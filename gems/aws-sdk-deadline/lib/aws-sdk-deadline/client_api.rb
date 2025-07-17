@@ -256,6 +256,9 @@ module Aws::Deadline
     GetTaskResponse = Shapes::StructureShape.new(name: 'GetTaskResponse')
     GetWorkerRequest = Shapes::StructureShape.new(name: 'GetWorkerRequest')
     GetWorkerResponse = Shapes::StructureShape.new(name: 'GetWorkerResponse')
+    HostConfiguration = Shapes::StructureShape.new(name: 'HostConfiguration')
+    HostConfigurationScript = Shapes::StringShape.new(name: 'HostConfigurationScript')
+    HostConfigurationScriptTimeoutSeconds = Shapes::IntegerShape.new(name: 'HostConfigurationScriptTimeoutSeconds')
     HostName = Shapes::StringShape.new(name: 'HostName')
     HostPropertiesRequest = Shapes::StructureShape.new(name: 'HostPropertiesRequest')
     HostPropertiesResponse = Shapes::StructureShape.new(name: 'HostPropertiesResponse')
@@ -555,13 +558,21 @@ module Aws::Deadline
     SyncInputJobAttachmentsSessionActionDefinition = Shapes::StructureShape.new(name: 'SyncInputJobAttachmentsSessionActionDefinition')
     SyncInputJobAttachmentsSessionActionDefinitionSummary = Shapes::StructureShape.new(name: 'SyncInputJobAttachmentsSessionActionDefinitionSummary')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
+    TagPropagationMode = Shapes::StringShape.new(name: 'TagPropagationMode')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     Tags = Shapes::MapShape.new(name: 'Tags')
+    TaskFailureRetryCount = Shapes::IntegerShape.new(name: 'TaskFailureRetryCount')
     TaskId = Shapes::StringShape.new(name: 'TaskId')
     TaskParameterValue = Shapes::UnionShape.new(name: 'TaskParameterValue')
     TaskParameters = Shapes::MapShape.new(name: 'TaskParameters')
     TaskRetryCount = Shapes::IntegerShape.new(name: 'TaskRetryCount')
+    TaskRunManifestPropertiesListRequest = Shapes::ListShape.new(name: 'TaskRunManifestPropertiesListRequest')
+    TaskRunManifestPropertiesListResponse = Shapes::ListShape.new(name: 'TaskRunManifestPropertiesListResponse')
+    TaskRunManifestPropertiesRequest = Shapes::StructureShape.new(name: 'TaskRunManifestPropertiesRequest')
+    TaskRunManifestPropertiesRequestOutputManifestHashString = Shapes::StringShape.new(name: 'TaskRunManifestPropertiesRequestOutputManifestHashString')
+    TaskRunManifestPropertiesRequestOutputManifestPathString = Shapes::StringShape.new(name: 'TaskRunManifestPropertiesRequestOutputManifestPathString')
+    TaskRunManifestPropertiesResponse = Shapes::StructureShape.new(name: 'TaskRunManifestPropertiesResponse')
     TaskRunSessionActionDefinition = Shapes::StructureShape.new(name: 'TaskRunSessionActionDefinition')
     TaskRunSessionActionDefinitionSummary = Shapes::StructureShape.new(name: 'TaskRunSessionActionDefinitionSummary')
     TaskRunStatus = Shapes::StringShape.new(name: 'TaskRunStatus')
@@ -852,7 +863,7 @@ module Aws::Deadline
     BudgetSummary.add_member(:usage_tracking_resource, Shapes::ShapeRef.new(shape: UsageTrackingResource, required: true, location_name: "usageTrackingResource"))
     BudgetSummary.add_member(:status, Shapes::ShapeRef.new(shape: BudgetStatus, required: true, location_name: "status"))
     BudgetSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "displayName"))
-    BudgetSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, deprecated: true, location_name: "description", metadata: {"deprecatedMessage"=>"ListBudgets no longer supports description. Use GetBudget if description is needed."}))
+    BudgetSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, deprecated: true, location_name: "description", metadata: {"deprecatedMessage" => "ListBudgets no longer supports description. Use GetBudget if description is needed."}))
     BudgetSummary.add_member(:approximate_dollar_limit, Shapes::ShapeRef.new(shape: ConsumedUsageLimit, required: true, location_name: "approximateDollarLimit"))
     BudgetSummary.add_member(:usages, Shapes::ShapeRef.new(shape: ConsumedUsages, required: true, location_name: "usages"))
     BudgetSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, required: true, location_name: "createdBy"))
@@ -883,7 +894,7 @@ module Aws::Deadline
     CopyJobTemplateResponse.add_member(:template_type, Shapes::ShapeRef.new(shape: JobTemplateType, required: true, location_name: "templateType"))
     CopyJobTemplateResponse.struct_class = Types::CopyJobTemplateResponse
 
-    CreateBudgetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    CreateBudgetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
     CreateBudgetRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     CreateBudgetRequest.add_member(:usage_tracking_resource, Shapes::ShapeRef.new(shape: UsageTrackingResource, required: true, location_name: "usageTrackingResource"))
     CreateBudgetRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "displayName"))
@@ -896,7 +907,7 @@ module Aws::Deadline
     CreateBudgetResponse.add_member(:budget_id, Shapes::ShapeRef.new(shape: BudgetId, required: true, location_name: "budgetId"))
     CreateBudgetResponse.struct_class = Types::CreateBudgetResponse
 
-    CreateFarmRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    CreateFarmRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
     CreateFarmRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "displayName"))
     CreateFarmRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateFarmRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
@@ -906,7 +917,7 @@ module Aws::Deadline
     CreateFarmResponse.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location_name: "farmId"))
     CreateFarmResponse.struct_class = Types::CreateFarmResponse
 
-    CreateFleetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    CreateFleetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
     CreateFleetRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     CreateFleetRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "displayName"))
     CreateFleetRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -915,6 +926,7 @@ module Aws::Deadline
     CreateFleetRequest.add_member(:max_worker_count, Shapes::ShapeRef.new(shape: MinZeroMaxInteger, required: true, location_name: "maxWorkerCount"))
     CreateFleetRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: FleetConfiguration, required: true, location_name: "configuration"))
     CreateFleetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateFleetRequest.add_member(:host_configuration, Shapes::ShapeRef.new(shape: HostConfiguration, location_name: "hostConfiguration"))
     CreateFleetRequest.struct_class = Types::CreateFleetRequest
 
     CreateFleetResponse.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "fleetId"))
@@ -922,7 +934,7 @@ module Aws::Deadline
 
     CreateJobRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     CreateJobRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
-    CreateJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    CreateJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
     CreateJobRequest.add_member(:template, Shapes::ShapeRef.new(shape: JobTemplate, location_name: "template"))
     CreateJobRequest.add_member(:template_type, Shapes::ShapeRef.new(shape: JobTemplateType, location_name: "templateType"))
     CreateJobRequest.add_member(:priority, Shapes::ShapeRef.new(shape: JobPriority, required: true, location_name: "priority"))
@@ -939,7 +951,7 @@ module Aws::Deadline
     CreateJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "jobId"))
     CreateJobResponse.struct_class = Types::CreateJobResponse
 
-    CreateLicenseEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    CreateLicenseEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
     CreateLicenseEndpointRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "vpcId"))
     CreateLicenseEndpointRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: CreateLicenseEndpointRequestSubnetIdsList, required: true, location_name: "subnetIds"))
     CreateLicenseEndpointRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: CreateLicenseEndpointRequestSecurityGroupIdsList, required: true, location_name: "securityGroupIds"))
@@ -953,7 +965,7 @@ module Aws::Deadline
     CreateLicenseEndpointResponse.add_member(:license_endpoint_id, Shapes::ShapeRef.new(shape: LicenseEndpointId, required: true, location_name: "licenseEndpointId"))
     CreateLicenseEndpointResponse.struct_class = Types::CreateLicenseEndpointResponse
 
-    CreateLimitRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    CreateLimitRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
     CreateLimitRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "displayName"))
     CreateLimitRequest.add_member(:amount_requirement_name, Shapes::ShapeRef.new(shape: AmountRequirementName, required: true, location_name: "amountRequirementName"))
     CreateLimitRequest.add_member(:max_count, Shapes::ShapeRef.new(shape: MaxCount, required: true, location_name: "maxCount"))
@@ -964,7 +976,7 @@ module Aws::Deadline
     CreateLimitResponse.add_member(:limit_id, Shapes::ShapeRef.new(shape: LimitId, required: true, location_name: "limitId"))
     CreateLimitResponse.struct_class = Types::CreateLimitResponse
 
-    CreateMonitorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    CreateMonitorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
     CreateMonitorRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "displayName"))
     CreateMonitorRequest.add_member(:identity_center_instance_arn, Shapes::ShapeRef.new(shape: IdentityCenterInstanceArn, required: true, location_name: "identityCenterInstanceArn"))
     CreateMonitorRequest.add_member(:subdomain, Shapes::ShapeRef.new(shape: Subdomain, required: true, location_name: "subdomain"))
@@ -975,7 +987,7 @@ module Aws::Deadline
     CreateMonitorResponse.add_member(:identity_center_application_arn, Shapes::ShapeRef.new(shape: IdentityCenterApplicationArn, required: true, location_name: "identityCenterApplicationArn"))
     CreateMonitorResponse.struct_class = Types::CreateMonitorResponse
 
-    CreateQueueEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    CreateQueueEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
     CreateQueueEnvironmentRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     CreateQueueEnvironmentRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
     CreateQueueEnvironmentRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, required: true, location_name: "priority"))
@@ -1000,7 +1012,7 @@ module Aws::Deadline
 
     CreateQueueLimitAssociationResponse.struct_class = Types::CreateQueueLimitAssociationResponse
 
-    CreateQueueRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    CreateQueueRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
     CreateQueueRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     CreateQueueRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "displayName"))
     CreateQueueRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -1016,7 +1028,7 @@ module Aws::Deadline
     CreateQueueResponse.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location_name: "queueId"))
     CreateQueueResponse.struct_class = Types::CreateQueueResponse
 
-    CreateStorageProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    CreateStorageProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
     CreateStorageProfileRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     CreateStorageProfileRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "displayName"))
     CreateStorageProfileRequest.add_member(:os_family, Shapes::ShapeRef.new(shape: StorageProfileOperatingSystemFamily, required: true, location_name: "osFamily"))
@@ -1029,7 +1041,8 @@ module Aws::Deadline
     CreateWorkerRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     CreateWorkerRequest.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location: "uri", location_name: "fleetId"))
     CreateWorkerRequest.add_member(:host_properties, Shapes::ShapeRef.new(shape: HostPropertiesRequest, location_name: "hostProperties"))
-    CreateWorkerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    CreateWorkerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
+    CreateWorkerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateWorkerRequest.struct_class = Types::CreateWorkerRequest
 
     CreateWorkerResponse.add_member(:worker_id, Shapes::ShapeRef.new(shape: WorkerId, required: true, location_name: "workerId"))
@@ -1042,6 +1055,7 @@ module Aws::Deadline
     CustomerManagedFleetConfiguration.add_member(:mode, Shapes::ShapeRef.new(shape: AutoScalingMode, required: true, location_name: "mode"))
     CustomerManagedFleetConfiguration.add_member(:worker_capabilities, Shapes::ShapeRef.new(shape: CustomerManagedWorkerCapabilities, required: true, location_name: "workerCapabilities"))
     CustomerManagedFleetConfiguration.add_member(:storage_profile_id, Shapes::ShapeRef.new(shape: StorageProfileId, location_name: "storageProfileId"))
+    CustomerManagedFleetConfiguration.add_member(:tag_propagation_mode, Shapes::ShapeRef.new(shape: TagPropagationMode, location_name: "tagPropagationMode"))
     CustomerManagedFleetConfiguration.struct_class = Types::CustomerManagedFleetConfiguration
 
     CustomerManagedWorkerCapabilities.add_member(:v_cpu_count, Shapes::ShapeRef.new(shape: VCpuCountRange, required: true, location_name: "vCpuCount"))
@@ -1071,7 +1085,7 @@ module Aws::Deadline
 
     DeleteFarmResponse.struct_class = Types::DeleteFarmResponse
 
-    DeleteFleetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    DeleteFleetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
     DeleteFleetRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     DeleteFleetRequest.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location: "uri", location_name: "fleetId"))
     DeleteFleetRequest.struct_class = Types::DeleteFleetRequest
@@ -1348,6 +1362,7 @@ module Aws::Deadline
     GetFleetResponse.add_member(:min_worker_count, Shapes::ShapeRef.new(shape: MinZeroMaxInteger, required: true, location_name: "minWorkerCount"))
     GetFleetResponse.add_member(:max_worker_count, Shapes::ShapeRef.new(shape: MinZeroMaxInteger, required: true, location_name: "maxWorkerCount"))
     GetFleetResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: FleetConfiguration, required: true, location_name: "configuration"))
+    GetFleetResponse.add_member(:host_configuration, Shapes::ShapeRef.new(shape: HostConfiguration, location_name: "hostConfiguration"))
     GetFleetResponse.add_member(:capabilities, Shapes::ShapeRef.new(shape: FleetCapabilities, location_name: "capabilities"))
     GetFleetResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "roleArn"))
     GetFleetResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, required: true, location_name: "createdAt"))
@@ -1387,6 +1402,7 @@ module Aws::Deadline
     GetJobResponse.add_member(:task_run_status, Shapes::ShapeRef.new(shape: TaskRunStatus, location_name: "taskRunStatus"))
     GetJobResponse.add_member(:target_task_run_status, Shapes::ShapeRef.new(shape: JobTargetTaskRunStatus, location_name: "targetTaskRunStatus"))
     GetJobResponse.add_member(:task_run_status_counts, Shapes::ShapeRef.new(shape: TaskRunStatusCounts, location_name: "taskRunStatusCounts"))
+    GetJobResponse.add_member(:task_failure_retry_count, Shapes::ShapeRef.new(shape: TaskFailureRetryCount, location_name: "taskFailureRetryCount"))
     GetJobResponse.add_member(:storage_profile_id, Shapes::ShapeRef.new(shape: StorageProfileId, location_name: "storageProfileId"))
     GetJobResponse.add_member(:max_failed_tasks_count, Shapes::ShapeRef.new(shape: MaxFailedTasksCount, location_name: "maxFailedTasksCount"))
     GetJobResponse.add_member(:max_retries_per_task, Shapes::ShapeRef.new(shape: MaxRetriesPerTask, location_name: "maxRetriesPerTask"))
@@ -1529,6 +1545,7 @@ module Aws::Deadline
     GetSessionActionResponse.add_member(:progress_message, Shapes::ShapeRef.new(shape: SessionActionProgressMessage, location_name: "progressMessage"))
     GetSessionActionResponse.add_member(:definition, Shapes::ShapeRef.new(shape: SessionActionDefinition, required: true, location_name: "definition"))
     GetSessionActionResponse.add_member(:acquired_limits, Shapes::ShapeRef.new(shape: AcquiredLimits, location_name: "acquiredLimits"))
+    GetSessionActionResponse.add_member(:manifests, Shapes::ShapeRef.new(shape: TaskRunManifestPropertiesListResponse, location_name: "manifests"))
     GetSessionActionResponse.struct_class = Types::GetSessionActionResponse
 
     GetSessionRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
@@ -1575,6 +1592,7 @@ module Aws::Deadline
     GetStepResponse.add_member(:lifecycle_status_message, Shapes::ShapeRef.new(shape: String, location_name: "lifecycleStatusMessage"))
     GetStepResponse.add_member(:task_run_status, Shapes::ShapeRef.new(shape: TaskRunStatus, required: true, location_name: "taskRunStatus"))
     GetStepResponse.add_member(:task_run_status_counts, Shapes::ShapeRef.new(shape: TaskRunStatusCounts, required: true, location_name: "taskRunStatusCounts"))
+    GetStepResponse.add_member(:task_failure_retry_count, Shapes::ShapeRef.new(shape: TaskFailureRetryCount, location_name: "taskFailureRetryCount"))
     GetStepResponse.add_member(:target_task_run_status, Shapes::ShapeRef.new(shape: StepTargetTaskRunStatus, location_name: "targetTaskRunStatus"))
     GetStepResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, required: true, location_name: "createdAt"))
     GetStepResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, required: true, location_name: "createdBy"))
@@ -1650,6 +1668,10 @@ module Aws::Deadline
     GetWorkerResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
     GetWorkerResponse.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
     GetWorkerResponse.struct_class = Types::GetWorkerResponse
+
+    HostConfiguration.add_member(:script_body, Shapes::ShapeRef.new(shape: HostConfigurationScript, required: true, location_name: "scriptBody"))
+    HostConfiguration.add_member(:script_timeout_seconds, Shapes::ShapeRef.new(shape: HostConfigurationScriptTimeoutSeconds, location_name: "scriptTimeoutSeconds"))
+    HostConfiguration.struct_class = Types::HostConfiguration
 
     HostPropertiesRequest.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: IpAddresses, location_name: "ipAddresses"))
     HostPropertiesRequest.add_member(:host_name, Shapes::ShapeRef.new(shape: HostName, location_name: "hostName"))
@@ -1778,6 +1800,7 @@ module Aws::Deadline
     JobSearchSummary.add_member(:task_run_status, Shapes::ShapeRef.new(shape: TaskRunStatus, location_name: "taskRunStatus"))
     JobSearchSummary.add_member(:target_task_run_status, Shapes::ShapeRef.new(shape: JobTargetTaskRunStatus, location_name: "targetTaskRunStatus"))
     JobSearchSummary.add_member(:task_run_status_counts, Shapes::ShapeRef.new(shape: TaskRunStatusCounts, location_name: "taskRunStatusCounts"))
+    JobSearchSummary.add_member(:task_failure_retry_count, Shapes::ShapeRef.new(shape: TaskFailureRetryCount, location_name: "taskFailureRetryCount"))
     JobSearchSummary.add_member(:priority, Shapes::ShapeRef.new(shape: JobPriority, location_name: "priority"))
     JobSearchSummary.add_member(:max_failed_tasks_count, Shapes::ShapeRef.new(shape: MaxFailedTasksCount, location_name: "maxFailedTasksCount"))
     JobSearchSummary.add_member(:max_retries_per_task, Shapes::ShapeRef.new(shape: MaxRetriesPerTask, location_name: "maxRetriesPerTask"))
@@ -1806,6 +1829,7 @@ module Aws::Deadline
     JobSummary.add_member(:task_run_status, Shapes::ShapeRef.new(shape: TaskRunStatus, location_name: "taskRunStatus"))
     JobSummary.add_member(:target_task_run_status, Shapes::ShapeRef.new(shape: JobTargetTaskRunStatus, location_name: "targetTaskRunStatus"))
     JobSummary.add_member(:task_run_status_counts, Shapes::ShapeRef.new(shape: TaskRunStatusCounts, location_name: "taskRunStatusCounts"))
+    JobSummary.add_member(:task_failure_retry_count, Shapes::ShapeRef.new(shape: TaskFailureRetryCount, location_name: "taskFailureRetryCount"))
     JobSummary.add_member(:max_failed_tasks_count, Shapes::ShapeRef.new(shape: MaxFailedTasksCount, location_name: "maxFailedTasksCount"))
     JobSummary.add_member(:max_retries_per_task, Shapes::ShapeRef.new(shape: MaxRetriesPerTask, location_name: "maxRetriesPerTask"))
     JobSummary.add_member(:max_worker_count, Shapes::ShapeRef.new(shape: MaxWorkerCount, location_name: "maxWorkerCount"))
@@ -2386,6 +2410,7 @@ module Aws::Deadline
 
     ServiceManagedEc2FleetConfiguration.add_member(:instance_capabilities, Shapes::ShapeRef.new(shape: ServiceManagedEc2InstanceCapabilities, required: true, location_name: "instanceCapabilities"))
     ServiceManagedEc2FleetConfiguration.add_member(:instance_market_options, Shapes::ShapeRef.new(shape: ServiceManagedEc2InstanceMarketOptions, required: true, location_name: "instanceMarketOptions"))
+    ServiceManagedEc2FleetConfiguration.add_member(:storage_profile_id, Shapes::ShapeRef.new(shape: StorageProfileId, location_name: "storageProfileId"))
     ServiceManagedEc2FleetConfiguration.struct_class = Types::ServiceManagedEc2FleetConfiguration
 
     ServiceManagedEc2InstanceCapabilities.add_member(:v_cpu_count, Shapes::ShapeRef.new(shape: VCpuCountRange, required: true, location_name: "vCpuCount"))
@@ -2447,6 +2472,7 @@ module Aws::Deadline
     SessionActionSummary.add_member(:worker_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "workerUpdatedAt"))
     SessionActionSummary.add_member(:progress_percent, Shapes::ShapeRef.new(shape: SessionActionProgressPercent, location_name: "progressPercent"))
     SessionActionSummary.add_member(:definition, Shapes::ShapeRef.new(shape: SessionActionDefinitionSummary, required: true, location_name: "definition"))
+    SessionActionSummary.add_member(:manifests, Shapes::ShapeRef.new(shape: TaskRunManifestPropertiesListResponse, location_name: "manifests"))
     SessionActionSummary.struct_class = Types::SessionActionSummary
 
     SessionSummaries.member = Shapes::ShapeRef.new(shape: SessionSummary)
@@ -2575,6 +2601,7 @@ module Aws::Deadline
     StepSearchSummary.add_member(:task_run_status, Shapes::ShapeRef.new(shape: TaskRunStatus, location_name: "taskRunStatus"))
     StepSearchSummary.add_member(:target_task_run_status, Shapes::ShapeRef.new(shape: StepTargetTaskRunStatus, location_name: "targetTaskRunStatus"))
     StepSearchSummary.add_member(:task_run_status_counts, Shapes::ShapeRef.new(shape: TaskRunStatusCounts, location_name: "taskRunStatusCounts"))
+    StepSearchSummary.add_member(:task_failure_retry_count, Shapes::ShapeRef.new(shape: TaskFailureRetryCount, location_name: "taskFailureRetryCount"))
     StepSearchSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     StepSearchSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: StartedAt, location_name: "startedAt"))
     StepSearchSummary.add_member(:ended_at, Shapes::ShapeRef.new(shape: EndedAt, location_name: "endedAt"))
@@ -2589,6 +2616,7 @@ module Aws::Deadline
     StepSummary.add_member(:lifecycle_status_message, Shapes::ShapeRef.new(shape: String, location_name: "lifecycleStatusMessage"))
     StepSummary.add_member(:task_run_status, Shapes::ShapeRef.new(shape: TaskRunStatus, required: true, location_name: "taskRunStatus"))
     StepSummary.add_member(:task_run_status_counts, Shapes::ShapeRef.new(shape: TaskRunStatusCounts, required: true, location_name: "taskRunStatusCounts"))
+    StepSummary.add_member(:task_failure_retry_count, Shapes::ShapeRef.new(shape: TaskFailureRetryCount, location_name: "taskFailureRetryCount"))
     StepSummary.add_member(:target_task_run_status, Shapes::ShapeRef.new(shape: StepTargetTaskRunStatus, location_name: "targetTaskRunStatus"))
     StepSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, required: true, location_name: "createdAt"))
     StepSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, required: true, location_name: "createdBy"))
@@ -2632,16 +2660,30 @@ module Aws::Deadline
     TaskParameterValue.add_member(:float, Shapes::ShapeRef.new(shape: FloatString, location_name: "float"))
     TaskParameterValue.add_member(:string, Shapes::ShapeRef.new(shape: ParameterString, location_name: "string"))
     TaskParameterValue.add_member(:path, Shapes::ShapeRef.new(shape: PathString, location_name: "path"))
+    TaskParameterValue.add_member(:chunk_int, Shapes::ShapeRef.new(shape: String, location_name: "chunkInt"))
     TaskParameterValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     TaskParameterValue.add_member_subclass(:int, Types::TaskParameterValue::Int)
     TaskParameterValue.add_member_subclass(:float, Types::TaskParameterValue::Float)
     TaskParameterValue.add_member_subclass(:string, Types::TaskParameterValue::String)
     TaskParameterValue.add_member_subclass(:path, Types::TaskParameterValue::Path)
+    TaskParameterValue.add_member_subclass(:chunk_int, Types::TaskParameterValue::ChunkInt)
     TaskParameterValue.add_member_subclass(:unknown, Types::TaskParameterValue::Unknown)
     TaskParameterValue.struct_class = Types::TaskParameterValue
 
     TaskParameters.key = Shapes::ShapeRef.new(shape: String)
     TaskParameters.value = Shapes::ShapeRef.new(shape: TaskParameterValue)
+
+    TaskRunManifestPropertiesListRequest.member = Shapes::ShapeRef.new(shape: TaskRunManifestPropertiesRequest)
+
+    TaskRunManifestPropertiesListResponse.member = Shapes::ShapeRef.new(shape: TaskRunManifestPropertiesResponse)
+
+    TaskRunManifestPropertiesRequest.add_member(:output_manifest_path, Shapes::ShapeRef.new(shape: TaskRunManifestPropertiesRequestOutputManifestPathString, location_name: "outputManifestPath"))
+    TaskRunManifestPropertiesRequest.add_member(:output_manifest_hash, Shapes::ShapeRef.new(shape: TaskRunManifestPropertiesRequestOutputManifestHashString, location_name: "outputManifestHash"))
+    TaskRunManifestPropertiesRequest.struct_class = Types::TaskRunManifestPropertiesRequest
+
+    TaskRunManifestPropertiesResponse.add_member(:output_manifest_path, Shapes::ShapeRef.new(shape: String, location_name: "outputManifestPath"))
+    TaskRunManifestPropertiesResponse.add_member(:output_manifest_hash, Shapes::ShapeRef.new(shape: String, location_name: "outputManifestHash"))
+    TaskRunManifestPropertiesResponse.struct_class = Types::TaskRunManifestPropertiesResponse
 
     TaskRunSessionActionDefinition.add_member(:task_id, Shapes::ShapeRef.new(shape: TaskId, location_name: "taskId"))
     TaskRunSessionActionDefinition.add_member(:step_id, Shapes::ShapeRef.new(shape: StepId, required: true, location_name: "stepId"))
@@ -2650,6 +2692,7 @@ module Aws::Deadline
 
     TaskRunSessionActionDefinitionSummary.add_member(:task_id, Shapes::ShapeRef.new(shape: TaskId, location_name: "taskId"))
     TaskRunSessionActionDefinitionSummary.add_member(:step_id, Shapes::ShapeRef.new(shape: StepId, required: true, location_name: "stepId"))
+    TaskRunSessionActionDefinitionSummary.add_member(:parameters, Shapes::ShapeRef.new(shape: TaskParameters, location_name: "parameters"))
     TaskRunSessionActionDefinitionSummary.struct_class = Types::TaskRunSessionActionDefinitionSummary
 
     TaskRunStatusCounts.key = Shapes::ShapeRef.new(shape: TaskRunStatus)
@@ -2698,7 +2741,7 @@ module Aws::Deadline
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
-    UpdateBudgetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    UpdateBudgetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
     UpdateBudgetRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     UpdateBudgetRequest.add_member(:budget_id, Shapes::ShapeRef.new(shape: BudgetId, required: true, location: "uri", location_name: "budgetId"))
     UpdateBudgetRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "displayName"))
@@ -2719,7 +2762,7 @@ module Aws::Deadline
 
     UpdateFarmResponse.struct_class = Types::UpdateFarmResponse
 
-    UpdateFleetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    UpdateFleetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
     UpdateFleetRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     UpdateFleetRequest.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location: "uri", location_name: "fleetId"))
     UpdateFleetRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "displayName"))
@@ -2728,11 +2771,12 @@ module Aws::Deadline
     UpdateFleetRequest.add_member(:min_worker_count, Shapes::ShapeRef.new(shape: MinZeroMaxInteger, location_name: "minWorkerCount"))
     UpdateFleetRequest.add_member(:max_worker_count, Shapes::ShapeRef.new(shape: MinZeroMaxInteger, location_name: "maxWorkerCount"))
     UpdateFleetRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: FleetConfiguration, location_name: "configuration"))
+    UpdateFleetRequest.add_member(:host_configuration, Shapes::ShapeRef.new(shape: HostConfiguration, location_name: "hostConfiguration"))
     UpdateFleetRequest.struct_class = Types::UpdateFleetRequest
 
     UpdateFleetResponse.struct_class = Types::UpdateFleetResponse
 
-    UpdateJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    UpdateJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
     UpdateJobRequest.add_member(:target_task_run_status, Shapes::ShapeRef.new(shape: JobTargetTaskRunStatus, location_name: "targetTaskRunStatus"))
     UpdateJobRequest.add_member(:priority, Shapes::ShapeRef.new(shape: JobPriority, location_name: "priority"))
     UpdateJobRequest.add_member(:max_failed_tasks_count, Shapes::ShapeRef.new(shape: MaxFailedTasksCount, location_name: "maxFailedTasksCount"))
@@ -2763,7 +2807,7 @@ module Aws::Deadline
 
     UpdateMonitorResponse.struct_class = Types::UpdateMonitorResponse
 
-    UpdateQueueEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    UpdateQueueEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
     UpdateQueueEnvironmentRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     UpdateQueueEnvironmentRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
     UpdateQueueEnvironmentRequest.add_member(:queue_environment_id, Shapes::ShapeRef.new(shape: QueueEnvironmentId, required: true, location: "uri", location_name: "queueEnvironmentId"))
@@ -2790,7 +2834,7 @@ module Aws::Deadline
 
     UpdateQueueLimitAssociationResponse.struct_class = Types::UpdateQueueLimitAssociationResponse
 
-    UpdateQueueRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    UpdateQueueRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
     UpdateQueueRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     UpdateQueueRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
     UpdateQueueRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "displayName"))
@@ -2807,7 +2851,7 @@ module Aws::Deadline
 
     UpdateQueueResponse.struct_class = Types::UpdateQueueResponse
 
-    UpdateSessionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    UpdateSessionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
     UpdateSessionRequest.add_member(:target_lifecycle_status, Shapes::ShapeRef.new(shape: SessionLifecycleTargetStatus, required: true, location_name: "targetLifecycleStatus"))
     UpdateSessionRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     UpdateSessionRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
@@ -2818,7 +2862,7 @@ module Aws::Deadline
     UpdateSessionResponse.struct_class = Types::UpdateSessionResponse
 
     UpdateStepRequest.add_member(:target_task_run_status, Shapes::ShapeRef.new(shape: StepTargetTaskRunStatus, required: true, location_name: "targetTaskRunStatus"))
-    UpdateStepRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    UpdateStepRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
     UpdateStepRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     UpdateStepRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
     UpdateStepRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
@@ -2827,7 +2871,7 @@ module Aws::Deadline
 
     UpdateStepResponse.struct_class = Types::UpdateStepResponse
 
-    UpdateStorageProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    UpdateStorageProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
     UpdateStorageProfileRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     UpdateStorageProfileRequest.add_member(:storage_profile_id, Shapes::ShapeRef.new(shape: StorageProfileId, required: true, location: "uri", location_name: "storageProfileId"))
     UpdateStorageProfileRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "displayName"))
@@ -2838,7 +2882,7 @@ module Aws::Deadline
 
     UpdateStorageProfileResponse.struct_class = Types::UpdateStorageProfileResponse
 
-    UpdateTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    UpdateTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken" => true}))
     UpdateTaskRequest.add_member(:target_run_status, Shapes::ShapeRef.new(shape: TaskTargetRunStatus, required: true, location_name: "targetRunStatus"))
     UpdateTaskRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     UpdateTaskRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
@@ -2858,6 +2902,7 @@ module Aws::Deadline
     UpdateWorkerRequest.struct_class = Types::UpdateWorkerRequest
 
     UpdateWorkerResponse.add_member(:log, Shapes::ShapeRef.new(shape: LogConfiguration, location_name: "log"))
+    UpdateWorkerResponse.add_member(:host_configuration, Shapes::ShapeRef.new(shape: HostConfiguration, location_name: "hostConfiguration"))
     UpdateWorkerResponse.struct_class = Types::UpdateWorkerResponse
 
     UpdateWorkerScheduleRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
@@ -2879,6 +2924,7 @@ module Aws::Deadline
     UpdatedSessionActionInfo.add_member(:ended_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "endedAt"))
     UpdatedSessionActionInfo.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     UpdatedSessionActionInfo.add_member(:progress_percent, Shapes::ShapeRef.new(shape: SessionActionProgressPercent, location_name: "progressPercent"))
+    UpdatedSessionActionInfo.add_member(:manifests, Shapes::ShapeRef.new(shape: TaskRunManifestPropertiesListRequest, location_name: "manifests"))
     UpdatedSessionActionInfo.struct_class = Types::UpdatedSessionActionInfo
 
     UpdatedSessionActions.key = Shapes::ShapeRef.new(shape: SessionActionId)

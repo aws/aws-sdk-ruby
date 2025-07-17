@@ -28,6 +28,8 @@ module Aws::ECR
       attr_accessor image_tags: ::Array[::String]
       attr_accessor platform: ::String
       attr_accessor pushed_at: ::Time
+      attr_accessor last_in_use_at: ::Time
+      attr_accessor in_use_count: ::Integer
       attr_accessor registry: ::String
       attr_accessor repository_name: ::String
       SENSITIVE: []

@@ -1375,7 +1375,8 @@ module Aws::DirectoryService
     # Contains the results of the DescribeDirectories operation.
     #
     # @!attribute [rw] directory_descriptions
-    #   The list of DirectoryDescription objects that were retrieved.
+    #   The list of available DirectoryDescription objects that were
+    #   retrieved.
     #
     #   It is possible that this list contains less than the number of items
     #   specified in the `Limit` member of the request. This occurs if there

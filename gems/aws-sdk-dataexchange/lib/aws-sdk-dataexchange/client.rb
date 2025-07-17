@@ -200,8 +200,7 @@ module Aws::DataExchange
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -533,7 +532,7 @@ module Aws::DataExchange
     # @example Request syntax with placeholder values
     #
     #   resp = client.cancel_job({
-    #     job_id: "__string", # required
+    #     job_id: "Id", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CancelJob AWS API Documentation
@@ -705,6 +704,9 @@ module Aws::DataExchange
     # @option params [required, Types::Event] :event
     #   What occurs to start an action.
     #
+    # @option params [Hash<String,String>] :tags
+    #   Key-value pairs that you can associate with the event action.
+    #
     # @return [Types::CreateEventActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEventActionResponse#action #action} => Types::Action
@@ -712,6 +714,7 @@ module Aws::DataExchange
     #   * {Types::CreateEventActionResponse#created_at #created_at} => Time
     #   * {Types::CreateEventActionResponse#event #event} => Types::Event
     #   * {Types::CreateEventActionResponse#id #id} => String
+    #   * {Types::CreateEventActionResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::CreateEventActionResponse#updated_at #updated_at} => Time
     #
     # @example Request syntax with placeholder values
@@ -734,6 +737,9 @@ module Aws::DataExchange
     #         data_set_id: "Id", # required
     #       },
     #     },
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -746,6 +752,8 @@ module Aws::DataExchange
     #   resp.created_at #=> Time
     #   resp.event.revision_published.data_set_id #=> String
     #   resp.id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CreateEventAction AWS API Documentation
@@ -1027,7 +1035,7 @@ module Aws::DataExchange
     #
     #   resp = client.create_revision({
     #     comment: "__stringMin0Max16384",
-    #     data_set_id: "__string", # required
+    #     data_set_id: "Id", # required
     #     tags: {
     #       "__string" => "__string",
     #     },
@@ -1074,9 +1082,9 @@ module Aws::DataExchange
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_asset({
-    #     asset_id: "__string", # required
-    #     data_set_id: "__string", # required
-    #     revision_id: "__string", # required
+    #     asset_id: "Id", # required
+    #     data_set_id: "Id", # required
+    #     revision_id: "Id", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/DeleteAsset AWS API Documentation
@@ -1120,7 +1128,7 @@ module Aws::DataExchange
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_data_set({
-    #     data_set_id: "__string", # required
+    #     data_set_id: "Id", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/DeleteDataSet AWS API Documentation
@@ -1167,8 +1175,8 @@ module Aws::DataExchange
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_revision({
-    #     data_set_id: "__string", # required
-    #     revision_id: "__string", # required
+    #     data_set_id: "Id", # required
+    #     revision_id: "Id", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/DeleteRevision AWS API Documentation
@@ -1207,9 +1215,9 @@ module Aws::DataExchange
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_asset({
-    #     asset_id: "__string", # required
-    #     data_set_id: "__string", # required
-    #     revision_id: "__string", # required
+    #     asset_id: "Id", # required
+    #     data_set_id: "Id", # required
+    #     revision_id: "Id", # required
     #   })
     #
     # @example Response structure
@@ -1346,7 +1354,7 @@ module Aws::DataExchange
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_data_set({
-    #     data_set_id: "__string", # required
+    #     data_set_id: "Id", # required
     #   })
     #
     # @example Response structure
@@ -1386,6 +1394,7 @@ module Aws::DataExchange
     #   * {Types::GetEventActionResponse#created_at #created_at} => Time
     #   * {Types::GetEventActionResponse#event #event} => Types::Event
     #   * {Types::GetEventActionResponse#id #id} => String
+    #   * {Types::GetEventActionResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetEventActionResponse#updated_at #updated_at} => Time
     #
     # @example Request syntax with placeholder values
@@ -1404,6 +1413,8 @@ module Aws::DataExchange
     #   resp.created_at #=> Time
     #   resp.event.revision_published.data_set_id #=> String
     #   resp.id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetEventAction AWS API Documentation
@@ -1434,7 +1445,7 @@ module Aws::DataExchange
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_job({
-    #     job_id: "__string", # required
+    #     job_id: "Id", # required
     #   })
     #
     # @example Response structure
@@ -1616,8 +1627,8 @@ module Aws::DataExchange
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_revision({
-    #     data_set_id: "__string", # required
-    #     revision_id: "__string", # required
+    #     data_set_id: "Id", # required
+    #     revision_id: "Id", # required
     #   })
     #
     # @example Response structure
@@ -1717,7 +1728,7 @@ module Aws::DataExchange
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_data_set_revisions({
-    #     data_set_id: "__string", # required
+    #     data_set_id: "Id", # required
     #     max_results: 1,
     #     next_token: "__string",
     #   })
@@ -2065,10 +2076,10 @@ module Aws::DataExchange
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_revision_assets({
-    #     data_set_id: "__string", # required
+    #     data_set_id: "Id", # required
     #     max_results: 1,
     #     next_token: "__string",
-    #     revision_id: "__string", # required
+    #     revision_id: "Id", # required
     #   })
     #
     # @example Response structure
@@ -2187,8 +2198,8 @@ module Aws::DataExchange
     # @example Request syntax with placeholder values
     #
     #   resp = client.revoke_revision({
-    #     data_set_id: "__string", # required
-    #     revision_id: "__string", # required
+    #     data_set_id: "Id", # required
+    #     revision_id: "Id", # required
     #     revocation_comment: "__stringMin10Max512", # required
     #   })
     #
@@ -2344,7 +2355,7 @@ module Aws::DataExchange
     #     },
     #     client_token: "ClientToken",
     #     comment: "__stringMin0Max4096",
-    #     data_set_id: "__string", # required
+    #     data_set_id: "Id", # required
     #     details: {
     #       data_update: {
     #         data_updated_at: Time.now,
@@ -2385,7 +2396,7 @@ module Aws::DataExchange
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_job({
-    #     job_id: "__string", # required
+    #     job_id: "Id", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/StartJob AWS API Documentation
@@ -2490,10 +2501,10 @@ module Aws::DataExchange
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_asset({
-    #     asset_id: "__string", # required
-    #     data_set_id: "__string", # required
+    #     asset_id: "Id", # required
+    #     data_set_id: "Id", # required
     #     name: "AssetName", # required
-    #     revision_id: "__string", # required
+    #     revision_id: "Id", # required
     #   })
     #
     # @example Response structure
@@ -2578,7 +2589,7 @@ module Aws::DataExchange
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_data_set({
-    #     data_set_id: "__string", # required
+    #     data_set_id: "Id", # required
     #     description: "Description",
     #     name: "Name",
     #   })
@@ -2696,9 +2707,9 @@ module Aws::DataExchange
     #
     #   resp = client.update_revision({
     #     comment: "__stringMin0Max16384",
-    #     data_set_id: "__string", # required
+    #     data_set_id: "Id", # required
     #     finalized: false,
-    #     revision_id: "__string", # required
+    #     revision_id: "Id", # required
     #   })
     #
     # @example Response structure
@@ -2742,7 +2753,7 @@ module Aws::DataExchange
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dataexchange'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

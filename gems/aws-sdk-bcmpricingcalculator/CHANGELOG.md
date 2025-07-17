@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2025-06-05)
+------------------
+
+* Feature - Updating the minimum for List APIs to be 1 (instead of 0)
+
+1.11.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.10.0 (2025-05-29)
+------------------
+
+* Feature - Add AFTER_DISCOUNTS_AND_COMMITMENTS to Workload Estimate Rate Type. Set ListWorkLoadEstimateUsage maxResults range to minimum of 0 and maximum of 300.
+
+1.9.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.8.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.7.0 (2025-03-27)
 ------------------
 

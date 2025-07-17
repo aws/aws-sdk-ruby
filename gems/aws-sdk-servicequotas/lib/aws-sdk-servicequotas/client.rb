@@ -200,8 +200,7 @@ module Aws::ServiceQuotas
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -491,6 +490,31 @@ module Aws::ServiceQuotas
     # @param [Hash] params ({})
     def associate_service_quota_template(params = {}, options = {})
       req = build_request(:associate_service_quota_template, params)
+      req.send_request(options)
+    end
+
+    # Creates a Support case for an existing quota increase request. This
+    # call only creates a Support case if the request has a `Pending`
+    # status.
+    #
+    # @option params [required, String] :request_id
+    #   The ID of the pending quota increase request for which you want to
+    #   open a Support case.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_support_case({
+    #     request_id: "RequestId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/CreateSupportCase AWS API Documentation
+    #
+    # @overload create_support_case(params = {})
+    # @param [Hash] params ({})
+    def create_support_case(params = {}, options = {})
+      req = build_request(:create_support_case, params)
       req.send_request(options)
     end
 
@@ -1521,7 +1545,7 @@ module Aws::ServiceQuotas
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-servicequotas'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

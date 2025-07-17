@@ -50,6 +50,80 @@ module Aws::IoTManagedIntegrations
       include Aws::Structure
     end
 
+    # Structure containing information about an account association,
+    # including its identifier, state, and related metadata.
+    #
+    # @!attribute [rw] account_association_id
+    #   The unique identifier of the account association.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_state
+    #   The current state of the account association, indicating its status
+    #   in the association lifecycle.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message explaining any issues with the account
+    #   association, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_destination_id
+    #   The identifier of the connector destination associated with this
+    #   account association.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the account association.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the account association.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the account association.
+    #   @return [String]
+    #
+    class AccountAssociationItem < Struct.new(
+      :account_association_id,
+      :association_state,
+      :error_message,
+      :connector_destination_id,
+      :name,
+      :description,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The authentication configuration details for a connector destination,
+    # including OAuth settings and other authentication parameters.
+    #
+    # @!attribute [rw] o_auth
+    #   The OAuth configuration settings used for authentication with the
+    #   third-party service.
+    #   @return [Types::OAuthConfig]
+    #
+    class AuthConfig < Struct.new(
+      :o_auth)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The updated authentication configuration details for a connector
+    # destination.
+    #
+    # @!attribute [rw] o_auth_update
+    #   The updated OAuth configuration settings for the authentication
+    #   configuration.
+    #   @return [Types::OAuthUpdate]
+    #
+    class AuthConfigUpdate < Struct.new(
+      :o_auth_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Action for an Amazon Web Services capability, containing the action
     # parameters for control.
     #
@@ -160,6 +234,43 @@ module Aws::IoTManagedIntegrations
       include Aws::Structure
     end
 
+    # Structure representing a capability schema item that defines the
+    # functionality and features supported by a managed thing.
+    #
+    # @!attribute [rw] format
+    #   The format of the capability schema, which defines how the schema is
+    #   structured and interpreted.
+    #   @return [String]
+    #
+    # @!attribute [rw] capability_id
+    #   The unique identifier of the capability defined in the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] extrinsic_id
+    #   The external identifier for the capability, used when referencing
+    #   the capability outside of the AWS ecosystem.
+    #   @return [String]
+    #
+    # @!attribute [rw] extrinsic_version
+    #   The version of the external capability definition, used to track
+    #   compatibility with external systems.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] schema
+    #   The actual schema definition that describes the capability's
+    #   properties, actions, and events.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    class CapabilitySchemaItem < Struct.new(
+      :format,
+      :capability_id,
+      :extrinsic_id,
+      :extrinsic_version,
+      :schema)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The command capabilities added for the managed thing
     #
     # @!attribute [rw] id
@@ -251,6 +362,245 @@ module Aws::IoTManagedIntegrations
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Structure containing summary information about a connector
+    # destination, which defines how a cloud-to-cloud connector connects to
+    # a customer's AWS account.
+    #
+    # @!attribute [rw] name
+    #   The display name of the connector destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the connector destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_connector_id
+    #   The identifier of the cloud connector associated with this connector
+    #   destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the connector destination.
+    #   @return [String]
+    #
+    class ConnectorDestinationSummary < Struct.new(
+      :name,
+      :description,
+      :cloud_connector_id,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Structure describing a connector.
+    #
+    # @!attribute [rw] name
+    #   The display name of the C2C connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_config
+    #   The configuration details for the cloud connector endpoint,
+    #   including connection parameters and authentication requirements.
+    #   @return [Types::EndpointConfig]
+    #
+    # @!attribute [rw] description
+    #   A description of the C2C connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of endpoint used for the C2C connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the C2C connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of cloud connector created.
+    #   @return [String]
+    #
+    class ConnectorItem < Struct.new(
+      :name,
+      :endpoint_config,
+      :description,
+      :endpoint_type,
+      :id,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   An idempotency token. If you retry a request that completed
+    #   successfully initially using the same client token and parameters,
+    #   then the retry attempt will succeed without performing any further
+    #   actions.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_destination_id
+    #   The identifier of the connector destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the destination for the new account association.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the account association request.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A set of key/value pairs that are used to manage the account
+    #   association.
+    #   @return [Hash<String,String>]
+    #
+    class CreateAccountAssociationRequest < Struct.new(
+      :client_token,
+      :connector_destination_id,
+      :name,
+      :description,
+      :tags)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] o_auth_authorization_url
+    #   Third-party IoT platform OAuth authorization server URL backed with
+    #   all the required parameters to perform end-user authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_association_id
+    #   The identifier for the account association request.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_state
+    #   The current state of the account association request.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the account association.
+    #   @return [String]
+    #
+    class CreateAccountAssociationResponse < Struct.new(
+      :o_auth_authorization_url,
+      :account_association_id,
+      :association_state,
+      :arn)
+      SENSITIVE = [:o_auth_authorization_url]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The display name of the C2C connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_config
+    #   The configuration details for the cloud connector endpoint,
+    #   including connection parameters and authentication requirements.
+    #   @return [Types::EndpointConfig]
+    #
+    # @!attribute [rw] description
+    #   A description of the C2C connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of endpoint used for the cloud connector, which defines how
+    #   the connector communicates with external services.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   An idempotency token. If you retry a request that completed
+    #   successfully initially using the same client token and parameters,
+    #   then the retry attempt will succeed without performing any further
+    #   actions.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class CreateCloudConnectorRequest < Struct.new(
+      :name,
+      :endpoint_config,
+      :description,
+      :endpoint_type,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The unique identifier assigned to the newly created cloud connector.
+    #   @return [String]
+    #
+    class CreateCloudConnectorResponse < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The display name of the connector destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the connector destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_connector_id
+    #   The identifier of the C2C connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_type
+    #   The authentication type used for the connector destination, which
+    #   determines how credentials and access are managed.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_config
+    #   The authentication configuration details for the connector
+    #   destination, including OAuth settings and other authentication
+    #   parameters.
+    #   @return [Types::AuthConfig]
+    #
+    # @!attribute [rw] secrets_manager
+    #   The AWS Secrets Manager configuration used to securely store and
+    #   manage sensitive information for the connector destination.
+    #   @return [Types::SecretsManager]
+    #
+    # @!attribute [rw] client_token
+    #   An idempotency token. If you retry a request that completed
+    #   successfully initially using the same client token and parameters,
+    #   then the retry attempt will succeed without performing any further
+    #   actions.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class CreateConnectorDestinationRequest < Struct.new(
+      :name,
+      :description,
+      :cloud_connector_id,
+      :auth_type,
+      :auth_config,
+      :secrets_manager,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The identifier of the C2C connector destination creation request.
+    #   @return [String]
+    #
+    class CreateConnectorDestinationResponse < Struct.new(
+      :id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -444,6 +794,12 @@ module Aws::IoTManagedIntegrations
     #   A report of the capabilities for the managed thing.
     #   @return [Types::CapabilityReport]
     #
+    # @!attribute [rw] capability_schemas
+    #   The capability schemas that define the functionality and features
+    #   supported by the managed thing, including device capabilities and
+    #   their associated properties.
+    #   @return [Array<Types::CapabilitySchemaItem>]
+    #
     # @!attribute [rw] capabilities
     #   The capabilities of the device such as light bulb.
     #   @return [String]
@@ -469,6 +825,14 @@ module Aws::IoTManagedIntegrations
     #
     # @!attribute [rw] meta_data
     #   The metadata for the managed thing.
+    #
+    #   <note markdown="1"> The `managedThing` `metadata` parameter is used for associating
+    #   attributes with a `managedThing` that can be used for grouping
+    #   over-the-air (OTA) tasks. Name value pairs in `metadata` can be used
+    #   in the `OtaTargetQueryString` parameter for the `CreateOtaTask` API
+    #   operation.
+    #
+    #    </note>
     #   @return [Hash<String,String>]
     #
     class CreateManagedThingRequest < Struct.new(
@@ -482,6 +846,7 @@ module Aws::IoTManagedIntegrations
       :model,
       :name,
       :capability_report,
+      :capability_schemas,
       :capabilities,
       :client_token,
       :classification,
@@ -795,6 +1160,36 @@ module Aws::IoTManagedIntegrations
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_association_id
+    #   The unique identifier of the account association to be deleted.
+    #   @return [String]
+    #
+    class DeleteAccountAssociationRequest < Struct.new(
+      :account_association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The identifier of the cloud connector.
+    #   @return [String]
+    #
+    class DeleteCloudConnectorRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The identifier of the connector destination.
+    #   @return [String]
+    #
+    class DeleteConnectorDestinationRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] identifier
     #   The identifier of the credential locker.
     #   @return [String]
@@ -883,6 +1278,24 @@ module Aws::IoTManagedIntegrations
       include Aws::Structure
     end
 
+    # Request for deregister a managed thing from account association
+    #
+    # @!attribute [rw] managed_thing_id
+    #   The identifier of the managed thing to be deregistered from the
+    #   account association.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_association_id
+    #   The unique identifier of the account association to be deregistered.
+    #   @return [String]
+    #
+    class DeregisterAccountAssociationRequest < Struct.new(
+      :managed_thing_id,
+      :account_association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Structure describing a destination for IoT managed integrations to
     # deliver notifications for a device.
     #
@@ -912,6 +1325,139 @@ module Aws::IoTManagedIntegrations
       :delivery_destination_type,
       :name,
       :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describe the device using the relevant metadata and supported clusters
+    # for device discovery.
+    #
+    # @!attribute [rw] connector_device_id
+    #   The device id as defined by the connector.
+    #
+    #   <note markdown="1"> This parameter is used for cloud-to-cloud devices only.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_device_name
+    #   The name of the device as defined by the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] capability_report
+    #   The capability report for the device.
+    #   @return [Types::MatterCapabilityReport]
+    #
+    # @!attribute [rw] capability_schemas
+    #   Report of all capabilities supported by the device.
+    #   @return [Array<Types::CapabilitySchemaItem>]
+    #
+    # @!attribute [rw] device_metadata
+    #   The metadata attributes for a device.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    class Device < Struct.new(
+      :connector_device_id,
+      :connector_device_name,
+      :capability_report,
+      :capability_schemas,
+      :device_metadata)
+      SENSITIVE = [:connector_device_id, :connector_device_name]
+      include Aws::Structure
+    end
+
+    # Structure containing summary information about a device discovery job,
+    # including its identifier, type, and status.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the device discovery job.
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_type
+    #   The type of discovery process used to find devices.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the device discovery job.
+    #   @return [String]
+    #
+    class DeviceDiscoverySummary < Struct.new(
+      :id,
+      :discovery_type,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Structure containing summary information about a device discovered
+    # during a device discovery job.
+    #
+    # @!attribute [rw] connector_device_id
+    #   The third-party device identifier as defined by the connector. This
+    #   identifier must not contain personal identifiable information (PII).
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_device_name
+    #   The name of the device as defined by the connector or third-party
+    #   system.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_types
+    #   The list of device types or categories that the discovered device
+    #   belongs to.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] managed_thing_id
+    #   The identifier of the managed thing created for this discovered
+    #   device, if one exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] modification
+    #   The status of the discovered device, indicating whether it has been
+    #   added, removed, or modified since the last discovery.
+    #   @return [String]
+    #
+    # @!attribute [rw] discovered_at
+    #   The timestamp indicating when the device was discovered.
+    #   @return [Time]
+    #
+    # @!attribute [rw] brand
+    #   The brand of the discovered device.
+    #   @return [String]
+    #
+    # @!attribute [rw] model
+    #   The model of the discovered device.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_material
+    #   The authentication material required for connecting to the
+    #   discovered device, such as credentials or tokens.
+    #   @return [String]
+    #
+    class DiscoveredDeviceSummary < Struct.new(
+      :connector_device_id,
+      :connector_device_name,
+      :device_types,
+      :managed_thing_id,
+      :modification,
+      :discovered_at,
+      :brand,
+      :model,
+      :authentication_material)
+      SENSITIVE = [:connector_device_id, :connector_device_name, :brand, :model, :authentication_material]
+      include Aws::Structure
+    end
+
+    # The configuration details for an endpoint, which defines how to
+    # connect to and communicate with external services.
+    #
+    # @!attribute [rw] lambda
+    #   The Lambda function configuration for the endpoint, used when the
+    #   endpoint communicates through an AWS Lambda function.
+    #   @return [Types::LambdaConfig]
+    #
+    class EndpointConfig < Struct.new(
+      :lambda)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -965,6 +1511,176 @@ module Aws::IoTManagedIntegrations
       :base_rate_per_minute,
       :increment_factor,
       :rate_increase_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_association_id
+    #   The unique identifier of the account association to retrieve.
+    #   @return [String]
+    #
+    class GetAccountAssociationRequest < Struct.new(
+      :account_association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_association_id
+    #   The unique identifier of the retrieved account association.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_state
+    #   The current status state for the account association.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message explaining the current account association error.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_destination_id
+    #   The identifier of the connector destination associated with this
+    #   account association.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the account association.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the account association.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the account association.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_auth_authorization_url
+    #   Third party IoT platform OAuth authorization server URL backed with
+    #   all the required parameters to perform end-user authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A set of key/value pairs that are used to manage the account
+    #   association.
+    #   @return [Hash<String,String>]
+    #
+    class GetAccountAssociationResponse < Struct.new(
+      :account_association_id,
+      :association_state,
+      :error_message,
+      :connector_destination_id,
+      :name,
+      :description,
+      :arn,
+      :o_auth_authorization_url,
+      :tags)
+      SENSITIVE = [:o_auth_authorization_url, :tags]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The identifier of the C2C connector.
+    #   @return [String]
+    #
+    class GetCloudConnectorRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The display name of the C2C connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_config
+    #   The configuration details for the cloud connector endpoint,
+    #   including connection parameters and authentication requirements.
+    #   @return [Types::EndpointConfig]
+    #
+    # @!attribute [rw] description
+    #   A description of the C2C connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of endpoint used for the cloud connector, which defines how
+    #   the connector communicates with external services.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the cloud connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of cloud connector created.
+    #   @return [String]
+    #
+    class GetCloudConnectorResponse < Struct.new(
+      :name,
+      :endpoint_config,
+      :description,
+      :endpoint_type,
+      :id,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The identifier of the C2C connector destination.
+    #   @return [String]
+    #
+    class GetConnectorDestinationRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The display name of the connector destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the connector destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_connector_id
+    #   The identifier of the C2C connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the connector destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_type
+    #   The authentication type used for the connector destination, which
+    #   determines how credentials and access are managed.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_config
+    #   The authentication configuration details for the connector
+    #   destination, including OAuth settings and other authentication
+    #   parameters.
+    #   @return [Types::AuthConfig]
+    #
+    # @!attribute [rw] secrets_manager
+    #   The AWS Secrets Manager configuration used to securely store and
+    #   manage sensitive information for the connector destination.
+    #   @return [Types::SecretsManager]
+    #
+    # @!attribute [rw] o_auth_complete_redirect_url
+    #   The URL where users are redirected after completing the OAuth
+    #   authorization process for the connector destination.
+    #   @return [String]
+    #
+    class GetConnectorDestinationResponse < Struct.new(
+      :name,
+      :description,
+      :cloud_connector_id,
+      :id,
+      :auth_type,
+      :auth_config,
+      :secrets_manager,
+      :o_auth_complete_redirect_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1148,6 +1864,11 @@ module Aws::IoTManagedIntegrations
     #   association.
     #   @return [String]
     #
+    # @!attribute [rw] account_association_id
+    #   The identifier of the account association used for the device
+    #   discovery.
+    #   @return [String]
+    #
     # @!attribute [rw] finished_at
     #   The timestamp value for the completion time of the device discovery.
     #   @return [Time]
@@ -1165,6 +1886,7 @@ module Aws::IoTManagedIntegrations
       :started_at,
       :controller_id,
       :connector_association_id,
+      :account_association_id,
       :finished_at,
       :tags)
       SENSITIVE = [:tags]
@@ -1392,6 +2114,11 @@ module Aws::IoTManagedIntegrations
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] connector_destination_id
+    #   The identifier of the connector destination associated with this
+    #   managed thing.
+    #   @return [String]
+    #
     # @!attribute [rw] connector_device_id
     #   The third-party device id as defined by the connector. This device
     #   id must not contain personal identifiable information (PII).
@@ -1466,6 +2193,7 @@ module Aws::IoTManagedIntegrations
       :universal_product_code,
       :international_article_number,
       :connector_policy_id,
+      :connector_destination_id,
       :connector_device_id,
       :device_specific_key,
       :mac_address,
@@ -1665,6 +2393,11 @@ module Aws::IoTManagedIntegrations
     #   The status of the over-the-air (OTA) task.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A set of key/value pairs that are used to manage the over-the-air
+    #   (OTA) task.
+    #   @return [Hash<String,String>]
+    #
     class GetOtaTaskResponse < Struct.new(
       :task_id,
       :task_arn,
@@ -1681,8 +2414,9 @@ module Aws::IoTManagedIntegrations
       :task_processing_details,
       :ota_scheduling_config,
       :ota_task_execution_retry_config,
-      :status)
-      SENSITIVE = []
+      :status,
+      :tags)
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -1845,6 +2579,162 @@ module Aws::IoTManagedIntegrations
       include Aws::Structure
     end
 
+    # The request is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration details for an AWS Lambda function used as an endpoint
+    # for a cloud connector.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Lambda function used as an
+    #   endpoint.
+    #   @return [String]
+    #
+    class LambdaConfig < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request exceeds a service limit or quota. Adjust your request
+    # parameters and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_destination_id
+    #   The identifier of the connector destination to filter account
+    #   associations by.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of account associations to return in a single
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination of results.
+    #   @return [String]
+    #
+    class ListAccountAssociationsRequest < Struct.new(
+      :connector_destination_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The list of account associations that match the specified criteria.
+    #   @return [Array<Types::AccountAssociationItem>]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination of results when there are more account
+    #   associations than can be returned in a single response.
+    #   @return [String]
+    #
+    class ListAccountAssociationsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] type
+    #   The type of cloud connectors to filter by when listing available
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_arn
+    #   The Amazon Resource Name (ARN) of the Lambda function to filter
+    #   cloud connectors by.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results.
+    #   @return [String]
+    #
+    class ListCloudConnectorsRequest < Struct.new(
+      :type,
+      :lambda_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The list of connectors.
+    #   @return [Array<Types::ConnectorItem>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results.
+    #   @return [String]
+    #
+    class ListCloudConnectorsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_connector_id
+    #   The identifier of the cloud connector to filter connector
+    #   destinations by.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of connector destinations to return in a single
+    #   response.
+    #   @return [Integer]
+    #
+    class ListConnectorDestinationsRequest < Struct.new(
+      :cloud_connector_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_destination_list
+    #   The list of connector destinations that match the specified
+    #   criteria.
+    #   @return [Array<Types::ConnectorDestinationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination of results when there are more connector
+    #   destinations than can be returned in a single response.
+    #   @return [String]
+    #
+    class ListConnectorDestinationsResponse < Struct.new(
+      :connector_destination_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   A token that can be used to retrieve the next set of results.
     #   @return [String]
@@ -1906,6 +2796,86 @@ module Aws::IoTManagedIntegrations
     end
 
     # @!attribute [rw] next_token
+    #   A token used for pagination of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of device discovery jobs to return in a single
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] type_filter
+    #   The discovery type to filter device discovery jobs by.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_filter
+    #   The status to filter device discovery jobs by.
+    #   @return [String]
+    #
+    class ListDeviceDiscoveriesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :type_filter,
+      :status_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The list of device discovery jobs that match the specified criteria.
+    #   @return [Array<Types::DeviceDiscoverySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination of results when there are more device
+    #   discovery jobs than can be returned in a single response.
+    #   @return [String]
+    #
+    class ListDeviceDiscoveriesResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The identifier of the device discovery job to list discovered
+    #   devices for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of discovered devices to return in a single
+    #   response.
+    #   @return [Integer]
+    #
+    class ListDiscoveredDevicesRequest < Struct.new(
+      :identifier,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The list of discovered devices that match the specified criteria.
+    #   @return [Array<Types::DiscoveredDeviceSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination of results when there are more
+    #   discovered devices than can be returned in a single response.
+    #   @return [String]
+    #
+    class ListDiscoveredDevicesResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
     #   A token that can be used to retrieve the next set of results.
     #   @return [String]
     #
@@ -1930,6 +2900,53 @@ module Aws::IoTManagedIntegrations
     #
     class ListEventLogConfigurationsResponse < Struct.new(
       :event_log_configuration_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] managed_thing_id
+    #   The identifier of the managed thing to list account associations
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_association_id
+    #   The identifier of the account association to filter results by. When
+    #   specified, only associations with this account association ID will
+    #   be returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of account associations to return in a single
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination of results.
+    #   @return [String]
+    #
+    class ListManagedThingAccountAssociationsRequest < Struct.new(
+      :managed_thing_id,
+      :account_association_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The list of managed thing associations that match the specified
+    #   criteria, including the managed thing ID and account association ID
+    #   for each association.
+    #   @return [Array<Types::ManagedThingAssociation>]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination of results when there are more account
+    #   associations than can be returned in a single response.
+    #   @return [String]
+    #
+    class ListManagedThingAccountAssociationsResponse < Struct.new(
+      :items,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2001,6 +3018,17 @@ module Aws::IoTManagedIntegrations
     #   Filter on a connector policy id for a managed thing.
     #   @return [String]
     #
+    # @!attribute [rw] connector_destination_id_filter
+    #   Filter managed things by the connector destination ID they are
+    #   associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_device_id_filter
+    #   Filter managed things by the connector device ID they are associated
+    #   with. When specified, only managed things with this connector device
+    #   ID will be returned.
+    #   @return [String]
+    #
     # @!attribute [rw] serial_number_filter
     #   Filter on the serial number of the device.
     #   @return [String]
@@ -2023,11 +3051,13 @@ module Aws::IoTManagedIntegrations
       :role_filter,
       :parent_controller_identifier_filter,
       :connector_policy_id_filter,
+      :connector_destination_id_filter,
+      :connector_device_id_filter,
       :serial_number_filter,
       :provisioning_status_filter,
       :next_token,
       :max_results)
-      SENSITIVE = [:owner_filter, :serial_number_filter]
+      SENSITIVE = [:owner_filter, :connector_device_id_filter, :serial_number_filter]
       include Aws::Structure
     end
 
@@ -2257,6 +3287,44 @@ module Aws::IoTManagedIntegrations
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource for which to list tags.
+    #   @return [String]
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A set of key/value pairs that are used to manage the resource.
+    #   @return [Hash<String,String>]
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # Structure representing an association between a managed thing and an
+    # account association, which connects a device to a third-party account.
+    #
+    # @!attribute [rw] managed_thing_id
+    #   The identifier of the managed thing in the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_association_id
+    #   The identifier of the account association in the association.
+    #   @return [String]
+    #
+    class ManagedThingAssociation < Struct.new(
+      :managed_thing_id,
+      :account_association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Structure representing one schema item associated with a managed
     # thing.
     #
@@ -2321,6 +3389,11 @@ module Aws::IoTManagedIntegrations
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] connector_destination_id
+    #   The identifier of the connector destination associated with this
+    #   managed thing, if applicable.
+    #   @return [String]
+    #
     # @!attribute [rw] model
     #   The model of the device.
     #   @return [String]
@@ -2377,6 +3450,7 @@ module Aws::IoTManagedIntegrations
       :classification,
       :connector_device_id,
       :connector_policy_id,
+      :connector_destination_id,
       :model,
       :name,
       :owner,
@@ -2389,6 +3463,203 @@ module Aws::IoTManagedIntegrations
       :updated_at,
       :activated_at)
       SENSITIVE = [:brand, :classification, :connector_device_id, :model, :owner, :serial_number]
+      include Aws::Structure
+    end
+
+    # Matter based capability report.
+    #
+    # @!attribute [rw] version
+    #   The version of the capability report.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   The numeric identifier of the node.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoints
+    #   The endpoints used in the capability report.
+    #   @return [Array<Types::MatterCapabilityReportEndpoint>]
+    #
+    class MatterCapabilityReport < Struct.new(
+      :version,
+      :node_id,
+      :endpoints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Matter attribute used in capability report.
+    #
+    # @!attribute [rw] id
+    #   The id of the Matter attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Name for the Amazon Web Services Matter capability report attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Value for the Amazon Web Services Matter capability report
+    #   attribute.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    class MatterCapabilityReportAttribute < Struct.new(
+      :id,
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Capability used in Matter capability report.
+    #
+    # @!attribute [rw] id
+    #   The id of the Amazon Web Services Matter capability report cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   The id of the revision for the Amazon Web Services Matter capability
+    #   report.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] public_id
+    #   The id of the schema version.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The capability name used in the Amazon Web Services Matter
+    #   capability report.
+    #   @return [String]
+    #
+    # @!attribute [rw] spec_version
+    #   The spec version used in the Amazon Web Services Matter capability
+    #   report.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   The attributes of the Amazon Web Services Matter capability report.
+    #   @return [Array<Types::MatterCapabilityReportAttribute>]
+    #
+    # @!attribute [rw] commands
+    #   The commands used with the Amazon Web Services Matter capability
+    #   report.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] events
+    #   The events used with the Amazon Web Services Matter capability
+    #   report.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] feature_map
+    #   32 bit-map used to indicate which features a cluster supports.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] generated_commands
+    #   Matter clusters used in capability report.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] fabric_index
+    #   The fabric index for the Amazon Web Services Matter capability
+    #   report.
+    #   @return [Integer]
+    #
+    class MatterCapabilityReportCluster < Struct.new(
+      :id,
+      :revision,
+      :public_id,
+      :name,
+      :spec_version,
+      :attributes,
+      :commands,
+      :events,
+      :feature_map,
+      :generated_commands,
+      :fabric_index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Matter endpoint used in capability report.
+    #
+    # @!attribute [rw] id
+    #   The id of the Amazon Web Services Matter capability report endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_types
+    #   The type of device.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] clusters
+    #   Matter clusters used in capability report.
+    #   @return [Array<Types::MatterCapabilityReportCluster>]
+    #
+    # @!attribute [rw] parts
+    #   Heirachy of child endpoints contained in the given endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] semantic_tags
+    #   Semantic information related to endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] client_clusters
+    #   Semantic information related to endpoint.
+    #   @return [Array<String>]
+    #
+    class MatterCapabilityReportEndpoint < Struct.new(
+      :id,
+      :device_types,
+      :clusters,
+      :parts,
+      :semantic_tags,
+      :client_clusters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describe a Matter cluster with an id, and the relevant attributes,
+    # commands, and events.
+    #
+    # @!attribute [rw] id
+    #   The cluster id.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   The Matter attributes.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] commands
+    #   Describe the Matter commands with the Matter command identifier
+    #   mapped to the command fields.
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
+    # @!attribute [rw] events
+    #   Describe the Matter events with the Matter event identifier mapped
+    #   to the event fields.
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
+    class MatterCluster < Struct.new(
+      :id,
+      :attributes,
+      :commands,
+      :events)
+      SENSITIVE = [:attributes, :commands, :events]
+      include Aws::Structure
+    end
+
+    # Structure describing a managed thing.
+    #
+    # @!attribute [rw] id
+    #   The Matter endpoint id.
+    #   @return [String]
+    #
+    # @!attribute [rw] clusters
+    #   A list of Matter clusters for a managed thing.
+    #   @return [Array<Types::MatterCluster>]
+    #
+    class MatterEndpoint < Struct.new(
+      :id,
+      :clusters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2406,6 +3677,69 @@ module Aws::IoTManagedIntegrations
     class NotificationConfigurationSummary < Struct.new(
       :event_type,
       :destination_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration details for OAuth authentication with a third-party
+    # service.
+    #
+    # @!attribute [rw] auth_url
+    #   The authorization URL for the OAuth service, where users are
+    #   directed to authenticate and authorize access.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_url
+    #   The token URL for the OAuth service, where authorization codes are
+    #   exchanged for access tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   The OAuth scopes requested during authorization, which define the
+    #   permissions granted to the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_endpoint_authentication_scheme
+    #   The authentication scheme used when requesting tokens from the token
+    #   endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_auth_complete_redirect_url
+    #   The URL where users are redirected after completing the OAuth
+    #   authorization process.
+    #   @return [String]
+    #
+    # @!attribute [rw] proactive_refresh_token_renewal
+    #   Configuration for proactively refreshing OAuth tokens before they
+    #   expire.
+    #   @return [Types::ProactiveRefreshTokenRenewal]
+    #
+    class OAuthConfig < Struct.new(
+      :auth_url,
+      :token_url,
+      :scope,
+      :token_endpoint_authentication_scheme,
+      :o_auth_complete_redirect_url,
+      :proactive_refresh_token_renewal)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Structure containing updated OAuth configuration settings.
+    #
+    # @!attribute [rw] o_auth_complete_redirect_url
+    #   The updated URL where users are redirected after completing the
+    #   OAuth authorization process.
+    #   @return [String]
+    #
+    # @!attribute [rw] proactive_refresh_token_renewal
+    #   Updated configuration for proactively refreshing OAuth tokens before
+    #   they expire.
+    #   @return [Types::ProactiveRefreshTokenRenewal]
+    #
+    class OAuthUpdate < Struct.new(
+      :o_auth_complete_redirect_url,
+      :proactive_refresh_token_renewal)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2618,6 +3952,25 @@ module Aws::IoTManagedIntegrations
       include Aws::Structure
     end
 
+    # Configuration settings for proactively refreshing OAuth tokens before
+    # they expire.
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether proactive refresh token renewal is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] days_before_renewal
+    #   The days before token expiration when the system should attempt to
+    #   renew the token, specified in days.
+    #   @return [Integer]
+    #
+    class ProactiveRefreshTokenRenewal < Struct.new(
+      :enabled,
+      :days_before_renewal)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Structure describing a provisioning profile.
     #
     # @!attribute [rw] name
@@ -2744,6 +4097,51 @@ module Aws::IoTManagedIntegrations
       include Aws::Structure
     end
 
+    # @!attribute [rw] managed_thing_id
+    #   The identifier of the managed thing to register with the account
+    #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_association_id
+    #   The identifier of the account association to register with the
+    #   managed thing.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_discovery_id
+    #   The identifier of the device discovery job associated with this
+    #   registration.
+    #   @return [String]
+    #
+    class RegisterAccountAssociationRequest < Struct.new(
+      :managed_thing_id,
+      :account_association_id,
+      :device_discovery_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_association_id
+    #   The identifier of the account association that was registered.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_discovery_id
+    #   The identifier of the device discovery job associated with this
+    #   registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_thing_id
+    #   The identifier of the managed thing that was registered with the
+    #   account association.
+    #   @return [String]
+    #
+    class RegisterAccountAssociationResponse < Struct.new(
+      :account_association_id,
+      :device_discovery_id,
+      :managed_thing_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     class RegisterCustomEndpointRequest < Aws::EmptyStructure; end
@@ -2774,8 +4172,18 @@ module Aws::IoTManagedIntegrations
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] resource_id
+    #   Id of the affected resource
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Type of the affected resource
+    #   @return [String]
+    #
     class ResourceNotFoundException < Struct.new(
-      :message)
+      :message,
+      :resource_id,
+      :resource_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2926,6 +4334,127 @@ module Aws::IoTManagedIntegrations
       include Aws::Structure
     end
 
+    # Configuration for AWS Secrets Manager, used to securely store and
+    # manage sensitive information for connector destinations.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the AWS Secrets Manager secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The version ID of the AWS Secrets Manager secret.
+    #   @return [String]
+    #
+    class SecretsManager < Struct.new(
+      :arn,
+      :version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_id
+    #   The id of the connector between the third-party cloud provider and
+    #   IoT managed integrations.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The id of the third-party cloud provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   The Open Connectivity Foundation (OCF) operation requested to be
+    #   performed on the managed thing.
+    #
+    #   <note markdown="1"> The field op can have a value of "I" or "U". The field "cn"
+    #   will contain the capability types.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_version
+    #   The Open Connectivity Foundation (OCF) security specification
+    #   version for the operation being requested on the managed thing. For
+    #   more information, see [OCF Security Specification][1].
+    #
+    #
+    #
+    #   [1]: https://openconnectivity.org/specs/OCF_Security_Specification_v1.0.0.pdf
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The status code of the Open Connectivity Foundation (OCF) operation
+    #   being performed on the managed thing.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] message
+    #   The device state change event payload.
+    #
+    #   This parameter will include the following three fields:
+    #
+    #   * `uri`: `schema auc://<PARTNER-DEVICE-ID>/ResourcePath` (The
+    #     `Resourcepath` corresponds to an OCF resource.)
+    #
+    #   * `op`: For device state changes, this field must populate as `n+d`.
+    #
+    #   * `cn`: The content depends on the OCF resource referenced in
+    #     `ResourcePath`.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_discovery_id
+    #   The id for the device discovery job.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_device_id
+    #   The third-party device id as defined by the connector. This device
+    #   id must not contain personal identifiable information (PII).
+    #
+    #   <note markdown="1"> This parameter is used for cloud-to-cloud devices only.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_id
+    #   The trace request identifier used to correlate a command request and
+    #   response. This is specified by the device owner, but will be
+    #   generated by IoT managed integrations if not provided by the device
+    #   owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] devices
+    #   The list of devices.
+    #   @return [Array<Types::Device>]
+    #
+    # @!attribute [rw] matter_endpoint
+    #   The device endpoint.
+    #   @return [Types::MatterEndpoint]
+    #
+    class SendConnectorEventRequest < Struct.new(
+      :connector_id,
+      :user_id,
+      :operation,
+      :operation_version,
+      :status_code,
+      :message,
+      :device_discovery_id,
+      :connector_device_id,
+      :trace_id,
+      :devices,
+      :matter_endpoint)
+      SENSITIVE = [:user_id, :operation_version, :status_code, :message, :connector_device_id]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_id
+    #   The id of the connector between the third-party cloud provider and
+    #   IoT managed integrations.
+    #   @return [String]
+    #
+    class SendConnectorEventResponse < Struct.new(
+      :connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] managed_thing_id
     #   The id of the device.
     #   @return [String]
@@ -2939,10 +4468,16 @@ module Aws::IoTManagedIntegrations
     #   association.
     #   @return [String]
     #
+    # @!attribute [rw] account_association_id
+    #   The identifier of the account association to use when sending a
+    #   command to a managed thing.
+    #   @return [String]
+    #
     class SendManagedThingCommandRequest < Struct.new(
       :managed_thing_id,
       :endpoints,
-      :connector_association_id)
+      :connector_association_id,
+      :account_association_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2981,10 +4516,42 @@ module Aws::IoTManagedIntegrations
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_association_id
+    #   The unique identifier of the account association to refresh.
+    #   @return [String]
+    #
+    class StartAccountAssociationRefreshRequest < Struct.new(
+      :account_association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] o_auth_authorization_url
+    #   Third-party IoT platform OAuth authorization server URL with all
+    #   required parameters to perform end-user authentication during the
+    #   refresh process.
+    #   @return [String]
+    #
+    class StartAccountAssociationRefreshResponse < Struct.new(
+      :o_auth_authorization_url)
+      SENSITIVE = [:o_auth_authorization_url]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] discovery_type
     #   The discovery type supporting the type of device to be discovered in
-    #   the device discovery job request.
+    #   the device discovery task request.
     #   @return [String]
+    #
+    # @!attribute [rw] custom_protocol_detail
+    #   Additional protocol-specific details required for device discovery,
+    #   which vary based on the discovery type.
+    #
+    #   <note markdown="1"> For a `DiscoveryType` of `CUSTOM`, the string-to-string map must
+    #   have a key value of `Name` set to a non-empty-string.
+    #
+    #    </note>
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] controller_identifier
     #   The id of the end-user's IoT hub.
@@ -2992,6 +4559,11 @@ module Aws::IoTManagedIntegrations
     #
     # @!attribute [rw] connector_association_identifier
     #   The id of the connector association.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_association_id
+    #   The identifier of the cloud-to-cloud account association to use for
+    #   discovery of third-party devices.
     #   @return [String]
     #
     # @!attribute [rw] authentication_material
@@ -3017,8 +4589,10 @@ module Aws::IoTManagedIntegrations
     #
     class StartDeviceDiscoveryRequest < Struct.new(
       :discovery_type,
+      :custom_protocol_detail,
       :controller_identifier,
       :connector_association_identifier,
+      :account_association_id,
       :authentication_material,
       :authentication_material_type,
       :client_token,
@@ -3087,6 +4661,23 @@ module Aws::IoTManagedIntegrations
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource to which to add tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A set of key/value pairs that are used to manage the resource
+    #   @return [Hash<String,String>]
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure; end
 
     # Details about the over-the-air (OTA) task process.
     #
@@ -3158,6 +4749,100 @@ module Aws::IoTManagedIntegrations
     #
     class UnauthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource to which to add tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of tag keys to remove from the resource.
+    #   @return [Array<String>]
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] account_association_id
+    #   The unique identifier of the account association to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The new name to assign to the account association.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The new description to assign to the account association.
+    #   @return [String]
+    #
+    class UpdateAccountAssociationRequest < Struct.new(
+      :account_association_id,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The unique identifier of the cloud connector to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The new display name to assign to the cloud connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The new description to assign to the cloud connector.
+    #   @return [String]
+    #
+    class UpdateCloudConnectorRequest < Struct.new(
+      :identifier,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The unique identifier of the connector destination to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The new description to assign to the connector destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The new display name to assign to the connector destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_type
+    #   The new authentication type to use for the connector destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_config
+    #   The updated authentication configuration details for the connector
+    #   destination.
+    #   @return [Types::AuthConfigUpdate]
+    #
+    # @!attribute [rw] secrets_manager
+    #   The updated AWS Secrets Manager configuration for the connector
+    #   destination.
+    #   @return [Types::SecretsManager]
+    #
+    class UpdateConnectorDestinationRequest < Struct.new(
+      :identifier,
+      :description,
+      :name,
+      :auth_type,
+      :auth_config,
+      :secrets_manager)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3241,6 +4926,11 @@ module Aws::IoTManagedIntegrations
     #   A report of the capabilities for the managed thing.
     #   @return [Types::CapabilityReport]
     #
+    # @!attribute [rw] capability_schemas
+    #   The updated capability schemas that define the functionality and
+    #   features supported by the managed thing.
+    #   @return [Array<Types::CapabilitySchemaItem>]
+    #
     # @!attribute [rw] capabilities
     #   The capabilities of the device such as light bulb.
     #   @return [String]
@@ -3267,6 +4957,7 @@ module Aws::IoTManagedIntegrations
       :model,
       :name,
       :capability_report,
+      :capability_schemas,
       :capabilities,
       :classification,
       :hub_network_mode,

@@ -19,8 +19,10 @@ module Aws::WAFV2
     APIKeySummary = Shapes::StructureShape.new(name: 'APIKeySummary')
     APIKeyTokenDomains = Shapes::ListShape.new(name: 'APIKeyTokenDomains')
     APIKeyVersion = Shapes::IntegerShape.new(name: 'APIKeyVersion')
+    ASN = Shapes::IntegerShape.new(name: 'ASN')
     AWSManagedRulesACFPRuleSet = Shapes::StructureShape.new(name: 'AWSManagedRulesACFPRuleSet')
     AWSManagedRulesATPRuleSet = Shapes::StructureShape.new(name: 'AWSManagedRulesATPRuleSet')
+    AWSManagedRulesAntiDDoSRuleSet = Shapes::StructureShape.new(name: 'AWSManagedRulesAntiDDoSRuleSet')
     AWSManagedRulesBotControlRuleSet = Shapes::StructureShape.new(name: 'AWSManagedRulesBotControlRuleSet')
     Action = Shapes::StringShape.new(name: 'Action')
     ActionCondition = Shapes::StructureShape.new(name: 'ActionCondition')
@@ -31,10 +33,18 @@ module Aws::WAFV2
     AllQueryArguments = Shapes::StructureShape.new(name: 'AllQueryArguments')
     AllowAction = Shapes::StructureShape.new(name: 'AllowAction')
     AndStatement = Shapes::StructureShape.new(name: 'AndStatement')
+    ApplicationAttribute = Shapes::StructureShape.new(name: 'ApplicationAttribute')
+    ApplicationAttributes = Shapes::ListShape.new(name: 'ApplicationAttributes')
+    ApplicationConfig = Shapes::StructureShape.new(name: 'ApplicationConfig')
+    AsnList = Shapes::ListShape.new(name: 'AsnList')
+    AsnMatchStatement = Shapes::StructureShape.new(name: 'AsnMatchStatement')
     AssociateWebACLRequest = Shapes::StructureShape.new(name: 'AssociateWebACLRequest')
     AssociateWebACLResponse = Shapes::StructureShape.new(name: 'AssociateWebACLResponse')
     AssociatedResourceType = Shapes::StringShape.new(name: 'AssociatedResourceType')
     AssociationConfig = Shapes::StructureShape.new(name: 'AssociationConfig')
+    AttributeName = Shapes::StringShape.new(name: 'AttributeName')
+    AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
+    AttributeValues = Shapes::ListShape.new(name: 'AttributeValues')
     BlockAction = Shapes::StructureShape.new(name: 'BlockAction')
     Body = Shapes::StructureShape.new(name: 'Body')
     BodyParsingFallbackBehavior = Shapes::StringShape.new(name: 'BodyParsingFallbackBehavior')
@@ -49,6 +59,8 @@ module Aws::WAFV2
     ChallengeResponse = Shapes::StructureShape.new(name: 'ChallengeResponse')
     CheckCapacityRequest = Shapes::StructureShape.new(name: 'CheckCapacityRequest')
     CheckCapacityResponse = Shapes::StructureShape.new(name: 'CheckCapacityResponse')
+    ClientSideAction = Shapes::StructureShape.new(name: 'ClientSideAction')
+    ClientSideActionConfig = Shapes::StructureShape.new(name: 'ClientSideActionConfig')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
     Condition = Shapes::StructureShape.new(name: 'Condition')
     Conditions = Shapes::ListShape.new(name: 'Conditions')
@@ -239,6 +251,7 @@ module Aws::WAFV2
     LoggingConfigurations = Shapes::ListShape.new(name: 'LoggingConfigurations')
     LoggingFilter = Shapes::StructureShape.new(name: 'LoggingFilter')
     LoginPathString = Shapes::StringShape.new(name: 'LoginPathString')
+    LowReputationMode = Shapes::StringShape.new(name: 'LowReputationMode')
     ManagedProductDescriptor = Shapes::StructureShape.new(name: 'ManagedProductDescriptor')
     ManagedProductDescriptors = Shapes::ListShape.new(name: 'ManagedProductDescriptors')
     ManagedRuleGroupConfig = Shapes::StructureShape.new(name: 'ManagedRuleGroupConfig')
@@ -259,6 +272,7 @@ module Aws::WAFV2
     NextMarker = Shapes::StringShape.new(name: 'NextMarker')
     NoneAction = Shapes::StructureShape.new(name: 'NoneAction')
     NotStatement = Shapes::StructureShape.new(name: 'NotStatement')
+    OnSourceDDoSProtectionConfig = Shapes::StructureShape.new(name: 'OnSourceDDoSProtectionConfig')
     OrStatement = Shapes::StructureShape.new(name: 'OrStatement')
     OutputUrl = Shapes::StringShape.new(name: 'OutputUrl')
     OverrideAction = Shapes::StructureShape.new(name: 'OverrideAction')
@@ -292,6 +306,7 @@ module Aws::WAFV2
     RateBasedStatementCustomKeys = Shapes::ListShape.new(name: 'RateBasedStatementCustomKeys')
     RateBasedStatementManagedKeysIPSet = Shapes::StructureShape.new(name: 'RateBasedStatementManagedKeysIPSet')
     RateLimit = Shapes::IntegerShape.new(name: 'RateLimit')
+    RateLimitAsn = Shapes::StructureShape.new(name: 'RateLimitAsn')
     RateLimitCookie = Shapes::StructureShape.new(name: 'RateLimitCookie')
     RateLimitForwardedIP = Shapes::StructureShape.new(name: 'RateLimitForwardedIP')
     RateLimitHTTPMethod = Shapes::StructureShape.new(name: 'RateLimitHTTPMethod')
@@ -359,6 +374,7 @@ module Aws::WAFV2
     Scope = Shapes::StringShape.new(name: 'Scope')
     SearchString = Shapes::BlobShape.new(name: 'SearchString')
     SensitivityLevel = Shapes::StringShape.new(name: 'SensitivityLevel')
+    SensitivityToAct = Shapes::StringShape.new(name: 'SensitivityToAct')
     SingleCookieName = Shapes::StringShape.new(name: 'SingleCookieName')
     SingleHeader = Shapes::StructureShape.new(name: 'SingleHeader')
     SingleQueryArgument = Shapes::StructureShape.new(name: 'SingleQueryArgument')
@@ -406,6 +422,7 @@ module Aws::WAFV2
     UpdateWebACLResponse = Shapes::StructureShape.new(name: 'UpdateWebACLResponse')
     UriFragment = Shapes::StructureShape.new(name: 'UriFragment')
     UriPath = Shapes::StructureShape.new(name: 'UriPath')
+    UsageOfAction = Shapes::StringShape.new(name: 'UsageOfAction')
     UsernameField = Shapes::StructureShape.new(name: 'UsernameField')
     VendorName = Shapes::StringShape.new(name: 'VendorName')
     VersionKeyString = Shapes::StringShape.new(name: 'VersionKeyString')
@@ -459,6 +476,10 @@ module Aws::WAFV2
     AWSManagedRulesATPRuleSet.add_member(:enable_regex_in_path, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableRegexInPath"))
     AWSManagedRulesATPRuleSet.struct_class = Types::AWSManagedRulesATPRuleSet
 
+    AWSManagedRulesAntiDDoSRuleSet.add_member(:client_side_action_config, Shapes::ShapeRef.new(shape: ClientSideActionConfig, required: true, location_name: "ClientSideActionConfig"))
+    AWSManagedRulesAntiDDoSRuleSet.add_member(:sensitivity_to_block, Shapes::ShapeRef.new(shape: SensitivityToAct, location_name: "SensitivityToBlock"))
+    AWSManagedRulesAntiDDoSRuleSet.struct_class = Types::AWSManagedRulesAntiDDoSRuleSet
+
     AWSManagedRulesBotControlRuleSet.add_member(:inspection_level, Shapes::ShapeRef.new(shape: InspectionLevel, required: true, location_name: "InspectionLevel"))
     AWSManagedRulesBotControlRuleSet.add_member(:enable_machine_learning, Shapes::ShapeRef.new(shape: EnableMachineLearning, location_name: "EnableMachineLearning"))
     AWSManagedRulesBotControlRuleSet.struct_class = Types::AWSManagedRulesBotControlRuleSet
@@ -481,6 +502,21 @@ module Aws::WAFV2
     AndStatement.add_member(:statements, Shapes::ShapeRef.new(shape: Statements, required: true, location_name: "Statements"))
     AndStatement.struct_class = Types::AndStatement
 
+    ApplicationAttribute.add_member(:name, Shapes::ShapeRef.new(shape: AttributeName, location_name: "Name"))
+    ApplicationAttribute.add_member(:values, Shapes::ShapeRef.new(shape: AttributeValues, location_name: "Values"))
+    ApplicationAttribute.struct_class = Types::ApplicationAttribute
+
+    ApplicationAttributes.member = Shapes::ShapeRef.new(shape: ApplicationAttribute)
+
+    ApplicationConfig.add_member(:attributes, Shapes::ShapeRef.new(shape: ApplicationAttributes, location_name: "Attributes"))
+    ApplicationConfig.struct_class = Types::ApplicationConfig
+
+    AsnList.member = Shapes::ShapeRef.new(shape: ASN)
+
+    AsnMatchStatement.add_member(:asn_list, Shapes::ShapeRef.new(shape: AsnList, required: true, location_name: "AsnList"))
+    AsnMatchStatement.add_member(:forwarded_ip_config, Shapes::ShapeRef.new(shape: ForwardedIPConfig, location_name: "ForwardedIPConfig"))
+    AsnMatchStatement.struct_class = Types::AsnMatchStatement
+
     AssociateWebACLRequest.add_member(:web_acl_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "WebACLArn"))
     AssociateWebACLRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     AssociateWebACLRequest.struct_class = Types::AssociateWebACLRequest
@@ -489,6 +525,8 @@ module Aws::WAFV2
 
     AssociationConfig.add_member(:request_body, Shapes::ShapeRef.new(shape: RequestBody, location_name: "RequestBody"))
     AssociationConfig.struct_class = Types::AssociationConfig
+
+    AttributeValues.member = Shapes::ShapeRef.new(shape: AttributeValue)
 
     BlockAction.add_member(:custom_response, Shapes::ShapeRef.new(shape: CustomResponse, location_name: "CustomResponse"))
     BlockAction.struct_class = Types::BlockAction
@@ -530,6 +568,14 @@ module Aws::WAFV2
 
     CheckCapacityResponse.add_member(:capacity, Shapes::ShapeRef.new(shape: ConsumedCapacity, location_name: "Capacity"))
     CheckCapacityResponse.struct_class = Types::CheckCapacityResponse
+
+    ClientSideAction.add_member(:usage_of_action, Shapes::ShapeRef.new(shape: UsageOfAction, required: true, location_name: "UsageOfAction"))
+    ClientSideAction.add_member(:sensitivity, Shapes::ShapeRef.new(shape: SensitivityToAct, location_name: "Sensitivity"))
+    ClientSideAction.add_member(:exempt_uri_regular_expressions, Shapes::ShapeRef.new(shape: RegularExpressionList, location_name: "ExemptUriRegularExpressions"))
+    ClientSideAction.struct_class = Types::ClientSideAction
+
+    ClientSideActionConfig.add_member(:challenge, Shapes::ShapeRef.new(shape: ClientSideAction, required: true, location_name: "Challenge"))
+    ClientSideActionConfig.struct_class = Types::ClientSideActionConfig
 
     Condition.add_member(:action_condition, Shapes::ShapeRef.new(shape: ActionCondition, location_name: "ActionCondition"))
     Condition.add_member(:label_name_condition, Shapes::ShapeRef.new(shape: LabelNameCondition, location_name: "LabelNameCondition"))
@@ -608,6 +654,8 @@ module Aws::WAFV2
     CreateWebACLRequest.add_member(:challenge_config, Shapes::ShapeRef.new(shape: ChallengeConfig, location_name: "ChallengeConfig"))
     CreateWebACLRequest.add_member(:token_domains, Shapes::ShapeRef.new(shape: TokenDomains, location_name: "TokenDomains"))
     CreateWebACLRequest.add_member(:association_config, Shapes::ShapeRef.new(shape: AssociationConfig, location_name: "AssociationConfig"))
+    CreateWebACLRequest.add_member(:on_source_d_do_s_protection_config, Shapes::ShapeRef.new(shape: OnSourceDDoSProtectionConfig, location_name: "OnSourceDDoSProtectionConfig"))
+    CreateWebACLRequest.add_member(:application_config, Shapes::ShapeRef.new(shape: ApplicationConfig, location_name: "ApplicationConfig"))
     CreateWebACLRequest.struct_class = Types::CreateWebACLRequest
 
     CreateWebACLResponse.add_member(:summary, Shapes::ShapeRef.new(shape: WebACLSummary, location_name: "Summary"))
@@ -1146,13 +1194,14 @@ module Aws::WAFV2
 
     ManagedProductDescriptors.member = Shapes::ShapeRef.new(shape: ManagedProductDescriptor)
 
-    ManagedRuleGroupConfig.add_member(:login_path, Shapes::ShapeRef.new(shape: LoginPathString, deprecated: true, location_name: "LoginPath", metadata: {"deprecatedMessage"=>"Deprecated. Use AWSManagedRulesATPRuleSet LoginPath"}))
-    ManagedRuleGroupConfig.add_member(:payload_type, Shapes::ShapeRef.new(shape: PayloadType, deprecated: true, location_name: "PayloadType", metadata: {"deprecatedMessage"=>"Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection PayloadType"}))
-    ManagedRuleGroupConfig.add_member(:username_field, Shapes::ShapeRef.new(shape: UsernameField, deprecated: true, location_name: "UsernameField", metadata: {"deprecatedMessage"=>"Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection UsernameField"}))
-    ManagedRuleGroupConfig.add_member(:password_field, Shapes::ShapeRef.new(shape: PasswordField, deprecated: true, location_name: "PasswordField", metadata: {"deprecatedMessage"=>"Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection PasswordField"}))
+    ManagedRuleGroupConfig.add_member(:login_path, Shapes::ShapeRef.new(shape: LoginPathString, deprecated: true, location_name: "LoginPath", metadata: {"deprecatedMessage" => "Deprecated. Use AWSManagedRulesATPRuleSet LoginPath"}))
+    ManagedRuleGroupConfig.add_member(:payload_type, Shapes::ShapeRef.new(shape: PayloadType, deprecated: true, location_name: "PayloadType", metadata: {"deprecatedMessage" => "Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection PayloadType"}))
+    ManagedRuleGroupConfig.add_member(:username_field, Shapes::ShapeRef.new(shape: UsernameField, deprecated: true, location_name: "UsernameField", metadata: {"deprecatedMessage" => "Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection UsernameField"}))
+    ManagedRuleGroupConfig.add_member(:password_field, Shapes::ShapeRef.new(shape: PasswordField, deprecated: true, location_name: "PasswordField", metadata: {"deprecatedMessage" => "Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection PasswordField"}))
     ManagedRuleGroupConfig.add_member(:aws_managed_rules_bot_control_rule_set, Shapes::ShapeRef.new(shape: AWSManagedRulesBotControlRuleSet, location_name: "AWSManagedRulesBotControlRuleSet"))
     ManagedRuleGroupConfig.add_member(:aws_managed_rules_atp_rule_set, Shapes::ShapeRef.new(shape: AWSManagedRulesATPRuleSet, location_name: "AWSManagedRulesATPRuleSet"))
     ManagedRuleGroupConfig.add_member(:aws_managed_rules_acfp_rule_set, Shapes::ShapeRef.new(shape: AWSManagedRulesACFPRuleSet, location_name: "AWSManagedRulesACFPRuleSet"))
+    ManagedRuleGroupConfig.add_member(:aws_managed_rules_anti_d_do_s_rule_set, Shapes::ShapeRef.new(shape: AWSManagedRulesAntiDDoSRuleSet, location_name: "AWSManagedRulesAntiDDoSRuleSet"))
     ManagedRuleGroupConfig.struct_class = Types::ManagedRuleGroupConfig
 
     ManagedRuleGroupConfigs.member = Shapes::ShapeRef.new(shape: ManagedRuleGroupConfig)
@@ -1220,6 +1269,9 @@ module Aws::WAFV2
     NotStatement.add_member(:statement, Shapes::ShapeRef.new(shape: Statement, required: true, location_name: "Statement"))
     NotStatement.struct_class = Types::NotStatement
 
+    OnSourceDDoSProtectionConfig.add_member(:alb_low_reputation_mode, Shapes::ShapeRef.new(shape: LowReputationMode, required: true, location_name: "ALBLowReputationMode"))
+    OnSourceDDoSProtectionConfig.struct_class = Types::OnSourceDDoSProtectionConfig
+
     OrStatement.add_member(:statements, Shapes::ShapeRef.new(shape: Statements, required: true, location_name: "Statements"))
     OrStatement.struct_class = Types::OrStatement
 
@@ -1282,6 +1334,7 @@ module Aws::WAFV2
     RateBasedStatementCustomKey.add_member(:uri_path, Shapes::ShapeRef.new(shape: RateLimitUriPath, location_name: "UriPath"))
     RateBasedStatementCustomKey.add_member(:ja3_fingerprint, Shapes::ShapeRef.new(shape: RateLimitJA3Fingerprint, location_name: "JA3Fingerprint"))
     RateBasedStatementCustomKey.add_member(:ja4_fingerprint, Shapes::ShapeRef.new(shape: RateLimitJA4Fingerprint, location_name: "JA4Fingerprint"))
+    RateBasedStatementCustomKey.add_member(:asn, Shapes::ShapeRef.new(shape: RateLimitAsn, location_name: "ASN"))
     RateBasedStatementCustomKey.struct_class = Types::RateBasedStatementCustomKey
 
     RateBasedStatementCustomKeys.member = Shapes::ShapeRef.new(shape: RateBasedStatementCustomKey)
@@ -1289,6 +1342,8 @@ module Aws::WAFV2
     RateBasedStatementManagedKeysIPSet.add_member(:ip_address_version, Shapes::ShapeRef.new(shape: IPAddressVersion, location_name: "IPAddressVersion"))
     RateBasedStatementManagedKeysIPSet.add_member(:addresses, Shapes::ShapeRef.new(shape: IPAddresses, location_name: "Addresses"))
     RateBasedStatementManagedKeysIPSet.struct_class = Types::RateBasedStatementManagedKeysIPSet
+
+    RateLimitAsn.struct_class = Types::RateLimitAsn
 
     RateLimitCookie.add_member(:name, Shapes::ShapeRef.new(shape: FieldToMatchData, required: true, location_name: "Name"))
     RateLimitCookie.add_member(:text_transformations, Shapes::ShapeRef.new(shape: TextTransformations, required: true, location_name: "TextTransformations"))
@@ -1529,6 +1584,7 @@ module Aws::WAFV2
     Statement.add_member(:managed_rule_group_statement, Shapes::ShapeRef.new(shape: ManagedRuleGroupStatement, location_name: "ManagedRuleGroupStatement"))
     Statement.add_member(:label_match_statement, Shapes::ShapeRef.new(shape: LabelMatchStatement, location_name: "LabelMatchStatement"))
     Statement.add_member(:regex_match_statement, Shapes::ShapeRef.new(shape: RegexMatchStatement, location_name: "RegexMatchStatement"))
+    Statement.add_member(:asn_match_statement, Shapes::ShapeRef.new(shape: AsnMatchStatement, location_name: "AsnMatchStatement"))
     Statement.struct_class = Types::Statement
 
     Statements.member = Shapes::ShapeRef.new(shape: Statement)
@@ -1631,6 +1687,7 @@ module Aws::WAFV2
     UpdateWebACLRequest.add_member(:challenge_config, Shapes::ShapeRef.new(shape: ChallengeConfig, location_name: "ChallengeConfig"))
     UpdateWebACLRequest.add_member(:token_domains, Shapes::ShapeRef.new(shape: TokenDomains, location_name: "TokenDomains"))
     UpdateWebACLRequest.add_member(:association_config, Shapes::ShapeRef.new(shape: AssociationConfig, location_name: "AssociationConfig"))
+    UpdateWebACLRequest.add_member(:on_source_d_do_s_protection_config, Shapes::ShapeRef.new(shape: OnSourceDDoSProtectionConfig, location_name: "OnSourceDDoSProtectionConfig"))
     UpdateWebACLRequest.struct_class = Types::UpdateWebACLRequest
 
     UpdateWebACLResponse.add_member(:next_lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "NextLockToken"))
@@ -1736,6 +1793,8 @@ module Aws::WAFV2
     WebACL.add_member(:token_domains, Shapes::ShapeRef.new(shape: TokenDomains, location_name: "TokenDomains"))
     WebACL.add_member(:association_config, Shapes::ShapeRef.new(shape: AssociationConfig, location_name: "AssociationConfig"))
     WebACL.add_member(:retrofitted_by_firewall_manager, Shapes::ShapeRef.new(shape: Boolean, location_name: "RetrofittedByFirewallManager"))
+    WebACL.add_member(:on_source_d_do_s_protection_config, Shapes::ShapeRef.new(shape: OnSourceDDoSProtectionConfig, location_name: "OnSourceDDoSProtectionConfig"))
+    WebACL.add_member(:application_config, Shapes::ShapeRef.new(shape: ApplicationConfig, location_name: "ApplicationConfig"))
     WebACL.struct_class = Types::WebACL
 
     WebACLSummaries.member = Shapes::ShapeRef.new(shape: WebACLSummary)

@@ -157,7 +157,7 @@ module Aws::CodeGuruSecurity
     ConflictException.struct_class = Types::ConflictException
 
     CreateScanRequest.add_member(:analysis_type, Shapes::ShapeRef.new(shape: AnalysisType, location_name: "analysisType"))
-    CreateScanRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateScanRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateScanRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
     CreateScanRequest.add_member(:scan_name, Shapes::ShapeRef.new(shape: ScanName, required: true, location_name: "scanName"))
     CreateScanRequest.add_member(:scan_type, Shapes::ShapeRef.new(shape: ScanType, location_name: "scanType"))
@@ -395,7 +395,7 @@ module Aws::CodeGuruSecurity
 
     Vulnerability.add_member(:file_path, Shapes::ShapeRef.new(shape: FilePath, location_name: "filePath"))
     Vulnerability.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
-    Vulnerability.add_member(:item_count, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "itemCount", metadata: {"deprecatedMessage"=>"This shape is not used."}))
+    Vulnerability.add_member(:item_count, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "itemCount", metadata: {"deprecatedMessage" => "This shape is not used."}))
     Vulnerability.add_member(:reference_urls, Shapes::ShapeRef.new(shape: ReferenceUrls, location_name: "referenceUrls"))
     Vulnerability.add_member(:related_vulnerabilities, Shapes::ShapeRef.new(shape: RelatedVulnerabilities, location_name: "relatedVulnerabilities"))
     Vulnerability.struct_class = Types::Vulnerability

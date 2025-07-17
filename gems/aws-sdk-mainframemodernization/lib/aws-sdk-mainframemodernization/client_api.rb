@@ -304,7 +304,7 @@ module Aws::MainframeModernization
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateApplicationRequest.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, required: true, location_name: "definition"))
     CreateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "description"))
     CreateApplicationRequest.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, required: true, location_name: "engineType"))
@@ -320,7 +320,7 @@ module Aws::MainframeModernization
     CreateApplicationResponse.struct_class = Types::CreateApplicationResponse
 
     CreateDataSetExportTaskRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "applicationId"))
-    CreateDataSetExportTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataSetExportTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDataSetExportTaskRequest.add_member(:export_config, Shapes::ShapeRef.new(shape: DataSetExportConfig, required: true, location_name: "exportConfig"))
     CreateDataSetExportTaskRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "kmsKeyId"))
     CreateDataSetExportTaskRequest.struct_class = Types::CreateDataSetExportTaskRequest
@@ -329,7 +329,7 @@ module Aws::MainframeModernization
     CreateDataSetExportTaskResponse.struct_class = Types::CreateDataSetExportTaskResponse
 
     CreateDataSetImportTaskRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "applicationId"))
-    CreateDataSetImportTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataSetImportTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDataSetImportTaskRequest.add_member(:import_config, Shapes::ShapeRef.new(shape: DataSetImportConfig, required: true, location_name: "importConfig"))
     CreateDataSetImportTaskRequest.struct_class = Types::CreateDataSetImportTaskRequest
 
@@ -338,14 +338,14 @@ module Aws::MainframeModernization
 
     CreateDeploymentRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "applicationId"))
     CreateDeploymentRequest.add_member(:application_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "applicationVersion"))
-    CreateDeploymentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDeploymentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDeploymentRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "environmentId"))
     CreateDeploymentRequest.struct_class = Types::CreateDeploymentRequest
 
     CreateDeploymentResponse.add_member(:deployment_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "deploymentId"))
     CreateDeploymentResponse.struct_class = Types::CreateDeploymentResponse
 
-    CreateEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateEnvironmentRequest.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "description"))
     CreateEnvironmentRequest.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, required: true, location_name: "engineType"))
     CreateEnvironmentRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "engineVersion"))
@@ -619,7 +619,7 @@ module Aws::MainframeModernization
     GetDataSetDetailsRequest.add_member(:data_set_name, Shapes::ShapeRef.new(shape: String200, required: true, location: "uri", location_name: "dataSetName"))
     GetDataSetDetailsRequest.struct_class = Types::GetDataSetDetailsRequest
 
-    GetDataSetDetailsResponse.add_member(:blocksize, Shapes::ShapeRef.new(shape: Integer, location_name: "blocksize", metadata: {"box"=>true}))
+    GetDataSetDetailsResponse.add_member(:blocksize, Shapes::ShapeRef.new(shape: Integer, location_name: "blocksize", metadata: {"box" => true}))
     GetDataSetDetailsResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     GetDataSetDetailsResponse.add_member(:data_set_name, Shapes::ShapeRef.new(shape: String200, required: true, location_name: "dataSetName"))
     GetDataSetDetailsResponse.add_member(:data_set_org, Shapes::ShapeRef.new(shape: DatasetDetailOrgAttributes, location_name: "dataSetOrg"))
@@ -627,7 +627,7 @@ module Aws::MainframeModernization
     GetDataSetDetailsResponse.add_member(:last_referenced_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastReferencedTime"))
     GetDataSetDetailsResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedTime"))
     GetDataSetDetailsResponse.add_member(:location, Shapes::ShapeRef.new(shape: String2000, location_name: "location"))
-    GetDataSetDetailsResponse.add_member(:record_length, Shapes::ShapeRef.new(shape: Integer, location_name: "recordLength", metadata: {"box"=>true}))
+    GetDataSetDetailsResponse.add_member(:record_length, Shapes::ShapeRef.new(shape: Integer, location_name: "recordLength", metadata: {"box" => true}))
     GetDataSetDetailsResponse.struct_class = Types::GetDataSetDetailsResponse
 
     GetDataSetExportTaskRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "applicationId"))
@@ -713,7 +713,7 @@ module Aws::MainframeModernization
 
     JobStep.add_member(:proc_step_name, Shapes::ShapeRef.new(shape: String, location_name: "procStepName"))
     JobStep.add_member(:proc_step_number, Shapes::ShapeRef.new(shape: Integer, location_name: "procStepNumber"))
-    JobStep.add_member(:step_checkpoint, Shapes::ShapeRef.new(shape: Integer, location_name: "stepCheckpoint", metadata: {"box"=>true}))
+    JobStep.add_member(:step_checkpoint, Shapes::ShapeRef.new(shape: Integer, location_name: "stepCheckpoint", metadata: {"box" => true}))
     JobStep.add_member(:step_checkpoint_status, Shapes::ShapeRef.new(shape: String, location_name: "stepCheckpointStatus"))
     JobStep.add_member(:step_checkpoint_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "stepCheckpointTime"))
     JobStep.add_member(:step_cond_code, Shapes::ShapeRef.new(shape: String, location_name: "stepCondCode"))
@@ -724,8 +724,8 @@ module Aws::MainframeModernization
 
     JobStepRestartMarker.add_member(:from_proc_step, Shapes::ShapeRef.new(shape: String, location_name: "fromProcStep"))
     JobStepRestartMarker.add_member(:from_step, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fromStep"))
-    JobStepRestartMarker.add_member(:skip, Shapes::ShapeRef.new(shape: Boolean, location_name: "skip", metadata: {"box"=>true}))
-    JobStepRestartMarker.add_member(:step_checkpoint, Shapes::ShapeRef.new(shape: Integer, location_name: "stepCheckpoint", metadata: {"box"=>true}))
+    JobStepRestartMarker.add_member(:skip, Shapes::ShapeRef.new(shape: Boolean, location_name: "skip", metadata: {"box" => true}))
+    JobStepRestartMarker.add_member(:step_checkpoint, Shapes::ShapeRef.new(shape: Integer, location_name: "stepCheckpoint", metadata: {"box" => true}))
     JobStepRestartMarker.add_member(:to_proc_step, Shapes::ShapeRef.new(shape: String, location_name: "toProcStep"))
     JobStepRestartMarker.add_member(:to_step, Shapes::ShapeRef.new(shape: String, location_name: "toStep"))
     JobStepRestartMarker.struct_class = Types::JobStepRestartMarker
@@ -1013,8 +1013,8 @@ module Aws::MainframeModernization
     VsamAttributes.struct_class = Types::VsamAttributes
 
     VsamDetailAttributes.add_member(:alternate_keys, Shapes::ShapeRef.new(shape: AlternateKeyList, location_name: "alternateKeys"))
-    VsamDetailAttributes.add_member(:cache_at_startup, Shapes::ShapeRef.new(shape: Boolean, location_name: "cacheAtStartup", metadata: {"box"=>true}))
-    VsamDetailAttributes.add_member(:compressed, Shapes::ShapeRef.new(shape: Boolean, location_name: "compressed", metadata: {"box"=>true}))
+    VsamDetailAttributes.add_member(:cache_at_startup, Shapes::ShapeRef.new(shape: Boolean, location_name: "cacheAtStartup", metadata: {"box" => true}))
+    VsamDetailAttributes.add_member(:compressed, Shapes::ShapeRef.new(shape: Boolean, location_name: "compressed", metadata: {"box" => true}))
     VsamDetailAttributes.add_member(:encoding, Shapes::ShapeRef.new(shape: String20, location_name: "encoding"))
     VsamDetailAttributes.add_member(:primary_key, Shapes::ShapeRef.new(shape: PrimaryKey, location_name: "primaryKey"))
     VsamDetailAttributes.add_member(:record_format, Shapes::ShapeRef.new(shape: String20, location_name: "recordFormat"))

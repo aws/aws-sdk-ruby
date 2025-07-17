@@ -98,6 +98,7 @@ module Aws::ConnectCampaignsV2
 
     class CommunicationLimitsConfig
       attr_accessor all_channel_subtypes: Types::CommunicationLimits
+      attr_accessor instance_limits_handling: ("OPT_IN" | "OPT_OUT")
       SENSITIVE: []
     end
 
@@ -298,6 +299,16 @@ module Aws::ConnectCampaignsV2
       SENSITIVE: []
     end
 
+    class GetInstanceCommunicationLimitsRequest
+      attr_accessor connect_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetInstanceCommunicationLimitsResponse
+      attr_accessor communication_limits_config: Types::InstanceCommunicationLimitsConfig
+      SENSITIVE: []
+    end
+
     class GetInstanceOnboardingJobStatusRequest
       attr_accessor connect_instance_id: ::String
       SENSITIVE: []
@@ -305,6 +316,11 @@ module Aws::ConnectCampaignsV2
 
     class GetInstanceOnboardingJobStatusResponse
       attr_accessor connect_instance_onboarding_job_status: Types::InstanceOnboardingJobStatus
+      SENSITIVE: []
+    end
+
+    class InstanceCommunicationLimitsConfig
+      attr_accessor all_channel_subtypes: Types::CommunicationLimits
       SENSITIVE: []
     end
 
@@ -474,6 +490,12 @@ module Aws::ConnectCampaignsV2
     class PutConnectInstanceIntegrationRequest
       attr_accessor connect_instance_id: ::String
       attr_accessor integration_config: Types::IntegrationConfig
+      SENSITIVE: []
+    end
+
+    class PutInstanceCommunicationLimitsRequest
+      attr_accessor connect_instance_id: ::String
+      attr_accessor communication_limits_config: Types::InstanceCommunicationLimitsConfig
       SENSITIVE: []
     end
 

@@ -200,8 +200,7 @@ module Aws::MedicalImaging
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -482,9 +481,16 @@ module Aws::MedicalImaging
     #   Copy image set information.
     #
     # @option params [Boolean] :force
-    #   Setting this flag will force the `CopyImageSet` operation, even if
-    #   Patient, Study, or Series level metadata are mismatched across the
-    #   `sourceImageSet` and `destinationImageSet`.
+    #   Providing this parameter will force completion of the `CopyImageSet`
+    #   operation, even if there are inconsistent Patient, Study, and/or
+    #   Series level metadata elements between the `sourceImageSet` and
+    #   `destinationImageSet`.
+    #
+    # @option params [Boolean] :promote_to_primary
+    #   Providing this parameter will configure the `CopyImageSet` operation
+    #   to promote the given image set to the primary DICOM hierarchy. If
+    #   successful, a new primary image set ID will be returned as the
+    #   destination image set.
     #
     # @return [Types::CopyImageSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -510,6 +516,7 @@ module Aws::MedicalImaging
     #       },
     #     },
     #     force: false,
+    #     promote_to_primary: false,
     #   })
     #
     # @example Response structure
@@ -809,6 +816,7 @@ module Aws::MedicalImaging
     #   * {Types::GetImageSetResponse#message #message} => String
     #   * {Types::GetImageSetResponse#image_set_arn #image_set_arn} => String
     #   * {Types::GetImageSetResponse#overrides #overrides} => Types::Overrides
+    #   * {Types::GetImageSetResponse#is_primary #is_primary} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -831,6 +839,7 @@ module Aws::MedicalImaging
     #   resp.message #=> String
     #   resp.image_set_arn #=> String
     #   resp.overrides.forced #=> Boolean
+    #   resp.is_primary #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/GetImageSet AWS API Documentation
     #
@@ -1024,6 +1033,7 @@ module Aws::MedicalImaging
     #   resp.image_set_properties_list[0].deleted_at #=> Time
     #   resp.image_set_properties_list[0].message #=> String
     #   resp.image_set_properties_list[0].overrides.forced #=> Boolean
+    #   resp.image_set_properties_list[0].is_primary #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/ListImageSetVersions AWS API Documentation
@@ -1120,6 +1130,7 @@ module Aws::MedicalImaging
     #                 dicom_study_date: "DICOMStudyDate", # required
     #                 dicom_study_time: "DICOMStudyTime",
     #               },
+    #               is_primary: false,
     #             },
     #           ],
     #           operator: "EQUAL", # required, accepts EQUAL, BETWEEN
@@ -1157,6 +1168,7 @@ module Aws::MedicalImaging
     #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_series_number #=> Integer
     #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_study_date #=> String
     #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_study_time #=> String
+    #   resp.image_sets_metadata_summaries[0].is_primary #=> Boolean
     #   resp.data.sort.sort_order #=> String, one of "ASC", "DESC"
     #   resp.data.sort.sort_field #=> String, one of "updatedAt", "createdAt", "DICOMStudyDateAndTime"
     #   resp.next_token #=> String
@@ -1383,7 +1395,7 @@ module Aws::MedicalImaging
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medicalimaging'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

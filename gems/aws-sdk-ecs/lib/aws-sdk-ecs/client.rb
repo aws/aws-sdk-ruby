@@ -200,8 +200,7 @@ module Aws::ECS
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -909,7 +908,7 @@ module Aws::ECS
     # You can attach Amazon EBS volumes to Amazon ECS tasks by configuring
     # the volume when creating or updating a service. `volumeConfigurations`
     # is only supported for REPLICA service and not DAEMON service. For more
-    # infomation, see [Amazon EBS volumes][3] in the *Amazon Elastic
+    # information, see [Amazon EBS volumes][3] in the *Amazon Elastic
     # Container Service Developer Guide*.
     #
     # Tasks for services that don't use a load balancer are considered
@@ -934,69 +933,111 @@ module Aws::ECS
     #   tasks. It also stops tasks that don't meet the placement
     #   constraints. When using this strategy, you don't need to specify a
     #   desired number of tasks, a task placement strategy, or use Service
-    #   Auto Scaling policies. For more information, see [Service scheduler
-    #   concepts][4] in the *Amazon Elastic Container Service Developer
+    #   Auto Scaling policies. For more information, see [Amazon ECS
+    #   services][4] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
-    # You can optionally specify a deployment configuration for your
-    # service. The deployment is initiated by changing properties. For
-    # example, the deployment might be initiated by the task definition or
-    # by your desired count of a service. You can use [UpdateService][1].
-    # The default value for a replica service for `minimumHealthyPercent` is
-    # 100%. The default value for a daemon service for
-    # `minimumHealthyPercent` is 0%.
+    # The deployment controller is the mechanism that determines how tasks
+    # are deployed for your service. The valid options are:
     #
-    # If a service uses the `ECS` deployment controller, the minimum healthy
-    # percent represents a lower limit on the number of tasks in a service
-    # that must remain in the `RUNNING` state during a deployment.
-    # Specifically, it represents it as a percentage of your desired number
-    # of tasks (rounded up to the nearest integer). This happens when any of
-    # your container instances are in the `DRAINING` state if the service
-    # contains tasks using the EC2 launch type. Using this parameter, you
-    # can deploy without using additional cluster capacity. For example, if
-    # you set your service to have desired number of four tasks and a
-    # minimum healthy percent of 50%, the scheduler might stop two existing
-    # tasks to free up cluster capacity before starting two new tasks. If
-    # they're in the `RUNNING` state, tasks for services that don't use a
-    # load balancer are considered healthy . If they're in the `RUNNING`
-    # state and reported as healthy by the load balancer, tasks for services
-    # that *do* use a load balancer are considered healthy . The default
-    # value for minimum healthy percent is 100%.
+    # * ECS
     #
-    # If a service uses the `ECS` deployment controller, the **maximum
-    # percent** parameter represents an upper limit on the number of tasks
-    # in a service that are allowed in the `RUNNING` or `PENDING` state
-    # during a deployment. Specifically, it represents it as a percentage of
-    # the desired number of tasks (rounded down to the nearest integer).
-    # This happens when any of your container instances are in the
-    # `DRAINING` state if the service contains tasks using the EC2 launch
-    # type. Using this parameter, you can define the deployment batch size.
-    # For example, if your service has a desired number of four tasks and a
-    # maximum percent value of 200%, the scheduler may start four new tasks
-    # before stopping the four older tasks (provided that the cluster
-    # resources required to do this are available). The default value for
-    # maximum percent is 200%.
+    #   When you create a service which uses the `ECS` deployment
+    #   controller, you can choose between the following deployment
+    #   strategies (which you can set in the “`strategy`” field in
+    #   “`deploymentConfiguration`”): :
     #
-    # If a service uses either the `CODE_DEPLOY` or `EXTERNAL` deployment
-    # controller types and tasks that use the EC2 launch type, the **minimum
-    # healthy percent** and **maximum percent** values are used only to
-    # define the lower and upper limit on the number of the tasks in the
-    # service that remain in the `RUNNING` state. This is while the
-    # container instances are in the `DRAINING` state. If the tasks in the
-    # service use the Fargate launch type, the minimum healthy percent and
-    # maximum percent values aren't used. This is the case even if they're
-    # currently visible when describing your service.
+    #   * `ROLLING`: When you create a service which uses the *rolling
+    #     update* (`ROLLING`) deployment strategy, the Amazon ECS service
+    #     scheduler replaces the currently running tasks with new tasks. The
+    #     number of tasks that Amazon ECS adds or removes from the service
+    #     during a rolling update is controlled by the service deployment
+    #     configuration. For more information, see [Deploy Amazon ECS
+    #     services by replacing tasks][5] in the *Amazon Elastic Container
+    #     Service Developer Guide*.
+    #
+    #     Rolling update deployments are best suited for the following
+    #     scenarios:
+    #
+    #     * Gradual service updates: You need to update your service
+    #       incrementally without taking the entire service offline at once.
+    #
+    #     * Limited resource requirements: You want to avoid the additional
+    #       resource costs of running two complete environments
+    #       simultaneously (as required by blue/green deployments).
+    #
+    #     * Acceptable deployment time: Your application can tolerate a
+    #       longer deployment process, as rolling updates replace tasks one
+    #       by one.
+    #
+    #     * No need for instant roll back: Your service can tolerate a
+    #       rollback process that takes minutes rather than seconds.
+    #
+    #     * Simple deployment process: You prefer a straightforward
+    #       deployment approach without the complexity of managing multiple
+    #       environments, target groups, and listeners.
+    #
+    #     * No load balancer requirement: Your service doesn't use or
+    #       require a load balancer, Application Load Balancer, Network Load
+    #       Balancer, or Service Connect (which are required for blue/green
+    #       deployments).
+    #
+    #     * Stateful applications: Your application maintains state that
+    #       makes it difficult to run two parallel environments.
+    #
+    #     * Cost sensitivity: You want to minimize deployment costs by not
+    #       running duplicate environments during deployment.
+    #     Rolling updates are the default deployment strategy for services
+    #     and provide a balance between deployment safety and resource
+    #     efficiency for many common application scenarios.
+    #
+    #   * `BLUE_GREEN`: A *blue/green* deployment strategy (`BLUE_GREEN`) is
+    #     a release methodology that reduces downtime and risk by running
+    #     two identical production environments called blue and green. With
+    #     Amazon ECS blue/green deployments, you can validate new service
+    #     revisions before directing production traffic to them. This
+    #     approach provides a safer way to deploy changes with the ability
+    #     to quickly roll back if needed. For more information, see [Amazon
+    #     ECS blue/green deployments][6] in the *Amazon Elastic Container
+    #     Service Developer Guide*.
+    #
+    #     Amazon ECS blue/green deployments are best suited for the
+    #     following scenarios:
+    #
+    #     * Service validation: When you need to validate new service
+    #       revisions before directing production traffic to them
+    #
+    #     * Zero downtime: When your service requires zero-downtime
+    #       deployments
+    #
+    #     * Instant roll back: When you need the ability to quickly roll
+    #       back if issues are detected
+    #
+    #     * Load balancer requirement: When your service uses Application
+    #       Load Balancer, Network Load Balancer, or Service Connect
+    # * External
+    #
+    #   Use a third-party deployment controller.
+    #
+    # * Blue/green deployment (powered by CodeDeploy)
+    #
+    #   CodeDeploy installs an updated version of the application as a new
+    #   replacement task set and reroutes production traffic from the
+    #   original application task set to the replacement task set. The
+    #   original task set is terminated after a successful deployment. Use
+    #   this deployment controller to verify a new deployment of a service
+    #   before sending production traffic to it.
     #
     # When creating a service that uses the `EXTERNAL` deployment
     # controller, you can specify only parameters that aren't controlled at
     # the task set level. The only required parameter is the service name.
-    # You control your services using the [CreateTaskSet][5]. For more
-    # information, see [Amazon ECS deployment types][6] in the *Amazon
+    # You control your services using the [CreateTaskSet][7]. For more
+    # information, see [Amazon ECS deployment types][8] in the *Amazon
     # Elastic Container Service Developer Guide*.
     #
     # When the service scheduler launches new tasks, it determines task
     # placement. For information about task placement and task placement
-    # strategies, see [Amazon ECS task placement][7] in the *Amazon Elastic
+    # strategies, see [Amazon ECS task placement][9] in the *Amazon Elastic
     # Container Service Developer Guide*
     #
     #
@@ -1005,9 +1046,11 @@ module Aws::ECS
     # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
     # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types
     # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
-    # [5]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateTaskSet.html
-    # [6]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
-    # [7]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html
+    # [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html
+    # [6]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-blue-green.html
+    # [7]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateTaskSet.html
+    # [8]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    # [9]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -1325,8 +1368,8 @@ module Aws::ECS
     #   resources][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
-    #   When you use Amazon ECS managed tags, you need to set the
-    #   `propagateTags` request parameter.
+    #   When you use Amazon ECS managed tags, you must set the `propagateTags`
+    #   request parameter.
     #
     #
     #
@@ -1514,6 +1557,12 @@ module Aws::ECS
     #         load_balancer_name: "String",
     #         container_name: "String",
     #         container_port: 1,
+    #         advanced_configuration: {
+    #           alternate_target_group_arn: "String",
+    #           production_listener_rule: "String",
+    #           test_listener_rule: "String",
+    #           role_arn: "String",
+    #         },
     #       },
     #     ],
     #     service_registries: [
@@ -1548,6 +1597,15 @@ module Aws::ECS
     #         rollback: false, # required
     #         enable: false, # required
     #       },
+    #       strategy: "ROLLING", # accepts ROLLING, BLUE_GREEN
+    #       bake_time_in_minutes: 1,
+    #       lifecycle_hooks: [
+    #         {
+    #           hook_target_arn: "String",
+    #           role_arn: "IAMRoleArn",
+    #           lifecycle_stages: ["RECONCILE_SERVICE"], # accepts RECONCILE_SERVICE, PRE_SCALE_UP, POST_SCALE_UP, TEST_TRAFFIC_SHIFT, POST_TEST_TRAFFIC_SHIFT, PRODUCTION_TRAFFIC_SHIFT, POST_PRODUCTION_TRAFFIC_SHIFT
+    #         },
+    #       ],
     #     },
     #     placement_constraints: [
     #       {
@@ -1593,6 +1651,14 @@ module Aws::ECS
     #             {
     #               port: 1, # required
     #               dns_name: "String",
+    #               test_traffic_rules: {
+    #                 header: { # required
+    #                   name: "String", # required
+    #                   value: {
+    #                     exact: "String", # required
+    #                   },
+    #                 },
+    #               },
     #             },
     #           ],
     #           ingress_port_override: 1,
@@ -1631,6 +1697,7 @@ module Aws::ECS
     #           volume_type: "EBSVolumeType",
     #           size_in_gi_b: 1,
     #           snapshot_id: "EBSSnapshotId",
+    #           volume_initialization_rate: 1,
     #           iops: 1,
     #           throughput: 1,
     #           tag_specifications: [
@@ -1669,6 +1736,10 @@ module Aws::ECS
     #   resp.service.load_balancers[0].load_balancer_name #=> String
     #   resp.service.load_balancers[0].container_name #=> String
     #   resp.service.load_balancers[0].container_port #=> Integer
+    #   resp.service.load_balancers[0].advanced_configuration.alternate_target_group_arn #=> String
+    #   resp.service.load_balancers[0].advanced_configuration.production_listener_rule #=> String
+    #   resp.service.load_balancers[0].advanced_configuration.test_listener_rule #=> String
+    #   resp.service.load_balancers[0].advanced_configuration.role_arn #=> String
     #   resp.service.service_registries #=> Array
     #   resp.service.service_registries[0].registry_arn #=> String
     #   resp.service.service_registries[0].port #=> Integer
@@ -1694,6 +1765,13 @@ module Aws::ECS
     #   resp.service.deployment_configuration.alarms.alarm_names[0] #=> String
     #   resp.service.deployment_configuration.alarms.rollback #=> Boolean
     #   resp.service.deployment_configuration.alarms.enable #=> Boolean
+    #   resp.service.deployment_configuration.strategy #=> String, one of "ROLLING", "BLUE_GREEN"
+    #   resp.service.deployment_configuration.bake_time_in_minutes #=> Integer
+    #   resp.service.deployment_configuration.lifecycle_hooks #=> Array
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].hook_target_arn #=> String
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].role_arn #=> String
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages #=> Array
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages[0] #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
@@ -1725,6 +1803,10 @@ module Aws::ECS
     #   resp.service.task_sets[0].load_balancers[0].load_balancer_name #=> String
     #   resp.service.task_sets[0].load_balancers[0].container_name #=> String
     #   resp.service.task_sets[0].load_balancers[0].container_port #=> Integer
+    #   resp.service.task_sets[0].load_balancers[0].advanced_configuration.alternate_target_group_arn #=> String
+    #   resp.service.task_sets[0].load_balancers[0].advanced_configuration.production_listener_rule #=> String
+    #   resp.service.task_sets[0].load_balancers[0].advanced_configuration.test_listener_rule #=> String
+    #   resp.service.task_sets[0].load_balancers[0].advanced_configuration.role_arn #=> String
     #   resp.service.task_sets[0].service_registries #=> Array
     #   resp.service.task_sets[0].service_registries[0].registry_arn #=> String
     #   resp.service.task_sets[0].service_registries[0].port #=> Integer
@@ -1770,6 +1852,8 @@ module Aws::ECS
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases #=> Array
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].port #=> Integer
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].dns_name #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].test_traffic_rules.header.name #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].test_traffic_rules.header.value.exact #=> String
     #   resp.service.deployments[0].service_connect_configuration.services[0].ingress_port_override #=> Integer
     #   resp.service.deployments[0].service_connect_configuration.services[0].timeout.idle_timeout_seconds #=> Integer
     #   resp.service.deployments[0].service_connect_configuration.services[0].timeout.per_request_timeout_seconds #=> Integer
@@ -1792,6 +1876,7 @@ module Aws::ECS
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.volume_type #=> String
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.size_in_gi_b #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.snapshot_id #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.volume_initialization_rate #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.iops #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.throughput #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications #=> Array
@@ -2072,6 +2157,12 @@ module Aws::ECS
     #         load_balancer_name: "String",
     #         container_name: "String",
     #         container_port: 1,
+    #         advanced_configuration: {
+    #           alternate_target_group_arn: "String",
+    #           production_listener_rule: "String",
+    #           test_listener_rule: "String",
+    #           role_arn: "String",
+    #         },
     #       },
     #     ],
     #     service_registries: [
@@ -2136,6 +2227,10 @@ module Aws::ECS
     #   resp.task_set.load_balancers[0].load_balancer_name #=> String
     #   resp.task_set.load_balancers[0].container_name #=> String
     #   resp.task_set.load_balancers[0].container_port #=> Integer
+    #   resp.task_set.load_balancers[0].advanced_configuration.alternate_target_group_arn #=> String
+    #   resp.task_set.load_balancers[0].advanced_configuration.production_listener_rule #=> String
+    #   resp.task_set.load_balancers[0].advanced_configuration.test_listener_rule #=> String
+    #   resp.task_set.load_balancers[0].advanced_configuration.role_arn #=> String
     #   resp.task_set.service_registries #=> Array
     #   resp.task_set.service_registries[0].registry_arn #=> String
     #   resp.task_set.service_registries[0].port #=> Integer
@@ -2173,12 +2268,15 @@ module Aws::ECS
     #   container instances is affected.
     #
     # @option params [String] :principal_arn
-    #   The Amazon Resource Name (ARN) of the principal. It can be an user,
+    #   The Amazon Resource Name (ARN) of the principal. It can be a user,
     #   role, or the root user. If you specify the root user, it disables the
     #   account setting for all users, roles, and the root user of the account
     #   unless a user or role explicitly overrides these settings. If this
     #   field is omitted, the setting is changed only for the authenticated
     #   user.
+    #
+    #   In order to use this parameter, you must be the root user, or the
+    #   principal.
     #
     # @return [Types::DeleteAccountSettingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2599,6 +2697,10 @@ module Aws::ECS
     #   resp.service.load_balancers[0].load_balancer_name #=> String
     #   resp.service.load_balancers[0].container_name #=> String
     #   resp.service.load_balancers[0].container_port #=> Integer
+    #   resp.service.load_balancers[0].advanced_configuration.alternate_target_group_arn #=> String
+    #   resp.service.load_balancers[0].advanced_configuration.production_listener_rule #=> String
+    #   resp.service.load_balancers[0].advanced_configuration.test_listener_rule #=> String
+    #   resp.service.load_balancers[0].advanced_configuration.role_arn #=> String
     #   resp.service.service_registries #=> Array
     #   resp.service.service_registries[0].registry_arn #=> String
     #   resp.service.service_registries[0].port #=> Integer
@@ -2624,6 +2726,13 @@ module Aws::ECS
     #   resp.service.deployment_configuration.alarms.alarm_names[0] #=> String
     #   resp.service.deployment_configuration.alarms.rollback #=> Boolean
     #   resp.service.deployment_configuration.alarms.enable #=> Boolean
+    #   resp.service.deployment_configuration.strategy #=> String, one of "ROLLING", "BLUE_GREEN"
+    #   resp.service.deployment_configuration.bake_time_in_minutes #=> Integer
+    #   resp.service.deployment_configuration.lifecycle_hooks #=> Array
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].hook_target_arn #=> String
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].role_arn #=> String
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages #=> Array
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages[0] #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
@@ -2655,6 +2764,10 @@ module Aws::ECS
     #   resp.service.task_sets[0].load_balancers[0].load_balancer_name #=> String
     #   resp.service.task_sets[0].load_balancers[0].container_name #=> String
     #   resp.service.task_sets[0].load_balancers[0].container_port #=> Integer
+    #   resp.service.task_sets[0].load_balancers[0].advanced_configuration.alternate_target_group_arn #=> String
+    #   resp.service.task_sets[0].load_balancers[0].advanced_configuration.production_listener_rule #=> String
+    #   resp.service.task_sets[0].load_balancers[0].advanced_configuration.test_listener_rule #=> String
+    #   resp.service.task_sets[0].load_balancers[0].advanced_configuration.role_arn #=> String
     #   resp.service.task_sets[0].service_registries #=> Array
     #   resp.service.task_sets[0].service_registries[0].registry_arn #=> String
     #   resp.service.task_sets[0].service_registries[0].port #=> Integer
@@ -2700,6 +2813,8 @@ module Aws::ECS
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases #=> Array
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].port #=> Integer
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].dns_name #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].test_traffic_rules.header.name #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].test_traffic_rules.header.value.exact #=> String
     #   resp.service.deployments[0].service_connect_configuration.services[0].ingress_port_override #=> Integer
     #   resp.service.deployments[0].service_connect_configuration.services[0].timeout.idle_timeout_seconds #=> Integer
     #   resp.service.deployments[0].service_connect_configuration.services[0].timeout.per_request_timeout_seconds #=> Integer
@@ -2722,6 +2837,7 @@ module Aws::ECS
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.volume_type #=> String
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.size_in_gi_b #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.snapshot_id #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.volume_initialization_rate #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.iops #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.throughput #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications #=> Array
@@ -2850,7 +2966,7 @@ module Aws::ECS
     #             environment: [
     #             ], 
     #             essential: true, 
-    #             image: "ubuntu", 
+    #             image: "public.ecr.aws/docker/library/ubuntu:latest", 
     #             memory: 100, 
     #             mount_points: [
     #             ], 
@@ -3029,7 +3145,7 @@ module Aws::ECS
     #   resp.task_definitions[0].compatibilities #=> Array
     #   resp.task_definitions[0].compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_definitions[0].runtime_platform.cpu_architecture #=> String, one of "X86_64", "ARM64"
-    #   resp.task_definitions[0].runtime_platform.operating_system_family #=> String, one of "WINDOWS_SERVER_2019_FULL", "WINDOWS_SERVER_2019_CORE", "WINDOWS_SERVER_2016_FULL", "WINDOWS_SERVER_2004_CORE", "WINDOWS_SERVER_2022_CORE", "WINDOWS_SERVER_2022_FULL", "WINDOWS_SERVER_20H2_CORE", "LINUX"
+    #   resp.task_definitions[0].runtime_platform.operating_system_family #=> String, one of "WINDOWS_SERVER_2019_FULL", "WINDOWS_SERVER_2019_CORE", "WINDOWS_SERVER_2016_FULL", "WINDOWS_SERVER_2004_CORE", "WINDOWS_SERVER_2022_CORE", "WINDOWS_SERVER_2022_FULL", "WINDOWS_SERVER_2025_CORE", "WINDOWS_SERVER_2025_FULL", "WINDOWS_SERVER_20H2_CORE", "LINUX"
     #   resp.task_definitions[0].requires_compatibilities #=> Array
     #   resp.task_definitions[0].requires_compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_definitions[0].cpu #=> String
@@ -3182,6 +3298,10 @@ module Aws::ECS
     #   resp.task_set.load_balancers[0].load_balancer_name #=> String
     #   resp.task_set.load_balancers[0].container_name #=> String
     #   resp.task_set.load_balancers[0].container_port #=> Integer
+    #   resp.task_set.load_balancers[0].advanced_configuration.alternate_target_group_arn #=> String
+    #   resp.task_set.load_balancers[0].advanced_configuration.production_listener_rule #=> String
+    #   resp.task_set.load_balancers[0].advanced_configuration.test_listener_rule #=> String
+    #   resp.task_set.load_balancers[0].advanced_configuration.role_arn #=> String
     #   resp.task_set.service_registries #=> Array
     #   resp.task_set.service_registries[0].registry_arn #=> String
     #   resp.task_set.service_registries[0].port #=> Integer
@@ -3386,10 +3506,10 @@ module Aws::ECS
     #
     # @example Example: To deregister a revision of a task definition
     #
-    #   # This example deregisters the first revision of the curler task definition
+    #   # This example deregisters the first revision of the fargate-task task definition
     #
     #   resp = client.deregister_task_definition({
-    #     task_definition: "curler:1", 
+    #     task_definition: "fargate-task:1", 
     #   })
     #
     #   resp.to_h outputs the following:
@@ -3397,30 +3517,23 @@ module Aws::ECS
     #     task_definition: {
     #       container_definitions: [
     #         {
-    #           name: "curler", 
-    #           command: [
-    #             "curl -v http://example.com/", 
-    #           ], 
-    #           cpu: 100, 
-    #           entry_point: [
-    #           ], 
-    #           environment: [
-    #           ], 
+    #           name: "nginx", 
+    #           cpu: 256, 
     #           essential: true, 
-    #           image: "curl:latest", 
-    #           memory: 256, 
-    #           mount_points: [
-    #           ], 
+    #           image: "public.ecr.aws/docker/library/nginx:latest", 
+    #           memory: 128, 
     #           port_mappings: [
-    #           ], 
-    #           volumes_from: [
+    #             {
+    #               container_port: 80, 
+    #               host_port: 80, 
+    #               protocol: "tcp", 
+    #             }, 
     #           ], 
     #         }, 
     #       ], 
-    #       family: "curler", 
-    #       revision: 1, 
+    #       family: "fargate-task", 
     #       status: "INACTIVE", 
-    #       task_definition_arn: "arn:aws:ecs:us-west-2:123456789012:task-definition/curler:1", 
+    #       task_definition_arn: "arn:aws:ecs:us-west-2:123456789012:task-definition/fargate-task:1", 
     #       volumes: [
     #       ], 
     #     }, 
@@ -3584,7 +3697,7 @@ module Aws::ECS
     #   resp.task_definition.compatibilities #=> Array
     #   resp.task_definition.compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_definition.runtime_platform.cpu_architecture #=> String, one of "X86_64", "ARM64"
-    #   resp.task_definition.runtime_platform.operating_system_family #=> String, one of "WINDOWS_SERVER_2019_FULL", "WINDOWS_SERVER_2019_CORE", "WINDOWS_SERVER_2016_FULL", "WINDOWS_SERVER_2004_CORE", "WINDOWS_SERVER_2022_CORE", "WINDOWS_SERVER_2022_FULL", "WINDOWS_SERVER_20H2_CORE", "LINUX"
+    #   resp.task_definition.runtime_platform.operating_system_family #=> String, one of "WINDOWS_SERVER_2019_FULL", "WINDOWS_SERVER_2019_CORE", "WINDOWS_SERVER_2016_FULL", "WINDOWS_SERVER_2004_CORE", "WINDOWS_SERVER_2022_CORE", "WINDOWS_SERVER_2022_FULL", "WINDOWS_SERVER_2025_CORE", "WINDOWS_SERVER_2025_FULL", "WINDOWS_SERVER_20H2_CORE", "LINUX"
     #   resp.task_definition.requires_compatibilities #=> Array
     #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_definition.cpu #=> String
@@ -4190,6 +4303,7 @@ module Aws::ECS
     #   resp.service_deployments[0].target_service_revision.pending_task_count #=> Integer
     #   resp.service_deployments[0].status #=> String, one of "PENDING", "SUCCESSFUL", "STOPPED", "STOP_REQUESTED", "IN_PROGRESS", "ROLLBACK_REQUESTED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_SUCCESSFUL", "ROLLBACK_FAILED"
     #   resp.service_deployments[0].status_reason #=> String
+    #   resp.service_deployments[0].lifecycle_stage #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT", "BAKE_TIME", "CLEAN_UP"
     #   resp.service_deployments[0].deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
     #   resp.service_deployments[0].deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
     #   resp.service_deployments[0].deployment_configuration.maximum_percent #=> Integer
@@ -4198,6 +4312,13 @@ module Aws::ECS
     #   resp.service_deployments[0].deployment_configuration.alarms.alarm_names[0] #=> String
     #   resp.service_deployments[0].deployment_configuration.alarms.rollback #=> Boolean
     #   resp.service_deployments[0].deployment_configuration.alarms.enable #=> Boolean
+    #   resp.service_deployments[0].deployment_configuration.strategy #=> String, one of "ROLLING", "BLUE_GREEN"
+    #   resp.service_deployments[0].deployment_configuration.bake_time_in_minutes #=> Integer
+    #   resp.service_deployments[0].deployment_configuration.lifecycle_hooks #=> Array
+    #   resp.service_deployments[0].deployment_configuration.lifecycle_hooks[0].hook_target_arn #=> String
+    #   resp.service_deployments[0].deployment_configuration.lifecycle_hooks[0].role_arn #=> String
+    #   resp.service_deployments[0].deployment_configuration.lifecycle_hooks[0].lifecycle_stages #=> Array
+    #   resp.service_deployments[0].deployment_configuration.lifecycle_hooks[0].lifecycle_stages[0] #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"
     #   resp.service_deployments[0].rollback.reason #=> String
     #   resp.service_deployments[0].rollback.started_at #=> Time
     #   resp.service_deployments[0].rollback.service_revision_arn #=> String
@@ -4319,6 +4440,10 @@ module Aws::ECS
     #   resp.service_revisions[0].load_balancers[0].load_balancer_name #=> String
     #   resp.service_revisions[0].load_balancers[0].container_name #=> String
     #   resp.service_revisions[0].load_balancers[0].container_port #=> Integer
+    #   resp.service_revisions[0].load_balancers[0].advanced_configuration.alternate_target_group_arn #=> String
+    #   resp.service_revisions[0].load_balancers[0].advanced_configuration.production_listener_rule #=> String
+    #   resp.service_revisions[0].load_balancers[0].advanced_configuration.test_listener_rule #=> String
+    #   resp.service_revisions[0].load_balancers[0].advanced_configuration.role_arn #=> String
     #   resp.service_revisions[0].service_registries #=> Array
     #   resp.service_revisions[0].service_registries[0].registry_arn #=> String
     #   resp.service_revisions[0].service_registries[0].port #=> Integer
@@ -4342,6 +4467,8 @@ module Aws::ECS
     #   resp.service_revisions[0].service_connect_configuration.services[0].client_aliases #=> Array
     #   resp.service_revisions[0].service_connect_configuration.services[0].client_aliases[0].port #=> Integer
     #   resp.service_revisions[0].service_connect_configuration.services[0].client_aliases[0].dns_name #=> String
+    #   resp.service_revisions[0].service_connect_configuration.services[0].client_aliases[0].test_traffic_rules.header.name #=> String
+    #   resp.service_revisions[0].service_connect_configuration.services[0].client_aliases[0].test_traffic_rules.header.value.exact #=> String
     #   resp.service_revisions[0].service_connect_configuration.services[0].ingress_port_override #=> Integer
     #   resp.service_revisions[0].service_connect_configuration.services[0].timeout.idle_timeout_seconds #=> Integer
     #   resp.service_revisions[0].service_connect_configuration.services[0].timeout.per_request_timeout_seconds #=> Integer
@@ -4361,6 +4488,7 @@ module Aws::ECS
     #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.volume_type #=> String
     #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.size_in_gi_b #=> Integer
     #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.snapshot_id #=> String
+    #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.volume_initialization_rate #=> Integer
     #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.iops #=> Integer
     #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.throughput #=> Integer
     #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.tag_specifications #=> Array
@@ -4377,6 +4505,9 @@ module Aws::ECS
     #   resp.service_revisions[0].vpc_lattice_configurations[0].role_arn #=> String
     #   resp.service_revisions[0].vpc_lattice_configurations[0].target_group_arn #=> String
     #   resp.service_revisions[0].vpc_lattice_configurations[0].port_name #=> String
+    #   resp.service_revisions[0].resolved_configuration.load_balancers #=> Array
+    #   resp.service_revisions[0].resolved_configuration.load_balancers[0].target_group_arn #=> String
+    #   resp.service_revisions[0].resolved_configuration.load_balancers[0].production_listener_rule #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -4488,6 +4619,10 @@ module Aws::ECS
     #   resp.services[0].load_balancers[0].load_balancer_name #=> String
     #   resp.services[0].load_balancers[0].container_name #=> String
     #   resp.services[0].load_balancers[0].container_port #=> Integer
+    #   resp.services[0].load_balancers[0].advanced_configuration.alternate_target_group_arn #=> String
+    #   resp.services[0].load_balancers[0].advanced_configuration.production_listener_rule #=> String
+    #   resp.services[0].load_balancers[0].advanced_configuration.test_listener_rule #=> String
+    #   resp.services[0].load_balancers[0].advanced_configuration.role_arn #=> String
     #   resp.services[0].service_registries #=> Array
     #   resp.services[0].service_registries[0].registry_arn #=> String
     #   resp.services[0].service_registries[0].port #=> Integer
@@ -4513,6 +4648,13 @@ module Aws::ECS
     #   resp.services[0].deployment_configuration.alarms.alarm_names[0] #=> String
     #   resp.services[0].deployment_configuration.alarms.rollback #=> Boolean
     #   resp.services[0].deployment_configuration.alarms.enable #=> Boolean
+    #   resp.services[0].deployment_configuration.strategy #=> String, one of "ROLLING", "BLUE_GREEN"
+    #   resp.services[0].deployment_configuration.bake_time_in_minutes #=> Integer
+    #   resp.services[0].deployment_configuration.lifecycle_hooks #=> Array
+    #   resp.services[0].deployment_configuration.lifecycle_hooks[0].hook_target_arn #=> String
+    #   resp.services[0].deployment_configuration.lifecycle_hooks[0].role_arn #=> String
+    #   resp.services[0].deployment_configuration.lifecycle_hooks[0].lifecycle_stages #=> Array
+    #   resp.services[0].deployment_configuration.lifecycle_hooks[0].lifecycle_stages[0] #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"
     #   resp.services[0].task_sets #=> Array
     #   resp.services[0].task_sets[0].id #=> String
     #   resp.services[0].task_sets[0].task_set_arn #=> String
@@ -4544,6 +4686,10 @@ module Aws::ECS
     #   resp.services[0].task_sets[0].load_balancers[0].load_balancer_name #=> String
     #   resp.services[0].task_sets[0].load_balancers[0].container_name #=> String
     #   resp.services[0].task_sets[0].load_balancers[0].container_port #=> Integer
+    #   resp.services[0].task_sets[0].load_balancers[0].advanced_configuration.alternate_target_group_arn #=> String
+    #   resp.services[0].task_sets[0].load_balancers[0].advanced_configuration.production_listener_rule #=> String
+    #   resp.services[0].task_sets[0].load_balancers[0].advanced_configuration.test_listener_rule #=> String
+    #   resp.services[0].task_sets[0].load_balancers[0].advanced_configuration.role_arn #=> String
     #   resp.services[0].task_sets[0].service_registries #=> Array
     #   resp.services[0].task_sets[0].service_registries[0].registry_arn #=> String
     #   resp.services[0].task_sets[0].service_registries[0].port #=> Integer
@@ -4589,6 +4735,8 @@ module Aws::ECS
     #   resp.services[0].deployments[0].service_connect_configuration.services[0].client_aliases #=> Array
     #   resp.services[0].deployments[0].service_connect_configuration.services[0].client_aliases[0].port #=> Integer
     #   resp.services[0].deployments[0].service_connect_configuration.services[0].client_aliases[0].dns_name #=> String
+    #   resp.services[0].deployments[0].service_connect_configuration.services[0].client_aliases[0].test_traffic_rules.header.name #=> String
+    #   resp.services[0].deployments[0].service_connect_configuration.services[0].client_aliases[0].test_traffic_rules.header.value.exact #=> String
     #   resp.services[0].deployments[0].service_connect_configuration.services[0].ingress_port_override #=> Integer
     #   resp.services[0].deployments[0].service_connect_configuration.services[0].timeout.idle_timeout_seconds #=> Integer
     #   resp.services[0].deployments[0].service_connect_configuration.services[0].timeout.per_request_timeout_seconds #=> Integer
@@ -4611,6 +4759,7 @@ module Aws::ECS
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.volume_type #=> String
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.size_in_gi_b #=> Integer
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.snapshot_id #=> String
+    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.volume_initialization_rate #=> Integer
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.iops #=> Integer
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.throughput #=> Integer
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications #=> Array
@@ -4921,7 +5070,7 @@ module Aws::ECS
     #   resp.task_definition.compatibilities #=> Array
     #   resp.task_definition.compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_definition.runtime_platform.cpu_architecture #=> String, one of "X86_64", "ARM64"
-    #   resp.task_definition.runtime_platform.operating_system_family #=> String, one of "WINDOWS_SERVER_2019_FULL", "WINDOWS_SERVER_2019_CORE", "WINDOWS_SERVER_2016_FULL", "WINDOWS_SERVER_2004_CORE", "WINDOWS_SERVER_2022_CORE", "WINDOWS_SERVER_2022_FULL", "WINDOWS_SERVER_20H2_CORE", "LINUX"
+    #   resp.task_definition.runtime_platform.operating_system_family #=> String, one of "WINDOWS_SERVER_2019_FULL", "WINDOWS_SERVER_2019_CORE", "WINDOWS_SERVER_2016_FULL", "WINDOWS_SERVER_2004_CORE", "WINDOWS_SERVER_2022_CORE", "WINDOWS_SERVER_2022_FULL", "WINDOWS_SERVER_2025_CORE", "WINDOWS_SERVER_2025_FULL", "WINDOWS_SERVER_20H2_CORE", "LINUX"
     #   resp.task_definition.requires_compatibilities #=> Array
     #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_definition.cpu #=> String
@@ -5080,6 +5229,10 @@ module Aws::ECS
     #   resp.task_sets[0].load_balancers[0].load_balancer_name #=> String
     #   resp.task_sets[0].load_balancers[0].container_name #=> String
     #   resp.task_sets[0].load_balancers[0].container_port #=> Integer
+    #   resp.task_sets[0].load_balancers[0].advanced_configuration.alternate_target_group_arn #=> String
+    #   resp.task_sets[0].load_balancers[0].advanced_configuration.production_listener_rule #=> String
+    #   resp.task_sets[0].load_balancers[0].advanced_configuration.test_listener_rule #=> String
+    #   resp.task_sets[0].load_balancers[0].advanced_configuration.role_arn #=> String
     #   resp.task_sets[0].service_registries #=> Array
     #   resp.task_sets[0].service_registries[0].registry_arn #=> String
     #   resp.task_sets[0].service_registries[0].port #=> Integer
@@ -5120,8 +5273,8 @@ module Aws::ECS
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
     #   hosts the task or tasks to describe. If you do not specify a cluster,
-    #   the default cluster is assumed. This parameter is required. If you do
-    #   not specify a value, the `default` cluster is used.
+    #   the default cluster is assumed. If you do not specify a value, the
+    #   `default` cluster is used.
     #
     # @option params [required, Array<String>] :tasks
     #   A list of up to 100 task IDs or full ARN entries.
@@ -5551,6 +5704,9 @@ module Aws::ECS
     #   The ARN of the principal, which can be a user, role, or the root user.
     #   If this field is omitted, the account settings are listed only for the
     #   authenticated user.
+    #
+    #   In order to use this parameter, you must be the root user, or the
+    #   principal.
     #
     #   <note markdown="1"> Federated users assume the account setting of the root user and can't
     #   have explicit account settings set for them.
@@ -6786,6 +6942,18 @@ module Aws::ECS
     #     using this account setting will be used as the default. For more
     #     information about log delivery modes, see [LogConfiguration][7].
     #
+    #     <note markdown="1"> On June 25, 2025, Amazon ECS changed the default log driver mode
+    #     from `blocking` to `non-blocking` to prioritize task availability
+    #     over logging. To continue using the `blocking` mode after this
+    #     change, do one of the following:
+    #
+    #      * Set the `mode` option in your container definition's
+    #       `logConfiguration` as `blocking`.
+    #
+    #     * Set the `defaultLogDriverMode` account setting to `blocking`.
+    #
+    #      </note>
+    #
     #   * `guardDutyActivate` - The `guardDutyActivate` parameter is read-only
     #     in Amazon ECS and indicates whether Amazon ECS Runtime Monitoring is
     #     enabled or disabled by your security administrator in your Amazon
@@ -6826,6 +6994,9 @@ module Aws::ECS
     #   users, roles, and the root user of the account unless a user or role
     #   explicitly overrides these settings. If this field is omitted, the
     #   setting is changed only for the authenticated user.
+    #
+    #   In order to use this parameter, you must be the root user, or the
+    #   principal.
     #
     #   <note markdown="1"> You must use the root user when you set the Fargate wait time
     #   (`fargateTaskRetirementWaitPeriod`).
@@ -7009,6 +7180,18 @@ module Aws::ECS
     #     container definition's `logConfiguration`, the mode you specify
     #     using this account setting will be used as the default. For more
     #     information about log delivery modes, see [LogConfiguration][7].
+    #
+    #     <note markdown="1"> On June 25, 2025, Amazon ECS changed the default log driver mode
+    #     from `blocking` to `non-blocking` to prioritize task availability
+    #     over logging. To continue using the `blocking` mode after this
+    #     change, do one of the following:
+    #
+    #      * Set the `mode` option in your container definition's
+    #       `logConfiguration` as `blocking`.
+    #
+    #     * Set the `defaultLogDriverMode` account setting to `blocking`.
+    #
+    #      </note>
     #
     #   * `guardDutyActivate` - The `guardDutyActivate` parameter is read-only
     #     in Amazon ECS and indicates whether Amazon ECS Runtime Monitoring is
@@ -8111,7 +8294,7 @@ module Aws::ECS
     #         ], 
     #         cpu: 10, 
     #         essential: true, 
-    #         image: "busybox", 
+    #         image: "public.ecr.aws/docker/library/busybox:latest", 
     #         memory: 10, 
     #       }, 
     #     ], 
@@ -8135,7 +8318,7 @@ module Aws::ECS
     #           environment: [
     #           ], 
     #           essential: true, 
-    #           image: "busybox", 
+    #           image: "public.ecr.aws/docker/library/busybox:latest", 
     #           memory: 10, 
     #           mount_points: [
     #           ], 
@@ -8396,7 +8579,7 @@ module Aws::ECS
     #     },
     #     runtime_platform: {
     #       cpu_architecture: "X86_64", # accepts X86_64, ARM64
-    #       operating_system_family: "WINDOWS_SERVER_2019_FULL", # accepts WINDOWS_SERVER_2019_FULL, WINDOWS_SERVER_2019_CORE, WINDOWS_SERVER_2016_FULL, WINDOWS_SERVER_2004_CORE, WINDOWS_SERVER_2022_CORE, WINDOWS_SERVER_2022_FULL, WINDOWS_SERVER_20H2_CORE, LINUX
+    #       operating_system_family: "WINDOWS_SERVER_2019_FULL", # accepts WINDOWS_SERVER_2019_FULL, WINDOWS_SERVER_2019_CORE, WINDOWS_SERVER_2016_FULL, WINDOWS_SERVER_2004_CORE, WINDOWS_SERVER_2022_CORE, WINDOWS_SERVER_2022_FULL, WINDOWS_SERVER_2025_CORE, WINDOWS_SERVER_2025_FULL, WINDOWS_SERVER_20H2_CORE, LINUX
     #     },
     #     enable_fault_injection: false,
     #   })
@@ -8553,7 +8736,7 @@ module Aws::ECS
     #   resp.task_definition.compatibilities #=> Array
     #   resp.task_definition.compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_definition.runtime_platform.cpu_architecture #=> String, one of "X86_64", "ARM64"
-    #   resp.task_definition.runtime_platform.operating_system_family #=> String, one of "WINDOWS_SERVER_2019_FULL", "WINDOWS_SERVER_2019_CORE", "WINDOWS_SERVER_2016_FULL", "WINDOWS_SERVER_2004_CORE", "WINDOWS_SERVER_2022_CORE", "WINDOWS_SERVER_2022_FULL", "WINDOWS_SERVER_20H2_CORE", "LINUX"
+    #   resp.task_definition.runtime_platform.operating_system_family #=> String, one of "WINDOWS_SERVER_2019_FULL", "WINDOWS_SERVER_2019_CORE", "WINDOWS_SERVER_2016_FULL", "WINDOWS_SERVER_2004_CORE", "WINDOWS_SERVER_2022_CORE", "WINDOWS_SERVER_2022_FULL", "WINDOWS_SERVER_2025_CORE", "WINDOWS_SERVER_2025_FULL", "WINDOWS_SERVER_20H2_CORE", "LINUX"
     #   resp.task_definition.requires_compatibilities #=> Array
     #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_definition.cpu #=> String
@@ -8608,7 +8791,7 @@ module Aws::ECS
     # place tasks manually on specific container instances.
     #
     # You can attach Amazon EBS volumes to Amazon ECS tasks by configuring
-    # the volume when creating or updating a service. For more infomation,
+    # the volume when creating or updating a service. For more information,
     # see [Amazon EBS volumes][2] in the *Amazon Elastic Container Service
     # Developer Guide*.
     #
@@ -8647,10 +8830,17 @@ module Aws::ECS
     # * Run `RunTask` with the `clientToken` and the original set of
     #   parameters
     #
+    # If you get a `ClientException`error, the `RunTask` could not be
+    # processed because you use managed scaling and there is a capacity
+    # error because the quota of tasks in the `PROVISIONING` per cluster has
+    # been reached. For information about the service quotas, see [Amazon
+    # ECS service quotas][3].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html
     # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-quotas.html
     #
     # @option params [Array<Types::CapacityProviderStrategyItem>] :capacity_provider_strategy
     #   The capacity provider strategy to use for the task.
@@ -9033,6 +9223,7 @@ module Aws::ECS
     #           volume_type: "EBSVolumeType",
     #           size_in_gi_b: 1,
     #           snapshot_id: "EBSSnapshotId",
+    #           volume_initialization_rate: 1,
     #           iops: 1,
     #           throughput: 1,
     #           tag_specifications: [
@@ -9199,7 +9390,7 @@ module Aws::ECS
     # Container Service Developer Guide*.
     #
     # You can attach Amazon EBS volumes to Amazon ECS tasks by configuring
-    # the volume when creating or updating a service. For more infomation,
+    # the volume when creating or updating a service. For more information,
     # see [Amazon EBS volumes][2] in the *Amazon Elastic Container Service
     # Developer Guide*.
     #
@@ -9465,6 +9656,7 @@ module Aws::ECS
     #           volume_type: "EBSVolumeType",
     #           size_in_gi_b: 1,
     #           snapshot_id: "EBSSnapshotId",
+    #           volume_initialization_rate: 1,
     #           iops: 1,
     #           throughput: 1,
     #           tag_specifications: [
@@ -9614,9 +9806,20 @@ module Aws::ECS
 
     # Stops an ongoing service deployment.
     #
-    # <note markdown="1"> StopServiceDeployment isn't currently supported.
+    # The following stop types are avaiable:
     #
-    #  </note>
+    # * ROLLBACK - This option rolls back the service deployment to the
+    #   previous service revision.
+    #
+    #   You can use this option even if you didn't configure the service
+    #   deployment for the rollback option.
+    #
+    # For more information, see [Stopping Amazon ECS service deployments][1]
+    # in the *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/stop-service-deployment.html
     #
     # @option params [required, String] :service_deployment_arn
     #   The ARN of the service deployment that you want to stop.
@@ -9624,7 +9827,7 @@ module Aws::ECS
     # @option params [String] :stop_type
     #   How you want Amazon ECS to stop the service.
     #
-    #   The ROLLBACK and ABORT stopType aren't supported.
+    #   The valid values are `ROLLBACK`.
     #
     # @return [Types::StopServiceDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11291,13 +11494,13 @@ module Aws::ECS
     #
     # You can attach Amazon EBS volumes to Amazon ECS tasks by configuring
     # the volume when starting or running a task, or when creating or
-    # updating a service. For more infomation, see [Amazon EBS volumes][1]
+    # updating a service. For more information, see [Amazon EBS volumes][1]
     # in the *Amazon Elastic Container Service Developer Guide*. You can
     # update your volume configurations and trigger a new deployment.
     # `volumeConfigurations` is only supported for REPLICA service and not
     # DAEMON service. If you leave `volumeConfigurations` `null`, it
-    # doesn't trigger a new deployment. For more infomation on volumes, see
-    # [Amazon EBS volumes][1] in the *Amazon Elastic Container Service
+    # doesn't trigger a new deployment. For more information on volumes,
+    # see [Amazon EBS volumes][1] in the *Amazon Elastic Container Service
     # Developer Guide*.
     #
     # For services using the blue/green (`CODE_DEPLOY`) deployment
@@ -11323,7 +11526,7 @@ module Aws::ECS
     #
     # You can attach Amazon EBS volumes to Amazon ECS tasks by configuring
     # the volume when starting or running a task, or when creating or
-    # updating a service. For more infomation, see [Amazon EBS volumes][1]
+    # updating a service. For more information, see [Amazon EBS volumes][1]
     # in the *Amazon Elastic Container Service Developer Guide*.
     #
     # If you have updated the container image of your application, you can
@@ -11407,30 +11610,19 @@ module Aws::ECS
     #   Zone (based on the previous steps), favoring container instances
     #   with the largest number of running tasks for this service.
     #
-    # <note markdown="1"> You must have a service-linked role when you update any of the
-    # following service properties:
-    #
-    #  * `loadBalancers`,
-    #
-    # * `serviceRegistries`
-    #
-    #  For more information about the role see the `CreateService` request
-    # parameter [ `role` ][5].
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types
     # [2]: https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html
     # [3]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateTaskSet.html
     # [4]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
-    # [5]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html#ECS-CreateService-request-role
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
     #   your service runs on. If you do not specify a cluster, the default
     #   cluster is assumed.
+    #
+    #   You can't change the cluster name.
     #
     # @option params [required, String] :service
     #   The name of the service to update.
@@ -11448,41 +11640,42 @@ module Aws::ECS
     #   after the new version is running.
     #
     # @option params [Array<Types::CapacityProviderStrategyItem>] :capacity_provider_strategy
-    #   The capacity provider strategy to update the service to use.
+    #   The details of a capacity provider strategy. You can set a capacity
+    #   provider when you create a cluster, run a task, or update a service.
     #
-    #   if the service uses the default capacity provider strategy for the
-    #   cluster, the service can be updated to use one or more capacity
-    #   providers as opposed to the default capacity provider strategy.
-    #   However, when a service is using a capacity provider strategy that's
-    #   not the default capacity provider strategy, the service can't be
-    #   updated to use the cluster's default capacity provider strategy.
+    #   When you use Fargate, the capacity providers are `FARGATE` or
+    #   `FARGATE_SPOT`.
     #
-    #   A capacity provider strategy consists of one or more capacity
-    #   providers along with the `base` and `weight` to assign to them. A
-    #   capacity provider must be associated with the cluster to be used in a
-    #   capacity provider strategy. The [PutClusterCapacityProviders][1] API
-    #   is used to associate a capacity provider with a cluster. Only capacity
-    #   providers with an `ACTIVE` or `UPDATING` status can be used.
+    #   When you use Amazon EC2, the capacity providers are Auto Scaling
+    #   groups.
     #
-    #   If specifying a capacity provider that uses an Auto Scaling group, the
-    #   capacity provider must already be created. New capacity providers can
-    #   be created with the [CreateClusterCapacityProvider][2] API operation.
+    #   You can change capacity providers for rolling deployments and
+    #   blue/green deployments.
     #
-    #   To use a Fargate capacity provider, specify either the `FARGATE` or
-    #   `FARGATE_SPOT` capacity providers. The Fargate capacity providers are
-    #   available to all accounts and only need to be associated with a
-    #   cluster to be used.
+    #   The following list provides the valid transitions:
     #
-    #   The [PutClusterCapacityProviders][1]API operation is used to update
-    #   the list of available capacity providers for a cluster after the
-    #   cluster is created.
+    #   * Update the Fargate launch type to an Auto Scaling group capacity
+    #     provider.
+    #
+    #   * Update the Amazon EC2 launch type to a Fargate capacity provider.
+    #
+    #   * Update the Fargate capacity provider to an Auto Scaling group
+    #     capacity provider.
+    #
+    #   * Update the Amazon EC2 capacity provider to a Fargate capacity
+    #     provider.
+    #
+    #   * Update the Auto Scaling group or Fargate capacity provider back to
+    #     the launch type.
+    #
+    #     Pass an empty list in the `capacityProviderStrategy` parameter.
+    #
+    #   For information about Amazon Web Services CDK considerations, see
+    #   [Amazon Web Services CDK considerations][1].
     #
     #
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
-    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateClusterCapacityProvider.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service-parameters.html
     #
     # @option params [Types::DeploymentConfiguration] :deployment_configuration
     #   Optional deployment parameters that control how many tasks run during
@@ -11557,6 +11750,9 @@ module Aws::ECS
     #   can prevent the service scheduler from marking tasks as unhealthy and
     #   stopping them before they have time to come up.
     #
+    # @option params [Types::DeploymentController] :deployment_controller
+    #   The deployment controller to use for the service.
+    #
     # @option params [Boolean] :enable_execute_command
     #   If `true`, this enables execute command functionality on all task
     #   containers.
@@ -11579,6 +11775,10 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #
     # @option params [Array<Types::LoadBalancer>] :load_balancers
+    #   <note markdown="1"> You must have a service-linked role when you update this property
+    #
+    #    </note>
+    #
     #   A list of Elastic Load Balancing load balancer objects. It contains
     #   the load balancer name, the container name, and the container port to
     #   access from the load balancer. The container name is as it appears in
@@ -11625,8 +11825,15 @@ module Aws::ECS
     #   that Amazon ECS starts new tasks with the updated tags.
     #
     # @option params [Array<Types::ServiceRegistry>] :service_registries
+    #   <note markdown="1"> You must have a service-linked role when you update this property.
+    #
+    #    For more information about the role see the `CreateService` request
+    #   parameter [ `role` ][1].
+    #
+    #    </note>
+    #
     #   The details for the service discovery registries to assign to this
-    #   service. For more information, see [Service Discovery][1].
+    #   service. For more information, see [Service Discovery][2].
     #
     #   When you add, update, or remove the service registries configuration,
     #   Amazon ECS starts new tasks with the updated service registries
@@ -11637,7 +11844,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html#ECS-CreateService-request-role
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
     #
     # @option params [Types::ServiceConnectConfiguration] :service_connect_configuration
     #   The configuration for this service to discover and connect to
@@ -11729,6 +11937,15 @@ module Aws::ECS
     #         rollback: false, # required
     #         enable: false, # required
     #       },
+    #       strategy: "ROLLING", # accepts ROLLING, BLUE_GREEN
+    #       bake_time_in_minutes: 1,
+    #       lifecycle_hooks: [
+    #         {
+    #           hook_target_arn: "String",
+    #           role_arn: "IAMRoleArn",
+    #           lifecycle_stages: ["RECONCILE_SERVICE"], # accepts RECONCILE_SERVICE, PRE_SCALE_UP, POST_SCALE_UP, TEST_TRAFFIC_SHIFT, POST_TEST_TRAFFIC_SHIFT, PRODUCTION_TRAFFIC_SHIFT, POST_PRODUCTION_TRAFFIC_SHIFT
+    #         },
+    #       ],
     #     },
     #     availability_zone_rebalancing: "ENABLED", # accepts ENABLED, DISABLED
     #     network_configuration: {
@@ -11753,6 +11970,9 @@ module Aws::ECS
     #     platform_version: "String",
     #     force_new_deployment: false,
     #     health_check_grace_period_seconds: 1,
+    #     deployment_controller: {
+    #       type: "ECS", # required, accepts ECS, CODE_DEPLOY, EXTERNAL
+    #     },
     #     enable_execute_command: false,
     #     enable_ecs_managed_tags: false,
     #     load_balancers: [
@@ -11761,6 +11981,12 @@ module Aws::ECS
     #         load_balancer_name: "String",
     #         container_name: "String",
     #         container_port: 1,
+    #         advanced_configuration: {
+    #           alternate_target_group_arn: "String",
+    #           production_listener_rule: "String",
+    #           test_listener_rule: "String",
+    #           role_arn: "String",
+    #         },
     #       },
     #     ],
     #     propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE, NONE
@@ -11783,6 +12009,14 @@ module Aws::ECS
     #             {
     #               port: 1, # required
     #               dns_name: "String",
+    #               test_traffic_rules: {
+    #                 header: { # required
+    #                   name: "String", # required
+    #                   value: {
+    #                     exact: "String", # required
+    #                   },
+    #                 },
+    #               },
     #             },
     #           ],
     #           ingress_port_override: 1,
@@ -11821,6 +12055,7 @@ module Aws::ECS
     #           volume_type: "EBSVolumeType",
     #           size_in_gi_b: 1,
     #           snapshot_id: "EBSSnapshotId",
+    #           volume_initialization_rate: 1,
     #           iops: 1,
     #           throughput: 1,
     #           tag_specifications: [
@@ -11859,6 +12094,10 @@ module Aws::ECS
     #   resp.service.load_balancers[0].load_balancer_name #=> String
     #   resp.service.load_balancers[0].container_name #=> String
     #   resp.service.load_balancers[0].container_port #=> Integer
+    #   resp.service.load_balancers[0].advanced_configuration.alternate_target_group_arn #=> String
+    #   resp.service.load_balancers[0].advanced_configuration.production_listener_rule #=> String
+    #   resp.service.load_balancers[0].advanced_configuration.test_listener_rule #=> String
+    #   resp.service.load_balancers[0].advanced_configuration.role_arn #=> String
     #   resp.service.service_registries #=> Array
     #   resp.service.service_registries[0].registry_arn #=> String
     #   resp.service.service_registries[0].port #=> Integer
@@ -11884,6 +12123,13 @@ module Aws::ECS
     #   resp.service.deployment_configuration.alarms.alarm_names[0] #=> String
     #   resp.service.deployment_configuration.alarms.rollback #=> Boolean
     #   resp.service.deployment_configuration.alarms.enable #=> Boolean
+    #   resp.service.deployment_configuration.strategy #=> String, one of "ROLLING", "BLUE_GREEN"
+    #   resp.service.deployment_configuration.bake_time_in_minutes #=> Integer
+    #   resp.service.deployment_configuration.lifecycle_hooks #=> Array
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].hook_target_arn #=> String
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].role_arn #=> String
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages #=> Array
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages[0] #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
@@ -11915,6 +12161,10 @@ module Aws::ECS
     #   resp.service.task_sets[0].load_balancers[0].load_balancer_name #=> String
     #   resp.service.task_sets[0].load_balancers[0].container_name #=> String
     #   resp.service.task_sets[0].load_balancers[0].container_port #=> Integer
+    #   resp.service.task_sets[0].load_balancers[0].advanced_configuration.alternate_target_group_arn #=> String
+    #   resp.service.task_sets[0].load_balancers[0].advanced_configuration.production_listener_rule #=> String
+    #   resp.service.task_sets[0].load_balancers[0].advanced_configuration.test_listener_rule #=> String
+    #   resp.service.task_sets[0].load_balancers[0].advanced_configuration.role_arn #=> String
     #   resp.service.task_sets[0].service_registries #=> Array
     #   resp.service.task_sets[0].service_registries[0].registry_arn #=> String
     #   resp.service.task_sets[0].service_registries[0].port #=> Integer
@@ -11960,6 +12210,8 @@ module Aws::ECS
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases #=> Array
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].port #=> Integer
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].dns_name #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].test_traffic_rules.header.name #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].test_traffic_rules.header.value.exact #=> String
     #   resp.service.deployments[0].service_connect_configuration.services[0].ingress_port_override #=> Integer
     #   resp.service.deployments[0].service_connect_configuration.services[0].timeout.idle_timeout_seconds #=> Integer
     #   resp.service.deployments[0].service_connect_configuration.services[0].timeout.per_request_timeout_seconds #=> Integer
@@ -11982,6 +12234,7 @@ module Aws::ECS
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.volume_type #=> String
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.size_in_gi_b #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.snapshot_id #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.volume_initialization_rate #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.iops #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.throughput #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications #=> Array
@@ -12150,6 +12403,10 @@ module Aws::ECS
     #   resp.task_set.load_balancers[0].load_balancer_name #=> String
     #   resp.task_set.load_balancers[0].container_name #=> String
     #   resp.task_set.load_balancers[0].container_port #=> Integer
+    #   resp.task_set.load_balancers[0].advanced_configuration.alternate_target_group_arn #=> String
+    #   resp.task_set.load_balancers[0].advanced_configuration.production_listener_rule #=> String
+    #   resp.task_set.load_balancers[0].advanced_configuration.test_listener_rule #=> String
+    #   resp.task_set.load_balancers[0].advanced_configuration.role_arn #=> String
     #   resp.task_set.service_registries #=> Array
     #   resp.task_set.service_registries[0].registry_arn #=> String
     #   resp.task_set.service_registries[0].port #=> Integer
@@ -12470,6 +12727,10 @@ module Aws::ECS
     #   resp.task_set.load_balancers[0].load_balancer_name #=> String
     #   resp.task_set.load_balancers[0].container_name #=> String
     #   resp.task_set.load_balancers[0].container_port #=> Integer
+    #   resp.task_set.load_balancers[0].advanced_configuration.alternate_target_group_arn #=> String
+    #   resp.task_set.load_balancers[0].advanced_configuration.production_listener_rule #=> String
+    #   resp.task_set.load_balancers[0].advanced_configuration.test_listener_rule #=> String
+    #   resp.task_set.load_balancers[0].advanced_configuration.role_arn #=> String
     #   resp.task_set.service_registries #=> Array
     #   resp.task_set.service_registries[0].registry_arn #=> String
     #   resp.task_set.service_registries[0].port #=> Integer
@@ -12511,7 +12772,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.187.0'
+      context[:gem_version] = '1.198.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -200,8 +200,7 @@ module Aws::MediaConnect
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -786,6 +785,7 @@ module Aws::MediaConnect
     #   resp.outputs[0].bridge_ports #=> Array
     #   resp.outputs[0].bridge_ports[0] #=> Integer
     #   resp.outputs[0].output_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.outputs[0].peer_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowOutputs AWS API Documentation
     #
@@ -915,6 +915,7 @@ module Aws::MediaConnect
     #   resp.sources[0].whitelist_cidr #=> String
     #   resp.sources[0].gateway_bridge_source.bridge_arn #=> String
     #   resp.sources[0].gateway_bridge_source.vpc_interface_attachment.vpc_interface_name #=> String
+    #   resp.sources[0].peer_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowSources AWS API Documentation
     #
@@ -1510,6 +1511,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].bridge_ports #=> Array
     #   resp.flow.outputs[0].bridge_ports[0] #=> Integer
     #   resp.flow.outputs[0].output_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.flow.outputs[0].peer_ip_address #=> String
     #   resp.flow.source.data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.source.decryption.constant_initialization_vector #=> String
@@ -1555,6 +1557,7 @@ module Aws::MediaConnect
     #   resp.flow.source.whitelist_cidr #=> String
     #   resp.flow.source.gateway_bridge_source.bridge_arn #=> String
     #   resp.flow.source.gateway_bridge_source.vpc_interface_attachment.vpc_interface_name #=> String
+    #   resp.flow.source.peer_ip_address #=> String
     #   resp.flow.source_failover_config.failover_mode #=> String, one of "MERGE", "FAILOVER"
     #   resp.flow.source_failover_config.recovery_window #=> Integer
     #   resp.flow.source_failover_config.source_priority.primary_source #=> String
@@ -1605,6 +1608,7 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].whitelist_cidr #=> String
     #   resp.flow.sources[0].gateway_bridge_source.bridge_arn #=> String
     #   resp.flow.sources[0].gateway_bridge_source.vpc_interface_attachment.vpc_interface_name #=> String
+    #   resp.flow.sources[0].peer_ip_address #=> String
     #   resp.flow.status #=> String, one of "STANDBY", "ACTIVE", "UPDATING", "DELETING", "STARTING", "STOPPING", "ERROR"
     #   resp.flow.vpc_interfaces #=> Array
     #   resp.flow.vpc_interfaces[0].name #=> String
@@ -2004,6 +2008,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].bridge_ports #=> Array
     #   resp.flow.outputs[0].bridge_ports[0] #=> Integer
     #   resp.flow.outputs[0].output_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.flow.outputs[0].peer_ip_address #=> String
     #   resp.flow.source.data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.source.decryption.constant_initialization_vector #=> String
@@ -2049,6 +2054,7 @@ module Aws::MediaConnect
     #   resp.flow.source.whitelist_cidr #=> String
     #   resp.flow.source.gateway_bridge_source.bridge_arn #=> String
     #   resp.flow.source.gateway_bridge_source.vpc_interface_attachment.vpc_interface_name #=> String
+    #   resp.flow.source.peer_ip_address #=> String
     #   resp.flow.source_failover_config.failover_mode #=> String, one of "MERGE", "FAILOVER"
     #   resp.flow.source_failover_config.recovery_window #=> Integer
     #   resp.flow.source_failover_config.source_priority.primary_source #=> String
@@ -2099,6 +2105,7 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].whitelist_cidr #=> String
     #   resp.flow.sources[0].gateway_bridge_source.bridge_arn #=> String
     #   resp.flow.sources[0].gateway_bridge_source.vpc_interface_attachment.vpc_interface_name #=> String
+    #   resp.flow.sources[0].peer_ip_address #=> String
     #   resp.flow.status #=> String, one of "STANDBY", "ACTIVE", "UPDATING", "DELETING", "STARTING", "STOPPING", "ERROR"
     #   resp.flow.vpc_interfaces #=> Array
     #   resp.flow.vpc_interfaces[0].name #=> String
@@ -3772,6 +3779,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].bridge_ports #=> Array
     #   resp.flow.outputs[0].bridge_ports[0] #=> Integer
     #   resp.flow.outputs[0].output_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.flow.outputs[0].peer_ip_address #=> String
     #   resp.flow.source.data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.source.decryption.constant_initialization_vector #=> String
@@ -3817,6 +3825,7 @@ module Aws::MediaConnect
     #   resp.flow.source.whitelist_cidr #=> String
     #   resp.flow.source.gateway_bridge_source.bridge_arn #=> String
     #   resp.flow.source.gateway_bridge_source.vpc_interface_attachment.vpc_interface_name #=> String
+    #   resp.flow.source.peer_ip_address #=> String
     #   resp.flow.source_failover_config.failover_mode #=> String, one of "MERGE", "FAILOVER"
     #   resp.flow.source_failover_config.recovery_window #=> Integer
     #   resp.flow.source_failover_config.source_priority.primary_source #=> String
@@ -3867,6 +3876,7 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].whitelist_cidr #=> String
     #   resp.flow.sources[0].gateway_bridge_source.bridge_arn #=> String
     #   resp.flow.sources[0].gateway_bridge_source.vpc_interface_attachment.vpc_interface_name #=> String
+    #   resp.flow.sources[0].peer_ip_address #=> String
     #   resp.flow.status #=> String, one of "STANDBY", "ACTIVE", "UPDATING", "DELETING", "STARTING", "STOPPING", "ERROR"
     #   resp.flow.vpc_interfaces #=> Array
     #   resp.flow.vpc_interfaces[0].name #=> String
@@ -4276,6 +4286,7 @@ module Aws::MediaConnect
     #   resp.output.bridge_ports #=> Array
     #   resp.output.bridge_ports[0] #=> Integer
     #   resp.output.output_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.output.peer_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowOutput AWS API Documentation
     #
@@ -4480,6 +4491,7 @@ module Aws::MediaConnect
     #   resp.source.whitelist_cidr #=> String
     #   resp.source.gateway_bridge_source.bridge_arn #=> String
     #   resp.source.gateway_bridge_source.vpc_interface_attachment.vpc_interface_name #=> String
+    #   resp.source.peer_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowSource AWS API Documentation
     #
@@ -4543,7 +4555,7 @@ module Aws::MediaConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -200,8 +200,7 @@ module Aws::Amplify
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -606,6 +605,10 @@ module Aws::Amplify
     # @option params [Types::AutoBranchCreationConfig] :auto_branch_creation_config
     #   The automated branch creation configuration for an Amplify app.
     #
+    # @option params [Types::JobConfig] :job_config
+    #   Describes the configuration details that apply to the jobs for an
+    #   Amplify app.
+    #
     # @option params [Types::CacheConfig] :cache_config
     #   The cache configuration for the Amplify app.
     #
@@ -659,6 +662,9 @@ module Aws::Amplify
     #       build_spec: "BuildSpec",
     #       enable_pull_request_preview: false,
     #       pull_request_environment_name: "PullRequestEnvironmentName",
+    #     },
+    #     job_config: {
+    #       build_compute_type: "STANDARD_8GB", # required, accepts STANDARD_8GB, LARGE_16GB, XLARGE_72GB
     #     },
     #     cache_config: {
     #       type: "AMPLIFY_MANAGED", # required, accepts AMPLIFY_MANAGED, AMPLIFY_MANAGED_NO_COOKIES
@@ -717,6 +723,7 @@ module Aws::Amplify
     #   resp.app.waf_configuration.web_acl_arn #=> String
     #   resp.app.waf_configuration.waf_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ASSOCIATION_SUCCESS", "DISASSOCIATING", "DISASSOCIATION_FAILED"
     #   resp.app.waf_configuration.status_reason #=> String
+    #   resp.app.job_config.build_compute_type #=> String, one of "STANDARD_8GB", "LARGE_16GB", "XLARGE_72GB"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateApp AWS API Documentation
     #
@@ -1208,6 +1215,7 @@ module Aws::Amplify
     #   resp.app.waf_configuration.web_acl_arn #=> String
     #   resp.app.waf_configuration.waf_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ASSOCIATION_SUCCESS", "DISASSOCIATING", "DISASSOCIATION_FAILED"
     #   resp.app.waf_configuration.status_reason #=> String
+    #   resp.app.job_config.build_compute_type #=> String, one of "STANDARD_8GB", "LARGE_16GB", "XLARGE_72GB"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteApp AWS API Documentation
     #
@@ -1566,6 +1574,7 @@ module Aws::Amplify
     #   resp.app.waf_configuration.web_acl_arn #=> String
     #   resp.app.waf_configuration.waf_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ASSOCIATION_SUCCESS", "DISASSOCIATING", "DISASSOCIATION_FAILED"
     #   resp.app.waf_configuration.status_reason #=> String
+    #   resp.app.job_config.build_compute_type #=> String, one of "STANDARD_8GB", "LARGE_16GB", "XLARGE_72GB"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetApp AWS API Documentation
     #
@@ -1934,6 +1943,7 @@ module Aws::Amplify
     #   resp.apps[0].waf_configuration.web_acl_arn #=> String
     #   resp.apps[0].waf_configuration.waf_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ASSOCIATION_SUCCESS", "DISASSOCIATING", "DISASSOCIATION_FAILED"
     #   resp.apps[0].waf_configuration.status_reason #=> String
+    #   resp.apps[0].job_config.build_compute_type #=> String, one of "STANDARD_8GB", "LARGE_16GB", "XLARGE_72GB"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListApps AWS API Documentation
@@ -2694,6 +2704,10 @@ module Aws::Amplify
     #
     #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth
     #
+    # @option params [Types::JobConfig] :job_config
+    #   Describes the configuration details that apply to the jobs for an
+    #   Amplify app.
+    #
     # @option params [Types::CacheConfig] :cache_config
     #   The cache configuration for the Amplify app.
     #
@@ -2746,6 +2760,9 @@ module Aws::Amplify
     #     repository: "Repository",
     #     oauth_token: "OauthToken",
     #     access_token: "AccessToken",
+    #     job_config: {
+    #       build_compute_type: "STANDARD_8GB", # required, accepts STANDARD_8GB, LARGE_16GB, XLARGE_72GB
+    #     },
     #     cache_config: {
     #       type: "AMPLIFY_MANAGED", # required, accepts AMPLIFY_MANAGED, AMPLIFY_MANAGED_NO_COOKIES
     #     },
@@ -2803,6 +2820,7 @@ module Aws::Amplify
     #   resp.app.waf_configuration.web_acl_arn #=> String
     #   resp.app.waf_configuration.waf_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ASSOCIATION_SUCCESS", "DISASSOCIATING", "DISASSOCIATION_FAILED"
     #   resp.app.waf_configuration.status_reason #=> String
+    #   resp.app.job_config.build_compute_type #=> String, one of "STANDARD_8GB", "LARGE_16GB", "XLARGE_72GB"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateApp AWS API Documentation
     #
@@ -3133,7 +3151,7 @@ module Aws::Amplify
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-amplify'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

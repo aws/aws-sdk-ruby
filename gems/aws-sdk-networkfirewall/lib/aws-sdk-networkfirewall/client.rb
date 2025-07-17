@@ -200,8 +200,7 @@ module Aws::NetworkFirewall
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -477,6 +476,135 @@ module Aws::NetworkFirewall
 
     # @!group API Operations
 
+    # Accepts a transit gateway attachment request for Network Firewall.
+    # When you accept the attachment request, Network Firewall creates the
+    # necessary routing components to enable traffic flow between the
+    # transit gateway and firewall endpoints.
+    #
+    # You must accept a transit gateway attachment to complete the creation
+    # of a transit gateway-attached firewall, unless auto-accept is enabled
+    # on the transit gateway. After acceptance, use DescribeFirewall to
+    # verify the firewall status.
+    #
+    # To reject an attachment instead of accepting it, use
+    # RejectNetworkFirewallTransitGatewayAttachment.
+    #
+    # <note markdown="1"> It can take several minutes for the attachment acceptance to complete
+    # and the firewall to become available.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :transit_gateway_attachment_id
+    #   Required. The unique identifier of the transit gateway attachment to
+    #   accept. This ID is returned in the response when creating a transit
+    #   gateway-attached firewall.
+    #
+    # @return [Types::AcceptNetworkFirewallTransitGatewayAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptNetworkFirewallTransitGatewayAttachmentResponse#transit_gateway_attachment_id #transit_gateway_attachment_id} => String
+    #   * {Types::AcceptNetworkFirewallTransitGatewayAttachmentResponse#transit_gateway_attachment_status #transit_gateway_attachment_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_network_firewall_transit_gateway_attachment({
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_attachment_status #=> String, one of "CREATING", "DELETING", "DELETED", "FAILED", "ERROR", "READY", "PENDING_ACCEPTANCE", "REJECTING", "REJECTED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/AcceptNetworkFirewallTransitGatewayAttachment AWS API Documentation
+    #
+    # @overload accept_network_firewall_transit_gateway_attachment(params = {})
+    # @param [Hash] params ({})
+    def accept_network_firewall_transit_gateway_attachment(params = {}, options = {})
+      req = build_request(:accept_network_firewall_transit_gateway_attachment, params)
+      req.send_request(options)
+    end
+
+    # Associates the specified Availability Zones with a transit
+    # gateway-attached firewall. For each Availability Zone, Network
+    # Firewall creates a firewall endpoint to process traffic. You can
+    # specify one or more Availability Zones where you want to deploy the
+    # firewall.
+    #
+    # After adding Availability Zones, you must update your transit gateway
+    # route tables to direct traffic through the new firewall endpoints. Use
+    # DescribeFirewall to monitor the status of the new endpoints.
+    #
+    # @option params [String] :update_token
+    #   An optional token that you can use for optimistic locking. Network
+    #   Firewall returns a token to your requests that access the firewall.
+    #   The token marks the state of the firewall resource at the time of the
+    #   request.
+    #
+    #   To make an unconditional change to the firewall, omit the token in
+    #   your update request. Without the token, Network Firewall performs your
+    #   updates regardless of whether the firewall has changed since you last
+    #   retrieved it.
+    #
+    #   To make a conditional change to the firewall, provide the token in
+    #   your update request. Network Firewall uses the token to ensure that
+    #   the firewall hasn't changed since you last retrieved it. If it has
+    #   changed, the operation fails with an `InvalidTokenException`. If this
+    #   happens, retrieve the firewall again to get a current copy of it with
+    #   a new token. Reapply your changes as needed, then try the operation
+    #   again using the new token.
+    #
+    # @option params [String] :firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :firewall_name
+    #   The descriptive name of the firewall. You can't change the name of a
+    #   firewall after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [required, Array<Types::AvailabilityZoneMapping>] :availability_zone_mappings
+    #   Required. The Availability Zones where you want to create firewall
+    #   endpoints. You must specify at least one Availability Zone.
+    #
+    # @return [Types::AssociateAvailabilityZonesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateAvailabilityZonesResponse#firewall_arn #firewall_arn} => String
+    #   * {Types::AssociateAvailabilityZonesResponse#firewall_name #firewall_name} => String
+    #   * {Types::AssociateAvailabilityZonesResponse#availability_zone_mappings #availability_zone_mappings} => Array&lt;Types::AvailabilityZoneMapping&gt;
+    #   * {Types::AssociateAvailabilityZonesResponse#update_token #update_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_availability_zones({
+    #     update_token: "UpdateToken",
+    #     firewall_arn: "ResourceArn",
+    #     firewall_name: "ResourceName",
+    #     availability_zone_mappings: [ # required
+    #       {
+    #         availability_zone: "AvailabilityZoneMappingString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_arn #=> String
+    #   resp.firewall_name #=> String
+    #   resp.availability_zone_mappings #=> Array
+    #   resp.availability_zone_mappings[0].availability_zone #=> String
+    #   resp.update_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/AssociateAvailabilityZones AWS API Documentation
+    #
+    # @overload associate_availability_zones(params = {})
+    # @param [Hash] params ({})
+    def associate_availability_zones(params = {}, options = {})
+      req = build_request(:associate_availability_zones, params)
+      req.send_request(options)
+    end
+
     # Associates a FirewallPolicy to a Firewall.
     #
     # A firewall policy defines how to monitor and manage your VPC network
@@ -712,6 +840,46 @@ module Aws::NetworkFirewall
     #   An optional setting indicating the specific traffic analysis types to
     #   enable on the firewall.
     #
+    # @option params [String] :transit_gateway_id
+    #   Required when creating a transit gateway-attached firewall. The unique
+    #   identifier of the transit gateway to attach to this firewall. You can
+    #   provide either a transit gateway from your account or one that has
+    #   been shared with you through Resource Access Manager.
+    #
+    #   After creating the firewall, you cannot change the transit gateway
+    #   association. To use a different transit gateway, you must create a new
+    #   firewall.
+    #
+    #   For information about creating firewalls, see CreateFirewall. For
+    #   specific guidance about transit gateway-attached firewalls, see
+    #   [Considerations for transit gateway-attached firewalls][1] in the
+    #   *Network Firewall Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tgw-firewall-considerations.html
+    #
+    # @option params [Array<Types::AvailabilityZoneMapping>] :availability_zone_mappings
+    #   Required. The Availability Zones where you want to create firewall
+    #   endpoints for a transit gateway-attached firewall. You must specify at
+    #   least one Availability Zone. Consider enabling the firewall in every
+    #   Availability Zone where you have workloads to maintain Availability
+    #   Zone independence.
+    #
+    #   You can modify Availability Zones later using
+    #   AssociateAvailabilityZones or DisassociateAvailabilityZones, but this
+    #   may briefly disrupt traffic. The `AvailabilityZoneChangeProtection`
+    #   setting controls whether you can make these modifications.
+    #
+    # @option params [Boolean] :availability_zone_change_protection
+    #   Optional. A setting indicating whether the firewall is protected
+    #   against changes to its Availability Zone configuration. When set to
+    #   `TRUE`, you cannot add or remove Availability Zones without first
+    #   disabling this protection using
+    #   UpdateAvailabilityZoneChangeProtection.
+    #
+    #   Default value: `FALSE`
+    #
     # @return [Types::CreateFirewallResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFirewallResponse#firewall #firewall} => Types::Firewall
@@ -744,6 +912,13 @@ module Aws::NetworkFirewall
     #       type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
     #     },
     #     enabled_analysis_types: ["TLS_SNI"], # accepts TLS_SNI, HTTP_HOST
+    #     transit_gateway_id: "TransitGatewayId",
+    #     availability_zone_mappings: [
+    #       {
+    #         availability_zone: "AvailabilityZoneMappingString", # required
+    #       },
+    #     ],
+    #     availability_zone_change_protection: false,
     #   })
     #
     # @example Response structure
@@ -765,8 +940,14 @@ module Aws::NetworkFirewall
     #   resp.firewall.tags[0].value #=> String
     #   resp.firewall.encryption_configuration.key_id #=> String
     #   resp.firewall.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall.number_of_associations #=> Integer
     #   resp.firewall.enabled_analysis_types #=> Array
     #   resp.firewall.enabled_analysis_types[0] #=> String, one of "TLS_SNI", "HTTP_HOST"
+    #   resp.firewall.transit_gateway_id #=> String
+    #   resp.firewall.transit_gateway_owner_account_id #=> String
+    #   resp.firewall.availability_zone_mappings #=> Array
+    #   resp.firewall.availability_zone_mappings[0].availability_zone #=> String
+    #   resp.firewall.availability_zone_change_protection #=> Boolean
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states #=> Hash
@@ -781,6 +962,9 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.capacity_usage_summary.cid_rs.utilized_cidr_count #=> Integer
     #   resp.firewall_status.capacity_usage_summary.cid_rs.ip_set_references #=> Hash
     #   resp.firewall_status.capacity_usage_summary.cid_rs.ip_set_references["IPSetArn"].resolved_cidr_count #=> Integer
+    #   resp.firewall_status.transit_gateway_attachment_sync_state.attachment_id #=> String
+    #   resp.firewall_status.transit_gateway_attachment_sync_state.transit_gateway_attachment_status #=> String, one of "CREATING", "DELETING", "DELETED", "FAILED", "ERROR", "READY", "PENDING_ACCEPTANCE", "REJECTING", "REJECTED"
+    #   resp.firewall_status.transit_gateway_attachment_sync_state.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateFirewall AWS API Documentation
     #
@@ -870,6 +1054,7 @@ module Aws::NetworkFirewall
     #           override: {
     #             action: "DROP_TO_ALERT", # accepts DROP_TO_ALERT
     #           },
+    #           deep_threat_inspection: false,
     #         },
     #       ],
     #       stateful_default_actions: ["CollectionMember_String"],
@@ -1054,6 +1239,17 @@ module Aws::NetworkFirewall
     #   the rule group for you. To run the stateless rule group analyzer
     #   without creating the rule group, set `DryRun` to `TRUE`.
     #
+    # @option params [Types::SummaryConfiguration] :summary_configuration
+    #   An object that contains a `RuleOptions` array of strings. You use
+    #   `RuleOptions` to determine which of the following RuleSummary values
+    #   are returned in response to `DescribeRuleGroupSummary`.
+    #
+    #   * `Metadata` - returns
+    #
+    #   * `Msg`
+    #
+    #   * `SID`
+    #
     # @return [Types::CreateRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRuleGroupResponse#update_token #update_token} => String
@@ -1094,7 +1290,7 @@ module Aws::NetworkFirewall
     #           {
     #             action: "PASS", # required, accepts PASS, DROP, ALERT, REJECT
     #             header: { # required
-    #               protocol: "IP", # required, accepts IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, IMAP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP
+    #               protocol: "IP", # required, accepts IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, IMAP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP, HTTP2, QUIC
     #               source: "Source", # required
     #               source_port: "Port", # required
     #               direction: "FORWARD", # required, accepts FORWARD, ANY
@@ -1189,6 +1385,9 @@ module Aws::NetworkFirewall
     #       source_update_token: "UpdateToken",
     #     },
     #     analyze_rule_group: false,
+    #     summary_configuration: {
+    #       rule_options: ["SID"], # accepts SID, MSG, METADATA
+    #     },
     #   })
     #
     # @example Response structure
@@ -1217,6 +1416,8 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.analysis_results[0].identified_rule_ids[0] #=> String
     #   resp.rule_group_response.analysis_results[0].identified_type #=> String, one of "STATELESS_RULE_FORWARDING_ASYMMETRICALLY", "STATELESS_RULE_CONTAINS_TCP_FLAGS"
     #   resp.rule_group_response.analysis_results[0].analysis_detail #=> String
+    #   resp.rule_group_response.summary_configuration.rule_options #=> Array
+    #   resp.rule_group_response.summary_configuration.rule_options[0] #=> String, one of "SID", "MSG", "METADATA"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateRuleGroup AWS API Documentation
     #
@@ -1405,6 +1606,84 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Creates a firewall endpoint for an Network Firewall firewall. This
+    # type of firewall endpoint is independent of the firewall endpoints
+    # that you specify in the `Firewall` itself, and you define it in
+    # addition to those endpoints after the firewall has been created. You
+    # can define a VPC endpoint association using a different VPC than the
+    # one you used in the firewall specifications.
+    #
+    # @option params [required, String] :firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    # @option params [required, String] :vpc_id
+    #   The unique identifier of the VPC where you want to create a firewall
+    #   endpoint.
+    #
+    # @option params [required, Types::SubnetMapping] :subnet_mapping
+    #   The ID for a subnet that's used in an association with a firewall.
+    #   This is used in CreateFirewall, AssociateSubnets, and
+    #   CreateVpcEndpointAssociation. Network Firewall creates an instance of
+    #   the associated firewall in each subnet that you specify, to filter
+    #   traffic in the subnet's Availability Zone.
+    #
+    # @option params [String] :description
+    #   A description of the VPC endpoint association.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The key:value pairs to associate with the resource.
+    #
+    # @return [Types::CreateVpcEndpointAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVpcEndpointAssociationResponse#vpc_endpoint_association #vpc_endpoint_association} => Types::VpcEndpointAssociation
+    #   * {Types::CreateVpcEndpointAssociationResponse#vpc_endpoint_association_status #vpc_endpoint_association_status} => Types::VpcEndpointAssociationStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_vpc_endpoint_association({
+    #     firewall_arn: "ResourceArn", # required
+    #     vpc_id: "VpcId", # required
+    #     subnet_mapping: { # required
+    #       subnet_id: "CollectionMember_String", # required
+    #       ip_address_type: "DUALSTACK", # accepts DUALSTACK, IPV4, IPV6
+    #     },
+    #     description: "Description",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_endpoint_association.vpc_endpoint_association_id #=> String
+    #   resp.vpc_endpoint_association.vpc_endpoint_association_arn #=> String
+    #   resp.vpc_endpoint_association.firewall_arn #=> String
+    #   resp.vpc_endpoint_association.vpc_id #=> String
+    #   resp.vpc_endpoint_association.subnet_mapping.subnet_id #=> String
+    #   resp.vpc_endpoint_association.subnet_mapping.ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
+    #   resp.vpc_endpoint_association.description #=> String
+    #   resp.vpc_endpoint_association.tags #=> Array
+    #   resp.vpc_endpoint_association.tags[0].key #=> String
+    #   resp.vpc_endpoint_association.tags[0].value #=> String
+    #   resp.vpc_endpoint_association_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
+    #   resp.vpc_endpoint_association_status.association_sync_state #=> Hash
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.subnet_id #=> String
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.endpoint_id #=> String
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateVpcEndpointAssociation AWS API Documentation
+    #
+    # @overload create_vpc_endpoint_association(params = {})
+    # @param [Hash] params ({})
+    def create_vpc_endpoint_association(params = {}, options = {})
+      req = build_request(:create_vpc_endpoint_association, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified Firewall and its FirewallStatus. This operation
     # requires the firewall's `DeleteProtection` flag to be `FALSE`. You
     # can't revert this operation.
@@ -1463,8 +1742,14 @@ module Aws::NetworkFirewall
     #   resp.firewall.tags[0].value #=> String
     #   resp.firewall.encryption_configuration.key_id #=> String
     #   resp.firewall.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall.number_of_associations #=> Integer
     #   resp.firewall.enabled_analysis_types #=> Array
     #   resp.firewall.enabled_analysis_types[0] #=> String, one of "TLS_SNI", "HTTP_HOST"
+    #   resp.firewall.transit_gateway_id #=> String
+    #   resp.firewall.transit_gateway_owner_account_id #=> String
+    #   resp.firewall.availability_zone_mappings #=> Array
+    #   resp.firewall.availability_zone_mappings[0].availability_zone #=> String
+    #   resp.firewall.availability_zone_change_protection #=> Boolean
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states #=> Hash
@@ -1479,6 +1764,9 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.capacity_usage_summary.cid_rs.utilized_cidr_count #=> Integer
     #   resp.firewall_status.capacity_usage_summary.cid_rs.ip_set_references #=> Hash
     #   resp.firewall_status.capacity_usage_summary.cid_rs.ip_set_references["IPSetArn"].resolved_cidr_count #=> Integer
+    #   resp.firewall_status.transit_gateway_attachment_sync_state.attachment_id #=> String
+    #   resp.firewall_status.transit_gateway_attachment_sync_state.transit_gateway_attachment_status #=> String, one of "CREATING", "DELETING", "DELETED", "FAILED", "ERROR", "READY", "PENDING_ACCEPTANCE", "REJECTING", "REJECTED"
+    #   resp.firewall_status.transit_gateway_attachment_sync_state.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteFirewall AWS API Documentation
     #
@@ -1536,6 +1824,45 @@ module Aws::NetworkFirewall
     # @param [Hash] params ({})
     def delete_firewall_policy(params = {}, options = {})
       req = build_request(:delete_firewall_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes a transit gateway attachment from a Network Firewall. Either
+    # the firewall owner or the transit gateway owner can delete the
+    # attachment.
+    #
+    # After you delete a transit gateway attachment, raffic will no longer
+    # flow through the firewall endpoints.
+    #
+    # After you initiate the delete operation, use DescribeFirewall to
+    # monitor the deletion status.
+    #
+    # @option params [required, String] :transit_gateway_attachment_id
+    #   Required. The unique identifier of the transit gateway attachment to
+    #   delete.
+    #
+    # @return [Types::DeleteNetworkFirewallTransitGatewayAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteNetworkFirewallTransitGatewayAttachmentResponse#transit_gateway_attachment_id #transit_gateway_attachment_id} => String
+    #   * {Types::DeleteNetworkFirewallTransitGatewayAttachmentResponse#transit_gateway_attachment_status #transit_gateway_attachment_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_network_firewall_transit_gateway_attachment({
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_attachment_status #=> String, one of "CREATING", "DELETING", "DELETED", "FAILED", "ERROR", "READY", "PENDING_ACCEPTANCE", "REJECTING", "REJECTED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteNetworkFirewallTransitGatewayAttachment AWS API Documentation
+    #
+    # @overload delete_network_firewall_transit_gateway_attachment(params = {})
+    # @param [Hash] params ({})
+    def delete_network_firewall_transit_gateway_attachment(params = {}, options = {})
+      req = build_request(:delete_network_firewall_transit_gateway_attachment, params)
       req.send_request(options)
     end
 
@@ -1623,6 +1950,8 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.analysis_results[0].identified_rule_ids[0] #=> String
     #   resp.rule_group_response.analysis_results[0].identified_type #=> String, one of "STATELESS_RULE_FORWARDING_ASYMMETRICALLY", "STATELESS_RULE_CONTAINS_TCP_FLAGS"
     #   resp.rule_group_response.analysis_results[0].analysis_detail #=> String
+    #   resp.rule_group_response.summary_configuration.rule_options #=> Array
+    #   resp.rule_group_response.summary_configuration.rule_options[0] #=> String, one of "SID", "MSG", "METADATA"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteRuleGroup AWS API Documentation
     #
@@ -1690,6 +2019,59 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Deletes the specified VpcEndpointAssociation.
+    #
+    # You can check whether an endpoint association is in use by reviewing
+    # the route tables for the Availability Zones where you have the
+    # endpoint subnet mapping. You can retrieve the subnet mapping by
+    # calling DescribeVpcEndpointAssociation. You define and update the
+    # route tables through Amazon VPC. As needed, update the route tables
+    # for the Availability Zone to remove the firewall endpoint for the
+    # association. When the route tables no longer use the firewall
+    # endpoint, you can remove the endpoint association safely.
+    #
+    # @option params [required, String] :vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #
+    # @return [Types::DeleteVpcEndpointAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteVpcEndpointAssociationResponse#vpc_endpoint_association #vpc_endpoint_association} => Types::VpcEndpointAssociation
+    #   * {Types::DeleteVpcEndpointAssociationResponse#vpc_endpoint_association_status #vpc_endpoint_association_status} => Types::VpcEndpointAssociationStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_vpc_endpoint_association({
+    #     vpc_endpoint_association_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_endpoint_association.vpc_endpoint_association_id #=> String
+    #   resp.vpc_endpoint_association.vpc_endpoint_association_arn #=> String
+    #   resp.vpc_endpoint_association.firewall_arn #=> String
+    #   resp.vpc_endpoint_association.vpc_id #=> String
+    #   resp.vpc_endpoint_association.subnet_mapping.subnet_id #=> String
+    #   resp.vpc_endpoint_association.subnet_mapping.ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
+    #   resp.vpc_endpoint_association.description #=> String
+    #   resp.vpc_endpoint_association.tags #=> Array
+    #   resp.vpc_endpoint_association.tags[0].key #=> String
+    #   resp.vpc_endpoint_association.tags[0].value #=> String
+    #   resp.vpc_endpoint_association_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
+    #   resp.vpc_endpoint_association_status.association_sync_state #=> Hash
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.subnet_id #=> String
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.endpoint_id #=> String
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteVpcEndpointAssociation AWS API Documentation
+    #
+    # @overload delete_vpc_endpoint_association(params = {})
+    # @param [Hash] params ({})
+    def delete_vpc_endpoint_association(params = {}, options = {})
+      req = build_request(:delete_vpc_endpoint_association, params)
+      req.send_request(options)
+    end
+
     # Returns the data objects for the specified firewall.
     #
     # @option params [String] :firewall_name
@@ -1736,8 +2118,14 @@ module Aws::NetworkFirewall
     #   resp.firewall.tags[0].value #=> String
     #   resp.firewall.encryption_configuration.key_id #=> String
     #   resp.firewall.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall.number_of_associations #=> Integer
     #   resp.firewall.enabled_analysis_types #=> Array
     #   resp.firewall.enabled_analysis_types[0] #=> String, one of "TLS_SNI", "HTTP_HOST"
+    #   resp.firewall.transit_gateway_id #=> String
+    #   resp.firewall.transit_gateway_owner_account_id #=> String
+    #   resp.firewall.availability_zone_mappings #=> Array
+    #   resp.firewall.availability_zone_mappings[0].availability_zone #=> String
+    #   resp.firewall.availability_zone_change_protection #=> Boolean
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states #=> Hash
@@ -1752,6 +2140,9 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.capacity_usage_summary.cid_rs.utilized_cidr_count #=> Integer
     #   resp.firewall_status.capacity_usage_summary.cid_rs.ip_set_references #=> Hash
     #   resp.firewall_status.capacity_usage_summary.cid_rs.ip_set_references["IPSetArn"].resolved_cidr_count #=> Integer
+    #   resp.firewall_status.transit_gateway_attachment_sync_state.attachment_id #=> String
+    #   resp.firewall_status.transit_gateway_attachment_sync_state.transit_gateway_attachment_status #=> String, one of "CREATING", "DELETING", "DELETED", "FAILED", "ERROR", "READY", "PENDING_ACCEPTANCE", "REJECTING", "REJECTED"
+    #   resp.firewall_status.transit_gateway_attachment_sync_state.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFirewall AWS API Documentation
     #
@@ -1759,6 +2150,46 @@ module Aws::NetworkFirewall
     # @param [Hash] params ({})
     def describe_firewall(params = {}, options = {})
       req = build_request(:describe_firewall, params)
+      req.send_request(options)
+    end
+
+    # Returns the high-level information about a firewall, including the
+    # Availability Zones where the Firewall is currently in use.
+    #
+    # @option params [String] :firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    # @return [Types::DescribeFirewallMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFirewallMetadataResponse#firewall_arn #firewall_arn} => String
+    #   * {Types::DescribeFirewallMetadataResponse#firewall_policy_arn #firewall_policy_arn} => String
+    #   * {Types::DescribeFirewallMetadataResponse#description #description} => String
+    #   * {Types::DescribeFirewallMetadataResponse#status #status} => String
+    #   * {Types::DescribeFirewallMetadataResponse#supported_availability_zones #supported_availability_zones} => Hash&lt;String,Types::AvailabilityZoneMetadata&gt;
+    #   * {Types::DescribeFirewallMetadataResponse#transit_gateway_attachment_id #transit_gateway_attachment_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_firewall_metadata({
+    #     firewall_arn: "ResourceArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_arn #=> String
+    #   resp.firewall_policy_arn #=> String
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "PROVISIONING", "DELETING", "READY"
+    #   resp.supported_availability_zones #=> Hash
+    #   resp.supported_availability_zones["AvailabilityZone"].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
+    #   resp.transit_gateway_attachment_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFirewallMetadata AWS API Documentation
+    #
+    # @overload describe_firewall_metadata(params = {})
+    # @param [Hash] params ({})
+    def describe_firewall_metadata(params = {}, options = {})
+      req = build_request(:describe_firewall_metadata, params)
       req.send_request(options)
     end
 
@@ -1820,6 +2251,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy.stateful_rule_group_references[0].resource_arn #=> String
     #   resp.firewall_policy.stateful_rule_group_references[0].priority #=> Integer
     #   resp.firewall_policy.stateful_rule_group_references[0].override.action #=> String, one of "DROP_TO_ALERT"
+    #   resp.firewall_policy.stateful_rule_group_references[0].deep_threat_inspection #=> Boolean
     #   resp.firewall_policy.stateful_default_actions #=> Array
     #   resp.firewall_policy.stateful_default_actions[0] #=> String
     #   resp.firewall_policy.stateful_engine_options.rule_order #=> String, one of "DEFAULT_ACTION_ORDER", "STRICT_ORDER"
@@ -1851,6 +2283,13 @@ module Aws::NetworkFirewall
     #   Defines the scope a flow operation. You can use up to 20 filters to
     #   configure a single flow operation.
     #
+    # @option params [String] :vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #
+    # @option params [String] :vpc_endpoint_id
+    #   A unique identifier for the primary endpoint associated with a
+    #   firewall.
+    #
     # @option params [required, String] :flow_operation_id
     #   A unique identifier for the flow operation. This ID is returned in the
     #   responses to start and list commands. You provide to describe
@@ -1860,6 +2299,8 @@ module Aws::NetworkFirewall
     #
     #   * {Types::DescribeFlowOperationResponse#firewall_arn #firewall_arn} => String
     #   * {Types::DescribeFlowOperationResponse#availability_zone #availability_zone} => String
+    #   * {Types::DescribeFlowOperationResponse#vpc_endpoint_association_arn #vpc_endpoint_association_arn} => String
+    #   * {Types::DescribeFlowOperationResponse#vpc_endpoint_id #vpc_endpoint_id} => String
     #   * {Types::DescribeFlowOperationResponse#flow_operation_id #flow_operation_id} => String
     #   * {Types::DescribeFlowOperationResponse#flow_operation_type #flow_operation_type} => String
     #   * {Types::DescribeFlowOperationResponse#flow_operation_status #flow_operation_status} => String
@@ -1872,6 +2313,8 @@ module Aws::NetworkFirewall
     #   resp = client.describe_flow_operation({
     #     firewall_arn: "ResourceArn", # required
     #     availability_zone: "AvailabilityZone",
+    #     vpc_endpoint_association_arn: "ResourceArn",
+    #     vpc_endpoint_id: "VpcEndpointId",
     #     flow_operation_id: "FlowOperationId", # required
     #   })
     #
@@ -1879,6 +2322,8 @@ module Aws::NetworkFirewall
     #
     #   resp.firewall_arn #=> String
     #   resp.availability_zone #=> String
+    #   resp.vpc_endpoint_association_arn #=> String
+    #   resp.vpc_endpoint_id #=> String
     #   resp.flow_operation_id #=> String
     #   resp.flow_operation_type #=> String, one of "FLOW_FLUSH", "FLOW_CAPTURE"
     #   resp.flow_operation_status #=> String, one of "COMPLETED", "IN_PROGRESS", "FAILED", "COMPLETED_WITH_ERRORS"
@@ -1919,6 +2364,7 @@ module Aws::NetworkFirewall
     #
     #   * {Types::DescribeLoggingConfigurationResponse#firewall_arn #firewall_arn} => String
     #   * {Types::DescribeLoggingConfigurationResponse#logging_configuration #logging_configuration} => Types::LoggingConfiguration
+    #   * {Types::DescribeLoggingConfigurationResponse#enable_monitoring_dashboard #enable_monitoring_dashboard} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -1935,6 +2381,7 @@ module Aws::NetworkFirewall
     #   resp.logging_configuration.log_destination_configs[0].log_destination_type #=> String, one of "S3", "CloudWatchLogs", "KinesisDataFirehose"
     #   resp.logging_configuration.log_destination_configs[0].log_destination #=> Hash
     #   resp.logging_configuration.log_destination_configs[0].log_destination["HashMapKey"] #=> String
+    #   resp.enable_monitoring_dashboard #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeLoggingConfiguration AWS API Documentation
     #
@@ -2037,7 +2484,7 @@ module Aws::NetworkFirewall
     #   resp.rule_group.rules_source.rules_source_list.generated_rules_type #=> String, one of "ALLOWLIST", "DENYLIST"
     #   resp.rule_group.rules_source.stateful_rules #=> Array
     #   resp.rule_group.rules_source.stateful_rules[0].action #=> String, one of "PASS", "DROP", "ALERT", "REJECT"
-    #   resp.rule_group.rules_source.stateful_rules[0].header.protocol #=> String, one of "IP", "TCP", "UDP", "ICMP", "HTTP", "FTP", "TLS", "SMB", "DNS", "DCERPC", "SSH", "SMTP", "IMAP", "MSN", "KRB5", "IKEV2", "TFTP", "NTP", "DHCP"
+    #   resp.rule_group.rules_source.stateful_rules[0].header.protocol #=> String, one of "IP", "TCP", "UDP", "ICMP", "HTTP", "FTP", "TLS", "SMB", "DNS", "DCERPC", "SSH", "SMTP", "IMAP", "MSN", "KRB5", "IKEV2", "TFTP", "NTP", "DHCP", "HTTP2", "QUIC"
     #   resp.rule_group.rules_source.stateful_rules[0].header.source #=> String
     #   resp.rule_group.rules_source.stateful_rules[0].header.source_port #=> String
     #   resp.rule_group.rules_source.stateful_rules[0].header.direction #=> String, one of "FORWARD", "ANY"
@@ -2096,6 +2543,8 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.analysis_results[0].identified_rule_ids[0] #=> String
     #   resp.rule_group_response.analysis_results[0].identified_type #=> String, one of "STATELESS_RULE_FORWARDING_ASYMMETRICALLY", "STATELESS_RULE_CONTAINS_TCP_FLAGS"
     #   resp.rule_group_response.analysis_results[0].analysis_detail #=> String
+    #   resp.rule_group_response.summary_configuration.rule_options #=> Array
+    #   resp.rule_group_response.summary_configuration.rule_options[0] #=> String, one of "SID", "MSG", "METADATA"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeRuleGroup AWS API Documentation
     #
@@ -2167,6 +2616,69 @@ module Aws::NetworkFirewall
     # @param [Hash] params ({})
     def describe_rule_group_metadata(params = {}, options = {})
       req = build_request(:describe_rule_group_metadata, params)
+      req.send_request(options)
+    end
+
+    # Returns detailed information for a stateful rule group.
+    #
+    # For active threat defense Amazon Web Services managed rule groups,
+    # this operation provides insight into the protections enabled by the
+    # rule group, based on Suricata rule metadata fields. Summaries are
+    # available for rule groups you manage and for active threat defense
+    # Amazon Web Services managed rule groups.
+    #
+    # To modify how threat information appears in summaries, use the
+    # `SummaryConfiguration` parameter in UpdateRuleGroup.
+    #
+    # @option params [String] :rule_group_name
+    #   The descriptive name of the rule group. You can't change the name of
+    #   a rule group after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :rule_group_arn
+    #   Required. The Amazon Resource Name (ARN) of the rule group.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :type
+    #   The type of rule group you want a summary for. This is a required
+    #   field.
+    #
+    #   Valid value: `STATEFUL`
+    #
+    #   Note that `STATELESS` exists but is not currently supported. If you
+    #   provide `STATELESS`, an exception is returned.
+    #
+    # @return [Types::DescribeRuleGroupSummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRuleGroupSummaryResponse#rule_group_name #rule_group_name} => String
+    #   * {Types::DescribeRuleGroupSummaryResponse#description #description} => String
+    #   * {Types::DescribeRuleGroupSummaryResponse#summary #summary} => Types::Summary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_rule_group_summary({
+    #     rule_group_name: "ResourceName",
+    #     rule_group_arn: "ResourceArn",
+    #     type: "STATELESS", # accepts STATELESS, STATEFUL
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_group_name #=> String
+    #   resp.description #=> String
+    #   resp.summary.rule_summaries #=> Array
+    #   resp.summary.rule_summaries[0].sid #=> String
+    #   resp.summary.rule_summaries[0].msg #=> String
+    #   resp.summary.rule_summaries[0].metadata #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeRuleGroupSummary AWS API Documentation
+    #
+    # @overload describe_rule_group_summary(params = {})
+    # @param [Hash] params ({})
+    def describe_rule_group_summary(params = {}, options = {})
+      req = build_request(:describe_rule_group_summary, params)
       req.send_request(options)
     end
 
@@ -2247,6 +2759,135 @@ module Aws::NetworkFirewall
     # @param [Hash] params ({})
     def describe_tls_inspection_configuration(params = {}, options = {})
       req = build_request(:describe_tls_inspection_configuration, params)
+      req.send_request(options)
+    end
+
+    # Returns the data object for the specified VPC endpoint association.
+    #
+    # @option params [required, String] :vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #
+    # @return [Types::DescribeVpcEndpointAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeVpcEndpointAssociationResponse#vpc_endpoint_association #vpc_endpoint_association} => Types::VpcEndpointAssociation
+    #   * {Types::DescribeVpcEndpointAssociationResponse#vpc_endpoint_association_status #vpc_endpoint_association_status} => Types::VpcEndpointAssociationStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_vpc_endpoint_association({
+    #     vpc_endpoint_association_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_endpoint_association.vpc_endpoint_association_id #=> String
+    #   resp.vpc_endpoint_association.vpc_endpoint_association_arn #=> String
+    #   resp.vpc_endpoint_association.firewall_arn #=> String
+    #   resp.vpc_endpoint_association.vpc_id #=> String
+    #   resp.vpc_endpoint_association.subnet_mapping.subnet_id #=> String
+    #   resp.vpc_endpoint_association.subnet_mapping.ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
+    #   resp.vpc_endpoint_association.description #=> String
+    #   resp.vpc_endpoint_association.tags #=> Array
+    #   resp.vpc_endpoint_association.tags[0].key #=> String
+    #   resp.vpc_endpoint_association.tags[0].value #=> String
+    #   resp.vpc_endpoint_association_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
+    #   resp.vpc_endpoint_association_status.association_sync_state #=> Hash
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.subnet_id #=> String
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.endpoint_id #=> String
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeVpcEndpointAssociation AWS API Documentation
+    #
+    # @overload describe_vpc_endpoint_association(params = {})
+    # @param [Hash] params ({})
+    def describe_vpc_endpoint_association(params = {}, options = {})
+      req = build_request(:describe_vpc_endpoint_association, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified Availability Zone associations from a transit
+    # gateway-attached firewall. This removes the firewall endpoints from
+    # these Availability Zones and stops traffic filtering in those zones.
+    # Before removing an Availability Zone, ensure you've updated your
+    # transit gateway route tables to redirect traffic appropriately.
+    #
+    # <note markdown="1"> If `AvailabilityZoneChangeProtection` is enabled, you must first
+    # disable it using UpdateAvailabilityZoneChangeProtection.
+    #
+    #  </note>
+    #
+    # To verify the status of your Availability Zone changes, use
+    # DescribeFirewall.
+    #
+    # @option params [String] :update_token
+    #   An optional token that you can use for optimistic locking. Network
+    #   Firewall returns a token to your requests that access the firewall.
+    #   The token marks the state of the firewall resource at the time of the
+    #   request.
+    #
+    #   To make an unconditional change to the firewall, omit the token in
+    #   your update request. Without the token, Network Firewall performs your
+    #   updates regardless of whether the firewall has changed since you last
+    #   retrieved it.
+    #
+    #   To make a conditional change to the firewall, provide the token in
+    #   your update request. Network Firewall uses the token to ensure that
+    #   the firewall hasn't changed since you last retrieved it. If it has
+    #   changed, the operation fails with an `InvalidTokenException`. If this
+    #   happens, retrieve the firewall again to get a current copy of it with
+    #   a new token. Reapply your changes as needed, then try the operation
+    #   again using the new token.
+    #
+    # @option params [String] :firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :firewall_name
+    #   The descriptive name of the firewall. You can't change the name of a
+    #   firewall after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [required, Array<Types::AvailabilityZoneMapping>] :availability_zone_mappings
+    #   Required. The Availability Zones to remove from the firewall's
+    #   configuration.
+    #
+    # @return [Types::DisassociateAvailabilityZonesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateAvailabilityZonesResponse#firewall_arn #firewall_arn} => String
+    #   * {Types::DisassociateAvailabilityZonesResponse#firewall_name #firewall_name} => String
+    #   * {Types::DisassociateAvailabilityZonesResponse#availability_zone_mappings #availability_zone_mappings} => Array&lt;Types::AvailabilityZoneMapping&gt;
+    #   * {Types::DisassociateAvailabilityZonesResponse#update_token #update_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_availability_zones({
+    #     update_token: "UpdateToken",
+    #     firewall_arn: "ResourceArn",
+    #     firewall_name: "ResourceName",
+    #     availability_zone_mappings: [ # required
+    #       {
+    #         availability_zone: "AvailabilityZoneMappingString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_arn #=> String
+    #   resp.firewall_name #=> String
+    #   resp.availability_zone_mappings #=> Array
+    #   resp.availability_zone_mappings[0].availability_zone #=> String
+    #   resp.update_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DisassociateAvailabilityZones AWS API Documentation
+    #
+    # @overload disassociate_availability_zones(params = {})
+    # @param [Hash] params ({})
+    def disassociate_availability_zones(params = {}, options = {})
+      req = build_request(:disassociate_availability_zones, params)
       req.send_request(options)
     end
 
@@ -2555,6 +3196,7 @@ module Aws::NetworkFirewall
     #   resp.firewalls #=> Array
     #   resp.firewalls[0].firewall_name #=> String
     #   resp.firewalls[0].firewall_arn #=> String
+    #   resp.firewalls[0].transit_gateway_attachment_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListFirewalls AWS API Documentation
     #
@@ -2603,10 +3245,19 @@ module Aws::NetworkFirewall
     #   Defines the scope a flow operation. You can use up to 20 filters to
     #   configure a single flow operation.
     #
+    # @option params [String] :vpc_endpoint_id
+    #   A unique identifier for the primary endpoint associated with a
+    #   firewall.
+    #
+    # @option params [String] :vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #
     # @return [Types::ListFlowOperationResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListFlowOperationResultsResponse#firewall_arn #firewall_arn} => String
     #   * {Types::ListFlowOperationResultsResponse#availability_zone #availability_zone} => String
+    #   * {Types::ListFlowOperationResultsResponse#vpc_endpoint_association_arn #vpc_endpoint_association_arn} => String
+    #   * {Types::ListFlowOperationResultsResponse#vpc_endpoint_id #vpc_endpoint_id} => String
     #   * {Types::ListFlowOperationResultsResponse#flow_operation_id #flow_operation_id} => String
     #   * {Types::ListFlowOperationResultsResponse#flow_operation_status #flow_operation_status} => String
     #   * {Types::ListFlowOperationResultsResponse#status_message #status_message} => String
@@ -2624,12 +3275,16 @@ module Aws::NetworkFirewall
     #     next_token: "PaginationToken",
     #     max_results: 1,
     #     availability_zone: "AvailabilityZone",
+    #     vpc_endpoint_id: "VpcEndpointId",
+    #     vpc_endpoint_association_arn: "ResourceArn",
     #   })
     #
     # @example Response structure
     #
     #   resp.firewall_arn #=> String
     #   resp.availability_zone #=> String
+    #   resp.vpc_endpoint_association_arn #=> String
+    #   resp.vpc_endpoint_id #=> String
     #   resp.flow_operation_id #=> String
     #   resp.flow_operation_status #=> String, one of "COMPLETED", "IN_PROGRESS", "FAILED", "COMPLETED_WITH_ERRORS"
     #   resp.status_message #=> String
@@ -2677,6 +3332,13 @@ module Aws::NetworkFirewall
     #   Defines the scope a flow operation. You can use up to 20 filters to
     #   configure a single flow operation.
     #
+    # @option params [String] :vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #
+    # @option params [String] :vpc_endpoint_id
+    #   A unique identifier for the primary endpoint associated with a
+    #   firewall.
+    #
     # @option params [String] :flow_operation_type
     #   An optional string that defines whether any or all operation types are
     #   returned.
@@ -2706,6 +3368,8 @@ module Aws::NetworkFirewall
     #   resp = client.list_flow_operations({
     #     firewall_arn: "ResourceArn", # required
     #     availability_zone: "AvailabilityZone",
+    #     vpc_endpoint_association_arn: "ResourceArn",
+    #     vpc_endpoint_id: "VpcEndpointId",
     #     flow_operation_type: "FLOW_FLUSH", # accepts FLOW_FLUSH, FLOW_CAPTURE
     #     next_token: "PaginationToken",
     #     max_results: 1,
@@ -2773,7 +3437,7 @@ module Aws::NetworkFirewall
     #     next_token: "PaginationToken",
     #     max_results: 1,
     #     scope: "MANAGED", # accepts MANAGED, ACCOUNT
-    #     managed_type: "AWS_MANAGED_THREAT_SIGNATURES", # accepts AWS_MANAGED_THREAT_SIGNATURES, AWS_MANAGED_DOMAIN_LISTS
+    #     managed_type: "AWS_MANAGED_THREAT_SIGNATURES", # accepts AWS_MANAGED_THREAT_SIGNATURES, AWS_MANAGED_DOMAIN_LISTS, ACTIVE_THREAT_DEFENSE
     #     type: "STATELESS", # accepts STATELESS, STATEFUL
     #   })
     #
@@ -2898,44 +3562,106 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
-    # Creates or updates an IAM policy for your rule group or firewall
-    # policy. Use this to share rule groups and firewall policies between
-    # accounts. This operation works in conjunction with the Amazon Web
-    # Services Resource Access Manager (RAM) service to manage resource
-    # sharing for Network Firewall.
+    # Retrieves the metadata for the VPC endpoint associations that you have
+    # defined. If you specify a fireawll, this returns only the endpoint
+    # associations for that firewall.
     #
-    # Use this operation to create or update a resource policy for your rule
-    # group or firewall policy. In the policy, you specify the accounts that
-    # you want to share the resource with and the operations that you want
-    # the accounts to be able to perform.
+    # Depending on your setting for max results and the number of
+    # associations, a single call might not return the full list.
+    #
+    # @option params [String] :next_token
+    #   When you request a list of objects with a `MaxResults` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   maximum you requested, Network Firewall returns a `NextToken` value in
+    #   the response. To retrieve the next batch of objects, use the token
+    #   returned from the prior request in your next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Network Firewall to return
+    #   for this request. If more objects are available, in the response,
+    #   Network Firewall provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    # @option params [String] :firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    #   If you don't specify this, Network Firewall retrieves all VPC
+    #   endpoint associations that you have defined.
+    #
+    # @return [Types::ListVpcEndpointAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVpcEndpointAssociationsResponse#next_token #next_token} => String
+    #   * {Types::ListVpcEndpointAssociationsResponse#vpc_endpoint_associations #vpc_endpoint_associations} => Array&lt;Types::VpcEndpointAssociationMetadata&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_vpc_endpoint_associations({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #     firewall_arn: "ResourceArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.vpc_endpoint_associations #=> Array
+    #   resp.vpc_endpoint_associations[0].vpc_endpoint_association_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListVpcEndpointAssociations AWS API Documentation
+    #
+    # @overload list_vpc_endpoint_associations(params = {})
+    # @param [Hash] params ({})
+    def list_vpc_endpoint_associations(params = {}, options = {})
+      req = build_request(:list_vpc_endpoint_associations, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates an IAM policy for your rule group, firewall policy,
+    # or firewall. Use this to share these resources between accounts. This
+    # operation works in conjunction with the Amazon Web Services Resource
+    # Access Manager (RAM) service to manage resource sharing for Network
+    # Firewall.
+    #
+    # For information about using sharing with Network Firewall resources,
+    # see [Sharing Network Firewall resources][1] in the *Network Firewall
+    # Developer Guide*.
+    #
+    # Use this operation to create or update a resource policy for your
+    # Network Firewall rule group, firewall policy, or firewall. In the
+    # resource policy, you specify the accounts that you want to share the
+    # Network Firewall resource with and the operations that you want the
+    # accounts to be able to perform.
     #
     # When you add an account in the resource policy, you then run the
     # following Resource Access Manager (RAM) operations to access and
-    # accept the shared rule group or firewall policy.
+    # accept the shared resource.
     #
-    # * [GetResourceShareInvitations][1] - Returns the Amazon Resource Names
+    # * [GetResourceShareInvitations][2] - Returns the Amazon Resource Names
     #   (ARNs) of the resource share invitations.
     #
-    # * [AcceptResourceShareInvitation][2] - Accepts the share invitation
+    # * [AcceptResourceShareInvitation][3] - Accepts the share invitation
     #   for a specified resource share.
     #
     # For additional information about resource sharing using RAM, see
-    # [Resource Access Manager User Guide][3].
+    # [Resource Access Manager User Guide][4].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ram/latest/APIReference/API_GetResourceShareInvitations.html
-    # [2]: https://docs.aws.amazon.com/ram/latest/APIReference/API_AcceptResourceShareInvitation.html
-    # [3]: https://docs.aws.amazon.com/ram/latest/userguide/what-is.html
+    # [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/sharing.html
+    # [2]: https://docs.aws.amazon.com/ram/latest/APIReference/API_GetResourceShareInvitations.html
+    # [3]: https://docs.aws.amazon.com/ram/latest/APIReference/API_AcceptResourceShareInvitation.html
+    # [4]: https://docs.aws.amazon.com/ram/latest/userguide/what-is.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the account that you want to share
-    #   rule groups and firewall policies with.
+    #   your Network Firewall resources with.
     #
     # @option params [required, String] :policy
     #   The IAM policy statement that lists the accounts that you want to
-    #   share your rule group or firewall policy with and the operations that
-    #   you want the accounts to be able to perform.
+    #   share your Network Firewall resources with and the operations that you
+    #   want the accounts to be able to perform.
     #
     #   For a rule group resource, you can specify the following operations in
     #   the Actions section of the statement:
@@ -2953,9 +3679,18 @@ module Aws::NetworkFirewall
     #
     #   * network-firewall:ListFirewallPolicies
     #
+    #   For a firewall resource, you can specify the following operations in
+    #   the Actions section of the statement:
+    #
+    #   * network-firewall:CreateVpcEndpointAssociation
+    #
+    #   * network-firewall:DescribeFirewallMetadata
+    #
+    #   * network-firewall:ListFirewalls
+    #
     #   In the Resource section of the statement, you specify the ARNs for the
-    #   rule groups and firewall policies that you want to share with the
-    #   account that you specified in `Arn`.
+    #   Network Firewall resources that you want to share with the account
+    #   that you specified in `Arn`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2972,6 +3707,53 @@ module Aws::NetworkFirewall
     # @param [Hash] params ({})
     def put_resource_policy(params = {}, options = {})
       req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Rejects a transit gateway attachment request for Network Firewall.
+    # When you reject the attachment request, Network Firewall cancels the
+    # creation of routing components between the transit gateway and
+    # firewall endpoints.
+    #
+    # Only the firewall owner can reject the attachment. After rejection, no
+    # traffic will flow through the firewall endpoints for this attachment.
+    #
+    # Use DescribeFirewall to monitor the rejection status. To accept the
+    # attachment instead of rejecting it, use
+    # AcceptNetworkFirewallTransitGatewayAttachment.
+    #
+    # <note markdown="1"> Once rejected, you cannot reverse this action. To establish
+    # connectivity, you must create a new transit gateway-attached firewall.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :transit_gateway_attachment_id
+    #   Required. The unique identifier of the transit gateway attachment to
+    #   reject. This ID is returned in the response when creating a transit
+    #   gateway-attached firewall.
+    #
+    # @return [Types::RejectNetworkFirewallTransitGatewayAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RejectNetworkFirewallTransitGatewayAttachmentResponse#transit_gateway_attachment_id #transit_gateway_attachment_id} => String
+    #   * {Types::RejectNetworkFirewallTransitGatewayAttachmentResponse#transit_gateway_attachment_status #transit_gateway_attachment_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reject_network_firewall_transit_gateway_attachment({
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_attachment_status #=> String, one of "CREATING", "DELETING", "DELETED", "FAILED", "ERROR", "READY", "PENDING_ACCEPTANCE", "REJECTING", "REJECTED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/RejectNetworkFirewallTransitGatewayAttachment AWS API Documentation
+    #
+    # @overload reject_network_firewall_transit_gateway_attachment(params = {})
+    # @param [Hash] params ({})
+    def reject_network_firewall_transit_gateway_attachment(params = {}, options = {})
+      req = build_request(:reject_network_firewall_transit_gateway_attachment, params)
       req.send_request(options)
     end
 
@@ -3048,6 +3830,13 @@ module Aws::NetworkFirewall
     #   Defines the scope a flow operation. You can use up to 20 filters to
     #   configure a single flow operation.
     #
+    # @option params [String] :vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #
+    # @option params [String] :vpc_endpoint_id
+    #   A unique identifier for the primary endpoint associated with a
+    #   firewall.
+    #
     # @option params [Integer] :minimum_flow_age_in_seconds
     #   The reqested `FlowOperation` ignores flows with an age (in seconds)
     #   lower than `MinimumFlowAgeInSeconds`. You provide this for start
@@ -3073,6 +3862,8 @@ module Aws::NetworkFirewall
     #   resp = client.start_flow_capture({
     #     firewall_arn: "ResourceArn", # required
     #     availability_zone: "AvailabilityZone",
+    #     vpc_endpoint_association_arn: "ResourceArn",
+    #     vpc_endpoint_id: "VpcEndpointId",
     #     minimum_flow_age_in_seconds: 1,
     #     flow_filters: [ # required
     #       {
@@ -3124,6 +3915,13 @@ module Aws::NetworkFirewall
     #   Defines the scope a flow operation. You can use up to 20 filters to
     #   configure a single flow operation.
     #
+    # @option params [String] :vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #
+    # @option params [String] :vpc_endpoint_id
+    #   A unique identifier for the primary endpoint associated with a
+    #   firewall.
+    #
     # @option params [Integer] :minimum_flow_age_in_seconds
     #   The reqested `FlowOperation` ignores flows with an age (in seconds)
     #   lower than `MinimumFlowAgeInSeconds`. You provide this for start
@@ -3144,6 +3942,8 @@ module Aws::NetworkFirewall
     #   resp = client.start_flow_flush({
     #     firewall_arn: "ResourceArn", # required
     #     availability_zone: "AvailabilityZone",
+    #     vpc_endpoint_association_arn: "ResourceArn",
+    #     vpc_endpoint_id: "VpcEndpointId",
     #     minimum_flow_age_in_seconds: 1,
     #     flow_filters: [ # required
     #       {
@@ -3244,6 +4044,85 @@ module Aws::NetworkFirewall
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Modifies the `AvailabilityZoneChangeProtection` setting for a transit
+    # gateway-attached firewall. When enabled, this setting prevents
+    # accidental changes to the firewall's Availability Zone configuration.
+    # This helps protect against disrupting traffic flow in production
+    # environments.
+    #
+    # When enabled, you must disable this protection before using
+    # AssociateAvailabilityZones or DisassociateAvailabilityZones to modify
+    # the firewall's Availability Zone configuration.
+    #
+    # @option params [String] :update_token
+    #   An optional token that you can use for optimistic locking. Network
+    #   Firewall returns a token to your requests that access the firewall.
+    #   The token marks the state of the firewall resource at the time of the
+    #   request.
+    #
+    #   To make an unconditional change to the firewall, omit the token in
+    #   your update request. Without the token, Network Firewall performs your
+    #   updates regardless of whether the firewall has changed since you last
+    #   retrieved it.
+    #
+    #   To make a conditional change to the firewall, provide the token in
+    #   your update request. Network Firewall uses the token to ensure that
+    #   the firewall hasn't changed since you last retrieved it. If it has
+    #   changed, the operation fails with an `InvalidTokenException`. If this
+    #   happens, retrieve the firewall again to get a current copy of it with
+    #   a new token. Reapply your changes as needed, then try the operation
+    #   again using the new token.
+    #
+    # @option params [String] :firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :firewall_name
+    #   The descriptive name of the firewall. You can't change the name of a
+    #   firewall after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [required, Boolean] :availability_zone_change_protection
+    #   A setting indicating whether the firewall is protected against changes
+    #   to the subnet associations. Use this setting to protect against
+    #   accidentally modifying the subnet associations for a firewall that is
+    #   in use. When you create a firewall, the operation initializes this
+    #   setting to `TRUE`.
+    #
+    # @return [Types::UpdateAvailabilityZoneChangeProtectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAvailabilityZoneChangeProtectionResponse#update_token #update_token} => String
+    #   * {Types::UpdateAvailabilityZoneChangeProtectionResponse#firewall_arn #firewall_arn} => String
+    #   * {Types::UpdateAvailabilityZoneChangeProtectionResponse#firewall_name #firewall_name} => String
+    #   * {Types::UpdateAvailabilityZoneChangeProtectionResponse#availability_zone_change_protection #availability_zone_change_protection} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_availability_zone_change_protection({
+    #     update_token: "UpdateToken",
+    #     firewall_arn: "ResourceArn",
+    #     firewall_name: "ResourceName",
+    #     availability_zone_change_protection: false, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update_token #=> String
+    #   resp.firewall_arn #=> String
+    #   resp.firewall_name #=> String
+    #   resp.availability_zone_change_protection #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateAvailabilityZoneChangeProtection AWS API Documentation
+    #
+    # @overload update_availability_zone_change_protection(params = {})
+    # @param [Hash] params ({})
+    def update_availability_zone_change_protection(params = {}, options = {})
+      req = build_request(:update_availability_zone_change_protection, params)
       req.send_request(options)
     end
 
@@ -3636,6 +4515,7 @@ module Aws::NetworkFirewall
     #           override: {
     #             action: "DROP_TO_ALERT", # accepts DROP_TO_ALERT
     #           },
+    #           deep_threat_inspection: false,
     #         },
     #       ],
     #       stateful_default_actions: ["CollectionMember_String"],
@@ -3804,11 +4684,25 @@ module Aws::NetworkFirewall
     #   Defines how Network Firewall performs logging for a firewall. If you
     #   omit this setting, Network Firewall disables logging for the firewall.
     #
+    # @option params [Boolean] :enable_monitoring_dashboard
+    #   A boolean that lets you enable or disable the detailed firewall
+    #   monitoring dashboard on the firewall.
+    #
+    #   The monitoring dashboard provides comprehensive visibility into your
+    #   firewall's flow logs and alert logs. After you enable detailed
+    #   monitoring, you can access these dashboards directly from the
+    #   **Monitoring** page of the Network Firewall console.
+    #
+    #   Specify `TRUE` to enable the the detailed monitoring dashboard on the
+    #   firewall. Specify `FALSE` to disable the the detailed monitoring
+    #   dashboard on the firewall.
+    #
     # @return [Types::UpdateLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateLoggingConfigurationResponse#firewall_arn #firewall_arn} => String
     #   * {Types::UpdateLoggingConfigurationResponse#firewall_name #firewall_name} => String
     #   * {Types::UpdateLoggingConfigurationResponse#logging_configuration #logging_configuration} => Types::LoggingConfiguration
+    #   * {Types::UpdateLoggingConfigurationResponse#enable_monitoring_dashboard #enable_monitoring_dashboard} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -3826,6 +4720,7 @@ module Aws::NetworkFirewall
     #         },
     #       ],
     #     },
+    #     enable_monitoring_dashboard: false,
     #   })
     #
     # @example Response structure
@@ -3837,6 +4732,7 @@ module Aws::NetworkFirewall
     #   resp.logging_configuration.log_destination_configs[0].log_destination_type #=> String, one of "S3", "CloudWatchLogs", "KinesisDataFirehose"
     #   resp.logging_configuration.log_destination_configs[0].log_destination #=> Hash
     #   resp.logging_configuration.log_destination_configs[0].log_destination["HashMapKey"] #=> String
+    #   resp.enable_monitoring_dashboard #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateLoggingConfiguration AWS API Documentation
     #
@@ -3946,6 +4842,11 @@ module Aws::NetworkFirewall
     #   the rule group for you. To run the stateless rule group analyzer
     #   without updating the rule group, set `DryRun` to `TRUE`.
     #
+    # @option params [Types::SummaryConfiguration] :summary_configuration
+    #   Updates the selected summary configuration for a rule group.
+    #
+    #   Changes affect subsequent responses from DescribeRuleGroupSummary.
+    #
     # @return [Types::UpdateRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateRuleGroupResponse#update_token #update_token} => String
@@ -3988,7 +4889,7 @@ module Aws::NetworkFirewall
     #           {
     #             action: "PASS", # required, accepts PASS, DROP, ALERT, REJECT
     #             header: { # required
-    #               protocol: "IP", # required, accepts IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, IMAP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP
+    #               protocol: "IP", # required, accepts IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, IMAP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP, HTTP2, QUIC
     #               source: "Source", # required
     #               source_port: "Port", # required
     #               direction: "FORWARD", # required, accepts FORWARD, ANY
@@ -4076,6 +4977,9 @@ module Aws::NetworkFirewall
     #       source_update_token: "UpdateToken",
     #     },
     #     analyze_rule_group: false,
+    #     summary_configuration: {
+    #       rule_options: ["SID"], # accepts SID, MSG, METADATA
+    #     },
     #   })
     #
     # @example Response structure
@@ -4104,6 +5008,8 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.analysis_results[0].identified_rule_ids[0] #=> String
     #   resp.rule_group_response.analysis_results[0].identified_type #=> String, one of "STATELESS_RULE_FORWARDING_ASYMMETRICALLY", "STATELESS_RULE_CONTAINS_TCP_FLAGS"
     #   resp.rule_group_response.analysis_results[0].analysis_detail #=> String
+    #   resp.rule_group_response.summary_configuration.rule_options #=> Array
+    #   resp.rule_group_response.summary_configuration.rule_options[0] #=> String, one of "SID", "MSG", "METADATA"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateRuleGroup AWS API Documentation
     #
@@ -4360,7 +5266,7 @@ module Aws::NetworkFirewall
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

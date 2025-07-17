@@ -172,6 +172,7 @@ module Aws::Transfer
     InternalServiceError = Shapes::StructureShape.new(name: 'InternalServiceError')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
     ListAccessesRequest = Shapes::StructureShape.new(name: 'ListAccessesRequest')
     ListAccessesResponse = Shapes::StructureShape.new(name: 'ListAccessesResponse')
     ListAgreementsRequest = Shapes::StructureShape.new(name: 'ListAgreementsRequest')
@@ -496,6 +497,7 @@ module Aws::Transfer
     CreateServerRequest.add_member(:workflow_details, Shapes::ShapeRef.new(shape: WorkflowDetails, location_name: "WorkflowDetails"))
     CreateServerRequest.add_member(:structured_log_destinations, Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: "StructuredLogDestinations"))
     CreateServerRequest.add_member(:s3_storage_options, Shapes::ShapeRef.new(shape: S3StorageOptions, location_name: "S3StorageOptions"))
+    CreateServerRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     CreateServerRequest.struct_class = Types::CreateServerRequest
 
     CreateServerResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
@@ -805,6 +807,7 @@ module Aws::Transfer
     DescribedServer.add_member(:structured_log_destinations, Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: "StructuredLogDestinations"))
     DescribedServer.add_member(:s3_storage_options, Shapes::ShapeRef.new(shape: S3StorageOptions, location_name: "S3StorageOptions"))
     DescribedServer.add_member(:as_2_service_managed_egress_ip_addresses, Shapes::ShapeRef.new(shape: ServiceManagedEgressIpAddresses, location_name: "As2ServiceManagedEgressIpAddresses"))
+    DescribedServer.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     DescribedServer.struct_class = Types::DescribedServer
 
     DescribedUser.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
@@ -1439,6 +1442,7 @@ module Aws::Transfer
     UpdateServerRequest.add_member(:workflow_details, Shapes::ShapeRef.new(shape: WorkflowDetails, location_name: "WorkflowDetails"))
     UpdateServerRequest.add_member(:structured_log_destinations, Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: "StructuredLogDestinations"))
     UpdateServerRequest.add_member(:s3_storage_options, Shapes::ShapeRef.new(shape: S3StorageOptions, location_name: "S3StorageOptions"))
+    UpdateServerRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     UpdateServerRequest.struct_class = Types::UpdateServerRequest
 
     UpdateServerResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))

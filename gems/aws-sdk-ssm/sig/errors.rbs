@@ -11,6 +11,9 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class AlreadyExistsException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
@@ -368,6 +371,13 @@ module Aws
       class ResourcePolicyNotFoundException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_id: () -> ::String
+        def resource_type: () -> ::String
+        def quota_code: () -> ::String
+        def service_code: () -> ::String
+      end
       class ServiceSettingNotFound < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
@@ -381,6 +391,11 @@ module Aws
       end
       class TargetNotConnected < ::Aws::Errors::ServiceError
         def message: () -> ::String
+      end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def quota_code: () -> ::String
+        def service_code: () -> ::String
       end
       class TooManyTagsError < ::Aws::Errors::ServiceError
       end

@@ -95,7 +95,7 @@ module Aws::CloudWatchLogs
       attr_accessor service: ::String
       attr_accessor log_type: ::String
       attr_accessor resource_type: ::String
-      attr_accessor delivery_destination_type: ("S3" | "CWL" | "FH")
+      attr_accessor delivery_destination_type: ("S3" | "CWL" | "FH" | "XRAY")
       attr_accessor default_delivery_config_values: Types::ConfigurationTemplateDeliveryConfigValues
       attr_accessor allowed_fields: ::Array[Types::RecordField]
       attr_accessor allowed_output_formats: ::Array[("json" | "plain" | "w3c" | "raw" | "parquet")]
@@ -178,7 +178,7 @@ module Aws::CloudWatchLogs
       attr_accessor log_group_name: ::String
       attr_accessor kms_key_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS")
+      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
       SENSITIVE: []
     end
 
@@ -296,6 +296,8 @@ module Aws::CloudWatchLogs
 
     class DeleteResourcePolicyRequest
       attr_accessor policy_name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor expected_revision_id: ::String
       SENSITIVE: []
     end
 
@@ -320,7 +322,7 @@ module Aws::CloudWatchLogs
       attr_accessor arn: ::String
       attr_accessor delivery_source_name: ::String
       attr_accessor delivery_destination_arn: ::String
-      attr_accessor delivery_destination_type: ("S3" | "CWL" | "FH")
+      attr_accessor delivery_destination_type: ("S3" | "CWL" | "FH" | "XRAY")
       attr_accessor record_fields: ::Array[::String]
       attr_accessor field_delimiter: ::String
       attr_accessor s3_delivery_configuration: Types::S3DeliveryConfiguration
@@ -331,7 +333,7 @@ module Aws::CloudWatchLogs
     class DeliveryDestination
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor delivery_destination_type: ("S3" | "CWL" | "FH")
+      attr_accessor delivery_destination_type: ("S3" | "CWL" | "FH" | "XRAY")
       attr_accessor output_format: ("json" | "plain" | "w3c" | "raw" | "parquet")
       attr_accessor delivery_destination_configuration: Types::DeliveryDestinationConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
@@ -371,7 +373,7 @@ module Aws::CloudWatchLogs
       attr_accessor service: ::String
       attr_accessor log_types: ::Array[::String]
       attr_accessor resource_types: ::Array[::String]
-      attr_accessor delivery_destination_types: ::Array[("S3" | "CWL" | "FH")]
+      attr_accessor delivery_destination_types: ::Array[("S3" | "CWL" | "FH" | "XRAY")]
       attr_accessor next_token: ::String
       attr_accessor limit: ::Integer
       SENSITIVE: []
@@ -477,7 +479,8 @@ module Aws::CloudWatchLogs
       attr_accessor next_token: ::String
       attr_accessor limit: ::Integer
       attr_accessor include_linked_accounts: bool
-      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS")
+      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
+      attr_accessor log_group_identifiers: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -552,6 +555,8 @@ module Aws::CloudWatchLogs
     class DescribeResourcePoliciesRequest
       attr_accessor next_token: ::String
       attr_accessor limit: ::Integer
+      attr_accessor resource_arn: ::String
+      attr_accessor policy_scope: ("ACCOUNT" | "RESOURCE")
       SENSITIVE: []
     end
 
@@ -920,6 +925,22 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class ListLogGroupsRequest
+      attr_accessor log_group_name_pattern: ::String
+      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
+      attr_accessor include_linked_accounts: bool
+      attr_accessor account_identifiers: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListLogGroupsResponse
+      attr_accessor log_groups: ::Array[Types::LogGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -998,7 +1019,7 @@ module Aws::CloudWatchLogs
       attr_accessor kms_key_id: ::String
       attr_accessor data_protection_status: ("ACTIVATED" | "DELETED" | "ARCHIVED" | "DISABLED")
       attr_accessor inherited_properties: ::Array[("ACCOUNT_DATA_PROTECTION")]
-      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS")
+      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
       attr_accessor log_group_arn: ::String
       SENSITIVE: []
     end
@@ -1006,6 +1027,13 @@ module Aws::CloudWatchLogs
     class LogGroupField
       attr_accessor name: ::String
       attr_accessor percent: ::Integer
+      SENSITIVE: []
+    end
+
+    class LogGroupSummary
+      attr_accessor log_group_name: ::String
+      attr_accessor log_group_arn: ::String
+      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
       SENSITIVE: []
     end
 
@@ -1190,6 +1218,13 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class ParseToOCSF
+      attr_accessor source: ::String
+      attr_accessor event_source: ("CloudTrail" | "Route53Resolver" | "VPCFlow" | "EKSAudit" | "AWSWAF")
+      attr_accessor ocsf_version: ("V1.1")
+      SENSITIVE: []
+    end
+
     class ParseVPC
       attr_accessor source: ::String
       SENSITIVE: []
@@ -1228,6 +1263,7 @@ module Aws::CloudWatchLogs
       attr_accessor parse_json: Types::ParseJSON
       attr_accessor parse_key_value: Types::ParseKeyValue
       attr_accessor parse_route_53: Types::ParseRoute53
+      attr_accessor parse_to_ocsf: Types::ParseToOCSF
       attr_accessor parse_postgres: Types::ParsePostgres
       attr_accessor parse_vpc: Types::ParseVPC
       attr_accessor parse_waf: Types::ParseWAF
@@ -1282,6 +1318,7 @@ module Aws::CloudWatchLogs
       attr_accessor name: ::String
       attr_accessor output_format: ("json" | "plain" | "w3c" | "raw" | "parquet")
       attr_accessor delivery_destination_configuration: Types::DeliveryDestinationConfiguration
+      attr_accessor delivery_destination_type: ("S3" | "CWL" | "FH" | "XRAY")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -1391,11 +1428,14 @@ module Aws::CloudWatchLogs
     class PutResourcePolicyRequest
       attr_accessor policy_name: ::String
       attr_accessor policy_document: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor expected_revision_id: ::String
       SENSITIVE: []
     end
 
     class PutResourcePolicyResponse
       attr_accessor resource_policy: Types::ResourcePolicy
+      attr_accessor revision_id: ::String
       SENSITIVE: []
     end
 
@@ -1515,6 +1555,9 @@ module Aws::CloudWatchLogs
       attr_accessor policy_name: ::String
       attr_accessor policy_document: ::String
       attr_accessor last_updated_time: ::Integer
+      attr_accessor policy_scope: ("ACCOUNT" | "RESOURCE")
+      attr_accessor resource_arn: ::String
+      attr_accessor revision_id: ::String
       SENSITIVE: []
     end
 

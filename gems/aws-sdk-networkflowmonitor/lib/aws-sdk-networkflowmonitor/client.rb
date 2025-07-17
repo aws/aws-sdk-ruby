@@ -200,8 +200,7 @@ module Aws::NetworkFlowMonitor
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -622,7 +621,7 @@ module Aws::NetworkFlowMonitor
     # @example Response structure
     #
     #   resp.scope_id #=> String
-    #   resp.status #=> String, one of "SUCCEEDED", "IN_PROGRESS", "FAILED"
+    #   resp.status #=> String, one of "SUCCEEDED", "IN_PROGRESS", "FAILED", "DEACTIVATING", "DEACTIVATED"
     #   resp.scope_arn #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -742,15 +741,17 @@ module Aws::NetworkFlowMonitor
     # ID that was returned for your account by `CreateScope`.
     #
     # Top contributors in Network Flow Monitor are network flows with the
-    # highest values for a specific metric type, related to a scope (for
-    # workload insights) or a monitor.
+    # highest values for a specific metric type. Top contributors can be
+    # across all workload insights, for a given scope, or for a specific
+    # monitor. Use the applicable call for the top contributors that you
+    # want to be returned.
     #
     # @option params [required, String] :monitor_name
     #   The name of the monitor.
     #
     # @option params [required, String] :query_id
     #   The identifier for the query. A query ID is an internally-generated
-    #   identifier for a specific query returned from an API call to start a
+    #   identifier for a specific query returned from an API call to create a
     #   query.
     #
     # @option params [String] :next_token
@@ -841,8 +842,10 @@ module Aws::NetworkFlowMonitor
     # the scope ID that was returned for your account by `CreateScope`.
     #
     # Top contributors in Network Flow Monitor are network flows with the
-    # highest values for a specific metric type, related to a scope (for
-    # workload insights) or a monitor.
+    # highest values for a specific metric type. Top contributors can be
+    # across all workload insights, for a given scope, or for a specific
+    # monitor. Use the applicable call for the top contributors that you
+    # want to be returned.
     #
     # @option params [required, String] :scope_id
     #   The identifier for the scope that includes the resources you want to
@@ -851,7 +854,7 @@ module Aws::NetworkFlowMonitor
     #
     # @option params [required, String] :query_id
     #   The identifier for the query. A query ID is an internally-generated
-    #   identifier for a specific query returned from an API call to start a
+    #   identifier for a specific query returned from an API call to create a
     #   query.
     #
     # @option params [String] :next_token
@@ -915,11 +918,13 @@ module Aws::NetworkFlowMonitor
     # Use the scope ID that was returned for your account by `CreateScope`.
     #
     # Top contributors in Network Flow Monitor are network flows with the
-    # highest values for a specific metric type, related to a scope (for
-    # workload insights) or a monitor.
+    # highest values for a specific metric type. Top contributors can be
+    # across all workload insights, for a given scope, or for a specific
+    # monitor. Use the applicable call for the top contributors that you
+    # want to be returned.
     #
-    # The top contributor network flows overall for a specific metric type,
-    # for example, the number of retransmissions.
+    # The top contributor network flows overall are for a specific metric
+    # type, for example, the number of retransmissions.
     #
     # @option params [required, String] :scope_id
     #   The identifier for the scope that includes the resources you want to
@@ -928,7 +933,7 @@ module Aws::NetworkFlowMonitor
     #
     # @option params [required, String] :query_id
     #   The identifier for the query. A query ID is an internally-generated
-    #   identifier for a specific query returned from an API call to start a
+    #   identifier for a specific query returned from an API call to create a
     #   query.
     #
     # @option params [String] :next_token
@@ -979,11 +984,10 @@ module Aws::NetworkFlowMonitor
     # query interface, for a specified query ID and monitor. This call
     # returns the query status for the top contributors for a monitor.
     #
-    # When you start a query, use this call to check the status of the query
-    # to make sure that it has has `SUCCEEDED` before you
-    # reviewStartQueryWorkloadInsightsTopContributorsData the results. Use
-    # the same query ID that you used for the corresponding API call to
-    # start the query, `StartQueryMonitorTopContributors`.
+    # When you create a query, use this call to check the status of the
+    # query to make sure that it has has `SUCCEEDED` before you review the
+    # results. Use the same query ID that you used for the corresponding API
+    # call to start (create) the query, `StartQueryMonitorTopContributors`.
     #
     # When you run a query, use this call to check the status of the query
     # to make sure that the query has `SUCCEEDED` before you review the
@@ -1032,8 +1036,10 @@ module Aws::NetworkFlowMonitor
     # call to start the query, `StartQueryWorkloadInsightsTopContributors`.
     #
     # Top contributors in Network Flow Monitor are network flows with the
-    # highest values for a specific metric type, related to a scope (for
-    # workload insights) or a monitor.
+    # highest values for a specific metric type. Top contributors can be
+    # across all workload insights, for a given scope, or for a specific
+    # monitor. Use the applicable call for the top contributors that you
+    # want to be returned.
     #
     # @option params [required, String] :scope_id
     #   The identifier for the scope that includes the resources you want to
@@ -1081,11 +1087,13 @@ module Aws::NetworkFlowMonitor
     # `StartQueryWorkloadInsightsTopContributorsData`.
     #
     # Top contributors in Network Flow Monitor are network flows with the
-    # highest values for a specific metric type, related to a scope (for
-    # workload insights) or a monitor.
+    # highest values for a specific metric type. Top contributors can be
+    # across all workload insights, for a given scope, or for a specific
+    # monitor. Use the applicable call for the top contributors that you
+    # want to be returned.
     #
-    # The top contributor network flows overall for a specific metric type,
-    # for example, the number of retransmissions.
+    # The top contributor network flows overall are for a specific metric
+    # type, for example, the number of retransmissions.
     #
     # @option params [required, String] :scope_id
     #   The identifier for the scope that includes the resources you want to
@@ -1148,7 +1156,7 @@ module Aws::NetworkFlowMonitor
     # @example Response structure
     #
     #   resp.scope_id #=> String
-    #   resp.status #=> String, one of "SUCCEEDED", "IN_PROGRESS", "FAILED"
+    #   resp.status #=> String, one of "SUCCEEDED", "IN_PROGRESS", "FAILED", "DEACTIVATING", "DEACTIVATED"
     #   resp.scope_arn #=> String
     #   resp.targets #=> Array
     #   resp.targets[0].target_identifier.target_id.account_id #=> String
@@ -1248,7 +1256,7 @@ module Aws::NetworkFlowMonitor
     #
     #   resp.scopes #=> Array
     #   resp.scopes[0].scope_id #=> String
-    #   resp.scopes[0].status #=> String, one of "SUCCEEDED", "IN_PROGRESS", "FAILED"
+    #   resp.scopes[0].status #=> String, one of "SUCCEEDED", "IN_PROGRESS", "FAILED", "DEACTIVATING", "DEACTIVATED"
     #   resp.scopes[0].scope_arn #=> String
     #   resp.next_token #=> String
     #
@@ -1290,14 +1298,23 @@ module Aws::NetworkFlowMonitor
       req.send_request(options)
     end
 
-    # Start a query to return the data with the Network Flow Monitor query
-    # interface. Specify the query that you want to return results for by
-    # providing a query ID and a monitor name. This query returns the top
-    # contributors for a specific monitor.
+    # Create a query that you can use with the Network Flow Monitor query
+    # interface to return the top contributors for a monitor. Specify the
+    # monitor that you want to create the query for.
+    #
+    # The call returns a query ID that you can use with [
+    # GetQueryResultsMonitorTopContributors][1] to run the query and return
+    # the top contributors for a specific monitor.
     #
     # Top contributors in Network Flow Monitor are network flows with the
-    # highest values for a specific metric type, related to a scope (for
-    # workload insights) or a monitor.
+    # highest values for a specific metric type. Top contributors can be
+    # across all workload insights, for a given scope, or for a specific
+    # monitor. Use the applicable APIs for the top contributors that you
+    # want to be returned.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/networkflowmonitor/2.0/APIReference/API_GetQueryResultsMonitorTopContributors.html
     #
     # @option params [required, String] :monitor_name
     #   The name of the monitor.
@@ -1312,9 +1329,10 @@ module Aws::NetworkFlowMonitor
     #
     # @option params [required, String] :metric_name
     #   The metric that you want to query top contributors for. That is, you
-    #   can specify this metric to return the top contributor network flows,
-    #   for this type of metric, for a monitor and (optionally) within a
-    #   specific category, such as network flows between Availability Zones.
+    #   can specify a metric with this call and return the top contributor
+    #   network flows, for that type of metric, for a monitor and (optionally)
+    #   within a specific category, such as network flows between Availability
+    #   Zones.
     #
     # @option params [required, String] :destination_category
     #   The category that you want to query top contributors for, for a
@@ -1366,14 +1384,23 @@ module Aws::NetworkFlowMonitor
       req.send_request(options)
     end
 
-    # Start a query to return the data with the Network Flow Monitor query
-    # interface. Specify the query that you want to start by providing a
-    # query ID and a monitor name. This query returns the top contributors
-    # for a specific monitor.
+    # Create a query with the Network Flow Monitor query interface that you
+    # can run to return workload insights top contributors. Specify the
+    # scope that you want to create a query for.
+    #
+    # The call returns a query ID that you can use with [
+    # GetQueryResultsWorkloadInsightsTopContributors][1] to run the query
+    # and return the top contributors for the workload insights for a scope.
     #
     # Top contributors in Network Flow Monitor are network flows with the
-    # highest values for a specific metric type, related to a scope (for
-    # workload insights) or a monitor.
+    # highest values for a specific metric type. Top contributors can be
+    # across all workload insights, for a given scope, or for a specific
+    # monitor. Use the applicable APIs for the top contributors that you
+    # want to be returned.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/networkflowmonitor/2.0/APIReference/API_GetQueryResultsWorkloadInsightsTopContributors.html
     #
     # @option params [required, String] :scope_id
     #   The identifier for the scope that includes the resources you want to
@@ -1443,14 +1470,24 @@ module Aws::NetworkFlowMonitor
       req.send_request(options)
     end
 
-    # Start a query to return the with the Network Flow Monitor query
-    # interface. Specify the query that you want to start by providing a
-    # query ID and a monitor name. This query returns the data for top
-    # contributors for workload insights.
+    # Create a query with the Network Flow Monitor query interface that you
+    # can run to return data for workload insights top contributors. Specify
+    # the scope that you want to create a query for.
+    #
+    # The call returns a query ID that you can use with [
+    # GetQueryResultsWorkloadInsightsTopContributorsData][1] to run the
+    # query and return the data for the top contributors for the workload
+    # insights for a scope.
     #
     # Top contributors in Network Flow Monitor are network flows with the
-    # highest values for a specific metric type, related to a scope (for
-    # workload insights) or a monitor.
+    # highest values for a specific metric type. Top contributors can be
+    # across all workload insights, for a given scope, or for a specific
+    # monitor. Use the applicable call for the top contributors that you
+    # want to be returned.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/networkflowmonitor/2.0/APIReference/API_GetQueryResultsWorkloadInsightsTopContributorsData.html
     #
     # @option params [required, String] :scope_id
     #   The identifier for the scope that includes the resources you want to
@@ -1515,20 +1552,21 @@ module Aws::NetworkFlowMonitor
       req.send_request(options)
     end
 
-    # Stop a query with the Network Flow Monitor query interface. Specify
-    # the query that you want to stop by providing a query ID and a monitor
-    # name. This query returns the top contributors for a specific monitor.
+    # Stop a top contributors query for a monitor. Specify the query that
+    # you want to stop by providing a query ID and a monitor name.
     #
     # Top contributors in Network Flow Monitor are network flows with the
-    # highest values for a specific metric type, related to a scope (for
-    # workload insights) or a monitor.
+    # highest values for a specific metric type. Top contributors can be
+    # across all workload insights, for a given scope, or for a specific
+    # monitor. Use the applicable call for the top contributors that you
+    # want to be returned.
     #
     # @option params [required, String] :monitor_name
     #   The name of the monitor.
     #
     # @option params [required, String] :query_id
     #   The identifier for the query. A query ID is an internally-generated
-    #   identifier for a specific query returned from an API call to start a
+    #   identifier for a specific query returned from an API call to create a
     #   query.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1549,13 +1587,14 @@ module Aws::NetworkFlowMonitor
       req.send_request(options)
     end
 
-    # Stop a query with the Network Flow Monitor query interface. Specify
-    # the query that you want to stop by providing a query ID and a monitor
-    # name. This query returns the top contributors for a specific monitor.
+    # Stop a top contributors query for workload insights. Specify the query
+    # that you want to stop by providing a query ID and a scope ID.
     #
     # Top contributors in Network Flow Monitor are network flows with the
-    # highest values for a specific metric type, related to a scope (for
-    # workload insights) or a monitor.
+    # highest values for a specific metric type. Top contributors can be
+    # across all workload insights, for a given scope, or for a specific
+    # monitor. Use the applicable call for the top contributors that you
+    # want to be returned.
     #
     # @option params [required, String] :scope_id
     #   The identifier for the scope that includes the resources you want to
@@ -1564,7 +1603,7 @@ module Aws::NetworkFlowMonitor
     #
     # @option params [required, String] :query_id
     #   The identifier for the query. A query ID is an internally-generated
-    #   identifier for a specific query returned from an API call to start a
+    #   identifier for a specific query returned from an API call to create a
     #   query.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1585,19 +1624,14 @@ module Aws::NetworkFlowMonitor
       req.send_request(options)
     end
 
-    # Return the data for a query with the Network Flow Monitor query
-    # interface. Specify the query that you want to return results for by
-    # providing a query ID and a scope ID. This query returns data for the
-    # top contributors for workload insights. Workload insights provide a
-    # high level view of network flow performance data collected by agents
-    # for a scope.
+    # Stop a top contributors data query for workload insights. Specify the
+    # query that you want to stop by providing a query ID and a scope ID.
     #
     # Top contributors in Network Flow Monitor are network flows with the
-    # highest values for a specific metric type, related to a scope (for
-    # workload insights) or a monitor.
-    #
-    # The top contributor network flows overall for a specific metric type,
-    # for example, the number of retransmissions.
+    # highest values for a specific metric type. Top contributors can be
+    # across all workload insights, for a given scope, or for a specific
+    # monitor. Use the applicable call for the top contributors that you
+    # want to be returned.
     #
     # @option params [required, String] :scope_id
     #   The identifier for the scope that includes the resources you want to
@@ -1606,7 +1640,7 @@ module Aws::NetworkFlowMonitor
     #
     # @option params [required, String] :query_id
     #   The identifier for the query. A query ID is an internally-generated
-    #   identifier for a specific query returned from an API call to start a
+    #   identifier for a specific query returned from an API call to create a
     #   query.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1831,7 +1865,7 @@ module Aws::NetworkFlowMonitor
     # @example Response structure
     #
     #   resp.scope_id #=> String
-    #   resp.status #=> String, one of "SUCCEEDED", "IN_PROGRESS", "FAILED"
+    #   resp.status #=> String, one of "SUCCEEDED", "IN_PROGRESS", "FAILED", "DEACTIVATING", "DEACTIVATED"
     #   resp.scope_arn #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -1863,7 +1897,7 @@ module Aws::NetworkFlowMonitor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkflowmonitor'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2250,6 +2250,26 @@ module Aws::ApplicationAutoScaling
     # predictive scaling policy uses individually specified load and scaling
     # metrics instead of a metric pair.
     #
+    # The following predefined metrics are available for predictive scaling:
+    #
+    # * `ECSServiceAverageCPUUtilization`
+    #
+    # * `ECSServiceAverageMemoryUtilization`
+    #
+    # * `ECSServiceCPUUtilization`
+    #
+    # * `ECSServiceMemoryUtilization`
+    #
+    # * `ECSServiceTotalCPUUtilization`
+    #
+    # * `ECSServiceTotalMemoryUtilization`
+    #
+    # * `ALBRequestCount`
+    #
+    # * `ALBRequestCountPerTarget`
+    #
+    # * `TotalALBRequestCount`
+    #
     # @!attribute [rw] predefined_metric_type
     #   The metric type.
     #   @return [String]
@@ -2268,6 +2288,26 @@ module Aws::ApplicationAutoScaling
     end
 
     # Represents a metric pair for a predictive scaling policy.
+    #
+    # The following predefined metrics are available for predictive scaling:
+    #
+    # * `ECSServiceAverageCPUUtilization`
+    #
+    # * `ECSServiceAverageMemoryUtilization`
+    #
+    # * `ECSServiceCPUUtilization`
+    #
+    # * `ECSServiceMemoryUtilization`
+    #
+    # * `ECSServiceTotalCPUUtilization`
+    #
+    # * `ECSServiceTotalMemoryUtilization`
+    #
+    # * `ALBRequestCount`
+    #
+    # * `ALBRequestCountPerTarget`
+    #
+    # * `TotalALBRequestCount`
     #
     # @!attribute [rw] predefined_metric_type
     #   Indicates which metrics to use. There are two different types of
@@ -2294,6 +2334,26 @@ module Aws::ApplicationAutoScaling
     # When returned in the output of `DescribePolicies`, it indicates that a
     # predictive scaling policy uses individually specified load and scaling
     # metrics instead of a metric pair.
+    #
+    # The following predefined metrics are available for predictive scaling:
+    #
+    # * `ECSServiceAverageCPUUtilization`
+    #
+    # * `ECSServiceAverageMemoryUtilization`
+    #
+    # * `ECSServiceCPUUtilization`
+    #
+    # * `ECSServiceMemoryUtilization`
+    #
+    # * `ECSServiceTotalCPUUtilization`
+    #
+    # * `ECSServiceTotalMemoryUtilization`
+    #
+    # * `ALBRequestCount`
+    #
+    # * `ALBRequestCountPerTarget`
+    #
+    # * `TotalALBRequestCount`
     #
     # @!attribute [rw] predefined_metric_type
     #   The metric type.

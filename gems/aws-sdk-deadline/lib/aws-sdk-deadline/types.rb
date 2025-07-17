@@ -62,7 +62,7 @@ module Aws::Deadline
     #   The name of the chip used by the GPU accelerator.
     #
     #   If you specify `l4` as the name of the accelerator, you must specify
-    #   `latest` or `grid:r550` as the runtime.
+    #   `latest` or `grid:r570` as the runtime.
     #
     #   The available GPU accelerators are:
     #
@@ -85,7 +85,7 @@ module Aws::Deadline
     #     specify `latest` and a new version of the runtime is released, the
     #     new version of the runtime is used.
     #
-    #   * `grid:r550` - [NVIDIA vGPU software 17][1]
+    #   * `grid:r570` - [NVIDIA vGPU software 18][1]
     #
     #   * `grid:r535` - [NVIDIA vGPU software 16][2]
     #
@@ -96,7 +96,7 @@ module Aws::Deadline
     #
     #
     #
-    #   [1]: https://docs.nvidia.com/vgpu/17.0/index.html
+    #   [1]: https://docs.nvidia.com/vgpu/18.0/index.html
     #   [2]: https://docs.nvidia.com/vgpu/16.0/index.html
     #   @return [String]
     #
@@ -1148,6 +1148,15 @@ module Aws::Deadline
     #
     # @!attribute [rw] max_worker_count
     #   The maximum number of workers for the fleet.
+    #
+    #   Deadline Cloud limits the number of workers to less than or equal to
+    #   the fleet's maximum worker count. The service maintains eventual
+    #   consistency for the worker count. If you make multiple rapid calls
+    #   to `CreateWorker` before the field updates, you might exceed your
+    #   fleet's maximum worker count. For example, if your `maxWorkerCount`
+    #   is 10 and you currently have 9 workers, making two quick
+    #   `CreateWorker` calls might successfully create 2 workers instead of
+    #   1, resulting in 11 total workers.
     #   @return [Integer]
     #
     # @!attribute [rw] configuration
@@ -1161,6 +1170,11 @@ module Aws::Deadline
     #   are both required, but tag values can be empty strings.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] host_configuration
+    #   Provides a script that runs as a worker is starting up that you can
+    #   use to provide additional configuration for workers in your fleet.
+    #   @return [Types::HostConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CreateFleetRequest AWS API Documentation
     #
     class CreateFleetRequest < Struct.new(
@@ -1172,7 +1186,8 @@ module Aws::Deadline
       :min_worker_count,
       :max_worker_count,
       :configuration,
-      :tags)
+      :tags,
+      :host_configuration)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -1751,13 +1766,19 @@ module Aws::Deadline
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Each tag consists of a tag key and a tag value. Tag keys and values
+    #   are both required, but tag values can be empty strings.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CreateWorkerRequest AWS API Documentation
     #
     class CreateWorkerRequest < Struct.new(
       :farm_id,
       :fleet_id,
       :host_properties,
-      :client_token)
+      :client_token,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1788,12 +1809,27 @@ module Aws::Deadline
     #   The storage profile ID.
     #   @return [String]
     #
+    # @!attribute [rw] tag_propagation_mode
+    #   Specifies whether tags associated with a fleet are attached to
+    #   workers when the worker is launched.
+    #
+    #   When the `tagPropagationMode` is set to
+    #   `PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH` any tag associated with a
+    #   fleet is attached to workers when they launch. If the tags for a
+    #   fleet change, the tags associated with running workers **do not**
+    #   change.
+    #
+    #   If you don't specify `tagPropagationMode`, the default is
+    #   `NO_PROPAGATION`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CustomerManagedFleetConfiguration AWS API Documentation
     #
     class CustomerManagedFleetConfiguration < Struct.new(
       :mode,
       :worker_capabilities,
-      :storage_profile_id)
+      :storage_profile_id,
+      :tag_propagation_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3034,7 +3070,7 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The Auto Scaling status of the fleet.
+    #   The status of the fleet.
     #   @return [String]
     #
     # @!attribute [rw] auto_scaling_status
@@ -3061,6 +3097,11 @@ module Aws::Deadline
     # @!attribute [rw] configuration
     #   The configuration setting for the fleet.
     #   @return [Types::FleetConfiguration]
+    #
+    # @!attribute [rw] host_configuration
+    #   The script that runs as a worker is starting up that you can use to
+    #   provide additional configuration for workers in your fleet.
+    #   @return [Types::HostConfiguration]
     #
     # @!attribute [rw] capabilities
     #   Outlines what the fleet is capable of for minimums, maximums, and
@@ -3101,6 +3142,7 @@ module Aws::Deadline
       :min_worker_count,
       :max_worker_count,
       :configuration,
+      :host_configuration,
       :capabilities,
       :role_arn,
       :created_at,
@@ -3229,6 +3271,11 @@ module Aws::Deadline
     #   The number of tasks running on the job.
     #   @return [Hash<String,Integer>]
     #
+    # @!attribute [rw] task_failure_retry_count
+    #   The total number of times tasks from the job failed and were
+    #   retried.
+    #   @return [Integer]
+    #
     # @!attribute [rw] storage_profile_id
     #   The storage profile ID associated with the job.
     #   @return [String]
@@ -3289,6 +3336,7 @@ module Aws::Deadline
       :task_run_status,
       :target_task_run_status,
       :task_run_status_counts,
+      :task_failure_retry_count,
       :storage_profile_id,
       :max_failed_tasks_count,
       :max_retries_per_task,
@@ -3940,6 +3988,11 @@ module Aws::Deadline
     #   limits were acquired during the session, this field isn't returned.
     #   @return [Array<Types::AcquiredLimit>]
     #
+    # @!attribute [rw] manifests
+    #   The list of manifest properties that describe file attachments for
+    #   the task run.
+    #   @return [Array<Types::TaskRunManifestPropertiesResponse>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/GetSessionActionResponse AWS API Documentation
     #
     class GetSessionActionResponse < Struct.new(
@@ -3953,7 +4006,8 @@ module Aws::Deadline
       :process_exit_code,
       :progress_message,
       :definition,
-      :acquired_limits)
+      :acquired_limits,
+      :manifests)
       SENSITIVE = [:progress_message]
       include Aws::Structure
     end
@@ -4176,6 +4230,11 @@ module Aws::Deadline
     #   The number of tasks running on the job.
     #   @return [Hash<String,Integer>]
     #
+    # @!attribute [rw] task_failure_retry_count
+    #   The total number of times tasks from the step failed and were
+    #   retried.
+    #   @return [Integer]
+    #
     # @!attribute [rw] target_task_run_status
     #   The task status with which the job started.
     #   @return [String]
@@ -4234,6 +4293,7 @@ module Aws::Deadline
       :lifecycle_status_message,
       :task_run_status,
       :task_run_status_counts,
+      :task_failure_retry_count,
       :target_task_run_status,
       :created_at,
       :created_by,
@@ -4545,6 +4605,59 @@ module Aws::Deadline
       :updated_at,
       :updated_by)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a script that runs as a worker is starting up that you can
+    # use to provide additional configuration for workers in your fleet.
+    #
+    # To remove a script from a fleet, use the [UpdateFleet][1] operation
+    # with the `hostConfiguration` `scriptBody` parameter set to an empty
+    # string ("").
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/deadline-cloud/latest/APIReference/API_UpdateFleet.html
+    #
+    # @!attribute [rw] script_body
+    #   The text of the script that runs as a worker is starting up that you
+    #   can use to provide additional configuration for workers in your
+    #   fleet. The script runs after a worker enters the `STARTING` state
+    #   and before the worker processes tasks.
+    #
+    #   For more information about using the script, see [Run scripts as an
+    #   administrator to configure workers][1] in the *Deadline Cloud
+    #   Developer Guide*.
+    #
+    #   The script runs as an administrative user (`sudo root` on Linux, as
+    #   an Administrator on Windows).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/deadline-cloud/latest/developerguide/smf-admin.html
+    #   @return [String]
+    #
+    # @!attribute [rw] script_timeout_seconds
+    #   The maximum time that the host configuration can run. If the timeout
+    #   expires, the worker enters the `NOT RESPONDING` state and shuts
+    #   down. You are charged for the time that the worker is running the
+    #   host configuration script.
+    #
+    #   <note markdown="1"> You should configure your fleet for a maximum of one worker while
+    #   testing your host configuration script to avoid starting additional
+    #   workers.
+    #
+    #    </note>
+    #
+    #   The default is 300 seconds (5 minutes).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/HostConfiguration AWS API Documentation
+    #
+    class HostConfiguration < Struct.new(
+      :script_body,
+      :script_timeout_seconds)
+      SENSITIVE = [:script_body]
       include Aws::Structure
     end
 
@@ -5041,6 +5154,11 @@ module Aws::Deadline
     #   The number of tasks running on the job.
     #   @return [Hash<String,Integer>]
     #
+    # @!attribute [rw] task_failure_retry_count
+    #   The total number of times tasks from the job failed and were
+    #   retried.
+    #   @return [Integer]
+    #
     # @!attribute [rw] priority
     #   The job priority.
     #   @return [Integer]
@@ -5101,6 +5219,7 @@ module Aws::Deadline
       :task_run_status,
       :target_task_run_status,
       :task_run_status_counts,
+      :task_failure_retry_count,
       :priority,
       :max_failed_tasks_count,
       :max_retries_per_task,
@@ -5193,6 +5312,11 @@ module Aws::Deadline
     #   The number of tasks running on the job.
     #   @return [Hash<String,Integer>]
     #
+    # @!attribute [rw] task_failure_retry_count
+    #   The total number of times tasks from the job failed and were
+    #   retried.
+    #   @return [Integer]
+    #
     # @!attribute [rw] max_failed_tasks_count
     #   The number of task failures before the job stops running and is
     #   marked as `FAILED`.
@@ -5235,6 +5359,7 @@ module Aws::Deadline
       :task_run_status,
       :target_task_run_status,
       :task_run_status_counts,
+      :task_failure_retry_count,
       :max_failed_tasks_count,
       :max_retries_per_task,
       :max_worker_count,
@@ -7914,11 +8039,16 @@ module Aws::Deadline
     #   The Amazon EC2 market type.
     #   @return [Types::ServiceManagedEc2InstanceMarketOptions]
     #
+    # @!attribute [rw] storage_profile_id
+    #   The storage profile ID.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ServiceManagedEc2FleetConfiguration AWS API Documentation
     #
     class ServiceManagedEc2FleetConfiguration < Struct.new(
       :instance_capabilities,
-      :instance_market_options)
+      :instance_market_options,
+      :storage_profile_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8155,6 +8285,11 @@ module Aws::Deadline
     #   The session action definition.
     #   @return [Types::SessionActionDefinitionSummary]
     #
+    # @!attribute [rw] manifests
+    #   The list of manifest properties that describe file attachments for
+    #   the task run.
+    #   @return [Array<Types::TaskRunManifestPropertiesResponse>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/SessionActionSummary AWS API Documentation
     #
     class SessionActionSummary < Struct.new(
@@ -8164,7 +8299,8 @@ module Aws::Deadline
       :ended_at,
       :worker_updated_at,
       :progress_percent,
-      :definition)
+      :definition,
+      :manifests)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8691,6 +8827,11 @@ module Aws::Deadline
     #   The number of tasks running on the job.
     #   @return [Hash<String,Integer>]
     #
+    # @!attribute [rw] task_failure_retry_count
+    #   The total number of times tasks from the step failed and were
+    #   retried.
+    #   @return [Integer]
+    #
     # @!attribute [rw] created_at
     #   The date and time the resource was created.
     #   @return [Time]
@@ -8719,6 +8860,7 @@ module Aws::Deadline
       :task_run_status,
       :target_task_run_status,
       :task_run_status_counts,
+      :task_failure_retry_count,
       :created_at,
       :started_at,
       :ended_at,
@@ -8773,6 +8915,11 @@ module Aws::Deadline
     #   The number of tasks running on the job.
     #   @return [Hash<String,Integer>]
     #
+    # @!attribute [rw] task_failure_retry_count
+    #   The total number of times tasks from the step failed and were
+    #   retried.
+    #   @return [Integer]
+    #
     # @!attribute [rw] target_task_run_status
     #   The task status to start with on the job.
     #   @return [String]
@@ -8814,6 +8961,7 @@ module Aws::Deadline
       :lifecycle_status_message,
       :task_run_status,
       :task_run_status_counts,
+      :task_failure_retry_count,
       :target_task_run_status,
       :created_at,
       :created_by,
@@ -8949,6 +9097,11 @@ module Aws::Deadline
     #   A file system path represented as a string.
     #   @return [String]
     #
+    # @!attribute [rw] chunk_int
+    #   A range (for example 1-10) or selection of specific (for example
+    #   1,3,7,8,10) integers represented as a string.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/TaskParameterValue AWS API Documentation
     #
     class TaskParameterValue < Struct.new(
@@ -8956,6 +9109,7 @@ module Aws::Deadline
       :float,
       :string,
       :path,
+      :chunk_int,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -8965,7 +9119,48 @@ module Aws::Deadline
       class Float < TaskParameterValue; end
       class String < TaskParameterValue; end
       class Path < TaskParameterValue; end
+      class ChunkInt < TaskParameterValue; end
       class Unknown < TaskParameterValue; end
+    end
+
+    # The output manifest properties reported by the worker agent for a
+    # completed task run.
+    #
+    # @!attribute [rw] output_manifest_path
+    #   The manifest file path.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_manifest_hash
+    #   The hash value of the file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/TaskRunManifestPropertiesRequest AWS API Documentation
+    #
+    class TaskRunManifestPropertiesRequest < Struct.new(
+      :output_manifest_path,
+      :output_manifest_hash)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The manifest properties for a task run, corresponding to the manifest
+    # properties in the job.
+    #
+    # @!attribute [rw] output_manifest_path
+    #   The manifest file path.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_manifest_hash
+    #   The hash value of the file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/TaskRunManifestPropertiesResponse AWS API Documentation
+    #
+    class TaskRunManifestPropertiesResponse < Struct.new(
+      :output_manifest_path,
+      :output_manifest_hash)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # The task, step, and parameters for the task run in the session action.
@@ -9002,12 +9197,17 @@ module Aws::Deadline
     #   The step ID.
     #   @return [String]
     #
+    # @!attribute [rw] parameters
+    #   The parameters of a task run in a session action.
+    #   @return [Hash<String,Types::TaskParameterValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/TaskRunSessionActionDefinitionSummary AWS API Documentation
     #
     class TaskRunSessionActionDefinitionSummary < Struct.new(
       :task_id,
-      :step_id)
-      SENSITIVE = []
+      :step_id,
+      :parameters)
+      SENSITIVE = [:parameters]
       include Aws::Structure
     end
 
@@ -9351,11 +9551,25 @@ module Aws::Deadline
     #
     # @!attribute [rw] max_worker_count
     #   The maximum number of workers in the fleet.
+    #
+    #   Deadline Cloud limits the number of workers to less than or equal to
+    #   the fleet's maximum worker count. The service maintains eventual
+    #   consistency for the worker count. If you make multiple rapid calls
+    #   to `CreateWorker` before the field updates, you might exceed your
+    #   fleet's maximum worker count. For example, if your `maxWorkerCount`
+    #   is 10 and you currently have 9 workers, making two quick
+    #   `CreateWorker` calls might successfully create 2 workers instead of
+    #   1, resulting in 11 total workers.
     #   @return [Integer]
     #
     # @!attribute [rw] configuration
     #   The fleet configuration to update.
     #   @return [Types::FleetConfiguration]
+    #
+    # @!attribute [rw] host_configuration
+    #   Provides a script that runs as a worker is starting up that you can
+    #   use to provide additional configuration for workers in your fleet.
+    #   @return [Types::HostConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdateFleetRequest AWS API Documentation
     #
@@ -9368,7 +9582,8 @@ module Aws::Deadline
       :role_arn,
       :min_worker_count,
       :max_worker_count,
-      :configuration)
+      :configuration,
+      :host_configuration)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -9985,10 +10200,16 @@ module Aws::Deadline
     #   The worker log to update.
     #   @return [Types::LogConfiguration]
     #
+    # @!attribute [rw] host_configuration
+    #   The script that runs as a worker is starting up that you can use to
+    #   provide additional configuration for workers in your fleet.
+    #   @return [Types::HostConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdateWorkerResponse AWS API Documentation
     #
     class UpdateWorkerResponse < Struct.new(
-      :log)
+      :log,
+      :host_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10079,6 +10300,11 @@ module Aws::Deadline
     #   The percentage completed.
     #   @return [Float]
     #
+    # @!attribute [rw] manifests
+    #   A list of output manifest properties reported by the worker agent,
+    #   with each entry corresponding to a manifest property in the job.
+    #   @return [Array<Types::TaskRunManifestPropertiesRequest>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdatedSessionActionInfo AWS API Documentation
     #
     class UpdatedSessionActionInfo < Struct.new(
@@ -10088,7 +10314,8 @@ module Aws::Deadline
       :started_at,
       :ended_at,
       :updated_at,
-      :progress_percent)
+      :progress_percent,
+      :manifests)
       SENSITIVE = [:progress_message]
       include Aws::Structure
     end

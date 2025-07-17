@@ -10,6 +10,28 @@
 module Aws::FSx
   module Types
 
+    # An access point with that name already exists in the Amazon Web
+    # Services Region in your Amazon Web Services account.
+    #
+    # @!attribute [rw] error_code
+    #   An error code indicating that an access point with that name already
+    #   exists in the Amazon Web Services Region in your Amazon Web Services
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/AccessPointAlreadyOwnedByYou AWS API Documentation
+    #
+    class AccessPointAlreadyOwnedByYou < Struct.new(
+      :error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Microsoft Active Directory attributes of the Amazon FSx for
     # Windows File Server file system.
     #
@@ -1091,6 +1113,116 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # Specifies the FSx for OpenZFS volume that the S3 access point will be
+    # attached to, and the file system user identity.
+    #
+    # @!attribute [rw] volume_id
+    #   The ID of the FSx for OpenZFS volume to which you want the S3 access
+    #   point attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_identity
+    #   Specifies the file system user identity to use for authorizing file
+    #   read and write requests that are made using this S3 access point.
+    #   @return [Types::OpenZFSFileSystemIdentity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateAndAttachS3AccessPointOpenZFSConfiguration AWS API Documentation
+    #
+    class CreateAndAttachS3AccessPointOpenZFSConfiguration < Struct.new(
+      :volume_id,
+      :file_system_identity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name you want to assign to this S3 access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of S3 access point you want to create. Only `OpenZFS` is
+    #   supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] open_zfs_configuration
+    #   Specifies the configuration to use when creating and attaching an S3
+    #   access point to an FSx for OpenZFS volume.
+    #   @return [Types::CreateAndAttachS3AccessPointOpenZFSConfiguration]
+    #
+    # @!attribute [rw] s3_access_point
+    #   Specifies the virtual private cloud (VPC) configuration if you're
+    #   creating an access point that is restricted to a VPC. For more
+    #   information, see [Creating access points restricted to a virtual
+    #   private cloud][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/access-points-vpc.html
+    #   @return [Types::CreateAndAttachS3AccessPointS3Configuration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateAndAttachS3AccessPointRequest AWS API Documentation
+    #
+    class CreateAndAttachS3AccessPointRequest < Struct.new(
+      :client_request_token,
+      :name,
+      :type,
+      :open_zfs_configuration,
+      :s3_access_point)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] s3_access_point_attachment
+    #   Describes the configuration of the S3 access point created.
+    #   @return [Types::S3AccessPointAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateAndAttachS3AccessPointResponse AWS API Documentation
+    #
+    class CreateAndAttachS3AccessPointResponse < Struct.new(
+      :s3_access_point_attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used to create an S3 access point that accepts requests only from a
+    # virtual private cloud (VPC) to restrict data access to a private
+    # network.
+    #
+    # @!attribute [rw] vpc_configuration
+    #   If included, Amazon S3 restricts access to this S3 access point to
+    #   requests made from the specified virtual private cloud (VPC).
+    #   @return [Types::S3AccessPointVpcConfiguration]
+    #
+    # @!attribute [rw] policy
+    #   Specifies an access policy to associate with the S3 access point
+    #   configuration. For more information, see [Configuring IAM policies
+    #   for using access points][1] in the Amazon Simple Storage Service
+    #   User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateAndAttachS3AccessPointS3Configuration AWS API Documentation
+    #
+    class CreateAndAttachS3AccessPointS3Configuration < Struct.new(
+      :vpc_configuration,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request object for the `CreateBackup` operation.
     #
     # @!attribute [rw] file_system_id
@@ -1382,20 +1514,11 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   A recurring weekly time, in the format `D:HH:MM`.
-    #
-    #   `D` is the day of the week, for which 1 represents Monday and 7
-    #   represents Sunday. For further details, see [the ISO-8601 spec as
-    #   described on Wikipedia][1].
-    #
-    #   `HH` is the zero-padded hour of the day (0-23), and `MM` is the
-    #   zero-padded minute of the hour.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone, where d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #
     #   For example, `1:05:00` specifies maintenance at 5 AM Monday.
-    #
-    #
-    #
-    #   [1]: https://en.wikipedia.org/wiki/ISO_week_date
     #   @return [String]
     #
     # @!attribute [rw] metadata_configuration
@@ -1597,8 +1720,9 @@ module Aws::FSx
     #   @return [Types::CreateFileSystemLustreConfiguration]
     #
     # @!attribute [rw] storage_type
-    #   Sets the storage type for the Windows or OpenZFS file system that
-    #   you're creating from a backup. Valid values are `SSD` and `HDD`.
+    #   Sets the storage type for the Windows, OpenZFS, or Lustre file
+    #   system that you're creating from a backup. Valid values are `SSD`,
+    #   `HDD`, and `INTELLIGENT_TIERING`.
     #
     #   * Set to `SSD` to use solid state drive storage. SSD is supported on
     #     all Windows and OpenZFS deployment types.
@@ -1606,6 +1730,12 @@ module Aws::FSx
     #   * Set to `HDD` to use hard disk drive storage. HDD is supported on
     #     `SINGLE_AZ_2` and `MULTI_AZ_1` FSx for Windows File Server file
     #     system deployment types.
+    #
+    #   * Set to `INTELLIGENT_TIERING` to use fully elastic,
+    #     intelligently-tiered storage. Intelligent-Tiering is only
+    #     available for OpenZFS file systems with the Multi-AZ deployment
+    #     type and for Lustre file systems with the Persistent\_2 deployment
+    #     type.
     #
     #   The default value is `SSD`.
     #
@@ -1800,14 +1930,14 @@ module Aws::FSx
     #
     #   Choose `PERSISTENT_2` for longer-term storage and for
     #   latency-sensitive workloads that require the highest levels of
-    #   IOPS/throughput. `PERSISTENT_2` supports SSD storage, and offers
-    #   higher `PerUnitStorageThroughput` (up to 1000 MB/s/TiB). You can
-    #   optionally specify a metadata configuration mode for `PERSISTENT_2`
-    #   which supports increasing metadata performance. `PERSISTENT_2` is
-    #   available in a limited number of Amazon Web Services Regions. For
-    #   more information, and an up-to-date list of Amazon Web Services
-    #   Regions in which `PERSISTENT_2` is available, see [File system
-    #   deployment options for FSx for Lustre][1] in the *Amazon FSx for
+    #   IOPS/throughput. `PERSISTENT_2` supports the SSD and
+    #   Intelligent-Tiering storage classes. You can optionally specify a
+    #   metadata configuration mode for `PERSISTENT_2` which supports
+    #   increasing metadata performance. `PERSISTENT_2` is available in a
+    #   limited number of Amazon Web Services Regions. For more information,
+    #   and an up-to-date list of Amazon Web Services Regions in which
+    #   `PERSISTENT_2` is available, see [Deployment and storage class
+    #   options for FSx for Lustre file systems][1] in the *Amazon FSx for
     #   Lustre User Guide*.
     #
     #   <note markdown="1"> If you choose `PERSISTENT_2`, and you set `FileSystemTypeVersion` to
@@ -1827,7 +1957,7 @@ module Aws::FSx
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-fsx-lustre.html#lustre-deployment-types
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-fsx-lustre.html
     #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html
     #   @return [String]
     #
@@ -1871,14 +2001,15 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] per_unit_storage_throughput
-    #   Required with `PERSISTENT_1` and `PERSISTENT_2` deployment types,
-    #   provisions the amount of read and write throughput for each 1
-    #   tebibyte (TiB) of file system storage capacity, in MB/s/TiB. File
-    #   system throughput capacity is calculated by multiplying ﬁle system
-    #   storage capacity (TiB) by the `PerUnitStorageThroughput` (MB/s/TiB).
-    #   For a 2.4-TiB ﬁle system, provisioning 50 MB/s/TiB of
-    #   `PerUnitStorageThroughput` yields 120 MB/s of ﬁle system throughput.
-    #   You pay for the amount of throughput that you provision.
+    #   Required with `PERSISTENT_1` and `PERSISTENT_2` deployment types
+    #   using an SSD or HDD storage class, provisions the amount of read and
+    #   write throughput for each 1 tebibyte (TiB) of file system storage
+    #   capacity, in MB/s/TiB. File system throughput capacity is calculated
+    #   by multiplying ﬁle system storage capacity (TiB) by the
+    #   `PerUnitStorageThroughput` (MB/s/TiB). For a 2.4-TiB ﬁle system,
+    #   provisioning 50 MB/s/TiB of `PerUnitStorageThroughput` yields 120
+    #   MB/s of ﬁle system throughput. You pay for the amount of throughput
+    #   that you provision.
     #
     #   Valid values:
     #
@@ -1977,6 +2108,19 @@ module Aws::FSx
     #   FSx for Lustre file system using a `PERSISTENT_2` deployment type.
     #   @return [Types::CreateFileSystemLustreMetadataConfiguration]
     #
+    # @!attribute [rw] throughput_capacity
+    #   Specifies the throughput of an FSx for Lustre file system using the
+    #   Intelligent-Tiering storage class, measured in megabytes per second
+    #   (MBps). Valid values are 4000 MBps or multiples of 4000 MBps. You
+    #   pay for the amount of throughput that you provision.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_read_cache_configuration
+    #   Specifies the optional provisioned SSD read cache on FSx for Lustre
+    #   file systems that use the Intelligent-Tiering storage class.
+    #   Required when `StorageType` is set to `INTELLIGENT_TIERING`.
+    #   @return [Types::LustreReadCacheConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemLustreConfiguration AWS API Documentation
     #
     class CreateFileSystemLustreConfiguration < Struct.new(
@@ -1995,7 +2139,9 @@ module Aws::FSx
       :efa_enabled,
       :log_configuration,
       :root_squash_configuration,
-      :metadata_configuration)
+      :metadata_configuration,
+      :throughput_capacity,
+      :data_read_cache_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2017,11 +2163,15 @@ module Aws::FSx
     # @!attribute [rw] iops
     #   (USER\_PROVISIONED mode only) Specifies the number of Metadata IOPS
     #   to provision for the file system. This parameter sets the maximum
-    #   rate of metadata disk IOPS supported by the file system. Valid
-    #   values are `1500`, `3000`, `6000`, `12000`, and multiples of `12000`
-    #   up to a maximum of `192000`.
+    #   rate of metadata disk IOPS supported by the file system.
     #
-    #   <note markdown="1"> Iops doesn’t have a default value. If you're using
+    #   * For SSD file systems, valid values are `1500`, `3000`, `6000`,
+    #     `12000`, and multiples of `12000` up to a maximum of `192000`.
+    #
+    #   * For Intelligent-Tiering file systems, valid values are `6000` and
+    #     `12000`.
+    #
+    #   <note markdown="1"> `Iops` doesn’t have a default value. If you're using
     #   USER\_PROVISIONED mode, you can choose to specify a valid value. If
     #   you're using AUTOMATIC mode, you cannot specify a value because FSx
     #   for Lustre automatically sets the value based on your file system
@@ -2035,9 +2185,10 @@ module Aws::FSx
     #   an FSx for Lustre file system using a `PERSISTENT_2` deployment
     #   type.
     #
-    #   * In AUTOMATIC mode, FSx for Lustre automatically provisions and
-    #     scales the number of Metadata IOPS for your file system based on
-    #     your file system storage capacity.
+    #   * In AUTOMATIC mode (supported only on SSD file systems), FSx for
+    #     Lustre automatically provisions and scales the number of Metadata
+    #     IOPS for your file system based on your file system storage
+    #     capacity.
     #
     #   * In USER\_PROVISIONED mode, you specify the number of Metadata IOPS
     #     to provision for your file system.
@@ -2160,20 +2311,11 @@ module Aws::FSx
     #   @return [Integer]
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   A recurring weekly time, in the format `D:HH:MM`.
-    #
-    #   `D` is the day of the week, for which 1 represents Monday and 7
-    #   represents Sunday. For further details, see [the ISO-8601 spec as
-    #   described on Wikipedia][1].
-    #
-    #   `HH` is the zero-padded hour of the day (0-23), and `MM` is the
-    #   zero-padded minute of the hour.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone, where d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #
     #   For example, `1:05:00` specifies maintenance at 5 AM Monday.
-    #
-    #
-    #
-    #   [1]: https://en.wikipedia.org/wiki/ISO_week_date
     #   @return [String]
     #
     # @!attribute [rw] ha_pairs
@@ -2331,7 +2473,7 @@ module Aws::FSx
     # @!attribute [rw] throughput_capacity
     #   Specifies the throughput of an Amazon FSx for OpenZFS file system,
     #   measured in megabytes per second (MBps). Valid values depend on the
-    #   DeploymentType you choose, as follows:
+    #   `DeploymentType` that you choose, as follows:
     #
     #   * For `MULTI_AZ_1` and `SINGLE_AZ_2`, valid values are 160, 320,
     #     640, 1280, 2560, 3840, 5120, 7680, or 10240 MBps.
@@ -2343,20 +2485,11 @@ module Aws::FSx
     #   @return [Integer]
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   A recurring weekly time, in the format `D:HH:MM`.
-    #
-    #   `D` is the day of the week, for which 1 represents Monday and 7
-    #   represents Sunday. For further details, see [the ISO-8601 spec as
-    #   described on Wikipedia][1].
-    #
-    #   `HH` is the zero-padded hour of the day (0-23), and `MM` is the
-    #   zero-padded minute of the hour.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone, where d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #
     #   For example, `1:05:00` specifies maintenance at 5 AM Monday.
-    #
-    #
-    #
-    #   [1]: https://en.wikipedia.org/wiki/ISO_week_date
     #   @return [String]
     #
     # @!attribute [rw] disk_iops_configuration
@@ -2387,7 +2520,8 @@ module Aws::FSx
     #   the Amazon FSx API and Amazon FSx console, Amazon FSx selects an
     #   available /28 IP address range for you from one of the VPC's CIDR
     #   ranges. You can have overlapping endpoint IP addresses for file
-    #   systems deployed in the same VPC/route tables.
+    #   systems deployed in the same VPC/route tables, as long as they
+    #   don't overlap with any subnet.
     #   @return [String]
     #
     # @!attribute [rw] route_table_ids
@@ -2483,25 +2617,26 @@ module Aws::FSx
     #   * Set to `SSD` to use solid state drive storage. SSD is supported on
     #     all Windows, Lustre, ONTAP, and OpenZFS deployment types.
     #
-    #   * Set to `HDD` to use hard disk drive storage. HDD is supported on
+    #   * Set to `HDD` to use hard disk drive storage, which is supported on
     #     `SINGLE_AZ_2` and `MULTI_AZ_1` Windows file system deployment
     #     types, and on `PERSISTENT_1` Lustre file system deployment types.
     #
     #   * Set to `INTELLIGENT_TIERING` to use fully elastic,
     #     intelligently-tiered storage. Intelligent-Tiering is only
     #     available for OpenZFS file systems with the Multi-AZ deployment
+    #     type and for Lustre file systems with the Persistent\_2 deployment
     #     type.
     #
     #   Default value is `SSD`. For more information, see [ Storage type
-    #   options][1] in the *FSx for Windows File Server User Guide*,
-    #   [Multiple storage options][2] in the *FSx for Lustre User Guide*,
+    #   options][1] in the *FSx for Windows File Server User Guide*, [FSx
+    #   for Lustre storage classes][2] in the *FSx for Lustre User Guide*,
     #   and [Working with Intelligent-Tiering][3] in the *Amazon FSx for
     #   OpenZFS User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options
-    #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/what-is.html#storage-options
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-fsx-lustre.html#lustre-storage-classes
     #   [3]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance-intelligent-tiering
     #   @return [String]
     #
@@ -3145,12 +3280,13 @@ module Aws::FSx
     #
     # @!attribute [rw] copy_tags_to_snapshots
     #   A Boolean value indicating whether tags for the volume should be
-    #   copied to snapshots. This value defaults to `false`. If it's set to
-    #   `true`, all tags for the volume are copied to snapshots where the
-    #   user doesn't specify tags. If this value is `true`, and you specify
-    #   one or more tags, only the specified tags are copied to snapshots.
-    #   If you specify one or more tags when creating the snapshot, no tags
-    #   are copied from the volume, regardless of this value.
+    #   copied to snapshots. This value defaults to `false`. If this value
+    #   is set to `true`, and you do not specify any tags, all tags for the
+    #   original volume are copied over to snapshots. If this value is set
+    #   to `true`, and you do specify one or more tags, only the specified
+    #   tags for the original volume are copied over to snapshots. If you
+    #   specify one or more tags when creating a new snapshot, no tags are
+    #   copied over from the original volume, regardless of this value.
     #   @return [Boolean]
     #
     # @!attribute [rw] origin_snapshot
@@ -3566,7 +3702,7 @@ module Aws::FSx
     #
     # Data repository associations are supported on Amazon File Cache
     # resources and all FSx for Lustre 2.12 and 2.15 file systems, excluding
-    # `scratch_1` deployment type.
+    # Intelligent-Tiering and `scratch_1` file systems.
     #
     # @!attribute [rw] association_id
     #   The system-generated, unique ID of the data repository association.
@@ -5130,6 +5266,60 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # @!attribute [rw] names
+    #   The names of the S3 access point attachments whose descriptions you
+    #   want to retrieve.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   Enter a filter Name and Values pair to view a select set of S3
+    #   access point attachments.
+    #   @return [Array<Types::S3AccessPointAttachmentsFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of resources to return in the response. This
+    #   value must be an integer greater than zero.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeS3AccessPointAttachmentsRequest AWS API Documentation
+    #
+    class DescribeS3AccessPointAttachmentsRequest < Struct.new(
+      :names,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] s3_access_point_attachments
+    #   Array of S3 access point attachments returned after a successful
+    #   `DescribeS3AccessPointAttachments` operation.
+    #   @return [Array<Types::S3AccessPointAttachment>]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeS3AccessPointAttachmentsResponse AWS API Documentation
+    #
+    class DescribeS3AccessPointAttachmentsResponse < Struct.new(
+      :s3_access_point_attachments,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeSharedVpcConfigurationRequest AWS API Documentation
@@ -5312,6 +5502,46 @@ module Aws::FSx
     class DescribeVolumesResponse < Struct.new(
       :volumes,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the S3 access point attachment that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DetachAndDeleteS3AccessPointRequest AWS API Documentation
+    #
+    class DetachAndDeleteS3AccessPointRequest < Struct.new(
+      :client_request_token,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lifecycle
+    #   The lifecycle status of the S3 access point attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the S3 access point attachment being deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DetachAndDeleteS3AccessPointResponse AWS API Documentation
+    #
+    class DetachAndDeleteS3AccessPointResponse < Struct.new(
+      :lifecycle,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5823,20 +6053,11 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   A recurring weekly time, in the format `D:HH:MM`.
-    #
-    #   `D` is the day of the week, for which 1 represents Monday and 7
-    #   represents Sunday. For further details, see [the ISO-8601 spec as
-    #   described on Wikipedia][1].
-    #
-    #   `HH` is the zero-padded hour of the day (0-23), and `MM` is the
-    #   zero-padded minute of the hour.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone, where d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #
     #   For example, `1:05:00` specifies maintenance at 5 AM Monday.
-    #
-    #
-    #
-    #   [1]: https://en.wikipedia.org/wiki/ISO_week_date
     #   @return [String]
     #
     # @!attribute [rw] metadata_configuration
@@ -5980,9 +6201,14 @@ module Aws::FSx
     #   @return [Integer]
     #
     # @!attribute [rw] storage_type
-    #   The type of storage the file system is using. If set to `SSD`, the
-    #   file system uses solid state drive storage. If set to `HDD`, the
-    #   file system uses hard disk drive storage.
+    #   The type of storage the file system is using.
+    #
+    #   * If set to `SSD`, the file system uses solid state drive storage.
+    #
+    #   * If set to `HDD`, the file system uses hard disk drive storage.
+    #
+    #   * If set to `INTELLIGENT_TIERING`, the file system uses fully
+    #     elastic, intelligently-tiered storage.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -6179,18 +6405,23 @@ module Aws::FSx
     # performance.
     #
     # @!attribute [rw] iops
-    #   The number of Metadata IOPS provisioned for the file system. Valid
-    #   values are `1500`, `3000`, `6000`, `12000`, and multiples of `12000`
-    #   up to a maximum of `192000`.
+    #   The number of Metadata IOPS provisioned for the file system.
+    #
+    #   * For SSD file systems, valid values are `1500`, `3000`, `6000`,
+    #     `12000`, and multiples of `12000` up to a maximum of `192000`.
+    #
+    #   * For Intelligent-Tiering file systems, valid values are `6000` and
+    #     `12000`.
     #   @return [Integer]
     #
     # @!attribute [rw] mode
     #   The metadata configuration mode for provisioning Metadata IOPS for
     #   the file system.
     #
-    #   * In AUTOMATIC mode, FSx for Lustre automatically provisions and
-    #     scales the number of Metadata IOPS on your file system based on
-    #     your file system storage capacity.
+    #   * In AUTOMATIC mode (supported only on SSD file systems), FSx for
+    #     Lustre automatically provisions and scales the number of Metadata
+    #     IOPS on your file system based on your file system storage
+    #     capacity.
     #
     #   * In USER\_PROVISIONED mode, you can choose to specify the number of
     #     Metadata IOPS to provision for your file system.
@@ -6286,6 +6517,26 @@ module Aws::FSx
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InternalServerError AWS API Documentation
     #
     class InternalServerError < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The access point specified doesn't exist.
+    #
+    # @!attribute [rw] error_code
+    #   An error code indicating that the access point specified doesn't
+    #   exist.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidAccessPoint AWS API Documentation
+    #
+    class InvalidAccessPoint < Struct.new(
+      :error_code,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -6411,6 +6662,27 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # The action or operation requested is invalid. Verify that the action
+    # is typed correctly.
+    #
+    # @!attribute [rw] error_code
+    #   An error code indicating that the action or operation requested is
+    #   invalid.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidRequest AWS API Documentation
+    #
+    class InvalidRequest < Struct.new(
+      :error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Key Management Service (KMS) key of the source backup is not
     # valid.
     #
@@ -6523,13 +6795,14 @@ module Aws::FSx
     #   `PERSISTENT_2` offers higher `PerUnitStorageThroughput` (up to 1000
     #   MB/s/TiB) along with a lower minimum storage capacity requirement
     #   (600 GiB). To learn more about FSx for Lustre deployment types, see
-    #   [ FSx for Lustre deployment options][1].
+    #   [Deployment and storage class options for FSx for Lustre file
+    #   systems][1].
     #
     #   The default is `SCRATCH_1`.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-fsx-lustre.html
     #   @return [String]
     #
     # @!attribute [rw] per_unit_storage_throughput
@@ -6627,6 +6900,17 @@ module Aws::FSx
     #   (GDS) support is enabled for the Amazon FSx for Lustre file system.
     #   @return [Boolean]
     #
+    # @!attribute [rw] throughput_capacity
+    #   The throughput of an Amazon FSx for Lustre file system using the
+    #   Intelligent-Tiering storage class, measured in megabytes per second
+    #   (MBps).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_read_cache_configuration
+    #   Required when `StorageType` is set to `INTELLIGENT_TIERING`.
+    #   Specifies the optional provisioned SSD read cache.
+    #   @return [Types::LustreReadCacheConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/LustreFileSystemConfiguration AWS API Documentation
     #
     class LustreFileSystemConfiguration < Struct.new(
@@ -6643,7 +6927,9 @@ module Aws::FSx
       :log_configuration,
       :root_squash_configuration,
       :metadata_configuration,
-      :efa_enabled)
+      :efa_enabled,
+      :throughput_capacity,
+      :data_read_cache_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6735,6 +7021,42 @@ module Aws::FSx
     class LustreLogCreateConfiguration < Struct.new(
       :level,
       :destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the optional provisioned SSD read cache on
+    # Amazon FSx for Lustre file systems that use the Intelligent-Tiering
+    # storage class.
+    #
+    # @!attribute [rw] sizing_mode
+    #   Specifies how the provisioned SSD read cache is sized, as follows:
+    #
+    #   * Set to `NO_CACHE` if you do not want to use an SSD read cache with
+    #     your Intelligent-Tiering file system.
+    #
+    #   * Set to `USER_PROVISIONED` to specify the exact size of your SSD
+    #     read cache.
+    #
+    #   * Set to `PROPORTIONAL_TO_THROUGHPUT_CAPACITY` to have your SSD read
+    #     cache automatically sized based on your throughput capacity.
+    #   @return [String]
+    #
+    # @!attribute [rw] size_gi_b
+    #   Required if `SizingMode` is set to `USER_PROVISIONED`. Specifies the
+    #   size of the file system's SSD read cache, in gibibytes (GiB).
+    #
+    #   The SSD read cache size is distributed across provisioned file
+    #   servers in your file system. Intelligent-Tiering file systems
+    #   support a minimum of 32 GiB and maximum of 131072 GiB for SSD read
+    #   cache size for every 4,000 MB/s of throughput capacity provisioned.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/LustreReadCacheConfiguration AWS API Documentation
+    #
+    class LustreReadCacheConfiguration < Struct.new(
+      :sizing_mode,
+      :size_gi_b)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6974,20 +7296,11 @@ module Aws::FSx
     #   @return [Integer]
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   A recurring weekly time, in the format `D:HH:MM`.
-    #
-    #   `D` is the day of the week, for which 1 represents Monday and 7
-    #   represents Sunday. For further details, see [the ISO-8601 spec as
-    #   described on Wikipedia][1].
-    #
-    #   `HH` is the zero-padded hour of the day (0-23), and `MM` is the
-    #   zero-padded minute of the hour.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone, where d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #
     #   For example, `1:05:00` specifies maintenance at 5 AM Monday.
-    #
-    #
-    #
-    #   [1]: https://en.wikipedia.org/wiki/ISO_week_date
     #   @return [String]
     #
     # @!attribute [rw] fsx_admin_password
@@ -7390,20 +7703,11 @@ module Aws::FSx
     #   @return [Integer]
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   A recurring weekly time, in the format `D:HH:MM`.
-    #
-    #   `D` is the day of the week, for which 1 represents Monday and 7
-    #   represents Sunday. For further details, see [the ISO-8601 spec as
-    #   described on Wikipedia][1].
-    #
-    #   `HH` is the zero-padded hour of the day (0-23), and `MM` is the
-    #   zero-padded minute of the hour.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone, where d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #
     #   For example, `1:05:00` specifies maintenance at 5 AM Monday.
-    #
-    #
-    #
-    #   [1]: https://en.wikipedia.org/wiki/ISO_week_date
     #   @return [String]
     #
     # @!attribute [rw] disk_iops_configuration
@@ -7471,6 +7775,28 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # Specifies the file system user identity that will be used for
+    # authorizing all file access requests that are made using the S3 access
+    # point.
+    #
+    # @!attribute [rw] type
+    #   Specifies the FSx for OpenZFS user identity type, accepts only
+    #   `POSIX`.
+    #   @return [String]
+    #
+    # @!attribute [rw] posix_user
+    #   Specifies the UID and GIDs of the file system POSIX user.
+    #   @return [Types::OpenZFSPosixFileSystemUser]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OpenZFSFileSystemIdentity AWS API Documentation
+    #
+    class OpenZFSFileSystemIdentity < Struct.new(
+      :type,
+      :posix_user)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Network File System (NFS) configurations for mounting an Amazon
     # FSx for OpenZFS file system.
     #
@@ -7534,8 +7860,34 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The configuration for the optional provisioned SSD read cache on file
-    # systems that use the Intelligent-Tiering storage class.
+    # The FSx for OpenZFS file system user that is used for authorizing all
+    # file access requests that are made using the S3 access point.
+    #
+    # @!attribute [rw] uid
+    #   The UID of the file system user.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gid
+    #   The GID of the file system user.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] secondary_gids
+    #   The list of secondary GIDs for the file system user.
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OpenZFSPosixFileSystemUser AWS API Documentation
+    #
+    class OpenZFSPosixFileSystemUser < Struct.new(
+      :uid,
+      :gid,
+      :secondary_gids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the optional provisioned SSD read cache on
+    # Amazon FSx for OpenZFS file systems that use the Intelligent-Tiering
+    # storage class.
     #
     # @!attribute [rw] sizing_mode
     #   Specifies how the provisioned SSD read cache is sized, as follows:
@@ -7987,6 +8339,165 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # Describes the S3 access point configuration of the S3 access point
+    # attachment.
+    #
+    # @!attribute [rw] resource_arn
+    #   he S3 access point's ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   The S3 access point's alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   The S3 access point's virtual private cloud (VPC) configuration.
+    #   @return [Types::S3AccessPointVpcConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/S3AccessPoint AWS API Documentation
+    #
+    class S3AccessPoint < Struct.new(
+      :resource_arn,
+      :alias,
+      :vpc_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An S3 access point attached to an Amazon FSx volume.
+    #
+    # @!attribute [rw] lifecycle
+    #   The lifecycle status of the S3 access point attachment. The
+    #   lifecycle can have the following values:
+    #
+    #   * AVAILABLE - the S3 access point attachment is available for use
+    #
+    #   * CREATING - Amazon FSx is creating the S3 access point and
+    #     attachment
+    #
+    #   * DELETING - Amazon FSx is deleting the S3 access point and
+    #     attachment
+    #
+    #   * FAILED - The S3 access point attachment is in a failed state.
+    #     Delete and detach the S3 access point attachment, and create a new
+    #     one.
+    #
+    #   * UPDATING - Amazon FSx is updating the S3 access point attachment
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_transition_reason
+    #   Describes why a resource lifecycle state changed.
+    #   @return [Types::LifecycleTransitionReason]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that the resource was created, in seconds (since
+    #   1970-01-01T00:00:00Z), also known as Unix time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the S3 access point attachment; also used for the name
+    #   of the S3 access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of Amazon FSx volume that the S3 access point is attached
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] open_zfs_configuration
+    #   The OpenZFSConfiguration of the S3 access point attachment.
+    #   @return [Types::S3AccessPointOpenZFSConfiguration]
+    #
+    # @!attribute [rw] s3_access_point
+    #   The S3 access point configuration of the S3 access point attachment.
+    #   @return [Types::S3AccessPoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/S3AccessPointAttachment AWS API Documentation
+    #
+    class S3AccessPointAttachment < Struct.new(
+      :lifecycle,
+      :lifecycle_transition_reason,
+      :creation_time,
+      :name,
+      :type,
+      :open_zfs_configuration,
+      :s3_access_point)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The access point specified was not found.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/S3AccessPointAttachmentNotFound AWS API Documentation
+    #
+    class S3AccessPointAttachmentNotFound < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A set of Name and Values pairs used to view a select set of S3 access
+    # point attachments.
+    #
+    # @!attribute [rw] name
+    #   The name of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of the filter.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/S3AccessPointAttachmentsFilter AWS API Documentation
+    #
+    class S3AccessPointAttachmentsFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the FSx for OpenZFS attachment configuration of an S3 access
+    # point attachment.
+    #
+    # @!attribute [rw] volume_id
+    #   The ID of the FSx for OpenZFS volume that the S3 access point is
+    #   attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_identity
+    #   The file system identity used to authorize file access requests made
+    #   using the S3 access point.
+    #   @return [Types::OpenZFSFileSystemIdentity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/S3AccessPointOpenZFSConfiguration AWS API Documentation
+    #
+    class S3AccessPointOpenZFSConfiguration < Struct.new(
+      :volume_id,
+      :file_system_identity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # If included, Amazon S3 restricts access to this access point to
+    # requests from the specified virtual private cloud (VPC).
+    #
+    # @!attribute [rw] vpc_id
+    #   Specifies the virtual private cloud (VPC) for the S3 access point
+    #   VPC configuration, if one exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/S3AccessPointVpcConfiguration AWS API Documentation
+    #
+    class S3AccessPointVpcConfiguration < Struct.new(
+      :vpc_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for an Amazon S3 data repository linked to an Amazon
     # FSx for Lustre file system with a data repository association. The
     # configuration consists of an `AutoImportPolicy` that defines which
@@ -8194,8 +8705,8 @@ module Aws::FSx
     end
 
     # An error indicating that a particular service limit was exceeded. You
-    # can increase some service limits by contacting Amazon Web Services
-    # Support.
+    # can increase some service limits by contacting Amazon Web
+    # ServicesSupport.
     #
     # @!attribute [rw] limit
     #   Enumeration of the service limit that was exceeded.
@@ -8841,6 +9352,35 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # You have reached the maximum number of S3 access points attachments
+    # allowed for your account in this Amazon Web Services Region, or for
+    # the file system. For more information, or to request an increase, see
+    # [Service quotas on FSx resources][1] in the FSx for OpenZFS User
+    # Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/limits.html
+    #
+    # @!attribute [rw] error_code
+    #   An error code indicating that you have reached the maximum number of
+    #   S3 access points attachments allowed for your account in this Amazon
+    #   Web Services Region, or for the file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/TooManyAccessPoints AWS API Documentation
+    #
+    class TooManyAccessPoints < Struct.new(
+      :error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The requested operation is not supported for this resource or API.
     #
     # @!attribute [rw] message
@@ -8943,20 +9483,11 @@ module Aws::FSx
     # The configuration update for an Amazon File Cache resource.
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   A recurring weekly time, in the format `D:HH:MM`.
-    #
-    #   `D` is the day of the week, for which 1 represents Monday and 7
-    #   represents Sunday. For further details, see [the ISO-8601 spec as
-    #   described on Wikipedia][1].
-    #
-    #   `HH` is the zero-padded hour of the day (0-23), and `MM` is the
-    #   zero-padded minute of the hour.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone, where d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #
     #   For example, `1:05:00` specifies maintenance at 5 AM Monday.
-    #
-    #
-    #
-    #   [1]: https://en.wikipedia.org/wiki/ISO_week_date
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileCacheLustreConfiguration AWS API Documentation
@@ -9116,6 +9647,18 @@ module Aws::FSx
     #   metadata performance.
     #   @return [Types::UpdateFileSystemLustreMetadataConfiguration]
     #
+    # @!attribute [rw] throughput_capacity
+    #   The throughput of an Amazon FSx for Lustre file system using an
+    #   Intelligent-Tiering storage class, measured in megabytes per second
+    #   (MBps). You can only increase your file system's throughput. Valid
+    #   values are 4000 MBps or multiples of 4000 MBps.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_read_cache_configuration
+    #   Specifies the optional provisioned SSD read cache on Amazon FSx for
+    #   Lustre file systems that use the Intelligent-Tiering storage class.
+    #   @return [Types::LustreReadCacheConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemLustreConfiguration AWS API Documentation
     #
     class UpdateFileSystemLustreConfiguration < Struct.new(
@@ -9127,7 +9670,9 @@ module Aws::FSx
       :log_configuration,
       :root_squash_configuration,
       :per_unit_storage_throughput,
-      :metadata_configuration)
+      :metadata_configuration,
+      :throughput_capacity,
+      :data_read_cache_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9145,9 +9690,13 @@ module Aws::FSx
     #
     # @!attribute [rw] iops
     #   (USER\_PROVISIONED mode only) Specifies the number of Metadata IOPS
-    #   to provision for your file system. Valid values are `1500`, `3000`,
-    #   `6000`, `12000`, and multiples of `12000` up to a maximum of
-    #   `192000`.
+    #   to provision for your file system.
+    #
+    #   * For SSD file systems, valid values are `1500`, `3000`, `6000`,
+    #     `12000`, and multiples of `12000` up to a maximum of `192000`.
+    #
+    #   * For Intelligent-Tiering file systems, valid values are `6000` and
+    #     `12000`.
     #
     #   The value you provide must be greater than or equal to the current
     #   number of Metadata IOPS provisioned for the file system.
@@ -9158,19 +9707,24 @@ module Aws::FSx
     #   an FSx for Lustre file system using a `PERSISTENT_2` deployment
     #   type.
     #
-    #   * To increase the Metadata IOPS or to switch from AUTOMATIC mode,
-    #     specify `USER_PROVISIONED` as the value for this parameter. Then
-    #     use the Iops parameter to provide a Metadata IOPS value that is
-    #     greater than or equal to the current number of Metadata IOPS
-    #     provisioned for the file system.
+    #   * To increase the Metadata IOPS or to switch an SSD file system from
+    #     AUTOMATIC, specify `USER_PROVISIONED` as the value for this
+    #     parameter. Then use the Iops parameter to provide a Metadata IOPS
+    #     value that is greater than or equal to the current number of
+    #     Metadata IOPS provisioned for the file system.
     #
-    #   * To switch from USER\_PROVISIONED mode, specify `AUTOMATIC` as the
-    #     value for this parameter, but do not input a value for Iops.
+    #   * To switch from USER\_PROVISIONED mode on an SSD file system,
+    #     specify `AUTOMATIC` as the value for this parameter, but do not
+    #     input a value for Iops.
     #
-    #     <note markdown="1"> If you request to switch from USER\_PROVISIONED to AUTOMATIC mode
-    #     and the current Metadata IOPS value is greater than the automated
-    #     default, FSx for Lustre rejects the request because downscaling
-    #     Metadata IOPS is not supported.
+    #     <note markdown="1"> * If you request to switch from USER\_PROVISIONED to AUTOMATIC
+    #       mode and the current Metadata IOPS value is greater than the
+    #       automated default, FSx for Lustre rejects the request because
+    #       downscaling Metadata IOPS is not supported.
+    #
+    #     * AUTOMATIC mode is not supported on Intelligent-Tiering file
+    #       systems. For Intelligent-Tiering file systems, use
+    #       USER\_PROVISIONED mode.
     #
     #      </note>
     #   @return [String]
@@ -9211,20 +9765,11 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   A recurring weekly time, in the format `D:HH:MM`.
-    #
-    #   `D` is the day of the week, for which 1 represents Monday and 7
-    #   represents Sunday. For further details, see [the ISO-8601 spec as
-    #   described on Wikipedia][1].
-    #
-    #   `HH` is the zero-padded hour of the day (0-23), and `MM` is the
-    #   zero-padded minute of the hour.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone, where d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #
     #   For example, `1:05:00` specifies maintenance at 5 AM Monday.
-    #
-    #
-    #
-    #   [1]: https://en.wikipedia.org/wiki/ISO_week_date
     #   @return [String]
     #
     # @!attribute [rw] disk_iops_configuration
@@ -9388,20 +9933,11 @@ module Aws::FSx
     #   @return [Integer]
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   A recurring weekly time, in the format `D:HH:MM`.
-    #
-    #   `D` is the day of the week, for which 1 represents Monday and 7
-    #   represents Sunday. For further details, see [the ISO-8601 spec as
-    #   described on Wikipedia][1].
-    #
-    #   `HH` is the zero-padded hour of the day (0-23), and `MM` is the
-    #   zero-padded minute of the hour.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone, where d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #
     #   For example, `1:05:00` specifies maintenance at 5 AM Monday.
-    #
-    #
-    #
-    #   [1]: https://en.wikipedia.org/wiki/ISO_week_date
     #   @return [String]
     #
     # @!attribute [rw] disk_iops_configuration

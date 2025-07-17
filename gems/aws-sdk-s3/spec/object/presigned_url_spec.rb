@@ -70,7 +70,7 @@ module Aws
           now = Time.parse('20130524T000000Z')
           allow(Time).to receive(:now).and_return(now)
           url = obj.presigned_url(:get, expires_in: 86_400)
-          expect(CGI.parse(url)).to eq(CGI.parse(
+          expect(URI.decode_www_form(url)).to eq(URI.decode_www_form(
             'https://examplebucket.s3.amazonaws.com/test.txt?X-Amz-Algorithm='\
             'AWS4-HMAC-SHA256&X-Amz-Credential=ACCESS_KEY_ID%2F20130524%2F'\
             'us-east-1%2Fs3%2Faws4_request&X-Amz-Date=20130524T000000Z&'\
@@ -159,7 +159,7 @@ module Aws
           allow(Time).to receive(:now).and_return(now)
           url, headers = obj.presigned_request(
             :get, expires_in: 86_400, request_payer: 'peccy')
-          expect(CGI.parse(url)).to eq(CGI.parse(
+          expect(URI.decode_www_form(url)).to eq(URI.decode_www_form(
             'https://examplebucket.s3.amazonaws.com/test.txt?X-Amz-Algorithm='\
             'AWS4-HMAC-SHA256&X-Amz-Credential=ACCESS_KEY_ID%2F20130524%2F'\
             'us-east-1%2Fs3%2Faws4_request&X-Amz-Date=20130524T000000Z'\

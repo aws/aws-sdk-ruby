@@ -240,6 +240,21 @@ module Aws::EMR
       SENSITIVE: []
     end
 
+    class CreatePersistentAppUIInput
+      attr_accessor target_resource_arn: ::String
+      attr_accessor emr_containers_config: Types::EMRContainersConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor x_referer: ::String
+      attr_accessor profiler_type: ("SHS" | "TEZUI" | "YTS")
+      SENSITIVE: []
+    end
+
+    class CreatePersistentAppUIOutput
+      attr_accessor persistent_app_ui_id: ::String
+      attr_accessor runtime_role_enabled_cluster: bool
+      SENSITIVE: []
+    end
+
     class CreateSecurityConfigurationInput
       attr_accessor name: ::String
       attr_accessor security_configuration: ::String
@@ -353,6 +368,16 @@ module Aws::EMR
       SENSITIVE: []
     end
 
+    class DescribePersistentAppUIInput
+      attr_accessor persistent_app_ui_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePersistentAppUIOutput
+      attr_accessor persistent_app_ui: Types::PersistentAppUI
+      SENSITIVE: []
+    end
+
     class DescribeReleaseLabelInput
       attr_accessor release_label: ::String
       attr_accessor next_token: ::String
@@ -398,6 +423,11 @@ module Aws::EMR
 
     class DescribeStudioOutput
       attr_accessor studio: Types::Studio
+      SENSITIVE: []
+    end
+
+    class EMRContainersConfig
+      attr_accessor job_run_id: ::String
       SENSITIVE: []
     end
 
@@ -500,6 +530,36 @@ module Aws::EMR
 
     class GetManagedScalingPolicyOutput
       attr_accessor managed_scaling_policy: Types::ManagedScalingPolicy
+      SENSITIVE: []
+    end
+
+    class GetOnClusterAppUIPresignedURLInput
+      attr_accessor cluster_id: ::String
+      attr_accessor on_cluster_app_ui_type: ("SparkHistoryServer" | "YarnTimelineService" | "TezUI" | "ApplicationMaster" | "JobHistoryServer" | "ResourceManager")
+      attr_accessor application_id: ::String
+      attr_accessor dry_run: bool
+      attr_accessor execution_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetOnClusterAppUIPresignedURLOutput
+      attr_accessor presigned_url_ready: bool
+      attr_accessor presigned_url: ::String
+      SENSITIVE: []
+    end
+
+    class GetPersistentAppUIPresignedURLInput
+      attr_accessor persistent_app_ui_id: ::String
+      attr_accessor persistent_app_ui_type: ("SHS" | "TEZ" | "YTS")
+      attr_accessor application_id: ::String
+      attr_accessor auth_proxy_call: bool
+      attr_accessor execution_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPersistentAppUIPresignedURLOutput
+      attr_accessor presigned_url_ready: bool
+      attr_accessor presigned_url: ::String
       SENSITIVE: []
     end
 
@@ -1125,6 +1185,18 @@ module Aws::EMR
     class OutputNotebookS3LocationFromInput
       attr_accessor bucket: ::String
       attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class PersistentAppUI
+      attr_accessor persistent_app_ui_id: ::String
+      attr_accessor persistent_app_ui_type_list: ::Array[("SHS" | "TEZ" | "YTS")]
+      attr_accessor persistent_app_ui_status: ::String
+      attr_accessor author_id: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_state_change_reason: ::String
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 

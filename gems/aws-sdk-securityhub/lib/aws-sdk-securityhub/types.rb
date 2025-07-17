@@ -441,6 +441,21 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Specifies a cross-Region data aggregation configuration, including the
+    # aggregation Region and any linked Regions.
+    #
+    # @!attribute [rw] aggregator_v2_arn
+    #   The ARN of the aggregatorV2.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AggregatorV2 AWS API Documentation
+    #
+    class AggregatorV2 < Struct.new(
+      :aggregator_v2_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an enabled security standard in which a security
     # control is enabled.
     #
@@ -573,6 +588,46 @@ module Aws::SecurityHub
     class AutomationRulesAction < Struct.new(
       :type,
       :finding_fields_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows you to customize security response workflows.
+    #
+    # @!attribute [rw] type
+    #   The category of action to be executed by the automation rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesActionTypeObjectV2 AWS API Documentation
+    #
+    class AutomationRulesActionTypeObjectV2 < Struct.new(
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows you to configure automated responses.
+    #
+    # @!attribute [rw] type
+    #   The category of action to be executed by the automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_fields_update
+    #   The changes to be applied to fields in a security finding when an
+    #   automation rule is triggered.
+    #   @return [Types::AutomationRulesFindingFieldsUpdateV2]
+    #
+    # @!attribute [rw] external_integration_configuration
+    #   The settings for integrating automation rule actions with external
+    #   systems or service.
+    #   @return [Types::ExternalIntegrationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesActionV2 AWS API Documentation
+    #
+    class AutomationRulesActionV2 < Struct.new(
+      :type,
+      :finding_fields_update,
+      :external_integration_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -725,6 +780,34 @@ module Aws::SecurityHub
       :user_defined_fields,
       :workflow,
       :related_findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows you to define the structure for modifying specific fields in
+    # security findings.
+    #
+    # @!attribute [rw] severity_id
+    #   The severity level to be assigned to findings that match the
+    #   automation rule criteria.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] comment
+    #   Notes or contextual information for findings that are modified by
+    #   the automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_id
+    #   The status to be applied to findings that match automation rule
+    #   criteria.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesFindingFieldsUpdateV2 AWS API Documentation
+    #
+    class AutomationRulesFindingFieldsUpdateV2 < Struct.new(
+      :severity_id,
+      :comment,
+      :status_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1184,6 +1267,62 @@ module Aws::SecurityHub
       :created_at,
       :updated_at,
       :created_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Includes essential metadata information about automation rules.
+    #
+    # @!attribute [rw] rule_arn
+    #   The ARN of the automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_id
+    #   The ID of the automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_order
+    #   The value for the rule priority.
+    #   @return [Float]
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_status
+    #   The status of the automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An explanation for the purpose and funcitonality of the automation
+    #   rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] actions
+    #   The list of action to be performed when the rule criteria is met.
+    #   @return [Array<Types::AutomationRulesActionTypeObjectV2>]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp for when the automation rule was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp for the most recent modification to the automation
+    #   rule.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesMetadataV2 AWS API Documentation
+    #
+    class AutomationRulesMetadataV2 < Struct.new(
+      :rule_arn,
+      :rule_id,
+      :rule_order,
+      :rule_name,
+      :rule_status,
+      :description,
+      :actions,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21953,6 +22092,116 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The list of findings that were updated.
+    #
+    # @!attribute [rw] finding_identifier
+    #   The finding identifier of a processed finding.
+    #   @return [Types::OcsfFindingIdentifier]
+    #
+    # @!attribute [rw] metadata_uid
+    #   The metadata.uid of a processed finding.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchUpdateFindingsV2ProcessedFinding AWS API Documentation
+    #
+    class BatchUpdateFindingsV2ProcessedFinding < Struct.new(
+      :finding_identifier,
+      :metadata_uid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metadata_uids
+    #   The list of finding `metadata.uid` to indicate findings to update.
+    #   Finding `metadata.uid` is a globally unique identifier associated
+    #   with the finding. Customers cannot use `MetadataUids` together with
+    #   `FindingIdentifiers`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] finding_identifiers
+    #   Provides information to identify a specific V2 finding.
+    #   @return [Array<Types::OcsfFindingIdentifier>]
+    #
+    # @!attribute [rw] comment
+    #   The updated value for a user provided comment about the finding.
+    #   Minimum character length 1. Maximum character length 512.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity_id
+    #   The updated value for the normalized severity identifier. The
+    #   severity ID is an integer with the allowed enum values \[0, 1, 2, 3,
+    #   4, 5, 99\]. When customer provides the updated severity ID, the
+    #   string sibling severity will automatically be updated in the
+    #   finding.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status_id
+    #   The updated value for the normalized status identifier. The status
+    #   ID is an integer with the allowed enum values \[0, 1, 2, 3, 4, 5, 6,
+    #   99\]. When customer provides the updated status ID, the string
+    #   sibling status will automatically be updated in the finding.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchUpdateFindingsV2Request AWS API Documentation
+    #
+    class BatchUpdateFindingsV2Request < Struct.new(
+      :metadata_uids,
+      :finding_identifiers,
+      :comment,
+      :severity_id,
+      :status_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] processed_findings
+    #   The list of findings that were updated successfully.
+    #   @return [Array<Types::BatchUpdateFindingsV2ProcessedFinding>]
+    #
+    # @!attribute [rw] unprocessed_findings
+    #   The list of V2 findings that were not updated.
+    #   @return [Array<Types::BatchUpdateFindingsV2UnprocessedFinding>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchUpdateFindingsV2Response AWS API Documentation
+    #
+    class BatchUpdateFindingsV2Response < Struct.new(
+      :processed_findings,
+      :unprocessed_findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The list of findings that were not updated.
+    #
+    # @!attribute [rw] finding_identifier
+    #   The finding identifier of an unprocessed finding.
+    #   @return [Types::OcsfFindingIdentifier]
+    #
+    # @!attribute [rw] metadata_uid
+    #   The metadata.uid of an unprocessed finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   Indicates the specific type of error preventing successful
+    #   processing of a finding during a batch update operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A detailed description of why a finding could not be processed
+    #   during a batch update operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchUpdateFindingsV2UnprocessedFinding AWS API Documentation
+    #
+    class BatchUpdateFindingsV2UnprocessedFinding < Struct.new(
+      :finding_identifier,
+      :metadata_uid,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] standards_control_association_updates
     #   Updates the enablement status of a security control in a specified
     #   standard.
@@ -22279,6 +22528,45 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Enables the creation of filtering criteria for security findings.
+    #
+    # @!attribute [rw] string_filters
+    #   Enables filtering based on string field values.
+    #   @return [Array<Types::OcsfStringFilter>]
+    #
+    # @!attribute [rw] date_filters
+    #   Enables filtering based on date and timestamp fields.
+    #   @return [Array<Types::OcsfDateFilter>]
+    #
+    # @!attribute [rw] boolean_filters
+    #   Enables filtering based on boolean field values.
+    #   @return [Array<Types::OcsfBooleanFilter>]
+    #
+    # @!attribute [rw] number_filters
+    #   Enables filtering based on numerical field values.
+    #   @return [Array<Types::OcsfNumberFilter>]
+    #
+    # @!attribute [rw] map_filters
+    #   Enables filtering based on map field values.
+    #   @return [Array<Types::OcsfMapFilter>]
+    #
+    # @!attribute [rw] operator
+    #   The logical operator used to combine multiple filter conditions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CompositeFilter AWS API Documentation
+    #
+    class CompositeFilter < Struct.new(
+      :string_filters,
+      :date_filters,
+      :boolean_filters,
+      :number_filters,
+      :map_filters,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The options for customizing a security control parameter.
     #
     # @note ConfigurationOptions is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConfigurationOptions corresponding to the set member.
@@ -22465,6 +22753,101 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The request causes conflict with the current state of the service
+    # resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message,
+      :code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] auth_code
+    #   The authCode retrieved from authUrl to complete the OAuth 2.0
+    #   authorization code flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_state
+    #   The authState retrieved from authUrl to complete the OAuth 2.0
+    #   authorization code flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ConnectorRegistrationsV2Request AWS API Documentation
+    #
+    class ConnectorRegistrationsV2Request < Struct.new(
+      :auth_code,
+      :auth_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connectorV2.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_id
+    #   The UUID of the connectorV2 to identify connectorV2 resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ConnectorRegistrationsV2Response AWS API Documentation
+    #
+    class ConnectorRegistrationsV2Response < Struct.new(
+      :connector_arn,
+      :connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A condensed overview of the connectorV2..
+    #
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connectorV2.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_id
+    #   The UUID of the connectorV2 to identify connectorV2 resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The Name field contains the user-defined name assigned to the
+    #   integration connector. This helps identify and manage multiple
+    #   connectors within Security Hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the connectorV2.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_summary
+    #   The connectorV2 third party provider configuration summary.
+    #   @return [Types::ProviderSummary]
+    #
+    # @!attribute [rw] created_at
+    #   ISO 8601 UTC timestamp for the time create the connectorV2.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ConnectorSummary AWS API Documentation
+    #
+    class ConnectorSummary < Struct.new(
+      :connector_arn,
+      :connector_id,
+      :name,
+      :description,
+      :provider_summary,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container details related to a finding.
     #
     # @!attribute [rw] container_runtime
@@ -22573,6 +22956,63 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] region_linking_mode
+    #   Determines how Regions are linked to an Aggregator V2.
+    #   @return [String]
+    #
+    # @!attribute [rw] linked_regions
+    #   The list of Regions that are linked to the aggregation Region.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs to be applied to the AggregatorV2.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique identifier used to ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateAggregatorV2Request AWS API Documentation
+    #
+    class CreateAggregatorV2Request < Struct.new(
+      :region_linking_mode,
+      :linked_regions,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aggregator_v2_arn
+    #   The ARN of the AggregatorV2.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_region
+    #   The Amazon Web Services Region where data is aggregated.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_linking_mode
+    #   Determines how Regions are linked to an Aggregator V2.
+    #   @return [String]
+    #
+    # @!attribute [rw] linked_regions
+    #   The list of Regions that are linked to the aggregation Region.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateAggregatorV2Response AWS API Documentation
+    #
+    class CreateAggregatorV2Response < Struct.new(
+      :aggregator_v2_arn,
+      :aggregation_region,
+      :region_linking_mode,
+      :linked_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] tags
     #   User-defined tags associated with an automation rule.
     #   @return [Hash<String,String>]
@@ -22649,6 +23089,73 @@ module Aws::SecurityHub
     #
     class CreateAutomationRuleResponse < Struct.new(
       :rule_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_name
+    #   The name of the V2 automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_status
+    #   The status of the V2 automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the V2 automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_order
+    #   The value for the rule priority.
+    #   @return [Float]
+    #
+    # @!attribute [rw] criteria
+    #   The filtering type and configuration of the automation rule.
+    #   @return [Types::Criteria]
+    #
+    # @!attribute [rw] actions
+    #   A list of actions to be performed when the rule criteria is met.
+    #   @return [Array<Types::AutomationRulesActionV2>]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs associated with the V2 automation rule.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique identifier used to ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateAutomationRuleV2Request AWS API Documentation
+    #
+    class CreateAutomationRuleV2Request < Struct.new(
+      :rule_name,
+      :rule_status,
+      :description,
+      :rule_order,
+      :criteria,
+      :actions,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_arn
+    #   The ARN of the V2 automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_id
+    #   The ID of the V2 automation rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateAutomationRuleV2Response AWS API Documentation
+    #
+    class CreateAutomationRuleV2Response < Struct.new(
+      :rule_arn,
+      :rule_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22746,6 +23253,69 @@ module Aws::SecurityHub
       :updated_at,
       :created_at,
       :configuration_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The unique name of the connectorV2.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the connectorV2.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The third-party provider’s service configuration.
+    #   @return [Types::ProviderConfiguration]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of KMS key used to encrypt secrets
+    #   for the connectorV2.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the connectorV2 when you create.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique identifier used to ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateConnectorV2Request AWS API Documentation
+    #
+    class CreateConnectorV2Request < Struct.new(
+      :name,
+      :description,
+      :provider,
+      :kms_key_arn,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connectorV2.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_id
+    #   The UUID of the connectorV2 to identify connectorV2 resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_url
+    #   The Url provide to customers for OAuth auth code flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateConnectorV2Response AWS API Documentation
+    #
+    class CreateConnectorV2Response < Struct.new(
+      :connector_arn,
+      :connector_id,
+      :auth_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22899,6 +23469,72 @@ module Aws::SecurityHub
       :unprocessed_accounts)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_id
+    #   The UUID of the connectorV2 to identify connectorV2 resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_metadata_uid
+    #   The the unique ID for the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The client idempotency token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateTicketV2Request AWS API Documentation
+    #
+    class CreateTicketV2Request < Struct.new(
+      :connector_id,
+      :finding_metadata_uid,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ticket_id
+    #   The ID for the ticketv2.
+    #   @return [String]
+    #
+    # @!attribute [rw] ticket_src_url
+    #   The url to the created ticket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateTicketV2Response AWS API Documentation
+    #
+    class CreateTicketV2Response < Struct.new(
+      :ticket_id,
+      :ticket_src_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the parameters and conditions used to evaluate and filter
+    # security findings.
+    #
+    # @note Criteria is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Criteria is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Criteria corresponding to the set member.
+    #
+    # @!attribute [rw] ocsf_finding_criteria
+    #   The filtering conditions that align with OCSF standards.
+    #   @return [Types::OcsfFindingFilters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Criteria AWS API Documentation
+    #
+    class Criteria < Struct.new(
+      :ocsf_finding_criteria,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class OcsfFindingCriteria < Criteria; end
+      class Unknown < Criteria; end
     end
 
     # The list of detected instances of sensitive data.
@@ -23115,6 +23751,38 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] aggregator_v2_arn
+    #   The ARN of the Aggregator V2.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteAggregatorV2Request AWS API Documentation
+    #
+    class DeleteAggregatorV2Request < Struct.new(
+      :aggregator_v2_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteAggregatorV2Response AWS API Documentation
+    #
+    class DeleteAggregatorV2Response < Aws::EmptyStructure; end
+
+    # @!attribute [rw] identifier
+    #   The ARN of the V2 automation rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteAutomationRuleV2Request AWS API Documentation
+    #
+    class DeleteAutomationRuleV2Request < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteAutomationRuleV2Response AWS API Documentation
+    #
+    class DeleteAutomationRuleV2Response < Aws::EmptyStructure; end
+
     # @!attribute [rw] identifier
     #   The Amazon Resource Name (ARN) or universally unique identifier
     #   (UUID) of the configuration policy.
@@ -23131,6 +23799,22 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteConfigurationPolicyResponse AWS API Documentation
     #
     class DeleteConfigurationPolicyResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] connector_id
+    #   The UUID of the connectorV2 to identify connectorV2 resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteConnectorV2Request AWS API Documentation
+    #
+    class DeleteConnectorV2Request < Struct.new(
+      :connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteConnectorV2Response AWS API Documentation
+    #
+    class DeleteConnectorV2Response < Aws::EmptyStructure; end
 
     # @!attribute [rw] finding_aggregator_arn
     #   The ARN of the finding aggregator to delete. To obtain the ARN, use
@@ -23450,6 +24134,67 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   The token required for pagination. On your first call, set the value
+    #   of this parameter to `NULL`. For subsequent calls, to continue
+    #   listing data, set the value of this parameter to the value returned
+    #   in the previous response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeProductsV2Request AWS API Documentation
+    #
+    class DescribeProductsV2Request < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] products_v2
+    #   Gets information about the product integration.
+    #   @return [Array<Types::ProductV2>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   Otherwise, this parameter is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeProductsV2Response AWS API Documentation
+    #
+    class DescribeProductsV2Response < Struct.new(
+      :products_v2,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeSecurityHubV2Request AWS API Documentation
+    #
+    class DescribeSecurityHubV2Request < Aws::EmptyStructure; end
+
+    # @!attribute [rw] hub_v2_arn
+    #   The ARN of the service resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscribed_at
+    #   The date and time when the service was enabled in the account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeSecurityHubV2Response AWS API Documentation
+    #
+    class DescribeSecurityHubV2Response < Struct.new(
+      :hub_v2_arn,
+      :subscribed_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] standards_subscription_arn
     #   The ARN of a resource that represents your subscription to a
     #   supported standard. To get the subscription ARNs of the standards
@@ -23582,10 +24327,16 @@ module Aws::SecurityHub
     #   administrator account.
     #   @return [String]
     #
+    # @!attribute [rw] feature
+    #   The feature for which the delegated admin account is disabled.
+    #   Defaults to Security Hub if not specified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableOrganizationAdminAccountRequest AWS API Documentation
     #
     class DisableOrganizationAdminAccountRequest < Struct.new(
-      :admin_account_id)
+      :admin_account_id,
+      :feature)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23603,6 +24354,16 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableSecurityHubResponse AWS API Documentation
     #
     class DisableSecurityHubResponse < Aws::EmptyStructure; end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableSecurityHubV2Request AWS API Documentation
+    #
+    class DisableSecurityHubV2Request < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableSecurityHubV2Response AWS API Documentation
+    #
+    class DisableSecurityHubV2Response < Aws::EmptyStructure; end
 
     # @api private
     #
@@ -23726,17 +24487,39 @@ module Aws::SecurityHub
     #   designate as the Security Hub administrator account.
     #   @return [String]
     #
+    # @!attribute [rw] feature
+    #   The feature for which the delegated admin account is enabled.
+    #   Defaults to Security Hub if not specified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableOrganizationAdminAccountRequest AWS API Documentation
     #
     class EnableOrganizationAdminAccountRequest < Struct.new(
-      :admin_account_id)
+      :admin_account_id,
+      :feature)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] admin_account_id
+    #   The Amazon Web Services account identifier of the account to
+    #   designate as the Security Hub administrator account.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature
+    #   The feature where the delegated administrator is enabled. The
+    #   default is Security Hub CSPM if no delegated administrator is
+    #   specified in the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableOrganizationAdminAccountResponse AWS API Documentation
     #
-    class EnableOrganizationAdminAccountResponse < Aws::EmptyStructure; end
+    class EnableOrganizationAdminAccountResponse < Struct.new(
+      :admin_account_id,
+      :feature)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] tags
     #   The tags to add to the hub resource when you enable Security Hub.
@@ -23780,6 +24563,30 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHubResponse AWS API Documentation
     #
     class EnableSecurityHubResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] tags
+    #   The tags to add to the hub V2 resource when you enable Security Hub.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHubV2Request AWS API Documentation
+    #
+    class EnableSecurityHubV2Request < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_v2_arn
+    #   The ARN of the V2 resource that was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHubV2Response AWS API Documentation
+    #
+    class EnableSecurityHubV2Response < Struct.new(
+      :hub_v2_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The options for customizing a security control parameter that is an
     # enum.
@@ -23825,6 +24632,21 @@ module Aws::SecurityHub
       :default_value,
       :max_items,
       :allowed_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the settings and parameters required for integrating external
+    # security tools and services.
+    #
+    # @!attribute [rw] connector_arn
+    #   The ARN of the connector that establishes the integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ExternalIntegrationConfiguration AWS API Documentation
+    #
+    class ExternalIntegrationConfiguration < Struct.new(
+      :connector_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24327,6 +25149,114 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] aggregator_v2_arn
+    #   The ARN of the Aggregator V2.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetAggregatorV2Request AWS API Documentation
+    #
+    class GetAggregatorV2Request < Struct.new(
+      :aggregator_v2_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aggregator_v2_arn
+    #   The ARN of the Aggregator V2.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_region
+    #   The Amazon Web Services Region where data is aggregated.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_linking_mode
+    #   Determines how Regions are linked to an Aggregator V2.
+    #   @return [String]
+    #
+    # @!attribute [rw] linked_regions
+    #   The list of Regions that are linked to the aggregation Region.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetAggregatorV2Response AWS API Documentation
+    #
+    class GetAggregatorV2Response < Struct.new(
+      :aggregator_v2_arn,
+      :aggregation_region,
+      :region_linking_mode,
+      :linked_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The ARN of the V2 automation rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetAutomationRuleV2Request AWS API Documentation
+    #
+    class GetAutomationRuleV2Request < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_arn
+    #   The ARN of the V2 automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_id
+    #   The ID of the V2 automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_order
+    #   The value for the rule priority.
+    #   @return [Float]
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the V2 automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_status
+    #   The status of the V2 automation automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] criteria
+    #   The filtering type and configuration of the V2 automation rule.
+    #   @return [Types::Criteria]
+    #
+    # @!attribute [rw] actions
+    #   A list of actions performed when the rule criteria is met.
+    #   @return [Array<Types::AutomationRulesActionV2>]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the V2 automation rule was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the V2 automation rule was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetAutomationRuleV2Response AWS API Documentation
+    #
+    class GetAutomationRuleV2Response < Struct.new(
+      :rule_arn,
+      :rule_id,
+      :rule_order,
+      :rule_name,
+      :rule_status,
+      :description,
+      :criteria,
+      :actions,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] target
     #   The target account ID, organizational unit ID, or the root ID to
     #   retrieve the association for.
@@ -24450,6 +25380,71 @@ module Aws::SecurityHub
       :updated_at,
       :created_at,
       :configuration_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_id
+    #   The UUID of the connectorV2 to identify connectorV2 resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetConnectorV2Request AWS API Documentation
+    #
+    class GetConnectorV2Request < Struct.new(
+      :connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connectorV2.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_id
+    #   The UUID of the connectorV2 to identify connectorV2 resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the connectorV2.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the connectorV2.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of KMS key used for the connectorV2.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   ISO 8601 UTC timestamp for the time create the connectorV2.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   ISO 8601 UTC timestamp for the time update the connectorV2
+    #   connectorStatus.
+    #   @return [Time]
+    #
+    # @!attribute [rw] health
+    #   The current health status for connectorV2
+    #   @return [Types::HealthCheck]
+    #
+    # @!attribute [rw] provider_detail
+    #   The third-party provider detail for a service configuration.
+    #   @return [Types::ProviderDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetConnectorV2Response AWS API Documentation
+    #
+    class GetConnectorV2Response < Struct.new(
+      :connector_arn,
+      :connector_id,
+      :name,
+      :description,
+      :kms_key_arn,
+      :created_at,
+      :last_updated_at,
+      :health,
+      :provider_detail)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24645,6 +25640,44 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] group_by_rules
+    #   Specifies how security findings should be aggregated and organized
+    #   in the statistical analysis. It can accept up to 5 `groupBy` fields
+    #   in a single call.
+    #   @return [Array<Types::GroupByRule>]
+    #
+    # @!attribute [rw] sort_order
+    #   Orders the aggregation count in descending or ascending order.
+    #   Descending order is the default.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_statistic_results
+    #   The maximum number of results to be returned.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindingStatisticsV2Request AWS API Documentation
+    #
+    class GetFindingStatisticsV2Request < Struct.new(
+      :group_by_rules,
+      :sort_order,
+      :max_statistic_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_by_results
+    #   Aggregated statistics about security findings based on specified
+    #   grouping criteria.
+    #   @return [Array<Types::GroupByResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindingStatisticsV2Response AWS API Documentation
+    #
+    class GetFindingStatisticsV2Response < Struct.new(
+      :group_by_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] filters
     #   The finding attributes used to define a condition to filter the
     #   returned findings.
@@ -24696,6 +25729,57 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindingsResponse AWS API Documentation
     #
     class GetFindingsResponse < Struct.new(
+      :findings,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
+    #   The finding attributes used to define a condition to filter the
+    #   returned OCSF findings. You can filter up to 10 composite filters.
+    #   For each filter type inside of a composite filter, you can provide
+    #   up to 20 filters.
+    #   @return [Types::OcsfFindingFilters]
+    #
+    # @!attribute [rw] sort_criteria
+    #   The finding attributes used to sort the list of returned findings.
+    #   @return [Array<Types::SortCriterion>]
+    #
+    # @!attribute [rw] next_token
+    #   The token required for pagination. On your first call, set the value
+    #   of this parameter to `NULL`. For subsequent calls, to continue
+    #   listing data, set the value of this parameter to the value returned
+    #   in the previous response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindingsV2Request AWS API Documentation
+    #
+    class GetFindingsV2Request < Struct.new(
+      :filters,
+      :sort_criteria,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] findings
+    #   An array of security findings returned by the operation.
+    #   @return [Array<Hash,Array,String,Numeric,Boolean>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   Otherwise, this parameter is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindingsV2Response AWS API Documentation
+    #
+    class GetFindingsV2Response < Struct.new(
       :findings,
       :next_token)
       SENSITIVE = []
@@ -24842,6 +25926,90 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] group_by_rules
+    #   How resource statistics should be aggregated and organized in the
+    #   response.
+    #   @return [Array<Types::ResourceGroupByRule>]
+    #
+    # @!attribute [rw] sort_order
+    #   Sorts aggregated statistics.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_statistic_results
+    #   The maximum number of results to be returned.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetResourcesStatisticsV2Request AWS API Documentation
+    #
+    class GetResourcesStatisticsV2Request < Struct.new(
+      :group_by_rules,
+      :sort_order,
+      :max_statistic_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_by_results
+    #   The aggregated statistics about resources based on the specified
+    #   grouping rule.
+    #   @return [Array<Types::GroupByResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetResourcesStatisticsV2Response AWS API Documentation
+    #
+    class GetResourcesStatisticsV2Response < Struct.new(
+      :group_by_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
+    #   Filters resources based on a set of criteria.
+    #   @return [Types::ResourcesFilters]
+    #
+    # @!attribute [rw] sort_criteria
+    #   The finding attributes used to sort the list of returned findings.
+    #   @return [Array<Types::SortCriterion>]
+    #
+    # @!attribute [rw] next_token
+    #   The token required for pagination. On your first call, set the value
+    #   of this parameter to `NULL`. For subsequent calls, to continue
+    #   listing data, set the value of this parameter to the value returned
+    #   in the previous response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetResourcesV2Request AWS API Documentation
+    #
+    class GetResourcesV2Request < Struct.new(
+      :filters,
+      :sort_criteria,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resources
+    #   Filters resources based on a set of criteria.
+    #   @return [Array<Types::ResourceResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   Otherwise, this parameter is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetResourcesV2Response AWS API Documentation
+    #
+    class GetResourcesV2Response < Struct.new(
+      :resources,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] security_control_id
     #   The ID of the security control to retrieve the definition for. This
     #   field doesn’t accept an Amazon Resource Name (ARN).
@@ -24866,6 +26034,92 @@ module Aws::SecurityHub
     #
     class GetSecurityControlDefinitionResponse < Struct.new(
       :security_control_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents finding statistics grouped by `GroupedByField`.
+    #
+    # @!attribute [rw] group_by_field
+    #   The attribute by which filtered security findings should be grouped.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_by_values
+    #   An array of grouped values and their respective counts for each
+    #   `GroupByField`.
+    #   @return [Array<Types::GroupByValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GroupByResult AWS API Documentation
+    #
+    class GroupByResult < Struct.new(
+      :group_by_field,
+      :group_by_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the how the finding attribute should be grouped.
+    #
+    # @!attribute [rw] filters
+    #   The criteria used to select which security findings should be
+    #   included in the grouping operation.
+    #   @return [Types::OcsfFindingFilters]
+    #
+    # @!attribute [rw] group_by_field
+    #   The attribute by which filtered findings should be grouped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GroupByRule AWS API Documentation
+    #
+    class GroupByRule < Struct.new(
+      :filters,
+      :group_by_field)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents individual aggregated results when grouping security
+    # findings for each `GroupByField`.
+    #
+    # @!attribute [rw] field_value
+    #   The value of the field by which findings are grouped.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of findings for a specific `FieldValue` and
+    #   `GroupByField`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GroupByValue AWS API Documentation
+    #
+    class GroupByValue < Struct.new(
+      :field_value,
+      :count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the operational status and health of a connectorV2.
+    #
+    # @!attribute [rw] connector_status
+    #   The status of the connectorV2.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message for the reason of connectorStatus change.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_checked_at
+    #   ISO 8601 UTC timestamp for the time check the health status of the
+    #   connectorV2.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/HealthCheck AWS API Documentation
+    #
+    class HealthCheck < Struct.new(
+      :connector_status,
+      :message,
+      :last_checked_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25125,6 +26379,23 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The request has failed due to an internal failure of the service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message,
+      :code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The account doesn't have permission to perform this action.
     #
     # @!attribute [rw] message
@@ -25298,6 +26569,70 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Information about the configuration and status of a Jira Cloud
+    # integration.
+    #
+    # @!attribute [rw] cloud_id
+    #   The cloud id of the Jira Cloud.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_key
+    #   The projectKey of Jira Cloud.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain
+    #   The URL domain of your Jira Cloud instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_url
+    #   The URL to provide to customers for OAuth auth code flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_status
+    #   The status of the authorization between Jira Cloud and the service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/JiraCloudDetail AWS API Documentation
+    #
+    class JiraCloudDetail < Struct.new(
+      :cloud_id,
+      :project_key,
+      :domain,
+      :auth_url,
+      :auth_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The initial configuration settings required to establish an
+    # integration between Security Hub and Jira Cloud.
+    #
+    # @!attribute [rw] project_key
+    #   The project key for a JiraCloud instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/JiraCloudProviderConfiguration AWS API Documentation
+    #
+    class JiraCloudProviderConfiguration < Struct.new(
+      :project_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The parameters used to modify an existing Jira Cloud integration.
+    #
+    # @!attribute [rw] project_key
+    #   The project key for a JiraCloud instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/JiraCloudUpdateConfiguration AWS API Documentation
+    #
+    class JiraCloudUpdateConfiguration < Struct.new(
+      :project_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A keyword filter for querying findings.
     #
     # @!attribute [rw] value
@@ -25327,6 +26662,44 @@ module Aws::SecurityHub
     class LimitExceededException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token required for pagination. On your first call, set the value
+    #   of this parameter to `NULL`. For subsequent calls, to continue
+    #   listing data, set the value of this parameter to the value returned
+    #   in the previous response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListAggregatorsV2Request AWS API Documentation
+    #
+    class ListAggregatorsV2Request < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aggregators_v2
+    #   An array of aggregators.
+    #   @return [Array<Types::AggregatorV2>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   Otherwise, this parameter is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListAggregatorsV2Response AWS API Documentation
+    #
+    class ListAggregatorsV2Response < Struct.new(
+      :aggregators_v2,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25365,6 +26738,44 @@ module Aws::SecurityHub
     #
     class ListAutomationRulesResponse < Struct.new(
       :automation_rules_metadata,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token required for pagination. On your first call, set the value
+    #   of this parameter to `NULL`. For subsequent calls, to continue
+    #   listing data, set the value of this parameter to the value returned
+    #   in the previous response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListAutomationRulesV2Request AWS API Documentation
+    #
+    class ListAutomationRulesV2Request < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rules
+    #   An array of automation rules.
+    #   @return [Array<Types::AutomationRulesMetadataV2>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   Otherwise, this parameter is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListAutomationRulesV2Response AWS API Documentation
+    #
+    class ListAutomationRulesV2Response < Struct.new(
+      :rules,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -25477,6 +26888,51 @@ module Aws::SecurityHub
     class ListConfigurationPolicyAssociationsResponse < Struct.new(
       :configuration_policy_association_summaries,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token per the Amazon Web Services Pagination standard
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] provider_name
+    #   The name of the third-party provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_status
+    #   The status for the connectorV2.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListConnectorsV2Request AWS API Documentation
+    #
+    class ListConnectorsV2Request < Struct.new(
+      :next_token,
+      :max_results,
+      :provider_name,
+      :connector_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   Otherwise, this parameter is null.
+    #   @return [String]
+    #
+    # @!attribute [rw] connectors
+    #   An array of connectorV2 summaries.
+    #   @return [Array<Types::ConnectorSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListConnectorsV2Response AWS API Documentation
+    #
+    class ListConnectorsV2Response < Struct.new(
+      :next_token,
+      :connectors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25667,11 +27123,17 @@ module Aws::SecurityHub
     #   returned from the previous response.
     #   @return [String]
     #
+    # @!attribute [rw] feature
+    #   The feature where the delegated administrator account is listed.
+    #   Defaults to Security Hub if not specified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListOrganizationAdminAccountsRequest AWS API Documentation
     #
     class ListOrganizationAdminAccountsRequest < Struct.new(
       :max_results,
-      :next_token)
+      :next_token,
+      :feature)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25684,11 +27146,17 @@ module Aws::SecurityHub
     #   The pagination token to use to request the next page of results.
     #   @return [String]
     #
+    # @!attribute [rw] feature
+    #   The feature where the delegated administrator account is listed.
+    #   Defaults to Security Hub CSPM if not specified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListOrganizationAdminAccountsResponse AWS API Documentation
     #
     class ListOrganizationAdminAccountsResponse < Struct.new(
       :admin_accounts,
-      :next_token)
+      :next_token,
+      :feature)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26528,6 +27996,156 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Enables filtering of security findings based on boolean field values
+    # in OCSF.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   Boolean filter for querying findings.
+    #   @return [Types::BooleanFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/OcsfBooleanFilter AWS API Documentation
+    #
+    class OcsfBooleanFilter < Struct.new(
+      :field_name,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Enables filtering of security findings based on date and timestamp
+    # fields in OCSF.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A date filter for querying findings.
+    #   @return [Types::DateFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/OcsfDateFilter AWS API Documentation
+    #
+    class OcsfDateFilter < Struct.new(
+      :field_name,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the filtering criteria for security findings using OCSF.
+    #
+    # @!attribute [rw] composite_filters
+    #   Enables the creation of complex filtering conditions by combining
+    #   filter criteria.
+    #   @return [Array<Types::CompositeFilter>]
+    #
+    # @!attribute [rw] composite_operator
+    #   The logical operators used to combine the filtering on multiple
+    #   `CompositeFilters`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/OcsfFindingFilters AWS API Documentation
+    #
+    class OcsfFindingFilters < Struct.new(
+      :composite_filters,
+      :composite_operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a standard to identify security findings using OCSF.
+    #
+    # @!attribute [rw] cloud_account_uid
+    #   Finding cloud.account.uid, which is a unique identifier in the
+    #   Amazon Web Services account..
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_info_uid
+    #   Finding finding\_info.uid, which is a unique identifier for the
+    #   finding from the finding provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_product_uid
+    #   Finding metadata.product.uid, which is a unique identifier for the
+    #   product.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/OcsfFindingIdentifier AWS API Documentation
+    #
+    class OcsfFindingIdentifier < Struct.new(
+      :cloud_account_uid,
+      :finding_info_uid,
+      :metadata_product_uid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Enables filtering of security findings based on map field values in
+    # OCSF.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A map filter for filtering Security Hub findings. Each map filter
+    #   provides the field to check for, the value to check for, and the
+    #   comparison operator.
+    #   @return [Types::MapFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/OcsfMapFilter AWS API Documentation
+    #
+    class OcsfMapFilter < Struct.new(
+      :field_name,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Enables filtering of security findings based on numerical field values
+    # in OCSF.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A number filter for querying findings.
+    #   @return [Types::NumberFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/OcsfNumberFilter AWS API Documentation
+    #
+    class OcsfNumberFilter < Struct.new(
+      :field_name,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Enables filtering of security findings based on string field values in
+    # OCSF.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A string filter for filtering Security Hub findings.
+    #   @return [Types::StringFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/OcsfStringFilter AWS API Documentation
+    #
+    class OcsfStringFilter < Struct.new(
+      :field_name,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about the way an organization is configured in
     # Security Hub.
     #
@@ -27073,6 +28691,51 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Defines the structure for the productV2.
+    #
+    # @!attribute [rw] product_v2_name
+    #   The name of the productV2.
+    #   @return [String]
+    #
+    # @!attribute [rw] company_name
+    #   The name of the organization or vendor that provides the productV2.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Detailed information about the productV2.
+    #   @return [String]
+    #
+    # @!attribute [rw] categories
+    #   The domains or functional areas the productV2 addresses.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] integration_v2_types
+    #   The type of integration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] marketplace_url
+    #   The console URL where you can purchase or subscribe to products.
+    #   @return [String]
+    #
+    # @!attribute [rw] activation_url
+    #   The URL to the serviceV@ or productV2 documentation about the
+    #   integration, which includes how to activate the integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProductV2 AWS API Documentation
+    #
+    class ProductV2 < Struct.new(
+      :product_v2_name,
+      :company_name,
+      :description,
+      :categories,
+      :integration_v2_types,
+      :marketplace_url,
+      :activation_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a virtual private gateway propagating route.
     #
     # @!attribute [rw] gateway_id
@@ -27085,6 +28748,105 @@ module Aws::SecurityHub
       :gateway_id)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The initial configuration settings required to establish an
+    # integration between Security Hub and third-party provider.
+    #
+    # @note ProviderConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] jira_cloud
+    #   The configuration settings required to establish an integration with
+    #   Jira Cloud.
+    #   @return [Types::JiraCloudProviderConfiguration]
+    #
+    # @!attribute [rw] service_now
+    #   The configuration settings required to establish an integration with
+    #   ServiceNow ITSM.
+    #   @return [Types::ServiceNowProviderConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProviderConfiguration AWS API Documentation
+    #
+    class ProviderConfiguration < Struct.new(
+      :jira_cloud,
+      :service_now,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class JiraCloud < ProviderConfiguration; end
+      class ServiceNow < ProviderConfiguration; end
+      class Unknown < ProviderConfiguration; end
+    end
+
+    # The third-party provider detail for a service configuration.
+    #
+    # @note ProviderDetail is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ProviderDetail corresponding to the set member.
+    #
+    # @!attribute [rw] jira_cloud
+    #   Details about a Jira Cloud integration.
+    #   @return [Types::JiraCloudDetail]
+    #
+    # @!attribute [rw] service_now
+    #   Details about a ServiceNow ITSM integration.
+    #   @return [Types::ServiceNowDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProviderDetail AWS API Documentation
+    #
+    class ProviderDetail < Struct.new(
+      :jira_cloud,
+      :service_now,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class JiraCloud < ProviderDetail; end
+      class ServiceNow < ProviderDetail; end
+      class Unknown < ProviderDetail; end
+    end
+
+    # The connectorV2 third-party provider configuration summary.
+    #
+    # @!attribute [rw] provider_name
+    #   The name of the provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_status
+    #   The status for the connectorV2.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProviderSummary AWS API Documentation
+    #
+    class ProviderSummary < Struct.new(
+      :provider_name,
+      :connector_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The parameters required to update the configuration of an integration
+    # provider.
+    #
+    # @note ProviderUpdateConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] jira_cloud
+    #   The parameters required to update the configuration for a Jira Cloud
+    #   integration.
+    #   @return [Types::JiraCloudUpdateConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProviderUpdateConfiguration AWS API Documentation
+    #
+    class ProviderUpdateConfiguration < Struct.new(
+      :jira_cloud,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class JiraCloud < ProviderUpdateConfiguration; end
+      class Unknown < ProviderUpdateConfiguration; end
     end
 
     # Identifies where the sensitive data begins and ends.
@@ -27873,6 +29635,56 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # A list of summaries for all finding types on a resource.
+    #
+    # @!attribute [rw] finding_type
+    #   The category or classification of the security finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_name
+    #   The name of the product associated with the security finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_findings
+    #   The total count of security findings.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] severities
+    #   A breakdown of security findings by their severity levels.
+    #   @return [Types::ResourceSeverityBreakdown]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceFindingsSummary AWS API Documentation
+    #
+    class ResourceFindingsSummary < Struct.new(
+      :finding_type,
+      :product_name,
+      :total_findings,
+      :severities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the configuration for organizing and categorizing Amazon Web
+    # Services resources based on associated security findings.
+    #
+    # @!attribute [rw] group_by_field
+    #   Specifies the attribute that resources should be grouped by.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   The criteria used to select resources and associated security
+    #   findings.
+    #   @return [Types::ResourcesFilters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceGroupByRule AWS API Documentation
+    #
+    class ResourceGroupByRule < Struct.new(
+      :group_by_field,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request was rejected because it conflicts with the resource's
     # availability. For example, you tried to update a security control
     # that's currently in the `UPDATING` state.
@@ -27906,6 +29718,284 @@ module Aws::SecurityHub
     class ResourceNotFoundException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides comprehensive details about an Amazon Web Services resource
+    # and its associated security findings.
+    #
+    # @!attribute [rw] resource_arn
+    #   Specifies the ARN that uniquely identifies a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The unique identifier for a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account that owns the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region where the resource is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_category
+    #   The grouping where the resource belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_creation_time_dt
+    #   The time when the resource was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_detail_capture_time_dt
+    #   The timestamp when information about the resource was captured.
+    #   @return [String]
+    #
+    # @!attribute [rw] findings_summary
+    #   An aggregated view of security findings associated with a resource.
+    #   @return [Array<Types::ResourceFindingsSummary>]
+    #
+    # @!attribute [rw] resource_tags
+    #   The key-value pairs associated with a resource.
+    #   @return [Array<Types::ResourceTag>]
+    #
+    # @!attribute [rw] resource_config
+    #   The configuration details of a resource.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceResult AWS API Documentation
+    #
+    class ResourceResult < Struct.new(
+      :resource_arn,
+      :resource_id,
+      :account_id,
+      :region,
+      :resource_category,
+      :resource_type,
+      :resource_name,
+      :resource_creation_time_dt,
+      :resource_detail_capture_time_dt,
+      :findings_summary,
+      :resource_tags,
+      :resource_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A comprehensive distribution of security findings by severity level
+    # for Amazon Web Services resources.
+    #
+    # @!attribute [rw] other
+    #   The number of findings not in any of the severity categories.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fatal
+    #   The number of findings with a severity level of fatal.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] critical
+    #   The number of findings with a severity level of critical.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] high
+    #   The number of findings with a severity level of high.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] medium
+    #   The number of findings with a severity level of medium.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] low
+    #   The number of findings with a severity level of low.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] informational
+    #   The number of findings that provide security-related information.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unknown
+    #   The number of findings with a severity level cannot be determined.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceSeverityBreakdown AWS API Documentation
+    #
+    class ResourceSeverityBreakdown < Struct.new(
+      :other,
+      :fatal,
+      :critical,
+      :high,
+      :medium,
+      :low,
+      :informational,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents tag information associated with Amazon Web Services
+    # resources.
+    #
+    # @!attribute [rw] key
+    #   The identifier or name of the tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The data associated with the tag key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceTag AWS API Documentation
+    #
+    class ResourceTag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Enables the creation of criteria for Amazon Web Services resources in
+    # Security Hub.
+    #
+    # @!attribute [rw] string_filters
+    #   Enables filtering based on string field values.
+    #   @return [Array<Types::ResourcesStringFilter>]
+    #
+    # @!attribute [rw] date_filters
+    #   Enables filtering based on date and timestamp field values.
+    #   @return [Array<Types::ResourcesDateFilter>]
+    #
+    # @!attribute [rw] number_filters
+    #   Enables filtering based on numerical field values.
+    #   @return [Array<Types::ResourcesNumberFilter>]
+    #
+    # @!attribute [rw] map_filters
+    #   Enables filtering based on map-based field values.
+    #   @return [Array<Types::ResourcesMapFilter>]
+    #
+    # @!attribute [rw] operator
+    #   The logical operator used to combine multiple filter conditions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourcesCompositeFilter AWS API Documentation
+    #
+    class ResourcesCompositeFilter < Struct.new(
+      :string_filters,
+      :date_filters,
+      :number_filters,
+      :map_filters,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Enables the filtering of Amazon Web Services resources based on date
+    # and timestamp attributes.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A date filter for querying findings.
+    #   @return [Types::DateFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourcesDateFilter AWS API Documentation
+    #
+    class ResourcesDateFilter < Struct.new(
+      :field_name,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Enables filtering of Amazon Web Services resources based on data.
+    #
+    # @!attribute [rw] composite_filters
+    #   A collection of complex filtering conditions that can be applied to
+    #   Amazon Web Services resources.
+    #   @return [Array<Types::ResourcesCompositeFilter>]
+    #
+    # @!attribute [rw] composite_operator
+    #   The logical operator used to combine multiple filter conditions in
+    #   the structure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourcesFilters AWS API Documentation
+    #
+    class ResourcesFilters < Struct.new(
+      :composite_filters,
+      :composite_operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Enables filtering of Amazon Web Services resources based on key-value
+    # map attributes.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A map filter for filtering Security Hub findings. Each map filter
+    #   provides the field to check for, the value to check for, and the
+    #   comparison operator.
+    #   @return [Types::MapFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourcesMapFilter AWS API Documentation
+    #
+    class ResourcesMapFilter < Struct.new(
+      :field_name,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Enables filtering of Amazon Web Services resources based on numerical
+    # values.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A number filter for querying findings.
+    #   @return [Types::NumberFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourcesNumberFilter AWS API Documentation
+    #
+    class ResourcesNumberFilter < Struct.new(
+      :field_name,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Enables filtering of Amazon Web Services resources based on string
+    # field values.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A string filter for filtering Security Hub findings.
+    #   @return [Types::StringFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourcesStringFilter AWS API Documentation
+    #
+    class ResourcesStringFilter < Struct.new(
+      :field_name,
+      :filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28833,6 +30923,55 @@ module Aws::SecurityHub
       :signals,
       :sequence_indicators)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a ServiceNow ITSM integration.
+    #
+    # @!attribute [rw] instance_name
+    #   The instanceName of ServiceNow ITSM.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The clientId of ServiceNow ITSM.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_status
+    #   The status of the authorization between Jira Cloud and the service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ServiceNowDetail AWS API Documentation
+    #
+    class ServiceNowDetail < Struct.new(
+      :instance_name,
+      :client_id,
+      :auth_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The initial configuration settings required to establish an
+    # integration between Security Hub and ServiceNow ITSM.
+    #
+    # @!attribute [rw] instance_name
+    #   The instance name of ServiceNow ITSM.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The client ID of ServiceNow ITSM.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret
+    #   The client secret of ServiceNow ITSM.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ServiceNowProviderConfiguration AWS API Documentation
+    #
+    class ServiceNowProviderConfiguration < Struct.new(
+      :instance_name,
+      :client_id,
+      :client_secret)
+      SENSITIVE = [:client_secret]
       include Aws::Structure
     end
 
@@ -29910,8 +32049,10 @@ module Aws::SecurityHub
     #   * `ResourceType NOT_EQUALS AwsEc2NetworkInterface`
     #
     #   `CONTAINS` and `NOT_CONTAINS` operators can be used only with
-    #   automation rules. For more information, see [Automation rules][1] in
-    #   the *Security Hub User Guide*.
+    #   automation rules V1. `CONTAINS_WORD` operator is only supported in
+    #   `GetFindingsV2`, `GetFindingStatisticsV2`, `GetResourcesV2`, and
+    #   `GetResourceStatisticsV2` APIs. For more information, see
+    #   [Automation rules][1] in the *Security Hub User Guide*.
     #
     #
     #
@@ -30105,6 +32246,23 @@ module Aws::SecurityHub
       :last_observed_at,
       :source,
       :source_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The limit on the number of requests per second was exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message,
+      :code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30320,6 +32478,105 @@ module Aws::SecurityHub
     #
     class UpdateActionTargetResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] aggregator_v2_arn
+    #   The ARN of the Aggregator V2.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_linking_mode
+    #   Determines how Amazon Web Services Regions should be linked to the
+    #   Aggregator V2.
+    #   @return [String]
+    #
+    # @!attribute [rw] linked_regions
+    #   A list of Amazon Web Services Regions linked to the aggegation
+    #   Region.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateAggregatorV2Request AWS API Documentation
+    #
+    class UpdateAggregatorV2Request < Struct.new(
+      :aggregator_v2_arn,
+      :region_linking_mode,
+      :linked_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aggregator_v2_arn
+    #   The ARN of the Aggregator V2.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_region
+    #   The Amazon Web Services Region where data is aggregated.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_linking_mode
+    #   Determines how Amazon Web Services Regions should be linked to the
+    #   Aggregator V2.
+    #   @return [String]
+    #
+    # @!attribute [rw] linked_regions
+    #   A list of Amazon Web Services Regions linked to the aggegation
+    #   Region.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateAggregatorV2Response AWS API Documentation
+    #
+    class UpdateAggregatorV2Response < Struct.new(
+      :aggregator_v2_arn,
+      :aggregation_region,
+      :region_linking_mode,
+      :linked_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The ARN of the automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_status
+    #   The status of the automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_order
+    #   Represents a value for the rule priority.
+    #   @return [Float]
+    #
+    # @!attribute [rw] description
+    #   A description of the automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] criteria
+    #   The filtering type and configuration of the automation rule.
+    #   @return [Types::Criteria]
+    #
+    # @!attribute [rw] actions
+    #   A list of actions to be performed when the rule criteria is met.
+    #   @return [Array<Types::AutomationRulesActionV2>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateAutomationRuleV2Request AWS API Documentation
+    #
+    class UpdateAutomationRuleV2Request < Struct.new(
+      :identifier,
+      :rule_status,
+      :rule_order,
+      :description,
+      :rule_name,
+      :criteria,
+      :actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateAutomationRuleV2Response AWS API Documentation
+    #
+    class UpdateAutomationRuleV2Response < Aws::EmptyStructure; end
+
     # Specifies the parameters to update in an existing automation rule.
     #
     # @!attribute [rw] rule_arn
@@ -30489,6 +32746,37 @@ module Aws::SecurityHub
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] connector_id
+    #   The UUID of the connectorV2 to identify connectorV2 resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret
+    #   The clientSecret of ServiceNow.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the connectorV2.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The third-party provider’s service configuration.
+    #   @return [Types::ProviderUpdateConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateConnectorV2Request AWS API Documentation
+    #
+    class UpdateConnectorV2Request < Struct.new(
+      :connector_id,
+      :client_secret,
+      :description,
+      :provider)
+      SENSITIVE = [:client_secret]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateConnectorV2Response AWS API Documentation
+    #
+    class UpdateConnectorV2Response < Aws::EmptyStructure; end
 
     # @!attribute [rw] finding_aggregator_arn
     #   The ARN of the finding aggregator. To obtain the ARN, use
@@ -30823,6 +33111,24 @@ module Aws::SecurityHub
     class UserAccount < Struct.new(
       :uid,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request has failed validation because it's missing required
+    # fields or has invalid inputs.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message,
+      :code)
       SENSITIVE = []
       include Aws::Structure
     end

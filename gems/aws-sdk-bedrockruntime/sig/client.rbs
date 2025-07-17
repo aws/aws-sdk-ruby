@@ -142,15 +142,25 @@ module Aws
                                 }
                               }?,
                               document: {
-                                format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md"),
+                                format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md")?,
                                 name: ::String,
                                 source: {
                                   bytes: ::String?,
                                   s3_location: {
                                     uri: ::String,
                                     bucket_owner: ::String?
-                                  }?
-                                }
+                                  }?,
+                                  text: ::String?,
+                                  content: Array[
+                                    {
+                                      text: ::String?
+                                    },
+                                  ]?
+                                },
+                                context: ::String?,
+                                citations: {
+                                  enabled: bool
+                                }?
                               }?,
                               video: {
                                 format: ("mkv" | "mov" | "mp4" | "webm" | "flv" | "mpeg" | "mpg" | "wmv" | "three_gp"),
@@ -186,15 +196,25 @@ module Aws
                                       }
                                     }?,
                                     document: {
-                                      format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md"),
+                                      format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md")?,
                                       name: ::String,
                                       source: {
                                         bytes: ::String?,
                                         s3_location: {
                                           uri: ::String,
                                           bucket_owner: ::String?
-                                        }?
-                                      }
+                                        }?,
+                                        text: ::String?,
+                                        content: Array[
+                                          {
+                                            text: ::String?
+                                          },
+                                        ]?
+                                      },
+                                      context: ::String?,
+                                      citations: {
+                                        enabled: bool
+                                      }?
                                     }?,
                                     video: {
                                       format: ("mkv" | "mov" | "mp4" | "webm" | "flv" | "mpeg" | "mpg" | "wmv" | "three_gp"),
@@ -231,6 +251,40 @@ module Aws
                                   signature: ::String?
                                 }?,
                                 redacted_content: ::String?
+                              }?,
+                              citations_content: {
+                                content: Array[
+                                  {
+                                    text: ::String?
+                                  },
+                                ]?,
+                                citations: Array[
+                                  {
+                                    title: ::String?,
+                                    source_content: Array[
+                                      {
+                                        text: ::String?
+                                      },
+                                    ]?,
+                                    location: {
+                                      document_char: {
+                                        document_index: ::Integer?,
+                                        start: ::Integer?,
+                                        end: ::Integer?
+                                      }?,
+                                      document_page: {
+                                        document_index: ::Integer?,
+                                        start: ::Integer?,
+                                        end: ::Integer?
+                                      }?,
+                                      document_chunk: {
+                                        document_index: ::Integer?,
+                                        start: ::Integer?,
+                                        end: ::Integer?
+                                      }?
+                                    }?
+                                  },
+                                ]?
                               }?
                             },
                           ]
@@ -330,15 +384,25 @@ module Aws
                                        }
                                      }?,
                                      document: {
-                                       format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md"),
+                                       format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md")?,
                                        name: ::String,
                                        source: {
                                          bytes: ::String?,
                                          s3_location: {
                                            uri: ::String,
                                            bucket_owner: ::String?
-                                         }?
-                                       }
+                                         }?,
+                                         text: ::String?,
+                                         content: Array[
+                                           {
+                                             text: ::String?
+                                           },
+                                         ]?
+                                       },
+                                       context: ::String?,
+                                       citations: {
+                                         enabled: bool
+                                       }?
                                      }?,
                                      video: {
                                        format: ("mkv" | "mov" | "mp4" | "webm" | "flv" | "mpeg" | "mpg" | "wmv" | "three_gp"),
@@ -374,15 +438,25 @@ module Aws
                                              }
                                            }?,
                                            document: {
-                                             format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md"),
+                                             format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md")?,
                                              name: ::String,
                                              source: {
                                                bytes: ::String?,
                                                s3_location: {
                                                  uri: ::String,
                                                  bucket_owner: ::String?
-                                               }?
-                                             }
+                                               }?,
+                                               text: ::String?,
+                                               content: Array[
+                                                 {
+                                                   text: ::String?
+                                                 },
+                                               ]?
+                                             },
+                                             context: ::String?,
+                                             citations: {
+                                               enabled: bool
+                                             }?
                                            }?,
                                            video: {
                                              format: ("mkv" | "mov" | "mp4" | "webm" | "flv" | "mpeg" | "mpg" | "wmv" | "three_gp"),
@@ -419,6 +493,40 @@ module Aws
                                          signature: ::String?
                                        }?,
                                        redacted_content: ::String?
+                                     }?,
+                                     citations_content: {
+                                       content: Array[
+                                         {
+                                           text: ::String?
+                                         },
+                                       ]?,
+                                       citations: Array[
+                                         {
+                                           title: ::String?,
+                                           source_content: Array[
+                                             {
+                                               text: ::String?
+                                             },
+                                           ]?,
+                                           location: {
+                                             document_char: {
+                                               document_index: ::Integer?,
+                                               start: ::Integer?,
+                                               end: ::Integer?
+                                             }?,
+                                             document_page: {
+                                               document_index: ::Integer?,
+                                               start: ::Integer?,
+                                               end: ::Integer?
+                                             }?,
+                                             document_chunk: {
+                                               document_index: ::Integer?,
+                                               start: ::Integer?,
+                                               end: ::Integer?
+                                             }?
+                                           }?
+                                         },
+                                       ]?
                                      }?
                                    },
                                  ]

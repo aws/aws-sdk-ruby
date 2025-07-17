@@ -3,6 +3,59 @@ Unreleased Changes
 
 * Feature - Set the default `retry_mode` to `standard` for all clients.
 
+3.226.2 (2025-07-01)
+------------------
+
+* Issue - Document incorrect behavior in protocol error parsing (specifically around query and query compatible services).
+
+3.226.1 (2025-06-24)
+------------------
+
+* Issue - Fixed spelling in the `Aws::Errors::SignalEventError` error message.
+
+3.226.0 (2025-06-17)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - The AWS Security Token Service APIs AssumeRoleWithSAML and AssumeRoleWithWebIdentity can now be invoked without pre-configured AWS credentials in the SDK configuration.
+
+3.225.2 (2025-06-10)
+------------------
+
+* Issue - Only load required `cgi` modules for Ruby 3.5.
+
+3.225.1 (2025-06-05)
+------------------
+
+* Issue - Fix RPCv2 parser to handle flattened list and flattened map members correctly for `AwsQueryCompatible` services.
+
+3.225.0 (2025-06-02)
+------------------
+
+* Feature - AWS SDK for Ruby no longer supports Ruby runtime versions 2.5 and 2.6.
+
+3.224.1 (2025-05-28)
+------------------
+
+* Issue - Signal data in http response listeners prior to writing, so that data can be inspected or verified before potential mutation.
+
+3.224.0 (2025-05-12)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Support `ENV['AWS_DISABLE_HOST_PREFIX_INJECTION']` and `disable_host_prefix_injection` shared config to disable host prefix injection for all services.
+
+3.223.0 (2025-05-01)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 3.222.3 (2025-04-28)
 ------------------
 

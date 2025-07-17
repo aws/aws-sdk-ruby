@@ -1,60 +1,6 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "GetTable_AccessDeniedException",
-    "operationName" : "GetTable",
-    "input" : {
-      "tableBucketARN" : "arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist",
-      "namespace" : "doesnotexist",
-      "name" : "doesnotexist"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "AccessDeniedException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListTables_AccessDeniedException",
-    "operationName" : "ListTables",
-    "input" : {
-      "tableBucketARN" : "arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "AccessDeniedException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetNamespace_AccessDeniedException",
-    "operationName" : "GetNamespace",
-    "input" : {
-      "tableBucketARN" : "arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist",
-      "namespace" : "doesnotexist"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "AccessDeniedException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
     "id" : "GetTableBucket_AccessDeniedException",
     "operationName" : "GetTableBucket",
     "input" : {
@@ -87,6 +33,77 @@
   }, {
     "id" : "ListNamespaces_AccessDeniedException",
     "operationName" : "ListNamespaces",
+    "input" : {
+      "tableBucketARN" : "arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "AccessDeniedException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetTable_AccessDeniedException",
+    "operationName" : "GetTable",
+    "input" : {
+      "tableBucketARN" : "arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist",
+      "namespace" : "doesnotexist",
+      "name" : "doesnotexist"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "AccessDeniedException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetTableArn_AccessDeniedException",
+    "operationName" : "GetTable",
+    "input" : {
+      "tableArn" : "arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist/table/f577d6ca-c1dd-4686-9f41-62130a40e91b"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "AccessDeniedException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetNamespace_AccessDeniedException",
+    "operationName" : "GetNamespace",
+    "input" : {
+      "tableBucketARN" : "arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist",
+      "namespace" : "doesnotexist"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "AccessDeniedException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListTables_AccessDeniedException",
+    "operationName" : "ListTables",
     "input" : {
       "tableBucketARN" : "arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist"
     },

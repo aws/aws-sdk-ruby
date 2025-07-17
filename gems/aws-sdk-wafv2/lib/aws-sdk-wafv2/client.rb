@@ -200,8 +200,7 @@ module Aws::WAFV2
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -1124,6 +1123,8 @@ module Aws::WAFV2
     #                 ja4_fingerprint: {
     #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #                 },
+    #                 asn: {
+    #                 },
     #               },
     #             ],
     #           },
@@ -1251,6 +1252,20 @@ module Aws::WAFV2
     #                     },
     #                   },
     #                   enable_regex_in_path: false,
+    #                 },
+    #                 aws_managed_rules_anti_d_do_s_rule_set: {
+    #                   client_side_action_config: { # required
+    #                     challenge: { # required
+    #                       usage_of_action: "ENABLED", # required, accepts ENABLED, DISABLED
+    #                       sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH
+    #                       exempt_uri_regular_expressions: [
+    #                         {
+    #                           regex_string: "RegexPatternString",
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   sensitivity_to_block: "LOW", # accepts LOW, MEDIUM, HIGH
     #                 },
     #               },
     #             ],
@@ -1387,6 +1402,13 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #           },
+    #           asn_match_statement: {
+    #             asn_list: [1], # required
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #             },
     #           },
     #         },
     #         action: {
@@ -2333,6 +2355,8 @@ module Aws::WAFV2
     #                 ja4_fingerprint: {
     #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #                 },
+    #                 asn: {
+    #                 },
     #               },
     #             ],
     #           },
@@ -2460,6 +2484,20 @@ module Aws::WAFV2
     #                     },
     #                   },
     #                   enable_regex_in_path: false,
+    #                 },
+    #                 aws_managed_rules_anti_d_do_s_rule_set: {
+    #                   client_side_action_config: { # required
+    #                     challenge: { # required
+    #                       usage_of_action: "ENABLED", # required, accepts ENABLED, DISABLED
+    #                       sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH
+    #                       exempt_uri_regular_expressions: [
+    #                         {
+    #                           regex_string: "RegexPatternString",
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   sensitivity_to_block: "LOW", # accepts LOW, MEDIUM, HIGH
     #                 },
     #               },
     #             ],
@@ -2596,6 +2634,13 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #           },
+    #           asn_match_statement: {
+    #             asn_list: [1], # required
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #             },
     #           },
     #         },
     #         action: {
@@ -2853,6 +2898,20 @@ module Aws::WAFV2
     #
     #
     #   [1]: http://aws.amazon.com/waf/pricing/
+    #
+    # @option params [Types::OnSourceDDoSProtectionConfig] :on_source_d_do_s_protection_config
+    #   Specifies the type of DDoS protection to apply to web request data for
+    #   a web ACL. For most scenarios, it is recommended to use the default
+    #   protection level, `ACTIVE_UNDER_DDOS`. If a web ACL is associated with
+    #   multiple Application Load Balancers, the changes you make to DDoS
+    #   protection in that web ACL will apply to all associated Application
+    #   Load Balancers.
+    #
+    # @option params [Types::ApplicationConfig] :application_config
+    #   Configures the ability for the WAF console to store and retrieve
+    #   application attributes during the web ACL creation process.
+    #   Application attributes help WAF give recommendations for protection
+    #   packs.
     #
     # @return [Types::CreateWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3397,6 +3456,8 @@ module Aws::WAFV2
     #                 ja4_fingerprint: {
     #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #                 },
+    #                 asn: {
+    #                 },
     #               },
     #             ],
     #           },
@@ -3524,6 +3585,20 @@ module Aws::WAFV2
     #                     },
     #                   },
     #                   enable_regex_in_path: false,
+    #                 },
+    #                 aws_managed_rules_anti_d_do_s_rule_set: {
+    #                   client_side_action_config: { # required
+    #                     challenge: { # required
+    #                       usage_of_action: "ENABLED", # required, accepts ENABLED, DISABLED
+    #                       sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH
+    #                       exempt_uri_regular_expressions: [
+    #                         {
+    #                           regex_string: "RegexPatternString",
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   sensitivity_to_block: "LOW", # accepts LOW, MEDIUM, HIGH
     #                 },
     #               },
     #             ],
@@ -3660,6 +3735,13 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #           },
+    #           asn_match_statement: {
+    #             asn_list: [1], # required
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #             },
     #           },
     #         },
     #         action: {
@@ -3799,6 +3881,17 @@ module Aws::WAFV2
     #           default_size_inspection_limit: "KB_16", # required, accepts KB_16, KB_32, KB_48, KB_64
     #         },
     #       },
+    #     },
+    #     on_source_d_do_s_protection_config: {
+    #       alb_low_reputation_mode: "ACTIVE_UNDER_DDOS", # required, accepts ACTIVE_UNDER_DDOS, ALWAYS_ON
+    #     },
+    #     application_config: {
+    #       attributes: [
+    #         {
+    #           name: "AttributeName",
+    #           values: ["AttributeValue"],
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -5332,6 +5425,11 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_acfp_rule_set.response_inspection.json.failure_values #=> Array
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_acfp_rule_set.response_inspection.json.failure_values[0] #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_acfp_rule_set.enable_regex_in_path #=> Boolean
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_anti_d_do_s_rule_set.client_side_action_config.challenge.usage_of_action #=> String, one of "ENABLED", "DISABLED"
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_anti_d_do_s_rule_set.client_side_action_config.challenge.sensitivity #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_anti_d_do_s_rule_set.client_side_action_config.challenge.exempt_uri_regular_expressions #=> Array
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_anti_d_do_s_rule_set.client_side_action_config.challenge.exempt_uri_regular_expressions[0].regex_string #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_anti_d_do_s_rule_set.sensitivity_to_block #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides #=> Array
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].name #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
@@ -5381,6 +5479,10 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.asn_match_statement.asn_list #=> Array
+    #   resp.rule_group.rules[0].statement.asn_match_statement.asn_list[0] #=> Integer
+    #   resp.rule_group.rules[0].statement.asn_match_statement.forwarded_ip_config.header_name #=> String
+    #   resp.rule_group.rules[0].statement.asn_match_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].action.block.custom_response.response_code #=> Integer
     #   resp.rule_group.rules[0].action.block.custom_response.custom_response_body_key #=> String
     #   resp.rule_group.rules[0].action.block.custom_response.response_headers #=> Array
@@ -7893,6 +7995,8 @@ module Aws::WAFV2
     #                 ja4_fingerprint: {
     #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #                 },
+    #                 asn: {
+    #                 },
     #               },
     #             ],
     #           },
@@ -8020,6 +8124,20 @@ module Aws::WAFV2
     #                     },
     #                   },
     #                   enable_regex_in_path: false,
+    #                 },
+    #                 aws_managed_rules_anti_d_do_s_rule_set: {
+    #                   client_side_action_config: { # required
+    #                     challenge: { # required
+    #                       usage_of_action: "ENABLED", # required, accepts ENABLED, DISABLED
+    #                       sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH
+    #                       exempt_uri_regular_expressions: [
+    #                         {
+    #                           regex_string: "RegexPatternString",
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   sensitivity_to_block: "LOW", # accepts LOW, MEDIUM, HIGH
     #                 },
     #               },
     #             ],
@@ -8156,6 +8274,13 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #           },
+    #           asn_match_statement: {
+    #             asn_list: [1], # required
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #             },
     #           },
     #         },
     #         action: {
@@ -8457,6 +8582,14 @@ module Aws::WAFV2
     #
     #
     #   [1]: http://aws.amazon.com/waf/pricing/
+    #
+    # @option params [Types::OnSourceDDoSProtectionConfig] :on_source_d_do_s_protection_config
+    #   Specifies the type of DDoS protection to apply to web request data for
+    #   a web ACL. For most scenarios, it is recommended to use the default
+    #   protection level, `ACTIVE_UNDER_DDOS`. If a web ACL is associated with
+    #   multiple Application Load Balancers, the changes you make to DDoS
+    #   protection in that web ACL will apply to all associated Application
+    #   Load Balancers.
     #
     # @return [Types::UpdateWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9002,6 +9135,8 @@ module Aws::WAFV2
     #                 ja4_fingerprint: {
     #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #                 },
+    #                 asn: {
+    #                 },
     #               },
     #             ],
     #           },
@@ -9129,6 +9264,20 @@ module Aws::WAFV2
     #                     },
     #                   },
     #                   enable_regex_in_path: false,
+    #                 },
+    #                 aws_managed_rules_anti_d_do_s_rule_set: {
+    #                   client_side_action_config: { # required
+    #                     challenge: { # required
+    #                       usage_of_action: "ENABLED", # required, accepts ENABLED, DISABLED
+    #                       sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH
+    #                       exempt_uri_regular_expressions: [
+    #                         {
+    #                           regex_string: "RegexPatternString",
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   sensitivity_to_block: "LOW", # accepts LOW, MEDIUM, HIGH
     #                 },
     #               },
     #             ],
@@ -9266,6 +9415,13 @@ module Aws::WAFV2
     #               },
     #             ],
     #           },
+    #           asn_match_statement: {
+    #             asn_list: [1], # required
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #             },
+    #           },
     #         },
     #         action: {
     #           block: {
@@ -9400,6 +9556,9 @@ module Aws::WAFV2
     #         },
     #       },
     #     },
+    #     on_source_d_do_s_protection_config: {
+    #       alb_low_reputation_mode: "ACTIVE_UNDER_DDOS", # required, accepts ACTIVE_UNDER_DDOS, ALWAYS_ON
+    #     },
     #   })
     #
     # @example Response structure
@@ -9433,7 +9592,7 @@ module Aws::WAFV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.112.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

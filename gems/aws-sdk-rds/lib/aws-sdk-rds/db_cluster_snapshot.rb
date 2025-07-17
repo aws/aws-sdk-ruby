@@ -1057,11 +1057,11 @@ module Aws::RDS
     #   support for that engine version. For more information, see the
     #   following sections:
     #
-    #   * Amazon Aurora - [Using Amazon RDS Extended Support][1] in the
-    #     *Amazon Aurora User Guide*
+    #   * Amazon Aurora - [Amazon RDS Extended Support with Amazon Aurora][1]
+    #     in the *Amazon Aurora User Guide*
     #
-    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
-    #     RDS User Guide*
+    #   * Amazon RDS - [Amazon RDS Extended Support with Amazon RDS][2] in the
+    #     *Amazon RDS User Guide*
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #

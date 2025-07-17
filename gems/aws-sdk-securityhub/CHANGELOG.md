@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.137.0 (2025-06-17)
+------------------
+
+* Feature - Adds operations, structures, and exceptions required for public preview release of Security Hub V2.
+
+1.136.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.135.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.134.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.133.0 (2025-04-21)
 ------------------
 

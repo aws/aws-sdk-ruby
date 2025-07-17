@@ -2,11 +2,20 @@
     {
         "description": "Test cases for DatetimeOffsets operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "DatetimeOffsetsOutput": {
@@ -72,11 +81,20 @@
     {
         "description": "Test cases for DocumentType operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "DocumentTypeInputOutput": {
@@ -250,11 +268,20 @@
     {
         "description": "Test cases for DocumentTypeAsMapValue operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "DocumentTypeAsMapValueInputOutput": {
@@ -327,11 +354,20 @@
     {
         "description": "Test cases for DocumentTypeAsPayload operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "DocumentTypeAsPayloadInputOutput": {
@@ -411,11 +447,20 @@
     {
         "description": "Test cases for EmptyInputAndEmptyOutput operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "EmptyInputAndEmptyOutputOutput": {
@@ -474,11 +519,20 @@
     {
         "description": "Test cases for FractionalSeconds operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "FractionalSecondsOutput": {
@@ -522,11 +576,20 @@
     {
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "GreetingWithErrorsOutput": {
@@ -603,11 +666,20 @@
     {
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "InvalidGreeting": {
@@ -666,11 +738,20 @@
     {
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "ComplexError": {
@@ -778,11 +859,20 @@
     {
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "FooError": {
@@ -1051,11 +1141,20 @@
     {
         "description": "Test cases for HttpEmptyPrefixHeaders operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "HttpEmptyPrefixHeadersOutput": {
@@ -1122,11 +1221,20 @@
     {
         "description": "Test cases for HttpEnumPayload operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "EnumPayloadInput": {
@@ -1175,11 +1283,20 @@
     {
         "description": "Test cases for HttpPayloadTraits operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "HttpPayloadTraitsInputOutput": {
@@ -1262,11 +1379,20 @@
     {
         "description": "Test cases for HttpPayloadWithStructure operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "HttpPayloadWithStructureInputOutput": {
@@ -1323,17 +1449,50 @@
                     },
                     "body": "{\n    \"greeting\": \"hello\",\n    \"name\": \"Phreddy\"\n}"
                 }
+            },
+            {
+                "id": "RestJsonHttpPayloadWithStructureAndEmptyResponseBody",
+                "given": {
+                    "name": "HttpPayloadWithStructure",
+                    "http": {
+                        "method": "PUT",
+                        "requestUri": "/HttpPayloadWithStructure",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "HttpPayloadWithStructureInputOutput"
+                    },
+                    "documentation": "<p>This example serializes a structure in the payload.</p> <p>Note that serializing a structure changes the wrapper element name to match the targeted structure.</p>",
+                    "idempotent": true
+                },
+                "description": "Serializes a structure in the payload",
+                "result": {
+                    "nested": null
+                },
+                "response": {
+                    "status_code": 200,
+                    "body": ""
+                }
             }
         ]
     },
     {
         "description": "Test cases for HttpPayloadWithUnion operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "HttpPayloadWithUnionInputOutput": {
@@ -1418,11 +1577,20 @@
     {
         "description": "Test cases for HttpPrefixHeaders operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "HttpPrefixHeadersOutput": {
@@ -1490,11 +1658,20 @@
     {
         "description": "Test cases for HttpPrefixHeadersInResponse operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "HttpPrefixHeadersInResponseOutput": {
@@ -1555,11 +1732,20 @@
     {
         "description": "Test cases for HttpResponseCode operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "HttpResponseCodeOutput": {
@@ -1631,11 +1817,20 @@
     {
         "description": "Test cases for HttpStringPayload operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "StringPayloadInput": {
@@ -1681,11 +1876,20 @@
     {
         "description": "Test cases for IgnoreQueryParamsInResponse operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "IgnoreQueryParamsInResponseOutput": {
@@ -1753,11 +1957,20 @@
     {
         "description": "Test cases for InputAndOutputWithHeaders operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "InputAndOutputWithHeadersIO": {
@@ -2255,11 +2468,20 @@
     {
         "description": "Test cases for JsonBlobs operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "JsonBlobsInputOutput": {
@@ -2306,11 +2528,20 @@
     {
         "description": "Test cases for JsonEnums operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "JsonEnumsInputOutput": {
@@ -2418,11 +2649,20 @@
     {
         "description": "Test cases for JsonIntEnums operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "JsonIntEnumsInputOutput": {
@@ -2525,11 +2765,20 @@
     {
         "description": "Test cases for JsonLists operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "JsonListsInputOutput": {
@@ -2769,11 +3018,20 @@
     {
         "description": "Test cases for JsonMaps operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "JsonMapsInputOutput": {
@@ -3001,11 +3259,20 @@
     {
         "description": "Test cases for JsonTimestamps operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "JsonTimestampsInputOutput": {
@@ -3250,11 +3517,20 @@
     {
         "description": "Test cases for JsonUnions operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "UnionInputOutput": {
@@ -3668,11 +3944,20 @@
     {
         "description": "Test cases for MediaTypeHeader operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "MediaTypeHeaderOutput": {
@@ -3721,11 +4006,20 @@
     {
         "description": "Test cases for NoInputAndNoOutput operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {},
         "cases": [
@@ -3752,11 +4046,20 @@
     {
         "description": "Test cases for NoInputAndOutput operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "NoInputAndOutputOutput": {
@@ -3815,11 +4118,20 @@
     {
         "description": "Test cases for PostUnionWithJsonName operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "PostUnionWithJsonNameOutput": {
@@ -3944,11 +4256,20 @@
     {
         "description": "Test cases for RecursiveShapes operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "RecursiveShapesInputOutput": {
@@ -4029,11 +4350,20 @@
     {
         "description": "Test cases for SimpleScalarProperties operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "SimpleScalarPropertiesInputOutput": {
@@ -4245,11 +4575,20 @@
     {
         "description": "Test cases for TimestampFormatHeaders operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
             "TimestampFormatHeadersIO": {
@@ -4363,11 +4702,20 @@
     {
         "description": "Test cases for UnitInputAndOutput operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
             "protocol": "rest-json",
             "protocols": [
                 "rest-json"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {},
         "cases": [

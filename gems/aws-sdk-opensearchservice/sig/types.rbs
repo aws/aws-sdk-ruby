@@ -10,11 +10,13 @@ module Aws::OpenSearchService
 
     class AIMLOptionsInput
       attr_accessor natural_language_query_generation_options: Types::NaturalLanguageQueryGenerationOptionsInput
+      attr_accessor s3_vectors_engine: Types::S3VectorsEngine
       SENSITIVE: []
     end
 
     class AIMLOptionsOutput
       attr_accessor natural_language_query_generation_options: Types::NaturalLanguageQueryGenerationOptionsOutput
+      attr_accessor s3_vectors_engine: Types::S3VectorsEngine
       SENSITIVE: []
     end
 
@@ -1689,6 +1691,11 @@ module Aws::OpenSearchService
 
     class S3GlueDataCatalog
       attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class S3VectorsEngine
+      attr_accessor enabled: bool
       SENSITIVE: []
     end
 

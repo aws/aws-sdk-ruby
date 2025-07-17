@@ -1416,6 +1416,22 @@
         "updatedAt":{"shape":"DateTimestamp"}
       }
     },
+    "AdditionalModelRequestFields":{
+      "type":"map",
+      "key":{"shape":"AdditionalModelRequestFieldsKey"},
+      "value":{"shape":"AdditionalModelRequestFieldsValue"}
+    },
+    "AdditionalModelRequestFieldsKey":{
+      "type":"string",
+      "max":100,
+      "min":1
+    },
+    "AdditionalModelRequestFieldsValue":{
+      "type":"structure",
+      "members":{
+      },
+      "document":true
+    },
     "Agent":{
       "type":"structure",
       "required":[
@@ -1502,6 +1518,7 @@
         "agentAliasName":{"shape":"Name"},
         "agentAliasStatus":{"shape":"AgentAliasStatus"},
         "agentId":{"shape":"Id"},
+        "aliasInvocationState":{"shape":"AliasInvocationState"},
         "clientToken":{"shape":"ClientToken"},
         "createdAt":{"shape":"DateTimestamp"},
         "description":{"shape":"Description"},
@@ -1579,6 +1596,7 @@
         "agentAliasId":{"shape":"AgentAliasId"},
         "agentAliasName":{"shape":"Name"},
         "agentAliasStatus":{"shape":"AgentAliasStatus"},
+        "aliasInvocationState":{"shape":"AliasInvocationState"},
         "createdAt":{"shape":"DateTimestamp"},
         "description":{"shape":"Description"},
         "routingConfiguration":{"shape":"AgentAliasRoutingConfiguration"},
@@ -1812,6 +1830,13 @@
         "updatedAt":{"shape":"DateTimestamp"}
       }
     },
+    "AliasInvocationState":{
+      "type":"string",
+      "enum":[
+        "ACCEPT_INVOCATIONS",
+        "REJECT_INVOCATIONS"
+      ]
+    },
     "AnyToolChoice":{
       "type":"structure",
       "members":{
@@ -1953,6 +1978,12 @@
       "min":1,
       "pattern":"^(arn:aws(-[^:]{1,12})?:(bedrock):[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-zA-Z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$"
     },
+    "BedrockRerankingModelArn":{
+      "type":"string",
+      "max":2048,
+      "min":1,
+      "pattern":"^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/(.*))?$"
+    },
     "Boolean":{
       "type":"boolean",
       "box":true
@@ -2047,6 +2078,13 @@
       "max":63,
       "min":0,
       "pattern":"^[a-zA-Z0-9_\\-]+$"
+    },
+    "ConcurrencyType":{
+      "type":"string",
+      "enum":[
+        "Automatic",
+        "Manual"
+      ]
     },
     "ConditionFlowNodeConfiguration":{
       "type":"structure",
@@ -2300,6 +2338,7 @@
           "shape":"ClientToken",
           "idempotencyToken":true
         },
+        "concurrencyConfiguration":{"shape":"FlowAliasConcurrencyConfiguration"},
         "description":{"shape":"Description"},
         "flowIdentifier":{
           "shape":"FlowIdentifier",
@@ -2324,6 +2363,7 @@
       ],
       "members":{
         "arn":{"shape":"FlowAliasArn"},
+        "concurrencyConfiguration":{"shape":"FlowAliasConcurrencyConfiguration"},
         "createdAt":{"shape":"DateTimestamp"},
         "description":{"shape":"Description"},
         "flowId":{"shape":"FlowId"},
@@ -3253,11 +3293,30 @@
       "max":2048,
       "min":0
     },
+    "FieldForReranking":{
+      "type":"structure",
+      "required":["fieldName"],
+      "members":{
+        "fieldName":{"shape":"FieldForRerankingFieldNameString"}
+      }
+    },
+    "FieldForRerankingFieldNameString":{
+      "type":"string",
+      "max":2000,
+      "min":1
+    },
     "FieldName":{
       "type":"string",
       "max":2048,
       "min":0,
       "pattern":"^.*$"
+    },
+    "FieldsForReranking":{
+      "type":"list",
+      "member":{"shape":"FieldForReranking"},
+      "max":100,
+      "min":1,
+      "sensitive":true
     },
     "FilterList":{
       "type":"list",
@@ -3304,6 +3363,20 @@
       "type":"string",
       "pattern":"^arn:aws:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:flow/[0-9a-zA-Z]{10}/alias/(TSTALIASID|[0-9a-zA-Z]{10})$"
     },
+    "FlowAliasConcurrencyConfiguration":{
+      "type":"structure",
+      "required":["type"],
+      "members":{
+        "maxConcurrency":{"shape":"FlowAliasConcurrencyConfigurationMaxConcurrencyInteger"},
+        "type":{"shape":"ConcurrencyType"}
+      }
+    },
+    "FlowAliasConcurrencyConfigurationMaxConcurrencyInteger":{
+      "type":"integer",
+      "box":true,
+      "max":100,
+      "min":1
+    },
     "FlowAliasId":{
       "type":"string",
       "pattern":"^(TSTALIASID|[0-9a-zA-Z]{10})$"
@@ -3343,6 +3416,7 @@
       ],
       "members":{
         "arn":{"shape":"FlowAliasArn"},
+        "concurrencyConfiguration":{"shape":"FlowAliasConcurrencyConfiguration"},
         "createdAt":{"shape":"DateTimestamp"},
         "description":{"shape":"Description"},
         "flowId":{"shape":"FlowId"},
@@ -3490,11 +3564,15 @@
         "agent":{"shape":"AgentFlowNodeConfiguration"},
         "collector":{"shape":"CollectorFlowNodeConfiguration"},
         "condition":{"shape":"ConditionFlowNodeConfiguration"},
+        "inlineCode":{"shape":"InlineCodeFlowNodeConfiguration"},
         "input":{"shape":"InputFlowNodeConfiguration"},
         "iterator":{"shape":"IteratorFlowNodeConfiguration"},
         "knowledgeBase":{"shape":"KnowledgeBaseFlowNodeConfiguration"},
         "lambdaFunction":{"shape":"LambdaFunctionFlowNodeConfiguration"},
         "lex":{"shape":"LexFlowNodeConfiguration"},
+        "loop":{"shape":"LoopFlowNodeConfiguration"},
+        "loopController":{"shape":"LoopControllerFlowNodeConfiguration"},
+        "loopInput":{"shape":"LoopInputFlowNodeConfiguration"},
         "output":{"shape":"OutputFlowNodeConfiguration"},
         "prompt":{"shape":"PromptFlowNodeConfiguration"},
         "retrieval":{"shape":"RetrievalFlowNodeConfiguration"},
@@ -3520,10 +3598,19 @@
         "type"
       ],
       "members":{
+        "category":{"shape":"FlowNodeInputCategory"},
         "expression":{"shape":"FlowNodeInputExpression"},
         "name":{"shape":"FlowNodeInputName"},
         "type":{"shape":"FlowNodeIODataType"}
       }
+    },
+    "FlowNodeInputCategory":{
+      "type":"string",
+      "enum":[
+        "LoopCondition",
+        "ReturnValueToLoopStart",
+        "ExitLoop"
+      ]
     },
     "FlowNodeInputExpression":{
       "type":"string",
@@ -3580,7 +3667,11 @@
         "Agent",
         "Retrieval",
         "Iterator",
-        "Collector"
+        "Collector",
+        "InlineCode",
+        "Loop",
+        "LoopInput",
+        "LoopController"
       ]
     },
     "FlowNodes":{
@@ -3646,6 +3737,8 @@
         "duplicateConditionExpression":{"shape":"DuplicateConditionExpressionFlowValidationDetails"},
         "duplicateConnections":{"shape":"DuplicateConnectionsFlowValidationDetails"},
         "incompatibleConnectionDataType":{"shape":"IncompatibleConnectionDataTypeFlowValidationDetails"},
+        "invalidLoopBoundary":{"shape":"InvalidLoopBoundaryFlowValidationDetails"},
+        "loopIncompatibleNodeType":{"shape":"LoopIncompatibleNodeTypeFlowValidationDetails"},
         "malformedConditionExpression":{"shape":"MalformedConditionExpressionFlowValidationDetails"},
         "malformedNodeInputExpression":{"shape":"MalformedNodeInputExpressionFlowValidationDetails"},
         "mismatchedNodeInputType":{"shape":"MismatchedNodeInputTypeFlowValidationDetails"},
@@ -3653,10 +3746,14 @@
         "missingConnectionConfiguration":{"shape":"MissingConnectionConfigurationFlowValidationDetails"},
         "missingDefaultCondition":{"shape":"MissingDefaultConditionFlowValidationDetails"},
         "missingEndingNodes":{"shape":"MissingEndingNodesFlowValidationDetails"},
+        "missingLoopControllerNode":{"shape":"MissingLoopControllerNodeFlowValidationDetails"},
+        "missingLoopInputNode":{"shape":"MissingLoopInputNodeFlowValidationDetails"},
         "missingNodeConfiguration":{"shape":"MissingNodeConfigurationFlowValidationDetails"},
         "missingNodeInput":{"shape":"MissingNodeInputFlowValidationDetails"},
         "missingNodeOutput":{"shape":"MissingNodeOutputFlowValidationDetails"},
         "missingStartingNodes":{"shape":"MissingStartingNodesFlowValidationDetails"},
+        "multipleLoopControllerNodes":{"shape":"MultipleLoopControllerNodesFlowValidationDetails"},
+        "multipleLoopInputNodes":{"shape":"MultipleLoopInputNodesFlowValidationDetails"},
         "multipleNodeInputConnections":{"shape":"MultipleNodeInputConnectionsFlowValidationDetails"},
         "unfulfilledNodeInput":{"shape":"UnfulfilledNodeInputFlowValidationDetails"},
         "unknownConnectionCondition":{"shape":"UnknownConnectionConditionFlowValidationDetails"},
@@ -3708,7 +3805,13 @@
         "UnsatisfiedConnectionConditions",
         "Unspecified",
         "UnknownNodeInput",
-        "UnknownNodeOutput"
+        "UnknownNodeOutput",
+        "MissingLoopInputNode",
+        "MissingLoopControllerNode",
+        "MultipleLoopInputNodes",
+        "MultipleLoopControllerNodes",
+        "LoopIncompatibleNodeType",
+        "InvalidLoopBoundary"
       ]
     },
     "FlowValidations":{
@@ -3990,6 +4093,7 @@
       ],
       "members":{
         "arn":{"shape":"FlowAliasArn"},
+        "concurrencyConfiguration":{"shape":"FlowAliasConcurrencyConfiguration"},
         "createdAt":{"shape":"DateTimestamp"},
         "description":{"shape":"Description"},
         "flowId":{"shape":"FlowId"},
@@ -4277,6 +4381,25 @@
         "connection":{"shape":"FlowConnectionName"}
       }
     },
+    "IncompatibleLoopNodeType":{
+      "type":"string",
+      "enum":[
+        "Input",
+        "Condition",
+        "Iterator",
+        "Collector"
+      ]
+    },
+    "IndexArn":{
+      "type":"string",
+      "sensitive":true
+    },
+    "IndexName":{
+      "type":"string",
+      "max":63,
+      "min":3,
+      "sensitive":true
+    },
     "InferenceConfiguration":{
       "type":"structure",
       "members":{
@@ -4445,6 +4568,23 @@
         "updatedAt":{"shape":"DateTimestamp"}
       }
     },
+    "InlineCode":{
+      "type":"string",
+      "max":5000000,
+      "min":1,
+      "sensitive":true
+    },
+    "InlineCodeFlowNodeConfiguration":{
+      "type":"structure",
+      "required":[
+        "code",
+        "language"
+      ],
+      "members":{
+        "code":{"shape":"InlineCode"},
+        "language":{"shape":"SupportedLanguages"}
+      }
+    },
     "InlineContent":{
       "type":"structure",
       "required":["type"],
@@ -4487,6 +4627,19 @@
       "error":{"httpStatusCode":500},
       "exception":true,
       "fault":true
+    },
+    "InvalidLoopBoundaryFlowValidationDetails":{
+      "type":"structure",
+      "required":[
+        "connection",
+        "source",
+        "target"
+      ],
+      "members":{
+        "connection":{"shape":"FlowConnectionName"},
+        "source":{"shape":"FlowNodeName"},
+        "target":{"shape":"FlowNodeName"}
+      }
     },
     "IteratorFlowNodeConfiguration":{
       "type":"structure",
@@ -4598,9 +4751,20 @@
       "required":["knowledgeBaseId"],
       "members":{
         "guardrailConfiguration":{"shape":"GuardrailConfiguration"},
+        "inferenceConfiguration":{"shape":"PromptInferenceConfiguration"},
         "knowledgeBaseId":{"shape":"KnowledgeBaseId"},
-        "modelId":{"shape":"KnowledgeBaseModelIdentifier"}
+        "modelId":{"shape":"KnowledgeBaseModelIdentifier"},
+        "numberOfResults":{"shape":"KnowledgeBaseFlowNodeConfigurationNumberOfResultsInteger"},
+        "orchestrationConfiguration":{"shape":"KnowledgeBaseOrchestrationConfiguration"},
+        "promptTemplate":{"shape":"KnowledgeBasePromptTemplate"},
+        "rerankingConfiguration":{"shape":"VectorSearchRerankingConfiguration"}
       }
+    },
+    "KnowledgeBaseFlowNodeConfigurationNumberOfResultsInteger":{
+      "type":"integer",
+      "box":true,
+      "max":100,
+      "min":1
     },
     "KnowledgeBaseId":{
       "type":"string",
@@ -4613,6 +4777,21 @@
       "max":2048,
       "min":1,
       "pattern":"^(arn:aws(-[^:]{1,12})?:(bedrock|sagemaker):[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-zA-Z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$"
+    },
+    "KnowledgeBaseOrchestrationConfiguration":{
+      "type":"structure",
+      "members":{
+        "additionalModelRequestFields":{"shape":"AdditionalModelRequestFields"},
+        "inferenceConfig":{"shape":"PromptInferenceConfiguration"},
+        "performanceConfig":{"shape":"PerformanceConfiguration"},
+        "promptTemplate":{"shape":"KnowledgeBasePromptTemplate"}
+      }
+    },
+    "KnowledgeBasePromptTemplate":{
+      "type":"structure",
+      "members":{
+        "textPromptTemplate":{"shape":"KnowledgeBaseTextPrompt"}
+      }
     },
     "KnowledgeBaseRoleArn":{
       "type":"string",
@@ -4647,7 +4826,8 @@
         "RDS",
         "MONGO_DB_ATLAS",
         "NEPTUNE_ANALYTICS",
-        "OPENSEARCH_MANAGED_CLUSTER"
+        "OPENSEARCH_MANAGED_CLUSTER",
+        "S3_VECTORS"
       ]
     },
     "KnowledgeBaseSummaries":{
@@ -4669,6 +4849,12 @@
         "status":{"shape":"KnowledgeBaseStatus"},
         "updatedAt":{"shape":"DateTimestamp"}
       }
+    },
+    "KnowledgeBaseTextPrompt":{
+      "type":"string",
+      "max":100000,
+      "min":1,
+      "sensitive":true
     },
     "KnowledgeBaseType":{
       "type":"string",
@@ -5079,6 +5265,45 @@
         "tags":{"shape":"TagsMap"}
       }
     },
+    "LoopControllerFlowNodeConfiguration":{
+      "type":"structure",
+      "required":["continueCondition"],
+      "members":{
+        "continueCondition":{"shape":"FlowCondition"},
+        "maxIterations":{"shape":"LoopControllerFlowNodeConfigurationMaxIterationsInteger"}
+      }
+    },
+    "LoopControllerFlowNodeConfigurationMaxIterationsInteger":{
+      "type":"integer",
+      "box":true,
+      "max":1000,
+      "min":1
+    },
+    "LoopFlowNodeConfiguration":{
+      "type":"structure",
+      "required":["definition"],
+      "members":{
+        "definition":{"shape":"FlowDefinition"}
+      }
+    },
+    "LoopIncompatibleNodeTypeFlowValidationDetails":{
+      "type":"structure",
+      "required":[
+        "incompatibleNodeName",
+        "incompatibleNodeType",
+        "node"
+      ],
+      "members":{
+        "incompatibleNodeName":{"shape":"FlowNodeName"},
+        "incompatibleNodeType":{"shape":"IncompatibleLoopNodeType"},
+        "node":{"shape":"FlowNodeName"}
+      }
+    },
+    "LoopInputFlowNodeConfiguration":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "MalformedConditionExpressionFlowValidationDetails":{
       "type":"structure",
       "required":[
@@ -5177,6 +5402,14 @@
       "max":10,
       "min":1
     },
+    "MetadataConfigurationForReranking":{
+      "type":"structure",
+      "required":["selectionMode"],
+      "members":{
+        "selectionMode":{"shape":"RerankingMetadataSelectionMode"},
+        "selectiveModeConfiguration":{"shape":"RerankingMetadataSelectiveModeConfiguration"}
+      }
+    },
     "MetadataSourceType":{
       "type":"string",
       "enum":[
@@ -5242,6 +5475,20 @@
     "MissingEndingNodesFlowValidationDetails":{
       "type":"structure",
       "members":{
+      }
+    },
+    "MissingLoopControllerNodeFlowValidationDetails":{
+      "type":"structure",
+      "required":["loopNode"],
+      "members":{
+        "loopNode":{"shape":"FlowNodeName"}
+      }
+    },
+    "MissingLoopInputNodeFlowValidationDetails":{
+      "type":"structure",
+      "required":["loopNode"],
+      "members":{
+        "loopNode":{"shape":"FlowNodeName"}
       }
     },
     "MissingNodeConfigurationFlowValidationDetails":{
@@ -5347,6 +5594,20 @@
       "max":2048,
       "min":0,
       "pattern":"^.*$"
+    },
+    "MultipleLoopControllerNodesFlowValidationDetails":{
+      "type":"structure",
+      "required":["loopNode"],
+      "members":{
+        "loopNode":{"shape":"FlowNodeName"}
+      }
+    },
+    "MultipleLoopInputNodesFlowValidationDetails":{
+      "type":"structure",
+      "required":["loopNode"],
+      "members":{
+        "loopNode":{"shape":"FlowNodeName"}
+      }
     },
     "MultipleNodeInputConnectionsFlowValidationDetails":{
       "type":"structure",
@@ -5594,6 +5855,19 @@
     "Payload":{
       "type":"string",
       "sensitive":true
+    },
+    "PerformanceConfigLatency":{
+      "type":"string",
+      "enum":[
+        "standard",
+        "optimized"
+      ]
+    },
+    "PerformanceConfiguration":{
+      "type":"structure",
+      "members":{
+        "latency":{"shape":"PerformanceConfigLatency"}
+      }
     },
     "PineconeConfiguration":{
       "type":"structure",
@@ -6254,6 +6528,21 @@
         "DISABLED"
       ]
     },
+    "RerankingMetadataSelectionMode":{
+      "type":"string",
+      "enum":[
+        "SELECTIVE",
+        "ALL"
+      ]
+    },
+    "RerankingMetadataSelectiveModeConfiguration":{
+      "type":"structure",
+      "members":{
+        "fieldsToExclude":{"shape":"FieldsForReranking"},
+        "fieldsToInclude":{"shape":"FieldsForReranking"}
+      },
+      "union":true
+    },
     "ResourceNotFoundException":{
       "type":"structure",
       "members":{
@@ -6358,6 +6647,14 @@
       "max":1,
       "min":1
     },
+    "S3VectorsConfiguration":{
+      "type":"structure",
+      "members":{
+        "indexArn":{"shape":"IndexArn"},
+        "indexName":{"shape":"IndexName"},
+        "vectorBucketArn":{"shape":"VectorBucketArn"}
+      }
+    },
     "SalesforceAuthType":{
       "type":"string",
       "enum":["OAUTH2_CLIENT_CREDENTIALS"]
@@ -6461,7 +6758,7 @@
     "SessionTTL":{
       "type":"integer",
       "box":true,
-      "max":3600,
+      "max":5400,
       "min":60
     },
     "SharePointAuthType":{
@@ -6629,6 +6926,7 @@
         "pineconeConfiguration":{"shape":"PineconeConfiguration"},
         "rdsConfiguration":{"shape":"RdsConfiguration"},
         "redisEnterpriseCloudConfiguration":{"shape":"RedisEnterpriseCloudConfiguration"},
+        "s3VectorsConfiguration":{"shape":"S3VectorsConfiguration"},
         "type":{"shape":"KnowledgeBaseStorageType"}
       }
     },
@@ -6690,6 +6988,10 @@
       "member":{"shape":"SupplementalDataStorageLocation"},
       "max":1,
       "min":1
+    },
+    "SupportedLanguages":{
+      "type":"string",
+      "enum":["Python_3"]
     },
     "SystemContentBlock":{
       "type":"structure",
@@ -7073,6 +7375,7 @@
           "location":"uri",
           "locationName":"agentId"
         },
+        "aliasInvocationState":{"shape":"AliasInvocationState"},
         "description":{"shape":"Description"},
         "routingConfiguration":{"shape":"AgentAliasRoutingConfiguration"}
       }
@@ -7241,6 +7544,7 @@
           "location":"uri",
           "locationName":"aliasIdentifier"
         },
+        "concurrencyConfiguration":{"shape":"FlowAliasConcurrencyConfiguration"},
         "description":{"shape":"Description"},
         "flowIdentifier":{
           "shape":"FlowIdentifier",
@@ -7264,6 +7568,7 @@
       ],
       "members":{
         "arn":{"shape":"FlowAliasArn"},
+        "concurrencyConfiguration":{"shape":"FlowAliasConcurrencyConfiguration"},
         "createdAt":{"shape":"DateTimestamp"},
         "description":{"shape":"Description"},
         "flowId":{"shape":"FlowId"},
@@ -7452,6 +7757,10 @@
       "type":"list",
       "member":{"shape":"ValidationExceptionField"}
     },
+    "VectorBucketArn":{
+      "type":"string",
+      "sensitive":true
+    },
     "VectorIngestionConfiguration":{
       "type":"structure",
       "members":{
@@ -7469,6 +7778,41 @@
         "embeddingModelConfiguration":{"shape":"EmbeddingModelConfiguration"},
         "supplementalDataStorageConfiguration":{"shape":"SupplementalDataStorageConfiguration"}
       }
+    },
+    "VectorSearchBedrockRerankingConfiguration":{
+      "type":"structure",
+      "required":["modelConfiguration"],
+      "members":{
+        "metadataConfiguration":{"shape":"MetadataConfigurationForReranking"},
+        "modelConfiguration":{"shape":"VectorSearchBedrockRerankingModelConfiguration"},
+        "numberOfRerankedResults":{"shape":"VectorSearchBedrockRerankingConfigurationNumberOfRerankedResultsInteger"}
+      }
+    },
+    "VectorSearchBedrockRerankingConfigurationNumberOfRerankedResultsInteger":{
+      "type":"integer",
+      "box":true,
+      "max":100,
+      "min":1
+    },
+    "VectorSearchBedrockRerankingModelConfiguration":{
+      "type":"structure",
+      "required":["modelArn"],
+      "members":{
+        "additionalModelRequestFields":{"shape":"AdditionalModelRequestFields"},
+        "modelArn":{"shape":"BedrockRerankingModelArn"}
+      }
+    },
+    "VectorSearchRerankingConfiguration":{
+      "type":"structure",
+      "required":["type"],
+      "members":{
+        "bedrockRerankingConfiguration":{"shape":"VectorSearchBedrockRerankingConfiguration"},
+        "type":{"shape":"VectorSearchRerankingConfigurationType"}
+      }
+    },
+    "VectorSearchRerankingConfigurationType":{
+      "type":"string",
+      "enum":["BEDROCK_RERANKING_MODEL"]
     },
     "Version":{
       "type":"string",

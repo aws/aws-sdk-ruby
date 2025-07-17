@@ -420,7 +420,7 @@ module Aws::Textract
     #     ISO basic Latin script characters that aren't separated by
     #     spaces.
     #
-    #   * *LINE* - A string of tab-delimited, contiguous words that are
+    #   * *LINE* - A string of space-delimited, contiguous words that are
     #     detected on a document page.
     #
     #   In text analysis operations, the following types are returned:
@@ -1315,11 +1315,17 @@ module Aws::Textract
     #   recognized item.
     #   @return [Array<Types::Point>]
     #
+    # @!attribute [rw] rotation_angle
+    #   Provides a numerical value corresponding to the rotation of the
+    #   text.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/Geometry AWS API Documentation
     #
     class Geometry < Struct.new(
       :bounding_box,
-      :polygon)
+      :polygon,
+      :rotation_angle)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2649,9 +2655,8 @@ module Aws::Textract
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The file name of the input document. Synchronous operations can use
-    #   image files that are in JPEG or PNG format. Asynchronous operations
-    #   also support PDF and TIFF format files.
+    #   The file name of the input document. Image files may be in PDF,
+    #   TIFF, JPEG, or PNG format.
     #   @return [String]
     #
     # @!attribute [rw] version

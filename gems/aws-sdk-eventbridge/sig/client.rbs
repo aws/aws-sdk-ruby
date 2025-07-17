@@ -264,6 +264,7 @@ module Aws
         def description: () -> ::String
         def kms_key_identifier: () -> ::String
         def dead_letter_config: () -> Types::DeadLetterConfig
+        def log_config: () -> Types::LogConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridge/Client.html#create_event_bus-instance_method
       def create_event_bus: (
@@ -273,6 +274,10 @@ module Aws
                               ?kms_key_identifier: ::String,
                               ?dead_letter_config: {
                                 arn: ::String?
+                              },
+                              ?log_config: {
+                                include_detail: ("NONE" | "FULL")?,
+                                level: ("OFF" | "ERROR" | "INFO" | "TRACE")?
                               },
                               ?tags: Array[
                                 {
@@ -469,6 +474,7 @@ module Aws
         def kms_key_identifier: () -> ::String
         def dead_letter_config: () -> Types::DeadLetterConfig
         def policy: () -> ::String
+        def log_config: () -> Types::LogConfig
         def creation_time: () -> ::Time
         def last_modified_time: () -> ::Time
       end
@@ -1187,6 +1193,7 @@ module Aws
         def kms_key_identifier: () -> ::String
         def description: () -> ::String
         def dead_letter_config: () -> Types::DeadLetterConfig
+        def log_config: () -> Types::LogConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridge/Client.html#update_event_bus-instance_method
       def update_event_bus: (
@@ -1195,6 +1202,10 @@ module Aws
                               ?description: ::String,
                               ?dead_letter_config: {
                                 arn: ::String?
+                              },
+                              ?log_config: {
+                                include_detail: ("NONE" | "FULL")?,
+                                level: ("OFF" | "ERROR" | "INFO" | "TRACE")?
                               }
                             ) -> _UpdateEventBusResponseSuccess
                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEventBusResponseSuccess

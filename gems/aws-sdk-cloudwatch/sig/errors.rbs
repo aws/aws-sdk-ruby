@@ -13,6 +13,9 @@ module Aws
 
       class ConcurrentModificationException < ::Aws::Errors::ServiceError
       end
+      class ConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class DashboardInvalidInputError < ::Aws::Errors::ServiceError
         def message: () -> ::String
         def dashboard_validation_messages: () -> ::String

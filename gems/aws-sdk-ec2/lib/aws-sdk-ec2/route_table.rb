@@ -235,6 +235,7 @@ module Aws::EC2
     #     local_gateway_id: "LocalGatewayId",
     #     carrier_gateway_id: "CarrierGatewayId",
     #     core_network_arn: "CoreNetworkArn",
+    #     odb_network_arn: "OdbNetworkArn",
     #     dry_run: false,
     #     destination_cidr_block: "String",
     #     gateway_id: "RouteGatewayId",
@@ -262,6 +263,8 @@ module Aws::EC2
     #   associated with a Wavelength Zone.
     # @option options [String] :core_network_arn
     #   The Amazon Resource Name (ARN) of the core network.
+    # @option options [String] :odb_network_arn
+    #   The Amazon Resource Name (ARN) of the ODB network.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

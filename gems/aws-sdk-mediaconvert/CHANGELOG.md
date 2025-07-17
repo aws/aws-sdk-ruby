@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.162.0 (2025-06-20)
+------------------
+
+* Feature - This release adds a new SPECIFIED_OPTIMAL option for handling DDS when using DVB-Sub with high resolution video.
+
+1.161.0 (2025-06-04)
+------------------
+
+* Feature - This release includes support for embedding and signing C2PA content credentials in MP4 outputs.
+
+1.160.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.159.0 (2025-05-14)
+------------------
+
+* Feature - This update enables cropping for video overlays and adds a new STL to Teletext upconversion toggle to preserve styling.
+
+1.158.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.157.0 (2025-05-05)
+------------------
+
+* Feature - This release adds an optional sidecar per-frame video quality metrics report and an ALL_PCM option for audio selectors. It also changes the data type for Probe API response fields related to video and audio bitrate from integer to double.
+
+1.156.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.155.0 (2025-03-26)
 ------------------
 

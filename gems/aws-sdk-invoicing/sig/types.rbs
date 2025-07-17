@@ -14,6 +14,14 @@ module Aws::Invoicing
       SENSITIVE: []
     end
 
+    class AmountBreakdown
+      attr_accessor sub_total_amount: ::String
+      attr_accessor discounts: Types::DiscountsBreakdown
+      attr_accessor taxes: Types::TaxesBreakdown
+      attr_accessor fees: Types::FeesBreakdown
+      SENSITIVE: []
+    end
+
     class BatchGetInvoiceProfileRequest
       attr_accessor account_ids: ::Array[::String]
       SENSITIVE: []
@@ -21,6 +29,12 @@ module Aws::Invoicing
 
     class BatchGetInvoiceProfileResponse
       attr_accessor profiles: ::Array[Types::InvoiceProfile]
+      SENSITIVE: []
+    end
+
+    class BillingPeriod
+      attr_accessor month: ::Integer
+      attr_accessor year: ::Integer
       SENSITIVE: []
     end
 
@@ -39,6 +53,19 @@ module Aws::Invoicing
       SENSITIVE: []
     end
 
+    class CurrencyExchangeDetails
+      attr_accessor source_currency_code: ::String
+      attr_accessor target_currency_code: ::String
+      attr_accessor rate: ::String
+      SENSITIVE: []
+    end
+
+    class DateInterval
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      SENSITIVE: []
+    end
+
     class DeleteInvoiceUnitRequest
       attr_accessor invoice_unit_arn: ::String
       SENSITIVE: []
@@ -46,6 +73,37 @@ module Aws::Invoicing
 
     class DeleteInvoiceUnitResponse
       attr_accessor invoice_unit_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DiscountsBreakdown
+      attr_accessor breakdown: ::Array[Types::DiscountsBreakdownAmount]
+      attr_accessor total_amount: ::String
+      SENSITIVE: []
+    end
+
+    class DiscountsBreakdownAmount
+      attr_accessor description: ::String
+      attr_accessor amount: ::String
+      attr_accessor rate: ::String
+      SENSITIVE: []
+    end
+
+    class Entity
+      attr_accessor invoicing_entity: ::String
+      SENSITIVE: []
+    end
+
+    class FeesBreakdown
+      attr_accessor breakdown: ::Array[Types::FeesBreakdownAmount]
+      attr_accessor total_amount: ::String
+      SENSITIVE: []
+    end
+
+    class FeesBreakdownAmount
+      attr_accessor description: ::String
+      attr_accessor amount: ::String
+      attr_accessor rate: ::String
       SENSITIVE: []
     end
 
@@ -79,6 +137,15 @@ module Aws::Invoicing
       SENSITIVE: []
     end
 
+    class InvoiceCurrencyAmount
+      attr_accessor total_amount: ::String
+      attr_accessor total_amount_before_tax: ::String
+      attr_accessor currency_code: ::String
+      attr_accessor amount_breakdown: Types::AmountBreakdown
+      attr_accessor currency_exchange_details: Types::CurrencyExchangeDetails
+      SENSITIVE: []
+    end
+
     class InvoiceProfile
       attr_accessor account_id: ::String
       attr_accessor receiver_name: ::String
@@ -87,6 +154,35 @@ module Aws::Invoicing
       attr_accessor issuer: ::String
       attr_accessor tax_registration_number: ::String
       SENSITIVE: [:receiver_address, :receiver_email, :tax_registration_number]
+    end
+
+    class InvoiceSummariesFilter
+      attr_accessor time_interval: Types::DateInterval
+      attr_accessor billing_period: Types::BillingPeriod
+      attr_accessor invoicing_entity: ::String
+      SENSITIVE: []
+    end
+
+    class InvoiceSummariesSelector
+      attr_accessor resource_type: ("ACCOUNT_ID" | "INVOICE_ID")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class InvoiceSummary
+      attr_accessor account_id: ::String
+      attr_accessor invoice_id: ::String
+      attr_accessor issued_date: ::Time
+      attr_accessor due_date: ::Time
+      attr_accessor entity: Types::Entity
+      attr_accessor billing_period: Types::BillingPeriod
+      attr_accessor invoice_type: ("INVOICE" | "CREDIT_MEMO")
+      attr_accessor original_invoice_id: ::String
+      attr_accessor purchase_order_number: ::String
+      attr_accessor base_currency_amount: Types::InvoiceCurrencyAmount
+      attr_accessor tax_currency_amount: Types::InvoiceCurrencyAmount
+      attr_accessor payment_currency_amount: Types::InvoiceCurrencyAmount
+      SENSITIVE: []
     end
 
     class InvoiceUnit
@@ -102,6 +198,20 @@ module Aws::Invoicing
 
     class InvoiceUnitRule
       attr_accessor linked_accounts: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListInvoiceSummariesRequest
+      attr_accessor selector: Types::InvoiceSummariesSelector
+      attr_accessor filter: Types::InvoiceSummariesFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListInvoiceSummariesResponse
+      attr_accessor invoice_summaries: ::Array[Types::InvoiceSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -166,6 +276,19 @@ module Aws::Invoicing
     end
 
     class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TaxesBreakdown
+      attr_accessor breakdown: ::Array[Types::TaxesBreakdownAmount]
+      attr_accessor total_amount: ::String
+      SENSITIVE: []
+    end
+
+    class TaxesBreakdownAmount
+      attr_accessor description: ::String
+      attr_accessor amount: ::String
+      attr_accessor rate: ::String
+      SENSITIVE: []
     end
 
     class ThrottlingException

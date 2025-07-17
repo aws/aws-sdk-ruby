@@ -55,7 +55,7 @@ module Aws::GeoPlaces
     class AccessRestriction < Struct.new(
       :restricted,
       :categories)
-      SENSITIVE = []
+      SENSITIVE = [:restricted]
       include Aws::Structure
     end
 
@@ -82,7 +82,7 @@ module Aws::GeoPlaces
     #   @return [Types::SubRegion]
     #
     # @!attribute [rw] locality
-    #   The locality or city of the address.
+    #   The city or locality of the address.
     #
     #   Example: `Vancouver`.
     #   @return [String]
@@ -100,7 +100,7 @@ module Aws::GeoPlaces
     # @!attribute [rw] postal_code
     #   An alphanumeric string included in a postal address to facilitate
     #   mail sorting, such as post code, postcode, or ZIP code, for which
-    #   the result should posses.
+    #   the result should possess.
     #   @return [String]
     #
     # @!attribute [rw] block
@@ -139,6 +139,12 @@ module Aws::GeoPlaces
     #   The name of the building at the address.
     #   @return [String]
     #
+    # @!attribute [rw] secondary_address_components
+    #   Components that correspond to secondary identifiers on an Address.
+    #   Secondary address components include information such as Suite or
+    #   Unit Number, Building, or Floor.
+    #   @return [Array<Types::SecondaryAddressComponent>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/Address AWS API Documentation
     #
     class Address < Struct.new(
@@ -156,8 +162,9 @@ module Aws::GeoPlaces
       :street,
       :street_components,
       :address_number,
-      :building)
-      SENSITIVE = []
+      :building,
+      :secondary_address_components)
+      SENSITIVE = [:label, :locality, :district, :sub_district, :postal_code, :block, :sub_block, :street, :address_number, :building]
       include Aws::Structure
     end
 
@@ -198,7 +205,7 @@ module Aws::GeoPlaces
     # @!attribute [rw] postal_code
     #   An alphanumeric string included in a postal address to facilitate
     #   mail sorting, such as post code, postcode, or ZIP code, for which
-    #   the result should posses.
+    #   the result should possess.
     #   @return [Float]
     #
     # @!attribute [rw] block
@@ -227,6 +234,10 @@ module Aws::GeoPlaces
     #   The name of the building at the address.
     #   @return [Float]
     #
+    # @!attribute [rw] secondary_address_components
+    #   Match scores for the secondary address components in the result.
+    #   @return [Array<Types::SecondaryAddressComponentMatchScore>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/AddressComponentMatchScores AWS API Documentation
     #
     class AddressComponentMatchScores < Struct.new(
@@ -241,7 +252,8 @@ module Aws::GeoPlaces
       :sub_block,
       :intersection,
       :address_number,
-      :building)
+      :building,
+      :secondary_address_components)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -354,11 +366,15 @@ module Aws::GeoPlaces
     #   @return [Array<Types::Highlight>]
     #
     # @!attribute [rw] block
-    #   Name of the block. Example: Sunny Mansion 203 block: 2 Chome
+    #   Name of the block.
+    #
+    #   Example: `Sunny Mansion 203 block: 2 Chome`
     #   @return [Array<Types::Highlight>]
     #
     # @!attribute [rw] sub_block
-    #   Name of sub-block. Example Sunny Mansion 203 sub-block: 4
+    #   Name of sub-block.
+    #
+    #   Example: `Sunny Mansion 203 sub-block: 4`
     #   @return [Array<Types::Highlight>]
     #
     # @!attribute [rw] intersection
@@ -369,7 +385,7 @@ module Aws::GeoPlaces
     # @!attribute [rw] postal_code
     #   An alphanumeric string included in a postal address to facilitate
     #   mail sorting, such as post code, postcode, or ZIP code for which the
-    #   result should posses.
+    #   result should possess.
     #   @return [Array<Types::Highlight>]
     #
     # @!attribute [rw] address_number
@@ -402,7 +418,7 @@ module Aws::GeoPlaces
     end
 
     # Autocomplete structure which contains a set of inclusion/exclusion
-    # properties that results must posses in order to be returned as a
+    # properties that results must possess in order to be returned as a
     # result.
     #
     # @!attribute [rw] bounding_box
@@ -433,7 +449,7 @@ module Aws::GeoPlaces
       :circle,
       :include_countries,
       :include_place_types)
-      SENSITIVE = [:bounding_box, :circle]
+      SENSITIVE = [:bounding_box, :circle, :include_countries]
       include Aws::Structure
     end
 
@@ -463,6 +479,10 @@ module Aws::GeoPlaces
     #   The free-form text query to match addresses against. This is usually
     #   a partially typed address from an end user in an address box or
     #   form.
+    #
+    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -484,7 +504,7 @@ module Aws::GeoPlaces
     #
     # @!attribute [rw] filter
     #   A structure which contains a set of inclusion/exclusion properties
-    #   that results must posses in order to be returned as a result.
+    #   that results must possess in order to be returned as a result.
     #   @return [Types::AutocompleteFilter]
     #
     # @!attribute [rw] postal_code_mode
@@ -492,7 +512,8 @@ module Aws::GeoPlaces
     #   If a postal code spans multiple localities and this value is empty,
     #   partial district or locality information may be returned under a
     #   single postal code result entry. If it's populated with the value
-    #   `cityLookup`, all cities in that postal code are returned.
+    #   `EnumerateSpannedLocalities`, all cities in that postal code are
+    #   returned.
     #   @return [String]
     #
     # @!attribute [rw] additional_features
@@ -516,6 +537,39 @@ module Aws::GeoPlaces
     #   country. The political view applies to the results of the request to
     #   represent unresolved territorial claims through the point of view of
     #   the specified country.
+    #
+    #   The following political views are currently supported:
+    #
+    #   * `ARG`: Argentina's view on the Southern Patagonian Ice Field and
+    #     Tierra Del Fuego, including the Falkland Islands, South Georgia,
+    #     and South Sandwich Islands
+    #
+    #   * `EGY`: Egypt's view on Bir Tawil
+    #
+    #   * `IND`: India's view on Gilgit-Baltistan
+    #
+    #   * `KEN`: Kenya's view on the Ilemi Triangle
+    #
+    #   * `MAR`: Morocco's view on Western Sahara
+    #
+    #   * `RUS`: Russia's view on Crimea
+    #
+    #   * `SDN`: Sudan's view on the Halaib Triangle
+    #
+    #   * `SRB`: Serbia's view on Kosovo, Vukovar, and Sarengrad Islands
+    #
+    #   * `SUR`: Suriname's view on the Courantyne Headwaters and Lawa
+    #     Headwaters
+    #
+    #   * `SYR`: Syria's view on the Golan Heights
+    #
+    #   * `TUR`: Turkey's view on Cyprus and Northern Cyprus
+    #
+    #   * `TZA`: Tanzania's view on Lake Malawi
+    #
+    #   * `URY`: Uruguay's view on Rincon de Artigas
+    #
+    #   * `VNM`: Vietnam's view on the Paracel Islands and Spratly Islands
     #   @return [String]
     #
     # @!attribute [rw] intended_use
@@ -541,14 +595,14 @@ module Aws::GeoPlaces
       :political_view,
       :intended_use,
       :key)
-      SENSITIVE = [:query_text, :bias_position, :key]
+      SENSITIVE = [:query_text, :bias_position, :political_view, :key]
       include Aws::Structure
     end
 
     # @!attribute [rw] pricing_bucket
     #   The pricing bucket for which the query is charged at.
     #
-    #   For more inforamtion on pricing, please visit [Amazon Location
+    #   For more information on pricing, please visit [Amazon Location
     #   Service Pricing][1].
     #
     #
@@ -629,7 +683,7 @@ module Aws::GeoPlaces
       :language,
       :political_view,
       :highlights)
-      SENSITIVE = []
+      SENSITIVE = [:place_id, :place_type, :title, :distance, :political_view]
       include Aws::Structure
     end
 
@@ -649,7 +703,7 @@ module Aws::GeoPlaces
     class BusinessChain < Struct.new(
       :name,
       :id)
-      SENSITIVE = []
+      SENSITIVE = [:name, :id]
       include Aws::Structure
     end
 
@@ -679,17 +733,18 @@ module Aws::GeoPlaces
       :name,
       :localized_name,
       :primary)
-      SENSITIVE = []
+      SENSITIVE = [:id, :name, :localized_name, :primary]
       include Aws::Structure
     end
 
-    # Indicates how well the input matches the returned element. It is equal
-    # to 1 if all input tokens are recognized and matched to the title in
-    # the result.
+    # Indicates how well the returned title and address components matches
+    # the input TextQuery. For each component a score is provied with 1
+    # indicating all tokens were matched and 0 indicating no tokens were
+    # matched.
     #
     # @!attribute [rw] title
-    #   Indicates the starting and ending index of the title in the text
-    #   query that match the found title.
+    #   Indicates the match score of the title in the text query that match
+    #   the found title.
     #   @return [Float]
     #
     # @!attribute [rw] address
@@ -725,7 +780,7 @@ module Aws::GeoPlaces
       :label,
       :value,
       :categories)
-      SENSITIVE = []
+      SENSITIVE = [:label, :value]
       include Aws::Structure
     end
 
@@ -779,7 +834,7 @@ module Aws::GeoPlaces
       :code_2,
       :code_3,
       :name)
-      SENSITIVE = []
+      SENSITIVE = [:code_2, :code_3, :name]
       include Aws::Structure
     end
 
@@ -821,7 +876,7 @@ module Aws::GeoPlaces
     class FilterCircle < Struct.new(
       :center,
       :radius)
-      SENSITIVE = [:center]
+      SENSITIVE = [:center, :radius]
       include Aws::Structure
     end
 
@@ -847,12 +902,12 @@ module Aws::GeoPlaces
       :localized_name,
       :id,
       :primary)
-      SENSITIVE = []
+      SENSITIVE = [:localized_name, :id, :primary]
       include Aws::Structure
     end
 
     # Geocode structure which contains a set of inclusion/exclusion
-    # properties that results must posses in order to be returned as a
+    # properties that results must possess in order to be returned as a
     # result.
     #
     # @!attribute [rw] include_countries
@@ -869,6 +924,113 @@ module Aws::GeoPlaces
     class GeocodeFilter < Struct.new(
       :include_countries,
       :include_place_types)
+      SENSITIVE = [:include_countries, :include_place_types]
+      include Aws::Structure
+    end
+
+    # Parsed components in the provided QueryText.
+    #
+    # @!attribute [rw] title
+    #   The localized display name of this result item based on request
+    #   parameter `language`.
+    #   @return [Array<Types::ParsedQueryComponent>]
+    #
+    # @!attribute [rw] address
+    #   The place address.
+    #   @return [Types::GeocodeParsedQueryAddressComponents]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/GeocodeParsedQuery AWS API Documentation
+    #
+    class GeocodeParsedQuery < Struct.new(
+      :title,
+      :address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Parsed address components in the provided QueryText.
+    #
+    # @!attribute [rw] country
+    #   The alpha-2 or alpha-3 character code for the country that the
+    #   results will be present in.
+    #   @return [Array<Types::ParsedQueryComponent>]
+    #
+    # @!attribute [rw] region
+    #   The region or state results should be present in.
+    #
+    #   Example: `North Rhine-Westphalia`.
+    #   @return [Array<Types::ParsedQueryComponent>]
+    #
+    # @!attribute [rw] sub_region
+    #   The sub-region or county for which results should be present in.
+    #   @return [Array<Types::ParsedQueryComponent>]
+    #
+    # @!attribute [rw] locality
+    #   The city or locality of the address.
+    #
+    #   Example: `Vancouver`.
+    #   @return [Array<Types::ParsedQueryComponent>]
+    #
+    # @!attribute [rw] district
+    #   The district or division of a city the results should be present in.
+    #   @return [Array<Types::ParsedQueryComponent>]
+    #
+    # @!attribute [rw] sub_district
+    #   A subdivision of a district.
+    #
+    #   Example: `Minden-Lübbecke`.
+    #   @return [Array<Types::ParsedQueryComponent>]
+    #
+    # @!attribute [rw] postal_code
+    #   An alphanumeric string included in a postal address to facilitate
+    #   mail sorting, such as post code, postcode, or ZIP code, for which
+    #   the result should possess.
+    #   @return [Array<Types::ParsedQueryComponent>]
+    #
+    # @!attribute [rw] block
+    #   Name of the block.
+    #
+    #   Example: `Sunny Mansion 203 block: 2 Chome`
+    #   @return [Array<Types::ParsedQueryComponent>]
+    #
+    # @!attribute [rw] sub_block
+    #   Name of sub-block.
+    #
+    #   Example: `Sunny Mansion 203 sub-block: 4`
+    #   @return [Array<Types::ParsedQueryComponent>]
+    #
+    # @!attribute [rw] street
+    #   The name of the street results should be present in.
+    #   @return [Array<Types::ParsedQueryComponent>]
+    #
+    # @!attribute [rw] address_number
+    #   The number that identifies an address within a street.
+    #   @return [Array<Types::ParsedQueryComponent>]
+    #
+    # @!attribute [rw] building
+    #   The name of the building at the address.
+    #   @return [Array<Types::ParsedQueryComponent>]
+    #
+    # @!attribute [rw] secondary_address_components
+    #   Parsed secondary address components from the provided query text.
+    #   @return [Array<Types::ParsedQuerySecondaryAddressComponent>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/GeocodeParsedQueryAddressComponents AWS API Documentation
+    #
+    class GeocodeParsedQueryAddressComponents < Struct.new(
+      :country,
+      :region,
+      :sub_region,
+      :locality,
+      :district,
+      :sub_district,
+      :postal_code,
+      :block,
+      :sub_block,
+      :street,
+      :address_number,
+      :building,
+      :secondary_address_components)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -892,7 +1054,7 @@ module Aws::GeoPlaces
     #   @return [String]
     #
     # @!attribute [rw] locality
-    #   City or locality results should be present in.
+    #   The city or locality results should be present in.
     #
     #   Example: `Vancouver`.
     #   @return [String]
@@ -912,7 +1074,7 @@ module Aws::GeoPlaces
     # @!attribute [rw] postal_code
     #   An alphanumeric string included in a postal address to facilitate
     #   mail sorting, such as post code, postcode, or ZIP code for which the
-    #   result should posses.
+    #   result should possess.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/GeocodeQueryComponents AWS API Documentation
@@ -934,6 +1096,10 @@ module Aws::GeoPlaces
     #   The free-form text query to match addresses against. This is usually
     #   a partially typed address from an end user in an address box or
     #   form.
+    #
+    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] query_components
@@ -960,7 +1126,7 @@ module Aws::GeoPlaces
     #
     # @!attribute [rw] filter
     #   A structure which contains a set of inclusion/exclusion properties
-    #   that results must posses in order to be returned as a result.
+    #   that results must possess in order to be returned as a result.
     #   @return [Types::GeocodeFilter]
     #
     # @!attribute [rw] additional_features
@@ -989,6 +1155,18 @@ module Aws::GeoPlaces
     # @!attribute [rw] intended_use
     #   Indicates if the results will be stored. Defaults to `SingleUse`, if
     #   left empty.
+    #
+    #   <note markdown="1"> Storing the response of an Geocode query is required to comply with
+    #   service terms, but charged at a higher cost per request. Please
+    #   review the [user agreement][1] and [service pricing structure][2] to
+    #   determine the correct setting for your use case.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/sla/
+    #   [2]: https://aws.amazon.com/location/pricing/
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -1009,14 +1187,14 @@ module Aws::GeoPlaces
       :political_view,
       :intended_use,
       :key)
-      SENSITIVE = [:query_text, :bias_position, :key]
+      SENSITIVE = [:query_text, :bias_position, :political_view, :key]
       include Aws::Structure
     end
 
     # @!attribute [rw] pricing_bucket
     #   The pricing bucket for which the query is charged at.
     #
-    #   For more inforamtion on pricing, please visit [Amazon Location
+    #   For more information on pricing, please visit [Amazon Location
     #   Service Pricing][1].
     #
     #
@@ -1040,7 +1218,7 @@ module Aws::GeoPlaces
     # The Geocoded result.
     #
     # @!attribute [rw] place_id
-    #   The `PlaceId` of the place you wish to receive the information for.
+    #   The `PlaceId` of the place result.
     #   @return [String]
     #
     # @!attribute [rw] place_type
@@ -1089,7 +1267,7 @@ module Aws::GeoPlaces
     #   @return [Array<Types::FoodType>]
     #
     # @!attribute [rw] access_points
-    #   Position of the access point represent by longitude and latitude.
+    #   Position of the access point represented by longitude and latitude.
     #   @return [Array<Types::AccessPoint>]
     #
     # @!attribute [rw] time_zone
@@ -1108,6 +1286,24 @@ module Aws::GeoPlaces
     #   equal to 1 if all input tokens are recognized and matched.
     #   @return [Types::MatchScoreDetails]
     #
+    # @!attribute [rw] parsed_query
+    #   Free-form text query.
+    #   @return [Types::GeocodeParsedQuery]
+    #
+    # @!attribute [rw] intersections
+    #   All Intersections that are near the provided address.
+    #   @return [Array<Types::Intersection>]
+    #
+    # @!attribute [rw] main_address
+    #   The main address corresponding to a place of type Secondary Address.
+    #   @return [Types::RelatedPlace]
+    #
+    # @!attribute [rw] secondary_addresses
+    #   All secondary addresses that are associated with a main address. A
+    #   secondary address is one that includes secondary designators, such
+    #   as a Suite or Unit Number, Building, or Floor information.
+    #   @return [Array<Types::RelatedPlace>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/GeocodeResultItem AWS API Documentation
     #
     class GeocodeResultItem < Struct.new(
@@ -1125,8 +1321,12 @@ module Aws::GeoPlaces
       :access_points,
       :time_zone,
       :political_view,
-      :match_scores)
-      SENSITIVE = [:position, :map_view]
+      :match_scores,
+      :parsed_query,
+      :intersections,
+      :main_address,
+      :secondary_addresses)
+      SENSITIVE = [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view]
       include Aws::Structure
     end
 
@@ -1160,6 +1360,18 @@ module Aws::GeoPlaces
     # @!attribute [rw] intended_use
     #   Indicates if the results will be stored. Defaults to `SingleUse`, if
     #   left empty.
+    #
+    #   <note markdown="1"> Storing the response of an GetPlace query is required to comply with
+    #   service terms, but charged at a higher cost per request. Please
+    #   review the [user agreement][1] and [service pricing structure][2] to
+    #   determine the correct setting for your use case.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/sla/
+    #   [2]: https://aws.amazon.com/location/pricing/
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -1176,7 +1388,7 @@ module Aws::GeoPlaces
       :political_view,
       :intended_use,
       :key)
-      SENSITIVE = [:place_id, :key]
+      SENSITIVE = [:place_id, :political_view, :key]
       include Aws::Structure
     end
 
@@ -1196,7 +1408,7 @@ module Aws::GeoPlaces
     # @!attribute [rw] pricing_bucket
     #   The pricing bucket for which the query is charged at.
     #
-    #   For more inforamtion on pricing, please visit [Amazon Location
+    #   For more information on pricing, please visit [Amazon Location
     #   Service Pricing][1].
     #
     #
@@ -1274,6 +1486,16 @@ module Aws::GeoPlaces
     #   in various languages.
     #   @return [Types::PhonemeDetails]
     #
+    # @!attribute [rw] main_address
+    #   The main address corresponding to a place of type Secondary Address.
+    #   @return [Types::RelatedPlace]
+    #
+    # @!attribute [rw] secondary_addresses
+    #   All secondary addresses that are associated with a main address. A
+    #   secondary address is one that includes secondary designators, such
+    #   as a Suite or Unit Number, Building, or Floor information.
+    #   @return [Array<Types::RelatedPlace>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/GetPlaceResponse AWS API Documentation
     #
     class GetPlaceResponse < Struct.new(
@@ -1295,12 +1517,15 @@ module Aws::GeoPlaces
       :access_restrictions,
       :time_zone,
       :political_view,
-      :phonemes)
-      SENSITIVE = [:position, :map_view]
+      :phonemes,
+      :main_address,
+      :secondary_addresses)
+      SENSITIVE = [:place_id, :place_type, :title, :address_number_corrected, :position, :map_view, :political_view]
       include Aws::Structure
     end
 
-    # Describes how parts of the result response match the input query.
+    # Indicates the starting and ending index of the text query that match
+    # the found title.
     #
     # @!attribute [rw] start_index
     #   Start index of the highlight.
@@ -1320,7 +1545,7 @@ module Aws::GeoPlaces
       :start_index,
       :end_index,
       :value)
-      SENSITIVE = []
+      SENSITIVE = [:value]
       include Aws::Structure
     end
 
@@ -1335,6 +1560,61 @@ module Aws::GeoPlaces
     class InternalServerException < Struct.new(
       :message)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # All Intersections that are near the provided address.
+    #
+    # @!attribute [rw] place_id
+    #   The `PlaceId` of the place result.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The localized display name of this result item based on request
+    #   parameter `language`.
+    #   @return [String]
+    #
+    # @!attribute [rw] address
+    #   The place address.
+    #   @return [Types::Address]
+    #
+    # @!attribute [rw] position
+    #   The position, in longitude and latitude.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] distance
+    #   The distance in meters from the QueryPosition.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] route_distance
+    #   The distance from the routing position of the nearby address to the
+    #   street result.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] map_view
+    #   The bounding box enclosing the geometric shape (area or line) that
+    #   an individual result covers.
+    #
+    #   The bounding box formed is defined as a set of four coordinates:
+    #   `[{westward lng}, {southern lat}, {eastward lng}, {northern lat}]`
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] access_points
+    #   Position of the access point represented by longitude and latitude.
+    #   @return [Array<Types::AccessPoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/Intersection AWS API Documentation
+    #
+    class Intersection < Struct.new(
+      :place_id,
+      :title,
+      :address,
+      :position,
+      :distance,
+      :route_distance,
+      :map_view,
+      :access_points)
+      SENSITIVE = [:place_id, :title, :position, :distance, :route_distance, :map_view]
       include Aws::Structure
     end
 
@@ -1386,7 +1666,7 @@ module Aws::GeoPlaces
       :open_now,
       :components,
       :categories)
-      SENSITIVE = []
+      SENSITIVE = [:display, :open_now]
       include Aws::Structure
     end
 
@@ -1413,7 +1693,74 @@ module Aws::GeoPlaces
       :open_time,
       :open_duration,
       :recurrence)
-      SENSITIVE = []
+      SENSITIVE = [:open_time, :open_duration, :recurrence]
+      include Aws::Structure
+    end
+
+    # Parsed components in the provided QueryText.
+    #
+    # @!attribute [rw] start_index
+    #   Start index of the parsed query component.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_index
+    #   End index of the parsed query component.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] value
+    #   Value of the parsed query component.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_component
+    #   The address component that the parsed query component corresponds
+    #   to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/ParsedQueryComponent AWS API Documentation
+    #
+    class ParsedQueryComponent < Struct.new(
+      :start_index,
+      :end_index,
+      :value,
+      :query_component)
+      SENSITIVE = [:value, :query_component]
+      include Aws::Structure
+    end
+
+    # Information about a secondary address component parsed from the query
+    # text.
+    #
+    # @!attribute [rw] start_index
+    #   Start index of the parsed secondary address component in the query
+    #   text.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_index
+    #   End index of the parsed secondary address component in the query
+    #   text.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] value
+    #   Value of the parsed secondary address component.
+    #   @return [String]
+    #
+    # @!attribute [rw] number
+    #   Secondary address number provided in the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] designator
+    #   Secondary address designator provided in the query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/ParsedQuerySecondaryAddressComponent AWS API Documentation
+    #
+    class ParsedQuerySecondaryAddressComponent < Struct.new(
+      :start_index,
+      :end_index,
+      :value,
+      :number,
+      :designator)
+      SENSITIVE = [:value, :number, :designator]
       include Aws::Structure
     end
 
@@ -1464,7 +1811,7 @@ module Aws::GeoPlaces
       :value,
       :language,
       :preferred)
-      SENSITIVE = []
+      SENSITIVE = [:value, :preferred]
       include Aws::Structure
     end
 
@@ -1473,7 +1820,7 @@ module Aws::GeoPlaces
     # @!attribute [rw] postal_code
     #   An alphanumeric string included in a postal address to facilitate
     #   mail sorting, such as post code, postcode, or ZIP code for which the
-    #   result should posses.
+    #   result should possess.
     #   @return [String]
     #
     # @!attribute [rw] postal_authority
@@ -1502,7 +1849,7 @@ module Aws::GeoPlaces
       :postal_code_type,
       :usps_zip,
       :usps_zip_plus_4)
-      SENSITIVE = []
+      SENSITIVE = [:postal_code, :postal_authority, :postal_code_type]
       include Aws::Structure
     end
 
@@ -1534,7 +1881,7 @@ module Aws::GeoPlaces
       :original_term,
       :start_index,
       :end_index)
-      SENSITIVE = []
+      SENSITIVE = [:refined_term, :original_term]
       include Aws::Structure
     end
 
@@ -1559,7 +1906,7 @@ module Aws::GeoPlaces
     class Region < Struct.new(
       :code,
       :name)
-      SENSITIVE = []
+      SENSITIVE = [:code, :name]
       include Aws::Structure
     end
 
@@ -1585,6 +1932,46 @@ module Aws::GeoPlaces
       include Aws::Structure
     end
 
+    # Place that is related to the result item.
+    #
+    # @!attribute [rw] place_id
+    #   The `PlaceId` of the place result.
+    #   @return [String]
+    #
+    # @!attribute [rw] place_type
+    #   A `PlaceType` is a category that the result place must belong to.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The localized display name of this result item based on request
+    #   parameter `language`.
+    #   @return [String]
+    #
+    # @!attribute [rw] address
+    #   The place address.
+    #   @return [Types::Address]
+    #
+    # @!attribute [rw] position
+    #   The position, in longitude and latitude.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] access_points
+    #   Position of the access point represented by longitude and latitude.
+    #   @return [Array<Types::AccessPoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/RelatedPlace AWS API Documentation
+    #
+    class RelatedPlace < Struct.new(
+      :place_id,
+      :place_type,
+      :title,
+      :address,
+      :position,
+      :access_points)
+      SENSITIVE = [:place_id, :place_type, :title, :position]
+      include Aws::Structure
+    end
+
     # The included place types.
     #
     # @!attribute [rw] include_place_types
@@ -1601,7 +1988,7 @@ module Aws::GeoPlaces
 
     # @!attribute [rw] query_position
     #   The position, in `[lng, lat]` for which you are querying nearby
-    #   resultsfor. Results closer to the position will be ranked higher
+    #   results for. Results closer to the position will be ranked higher
     #   then results further away from the position
     #   @return [Array<Float>]
     #
@@ -1617,7 +2004,7 @@ module Aws::GeoPlaces
     #
     # @!attribute [rw] filter
     #   A structure which contains a set of inclusion/exclusion properties
-    #   that results must posses in order to be returned as a result.
+    #   that results must possess in order to be returned as a result.
     #   @return [Types::ReverseGeocodeFilter]
     #
     # @!attribute [rw] additional_features
@@ -1646,6 +2033,18 @@ module Aws::GeoPlaces
     # @!attribute [rw] intended_use
     #   Indicates if the results will be stored. Defaults to `SingleUse`, if
     #   left empty.
+    #
+    #   <note markdown="1"> Storing the response of an ReverseGeocode query is required to
+    #   comply with service terms, but charged at a higher cost per request.
+    #   Please review the [user agreement][1] and [service pricing
+    #   structure][2] to determine the correct setting for your use case.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/sla/
+    #   [2]: https://aws.amazon.com/location/pricing/
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -1665,14 +2064,14 @@ module Aws::GeoPlaces
       :political_view,
       :intended_use,
       :key)
-      SENSITIVE = [:query_position, :key]
+      SENSITIVE = [:query_position, :query_radius, :political_view, :key]
       include Aws::Structure
     end
 
     # @!attribute [rw] pricing_bucket
     #   The pricing bucket for which the query is charged at.
     #
-    #   For more inforamtion on pricing, please visit [Amazon Location
+    #   For more information on pricing, please visit [Amazon Location
     #   Service Pricing][1].
     #
     #
@@ -1745,7 +2144,7 @@ module Aws::GeoPlaces
     #   @return [Array<Types::FoodType>]
     #
     # @!attribute [rw] access_points
-    #   Position of the access point represent by longitude and latitude.
+    #   Position of the access point represented by longitude and latitude.
     #   @return [Array<Types::AccessPoint>]
     #
     # @!attribute [rw] time_zone
@@ -1758,6 +2157,10 @@ module Aws::GeoPlaces
     #   represent unresolved territorial claims through the point of view of
     #   the specified country.
     #   @return [String]
+    #
+    # @!attribute [rw] intersections
+    #   All Intersections that are near the provided address.
+    #   @return [Array<Types::Intersection>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/ReverseGeocodeResultItem AWS API Documentation
     #
@@ -1775,13 +2178,14 @@ module Aws::GeoPlaces
       :food_types,
       :access_points,
       :time_zone,
-      :political_view)
-      SENSITIVE = [:position, :map_view]
+      :political_view,
+      :intersections)
+      SENSITIVE = [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view]
       include Aws::Structure
     end
 
     # SearchNearby structure which contains a set of inclusion/exclusion
-    # properties that results must posses in order to be returned as a
+    # properties that results must possess in order to be returned as a
     # result.
     #
     # @!attribute [rw] bounding_box
@@ -1832,19 +2236,23 @@ module Aws::GeoPlaces
       :exclude_business_chains,
       :include_food_types,
       :exclude_food_types)
-      SENSITIVE = [:bounding_box]
+      SENSITIVE = [:bounding_box, :include_countries, :include_categories, :exclude_categories, :include_business_chains, :exclude_business_chains, :include_food_types, :exclude_food_types]
       include Aws::Structure
     end
 
     # @!attribute [rw] query_position
     #   The position, in `[lng, lat]` for which you are querying nearby
-    #   resultsfor. Results closer to the position will be ranked higher
+    #   results for. Results closer to the position will be ranked higher
     #   then results further away from the position
     #   @return [Array<Float>]
     #
     # @!attribute [rw] query_radius
     #   The maximum distance in meters from the QueryPosition from which a
     #   result will be returned.
+    #
+    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] max_results
@@ -1854,7 +2262,7 @@ module Aws::GeoPlaces
     #
     # @!attribute [rw] filter
     #   A structure which contains a set of inclusion/exclusion properties
-    #   that results must posses in order to be returned as a result.
+    #   that results must possess in order to be returned as a result.
     #   @return [Types::SearchNearbyFilter]
     #
     # @!attribute [rw] additional_features
@@ -1883,6 +2291,18 @@ module Aws::GeoPlaces
     # @!attribute [rw] intended_use
     #   Indicates if the results will be stored. Defaults to `SingleUse`, if
     #   left empty.
+    #
+    #   <note markdown="1"> Storing the response of an SearchNearby query is required to comply
+    #   with service terms, but charged at a higher cost per request. Please
+    #   review the [user agreement][1] and [service pricing structure][2] to
+    #   determine the correct setting for your use case.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/sla/
+    #   [2]: https://aws.amazon.com/location/pricing/
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1908,14 +2328,14 @@ module Aws::GeoPlaces
       :intended_use,
       :next_token,
       :key)
-      SENSITIVE = [:query_position, :key]
+      SENSITIVE = [:query_position, :query_radius, :political_view, :key]
       include Aws::Structure
     end
 
     # @!attribute [rw] pricing_bucket
     #   The pricing bucket for which the query is charged at.
     #
-    #   For more inforamtion on pricing, please visit [Amazon Location
+    #   For more information on pricing, please visit [Amazon Location
     #   Service Pricing][1].
     #
     #
@@ -2047,12 +2467,12 @@ module Aws::GeoPlaces
       :time_zone,
       :political_view,
       :phonemes)
-      SENSITIVE = [:position, :map_view]
+      SENSITIVE = [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view]
       include Aws::Structure
     end
 
     # SearchText structure which contains a set of inclusion/exclusion
-    # properties that results must posses in order to be returned as a
+    # properties that results must possess in order to be returned as a
     # result.
     #
     # @!attribute [rw] bounding_box
@@ -2078,7 +2498,7 @@ module Aws::GeoPlaces
       :bounding_box,
       :circle,
       :include_countries)
-      SENSITIVE = [:bounding_box, :circle]
+      SENSITIVE = [:bounding_box, :circle, :include_countries]
       include Aws::Structure
     end
 
@@ -2086,10 +2506,20 @@ module Aws::GeoPlaces
     #   The free-form text query to match addresses against. This is usually
     #   a partially typed address from an end user in an address box or
     #   form.
+    #
+    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] query_id
-    #   The query Id.
+    #   The query Id returned by the suggest API. If passed in the request,
+    #   the SearchText API will preform a SearchText query with the improved
+    #   query terms for the original query made to the suggest API.
+    #
+    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2111,7 +2541,7 @@ module Aws::GeoPlaces
     #
     # @!attribute [rw] filter
     #   A structure which contains a set of inclusion/exclusion properties
-    #   that results must posses in order to be returned as a result.
+    #   that results must possess in order to be returned as a result.
     #   @return [Types::SearchTextFilter]
     #
     # @!attribute [rw] additional_features
@@ -2140,6 +2570,18 @@ module Aws::GeoPlaces
     # @!attribute [rw] intended_use
     #   Indicates if the results will be stored. Defaults to `SingleUse`, if
     #   left empty.
+    #
+    #   <note markdown="1"> Storing the response of an SearchText query is required to comply
+    #   with service terms, but charged at a higher cost per request. Please
+    #   review the [user agreement][1] and [service pricing structure][2] to
+    #   determine the correct setting for your use case.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/sla/
+    #   [2]: https://aws.amazon.com/location/pricing/
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2166,14 +2608,14 @@ module Aws::GeoPlaces
       :intended_use,
       :next_token,
       :key)
-      SENSITIVE = [:query_text, :query_id, :bias_position, :key]
+      SENSITIVE = [:query_text, :query_id, :bias_position, :political_view, :key]
       include Aws::Structure
     end
 
     # @!attribute [rw] pricing_bucket
     #   The pricing bucket for which the query is charged at.
     #
-    #   For more inforamtion on pricing, please visit [Amazon Location
+    #   For more information on pricing, please visit [Amazon Location
     #   Service Pricing][1].
     #
     #
@@ -2305,7 +2747,36 @@ module Aws::GeoPlaces
       :time_zone,
       :political_view,
       :phonemes)
-      SENSITIVE = [:position, :map_view]
+      SENSITIVE = [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view]
+      include Aws::Structure
+    end
+
+    # Components that correspond to secondary identifiers on an address. The
+    # only component type supported currently is Unit.
+    #
+    # @!attribute [rw] number
+    #   Number that uniquely identifies a secondary address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/SecondaryAddressComponent AWS API Documentation
+    #
+    class SecondaryAddressComponent < Struct.new(
+      :number)
+      SENSITIVE = [:number]
+      include Aws::Structure
+    end
+
+    # Match score for a secondary address component in the result.
+    #
+    # @!attribute [rw] number
+    #   Match score for the secondary address number.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/SecondaryAddressComponentMatchScore AWS API Documentation
+    #
+    class SecondaryAddressComponentMatchScore < Struct.new(
+      :number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2314,13 +2785,13 @@ module Aws::GeoPlaces
     # @!attribute [rw] base_name
     #   Base name part of the street name.
     #
-    #   Example: Younge from the “Younge street".
+    #   Example: Younge from the "Younge street".
     #   @return [String]
     #
     # @!attribute [rw] type
     #   Street type part of the street name.
     #
-    #   Example: `“avenue"`.
+    #   Example: `"avenue"`.
     #   @return [String]
     #
     # @!attribute [rw] type_placement
@@ -2328,7 +2799,8 @@ module Aws::GeoPlaces
     #   @return [String]
     #
     # @!attribute [rw] type_separator
-    #   What character(s) separates the string from its type.
+    #   Defines a separator character such as `""` or `" "` between the base
+    #   name and type.
     #   @return [String]
     #
     # @!attribute [rw] prefix
@@ -2371,7 +2843,7 @@ module Aws::GeoPlaces
       :suffix,
       :direction,
       :language)
-      SENSITIVE = []
+      SENSITIVE = [:base_name, :type, :prefix, :suffix, :direction]
       include Aws::Structure
     end
 
@@ -2390,7 +2862,7 @@ module Aws::GeoPlaces
     class SubRegion < Struct.new(
       :code,
       :name)
-      SENSITIVE = []
+      SENSITIVE = [:code, :name]
       include Aws::Structure
     end
 
@@ -2437,7 +2909,7 @@ module Aws::GeoPlaces
     end
 
     # SuggestFilter structure which contains a set of inclusion/exclusion
-    # properties that results must posses in order to be returned as a
+    # properties that results must possess in order to be returned as a
     # result.
     #
     # @!attribute [rw] bounding_box
@@ -2463,7 +2935,7 @@ module Aws::GeoPlaces
       :bounding_box,
       :circle,
       :include_countries)
-      SENSITIVE = [:bounding_box, :circle]
+      SENSITIVE = [:bounding_box, :circle, :include_countries]
       include Aws::Structure
     end
 
@@ -2574,7 +3046,7 @@ module Aws::GeoPlaces
       :time_zone,
       :political_view,
       :phonemes)
-      SENSITIVE = [:position, :map_view]
+      SENSITIVE = [:place_id, :place_type, :position, :distance, :map_view, :political_view]
       include Aws::Structure
     end
 
@@ -2587,13 +3059,17 @@ module Aws::GeoPlaces
     #   the SearchText API documentation for more details [SearchText API
     #   docs][1].
     #
+    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/latest/APIReference/API_geoplaces_SearchText.html
     #   @return [String]
     #
     # @!attribute [rw] query_type
-    #   The query type. Category qeuries will search for places which have
+    #   The query type. Category queries will search for places which have
     #   an entry matching the given category, for example "doctor office".
     #   BusinessChain queries will search for instances of a given business.
     #   @return [String]
@@ -2603,7 +3079,7 @@ module Aws::GeoPlaces
     class SuggestQueryResult < Struct.new(
       :query_id,
       :query_type)
-      SENSITIVE = []
+      SENSITIVE = [:query_id]
       include Aws::Structure
     end
 
@@ -2611,6 +3087,10 @@ module Aws::GeoPlaces
     #   The free-form text query to match addresses against. This is usually
     #   a partially typed address from an end user in an address box or
     #   form.
+    #
+    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2637,7 +3117,7 @@ module Aws::GeoPlaces
     #
     # @!attribute [rw] filter
     #   A structure which contains a set of inclusion/exclusion properties
-    #   that results must posses in order to be returned as a result.
+    #   that results must possess in order to be returned as a result.
     #   @return [Types::SuggestFilter]
     #
     # @!attribute [rw] additional_features
@@ -2686,14 +3166,14 @@ module Aws::GeoPlaces
       :political_view,
       :intended_use,
       :key)
-      SENSITIVE = [:query_text, :bias_position, :key]
+      SENSITIVE = [:query_text, :bias_position, :political_view, :key]
       include Aws::Structure
     end
 
     # @!attribute [rw] pricing_bucket
     #   The pricing bucket for which the query is charged at.
     #
-    #   For more inforamtion on pricing, please visit [Amazon Location
+    #   For more information on pricing, please visit [Amazon Location
     #   Service Pricing][1].
     #
     #
@@ -2755,7 +3235,7 @@ module Aws::GeoPlaces
       :place,
       :query,
       :highlights)
-      SENSITIVE = []
+      SENSITIVE = [:title]
       include Aws::Structure
     end
 
@@ -2792,7 +3272,7 @@ module Aws::GeoPlaces
       :name,
       :offset,
       :offset_seconds)
-      SENSITIVE = []
+      SENSITIVE = [:name, :offset, :offset_seconds]
       include Aws::Structure
     end
 
@@ -2807,7 +3287,7 @@ module Aws::GeoPlaces
     #
     class UspsZip < Struct.new(
       :zip_classification_code)
-      SENSITIVE = []
+      SENSITIVE = [:zip_classification_code]
       include Aws::Structure
     end
 
@@ -2821,7 +3301,7 @@ module Aws::GeoPlaces
     #
     class UspsZipPlus4 < Struct.new(
       :record_type_code)
-      SENSITIVE = []
+      SENSITIVE = [:record_type_code]
       include Aws::Structure
     end
 

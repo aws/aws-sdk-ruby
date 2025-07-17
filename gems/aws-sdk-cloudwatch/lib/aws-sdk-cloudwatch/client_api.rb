@@ -44,18 +44,19 @@ module Aws::CloudWatch
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
     CompositeAlarm = Shapes::StructureShape.new(name: 'CompositeAlarm')
     CompositeAlarms = Shapes::ListShape.new(name: 'CompositeAlarms')
-    ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException', error: {"code"=>"ConcurrentModificationException", "httpStatusCode"=>429, "senderFault"=>true})
+    ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException', error: {"code" => "ConcurrentModificationException", "httpStatusCode" => 429, "senderFault" => true})
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     Counts = Shapes::ListShape.new(name: 'Counts')
     DashboardArn = Shapes::StringShape.new(name: 'DashboardArn')
     DashboardBody = Shapes::StringShape.new(name: 'DashboardBody')
     DashboardEntries = Shapes::ListShape.new(name: 'DashboardEntries')
     DashboardEntry = Shapes::StructureShape.new(name: 'DashboardEntry')
     DashboardErrorMessage = Shapes::StringShape.new(name: 'DashboardErrorMessage')
-    DashboardInvalidInputError = Shapes::StructureShape.new(name: 'DashboardInvalidInputError', error: {"code"=>"InvalidParameterInput", "httpStatusCode"=>400, "senderFault"=>true})
+    DashboardInvalidInputError = Shapes::StructureShape.new(name: 'DashboardInvalidInputError', error: {"code" => "InvalidParameterInput", "httpStatusCode" => 400, "senderFault" => true})
     DashboardName = Shapes::StringShape.new(name: 'DashboardName')
     DashboardNamePrefix = Shapes::StringShape.new(name: 'DashboardNamePrefix')
     DashboardNames = Shapes::ListShape.new(name: 'DashboardNames')
-    DashboardNotFoundError = Shapes::StructureShape.new(name: 'DashboardNotFoundError', error: {"code"=>"ResourceNotFound", "httpStatusCode"=>404, "senderFault"=>true})
+    DashboardNotFoundError = Shapes::StructureShape.new(name: 'DashboardNotFoundError', error: {"code" => "ResourceNotFound", "httpStatusCode" => 404, "senderFault" => true})
     DashboardValidationMessage = Shapes::StructureShape.new(name: 'DashboardValidationMessage')
     DashboardValidationMessages = Shapes::ListShape.new(name: 'DashboardValidationMessages')
     DataPath = Shapes::StringShape.new(name: 'DataPath')
@@ -154,6 +155,7 @@ module Aws::CloudWatch
     InsightRuleMetricName = Shapes::StringShape.new(name: 'InsightRuleMetricName')
     InsightRuleName = Shapes::StringShape.new(name: 'InsightRuleName')
     InsightRuleNames = Shapes::ListShape.new(name: 'InsightRuleNames')
+    InsightRuleOnTransformedLogs = Shapes::BooleanShape.new(name: 'InsightRuleOnTransformedLogs')
     InsightRuleOrderBy = Shapes::StringShape.new(name: 'InsightRuleOrderBy')
     InsightRuleSchema = Shapes::StringShape.new(name: 'InsightRuleSchema')
     InsightRuleState = Shapes::StringShape.new(name: 'InsightRuleState')
@@ -161,15 +163,15 @@ module Aws::CloudWatch
     InsightRuleUnboundInteger = Shapes::IntegerShape.new(name: 'InsightRuleUnboundInteger')
     InsightRuleUnboundLong = Shapes::IntegerShape.new(name: 'InsightRuleUnboundLong')
     InsightRules = Shapes::ListShape.new(name: 'InsightRules')
-    InternalServiceFault = Shapes::StructureShape.new(name: 'InternalServiceFault', error: {"code"=>"InternalServiceError", "httpStatusCode"=>500})
-    InvalidFormatFault = Shapes::StructureShape.new(name: 'InvalidFormatFault', error: {"code"=>"InvalidFormat", "httpStatusCode"=>400, "senderFault"=>true})
-    InvalidNextToken = Shapes::StructureShape.new(name: 'InvalidNextToken', error: {"code"=>"InvalidNextToken", "httpStatusCode"=>400, "senderFault"=>true})
-    InvalidParameterCombinationException = Shapes::StructureShape.new(name: 'InvalidParameterCombinationException', error: {"code"=>"InvalidParameterCombination", "httpStatusCode"=>400, "senderFault"=>true})
-    InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException', error: {"code"=>"InvalidParameterValue", "httpStatusCode"=>400, "senderFault"=>true})
+    InternalServiceFault = Shapes::StructureShape.new(name: 'InternalServiceFault', error: {"code" => "InternalServiceError", "httpStatusCode" => 500})
+    InvalidFormatFault = Shapes::StructureShape.new(name: 'InvalidFormatFault', error: {"code" => "InvalidFormat", "httpStatusCode" => 400, "senderFault" => true})
+    InvalidNextToken = Shapes::StructureShape.new(name: 'InvalidNextToken', error: {"code" => "InvalidNextToken", "httpStatusCode" => 400, "senderFault" => true})
+    InvalidParameterCombinationException = Shapes::StructureShape.new(name: 'InvalidParameterCombinationException', error: {"code" => "InvalidParameterCombination", "httpStatusCode" => 400, "senderFault" => true})
+    InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException', error: {"code" => "InvalidParameterValue", "httpStatusCode" => 400, "senderFault" => true})
     LabelOptions = Shapes::StructureShape.new(name: 'LabelOptions')
     LastModified = Shapes::TimestampShape.new(name: 'LastModified')
-    LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException', error: {"code"=>"LimitExceededException", "httpStatusCode"=>400, "senderFault"=>true})
-    LimitExceededFault = Shapes::StructureShape.new(name: 'LimitExceededFault', error: {"code"=>"LimitExceeded", "httpStatusCode"=>400, "senderFault"=>true})
+    LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException', error: {"code" => "LimitExceededException", "httpStatusCode" => 400, "senderFault" => true})
+    LimitExceededFault = Shapes::StructureShape.new(name: 'LimitExceededFault', error: {"code" => "LimitExceeded", "httpStatusCode" => 400, "senderFault" => true})
     ListDashboardsInput = Shapes::StructureShape.new(name: 'ListDashboardsInput')
     ListDashboardsOutput = Shapes::StructureShape.new(name: 'ListDashboardsOutput')
     ListManagedInsightRulesInput = Shapes::StructureShape.new(name: 'ListManagedInsightRulesInput')
@@ -227,7 +229,7 @@ module Aws::CloudWatch
     MetricWidget = Shapes::StringShape.new(name: 'MetricWidget')
     MetricWidgetImage = Shapes::BlobShape.new(name: 'MetricWidgetImage')
     Metrics = Shapes::ListShape.new(name: 'Metrics')
-    MissingRequiredParameterException = Shapes::StructureShape.new(name: 'MissingRequiredParameterException', error: {"code"=>"MissingParameter", "httpStatusCode"=>400, "senderFault"=>true})
+    MissingRequiredParameterException = Shapes::StructureShape.new(name: 'MissingRequiredParameterException', error: {"code" => "MissingParameter", "httpStatusCode" => 400, "senderFault" => true})
     Namespace = Shapes::StringShape.new(name: 'Namespace')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OutputFormat = Shapes::StringShape.new(name: 'OutputFormat')
@@ -253,8 +255,8 @@ module Aws::CloudWatch
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
-    ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound', error: {"code"=>"ResourceNotFound", "httpStatusCode"=>404, "senderFault"=>true})
-    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException', error: {"code"=>"ResourceNotFoundException", "httpStatusCode"=>404, "senderFault"=>true})
+    ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound', error: {"code" => "ResourceNotFound", "httpStatusCode" => 404, "senderFault" => true})
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException', error: {"code" => "ResourceNotFoundException", "httpStatusCode" => 404, "senderFault" => true})
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ReturnData = Shapes::BooleanShape.new(name: 'ReturnData')
     ScanBy = Shapes::StringShape.new(name: 'ScanBy')
@@ -307,10 +309,10 @@ module Aws::CloudWatch
 
     AlarmTypes.member = Shapes::ShapeRef.new(shape: AlarmType)
 
-    AnomalyDetector.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, deprecated: true, location_name: "Namespace", metadata: {"deprecatedMessage"=>"Use SingleMetricAnomalyDetector.Namespace property."}))
-    AnomalyDetector.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, deprecated: true, location_name: "MetricName", metadata: {"deprecatedMessage"=>"Use SingleMetricAnomalyDetector.MetricName property."}))
-    AnomalyDetector.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, deprecated: true, location_name: "Dimensions", metadata: {"deprecatedMessage"=>"Use SingleMetricAnomalyDetector.Dimensions property."}))
-    AnomalyDetector.add_member(:stat, Shapes::ShapeRef.new(shape: AnomalyDetectorMetricStat, deprecated: true, location_name: "Stat", metadata: {"deprecatedMessage"=>"Use SingleMetricAnomalyDetector.Stat property."}))
+    AnomalyDetector.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, deprecated: true, location_name: "Namespace", metadata: {"deprecatedMessage" => "Use SingleMetricAnomalyDetector.Namespace property."}))
+    AnomalyDetector.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, deprecated: true, location_name: "MetricName", metadata: {"deprecatedMessage" => "Use SingleMetricAnomalyDetector.MetricName property."}))
+    AnomalyDetector.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, deprecated: true, location_name: "Dimensions", metadata: {"deprecatedMessage" => "Use SingleMetricAnomalyDetector.Dimensions property."}))
+    AnomalyDetector.add_member(:stat, Shapes::ShapeRef.new(shape: AnomalyDetectorMetricStat, deprecated: true, location_name: "Stat", metadata: {"deprecatedMessage" => "Use SingleMetricAnomalyDetector.Stat property."}))
     AnomalyDetector.add_member(:configuration, Shapes::ShapeRef.new(shape: AnomalyDetectorConfiguration, location_name: "Configuration"))
     AnomalyDetector.add_member(:state_value, Shapes::ShapeRef.new(shape: AnomalyDetectorStateValue, location_name: "StateValue"))
     AnomalyDetector.add_member(:metric_characteristics, Shapes::ShapeRef.new(shape: MetricCharacteristics, location_name: "MetricCharacteristics"))
@@ -354,6 +356,9 @@ module Aws::CloudWatch
     CompositeAlarms.member = Shapes::ShapeRef.new(shape: CompositeAlarm)
 
     ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ConflictException.struct_class = Types::ConflictException
 
     Counts.member = Shapes::ShapeRef.new(shape: DatapointValue)
 
@@ -400,10 +405,10 @@ module Aws::CloudWatch
     DeleteAlarmsInput.add_member(:alarm_names, Shapes::ShapeRef.new(shape: AlarmNames, required: true, location_name: "AlarmNames"))
     DeleteAlarmsInput.struct_class = Types::DeleteAlarmsInput
 
-    DeleteAnomalyDetectorInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, deprecated: true, location_name: "Namespace", metadata: {"deprecatedMessage"=>"Use SingleMetricAnomalyDetector."}))
-    DeleteAnomalyDetectorInput.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, deprecated: true, location_name: "MetricName", metadata: {"deprecatedMessage"=>"Use SingleMetricAnomalyDetector."}))
-    DeleteAnomalyDetectorInput.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, deprecated: true, location_name: "Dimensions", metadata: {"deprecatedMessage"=>"Use SingleMetricAnomalyDetector."}))
-    DeleteAnomalyDetectorInput.add_member(:stat, Shapes::ShapeRef.new(shape: AnomalyDetectorMetricStat, deprecated: true, location_name: "Stat", metadata: {"deprecatedMessage"=>"Use SingleMetricAnomalyDetector."}))
+    DeleteAnomalyDetectorInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, deprecated: true, location_name: "Namespace", metadata: {"deprecatedMessage" => "Use SingleMetricAnomalyDetector."}))
+    DeleteAnomalyDetectorInput.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, deprecated: true, location_name: "MetricName", metadata: {"deprecatedMessage" => "Use SingleMetricAnomalyDetector."}))
+    DeleteAnomalyDetectorInput.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, deprecated: true, location_name: "Dimensions", metadata: {"deprecatedMessage" => "Use SingleMetricAnomalyDetector."}))
+    DeleteAnomalyDetectorInput.add_member(:stat, Shapes::ShapeRef.new(shape: AnomalyDetectorMetricStat, deprecated: true, location_name: "Stat", metadata: {"deprecatedMessage" => "Use SingleMetricAnomalyDetector."}))
     DeleteAnomalyDetectorInput.add_member(:single_metric_anomaly_detector, Shapes::ShapeRef.new(shape: SingleMetricAnomalyDetector, location_name: "SingleMetricAnomalyDetector"))
     DeleteAnomalyDetectorInput.add_member(:metric_math_anomaly_detector, Shapes::ShapeRef.new(shape: MetricMathAnomalyDetector, location_name: "MetricMathAnomalyDetector"))
     DeleteAnomalyDetectorInput.struct_class = Types::DeleteAnomalyDetectorInput
@@ -619,6 +624,7 @@ module Aws::CloudWatch
     InsightRule.add_member(:schema, Shapes::ShapeRef.new(shape: InsightRuleSchema, required: true, location_name: "Schema"))
     InsightRule.add_member(:definition, Shapes::ShapeRef.new(shape: InsightRuleDefinition, required: true, location_name: "Definition"))
     InsightRule.add_member(:managed_rule, Shapes::ShapeRef.new(shape: InsightRuleIsManaged, location_name: "ManagedRule"))
+    InsightRule.add_member(:apply_on_transformed_logs, Shapes::ShapeRef.new(shape: InsightRuleOnTransformedLogs, location_name: "ApplyOnTransformedLogs"))
     InsightRule.struct_class = Types::InsightRule
 
     InsightRuleContributor.add_member(:keys, Shapes::ShapeRef.new(shape: InsightRuleContributorKeys, required: true, location_name: "Keys"))
@@ -880,10 +886,10 @@ module Aws::CloudWatch
     PartialFailure.add_member(:failure_description, Shapes::ShapeRef.new(shape: FailureDescription, location_name: "FailureDescription"))
     PartialFailure.struct_class = Types::PartialFailure
 
-    PutAnomalyDetectorInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, deprecated: true, location_name: "Namespace", metadata: {"deprecatedMessage"=>"Use SingleMetricAnomalyDetector."}))
-    PutAnomalyDetectorInput.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, deprecated: true, location_name: "MetricName", metadata: {"deprecatedMessage"=>"Use SingleMetricAnomalyDetector."}))
-    PutAnomalyDetectorInput.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, deprecated: true, location_name: "Dimensions", metadata: {"deprecatedMessage"=>"Use SingleMetricAnomalyDetector."}))
-    PutAnomalyDetectorInput.add_member(:stat, Shapes::ShapeRef.new(shape: AnomalyDetectorMetricStat, deprecated: true, location_name: "Stat", metadata: {"deprecatedMessage"=>"Use SingleMetricAnomalyDetector."}))
+    PutAnomalyDetectorInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, deprecated: true, location_name: "Namespace", metadata: {"deprecatedMessage" => "Use SingleMetricAnomalyDetector."}))
+    PutAnomalyDetectorInput.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, deprecated: true, location_name: "MetricName", metadata: {"deprecatedMessage" => "Use SingleMetricAnomalyDetector."}))
+    PutAnomalyDetectorInput.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, deprecated: true, location_name: "Dimensions", metadata: {"deprecatedMessage" => "Use SingleMetricAnomalyDetector."}))
+    PutAnomalyDetectorInput.add_member(:stat, Shapes::ShapeRef.new(shape: AnomalyDetectorMetricStat, deprecated: true, location_name: "Stat", metadata: {"deprecatedMessage" => "Use SingleMetricAnomalyDetector."}))
     PutAnomalyDetectorInput.add_member(:configuration, Shapes::ShapeRef.new(shape: AnomalyDetectorConfiguration, location_name: "Configuration"))
     PutAnomalyDetectorInput.add_member(:metric_characteristics, Shapes::ShapeRef.new(shape: MetricCharacteristics, location_name: "MetricCharacteristics"))
     PutAnomalyDetectorInput.add_member(:single_metric_anomaly_detector, Shapes::ShapeRef.new(shape: SingleMetricAnomalyDetector, location_name: "SingleMetricAnomalyDetector"))
@@ -916,6 +922,7 @@ module Aws::CloudWatch
     PutInsightRuleInput.add_member(:rule_state, Shapes::ShapeRef.new(shape: InsightRuleState, location_name: "RuleState"))
     PutInsightRuleInput.add_member(:rule_definition, Shapes::ShapeRef.new(shape: InsightRuleDefinition, required: true, location_name: "RuleDefinition"))
     PutInsightRuleInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    PutInsightRuleInput.add_member(:apply_on_transformed_logs, Shapes::ShapeRef.new(shape: InsightRuleOnTransformedLogs, location_name: "ApplyOnTransformedLogs"))
     PutInsightRuleInput.struct_class = Types::PutInsightRuleInput
 
     PutInsightRuleOutput.struct_class = Types::PutInsightRuleOutput
@@ -953,7 +960,7 @@ module Aws::CloudWatch
     PutMetricDataInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
     PutMetricDataInput.add_member(:metric_data, Shapes::ShapeRef.new(shape: MetricData, location_name: "MetricData"))
     PutMetricDataInput.add_member(:entity_metric_data, Shapes::ShapeRef.new(shape: EntityMetricDataList, location_name: "EntityMetricData"))
-    PutMetricDataInput.add_member(:strict_entity_validation, Shapes::ShapeRef.new(shape: StrictEntityValidation, location_name: "StrictEntityValidation", metadata: {"box"=>true}))
+    PutMetricDataInput.add_member(:strict_entity_validation, Shapes::ShapeRef.new(shape: StrictEntityValidation, location_name: "StrictEntityValidation", metadata: {"box" => true}))
     PutMetricDataInput.struct_class = Types::PutMetricDataInput
 
     PutMetricStreamInput.add_member(:name, Shapes::ShapeRef.new(shape: MetricStreamName, required: true, location_name: "Name"))
@@ -1089,6 +1096,7 @@ module Aws::CloudWatch
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: DashboardNotFoundError)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_insight_rules, Seahorse::Model::Operation.new.tap do |o|
@@ -1396,6 +1404,7 @@ module Aws::CloudWatch
         o.output = Shapes::ShapeRef.new(shape: PutDashboardOutput)
         o.errors << Shapes::ShapeRef.new(shape: DashboardInvalidInputError)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:put_insight_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -1498,6 +1507,7 @@ module Aws::CloudWatch
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1510,6 +1520,7 @@ module Aws::CloudWatch
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
     end
 

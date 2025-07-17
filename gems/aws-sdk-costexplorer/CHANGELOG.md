@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.128.0 (2025-06-09)
+------------------
+
+* Feature - Support dual-stack endpoints for ce api
+
+1.127.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.126.0 (2025-05-27)
+------------------
+
+* Feature - This release introduces Cost Comparison feature (GetCostAndUsageComparisons, GetCostComparisonDrivers) allowing you find cost variations across multiple dimensions and identify key drivers of spending changes.
+
+1.125.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.124.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.123.0 (2025-04-08)
 ------------------
 

@@ -98,6 +98,22 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # Configuration details for logging to CloudWatch Logs.
+    #
+    # @!attribute [rw] log_group_arn
+    #   The ARN of the CloudWatch log group to which the vended log data
+    #   will be published. This log group must exist prior to calling this
+    #   operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CloudWatchLogDestination AWS API Documentation
+    #
+    class CloudWatchLogDestination < Struct.new(
+      :log_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request would cause an inconsistent state.
     #
     # @!attribute [rw] message
@@ -213,6 +229,46 @@ module Aws::PrometheusService
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateLoggingConfigurationResponse AWS API Documentation
     #
     class CreateLoggingConfigurationResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   (Optional) A unique, case-sensitive identifier that you can provide
+    #   to ensure the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   The destinations where query logs will be sent. Only CloudWatch Logs
+    #   destination is supported. The list must contain exactly one element.
+    #   @return [Array<Types::LoggingDestination>]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace for which to create the query logging
+    #   configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateQueryLoggingConfigurationRequest AWS API Documentation
+    #
+    class CreateQueryLoggingConfigurationRequest < Struct.new(
+      :client_token,
+      :destinations,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current status of the query logging configuration.
+    #   @return [Types::QueryLoggingConfigurationStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateQueryLoggingConfigurationResponse AWS API Documentation
+    #
+    class CreateQueryLoggingConfigurationResponse < Struct.new(
       :status)
       SENSITIVE = []
       include Aws::Structure
@@ -514,6 +570,28 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   (Optional) A unique, case-sensitive identifier that you can provide
+    #   to ensure the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace from which to delete the query logging
+    #   configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteQueryLoggingConfigurationRequest AWS API Documentation
+    #
+    class DeleteQueryLoggingConfigurationRequest < Struct.new(
+      :client_token,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a `DeleteRuleGroupsNamespace` operation.
     #
     # @!attribute [rw] client_token
@@ -662,6 +740,32 @@ module Aws::PrometheusService
     #
     class DescribeLoggingConfigurationResponse < Struct.new(
       :logging_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace for which to retrieve the query logging
+    #   configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeQueryLoggingConfigurationRequest AWS API Documentation
+    #
+    class DescribeQueryLoggingConfigurationRequest < Struct.new(
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_logging_configuration
+    #   The detailed information about the query logging configuration for
+    #   the specified workspace.
+    #   @return [Types::QueryLoggingConfigurationMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeQueryLoggingConfigurationResponse AWS API Documentation
+    #
+    class DescribeQueryLoggingConfigurationResponse < Struct.new(
+      :query_logging_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -883,16 +987,17 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
-    # This structure defines one label set used to enforce ingestion limits
-    # for the workspace, and defines the limit for that label set.
+    # This structure defines one label set used to enforce active time
+    # series limits for the workspace, and defines the limit for that label
+    # set.
     #
     # A label set is a unique combination of label-value pairs. Use them to
-    # control time series ingestion limits and to monitor usage by specific
-    # label groups. Example label sets might be `team:finance` or `env:prod`
+    # control time series limits and to monitor usage by specific label
+    # groups. Example label sets might be `team:finance` or `env:prod`
     #
     # @!attribute [rw] label_set
-    #   This defines one label set that will have an enforced ingestion
-    #   limit.
+    #   This defines one label set that will have an enforced active time
+    #   series limit.
     #
     #   Label values accept ASCII characters and must contain at least one
     #   character that isn't whitespace. ASCII control characters are not
@@ -1145,8 +1250,12 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
-    # Contains information about the logging configuration for the
-    # workspace.
+    # Contains information about the current rules and alerting logging
+    # configuration for the workspace.
+    #
+    # <note markdown="1"> These logging configurations are only for rules and alerting logs.
+    #
+    #  </note>
     #
     # @!attribute [rw] created_at
     #   The date and time that the logging configuration was created.
@@ -1185,7 +1294,12 @@ module Aws::PrometheusService
     # The status of the logging configuration.
     #
     # @!attribute [rw] status_code
-    #   The current status of the logging configuration.
+    #   The current status of the current rules and alerting logging
+    #   configuration.
+    #
+    #   <note markdown="1"> These logging configurations are only for rules and alerting logs.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] status_reason
@@ -1197,6 +1311,42 @@ module Aws::PrometheusService
     class LoggingConfigurationStatus < Struct.new(
       :status_code,
       :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a destination and its associated filtering criteria for query
+    # logging.
+    #
+    # @!attribute [rw] cloud_watch_logs
+    #   Configuration details for logging to CloudWatch Logs.
+    #   @return [Types::CloudWatchLogDestination]
+    #
+    # @!attribute [rw] filters
+    #   Filtering criteria that determine which queries are logged.
+    #   @return [Types::LoggingFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/LoggingDestination AWS API Documentation
+    #
+    class LoggingDestination < Struct.new(
+      :cloud_watch_logs,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filtering criteria that determine which queries are logged.
+    #
+    # @!attribute [rw] qsp_threshold
+    #   The Query Samples Processed (QSP) threshold above which queries will
+    #   be logged. Queries processing more samples than this threshold will
+    #   be captured in logs.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/LoggingFilter AWS API Documentation
+    #
+    class LoggingFilter < Struct.new(
+      :qsp_threshold)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1321,6 +1471,61 @@ module Aws::PrometheusService
       :name,
       :status,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata for a query logging configuration.
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the query logging configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] destinations
+    #   The configured destinations for the query logging configuration.
+    #   @return [Array<Types::LoggingDestination>]
+    #
+    # @!attribute [rw] modified_at
+    #   The date and time when the query logging configuration was last
+    #   modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the query logging configuration.
+    #   @return [Types::QueryLoggingConfigurationStatus]
+    #
+    # @!attribute [rw] workspace
+    #   The ID of the workspace associated with this query logging
+    #   configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/QueryLoggingConfigurationMetadata AWS API Documentation
+    #
+    class QueryLoggingConfigurationMetadata < Struct.new(
+      :created_at,
+      :destinations,
+      :modified_at,
+      :status,
+      :workspace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status information for a query logging configuration.
+    #
+    # @!attribute [rw] status_code
+    #   The current status of the query logging configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   If there is a failure, the reason for the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/QueryLoggingConfigurationStatus AWS API Documentation
+    #
+    class QueryLoggingConfigurationStatus < Struct.new(
+      :status_code,
+      :status_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1875,6 +2080,46 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   (Optional) A unique, case-sensitive identifier that you can provide
+    #   to ensure the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   The destinations where query logs will be sent. Only CloudWatch Logs
+    #   destination is supported. The list must contain exactly one element.
+    #   @return [Array<Types::LoggingDestination>]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace for which to update the query logging
+    #   configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateQueryLoggingConfigurationRequest AWS API Documentation
+    #
+    class UpdateQueryLoggingConfigurationRequest < Struct.new(
+      :client_token,
+      :destinations,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current status of the query logging configuration.
+    #   @return [Types::QueryLoggingConfigurationStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateQueryLoggingConfigurationResponse AWS API Documentation
+    #
+    class UpdateQueryLoggingConfigurationResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] alias
     #   The new alias of the scraper.
     #   @return [String]
@@ -1999,9 +2244,9 @@ module Aws::PrometheusService
     #
     # @!attribute [rw] limits_per_label_set
     #   This is an array of structures, where each structure defines a label
-    #   set for the workspace, and defines the ingestion limit for active
-    #   time series for each of those label sets. Each label name in a label
-    #   set must be unique.
+    #   set for the workspace, and defines the active time series limit for
+    #   each of those label sets. Each label name in a label set must be
+    #   unique.
     #   @return [Array<Types::LimitsPerLabelSet>]
     #
     # @!attribute [rw] retention_period_in_days

@@ -23,6 +23,7 @@ module Aws::ACM
     CertificateChain = Shapes::StringShape.new(name: 'CertificateChain')
     CertificateChainBlob = Shapes::BlobShape.new(name: 'CertificateChainBlob')
     CertificateDetail = Shapes::StructureShape.new(name: 'CertificateDetail')
+    CertificateExport = Shapes::StringShape.new(name: 'CertificateExport')
     CertificateManagedBy = Shapes::StringShape.new(name: 'CertificateManagedBy')
     CertificateOptions = Shapes::StructureShape.new(name: 'CertificateOptions')
     CertificateStatus = Shapes::StringShape.new(name: 'CertificateStatus')
@@ -101,6 +102,8 @@ module Aws::ACM
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceRecord = Shapes::StructureShape.new(name: 'ResourceRecord')
     RevocationReason = Shapes::StringShape.new(name: 'RevocationReason')
+    RevokeCertificateRequest = Shapes::StructureShape.new(name: 'RevokeCertificateRequest')
+    RevokeCertificateResponse = Shapes::StructureShape.new(name: 'RevokeCertificateResponse')
     ServiceErrorMessage = Shapes::StringShape.new(name: 'ServiceErrorMessage')
     SortBy = Shapes::StringShape.new(name: 'SortBy')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
@@ -156,6 +159,7 @@ module Aws::ACM
     CertificateDetail.struct_class = Types::CertificateDetail
 
     CertificateOptions.add_member(:certificate_transparency_logging_preference, Shapes::ShapeRef.new(shape: CertificateTransparencyLoggingPreference, location_name: "CertificateTransparencyLoggingPreference"))
+    CertificateOptions.add_member(:export, Shapes::ShapeRef.new(shape: CertificateExport, location_name: "Export"))
     CertificateOptions.struct_class = Types::CertificateOptions
 
     CertificateStatuses.member = Shapes::ShapeRef.new(shape: CertificateStatus)
@@ -169,6 +173,7 @@ module Aws::ACM
     CertificateSummary.add_member(:key_algorithm, Shapes::ShapeRef.new(shape: KeyAlgorithm, location_name: "KeyAlgorithm"))
     CertificateSummary.add_member(:key_usages, Shapes::ShapeRef.new(shape: KeyUsageNames, location_name: "KeyUsages"))
     CertificateSummary.add_member(:extended_key_usages, Shapes::ShapeRef.new(shape: ExtendedKeyUsageNames, location_name: "ExtendedKeyUsages"))
+    CertificateSummary.add_member(:export_option, Shapes::ShapeRef.new(shape: CertificateExport, location_name: "ExportOption"))
     CertificateSummary.add_member(:in_use, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "InUse"))
     CertificateSummary.add_member(:exported, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Exported"))
     CertificateSummary.add_member(:renewal_eligibility, Shapes::ShapeRef.new(shape: RenewalEligibility, location_name: "RenewalEligibility"))
@@ -239,6 +244,7 @@ module Aws::ACM
     Filters.add_member(:extended_key_usage, Shapes::ShapeRef.new(shape: ExtendedKeyUsageFilterList, location_name: "extendedKeyUsage"))
     Filters.add_member(:key_usage, Shapes::ShapeRef.new(shape: KeyUsageFilterList, location_name: "keyUsage"))
     Filters.add_member(:key_types, Shapes::ShapeRef.new(shape: KeyAlgorithmList, location_name: "keyTypes"))
+    Filters.add_member(:export_option, Shapes::ShapeRef.new(shape: CertificateExport, location_name: "exportOption"))
     Filters.add_member(:managed_by, Shapes::ShapeRef.new(shape: CertificateManagedBy, location_name: "managedBy"))
     Filters.struct_class = Types::Filters
 
@@ -369,6 +375,13 @@ module Aws::ACM
     ResourceRecord.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
     ResourceRecord.struct_class = Types::ResourceRecord
 
+    RevokeCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
+    RevokeCertificateRequest.add_member(:revocation_reason, Shapes::ShapeRef.new(shape: RevocationReason, required: true, location_name: "RevocationReason"))
+    RevokeCertificateRequest.struct_class = Types::RevokeCertificateRequest
+
+    RevokeCertificateResponse.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateArn"))
+    RevokeCertificateResponse.struct_class = Types::RevokeCertificateResponse
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -421,11 +434,11 @@ module Aws::ACM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AddTagsToCertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -437,8 +450,8 @@ module Aws::ACM
         o.input = Shapes::ShapeRef.new(shape: DeleteCertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -492,8 +505,8 @@ module Aws::ACM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ImportCertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: ImportCertificateResponse)
-        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
@@ -545,10 +558,10 @@ module Aws::ACM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RemoveTagsFromCertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -570,8 +583,8 @@ module Aws::ACM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RequestCertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: RequestCertificateResponse)
-        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
@@ -588,6 +601,20 @@ module Aws::ACM
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDomainValidationOptionsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:revoke_certificate, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RevokeCertificate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RevokeCertificateRequest)
+        o.output = Shapes::ShapeRef.new(shape: RevokeCertificateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 

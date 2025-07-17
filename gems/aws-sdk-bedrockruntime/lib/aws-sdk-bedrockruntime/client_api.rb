@@ -36,6 +36,18 @@ module Aws::BedrockRuntime
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CachePointBlock = Shapes::StructureShape.new(name: 'CachePointBlock')
     CachePointType = Shapes::StringShape.new(name: 'CachePointType')
+    Citation = Shapes::StructureShape.new(name: 'Citation')
+    CitationGeneratedContent = Shapes::UnionShape.new(name: 'CitationGeneratedContent')
+    CitationGeneratedContentList = Shapes::ListShape.new(name: 'CitationGeneratedContentList')
+    CitationLocation = Shapes::UnionShape.new(name: 'CitationLocation')
+    CitationSourceContent = Shapes::UnionShape.new(name: 'CitationSourceContent')
+    CitationSourceContentDelta = Shapes::StructureShape.new(name: 'CitationSourceContentDelta')
+    CitationSourceContentList = Shapes::ListShape.new(name: 'CitationSourceContentList')
+    CitationSourceContentListDelta = Shapes::ListShape.new(name: 'CitationSourceContentListDelta')
+    Citations = Shapes::ListShape.new(name: 'Citations')
+    CitationsConfig = Shapes::StructureShape.new(name: 'CitationsConfig')
+    CitationsContentBlock = Shapes::StructureShape.new(name: 'CitationsContentBlock')
+    CitationsDelta = Shapes::StructureShape.new(name: 'CitationsDelta')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentBlock = Shapes::UnionShape.new(name: 'ContentBlock')
     ContentBlockDelta = Shapes::UnionShape.new(name: 'ContentBlockDelta')
@@ -64,7 +76,21 @@ module Aws::BedrockRuntime
     Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     DocumentBlock = Shapes::StructureShape.new(name: 'DocumentBlock')
     DocumentBlockNameString = Shapes::StringShape.new(name: 'DocumentBlockNameString')
+    DocumentCharLocation = Shapes::StructureShape.new(name: 'DocumentCharLocation')
+    DocumentCharLocationDocumentIndexInteger = Shapes::IntegerShape.new(name: 'DocumentCharLocationDocumentIndexInteger')
+    DocumentCharLocationEndInteger = Shapes::IntegerShape.new(name: 'DocumentCharLocationEndInteger')
+    DocumentCharLocationStartInteger = Shapes::IntegerShape.new(name: 'DocumentCharLocationStartInteger')
+    DocumentChunkLocation = Shapes::StructureShape.new(name: 'DocumentChunkLocation')
+    DocumentChunkLocationDocumentIndexInteger = Shapes::IntegerShape.new(name: 'DocumentChunkLocationDocumentIndexInteger')
+    DocumentChunkLocationEndInteger = Shapes::IntegerShape.new(name: 'DocumentChunkLocationEndInteger')
+    DocumentChunkLocationStartInteger = Shapes::IntegerShape.new(name: 'DocumentChunkLocationStartInteger')
+    DocumentContentBlock = Shapes::UnionShape.new(name: 'DocumentContentBlock')
+    DocumentContentBlocks = Shapes::ListShape.new(name: 'DocumentContentBlocks')
     DocumentFormat = Shapes::StringShape.new(name: 'DocumentFormat')
+    DocumentPageLocation = Shapes::StructureShape.new(name: 'DocumentPageLocation')
+    DocumentPageLocationDocumentIndexInteger = Shapes::IntegerShape.new(name: 'DocumentPageLocationDocumentIndexInteger')
+    DocumentPageLocationEndInteger = Shapes::IntegerShape.new(name: 'DocumentPageLocationEndInteger')
+    DocumentPageLocationStartInteger = Shapes::IntegerShape.new(name: 'DocumentPageLocationStartInteger')
     DocumentSource = Shapes::UnionShape.new(name: 'DocumentSource')
     DocumentSourceBytesBlob = Shapes::BlobShape.new(name: 'DocumentSourceBytesBlob')
     GetAsyncInvokeRequest = Shapes::StructureShape.new(name: 'GetAsyncInvokeRequest')
@@ -312,6 +338,56 @@ module Aws::BedrockRuntime
     CachePointBlock.add_member(:type, Shapes::ShapeRef.new(shape: CachePointType, required: true, location_name: "type"))
     CachePointBlock.struct_class = Types::CachePointBlock
 
+    Citation.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
+    Citation.add_member(:source_content, Shapes::ShapeRef.new(shape: CitationSourceContentList, location_name: "sourceContent"))
+    Citation.add_member(:location, Shapes::ShapeRef.new(shape: CitationLocation, location_name: "location"))
+    Citation.struct_class = Types::Citation
+
+    CitationGeneratedContent.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
+    CitationGeneratedContent.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CitationGeneratedContent.add_member_subclass(:text, Types::CitationGeneratedContent::Text)
+    CitationGeneratedContent.add_member_subclass(:unknown, Types::CitationGeneratedContent::Unknown)
+    CitationGeneratedContent.struct_class = Types::CitationGeneratedContent
+
+    CitationGeneratedContentList.member = Shapes::ShapeRef.new(shape: CitationGeneratedContent)
+
+    CitationLocation.add_member(:document_char, Shapes::ShapeRef.new(shape: DocumentCharLocation, location_name: "documentChar"))
+    CitationLocation.add_member(:document_page, Shapes::ShapeRef.new(shape: DocumentPageLocation, location_name: "documentPage"))
+    CitationLocation.add_member(:document_chunk, Shapes::ShapeRef.new(shape: DocumentChunkLocation, location_name: "documentChunk"))
+    CitationLocation.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CitationLocation.add_member_subclass(:document_char, Types::CitationLocation::DocumentChar)
+    CitationLocation.add_member_subclass(:document_page, Types::CitationLocation::DocumentPage)
+    CitationLocation.add_member_subclass(:document_chunk, Types::CitationLocation::DocumentChunk)
+    CitationLocation.add_member_subclass(:unknown, Types::CitationLocation::Unknown)
+    CitationLocation.struct_class = Types::CitationLocation
+
+    CitationSourceContent.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
+    CitationSourceContent.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CitationSourceContent.add_member_subclass(:text, Types::CitationSourceContent::Text)
+    CitationSourceContent.add_member_subclass(:unknown, Types::CitationSourceContent::Unknown)
+    CitationSourceContent.struct_class = Types::CitationSourceContent
+
+    CitationSourceContentDelta.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
+    CitationSourceContentDelta.struct_class = Types::CitationSourceContentDelta
+
+    CitationSourceContentList.member = Shapes::ShapeRef.new(shape: CitationSourceContent)
+
+    CitationSourceContentListDelta.member = Shapes::ShapeRef.new(shape: CitationSourceContentDelta)
+
+    Citations.member = Shapes::ShapeRef.new(shape: Citation)
+
+    CitationsConfig.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
+    CitationsConfig.struct_class = Types::CitationsConfig
+
+    CitationsContentBlock.add_member(:content, Shapes::ShapeRef.new(shape: CitationGeneratedContentList, location_name: "content"))
+    CitationsContentBlock.add_member(:citations, Shapes::ShapeRef.new(shape: Citations, location_name: "citations"))
+    CitationsContentBlock.struct_class = Types::CitationsContentBlock
+
+    CitationsDelta.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
+    CitationsDelta.add_member(:source_content, Shapes::ShapeRef.new(shape: CitationSourceContentListDelta, location_name: "sourceContent"))
+    CitationsDelta.add_member(:location, Shapes::ShapeRef.new(shape: CitationLocation, location_name: "location"))
+    CitationsDelta.struct_class = Types::CitationsDelta
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
@@ -324,6 +400,7 @@ module Aws::BedrockRuntime
     ContentBlock.add_member(:guard_content, Shapes::ShapeRef.new(shape: GuardrailConverseContentBlock, location_name: "guardContent"))
     ContentBlock.add_member(:cache_point, Shapes::ShapeRef.new(shape: CachePointBlock, location_name: "cachePoint"))
     ContentBlock.add_member(:reasoning_content, Shapes::ShapeRef.new(shape: ReasoningContentBlock, location_name: "reasoningContent"))
+    ContentBlock.add_member(:citations_content, Shapes::ShapeRef.new(shape: CitationsContentBlock, location_name: "citationsContent"))
     ContentBlock.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ContentBlock.add_member_subclass(:text, Types::ContentBlock::Text)
     ContentBlock.add_member_subclass(:image, Types::ContentBlock::Image)
@@ -334,16 +411,19 @@ module Aws::BedrockRuntime
     ContentBlock.add_member_subclass(:guard_content, Types::ContentBlock::GuardContent)
     ContentBlock.add_member_subclass(:cache_point, Types::ContentBlock::CachePoint)
     ContentBlock.add_member_subclass(:reasoning_content, Types::ContentBlock::ReasoningContent)
+    ContentBlock.add_member_subclass(:citations_content, Types::ContentBlock::CitationsContent)
     ContentBlock.add_member_subclass(:unknown, Types::ContentBlock::Unknown)
     ContentBlock.struct_class = Types::ContentBlock
 
     ContentBlockDelta.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
     ContentBlockDelta.add_member(:tool_use, Shapes::ShapeRef.new(shape: ToolUseBlockDelta, location_name: "toolUse"))
     ContentBlockDelta.add_member(:reasoning_content, Shapes::ShapeRef.new(shape: ReasoningContentBlockDelta, location_name: "reasoningContent"))
+    ContentBlockDelta.add_member(:citation, Shapes::ShapeRef.new(shape: CitationsDelta, location_name: "citation"))
     ContentBlockDelta.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ContentBlockDelta.add_member_subclass(:text, Types::ContentBlockDelta::Text)
     ContentBlockDelta.add_member_subclass(:tool_use, Types::ContentBlockDelta::ToolUse)
     ContentBlockDelta.add_member_subclass(:reasoning_content, Types::ContentBlockDelta::ReasoningContent)
+    ContentBlockDelta.add_member_subclass(:citation, Types::ContentBlockDelta::Citation)
     ContentBlockDelta.add_member_subclass(:unknown, Types::ContentBlockDelta::Unknown)
     ContentBlockDelta.struct_class = Types::ContentBlockDelta
 
@@ -449,16 +529,45 @@ module Aws::BedrockRuntime
     ConverseTrace.add_member(:prompt_router, Shapes::ShapeRef.new(shape: PromptRouterTrace, location_name: "promptRouter"))
     ConverseTrace.struct_class = Types::ConverseTrace
 
-    DocumentBlock.add_member(:format, Shapes::ShapeRef.new(shape: DocumentFormat, required: true, location_name: "format"))
+    DocumentBlock.add_member(:format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "format"))
     DocumentBlock.add_member(:name, Shapes::ShapeRef.new(shape: DocumentBlockNameString, required: true, location_name: "name"))
     DocumentBlock.add_member(:source, Shapes::ShapeRef.new(shape: DocumentSource, required: true, location_name: "source"))
+    DocumentBlock.add_member(:context, Shapes::ShapeRef.new(shape: String, location_name: "context"))
+    DocumentBlock.add_member(:citations, Shapes::ShapeRef.new(shape: CitationsConfig, location_name: "citations"))
     DocumentBlock.struct_class = Types::DocumentBlock
+
+    DocumentCharLocation.add_member(:document_index, Shapes::ShapeRef.new(shape: DocumentCharLocationDocumentIndexInteger, location_name: "documentIndex"))
+    DocumentCharLocation.add_member(:start, Shapes::ShapeRef.new(shape: DocumentCharLocationStartInteger, location_name: "start"))
+    DocumentCharLocation.add_member(:end, Shapes::ShapeRef.new(shape: DocumentCharLocationEndInteger, location_name: "end"))
+    DocumentCharLocation.struct_class = Types::DocumentCharLocation
+
+    DocumentChunkLocation.add_member(:document_index, Shapes::ShapeRef.new(shape: DocumentChunkLocationDocumentIndexInteger, location_name: "documentIndex"))
+    DocumentChunkLocation.add_member(:start, Shapes::ShapeRef.new(shape: DocumentChunkLocationStartInteger, location_name: "start"))
+    DocumentChunkLocation.add_member(:end, Shapes::ShapeRef.new(shape: DocumentChunkLocationEndInteger, location_name: "end"))
+    DocumentChunkLocation.struct_class = Types::DocumentChunkLocation
+
+    DocumentContentBlock.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
+    DocumentContentBlock.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DocumentContentBlock.add_member_subclass(:text, Types::DocumentContentBlock::Text)
+    DocumentContentBlock.add_member_subclass(:unknown, Types::DocumentContentBlock::Unknown)
+    DocumentContentBlock.struct_class = Types::DocumentContentBlock
+
+    DocumentContentBlocks.member = Shapes::ShapeRef.new(shape: DocumentContentBlock)
+
+    DocumentPageLocation.add_member(:document_index, Shapes::ShapeRef.new(shape: DocumentPageLocationDocumentIndexInteger, location_name: "documentIndex"))
+    DocumentPageLocation.add_member(:start, Shapes::ShapeRef.new(shape: DocumentPageLocationStartInteger, location_name: "start"))
+    DocumentPageLocation.add_member(:end, Shapes::ShapeRef.new(shape: DocumentPageLocationEndInteger, location_name: "end"))
+    DocumentPageLocation.struct_class = Types::DocumentPageLocation
 
     DocumentSource.add_member(:bytes, Shapes::ShapeRef.new(shape: DocumentSourceBytesBlob, location_name: "bytes"))
     DocumentSource.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "s3Location"))
+    DocumentSource.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
+    DocumentSource.add_member(:content, Shapes::ShapeRef.new(shape: DocumentContentBlocks, location_name: "content"))
     DocumentSource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     DocumentSource.add_member_subclass(:bytes, Types::DocumentSource::Bytes)
     DocumentSource.add_member_subclass(:s3_location, Types::DocumentSource::S3Location)
+    DocumentSource.add_member_subclass(:text, Types::DocumentSource::Text)
+    DocumentSource.add_member_subclass(:content, Types::DocumentSource::Content)
     DocumentSource.add_member_subclass(:unknown, Types::DocumentSource::Unknown)
     DocumentSource.struct_class = Types::DocumentSource
 
@@ -861,7 +970,7 @@ module Aws::BedrockRuntime
     SpecificToolChoice.add_member(:name, Shapes::ShapeRef.new(shape: ToolName, required: true, location_name: "name"))
     SpecificToolChoice.struct_class = Types::SpecificToolChoice
 
-    StartAsyncInvokeRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: AsyncInvokeIdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartAsyncInvokeRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: AsyncInvokeIdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     StartAsyncInvokeRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: AsyncInvokeIdentifier, required: true, location_name: "modelId"))
     StartAsyncInvokeRequest.add_member(:model_input, Shapes::ShapeRef.new(shape: ModelInputPayload, required: true, location_name: "modelInput"))
     StartAsyncInvokeRequest.add_member(:output_data_config, Shapes::ShapeRef.new(shape: AsyncInvokeOutputDataConfig, required: true, location_name: "outputDataConfig"))
@@ -990,10 +1099,10 @@ module Aws::BedrockRuntime
 
       api.metadata = {
         "apiVersion" => "2023-09-30",
-        "auth" => ["aws.auth#sigv4"],
+        "auth" => ["aws.auth#sigv4", "smithy.api#httpBearerAuth"],
         "endpointPrefix" => "bedrock-runtime",
         "protocol" => "rest-json",
-        "protocolSettings" => {"h2"=>"optional"},
+        "protocolSettings" => {"h2" => "optional"},
         "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Bedrock Runtime",
         "serviceId" => "Bedrock Runtime",

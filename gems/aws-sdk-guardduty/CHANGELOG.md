@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.120.0 (2025-07-16)
+------------------
+
+* Feature - Add expectedBucketOwner parameter to ThreatIntel and IPSet APIs.
+
+1.119.0 (2025-06-27)
+------------------
+
+* Feature - Update JSON target for Kubernetes workload resource type.
+
+1.118.0 (2025-06-17)
+------------------
+
+* Feature - Adding support for extended threat detection for EKS Audit Logs and EKS Runtime Monitoring.
+
+1.117.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.116.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.115.0 (2025-05-08)
+------------------
+
+* Feature - Updated description of a data structure.
+
+1.114.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.113.0 (2025-02-20)
 ------------------
 

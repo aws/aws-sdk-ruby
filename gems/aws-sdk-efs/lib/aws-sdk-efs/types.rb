@@ -444,9 +444,9 @@ module Aws::EFS
     #   want to provision for a file system that you're creating. Required
     #   if `ThroughputMode` is set to `provisioned`. Valid values are 1-3414
     #   MiBps, with the upper limit depending on Region. To increase this
-    #   limit, contact Amazon Web Services Support. For more information,
-    #   see [Amazon EFS quotas that you can increase][1] in the *Amazon EFS
-    #   User Guide*.
+    #   limit, contact Amazon Web ServicesSupport. For more information, see
+    #   [Amazon EFS quotas that you can increase][1] in the *Amazon EFS User
+    #   Guide*.
     #
     #
     #
@@ -530,12 +530,43 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] ip_address
-    #   Valid IPv4 address within the address range of the specified subnet.
+    #   If the IP address type for the mount target is IPv4, then specify
+    #   the IPv4 address within the address range of the specified subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_6_address
+    #   If the IP address type for the mount target is IPv6, then specify
+    #   the IPv6 address within the address range of the specified subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address_type
+    #   Specify the type of IP address of the mount target you are creating.
+    #   Options are IPv4, dual stack, or IPv6. If you don’t specify an
+    #   IpAddressType, then IPv4 is used.
+    #
+    #   * IPV4\_ONLY – Create mount target with IPv4 only subnet or
+    #     dual-stack subnet.
+    #
+    #   * DUAL\_STACK – Create mount target with dual-stack subnet.
+    #
+    #   * IPV6\_ONLY – Create mount target with IPv6 only subnet.
+    #
+    #   <note markdown="1"> Creating IPv6 mount target only ENI in dual-stack subnet is not
+    #   supported.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] security_groups
-    #   Up to five VPC security group IDs, of the form `sg-xxxxxxxx`. These
-    #   must be for the same VPC as subnet specified.
+    #   VPC security group IDs, of the form `sg-xxxxxxxx`. These must be for
+    #   the same VPC as the subnet specified. The maximum number of security
+    #   groups depends on account quota. For more information, see [Amazon
+    #   VPC Quotas][1] in the *Amazon VPC User Guide* (see the **Security
+    #   Groups** table).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateMountTargetRequest AWS API Documentation
@@ -544,6 +575,8 @@ module Aws::EFS
       :file_system_id,
       :subnet_id,
       :ip_address,
+      :ipv_6_address,
+      :ip_address_type,
       :security_groups)
       SENSITIVE = []
       include Aws::Structure
@@ -1299,6 +1332,20 @@ module Aws::EFS
     #   cross-account replication, this must be an ARN. The file system's
     #   replication overwrite replication must be disabled. If no ID or ARN
     #   is specified, then a new file system is created.
+    #
+    #   <note markdown="1"> When you initially configure replication to an existing file system,
+    #   Amazon EFS writes data to or removes existing data from the
+    #   destination file system to match data in the source file system. If
+    #   you don't want to change data in the destination file system, then
+    #   you should replicate to a new file system instead. For more
+    #   information, see
+    #   [https://docs.aws.amazon.com/efs/latest/ug/create-replication.html][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/create-replication.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -1605,7 +1652,7 @@ module Aws::EFS
     #
     #   * `REPLICATING` – The file system is being used as the destination
     #     file system in a replication configuration. The file system is
-    #     read-only and is only modified only by EFS replication.
+    #     read-only and is modified only by EFS replication.
     #
     #   If the replication configuration is deleted, the file system's
     #   replication overwrite protection is re-enabled, the file system
@@ -1953,7 +2000,7 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] security_groups
-    #   An array of up to five VPC security group IDs.
+    #   An array of VPC security group IDs.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ModifyMountTargetSecurityGroupsRequest AWS API Documentation
@@ -2020,6 +2067,10 @@ module Aws::EFS
     #   target.
     #   @return [String]
     #
+    # @!attribute [rw] ipv_6_address
+    #   The IPv6 address for the mount target.
+    #   @return [String]
+    #
     # @!attribute [rw] network_interface_id
     #   The ID of the network interface that Amazon EFS created when it
     #   created the mount target.
@@ -2055,6 +2106,7 @@ module Aws::EFS
       :subnet_id,
       :life_cycle_state,
       :ip_address,
+      :ipv_6_address,
       :network_interface_id,
       :availability_zone_id,
       :availability_zone_name,
@@ -2100,7 +2152,7 @@ module Aws::EFS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
     #
     # @!attribute [rw] error_code
     #   The error code is a string that uniquely identifies an error
@@ -2155,8 +2207,7 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # Returned if the default file system policy is in effect for the EFS
-    # file system specified.
+    # Returned if `no backup` is specified for a One Zone EFS file system.
     #
     # @!attribute [rw] error_code
     #   The error code is a string that uniquely identifies an error
@@ -2520,8 +2571,15 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # Returned if the size of `SecurityGroups` specified in the request is
-    # greater than five.
+    # Returned if the number of `SecurityGroups` specified in the request is
+    # greater than the limit, which is based on account quota. Either delete
+    # some security groups or request that the account quota be raised. For
+    # more information, see [Amazon VPC Quotas][1] in the *Amazon VPC User
+    # Guide* (see the **Security Groups** table).
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
     #
     # @!attribute [rw] error_code
     #   The error code is a string that uniquely identifies an error
@@ -2831,7 +2889,7 @@ module Aws::EFS
     #   that you want to provision for a file system that you're creating.
     #   Required if `ThroughputMode` is set to `provisioned`. Valid values
     #   are 1-3414 MiBps, with the upper limit depending on Region. To
-    #   increase this limit, contact Amazon Web Services Support. For more
+    #   increase this limit, contact Amazon Web ServicesSupport. For more
     #   information, see [Amazon EFS quotas that you can increase][1] in the
     #   *Amazon EFS User Guide*.
     #

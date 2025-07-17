@@ -200,8 +200,7 @@ module Aws::BedrockDataAutomationRuntime
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -553,6 +552,16 @@ module Aws::BedrockDataAutomationRuntime
     #     client_token: "IdempotencyToken",
     #     input_configuration: { # required
     #       s3_uri: "S3Uri", # required
+    #       asset_processing_configuration: {
+    #         video: {
+    #           segment_configuration: {
+    #             timestamp_segment: {
+    #               start_time_millis: 1, # required
+    #               end_time_millis: 1, # required
+    #             },
+    #           },
+    #         },
+    #       },
     #     },
     #     output_configuration: { # required
     #       s3_uri: "S3Uri", # required
@@ -706,7 +715,7 @@ module Aws::BedrockDataAutomationRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockdataautomationruntime'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

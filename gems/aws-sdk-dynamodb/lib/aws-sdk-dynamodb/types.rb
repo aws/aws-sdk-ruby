@@ -1774,6 +1774,33 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Specifies the action to add a new witness Region to a MRSC global
+    # table. A MRSC global table can be configured with either three
+    # replicas, or with two replicas and one witness.
+    #
+    # @!attribute [rw] region_name
+    #   The Amazon Web Services Region name to be added as a witness Region
+    #   for the MRSC global table. The witness must be in a different Region
+    #   than the replicas and within the same Region set:
+    #
+    #   * US Region set: US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon)
+    #
+    #   * EU Region set: Europe (Ireland), Europe (London), Europe (Paris),
+    #     Europe (Frankfurt)
+    #
+    #   * AP Region set: Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia
+    #     Pacific (Osaka)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateGlobalTableWitnessGroupMemberAction AWS API Documentation
+    #
+    class CreateGlobalTableWitnessGroupMemberAction < Struct.new(
+      :region_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a replica to be added.
     #
     # @!attribute [rw] region_name
@@ -2245,6 +2272,24 @@ module Aws::DynamoDB
     #
     class DeleteGlobalSecondaryIndexAction < Struct.new(
       :index_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the action to remove a witness Region from a MRSC global
+    # table. You cannot delete a single witness from a MRSC global table -
+    # you must delete both a replica and the witness together. The deletion
+    # of both a witness and replica converts the remaining replica to a
+    # single-Region DynamoDB table.
+    #
+    # @!attribute [rw] region_name
+    #   The witness Region name to be removed from the MRSC global table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteGlobalTableWitnessGroupMemberAction AWS API Documentation
+    #
+    class DeleteGlobalTableWitnessGroupMemberAction < Struct.new(
+      :region_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4550,6 +4595,55 @@ module Aws::DynamoDB
     #
     class GlobalTableNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the properties of a witness Region in a MRSC global table.
+    #
+    # @!attribute [rw] region_name
+    #   The name of the Amazon Web Services Region that serves as a witness
+    #   for the MRSC global table.
+    #   @return [String]
+    #
+    # @!attribute [rw] witness_status
+    #   The current status of the witness Region in the MRSC global table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalTableWitnessDescription AWS API Documentation
+    #
+    class GlobalTableWitnessDescription < Struct.new(
+      :region_name,
+      :witness_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents one of the following:
+    #
+    # * A new witness to be added to a new global table.
+    #
+    # * An existing witness to be removed from an existing global table.
+    #
+    # You can configure one witness per MRSC global table.
+    #
+    # @!attribute [rw] create
+    #   Specifies a witness Region to be added to a new MRSC global table.
+    #   The witness must be added when creating the MRSC global table.
+    #   @return [Types::CreateGlobalTableWitnessGroupMemberAction]
+    #
+    # @!attribute [rw] delete
+    #   Specifies a witness Region to be removed from an existing global
+    #   table. Must be done in conjunction with removing a replica. The
+    #   deletion of both a witness and replica converts the remaining
+    #   replica to a single-Region DynamoDB table.
+    #   @return [Types::DeleteGlobalTableWitnessGroupMemberAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalTableWitnessGroupUpdate AWS API Documentation
+    #
+    class GlobalTableWitnessGroupUpdate < Struct.new(
+      :create,
+      :delete)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9002,6 +9096,11 @@ module Aws::DynamoDB
     #   Represents replicas of the table.
     #   @return [Array<Types::ReplicaDescription>]
     #
+    # @!attribute [rw] global_table_witnesses
+    #   The witness Region and its current status in the MRSC global table.
+    #   Only one witness Region can be configured per MRSC global table.
+    #   @return [Array<Types::GlobalTableWitnessDescription>]
+    #
     # @!attribute [rw] restore_summary
     #   Contains details for the restore.
     #   @return [Types::RestoreSummary]
@@ -9038,24 +9137,19 @@ module Aws::DynamoDB
     #   Indicates one of the following consistency modes for a global table:
     #
     #   * `EVENTUAL`: Indicates that the global table is configured for
-    #     multi-Region eventual consistency.
+    #     multi-Region eventual consistency (MREC).
     #
     #   * `STRONG`: Indicates that the global table is configured for
-    #     multi-Region strong consistency (preview).
-    #
-    #     <note markdown="1"> Multi-Region strong consistency (MRSC) is a new DynamoDB global
-    #     tables capability currently available in preview mode. For more
-    #     information, see [Global tables multi-Region strong
-    #     consistency][1].
-    #
-    #      </note>
+    #     multi-Region strong consistency (MRSC).
     #
     #   If you don't specify this field, the global table consistency mode
-    #   defaults to `EVENTUAL`.
+    #   defaults to `EVENTUAL`. For more information about global tables
+    #   consistency modes, see [ Consistency modes][1] in DynamoDB developer
+    #   guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/PreviewFeatures.html#multi-region-strong-consistency-gt
+    #   [1]: https://docs.aws.amazon.com/V2globaltables_HowItWorks.html#V2globaltables_HowItWorks.consistency-modes
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TableDescription AWS API Documentation
@@ -9079,6 +9173,7 @@ module Aws::DynamoDB
       :latest_stream_arn,
       :global_table_version,
       :replicas,
+      :global_table_witnesses,
       :restore_summary,
       :sse_description,
       :archival_summary,
@@ -10557,11 +10652,6 @@ module Aws::DynamoDB
     # @!attribute [rw] replica_updates
     #   A list of replica update actions (create, delete, or update) for the
     #   table.
-    #
-    #   <note markdown="1"> For global tables, this property only applies to global tables using
-    #   Version 2019.11.21 (Current version).
-    #
-    #    </note>
     #   @return [Array<Types::ReplicationGroupUpdate>]
     #
     # @!attribute [rw] table_class
@@ -10583,28 +10673,45 @@ module Aws::DynamoDB
     #   You can specify one of the following consistency modes:
     #
     #   * `EVENTUAL`: Configures a new global table for multi-Region
-    #     eventual consistency. This is the default consistency mode for
-    #     global tables.
+    #     eventual consistency (MREC). This is the default consistency mode
+    #     for global tables.
     #
     #   * `STRONG`: Configures a new global table for multi-Region strong
-    #     consistency (preview).
+    #     consistency (MRSC).
     #
-    #     <note markdown="1"> Multi-Region strong consistency (MRSC) is a new DynamoDB global
-    #     tables capability currently available in preview mode. For more
-    #     information, see [Global tables multi-Region strong
-    #     consistency][3].
-    #
-    #      </note>
-    #
-    #   If you don't specify this parameter, the global table consistency
-    #   mode defaults to `EVENTUAL`.
+    #   If you don't specify this field, the global table consistency mode
+    #   defaults to `EVENTUAL`. For more information about global tables
+    #   consistency modes, see [ Consistency modes][3] in DynamoDB developer
+    #   guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ReplicationGroupUpdate.html#DDB-Type-ReplicationGroupUpdate-Create
     #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTable.html#DDB-UpdateTable-request-ReplicaUpdates
-    #   [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/PreviewFeatures.html#multi-region-strong-consistency-gt
+    #   [3]: https://docs.aws.amazon.com/V2globaltables_HowItWorks.html#V2globaltables_HowItWorks.consistency-modes
     #   @return [String]
+    #
+    # @!attribute [rw] global_table_witness_updates
+    #   A list of witness updates for a MRSC global table. A witness
+    #   provides a cost-effective alternative to a full replica in a MRSC
+    #   global table by maintaining replicated change data written to global
+    #   table replicas. You cannot perform read or write operations on a
+    #   witness. For each witness, you can request one action:
+    #
+    #   * `Create` - add a new witness to the global table.
+    #
+    #   * `Delete` - remove a witness from the global table.
+    #
+    #   You can create or delete only one witness per `UpdateTable`
+    #   operation.
+    #
+    #   For more information, see [Multi-Region strong consistency
+    #   (MRSC)][1] in the Amazon DynamoDB Developer Guide
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_HowItWorks.html#V2globaltables_HowItWorks.consistency-modes
+    #   @return [Array<Types::GlobalTableWitnessGroupUpdate>]
     #
     # @!attribute [rw] on_demand_throughput
     #   Updates the maximum number of read and write units for the specified
@@ -10631,6 +10738,7 @@ module Aws::DynamoDB
       :table_class,
       :deletion_protection_enabled,
       :multi_region_consistency,
+      :global_table_witness_updates,
       :on_demand_throughput,
       :warm_throughput)
       SENSITIVE = []

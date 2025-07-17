@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.3.1 (2025-06-10)
+------------------
+
+* Issue - Only load required `cgi` modules for Ruby 3.5.
+
+1.3.0 (2025-06-02)
+------------------
+
+* Feature - AWS SDK for Ruby no longer supports Ruby runtime versions 2.5 and 2.6.
+
 1.2.0 (2023-11-22)
 ------------------
 

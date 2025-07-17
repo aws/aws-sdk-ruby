@@ -41,6 +41,7 @@ module Aws::Textract
     AnalyzeIDDetections = Shapes::StructureShape.new(name: 'AnalyzeIDDetections')
     AnalyzeIDRequest = Shapes::StructureShape.new(name: 'AnalyzeIDRequest')
     AnalyzeIDResponse = Shapes::StructureShape.new(name: 'AnalyzeIDResponse')
+    Angle = Shapes::FloatShape.new(name: 'Angle')
     AutoUpdate = Shapes::StringShape.new(name: 'AutoUpdate')
     BadDocumentException = Shapes::StructureShape.new(name: 'BadDocumentException')
     Block = Shapes::StructureShape.new(name: 'Block')
@@ -326,7 +327,7 @@ module Aws::Textract
     ContentClassifiers.member = Shapes::ShapeRef.new(shape: ContentClassifier)
 
     CreateAdapterRequest.add_member(:adapter_name, Shapes::ShapeRef.new(shape: AdapterName, required: true, location_name: "AdapterName"))
-    CreateAdapterRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateAdapterRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateAdapterRequest.add_member(:description, Shapes::ShapeRef.new(shape: AdapterDescription, location_name: "Description"))
     CreateAdapterRequest.add_member(:feature_types, Shapes::ShapeRef.new(shape: FeatureTypes, required: true, location_name: "FeatureTypes"))
     CreateAdapterRequest.add_member(:auto_update, Shapes::ShapeRef.new(shape: AutoUpdate, location_name: "AutoUpdate"))
@@ -337,7 +338,7 @@ module Aws::Textract
     CreateAdapterResponse.struct_class = Types::CreateAdapterResponse
 
     CreateAdapterVersionRequest.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AdapterId, required: true, location_name: "AdapterId"))
-    CreateAdapterVersionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateAdapterVersionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateAdapterVersionRequest.add_member(:dataset_config, Shapes::ShapeRef.new(shape: AdapterVersionDatasetConfig, required: true, location_name: "DatasetConfig"))
     CreateAdapterVersionRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "KMSKeyId"))
     CreateAdapterVersionRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, required: true, location_name: "OutputConfig"))
@@ -449,6 +450,7 @@ module Aws::Textract
 
     Geometry.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
     Geometry.add_member(:polygon, Shapes::ShapeRef.new(shape: Polygon, location_name: "Polygon"))
+    Geometry.add_member(:rotation_angle, Shapes::ShapeRef.new(shape: Angle, location_name: "RotationAngle"))
     Geometry.struct_class = Types::Geometry
 
     GetAdapterRequest.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AdapterId, required: true, location_name: "AdapterId"))
@@ -549,7 +551,7 @@ module Aws::Textract
 
     HumanLoopActivationOutput.add_member(:human_loop_arn, Shapes::ShapeRef.new(shape: HumanLoopArn, location_name: "HumanLoopArn"))
     HumanLoopActivationOutput.add_member(:human_loop_activation_reasons, Shapes::ShapeRef.new(shape: HumanLoopActivationReasons, location_name: "HumanLoopActivationReasons"))
-    HumanLoopActivationOutput.add_member(:human_loop_activation_conditions_evaluation_results, Shapes::ShapeRef.new(shape: HumanLoopActivationConditionsEvaluationResults, location_name: "HumanLoopActivationConditionsEvaluationResults", metadata: {"jsonvalue"=>true}))
+    HumanLoopActivationOutput.add_member(:human_loop_activation_conditions_evaluation_results, Shapes::ShapeRef.new(shape: HumanLoopActivationConditionsEvaluationResults, location_name: "HumanLoopActivationConditionsEvaluationResults", metadata: {"jsonvalue" => true}))
     HumanLoopActivationOutput.struct_class = Types::HumanLoopActivationOutput
 
     HumanLoopActivationReasons.member = Shapes::ShapeRef.new(shape: HumanLoopActivationReason)

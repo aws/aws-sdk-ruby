@@ -3,7 +3,8 @@
 require 'openssl'
 require 'base64'
 require 'uri'
-require 'cgi'
+require "cgi/escape"
+require "cgi/util" if RUBY_VERSION < "3.5"
 
 module Aws
   module Sigv2

@@ -150,7 +150,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OAM/Client.html#get_link-instance_method
       def get_link: (
-                      identifier: ::String
+                      identifier: ::String,
+                      ?include_tags: bool
                     ) -> _GetLinkResponseSuccess
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLinkResponseSuccess
 
@@ -163,7 +164,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OAM/Client.html#get_sink-instance_method
       def get_sink: (
-                      identifier: ::String
+                      identifier: ::String,
+                      ?include_tags: bool
                     ) -> _GetSinkResponseSuccess
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSinkResponseSuccess
 
@@ -273,6 +275,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OAM/Client.html#update_link-instance_method
       def update_link: (
                          identifier: ::String,
+                         ?include_tags: bool,
                          ?link_configuration: {
                            log_group_configuration: {
                              filter: ::String

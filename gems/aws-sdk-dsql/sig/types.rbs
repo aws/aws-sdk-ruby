@@ -28,30 +28,21 @@ module Aws::DSQL
 
     class CreateClusterInput
       attr_accessor deletion_protection_enabled: bool
+      attr_accessor kms_encryption_key: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
+      attr_accessor multi_region_properties: Types::MultiRegionProperties
       SENSITIVE: []
     end
 
     class CreateClusterOutput
       attr_accessor identifier: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "IDLE" | "INACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED" | "PENDING_SETUP" | "PENDING_DELETE")
       attr_accessor creation_time: ::Time
+      attr_accessor multi_region_properties: Types::MultiRegionProperties
+      attr_accessor encryption_details: Types::EncryptionDetails
       attr_accessor deletion_protection_enabled: bool
-      SENSITIVE: []
-    end
-
-    class CreateMultiRegionClustersInput
-      attr_accessor linked_region_list: ::Array[::String]
-      attr_accessor cluster_properties: ::Hash[::String, Types::LinkedClusterProperties]
-      attr_accessor witness_region: ::String
-      attr_accessor client_token: ::String
-      SENSITIVE: []
-    end
-
-    class CreateMultiRegionClustersOutput
-      attr_accessor linked_cluster_arns: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -64,15 +55,15 @@ module Aws::DSQL
     class DeleteClusterOutput
       attr_accessor identifier: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "IDLE" | "INACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED" | "PENDING_SETUP" | "PENDING_DELETE")
       attr_accessor creation_time: ::Time
-      attr_accessor deletion_protection_enabled: bool
       SENSITIVE: []
     end
 
-    class DeleteMultiRegionClustersInput
-      attr_accessor linked_cluster_arns: ::Array[::String]
-      attr_accessor client_token: ::String
+    class EncryptionDetails
+      attr_accessor encryption_type: ("AWS_OWNED_KMS_KEY" | "CUSTOMER_MANAGED_KMS_KEY")
+      attr_accessor kms_key_arn: ::String
+      attr_accessor encryption_status: ("ENABLED" | "UPDATING" | "KMS_KEY_INACCESSIBLE" | "ENABLING")
       SENSITIVE: []
     end
 
@@ -84,11 +75,12 @@ module Aws::DSQL
     class GetClusterOutput
       attr_accessor identifier: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "IDLE" | "INACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED" | "PENDING_SETUP" | "PENDING_DELETE")
       attr_accessor creation_time: ::Time
       attr_accessor deletion_protection_enabled: bool
-      attr_accessor witness_region: ::String
-      attr_accessor linked_cluster_arns: ::Array[::String]
+      attr_accessor multi_region_properties: Types::MultiRegionProperties
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor encryption_details: Types::EncryptionDetails
       SENSITIVE: []
     end
 
@@ -105,12 +97,6 @@ module Aws::DSQL
     class InternalServerException
       attr_accessor message: ::String
       attr_accessor retry_after_seconds: ::Integer
-      SENSITIVE: []
-    end
-
-    class LinkedClusterProperties
-      attr_accessor deletion_protection_enabled: bool
-      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -133,6 +119,12 @@ module Aws::DSQL
 
     class ListTagsForResourceOutput
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MultiRegionProperties
+      attr_accessor witness_region: ::String
+      attr_accessor clusters: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -175,18 +167,17 @@ module Aws::DSQL
     class UpdateClusterInput
       attr_accessor identifier: ::String
       attr_accessor deletion_protection_enabled: bool
+      attr_accessor kms_encryption_key: ::String
       attr_accessor client_token: ::String
+      attr_accessor multi_region_properties: Types::MultiRegionProperties
       SENSITIVE: []
     end
 
     class UpdateClusterOutput
       attr_accessor identifier: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "IDLE" | "INACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED" | "PENDING_SETUP" | "PENDING_DELETE")
       attr_accessor creation_time: ::Time
-      attr_accessor deletion_protection_enabled: bool
-      attr_accessor witness_region: ::String
-      attr_accessor linked_cluster_arns: ::Array[::String]
       SENSITIVE: []
     end
 

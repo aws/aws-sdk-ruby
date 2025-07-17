@@ -10211,6 +10211,11 @@ module Aws::MediaLive
     #   encoder.
     #   @return [Array<Types::SrtOutputDestinationSettings>]
     #
+    # @!attribute [rw] logical_interface_names
+    #   Optional assignment of an output to a logical interface on the Node.
+    #   Only applies to on premises channels.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputDestination AWS API Documentation
     #
     class OutputDestination < Struct.new(
@@ -10218,7 +10223,8 @@ module Aws::MediaLive
       :media_package_settings,
       :multiplex_settings,
       :settings,
-      :srt_settings)
+      :srt_settings,
+      :logical_interface_names)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12736,6 +12742,10 @@ module Aws::MediaLive
     # @!attribute [rw] dry_run
     #   @return [Boolean]
     #
+    # @!attribute [rw] anywhere_settings
+    #   The Elemental Anywhere settings for this channel.
+    #   @return [Types::AnywhereSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannel AWS API Documentation
     #
     class UpdateChannel < Struct.new(
@@ -12749,7 +12759,8 @@ module Aws::MediaLive
       :name,
       :role_arn,
       :channel_engine_version,
-      :dry_run)
+      :dry_run,
+      :anywhere_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12841,6 +12852,10 @@ module Aws::MediaLive
     # @!attribute [rw] dry_run
     #   @return [Boolean]
     #
+    # @!attribute [rw] anywhere_settings
+    #   Elemental anywhere settings
+    #   @return [Types::AnywhereSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannelRequest AWS API Documentation
     #
     class UpdateChannelRequest < Struct.new(
@@ -12855,7 +12870,8 @@ module Aws::MediaLive
       :name,
       :role_arn,
       :channel_engine_version,
-      :dry_run)
+      :dry_run,
+      :anywhere_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18323,6 +18339,20 @@ module Aws::MediaLive
     #   the timecode will become part of the video.
     #   @return [Types::TimecodeBurninSettings]
     #
+    # @!attribute [rw] bitrate
+    #   Average bitrate in bits/second. Required when the rate control mode
+    #   is CBR. Not used for QVBR.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rate_control_mode
+    #   Rate control mode. QVBR: Quality will match the specified quality
+    #   level except when it is constrained by the maximum bitrate.
+    #   Recommended if you or your viewers pay for bandwidth. CBR: Quality
+    #   varies, depending on the video complexity. Recommended only if you
+    #   distribute your assets to devices that cannot handle variable
+    #   bitrates.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Av1Settings AWS API Documentation
     #
     class Av1Settings < Struct.new(
@@ -18342,7 +18372,9 @@ module Aws::MediaLive
       :par_numerator,
       :qvbr_quality_level,
       :scene_change_detect,
-      :timecode_burnin_settings)
+      :timecode_burnin_settings,
+      :bitrate,
+      :rate_control_mode)
       SENSITIVE = []
       include Aws::Structure
     end

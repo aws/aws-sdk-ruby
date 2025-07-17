@@ -1232,6 +1232,18 @@
         {"shape":"DBInstanceNotReadyFault"}
       ]
     },
+    "DescribeDBMajorEngineVersions":{
+      "name":"DescribeDBMajorEngineVersions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeDBMajorEngineVersionsRequest"},
+      "output":{
+        "shape":"DescribeDBMajorEngineVersionsResponse",
+        "resultWrapper":"DescribeDBMajorEngineVersionsResult"
+      }
+    },
     "DescribeDBParameterGroups":{
       "name":"DescribeDBParameterGroups",
       "http":{
@@ -2685,7 +2697,8 @@
       "errors":[
         {"shape":"DBClusterNotFoundFault"},
         {"shape":"InvalidDBClusterStateFault"},
-        {"shape":"InvalidDBInstanceStateFault"}
+        {"shape":"InvalidDBInstanceStateFault"},
+        {"shape":"InvalidDBShardGroupStateFault"}
       ]
     },
     "StartDBInstance":{
@@ -2789,7 +2802,8 @@
       "errors":[
         {"shape":"DBClusterNotFoundFault"},
         {"shape":"InvalidDBClusterStateFault"},
-        {"shape":"InvalidDBInstanceStateFault"}
+        {"shape":"InvalidDBInstanceStateFault"},
+        {"shape":"InvalidDBShardGroupStateFault"}
       ]
     },
     "StopDBInstance":{
@@ -3439,7 +3453,9 @@
         "PreSignedUrl":{"shape":"String"},
         "OptionGroupName":{"shape":"String"},
         "TargetCustomAvailabilityZone":{"shape":"String"},
-        "CopyOptionGroup":{"shape":"BooleanOptional"}
+        "CopyOptionGroup":{"shape":"BooleanOptional"},
+        "SnapshotAvailabilityZone":{"shape":"String"},
+        "SnapshotTarget":{"shape":"String"}
       }
     },
     "CopyDBSnapshotResult":{
@@ -3769,6 +3785,7 @@
         "NetworkType":{"shape":"String"},
         "StorageThroughput":{"shape":"IntegerOptional"},
         "EnableCustomerOwnedIp":{"shape":"BooleanOptional"},
+        "BackupTarget":{"shape":"String"},
         "AllocatedStorage":{"shape":"IntegerOptional"},
         "SourceDBClusterIdentifier":{"shape":"String"},
         "DedicatedLogVolume":{"shape":"BooleanOptional"},
@@ -4170,6 +4187,7 @@
         "CrossAccountClone":{"shape":"BooleanOptional"},
         "DomainMemberships":{"shape":"DomainMembershipList"},
         "TagList":{"shape":"TagList"},
+        "GlobalClusterIdentifier":{"shape":"GlobalClusterIdentifier"},
         "GlobalWriteForwardingStatus":{"shape":"WriteForwardingStatus"},
         "GlobalWriteForwardingRequested":{"shape":"BooleanOptional"},
         "PendingModifiedValues":{"shape":"ClusterPendingModifiedValues"},
@@ -4990,6 +5008,21 @@
       },
       "exception":true
     },
+    "DBMajorEngineVersion":{
+      "type":"structure",
+      "members":{
+        "Engine":{"shape":"String"},
+        "MajorEngineVersion":{"shape":"String"},
+        "SupportedEngineLifecycles":{"shape":"SupportedEngineLifecycleList"}
+      }
+    },
+    "DBMajorEngineVersionsList":{
+      "type":"list",
+      "member":{
+        "shape":"DBMajorEngineVersion",
+        "locationName":"DBMajorEngineVersion"
+      }
+    },
     "DBParameterGroup":{
       "type":"structure",
       "members":{
@@ -5492,7 +5525,8 @@
         "StorageThroughput":{"shape":"IntegerOptional"},
         "DBSystemId":{"shape":"String"},
         "DedicatedLogVolume":{"shape":"Boolean"},
-        "MultiTenant":{"shape":"BooleanOptional"}
+        "MultiTenant":{"shape":"BooleanOptional"},
+        "SnapshotAvailabilityZone":{"shape":"String"}
       },
       "wrapper":true
     },
@@ -6149,6 +6183,22 @@
         "Marker":{"shape":"String"}
       }
     },
+    "DescribeDBMajorEngineVersionsRequest":{
+      "type":"structure",
+      "members":{
+        "Engine":{"shape":"Engine"},
+        "MajorEngineVersion":{"shape":"MajorEngineVersion"},
+        "Marker":{"shape":"Marker"},
+        "MaxRecords":{"shape":"MaxRecords"}
+      }
+    },
+    "DescribeDBMajorEngineVersionsResponse":{
+      "type":"structure",
+      "members":{
+        "DBMajorEngineVersions":{"shape":"DBMajorEngineVersionsList"},
+        "Marker":{"shape":"String"}
+      }
+    },
     "DescribeDBParameterGroupsMessage":{
       "type":"structure",
       "members":{
@@ -6677,6 +6727,11 @@
         "Port":{"shape":"Integer"},
         "HostedZoneId":{"shape":"String"}
       }
+    },
+    "Engine":{
+      "type":"string",
+      "max":50,
+      "min":1
     },
     "EngineDefaults":{
       "type":"structure",
@@ -7564,6 +7619,13 @@
       "min":1,
       "pattern":"[a-zA-Z0-9_:\\-\\/]+"
     },
+    "LifecycleSupportName":{
+      "type":"string",
+      "enum":[
+        "open-source-rds-standard-support",
+        "open-source-rds-extended-support"
+      ]
+    },
     "LimitlessDatabase":{
       "type":"structure",
       "members":{
@@ -7608,6 +7670,11 @@
     },
     "Long":{"type":"long"},
     "LongOptional":{"type":"long"},
+    "MajorEngineVersion":{
+      "type":"string",
+      "max":50,
+      "min":1
+    },
     "Marker":{
       "type":"string",
       "max":340,
@@ -9799,6 +9866,26 @@
       "member":{
         "shape":"CharacterSet",
         "locationName":"CharacterSet"
+      }
+    },
+    "SupportedEngineLifecycle":{
+      "type":"structure",
+      "required":[
+        "LifecycleSupportName",
+        "LifecycleSupportStartDate",
+        "LifecycleSupportEndDate"
+      ],
+      "members":{
+        "LifecycleSupportName":{"shape":"LifecycleSupportName"},
+        "LifecycleSupportStartDate":{"shape":"TStamp"},
+        "LifecycleSupportEndDate":{"shape":"TStamp"}
+      }
+    },
+    "SupportedEngineLifecycleList":{
+      "type":"list",
+      "member":{
+        "shape":"SupportedEngineLifecycle",
+        "locationName":"SupportedEngineLifecycle"
       }
     },
     "SupportedTimezonesList":{

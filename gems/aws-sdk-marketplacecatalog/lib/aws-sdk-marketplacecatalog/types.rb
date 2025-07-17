@@ -308,6 +308,14 @@ module Aws::MarketplaceCatalog
     #   Alternative field that accepts a JSON value instead of a string for
     #   `ChangeType` details. You can use either `Details` or
     #   `DetailsDocument`, but not both.
+    #
+    #   To download the "DetailsDocument" shapes, see the [Python][1] and
+    #   [Java][2] shapes on GitHub.
+    #
+    #
+    #
+    #   [1]: https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python
+    #   [2]: https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] change_name
@@ -405,6 +413,14 @@ module Aws::MarketplaceCatalog
     # @!attribute [rw] details_document
     #   The JSON value of the details specific to the change type of the
     #   requested change.
+    #
+    #   To download the "DetailsDocument" shapes, see the [Python][1] and
+    #   [Java][2] shapes on GitHub.
+    #
+    #
+    #
+    #   [1]: https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python
+    #   [2]: https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] error_detail_list
@@ -888,6 +904,14 @@ module Aws::MarketplaceCatalog
     #
     # @!attribute [rw] details_document
     #   The JSON value of the details specific to the entity.
+    #
+    #   To download "DetailsDocument" shapes, see the [Python][1] and
+    #   [Java][2] shapes on GitHub.
+    #
+    #
+    #
+    #   [1]: https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python
+    #   [2]: https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/DescribeEntityResponse AWS API Documentation
@@ -1039,6 +1063,10 @@ module Aws::MarketplaceCatalog
     #   Authorization.
     #   @return [Types::ResaleAuthorizationSummary]
     #
+    # @!attribute [rw] machine_learning_product_summary
+    #   A summary of a machine learning product.
+    #   @return [Types::MachineLearningProductSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/EntitySummary AWS API Documentation
     #
     class EntitySummary < Struct.new(
@@ -1053,7 +1081,8 @@ module Aws::MarketplaceCatalog
       :data_product_summary,
       :saa_s_product_summary,
       :offer_summary,
-      :resale_authorization_summary)
+      :resale_authorization_summary,
+      :machine_learning_product_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1086,6 +1115,12 @@ module Aws::MarketplaceCatalog
     #   A filter for Resale Authorizations.
     #   @return [Types::ResaleAuthorizationFilters]
     #
+    # @!attribute [rw] machine_learning_product_filters
+    #   The filters that you can use with the ListEntities operation to
+    #   filter machine learning products. You can filter by EntityId,
+    #   LastModifiedDate, ProductTitle, and Visibility.
+    #   @return [Types::MachineLearningProductFilters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/EntityTypeFilters AWS API Documentation
     #
     class EntityTypeFilters < Struct.new(
@@ -1095,6 +1130,7 @@ module Aws::MarketplaceCatalog
       :offer_filters,
       :container_product_filters,
       :resale_authorization_filters,
+      :machine_learning_product_filters,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1106,6 +1142,7 @@ module Aws::MarketplaceCatalog
       class OfferFilters < EntityTypeFilters; end
       class ContainerProductFilters < EntityTypeFilters; end
       class ResaleAuthorizationFilters < EntityTypeFilters; end
+      class MachineLearningProductFilters < EntityTypeFilters; end
       class Unknown < EntityTypeFilters; end
     end
 
@@ -1137,6 +1174,10 @@ module Aws::MarketplaceCatalog
     #   A sort for Resale Authorizations.
     #   @return [Types::ResaleAuthorizationSort]
     #
+    # @!attribute [rw] machine_learning_product_sort
+    #   The sort options for machine learning products.
+    #   @return [Types::MachineLearningProductSort]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/EntityTypeSort AWS API Documentation
     #
     class EntityTypeSort < Struct.new(
@@ -1146,6 +1187,7 @@ module Aws::MarketplaceCatalog
       :offer_sort,
       :container_product_sort,
       :resale_authorization_sort,
+      :machine_learning_product_sort,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1157,6 +1199,7 @@ module Aws::MarketplaceCatalog
       class OfferSort < EntityTypeSort; end
       class ContainerProductSort < EntityTypeSort; end
       class ResaleAuthorizationSort < EntityTypeSort; end
+      class MachineLearningProductSort < EntityTypeSort; end
       class Unknown < EntityTypeSort; end
     end
 
@@ -1432,6 +1475,172 @@ module Aws::MarketplaceCatalog
     class ListTagsForResourceResponse < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter for machine learning product entity IDs.
+    #
+    # @!attribute [rw] value_list
+    #   A list of entity IDs to filter by. The operation returns machine
+    #   learning products with entity IDs that match the values in this
+    #   list.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/MachineLearningProductEntityIdFilter AWS API Documentation
+    #
+    class MachineLearningProductEntityIdFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filters that you can use with the ListEntities operation to filter
+    # machine learning products. You can filter by EntityId,
+    # LastModifiedDate, ProductTitle, and Visibility.
+    #
+    # @!attribute [rw] entity_id
+    #   Filter machine learning products by their entity IDs.
+    #   @return [Types::MachineLearningProductEntityIdFilter]
+    #
+    # @!attribute [rw] last_modified_date
+    #   Filter machine learning products by their last modified date.
+    #   @return [Types::MachineLearningProductLastModifiedDateFilter]
+    #
+    # @!attribute [rw] product_title
+    #   Filter machine learning products by their product titles.
+    #   @return [Types::MachineLearningProductTitleFilter]
+    #
+    # @!attribute [rw] visibility
+    #   Filter machine learning products by their visibility status.
+    #   @return [Types::MachineLearningProductVisibilityFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/MachineLearningProductFilters AWS API Documentation
+    #
+    class MachineLearningProductFilters < Struct.new(
+      :entity_id,
+      :last_modified_date,
+      :product_title,
+      :visibility)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter for machine learning product last modified date.
+    #
+    # @!attribute [rw] date_range
+    #   A date range to filter by. The operation returns machine learning
+    #   products with last modified dates that fall within this range.
+    #   @return [Types::MachineLearningProductLastModifiedDateFilterDateRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/MachineLearningProductLastModifiedDateFilter AWS API Documentation
+    #
+    class MachineLearningProductLastModifiedDateFilter < Struct.new(
+      :date_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A date range for filtering machine learning products by their last
+    # modified date.
+    #
+    # @!attribute [rw] after_value
+    #   The start date (inclusive) of the date range. The operation returns
+    #   machine learning products with last modified dates on or after this
+    #   date.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_value
+    #   The end date (inclusive) of the date range. The operation returns
+    #   machine learning products with last modified dates on or before this
+    #   date.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/MachineLearningProductLastModifiedDateFilterDateRange AWS API Documentation
+    #
+    class MachineLearningProductLastModifiedDateFilterDateRange < Struct.new(
+      :after_value,
+      :before_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The sort options for machine learning products.
+    #
+    # @!attribute [rw] sort_by
+    #   The field to sort by. Valid values: `EntityId`, `LastModifiedDate`,
+    #   `ProductTitle`, and `Visibility`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order. Valid values are `ASC` (ascending) and `DESC`
+    #   (descending).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/MachineLearningProductSort AWS API Documentation
+    #
+    class MachineLearningProductSort < Struct.new(
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a machine learning product.
+    #
+    # @!attribute [rw] product_title
+    #   The title of the machine learning product.
+    #   @return [String]
+    #
+    # @!attribute [rw] visibility
+    #   The visibility status of the machine learning product. Valid values
+    #   are `Limited`, `Public`, `Restricted`, and `Draft`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/MachineLearningProductSummary AWS API Documentation
+    #
+    class MachineLearningProductSummary < Struct.new(
+      :product_title,
+      :visibility)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter for machine learning product titles.
+    #
+    # @!attribute [rw] value_list
+    #   A list of product titles to filter by. The operation returns machine
+    #   learning products with titles that exactly match the values in this
+    #   list.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] wild_card_value
+    #   A wildcard value to filter product titles. The operation returns
+    #   machine learning products with titles that match this wildcard
+    #   pattern.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/MachineLearningProductTitleFilter AWS API Documentation
+    #
+    class MachineLearningProductTitleFilter < Struct.new(
+      :value_list,
+      :wild_card_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter for machine learning product visibility status.
+    #
+    # @!attribute [rw] value_list
+    #   A list of visibility values to filter by. The operation returns
+    #   machine learning products with visibility status that match the
+    #   values in this list.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/MachineLearningProductVisibilityFilter AWS API Documentation
+    #
+    class MachineLearningProductVisibilityFilter < Struct.new(
+      :value_list)
       SENSITIVE = []
       include Aws::Structure
     end

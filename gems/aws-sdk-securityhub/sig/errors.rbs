@@ -15,7 +15,15 @@ module Aws
         def message: () -> ::String
         def code: () -> ::String
       end
+      class ConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
       class InternalException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
+      class InternalServerException < ::Aws::Errors::ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end
@@ -40,6 +48,14 @@ module Aws
         def code: () -> ::String
       end
       class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
+      class ValidationException < ::Aws::Errors::ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end

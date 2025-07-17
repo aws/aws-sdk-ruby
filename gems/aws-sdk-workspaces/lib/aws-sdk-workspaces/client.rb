@@ -200,8 +200,7 @@ module Aws::WorkSpaces
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -1404,6 +1403,9 @@ module Aws::WorkSpaces
     # @option params [Types::TimeoutSettings] :timeout_settings
     #   Indicates the timeout settings of the pool.
     #
+    # @option params [String] :running_mode
+    #   The running mode for the pool.
+    #
     # @return [Types::CreateWorkspacesPoolResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkspacesPoolResult#workspaces_pool #workspaces_pool} => Types::WorkspacesPool
@@ -1433,6 +1435,7 @@ module Aws::WorkSpaces
     #       idle_disconnect_timeout_in_seconds: 1,
     #       max_user_duration_in_seconds: 1,
     #     },
+    #     running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON
     #   })
     #
     # @example Response structure
@@ -1458,6 +1461,7 @@ module Aws::WorkSpaces
     #   resp.workspaces_pool.timeout_settings.disconnect_timeout_in_seconds #=> Integer
     #   resp.workspaces_pool.timeout_settings.idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.workspaces_pool.timeout_settings.max_user_duration_in_seconds #=> Integer
+    #   resp.workspaces_pool.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspacesPool AWS API Documentation
     #
@@ -2571,7 +2575,6 @@ module Aws::WorkSpaces
     #   resp.directories[0].directory_type #=> String, one of "SIMPLE_AD", "AD_CONNECTOR", "CUSTOMER_MANAGED", "AWS_IAM_IDENTITY_CENTER"
     #   resp.directories[0].workspace_security_group_id #=> String
     #   resp.directories[0].state #=> String, one of "REGISTERING", "REGISTERED", "DEREGISTERING", "DEREGISTERED", "ERROR"
-    #   resp.directories[0].workspace_creation_properties.enable_work_docs #=> Boolean
     #   resp.directories[0].workspace_creation_properties.enable_internet_access #=> Boolean
     #   resp.directories[0].workspace_creation_properties.default_ou #=> String
     #   resp.directories[0].workspace_creation_properties.custom_security_group_id #=> String
@@ -2589,6 +2592,11 @@ module Aws::WorkSpaces
     #   resp.directories[0].workspace_access_properties.device_type_zero_client #=> String, one of "ALLOW", "DENY"
     #   resp.directories[0].workspace_access_properties.device_type_linux #=> String, one of "ALLOW", "DENY"
     #   resp.directories[0].workspace_access_properties.device_type_work_spaces_thin_client #=> String, one of "ALLOW", "DENY"
+    #   resp.directories[0].workspace_access_properties.access_endpoint_config.access_endpoints #=> Array
+    #   resp.directories[0].workspace_access_properties.access_endpoint_config.access_endpoints[0].access_endpoint_type #=> String, one of "STREAMING_WSP"
+    #   resp.directories[0].workspace_access_properties.access_endpoint_config.access_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.directories[0].workspace_access_properties.access_endpoint_config.internet_fallback_protocols #=> Array
+    #   resp.directories[0].workspace_access_properties.access_endpoint_config.internet_fallback_protocols[0] #=> String, one of "PCOIP"
     #   resp.directories[0].tenancy #=> String, one of "DEDICATED", "SHARED"
     #   resp.directories[0].selfservice_permissions.restart_workspace #=> String, one of "ENABLED", "DISABLED"
     #   resp.directories[0].selfservice_permissions.increase_volume_size #=> String, one of "ENABLED", "DISABLED"
@@ -2723,7 +2731,7 @@ module Aws::WorkSpaces
     #   resp.images[0].updates.update_available #=> Boolean
     #   resp.images[0].updates.description #=> String
     #   resp.images[0].error_details #=> Array
-    #   resp.images[0].error_details[0].error_code #=> String, one of "OutdatedPowershellVersion", "OfficeInstalled", "PCoIPAgentInstalled", "WindowsUpdatesEnabled", "AutoMountDisabled", "WorkspacesBYOLAccountNotFound", "WorkspacesBYOLAccountDisabled", "DHCPDisabled", "DiskFreeSpace", "AdditionalDrivesAttached", "OSNotSupported", "DomainJoined", "AzureDomainJoined", "FirewallEnabled", "VMWareToolsInstalled", "DiskSizeExceeded", "IncompatiblePartitioning", "PendingReboot", "AutoLogonEnabled", "RealTimeUniversalDisabled", "MultipleBootPartition", "Requires64BitOS", "ZeroRearmCount", "InPlaceUpgrade", "AntiVirusInstalled", "UEFINotSupported", "UnknownError", "AppXPackagesInstalled", "ReservedStorageInUse", "AdditionalDrivesPresent", "WindowsUpdatesRequired", "SysPrepFileMissing", "UserProfileMissing", "InsufficientDiskSpace", "EnvironmentVariablesPathMissingEntries", "DomainAccountServicesFound", "InvalidIp", "RemoteDesktopServicesDisabled", "WindowsModulesInstallerDisabled", "AmazonSsmAgentEnabled", "UnsupportedSecurityProtocol", "MultipleUserProfiles", "StagedAppxPackage", "UnsupportedOsUpgrade", "InsufficientRearmCount"
+    #   resp.images[0].error_details[0].error_code #=> String, one of "OutdatedPowershellVersion", "OfficeInstalled", "PCoIPAgentInstalled", "WindowsUpdatesEnabled", "AutoMountDisabled", "WorkspacesBYOLAccountNotFound", "WorkspacesBYOLAccountDisabled", "DHCPDisabled", "DiskFreeSpace", "AdditionalDrivesAttached", "OSNotSupported", "DomainJoined", "AzureDomainJoined", "FirewallEnabled", "VMWareToolsInstalled", "DiskSizeExceeded", "IncompatiblePartitioning", "PendingReboot", "AutoLogonEnabled", "RealTimeUniversalDisabled", "MultipleBootPartition", "Requires64BitOS", "ZeroRearmCount", "InPlaceUpgrade", "AntiVirusInstalled", "UEFINotSupported", "UnknownError", "AppXPackagesInstalled", "ReservedStorageInUse", "AdditionalDrivesPresent", "WindowsUpdatesRequired", "SysPrepFileMissing", "UserProfileMissing", "InsufficientDiskSpace", "EnvironmentVariablesPathMissingEntries", "DomainAccountServicesFound", "InvalidIp", "RemoteDesktopServicesDisabled", "WindowsModulesInstallerDisabled", "AmazonSsmAgentEnabled", "UnsupportedSecurityProtocol", "MultipleUserProfiles", "StagedAppxPackage", "UnsupportedOsUpgrade", "InsufficientRearmCount", "ProtocolOSIncompatibility", "MemoryIntegrityIncompatibility", "RestrictedDriveLetterInUse"
     #   resp.images[0].error_details[0].error_message #=> String
     #   resp.next_token #=> String
     #
@@ -3030,6 +3038,7 @@ module Aws::WorkSpaces
     #   resp.workspaces_pools[0].timeout_settings.disconnect_timeout_in_seconds #=> Integer
     #   resp.workspaces_pools[0].timeout_settings.idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.workspaces_pools[0].timeout_settings.max_user_duration_in_seconds #=> Integer
+    #   resp.workspaces_pools[0].running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesPools AWS API Documentation
@@ -3875,6 +3884,15 @@ module Aws::WorkSpaces
     #       device_type_zero_client: "ALLOW", # accepts ALLOW, DENY
     #       device_type_linux: "ALLOW", # accepts ALLOW, DENY
     #       device_type_work_spaces_thin_client: "ALLOW", # accepts ALLOW, DENY
+    #       access_endpoint_config: {
+    #         access_endpoints: [ # required
+    #           {
+    #             access_endpoint_type: "STREAMING_WSP", # accepts STREAMING_WSP
+    #             vpc_endpoint_id: "AlphanumericDashUnderscoreNonEmptyString",
+    #           },
+    #         ],
+    #         internet_fallback_protocols: ["PCOIP"], # accepts PCOIP
+    #       },
     #     },
     #   })
     #
@@ -3902,7 +3920,6 @@ module Aws::WorkSpaces
     #   resp = client.modify_workspace_creation_properties({
     #     resource_id: "DirectoryId", # required
     #     workspace_creation_properties: { # required
-    #       enable_work_docs: false,
     #       enable_internet_access: false,
     #       default_ou: "DefaultOu",
     #       custom_security_group_id: "SecurityGroupId",
@@ -4127,12 +4144,6 @@ module Aws::WorkSpaces
     #   conditions are not met, you will receive an
     #   OperationNotSupportedException error.
     #
-    # @option params [Boolean] :enable_work_docs
-    #   Indicates whether Amazon WorkDocs is enabled or disabled. If you have
-    #   enabled this parameter and WorkDocs is not available in the Region,
-    #   you will receive an OperationNotSupportedException error. Set
-    #   `EnableWorkDocs` to disabled, and try again.
-    #
     # @option params [Boolean] :enable_self_service
     #   Indicates whether self-service capabilities are enabled or disabled.
     #
@@ -4183,7 +4194,6 @@ module Aws::WorkSpaces
     #   resp = client.register_workspace_directory({
     #     directory_id: "DirectoryId",
     #     subnet_ids: ["SubnetId"],
-    #     enable_work_docs: false,
     #     enable_self_service: false,
     #     tenancy: "DEDICATED", # accepts DEDICATED, SHARED
     #     tags: [
@@ -4807,6 +4817,10 @@ module Aws::WorkSpaces
     # @option params [Types::TimeoutSettings] :timeout_settings
     #   Indicates the timeout settings of the specified pool.
     #
+    # @option params [String] :running_mode
+    #   The desired running mode for the pool. The running mode can only be
+    #   updated when the pool is in a stopped state.
+    #
     # @return [Types::UpdateWorkspacesPoolResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateWorkspacesPoolResult#workspaces_pool #workspaces_pool} => Types::WorkspacesPool
@@ -4830,6 +4844,7 @@ module Aws::WorkSpaces
     #       idle_disconnect_timeout_in_seconds: 1,
     #       max_user_duration_in_seconds: 1,
     #     },
+    #     running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON
     #   })
     #
     # @example Response structure
@@ -4855,6 +4870,7 @@ module Aws::WorkSpaces
     #   resp.workspaces_pool.timeout_settings.disconnect_timeout_in_seconds #=> Integer
     #   resp.workspaces_pool.timeout_settings.idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.workspaces_pool.timeout_settings.max_user_duration_in_seconds #=> Integer
+    #   resp.workspaces_pool.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspacesPool AWS API Documentation
     #
@@ -4883,7 +4899,7 @@ module Aws::WorkSpaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.133.0'
+      context[:gem_version] = '1.139.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

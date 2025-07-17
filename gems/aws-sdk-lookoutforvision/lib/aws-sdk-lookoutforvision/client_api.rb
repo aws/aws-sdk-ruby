@@ -173,7 +173,7 @@ module Aws::LookoutforVision
     CreateDatasetRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location: "uri", location_name: "projectName"))
     CreateDatasetRequest.add_member(:dataset_type, Shapes::ShapeRef.new(shape: DatasetType, required: true, location_name: "DatasetType"))
     CreateDatasetRequest.add_member(:dataset_source, Shapes::ShapeRef.new(shape: DatasetSource, location_name: "DatasetSource"))
-    CreateDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken"=>true}))
+    CreateDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken" => true}))
     CreateDatasetRequest.struct_class = Types::CreateDatasetRequest
 
     CreateDatasetResponse.add_member(:dataset_metadata, Shapes::ShapeRef.new(shape: DatasetMetadata, location_name: "DatasetMetadata"))
@@ -181,7 +181,7 @@ module Aws::LookoutforVision
 
     CreateModelRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location: "uri", location_name: "projectName"))
     CreateModelRequest.add_member(:description, Shapes::ShapeRef.new(shape: ModelDescriptionMessage, location_name: "Description"))
-    CreateModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken"=>true}))
+    CreateModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken" => true}))
     CreateModelRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, required: true, location_name: "OutputConfig"))
     CreateModelRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CreateModelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -191,7 +191,7 @@ module Aws::LookoutforVision
     CreateModelResponse.struct_class = Types::CreateModelResponse
 
     CreateProjectRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "ProjectName"))
-    CreateProjectRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken"=>true}))
+    CreateProjectRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken" => true}))
     CreateProjectRequest.struct_class = Types::CreateProjectRequest
 
     CreateProjectResponse.add_member(:project_metadata, Shapes::ShapeRef.new(shape: ProjectMetadata, location_name: "ProjectMetadata"))
@@ -230,21 +230,21 @@ module Aws::LookoutforVision
 
     DeleteDatasetRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location: "uri", location_name: "projectName"))
     DeleteDatasetRequest.add_member(:dataset_type, Shapes::ShapeRef.new(shape: DatasetType, required: true, location: "uri", location_name: "datasetType"))
-    DeleteDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken"=>true}))
+    DeleteDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken" => true}))
     DeleteDatasetRequest.struct_class = Types::DeleteDatasetRequest
 
     DeleteDatasetResponse.struct_class = Types::DeleteDatasetResponse
 
     DeleteModelRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location: "uri", location_name: "projectName"))
     DeleteModelRequest.add_member(:model_version, Shapes::ShapeRef.new(shape: ModelVersionNoLatest, required: true, location: "uri", location_name: "modelVersion"))
-    DeleteModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken"=>true}))
+    DeleteModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken" => true}))
     DeleteModelRequest.struct_class = Types::DeleteModelRequest
 
     DeleteModelResponse.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, location_name: "ModelArn"))
     DeleteModelResponse.struct_class = Types::DeleteModelResponse
 
     DeleteProjectRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location: "uri", location_name: "projectName"))
-    DeleteProjectRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken"=>true}))
+    DeleteProjectRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken" => true}))
     DeleteProjectRequest.struct_class = Types::DeleteProjectRequest
 
     DeleteProjectResponse.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, location_name: "ProjectArn"))
@@ -478,7 +478,7 @@ module Aws::LookoutforVision
     StartModelPackagingJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: ModelPackagingJobName, location_name: "JobName"))
     StartModelPackagingJobRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ModelPackagingConfiguration, required: true, location_name: "Configuration"))
     StartModelPackagingJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: ModelPackagingJobDescription, location_name: "Description"))
-    StartModelPackagingJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken"=>true}))
+    StartModelPackagingJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken" => true}))
     StartModelPackagingJobRequest.struct_class = Types::StartModelPackagingJobRequest
 
     StartModelPackagingJobResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: ModelPackagingJobName, location_name: "JobName"))
@@ -487,7 +487,7 @@ module Aws::LookoutforVision
     StartModelRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location: "uri", location_name: "projectName"))
     StartModelRequest.add_member(:model_version, Shapes::ShapeRef.new(shape: ModelVersion, required: true, location: "uri", location_name: "modelVersion"))
     StartModelRequest.add_member(:min_inference_units, Shapes::ShapeRef.new(shape: InferenceUnits, required: true, location_name: "MinInferenceUnits"))
-    StartModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken"=>true}))
+    StartModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken" => true}))
     StartModelRequest.add_member(:max_inference_units, Shapes::ShapeRef.new(shape: InferenceUnits, location_name: "MaxInferenceUnits"))
     StartModelRequest.struct_class = Types::StartModelRequest
 
@@ -496,7 +496,7 @@ module Aws::LookoutforVision
 
     StopModelRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location: "uri", location_name: "projectName"))
     StopModelRequest.add_member(:model_version, Shapes::ShapeRef.new(shape: ModelVersion, required: true, location: "uri", location_name: "modelVersion"))
-    StopModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken"=>true}))
+    StopModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken" => true}))
     StopModelRequest.struct_class = Types::StopModelRequest
 
     StopModelResponse.add_member(:status, Shapes::ShapeRef.new(shape: ModelHostingStatus, location_name: "Status"))
@@ -536,7 +536,7 @@ module Aws::LookoutforVision
     UpdateDatasetEntriesRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location: "uri", location_name: "projectName"))
     UpdateDatasetEntriesRequest.add_member(:dataset_type, Shapes::ShapeRef.new(shape: DatasetType, required: true, location: "uri", location_name: "datasetType"))
     UpdateDatasetEntriesRequest.add_member(:changes, Shapes::ShapeRef.new(shape: DatasetChanges, required: true, location_name: "Changes"))
-    UpdateDatasetEntriesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken"=>true}))
+    UpdateDatasetEntriesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken" => true}))
     UpdateDatasetEntriesRequest.struct_class = Types::UpdateDatasetEntriesRequest
 
     UpdateDatasetEntriesResponse.add_member(:status, Shapes::ShapeRef.new(shape: DatasetStatus, location_name: "Status"))

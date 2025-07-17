@@ -200,8 +200,7 @@ module Aws::CodePipeline
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -765,6 +764,7 @@ module Aws::CodePipeline
     #                 {
     #                   name: "EnvironmentVariableName", # required
     #                   value: "EnvironmentVariableValue", # required
+    #                   type: "PLAINTEXT", # accepts PLAINTEXT, SECRETS_MANAGER
     #                 },
     #               ],
     #             },
@@ -965,6 +965,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].environment_variables #=> Array
     #   resp.pipeline.stages[0].actions[0].environment_variables[0].name #=> String
     #   resp.pipeline.stages[0].actions[0].environment_variables[0].value #=> String
+    #   resp.pipeline.stages[0].actions[0].environment_variables[0].type #=> String, one of "PLAINTEXT", "SECRETS_MANAGER"
     #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK", "FAIL", "RETRY", "SKIP"
     #   resp.pipeline.stages[0].on_failure.retry_configuration.retry_mode #=> String, one of "FAILED_ACTIONS", "ALL_ACTIONS"
     #   resp.pipeline.stages[0].on_failure.conditions #=> Array
@@ -1480,6 +1481,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].environment_variables #=> Array
     #   resp.pipeline.stages[0].actions[0].environment_variables[0].name #=> String
     #   resp.pipeline.stages[0].actions[0].environment_variables[0].value #=> String
+    #   resp.pipeline.stages[0].actions[0].environment_variables[0].type #=> String, one of "PLAINTEXT", "SECRETS_MANAGER"
     #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK", "FAIL", "RETRY", "SKIP"
     #   resp.pipeline.stages[0].on_failure.retry_configuration.retry_mode #=> String, one of "FAILED_ACTIONS", "ALL_ACTIONS"
     #   resp.pipeline.stages[0].on_failure.conditions #=> Array
@@ -2010,6 +2012,75 @@ module Aws::CodePipeline
     # @param [Hash] params ({})
     def list_action_types(params = {}, options = {})
       req = build_request(:list_action_types, params)
+      req.send_request(options)
+    end
+
+    # Lists the targets for the deploy action.
+    #
+    # @option params [String] :pipeline_name
+    #   The name of the pipeline with the deploy action.
+    #
+    # @option params [required, String] :action_execution_id
+    #   The execution ID for the deploy action.
+    #
+    # @option params [Array<Types::TargetFilter>] :filters
+    #   Filters the targets for a specified deploy action.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned nextToken
+    #   value.
+    #
+    # @option params [String] :next_token
+    #   An identifier that was returned from the previous list action types
+    #   call, which can be used to return the next set of action types in the
+    #   list.
+    #
+    # @return [Types::ListDeployActionExecutionTargetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDeployActionExecutionTargetsOutput#targets #targets} => Array&lt;Types::DeployActionExecutionTarget&gt;
+    #   * {Types::ListDeployActionExecutionTargetsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_deploy_action_execution_targets({
+    #     pipeline_name: "PipelineName",
+    #     action_execution_id: "ActionExecutionId", # required
+    #     filters: [
+    #       {
+    #         name: "TARGET_STATUS", # accepts TARGET_STATUS
+    #         values: ["TargetFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.targets #=> Array
+    #   resp.targets[0].target_id #=> String
+    #   resp.targets[0].target_type #=> String
+    #   resp.targets[0].status #=> String
+    #   resp.targets[0].start_time #=> Time
+    #   resp.targets[0].end_time #=> Time
+    #   resp.targets[0].events #=> Array
+    #   resp.targets[0].events[0].name #=> String
+    #   resp.targets[0].events[0].status #=> String
+    #   resp.targets[0].events[0].start_time #=> Time
+    #   resp.targets[0].events[0].end_time #=> Time
+    #   resp.targets[0].events[0].context.ssm_command_id #=> String
+    #   resp.targets[0].events[0].context.message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListDeployActionExecutionTargets AWS API Documentation
+    #
+    # @overload list_deploy_action_execution_targets(params = {})
+    # @param [Hash] params ({})
+    def list_deploy_action_execution_targets(params = {}, options = {})
+      req = build_request(:list_deploy_action_execution_targets, params)
       req.send_request(options)
     end
 
@@ -3385,6 +3456,7 @@ module Aws::CodePipeline
     #                 {
     #                   name: "EnvironmentVariableName", # required
     #                   value: "EnvironmentVariableValue", # required
+    #                   type: "PLAINTEXT", # accepts PLAINTEXT, SECRETS_MANAGER
     #                 },
     #               ],
     #             },
@@ -3579,6 +3651,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].environment_variables #=> Array
     #   resp.pipeline.stages[0].actions[0].environment_variables[0].name #=> String
     #   resp.pipeline.stages[0].actions[0].environment_variables[0].value #=> String
+    #   resp.pipeline.stages[0].actions[0].environment_variables[0].type #=> String, one of "PLAINTEXT", "SECRETS_MANAGER"
     #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK", "FAIL", "RETRY", "SKIP"
     #   resp.pipeline.stages[0].on_failure.retry_configuration.retry_mode #=> String, one of "FAILED_ACTIONS", "ALL_ACTIONS"
     #   resp.pipeline.stages[0].on_failure.conditions #=> Array
@@ -3694,7 +3767,7 @@ module Aws::CodePipeline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

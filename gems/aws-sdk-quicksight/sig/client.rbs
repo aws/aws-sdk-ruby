@@ -35212,7 +35212,12 @@ module Aws
                                    text_boxes: Array[
                                      {
                                        sheet_text_box_id: ::String,
-                                       content: ::String?
+                                       content: ::String?,
+                                       interactions: {
+                                         text_box_menu_option: {
+                                           availability_status: ("ENABLED" | "DISABLED")?
+                                         }?
+                                       }?
                                      },
                                    ]?,
                                    images: Array[
@@ -38184,6 +38189,8 @@ module Aws
                                        ?capabilities: {
                                          export_to_csv: ("DENY")?,
                                          export_to_excel: ("DENY")?,
+                                         export_to_pdf: ("DENY")?,
+                                         print_reports: ("DENY")?,
                                          create_and_update_themes: ("DENY")?,
                                          add_or_run_anomaly_detection_for_analyses: ("DENY")?,
                                          share_analyses: ("DENY")?,
@@ -38198,7 +38205,11 @@ module Aws
                                          create_and_update_data_sources: ("DENY")?,
                                          share_data_sources: ("DENY")?,
                                          view_account_spice_capacity: ("DENY")?,
-                                         create_spice_dataset: ("DENY")?
+                                         create_spice_dataset: ("DENY")?,
+                                         export_to_pdf_in_scheduled_reports: ("DENY")?,
+                                         export_to_csv_in_scheduled_reports: ("DENY")?,
+                                         export_to_excel_in_scheduled_reports: ("DENY")?,
+                                         include_content_in_scheduled_reports_email: ("DENY")?
                                        },
                                        ?tags: Array[
                                          {
@@ -72539,7 +72550,12 @@ module Aws
                                     text_boxes: Array[
                                       {
                                         sheet_text_box_id: ::String,
-                                        content: ::String?
+                                        content: ::String?,
+                                        interactions: {
+                                          text_box_menu_option: {
+                                            availability_status: ("ENABLED" | "DISABLED")?
+                                          }?
+                                        }?
                                       },
                                     ]?,
                                     images: Array[
@@ -75665,7 +75681,10 @@ module Aws
                                   }?,
                                   athena_parameters: {
                                     work_group: ::String?,
-                                    role_arn: ::String?
+                                    role_arn: ::String?,
+                                    identity_center_configuration: {
+                                      enable_identity_propagation: bool?
+                                    }?
                                   }?,
                                   aurora_parameters: {
                                     host: ::String,
@@ -75820,7 +75839,10 @@ module Aws
                                         }?,
                                         athena_parameters: {
                                           work_group: ::String?,
-                                          role_arn: ::String?
+                                          role_arn: ::String?,
+                                          identity_center_configuration: {
+                                            enable_identity_propagation: bool?
+                                          }?
                                         }?,
                                         aurora_parameters: {
                                           host: ::String,
@@ -110455,7 +110477,12 @@ module Aws
                                    text_boxes: Array[
                                      {
                                        sheet_text_box_id: ::String,
-                                       content: ::String?
+                                       content: ::String?,
+                                       interactions: {
+                                         text_box_menu_option: {
+                                           availability_status: ("ENABLED" | "DISABLED")?
+                                         }?
+                                       }?
                                      },
                                    ]?,
                                    images: Array[
@@ -113658,7 +113685,10 @@ module Aws
                               value: ::String
                             },
                           ],
-                          ?folder_arns: Array[::String]
+                          ?folder_arns: Array[::String],
+                          ?custom_instructions: {
+                            custom_instructions_string: ::String
+                          }
                         ) -> _CreateTopicResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTopicResponseSuccess
 
@@ -113932,7 +113962,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#delete_identity_propagation_config-instance_method
       def delete_identity_propagation_config: (
                                                 aws_account_id: ::String,
-                                                service: ("REDSHIFT" | "QBUSINESS")
+                                                service: ("REDSHIFT" | "QBUSINESS" | "ATHENA")
                                               ) -> _DeleteIdentityPropagationConfigResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIdentityPropagationConfigResponseSuccess
 
@@ -114836,6 +114866,7 @@ module Aws
         def topic: () -> Types::TopicDetails
         def request_id: () -> ::String
         def status: () -> ::Integer
+        def custom_instructions: () -> Types::CustomInstructions
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_topic-instance_method
       def describe_topic: (
@@ -116077,7 +116108,10 @@ module Aws
                                                    }?,
                                                    athena_parameters: {
                                                      work_group: ::String?,
-                                                     role_arn: ::String?
+                                                     role_arn: ::String?,
+                                                     identity_center_configuration: {
+                                                       enable_identity_propagation: bool?
+                                                     }?
                                                    }?,
                                                    aurora_parameters: {
                                                      host: ::String,
@@ -150866,7 +150900,12 @@ module Aws
                                    text_boxes: Array[
                                      {
                                        sheet_text_box_id: ::String,
-                                       content: ::String?
+                                       content: ::String?,
+                                       interactions: {
+                                         text_box_menu_option: {
+                                           availability_status: ("ENABLED" | "DISABLED")?
+                                         }?
+                                       }?
                                      },
                                    ]?,
                                    images: Array[
@@ -153895,6 +153934,8 @@ module Aws
                                        ?capabilities: {
                                          export_to_csv: ("DENY")?,
                                          export_to_excel: ("DENY")?,
+                                         export_to_pdf: ("DENY")?,
+                                         print_reports: ("DENY")?,
                                          create_and_update_themes: ("DENY")?,
                                          add_or_run_anomaly_detection_for_analyses: ("DENY")?,
                                          share_analyses: ("DENY")?,
@@ -153909,7 +153950,11 @@ module Aws
                                          create_and_update_data_sources: ("DENY")?,
                                          share_data_sources: ("DENY")?,
                                          view_account_spice_capacity: ("DENY")?,
-                                         create_spice_dataset: ("DENY")?
+                                         create_spice_dataset: ("DENY")?,
+                                         export_to_pdf_in_scheduled_reports: ("DENY")?,
+                                         export_to_csv_in_scheduled_reports: ("DENY")?,
+                                         export_to_excel_in_scheduled_reports: ("DENY")?,
+                                         include_content_in_scheduled_reports_email: ("DENY")?
                                        }
                                      ) -> _UpdateCustomPermissionsResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCustomPermissionsResponseSuccess
@@ -188232,7 +188277,12 @@ module Aws
                                     text_boxes: Array[
                                       {
                                         sheet_text_box_id: ::String,
-                                        content: ::String?
+                                        content: ::String?,
+                                        interactions: {
+                                          text_box_menu_option: {
+                                            availability_status: ("ENABLED" | "DISABLED")?
+                                          }?
+                                        }?
                                       },
                                     ]?,
                                     images: Array[
@@ -191442,7 +191492,10 @@ module Aws
                                   }?,
                                   athena_parameters: {
                                     work_group: ::String?,
-                                    role_arn: ::String?
+                                    role_arn: ::String?,
+                                    identity_center_configuration: {
+                                      enable_identity_propagation: bool?
+                                    }?
                                   }?,
                                   aurora_parameters: {
                                     host: ::String,
@@ -191597,7 +191650,10 @@ module Aws
                                         }?,
                                         athena_parameters: {
                                           work_group: ::String?,
-                                          role_arn: ::String?
+                                          role_arn: ::String?,
+                                          identity_center_configuration: {
+                                            enable_identity_propagation: bool?
+                                          }?
                                         }?,
                                         aurora_parameters: {
                                           host: ::String,
@@ -191880,7 +191936,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_identity_propagation_config-instance_method
       def update_identity_propagation_config: (
                                                 aws_account_id: ::String,
-                                                service: ("REDSHIFT" | "QBUSINESS"),
+                                                service: ("REDSHIFT" | "QBUSINESS" | "ATHENA"),
                                                 ?authorized_targets: Array[::String]
                                               ) -> _UpdateIdentityPropagationConfigResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIdentityPropagationConfigResponseSuccess
@@ -226284,7 +226340,12 @@ module Aws
                                    text_boxes: Array[
                                      {
                                        sheet_text_box_id: ::String,
-                                       content: ::String?
+                                       content: ::String?,
+                                       interactions: {
+                                         text_box_menu_option: {
+                                           availability_status: ("ENABLED" | "DISABLED")?
+                                         }?
+                                       }?
                                      },
                                    ]?,
                                    images: Array[
@@ -229522,6 +229583,9 @@ module Aws
                             config_options: {
                               q_business_insights_enabled: bool?
                             }?
+                          },
+                          ?custom_instructions: {
+                            custom_instructions_string: ::String
                           }
                         ) -> _UpdateTopicResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTopicResponseSuccess

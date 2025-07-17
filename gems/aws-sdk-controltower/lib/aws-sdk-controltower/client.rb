@@ -200,8 +200,7 @@ module Aws::ControlTower
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -923,6 +922,7 @@ module Aws::ControlTower
     #   resp.enabled_baseline_details.arn #=> String
     #   resp.enabled_baseline_details.baseline_identifier #=> String
     #   resp.enabled_baseline_details.baseline_version #=> String
+    #   resp.enabled_baseline_details.drift_status_summary.types.inheritance.status #=> String, one of "IN_SYNC", "DRIFTED"
     #   resp.enabled_baseline_details.parameters #=> Array
     #   resp.enabled_baseline_details.parameters[0].key #=> String
     #   resp.enabled_baseline_details.parent_identifier #=> String
@@ -1189,7 +1189,9 @@ module Aws::ControlTower
     #   resp = client.list_enabled_baselines({
     #     filter: {
     #       baseline_identifiers: ["Arn"],
+    #       inheritance_drift_statuses: ["IN_SYNC"], # accepts IN_SYNC, DRIFTED
     #       parent_identifiers: ["Arn"],
+    #       statuses: ["SUCCEEDED"], # accepts SUCCEEDED, FAILED, UNDER_CHANGE
     #       target_identifiers: ["Arn"],
     #     },
     #     include_children: false,
@@ -1203,6 +1205,7 @@ module Aws::ControlTower
     #   resp.enabled_baselines[0].arn #=> String
     #   resp.enabled_baselines[0].baseline_identifier #=> String
     #   resp.enabled_baselines[0].baseline_version #=> String
+    #   resp.enabled_baselines[0].drift_status_summary.types.inheritance.status #=> String, one of "IN_SYNC", "DRIFTED"
     #   resp.enabled_baselines[0].parent_identifier #=> String
     #   resp.enabled_baselines[0].status_summary.last_operation_identifier #=> String
     #   resp.enabled_baselines[0].status_summary.status #=> String, one of "SUCCEEDED", "FAILED", "UNDER_CHANGE"
@@ -1751,7 +1754,7 @@ module Aws::ControlTower
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-controltower'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

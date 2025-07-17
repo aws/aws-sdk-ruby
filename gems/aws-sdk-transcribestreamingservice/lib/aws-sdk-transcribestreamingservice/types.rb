@@ -353,12 +353,30 @@ module Aws::TranscribeStreamingService
     #   summary. The default is `HISTORY_AND_PHYSICAL`.
     #
     #   * HISTORY\_AND\_PHYSICAL: Provides summaries for key sections of the
-    #     clinical documentation. Sections include Chief Complaint, History
-    #     of Present Illness, Review of Systems, Past Medical History,
-    #     Assessment, and Plan.
+    #     clinical documentation. Examples of sections include Chief
+    #     Complaint, History of Present Illness, Review of Systems, Past
+    #     Medical History, Assessment, and Plan.
     #
     #   * GIRPP: Provides summaries based on the patients progress toward
-    #     goals. Sections include Goal, Intervention, Response, Progress,
+    #     goals. Examples of sections include Goal, Intervention, Response,
+    #     Progress, and Plan.
+    #
+    #   * BIRP: Focuses on the patient's behavioral patterns and responses.
+    #     Examples of sections include Behavior, Intervention, Response, and
+    #     Plan.
+    #
+    #   * SIRP: Emphasizes the situational context of therapy. Examples of
+    #     sections include Situation, Intervention, Response, and Plan.
+    #
+    #   * DAP: Provides a simplified format for clinical documentation.
+    #     Examples of sections include Data, Assessment, and Plan.
+    #
+    #   * BEHAVIORAL\_SOAP: Behavioral health focused documentation format.
+    #     Examples of sections include Subjective, Objective, Assessment,
+    #     and Plan.
+    #
+    #   * PHYSICAL\_SOAP: Physical health focused documentation format.
+    #     Examples of sections include Subjective, Objective, Assessment,
     #     and Plan.
     #   @return [String]
     #
@@ -423,13 +441,13 @@ module Aws::TranscribeStreamingService
     # stability score, and start and end times.
     #
     # @!attribute [rw] start_time
-    #   The start time, in milliseconds, of the utterance that was
-    #   identified as PII.
+    #   The start time of the utterance that was identified as PII in
+    #   seconds, with millisecond precision (e.g., 1.056)
     #   @return [Float]
     #
     # @!attribute [rw] end_time
-    #   The end time, in milliseconds, of the utterance that was identified
-    #   as PII.
+    #   The end time of the utterance that was identified as PII in seconds,
+    #   with millisecond precision (e.g., 1.056)
     #   @return [Float]
     #
     # @!attribute [rw] category
@@ -527,11 +545,13 @@ module Aws::TranscribeStreamingService
     # type, and start and end times.
     #
     # @!attribute [rw] start_time
-    #   The start time, in milliseconds, of the transcribed item.
+    #   The start time of the transcribed item in seconds, with millisecond
+    #   precision (e.g., 1.056)
     #   @return [Float]
     #
     # @!attribute [rw] end_time
-    #   The end time, in milliseconds, of the transcribed item.
+    #   The end time of the transcribed item in seconds, with millisecond
+    #   precision (e.g., 1.056)
     #   @return [Float]
     #
     # @!attribute [rw] type
@@ -659,13 +679,13 @@ module Aws::TranscribeStreamingService
     # and start and end times.
     #
     # @!attribute [rw] start_time
-    #   The start time, in milliseconds, of the utterance that was
-    #   identified as PHI.
+    #   The start time, in seconds, of the utterance that was identified as
+    #   PHI.
     #   @return [Float]
     #
     # @!attribute [rw] end_time
-    #   The end time, in milliseconds, of the utterance that was identified
-    #   as PHI.
+    #   The end time, in seconds, of the utterance that was identified as
+    #   PHI.
     #   @return [Float]
     #
     # @!attribute [rw] category
@@ -702,11 +722,11 @@ module Aws::TranscribeStreamingService
     # type, and start and end times.
     #
     # @!attribute [rw] start_time
-    #   The start time, in milliseconds, of the transcribed item.
+    #   The start time, in seconds, of the transcribed item.
     #   @return [Float]
     #
     # @!attribute [rw] end_time
-    #   The end time, in milliseconds, of the transcribed item.
+    #   The end time, in seconds, of the transcribed item.
     #   @return [Float]
     #
     # @!attribute [rw] type
@@ -758,11 +778,11 @@ module Aws::TranscribeStreamingService
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The start time, in milliseconds, of the `Result`.
+    #   The start time, in seconds, of the `Result`.
     #   @return [Float]
     #
     # @!attribute [rw] end_time
-    #   The end time, in milliseconds, of the `Result`.
+    #   The end time, in seconds, of the `Result`.
     #   @return [Float]
     #
     # @!attribute [rw] is_partial
@@ -1490,11 +1510,13 @@ module Aws::TranscribeStreamingService
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The start time, in milliseconds, of the `Result`.
+    #   The start time of the `Result` in seconds, with millisecond
+    #   precision (e.g., 1.056).
     #   @return [Float]
     #
     # @!attribute [rw] end_time
-    #   The end time, in milliseconds, of the `Result`.
+    #   The end time of the `Result` in seconds, with millisecond precision
+    #   (e.g., 1.056).
     #   @return [Float]
     #
     # @!attribute [rw] is_partial

@@ -200,8 +200,7 @@ module Aws::EMRServerless
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -478,6 +477,10 @@ module Aws::EMRServerless
     # @option params [required, String] :job_run_id
     #   The ID of the job run to cancel.
     #
+    # @option params [Integer] :shutdown_grace_period_in_seconds
+    #   The duration in seconds to wait before forcefully terminating the job
+    #   after cancellation is requested.
+    #
     # @return [Types::CancelJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CancelJobRunResponse#application_id #application_id} => String
@@ -488,6 +491,7 @@ module Aws::EMRServerless
     #   resp = client.cancel_job_run({
     #     application_id: "ApplicationId", # required
     #     job_run_id: "JobRunId", # required
+    #     shutdown_grace_period_in_seconds: 1,
     #   })
     #
     # @example Response structure
@@ -583,6 +587,12 @@ module Aws::EMRServerless
     #   The scheduler configuration for batch and streaming jobs running on
     #   this application. Supported with release labels emr-7.0.0 and above.
     #
+    # @option params [Types::IdentityCenterConfigurationInput] :identity_center_configuration
+    #   The IAM Identity Center Configuration accepts the Identity Center
+    #   instance parameter required to enable trusted identity propagation.
+    #   This configuration allows identity propagation between integrated
+    #   services and the Identity Center instance.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#application_id #application_id} => String
@@ -677,6 +687,9 @@ module Aws::EMRServerless
     #     scheduler_configuration: {
     #       queue_timeout_minutes: 1,
     #       max_concurrent_runs: 1,
+    #     },
+    #     identity_center_configuration: {
+    #       identity_center_instance_arn: "IdentityCenterInstanceArn",
     #     },
     #   })
     #
@@ -789,6 +802,8 @@ module Aws::EMRServerless
     #   resp.application.interactive_configuration.livy_endpoint_enabled #=> Boolean
     #   resp.application.scheduler_configuration.queue_timeout_minutes #=> Integer
     #   resp.application.scheduler_configuration.max_concurrent_runs #=> Integer
+    #   resp.application.identity_center_configuration.identity_center_instance_arn #=> String
+    #   resp.application.identity_center_configuration.identity_center_application_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetApplication AWS API Documentation
     #
@@ -889,6 +904,9 @@ module Aws::EMRServerless
     #   resp.job_run.created_at #=> Time
     #   resp.job_run.updated_at #=> Time
     #   resp.job_run.execution_role #=> String
+    #   resp.job_run.execution_iam_policy.policy #=> String
+    #   resp.job_run.execution_iam_policy.policy_arns #=> Array
+    #   resp.job_run.execution_iam_policy.policy_arns[0] #=> String
     #   resp.job_run.state #=> String, one of "SUBMITTED", "PENDING", "SCHEDULED", "RUNNING", "SUCCESS", "FAILED", "CANCELLING", "CANCELLED", "QUEUED"
     #   resp.job_run.state_details #=> String
     #   resp.job_run.release_label #=> String
@@ -1203,6 +1221,11 @@ module Aws::EMRServerless
     # @option params [required, String] :execution_role_arn
     #   The execution role ARN for the job run.
     #
+    # @option params [Types::JobRunExecutionIamPolicy] :execution_iam_policy
+    #   You can pass an optional IAM policy. The resulting job IAM role
+    #   permissions will be an intersection of this policy and the policy
+    #   associated with your job execution role.
+    #
     # @option params [Types::JobDriver] :job_driver
     #   The job driver for the job run.
     #
@@ -1237,6 +1260,10 @@ module Aws::EMRServerless
     #     application_id: "ApplicationId", # required
     #     client_token: "ClientToken", # required
     #     execution_role_arn: "IAMRoleArn", # required
+    #     execution_iam_policy: {
+    #       policy: "PolicyDocument",
+    #       policy_arns: ["Arn"],
+    #     },
     #     job_driver: {
     #       spark_submit: {
     #         entry_point: "EntryPointPath", # required
@@ -1474,6 +1501,12 @@ module Aws::EMRServerless
     #   The scheduler configuration for batch and streaming jobs running on
     #   this application. Supported with release labels emr-7.0.0 and above.
     #
+    # @option params [Types::IdentityCenterConfigurationInput] :identity_center_configuration
+    #   Specifies the IAM Identity Center configuration used to enable or
+    #   disable trusted identity propagation. When provided, this
+    #   configuration determines how the application interacts with IAM
+    #   Identity Center for user authentication and access control.
+    #
     # @return [Types::UpdateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateApplicationResponse#application #application} => Types::Application
@@ -1563,6 +1596,9 @@ module Aws::EMRServerless
     #       queue_timeout_minutes: 1,
     #       max_concurrent_runs: 1,
     #     },
+    #     identity_center_configuration: {
+    #       identity_center_instance_arn: "IdentityCenterInstanceArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1621,6 +1657,8 @@ module Aws::EMRServerless
     #   resp.application.interactive_configuration.livy_endpoint_enabled #=> Boolean
     #   resp.application.scheduler_configuration.queue_timeout_minutes #=> Integer
     #   resp.application.scheduler_configuration.max_concurrent_runs #=> Integer
+    #   resp.application.identity_center_configuration.identity_center_instance_arn #=> String
+    #   resp.application.identity_center_configuration.identity_center_application_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/UpdateApplication AWS API Documentation
     #
@@ -1649,7 +1687,7 @@ module Aws::EMRServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

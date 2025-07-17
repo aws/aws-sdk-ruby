@@ -630,7 +630,7 @@
         "GetSubscriptionTargetOutput$authorizedPrincipals": "<p>The authorized principals of the subscription target.</p>",
         "SubscriptionTargetSummary$authorizedPrincipals": "<p>The authorized principals included in the subscription target.</p>",
         "UpdateSubscriptionTargetInput$authorizedPrincipals": "<p>The authorized principals to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>",
-        "UpdateSubscriptionTargetOutput$authorizedPrincipals": "<p>The authorized principals to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>"
+        "UpdateSubscriptionTargetOutput$authorizedPrincipals": "<p>The authorized principals to be updated as part of the <code>UpdateSubscriptionTarget</code> action. Updates are supported in batches of 5 at a time.</p>"
       }
     },
     "AwsAccount": {
@@ -964,7 +964,8 @@
       "refs": {
         "GlueConnection$status": "<p>The status of the Amazon Web Services Glue connection.</p>",
         "GluePropertiesOutput$status": "<p>The status of a connection.</p>",
-        "RedshiftPropertiesOutput$status": "<p>The status in the Amazon Redshift properties.</p>"
+        "RedshiftPropertiesOutput$status": "<p>The status in the Amazon Redshift properties.</p>",
+        "S3PropertiesOutput$status": "<p>The status of the Amazon S3 connection.</p>"
       }
     },
     "ConnectionSummaries": {
@@ -2614,9 +2615,11 @@
         "UpdateDomainUnitInput$identifier": "<p>The ID of the domain unit that you want to update.</p>",
         "UpdateDomainUnitOutput$id": "<p>The ID of the domain unit that you want to update.</p>",
         "UpdateDomainUnitOutput$parentDomainUnitId": "<p>The ID of the parent domain unit.</p>",
+        "UpdateProjectInput$domainUnitId": "<p>The ID of the domain unit.</p>",
         "UpdateProjectOutput$domainUnitId": "<p>The ID of the domain unit.</p>",
         "UpdateProjectProfileInput$domainUnitIdentifier": "<p>The ID of the domain unit where a project profile is to be updated.</p>",
-        "UpdateProjectProfileOutput$domainUnitId": "<p>The domain unit ID of the project profile to be updated.</p>"
+        "UpdateProjectProfileOutput$domainUnitId": "<p>The domain unit ID of the project profile to be updated.</p>",
+        "UseAssetTypePolicyGrantDetail$domainUnitId": "<p>The ID of the domain unit.</p>"
       }
     },
     "DomainUnitIds": {
@@ -6350,6 +6353,14 @@
         "StartDataSourceRunOutput$runStatisticsForAssets": "<p>Specifies run statistics for assets.</p>"
       }
     },
+    "S3AccessGrantLocationId": {
+      "base": null,
+      "refs": {
+        "S3PropertiesInput$s3AccessGrantLocationId": "<p>The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a connection.</p>",
+        "S3PropertiesOutput$s3AccessGrantLocationId": "<p>The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a connection.</p>",
+        "S3PropertiesPatch$s3AccessGrantLocationId": "<p>The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties patch of a connection.</p>"
+      }
+    },
     "S3Location": {
       "base": null,
       "refs": {
@@ -6360,6 +6371,32 @@
       "base": null,
       "refs": {
         "LakeFormationConfiguration$locationRegistrationExcludeS3Locations": "<p>Specifies certain Amazon S3 locations if you do not want Amazon DataZone to automatically register them in hybrid mode. </p>"
+      }
+    },
+    "S3PropertiesInput": {
+      "base": "<p>The Amazon S3 properties of a connection.</p>",
+      "refs": {
+        "ConnectionPropertiesInput$s3Properties": "<p>The Amazon S3 properties of a connection.</p>"
+      }
+    },
+    "S3PropertiesOutput": {
+      "base": "<p>The Amazon S3 properties of a connection.</p>",
+      "refs": {
+        "ConnectionPropertiesOutput$s3Properties": "<p>The Amazon S3 properties of a connection.</p>"
+      }
+    },
+    "S3PropertiesPatch": {
+      "base": "<p>The Amazon S3 properties patch of a connection.</p>",
+      "refs": {
+        "ConnectionPropertiesPatch$s3Properties": "<p>The Amazon S3 properties of a connection properties patch.</p>"
+      }
+    },
+    "S3Uri": {
+      "base": null,
+      "refs": {
+        "S3PropertiesInput$s3Uri": "<p>The Amazon S3 URI that's part of the Amazon S3 properties of a connection.</p>",
+        "S3PropertiesOutput$s3Uri": "<p>The Amazon S3 URI that's part of the Amazon S3 properties of a connection.</p>",
+        "S3PropertiesPatch$s3Uri": "<p>The Amazon S3 URI that's part of the Amazon S3 properties patch of a connection.</p>"
       }
     },
     "SageMakerAssetType": {
@@ -7069,6 +7106,7 @@
         "Resource$provider": "<p>The provider of a provisioned resource of this Amazon DataZone environment.</p>",
         "Resource$type": "<p>The type of a provisioned resource of this Amazon DataZone environment.</p>",
         "Resource$value": "<p>The value of a provisioned resource of this Amazon DataZone environment.</p>",
+        "S3PropertiesOutput$errorMessage": "<p>The error message that gets displayed.</p>",
         "SearchListingsInput$searchText": "<p>Specifies the text for which to search.</p>",
         "SelfGrantStatusDetail$failureCause": "<p>The reason for why the operation failed.</p>",
         "SparkEmrPropertiesOutput$computeArn": "<p>The compute ARN of the Spark EMR.</p>",
@@ -8090,6 +8128,12 @@
         "UpdateSubscriptionGrantStatusOutput$updatedBy": "<p>The Amazon DataZone user who updated the subscription grant status.</p>",
         "UpdateSubscriptionRequestOutput$updatedBy": "<p>The Amazon DataZone user who updated the subscription request.</p>",
         "UpdateSubscriptionTargetOutput$updatedBy": "<p>The Amazon DataZone user who updated the subscription target.</p>"
+      }
+    },
+    "UseAssetTypePolicyGrantDetail": {
+      "base": "<p>Specifies the domain unit(s) whose projects can use this asset type while creating asset or asset revisions.</p>",
+      "refs": {
+        "PolicyGrantDetail$useAssetType": "<p> Specifies the domain unit(s) whose projects can use this asset type while creating asset or asset revisions.</p>"
       }
     },
     "UserAssignment": {

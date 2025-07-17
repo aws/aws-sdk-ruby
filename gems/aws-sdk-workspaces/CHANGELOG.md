@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.139.0 (2025-06-26)
+------------------
+
+* Feature - Updated modifyStreamingProperties to support PrivateLink VPC endpoints for directories
+
+1.138.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.137.0 (2025-05-15)
+------------------
+
+* Feature - Added the new AlwaysOn running mode for WorkSpaces Pools. Customers can now choose between AlwaysOn (for instant access, with hourly usage billing regardless of connection status), or AutoStop (to optimize cost, with a brief startup delay) for their pools.
+
+1.136.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.135.0 (2025-05-09)
+------------------
+
+* Feature - Remove parameter EnableWorkDocs from WorkSpacesServiceModel due to end of support of Amazon WorkDocs service.
+
+1.134.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.133.0 (2025-03-06)
 ------------------
 

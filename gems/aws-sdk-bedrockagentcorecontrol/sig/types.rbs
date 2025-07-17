@@ -1,0 +1,1674 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::BedrockAgentCoreControl
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Agent
+      attr_accessor agent_runtime_arn: ::String
+      attr_accessor agent_runtime_id: ::String
+      attr_accessor agent_runtime_version: ::String
+      attr_accessor agent_runtime_name: ::String
+      attr_accessor description: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      SENSITIVE: [:description]
+    end
+
+    class AgentArtifact
+      attr_accessor container_configuration: Types::ContainerConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ContainerConfiguration < AgentArtifact
+      end
+      class Unknown < AgentArtifact
+      end
+    end
+
+    class AgentEndpoint
+      attr_accessor name: ::String
+      attr_accessor live_version: ::String
+      attr_accessor target_version: ::String
+      attr_accessor agent_runtime_endpoint_arn: ::String
+      attr_accessor agent_runtime_arn: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: [:name]
+    end
+
+    class ApiKeyCredentialProvider
+      attr_accessor provider_arn: ::String
+      attr_accessor credential_parameter_name: ::String
+      attr_accessor credential_prefix: ::String
+      attr_accessor credential_location: ("HEADER" | "QUERY_PARAMETER")
+      SENSITIVE: []
+    end
+
+    class ApiKeyCredentialProviderItem
+      attr_accessor name: ::String
+      attr_accessor credential_provider_arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ApiSchemaConfiguration
+      attr_accessor s3: Types::S3Configuration
+      attr_accessor inline_payload: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: [:inline_payload]
+
+      class S3 < ApiSchemaConfiguration
+      end
+      class InlinePayload < ApiSchemaConfiguration
+      end
+      class Unknown < ApiSchemaConfiguration
+      end
+    end
+
+    class AuthorizerConfiguration
+      attr_accessor custom_jwt_authorizer: Types::CustomJWTAuthorizerConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CustomJwtAuthorizer < AuthorizerConfiguration
+      end
+      class Unknown < AuthorizerConfiguration
+      end
+    end
+
+    class BrowserNetworkConfiguration
+      attr_accessor network_mode: ("PUBLIC")
+      SENSITIVE: []
+    end
+
+    class BrowserSummary
+      attr_accessor browser_id: ::String
+      attr_accessor browser_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class CodeInterpreterNetworkConfiguration
+      attr_accessor network_mode: ("PUBLIC" | "SANDBOX")
+      SENSITIVE: []
+    end
+
+    class CodeInterpreterSummary
+      attr_accessor code_interpreter_id: ::String
+      attr_accessor code_interpreter_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConsolidationConfiguration
+      attr_accessor custom_consolidation_configuration: Types::CustomConsolidationConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CustomConsolidationConfiguration < ConsolidationConfiguration
+      end
+      class Unknown < ConsolidationConfiguration
+      end
+    end
+
+    class ContainerConfiguration
+      attr_accessor container_uri: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAgentRuntimeEndpointRequest
+      attr_accessor agent_runtime_id: ::String
+      attr_accessor name: ::String
+      attr_accessor agent_runtime_version: ::String
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: [:name]
+    end
+
+    class CreateAgentRuntimeEndpointResponse
+      attr_accessor target_version: ::String
+      attr_accessor agent_runtime_endpoint_arn: ::String
+      attr_accessor agent_runtime_arn: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateAgentRuntimeRequest
+      attr_accessor agent_runtime_name: ::String
+      attr_accessor description: ::String
+      attr_accessor agent_runtime_artifact: Types::AgentArtifact
+      attr_accessor role_arn: ::String
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor protocol_configuration: Types::ProtocolConfiguration
+      attr_accessor client_token: ::String
+      attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
+      SENSITIVE: [:description, :environment_variables]
+    end
+
+    class CreateAgentRuntimeResponse
+      attr_accessor agent_runtime_arn: ::String
+      attr_accessor workload_identity_details: Types::WorkloadIdentityDetails
+      attr_accessor agent_runtime_id: ::String
+      attr_accessor agent_runtime_version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class CreateApiKeyCredentialProviderRequest
+      attr_accessor name: ::String
+      attr_accessor api_key: ::String
+      SENSITIVE: [:api_key]
+    end
+
+    class CreateApiKeyCredentialProviderResponse
+      attr_accessor api_key_secret_arn: Types::Secret
+      attr_accessor name: ::String
+      attr_accessor credential_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBrowserRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor network_configuration: Types::BrowserNetworkConfiguration
+      attr_accessor recording: Types::RecordingConfig
+      attr_accessor client_token: ::String
+      SENSITIVE: [:description]
+    end
+
+    class CreateBrowserResponse
+      attr_accessor browser_id: ::String
+      attr_accessor browser_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class CreateCodeInterpreterRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor network_configuration: Types::CodeInterpreterNetworkConfiguration
+      attr_accessor client_token: ::String
+      SENSITIVE: [:description]
+    end
+
+    class CreateCodeInterpreterResponse
+      attr_accessor code_interpreter_id: ::String
+      attr_accessor code_interpreter_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class CreateGatewayRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor protocol_type: ("MCP")
+      attr_accessor protocol_configuration: Types::GatewayProtocolConfiguration
+      attr_accessor authorizer_type: ("CUSTOM_JWT")
+      attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
+      attr_accessor kms_key_arn: ::String
+      attr_accessor exception_level: ("DEBUG")
+      SENSITIVE: [:name, :description]
+    end
+
+    class CreateGatewayResponse
+      attr_accessor gateway_arn: ::String
+      attr_accessor gateway_id: ::String
+      attr_accessor gateway_url: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+      attr_accessor status_reasons: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor protocol_type: ("MCP")
+      attr_accessor protocol_configuration: Types::GatewayProtocolConfiguration
+      attr_accessor authorizer_type: ("CUSTOM_JWT")
+      attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
+      attr_accessor kms_key_arn: ::String
+      attr_accessor workload_identity_details: Types::WorkloadIdentityDetails
+      attr_accessor exception_level: ("DEBUG")
+      SENSITIVE: [:name, :description]
+    end
+
+    class CreateGatewayTargetRequest
+      attr_accessor gateway_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
+      attr_accessor target_configuration: Types::TargetConfiguration
+      attr_accessor credential_provider_configurations: ::Array[Types::CredentialProviderConfiguration]
+      SENSITIVE: [:name, :description]
+    end
+
+    class CreateGatewayTargetResponse
+      attr_accessor gateway_arn: ::String
+      attr_accessor target_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+      attr_accessor status_reasons: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor target_configuration: Types::TargetConfiguration
+      attr_accessor credential_provider_configurations: ::Array[Types::CredentialProviderConfiguration]
+      SENSITIVE: [:name, :description]
+    end
+
+    class CreateMemoryInput
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor memory_execution_role_arn: ::String
+      attr_accessor event_expiry_duration: ::Integer
+      attr_accessor memory_strategies: ::Array[Types::MemoryStrategyInput]
+      SENSITIVE: [:description]
+    end
+
+    class CreateMemoryOutput
+      attr_accessor memory: Types::Memory
+      SENSITIVE: []
+    end
+
+    class CreateOauth2CredentialProviderRequest
+      attr_accessor name: ::String
+      attr_accessor credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2")
+      attr_accessor oauth2_provider_config_input: Types::Oauth2ProviderConfigInput
+      SENSITIVE: []
+    end
+
+    class CreateOauth2CredentialProviderResponse
+      attr_accessor client_secret_arn: Types::Secret
+      attr_accessor name: ::String
+      attr_accessor credential_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkloadIdentityRequest
+      attr_accessor name: ::String
+      attr_accessor allowed_resource_oauth_2_return_urls: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateWorkloadIdentityResponse
+      attr_accessor name: ::String
+      attr_accessor workload_identity_arn: ::String
+      attr_accessor allowed_resource_oauth_2_return_urls: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CredentialProvider
+      attr_accessor oauth_credential_provider: Types::OAuthCredentialProvider
+      attr_accessor api_key_credential_provider: Types::ApiKeyCredentialProvider
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class OauthCredentialProvider < CredentialProvider
+      end
+      class ApiKeyCredentialProvider < CredentialProvider
+      end
+      class Unknown < CredentialProvider
+      end
+    end
+
+    class CredentialProviderConfiguration
+      attr_accessor credential_provider_type: ("GATEWAY_IAM_ROLE" | "OAUTH" | "API_KEY")
+      attr_accessor credential_provider: Types::CredentialProvider
+      SENSITIVE: []
+    end
+
+    class CustomConfigurationInput
+      attr_accessor semantic_override: Types::SemanticOverrideConfigurationInput
+      attr_accessor summary_override: Types::SummaryOverrideConfigurationInput
+      attr_accessor user_preference_override: Types::UserPreferenceOverrideConfigurationInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SemanticOverride < CustomConfigurationInput
+      end
+      class SummaryOverride < CustomConfigurationInput
+      end
+      class UserPreferenceOverride < CustomConfigurationInput
+      end
+      class Unknown < CustomConfigurationInput
+      end
+    end
+
+    class CustomConsolidationConfiguration
+      attr_accessor semantic_consolidation_override: Types::SemanticConsolidationOverride
+      attr_accessor summary_consolidation_override: Types::SummaryConsolidationOverride
+      attr_accessor user_preference_consolidation_override: Types::UserPreferenceConsolidationOverride
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SemanticConsolidationOverride < CustomConsolidationConfiguration
+      end
+      class SummaryConsolidationOverride < CustomConsolidationConfiguration
+      end
+      class UserPreferenceConsolidationOverride < CustomConsolidationConfiguration
+      end
+      class Unknown < CustomConsolidationConfiguration
+      end
+    end
+
+    class CustomConsolidationConfigurationInput
+      attr_accessor semantic_consolidation_override: Types::SemanticOverrideConsolidationConfigurationInput
+      attr_accessor summary_consolidation_override: Types::SummaryOverrideConsolidationConfigurationInput
+      attr_accessor user_preference_consolidation_override: Types::UserPreferenceOverrideConsolidationConfigurationInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SemanticConsolidationOverride < CustomConsolidationConfigurationInput
+      end
+      class SummaryConsolidationOverride < CustomConsolidationConfigurationInput
+      end
+      class UserPreferenceConsolidationOverride < CustomConsolidationConfigurationInput
+      end
+      class Unknown < CustomConsolidationConfigurationInput
+      end
+    end
+
+    class CustomExtractionConfiguration
+      attr_accessor semantic_extraction_override: Types::SemanticExtractionOverride
+      attr_accessor user_preference_extraction_override: Types::UserPreferenceExtractionOverride
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SemanticExtractionOverride < CustomExtractionConfiguration
+      end
+      class UserPreferenceExtractionOverride < CustomExtractionConfiguration
+      end
+      class Unknown < CustomExtractionConfiguration
+      end
+    end
+
+    class CustomExtractionConfigurationInput
+      attr_accessor semantic_extraction_override: Types::SemanticOverrideExtractionConfigurationInput
+      attr_accessor user_preference_extraction_override: Types::UserPreferenceOverrideExtractionConfigurationInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SemanticExtractionOverride < CustomExtractionConfigurationInput
+      end
+      class UserPreferenceExtractionOverride < CustomExtractionConfigurationInput
+      end
+      class Unknown < CustomExtractionConfigurationInput
+      end
+    end
+
+    class CustomJWTAuthorizerConfiguration
+      attr_accessor discovery_url: ::String
+      attr_accessor allowed_audience: ::Array[::String]
+      attr_accessor allowed_clients: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CustomMemoryStrategyInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor namespaces: ::Array[::String]
+      attr_accessor configuration: Types::CustomConfigurationInput
+      SENSITIVE: [:description]
+    end
+
+    class CustomOauth2ProviderConfigInput
+      attr_accessor oauth_discovery: Types::Oauth2Discovery
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      SENSITIVE: [:client_secret]
+    end
+
+    class CustomOauth2ProviderConfigOutput
+      attr_accessor oauth_discovery: Types::Oauth2Discovery
+      SENSITIVE: []
+    end
+
+    class DecryptionFailure
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAgentRuntimeEndpointRequest
+      attr_accessor agent_runtime_id: ::String
+      attr_accessor endpoint_name: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: [:endpoint_name]
+    end
+
+    class DeleteAgentRuntimeEndpointResponse
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class DeleteAgentRuntimeRequest
+      attr_accessor agent_runtime_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAgentRuntimeResponse
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class DeleteApiKeyCredentialProviderRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApiKeyCredentialProviderResponse < Aws::EmptyStructure
+    end
+
+    class DeleteBrowserRequest
+      attr_accessor browser_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBrowserResponse
+      attr_accessor browser_id: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteCodeInterpreterRequest
+      attr_accessor code_interpreter_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCodeInterpreterResponse
+      attr_accessor code_interpreter_id: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteGatewayRequest
+      attr_accessor gateway_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGatewayResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+      attr_accessor status_reasons: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteGatewayTargetRequest
+      attr_accessor gateway_identifier: ::String
+      attr_accessor target_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGatewayTargetResponse
+      attr_accessor gateway_arn: ::String
+      attr_accessor target_id: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+      attr_accessor status_reasons: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteMemoryInput
+      attr_accessor client_token: ::String
+      attr_accessor memory_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMemoryOutput
+      attr_accessor memory_id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "FAILED" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class DeleteMemoryStrategyInput
+      attr_accessor memory_strategy_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOauth2CredentialProviderRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOauth2CredentialProviderResponse < Aws::EmptyStructure
+    end
+
+    class DeleteWorkloadIdentityRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkloadIdentityResponse < Aws::EmptyStructure
+    end
+
+    class EncryptionFailure
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExtractionConfiguration
+      attr_accessor custom_extraction_configuration: Types::CustomExtractionConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CustomExtractionConfiguration < ExtractionConfiguration
+      end
+      class Unknown < ExtractionConfiguration
+      end
+    end
+
+    class GatewayProtocolConfiguration
+      attr_accessor mcp: Types::MCPGatewayConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Mcp < GatewayProtocolConfiguration
+      end
+      class Unknown < GatewayProtocolConfiguration
+      end
+    end
+
+    class GatewaySummary
+      attr_accessor gateway_id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor authorizer_type: ("CUSTOM_JWT")
+      attr_accessor protocol_type: ("MCP")
+      SENSITIVE: [:name, :description]
+    end
+
+    class GetAgentRuntimeEndpointRequest
+      attr_accessor agent_runtime_id: ::String
+      attr_accessor endpoint_name: ::String
+      SENSITIVE: [:endpoint_name]
+    end
+
+    class GetAgentRuntimeEndpointResponse
+      attr_accessor live_version: ::String
+      attr_accessor target_version: ::String
+      attr_accessor agent_runtime_endpoint_arn: ::String
+      attr_accessor agent_runtime_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      SENSITIVE: [:name]
+    end
+
+    class GetAgentRuntimeRequest
+      attr_accessor agent_runtime_id: ::String
+      attr_accessor agent_runtime_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetAgentRuntimeResponse
+      attr_accessor agent_runtime_arn: ::String
+      attr_accessor workload_identity_details: Types::WorkloadIdentityDetails
+      attr_accessor agent_runtime_name: ::String
+      attr_accessor description: ::String
+      attr_accessor agent_runtime_id: ::String
+      attr_accessor agent_runtime_version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor role_arn: ::String
+      attr_accessor agent_runtime_artifact: Types::AgentArtifact
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor protocol_configuration: Types::ProtocolConfiguration
+      attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      SENSITIVE: [:description, :environment_variables]
+    end
+
+    class GetApiKeyCredentialProviderRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetApiKeyCredentialProviderResponse
+      attr_accessor api_key_secret_arn: Types::Secret
+      attr_accessor name: ::String
+      attr_accessor credential_provider_arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetBrowserRequest
+      attr_accessor browser_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBrowserResponse
+      attr_accessor browser_id: ::String
+      attr_accessor browser_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor network_configuration: Types::BrowserNetworkConfiguration
+      attr_accessor recording: Types::RecordingConfig
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class GetCodeInterpreterRequest
+      attr_accessor code_interpreter_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCodeInterpreterResponse
+      attr_accessor code_interpreter_id: ::String
+      attr_accessor code_interpreter_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor network_configuration: Types::CodeInterpreterNetworkConfiguration
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class GetGatewayRequest
+      attr_accessor gateway_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetGatewayResponse
+      attr_accessor gateway_arn: ::String
+      attr_accessor gateway_id: ::String
+      attr_accessor gateway_url: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+      attr_accessor status_reasons: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor protocol_type: ("MCP")
+      attr_accessor protocol_configuration: Types::GatewayProtocolConfiguration
+      attr_accessor authorizer_type: ("CUSTOM_JWT")
+      attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
+      attr_accessor kms_key_arn: ::String
+      attr_accessor workload_identity_details: Types::WorkloadIdentityDetails
+      attr_accessor exception_level: ("DEBUG")
+      SENSITIVE: [:name, :description]
+    end
+
+    class GetGatewayTargetRequest
+      attr_accessor gateway_identifier: ::String
+      attr_accessor target_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetGatewayTargetResponse
+      attr_accessor gateway_arn: ::String
+      attr_accessor target_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+      attr_accessor status_reasons: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor target_configuration: Types::TargetConfiguration
+      attr_accessor credential_provider_configurations: ::Array[Types::CredentialProviderConfiguration]
+      SENSITIVE: [:name, :description]
+    end
+
+    class GetMemoryInput
+      attr_accessor memory_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMemoryOutput
+      attr_accessor memory: Types::Memory
+      SENSITIVE: []
+    end
+
+    class GetOauth2CredentialProviderRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetOauth2CredentialProviderResponse
+      attr_accessor client_secret_arn: Types::Secret
+      attr_accessor name: ::String
+      attr_accessor credential_provider_arn: ::String
+      attr_accessor credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2")
+      attr_accessor oauth2_provider_config_output: Types::Oauth2ProviderConfigOutput
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetTokenVaultRequest
+      attr_accessor token_vault_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTokenVaultResponse
+      attr_accessor token_vault_id: ::String
+      attr_accessor kms_configuration: Types::KmsConfiguration
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class GetWorkloadIdentityRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkloadIdentityResponse
+      attr_accessor name: ::String
+      attr_accessor workload_identity_arn: ::String
+      attr_accessor allowed_resource_oauth_2_return_urls: ::Array[::String]
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GithubOauth2ProviderConfigInput
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      SENSITIVE: [:client_secret]
+    end
+
+    class GithubOauth2ProviderConfigOutput
+      attr_accessor oauth_discovery: Types::Oauth2Discovery
+      SENSITIVE: []
+    end
+
+    class GoogleOauth2ProviderConfigInput
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      SENSITIVE: [:client_secret]
+    end
+
+    class GoogleOauth2ProviderConfigOutput
+      attr_accessor oauth_discovery: Types::Oauth2Discovery
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KmsConfiguration
+      attr_accessor key_type: ("CustomerManagedKey" | "ServiceManagedKey")
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentRuntimeEndpointsRequest
+      attr_accessor agent_runtime_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentRuntimeEndpointsResponse
+      attr_accessor runtime_endpoints: ::Array[Types::AgentEndpoint]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentRuntimeVersionsRequest
+      attr_accessor agent_runtime_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentRuntimeVersionsResponse
+      attr_accessor agent_runtimes: ::Array[Types::Agent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentRuntimesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentRuntimesResponse
+      attr_accessor agent_runtimes: ::Array[Types::Agent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApiKeyCredentialProvidersRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListApiKeyCredentialProvidersResponse
+      attr_accessor credential_providers: ::Array[Types::ApiKeyCredentialProviderItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBrowsersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor type: ("SYSTEM" | "CUSTOM")
+      SENSITIVE: []
+    end
+
+    class ListBrowsersResponse
+      attr_accessor browser_summaries: ::Array[Types::BrowserSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCodeInterpretersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor type: ("SYSTEM" | "CUSTOM")
+      SENSITIVE: []
+    end
+
+    class ListCodeInterpretersResponse
+      attr_accessor code_interpreter_summaries: ::Array[Types::CodeInterpreterSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewayTargetsRequest
+      attr_accessor gateway_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewayTargetsResponse
+      attr_accessor items: ::Array[Types::TargetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewaysRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewaysResponse
+      attr_accessor items: ::Array[Types::GatewaySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMemoriesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMemoriesOutput
+      attr_accessor memories: ::Array[Types::MemorySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOauth2CredentialProvidersRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListOauth2CredentialProvidersResponse
+      attr_accessor credential_providers: ::Array[Types::Oauth2CredentialProviderItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkloadIdentitiesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListWorkloadIdentitiesResponse
+      attr_accessor workload_identities: ::Array[Types::WorkloadIdentityType]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MCPGatewayConfiguration
+      attr_accessor supported_versions: ::Array[::String]
+      attr_accessor instructions: ::String
+      attr_accessor search_type: ("SEMANTIC")
+      SENSITIVE: []
+    end
+
+    class McpLambdaTargetConfiguration
+      attr_accessor lambda_arn: ::String
+      attr_accessor tool_schema: Types::ToolSchema
+      SENSITIVE: []
+    end
+
+    class McpTargetConfiguration
+      attr_accessor open_api_schema: Types::ApiSchemaConfiguration
+      attr_accessor smithy_model: Types::ApiSchemaConfiguration
+      attr_accessor lambda: Types::McpLambdaTargetConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class OpenApiSchema < McpTargetConfiguration
+      end
+      class SmithyModel < McpTargetConfiguration
+      end
+      class Lambda < McpTargetConfiguration
+      end
+      class Unknown < McpTargetConfiguration
+      end
+    end
+
+    class Memory
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor memory_execution_role_arn: ::String
+      attr_accessor event_expiry_duration: ::Integer
+      attr_accessor status: ("CREATING" | "ACTIVE" | "FAILED" | "DELETING")
+      attr_accessor failure_reason: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor strategies: ::Array[Types::MemoryStrategy]
+      SENSITIVE: [:description]
+    end
+
+    class MemoryStrategy
+      attr_accessor strategy_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor configuration: Types::StrategyConfiguration
+      attr_accessor type: ("SEMANTIC" | "SUMMARIZATION" | "USER_PREFERENCE" | "CUSTOM")
+      attr_accessor namespaces: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+      SENSITIVE: [:description]
+    end
+
+    class MemoryStrategyInput
+      attr_accessor semantic_memory_strategy: Types::SemanticMemoryStrategyInput
+      attr_accessor summary_memory_strategy: Types::SummaryMemoryStrategyInput
+      attr_accessor user_preference_memory_strategy: Types::UserPreferenceMemoryStrategyInput
+      attr_accessor custom_memory_strategy: Types::CustomMemoryStrategyInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SemanticMemoryStrategy < MemoryStrategyInput
+      end
+      class SummaryMemoryStrategy < MemoryStrategyInput
+      end
+      class UserPreferenceMemoryStrategy < MemoryStrategyInput
+      end
+      class CustomMemoryStrategy < MemoryStrategyInput
+      end
+      class Unknown < MemoryStrategyInput
+      end
+    end
+
+    class MemorySummary
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "FAILED" | "DELETING")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class MicrosoftOauth2ProviderConfigInput
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      SENSITIVE: [:client_secret]
+    end
+
+    class MicrosoftOauth2ProviderConfigOutput
+      attr_accessor oauth_discovery: Types::Oauth2Discovery
+      SENSITIVE: []
+    end
+
+    class ModifyConsolidationConfiguration
+      attr_accessor custom_consolidation_configuration: Types::CustomConsolidationConfigurationInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CustomConsolidationConfiguration < ModifyConsolidationConfiguration
+      end
+      class Unknown < ModifyConsolidationConfiguration
+      end
+    end
+
+    class ModifyExtractionConfiguration
+      attr_accessor custom_extraction_configuration: Types::CustomExtractionConfigurationInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CustomExtractionConfiguration < ModifyExtractionConfiguration
+      end
+      class Unknown < ModifyExtractionConfiguration
+      end
+    end
+
+    class ModifyMemoryStrategies
+      attr_accessor add_memory_strategies: ::Array[Types::MemoryStrategyInput]
+      attr_accessor modify_memory_strategies: ::Array[Types::ModifyMemoryStrategyInput]
+      attr_accessor delete_memory_strategies: ::Array[Types::DeleteMemoryStrategyInput]
+      SENSITIVE: []
+    end
+
+    class ModifyMemoryStrategyInput
+      attr_accessor memory_strategy_id: ::String
+      attr_accessor description: ::String
+      attr_accessor namespaces: ::Array[::String]
+      attr_accessor configuration: Types::ModifyStrategyConfiguration
+      SENSITIVE: [:description]
+    end
+
+    class ModifyStrategyConfiguration
+      attr_accessor extraction: Types::ModifyExtractionConfiguration
+      attr_accessor consolidation: Types::ModifyConsolidationConfiguration
+      SENSITIVE: []
+    end
+
+    class NetworkConfiguration
+      attr_accessor network_mode: ("PUBLIC")
+      SENSITIVE: []
+    end
+
+    class OAuthCredentialProvider
+      attr_accessor provider_arn: ::String
+      attr_accessor scopes: ::Array[::String]
+      attr_accessor custom_parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Oauth2AuthorizationServerMetadata
+      attr_accessor issuer: ::String
+      attr_accessor authorization_endpoint: ::String
+      attr_accessor token_endpoint: ::String
+      attr_accessor response_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Oauth2CredentialProviderItem
+      attr_accessor name: ::String
+      attr_accessor credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2")
+      attr_accessor credential_provider_arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Oauth2Discovery
+      attr_accessor discovery_url: ::String
+      attr_accessor authorization_server_metadata: Types::Oauth2AuthorizationServerMetadata
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DiscoveryUrl < Oauth2Discovery
+      end
+      class AuthorizationServerMetadata < Oauth2Discovery
+      end
+      class Unknown < Oauth2Discovery
+      end
+    end
+
+    class Oauth2ProviderConfigInput
+      attr_accessor custom_oauth_2_provider_config: Types::CustomOauth2ProviderConfigInput
+      attr_accessor google_oauth_2_provider_config: Types::GoogleOauth2ProviderConfigInput
+      attr_accessor github_oauth_2_provider_config: Types::GithubOauth2ProviderConfigInput
+      attr_accessor slack_oauth_2_provider_config: Types::SlackOauth2ProviderConfigInput
+      attr_accessor salesforce_oauth_2_provider_config: Types::SalesforceOauth2ProviderConfigInput
+      attr_accessor microsoft_oauth_2_provider_config: Types::MicrosoftOauth2ProviderConfigInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CustomOauth2ProviderConfig < Oauth2ProviderConfigInput
+      end
+      class GoogleOauth2ProviderConfig < Oauth2ProviderConfigInput
+      end
+      class GithubOauth2ProviderConfig < Oauth2ProviderConfigInput
+      end
+      class SlackOauth2ProviderConfig < Oauth2ProviderConfigInput
+      end
+      class SalesforceOauth2ProviderConfig < Oauth2ProviderConfigInput
+      end
+      class MicrosoftOauth2ProviderConfig < Oauth2ProviderConfigInput
+      end
+      class Unknown < Oauth2ProviderConfigInput
+      end
+    end
+
+    class Oauth2ProviderConfigOutput
+      attr_accessor custom_oauth_2_provider_config: Types::CustomOauth2ProviderConfigOutput
+      attr_accessor google_oauth_2_provider_config: Types::GoogleOauth2ProviderConfigOutput
+      attr_accessor github_oauth_2_provider_config: Types::GithubOauth2ProviderConfigOutput
+      attr_accessor slack_oauth_2_provider_config: Types::SlackOauth2ProviderConfigOutput
+      attr_accessor salesforce_oauth_2_provider_config: Types::SalesforceOauth2ProviderConfigOutput
+      attr_accessor microsoft_oauth_2_provider_config: Types::MicrosoftOauth2ProviderConfigOutput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CustomOauth2ProviderConfig < Oauth2ProviderConfigOutput
+      end
+      class GoogleOauth2ProviderConfig < Oauth2ProviderConfigOutput
+      end
+      class GithubOauth2ProviderConfig < Oauth2ProviderConfigOutput
+      end
+      class SlackOauth2ProviderConfig < Oauth2ProviderConfigOutput
+      end
+      class SalesforceOauth2ProviderConfig < Oauth2ProviderConfigOutput
+      end
+      class MicrosoftOauth2ProviderConfig < Oauth2ProviderConfigOutput
+      end
+      class Unknown < Oauth2ProviderConfigOutput
+      end
+    end
+
+    class ProtocolConfiguration
+      attr_accessor server_protocol: ("MCP" | "HTTP")
+      SENSITIVE: []
+    end
+
+    class RecordingConfig
+      attr_accessor enabled: bool
+      attr_accessor s3_location: Types::S3Location
+      SENSITIVE: []
+    end
+
+    class ResourceLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3Configuration
+      attr_accessor uri: ::String
+      attr_accessor bucket_owner_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class S3Location
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class SalesforceOauth2ProviderConfigInput
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      SENSITIVE: [:client_secret]
+    end
+
+    class SalesforceOauth2ProviderConfigOutput
+      attr_accessor oauth_discovery: Types::Oauth2Discovery
+      SENSITIVE: []
+    end
+
+    class SchemaDefinition
+      attr_accessor type: ("string" | "number" | "object" | "array" | "boolean" | "integer")
+      attr_accessor properties: ::Hash[::String, Types::SchemaDefinition]
+      attr_accessor required: ::Array[::String]
+      attr_accessor items: Types::SchemaDefinition
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class Secret
+      attr_accessor secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SemanticConsolidationOverride
+      attr_accessor append_to_prompt: ::String
+      attr_accessor model_id: ::String
+      SENSITIVE: [:append_to_prompt]
+    end
+
+    class SemanticExtractionOverride
+      attr_accessor append_to_prompt: ::String
+      attr_accessor model_id: ::String
+      SENSITIVE: [:append_to_prompt]
+    end
+
+    class SemanticMemoryStrategyInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor namespaces: ::Array[::String]
+      SENSITIVE: [:description]
+    end
+
+    class SemanticOverrideConfigurationInput
+      attr_accessor extraction: Types::SemanticOverrideExtractionConfigurationInput
+      attr_accessor consolidation: Types::SemanticOverrideConsolidationConfigurationInput
+      SENSITIVE: []
+    end
+
+    class SemanticOverrideConsolidationConfigurationInput
+      attr_accessor append_to_prompt: ::String
+      attr_accessor model_id: ::String
+      SENSITIVE: [:append_to_prompt]
+    end
+
+    class SemanticOverrideExtractionConfigurationInput
+      attr_accessor append_to_prompt: ::String
+      attr_accessor model_id: ::String
+      SENSITIVE: [:append_to_prompt]
+    end
+
+    class ServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SetTokenVaultCMKRequest
+      attr_accessor token_vault_id: ::String
+      attr_accessor kms_configuration: Types::KmsConfiguration
+      SENSITIVE: []
+    end
+
+    class SetTokenVaultCMKResponse
+      attr_accessor token_vault_id: ::String
+      attr_accessor kms_configuration: Types::KmsConfiguration
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class SlackOauth2ProviderConfigInput
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      SENSITIVE: [:client_secret]
+    end
+
+    class SlackOauth2ProviderConfigOutput
+      attr_accessor oauth_discovery: Types::Oauth2Discovery
+      SENSITIVE: []
+    end
+
+    class StrategyConfiguration
+      attr_accessor type: ("SEMANTIC_OVERRIDE" | "SUMMARY_OVERRIDE" | "USER_PREFERENCE_OVERRIDE")
+      attr_accessor extraction: Types::ExtractionConfiguration
+      attr_accessor consolidation: Types::ConsolidationConfiguration
+      SENSITIVE: []
+    end
+
+    class SummaryConsolidationOverride
+      attr_accessor append_to_prompt: ::String
+      attr_accessor model_id: ::String
+      SENSITIVE: [:append_to_prompt]
+    end
+
+    class SummaryMemoryStrategyInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor namespaces: ::Array[::String]
+      SENSITIVE: [:description]
+    end
+
+    class SummaryOverrideConfigurationInput
+      attr_accessor consolidation: Types::SummaryOverrideConsolidationConfigurationInput
+      SENSITIVE: []
+    end
+
+    class SummaryOverrideConsolidationConfigurationInput
+      attr_accessor append_to_prompt: ::String
+      attr_accessor model_id: ::String
+      SENSITIVE: [:append_to_prompt]
+    end
+
+    class TargetConfiguration
+      attr_accessor mcp: Types::McpTargetConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Mcp < TargetConfiguration
+      end
+      class Unknown < TargetConfiguration
+      end
+    end
+
+    class TargetSummary
+      attr_accessor target_id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:name, :description]
+    end
+
+    class ThrottledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ToolDefinition
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor input_schema: Types::SchemaDefinition
+      attr_accessor output_schema: Types::SchemaDefinition
+      SENSITIVE: []
+    end
+
+    class ToolSchema
+      attr_accessor s3: Types::S3Configuration
+      attr_accessor inline_payload: ::Array[Types::ToolDefinition]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3 < ToolSchema
+      end
+      class InlinePayload < ToolSchema
+      end
+      class Unknown < ToolSchema
+      end
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAgentRuntimeEndpointRequest
+      attr_accessor agent_runtime_id: ::String
+      attr_accessor endpoint_name: ::String
+      attr_accessor agent_runtime_version: ::String
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: [:endpoint_name]
+    end
+
+    class UpdateAgentRuntimeEndpointResponse
+      attr_accessor live_version: ::String
+      attr_accessor target_version: ::String
+      attr_accessor agent_runtime_endpoint_arn: ::String
+      attr_accessor agent_runtime_arn: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateAgentRuntimeRequest
+      attr_accessor agent_runtime_id: ::String
+      attr_accessor description: ::String
+      attr_accessor agent_runtime_artifact: Types::AgentArtifact
+      attr_accessor role_arn: ::String
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor protocol_configuration: Types::ProtocolConfiguration
+      attr_accessor client_token: ::String
+      attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
+      SENSITIVE: [:description, :environment_variables]
+    end
+
+    class UpdateAgentRuntimeResponse
+      attr_accessor agent_runtime_arn: ::String
+      attr_accessor agent_runtime_id: ::String
+      attr_accessor workload_identity_details: Types::WorkloadIdentityDetails
+      attr_accessor agent_runtime_version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class UpdateApiKeyCredentialProviderRequest
+      attr_accessor name: ::String
+      attr_accessor api_key: ::String
+      SENSITIVE: [:api_key]
+    end
+
+    class UpdateApiKeyCredentialProviderResponse
+      attr_accessor api_key_secret_arn: Types::Secret
+      attr_accessor name: ::String
+      attr_accessor credential_provider_arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateGatewayRequest
+      attr_accessor gateway_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor protocol_type: ("MCP")
+      attr_accessor protocol_configuration: Types::GatewayProtocolConfiguration
+      attr_accessor authorizer_type: ("CUSTOM_JWT")
+      attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
+      attr_accessor kms_key_arn: ::String
+      attr_accessor exception_level: ("DEBUG")
+      SENSITIVE: [:name, :description]
+    end
+
+    class UpdateGatewayResponse
+      attr_accessor gateway_arn: ::String
+      attr_accessor gateway_id: ::String
+      attr_accessor gateway_url: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+      attr_accessor status_reasons: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor protocol_type: ("MCP")
+      attr_accessor protocol_configuration: Types::GatewayProtocolConfiguration
+      attr_accessor authorizer_type: ("CUSTOM_JWT")
+      attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
+      attr_accessor kms_key_arn: ::String
+      attr_accessor workload_identity_details: Types::WorkloadIdentityDetails
+      attr_accessor exception_level: ("DEBUG")
+      SENSITIVE: [:name, :description]
+    end
+
+    class UpdateGatewayTargetRequest
+      attr_accessor gateway_identifier: ::String
+      attr_accessor target_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor target_configuration: Types::TargetConfiguration
+      attr_accessor credential_provider_configurations: ::Array[Types::CredentialProviderConfiguration]
+      SENSITIVE: [:name, :description]
+    end
+
+    class UpdateGatewayTargetResponse
+      attr_accessor gateway_arn: ::String
+      attr_accessor target_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+      attr_accessor status_reasons: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor target_configuration: Types::TargetConfiguration
+      attr_accessor credential_provider_configurations: ::Array[Types::CredentialProviderConfiguration]
+      SENSITIVE: [:name, :description]
+    end
+
+    class UpdateMemoryInput
+      attr_accessor client_token: ::String
+      attr_accessor memory_id: ::String
+      attr_accessor description: ::String
+      attr_accessor event_expiry_duration: ::Integer
+      attr_accessor memory_execution_role_arn: ::String
+      attr_accessor memory_strategies: Types::ModifyMemoryStrategies
+      SENSITIVE: [:description]
+    end
+
+    class UpdateMemoryOutput
+      attr_accessor memory: Types::Memory
+      SENSITIVE: []
+    end
+
+    class UpdateOauth2CredentialProviderRequest
+      attr_accessor name: ::String
+      attr_accessor credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2")
+      attr_accessor oauth2_provider_config_input: Types::Oauth2ProviderConfigInput
+      SENSITIVE: []
+    end
+
+    class UpdateOauth2CredentialProviderResponse
+      attr_accessor client_secret_arn: Types::Secret
+      attr_accessor name: ::String
+      attr_accessor credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2")
+      attr_accessor credential_provider_arn: ::String
+      attr_accessor oauth2_provider_config_output: Types::Oauth2ProviderConfigOutput
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateWorkloadIdentityRequest
+      attr_accessor name: ::String
+      attr_accessor allowed_resource_oauth_2_return_urls: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateWorkloadIdentityResponse
+      attr_accessor name: ::String
+      attr_accessor workload_identity_arn: ::String
+      attr_accessor allowed_resource_oauth_2_return_urls: ::Array[::String]
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UserPreferenceConsolidationOverride
+      attr_accessor append_to_prompt: ::String
+      attr_accessor model_id: ::String
+      SENSITIVE: [:append_to_prompt]
+    end
+
+    class UserPreferenceExtractionOverride
+      attr_accessor append_to_prompt: ::String
+      attr_accessor model_id: ::String
+      SENSITIVE: [:append_to_prompt]
+    end
+
+    class UserPreferenceMemoryStrategyInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor namespaces: ::Array[::String]
+      SENSITIVE: [:description]
+    end
+
+    class UserPreferenceOverrideConfigurationInput
+      attr_accessor extraction: Types::UserPreferenceOverrideExtractionConfigurationInput
+      attr_accessor consolidation: Types::UserPreferenceOverrideConsolidationConfigurationInput
+      SENSITIVE: []
+    end
+
+    class UserPreferenceOverrideConsolidationConfigurationInput
+      attr_accessor append_to_prompt: ::String
+      attr_accessor model_id: ::String
+      SENSITIVE: [:append_to_prompt]
+    end
+
+    class UserPreferenceOverrideExtractionConfigurationInput
+      attr_accessor append_to_prompt: ::String
+      attr_accessor model_id: ::String
+      SENSITIVE: [:append_to_prompt]
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("CannotParse" | "FieldValidationFailed" | "IdempotentParameterMismatchException" | "EventInOtherSession" | "ResourceConflict")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WorkloadIdentityDetails
+      attr_accessor workload_identity_arn: ::String
+      SENSITIVE: []
+    end
+
+    class WorkloadIdentityType
+      attr_accessor name: ::String
+      attr_accessor workload_identity_arn: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -200,8 +200,7 @@ module Aws::Pricing
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -738,7 +737,7 @@ module Aws::Pricing
     #     service_code: "String", # required
     #     filters: [
     #       {
-    #         type: "TERM_MATCH", # required, accepts TERM_MATCH
+    #         type: "TERM_MATCH", # required, accepts TERM_MATCH, EQUALS, CONTAINS, ANY_OF, NONE_OF
     #         field: "Field", # required
     #         value: "Value", # required
     #       },
@@ -880,7 +879,7 @@ module Aws::Pricing
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pricing'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

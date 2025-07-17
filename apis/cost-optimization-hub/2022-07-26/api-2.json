@@ -180,6 +180,19 @@
         "LowestPrice"
       ]
     },
+    "AuroraDbClusterStorage":{
+      "type":"structure",
+      "members":{
+        "configuration":{"shape":"AuroraDbClusterStorageConfiguration"},
+        "costCalculation":{"shape":"ResourceCostCalculation"}
+      }
+    },
+    "AuroraDbClusterStorageConfiguration":{
+      "type":"structure",
+      "members":{
+        "storageType":{"shape":"String"}
+      }
+    },
     "BlockStoragePerformanceConfiguration":{
       "type":"structure",
       "members":{
@@ -423,7 +436,8 @@
       "type":"structure",
       "members":{
         "savingsEstimationMode":{"shape":"SavingsEstimationMode"},
-        "memberAccountDiscountVisibility":{"shape":"MemberAccountDiscountVisibility"}
+        "memberAccountDiscountVisibility":{"shape":"MemberAccountDiscountVisibility"},
+        "preferredCommitment":{"shape":"PreferredCommitment"}
       }
     },
     "GetRecommendationRequest":{
@@ -663,6 +677,21 @@
         "order":{"shape":"Order"}
       }
     },
+    "PaymentOption":{
+      "type":"string",
+      "enum":[
+        "AllUpfront",
+        "PartialUpfront",
+        "NoUpfront"
+      ]
+    },
+    "PreferredCommitment":{
+      "type":"structure",
+      "members":{
+        "term":{"shape":"Term"},
+        "paymentOption":{"shape":"PaymentOption"}
+      }
+    },
     "PrimitiveBoolean":{"type":"boolean"},
     "RdsDbInstance":{
       "type":"structure",
@@ -847,6 +876,7 @@
         "sageMakerSavingsPlans":{"shape":"SageMakerSavingsPlans"},
         "rdsDbInstance":{"shape":"RdsDbInstance"},
         "rdsDbInstanceStorage":{"shape":"RdsDbInstanceStorage"},
+        "auroraDbClusterStorage":{"shape":"AuroraDbClusterStorage"},
         "dynamoDbReservedCapacity":{"shape":"DynamoDbReservedCapacity"},
         "memoryDbReservedInstances":{"shape":"MemoryDbReservedInstances"}
       },
@@ -897,6 +927,7 @@
         "ElastiCacheReservedInstances",
         "RdsDbInstanceStorage",
         "RdsDbInstance",
+        "AuroraDbClusterStorage",
         "DynamoDbReservedCapacity",
         "MemoryDbReservedInstances"
       ]
@@ -989,6 +1020,13 @@
       "max":100,
       "min":1
     },
+    "Term":{
+      "type":"string",
+      "enum":[
+        "OneYear",
+        "ThreeYears"
+      ]
+    },
     "ThrottlingException":{
       "type":"structure",
       "members":{
@@ -1015,14 +1053,16 @@
       "type":"structure",
       "members":{
         "savingsEstimationMode":{"shape":"SavingsEstimationMode"},
-        "memberAccountDiscountVisibility":{"shape":"MemberAccountDiscountVisibility"}
+        "memberAccountDiscountVisibility":{"shape":"MemberAccountDiscountVisibility"},
+        "preferredCommitment":{"shape":"PreferredCommitment"}
       }
     },
     "UpdatePreferencesResponse":{
       "type":"structure",
       "members":{
         "savingsEstimationMode":{"shape":"SavingsEstimationMode"},
-        "memberAccountDiscountVisibility":{"shape":"MemberAccountDiscountVisibility"}
+        "memberAccountDiscountVisibility":{"shape":"MemberAccountDiscountVisibility"},
+        "preferredCommitment":{"shape":"PreferredCommitment"}
       }
     },
     "Usage":{

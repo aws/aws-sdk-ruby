@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2025-06-02)
+------------------
+
+* Feature - Add support for generating match IDs in near real-time.
+
+1.30.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.28.0 (2025-04-22)
 ------------------
 

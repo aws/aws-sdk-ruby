@@ -99,7 +99,8 @@ module Aws
                                 latest_version_id: ::String
                               }?
                             },
-                            ?force: bool
+                            ?force: bool,
+                            ?promote_to_primary: bool
                           ) -> _CopyImageSetResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyImageSetResponseSuccess
 
@@ -191,6 +192,7 @@ module Aws
         def message: () -> ::String
         def image_set_arn: () -> ::String
         def overrides: () -> Types::Overrides
+        def is_primary: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#get_image_set-instance_method
       def get_image_set: (
@@ -289,7 +291,8 @@ module Aws
                                          dicom_study_date_and_time: {
                                            dicom_study_date: ::String,
                                            dicom_study_time: ::String?
-                                         }?
+                                         }?,
+                                         is_primary: bool?
                                        },
                                      ],
                                      operator: ("EQUAL" | "BETWEEN")

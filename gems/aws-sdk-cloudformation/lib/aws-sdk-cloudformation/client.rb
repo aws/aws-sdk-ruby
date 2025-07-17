@@ -200,8 +200,7 @@ module Aws::CloudFormation
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -881,7 +880,7 @@ module Aws::CloudFormation
     #   bucket or a Systems Manager document. CloudFormation generates the
     #   change set by comparing this template with the stack that you
     #   specified. The location for an Amazon S3 bucket must start with
-    #   `https://`.
+    #   `https://`. URLs from S3 static websites are not supported.
     #
     #   Conditional: You must specify only `TemplateBody` or `TemplateURL`.
     #
@@ -972,14 +971,14 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-accesskey.html
-    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-group.html
-    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-managedpolicy.html
-    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
-    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-user.html
-    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-usertogroupaddition.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-accesskey.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-group.html
+    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-instanceprofile.html
+    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-managedpolicy.html
+    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html
+    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-role.html
+    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-user.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-usertogroupaddition.html
     #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html#using-iam-capabilities
     #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-include.html
     #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
@@ -1105,22 +1104,23 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html
     #
     # @option params [Boolean] :import_existing_resources
-    #   Indicates if the change set imports resources that already exist.
+    #   Indicates if the change set auto-imports resources that already exist.
+    #   For more information, see [Import Amazon Web Services resources into a
+    #   CloudFormation stack automatically][1] in the *CloudFormation User
+    #   Guide*.
     #
     #   <note markdown="1"> This parameter can only import resources that have custom names in
-    #   templates. For more information, see [name type][1] in the
+    #   templates. For more information, see [name type][2] in the
     #   *CloudFormation User Guide*. To import resources that do not accept
-    #   custom names, such as EC2 instances, use the resource import feature
-    #   instead. For more information, see [Import Amazon Web Services
-    #   resources into a CloudFormation stack with a resource import][2] in
-    #   the *CloudFormation User Guide*.
+    #   custom names, such as EC2 instances, use the `ResourcesToImport`
+    #   parameter instead.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html
-    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/import-resources-automatically.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-name.html
     #
     # @return [Types::CreateChangeSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1304,17 +1304,18 @@ module Aws::CloudFormation
     #    </note>
     #
     # @option params [String] :template_body
-    #   Structure containing the template body with a minimum length of 1 byte
-    #   and a maximum length of 51,200 bytes.
+    #   Structure that contains the template body with a minimum length of 1
+    #   byte and a maximum length of 51,200 bytes.
     #
-    #   Conditional: You must specify either the `TemplateBody` or the
-    #   `TemplateURL` parameter, but not both.
+    #   Conditional: You must specify either `TemplateBody` or `TemplateURL`,
+    #   but not both.
     #
     # @option params [String] :template_url
-    #   The URL of a file containing the template body. The URL must point to
-    #   a template (max size: 1 MB) that's located in an Amazon S3 bucket or
-    #   a Systems Manager document. The location for an Amazon S3 bucket must
-    #   start with `https://`.
+    #   The URL of a file that contains the template body. The URL must point
+    #   to a template (max size: 1 MB) that's located in an Amazon S3 bucket
+    #   or a Systems Manager document. The location for an Amazon S3 bucket
+    #   must start with `https://`. URLs from S3 static websites are not
+    #   supported.
     #
     #   Conditional: You must specify either the `TemplateBody` or the
     #   `TemplateURL` parameter, but not both.
@@ -1430,14 +1431,14 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-accesskey.html
-    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-group.html
-    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-managedpolicy.html
-    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
-    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-user.html
-    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-usertogroupaddition.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-accesskey.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-group.html
+    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-instanceprofile.html
+    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-managedpolicy.html
+    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html
+    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-role.html
+    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-user.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-usertogroupaddition.html
     #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html#using-iam-capabilities
     #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-include.html
     #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
@@ -1492,9 +1493,9 @@ module Aws::CloudFormation
     #   Default: `ROLLBACK`
     #
     # @option params [String] :stack_policy_body
-    #   Structure containing the stack policy body. For more information, see
-    #   [Prevent updates to stack resources][1] in the *CloudFormation User
-    #   Guide*. You can specify either the `StackPolicyBody` or the
+    #   Structure that contains the stack policy body. For more information,
+    #   see [Prevent updates to stack resources][1] in the *CloudFormation
+    #   User Guide*. You can specify either the `StackPolicyBody` or the
     #   `StackPolicyURL` parameter, but not both.
     #
     #
@@ -1502,11 +1503,13 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html
     #
     # @option params [String] :stack_policy_url
-    #   Location of a file containing the stack policy. The URL must point to
-    #   a policy (maximum size: 16 KB) located in an S3 bucket in the same
+    #   Location of a file that contains the stack policy. The URL must point
+    #   to a policy (maximum size: 16 KB) located in an S3 bucket in the same
     #   Region as the stack. The location for an Amazon S3 bucket must start
-    #   with `https://`. You can specify either the `StackPolicyBody` or the
-    #   `StackPolicyURL` parameter, but not both.
+    #   with `https://`. URLs from S3 static websites are not supported.
+    #
+    #   You can specify either the `StackPolicyBody` or the `StackPolicyURL`
+    #   parameter, but not both.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Key-value pairs to associate with this stack. CloudFormation also
@@ -1622,6 +1625,20 @@ module Aws::CloudFormation
     # stack in a specific account and Region. You must specify at least one
     # value for either `Accounts` or `DeploymentTargets`, and you must
     # specify at least one value for `Regions`.
+    #
+    # <note markdown="1"> The maximum number of organizational unit (OUs) supported by a
+    # `CreateStackInstances` operation is 50.
+    #
+    #  If you need more than 50, consider the following options:
+    #
+    #  * *Batch processing:* If you don't want to expose your OU hierarchy,
+    #   split up the operations into multiple calls with less than 50 OUs
+    #   each.
+    #
+    # * *Parent OU strategy:* If you don't mind exposing the OU hierarchy,
+    #   target a parent OU that contains all desired child OUs.
+    #
+    #  </note>
     #
     # @option params [required, String] :stack_set_name
     #   The name or unique ID of the stack set that you want to create stack
@@ -1852,17 +1869,18 @@ module Aws::CloudFormation
     #   The structure that contains the template body, with a minimum length
     #   of 1 byte and a maximum length of 51,200 bytes.
     #
-    #   Conditional: You must specify either the TemplateBody or the
-    #   TemplateURL parameter, but not both.
+    #   Conditional: You must specify either the `TemplateBody` or the
+    #   `TemplateURL` parameter, but not both.
     #
     # @option params [String] :template_url
     #   The URL of a file that contains the template body. The URL must point
     #   to a template (maximum size: 1 MB) that's located in an Amazon S3
     #   bucket or a Systems Manager document. The location for an Amazon S3
-    #   bucket must start with `https://`.
+    #   bucket must start with `https://`. S3 static website URLs are not
+    #   supported.
     #
-    #   Conditional: You must specify either the TemplateBody or the
-    #   TemplateURL parameter, but not both.
+    #   Conditional: You must specify either the `TemplateBody` or the
+    #   `TemplateURL` parameter, but not both.
     #
     # @option params [String] :stack_id
     #   The stack ID you are importing into a new stack set. Specify the
@@ -1933,13 +1951,13 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-accesskey.html
-    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-group.html
-    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
-    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-user.html
-    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-usertogroupaddition.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-accesskey.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-group.html
+    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-instanceprofile.html
+    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html
+    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-role.html
+    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-user.html
+    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-usertogroupaddition.html
     #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html#using-iam-capabilities
     #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
     #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-include.html
@@ -2330,6 +2348,20 @@ module Aws::CloudFormation
 
     # Deletes stack instances for the specified accounts, in the specified
     # Amazon Web Services Regions.
+    #
+    # <note markdown="1"> The maximum number of organizational unit (OUs) supported by a
+    # `DeleteStackInstances` operation is 50.
+    #
+    #  If you need more than 50, consider the following options:
+    #
+    #  * *Batch processing:* If you don't want to expose your OU hierarchy,
+    #   split up the operations into multiple calls with less than 50 OUs
+    #   each.
+    #
+    # * *Parent OU strategy:* If you don't mind exposing the OU hierarchy,
+    #   target a parent OU that contains all desired child OUs.
+    #
+    #  </note>
     #
     # @option params [required, String] :stack_set_name
     #   The name or unique ID of the stack set that you want to delete stack
@@ -2871,7 +2903,7 @@ module Aws::CloudFormation
     #   resp.resources[0].resource_status #=> String, one of "PENDING", "IN_PROGRESS", "FAILED", "COMPLETE"
     #   resp.resources[0].resource_status_reason #=> String
     #   resp.resources[0].warnings #=> Array
-    #   resp.resources[0].warnings[0].type #=> String, one of "MUTUALLY_EXCLUSIVE_PROPERTIES", "UNSUPPORTED_PROPERTIES", "MUTUALLY_EXCLUSIVE_TYPES"
+    #   resp.resources[0].warnings[0].type #=> String, one of "MUTUALLY_EXCLUSIVE_PROPERTIES", "UNSUPPORTED_PROPERTIES", "MUTUALLY_EXCLUSIVE_TYPES", "EXCLUDED_PROPERTIES"
     #   resp.resources[0].warnings[0].properties #=> Array
     #   resp.resources[0].warnings[0].properties[0].property_path #=> String
     #   resp.resources[0].warnings[0].properties[0].required #=> Boolean
@@ -3451,7 +3483,7 @@ module Aws::CloudFormation
     #   resp.stack_resource_detail.resource_status_reason #=> String
     #   resp.stack_resource_detail.description #=> String
     #   resp.stack_resource_detail.metadata #=> String
-    #   resp.stack_resource_detail.drift_information.stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED"
+    #   resp.stack_resource_detail.drift_information.stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN"
     #   resp.stack_resource_detail.drift_information.last_check_timestamp #=> Time
     #   resp.stack_resource_detail.module_info.type_hierarchy #=> String
     #   resp.stack_resource_detail.module_info.logical_id_hierarchy #=> String
@@ -3503,6 +3535,9 @@ module Aws::CloudFormation
     #
     #   * `NOT_CHECKED`: CloudFormation doesn't currently return this value.
     #
+    #   * `UNKNOWN`: CloudFormation could not run drift detection for the
+    #     resource.
+    #
     # @option params [String] :next_token
     #   A string that identifies the next page of stack resource drift
     #   results.
@@ -3524,7 +3559,7 @@ module Aws::CloudFormation
     #
     #   resp = client.describe_stack_resource_drifts({
     #     stack_name: "StackNameOrId", # required
-    #     stack_resource_drift_status_filters: ["IN_SYNC"], # accepts IN_SYNC, MODIFIED, DELETED, NOT_CHECKED
+    #     stack_resource_drift_status_filters: ["IN_SYNC"], # accepts IN_SYNC, MODIFIED, DELETED, NOT_CHECKED, UNKNOWN
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -3546,10 +3581,11 @@ module Aws::CloudFormation
     #   resp.stack_resource_drifts[0].property_differences[0].expected_value #=> String
     #   resp.stack_resource_drifts[0].property_differences[0].actual_value #=> String
     #   resp.stack_resource_drifts[0].property_differences[0].difference_type #=> String, one of "ADD", "REMOVE", "NOT_EQUAL"
-    #   resp.stack_resource_drifts[0].stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED"
+    #   resp.stack_resource_drifts[0].stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN"
     #   resp.stack_resource_drifts[0].timestamp #=> Time
     #   resp.stack_resource_drifts[0].module_info.type_hierarchy #=> String
     #   resp.stack_resource_drifts[0].module_info.logical_id_hierarchy #=> String
+    #   resp.stack_resource_drifts[0].drift_status_reason #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResourceDrifts AWS API Documentation
@@ -3641,7 +3677,7 @@ module Aws::CloudFormation
     #   resp.stack_resources[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE", "IMPORT_FAILED", "IMPORT_COMPLETE", "IMPORT_IN_PROGRESS", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE", "EXPORT_FAILED", "EXPORT_COMPLETE", "EXPORT_IN_PROGRESS", "EXPORT_ROLLBACK_IN_PROGRESS", "EXPORT_ROLLBACK_FAILED", "EXPORT_ROLLBACK_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "UPDATE_ROLLBACK_FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_COMPLETE", "ROLLBACK_FAILED"
     #   resp.stack_resources[0].resource_status_reason #=> String
     #   resp.stack_resources[0].description #=> String
-    #   resp.stack_resources[0].drift_information.stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED"
+    #   resp.stack_resources[0].drift_information.stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN"
     #   resp.stack_resources[0].drift_information.last_check_timestamp #=> Time
     #   resp.stack_resources[0].module_info.type_hierarchy #=> String
     #   resp.stack_resources[0].module_info.logical_id_hierarchy #=> String
@@ -3656,6 +3692,11 @@ module Aws::CloudFormation
     end
 
     # Returns the description of the specified StackSet.
+    #
+    # <note markdown="1"> This API provides *strongly consistent* reads meaning it will always
+    # return the most up-to-date data.
+    #
+    #  </note>
     #
     # @option params [required, String] :stack_set_name
     #   The name or unique ID of the stack set whose description you want.
@@ -3740,6 +3781,11 @@ module Aws::CloudFormation
     end
 
     # Returns the description of the specified StackSet operation.
+    #
+    # <note markdown="1"> This API provides *strongly consistent* reads meaning it will always
+    # return the most up-to-date data.
+    #
+    #  </note>
     #
     # @option params [required, String] :stack_set_name
     #   The name or the unique stack ID of the stack set for the stack
@@ -4249,10 +4295,11 @@ module Aws::CloudFormation
     #   resp.stack_resource_drift.property_differences[0].expected_value #=> String
     #   resp.stack_resource_drift.property_differences[0].actual_value #=> String
     #   resp.stack_resource_drift.property_differences[0].difference_type #=> String, one of "ADD", "REMOVE", "NOT_EQUAL"
-    #   resp.stack_resource_drift.stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED"
+    #   resp.stack_resource_drift.stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN"
     #   resp.stack_resource_drift.timestamp #=> Time
     #   resp.stack_resource_drift.module_info.type_hierarchy #=> String
     #   resp.stack_resource_drift.module_info.logical_id_hierarchy #=> String
+    #   resp.stack_resource_drift.drift_status_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackResourceDrift AWS API Documentation
     #
@@ -4384,17 +4431,17 @@ module Aws::CloudFormation
     # string that describes the resources required to run the template.
     #
     # @option params [String] :template_body
-    #   Structure containing the template body with a minimum length of 1 byte
-    #   and a maximum length of 51,200 bytes.
+    #   Structure that contains the template body with a minimum length of 1
+    #   byte and a maximum length of 51,200 bytes.
     #
     #   Conditional: You must pass `TemplateBody` or `TemplateURL`. If both
     #   are passed, only `TemplateBody` is used.
     #
     # @option params [String] :template_url
-    #   The URL of a file containing the template body. The URL must point to
-    #   a template that's located in an Amazon S3 bucket or a Systems Manager
-    #   document. The location for an Amazon S3 bucket must start with
-    #   `https://`.
+    #   The URL of a file that contains the template body. The URL must point
+    #   to a template that's located in an Amazon S3 bucket or a Systems
+    #   Manager document. The location for an Amazon S3 bucket must start with
+    #   `https://`. URLs from S3 static websites are not supported.
     #
     #   Conditional: You must pass `TemplateURL` or `TemplateBody`. If both
     #   are passed, only `TemplateBody` is used.
@@ -4721,17 +4768,17 @@ module Aws::CloudFormation
     # template doesn't exist, a `ValidationError` is returned.
     #
     # @option params [String] :template_body
-    #   Structure containing the template body with a minimum length of 1 byte
-    #   and a maximum length of 51,200 bytes.
+    #   Structure that contains the template body with a minimum length of 1
+    #   byte and a maximum length of 51,200 bytes.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
     #
     # @option params [String] :template_url
-    #   The URL of a file containing the template body. The URL must point to
-    #   a template (max size: 1 MB) that's located in an Amazon S3 bucket or
-    #   a Systems Manager document. The location for an Amazon S3 bucket must
-    #   start with `https://`.
+    #   The URL of a file that contains the template body. The URL must point
+    #   to a template (max size: 1 MB) that's located in an Amazon S3 bucket
+    #   or a Systems Manager document. The location for an Amazon S3 bucket
+    #   must start with `https://`.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
@@ -5642,7 +5689,7 @@ module Aws::CloudFormation
     #     stack_set_name: "StackSetNameOrId", # required
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     stack_instance_resource_drift_statuses: ["IN_SYNC"], # accepts IN_SYNC, MODIFIED, DELETED, NOT_CHECKED
+    #     stack_instance_resource_drift_statuses: ["IN_SYNC"], # accepts IN_SYNC, MODIFIED, DELETED, NOT_CHECKED, UNKNOWN
     #     stack_instance_account: "Account", # required
     #     stack_instance_region: "Region", # required
     #     operation_id: "ClientRequestToken", # required
@@ -5664,7 +5711,7 @@ module Aws::CloudFormation
     #   resp.summaries[0].property_differences[0].expected_value #=> String
     #   resp.summaries[0].property_differences[0].actual_value #=> String
     #   resp.summaries[0].property_differences[0].difference_type #=> String, one of "ADD", "REMOVE", "NOT_EQUAL"
-    #   resp.summaries[0].stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED"
+    #   resp.summaries[0].stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN"
     #   resp.summaries[0].timestamp #=> Time
     #   resp.next_token #=> String
     #
@@ -5942,7 +5989,7 @@ module Aws::CloudFormation
     #   resp.stack_resource_summaries[0].last_updated_timestamp #=> Time
     #   resp.stack_resource_summaries[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE", "IMPORT_FAILED", "IMPORT_COMPLETE", "IMPORT_IN_PROGRESS", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE", "EXPORT_FAILED", "EXPORT_COMPLETE", "EXPORT_IN_PROGRESS", "EXPORT_ROLLBACK_IN_PROGRESS", "EXPORT_ROLLBACK_FAILED", "EXPORT_ROLLBACK_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "UPDATE_ROLLBACK_FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_COMPLETE", "ROLLBACK_FAILED"
     #   resp.stack_resource_summaries[0].resource_status_reason #=> String
-    #   resp.stack_resource_summaries[0].drift_information.stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED"
+    #   resp.stack_resource_summaries[0].drift_information.stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN"
     #   resp.stack_resource_summaries[0].drift_information.last_check_timestamp #=> Time
     #   resp.stack_resource_summaries[0].module_info.type_hierarchy #=> String
     #   resp.stack_resource_summaries[0].module_info.logical_id_hierarchy #=> String
@@ -6028,6 +6075,11 @@ module Aws::CloudFormation
 
     # Returns summary information about the results of a stack set
     # operation.
+    #
+    # <note markdown="1"> This API provides *eventually consistent* reads meaning it may take
+    # some time but will eventually return the most up-to-date data.
+    #
+    #  </note>
     #
     # @option params [required, String] :stack_set_name
     #   The name or unique ID of the stack set that you want to get operation
@@ -6121,6 +6173,11 @@ module Aws::CloudFormation
 
     # Returns summary information about operations performed on a stack set.
     #
+    # <note markdown="1"> This API provides *eventually consistent* reads meaning it may take
+    # some time but will eventually return the most up-to-date data.
+    #
+    #  </note>
+    #
     # @option params [required, String] :stack_set_name
     #   The name or unique ID of the stack set that you want to get operation
     #   summaries for.
@@ -6209,6 +6266,11 @@ module Aws::CloudFormation
 
     # Returns summary information about stack sets that are associated with
     # the user.
+    #
+    # <note markdown="1"> This API provides *strongly consistent* reads meaning it will always
+    # return the most up-to-date data.
+    #
+    #  </note>
     #
     # * \[Self-managed permissions\] If you set the `CallAs` parameter to
     #   `SELF` while signed in to your Amazon Web Services account,
@@ -6948,8 +7010,9 @@ module Aws::CloudFormation
     #    </note>
     #
     # @option params [required, String] :schema_handler_package
-    #   A URL to the S3 bucket containing the extension project package that
-    #   contains the necessary files for the extension you want to register.
+    #   A URL to the S3 bucket that contains the extension project package
+    #   that contains the necessary files for the extension you want to
+    #   register.
     #
     #   For information about generating a schema handler package for the
     #   extension you want to register, see [submit][1] in the *CloudFormation
@@ -7105,9 +7168,9 @@ module Aws::CloudFormation
     #   The name or unique stack ID that you want to associate a policy with.
     #
     # @option params [String] :stack_policy_body
-    #   Structure containing the stack policy body. For more information, see
-    #   [Prevent updates to stack resources][1] in the *CloudFormation User
-    #   Guide*. You can specify either the `StackPolicyBody` or the
+    #   Structure that contains the stack policy body. For more information,
+    #   see [Prevent updates to stack resources][1] in the *CloudFormation
+    #   User Guide*. You can specify either the `StackPolicyBody` or the
     #   `StackPolicyURL` parameter, but not both.
     #
     #
@@ -7115,11 +7178,14 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html
     #
     # @option params [String] :stack_policy_url
-    #   Location of a file containing the stack policy. The URL must point to
-    #   a policy (maximum size: 16 KB) located in an Amazon S3 bucket in the
-    #   same Amazon Web Services Region as the stack. The location for an
-    #   Amazon S3 bucket must start with `https://`. You can specify either
-    #   the `StackPolicyBody` or the `StackPolicyURL` parameter, but not both.
+    #   Location of a file that contains the stack policy. The URL must point
+    #   to a policy (maximum size: 16 KB) located in an Amazon S3 bucket in
+    #   the same Amazon Web Services Region as the stack. The location for an
+    #   Amazon S3 bucket must start with `https://`. URLs from S3 static
+    #   websites are not supported.
+    #
+    #   You can specify either the `StackPolicyBody` or the `StackPolicyURL`
+    #   parameter, but not both.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -7692,17 +7758,17 @@ module Aws::CloudFormation
     #   The name or unique stack ID of the stack to update.
     #
     # @option params [String] :template_body
-    #   Structure containing the template body with a minimum length of 1 byte
-    #   and a maximum length of 51,200 bytes.
+    #   Structure that contains the template body with a minimum length of 1
+    #   byte and a maximum length of 51,200 bytes.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
     #   `true`.
     #
     # @option params [String] :template_url
-    #   The URL of a file containing the template body. The URL must point to
-    #   a template that's located in an Amazon S3 bucket or a Systems Manager
-    #   document. The location for an Amazon S3 bucket must start with
+    #   The URL of a file that contains the template body. The URL must point
+    #   to a template that's located in an Amazon S3 bucket or a Systems
+    #   Manager document. The location for an Amazon S3 bucket must start with
     #   `https://`.
     #
     #   Conditional: You must specify only one of the following parameters:
@@ -7718,8 +7784,8 @@ module Aws::CloudFormation
     #   `true`.
     #
     # @option params [String] :stack_policy_during_update_body
-    #   Structure containing the temporary overriding stack policy body. You
-    #   can specify either the `StackPolicyDuringUpdateBody` or the
+    #   Structure that contains the temporary overriding stack policy body.
+    #   You can specify either the `StackPolicyDuringUpdateBody` or the
     #   `StackPolicyDuringUpdateURL` parameter, but not both.
     #
     #   If you want to update protected resources, specify a temporary
@@ -7728,12 +7794,14 @@ module Aws::CloudFormation
     #   will be used.
     #
     # @option params [String] :stack_policy_during_update_url
-    #   Location of a file containing the temporary overriding stack policy.
-    #   The URL must point to a policy (max size: 16KB) located in an S3
-    #   bucket in the same Region as the stack. The location for an Amazon S3
-    #   bucket must start with `https://`. You can specify either the
-    #   `StackPolicyDuringUpdateBody` or the `StackPolicyDuringUpdateURL`
-    #   parameter, but not both.
+    #   Location of a file that contains the temporary overriding stack
+    #   policy. The URL must point to a policy (max size: 16KB) located in an
+    #   S3 bucket in the same Region as the stack. The location for an Amazon
+    #   S3 bucket must start with `https://`. URLs from S3 static websites are
+    #   not supported.
+    #
+    #   You can specify either the `StackPolicyDuringUpdateBody` or the
+    #   `StackPolicyDuringUpdateURL` parameter, but not both.
     #
     #   If you want to update protected resources, specify a temporary
     #   overriding stack policy during this update. If you don't specify a
@@ -7829,14 +7897,14 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-accesskey.html
-    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-group.html
-    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-managedpolicy.html
-    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
-    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-user.html
-    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-usertogroupaddition.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-accesskey.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-group.html
+    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-instanceprofile.html
+    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-managedpolicy.html
+    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html
+    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-role.html
+    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-user.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-usertogroupaddition.html
     #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html#using-iam-capabilities
     #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-include.html
     #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
@@ -7883,8 +7951,9 @@ module Aws::CloudFormation
     #   period afterwards.
     #
     # @option params [String] :stack_policy_body
-    #   Structure containing a new stack policy body. You can specify either
-    #   the `StackPolicyBody` or the `StackPolicyURL` parameter, but not both.
+    #   Structure that contains a new stack policy body. You can specify
+    #   either the `StackPolicyBody` or the `StackPolicyURL` parameter, but
+    #   not both.
     #
     #   You might update the stack policy, for example, in order to protect a
     #   new resource that you created during a stack update. If you don't
@@ -7892,11 +7961,13 @@ module Aws::CloudFormation
     #   stack is unchanged.
     #
     # @option params [String] :stack_policy_url
-    #   Location of a file containing the updated stack policy. The URL must
-    #   point to a policy (max size: 16KB) located in an S3 bucket in the same
-    #   Region as the stack. The location for an Amazon S3 bucket must start
-    #   with `https://`. You can specify either the `StackPolicyBody` or the
-    #   `StackPolicyURL` parameter, but not both.
+    #   Location of a file that contains the updated stack policy. The URL
+    #   must point to a policy (max size: 16KB) located in an S3 bucket in the
+    #   same Region as the stack. The location for an Amazon S3 bucket must
+    #   start with `https://`. URLs from S3 static websites are not supported.
+    #
+    #   You can specify either the `StackPolicyBody` or the `StackPolicyURL`
+    #   parameter, but not both.
     #
     #   You might update the stack policy, for example, in order to protect a
     #   new resource that you created during a stack update. If you don't
@@ -8031,6 +8102,20 @@ module Aws::CloudFormation
     # value specified in the stack set. Once a stack instance has been
     # updated with the new parameter, you can then override the parameter
     # value using `UpdateStackInstances`.
+    #
+    # <note markdown="1"> The maximum number of organizational unit (OUs) supported by a
+    # `UpdateStackInstances` operation is 50.
+    #
+    #  If you need more than 50, consider the following options:
+    #
+    #  * *Batch processing:* If you don't want to expose your OU hierarchy,
+    #   split up the operations into multiple calls with less than 50 OUs
+    #   each.
+    #
+    # * *Parent OU strategy:* If you don't mind exposing the OU hierarchy,
+    #   target a parent OU that contains all desired child OUs.
+    #
+    #  </note>
     #
     #
     #
@@ -8205,6 +8290,20 @@ module Aws::CloudFormation
     # CreateStackInstances calls on the specified stack set use the updated
     # stack set.
     #
+    # <note markdown="1"> The maximum number of organizational unit (OUs) supported by a
+    # `UpdateStackSet` operation is 50.
+    #
+    #  If you need more than 50, consider the following options:
+    #
+    #  * *Batch processing:* If you don't want to expose your OU hierarchy,
+    #   split up the operations into multiple calls with less than 50 OUs
+    #   each.
+    #
+    # * *Parent OU strategy:* If you don't mind exposing the OU hierarchy,
+    #   target a parent OU that contains all desired child OUs.
+    #
+    #  </note>
+    #
     # @option params [required, String] :stack_set_name
     #   The name or unique ID of the stack set that you want to update.
     #
@@ -8222,7 +8321,8 @@ module Aws::CloudFormation
     #   The URL of a file that contains the template body. The URL must point
     #   to a template (maximum size: 1 MB) that is located in an Amazon S3
     #   bucket or a Systems Manager document. The location for an Amazon S3
-    #   bucket must start with `https://`.
+    #   bucket must start with `https://`. S3 static website URLs are not
+    #   supported.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody` or `TemplateURL`—or set `UsePreviousTemplate` to true.
@@ -8299,13 +8399,13 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-accesskey.html
-    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-group.html
-    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
-    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-user.html
-    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-usertogroupaddition.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-accesskey.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-group.html
+    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-instanceprofile.html
+    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html
+    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-role.html
+    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-user.html
+    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-usertogroupaddition.html
     #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html#using-iam-capabilities
     #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
     #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-include.html
@@ -8633,17 +8733,17 @@ module Aws::CloudFormation
     # returns a template validation error.
     #
     # @option params [String] :template_body
-    #   Structure containing the template body with a minimum length of 1 byte
-    #   and a maximum length of 51,200 bytes.
+    #   Structure that contains the template body with a minimum length of 1
+    #   byte and a maximum length of 51,200 bytes.
     #
     #   Conditional: You must pass `TemplateURL` or `TemplateBody`. If both
     #   are passed, only `TemplateBody` is used.
     #
     # @option params [String] :template_url
-    #   The URL of a file containing the template body. The URL must point to
-    #   a template (max size: 1 MB) that is located in an Amazon S3 bucket or
-    #   a Systems Manager document. The location for an Amazon S3 bucket must
-    #   start with `https://`.
+    #   The URL of a file that contains the template body. The URL must point
+    #   to a template (max size: 1 MB) that is located in an Amazon S3 bucket
+    #   or a Systems Manager document. The location for an Amazon S3 bucket
+    #   must start with `https://`.
     #
     #   Conditional: You must pass `TemplateURL` or `TemplateBody`. If both
     #   are passed, only `TemplateBody` is used.
@@ -8704,7 +8804,7 @@ module Aws::CloudFormation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.129.0'
+      context[:gem_version] = '1.134.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -419,6 +419,7 @@ module Aws
                                  ?network_type: ::String,
                                  ?storage_throughput: ::Integer,
                                  ?enable_customer_owned_ip: bool,
+                                 ?backup_target: ::String,
                                  ?allocated_storage: ::Integer,
                                  ?source_db_cluster_identifier: ::String,
                                  ?dedicated_log_volume: bool,

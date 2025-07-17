@@ -111,6 +111,12 @@ module Aws::EC2
       data[:carrier_ip]
     end
 
+    # The ID of the subnet where the IP address is allocated.
+    # @return [String]
+    def subnet_id
+      data[:subnet_id]
+    end
+
     # The service that manages the elastic IP address.
     #
     # <note markdown="1"> The only option supported today is `alb`.

@@ -200,8 +200,7 @@ module Aws::CloudWatch
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -476,8 +475,9 @@ module Aws::CloudWatch
     # composite alarms with one operation, but you can't delete two
     # composite alarms with one operation.
     #
-    # If you specify an incorrect alarm name or make any other error in the
-    # operation, no alarms are deleted. To confirm that alarms were deleted
+    # If you specify any incorrect alarm names, the alarms you specify with
+    # correct names are still deleted. Other syntax errors might result in
+    # no alarms being deleted. To confirm that alarms were deleted
     # successfully, you can use the [DescribeAlarms][1] operation after
     # using `DeleteAlarms`.
     #
@@ -1290,6 +1290,7 @@ module Aws::CloudWatch
     #   resp.insight_rules[0].schema #=> String
     #   resp.insight_rules[0].definition #=> String
     #   resp.insight_rules[0].managed_rule #=> Boolean
+    #   resp.insight_rules[0].apply_on_transformed_logs #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeInsightRules AWS API Documentation
     #
@@ -1702,14 +1703,14 @@ module Aws::CloudWatch
     #     1-hour clock interval. For example, 12:32:34 is rounded down to
     #     12:00:00.
     #
-    #   If you set `Period` to 5, 10, or 30, the start time of your request is
-    #   rounded down to the nearest time that corresponds to even 5-, 10-, or
-    #   30-second divisions of a minute. For example, if you make a query at
-    #   (HH:mm:ss) 01:05:23 for the previous 10-second period, the start time
-    #   of your request is rounded down and you receive data from 01:05:10 to
-    #   01:05:20. If you make a query at 15:07:17 for the previous 5 minutes
-    #   of data, using a period of 5 seconds, you receive data timestamped
-    #   between 15:02:15 and 15:07:15.
+    #   If you set `Period` to 5, 10, 20, or 30, the start time of your
+    #   request is rounded down to the nearest time that corresponds to even
+    #   5-, 10-, 20-, or 30-second divisions of a minute. For example, if you
+    #   make a query at (HH:mm:ss) 01:05:23 for the previous 10-second period,
+    #   the start time of your request is rounded down and you receive data
+    #   from 01:05:10 to 01:05:20. If you make a query at 15:07:17 for the
+    #   previous 5 minutes of data, using a period of 5 seconds, you receive
+    #   data timestamped between 15:02:15 and 15:07:15.
     #
     #   For better performance, specify `StartTime` and `EndTime` values that
     #   align with the value of the metric's `Period` and sync up with the
@@ -1933,14 +1934,14 @@ module Aws::CloudWatch
     #     1-hour clock interval. For example, 12:32:34 is rounded down to
     #     12:00:00.
     #
-    #   If you set `Period` to 5, 10, or 30, the start time of your request is
-    #   rounded down to the nearest time that corresponds to even 5-, 10-, or
-    #   30-second divisions of a minute. For example, if you make a query at
-    #   (HH:mm:ss) 01:05:23 for the previous 10-second period, the start time
-    #   of your request is rounded down and you receive data from 01:05:10 to
-    #   01:05:20. If you make a query at 15:07:17 for the previous 5 minutes
-    #   of data, using a period of 5 seconds, you receive data timestamped
-    #   between 15:02:15 and 15:07:15.
+    #   If you set `Period` to 5, 10, 20, or 30, the start time of your
+    #   request is rounded down to the nearest time that corresponds to even
+    #   5-, 10-, 20-, or 30-second divisions of a minute. For example, if you
+    #   make a query at (HH:mm:ss) 01:05:23 for the previous 10-second period,
+    #   the start time of your request is rounded down and you receive data
+    #   from 01:05:10 to 01:05:20. If you make a query at 15:07:17 for the
+    #   previous 5 minutes of data, using a period of 5 seconds, you receive
+    #   data timestamped between 15:02:15 and 15:07:15.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The time stamp that determines the last data point to return.
@@ -1954,7 +1955,7 @@ module Aws::CloudWatch
     #   with regular resolution, a period can be as short as one minute (60
     #   seconds) and must be a multiple of 60. For high-resolution metrics
     #   that are collected at intervals of less than one minute, the period
-    #   can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution
+    #   can be 1, 5, 10, 20, 30, 60, or any multiple of 60. High-resolution
     #   metrics are those metrics stored by a `PutMetricData` call that
     #   includes a `StorageResolution` of 1 second.
     #
@@ -2372,8 +2373,10 @@ module Aws::CloudWatch
     #   that match exactly will be returned.
     #
     # @option params [Array<Types::DimensionFilter>] :dimensions
-    #   The dimensions to filter against. Only the dimensions that match
-    #   exactly will be returned.
+    #   The dimensions to filter against. Only the dimension with names that
+    #   match exactly will be returned. If you specify one dimension name and
+    #   a metric has that dimension and also other dimensions, it will be
+    #   returned.
     #
     # @option params [String] :next_token
     #   The token returned by a previous call to indicate that there is more
@@ -2746,7 +2749,7 @@ module Aws::CloudWatch
     #
     #   **Start a Amazon Q Developer operational investigation**
     #
-    #   `arn:aws:aiops:region:account-id:investigation-group:ingestigation-group-id
+    #   `arn:aws:aiops:region:account-id:investigation-group:investigation-group-id
     #   `
     #
     # @option params [String] :alarm_description
@@ -3046,6 +3049,28 @@ module Aws::CloudWatch
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html
     #
+    # @option params [Boolean] :apply_on_transformed_logs
+    #   Specify `true` to have this rule evalute log events after they have
+    #   been transformed by [Log transformation][1]. If you specify `true`,
+    #   then the log events in log groups that have transformers will be
+    #   evaluated by Contributor Insights after being transformed. Log groups
+    #   that don't have transformers will still have their original log
+    #   events evaluated by Contributor Insights.
+    #
+    #   The default is `false`
+    #
+    #   <note markdown="1"> If a log group has a transformer, and transformation fails for some
+    #   log events, those log events won't be evaluated by Contributor
+    #   Insights. For information about investigating log transformation
+    #   failures, see [Transformation metrics and errors][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Transformation-Errors-Metrics.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3060,6 +3085,7 @@ module Aws::CloudWatch
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     apply_on_transformed_logs: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutInsightRule AWS API Documentation
@@ -3314,7 +3340,7 @@ module Aws::CloudWatch
     #
     #   **Start a Amazon Q Developer operational investigation**
     #
-    #   `arn:aws:aiops:region:account-id:investigation-group:ingestigation-group-id
+    #   `arn:aws:aiops:region:account-id:investigation-group:investigation-group-id
     #   `
     #
     # @option params [Array<String>] :insufficient_data_actions
@@ -3433,27 +3459,29 @@ module Aws::CloudWatch
     #
     # @option params [Integer] :period
     #   The length, in seconds, used each time the metric specified in
-    #   `MetricName` is evaluated. Valid values are 10, 30, and any multiple
-    #   of 60.
+    #   `MetricName` is evaluated. Valid values are 10, 20, 30, and any
+    #   multiple of 60.
     #
     #   `Period` is required for alarms based on static thresholds. If you are
     #   creating an alarm based on a metric math expression, you specify the
     #   period for each metric within the objects in the `Metrics` array.
     #
-    #   Be sure to specify 10 or 30 only for metrics that are stored by a
+    #   Be sure to specify 10, 20, or 30 only for metrics that are stored by a
     #   `PutMetricData` call with a `StorageResolution` of 1. If you specify a
-    #   period of 10 or 30 for a metric that does not have sub-minute
+    #   period of 10, 20, or 30 for a metric that does not have sub-minute
     #   resolution, the alarm still attempts to gather data at the period rate
     #   that you specify. In this case, it does not receive data for the
     #   attempts that do not correspond to a one-minute data resolution, and
     #   the alarm might often lapse into INSUFFICENT\_DATA status. Specifying
-    #   10 or 30 also sets this alarm as a high-resolution alarm, which has a
-    #   higher charge than other alarms. For more information about pricing,
-    #   see [Amazon CloudWatch Pricing][1].
+    #   10, 20, or 30 also sets this alarm as a high-resolution alarm, which
+    #   has a higher charge than other alarms. For more information about
+    #   pricing, see [Amazon CloudWatch Pricing][1].
     #
-    #   An alarm's total current evaluation period can be no longer than one
-    #   day, so `Period` multiplied by `EvaluationPeriods` cannot be more than
-    #   86,400 seconds.
+    #   An alarm's total current evaluation period can be no longer than
+    #   seven days, so `Period` multiplied by `EvaluationPeriods` can't be
+    #   more than 604,800 seconds. For alarms with a period of less than one
+    #   hour (3,600 seconds), the total evaluation period can't be longer
+    #   than one day (86,400 seconds).
     #
     #
     #
@@ -3489,10 +3517,6 @@ module Aws::CloudWatch
     #   consecutive data points be breaching to trigger the alarm, this value
     #   specifies that number. If you are setting an "M out of N" alarm,
     #   this value is the N.
-    #
-    #   An alarm's total current evaluation period can be no longer than one
-    #   day, so this number multiplied by `Period` cannot be more than 86,400
-    #   seconds.
     #
     # @option params [Integer] :datapoints_to_alarm
     #   The number of data points that must be breaching to trigger the alarm.
@@ -3810,7 +3834,7 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/adding-your-own-related-telemetry.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/adding-your-own-related-telemetry.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4314,7 +4338,7 @@ module Aws::CloudWatch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.112.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

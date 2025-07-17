@@ -239,7 +239,8 @@
         {"shape":"KMSNotFoundException"},
         {"shape":"KMSOptInRequired"},
         {"shape":"KMSThrottlingException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalFailureException"}
       ],
       "staticContextParams":{
         "OperationType":{"value":"data"}
@@ -276,7 +277,8 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidArgumentException"},
         {"shape":"ProvisionedThroughputExceededException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalFailureException"}
       ],
       "staticContextParams":{
         "OperationType":{"value":"data"}
@@ -353,6 +355,25 @@
         {"shape":"InvalidArgumentException"}
       ]
     },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTagsForResourceInput"},
+      "output":{"shape":"ListTagsForResourceOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"}
+      ],
+      "staticContextParams":{
+        "OperationType":{"value":"control"}
+      }
+    },
     "ListTagsForStream":{
       "name":"ListTagsForStream",
       "http":{
@@ -408,7 +429,8 @@
         {"shape":"KMSNotFoundException"},
         {"shape":"KMSOptInRequired"},
         {"shape":"KMSThrottlingException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalFailureException"}
       ],
       "staticContextParams":{
         "OperationType":{"value":"data"}
@@ -432,7 +454,8 @@
         {"shape":"KMSNotFoundException"},
         {"shape":"KMSOptInRequired"},
         {"shape":"KMSThrottlingException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalFailureException"}
       ],
       "staticContextParams":{
         "OperationType":{"value":"data"}
@@ -570,6 +593,42 @@
       ],
       "staticContextParams":{
         "OperationType":{"value":"data"}
+      }
+    },
+    "TagResource":{
+      "name":"TagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TagResourceInput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"}
+      ],
+      "staticContextParams":{
+        "OperationType":{"value":"control"}
+      }
+    },
+    "UntagResource":{
+      "name":"UntagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UntagResourceInput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"}
+      ],
+      "staticContextParams":{
+        "OperationType":{"value":"control"}
       }
     },
     "UpdateShardCount":{
@@ -773,8 +832,7 @@
     },
     "DescribeLimitsInput":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DescribeLimitsOutput":{
       "type":"structure",
@@ -1161,6 +1219,22 @@
         "StreamSummaries":{"shape":"StreamSummaryList"}
       }
     },
+    "ListTagsForResourceInput":{
+      "type":"structure",
+      "required":["ResourceARN"],
+      "members":{
+        "ResourceARN":{
+          "shape":"ResourceARN",
+          "contextParam":{"name":"ResourceARN"}
+        }
+      }
+    },
+    "ListTagsForResourceOutput":{
+      "type":"structure",
+      "members":{
+        "Tags":{"shape":"TagList"}
+      }
+    },
     "ListTagsForStreamInput":{
       "type":"structure",
       "members":{
@@ -1388,7 +1462,8 @@
           "shape":"StreamARN",
           "contextParam":{"name":"StreamARN"}
         },
-        "ConsumerName":{"shape":"ConsumerName"}
+        "ConsumerName":{"shape":"ConsumerName"},
+        "Tags":{"shape":"TagMap"}
       }
     },
     "RegisterStreamConsumerOutput":{
@@ -1769,12 +1844,40 @@
       "max":200,
       "min":1
     },
+    "TagResourceInput":{
+      "type":"structure",
+      "required":[
+        "Tags",
+        "ResourceARN"
+      ],
+      "members":{
+        "Tags":{"shape":"TagMap"},
+        "ResourceARN":{
+          "shape":"ResourceARN",
+          "contextParam":{"name":"ResourceARN"}
+        }
+      }
+    },
     "TagValue":{
       "type":"string",
       "max":256,
       "min":0
     },
     "Timestamp":{"type":"timestamp"},
+    "UntagResourceInput":{
+      "type":"structure",
+      "required":[
+        "TagKeys",
+        "ResourceARN"
+      ],
+      "members":{
+        "TagKeys":{"shape":"TagKeyList"},
+        "ResourceARN":{
+          "shape":"ResourceARN",
+          "contextParam":{"name":"ResourceARN"}
+        }
+      }
+    },
     "UpdateShardCountInput":{
       "type":"structure",
       "required":[

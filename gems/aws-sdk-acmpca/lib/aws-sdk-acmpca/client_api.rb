@@ -257,7 +257,7 @@ module Aws::ACMPCA
     CreatePermissionRequest.add_member(:actions, Shapes::ShapeRef.new(shape: ActionList, required: true, location_name: "Actions"))
     CreatePermissionRequest.struct_class = Types::CreatePermissionRequest
 
-    CrlConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled", metadata: {"box"=>true}))
+    CrlConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled", metadata: {"box" => true}))
     CrlConfiguration.add_member(:expiration_in_days, Shapes::ShapeRef.new(shape: Integer1To5000, location_name: "ExpirationInDays"))
     CrlConfiguration.add_member(:custom_cname, Shapes::ShapeRef.new(shape: CnameString, location_name: "CustomCname"))
     CrlConfiguration.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName3To255, location_name: "S3BucketName"))
@@ -267,7 +267,7 @@ module Aws::ACMPCA
     CrlConfiguration.add_member(:custom_path, Shapes::ShapeRef.new(shape: CrlPathString, location_name: "CustomPath"))
     CrlConfiguration.struct_class = Types::CrlConfiguration
 
-    CrlDistributionPointExtensionConfiguration.add_member(:omit_extension, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "OmitExtension", metadata: {"box"=>true}))
+    CrlDistributionPointExtensionConfiguration.add_member(:omit_extension, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "OmitExtension", metadata: {"box" => true}))
     CrlDistributionPointExtensionConfiguration.struct_class = Types::CrlDistributionPointExtensionConfiguration
 
     CsrExtensions.add_member(:key_usage, Shapes::ShapeRef.new(shape: KeyUsage, location_name: "KeyUsage"))
@@ -282,7 +282,7 @@ module Aws::ACMPCA
 
     CustomExtension.add_member(:object_identifier, Shapes::ShapeRef.new(shape: CustomObjectIdentifier, required: true, location_name: "ObjectIdentifier"))
     CustomExtension.add_member(:value, Shapes::ShapeRef.new(shape: Base64String1To4096, required: true, location_name: "Value"))
-    CustomExtension.add_member(:critical, Shapes::ShapeRef.new(shape: Boolean, location_name: "Critical", metadata: {"box"=>true}))
+    CustomExtension.add_member(:critical, Shapes::ShapeRef.new(shape: Boolean, location_name: "Critical", metadata: {"box" => true}))
     CustomExtension.struct_class = Types::CustomExtension
 
     CustomExtensionList.member = Shapes::ShapeRef.new(shape: CustomExtension)
@@ -460,7 +460,7 @@ module Aws::ACMPCA
     MalformedCertificateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     MalformedCertificateException.struct_class = Types::MalformedCertificateException
 
-    OcspConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled", metadata: {"box"=>true}))
+    OcspConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled", metadata: {"box" => true}))
     OcspConfiguration.add_member(:ocsp_custom_cname, Shapes::ShapeRef.new(shape: CnameString, location_name: "OcspCustomCname"))
     OcspConfiguration.struct_class = Types::OcspConfiguration
 

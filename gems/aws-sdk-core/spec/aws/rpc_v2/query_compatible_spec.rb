@@ -19,13 +19,32 @@ module Aws
               'Foo' => {
                 'name' => 'Foo',
                 'http' => { 'method' => 'POST', 'requestUri' => '/' },
-                'input' => { 'shape' => 'FooInput' }
+                'input' => { 'shape' => 'FooInput' },
+                'output' => { 'shape' => 'FooOutput'}
               }
             },
             'shapes' => {
               'FooInput' => {
                 'type' => 'structure',
                 'members' => {}
+              },
+              'FooOutput' => {
+                'type' => 'structure',
+                'members' => {
+                  'FlattenedList' => { 'shape' => 'FlattenedList' },
+                  'FlattenedMap' => { 'shape' => 'FlattenedMap' }
+                }
+              },
+              'FlattenedList' => {
+                'type' => 'list',
+                'member' => { 'shape' => 'String' },
+                'flattened' => true
+              },
+              'FlattenedMap' => {
+                'type' => 'map',
+                'key' => { 'shape' => 'String' },
+                'value' => { 'shape' => 'String' },
+                'flattened' => true
               },
               'String' => { 'type' => 'string' }
             }
@@ -86,6 +105,20 @@ module Aws
         resp = client.foo
         header = resp.context.http_request.headers['x-amzn-query-mode']
         expect(header).to eq('true')
+      end
+
+      before do
+        # nil values for flattened members need to be parsed as empty arrays
+        # and hashes to preserve backwards compatibility with Query/XML
+        client.stub_responses(:foo, {})
+      end
+
+      it 'defaults flattened list to empty array' do
+        expect(client.foo.flattened_list).to be_a(Array)
+      end
+
+      it 'defaults flattened map to empty hash' do
+        expect(client.foo.flattened_map).to be_a(Hash)
       end
     end
   end

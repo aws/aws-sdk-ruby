@@ -134,7 +134,7 @@ module Aws::Route53Resolver
       attr_accessor creator_request_id: ::String
       attr_accessor name: ::String
       attr_accessor security_group_ids: ::Array[::String]
-      attr_accessor direction: ("INBOUND" | "OUTBOUND")
+      attr_accessor direction: ("INBOUND" | "OUTBOUND" | "INBOUND_DELEGATION")
       attr_accessor ip_addresses: ::Array[Types::IpAddressRequest]
       attr_accessor outpost_arn: ::String
       attr_accessor preferred_instance_type: ::String
@@ -165,11 +165,12 @@ module Aws::Route53Resolver
     class CreateResolverRuleRequest
       attr_accessor creator_request_id: ::String
       attr_accessor name: ::String
-      attr_accessor rule_type: ("FORWARD" | "SYSTEM" | "RECURSIVE")
+      attr_accessor rule_type: ("FORWARD" | "SYSTEM" | "RECURSIVE" | "DELEGATE")
       attr_accessor domain_name: ::String
       attr_accessor target_ips: ::Array[Types::TargetAddress]
       attr_accessor resolver_endpoint_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor delegation_record: ::String
       SENSITIVE: []
     end
 
@@ -602,7 +603,7 @@ module Aws::Route53Resolver
       attr_accessor subnet_id: ::String
       attr_accessor ip: ::String
       attr_accessor ipv_6: ::String
-      attr_accessor status: ("CREATING" | "FAILED_CREATION" | "ATTACHING" | "ATTACHED" | "REMAP_DETACHING" | "REMAP_ATTACHING" | "DETACHING" | "FAILED_RESOURCE_GONE" | "DELETING" | "DELETE_FAILED_FAS_EXPIRED" | "UPDATING" | "UPDATE_FAILED")
+      attr_accessor status: ("CREATING" | "FAILED_CREATION" | "ATTACHING" | "ATTACHED" | "REMAP_DETACHING" | "REMAP_ATTACHING" | "DETACHING" | "FAILED_RESOURCE_GONE" | "DELETING" | "DELETE_FAILED_FAS_EXPIRED" | "UPDATING" | "UPDATE_FAILED" | "ISOLATED")
       attr_accessor status_message: ::String
       attr_accessor creation_time: ::String
       attr_accessor modification_time: ::String
@@ -914,7 +915,7 @@ module Aws::Route53Resolver
       attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor security_group_ids: ::Array[::String]
-      attr_accessor direction: ("INBOUND" | "OUTBOUND")
+      attr_accessor direction: ("INBOUND" | "OUTBOUND" | "INBOUND_DELEGATION")
       attr_accessor ip_address_count: ::Integer
       attr_accessor host_vpc_id: ::String
       attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "AUTO_RECOVERING" | "ACTION_NEEDED" | "DELETING")
@@ -960,7 +961,7 @@ module Aws::Route53Resolver
       attr_accessor domain_name: ::String
       attr_accessor status: ("COMPLETE" | "DELETING" | "UPDATING" | "FAILED")
       attr_accessor status_message: ::String
-      attr_accessor rule_type: ("FORWARD" | "SYSTEM" | "RECURSIVE")
+      attr_accessor rule_type: ("FORWARD" | "SYSTEM" | "RECURSIVE" | "DELEGATE")
       attr_accessor name: ::String
       attr_accessor target_ips: ::Array[Types::TargetAddress]
       attr_accessor resolver_endpoint_id: ::String
@@ -968,6 +969,7 @@ module Aws::Route53Resolver
       attr_accessor share_status: ("NOT_SHARED" | "SHARED_WITH_ME" | "SHARED_BY_ME")
       attr_accessor creation_time: ::String
       attr_accessor modification_time: ::String
+      attr_accessor delegation_record: ::String
       SENSITIVE: []
     end
 

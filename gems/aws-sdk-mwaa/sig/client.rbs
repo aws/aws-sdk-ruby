@@ -274,21 +274,10 @@ module Aws
       def update_environment: (
                                 name: ::String,
                                 ?execution_role_arn: ::String,
-                                ?airflow_version: ::String,
-                                ?source_bucket_arn: ::String,
-                                ?dag_s3_path: ::String,
-                                ?plugins_s3_path: ::String,
-                                ?plugins_s3_object_version: ::String,
-                                ?requirements_s3_path: ::String,
-                                ?requirements_s3_object_version: ::String,
-                                ?startup_script_s3_path: ::String,
-                                ?startup_script_s3_object_version: ::String,
                                 ?airflow_configuration_options: Hash[::String, ::String],
+                                ?airflow_version: ::String,
+                                ?dag_s3_path: ::String,
                                 ?environment_class: ::String,
-                                ?max_workers: ::Integer,
-                                ?network_configuration: {
-                                  security_group_ids: Array[::String]
-                                },
                                 ?logging_configuration: {
                                   dag_processing_logs: {
                                     enabled: bool,
@@ -311,12 +300,24 @@ module Aws
                                     log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
                                   }?
                                 },
-                                ?weekly_maintenance_window_start: ::String,
-                                ?webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY"),
+                                ?max_workers: ::Integer,
                                 ?min_workers: ::Integer,
-                                ?schedulers: ::Integer,
+                                ?max_webservers: ::Integer,
                                 ?min_webservers: ::Integer,
-                                ?max_webservers: ::Integer
+                                ?worker_replacement_strategy: ("FORCED" | "GRACEFUL"),
+                                ?network_configuration: {
+                                  security_group_ids: Array[::String]
+                                },
+                                ?plugins_s3_path: ::String,
+                                ?plugins_s3_object_version: ::String,
+                                ?requirements_s3_path: ::String,
+                                ?requirements_s3_object_version: ::String,
+                                ?schedulers: ::Integer,
+                                ?source_bucket_arn: ::String,
+                                ?startup_script_s3_path: ::String,
+                                ?startup_script_s3_object_version: ::String,
+                                ?webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY"),
+                                ?weekly_maintenance_window_start: ::String
                               ) -> _UpdateEnvironmentResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentResponseSuccess
     end

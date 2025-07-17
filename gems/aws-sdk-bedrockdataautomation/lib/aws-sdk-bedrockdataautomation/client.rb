@@ -200,8 +200,7 @@ module Aws::BedrockDataAutomation
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -504,7 +503,7 @@ module Aws::BedrockDataAutomation
     #
     #   resp = client.create_blueprint({
     #     blueprint_name: "BlueprintName", # required
-    #     type: "DOCUMENT", # required, accepts DOCUMENT, IMAGE
+    #     type: "DOCUMENT", # required, accepts DOCUMENT, IMAGE, AUDIO, VIDEO
     #     blueprint_stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
     #     schema: "BlueprintSchema", # required
     #     client_token: "ClientToken",
@@ -526,7 +525,7 @@ module Aws::BedrockDataAutomation
     #
     #   resp.blueprint.blueprint_arn #=> String
     #   resp.blueprint.schema #=> String
-    #   resp.blueprint.type #=> String, one of "DOCUMENT", "IMAGE"
+    #   resp.blueprint.type #=> String, one of "DOCUMENT", "IMAGE", "AUDIO", "VIDEO"
     #   resp.blueprint.creation_time #=> Time
     #   resp.blueprint.last_modified_time #=> Time
     #   resp.blueprint.blueprint_name #=> String
@@ -572,7 +571,7 @@ module Aws::BedrockDataAutomation
     #
     #   resp.blueprint.blueprint_arn #=> String
     #   resp.blueprint.schema #=> String
-    #   resp.blueprint.type #=> String, one of "DOCUMENT", "IMAGE"
+    #   resp.blueprint.type #=> String, one of "DOCUMENT", "IMAGE", "AUDIO", "VIDEO"
     #   resp.blueprint.creation_time #=> Time
     #   resp.blueprint.last_modified_time #=> Time
     #   resp.blueprint.blueprint_name #=> String
@@ -854,7 +853,7 @@ module Aws::BedrockDataAutomation
     #
     #   resp.blueprint.blueprint_arn #=> String
     #   resp.blueprint.schema #=> String
-    #   resp.blueprint.type #=> String, one of "DOCUMENT", "IMAGE"
+    #   resp.blueprint.type #=> String, one of "DOCUMENT", "IMAGE", "AUDIO", "VIDEO"
     #   resp.blueprint.creation_time #=> Time
     #   resp.blueprint.last_modified_time #=> Time
     #   resp.blueprint.blueprint_name #=> String
@@ -1195,7 +1194,7 @@ module Aws::BedrockDataAutomation
     #
     #   resp.blueprint.blueprint_arn #=> String
     #   resp.blueprint.schema #=> String
-    #   resp.blueprint.type #=> String, one of "DOCUMENT", "IMAGE"
+    #   resp.blueprint.type #=> String, one of "DOCUMENT", "IMAGE", "AUDIO", "VIDEO"
     #   resp.blueprint.creation_time #=> Time
     #   resp.blueprint.last_modified_time #=> Time
     #   resp.blueprint.blueprint_name #=> String
@@ -1396,7 +1395,7 @@ module Aws::BedrockDataAutomation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockdataautomation'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2025-07-03)
+------------------
+
+* Feature - Added fields for output manifest reporting and task chunking parameters
+
+1.28.0 (2025-06-26)
+------------------
+
+* Feature - Added fields to track cumulative task retry attempts for steps and jobs
+
+1.27.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2025-05-27)
+------------------
+
+* Feature - AWS Deadline Cloud service-managed fleets now support storage profiles. With storage profiles, you can map file paths between a workstation and the worker hosts running the job.
+
+1.25.0 (2025-05-12)
+------------------
+
+* Feature - AWS Deadline Cloud service-managed fleets now support configuration scripts. Configuration scripts make it easy to install additional software, like plugins and packages, onto a worker.
+
+1.24.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2025-04-30)
+------------------
+
+* Feature - Adds support for tag management on workers and tag inheritance from fleets to their associated workers.
+
 1.22.0 (2025-03-31)
 ------------------
 

@@ -59,6 +59,7 @@ module Aws::S3Tables
     GetTableRequest = Shapes::StructureShape.new(name: 'GetTableRequest')
     GetTableResponse = Shapes::StructureShape.new(name: 'GetTableResponse')
     IcebergCompactionSettings = Shapes::StructureShape.new(name: 'IcebergCompactionSettings')
+    IcebergCompactionStrategy = Shapes::StringShape.new(name: 'IcebergCompactionStrategy')
     IcebergMetadata = Shapes::StructureShape.new(name: 'IcebergMetadata')
     IcebergSchema = Shapes::StructureShape.new(name: 'IcebergSchema')
     IcebergSnapshotManagementSettings = Shapes::StructureShape.new(name: 'IcebergSnapshotManagementSettings')
@@ -110,6 +111,7 @@ module Aws::S3Tables
     TableBucketName = Shapes::StringShape.new(name: 'TableBucketName')
     TableBucketSummary = Shapes::StructureShape.new(name: 'TableBucketSummary')
     TableBucketSummaryList = Shapes::ListShape.new(name: 'TableBucketSummaryList')
+    TableBucketType = Shapes::StringShape.new(name: 'TableBucketType')
     TableMaintenanceConfiguration = Shapes::MapShape.new(name: 'TableMaintenanceConfiguration')
     TableMaintenanceConfigurationValue = Shapes::StructureShape.new(name: 'TableMaintenanceConfigurationValue')
     TableMaintenanceJobStatus = Shapes::MapShape.new(name: 'TableMaintenanceJobStatus')
@@ -236,6 +238,7 @@ module Aws::S3Tables
     GetTableBucketResponse.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "ownerAccountId"))
     GetTableBucketResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
     GetTableBucketResponse.add_member(:table_bucket_id, Shapes::ShapeRef.new(shape: TableBucketId, location_name: "tableBucketId"))
+    GetTableBucketResponse.add_member(:type, Shapes::ShapeRef.new(shape: TableBucketType, location_name: "type"))
     GetTableBucketResponse.struct_class = Types::GetTableBucketResponse
 
     GetTableEncryptionRequest.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: TableBucketARN, required: true, location: "uri", location_name: "tableBucketARN"))
@@ -282,9 +285,10 @@ module Aws::S3Tables
     GetTablePolicyResponse.add_member(:resource_policy, Shapes::ShapeRef.new(shape: ResourcePolicy, required: true, location_name: "resourcePolicy"))
     GetTablePolicyResponse.struct_class = Types::GetTablePolicyResponse
 
-    GetTableRequest.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: TableBucketARN, required: true, location: "uri", location_name: "tableBucketARN"))
-    GetTableRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location: "uri", location_name: "namespace"))
-    GetTableRequest.add_member(:name, Shapes::ShapeRef.new(shape: TableName, required: true, location: "uri", location_name: "name"))
+    GetTableRequest.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: TableBucketARN, location: "querystring", location_name: "tableBucketARN"))
+    GetTableRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: NamespaceName, location: "querystring", location_name: "namespace"))
+    GetTableRequest.add_member(:name, Shapes::ShapeRef.new(shape: TableName, location: "querystring", location_name: "name"))
+    GetTableRequest.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableARN, location: "querystring", location_name: "tableArn"))
     GetTableRequest.struct_class = Types::GetTableRequest
 
     GetTableResponse.add_member(:name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "name"))
@@ -306,6 +310,7 @@ module Aws::S3Tables
     GetTableResponse.struct_class = Types::GetTableResponse
 
     IcebergCompactionSettings.add_member(:target_file_size_mb, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "targetFileSizeMB"))
+    IcebergCompactionSettings.add_member(:strategy, Shapes::ShapeRef.new(shape: IcebergCompactionStrategy, location_name: "strategy"))
     IcebergCompactionSettings.struct_class = Types::IcebergCompactionSettings
 
     IcebergMetadata.add_member(:schema, Shapes::ShapeRef.new(shape: IcebergSchema, required: true, location_name: "schema"))
@@ -338,6 +343,7 @@ module Aws::S3Tables
     ListTableBucketsRequest.add_member(:prefix, Shapes::ShapeRef.new(shape: ListTableBucketsRequestPrefixString, location: "querystring", location_name: "prefix"))
     ListTableBucketsRequest.add_member(:continuation_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "continuationToken"))
     ListTableBucketsRequest.add_member(:max_buckets, Shapes::ShapeRef.new(shape: ListTableBucketsLimit, location: "querystring", location_name: "maxBuckets"))
+    ListTableBucketsRequest.add_member(:type, Shapes::ShapeRef.new(shape: TableBucketType, location: "querystring", location_name: "type"))
     ListTableBucketsRequest.struct_class = Types::ListTableBucketsRequest
 
     ListTableBucketsResponse.add_member(:table_buckets, Shapes::ShapeRef.new(shape: TableBucketSummaryList, required: true, location_name: "tableBuckets"))
@@ -429,6 +435,7 @@ module Aws::S3Tables
     TableBucketSummary.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "ownerAccountId"))
     TableBucketSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
     TableBucketSummary.add_member(:table_bucket_id, Shapes::ShapeRef.new(shape: TableBucketId, location_name: "tableBucketId"))
+    TableBucketSummary.add_member(:type, Shapes::ShapeRef.new(shape: TableBucketType, location_name: "type"))
     TableBucketSummary.struct_class = Types::TableBucketSummary
 
     TableBucketSummaryList.member = Shapes::ShapeRef.new(shape: TableBucketSummary)
@@ -654,7 +661,7 @@ module Aws::S3Tables
       api.add_operation(:get_table, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTable"
         o.http_method = "GET"
-        o.http_request_uri = "/tables/{tableBucketARN}/{namespace}/{name}"
+        o.http_request_uri = "/get-table"
         o.input = Shapes::ShapeRef.new(shape: GetTableRequest)
         o.output = Shapes::ShapeRef.new(shape: GetTableResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)

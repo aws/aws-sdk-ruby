@@ -164,6 +164,7 @@ module Aws
         def subnet_id: () -> ::String
         def life_cycle_state: () -> ("creating" | "available" | "updating" | "deleting" | "deleted" | "error")
         def ip_address: () -> ::String
+        def ipv_6_address: () -> ::String
         def network_interface_id: () -> ::String
         def availability_zone_id: () -> ::String
         def availability_zone_name: () -> ::String
@@ -174,6 +175,8 @@ module Aws
                                  file_system_id: ::String,
                                  subnet_id: ::String,
                                  ?ip_address: ::String,
+                                 ?ipv_6_address: ::String,
+                                 ?ip_address_type: ("IPV4_ONLY" | "IPV6_ONLY" | "DUAL_STACK"),
                                  ?security_groups: Array[::String]
                                ) -> _CreateMountTargetResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMountTargetResponseSuccess

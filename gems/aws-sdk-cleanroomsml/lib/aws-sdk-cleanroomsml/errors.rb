@@ -29,8 +29,10 @@ module Aws::CleanRoomsML
   # ## Error Classes
   # * {AccessDeniedException}
   # * {ConflictException}
+  # * {InternalServiceException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
+  # * {ThrottlingException}
   # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -69,6 +71,21 @@ module Aws::CleanRoomsML
       end
     end
 
+    class InternalServiceException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CleanRoomsML::Types::InternalServiceException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class ResourceNotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -89,6 +106,31 @@ module Aws::CleanRoomsML
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CleanRoomsML::Types::ServiceQuotaExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def quota_name
+        @data[:quota_name]
+      end
+
+      # @return [String]
+      def quota_value
+        @data[:quota_value]
+      end
+    end
+
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CleanRoomsML::Types::ThrottlingException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -3909,6 +3909,7 @@
         "hyperPodProperties":{"shape":"HyperPodPropertiesInput"},
         "iamProperties":{"shape":"IamPropertiesInput"},
         "redshiftProperties":{"shape":"RedshiftPropertiesInput"},
+        "s3Properties":{"shape":"S3PropertiesInput"},
         "sparkEmrProperties":{"shape":"SparkEmrPropertiesInput"},
         "sparkGlueProperties":{"shape":"SparkGluePropertiesInput"}
       },
@@ -3922,6 +3923,7 @@
         "hyperPodProperties":{"shape":"HyperPodPropertiesOutput"},
         "iamProperties":{"shape":"IamPropertiesOutput"},
         "redshiftProperties":{"shape":"RedshiftPropertiesOutput"},
+        "s3Properties":{"shape":"S3PropertiesOutput"},
         "sparkEmrProperties":{"shape":"SparkEmrPropertiesOutput"},
         "sparkGlueProperties":{"shape":"SparkGluePropertiesOutput"}
       },
@@ -3934,6 +3936,7 @@
         "glueProperties":{"shape":"GluePropertiesPatch"},
         "iamProperties":{"shape":"IamPropertiesPatch"},
         "redshiftProperties":{"shape":"RedshiftPropertiesPatch"},
+        "s3Properties":{"shape":"S3PropertiesPatch"},
         "sparkEmrProperties":{"shape":"SparkEmrPropertiesPatch"}
       },
       "union":true
@@ -3997,6 +4000,7 @@
         "ORACLE",
         "POSTGRESQL",
         "REDSHIFT",
+        "S3",
         "SAPHANA",
         "SNOWFLAKE",
         "SPARK",
@@ -4605,7 +4609,6 @@
       "type":"structure",
       "required":[
         "domainIdentifier",
-        "environmentProfileIdentifier",
         "name",
         "projectIdentifier"
       ],
@@ -11075,7 +11078,8 @@
         "DELEGATE_CREATE_ENVIRONMENT_PROFILE",
         "CREATE_ENVIRONMENT",
         "CREATE_ENVIRONMENT_FROM_BLUEPRINT",
-        "CREATE_PROJECT_FROM_PROJECT_PROFILE"
+        "CREATE_PROJECT_FROM_PROJECT_PROFILE",
+        "USE_ASSET_TYPE"
       ]
     },
     "MatchCriteria":{
@@ -11540,7 +11544,8 @@
         "createProjectFromProjectProfile":{"shape":"CreateProjectFromProjectProfilePolicyGrantDetail"},
         "delegateCreateEnvironmentProfile":{"shape":"Unit"},
         "overrideDomainUnitOwners":{"shape":"OverrideDomainUnitOwnersPolicyGrantDetail"},
-        "overrideProjectOwners":{"shape":"OverrideProjectOwnersPolicyGrantDetail"}
+        "overrideProjectOwners":{"shape":"OverrideProjectOwnersPolicyGrantDetail"},
+        "useAssetType":{"shape":"UseAssetTypePolicyGrantDetail"}
       },
       "union":true
     },
@@ -12577,6 +12582,12 @@
         "updated":{"shape":"Integer"}
       }
     },
+    "S3AccessGrantLocationId":{
+      "type":"string",
+      "max":64,
+      "min":0,
+      "pattern":"^[a-zA-Z0-9\\-]+$"
+    },
     "S3Location":{
       "type":"string",
       "max":1024,
@@ -12588,6 +12599,38 @@
       "member":{"shape":"S3Location"},
       "max":20,
       "min":0
+    },
+    "S3PropertiesInput":{
+      "type":"structure",
+      "required":["s3Uri"],
+      "members":{
+        "s3AccessGrantLocationId":{"shape":"S3AccessGrantLocationId"},
+        "s3Uri":{"shape":"S3Uri"}
+      }
+    },
+    "S3PropertiesOutput":{
+      "type":"structure",
+      "required":["s3Uri"],
+      "members":{
+        "errorMessage":{"shape":"String"},
+        "s3AccessGrantLocationId":{"shape":"S3AccessGrantLocationId"},
+        "s3Uri":{"shape":"S3Uri"},
+        "status":{"shape":"ConnectionStatus"}
+      }
+    },
+    "S3PropertiesPatch":{
+      "type":"structure",
+      "required":["s3Uri"],
+      "members":{
+        "s3AccessGrantLocationId":{"shape":"S3AccessGrantLocationId"},
+        "s3Uri":{"shape":"S3Uri"}
+      }
+    },
+    "S3Uri":{
+      "type":"string",
+      "max":2048,
+      "min":0,
+      "pattern":"^s3://.+$"
     },
     "SageMakerAssetType":{
       "type":"string",
@@ -13643,7 +13686,8 @@
       "enum":[
         "DOMAIN_UNIT",
         "ENVIRONMENT_BLUEPRINT_CONFIGURATION",
-        "ENVIRONMENT_PROFILE"
+        "ENVIRONMENT_PROFILE",
+        "ASSET_TYPE"
       ]
     },
     "TaskId":{
@@ -14476,6 +14520,7 @@
           "location":"uri",
           "locationName":"domainIdentifier"
         },
+        "domainUnitId":{"shape":"DomainUnitId"},
         "environmentDeploymentDetails":{"shape":"EnvironmentDeploymentDetails"},
         "glossaryTerms":{"shape":"GlossaryTerms"},
         "identifier":{
@@ -14835,6 +14880,12 @@
     },
     "UpdatedAt":{"type":"timestamp"},
     "UpdatedBy":{"type":"string"},
+    "UseAssetTypePolicyGrantDetail":{
+      "type":"structure",
+      "members":{
+        "domainUnitId":{"shape":"DomainUnitId"}
+      }
+    },
     "UserAssignment":{
       "type":"string",
       "enum":[

@@ -1175,6 +1175,9 @@ module Aws::ApiGatewayV2
     #   name.
     #   @return [Types::MutualTlsAuthenticationInput]
     #
+    # @!attribute [rw] routing_mode
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The collection of tags associated with a domain name.
     #   @return [Hash<String,String>]
@@ -1183,6 +1186,7 @@ module Aws::ApiGatewayV2
       :domain_name,
       :domain_name_configurations,
       :mutual_tls_authentication,
+      :routing_mode,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1202,6 +1206,9 @@ module Aws::ApiGatewayV2
     #   certificate to access your API.
     #   @return [Types::MutualTlsAuthenticationInput]
     #
+    # @!attribute [rw] routing_mode
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   Represents a collection of tags associated with the resource.
     #   @return [Hash<String,String>]
@@ -1210,6 +1217,7 @@ module Aws::ApiGatewayV2
       :domain_name,
       :domain_name_configurations,
       :mutual_tls_authentication,
+      :routing_mode,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1228,6 +1236,10 @@ module Aws::ApiGatewayV2
     #   A string with a length between \[1-512\].
     #   @return [String]
     #
+    # @!attribute [rw] domain_name_arn
+    #   Represents an Amazon Resource Name (ARN).
+    #   @return [String]
+    #
     # @!attribute [rw] domain_name_configurations
     #   The domain name configurations.
     #   @return [Array<Types::DomainNameConfiguration>]
@@ -1238,6 +1250,9 @@ module Aws::ApiGatewayV2
     #   certificate to access your API.
     #   @return [Types::MutualTlsAuthentication]
     #
+    # @!attribute [rw] routing_mode
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   Represents a collection of tags associated with the resource.
     #   @return [Hash<String,String>]
@@ -1245,8 +1260,10 @@ module Aws::ApiGatewayV2
     class CreateDomainNameResponse < Struct.new(
       :api_mapping_selection_expression,
       :domain_name,
+      :domain_name_arn,
       :domain_name_configurations,
       :mutual_tls_authentication,
+      :routing_mode,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2454,6 +2471,60 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] actions
+    #   @return [Array<Types::RoutingRuleAction>]
+    #
+    # @!attribute [rw] conditions
+    #   @return [Array<Types::RoutingRuleCondition>]
+    #
+    # @!attribute [rw] domain_name
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name_id
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   Represents the priority of the routing rule.
+    #   @return [Integer]
+    #
+    class CreateRoutingRuleRequest < Struct.new(
+      :actions,
+      :conditions,
+      :domain_name,
+      :domain_name_id,
+      :priority)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] actions
+    #   @return [Array<Types::RoutingRuleAction>]
+    #
+    # @!attribute [rw] conditions
+    #   @return [Array<Types::RoutingRuleCondition>]
+    #
+    # @!attribute [rw] priority
+    #   Represents the priority of the routing rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] routing_rule_arn
+    #   Represents an Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_rule_id
+    #   The identifier.
+    #   @return [String]
+    #
+    class CreateRoutingRuleResponse < Struct.new(
+      :actions,
+      :conditions,
+      :priority,
+      :routing_rule_arn,
+      :routing_rule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input parameters for a CreateStage request.
     #
     # @!attribute [rw] access_log_settings
@@ -2931,6 +3002,23 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_name
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name_id
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_rule_id
+    #   @return [String]
+    #
+    class DeleteRoutingRuleRequest < Struct.new(
+      :domain_name,
+      :domain_name_id,
+      :routing_rule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] api_id
     #   @return [String]
     #
@@ -3025,6 +3113,10 @@ module Aws::ApiGatewayV2
     #   The name of the DomainName resource.
     #   @return [String]
     #
+    # @!attribute [rw] domain_name_arn
+    #   Represents an Amazon Resource Name (ARN).
+    #   @return [String]
+    #
     # @!attribute [rw] domain_name_configurations
     #   The domain name configurations.
     #   @return [Array<Types::DomainNameConfiguration>]
@@ -3034,6 +3126,9 @@ module Aws::ApiGatewayV2
     #   name.
     #   @return [Types::MutualTlsAuthentication]
     #
+    # @!attribute [rw] routing_mode
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The collection of tags associated with a domain name.
     #   @return [Hash<String,String>]
@@ -3041,8 +3136,10 @@ module Aws::ApiGatewayV2
     class DomainName < Struct.new(
       :api_mapping_selection_expression,
       :domain_name,
+      :domain_name_arn,
       :domain_name_configurations,
       :mutual_tls_authentication,
+      :routing_mode,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -3631,6 +3728,10 @@ module Aws::ApiGatewayV2
     #   A string with a length between \[1-512\].
     #   @return [String]
     #
+    # @!attribute [rw] domain_name_arn
+    #   Represents an Amazon Resource Name (ARN).
+    #   @return [String]
+    #
     # @!attribute [rw] domain_name_configurations
     #   The domain name configurations.
     #   @return [Array<Types::DomainNameConfiguration>]
@@ -3641,6 +3742,9 @@ module Aws::ApiGatewayV2
     #   certificate to access your API.
     #   @return [Types::MutualTlsAuthentication]
     #
+    # @!attribute [rw] routing_mode
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   Represents a collection of tags associated with the resource.
     #   @return [Hash<String,String>]
@@ -3648,8 +3752,10 @@ module Aws::ApiGatewayV2
     class GetDomainNameResponse < Struct.new(
       :api_mapping_selection_expression,
       :domain_name,
+      :domain_name_arn,
       :domain_name_configurations,
       :mutual_tls_authentication,
+      :routing_mode,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -4356,6 +4462,87 @@ module Aws::ApiGatewayV2
     class GetStageRequest < Struct.new(
       :api_id,
       :stage_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name_id
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_rule_id
+    #   @return [String]
+    #
+    class GetRoutingRuleRequest < Struct.new(
+      :domain_name,
+      :domain_name_id,
+      :routing_rule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] actions
+    #   @return [Array<Types::RoutingRuleAction>]
+    #
+    # @!attribute [rw] conditions
+    #   @return [Array<Types::RoutingRuleCondition>]
+    #
+    # @!attribute [rw] priority
+    #   Represents the priority of the routing rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] routing_rule_arn
+    #   Represents an Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_rule_id
+    #   The identifier.
+    #   @return [String]
+    #
+    class GetRoutingRuleResponse < Struct.new(
+      :actions,
+      :conditions,
+      :priority,
+      :routing_rule_arn,
+      :routing_rule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name_id
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    class ListRoutingRulesRequest < Struct.new(
+      :domain_name,
+      :domain_name_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The next page of elements from this collection. Not valid for the
+    #   last element of the collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_rules
+    #   @return [Array<Types::RoutingRule>]
+    #
+    class ListRoutingRulesResponse < Struct.new(
+      :next_token,
+      :routing_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5246,6 +5433,64 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] actions
+    #   @return [Array<Types::RoutingRuleAction>]
+    #
+    # @!attribute [rw] conditions
+    #   @return [Array<Types::RoutingRuleCondition>]
+    #
+    # @!attribute [rw] domain_name
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name_id
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   Represents the priority of the routing rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] routing_rule_id
+    #   @return [String]
+    #
+    class PutRoutingRuleRequest < Struct.new(
+      :actions,
+      :conditions,
+      :domain_name,
+      :domain_name_id,
+      :priority,
+      :routing_rule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] actions
+    #   @return [Array<Types::RoutingRuleAction>]
+    #
+    # @!attribute [rw] conditions
+    #   @return [Array<Types::RoutingRuleCondition>]
+    #
+    # @!attribute [rw] priority
+    #   Represents the priority of the routing rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] routing_rule_arn
+    #   Represents an Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_rule_id
+    #   The identifier.
+    #   @return [String]
+    #
+    class PutRoutingRuleResponse < Struct.new(
+      :actions,
+      :conditions,
+      :priority,
+      :routing_rule_arn,
+      :routing_rule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Overwrites the configuration of an existing API using the provided
     # definition. Supported only for HTTP APIs.
     #
@@ -5572,6 +5817,186 @@ module Aws::ApiGatewayV2
     class Routes < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a routing rule.
+    #
+    # @!attribute [rw] actions
+    #   @return [Array<Types::RoutingRuleAction>]
+    #
+    # @!attribute [rw] conditions
+    #   @return [Array<Types::RoutingRuleCondition>]
+    #
+    # @!attribute [rw] priority
+    #   Represents the priority of the routing rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] routing_rule_arn
+    #   Represents an Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_rule_id
+    #   The ID of the routing rule.
+    #   @return [String]
+    #
+    class RoutingRule < Struct.new(
+      :actions,
+      :conditions,
+      :priority,
+      :routing_rule_arn,
+      :routing_rule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a routing rule action. The only supported action is
+    # invokeApi.
+    #
+    # @!attribute [rw] invoke_api
+    #   Action to invoke a stage of a target API. Only REST APIs are
+    #   supported.
+    #   @return [Types::RoutingRuleActionInvokeApi]
+    #
+    class RoutingRuleAction < Struct.new(
+      :invoke_api)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents an InvokeApi action.
+    #
+    # @!attribute [rw] api_id
+    #   Action to invoke a stage of a target API. Only REST APIs are
+    #   supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage
+    #   The name of the target stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] strip_base_path
+    #   The strip base path setting. When true, API Gateway strips the
+    #   incoming matched base path when forwarding the request to the target
+    #   API.
+    #   @return [Boolean]
+    #
+    class RoutingRuleActionInvokeApi < Struct.new(
+      :api_id,
+      :stage,
+      :strip_base_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a condition. Conditions can contain up to two matchHeaders
+    # conditions and one matchBasePaths conditions. API Gateway evaluates
+    # header conditions and base path conditions together. You can only use
+    # AND between header and base path conditions.
+    #
+    # @!attribute [rw] match_base_paths
+    #   The base path to be matched.
+    #   @return [Types::RoutingRuleMatchBasePaths]
+    #
+    # @!attribute [rw] match_headers
+    #   The header to be matched.
+    #   @return [Types::RoutingRuleMatchHeaders]
+    #
+    class RoutingRuleCondition < Struct.new(
+      :match_base_paths,
+      :match_headers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the input parameters for an RoutingRule request.
+    #
+    # @!attribute [rw] actions
+    #   The elements from this collection.
+    #   @return [Array<Types::RoutingRuleAction>]
+    #
+    # @!attribute [rw] conditions
+    #   The elements from this collection.
+    #   @return [Array<Types::RoutingRuleCondition>]
+    #
+    # @!attribute [rw] priority
+    #   The order in which API Gateway evaluates a rule. Priority is
+    #   evaluated from the lowest value to the highest value. Rules can't
+    #   have the same priority. Priority values 1-1,000,000 are supported.
+    #   @return [Integer]
+    #
+    class RoutingRuleInput < Struct.new(
+      :actions,
+      :conditions,
+      :priority)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a MatchBasePaths condition.
+    #
+    # @!attribute [rw] any_of
+    #   The elements from this collection.
+    #   @return [Array<String>]
+    #
+    class RoutingRuleMatchBasePaths < Struct.new(
+      :any_of)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a MatchHeaderValue.
+    #
+    # @!attribute [rw] header
+    #   The case insensitive header name to be matched. The header name must
+    #   be less than 40 characters and the only allowed characters are a-z,
+    #   A-Z, 0-9, and the following special characters:
+    #   *?-!#$%&'.^\_`\|~.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_glob
+    #   The case sensitive header glob value to be matched against entire
+    #   header value. The header glob value must be less than 128 characters
+    #   and the only allowed characters are a-z, A-Z, 0-9, and the following
+    #   special characters: *?-!#$%&'.^\_`\|~. Wildcard matching is
+    #   supported for header glob values but must be for *prefix-match,
+    #   suffix-match*, or *infix*-match.
+    #   @return [String]
+    #
+    class RoutingRuleMatchHeaderValue < Struct.new(
+      :header,
+      :value_glob)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a MatchHeaders condition.
+    #
+    # @!attribute [rw] any_of
+    #   The elements from this collection.
+    #   @return [Array<Types::RoutingRuleMatchHeaderValue>]
+    #
+    class RoutingRuleMatchHeaders < Struct.new(
+      :any_of)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents collection of routing rules.
+    #
+    # @!attribute [rw] next_token
+    #   The next page of elements from this collection. Not valid for the
+    #   last element of the collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_rules
+    #   The elements from this collection.
+    #   @return [Array<Types::RoutingRule>]
+    #
+    class RoutingRules < Struct.new(
+      :next_token,
+      :routing_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6506,9 +6931,13 @@ module Aws::ApiGatewayV2
     #   name.
     #   @return [Types::MutualTlsAuthenticationInput]
     #
+    # @!attribute [rw] routing_mode
+    #   @return [String]
+    #
     class UpdateDomainNameInput < Struct.new(
       :domain_name_configurations,
-      :mutual_tls_authentication)
+      :mutual_tls_authentication,
+      :routing_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6526,10 +6955,14 @@ module Aws::ApiGatewayV2
     #   certificate to access your API.
     #   @return [Types::MutualTlsAuthenticationInput]
     #
+    # @!attribute [rw] routing_mode
+    #   @return [String]
+    #
     class UpdateDomainNameRequest < Struct.new(
       :domain_name,
       :domain_name_configurations,
-      :mutual_tls_authentication)
+      :mutual_tls_authentication,
+      :routing_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6547,6 +6980,10 @@ module Aws::ApiGatewayV2
     #   A string with a length between \[1-512\].
     #   @return [String]
     #
+    # @!attribute [rw] domain_name_arn
+    #   Represents an Amazon Resource Name (ARN).
+    #   @return [String]
+    #
     # @!attribute [rw] domain_name_configurations
     #   The domain name configurations.
     #   @return [Array<Types::DomainNameConfiguration>]
@@ -6557,6 +6994,9 @@ module Aws::ApiGatewayV2
     #   certificate to access your API.
     #   @return [Types::MutualTlsAuthentication]
     #
+    # @!attribute [rw] routing_mode
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   Represents a collection of tags associated with the resource.
     #   @return [Hash<String,String>]
@@ -6564,8 +7004,10 @@ module Aws::ApiGatewayV2
     class UpdateDomainNameResponse < Struct.new(
       :api_mapping_selection_expression,
       :domain_name,
+      :domain_name_arn,
       :domain_name_configurations,
       :mutual_tls_authentication,
+      :routing_mode,
       :tags)
       SENSITIVE = []
       include Aws::Structure

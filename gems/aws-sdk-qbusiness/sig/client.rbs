@@ -89,6 +89,13 @@ module Aws
                                   application_id: ::String,
                                   statement_id: ::String,
                                   actions: Array[::String],
+                                  ?conditions: Array[
+                                    {
+                                      condition_operator: ("StringEquals"),
+                                      condition_key: ::String,
+                                      condition_values: Array[::String]
+                                    },
+                                  ],
                                   principal: ::String
                                 ) -> _AssociatePermissionResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociatePermissionResponseSuccess
@@ -392,6 +399,18 @@ module Aws
                                  ) -> _CheckDocumentAccessResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CheckDocumentAccessResponseSuccess
 
+      interface _CreateAnonymousWebExperienceUrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAnonymousWebExperienceUrlResponse]
+        def anonymous_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#create_anonymous_web_experience_url-instance_method
+      def create_anonymous_web_experience_url: (
+                                                 application_id: ::String,
+                                                 web_experience_id: ::String,
+                                                 ?session_duration_in_minutes: ::Integer
+                                               ) -> _CreateAnonymousWebExperienceUrlResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAnonymousWebExperienceUrlResponseSuccess
+
       interface _CreateApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationResponse]
         def application_id: () -> ::String
@@ -401,7 +420,7 @@ module Aws
       def create_application: (
                                 display_name: ::String,
                                 ?role_arn: ::String,
-                                ?identity_type: ("AWS_IAM_IDP_SAML" | "AWS_IAM_IDP_OIDC" | "AWS_IAM_IDC" | "AWS_QUICKSIGHT_IDP"),
+                                ?identity_type: ("AWS_IAM_IDP_SAML" | "AWS_IAM_IDP_OIDC" | "AWS_IAM_IDC" | "AWS_QUICKSIGHT_IDP" | "ANONYMOUS"),
                                 ?iam_identity_provider_arn: ::String,
                                 ?identity_center_instance_arn: ::String,
                                 ?client_ids_for_oidc: Array[::String],
@@ -430,6 +449,37 @@ module Aws
                                 }
                               ) -> _CreateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
+
+      interface _CreateChatResponseConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChatResponseConfigurationResponse]
+        def chat_response_configuration_id: () -> ::String
+        def chat_response_configuration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#create_chat_response_configuration-instance_method
+      def create_chat_response_configuration: (
+                                                application_id: ::String,
+                                                display_name: ::String,
+                                                ?client_token: ::String,
+                                                response_configurations: Hash[("ALL"), {
+                                                    instruction_collection: {
+                                                      response_length: ::String?,
+                                                      target_audience: ::String?,
+                                                      perspective: ::String?,
+                                                      output_style: ::String?,
+                                                      identity: ::String?,
+                                                      tone: ::String?,
+                                                      custom_instructions: ::String?,
+                                                      examples: ::String?
+                                                    }?
+                                                  }],
+                                                ?tags: Array[
+                                                  {
+                                                    key: ::String,
+                                                    value: ::String
+                                                  },
+                                                ]
+                                              ) -> _CreateChatResponseConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChatResponseConfigurationResponseSuccess
 
       interface _CreateDataAccessorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataAccessorResponse]
@@ -522,6 +572,15 @@ module Aws
                                   ],
                                   ?client_token: ::String,
                                   display_name: ::String,
+                                  ?authentication_detail: {
+                                    authentication_type: ("AWS_IAM_IDC_TTI" | "AWS_IAM_IDC_AUTH_CODE"),
+                                    authentication_configuration: {
+                                      idc_trusted_token_issuer_configuration: {
+                                        idc_trusted_token_issuer_arn: ::String
+                                      }?
+                                    }?,
+                                    external_ids: Array[::String]?
+                                  },
                                   ?tags: Array[
                                     {
                                       key: ::String,
@@ -691,7 +750,7 @@ module Aws
                                  bucket: ::String,
                                  key: ::String
                                }?
-                             }
+                             }?
                            },
                            ?tags: Array[
                              {
@@ -716,21 +775,22 @@ module Aws
                               configuration: {
                                 native_index_configuration: {
                                   index_id: ::String,
+                                  version: ::Integer?,
                                   boosting_override: Hash[::String, {
                                       number_configuration: {
-                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH"),
+                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH" | "ONE" | "TWO"),
                                         boosting_type: ("PRIORITIZE_LARGER_VALUES" | "PRIORITIZE_SMALLER_VALUES")?
                                       }?,
                                       string_configuration: {
-                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH"),
-                                        attribute_value_boosting: Hash[::String, ("LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")]?
+                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH" | "ONE" | "TWO"),
+                                        attribute_value_boosting: Hash[::String, ("LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH" | "ONE" | "TWO" | "THREE" | "FOUR" | "FIVE")]?
                                       }?,
                                       date_configuration: {
-                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH"),
+                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH" | "ONE" | "TWO"),
                                         boosting_duration_in_seconds: ::Integer?
                                       }?,
                                       string_list_configuration: {
-                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")
+                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH" | "ONE" | "TWO")
                                       }?
                                     }]?
                                 }?,
@@ -858,6 +918,16 @@ module Aws
                                               ) -> _DeleteChatControlsConfigurationResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteChatControlsConfigurationResponseSuccess
 
+      interface _DeleteChatResponseConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteChatResponseConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#delete_chat_response_configuration-instance_method
+      def delete_chat_response_configuration: (
+                                                application_id: ::String,
+                                                chat_response_configuration_id: ::String
+                                              ) -> _DeleteChatResponseConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteChatResponseConfigurationResponseSuccess
+
       interface _DeleteConversationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConversationResponse]
       end
@@ -967,7 +1037,7 @@ module Aws
         def display_name: () -> ::String
         def application_id: () -> ::String
         def application_arn: () -> ::String
-        def identity_type: () -> ("AWS_IAM_IDP_SAML" | "AWS_IAM_IDP_OIDC" | "AWS_IAM_IDC" | "AWS_QUICKSIGHT_IDP")
+        def identity_type: () -> ("AWS_IAM_IDP_SAML" | "AWS_IAM_IDP_OIDC" | "AWS_IAM_IDC" | "AWS_QUICKSIGHT_IDP" | "ANONYMOUS")
         def iam_identity_provider_arn: () -> ::String
         def identity_center_application_arn: () -> ::String
         def role_arn: () -> ::String
@@ -1007,6 +1077,22 @@ module Aws
                                            ) -> _GetChatControlsConfigurationResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChatControlsConfigurationResponseSuccess
 
+      interface _GetChatResponseConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetChatResponseConfigurationResponse]
+        def chat_response_configuration_id: () -> ::String
+        def chat_response_configuration_arn: () -> ::String
+        def display_name: () -> ::String
+        def created_at: () -> ::Time
+        def in_use_configuration: () -> Types::ChatResponseConfigurationDetail
+        def last_update_configuration: () -> Types::ChatResponseConfigurationDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_chat_response_configuration-instance_method
+      def get_chat_response_configuration: (
+                                             application_id: ::String,
+                                             chat_response_configuration_id: ::String
+                                           ) -> _GetChatResponseConfigurationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChatResponseConfigurationResponseSuccess
+
       interface _GetDataAccessorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDataAccessorResponse]
         def display_name: () -> ::String
@@ -1016,6 +1102,7 @@ module Aws
         def idc_application_arn: () -> ::String
         def principal: () -> ::String
         def action_configurations: () -> ::Array[Types::ActionConfiguration]
+        def authentication_detail: () -> Types::DataAccessorAuthenticationDetail
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
       end
@@ -1219,6 +1306,19 @@ module Aws
                               ?max_results: ::Integer
                             ) -> _ListAttachmentsResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAttachmentsResponseSuccess
+
+      interface _ListChatResponseConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChatResponseConfigurationsResponse]
+        def chat_response_configurations: () -> ::Array[Types::ChatResponseConfiguration]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_chat_response_configurations-instance_method
+      def list_chat_response_configurations: (
+                                               application_id: ::String,
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _ListChatResponseConfigurationsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChatResponseConfigurationsResponseSuccess
 
       interface _ListConversationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListConversationsResponse]
@@ -1743,6 +1843,30 @@ module Aws
                                               ) -> _UpdateChatControlsConfigurationResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChatControlsConfigurationResponseSuccess
 
+      interface _UpdateChatResponseConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChatResponseConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#update_chat_response_configuration-instance_method
+      def update_chat_response_configuration: (
+                                                application_id: ::String,
+                                                chat_response_configuration_id: ::String,
+                                                ?display_name: ::String,
+                                                response_configurations: Hash[("ALL"), {
+                                                    instruction_collection: {
+                                                      response_length: ::String?,
+                                                      target_audience: ::String?,
+                                                      perspective: ::String?,
+                                                      output_style: ::String?,
+                                                      identity: ::String?,
+                                                      tone: ::String?,
+                                                      custom_instructions: ::String?,
+                                                      examples: ::String?
+                                                    }?
+                                                  }],
+                                                ?client_token: ::String
+                                              ) -> _UpdateChatResponseConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChatResponseConfigurationResponseSuccess
+
       interface _UpdateDataAccessorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataAccessorResponse]
       end
@@ -1829,6 +1953,15 @@ module Aws
                                       }?
                                     },
                                   ],
+                                  ?authentication_detail: {
+                                    authentication_type: ("AWS_IAM_IDC_TTI" | "AWS_IAM_IDC_AUTH_CODE"),
+                                    authentication_configuration: {
+                                      idc_trusted_token_issuer_configuration: {
+                                        idc_trusted_token_issuer_arn: ::String
+                                      }?
+                                    }?,
+                                    external_ids: Array[::String]?
+                                  },
                                   ?display_name: ::String
                                 ) -> _UpdateDataAccessorResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataAccessorResponseSuccess
@@ -1963,7 +2096,7 @@ module Aws
                                  bucket: ::String,
                                  key: ::String
                                }?
-                             }
+                             }?
                            },
                            ?auth_configuration: {
                              basic_auth_configuration: {
@@ -1996,21 +2129,22 @@ module Aws
                               ?configuration: {
                                 native_index_configuration: {
                                   index_id: ::String,
+                                  version: ::Integer?,
                                   boosting_override: Hash[::String, {
                                       number_configuration: {
-                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH"),
+                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH" | "ONE" | "TWO"),
                                         boosting_type: ("PRIORITIZE_LARGER_VALUES" | "PRIORITIZE_SMALLER_VALUES")?
                                       }?,
                                       string_configuration: {
-                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH"),
-                                        attribute_value_boosting: Hash[::String, ("LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")]?
+                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH" | "ONE" | "TWO"),
+                                        attribute_value_boosting: Hash[::String, ("LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH" | "ONE" | "TWO" | "THREE" | "FOUR" | "FIVE")]?
                                       }?,
                                       date_configuration: {
-                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH"),
+                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH" | "ONE" | "TWO"),
                                         boosting_duration_in_seconds: ::Integer?
                                       }?,
                                       string_list_configuration: {
-                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")
+                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH" | "ONE" | "TWO")
                                       }?
                                     }]?
                                 }?,

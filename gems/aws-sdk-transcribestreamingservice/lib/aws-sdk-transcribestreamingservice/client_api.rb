@@ -153,7 +153,7 @@ module Aws::TranscribeStreamingService
 
     AlternativeList.member = Shapes::ShapeRef.new(shape: Alternative)
 
-    AudioEvent.add_member(:audio_chunk, Shapes::ShapeRef.new(shape: AudioChunk, eventpayload: true, eventpayload_type: 'blob', location_name: "AudioChunk", metadata: {"eventpayload"=>true}))
+    AudioEvent.add_member(:audio_chunk, Shapes::ShapeRef.new(shape: AudioChunk, eventpayload: true, eventpayload_type: 'blob', location_name: "AudioChunk", metadata: {"eventpayload" => true}))
     AudioEvent.struct_class = Types::AudioEvent
 
     AudioStream.add_member(:audio_event, Shapes::ShapeRef.new(shape: AudioEvent, event: true, location_name: "AudioEvent"))
@@ -311,7 +311,7 @@ module Aws::TranscribeStreamingService
 
     MedicalResultList.member = Shapes::ShapeRef.new(shape: MedicalResult)
 
-    MedicalScribeAudioEvent.add_member(:audio_chunk, Shapes::ShapeRef.new(shape: AudioChunk, required: true, eventpayload: true, eventpayload_type: 'blob', location_name: "AudioChunk", metadata: {"eventpayload"=>true}))
+    MedicalScribeAudioEvent.add_member(:audio_chunk, Shapes::ShapeRef.new(shape: AudioChunk, required: true, eventpayload: true, eventpayload_type: 'blob', location_name: "AudioChunk", metadata: {"eventpayload" => true}))
     MedicalScribeAudioEvent.struct_class = Types::MedicalScribeAudioEvent
 
     MedicalScribeChannelDefinition.add_member(:channel_id, Shapes::ShapeRef.new(shape: MedicalScribeChannelId, required: true, location_name: "ChannelId"))
@@ -624,7 +624,7 @@ module Aws::TranscribeStreamingService
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "transcribestreaming",
         "protocol" => "rest-json",
-        "protocolSettings" => {"h2"=>"eventstream"},
+        "protocolSettings" => {"h2" => "eventstream"},
         "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Transcribe Streaming Service",
         "serviceId" => "Transcribe Streaming",

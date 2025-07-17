@@ -3209,6 +3209,20 @@ module Aws::Batch
     #       families (for example, `P4` and `G4`) and can be used for all
     #       non Amazon Web Services Graviton-based instance types.
     #
+    #     EKS\_AL2023
+    #
+    #     : [Amazon Linux 2023][6]: Batch supports Amazon Linux 2023.
+    #
+    #       <note markdown="1"> Amazon Linux 2023 does not support `A1` instances.
+    #
+    #        </note>
+    #
+    #     EKS\_AL2023\_NVIDIA
+    #
+    #     : [Amazon Linux 2023 (accelerated)][6]: GPU instance families and
+    #       can be used for all non Amazon Web Services Graviton-based
+    #       instance types.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami
@@ -5923,13 +5937,22 @@ module Aws::Batch
     #   [1]: https://docs.aws.amazon.com/batch/latest/APIReference/API_UpdateComputeEnvironment.html
     #   @return [Array<Types::LaunchTemplateSpecificationOverride>]
     #
+    # @!attribute [rw] userdata_type
+    #   The EKS node initialization process to use. You only need to specify
+    #   this value if you are using a custom AMI. The default value is
+    #   `EKS_BOOTSTRAP_SH`. If *imageType* is a custom AMI based on
+    #   EKS\_AL2023 or EKS\_AL2023\_NVIDIA then you must choose
+    #   `EKS_NODEADM`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/LaunchTemplateSpecification AWS API Documentation
     #
     class LaunchTemplateSpecification < Struct.new(
       :launch_template_id,
       :launch_template_name,
       :version,
-      :overrides)
+      :overrides,
+      :userdata_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6036,13 +6059,22 @@ module Aws::Batch
     #   [1]: https://docs.aws.amazon.com/batch/latest/APIReference/API_ComputeResource.html#Batch-Type-ComputeResource-instanceTypes
     #   @return [Array<String>]
     #
+    # @!attribute [rw] userdata_type
+    #   The EKS node initialization process to use. You only need to specify
+    #   this value if you are using a custom AMI. The default value is
+    #   `EKS_BOOTSTRAP_SH`. If *imageType* is a custom AMI based on
+    #   EKS\_AL2023 or EKS\_AL2023\_NVIDIA then you must choose
+    #   `EKS_NODEADM`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/LaunchTemplateSpecificationOverride AWS API Documentation
     #
     class LaunchTemplateSpecificationOverride < Struct.new(
       :launch_template_id,
       :launch_template_name,
       :version,
-      :target_instance_types)
+      :target_instance_types,
+      :userdata_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9172,9 +9204,8 @@ module Aws::Batch
     # [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
     #
     # @!attribute [rw] terminate_jobs_on_update
-    #   Specifies whether jobs are automatically terminated when the
-    #   computer environment infrastructure is updated. The default value is
-    #   `false`.
+    #   Specifies whether jobs are automatically terminated when the compute
+    #   environment infrastructure is updated. The default value is `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] job_execution_timeout_minutes

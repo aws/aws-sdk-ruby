@@ -309,7 +309,7 @@ module Aws::AppTest
     CreateTestCaseRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     CreateTestCaseRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     CreateTestCaseRequest.add_member(:steps, Shapes::ShapeRef.new(shape: StepList, required: true, location_name: "steps"))
-    CreateTestCaseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTestCaseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateTestCaseRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateTestCaseRequest.struct_class = Types::CreateTestCaseRequest
 
@@ -321,7 +321,7 @@ module Aws::AppTest
     CreateTestConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     CreateTestConfigurationRequest.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceList, required: true, location_name: "resources"))
     CreateTestConfigurationRequest.add_member(:properties, Shapes::ShapeRef.new(shape: Properties, location_name: "properties"))
-    CreateTestConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTestConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateTestConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateTestConfigurationRequest.add_member(:service_settings, Shapes::ShapeRef.new(shape: ServiceSettings, location_name: "serviceSettings"))
     CreateTestConfigurationRequest.struct_class = Types::CreateTestConfigurationRequest
@@ -335,7 +335,7 @@ module Aws::AppTest
     CreateTestSuiteRequest.add_member(:before_steps, Shapes::ShapeRef.new(shape: StepList, location_name: "beforeSteps"))
     CreateTestSuiteRequest.add_member(:after_steps, Shapes::ShapeRef.new(shape: StepList, location_name: "afterSteps"))
     CreateTestSuiteRequest.add_member(:test_cases, Shapes::ShapeRef.new(shape: TestCases, required: true, location_name: "testCases"))
-    CreateTestSuiteRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTestSuiteRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateTestSuiteRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateTestSuiteRequest.struct_class = Types::CreateTestSuiteRequest
 
@@ -731,7 +731,7 @@ module Aws::AppTest
 
     StartTestRunRequest.add_member(:test_suite_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "testSuiteId"))
     StartTestRunRequest.add_member(:test_configuration_id, Shapes::ShapeRef.new(shape: Identifier, location_name: "testConfigurationId"))
-    StartTestRunRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartTestRunRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartTestRunRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     StartTestRunRequest.struct_class = Types::StartTestRunRequest
 

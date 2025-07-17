@@ -141,8 +141,8 @@ module Aws
                          ?notes: ::String,
                          ?tags: Hash[::String, ::String],
                          ?operating_address: {
-                           contact_name: ::String?,
-                           contact_phone_number: ::String?,
+                           contact_name: ::String,
+                           contact_phone_number: ::String,
                            address_line_1: ::String,
                            address_line_2: ::String?,
                            address_line_3: ::String?,
@@ -154,8 +154,8 @@ module Aws
                            municipality: ::String?
                          },
                          ?shipping_address: {
-                           contact_name: ::String?,
-                           contact_phone_number: ::String?,
+                           contact_name: ::String,
+                           contact_phone_number: ::String,
                            address_line_1: ::String,
                            address_line_2: ::String?,
                            address_line_3: ::String?,
@@ -550,8 +550,8 @@ module Aws
                                  site_id: ::String,
                                  address_type: ("SHIPPING_ADDRESS" | "OPERATING_ADDRESS"),
                                  address: {
-                                   contact_name: ::String?,
-                                   contact_phone_number: ::String?,
+                                   contact_name: ::String,
+                                   contact_phone_number: ::String,
                                    address_line_1: ::String,
                                    address_line_2: ::String?,
                                    address_line_3: ::String?,

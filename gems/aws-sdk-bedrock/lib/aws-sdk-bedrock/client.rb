@@ -200,8 +200,7 @@ module Aws::Bedrock
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -538,6 +537,252 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Creates a new custom model in Amazon Bedrock. After the model is
+    # active, you can use it for inference.
+    #
+    # To use the model for inference, you must purchase Provisioned
+    # Throughput for it. You can't use On-demand inference with these
+    # custom models. For more information about Provisioned Throughput, see
+    # [Provisioned Throughput][1].
+    #
+    # The model appears in `ListCustomModels` with a `customizationType` of
+    # `imported`. To track the status of the new model, you use the
+    # `GetCustomModel` API operation. The model can be in the following
+    # states:
+    #
+    # * `Creating` - Initial state during validation and registration
+    #
+    # * `Active` - Model is ready for use in inference
+    #
+    # * `Failed` - Creation process encountered an error
+    #
+    # **Related APIs**
+    #
+    # * [GetCustomModel][2]
+    #
+    # * [ListCustomModels][3]
+    #
+    # * [DeleteCustomModel][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetCustomModel.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListCustomModels.html
+    # [4]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_DeleteCustomModel.html
+    #
+    # @option params [required, String] :model_name
+    #   A unique name for the custom model.
+    #
+    # @option params [required, Types::ModelDataSource] :model_source_config
+    #   The data source for the model. The Amazon S3 URI in the model source
+    #   must be for the Amazon-managed Amazon S3 bucket containing your model
+    #   artifacts.
+    #
+    # @option params [String] :model_kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer managed KMS key to
+    #   encrypt the custom model. If you don't provide a KMS key, Amazon
+    #   Bedrock uses an Amazon Web Services-managed KMS key to encrypt the
+    #   model.
+    #
+    #   If you provide a customer managed KMS key, your Amazon Bedrock service
+    #   role must have permissions to use it. For more information see
+    #   [Encryption of imported models][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/encryption-import-model.html
+    #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of an IAM service role that Amazon
+    #   Bedrock assumes to perform tasks on your behalf. This role must have
+    #   permissions to access the Amazon S3 bucket containing your model
+    #   artifacts and the KMS key (if specified). For more information, see
+    #   [Setting up an IAM service role for importing models][1] in the Amazon
+    #   Bedrock User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-import-iam-role.html
+    #
+    # @option params [Array<Types::Tag>] :model_tags
+    #   A list of key-value pairs to associate with the custom model resource.
+    #   You can use these tags to organize and identify your resources.
+    #
+    #   For more information, see [Tagging resources][1] in the [Amazon
+    #   Bedrock User Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CreateCustomModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCustomModelResponse#model_arn #model_arn} => String
+    #
+    #
+    # @example Example: Successful CreateCustomModel API call
+    #
+    #   resp = client.create_custom_model({
+    #     client_request_token: "foo", 
+    #     model_kms_key_arn: "arn:aws:kms:us-east-1:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #     model_name: "SampleModel", 
+    #     model_source_config: {
+    #       s3_data_source: {
+    #         s3_uri: "s3://my-bucket/folder", 
+    #       }, 
+    #     }, 
+    #     model_tags: [
+    #       {
+    #         key: "foo", 
+    #         value: "foo", 
+    #       }, 
+    #       {
+    #         key: "foo", 
+    #         value: "foo", 
+    #       }, 
+    #     ], 
+    #     role_arn: "arn:aws:iam::123456789012:role/SampleRole", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     model_arn: "arn:aws:bedrock:us-east-1:123456789012:custom-model/imported/abcdef123456", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_custom_model({
+    #     model_name: "CustomModelName", # required
+    #     model_source_config: { # required
+    #       s3_data_source: {
+    #         s3_uri: "S3Uri", # required
+    #       },
+    #     },
+    #     model_kms_key_arn: "KmsKeyArn",
+    #     role_arn: "RoleArn",
+    #     model_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_request_token: "IdempotencyToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateCustomModel AWS API Documentation
+    #
+    # @overload create_custom_model(params = {})
+    # @param [Hash] params ({})
+    def create_custom_model(params = {}, options = {})
+      req = build_request(:create_custom_model, params)
+      req.send_request(options)
+    end
+
+    # Deploys a custom model for on-demand inference in Amazon Bedrock.
+    # After you deploy your custom model, you use the deployment's Amazon
+    # Resource Name (ARN) as the `modelId` parameter when you submit prompts
+    # and generate responses with model inference.
+    #
+    # For more information about setting up on-demand inference for custom
+    # models, see [Set up inference for a custom model][1].
+    #
+    # The following actions are related to the `CreateCustomModelDeployment`
+    # operation:
+    #
+    # * [GetCustomModelDeployment][2]
+    #
+    # * [ListCustomModelDeployments][3]
+    #
+    # * [DeleteCustomModelDeployment][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetCustomModelDeployment.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListCustomModelDeployments.html
+    # [4]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_DeleteCustomModelDeployment.html
+    #
+    # @option params [required, String] :model_deployment_name
+    #   The name for the custom model deployment. The name must be unique
+    #   within your Amazon Web Services account and Region.
+    #
+    # @option params [required, String] :model_arn
+    #   The Amazon Resource Name (ARN) of the custom model to deploy for
+    #   on-demand inference. The custom model must be in the `Active` state.
+    #
+    # @option params [String] :description
+    #   A description for the custom model deployment to help you identify its
+    #   purpose.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to assign to the custom model deployment. You can use tags to
+    #   organize and track your Amazon Web Services resources for cost
+    #   allocation and management purposes.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-idempotency.html
+    #
+    # @return [Types::CreateCustomModelDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCustomModelDeploymentResponse#custom_model_deployment_arn #custom_model_deployment_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_custom_model_deployment({
+    #     model_deployment_name: "ModelDeploymentName", # required
+    #     model_arn: "CustomModelArn", # required
+    #     description: "CustomModelDeploymentDescription",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_request_token: "IdempotencyToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_model_deployment_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateCustomModelDeployment AWS API Documentation
+    #
+    # @overload create_custom_model_deployment(params = {})
+    # @param [Hash] params ({})
+    def create_custom_model_deployment(params = {}, options = {})
+      req = build_request(:create_custom_model_deployment, params)
+      req.send_request(options)
+    end
+
     # Creates an evaluation job.
     #
     # @option params [required, String] :job_name
@@ -785,6 +1030,44 @@ module Aws::Bedrock
     #                       },
     #                     ],
     #                   },
+    #                   implicit_filter_configuration: {
+    #                     metadata_attributes: [ # required
+    #                       {
+    #                         key: "MetadataAttributeSchemaKeyString", # required
+    #                         type: "STRING", # required, accepts STRING, NUMBER, BOOLEAN, STRING_LIST
+    #                         description: "MetadataAttributeSchemaDescriptionString", # required
+    #                       },
+    #                     ],
+    #                     model_arn: "BedrockModelArn", # required
+    #                   },
+    #                   reranking_configuration: {
+    #                     type: "BEDROCK_RERANKING_MODEL", # required, accepts BEDROCK_RERANKING_MODEL
+    #                     bedrock_reranking_configuration: {
+    #                       model_configuration: { # required
+    #                         model_arn: "BedrockRerankingModelArn", # required
+    #                         additional_model_request_fields: {
+    #                           "AdditionalModelRequestFieldsKey" => {
+    #                           },
+    #                         },
+    #                       },
+    #                       number_of_reranked_results: 1,
+    #                       metadata_configuration: {
+    #                         selection_mode: "SELECTIVE", # required, accepts SELECTIVE, ALL
+    #                         selective_mode_configuration: {
+    #                           fields_to_include: [
+    #                             {
+    #                               field_name: "FieldForRerankingFieldNameString", # required
+    #                             },
+    #                           ],
+    #                           fields_to_exclude: [
+    #                             {
+    #                               field_name: "FieldForRerankingFieldNameString", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                   },
     #                 },
     #               },
     #             },
@@ -863,6 +1146,44 @@ module Aws::Bedrock
     #                           # recursive RetrievalFilter
     #                         },
     #                       ],
+    #                     },
+    #                     implicit_filter_configuration: {
+    #                       metadata_attributes: [ # required
+    #                         {
+    #                           key: "MetadataAttributeSchemaKeyString", # required
+    #                           type: "STRING", # required, accepts STRING, NUMBER, BOOLEAN, STRING_LIST
+    #                           description: "MetadataAttributeSchemaDescriptionString", # required
+    #                         },
+    #                       ],
+    #                       model_arn: "BedrockModelArn", # required
+    #                     },
+    #                     reranking_configuration: {
+    #                       type: "BEDROCK_RERANKING_MODEL", # required, accepts BEDROCK_RERANKING_MODEL
+    #                       bedrock_reranking_configuration: {
+    #                         model_configuration: { # required
+    #                           model_arn: "BedrockRerankingModelArn", # required
+    #                           additional_model_request_fields: {
+    #                             "AdditionalModelRequestFieldsKey" => {
+    #                             },
+    #                           },
+    #                         },
+    #                         number_of_reranked_results: 1,
+    #                         metadata_configuration: {
+    #                           selection_mode: "SELECTIVE", # required, accepts SELECTIVE, ALL
+    #                           selective_mode_configuration: {
+    #                             fields_to_include: [
+    #                               {
+    #                                 field_name: "FieldForRerankingFieldNameString", # required
+    #                               },
+    #                             ],
+    #                             fields_to_exclude: [
+    #                               {
+    #                                 field_name: "FieldForRerankingFieldNameString", # required
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       },
     #                     },
     #                   },
     #                 },
@@ -961,6 +1282,38 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Request a model access agreement for the specified model.
+    #
+    # @option params [required, String] :offer_token
+    #   An offer token encapsulates the information for an offer.
+    #
+    # @option params [required, String] :model_id
+    #   Model Id of the model for the access request.
+    #
+    # @return [Types::CreateFoundationModelAgreementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFoundationModelAgreementResponse#model_id #model_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_foundation_model_agreement({
+    #     offer_token: "OfferToken", # required
+    #     model_id: "BedrockModelId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateFoundationModelAgreement AWS API Documentation
+    #
+    # @overload create_foundation_model_agreement(params = {})
+    # @param [Hash] params ({})
+    def create_foundation_model_agreement(params = {}, options = {})
+      req = build_request(:create_foundation_model_agreement, params)
+      req.send_request(options)
+    end
+
     # Creates a guardrail to block topics and to implement safeguards for
     # your generative AI applications.
     #
@@ -1016,6 +1369,18 @@ module Aws::Bedrock
     #   The contextual grounding policy configuration used to create a
     #   guardrail.
     #
+    # @option params [Types::GuardrailCrossRegionConfig] :cross_region_config
+    #   The system-defined guardrail profile that you're using with your
+    #   guardrail. Guardrail profiles define the destination Amazon Web
+    #   Services Regions where guardrail inference requests can be
+    #   automatically routed.
+    #
+    #   For more information, see the [Amazon Bedrock User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #
     # @option params [required, String] :blocked_input_messaging
     #   The message to return when the guardrail blocks a prompt.
     #
@@ -1067,6 +1432,9 @@ module Aws::Bedrock
     #           output_enabled: false,
     #         },
     #       ],
+    #       tier_config: {
+    #         tier_name: "CLASSIC", # required, accepts CLASSIC, STANDARD
+    #       },
     #     },
     #     content_policy_config: {
     #       filters_config: [ # required
@@ -1082,6 +1450,9 @@ module Aws::Bedrock
     #           output_enabled: false,
     #         },
     #       ],
+    #       tier_config: {
+    #         tier_name: "CLASSIC", # required, accepts CLASSIC, STANDARD
+    #       },
     #     },
     #     word_policy_config: {
     #       words_config: [
@@ -1136,6 +1507,9 @@ module Aws::Bedrock
     #           enabled: false,
     #         },
     #       ],
+    #     },
+    #     cross_region_config: {
+    #       guardrail_profile_identifier: "GuardrailCrossRegionGuardrailProfileIdentifier", # required
     #     },
     #     blocked_input_messaging: "GuardrailBlockedMessaging", # required
     #     blocked_outputs_messaging: "GuardrailBlockedMessaging", # required
@@ -1571,7 +1945,7 @@ module Aws::Bedrock
     #     role_arn: "RoleArn", # required
     #     client_request_token: "IdempotencyToken",
     #     base_model_identifier: "BaseModelIdentifier", # required
-    #     customization_type: "FINE_TUNING", # accepts FINE_TUNING, CONTINUED_PRE_TRAINING, DISTILLATION
+    #     customization_type: "FINE_TUNING", # accepts FINE_TUNING, CONTINUED_PRE_TRAINING, DISTILLATION, IMPORTED
     #     custom_model_kms_key_id: "KmsKeyId",
     #     job_tags: [
     #       {
@@ -2089,6 +2463,68 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Deletes a custom model deployment. This operation stops the deployment
+    # and removes it from your account. After deletion, the deployment ARN
+    # can no longer be used for inference requests.
+    #
+    # The following actions are related to the `DeleteCustomModelDeployment`
+    # operation:
+    #
+    # * [CreateCustomModelDeployment][1]
+    #
+    # * [GetCustomModelDeployment][2]
+    #
+    # * [ListCustomModelDeployments][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateCustomModelDeployment.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetCustomModelDeployment.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListCustomModelDeployments.html
+    #
+    # @option params [required, String] :custom_model_deployment_identifier
+    #   The Amazon Resource Name (ARN) or name of the custom model deployment
+    #   to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_custom_model_deployment({
+    #     custom_model_deployment_identifier: "CustomModelDeploymentIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteCustomModelDeployment AWS API Documentation
+    #
+    # @overload delete_custom_model_deployment(params = {})
+    # @param [Hash] params ({})
+    def delete_custom_model_deployment(params = {}, options = {})
+      req = build_request(:delete_custom_model_deployment, params)
+      req.send_request(options)
+    end
+
+    # Delete the model access agreement for the specified model.
+    #
+    # @option params [required, String] :model_id
+    #   Model Id of the model access to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_foundation_model_agreement({
+    #     model_id: "BedrockModelId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteFoundationModelAgreement AWS API Documentation
+    #
+    # @overload delete_foundation_model_agreement(params = {})
+    # @param [Hash] params ({})
+    def delete_foundation_model_agreement(params = {}, options = {})
+      req = build_request(:delete_foundation_model_agreement, params)
+      req.send_request(options)
+    end
+
     # Deletes a guardrail.
     #
     # * To delete a guardrail, only specify the ARN of the guardrail in the
@@ -2292,7 +2728,7 @@ module Aws::Bedrock
     end
 
     # Get the properties associated with a Amazon Bedrock custom model that
-    # you have created.For more information, see [Custom models][1] in the
+    # you have created. For more information, see [Custom models][1] in the
     # [Amazon Bedrock User Guide][2].
     #
     #
@@ -2320,6 +2756,8 @@ module Aws::Bedrock
     #   * {Types::GetCustomModelResponse#validation_metrics #validation_metrics} => Array&lt;Types::ValidatorMetric&gt;
     #   * {Types::GetCustomModelResponse#creation_time #creation_time} => Time
     #   * {Types::GetCustomModelResponse#customization_config #customization_config} => Types::CustomizationConfig
+    #   * {Types::GetCustomModelResponse#model_status #model_status} => String
+    #   * {Types::GetCustomModelResponse#failure_message #failure_message} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2334,7 +2772,7 @@ module Aws::Bedrock
     #   resp.job_name #=> String
     #   resp.job_arn #=> String
     #   resp.base_model_arn #=> String
-    #   resp.customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION"
+    #   resp.customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"
     #   resp.model_kms_key_arn #=> String
     #   resp.hyper_parameters #=> Hash
     #   resp.hyper_parameters["String"] #=> String
@@ -2364,6 +2802,8 @@ module Aws::Bedrock
     #   resp.creation_time #=> Time
     #   resp.customization_config.distillation_config.teacher_model_config.teacher_model_identifier #=> String
     #   resp.customization_config.distillation_config.teacher_model_config.max_response_length_for_inference #=> Integer
+    #   resp.model_status #=> String, one of "Active", "Creating", "Failed"
+    #   resp.failure_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetCustomModel AWS API Documentation
     #
@@ -2371,6 +2811,66 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def get_custom_model(params = {}, options = {})
       req = build_request(:get_custom_model, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a custom model deployment, including its
+    # status, configuration, and metadata. Use this operation to monitor the
+    # deployment status and retrieve details needed for inference requests.
+    #
+    # The following actions are related to the `GetCustomModelDeployment`
+    # operation:
+    #
+    # * [CreateCustomModelDeployment][1]
+    #
+    # * [ListCustomModelDeployments][2]
+    #
+    # * [DeleteCustomModelDeployment][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateCustomModelDeployment.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListCustomModelDeployments.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_DeleteCustomModelDeployment.html
+    #
+    # @option params [required, String] :custom_model_deployment_identifier
+    #   The Amazon Resource Name (ARN) or name of the custom model deployment
+    #   to retrieve information about.
+    #
+    # @return [Types::GetCustomModelDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCustomModelDeploymentResponse#custom_model_deployment_arn #custom_model_deployment_arn} => String
+    #   * {Types::GetCustomModelDeploymentResponse#model_deployment_name #model_deployment_name} => String
+    #   * {Types::GetCustomModelDeploymentResponse#model_arn #model_arn} => String
+    #   * {Types::GetCustomModelDeploymentResponse#created_at #created_at} => Time
+    #   * {Types::GetCustomModelDeploymentResponse#status #status} => String
+    #   * {Types::GetCustomModelDeploymentResponse#description #description} => String
+    #   * {Types::GetCustomModelDeploymentResponse#failure_message #failure_message} => String
+    #   * {Types::GetCustomModelDeploymentResponse#last_updated_at #last_updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_custom_model_deployment({
+    #     custom_model_deployment_identifier: "CustomModelDeploymentIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_model_deployment_arn #=> String
+    #   resp.model_deployment_name #=> String
+    #   resp.model_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.status #=> String, one of "Creating", "Active", "Failed"
+    #   resp.description #=> String
+    #   resp.failure_message #=> String
+    #   resp.last_updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetCustomModelDeployment AWS API Documentation
+    #
+    # @overload get_custom_model_deployment(params = {})
+    # @param [Hash] params ({})
+    def get_custom_model_deployment(params = {}, options = {})
+      req = build_request(:get_custom_model_deployment, params)
       req.send_request(options)
     end
 
@@ -2467,6 +2967,20 @@ module Aws::Bedrock
     #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_config.knowledge_base_retrieval_configuration.vector_search_configuration.filter.and_all[0] #=> Types::RetrievalFilter
     #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_config.knowledge_base_retrieval_configuration.vector_search_configuration.filter.or_all #=> Array
     #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_config.knowledge_base_retrieval_configuration.vector_search_configuration.filter.or_all[0] #=> Types::RetrievalFilter
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_config.knowledge_base_retrieval_configuration.vector_search_configuration.implicit_filter_configuration.metadata_attributes #=> Array
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_config.knowledge_base_retrieval_configuration.vector_search_configuration.implicit_filter_configuration.metadata_attributes[0].key #=> String
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_config.knowledge_base_retrieval_configuration.vector_search_configuration.implicit_filter_configuration.metadata_attributes[0].type #=> String, one of "STRING", "NUMBER", "BOOLEAN", "STRING_LIST"
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_config.knowledge_base_retrieval_configuration.vector_search_configuration.implicit_filter_configuration.metadata_attributes[0].description #=> String
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_config.knowledge_base_retrieval_configuration.vector_search_configuration.implicit_filter_configuration.model_arn #=> String
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_config.knowledge_base_retrieval_configuration.vector_search_configuration.reranking_configuration.type #=> String, one of "BEDROCK_RERANKING_MODEL"
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_config.knowledge_base_retrieval_configuration.vector_search_configuration.reranking_configuration.bedrock_reranking_configuration.model_configuration.model_arn #=> String
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_config.knowledge_base_retrieval_configuration.vector_search_configuration.reranking_configuration.bedrock_reranking_configuration.model_configuration.additional_model_request_fields #=> Hash
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_config.knowledge_base_retrieval_configuration.vector_search_configuration.reranking_configuration.bedrock_reranking_configuration.number_of_reranked_results #=> Integer
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_config.knowledge_base_retrieval_configuration.vector_search_configuration.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selection_mode #=> String, one of "SELECTIVE", "ALL"
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_config.knowledge_base_retrieval_configuration.vector_search_configuration.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_include #=> Array
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_config.knowledge_base_retrieval_configuration.vector_search_configuration.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_include[0].field_name #=> String
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_config.knowledge_base_retrieval_configuration.vector_search_configuration.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_exclude #=> Array
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_config.knowledge_base_retrieval_configuration.vector_search_configuration.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_exclude[0].field_name #=> String
     #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.type #=> String, one of "KNOWLEDGE_BASE", "EXTERNAL_SOURCES"
     #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.knowledge_base_id #=> String
     #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.model_arn #=> String
@@ -2487,6 +3001,20 @@ module Aws::Bedrock
     #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.retrieval_configuration.vector_search_configuration.filter.and_all[0] #=> Types::RetrievalFilter
     #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.retrieval_configuration.vector_search_configuration.filter.or_all #=> Array
     #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.retrieval_configuration.vector_search_configuration.filter.or_all[0] #=> Types::RetrievalFilter
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.retrieval_configuration.vector_search_configuration.implicit_filter_configuration.metadata_attributes #=> Array
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.retrieval_configuration.vector_search_configuration.implicit_filter_configuration.metadata_attributes[0].key #=> String
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.retrieval_configuration.vector_search_configuration.implicit_filter_configuration.metadata_attributes[0].type #=> String, one of "STRING", "NUMBER", "BOOLEAN", "STRING_LIST"
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.retrieval_configuration.vector_search_configuration.implicit_filter_configuration.metadata_attributes[0].description #=> String
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.retrieval_configuration.vector_search_configuration.implicit_filter_configuration.model_arn #=> String
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.retrieval_configuration.vector_search_configuration.reranking_configuration.type #=> String, one of "BEDROCK_RERANKING_MODEL"
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.retrieval_configuration.vector_search_configuration.reranking_configuration.bedrock_reranking_configuration.model_configuration.model_arn #=> String
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.retrieval_configuration.vector_search_configuration.reranking_configuration.bedrock_reranking_configuration.model_configuration.additional_model_request_fields #=> Hash
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.retrieval_configuration.vector_search_configuration.reranking_configuration.bedrock_reranking_configuration.number_of_reranked_results #=> Integer
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.retrieval_configuration.vector_search_configuration.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selection_mode #=> String, one of "SELECTIVE", "ALL"
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.retrieval_configuration.vector_search_configuration.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_include #=> Array
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.retrieval_configuration.vector_search_configuration.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_include[0].field_name #=> String
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.retrieval_configuration.vector_search_configuration.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_exclude #=> Array
+    #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.retrieval_configuration.vector_search_configuration.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_exclude[0].field_name #=> String
     #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.generation_configuration.prompt_template.text_prompt_template #=> String
     #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.generation_configuration.guardrail_configuration.guardrail_id #=> String
     #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.knowledge_base_configuration.generation_configuration.guardrail_configuration.guardrail_version #=> String
@@ -2571,6 +3099,43 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Get information about the Foundation model availability.
+    #
+    # @option params [required, String] :model_id
+    #   The model Id of the foundation model.
+    #
+    # @return [Types::GetFoundationModelAvailabilityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFoundationModelAvailabilityResponse#model_id #model_id} => String
+    #   * {Types::GetFoundationModelAvailabilityResponse#agreement_availability #agreement_availability} => Types::AgreementAvailability
+    #   * {Types::GetFoundationModelAvailabilityResponse#authorization_status #authorization_status} => String
+    #   * {Types::GetFoundationModelAvailabilityResponse#entitlement_availability #entitlement_availability} => String
+    #   * {Types::GetFoundationModelAvailabilityResponse#region_availability #region_availability} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_foundation_model_availability({
+    #     model_id: "BedrockModelId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_id #=> String
+    #   resp.agreement_availability.status #=> String, one of "AVAILABLE", "PENDING", "NOT_AVAILABLE", "ERROR"
+    #   resp.agreement_availability.error_message #=> String
+    #   resp.authorization_status #=> String, one of "AUTHORIZED", "NOT_AUTHORIZED"
+    #   resp.entitlement_availability #=> String, one of "AVAILABLE", "NOT_AVAILABLE"
+    #   resp.region_availability #=> String, one of "AVAILABLE", "NOT_AVAILABLE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetFoundationModelAvailability AWS API Documentation
+    #
+    # @overload get_foundation_model_availability(params = {})
+    # @param [Hash] params ({})
+    def get_foundation_model_availability(params = {}, options = {})
+      req = build_request(:get_foundation_model_availability, params)
+      req.send_request(options)
+    end
+
     # Gets details about a guardrail. If you don't specify a version, the
     # response returns details for the `DRAFT` version.
     #
@@ -2596,6 +3161,7 @@ module Aws::Bedrock
     #   * {Types::GetGuardrailResponse#word_policy #word_policy} => Types::GuardrailWordPolicy
     #   * {Types::GetGuardrailResponse#sensitive_information_policy #sensitive_information_policy} => Types::GuardrailSensitiveInformationPolicy
     #   * {Types::GetGuardrailResponse#contextual_grounding_policy #contextual_grounding_policy} => Types::GuardrailContextualGroundingPolicy
+    #   * {Types::GetGuardrailResponse#cross_region_details #cross_region_details} => Types::GuardrailCrossRegionDetails
     #   * {Types::GetGuardrailResponse#created_at #created_at} => Time
     #   * {Types::GetGuardrailResponse#updated_at #updated_at} => Time
     #   * {Types::GetGuardrailResponse#status_reasons #status_reasons} => Array&lt;String&gt;
@@ -2629,6 +3195,7 @@ module Aws::Bedrock
     #   resp.topic_policy.topics[0].output_action #=> String, one of "BLOCK", "NONE"
     #   resp.topic_policy.topics[0].input_enabled #=> Boolean
     #   resp.topic_policy.topics[0].output_enabled #=> Boolean
+    #   resp.topic_policy.tier.tier_name #=> String, one of "CLASSIC", "STANDARD"
     #   resp.content_policy.filters #=> Array
     #   resp.content_policy.filters[0].type #=> String, one of "SEXUAL", "VIOLENCE", "HATE", "INSULTS", "MISCONDUCT", "PROMPT_ATTACK"
     #   resp.content_policy.filters[0].input_strength #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
@@ -2641,6 +3208,7 @@ module Aws::Bedrock
     #   resp.content_policy.filters[0].output_action #=> String, one of "BLOCK", "NONE"
     #   resp.content_policy.filters[0].input_enabled #=> Boolean
     #   resp.content_policy.filters[0].output_enabled #=> Boolean
+    #   resp.content_policy.tier.tier_name #=> String, one of "CLASSIC", "STANDARD"
     #   resp.word_policy.words #=> Array
     #   resp.word_policy.words[0].text #=> String
     #   resp.word_policy.words[0].input_action #=> String, one of "BLOCK", "NONE"
@@ -2674,6 +3242,8 @@ module Aws::Bedrock
     #   resp.contextual_grounding_policy.filters[0].threshold #=> Float
     #   resp.contextual_grounding_policy.filters[0].action #=> String, one of "BLOCK", "NONE"
     #   resp.contextual_grounding_policy.filters[0].enabled #=> Boolean
+    #   resp.cross_region_details.guardrail_profile_id #=> String
+    #   resp.cross_region_details.guardrail_profile_arn #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.status_reasons #=> Array
@@ -2914,6 +3484,7 @@ module Aws::Bedrock
     #   * {Types::GetModelCustomizationJobResponse#client_request_token #client_request_token} => String
     #   * {Types::GetModelCustomizationJobResponse#role_arn #role_arn} => String
     #   * {Types::GetModelCustomizationJobResponse#status #status} => String
+    #   * {Types::GetModelCustomizationJobResponse#status_details #status_details} => Types::StatusDetails
     #   * {Types::GetModelCustomizationJobResponse#failure_message #failure_message} => String
     #   * {Types::GetModelCustomizationJobResponse#creation_time #creation_time} => Time
     #   * {Types::GetModelCustomizationJobResponse#last_modified_time #last_modified_time} => Time
@@ -2945,6 +3516,15 @@ module Aws::Bedrock
     #   resp.client_request_token #=> String
     #   resp.role_arn #=> String
     #   resp.status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.status_details.validation_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
+    #   resp.status_details.validation_details.creation_time #=> Time
+    #   resp.status_details.validation_details.last_modified_time #=> Time
+    #   resp.status_details.data_processing_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
+    #   resp.status_details.data_processing_details.creation_time #=> Time
+    #   resp.status_details.data_processing_details.last_modified_time #=> Time
+    #   resp.status_details.training_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
+    #   resp.status_details.training_details.creation_time #=> Time
+    #   resp.status_details.training_details.last_modified_time #=> Time
     #   resp.failure_message #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
@@ -2972,7 +3552,7 @@ module Aws::Bedrock
     #   resp.validation_data_config.validators #=> Array
     #   resp.validation_data_config.validators[0].s3_uri #=> String
     #   resp.output_data_config.s3_uri #=> String
-    #   resp.customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION"
+    #   resp.customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"
     #   resp.output_model_kms_key_arn #=> String
     #   resp.training_metrics.training_loss #=> Float
     #   resp.validation_metrics #=> Array
@@ -3256,6 +3836,121 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Get usecase for model access.
+    #
+    # @return [Types::GetUseCaseForModelAccessResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUseCaseForModelAccessResponse#form_data #form_data} => String
+    #
+    # @example Response structure
+    #
+    #   resp.form_data #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetUseCaseForModelAccess AWS API Documentation
+    #
+    # @overload get_use_case_for_model_access(params = {})
+    # @param [Hash] params ({})
+    def get_use_case_for_model_access(params = {}, options = {})
+      req = build_request(:get_use_case_for_model_access, params)
+      req.send_request(options)
+    end
+
+    # Lists custom model deployments in your account. You can filter the
+    # results by creation time, name, status, and associated model. Use this
+    # operation to manage and monitor your custom model deployments.
+    #
+    # We recommend using pagination to ensure that the operation returns
+    # quickly and successfully.
+    #
+    # The following actions are related to the `ListCustomModelDeployments`
+    # operation:
+    #
+    # * [CreateCustomModelDeployment][1]
+    #
+    # * [GetCustomModelDeployment][2]
+    #
+    # * [DeleteCustomModelDeployment][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateCustomModelDeployment.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetCustomModelDeployment.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_DeleteCustomModelDeployment.html
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :created_before
+    #   Filters deployments created before the specified date and time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :created_after
+    #   Filters deployments created after the specified date and time.
+    #
+    # @option params [String] :name_contains
+    #   Filters deployments whose names contain the specified string.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use this token to retrieve
+    #   additional results when the response is truncated.
+    #
+    # @option params [String] :sort_by
+    #   The field to sort the results by. The only supported value is
+    #   `CreationTime`.
+    #
+    # @option params [String] :sort_order
+    #   The sort order for the results. Valid values are `Ascending` and
+    #   `Descending`. Default is `Descending`.
+    #
+    # @option params [String] :status_equals
+    #   Filters deployments by status. Valid values are `CREATING`, `ACTIVE`,
+    #   and `FAILED`.
+    #
+    # @option params [String] :model_arn_equals
+    #   Filters deployments by the Amazon Resource Name (ARN) of the
+    #   associated custom model.
+    #
+    # @return [Types::ListCustomModelDeploymentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCustomModelDeploymentsResponse#next_token #next_token} => String
+    #   * {Types::ListCustomModelDeploymentsResponse#model_deployment_summaries #model_deployment_summaries} => Array&lt;Types::CustomModelDeploymentSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_custom_model_deployments({
+    #     created_before: Time.now,
+    #     created_after: Time.now,
+    #     name_contains: "ModelDeploymentName",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     sort_by: "CreationTime", # accepts CreationTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     status_equals: "Creating", # accepts Creating, Active, Failed
+    #     model_arn_equals: "CustomModelArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.model_deployment_summaries #=> Array
+    #   resp.model_deployment_summaries[0].custom_model_deployment_arn #=> String
+    #   resp.model_deployment_summaries[0].custom_model_deployment_name #=> String
+    #   resp.model_deployment_summaries[0].model_arn #=> String
+    #   resp.model_deployment_summaries[0].created_at #=> Time
+    #   resp.model_deployment_summaries[0].status #=> String, one of "Creating", "Active", "Failed"
+    #   resp.model_deployment_summaries[0].last_updated_at #=> Time
+    #   resp.model_deployment_summaries[0].failure_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListCustomModelDeployments AWS API Documentation
+    #
+    # @overload list_custom_model_deployments(params = {})
+    # @param [Hash] params ({})
+    def list_custom_model_deployments(params = {}, options = {})
+      req = build_request(:list_custom_model_deployments, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the custom models that you have created with the
     # `CreateModelCustomizationJob` operation.
     #
@@ -3306,6 +4001,20 @@ module Aws::Bedrock
     #   Return custom models depending on if the current account owns them
     #   (`true`) or if they were shared with the current account (`false`).
     #
+    # @option params [String] :model_status
+    #   The status of them model to filter results by. Possible values
+    #   include:
+    #
+    #   * `Creating` - Include only models that are currently being created
+    #     and validated.
+    #
+    #   * `Active` - Include only models that have been successfully created
+    #     and are ready for use.
+    #
+    #   * `Failed` - Include only models where the creation process failed.
+    #
+    #   If you don't specify a status, the API returns models in all states.
+    #
     # @return [Types::ListCustomModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListCustomModelsResponse#next_token #next_token} => String
@@ -3326,6 +4035,7 @@ module Aws::Bedrock
     #     sort_by: "CreationTime", # accepts CreationTime
     #     sort_order: "Ascending", # accepts Ascending, Descending
     #     is_owned: false,
+    #     model_status: "Active", # accepts Active, Creating, Failed
     #   })
     #
     # @example Response structure
@@ -3337,8 +4047,9 @@ module Aws::Bedrock
     #   resp.model_summaries[0].creation_time #=> Time
     #   resp.model_summaries[0].base_model_arn #=> String
     #   resp.model_summaries[0].base_model_name #=> String
-    #   resp.model_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION"
+    #   resp.model_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"
     #   resp.model_summaries[0].owner_account_id #=> String
+    #   resp.model_summaries[0].model_status #=> String, one of "Active", "Creating", "Failed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListCustomModels AWS API Documentation
     #
@@ -3439,6 +4150,50 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def list_evaluation_jobs(params = {}, options = {})
       req = build_request(:list_evaluation_jobs, params)
+      req.send_request(options)
+    end
+
+    # Get the offers associated with the specified model.
+    #
+    # @option params [required, String] :model_id
+    #   Model Id of the foundation model.
+    #
+    # @option params [String] :offer_type
+    #   Type of offer associated with the model.
+    #
+    # @return [Types::ListFoundationModelAgreementOffersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFoundationModelAgreementOffersResponse#model_id #model_id} => String
+    #   * {Types::ListFoundationModelAgreementOffersResponse#offers #offers} => Array&lt;Types::Offer&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_foundation_model_agreement_offers({
+    #     model_id: "BedrockModelId", # required
+    #     offer_type: "ALL", # accepts ALL, PUBLIC
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_id #=> String
+    #   resp.offers #=> Array
+    #   resp.offers[0].offer_id #=> String
+    #   resp.offers[0].offer_token #=> String
+    #   resp.offers[0].term_details.usage_based_pricing_term.rate_card #=> Array
+    #   resp.offers[0].term_details.usage_based_pricing_term.rate_card[0].dimension #=> String
+    #   resp.offers[0].term_details.usage_based_pricing_term.rate_card[0].price #=> String
+    #   resp.offers[0].term_details.usage_based_pricing_term.rate_card[0].description #=> String
+    #   resp.offers[0].term_details.usage_based_pricing_term.rate_card[0].unit #=> String
+    #   resp.offers[0].term_details.legal_term.url #=> String
+    #   resp.offers[0].term_details.support_term.refund_policy_description #=> String
+    #   resp.offers[0].term_details.validity_term.agreement_duration #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListFoundationModelAgreementOffers AWS API Documentation
+    #
+    # @overload list_foundation_model_agreement_offers(params = {})
+    # @param [Hash] params ({})
+    def list_foundation_model_agreement_offers(params = {}, options = {})
+      req = build_request(:list_foundation_model_agreement_offers, params)
       req.send_request(options)
     end
 
@@ -3564,6 +4319,8 @@ module Aws::Bedrock
     #   resp.guardrails[0].version #=> String
     #   resp.guardrails[0].created_at #=> Time
     #   resp.guardrails[0].updated_at #=> Time
+    #   resp.guardrails[0].cross_region_details.guardrail_profile_id #=> String
+    #   resp.guardrails[0].cross_region_details.guardrail_profile_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListGuardrails AWS API Documentation
@@ -3942,12 +4699,21 @@ module Aws::Bedrock
     #   resp.model_customization_job_summaries[0].base_model_arn #=> String
     #   resp.model_customization_job_summaries[0].job_name #=> String
     #   resp.model_customization_job_summaries[0].status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.model_customization_job_summaries[0].status_details.validation_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
+    #   resp.model_customization_job_summaries[0].status_details.validation_details.creation_time #=> Time
+    #   resp.model_customization_job_summaries[0].status_details.validation_details.last_modified_time #=> Time
+    #   resp.model_customization_job_summaries[0].status_details.data_processing_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
+    #   resp.model_customization_job_summaries[0].status_details.data_processing_details.creation_time #=> Time
+    #   resp.model_customization_job_summaries[0].status_details.data_processing_details.last_modified_time #=> Time
+    #   resp.model_customization_job_summaries[0].status_details.training_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
+    #   resp.model_customization_job_summaries[0].status_details.training_details.creation_time #=> Time
+    #   resp.model_customization_job_summaries[0].status_details.training_details.last_modified_time #=> Time
     #   resp.model_customization_job_summaries[0].last_modified_time #=> Time
     #   resp.model_customization_job_summaries[0].creation_time #=> Time
     #   resp.model_customization_job_summaries[0].end_time #=> Time
     #   resp.model_customization_job_summaries[0].custom_model_arn #=> String
     #   resp.model_customization_job_summaries[0].custom_model_name #=> String
-    #   resp.model_customization_job_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION"
+    #   resp.model_customization_job_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelCustomizationJobs AWS API Documentation
     #
@@ -4409,6 +5175,28 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Put usecase for model access.
+    #
+    # @option params [required, String, StringIO, File] :form_data
+    #   Put customer profile Request.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_use_case_for_model_access({
+    #     form_data: "data", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutUseCaseForModelAccess AWS API Documentation
+    #
+    # @overload put_use_case_for_model_access(params = {})
+    # @param [Hash] params ({})
+    def put_use_case_for_model_access(params = {}, options = {})
+      req = build_request(:put_use_case_for_model_access, params)
+      req.send_request(options)
+    end
+
     # Registers an existing Amazon SageMaker endpoint with Amazon Bedrock
     # Marketplace, allowing it to be used with Amazon Bedrock APIs.
     #
@@ -4669,6 +5457,18 @@ module Aws::Bedrock
     #   The contextual grounding policy configuration used to update a
     #   guardrail.
     #
+    # @option params [Types::GuardrailCrossRegionConfig] :cross_region_config
+    #   The system-defined guardrail profile that you're using with your
+    #   guardrail. Guardrail profiles define the destination Amazon Web
+    #   Services Regions where guardrail inference requests can be
+    #   automatically routed.
+    #
+    #   For more information, see the [Amazon Bedrock User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #
     # @option params [required, String] :blocked_input_messaging
     #   The message to return when the guardrail blocks a prompt.
     #
@@ -4704,6 +5504,9 @@ module Aws::Bedrock
     #           output_enabled: false,
     #         },
     #       ],
+    #       tier_config: {
+    #         tier_name: "CLASSIC", # required, accepts CLASSIC, STANDARD
+    #       },
     #     },
     #     content_policy_config: {
     #       filters_config: [ # required
@@ -4719,6 +5522,9 @@ module Aws::Bedrock
     #           output_enabled: false,
     #         },
     #       ],
+    #       tier_config: {
+    #         tier_name: "CLASSIC", # required, accepts CLASSIC, STANDARD
+    #       },
     #     },
     #     word_policy_config: {
     #       words_config: [
@@ -4773,6 +5579,9 @@ module Aws::Bedrock
     #           enabled: false,
     #         },
     #       ],
+    #     },
+    #     cross_region_config: {
+    #       guardrail_profile_identifier: "GuardrailCrossRegionGuardrailProfileIdentifier", # required
     #     },
     #     blocked_input_messaging: "GuardrailBlockedMessaging", # required
     #     blocked_outputs_messaging: "GuardrailBlockedMessaging", # required
@@ -4932,7 +5741,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

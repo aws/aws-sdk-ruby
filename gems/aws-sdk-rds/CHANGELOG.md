@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.283.0 (2025-07-01)
+------------------
+
+* Feature - Amazon RDS Custom for Oracle now supports multi-AZ database instances.
+
+1.282.0 (2025-06-27)
+------------------
+
+* Feature - StartDBCluster and StopDBCluster can now throw InvalidDBShardGroupStateFault.
+
+1.281.0 (2025-06-24)
+------------------
+
+* Feature - Adding support for RDS on Dedicated Local Zones, including local backup target, snapshot availability zone and snapshot target
+
+1.280.0 (2025-06-11)
+------------------
+
+* Feature - Updates Amazon RDS documentation for Amazon RDS for Db2 cross-Region replicas in standby mode.
+
+1.279.0 (2025-06-06)
+------------------
+
+* Feature - Include Global Cluster Identifier in DBCluster if the DBCluster is a Global Cluster Member.
+
+1.278.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.277.0 (2025-05-20)
+------------------
+
+* Feature - This release introduces the new DescribeDBMajorEngineVersions API for describing the properties of specific major versions of database engines.
+
+1.276.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.275.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.274.0 (2025-04-24)
 ------------------
 

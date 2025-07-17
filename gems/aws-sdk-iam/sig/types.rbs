@@ -21,7 +21,7 @@ module Aws::IAM
     class AccessKey
       attr_accessor user_name: ::String
       attr_accessor access_key_id: ::String
-      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor status: ("Active" | "Inactive" | "Expired")
       attr_accessor secret_access_key: ::String
       attr_accessor create_date: ::Time
       SENSITIVE: [:secret_access_key]
@@ -37,7 +37,7 @@ module Aws::IAM
     class AccessKeyMetadata
       attr_accessor user_name: ::String
       attr_accessor access_key_id: ::String
-      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor status: ("Active" | "Inactive" | "Expired")
       attr_accessor create_date: ::Time
       SENSITIVE: []
     end
@@ -250,6 +250,7 @@ module Aws::IAM
     class CreateServiceSpecificCredentialRequest
       attr_accessor user_name: ::String
       attr_accessor service_name: ::String
+      attr_accessor credential_age_days: ::Integer
       SENSITIVE: []
     end
 
@@ -1368,11 +1369,16 @@ module Aws::IAM
     class ListServiceSpecificCredentialsRequest
       attr_accessor user_name: ::String
       attr_accessor service_name: ::String
+      attr_accessor all_users: bool
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
       SENSITIVE: []
     end
 
     class ListServiceSpecificCredentialsResponse
       attr_accessor service_specific_credentials: ::Array[Types::ServiceSpecificCredentialMetadata]
+      attr_accessor marker: ::String
+      attr_accessor is_truncated: bool
       SENSITIVE: []
     end
 
@@ -1755,7 +1761,7 @@ module Aws::IAM
       attr_accessor ssh_public_key_id: ::String
       attr_accessor fingerprint: ::String
       attr_accessor ssh_public_key_body: ::String
-      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor status: ("Active" | "Inactive" | "Expired")
       attr_accessor upload_date: ::Time
       SENSITIVE: []
     end
@@ -1763,7 +1769,7 @@ module Aws::IAM
     class SSHPublicKeyMetadata
       attr_accessor user_name: ::String
       attr_accessor ssh_public_key_id: ::String
-      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor status: ("Active" | "Inactive" | "Expired")
       attr_accessor upload_date: ::Time
       SENSITIVE: []
     end
@@ -1812,20 +1818,25 @@ module Aws::IAM
 
     class ServiceSpecificCredential
       attr_accessor create_date: ::Time
+      attr_accessor expiration_date: ::Time
       attr_accessor service_name: ::String
       attr_accessor service_user_name: ::String
       attr_accessor service_password: ::String
+      attr_accessor service_credential_alias: ::String
+      attr_accessor service_credential_secret: ::String
       attr_accessor service_specific_credential_id: ::String
       attr_accessor user_name: ::String
-      attr_accessor status: ("Active" | "Inactive")
-      SENSITIVE: [:service_password]
+      attr_accessor status: ("Active" | "Inactive" | "Expired")
+      SENSITIVE: [:service_password, :service_credential_secret]
     end
 
     class ServiceSpecificCredentialMetadata
       attr_accessor user_name: ::String
-      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor status: ("Active" | "Inactive" | "Expired")
       attr_accessor service_user_name: ::String
+      attr_accessor service_credential_alias: ::String
       attr_accessor create_date: ::Time
+      attr_accessor expiration_date: ::Time
       attr_accessor service_specific_credential_id: ::String
       attr_accessor service_name: ::String
       SENSITIVE: []
@@ -1846,7 +1857,7 @@ module Aws::IAM
       attr_accessor user_name: ::String
       attr_accessor certificate_id: ::String
       attr_accessor certificate_body: ::String
-      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor status: ("Active" | "Inactive" | "Expired")
       attr_accessor upload_date: ::Time
       SENSITIVE: []
     end
@@ -2020,7 +2031,7 @@ module Aws::IAM
     class UpdateAccessKeyRequest
       attr_accessor user_name: ::String
       attr_accessor access_key_id: ::String
-      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor status: ("Active" | "Inactive" | "Expired")
       SENSITIVE: []
     end
 
@@ -2101,7 +2112,7 @@ module Aws::IAM
     class UpdateSSHPublicKeyRequest
       attr_accessor user_name: ::String
       attr_accessor ssh_public_key_id: ::String
-      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor status: ("Active" | "Inactive" | "Expired")
       SENSITIVE: []
     end
 
@@ -2115,14 +2126,14 @@ module Aws::IAM
     class UpdateServiceSpecificCredentialRequest
       attr_accessor user_name: ::String
       attr_accessor service_specific_credential_id: ::String
-      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor status: ("Active" | "Inactive" | "Expired")
       SENSITIVE: []
     end
 
     class UpdateSigningCertificateRequest
       attr_accessor user_name: ::String
       attr_accessor certificate_id: ::String
-      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor status: ("Active" | "Inactive" | "Expired")
       SENSITIVE: []
     end
 

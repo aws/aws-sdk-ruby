@@ -8,13 +8,13 @@
 Feature: Smoke tests for NetworkFlowMonitor
 
   @networkflowmonitor @smoke
-  Scenario: GetMonitorSuccess
+  Scenario: ListMonitors
     Given I create a 'Aws::NetworkFlowMonitor' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'get_monitor' with params:
+    When I call the operation 'list_monitors' with params:
       """
-{"monitor_name":"SmokeTestMonitor"}
+{}
       """
-    Then I expect an error was raised
+    Then I expect an error was not raised

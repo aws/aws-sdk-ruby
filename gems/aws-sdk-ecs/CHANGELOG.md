@@ -1,6 +1,61 @@
 Unreleased Changes
 ------------------
 
+1.198.0 (2025-07-16)
+------------------
+
+* Feature - This release removes hookDetails for the Amazon ECS native blue/green deployments.
+
+1.197.0 (2025-07-15)
+------------------
+
+* Feature - Amazon ECS supports native blue/green deployments, allowing you to validate new service revisions before directing production traffic to them.
+
+1.196.0 (2025-06-25)
+------------------
+
+* Feature - Updates for change to Amazon ECS default log driver mode from blocking to non-blocking
+
+1.195.0 (2025-06-20)
+------------------
+
+* Feature - Add ECS support for Windows Server 2025
+
+1.194.0 (2025-06-12)
+------------------
+
+* Feature - This Amazon ECS  release supports updating the capacityProviderStrategy parameter in update-service.
+
+1.193.0 (2025-06-02)
+------------------
+
+* Feature - Updates Amazon ECS documentation to include note for upcoming default log driver mode change.
+
+1.192.0 (2025-05-16)
+------------------
+
+* Feature - This is an Amazon ECs documentation only release to support the change of the container exit "reason" field from 255 characters to 1024 characters.
+
+1.191.0 (2025-05-13)
+------------------
+
+* Feature - This release extends functionality for Amazon EBS volumes attached to Amazon ECS tasks by adding support for the new EBS volumeInitializationRate parameter in ECS RunTask/StartTask/CreateService/UpdateService APIs.
+
+1.190.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.189.0 (2025-05-05)
+------------------
+
+* Feature - Add support to roll back an In_Progress ECS Service Deployment
+
+1.188.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.187.0 (2025-04-25)
 ------------------
 

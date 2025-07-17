@@ -456,6 +456,10 @@ module Aws
                                      },
                                    ]
                                  }?,
+                                 inline_code: {
+                                   code: ::String,
+                                   language: ("Python_3")
+                                 }?,
                                  input: {
                                  }?,
                                  iterator: {
@@ -465,8 +469,64 @@ module Aws
                                      guardrail_identifier: ::String?,
                                      guardrail_version: ::String?
                                    }?,
+                                   inference_configuration: {
+                                     text: {
+                                       max_tokens: ::Integer?,
+                                       stop_sequences: Array[::String]?,
+                                       temperature: ::Float?,
+                                       top_p: ::Float?
+                                     }?
+                                   }?,
                                    knowledge_base_id: ::String,
-                                   model_id: ::String?
+                                   model_id: ::String?,
+                                   number_of_results: ::Integer?,
+                                   orchestration_configuration: {
+                                     additional_model_request_fields: Hash[::String, {
+                                       }]?,
+                                     inference_config: {
+                                       text: {
+                                         max_tokens: ::Integer?,
+                                         stop_sequences: Array[::String]?,
+                                         temperature: ::Float?,
+                                         top_p: ::Float?
+                                       }?
+                                     }?,
+                                     performance_config: {
+                                       latency: ("standard" | "optimized")?
+                                     }?,
+                                     prompt_template: {
+                                       text_prompt_template: ::String?
+                                     }?
+                                   }?,
+                                   prompt_template: {
+                                     text_prompt_template: ::String?
+                                   }?,
+                                   reranking_configuration: {
+                                     bedrock_reranking_configuration: {
+                                       metadata_configuration: {
+                                         selection_mode: ("SELECTIVE" | "ALL"),
+                                         selective_mode_configuration: {
+                                           fields_to_exclude: Array[
+                                             {
+                                               field_name: ::String
+                                             },
+                                           ]?,
+                                           fields_to_include: Array[
+                                             {
+                                               field_name: ::String
+                                             },
+                                           ]?
+                                         }?
+                                       }?,
+                                       model_configuration: {
+                                         additional_model_request_fields: Hash[::String, {
+                                           }]?,
+                                         model_arn: ::String
+                                       },
+                                       number_of_reranked_results: ::Integer?
+                                     }?,
+                                     type: ("BEDROCK_RERANKING_MODEL")
+                                   }?
                                  }?,
                                  lambda_function: {
                                    lambda_arn: ::String
@@ -474,6 +534,18 @@ module Aws
                                  lex: {
                                    bot_alias_arn: ::String,
                                    locale_id: ::String
+                                 }?,
+                                 loop: {
+                                   definition: untyped
+                                 }?,
+                                 loop_controller: {
+                                   continue_condition: {
+                                     expression: ::String?,
+                                     name: ::String
+                                   },
+                                   max_iterations: ::Integer?
+                                 }?,
+                                 loop_input: {
                                  }?,
                                  output: {
                                  }?,
@@ -586,6 +658,7 @@ module Aws
                                }?,
                                inputs: Array[
                                  {
+                                   category: ("LoopCondition" | "ReturnValueToLoopStart" | "ExitLoop")?,
                                    expression: ::String,
                                    name: ::String,
                                    type: ("String" | "Number" | "Boolean" | "Object" | "Array")
@@ -598,7 +671,7 @@ module Aws
                                    type: ("String" | "Number" | "Boolean" | "Object" | "Array")
                                  },
                                ]?,
-                               type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector")
+                               type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector" | "InlineCode" | "Loop" | "LoopInput" | "LoopController")
                              },
                            ]?
                          },
@@ -612,6 +685,7 @@ module Aws
       interface _CreateFlowAliasResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateFlowAliasResponse]
         def arn: () -> ::String
+        def concurrency_configuration: () -> Types::FlowAliasConcurrencyConfiguration
         def created_at: () -> ::Time
         def description: () -> ::String
         def flow_id: () -> ::String
@@ -623,6 +697,10 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_flow_alias-instance_method
       def create_flow_alias: (
                                ?client_token: ::String,
+                               ?concurrency_configuration: {
+                                 max_concurrency: ::Integer?,
+                                 type: ("Automatic" | "Manual")
+                               },
                                ?description: ::String,
                                flow_identifier: ::String,
                                name: ::String,
@@ -823,7 +901,12 @@ module Aws
                                        },
                                        vector_index_name: ::String
                                      }?,
-                                     type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS" | "MONGO_DB_ATLAS" | "NEPTUNE_ANALYTICS" | "OPENSEARCH_MANAGED_CLUSTER")
+                                     s3_vectors_configuration: {
+                                       index_arn: ::String?,
+                                       index_name: ::String?,
+                                       vector_bucket_arn: ::String?
+                                     }?,
+                                     type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS" | "MONGO_DB_ATLAS" | "NEPTUNE_ANALYTICS" | "OPENSEARCH_MANAGED_CLUSTER" | "S3_VECTORS")
                                    },
                                    ?tags: Hash[::String, ::String]
                                  ) -> _CreateKnowledgeBaseResponseSuccess
@@ -1241,6 +1324,7 @@ module Aws
       interface _GetFlowAliasResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetFlowAliasResponse]
         def arn: () -> ::String
+        def concurrency_configuration: () -> Types::FlowAliasConcurrencyConfiguration
         def created_at: () -> ::Time
         def description: () -> ::String
         def flow_id: () -> ::String
@@ -1785,6 +1869,7 @@ module Aws
                                 agent_alias_id: ::String,
                                 agent_alias_name: ::String,
                                 agent_id: ::String,
+                                ?alias_invocation_state: ("ACCEPT_INVOCATIONS" | "REJECT_INVOCATIONS"),
                                 ?description: ::String,
                                 ?routing_configuration: Array[
                                   {
@@ -2053,6 +2138,10 @@ module Aws
                                      },
                                    ]
                                  }?,
+                                 inline_code: {
+                                   code: ::String,
+                                   language: ("Python_3")
+                                 }?,
                                  input: {
                                  }?,
                                  iterator: {
@@ -2062,8 +2151,64 @@ module Aws
                                      guardrail_identifier: ::String?,
                                      guardrail_version: ::String?
                                    }?,
+                                   inference_configuration: {
+                                     text: {
+                                       max_tokens: ::Integer?,
+                                       stop_sequences: Array[::String]?,
+                                       temperature: ::Float?,
+                                       top_p: ::Float?
+                                     }?
+                                   }?,
                                    knowledge_base_id: ::String,
-                                   model_id: ::String?
+                                   model_id: ::String?,
+                                   number_of_results: ::Integer?,
+                                   orchestration_configuration: {
+                                     additional_model_request_fields: Hash[::String, {
+                                       }]?,
+                                     inference_config: {
+                                       text: {
+                                         max_tokens: ::Integer?,
+                                         stop_sequences: Array[::String]?,
+                                         temperature: ::Float?,
+                                         top_p: ::Float?
+                                       }?
+                                     }?,
+                                     performance_config: {
+                                       latency: ("standard" | "optimized")?
+                                     }?,
+                                     prompt_template: {
+                                       text_prompt_template: ::String?
+                                     }?
+                                   }?,
+                                   prompt_template: {
+                                     text_prompt_template: ::String?
+                                   }?,
+                                   reranking_configuration: {
+                                     bedrock_reranking_configuration: {
+                                       metadata_configuration: {
+                                         selection_mode: ("SELECTIVE" | "ALL"),
+                                         selective_mode_configuration: {
+                                           fields_to_exclude: Array[
+                                             {
+                                               field_name: ::String
+                                             },
+                                           ]?,
+                                           fields_to_include: Array[
+                                             {
+                                               field_name: ::String
+                                             },
+                                           ]?
+                                         }?
+                                       }?,
+                                       model_configuration: {
+                                         additional_model_request_fields: Hash[::String, {
+                                           }]?,
+                                         model_arn: ::String
+                                       },
+                                       number_of_reranked_results: ::Integer?
+                                     }?,
+                                     type: ("BEDROCK_RERANKING_MODEL")
+                                   }?
                                  }?,
                                  lambda_function: {
                                    lambda_arn: ::String
@@ -2071,6 +2216,18 @@ module Aws
                                  lex: {
                                    bot_alias_arn: ::String,
                                    locale_id: ::String
+                                 }?,
+                                 loop: {
+                                   definition: untyped
+                                 }?,
+                                 loop_controller: {
+                                   continue_condition: {
+                                     expression: ::String?,
+                                     name: ::String
+                                   },
+                                   max_iterations: ::Integer?
+                                 }?,
+                                 loop_input: {
                                  }?,
                                  output: {
                                  }?,
@@ -2183,6 +2340,7 @@ module Aws
                                }?,
                                inputs: Array[
                                  {
+                                   category: ("LoopCondition" | "ReturnValueToLoopStart" | "ExitLoop")?,
                                    expression: ::String,
                                    name: ::String,
                                    type: ("String" | "Number" | "Boolean" | "Object" | "Array")
@@ -2195,7 +2353,7 @@ module Aws
                                    type: ("String" | "Number" | "Boolean" | "Object" | "Array")
                                  },
                                ]?,
-                               type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector")
+                               type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector" | "InlineCode" | "Loop" | "LoopInput" | "LoopController")
                              },
                            ]?
                          },
@@ -2209,6 +2367,7 @@ module Aws
       interface _UpdateFlowAliasResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFlowAliasResponse]
         def arn: () -> ::String
+        def concurrency_configuration: () -> Types::FlowAliasConcurrencyConfiguration
         def created_at: () -> ::Time
         def description: () -> ::String
         def flow_id: () -> ::String
@@ -2220,6 +2379,10 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#update_flow_alias-instance_method
       def update_flow_alias: (
                                alias_identifier: ::String,
+                               ?concurrency_configuration: {
+                                 max_concurrency: ::Integer?,
+                                 type: ("Automatic" | "Manual")
+                               },
                                ?description: ::String,
                                flow_identifier: ::String,
                                name: ::String,
@@ -2398,7 +2561,12 @@ module Aws
                                        },
                                        vector_index_name: ::String
                                      }?,
-                                     type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS" | "MONGO_DB_ATLAS" | "NEPTUNE_ANALYTICS" | "OPENSEARCH_MANAGED_CLUSTER")
+                                     s3_vectors_configuration: {
+                                       index_arn: ::String?,
+                                       index_name: ::String?,
+                                       vector_bucket_arn: ::String?
+                                     }?,
+                                     type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS" | "MONGO_DB_ATLAS" | "NEPTUNE_ANALYTICS" | "OPENSEARCH_MANAGED_CLUSTER" | "S3_VECTORS")
                                    }
                                  ) -> _UpdateKnowledgeBaseResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKnowledgeBaseResponseSuccess
@@ -2561,6 +2729,10 @@ module Aws
                                                   },
                                                 ]
                                               }?,
+                                              inline_code: {
+                                                code: ::String,
+                                                language: ("Python_3")
+                                              }?,
                                               input: {
                                               }?,
                                               iterator: {
@@ -2570,8 +2742,64 @@ module Aws
                                                   guardrail_identifier: ::String?,
                                                   guardrail_version: ::String?
                                                 }?,
+                                                inference_configuration: {
+                                                  text: {
+                                                    max_tokens: ::Integer?,
+                                                    stop_sequences: Array[::String]?,
+                                                    temperature: ::Float?,
+                                                    top_p: ::Float?
+                                                  }?
+                                                }?,
                                                 knowledge_base_id: ::String,
-                                                model_id: ::String?
+                                                model_id: ::String?,
+                                                number_of_results: ::Integer?,
+                                                orchestration_configuration: {
+                                                  additional_model_request_fields: Hash[::String, {
+                                                    }]?,
+                                                  inference_config: {
+                                                    text: {
+                                                      max_tokens: ::Integer?,
+                                                      stop_sequences: Array[::String]?,
+                                                      temperature: ::Float?,
+                                                      top_p: ::Float?
+                                                    }?
+                                                  }?,
+                                                  performance_config: {
+                                                    latency: ("standard" | "optimized")?
+                                                  }?,
+                                                  prompt_template: {
+                                                    text_prompt_template: ::String?
+                                                  }?
+                                                }?,
+                                                prompt_template: {
+                                                  text_prompt_template: ::String?
+                                                }?,
+                                                reranking_configuration: {
+                                                  bedrock_reranking_configuration: {
+                                                    metadata_configuration: {
+                                                      selection_mode: ("SELECTIVE" | "ALL"),
+                                                      selective_mode_configuration: {
+                                                        fields_to_exclude: Array[
+                                                          {
+                                                            field_name: ::String
+                                                          },
+                                                        ]?,
+                                                        fields_to_include: Array[
+                                                          {
+                                                            field_name: ::String
+                                                          },
+                                                        ]?
+                                                      }?
+                                                    }?,
+                                                    model_configuration: {
+                                                      additional_model_request_fields: Hash[::String, {
+                                                        }]?,
+                                                      model_arn: ::String
+                                                    },
+                                                    number_of_reranked_results: ::Integer?
+                                                  }?,
+                                                  type: ("BEDROCK_RERANKING_MODEL")
+                                                }?
                                               }?,
                                               lambda_function: {
                                                 lambda_arn: ::String
@@ -2579,6 +2807,18 @@ module Aws
                                               lex: {
                                                 bot_alias_arn: ::String,
                                                 locale_id: ::String
+                                              }?,
+                                              loop: {
+                                                definition: untyped
+                                              }?,
+                                              loop_controller: {
+                                                continue_condition: {
+                                                  expression: ::String?,
+                                                  name: ::String
+                                                },
+                                                max_iterations: ::Integer?
+                                              }?,
+                                              loop_input: {
                                               }?,
                                               output: {
                                               }?,
@@ -2691,6 +2931,7 @@ module Aws
                                             }?,
                                             inputs: Array[
                                               {
+                                                category: ("LoopCondition" | "ReturnValueToLoopStart" | "ExitLoop")?,
                                                 expression: ::String,
                                                 name: ::String,
                                                 type: ("String" | "Number" | "Boolean" | "Object" | "Array")
@@ -2703,7 +2944,7 @@ module Aws
                                                 type: ("String" | "Number" | "Boolean" | "Object" | "Array")
                                               },
                                             ]?,
-                                            type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector")
+                                            type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector" | "InlineCode" | "Loop" | "LoopInput" | "LoopController")
                                           },
                                         ]?
                                       }

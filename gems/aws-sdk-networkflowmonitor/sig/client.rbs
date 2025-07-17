@@ -112,7 +112,7 @@ module Aws
       interface _CreateScopeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateScopeOutput]
         def scope_id: () -> ::String
-        def status: () -> ("SUCCEEDED" | "IN_PROGRESS" | "FAILED")
+        def status: () -> ("SUCCEEDED" | "IN_PROGRESS" | "FAILED" | "DEACTIVATING" | "DEACTIVATED")
         def scope_arn: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
@@ -249,7 +249,7 @@ module Aws
       interface _GetScopeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetScopeOutput]
         def scope_id: () -> ::String
-        def status: () -> ("SUCCEEDED" | "IN_PROGRESS" | "FAILED")
+        def status: () -> ("SUCCEEDED" | "IN_PROGRESS" | "FAILED" | "DEACTIVATING" | "DEACTIVATED")
         def scope_arn: () -> ::String
         def targets: () -> ::Array[Types::TargetResource]
         def tags: () -> ::Hash[::String, ::String]
@@ -434,7 +434,7 @@ module Aws
       interface _UpdateScopeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateScopeOutput]
         def scope_id: () -> ::String
-        def status: () -> ("SUCCEEDED" | "IN_PROGRESS" | "FAILED")
+        def status: () -> ("SUCCEEDED" | "IN_PROGRESS" | "FAILED" | "DEACTIVATING" | "DEACTIVATED")
         def scope_arn: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end

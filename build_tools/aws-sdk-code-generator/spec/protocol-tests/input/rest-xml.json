@@ -2,11 +2,20 @@
     {
         "description": "Test cases for AllQueryStringTypes operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "AllQueryStringTypesInput": {
@@ -457,11 +466,20 @@
     {
         "description": "Test cases for BodyWithXmlName operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "BodyWithXmlNameInputOutput": {
@@ -526,11 +544,20 @@
     {
         "description": "Test cases for ConstantAndVariableQueryString operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "ConstantAndVariableQueryStringInput": {
@@ -607,11 +634,20 @@
     {
         "description": "Test cases for ConstantQueryString operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "ConstantQueryStringInput": {
@@ -661,11 +697,20 @@
     {
         "description": "Test cases for EmptyInputAndEmptyOutput operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "EmptyInputAndEmptyOutputInput": {
@@ -701,11 +746,20 @@
     {
         "description": "Test cases for EndpointOperation operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {},
         "cases": [
@@ -737,11 +791,20 @@
     {
         "description": "Test cases for EndpointWithHostLabelHeaderOperation operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "HostLabelHeaderInput": {
@@ -799,11 +862,20 @@
     {
         "description": "Test cases for EndpointWithHostLabelOperation operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "EndpointWithHostLabelOperationRequest": {
@@ -857,11 +929,20 @@
     {
         "description": "Test cases for FlattenedXmlMap operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "FlattenedXmlMapRequest": {
@@ -933,11 +1014,20 @@
     {
         "description": "Test cases for FlattenedXmlMapWithXmlName operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "FlattenedXmlMapWithXmlNameRequest": {
@@ -1002,11 +1092,20 @@
     {
         "description": "Test cases for HttpEmptyPrefixHeaders operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "HttpEmptyPrefixHeadersInput": {
@@ -1075,11 +1174,20 @@
     {
         "description": "Test cases for HttpEnumPayload operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "EnumPayloadInput": {
@@ -1129,11 +1237,20 @@
     {
         "description": "Test cases for HttpPayloadTraits operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "HttpPayloadTraitsInputOutput": {
@@ -1221,11 +1338,20 @@
     {
         "description": "Test cases for HttpPayloadWithMemberXmlName operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "HttpPayloadWithMemberXmlNameInputOutput": {
@@ -1290,11 +1416,20 @@
     {
         "description": "Test cases for HttpPayloadWithStructure operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "HttpPayloadWithStructureInputOutput": {
@@ -1362,11 +1497,20 @@
     {
         "description": "Test cases for HttpPayloadWithUnion operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "HttpPayloadWithUnionInputOutput": {
@@ -1454,11 +1598,20 @@
     {
         "description": "Test cases for HttpPayloadWithXmlName operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "HttpPayloadWithXmlNameInputOutput": {
@@ -1523,11 +1676,20 @@
     {
         "description": "Test cases for HttpPayloadWithXmlNamespace operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "HttpPayloadWithXmlNamespaceInputOutput": {
@@ -1592,11 +1754,20 @@
     {
         "description": "Test cases for HttpPayloadWithXmlNamespaceAndPrefix operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "HttpPayloadWithXmlNamespaceAndPrefixInputOutput": {
@@ -1664,11 +1835,20 @@
     {
         "description": "Test cases for HttpPrefixHeaders operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "HttpPrefixHeadersInputOutput": {
@@ -1795,11 +1975,20 @@
     {
         "description": "Test cases for HttpRequestWithFloatLabels operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "HttpRequestWithFloatLabelsInput": {
@@ -1908,11 +2097,20 @@
     {
         "description": "Test cases for HttpRequestWithGreedyLabelInPath operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "HttpRequestWithGreedyLabelInPathInput": {
@@ -1968,11 +2166,20 @@
     {
         "description": "Test cases for HttpRequestWithLabels operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "HttpRequestWithLabelsInput": {
@@ -2127,11 +2334,20 @@
     {
         "description": "Test cases for HttpRequestWithLabelsAndTimestampFormat operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "HttpRequestWithLabelsAndTimestampFormatInput": {
@@ -2247,11 +2463,20 @@
     {
         "description": "Test cases for HttpStringPayload operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "StringPayloadInput": {
@@ -2298,11 +2523,20 @@
     {
         "description": "Test cases for InputAndOutputWithHeaders operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "InputAndOutputWithHeadersIO": {
@@ -2736,11 +2970,20 @@
     {
         "description": "Test cases for NestedXmlMaps operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "NestedXmlMapsRequest": {
@@ -2855,11 +3098,20 @@
     {
         "description": "Test cases for NestedXmlMapWithXmlName operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "NestedXmlMapWithXmlNameRequest": {
@@ -2938,11 +3190,20 @@
     {
         "description": "Test cases for NoInputAndNoOutput operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {},
         "cases": [
@@ -2970,11 +3231,20 @@
     {
         "description": "Test cases for NoInputAndOutput operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {},
         "cases": [
@@ -3002,11 +3272,20 @@
     {
         "description": "Test cases for NullAndEmptyHeadersClient operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "NullAndEmptyHeadersIO": {
@@ -3078,11 +3357,20 @@
     {
         "description": "Test cases for OmitsNullSerializesEmptyString operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "OmitsNullSerializesEmptyStringInput": {
@@ -3158,11 +3446,20 @@
     {
         "description": "Test cases for PutWithContentEncoding operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "PutWithContentEncodingInput": {
@@ -3251,11 +3548,20 @@
     {
         "description": "Test cases for QueryIdempotencyTokenAutoFill operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "QueryIdempotencyTokenAutoFillInput": {
@@ -3325,11 +3631,20 @@
     {
         "description": "Test cases for QueryParamsAsStringListMap operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "QueryParamsAsStringListMapInput": {
@@ -3400,11 +3715,20 @@
     {
         "description": "Test cases for QueryPrecedence operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "QueryPrecedenceInput": {
@@ -3467,11 +3791,20 @@
     {
         "description": "Test cases for RecursiveShapes operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "RecursiveShapesRequest": {
@@ -3554,11 +3887,20 @@
     {
         "description": "Test cases for SimpleScalarProperties operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "SimpleScalarPropertiesRequest": {
@@ -3844,11 +4186,20 @@
     {
         "description": "Test cases for TimestampFormatHeaders operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "TimestampFormatHeadersIO": {
@@ -3964,11 +4315,20 @@
     {
         "description": "Test cases for XmlAttributes operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "XmlAttributesRequest": {
@@ -4054,11 +4414,20 @@
     {
         "description": "Test cases for XmlAttributesOnPayload operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "XmlAttributesOnPayloadRequest": {
@@ -4125,11 +4494,20 @@
     {
         "description": "Test cases for XmlBlobs operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "XmlBlobsRequest": {
@@ -4178,11 +4556,20 @@
     {
         "description": "Test cases for XmlEmptyLists operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "XmlEmptyListsRequest": {
@@ -4398,11 +4785,20 @@
     {
         "description": "Test cases for XmlEmptyMaps operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "XmlEmptyMapsRequest": {
@@ -4467,11 +4863,20 @@
     {
         "description": "Test cases for XmlEmptyStrings operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "XmlEmptyStringsRequest": {
@@ -4520,11 +4925,20 @@
     {
         "description": "Test cases for XmlEnums operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "XmlEnumsRequest": {
@@ -4634,11 +5048,20 @@
     {
         "description": "Test cases for XmlIntEnums operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "XmlIntEnumsRequest": {
@@ -4742,11 +5165,20 @@
     {
         "description": "Test cases for XmlLists operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "XmlListsRequest": {
@@ -5031,11 +5463,20 @@
     {
         "description": "Test cases for XmlMaps operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "XmlMapsRequest": {
@@ -5108,11 +5549,20 @@
     {
         "description": "Test cases for XmlMapsXmlName operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "XmlMapsXmlNameRequest": {
@@ -5186,11 +5636,20 @@
     {
         "description": "Test cases for XmlMapWithXmlNamespace operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "XmlMapWithXmlNamespaceRequest": {
@@ -5257,11 +5716,20 @@
     {
         "description": "Test cases for XmlNamespaces operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "XmlNamespacesRequest": {
@@ -5340,11 +5808,20 @@
     {
         "description": "Test cases for XmlTimestamps operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "XmlTimestampsRequest": {
@@ -5603,11 +6080,20 @@
     {
         "description": "Test cases for XmlUnions operation",
         "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
             "protocol": "rest-xml",
             "protocols": [
                 "rest-xml"
             ],
-            "apiVersion": "2019-12-16"
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
         },
         "shapes": {
             "XmlUnionsRequest": {

@@ -1,0 +1,483 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::WorkspacesInstances
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateVolumeRequest
+      attr_accessor workspace_instance_id: ::String
+      attr_accessor volume_id: ::String
+      attr_accessor device: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateVolumeResponse < Aws::EmptyStructure
+    end
+
+    class BlockDeviceMappingRequest
+      attr_accessor device_name: ::String
+      attr_accessor ebs: Types::EbsBlockDevice
+      attr_accessor no_device: ::String
+      attr_accessor virtual_name: ::String
+      SENSITIVE: []
+    end
+
+    class CapacityReservationSpecification
+      attr_accessor capacity_reservation_preference: ("capacity-reservations-only" | "open" | "none")
+      attr_accessor capacity_reservation_target: Types::CapacityReservationTarget
+      SENSITIVE: []
+    end
+
+    class CapacityReservationTarget
+      attr_accessor capacity_reservation_id: ::String
+      attr_accessor capacity_reservation_resource_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectionTrackingSpecificationRequest
+      attr_accessor tcp_established_timeout: ::Integer
+      attr_accessor udp_stream_timeout: ::Integer
+      attr_accessor udp_timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class CpuOptionsRequest
+      attr_accessor amd_sev_snp: ("enabled" | "disabled")
+      attr_accessor core_count: ::Integer
+      attr_accessor threads_per_core: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateVolumeRequest
+      attr_accessor availability_zone: ::String
+      attr_accessor client_token: ::String
+      attr_accessor encrypted: bool
+      attr_accessor iops: ::Integer
+      attr_accessor kms_key_id: ::String
+      attr_accessor size_in_gb: ::Integer
+      attr_accessor snapshot_id: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
+      attr_accessor throughput: ::Integer
+      attr_accessor volume_type: ("standard" | "io1" | "io2" | "gp2" | "sc1" | "st1" | "gp3")
+      SENSITIVE: [:client_token, :kms_key_id]
+    end
+
+    class CreateVolumeResponse
+      attr_accessor volume_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkspaceInstanceRequest
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor managed_instance: Types::ManagedInstanceRequest
+      SENSITIVE: [:client_token]
+    end
+
+    class CreateWorkspaceInstanceResponse
+      attr_accessor workspace_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreditSpecificationRequest
+      attr_accessor cpu_credits: ("standard" | "unlimited")
+      SENSITIVE: []
+    end
+
+    class DeleteVolumeRequest
+      attr_accessor volume_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVolumeResponse < Aws::EmptyStructure
+    end
+
+    class DeleteWorkspaceInstanceRequest
+      attr_accessor workspace_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkspaceInstanceResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateVolumeRequest
+      attr_accessor workspace_instance_id: ::String
+      attr_accessor volume_id: ::String
+      attr_accessor device: ::String
+      attr_accessor disassociate_mode: ("FORCE" | "NO_FORCE")
+      SENSITIVE: []
+    end
+
+    class DisassociateVolumeResponse < Aws::EmptyStructure
+    end
+
+    class EC2InstanceError
+      attr_accessor ec2_error_code: ::String
+      attr_accessor ec2_exception_type: ::String
+      attr_accessor ec2_error_message: ::String
+      SENSITIVE: []
+    end
+
+    class EC2ManagedInstance
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class EbsBlockDevice
+      attr_accessor volume_type: ("standard" | "io1" | "io2" | "gp2" | "sc1" | "st1" | "gp3")
+      attr_accessor encrypted: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor iops: ::Integer
+      attr_accessor throughput: ::Integer
+      attr_accessor volume_size: ::Integer
+      SENSITIVE: [:kms_key_id]
+    end
+
+    class EnaSrdSpecificationRequest
+      attr_accessor ena_srd_enabled: bool
+      attr_accessor ena_srd_udp_specification: Types::EnaSrdUdpSpecificationRequest
+      SENSITIVE: []
+    end
+
+    class EnaSrdUdpSpecificationRequest
+      attr_accessor ena_srd_udp_enabled: bool
+      SENSITIVE: []
+    end
+
+    class EnclaveOptionsRequest
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class GetWorkspaceInstanceRequest
+      attr_accessor workspace_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkspaceInstanceResponse
+      attr_accessor workspace_instance_errors: ::Array[Types::WorkspaceInstanceError]
+      attr_accessor ec2_instance_errors: ::Array[Types::EC2InstanceError]
+      attr_accessor provision_state: ("ALLOCATING" | "ALLOCATED" | "DEALLOCATING" | "DEALLOCATED" | "ERROR_ALLOCATING" | "ERROR_DEALLOCATING")
+      attr_accessor workspace_instance_id: ::String
+      attr_accessor ec2_managed_instance: Types::EC2ManagedInstance
+      SENSITIVE: []
+    end
+
+    class HibernationOptionsRequest
+      attr_accessor configured: bool
+      SENSITIVE: []
+    end
+
+    class IamInstanceProfileSpecification
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceIpv6Address
+      attr_accessor ipv_6_address: ::String
+      attr_accessor is_primary_ipv_6: bool
+      SENSITIVE: [:ipv_6_address]
+    end
+
+    class InstanceMaintenanceOptionsRequest
+      attr_accessor auto_recovery: ("disabled" | "default")
+      SENSITIVE: []
+    end
+
+    class InstanceMarketOptionsRequest
+      attr_accessor market_type: ("spot" | "capacity-block")
+      attr_accessor spot_options: Types::SpotMarketOptions
+      SENSITIVE: []
+    end
+
+    class InstanceMetadataOptionsRequest
+      attr_accessor http_endpoint: ("enabled" | "disabled")
+      attr_accessor http_protocol_ipv_6: ("enabled" | "disabled")
+      attr_accessor http_put_response_hop_limit: ::Integer
+      attr_accessor http_tokens: ("optional" | "required")
+      attr_accessor instance_metadata_tags: ("enabled" | "disabled")
+      SENSITIVE: []
+    end
+
+    class InstanceNetworkInterfaceSpecification
+      attr_accessor associate_carrier_ip_address: bool
+      attr_accessor associate_public_ip_address: bool
+      attr_accessor connection_tracking_specification: Types::ConnectionTrackingSpecificationRequest
+      attr_accessor description: ::String
+      attr_accessor device_index: ::Integer
+      attr_accessor ena_srd_specification: Types::EnaSrdSpecificationRequest
+      attr_accessor interface_type: ("interface" | "efa" | "efa-only")
+      attr_accessor ipv_4_prefixes: ::Array[Types::Ipv4PrefixSpecificationRequest]
+      attr_accessor ipv_4_prefix_count: ::Integer
+      attr_accessor ipv_6_address_count: ::Integer
+      attr_accessor ipv_6_addresses: ::Array[Types::InstanceIpv6Address]
+      attr_accessor ipv_6_prefixes: ::Array[Types::Ipv6PrefixSpecificationRequest]
+      attr_accessor ipv_6_prefix_count: ::Integer
+      attr_accessor network_card_index: ::Integer
+      attr_accessor network_interface_id: ::String
+      attr_accessor primary_ipv_6: bool
+      attr_accessor private_ip_address: ::String
+      attr_accessor private_ip_addresses: ::Array[Types::PrivateIpAddressSpecification]
+      attr_accessor secondary_private_ip_address_count: ::Integer
+      attr_accessor groups: ::Array[::String]
+      attr_accessor subnet_id: ::String
+      SENSITIVE: [:private_ip_address]
+    end
+
+    class InstanceNetworkPerformanceOptionsRequest
+      attr_accessor bandwidth_weighting: ("default" | "vpc-1" | "ebs-1")
+      SENSITIVE: []
+    end
+
+    class InstanceTypeInfo
+      attr_accessor instance_type: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class Ipv4PrefixSpecificationRequest
+      attr_accessor ipv_4_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class Ipv6PrefixSpecificationRequest
+      attr_accessor ipv_6_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class LicenseConfigurationRequest
+      attr_accessor license_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstanceTypesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListInstanceTypesResponse
+      attr_accessor instance_types: ::Array[Types::InstanceTypeInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListRegionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListRegionsResponse
+      attr_accessor regions: ::Array[Types::Region]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor workspace_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListWorkspaceInstancesRequest
+      attr_accessor provision_states: ::Array[("ALLOCATING" | "ALLOCATED" | "DEALLOCATING" | "DEALLOCATED" | "ERROR_ALLOCATING" | "ERROR_DEALLOCATING")]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListWorkspaceInstancesResponse
+      attr_accessor workspace_instances: ::Array[Types::WorkspaceInstance]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ManagedInstanceRequest
+      attr_accessor block_device_mappings: ::Array[Types::BlockDeviceMappingRequest]
+      attr_accessor capacity_reservation_specification: Types::CapacityReservationSpecification
+      attr_accessor cpu_options: Types::CpuOptionsRequest
+      attr_accessor credit_specification: Types::CreditSpecificationRequest
+      attr_accessor disable_api_stop: bool
+      attr_accessor ebs_optimized: bool
+      attr_accessor enable_primary_ipv_6: bool
+      attr_accessor enclave_options: Types::EnclaveOptionsRequest
+      attr_accessor hibernation_options: Types::HibernationOptionsRequest
+      attr_accessor iam_instance_profile: Types::IamInstanceProfileSpecification
+      attr_accessor image_id: ::String
+      attr_accessor instance_market_options: Types::InstanceMarketOptionsRequest
+      attr_accessor instance_type: ::String
+      attr_accessor ipv_6_addresses: ::Array[Types::InstanceIpv6Address]
+      attr_accessor ipv_6_address_count: ::Integer
+      attr_accessor kernel_id: ::String
+      attr_accessor key_name: ::String
+      attr_accessor license_specifications: ::Array[Types::LicenseConfigurationRequest]
+      attr_accessor maintenance_options: Types::InstanceMaintenanceOptionsRequest
+      attr_accessor metadata_options: Types::InstanceMetadataOptionsRequest
+      attr_accessor monitoring: Types::RunInstancesMonitoringEnabled
+      attr_accessor network_interfaces: ::Array[Types::InstanceNetworkInterfaceSpecification]
+      attr_accessor network_performance_options: Types::InstanceNetworkPerformanceOptionsRequest
+      attr_accessor placement: Types::Placement
+      attr_accessor private_dns_name_options: Types::PrivateDnsNameOptionsRequest
+      attr_accessor private_ip_address: ::String
+      attr_accessor ramdisk_id: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor subnet_id: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
+      attr_accessor user_data: ::String
+      SENSITIVE: [:private_ip_address, :user_data]
+    end
+
+    class Placement
+      attr_accessor affinity: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor group_id: ::String
+      attr_accessor group_name: ::String
+      attr_accessor host_id: ::String
+      attr_accessor host_resource_group_arn: ::String
+      attr_accessor partition_number: ::Integer
+      attr_accessor tenancy: ("default" | "dedicated" | "host")
+      SENSITIVE: []
+    end
+
+    class PrivateDnsNameOptionsRequest
+      attr_accessor hostname_type: ("ip-name" | "resource-name")
+      attr_accessor enable_resource_name_dns_a_record: bool
+      attr_accessor enable_resource_name_dns_aaaa_record: bool
+      SENSITIVE: []
+    end
+
+    class PrivateIpAddressSpecification
+      attr_accessor primary: bool
+      attr_accessor private_ip_address: ::String
+      SENSITIVE: [:private_ip_address]
+    end
+
+    class Region
+      attr_accessor region_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class RunInstancesMonitoringEnabled
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class SpotMarketOptions
+      attr_accessor block_duration_minutes: ::Integer
+      attr_accessor instance_interruption_behavior: ("hibernate" | "stop")
+      attr_accessor max_price: ::String
+      attr_accessor spot_instance_type: ("one-time" | "persistent")
+      attr_accessor valid_until_utc: ::Time
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor workspace_instance_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TagSpecification
+      attr_accessor resource_type: ("instance" | "volume" | "spot-instances-request" | "network-interface")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor workspace_instance_id: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("UNKNOWN_OPERATION" | "UNSUPPORTED_OPERATION" | "CANNOT_PARSE" | "FIELD_VALIDATION_FAILED" | "DEPENDENCY_FAILURE" | "OTHER")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor reason: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WorkspaceInstance
+      attr_accessor provision_state: ("ALLOCATING" | "ALLOCATED" | "DEALLOCATING" | "DEALLOCATED" | "ERROR_ALLOCATING" | "ERROR_DEALLOCATING")
+      attr_accessor workspace_instance_id: ::String
+      attr_accessor ec2_managed_instance: Types::EC2ManagedInstance
+      SENSITIVE: []
+    end
+
+    class WorkspaceInstanceError
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+  end
+end

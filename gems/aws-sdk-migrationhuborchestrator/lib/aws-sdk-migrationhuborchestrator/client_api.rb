@@ -205,7 +205,7 @@ module Aws::MigrationHubOrchestrator
     CreateTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: CreateTemplateRequestTemplateNameString, required: true, location_name: "templateName"))
     CreateTemplateRequest.add_member(:template_description, Shapes::ShapeRef.new(shape: CreateTemplateRequestTemplateDescriptionString, location_name: "templateDescription"))
     CreateTemplateRequest.add_member(:template_source, Shapes::ShapeRef.new(shape: TemplateSource, required: true, location_name: "templateSource"))
-    CreateTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateTemplateRequest.struct_class = Types::CreateTemplateRequest
 
@@ -669,7 +669,7 @@ module Aws::MigrationHubOrchestrator
     UpdateTemplateRequest.add_member(:id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location: "uri", location_name: "id"))
     UpdateTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: UpdateTemplateRequestTemplateNameString, location_name: "templateName"))
     UpdateTemplateRequest.add_member(:template_description, Shapes::ShapeRef.new(shape: UpdateTemplateRequestTemplateDescriptionString, location_name: "templateDescription"))
-    UpdateTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateTemplateRequest.struct_class = Types::UpdateTemplateRequest
 
     UpdateTemplateResponse.add_member(:template_id, Shapes::ShapeRef.new(shape: String, location_name: "templateId"))

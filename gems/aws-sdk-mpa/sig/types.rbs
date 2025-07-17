@@ -1,0 +1,549 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MPA
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ApprovalStrategy
+      attr_accessor mof_n: Types::MofNApprovalStrategy
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MofN < ApprovalStrategy
+      end
+      class Unknown < ApprovalStrategy
+      end
+    end
+
+    class ApprovalStrategyResponse
+      attr_accessor mof_n: Types::MofNApprovalStrategy
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MofN < ApprovalStrategyResponse
+      end
+      class Unknown < ApprovalStrategyResponse
+      end
+    end
+
+    class ApprovalTeamRequestApprover
+      attr_accessor primary_identity_id: ::String
+      attr_accessor primary_identity_source_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CancelSessionRequest
+      attr_accessor session_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CancelSessionResponse < Aws::EmptyStructure
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApprovalTeamRequest
+      attr_accessor client_token: ::String
+      attr_accessor approval_strategy: Types::ApprovalStrategy
+      attr_accessor approvers: ::Array[Types::ApprovalTeamRequestApprover]
+      attr_accessor description: ::String
+      attr_accessor policies: ::Array[Types::PolicyReference]
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description, :tags]
+    end
+
+    class CreateApprovalTeamResponse
+      attr_accessor creation_time: ::Time
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIdentitySourceRequest
+      attr_accessor identity_source_parameters: Types::IdentitySourceParameters
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateIdentitySourceResponse
+      attr_accessor identity_source_type: ("IAM_IDENTITY_CENTER")
+      attr_accessor identity_source_arn: ::String
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteIdentitySourceRequest
+      attr_accessor identity_source_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInactiveApprovalTeamVersionRequest
+      attr_accessor arn: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInactiveApprovalTeamVersionResponse < Aws::EmptyStructure
+    end
+
+    class Filter
+      attr_accessor field_name: ("ActionName" | "ApprovalTeamName" | "VotingTime" | "Vote" | "SessionStatus" | "InitiationTime")
+      attr_accessor operator: ("EQ" | "NE" | "GT" | "LT" | "GTE" | "LTE" | "CONTAINS" | "NOT_CONTAINS" | "BETWEEN")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class GetApprovalTeamRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetApprovalTeamResponse
+      attr_accessor creation_time: ::Time
+      attr_accessor approval_strategy: Types::ApprovalStrategyResponse
+      attr_accessor number_of_approvers: ::Integer
+      attr_accessor approvers: ::Array[Types::GetApprovalTeamResponseApprover]
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "DELETING" | "PENDING")
+      attr_accessor status_code: ("VALIDATING" | "PENDING_ACTIVATION" | "FAILED_VALIDATION" | "FAILED_ACTIVATION" | "UPDATE_PENDING_APPROVAL" | "UPDATE_PENDING_ACTIVATION" | "UPDATE_FAILED_APPROVAL" | "UPDATE_FAILED_ACTIVATION" | "UPDATE_FAILED_VALIDATION" | "DELETE_PENDING_APPROVAL" | "DELETE_FAILED_APPROVAL" | "DELETE_FAILED_VALIDATION")
+      attr_accessor status_message: ::String
+      attr_accessor update_session_arn: ::String
+      attr_accessor version_id: ::String
+      attr_accessor policies: ::Array[Types::PolicyReference]
+      attr_accessor last_update_time: ::Time
+      attr_accessor pending_update: Types::PendingUpdate
+      SENSITIVE: [:description]
+    end
+
+    class GetApprovalTeamResponseApprover
+      attr_accessor approver_id: ::String
+      attr_accessor response_time: ::Time
+      attr_accessor primary_identity_id: ::String
+      attr_accessor primary_identity_source_arn: ::String
+      attr_accessor primary_identity_status: ("PENDING" | "ACCEPTED" | "REJECTED" | "INVALID")
+      SENSITIVE: []
+    end
+
+    class GetIdentitySourceRequest
+      attr_accessor identity_source_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetIdentitySourceResponse
+      attr_accessor identity_source_type: ("IAM_IDENTITY_CENTER")
+      attr_accessor identity_source_parameters: Types::IdentitySourceParametersForGet
+      attr_accessor identity_source_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "ERROR")
+      attr_accessor status_code: ("ACCESS_DENIED" | "DELETION_FAILED" | "IDC_INSTANCE_NOT_FOUND" | "IDC_INSTANCE_NOT_VALID")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyVersionRequest
+      attr_accessor policy_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyVersionResponse
+      attr_accessor policy_version: Types::PolicyVersion
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_type: ("AWS_MANAGED" | "AWS_RAM")
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyResponse
+      attr_accessor resource_arn: ::String
+      attr_accessor policy_type: ("AWS_MANAGED" | "AWS_RAM")
+      attr_accessor policy_version_arn: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_document: ::String
+      SENSITIVE: [:policy_document]
+    end
+
+    class GetSessionRequest
+      attr_accessor session_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetSessionResponse
+      attr_accessor session_arn: ::String
+      attr_accessor approval_team_arn: ::String
+      attr_accessor approval_team_name: ::String
+      attr_accessor protected_resource_arn: ::String
+      attr_accessor approval_strategy: Types::ApprovalStrategyResponse
+      attr_accessor number_of_approvers: ::Integer
+      attr_accessor initiation_time: ::Time
+      attr_accessor expiration_time: ::Time
+      attr_accessor completion_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor status: ("PENDING" | "CANCELLED" | "APPROVED" | "FAILED" | "CREATING")
+      attr_accessor status_code: ("REJECTED" | "EXPIRED" | "CONFIGURATION_CHANGED")
+      attr_accessor status_message: ::String
+      attr_accessor execution_status: ("EXECUTED" | "FAILED" | "PENDING")
+      attr_accessor action_name: ::String
+      attr_accessor requester_service_principal: ::String
+      attr_accessor requester_principal_arn: ::String
+      attr_accessor requester_account_id: ::String
+      attr_accessor requester_region: ::String
+      attr_accessor requester_comment: ::String
+      attr_accessor action_completion_strategy: ("AUTO_COMPLETION_UPON_APPROVAL")
+      attr_accessor approver_responses: ::Array[Types::GetSessionResponseApproverResponse]
+      SENSITIVE: [:description, :metadata, :requester_comment]
+    end
+
+    class GetSessionResponseApproverResponse
+      attr_accessor approver_id: ::String
+      attr_accessor identity_source_arn: ::String
+      attr_accessor identity_id: ::String
+      attr_accessor response: ("APPROVED" | "REJECTED" | "NO_RESPONSE")
+      attr_accessor response_time: ::Time
+      SENSITIVE: []
+    end
+
+    class IamIdentityCenter
+      attr_accessor instance_arn: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class IamIdentityCenterForGet
+      attr_accessor instance_arn: ::String
+      attr_accessor approval_portal_url: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class IamIdentityCenterForList
+      attr_accessor instance_arn: ::String
+      attr_accessor approval_portal_url: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class IdentitySourceForList
+      attr_accessor identity_source_type: ("IAM_IDENTITY_CENTER")
+      attr_accessor identity_source_parameters: Types::IdentitySourceParametersForList
+      attr_accessor identity_source_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "ERROR")
+      attr_accessor status_code: ("ACCESS_DENIED" | "DELETION_FAILED" | "IDC_INSTANCE_NOT_FOUND" | "IDC_INSTANCE_NOT_VALID")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class IdentitySourceParameters
+      attr_accessor iam_identity_center: Types::IamIdentityCenter
+      SENSITIVE: []
+    end
+
+    class IdentitySourceParametersForGet
+      attr_accessor iam_identity_center: Types::IamIdentityCenterForGet
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class IamIdentityCenter < IdentitySourceParametersForGet
+      end
+      class Unknown < IdentitySourceParametersForGet
+      end
+    end
+
+    class IdentitySourceParametersForList
+      attr_accessor iam_identity_center: Types::IamIdentityCenterForList
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class IamIdentityCenter < IdentitySourceParametersForList
+      end
+      class Unknown < IdentitySourceParametersForList
+      end
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListApprovalTeamsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApprovalTeamsResponse
+      attr_accessor next_token: ::String
+      attr_accessor approval_teams: ::Array[Types::ListApprovalTeamsResponseApprovalTeam]
+      SENSITIVE: []
+    end
+
+    class ListApprovalTeamsResponseApprovalTeam
+      attr_accessor creation_time: ::Time
+      attr_accessor approval_strategy: Types::ApprovalStrategyResponse
+      attr_accessor number_of_approvers: ::Integer
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "DELETING" | "PENDING")
+      attr_accessor status_code: ("VALIDATING" | "PENDING_ACTIVATION" | "FAILED_VALIDATION" | "FAILED_ACTIVATION" | "UPDATE_PENDING_APPROVAL" | "UPDATE_PENDING_ACTIVATION" | "UPDATE_FAILED_APPROVAL" | "UPDATE_FAILED_ACTIVATION" | "UPDATE_FAILED_VALIDATION" | "DELETE_PENDING_APPROVAL" | "DELETE_FAILED_APPROVAL" | "DELETE_FAILED_VALIDATION")
+      attr_accessor status_message: ::String
+      SENSITIVE: [:description]
+    end
+
+    class ListIdentitySourcesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdentitySourcesResponse
+      attr_accessor next_token: ::String
+      attr_accessor identity_sources: ::Array[Types::IdentitySourceForList]
+      SENSITIVE: []
+    end
+
+    class ListPoliciesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPoliciesResponse
+      attr_accessor next_token: ::String
+      attr_accessor policies: ::Array[Types::Policy]
+      SENSITIVE: []
+    end
+
+    class ListPolicyVersionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListPolicyVersionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor policy_versions: ::Array[Types::PolicyVersionSummary]
+      SENSITIVE: []
+    end
+
+    class ListResourcePoliciesRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourcePoliciesResponse
+      attr_accessor next_token: ::String
+      attr_accessor resource_policies: ::Array[Types::ListResourcePoliciesResponseResourcePolicy]
+      SENSITIVE: []
+    end
+
+    class ListResourcePoliciesResponseResourcePolicy
+      attr_accessor policy_arn: ::String
+      attr_accessor policy_type: ("AWS_MANAGED" | "AWS_RAM")
+      attr_accessor policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListSessionsRequest
+      attr_accessor approval_team_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListSessionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor sessions: ::Array[Types::ListSessionsResponseSession]
+      SENSITIVE: []
+    end
+
+    class ListSessionsResponseSession
+      attr_accessor session_arn: ::String
+      attr_accessor approval_team_name: ::String
+      attr_accessor approval_team_arn: ::String
+      attr_accessor initiation_time: ::Time
+      attr_accessor expiration_time: ::Time
+      attr_accessor completion_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor action_name: ::String
+      attr_accessor protected_resource_arn: ::String
+      attr_accessor requester_service_principal: ::String
+      attr_accessor requester_principal_arn: ::String
+      attr_accessor requester_region: ::String
+      attr_accessor requester_account_id: ::String
+      attr_accessor status: ("PENDING" | "CANCELLED" | "APPROVED" | "FAILED" | "CREATING")
+      attr_accessor status_code: ("REJECTED" | "EXPIRED" | "CONFIGURATION_CHANGED")
+      attr_accessor status_message: ::String
+      attr_accessor action_completion_strategy: ("AUTO_COMPLETION_UPON_APPROVAL")
+      SENSITIVE: [:description]
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class MofNApprovalStrategy
+      attr_accessor min_approvals_required: ::Integer
+      SENSITIVE: []
+    end
+
+    class PendingUpdate
+      attr_accessor version_id: ::String
+      attr_accessor description: ::String
+      attr_accessor approval_strategy: Types::ApprovalStrategyResponse
+      attr_accessor number_of_approvers: ::Integer
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "DELETING" | "PENDING")
+      attr_accessor status_code: ("VALIDATING" | "PENDING_ACTIVATION" | "FAILED_VALIDATION" | "FAILED_ACTIVATION" | "UPDATE_PENDING_APPROVAL" | "UPDATE_PENDING_ACTIVATION" | "UPDATE_FAILED_APPROVAL" | "UPDATE_FAILED_ACTIVATION" | "UPDATE_FAILED_VALIDATION" | "DELETE_PENDING_APPROVAL" | "DELETE_FAILED_APPROVAL" | "DELETE_FAILED_VALIDATION")
+      attr_accessor status_message: ::String
+      attr_accessor approvers: ::Array[Types::GetApprovalTeamResponseApprover]
+      attr_accessor update_initiation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Policy
+      attr_accessor arn: ::String
+      attr_accessor default_version: ::Integer
+      attr_accessor policy_type: ("AWS_MANAGED" | "AWS_RAM")
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyReference
+      attr_accessor policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyVersion
+      attr_accessor arn: ::String
+      attr_accessor policy_arn: ::String
+      attr_accessor version_id: ::Integer
+      attr_accessor policy_type: ("AWS_MANAGED" | "AWS_RAM")
+      attr_accessor is_default: bool
+      attr_accessor name: ::String
+      attr_accessor status: ("ATTACHABLE" | "DEPRECATED")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor document: ::String
+      SENSITIVE: [:document]
+    end
+
+    class PolicyVersionSummary
+      attr_accessor arn: ::String
+      attr_accessor policy_arn: ::String
+      attr_accessor version_id: ::Integer
+      attr_accessor policy_type: ("AWS_MANAGED" | "AWS_RAM")
+      attr_accessor is_default: bool
+      attr_accessor name: ::String
+      attr_accessor status: ("ATTACHABLE" | "DEPRECATED")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartActiveApprovalTeamDeletionRequest
+      attr_accessor pending_window_days: ::Integer
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartActiveApprovalTeamDeletionResponse
+      attr_accessor deletion_completion_time: ::Time
+      attr_accessor deletion_start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: [:tag_keys]
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateApprovalTeamRequest
+      attr_accessor approval_strategy: Types::ApprovalStrategy
+      attr_accessor approvers: ::Array[Types::ApprovalTeamRequestApprover]
+      attr_accessor description: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: [:description]
+    end
+
+    class UpdateApprovalTeamResponse
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

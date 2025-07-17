@@ -179,7 +179,7 @@ module Aws::EBS
     StartSnapshotRequest.add_member(:parent_snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "ParentSnapshotId"))
     StartSnapshotRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     StartSnapshotRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    StartSnapshotRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartSnapshotRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     StartSnapshotRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Encrypted"))
     StartSnapshotRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
     StartSnapshotRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))

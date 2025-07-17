@@ -867,6 +867,7 @@ module Aws::Batch
       attr_accessor launch_template_name: ::String
       attr_accessor version: ::String
       attr_accessor overrides: ::Array[Types::LaunchTemplateSpecificationOverride]
+      attr_accessor userdata_type: ("EKS_BOOTSTRAP_SH" | "EKS_NODEADM")
       SENSITIVE: []
     end
 
@@ -875,6 +876,7 @@ module Aws::Batch
       attr_accessor launch_template_name: ::String
       attr_accessor version: ::String
       attr_accessor target_instance_types: ::Array[::String]
+      attr_accessor userdata_type: ("EKS_BOOTSTRAP_SH" | "EKS_NODEADM")
       SENSITIVE: []
     end
 

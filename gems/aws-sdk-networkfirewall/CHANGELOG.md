@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2025-06-17)
+------------------
+
+* Feature - Release of Active Threat Defense in Network Firewall
+
+1.69.0 (2025-06-16)
+------------------
+
+* Feature - You can now create firewalls using a Transit Gateway instead of a VPC, resulting in a TGW attachment.
+
+1.68.0 (2025-06-04)
+------------------
+
+* Feature - You can now monitor flow and alert log metrics from the Network Firewall console.
+
+1.67.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.66.0 (2025-05-28)
+------------------
+
+* Feature - You can now use VPC endpoint associations to create multiple firewall endpoints for a single firewall.
+
+1.65.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.64.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.63.0 (2025-03-20)
 ------------------
 

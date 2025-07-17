@@ -393,7 +393,7 @@ module Aws::ChimeSDKMediaPipelines
     CreateMediaCapturePipelineRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "SourceArn"))
     CreateMediaCapturePipelineRequest.add_member(:sink_type, Shapes::ShapeRef.new(shape: MediaPipelineSinkType, required: true, location_name: "SinkType"))
     CreateMediaCapturePipelineRequest.add_member(:sink_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "SinkArn"))
-    CreateMediaCapturePipelineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMediaCapturePipelineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateMediaCapturePipelineRequest.add_member(:chime_sdk_meeting_configuration, Shapes::ShapeRef.new(shape: ChimeSdkMeetingConfiguration, location_name: "ChimeSdkMeetingConfiguration"))
     CreateMediaCapturePipelineRequest.add_member(:sse_aws_key_management_params, Shapes::ShapeRef.new(shape: SseAwsKeyManagementParams, location_name: "SseAwsKeyManagementParams"))
     CreateMediaCapturePipelineRequest.add_member(:sink_iam_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SinkIamRoleArn"))
@@ -405,7 +405,7 @@ module Aws::ChimeSDKMediaPipelines
 
     CreateMediaConcatenationPipelineRequest.add_member(:sources, Shapes::ShapeRef.new(shape: ConcatenationSourceList, required: true, location_name: "Sources"))
     CreateMediaConcatenationPipelineRequest.add_member(:sinks, Shapes::ShapeRef.new(shape: ConcatenationSinkList, required: true, location_name: "Sinks"))
-    CreateMediaConcatenationPipelineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMediaConcatenationPipelineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateMediaConcatenationPipelineRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateMediaConcatenationPipelineRequest.struct_class = Types::CreateMediaConcatenationPipelineRequest
 
@@ -417,7 +417,7 @@ module Aws::ChimeSDKMediaPipelines
     CreateMediaInsightsPipelineConfigurationRequest.add_member(:real_time_alert_configuration, Shapes::ShapeRef.new(shape: RealTimeAlertConfiguration, location_name: "RealTimeAlertConfiguration"))
     CreateMediaInsightsPipelineConfigurationRequest.add_member(:elements, Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfigurationElements, required: true, location_name: "Elements"))
     CreateMediaInsightsPipelineConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateMediaInsightsPipelineConfigurationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMediaInsightsPipelineConfigurationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateMediaInsightsPipelineConfigurationRequest.struct_class = Types::CreateMediaInsightsPipelineConfigurationRequest
 
     CreateMediaInsightsPipelineConfigurationResponse.add_member(:media_insights_pipeline_configuration, Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfiguration, location_name: "MediaInsightsPipelineConfiguration"))
@@ -429,7 +429,7 @@ module Aws::ChimeSDKMediaPipelines
     CreateMediaInsightsPipelineRequest.add_member(:kinesis_video_stream_recording_source_runtime_configuration, Shapes::ShapeRef.new(shape: KinesisVideoStreamRecordingSourceRuntimeConfiguration, location_name: "KinesisVideoStreamRecordingSourceRuntimeConfiguration"))
     CreateMediaInsightsPipelineRequest.add_member(:s3_recording_sink_runtime_configuration, Shapes::ShapeRef.new(shape: S3RecordingSinkRuntimeConfiguration, location_name: "S3RecordingSinkRuntimeConfiguration"))
     CreateMediaInsightsPipelineRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateMediaInsightsPipelineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMediaInsightsPipelineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateMediaInsightsPipelineRequest.struct_class = Types::CreateMediaInsightsPipelineRequest
 
     CreateMediaInsightsPipelineResponse.add_member(:media_insights_pipeline, Shapes::ShapeRef.new(shape: MediaInsightsPipeline, required: true, location_name: "MediaInsightsPipeline"))
@@ -437,7 +437,7 @@ module Aws::ChimeSDKMediaPipelines
 
     CreateMediaLiveConnectorPipelineRequest.add_member(:sources, Shapes::ShapeRef.new(shape: LiveConnectorSourceList, required: true, location_name: "Sources"))
     CreateMediaLiveConnectorPipelineRequest.add_member(:sinks, Shapes::ShapeRef.new(shape: LiveConnectorSinkList, required: true, location_name: "Sinks"))
-    CreateMediaLiveConnectorPipelineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMediaLiveConnectorPipelineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateMediaLiveConnectorPipelineRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateMediaLiveConnectorPipelineRequest.struct_class = Types::CreateMediaLiveConnectorPipelineRequest
 
@@ -446,7 +446,7 @@ module Aws::ChimeSDKMediaPipelines
 
     CreateMediaPipelineKinesisVideoStreamPoolRequest.add_member(:stream_configuration, Shapes::ShapeRef.new(shape: KinesisVideoStreamConfiguration, required: true, location_name: "StreamConfiguration"))
     CreateMediaPipelineKinesisVideoStreamPoolRequest.add_member(:pool_name, Shapes::ShapeRef.new(shape: KinesisVideoStreamPoolName, required: true, location_name: "PoolName"))
-    CreateMediaPipelineKinesisVideoStreamPoolRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMediaPipelineKinesisVideoStreamPoolRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateMediaPipelineKinesisVideoStreamPoolRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateMediaPipelineKinesisVideoStreamPoolRequest.struct_class = Types::CreateMediaPipelineKinesisVideoStreamPoolRequest
 
@@ -455,7 +455,7 @@ module Aws::ChimeSDKMediaPipelines
 
     CreateMediaStreamPipelineRequest.add_member(:sources, Shapes::ShapeRef.new(shape: MediaStreamSourceList, required: true, location_name: "Sources"))
     CreateMediaStreamPipelineRequest.add_member(:sinks, Shapes::ShapeRef.new(shape: MediaStreamSinkList, required: true, location_name: "Sinks"))
-    CreateMediaStreamPipelineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMediaStreamPipelineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateMediaStreamPipelineRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateMediaStreamPipelineRequest.struct_class = Types::CreateMediaStreamPipelineRequest
 
@@ -871,7 +871,7 @@ module Aws::ChimeSDKMediaPipelines
     StartSpeakerSearchTaskRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "identifier"))
     StartSpeakerSearchTaskRequest.add_member(:voice_profile_domain_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "VoiceProfileDomainArn"))
     StartSpeakerSearchTaskRequest.add_member(:kinesis_video_stream_source_task_configuration, Shapes::ShapeRef.new(shape: KinesisVideoStreamSourceTaskConfiguration, location_name: "KinesisVideoStreamSourceTaskConfiguration"))
-    StartSpeakerSearchTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartSpeakerSearchTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     StartSpeakerSearchTaskRequest.struct_class = Types::StartSpeakerSearchTaskRequest
 
     StartSpeakerSearchTaskResponse.add_member(:speaker_search_task, Shapes::ShapeRef.new(shape: SpeakerSearchTask, location_name: "SpeakerSearchTask"))
@@ -880,7 +880,7 @@ module Aws::ChimeSDKMediaPipelines
     StartVoiceToneAnalysisTaskRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "identifier"))
     StartVoiceToneAnalysisTaskRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: VoiceAnalyticsLanguageCode, required: true, location_name: "LanguageCode"))
     StartVoiceToneAnalysisTaskRequest.add_member(:kinesis_video_stream_source_task_configuration, Shapes::ShapeRef.new(shape: KinesisVideoStreamSourceTaskConfiguration, location_name: "KinesisVideoStreamSourceTaskConfiguration"))
-    StartVoiceToneAnalysisTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartVoiceToneAnalysisTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     StartVoiceToneAnalysisTaskRequest.struct_class = Types::StartVoiceToneAnalysisTaskRequest
 
     StartVoiceToneAnalysisTaskResponse.add_member(:voice_tone_analysis_task, Shapes::ShapeRef.new(shape: VoiceToneAnalysisTask, location_name: "VoiceToneAnalysisTask"))

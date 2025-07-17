@@ -46,6 +46,7 @@ module Aws::MedicalImaging
       attr_accessor source_image_set_id: ::String
       attr_accessor copy_image_set_information: Types::CopyImageSetInformation
       attr_accessor force: bool
+      attr_accessor promote_to_primary: bool
       SENSITIVE: []
     end
 
@@ -258,6 +259,7 @@ module Aws::MedicalImaging
       attr_accessor message: ::String
       attr_accessor image_set_arn: ::String
       attr_accessor overrides: Types::Overrides
+      attr_accessor is_primary: bool
       SENSITIVE: []
     end
 
@@ -276,6 +278,7 @@ module Aws::MedicalImaging
       attr_accessor deleted_at: ::Time
       attr_accessor message: ::String
       attr_accessor overrides: Types::Overrides
+      attr_accessor is_primary: bool
       SENSITIVE: []
     end
 
@@ -285,6 +288,7 @@ module Aws::MedicalImaging
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor dicom_tags: Types::DICOMTags
+      attr_accessor is_primary: bool
       SENSITIVE: []
     end
 
@@ -382,6 +386,7 @@ module Aws::MedicalImaging
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor dicom_study_date_and_time: Types::DICOMStudyDateAndTime
+      attr_accessor is_primary: bool
       attr_accessor unknown: untyped
       SENSITIVE: [:dicom_patient_id, :dicom_accession_number, :dicom_study_id, :dicom_study_instance_uid, :dicom_series_instance_uid]
 
@@ -400,6 +405,8 @@ module Aws::MedicalImaging
       class UpdatedAt < SearchByAttributeValue
       end
       class DicomStudyDateAndTime < SearchByAttributeValue
+      end
+      class IsPrimary < SearchByAttributeValue
       end
       class Unknown < SearchByAttributeValue
       end

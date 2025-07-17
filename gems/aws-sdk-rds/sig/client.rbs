@@ -262,6 +262,8 @@ module Aws
                               ?option_group_name: ::String,
                               ?target_custom_availability_zone: ::String,
                               ?copy_option_group: bool,
+                              ?snapshot_availability_zone: ::String,
+                              ?snapshot_target: ::String,
                               ?source_region: ::String
                             ) -> _CopyDBSnapshotResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyDBSnapshotResponseSuccess
@@ -659,6 +661,7 @@ module Aws
                                              ?network_type: ::String,
                                              ?storage_throughput: ::Integer,
                                              ?enable_customer_owned_ip: bool,
+                                             ?backup_target: ::String,
                                              ?allocated_storage: ::Integer,
                                              ?source_db_cluster_identifier: ::String,
                                              ?dedicated_log_volume: bool,
@@ -1506,6 +1509,20 @@ module Aws
                                    ?marker: ::String
                                  ) -> _DescribeDBLogFilesResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDBLogFilesResponseSuccess
+
+      interface _DescribeDBMajorEngineVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDBMajorEngineVersionsResponse]
+        def db_major_engine_versions: () -> ::Array[Types::DBMajorEngineVersion]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#describe_db_major_engine_versions-instance_method
+      def describe_db_major_engine_versions: (
+                                               ?engine: ::String,
+                                               ?major_engine_version: ::String,
+                                               ?marker: ::String,
+                                               ?max_records: ::Integer
+                                             ) -> _DescribeDBMajorEngineVersionsResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDBMajorEngineVersionsResponseSuccess
 
       interface _DescribeDBParameterGroupsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DBParameterGroupsMessage]

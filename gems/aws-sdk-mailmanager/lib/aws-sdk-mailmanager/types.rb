@@ -1044,7 +1044,7 @@ module Aws::MailManager
     #   A policy that states what to do in the case of failure. The action
     #   will fail if there are configuration errors. For example, the
     #   specified application has been deleted or the role lacks necessary
-    #   permissions to call the qbusiness:BatchPutDocument API.
+    #   permissions to call the `qbusiness:BatchPutDocument` API.
     #   @return [String]
     #
     # @!attribute [rw] application_id
@@ -1061,7 +1061,8 @@ module Aws::MailManager
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM Role to use while
     #   delivering to Amazon Q Business. This role must have access to the
-    #   qbusiness:BatchPutDocument API for the given application and index.
+    #   `qbusiness:BatchPutDocument` API for the given application and
+    #   index.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/DeliverToQBusinessAction AWS API Documentation
@@ -3575,6 +3576,10 @@ module Aws::MailManager
     #   This action terminates the evaluation of rules in the rule set.
     #   @return [Types::DropAction]
     #
+    # @!attribute [rw] publish_to_sns
+    #   This action publishes the email content to an Amazon SNS topic.
+    #   @return [Types::SnsAction]
+    #
     # @!attribute [rw] relay
     #   This action relays the email to another SMTP server.
     #   @return [Types::RelayAction]
@@ -3600,6 +3605,7 @@ module Aws::MailManager
       :deliver_to_mailbox,
       :deliver_to_q_business,
       :drop,
+      :publish_to_sns,
       :relay,
       :replace_recipient,
       :send,
@@ -3614,6 +3620,7 @@ module Aws::MailManager
       class DeliverToMailbox < RuleAction; end
       class DeliverToQBusiness < RuleAction; end
       class Drop < RuleAction; end
+      class PublishToSns < RuleAction; end
       class Relay < RuleAction; end
       class ReplaceRecipient < RuleAction; end
       class Send < RuleAction; end
@@ -4187,6 +4194,55 @@ module Aws::MailManager
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The action to publish the email content to an Amazon SNS topic. When
+    # executed, this action will send the email as a notification to the
+    # specified SNS topic.
+    #
+    # @!attribute [rw] action_failure_policy
+    #   A policy that states what to do in the case of failure. The action
+    #   will fail if there are configuration errors. For example, specified
+    #   SNS topic has been deleted or the role lacks necessary permissions
+    #   to call the `sns:Publish` API.
+    #   @return [String]
+    #
+    # @!attribute [rw] encoding
+    #   The encoding to use for the email within the Amazon SNS
+    #   notification. The default value is `UTF-8`. Use `BASE64` if you need
+    #   to preserve all special characters, especially when the original
+    #   message uses a different encoding format.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload_type
+    #   The expected payload type within the Amazon SNS notification.
+    #   `CONTENT` attempts to publish the full email content with 20KB of
+    #   headers content. `HEADERS` extracts up to 100KB of header content to
+    #   include in the notification, email content will not be included to
+    #   the notification. The default value is `CONTENT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM Role to use while writing
+    #   to Amazon SNS. This role must have access to the `sns:Publish` API
+    #   for the given topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_arn
+    #   The Amazon Resource Name (ARN) of the Amazon SNS Topic to which
+    #   notification for the email received will be published.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/SnsAction AWS API Documentation
+    #
+    class SnsAction < Struct.new(
+      :action_failure_policy,
+      :encoding,
+      :payload_type,
+      :role_arn,
+      :topic_arn)
       SENSITIVE = []
       include Aws::Structure
     end

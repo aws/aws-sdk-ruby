@@ -1499,7 +1499,7 @@ module Aws::IoTFleetWise
     class VehicleStatus
       attr_accessor campaign_name: ::String
       attr_accessor vehicle_name: ::String
-      attr_accessor status: ("CREATED" | "READY" | "HEALTHY" | "SUSPENDED" | "DELETING")
+      attr_accessor status: ("CREATED" | "READY" | "HEALTHY" | "SUSPENDED" | "DELETING" | "READY_FOR_CHECKIN")
       SENSITIVE: []
     end
 

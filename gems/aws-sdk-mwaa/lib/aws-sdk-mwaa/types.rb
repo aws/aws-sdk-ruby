@@ -1007,13 +1007,19 @@ module Aws::MWAA
     #   processes by Amazon MWAA, such as an environment maintenance update.
     #   @return [String]
     #
+    # @!attribute [rw] worker_replacement_strategy
+    #   The worker replacement strategy used in the last update of the
+    #   environment.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/LastUpdate AWS API Documentation
     #
     class LastUpdate < Struct.new(
       :status,
       :created_at,
       :error,
-      :source)
+      :source,
+      :worker_replacement_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1479,6 +1485,16 @@ module Aws::MWAA
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html
     #   @return [String]
     #
+    # @!attribute [rw] airflow_configuration_options
+    #   A list of key-value pairs containing the Apache Airflow
+    #   configuration options you want to attach to your environment. For
+    #   more information, see [Apache Airflow configuration options][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] airflow_version
     #   The Apache Airflow version for your environment. To upgrade your
     #   environment, specify a newer version of Apache Airflow supported by
@@ -1498,17 +1514,6 @@ module Aws::MWAA
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/upgrading-environment.html
     #   @return [String]
     #
-    # @!attribute [rw] source_bucket_arn
-    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where your
-    #   DAG code and supporting files are stored. For example,
-    #   `arn:aws:s3:::my-airflow-bucket-unique-name`. For more information,
-    #   see [Create an Amazon S3 bucket for Amazon MWAA][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html
-    #   @return [String]
-    #
     # @!attribute [rw] dag_s3_path
     #   The relative path to the DAGs folder on your Amazon S3 bucket. For
     #   example, `dags`. For more information, see [Adding or updating
@@ -1518,6 +1523,97 @@ module Aws::MWAA
     #
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html
     #   @return [String]
+    #
+    # @!attribute [rw] environment_class
+    #   The environment class type. Valid values: `mw1.micro`, `mw1.small`,
+    #   `mw1.medium`, `mw1.large`, `mw1.xlarge`, and `mw1.2xlarge`. For more
+    #   information, see [Amazon MWAA environment class][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html
+    #   @return [String]
+    #
+    # @!attribute [rw] logging_configuration
+    #   The Apache Airflow log types to send to CloudWatch Logs.
+    #   @return [Types::LoggingConfigurationInput]
+    #
+    # @!attribute [rw] max_workers
+    #   The maximum number of workers that you want to run in your
+    #   environment. MWAA scales the number of Apache Airflow workers up to
+    #   the number you specify in the `MaxWorkers` field. For example, `20`.
+    #   When there are no more tasks running, and no more in the queue, MWAA
+    #   disposes of the extra workers leaving the one worker that is
+    #   included with your environment, or the number you specify in
+    #   `MinWorkers`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_workers
+    #   The minimum number of workers that you want to run in your
+    #   environment. MWAA scales the number of Apache Airflow workers up to
+    #   the number you specify in the `MaxWorkers` field. When there are no
+    #   more tasks running, and no more in the queue, MWAA disposes of the
+    #   extra workers leaving the worker count you specify in the
+    #   `MinWorkers` field. For example, `2`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_webservers
+    #   The maximum number of web servers that you want to run in your
+    #   environment. Amazon MWAA scales the number of Apache Airflow web
+    #   servers up to the number you specify for `MaxWebservers` when you
+    #   interact with your Apache Airflow environment using Apache Airflow
+    #   REST API, or the Apache Airflow CLI. For example, in scenarios where
+    #   your workload requires network calls to the Apache Airflow REST API
+    #   with a high transaction-per-second (TPS) rate, Amazon MWAA will
+    #   increase the number of web servers up to the number set in
+    #   `MaxWebserers`. As TPS rates decrease Amazon MWAA disposes of the
+    #   additional web servers, and scales down to the number set in
+    #   `MinxWebserers`.
+    #
+    #   Valid values: For environments larger than mw1.micro, accepts values
+    #   from `2` to `5`. Defaults to `2` for all environment sizes except
+    #   mw1.micro, which defaults to `1`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_webservers
+    #   The minimum number of web servers that you want to run in your
+    #   environment. Amazon MWAA scales the number of Apache Airflow web
+    #   servers up to the number you specify for `MaxWebservers` when you
+    #   interact with your Apache Airflow environment using Apache Airflow
+    #   REST API, or the Apache Airflow CLI. As the transaction-per-second
+    #   rate, and the network load, decrease, Amazon MWAA disposes of the
+    #   additional web servers, and scales down to the number set in
+    #   `MinxWebserers`.
+    #
+    #   Valid values: For environments larger than mw1.micro, accepts values
+    #   from `2` to `5`. Defaults to `2` for all environment sizes except
+    #   mw1.micro, which defaults to `1`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] worker_replacement_strategy
+    #   The worker replacement strategy to use when updating the
+    #   environment.
+    #
+    #   You can select one of the following strategies:
+    #
+    #   * **Forced -** Stops and replaces Apache Airflow workers without
+    #     waiting for tasks to complete before an update.
+    #
+    #   * **Graceful -** Allows Apache Airflow workers to complete running
+    #     tasks for up to 12 hours during an update before they're stopped
+    #     and replaced.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_configuration
+    #   The VPC networking components used to secure and enable network
+    #   traffic between the Amazon Web Services resources for your
+    #   environment. For more information, see [About networking on Amazon
+    #   MWAA][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
+    #   @return [Types::UpdateNetworkConfigurationInput]
     #
     # @!attribute [rw] plugins_s3_path
     #   The relative path to the `plugins.zip` file on your Amazon S3
@@ -1561,6 +1657,22 @@ module Aws::MWAA
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
     #   @return [String]
     #
+    # @!attribute [rw] schedulers
+    #   The number of Apache Airflow schedulers to run in your Amazon MWAA
+    #   environment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source_bucket_arn
+    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where your
+    #   DAG code and supporting files are stored. For example,
+    #   `arn:aws:s3:::my-airflow-bucket-unique-name`. For more information,
+    #   see [Create an Amazon S3 bucket for Amazon MWAA][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html
+    #   @return [String]
+    #
     # @!attribute [rw] startup_script_s3_path
     #   The relative path to the startup shell script in your Amazon S3
     #   bucket. For example, `s3://mwaa-environment/startup.sh`.
@@ -1594,59 +1706,6 @@ module Aws::MWAA
     #   [2]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
     #   @return [String]
     #
-    # @!attribute [rw] airflow_configuration_options
-    #   A list of key-value pairs containing the Apache Airflow
-    #   configuration options you want to attach to your environment. For
-    #   more information, see [Apache Airflow configuration options][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] environment_class
-    #   The environment class type. Valid values: `mw1.micro`, `mw1.small`,
-    #   `mw1.medium`, `mw1.large`, `mw1.xlarge`, and `mw1.2xlarge`. For more
-    #   information, see [Amazon MWAA environment class][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html
-    #   @return [String]
-    #
-    # @!attribute [rw] max_workers
-    #   The maximum number of workers that you want to run in your
-    #   environment. MWAA scales the number of Apache Airflow workers up to
-    #   the number you specify in the `MaxWorkers` field. For example, `20`.
-    #   When there are no more tasks running, and no more in the queue, MWAA
-    #   disposes of the extra workers leaving the one worker that is
-    #   included with your environment, or the number you specify in
-    #   `MinWorkers`.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] network_configuration
-    #   The VPC networking components used to secure and enable network
-    #   traffic between the Amazon Web Services resources for your
-    #   environment. For more information, see [About networking on Amazon
-    #   MWAA][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
-    #   @return [Types::UpdateNetworkConfigurationInput]
-    #
-    # @!attribute [rw] logging_configuration
-    #   The Apache Airflow log types to send to CloudWatch Logs.
-    #   @return [Types::LoggingConfigurationInput]
-    #
-    # @!attribute [rw] weekly_maintenance_window_start
-    #   The day and time of the week in Coordinated Universal Time (UTC)
-    #   24-hour standard time to start weekly maintenance updates of your
-    #   environment in the following format: `DAY:HH:MM`. For example:
-    #   `TUE:03:30`. You can specify a start time in 30 minute increments
-    #   only.
-    #   @return [String]
-    #
     # @!attribute [rw] webserver_access_mode
     #   The Apache Airflow *Web server* access mode. For more information,
     #   see [Apache Airflow access modes][1].
@@ -1656,78 +1715,40 @@ module Aws::MWAA
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html
     #   @return [String]
     #
-    # @!attribute [rw] min_workers
-    #   The minimum number of workers that you want to run in your
-    #   environment. MWAA scales the number of Apache Airflow workers up to
-    #   the number you specify in the `MaxWorkers` field. When there are no
-    #   more tasks running, and no more in the queue, MWAA disposes of the
-    #   extra workers leaving the worker count you specify in the
-    #   `MinWorkers` field. For example, `2`.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] schedulers
-    #   The number of Apache Airflow schedulers to run in your Amazon MWAA
-    #   environment.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] min_webservers
-    #   The minimum number of web servers that you want to run in your
-    #   environment. Amazon MWAA scales the number of Apache Airflow web
-    #   servers up to the number you specify for `MaxWebservers` when you
-    #   interact with your Apache Airflow environment using Apache Airflow
-    #   REST API, or the Apache Airflow CLI. As the transaction-per-second
-    #   rate, and the network load, decrease, Amazon MWAA disposes of the
-    #   additional web servers, and scales down to the number set in
-    #   `MinxWebserers`.
-    #
-    #   Valid values: For environments larger than mw1.micro, accepts values
-    #   from `2` to `5`. Defaults to `2` for all environment sizes except
-    #   mw1.micro, which defaults to `1`.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] max_webservers
-    #   The maximum number of web servers that you want to run in your
-    #   environment. Amazon MWAA scales the number of Apache Airflow web
-    #   servers up to the number you specify for `MaxWebservers` when you
-    #   interact with your Apache Airflow environment using Apache Airflow
-    #   REST API, or the Apache Airflow CLI. For example, in scenarios where
-    #   your workload requires network calls to the Apache Airflow REST API
-    #   with a high transaction-per-second (TPS) rate, Amazon MWAA will
-    #   increase the number of web servers up to the number set in
-    #   `MaxWebserers`. As TPS rates decrease Amazon MWAA disposes of the
-    #   additional web servers, and scales down to the number set in
-    #   `MinxWebserers`.
-    #
-    #   Valid values: For environments larger than mw1.micro, accepts values
-    #   from `2` to `5`. Defaults to `2` for all environment sizes except
-    #   mw1.micro, which defaults to `1`.
-    #   @return [Integer]
+    # @!attribute [rw] weekly_maintenance_window_start
+    #   The day and time of the week in Coordinated Universal Time (UTC)
+    #   24-hour standard time to start weekly maintenance updates of your
+    #   environment in the following format: `DAY:HH:MM`. For example:
+    #   `TUE:03:30`. You can specify a start time in 30 minute increments
+    #   only.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/UpdateEnvironmentInput AWS API Documentation
     #
     class UpdateEnvironmentInput < Struct.new(
       :name,
       :execution_role_arn,
+      :airflow_configuration_options,
       :airflow_version,
-      :source_bucket_arn,
       :dag_s3_path,
+      :environment_class,
+      :logging_configuration,
+      :max_workers,
+      :min_workers,
+      :max_webservers,
+      :min_webservers,
+      :worker_replacement_strategy,
+      :network_configuration,
       :plugins_s3_path,
       :plugins_s3_object_version,
       :requirements_s3_path,
       :requirements_s3_object_version,
+      :schedulers,
+      :source_bucket_arn,
       :startup_script_s3_path,
       :startup_script_s3_object_version,
-      :airflow_configuration_options,
-      :environment_class,
-      :max_workers,
-      :network_configuration,
-      :logging_configuration,
-      :weekly_maintenance_window_start,
       :webserver_access_mode,
-      :min_workers,
-      :schedulers,
-      :min_webservers,
-      :max_webservers)
+      :weekly_maintenance_window_start)
       SENSITIVE = [:airflow_configuration_options]
       include Aws::Structure
     end

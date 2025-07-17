@@ -15,6 +15,7 @@ module Aws::B2bi
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AdvancedOptions = Shapes::StructureShape.new(name: 'AdvancedOptions')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
     BusinessName = Shapes::StringShape.new(name: 'BusinessName')
@@ -70,6 +71,7 @@ module Aws::B2bi
     GetTransformerJobResponse = Shapes::StructureShape.new(name: 'GetTransformerJobResponse')
     GetTransformerRequest = Shapes::StructureShape.new(name: 'GetTransformerRequest')
     GetTransformerResponse = Shapes::StructureShape.new(name: 'GetTransformerResponse')
+    InboundEdiOptions = Shapes::StructureShape.new(name: 'InboundEdiOptions')
     InputConversion = Shapes::StructureShape.new(name: 'InputConversion')
     InputFileSource = Shapes::UnionShape.new(name: 'InputFileSource')
     InputFileSourceFileContentString = Shapes::StringShape.new(name: 'InputFileSourceFileContentString')
@@ -77,6 +79,8 @@ module Aws::B2bi
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
+    LineLength = Shapes::IntegerShape.new(name: 'LineLength')
+    LineTerminator = Shapes::StringShape.new(name: 'LineTerminator')
     ListCapabilitiesRequest = Shapes::StructureShape.new(name: 'ListCapabilitiesRequest')
     ListCapabilitiesResponse = Shapes::StructureShape.new(name: 'ListCapabilitiesResponse')
     ListPartnershipsRequest = Shapes::StructureShape.new(name: 'ListPartnershipsRequest')
@@ -99,6 +103,7 @@ module Aws::B2bi
     OutputConversion = Shapes::StructureShape.new(name: 'OutputConversion')
     OutputSampleFileSource = Shapes::UnionShape.new(name: 'OutputSampleFileSource')
     PageToken = Shapes::StringShape.new(name: 'PageToken')
+    ParsedSplitFileContentsList = Shapes::ListShape.new(name: 'ParsedSplitFileContentsList')
     PartnerName = Shapes::StringShape.new(name: 'PartnerName')
     PartnershipCapabilities = Shapes::ListShape.new(name: 'PartnershipCapabilities')
     PartnershipId = Shapes::StringShape.new(name: 'PartnershipId')
@@ -119,6 +124,9 @@ module Aws::B2bi
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StartTransformerJobRequest = Shapes::StructureShape.new(name: 'StartTransformerJobRequest')
     StartTransformerJobResponse = Shapes::StructureShape.new(name: 'StartTransformerJobResponse')
+    StartingFunctionalGroupControlNumber = Shapes::IntegerShape.new(name: 'StartingFunctionalGroupControlNumber')
+    StartingInterchangeControlNumber = Shapes::IntegerShape.new(name: 'StartingInterchangeControlNumber')
+    StartingTransactionSetControlNumber = Shapes::IntegerShape.new(name: 'StartingTransactionSetControlNumber')
     String = Shapes::StringShape.new(name: 'String')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -155,16 +163,24 @@ module Aws::B2bi
     UpdateTransformerResponse = Shapes::StructureShape.new(name: 'UpdateTransformerResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationMessages = Shapes::ListShape.new(name: 'ValidationMessages')
+    WrapFormat = Shapes::StringShape.new(name: 'WrapFormat')
+    WrapOptions = Shapes::StructureShape.new(name: 'WrapOptions')
+    X12AcknowledgmentOptions = Shapes::StructureShape.new(name: 'X12AcknowledgmentOptions')
     X12AcknowledgmentRequestedCode = Shapes::StringShape.new(name: 'X12AcknowledgmentRequestedCode')
+    X12AdvancedOptions = Shapes::StructureShape.new(name: 'X12AdvancedOptions')
     X12ApplicationReceiverCode = Shapes::StringShape.new(name: 'X12ApplicationReceiverCode')
     X12ApplicationSenderCode = Shapes::StringShape.new(name: 'X12ApplicationSenderCode')
     X12ComponentSeparator = Shapes::StringShape.new(name: 'X12ComponentSeparator')
+    X12ControlNumbers = Shapes::StructureShape.new(name: 'X12ControlNumbers')
     X12DataElementSeparator = Shapes::StringShape.new(name: 'X12DataElementSeparator')
     X12Delimiters = Shapes::StructureShape.new(name: 'X12Delimiters')
     X12Details = Shapes::StructureShape.new(name: 'X12Details')
     X12Envelope = Shapes::StructureShape.new(name: 'X12Envelope')
+    X12FunctionalAcknowledgment = Shapes::StringShape.new(name: 'X12FunctionalAcknowledgment')
     X12FunctionalGroupHeaders = Shapes::StructureShape.new(name: 'X12FunctionalGroupHeaders')
+    X12GS05TimeFormat = Shapes::StringShape.new(name: 'X12GS05TimeFormat')
     X12IdQualifier = Shapes::StringShape.new(name: 'X12IdQualifier')
+    X12InboundEdiOptions = Shapes::StructureShape.new(name: 'X12InboundEdiOptions')
     X12InterchangeControlHeaders = Shapes::StructureShape.new(name: 'X12InterchangeControlHeaders')
     X12OutboundEdiHeaders = Shapes::StructureShape.new(name: 'X12OutboundEdiHeaders')
     X12ReceiverId = Shapes::StringShape.new(name: 'X12ReceiverId')
@@ -172,6 +188,9 @@ module Aws::B2bi
     X12ResponsibleAgencyCode = Shapes::StringShape.new(name: 'X12ResponsibleAgencyCode')
     X12SegmentTerminator = Shapes::StringShape.new(name: 'X12SegmentTerminator')
     X12SenderId = Shapes::StringShape.new(name: 'X12SenderId')
+    X12SplitBy = Shapes::StringShape.new(name: 'X12SplitBy')
+    X12SplitOptions = Shapes::StructureShape.new(name: 'X12SplitOptions')
+    X12TechnicalAcknowledgment = Shapes::StringShape.new(name: 'X12TechnicalAcknowledgment')
     X12TransactionSet = Shapes::StringShape.new(name: 'X12TransactionSet')
     X12UsageIndicatorCode = Shapes::StringShape.new(name: 'X12UsageIndicatorCode')
     X12ValidateEdi = Shapes::BooleanShape.new(name: 'X12ValidateEdi')
@@ -179,6 +198,9 @@ module Aws::B2bi
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AdvancedOptions.add_member(:x12, Shapes::ShapeRef.new(shape: X12AdvancedOptions, location_name: "x12"))
+    AdvancedOptions.struct_class = Types::AdvancedOptions
 
     CapabilityConfiguration.add_member(:edi, Shapes::ShapeRef.new(shape: EdiConfiguration, location_name: "edi"))
     CapabilityConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -189,6 +211,7 @@ module Aws::B2bi
     CapabilityList.member = Shapes::ShapeRef.new(shape: CapabilitySummary)
 
     CapabilityOptions.add_member(:outbound_edi, Shapes::ShapeRef.new(shape: OutboundEdiOptions, location_name: "outboundEdi"))
+    CapabilityOptions.add_member(:inbound_edi, Shapes::ShapeRef.new(shape: InboundEdiOptions, location_name: "inboundEdi"))
     CapabilityOptions.struct_class = Types::CapabilityOptions
 
     CapabilitySummary.add_member(:capability_id, Shapes::ShapeRef.new(shape: CapabilityId, required: true, location_name: "capabilityId"))
@@ -220,7 +243,7 @@ module Aws::B2bi
     CreateCapabilityRequest.add_member(:type, Shapes::ShapeRef.new(shape: CapabilityType, required: true, location_name: "type"))
     CreateCapabilityRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CapabilityConfiguration, required: true, location_name: "configuration"))
     CreateCapabilityRequest.add_member(:instructions_documents, Shapes::ShapeRef.new(shape: InstructionsDocuments, location_name: "instructionsDocuments"))
-    CreateCapabilityRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateCapabilityRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateCapabilityRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateCapabilityRequest.struct_class = Types::CreateCapabilityRequest
 
@@ -239,7 +262,7 @@ module Aws::B2bi
     CreatePartnershipRequest.add_member(:phone, Shapes::ShapeRef.new(shape: Phone, location_name: "phone"))
     CreatePartnershipRequest.add_member(:capabilities, Shapes::ShapeRef.new(shape: PartnershipCapabilities, required: true, location_name: "capabilities"))
     CreatePartnershipRequest.add_member(:capability_options, Shapes::ShapeRef.new(shape: CapabilityOptions, location_name: "capabilityOptions"))
-    CreatePartnershipRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreatePartnershipRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreatePartnershipRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreatePartnershipRequest.struct_class = Types::CreatePartnershipRequest
 
@@ -260,7 +283,7 @@ module Aws::B2bi
     CreateProfileRequest.add_member(:phone, Shapes::ShapeRef.new(shape: Phone, required: true, location_name: "phone"))
     CreateProfileRequest.add_member(:business_name, Shapes::ShapeRef.new(shape: BusinessName, required: true, location_name: "businessName"))
     CreateProfileRequest.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, required: true, location_name: "logging"))
-    CreateProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateProfileRequest.struct_class = Types::CreateProfileRequest
 
@@ -284,12 +307,12 @@ module Aws::B2bi
     CreateStarterMappingTemplateResponse.struct_class = Types::CreateStarterMappingTemplateResponse
 
     CreateTransformerRequest.add_member(:name, Shapes::ShapeRef.new(shape: TransformerName, required: true, location_name: "name"))
-    CreateTransformerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTransformerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateTransformerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
-    CreateTransformerRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, deprecated: true, location_name: "fileFormat", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
-    CreateTransformerRequest.add_member(:mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, deprecated: true, location_name: "mappingTemplate", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
-    CreateTransformerRequest.add_member(:edi_type, Shapes::ShapeRef.new(shape: EdiType, deprecated: true, location_name: "ediType", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
-    CreateTransformerRequest.add_member(:sample_document, Shapes::ShapeRef.new(shape: FileLocation, deprecated: true, location_name: "sampleDocument", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
+    CreateTransformerRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, deprecated: true, location_name: "fileFormat", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
+    CreateTransformerRequest.add_member(:mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, deprecated: true, location_name: "mappingTemplate", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
+    CreateTransformerRequest.add_member(:edi_type, Shapes::ShapeRef.new(shape: EdiType, deprecated: true, location_name: "ediType", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
+    CreateTransformerRequest.add_member(:sample_document, Shapes::ShapeRef.new(shape: FileLocation, deprecated: true, location_name: "sampleDocument", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
     CreateTransformerRequest.add_member(:input_conversion, Shapes::ShapeRef.new(shape: InputConversion, location_name: "inputConversion"))
     CreateTransformerRequest.add_member(:mapping, Shapes::ShapeRef.new(shape: Mapping, location_name: "mapping"))
     CreateTransformerRequest.add_member(:output_conversion, Shapes::ShapeRef.new(shape: OutputConversion, location_name: "outputConversion"))
@@ -301,10 +324,10 @@ module Aws::B2bi
     CreateTransformerResponse.add_member(:name, Shapes::ShapeRef.new(shape: TransformerName, required: true, location_name: "name"))
     CreateTransformerResponse.add_member(:status, Shapes::ShapeRef.new(shape: TransformerStatus, required: true, location_name: "status"))
     CreateTransformerResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedDate, required: true, location_name: "createdAt"))
-    CreateTransformerResponse.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, deprecated: true, location_name: "fileFormat", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
-    CreateTransformerResponse.add_member(:mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, deprecated: true, location_name: "mappingTemplate", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
-    CreateTransformerResponse.add_member(:edi_type, Shapes::ShapeRef.new(shape: EdiType, deprecated: true, location_name: "ediType", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
-    CreateTransformerResponse.add_member(:sample_document, Shapes::ShapeRef.new(shape: FileLocation, deprecated: true, location_name: "sampleDocument", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
+    CreateTransformerResponse.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, deprecated: true, location_name: "fileFormat", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
+    CreateTransformerResponse.add_member(:mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, deprecated: true, location_name: "mappingTemplate", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
+    CreateTransformerResponse.add_member(:edi_type, Shapes::ShapeRef.new(shape: EdiType, deprecated: true, location_name: "ediType", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
+    CreateTransformerResponse.add_member(:sample_document, Shapes::ShapeRef.new(shape: FileLocation, deprecated: true, location_name: "sampleDocument", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
     CreateTransformerResponse.add_member(:input_conversion, Shapes::ShapeRef.new(shape: InputConversion, location_name: "inputConversion"))
     CreateTransformerResponse.add_member(:mapping, Shapes::ShapeRef.new(shape: Mapping, location_name: "mapping"))
     CreateTransformerResponse.add_member(:output_conversion, Shapes::ShapeRef.new(shape: OutputConversion, location_name: "outputConversion"))
@@ -413,18 +436,22 @@ module Aws::B2bi
     GetTransformerResponse.add_member(:status, Shapes::ShapeRef.new(shape: TransformerStatus, required: true, location_name: "status"))
     GetTransformerResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedDate, required: true, location_name: "createdAt"))
     GetTransformerResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: ModifiedDate, location_name: "modifiedAt"))
-    GetTransformerResponse.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, deprecated: true, location_name: "fileFormat", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
-    GetTransformerResponse.add_member(:mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, deprecated: true, location_name: "mappingTemplate", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
-    GetTransformerResponse.add_member(:edi_type, Shapes::ShapeRef.new(shape: EdiType, deprecated: true, location_name: "ediType", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
-    GetTransformerResponse.add_member(:sample_document, Shapes::ShapeRef.new(shape: FileLocation, deprecated: true, location_name: "sampleDocument", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
+    GetTransformerResponse.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, deprecated: true, location_name: "fileFormat", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
+    GetTransformerResponse.add_member(:mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, deprecated: true, location_name: "mappingTemplate", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
+    GetTransformerResponse.add_member(:edi_type, Shapes::ShapeRef.new(shape: EdiType, deprecated: true, location_name: "ediType", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
+    GetTransformerResponse.add_member(:sample_document, Shapes::ShapeRef.new(shape: FileLocation, deprecated: true, location_name: "sampleDocument", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
     GetTransformerResponse.add_member(:input_conversion, Shapes::ShapeRef.new(shape: InputConversion, location_name: "inputConversion"))
     GetTransformerResponse.add_member(:mapping, Shapes::ShapeRef.new(shape: Mapping, location_name: "mapping"))
     GetTransformerResponse.add_member(:output_conversion, Shapes::ShapeRef.new(shape: OutputConversion, location_name: "outputConversion"))
     GetTransformerResponse.add_member(:sample_documents, Shapes::ShapeRef.new(shape: SampleDocuments, location_name: "sampleDocuments"))
     GetTransformerResponse.struct_class = Types::GetTransformerResponse
 
+    InboundEdiOptions.add_member(:x12, Shapes::ShapeRef.new(shape: X12InboundEdiOptions, location_name: "x12"))
+    InboundEdiOptions.struct_class = Types::InboundEdiOptions
+
     InputConversion.add_member(:from_format, Shapes::ShapeRef.new(shape: FromFormat, required: true, location_name: "fromFormat"))
     InputConversion.add_member(:format_options, Shapes::ShapeRef.new(shape: FormatOptions, location_name: "formatOptions"))
+    InputConversion.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AdvancedOptions, location_name: "advancedOptions"))
     InputConversion.struct_class = Types::InputConversion
 
     InputFileSource.add_member(:file_content, Shapes::ShapeRef.new(shape: InputFileSourceFileContentString, location_name: "fileContent"))
@@ -500,6 +527,8 @@ module Aws::B2bi
     OutputSampleFileSource.add_member_subclass(:unknown, Types::OutputSampleFileSource::Unknown)
     OutputSampleFileSource.struct_class = Types::OutputSampleFileSource
 
+    ParsedSplitFileContentsList.member = Shapes::ShapeRef.new(shape: String)
+
     PartnershipCapabilities.member = Shapes::ShapeRef.new(shape: CapabilityId)
 
     PartnershipList.member = Shapes::ShapeRef.new(shape: PartnershipSummary)
@@ -552,7 +581,7 @@ module Aws::B2bi
     StartTransformerJobRequest.add_member(:input_file, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "inputFile"))
     StartTransformerJobRequest.add_member(:output_location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "outputLocation"))
     StartTransformerJobRequest.add_member(:transformer_id, Shapes::ShapeRef.new(shape: TransformerId, required: true, location_name: "transformerId"))
-    StartTransformerJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartTransformerJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartTransformerJobRequest.struct_class = Types::StartTransformerJobRequest
 
     StartTransformerJobResponse.add_member(:transformer_job_id, Shapes::ShapeRef.new(shape: TransformerJobId, required: true, location_name: "transformerJobId"))
@@ -595,9 +624,11 @@ module Aws::B2bi
     TestParsingRequest.add_member(:input_file, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "inputFile"))
     TestParsingRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, required: true, location_name: "fileFormat"))
     TestParsingRequest.add_member(:edi_type, Shapes::ShapeRef.new(shape: EdiType, required: true, location_name: "ediType"))
+    TestParsingRequest.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AdvancedOptions, location_name: "advancedOptions"))
     TestParsingRequest.struct_class = Types::TestParsingRequest
 
     TestParsingResponse.add_member(:parsed_file_content, Shapes::ShapeRef.new(shape: String, required: true, location_name: "parsedFileContent"))
+    TestParsingResponse.add_member(:parsed_split_file_contents, Shapes::ShapeRef.new(shape: ParsedSplitFileContentsList, location_name: "parsedSplitFileContents"))
     TestParsingResponse.struct_class = Types::TestParsingResponse
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
@@ -611,10 +642,10 @@ module Aws::B2bi
     TransformerSummary.add_member(:status, Shapes::ShapeRef.new(shape: TransformerStatus, required: true, location_name: "status"))
     TransformerSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedDate, required: true, location_name: "createdAt"))
     TransformerSummary.add_member(:modified_at, Shapes::ShapeRef.new(shape: ModifiedDate, location_name: "modifiedAt"))
-    TransformerSummary.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, deprecated: true, location_name: "fileFormat", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
-    TransformerSummary.add_member(:mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, deprecated: true, location_name: "mappingTemplate", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
-    TransformerSummary.add_member(:edi_type, Shapes::ShapeRef.new(shape: EdiType, deprecated: true, location_name: "ediType", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
-    TransformerSummary.add_member(:sample_document, Shapes::ShapeRef.new(shape: FileLocation, deprecated: true, location_name: "sampleDocument", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
+    TransformerSummary.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, deprecated: true, location_name: "fileFormat", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
+    TransformerSummary.add_member(:mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, deprecated: true, location_name: "mappingTemplate", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
+    TransformerSummary.add_member(:edi_type, Shapes::ShapeRef.new(shape: EdiType, deprecated: true, location_name: "ediType", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
+    TransformerSummary.add_member(:sample_document, Shapes::ShapeRef.new(shape: FileLocation, deprecated: true, location_name: "sampleDocument", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
     TransformerSummary.add_member(:input_conversion, Shapes::ShapeRef.new(shape: InputConversion, location_name: "inputConversion"))
     TransformerSummary.add_member(:mapping, Shapes::ShapeRef.new(shape: Mapping, location_name: "mapping"))
     TransformerSummary.add_member(:output_conversion, Shapes::ShapeRef.new(shape: OutputConversion, location_name: "outputConversion"))
@@ -682,10 +713,10 @@ module Aws::B2bi
     UpdateTransformerRequest.add_member(:transformer_id, Shapes::ShapeRef.new(shape: TransformerId, required: true, location_name: "transformerId"))
     UpdateTransformerRequest.add_member(:name, Shapes::ShapeRef.new(shape: TransformerName, location_name: "name"))
     UpdateTransformerRequest.add_member(:status, Shapes::ShapeRef.new(shape: TransformerStatus, location_name: "status"))
-    UpdateTransformerRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, deprecated: true, location_name: "fileFormat", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
-    UpdateTransformerRequest.add_member(:mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, deprecated: true, location_name: "mappingTemplate", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
-    UpdateTransformerRequest.add_member(:edi_type, Shapes::ShapeRef.new(shape: EdiType, deprecated: true, location_name: "ediType", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
-    UpdateTransformerRequest.add_member(:sample_document, Shapes::ShapeRef.new(shape: FileLocation, deprecated: true, location_name: "sampleDocument", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
+    UpdateTransformerRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, deprecated: true, location_name: "fileFormat", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
+    UpdateTransformerRequest.add_member(:mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, deprecated: true, location_name: "mappingTemplate", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
+    UpdateTransformerRequest.add_member(:edi_type, Shapes::ShapeRef.new(shape: EdiType, deprecated: true, location_name: "ediType", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
+    UpdateTransformerRequest.add_member(:sample_document, Shapes::ShapeRef.new(shape: FileLocation, deprecated: true, location_name: "sampleDocument", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
     UpdateTransformerRequest.add_member(:input_conversion, Shapes::ShapeRef.new(shape: InputConversion, location_name: "inputConversion"))
     UpdateTransformerRequest.add_member(:mapping, Shapes::ShapeRef.new(shape: Mapping, location_name: "mapping"))
     UpdateTransformerRequest.add_member(:output_conversion, Shapes::ShapeRef.new(shape: OutputConversion, location_name: "outputConversion"))
@@ -698,10 +729,10 @@ module Aws::B2bi
     UpdateTransformerResponse.add_member(:status, Shapes::ShapeRef.new(shape: TransformerStatus, required: true, location_name: "status"))
     UpdateTransformerResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedDate, required: true, location_name: "createdAt"))
     UpdateTransformerResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: ModifiedDate, required: true, location_name: "modifiedAt"))
-    UpdateTransformerResponse.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, deprecated: true, location_name: "fileFormat", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
-    UpdateTransformerResponse.add_member(:mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, deprecated: true, location_name: "mappingTemplate", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
-    UpdateTransformerResponse.add_member(:edi_type, Shapes::ShapeRef.new(shape: EdiType, deprecated: true, location_name: "ediType", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
-    UpdateTransformerResponse.add_member(:sample_document, Shapes::ShapeRef.new(shape: FileLocation, deprecated: true, location_name: "sampleDocument", metadata: {"deprecatedMessage"=>"This is a legacy trait. Please use input-conversion or output-conversion."}))
+    UpdateTransformerResponse.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, deprecated: true, location_name: "fileFormat", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
+    UpdateTransformerResponse.add_member(:mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, deprecated: true, location_name: "mappingTemplate", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
+    UpdateTransformerResponse.add_member(:edi_type, Shapes::ShapeRef.new(shape: EdiType, deprecated: true, location_name: "ediType", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
+    UpdateTransformerResponse.add_member(:sample_document, Shapes::ShapeRef.new(shape: FileLocation, deprecated: true, location_name: "sampleDocument", metadata: {"deprecatedMessage" => "This is a legacy trait. Please use input-conversion or output-conversion."}))
     UpdateTransformerResponse.add_member(:input_conversion, Shapes::ShapeRef.new(shape: InputConversion, location_name: "inputConversion"))
     UpdateTransformerResponse.add_member(:mapping, Shapes::ShapeRef.new(shape: Mapping, location_name: "mapping"))
     UpdateTransformerResponse.add_member(:output_conversion, Shapes::ShapeRef.new(shape: OutputConversion, location_name: "outputConversion"))
@@ -713,6 +744,23 @@ module Aws::B2bi
 
     ValidationMessages.member = Shapes::ShapeRef.new(shape: String)
 
+    WrapOptions.add_member(:wrap_by, Shapes::ShapeRef.new(shape: WrapFormat, required: true, location_name: "wrapBy"))
+    WrapOptions.add_member(:line_terminator, Shapes::ShapeRef.new(shape: LineTerminator, location_name: "lineTerminator"))
+    WrapOptions.add_member(:line_length, Shapes::ShapeRef.new(shape: LineLength, location_name: "lineLength"))
+    WrapOptions.struct_class = Types::WrapOptions
+
+    X12AcknowledgmentOptions.add_member(:functional_acknowledgment, Shapes::ShapeRef.new(shape: X12FunctionalAcknowledgment, required: true, location_name: "functionalAcknowledgment"))
+    X12AcknowledgmentOptions.add_member(:technical_acknowledgment, Shapes::ShapeRef.new(shape: X12TechnicalAcknowledgment, required: true, location_name: "technicalAcknowledgment"))
+    X12AcknowledgmentOptions.struct_class = Types::X12AcknowledgmentOptions
+
+    X12AdvancedOptions.add_member(:split_options, Shapes::ShapeRef.new(shape: X12SplitOptions, location_name: "splitOptions"))
+    X12AdvancedOptions.struct_class = Types::X12AdvancedOptions
+
+    X12ControlNumbers.add_member(:starting_interchange_control_number, Shapes::ShapeRef.new(shape: StartingInterchangeControlNumber, location_name: "startingInterchangeControlNumber"))
+    X12ControlNumbers.add_member(:starting_functional_group_control_number, Shapes::ShapeRef.new(shape: StartingFunctionalGroupControlNumber, location_name: "startingFunctionalGroupControlNumber"))
+    X12ControlNumbers.add_member(:starting_transaction_set_control_number, Shapes::ShapeRef.new(shape: StartingTransactionSetControlNumber, location_name: "startingTransactionSetControlNumber"))
+    X12ControlNumbers.struct_class = Types::X12ControlNumbers
+
     X12Delimiters.add_member(:component_separator, Shapes::ShapeRef.new(shape: X12ComponentSeparator, location_name: "componentSeparator"))
     X12Delimiters.add_member(:data_element_separator, Shapes::ShapeRef.new(shape: X12DataElementSeparator, location_name: "dataElementSeparator"))
     X12Delimiters.add_member(:segment_terminator, Shapes::ShapeRef.new(shape: X12SegmentTerminator, location_name: "segmentTerminator"))
@@ -723,12 +771,16 @@ module Aws::B2bi
     X12Details.struct_class = Types::X12Details
 
     X12Envelope.add_member(:common, Shapes::ShapeRef.new(shape: X12OutboundEdiHeaders, location_name: "common"))
+    X12Envelope.add_member(:wrap_options, Shapes::ShapeRef.new(shape: WrapOptions, location_name: "wrapOptions"))
     X12Envelope.struct_class = Types::X12Envelope
 
     X12FunctionalGroupHeaders.add_member(:application_sender_code, Shapes::ShapeRef.new(shape: X12ApplicationSenderCode, location_name: "applicationSenderCode"))
     X12FunctionalGroupHeaders.add_member(:application_receiver_code, Shapes::ShapeRef.new(shape: X12ApplicationReceiverCode, location_name: "applicationReceiverCode"))
     X12FunctionalGroupHeaders.add_member(:responsible_agency_code, Shapes::ShapeRef.new(shape: X12ResponsibleAgencyCode, location_name: "responsibleAgencyCode"))
     X12FunctionalGroupHeaders.struct_class = Types::X12FunctionalGroupHeaders
+
+    X12InboundEdiOptions.add_member(:acknowledgment_options, Shapes::ShapeRef.new(shape: X12AcknowledgmentOptions, location_name: "acknowledgmentOptions"))
+    X12InboundEdiOptions.struct_class = Types::X12InboundEdiOptions
 
     X12InterchangeControlHeaders.add_member(:sender_id_qualifier, Shapes::ShapeRef.new(shape: X12IdQualifier, location_name: "senderIdQualifier"))
     X12InterchangeControlHeaders.add_member(:sender_id, Shapes::ShapeRef.new(shape: X12SenderId, location_name: "senderId"))
@@ -743,7 +795,12 @@ module Aws::B2bi
     X12OutboundEdiHeaders.add_member(:functional_group_headers, Shapes::ShapeRef.new(shape: X12FunctionalGroupHeaders, location_name: "functionalGroupHeaders"))
     X12OutboundEdiHeaders.add_member(:delimiters, Shapes::ShapeRef.new(shape: X12Delimiters, location_name: "delimiters"))
     X12OutboundEdiHeaders.add_member(:validate_edi, Shapes::ShapeRef.new(shape: X12ValidateEdi, location_name: "validateEdi"))
+    X12OutboundEdiHeaders.add_member(:control_numbers, Shapes::ShapeRef.new(shape: X12ControlNumbers, location_name: "controlNumbers"))
+    X12OutboundEdiHeaders.add_member(:gs05_time_format, Shapes::ShapeRef.new(shape: X12GS05TimeFormat, location_name: "gs05TimeFormat"))
     X12OutboundEdiHeaders.struct_class = Types::X12OutboundEdiHeaders
+
+    X12SplitOptions.add_member(:split_by, Shapes::ShapeRef.new(shape: X12SplitBy, required: true, location_name: "splitBy"))
+    X12SplitOptions.struct_class = Types::X12SplitOptions
 
 
     # @api private
@@ -773,8 +830,8 @@ module Aws::B2bi
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateCapabilityRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateCapabilityResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -788,11 +845,11 @@ module Aws::B2bi
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreatePartnershipRequest)
         o.output = Shapes::ShapeRef.new(shape: CreatePartnershipResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -803,11 +860,11 @@ module Aws::B2bi
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateProfileResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -830,11 +887,11 @@ module Aws::B2bi
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateTransformerRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateTransformerResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -845,8 +902,8 @@ module Aws::B2bi
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteCapabilityRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -859,11 +916,11 @@ module Aws::B2bi
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeletePartnershipRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -876,8 +933,8 @@ module Aws::B2bi
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -887,11 +944,11 @@ module Aws::B2bi
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteTransformerRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -928,8 +985,8 @@ module Aws::B2bi
         o.output = Shapes::ShapeRef.new(shape: GetPartnershipResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -941,8 +998,8 @@ module Aws::B2bi
         o.output = Shapes::ShapeRef.new(shape: GetProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -954,8 +1011,8 @@ module Aws::B2bi
         o.output = Shapes::ShapeRef.new(shape: GetTransformerResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -998,8 +1055,8 @@ module Aws::B2bi
         o.output = Shapes::ShapeRef.new(shape: ListPartnershipsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -1062,8 +1119,8 @@ module Aws::B2bi
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartTransformerJobRequest)
         o.output = Shapes::ShapeRef.new(shape: StartTransformerJobResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1077,8 +1134,8 @@ module Aws::B2bi
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -1138,8 +1195,8 @@ module Aws::B2bi
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateCapabilityRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateCapabilityResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1153,11 +1210,11 @@ module Aws::B2bi
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdatePartnershipRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdatePartnershipResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -1168,11 +1225,11 @@ module Aws::B2bi
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateProfileResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -1183,11 +1240,11 @@ module Aws::B2bi
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateTransformerRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateTransformerResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)

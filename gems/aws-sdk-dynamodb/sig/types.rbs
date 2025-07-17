@@ -293,6 +293,11 @@ module Aws::DynamoDB
       SENSITIVE: []
     end
 
+    class CreateGlobalTableWitnessGroupMemberAction
+      attr_accessor region_name: ::String
+      SENSITIVE: []
+    end
+
     class CreateReplicaAction
       attr_accessor region_name: ::String
       SENSITIVE: []
@@ -360,6 +365,11 @@ module Aws::DynamoDB
 
     class DeleteGlobalSecondaryIndexAction
       attr_accessor index_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGlobalTableWitnessGroupMemberAction
+      attr_accessor region_name: ::String
       SENSITIVE: []
     end
 
@@ -804,6 +814,18 @@ module Aws::DynamoDB
       SENSITIVE: []
     end
 
+    class GlobalTableWitnessDescription
+      attr_accessor region_name: ::String
+      attr_accessor witness_status: ("CREATING" | "DELETING" | "ACTIVE")
+      SENSITIVE: []
+    end
+
+    class GlobalTableWitnessGroupUpdate
+      attr_accessor create: Types::CreateGlobalTableWitnessGroupMemberAction
+      attr_accessor delete: Types::DeleteGlobalTableWitnessGroupMemberAction
+      SENSITIVE: []
+    end
+
     class IdempotentParameterMismatchException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1244,7 +1266,7 @@ module Aws::DynamoDB
       attr_accessor global_secondary_indexes: ::Array[Types::ReplicaGlobalSecondaryIndexAutoScalingDescription]
       attr_accessor replica_provisioned_read_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription
       attr_accessor replica_provisioned_write_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription
-      attr_accessor replica_status: ("CREATING" | "CREATION_FAILED" | "UPDATING" | "DELETING" | "ACTIVE" | "REGION_DISABLED" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS")
+      attr_accessor replica_status: ("CREATING" | "CREATION_FAILED" | "UPDATING" | "DELETING" | "ACTIVE" | "REGION_DISABLED" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS" | "ARCHIVING" | "ARCHIVED" | "REPLICATION_NOT_AUTHORIZED")
       SENSITIVE: []
     end
 
@@ -1257,7 +1279,7 @@ module Aws::DynamoDB
 
     class ReplicaDescription
       attr_accessor region_name: ::String
-      attr_accessor replica_status: ("CREATING" | "CREATION_FAILED" | "UPDATING" | "DELETING" | "ACTIVE" | "REGION_DISABLED" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS")
+      attr_accessor replica_status: ("CREATING" | "CREATION_FAILED" | "UPDATING" | "DELETING" | "ACTIVE" | "REGION_DISABLED" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS" | "ARCHIVING" | "ARCHIVED" | "REPLICATION_NOT_AUTHORIZED")
       attr_accessor replica_status_description: ::String
       attr_accessor replica_status_percent_progress: ::String
       attr_accessor kms_master_key_id: ::String
@@ -1323,7 +1345,7 @@ module Aws::DynamoDB
 
     class ReplicaSettingsDescription
       attr_accessor region_name: ::String
-      attr_accessor replica_status: ("CREATING" | "CREATION_FAILED" | "UPDATING" | "DELETING" | "ACTIVE" | "REGION_DISABLED" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS")
+      attr_accessor replica_status: ("CREATING" | "CREATION_FAILED" | "UPDATING" | "DELETING" | "ACTIVE" | "REGION_DISABLED" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS" | "ARCHIVING" | "ARCHIVED" | "REPLICATION_NOT_AUTHORIZED")
       attr_accessor replica_billing_mode_summary: Types::BillingModeSummary
       attr_accessor replica_provisioned_read_capacity_units: ::Integer
       attr_accessor replica_provisioned_read_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription
@@ -1508,7 +1530,7 @@ module Aws::DynamoDB
 
     class TableAutoScalingDescription
       attr_accessor table_name: ::String
-      attr_accessor table_status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS" | "ARCHIVING" | "ARCHIVED")
+      attr_accessor table_status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS" | "ARCHIVING" | "ARCHIVED" | "REPLICATION_NOT_AUTHORIZED")
       attr_accessor replicas: ::Array[Types::ReplicaAutoScalingDescription]
       SENSITIVE: []
     end
@@ -1535,7 +1557,7 @@ module Aws::DynamoDB
       attr_accessor attribute_definitions: ::Array[Types::AttributeDefinition]
       attr_accessor table_name: ::String
       attr_accessor key_schema: ::Array[Types::KeySchemaElement]
-      attr_accessor table_status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS" | "ARCHIVING" | "ARCHIVED")
+      attr_accessor table_status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS" | "ARCHIVING" | "ARCHIVED" | "REPLICATION_NOT_AUTHORIZED")
       attr_accessor creation_date_time: ::Time
       attr_accessor provisioned_throughput: Types::ProvisionedThroughputDescription
       attr_accessor table_size_bytes: ::Integer
@@ -1550,6 +1572,7 @@ module Aws::DynamoDB
       attr_accessor latest_stream_arn: ::String
       attr_accessor global_table_version: ::String
       attr_accessor replicas: ::Array[Types::ReplicaDescription]
+      attr_accessor global_table_witnesses: ::Array[Types::GlobalTableWitnessDescription]
       attr_accessor restore_summary: Types::RestoreSummary
       attr_accessor sse_description: Types::SSEDescription
       attr_accessor archival_summary: Types::ArchivalSummary
@@ -1574,7 +1597,7 @@ module Aws::DynamoDB
     class TableWarmThroughputDescription
       attr_accessor read_units_per_second: ::Integer
       attr_accessor write_units_per_second: ::Integer
-      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS" | "ARCHIVING" | "ARCHIVED")
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS" | "ARCHIVING" | "ARCHIVED" | "REPLICATION_NOT_AUTHORIZED")
       SENSITIVE: []
     end
 
@@ -1800,6 +1823,7 @@ module Aws::DynamoDB
       attr_accessor table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS")
       attr_accessor deletion_protection_enabled: bool
       attr_accessor multi_region_consistency: ("EVENTUAL" | "STRONG")
+      attr_accessor global_table_witness_updates: ::Array[Types::GlobalTableWitnessGroupUpdate]
       attr_accessor on_demand_throughput: Types::OnDemandThroughput
       attr_accessor warm_throughput: Types::WarmThroughput
       SENSITIVE: []

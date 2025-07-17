@@ -200,8 +200,7 @@ module Aws::WorkSpacesThinClient
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -771,8 +770,6 @@ module Aws::WorkSpacesThinClient
     #   resp.device.updated_at #=> Time
     #   resp.device.arn #=> String
     #   resp.device.kms_key_arn #=> String
-    #   resp.device.tags #=> Hash
-    #   resp.device.tags["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/GetDevice AWS API Documentation
     #
@@ -825,8 +822,6 @@ module Aws::WorkSpacesThinClient
     #   resp.environment.updated_at #=> Time
     #   resp.environment.arn #=> String
     #   resp.environment.kms_key_arn #=> String
-    #   resp.environment.tags #=> Hash
-    #   resp.environment.tags["String"] #=> String
     #   resp.environment.device_creation_tags #=> Hash
     #   resp.environment.device_creation_tags["DeviceCreationTagKey"] #=> String
     #
@@ -865,8 +860,6 @@ module Aws::WorkSpacesThinClient
     #   resp.software_set.software[0].name #=> String
     #   resp.software_set.software[0].version #=> String
     #   resp.software_set.arn #=> String
-    #   resp.software_set.tags #=> Hash
-    #   resp.software_set.tags["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/GetSoftwareSet AWS API Documentation
     #
@@ -1333,7 +1326,7 @@ module Aws::WorkSpacesThinClient
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspacesthinclient'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

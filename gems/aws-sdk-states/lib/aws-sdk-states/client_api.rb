@@ -303,8 +303,8 @@ module Aws::States
     ActivityScheduledEventDetails.add_member(:resource, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resource"))
     ActivityScheduledEventDetails.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "input"))
     ActivityScheduledEventDetails.add_member(:input_details, Shapes::ShapeRef.new(shape: HistoryEventExecutionDataDetails, location_name: "inputDetails"))
-    ActivityScheduledEventDetails.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: TimeoutInSeconds, location_name: "timeoutInSeconds", metadata: {"box"=>true}))
-    ActivityScheduledEventDetails.add_member(:heartbeat_in_seconds, Shapes::ShapeRef.new(shape: TimeoutInSeconds, location_name: "heartbeatInSeconds", metadata: {"box"=>true}))
+    ActivityScheduledEventDetails.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: TimeoutInSeconds, location_name: "timeoutInSeconds", metadata: {"box" => true}))
+    ActivityScheduledEventDetails.add_member(:heartbeat_in_seconds, Shapes::ShapeRef.new(shape: TimeoutInSeconds, location_name: "heartbeatInSeconds", metadata: {"box" => true}))
     ActivityScheduledEventDetails.struct_class = Types::ActivityScheduledEventDetails
 
     ActivityStartedEventDetails.add_member(:worker_name, Shapes::ShapeRef.new(shape: Identity, location_name: "workerName"))
@@ -497,7 +497,7 @@ module Aws::States
     DescribeStateMachineOutput.struct_class = Types::DescribeStateMachineOutput
 
     EncryptionConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
-    EncryptionConfiguration.add_member(:kms_data_key_reuse_period_seconds, Shapes::ShapeRef.new(shape: KmsDataKeyReusePeriodSeconds, location_name: "kmsDataKeyReusePeriodSeconds", metadata: {"box"=>true}))
+    EncryptionConfiguration.add_member(:kms_data_key_reuse_period_seconds, Shapes::ShapeRef.new(shape: KmsDataKeyReusePeriodSeconds, location_name: "kmsDataKeyReusePeriodSeconds", metadata: {"box" => true}))
     EncryptionConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "type"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
 
@@ -533,10 +533,10 @@ module Aws::States
     ExecutionListItem.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDate"))
     ExecutionListItem.add_member(:stop_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "stopDate"))
     ExecutionListItem.add_member(:map_run_arn, Shapes::ShapeRef.new(shape: LongArn, location_name: "mapRunArn"))
-    ExecutionListItem.add_member(:item_count, Shapes::ShapeRef.new(shape: UnsignedInteger, location_name: "itemCount", metadata: {"box"=>true}))
+    ExecutionListItem.add_member(:item_count, Shapes::ShapeRef.new(shape: UnsignedInteger, location_name: "itemCount", metadata: {"box" => true}))
     ExecutionListItem.add_member(:state_machine_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "stateMachineVersionArn"))
     ExecutionListItem.add_member(:state_machine_alias_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "stateMachineAliasArn"))
-    ExecutionListItem.add_member(:redrive_count, Shapes::ShapeRef.new(shape: RedriveCount, location_name: "redriveCount", metadata: {"box"=>true}))
+    ExecutionListItem.add_member(:redrive_count, Shapes::ShapeRef.new(shape: RedriveCount, location_name: "redriveCount", metadata: {"box" => true}))
     ExecutionListItem.add_member(:redrive_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "redriveDate"))
     ExecutionListItem.struct_class = Types::ExecutionListItem
 
@@ -702,7 +702,7 @@ module Aws::States
     LambdaFunctionScheduledEventDetails.add_member(:resource, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resource"))
     LambdaFunctionScheduledEventDetails.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "input"))
     LambdaFunctionScheduledEventDetails.add_member(:input_details, Shapes::ShapeRef.new(shape: HistoryEventExecutionDataDetails, location_name: "inputDetails"))
-    LambdaFunctionScheduledEventDetails.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: TimeoutInSeconds, location_name: "timeoutInSeconds", metadata: {"box"=>true}))
+    LambdaFunctionScheduledEventDetails.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: TimeoutInSeconds, location_name: "timeoutInSeconds", metadata: {"box" => true}))
     LambdaFunctionScheduledEventDetails.add_member(:task_credentials, Shapes::ShapeRef.new(shape: TaskCredentials, location_name: "taskCredentials"))
     LambdaFunctionScheduledEventDetails.struct_class = Types::LambdaFunctionScheduledEventDetails
 
@@ -853,7 +853,7 @@ module Aws::States
     PublishStateMachineVersionOutput.struct_class = Types::PublishStateMachineVersionOutput
 
     RedriveExecutionInput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
-    RedriveExecutionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    RedriveExecutionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     RedriveExecutionInput.struct_class = Types::RedriveExecutionInput
 
     RedriveExecutionOutput.add_member(:redrive_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "redriveDate"))
@@ -1008,8 +1008,8 @@ module Aws::States
     TaskScheduledEventDetails.add_member(:resource, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "resource"))
     TaskScheduledEventDetails.add_member(:region, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "region"))
     TaskScheduledEventDetails.add_member(:parameters, Shapes::ShapeRef.new(shape: ConnectorParameters, required: true, location_name: "parameters"))
-    TaskScheduledEventDetails.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: TimeoutInSeconds, location_name: "timeoutInSeconds", metadata: {"box"=>true}))
-    TaskScheduledEventDetails.add_member(:heartbeat_in_seconds, Shapes::ShapeRef.new(shape: TimeoutInSeconds, location_name: "heartbeatInSeconds", metadata: {"box"=>true}))
+    TaskScheduledEventDetails.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: TimeoutInSeconds, location_name: "timeoutInSeconds", metadata: {"box" => true}))
+    TaskScheduledEventDetails.add_member(:heartbeat_in_seconds, Shapes::ShapeRef.new(shape: TimeoutInSeconds, location_name: "heartbeatInSeconds", metadata: {"box" => true}))
     TaskScheduledEventDetails.add_member(:task_credentials, Shapes::ShapeRef.new(shape: TaskCredentials, location_name: "taskCredentials"))
     TaskScheduledEventDetails.struct_class = Types::TaskScheduledEventDetails
 
@@ -1080,9 +1080,9 @@ module Aws::States
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
     UpdateMapRunInput.add_member(:map_run_arn, Shapes::ShapeRef.new(shape: LongArn, required: true, location_name: "mapRunArn"))
-    UpdateMapRunInput.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "maxConcurrency", metadata: {"box"=>true}))
-    UpdateMapRunInput.add_member(:tolerated_failure_percentage, Shapes::ShapeRef.new(shape: ToleratedFailurePercentage, location_name: "toleratedFailurePercentage", metadata: {"box"=>true}))
-    UpdateMapRunInput.add_member(:tolerated_failure_count, Shapes::ShapeRef.new(shape: ToleratedFailureCount, location_name: "toleratedFailureCount", metadata: {"box"=>true}))
+    UpdateMapRunInput.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "maxConcurrency", metadata: {"box" => true}))
+    UpdateMapRunInput.add_member(:tolerated_failure_percentage, Shapes::ShapeRef.new(shape: ToleratedFailurePercentage, location_name: "toleratedFailurePercentage", metadata: {"box" => true}))
+    UpdateMapRunInput.add_member(:tolerated_failure_count, Shapes::ShapeRef.new(shape: ToleratedFailureCount, location_name: "toleratedFailureCount", metadata: {"box" => true}))
     UpdateMapRunInput.struct_class = Types::UpdateMapRunInput
 
     UpdateMapRunOutput.struct_class = Types::UpdateMapRunOutput

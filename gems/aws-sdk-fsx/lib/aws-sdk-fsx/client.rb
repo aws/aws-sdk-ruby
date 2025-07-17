@@ -200,8 +200,7 @@ module Aws::FSx
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -839,6 +838,9 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.backup.file_system.lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backup.file_system.lustre_configuration.efa_enabled #=> Boolean
+    #   resp.backup.file_system.lustre_configuration.throughput_capacity #=> Integer
+    #   resp.backup.file_system.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.backup.file_system.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.backup.file_system.administrative_actions #=> Array
     #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -1086,6 +1088,9 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.efa_enabled #=> Boolean
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.throughput_capacity #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -1334,6 +1339,9 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.efa_enabled #=> Boolean
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.throughput_capacity #=> Integer
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -1462,6 +1470,117 @@ module Aws::FSx
     # @param [Hash] params ({})
     def copy_snapshot_and_update_volume(params = {}, options = {})
       req = build_request(:copy_snapshot_and_update_volume, params)
+      req.send_request(options)
+    end
+
+    # Creates an S3 access point and attaches it to an Amazon FSx volume.
+    # For FSx for OpenZFS file systems, the volume must be hosted on a
+    # high-availability file system, either Single-AZ or Multi-AZ. For more
+    # information, see [Accessing your data using access
+    # points](fsx/latest/OpenZFSGuide/s3accesspoints-for-FSx.html) in the
+    # Amazon FSx for OpenZFS User Guide.
+    #
+    # The requester requires the following permissions to perform these
+    # actions:
+    #
+    # * `fsx:CreateAndAttachS3AccessPoint`
+    #
+    # * `s3:CreateAccessPoint`
+    #
+    # * `s3:GetAccessPoint`
+    #
+    # * `s3:PutAccessPointPolicy`
+    #
+    # * `s3:DeleteAccessPoint`
+    #
+    # The following actions are related to `CreateAndAttachS3AccessPoint`:
+    #
+    # * DescribeS3AccessPointAttachments
+    #
+    # * DetachAndDeleteS3AccessPoint
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 63 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :name
+    #   The name you want to assign to this S3 access point.
+    #
+    # @option params [required, String] :type
+    #   The type of S3 access point you want to create. Only `OpenZFS` is
+    #   supported.
+    #
+    # @option params [Types::CreateAndAttachS3AccessPointOpenZFSConfiguration] :open_zfs_configuration
+    #   Specifies the configuration to use when creating and attaching an S3
+    #   access point to an FSx for OpenZFS volume.
+    #
+    # @option params [Types::CreateAndAttachS3AccessPointS3Configuration] :s3_access_point
+    #   Specifies the virtual private cloud (VPC) configuration if you're
+    #   creating an access point that is restricted to a VPC. For more
+    #   information, see [Creating access points restricted to a virtual
+    #   private cloud][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/access-points-vpc.html
+    #
+    # @return [Types::CreateAndAttachS3AccessPointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAndAttachS3AccessPointResponse#s3_access_point_attachment #s3_access_point_attachment} => Types::S3AccessPointAttachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_and_attach_s3_access_point({
+    #     client_request_token: "ClientRequestToken",
+    #     name: "S3AccessPointAttachmentName", # required
+    #     type: "OPENZFS", # required, accepts OPENZFS
+    #     open_zfs_configuration: {
+    #       volume_id: "VolumeId", # required
+    #       file_system_identity: { # required
+    #         type: "POSIX", # required, accepts POSIX
+    #         posix_user: {
+    #           uid: 1, # required
+    #           gid: 1, # required
+    #           secondary_gids: [1],
+    #         },
+    #       },
+    #     },
+    #     s3_access_point: {
+    #       vpc_configuration: {
+    #         vpc_id: "VpcId",
+    #       },
+    #       policy: "AccessPointPolicy",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.s3_access_point_attachment.lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED"
+    #   resp.s3_access_point_attachment.lifecycle_transition_reason.message #=> String
+    #   resp.s3_access_point_attachment.creation_time #=> Time
+    #   resp.s3_access_point_attachment.name #=> String
+    #   resp.s3_access_point_attachment.type #=> String, one of "OPENZFS"
+    #   resp.s3_access_point_attachment.open_zfs_configuration.volume_id #=> String
+    #   resp.s3_access_point_attachment.open_zfs_configuration.file_system_identity.type #=> String, one of "POSIX"
+    #   resp.s3_access_point_attachment.open_zfs_configuration.file_system_identity.posix_user.uid #=> Integer
+    #   resp.s3_access_point_attachment.open_zfs_configuration.file_system_identity.posix_user.gid #=> Integer
+    #   resp.s3_access_point_attachment.open_zfs_configuration.file_system_identity.posix_user.secondary_gids #=> Array
+    #   resp.s3_access_point_attachment.open_zfs_configuration.file_system_identity.posix_user.secondary_gids[0] #=> Integer
+    #   resp.s3_access_point_attachment.s3_access_point.resource_arn #=> String
+    #   resp.s3_access_point_attachment.s3_access_point.alias #=> String
+    #   resp.s3_access_point_attachment.s3_access_point.vpc_configuration.vpc_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateAndAttachS3AccessPoint AWS API Documentation
+    #
+    # @overload create_and_attach_s3_access_point(params = {})
+    # @param [Hash] params ({})
+    def create_and_attach_s3_access_point(params = {}, options = {})
+      req = build_request(:create_and_attach_s3_access_point, params)
       req.send_request(options)
     end
 
@@ -1690,6 +1809,9 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.backup.file_system.lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backup.file_system.lustre_configuration.efa_enabled #=> Boolean
+    #   resp.backup.file_system.lustre_configuration.throughput_capacity #=> Integer
+    #   resp.backup.file_system.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.backup.file_system.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.backup.file_system.administrative_actions #=> Array
     #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -1937,6 +2059,9 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.efa_enabled #=> Boolean
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.throughput_capacity #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -2656,24 +2781,25 @@ module Aws::FSx
     #   * Set to `SSD` to use solid state drive storage. SSD is supported on
     #     all Windows, Lustre, ONTAP, and OpenZFS deployment types.
     #
-    #   * Set to `HDD` to use hard disk drive storage. HDD is supported on
+    #   * Set to `HDD` to use hard disk drive storage, which is supported on
     #     `SINGLE_AZ_2` and `MULTI_AZ_1` Windows file system deployment types,
     #     and on `PERSISTENT_1` Lustre file system deployment types.
     #
     #   * Set to `INTELLIGENT_TIERING` to use fully elastic,
     #     intelligently-tiered storage. Intelligent-Tiering is only available
-    #     for OpenZFS file systems with the Multi-AZ deployment type.
+    #     for OpenZFS file systems with the Multi-AZ deployment type and for
+    #     Lustre file systems with the Persistent\_2 deployment type.
     #
     #   Default value is `SSD`. For more information, see [ Storage type
-    #   options][1] in the *FSx for Windows File Server User Guide*, [Multiple
-    #   storage options][2] in the *FSx for Lustre User Guide*, and [Working
-    #   with Intelligent-Tiering][3] in the *Amazon FSx for OpenZFS User
-    #   Guide*.
+    #   options][1] in the *FSx for Windows File Server User Guide*, [FSx for
+    #   Lustre storage classes][2] in the *FSx for Lustre User Guide*, and
+    #   [Working with Intelligent-Tiering][3] in the *Amazon FSx for OpenZFS
+    #   User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options
-    #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/what-is.html#storage-options
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-fsx-lustre.html#lustre-storage-classes
     #   [3]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance-intelligent-tiering
     #
     # @option params [required, Array<String>] :subnet_ids
@@ -2931,6 +3057,11 @@ module Aws::FSx
     #         iops: 1,
     #         mode: "AUTOMATIC", # required, accepts AUTOMATIC, USER_PROVISIONED
     #       },
+    #       throughput_capacity: 1,
+    #       data_read_cache_configuration: {
+    #         sizing_mode: "NO_CACHE", # accepts NO_CACHE, USER_PROVISIONED, PROPORTIONAL_TO_THROUGHPUT_CAPACITY
+    #         size_gi_b: 1,
+    #       },
     #     },
     #     ontap_configuration: {
     #       automatic_backup_retention_days: 1,
@@ -3065,6 +3196,9 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.file_system.lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.lustre_configuration.efa_enabled #=> Boolean
+    #   resp.file_system.lustre_configuration.throughput_capacity #=> Integer
+    #   resp.file_system.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.file_system.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -3300,8 +3434,9 @@ module Aws::FSx
     #    </note>
     #
     # @option params [String] :storage_type
-    #   Sets the storage type for the Windows or OpenZFS file system that
-    #   you're creating from a backup. Valid values are `SSD` and `HDD`.
+    #   Sets the storage type for the Windows, OpenZFS, or Lustre file system
+    #   that you're creating from a backup. Valid values are `SSD`, `HDD`,
+    #   and `INTELLIGENT_TIERING`.
     #
     #   * Set to `SSD` to use solid state drive storage. SSD is supported on
     #     all Windows and OpenZFS deployment types.
@@ -3309,6 +3444,11 @@ module Aws::FSx
     #   * Set to `HDD` to use hard disk drive storage. HDD is supported on
     #     `SINGLE_AZ_2` and `MULTI_AZ_1` FSx for Windows File Server file
     #     system deployment types.
+    #
+    #   * Set to `INTELLIGENT_TIERING` to use fully elastic,
+    #     intelligently-tiered storage. Intelligent-Tiering is only available
+    #     for OpenZFS file systems with the Multi-AZ deployment type and for
+    #     Lustre file systems with the Persistent\_2 deployment type.
     #
     #   The default value is `SSD`.
     #
@@ -3497,6 +3637,11 @@ module Aws::FSx
     #         iops: 1,
     #         mode: "AUTOMATIC", # required, accepts AUTOMATIC, USER_PROVISIONED
     #       },
+    #       throughput_capacity: 1,
+    #       data_read_cache_configuration: {
+    #         sizing_mode: "NO_CACHE", # accepts NO_CACHE, USER_PROVISIONED, PROPORTIONAL_TO_THROUGHPUT_CAPACITY
+    #         size_gi_b: 1,
+    #       },
     #     },
     #     storage_type: "SSD", # accepts SSD, HDD, INTELLIGENT_TIERING
     #     kms_key_id: "KmsKeyId",
@@ -3617,6 +3762,9 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.file_system.lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.lustre_configuration.efa_enabled #=> Boolean
+    #   resp.file_system.lustre_configuration.throughput_capacity #=> Integer
+    #   resp.file_system.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.file_system.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -3906,6 +4054,9 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.efa_enabled #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.throughput_capacity #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -4392,6 +4543,9 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.efa_enabled #=> Boolean
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.throughput_capacity #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -4685,6 +4839,9 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.efa_enabled #=> Boolean
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.throughput_capacity #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -4952,12 +5109,19 @@ module Aws::FSx
     # Then provide a `FileSystemId` value to the `DeleteFileSystem`
     # operation.
     #
+    # Before deleting an Amazon FSx for OpenZFS file system, make sure that
+    # there aren't any Amazon S3 access points attached to any volume. For
+    # more information on how to list S3 access points that are attached to
+    # volumes, see [Listing S3 access point attachments][1]. For more
+    # information on how to delete S3 access points, see [Deleting an S3
+    # access point attachment][2].
+    #
     # By default, when you delete an Amazon FSx for Windows File Server file
     # system, a final backup is created upon deletion. This final backup
     # isn't subject to the file system's retention policy, and must be
     # manually deleted.
     #
-    # To delete an Amazon FSx for Lustre file system, first [unmount][1] it
+    # To delete an Amazon FSx for Lustre file system, first [unmount][3] it
     # from every connected Amazon EC2 instance, then provide a
     # `FileSystemId` value to the `DeleteFileSystem` operation. By default,
     # Amazon FSx will not take a final backup when the `DeleteFileSystem`
@@ -4966,15 +5130,15 @@ module Aws::FSx
     # file system you are deleting. Backups cannot be enabled on S3-linked
     # file systems. To ensure all of your data is written back to S3 before
     # deleting your file system, you can either monitor for the
-    # [AgeOfOldestQueuedMessage][2] metric to be zero (if using automatic
-    # export) or you can run an [export data repository task][3]. If you
+    # [AgeOfOldestQueuedMessage][4] metric to be zero (if using automatic
+    # export) or you can run an [export data repository task][5]. If you
     # have automatic export enabled and want to use an export data
     # repository task, you have to disable automatic export before executing
     # the export data repository task.
     #
     # The `DeleteFileSystem` operation returns while the file system has the
     # `DELETING` status. You can check the file system deletion status by
-    # calling the [DescribeFileSystems][4] operation, which returns a list
+    # calling the [DescribeFileSystems][6] operation, which returns a list
     # of file systems in your account. If you pass the file system ID for a
     # deleted file system, the `DescribeFileSystems` operation returns a
     # `FileSystemNotFound` error.
@@ -4990,10 +5154,12 @@ module Aws::FSx
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/unmounting-fs.html
-    # [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/monitoring-cloudwatch.html#auto-import-export-metrics
-    # [3]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/export-data-repo-task-dra.html
-    # [4]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html
+    # [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/access-points-list
+    # [2]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/delete-points-list
+    # [3]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/unmounting-fs.html
+    # [4]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/monitoring-cloudwatch.html#auto-import-export-metrics
+    # [5]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/export-data-repo-task-dra.html
+    # [6]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html
     #
     # @option params [required, String] :file_system_id
     #   The ID of the file system that you want to delete.
@@ -5447,6 +5613,9 @@ module Aws::FSx
     #   resp.backups[0].file_system.lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.backups[0].file_system.lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backups[0].file_system.lustre_configuration.efa_enabled #=> Boolean
+    #   resp.backups[0].file_system.lustre_configuration.throughput_capacity #=> Integer
+    #   resp.backups[0].file_system.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.backups[0].file_system.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.backups[0].file_system.administrative_actions #=> Array
     #   resp.backups[0].file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.backups[0].file_system.administrative_actions[0].progress_percent #=> Integer
@@ -5694,6 +5863,9 @@ module Aws::FSx
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.efa_enabled #=> Boolean
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.throughput_capacity #=> Integer
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -6319,6 +6491,9 @@ module Aws::FSx
     #   resp.file_systems[0].lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.file_systems[0].lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_systems[0].lustre_configuration.efa_enabled #=> Boolean
+    #   resp.file_systems[0].lustre_configuration.throughput_capacity #=> Integer
+    #   resp.file_systems[0].lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.file_systems[0].lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.file_systems[0].administrative_actions #=> Array
     #   resp.file_systems[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.file_systems[0].administrative_actions[0].progress_percent #=> Integer
@@ -6453,6 +6628,82 @@ module Aws::FSx
     # @param [Hash] params ({})
     def describe_file_systems(params = {}, options = {})
       req = build_request(:describe_file_systems, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more S3 access points attached to Amazon FSx volumes.
+    #
+    # The requester requires the following permission to perform this
+    # action:
+    #
+    # * `fsx:DescribeS3AccessPointAttachments`
+    #
+    # ^
+    #
+    # @option params [Array<String>] :names
+    #   The names of the S3 access point attachments whose descriptions you
+    #   want to retrieve.
+    #
+    # @option params [Array<Types::S3AccessPointAttachmentsFilter>] :filters
+    #   Enter a filter Name and Values pair to view a select set of S3 access
+    #   point attachments.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of resources to return in the response. This value
+    #   must be an integer greater than zero.
+    #
+    # @option params [String] :next_token
+    #   (Optional) Opaque pagination token returned from a previous operation
+    #   (String). If present, this token indicates from what point you can
+    #   continue processing the request, where the previous `NextToken` value
+    #   left off.
+    #
+    # @return [Types::DescribeS3AccessPointAttachmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeS3AccessPointAttachmentsResponse#s3_access_point_attachments #s3_access_point_attachments} => Array&lt;Types::S3AccessPointAttachment&gt;
+    #   * {Types::DescribeS3AccessPointAttachmentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_s3_access_point_attachments({
+    #     names: ["S3AccessPointAttachmentName"],
+    #     filters: [
+    #       {
+    #         name: "file-system-id", # accepts file-system-id, volume-id, type
+    #         values: ["S3AccessPointAttachmentsFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.s3_access_point_attachments #=> Array
+    #   resp.s3_access_point_attachments[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED"
+    #   resp.s3_access_point_attachments[0].lifecycle_transition_reason.message #=> String
+    #   resp.s3_access_point_attachments[0].creation_time #=> Time
+    #   resp.s3_access_point_attachments[0].name #=> String
+    #   resp.s3_access_point_attachments[0].type #=> String, one of "OPENZFS"
+    #   resp.s3_access_point_attachments[0].open_zfs_configuration.volume_id #=> String
+    #   resp.s3_access_point_attachments[0].open_zfs_configuration.file_system_identity.type #=> String, one of "POSIX"
+    #   resp.s3_access_point_attachments[0].open_zfs_configuration.file_system_identity.posix_user.uid #=> Integer
+    #   resp.s3_access_point_attachments[0].open_zfs_configuration.file_system_identity.posix_user.gid #=> Integer
+    #   resp.s3_access_point_attachments[0].open_zfs_configuration.file_system_identity.posix_user.secondary_gids #=> Array
+    #   resp.s3_access_point_attachments[0].open_zfs_configuration.file_system_identity.posix_user.secondary_gids[0] #=> Integer
+    #   resp.s3_access_point_attachments[0].s3_access_point.resource_arn #=> String
+    #   resp.s3_access_point_attachments[0].s3_access_point.alias #=> String
+    #   resp.s3_access_point_attachments[0].s3_access_point.vpc_configuration.vpc_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeS3AccessPointAttachments AWS API Documentation
+    #
+    # @overload describe_s3_access_point_attachments(params = {})
+    # @param [Hash] params ({})
+    def describe_s3_access_point_attachments(params = {}, options = {})
+      req = build_request(:describe_s3_access_point_attachments, params)
       req.send_request(options)
     end
 
@@ -6642,6 +6893,9 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.efa_enabled #=> Boolean
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.throughput_capacity #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -7008,6 +7262,9 @@ module Aws::FSx
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.efa_enabled #=> Boolean
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.throughput_capacity #=> Integer
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -7096,6 +7353,54 @@ module Aws::FSx
     # @param [Hash] params ({})
     def describe_volumes(params = {}, options = {})
       req = build_request(:describe_volumes, params)
+      req.send_request(options)
+    end
+
+    # Detaches an S3 access point from an Amazon FSx volume and deletes the
+    # S3 access point.
+    #
+    # The requester requires the following permission to perform this
+    # action:
+    #
+    # * `fsx:DetachAndDeleteS3AccessPoint`
+    #
+    # * `s3:DeleteAccessPoint`
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 63 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :name
+    #   The name of the S3 access point attachment that you want to delete.
+    #
+    # @return [Types::DetachAndDeleteS3AccessPointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DetachAndDeleteS3AccessPointResponse#lifecycle #lifecycle} => String
+    #   * {Types::DetachAndDeleteS3AccessPointResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detach_and_delete_s3_access_point({
+    #     client_request_token: "ClientRequestToken",
+    #     name: "S3AccessPointAttachmentName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED"
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DetachAndDeleteS3AccessPoint AWS API Documentation
+    #
+    # @overload detach_and_delete_s3_access_point(params = {})
+    # @param [Hash] params ({})
+    def detach_and_delete_s3_access_point(params = {}, options = {})
+      req = build_request(:detach_and_delete_s3_access_point, params)
       req.send_request(options)
     end
 
@@ -7342,6 +7647,9 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.file_system.lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.lustre_configuration.efa_enabled #=> Boolean
+    #   resp.file_system.lustre_configuration.throughput_capacity #=> Integer
+    #   resp.file_system.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.file_system.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -7602,6 +7910,9 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.efa_enabled #=> Boolean
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.throughput_capacity #=> Integer
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -7831,6 +8142,9 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.file_system.lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.lustre_configuration.efa_enabled #=> Boolean
+    #   resp.file_system.lustre_configuration.throughput_capacity #=> Integer
+    #   resp.file_system.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.file_system.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -8229,6 +8543,8 @@ module Aws::FSx
     #
     # * `DailyAutomaticBackupStartTime`
     #
+    # * `DiskIopsConfiguration`
+    #
     # * `SelfManagedActiveDirectoryConfiguration`
     #
     # * `StorageCapacity`
@@ -8236,8 +8552,6 @@ module Aws::FSx
     # * `StorageType`
     #
     # * `ThroughputCapacity`
-    #
-    # * `DiskIopsConfiguration`
     #
     # * `WeeklyMaintenanceStartTime`
     #
@@ -8256,6 +8570,8 @@ module Aws::FSx
     #
     # * `LogConfiguration`
     #
+    # * `LustreReadCacheConfiguration`
+    #
     # * `LustreRootSquashConfiguration`
     #
     # * `MetadataConfiguration`
@@ -8263,6 +8579,8 @@ module Aws::FSx
     # * `PerUnitStorageThroughput`
     #
     # * `StorageCapacity`
+    #
+    # * `ThroughputCapacity`
     #
     # * `WeeklyMaintenanceStartTime`
     #
@@ -8500,6 +8818,11 @@ module Aws::FSx
     #         iops: 1,
     #         mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
     #       },
+    #       throughput_capacity: 1,
+    #       data_read_cache_configuration: {
+    #         sizing_mode: "NO_CACHE", # accepts NO_CACHE, USER_PROVISIONED, PROPORTIONAL_TO_THROUGHPUT_CAPACITY
+    #         size_gi_b: 1,
+    #       },
     #     },
     #     ontap_configuration: {
     #       automatic_backup_retention_days: 1,
@@ -8608,6 +8931,9 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.file_system.lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.lustre_configuration.efa_enabled #=> Boolean
+    #   resp.file_system.lustre_configuration.throughput_capacity #=> Integer
+    #   resp.file_system.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.file_system.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -8916,6 +9242,9 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.efa_enabled #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.throughput_capacity #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -9342,6 +9671,9 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.iops #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.metadata_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.efa_enabled #=> Boolean
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.throughput_capacity #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_read_cache_configuration.size_gi_b #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -9450,7 +9782,7 @@ module Aws::FSx
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.115.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

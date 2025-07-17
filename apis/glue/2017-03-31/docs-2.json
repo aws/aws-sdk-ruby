@@ -215,7 +215,7 @@
     "StartImportLabelsTaskRun": "<p>Enables you to provide additional labels (examples of truth) to be used to teach the machine learning transform and improve its quality. This API operation is generally used as part of the active learning workflow that starts with the <code>StartMLLabelingSetGenerationTaskRun</code> call and that ultimately results in improving the quality of your machine learning transform. </p> <p>After the <code>StartMLLabelingSetGenerationTaskRun</code> finishes, Glue machine learning will have generated a series of questions for humans to answer. (Answering these questions is often called 'labeling' in the machine learning workflows). In the case of the <code>FindMatches</code> transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?” After the labeling process is finished, users upload their answers/labels with a call to <code>StartImportLabelsTaskRun</code>. After <code>StartImportLabelsTaskRun</code> finishes, all future runs of the machine learning transform use the new and improved labels and perform a higher-quality transformation.</p> <p>By default, <code>StartMLLabelingSetGenerationTaskRun</code> continually learns from and combines all labels that you upload unless you set <code>Replace</code> to true. If you set <code>Replace</code> to true, <code>StartImportLabelsTaskRun</code> deletes and forgets all previously uploaded labels and learns only from the exact set that you upload. Replacing labels can be helpful if you realize that you previously uploaded incorrect labels, and you believe that they are having a negative effect on your transform quality.</p> <p>You can check on the status of your task run by calling the <code>GetMLTaskRun</code> operation. </p>",
     "StartJobRun": "<p>Starts a job run using a job definition.</p>",
     "StartMLEvaluationTaskRun": "<p>Starts a task to estimate the quality of the transform. </p> <p>When you provide label sets as examples of truth, Glue machine learning uses some of those examples to learn from them. The rest of the labels are used as a test to estimate quality.</p> <p>Returns a unique identifier for the run. You can call <code>GetMLTaskRun</code> to get more information about the stats of the <code>EvaluationTaskRun</code>.</p>",
-    "StartMLLabelingSetGenerationTaskRun": "<p>Starts the active learning workflow for your machine learning transform to improve the transform's quality by generating label sets and adding labels.</p> <p>When the <code>StartMLLabelingSetGenerationTaskRun</code> finishes, Glue will have generated a \"labeling set\" or a set of questions for humans to answer.</p> <p>In the case of the <code>FindMatches</code> transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?” </p> <p>After the labeling process is finished, you can upload your labels with a call to <code>StartImportLabelsTaskRun</code>. After <code>StartImportLabelsTaskRun</code> finishes, all future runs of the machine learning transform will use the new and improved labels and perform a higher-quality transformation.</p>",
+    "StartMLLabelingSetGenerationTaskRun": "<p>Starts the active learning workflow for your machine learning transform to improve the transform's quality by generating label sets and adding labels.</p> <p>When the <code>StartMLLabelingSetGenerationTaskRun</code> finishes, Glue will have generated a \"labeling set\" or a set of questions for humans to answer.</p> <p>In the case of the <code>FindMatches</code> transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?” </p> <p>After the labeling process is finished, you can upload your labels with a call to <code>StartImportLabelsTaskRun</code>. After <code>StartImportLabelsTaskRun</code> finishes, all future runs of the machine learning transform will use the new and improved labels and perform a higher-quality transformation.</p> <p>Note: The role used to write the generated labeling set to the <code>OutputS3Path</code> is the role associated with the Machine Learning Transform, specified in the <code>CreateMLTransform</code> API.</p>",
     "StartTrigger": "<p>Starts an existing trigger. See <a href=\"https://docs.aws.amazon.com/glue/latest/dg/trigger-job.html\">Triggering Jobs</a> for information about how different types of trigger are started.</p>",
     "StartWorkflowRun": "<p>Starts a new run of the specified workflow.</p>",
     "StopColumnStatisticsTaskRun": "<p>Stops a task run for the specified table.</p>",
@@ -265,8 +265,7 @@
     },
     "AccessDeniedException": {
       "base": "<p>Access to a resource was denied.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "AccessToken": {
       "base": null,
@@ -321,6 +320,7 @@
         "S3HudiCatalogTarget$AdditionalOptions": "<p>Specifies additional connection options for the connector.</p>",
         "S3HudiDirectTarget$AdditionalOptions": "<p>Specifies additional connection options for the connector.</p>",
         "S3HudiSource$AdditionalHudiOptions": "<p>Specifies additional connection options.</p>",
+        "S3IcebergDirectTarget$AdditionalOptions": "<p>Provides additional configuration options for customizing the Iceberg table behavior.</p>",
         "SnowflakeNodeData$AdditionalOptions": "<p>Specifies additional options passed to the Snowflake connector. If options are specified elsewhere in this node, this will take precedence.</p>",
         "SparkConnectorSource$AdditionalOptions": "<p>Additional connection options for the connector.</p>",
         "SparkConnectorTarget$AdditionalOptions": "<p>Additional connection options for the connector.</p>"
@@ -395,8 +395,7 @@
     },
     "AlreadyExistsException": {
       "base": "<p>A resource to be created or added already exists.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "AmazonRedshiftAdvancedOption": {
       "base": "<p>Specifies an optional value when connecting to the Redshift cluster.</p>",
@@ -596,33 +595,27 @@
     },
     "BatchCreatePartitionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchCreatePartitionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchDeleteConnectionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchDeleteConnectionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchDeletePartitionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchDeletePartitionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchDeletePartitionValueList": {
       "base": null,
@@ -638,13 +631,11 @@
     },
     "BatchDeleteTableRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchDeleteTableResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchDeleteTableVersionList": {
       "base": null,
@@ -654,13 +645,11 @@
     },
     "BatchDeleteTableVersionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchDeleteTableVersionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchGetBlueprintNames": {
       "base": null,
@@ -670,73 +659,59 @@
     },
     "BatchGetBlueprintsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchGetBlueprintsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchGetCrawlersRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchGetCrawlersResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchGetCustomEntityTypesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchGetCustomEntityTypesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchGetDataQualityResultRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchGetDataQualityResultResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchGetDevEndpointsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchGetDevEndpointsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchGetJobsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchGetJobsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchGetPartitionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchGetPartitionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchGetPartitionValueList": {
       "base": null,
@@ -771,43 +746,35 @@
     },
     "BatchGetTableOptimizerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchGetTableOptimizerResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchGetTriggersRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchGetTriggersResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchGetWorkflowsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchGetWorkflowsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchPutDataQualityStatisticAnnotationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchPutDataQualityStatisticAnnotationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchSize": {
       "base": null,
@@ -835,13 +802,11 @@
     },
     "BatchStopJobRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchStopJobRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchStopJobRunSuccessfulSubmission": {
       "base": "<p>Records a successful request to stop a specified <code>JobRun</code>.</p>",
@@ -881,8 +846,7 @@
     },
     "BatchUpdatePartitionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchUpdatePartitionRequestEntry": {
       "base": "<p>A structure that contains the values and structure used to update a partition.</p>",
@@ -898,8 +862,7 @@
     },
     "BatchUpdatePartitionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchWindow": {
       "base": null,
@@ -1017,6 +980,7 @@
         "GetUnfilteredTableMetadataResponse$IsRegisteredWithLakeFormation": "<p>A Boolean value that indicates whether the partition location is registered with Lake Formation.</p>",
         "GetUnfilteredTableMetadataResponse$IsMultiDialectView": "<p>Specifies whether the view supports the SQL dialects of one or more different query engines and can therefore be read by those engines.</p>",
         "GetUnfilteredTableMetadataResponse$IsProtected": "<p>A flag that instructs the engine not to push user-provided operations into the logical plan of the view during query planning. However, if set this flag does not guarantee that the engine will comply. Refer to the engine's documentation to understand the guarantees provided, if any.</p>",
+        "IcebergStructField$Required": "<p>Indicates whether this field is required (non-nullable) or optional (nullable) in the table schema.</p>",
         "StorageDescriptor$Compressed": "<p> <code>True</code> if the data in the table is compressed, or <code>False</code> if not.</p>",
         "StorageDescriptor$StoredAsSubDirectories": "<p> <code>True</code> if the table data is stored in subdirectories, or <code>False</code> if not.</p>",
         "Table$IsRegisteredWithLakeFormation": "<p>Indicates whether the table has been registered with Lake Formation.</p>",
@@ -1085,6 +1049,7 @@
         "S3CsvSource$WriteHeader": "<p>A Boolean value that specifies whether to write the header to output. The default value is <code>True</code>. </p>",
         "S3CsvSource$SkipFirst": "<p>A Boolean value that specifies whether to skip the first data line. The default value is <code>False</code>.</p>",
         "S3DirectSourceAdditionalOptions$EnableSamplePath": "<p>Sets option to enable a sample path.</p>",
+        "S3ExcelSource$Recurse": "<p>Indicates whether to recursively process subdirectories.</p>",
         "S3JsonSource$Recurse": "<p>If set to true, recursively reads files in all subdirectories under the specified paths.</p>",
         "S3JsonSource$Multiline": "<p>A Boolean value that specifies whether a single record can span multiple lines. This can occur when a field contains a quoted new-line character. You must set this option to True if any record spans multiple lines. The default value is <code>False</code>, which allows for more aggressive file-splitting during parsing.</p>",
         "S3ParquetSource$Recurse": "<p>If set to true, recursively reads files in all subdirectories under the specified paths.</p>",
@@ -1103,6 +1068,7 @@
       "refs": {
         "S3DirectSourceAdditionalOptions$BoundedSize": "<p>Sets the upper limit for the target size of the dataset in bytes that will be processed.</p>",
         "S3DirectSourceAdditionalOptions$BoundedFiles": "<p>Sets the upper limit for the target number of files that will be processed.</p>",
+        "S3ExcelSource$NumberRows": "<p>The number of rows to process from each Excel file.</p>",
         "S3SourceAdditionalOptions$BoundedSize": "<p>Sets the upper limit for the target size of the dataset in bytes that will be processed.</p>",
         "S3SourceAdditionalOptions$BoundedFiles": "<p>Sets the upper limit for the target number of files that will be processed.</p>"
       }
@@ -1115,6 +1081,9 @@
         "KinesisStreamingSourceOptions$NumRetries": "<p>The maximum number of retries for Kinesis Data Streams API requests. The default value is <code>3</code>.</p>",
         "S3CsvSource$MaxBand": "<p>This option controls the duration in milliseconds after which the s3 listing is likely to be consistent. Files with modification timestamps falling within the last maxBand milliseconds are tracked specially when using JobBookmarks to account for Amazon S3 eventual consistency. Most users don't need to set this option. The default is 900000 milliseconds, or 15 minutes.</p>",
         "S3CsvSource$MaxFilesInBand": "<p>This option specifies the maximum number of files to save from the last maxBand seconds. If this number is exceeded, extra files are skipped and only processed in the next job run.</p>",
+        "S3ExcelSource$MaxBand": "<p>The maximum number of processing bands to use.</p>",
+        "S3ExcelSource$MaxFilesInBand": "<p>The maximum number of files to process in each band.</p>",
+        "S3ExcelSource$SkipFooter": "<p>The number of rows to skip at the end of each Excel file.</p>",
         "S3JsonSource$MaxBand": "<p>This option controls the duration in milliseconds after which the s3 listing is likely to be consistent. Files with modification timestamps falling within the last maxBand milliseconds are tracked specially when using JobBookmarks to account for Amazon S3 eventual consistency. Most users don't need to set this option. The default is 900000 milliseconds, or 15 minutes.</p>",
         "S3JsonSource$MaxFilesInBand": "<p>This option specifies the maximum number of files to save from the last maxBand seconds. If this number is exceeded, extra files are skipped and only processed in the next job run.</p>",
         "S3ParquetSource$MaxBand": "<p>This option controls the duration in milliseconds after which the s3 listing is likely to be consistent. Files with modification timestamps falling within the last maxBand milliseconds are tracked specially when using JobBookmarks to account for Amazon S3 eventual consistency. Most users don't need to set this option. The default is 900000 milliseconds, or 15 minutes.</p>",
@@ -1150,43 +1119,35 @@
     },
     "CancelDataQualityRuleRecommendationRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CancelDataQualityRuleRecommendationRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CancelDataQualityRulesetEvaluationRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CancelDataQualityRulesetEvaluationRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CancelMLTaskRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CancelMLTaskRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CancelStatementRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CancelStatementResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "Capabilities": {
       "base": "<p>Specifies the supported authentication types returned by the <code>DescribeConnectionType</code> API.</p>",
@@ -1419,13 +1380,11 @@
     },
     "CheckSchemaVersionValidityInput": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CheckSchemaVersionValidityResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "Classification": {
       "base": null,
@@ -1594,6 +1553,8 @@
       "refs": {
         "AuditColumnNamesList$member": null,
         "FindMatchesParameters$PrimaryKeyColumnName": "<p>The name of a column that uniquely identifies rows in the source table. Used to help identify matching records.</p>",
+        "IcebergPartitionField$Name": "<p>The name of the partition field as it will appear in the partitioned table structure.</p>",
+        "IcebergStructField$Name": "<p>The name of the field as it appears in the table schema and query operations.</p>",
         "SchemaColumn$Name": "<p>The name of the column.</p>"
       }
     },
@@ -1651,8 +1612,7 @@
     },
     "ColumnStatisticsTaskNotRunningException": {
       "base": "<p>An exception thrown when you try to stop a task run when there is no task running.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ColumnStatisticsTaskRun": {
       "base": "<p>The object that shows the details of the column stats run.</p>",
@@ -1669,8 +1629,7 @@
     },
     "ColumnStatisticsTaskRunningException": {
       "base": "<p>An exception thrown when you try to start another job while running a column stats generation job.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ColumnStatisticsTaskRunsList": {
       "base": null,
@@ -1686,8 +1645,7 @@
     },
     "ColumnStatisticsTaskStoppingException": {
       "base": "<p>An exception thrown when you try to stop a task run.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ColumnStatisticsType": {
       "base": null,
@@ -1721,7 +1679,8 @@
     "CommentString": {
       "base": null,
       "refs": {
-        "Column$Comment": "<p>A free-form text comment.</p>"
+        "Column$Comment": "<p>A free-form text comment.</p>",
+        "IcebergStructField$Doc": "<p>Optional documentation or description text that provides additional context about the purpose and usage of this field.</p>"
       }
     },
     "CommitIdString": {
@@ -1731,10 +1690,23 @@
         "UpdateSourceControlFromJobRequest$CommitId": "<p>A commit ID for a commit in the remote repository.</p>"
       }
     },
+    "CompactionConfiguration": {
+      "base": "<p>The configuration for a compaction optimizer. This configuration defines how data files in your table will be compacted to improve query performance and reduce storage costs.</p>",
+      "refs": {
+        "TableOptimizerConfiguration$compactionConfiguration": "<p>The configuration for a compaction optimizer. This configuration defines how data files in your table will be compacted to improve query performance and reduce storage costs.</p>"
+      }
+    },
     "CompactionMetrics": {
       "base": "<p>A structure that contains compaction metrics for the optimizer run.</p>",
       "refs": {
         "TableOptimizerRun$compactionMetrics": "<p>A <code>CompactionMetrics</code> object containing metrics for the optimizer run.</p>"
+      }
+    },
+    "CompactionStrategy": {
+      "base": null,
+      "refs": {
+        "IcebergCompactionConfiguration$strategy": "<p>The strategy to use for compaction. Valid values are:</p> <ul> <li> <p> <code>binpack</code>: Combines small files into larger files, typically targeting sizes over 100MB, while applying any pending deletes. This is the recommended compaction strategy for most use cases. </p> </li> <li> <p> <code>sort</code>: Organizes data based on specified columns which are sorted hierarchically during compaction, improving query performance for filtered operations. This strategy is recommended when your queries frequently filter on specific columns. To use this strategy, you must first define a sort order in your Iceberg table properties using the <code>sort_order</code> table property.</p> </li> <li> <p> <code>z-order</code>: Optimizes data organization by blending multiple attributes into a single scalar value that can be used for sorting, allowing efficient querying across multiple dimensions. This strategy is recommended when you need to query data across multiple dimensions simultaneously. To use this strategy, you must first define a sort order in your Iceberg table properties using the <code>sort_order</code> table property. </p> </li> </ul> <p>If an input is not provided, the default value 'binpack' will be used.</p>",
+        "TableOptimizerRun$compactionStrategy": "<p>The strategy used for the compaction run. Indicates which algorithm was applied to determine how files were selected and combined during the compaction process. Valid values are:</p> <ul> <li> <p> <code>binpack</code>: Combines small files into larger files, typically targeting sizes over 100MB, while applying any pending deletes. This is the recommended compaction strategy for most use cases. </p> </li> <li> <p> <code>sort</code>: Organizes data based on specified columns which are sorted hierarchically during compaction, improving query performance for filtered operations. This strategy is recommended when your queries frequently filter on specific columns. To use this strategy, you must first define a sort order in your Iceberg table properties using the <code>sort_order</code> table property.</p> </li> <li> <p> <code>z-order</code>: Optimizes data organization by blending multiple attributes into a single scalar value that can be used for sorting, allowing efficient querying across multiple dimensions. This strategy is recommended when you need to query data across multiple dimensions simultaneously. To use this strategy, you must first define a sort order in your Iceberg table properties using the <code>sort_order</code> table property. </p> </li> </ul>"
       }
     },
     "Comparator": {
@@ -1814,13 +1786,11 @@
     },
     "ConcurrentModificationException": {
       "base": "<p>Two processes are trying to modify a resource simultaneously.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ConcurrentRunsExceededException": {
       "base": "<p>Too many jobs are being run concurrently.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "Condition": {
       "base": "<p>Defines a condition under which a trigger fires.</p>",
@@ -1830,8 +1800,7 @@
     },
     "ConditionCheckFailureException": {
       "base": "<p>A specified condition was not satisfied.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ConditionExpression": {
       "base": "<p>Condition expression defined in the Glue Studio data preparation recipe node.</p>",
@@ -1875,8 +1844,7 @@
     },
     "ConflictException": {
       "base": "<p>The <code>CreatePartitions</code> API was called on a table that has indexes enabled. </p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ConfusionMatrix": {
       "base": "<p>The confusion matrix shows you what your transform is predicting accurately and what types of errors it is making.</p> <p>For more information, see <a href=\"https://en.wikipedia.org/wiki/Confusion_matrix\">Confusion matrix</a> in Wikipedia.</p>",
@@ -1988,6 +1956,18 @@
       "base": null,
       "refs": {
         "ListConnectionTypesResponse$ConnectionTypes": "<p>A list of <code>ConnectionTypeBrief</code> objects containing brief information about the supported connection types.</p>"
+      }
+    },
+    "ConnectionTypeVariant": {
+      "base": "<p>Represents a variant of a connection type in Glue Data Catalog. Connection type variants provide specific configurations and behaviors for different implementations of the same general connection type.</p>",
+      "refs": {
+        "ConnectionTypeVariantList$member": null
+      }
+    },
+    "ConnectionTypeVariantList": {
+      "base": null,
+      "refs": {
+        "ConnectionTypeBrief$ConnectionTypeVariants": "<p>A list of variants available for this connection type. Different variants may provide specialized configurations for specific use cases or implementations of the same general connection type.</p>"
       }
     },
     "ConnectionsList": {
@@ -2139,13 +2119,11 @@
     },
     "CrawlerNotRunningException": {
       "base": "<p>The specified crawler is not running.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "CrawlerRunningException": {
       "base": "<p>The operation cannot be performed because the crawler is already running.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "CrawlerSecurityConfiguration": {
       "base": null,
@@ -2165,8 +2143,7 @@
     },
     "CrawlerStoppingException": {
       "base": "<p>The specified crawler is stopping.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "CrawlerTargets": {
       "base": "<p>Specifies data stores to crawl.</p>",
@@ -2190,63 +2167,51 @@
     },
     "CreateBlueprintRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateBlueprintResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateCatalogRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateCatalogResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateClassifierRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateClassifierResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateColumnStatisticsTaskSettingsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateColumnStatisticsTaskSettingsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateConnectionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateConnectionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateCrawlerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateCrawlerResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateCsvClassifierRequest": {
       "base": "<p>Specifies a custom CSV classifier for <code>CreateClassifier</code> to create.</p>",
@@ -2256,43 +2221,35 @@
     },
     "CreateCustomEntityTypeRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateCustomEntityTypeResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateDataQualityRulesetRequest": {
-      "base": null,
-      "refs": {
-      }
+      "base": "<p>A request to create a data quality ruleset.</p>",
+      "refs": {}
     },
     "CreateDataQualityRulesetResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateDatabaseRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateDatabaseResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateDevEndpointRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateDevEndpointResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateGrokClassifierRequest": {
       "base": "<p>Specifies a <code>grok</code> classifier for <code>CreateClassifier</code> to create.</p>",
@@ -2300,45 +2257,43 @@
         "CreateClassifierRequest$GrokClassifier": "<p>A <code>GrokClassifier</code> object specifying the classifier to create.</p>"
       }
     },
+    "CreateIcebergTableInput": {
+      "base": "<p>The configuration parameters required to create a new Iceberg table in the Glue Data Catalog, including table properties and metadata specifications.</p>",
+      "refs": {
+        "IcebergInput$CreateIcebergTableInput": "<p>The configuration parameters required to create a new Iceberg table in the Glue Data Catalog, including table properties and metadata specifications.</p>"
+      }
+    },
     "CreateIntegrationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateIntegrationResourcePropertyRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateIntegrationResourcePropertyResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateIntegrationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateIntegrationTablePropertiesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateIntegrationTablePropertiesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateJobRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateJobResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateJsonClassifierRequest": {
       "base": "<p>Specifies a JSON classifier for <code>CreateClassifier</code> to create.</p>",
@@ -2348,143 +2303,115 @@
     },
     "CreateMLTransformRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateMLTransformResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreatePartitionIndexRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreatePartitionIndexResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreatePartitionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreatePartitionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateRegistryInput": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateRegistryResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateSchemaInput": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateSchemaResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateScriptRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateScriptResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateSecurityConfigurationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateSecurityConfigurationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateSessionRequest": {
       "base": "<p>Request to create a new session.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateSessionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateTableOptimizerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateTableOptimizerResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateTableRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateTableResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateTriggerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateTriggerResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateUsageProfileRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateUsageProfileResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateUserDefinedFunctionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateUserDefinedFunctionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateWorkflowRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateWorkflowResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateXMLClassifierRequest": {
       "base": "<p>Specifies an XML classifier for <code>CreateClassifier</code> to create.</p>",
@@ -2748,6 +2675,13 @@
       "refs": {
         "Capabilities$SupportedDataOperations": "<p>A list of supported data operations.</p>",
         "Property$DataOperationScopes": "<p>Indicates which data operations are applicable to the property.</p>"
+      }
+    },
+    "DataQualityAggregatedMetrics": {
+      "base": "<p>A summary of metrics showing the total counts of processed rows and rules, including their pass/fail statistics based on row-level results.</p>",
+      "refs": {
+        "DataQualityResult$AggregatedMetrics": "<p> A summary of <code>DataQualityAggregatedMetrics</code> objects showing the total counts of processed rows and rules, including their pass/fail statistics based on row-level results. </p>",
+        "GetDataQualityResultResponse$AggregatedMetrics": "<p> A summary of <code>DataQualityAggregatedMetrics</code> objects showing the total counts of processed rows and rules, including their pass/fail statistics based on row-level results. </p>"
       }
     },
     "DataQualityAnalyzerResult": {
@@ -3085,63 +3019,51 @@
     },
     "DeleteBlueprintRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteBlueprintResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteCatalogRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteCatalogResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteClassifierRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteClassifierResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteColumnStatisticsForPartitionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteColumnStatisticsForPartitionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteColumnStatisticsForTableRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteColumnStatisticsForTableResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteColumnStatisticsTaskSettingsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteColumnStatisticsTaskSettingsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteConnectionNameList": {
       "base": null,
@@ -3151,253 +3073,203 @@
     },
     "DeleteConnectionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteConnectionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteCrawlerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteCrawlerResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteCustomEntityTypeRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteCustomEntityTypeResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteDataQualityRulesetRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteDataQualityRulesetResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteDatabaseRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteDatabaseResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteDevEndpointRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteDevEndpointResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteIntegrationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteIntegrationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteIntegrationTablePropertiesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteIntegrationTablePropertiesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteJobRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteJobResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteMLTransformRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteMLTransformResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeletePartitionIndexRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeletePartitionIndexResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeletePartitionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeletePartitionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteRegistryInput": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteRegistryResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteResourcePolicyRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteResourcePolicyResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteSchemaInput": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteSchemaResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteSchemaVersionsInput": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteSchemaVersionsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteSecurityConfigurationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteSecurityConfigurationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteSessionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteSessionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteTableOptimizerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteTableOptimizerResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteTableRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteTableResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteTableVersionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteTableVersionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteTriggerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteTriggerResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteUsageProfileRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteUsageProfileResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteUserDefinedFunctionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteUserDefinedFunctionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteWorkflowRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteWorkflowResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeltaTarget": {
       "base": "<p>Specifies a Delta data store to crawl one or more Delta tables.</p>",
@@ -3419,48 +3291,41 @@
     },
     "DescribeConnectionTypeRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeConnectionTypeResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeEntityRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeEntityResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeInboundIntegrationsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeInboundIntegrationsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeIntegrationsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeIntegrationsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "Description": {
       "base": null,
       "refs": {
         "ConnectionTypeBrief$Description": "<p>A description of the connection type.</p>",
+        "ConnectionTypeVariant$Description": "<p>A detailed description of the connection type variant, including its purpose, use cases, and any specific configuration requirements.</p>",
         "DescribeConnectionTypeResponse$Description": "<p>A description of the connection type.</p>"
       }
     },
@@ -3584,7 +3449,17 @@
         "S3DeltaDirectTarget$SchemaChangePolicy": "<p>A policy that specifies update behavior for the crawler.</p>",
         "S3DirectTarget$SchemaChangePolicy": "<p>A policy that specifies update behavior for the crawler.</p>",
         "S3GlueParquetTarget$SchemaChangePolicy": "<p>A policy that specifies update behavior for the crawler.</p>",
-        "S3HudiDirectTarget$SchemaChangePolicy": "<p>A policy that specifies update behavior for the crawler.</p>"
+        "S3HudiDirectTarget$SchemaChangePolicy": "<p>A policy that specifies update behavior for the crawler.</p>",
+        "S3HyperDirectTarget$SchemaChangePolicy": "<p>Defines how schema changes are handled during write operations.</p>",
+        "S3IcebergDirectTarget$SchemaChangePolicy": "<p>Defines how schema changes are handled when writing data to the Iceberg table.</p>"
+      }
+    },
+    "DisplayName": {
+      "base": null,
+      "refs": {
+        "ConnectionTypeBrief$DisplayName": "<p>The human-readable name for the connection type that is displayed in the Glue console.</p>",
+        "ConnectionTypeVariant$ConnectionTypeVariantName": "<p>The unique identifier for the connection type variant. This name is used internally to identify the specific variant of a connection type. </p>",
+        "ConnectionTypeVariant$DisplayName": "<p>The human-readable name for the connection type variant that is displayed in the Glue console.</p>"
       }
     },
     "Double": {
@@ -3687,6 +3562,8 @@
         "S3CsvSource$Paths": "<p>A list of the Amazon S3 paths to read from.</p>",
         "S3CsvSource$Exclusions": "<p>A string containing a JSON list of Unix-style glob patterns to exclude. For example, \"[\\\"**.pdf\\\"]\" excludes all PDF files. </p>",
         "S3DeltaSource$Paths": "<p>A list of the Amazon S3 paths to read from.</p>",
+        "S3ExcelSource$Paths": "<p>The S3 paths where the Excel files are located.</p>",
+        "S3ExcelSource$Exclusions": "<p>Patterns to exclude specific files or paths from processing.</p>",
         "S3HudiSource$Paths": "<p>A list of the Amazon S3 paths to read from.</p>",
         "S3JsonSource$Paths": "<p>A list of the Amazon S3 paths to read from.</p>",
         "S3JsonSource$Exclusions": "<p>A string containing a JSON list of Unix-style glob patterns to exclude. For example, \"[\\\"**.pdf\\\"]\" excludes all PDF files. </p>",
@@ -3833,10 +3710,14 @@
         "S3DirectSourceAdditionalOptions$SamplePath": "<p>If enabled, specifies the sample path.</p>",
         "S3DirectTarget$Path": "<p>A single Amazon S3 path to write to.</p>",
         "S3DirectTarget$Compression": "<p>Specifies how the data is compressed. This is generally not necessary if the data has a standard file extension. Possible values are <code>\"gzip\"</code> and <code>\"bzip\"</code>).</p>",
+        "S3ExcelSource$GroupSize": "<p>Defines the size of file groups for batch processing.</p>",
+        "S3ExcelSource$GroupFiles": "<p>Specifies how files should be grouped for processing.</p>",
         "S3GlueParquetTarget$Path": "<p>A single Amazon S3 path to write to.</p>",
         "S3HudiCatalogTarget$Table": "<p>The name of the table in the database to write to.</p>",
         "S3HudiCatalogTarget$Database": "<p>The name of the database to write to.</p>",
         "S3HudiDirectTarget$Path": "<p>The Amazon S3 path of your Hudi data source to write to.</p>",
+        "S3HyperDirectTarget$Path": "<p>The S3 location where the output data will be written.</p>",
+        "S3IcebergDirectTarget$Path": "<p>Defines the S3 location where the Iceberg table data will be stored.</p>",
         "S3JsonSource$GroupSize": "<p>The target group size in bytes. The default is computed based on the input data size and the size of your cluster. When there are fewer than 50,000 input files, <code>\"groupFiles\"</code> must be set to <code>\"inPartition\"</code> for this to take effect.</p>",
         "S3JsonSource$GroupFiles": "<p>Grouping files is turned on by default when the input contains more than 50,000 files. To turn on grouping with fewer than 50,000 files, set this parameter to \"inPartition\". To disable grouping when there are more than 50,000 files, set this parameter to <code>\"none\"</code>.</p>",
         "S3JsonSource$JsonPath": "<p>A JsonPath string defining the JSON data.</p>",
@@ -3922,8 +3803,7 @@
     },
     "EntityNotFoundException": {
       "base": "<p>A specified entity does not exist</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ErrorByName": {
       "base": null,
@@ -4090,8 +3970,7 @@
     },
     "FederatedResourceAlreadyExistsException": {
       "base": "<p>A federated resource already exists.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "FederatedTable": {
       "base": "<p>A table that points to an entity outside the Glue Data Catalog.</p>",
@@ -4116,13 +3995,11 @@
     },
     "FederationSourceException": {
       "base": "<p>A federation source failed.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "FederationSourceRetryableException": {
       "base": "<p>A federation source failed, but the operation may be retried.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "Field": {
       "base": "<p>The <code>Field</code> object has information about the different properties associated with a field in the connector.</p>",
@@ -4459,83 +4336,67 @@
     },
     "GetBlueprintRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetBlueprintResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetBlueprintRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetBlueprintRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetBlueprintRunsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetBlueprintRunsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetCatalogImportStatusRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetCatalogImportStatusResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetCatalogRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetCatalogResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetCatalogsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetCatalogsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetClassifierRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetClassifierResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetClassifiersRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetClassifiersResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetColumnNamesList": {
       "base": null,
@@ -4546,63 +4407,51 @@
     },
     "GetColumnStatisticsForPartitionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetColumnStatisticsForPartitionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetColumnStatisticsForTableRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetColumnStatisticsForTableResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetColumnStatisticsTaskRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetColumnStatisticsTaskRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetColumnStatisticsTaskRunsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetColumnStatisticsTaskRunsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetColumnStatisticsTaskSettingsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetColumnStatisticsTaskSettingsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetConnectionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetConnectionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetConnectionsFilter": {
       "base": "<p>Filters the connection definitions that are returned by the <code>GetConnections</code> API operation.</p>",
@@ -4612,363 +4461,291 @@
     },
     "GetConnectionsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetConnectionsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetCrawlerMetricsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetCrawlerMetricsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetCrawlerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetCrawlerResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetCrawlersRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetCrawlersResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetCustomEntityTypeRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetCustomEntityTypeResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDataCatalogEncryptionSettingsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDataCatalogEncryptionSettingsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDataQualityModelRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDataQualityModelResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDataQualityModelResultRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDataQualityModelResultResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDataQualityResultRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDataQualityResultResponse": {
-      "base": null,
-      "refs": {
-      }
+      "base": "<p>The response for the data quality result.</p>",
+      "refs": {}
     },
     "GetDataQualityRuleRecommendationRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDataQualityRuleRecommendationRunResponse": {
-      "base": null,
-      "refs": {
-      }
+      "base": "<p>The response for the Data Quality rule recommendation run.</p>",
+      "refs": {}
     },
     "GetDataQualityRulesetEvaluationRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDataQualityRulesetEvaluationRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDataQualityRulesetRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDataQualityRulesetResponse": {
-      "base": null,
-      "refs": {
-      }
+      "base": "<p>Returns the data quality ruleset response.</p>",
+      "refs": {}
     },
     "GetDatabaseRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDatabaseResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDatabasesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDatabasesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDataflowGraphRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDataflowGraphResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDevEndpointRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDevEndpointResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDevEndpointsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDevEndpointsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetEntityRecordsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetEntityRecordsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetIntegrationResourcePropertyRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetIntegrationResourcePropertyResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetIntegrationTablePropertiesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetIntegrationTablePropertiesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetJobBookmarkRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetJobBookmarkResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetJobRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetJobResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetJobRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetJobRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetJobRunsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetJobRunsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetJobsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetJobsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMLTaskRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMLTaskRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMLTaskRunsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMLTaskRunsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMLTransformRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMLTransformResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMLTransformsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMLTransformsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMappingRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMappingResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetPartitionIndexesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetPartitionIndexesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetPartitionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetPartitionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetPartitionsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetPartitionsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetPlanRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetPlanResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetRegistryInput": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetRegistryResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetResourcePoliciesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetResourcePoliciesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetResourcePoliciesResponseList": {
       "base": null,
@@ -4978,123 +4755,99 @@
     },
     "GetResourcePolicyRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetResourcePolicyResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetSchemaByDefinitionInput": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetSchemaByDefinitionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetSchemaInput": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetSchemaResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetSchemaVersionInput": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetSchemaVersionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetSchemaVersionsDiffInput": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetSchemaVersionsDiffResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetSecurityConfigurationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetSecurityConfigurationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetSecurityConfigurationsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetSecurityConfigurationsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetSessionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetSessionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetStatementRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetStatementResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableOptimizerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableOptimizerResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableVersionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableVersionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableVersionsList": {
       "base": null,
@@ -5104,158 +4857,127 @@
     },
     "GetTableVersionsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableVersionsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTablesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTablesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTagsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTagsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTriggerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTriggerResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTriggersRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTriggersResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetUnfilteredPartitionMetadataRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetUnfilteredPartitionMetadataResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetUnfilteredPartitionsMetadataRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetUnfilteredPartitionsMetadataResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetUnfilteredTableMetadataRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetUnfilteredTableMetadataResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetUsageProfileRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetUsageProfileResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetUserDefinedFunctionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetUserDefinedFunctionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetUserDefinedFunctionsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetUserDefinedFunctionsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetWorkflowRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetWorkflowResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetWorkflowRunPropertiesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetWorkflowRunPropertiesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetWorkflowRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetWorkflowRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetWorkflowRunsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetWorkflowRunsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GlueEncryptionException": {
       "base": "<p>An encryption operation failed.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "GluePolicy": {
       "base": "<p>A structure for returning a resource policy.</p>",
@@ -5321,6 +5043,7 @@
         "S3CatalogHudiSource$OutputSchemas": "<p>Specifies the data schema for the Hudi source.</p>",
         "S3CsvSource$OutputSchemas": "<p>Specifies the data schema for the S3 CSV source.</p>",
         "S3DeltaSource$OutputSchemas": "<p>Specifies the data schema for the Delta Lake source.</p>",
+        "S3ExcelSource$OutputSchemas": "<p>The AWS Glue schemas to apply to the processed data.</p>",
         "S3HudiSource$OutputSchemas": "<p>Specifies the data schema for the Hudi source.</p>",
         "S3JsonSource$OutputSchemas": "<p>Specifies the data schema for the S3 JSON source.</p>",
         "S3ParquetSource$OutputSchemas": "<p>Specifies the data schema for the S3 Parquet source.</p>",
@@ -5352,6 +5075,8 @@
         "S3GlueParquetTarget$PartitionKeys": "<p>Specifies native partitioning using a sequence of keys.</p>",
         "S3HudiCatalogTarget$PartitionKeys": "<p>Specifies native partitioning using a sequence of keys.</p>",
         "S3HudiDirectTarget$PartitionKeys": "<p>Specifies native partitioning using a sequence of keys.</p>",
+        "S3HyperDirectTarget$PartitionKeys": "<p>Defines the partitioning strategy for the output data.</p>",
+        "S3IcebergDirectTarget$PartitionKeys": "<p>Specifies the columns used to partition the Iceberg table data in S3.</p>",
         "SelectFields$Paths": "<p>A JSON path to a variable in the data structure.</p>",
         "SplitFields$Paths": "<p>A JSON path to a variable in the data structure.</p>"
       }
@@ -5551,6 +5276,12 @@
         "CrawlerTargets$HudiTargets": "<p>Specifies Apache Hudi data store targets.</p>"
       }
     },
+    "HyperTargetCompressionType": {
+      "base": null,
+      "refs": {
+        "S3HyperDirectTarget$Compression": "<p>The compression type to apply to the output data.</p>"
+      }
+    },
     "IAMRoleArn": {
       "base": null,
       "refs": {
@@ -5559,16 +5290,34 @@
         "EncryptionAtRest$CatalogEncryptionServiceRole": "<p>The role that Glue assumes to encrypt and decrypt the Data Catalog objects on the caller's behalf.</p>"
       }
     },
+    "IcebergCompactionConfiguration": {
+      "base": "<p>The configuration for an Iceberg compaction optimizer. This configuration defines parameters for optimizing the layout of data files in Iceberg tables.</p>",
+      "refs": {
+        "CompactionConfiguration$icebergConfiguration": "<p>The configuration for an Iceberg compaction optimizer.</p>"
+      }
+    },
     "IcebergCompactionMetrics": {
       "base": "<p>Compaction metrics for Iceberg for the optimizer run.</p>",
       "refs": {
         "CompactionMetrics$IcebergMetrics": "<p>A structure containing the Iceberg compaction metrics for the optimizer run.</p>"
       }
     },
+    "IcebergDocument": {
+      "base": null,
+      "refs": {
+        "IcebergStructField$Type": "<p>The data type definition for this field, specifying the structure and format of the data it contains.</p>"
+      }
+    },
     "IcebergInput": {
       "base": "<p>A structure that defines an Apache Iceberg metadata table to create in the catalog.</p>",
       "refs": {
         "OpenTableFormatInput$IcebergInput": "<p>Specifies an <code>IcebergInput</code> structure that defines an Apache Iceberg metadata table.</p>"
+      }
+    },
+    "IcebergNullOrder": {
+      "base": null,
+      "refs": {
+        "IcebergSortField$NullOrder": "<p>The ordering behavior for null values in this field, specifying whether nulls should appear first or last in the sort order.</p>"
       }
     },
     "IcebergOrphanFileDeletionConfiguration": {
@@ -5583,6 +5332,25 @@
         "OrphanFileDeletionMetrics$IcebergMetrics": "<p>A structure containing the Iceberg orphan file deletion metrics for the optimizer run.</p>"
       }
     },
+    "IcebergPartitionField": {
+      "base": "<p>Defines a single partition field within an Iceberg partition specification, including the source field, transformation function, partition name, and unique identifier.</p>",
+      "refs": {
+        "IcebergPartitionSpecFieldList$member": null
+      }
+    },
+    "IcebergPartitionSpec": {
+      "base": "<p>Defines the partitioning specification for an Iceberg table, determining how table data will be organized and partitioned for optimal query performance.</p>",
+      "refs": {
+        "CreateIcebergTableInput$PartitionSpec": "<p>The partitioning specification that defines how the Iceberg table data will be organized and partitioned for optimal query performance.</p>",
+        "IcebergTableUpdate$PartitionSpec": "<p>The updated partitioning specification that defines how the table data should be reorganized and partitioned.</p>"
+      }
+    },
+    "IcebergPartitionSpecFieldList": {
+      "base": null,
+      "refs": {
+        "IcebergPartitionSpec$Fields": "<p>The list of partition fields that define how the table data should be partitioned, including source fields and their transformations.</p>"
+      }
+    },
     "IcebergRetentionConfiguration": {
       "base": "<p>The configuration for an Iceberg snapshot retention optimizer.</p>",
       "refs": {
@@ -5595,16 +5363,91 @@
         "RetentionMetrics$IcebergMetrics": "<p>A structure containing the Iceberg retention metrics for the optimizer run.</p>"
       }
     },
+    "IcebergSchema": {
+      "base": "<p>Defines the schema structure for an Iceberg table, including field definitions, data types, and schema metadata.</p>",
+      "refs": {
+        "CreateIcebergTableInput$Schema": "<p>The schema definition that specifies the structure, field types, and metadata for the Iceberg table.</p>",
+        "IcebergTableUpdate$Schema": "<p>The updated schema definition for the Iceberg table, specifying any changes to field structure, data types, or schema metadata.</p>"
+      }
+    },
+    "IcebergSortDirection": {
+      "base": null,
+      "refs": {
+        "IcebergSortField$Direction": "<p>The sort direction for this field, either ascending or descending.</p>"
+      }
+    },
+    "IcebergSortField": {
+      "base": "<p>Defines a single field within an Iceberg sort order specification, including the source field, transformation, sort direction, and null value ordering.</p>",
+      "refs": {
+        "IcebergSortOrderFieldList$member": null
+      }
+    },
+    "IcebergSortOrder": {
+      "base": "<p>Defines the sort order specification for an Iceberg table, determining how data should be ordered within partitions to optimize query performance.</p>",
+      "refs": {
+        "CreateIcebergTableInput$WriteOrder": "<p>The sort order specification that defines how data should be ordered within each partition to optimize query performance.</p>",
+        "IcebergTableUpdate$SortOrder": "<p>The updated sort order specification that defines how data should be ordered within partitions for optimal query performance.</p>"
+      }
+    },
+    "IcebergSortOrderFieldList": {
+      "base": null,
+      "refs": {
+        "IcebergSortOrder$Fields": "<p>The list of fields and their sort directions that define the ordering criteria for the Iceberg table data.</p>"
+      }
+    },
+    "IcebergStructField": {
+      "base": "<p>Defines a single field within an Iceberg table schema, including its identifier, name, data type, nullability, and documentation.</p>",
+      "refs": {
+        "IcebergStructFieldList$member": null
+      }
+    },
+    "IcebergStructFieldList": {
+      "base": null,
+      "refs": {
+        "IcebergSchema$Fields": "<p>The list of field definitions that make up the table schema, including field names, types, and metadata.</p>"
+      }
+    },
+    "IcebergStructTypeEnum": {
+      "base": null,
+      "refs": {
+        "IcebergSchema$Type": "<p>The root type of the schema structure, typically \"struct\" for Iceberg table schemas.</p>"
+      }
+    },
+    "IcebergTableUpdate": {
+      "base": "<p>Defines a complete set of updates to be applied to an Iceberg table, including schema changes, partitioning modifications, sort order adjustments, location updates, and property changes.</p>",
+      "refs": {
+        "IcebergTableUpdateList$member": null
+      }
+    },
+    "IcebergTableUpdateList": {
+      "base": null,
+      "refs": {
+        "UpdateIcebergTableInput$Updates": "<p>The list of table update operations that specify the changes to be made to the Iceberg table, including schema modifications, partition specifications, and table properties.</p>"
+      }
+    },
     "IcebergTarget": {
       "base": "<p>Specifies an Apache Iceberg data source where Iceberg tables are stored in Amazon S3.</p>",
       "refs": {
         "IcebergTargetList$member": null
       }
     },
+    "IcebergTargetCompressionType": {
+      "base": null,
+      "refs": {
+        "S3IcebergDirectTarget$Compression": "<p>Specifies the compression codec used for Iceberg table files in S3.</p>"
+      }
+    },
     "IcebergTargetList": {
       "base": null,
       "refs": {
         "CrawlerTargets$IcebergTargets": "<p>Specifies Apache Iceberg data store targets.</p>"
+      }
+    },
+    "IcebergTransformString": {
+      "base": null,
+      "refs": {
+        "IcebergPartitionField$Transform": "<p>The transformation function applied to the source field to create the partition, such as identity, bucket, truncate, year, month, day, or hour.</p>",
+        "IcebergSortField$Transform": "<p>The transformation function applied to the source field before sorting, such as identity, bucket, or truncate.</p>"
       }
     },
     "IdString": {
@@ -5638,8 +5481,7 @@
     },
     "IdempotentParameterMismatchException": {
       "base": "<p>The same unique identifier was associated with two different records.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "IdleTimeout": {
       "base": null,
@@ -5649,28 +5491,23 @@
     },
     "IllegalBlueprintStateException": {
       "base": "<p>The blueprint is in an invalid state to perform a requested operation.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "IllegalSessionStateException": {
       "base": "<p>The session is in an invalid state to perform a requested operation.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "IllegalWorkflowStateException": {
       "base": "<p>The workflow is in an invalid state to perform a requested operation.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ImportCatalogToGlueRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ImportCatalogToGlueResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ImportLabelsTaskRunProperties": {
       "base": "<p>Specifies configuration properties for an importing labels task run.</p>",
@@ -5710,6 +5547,14 @@
       "refs": {
         "CodeGenNode$LineNumber": "<p>The line number of the node.</p>",
         "DecimalNumber$Scale": "<p>The scale that determines where the decimal point falls in the unscaled value.</p>",
+        "IcebergPartitionField$SourceId": "<p>The identifier of the source field from the table schema that this partition field is based on.</p>",
+        "IcebergPartitionField$FieldId": "<p>The unique identifier assigned to this partition field within the Iceberg table's partition specification.</p>",
+        "IcebergPartitionSpec$SpecId": "<p>The unique identifier for this partition specification within the Iceberg table's metadata history.</p>",
+        "IcebergSchema$SchemaId": "<p>The unique identifier for this schema version within the Iceberg table's schema evolution history.</p>",
+        "IcebergSortField$SourceId": "<p>The identifier of the source field from the table schema that this sort field is based on.</p>",
+        "IcebergSortOrder$OrderId": "<p>The unique identifier for this sort order specification within the Iceberg table's metadata.</p>",
+        "IcebergStructField$Id": "<p>The unique identifier assigned to this field within the Iceberg table schema, used for schema evolution and field tracking.</p>",
+        "IntegerList$member": null,
         "StorageDescriptor$NumberOfBuckets": "<p>Must be specified if the table contains any dimension columns.</p>"
       }
     },
@@ -5717,6 +5562,12 @@
       "base": null,
       "refs": {
         "Order$SortOrder": "<p>Indicates that the column is sorted in ascending order (<code>== 1</code>), or in descending order (<code>==0</code>).</p>"
+      }
+    },
+    "IntegerList": {
+      "base": null,
+      "refs": {
+        "IcebergSchema$IdentifierFieldIds": "<p>The list of field identifiers that uniquely identify records in the table, used for row-level operations and deduplication.</p>"
       }
     },
     "IntegerValue": {
@@ -5766,10 +5617,18 @@
         "ModifyIntegrationResponse$AdditionalEncryptionContext": "<p>An optional set of non-secret key–value pairs that contains additional contextual information for encryption.</p>"
       }
     },
+    "IntegrationConfig": {
+      "base": "<p>Properties associated with the integration.</p>",
+      "refs": {
+        "CreateIntegrationRequest$IntegrationConfig": "<p>The configuration settings.</p>",
+        "CreateIntegrationResponse$IntegrationConfig": "<p>The configuration settings.</p>",
+        "InboundIntegration$IntegrationConfig": "<p>Properties associated with the integration.</p>",
+        "Integration$IntegrationConfig": "<p>Properties associated with the integration.</p>"
+      }
+    },
     "IntegrationConflictOperationFault": {
       "base": "<p>The requested operation conflicts with another operation.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "IntegrationDescription": {
       "base": null,
@@ -5838,8 +5697,7 @@
     },
     "IntegrationNotFoundFault": {
       "base": "<p>The specified integration could not be found.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "IntegrationPartition": {
       "base": "<p>A structure that describes how data is partitioned on the target.</p>",
@@ -5855,7 +5713,12 @@
     },
     "IntegrationQuotaExceededFault": {
       "base": "<p>The data processed through your integration exceeded your quota.</p>",
+      "refs": {}
+    },
+    "IntegrationSourcePropertiesMap": {
+      "base": null,
       "refs": {
+        "IntegrationConfig$SourceProperties": "<p> A collection of key-value pairs that specify additional properties for the integration source. These properties provide configuration options that can be used to customize the behavior of the ODB source during data integration operations. </p>"
       }
     },
     "IntegrationStatus": {
@@ -5872,7 +5735,9 @@
       "base": null,
       "refs": {
         "IntegrationAdditionalEncryptionContextMap$key": null,
-        "IntegrationAdditionalEncryptionContextMap$value": null
+        "IntegrationAdditionalEncryptionContextMap$value": null,
+        "IntegrationSourcePropertiesMap$key": null,
+        "IntegrationSourcePropertiesMap$value": null
       }
     },
     "IntegrationTagsList": {
@@ -5903,28 +5768,23 @@
     },
     "InternalServerException": {
       "base": "<p>An internal server error occurred.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "InternalServiceException": {
       "base": "<p>An internal service error occurred.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "InvalidInputException": {
       "base": "<p>The input provided was not valid.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "InvalidIntegrationStateFault": {
       "base": "<p>The integration is in an invalid state.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "InvalidStateException": {
       "base": "<p>An error that indicates your data is in an invalid state.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "IsParentEntity": {
       "base": null,
@@ -6150,8 +6010,7 @@
     },
     "KMSKeyNotAccessibleFault": {
       "base": "<p>The KMS key specified is not accessible.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "KafkaStreamingSourceOptions": {
       "base": "<p>Additional options for streaming.</p>",
@@ -6283,230 +6142,187 @@
     },
     "ListBlueprintsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListBlueprintsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListColumnStatisticsTaskRunsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListColumnStatisticsTaskRunsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListConnectionTypesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListConnectionTypesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListCrawlersRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListCrawlersResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListCrawlsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListCrawlsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListCustomEntityTypesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListCustomEntityTypesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListDataQualityResultsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListDataQualityResultsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListDataQualityRuleRecommendationRunsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListDataQualityRuleRecommendationRunsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListDataQualityRulesetEvaluationRunsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListDataQualityRulesetEvaluationRunsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListDataQualityRulesetsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListDataQualityRulesetsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListDataQualityStatisticAnnotationsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListDataQualityStatisticAnnotationsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListDataQualityStatisticsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListDataQualityStatisticsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListDevEndpointsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListDevEndpointsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListEntitiesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListEntitiesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListJobsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListJobsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListMLTransformsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListMLTransformsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListOfString": {
       "base": null,
       "refs": {
         "ComputeEnvironmentConfiguration$ConnectionPropertiesRequiredOverrides": "<p>The connection properties that are required as overrides for the compute environment.</p>",
+        "ConnectionTypeBrief$Categories": "<p>A list of categories that this connection type belongs to. Categories help users filter and find appropriate connection types based on their use cases.</p>",
         "Field$SupportedValues": "<p>A list of supported values for the field.</p>"
       }
     },
     "ListRegistriesInput": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListRegistriesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListSchemaVersionsInput": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListSchemaVersionsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListSchemasInput": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListSchemasResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListSessionsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListSessionsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListStatementsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListStatementsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListTableOptimizerRunsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListTableOptimizerRunsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListTableOptimizerRunsToken": {
       "base": null,
@@ -6517,33 +6333,27 @@
     },
     "ListTriggersRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListTriggersResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListUsageProfilesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListUsageProfilesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListWorkflowsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListWorkflowsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "Location": {
       "base": "<p>The location of resources.</p>",
@@ -6561,6 +6371,8 @@
     "LocationString": {
       "base": null,
       "refs": {
+        "CreateIcebergTableInput$Location": "<p>The S3 location where the Iceberg table data will be stored.</p>",
+        "IcebergTableUpdate$Location": "<p>The updated S3 location where the Iceberg table data will be stored.</p>",
         "LocationStringList$member": null,
         "StorageDescriptor$Location": "<p>The physical location of the table. By default, this takes the form of the warehouse location, followed by the database location in the warehouse, followed by the table name.</p>"
       }
@@ -6633,8 +6445,7 @@
     },
     "MLTransformNotReadyException": {
       "base": "<p>The machine learning transform is not ready to run.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "MLUserDataEncryption": {
       "base": "<p>The encryption-at-rest settings of the transform that apply to accessing user data.</p>",
@@ -6888,13 +6699,11 @@
     },
     "ModifyIntegrationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyIntegrationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "MongoDBTarget": {
       "base": "<p>Specifies an Amazon DocumentDB or MongoDB data store to crawl.</p>",
@@ -7001,6 +6810,7 @@
         "CreateTableOptimizerRequest$DatabaseName": "<p>The name of the database in the catalog in which the table resides.</p>",
         "CreateTableOptimizerRequest$TableName": "<p>The name of the table.</p>",
         "CreateTableRequest$DatabaseName": "<p>The catalog database in which to create the new table. For Hive compatibility, this name is entirely lowercase.</p>",
+        "CreateTableRequest$Name": "<p>The unique identifier for the table within the specified database that will be created in the Glue Data Catalog.</p>",
         "CreateTriggerRequest$Name": "<p>The name of the trigger.</p>",
         "CreateTriggerRequest$WorkflowName": "<p>The name of the workflow associated with the trigger.</p>",
         "CreateTriggerResponse$Name": "<p>The name of the trigger.</p>",
@@ -7091,8 +6901,11 @@
         "ErrorDetail$ErrorCode": "<p>The code associated with this error.</p>",
         "EvaluatedMetricsMap$key": null,
         "FederatedCatalog$ConnectionName": "<p>The name of the connection to an external data source, for example a Redshift-federated catalog.</p>",
+        "FederatedCatalog$ConnectionType": "<p>The type of connection used to access the federated catalog, specifying the protocol or method for connection to the external data source.</p>",
         "FederatedDatabase$ConnectionName": "<p>The name of the connection to the external metastore.</p>",
+        "FederatedDatabase$ConnectionType": "<p>The type of connection used to access the federated database, such as JDBC, ODBC, or other supported connection protocols.</p>",
         "FederatedTable$ConnectionName": "<p>The name of the connection to the external metastore.</p>",
+        "FederatedTable$ConnectionType": "<p>The type of connection used to access the federated table, specifying the protocol or method for connecting to the external data source.</p>",
         "FindMatchesTaskRunProperties$JobName": "<p>The name assigned to the job for the Find Matches task run.</p>",
         "GetBlueprintRequest$Name": "<p>The name of the blueprint.</p>",
         "GetBlueprintRunsRequest$BlueprintName": "<p>The name of the blueprint.</p>",
@@ -7207,6 +7020,7 @@
         "PutWorkflowRunPropertiesRequest$Name": "<p>Name of the workflow which was run.</p>",
         "ReferenceDatasetsList$member": null,
         "ResumeWorkflowRunRequest$Name": "<p>The name of the workflow to resume.</p>",
+        "RuleMetricsMap$key": null,
         "RulesetNames$member": null,
         "RunStatementRequest$SessionId": "<p>The Session Id of the statement to be run.</p>",
         "SecurityConfiguration$Name": "<p>The name of the security configuration.</p>",
@@ -7304,6 +7118,7 @@
         "UpdateTableOptimizerRequest$DatabaseName": "<p>The name of the database in the catalog in which the table resides.</p>",
         "UpdateTableOptimizerRequest$TableName": "<p>The name of the table.</p>",
         "UpdateTableRequest$DatabaseName": "<p>The name of the catalog database in which the table resides. For Hive compatibility, this name is entirely lowercase.</p>",
+        "UpdateTableRequest$Name": "<p>The unique identifier for the table within the specified database that will be created in the Glue Data Catalog.</p>",
         "UpdateTriggerRequest$Name": "<p>The name of the trigger to update.</p>",
         "UpdateUsageProfileRequest$Name": "<p>The name of the usage profile.</p>",
         "UpdateUsageProfileResponse$Name": "<p>The name of the usage profile that was updated.</p>",
@@ -7360,8 +7175,7 @@
     },
     "NoScheduleException": {
       "base": "<p>There is no applicable schedule.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "Node": {
       "base": "<p>A node represents an Glue component (trigger, crawler, or job) on a workflow graph.</p>",
@@ -7451,10 +7265,13 @@
         "S3DeltaDirectTarget$Name": "<p>The name of the data target.</p>",
         "S3DeltaSource$Name": "<p>The name of the Delta Lake source.</p>",
         "S3DirectTarget$Name": "<p>The name of the data target.</p>",
+        "S3ExcelSource$Name": "<p>The name of the S3 Excel data source.</p>",
         "S3GlueParquetTarget$Name": "<p>The name of the data target.</p>",
         "S3HudiCatalogTarget$Name": "<p>The name of the data target.</p>",
         "S3HudiDirectTarget$Name": "<p>The name of the data target.</p>",
         "S3HudiSource$Name": "<p>The name of the Hudi source.</p>",
+        "S3HyperDirectTarget$Name": "<p>The unique identifier for the HyperDirect target node.</p>",
+        "S3IcebergDirectTarget$Name": "<p>Specifies the unique identifier for the Iceberg target node in your data pipeline.</p>",
         "S3JsonSource$Name": "<p>The name of the data store.</p>",
         "S3ParquetSource$Name": "<p>The name of the data store.</p>",
         "SelectFields$Name": "<p>The name of the transform node.</p>",
@@ -7610,6 +7427,12 @@
         "CreateJobRequest$MaxCapacity": "<p>For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\"> Glue pricing page</a>.</p> <p>For Glue version 2.0+ jobs, you cannot specify a <code>Maximum capacity</code>. Instead, you should specify a <code>Worker type</code> and the <code>Number of workers</code>.</p> <p>Do not set <code>MaxCapacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job, an Apache Spark ETL job, or an Apache Spark streaming ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>=\"pythonshell\"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>=\"glueetl\") or Apache Spark streaming ETL job (<code>JobCommand.Name</code>=\"gluestreaming\"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>",
         "CreateMLTransformRequest$MaxCapacity": "<p>The number of Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue pricing page</a>. </p> <p> <code>MaxCapacity</code> is a mutually exclusive option with <code>NumberOfWorkers</code> and <code>WorkerType</code>.</p> <ul> <li> <p>If either <code>NumberOfWorkers</code> or <code>WorkerType</code> is set, then <code>MaxCapacity</code> cannot be set.</p> </li> <li> <p>If <code>MaxCapacity</code> is set then neither <code>NumberOfWorkers</code> or <code>WorkerType</code> can be set.</p> </li> <li> <p>If <code>WorkerType</code> is set, then <code>NumberOfWorkers</code> is required (and vice versa).</p> </li> <li> <p> <code>MaxCapacity</code> and <code>NumberOfWorkers</code> must both be at least 1.</p> </li> </ul> <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p> <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>",
         "CreateSessionRequest$MaxCapacity": "<p>The number of Glue data processing units (DPUs) that can be allocated when the job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB memory. </p>",
+        "DataQualityAggregatedMetrics$TotalRowsProcessed": "<p>The total number of rows that were processed during the data quality evaluation.</p>",
+        "DataQualityAggregatedMetrics$TotalRowsPassed": "<p>The total number of rows that passed all applicable data quality rules.</p>",
+        "DataQualityAggregatedMetrics$TotalRowsFailed": "<p>The total number of rows that failed one or more data quality rules.</p>",
+        "DataQualityAggregatedMetrics$TotalRulesProcessed": "<p>The total number of data quality rules that were evaluated.</p>",
+        "DataQualityAggregatedMetrics$TotalRulesPassed": "<p>The total number of data quality rules that passed their evaluation criteria.</p>",
+        "DataQualityAggregatedMetrics$TotalRulesFailed": "<p>The total number of data quality rules that failed their evaluation criteria.</p>",
         "DataQualityMetricValues$ActualValue": "<p>The actual value of the data quality metric.</p>",
         "DataQualityMetricValues$ExpectedValue": "<p>The expected value of the data quality metric according to the analysis of historical data.</p>",
         "DataQualityMetricValues$LowerLimit": "<p>The lower limit of the data quality metric value according to the analysis of historical data.</p>",
@@ -7622,6 +7445,7 @@
         "JobRun$DPUSeconds": "<p>This field can be set for either job runs with execution class <code>FLEX</code> or when Auto Scaling is enabled, and represents the total time each executor ran during the lifecycle of a job run in seconds, multiplied by a DPU factor (1 for <code>G.1X</code>, 2 for <code>G.2X</code>, or 0.25 for <code>G.025X</code> workers). This value may be different than the <code>executionEngineRuntime</code> * <code>MaxCapacity</code> as in the case of Auto Scaling jobs, as the number of executors running at a given time may be less than the <code>MaxCapacity</code>. Therefore, it is possible that the value of <code>DPUSeconds</code> is less than <code>executionEngineRuntime</code> * <code>MaxCapacity</code>.</p>",
         "JobUpdate$MaxCapacity": "<p>For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\"> Glue pricing page</a>.</p> <p>For Glue version 2.0+ jobs, you cannot specify a <code>Maximum capacity</code>. Instead, you should specify a <code>Worker type</code> and the <code>Number of workers</code>.</p> <p>Do not set <code>MaxCapacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job, an Apache Spark ETL job, or an Apache Spark streaming ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>=\"pythonshell\"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>=\"glueetl\") or Apache Spark streaming ETL job (<code>JobCommand.Name</code>=\"gluestreaming\"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>",
         "MLTransform$MaxCapacity": "<p>The number of Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"http://aws.amazon.com/glue/pricing/\">Glue pricing page</a>. </p> <p> <code>MaxCapacity</code> is a mutually exclusive option with <code>NumberOfWorkers</code> and <code>WorkerType</code>.</p> <ul> <li> <p>If either <code>NumberOfWorkers</code> or <code>WorkerType</code> is set, then <code>MaxCapacity</code> cannot be set.</p> </li> <li> <p>If <code>MaxCapacity</code> is set then neither <code>NumberOfWorkers</code> or <code>WorkerType</code> can be set.</p> </li> <li> <p>If <code>WorkerType</code> is set, then <code>NumberOfWorkers</code> is required (and vice versa).</p> </li> <li> <p> <code>MaxCapacity</code> and <code>NumberOfWorkers</code> must both be at least 1.</p> </li> </ul> <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>",
+        "RuleMetricsMap$value": null,
         "Session$MaxCapacity": "<p>The number of Glue data processing units (DPUs) that can be allocated when the job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB memory. </p>",
         "Session$ExecutionTime": "<p>The total time the session ran for.</p>",
         "Session$DPUSeconds": "<p>The DPUs consumed by the session (formula: ExecutionTime * MaxCapacity).</p>",
@@ -7675,7 +7499,19 @@
     "NullableString": {
       "base": null,
       "refs": {
-        "QuerySessionContext$ClusterId": "<p>An identifier string for the consumer cluster.</p>"
+        "QuerySessionContext$ClusterId": "<p>An identifier string for the consumer cluster.</p>",
+        "StringToStringMap$key": null,
+        "StringToStringMap$value": null
+      }
+    },
+    "NumberTargetPartitionsString": {
+      "base": null,
+      "refs": {
+        "S3DeltaDirectTarget$NumberTargetPartitions": "<p>Specifies the number of target partitions for distributing Delta Lake dataset files across Amazon S3.</p>",
+        "S3DirectTarget$NumberTargetPartitions": "<p>Specifies the number of target partitions when writing data directly to Amazon S3.</p>",
+        "S3GlueParquetTarget$NumberTargetPartitions": "<p>Specifies the number of target partitions for Parquet files when writing to Amazon S3 using AWS Glue.</p>",
+        "S3HudiDirectTarget$NumberTargetPartitions": "<p>Specifies the number of target partitions for distributing Hudi dataset files across Amazon S3.</p>",
+        "S3IcebergDirectTarget$NumberTargetPartitions": "<p>Sets the number of target partitions for distributing Iceberg table files across S3.</p>"
       }
     },
     "OAuth2ClientApplication": {
@@ -7742,6 +7578,8 @@
         "S3GlueParquetTarget$Inputs": "<p>The nodes that are inputs to the data target.</p>",
         "S3HudiCatalogTarget$Inputs": "<p>The nodes that are inputs to the data target.</p>",
         "S3HudiDirectTarget$Inputs": "<p>The nodes that are inputs to the data target.</p>",
+        "S3HyperDirectTarget$Inputs": "<p>Specifies the input source for the HyperDirect target.</p>",
+        "S3IcebergDirectTarget$Inputs": "<p>Defines the single input source that provides data to this Iceberg target.</p>",
         "SelectFields$Inputs": "<p>The data inputs identified by their node names.</p>",
         "SelectFromCollection$Inputs": "<p>The data inputs identified by their node names.</p>",
         "SnowflakeTarget$Inputs": "<p>The nodes that are inputs to the data target.</p>",
@@ -7764,13 +7602,11 @@
     },
     "OperationNotSupportedException": {
       "base": "<p>The operation is not available in the region.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "OperationTimeoutException": {
       "base": "<p>The operation timed out.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "Option": {
       "base": "<p>Specifies an option value.</p>",
@@ -8077,6 +7913,7 @@
     "ParquetCompressionType": {
       "base": null,
       "refs": {
+        "S3ExcelSource$CompressionType": "<p>The compression format used for the Excel files.</p>",
         "S3GlueParquetTarget$Compression": "<p>Specifies how the data is compressed. This is generally not necessary if the data has a standard file extension. Possible values are <code>\"gzip\"</code> and <code>\"bzip\"</code>).</p>",
         "S3ParquetSource$CompressionType": "<p>Specifies how the data is compressed. This is generally not necessary if the data has a standard file extension. Possible values are <code>\"gzip\"</code> and <code>\"bzip\"</code>).</p>"
       }
@@ -8222,8 +8059,7 @@
     },
     "PermissionTypeMismatchException": {
       "base": "<p>The operation timed out.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "PhysicalConnectionRequirements": {
       "base": "<p>The OAuth client app in GetConnection response.</p>",
@@ -8308,7 +8144,7 @@
     "PrimaryKeyList": {
       "base": null,
       "refs": {
-        "SourceTableConfig$PrimaryKey": "<p>Unique identifier of a record.</p>"
+        "SourceTableConfig$PrimaryKey": "<p>Provide the primary key set for this table. Currently supported specifically for SAP <code>EntityOf</code> entities upon request. Contact Amazon Web Services Support to make this feature available.</p>"
       }
     },
     "PrincipalPermissions": {
@@ -8446,53 +8282,43 @@
     },
     "PutDataCatalogEncryptionSettingsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "PutDataCatalogEncryptionSettingsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "PutDataQualityProfileAnnotationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "PutDataQualityProfileAnnotationResponse": {
       "base": "<p>Left blank.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "PutResourcePolicyRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "PutResourcePolicyResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "PutSchemaVersionMetadataInput": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "PutSchemaVersionMetadataResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "PutWorkflowRunPropertiesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "PutWorkflowRunPropertiesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "PythonScript": {
       "base": null,
@@ -8511,8 +8337,7 @@
     },
     "QuerySchemaVersionMetadataInput": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "QuerySchemaVersionMetadataMaxResults": {
       "base": null,
@@ -8522,8 +8347,7 @@
     },
     "QuerySchemaVersionMetadataResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "QuerySessionContext": {
       "base": "<p>A structure used as a protocol between query engines and Lake Formation or Glue. Contains both a Lake Formation generated authorization identifier and information from the request's authorization context.</p>",
@@ -8642,13 +8466,11 @@
     },
     "RegisterSchemaVersionInput": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "RegisterSchemaVersionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "RegistryId": {
       "base": "<p>A wrapper structure that may contain the registry name and Amazon Resource Name (ARN).</p>",
@@ -8688,13 +8510,11 @@
     },
     "RemoveSchemaVersionMetadataInput": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "RemoveSchemaVersionMetadataResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "RenameField": {
       "base": "<p>Specifies a transform that renames a single data property key.</p>",
@@ -8711,13 +8531,11 @@
     },
     "ResetJobBookmarkRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ResetJobBookmarkResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ResourceAction": {
       "base": null,
@@ -8736,18 +8554,15 @@
     },
     "ResourceNotFoundException": {
       "base": "<p>The resource could not be found.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ResourceNotReadyException": {
       "base": "<p>A resource was not ready for a transaction.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ResourceNumberLimitExceededException": {
       "base": "<p>A resource numerical limit was exceeded.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ResourceShareType": {
       "base": null,
@@ -8784,13 +8599,11 @@
     },
     "ResumeWorkflowRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ResumeWorkflowRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "RetentionConfiguration": {
       "base": "<p>The configuration for a snapshot retention optimizer.</p>",
@@ -8846,6 +8659,12 @@
         "XMLClassifier$RowTag": "<p>The XML tag designating the element that contains each record in an XML document being parsed. This can't identify a self-closing element (closed by <code>/&gt;</code>). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <code>&lt;row item_a=\"A\" item_b=\"B\"&gt;&lt;/row&gt;</code> is okay, but <code>&lt;row item_a=\"A\" item_b=\"B\" /&gt;</code> is not).</p>"
       }
     },
+    "RuleMetricsMap": {
+      "base": null,
+      "refs": {
+        "DataQualityRuleResult$RuleMetrics": "<p>A map containing metrics associated with the evaluation of the rule based on row-level results. </p>"
+      }
+    },
     "RulesetNames": {
       "base": null,
       "refs": {
@@ -8876,13 +8695,11 @@
     },
     "RunStatementRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "RunStatementResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "RuntimeNameString": {
       "base": null,
@@ -8943,6 +8760,7 @@
       "refs": {
         "S3CsvSource$AdditionalOptions": "<p>Specifies additional connection options.</p>",
         "S3DeltaSource$AdditionalOptions": "<p>Specifies additional options for the connector.</p>",
+        "S3ExcelSource$AdditionalOptions": "<p>Additional configuration options for S3 direct source processing.</p>",
         "S3HudiSource$AdditionalOptions": "<p>Specifies additional options for the connector.</p>",
         "S3JsonSource$AdditionalOptions": "<p>Specifies additional connection options.</p>",
         "S3ParquetSource$AdditionalOptions": "<p>Specifies additional connection options.</p>"
@@ -8972,6 +8790,12 @@
         "S3Encryption$S3EncryptionMode": "<p>The encryption mode to use for Amazon S3 data.</p>"
       }
     },
+    "S3ExcelSource": {
+      "base": "<p>Specifies an S3 Excel data source.</p>",
+      "refs": {
+        "CodeGenConfigurationNode$S3ExcelSource": "<p>Defines configuration parameters for reading Excel files from Amazon S3.</p>"
+      }
+    },
     "S3GlueParquetTarget": {
       "base": "<p>Specifies a data target that writes to Amazon S3 in Apache Parquet columnar storage.</p>",
       "refs": {
@@ -8994,6 +8818,18 @@
       "base": "<p>Specifies a Hudi data source stored in Amazon S3.</p>",
       "refs": {
         "CodeGenConfigurationNode$S3HudiSource": "<p>Specifies a Hudi data source stored in Amazon S3.</p>"
+      }
+    },
+    "S3HyperDirectTarget": {
+      "base": "<p>Specifies a HyperDirect data target that writes to Amazon S3.</p>",
+      "refs": {
+        "CodeGenConfigurationNode$S3HyperDirectTarget": "<p>Defines configuration parameters for writing data to Amazon S3 using HyperDirect optimization.</p>"
+      }
+    },
+    "S3IcebergDirectTarget": {
+      "base": "<p>Specifies a target that writes to an Iceberg data source in Amazon S3.</p>",
+      "refs": {
+        "CodeGenConfigurationNode$S3IcebergDirectTarget": "<p>Defines configuration parameters for writing data to Amazon S3 as an Apache Iceberg table.</p>"
       }
     },
     "S3JsonSource": {
@@ -9065,18 +8901,15 @@
     },
     "SchedulerNotRunningException": {
       "base": "<p>The specified scheduler is not running.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "SchedulerRunningException": {
       "base": "<p>The specified scheduler is already running.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "SchedulerTransitioningException": {
       "base": "<p>The specified scheduler is transitioning.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "SchemaChangePolicy": {
       "base": "<p>A policy that specifies update and deletion behaviors for the crawler.</p>",
@@ -9298,13 +9131,11 @@
     },
     "SearchTablesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "SearchTablesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "SecretArn": {
       "base": null,
@@ -9495,7 +9326,7 @@
     "SourceTableConfig": {
       "base": "<p>Properties used by the source leg to process data from the source.</p>",
       "refs": {
-        "CreateIntegrationTablePropertiesRequest$SourceTableConfig": "<p>A structure for the source table configuration.</p>",
+        "CreateIntegrationTablePropertiesRequest$SourceTableConfig": "<p>A structure for the source table configuration. See the <code>SourceTableConfig</code> structure to see list of supported source properties.</p>",
         "GetIntegrationTablePropertiesResponse$SourceTableConfig": "<p>A structure for the source table configuration.</p>",
         "UpdateIntegrationTablePropertiesRequest$SourceTableConfig": "<p>A structure for the source table configuration.</p>"
       }
@@ -9503,7 +9334,7 @@
     "SourceTableFieldsList": {
       "base": null,
       "refs": {
-        "SourceTableConfig$Fields": "<p>A list of fields used for column-level filtering.</p>"
+        "SourceTableConfig$Fields": "<p>A list of fields used for column-level filtering. Currently unsupported.</p>"
       }
     },
     "SparkConnectorSource": {
@@ -9557,143 +9388,115 @@
     },
     "StartBlueprintRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartBlueprintRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartColumnStatisticsTaskRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartColumnStatisticsTaskRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartColumnStatisticsTaskRunScheduleRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartColumnStatisticsTaskRunScheduleResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartCrawlerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartCrawlerResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartCrawlerScheduleRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartCrawlerScheduleResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartDataQualityRuleRecommendationRunRequest": {
-      "base": null,
-      "refs": {
-      }
+      "base": "<p>The request of the Data Quality rule recommendation request.</p>",
+      "refs": {}
     },
     "StartDataQualityRuleRecommendationRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartDataQualityRulesetEvaluationRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartDataQualityRulesetEvaluationRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartExportLabelsTaskRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartExportLabelsTaskRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartImportLabelsTaskRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartImportLabelsTaskRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartJobRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartJobRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMLEvaluationTaskRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMLEvaluationTaskRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMLLabelingSetGenerationTaskRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMLLabelingSetGenerationTaskRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartTriggerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartTriggerResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartWorkflowRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartWorkflowRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartingEventBatchCondition": {
       "base": "<p>The batch condition that started the workflow run. Either the number of events in the batch size arrived, in which case the BatchSize member is non-zero, or the batch window expired, in which case the BatchWindow member is non-zero.</p>",
@@ -9795,73 +9598,59 @@
     },
     "StopColumnStatisticsTaskRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopColumnStatisticsTaskRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopColumnStatisticsTaskRunScheduleRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopColumnStatisticsTaskRunScheduleResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopCrawlerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopCrawlerResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopCrawlerScheduleRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopCrawlerScheduleResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopSessionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopSessionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopTriggerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopTriggerResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopWorkflowRunRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopWorkflowRunResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StorageDescriptor": {
       "base": "<p>Describes the physical storage of table data.</p>",
@@ -9905,7 +9694,7 @@
         "CreateIntegrationResponse$TargetArn": "<p>The ARN of the target resource for the integration.</p>",
         "CreateIntegrationResponse$IntegrationName": "<p>A unique name for an integration in Glue.</p>",
         "CreateIntegrationResponse$IntegrationArn": "<p>The Amazon Resource Name (ARN) for the created integration.</p>",
-        "CreateIntegrationTablePropertiesRequest$ResourceArn": "<p>The connection ARN of the source, or the database ARN of the target.</p>",
+        "CreateIntegrationTablePropertiesRequest$ResourceArn": "<p>The Amazon Resource Name (ARN) of the target table for which to create integration table properties. Currently, this API only supports creating integration table properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for creating integration table properties for source connections (using the connection ARN) is not yet implemented and will be added in a future release. </p>",
         "CreateIntegrationTablePropertiesRequest$TableName": "<p>The name of the table to be replicated.</p>",
         "DeleteIntegrationRequest$IntegrationIdentifier": "<p>The Amazon Resource Name (ARN) for the integration.</p>",
         "DeleteIntegrationResponse$SourceArn": "<p>The ARN of the source for the integration.</p>",
@@ -9923,9 +9712,9 @@
         "DescribeIntegrationsResponse$Marker": "<p>A value that indicates the starting point for the next set of response records in a subsequent request.</p>",
         "GetIntegrationResourcePropertyRequest$ResourceArn": "<p>The connection ARN of the source, or the database ARN of the target.</p>",
         "GetIntegrationResourcePropertyResponse$ResourceArn": "<p>The connection ARN of the source, or the database ARN of the target.</p>",
-        "GetIntegrationTablePropertiesRequest$ResourceArn": "<p>The connection ARN of the source, or the database ARN of the target.</p>",
+        "GetIntegrationTablePropertiesRequest$ResourceArn": "<p>The Amazon Resource Name (ARN) of the target table for which to retrieve integration table properties. Currently, this API only supports retrieving properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for retrieving integration table properties for source connections (using the connection ARN) is not yet implemented and will be added in a future release. </p>",
         "GetIntegrationTablePropertiesRequest$TableName": "<p>The name of the table to be replicated.</p>",
-        "GetIntegrationTablePropertiesResponse$ResourceArn": "<p>The connection ARN of the source, or the database ARN of the target.</p>",
+        "GetIntegrationTablePropertiesResponse$ResourceArn": "<p>The Amazon Resource Name (ARN) of the target table for which to retrieve integration table properties. Currently, this API only supports retrieving properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for retrieving integration table properties for source connections (using the connection ARN) is not yet implemented and will be added in a future release. </p>",
         "GetIntegrationTablePropertiesResponse$TableName": "<p>The name of the table to be replicated.</p>",
         "InboundIntegration$SourceArn": "<p>The ARN of the source resource for the integration.</p>",
         "InboundIntegration$TargetArn": "<p>The ARN of the target resource for the integration.</p>",
@@ -9934,11 +9723,13 @@
         "Integration$TargetArn": "<p>The ARN for the target of the integration.</p>",
         "Integration$IntegrationName": "<p>A unique name for the integration.</p>",
         "Integration$IntegrationArn": "<p>The Amazon Resource Name (ARN) for the integration.</p>",
+        "IntegrationConfig$RefreshInterval": "<p>Specifies the frequency at which CDC (Change Data Capture) pulls or incremental loads should occur. This parameter provides flexibility to align the refresh rate with your specific data update patterns, system load considerations, and performance optimization goals. Time increment can be set from 15 minutes to 8640 minutes (six days). Currently supports creation of <code>RefreshInterval</code> only.</p>",
         "IntegrationError$ErrorCode": "<p>The code associated with this error.</p>",
         "IntegrationFilter$Name": "<p>The name of the filter.</p>",
         "IntegrationFilterValues$member": null,
-        "IntegrationPartition$FieldName": "<p>The field name used to partition data on the target.</p>",
-        "IntegrationPartition$FunctionSpec": "<p>Specifies a function used to partition data on the target.</p>",
+        "IntegrationPartition$FieldName": "<p>The field name used to partition data on the target. Avoid using columns that have unique values for each row (for example, `LastModifiedTimestamp`, `SystemModTimeStamp`) as the partition column. These columns are not suitable for partitioning because they create a large number of small partitions, which can lead to performance issues.</p>",
+        "IntegrationPartition$FunctionSpec": "<p>Specifies the function used to partition data on the target. The only accepted value for this parameter is `'identity'` (string). The `'identity'` function ensures that the data partitioning on the target follows the same scheme as the source. In other words, the partitioning structure of the source data is preserved in the target destination.</p>",
+        "IntegrationPartition$ConversionSpec": "<p>Specifies the timestamp format of the source data. Valid values are:</p> <ul> <li> <p> <code>epoch_sec</code> - Unix epoch timestamp in seconds</p> </li> <li> <p> <code>epoch_milli</code> - Unix epoch timestamp in milliseconds</p> </li> <li> <p> <code>iso</code> - ISO 8601 formatted timestamp</p> </li> </ul> <note> <p> Only specify <code>ConversionSpec</code> when using timestamp-based partition functions (year, month, day, or hour). Glue Zero-ETL uses this parameter to correctly transform source data into timestamp format before partitioning. </p> <p> Do not use high-cardinality columns with the <code>identity</code> partition function. High-cardinality columns include: </p> <ul> <li> <p>Primary keys</p> </li> <li> <p>Timestamp fields (such as <code>LastModifiedTimestamp</code>, <code>CreatedDate</code>)</p> </li> <li> <p>System-generated timestamps</p> </li> </ul> <p> Using high-cardinality columns with identity partitioning creates many small partitions, which can significantly degrade ingestion performance. </p> </note>",
         "ModifyIntegrationRequest$IntegrationIdentifier": "<p>The Amazon Resource Name (ARN) for the integration.</p>",
         "ModifyIntegrationRequest$IntegrationName": "<p>A unique name for an integration in Glue.</p>",
         "ModifyIntegrationResponse$SourceArn": "<p>The ARN of the source for the integration.</p>",
@@ -9947,8 +9738,8 @@
         "ModifyIntegrationResponse$IntegrationArn": "<p>The Amazon Resource Name (ARN) for the integration.</p>",
         "PrimaryKeyList$member": null,
         "SourceProcessingProperties$RoleArn": "<p>The IAM role to access the Glue connection.</p>",
-        "SourceTableConfig$FilterPredicate": "<p>A condition clause used for row-level filtering.</p>",
-        "SourceTableConfig$RecordUpdateField": "<p>Incremental pull timestamp-based field.</p>",
+        "SourceTableConfig$FilterPredicate": "<p>A condition clause used for row-level filtering. Currently unsupported.</p>",
+        "SourceTableConfig$RecordUpdateField": "<p>Incremental pull timestamp-based field. Currently unsupported.</p>",
         "SourceTableFieldsList$member": null,
         "TargetProcessingProperties$RoleArn": "<p>The IAM role to access the Glue database.</p>",
         "TargetProcessingProperties$ConnectionName": "<p>The Glue network connection to configure the Glue job running in the customer VPC.</p>",
@@ -9991,6 +9782,13 @@
         "CreateDevEndpointResponse$SecurityGroupIds": "<p>The security groups assigned to the new <code>DevEndpoint</code>.</p>",
         "DevEndpoint$SecurityGroupIds": "<p>A list of security group identifiers used in this <code>DevEndpoint</code>.</p>",
         "UpdateDevEndpointRequest$DeleteArguments": "<p>The list of argument keys to be deleted from the map of arguments used to configure the <code>DevEndpoint</code>.</p>"
+      }
+    },
+    "StringToStringMap": {
+      "base": null,
+      "refs": {
+        "CreateIcebergTableInput$Properties": "<p>Key-value pairs of additional table properties and configuration settings for the Iceberg table.</p>",
+        "IcebergTableUpdate$Properties": "<p>Updated key-value pairs of table properties and configuration settings for the Iceberg table.</p>"
       }
     },
     "SupportedDialect": {
@@ -10185,13 +9983,11 @@
     },
     "TagResourceRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "TagResourceResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "TagValue": {
       "base": null,
@@ -10246,7 +10042,8 @@
       "refs": {
         "S3DeltaDirectTarget$Format": "<p>Specifies the data output format for the target.</p>",
         "S3DirectTarget$Format": "<p>Specifies the data output format for the target.</p>",
-        "S3HudiDirectTarget$Format": "<p>Specifies the data output format for the target.</p>"
+        "S3HudiDirectTarget$Format": "<p>Specifies the data output format for the target.</p>",
+        "S3IcebergDirectTarget$Format": "<p>Specifies the file format used for storing Iceberg table data (e.g., Parquet, ORC).</p>"
       }
     },
     "TargetProcessingProperties": {
@@ -10268,8 +10065,7 @@
     },
     "TargetResourceNotFound": {
       "base": "<p>The target resource could not be found.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "TargetTableConfig": {
       "base": "<p>Properties used by the target leg to partition the data on the target.</p>",
@@ -10344,18 +10140,15 @@
     },
     "TestConnectionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "TestConnectionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ThrottlingException": {
       "base": "<p>The throttling threshhold was exceeded.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "Timeout": {
       "base": null,
@@ -10811,13 +10604,11 @@
     },
     "UntagResourceRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UntagResourceResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateBehavior": {
       "base": null,
@@ -10827,13 +10618,11 @@
     },
     "UpdateBlueprintRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateBlueprintResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateCatalogBehavior": {
       "base": null,
@@ -10844,43 +10633,35 @@
     },
     "UpdateCatalogRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateCatalogResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateClassifierRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateClassifierResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateColumnStatisticsForPartitionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateColumnStatisticsForPartitionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateColumnStatisticsForTableRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateColumnStatisticsForTableResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateColumnStatisticsList": {
       "base": null,
@@ -10891,43 +10672,35 @@
     },
     "UpdateColumnStatisticsTaskSettingsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateColumnStatisticsTaskSettingsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateConnectionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateConnectionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateCrawlerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateCrawlerResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateCrawlerScheduleRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateCrawlerScheduleResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateCsvClassifierRequest": {
       "base": "<p>Specifies a custom CSV classifier to be updated.</p>",
@@ -10937,33 +10710,27 @@
     },
     "UpdateDataQualityRulesetRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateDataQualityRulesetResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateDatabaseRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateDatabaseResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateDevEndpointRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateDevEndpointResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateGrokClassifierRequest": {
       "base": "<p>Specifies a grok classifier to update when passed to <code>UpdateClassifier</code>.</p>",
@@ -10971,45 +10738,49 @@
         "UpdateClassifierRequest$GrokClassifier": "<p>A <code>GrokClassifier</code> object with updated fields.</p>"
       }
     },
+    "UpdateIcebergInput": {
+      "base": "<p>Input parameters specific to updating Apache Iceberg tables in Glue Data Catalog, containing the update operations to be applied to an existing Iceberg table.</p>",
+      "refs": {
+        "UpdateOpenTableFormatInput$UpdateIcebergInput": "<p>Apache Iceberg-specific update parameters that define the table modifications to be applied, including schema changes, partition specifications, and table properties.</p>"
+      }
+    },
+    "UpdateIcebergTableInput": {
+      "base": "<p>Contains the update operations to be applied to an existing Iceberg table in AWS Glue Data Catalog, defining the new state of the table metadata. </p>",
+      "refs": {
+        "UpdateIcebergInput$UpdateIcebergTableInput": "<p>The specific update operations to be applied to the Iceberg table, containing a list of updates that define the new state of the table including schema, partitions, and properties.</p>"
+      }
+    },
     "UpdateIntegrationResourcePropertyRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateIntegrationResourcePropertyResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateIntegrationTablePropertiesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateIntegrationTablePropertiesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateJobFromSourceControlRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateJobFromSourceControlResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateJobRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateJobResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateJsonClassifierRequest": {
       "base": "<p>Specifies a JSON classifier to be updated.</p>",
@@ -11019,113 +10790,97 @@
     },
     "UpdateMLTransformRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateMLTransformResponse": {
       "base": null,
+      "refs": {}
+    },
+    "UpdateOpenTableFormatInput": {
+      "base": "<p>Input parameters for updating open table format tables in GlueData Catalog, serving as a wrapper for format-specific update operations such as Apache Iceberg.</p>",
       "refs": {
+        "UpdateTableRequest$UpdateOpenTableFormatInput": null
       }
     },
     "UpdatePartitionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdatePartitionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateRegistryInput": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateRegistryResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateSchemaInput": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateSchemaResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateSourceControlFromJobRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateSourceControlFromJobResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateTableOptimizerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateTableOptimizerResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateTableRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateTableResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateTriggerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateTriggerResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateUsageProfileRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateUsageProfileResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateUserDefinedFunctionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateUserDefinedFunctionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateWorkflowRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateWorkflowResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateXMLClassifierRequest": {
       "base": "<p>Specifies an XML classifier to be updated.</p>",
@@ -11161,6 +10916,13 @@
         "StartExportLabelsTaskRunRequest$OutputS3Path": "<p>The Amazon S3 path where you export the labels.</p>",
         "StartImportLabelsTaskRunRequest$InputS3Path": "<p>The Amazon Simple Storage Service (Amazon S3) path from where you import the labels.</p>",
         "StartMLLabelingSetGenerationTaskRunRequest$OutputS3Path": "<p>The Amazon Simple Storage Service (Amazon S3) path where you generate the labeling set.</p>"
+      }
+    },
+    "UrlString": {
+      "base": null,
+      "refs": {
+        "ConnectionTypeBrief$LogoUrl": "<p>The URL of the logo associated with a connection type.</p>",
+        "ConnectionTypeVariant$LogoUrl": "<p>The URL of the logo associated with a connection type variant.</p>"
       }
     },
     "UsageProfileDefinition": {
@@ -11215,8 +10977,7 @@
     },
     "ValidationException": {
       "base": "<p>A value could not be validated.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ValueString": {
       "base": null,
@@ -11248,6 +11009,12 @@
         "UpdateColumnStatisticsForPartitionRequest$PartitionValues": "<p>A list of partition values identifying the partition.</p>"
       }
     },
+    "Vendor": {
+      "base": null,
+      "refs": {
+        "ConnectionTypeBrief$Vendor": "<p>The name of the vendor or provider that created or maintains this connection type.</p>"
+      }
+    },
     "VersionId": {
       "base": null,
       "refs": {
@@ -11277,8 +11044,7 @@
     },
     "VersionMismatchException": {
       "base": "<p>There was a version conflict.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "VersionString": {
       "base": null,

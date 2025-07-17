@@ -1409,6 +1409,16 @@ module Aws
                           ?table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS"),
                           ?deletion_protection_enabled: bool,
                           ?multi_region_consistency: ("EVENTUAL" | "STRONG"),
+                          ?global_table_witness_updates: Array[
+                            {
+                              create: {
+                                region_name: ::String
+                              }?,
+                              delete: {
+                                region_name: ::String
+                              }?
+                            },
+                          ],
                           ?on_demand_throughput: {
                             max_read_request_units: ::Integer?,
                             max_write_request_units: ::Integer?

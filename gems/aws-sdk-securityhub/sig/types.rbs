@@ -116,6 +116,11 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class AggregatorV2
+      attr_accessor aggregator_v2_arn: ::String
+      SENSITIVE: []
+    end
+
     class AssociatedStandard
       attr_accessor standards_id: ::String
       SENSITIVE: []
@@ -150,6 +155,18 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class AutomationRulesActionTypeObjectV2
+      attr_accessor type: ("FINDING_FIELDS_UPDATE" | "EXTERNAL_INTEGRATION")
+      SENSITIVE: []
+    end
+
+    class AutomationRulesActionV2
+      attr_accessor type: ("FINDING_FIELDS_UPDATE" | "EXTERNAL_INTEGRATION")
+      attr_accessor finding_fields_update: Types::AutomationRulesFindingFieldsUpdateV2
+      attr_accessor external_integration_configuration: Types::ExternalIntegrationConfiguration
+      SENSITIVE: []
+    end
+
     class AutomationRulesConfig
       attr_accessor rule_arn: ::String
       attr_accessor rule_status: ("ENABLED" | "DISABLED")
@@ -175,6 +192,13 @@ module Aws::SecurityHub
       attr_accessor user_defined_fields: ::Hash[::String, ::String]
       attr_accessor workflow: Types::WorkflowUpdate
       attr_accessor related_findings: ::Array[Types::RelatedFinding]
+      SENSITIVE: []
+    end
+
+    class AutomationRulesFindingFieldsUpdateV2
+      attr_accessor severity_id: ::Integer
+      attr_accessor comment: ::String
+      attr_accessor status_id: ::Integer
       SENSITIVE: []
     end
 
@@ -230,6 +254,19 @@ module Aws::SecurityHub
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor created_by: ::String
+      SENSITIVE: []
+    end
+
+    class AutomationRulesMetadataV2
+      attr_accessor rule_arn: ::String
+      attr_accessor rule_id: ::String
+      attr_accessor rule_order: ::Float
+      attr_accessor rule_name: ::String
+      attr_accessor rule_status: ("ENABLED" | "DISABLED")
+      attr_accessor description: ::String
+      attr_accessor actions: ::Array[Types::AutomationRulesActionTypeObjectV2]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -4771,6 +4808,35 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class BatchUpdateFindingsV2ProcessedFinding
+      attr_accessor finding_identifier: Types::OcsfFindingIdentifier
+      attr_accessor metadata_uid: ::String
+      SENSITIVE: []
+    end
+
+    class BatchUpdateFindingsV2Request
+      attr_accessor metadata_uids: ::Array[::String]
+      attr_accessor finding_identifiers: ::Array[Types::OcsfFindingIdentifier]
+      attr_accessor comment: ::String
+      attr_accessor severity_id: ::Integer
+      attr_accessor status_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchUpdateFindingsV2Response
+      attr_accessor processed_findings: ::Array[Types::BatchUpdateFindingsV2ProcessedFinding]
+      attr_accessor unprocessed_findings: ::Array[Types::BatchUpdateFindingsV2UnprocessedFinding]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateFindingsV2UnprocessedFinding
+      attr_accessor finding_identifier: Types::OcsfFindingIdentifier
+      attr_accessor metadata_uid: ::String
+      attr_accessor error_code: ("ResourceNotFoundException" | "ValidationException" | "InternalServerException" | "ConflictException")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
     class BatchUpdateStandardsControlAssociationsRequest
       attr_accessor standards_control_association_updates: ::Array[Types::StandardsControlAssociationUpdate]
       SENSITIVE: []
@@ -4852,6 +4918,16 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class CompositeFilter
+      attr_accessor string_filters: ::Array[Types::OcsfStringFilter]
+      attr_accessor date_filters: ::Array[Types::OcsfDateFilter]
+      attr_accessor boolean_filters: ::Array[Types::OcsfBooleanFilter]
+      attr_accessor number_filters: ::Array[Types::OcsfNumberFilter]
+      attr_accessor map_filters: ::Array[Types::OcsfMapFilter]
+      attr_accessor operator: ("AND" | "OR")
+      SENSITIVE: []
+    end
+
     class ConfigurationOptions
       attr_accessor integer: Types::IntegerConfigurationOptions
       attr_accessor integer_list: Types::IntegerListConfigurationOptions
@@ -4910,6 +4986,34 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectorRegistrationsV2Request
+      attr_accessor auth_code: ::String
+      attr_accessor auth_state: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectorRegistrationsV2Response
+      attr_accessor connector_arn: ::String
+      attr_accessor connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectorSummary
+      attr_accessor connector_arn: ::String
+      attr_accessor connector_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor provider_summary: Types::ProviderSummary
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
     class ContainerDetails
       attr_accessor container_runtime: ::String
       attr_accessor name: ::String
@@ -4939,6 +5043,22 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class CreateAggregatorV2Request
+      attr_accessor region_linking_mode: ::String
+      attr_accessor linked_regions: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAggregatorV2Response
+      attr_accessor aggregator_v2_arn: ::String
+      attr_accessor aggregation_region: ::String
+      attr_accessor region_linking_mode: ::String
+      attr_accessor linked_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class CreateAutomationRuleRequest
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor rule_status: ("ENABLED" | "DISABLED")
@@ -4953,6 +5073,24 @@ module Aws::SecurityHub
 
     class CreateAutomationRuleResponse
       attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAutomationRuleV2Request
+      attr_accessor rule_name: ::String
+      attr_accessor rule_status: ("ENABLED" | "DISABLED")
+      attr_accessor description: ::String
+      attr_accessor rule_order: ::Float
+      attr_accessor criteria: Types::Criteria
+      attr_accessor actions: ::Array[Types::AutomationRulesActionV2]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAutomationRuleV2Response
+      attr_accessor rule_arn: ::String
+      attr_accessor rule_id: ::String
       SENSITIVE: []
     end
 
@@ -4972,6 +5110,23 @@ module Aws::SecurityHub
       attr_accessor updated_at: ::Time
       attr_accessor created_at: ::Time
       attr_accessor configuration_policy: Types::Policy
+      SENSITIVE: []
+    end
+
+    class CreateConnectorV2Request
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor provider: Types::ProviderConfiguration
+      attr_accessor kms_key_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConnectorV2Response
+      attr_accessor connector_arn: ::String
+      attr_accessor connector_id: ::String
+      attr_accessor auth_url: ::String
       SENSITIVE: []
     end
 
@@ -5009,6 +5164,30 @@ module Aws::SecurityHub
     class CreateMembersResponse
       attr_accessor unprocessed_accounts: ::Array[Types::Result]
       SENSITIVE: []
+    end
+
+    class CreateTicketV2Request
+      attr_accessor connector_id: ::String
+      attr_accessor finding_metadata_uid: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTicketV2Response
+      attr_accessor ticket_id: ::String
+      attr_accessor ticket_src_url: ::String
+      SENSITIVE: []
+    end
+
+    class Criteria
+      attr_accessor ocsf_finding_criteria: Types::OcsfFindingFilters
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class OcsfFindingCriteria < Criteria
+      end
+      class Unknown < Criteria
+      end
     end
 
     class CustomDataIdentifiersDetections
@@ -5073,12 +5252,36 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class DeleteAggregatorV2Request
+      attr_accessor aggregator_v2_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAggregatorV2Response < Aws::EmptyStructure
+    end
+
+    class DeleteAutomationRuleV2Request
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAutomationRuleV2Response < Aws::EmptyStructure
+    end
+
     class DeleteConfigurationPolicyRequest
       attr_accessor identifier: ::String
       SENSITIVE: []
     end
 
     class DeleteConfigurationPolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteConnectorV2Request
+      attr_accessor connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectorV2Response < Aws::EmptyStructure
     end
 
     class DeleteFindingAggregatorRequest
@@ -5169,6 +5372,27 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class DescribeProductsV2Request
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeProductsV2Response
+      attr_accessor products_v2: ::Array[Types::ProductV2]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSecurityHubV2Request < Aws::EmptyStructure
+    end
+
+    class DescribeSecurityHubV2Response
+      attr_accessor hub_v2_arn: ::String
+      attr_accessor subscribed_at: ::String
+      SENSITIVE: []
+    end
+
     class DescribeStandardsControlsRequest
       attr_accessor standards_subscription_arn: ::String
       attr_accessor next_token: ::String
@@ -5209,6 +5433,7 @@ module Aws::SecurityHub
 
     class DisableOrganizationAdminAccountRequest
       attr_accessor admin_account_id: ::String
+      attr_accessor feature: ("SecurityHub" | "SecurityHubV2")
       SENSITIVE: []
     end
 
@@ -5219,6 +5444,12 @@ module Aws::SecurityHub
     end
 
     class DisableSecurityHubResponse < Aws::EmptyStructure
+    end
+
+    class DisableSecurityHubV2Request < Aws::EmptyStructure
+    end
+
+    class DisableSecurityHubV2Response < Aws::EmptyStructure
     end
 
     class DisassociateFromAdministratorAccountRequest < Aws::EmptyStructure
@@ -5267,10 +5498,14 @@ module Aws::SecurityHub
 
     class EnableOrganizationAdminAccountRequest
       attr_accessor admin_account_id: ::String
+      attr_accessor feature: ("SecurityHub" | "SecurityHubV2")
       SENSITIVE: []
     end
 
-    class EnableOrganizationAdminAccountResponse < Aws::EmptyStructure
+    class EnableOrganizationAdminAccountResponse
+      attr_accessor admin_account_id: ::String
+      attr_accessor feature: ("SecurityHub" | "SecurityHubV2")
+      SENSITIVE: []
     end
 
     class EnableSecurityHubRequest
@@ -5283,6 +5518,16 @@ module Aws::SecurityHub
     class EnableSecurityHubResponse < Aws::EmptyStructure
     end
 
+    class EnableSecurityHubV2Request
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class EnableSecurityHubV2Response
+      attr_accessor hub_v2_arn: ::String
+      SENSITIVE: []
+    end
+
     class EnumConfigurationOptions
       attr_accessor default_value: ::String
       attr_accessor allowed_values: ::Array[::String]
@@ -5293,6 +5538,11 @@ module Aws::SecurityHub
       attr_accessor default_value: ::Array[::String]
       attr_accessor max_items: ::Integer
       attr_accessor allowed_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ExternalIntegrationConfiguration
+      attr_accessor connector_arn: ::String
       SENSITIVE: []
     end
 
@@ -5394,6 +5644,38 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class GetAggregatorV2Request
+      attr_accessor aggregator_v2_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetAggregatorV2Response
+      attr_accessor aggregator_v2_arn: ::String
+      attr_accessor aggregation_region: ::String
+      attr_accessor region_linking_mode: ::String
+      attr_accessor linked_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetAutomationRuleV2Request
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetAutomationRuleV2Response
+      attr_accessor rule_arn: ::String
+      attr_accessor rule_id: ::String
+      attr_accessor rule_order: ::Float
+      attr_accessor rule_name: ::String
+      attr_accessor rule_status: ("ENABLED" | "DISABLED")
+      attr_accessor description: ::String
+      attr_accessor criteria: Types::Criteria
+      attr_accessor actions: ::Array[Types::AutomationRulesActionV2]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class GetConfigurationPolicyAssociationRequest
       attr_accessor target: Types::Target
       SENSITIVE: []
@@ -5423,6 +5705,24 @@ module Aws::SecurityHub
       attr_accessor updated_at: ::Time
       attr_accessor created_at: ::Time
       attr_accessor configuration_policy: Types::Policy
+      SENSITIVE: []
+    end
+
+    class GetConnectorV2Request
+      attr_accessor connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectorV2Response
+      attr_accessor connector_arn: ::String
+      attr_accessor connector_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor health: Types::HealthCheck
+      attr_accessor provider_detail: Types::ProviderDetail
       SENSITIVE: []
     end
 
@@ -5467,6 +5767,18 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class GetFindingStatisticsV2Request
+      attr_accessor group_by_rules: ::Array[Types::GroupByRule]
+      attr_accessor sort_order: ("asc" | "desc")
+      attr_accessor max_statistic_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetFindingStatisticsV2Response
+      attr_accessor group_by_results: ::Array[Types::GroupByResult]
+      SENSITIVE: []
+    end
+
     class GetFindingsRequest
       attr_accessor filters: Types::AwsSecurityFindingFilters
       attr_accessor sort_criteria: ::Array[Types::SortCriterion]
@@ -5477,6 +5789,20 @@ module Aws::SecurityHub
 
     class GetFindingsResponse
       attr_accessor findings: ::Array[Types::AwsSecurityFinding]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetFindingsV2Request
+      attr_accessor filters: Types::OcsfFindingFilters
+      attr_accessor sort_criteria: ::Array[Types::SortCriterion]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetFindingsV2Response
+      attr_accessor findings: ::Array[untyped]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -5531,6 +5857,32 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class GetResourcesStatisticsV2Request
+      attr_accessor group_by_rules: ::Array[Types::ResourceGroupByRule]
+      attr_accessor sort_order: ("asc" | "desc")
+      attr_accessor max_statistic_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetResourcesStatisticsV2Response
+      attr_accessor group_by_results: ::Array[Types::GroupByResult]
+      SENSITIVE: []
+    end
+
+    class GetResourcesV2Request
+      attr_accessor filters: Types::ResourcesFilters
+      attr_accessor sort_criteria: ::Array[Types::SortCriterion]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetResourcesV2Response
+      attr_accessor resources: ::Array[Types::ResourceResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class GetSecurityControlDefinitionRequest
       attr_accessor security_control_id: ::String
       SENSITIVE: []
@@ -5538,6 +5890,31 @@ module Aws::SecurityHub
 
     class GetSecurityControlDefinitionResponse
       attr_accessor security_control_definition: Types::SecurityControlDefinition
+      SENSITIVE: []
+    end
+
+    class GroupByResult
+      attr_accessor group_by_field: ::String
+      attr_accessor group_by_values: ::Array[Types::GroupByValue]
+      SENSITIVE: []
+    end
+
+    class GroupByRule
+      attr_accessor filters: Types::OcsfFindingFilters
+      attr_accessor group_by_field: ("activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.name" | "compliance.status" | "compliance.control" | "finding_info.title" | "finding_info.types" | "metadata.product.name" | "metadata.product.uid" | "resources.type" | "resources.uid" | "severity" | "status" | "vulnerabilities.fix_coverage" | "class_name")
+      SENSITIVE: []
+    end
+
+    class GroupByValue
+      attr_accessor field_value: ::String
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
+    class HealthCheck
+      attr_accessor connector_status: ("CONNECTED" | "FAILED_TO_CONNECT" | "PENDING_CONFIGURATION" | "PENDING_AUTHORIZATION")
+      attr_accessor message: ::String
+      attr_accessor last_checked_at: ::Time
       SENSITIVE: []
     end
 
@@ -5604,6 +5981,12 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
     class InvalidAccessException
       attr_accessor message: ::String
       attr_accessor code: ::String
@@ -5654,6 +6037,25 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class JiraCloudDetail
+      attr_accessor cloud_id: ::String
+      attr_accessor project_key: ::String
+      attr_accessor domain: ::String
+      attr_accessor auth_url: ::String
+      attr_accessor auth_status: ("ACTIVE" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class JiraCloudProviderConfiguration
+      attr_accessor project_key: ::String
+      SENSITIVE: []
+    end
+
+    class JiraCloudUpdateConfiguration
+      attr_accessor project_key: ::String
+      SENSITIVE: []
+    end
+
     class KeywordFilter
       attr_accessor value: ::String
       SENSITIVE: []
@@ -5665,6 +6067,18 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class ListAggregatorsV2Request
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAggregatorsV2Response
+      attr_accessor aggregators_v2: ::Array[Types::AggregatorV2]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListAutomationRulesRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -5673,6 +6087,18 @@ module Aws::SecurityHub
 
     class ListAutomationRulesResponse
       attr_accessor automation_rules_metadata: ::Array[Types::AutomationRulesMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAutomationRulesV2Request
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAutomationRulesV2Response
+      attr_accessor rules: ::Array[Types::AutomationRulesMetadataV2]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -5699,6 +6125,20 @@ module Aws::SecurityHub
     class ListConfigurationPolicyAssociationsResponse
       attr_accessor configuration_policy_association_summaries: ::Array[Types::ConfigurationPolicyAssociationSummary]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectorsV2Request
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor provider_name: ("JIRA_CLOUD" | "SERVICENOW")
+      attr_accessor connector_status: ("CONNECTED" | "FAILED_TO_CONNECT" | "PENDING_CONFIGURATION" | "PENDING_AUTHORIZATION")
+      SENSITIVE: []
+    end
+
+    class ListConnectorsV2Response
+      attr_accessor next_token: ::String
+      attr_accessor connectors: ::Array[Types::ConnectorSummary]
       SENSITIVE: []
     end
 
@@ -5754,12 +6194,14 @@ module Aws::SecurityHub
     class ListOrganizationAdminAccountsRequest
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor feature: ("SecurityHub" | "SecurityHubV2")
       SENSITIVE: []
     end
 
     class ListOrganizationAdminAccountsResponse
       attr_accessor admin_accounts: ::Array[Types::AdminAccount]
       attr_accessor next_token: ::String
+      attr_accessor feature: ("SecurityHub" | "SecurityHubV2")
       SENSITIVE: []
     end
 
@@ -5939,6 +6381,49 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class OcsfBooleanFilter
+      attr_accessor field_name: ("compliance.assessments.meets_criteria" | "vulnerabilities.is_exploit_available" | "vulnerabilities.is_fix_available")
+      attr_accessor filter: Types::BooleanFilter
+      SENSITIVE: []
+    end
+
+    class OcsfDateFilter
+      attr_accessor field_name: ("finding_info.created_time_dt" | "finding_info.first_seen_time_dt" | "finding_info.last_seen_time_dt" | "finding_info.modified_time_dt")
+      attr_accessor filter: Types::DateFilter
+      SENSITIVE: []
+    end
+
+    class OcsfFindingFilters
+      attr_accessor composite_filters: ::Array[Types::CompositeFilter]
+      attr_accessor composite_operator: ("AND" | "OR")
+      SENSITIVE: []
+    end
+
+    class OcsfFindingIdentifier
+      attr_accessor cloud_account_uid: ::String
+      attr_accessor finding_info_uid: ::String
+      attr_accessor metadata_product_uid: ::String
+      SENSITIVE: []
+    end
+
+    class OcsfMapFilter
+      attr_accessor field_name: ("resources.tags")
+      attr_accessor filter: Types::MapFilter
+      SENSITIVE: []
+    end
+
+    class OcsfNumberFilter
+      attr_accessor field_name: ("activity_id" | "compliance.status_id" | "confidence_score" | "severity_id" | "status_id" | "finding_info.related_events_count")
+      attr_accessor filter: Types::NumberFilter
+      SENSITIVE: []
+    end
+
+    class OcsfStringFilter
+      attr_accessor field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name")
+      attr_accessor filter: Types::StringFilter
+      SENSITIVE: []
+    end
+
     class OrganizationConfiguration
       attr_accessor configuration_type: ("CENTRAL" | "LOCAL")
       attr_accessor status: ("PENDING" | "ENABLED" | "FAILED")
@@ -6071,9 +6556,65 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class ProductV2
+      attr_accessor product_v2_name: ::String
+      attr_accessor company_name: ::String
+      attr_accessor description: ::String
+      attr_accessor categories: ::Array[::String]
+      attr_accessor integration_v2_types: ::Array[("SEND_FINDINGS_TO_SECURITY_HUB" | "RECEIVE_FINDINGS_FROM_SECURITY_HUB" | "UPDATE_FINDINGS_IN_SECURITY_HUB")]
+      attr_accessor marketplace_url: ::String
+      attr_accessor activation_url: ::String
+      SENSITIVE: []
+    end
+
     class PropagatingVgwSetDetails
       attr_accessor gateway_id: ::String
       SENSITIVE: []
+    end
+
+    class ProviderConfiguration
+      attr_accessor jira_cloud: Types::JiraCloudProviderConfiguration
+      attr_accessor service_now: Types::ServiceNowProviderConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class JiraCloud < ProviderConfiguration
+      end
+      class ServiceNow < ProviderConfiguration
+      end
+      class Unknown < ProviderConfiguration
+      end
+    end
+
+    class ProviderDetail
+      attr_accessor jira_cloud: Types::JiraCloudDetail
+      attr_accessor service_now: Types::ServiceNowDetail
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class JiraCloud < ProviderDetail
+      end
+      class ServiceNow < ProviderDetail
+      end
+      class Unknown < ProviderDetail
+      end
+    end
+
+    class ProviderSummary
+      attr_accessor provider_name: ("JIRA_CLOUD" | "SERVICENOW")
+      attr_accessor connector_status: ("CONNECTED" | "FAILED_TO_CONNECT" | "PENDING_CONFIGURATION" | "PENDING_AUTHORIZATION")
+      SENSITIVE: []
+    end
+
+    class ProviderUpdateConfiguration
+      attr_accessor jira_cloud: Types::JiraCloudUpdateConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class JiraCloud < ProviderUpdateConfiguration
+      end
+      class Unknown < ProviderUpdateConfiguration
+      end
     end
 
     class Range
@@ -6229,6 +6770,20 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class ResourceFindingsSummary
+      attr_accessor finding_type: ::String
+      attr_accessor product_name: ::String
+      attr_accessor total_findings: ::Integer
+      attr_accessor severities: Types::ResourceSeverityBreakdown
+      SENSITIVE: []
+    end
+
+    class ResourceGroupByRule
+      attr_accessor group_by_field: ("account_id" | "region" | "resource_category" | "resource_type" | "resource_name" | "findings_summary.finding_type")
+      attr_accessor filters: Types::ResourcesFilters
+      SENSITIVE: []
+    end
+
     class ResourceInUseException
       attr_accessor message: ::String
       attr_accessor code: ::String
@@ -6238,6 +6793,79 @@ module Aws::SecurityHub
     class ResourceNotFoundException
       attr_accessor message: ::String
       attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceResult
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor region: ::String
+      attr_accessor resource_category: ("Compute" | "Database" | "Storage" | "Code" | "AI/ML" | "Identity" | "Network" | "Other")
+      attr_accessor resource_type: ::String
+      attr_accessor resource_name: ::String
+      attr_accessor resource_creation_time_dt: ::String
+      attr_accessor resource_detail_capture_time_dt: ::String
+      attr_accessor findings_summary: ::Array[Types::ResourceFindingsSummary]
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      attr_accessor resource_config: untyped
+      SENSITIVE: []
+    end
+
+    class ResourceSeverityBreakdown
+      attr_accessor other: ::Integer
+      attr_accessor fatal: ::Integer
+      attr_accessor critical: ::Integer
+      attr_accessor high: ::Integer
+      attr_accessor medium: ::Integer
+      attr_accessor low: ::Integer
+      attr_accessor informational: ::Integer
+      attr_accessor unknown: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceTag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ResourcesCompositeFilter
+      attr_accessor string_filters: ::Array[Types::ResourcesStringFilter]
+      attr_accessor date_filters: ::Array[Types::ResourcesDateFilter]
+      attr_accessor number_filters: ::Array[Types::ResourcesNumberFilter]
+      attr_accessor map_filters: ::Array[Types::ResourcesMapFilter]
+      attr_accessor operator: ("AND" | "OR")
+      SENSITIVE: []
+    end
+
+    class ResourcesDateFilter
+      attr_accessor field_name: ("resource_detail_capture_time_dt" | "resource_creation_time_dt")
+      attr_accessor filter: Types::DateFilter
+      SENSITIVE: []
+    end
+
+    class ResourcesFilters
+      attr_accessor composite_filters: ::Array[Types::ResourcesCompositeFilter]
+      attr_accessor composite_operator: ("AND" | "OR")
+      SENSITIVE: []
+    end
+
+    class ResourcesMapFilter
+      attr_accessor field_name: ("tags")
+      attr_accessor filter: Types::MapFilter
+      SENSITIVE: []
+    end
+
+    class ResourcesNumberFilter
+      attr_accessor field_name: ("findings_summary.total_findings" | "findings_summary.severities.other" | "findings_summary.severities.fatal" | "findings_summary.severities.critical" | "findings_summary.severities.high" | "findings_summary.severities.medium" | "findings_summary.severities.low" | "findings_summary.severities.informational" | "findings_summary.severities.unknown")
+      attr_accessor filter: Types::NumberFilter
+      SENSITIVE: []
+    end
+
+    class ResourcesStringFilter
+      attr_accessor field_name: ("resource_arn" | "resource_id" | "account_id" | "region" | "resource_category" | "resource_type" | "resource_name" | "findings_summary.finding_type" | "findings_summary.product_name")
+      attr_accessor filter: Types::StringFilter
       SENSITIVE: []
     end
 
@@ -6464,6 +7092,20 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class ServiceNowDetail
+      attr_accessor instance_name: ::String
+      attr_accessor client_id: ::String
+      attr_accessor auth_status: ("ACTIVE" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ServiceNowProviderConfiguration
+      attr_accessor instance_name: ::String
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      SENSITIVE: [:client_secret]
+    end
+
     class Severity
       attr_accessor product: ::Float
       attr_accessor label: ("INFORMATIONAL" | "LOW" | "MEDIUM" | "HIGH" | "CRITICAL")
@@ -6666,7 +7308,7 @@ module Aws::SecurityHub
 
     class StringFilter
       attr_accessor value: ::String
-      attr_accessor comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS")
+      attr_accessor comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")
       SENSITIVE: []
     end
 
@@ -6719,6 +7361,12 @@ module Aws::SecurityHub
       attr_accessor last_observed_at: ::String
       attr_accessor source: ::String
       attr_accessor source_url: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor code: ::String
       SENSITIVE: []
     end
 
@@ -6776,6 +7424,35 @@ module Aws::SecurityHub
     class UpdateActionTargetResponse < Aws::EmptyStructure
     end
 
+    class UpdateAggregatorV2Request
+      attr_accessor aggregator_v2_arn: ::String
+      attr_accessor region_linking_mode: ::String
+      attr_accessor linked_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateAggregatorV2Response
+      attr_accessor aggregator_v2_arn: ::String
+      attr_accessor aggregation_region: ::String
+      attr_accessor region_linking_mode: ::String
+      attr_accessor linked_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateAutomationRuleV2Request
+      attr_accessor identifier: ::String
+      attr_accessor rule_status: ("ENABLED" | "DISABLED")
+      attr_accessor rule_order: ::Float
+      attr_accessor description: ::String
+      attr_accessor rule_name: ::String
+      attr_accessor criteria: Types::Criteria
+      attr_accessor actions: ::Array[Types::AutomationRulesActionV2]
+      SENSITIVE: []
+    end
+
+    class UpdateAutomationRuleV2Response < Aws::EmptyStructure
+    end
+
     class UpdateAutomationRulesRequestItem
       attr_accessor rule_arn: ::String
       attr_accessor rule_status: ("ENABLED" | "DISABLED")
@@ -6806,6 +7483,17 @@ module Aws::SecurityHub
       attr_accessor created_at: ::Time
       attr_accessor configuration_policy: Types::Policy
       SENSITIVE: []
+    end
+
+    class UpdateConnectorV2Request
+      attr_accessor connector_id: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor description: ::String
+      attr_accessor provider: Types::ProviderUpdateConfiguration
+      SENSITIVE: [:client_secret]
+    end
+
+    class UpdateConnectorV2Response < Aws::EmptyStructure
     end
 
     class UpdateFindingAggregatorRequest
@@ -6886,6 +7574,12 @@ module Aws::SecurityHub
     class UserAccount
       attr_accessor uid: ::String
       attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor code: ::String
       SENSITIVE: []
     end
 

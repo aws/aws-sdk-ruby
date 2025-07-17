@@ -378,6 +378,24 @@ module Aws
                                    before_value: ::String?
                                  }?
                                }?
+                             }?,
+                             machine_learning_product_filters: {
+                               entity_id: {
+                                 value_list: Array[::String]?
+                               }?,
+                               last_modified_date: {
+                                 date_range: {
+                                   after_value: ::String?,
+                                   before_value: ::String?
+                                 }?
+                               }?,
+                               product_title: {
+                                 value_list: Array[::String]?,
+                                 wild_card_value: ::String?
+                               }?,
+                               visibility: {
+                                 value_list: Array[("Limited" | "Public" | "Restricted" | "Draft")]?
+                               }?
                              }?
                            },
                            ?entity_type_sort: {
@@ -403,6 +421,10 @@ module Aws
                              }?,
                              resale_authorization_sort: {
                                sort_by: ("EntityId" | "Name" | "ProductId" | "ProductName" | "ManufacturerAccountId" | "ManufacturerLegalName" | "ResellerAccountID" | "ResellerLegalName" | "Status" | "OfferExtendedStatus" | "CreatedDate" | "AvailabilityEndDate" | "LastModifiedDate")?,
+                               sort_order: ("ASCENDING" | "DESCENDING")?
+                             }?,
+                             machine_learning_product_sort: {
+                               sort_by: ("EntityId" | "LastModifiedDate" | "ProductTitle" | "Visibility")?,
                                sort_order: ("ASCENDING" | "DESCENDING")?
                              }?
                            }

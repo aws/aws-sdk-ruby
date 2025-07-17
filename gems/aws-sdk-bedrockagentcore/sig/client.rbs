@@ -1,0 +1,515 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module BedrockAgentCore
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?event_stream_handler: Proc,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?input_event_stream_handler: Proc,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?output_event_stream_handler: Proc,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventOutput]
+        def event: () -> Types::Event
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#create_event-instance_method
+      def create_event: (
+                          memory_id: ::String,
+                          actor_id: ::String,
+                          ?session_id: ::String,
+                          event_timestamp: ::Time,
+                          payload: Array[
+                            {
+                              conversational: {
+                                content: {
+                                  text: ::String?
+                                },
+                                role: ("ASSISTANT" | "USER" | "TOOL" | "OTHER")
+                              }?,
+                              blob: {
+                              }?
+                            },
+                          ],
+                          ?branch: {
+                            root_event_id: ::String?,
+                            name: ::String
+                          },
+                          ?client_token: ::String
+                        ) -> _CreateEventResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventResponseSuccess
+
+      interface _DeleteEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEventOutput]
+        def event_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#delete_event-instance_method
+      def delete_event: (
+                          memory_id: ::String,
+                          session_id: ::String,
+                          event_id: ::String,
+                          actor_id: ::String
+                        ) -> _DeleteEventResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEventResponseSuccess
+
+      interface _DeleteMemoryRecordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMemoryRecordOutput]
+        def memory_record_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#delete_memory_record-instance_method
+      def delete_memory_record: (
+                                  memory_id: ::String,
+                                  memory_record_id: ::String
+                                ) -> _DeleteMemoryRecordResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMemoryRecordResponseSuccess
+
+      interface _GetBrowserSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBrowserSessionResponse]
+        def browser_identifier: () -> ::String
+        def session_id: () -> ::String
+        def name: () -> ::String
+        def created_at: () -> ::Time
+        def view_port: () -> Types::ViewPort
+        def session_timeout_seconds: () -> ::Integer
+        def status: () -> ("READY" | "TERMINATED")
+        def streams: () -> Types::BrowserSessionStream
+        def session_replay_artifact: () -> ::String
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_browser_session-instance_method
+      def get_browser_session: (
+                                 browser_identifier: ::String,
+                                 session_id: ::String
+                               ) -> _GetBrowserSessionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBrowserSessionResponseSuccess
+
+      interface _GetCodeInterpreterSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCodeInterpreterSessionResponse]
+        def code_interpreter_identifier: () -> ::String
+        def session_id: () -> ::String
+        def name: () -> ::String
+        def created_at: () -> ::Time
+        def session_timeout_seconds: () -> ::Integer
+        def status: () -> ("READY" | "TERMINATED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_code_interpreter_session-instance_method
+      def get_code_interpreter_session: (
+                                          code_interpreter_identifier: ::String,
+                                          session_id: ::String
+                                        ) -> _GetCodeInterpreterSessionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCodeInterpreterSessionResponseSuccess
+
+      interface _GetEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEventOutput]
+        def event: () -> Types::Event
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_event-instance_method
+      def get_event: (
+                       memory_id: ::String,
+                       session_id: ::String,
+                       actor_id: ::String,
+                       event_id: ::String
+                     ) -> _GetEventResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventResponseSuccess
+
+      interface _GetMemoryRecordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMemoryRecordOutput]
+        def memory_record: () -> Types::MemoryRecord
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_memory_record-instance_method
+      def get_memory_record: (
+                               memory_id: ::String,
+                               memory_record_id: ::String
+                             ) -> _GetMemoryRecordResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMemoryRecordResponseSuccess
+
+      interface _GetResourceApiKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceApiKeyResponse]
+        def api_key: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_resource_api_key-instance_method
+      def get_resource_api_key: (
+                                  workload_identity_token: ::String,
+                                  resource_credential_provider_name: ::String
+                                ) -> _GetResourceApiKeyResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceApiKeyResponseSuccess
+
+      interface _GetResourceOauth2TokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceOauth2TokenResponse]
+        def authorization_url: () -> ::String
+        def access_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_resource_oauth_2_token-instance_method
+      def get_resource_oauth_2_token: (
+                                        workload_identity_token: ::String,
+                                        ?user_id: ::String,
+                                        resource_credential_provider_name: ::String,
+                                        scopes: Array[::String],
+                                        oauth2_flow: ("USER_FEDERATION" | "M2M"),
+                                        ?resource_oauth_2_return_url: ::String,
+                                        ?force_authentication: bool,
+                                        ?custom_parameters: Hash[::String, ::String]
+                                      ) -> _GetResourceOauth2TokenResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceOauth2TokenResponseSuccess
+
+      interface _GetWorkloadAccessTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkloadAccessTokenResponse]
+        def workload_access_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_workload_access_token-instance_method
+      def get_workload_access_token: (
+                                       workload_name: ::String
+                                     ) -> _GetWorkloadAccessTokenResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkloadAccessTokenResponseSuccess
+
+      interface _GetWorkloadAccessTokenForJWTResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkloadAccessTokenForJWTResponse]
+        def workload_access_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_workload_access_token_for_jwt-instance_method
+      def get_workload_access_token_for_jwt: (
+                                               workload_name: ::String,
+                                               user_token: ::String
+                                             ) -> _GetWorkloadAccessTokenForJWTResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkloadAccessTokenForJWTResponseSuccess
+
+      interface _GetWorkloadAccessTokenForUserIdResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkloadAccessTokenForUserIdResponse]
+        def workload_access_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_workload_access_token_for_user_id-instance_method
+      def get_workload_access_token_for_user_id: (
+                                                   workload_name: ::String,
+                                                   user_id: ::String
+                                                 ) -> _GetWorkloadAccessTokenForUserIdResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkloadAccessTokenForUserIdResponseSuccess
+
+      interface _InvokeAgentRuntimeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeAgentRuntimeResponse]
+        def runtime_session_id: () -> ::String
+        def mcp_session_id: () -> ::String
+        def mcp_protocol_version: () -> ::String
+        def trace_id: () -> ::String
+        def trace_parent: () -> ::String
+        def trace_state: () -> ::String
+        def baggage: () -> ::String
+        def content_type: () -> ::String
+        def response: () -> ::IO
+        def status_code: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#invoke_agent_runtime-instance_method
+      def invoke_agent_runtime: (
+                                  ?content_type: ::String,
+                                  ?accept: ::String,
+                                  ?mcp_session_id: ::String,
+                                  ?runtime_session_id: ::String,
+                                  ?mcp_protocol_version: ::String,
+                                  ?runtime_user_id: ::String,
+                                  ?trace_id: ::String,
+                                  ?trace_parent: ::String,
+                                  ?trace_state: ::String,
+                                  ?baggage: ::String,
+                                  agent_runtime_arn: ::String,
+                                  ?qualifier: ::String,
+                                  payload: ::String
+                                ) ?{ (*untyped) -> void } -> _InvokeAgentRuntimeResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeAgentRuntimeResponseSuccess
+
+      interface _InvokeCodeInterpreterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeCodeInterpreterResponse]
+        def session_id: () -> ::String
+        def stream: () -> Types::CodeInterpreterStreamOutput
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#invoke_code_interpreter-instance_method
+      def invoke_code_interpreter: (
+                                     code_interpreter_identifier: ::String,
+                                     ?session_id: ::String,
+                                     name: ("executeCode" | "executeCommand" | "readFiles" | "listFiles" | "removeFiles" | "writeFiles" | "startCommandExecution" | "getTask" | "stopTask"),
+                                     ?arguments: {
+                                       code: ::String?,
+                                       language: ("python" | "javascript" | "typescript")?,
+                                       clear_context: bool?,
+                                       command: ::String?,
+                                       path: ::String?,
+                                       paths: Array[::String]?,
+                                       content: Array[
+                                         {
+                                           path: ::String,
+                                           text: ::String?,
+                                           blob: ::String?
+                                         },
+                                       ]?,
+                                       directory_path: ::String?,
+                                       task_id: ::String?
+                                     }
+                                   ) ?{ (*untyped) -> void } -> _InvokeCodeInterpreterResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeCodeInterpreterResponseSuccess
+
+      interface _ListActorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListActorsOutput]
+        def actor_summaries: () -> ::Array[Types::ActorSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#list_actors-instance_method
+      def list_actors: (
+                         memory_id: ::String,
+                         ?max_results: ::Integer,
+                         ?next_token: ::String
+                       ) -> _ListActorsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListActorsResponseSuccess
+
+      interface _ListBrowserSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBrowserSessionsResponse]
+        def items: () -> ::Array[Types::BrowserSessionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#list_browser_sessions-instance_method
+      def list_browser_sessions: (
+                                   browser_identifier: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   ?status: ("READY" | "TERMINATED")
+                                 ) -> _ListBrowserSessionsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBrowserSessionsResponseSuccess
+
+      interface _ListCodeInterpreterSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCodeInterpreterSessionsResponse]
+        def items: () -> ::Array[Types::CodeInterpreterSessionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#list_code_interpreter_sessions-instance_method
+      def list_code_interpreter_sessions: (
+                                            code_interpreter_identifier: ::String,
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String,
+                                            ?status: ("READY" | "TERMINATED")
+                                          ) -> _ListCodeInterpreterSessionsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCodeInterpreterSessionsResponseSuccess
+
+      interface _ListEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventsOutput]
+        def events: () -> ::Array[Types::Event]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#list_events-instance_method
+      def list_events: (
+                         memory_id: ::String,
+                         session_id: ::String,
+                         actor_id: ::String,
+                         ?include_payloads: bool,
+                         ?filter: {
+                           branch: {
+                             name: ::String,
+                             include_parent_branches: bool?
+                           }?
+                         },
+                         ?max_results: ::Integer,
+                         ?next_token: ::String
+                       ) -> _ListEventsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventsResponseSuccess
+
+      interface _ListMemoryRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMemoryRecordsOutput]
+        def memory_record_summaries: () -> ::Array[Types::MemoryRecordSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#list_memory_records-instance_method
+      def list_memory_records: (
+                                 memory_id: ::String,
+                                 namespace: ::String,
+                                 ?memory_strategy_id: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListMemoryRecordsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMemoryRecordsResponseSuccess
+
+      interface _ListSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSessionsOutput]
+        def session_summaries: () -> ::Array[Types::SessionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#list_sessions-instance_method
+      def list_sessions: (
+                           memory_id: ::String,
+                           actor_id: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListSessionsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSessionsResponseSuccess
+
+      interface _RetrieveMemoryRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RetrieveMemoryRecordsOutput]
+        def memory_record_summaries: () -> ::Array[Types::MemoryRecordSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#retrieve_memory_records-instance_method
+      def retrieve_memory_records: (
+                                     memory_id: ::String,
+                                     namespace: ::String,
+                                     search_criteria: {
+                                       search_query: ::String,
+                                       memory_strategy_id: ::String?,
+                                       top_k: ::Integer?
+                                     },
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _RetrieveMemoryRecordsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RetrieveMemoryRecordsResponseSuccess
+
+      interface _StartBrowserSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartBrowserSessionResponse]
+        def browser_identifier: () -> ::String
+        def session_id: () -> ::String
+        def created_at: () -> ::Time
+        def streams: () -> Types::BrowserSessionStream
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#start_browser_session-instance_method
+      def start_browser_session: (
+                                   browser_identifier: ::String,
+                                   ?name: ::String,
+                                   ?session_timeout_seconds: ::Integer,
+                                   ?view_port: {
+                                     width: ::Integer,
+                                     height: ::Integer
+                                   },
+                                   ?client_token: ::String
+                                 ) -> _StartBrowserSessionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartBrowserSessionResponseSuccess
+
+      interface _StartCodeInterpreterSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartCodeInterpreterSessionResponse]
+        def code_interpreter_identifier: () -> ::String
+        def session_id: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#start_code_interpreter_session-instance_method
+      def start_code_interpreter_session: (
+                                            code_interpreter_identifier: ::String,
+                                            ?name: ::String,
+                                            ?session_timeout_seconds: ::Integer,
+                                            ?client_token: ::String
+                                          ) -> _StartCodeInterpreterSessionResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCodeInterpreterSessionResponseSuccess
+
+      interface _StopBrowserSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopBrowserSessionResponse]
+        def browser_identifier: () -> ::String
+        def session_id: () -> ::String
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#stop_browser_session-instance_method
+      def stop_browser_session: (
+                                  browser_identifier: ::String,
+                                  session_id: ::String,
+                                  ?client_token: ::String
+                                ) -> _StopBrowserSessionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopBrowserSessionResponseSuccess
+
+      interface _StopCodeInterpreterSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopCodeInterpreterSessionResponse]
+        def code_interpreter_identifier: () -> ::String
+        def session_id: () -> ::String
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#stop_code_interpreter_session-instance_method
+      def stop_code_interpreter_session: (
+                                           code_interpreter_identifier: ::String,
+                                           session_id: ::String,
+                                           ?client_token: ::String
+                                         ) -> _StopCodeInterpreterSessionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopCodeInterpreterSessionResponseSuccess
+
+      interface _UpdateBrowserStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBrowserStreamResponse]
+        def browser_identifier: () -> ::String
+        def session_id: () -> ::String
+        def streams: () -> Types::BrowserSessionStream
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#update_browser_stream-instance_method
+      def update_browser_stream: (
+                                   browser_identifier: ::String,
+                                   session_id: ::String,
+                                   stream_update: {
+                                     automation_stream_update: {
+                                       stream_status: ("ENABLED" | "DISABLED")?
+                                     }?
+                                   },
+                                   ?client_token: ::String
+                                 ) -> _UpdateBrowserStreamResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBrowserStreamResponseSuccess
+    end
+  end
+end
+

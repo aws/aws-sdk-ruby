@@ -1224,7 +1224,7 @@ module Aws::AutoScaling
     #                 min: 1, # required
     #                 max: 1,
     #               },
-    #               cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #               cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services, apple
     #               memory_gi_b_per_v_cpu: {
     #                 min: 1.0,
     #                 max: 1.0,
@@ -1404,8 +1404,7 @@ module Aws::AutoScaling
     #   The name of an existing placement group into which to launch your
     #   instances. To remove the placement group setting, pass an empty string
     #   for `placement-group`. For more information about placement groups,
-    #   see [Placement groups][1] in the *Amazon EC2 User Guide for Linux
-    #   Instances*.
+    #   see [Placement groups][1] in the *Amazon EC2 User Guide*.
     #
     #   <note markdown="1"> A *cluster* placement group is a logical grouping of instances within
     #   a single Availability Zone. You cannot specify multiple Availability

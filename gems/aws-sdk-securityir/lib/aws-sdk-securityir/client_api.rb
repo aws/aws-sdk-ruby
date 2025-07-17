@@ -206,14 +206,14 @@ module Aws::SecurityIR
     ConflictException.struct_class = Types::ConflictException
 
     CreateCaseCommentRequest.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, required: true, location: "uri", location_name: "caseId"))
-    CreateCaseCommentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateCaseCommentRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateCaseCommentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateCaseCommentRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateCaseCommentRequest.add_member(:body, Shapes::ShapeRef.new(shape: CommentBody, required: true, location_name: "body"))
     CreateCaseCommentRequest.struct_class = Types::CreateCaseCommentRequest
 
     CreateCaseCommentResponse.add_member(:comment_id, Shapes::ShapeRef.new(shape: CommentId, required: true, location_name: "commentId"))
     CreateCaseCommentResponse.struct_class = Types::CreateCaseCommentResponse
 
-    CreateCaseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateCaseRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateCaseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateCaseRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateCaseRequest.add_member(:resolver_type, Shapes::ShapeRef.new(shape: ResolverType, required: true, location_name: "resolverType"))
     CreateCaseRequest.add_member(:title, Shapes::ShapeRef.new(shape: CaseTitle, required: true, location_name: "title"))
     CreateCaseRequest.add_member(:description, Shapes::ShapeRef.new(shape: CaseDescription, required: true, location_name: "description"))
@@ -230,7 +230,7 @@ module Aws::SecurityIR
     CreateCaseResponse.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, required: true, location_name: "caseId"))
     CreateCaseResponse.struct_class = Types::CreateCaseResponse
 
-    CreateMembershipRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateMembershipRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateMembershipRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateMembershipRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateMembershipRequest.add_member(:membership_name, Shapes::ShapeRef.new(shape: MembershipName, required: true, location_name: "membershipName"))
     CreateMembershipRequest.add_member(:incident_response_team, Shapes::ShapeRef.new(shape: IncidentResponseTeam, required: true, location_name: "incidentResponseTeam"))
     CreateMembershipRequest.add_member(:opt_in_features, Shapes::ShapeRef.new(shape: OptInFeatures, location_name: "optInFeatures"))
@@ -250,7 +250,7 @@ module Aws::SecurityIR
     GetCaseAttachmentUploadUrlRequest.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, required: true, location: "uri", location_name: "caseId"))
     GetCaseAttachmentUploadUrlRequest.add_member(:file_name, Shapes::ShapeRef.new(shape: FileName, required: true, location_name: "fileName"))
     GetCaseAttachmentUploadUrlRequest.add_member(:content_length, Shapes::ShapeRef.new(shape: ContentLength, required: true, location_name: "contentLength"))
-    GetCaseAttachmentUploadUrlRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: GetCaseAttachmentUploadUrlRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    GetCaseAttachmentUploadUrlRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: GetCaseAttachmentUploadUrlRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     GetCaseAttachmentUploadUrlRequest.struct_class = Types::GetCaseAttachmentUploadUrlRequest
 
     GetCaseAttachmentUploadUrlResponse.add_member(:attachment_presigned_url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "attachmentPresignedUrl"))
@@ -559,9 +559,9 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
       end)
 
@@ -576,9 +576,9 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
       end)
 
@@ -593,9 +593,9 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
       end)
 
@@ -610,9 +610,9 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
       end)
 
@@ -627,9 +627,9 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
       end)
 
@@ -644,9 +644,9 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
       end)
 
@@ -661,9 +661,9 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
       end)
 
@@ -678,9 +678,9 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
       end)
 
@@ -695,9 +695,9 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
       end)
 
@@ -712,9 +712,9 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
       end)
 
@@ -729,9 +729,9 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -752,9 +752,9 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -775,9 +775,9 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -798,9 +798,9 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -822,8 +822,8 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
       end)
 
@@ -839,8 +839,8 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
       end)
 
@@ -856,8 +856,8 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
       end)
 
@@ -872,9 +872,9 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
       end)
 
@@ -889,9 +889,9 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
       end)
 
@@ -906,9 +906,9 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
       end)
 
@@ -923,9 +923,9 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
       end)
 
@@ -940,9 +940,9 @@ module Aws::SecurityIR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
       end)
     end

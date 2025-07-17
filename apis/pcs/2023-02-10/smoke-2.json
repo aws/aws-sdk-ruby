@@ -1,6 +1,23 @@
 {
   "version" : 2,
   "testCases" : [ {
+    "id" : "GetCluster_AccessDeniedException",
+    "operationName" : "GetCluster",
+    "input" : {
+      "clusterIdentifier" : "pcs_donotexist"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "AccessDeniedException"
+      }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
     "id" : "GetComputeNodeGroup_AccessDeniedException",
     "operationName" : "GetComputeNodeGroup",
     "input" : {
@@ -37,19 +54,6 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListClustersSuccess",
-    "operationName" : "ListClusters",
-    "input" : { },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
     "id" : "ListComputeNodeGroups_AccessDeniedException",
     "operationName" : "ListComputeNodeGroups",
     "input" : {
@@ -67,10 +71,37 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetCluster_AccessDeniedException",
-    "operationName" : "GetCluster",
+    "id" : "ListClustersSuccess",
+    "operationName" : "ListClusters",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "InstanceArnSuccess",
+    "operationName" : "CreateComputeNodeGroup",
     "input" : {
-      "clusterIdentifier" : "pcs_donotexist"
+      "clusterIdentifier" : "testCluster",
+      "computeNodeGroupName" : "testNodeGroupName",
+      "subnetIds" : [ "subnet-0cbf727bae9405b47" ],
+      "scalingConfiguration" : {
+        "minInstanceCount" : 1,
+        "maxInstanceCount" : 1
+      },
+      "iamInstanceProfileArn" : "arn:aws:iam::975050141277:instance-profile/aws-pcs/example-role-2",
+      "customLaunchTemplate" : {
+        "id" : "lt-0b8f8ee3f92b73dc0",
+        "version" : "1"
+      },
+      "instanceConfigs" : [ {
+        "instanceType" : "t3.medium"
+      } ]
     },
     "expectation" : {
       "failure" : {
@@ -78,7 +109,7 @@
       }
     },
     "config" : {
-      "region" : "us-west-2",
+      "region" : "us-east-1",
       "useFips" : false,
       "useDualstack" : false,
       "useAccountIdRouting" : true

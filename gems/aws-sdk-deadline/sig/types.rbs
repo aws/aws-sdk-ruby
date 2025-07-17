@@ -345,6 +345,7 @@ module Aws::Deadline
       attr_accessor max_worker_count: ::Integer
       attr_accessor configuration: Types::FleetConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor host_configuration: Types::HostConfiguration
       SENSITIVE: [:description]
     end
 
@@ -494,6 +495,7 @@ module Aws::Deadline
       attr_accessor fleet_id: ::String
       attr_accessor host_properties: Types::HostPropertiesRequest
       attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -506,6 +508,7 @@ module Aws::Deadline
       attr_accessor mode: ("NO_SCALING" | "EVENT_BASED_AUTO_SCALING")
       attr_accessor worker_capabilities: Types::CustomerManagedWorkerCapabilities
       attr_accessor storage_profile_id: ::String
+      attr_accessor tag_propagation_mode: ("NO_PROPAGATION" | "PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH")
       SENSITIVE: []
     end
 
@@ -904,6 +907,7 @@ module Aws::Deadline
       attr_accessor min_worker_count: ::Integer
       attr_accessor max_worker_count: ::Integer
       attr_accessor configuration: Types::FleetConfiguration
+      attr_accessor host_configuration: Types::HostConfiguration
       attr_accessor capabilities: Types::FleetCapabilities
       attr_accessor role_arn: ::String
       attr_accessor created_at: ::Time
@@ -955,6 +959,7 @@ module Aws::Deadline
       attr_accessor task_run_status: ("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE")
       attr_accessor target_task_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
       attr_accessor task_run_status_counts: ::Hash[("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE"), ::Integer]
+      attr_accessor task_failure_retry_count: ::Integer
       attr_accessor storage_profile_id: ::String
       attr_accessor max_failed_tasks_count: ::Integer
       attr_accessor max_retries_per_task: ::Integer
@@ -1125,6 +1130,7 @@ module Aws::Deadline
       attr_accessor progress_message: ::String
       attr_accessor definition: Types::SessionActionDefinition
       attr_accessor acquired_limits: ::Array[Types::AcquiredLimit]
+      attr_accessor manifests: ::Array[Types::TaskRunManifestPropertiesResponse]
       SENSITIVE: [:progress_message]
     end
 
@@ -1183,6 +1189,7 @@ module Aws::Deadline
       attr_accessor lifecycle_status_message: ::String
       attr_accessor task_run_status: ("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE")
       attr_accessor task_run_status_counts: ::Hash[("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE"), ::Integer]
+      attr_accessor task_failure_retry_count: ::Integer
       attr_accessor target_task_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
@@ -1274,6 +1281,12 @@ module Aws::Deadline
       attr_accessor updated_at: ::Time
       attr_accessor updated_by: ::String
       SENSITIVE: []
+    end
+
+    class HostConfiguration
+      attr_accessor script_body: ::String
+      attr_accessor script_timeout_seconds: ::Integer
+      SENSITIVE: [:script_body]
     end
 
     class HostPropertiesRequest
@@ -1437,6 +1450,7 @@ module Aws::Deadline
       attr_accessor task_run_status: ("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE")
       attr_accessor target_task_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
       attr_accessor task_run_status_counts: ::Hash[("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE"), ::Integer]
+      attr_accessor task_failure_retry_count: ::Integer
       attr_accessor priority: ::Integer
       attr_accessor max_failed_tasks_count: ::Integer
       attr_accessor max_retries_per_task: ::Integer
@@ -1465,6 +1479,7 @@ module Aws::Deadline
       attr_accessor task_run_status: ("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE")
       attr_accessor target_task_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
       attr_accessor task_run_status_counts: ::Hash[("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE"), ::Integer]
+      attr_accessor task_failure_retry_count: ::Integer
       attr_accessor max_failed_tasks_count: ::Integer
       attr_accessor max_retries_per_task: ::Integer
       attr_accessor max_worker_count: ::Integer
@@ -2192,6 +2207,7 @@ module Aws::Deadline
     class ServiceManagedEc2FleetConfiguration
       attr_accessor instance_capabilities: Types::ServiceManagedEc2InstanceCapabilities
       attr_accessor instance_market_options: Types::ServiceManagedEc2InstanceMarketOptions
+      attr_accessor storage_profile_id: ::String
       SENSITIVE: []
     end
 
@@ -2216,7 +2232,7 @@ module Aws::Deadline
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
-      attr_accessor reason: ("SERVICE_QUOTA_EXCEEDED_EXCEPTION" | "KMS_KEY_LIMIT_EXCEEDED")
+      attr_accessor reason: ("SERVICE_QUOTA_EXCEEDED_EXCEPTION" | "KMS_KEY_LIMIT_EXCEEDED" | "DEPENDENCY_LIMIT_EXCEEDED")
       attr_accessor resource_type: ::String
       attr_accessor service_code: ::String
       attr_accessor quota_code: ::String
@@ -2273,6 +2289,7 @@ module Aws::Deadline
       attr_accessor worker_updated_at: ::Time
       attr_accessor progress_percent: ::Float
       attr_accessor definition: Types::SessionActionDefinitionSummary
+      attr_accessor manifests: ::Array[Types::TaskRunManifestPropertiesResponse]
       SENSITIVE: []
     end
 
@@ -2397,7 +2414,7 @@ module Aws::Deadline
 
     class StepParameter
       attr_accessor name: ::String
-      attr_accessor type: ("INT" | "FLOAT" | "STRING" | "PATH")
+      attr_accessor type: ("INT" | "FLOAT" | "STRING" | "PATH" | "CHUNK_INT")
       SENSITIVE: []
     end
 
@@ -2417,6 +2434,7 @@ module Aws::Deadline
       attr_accessor task_run_status: ("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE")
       attr_accessor target_task_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
       attr_accessor task_run_status_counts: ::Hash[("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE"), ::Integer]
+      attr_accessor task_failure_retry_count: ::Integer
       attr_accessor created_at: ::Time
       attr_accessor started_at: ::Time
       attr_accessor ended_at: ::Time
@@ -2431,6 +2449,7 @@ module Aws::Deadline
       attr_accessor lifecycle_status_message: ::String
       attr_accessor task_run_status: ("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE")
       attr_accessor task_run_status_counts: ::Hash[("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE"), ::Integer]
+      attr_accessor task_failure_retry_count: ::Integer
       attr_accessor target_task_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
@@ -2480,6 +2499,7 @@ module Aws::Deadline
       attr_accessor float: ::String
       attr_accessor string: ::String
       attr_accessor path: ::String
+      attr_accessor chunk_int: ::String
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -2491,8 +2511,22 @@ module Aws::Deadline
       end
       class Path < TaskParameterValue
       end
+      class ChunkInt < TaskParameterValue
+      end
       class Unknown < TaskParameterValue
       end
+    end
+
+    class TaskRunManifestPropertiesRequest
+      attr_accessor output_manifest_path: ::String
+      attr_accessor output_manifest_hash: ::String
+      SENSITIVE: []
+    end
+
+    class TaskRunManifestPropertiesResponse
+      attr_accessor output_manifest_path: ::String
+      attr_accessor output_manifest_hash: ::String
+      SENSITIVE: []
     end
 
     class TaskRunSessionActionDefinition
@@ -2505,7 +2539,8 @@ module Aws::Deadline
     class TaskRunSessionActionDefinitionSummary
       attr_accessor task_id: ::String
       attr_accessor step_id: ::String
-      SENSITIVE: []
+      attr_accessor parameters: ::Hash[::String, Types::TaskParameterValue]
+      SENSITIVE: [:parameters]
     end
 
     class TaskSearchSummary
@@ -2593,6 +2628,7 @@ module Aws::Deadline
       attr_accessor min_worker_count: ::Integer
       attr_accessor max_worker_count: ::Integer
       attr_accessor configuration: Types::FleetConfiguration
+      attr_accessor host_configuration: Types::HostConfiguration
       SENSITIVE: [:description]
     end
 
@@ -2761,6 +2797,7 @@ module Aws::Deadline
 
     class UpdateWorkerResponse
       attr_accessor log: Types::LogConfiguration
+      attr_accessor host_configuration: Types::HostConfiguration
       SENSITIVE: []
     end
 
@@ -2788,6 +2825,7 @@ module Aws::Deadline
       attr_accessor ended_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor progress_percent: ::Float
+      attr_accessor manifests: ::Array[Types::TaskRunManifestPropertiesRequest]
       SENSITIVE: [:progress_message]
     end
 

@@ -30,6 +30,7 @@ module Aws::OAM
     GetSinkOutput = Shapes::StructureShape.new(name: 'GetSinkOutput')
     GetSinkPolicyInput = Shapes::StructureShape.new(name: 'GetSinkPolicyInput')
     GetSinkPolicyOutput = Shapes::StructureShape.new(name: 'GetSinkPolicyOutput')
+    IncludeTags = Shapes::BooleanShape.new(name: 'IncludeTags')
     InternalServiceFault = Shapes::StructureShape.new(name: 'InternalServiceFault')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     LabelTemplate = Shapes::StringShape.new(name: 'LabelTemplate')
@@ -124,6 +125,7 @@ module Aws::OAM
     DeleteSinkOutput.struct_class = Types::DeleteSinkOutput
 
     GetLinkInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "Identifier"))
+    GetLinkInput.add_member(:include_tags, Shapes::ShapeRef.new(shape: IncludeTags, location_name: "IncludeTags"))
     GetLinkInput.struct_class = Types::GetLinkInput
 
     GetLinkOutput.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
@@ -137,6 +139,7 @@ module Aws::OAM
     GetLinkOutput.struct_class = Types::GetLinkOutput
 
     GetSinkInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "Identifier"))
+    GetSinkInput.add_member(:include_tags, Shapes::ShapeRef.new(shape: IncludeTags, location_name: "IncludeTags"))
     GetSinkInput.struct_class = Types::GetSinkInput
 
     GetSinkOutput.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
@@ -274,6 +277,7 @@ module Aws::OAM
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
     UpdateLinkInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "Identifier"))
+    UpdateLinkInput.add_member(:include_tags, Shapes::ShapeRef.new(shape: IncludeTags, location_name: "IncludeTags"))
     UpdateLinkInput.add_member(:link_configuration, Shapes::ShapeRef.new(shape: LinkConfiguration, location_name: "LinkConfiguration"))
     UpdateLinkInput.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypesInput, required: true, location_name: "ResourceTypes"))
     UpdateLinkInput.struct_class = Types::UpdateLinkInput

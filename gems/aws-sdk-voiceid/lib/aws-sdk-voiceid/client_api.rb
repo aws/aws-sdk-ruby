@@ -193,7 +193,7 @@ module Aws::VoiceID
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateDomainRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDomainRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateDomainRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateDomainRequest.add_member(:name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "Name"))
     CreateDomainRequest.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, required: true, location_name: "ServerSideEncryptionConfiguration"))
@@ -203,7 +203,7 @@ module Aws::VoiceID
     CreateDomainResponse.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, location_name: "Domain"))
     CreateDomainResponse.struct_class = Types::CreateDomainResponse
 
-    CreateWatchlistRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateWatchlistRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateWatchlistRequest.add_member(:description, Shapes::ShapeRef.new(shape: WatchlistDescription, location_name: "Description"))
     CreateWatchlistRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
     CreateWatchlistRequest.add_member(:name, Shapes::ShapeRef.new(shape: WatchlistName, required: true, location_name: "Name"))
@@ -544,7 +544,7 @@ module Aws::VoiceID
     SpeakerSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     SpeakerSummary.struct_class = Types::SpeakerSummary
 
-    StartFraudsterRegistrationJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartFraudsterRegistrationJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     StartFraudsterRegistrationJobRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
     StartFraudsterRegistrationJobRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
     StartFraudsterRegistrationJobRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, required: true, location_name: "InputDataConfig"))
@@ -556,7 +556,7 @@ module Aws::VoiceID
     StartFraudsterRegistrationJobResponse.add_member(:job, Shapes::ShapeRef.new(shape: FraudsterRegistrationJob, location_name: "Job"))
     StartFraudsterRegistrationJobResponse.struct_class = Types::StartFraudsterRegistrationJobResponse
 
-    StartSpeakerEnrollmentJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartSpeakerEnrollmentJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     StartSpeakerEnrollmentJobRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
     StartSpeakerEnrollmentJobRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
     StartSpeakerEnrollmentJobRequest.add_member(:enrollment_config, Shapes::ShapeRef.new(shape: EnrollmentConfig, location_name: "EnrollmentConfig"))

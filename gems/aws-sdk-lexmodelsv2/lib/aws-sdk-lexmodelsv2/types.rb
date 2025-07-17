@@ -11201,6 +11201,20 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Specifies whether the assisted nlu feature is turned on or off.
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether the assisted nlu feature is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/NluImprovementSpecification AWS API Documentation
+    #
+    class NluImprovementSpecification < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Determines whether Amazon Lex obscures slot values in conversation
     # logs.
     #
@@ -11919,10 +11933,15 @@ module Aws::LexModelsV2
     #   feature.
     #   @return [Types::SlotResolutionImprovementSpecification]
     #
+    # @!attribute [rw] nlu_improvement
+    #   An object containing specifications for the assisted nlu feature.
+    #   @return [Types::NluImprovementSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/RuntimeSettings AWS API Documentation
     #
     class RuntimeSettings < Struct.new(
-      :slot_resolution_improvement)
+      :slot_resolution_improvement,
+      :nlu_improvement)
       SENSITIVE = []
       include Aws::Structure
     end

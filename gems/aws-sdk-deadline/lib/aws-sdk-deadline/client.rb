@@ -200,8 +200,7 @@ module Aws::Deadline
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -1169,6 +1168,15 @@ module Aws::Deadline
     # @option params [required, Integer] :max_worker_count
     #   The maximum number of workers for the fleet.
     #
+    #   Deadline Cloud limits the number of workers to less than or equal to
+    #   the fleet's maximum worker count. The service maintains eventual
+    #   consistency for the worker count. If you make multiple rapid calls to
+    #   `CreateWorker` before the field updates, you might exceed your
+    #   fleet's maximum worker count. For example, if your `maxWorkerCount`
+    #   is 10 and you currently have 9 workers, making two quick
+    #   `CreateWorker` calls might successfully create 2 workers instead of 1,
+    #   resulting in 11 total workers.
+    #
     # @option params [required, Types::FleetConfiguration] :configuration
     #   The configuration settings for the fleet. Customer managed fleets are
     #   self-managed. Service managed Amazon EC2 fleets are managed by
@@ -1177,6 +1185,10 @@ module Aws::Deadline
     # @option params [Hash<String,String>] :tags
     #   Each tag consists of a tag key and a tag value. Tag keys and values
     #   are both required, but tag values can be empty strings.
+    #
+    # @option params [Types::HostConfiguration] :host_configuration
+    #   Provides a script that runs as a worker is starting up that you can
+    #   use to provide additional configuration for workers in your fleet.
     #
     # @return [Types::CreateFleetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1230,6 +1242,7 @@ module Aws::Deadline
     #           ],
     #         },
     #         storage_profile_id: "StorageProfileId",
+    #         tag_propagation_mode: "NO_PROPAGATION", # accepts NO_PROPAGATION, PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH
     #       },
     #       service_managed_ec2: {
     #         instance_capabilities: { # required
@@ -1279,10 +1292,15 @@ module Aws::Deadline
     #         instance_market_options: { # required
     #           type: "on-demand", # required, accepts on-demand, spot
     #         },
+    #         storage_profile_id: "StorageProfileId",
     #       },
     #     },
     #     tags: {
     #       "String" => "String",
+    #     },
+    #     host_configuration: {
+    #       script_body: "HostConfigurationScript", # required
+    #       script_timeout_seconds: 1,
     #     },
     #   })
     #
@@ -1897,6 +1915,15 @@ module Aws::Deadline
     # instance types to use, or let the worker know which instances types to
     # exclude.
     #
+    # Deadline Cloud limits the number of workers to less than or equal to
+    # the fleet's maximum worker count. The service maintains eventual
+    # consistency for the worker count. If you make multiple rapid calls to
+    # `CreateWorker` before the field updates, you might exceed your
+    # fleet's maximum worker count. For example, if your `maxWorkerCount`
+    # is 10 and you currently have 9 workers, making two quick
+    # `CreateWorker` calls might successfully create 2 workers instead of 1,
+    # resulting in 11 total workers.
+    #
     # @option params [required, String] :farm_id
     #   The farm ID of the farm to connect to the worker.
     #
@@ -1912,6 +1939,10 @@ module Aws::Deadline
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Each tag consists of a tag key and a tag value. Tag keys and values
+    #   are both required, but tag values can be empty strings.
     #
     # @return [Types::CreateWorkerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1930,6 +1961,9 @@ module Aws::Deadline
     #       host_name: "HostName",
     #     },
     #     client_token: "ClientToken",
+    #     tags: {
+    #       "String" => "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2557,6 +2591,7 @@ module Aws::Deadline
     #   * {Types::GetFleetResponse#min_worker_count #min_worker_count} => Integer
     #   * {Types::GetFleetResponse#max_worker_count #max_worker_count} => Integer
     #   * {Types::GetFleetResponse#configuration #configuration} => Types::FleetConfiguration
+    #   * {Types::GetFleetResponse#host_configuration #host_configuration} => Types::HostConfiguration
     #   * {Types::GetFleetResponse#capabilities #capabilities} => Types::FleetCapabilities
     #   * {Types::GetFleetResponse#role_arn #role_arn} => String
     #   * {Types::GetFleetResponse#created_at #created_at} => Time
@@ -2605,6 +2640,7 @@ module Aws::Deadline
     #   resp.configuration.customer_managed.worker_capabilities.custom_attributes[0].values #=> Array
     #   resp.configuration.customer_managed.worker_capabilities.custom_attributes[0].values[0] #=> String
     #   resp.configuration.customer_managed.storage_profile_id #=> String
+    #   resp.configuration.customer_managed.tag_propagation_mode #=> String, one of "NO_PROPAGATION", "PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH"
     #   resp.configuration.service_managed_ec2.instance_capabilities.v_cpu_count.min #=> Integer
     #   resp.configuration.service_managed_ec2.instance_capabilities.v_cpu_count.max #=> Integer
     #   resp.configuration.service_managed_ec2.instance_capabilities.memory_mi_b.min #=> Integer
@@ -2632,6 +2668,9 @@ module Aws::Deadline
     #   resp.configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].values #=> Array
     #   resp.configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].values[0] #=> String
     #   resp.configuration.service_managed_ec2.instance_market_options.type #=> String, one of "on-demand", "spot"
+    #   resp.configuration.service_managed_ec2.storage_profile_id #=> String
+    #   resp.host_configuration.script_body #=> String
+    #   resp.host_configuration.script_timeout_seconds #=> Integer
     #   resp.capabilities.amounts #=> Array
     #   resp.capabilities.amounts[0].name #=> String
     #   resp.capabilities.amounts[0].min #=> Float
@@ -2687,6 +2726,7 @@ module Aws::Deadline
     #   * {Types::GetJobResponse#task_run_status #task_run_status} => String
     #   * {Types::GetJobResponse#target_task_run_status #target_task_run_status} => String
     #   * {Types::GetJobResponse#task_run_status_counts #task_run_status_counts} => Hash&lt;String,Integer&gt;
+    #   * {Types::GetJobResponse#task_failure_retry_count #task_failure_retry_count} => Integer
     #   * {Types::GetJobResponse#storage_profile_id #storage_profile_id} => String
     #   * {Types::GetJobResponse#max_failed_tasks_count #max_failed_tasks_count} => Integer
     #   * {Types::GetJobResponse#max_retries_per_task #max_retries_per_task} => Integer
@@ -2721,6 +2761,7 @@ module Aws::Deadline
     #   resp.target_task_run_status #=> String, one of "READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"
     #   resp.task_run_status_counts #=> Hash
     #   resp.task_run_status_counts["TaskRunStatus"] #=> Integer
+    #   resp.task_failure_retry_count #=> Integer
     #   resp.storage_profile_id #=> String
     #   resp.max_failed_tasks_count #=> Integer
     #   resp.max_retries_per_task #=> Integer
@@ -3245,6 +3286,7 @@ module Aws::Deadline
     #   * {Types::GetSessionActionResponse#progress_message #progress_message} => String
     #   * {Types::GetSessionActionResponse#definition #definition} => Types::SessionActionDefinition
     #   * {Types::GetSessionActionResponse#acquired_limits #acquired_limits} => Array&lt;Types::AcquiredLimit&gt;
+    #   * {Types::GetSessionActionResponse#manifests #manifests} => Array&lt;Types::TaskRunManifestPropertiesResponse&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3275,10 +3317,14 @@ module Aws::Deadline
     #   resp.definition.task_run.parameters["String"].float #=> String
     #   resp.definition.task_run.parameters["String"].string #=> String
     #   resp.definition.task_run.parameters["String"].path #=> String
+    #   resp.definition.task_run.parameters["String"].chunk_int #=> String
     #   resp.definition.sync_input_job_attachments.step_id #=> String
     #   resp.acquired_limits #=> Array
     #   resp.acquired_limits[0].limit_id #=> String
     #   resp.acquired_limits[0].count #=> Integer
+    #   resp.manifests #=> Array
+    #   resp.manifests[0].output_manifest_path #=> String
+    #   resp.manifests[0].output_manifest_hash #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/GetSessionAction AWS API Documentation
     #
@@ -3387,6 +3433,7 @@ module Aws::Deadline
     #   * {Types::GetStepResponse#lifecycle_status_message #lifecycle_status_message} => String
     #   * {Types::GetStepResponse#task_run_status #task_run_status} => String
     #   * {Types::GetStepResponse#task_run_status_counts #task_run_status_counts} => Hash&lt;String,Integer&gt;
+    #   * {Types::GetStepResponse#task_failure_retry_count #task_failure_retry_count} => Integer
     #   * {Types::GetStepResponse#target_task_run_status #target_task_run_status} => String
     #   * {Types::GetStepResponse#created_at #created_at} => Time
     #   * {Types::GetStepResponse#created_by #created_by} => String
@@ -3417,6 +3464,7 @@ module Aws::Deadline
     #   resp.task_run_status #=> String, one of "PENDING", "READY", "ASSIGNED", "STARTING", "SCHEDULED", "INTERRUPTING", "RUNNING", "SUSPENDED", "CANCELED", "FAILED", "SUCCEEDED", "NOT_COMPATIBLE"
     #   resp.task_run_status_counts #=> Hash
     #   resp.task_run_status_counts["TaskRunStatus"] #=> Integer
+    #   resp.task_failure_retry_count #=> Integer
     #   resp.target_task_run_status #=> String, one of "READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
@@ -3441,7 +3489,7 @@ module Aws::Deadline
     #   resp.required_capabilities.amounts[0].value #=> Float
     #   resp.parameter_space.parameters #=> Array
     #   resp.parameter_space.parameters[0].name #=> String
-    #   resp.parameter_space.parameters[0].type #=> String, one of "INT", "FLOAT", "STRING", "PATH"
+    #   resp.parameter_space.parameters[0].type #=> String, one of "INT", "FLOAT", "STRING", "PATH", "CHUNK_INT"
     #   resp.parameter_space.combination #=> String
     #   resp.description #=> String
     #
@@ -3603,6 +3651,7 @@ module Aws::Deadline
     #   resp.parameters["String"].float #=> String
     #   resp.parameters["String"].string #=> String
     #   resp.parameters["String"].path #=> String
+    #   resp.parameters["String"].chunk_int #=> String
     #   resp.started_at #=> Time
     #   resp.ended_at #=> Time
     #   resp.updated_at #=> Time
@@ -4008,6 +4057,7 @@ module Aws::Deadline
     #   resp.fleets[0].configuration.customer_managed.worker_capabilities.custom_attributes[0].values #=> Array
     #   resp.fleets[0].configuration.customer_managed.worker_capabilities.custom_attributes[0].values[0] #=> String
     #   resp.fleets[0].configuration.customer_managed.storage_profile_id #=> String
+    #   resp.fleets[0].configuration.customer_managed.tag_propagation_mode #=> String, one of "NO_PROPAGATION", "PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH"
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.v_cpu_count.min #=> Integer
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.v_cpu_count.max #=> Integer
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.memory_mi_b.min #=> Integer
@@ -4035,6 +4085,7 @@ module Aws::Deadline
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].values #=> Array
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].values[0] #=> String
     #   resp.fleets[0].configuration.service_managed_ec2.instance_market_options.type #=> String, one of "on-demand", "spot"
+    #   resp.fleets[0].configuration.service_managed_ec2.storage_profile_id #=> String
     #   resp.fleets[0].created_at #=> Time
     #   resp.fleets[0].created_by #=> String
     #   resp.fleets[0].updated_at #=> Time
@@ -4211,6 +4262,7 @@ module Aws::Deadline
     #   resp.jobs[0].target_task_run_status #=> String, one of "READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"
     #   resp.jobs[0].task_run_status_counts #=> Hash
     #   resp.jobs[0].task_run_status_counts["TaskRunStatus"] #=> Integer
+    #   resp.jobs[0].task_failure_retry_count #=> Integer
     #   resp.jobs[0].max_failed_tasks_count #=> Integer
     #   resp.jobs[0].max_retries_per_task #=> Integer
     #   resp.jobs[0].max_worker_count #=> Integer
@@ -4760,7 +4812,16 @@ module Aws::Deadline
     #   resp.session_actions[0].definition.env_exit.environment_id #=> String
     #   resp.session_actions[0].definition.task_run.task_id #=> String
     #   resp.session_actions[0].definition.task_run.step_id #=> String
+    #   resp.session_actions[0].definition.task_run.parameters #=> Hash
+    #   resp.session_actions[0].definition.task_run.parameters["String"].int #=> String
+    #   resp.session_actions[0].definition.task_run.parameters["String"].float #=> String
+    #   resp.session_actions[0].definition.task_run.parameters["String"].string #=> String
+    #   resp.session_actions[0].definition.task_run.parameters["String"].path #=> String
+    #   resp.session_actions[0].definition.task_run.parameters["String"].chunk_int #=> String
     #   resp.session_actions[0].definition.sync_input_job_attachments.step_id #=> String
+    #   resp.session_actions[0].manifests #=> Array
+    #   resp.session_actions[0].manifests[0].output_manifest_path #=> String
+    #   resp.session_actions[0].manifests[0].output_manifest_hash #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ListSessionActions AWS API Documentation
@@ -5046,6 +5107,7 @@ module Aws::Deadline
     #   resp.steps[0].task_run_status #=> String, one of "PENDING", "READY", "ASSIGNED", "STARTING", "SCHEDULED", "INTERRUPTING", "RUNNING", "SUSPENDED", "CANCELED", "FAILED", "SUCCEEDED", "NOT_COMPATIBLE"
     #   resp.steps[0].task_run_status_counts #=> Hash
     #   resp.steps[0].task_run_status_counts["TaskRunStatus"] #=> Integer
+    #   resp.steps[0].task_failure_retry_count #=> Integer
     #   resp.steps[0].target_task_run_status #=> String, one of "READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"
     #   resp.steps[0].created_at #=> Time
     #   resp.steps[0].created_by #=> String
@@ -5245,6 +5307,7 @@ module Aws::Deadline
     #   resp.tasks[0].parameters["String"].float #=> String
     #   resp.tasks[0].parameters["String"].string #=> String
     #   resp.tasks[0].parameters["String"].path #=> String
+    #   resp.tasks[0].parameters["String"].chunk_int #=> String
     #   resp.tasks[0].started_at #=> Time
     #   resp.tasks[0].ended_at #=> Time
     #   resp.tasks[0].updated_at #=> Time
@@ -5448,6 +5511,7 @@ module Aws::Deadline
     #   resp.jobs[0].target_task_run_status #=> String, one of "READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"
     #   resp.jobs[0].task_run_status_counts #=> Hash
     #   resp.jobs[0].task_run_status_counts["TaskRunStatus"] #=> Integer
+    #   resp.jobs[0].task_failure_retry_count #=> Integer
     #   resp.jobs[0].priority #=> Integer
     #   resp.jobs[0].max_failed_tasks_count #=> Integer
     #   resp.jobs[0].max_retries_per_task #=> Integer
@@ -5573,12 +5637,13 @@ module Aws::Deadline
     #   resp.steps[0].target_task_run_status #=> String, one of "READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"
     #   resp.steps[0].task_run_status_counts #=> Hash
     #   resp.steps[0].task_run_status_counts["TaskRunStatus"] #=> Integer
+    #   resp.steps[0].task_failure_retry_count #=> Integer
     #   resp.steps[0].created_at #=> Time
     #   resp.steps[0].started_at #=> Time
     #   resp.steps[0].ended_at #=> Time
     #   resp.steps[0].parameter_space.parameters #=> Array
     #   resp.steps[0].parameter_space.parameters[0].name #=> String
-    #   resp.steps[0].parameter_space.parameters[0].type #=> String, one of "INT", "FLOAT", "STRING", "PATH"
+    #   resp.steps[0].parameter_space.parameters[0].type #=> String, one of "INT", "FLOAT", "STRING", "PATH", "CHUNK_INT"
     #   resp.steps[0].parameter_space.combination #=> String
     #   resp.next_item_offset #=> Integer
     #   resp.total_results #=> Integer
@@ -5692,6 +5757,7 @@ module Aws::Deadline
     #   resp.tasks[0].parameters["String"].float #=> String
     #   resp.tasks[0].parameters["String"].string #=> String
     #   resp.tasks[0].parameters["String"].path #=> String
+    #   resp.tasks[0].parameters["String"].chunk_int #=> String
     #   resp.tasks[0].failure_retry_count #=> Integer
     #   resp.tasks[0].started_at #=> Time
     #   resp.tasks[0].ended_at #=> Time
@@ -6110,8 +6176,21 @@ module Aws::Deadline
     # @option params [Integer] :max_worker_count
     #   The maximum number of workers in the fleet.
     #
+    #   Deadline Cloud limits the number of workers to less than or equal to
+    #   the fleet's maximum worker count. The service maintains eventual
+    #   consistency for the worker count. If you make multiple rapid calls to
+    #   `CreateWorker` before the field updates, you might exceed your
+    #   fleet's maximum worker count. For example, if your `maxWorkerCount`
+    #   is 10 and you currently have 9 workers, making two quick
+    #   `CreateWorker` calls might successfully create 2 workers instead of 1,
+    #   resulting in 11 total workers.
+    #
     # @option params [Types::FleetConfiguration] :configuration
     #   The fleet configuration to update.
+    #
+    # @option params [Types::HostConfiguration] :host_configuration
+    #   Provides a script that runs as a worker is starting up that you can
+    #   use to provide additional configuration for workers in your fleet.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6164,6 +6243,7 @@ module Aws::Deadline
     #           ],
     #         },
     #         storage_profile_id: "StorageProfileId",
+    #         tag_propagation_mode: "NO_PROPAGATION", # accepts NO_PROPAGATION, PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH
     #       },
     #       service_managed_ec2: {
     #         instance_capabilities: { # required
@@ -6213,7 +6293,12 @@ module Aws::Deadline
     #         instance_market_options: { # required
     #           type: "on-demand", # required, accepts on-demand, spot
     #         },
+    #         storage_profile_id: "StorageProfileId",
     #       },
+    #     },
+    #     host_configuration: {
+    #       script_body: "HostConfigurationScript", # required
+    #       script_timeout_seconds: 1,
     #     },
     #   })
     #
@@ -6854,6 +6939,7 @@ module Aws::Deadline
     # @return [Types::UpdateWorkerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateWorkerResponse#log #log} => Types::LogConfiguration
+    #   * {Types::UpdateWorkerResponse#host_configuration #host_configuration} => Types::HostConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -6893,6 +6979,8 @@ module Aws::Deadline
     #   resp.log.parameters #=> Hash
     #   resp.log.parameters["String"] #=> String
     #   resp.log.error #=> String
+    #   resp.host_configuration.script_body #=> String
+    #   resp.host_configuration.script_timeout_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdateWorker AWS API Documentation
     #
@@ -6939,6 +7027,12 @@ module Aws::Deadline
     #         ended_at: Time.now,
     #         updated_at: Time.now,
     #         progress_percent: 1.0,
+    #         manifests: [
+    #           {
+    #             output_manifest_path: "TaskRunManifestPropertiesRequestOutputManifestPathString",
+    #             output_manifest_hash: "TaskRunManifestPropertiesRequestOutputManifestHashString",
+    #           },
+    #         ],
     #       },
     #     },
     #   })
@@ -6959,6 +7053,7 @@ module Aws::Deadline
     #   resp.assigned_sessions["SessionId"].session_actions[0].definition.task_run.parameters["String"].float #=> String
     #   resp.assigned_sessions["SessionId"].session_actions[0].definition.task_run.parameters["String"].string #=> String
     #   resp.assigned_sessions["SessionId"].session_actions[0].definition.task_run.parameters["String"].path #=> String
+    #   resp.assigned_sessions["SessionId"].session_actions[0].definition.task_run.parameters["String"].chunk_int #=> String
     #   resp.assigned_sessions["SessionId"].session_actions[0].definition.sync_input_job_attachments.step_id #=> String
     #   resp.assigned_sessions["SessionId"].log_configuration.log_driver #=> String
     #   resp.assigned_sessions["SessionId"].log_configuration.options #=> Hash
@@ -6999,7 +7094,7 @@ module Aws::Deadline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-deadline'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

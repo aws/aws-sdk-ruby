@@ -2,6 +2,7 @@
 
 module Aws
   module RpcV2
+    # @api private
     class ErrorHandler < Aws::ErrorHandler
 
       def call(context)
@@ -37,11 +38,14 @@ module Aws
       end
 
       def error_code(data, context)
+        # This is not correct per protocol tests. awsQueryError is intended to populate the
+        # error code of the error class. The error class should come from __type. Query and
+        # query compatible services currently have dynamic errors raised from error codes instead
+        # of the modeled error class. However, changing this in this major version would break
+        # existing usage.
         code =
           if aws_query_error?(context)
-            query_header = context.http_response.headers['x-amzn-query-error']
-            error, _type = query_header.split(';') # type not supported
-            remove_prefix(error, context)
+            aws_query_error_code(context)
           else
             data['__type']
           end
@@ -49,6 +53,25 @@ module Aws
           code.split('#').last
         else
           http_status_error_code(context)
+        end
+      end
+
+      def aws_query_error?(context)
+        context.config.api.metadata['awsQueryCompatible'] &&
+          context.http_response.headers['x-amzn-query-error']
+      end
+
+      def aws_query_error_code(context)
+        query_header = context.http_response.headers['x-amzn-query-error']
+        error, _type = query_header.split(';') # type not supported
+        remove_prefix(error, context)
+      end
+
+      def remove_prefix(error_code, context)
+        if (prefix = context.config.api.metadata['errorPrefix'])
+          error_code.sub(/^#{prefix}/, '')
+        else
+          error_code
         end
       end
 
@@ -66,19 +89,6 @@ module Aws
           end
         end
         data
-      end
-
-      def aws_query_error?(context)
-        context.config.api.metadata['awsQueryCompatible'] &&
-          context.http_response.headers['x-amzn-query-error']
-      end
-
-      def remove_prefix(error_code, context)
-        if (prefix = context.config.api.metadata['errorPrefix'])
-          error_code.sub(/^#{prefix}/, '')
-        else
-          error_code
-        end
       end
     end
   end

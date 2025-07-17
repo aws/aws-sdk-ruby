@@ -340,6 +340,13 @@ module Aws::DynamoDB
       data[:replicas]
     end
 
+    # The witness Region and its current status in the MRSC global table.
+    # Only one witness Region can be configured per MRSC global table.
+    # @return [Array<Types::GlobalTableWitnessDescription>]
+    def global_table_witnesses
+      data[:global_table_witnesses]
+    end
+
     # Contains details for the restore.
     # @return [Types::RestoreSummary]
     def restore_summary
@@ -389,23 +396,19 @@ module Aws::DynamoDB
     # Indicates one of the following consistency modes for a global table:
     #
     # * `EVENTUAL`: Indicates that the global table is configured for
-    #   multi-Region eventual consistency.
+    #   multi-Region eventual consistency (MREC).
     #
     # * `STRONG`: Indicates that the global table is configured for
-    #   multi-Region strong consistency (preview).
-    #
-    #   <note markdown="1"> Multi-Region strong consistency (MRSC) is a new DynamoDB global
-    #   tables capability currently available in preview mode. For more
-    #   information, see [Global tables multi-Region strong consistency][1].
-    #
-    #    </note>
+    #   multi-Region strong consistency (MRSC).
     #
     # If you don't specify this field, the global table consistency mode
-    # defaults to `EVENTUAL`.
+    # defaults to `EVENTUAL`. For more information about global tables
+    # consistency modes, see [ Consistency modes][1] in DynamoDB developer
+    # guide.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/PreviewFeatures.html#multi-region-strong-consistency-gt
+    # [1]: https://docs.aws.amazon.com/V2globaltables_HowItWorks.html#V2globaltables_HowItWorks.consistency-modes
     # @return [String]
     def multi_region_consistency
       data[:multi_region_consistency]
@@ -1947,6 +1950,16 @@ module Aws::DynamoDB
     #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #     deletion_protection_enabled: false,
     #     multi_region_consistency: "EVENTUAL", # accepts EVENTUAL, STRONG
+    #     global_table_witness_updates: [
+    #       {
+    #         create: {
+    #           region_name: "RegionName", # required
+    #         },
+    #         delete: {
+    #           region_name: "RegionName", # required
+    #         },
+    #       },
+    #     ],
     #     on_demand_throughput: {
     #       max_read_request_units: 1,
     #       max_write_request_units: 1,
@@ -2019,11 +2032,6 @@ module Aws::DynamoDB
     # @option options [Array<Types::ReplicationGroupUpdate>] :replica_updates
     #   A list of replica update actions (create, delete, or update) for the
     #   table.
-    #
-    #   <note markdown="1"> For global tables, this property only applies to global tables using
-    #   Version 2019.11.21 (Current version).
-    #
-    #    </note>
     # @option options [String] :table_class
     #   The table class of the table to be updated. Valid values are
     #   `STANDARD` and `STANDARD_INFREQUENT_ACCESS`.
@@ -2038,25 +2046,41 @@ module Aws::DynamoDB
     #   You can specify one of the following consistency modes:
     #
     #   * `EVENTUAL`: Configures a new global table for multi-Region eventual
-    #     consistency. This is the default consistency mode for global tables.
+    #     consistency (MREC). This is the default consistency mode for global
+    #     tables.
     #
     #   * `STRONG`: Configures a new global table for multi-Region strong
-    #     consistency (preview).
+    #     consistency (MRSC).
     #
-    #     <note markdown="1"> Multi-Region strong consistency (MRSC) is a new DynamoDB global
-    #     tables capability currently available in preview mode. For more
-    #     information, see [Global tables multi-Region strong consistency][3].
-    #
-    #      </note>
-    #
-    #   If you don't specify this parameter, the global table consistency
-    #   mode defaults to `EVENTUAL`.
+    #   If you don't specify this field, the global table consistency mode
+    #   defaults to `EVENTUAL`. For more information about global tables
+    #   consistency modes, see [ Consistency modes][3] in DynamoDB developer
+    #   guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ReplicationGroupUpdate.html#DDB-Type-ReplicationGroupUpdate-Create
     #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTable.html#DDB-UpdateTable-request-ReplicaUpdates
-    #   [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/PreviewFeatures.html#multi-region-strong-consistency-gt
+    #   [3]: https://docs.aws.amazon.com/V2globaltables_HowItWorks.html#V2globaltables_HowItWorks.consistency-modes
+    # @option options [Array<Types::GlobalTableWitnessGroupUpdate>] :global_table_witness_updates
+    #   A list of witness updates for a MRSC global table. A witness provides
+    #   a cost-effective alternative to a full replica in a MRSC global table
+    #   by maintaining replicated change data written to global table
+    #   replicas. You cannot perform read or write operations on a witness.
+    #   For each witness, you can request one action:
+    #
+    #   * `Create` - add a new witness to the global table.
+    #
+    #   * `Delete` - remove a witness from the global table.
+    #
+    #   You can create or delete only one witness per `UpdateTable` operation.
+    #
+    #   For more information, see [Multi-Region strong consistency (MRSC)][1]
+    #   in the Amazon DynamoDB Developer Guide
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_HowItWorks.html#V2globaltables_HowItWorks.consistency-modes
     # @option options [Types::OnDemandThroughput] :on_demand_throughput
     #   Updates the maximum number of read and write units for the specified
     #   table in on-demand capacity mode. If you use this parameter, you must

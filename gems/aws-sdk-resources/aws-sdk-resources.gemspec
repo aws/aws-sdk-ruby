@@ -17,6 +17,7 @@ Gem::Specification.new do |spec|
   # service gems
   spec.add_dependency('aws-sdk-acm', '~> 1')
   spec.add_dependency('aws-sdk-acmpca', '~> 1')
+  spec.add_dependency('aws-sdk-aiops', '~> 1')
   spec.add_dependency('aws-sdk-apigateway', '~> 1')
   spec.add_dependency('aws-sdk-arczonalshift', '~> 1')
   spec.add_dependency('aws-sdk-accessanalyzer', '~> 1')
@@ -57,6 +58,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-batch', '~> 1')
   spec.add_dependency('aws-sdk-bedrock', '~> 1')
   spec.add_dependency('aws-sdk-bedrockagent', '~> 1')
+  spec.add_dependency('aws-sdk-bedrockagentcore', '~> 1')
+  spec.add_dependency('aws-sdk-bedrockagentcorecontrol', '~> 1')
   spec.add_dependency('aws-sdk-bedrockagentruntime', '~> 1')
   spec.add_dependency('aws-sdk-bedrockdataautomation', '~> 1')
   spec.add_dependency('aws-sdk-bedrockdataautomationruntime', '~> 1')
@@ -163,6 +166,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-elasticsearchservice', '~> 1')
   spec.add_dependency('aws-sdk-entityresolution', '~> 1')
   spec.add_dependency('aws-sdk-eventbridge', '~> 1')
+  spec.add_dependency('aws-sdk-evs', '~> 1')
   spec.add_dependency('aws-sdk-fis', '~> 1')
   spec.add_dependency('aws-sdk-fms', '~> 1')
   spec.add_dependency('aws-sdk-fsx', '~> 1')
@@ -221,6 +225,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-kendra', '~> 1')
   spec.add_dependency('aws-sdk-kendraranking', '~> 1')
   spec.add_dependency('aws-sdk-keyspaces', '~> 1')
+  spec.add_dependency('aws-sdk-keyspacesstreams', '~> 1')
   spec.add_dependency('aws-sdk-kinesis', '~> 1')
   spec.add_dependency('aws-sdk-kinesisanalytics', '~> 1')
   spec.add_dependency('aws-sdk-kinesisanalyticsv2', '~> 1')
@@ -244,6 +249,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-lookoutequipment', '~> 1')
   spec.add_dependency('aws-sdk-lookoutmetrics', '~> 1')
   spec.add_dependency('aws-sdk-lookoutforvision', '~> 1')
+  spec.add_dependency('aws-sdk-mpa', '~> 1')
   spec.add_dependency('aws-sdk-mq', '~> 1')
   spec.add_dependency('aws-sdk-mturk', '~> 1')
   spec.add_dependency('aws-sdk-mwaa', '~> 1')
@@ -290,6 +296,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-oam', '~> 1')
   spec.add_dependency('aws-sdk-osis', '~> 1')
   spec.add_dependency('aws-sdk-observabilityadmin', '~> 1')
+  spec.add_dependency('aws-sdk-odb', '~> 1')
   spec.add_dependency('aws-sdk-omics', '~> 1')
   spec.add_dependency('aws-sdk-opensearchserverless', '~> 1')
   spec.add_dependency('aws-sdk-opensearchservice', '~> 1')
@@ -315,7 +322,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-pipes', '~> 1')
   spec.add_dependency('aws-sdk-polly', '~> 1')
   spec.add_dependency('aws-sdk-pricing', '~> 1')
-  spec.add_dependency('aws-sdk-privatenetworks', '~> 1')
   spec.add_dependency('aws-sdk-prometheusservice', '~> 1')
   spec.add_dependency('aws-sdk-proton', '~> 1')
   spec.add_dependency('aws-sdk-qapps', '~> 1')
@@ -350,6 +356,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-s3control', '~> 1')
   spec.add_dependency('aws-sdk-s3outposts', '~> 1')
   spec.add_dependency('aws-sdk-s3tables', '~> 1')
+  spec.add_dependency('aws-sdk-s3vectors', '~> 1')
   spec.add_dependency('aws-sdk-ses', '~> 1')
   spec.add_dependency('aws-sdk-sesv2', '~> 1')
   spec.add_dependency('aws-sdk-sms', '~> 1')
@@ -357,6 +364,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-sqs', '~> 1')
   spec.add_dependency('aws-sdk-ssm', '~> 1')
   spec.add_dependency('aws-sdk-ssmcontacts', '~> 1')
+  spec.add_dependency('aws-sdk-ssmguiconnect', '~> 1')
   spec.add_dependency('aws-sdk-ssmincidents', '~> 1')
   spec.add_dependency('aws-sdk-ssmquicksetup', '~> 1')
   spec.add_dependency('aws-sdk-ssoadmin', '~> 1')
@@ -416,6 +424,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-workspaces', '~> 1')
   spec.add_dependency('aws-sdk-workspacesthinclient', '~> 1')
   spec.add_dependency('aws-sdk-workspacesweb', '~> 1')
+  spec.add_dependency('aws-sdk-workspacesinstances', '~> 1')
   spec.add_dependency('aws-sdk-xray', '~> 1')
   # end service gems
 
@@ -424,5 +433,5 @@ Gem::Specification.new do |spec|
     'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-resources/CHANGELOG.md'
   }
 
-  spec.required_ruby_version = '>= 2.5'
+  spec.required_ruby_version = '>= 2.7'
 end

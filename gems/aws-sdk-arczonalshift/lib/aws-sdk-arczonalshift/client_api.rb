@@ -30,6 +30,8 @@ module Aws::ARCZonalShift
     BlockedDates = Shapes::ListShape.new(name: 'BlockedDates')
     BlockedWindow = Shapes::StringShape.new(name: 'BlockedWindow')
     BlockedWindows = Shapes::ListShape.new(name: 'BlockedWindows')
+    CancelPracticeRunRequest = Shapes::StructureShape.new(name: 'CancelPracticeRunRequest')
+    CancelPracticeRunResponse = Shapes::StructureShape.new(name: 'CancelPracticeRunResponse')
     CancelZonalShiftRequest = Shapes::StructureShape.new(name: 'CancelZonalShiftRequest')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConflictExceptionReason = Shapes::StringShape.new(name: 'ConflictExceptionReason')
@@ -64,6 +66,8 @@ module Aws::ARCZonalShift
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ShiftType = Shapes::StringShape.new(name: 'ShiftType')
+    StartPracticeRunRequest = Shapes::StructureShape.new(name: 'StartPracticeRunRequest')
+    StartPracticeRunResponse = Shapes::StructureShape.new(name: 'StartPracticeRunResponse')
     StartTime = Shapes::TimestampShape.new(name: 'StartTime')
     StartZonalShiftRequest = Shapes::StructureShape.new(name: 'StartZonalShiftRequest')
     String = Shapes::StringShape.new(name: 'String')
@@ -115,6 +119,18 @@ module Aws::ARCZonalShift
 
     BlockedWindows.member = Shapes::ShapeRef.new(shape: BlockedWindow)
 
+    CancelPracticeRunRequest.add_member(:zonal_shift_id, Shapes::ShapeRef.new(shape: ZonalShiftId, required: true, location: "uri", location_name: "zonalShiftId"))
+    CancelPracticeRunRequest.struct_class = Types::CancelPracticeRunRequest
+
+    CancelPracticeRunResponse.add_member(:zonal_shift_id, Shapes::ShapeRef.new(shape: ZonalShiftId, required: true, location_name: "zonalShiftId"))
+    CancelPracticeRunResponse.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "resourceIdentifier"))
+    CancelPracticeRunResponse.add_member(:away_from, Shapes::ShapeRef.new(shape: AvailabilityZone, required: true, location_name: "awayFrom"))
+    CancelPracticeRunResponse.add_member(:expiry_time, Shapes::ShapeRef.new(shape: ExpiryTime, required: true, location_name: "expiryTime"))
+    CancelPracticeRunResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, required: true, location_name: "startTime"))
+    CancelPracticeRunResponse.add_member(:status, Shapes::ShapeRef.new(shape: ZonalShiftStatus, required: true, location_name: "status"))
+    CancelPracticeRunResponse.add_member(:comment, Shapes::ShapeRef.new(shape: ZonalShiftComment, required: true, location_name: "comment"))
+    CancelPracticeRunResponse.struct_class = Types::CancelPracticeRunResponse
+
     CancelZonalShiftRequest.add_member(:zonal_shift_id, Shapes::ShapeRef.new(shape: ZonalShiftId, required: true, location: "uri", location_name: "zonalShiftId"))
     CancelZonalShiftRequest.struct_class = Types::CancelZonalShiftRequest
 
@@ -123,23 +139,23 @@ module Aws::ARCZonalShift
     ConflictException.add_member(:zonal_shift_id, Shapes::ShapeRef.new(shape: String, location_name: "zonalShiftId"))
     ConflictException.struct_class = Types::ConflictException
 
-    ControlCondition.add_member(:alarm_identifier, Shapes::ShapeRef.new(shape: MetricIdentifier, required: true, location_name: "alarmIdentifier"))
     ControlCondition.add_member(:type, Shapes::ShapeRef.new(shape: ControlConditionType, required: true, location_name: "type"))
+    ControlCondition.add_member(:alarm_identifier, Shapes::ShapeRef.new(shape: MetricIdentifier, required: true, location_name: "alarmIdentifier"))
     ControlCondition.struct_class = Types::ControlCondition
 
     ControlConditions.member = Shapes::ShapeRef.new(shape: ControlCondition)
 
-    CreatePracticeRunConfigurationRequest.add_member(:blocked_dates, Shapes::ShapeRef.new(shape: BlockedDates, location_name: "blockedDates"))
+    CreatePracticeRunConfigurationRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "resourceIdentifier"))
     CreatePracticeRunConfigurationRequest.add_member(:blocked_windows, Shapes::ShapeRef.new(shape: BlockedWindows, location_name: "blockedWindows"))
+    CreatePracticeRunConfigurationRequest.add_member(:blocked_dates, Shapes::ShapeRef.new(shape: BlockedDates, location_name: "blockedDates"))
     CreatePracticeRunConfigurationRequest.add_member(:blocking_alarms, Shapes::ShapeRef.new(shape: ControlConditions, location_name: "blockingAlarms"))
     CreatePracticeRunConfigurationRequest.add_member(:outcome_alarms, Shapes::ShapeRef.new(shape: ControlConditions, required: true, location_name: "outcomeAlarms"))
-    CreatePracticeRunConfigurationRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "resourceIdentifier"))
     CreatePracticeRunConfigurationRequest.struct_class = Types::CreatePracticeRunConfigurationRequest
 
     CreatePracticeRunConfigurationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "arn"))
     CreatePracticeRunConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
-    CreatePracticeRunConfigurationResponse.add_member(:practice_run_configuration, Shapes::ShapeRef.new(shape: PracticeRunConfiguration, required: true, location_name: "practiceRunConfiguration"))
     CreatePracticeRunConfigurationResponse.add_member(:zonal_autoshift_status, Shapes::ShapeRef.new(shape: ZonalAutoshiftStatus, required: true, location_name: "zonalAutoshiftStatus"))
+    CreatePracticeRunConfigurationResponse.add_member(:practice_run_configuration, Shapes::ShapeRef.new(shape: PracticeRunConfiguration, required: true, location_name: "practiceRunConfiguration"))
     CreatePracticeRunConfigurationResponse.struct_class = Types::CreatePracticeRunConfigurationResponse
 
     DeletePracticeRunConfigurationRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location: "uri", location_name: "resourceIdentifier"))
@@ -158,39 +174,39 @@ module Aws::ARCZonalShift
     GetManagedResourceRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location: "uri", location_name: "resourceIdentifier"))
     GetManagedResourceRequest.struct_class = Types::GetManagedResourceRequest
 
-    GetManagedResourceResponse.add_member(:applied_weights, Shapes::ShapeRef.new(shape: AppliedWeights, required: true, location_name: "appliedWeights"))
     GetManagedResourceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
-    GetManagedResourceResponse.add_member(:autoshifts, Shapes::ShapeRef.new(shape: AutoshiftsInResource, location_name: "autoshifts"))
     GetManagedResourceResponse.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    GetManagedResourceResponse.add_member(:applied_weights, Shapes::ShapeRef.new(shape: AppliedWeights, required: true, location_name: "appliedWeights"))
+    GetManagedResourceResponse.add_member(:zonal_shifts, Shapes::ShapeRef.new(shape: ZonalShiftsInResource, required: true, location_name: "zonalShifts"))
+    GetManagedResourceResponse.add_member(:autoshifts, Shapes::ShapeRef.new(shape: AutoshiftsInResource, location_name: "autoshifts"))
     GetManagedResourceResponse.add_member(:practice_run_configuration, Shapes::ShapeRef.new(shape: PracticeRunConfiguration, location_name: "practiceRunConfiguration"))
     GetManagedResourceResponse.add_member(:zonal_autoshift_status, Shapes::ShapeRef.new(shape: ZonalAutoshiftStatus, location_name: "zonalAutoshiftStatus"))
-    GetManagedResourceResponse.add_member(:zonal_shifts, Shapes::ShapeRef.new(shape: ZonalShiftsInResource, required: true, location_name: "zonalShifts"))
     GetManagedResourceResponse.struct_class = Types::GetManagedResourceResponse
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
-    ListAutoshiftsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListAutoshiftsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ListAutoshiftsRequest.add_member(:status, Shapes::ShapeRef.new(shape: AutoshiftExecutionStatus, location: "querystring", location_name: "status"))
+    ListAutoshiftsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListAutoshiftsRequest.struct_class = Types::ListAutoshiftsRequest
 
     ListAutoshiftsResponse.add_member(:items, Shapes::ShapeRef.new(shape: AutoshiftSummaries, location_name: "items"))
     ListAutoshiftsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListAutoshiftsResponse.struct_class = Types::ListAutoshiftsResponse
 
-    ListManagedResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListManagedResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListManagedResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListManagedResourcesRequest.struct_class = Types::ListManagedResourcesRequest
 
     ListManagedResourcesResponse.add_member(:items, Shapes::ShapeRef.new(shape: ManagedResourceSummaries, required: true, location_name: "items"))
     ListManagedResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListManagedResourcesResponse.struct_class = Types::ListManagedResourcesResponse
 
-    ListZonalShiftsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListZonalShiftsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
-    ListZonalShiftsRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location: "querystring", location_name: "resourceIdentifier"))
     ListZonalShiftsRequest.add_member(:status, Shapes::ShapeRef.new(shape: ZonalShiftStatus, location: "querystring", location_name: "status"))
+    ListZonalShiftsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListZonalShiftsRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location: "querystring", location_name: "resourceIdentifier"))
     ListZonalShiftsRequest.struct_class = Types::ListZonalShiftsRequest
 
     ListZonalShiftsResponse.add_member(:items, Shapes::ShapeRef.new(shape: ZonalShiftSummaries, location_name: "items"))
@@ -199,29 +215,43 @@ module Aws::ARCZonalShift
 
     ManagedResourceSummaries.member = Shapes::ShapeRef.new(shape: ManagedResourceSummary)
 
-    ManagedResourceSummary.add_member(:applied_weights, Shapes::ShapeRef.new(shape: AppliedWeights, location_name: "appliedWeights"))
     ManagedResourceSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
-    ManagedResourceSummary.add_member(:autoshifts, Shapes::ShapeRef.new(shape: AutoshiftsInResource, location_name: "autoshifts"))
-    ManagedResourceSummary.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, required: true, location_name: "availabilityZones"))
     ManagedResourceSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
-    ManagedResourceSummary.add_member(:practice_run_status, Shapes::ShapeRef.new(shape: ZonalAutoshiftStatus, location_name: "practiceRunStatus"))
-    ManagedResourceSummary.add_member(:zonal_autoshift_status, Shapes::ShapeRef.new(shape: ZonalAutoshiftStatus, location_name: "zonalAutoshiftStatus"))
+    ManagedResourceSummary.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, required: true, location_name: "availabilityZones"))
+    ManagedResourceSummary.add_member(:applied_weights, Shapes::ShapeRef.new(shape: AppliedWeights, location_name: "appliedWeights"))
     ManagedResourceSummary.add_member(:zonal_shifts, Shapes::ShapeRef.new(shape: ZonalShiftsInResource, location_name: "zonalShifts"))
+    ManagedResourceSummary.add_member(:autoshifts, Shapes::ShapeRef.new(shape: AutoshiftsInResource, location_name: "autoshifts"))
+    ManagedResourceSummary.add_member(:zonal_autoshift_status, Shapes::ShapeRef.new(shape: ZonalAutoshiftStatus, location_name: "zonalAutoshiftStatus"))
+    ManagedResourceSummary.add_member(:practice_run_status, Shapes::ShapeRef.new(shape: ZonalAutoshiftStatus, location_name: "practiceRunStatus"))
     ManagedResourceSummary.struct_class = Types::ManagedResourceSummary
 
-    PracticeRunConfiguration.add_member(:blocked_dates, Shapes::ShapeRef.new(shape: BlockedDates, location_name: "blockedDates"))
-    PracticeRunConfiguration.add_member(:blocked_windows, Shapes::ShapeRef.new(shape: BlockedWindows, location_name: "blockedWindows"))
     PracticeRunConfiguration.add_member(:blocking_alarms, Shapes::ShapeRef.new(shape: ControlConditions, location_name: "blockingAlarms"))
     PracticeRunConfiguration.add_member(:outcome_alarms, Shapes::ShapeRef.new(shape: ControlConditions, required: true, location_name: "outcomeAlarms"))
+    PracticeRunConfiguration.add_member(:blocked_windows, Shapes::ShapeRef.new(shape: BlockedWindows, location_name: "blockedWindows"))
+    PracticeRunConfiguration.add_member(:blocked_dates, Shapes::ShapeRef.new(shape: BlockedDates, location_name: "blockedDates"))
     PracticeRunConfiguration.struct_class = Types::PracticeRunConfiguration
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    StartZonalShiftRequest.add_member(:away_from, Shapes::ShapeRef.new(shape: AvailabilityZone, required: true, location_name: "awayFrom"))
-    StartZonalShiftRequest.add_member(:comment, Shapes::ShapeRef.new(shape: ZonalShiftComment, required: true, location_name: "comment"))
-    StartZonalShiftRequest.add_member(:expires_in, Shapes::ShapeRef.new(shape: ExpiresIn, required: true, location_name: "expiresIn"))
+    StartPracticeRunRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "resourceIdentifier"))
+    StartPracticeRunRequest.add_member(:away_from, Shapes::ShapeRef.new(shape: AvailabilityZone, required: true, location_name: "awayFrom"))
+    StartPracticeRunRequest.add_member(:comment, Shapes::ShapeRef.new(shape: ZonalShiftComment, required: true, location_name: "comment"))
+    StartPracticeRunRequest.struct_class = Types::StartPracticeRunRequest
+
+    StartPracticeRunResponse.add_member(:zonal_shift_id, Shapes::ShapeRef.new(shape: ZonalShiftId, required: true, location_name: "zonalShiftId"))
+    StartPracticeRunResponse.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "resourceIdentifier"))
+    StartPracticeRunResponse.add_member(:away_from, Shapes::ShapeRef.new(shape: AvailabilityZone, required: true, location_name: "awayFrom"))
+    StartPracticeRunResponse.add_member(:expiry_time, Shapes::ShapeRef.new(shape: ExpiryTime, required: true, location_name: "expiryTime"))
+    StartPracticeRunResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, required: true, location_name: "startTime"))
+    StartPracticeRunResponse.add_member(:status, Shapes::ShapeRef.new(shape: ZonalShiftStatus, required: true, location_name: "status"))
+    StartPracticeRunResponse.add_member(:comment, Shapes::ShapeRef.new(shape: ZonalShiftComment, required: true, location_name: "comment"))
+    StartPracticeRunResponse.struct_class = Types::StartPracticeRunResponse
+
     StartZonalShiftRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "resourceIdentifier"))
+    StartZonalShiftRequest.add_member(:away_from, Shapes::ShapeRef.new(shape: AvailabilityZone, required: true, location_name: "awayFrom"))
+    StartZonalShiftRequest.add_member(:expires_in, Shapes::ShapeRef.new(shape: ExpiresIn, required: true, location_name: "expiresIn"))
+    StartZonalShiftRequest.add_member(:comment, Shapes::ShapeRef.new(shape: ZonalShiftComment, required: true, location_name: "comment"))
     StartZonalShiftRequest.struct_class = Types::StartZonalShiftRequest
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -233,17 +263,17 @@ module Aws::ARCZonalShift
     UpdateAutoshiftObserverNotificationStatusResponse.add_member(:status, Shapes::ShapeRef.new(shape: AutoshiftObserverNotificationStatus, required: true, location_name: "status"))
     UpdateAutoshiftObserverNotificationStatusResponse.struct_class = Types::UpdateAutoshiftObserverNotificationStatusResponse
 
-    UpdatePracticeRunConfigurationRequest.add_member(:blocked_dates, Shapes::ShapeRef.new(shape: BlockedDates, location_name: "blockedDates"))
+    UpdatePracticeRunConfigurationRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location: "uri", location_name: "resourceIdentifier"))
     UpdatePracticeRunConfigurationRequest.add_member(:blocked_windows, Shapes::ShapeRef.new(shape: BlockedWindows, location_name: "blockedWindows"))
+    UpdatePracticeRunConfigurationRequest.add_member(:blocked_dates, Shapes::ShapeRef.new(shape: BlockedDates, location_name: "blockedDates"))
     UpdatePracticeRunConfigurationRequest.add_member(:blocking_alarms, Shapes::ShapeRef.new(shape: ControlConditions, location_name: "blockingAlarms"))
     UpdatePracticeRunConfigurationRequest.add_member(:outcome_alarms, Shapes::ShapeRef.new(shape: ControlConditions, location_name: "outcomeAlarms"))
-    UpdatePracticeRunConfigurationRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location: "uri", location_name: "resourceIdentifier"))
     UpdatePracticeRunConfigurationRequest.struct_class = Types::UpdatePracticeRunConfigurationRequest
 
     UpdatePracticeRunConfigurationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "arn"))
     UpdatePracticeRunConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
-    UpdatePracticeRunConfigurationResponse.add_member(:practice_run_configuration, Shapes::ShapeRef.new(shape: PracticeRunConfiguration, required: true, location_name: "practiceRunConfiguration"))
     UpdatePracticeRunConfigurationResponse.add_member(:zonal_autoshift_status, Shapes::ShapeRef.new(shape: ZonalAutoshiftStatus, required: true, location_name: "zonalAutoshiftStatus"))
+    UpdatePracticeRunConfigurationResponse.add_member(:practice_run_configuration, Shapes::ShapeRef.new(shape: PracticeRunConfiguration, required: true, location_name: "practiceRunConfiguration"))
     UpdatePracticeRunConfigurationResponse.struct_class = Types::UpdatePracticeRunConfigurationResponse
 
     UpdateZonalAutoshiftConfigurationRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location: "uri", location_name: "resourceIdentifier"))
@@ -254,46 +284,46 @@ module Aws::ARCZonalShift
     UpdateZonalAutoshiftConfigurationResponse.add_member(:zonal_autoshift_status, Shapes::ShapeRef.new(shape: ZonalAutoshiftStatus, required: true, location_name: "zonalAutoshiftStatus"))
     UpdateZonalAutoshiftConfigurationResponse.struct_class = Types::UpdateZonalAutoshiftConfigurationResponse
 
+    UpdateZonalShiftRequest.add_member(:zonal_shift_id, Shapes::ShapeRef.new(shape: ZonalShiftId, required: true, location: "uri", location_name: "zonalShiftId"))
     UpdateZonalShiftRequest.add_member(:comment, Shapes::ShapeRef.new(shape: ZonalShiftComment, location_name: "comment"))
     UpdateZonalShiftRequest.add_member(:expires_in, Shapes::ShapeRef.new(shape: ExpiresIn, location_name: "expiresIn"))
-    UpdateZonalShiftRequest.add_member(:zonal_shift_id, Shapes::ShapeRef.new(shape: ZonalShiftId, required: true, location: "uri", location_name: "zonalShiftId"))
     UpdateZonalShiftRequest.struct_class = Types::UpdateZonalShiftRequest
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, required: true, location_name: "reason"))
     ValidationException.struct_class = Types::ValidationException
 
-    ZonalShift.add_member(:away_from, Shapes::ShapeRef.new(shape: AvailabilityZone, required: true, location_name: "awayFrom"))
-    ZonalShift.add_member(:comment, Shapes::ShapeRef.new(shape: ZonalShiftComment, required: true, location_name: "comment"))
-    ZonalShift.add_member(:expiry_time, Shapes::ShapeRef.new(shape: ExpiryTime, required: true, location_name: "expiryTime"))
+    ZonalShift.add_member(:zonal_shift_id, Shapes::ShapeRef.new(shape: ZonalShiftId, required: true, location_name: "zonalShiftId"))
     ZonalShift.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "resourceIdentifier"))
+    ZonalShift.add_member(:away_from, Shapes::ShapeRef.new(shape: AvailabilityZone, required: true, location_name: "awayFrom"))
+    ZonalShift.add_member(:expiry_time, Shapes::ShapeRef.new(shape: ExpiryTime, required: true, location_name: "expiryTime"))
     ZonalShift.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, required: true, location_name: "startTime"))
     ZonalShift.add_member(:status, Shapes::ShapeRef.new(shape: ZonalShiftStatus, required: true, location_name: "status"))
-    ZonalShift.add_member(:zonal_shift_id, Shapes::ShapeRef.new(shape: ZonalShiftId, required: true, location_name: "zonalShiftId"))
+    ZonalShift.add_member(:comment, Shapes::ShapeRef.new(shape: ZonalShiftComment, required: true, location_name: "comment"))
     ZonalShift.struct_class = Types::ZonalShift
 
     ZonalShiftInResource.add_member(:applied_status, Shapes::ShapeRef.new(shape: AppliedStatus, required: true, location_name: "appliedStatus"))
-    ZonalShiftInResource.add_member(:away_from, Shapes::ShapeRef.new(shape: AvailabilityZone, required: true, location_name: "awayFrom"))
-    ZonalShiftInResource.add_member(:comment, Shapes::ShapeRef.new(shape: ZonalShiftComment, required: true, location_name: "comment"))
-    ZonalShiftInResource.add_member(:expiry_time, Shapes::ShapeRef.new(shape: ExpiryTime, required: true, location_name: "expiryTime"))
-    ZonalShiftInResource.add_member(:practice_run_outcome, Shapes::ShapeRef.new(shape: PracticeRunOutcome, location_name: "practiceRunOutcome"))
-    ZonalShiftInResource.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "resourceIdentifier"))
-    ZonalShiftInResource.add_member(:shift_type, Shapes::ShapeRef.new(shape: ShiftType, location_name: "shiftType"))
-    ZonalShiftInResource.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, required: true, location_name: "startTime"))
     ZonalShiftInResource.add_member(:zonal_shift_id, Shapes::ShapeRef.new(shape: ZonalShiftId, required: true, location_name: "zonalShiftId"))
+    ZonalShiftInResource.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "resourceIdentifier"))
+    ZonalShiftInResource.add_member(:away_from, Shapes::ShapeRef.new(shape: AvailabilityZone, required: true, location_name: "awayFrom"))
+    ZonalShiftInResource.add_member(:expiry_time, Shapes::ShapeRef.new(shape: ExpiryTime, required: true, location_name: "expiryTime"))
+    ZonalShiftInResource.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, required: true, location_name: "startTime"))
+    ZonalShiftInResource.add_member(:comment, Shapes::ShapeRef.new(shape: ZonalShiftComment, required: true, location_name: "comment"))
+    ZonalShiftInResource.add_member(:shift_type, Shapes::ShapeRef.new(shape: ShiftType, location_name: "shiftType"))
+    ZonalShiftInResource.add_member(:practice_run_outcome, Shapes::ShapeRef.new(shape: PracticeRunOutcome, location_name: "practiceRunOutcome"))
     ZonalShiftInResource.struct_class = Types::ZonalShiftInResource
 
     ZonalShiftSummaries.member = Shapes::ShapeRef.new(shape: ZonalShiftSummary)
 
-    ZonalShiftSummary.add_member(:away_from, Shapes::ShapeRef.new(shape: AvailabilityZone, required: true, location_name: "awayFrom"))
-    ZonalShiftSummary.add_member(:comment, Shapes::ShapeRef.new(shape: ZonalShiftComment, required: true, location_name: "comment"))
-    ZonalShiftSummary.add_member(:expiry_time, Shapes::ShapeRef.new(shape: ExpiryTime, required: true, location_name: "expiryTime"))
-    ZonalShiftSummary.add_member(:practice_run_outcome, Shapes::ShapeRef.new(shape: PracticeRunOutcome, location_name: "practiceRunOutcome"))
+    ZonalShiftSummary.add_member(:zonal_shift_id, Shapes::ShapeRef.new(shape: ZonalShiftId, required: true, location_name: "zonalShiftId"))
     ZonalShiftSummary.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "resourceIdentifier"))
-    ZonalShiftSummary.add_member(:shift_type, Shapes::ShapeRef.new(shape: ShiftType, location_name: "shiftType"))
+    ZonalShiftSummary.add_member(:away_from, Shapes::ShapeRef.new(shape: AvailabilityZone, required: true, location_name: "awayFrom"))
+    ZonalShiftSummary.add_member(:expiry_time, Shapes::ShapeRef.new(shape: ExpiryTime, required: true, location_name: "expiryTime"))
     ZonalShiftSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, required: true, location_name: "startTime"))
     ZonalShiftSummary.add_member(:status, Shapes::ShapeRef.new(shape: ZonalShiftStatus, required: true, location_name: "status"))
-    ZonalShiftSummary.add_member(:zonal_shift_id, Shapes::ShapeRef.new(shape: ZonalShiftId, required: true, location_name: "zonalShiftId"))
+    ZonalShiftSummary.add_member(:comment, Shapes::ShapeRef.new(shape: ZonalShiftComment, required: true, location_name: "comment"))
+    ZonalShiftSummary.add_member(:shift_type, Shapes::ShapeRef.new(shape: ShiftType, location_name: "shiftType"))
+    ZonalShiftSummary.add_member(:practice_run_outcome, Shapes::ShapeRef.new(shape: PracticeRunOutcome, location_name: "practiceRunOutcome"))
     ZonalShiftSummary.struct_class = Types::ZonalShiftSummary
 
     ZonalShiftsInResource.member = Shapes::ShapeRef.new(shape: ZonalShiftInResource)
@@ -308,7 +338,6 @@ module Aws::ARCZonalShift
         "apiVersion" => "2022-10-30",
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "arc-zonal-shift",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],
         "serviceFullName" => "AWS ARC - Zonal Shift",
@@ -317,6 +346,20 @@ module Aws::ARCZonalShift
         "signingName" => "arc-zonal-shift",
         "uid" => "arc-zonal-shift-2022-10-30",
       }
+
+      api.add_operation(:cancel_practice_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelPracticeRun"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/practiceruns/{zonalShiftId}"
+        o.input = Shapes::ShapeRef.new(shape: CancelPracticeRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelPracticeRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
 
       api.add_operation(:cancel_zonal_shift, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CancelZonalShift"
@@ -328,8 +371,8 @@ module Aws::ARCZonalShift
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:create_practice_run_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -342,8 +385,8 @@ module Aws::ARCZonalShift
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:delete_practice_run_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -356,8 +399,8 @@ module Aws::ARCZonalShift
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:get_autoshift_observer_notification_status, Seahorse::Model::Operation.new.tap do |o|
@@ -380,8 +423,8 @@ module Aws::ARCZonalShift
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:list_autoshifts, Seahorse::Model::Operation.new.tap do |o|
@@ -392,8 +435,8 @@ module Aws::ARCZonalShift
         o.output = Shapes::ShapeRef.new(shape: ListAutoshiftsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -410,8 +453,8 @@ module Aws::ARCZonalShift
         o.output = Shapes::ShapeRef.new(shape: ListManagedResourcesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -428,14 +471,28 @@ module Aws::ARCZonalShift
         o.output = Shapes::ShapeRef.new(shape: ListZonalShiftsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:start_practice_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartPracticeRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/practiceruns"
+        o.input = Shapes::ShapeRef.new(shape: StartPracticeRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartPracticeRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:start_zonal_shift, Seahorse::Model::Operation.new.tap do |o|
@@ -448,8 +505,8 @@ module Aws::ARCZonalShift
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:update_autoshift_observer_notification_status, Seahorse::Model::Operation.new.tap do |o|
@@ -460,8 +517,8 @@ module Aws::ARCZonalShift
         o.output = Shapes::ShapeRef.new(shape: UpdateAutoshiftObserverNotificationStatusResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:update_practice_run_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -474,8 +531,8 @@ module Aws::ARCZonalShift
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:update_zonal_autoshift_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -488,8 +545,8 @@ module Aws::ARCZonalShift
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:update_zonal_shift, Seahorse::Model::Operation.new.tap do |o|
@@ -502,8 +559,8 @@ module Aws::ARCZonalShift
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
     end
 

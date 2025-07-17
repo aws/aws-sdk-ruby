@@ -200,8 +200,7 @@ module Aws::B2bi
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -775,6 +774,25 @@ module Aws::B2bi
     #               segment_terminator: "X12SegmentTerminator",
     #             },
     #             validate_edi: false,
+    #             control_numbers: {
+    #               starting_interchange_control_number: 1,
+    #               starting_functional_group_control_number: 1,
+    #               starting_transaction_set_control_number: 1,
+    #             },
+    #             gs05_time_format: "HHMM", # accepts HHMM, HHMMSS, HHMMSSDD
+    #           },
+    #           wrap_options: {
+    #             wrap_by: "SEGMENT", # required, accepts SEGMENT, ONE_LINE, LINE_LENGTH
+    #             line_terminator: "CRLF", # accepts CRLF, LF, CR
+    #             line_length: 1,
+    #           },
+    #         },
+    #       },
+    #       inbound_edi: {
+    #         x12: {
+    #           acknowledgment_options: {
+    #             functional_acknowledgment: "DO_NOT_GENERATE", # required, accepts DO_NOT_GENERATE, GENERATE_ALL_SEGMENTS, GENERATE_WITHOUT_TRANSACTION_SET_RESPONSE_LOOP
+    #             technical_acknowledgment: "DO_NOT_GENERATE", # required, accepts DO_NOT_GENERATE, GENERATE_ALL_SEGMENTS
     #           },
     #         },
     #       },
@@ -812,6 +830,15 @@ module Aws::B2bi
     #   resp.capability_options.outbound_edi.x12.common.delimiters.data_element_separator #=> String
     #   resp.capability_options.outbound_edi.x12.common.delimiters.segment_terminator #=> String
     #   resp.capability_options.outbound_edi.x12.common.validate_edi #=> Boolean
+    #   resp.capability_options.outbound_edi.x12.common.control_numbers.starting_interchange_control_number #=> Integer
+    #   resp.capability_options.outbound_edi.x12.common.control_numbers.starting_functional_group_control_number #=> Integer
+    #   resp.capability_options.outbound_edi.x12.common.control_numbers.starting_transaction_set_control_number #=> Integer
+    #   resp.capability_options.outbound_edi.x12.common.gs05_time_format #=> String, one of "HHMM", "HHMMSS", "HHMMSSDD"
+    #   resp.capability_options.outbound_edi.x12.wrap_options.wrap_by #=> String, one of "SEGMENT", "ONE_LINE", "LINE_LENGTH"
+    #   resp.capability_options.outbound_edi.x12.wrap_options.line_terminator #=> String, one of "CRLF", "LF", "CR"
+    #   resp.capability_options.outbound_edi.x12.wrap_options.line_length #=> Integer
+    #   resp.capability_options.inbound_edi.x12.acknowledgment_options.functional_acknowledgment #=> String, one of "DO_NOT_GENERATE", "GENERATE_ALL_SEGMENTS", "GENERATE_WITHOUT_TRANSACTION_SET_RESPONSE_LOOP"
+    #   resp.capability_options.inbound_edi.x12.acknowledgment_options.technical_acknowledgment #=> String, one of "DO_NOT_GENERATE", "GENERATE_ALL_SEGMENTS"
     #   resp.trading_partner_id #=> String
     #   resp.created_at #=> Time
     #
@@ -1218,6 +1245,13 @@ module Aws::B2bi
     #           version: "VERSION_4010", # accepts VERSION_4010, VERSION_4030, VERSION_4050, VERSION_4060, VERSION_5010, VERSION_5010_HIPAA
     #         },
     #       },
+    #       advanced_options: {
+    #         x12: {
+    #           split_options: {
+    #             split_by: "NONE", # required, accepts NONE, TRANSACTION
+    #           },
+    #         },
+    #       },
     #     },
     #     mapping: {
     #       template_language: "XSLT", # required, accepts XSLT, JSONATA
@@ -1258,6 +1292,7 @@ module Aws::B2bi
     #   resp.input_conversion.from_format #=> String, one of "X12"
     #   resp.input_conversion.format_options.x12.transaction_set #=> String, one of "X12_100", "X12_101", "X12_102", "X12_103", "X12_104", "X12_105", "X12_106", "X12_107", "X12_108", "X12_109", "X12_110", "X12_111", "X12_112", "X12_113", "X12_120", "X12_121", "X12_124", "X12_125", "X12_126", "X12_127", "X12_128", "X12_129", "X12_130", "X12_131", "X12_132", "X12_133", "X12_135", "X12_138", "X12_139", "X12_140", "X12_141", "X12_142", "X12_143", "X12_144", "X12_146", "X12_147", "X12_148", "X12_149", "X12_150", "X12_151", "X12_152", "X12_153", "X12_154", "X12_155", "X12_157", "X12_158", "X12_159", "X12_160", "X12_161", "X12_163", "X12_170", "X12_175", "X12_176", "X12_179", "X12_180", "X12_185", "X12_186", "X12_187", "X12_188", "X12_189", "X12_190", "X12_191", "X12_194", "X12_195", "X12_196", "X12_197", "X12_198", "X12_199", "X12_200", "X12_201", "X12_202", "X12_203", "X12_204", "X12_205", "X12_206", "X12_210", "X12_211", "X12_212", "X12_213", "X12_214", "X12_215", "X12_216", "X12_217", "X12_218", "X12_219", "X12_220", "X12_222", "X12_223", "X12_224", "X12_225", "X12_227", "X12_228", "X12_240", "X12_242", "X12_244", "X12_245", "X12_248", "X12_249", "X12_250", "X12_251", "X12_252", "X12_255", "X12_256", "X12_259", "X12_260", "X12_261", "X12_262", "X12_263", "X12_264", "X12_265", "X12_266", "X12_267", "X12_268", "X12_269", "X12_270", "X12_271", "X12_272", "X12_273", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_280", "X12_283", "X12_284", "X12_285", "X12_286", "X12_288", "X12_290", "X12_300", "X12_301", "X12_303", "X12_304", "X12_309", "X12_310", "X12_311", "X12_312", "X12_313", "X12_315", "X12_317", "X12_319", "X12_322", "X12_323", "X12_324", "X12_325", "X12_326", "X12_350", "X12_352", "X12_353", "X12_354", "X12_355", "X12_356", "X12_357", "X12_358", "X12_361", "X12_362", "X12_404", "X12_410", "X12_412", "X12_414", "X12_417", "X12_418", "X12_419", "X12_420", "X12_421", "X12_422", "X12_423", "X12_424", "X12_425", "X12_426", "X12_429", "X12_431", "X12_432", "X12_433", "X12_434", "X12_435", "X12_436", "X12_437", "X12_440", "X12_451", "X12_452", "X12_453", "X12_455", "X12_456", "X12_460", "X12_463", "X12_466", "X12_468", "X12_470", "X12_475", "X12_485", "X12_486", "X12_490", "X12_492", "X12_494", "X12_500", "X12_501", "X12_503", "X12_504", "X12_511", "X12_517", "X12_521", "X12_527", "X12_536", "X12_540", "X12_561", "X12_567", "X12_568", "X12_601", "X12_602", "X12_620", "X12_625", "X12_650", "X12_715", "X12_753", "X12_754", "X12_805", "X12_806", "X12_810", "X12_811", "X12_812", "X12_813", "X12_814", "X12_815", "X12_816", "X12_818", "X12_819", "X12_820", "X12_821", "X12_822", "X12_823", "X12_824", "X12_826", "X12_827", "X12_828", "X12_829", "X12_830", "X12_831", "X12_832", "X12_833", "X12_834", "X12_835", "X12_836", "X12_837", "X12_838", "X12_839", "X12_840", "X12_841", "X12_842", "X12_843", "X12_844", "X12_845", "X12_846", "X12_847", "X12_848", "X12_849", "X12_850", "X12_851", "X12_852", "X12_853", "X12_854", "X12_855", "X12_856", "X12_857", "X12_858", "X12_859", "X12_860", "X12_861", "X12_862", "X12_863", "X12_864", "X12_865", "X12_866", "X12_867", "X12_868", "X12_869", "X12_870", "X12_871", "X12_872", "X12_873", "X12_874", "X12_875", "X12_876", "X12_877", "X12_878", "X12_879", "X12_880", "X12_881", "X12_882", "X12_883", "X12_884", "X12_885", "X12_886", "X12_887", "X12_888", "X12_889", "X12_891", "X12_893", "X12_894", "X12_895", "X12_896", "X12_920", "X12_924", "X12_925", "X12_926", "X12_928", "X12_940", "X12_943", "X12_944", "X12_945", "X12_947", "X12_980", "X12_990", "X12_993", "X12_996", "X12_997", "X12_998", "X12_999", "X12_270_X279", "X12_271_X279", "X12_275_X210", "X12_275_X211", "X12_276_X212", "X12_277_X212", "X12_277_X214", "X12_277_X364", "X12_278_X217", "X12_820_X218", "X12_820_X306", "X12_824_X186", "X12_834_X220", "X12_834_X307", "X12_834_X318", "X12_835_X221", "X12_837_X222", "X12_837_X223", "X12_837_X224", "X12_837_X291", "X12_837_X292", "X12_837_X298", "X12_999_X231"
     #   resp.input_conversion.format_options.x12.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_4050", "VERSION_4060", "VERSION_5010", "VERSION_5010_HIPAA"
+    #   resp.input_conversion.advanced_options.x12.split_options.split_by #=> String, one of "NONE", "TRANSACTION"
     #   resp.mapping.template_language #=> String, one of "XSLT", "JSONATA"
     #   resp.mapping.template #=> String
     #   resp.output_conversion.to_format #=> String, one of "X12"
@@ -1412,18 +1447,26 @@ module Aws::B2bi
     #
     #  </note>
     #
+    # To generate a mapping, perform the following steps:
+    #
+    # 1.  Start with an X12 EDI document to use as the input.
+    #
+    # 2.  Call `TestMapping` using your EDI document.
+    #
+    # 3.  Use the output from the `TestMapping` operation as either input or
+    #     output for your GenerateMapping call, along with your sample file.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/b2bi/latest/userguide/ai-assisted-mapping.html#ai-assist-prereq
     #
     # @option params [required, String] :input_file_content
-    #   Provide the contents of a sample X12 EDI file (for inbound EDI) or
-    #   JSON/XML file (for outbound EDI) to use as a starting point for the
-    #   mapping.
+    #   Provide the contents of a sample X12 EDI file, either in JSON or XML
+    #   format, to use as a starting point for the mapping.
     #
     # @option params [required, String] :output_file_content
-    #   Provide the contents of a sample X12 EDI file (for outbound EDI) or
-    #   JSON/XML file (for inbound EDI) to use as a target for the mapping.
+    #   Provide the contents of a sample X12 EDI file, either in JSON or XML
+    #   format, to use as a target for the mapping.
     #
     # @option params [required, String] :mapping_type
     #   Specify the mapping type: either `JSONATA` or `XSLT.`
@@ -1640,6 +1683,15 @@ module Aws::B2bi
     #   resp.capability_options.outbound_edi.x12.common.delimiters.data_element_separator #=> String
     #   resp.capability_options.outbound_edi.x12.common.delimiters.segment_terminator #=> String
     #   resp.capability_options.outbound_edi.x12.common.validate_edi #=> Boolean
+    #   resp.capability_options.outbound_edi.x12.common.control_numbers.starting_interchange_control_number #=> Integer
+    #   resp.capability_options.outbound_edi.x12.common.control_numbers.starting_functional_group_control_number #=> Integer
+    #   resp.capability_options.outbound_edi.x12.common.control_numbers.starting_transaction_set_control_number #=> Integer
+    #   resp.capability_options.outbound_edi.x12.common.gs05_time_format #=> String, one of "HHMM", "HHMMSS", "HHMMSSDD"
+    #   resp.capability_options.outbound_edi.x12.wrap_options.wrap_by #=> String, one of "SEGMENT", "ONE_LINE", "LINE_LENGTH"
+    #   resp.capability_options.outbound_edi.x12.wrap_options.line_terminator #=> String, one of "CRLF", "LF", "CR"
+    #   resp.capability_options.outbound_edi.x12.wrap_options.line_length #=> Integer
+    #   resp.capability_options.inbound_edi.x12.acknowledgment_options.functional_acknowledgment #=> String, one of "DO_NOT_GENERATE", "GENERATE_ALL_SEGMENTS", "GENERATE_WITHOUT_TRANSACTION_SET_RESPONSE_LOOP"
+    #   resp.capability_options.inbound_edi.x12.acknowledgment_options.technical_acknowledgment #=> String, one of "DO_NOT_GENERATE", "GENERATE_ALL_SEGMENTS"
     #   resp.trading_partner_id #=> String
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
@@ -1806,6 +1858,7 @@ module Aws::B2bi
     #   resp.input_conversion.from_format #=> String, one of "X12"
     #   resp.input_conversion.format_options.x12.transaction_set #=> String, one of "X12_100", "X12_101", "X12_102", "X12_103", "X12_104", "X12_105", "X12_106", "X12_107", "X12_108", "X12_109", "X12_110", "X12_111", "X12_112", "X12_113", "X12_120", "X12_121", "X12_124", "X12_125", "X12_126", "X12_127", "X12_128", "X12_129", "X12_130", "X12_131", "X12_132", "X12_133", "X12_135", "X12_138", "X12_139", "X12_140", "X12_141", "X12_142", "X12_143", "X12_144", "X12_146", "X12_147", "X12_148", "X12_149", "X12_150", "X12_151", "X12_152", "X12_153", "X12_154", "X12_155", "X12_157", "X12_158", "X12_159", "X12_160", "X12_161", "X12_163", "X12_170", "X12_175", "X12_176", "X12_179", "X12_180", "X12_185", "X12_186", "X12_187", "X12_188", "X12_189", "X12_190", "X12_191", "X12_194", "X12_195", "X12_196", "X12_197", "X12_198", "X12_199", "X12_200", "X12_201", "X12_202", "X12_203", "X12_204", "X12_205", "X12_206", "X12_210", "X12_211", "X12_212", "X12_213", "X12_214", "X12_215", "X12_216", "X12_217", "X12_218", "X12_219", "X12_220", "X12_222", "X12_223", "X12_224", "X12_225", "X12_227", "X12_228", "X12_240", "X12_242", "X12_244", "X12_245", "X12_248", "X12_249", "X12_250", "X12_251", "X12_252", "X12_255", "X12_256", "X12_259", "X12_260", "X12_261", "X12_262", "X12_263", "X12_264", "X12_265", "X12_266", "X12_267", "X12_268", "X12_269", "X12_270", "X12_271", "X12_272", "X12_273", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_280", "X12_283", "X12_284", "X12_285", "X12_286", "X12_288", "X12_290", "X12_300", "X12_301", "X12_303", "X12_304", "X12_309", "X12_310", "X12_311", "X12_312", "X12_313", "X12_315", "X12_317", "X12_319", "X12_322", "X12_323", "X12_324", "X12_325", "X12_326", "X12_350", "X12_352", "X12_353", "X12_354", "X12_355", "X12_356", "X12_357", "X12_358", "X12_361", "X12_362", "X12_404", "X12_410", "X12_412", "X12_414", "X12_417", "X12_418", "X12_419", "X12_420", "X12_421", "X12_422", "X12_423", "X12_424", "X12_425", "X12_426", "X12_429", "X12_431", "X12_432", "X12_433", "X12_434", "X12_435", "X12_436", "X12_437", "X12_440", "X12_451", "X12_452", "X12_453", "X12_455", "X12_456", "X12_460", "X12_463", "X12_466", "X12_468", "X12_470", "X12_475", "X12_485", "X12_486", "X12_490", "X12_492", "X12_494", "X12_500", "X12_501", "X12_503", "X12_504", "X12_511", "X12_517", "X12_521", "X12_527", "X12_536", "X12_540", "X12_561", "X12_567", "X12_568", "X12_601", "X12_602", "X12_620", "X12_625", "X12_650", "X12_715", "X12_753", "X12_754", "X12_805", "X12_806", "X12_810", "X12_811", "X12_812", "X12_813", "X12_814", "X12_815", "X12_816", "X12_818", "X12_819", "X12_820", "X12_821", "X12_822", "X12_823", "X12_824", "X12_826", "X12_827", "X12_828", "X12_829", "X12_830", "X12_831", "X12_832", "X12_833", "X12_834", "X12_835", "X12_836", "X12_837", "X12_838", "X12_839", "X12_840", "X12_841", "X12_842", "X12_843", "X12_844", "X12_845", "X12_846", "X12_847", "X12_848", "X12_849", "X12_850", "X12_851", "X12_852", "X12_853", "X12_854", "X12_855", "X12_856", "X12_857", "X12_858", "X12_859", "X12_860", "X12_861", "X12_862", "X12_863", "X12_864", "X12_865", "X12_866", "X12_867", "X12_868", "X12_869", "X12_870", "X12_871", "X12_872", "X12_873", "X12_874", "X12_875", "X12_876", "X12_877", "X12_878", "X12_879", "X12_880", "X12_881", "X12_882", "X12_883", "X12_884", "X12_885", "X12_886", "X12_887", "X12_888", "X12_889", "X12_891", "X12_893", "X12_894", "X12_895", "X12_896", "X12_920", "X12_924", "X12_925", "X12_926", "X12_928", "X12_940", "X12_943", "X12_944", "X12_945", "X12_947", "X12_980", "X12_990", "X12_993", "X12_996", "X12_997", "X12_998", "X12_999", "X12_270_X279", "X12_271_X279", "X12_275_X210", "X12_275_X211", "X12_276_X212", "X12_277_X212", "X12_277_X214", "X12_277_X364", "X12_278_X217", "X12_820_X218", "X12_820_X306", "X12_824_X186", "X12_834_X220", "X12_834_X307", "X12_834_X318", "X12_835_X221", "X12_837_X222", "X12_837_X223", "X12_837_X224", "X12_837_X291", "X12_837_X292", "X12_837_X298", "X12_999_X231"
     #   resp.input_conversion.format_options.x12.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_4050", "VERSION_4060", "VERSION_5010", "VERSION_5010_HIPAA"
+    #   resp.input_conversion.advanced_options.x12.split_options.split_by #=> String, one of "NONE", "TRANSACTION"
     #   resp.mapping.template_language #=> String, one of "XSLT", "JSONATA"
     #   resp.mapping.template #=> String
     #   resp.output_conversion.to_format #=> String, one of "X12"
@@ -1827,6 +1880,13 @@ module Aws::B2bi
 
     # Returns the details of the transformer run, based on the Transformer
     # job ID.
+    #
+    # <note markdown="1"> If 30 days have elapsed since your transformer job was started, the
+    # system deletes it. So, if you run `GetTransformerJob` and supply a
+    # `transformerId` and `transformerJobId` for a job that was started more
+    # than 30 days previously, you receive a 404 response.
+    #
+    #  </note>
     #
     # @option params [required, String] :transformer_job_id
     #   Specifies the unique, system-generated identifier for a transformer
@@ -1875,6 +1935,11 @@ module Aws::B2bi
     #   resp.output_files[0].bucket_name #=> String
     #   resp.output_files[0].key #=> String
     #   resp.message #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * transformer_job_succeeded
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/GetTransformerJob AWS API Documentation
     #
@@ -2036,6 +2101,15 @@ module Aws::B2bi
     #   resp.partnerships[0].capability_options.outbound_edi.x12.common.delimiters.data_element_separator #=> String
     #   resp.partnerships[0].capability_options.outbound_edi.x12.common.delimiters.segment_terminator #=> String
     #   resp.partnerships[0].capability_options.outbound_edi.x12.common.validate_edi #=> Boolean
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.common.control_numbers.starting_interchange_control_number #=> Integer
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.common.control_numbers.starting_functional_group_control_number #=> Integer
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.common.control_numbers.starting_transaction_set_control_number #=> Integer
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.common.gs05_time_format #=> String, one of "HHMM", "HHMMSS", "HHMMSSDD"
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.wrap_options.wrap_by #=> String, one of "SEGMENT", "ONE_LINE", "LINE_LENGTH"
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.wrap_options.line_terminator #=> String, one of "CRLF", "LF", "CR"
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.wrap_options.line_length #=> Integer
+    #   resp.partnerships[0].capability_options.inbound_edi.x12.acknowledgment_options.functional_acknowledgment #=> String, one of "DO_NOT_GENERATE", "GENERATE_ALL_SEGMENTS", "GENERATE_WITHOUT_TRANSACTION_SET_RESPONSE_LOOP"
+    #   resp.partnerships[0].capability_options.inbound_edi.x12.acknowledgment_options.technical_acknowledgment #=> String, one of "DO_NOT_GENERATE", "GENERATE_ALL_SEGMENTS"
     #   resp.partnerships[0].trading_partner_id #=> String
     #   resp.partnerships[0].created_at #=> Time
     #   resp.partnerships[0].modified_at #=> Time
@@ -2247,6 +2321,7 @@ module Aws::B2bi
     #   resp.transformers[0].input_conversion.from_format #=> String, one of "X12"
     #   resp.transformers[0].input_conversion.format_options.x12.transaction_set #=> String, one of "X12_100", "X12_101", "X12_102", "X12_103", "X12_104", "X12_105", "X12_106", "X12_107", "X12_108", "X12_109", "X12_110", "X12_111", "X12_112", "X12_113", "X12_120", "X12_121", "X12_124", "X12_125", "X12_126", "X12_127", "X12_128", "X12_129", "X12_130", "X12_131", "X12_132", "X12_133", "X12_135", "X12_138", "X12_139", "X12_140", "X12_141", "X12_142", "X12_143", "X12_144", "X12_146", "X12_147", "X12_148", "X12_149", "X12_150", "X12_151", "X12_152", "X12_153", "X12_154", "X12_155", "X12_157", "X12_158", "X12_159", "X12_160", "X12_161", "X12_163", "X12_170", "X12_175", "X12_176", "X12_179", "X12_180", "X12_185", "X12_186", "X12_187", "X12_188", "X12_189", "X12_190", "X12_191", "X12_194", "X12_195", "X12_196", "X12_197", "X12_198", "X12_199", "X12_200", "X12_201", "X12_202", "X12_203", "X12_204", "X12_205", "X12_206", "X12_210", "X12_211", "X12_212", "X12_213", "X12_214", "X12_215", "X12_216", "X12_217", "X12_218", "X12_219", "X12_220", "X12_222", "X12_223", "X12_224", "X12_225", "X12_227", "X12_228", "X12_240", "X12_242", "X12_244", "X12_245", "X12_248", "X12_249", "X12_250", "X12_251", "X12_252", "X12_255", "X12_256", "X12_259", "X12_260", "X12_261", "X12_262", "X12_263", "X12_264", "X12_265", "X12_266", "X12_267", "X12_268", "X12_269", "X12_270", "X12_271", "X12_272", "X12_273", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_280", "X12_283", "X12_284", "X12_285", "X12_286", "X12_288", "X12_290", "X12_300", "X12_301", "X12_303", "X12_304", "X12_309", "X12_310", "X12_311", "X12_312", "X12_313", "X12_315", "X12_317", "X12_319", "X12_322", "X12_323", "X12_324", "X12_325", "X12_326", "X12_350", "X12_352", "X12_353", "X12_354", "X12_355", "X12_356", "X12_357", "X12_358", "X12_361", "X12_362", "X12_404", "X12_410", "X12_412", "X12_414", "X12_417", "X12_418", "X12_419", "X12_420", "X12_421", "X12_422", "X12_423", "X12_424", "X12_425", "X12_426", "X12_429", "X12_431", "X12_432", "X12_433", "X12_434", "X12_435", "X12_436", "X12_437", "X12_440", "X12_451", "X12_452", "X12_453", "X12_455", "X12_456", "X12_460", "X12_463", "X12_466", "X12_468", "X12_470", "X12_475", "X12_485", "X12_486", "X12_490", "X12_492", "X12_494", "X12_500", "X12_501", "X12_503", "X12_504", "X12_511", "X12_517", "X12_521", "X12_527", "X12_536", "X12_540", "X12_561", "X12_567", "X12_568", "X12_601", "X12_602", "X12_620", "X12_625", "X12_650", "X12_715", "X12_753", "X12_754", "X12_805", "X12_806", "X12_810", "X12_811", "X12_812", "X12_813", "X12_814", "X12_815", "X12_816", "X12_818", "X12_819", "X12_820", "X12_821", "X12_822", "X12_823", "X12_824", "X12_826", "X12_827", "X12_828", "X12_829", "X12_830", "X12_831", "X12_832", "X12_833", "X12_834", "X12_835", "X12_836", "X12_837", "X12_838", "X12_839", "X12_840", "X12_841", "X12_842", "X12_843", "X12_844", "X12_845", "X12_846", "X12_847", "X12_848", "X12_849", "X12_850", "X12_851", "X12_852", "X12_853", "X12_854", "X12_855", "X12_856", "X12_857", "X12_858", "X12_859", "X12_860", "X12_861", "X12_862", "X12_863", "X12_864", "X12_865", "X12_866", "X12_867", "X12_868", "X12_869", "X12_870", "X12_871", "X12_872", "X12_873", "X12_874", "X12_875", "X12_876", "X12_877", "X12_878", "X12_879", "X12_880", "X12_881", "X12_882", "X12_883", "X12_884", "X12_885", "X12_886", "X12_887", "X12_888", "X12_889", "X12_891", "X12_893", "X12_894", "X12_895", "X12_896", "X12_920", "X12_924", "X12_925", "X12_926", "X12_928", "X12_940", "X12_943", "X12_944", "X12_945", "X12_947", "X12_980", "X12_990", "X12_993", "X12_996", "X12_997", "X12_998", "X12_999", "X12_270_X279", "X12_271_X279", "X12_275_X210", "X12_275_X211", "X12_276_X212", "X12_277_X212", "X12_277_X214", "X12_277_X364", "X12_278_X217", "X12_820_X218", "X12_820_X306", "X12_824_X186", "X12_834_X220", "X12_834_X307", "X12_834_X318", "X12_835_X221", "X12_837_X222", "X12_837_X223", "X12_837_X224", "X12_837_X291", "X12_837_X292", "X12_837_X298", "X12_999_X231"
     #   resp.transformers[0].input_conversion.format_options.x12.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_4050", "VERSION_4060", "VERSION_5010", "VERSION_5010_HIPAA"
+    #   resp.transformers[0].input_conversion.advanced_options.x12.split_options.split_by #=> String, one of "NONE", "TRANSACTION"
     #   resp.transformers[0].mapping.template_language #=> String, one of "XSLT", "JSONATA"
     #   resp.transformers[0].mapping.template #=> String
     #   resp.transformers[0].output_conversion.to_format #=> String, one of "X12"
@@ -2275,6 +2350,16 @@ module Aws::B2bi
     # documents, you don't need to create profiles, partnerships or
     # capabilities. Just create and configure a transformer, and then run
     # the `StartTransformerJob` API to process your files.
+    #
+    # <note markdown="1"> The system stores transformer jobs for 30 days. During that period,
+    # you can run [GetTransformerJob][1] and supply its `transformerId` and
+    # `transformerJobId` to return details of the job.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/b2bi/latest/APIReference/API_GetTransformerJob.html
     #
     # @option params [required, Types::S3Location] :input_file
     #   Specifies the location of the input file for the transformation. The
@@ -2565,9 +2650,15 @@ module Aws::B2bi
     #   standards and corresponding messages that define specific business
     #   documents.
     #
+    # @option params [Types::AdvancedOptions] :advanced_options
+    #   Specifies advanced options for parsing the input EDI file. These
+    #   options allow for more granular control over the parsing process,
+    #   including split options for X12 files.
+    #
     # @return [Types::TestParsingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::TestParsingResponse#parsed_file_content #parsed_file_content} => String
+    #   * {Types::TestParsingResponse#parsed_split_file_contents #parsed_split_file_contents} => Array&lt;String&gt;
     #
     #
     # @example Example: Sample TestParsing call
@@ -2591,6 +2682,66 @@ module Aws::B2bi
     #     parsed_file_content: "Sample parsed file content", 
     #   }
     #
+    # @example Example: Sample TestParsing call without EDI Splitting
+    #
+    #   resp = client.test_parsing({
+    #     advanced_options: {
+    #       x12: {
+    #         split_options: {
+    #           split_by: "NONE", 
+    #         }, 
+    #       }, 
+    #     }, 
+    #     edi_type: {
+    #       x12_details: {
+    #         version: "VERSION_4010", 
+    #         transaction_set: "X12_110", 
+    #       }, 
+    #     }, 
+    #     file_format: "JSON", 
+    #     input_file: {
+    #       key: "sampleFile.txt", 
+    #       bucket_name: "test-bucket", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     parsed_file_content: "Sample parsed file content", 
+    #   }
+    #
+    # @example Example: Sample TestParsing call with EDI Splitting by Transaction
+    #
+    #   resp = client.test_parsing({
+    #     advanced_options: {
+    #       x12: {
+    #         split_options: {
+    #           split_by: "TRANSACTION", 
+    #         }, 
+    #       }, 
+    #     }, 
+    #     edi_type: {
+    #       x12_details: {
+    #         version: "VERSION_4010", 
+    #         transaction_set: "X12_110", 
+    #       }, 
+    #     }, 
+    #     file_format: "JSON", 
+    #     input_file: {
+    #       key: "sampleFile.txt", 
+    #       bucket_name: "test-bucket", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     parsed_file_content: "", 
+    #     parsed_split_file_contents: [
+    #       "sample split parsed file content", 
+    #       "sample split parsed file content", 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.test_parsing({
@@ -2605,11 +2756,20 @@ module Aws::B2bi
     #         version: "VERSION_4010", # accepts VERSION_4010, VERSION_4030, VERSION_4050, VERSION_4060, VERSION_5010, VERSION_5010_HIPAA
     #       },
     #     },
+    #     advanced_options: {
+    #       x12: {
+    #         split_options: {
+    #           split_by: "NONE", # required, accepts NONE, TRANSACTION
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.parsed_file_content #=> String
+    #   resp.parsed_split_file_contents #=> Array
+    #   resp.parsed_split_file_contents[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/TestParsing AWS API Documentation
     #
@@ -2910,6 +3070,25 @@ module Aws::B2bi
     #               segment_terminator: "X12SegmentTerminator",
     #             },
     #             validate_edi: false,
+    #             control_numbers: {
+    #               starting_interchange_control_number: 1,
+    #               starting_functional_group_control_number: 1,
+    #               starting_transaction_set_control_number: 1,
+    #             },
+    #             gs05_time_format: "HHMM", # accepts HHMM, HHMMSS, HHMMSSDD
+    #           },
+    #           wrap_options: {
+    #             wrap_by: "SEGMENT", # required, accepts SEGMENT, ONE_LINE, LINE_LENGTH
+    #             line_terminator: "CRLF", # accepts CRLF, LF, CR
+    #             line_length: 1,
+    #           },
+    #         },
+    #       },
+    #       inbound_edi: {
+    #         x12: {
+    #           acknowledgment_options: {
+    #             functional_acknowledgment: "DO_NOT_GENERATE", # required, accepts DO_NOT_GENERATE, GENERATE_ALL_SEGMENTS, GENERATE_WITHOUT_TRANSACTION_SET_RESPONSE_LOOP
+    #             technical_acknowledgment: "DO_NOT_GENERATE", # required, accepts DO_NOT_GENERATE, GENERATE_ALL_SEGMENTS
     #           },
     #         },
     #       },
@@ -2940,6 +3119,15 @@ module Aws::B2bi
     #   resp.capability_options.outbound_edi.x12.common.delimiters.data_element_separator #=> String
     #   resp.capability_options.outbound_edi.x12.common.delimiters.segment_terminator #=> String
     #   resp.capability_options.outbound_edi.x12.common.validate_edi #=> Boolean
+    #   resp.capability_options.outbound_edi.x12.common.control_numbers.starting_interchange_control_number #=> Integer
+    #   resp.capability_options.outbound_edi.x12.common.control_numbers.starting_functional_group_control_number #=> Integer
+    #   resp.capability_options.outbound_edi.x12.common.control_numbers.starting_transaction_set_control_number #=> Integer
+    #   resp.capability_options.outbound_edi.x12.common.gs05_time_format #=> String, one of "HHMM", "HHMMSS", "HHMMSSDD"
+    #   resp.capability_options.outbound_edi.x12.wrap_options.wrap_by #=> String, one of "SEGMENT", "ONE_LINE", "LINE_LENGTH"
+    #   resp.capability_options.outbound_edi.x12.wrap_options.line_terminator #=> String, one of "CRLF", "LF", "CR"
+    #   resp.capability_options.outbound_edi.x12.wrap_options.line_length #=> Integer
+    #   resp.capability_options.inbound_edi.x12.acknowledgment_options.functional_acknowledgment #=> String, one of "DO_NOT_GENERATE", "GENERATE_ALL_SEGMENTS", "GENERATE_WITHOUT_TRANSACTION_SET_RESPONSE_LOOP"
+    #   resp.capability_options.inbound_edi.x12.acknowledgment_options.technical_acknowledgment #=> String, one of "DO_NOT_GENERATE", "GENERATE_ALL_SEGMENTS"
     #   resp.trading_partner_id #=> String
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
@@ -3202,6 +3390,13 @@ module Aws::B2bi
     #           version: "VERSION_4010", # accepts VERSION_4010, VERSION_4030, VERSION_4050, VERSION_4060, VERSION_5010, VERSION_5010_HIPAA
     #         },
     #       },
+    #       advanced_options: {
+    #         x12: {
+    #           split_options: {
+    #             split_by: "NONE", # required, accepts NONE, TRANSACTION
+    #           },
+    #         },
+    #       },
     #     },
     #     mapping: {
     #       template_language: "XSLT", # required, accepts XSLT, JSONATA
@@ -3243,6 +3438,7 @@ module Aws::B2bi
     #   resp.input_conversion.from_format #=> String, one of "X12"
     #   resp.input_conversion.format_options.x12.transaction_set #=> String, one of "X12_100", "X12_101", "X12_102", "X12_103", "X12_104", "X12_105", "X12_106", "X12_107", "X12_108", "X12_109", "X12_110", "X12_111", "X12_112", "X12_113", "X12_120", "X12_121", "X12_124", "X12_125", "X12_126", "X12_127", "X12_128", "X12_129", "X12_130", "X12_131", "X12_132", "X12_133", "X12_135", "X12_138", "X12_139", "X12_140", "X12_141", "X12_142", "X12_143", "X12_144", "X12_146", "X12_147", "X12_148", "X12_149", "X12_150", "X12_151", "X12_152", "X12_153", "X12_154", "X12_155", "X12_157", "X12_158", "X12_159", "X12_160", "X12_161", "X12_163", "X12_170", "X12_175", "X12_176", "X12_179", "X12_180", "X12_185", "X12_186", "X12_187", "X12_188", "X12_189", "X12_190", "X12_191", "X12_194", "X12_195", "X12_196", "X12_197", "X12_198", "X12_199", "X12_200", "X12_201", "X12_202", "X12_203", "X12_204", "X12_205", "X12_206", "X12_210", "X12_211", "X12_212", "X12_213", "X12_214", "X12_215", "X12_216", "X12_217", "X12_218", "X12_219", "X12_220", "X12_222", "X12_223", "X12_224", "X12_225", "X12_227", "X12_228", "X12_240", "X12_242", "X12_244", "X12_245", "X12_248", "X12_249", "X12_250", "X12_251", "X12_252", "X12_255", "X12_256", "X12_259", "X12_260", "X12_261", "X12_262", "X12_263", "X12_264", "X12_265", "X12_266", "X12_267", "X12_268", "X12_269", "X12_270", "X12_271", "X12_272", "X12_273", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_280", "X12_283", "X12_284", "X12_285", "X12_286", "X12_288", "X12_290", "X12_300", "X12_301", "X12_303", "X12_304", "X12_309", "X12_310", "X12_311", "X12_312", "X12_313", "X12_315", "X12_317", "X12_319", "X12_322", "X12_323", "X12_324", "X12_325", "X12_326", "X12_350", "X12_352", "X12_353", "X12_354", "X12_355", "X12_356", "X12_357", "X12_358", "X12_361", "X12_362", "X12_404", "X12_410", "X12_412", "X12_414", "X12_417", "X12_418", "X12_419", "X12_420", "X12_421", "X12_422", "X12_423", "X12_424", "X12_425", "X12_426", "X12_429", "X12_431", "X12_432", "X12_433", "X12_434", "X12_435", "X12_436", "X12_437", "X12_440", "X12_451", "X12_452", "X12_453", "X12_455", "X12_456", "X12_460", "X12_463", "X12_466", "X12_468", "X12_470", "X12_475", "X12_485", "X12_486", "X12_490", "X12_492", "X12_494", "X12_500", "X12_501", "X12_503", "X12_504", "X12_511", "X12_517", "X12_521", "X12_527", "X12_536", "X12_540", "X12_561", "X12_567", "X12_568", "X12_601", "X12_602", "X12_620", "X12_625", "X12_650", "X12_715", "X12_753", "X12_754", "X12_805", "X12_806", "X12_810", "X12_811", "X12_812", "X12_813", "X12_814", "X12_815", "X12_816", "X12_818", "X12_819", "X12_820", "X12_821", "X12_822", "X12_823", "X12_824", "X12_826", "X12_827", "X12_828", "X12_829", "X12_830", "X12_831", "X12_832", "X12_833", "X12_834", "X12_835", "X12_836", "X12_837", "X12_838", "X12_839", "X12_840", "X12_841", "X12_842", "X12_843", "X12_844", "X12_845", "X12_846", "X12_847", "X12_848", "X12_849", "X12_850", "X12_851", "X12_852", "X12_853", "X12_854", "X12_855", "X12_856", "X12_857", "X12_858", "X12_859", "X12_860", "X12_861", "X12_862", "X12_863", "X12_864", "X12_865", "X12_866", "X12_867", "X12_868", "X12_869", "X12_870", "X12_871", "X12_872", "X12_873", "X12_874", "X12_875", "X12_876", "X12_877", "X12_878", "X12_879", "X12_880", "X12_881", "X12_882", "X12_883", "X12_884", "X12_885", "X12_886", "X12_887", "X12_888", "X12_889", "X12_891", "X12_893", "X12_894", "X12_895", "X12_896", "X12_920", "X12_924", "X12_925", "X12_926", "X12_928", "X12_940", "X12_943", "X12_944", "X12_945", "X12_947", "X12_980", "X12_990", "X12_993", "X12_996", "X12_997", "X12_998", "X12_999", "X12_270_X279", "X12_271_X279", "X12_275_X210", "X12_275_X211", "X12_276_X212", "X12_277_X212", "X12_277_X214", "X12_277_X364", "X12_278_X217", "X12_820_X218", "X12_820_X306", "X12_824_X186", "X12_834_X220", "X12_834_X307", "X12_834_X318", "X12_835_X221", "X12_837_X222", "X12_837_X223", "X12_837_X224", "X12_837_X291", "X12_837_X292", "X12_837_X298", "X12_999_X231"
     #   resp.input_conversion.format_options.x12.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_4050", "VERSION_4060", "VERSION_5010", "VERSION_5010_HIPAA"
+    #   resp.input_conversion.advanced_options.x12.split_options.split_by #=> String, one of "NONE", "TRANSACTION"
     #   resp.mapping.template_language #=> String, one of "XSLT", "JSONATA"
     #   resp.mapping.template #=> String
     #   resp.output_conversion.to_format #=> String, one of "X12"
@@ -3280,14 +3476,127 @@ module Aws::B2bi
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-b2bi'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # Polls an API operation until a resource enters a desired state.
+    #
+    # ## Basic Usage
+    #
+    # A waiter will call an API operation until:
+    #
+    # * It is successful
+    # * It enters a terminal state
+    # * It makes the maximum number of attempts
+    #
+    # In between attempts, the waiter will sleep.
+    #
+    #     # polls in a loop, sleeping between attempts
+    #     client.wait_until(waiter_name, params)
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. You can pass
+    # configuration as the final arguments hash.
+    #
+    #     # poll for ~25 seconds
+    #     client.wait_until(waiter_name, params, {
+    #       max_attempts: 5,
+    #       delay: 5,
+    #     })
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     client.wait_until(waiter_name, params, {
+    #
+    #       # disable max attempts
+    #       max_attempts: nil,
+    #
+    #       # poll for 1 hour, instead of a number of attempts
+    #       before_wait: -> (attempts, response) do
+    #         throw :failure if Time.now - started_at > 3600
+    #       end
+    #     })
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is unsuccessful, it will raise an error.
+    # All of the failure errors extend from
+    # {Aws::Waiters::Errors::WaiterFailed}.
+    #
+    #     begin
+    #       client.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    # ## Valid Waiters
+    #
+    # The following table lists the valid waiter names, the operations they call,
+    # and the default `:delay` and `:max_attempts` values.
+    #
+    # | waiter_name               | params                       | :delay   | :max_attempts |
+    # | ------------------------- | ---------------------------- | -------- | ------------- |
+    # | transformer_job_succeeded | {Client#get_transformer_job} | 10       | 12            |
+    #
+    # @raise [Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    # @raise [Errors::TooManyAttemptsError] Raised when the configured
+    #   maximum number of attempts have been made, and the waiter is not
+    #   yet successful.
+    #
+    # @raise [Errors::UnexpectedError] Raised when an error is encounted
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [Errors::NoSuchWaiterError] Raised when you request to wait
+    #   for an unknown state.
+    #
+    # @return [Boolean] Returns `true` if the waiter was successful.
+    # @param [Symbol] waiter_name
+    # @param [Hash] params ({})
+    # @param [Hash] options ({})
+    # @option options [Integer] :max_attempts
+    # @option options [Integer] :delay
+    # @option options [Proc] :before_attempt
+    # @option options [Proc] :before_wait
+    def wait_until(waiter_name, params = {}, options = {})
+      w = waiter(waiter_name, options)
+      yield(w.waiter) if block_given? # deprecated
+      w.wait(params)
     end
 
     # @api private
     # @deprecated
     def waiter_names
-      []
+      waiters.keys
+    end
+
+    private
+
+    # @param [Symbol] waiter_name
+    # @param [Hash] options ({})
+    def waiter(waiter_name, options = {})
+      waiter_class = waiters[waiter_name]
+      if waiter_class
+        waiter_class.new(options.merge(client: self))
+      else
+        raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
+      end
+    end
+
+    def waiters
+      {
+        transformer_job_succeeded: Waiters::TransformerJobSucceeded
+      }
     end
 
     class << self

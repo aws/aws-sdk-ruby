@@ -193,8 +193,10 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainNameResponse]
         def api_mapping_selection_expression: () -> ::String
         def domain_name: () -> ::String
+        def domain_name_arn: () -> ::String
         def domain_name_configurations: () -> ::Array[Types::DomainNameConfiguration]
         def mutual_tls_authentication: () -> Types::MutualTlsAuthentication
+        def routing_mode: () -> ("API_MAPPING_ONLY" | "ROUTING_RULE_ONLY" | "ROUTING_RULE_THEN_API_MAPPING")
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#create_domain_name-instance_method
@@ -219,6 +221,7 @@ module Aws
                                   truststore_uri: ::String?,
                                   truststore_version: ::String?
                                 },
+                                ?routing_mode: ("API_MAPPING_ONLY" | "ROUTING_RULE_ONLY" | "ROUTING_RULE_THEN_API_MAPPING"),
                                 ?tags: Hash[::String, ::String]
                               ) -> _CreateDomainNameResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainNameResponseSuccess
@@ -365,6 +368,46 @@ module Aws
                                    route_response_key: ::String
                                  ) -> _CreateRouteResponseResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRouteResponseResponseSuccess
+
+      interface _CreateRoutingRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRoutingRuleResponse]
+        def actions: () -> ::Array[Types::RoutingRuleAction]
+        def conditions: () -> ::Array[Types::RoutingRuleCondition]
+        def priority: () -> ::Integer
+        def routing_rule_arn: () -> ::String
+        def routing_rule_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#create_routing_rule-instance_method
+      def create_routing_rule: (
+                                 actions: Array[
+                                   {
+                                     invoke_api: {
+                                       api_id: ::String,
+                                       stage: ::String,
+                                       strip_base_path: bool?
+                                     }
+                                   },
+                                 ],
+                                 conditions: Array[
+                                   {
+                                     match_base_paths: {
+                                       any_of: Array[::String]
+                                     }?,
+                                     match_headers: {
+                                       any_of: Array[
+                                         {
+                                           header: ::String,
+                                           value_glob: ::String
+                                         },
+                                       ]
+                                     }?
+                                   },
+                                 ],
+                                 domain_name: ::String,
+                                 ?domain_name_id: ::String,
+                                 priority: ::Integer
+                               ) -> _CreateRoutingRuleResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRoutingRuleResponseSuccess
 
       interface _CreateStageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateStageResponse]
@@ -533,6 +576,14 @@ module Aws
                                    stage_name: ::String
                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#delete_routing_rule-instance_method
+      def delete_routing_rule: (
+                                 domain_name: ::String,
+                                 ?domain_name_id: ::String,
+                                 routing_rule_id: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#delete_stage-instance_method
       def delete_stage: (
@@ -704,8 +755,10 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainNameResponse]
         def api_mapping_selection_expression: () -> ::String
         def domain_name: () -> ::String
+        def domain_name_arn: () -> ::String
         def domain_name_configurations: () -> ::Array[Types::DomainNameConfiguration]
         def mutual_tls_authentication: () -> Types::MutualTlsAuthentication
+        def routing_mode: () -> ("API_MAPPING_ONLY" | "ROUTING_RULE_ONLY" | "ROUTING_RULE_THEN_API_MAPPING")
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#get_domain_name-instance_method
@@ -905,6 +958,36 @@ module Aws
                       ) -> _GetRoutesResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRoutesResponseSuccess
 
+      interface _GetRoutingRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRoutingRuleResponse]
+        def actions: () -> ::Array[Types::RoutingRuleAction]
+        def conditions: () -> ::Array[Types::RoutingRuleCondition]
+        def priority: () -> ::Integer
+        def routing_rule_arn: () -> ::String
+        def routing_rule_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#get_routing_rule-instance_method
+      def get_routing_rule: (
+                              domain_name: ::String,
+                              ?domain_name_id: ::String,
+                              routing_rule_id: ::String
+                            ) -> _GetRoutingRuleResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRoutingRuleResponseSuccess
+
+      interface _ListRoutingRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRoutingRulesResponse]
+        def next_token: () -> ::String
+        def routing_rules: () -> ::Array[Types::RoutingRule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#list_routing_rules-instance_method
+      def list_routing_rules: (
+                                domain_name: ::String,
+                                ?domain_name_id: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListRoutingRulesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRoutingRulesResponseSuccess
+
       interface _GetStageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetStageResponse]
         def access_log_settings: () -> Types::AccessLogSettings
@@ -1009,6 +1092,47 @@ module Aws
                         ?fail_on_warnings: bool
                       ) -> _ImportApiResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportApiResponseSuccess
+
+      interface _PutRoutingRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutRoutingRuleResponse]
+        def actions: () -> ::Array[Types::RoutingRuleAction]
+        def conditions: () -> ::Array[Types::RoutingRuleCondition]
+        def priority: () -> ::Integer
+        def routing_rule_arn: () -> ::String
+        def routing_rule_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#put_routing_rule-instance_method
+      def put_routing_rule: (
+                              actions: Array[
+                                {
+                                  invoke_api: {
+                                    api_id: ::String,
+                                    stage: ::String,
+                                    strip_base_path: bool?
+                                  }
+                                },
+                              ],
+                              conditions: Array[
+                                {
+                                  match_base_paths: {
+                                    any_of: Array[::String]
+                                  }?,
+                                  match_headers: {
+                                    any_of: Array[
+                                      {
+                                        header: ::String,
+                                        value_glob: ::String
+                                      },
+                                    ]
+                                  }?
+                                },
+                              ],
+                              domain_name: ::String,
+                              ?domain_name_id: ::String,
+                              priority: ::Integer,
+                              routing_rule_id: ::String
+                            ) -> _PutRoutingRuleResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRoutingRuleResponseSuccess
 
       interface _ReimportApiResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ReimportApiResponse]
@@ -1173,8 +1297,10 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDomainNameResponse]
         def api_mapping_selection_expression: () -> ::String
         def domain_name: () -> ::String
+        def domain_name_arn: () -> ::String
         def domain_name_configurations: () -> ::Array[Types::DomainNameConfiguration]
         def mutual_tls_authentication: () -> Types::MutualTlsAuthentication
+        def routing_mode: () -> ("API_MAPPING_ONLY" | "ROUTING_RULE_ONLY" | "ROUTING_RULE_THEN_API_MAPPING")
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#update_domain_name-instance_method
@@ -1198,7 +1324,8 @@ module Aws
                                 ?mutual_tls_authentication: {
                                   truststore_uri: ::String?,
                                   truststore_version: ::String?
-                                }
+                                },
+                                ?routing_mode: ("API_MAPPING_ONLY" | "ROUTING_RULE_ONLY" | "ROUTING_RULE_THEN_API_MAPPING")
                               ) -> _UpdateDomainNameResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainNameResponseSuccess
 

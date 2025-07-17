@@ -255,6 +255,13 @@ module Aws
                                      }?,
                                      drop: {
                                      }?,
+                                     publish_to_sns: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       encoding: ("UTF-8" | "BASE64")?,
+                                       payload_type: ("HEADERS" | "CONTENT")?,
+                                       role_arn: ::String,
+                                       topic_arn: ::String
+                                     }?,
                                      relay: {
                                        action_failure_policy: ("CONTINUE" | "DROP")?,
                                        mail_from: ("REPLACE" | "PRESERVE")?,
@@ -1196,6 +1203,13 @@ module Aws
                                        role_arn: ::String
                                      }?,
                                      drop: {
+                                     }?,
+                                     publish_to_sns: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       encoding: ("UTF-8" | "BASE64")?,
+                                       payload_type: ("HEADERS" | "CONTENT")?,
+                                       role_arn: ::String,
+                                       topic_arn: ::String
                                      }?,
                                      relay: {
                                        action_failure_policy: ("CONTINUE" | "DROP")?,

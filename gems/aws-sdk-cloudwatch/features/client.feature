@@ -17,3 +17,8 @@ Feature: Amazon CloudWatch
     """
     failed to satisfy constraint
     """
+
+  Scenario: Query Compatible Ambiguous Error Resolution
+    When I attempt to call the "GetDashboard" API with:
+    | DashboardName | foo |
+    Then I expect the response error code to be "ResourceNotFound"

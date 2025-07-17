@@ -1,6 +1,76 @@
 Unreleased Changes
 ------------------
 
+1.315.0 (2025-07-15)
+------------------
+
+* Feature - This release adds support for a new Restricted instance group type to enable a specialized environment for running Nova customization jobs on SageMaker HyperPod clusters. This release also adds support for SageMaker pipeline versioning.
+
+1.314.0 (2025-07-03)
+------------------
+
+* Feature - Changes include new StartSession API for SageMaker Studio spaces and CreateHubContentPresignedUrls API for SageMaker JumpStart.
+
+1.313.0 (2025-07-01)
+------------------
+
+* Feature - Updated field validation requirements for InstanceGroups.
+
+1.312.0 (2025-06-19)
+------------------
+
+* Feature - This release introduces alternative support for utilizing CFN templates from S3 for SageMaker Projects.
+
+1.311.0 (2025-06-18)
+------------------
+
+* Feature - Add support for p6-b200 instance type for SageMaker Hyperpod
+
+1.310.0 (2025-06-16)
+------------------
+
+* Feature - This release 1) adds a new S3DataType Converse for SageMaker training 2)adds C8g R7gd M8g C6in P6 P6e instance type for SageMaker endpoint 3) adds m7i, r7i, c7i instance type for SageMaker Training and Processing.
+
+1.309.0 (2025-06-04)
+------------------
+
+* Feature - Added support for p6-b200 instance type in SageMaker Training Jobs and Training Plans.
+
+1.308.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.307.0 (2025-05-30)
+------------------
+
+* Feature - Release new parameter CapacityReservationConfig in ProductionVariant
+
+1.306.0 (2025-05-29)
+------------------
+
+* Feature - Add maintenance status field to DescribeMlflowTrackingServer API response
+
+1.305.0 (2025-05-12)
+------------------
+
+* Feature - No API changes from previous release. This release migrated the model to Smithy keeping all features unchanged.
+
+1.304.0 (2025-05-07)
+------------------
+
+* Feature - SageMaker AI Studio users can now migrate to SageMaker Unified Studio, which offers a unified web-based development experience that integrates AWS data, analytics, artificial intelligence (AI), and machine learning (ML) services, as well as additional tools and resource
+
+1.303.0 (2025-05-01)
+------------------
+
+* Feature - Feature - Adding support for Scheduled and Rolling Update Software in Sagemaker Hyperpod.
+
+1.302.0 (2025-04-29)
+------------------
+
+* Feature - Introduced support for P5en instance types on SageMaker Studio for JupyterLab and CodeEditor applications.
+
 1.301.0 (2025-04-18)
 ------------------
 

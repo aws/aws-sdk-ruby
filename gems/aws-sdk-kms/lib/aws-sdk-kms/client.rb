@@ -200,8 +200,7 @@ module Aws::KMS
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -504,7 +503,7 @@ module Aws::KMS
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Identifies the KMS key whose deletion is being canceled.
@@ -576,9 +575,9 @@ module Aws::KMS
     # custom key store is connected. To get the connection state of the
     # custom key store, use the DescribeCustomKeyStores operation.
     #
-    # This operation is part of the [custom key stores][1] feature in KMS,
-    # which combines the convenience and extensive integration of KMS with
-    # the isolation and control of a key store that you own and manage.
+    # This operation is part of the custom key stores feature in KMS, which
+    # combines the convenience and extensive integration of KMS with the
+    # isolation and control of a key store that you own and manage.
     #
     # The `ConnectCustomKeyStore` operation might fail for various reasons.
     # To find the reason, use the DescribeCustomKeyStores operation and see
@@ -652,14 +651,14 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
     # [2]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html
     # [3]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_CreateHsm.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/keystore-cloudhsm.html#concept-kmsuser
     # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html
     # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/xks-troubleshooting.html
     # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :custom_key_store_id
     #   Enter the key store ID of the custom key store that you want to
@@ -721,7 +720,7 @@ module Aws::KMS
     #
     # The alias must be unique in the account and Region, but you can have
     # aliases with the same name in different Regions. For detailed
-    # information about aliases, see [Using aliases][3] in the *Key
+    # information about aliases, see [Aliases in KMS][3] in the *Key
     # Management Service Developer Guide*.
     #
     # This operation does not return a response. To get the alias that you
@@ -757,12 +756,12 @@ module Aws::KMS
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/abac.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#cryptographic-operations
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/alias-access.html
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :alias_name
     #   Specifies the alias name. This value must begin with `alias/` followed
@@ -789,7 +788,7 @@ module Aws::KMS
     #   A valid key ID is required. If you supply a null or empty string
     #   value, this operation returns an error.
     #
-    #   For help finding the key ID and ARN, see [Finding the Key ID and
+    #   For help finding the key ID and ARN, see [Find the key ID and key
     #   ARN][2] in the <i> <i>Key Management Service Developer Guide</i> </i>.
     #
     #   Specify the key ID or key ARN of the KMS key.
@@ -807,7 +806,7 @@ module Aws::KMS
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html#find-cmk-id-arn
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/find-cmk-id-arn.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -845,9 +844,9 @@ module Aws::KMS
     # stores][4] backed by an external key store proxy and external key
     # manager outside of Amazon Web Services.
     #
-    # This operation is part of the [custom key stores][1] feature in KMS,
-    # which combines the convenience and extensive integration of KMS with
-    # the isolation and control of a key store that you own and manage.
+    # This operation is part of the custom key stores feature in KMS, which
+    # combines the convenience and extensive integration of KMS with the
+    # isolation and control of a key store that you own and manage.
     #
     # Before you create the custom key store, the required elements must be
     # in place and operational. We recommend that you use the test tools
@@ -900,9 +899,6 @@ module Aws::KMS
     # immediately, you might want to connect it to verify that all settings
     # are correct and then disconnect it until you are ready to use it.
     #
-    # For help with failures, see [Troubleshooting a custom key store][7] in
-    # the *Key Management Service Developer Guide*.
-    #
     # **Cross-account use**: No. You cannot perform this operation on a
     # custom key store in a different Amazon Web Services account.
     #
@@ -925,7 +921,7 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/keystore-cloudhsm.html
     # [3]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/clusters.html
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html
@@ -934,7 +930,7 @@ module Aws::KMS
     # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html
     # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/xks-troubleshooting.html
     # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :custom_key_store_name
     #   Specifies a friendly name for the custom key store. The name must be
@@ -988,7 +984,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/keystore-cloudhsm.html#concept-kmsuser
     #
     # @option params [String] :custom_key_store_type
     #   Specifies the type of custom key store. The default value is
@@ -1089,7 +1085,7 @@ module Aws::KMS
     #   `RawSecretAccessKey`, a secret key, and `AccessKeyId`, a unique
     #   identifier for the `RawSecretAccessKey`. For character requirements,
     #   see
-    #   [XksProxyAuthenticationCredentialType](kms/latest/APIReference/API_XksProxyAuthenticationCredentialType.html).
+    #   [XksProxyAuthenticationCredentialType](API_XksProxyAuthenticationCredentialType.html).
     #
     #   KMS uses this authentication credential to sign requests to the
     #   external key store proxy on your behalf. This credential is unrelated
@@ -1129,7 +1125,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/plan-xks-keystore.html#choose-xks-connectivity
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/choose-xks-connectivity.html
     #
     # @return [Types::CreateCustomKeyStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1238,8 +1234,9 @@ module Aws::KMS
     #
     # For detailed information about grants, including grant terminology,
     # see [Grants in KMS][1] in the <i> <i>Key Management Service Developer
-    # Guide</i> </i>. For examples of working with grants in several
-    # programming languages, see [Programming grants][2].
+    # Guide</i> </i>. For examples of creating grants in several programming
+    # languages, see [Use CreateGrant with an Amazon Web Services SDK or
+    # CLI][2].
     #
     # The `CreateGrant` operation returns a `GrantToken` and a `GrantId`.
     #
@@ -1285,11 +1282,11 @@ module Aws::KMS
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-grants.html
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/example_kms_CreateGrant_section.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Identifies the KMS key for the grant. The grant gives principals
@@ -1342,7 +1339,7 @@ module Aws::KMS
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
-    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#grant-delete
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-delete.html
     #
     # @option params [required, Array<String>] :operations
     #   A list of operations that the grant permits.
@@ -1411,7 +1408,7 @@ module Aws::KMS
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
     #
     # @option params [String] :name
     #   A friendly name for the grant. Use this value to prevent the
@@ -1437,12 +1434,12 @@ module Aws::KMS
     #   Checks if your request will succeed. `DryRun` is an optional
     #   parameter.
     #
-    #   To learn more about how to use this parameter, see [Testing your KMS
-    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
     #
     # @return [Types::CreateGrantResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1512,8 +1509,7 @@ module Aws::KMS
     # A KMS key is a logical representation of a cryptographic key. In
     # addition to the key material used in cryptographic operations, a KMS
     # key includes metadata, such as the key ID, key policy, creation date,
-    # description, and key state. For details, see [Managing keys][2] in the
-    # *Key Management Service Developer Guide*
+    # description, and key state.
     #
     # Use the parameters of `CreateKey` to specify the type of KMS key, the
     # source of its key material, its key policy, description, tags, and
@@ -1559,20 +1555,21 @@ module Aws::KMS
     #   properties after the KMS key is created.
     #
     #   Asymmetric KMS keys contain an RSA key pair, Elliptic Curve (ECC)
-    #   key pair, or an SM2 key pair (China Regions only). The private key
-    #   in an asymmetric KMS key never leaves KMS unencrypted. However, you
-    #   can use the GetPublicKey operation to download the public key so it
-    #   can be used outside of KMS. Each KMS key can have only one key
-    #   usage. KMS keys with RSA key pairs can be used to encrypt and
-    #   decrypt data or sign and verify messages (but not both). KMS keys
-    #   with NIST-recommended ECC key pairs can be used to sign and verify
-    #   messages or derive shared secrets (but not both). KMS keys with
-    #   `ECC_SECG_P256K1` can be used only to sign and verify messages. KMS
-    #   keys with SM2 key pairs (China Regions only) can be used to either
-    #   encrypt and decrypt data, sign and verify messages, or derive shared
-    #   secrets (you must choose one key usage type). For information about
-    #   asymmetric KMS keys, see [Asymmetric KMS keys][3] in the *Key
-    #   Management Service Developer Guide*.
+    #   key pair, ML-DSA key pair or an SM2 key pair (China Regions only).
+    #   The private key in an asymmetric KMS key never leaves KMS
+    #   unencrypted. However, you can use the GetPublicKey operation to
+    #   download the public key so it can be used outside of KMS. Each KMS
+    #   key can have only one key usage. KMS keys with RSA key pairs can be
+    #   used to encrypt and decrypt data or sign and verify messages (but
+    #   not both). KMS keys with NIST-recommended ECC key pairs can be used
+    #   to sign and verify messages or derive shared secrets (but not both).
+    #   KMS keys with `ECC_SECG_P256K1` can be used only to sign and verify
+    #   messages. KMS keys with ML-DSA key pairs can be used to sign and
+    #   verify messages. KMS keys with SM2 key pairs (China Regions only)
+    #   can be used to either encrypt and decrypt data, sign and verify
+    #   messages, or derive shared secrets (you must choose one key usage
+    #   type). For information about asymmetric KMS keys, see [Asymmetric
+    #   KMS keys][2] in the *Key Management Service Developer Guide*.
     #
     #
     #
@@ -1615,7 +1612,7 @@ module Aws::KMS
     #   to encrypt data in one Amazon Web Services Region and decrypt it in
     #   a different Amazon Web Services Region without re-encrypting the
     #   data or making a cross-Region call. For more information about
-    #   multi-Region keys, see [Multi-Region keys in KMS][4] in the *Key
+    #   multi-Region keys, see [Multi-Region keys in KMS][3] in the *Key
     #   Management Service Developer Guide*.
     #
     #
@@ -1627,7 +1624,7 @@ module Aws::KMS
     #   token. Use the wrapping public key to encrypt your key material.
     #   Then, use ImportKeyMaterial with your import token to import the key
     #   material. For step-by-step instructions, see [Importing Key
-    #   Material][5] in the <i> <i>Key Management Service Developer
+    #   Material][4] in the <i> <i>Key Management Service Developer
     #   Guide</i> </i>.
     #
     #   You can import key material into KMS keys of all supported KMS key
@@ -1640,23 +1637,22 @@ module Aws::KMS
     #   the `Origin` parameter of `CreateKey` with a value of `EXTERNAL` and
     #   the `MultiRegion` parameter with a value of `True`. To create
     #   replicas of the multi-Region primary key, use the ReplicateKey
-    #   operation. For instructions, see [Importing key material into
-    #   multi-Region keys][6]. For more information about multi-Region keys,
-    #   see [Multi-Region keys in KMS][4] in the *Key Management Service
-    #   Developer Guide*.
+    #   operation. For instructions, see [Importing key material step 1][5].
+    #   For more information about multi-Region keys, see [Multi-Region keys
+    #   in KMS][3] in the *Key Management Service Developer Guide*.
     #
     #
     #
     # Custom key store
     #
-    # : A [custom key store][7] lets you protect your Amazon Web Services
+    # : A [custom key store][6] lets you protect your Amazon Web Services
     #   resources using keys in a backing key store that you own and manage.
     #   When you request a cryptographic operation with a KMS key in a
     #   custom key store, the operation is performed in the backing key
     #   store using its cryptographic keys.
     #
-    #   KMS supports [CloudHSM key stores][8] backed by an CloudHSM cluster
-    #   and [external key stores][9] backed by an external key manager
+    #   KMS supports [CloudHSM key stores][7] backed by an CloudHSM cluster
+    #   and [external key stores][8] backed by an external key manager
     #   outside of Amazon Web Services. When you create a KMS key in an
     #   CloudHSM key store, KMS generates an encryption key in the CloudHSM
     #   cluster and associates it with the KMS key. When you create a KMS
@@ -1681,13 +1677,13 @@ module Aws::KMS
     #   `ENCRYPT_DECRYPT` to create a symmetric encryption key. No other key
     #   type is supported in a custom key store.
     #
-    #   To create a KMS key in an [CloudHSM key store][8], use the `Origin`
+    #   To create a KMS key in an [CloudHSM key store][9], use the `Origin`
     #   parameter with a value of `AWS_CLOUDHSM`. The CloudHSM cluster that
     #   is associated with the custom key store must have at least two
     #   active HSMs in different Availability Zones in the Amazon Web
     #   Services Region.
     #
-    #   To create a KMS key in an [external key store][9], use the `Origin`
+    #   To create a KMS key in an [external key store][10], use the `Origin`
     #   parameter with a value of `EXTERNAL_KEY_STORE` and an `XksKeyId`
     #   parameter that identifies an existing external key.
     #
@@ -1700,10 +1696,10 @@ module Aws::KMS
     # **Cross-account use**: No. You cannot use this operation to create a
     # KMS key in a different Amazon Web Services account.
     #
-    # **Required permissions**: [kms:CreateKey][10] (IAM policy). To use the
-    # `Tags` parameter, [kms:TagResource][10] (IAM policy). For examples and
+    # **Required permissions**: [kms:CreateKey][11] (IAM policy). To use the
+    # `Tags` parameter, [kms:TagResource][11] (IAM policy). For examples and
     # information about related permissions, see [Allow a user to create KMS
-    # keys][11] in the *Key Management Service Developer Guide*.
+    # keys][12] in the *Key Management Service Developer Guide*.
     #
     # **Related operations:**
     #
@@ -1714,22 +1710,23 @@ module Aws::KMS
     # * ScheduleKeyDeletion
     #
     # **Eventual consistency**: The KMS API follows an eventual consistency
-    # model. For more information, see [KMS eventual consistency][12].
+    # model. For more information, see [KMS eventual consistency][13].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#kms-keys
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-import.html
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
-    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/keystore-cloudhsm.html
-    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html
-    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [11]: https://docs.aws.amazon.com/kms/latest/developerguide/iam-policies.html#iam-policy-example-create-key
-    # [12]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-create-cmk.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/keystore-cloudhsm.html
+    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html
+    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/create-cmk-keystore.html
+    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/create-xks-keys.html
+    # [11]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [12]: https://docs.aws.amazon.com/kms/latest/developerguide/customer-managed-policies.html#iam-policy-example-create-key
+    # [13]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [String] :policy
     #   The key policy to attach to the KMS key.
@@ -1751,22 +1748,38 @@ module Aws::KMS
     #     not always immediately visible][2] in the *Amazon Web Services
     #     Identity and Access Management User Guide*.
     #
+    #   <note markdown="1"> If either of the required `Resource` or `Action` elements are missing
+    #   from a key policy statement, the policy statement has no effect. When
+    #   a key policy statement is missing one of these elements, the KMS
+    #   console correctly reports an error, but the `CreateKey` and
+    #   `PutKeyPolicy` API requests succeed, even though the policy statement
+    #   is ineffective.
+    #
+    #    For more information on required key policy elements, see [Elements in
+    #   a key policy][3] in the *Key Management Service Developer Guide*.
+    #
+    #    </note>
+    #
     #   If you do not provide a key policy, KMS attaches a default key policy
-    #   to the KMS key. For more information, see [Default key policy][3] in
+    #   to the KMS key. For more information, see [Default key policy][4] in
     #   the *Key Management Service Developer Guide*.
     #
-    #   The key policy size quota is 32 kilobytes (32768 bytes).
+    #   <note markdown="1"> If the key policy exceeds the length constraint, KMS returns a
+    #   `LimitExceededException`.
+    #
+    #    </note>
     #
     #   For help writing and formatting a JSON policy document, see the [IAM
-    #   JSON Policy Reference][4] in the <i> <i>Identity and Access Management
+    #   JSON Policy Reference][5] in the <i> <i>Identity and Access Management
     #   User Guide</i> </i>.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html#prevent-unmanageable-key
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
-    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
-    #   [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-overview.html#key-policy-elements
+    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html
+    #   [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
     #
     # @option params [String] :description
     #   A description of the KMS key. Use a description that helps you decide
@@ -1800,7 +1813,10 @@ module Aws::KMS
     #   * For asymmetric KMS keys with NIST-recommended elliptic curve key
     #     pairs, specify `SIGN_VERIFY` or `KEY_AGREEMENT`.
     #
-    #   * For asymmetric KMS keys with `ECC_SECG_P256K1` key pairs specify
+    #   * For asymmetric KMS keys with `ECC_SECG_P256K1` key pairs, specify
+    #     `SIGN_VERIFY`.
+    #
+    #   * For asymmetric KMS keys with ML-DSA key pairs, specify
     #     `SIGN_VERIFY`.
     #
     #   * For asymmetric KMS keys with SM2 key pairs (China Regions only),
@@ -1808,7 +1824,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#cryptographic-operations
     #
     # @option params [String] :customer_master_key_spec
     #   Instead, use the `KeySpec` parameter.
@@ -1822,20 +1838,21 @@ module Aws::KMS
     #   Specifies the type of KMS key to create. The default value,
     #   `SYMMETRIC_DEFAULT`, creates a KMS key with a 256-bit AES-GCM key that
     #   is used for encryption and decryption, except in China Regions, where
-    #   it creates a 128-bit symmetric key that uses SM4 encryption. For help
-    #   choosing a key spec for your KMS key, see [Choosing a KMS key type][1]
-    #   in the <i> <i>Key Management Service Developer Guide</i> </i>.
+    #   it creates a 128-bit symmetric key that uses SM4 encryption. For a
+    #   detailed description of all supported key specs, see [Key spec
+    #   reference][1] in the <i> <i>Key Management Service Developer Guide</i>
+    #   </i>.
     #
     #   The `KeySpec` determines whether the KMS key contains a symmetric key
     #   or an asymmetric key pair. It also determines the algorithms that the
     #   KMS key supports. You can't change the `KeySpec` after the KMS key is
     #   created. To further restrict the algorithms that can be used with the
     #   KMS key, use a condition key in its key policy or IAM policy. For more
-    #   information, see [kms:EncryptionAlgorithm][2], [kms:MacAlgorithm][3]
-    #   or [kms:Signing Algorithm][4] in the <i> <i>Key Management Service
-    #   Developer Guide</i> </i>.
+    #   information, see [kms:EncryptionAlgorithm][2], [kms:MacAlgorithm][3],
+    #   [kms:KeyAgreementAlgorithm][4], or [kms:SigningAlgorithm][5] in the
+    #   <i> <i>Key Management Service Developer Guide</i> </i>.
     #
-    #   [Amazon Web Services services that are integrated with KMS][5] use
+    #   [Amazon Web Services services that are integrated with KMS][6] use
     #   symmetric encryption KMS keys to protect your data. These services do
     #   not support asymmetric KMS keys or HMAC KMS keys.
     #
@@ -1876,6 +1893,13 @@ module Aws::KMS
     #     * `ECC_SECG_P256K1` (secp256k1), commonly used for cryptocurrencies.
     #
     #     ^
+    #   * Asymmetric ML-DSA key pairs (signing and verification)
+    #
+    #     * `ML_DSA_44`
+    #
+    #     * `ML_DSA_65`
+    #
+    #     * `ML_DSA_87`
     #   * SM2 key pairs (encryption and decryption -or- signing and
     #     verification -or- deriving shared secrets)
     #
@@ -1885,11 +1909,12 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-types.html#symm-asymm-choose
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-algorithm
-    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-mac-algorithm
-    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-signing-algorithm
-    #   [5]: http://aws.amazon.com/kms/features/#AWS_Service_Integration
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-choose-key-spec.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-encryption-algorithm
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-mac-algorithm
+    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-key-agreement-algorithm
+    #   [5]: https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-signing-algorithm
+    #   [6]: http://aws.amazon.com/kms/features/#AWS_Service_Integration
     #
     # @option params [String] :origin
     #   The source of the key material for the KMS key. You cannot change the
@@ -1939,7 +1964,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
     #
     # @option params [Boolean] :bypass_policy_lockout_safety_check
     #   Skips ("bypasses") the key policy lockout safety check. The default
@@ -1987,7 +2012,7 @@ module Aws::KMS
     #   When you add tags to an Amazon Web Services resource, Amazon Web
     #   Services generates a cost allocation report with usage and costs
     #   aggregated by tags. Tags can also be used to control access to a KMS
-    #   key. For details, see [Tagging Keys][3].
+    #   key. For details, see [Tags in KMS][3].
     #
     #
     #
@@ -2058,7 +2083,7 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html#concept-external-key
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html
     #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html#concept-xks-proxy
-    #   [4]: https://docs.aws.amazon.com/create-xks-keys.html#xks-key-requirements
+    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/create-xks-keys.html#xks-key-requirements
     #   [5]: https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html#concept-double-encryption
     #
     # @return [Types::CreateKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2080,6 +2105,7 @@ module Aws::KMS
     #       aws_account_id: "111122223333", 
     #       arn: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
     #       creation_date: Time.parse("2017-07-05T14:04:55-07:00"), 
+    #       current_key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", 
     #       customer_master_key_spec: "SYMMETRIC_DEFAULT", 
     #       description: "", 
     #       enabled: true, 
@@ -2132,8 +2158,7 @@ module Aws::KMS
     # @example Example: To create an asymmetric elliptic curve KMS key for signing and verification
     #
     #   # This example creates a KMS key that contains an asymmetric elliptic curve (ECC) key pair for signing and verification.
-    #   # The key usage is required even though "SIGN_VERIFY" is the only valid value for ECC KMS keys. The key spec and key usage
-    #   # can't be changed after the key is created.
+    #   # The key spec and key usage can't be changed after the key is created.
     #
     #   resp = client.create_key({
     #     key_spec: "ECC_NIST_P521", # Describes the type of key material in the KMS key.
@@ -2194,6 +2219,38 @@ module Aws::KMS
     #     }, # Detailed information about the KMS key that this operation creates.
     #   }
     #
+    # @example Example: To create an asymmetric ML-DSA KMS key for signing and verification
+    #
+    #   # This example creates a module-lattice digital signature algorithm (ML-DSA) key for signing and verification. The
+    #   # key-usage parameter is required even though SIGN_VERIFY is the only valid value for ML-DSA keys.
+    #
+    #   resp = client.create_key({
+    #     key_spec: "ML_DSA_65", # Describes the type of key material in the KMS key.
+    #     key_usage: "SIGN_VERIFY", # The cryptographic operations for which you can use the KMS key.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_metadata: {
+    #       aws_account_id: "111122223333", 
+    #       arn: "arn:aws:kms:us-east-1:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       creation_date: Time.parse(1748371316.734), 
+    #       customer_master_key_spec: "ML_DSA_65", 
+    #       description: "", 
+    #       enabled: true, 
+    #       key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       key_manager: "CUSTOMER", 
+    #       key_spec: "ML_DSA_65", 
+    #       key_state: "Enabled", 
+    #       key_usage: "SIGN_VERIFY", 
+    #       multi_region: false, 
+    #       origin: "AWS_KMS", 
+    #       signing_algorithms: [
+    #         "ML_DSA_SHAKE_256", 
+    #       ], 
+    #     }, # Detailed information about the KMS key that this operation creates.
+    #   }
+    #
     # @example Example: To create a multi-Region primary KMS key
     #
     #   # This example creates a multi-Region primary symmetric encryption key. Because the default values for all parameters
@@ -2209,6 +2266,7 @@ module Aws::KMS
     #       aws_account_id: "111122223333", 
     #       arn: "arn:aws:kms:us-west-2:111122223333:key/mrk-1234abcd12ab34cd56ef12345678990ab", 
     #       creation_date: Time.parse("2021-09-02T016:15:21-09:00"), 
+    #       current_key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", 
     #       customer_master_key_spec: "SYMMETRIC_DEFAULT", 
     #       description: "", 
     #       enabled: true, 
@@ -2345,7 +2403,7 @@ module Aws::KMS
     #     description: "DescriptionType",
     #     key_usage: "SIGN_VERIFY", # accepts SIGN_VERIFY, ENCRYPT_DECRYPT, GENERATE_VERIFY_MAC, KEY_AGREEMENT
     #     customer_master_key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512, SM2
-    #     key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512, SM2
+    #     key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512, SM2, ML_DSA_44, ML_DSA_65, ML_DSA_87
     #     origin: "AWS_KMS", # accepts AWS_KMS, EXTERNAL, AWS_CLOUDHSM, EXTERNAL_KEY_STORE
     #     custom_key_store_id: "CustomKeyStoreIdType",
     #     bypass_policy_lockout_safety_check: false,
@@ -2377,11 +2435,11 @@ module Aws::KMS
     #   resp.key_metadata.expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
     #   resp.key_metadata.key_manager #=> String, one of "AWS", "CUSTOMER"
     #   resp.key_metadata.customer_master_key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
-    #   resp.key_metadata.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
+    #   resp.key_metadata.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87"
     #   resp.key_metadata.encryption_algorithms #=> Array
     #   resp.key_metadata.encryption_algorithms[0] #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"
     #   resp.key_metadata.signing_algorithms #=> Array
-    #   resp.key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA"
+    #   resp.key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256"
     #   resp.key_metadata.key_agreement_algorithms #=> Array
     #   resp.key_metadata.key_agreement_algorithms[0] #=> String, one of "ECDH"
     #   resp.key_metadata.multi_region #=> Boolean
@@ -2395,6 +2453,7 @@ module Aws::KMS
     #   resp.key_metadata.mac_algorithms #=> Array
     #   resp.key_metadata.mac_algorithms[0] #=> String, one of "HMAC_SHA_224", "HMAC_SHA_256", "HMAC_SHA_384", "HMAC_SHA_512"
     #   resp.key_metadata.xks_key_configuration.id #=> String
+    #   resp.key_metadata.current_key_material_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateKey AWS API Documentation
     #
@@ -2445,15 +2504,14 @@ module Aws::KMS
     # key that you intend.
     #
     # Whenever possible, use key policies to give users permission to call
-    # the `Decrypt` operation on a particular KMS key, instead of using
-    # &amp;IAM; policies. Otherwise, you might create an &amp;IAM; policy
-    # that gives the user `Decrypt` permission on all KMS keys. This user
-    # could decrypt ciphertext that was encrypted by KMS keys in other
-    # accounts if the key policy for the cross-account KMS key permits it.
-    # If you must use an IAM policy for `Decrypt` permissions, limit the
-    # user to particular KMS keys or particular trusted accounts. For
-    # details, see [Best practices for IAM policies][4] in the *Key
-    # Management Service Developer Guide*.
+    # the `Decrypt` operation on a particular KMS key, instead of using IAM
+    # policies. Otherwise, you might create an IAM policy that gives the
+    # user `Decrypt` permission on all KMS keys. This user could decrypt
+    # ciphertext that was encrypted by KMS keys in other accounts if the key
+    # policy for the cross-account KMS key permits it. If you must use an
+    # IAM policy for `Decrypt` permissions, limit the user to particular KMS
+    # keys or particular trusted accounts. For details, see [Best practices
+    # for IAM policies][4] in the *Key Management Service Developer Guide*.
     #
     # `Decrypt` also supports [Amazon Web Services Nitro Enclaves][5], which
     # provide an isolated compute environment in Amazon EC2. To call
@@ -2501,7 +2559,7 @@ module Aws::KMS
     # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html
     # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String, StringIO, File] :ciphertext_blob
     #   Ciphertext to be decrypted. The blob includes metadata.
@@ -2526,8 +2584,8 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#cryptographic-operations
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html
     #
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
@@ -2540,7 +2598,7 @@ module Aws::KMS
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
     #
     # @option params [String] :key_id
     #   Specifies the KMS key that KMS uses to decrypt the ciphertext.
@@ -2616,12 +2674,12 @@ module Aws::KMS
     #   Checks if your request will succeed. `DryRun` is an optional
     #   parameter.
     #
-    #   To learn more about how to use this parameter, see [Testing your KMS
-    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
     #
     # @return [Types::DecryptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2629,6 +2687,7 @@ module Aws::KMS
     #   * {Types::DecryptResponse#plaintext #plaintext} => String
     #   * {Types::DecryptResponse#encryption_algorithm #encryption_algorithm} => String
     #   * {Types::DecryptResponse#ciphertext_for_recipient #ciphertext_for_recipient} => String
+    #   * {Types::DecryptResponse#key_material_id #key_material_id} => String
     #
     #
     # @example Example: To decrypt data with a symmetric encryption KMS key
@@ -2645,6 +2704,7 @@ module Aws::KMS
     #   {
     #     encryption_algorithm: "SYMMETRIC_DEFAULT", # The encryption algorithm that was used to decrypt the ciphertext. SYMMETRIC_DEFAULT is the only valid value for symmetric encryption in AWS KMS.
     #     key_id: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The Amazon Resource Name (ARN) of the KMS key that was used to decrypt the data.
+    #     key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # The identifier of the key material used to decrypt the ciphertext.
     #     plaintext: "<binary data>", # The decrypted (plaintext) data.
     #   }
     #
@@ -2711,6 +2771,7 @@ module Aws::KMS
     #   resp.plaintext #=> String
     #   resp.encryption_algorithm #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"
     #   resp.ciphertext_for_recipient #=> String
+    #   resp.key_material_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Decrypt AWS API Documentation
     #
@@ -2767,7 +2828,7 @@ module Aws::KMS
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/abac.html
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :alias_name
     #   The alias to be deleted. The alias name must begin with `alias/`
@@ -2806,9 +2867,9 @@ module Aws::KMS
     # does not affect the external key store proxy, external key manager, or
     # any external keys.
     #
-    # This operation is part of the [custom key stores][1] feature in KMS,
-    # which combines the convenience and extensive integration of KMS with
-    # the isolation and control of a key store that you own and manage.
+    # This operation is part of the custom key stores feature in KMS, which
+    # combines the convenience and extensive integration of KMS with the
+    # isolation and control of a key store that you own and manage.
     #
     # The custom key store that you delete cannot contain any [KMS keys][2].
     # Before deleting the key store, verify that you will never need to use
@@ -2859,12 +2920,12 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#kms_keys
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#cryptographic-operations
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-orphaned-key
     # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :custom_key_store_id
     #   Enter the ID of the custom key store you want to delete. To find the
@@ -2926,6 +2987,8 @@ module Aws::KMS
     #
     # * GetParametersForImport
     #
+    # * ListKeyRotations
+    #
     # * ImportKeyMaterial
     #
     # **Eventual consistency**: The KMS API follows an eventual consistency
@@ -2936,7 +2999,7 @@ module Aws::KMS
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Identifies the KMS key from which you are deleting imported key
@@ -2954,7 +3017,19 @@ module Aws::KMS
     #   To get the key ID and key ARN for a KMS key, use ListKeys or
     #   DescribeKey.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @option params [String] :key_material_id
+    #   Identifies the imported key material you are deleting.
+    #
+    #   If no KeyMaterialId is specified, KMS deletes the current key
+    #   material.
+    #
+    #   To get the list of key material IDs associated with a KMS key, use
+    #   ListKeyRotations.
+    #
+    # @return [Types::DeleteImportedKeyMaterialResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteImportedKeyMaterialResponse#key_id #key_id} => String
+    #   * {Types::DeleteImportedKeyMaterialResponse#key_material_id #key_material_id} => String
     #
     #
     # @example Example: To delete imported key material
@@ -2963,13 +3038,20 @@ module Aws::KMS
     #
     #   resp = client.delete_imported_key_material({
     #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the KMS key whose imported key material you are deleting. You can use the key ID or the Amazon Resource Name (ARN) of the KMS key.
+    #     key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # Identifies the deleted key material.
     #   })
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_imported_key_material({
     #     key_id: "KeyIdType", # required
+    #     key_material_id: "BackingKeyIdType",
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_id #=> String
+    #   resp.key_material_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteImportedKeyMaterial AWS API Documentation
     #
@@ -3073,7 +3155,7 @@ module Aws::KMS
     # [2]: https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Cr2.pdf
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Identifies an asymmetric NIST-recommended ECC or SM2 (China Regions
@@ -3141,18 +3223,18 @@ module Aws::KMS
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
     #
     # @option params [Boolean] :dry_run
     #   Checks if your request will succeed. `DryRun` is an optional
     #   parameter.
     #
-    #   To learn more about how to use this parameter, see [Testing your KMS
-    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
     #
     # @option params [Types::RecipientInfo] :recipient
     #   A signed [attestation document][1] from an Amazon Web Services Nitro
@@ -3247,9 +3329,9 @@ module Aws::KMS
     # Gets information about [custom key stores][1] in the account and
     # Region.
     #
-    # This operation is part of the [custom key stores][1] feature in KMS,
-    # which combines the convenience and extensive integration of KMS with
-    # the isolation and control of a key store that you own and manage.
+    # This operation is part of the custom key stores feature in KMS, which
+    # combines the convenience and extensive integration of KMS with the
+    # isolation and control of a key store that you own and manage.
     #
     # By default, this operation returns information about all custom key
     # stores in the account and Region. To get only information about a
@@ -3302,11 +3384,11 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/xks-troubleshooting.html
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [String] :custom_key_store_id
     #   Gets only information about the specified custom key store. Enter the
@@ -3504,8 +3586,8 @@ module Aws::KMS
     # * Whether automatic key rotation is enabled on the KMS key. To get
     #   this information, use GetKeyRotationStatus. Also, some key states
     #   prevent a KMS key from being automatically rotated. For details, see
-    #   [How Automatic Key Rotation Works][6] in the *Key Management Service
-    #   Developer Guide*.
+    #   [How key rotation works][6] in the *Key Management Service Developer
+    #   Guide*.
     #
     # * Tags on the KMS key. To get this information, use ListResourceTags.
     #
@@ -3551,7 +3633,7 @@ module Aws::KMS
     # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html
     # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotate-keys-how-it-works
     # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Describes the specified KMS key.
@@ -3595,7 +3677,7 @@ module Aws::KMS
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
     #
     # @return [Types::DescribeKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3616,6 +3698,7 @@ module Aws::KMS
     #       aws_account_id: "111122223333", 
     #       arn: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
     #       creation_date: Time.parse("2017-07-05T14:04:55-07:00"), 
+    #       current_key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", 
     #       customer_master_key_spec: "SYMMETRIC_DEFAULT", 
     #       description: "", 
     #       enabled: true, 
@@ -3682,6 +3765,7 @@ module Aws::KMS
     #       aws_account_id: "111122223333", 
     #       arn: "arn:aws:kms:ap-northeast-1:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab", 
     #       creation_date: Time.parse(1586329200.918), 
+    #       current_key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", 
     #       customer_master_key_spec: "SYMMETRIC_DEFAULT", 
     #       description: "", 
     #       enabled: true, 
@@ -3838,11 +3922,11 @@ module Aws::KMS
     #   resp.key_metadata.expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
     #   resp.key_metadata.key_manager #=> String, one of "AWS", "CUSTOMER"
     #   resp.key_metadata.customer_master_key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
-    #   resp.key_metadata.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
+    #   resp.key_metadata.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87"
     #   resp.key_metadata.encryption_algorithms #=> Array
     #   resp.key_metadata.encryption_algorithms[0] #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"
     #   resp.key_metadata.signing_algorithms #=> Array
-    #   resp.key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA"
+    #   resp.key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256"
     #   resp.key_metadata.key_agreement_algorithms #=> Array
     #   resp.key_metadata.key_agreement_algorithms[0] #=> String, one of "ECDH"
     #   resp.key_metadata.multi_region #=> Boolean
@@ -3856,6 +3940,7 @@ module Aws::KMS
     #   resp.key_metadata.mac_algorithms #=> Array
     #   resp.key_metadata.mac_algorithms[0] #=> String, one of "HMAC_SHA_224", "HMAC_SHA_256", "HMAC_SHA_384", "HMAC_SHA_512"
     #   resp.key_metadata.xks_key_configuration.id #=> String
+    #   resp.key_metadata.current_key_material_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DescribeKey AWS API Documentation
     #
@@ -3869,13 +3954,10 @@ module Aws::KMS
     # Sets the state of a KMS key to disabled. This change temporarily
     # prevents use of the KMS key for [cryptographic operations][1].
     #
-    # For more information about how key state affects the use of a KMS key,
-    # see [Key states of KMS keys][2] in the <i> <i>Key Management Service
-    # Developer Guide</i> </i>.
-    #
     # The KMS key that you use for this operation must be in a compatible
-    # key state. For details, see [Key states of KMS keys][2] in the *Key
-    # Management Service Developer Guide*.
+    # key state. For more information about how key state affects the use of
+    # a KMS key, see [Key states of KMS keys][2] in the <i> <i>Key
+    # Management Service Developer Guide</i> </i>.
     #
     # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
@@ -3889,10 +3971,10 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#cryptographic-operations
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Identifies the KMS key to disable.
@@ -3981,18 +4063,18 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/rotating-keys-enable-disable.html
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#multi-region-rotate
     # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk
     # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
     # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk
     # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [11]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [12]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [12]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Identifies a symmetric encryption KMS key. You cannot enable or
@@ -4017,7 +4099,7 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html#asymmetric-cmks
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
     #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4051,9 +4133,9 @@ module Aws::KMS
     # external key store proxy that communicates with your external key
     # manager.
     #
-    # This operation is part of the [custom key stores][1] feature in KMS,
-    # which combines the convenience and extensive integration of KMS with
-    # the isolation and control of a key store that you own and manage.
+    # This operation is part of the custom key stores feature in KMS, which
+    # combines the convenience and extensive integration of KMS with the
+    # isolation and control of a key store that you own and manage.
     #
     # While a custom key store is disconnected, you can manage the custom
     # key store and its KMS keys, but you cannot create or use its KMS keys.
@@ -4097,10 +4179,10 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#cryptographic-operations
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :custom_key_store_id
     #   Enter the ID of the custom key store you want to disconnect. To find
@@ -4159,10 +4241,10 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#cryptographic-operations
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Identifies the KMS key to enable.
@@ -4223,17 +4305,17 @@ module Aws::KMS
     # any in progress rotations. You can use the ListKeyRotations operation
     # to view the details of completed rotations.
     #
-    # Automatic key rotation is supported only on [symmetric encryption KMS
-    # keys][3]. You cannot enable automatic rotation of [asymmetric KMS
-    # keys][4], [HMAC KMS keys][5], KMS keys with [imported key
-    # material][6], or KMS keys in a [custom key store][7]. To enable or
-    # disable automatic rotation of a set of related [multi-Region keys][8],
+    # Automatic key rotation is supported only on symmetric encryption KMS
+    # keys. You cannot enable automatic rotation of [asymmetric KMS
+    # keys][3], [HMAC KMS keys][4], KMS keys with [imported key
+    # material][5], or KMS keys in a [custom key store][6]. To enable or
+    # disable automatic rotation of a set of related [multi-Region keys][7],
     # set the property on the primary key.
     #
     # You cannot enable or disable automatic rotation of [Amazon Web
-    # Services managed KMS keys][9]. KMS always rotates the key material of
+    # Services managed KMS keys][8]. KMS always rotates the key material of
     # Amazon Web Services managed keys every year. Rotation of [Amazon Web
-    # Services owned KMS keys][10] is managed by the Amazon Web Services
+    # Services owned KMS keys][9] is managed by the Amazon Web Services
     # service that owns the key.
     #
     # <note markdown="1"> In May 2022, KMS changed the rotation schedule for Amazon Web Services
@@ -4249,13 +4331,13 @@ module Aws::KMS
     #  </note>
     #
     # The KMS key that you use for this operation must be in a compatible
-    # key state. For details, see [Key states of KMS keys][11] in the *Key
+    # key state. For details, see [Key states of KMS keys][10] in the *Key
     # Management Service Developer Guide*.
     #
     # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**: [kms:EnableKeyRotation][12] (key policy)
+    # **Required permissions**: [kms:EnableKeyRotation][11] (key policy)
     #
     # **Related operations:**
     #
@@ -4274,23 +4356,22 @@ module Aws::KMS
     #    </note>
     #
     # **Eventual consistency**: The KMS API follows an eventual consistency
-    # model. For more information, see [KMS eventual consistency][13].
+    # model. For more information, see [KMS eventual consistency][12].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotating-keys-enable-disable
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/rotating-keys-enable-disable.html
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#symmetric-cmks
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
-    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate
-    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
-    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk
-    # [11]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
-    # [12]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [13]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#multi-region-rotate
+    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
+    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk
+    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [11]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [12]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Identifies a symmetric encryption KMS key. You cannot enable automatic
@@ -4316,8 +4397,8 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
     #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
-    #   [5]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate
+    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    #   [5]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#multi-region-rotate
     #
     # @option params [Integer] :rotation_period_in_days
     #   Use this parameter to specify a custom period of time between each
@@ -4449,10 +4530,10 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Identifies the KMS key to use in the encryption operation. The KMS key
@@ -4505,8 +4586,8 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#cryptographic-operations
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html
     #
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
@@ -4519,7 +4600,7 @@ module Aws::KMS
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
     #
     # @option params [String] :encryption_algorithm
     #   Specifies the encryption algorithm that KMS will use to encrypt the
@@ -4537,12 +4618,12 @@ module Aws::KMS
     #   Checks if your request will succeed. `DryRun` is an optional
     #   parameter.
     #
-    #   To learn more about how to use this parameter, see [Testing your KMS
-    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
     #
     # @return [Types::EncryptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4717,7 +4798,7 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html
     # [3]: https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html
@@ -4726,7 +4807,7 @@ module Aws::KMS
     # [7]: https://docs.aws.amazon.com/dynamodb-encryption-client/latest/devguide/
     # [8]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html
     # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Specifies the symmetric encryption KMS key that encrypts the data key.
@@ -4774,7 +4855,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html
     #
     # @option params [Integer] :number_of_bytes
     #   Specifies the length of the data key in bytes. For example, use the
@@ -4804,7 +4885,7 @@ module Aws::KMS
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
     #
     # @option params [Types::RecipientInfo] :recipient
     #   A signed [attestation document][1] from an Amazon Web Services Nitro
@@ -4838,12 +4919,12 @@ module Aws::KMS
     #   Checks if your request will succeed. `DryRun` is an optional
     #   parameter.
     #
-    #   To learn more about how to use this parameter, see [Testing your KMS
-    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
     #
     # @return [Types::GenerateDataKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4851,6 +4932,7 @@ module Aws::KMS
     #   * {Types::GenerateDataKeyResponse#plaintext #plaintext} => String
     #   * {Types::GenerateDataKeyResponse#key_id #key_id} => String
     #   * {Types::GenerateDataKeyResponse#ciphertext_for_recipient #ciphertext_for_recipient} => String
+    #   * {Types::GenerateDataKeyResponse#key_material_id #key_material_id} => String
     #
     #
     # @example Example: To generate a data key
@@ -4867,6 +4949,7 @@ module Aws::KMS
     #   {
     #     ciphertext_blob: "<binary data>", # The encrypted data key.
     #     key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The ARN of the KMS key that was used to encrypt the data key.
+    #     key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # The identifier of the key material used to encrypt the data key.
     #     plaintext: "<binary data>", # The unencrypted (plaintext) data key.
     #   }
     #
@@ -4918,6 +5001,7 @@ module Aws::KMS
     #   resp.plaintext #=> String
     #   resp.key_id #=> String
     #   resp.ciphertext_for_recipient #=> String
+    #   resp.key_material_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKey AWS API Documentation
     #
@@ -5026,10 +5110,10 @@ module Aws::KMS
     # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html
     # [4]: https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk
     # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html
     # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [Hash<String,String>] :encryption_context
     #   Specifies the encryption context that will be used when encrypting the
@@ -5052,7 +5136,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html
     #
     # @option params [required, String] :key_id
     #   Specifies the symmetric encryption KMS key that encrypts the private
@@ -5083,10 +5167,11 @@ module Aws::KMS
     #   Determines the type of data key pair that is generated.
     #
     #   The KMS rule that restricts the use of asymmetric RSA and SM2 KMS keys
-    #   to encrypt and decrypt or to sign and verify (but not both), and the
-    #   rule that permits you to use ECC KMS keys only to sign and verify, are
-    #   not effective on data key pairs, which are used outside of KMS. The
-    #   SM2 key spec is only available in China Regions.
+    #   to encrypt and decrypt or to sign and verify (but not both), the rule
+    #   that permits you to use ECC KMS keys only to sign and verify, and the
+    #   rule that permits you to use ML-DSA key pairs to sign and verify only
+    #   are not effective on data key pairs, which are used outside of KMS.
+    #   The SM2 key spec is only available in China Regions.
     #
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
@@ -5099,7 +5184,7 @@ module Aws::KMS
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
     #
     # @option params [Types::RecipientInfo] :recipient
     #   A signed [attestation document][1] from an Amazon Web Services Nitro
@@ -5137,12 +5222,12 @@ module Aws::KMS
     #   Checks if your request will succeed. `DryRun` is an optional
     #   parameter.
     #
-    #   To learn more about how to use this parameter, see [Testing your KMS
-    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
     #
     # @return [Types::GenerateDataKeyPairResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5152,6 +5237,7 @@ module Aws::KMS
     #   * {Types::GenerateDataKeyPairResponse#key_id #key_id} => String
     #   * {Types::GenerateDataKeyPairResponse#key_pair_spec #key_pair_spec} => String
     #   * {Types::GenerateDataKeyPairResponse#ciphertext_for_recipient #ciphertext_for_recipient} => String
+    #   * {Types::GenerateDataKeyPairResponse#key_material_id #key_material_id} => String
     #
     #
     # @example Example: To generate an RSA key pair for encryption and decryption
@@ -5167,6 +5253,7 @@ module Aws::KMS
     #   resp.to_h outputs the following:
     #   {
     #     key_id: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The key ARN of the symmetric encryption KMS key that was used to encrypt the private key.
+    #     key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # The identifier of the key material used to encrypt the private key.
     #     key_pair_spec: "RSA_3072", # The actual key spec of the RSA data key pair.
     #     private_key_ciphertext_blob: "<binary data>", # The encrypted private key of the RSA data key pair.
     #     private_key_plaintext: "<binary data>", # The plaintext private key of the RSA data key pair.
@@ -5194,6 +5281,7 @@ module Aws::KMS
     #   {
     #     ciphertext_for_recipient: "<binary data>", # The private key of the RSA data key pair encrypted by the public key from the attestation document
     #     key_id: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The key ARN of the symmetric encryption KMS key that was used to encrypt the PrivateKeyCiphertextBlob.
+    #     key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # The identifier of the key material used to encrypt the private key.
     #     key_pair_spec: "RSA_3072", # The actual key spec of the RSA data key pair.
     #     private_key_ciphertext_blob: "<binary data>", # The private key of the RSA data key pair encrypted by the KMS key.
     #     private_key_plaintext: "", # This field is null or empty
@@ -5224,6 +5312,7 @@ module Aws::KMS
     #   resp.key_id #=> String
     #   resp.key_pair_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SM2"
     #   resp.ciphertext_for_recipient #=> String
+    #   resp.key_material_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyPair AWS API Documentation
     #
@@ -5302,10 +5391,10 @@ module Aws::KMS
     #
     #
     # [1]: https://tools.ietf.org/html/rfc5280
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [Hash<String,String>] :encryption_context
     #   Specifies the encryption context that will be used when encrypting the
@@ -5328,7 +5417,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html
     #
     # @option params [required, String] :key_id
     #   Specifies the symmetric encryption KMS key that encrypts the private
@@ -5359,10 +5448,11 @@ module Aws::KMS
     #   Determines the type of data key pair that is generated.
     #
     #   The KMS rule that restricts the use of asymmetric RSA and SM2 KMS keys
-    #   to encrypt and decrypt or to sign and verify (but not both), and the
-    #   rule that permits you to use ECC KMS keys only to sign and verify, are
-    #   not effective on data key pairs, which are used outside of KMS. The
-    #   SM2 key spec is only available in China Regions.
+    #   to encrypt and decrypt or to sign and verify (but not both), the rule
+    #   that permits you to use ECC KMS keys only to sign and verify, and the
+    #   rule that permits you to use ML-DSA key pairs to sign and verify only
+    #   are not effective on data key pairs, which are used outside of KMS.
+    #   The SM2 key spec is only available in China Regions.
     #
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
@@ -5375,18 +5465,18 @@ module Aws::KMS
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
     #
     # @option params [Boolean] :dry_run
     #   Checks if your request will succeed. `DryRun` is an optional
     #   parameter.
     #
-    #   To learn more about how to use this parameter, see [Testing your KMS
-    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
     #
     # @return [Types::GenerateDataKeyPairWithoutPlaintextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5394,6 +5484,7 @@ module Aws::KMS
     #   * {Types::GenerateDataKeyPairWithoutPlaintextResponse#public_key #public_key} => String
     #   * {Types::GenerateDataKeyPairWithoutPlaintextResponse#key_id #key_id} => String
     #   * {Types::GenerateDataKeyPairWithoutPlaintextResponse#key_pair_spec #key_pair_spec} => String
+    #   * {Types::GenerateDataKeyPairWithoutPlaintextResponse#key_material_id #key_material_id} => String
     #
     #
     # @example Example: To generate an asymmetric data key pair without a plaintext key
@@ -5409,6 +5500,7 @@ module Aws::KMS
     #   resp.to_h outputs the following:
     #   {
     #     key_id: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The key ARN of the symmetric encryption KMS key that encrypted the private key in the ECC asymmetric data key pair.
+    #     key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # The identifier of the key material used to encrypt the private key.
     #     key_pair_spec: "ECC_NIST_P521", # The actual key spec of the ECC asymmetric data key pair.
     #     private_key_ciphertext_blob: "<binary data>", # The encrypted private key of the asymmetric ECC data key pair.
     #     public_key: "<binary data>", # The public key (plaintext).
@@ -5432,6 +5524,7 @@ module Aws::KMS
     #   resp.public_key #=> String
     #   resp.key_id #=> String
     #   resp.key_pair_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SM2"
+    #   resp.key_material_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyPairWithoutPlaintext AWS API Documentation
     #
@@ -5521,10 +5614,10 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Specifies the symmetric encryption KMS key that encrypts the data key.
@@ -5572,7 +5665,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html
     #
     # @option params [String] :key_spec
     #   The length of the data key. Use `AES_128` to generate a 128-bit
@@ -5595,23 +5688,24 @@ module Aws::KMS
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
     #
     # @option params [Boolean] :dry_run
     #   Checks if your request will succeed. `DryRun` is an optional
     #   parameter.
     #
-    #   To learn more about how to use this parameter, see [Testing your KMS
-    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
     #
     # @return [Types::GenerateDataKeyWithoutPlaintextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GenerateDataKeyWithoutPlaintextResponse#ciphertext_blob #ciphertext_blob} => String
     #   * {Types::GenerateDataKeyWithoutPlaintextResponse#key_id #key_id} => String
+    #   * {Types::GenerateDataKeyWithoutPlaintextResponse#key_material_id #key_material_id} => String
     #
     #
     # @example Example: To generate an encrypted data key
@@ -5628,6 +5722,7 @@ module Aws::KMS
     #   {
     #     ciphertext_blob: "<binary data>", # The encrypted data key.
     #     key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The ARN of the KMS key that was used to encrypt the data key.
+    #     key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # The identifier of the key material used to encrypt the data key.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -5647,6 +5742,7 @@ module Aws::KMS
     #
     #   resp.ciphertext_blob #=> String
     #   resp.key_id #=> String
+    #   resp.key_material_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyWithoutPlaintext AWS API Documentation
     #
@@ -5701,7 +5797,7 @@ module Aws::KMS
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String, StringIO, File] :message
     #   The message to be hashed. Specify a message of up to 4,096 bytes.
@@ -5740,18 +5836,18 @@ module Aws::KMS
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
     #
     # @option params [Boolean] :dry_run
     #   Checks if your request will succeed. `DryRun` is an optional
     #   parameter.
     #
-    #   To learn more about how to use this parameter, see [Testing your KMS
-    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
     #
     # @return [Types::GenerateMacResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5825,7 +5921,8 @@ module Aws::KMS
     # Management Service Developer Guide*.
     #
     # For more information about entropy and random number generation, see
-    # [Key Management Service Cryptographic Details][4].
+    # [Entropy and random number generation][4] in the *Key Management
+    # Service Developer Guide*.
     #
     # **Cross-account use**: Not applicable. `GenerateRandom` does not use
     # any account-specific resources, such as KMS keys.
@@ -5840,9 +5937,9 @@ module Aws::KMS
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html
     # [2]: https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/cryptographic-details/
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#entropy-and-random-numbers
     # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [Integer] :number_of_bytes
     #   The length of the random byte string. This parameter is required.
@@ -5962,7 +6059,7 @@ module Aws::KMS
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     # [2]: https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Gets the key policy for the specified KMS key.
@@ -6030,16 +6127,16 @@ module Aws::KMS
     # enabled for the specified KMS key, the [rotation period][2], and the
     # next scheduled rotation date.
     #
-    # Automatic key rotation is supported only on [symmetric encryption KMS
-    # keys][3]. You cannot enable automatic rotation of [asymmetric KMS
-    # keys][4], [HMAC KMS keys][5], KMS keys with [imported key
-    # material][6], or KMS keys in a [custom key store][7]. To enable or
-    # disable automatic rotation of a set of related [multi-Region keys][8],
-    # set the property on the primary key..
+    # Automatic key rotation is supported only on symmetric encryption KMS
+    # keys. You cannot enable automatic rotation of [asymmetric KMS
+    # keys][3], [HMAC KMS keys][4], KMS keys with [imported key
+    # material][5], or KMS keys in a [custom key store][6]. To enable or
+    # disable automatic rotation of a set of related [multi-Region keys][7],
+    # set the property on the primary key.
     #
     # You can enable (EnableKeyRotation) and disable automatic rotation
     # (DisableKeyRotation) of the key material in customer managed KMS keys.
-    # Key material rotation of [Amazon Web Services managed KMS keys][9] is
+    # Key material rotation of [Amazon Web Services managed KMS keys][8] is
     # not configurable. KMS always rotates the key material in Amazon Web
     # Services managed KMS keys every year. The key rotation status for
     # Amazon Web Services managed KMS keys is always `true`.
@@ -6058,7 +6155,7 @@ module Aws::KMS
     #  </note>
     #
     # The KMS key that you use for this operation must be in a compatible
-    # key state. For details, see [Key states of KMS keys][10] in the *Key
+    # key state. For details, see [Key states of KMS keys][9] in the *Key
     # Management Service Developer Guide*.
     #
     # * Disabled: The key rotation status does not change when you disable a
@@ -6079,7 +6176,7 @@ module Aws::KMS
     # a different Amazon Web Services account, specify the key ARN in the
     # value of the `KeyId` parameter.
     #
-    # **Required permissions**: [kms:GetKeyRotationStatus][11] (key policy)
+    # **Required permissions**: [kms:GetKeyRotationStatus][10] (key policy)
     #
     # **Related operations:**
     #
@@ -6092,22 +6189,21 @@ module Aws::KMS
     # * RotateKeyOnDemand
     #
     # **Eventual consistency**: The KMS API follows an eventual consistency
-    # model. For more information, see [KMS eventual consistency][12].
+    # model. For more information, see [KMS eventual consistency][11].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/rotating-keys-enable-disable.html
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotation-period
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#symmetric-cmks
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
-    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate
-    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
-    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
-    # [11]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [12]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#multi-region-rotate
+    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
+    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [11]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Gets the rotation status for the specified KMS key.
@@ -6181,9 +6277,7 @@ module Aws::KMS
     # By default, KMS keys are created with key material that KMS generates.
     # This operation supports [Importing key material][1], an advanced
     # feature that lets you generate and import the cryptographic key
-    # material for a KMS key. For more information about importing key
-    # material into KMS, see [Importing key material][1] in the *Key
-    # Management Service Developer Guide*.
+    # material for a KMS key.
     #
     # Before calling `GetParametersForImport`, use the CreateKey operation
     # with an `Origin` value of `EXTERNAL` to create a KMS key with no key
@@ -6252,11 +6346,11 @@ module Aws::KMS
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html#reimport-key-material
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-import-key-material.html#reimport-key-material
     # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   The identifier of the KMS key that will be associated with the
@@ -6280,9 +6374,8 @@ module Aws::KMS
     # @option params [required, String] :wrapping_algorithm
     #   The algorithm you will use with the RSA public key (`PublicKey`) in
     #   the response to protect your key material during import. For more
-    #   information, see [Select a wrapping
-    #   algorithm](kms/latest/developerguide/importing-keys-get-public-key-and-token.html#select-wrapping-algorithm)
-    #   in the *Key Management Service Developer Guide*.
+    #   information, see [Select a wrapping algorithm][1] in the *Key
+    #   Management Service Developer Guide*.
     #
     #   For RSA\_AES wrapping algorithms, you encrypt your key material with
     #   an AES key that you generate, then encrypt your AES key with the RSA
@@ -6313,6 +6406,10 @@ module Aws::KMS
     #
     #   * **RSAES\_PKCS1\_V1\_5** (Deprecated) — As of October 10, 2023, KMS
     #     does not support the RSAES\_PKCS1\_V1\_5 wrapping algorithm.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-get-public-key-and-token.html#select-wrapping-algorithm
     #
     # @option params [required, String] :wrapping_key_spec
     #   The type of RSA public key to return in the response. You will use
@@ -6461,8 +6558,9 @@ module Aws::KMS
     # * [KeyUsage][3]: Whether the key is used for encryption, signing, or
     #   deriving a shared secret.
     #
-    # * [EncryptionAlgorithms][4] or [SigningAlgorithms][5]: A list of the
-    #   encryption algorithms or the signing algorithms for the key.
+    # * [EncryptionAlgorithms][4], [KeyAgreementAlgorithms][5], or
+    #   [SigningAlgorithms][6]: A list of the encryption algorithms, key
+    #   agreement algorithms, or signing algorithms for the key.
     #
     # Although KMS cannot enforce these restrictions on external operations,
     # it is crucial that you use this information to prevent the public key
@@ -6475,22 +6573,22 @@ module Aws::KMS
     # To verify a signature outside of KMS with an SM2 public key (China
     # Regions only), you must specify the distinguishing ID. By default, KMS
     # uses `1234567812345678` as the distinguishing ID. For more
-    # information, see [Offline verification with SM2 key pairs][6].
+    # information, see [Offline verification with SM2 key pairs][7].
     #
     # The KMS key that you use for this operation must be in a compatible
-    # key state. For details, see [Key states of KMS keys][7] in the *Key
+    # key state. For details, see [Key states of KMS keys][8] in the *Key
     # Management Service Developer Guide*.
     #
     # **Cross-account use**: Yes. To perform this operation with a KMS key
     # in a different Amazon Web Services account, specify the key ARN or
     # alias ARN in the value of the `KeyId` parameter.
     #
-    # **Required permissions**: [kms:GetPublicKey][8] (key policy)
+    # **Required permissions**: [kms:GetPublicKey][9] (key policy)
     #
     # **Related operations**: CreateKey
     #
     # **Eventual consistency**: The KMS API follows an eventual consistency
-    # model. For more information, see [KMS eventual consistency][9].
+    # model. For more information, see [KMS eventual consistency][10].
     #
     #
     #
@@ -6498,11 +6596,12 @@ module Aws::KMS
     # [2]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-KeySpec
     # [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-KeyUsage
     # [4]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-EncryptionAlgorithms
-    # [5]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-SigningAlgorithms
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-sm-offline-verification
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
-    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-KeyAgreementAlgorithms
+    # [6]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-SigningAlgorithms
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/offline-operations.html#key-spec-sm-offline-verification
+    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Identifies the asymmetric KMS key that includes the public key.
@@ -6537,7 +6636,7 @@ module Aws::KMS
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
     #
     # @return [Types::GetPublicKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6585,12 +6684,12 @@ module Aws::KMS
     #   resp.key_id #=> String
     #   resp.public_key #=> String
     #   resp.customer_master_key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
-    #   resp.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
+    #   resp.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87"
     #   resp.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT", "GENERATE_VERIFY_MAC", "KEY_AGREEMENT"
     #   resp.encryption_algorithms #=> Array
     #   resp.encryption_algorithms[0] #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"
     #   resp.signing_algorithms #=> Array
-    #   resp.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA"
+    #   resp.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256"
     #   resp.key_agreement_algorithms #=> Array
     #   resp.key_agreement_algorithms[0] #=> String, one of "ECDH"
     #
@@ -6604,53 +6703,47 @@ module Aws::KMS
     end
 
     # Imports or reimports key material into an existing KMS key that was
-    # created without key material. `ImportKeyMaterial` also sets the
-    # expiration model and expiration date of the imported key material.
+    # created without key material. You can also use this operation to set
+    # or update the expiration model and expiration date of the imported key
+    # material.
     #
-    # By default, KMS keys are created with key material that KMS generates.
-    # This operation supports [Importing key material][1], an advanced
-    # feature that lets you generate and import the cryptographic key
-    # material for a KMS key. For more information about importing key
-    # material into KMS, see [Importing key material][1] in the *Key
-    # Management Service Developer Guide*.
+    # By default, KMS creates KMS keys with key material that it generates.
+    # You can also generate and import your own key material. For more
+    # information about importing key material, see [Importing key
+    # material][1].
     #
-    # After you successfully import key material into a KMS key, you can
-    # [reimport the same key material][2] into that KMS key, but you cannot
-    # import different key material. You might reimport key material to
-    # replace key material that expired or key material that you deleted.
-    # You might also reimport key material to change the expiration model or
-    # expiration date of the key material.
+    # For asymmetric, HMAC and multi-Region keys, you cannot change the key
+    # material after the initial import. You can import multiple key
+    # materials into single-Region, symmetric encryption keys and rotate the
+    # key material on demand using `RotateKeyOnDemand`.
+    #
+    # After you import key material, you can [reimport the same key
+    # material][2] into that KMS key or, if the key supports on-demand
+    # rotation, import new key material. You can use the `ImportType`
+    # parameter to indicate whether you are importing new key material or
+    # re-importing previously imported key material. You might reimport key
+    # material to replace key material that expired or key material that you
+    # deleted. You might also reimport key material to change the expiration
+    # model or expiration date of the key material.
     #
     # Each time you import key material into KMS, you can determine whether
     # (`ExpirationModel`) and when (`ValidTo`) the key material expires. To
     # change the expiration of your key material, you must import it again,
     # either by calling `ImportKeyMaterial` or using the [import
-    # features](kms/latest/developerguide/importing-keys-import-key-material.html#importing-keys-import-key-material-console)
-    # of the KMS console.
+    # features][3] of the KMS console.
     #
-    # Before calling `ImportKeyMaterial`:
+    # Before you call `ImportKeyMaterial`, complete these steps:
     #
-    # * Create or identify a KMS key with no key material. The KMS key must
-    #   have an `Origin` value of `EXTERNAL`, which indicates that the KMS
-    #   key is designed for imported key material.
+    # * Create or identify a KMS key with `EXTERNAL` origin, which indicates
+    #   that the KMS key is designed for imported key material.
     #
-    #   To create an new KMS key for imported key material, call the
+    #   To create a new KMS key for imported key material, call the
     #   CreateKey operation with an `Origin` value of `EXTERNAL`. You can
     #   create a symmetric encryption KMS key, HMAC KMS key, asymmetric
-    #   encryption KMS key, or asymmetric signing KMS key. You can also
-    #   import key material into a [multi-Region
-    #   key](kms/latest/developerguide/multi-region-keys-overview.html) of
-    #   any supported type. However, you can't import key material into a
-    #   KMS key in a [custom key
-    #   store](kms/latest/developerguide/custom-key-store-overview.html).
-    #
-    # * Use the DescribeKey operation to verify that the `KeyState` of the
-    #   KMS key is `PendingImport`, which indicates that the KMS key has no
-    #   key material.
-    #
-    #   If you are reimporting the same key material into an existing KMS
-    #   key, you might need to call the DeleteImportedKeyMaterial to delete
-    #   its existing key material.
+    #   encryption KMS key, asymmetric key agreement key, or asymmetric
+    #   signing KMS key. You can also import key material into a
+    #   [multi-Region key][4] of any supported type. However, you can't
+    #   import key material into a KMS key in a [custom key store][5].
     #
     # * Call the GetParametersForImport operation to get a public key and
     #   import token set for importing key material.
@@ -6665,10 +6758,9 @@ module Aws::KMS
     # * The key ID or key ARN of the KMS key to associate with the imported
     #   key material. Its `Origin` must be `EXTERNAL` and its `KeyState`
     #   must be `PendingImport`. You cannot perform this operation on a KMS
-    #   key in a [custom key
-    #   store](kms/latest/developerguide/custom-key-store-overview.html), or
-    #   on a KMS key in a different Amazon Web Services account. To get the
-    #   `Origin` and `KeyState` of a KMS key, call DescribeKey.
+    #   key in a [custom key store][5], or on a KMS key in a different
+    #   Amazon Web Services account. To get the `Origin` and `KeyState` of a
+    #   KMS key, call DescribeKey.
     #
     # * The encrypted key material.
     #
@@ -6678,7 +6770,7 @@ module Aws::KMS
     #
     # * Whether the key material expires (`ExpirationModel`) and, if so,
     #   when (`ValidTo`). For help with this choice, see [Setting an
-    #   expiration time][3] in the *Key Management Service Developer Guide*.
+    #   expiration time][6] in the *Key Management Service Developer Guide*.
     #
     #   If you set an expiration date, KMS deletes the key material from the
     #   KMS key on the specified date, making the KMS key unusable. To use
@@ -6690,23 +6782,27 @@ module Aws::KMS
     #
     # When this operation is successful, the key state of the KMS key
     # changes from `PendingImport` to `Enabled`, and you can use the KMS key
-    # in cryptographic operations.
+    # in cryptographic operations. For single-Region, symmetric encryption
+    # keys, you will need to import all of the key materials associated with
+    # the KMS key to change its state to `Enabled`. Use the
+    # `ListKeyRotations` operation to list the ID and import state of each
+    # key material associated with a KMS key.
     #
     # If this operation fails, use the exception to help determine the
     # problem. If the error is related to the key material, the import
     # token, or wrapping key, use GetParametersForImport to get a new public
     # key and import token for the KMS key and repeat the import procedure.
-    # For help, see [How To Import Key Material][4] in the *Key Management
-    # Service Developer Guide*.
+    # For help, see [Create a KMS key with imported key material][7] in the
+    # *Key Management Service Developer Guide*.
     #
     # The KMS key that you use for this operation must be in a compatible
-    # key state. For details, see [Key states of KMS keys][5] in the *Key
+    # key state. For details, see [Key states of KMS keys][8] in the *Key
     # Management Service Developer Guide*.
     #
     # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**: [kms:ImportKeyMaterial][6] (key policy)
+    # **Required permissions**: [kms:ImportKeyMaterial][9] (key policy)
     #
     # **Related operations:**
     #
@@ -6714,18 +6810,25 @@ module Aws::KMS
     #
     # * GetParametersForImport
     #
+    # * ListKeyRotations
+    #
+    # * RotateKeyOnDemand
+    #
     # **Eventual consistency**: The KMS API follows an eventual consistency
-    # model. For more information, see [KMS eventual consistency][7].
+    # model. For more information, see [KMS eventual consistency][10].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html#reimport-key-material
-    # [3]: https://docs.aws.amazon.com/en_us/kms/latest/developerguide/importing-keys.html#importing-keys-expiration
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html#importing-keys-overview
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-import-key-material.html#reimport-key-material
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-import-key-material.html#importing-keys-import-key-material-console
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-import-key-material.html#importing-keys-expiration
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-conceptual.html
+    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   The identifier of the KMS key that will be associated with the
@@ -6736,11 +6839,9 @@ module Aws::KMS
     #
     #   The KMS key can be a symmetric encryption KMS key, HMAC KMS key,
     #   asymmetric encryption KMS key, or asymmetric signing KMS key,
-    #   including a [multi-Region
-    #   key](kms/latest/developerguide/multi-region-keys-overview.html) of any
-    #   supported type. You cannot perform this operation on a KMS key in a
-    #   custom key store, or on a KMS key in a different Amazon Web Services
-    #   account.
+    #   including a [multi-Region key][1] of any supported type. You cannot
+    #   perform this operation on a KMS key in a custom key store, or on a KMS
+    #   key in a different Amazon Web Services account.
     #
     #   Specify the key ID or key ARN of the KMS key.
     #
@@ -6753,6 +6854,10 @@ module Aws::KMS
     #
     #   To get the key ID and key ARN for a KMS key, use ListKeys or
     #   DescribeKey.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
     #
     # @option params [required, String, StringIO, File] :import_token
     #   The import token that you received in the response to a previous
@@ -6798,9 +6903,48 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/en_us/kms/latest/developerguide/importing-keys.html#importing-keys-expiration
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-import-key-material.html#importing-keys-expiration
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @option params [String] :import_type
+    #   Indicates whether the key material being imported is previously
+    #   associated with this KMS key or not. This parameter is optional and
+    #   only usable with symmetric encryption keys. If no key material has
+    #   ever been imported into the KMS key, and this parameter is omitted,
+    #   the parameter defaults to `NEW_KEY_MATERIAL`. After the first key
+    #   material is imported, if this parameter is omitted then the parameter
+    #   defaults to `EXISTING_KEY_MATERIAL`.
+    #
+    # @option params [String] :key_material_description
+    #   Description for the key material being imported. This parameter is
+    #   optional and only usable with symmetric encryption keys. If you do not
+    #   specify a key material description, KMS retains the value you
+    #   specified when you last imported the same key material into this KMS
+    #   key.
+    #
+    # @option params [String] :key_material_id
+    #   Identifies the key material being imported. This parameter is optional
+    #   and only usable with symmetric encryption keys. You cannot specify a
+    #   key material ID with `ImportType` set to `NEW_KEY_MATERIAL`. Whenever
+    #   you import key material into a symmetric encryption key, KMS assigns a
+    #   unique identifier to the key material based on the KMS key ID and the
+    #   imported key material. When you re-import key material with a
+    #   specified key material ID, KMS:
+    #
+    #   * Computes the identifier for the key material
+    #
+    #   * Matches the computed identifier against the specified key material
+    #     ID
+    #
+    #   * Verifies that the key material ID is already associated with the KMS
+    #     key
+    #
+    #   To get the list of key material IDs associated with a KMS key, use
+    #   ListKeyRotations.
+    #
+    # @return [Types::ImportKeyMaterialResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportKeyMaterialResponse#key_id #key_id} => String
+    #   * {Types::ImportKeyMaterialResponse#key_material_id #key_material_id} => String
     #
     #
     # @example Example: To import key material into a KMS key
@@ -6813,6 +6957,12 @@ module Aws::KMS
     #     import_token: "<binary data>", # The import token that you received in the response to a previous GetParametersForImport request.
     #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the KMS key to import the key material into. You can use the key ID or the Amazon Resource Name (ARN) of the KMS key.
     #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The Amazon Resource Name (ARN) of the KMS key into which key material was imported.
+    #     key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # Identifies the imported key material.
+    #   }
     #
     # @example Example: To import key material into a KMS key
     #
@@ -6827,6 +6977,12 @@ module Aws::KMS
     #     valid_to: Time.parse("2023-09-30T00:00:00-00:00"), # Specifies the date and time when the imported key material expires.
     #   })
     #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The Amazon Resource Name (ARN) of the KMS key into which key material was imported.
+    #     key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # Identifies the imported key material.
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.import_key_material({
@@ -6835,7 +6991,15 @@ module Aws::KMS
     #     encrypted_key_material: "data", # required
     #     valid_to: Time.now,
     #     expiration_model: "KEY_MATERIAL_EXPIRES", # accepts KEY_MATERIAL_EXPIRES, KEY_MATERIAL_DOES_NOT_EXPIRE
+    #     import_type: "NEW_KEY_MATERIAL", # accepts NEW_KEY_MATERIAL, EXISTING_KEY_MATERIAL
+    #     key_material_description: "KeyMaterialDescriptionType",
+    #     key_material_id: "BackingKeyIdType",
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_id #=> String
+    #   resp.key_material_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ImportKeyMaterial AWS API Documentation
     #
@@ -6887,10 +7051,10 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/limits.html#aliases-limit
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/resource-limits.html#aliases-per-key
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/alias-access.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [String] :key_id
     #   Lists only aliases that are associated with the specified KMS key.
@@ -7022,8 +7186,9 @@ module Aws::KMS
     #
     # For detailed information about grants, including grant terminology,
     # see [Grants in KMS][1] in the <i> <i>Key Management Service Developer
-    # Guide</i> </i>. For examples of working with grants in several
-    # programming languages, see [Programming grants][2].
+    # Guide</i> </i>. For examples of creating grants in several programming
+    # languages, see [Use CreateGrant with an Amazon Web Services SDK or
+    # CLI][2].
     #
     # <note markdown="1"> The `GranteePrincipal` field in the `ListGrants` response usually
     # contains the user or role designated as the grantee principal in the
@@ -7056,10 +7221,10 @@ module Aws::KMS
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-grants.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/example_kms_CreateGrant_section.html
     # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [Integer] :limit
     #   Use this parameter to specify the maximum number of items to return.
@@ -7235,7 +7400,7 @@ module Aws::KMS
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     # [2]: https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Gets the names of key policies for the specified KMS key.
@@ -7317,14 +7482,15 @@ module Aws::KMS
       req.send_request(options)
     end
 
-    # Returns information about all completed key material rotations for the
-    # specified KMS key.
+    # Returns information about the key materials associated with the
+    # specified KMS key. You can use the optional `IncludeKeyMaterial`
+    # parameter to control which key materials are included in the response.
     #
     # You must specify the KMS key in all requests. You can refine the key
     # rotations list by limiting the number of rotations returned.
     #
     # For detailed information about automatic and on-demand key rotations,
-    # see [Rotating KMS keys][1] in the *Key Management Service Developer
+    # see [Rotate KMS keys][1] in the *Key Management Service Developer
     # Guide*.
     #
     # **Cross-account use**: No. You cannot perform this operation on a KMS
@@ -7336,9 +7502,13 @@ module Aws::KMS
     #
     # * EnableKeyRotation
     #
+    # * DeleteImportedKeyMaterial
+    #
     # * DisableKeyRotation
     #
     # * GetKeyRotationStatus
+    #
+    # * ImportKeyMaterial
     #
     # * RotateKeyOnDemand
     #
@@ -7349,7 +7519,7 @@ module Aws::KMS
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Gets the key rotations for the specified KMS key.
@@ -7365,6 +7535,16 @@ module Aws::KMS
     #
     #   To get the key ID and key ARN for a KMS key, use ListKeys or
     #   DescribeKey.
+    #
+    # @option params [String] :include_key_material
+    #   Use this optional parameter to control which key materials associated
+    #   with this key are listed in the response. The default value of this
+    #   parameter is `ROTATIONS_ONLY`. If you omit this parameter, KMS returns
+    #   information on the key materials created by automatic or on-demand key
+    #   rotation. When you specify a value of `ALL_KEY_MATERIAL`, KMS adds the
+    #   first key material and any imported key material pending rotation to
+    #   the response. This parameter can only be used with KMS keys that
+    #   support automatic or on-demand key rotation.
     #
     # @option params [Integer] :limit
     #   Use this parameter to specify the maximum number of items to return.
@@ -7418,6 +7598,7 @@ module Aws::KMS
     #
     #   resp = client.list_key_rotations({
     #     key_id: "KeyIdType", # required
+    #     include_key_material: "ALL_KEY_MATERIAL", # accepts ALL_KEY_MATERIAL, ROTATIONS_ONLY
     #     limit: 1,
     #     marker: "MarkerType",
     #   })
@@ -7426,6 +7607,12 @@ module Aws::KMS
     #
     #   resp.rotations #=> Array
     #   resp.rotations[0].key_id #=> String
+    #   resp.rotations[0].key_material_id #=> String
+    #   resp.rotations[0].key_material_description #=> String
+    #   resp.rotations[0].import_state #=> String, one of "IMPORTED", "PENDING_IMPORT"
+    #   resp.rotations[0].key_material_state #=> String, one of "NON_CURRENT", "CURRENT", "PENDING_ROTATION"
+    #   resp.rotations[0].expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
+    #   resp.rotations[0].valid_to #=> Time
     #   resp.rotations[0].rotation_date #=> Time
     #   resp.rotations[0].rotation_type #=> String, one of "AUTOMATIC", "ON_DEMAND"
     #   resp.next_marker #=> String
@@ -7464,7 +7651,7 @@ module Aws::KMS
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [Integer] :limit
     #   Use this parameter to specify the maximum number of items to return.
@@ -7560,7 +7747,7 @@ module Aws::KMS
     # For general information about tags, including the format and syntax,
     # see [Tagging Amazon Web Services resources][1] in the *Amazon Web
     # Services General Reference*. For information about using tags in KMS,
-    # see [Tagging keys][2].
+    # see [Tags in KMS][2].
     #
     # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
@@ -7585,7 +7772,7 @@ module Aws::KMS
     # [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Gets tags on the specified KMS key.
@@ -7690,8 +7877,9 @@ module Aws::KMS
     #
     # For detailed information about grants, including grant terminology,
     # see [Grants in KMS][1] in the <i> <i>Key Management Service Developer
-    # Guide</i> </i>. For examples of working with grants in several
-    # programming languages, see [Programming grants][2].
+    # Guide</i> </i>. For examples of creating grants in several programming
+    # languages, see [Use CreateGrant with an Amazon Web Services SDK or
+    # CLI][2].
     #
     # **Cross-account use**: You must specify a principal in your Amazon Web
     # Services account. This operation returns a list of grants where the
@@ -7729,9 +7917,9 @@ module Aws::KMS
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-grants.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/example_kms_CreateGrant_section.html
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [Integer] :limit
     #   Use this parameter to specify the maximum number of items to return.
@@ -7841,8 +8029,9 @@ module Aws::KMS
     # formatting a JSON policy document, see the [IAM JSON Policy
     # Reference][2] in the <i> <i>Identity and Access Management User
     # Guide</i> </i>. For examples of adding a key policy in multiple
-    # programming languages, see [Setting a key policy][3] in the *Key
-    # Management Service Developer Guide*.
+    # programming languages, see [Use PutKeyPolicy with an Amazon Web
+    # Services SDK or CLI][3] in the *Key Management Service Developer
+    # Guide*.
     #
     # **Cross-account use**: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
@@ -7858,9 +8047,9 @@ module Aws::KMS
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
     # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-key-policies.html#put-policy
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/example_kms_PutKeyPolicy_section.html
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Sets the key policy on the specified KMS key.
@@ -7901,6 +8090,17 @@ module Aws::KMS
     #     not always immediately visible][2] in the *Amazon Web Services
     #     Identity and Access Management User Guide*.
     #
+    #   <note markdown="1"> If either of the required `Resource` or `Action` elements are missing
+    #   from a key policy statement, the policy statement has no effect. When
+    #   a key policy statement is missing one of these elements, the KMS
+    #   console correctly reports an error, but the `PutKeyPolicy` API request
+    #   succeeds, even though the policy statement is ineffective.
+    #
+    #    For more information on required key policy elements, see [Elements in
+    #   a key policy][3] in the *Key Management Service Developer Guide*.
+    #
+    #    </note>
+    #
     #   A key policy document can include only the following characters:
     #
     #   * Printable ASCII characters from the space character (`\u0020`)
@@ -7912,18 +8112,24 @@ module Aws::KMS
     #   * The tab (`\u0009`), line feed (`\u000A`), and carriage return
     #     (`\u000D`) special characters
     #
-    #   For information about key policies, see [Key policies in KMS][3] in
+    #   <note markdown="1"> If the key policy exceeds the length constraint, KMS returns a
+    #   `LimitExceededException`.
+    #
+    #    </note>
+    #
+    #   For information about key policies, see [Key policies in KMS][4] in
     #   the *Key Management Service Developer Guide*.For help writing and
     #   formatting a JSON policy document, see the [IAM JSON Policy
-    #   Reference][4] in the <i> <i>Identity and Access Management User
+    #   Reference][5] in the <i> <i>Identity and Access Management User
     #   Guide</i> </i>.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html#prevent-unmanageable-key
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
-    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
-    #   [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-overview.html#key-policy-elements
+    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    #   [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
     #
     # @option params [Boolean] :bypass_policy_lockout_safety_check
     #   Skips ("bypasses") the key policy lockout safety check. The default
@@ -8072,15 +8278,15 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotate-keys-manually
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html#asymmetric-cmks
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys-manually.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     # [4]: https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html
     # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
-    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String, StringIO, File] :ciphertext_blob
     #   Ciphertext of the data to reencrypt.
@@ -8103,7 +8309,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html
     #
     # @option params [String] :source_key_id
     #   Specifies the KMS key that KMS will use to decrypt the ciphertext
@@ -8189,7 +8395,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html
     #
     # @option params [String] :source_encryption_algorithm
     #   Specifies the encryption algorithm that KMS will use to decrypt the
@@ -8223,18 +8429,18 @@ module Aws::KMS
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
     #
     # @option params [Boolean] :dry_run
     #   Checks if your request will succeed. `DryRun` is an optional
     #   parameter.
     #
-    #   To learn more about how to use this parameter, see [Testing your KMS
-    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
     #
     # @return [Types::ReEncryptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8243,6 +8449,8 @@ module Aws::KMS
     #   * {Types::ReEncryptResponse#key_id #key_id} => String
     #   * {Types::ReEncryptResponse#source_encryption_algorithm #source_encryption_algorithm} => String
     #   * {Types::ReEncryptResponse#destination_encryption_algorithm #destination_encryption_algorithm} => String
+    #   * {Types::ReEncryptResponse#source_key_material_id #source_key_material_id} => String
+    #   * {Types::ReEncryptResponse#destination_key_material_id #destination_key_material_id} => String
     #
     #
     # @example Example: To reencrypt data
@@ -8257,8 +8465,12 @@ module Aws::KMS
     #   resp.to_h outputs the following:
     #   {
     #     ciphertext_blob: "<binary data>", # The reencrypted data.
+    #     destination_encryption_algorithm: "SYMMETRIC_DEFAULT", # The encryption algorithm that was used to reencrypt the data.
+    #     destination_key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # The identifier of the key material used to reencrypt the data.
     #     key_id: "arn:aws:kms:us-east-2:111122223333:key/0987dcba-09fe-87dc-65ba-ab0987654321", # The ARN of the KMS key that was used to reencrypt the data.
+    #     source_encryption_algorithm: "SYMMETRIC_DEFAULT", # The encryption algorithm that was used to decrypt the ciphertext before it was reencrypted.
     #     source_key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The ARN of the KMS key that was originally used to encrypt the data.
+    #     source_key_material_id: "1c6be7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # The identifier of the key material used to originally encrypt the data.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -8286,6 +8498,8 @@ module Aws::KMS
     #   resp.key_id #=> String
     #   resp.source_encryption_algorithm #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"
     #   resp.destination_encryption_algorithm #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"
+    #   resp.source_key_material_id #=> String
+    #   resp.destination_key_material_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ReEncrypt AWS API Documentation
     #
@@ -8317,12 +8531,12 @@ module Aws::KMS
     # independently of its primary and peer replica keys. A primary key and
     # its replica keys share properties that make them interoperable. They
     # have the same [key ID][2] and key material. They also have the same
-    # [key spec][3], [key usage][4], [key material origin][5], and
-    # [automatic key rotation status][6]. KMS automatically synchronizes
-    # these shared properties among related multi-Region keys. All other
-    # properties of a replica key can differ, including its [key policy][7],
-    # [tags][8], [aliases][9], and [Key states of KMS keys][10]. KMS pricing
-    # and quotas for KMS keys apply to each primary key and replica key.
+    # key spec, key usage, key material origin, and automatic key rotation
+    # status. KMS automatically synchronizes these shared properties among
+    # related multi-Region keys. All other properties of a replica key can
+    # differ, including its [key policy][3], [tags][4], [aliases][5], and
+    # [key state][6]. KMS pricing and quotas for KMS keys apply to each
+    # primary key and replica key.
     #
     # When this operation completes, the new replica key has a transient key
     # state of `Creating`. This key state changes to `Enabled` (or
@@ -8332,7 +8546,7 @@ module Aws::KMS
     # If you are creating and using the replica key programmatically, retry
     # on `KMSInvalidStateException` or call `DescribeKey` to check its
     # `KeyState` value before using it. For details about the `Creating` key
-    # state, see [Key states of KMS keys][10] in the *Key Management Service
+    # state, see [Key states of KMS keys][6] in the *Key Management Service
     # Developer Guide*.
     #
     # You cannot create more than one replica of a primary key in any
@@ -8341,7 +8555,7 @@ module Aws::KMS
     # `AlreadyExistsException` error. If the key state of the existing
     # replica is `PendingDeletion`, you can cancel the scheduled key
     # deletion (CancelKeyDeletion) or wait for the key to be deleted. The
-    # new replica key you create will have the same [shared properties][11]
+    # new replica key you create will have the same [shared properties][7]
     # as the original replica key.
     #
     # The CloudTrail log of a `ReplicateKey` operation records a
@@ -8351,8 +8565,6 @@ module Aws::KMS
     # If you replicate a multi-Region primary key with imported key
     # material, the replica key is created with no key material. You must
     # import the same key material that you imported into the primary key.
-    # For details, see [Importing key material into multi-Region keys][12]
-    # in the *Key Management Service Developer Guide*.
     #
     # To convert a replica key to a primary key, use the UpdatePrimaryRegion
     # operation.
@@ -8383,23 +8595,18 @@ module Aws::KMS
     # * UpdatePrimaryRegion
     #
     # **Eventual consistency**: The KMS API follows an eventual consistency
-    # model. For more information, see [KMS eventual consistency][13].
+    # model. For more information, see [KMS eventual consistency][8].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-spec
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-usage
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-origin
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
-    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html
-    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html
-    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
-    # [11]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html#mrk-sync-properties
-    # [12]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-import.html
-    # [13]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html#mrk-sync-properties
+    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Identifies the multi-Region primary key that is being replicated. To
@@ -8427,33 +8634,23 @@ module Aws::KMS
     #   [KMS service endpoints][1] in the *Amazon Web Services General
     #   Reference*.
     #
-    #   <note markdown="1"> HMAC KMS keys are not supported in all Amazon Web Services Regions. If
-    #   you try to replicate an HMAC KMS key in an Amazon Web Services Region
-    #   in which HMAC keys are not supported, the `ReplicateKey` operation
-    #   returns an `UnsupportedOperationException`. For a list of Regions in
-    #   which HMAC KMS keys are supported, see [HMAC keys in KMS][2] in the
-    #   *Key Management Service Developer Guide*.
-    #
-    #    </note>
-    #
     #   The replica must be in a different Amazon Web Services Region than its
     #   primary key and other replicas of that primary key, but in the same
     #   Amazon Web Services partition. KMS must be available in the replica
     #   Region. If the Region is not enabled by default, the Amazon Web
     #   Services account must be enabled in the Region. For information about
-    #   Amazon Web Services partitions, see [Amazon Resource Names (ARNs)][3]
+    #   Amazon Web Services partitions, see [Amazon Resource Names (ARNs)][2]
     #   in the *Amazon Web Services General Reference*. For information about
-    #   enabling and disabling Regions, see [Enabling a Region][4] and
-    #   [Disabling a Region][5] in the *Amazon Web Services General
+    #   enabling and disabling Regions, see [Enabling a Region][3] and
+    #   [Disabling a Region][4] in the *Amazon Web Services General
     #   Reference*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/kms.html#kms_region
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
-    #   [3]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   [4]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable
-    #   [5]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-disable
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [3]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable
+    #   [4]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-disable
     #
     # @option params [String] :policy
     #   The key policy to attach to the KMS key. This parameter is optional.
@@ -8501,7 +8698,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html#prevent-unmanageable-key
     #   [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
     #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
@@ -8570,7 +8767,7 @@ module Aws::KMS
     #   When you add tags to an Amazon Web Services resource, Amazon Web
     #   Services generates a cost allocation report with usage and costs
     #   aggregated by tags. Tags can also be used to control access to a KMS
-    #   key. For details, see [Tagging Keys][3].
+    #   key. For details, see [Tags in KMS][3].
     #
     #
     #
@@ -8665,11 +8862,11 @@ module Aws::KMS
     #   resp.replica_key_metadata.expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
     #   resp.replica_key_metadata.key_manager #=> String, one of "AWS", "CUSTOMER"
     #   resp.replica_key_metadata.customer_master_key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
-    #   resp.replica_key_metadata.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
+    #   resp.replica_key_metadata.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87"
     #   resp.replica_key_metadata.encryption_algorithms #=> Array
     #   resp.replica_key_metadata.encryption_algorithms[0] #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"
     #   resp.replica_key_metadata.signing_algorithms #=> Array
-    #   resp.replica_key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA"
+    #   resp.replica_key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256"
     #   resp.replica_key_metadata.key_agreement_algorithms #=> Array
     #   resp.replica_key_metadata.key_agreement_algorithms[0] #=> String, one of "ECDH"
     #   resp.replica_key_metadata.multi_region #=> Boolean
@@ -8683,6 +8880,7 @@ module Aws::KMS
     #   resp.replica_key_metadata.mac_algorithms #=> Array
     #   resp.replica_key_metadata.mac_algorithms[0] #=> String, one of "HMAC_SHA_224", "HMAC_SHA_256", "HMAC_SHA_384", "HMAC_SHA_512"
     #   resp.replica_key_metadata.xks_key_configuration.id #=> String
+    #   resp.replica_key_metadata.current_key_material_id #=> String
     #   resp.replica_policy #=> String
     #   resp.replica_tags #=> Array
     #   resp.replica_tags[0].tag_key #=> String
@@ -8706,20 +8904,20 @@ module Aws::KMS
     # by the *grantee principal* if the grant allows the `RetireGrant`
     # operation, and by the Amazon Web Services account in which the grant
     # is created. It can also be called by principals to whom permission for
-    # retiring a grant is delegated. For details, see [Retiring and revoking
-    # grants][2] in the *Key Management Service Developer Guide*.
+    # retiring a grant is delegated.
     #
     # For detailed information about grants, including grant terminology,
-    # see [Grants in KMS][3] in the <i> <i>Key Management Service Developer
-    # Guide</i> </i>. For examples of working with grants in several
-    # programming languages, see [Programming grants][4].
+    # see [Grants in KMS][2] in the <i> <i>Key Management Service Developer
+    # Guide</i> </i>. For examples of creating grants in several programming
+    # languages, see [Use CreateGrant with an Amazon Web Services SDK or
+    # CLI][3].
     #
     # **Cross-account use**: Yes. You can retire a grant on a KMS key in a
     # different Amazon Web Services account.
     #
     # **Required permissions**: Permission to retire a grant is determined
     # primarily by the grant. For details, see [Retiring and revoking
-    # grants][2] in the *Key Management Service Developer Guide*.
+    # grants][4] in the *Key Management Service Developer Guide*.
     #
     # **Related operations:**
     #
@@ -8737,10 +8935,10 @@ module Aws::KMS
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#grant-delete
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-grants.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/example_kms_CreateGrant_section.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-delete.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [String] :grant_token
     #   Identifies the grant to be retired. You can use a grant token to
@@ -8775,12 +8973,12 @@ module Aws::KMS
     #   Checks if your request will succeed. `DryRun` is an optional
     #   parameter.
     #
-    #   To learn more about how to use this parameter, see [Testing your KMS
-    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -8825,8 +9023,9 @@ module Aws::KMS
     #
     # For detailed information about grants, including grant terminology,
     # see [Grants in KMS][3] in the <i> <i>Key Management Service Developer
-    # Guide</i> </i>. For examples of working with grants in several
-    # programming languages, see [Programming grants][4].
+    # Guide</i> </i>. For examples of creating grants in several programming
+    # languages, see [Use CreateGrant with an Amazon Web Services SDK or
+    # CLI][4].
     #
     # **Cross-account use**: Yes. To perform this operation on a KMS key in
     # a different Amazon Web Services account, specify the key ARN in the
@@ -8849,12 +9048,12 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#grant-delete
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-delete.html
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-eventual-consistency
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-grants.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/example_kms_CreateGrant_section.html
     # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   A unique identifier for the KMS key associated with the grant. To get
@@ -8881,12 +9080,12 @@ module Aws::KMS
     #   Checks if your request will succeed. `DryRun` is an optional
     #   parameter.
     #
-    #   To learn more about how to use this parameter, see [Testing your KMS
-    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -8942,10 +9141,15 @@ module Aws::KMS
     # of the key material for your KMS keys in CloudTrail and Amazon
     # CloudWatch.
     #
-    # On-demand key rotation is supported only on [symmetric encryption KMS
-    # keys][3]. You cannot perform on-demand rotation of [asymmetric KMS
-    # keys][4], [HMAC KMS keys][5], KMS keys with [imported key
-    # material][6], or KMS keys in a [custom key store][7]. To perform
+    # On-demand key rotation is supported only on symmetric encryption KMS
+    # keys. You cannot perform on-demand rotation of [asymmetric KMS
+    # keys][3], [HMAC KMS keys][4], multi-Region KMS keys with [imported key
+    # material][5], or KMS keys in a [custom key store][6]. When you
+    # initiate on-demand key rotation on a symmetric encryption KMS key with
+    # imported key material, you must have already imported [new key
+    # material][7] and that key material's state should be
+    # `PENDING_ROTATION`. Use the `ListKeyRotations` operation to check the
+    # state of all key materials associated with a KMS key. To perform
     # on-demand rotation of a set of related [multi-Region keys][8], invoke
     # the on-demand rotation on the primary key.
     #
@@ -8972,6 +9176,8 @@ module Aws::KMS
     #
     # * GetKeyRotationStatus
     #
+    # * ImportKeyMaterial
+    #
     # * ListKeyRotations
     #
     # **Eventual consistency**: The KMS API follows an eventual consistency
@@ -8979,27 +9185,27 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotating-keys-on-demand
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotating-keys-enable-disable
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#symmetric-cmks
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
-    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/rotating-keys-on-demand.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/rotating-keys-enable-disable.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-import-key-material.html
+    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#multi-region-rotate
     # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
     # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk
     # [11]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [12]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [13]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [13]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Identifies a symmetric encryption KMS key. You cannot perform
     #   on-demand rotation of [asymmetric KMS keys][1], [HMAC KMS keys][2],
-    #   KMS keys with [imported key material][3], or KMS keys in a [custom key
-    #   store][4]. To perform on-demand rotation of a set of related
-    #   [multi-Region keys][5], invoke the on-demand rotation on the primary
-    #   key.
+    #   multi-Region KMS keys with [imported key material][3], or KMS keys in
+    #   a [custom key store][4]. To perform on-demand rotation of a set of
+    #   related [multi-Region keys][5], invoke the on-demand rotation on the
+    #   primary key.
     #
     #   Specify the key ID or key ARN of the KMS key.
     #
@@ -9018,8 +9224,8 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
     #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
-    #   [5]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate
+    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    #   [5]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#multi-region-rotate
     #
     # @return [Types::RotateKeyOnDemandResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9073,9 +9279,8 @@ module Aws::KMS
     # operation. When a KMS key is deleted, all data that was encrypted
     # under the KMS key is unrecoverable. (The only exception is a
     # [multi-Region replica key][1], or an [asymmetric or HMAC KMS key with
-    # imported key
-    # material](kms/latest/developerguide/importing-keys-managing.html#import-delete-key).)
-    # To prevent the use of a KMS key without deleting it, use DisableKey.
+    # imported key material][2].) To prevent the use of a KMS key without
+    # deleting it, use DisableKey.
     #
     # You can schedule the deletion of a multi-Region primary key and its
     # replica keys at any time. However, KMS will not delete a multi-Region
@@ -9086,13 +9291,13 @@ module Aws::KMS
     # the last of its replicas keys is deleted (not just scheduled), the key
     # state of the primary key changes to `PendingDeletion` and its waiting
     # period (`PendingWindowInDays`) begins. For details, see [Deleting
-    # multi-Region keys][1] in the *Key Management Service Developer Guide*.
+    # multi-Region keys][3] in the *Key Management Service Developer Guide*.
     #
-    # When KMS [deletes a KMS key from an CloudHSM key store][2], it makes a
+    # When KMS [deletes a KMS key from an CloudHSM key store][4], it makes a
     # best effort to delete the associated key material from the associated
     # CloudHSM cluster. However, you might need to manually [delete the
-    # orphaned key material][3] from the cluster and its backups. [Deleting
-    # a KMS key from an external key store][4] has no effect on the
+    # orphaned key material][5] from the cluster and its backups. [Deleting
+    # a KMS key from an external key store][6] has no effect on the
     # associated external key. However, for both types of custom key stores,
     # deleting a KMS key is destructive and irreversible. You cannot decrypt
     # ciphertext encrypted under the KMS key by using only its associated
@@ -9101,11 +9306,11 @@ module Aws::KMS
     # material.
     #
     # For more information about scheduling a KMS key for deletion, see
-    # [Deleting KMS keys][5] in the *Key Management Service Developer
+    # [Deleting KMS keys][7] in the *Key Management Service Developer
     # Guide*.
     #
     # The KMS key that you use for this operation must be in a compatible
-    # key state. For details, see [Key states of KMS keys][6] in the *Key
+    # key state. For details, see [Key states of KMS keys][8] in the *Key
     # Management Service Developer Guide*.
     #
     # **Cross-account use**: No. You cannot perform this operation on a KMS
@@ -9120,17 +9325,19 @@ module Aws::KMS
     # * DisableKey
     #
     # **Eventual consistency**: The KMS API follows an eventual consistency
-    # model. For more information, see [KMS eventual consistency][7].
+    # model. For more information, see [KMS eventual consistency][9].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-delete.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/delete-cmk-keystore.html
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-orphaned-key
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/delete-xks-key.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html#import-delete-key
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html#deleting-mrks
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html#delete-cmk-keystore
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-orphaned-key
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html#delete-xks-key
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html
+    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   The unique identifier of the KMS key to delete.
@@ -9219,11 +9426,11 @@ module Aws::KMS
     # Developer Guide*.
     #
     # Digital signatures are generated and verified by using asymmetric key
-    # pair, such as an RSA or ECC pair that is represented by an asymmetric
-    # KMS key. The key owner (or an authorized user) uses their private key
-    # to sign a message. Anyone with the public key can verify that the
-    # message was signed with that particular private key and that the
-    # message hasn't changed since it was signed.
+    # pair, such as an RSA, ECC, or ML-DSA pair that is represented by an
+    # asymmetric KMS key. The key owner (or an authorized user) uses their
+    # private key to sign a message. Anyone with the public key can verify
+    # that the message was signed with that particular private key and that
+    # the message hasn't changed since it was signed.
     #
     # To use the `Sign` operation, provide the following information:
     #
@@ -9236,8 +9443,8 @@ module Aws::KMS
     #   to sign. You can submit messages of up to 4096 bytes. To sign a
     #   larger message, generate a hash digest of the message, and then
     #   provide the hash digest in the `Message` parameter. To indicate
-    #   whether the message is a full message or a digest, use the
-    #   `MessageType` parameter.
+    #   whether the message is a full message, a digest, or an ML-DSA
+    #   EXTERNAL\_MU, use the `MessageType` parameter.
     #
     # * Choose a signing algorithm that is compatible with the KMS key.
     #
@@ -9279,7 +9486,7 @@ module Aws::KMS
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Identifies an asymmetric KMS key. KMS uses the private key in the
@@ -9317,26 +9524,34 @@ module Aws::KMS
     # @option params [String] :message_type
     #   Tells KMS whether the value of the `Message` parameter should be
     #   hashed as part of the signing algorithm. Use `RAW` for unhashed
-    #   messages; use `DIGEST` for message digests, which are already hashed.
+    #   messages; use `DIGEST` for message digests, which are already hashed;
+    #   use `EXTERNAL_MU` for 64-byte representative μ used in ML-DSA signing
+    #   as defined in NIST FIPS 204 Section 6.2.
     #
     #   When the value of `MessageType` is `RAW`, KMS uses the standard
     #   signing algorithm, which begins with a hash function. When the value
-    #   is `DIGEST`, KMS skips the hashing step in the signing algorithm.
+    #   is `DIGEST`, KMS skips the hashing step in the signing algorithm. When
+    #   the value is `EXTERNAL_MU` KMS skips the concatenated hashing of the
+    #   public key hash and the message done in the ML-DSA signing algorithm.
     #
-    #   Use the `DIGEST` value only when the value of the `Message` parameter
-    #   is a message digest. If you use the `DIGEST` value with an unhashed
-    #   message, the security of the signing operation can be compromised.
+    #   Use the `DIGEST` or `EXTERNAL_MU` value only when the value of the
+    #   `Message` parameter is a message digest. If you use the `DIGEST` value
+    #   with an unhashed message, the security of the signing operation can be
+    #   compromised.
     #
-    #   When the value of `MessageType`is `DIGEST`, the length of the
+    #   When the value of `MessageType` is `DIGEST`, the length of the
     #   `Message` value must match the length of hashed messages for the
     #   specified signing algorithm.
+    #
+    #   When the value of `MessageType` is `EXTERNAL_MU` the length of the
+    #   `Message` value must be 64 bytes.
     #
     #   You can submit a message digest and omit the `MessageType` or specify
     #   `RAW` so the digest is hashed again while signing. However, this can
     #   cause verification failures when verifying with a system that assumes
     #   a single hash.
     #
-    #   The hashing algorithm in that `Sign` uses is based on the
+    #   The hashing algorithm that `Sign` uses is based on the
     #   `SigningAlgorithm` value.
     #
     #   * Signing algorithms that end in SHA\_256 use the SHA\_256 hashing
@@ -9348,12 +9563,15 @@ module Aws::KMS
     #   * Signing algorithms that end in SHA\_512 use the SHA\_512 hashing
     #     algorithm.
     #
+    #   * Signing algorithms that end in SHAKE\_256 use the SHAKE\_256 hashing
+    #     algorithm.
+    #
     #   * SM2DSA uses the SM3 hashing algorithm. For details, see [Offline
     #     verification with SM2 key pairs][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-sm-offline-verification
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/offline-operations.html#key-spec-sm-offline-verification
     #
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
@@ -9366,7 +9584,7 @@ module Aws::KMS
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
     #
     # @option params [required, String] :signing_algorithm
     #   Specifies the signing algorithm to use when signing the message.
@@ -9380,12 +9598,12 @@ module Aws::KMS
     #   Checks if your request will succeed. `DryRun` is an optional
     #   parameter.
     #
-    #   To learn more about how to use this parameter, see [Testing your KMS
-    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
     #
     # @return [Types::SignResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9438,9 +9656,9 @@ module Aws::KMS
     #   resp = client.sign({
     #     key_id: "KeyIdType", # required
     #     message: "data", # required
-    #     message_type: "RAW", # accepts RAW, DIGEST
+    #     message_type: "RAW", # accepts RAW, DIGEST, EXTERNAL_MU
     #     grant_tokens: ["GrantTokenType"],
-    #     signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512, SM2DSA
+    #     signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512, SM2DSA, ML_DSA_SHAKE_256
     #     dry_run: false,
     #   })
     #
@@ -9448,7 +9666,7 @@ module Aws::KMS
     #
     #   resp.key_id #=> String
     #   resp.signature #=> String
-    #   resp.signing_algorithm #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA"
+    #   resp.signing_algorithm #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Sign AWS API Documentation
     #
@@ -9512,13 +9730,13 @@ module Aws::KMS
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/abac.html
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#keystore-concept
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#alias-concept
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html
     # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html
     # [8]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [11]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [11]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Identifies a customer managed key in the account and Region.
@@ -9634,7 +9852,7 @@ module Aws::KMS
     # [4]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Identifies the KMS key from which you are removing tags.
@@ -9747,7 +9965,7 @@ module Aws::KMS
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :alias_name
     #   Identifies the alias that is changing its KMS key. This value must
@@ -9827,9 +10045,9 @@ module Aws::KMS
     # verify the updated property values, use the DescribeCustomKeyStores
     # operation.
     #
-    # This operation is part of the [custom key stores][1] feature in KMS,
-    # which combines the convenience and extensive integration of KMS with
-    # the isolation and control of a key store that you own and manage.
+    # This operation is part of the custom key stores feature in KMS, which
+    # combines the convenience and extensive integration of KMS with the
+    # isolation and control of a key store that you own and manage.
     #
     # When updating the properties of an external key store, verify that the
     # updated settings connect your key store, via the external key store
@@ -9899,7 +10117,7 @@ module Aws::KMS
     # **Cross-account use**: No. You cannot perform this operation on a
     # custom key store in a different Amazon Web Services account.
     #
-    # **Required permissions**: [kms:UpdateCustomKeyStore][2] (IAM policy)
+    # **Required permissions**: [kms:UpdateCustomKeyStore][1] (IAM policy)
     #
     # **Related operations:**
     #
@@ -9914,13 +10132,12 @@ module Aws::KMS
     # * DisconnectCustomKeyStore
     #
     # **Eventual consistency**: The KMS API follows an eventual consistency
-    # model. For more information, see [KMS eventual consistency][3].
+    # model. For more information, see [KMS eventual consistency][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :custom_key_store_id
     #   Identifies the custom key store that you want to update. Enter the ID
@@ -10198,7 +10415,7 @@ module Aws::KMS
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Updates the description of the specified KMS key.
@@ -10258,8 +10475,8 @@ module Aws::KMS
     # key in `eu-west-2`. If you run `UpdatePrimaryRegion` with a
     # `PrimaryRegion` value of `eu-west-2`, the primary key is now the key
     # in `eu-west-2`, and the key in `us-east-1` becomes a replica key. For
-    # details, see [Updating the primary Region][1] in the *Key Management
-    # Service Developer Guide*.
+    # details, see [Change the primary key in a set of multi-Region keys][1]
+    # in the *Key Management Service Developer Guide*.
     #
     # This operation supports *multi-Region keys*, an KMS feature that lets
     # you create multiple interoperable KMS keys in different Amazon Web
@@ -10327,7 +10544,7 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-update
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-update.html
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-spec
@@ -10336,7 +10553,7 @@ module Aws::KMS
     # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html
     # [8]: https://docs.aws.amazon.com/kms/latest/APIReference/API_ScheduleKeyDeletion.html
     # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
-    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Identifies the current primary key. When the operation completes, this
@@ -10451,10 +10668,10 @@ module Aws::KMS
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-sm-offline-verification
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/offline-operations.html#key-spec-sm-offline-verification
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String] :key_id
     #   Identifies the asymmetric KMS key that will be used to verify the
@@ -10493,27 +10710,34 @@ module Aws::KMS
     # @option params [String] :message_type
     #   Tells KMS whether the value of the `Message` parameter should be
     #   hashed as part of the signing algorithm. Use `RAW` for unhashed
-    #   messages; use `DIGEST` for message digests, which are already hashed.
+    #   messages; use `DIGEST` for message digests, which are already hashed;
+    #   use `EXTERNAL_MU` for 64-byte representative μ used in ML-DSA signing
+    #   as defined in NIST FIPS 204 Section 6.2.
     #
     #   When the value of `MessageType` is `RAW`, KMS uses the standard
     #   signing algorithm, which begins with a hash function. When the value
-    #   is `DIGEST`, KMS skips the hashing step in the signing algorithm.
+    #   is `DIGEST`, KMS skips the hashing step in the signing algorithm. When
+    #   the value is `EXTERNAL_MU` KMS skips the concatenated hashing of the
+    #   public key hash and the message done in the ML-DSA signing algorithm.
     #
-    #   Use the `DIGEST` value only when the value of the `Message` parameter
-    #   is a message digest. If you use the `DIGEST` value with an unhashed
-    #   message, the security of the verification operation can be
+    #   Use the `DIGEST` or `EXTERNAL_MU` value only when the value of the
+    #   `Message` parameter is a message digest. If you use the `DIGEST` value
+    #   with an unhashed message, the security of the signing operation can be
     #   compromised.
     #
-    #   When the value of `MessageType`is `DIGEST`, the length of the
+    #   When the value of `MessageType` is `DIGEST`, the length of the
     #   `Message` value must match the length of hashed messages for the
     #   specified signing algorithm.
+    #
+    #   When the value of `MessageType` is `EXTERNAL_MU` the length of the
+    #   `Message` value must be 64 bytes.
     #
     #   You can submit a message digest and omit the `MessageType` or specify
     #   `RAW` so the digest is hashed again while signing. However, if the
     #   signed message is hashed once while signing, but twice while
     #   verifying, verification fails, even when the message hasn't changed.
     #
-    #   The hashing algorithm in that `Verify` uses is based on the
+    #   The hashing algorithm that `Verify` uses is based on the
     #   `SigningAlgorithm` value.
     #
     #   * Signing algorithms that end in SHA\_256 use the SHA\_256 hashing
@@ -10525,12 +10749,15 @@ module Aws::KMS
     #   * Signing algorithms that end in SHA\_512 use the SHA\_512 hashing
     #     algorithm.
     #
+    #   * Signing algorithms that end in SHAKE\_256 use the SHAKE\_256 hashing
+    #     algorithm.
+    #
     #   * SM2DSA uses the SM3 hashing algorithm. For details, see [Offline
     #     verification with SM2 key pairs][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-sm-offline-verification
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/offline-operations.html#key-spec-sm-offline-verification
     #
     # @option params [required, String, StringIO, File] :signature
     #   The signature that the `Sign` operation generated.
@@ -10550,18 +10777,18 @@ module Aws::KMS
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
     #
     # @option params [Boolean] :dry_run
     #   Checks if your request will succeed. `DryRun` is an optional
     #   parameter.
     #
-    #   To learn more about how to use this parameter, see [Testing your KMS
-    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
     #
     # @return [Types::VerifyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10616,9 +10843,9 @@ module Aws::KMS
     #   resp = client.verify({
     #     key_id: "KeyIdType", # required
     #     message: "data", # required
-    #     message_type: "RAW", # accepts RAW, DIGEST
+    #     message_type: "RAW", # accepts RAW, DIGEST, EXTERNAL_MU
     #     signature: "data", # required
-    #     signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512, SM2DSA
+    #     signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512, SM2DSA, ML_DSA_SHAKE_256
     #     grant_tokens: ["GrantTokenType"],
     #     dry_run: false,
     #   })
@@ -10627,7 +10854,7 @@ module Aws::KMS
     #
     #   resp.key_id #=> String
     #   resp.signature_valid #=> Boolean
-    #   resp.signing_algorithm #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA"
+    #   resp.signing_algorithm #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Verify AWS API Documentation
     #
@@ -10675,7 +10902,7 @@ module Aws::KMS
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
     # @option params [required, String, StringIO, File] :message
     #   The message that will be used in the verification. Enter the same
@@ -10713,18 +10940,18 @@ module Aws::KMS
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
     #
     # @option params [Boolean] :dry_run
     #   Checks if your request will succeed. `DryRun` is an optional
     #   parameter.
     #
-    #   To learn more about how to use this parameter, see [Testing your KMS
-    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
     #
     # @return [Types::VerifyMacResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10796,7 +11023,7 @@ module Aws::KMS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

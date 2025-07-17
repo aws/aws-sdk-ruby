@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.138.0 (2025-06-18)
+------------------
+
+* Feature - Add IncludeInstances parameter to DescribeAutoScalingGroups API
+
+1.137.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.136.0 (2025-05-29)
+------------------
+
+* Feature - Add support for "apple" CpuManufacturer in ABIS
+
+1.135.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.134.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.133.0 (2025-04-17)
 ------------------
 

@@ -86,6 +86,75 @@ module Aws::BedrockRuntime
       SENSITIVE: []
     end
 
+    class Citation
+      attr_accessor title: ::String
+      attr_accessor source_content: ::Array[Types::CitationSourceContent]
+      attr_accessor location: Types::CitationLocation
+      SENSITIVE: []
+    end
+
+    class CitationGeneratedContent
+      attr_accessor text: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < CitationGeneratedContent
+      end
+      class Unknown < CitationGeneratedContent
+      end
+    end
+
+    class CitationLocation
+      attr_accessor document_char: Types::DocumentCharLocation
+      attr_accessor document_page: Types::DocumentPageLocation
+      attr_accessor document_chunk: Types::DocumentChunkLocation
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DocumentChar < CitationLocation
+      end
+      class DocumentPage < CitationLocation
+      end
+      class DocumentChunk < CitationLocation
+      end
+      class Unknown < CitationLocation
+      end
+    end
+
+    class CitationSourceContent
+      attr_accessor text: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < CitationSourceContent
+      end
+      class Unknown < CitationSourceContent
+      end
+    end
+
+    class CitationSourceContentDelta
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class CitationsConfig
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class CitationsContentBlock
+      attr_accessor content: ::Array[Types::CitationGeneratedContent]
+      attr_accessor citations: ::Array[Types::Citation]
+      SENSITIVE: []
+    end
+
+    class CitationsDelta
+      attr_accessor title: ::String
+      attr_accessor source_content: ::Array[Types::CitationSourceContentDelta]
+      attr_accessor location: Types::CitationLocation
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -101,6 +170,7 @@ module Aws::BedrockRuntime
       attr_accessor guard_content: Types::GuardrailConverseContentBlock
       attr_accessor cache_point: Types::CachePointBlock
       attr_accessor reasoning_content: Types::ReasoningContentBlock
+      attr_accessor citations_content: Types::CitationsContentBlock
       attr_accessor unknown: untyped
       SENSITIVE: [:reasoning_content]
 
@@ -122,6 +192,8 @@ module Aws::BedrockRuntime
       end
       class ReasoningContent < ContentBlock
       end
+      class CitationsContent < ContentBlock
+      end
       class Unknown < ContentBlock
       end
     end
@@ -130,6 +202,7 @@ module Aws::BedrockRuntime
       attr_accessor text: ::String
       attr_accessor tool_use: Types::ToolUseBlockDelta
       attr_accessor reasoning_content: Types::ReasoningContentBlockDelta
+      attr_accessor citation: Types::CitationsDelta
       attr_accessor unknown: untyped
       SENSITIVE: [:reasoning_content]
 
@@ -138,6 +211,8 @@ module Aws::BedrockRuntime
       class ToolUse < ContentBlockDelta
       end
       class ReasoningContent < ContentBlockDelta
+      end
+      class Citation < ContentBlockDelta
       end
       class Unknown < ContentBlockDelta
       end
@@ -266,18 +341,58 @@ module Aws::BedrockRuntime
       attr_accessor format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md")
       attr_accessor name: ::String
       attr_accessor source: Types::DocumentSource
+      attr_accessor context: ::String
+      attr_accessor citations: Types::CitationsConfig
+      SENSITIVE: []
+    end
+
+    class DocumentCharLocation
+      attr_accessor document_index: ::Integer
+      attr_accessor start: ::Integer
+      attr_accessor end: ::Integer
+      SENSITIVE: []
+    end
+
+    class DocumentChunkLocation
+      attr_accessor document_index: ::Integer
+      attr_accessor start: ::Integer
+      attr_accessor end: ::Integer
+      SENSITIVE: []
+    end
+
+    class DocumentContentBlock
+      attr_accessor text: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < DocumentContentBlock
+      end
+      class Unknown < DocumentContentBlock
+      end
+    end
+
+    class DocumentPageLocation
+      attr_accessor document_index: ::Integer
+      attr_accessor start: ::Integer
+      attr_accessor end: ::Integer
       SENSITIVE: []
     end
 
     class DocumentSource
       attr_accessor bytes: ::String
       attr_accessor s3_location: Types::S3Location
+      attr_accessor text: ::String
+      attr_accessor content: ::Array[Types::DocumentContentBlock]
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Bytes < DocumentSource
       end
       class S3Location < DocumentSource
+      end
+      class Text < DocumentSource
+      end
+      class Content < DocumentSource
       end
       class Unknown < DocumentSource
       end

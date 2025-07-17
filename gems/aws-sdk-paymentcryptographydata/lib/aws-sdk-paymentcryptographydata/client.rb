@@ -200,8 +200,7 @@ module Aws::PaymentCryptographyData
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -571,7 +570,7 @@ module Aws::PaymentCryptographyData
     #         padding_type: "PKCS1", # accepts PKCS1, OAEP_SHA1, OAEP_SHA256, OAEP_SHA512
     #       },
     #       dukpt: {
-    #         key_serial_number: "HexLengthBetween10And24", # required
+    #         key_serial_number: "HexLength16Or20Or24", # required
     #         mode: "ECB", # accepts ECB, CBC
     #         dukpt_key_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #         dukpt_key_variant: "BIDIRECTIONAL", # accepts BIDIRECTIONAL, REQUEST, RESPONSE
@@ -592,13 +591,13 @@ module Aws::PaymentCryptographyData
     #         diffie_hellman_symmetric_key: {
     #           certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
     #           public_key_certificate: "CertificateType", # required
-    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
+    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512, HMAC_SHA224
     #           key_derivation_function: "NIST_SP800", # required, accepts NIST_SP800, ANSI_X963
     #           key_derivation_hash_algorithm: "SHA_256", # required, accepts SHA_256, SHA_384, SHA_512
     #           shared_information: "SharedInformation", # required
     #         },
     #       },
-    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC, SHA_1
     #     },
     #   })
     #
@@ -739,7 +738,7 @@ module Aws::PaymentCryptographyData
     #         padding_type: "PKCS1", # accepts PKCS1, OAEP_SHA1, OAEP_SHA256, OAEP_SHA512
     #       },
     #       dukpt: {
-    #         key_serial_number: "HexLengthBetween10And24", # required
+    #         key_serial_number: "HexLength16Or20Or24", # required
     #         mode: "ECB", # accepts ECB, CBC
     #         dukpt_key_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #         dukpt_key_variant: "BIDIRECTIONAL", # accepts BIDIRECTIONAL, REQUEST, RESPONSE
@@ -760,13 +759,13 @@ module Aws::PaymentCryptographyData
     #         diffie_hellman_symmetric_key: {
     #           certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
     #           public_key_certificate: "CertificateType", # required
-    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
+    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512, HMAC_SHA224
     #           key_derivation_function: "NIST_SP800", # required, accepts NIST_SP800, ANSI_X963
     #           key_derivation_hash_algorithm: "SHA_256", # required, accepts SHA_256, SHA_384, SHA_512
     #           shared_information: "SharedInformation", # required
     #         },
     #       },
-    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC, SHA_1
     #     },
     #   })
     #
@@ -963,7 +962,7 @@ module Aws::PaymentCryptographyData
     #     key_identifier: "KeyArnOrKeyAliasType", # required
     #     message_data: "MessageDataType", # required
     #     generation_attributes: { # required
-    #       algorithm: "ISO9797_ALGORITHM1", # accepts ISO9797_ALGORITHM1, ISO9797_ALGORITHM3, CMAC, HMAC_SHA224, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512
+    #       algorithm: "ISO9797_ALGORITHM1", # accepts ISO9797_ALGORITHM1, ISO9797_ALGORITHM3, CMAC, HMAC, HMAC_SHA224, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512
     #       emv_mac: {
     #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
     #         primary_account_number: "PrimaryAccountNumberType", # required
@@ -975,17 +974,17 @@ module Aws::PaymentCryptographyData
     #         },
     #       },
     #       dukpt_iso_9797_algorithm_1: {
-    #         key_serial_number: "HexLengthBetween10And24", # required
+    #         key_serial_number: "HexLength16Or20Or24", # required
     #         dukpt_key_variant: "BIDIRECTIONAL", # required, accepts BIDIRECTIONAL, REQUEST, RESPONSE
     #         dukpt_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #       },
     #       dukpt_iso_9797_algorithm_3: {
-    #         key_serial_number: "HexLengthBetween10And24", # required
+    #         key_serial_number: "HexLength16Or20Or24", # required
     #         dukpt_key_variant: "BIDIRECTIONAL", # required, accepts BIDIRECTIONAL, REQUEST, RESPONSE
     #         dukpt_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #       },
     #       dukpt_cmac: {
-    #         key_serial_number: "HexLengthBetween10And24", # required
+    #         key_serial_number: "HexLength16Or20Or24", # required
     #         dukpt_key_variant: "BIDIRECTIONAL", # required, accepts BIDIRECTIONAL, REQUEST, RESPONSE
     #         dukpt_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #       },
@@ -1310,13 +1309,13 @@ module Aws::PaymentCryptographyData
     #         diffie_hellman_symmetric_key: {
     #           certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
     #           public_key_certificate: "CertificateType", # required
-    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
+    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512, HMAC_SHA224
     #           key_derivation_function: "NIST_SP800", # required, accepts NIST_SP800, ANSI_X963
     #           key_derivation_hash_algorithm: "SHA_256", # required, accepts SHA_256, SHA_384, SHA_512
     #           shared_information: "SharedInformation", # required
     #         },
     #       },
-    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC, SHA_1
     #     },
     #   })
     #
@@ -1441,7 +1440,7 @@ module Aws::PaymentCryptographyData
     #         padding_type: "PKCS1", # accepts PKCS1, OAEP_SHA1, OAEP_SHA256, OAEP_SHA512
     #       },
     #       dukpt: {
-    #         key_serial_number: "HexLengthBetween10And24", # required
+    #         key_serial_number: "HexLength16Or20Or24", # required
     #         mode: "ECB", # accepts ECB, CBC
     #         dukpt_key_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #         dukpt_key_variant: "BIDIRECTIONAL", # accepts BIDIRECTIONAL, REQUEST, RESPONSE
@@ -1455,7 +1454,7 @@ module Aws::PaymentCryptographyData
     #         padding_type: "PKCS1", # accepts PKCS1, OAEP_SHA1, OAEP_SHA256, OAEP_SHA512
     #       },
     #       dukpt: {
-    #         key_serial_number: "HexLengthBetween10And24", # required
+    #         key_serial_number: "HexLength16Or20Or24", # required
     #         mode: "ECB", # accepts ECB, CBC
     #         dukpt_key_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #         dukpt_key_variant: "BIDIRECTIONAL", # accepts BIDIRECTIONAL, REQUEST, RESPONSE
@@ -1468,13 +1467,13 @@ module Aws::PaymentCryptographyData
     #         diffie_hellman_symmetric_key: {
     #           certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
     #           public_key_certificate: "CertificateType", # required
-    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
+    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512, HMAC_SHA224
     #           key_derivation_function: "NIST_SP800", # required, accepts NIST_SP800, ANSI_X963
     #           key_derivation_hash_algorithm: "SHA_256", # required, accepts SHA_256, SHA_384, SHA_512
     #           shared_information: "SharedInformation", # required
     #         },
     #       },
-    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC, SHA_1
     #     },
     #     outgoing_wrapped_key: {
     #       wrapped_key_material: { # required
@@ -1482,13 +1481,13 @@ module Aws::PaymentCryptographyData
     #         diffie_hellman_symmetric_key: {
     #           certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
     #           public_key_certificate: "CertificateType", # required
-    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
+    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512, HMAC_SHA224
     #           key_derivation_function: "NIST_SP800", # required, accepts NIST_SP800, ANSI_X963
     #           key_derivation_hash_algorithm: "SHA_256", # required, accepts SHA_256, SHA_384, SHA_512
     #           shared_information: "SharedInformation", # required
     #         },
     #       },
-    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC, SHA_1
     #     },
     #   })
     #
@@ -1657,12 +1656,12 @@ module Aws::PaymentCryptographyData
     #     },
     #     encrypted_pin_block: "HexEvenLengthBetween16And32", # required
     #     incoming_dukpt_attributes: {
-    #       key_serial_number: "HexLengthBetween10And24", # required
+    #       key_serial_number: "HexLength16Or20Or24", # required
     #       dukpt_key_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #       dukpt_key_variant: "BIDIRECTIONAL", # accepts BIDIRECTIONAL, REQUEST, RESPONSE
     #     },
     #     outgoing_dukpt_attributes: {
-    #       key_serial_number: "HexLengthBetween10And24", # required
+    #       key_serial_number: "HexLength16Or20Or24", # required
     #       dukpt_key_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #       dukpt_key_variant: "BIDIRECTIONAL", # accepts BIDIRECTIONAL, REQUEST, RESPONSE
     #     },
@@ -1672,13 +1671,13 @@ module Aws::PaymentCryptographyData
     #         diffie_hellman_symmetric_key: {
     #           certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
     #           public_key_certificate: "CertificateType", # required
-    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
+    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512, HMAC_SHA224
     #           key_derivation_function: "NIST_SP800", # required, accepts NIST_SP800, ANSI_X963
     #           key_derivation_hash_algorithm: "SHA_256", # required, accepts SHA_256, SHA_384, SHA_512
     #           shared_information: "SharedInformation", # required
     #         },
     #       },
-    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC, SHA_1
     #     },
     #     outgoing_wrapped_key: {
     #       wrapped_key_material: { # required
@@ -1686,13 +1685,13 @@ module Aws::PaymentCryptographyData
     #         diffie_hellman_symmetric_key: {
     #           certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
     #           public_key_certificate: "CertificateType", # required
-    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
+    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512, HMAC_SHA224
     #           key_derivation_function: "NIST_SP800", # required, accepts NIST_SP800, ANSI_X963
     #           key_derivation_hash_algorithm: "SHA_256", # required, accepts SHA_256, SHA_384, SHA_512
     #           shared_information: "SharedInformation", # required
     #         },
     #       },
-    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC, SHA_1
     #     },
     #   })
     #
@@ -2024,7 +2023,7 @@ module Aws::PaymentCryptographyData
     #     message_data: "MessageDataType", # required
     #     mac: "MacType", # required
     #     verification_attributes: { # required
-    #       algorithm: "ISO9797_ALGORITHM1", # accepts ISO9797_ALGORITHM1, ISO9797_ALGORITHM3, CMAC, HMAC_SHA224, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512
+    #       algorithm: "ISO9797_ALGORITHM1", # accepts ISO9797_ALGORITHM1, ISO9797_ALGORITHM3, CMAC, HMAC, HMAC_SHA224, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512
     #       emv_mac: {
     #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
     #         primary_account_number: "PrimaryAccountNumberType", # required
@@ -2036,17 +2035,17 @@ module Aws::PaymentCryptographyData
     #         },
     #       },
     #       dukpt_iso_9797_algorithm_1: {
-    #         key_serial_number: "HexLengthBetween10And24", # required
+    #         key_serial_number: "HexLength16Or20Or24", # required
     #         dukpt_key_variant: "BIDIRECTIONAL", # required, accepts BIDIRECTIONAL, REQUEST, RESPONSE
     #         dukpt_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #       },
     #       dukpt_iso_9797_algorithm_3: {
-    #         key_serial_number: "HexLengthBetween10And24", # required
+    #         key_serial_number: "HexLength16Or20Or24", # required
     #         dukpt_key_variant: "BIDIRECTIONAL", # required, accepts BIDIRECTIONAL, REQUEST, RESPONSE
     #         dukpt_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #       },
     #       dukpt_cmac: {
-    #         key_serial_number: "HexLengthBetween10And24", # required
+    #         key_serial_number: "HexLength16Or20Or24", # required
     #         dukpt_key_variant: "BIDIRECTIONAL", # required, accepts BIDIRECTIONAL, REQUEST, RESPONSE
     #         dukpt_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #       },
@@ -2169,7 +2168,7 @@ module Aws::PaymentCryptographyData
     #     pin_block_format: "ISO_FORMAT_0", # required, accepts ISO_FORMAT_0, ISO_FORMAT_3, ISO_FORMAT_4
     #     pin_data_length: 1,
     #     dukpt_attributes: {
-    #       key_serial_number: "HexLengthBetween10And24", # required
+    #       key_serial_number: "HexLength16Or20Or24", # required
     #       dukpt_derivation_type: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #     },
     #     encryption_wrapped_key: {
@@ -2178,13 +2177,13 @@ module Aws::PaymentCryptographyData
     #         diffie_hellman_symmetric_key: {
     #           certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
     #           public_key_certificate: "CertificateType", # required
-    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
+    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512, HMAC_SHA224
     #           key_derivation_function: "NIST_SP800", # required, accepts NIST_SP800, ANSI_X963
     #           key_derivation_hash_algorithm: "SHA_256", # required, accepts SHA_256, SHA_384, SHA_512
     #           shared_information: "SharedInformation", # required
     #         },
     #       },
-    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC, SHA_1
     #     },
     #   })
     #
@@ -2222,7 +2221,7 @@ module Aws::PaymentCryptographyData
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-paymentcryptographydata'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

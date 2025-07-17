@@ -28,8 +28,8 @@ module Aws::DynamoDBStreams
             raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
           end
           if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
-            if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
-              if Aws::Endpoints::Matchers.string_equals?("aws-us-gov", Aws::Endpoints::Matchers.attr(partition_result, "name"))
+            if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
+              if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-us-gov")
                 return Aws::Endpoints::Endpoint.new(url: "https://streams.dynamodb.#{parameters.region}.amazonaws.com", headers: {}, properties: {})
               end
               return Aws::Endpoints::Endpoint.new(url: "https://streams.dynamodb-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
@@ -43,7 +43,7 @@ module Aws::DynamoDBStreams
             raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
           end
           if Aws::Endpoints::Matchers.string_equals?(parameters.region, "local")
-            return Aws::Endpoints::Endpoint.new(url: "http://localhost:8000", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"dynamodb", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "http://localhost:8000", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?("aws", Aws::Endpoints::Matchers.attr(partition_result, "name"))
             return Aws::Endpoints::Endpoint.new(url: "https://streams.dynamodb.#{parameters.region}.amazonaws.com", headers: {}, properties: {})

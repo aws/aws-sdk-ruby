@@ -692,6 +692,7 @@ module Aws::Glue
       attr_accessor redshift_source: Types::RedshiftSource
       attr_accessor s3_catalog_source: Types::S3CatalogSource
       attr_accessor s3_csv_source: Types::S3CsvSource
+      attr_accessor s3_excel_source: Types::S3ExcelSource
       attr_accessor s3_json_source: Types::S3JsonSource
       attr_accessor s3_parquet_source: Types::S3ParquetSource
       attr_accessor relational_catalog_source: Types::RelationalCatalogSource
@@ -702,7 +703,9 @@ module Aws::Glue
       attr_accessor redshift_target: Types::RedshiftTarget
       attr_accessor s3_catalog_target: Types::S3CatalogTarget
       attr_accessor s3_glue_parquet_target: Types::S3GlueParquetTarget
+      attr_accessor s3_hyper_direct_target: Types::S3HyperDirectTarget
       attr_accessor s3_direct_target: Types::S3DirectTarget
+      attr_accessor s3_iceberg_direct_target: Types::S3IcebergDirectTarget
       attr_accessor apply_mapping: Types::ApplyMapping
       attr_accessor select_fields: Types::SelectFields
       attr_accessor drop_fields: Types::DropFields
@@ -886,6 +889,11 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class CompactionConfiguration
+      attr_accessor iceberg_configuration: Types::IcebergCompactionConfiguration
+      SENSITIVE: []
+    end
+
     class CompactionMetrics
       attr_accessor iceberg_metrics: Types::IcebergCompactionMetrics
       SENSITIVE: []
@@ -1002,8 +1010,21 @@ module Aws::Glue
 
     class ConnectionTypeBrief
       attr_accessor connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM" | "SALESFORCE" | "VIEW_VALIDATION_REDSHIFT" | "VIEW_VALIDATION_ATHENA" | "GOOGLEADS" | "GOOGLESHEETS" | "GOOGLEANALYTICS4" | "SERVICENOW" | "MARKETO" | "SAPODATA" | "ZENDESK" | "JIRACLOUD" | "NETSUITEERP" | "HUBSPOT" | "FACEBOOKADS" | "INSTAGRAMADS" | "ZOHOCRM" | "SALESFORCEPARDOT" | "SALESFORCEMARKETINGCLOUD" | "SLACK" | "STRIPE" | "INTERCOM" | "SNAPCHATADS")
+      attr_accessor display_name: ::String
+      attr_accessor vendor: ::String
       attr_accessor description: ::String
+      attr_accessor categories: ::Array[::String]
       attr_accessor capabilities: Types::Capabilities
+      attr_accessor logo_url: ::String
+      attr_accessor connection_type_variants: ::Array[Types::ConnectionTypeVariant]
+      SENSITIVE: []
+    end
+
+    class ConnectionTypeVariant
+      attr_accessor connection_type_variant_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor logo_url: ::String
       SENSITIVE: []
     end
 
@@ -1314,6 +1335,15 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class CreateIcebergTableInput
+      attr_accessor location: ::String
+      attr_accessor schema: Types::IcebergSchema
+      attr_accessor partition_spec: Types::IcebergPartitionSpec
+      attr_accessor write_order: Types::IcebergSortOrder
+      attr_accessor properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class CreateIntegrationRequest
       attr_accessor integration_name: ::String
       attr_accessor source_arn: ::String
@@ -1323,6 +1353,7 @@ module Aws::Glue
       attr_accessor kms_key_id: ::String
       attr_accessor additional_encryption_context: ::Hash[::String, ::String]
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor integration_config: Types::IntegrationConfig
       SENSITIVE: []
     end
 
@@ -1353,6 +1384,7 @@ module Aws::Glue
       attr_accessor create_time: ::Time
       attr_accessor errors: ::Array[Types::IntegrationError]
       attr_accessor data_filter: ::String
+      attr_accessor integration_config: Types::IntegrationConfig
       SENSITIVE: []
     end
 
@@ -1559,6 +1591,7 @@ module Aws::Glue
     class CreateTableRequest
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String
+      attr_accessor name: ::String
       attr_accessor table_input: Types::TableInput
       attr_accessor partition_indexes: ::Array[Types::PartitionIndex]
       attr_accessor transaction_id: ::String
@@ -1709,6 +1742,16 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class DataQualityAggregatedMetrics
+      attr_accessor total_rows_processed: ::Float
+      attr_accessor total_rows_passed: ::Float
+      attr_accessor total_rows_failed: ::Float
+      attr_accessor total_rules_processed: ::Float
+      attr_accessor total_rules_passed: ::Float
+      attr_accessor total_rules_failed: ::Float
+      SENSITIVE: []
+    end
+
     class DataQualityAnalyzerResult
       attr_accessor name: ::String
       attr_accessor description: ::String
@@ -1759,6 +1802,7 @@ module Aws::Glue
       attr_accessor rule_results: ::Array[Types::DataQualityRuleResult]
       attr_accessor analyzer_results: ::Array[Types::DataQualityAnalyzerResult]
       attr_accessor observations: ::Array[Types::DataQualityObservation]
+      attr_accessor aggregated_metrics: Types::DataQualityAggregatedMetrics
       SENSITIVE: []
     end
 
@@ -1802,7 +1846,8 @@ module Aws::Glue
       attr_accessor result: ("PASS" | "FAIL" | "ERROR")
       attr_accessor evaluated_metrics: ::Hash[::String, ::Float]
       attr_accessor evaluated_rule: ::String
-      SENSITIVE: [:description, :evaluation_message, :evaluated_metrics, :evaluated_rule]
+      attr_accessor rule_metrics: ::Hash[::String, ::Float]
+      SENSITIVE: [:description, :evaluation_message, :evaluated_metrics, :evaluated_rule, :rule_metrics]
     end
 
     class DataQualityRulesetEvaluationRunDescription
@@ -2537,12 +2582,14 @@ module Aws::Glue
     class FederatedCatalog
       attr_accessor identifier: ::String
       attr_accessor connection_name: ::String
+      attr_accessor connection_type: ::String
       SENSITIVE: []
     end
 
     class FederatedDatabase
       attr_accessor identifier: ::String
       attr_accessor connection_name: ::String
+      attr_accessor connection_type: ::String
       SENSITIVE: []
     end
 
@@ -2556,6 +2603,7 @@ module Aws::Glue
       attr_accessor identifier: ::String
       attr_accessor database_identifier: ::String
       attr_accessor connection_name: ::String
+      attr_accessor connection_type: ::String
       SENSITIVE: []
     end
 
@@ -2941,6 +2989,7 @@ module Aws::Glue
       attr_accessor rule_results: ::Array[Types::DataQualityRuleResult]
       attr_accessor analyzer_results: ::Array[Types::DataQualityAnalyzerResult]
       attr_accessor observations: ::Array[Types::DataQualityObservation]
+      attr_accessor aggregated_metrics: Types::DataQualityAggregatedMetrics
       SENSITIVE: []
     end
 
@@ -3816,6 +3865,11 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class IcebergCompactionConfiguration
+      attr_accessor strategy: ("binpack" | "sort" | "z-order")
+      SENSITIVE: []
+    end
+
     class IcebergCompactionMetrics
       attr_accessor number_of_bytes_compacted: ::Integer
       attr_accessor number_of_files_compacted: ::Integer
@@ -3828,6 +3882,7 @@ module Aws::Glue
     class IcebergInput
       attr_accessor metadata_operation: ("CREATE")
       attr_accessor version: ::String
+      attr_accessor create_iceberg_table_input: Types::CreateIcebergTableInput
       SENSITIVE: []
     end
 
@@ -3845,6 +3900,20 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class IcebergPartitionField
+      attr_accessor source_id: ::Integer
+      attr_accessor transform: ::String
+      attr_accessor name: ::String
+      attr_accessor field_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class IcebergPartitionSpec
+      attr_accessor fields: ::Array[Types::IcebergPartitionField]
+      attr_accessor spec_id: ::Integer
+      SENSITIVE: []
+    end
+
     class IcebergRetentionConfiguration
       attr_accessor snapshot_retention_period_in_days: ::Integer
       attr_accessor number_of_snapshots_to_retain: ::Integer
@@ -3859,6 +3928,46 @@ module Aws::Glue
       attr_accessor dpu_hours: ::Float
       attr_accessor number_of_dpus: ::Integer
       attr_accessor job_duration_in_hour: ::Float
+      SENSITIVE: []
+    end
+
+    class IcebergSchema
+      attr_accessor schema_id: ::Integer
+      attr_accessor identifier_field_ids: ::Array[::Integer]
+      attr_accessor type: ("struct")
+      attr_accessor fields: ::Array[Types::IcebergStructField]
+      SENSITIVE: []
+    end
+
+    class IcebergSortField
+      attr_accessor source_id: ::Integer
+      attr_accessor transform: ::String
+      attr_accessor direction: ("asc" | "desc")
+      attr_accessor null_order: ("nulls-first" | "nulls-last")
+      SENSITIVE: []
+    end
+
+    class IcebergSortOrder
+      attr_accessor order_id: ::Integer
+      attr_accessor fields: ::Array[Types::IcebergSortField]
+      SENSITIVE: []
+    end
+
+    class IcebergStructField
+      attr_accessor id: ::Integer
+      attr_accessor name: ::String
+      attr_accessor type: untyped
+      attr_accessor required: bool
+      attr_accessor doc: ::String
+      SENSITIVE: []
+    end
+
+    class IcebergTableUpdate
+      attr_accessor schema: Types::IcebergSchema
+      attr_accessor partition_spec: Types::IcebergPartitionSpec
+      attr_accessor sort_order: Types::IcebergSortOrder
+      attr_accessor location: ::String
+      attr_accessor properties: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -3910,6 +4019,7 @@ module Aws::Glue
       attr_accessor integration_arn: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "MODIFYING" | "FAILED" | "DELETING" | "SYNCING" | "NEEDS_ATTENTION")
       attr_accessor create_time: ::Time
+      attr_accessor integration_config: Types::IntegrationConfig
       attr_accessor errors: ::Array[Types::IntegrationError]
       SENSITIVE: []
     end
@@ -3925,8 +4035,15 @@ module Aws::Glue
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor status: ("CREATING" | "ACTIVE" | "MODIFYING" | "FAILED" | "DELETING" | "SYNCING" | "NEEDS_ATTENTION")
       attr_accessor create_time: ::Time
+      attr_accessor integration_config: Types::IntegrationConfig
       attr_accessor errors: ::Array[Types::IntegrationError]
       attr_accessor data_filter: ::String
+      SENSITIVE: []
+    end
+
+    class IntegrationConfig
+      attr_accessor refresh_interval: ::String
+      attr_accessor source_properties: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -3955,6 +4072,7 @@ module Aws::Glue
     class IntegrationPartition
       attr_accessor field_name: ::String
       attr_accessor function_spec: ::String
+      attr_accessor conversion_spec: ::String
       SENSITIVE: []
     end
 
@@ -5382,7 +5500,8 @@ module Aws::Glue
       attr_accessor partition_keys: ::Array[::Array[::String]]
       attr_accessor path: ::String
       attr_accessor compression: ("uncompressed" | "snappy")
-      attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta")
+      attr_accessor number_target_partitions: ::String
+      attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml")
       attr_accessor additional_options: ::Hash[::String, ::String]
       attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
       SENSITIVE: []
@@ -5411,7 +5530,8 @@ module Aws::Glue
       attr_accessor partition_keys: ::Array[::Array[::String]]
       attr_accessor path: ::String
       attr_accessor compression: ::String
-      attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta")
+      attr_accessor number_target_partitions: ::String
+      attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml")
       attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
       SENSITIVE: []
     end
@@ -5422,12 +5542,30 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class S3ExcelSource
+      attr_accessor name: ::String
+      attr_accessor paths: ::Array[::String]
+      attr_accessor compression_type: ("snappy" | "lzo" | "gzip" | "brotli" | "lz4" | "uncompressed" | "none")
+      attr_accessor exclusions: ::Array[::String]
+      attr_accessor group_size: ::String
+      attr_accessor group_files: ::String
+      attr_accessor recurse: bool
+      attr_accessor max_band: ::Integer
+      attr_accessor max_files_in_band: ::Integer
+      attr_accessor additional_options: Types::S3DirectSourceAdditionalOptions
+      attr_accessor number_rows: ::Integer
+      attr_accessor skip_footer: ::Integer
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
     class S3GlueParquetTarget
       attr_accessor name: ::String
       attr_accessor inputs: ::Array[::String]
       attr_accessor partition_keys: ::Array[::Array[::String]]
       attr_accessor path: ::String
-      attr_accessor compression: ("snappy" | "lzo" | "gzip" | "uncompressed" | "none")
+      attr_accessor compression: ("snappy" | "lzo" | "gzip" | "brotli" | "lz4" | "uncompressed" | "none")
+      attr_accessor number_target_partitions: ::String
       attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
       SENSITIVE: []
     end
@@ -5448,8 +5586,9 @@ module Aws::Glue
       attr_accessor inputs: ::Array[::String]
       attr_accessor path: ::String
       attr_accessor compression: ("gzip" | "lzo" | "uncompressed" | "snappy")
+      attr_accessor number_target_partitions: ::String
       attr_accessor partition_keys: ::Array[::Array[::String]]
-      attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta")
+      attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml")
       attr_accessor additional_options: ::Hash[::String, ::String]
       attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
       SENSITIVE: []
@@ -5461,6 +5600,29 @@ module Aws::Glue
       attr_accessor additional_hudi_options: ::Hash[::String, ::String]
       attr_accessor additional_options: Types::S3DirectSourceAdditionalOptions
       attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class S3HyperDirectTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor partition_keys: ::Array[::Array[::String]]
+      attr_accessor path: ::String
+      attr_accessor compression: ("uncompressed")
+      attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
+      SENSITIVE: []
+    end
+
+    class S3IcebergDirectTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor partition_keys: ::Array[::Array[::String]]
+      attr_accessor path: ::String
+      attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml")
+      attr_accessor additional_options: ::Hash[::String, ::String]
+      attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
+      attr_accessor compression: ("gzip" | "lzo" | "uncompressed" | "snappy")
+      attr_accessor number_target_partitions: ::String
       SENSITIVE: []
     end
 
@@ -5484,7 +5646,7 @@ module Aws::Glue
     class S3ParquetSource
       attr_accessor name: ::String
       attr_accessor paths: ::Array[::String]
-      attr_accessor compression_type: ("snappy" | "lzo" | "gzip" | "uncompressed" | "none")
+      attr_accessor compression_type: ("snappy" | "lzo" | "gzip" | "brotli" | "lz4" | "uncompressed" | "none")
       attr_accessor exclusions: ::Array[::String]
       attr_accessor group_size: ::String
       attr_accessor group_files: ::String
@@ -6218,6 +6380,7 @@ module Aws::Glue
       attr_accessor role_arn: ::String
       attr_accessor enabled: bool
       attr_accessor vpc_configuration: Types::TableOptimizerVpcConfiguration
+      attr_accessor compaction_configuration: Types::CompactionConfiguration
       attr_accessor retention_configuration: Types::RetentionConfiguration
       attr_accessor orphan_file_deletion_configuration: Types::OrphanFileDeletionConfiguration
       SENSITIVE: []
@@ -6230,6 +6393,7 @@ module Aws::Glue
       attr_accessor metrics: Types::RunMetrics
       attr_accessor error: ::String
       attr_accessor compaction_metrics: Types::CompactionMetrics
+      attr_accessor compaction_strategy: ("binpack" | "sort" | "z-order")
       attr_accessor retention_metrics: Types::RetentionMetrics
       attr_accessor orphan_file_deletion_metrics: Types::OrphanFileDeletionMetrics
       SENSITIVE: []
@@ -6651,6 +6815,16 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class UpdateIcebergInput
+      attr_accessor update_iceberg_table_input: Types::UpdateIcebergTableInput
+      SENSITIVE: []
+    end
+
+    class UpdateIcebergTableInput
+      attr_accessor updates: ::Array[Types::IcebergTableUpdate]
+      SENSITIVE: []
+    end
+
     class UpdateIntegrationResourcePropertyRequest
       attr_accessor resource_arn: ::String
       attr_accessor source_processing_properties: Types::SourceProcessingProperties
@@ -6731,6 +6905,11 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class UpdateOpenTableFormatInput
+      attr_accessor update_iceberg_input: Types::UpdateIcebergInput
+      SENSITIVE: []
+    end
+
     class UpdatePartitionRequest
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String
@@ -6803,12 +6982,14 @@ module Aws::Glue
     class UpdateTableRequest
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String
+      attr_accessor name: ::String
       attr_accessor table_input: Types::TableInput
       attr_accessor skip_archive: bool
       attr_accessor transaction_id: ::String
       attr_accessor version_id: ::String
       attr_accessor view_update_action: ("ADD" | "REPLACE" | "ADD_OR_REPLACE" | "DROP")
       attr_accessor force: bool
+      attr_accessor update_open_table_format_input: Types::UpdateOpenTableFormatInput
       SENSITIVE: []
     end
 

@@ -158,7 +158,7 @@ module Aws::SimSpaceWeaver
     DescribeSimulationOutput.add_member(:maximum_duration, Shapes::ShapeRef.new(shape: TimeToLiveString, location_name: "MaximumDuration"))
     DescribeSimulationOutput.add_member(:name, Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Name"))
     DescribeSimulationOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
-    DescribeSimulationOutput.add_member(:schema_error, Shapes::ShapeRef.new(shape: OptionalString, deprecated: true, location_name: "SchemaError", metadata: {"deprecatedMessage"=>"SchemaError is no longer used, check StartError instead."}))
+    DescribeSimulationOutput.add_member(:schema_error, Shapes::ShapeRef.new(shape: OptionalString, deprecated: true, location_name: "SchemaError", metadata: {"deprecatedMessage" => "SchemaError is no longer used, check StartError instead."}))
     DescribeSimulationOutput.add_member(:schema_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SchemaS3Location"))
     DescribeSimulationOutput.add_member(:snapshot_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SnapshotS3Location"))
     DescribeSimulationOutput.add_member(:start_error, Shapes::ShapeRef.new(shape: OptionalString, location_name: "StartError"))
@@ -262,7 +262,7 @@ module Aws::SimSpaceWeaver
     SimulationMetadata.add_member(:target_status, Shapes::ShapeRef.new(shape: SimulationTargetStatus, location_name: "TargetStatus"))
     SimulationMetadata.struct_class = Types::SimulationMetadata
 
-    StartAppInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartAppInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     StartAppInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     StartAppInput.add_member(:domain, Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, required: true, location_name: "Domain"))
     StartAppInput.add_member(:launch_overrides, Shapes::ShapeRef.new(shape: LaunchOverrides, location_name: "LaunchOverrides"))
@@ -280,7 +280,7 @@ module Aws::SimSpaceWeaver
 
     StartClockOutput.struct_class = Types::StartClockOutput
 
-    StartSimulationInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartSimulationInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     StartSimulationInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     StartSimulationInput.add_member(:maximum_duration, Shapes::ShapeRef.new(shape: TimeToLiveString, location_name: "MaximumDuration"))
     StartSimulationInput.add_member(:name, Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, required: true, location_name: "Name"))

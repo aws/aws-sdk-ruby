@@ -77,15 +77,31 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
-      interface _CancelZonalShiftResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::ZonalShift]
-        def away_from: () -> ::String
-        def comment: () -> ::String
-        def expiry_time: () -> ::Time
+      interface _CancelPracticeRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelPracticeRunResponse]
+        def zonal_shift_id: () -> ::String
         def resource_identifier: () -> ::String
+        def away_from: () -> ::String
+        def expiry_time: () -> ::Time
         def start_time: () -> ::Time
         def status: () -> ("ACTIVE" | "EXPIRED" | "CANCELED")
+        def comment: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCZonalShift/Client.html#cancel_practice_run-instance_method
+      def cancel_practice_run: (
+                                 zonal_shift_id: ::String
+                               ) -> _CancelPracticeRunResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelPracticeRunResponseSuccess
+
+      interface _CancelZonalShiftResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ZonalShift]
         def zonal_shift_id: () -> ::String
+        def resource_identifier: () -> ::String
+        def away_from: () -> ::String
+        def expiry_time: () -> ::Time
+        def start_time: () -> ::Time
+        def status: () -> ("ACTIVE" | "EXPIRED" | "CANCELED")
+        def comment: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCZonalShift/Client.html#cancel_zonal_shift-instance_method
       def cancel_zonal_shift: (
@@ -97,26 +113,26 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::CreatePracticeRunConfigurationResponse]
         def arn: () -> ::String
         def name: () -> ::String
-        def practice_run_configuration: () -> Types::PracticeRunConfiguration
         def zonal_autoshift_status: () -> ("ENABLED" | "DISABLED")
+        def practice_run_configuration: () -> Types::PracticeRunConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCZonalShift/Client.html#create_practice_run_configuration-instance_method
       def create_practice_run_configuration: (
-                                               ?blocked_dates: Array[::String],
+                                               resource_identifier: ::String,
                                                ?blocked_windows: Array[::String],
+                                               ?blocked_dates: Array[::String],
                                                ?blocking_alarms: Array[
                                                  {
-                                                   alarm_identifier: ::String,
-                                                   type: ("CLOUDWATCH")
+                                                   type: ("CLOUDWATCH"),
+                                                   alarm_identifier: ::String
                                                  },
                                                ],
                                                outcome_alarms: Array[
                                                  {
-                                                   alarm_identifier: ::String,
-                                                   type: ("CLOUDWATCH")
+                                                   type: ("CLOUDWATCH"),
+                                                   alarm_identifier: ::String
                                                  },
-                                               ],
-                                               resource_identifier: ::String
+                                               ]
                                              ) -> _CreatePracticeRunConfigurationResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePracticeRunConfigurationResponseSuccess
 
@@ -143,13 +159,13 @@ module Aws
 
       interface _GetManagedResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetManagedResourceResponse]
-        def applied_weights: () -> ::Hash[::String, ::Float]
         def arn: () -> ::String
-        def autoshifts: () -> ::Array[Types::AutoshiftInResource]
         def name: () -> ::String
+        def applied_weights: () -> ::Hash[::String, ::Float]
+        def zonal_shifts: () -> ::Array[Types::ZonalShiftInResource]
+        def autoshifts: () -> ::Array[Types::AutoshiftInResource]
         def practice_run_configuration: () -> Types::PracticeRunConfiguration
         def zonal_autoshift_status: () -> ("ENABLED" | "DISABLED")
-        def zonal_shifts: () -> ::Array[Types::ZonalShiftInResource]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCZonalShift/Client.html#get_managed_resource-instance_method
       def get_managed_resource: (
@@ -164,9 +180,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCZonalShift/Client.html#list_autoshifts-instance_method
       def list_autoshifts: (
-                             ?max_results: ::Integer,
                              ?next_token: ::String,
-                             ?status: ("ACTIVE" | "COMPLETED")
+                             ?status: ("ACTIVE" | "COMPLETED"),
+                             ?max_results: ::Integer
                            ) -> _ListAutoshiftsResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAutoshiftsResponseSuccess
 
@@ -177,8 +193,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCZonalShift/Client.html#list_managed_resources-instance_method
       def list_managed_resources: (
-                                    ?max_results: ::Integer,
-                                    ?next_token: ::String
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
                                   ) -> _ListManagedResourcesResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListManagedResourcesResponseSuccess
 
@@ -189,29 +205,47 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCZonalShift/Client.html#list_zonal_shifts-instance_method
       def list_zonal_shifts: (
-                               ?max_results: ::Integer,
                                ?next_token: ::String,
-                               ?resource_identifier: ::String,
-                               ?status: ("ACTIVE" | "EXPIRED" | "CANCELED")
+                               ?status: ("ACTIVE" | "EXPIRED" | "CANCELED"),
+                               ?max_results: ::Integer,
+                               ?resource_identifier: ::String
                              ) -> _ListZonalShiftsResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListZonalShiftsResponseSuccess
 
-      interface _StartZonalShiftResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::ZonalShift]
-        def away_from: () -> ::String
-        def comment: () -> ::String
-        def expiry_time: () -> ::Time
+      interface _StartPracticeRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartPracticeRunResponse]
+        def zonal_shift_id: () -> ::String
         def resource_identifier: () -> ::String
+        def away_from: () -> ::String
+        def expiry_time: () -> ::Time
         def start_time: () -> ::Time
         def status: () -> ("ACTIVE" | "EXPIRED" | "CANCELED")
+        def comment: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCZonalShift/Client.html#start_practice_run-instance_method
+      def start_practice_run: (
+                                resource_identifier: ::String,
+                                away_from: ::String,
+                                comment: ::String
+                              ) -> _StartPracticeRunResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPracticeRunResponseSuccess
+
+      interface _StartZonalShiftResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ZonalShift]
         def zonal_shift_id: () -> ::String
+        def resource_identifier: () -> ::String
+        def away_from: () -> ::String
+        def expiry_time: () -> ::Time
+        def start_time: () -> ::Time
+        def status: () -> ("ACTIVE" | "EXPIRED" | "CANCELED")
+        def comment: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCZonalShift/Client.html#start_zonal_shift-instance_method
       def start_zonal_shift: (
+                               resource_identifier: ::String,
                                away_from: ::String,
-                               comment: ::String,
                                expires_in: ::String,
-                               resource_identifier: ::String
+                               comment: ::String
                              ) -> _StartZonalShiftResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartZonalShiftResponseSuccess
 
@@ -229,26 +263,26 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePracticeRunConfigurationResponse]
         def arn: () -> ::String
         def name: () -> ::String
-        def practice_run_configuration: () -> Types::PracticeRunConfiguration
         def zonal_autoshift_status: () -> ("ENABLED" | "DISABLED")
+        def practice_run_configuration: () -> Types::PracticeRunConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCZonalShift/Client.html#update_practice_run_configuration-instance_method
       def update_practice_run_configuration: (
-                                               ?blocked_dates: Array[::String],
+                                               resource_identifier: ::String,
                                                ?blocked_windows: Array[::String],
+                                               ?blocked_dates: Array[::String],
                                                ?blocking_alarms: Array[
                                                  {
-                                                   alarm_identifier: ::String,
-                                                   type: ("CLOUDWATCH")
+                                                   type: ("CLOUDWATCH"),
+                                                   alarm_identifier: ::String
                                                  },
                                                ],
                                                ?outcome_alarms: Array[
                                                  {
-                                                   alarm_identifier: ::String,
-                                                   type: ("CLOUDWATCH")
+                                                   type: ("CLOUDWATCH"),
+                                                   alarm_identifier: ::String
                                                  },
-                                               ],
-                                               resource_identifier: ::String
+                                               ]
                                              ) -> _UpdatePracticeRunConfigurationResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePracticeRunConfigurationResponseSuccess
 
@@ -266,19 +300,19 @@ module Aws
 
       interface _UpdateZonalShiftResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ZonalShift]
-        def away_from: () -> ::String
-        def comment: () -> ::String
-        def expiry_time: () -> ::Time
+        def zonal_shift_id: () -> ::String
         def resource_identifier: () -> ::String
+        def away_from: () -> ::String
+        def expiry_time: () -> ::Time
         def start_time: () -> ::Time
         def status: () -> ("ACTIVE" | "EXPIRED" | "CANCELED")
-        def zonal_shift_id: () -> ::String
+        def comment: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCZonalShift/Client.html#update_zonal_shift-instance_method
       def update_zonal_shift: (
+                                zonal_shift_id: ::String,
                                 ?comment: ::String,
-                                ?expires_in: ::String,
-                                zonal_shift_id: ::String
+                                ?expires_in: ::String
                               ) -> _UpdateZonalShiftResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateZonalShiftResponseSuccess
     end

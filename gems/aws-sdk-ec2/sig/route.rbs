@@ -65,6 +65,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#core_network_arn-instance_method
       def core_network_arn: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#odb_network_arn-instance_method
+      def odb_network_arn: () -> ::String
+
       def client: () -> Client
 
 
@@ -92,6 +95,7 @@ module Aws
                      ?local_gateway_id: ::String,
                      ?carrier_gateway_id: ::String,
                      ?core_network_arn: ::String,
+                     ?odb_network_arn: ::String,
                      ?dry_run: bool,
                      ?gateway_id: ::String,
                      ?destination_ipv_6_cidr_block: ::String,

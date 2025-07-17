@@ -265,11 +265,12 @@ module Aws::IAM
     #
     #   However, the format can be further restricted by the account
     #   administrator by setting a password policy on the Amazon Web Services
-    #   account. For more information, see UpdateAccountPasswordPolicy.
+    #   account. For more information, see [UpdateAccountPasswordPolicy][2].
     #
     #
     #
     #   [1]: http://wikipedia.org/wiki/regex
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateAccountPasswordPolicy.html
     # @option options [Boolean] :password_reset_required
     #   Allows this new password to be used only once by requiring the
     #   specified IAM user to set a new password on next sign-in.

@@ -419,6 +419,18 @@ module Aws
                          ) -> _GetDashboardResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDashboardResponseSuccess
 
+      interface _GetEventConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEventConfigurationResponse]
+        def event_data_store_arn: () -> ::String
+        def max_event_size: () -> ("Standard" | "Large")
+        def context_key_selectors: () -> ::Array[Types::ContextKeySelector]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#get_event_configuration-instance_method
+      def get_event_configuration: (
+                                     ?event_data_store: ::String
+                                   ) -> _GetEventConfigurationResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventConfigurationResponseSuccess
+
       interface _GetEventDataStoreResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetEventDataStoreResponse]
         def event_data_store_arn: () -> ::String
@@ -715,6 +727,25 @@ module Aws
                            ?next_token: ::String
                          ) -> _LookupEventsResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _LookupEventsResponseSuccess
+
+      interface _PutEventConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEventConfigurationResponse]
+        def event_data_store_arn: () -> ::String
+        def max_event_size: () -> ("Standard" | "Large")
+        def context_key_selectors: () -> ::Array[Types::ContextKeySelector]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#put_event_configuration-instance_method
+      def put_event_configuration: (
+                                     ?event_data_store: ::String,
+                                     max_event_size: ("Standard" | "Large"),
+                                     context_key_selectors: Array[
+                                       {
+                                         type: ("TagContext" | "RequestContext"),
+                                         equals: Array[::String]
+                                       },
+                                     ]
+                                   ) -> _PutEventConfigurationResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEventConfigurationResponseSuccess
 
       interface _PutEventSelectorsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutEventSelectorsResponse]

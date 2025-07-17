@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.151.0 (2025-07-15)
+------------------
+
+* Feature - Introduced custom instructions for topics.
+
+1.150.0 (2025-06-30)
+------------------
+
+* Feature - Introduced custom permission capabilities for reporting content. Added menu option in exploration to preserve configuration data when textbox menu option is used. Added support for Athena trusted identity propagation.
+
+1.149.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.148.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.147.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.146.0 (2025-04-10)
 ------------------
 

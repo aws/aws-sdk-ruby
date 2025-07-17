@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2025-06-26)
+------------------
+
+* Feature - This release provides change data capture (CDC) streams support through updates to the Amazon Keyspaces API.
+
+1.41.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.39.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.38.0 (2025-03-25)
 ------------------
 

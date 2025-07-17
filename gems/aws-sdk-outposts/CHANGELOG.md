@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2025-06-30)
+------------------
+
+* Feature - Make ContactName and ContactPhoneNumber required fields when creating and updating Outpost Site Addresses.
+
+1.82.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.81.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.80.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.79.0 (2025-03-31)
 ------------------
 

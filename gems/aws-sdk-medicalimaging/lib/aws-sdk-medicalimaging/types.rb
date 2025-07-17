@@ -136,9 +136,17 @@ module Aws::MedicalImaging
     #   @return [Types::CopyImageSetInformation]
     #
     # @!attribute [rw] force
-    #   Setting this flag will force the `CopyImageSet` operation, even if
-    #   Patient, Study, or Series level metadata are mismatched across the
-    #   `sourceImageSet` and `destinationImageSet`.
+    #   Providing this parameter will force completion of the `CopyImageSet`
+    #   operation, even if there are inconsistent Patient, Study, and/or
+    #   Series level metadata elements between the `sourceImageSet` and
+    #   `destinationImageSet`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] promote_to_primary
+    #   Providing this parameter will configure the `CopyImageSet` operation
+    #   to promote the given image set to the primary DICOM hierarchy. If
+    #   successful, a new primary image set ID will be returned as the
+    #   destination image set.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/CopyImageSetRequest AWS API Documentation
@@ -147,7 +155,8 @@ module Aws::MedicalImaging
       :datastore_id,
       :source_image_set_id,
       :copy_image_set_information,
-      :force)
+      :force,
+      :promote_to_primary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -766,6 +775,57 @@ module Aws::MedicalImaging
     # @!attribute [rw] content_type
     #   The format in which the image frame information is returned to the
     #   customer. Default is `application/octet-stream`.
+    #
+    #   <note markdown="1"> * If the stored transfer syntax is `1.2.840.10008.1.2.1`, the
+    #     returned `contentType` is `application/octet-stream`.
+    #
+    #   ^
+    #
+    #    * If the stored transfer syntax is `1.2.840.10008.1.2.4.50`, the
+    #     returned `contentType` is `image/jpeg`.
+    #
+    #   ^
+    #
+    #    * If the stored transfer syntax is `1.2.840.10008.1.2.4.91`, the
+    #     returned `contentType` is `image/j2c`.
+    #
+    #   ^
+    #
+    #    * If the stored transfer syntax is MPEG2, `1.2.840.10008.1.2.4.100`,
+    #     `1.2.840.10008.1.2.4.100.1`, `1.2.840.10008.1.2.4.101`, or
+    #     `1.2.840.10008.1.2.4.101.1`, the returned `contentType` is
+    #     `video/mpeg`.
+    #
+    #   ^
+    #
+    #    * If the stored transfer syntax is MPEG-4 AVC/H.264, UID
+    #     `1.2.840.10008.1.2.4.102`, `1.2.840.10008.1.2.4.102.1`,
+    #     `1.2.840.10008.1.2.4.103`, `1.2.840.10008.1.2.4.103.1`,
+    #     `1.2.840.10008.1.2.4.104`, `1.2.840.10008.1.2.4.104.1`,
+    #     `1.2.840.10008.1.2.4.105`, `1.2.840.10008.1.2.4.105.1`,
+    #     `1.2.840.10008.1.2.4.106`, or `1.2.840.10008.1.2.4.106.1`, the
+    #     returned `contentType` is `video/mp4`.
+    #
+    #   ^
+    #
+    #    * If the stored transfer syntax is HEVC/H.265, UID
+    #     `1.2.840.10008.1.2.4.107` or `1.2.840.10008.1.2.4.108`, the
+    #     returned `contentType` is `video/H256`.
+    #
+    #   ^
+    #
+    #    * If the stored transfer syntax is `1.2.840.10008.1.2.4.202` or if
+    #     the stored transfer syntax is *missing*, the returned
+    #     `contentType` is `image/jph`.
+    #
+    #   ^
+    #
+    #    * If the stored transfer syntax is `1.2.840.10008.1.2.4.203`, the
+    #     returned contentType is `image/jphc`.
+    #
+    #   ^
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/GetImageFrameResponse AWS API Documentation
@@ -893,6 +953,10 @@ module Aws::MedicalImaging
     #   `forced` flag.
     #   @return [Types::Overrides]
     #
+    # @!attribute [rw] is_primary
+    #   The flag to determine whether the image set is primary or not.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/GetImageSetResponse AWS API Documentation
     #
     class GetImageSetResponse < Struct.new(
@@ -906,7 +970,8 @@ module Aws::MedicalImaging
       :deleted_at,
       :message,
       :image_set_arn,
-      :overrides)
+      :overrides,
+      :is_primary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -965,6 +1030,10 @@ module Aws::MedicalImaging
     #   `forced` flag was used when creating the image set.
     #   @return [Types::Overrides]
     #
+    # @!attribute [rw] is_primary
+    #   The flag to determine whether the image set is primary or not.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/ImageSetProperties AWS API Documentation
     #
     class ImageSetProperties < Struct.new(
@@ -976,7 +1045,8 @@ module Aws::MedicalImaging
       :updated_at,
       :deleted_at,
       :message,
-      :overrides)
+      :overrides,
+      :is_primary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1004,6 +1074,10 @@ module Aws::MedicalImaging
     #   The DICOM tags associated with the image set.
     #   @return [Types::DICOMTags]
     #
+    # @!attribute [rw] is_primary
+    #   The flag to determine whether the image set is primary or not.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/ImageSetsMetadataSummary AWS API Documentation
     #
     class ImageSetsMetadataSummary < Struct.new(
@@ -1011,7 +1085,8 @@ module Aws::MedicalImaging
       :version,
       :created_at,
       :updated_at,
-      :dicom_tags)
+      :dicom_tags,
+      :is_primary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1243,9 +1318,9 @@ module Aws::MedicalImaging
     # `CopyImageSet` and `UpdateImageSetMetadata`.
     #
     # @!attribute [rw] forced
-    #   Setting this flag will force the `CopyImageSet` and
-    #   `UpdateImageSetMetadata` operations, even if Patient, Study, or
-    #   Series level metadata are mismatched.
+    #   Providing this parameter will force completion of the `CopyImageSet`
+    #   and `UpdateImageSetMetadata` actions, even if metadata is
+    #   inconsistent at the Patient, Study, and/or Series levels.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/Overrides AWS API Documentation
@@ -1306,6 +1381,10 @@ module Aws::MedicalImaging
     #   for search.
     #   @return [Types::DICOMStudyDateAndTime]
     #
+    # @!attribute [rw] is_primary
+    #   The primary image set flag provided for search.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/SearchByAttributeValue AWS API Documentation
     #
     class SearchByAttributeValue < Struct.new(
@@ -1317,6 +1396,7 @@ module Aws::MedicalImaging
       :created_at,
       :updated_at,
       :dicom_study_date_and_time,
+      :is_primary,
       :unknown)
       SENSITIVE = [:dicom_patient_id, :dicom_accession_number, :dicom_study_id, :dicom_study_instance_uid, :dicom_series_instance_uid]
       include Aws::Structure
@@ -1330,6 +1410,7 @@ module Aws::MedicalImaging
       class CreatedAt < SearchByAttributeValue; end
       class UpdatedAt < SearchByAttributeValue; end
       class DicomStudyDateAndTime < SearchByAttributeValue; end
+      class IsPrimary < SearchByAttributeValue; end
       class Unknown < SearchByAttributeValue; end
     end
 

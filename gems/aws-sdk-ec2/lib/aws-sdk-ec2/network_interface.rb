@@ -103,10 +103,37 @@ module Aws::EC2
       data[:owner_id]
     end
 
-    # The private DNS name.
+    # The private hostname. For more information, see [EC2 instance
+    # hostnames, DNS names, and domains][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html
     # @return [String]
     def private_dns_name
       data[:private_dns_name]
+    end
+
+    # A public hostname. For more information, see [EC2 instance hostnames,
+    # DNS names, and domains][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html
+    # @return [String]
+    def public_dns_name
+      data[:public_dns_name]
+    end
+
+    # Public hostname type options. For more information, see [EC2 instance
+    # hostnames, DNS names, and domains][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html
+    # @return [Types::PublicIpDnsNameOptions]
+    def public_ip_dns_name_options
+      data[:public_ip_dns_name_options]
     end
 
     # The IPv4 address of the network interface within the subnet.
@@ -205,6 +232,12 @@ module Aws::EC2
     # @return [Types::OperatorResponse]
     def operator
       data[:operator]
+    end
+
+    # The subnets associated with this network interface.
+    # @return [Array<String>]
+    def associated_subnets
+      data[:associated_subnets]
     end
 
     # @!endgroup
@@ -396,6 +429,7 @@ module Aws::EC2
     #         ena_srd_udp_enabled: false,
     #       },
     #     },
+    #     ena_queue_count: 1,
     #     dry_run: false,
     #     instance_id: "InstanceId", # required
     #     device_index: 1, # required
@@ -408,6 +442,8 @@ module Aws::EC2
     # @option options [Types::EnaSrdSpecification] :ena_srd_specification
     #   Configures ENA Express for the network interface that this action
     #   attaches to the instance.
+    # @option options [Integer] :ena_queue_count
+    #   The number of ENA queues to be created with the instance.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -614,6 +650,7 @@ module Aws::EC2
     #       udp_timeout: 1,
     #     },
     #     associate_public_ip_address: false,
+    #     associated_subnet_ids: ["SubnetId"],
     #     dry_run: false,
     #     description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     source_dest_check: {
@@ -621,6 +658,8 @@ module Aws::EC2
     #     },
     #     groups: ["SecurityGroupId"],
     #     attachment: {
+    #       default_ena_queue_count: false,
+    #       ena_queue_count: 1,
     #       attachment_id: "NetworkInterfaceAttachmentId",
     #       delete_on_termination: false,
     #     },
@@ -651,6 +690,8 @@ module Aws::EC2
     #   Indicates whether to assign a public IPv4 address to a network
     #   interface. This option can be enabled for any network interface but
     #   will only apply to the primary network interface (eth0).
+    # @option options [Array<String>] :associated_subnet_ids
+    #   A list of subnet IDs to associate with the network interface.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

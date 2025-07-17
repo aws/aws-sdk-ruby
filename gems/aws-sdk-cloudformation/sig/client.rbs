@@ -676,7 +676,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_stack_resource_drifts-instance_method
       def describe_stack_resource_drifts: (
                                             stack_name: ::String,
-                                            ?stack_resource_drift_status_filters: Array[("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED")],
+                                            ?stack_resource_drift_status_filters: Array[("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED" | "UNKNOWN")],
                                             ?next_token: ::String,
                                             ?max_results: ::Integer
                                           ) -> _DescribeStackResourceDriftsResponseSuccess
@@ -1070,7 +1070,7 @@ module Aws
                                                  stack_set_name: ::String,
                                                  ?next_token: ::String,
                                                  ?max_results: ::Integer,
-                                                 ?stack_instance_resource_drift_statuses: Array[("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED")],
+                                                 ?stack_instance_resource_drift_statuses: Array[("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED" | "UNKNOWN")],
                                                  stack_instance_account: ::String,
                                                  stack_instance_region: ::String,
                                                  operation_id: ::String,

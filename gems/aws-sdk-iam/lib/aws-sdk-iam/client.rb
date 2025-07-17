@@ -200,8 +200,7 @@ module Aws::IAM
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -480,7 +479,11 @@ module Aws::IAM
     # @option params [required, String] :open_id_connect_provider_arn
     #   The Amazon Resource Name (ARN) of the IAM OpenID Connect (OIDC)
     #   provider resource to add the client ID to. You can get a list of OIDC
-    #   provider ARNs by using the ListOpenIDConnectProviders operation.
+    #   provider ARNs by using the [ListOpenIDConnectProviders][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListOpenIDConnectProviders.html
     #
     # @option params [required, String] :client_id
     #   The client ID (also known as audience) to add to the IAM OpenID
@@ -876,14 +879,15 @@ module Aws::IAM
     # Services Management Console. The Amazon Web Services account root user
     # password is not affected by this operation.
     #
-    # Use UpdateLoginProfile to use the CLI, the Amazon Web Services API, or
-    # the **Users** page in the IAM console to change the password for any
-    # IAM user. For more information about modifying passwords, see
-    # [Managing passwords][1] in the *IAM User Guide*.
+    # Use [UpdateLoginProfile][1] to use the CLI, the Amazon Web Services
+    # API, or the **Users** page in the IAM console to change the password
+    # for any IAM user. For more information about modifying passwords, see
+    # [Managing passwords][2] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateLoginProfile.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html
     #
     # @option params [required, String] :old_password
     #   The IAM user's current password.
@@ -1004,7 +1008,7 @@ module Aws::IAM
     #
     #   resp.access_key.user_name #=> String
     #   resp.access_key.access_key_id #=> String
-    #   resp.access_key.status #=> String, one of "Active", "Inactive"
+    #   resp.access_key.status #=> String, one of "Active", "Inactive", "Expired"
     #   resp.access_key.secret_access_key #=> String
     #   resp.access_key.create_date #=> Time
     #
@@ -1291,16 +1295,17 @@ module Aws::IAM
     #
     # You can use the CLI, the Amazon Web Services API, or the **Users**
     # page in the IAM console to create a password for any IAM user. Use
-    # ChangePassword to update your own existing password in the **My
+    # [ChangePassword][1] to update your own existing password in the **My
     # Security Credentials** page in the Amazon Web Services Management
     # Console.
     #
     # For more information about managing passwords, see [Managing
-    # passwords][1] in the *IAM User Guide*.
+    # passwords][2] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ChangePassword.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html
     #
     # @option params [String] :user_name
     #   The name of the IAM user to create a password for. The user must
@@ -1436,7 +1441,7 @@ module Aws::IAM
     #
     # <note markdown="1"> The trust for the OIDC provider is derived from the IAM provider that
     # this operation creates. Therefore, it is best to limit access to the
-    # CreateOpenIDConnectProvider operation to highly privileged users.
+    # [CreateOpenIDConnectProvider][3] operation to highly privileged users.
     #
     #  </note>
     #
@@ -1444,6 +1449,7 @@ module Aws::IAM
     #
     # [1]: http://openid.net/connect/
     # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html
     #
     # @option params [required, String] :url
     #   The URL of the identity provider. The URL must begin with `https://`
@@ -1734,19 +1740,20 @@ module Aws::IAM
     # Creates a new version of the specified managed policy. To update a
     # managed policy, you create a new policy version. A managed policy can
     # have up to five versions. If the policy has five versions, you must
-    # delete an existing version using DeletePolicyVersion before you create
-    # a new version.
+    # delete an existing version using [DeletePolicyVersion][1] before you
+    # create a new version.
     #
     # Optionally, you can set the new version as the policy's default
     # version. The default version is the version that is in effect for the
     # IAM users, groups, and roles to which the policy is attached.
     #
     # For more information about managed policy versions, see [Versioning
-    # for managed policies][1] in the *IAM User Guide*.
+    # for managed policies][2] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeletePolicyVersion.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #
     # @option params [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy to which you want to
@@ -2251,19 +2258,20 @@ module Aws::IAM
     # You can have a maximum of two sets of service-specific credentials for
     # each supported service per user.
     #
-    # You can create service-specific credentials for CodeCommit and Amazon
-    # Keyspaces (for Apache Cassandra).
+    # You can create service-specific credentials for Amazon Bedrock,
+    # CodeCommit and Amazon Keyspaces (for Apache Cassandra).
     #
     # You can reset the password to a new service-generated value by calling
-    # ResetServiceSpecificCredential.
+    # [ResetServiceSpecificCredential][1].
     #
-    # For more information about service-specific credentials, see [Using
-    # IAM with CodeCommit: Git credentials, SSH keys, and Amazon Web
-    # Services access keys][1] in the *IAM User Guide*.
+    # For more information about service-specific credentials, see
+    # [Service-specific credentials for IAM users][2] in the *IAM User
+    # Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_ssh-keys.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ResetServiceSpecificCredential.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_bedrock.html
     #
     # @option params [required, String] :user_name
     #   The name of the IAM user that is to be associated with the
@@ -2285,6 +2293,11 @@ module Aws::IAM
     #   with the credentials. The service you specify here is the only service
     #   that can be accessed using these credentials.
     #
+    # @option params [Integer] :credential_age_days
+    #   The number of days until the service specific credential expires. This
+    #   field is only valid for Bedrock API keys and must be a positive
+    #   integer. When not specified, the credential will not expire.
+    #
     # @return [Types::CreateServiceSpecificCredentialResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateServiceSpecificCredentialResponse#service_specific_credential #service_specific_credential} => Types::ServiceSpecificCredential
@@ -2294,17 +2307,21 @@ module Aws::IAM
     #   resp = client.create_service_specific_credential({
     #     user_name: "userNameType", # required
     #     service_name: "serviceName", # required
+    #     credential_age_days: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.service_specific_credential.create_date #=> Time
+    #   resp.service_specific_credential.expiration_date #=> Time
     #   resp.service_specific_credential.service_name #=> String
     #   resp.service_specific_credential.service_user_name #=> String
     #   resp.service_specific_credential.service_password #=> String
+    #   resp.service_specific_credential.service_credential_alias #=> String
+    #   resp.service_specific_credential.service_credential_secret #=> String
     #   resp.service_specific_credential.service_specific_credential_id #=> String
     #   resp.service_specific_credential.user_name #=> String
-    #   resp.service_specific_credential.status #=> String, one of "Active", "Inactive"
+    #   resp.service_specific_credential.status #=> String, one of "Active", "Inactive", "Expired"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceSpecificCredential AWS API Documentation
     #
@@ -2446,13 +2463,13 @@ module Aws::IAM
     end
 
     # Creates a new virtual MFA device for the Amazon Web Services account.
-    # After creating the virtual MFA, use EnableMFADevice to attach the MFA
-    # device to an IAM user. For more information about creating and working
-    # with virtual MFA devices, see [Using a virtual MFA device][1] in the
-    # *IAM User Guide*.
+    # After creating the virtual MFA, use [EnableMFADevice][1] to attach the
+    # MFA device to an IAM user. For more information about creating and
+    # working with virtual MFA devices, see [Using a virtual MFA device][2]
+    # in the *IAM User Guide*.
     #
     # For information about the maximum number of MFA devices you can
-    # create, see [IAM and STS quotas][2] in the *IAM User Guide*.
+    # create, see [IAM and STS quotas][3] in the *IAM User Guide*.
     #
     # The seed information contained in the QR code and the Base32 string
     # should be treated like any other secret access information. In other
@@ -2463,8 +2480,9 @@ module Aws::IAM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_EnableMFADevice.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html
     #
     # @option params [String] :path
     #   The path for the virtual MFA device. For more information about paths,
@@ -2787,13 +2805,14 @@ module Aws::IAM
     # IAM group.
     #
     # A group can also have managed policies attached to it. To detach a
-    # managed policy from a group, use DetachGroupPolicy. For more
+    # managed policy from a group, use [DetachGroupPolicy][1]. For more
     # information about policies, refer to [Managed policies and inline
-    # policies][1] in the *IAM User Guide*.
+    # policies][2] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DetachGroupPolicy.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :group_name
     #   The name (friendly name, not ARN) identifying the group that the
@@ -2901,24 +2920,28 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Deletes the password for the specified IAM user, For more information,
-    # see [Managing passwords for IAM users][1].
+    # Deletes the password for the specified IAM user or root user, For more
+    # information, see [Managing passwords for IAM users][1].
     #
     # You can use the CLI, the Amazon Web Services API, or the **Users**
     # page in the IAM console to delete a password for any IAM user. You can
-    # use ChangePassword to update, but not delete, your own password in the
-    # **My Security Credentials** page in the Amazon Web Services Management
-    # Console.
+    # use [ChangePassword][2] to update, but not delete, your own password
+    # in the **My Security Credentials** page in the Amazon Web Services
+    # Management Console.
     #
     # Deleting a user's password does not prevent a user from accessing
     # Amazon Web Services through the command line interface or the API. To
     # prevent all user access, you must also either make any access keys
     # inactive or delete them. For more information about making keys
-    # inactive or deleting them, see UpdateAccessKey and DeleteAccessKey.
+    # inactive or deleting them, see [UpdateAccessKey][3] and
+    # [DeleteAccessKey][4].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_admin-change-user.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ChangePassword.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateAccessKey.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteAccessKey.html
     #
     # @option params [String] :user_name
     #   The name of the user whose password you want to delete.
@@ -2977,8 +3000,12 @@ module Aws::IAM
     # @option params [required, String] :open_id_connect_provider_arn
     #   The Amazon Resource Name (ARN) of the IAM OpenID Connect provider
     #   resource object to delete. You can get a list of OpenID Connect
-    #   provider resource ARNs by using the ListOpenIDConnectProviders
+    #   provider resource ARNs by using the [ListOpenIDConnectProviders][1]
     #   operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListOpenIDConnectProviders.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3005,25 +3032,31 @@ module Aws::IAM
     # steps describe the process for deleting a managed policy:
     #
     # * Detach the policy from all users, groups, and roles that the policy
-    #   is attached to, using DetachUserPolicy, DetachGroupPolicy, or
-    #   DetachRolePolicy. To list all the users, groups, and roles that a
-    #   policy is attached to, use ListEntitiesForPolicy.
+    #   is attached to, using [DetachUserPolicy][1], [DetachGroupPolicy][2],
+    #   or [DetachRolePolicy][3]. To list all the users, groups, and roles
+    #   that a policy is attached to, use [ListEntitiesForPolicy][4].
     #
-    # * Delete all versions of the policy using DeletePolicyVersion. To list
-    #   the policy's versions, use ListPolicyVersions. You cannot use
-    #   DeletePolicyVersion to delete the version that is marked as the
-    #   default version. You delete the policy's default version in the
+    # * Delete all versions of the policy using [DeletePolicyVersion][5]. To
+    #   list the policy's versions, use [ListPolicyVersions][6]. You cannot
+    #   use [DeletePolicyVersion][5] to delete the version that is marked as
+    #   the default version. You delete the policy's default version in the
     #   next step of the process.
     #
     # * Delete the policy (this automatically deletes the policy's default
     #   version) using this operation.
     #
     # For information about managed policies, see [Managed policies and
-    # inline policies][1] in the *IAM User Guide*.
+    # inline policies][7] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DetachUserPolicy.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DetachGroupPolicy.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DetachRolePolicy.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListEntitiesForPolicy.html
+    # [5]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeletePolicyVersion.html
+    # [6]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPolicyVersions.html
+    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy you want to delete.
@@ -3056,15 +3089,17 @@ module Aws::IAM
     #
     # You cannot delete the default version from a policy using this
     # operation. To delete the default version from a policy, use
-    # DeletePolicy. To find out which version of a policy is marked as the
-    # default version, use ListPolicyVersions.
+    # [DeletePolicy][1]. To find out which version of a policy is marked as
+    # the default version, use [ListPolicyVersions][2].
     #
     # For information about versions for managed policies, see [Versioning
-    # for managed policies][1] in the *IAM User Guide*.
+    # for managed policies][3] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeletePolicy.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPolicyVersions.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #
     # @option params [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy from which you want
@@ -3117,14 +3152,14 @@ module Aws::IAM
     # information, see [Deleting an IAM role][1]. Before attempting to
     # delete a role, remove the following attached items:
     #
-    # * Inline policies (DeleteRolePolicy)
+    # * Inline policies ([DeleteRolePolicy][2])
     #
-    # * Attached managed policies (DetachRolePolicy)
+    # * Attached managed policies ([DetachRolePolicy][3])
     #
-    # * Instance profile (RemoveRoleFromInstanceProfile)
+    # * Instance profile ([RemoveRoleFromInstanceProfile][4])
     #
     # * Optional – Delete instance profile after detaching from role for
-    #   resource clean up (DeleteInstanceProfile)
+    #   resource clean up ([DeleteInstanceProfile][5])
     #
     # Make sure that you do not have any Amazon EC2 instances running with
     # the role you are about to delete. Deleting a role or instance profile
@@ -3134,6 +3169,10 @@ module Aws::IAM
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_manage_delete.html#roles-managingrole-deleting-cli
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteRolePolicy.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DetachRolePolicy.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_RemoveRoleFromInstanceProfile.html
+    # [5]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteInstanceProfile.html
     #
     # @option params [required, String] :role_name
     #   The name of the role to delete.
@@ -3206,13 +3245,14 @@ module Aws::IAM
     # IAM role.
     #
     # A role can also have managed policies attached to it. To detach a
-    # managed policy from a role, use DetachRolePolicy. For more information
-    # about policies, refer to [Managed policies and inline policies][1] in
-    # the *IAM User Guide*.
+    # managed policy from a role, use [DetachRolePolicy][1]. For more
+    # information about policies, refer to [Managed policies and inline
+    # policies][2] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DetachRolePolicy.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :role_name
     #   The name (friendly name, not ARN) identifying the role that the policy
@@ -3416,23 +3456,24 @@ module Aws::IAM
     #
     # If you submit a deletion request for a service-linked role whose
     # linked service is still accessing a resource, then the deletion task
-    # fails. If it fails, the GetServiceLinkedRoleDeletionStatus operation
-    # returns the reason for the failure, usually including the resources
-    # that must be deleted. To delete the service-linked role, you must
-    # first remove those resources from the linked service and then submit
-    # the deletion request again. Resources are specific to the service that
-    # is linked to the role. For more information about removing resources
-    # from a service, see the [Amazon Web Services documentation][1] for
-    # your service.
+    # fails. If it fails, the [GetServiceLinkedRoleDeletionStatus][1]
+    # operation returns the reason for the failure, usually including the
+    # resources that must be deleted. To delete the service-linked role, you
+    # must first remove those resources from the linked service and then
+    # submit the deletion request again. Resources are specific to the
+    # service that is linked to the role. For more information about
+    # removing resources from a service, see the [Amazon Web Services
+    # documentation][2] for your service.
     #
     # For more information about service-linked roles, see [Roles terms and
-    # concepts: Amazon Web Services service-linked role][2] in the *IAM User
+    # concepts: Amazon Web Services service-linked role][3] in the *IAM User
     # Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetServiceLinkedRoleDeletionStatus.html
+    # [2]: http://docs.aws.amazon.com/
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role
     #
     # @option params [required, String] :role_name
     #   The name of the service-linked role to be deleted.
@@ -3478,15 +3519,16 @@ module Aws::IAM
     #
     # @option params [required, String] :service_specific_credential_id
     #   The unique identifier of the service-specific credential. You can get
-    #   this value by calling ListServiceSpecificCredentials.
+    #   this value by calling [ListServiceSpecificCredentials][1].
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters that can consist of any upper or lowercased letter or
     #   digit.
     #
     #
     #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListServiceSpecificCredentials.html
+    #   [2]: http://wikipedia.org/wiki/regex
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3572,28 +3614,38 @@ module Aws::IAM
     # For more information, see [Deleting an IAM user][1]. Before attempting
     # to delete a user, remove the following items:
     #
-    # * Password (DeleteLoginProfile)
+    # * Password ([DeleteLoginProfile][2])
     #
-    # * Access keys (DeleteAccessKey)
+    # * Access keys ([DeleteAccessKey][3])
     #
-    # * Signing certificate (DeleteSigningCertificate)
+    # * Signing certificate ([DeleteSigningCertificate][4])
     #
-    # * SSH public key (DeleteSSHPublicKey)
+    # * SSH public key ([DeleteSSHPublicKey][5])
     #
-    # * Git credentials (DeleteServiceSpecificCredential)
+    # * Git credentials ([DeleteServiceSpecificCredential][6])
     #
-    # * Multi-factor authentication (MFA) device (DeactivateMFADevice,
-    #   DeleteVirtualMFADevice)
+    # * Multi-factor authentication (MFA) device ([DeactivateMFADevice][7],
+    #   [DeleteVirtualMFADevice][8])
     #
-    # * Inline policies (DeleteUserPolicy)
+    # * Inline policies ([DeleteUserPolicy][9])
     #
-    # * Attached managed policies (DetachUserPolicy)
+    # * Attached managed policies ([DetachUserPolicy][10])
     #
-    # * Group memberships (RemoveUserFromGroup)
+    # * Group memberships ([RemoveUserFromGroup][11])
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_manage.html#id_users_deleting_cli
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteLoginProfile.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteAccessKey.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteSigningCertificate.html
+    # [5]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteSSHPublicKey.html
+    # [6]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteServiceSpecificCredential.html
+    # [7]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeactivateMFADevice.html
+    # [8]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteVirtualMFADevice.html
+    # [9]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteUserPolicy.html
+    # [10]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DetachUserPolicy.html
+    # [11]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_RemoveUserFromGroup.html
     #
     # @option params [required, String] :user_name
     #   The name of the user to delete.
@@ -3664,13 +3716,14 @@ module Aws::IAM
     # IAM user.
     #
     # A user can also have managed policies attached to it. To detach a
-    # managed policy from a user, use DetachUserPolicy. For more information
-    # about policies, refer to [Managed policies and inline policies][1] in
-    # the *IAM User Guide*.
+    # managed policy from a user, use [DetachUserPolicy][1]. For more
+    # information about policies, refer to [Managed policies and inline
+    # policies][2] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DetachUserPolicy.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :user_name
     #   The name (friendly name, not ARN) identifying the user that the policy
@@ -3729,9 +3782,13 @@ module Aws::IAM
     #
     # <note markdown="1"> You must deactivate a user's virtual MFA device before you can delete
     # it. For information about deactivating MFA devices, see
-    # DeactivateMFADevice.
+    # [DeactivateMFADevice][1].
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeactivateMFADevice.html
     #
     # @option params [required, String] :serial_number
     #   The serial number that uniquely identifies the MFA device. For virtual
@@ -3775,12 +3832,14 @@ module Aws::IAM
     # Removes the specified managed policy from the specified IAM group.
     #
     # A group can also have inline policies embedded with it. To delete an
-    # inline policy, use DeleteGroupPolicy. For information about policies,
-    # see [Managed policies and inline policies][1] in the *IAM User Guide*.
+    # inline policy, use [DeleteGroupPolicy][1]. For information about
+    # policies, see [Managed policies and inline policies][2] in the *IAM
+    # User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteGroupPolicy.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :group_name
     #   The name (friendly name, not ARN) of the IAM group to detach the
@@ -3826,12 +3885,14 @@ module Aws::IAM
     # Removes the specified managed policy from the specified role.
     #
     # A role can also have inline policies embedded with it. To delete an
-    # inline policy, use DeleteRolePolicy. For information about policies,
-    # see [Managed policies and inline policies][1] in the *IAM User Guide*.
+    # inline policy, use [DeleteRolePolicy][1]. For information about
+    # policies, see [Managed policies and inline policies][2] in the *IAM
+    # User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteRolePolicy.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :role_name
     #   The name (friendly name, not ARN) of the IAM role to detach the policy
@@ -3877,12 +3938,14 @@ module Aws::IAM
     # Removes the specified managed policy from the specified user.
     #
     # A user can also have inline policies embedded with it. To delete an
-    # inline policy, use DeleteUserPolicy. For information about policies,
-    # see [Managed policies and inline policies][1] in the *IAM User Guide*.
+    # inline policy, use [DeleteUserPolicy][1]. For information about
+    # policies, see [Managed policies and inline policies][2] in the *IAM
+    # User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteUserPolicy.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :user_name
     #   The name (friendly name, not ARN) of the IAM user to detach the policy
@@ -4447,7 +4510,7 @@ module Aws::IAM
     # Use this parameter in the following operations to retrieve the
     # following details from your report:
     #
-    # * GetServiceLastAccessedDetails – Use this operation for users,
+    # * [GetServiceLastAccessedDetails][4] – Use this operation for users,
     #   groups, roles, or policies to list every Amazon Web Services service
     #   that the resource could access using permissions policies. For each
     #   service, the response includes information about the most recent
@@ -4457,8 +4520,8 @@ module Aws::IAM
     #   used by the same role within a session, or by the same user when
     #   used to call `GetServiceLastAccessedDetail`.
     #
-    # * GetServiceLastAccessedDetailsWithEntities – Use this operation for
-    #   groups and policies to list information about the associated
+    # * [GetServiceLastAccessedDetailsWithEntities][5] – Use this operation
+    #   for groups and policies to list information about the associated
     #   entities (users or roles) that attempted to access a specific Amazon
     #   Web Services service.
     #
@@ -4468,20 +4531,20 @@ module Aws::IAM
     #
     # For additional information about the permissions policies that allow
     # an identity (user, group, or role) to access specific services, use
-    # the ListPoliciesGrantingServiceAccess operation.
+    # the [ListPoliciesGrantingServiceAccess][6] operation.
     #
     # <note markdown="1"> Service last accessed data does not use other policy types when
     # determining whether a resource could access a service. These other
     # policy types include resource-based policies, access control lists,
     # Organizations policies, IAM permissions boundaries, and STS assume
     # role policies. It only applies permissions policy logic. For more
-    # about the evaluation of policy types, see [Evaluating policies][4] in
+    # about the evaluation of policy types, see [Evaluating policies][7] in
     # the *IAM User Guide*.
     #
     #  </note>
     #
     # For more information about service and action last accessed data, see
-    # [Reducing permissions using service last accessed data][5] in the *IAM
+    # [Reducing permissions using service last accessed data][8] in the *IAM
     # User Guide*.
     #
     #
@@ -4489,8 +4552,11 @@ module Aws::IAM
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period
     # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor-action-last-accessed.html
     # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html
-    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics
-    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetServiceLastAccessedDetails.html
+    # [5]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetServiceLastAccessedDetailsWithEntities.html
+    # [6]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPoliciesGrantingServiceAccess.html
+    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics
+    # [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html
     #
     # @option params [required, String] :arn
     #   The ARN of the IAM resource (user, group, role, or managed policy)
@@ -4596,7 +4662,8 @@ module Aws::IAM
     # [RFC 3986][1]. You can use a URL decoding method to convert the policy
     # back to plain JSON text. For example, if you use Java, you can use the
     # `decode` method of the `java.net.URLDecoder` utility class in the Java
-    # SDK. Other languages and SDKs provide similar functionality.
+    # SDK. Other languages and SDKs provide similar functionality, and some
+    # SDKs do this decoding automatically.
     #
     #  </note>
     #
@@ -4891,16 +4958,21 @@ module Aws::IAM
     # Gets a list of all of the context keys referenced in the input
     # policies. The policies are supplied as a list of one or more strings.
     # To get the context keys from policies associated with an IAM user,
-    # group, or role, use GetContextKeysForPrincipalPolicy.
+    # group, or role, use [GetContextKeysForPrincipalPolicy][1].
     #
     # Context keys are variables maintained by Amazon Web Services and its
     # services that provide details about the context of an API query
     # request. Context keys can be evaluated by testing against a value
     # specified in an IAM policy. Use `GetContextKeysForCustomPolicy` to
     # understand what key names and values you must supply when you call
-    # SimulateCustomPolicy. Note that all parameters are shown in unencoded
-    # form here for clarity but must be URL encoded to be included as a part
-    # of a real HTML request.
+    # [SimulateCustomPolicy][2]. Note that all parameters are shown in
+    # unencoded form here for clarity but must be URL encoded to be included
+    # as a part of a real HTML request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForPrincipalPolicy.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulateCustomPolicy.html
     #
     # @option params [required, Array<String>] :policy_input_list
     #   A list of policies for which you want the list of context keys
@@ -4955,19 +5027,25 @@ module Aws::IAM
     #
     # You can optionally include a list of one or more additional policies,
     # specified as strings. If you want to include *only* a list of policies
-    # by string, use GetContextKeysForCustomPolicy instead.
+    # by string, use [GetContextKeysForCustomPolicy][1] instead.
     #
     # **Note:** This operation discloses information about the permissions
     # granted to other users. If you do not want users to see other user's
     # permissions, then consider allowing them to use
-    # GetContextKeysForCustomPolicy instead.
+    # [GetContextKeysForCustomPolicy][1] instead.
     #
     # Context keys are variables maintained by Amazon Web Services and its
     # services that provide details about the context of an API query
     # request. Context keys can be evaluated by testing against a value in
-    # an IAM policy. Use GetContextKeysForPrincipalPolicy to understand what
-    # key names and values you must supply when you call
-    # SimulatePrincipalPolicy.
+    # an IAM policy. Use [GetContextKeysForPrincipalPolicy][2] to understand
+    # what key names and values you must supply when you call
+    # [SimulatePrincipalPolicy][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForCustomPolicy.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForPrincipalPolicy.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html
     #
     # @option params [required, String] :policy_source_arn
     #   The ARN of a user, group, or role whose policies contain the context
@@ -5147,22 +5225,25 @@ module Aws::IAM
     # [RFC 3986][1]. You can use a URL decoding method to convert the policy
     # back to plain JSON text. For example, if you use Java, you can use the
     # `decode` method of the `java.net.URLDecoder` utility class in the Java
-    # SDK. Other languages and SDKs provide similar functionality.
+    # SDK. Other languages and SDKs provide similar functionality, and some
+    # SDKs do this decoding automatically.
     #
     #  </note>
     #
     # An IAM group can also have managed policies attached to it. To
     # retrieve a managed policy document that is attached to a group, use
-    # GetPolicy to determine the policy's default version, then use
-    # GetPolicyVersion to retrieve the policy document.
+    # [GetPolicy][2] to determine the policy's default version, then use
+    # [GetPolicyVersion][3] to retrieve the policy document.
     #
     # For more information about policies, see [Managed policies and inline
-    # policies][2] in the *IAM User Guide*.
+    # policies][4] in the *IAM User Guide*.
     #
     #
     #
     # [1]: https://tools.ietf.org/html/rfc3986
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicy.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :group_name
     #   The name of the group the policy is associated with.
@@ -5444,14 +5525,15 @@ module Aws::IAM
     # @option params [required, String] :open_id_connect_provider_arn
     #   The Amazon Resource Name (ARN) of the OIDC provider resource object in
     #   IAM to get information for. You can get a list of OIDC provider
-    #   resource ARNs by using the ListOpenIDConnectProviders operation.
+    #   resource ARNs by using the [ListOpenIDConnectProviders][1] operation.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)][1]
+    #   For more information about ARNs, see [Amazon Resource Names (ARNs)][2]
     #   in the *Amazon Web Services General Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListOpenIDConnectProviders.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @return [Types::GetOpenIDConnectProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5495,13 +5577,13 @@ module Aws::IAM
     #
     # Depending on the parameters that you passed when you generated the
     # report, the data returned could include different information. For
-    # details, see GenerateOrganizationsAccessReport.
+    # details, see [GenerateOrganizationsAccessReport][1].
     #
     # To call this operation, you must be signed in to the management
     # account in your organization. SCPs must be enabled for your
     # organization root. You must have permissions to perform this
     # operation. For more information, see [Refining permissions using
-    # service last accessed data][1] in the *IAM User Guide*.
+    # service last accessed data][2] in the *IAM User Guide*.
     #
     # For each service that principals in an account (root user, IAM users,
     # or IAM roles) could access using SCPs, the operation returns details
@@ -5514,11 +5596,16 @@ module Aws::IAM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateOrganizationsAccessReport.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html
     #
     # @option params [required, String] :job_id
     #   The identifier of the request generated by the
-    #   GenerateOrganizationsAccessReport operation.
+    #   [GenerateOrganizationsAccessReport][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateOrganizationsAccessReport.html
     #
     # @option params [Integer] :max_items
     #   Use this only when paginating results to indicate the maximum number
@@ -5637,21 +5724,26 @@ module Aws::IAM
     # the policy's default version and the total number of IAM users,
     # groups, and roles to which the policy is attached. To retrieve the
     # list of the specific users, groups, and roles that the policy is
-    # attached to, use ListEntitiesForPolicy. This operation returns
+    # attached to, use [ListEntitiesForPolicy][1]. This operation returns
     # metadata about the policy. To retrieve the actual policy document for
-    # a specific version of the policy, use GetPolicyVersion.
+    # a specific version of the policy, use [GetPolicyVersion][2].
     #
     # This operation retrieves information about managed policies. To
     # retrieve information about an inline policy that is embedded with an
-    # IAM user, group, or role, use GetUserPolicy, GetGroupPolicy, or
-    # GetRolePolicy.
+    # IAM user, group, or role, use [GetUserPolicy][3], [GetGroupPolicy][4],
+    # or [GetRolePolicy][5].
     #
     # For more information about policies, see [Managed policies and inline
-    # policies][1] in the *IAM User Guide*.
+    # policies][6] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListEntitiesForPolicy.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetUserPolicy.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetGroupPolicy.html
+    # [5]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetRolePolicy.html
+    # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the managed policy that you want
@@ -5712,28 +5804,34 @@ module Aws::IAM
     # [RFC 3986][1]. You can use a URL decoding method to convert the policy
     # back to plain JSON text. For example, if you use Java, you can use the
     # `decode` method of the `java.net.URLDecoder` utility class in the Java
-    # SDK. Other languages and SDKs provide similar functionality.
+    # SDK. Other languages and SDKs provide similar functionality, and some
+    # SDKs do this decoding automatically.
     #
     #  </note>
     #
-    # To list the available versions for a policy, use ListPolicyVersions.
+    # To list the available versions for a policy, use
+    # [ListPolicyVersions][2].
     #
     # This operation retrieves information about managed policies. To
     # retrieve information about an inline policy that is embedded in a
-    # user, group, or role, use GetUserPolicy, GetGroupPolicy, or
-    # GetRolePolicy.
+    # user, group, or role, use [GetUserPolicy][3], [GetGroupPolicy][4], or
+    # [GetRolePolicy][5].
     #
     # For more information about the types of policies, see [Managed
-    # policies and inline policies][2] in the *IAM User Guide*.
+    # policies and inline policies][6] in the *IAM User Guide*.
     #
     # For more information about managed policy versions, see [Versioning
-    # for managed policies][3] in the *IAM User Guide*.
+    # for managed policies][7] in the *IAM User Guide*.
     #
     #
     #
     # [1]: https://tools.ietf.org/html/rfc3986
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPolicyVersions.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetUserPolicy.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetGroupPolicy.html
+    # [5]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetRolePolicy.html
+    # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #
     # @option params [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the managed policy that you want
@@ -5794,7 +5892,8 @@ module Aws::IAM
     # [RFC 3986][2]. You can use a URL decoding method to convert the policy
     # back to plain JSON text. For example, if you use Java, you can use the
     # `decode` method of the `java.net.URLDecoder` utility class in the Java
-    # SDK. Other languages and SDKs provide similar functionality.
+    # SDK. Other languages and SDKs provide similar functionality, and some
+    # SDKs do this decoding automatically.
     #
     #  </note>
     #
@@ -5890,26 +5989,29 @@ module Aws::IAM
     # [RFC 3986][1]. You can use a URL decoding method to convert the policy
     # back to plain JSON text. For example, if you use Java, you can use the
     # `decode` method of the `java.net.URLDecoder` utility class in the Java
-    # SDK. Other languages and SDKs provide similar functionality.
+    # SDK. Other languages and SDKs provide similar functionality, and some
+    # SDKs do this decoding automatically.
     #
     #  </note>
     #
     # An IAM role can also have managed policies attached to it. To retrieve
-    # a managed policy document that is attached to a role, use GetPolicy to
-    # determine the policy's default version, then use GetPolicyVersion to
-    # retrieve the policy document.
+    # a managed policy document that is attached to a role, use
+    # [GetPolicy][2] to determine the policy's default version, then use
+    # [GetPolicyVersion][3] to retrieve the policy document.
     #
     # For more information about policies, see [Managed policies and inline
-    # policies][2] in the *IAM User Guide*.
+    # policies][4] in the *IAM User Guide*.
     #
-    # For more information about roles, see [IAM roles][3] in the *IAM User
+    # For more information about roles, see [IAM roles][5] in the *IAM User
     # Guide*.
     #
     #
     #
     # [1]: https://tools.ietf.org/html/rfc3986
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicy.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
     #
     # @option params [required, String] :role_name
     #   The name of the role associated with the policy.
@@ -6083,7 +6185,7 @@ module Aws::IAM
     #   resp.ssh_public_key.ssh_public_key_id #=> String
     #   resp.ssh_public_key.fingerprint #=> String
     #   resp.ssh_public_key.ssh_public_key_body #=> String
-    #   resp.ssh_public_key.status #=> String, one of "Active", "Inactive"
+    #   resp.ssh_public_key.status #=> String, one of "Active", "Inactive", "Expired"
     #   resp.ssh_public_key.upload_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSSHPublicKey AWS API Documentation
@@ -6212,10 +6314,14 @@ module Aws::IAM
     #
     # @option params [required, String] :job_id
     #   The ID of the request generated by the
-    #   GenerateServiceLastAccessedDetails operation. The `JobId` returned by
-    #   `GenerateServiceLastAccessedDetail` must be used by the same role
-    #   within a session, or by the same user when used to call
+    #   [GenerateServiceLastAccessedDetails][1] operation. The `JobId`
+    #   returned by `GenerateServiceLastAccessedDetail` must be used by the
+    #   same role within a session, or by the same user when used to call
     #   `GetServiceLastAccessedDetail`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateServiceLastAccessedDetails.html
     #
     # @option params [Integer] :max_items
     #   Use this only when paginating results to indicate the maximum number
@@ -6465,16 +6571,24 @@ module Aws::IAM
     end
 
     # Retrieves the status of your service-linked role deletion. After you
-    # use DeleteServiceLinkedRole to submit a service-linked role for
+    # use [DeleteServiceLinkedRole][1] to submit a service-linked role for
     # deletion, you can use the `DeletionTaskId` parameter in
     # `GetServiceLinkedRoleDeletionStatus` to check the status of the
     # deletion. If the deletion fails, this operation returns the reason
     # that it failed, if that information is returned by the service.
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteServiceLinkedRole.html
+    #
     # @option params [required, String] :deletion_task_id
     #   The deletion task identifier. This identifier is returned by the
-    #   DeleteServiceLinkedRole operation in the format
+    #   [DeleteServiceLinkedRole][1] operation in the format
     #   `task/aws-service-role/<service-principal-name>/<role-name>/<task-uuid>`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteServiceLinkedRole.html
     #
     # @return [Types::GetServiceLinkedRoleDeletionStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6590,22 +6704,25 @@ module Aws::IAM
     # [RFC 3986][1]. You can use a URL decoding method to convert the policy
     # back to plain JSON text. For example, if you use Java, you can use the
     # `decode` method of the `java.net.URLDecoder` utility class in the Java
-    # SDK. Other languages and SDKs provide similar functionality.
+    # SDK. Other languages and SDKs provide similar functionality, and some
+    # SDKs do this decoding automatically.
     #
     #  </note>
     #
     # An IAM user can also have managed policies attached to it. To retrieve
-    # a managed policy document that is attached to a user, use GetPolicy to
-    # determine the policy's default version. Then use GetPolicyVersion to
-    # retrieve the policy document.
+    # a managed policy document that is attached to a user, use
+    # [GetPolicy][2] to determine the policy's default version. Then use
+    # [GetPolicyVersion][3] to retrieve the policy document.
     #
     # For more information about policies, see [Managed policies and inline
-    # policies][2] in the *IAM User Guide*.
+    # policies][4] in the *IAM User Guide*.
     #
     #
     #
     # [1]: https://tools.ietf.org/html/rfc3986
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicy.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :user_name
     #   The name of the user who the policy is associated with.
@@ -6759,7 +6876,7 @@ module Aws::IAM
     #   resp.access_key_metadata #=> Array
     #   resp.access_key_metadata[0].user_name #=> String
     #   resp.access_key_metadata[0].access_key_id #=> String
-    #   resp.access_key_metadata[0].status #=> String, one of "Active", "Inactive"
+    #   resp.access_key_metadata[0].status #=> String, one of "Active", "Inactive", "Expired"
     #   resp.access_key_metadata[0].create_date #=> Time
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
@@ -6850,9 +6967,9 @@ module Aws::IAM
     # group.
     #
     # An IAM group can also have inline policies embedded with it. To list
-    # the inline policies for a group, use ListGroupPolicies. For
+    # the inline policies for a group, use [ListGroupPolicies][1]. For
     # information about policies, see [Managed policies and inline
-    # policies][1] in the *IAM User Guide*.
+    # policies][2] in the *IAM User Guide*.
     #
     # You can paginate the results using the `MaxItems` and `Marker`
     # parameters. You can use the `PathPrefix` parameter to limit the list
@@ -6862,7 +6979,8 @@ module Aws::IAM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListGroupPolicies.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :group_name
     #   The name (friendly name, not ARN) of the group to list attached
@@ -6948,9 +7066,9 @@ module Aws::IAM
     # role.
     #
     # An IAM role can also have inline policies embedded with it. To list
-    # the inline policies for a role, use ListRolePolicies. For information
-    # about policies, see [Managed policies and inline policies][1] in the
-    # *IAM User Guide*.
+    # the inline policies for a role, use [ListRolePolicies][1]. For
+    # information about policies, see [Managed policies and inline
+    # policies][2] in the *IAM User Guide*.
     #
     # You can paginate the results using the `MaxItems` and `Marker`
     # parameters. You can use the `PathPrefix` parameter to limit the list
@@ -6960,7 +7078,8 @@ module Aws::IAM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListRolePolicies.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :role_name
     #   The name (friendly name, not ARN) of the role to list attached
@@ -7046,9 +7165,9 @@ module Aws::IAM
     # user.
     #
     # An IAM user can also have inline policies embedded with it. To list
-    # the inline policies for a user, use ListUserPolicies. For information
-    # about policies, see [Managed policies and inline policies][1] in the
-    # *IAM User Guide*.
+    # the inline policies for a user, use [ListUserPolicies][1]. For
+    # information about policies, see [Managed policies and inline
+    # policies][2] in the *IAM User Guide*.
     #
     # You can paginate the results using the `MaxItems` and `Marker`
     # parameters. You can use the `PathPrefix` parameter to limit the list
@@ -7058,7 +7177,8 @@ module Aws::IAM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListUserPolicies.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :user_name
     #   The name (friendly name, not ARN) of the user to list attached
@@ -7264,8 +7384,8 @@ module Aws::IAM
     #
     # An IAM group can also have managed policies attached to it. To list
     # the managed policies that are attached to a group, use
-    # ListAttachedGroupPolicies. For more information about policies, see
-    # [Managed policies and inline policies][1] in the *IAM User Guide*.
+    # [ListAttachedGroupPolicies][1]. For more information about policies,
+    # see [Managed policies and inline policies][2] in the *IAM User Guide*.
     #
     # You can paginate the results using the `MaxItems` and `Marker`
     # parameters. If there are no inline policies embedded with the
@@ -7273,7 +7393,8 @@ module Aws::IAM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedGroupPolicies.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :group_name
     #   The name of the group to list policies for.
@@ -7642,7 +7763,7 @@ module Aws::IAM
     # attributes for the resource. For example, this operation does not
     # return tags, even though they are an attribute of the returned object.
     # To view all of the information for an instance profile, see
-    # GetInstanceProfile.
+    # [GetInstanceProfile][2].
     #
     #  </note>
     #
@@ -7652,6 +7773,7 @@ module Aws::IAM
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetInstanceProfile.html
     #
     # @option params [String] :path_prefix
     #   The path prefix for filtering the results. For example, the prefix
@@ -8067,9 +8189,13 @@ module Aws::IAM
     # attributes for the resource. For example, this operation does not
     # return tags, even though they are an attribute of the returned object.
     # To view all of the information for an OIDC provider, see
-    # GetOpenIDConnectProvider.
+    # [GetOpenIDConnectProvider][1].
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetOpenIDConnectProvider.html
     #
     # @return [Types::ListOpenIDConnectProvidersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8153,13 +8279,14 @@ module Aws::IAM
     # attributes for the resource. For example, this operation does not
     # return tags, even though they are an attribute of the returned object.
     # To view all of the information for a customer manged policy, see
-    # GetPolicy.
+    # [GetPolicy][2].
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicy.html
     #
     # @option params [String] :scope
     #   The scope to use for filtering the results.
@@ -8305,12 +8432,14 @@ module Aws::IAM
     # Policies that are attached to users and roles as permissions
     # boundaries are not returned. To view which managed policy is currently
     # used to set the permissions boundary for a user or role, use the
-    # GetUser or GetRole operations.
+    # [GetUser][3] or [GetRole][4] operations.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics
     # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetUser.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetRole.html
     #
     # @option params [String] :marker
     #   Use this parameter only when paginating results and only after you
@@ -8571,8 +8700,8 @@ module Aws::IAM
     #
     # An IAM role can also have managed policies attached to it. To list the
     # managed policies that are attached to a role, use
-    # ListAttachedRolePolicies. For more information about policies, see
-    # [Managed policies and inline policies][1] in the *IAM User Guide*.
+    # [ListAttachedRolePolicies][1]. For more information about policies,
+    # see [Managed policies and inline policies][2] in the *IAM User Guide*.
     #
     # You can paginate the results using the `MaxItems` and `Marker`
     # parameters. If there are no inline policies embedded with the
@@ -8580,7 +8709,8 @@ module Aws::IAM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedRolePolicies.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :role_name
     #   The name of the role to list policies for.
@@ -8752,7 +8882,7 @@ module Aws::IAM
     #
     # * Tags
     #
-    #  To view all of the information for a role, see GetRole.
+    #  To view all of the information for a role, see [GetRole][2].
     #
     #  </note>
     #
@@ -8762,6 +8892,7 @@ module Aws::IAM
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetRole.html
     #
     # @option params [String] :path_prefix
     #   The path prefix for filtering the results. For example, the prefix
@@ -8924,13 +9055,14 @@ module Aws::IAM
     # available attributes for the resource. For example, this operation
     # does not return tags, even though they are an attribute of the
     # returned object. To view all of the information for a SAML provider,
-    # see GetSAMLProvider.
+    # see [GetSAMLProvider][1].
     #
-    # This operation requires [Signature Version 4][1].
+    # This operation requires [Signature Version 4][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetSAMLProvider.html
+    # [2]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @return [Types::ListSAMLProvidersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9021,7 +9153,7 @@ module Aws::IAM
     #   resp.ssh_public_keys #=> Array
     #   resp.ssh_public_keys[0].user_name #=> String
     #   resp.ssh_public_keys[0].ssh_public_key_id #=> String
-    #   resp.ssh_public_keys[0].status #=> String, one of "Active", "Inactive"
+    #   resp.ssh_public_keys[0].status #=> String, one of "Active", "Inactive", "Expired"
     #   resp.ssh_public_keys[0].upload_date #=> Time
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
@@ -9130,13 +9262,14 @@ module Aws::IAM
     # attributes for the resource. For example, this operation does not
     # return tags, even though they are an attribute of the returned object.
     # To view all of the information for a servercertificate, see
-    # GetServerCertificate.
+    # [GetServerCertificate][2].
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetServerCertificate.html
     #
     # @option params [String] :path_prefix
     #   The path prefix for filtering the results. For example:
@@ -9241,26 +9374,51 @@ module Aws::IAM
     #   Web Services service. If not specified, then Amazon Web Services
     #   returns service-specific credentials for all services.
     #
+    # @option params [Boolean] :all_users
+    #   A flag indicating whether to list service specific credentials for all
+    #   users. This parameter cannot be specified together with UserName. When
+    #   true, returns all credentials associated with the specified service.
+    #
+    # @option params [String] :marker
+    #   Use this parameter only when paginating results and only after you
+    #   receive a response indicating that the results are truncated. Set it
+    #   to the value of the Marker from the response that you received to
+    #   indicate where the next call should start.
+    #
+    # @option params [Integer] :max_items
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the IsTruncated response element is true.
+    #
     # @return [Types::ListServiceSpecificCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListServiceSpecificCredentialsResponse#service_specific_credentials #service_specific_credentials} => Array&lt;Types::ServiceSpecificCredentialMetadata&gt;
+    #   * {Types::ListServiceSpecificCredentialsResponse#marker #marker} => String
+    #   * {Types::ListServiceSpecificCredentialsResponse#is_truncated #is_truncated} => Boolean
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_service_specific_credentials({
     #     user_name: "userNameType",
     #     service_name: "serviceName",
+    #     all_users: false,
+    #     marker: "markerType",
+    #     max_items: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.service_specific_credentials #=> Array
     #   resp.service_specific_credentials[0].user_name #=> String
-    #   resp.service_specific_credentials[0].status #=> String, one of "Active", "Inactive"
+    #   resp.service_specific_credentials[0].status #=> String, one of "Active", "Inactive", "Expired"
     #   resp.service_specific_credentials[0].service_user_name #=> String
+    #   resp.service_specific_credentials[0].service_credential_alias #=> String
     #   resp.service_specific_credentials[0].create_date #=> Time
+    #   resp.service_specific_credentials[0].expiration_date #=> Time
     #   resp.service_specific_credentials[0].service_specific_credential_id #=> String
     #   resp.service_specific_credentials[0].service_name #=> String
+    #   resp.marker #=> String
+    #   resp.is_truncated #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServiceSpecificCredentials AWS API Documentation
     #
@@ -9360,7 +9518,7 @@ module Aws::IAM
     #   resp.certificates[0].user_name #=> String
     #   resp.certificates[0].certificate_id #=> String
     #   resp.certificates[0].certificate_body #=> String
-    #   resp.certificates[0].status #=> String, one of "Active", "Inactive"
+    #   resp.certificates[0].status #=> String, one of "Active", "Inactive", "Expired"
     #   resp.certificates[0].upload_date #=> Time
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
@@ -9379,8 +9537,8 @@ module Aws::IAM
     #
     # An IAM user can also have managed policies attached to it. To list the
     # managed policies that are attached to a user, use
-    # ListAttachedUserPolicies. For more information about policies, see
-    # [Managed policies and inline policies][1] in the *IAM User Guide*.
+    # [ListAttachedUserPolicies][1]. For more information about policies,
+    # see [Managed policies and inline policies][2] in the *IAM User Guide*.
     #
     # You can paginate the results using the `MaxItems` and `Marker`
     # parameters. If there are no inline policies embedded with the
@@ -9388,7 +9546,8 @@ module Aws::IAM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedUserPolicies.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :user_name
     #   The name of the user to list policies for.
@@ -9559,12 +9718,16 @@ module Aws::IAM
     #
     # * Tags
     #
-    #  To view all of the information for a user, see GetUser.
+    #  To view all of the information for a user, see [GetUser][1].
     #
     #  </note>
     #
     # You can paginate the results using the `MaxItems` and `Marker`
     # parameters.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetUser.html
     #
     # @option params [String] :path_prefix
     #   The path prefix for filtering the results. For example:
@@ -9681,12 +9844,16 @@ module Aws::IAM
     # attributes for the resource. For example, this operation does not
     # return tags, even though they are an attribute of the returned object.
     # To view tag information for a virtual MFA device, see
-    # ListMFADeviceTags.
+    # [ListMFADeviceTags][1].
     #
     #  </note>
     #
     # You can paginate the results using the `MaxItems` and `Marker`
     # parameters.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListMFADeviceTags.html
     #
     # @option params [String] :assignment_status
     #   The status (`Unassigned` or `Assigned`) of the devices to list. If you
@@ -9860,12 +10027,12 @@ module Aws::IAM
     #
     # @example Example: To add a policy to a group
     #
-    #   # The following command adds a policy named AllPerms to the IAM group named Admins.
+    #   # The following command adds a policy named IAMReadAccess to the IAM group named PowerUsers.
     #
     #   resp = client.put_group_policy({
-    #     group_name: "Admins", 
-    #     policy_document: "{\"Version\":\"2012-10-17\",\"Statement\":{\"Effect\":\"Allow\",\"Action\":\"*\",\"Resource\":\"*\"}}", 
-    #     policy_name: "AllPerms", 
+    #     group_name: "PowerUsers", 
+    #     policy_document: "{\"Version\":\"2012-10-17\",\"Statement\":{\"Effect\":\"Allow\",\"Action\":[\"iam:Get*\",\"iam:List*\",\"iam:Generate*\"],\"Resource\":\"*\"}}", 
+    #     policy_name: "IAMReadAccess", 
     #   })
     #
     # @example Request syntax with placeholder values
@@ -10233,19 +10400,24 @@ module Aws::IAM
     # @option params [required, String] :open_id_connect_provider_arn
     #   The Amazon Resource Name (ARN) of the IAM OIDC provider resource to
     #   remove the client ID from. You can get a list of OIDC provider ARNs by
-    #   using the ListOpenIDConnectProviders operation.
+    #   using the [ListOpenIDConnectProviders][1] operation.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)][1]
+    #   For more information about ARNs, see [Amazon Resource Names (ARNs)][2]
     #   in the *Amazon Web Services General Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListOpenIDConnectProviders.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, String] :client_id
     #   The client ID (also known as audience) to remove from the IAM OIDC
     #   provider resource. For more information about client IDs, see
-    #   CreateOpenIDConnectProvider.
+    #   [CreateOpenIDConnectProvider][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -10433,12 +10605,15 @@ module Aws::IAM
     # @example Response structure
     #
     #   resp.service_specific_credential.create_date #=> Time
+    #   resp.service_specific_credential.expiration_date #=> Time
     #   resp.service_specific_credential.service_name #=> String
     #   resp.service_specific_credential.service_user_name #=> String
     #   resp.service_specific_credential.service_password #=> String
+    #   resp.service_specific_credential.service_credential_alias #=> String
+    #   resp.service_specific_credential.service_credential_secret #=> String
     #   resp.service_specific_credential.service_specific_credential_id #=> String
     #   resp.service_specific_credential.user_name #=> String
-    #   resp.service_specific_credential.status #=> String, one of "Active", "Inactive"
+    #   resp.service_specific_credential.status #=> String, one of "Active", "Inactive", "Expired"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResetServiceSpecificCredential AWS API Documentation
     #
@@ -10518,14 +10693,15 @@ module Aws::IAM
     #
     # This operation affects all users, groups, and roles that the policy is
     # attached to. To list the users, groups, and roles that the policy is
-    # attached to, use ListEntitiesForPolicy.
+    # attached to, use [ListEntitiesForPolicy][1].
     #
     # For information about managed policies, see [Managed policies and
-    # inline policies][1] in the *IAM User Guide*.
+    # inline policies][2] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListEntitiesForPolicy.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy whose default version
@@ -10590,12 +10766,13 @@ module Aws::IAM
     #
     # To view the current session token version, see the
     # `GlobalEndpointTokenVersion` entry in the response of the
-    # GetAccountSummary operation.
+    # [GetAccountSummary][3] operation.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/general/latest/gr/sts.html
     # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountSummary.html
     #
     # @option params [required, String] :global_endpoint_token_version
     #   The version of the global endpoint token. Version 1 tokens are valid
@@ -10649,14 +10826,14 @@ module Aws::IAM
     # account.
     #
     # If you want to simulate existing policies that are attached to an IAM
-    # user, group, or role, use SimulatePrincipalPolicy instead.
+    # user, group, or role, use [SimulatePrincipalPolicy][1] instead.
     #
     # Context keys are variables that are maintained by Amazon Web Services
     # and its services and which provide details about the context of an API
     # query request. You can use the `Condition` element of an IAM policy to
     # evaluate context keys. To get the list of context keys that the
     # policies require for correct simulation, use
-    # GetContextKeysForCustomPolicy.
+    # [GetContextKeysForCustomPolicy][2].
     #
     # If the output is long, you can use `MaxItems` and `Marker` parameters
     # to paginate the results.
@@ -10668,13 +10845,15 @@ module Aws::IAM
     # live Amazon Web Services environment after testing using the policy
     # simulator to confirm that you have the desired results. For more
     # information about using the policy simulator, see [Testing IAM
-    # policies with the IAM policy simulator ][1]in the *IAM User Guide*.
+    # policies with the IAM policy simulator ][3]in the *IAM User Guide*.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForCustomPolicy.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html
     #
     # @option params [required, Array<String>] :policy_input_list
     #   A list of policy documents to include in the simulation. Each document
@@ -10983,8 +11162,8 @@ module Aws::IAM
     #
     # You can optionally include a list of one or more additional policies
     # specified as strings to include in the simulation. If you want to
-    # simulate only policies specified as strings, use SimulateCustomPolicy
-    # instead.
+    # simulate only policies specified as strings, use
+    # [SimulateCustomPolicy][1] instead.
     #
     # You can also optionally include one resource-based policy to be
     # evaluated with each of the resources included in the simulation for
@@ -10996,15 +11175,15 @@ module Aws::IAM
     #
     # **Note:** This operation discloses information about the permissions
     # granted to other users. If you do not want users to see other user's
-    # permissions, then consider allowing them to use SimulateCustomPolicy
-    # instead.
+    # permissions, then consider allowing them to use
+    # [SimulateCustomPolicy][1] instead.
     #
     # Context keys are variables maintained by Amazon Web Services and its
     # services that provide details about the context of an API query
     # request. You can use the `Condition` element of an IAM policy to
     # evaluate context keys. To get the list of context keys that the
     # policies require for correct simulation, use
-    # GetContextKeysForPrincipalPolicy.
+    # [GetContextKeysForPrincipalPolicy][2].
     #
     # If the output is long, you can use the `MaxItems` and `Marker`
     # parameters to paginate the results.
@@ -11016,13 +11195,15 @@ module Aws::IAM
     # live Amazon Web Services environment after testing using the policy
     # simulator to confirm that you have the desired results. For more
     # information about using the policy simulator, see [Testing IAM
-    # policies with the IAM policy simulator ][1]in the *IAM User Guide*.
+    # policies with the IAM policy simulator ][3]in the *IAM User Guide*.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulateCustomPolicy.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForPrincipalPolicy.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html
     #
     # @option params [required, String] :policy_source_arn
     #   The Amazon Resource Name (ARN) of a user, group, or role whose
@@ -12460,7 +12641,7 @@ module Aws::IAM
     #   resp = client.update_access_key({
     #     user_name: "existingUserNameType",
     #     access_key_id: "accessKeyIdType", # required
-    #     status: "Active", # required, accepts Active, Inactive
+    #     status: "Active", # required, accepts Active, Inactive, Expired
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccessKey AWS API Documentation
@@ -12781,16 +12962,17 @@ module Aws::IAM
 
     # Changes the password for the specified IAM user. You can use the CLI,
     # the Amazon Web Services API, or the **Users** page in the IAM console
-    # to change the password for any IAM user. Use ChangePassword to change
-    # your own password in the **My Security Credentials** page in the
-    # Amazon Web Services Management Console.
+    # to change the password for any IAM user. Use [ChangePassword][1] to
+    # change your own password in the **My Security Credentials** page in
+    # the Amazon Web Services Management Console.
     #
     # For more information about modifying passwords, see [Managing
-    # passwords][1] in the *IAM User Guide*.
+    # passwords][2] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ChangePassword.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html
     #
     # @option params [required, String] :user_name
     #   The name of the user whose password you want to update.
@@ -12821,11 +13003,12 @@ module Aws::IAM
     #
     #   However, the format can be further restricted by the account
     #   administrator by setting a password policy on the Amazon Web Services
-    #   account. For more information, see UpdateAccountPasswordPolicy.
+    #   account. For more information, see [UpdateAccountPasswordPolicy][2].
     #
     #
     #
     #   [1]: http://wikipedia.org/wiki/regex
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateAccountPasswordPolicy.html
     #
     # @option params [Boolean] :password_reset_required
     #   Allows this new password to be used only once by requiring the
@@ -12892,20 +13075,25 @@ module Aws::IAM
     # @option params [required, String] :open_id_connect_provider_arn
     #   The Amazon Resource Name (ARN) of the IAM OIDC provider resource
     #   object for which you want to update the thumbprint. You can get a list
-    #   of OIDC provider ARNs by using the ListOpenIDConnectProviders
+    #   of OIDC provider ARNs by using the [ListOpenIDConnectProviders][1]
     #   operation.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)][1]
+    #   For more information about ARNs, see [Amazon Resource Names (ARNs)][2]
     #   in the *Amazon Web Services General Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListOpenIDConnectProviders.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, Array<String>] :thumbprint_list
     #   A list of certificate thumbprints that are associated with the
     #   specified IAM OpenID Connect provider. For more information, see
-    #   CreateOpenIDConnectProvider.
+    #   [CreateOpenIDConnectProvider][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -12978,11 +13166,15 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Use UpdateRole instead.
+    # Use [UpdateRole][1] instead.
     #
     # Modifies only the description of a role. This operation performs the
     # same function as the `Description` parameter in the `UpdateRole`
     # operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateRole.html
     #
     # @option params [required, String] :role_name
     #   The name of the role that you want to modify.
@@ -13138,7 +13330,7 @@ module Aws::IAM
     #   resp = client.update_ssh_public_key({
     #     user_name: "userNameType", # required
     #     ssh_public_key_id: "publicKeyIdType", # required
-    #     status: "Active", # required, accepts Active, Inactive
+    #     status: "Active", # required, accepts Active, Inactive, Expired
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSSHPublicKey AWS API Documentation
@@ -13280,7 +13472,7 @@ module Aws::IAM
     #   resp = client.update_service_specific_credential({
     #     user_name: "userNameType",
     #     service_specific_credential_id: "serviceSpecificCredentialId", # required
-    #     status: "Active", # required, accepts Active, Inactive
+    #     status: "Active", # required, accepts Active, Inactive, Expired
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateServiceSpecificCredential AWS API Documentation
@@ -13350,7 +13542,7 @@ module Aws::IAM
     #   resp = client.update_signing_certificate({
     #     user_name: "existingUserNameType",
     #     certificate_id: "certificateIdType", # required
-    #     status: "Active", # required, accepts Active, Inactive
+    #     status: "Active", # required, accepts Active, Inactive, Expired
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSigningCertificate AWS API Documentation
@@ -13511,7 +13703,7 @@ module Aws::IAM
     #   resp.ssh_public_key.ssh_public_key_id #=> String
     #   resp.ssh_public_key.fingerprint #=> String
     #   resp.ssh_public_key.ssh_public_key_body #=> String
-    #   resp.ssh_public_key.status #=> String, one of "Active", "Inactive"
+    #   resp.ssh_public_key.status #=> String, one of "Active", "Inactive", "Expired"
     #   resp.ssh_public_key.upload_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSSHPublicKey AWS API Documentation
@@ -13840,7 +14032,7 @@ module Aws::IAM
     #   resp.certificate.user_name #=> String
     #   resp.certificate.certificate_id #=> String
     #   resp.certificate.certificate_body #=> String
-    #   resp.certificate.status #=> String, one of "Active", "Inactive"
+    #   resp.certificate.status #=> String, one of "Active", "Inactive", "Expired"
     #   resp.certificate.upload_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSigningCertificate AWS API Documentation
@@ -13870,7 +14062,7 @@ module Aws::IAM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.120.0'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

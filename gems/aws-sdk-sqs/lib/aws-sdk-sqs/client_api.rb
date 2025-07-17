@@ -293,7 +293,7 @@ module Aws::SQS
     ListMessageMoveTasksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "MaxResults"))
     ListMessageMoveTasksRequest.struct_class = Types::ListMessageMoveTasksRequest
 
-    ListMessageMoveTasksResult.add_member(:results, Shapes::ShapeRef.new(shape: ListMessageMoveTasksResultEntryList, location_name: "Results", metadata: {"flattened"=>true}))
+    ListMessageMoveTasksResult.add_member(:results, Shapes::ShapeRef.new(shape: ListMessageMoveTasksResultEntryList, location_name: "Results", metadata: {"flattened" => true}))
     ListMessageMoveTasksResult.struct_class = Types::ListMessageMoveTasksResult
 
     ListMessageMoveTasksResultEntry.add_member(:task_handle, Shapes::ShapeRef.new(shape: String, location_name: "TaskHandle"))
@@ -359,8 +359,8 @@ module Aws::SQS
 
     MessageSystemAttributeValue.add_member(:string_value, Shapes::ShapeRef.new(shape: String, location_name: "StringValue"))
     MessageSystemAttributeValue.add_member(:binary_value, Shapes::ShapeRef.new(shape: Binary, location_name: "BinaryValue"))
-    MessageSystemAttributeValue.add_member(:string_list_values, Shapes::ShapeRef.new(shape: StringList, location_name: "StringListValues", metadata: {"flattened"=>true}))
-    MessageSystemAttributeValue.add_member(:binary_list_values, Shapes::ShapeRef.new(shape: BinaryList, location_name: "BinaryListValues", metadata: {"flattened"=>true}))
+    MessageSystemAttributeValue.add_member(:string_list_values, Shapes::ShapeRef.new(shape: StringList, location_name: "StringListValues", metadata: {"flattened" => true}))
+    MessageSystemAttributeValue.add_member(:binary_list_values, Shapes::ShapeRef.new(shape: BinaryList, location_name: "BinaryListValues", metadata: {"flattened" => true}))
     MessageSystemAttributeValue.add_member(:data_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataType"))
     MessageSystemAttributeValue.struct_class = Types::MessageSystemAttributeValue
 
@@ -391,7 +391,7 @@ module Aws::SQS
     ReceiptHandleIsInvalid.struct_class = Types::ReceiptHandleIsInvalid
 
     ReceiveMessageRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
-    ReceiveMessageRequest.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNameList, deprecated: true, location_name: "AttributeNames", metadata: {"deprecatedMessage"=>"AttributeNames has been replaced by MessageSystemAttributeNames"}))
+    ReceiveMessageRequest.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNameList, deprecated: true, location_name: "AttributeNames", metadata: {"deprecatedMessage" => "AttributeNames has been replaced by MessageSystemAttributeNames"}))
     ReceiveMessageRequest.add_member(:message_system_attribute_names, Shapes::ShapeRef.new(shape: MessageSystemAttributeList, location_name: "MessageSystemAttributeNames"))
     ReceiveMessageRequest.add_member(:message_attribute_names, Shapes::ShapeRef.new(shape: MessageAttributeNameList, location_name: "MessageAttributeNames"))
     ReceiveMessageRequest.add_member(:max_number_of_messages, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "MaxNumberOfMessages"))

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2025-06-25)
+------------------
+
+* Feature - Remove Tags field from Get API responses
+
+1.28.0 (2025-06-09)
+------------------
+
+* Feature - Add ConflictException to UpdateEnvironment API
+
+1.27.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.24.0 (2025-03-25)
 ------------------
 

@@ -4226,7 +4226,8 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # Provides details on a RuleSetNumberOverride.
+    # Provides details on phone number rule overrides for a protect
+    # configuration.
     #
     # @!attribute [rw] destination_phone_number
     #   The destination phone number in E.164 format.
@@ -5550,8 +5551,8 @@ module Aws::PinpointSMSVoiceV2
     #   @return [String]
     #
     # @!attribute [rw] message_type
-    #   The type of message. Valid values are TRANSACTIONAL for messages
-    #   that are critical or time-sensitive and PROMOTIONAL for messages
+    #   The type of message. Valid values are `TRANSACTIONAL` for messages
+    #   that are critical or time-sensitive and `PROMOTIONAL` for messages
     #   that aren't critical or time-sensitive.
     #   @return [String]
     #
@@ -5562,6 +5563,9 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] number_type
     #   The type of phone number to request.
+    #
+    #   When you request a `SIMULATOR` phone number, you must set
+    #   **MessageType** as `TRANSACTIONAL`.
     #   @return [String]
     #
     # @!attribute [rw] opt_out_list_name
@@ -6004,17 +6008,20 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] media_urls
     #   An array of URLs to each media file to send.
     #
-    #   The media files have to be stored in a publicly available S3 bucket.
-    #   Supported media file formats are listed in [MMS file types, size and
-    #   character limits][1]. For more information on creating an S3 bucket
-    #   and managing objects, see [Creating a bucket][2] and [Uploading
-    #   objects][3] in the S3 user guide.
+    #   The media files have to be stored in an S3 bucket. Supported media
+    #   file formats are listed in [MMS file types, size and character
+    #   limits][1]. For more information on creating an S3 bucket and
+    #   managing objects, see [Creating a bucket][2], [Uploading objects][3]
+    #   in the *Amazon S3 User Guide*, and [Setting up an Amazon S3 bucket
+    #   for MMS files][4] in the *Amazon Web Services End User Messaging SMS
+    #   User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/mms-limitations-character.html
     #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html
     #   [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html
+    #   [4]: https://docs.aws.amazon.com/sms-voice/latest/userguide/send-mms-message.html#send-mms-message-bucket
     #   @return [Array<String>]
     #
     # @!attribute [rw] configuration_set_name
@@ -6812,8 +6819,8 @@ module Aws::PinpointSMSVoiceV2
     #   * `ASSOCIATE_BEFORE_SUBMIT` The origination identity has to be
     #     supplied when creating a registration.
     #
-    #   * `ASSOCIATE_ON_APPROVAL` This applies to all short code
-    #     registrations. The short code will be automatically provisioned
+    #   * `ASSOCIATE_ON_APPROVAL` This applies to all sender ID
+    #     registrations. The sender ID will be automatically provisioned
     #     once the registration is approved.
     #
     #   * `ASSOCIATE_AFTER_COMPLETE` This applies to phone number
@@ -7337,6 +7344,11 @@ module Aws::PinpointSMSVoiceV2
     #   the two-letter ISO country code. For a list of supported ISO country
     #   codes, see [Supported countries and regions (SMS channel)][1] in the
     #   AWS End User Messaging SMS User Guide.
+    #
+    #   For example, to set the United States as allowed and Canada as
+    #   blocked, the `CountryRuleSetUpdates` would be formatted as:
+    #   `"CountryRuleSetUpdates": { "US" : { "ProtectStatus": "ALLOW" } "CA"
+    #   \: { "ProtectStatus": "BLOCK" } }`
     #
     #
     #

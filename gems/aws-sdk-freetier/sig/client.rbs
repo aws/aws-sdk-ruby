@@ -78,6 +78,39 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _GetAccountActivityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountActivityResponse]
+        def activity_id: () -> ::String
+        def title: () -> ::String
+        def description: () -> ::String
+        def status: () -> ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETED" | "EXPIRING")
+        def instructions_url: () -> ::String
+        def reward: () -> Types::ActivityReward
+        def estimated_time_to_complete_in_minutes: () -> ::Integer
+        def expires_at: () -> ::Time
+        def started_at: () -> ::Time
+        def completed_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FreeTier/Client.html#get_account_activity-instance_method
+      def get_account_activity: (
+                                  activity_id: ::String,
+                                  ?language_code: ("en-US" | "en-GB" | "id-ID" | "de-DE" | "es-ES" | "fr-FR" | "ja-JP" | "it-IT" | "pt-PT" | "ko-KR" | "zh-CN" | "zh-TW" | "tr-TR")
+                                ) -> _GetAccountActivityResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountActivityResponseSuccess
+
+      interface _GetAccountPlanStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountPlanStateResponse]
+        def account_id: () -> ::String
+        def account_plan_type: () -> ("FREE" | "PAID")
+        def account_plan_status: () -> ("NOT_STARTED" | "ACTIVE" | "EXPIRED")
+        def account_plan_remaining_credits: () -> Types::MonetaryAmount
+        def account_plan_expiration_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FreeTier/Client.html#get_account_plan_state-instance_method
+      def get_account_plan_state: (
+                                  ) -> _GetAccountPlanStateResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountPlanStateResponseSuccess
+
       interface _GetFreeTierUsageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetFreeTierUsageResponse]
         def free_tier_usages: () -> ::Array[Types::FreeTierUsage]
@@ -86,23 +119,49 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FreeTier/Client.html#get_free_tier_usage-instance_method
       def get_free_tier_usage: (
                                  ?filter: {
+                                   or: Array[
+                                     untyped,
+                                   ]?,
                                    and: Array[
                                      untyped,
                                    ]?,
+                                   not: untyped?,
                                    dimensions: {
                                      key: ("SERVICE" | "OPERATION" | "USAGE_TYPE" | "REGION" | "FREE_TIER_TYPE" | "DESCRIPTION" | "USAGE_PERCENTAGE"),
-                                     match_options: Array[("EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL")],
-                                     values: Array[::String]
-                                   }?,
-                                   not: untyped?,
-                                   or: Array[
-                                     untyped,
-                                   ]?
+                                     values: Array[::String],
+                                     match_options: Array[("EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL")]
+                                   }?
                                  },
                                  ?max_results: ::Integer,
                                  ?next_token: ::String
                                ) -> _GetFreeTierUsageResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFreeTierUsageResponseSuccess
+
+      interface _ListAccountActivitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccountActivitiesResponse]
+        def activities: () -> ::Array[Types::ActivitySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FreeTier/Client.html#list_account_activities-instance_method
+      def list_account_activities: (
+                                     ?filter_activity_statuses: Array[("NOT_STARTED" | "IN_PROGRESS" | "COMPLETED" | "EXPIRING")],
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer,
+                                     ?language_code: ("en-US" | "en-GB" | "id-ID" | "de-DE" | "es-ES" | "fr-FR" | "ja-JP" | "it-IT" | "pt-PT" | "ko-KR" | "zh-CN" | "zh-TW" | "tr-TR")
+                                   ) -> _ListAccountActivitiesResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccountActivitiesResponseSuccess
+
+      interface _UpgradeAccountPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpgradeAccountPlanResponse]
+        def account_id: () -> ::String
+        def account_plan_type: () -> ("FREE" | "PAID")
+        def account_plan_status: () -> ("NOT_STARTED" | "ACTIVE" | "EXPIRED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FreeTier/Client.html#upgrade_account_plan-instance_method
+      def upgrade_account_plan: (
+                                  account_plan_type: ("FREE" | "PAID")
+                                ) -> _UpgradeAccountPlanResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpgradeAccountPlanResponseSuccess
     end
   end
 end

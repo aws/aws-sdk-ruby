@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2025-06-30)
+------------------
+
+* Feature - Fixed the validation pattern for an instance profile Amazon Resource Name (ARN) in AWS PCS.
+
+1.21.0 (2025-06-12)
+------------------
+
+* Feature - Fixed regex patterns for ARN fields.
+
+1.20.0 (2025-06-02)
+------------------
+
+* Feature - Introduces SUSPENDING and SUSPENDED states for clusters, compute node groups, and queues.
+
+1.19.0 (2025-05-15)
+------------------
+
+* Feature - This release adds support for Slurm accounting. For more information, see the Slurm accounting topic in the AWS PCS User Guide. Slurm accounting is supported for Slurm 24.11 and later. This release also adds 24.11 as a valid value for the version parameter of the Scheduler data type.
+
+1.18.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.17.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.16.0 (2025-04-24)
 ------------------
 

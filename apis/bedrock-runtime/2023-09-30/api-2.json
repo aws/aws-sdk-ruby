@@ -2,7 +2,10 @@
   "version":"2.0",
   "metadata":{
     "apiVersion":"2023-09-30",
-    "auth":["aws.auth#sigv4"],
+    "auth":[
+      "aws.auth#sigv4",
+      "smithy.api#httpBearerAuth"
+    ],
     "endpointPrefix":"bedrock-runtime",
     "protocol":"rest-json",
     "protocolSettings":{"h2":"optional"},
@@ -373,6 +376,81 @@
       "type":"string",
       "enum":["default"]
     },
+    "Citation":{
+      "type":"structure",
+      "members":{
+        "title":{"shape":"String"},
+        "sourceContent":{"shape":"CitationSourceContentList"},
+        "location":{"shape":"CitationLocation"}
+      }
+    },
+    "CitationGeneratedContent":{
+      "type":"structure",
+      "members":{
+        "text":{"shape":"String"}
+      },
+      "union":true
+    },
+    "CitationGeneratedContentList":{
+      "type":"list",
+      "member":{"shape":"CitationGeneratedContent"}
+    },
+    "CitationLocation":{
+      "type":"structure",
+      "members":{
+        "documentChar":{"shape":"DocumentCharLocation"},
+        "documentPage":{"shape":"DocumentPageLocation"},
+        "documentChunk":{"shape":"DocumentChunkLocation"}
+      },
+      "union":true
+    },
+    "CitationSourceContent":{
+      "type":"structure",
+      "members":{
+        "text":{"shape":"String"}
+      },
+      "union":true
+    },
+    "CitationSourceContentDelta":{
+      "type":"structure",
+      "members":{
+        "text":{"shape":"String"}
+      }
+    },
+    "CitationSourceContentList":{
+      "type":"list",
+      "member":{"shape":"CitationSourceContent"}
+    },
+    "CitationSourceContentListDelta":{
+      "type":"list",
+      "member":{"shape":"CitationSourceContentDelta"}
+    },
+    "Citations":{
+      "type":"list",
+      "member":{"shape":"Citation"}
+    },
+    "CitationsConfig":{
+      "type":"structure",
+      "required":["enabled"],
+      "members":{
+        "enabled":{"shape":"Boolean"}
+      }
+    },
+    "CitationsContentBlock":{
+      "type":"structure",
+      "members":{
+        "content":{"shape":"CitationGeneratedContentList"},
+        "citations":{"shape":"Citations"}
+      }
+    },
+    "CitationsDelta":{
+      "type":"structure",
+      "members":{
+        "title":{"shape":"String"},
+        "sourceContent":{"shape":"CitationSourceContentListDelta"},
+        "location":{"shape":"CitationLocation"}
+      }
+    },
     "ConflictException":{
       "type":"structure",
       "members":{
@@ -395,7 +473,8 @@
         "toolResult":{"shape":"ToolResultBlock"},
         "guardContent":{"shape":"GuardrailConverseContentBlock"},
         "cachePoint":{"shape":"CachePointBlock"},
-        "reasoningContent":{"shape":"ReasoningContentBlock"}
+        "reasoningContent":{"shape":"ReasoningContentBlock"},
+        "citationsContent":{"shape":"CitationsContentBlock"}
       },
       "union":true
     },
@@ -404,7 +483,8 @@
       "members":{
         "text":{"shape":"String"},
         "toolUse":{"shape":"ToolUseBlockDelta"},
-        "reasoningContent":{"shape":"ReasoningContentBlockDelta"}
+        "reasoningContent":{"shape":"ReasoningContentBlockDelta"},
+        "citation":{"shape":"CitationsDelta"}
       },
       "union":true
     },
@@ -462,7 +542,7 @@
       "type":"string",
       "max":2048,
       "min":1,
-      "pattern":"(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:imported-model/[a-z0-9]{12})|([0-9]{12}:provisioned-model/[a-z0-9]{12})|([0-9]{12}:(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+)))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)|([a-zA-Z0-9-:.]+)|(^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:prompt/[0-9a-zA-Z]{10}(?::[0-9]{1,5})?))$|(^arn:aws:sagemaker:[a-z0-9-]+:[0-9]{12}:endpoint/[a-zA-Z0-9-]+$)|(^arn:aws(-[^:]+)?:bedrock:([0-9a-z-]{1,20}):([0-9]{12}):(default-)?prompt-router/[a-zA-Z0-9-:.]+$)"
+      "pattern":"(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:imported-model/[a-z0-9]{12})|([0-9]{12}:provisioned-model/[a-z0-9]{12})|([0-9]{12}:custom-model-deployment/[a-z0-9]{12})|([0-9]{12}:(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+)))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)|([a-zA-Z0-9-:.]+)|(^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:prompt/[0-9a-zA-Z]{10}(?::[0-9]{1,5})?))$|(^arn:aws:sagemaker:[a-z0-9-]+:[0-9]{12}:endpoint/[a-zA-Z0-9-]+$)|(^arn:aws(-[^:]+)?:bedrock:([0-9a-z-]{1,20}):([0-9]{12}):(default-)?prompt-router/[a-zA-Z0-9-:.]+$)"
     },
     "ConverseMetrics":{
       "type":"structure",
@@ -628,20 +708,78 @@
     "DocumentBlock":{
       "type":"structure",
       "required":[
-        "format",
         "name",
         "source"
       ],
       "members":{
         "format":{"shape":"DocumentFormat"},
         "name":{"shape":"DocumentBlockNameString"},
-        "source":{"shape":"DocumentSource"}
+        "source":{"shape":"DocumentSource"},
+        "context":{"shape":"String"},
+        "citations":{"shape":"CitationsConfig"}
       }
     },
     "DocumentBlockNameString":{
       "type":"string",
       "max":200,
       "min":1
+    },
+    "DocumentCharLocation":{
+      "type":"structure",
+      "members":{
+        "documentIndex":{"shape":"DocumentCharLocationDocumentIndexInteger"},
+        "start":{"shape":"DocumentCharLocationStartInteger"},
+        "end":{"shape":"DocumentCharLocationEndInteger"}
+      }
+    },
+    "DocumentCharLocationDocumentIndexInteger":{
+      "type":"integer",
+      "box":true,
+      "min":0
+    },
+    "DocumentCharLocationEndInteger":{
+      "type":"integer",
+      "box":true,
+      "min":0
+    },
+    "DocumentCharLocationStartInteger":{
+      "type":"integer",
+      "box":true,
+      "min":0
+    },
+    "DocumentChunkLocation":{
+      "type":"structure",
+      "members":{
+        "documentIndex":{"shape":"DocumentChunkLocationDocumentIndexInteger"},
+        "start":{"shape":"DocumentChunkLocationStartInteger"},
+        "end":{"shape":"DocumentChunkLocationEndInteger"}
+      }
+    },
+    "DocumentChunkLocationDocumentIndexInteger":{
+      "type":"integer",
+      "box":true,
+      "min":0
+    },
+    "DocumentChunkLocationEndInteger":{
+      "type":"integer",
+      "box":true,
+      "min":0
+    },
+    "DocumentChunkLocationStartInteger":{
+      "type":"integer",
+      "box":true,
+      "min":0
+    },
+    "DocumentContentBlock":{
+      "type":"structure",
+      "members":{
+        "text":{"shape":"String"}
+      },
+      "union":true
+    },
+    "DocumentContentBlocks":{
+      "type":"list",
+      "member":{"shape":"DocumentContentBlock"}
     },
     "DocumentFormat":{
       "type":"string",
@@ -657,11 +795,36 @@
         "md"
       ]
     },
+    "DocumentPageLocation":{
+      "type":"structure",
+      "members":{
+        "documentIndex":{"shape":"DocumentPageLocationDocumentIndexInteger"},
+        "start":{"shape":"DocumentPageLocationStartInteger"},
+        "end":{"shape":"DocumentPageLocationEndInteger"}
+      }
+    },
+    "DocumentPageLocationDocumentIndexInteger":{
+      "type":"integer",
+      "box":true,
+      "min":0
+    },
+    "DocumentPageLocationEndInteger":{
+      "type":"integer",
+      "box":true,
+      "min":0
+    },
+    "DocumentPageLocationStartInteger":{
+      "type":"integer",
+      "box":true,
+      "min":0
+    },
     "DocumentSource":{
       "type":"structure",
       "members":{
         "bytes":{"shape":"DocumentSourceBytesBlob"},
-        "s3Location":{"shape":"S3Location"}
+        "s3Location":{"shape":"S3Location"},
+        "text":{"shape":"String"},
+        "content":{"shape":"DocumentContentBlocks"}
       },
       "union":true
     },
@@ -1405,7 +1568,7 @@
       "type":"string",
       "max":2048,
       "min":1,
-      "pattern":"(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:imported-model/[a-z0-9]{12})|([0-9]{12}:provisioned-model/[a-z0-9]{12})|([0-9]{12}:(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+)))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)|([a-zA-Z0-9-:.]+)$|(^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:prompt/[0-9a-zA-Z]{10}(?::[0-9]{1,5})?))$|(^arn:aws:sagemaker:[a-z0-9-]+:[0-9]{12}:endpoint/[a-zA-Z0-9-]+$)|(^arn:aws(-[^:]+)?:bedrock:([0-9a-z-]{1,20}):([0-9]{12}):(default-)?prompt-router/[a-zA-Z0-9-:.]+$)"
+      "pattern":"(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:imported-model/[a-z0-9]{12})|([0-9]{12}:provisioned-model/[a-z0-9]{12})|([0-9]{12}:custom-model-deployment/[a-z0-9]{12})|([0-9]{12}:(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+)))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)|([a-zA-Z0-9-:.]+)$|(^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:prompt/[0-9a-zA-Z]{10}(?::[0-9]{1,5})?))$|(^arn:aws:sagemaker:[a-z0-9-]+:[0-9]{12}:endpoint/[a-zA-Z0-9-]+$)|(^arn:aws(-[^:]+)?:bedrock:([0-9a-z-]{1,20}):([0-9]{12}):(default-)?prompt-router/[a-zA-Z0-9-:.]+$)"
     },
     "InvokeModelRequest":{
       "type":"structure",

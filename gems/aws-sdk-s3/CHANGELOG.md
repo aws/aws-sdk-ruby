@@ -1,6 +1,62 @@
 Unreleased Changes
 ------------------
 
+1.193.0 (2025-07-15)
+------------------
+
+* Feature - Amazon S3 Metadata live inventory tables provide a queryable inventory of all the objects in your general purpose bucket so that you can determine the latest state of your data. To help minimize your storage costs, use journal table record expiration to set a retention period for your records.
+
+1.192.0 (2025-07-02)
+------------------
+
+* Feature - Added support for directory bucket creation with tags and bucket ARN retrieval in CreateBucket, ListDirectoryBuckets, and HeadBucket operations
+
+1.191.0 (2025-06-25)
+------------------
+
+* Feature - Adds support for additional server-side encryption mode and storage class values for accessing Amazon FSx data from Amazon S3 using S3 Access Points
+
+1.190.0 (2025-06-18)
+------------------
+
+* Feature - Added support for renaming objects within the same bucket using the new RenameObject API.
+
+1.189.1 (2025-06-10)
+------------------
+
+* Issue - Only load required `cgi` modules for Ruby 3.5.
+
+1.189.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.188.0 (2025-05-29)
+------------------
+
+* Feature - Adding checksum support for S3 PutBucketOwnershipControls API.
+
+1.187.0 (2025-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Issue - Signal data in http response listeners prior to writing, so that data can be inspected or verified before potential mutation.
+
+1.186.1 (2025-05-15)
+------------------
+* Issue - Abort multipart download if object is modified during download.
+
+1.186.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.185.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.184.0 (2025-04-28)
 ------------------
 

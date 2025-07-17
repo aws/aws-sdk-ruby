@@ -86,6 +86,15 @@ module Aws::ECR
     #   The date and time the Amazon ECR container image was pushed.
     #   @return [Time]
     #
+    # @!attribute [rw] last_in_use_at
+    #   The most recent date and time a cluster was running the image.
+    #   @return [Time]
+    #
+    # @!attribute [rw] in_use_count
+    #   The number of Amazon ECS or Amazon EKS clusters currently running
+    #   the image.
+    #   @return [Integer]
+    #
     # @!attribute [rw] registry
     #   The registry the Amazon ECR container image belongs to.
     #   @return [String]
@@ -104,6 +113,8 @@ module Aws::ECR
       :image_tags,
       :platform,
       :pushed_at,
+      :last_in_use_at,
+      :in_use_count,
       :registry,
       :repository_name)
       SENSITIVE = []
@@ -1797,8 +1808,8 @@ module Aws::ECR
     #   response element. The remaining results of the initial request can
     #   be seen by sending  another `GetLifecyclePolicyPreviewRequest`
     #   request with the returned `nextToken`  value. This value can be
-    #   between 1 and 1000. If this  parameter is not used, then
-    #   `GetLifecyclePolicyPreviewRequest` returns up to  100 results and a
+    #   between 1 and 100. If this  parameter is not used, then
+    #   `GetLifecyclePolicyPreviewRequest` returns up to 100 results and a
     #   `nextToken` value, if  applicable. This option cannot be used when
     #   you specify images with `imageIds`.
     #   @return [Integer]
@@ -3649,8 +3660,8 @@ module Aws::ECR
     #
     # @!attribute [rw] image_tag_mutability
     #   The tag mutability setting for the repository. If this parameter is
-    #   omitted, the default setting of MUTABLE will be used which will
-    #   allow image tags to be overwritten. If IMMUTABLE is specified, all
+    #   omitted, the default setting of `MUTABLE` will be used which will
+    #   allow image tags to be overwritten. If `IMMUTABLE` is specified, all
     #   image tags within the repository will be immutable which will
     #   prevent them from being overwritten.
     #   @return [String]

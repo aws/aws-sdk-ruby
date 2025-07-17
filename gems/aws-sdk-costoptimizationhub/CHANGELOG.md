@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2025-06-02)
+------------------
+
+* Feature - Support recommendations for Aurora instance and Aurora cluster storage.
+
+1.26.0 (2025-05-28)
+------------------
+
+* Feature - This release allows customers to modify their preferred commitment term and payment options.
+
+1.25.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.23.0 (2025-04-08)
 ------------------
 

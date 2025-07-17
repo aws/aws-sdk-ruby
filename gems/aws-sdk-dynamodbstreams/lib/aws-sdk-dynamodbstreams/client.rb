@@ -202,8 +202,7 @@ module Aws::DynamoDBStreams
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -510,6 +509,10 @@ module Aws::DynamoDBStreams
     #   the value that was returned for `LastEvaluatedShardId` in the previous
     #   operation.
     #
+    # @option params [Types::ShardFilter] :shard_filter
+    #   This optional field contains the filter definition for the
+    #   `DescribeStream` API.
+    #
     # @return [Types::DescribeStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeStreamOutput#stream_description #stream_description} => Types::StreamDescription
@@ -583,6 +586,10 @@ module Aws::DynamoDBStreams
     #     stream_arn: "StreamArn", # required
     #     limit: 1,
     #     exclusive_start_shard_id: "ShardId",
+    #     shard_filter: {
+    #       type: "CHILD_SHARDS", # accepts CHILD_SHARDS
+    #       shard_id: "ShardId",
+    #     },
     #   })
     #
     # @example Response structure
@@ -938,7 +945,7 @@ module Aws::DynamoDBStreams
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dynamodbstreams'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -158,6 +158,7 @@ module Aws::MWAA
       attr_accessor created_at: ::Time
       attr_accessor error: Types::UpdateError
       attr_accessor source: ::String
+      attr_accessor worker_replacement_strategy: ("FORCED" | "GRACEFUL")
       SENSITIVE: []
     end
 
@@ -285,26 +286,27 @@ module Aws::MWAA
     class UpdateEnvironmentInput
       attr_accessor name: ::String
       attr_accessor execution_role_arn: ::String
+      attr_accessor airflow_configuration_options: ::Hash[::String, ::String]
       attr_accessor airflow_version: ::String
-      attr_accessor source_bucket_arn: ::String
       attr_accessor dag_s3_path: ::String
+      attr_accessor environment_class: ::String
+      attr_accessor logging_configuration: Types::LoggingConfigurationInput
+      attr_accessor max_workers: ::Integer
+      attr_accessor min_workers: ::Integer
+      attr_accessor max_webservers: ::Integer
+      attr_accessor min_webservers: ::Integer
+      attr_accessor worker_replacement_strategy: ("FORCED" | "GRACEFUL")
+      attr_accessor network_configuration: Types::UpdateNetworkConfigurationInput
       attr_accessor plugins_s3_path: ::String
       attr_accessor plugins_s3_object_version: ::String
       attr_accessor requirements_s3_path: ::String
       attr_accessor requirements_s3_object_version: ::String
+      attr_accessor schedulers: ::Integer
+      attr_accessor source_bucket_arn: ::String
       attr_accessor startup_script_s3_path: ::String
       attr_accessor startup_script_s3_object_version: ::String
-      attr_accessor airflow_configuration_options: ::Hash[::String, ::String]
-      attr_accessor environment_class: ::String
-      attr_accessor max_workers: ::Integer
-      attr_accessor network_configuration: Types::UpdateNetworkConfigurationInput
-      attr_accessor logging_configuration: Types::LoggingConfigurationInput
-      attr_accessor weekly_maintenance_window_start: ::String
       attr_accessor webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY")
-      attr_accessor min_workers: ::Integer
-      attr_accessor schedulers: ::Integer
-      attr_accessor min_webservers: ::Integer
-      attr_accessor max_webservers: ::Integer
+      attr_accessor weekly_maintenance_window_start: ::String
       SENSITIVE: [:airflow_configuration_options]
     end
 

@@ -200,8 +200,7 @@ module Aws::QConnect
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -4014,7 +4013,7 @@ module Aws::QConnect
     # in Connect JavaScript library (amazon-q-connectjs) into your
     # applications.
     #
-    # Retrieves recommendations for the specified session. To avoid
+    #  Retrieves recommendations for the specified session. To avoid
     # retrieving the same recommendations in subsequent calls, use
     # [NotifyRecommendationsReceived][1]. This API supports long-polling
     # behavior with the `waitTimeSeconds` parameter. Short poll is the
@@ -5410,7 +5409,7 @@ module Aws::QConnect
     # in Connect JavaScript library (amazon-q-connectjs) into your
     # applications.
     #
-    # Performs a manual search against the specified assistant. To retrieve
+    #  Performs a manual search against the specified assistant. To retrieve
     # recommendations for an assistant, use [GetRecommendations][1].
     #
     #
@@ -7800,7 +7799,7 @@ module Aws::QConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qconnect'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

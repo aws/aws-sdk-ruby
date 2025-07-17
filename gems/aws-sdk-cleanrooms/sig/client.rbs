@@ -1149,6 +1149,21 @@ module Aws
                                        }?,
                                        member: {
                                          account_id: ::String
+                                       }?,
+                                       distribute: {
+                                         locations: Array[
+                                           {
+                                             s3: {
+                                               result_format: ("CSV" | "PARQUET"),
+                                               bucket: ::String,
+                                               key_prefix: ::String?,
+                                               single_file_output: bool?
+                                             }?,
+                                             member: {
+                                               account_id: ::String
+                                             }?
+                                           },
+                                         ]
                                        }?
                                      }
                                    },

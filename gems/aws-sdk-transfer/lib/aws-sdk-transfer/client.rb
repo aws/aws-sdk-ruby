@@ -200,8 +200,7 @@ module Aws::Transfer
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -491,8 +490,8 @@ module Aws::Transfer
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
-    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `PATH`.
+    #   <note markdown="1"> You can use the `HomeDirectory` parameter for `HomeDirectoryType` when
+    #   it is set to either `PATH` or `LOGICAL`.
     #
     #    </note>
     #
@@ -1279,6 +1278,28 @@ module Aws::Transfer
     #   `HomeDirectoryMapEntry` `Type` to `FILE` if you want a mapping to have
     #   a file target.
     #
+    # @option params [String] :ip_address_type
+    #   Specifies whether to use IPv4 only, or to use dual-stack (IPv4 and
+    #   IPv6) for your Transfer Family endpoint. The default value is `IPV4`.
+    #
+    #   The `IpAddressType` parameter has the following limitations:
+    #
+    #    * It cannot be changed while the server is online. You must stop the
+    #     server before modifying this parameter.
+    #
+    #   * It cannot be updated to `DUALSTACK` if the server has
+    #     `AddressAllocationIds` specified.
+    #
+    #   <note markdown="1"> When using `DUALSTACK` as the `IpAddressType`, you cannot set the
+    #   `AddressAllocationIds` parameter for the [EndpointDetails][1] for the
+    #   server.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html
+    #
     # @return [Types::CreateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateServerResponse#server_id #server_id} => String
@@ -1340,6 +1361,7 @@ module Aws::Transfer
     #     s3_storage_options: {
     #       directory_listing_optimization: "ENABLED", # accepts ENABLED, DISABLED
     #     },
+    #     ip_address_type: "IPV4", # accepts IPV4, DUALSTACK
     #   })
     #
     # @example Response structure
@@ -1370,8 +1392,8 @@ module Aws::Transfer
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
-    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `PATH`.
+    #   <note markdown="1"> You can use the `HomeDirectory` parameter for `HomeDirectoryType` when
+    #   it is set to either `PATH` or `LOGICAL`.
     #
     #    </note>
     #
@@ -2623,6 +2645,7 @@ module Aws::Transfer
     #   resp.server.s3_storage_options.directory_listing_optimization #=> String, one of "ENABLED", "DISABLED"
     #   resp.server.as_2_service_managed_egress_ip_addresses #=> Array
     #   resp.server.as_2_service_managed_egress_ip_addresses[0] #=> String
+    #   resp.server.ip_address_type #=> String, one of "IPV4", "DUALSTACK"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4348,8 +4371,8 @@ module Aws::Transfer
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
-    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `PATH`.
+    #   <note markdown="1"> You can use the `HomeDirectory` parameter for `HomeDirectoryType` when
+    #   it is set to either `PATH` or `LOGICAL`.
     #
     #    </note>
     #
@@ -5144,6 +5167,28 @@ module Aws::Transfer
     #   `HomeDirectoryMapEntry` `Type` to `FILE` if you want a mapping to have
     #   a file target.
     #
+    # @option params [String] :ip_address_type
+    #   Specifies whether to use IPv4 only, or to use dual-stack (IPv4 and
+    #   IPv6) for your Transfer Family endpoint. The default value is `IPV4`.
+    #
+    #   The `IpAddressType` parameter has the following limitations:
+    #
+    #    * It cannot be changed while the server is online. You must stop the
+    #     server before modifying this parameter.
+    #
+    #   * It cannot be updated to `DUALSTACK` if the server has
+    #     `AddressAllocationIds` specified.
+    #
+    #   <note markdown="1"> When using `DUALSTACK` as the `IpAddressType`, you cannot set the
+    #   `AddressAllocationIds` parameter for the [EndpointDetails][1] for the
+    #   server.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html
+    #
     # @return [Types::UpdateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateServerResponse#server_id #server_id} => String
@@ -5198,6 +5243,7 @@ module Aws::Transfer
     #     s3_storage_options: {
     #       directory_listing_optimization: "ENABLED", # accepts ENABLED, DISABLED
     #     },
+    #     ip_address_type: "IPV4", # accepts IPV4, DUALSTACK
     #   })
     #
     # @example Response structure
@@ -5241,8 +5287,8 @@ module Aws::Transfer
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
-    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `PATH`.
+    #   <note markdown="1"> You can use the `HomeDirectory` parameter for `HomeDirectoryType` when
+    #   it is set to either `PATH` or `LOGICAL`.
     #
     #    </note>
     #
@@ -5497,7 +5543,7 @@ module Aws::Transfer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.116.0'
+      context[:gem_version] = '1.120.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

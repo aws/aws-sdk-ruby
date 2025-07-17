@@ -904,12 +904,18 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] log_group_class
     #   Use this parameter to specify the log group class for this log
-    #   group. There are two classes:
+    #   group. There are three classes:
     #
     #   * The `Standard` log class supports all CloudWatch Logs features.
     #
     #   * The `Infrequent Access` log class supports a subset of CloudWatch
     #     Logs features and incurs lower costs.
+    #
+    #   * Use the `Delivery` log class only for delivering Lambda logs to
+    #     store in Amazon S3 or Amazon Data Firehose. Log events in log
+    #     groups in the Delivery class are kept in CloudWatch Logs for only
+    #     one day. This log class doesn't offer rich CloudWatch Logs
+    #     capabilities such as CloudWatch Logs Insights queries.
     #
     #   If you omit this parameter, the default of `STANDARD` is used.
     #
@@ -1073,7 +1079,7 @@ module Aws::CloudWatchLogs
 
     # @!attribute [rw] name
     #   The name of the delivery destination that you want to delete. You
-    #   can find a list of delivery destionation names by using the
+    #   can find a list of delivery destination names by using the
     #   [DescribeDeliveryDestinations][1] operation.
     #
     #
@@ -1297,10 +1303,23 @@ module Aws::CloudWatchLogs
     #   The name of the policy to be revoked. This parameter is required.
     #   @return [String]
     #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the CloudWatch Logs resource for which the resource
+    #   policy needs to be deleted
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_revision_id
+    #   The expected revision ID of the resource policy. Required when
+    #   deleting a resource-scoped policy to prevent concurrent
+    #   modifications.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteResourcePolicyRequest AWS API Documentation
     #
     class DeleteResourcePolicyRequest < Struct.new(
-      :policy_name)
+      :policy_name,
+      :resource_arn,
+      :expected_revision_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1385,7 +1404,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] delivery_destination_type
     #   Displays whether the delivery destination associated with this
-    #   delivery is CloudWatch Logs, Amazon S3, or Firehose.
+    #   delivery is CloudWatch Logs, Amazon S3, Firehose, or X-Ray.
     #   @return [String]
     #
     # @!attribute [rw] record_fields
@@ -1426,8 +1445,8 @@ module Aws::CloudWatchLogs
     # This structure contains information about one *delivery destination*
     # in your account. A delivery destination is an Amazon Web Services
     # resource that represents an Amazon Web Services service that logs can
-    # be sent to. CloudWatch Logs, Amazon S3, are supported as Firehose
-    # delivery destinations.
+    # be sent to. CloudWatch Logs, Amazon S3, Firehose, and X-Ray are
+    # supported as delivery destinations.
     #
     # To configure logs delivery between a supported Amazon Web Services
     # service and a destination, you must do the following:
@@ -1469,7 +1488,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] delivery_destination_type
     #   Displays whether this delivery destination is CloudWatch Logs,
-    #   Amazon S3, or Firehose.
+    #   Amazon S3, Firehose, or X-Ray.
     #   @return [String]
     #
     # @!attribute [rw] output_format
@@ -2002,7 +2021,7 @@ module Aws::CloudWatchLogs
     end
 
     # @!attribute [rw] account_identifiers
-    #   When `includeLinkedAccounts` is set to `True`, use this parameter to
+    #   When `includeLinkedAccounts` is set to `true`, use this parameter to
     #   specify the list of accounts to search. You can specify as many as
     #   20 account IDs in the array.
     #   @return [Array<String>]
@@ -2019,9 +2038,10 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_group_name_pattern
     #   If you specify a string for this parameter, the operation returns
     #   only log groups that have names that match the string based on a
-    #   case-sensitive substring search. For example, if you specify `Foo`,
-    #   log groups named `FooBar`, `aws/Foo`, and `GroupFoo` would match,
-    #   but `foo`, `F/o/o` and `Froo` would not match.
+    #   case-sensitive substring search. For example, if you specify
+    #   `DataLogs`, log groups named `DataLogs`, `aws/DataLogs`, and
+    #   `GroupDataLogs` would match, but `datalogs`, `Data/log/s` and
+    #   `Groupdata` would not match.
     #
     #   If you specify `logGroupNamePattern` in your request, then only
     #   `arn`, `creationTime`, and `logGroupName` are included in the
@@ -2044,7 +2064,7 @@ module Aws::CloudWatchLogs
     #   @return [Integer]
     #
     # @!attribute [rw] include_linked_accounts
-    #   If you are using a monitoring account, set this to `True` to have
+    #   If you are using a monitoring account, set this to `true` to have
     #   the operation return log groups in the accounts listed in
     #   `accountIdentifiers`.
     #
@@ -2052,16 +2072,28 @@ module Aws::CloudWatchLogs
     #   a null value, the operation returns all log groups in the monitoring
     #   account and all log groups in all source accounts that are linked to
     #   the monitoring account.
+    #
+    #   The default for this parameter is `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] log_group_class
-    #   Specifies the log group class for this log group. There are two
+    #   Use this parameter to limit the results to only those log groups in
+    #   the specified log group class. If you omit this parameter, log
+    #   groups of all classes can be returned.
+    #
+    #   Specifies the log group class for this log group. There are three
     #   classes:
     #
     #   * The `Standard` log class supports all CloudWatch Logs features.
     #
     #   * The `Infrequent Access` log class supports a subset of CloudWatch
     #     Logs features and incurs lower costs.
+    #
+    #   * Use the `Delivery` log class only for delivering Lambda logs to
+    #     store in Amazon S3 or Amazon Data Firehose. Log events in log
+    #     groups in the Delivery class are kept in CloudWatch Logs for only
+    #     one day. This log class doesn't offer rich CloudWatch Logs
+    #     capabilities such as CloudWatch Logs Insights queries.
     #
     #   For details about the features supported by each class, see [Log
     #   classes][1]
@@ -2070,6 +2102,18 @@ module Aws::CloudWatchLogs
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html
     #   @return [String]
+    #
+    # @!attribute [rw] log_group_identifiers
+    #   Use this array to filter the list of log groups returned. If you
+    #   specify this parameter, the only other filter that you can choose to
+    #   specify is `includeLinkedAccounts`.
+    #
+    #   If you are using this operation in a monitoring account, you can
+    #   specify the ARNs of log groups in source accounts and in the
+    #   monitoring account itself. If you are using this operation in an
+    #   account that is not a cross-account monitoring account, you can
+    #   specify only log group names in the same account as the operation.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogGroupsRequest AWS API Documentation
     #
@@ -2080,16 +2124,15 @@ module Aws::CloudWatchLogs
       :next_token,
       :limit,
       :include_linked_accounts,
-      :log_group_class)
+      :log_group_class,
+      :log_group_identifiers)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] log_groups
-    #   The log groups.
-    #
-    #   If the `retentionInDays` value is not included for a log group, then
-    #   that log group's events do not expire.
+    #   An array of structures, where each structure contains the
+    #   information about one log group.
     #   @return [Array<Types::LogGroup>]
     #
     # @!attribute [rw] next_token
@@ -2378,11 +2421,23 @@ module Aws::CloudWatchLogs
     #   call of this API.
     #   @return [Integer]
     #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the CloudWatch Logs resource for which to query the
+    #   resource policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_scope
+    #   Specifies the scope of the resource policy. Valid values are
+    #   `ACCOUNT` or `RESOURCE`. When not specified, defaults to `ACCOUNT`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeResourcePoliciesRequest AWS API Documentation
     #
     class DescribeResourcePoliciesRequest < Struct.new(
       :next_token,
-      :limit)
+      :limit,
+      :resource_arn,
+      :policy_scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3501,7 +3556,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#Grok-Patterns
+    #   [1]: https://docs.aws.amazon.com/mazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Processors.html#Grok-Patterns
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/Grok AWS API Documentation
@@ -3560,7 +3615,7 @@ module Aws::CloudWatchLogs
     #   @return [Integer]
     #
     # @!attribute [rw] message
-    #   The raw event message. Each log event can be no larger than 256 KB.
+    #   The raw event message. Each log event can be no larger than 1 MB.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/InputLogEvent AWS API Documentation
@@ -3851,6 +3906,94 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @!attribute [rw] log_group_name_pattern
+    #   Use this parameter to limit the returned log groups to only those
+    #   with names that match the pattern that you specify. This parameter
+    #   is a regular expression that can match prefixes and substrings, and
+    #   supports wildcard matching and matching multiple patterns, as in the
+    #   following examples.
+    #
+    #   * Use `^` to match log group names by prefix.
+    #
+    #   * For a substring match, specify the string to match. All matches
+    #     are case sensitive
+    #
+    #   * To match multiple patterns, separate them with a `|` as in the
+    #     example `^/aws/lambda|discovery`
+    #
+    #   You can specify as many as five different regular expression
+    #   patterns in this field, each of which must be between 3 and 24
+    #   characters. You can include the `^` symbol as many as five times,
+    #   and include the `|` symbol as many as four times.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_class
+    #   Use this parameter to limit the results to only those log groups in
+    #   the specified log group class. If you omit this parameter, log
+    #   groups of all classes can be returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_linked_accounts
+    #   If you are using a monitoring account, set this to `true` to have
+    #   the operation return log groups in the accounts listed in
+    #   `accountIdentifiers`.
+    #
+    #   If this parameter is set to `true` and `accountIdentifiers` contains
+    #   a null value, the operation returns all log groups in the monitoring
+    #   account and all log groups in all source accounts that are linked to
+    #   the monitoring account.
+    #
+    #   The default for this parameter is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] account_identifiers
+    #   When `includeLinkedAccounts` is set to `true`, use this parameter to
+    #   specify the list of accounts to search. You can specify as many as
+    #   20 account IDs in the array.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of log groups to return. If you omit this
+    #   parameter, the default is up to 50 log groups.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListLogGroupsRequest AWS API Documentation
+    #
+    class ListLogGroupsRequest < Struct.new(
+      :log_group_name_pattern,
+      :log_group_class,
+      :include_linked_accounts,
+      :account_identifiers,
+      :next_token,
+      :limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] log_groups
+    #   An array of structures, where each structure contains the
+    #   information about one log group.
+    #   @return [Array<Types::LogGroupSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListLogGroupsResponse AWS API Documentation
+    #
+    class ListLogGroupsResponse < Struct.new(
+      :log_groups,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of the resource that you want to view tags for.
     #
@@ -3920,7 +4063,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-listToMap
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Processors.html#CloudWatch-Logs-Transformation-listToMap
     #
     # @!attribute [rw] source
     #   The key in the log event that has a list of objects that will be
@@ -4205,16 +4348,22 @@ module Aws::CloudWatchLogs
     #   @return [Array<String>]
     #
     # @!attribute [rw] log_group_class
-    #   This specifies the log group class for this log group. There are two
-    #   classes:
+    #   This specifies the log group class for this log group. There are
+    #   three classes:
     #
     #   * The `Standard` log class supports all CloudWatch Logs features.
     #
     #   * The `Infrequent Access` log class supports a subset of CloudWatch
     #     Logs features and incurs lower costs.
     #
-    #   For details about the features supported by each class, see [Log
-    #   classes][1]
+    #   * Use the `Delivery` log class only for delivering Lambda logs to
+    #     store in Amazon S3 or Amazon Data Firehose. Log events in log
+    #     groups in the Delivery class are kept in CloudWatch Logs for only
+    #     one day. This log class doesn't offer rich CloudWatch Logs
+    #     capabilities such as CloudWatch Logs Insights queries.
+    #
+    #   For details about the features supported by the Standard and
+    #   Infrequent Access classes, see [Log classes][1]
     #
     #
     #
@@ -4277,6 +4426,36 @@ module Aws::CloudWatchLogs
     class LogGroupField < Struct.new(
       :name,
       :percent)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This structure contains information about one log group in your
+    # account.
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_arn
+    #   The Amazon Resource Name (ARN) of the log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_class
+    #   The log group class for this log group. For details about the
+    #   features supported by each log group class, see [Log classes][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogGroupSummary AWS API Documentation
+    #
+    class LogGroupSummary < Struct.new(
+      :log_group_name,
+      :log_group_arn,
+      :log_group_class)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5266,6 +5445,42 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # This processor converts logs into [Open Cybersecurity Schema Framework
+    # (OCSF)][1] events.
+    #
+    # For more information about this processor including examples, see [
+    # parseToOSCF][2] in the *CloudWatch Logs User Guide*.
+    #
+    #
+    #
+    # [1]: https://ocsf.io
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseToOCSF
+    #
+    # @!attribute [rw] source
+    #   The path to the field in the log event that you want to parse. If
+    #   you omit this value, the whole log message is parsed.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_source
+    #   Specify the service or process that produces the log events that
+    #   will be converted with this processor.
+    #   @return [String]
+    #
+    # @!attribute [rw] ocsf_version
+    #   Specify which version of the OCSF schema to use for the transformed
+    #   log events.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ParseToOCSF AWS API Documentation
+    #
+    class ParseToOCSF < Struct.new(
+      :source,
+      :event_source,
+      :ocsf_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Use this processor to parse Amazon VPC vended logs, extract fields,
     # and and convert them into a JSON format. This processor always
     # processes the entire log event message.
@@ -5525,6 +5740,11 @@ module Aws::CloudWatchLogs
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseRoute53
     #   @return [Types::ParseRoute53]
     #
+    # @!attribute [rw] parse_to_ocsf
+    #   Use this parameter to convert logs into Open Cybersecurity Schema
+    #   (OCSF) format.
+    #   @return [Types::ParseToOCSF]
+    #
     # @!attribute [rw] parse_postgres
     #   Use this parameter to include the [ parsePostGres][1] processor in
     #   your transformer.
@@ -5631,6 +5851,7 @@ module Aws::CloudWatchLogs
       :parse_json,
       :parse_key_value,
       :parse_route_53,
+      :parse_to_ocsf,
       :parse_postgres,
       :parse_vpc,
       :parse_waf,
@@ -5937,7 +6158,33 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] delivery_destination_configuration
     #   A structure that contains the ARN of the Amazon Web Services
     #   resource that will receive the logs.
+    #
+    #   <note markdown="1"> `deliveryDestinationConfiguration` is required for CloudWatch Logs,
+    #   Amazon S3, Firehose log delivery destinations and not required for
+    #   X-Ray trace delivery destinations. `deliveryDestinationType` is
+    #   needed for X-Ray trace delivery destinations but not required for
+    #   other logs delivery destinations.
+    #
+    #    </note>
     #   @return [Types::DeliveryDestinationConfiguration]
+    #
+    # @!attribute [rw] delivery_destination_type
+    #   The type of delivery destination. This parameter specifies the
+    #   target service where log data will be delivered. Valid values
+    #   include:
+    #
+    #   * `S3` - Amazon S3 for long-term storage and analytics
+    #
+    #   * `CWL` - CloudWatch Logs for centralized log management
+    #
+    #   * `FH` - Amazon Kinesis Data Firehose for real-time data streaming
+    #
+    #   * `XRAY` - Amazon Web Services X-Ray for distributed tracing and
+    #     application monitoring
+    #
+    #   The delivery destination type determines the format and
+    #   configuration options available for log delivery.
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   An optional list of key-value pairs to associate with the resource.
@@ -5956,6 +6203,7 @@ module Aws::CloudWatchLogs
       :name,
       :output_format,
       :delivery_destination_configuration,
+      :delivery_destination_type,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -5988,7 +6236,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_type
     #   Defines the type of log that the source is sending.
     #
-    #   * For Amazon Bedrock, the valid value is `APPLICATION_LOGS`.
+    #   * For Amazon Bedrock, the valid value is `APPLICATION_LOGS` and
+    #     `TRACES`.
     #
     #   * For CloudFront, the valid value is `ACCESS_LOGS`.
     #
@@ -6001,16 +6250,24 @@ module Aws::CloudWatchLogs
     #     `AD_DECISION_SERVER_LOGS`, `MANIFEST_SERVICE_LOGS`, and
     #     `TRANSCODE_LOGS`.
     #
+    #   * For Entity Resolution, the valid value is `WORKFLOW_LOGS`.
+    #
     #   * For IAM Identity Center, the valid value is `ERROR_LOGS`.
+    #
+    #   * For PCS, the valid values are `PCS_SCHEDULER_LOGS` and
+    #     `PCS_JOBCOMP_LOGS`.
     #
     #   * For Amazon Q, the valid value is `EVENT_LOGS`.
     #
-    #   * For Amazon SES mail manager, the valid value is `APPLICATION_LOG`.
+    #   * For Amazon SES mail manager, the valid values are
+    #     `APPLICATION_LOG` and `TRAFFIC_POLICY_DEBUG_LOGS`.
     #
     #   * For Amazon WorkMail, the valid values are `ACCESS_CONTROL_LOGS`,
     #     `AUTHENTICATION_LOGS`, `WORKMAIL_AVAILABILITY_PROVIDER_LOGS`,
     #     `WORKMAIL_MAILBOX_ACCESS_LOGS`, and
     #     `WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS`.
+    #
+    #   * For Amazon VPC Route Server, the valid value is `EVENT_LOGS`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -6471,11 +6728,24 @@ module Aws::CloudWatchLogs
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount
     #   @return [String]
     #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the CloudWatch Logs resource to which the resource policy
+    #   needs to be added or attached. Currently only supports LogGroup ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_revision_id
+    #   The expected revision ID of the resource policy. Required when
+    #   `resourceArn` is provided to prevent concurrent modifications. Use
+    #   `null` when creating a resource policy for the first time.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutResourcePolicyRequest AWS API Documentation
     #
     class PutResourcePolicyRequest < Struct.new(
       :policy_name,
-      :policy_document)
+      :policy_document,
+      :resource_arn,
+      :expected_revision_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6484,10 +6754,16 @@ module Aws::CloudWatchLogs
     #   The new policy.
     #   @return [Types::ResourcePolicy]
     #
+    # @!attribute [rw] revision_id
+    #   The revision ID of the created or updated resource policy. Only
+    #   returned for resource-scoped policies.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutResourcePolicyResponse AWS API Documentation
     #
     class PutResourcePolicyResponse < Struct.new(
-      :resource_policy)
+      :resource_policy,
+      :revision_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7012,12 +7288,30 @@ module Aws::CloudWatchLogs
     #   the number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
     #   @return [Integer]
     #
+    # @!attribute [rw] policy_scope
+    #   Specifies scope of the resource policy. Valid values are ACCOUNT or
+    #   RESOURCE.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the CloudWatch Logs resource to which the resource policy
+    #   is attached. Only populated for resource-scoped policies.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID of the resource policy. Only populated for
+    #   resource-scoped policies.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ResourcePolicy AWS API Documentation
     #
     class ResourcePolicy < Struct.new(
       :policy_name,
       :policy_document,
-      :last_updated_time)
+      :last_updated_time,
+      :policy_scope,
+      :resource_arn,
+      :revision_id)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -200,8 +200,7 @@ module Aws::IoTFleetWise
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -2225,7 +2224,7 @@ module Aws::IoTFleetWise
     #   resp.campaigns #=> Array
     #   resp.campaigns[0].campaign_name #=> String
     #   resp.campaigns[0].vehicle_name #=> String
-    #   resp.campaigns[0].status #=> String, one of "CREATED", "READY", "HEALTHY", "SUSPENDED", "DELETING"
+    #   resp.campaigns[0].status #=> String, one of "CREATED", "READY", "HEALTHY", "SUSPENDED", "DELETING", "READY_FOR_CHECKIN"
     #   resp.next_token #=> String
     #
     # @overload get_vehicle_status(params = {})
@@ -4248,7 +4247,7 @@ module Aws::IoTFleetWise
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotfleetwise'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

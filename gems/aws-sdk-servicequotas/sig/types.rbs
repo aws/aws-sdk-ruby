@@ -24,6 +24,14 @@ module Aws::ServiceQuotas
     class AssociateServiceQuotaTemplateResponse < Aws::EmptyStructure
     end
 
+    class CreateSupportCaseRequest
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSupportCaseResponse < Aws::EmptyStructure
+    end
+
     class DeleteServiceQuotaIncreaseRequestFromTemplateRequest
       attr_accessor service_code: ::String
       attr_accessor quota_code: ::String

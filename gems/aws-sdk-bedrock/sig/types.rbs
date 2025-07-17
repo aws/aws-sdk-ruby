@@ -13,6 +13,12 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class AgreementAvailability
+      attr_accessor status: ("AVAILABLE" | "PENDING" | "NOT_AVAILABLE" | "ERROR")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
     class AutomatedEvaluationConfig
       attr_accessor dataset_metric_configs: ::Array[Types::EvaluationDatasetMetricConfig]
       attr_accessor evaluator_model_config: Types::EvaluatorModelConfig
@@ -85,6 +91,35 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class CreateCustomModelDeploymentRequest
+      attr_accessor model_deployment_name: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCustomModelDeploymentResponse
+      attr_accessor custom_model_deployment_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCustomModelRequest
+      attr_accessor model_name: ::String
+      attr_accessor model_source_config: Types::ModelDataSource
+      attr_accessor model_kms_key_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor model_tags: ::Array[Types::Tag]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCustomModelResponse
+      attr_accessor model_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateEvaluationJobRequest
       attr_accessor job_name: ::String
       attr_accessor job_description: ::String
@@ -104,6 +139,17 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class CreateFoundationModelAgreementRequest
+      attr_accessor offer_token: ::String
+      attr_accessor model_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFoundationModelAgreementResponse
+      attr_accessor model_id: ::String
+      SENSITIVE: []
+    end
+
     class CreateGuardrailRequest
       attr_accessor name: ::String
       attr_accessor description: ::String
@@ -112,6 +158,7 @@ module Aws::Bedrock
       attr_accessor word_policy_config: Types::GuardrailWordPolicyConfig
       attr_accessor sensitive_information_policy_config: Types::GuardrailSensitiveInformationPolicyConfig
       attr_accessor contextual_grounding_policy_config: Types::GuardrailContextualGroundingPolicyConfig
+      attr_accessor cross_region_config: Types::GuardrailCrossRegionConfig
       attr_accessor blocked_input_messaging: ::String
       attr_accessor blocked_outputs_messaging: ::String
       attr_accessor kms_key_id: ::String
@@ -191,7 +238,7 @@ module Aws::Bedrock
       attr_accessor role_arn: ::String
       attr_accessor client_request_token: ::String
       attr_accessor base_model_identifier: ::String
-      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION")
+      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
       attr_accessor custom_model_kms_key_id: ::String
       attr_accessor job_tags: ::Array[Types::Tag]
       attr_accessor custom_model_tags: ::Array[Types::Tag]
@@ -293,14 +340,26 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class CustomModelDeploymentSummary
+      attr_accessor custom_model_deployment_arn: ::String
+      attr_accessor custom_model_deployment_name: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("Creating" | "Active" | "Failed")
+      attr_accessor last_updated_at: ::Time
+      attr_accessor failure_message: ::String
+      SENSITIVE: []
+    end
+
     class CustomModelSummary
       attr_accessor model_arn: ::String
       attr_accessor model_name: ::String
       attr_accessor creation_time: ::Time
       attr_accessor base_model_arn: ::String
       attr_accessor base_model_name: ::String
-      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION")
+      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
       attr_accessor owner_account_id: ::String
+      attr_accessor model_status: ("Active" | "Creating" | "Failed")
       SENSITIVE: []
     end
 
@@ -321,12 +380,35 @@ module Aws::Bedrock
       end
     end
 
+    class DataProcessingDetails
+      attr_accessor status: ("InProgress" | "Completed" | "Stopping" | "Stopped" | "Failed" | "NotStarted")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteCustomModelDeploymentRequest
+      attr_accessor custom_model_deployment_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCustomModelDeploymentResponse < Aws::EmptyStructure
+    end
+
     class DeleteCustomModelRequest
       attr_accessor model_identifier: ::String
       SENSITIVE: []
     end
 
     class DeleteCustomModelResponse < Aws::EmptyStructure
+    end
+
+    class DeleteFoundationModelAgreementRequest
+      attr_accessor model_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFoundationModelAgreementResponse < Aws::EmptyStructure
     end
 
     class DeleteGuardrailRequest
@@ -390,6 +472,14 @@ module Aws::Bedrock
     end
 
     class DeregisterMarketplaceModelEndpointResponse < Aws::EmptyStructure
+    end
+
+    class DimensionalPriceRate
+      attr_accessor dimension: ::String
+      attr_accessor price: ::String
+      attr_accessor description: ::String
+      attr_accessor unit: ::String
+      SENSITIVE: []
     end
 
     class DistillationConfig
@@ -582,6 +672,11 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class FieldForReranking
+      attr_accessor field_name: ::String
+      SENSITIVE: []
+    end
+
     class FilterAttribute
       attr_accessor key: ::String
       attr_accessor value: untyped
@@ -629,6 +724,23 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class GetCustomModelDeploymentRequest
+      attr_accessor custom_model_deployment_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetCustomModelDeploymentResponse
+      attr_accessor custom_model_deployment_arn: ::String
+      attr_accessor model_deployment_name: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("Creating" | "Active" | "Failed")
+      attr_accessor description: ::String
+      attr_accessor failure_message: ::String
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class GetCustomModelRequest
       attr_accessor model_identifier: ::String
       SENSITIVE: []
@@ -640,7 +752,7 @@ module Aws::Bedrock
       attr_accessor job_name: ::String
       attr_accessor job_arn: ::String
       attr_accessor base_model_arn: ::String
-      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION")
+      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
       attr_accessor model_kms_key_arn: ::String
       attr_accessor hyper_parameters: ::Hash[::String, ::String]
       attr_accessor training_data_config: Types::TrainingDataConfig
@@ -650,6 +762,8 @@ module Aws::Bedrock
       attr_accessor validation_metrics: ::Array[Types::ValidatorMetric]
       attr_accessor creation_time: ::Time
       attr_accessor customization_config: Types::CustomizationConfig
+      attr_accessor model_status: ("Active" | "Creating" | "Failed")
+      attr_accessor failure_message: ::String
       SENSITIVE: []
     end
 
@@ -674,6 +788,20 @@ module Aws::Bedrock
       attr_accessor last_modified_time: ::Time
       attr_accessor failure_messages: ::Array[::String]
       SENSITIVE: [:job_description]
+    end
+
+    class GetFoundationModelAvailabilityRequest
+      attr_accessor model_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFoundationModelAvailabilityResponse
+      attr_accessor model_id: ::String
+      attr_accessor agreement_availability: Types::AgreementAvailability
+      attr_accessor authorization_status: ("AUTHORIZED" | "NOT_AUTHORIZED")
+      attr_accessor entitlement_availability: ("AVAILABLE" | "NOT_AVAILABLE")
+      attr_accessor region_availability: ("AVAILABLE" | "NOT_AVAILABLE")
+      SENSITIVE: []
     end
 
     class GetFoundationModelRequest
@@ -704,6 +832,7 @@ module Aws::Bedrock
       attr_accessor word_policy: Types::GuardrailWordPolicy
       attr_accessor sensitive_information_policy: Types::GuardrailSensitiveInformationPolicy
       attr_accessor contextual_grounding_policy: Types::GuardrailContextualGroundingPolicy
+      attr_accessor cross_region_details: Types::GuardrailCrossRegionDetails
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor status_reasons: ::Array[::String]
@@ -794,6 +923,7 @@ module Aws::Bedrock
       attr_accessor client_request_token: ::String
       attr_accessor role_arn: ::String
       attr_accessor status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor status_details: Types::StatusDetails
       attr_accessor failure_message: ::String
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
@@ -803,7 +933,7 @@ module Aws::Bedrock
       attr_accessor training_data_config: Types::TrainingDataConfig
       attr_accessor validation_data_config: Types::ValidationDataConfig
       attr_accessor output_data_config: Types::OutputDataConfig
-      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION")
+      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
       attr_accessor output_model_kms_key_arn: ::String
       attr_accessor training_metrics: Types::TrainingMetrics
       attr_accessor validation_metrics: ::Array[Types::ValidatorMetric]
@@ -907,6 +1037,14 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class GetUseCaseForModelAccessRequest < Aws::EmptyStructure
+    end
+
+    class GetUseCaseForModelAccessResponse
+      attr_accessor form_data: ::String
+      SENSITIVE: []
+    end
+
     class GuardrailConfiguration
       attr_accessor guardrail_id: ::String
       attr_accessor guardrail_version: ::String
@@ -939,13 +1077,25 @@ module Aws::Bedrock
       SENSITIVE: [:input_action, :output_action]
     end
 
+    class GuardrailContentFiltersTier
+      attr_accessor tier_name: ("CLASSIC" | "STANDARD")
+      SENSITIVE: [:tier_name]
+    end
+
+    class GuardrailContentFiltersTierConfig
+      attr_accessor tier_name: ("CLASSIC" | "STANDARD")
+      SENSITIVE: [:tier_name]
+    end
+
     class GuardrailContentPolicy
       attr_accessor filters: ::Array[Types::GuardrailContentFilter]
+      attr_accessor tier: Types::GuardrailContentFiltersTier
       SENSITIVE: []
     end
 
     class GuardrailContentPolicyConfig
       attr_accessor filters_config: ::Array[Types::GuardrailContentFilterConfig]
+      attr_accessor tier_config: Types::GuardrailContentFiltersTierConfig
       SENSITIVE: []
     end
 
@@ -972,6 +1122,17 @@ module Aws::Bedrock
 
     class GuardrailContextualGroundingPolicyConfig
       attr_accessor filters_config: ::Array[Types::GuardrailContextualGroundingFilterConfig]
+      SENSITIVE: []
+    end
+
+    class GuardrailCrossRegionConfig
+      attr_accessor guardrail_profile_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GuardrailCrossRegionDetails
+      attr_accessor guardrail_profile_id: ::String
+      attr_accessor guardrail_profile_arn: ::String
       SENSITIVE: []
     end
 
@@ -1058,6 +1219,7 @@ module Aws::Bedrock
       attr_accessor version: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor cross_region_details: Types::GuardrailCrossRegionDetails
       SENSITIVE: [:name, :description]
     end
 
@@ -1087,12 +1249,24 @@ module Aws::Bedrock
 
     class GuardrailTopicPolicy
       attr_accessor topics: ::Array[Types::GuardrailTopic]
+      attr_accessor tier: Types::GuardrailTopicsTier
       SENSITIVE: []
     end
 
     class GuardrailTopicPolicyConfig
       attr_accessor topics_config: ::Array[Types::GuardrailTopicConfig]
+      attr_accessor tier_config: Types::GuardrailTopicsTierConfig
       SENSITIVE: []
+    end
+
+    class GuardrailTopicsTier
+      attr_accessor tier_name: ("CLASSIC" | "STANDARD")
+      SENSITIVE: [:tier_name]
+    end
+
+    class GuardrailTopicsTierConfig
+      attr_accessor tier_name: ("CLASSIC" | "STANDARD")
+      SENSITIVE: [:tier_name]
     end
 
     class GuardrailWord
@@ -1143,6 +1317,12 @@ module Aws::Bedrock
       attr_accessor flow_definition_arn: ::String
       attr_accessor instructions: ::String
       SENSITIVE: [:instructions]
+    end
+
+    class ImplicitFilterConfiguration
+      attr_accessor metadata_attributes: ::Array[Types::MetadataAttributeSchema]
+      attr_accessor model_arn: ::String
+      SENSITIVE: []
     end
 
     class ImportedModelSummary
@@ -1243,7 +1423,33 @@ module Aws::Bedrock
       attr_accessor number_of_results: ::Integer
       attr_accessor override_search_type: ("HYBRID" | "SEMANTIC")
       attr_accessor filter: Types::RetrievalFilter
+      attr_accessor implicit_filter_configuration: Types::ImplicitFilterConfiguration
+      attr_accessor reranking_configuration: Types::VectorSearchRerankingConfiguration
       SENSITIVE: [:filter]
+    end
+
+    class LegalTerm
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomModelDeploymentsRequest
+      attr_accessor created_before: ::Time
+      attr_accessor created_after: ::Time
+      attr_accessor name_contains: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ("CreationTime")
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      attr_accessor status_equals: ("Creating" | "Active" | "Failed")
+      attr_accessor model_arn_equals: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomModelDeploymentsResponse
+      attr_accessor next_token: ::String
+      attr_accessor model_deployment_summaries: ::Array[Types::CustomModelDeploymentSummary]
+      SENSITIVE: []
     end
 
     class ListCustomModelsRequest
@@ -1257,6 +1463,7 @@ module Aws::Bedrock
       attr_accessor sort_by: ("CreationTime")
       attr_accessor sort_order: ("Ascending" | "Descending")
       attr_accessor is_owned: bool
+      attr_accessor model_status: ("Active" | "Creating" | "Failed")
       SENSITIVE: []
     end
 
@@ -1282,6 +1489,18 @@ module Aws::Bedrock
     class ListEvaluationJobsResponse
       attr_accessor next_token: ::String
       attr_accessor job_summaries: ::Array[Types::EvaluationSummary]
+      SENSITIVE: []
+    end
+
+    class ListFoundationModelAgreementOffersRequest
+      attr_accessor model_id: ::String
+      attr_accessor offer_type: ("ALL" | "PUBLIC")
+      SENSITIVE: []
+    end
+
+    class ListFoundationModelAgreementOffersResponse
+      attr_accessor model_id: ::String
+      attr_accessor offers: ::Array[Types::Offer]
       SENSITIVE: []
     end
 
@@ -1503,6 +1722,19 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class MetadataAttributeSchema
+      attr_accessor key: ::String
+      attr_accessor type: ("STRING" | "NUMBER" | "BOOLEAN" | "STRING_LIST")
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class MetadataConfigurationForReranking
+      attr_accessor selection_mode: ("SELECTIVE" | "ALL")
+      attr_accessor selective_mode_configuration: Types::RerankingMetadataSelectiveModeConfiguration
+      SENSITIVE: []
+    end
+
     class ModelCopyJobSummary
       attr_accessor job_arn: ::String
       attr_accessor status: ("InProgress" | "Completed" | "Failed")
@@ -1523,12 +1755,13 @@ module Aws::Bedrock
       attr_accessor base_model_arn: ::String
       attr_accessor job_name: ::String
       attr_accessor status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor status_details: Types::StatusDetails
       attr_accessor last_modified_time: ::Time
       attr_accessor creation_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor custom_model_arn: ::String
       attr_accessor custom_model_name: ::String
-      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION")
+      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
       SENSITIVE: []
     end
 
@@ -1610,6 +1843,13 @@ module Aws::Bedrock
       SENSITIVE: [:message]
     end
 
+    class Offer
+      attr_accessor offer_id: ::String
+      attr_accessor offer_token: ::String
+      attr_accessor term_details: Types::TermDetails
+      SENSITIVE: []
+    end
+
     class OrchestrationConfiguration
       attr_accessor query_transformation_configuration: Types::QueryTransformationConfiguration
       SENSITIVE: []
@@ -1622,6 +1862,11 @@ module Aws::Bedrock
 
     class PerformanceConfiguration
       attr_accessor latency: ("standard" | "optimized")
+      SENSITIVE: []
+    end
+
+    class PricingTerm
+      attr_accessor rate_card: ::Array[Types::DimensionalPriceRate]
       SENSITIVE: []
     end
 
@@ -1671,6 +1916,14 @@ module Aws::Bedrock
     end
 
     class PutModelInvocationLoggingConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class PutUseCaseForModelAccessRequest
+      attr_accessor form_data: ::String
+      SENSITIVE: []
+    end
+
+    class PutUseCaseForModelAccessResponse < Aws::EmptyStructure
     end
 
     class QueryTransformationConfiguration
@@ -1746,6 +1999,20 @@ module Aws::Bedrock
       class OrAll < RequestMetadataFilters
       end
       class Unknown < RequestMetadataFilters
+      end
+    end
+
+    class RerankingMetadataSelectiveModeConfiguration
+      attr_accessor fields_to_include: ::Array[Types::FieldForReranking]
+      attr_accessor fields_to_exclude: ::Array[Types::FieldForReranking]
+      attr_accessor unknown: untyped
+      SENSITIVE: [:fields_to_include, :fields_to_exclude]
+
+      class FieldsToInclude < RerankingMetadataSelectiveModeConfiguration
+      end
+      class FieldsToExclude < RerankingMetadataSelectiveModeConfiguration
+      end
+      class Unknown < RerankingMetadataSelectiveModeConfiguration
       end
     end
 
@@ -1854,6 +2121,13 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class StatusDetails
+      attr_accessor validation_details: Types::ValidationDetails
+      attr_accessor data_processing_details: Types::DataProcessingDetails
+      attr_accessor training_details: Types::TrainingDetails
+      SENSITIVE: []
+    end
+
     class StopEvaluationJobRequest
       attr_accessor job_identifier: ::String
       SENSITIVE: [:job_identifier]
@@ -1878,6 +2152,11 @@ module Aws::Bedrock
     class StopModelInvocationJobResponse < Aws::EmptyStructure
     end
 
+    class SupportTerm
+      attr_accessor refund_policy_description: ::String
+      SENSITIVE: []
+    end
+
     class Tag
       attr_accessor key: ::String
       attr_accessor value: ::String
@@ -1896,6 +2175,14 @@ module Aws::Bedrock
     class TeacherModelConfig
       attr_accessor teacher_model_identifier: ::String
       attr_accessor max_response_length_for_inference: ::Integer
+      SENSITIVE: []
+    end
+
+    class TermDetails
+      attr_accessor usage_based_pricing_term: Types::PricingTerm
+      attr_accessor legal_term: Types::LegalTerm
+      attr_accessor support_term: Types::SupportTerm
+      attr_accessor validity_term: Types::ValidityTerm
       SENSITIVE: []
     end
 
@@ -1924,6 +2211,13 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class TrainingDetails
+      attr_accessor status: ("InProgress" | "Completed" | "Stopping" | "Stopped" | "Failed" | "NotStarted")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
     class TrainingMetrics
       attr_accessor training_loss: ::Float
       SENSITIVE: []
@@ -1947,6 +2241,7 @@ module Aws::Bedrock
       attr_accessor word_policy_config: Types::GuardrailWordPolicyConfig
       attr_accessor sensitive_information_policy_config: Types::GuardrailSensitiveInformationPolicyConfig
       attr_accessor contextual_grounding_policy_config: Types::GuardrailContextualGroundingPolicyConfig
+      attr_accessor cross_region_config: Types::GuardrailCrossRegionConfig
       attr_accessor blocked_input_messaging: ::String
       attr_accessor blocked_outputs_messaging: ::String
       attr_accessor kms_key_id: ::String
@@ -1988,6 +2283,13 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class ValidationDetails
+      attr_accessor status: ("InProgress" | "Completed" | "Stopping" | "Stopped" | "Failed" | "NotStarted")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
     class ValidationException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -2000,6 +2302,30 @@ module Aws::Bedrock
 
     class ValidatorMetric
       attr_accessor validation_loss: ::Float
+      SENSITIVE: []
+    end
+
+    class ValidityTerm
+      attr_accessor agreement_duration: ::String
+      SENSITIVE: []
+    end
+
+    class VectorSearchBedrockRerankingConfiguration
+      attr_accessor model_configuration: Types::VectorSearchBedrockRerankingModelConfiguration
+      attr_accessor number_of_reranked_results: ::Integer
+      attr_accessor metadata_configuration: Types::MetadataConfigurationForReranking
+      SENSITIVE: []
+    end
+
+    class VectorSearchBedrockRerankingModelConfiguration
+      attr_accessor model_arn: ::String
+      attr_accessor additional_model_request_fields: ::Hash[::String, untyped]
+      SENSITIVE: []
+    end
+
+    class VectorSearchRerankingConfiguration
+      attr_accessor type: ("BEDROCK_RERANKING_MODEL")
+      attr_accessor bedrock_reranking_configuration: Types::VectorSearchBedrockRerankingConfiguration
       SENSITIVE: []
     end
 

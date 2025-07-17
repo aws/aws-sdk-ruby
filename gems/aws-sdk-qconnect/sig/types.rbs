@@ -2493,6 +2493,11 @@ module Aws::QConnect
       SENSITIVE: []
     end
 
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]

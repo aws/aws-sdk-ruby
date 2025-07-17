@@ -95,6 +95,8 @@ module Aws::EFS
       attr_accessor file_system_id: ::String
       attr_accessor subnet_id: ::String
       attr_accessor ip_address: ::String
+      attr_accessor ipv_6_address: ::String
+      attr_accessor ip_address_type: ("IPV4_ONLY" | "IPV6_ONLY" | "DUAL_STACK")
       attr_accessor security_groups: ::Array[::String]
       SENSITIVE: []
     end
@@ -432,6 +434,7 @@ module Aws::EFS
       attr_accessor subnet_id: ::String
       attr_accessor life_cycle_state: ("creating" | "available" | "updating" | "deleting" | "deleted" | "error")
       attr_accessor ip_address: ::String
+      attr_accessor ipv_6_address: ::String
       attr_accessor network_interface_id: ::String
       attr_accessor availability_zone_id: ::String
       attr_accessor availability_zone_name: ::String

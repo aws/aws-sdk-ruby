@@ -27,8 +27,8 @@ module Aws::ARCZonalShift
     # for a managed resource and information about the autoshift.
     #
     # For more information, see [How zonal autoshift and practice runs
-    # work][1] in the Amazon Route 53 Application Recovery Controller
-    # Developer Guide.
+    # work][1] in the Amazon Application Recovery Controller Developer
+    # Guide.
     #
     #
     #
@@ -51,8 +51,8 @@ module Aws::ARCZonalShift
     #   shifts &gt; autoshifts &gt; practice run zonal shifts.
     #
     #   For more information, see [How zonal autoshift and practice runs
-    #   work][1] in the Amazon Route 53 Application Recovery Controller
-    #   Developer Guide.
+    #   work][1] in the Amazon Application Recovery Controller Developer
+    #   Guide.
     #
     #
     #
@@ -96,6 +96,8 @@ module Aws::ARCZonalShift
     # Web Services ends the autoshift, and traffic for the resource is no
     # longer directed to the other Availability Zones in the Region.
     #
+    # You can stop an autoshift for a resource by disabling zonal autoshift.
+    #
     # @!attribute [rw] away_from
     #   The Availability Zone (for example, `use1-az1`) that traffic is
     #   shifted away from for a resource when Amazon Web Services starts an
@@ -125,6 +127,82 @@ module Aws::ARCZonalShift
       :end_time,
       :start_time,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] zonal_shift_id
+    #   The identifier of a practice run zonal shift in Amazon Application
+    #   Recovery Controller that you want to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/CancelPracticeRunRequest AWS API Documentation
+    #
+    class CancelPracticeRunRequest < Struct.new(
+      :zonal_shift_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] zonal_shift_id
+    #   The identifier of the practice run zonal shift in Amazon Application
+    #   Recovery Controller that was canceled.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   The identifier for the resource that you canceled a practice run
+    #   zonal shift for. The identifier is the Amazon Resource Name (ARN)
+    #   for the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] away_from
+    #   The Availability Zone (for example, `use1-az1`) that traffic was
+    #   moved away from for a resource that you specified for the practice
+    #   run.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiry_time
+    #   The expiry time (expiration time) for an on-demand practice run
+    #   zonal shift is 30 minutes from the time when you start the practice
+    #   run, unless you cancel it before that time. However, be aware that
+    #   the `expiryTime` field for practice run zonal shifts always has a
+    #   value of 1 minute.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   The time (UTC) when the zonal shift starts.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   A status for the practice run that you canceled (expected status is
+    #   **CANCELED**).
+    #
+    #   The `Status` for a practice run zonal shift can have one of the
+    #   following values:
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   The initial comment that you entered about the practice run. Be
+    #   aware that this comment can be overwritten by Amazon Web Services if
+    #   the automatic check for balanced capacity fails. For more
+    #   information, see [ Capacity checks for practice runs][1] in the
+    #   Amazon Application Recovery Controller Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.how-it-works.capacity-check.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/CancelPracticeRunResponse AWS API Documentation
+    #
+    class CancelPracticeRunResponse < Struct.new(
+      :zonal_shift_id,
+      :resource_identifier,
+      :away_from,
+      :expiry_time,
+      :start_time,
+      :status,
+      :comment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -176,17 +254,12 @@ module Aws::ARCZonalShift
     # Control condition alarms do not apply for autoshifts.
     #
     # For more information, see [ Considerations when you configure zonal
-    # autoshift][1] in the Amazon Route 53 Application Recovery Controller
-    # Developer Guide.
+    # autoshift][1] in the Amazon Application Recovery Controller Developer
+    # Guide.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.considerations.html
-    #
-    # @!attribute [rw] alarm_identifier
-    #   The Amazon Resource Name (ARN) for an Amazon CloudWatch alarm that
-    #   you specify as a control condition for a practice run.
-    #   @return [String]
     #
     # @!attribute [rw] type
     #   The type of alarm specified for a practice run. You can only specify
@@ -194,27 +267,43 @@ module Aws::ARCZonalShift
     #   is `CLOUDWATCH`.
     #   @return [String]
     #
+    # @!attribute [rw] alarm_identifier
+    #   The Amazon Resource Name (ARN) for an Amazon CloudWatch alarm that
+    #   you specify as a control condition for a practice run.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/ControlCondition AWS API Documentation
     #
     class ControlCondition < Struct.new(
-      :alarm_identifier,
-      :type)
+      :type,
+      :alarm_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] blocked_dates
-    #   Optionally, you can block ARC from starting practice runs for a
-    #   resource on specific calendar dates.
+    # @!attribute [rw] resource_identifier
+    #   The identifier of the resource that Amazon Web Services shifts
+    #   traffic for with a practice run zonal shift. The identifier is the
+    #   Amazon Resource Name (ARN) for the resource.
     #
-    #   The format for blocked dates is: YYYY-MM-DD. Keep in mind, when you
-    #   specify dates, that dates and times for practice runs are in UTC.
-    #   Separate multiple blocked dates with spaces.
+    #   Amazon Application Recovery Controller currently supports enabling
+    #   the following resources for zonal shift and zonal autoshift:
     #
-    #   For example, if you have an application update scheduled to launch
-    #   on May 1, 2024, and you don't want practice runs to shift traffic
-    #   away at that time, you could set a blocked date for `2024-05-01`.
-    #   @return [Array<String>]
+    #   * [Amazon EC2 Auto Scaling groups][1]
+    #
+    #   * [Amazon Elastic Kubernetes Service][2]
+    #
+    #   * [Application Load Balancer][3]
+    #
+    #   * [Network Load Balancer][4]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.ec2-auto-scaling-groups.html
+    #   [2]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.eks.html
+    #   [3]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.app-load-balancers.html
+    #   [4]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.network-load-balancers.html
+    #   @return [String]
     #
     # @!attribute [rw] blocked_windows
     #   Optionally, you can block ARC from starting practice runs for
@@ -230,6 +319,19 @@ module Aws::ARCZonalShift
     #   week. For this scenario, you might set the following recurring days
     #   and times as blocked windows, for example: `MON-20:30-21:30
     #   WED-20:30-21:30 FRI-20:30-21:30`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] blocked_dates
+    #   Optionally, you can block ARC from starting practice runs for a
+    #   resource on specific calendar dates.
+    #
+    #   The format for blocked dates is: YYYY-MM-DD. Keep in mind, when you
+    #   specify dates, that dates and times for practice runs are in UTC.
+    #   Separate multiple blocked dates with spaces.
+    #
+    #   For example, if you have an application update scheduled to launch
+    #   on May 1, 2024, and you don't want practice runs to shift traffic
+    #   away at that time, you could set a blocked date for `2024-05-01`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] blocking_alarms
@@ -252,24 +354,14 @@ module Aws::ARCZonalShift
     #   to the Availability Zone.
     #   @return [Array<Types::ControlCondition>]
     #
-    # @!attribute [rw] resource_identifier
-    #   The identifier of the resource that Amazon Web Services shifts
-    #   traffic for with a practice run zonal shift. The identifier is the
-    #   Amazon Resource Name (ARN) for the resource.
-    #
-    #   At this time, supported resources are Network Load Balancers and
-    #   Application Load Balancers with cross-zone load balancing turned
-    #   off.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/CreatePracticeRunConfigurationRequest AWS API Documentation
     #
     class CreatePracticeRunConfigurationRequest < Struct.new(
-      :blocked_dates,
+      :resource_identifier,
       :blocked_windows,
+      :blocked_dates,
       :blocking_alarms,
-      :outcome_alarms,
-      :resource_identifier)
+      :outcome_alarms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -283,12 +375,6 @@ module Aws::ARCZonalShift
     #   The name of the resource that you configured the practice run for.
     #   @return [String]
     #
-    # @!attribute [rw] practice_run_configuration
-    #   A practice run configuration for a resource. Configurations include
-    #   the outcome alarm that you specify for practice runs, and,
-    #   optionally, a blocking alarm and blocking dates and windows.
-    #   @return [Types::PracticeRunConfiguration]
-    #
     # @!attribute [rw] zonal_autoshift_status
     #   The status for zonal autoshift for a resource. When you specify
     #   `ENABLED` for the autoshift status, Amazon Web Services shifts
@@ -301,13 +387,19 @@ module Aws::ARCZonalShift
     #   runs for the resource.
     #   @return [String]
     #
+    # @!attribute [rw] practice_run_configuration
+    #   A practice run configuration for a resource. Configurations include
+    #   the outcome alarm that you specify for practice runs, and,
+    #   optionally, a blocking alarm and blocking dates and windows.
+    #   @return [Types::PracticeRunConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/CreatePracticeRunConfigurationResponse AWS API Documentation
     #
     class CreatePracticeRunConfigurationResponse < Struct.new(
       :arn,
       :name,
-      :practice_run_configuration,
-      :zonal_autoshift_status)
+      :zonal_autoshift_status,
+      :practice_run_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -376,9 +468,23 @@ module Aws::ARCZonalShift
     #   traffic for. The identifier is the Amazon Resource Name (ARN) for
     #   the resource.
     #
-    #   At this time, supported resources are Network Load Balancers and
-    #   Application Load Balancers with cross-zone load balancing turned
-    #   off.
+    #   Amazon Application Recovery Controller currently supports enabling
+    #   the following resources for zonal shift and zonal autoshift:
+    #
+    #   * [Amazon EC2 Auto Scaling groups][1]
+    #
+    #   * [Amazon Elastic Kubernetes Service][2]
+    #
+    #   * [Application Load Balancer][3]
+    #
+    #   * [Network Load Balancer][4]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.ec2-auto-scaling-groups.html
+    #   [2]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.eks.html
+    #   [3]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.app-load-balancers.html
+    #   [4]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.network-load-balancers.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/GetManagedResourceRequest AWS API Documentation
@@ -389,6 +495,14 @@ module Aws::ARCZonalShift
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the resource.
+    #   @return [String]
+    #
     # @!attribute [rw] applied_weights
     #   A collection of key-value pairs that indicate whether resources are
     #   active in Availability Zones or not. The key name is the
@@ -396,17 +510,13 @@ module Aws::ARCZonalShift
     #   0.
     #   @return [Hash<String,Float>]
     #
-    # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) for the resource.
-    #   @return [String]
+    # @!attribute [rw] zonal_shifts
+    #   The zonal shifts that are currently active for a resource.
+    #   @return [Array<Types::ZonalShiftInResource>]
     #
     # @!attribute [rw] autoshifts
     #   An array of the autoshifts that are active for the resource.
     #   @return [Array<Types::AutoshiftInResource>]
-    #
-    # @!attribute [rw] name
-    #   The name of the resource.
-    #   @return [String]
     #
     # @!attribute [rw] practice_run_configuration
     #   The practice run configuration for zonal autoshift that's
@@ -421,20 +531,16 @@ module Aws::ARCZonalShift
     #   Zone that could potentially affect customers.
     #   @return [String]
     #
-    # @!attribute [rw] zonal_shifts
-    #   The zonal shifts that are currently active for a resource.
-    #   @return [Array<Types::ZonalShiftInResource>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/GetManagedResourceResponse AWS API Documentation
     #
     class GetManagedResourceResponse < Struct.new(
-      :applied_weights,
       :arn,
-      :autoshifts,
       :name,
+      :applied_weights,
+      :zonal_shifts,
+      :autoshifts,
       :practice_run_configuration,
-      :zonal_autoshift_status,
-      :zonal_shifts)
+      :zonal_autoshift_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -452,10 +558,6 @@ module Aws::ARCZonalShift
       include Aws::Structure
     end
 
-    # @!attribute [rw] max_results
-    #   The number of objects that you want to return with this call.
-    #   @return [Integer]
-    #
     # @!attribute [rw] next_token
     #   Specifies that you want to receive the next page of results. Valid
     #   only if you received a `nextToken` response in the previous request.
@@ -468,12 +570,16 @@ module Aws::ARCZonalShift
     #   The status of the autoshift.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   The number of objects that you want to return with this call.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/ListAutoshiftsRequest AWS API Documentation
     #
     class ListAutoshiftsRequest < Struct.new(
-      :max_results,
       :next_token,
-      :status)
+      :status,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -499,10 +605,6 @@ module Aws::ARCZonalShift
       include Aws::Structure
     end
 
-    # @!attribute [rw] max_results
-    #   The number of objects that you want to return with this call.
-    #   @return [Integer]
-    #
     # @!attribute [rw] next_token
     #   Specifies that you want to receive the next page of results. Valid
     #   only if you received a `nextToken` response in the previous request.
@@ -511,11 +613,15 @@ module Aws::ARCZonalShift
     #   response to request the next page of results.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   The number of objects that you want to return with this call.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/ListManagedResourcesRequest AWS API Documentation
     #
     class ListManagedResourcesRequest < Struct.new(
-      :max_results,
-      :next_token)
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -541,10 +647,6 @@ module Aws::ARCZonalShift
       include Aws::Structure
     end
 
-    # @!attribute [rw] max_results
-    #   The number of objects that you want to return with this call.
-    #   @return [Integer]
-    #
     # @!attribute [rw] next_token
     #   Specifies that you want to receive the next page of results. Valid
     #   only if you received a `nextToken` response in the previous request.
@@ -553,18 +655,12 @@ module Aws::ARCZonalShift
     #   response to request the next page of results.
     #   @return [String]
     #
-    # @!attribute [rw] resource_identifier
-    #   The identifier for the resource that you want to list zonal shifts
-    #   for. The identifier is the Amazon Resource Name (ARN) for the
-    #   resource.
-    #   @return [String]
-    #
     # @!attribute [rw] status
     #   A status for a zonal shift.
     #
     #   The `Status` for a zonal shift can have one of the following values:
     #
-    #   * **ACTIVE**: The zonal shift has been started and active.
+    #   * **ACTIVE**: The zonal shift has been started and is active.
     #
     #   * **EXPIRED**: The zonal shift has expired (the expiry time was
     #     exceeded).
@@ -572,13 +668,23 @@ module Aws::ARCZonalShift
     #   * **CANCELED**: The zonal shift was canceled.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   The number of objects that you want to return with this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resource_identifier
+    #   The identifier for the resource that you want to list zonal shifts
+    #   for. The identifier is the Amazon Resource Name (ARN) for the
+    #   resource.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/ListZonalShiftsRequest AWS API Documentation
     #
     class ListZonalShiftsRequest < Struct.new(
-      :max_results,
       :next_token,
-      :resource_identifier,
-      :status)
+      :status,
+      :max_results,
+      :resource_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -607,16 +713,28 @@ module Aws::ARCZonalShift
     # A complex structure for a managed resource in an Amazon Web Services
     # account with information about zonal shifts and autoshifts.
     #
-    # A managed resource is a load balancer that has been registered with
-    # ARC by Elastic Load Balancing. You can start a zonal shift in ARC for
-    # a managed resource to temporarily move traffic for the resource away
-    # from an Availability Zone in an Amazon Web Services Region. You can
-    # also configure zonal autoshift for a managed resource.
+    # You can start a zonal shift in ARC for a managed resource to
+    # temporarily move traffic for the resource away from an Availability
+    # Zone in an Amazon Web Services Region. You can also configure zonal
+    # autoshift for a managed resource.
     #
-    # <note markdown="1"> At this time, managed resources are Network Load Balancers and
-    # Application Load Balancers with cross-zone load balancing turned off.
+    # <note markdown="1"> At this time, managed resources are Amazon EC2 Auto Scaling groups,
+    # Amazon Elastic Kubernetes Service, Network Load Balancers, and
+    # Application Load Balancer.
     #
     #  </note>
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the managed resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the managed resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zones
+    #   The Availability Zones that a resource is deployed in.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] applied_weights
     #   A collection of key-value pairs that indicate whether resources are
@@ -625,20 +743,18 @@ module Aws::ARCZonalShift
     #   0.
     #   @return [Hash<String,Float>]
     #
-    # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) for the managed resource.
-    #   @return [String]
+    # @!attribute [rw] zonal_shifts
+    #   An array of the zonal shifts for a resource.
+    #   @return [Array<Types::ZonalShiftInResource>]
     #
     # @!attribute [rw] autoshifts
     #   An array of the autoshifts that have been completed for a resource.
     #   @return [Array<Types::AutoshiftInResource>]
     #
-    # @!attribute [rw] availability_zones
-    #   The Availability Zones that a resource is deployed in.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] name
-    #   The name of the managed resource.
+    # @!attribute [rw] zonal_autoshift_status
+    #   The status of autoshift for a resource. When you configure zonal
+    #   autoshift for a resource, you can set the value of the status to
+    #   `ENABLED` or `DISABLED`.
     #   @return [String]
     #
     # @!attribute [rw] practice_run_status
@@ -653,27 +769,17 @@ module Aws::ARCZonalShift
     #   `ENABLED` or `DISABLED`.
     #   @return [String]
     #
-    # @!attribute [rw] zonal_autoshift_status
-    #   The status of autoshift for a resource. When you configure zonal
-    #   autoshift for a resource, you can set the value of the status to
-    #   `ENABLED` or `DISABLED`.
-    #   @return [String]
-    #
-    # @!attribute [rw] zonal_shifts
-    #   An array of the zonal shifts for a resource.
-    #   @return [Array<Types::ZonalShiftInResource>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/ManagedResourceSummary AWS API Documentation
     #
     class ManagedResourceSummary < Struct.new(
-      :applied_weights,
       :arn,
-      :autoshifts,
-      :availability_zones,
       :name,
-      :practice_run_status,
+      :availability_zones,
+      :applied_weights,
+      :zonal_shifts,
+      :autoshifts,
       :zonal_autoshift_status,
-      :zonal_shifts)
+      :practice_run_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -694,23 +800,6 @@ module Aws::ARCZonalShift
     # for the resource. A practice run configuration is required when zonal
     # autoshift is enabled.
     #
-    # @!attribute [rw] blocked_dates
-    #   An array of one or more dates that you can specify when Amazon Web
-    #   Services does not start practice runs for a resource.
-    #
-    #   Specify blocked dates, in UTC, in the format `YYYY-MM-DD`, separated
-    #   by spaces.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] blocked_windows
-    #   An array of one or more windows of days and times that you can block
-    #   ARC from starting practice runs for a resource.
-    #
-    #   Specify the blocked windows in UTC, using the format
-    #   `DAY:HH:MM-DAY:HH:MM`, separated by spaces. For example,
-    #   `MON:18:30-MON:19:30 TUE:18:30-TUE:19:30`.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] blocking_alarms
     #   The *blocking alarm* for practice runs is an optional alarm that you
     #   can specify that blocks practice runs when the alarm is in an
@@ -722,13 +811,30 @@ module Aws::ARCZonalShift
     #   that ends a practice run when the alarm is in an `ALARM` state.
     #   @return [Array<Types::ControlCondition>]
     #
+    # @!attribute [rw] blocked_windows
+    #   An array of one or more windows of days and times that you can block
+    #   ARC from starting practice runs for a resource.
+    #
+    #   Specify the blocked windows in UTC, using the format
+    #   `DAY:HH:MM-DAY:HH:MM`, separated by spaces. For example,
+    #   `MON:18:30-MON:19:30 TUE:18:30-TUE:19:30`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] blocked_dates
+    #   An array of one or more dates that you can specify when Amazon Web
+    #   Services does not start practice runs for a resource.
+    #
+    #   Specify blocked dates, in UTC, in the format `YYYY-MM-DD`, separated
+    #   by spaces.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/PracticeRunConfiguration AWS API Documentation
     #
     class PracticeRunConfiguration < Struct.new(
-      :blocked_dates,
-      :blocked_windows,
       :blocking_alarms,
-      :outcome_alarms)
+      :outcome_alarms,
+      :blocked_windows,
+      :blocked_dates)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -746,18 +852,127 @@ module Aws::ARCZonalShift
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_identifier
+    #   The identifier for the resource that you want to start a practice
+    #   run zonal shift for. The identifier is the Amazon Resource Name
+    #   (ARN) for the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] away_from
+    #   The Availability Zone (for example, `use1-az1`) that traffic is
+    #   shifted away from for the resource that you specify for the practice
+    #   run.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   The initial comment that you enter about the practice run. Be aware
+    #   that this comment can be overwritten by Amazon Web Services if the
+    #   automatic check for balanced capacity fails. For more information,
+    #   see [ Capacity checks for practice runs][1] in the Amazon
+    #   Application Recovery Controller Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.how-it-works.capacity-check.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/StartPracticeRunRequest AWS API Documentation
+    #
+    class StartPracticeRunRequest < Struct.new(
+      :resource_identifier,
+      :away_from,
+      :comment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] zonal_shift_id
+    #   The identifier of a practice run zonal shift.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   The identifier for the resource that you want to shift traffic for.
+    #   The identifier is the Amazon Resource Name (ARN) for the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] away_from
+    #   The Availability Zone (for example, `use1-az1`) that traffic is
+    #   shifted away from for the resource that you specify for the practice
+    #   run.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiry_time
+    #   The expiry time (expiration time) for an on-demand practice run
+    #   zonal shift is 30 minutes from the time when you start the practice
+    #   run, unless you cancel it before that time. However, be aware that
+    #   the `expiryTime` field for practice run zonal shifts always has a
+    #   value of 1 minute.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   The time (UTC) when the zonal shift starts.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   A status for the practice run (expected status is **ACTIVE**).
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   The initial comment that you enter about the practice run. Be aware
+    #   that this comment can be overwritten by Amazon Web Services if the
+    #   automatic check for balanced capacity fails. For more information,
+    #   see [ Capacity checks for practice runs][1] in the Amazon
+    #   Application Recovery Controller Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.how-it-works.capacity-check.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/StartPracticeRunResponse AWS API Documentation
+    #
+    class StartPracticeRunResponse < Struct.new(
+      :zonal_shift_id,
+      :resource_identifier,
+      :away_from,
+      :expiry_time,
+      :start_time,
+      :status,
+      :comment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_identifier
+    #   The identifier for the resource that Amazon Web Services shifts
+    #   traffic for. The identifier is the Amazon Resource Name (ARN) for
+    #   the resource.
+    #
+    #   Amazon Application Recovery Controller currently supports enabling
+    #   the following resources for zonal shift and zonal autoshift:
+    #
+    #   * [Amazon EC2 Auto Scaling groups][1]
+    #
+    #   * [Amazon Elastic Kubernetes Service][2]
+    #
+    #   * [Application Load Balancer][3]
+    #
+    #   * [Network Load Balancer][4]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.ec2-auto-scaling-groups.html
+    #   [2]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.eks.html
+    #   [3]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.app-load-balancers.html
+    #   [4]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.network-load-balancers.html
+    #   @return [String]
+    #
     # @!attribute [rw] away_from
     #   The Availability Zone (for example, `use1-az1`) that traffic is
     #   moved away from for a resource when you start a zonal shift. Until
     #   the zonal shift expires or you cancel it, traffic for the resource
     #   is instead moved to other Availability Zones in the Amazon Web
     #   Services Region.
-    #   @return [String]
-    #
-    # @!attribute [rw] comment
-    #   A comment that you enter about the zonal shift. Only the latest
-    #   comment is retained; no comment history is maintained. A new comment
-    #   overwrites any existing comment string.
     #   @return [String]
     #
     # @!attribute [rw] expires_in
@@ -782,23 +997,19 @@ module Aws::ARCZonalShift
     #   means the zonal shift expires in 120 minutes (2 hours).
     #   @return [String]
     #
-    # @!attribute [rw] resource_identifier
-    #   The identifier for the resource that Amazon Web Services shifts
-    #   traffic for. The identifier is the Amazon Resource Name (ARN) for
-    #   the resource.
-    #
-    #   At this time, supported resources are Network Load Balancers and
-    #   Application Load Balancers with cross-zone load balancing turned
-    #   off.
+    # @!attribute [rw] comment
+    #   A comment that you enter about the zonal shift. Only the latest
+    #   comment is retained; no comment history is maintained. A new comment
+    #   overwrites any existing comment string.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/StartZonalShiftRequest AWS API Documentation
     #
     class StartZonalShiftRequest < Struct.new(
+      :resource_identifier,
       :away_from,
-      :comment,
       :expires_in,
-      :resource_identifier)
+      :comment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -844,19 +1055,11 @@ module Aws::ARCZonalShift
       include Aws::Structure
     end
 
-    # @!attribute [rw] blocked_dates
-    #   Add, change, or remove blocked dates for a practice run in zonal
-    #   autoshift.
-    #
-    #   Optionally, you can block practice runs for specific calendar dates.
-    #   The format for blocked dates is: YYYY-MM-DD. Keep in mind, when you
-    #   specify dates, that dates and times for practice runs are in UTC.
-    #   Separate multiple blocked dates with spaces.
-    #
-    #   For example, if you have an application update scheduled to launch
-    #   on May 1, 2024, and you don't want practice runs to shift traffic
-    #   away at that time, you could set a blocked date for `2024-05-01`.
-    #   @return [Array<String>]
+    # @!attribute [rw] resource_identifier
+    #   The identifier for the resource that you want to update the practice
+    #   run configuration for. The identifier is the Amazon Resource Name
+    #   (ARN) for the resource.
+    #   @return [String]
     #
     # @!attribute [rw] blocked_windows
     #   Add, change, or remove windows of days and times for when you can,
@@ -874,6 +1077,20 @@ module Aws::ARCZonalShift
     #   WED-20:30-21:30 FRI-20:30-21:30`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] blocked_dates
+    #   Add, change, or remove blocked dates for a practice run in zonal
+    #   autoshift.
+    #
+    #   Optionally, you can block practice runs for specific calendar dates.
+    #   The format for blocked dates is: YYYY-MM-DD. Keep in mind, when you
+    #   specify dates, that dates and times for practice runs are in UTC.
+    #   Separate multiple blocked dates with spaces.
+    #
+    #   For example, if you have an application update scheduled to launch
+    #   on May 1, 2024, and you don't want practice runs to shift traffic
+    #   away at that time, you could set a blocked date for `2024-05-01`.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] blocking_alarms
     #   Add, change, or remove the Amazon CloudWatch alarm that you
     #   optionally specify as the blocking alarm for practice runs.
@@ -884,20 +1101,14 @@ module Aws::ARCZonalShift
     #   practice runs.
     #   @return [Array<Types::ControlCondition>]
     #
-    # @!attribute [rw] resource_identifier
-    #   The identifier for the resource that you want to update the practice
-    #   run configuration for. The identifier is the Amazon Resource Name
-    #   (ARN) for the resource.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/UpdatePracticeRunConfigurationRequest AWS API Documentation
     #
     class UpdatePracticeRunConfigurationRequest < Struct.new(
-      :blocked_dates,
+      :resource_identifier,
       :blocked_windows,
+      :blocked_dates,
       :blocking_alarms,
-      :outcome_alarms,
-      :resource_identifier)
+      :outcome_alarms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -911,22 +1122,22 @@ module Aws::ARCZonalShift
     #   The name of the resource that you updated the practice run for.
     #   @return [String]
     #
-    # @!attribute [rw] practice_run_configuration
-    #   The practice run configuration that was updated.
-    #   @return [Types::PracticeRunConfiguration]
-    #
     # @!attribute [rw] zonal_autoshift_status
     #   The zonal autoshift status for the resource that you updated the
     #   practice run for.
     #   @return [String]
+    #
+    # @!attribute [rw] practice_run_configuration
+    #   The practice run configuration that was updated.
+    #   @return [Types::PracticeRunConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/UpdatePracticeRunConfigurationResponse AWS API Documentation
     #
     class UpdatePracticeRunConfigurationResponse < Struct.new(
       :arn,
       :name,
-      :practice_run_configuration,
-      :zonal_autoshift_status)
+      :zonal_autoshift_status,
+      :practice_run_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -973,6 +1184,10 @@ module Aws::ARCZonalShift
       include Aws::Structure
     end
 
+    # @!attribute [rw] zonal_shift_id
+    #   The identifier of a zonal shift.
+    #   @return [String]
+    #
     # @!attribute [rw] comment
     #   A comment that you enter about the zonal shift. Only the latest
     #   comment is retained; no comment history is maintained. A new comment
@@ -1001,16 +1216,12 @@ module Aws::ARCZonalShift
     #   means the zonal shift expires in 120 minutes (2 hours).
     #   @return [String]
     #
-    # @!attribute [rw] zonal_shift_id
-    #   The identifier of a zonal shift.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/UpdateZonalShiftRequest AWS API Documentation
     #
     class UpdateZonalShiftRequest < Struct.new(
+      :zonal_shift_id,
       :comment,
-      :expires_in,
-      :zonal_shift_id)
+      :expires_in)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1034,18 +1245,40 @@ module Aws::ARCZonalShift
       include Aws::Structure
     end
 
+    # @!attribute [rw] zonal_shift_id
+    #   The identifier of a zonal shift.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   The identifier for the resource that Amazon Web Services shifts
+    #   traffic for. The identifier is the Amazon Resource Name (ARN) for
+    #   the resource.
+    #
+    #   Amazon Application Recovery Controller currently supports enabling
+    #   the following resources for zonal shift and zonal autoshift:
+    #
+    #   * [Amazon EC2 Auto Scaling groups][1]
+    #
+    #   * [Amazon Elastic Kubernetes Service][2]
+    #
+    #   * [Application Load Balancer][3]
+    #
+    #   * [Network Load Balancer][4]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.ec2-auto-scaling-groups.html
+    #   [2]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.eks.html
+    #   [3]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.app-load-balancers.html
+    #   [4]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.network-load-balancers.html
+    #   @return [String]
+    #
     # @!attribute [rw] away_from
     #   The Availability Zone (for example, `use1-az1`) that traffic is
     #   moved away from for a resource when you start a zonal shift. Until
     #   the zonal shift expires or you cancel it, traffic for the resource
     #   is instead moved to other Availability Zones in the Amazon Web
     #   Services Region.
-    #   @return [String]
-    #
-    # @!attribute [rw] comment
-    #   A comment that you enter about the zonal shift. Only the latest
-    #   comment is retained; no comment history is maintained. A new comment
-    #   overwrites any existing comment string.
     #   @return [String]
     #
     # @!attribute [rw] expiry_time
@@ -1063,16 +1296,6 @@ module Aws::ARCZonalShift
     #   in.
     #   @return [Time]
     #
-    # @!attribute [rw] resource_identifier
-    #   The identifier for the resource that Amazon Web Services shifts
-    #   traffic for. The identifier is the Amazon Resource Name (ARN) for
-    #   the resource.
-    #
-    #   At this time, supported resources are Network Load Balancers and
-    #   Application Load Balancers with cross-zone load balancing turned
-    #   off.
-    #   @return [String]
-    #
     # @!attribute [rw] start_time
     #   The time (UTC) when the zonal shift starts.
     #   @return [Time]
@@ -1082,7 +1305,7 @@ module Aws::ARCZonalShift
     #
     #   The `Status` for a zonal shift can have one of the following values:
     #
-    #   * **ACTIVE:** The zonal shift has been started and active.
+    #   * **ACTIVE:** The zonal shift has been started and is active.
     #
     #   * **EXPIRED:** The zonal shift has expired (the expiry time was
     #     exceeded).
@@ -1090,20 +1313,22 @@ module Aws::ARCZonalShift
     #   * **CANCELED:** The zonal shift was canceled.
     #   @return [String]
     #
-    # @!attribute [rw] zonal_shift_id
-    #   The identifier of a zonal shift.
+    # @!attribute [rw] comment
+    #   A comment that you enter about the zonal shift. Only the latest
+    #   comment is retained; no comment history is maintained. A new comment
+    #   overwrites any existing comment string.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/ZonalShift AWS API Documentation
     #
     class ZonalShift < Struct.new(
-      :away_from,
-      :comment,
-      :expiry_time,
+      :zonal_shift_id,
       :resource_identifier,
+      :away_from,
+      :expiry_time,
       :start_time,
       :status,
-      :zonal_shift_id)
+      :comment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1128,12 +1353,39 @@ module Aws::ARCZonalShift
     #   shifts &gt; autoshifts &gt; practice run zonal shifts.
     #
     #   For more information, see [How zonal autoshift and practice runs
-    #   work][1] in the Amazon Route 53 Application Recovery Controller
-    #   Developer Guide.
+    #   work][1] in the Amazon Application Recovery Controller Developer
+    #   Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.how-it-works.html
+    #   @return [String]
+    #
+    # @!attribute [rw] zonal_shift_id
+    #   The identifier of a zonal shift.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   The identifier for the resource to include in a zonal shift. The
+    #   identifier is the Amazon Resource Name (ARN) for the resource.
+    #
+    #   Amazon Application Recovery Controller currently supports enabling
+    #   the following resources for zonal shift and zonal autoshift:
+    #
+    #   * [Amazon EC2 Auto Scaling groups][1]
+    #
+    #   * [Amazon Elastic Kubernetes Service][2]
+    #
+    #   * [Application Load Balancer][3]
+    #
+    #   * [Network Load Balancer][4]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.ec2-auto-scaling-groups.html
+    #   [2]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.eks.html
+    #   [3]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.app-load-balancers.html
+    #   [4]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.network-load-balancers.html
     #   @return [String]
     #
     # @!attribute [rw] away_from
@@ -1142,12 +1394,6 @@ module Aws::ARCZonalShift
     #   the zonal shift expires or you cancel it, traffic for the resource
     #   is instead moved to other Availability Zones in the Amazon Web
     #   Services Region.
-    #   @return [String]
-    #
-    # @!attribute [rw] comment
-    #   A comment that you enter for a customer-initiated zonal shift. Only
-    #   the latest comment is retained; no comment history is maintained.
-    #   That is, a new comment overwrites any existing comment string.
     #   @return [String]
     #
     # @!attribute [rw] expiry_time
@@ -1164,6 +1410,20 @@ module Aws::ARCZonalShift
     #   update the zonal shift to specify another length of time to expire
     #   in.
     #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   The time (UTC) when the zonal shift starts.
+    #   @return [Time]
+    #
+    # @!attribute [rw] comment
+    #   A comment that you enter for a customer-initiated zonal shift. Only
+    #   the latest comment is retained; no comment history is maintained.
+    #   That is, a new comment overwrites any existing comment string.
+    #   @return [String]
+    #
+    # @!attribute [rw] shift_type
+    #   Defines the zonal shift type.
+    #   @return [String]
     #
     # @!attribute [rw] practice_run_outcome
     #   The outcome, or end state, returned for a practice run. The
@@ -1186,56 +1446,39 @@ module Aws::ARCZonalShift
     #     practice run, and the practice run was not interrupted before it
     #     completed.
     #
+    #   * **CAPACITY\_CHECK\_FAILED:** The check for balanced capacity
+    #     across Availability Zones for your load balancing and Auto Scaling
+    #     group resources failed.
+    #
     #   For more information about practice run outcomes, see [
     #   Considerations when you configure zonal autoshift][1] in the Amazon
-    #   Route 53 Application Recovery Controller Developer Guide.
+    #   Application Recovery Controller Developer Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.configure.html
     #   @return [String]
     #
-    # @!attribute [rw] resource_identifier
-    #   The identifier for the resource to include in a zonal shift. The
-    #   identifier is the Amazon Resource Name (ARN) for the resource.
-    #
-    #   At this time, you can only start a zonal shift for Network Load
-    #   Balancers and Application Load Balancers with cross-zone load
-    #   balancing turned off.
-    #   @return [String]
-    #
-    # @!attribute [rw] shift_type
-    #   Defines the zonal shift type.
-    #   @return [String]
-    #
-    # @!attribute [rw] start_time
-    #   The time (UTC) when the zonal shift starts.
-    #   @return [Time]
-    #
-    # @!attribute [rw] zonal_shift_id
-    #   The identifier of a zonal shift.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/ZonalShiftInResource AWS API Documentation
     #
     class ZonalShiftInResource < Struct.new(
       :applied_status,
-      :away_from,
-      :comment,
-      :expiry_time,
-      :practice_run_outcome,
+      :zonal_shift_id,
       :resource_identifier,
-      :shift_type,
+      :away_from,
+      :expiry_time,
       :start_time,
-      :zonal_shift_id)
+      :comment,
+      :shift_type,
+      :practice_run_outcome)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Lists information about zonal shifts in Amazon Route 53 Application
-    # Recovery Controller, including zonal shifts that you start yourself
-    # and zonal shifts that ARC starts on your behalf for practice runs with
-    # zonal autoshift.
+    # Lists information about zonal shifts in Amazon Application Recovery
+    # Controller, including zonal shifts that you start yourself and zonal
+    # shifts that ARC starts on your behalf for practice runs with zonal
+    # autoshift.
     #
     # Zonal shifts are temporary, including customer-initiated zonal shifts
     # and the zonal autoshift practice run zonal shifts that ARC starts
@@ -1243,18 +1486,39 @@ module Aws::ARCZonalShift
     # active for up to three days (72 hours). A practice run zonal shift has
     # a 30 minute duration.
     #
+    # @!attribute [rw] zonal_shift_id
+    #   The identifier of a zonal shift.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   The identifier for the resource to include in a zonal shift. The
+    #   identifier is the Amazon Resource Name (ARN) for the resource.
+    #
+    #   Amazon Application Recovery Controller currently supports enabling
+    #   the following resources for zonal shift and zonal autoshift:
+    #
+    #   * [Amazon EC2 Auto Scaling groups][1]
+    #
+    #   * [Amazon Elastic Kubernetes Service][2]
+    #
+    #   * [Application Load Balancers][3]
+    #
+    #   * [Network Load Balancers][4]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.ec2-auto-scaling-groups.html
+    #   [2]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.eks.html
+    #   [3]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.app-load-balancers.html
+    #   [4]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.network-load-balancers.html
+    #   @return [String]
+    #
     # @!attribute [rw] away_from
     #   The Availability Zone (for example, `use1-az1`) that traffic is
     #   moved away from for a resource when you start a zonal shift. Until
     #   the zonal shift expires or you cancel it, traffic for the resource
     #   is instead moved to other Availability Zones in the Amazon Web
     #   Services Region.
-    #   @return [String]
-    #
-    # @!attribute [rw] comment
-    #   A comment that you enter about the zonal shift. Only the latest
-    #   comment is retained; no comment history is maintained. That is, a
-    #   new comment overwrites any existing comment string.
     #   @return [String]
     #
     # @!attribute [rw] expiry_time
@@ -1271,6 +1535,33 @@ module Aws::ARCZonalShift
     #   update the zonal shift to specify another length of time to expire
     #   in.
     #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   The time (UTC) when the zonal shift starts.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   A status for a zonal shift.
+    #
+    #   The `Status` for a zonal shift can have one of the following values:
+    #
+    #   * **ACTIVE:** The zonal shift has been started and is active.
+    #
+    #   * **EXPIRED:** The zonal shift has expired (the expiry time was
+    #     exceeded).
+    #
+    #   * **CANCELED:** The zonal shift was canceled.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   A comment that you enter about the zonal shift. Only the latest
+    #   comment is retained; no comment history is maintained. That is, a
+    #   new comment overwrites any existing comment string.
+    #   @return [String]
+    #
+    # @!attribute [rw] shift_type
+    #   Defines the zonal shift type.
+    #   @return [String]
     #
     # @!attribute [rw] practice_run_outcome
     #   The outcome, or end state, of a practice run. The following values
@@ -1292,61 +1583,31 @@ module Aws::ARCZonalShift
     #     practice run, and the practice run was not interrupted before it
     #     completed.
     #
+    #   * **CAPACITY\_CHECK\_FAILED:** The check for balanced capacity
+    #     across Availability Zones for your load balancing and Auto Scaling
+    #     group resources failed.
+    #
     #   For more information about practice run outcomes, see [
     #   Considerations when you configure zonal autoshift][1] in the Amazon
-    #   Route 53 Application Recovery Controller Developer Guide.
+    #   Application Recovery Controller Developer Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.configure.html
     #   @return [String]
     #
-    # @!attribute [rw] resource_identifier
-    #   The identifier for the resource to include in a zonal shift. The
-    #   identifier is the Amazon Resource Name (ARN) for the resource.
-    #
-    #   At this time, you can only start a zonal shift for Network Load
-    #   Balancers and Application Load Balancers with cross-zone load
-    #   balancing turned off.
-    #   @return [String]
-    #
-    # @!attribute [rw] shift_type
-    #   Defines the zonal shift type.
-    #   @return [String]
-    #
-    # @!attribute [rw] start_time
-    #   The time (UTC) when the zonal shift starts.
-    #   @return [Time]
-    #
-    # @!attribute [rw] status
-    #   A status for a zonal shift.
-    #
-    #   The `Status` for a zonal shift can have one of the following values:
-    #
-    #   * **ACTIVE:** The zonal shift has been started and active.
-    #
-    #   * **EXPIRED:** The zonal shift has expired (the expiry time was
-    #     exceeded).
-    #
-    #   * **CANCELED:** The zonal shift was canceled.
-    #   @return [String]
-    #
-    # @!attribute [rw] zonal_shift_id
-    #   The identifier of a zonal shift.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/ZonalShiftSummary AWS API Documentation
     #
     class ZonalShiftSummary < Struct.new(
-      :away_from,
-      :comment,
-      :expiry_time,
-      :practice_run_outcome,
+      :zonal_shift_id,
       :resource_identifier,
-      :shift_type,
+      :away_from,
+      :expiry_time,
       :start_time,
       :status,
-      :zonal_shift_id)
+      :comment,
+      :shift_type,
+      :practice_run_outcome)
       SENSITIVE = []
       include Aws::Structure
     end

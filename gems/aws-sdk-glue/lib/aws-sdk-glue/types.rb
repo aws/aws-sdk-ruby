@@ -2536,6 +2536,11 @@ module Aws::Glue
     #   Amazon S3.
     #   @return [Types::S3CsvSource]
     #
+    # @!attribute [rw] s3_excel_source
+    #   Defines configuration parameters for reading Excel files from Amazon
+    #   S3.
+    #   @return [Types::S3ExcelSource]
+    #
     # @!attribute [rw] s3_json_source
     #   Specifies a JSON data store stored in Amazon S3.
     #   @return [Types::S3JsonSource]
@@ -2579,9 +2584,19 @@ module Aws::Glue
     #   columnar storage.
     #   @return [Types::S3GlueParquetTarget]
     #
+    # @!attribute [rw] s3_hyper_direct_target
+    #   Defines configuration parameters for writing data to Amazon S3 using
+    #   HyperDirect optimization.
+    #   @return [Types::S3HyperDirectTarget]
+    #
     # @!attribute [rw] s3_direct_target
     #   Specifies a data target that writes to Amazon S3.
     #   @return [Types::S3DirectTarget]
+    #
+    # @!attribute [rw] s3_iceberg_direct_target
+    #   Defines configuration parameters for writing data to Amazon S3 as an
+    #   Apache Iceberg table.
+    #   @return [Types::S3IcebergDirectTarget]
     #
     # @!attribute [rw] apply_mapping
     #   Specifies a transform that maps data property keys in the data
@@ -2844,6 +2859,7 @@ module Aws::Glue
       :redshift_source,
       :s3_catalog_source,
       :s3_csv_source,
+      :s3_excel_source,
       :s3_json_source,
       :s3_parquet_source,
       :relational_catalog_source,
@@ -2854,7 +2870,9 @@ module Aws::Glue
       :redshift_target,
       :s3_catalog_target,
       :s3_glue_parquet_target,
+      :s3_hyper_direct_target,
       :s3_direct_target,
+      :s3_iceberg_direct_target,
       :apply_mapping,
       :select_fields,
       :drop_fields,
@@ -3401,6 +3419,22 @@ module Aws::Glue
     #
     class ColumnStatisticsTaskStoppingException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a compaction optimizer. This configuration
+    # defines how data files in your table will be compacted to improve
+    # query performance and reduce storage costs.
+    #
+    # @!attribute [rw] iceberg_configuration
+    #   The configuration for an Iceberg compaction optimizer.
+    #   @return [Types::IcebergCompactionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CompactionConfiguration AWS API Documentation
+    #
+    class CompactionConfiguration < Struct.new(
+      :iceberg_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4219,21 +4253,87 @@ module Aws::Glue
     #   The name of the connection type.
     #   @return [String]
     #
+    # @!attribute [rw] display_name
+    #   The human-readable name for the connection type that is displayed in
+    #   the Glue console.
+    #   @return [String]
+    #
+    # @!attribute [rw] vendor
+    #   The name of the vendor or provider that created or maintains this
+    #   connection type.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   A description of the connection type.
     #   @return [String]
+    #
+    # @!attribute [rw] categories
+    #   A list of categories that this connection type belongs to.
+    #   Categories help users filter and find appropriate connection types
+    #   based on their use cases.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] capabilities
     #   The supported authentication types, data interface types (compute
     #   environments), and data operations of the connector.
     #   @return [Types::Capabilities]
     #
+    # @!attribute [rw] logo_url
+    #   The URL of the logo associated with a connection type.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_type_variants
+    #   A list of variants available for this connection type. Different
+    #   variants may provide specialized configurations for specific use
+    #   cases or implementations of the same general connection type.
+    #   @return [Array<Types::ConnectionTypeVariant>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectionTypeBrief AWS API Documentation
     #
     class ConnectionTypeBrief < Struct.new(
       :connection_type,
+      :display_name,
+      :vendor,
       :description,
-      :capabilities)
+      :categories,
+      :capabilities,
+      :logo_url,
+      :connection_type_variants)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a variant of a connection type in Glue Data Catalog.
+    # Connection type variants provide specific configurations and behaviors
+    # for different implementations of the same general connection type.
+    #
+    # @!attribute [rw] connection_type_variant_name
+    #   The unique identifier for the connection type variant. This name is
+    #   used internally to identify the specific variant of a connection
+    #   type.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The human-readable name for the connection type variant that is
+    #   displayed in the Glue console.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A detailed description of the connection type variant, including its
+    #   purpose, use cases, and any specific configuration requirements.
+    #   @return [String]
+    #
+    # @!attribute [rw] logo_url
+    #   The URL of the logo associated with a connection type variant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectionTypeVariant AWS API Documentation
+    #
+    class ConnectionTypeVariant < Struct.new(
+      :connection_type_variant_name,
+      :display_name,
+      :description,
+      :logo_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5201,6 +5301,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A request to create a data quality ruleset.
+    #
     # @!attribute [rw] name
     #   A unique name for the data quality ruleset.
     #   @return [String]
@@ -5603,6 +5705,47 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The configuration parameters required to create a new Iceberg table in
+    # the Glue Data Catalog, including table properties and metadata
+    # specifications.
+    #
+    # @!attribute [rw] location
+    #   The S3 location where the Iceberg table data will be stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema
+    #   The schema definition that specifies the structure, field types, and
+    #   metadata for the Iceberg table.
+    #   @return [Types::IcebergSchema]
+    #
+    # @!attribute [rw] partition_spec
+    #   The partitioning specification that defines how the Iceberg table
+    #   data will be organized and partitioned for optimal query
+    #   performance.
+    #   @return [Types::IcebergPartitionSpec]
+    #
+    # @!attribute [rw] write_order
+    #   The sort order specification that defines how data should be ordered
+    #   within each partition to optimize query performance.
+    #   @return [Types::IcebergSortOrder]
+    #
+    # @!attribute [rw] properties
+    #   Key-value pairs of additional table properties and configuration
+    #   settings for the Iceberg table.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateIcebergTableInput AWS API Documentation
+    #
+    class CreateIcebergTableInput < Struct.new(
+      :location,
+      :schema,
+      :partition_spec,
+      :write_order,
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] integration_name
     #   A unique name for an integration in Glue.
     #   @return [String]
@@ -5639,6 +5782,10 @@ module Aws::Glue
     #   pairs.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] integration_config
+    #   The configuration settings.
+    #   @return [Types::IntegrationConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateIntegrationRequest AWS API Documentation
     #
     class CreateIntegrationRequest < Struct.new(
@@ -5649,7 +5796,8 @@ module Aws::Glue
       :data_filter,
       :kms_key_id,
       :additional_encryption_context,
-      :tags)
+      :tags,
+      :integration_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5766,6 +5914,10 @@ module Aws::Glue
     #   syntax.
     #   @return [String]
     #
+    # @!attribute [rw] integration_config
+    #   The configuration settings.
+    #   @return [Types::IntegrationConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateIntegrationResponse AWS API Documentation
     #
     class CreateIntegrationResponse < Struct.new(
@@ -5780,13 +5932,20 @@ module Aws::Glue
       :status,
       :create_time,
       :errors,
-      :data_filter)
+      :data_filter,
+      :integration_config)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] resource_arn
-    #   The connection ARN of the source, or the database ARN of the target.
+    #   The Amazon Resource Name (ARN) of the target table for which to
+    #   create integration table properties. Currently, this API only
+    #   supports creating integration table properties for target tables,
+    #   and the provided ARN should be the ARN of the target table in the
+    #   Glue Data Catalog. Support for creating integration table properties
+    #   for source connections (using the connection ARN) is not yet
+    #   implemented and will be added in a future release.
     #   @return [String]
     #
     # @!attribute [rw] table_name
@@ -5794,7 +5953,9 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] source_table_config
-    #   A structure for the source table configuration.
+    #   A structure for the source table configuration. See the
+    #   `SourceTableConfig` structure to see list of supported source
+    #   properties.
     #   @return [Types::SourceTableConfig]
     #
     # @!attribute [rw] target_table_config
@@ -6921,6 +7082,11 @@ module Aws::Glue
     #   compatibility, this name is entirely lowercase.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The unique identifier for the table within the specified database
+    #   that will be created in the Glue Data Catalog.
+    #   @return [String]
+    #
     # @!attribute [rw] table_input
     #   The `TableInput` object that defines the metadata table to create in
     #   the catalog.
@@ -6945,6 +7111,7 @@ module Aws::Glue
     class CreateTableRequest < Struct.new(
       :catalog_id,
       :database_name,
+      :name,
       :table_input,
       :partition_indexes,
       :transaction_id,
@@ -7521,6 +7688,51 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A summary of metrics showing the total counts of processed rows and
+    # rules, including their pass/fail statistics based on row-level
+    # results.
+    #
+    # @!attribute [rw] total_rows_processed
+    #   The total number of rows that were processed during the data quality
+    #   evaluation.
+    #   @return [Float]
+    #
+    # @!attribute [rw] total_rows_passed
+    #   The total number of rows that passed all applicable data quality
+    #   rules.
+    #   @return [Float]
+    #
+    # @!attribute [rw] total_rows_failed
+    #   The total number of rows that failed one or more data quality rules.
+    #   @return [Float]
+    #
+    # @!attribute [rw] total_rules_processed
+    #   The total number of data quality rules that were evaluated.
+    #   @return [Float]
+    #
+    # @!attribute [rw] total_rules_passed
+    #   The total number of data quality rules that passed their evaluation
+    #   criteria.
+    #   @return [Float]
+    #
+    # @!attribute [rw] total_rules_failed
+    #   The total number of data quality rules that failed their evaluation
+    #   criteria.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityAggregatedMetrics AWS API Documentation
+    #
+    class DataQualityAggregatedMetrics < Struct.new(
+      :total_rows_processed,
+      :total_rows_passed,
+      :total_rows_failed,
+      :total_rules_processed,
+      :total_rules_passed,
+      :total_rules_failed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the result of the evaluation of a data quality analyzer.
     #
     # @!attribute [rw] name
@@ -7720,6 +7932,12 @@ module Aws::Glue
     #   observations generated after evaluating the rules and analyzers.
     #   @return [Array<Types::DataQualityObservation>]
     #
+    # @!attribute [rw] aggregated_metrics
+    #   A summary of `DataQualityAggregatedMetrics` objects showing the
+    #   total counts of processed rows and rules, including their pass/fail
+    #   statistics based on row-level results.
+    #   @return [Types::DataQualityAggregatedMetrics]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityResult AWS API Documentation
     #
     class DataQualityResult < Struct.new(
@@ -7736,7 +7954,8 @@ module Aws::Glue
       :ruleset_evaluation_run_id,
       :rule_results,
       :analyzer_results,
-      :observations)
+      :observations,
+      :aggregated_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7889,6 +8108,11 @@ module Aws::Glue
     #   The evaluated rule.
     #   @return [String]
     #
+    # @!attribute [rw] rule_metrics
+    #   A map containing metrics associated with the evaluation of the rule
+    #   based on row-level results.
+    #   @return [Hash<String,Float>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityRuleResult AWS API Documentation
     #
     class DataQualityRuleResult < Struct.new(
@@ -7897,8 +8121,9 @@ module Aws::Glue
       :evaluation_message,
       :result,
       :evaluated_metrics,
-      :evaluated_rule)
-      SENSITIVE = [:description, :evaluation_message, :evaluated_metrics, :evaluated_rule]
+      :evaluated_rule,
+      :rule_metrics)
+      SENSITIVE = [:description, :evaluation_message, :evaluated_metrics, :evaluated_rule, :rule_metrics]
       include Aws::Structure
     end
 
@@ -10483,11 +10708,18 @@ module Aws::Glue
     #   Redshift-federated catalog.
     #   @return [String]
     #
+    # @!attribute [rw] connection_type
+    #   The type of connection used to access the federated catalog,
+    #   specifying the protocol or method for connection to the external
+    #   data source.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FederatedCatalog AWS API Documentation
     #
     class FederatedCatalog < Struct.new(
       :identifier,
-      :connection_name)
+      :connection_name,
+      :connection_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10502,11 +10734,17 @@ module Aws::Glue
     #   The name of the connection to the external metastore.
     #   @return [String]
     #
+    # @!attribute [rw] connection_type
+    #   The type of connection used to access the federated database, such
+    #   as JDBC, ODBC, or other supported connection protocols.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FederatedDatabase AWS API Documentation
     #
     class FederatedDatabase < Struct.new(
       :identifier,
-      :connection_name)
+      :connection_name,
+      :connection_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10544,12 +10782,19 @@ module Aws::Glue
     #   The name of the connection to the external metastore.
     #   @return [String]
     #
+    # @!attribute [rw] connection_type
+    #   The type of connection used to access the federated table,
+    #   specifying the protocol or method for connecting to the external
+    #   data source.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FederatedTable AWS API Documentation
     #
     class FederatedTable < Struct.new(
       :identifier,
       :database_identifier,
-      :connection_name)
+      :connection_name,
+      :connection_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11828,6 +12073,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The response for the data quality result.
+    #
     # @!attribute [rw] result_id
     #   A unique result ID for the data quality result.
     #   @return [String]
@@ -11892,6 +12139,12 @@ module Aws::Glue
     #   observations generated after evaluating the rules and analyzers.
     #   @return [Array<Types::DataQualityObservation>]
     #
+    # @!attribute [rw] aggregated_metrics
+    #   A summary of `DataQualityAggregatedMetrics` objects showing the
+    #   total counts of processed rows and rules, including their pass/fail
+    #   statistics based on row-level results.
+    #   @return [Types::DataQualityAggregatedMetrics]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityResultResponse AWS API Documentation
     #
     class GetDataQualityResultResponse < Struct.new(
@@ -11908,7 +12161,8 @@ module Aws::Glue
       :ruleset_evaluation_run_id,
       :rule_results,
       :analyzer_results,
-      :observations)
+      :observations,
+      :aggregated_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11925,6 +12179,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The response for the Data Quality rule recommendation run.
+    #
     # @!attribute [rw] run_id
     #   The unique run identifier associated with this run.
     #   @return [String]
@@ -12121,6 +12377,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Returns the data quality ruleset response.
+    #
     # @!attribute [rw] name
     #   The name of the ruleset.
     #   @return [String]
@@ -12471,7 +12729,13 @@ module Aws::Glue
     end
 
     # @!attribute [rw] resource_arn
-    #   The connection ARN of the source, or the database ARN of the target.
+    #   The Amazon Resource Name (ARN) of the target table for which to
+    #   retrieve integration table properties. Currently, this API only
+    #   supports retrieving properties for target tables, and the provided
+    #   ARN should be the ARN of the target table in the Glue Data Catalog.
+    #   Support for retrieving integration table properties for source
+    #   connections (using the connection ARN) is not yet implemented and
+    #   will be added in a future release.
     #   @return [String]
     #
     # @!attribute [rw] table_name
@@ -12488,7 +12752,13 @@ module Aws::Glue
     end
 
     # @!attribute [rw] resource_arn
-    #   The connection ARN of the source, or the database ARN of the target.
+    #   The Amazon Resource Name (ARN) of the target table for which to
+    #   retrieve integration table properties. Currently, this API only
+    #   supports retrieving properties for target tables, and the provided
+    #   ARN should be the ARN of the target table in the Glue Data Catalog.
+    #   Support for retrieving integration table properties for source
+    #   connections (using the connection ARN) is not yet implemented and
+    #   will be added in a future release.
     #   @return [String]
     #
     # @!attribute [rw] table_name
@@ -15262,6 +15532,44 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The configuration for an Iceberg compaction optimizer. This
+    # configuration defines parameters for optimizing the layout of data
+    # files in Iceberg tables.
+    #
+    # @!attribute [rw] strategy
+    #   The strategy to use for compaction. Valid values are:
+    #
+    #   * `binpack`: Combines small files into larger files, typically
+    #     targeting sizes over 100MB, while applying any pending deletes.
+    #     This is the recommended compaction strategy for most use cases.
+    #
+    #   * `sort`: Organizes data based on specified columns which are sorted
+    #     hierarchically during compaction, improving query performance for
+    #     filtered operations. This strategy is recommended when your
+    #     queries frequently filter on specific columns. To use this
+    #     strategy, you must first define a sort order in your Iceberg table
+    #     properties using the `sort_order` table property.
+    #
+    #   * `z-order`: Optimizes data organization by blending multiple
+    #     attributes into a single scalar value that can be used for
+    #     sorting, allowing efficient querying across multiple dimensions.
+    #     This strategy is recommended when you need to query data across
+    #     multiple dimensions simultaneously. To use this strategy, you must
+    #     first define a sort order in your Iceberg table properties using
+    #     the `sort_order` table property.
+    #
+    #   If an input is not provided, the default value 'binpack' will be
+    #   used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergCompactionConfiguration AWS API Documentation
+    #
+    class IcebergCompactionConfiguration < Struct.new(
+      :strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Compaction metrics for Iceberg for the optimizer run.
     #
     # @!attribute [rw] number_of_bytes_compacted
@@ -15308,11 +15616,18 @@ module Aws::Glue
     #   The table version for the Iceberg table. Defaults to 2.
     #   @return [String]
     #
+    # @!attribute [rw] create_iceberg_table_input
+    #   The configuration parameters required to create a new Iceberg table
+    #   in the Glue Data Catalog, including table properties and metadata
+    #   specifications.
+    #   @return [Types::CreateIcebergTableInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergInput AWS API Documentation
     #
     class IcebergInput < Struct.new(
       :metadata_operation,
-      :version)
+      :version,
+      :create_iceberg_table_input)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15367,6 +15682,65 @@ module Aws::Glue
       :dpu_hours,
       :number_of_dpus,
       :job_duration_in_hour)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a single partition field within an Iceberg partition
+    # specification, including the source field, transformation function,
+    # partition name, and unique identifier.
+    #
+    # @!attribute [rw] source_id
+    #   The identifier of the source field from the table schema that this
+    #   partition field is based on.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] transform
+    #   The transformation function applied to the source field to create
+    #   the partition, such as identity, bucket, truncate, year, month, day,
+    #   or hour.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the partition field as it will appear in the partitioned
+    #   table structure.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_id
+    #   The unique identifier assigned to this partition field within the
+    #   Iceberg table's partition specification.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergPartitionField AWS API Documentation
+    #
+    class IcebergPartitionField < Struct.new(
+      :source_id,
+      :transform,
+      :name,
+      :field_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the partitioning specification for an Iceberg table,
+    # determining how table data will be organized and partitioned for
+    # optimal query performance.
+    #
+    # @!attribute [rw] fields
+    #   The list of partition fields that define how the table data should
+    #   be partitioned, including source fields and their transformations.
+    #   @return [Array<Types::IcebergPartitionField>]
+    #
+    # @!attribute [rw] spec_id
+    #   The unique identifier for this partition specification within the
+    #   Iceberg table's metadata history.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergPartitionSpec AWS API Documentation
+    #
+    class IcebergPartitionSpec < Struct.new(
+      :fields,
+      :spec_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15437,6 +15811,177 @@ module Aws::Glue
       :dpu_hours,
       :number_of_dpus,
       :job_duration_in_hour)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the schema structure for an Iceberg table, including field
+    # definitions, data types, and schema metadata.
+    #
+    # @!attribute [rw] schema_id
+    #   The unique identifier for this schema version within the Iceberg
+    #   table's schema evolution history.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] identifier_field_ids
+    #   The list of field identifiers that uniquely identify records in the
+    #   table, used for row-level operations and deduplication.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] type
+    #   The root type of the schema structure, typically "struct" for
+    #   Iceberg table schemas.
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   The list of field definitions that make up the table schema,
+    #   including field names, types, and metadata.
+    #   @return [Array<Types::IcebergStructField>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergSchema AWS API Documentation
+    #
+    class IcebergSchema < Struct.new(
+      :schema_id,
+      :identifier_field_ids,
+      :type,
+      :fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a single field within an Iceberg sort order specification,
+    # including the source field, transformation, sort direction, and null
+    # value ordering.
+    #
+    # @!attribute [rw] source_id
+    #   The identifier of the source field from the table schema that this
+    #   sort field is based on.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] transform
+    #   The transformation function applied to the source field before
+    #   sorting, such as identity, bucket, or truncate.
+    #   @return [String]
+    #
+    # @!attribute [rw] direction
+    #   The sort direction for this field, either ascending or descending.
+    #   @return [String]
+    #
+    # @!attribute [rw] null_order
+    #   The ordering behavior for null values in this field, specifying
+    #   whether nulls should appear first or last in the sort order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergSortField AWS API Documentation
+    #
+    class IcebergSortField < Struct.new(
+      :source_id,
+      :transform,
+      :direction,
+      :null_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the sort order specification for an Iceberg table, determining
+    # how data should be ordered within partitions to optimize query
+    # performance.
+    #
+    # @!attribute [rw] order_id
+    #   The unique identifier for this sort order specification within the
+    #   Iceberg table's metadata.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fields
+    #   The list of fields and their sort directions that define the
+    #   ordering criteria for the Iceberg table data.
+    #   @return [Array<Types::IcebergSortField>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergSortOrder AWS API Documentation
+    #
+    class IcebergSortOrder < Struct.new(
+      :order_id,
+      :fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a single field within an Iceberg table schema, including its
+    # identifier, name, data type, nullability, and documentation.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier assigned to this field within the Iceberg
+    #   table schema, used for schema evolution and field tracking.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   The name of the field as it appears in the table schema and query
+    #   operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The data type definition for this field, specifying the structure
+    #   and format of the data it contains.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] required
+    #   Indicates whether this field is required (non-nullable) or optional
+    #   (nullable) in the table schema.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] doc
+    #   Optional documentation or description text that provides additional
+    #   context about the purpose and usage of this field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergStructField AWS API Documentation
+    #
+    class IcebergStructField < Struct.new(
+      :id,
+      :name,
+      :type,
+      :required,
+      :doc)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a complete set of updates to be applied to an Iceberg table,
+    # including schema changes, partitioning modifications, sort order
+    # adjustments, location updates, and property changes.
+    #
+    # @!attribute [rw] schema
+    #   The updated schema definition for the Iceberg table, specifying any
+    #   changes to field structure, data types, or schema metadata.
+    #   @return [Types::IcebergSchema]
+    #
+    # @!attribute [rw] partition_spec
+    #   The updated partitioning specification that defines how the table
+    #   data should be reorganized and partitioned.
+    #   @return [Types::IcebergPartitionSpec]
+    #
+    # @!attribute [rw] sort_order
+    #   The updated sort order specification that defines how data should be
+    #   ordered within partitions for optimal query performance.
+    #   @return [Types::IcebergSortOrder]
+    #
+    # @!attribute [rw] location
+    #   The updated S3 location where the Iceberg table data will be stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   Updated key-value pairs of table properties and configuration
+    #   settings for the Iceberg table.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergTableUpdate AWS API Documentation
+    #
+    class IcebergTableUpdate < Struct.new(
+      :schema,
+      :partition_spec,
+      :sort_order,
+      :location,
+      :properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15609,6 +16154,10 @@ module Aws::Glue
     #   The time that the integration was created, in UTC.
     #   @return [Time]
     #
+    # @!attribute [rw] integration_config
+    #   Properties associated with the integration.
+    #   @return [Types::IntegrationConfig]
+    #
     # @!attribute [rw] errors
     #   A list of errors associated with the integration.
     #   @return [Array<Types::IntegrationError>]
@@ -15621,6 +16170,7 @@ module Aws::Glue
       :integration_arn,
       :status,
       :create_time,
+      :integration_config,
       :errors)
       SENSITIVE = []
       include Aws::Structure
@@ -15686,6 +16236,10 @@ module Aws::Glue
     #   The time that the integration was created, in UTC.
     #   @return [Time]
     #
+    # @!attribute [rw] integration_config
+    #   Properties associated with the integration.
+    #   @return [Types::IntegrationConfig]
+    #
     # @!attribute [rw] errors
     #   A list of errors associated with the integration.
     #   @return [Array<Types::IntegrationError>]
@@ -15708,8 +16262,36 @@ module Aws::Glue
       :tags,
       :status,
       :create_time,
+      :integration_config,
       :errors,
       :data_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Properties associated with the integration.
+    #
+    # @!attribute [rw] refresh_interval
+    #   Specifies the frequency at which CDC (Change Data Capture) pulls or
+    #   incremental loads should occur. This parameter provides flexibility
+    #   to align the refresh rate with your specific data update patterns,
+    #   system load considerations, and performance optimization goals. Time
+    #   increment can be set from 15 minutes to 8640 minutes (six days).
+    #   Currently supports creation of `RefreshInterval` only.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_properties
+    #   A collection of key-value pairs that specify additional properties
+    #   for the integration source. These properties provide configuration
+    #   options that can be used to customize the behavior of the ODB source
+    #   during data integration operations.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IntegrationConfig AWS API Documentation
+    #
+    class IntegrationConfig < Struct.new(
+      :refresh_interval,
+      :source_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15784,18 +16366,59 @@ module Aws::Glue
     # A structure that describes how data is partitioned on the target.
     #
     # @!attribute [rw] field_name
-    #   The field name used to partition data on the target.
+    #   The field name used to partition data on the target. Avoid using
+    #   columns that have unique values for each row (for example,
+    #   `LastModifiedTimestamp`, `SystemModTimeStamp`) as the partition
+    #   column. These columns are not suitable for partitioning because they
+    #   create a large number of small partitions, which can lead to
+    #   performance issues.
     #   @return [String]
     #
     # @!attribute [rw] function_spec
-    #   Specifies a function used to partition data on the target.
+    #   Specifies the function used to partition data on the target. The
+    #   only accepted value for this parameter is `'identity'` (string).
+    #   The `'identity'` function ensures that the data partitioning on
+    #   the target follows the same scheme as the source. In other words,
+    #   the partitioning structure of the source data is preserved in the
+    #   target destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] conversion_spec
+    #   Specifies the timestamp format of the source data. Valid values are:
+    #
+    #   * `epoch_sec` - Unix epoch timestamp in seconds
+    #
+    #   * `epoch_milli` - Unix epoch timestamp in milliseconds
+    #
+    #   * `iso` - ISO 8601 formatted timestamp
+    #
+    #   <note markdown="1"> Only specify `ConversionSpec` when using timestamp-based partition
+    #   functions (year, month, day, or hour). Glue Zero-ETL uses this
+    #   parameter to correctly transform source data into timestamp format
+    #   before partitioning.
+    #
+    #    Do not use high-cardinality columns with the `identity` partition
+    #   function. High-cardinality columns include:
+    #
+    #    * Primary keys
+    #
+    #   * Timestamp fields (such as `LastModifiedTimestamp`, `CreatedDate`)
+    #
+    #   * System-generated timestamps
+    #
+    #    Using high-cardinality columns with identity partitioning creates
+    #   many small partitions, which can significantly degrade ingestion
+    #   performance.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IntegrationPartition AWS API Documentation
     #
     class IntegrationPartition < Struct.new(
       :field_name,
-      :function_spec)
+      :function_spec,
+      :conversion_spec)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21914,6 +22537,11 @@ module Aws::Glue
     #   are `"gzip"` and `"bzip"`).
     #   @return [String]
     #
+    # @!attribute [rw] number_target_partitions
+    #   Specifies the number of target partitions for distributing Delta
+    #   Lake dataset files across Amazon S3.
+    #   @return [String]
+    #
     # @!attribute [rw] format
     #   Specifies the data output format for the target.
     #   @return [String]
@@ -21934,6 +22562,7 @@ module Aws::Glue
       :partition_keys,
       :path,
       :compression,
+      :number_target_partitions,
       :format,
       :additional_options,
       :schema_change_policy)
@@ -22030,6 +22659,11 @@ module Aws::Glue
     #   are `"gzip"` and `"bzip"`).
     #   @return [String]
     #
+    # @!attribute [rw] number_target_partitions
+    #   Specifies the number of target partitions when writing data directly
+    #   to Amazon S3.
+    #   @return [String]
+    #
     # @!attribute [rw] format
     #   Specifies the data output format for the target.
     #   @return [String]
@@ -22046,6 +22680,7 @@ module Aws::Glue
       :partition_keys,
       :path,
       :compression,
+      :number_target_partitions,
       :format,
       :schema_change_policy)
       SENSITIVE = []
@@ -22069,6 +22704,80 @@ module Aws::Glue
     class S3Encryption < Struct.new(
       :s3_encryption_mode,
       :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies an S3 Excel data source.
+    #
+    # @!attribute [rw] name
+    #   The name of the S3 Excel data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] paths
+    #   The S3 paths where the Excel files are located.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] compression_type
+    #   The compression format used for the Excel files.
+    #   @return [String]
+    #
+    # @!attribute [rw] exclusions
+    #   Patterns to exclude specific files or paths from processing.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] group_size
+    #   Defines the size of file groups for batch processing.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_files
+    #   Specifies how files should be grouped for processing.
+    #   @return [String]
+    #
+    # @!attribute [rw] recurse
+    #   Indicates whether to recursively process subdirectories.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_band
+    #   The maximum number of processing bands to use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_files_in_band
+    #   The maximum number of files to process in each band.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_options
+    #   Additional configuration options for S3 direct source processing.
+    #   @return [Types::S3DirectSourceAdditionalOptions]
+    #
+    # @!attribute [rw] number_rows
+    #   The number of rows to process from each Excel file.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] skip_footer
+    #   The number of rows to skip at the end of each Excel file.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_schemas
+    #   The AWS Glue schemas to apply to the processed data.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3ExcelSource AWS API Documentation
+    #
+    class S3ExcelSource < Struct.new(
+      :name,
+      :paths,
+      :compression_type,
+      :exclusions,
+      :group_size,
+      :group_files,
+      :recurse,
+      :max_band,
+      :max_files_in_band,
+      :additional_options,
+      :number_rows,
+      :skip_footer,
+      :output_schemas)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22098,6 +22807,11 @@ module Aws::Glue
     #   are `"gzip"` and `"bzip"`).
     #   @return [String]
     #
+    # @!attribute [rw] number_target_partitions
+    #   Specifies the number of target partitions for Parquet files when
+    #   writing to Amazon S3 using AWS Glue.
+    #   @return [String]
+    #
     # @!attribute [rw] schema_change_policy
     #   A policy that specifies update behavior for the crawler.
     #   @return [Types::DirectSchemaChangePolicy]
@@ -22110,6 +22824,7 @@ module Aws::Glue
       :partition_keys,
       :path,
       :compression,
+      :number_target_partitions,
       :schema_change_policy)
       SENSITIVE = []
       include Aws::Structure
@@ -22180,6 +22895,11 @@ module Aws::Glue
     #   are `"gzip"` and `"bzip"`).
     #   @return [String]
     #
+    # @!attribute [rw] number_target_partitions
+    #   Specifies the number of target partitions for distributing Hudi
+    #   dataset files across Amazon S3.
+    #   @return [String]
+    #
     # @!attribute [rw] partition_keys
     #   Specifies native partitioning using a sequence of keys.
     #   @return [Array<Array<String>>]
@@ -22203,6 +22923,7 @@ module Aws::Glue
       :inputs,
       :path,
       :compression,
+      :number_target_partitions,
       :partition_keys,
       :format,
       :additional_options,
@@ -22241,6 +22962,106 @@ module Aws::Glue
       :additional_hudi_options,
       :additional_options,
       :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a HyperDirect data target that writes to Amazon S3.
+    #
+    # @!attribute [rw] name
+    #   The unique identifier for the HyperDirect target node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   Specifies the input source for the HyperDirect target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] partition_keys
+    #   Defines the partitioning strategy for the output data.
+    #   @return [Array<Array<String>>]
+    #
+    # @!attribute [rw] path
+    #   The S3 location where the output data will be written.
+    #   @return [String]
+    #
+    # @!attribute [rw] compression
+    #   The compression type to apply to the output data.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_change_policy
+    #   Defines how schema changes are handled during write operations.
+    #   @return [Types::DirectSchemaChangePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3HyperDirectTarget AWS API Documentation
+    #
+    class S3HyperDirectTarget < Struct.new(
+      :name,
+      :inputs,
+      :partition_keys,
+      :path,
+      :compression,
+      :schema_change_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a target that writes to an Iceberg data source in Amazon S3.
+    #
+    # @!attribute [rw] name
+    #   Specifies the unique identifier for the Iceberg target node in your
+    #   data pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   Defines the single input source that provides data to this Iceberg
+    #   target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] partition_keys
+    #   Specifies the columns used to partition the Iceberg table data in
+    #   S3.
+    #   @return [Array<Array<String>>]
+    #
+    # @!attribute [rw] path
+    #   Defines the S3 location where the Iceberg table data will be stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   Specifies the file format used for storing Iceberg table data (e.g.,
+    #   Parquet, ORC).
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_options
+    #   Provides additional configuration options for customizing the
+    #   Iceberg table behavior.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] schema_change_policy
+    #   Defines how schema changes are handled when writing data to the
+    #   Iceberg table.
+    #   @return [Types::DirectSchemaChangePolicy]
+    #
+    # @!attribute [rw] compression
+    #   Specifies the compression codec used for Iceberg table files in S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_target_partitions
+    #   Sets the number of target partitions for distributing Iceberg table
+    #   files across S3.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3IcebergDirectTarget AWS API Documentation
+    #
+    class S3IcebergDirectTarget < Struct.new(
+      :name,
+      :inputs,
+      :partition_keys,
+      :path,
+      :format,
+      :additional_options,
+      :schema_change_policy,
+      :compression,
+      :number_target_partitions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23423,19 +24244,23 @@ module Aws::Glue
     # Properties used by the source leg to process data from the source.
     #
     # @!attribute [rw] fields
-    #   A list of fields used for column-level filtering.
+    #   A list of fields used for column-level filtering. Currently
+    #   unsupported.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filter_predicate
-    #   A condition clause used for row-level filtering.
+    #   A condition clause used for row-level filtering. Currently
+    #   unsupported.
     #   @return [String]
     #
     # @!attribute [rw] primary_key
-    #   Unique identifier of a record.
+    #   Provide the primary key set for this table. Currently supported
+    #   specifically for SAP `EntityOf` entities upon request. Contact
+    #   Amazon Web Services Support to make this feature available.
     #   @return [Array<String>]
     #
     # @!attribute [rw] record_update_field
-    #   Incremental pull timestamp-based field.
+    #   Incremental pull timestamp-based field. Currently unsupported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SourceTableConfig AWS API Documentation
@@ -23811,6 +24636,8 @@ module Aws::Glue
     #
     class StartCrawlerScheduleResponse < Aws::EmptyStructure; end
 
+    # The request of the Data Quality rule recommendation request.
+    #
     # @!attribute [rw] data_source
     #   The data source (Glue table) associated with this run.
     #   @return [Types::DataSource]
@@ -25290,6 +26117,12 @@ module Aws::Glue
     #   that are in a customer VPC.
     #   @return [Types::TableOptimizerVpcConfiguration]
     #
+    # @!attribute [rw] compaction_configuration
+    #   The configuration for a compaction optimizer. This configuration
+    #   defines how data files in your table will be compacted to improve
+    #   query performance and reduce storage costs.
+    #   @return [Types::CompactionConfiguration]
+    #
     # @!attribute [rw] retention_configuration
     #   The configuration for a snapshot retention optimizer.
     #   @return [Types::RetentionConfiguration]
@@ -25304,6 +26137,7 @@ module Aws::Glue
       :role_arn,
       :enabled,
       :vpc_configuration,
+      :compaction_configuration,
       :retention_configuration,
       :orphan_file_deletion_configuration)
       SENSITIVE = []
@@ -25341,6 +26175,31 @@ module Aws::Glue
     #   run.
     #   @return [Types::CompactionMetrics]
     #
+    # @!attribute [rw] compaction_strategy
+    #   The strategy used for the compaction run. Indicates which algorithm
+    #   was applied to determine how files were selected and combined during
+    #   the compaction process. Valid values are:
+    #
+    #   * `binpack`: Combines small files into larger files, typically
+    #     targeting sizes over 100MB, while applying any pending deletes.
+    #     This is the recommended compaction strategy for most use cases.
+    #
+    #   * `sort`: Organizes data based on specified columns which are sorted
+    #     hierarchically during compaction, improving query performance for
+    #     filtered operations. This strategy is recommended when your
+    #     queries frequently filter on specific columns. To use this
+    #     strategy, you must first define a sort order in your Iceberg table
+    #     properties using the `sort_order` table property.
+    #
+    #   * `z-order`: Optimizes data organization by blending multiple
+    #     attributes into a single scalar value that can be used for
+    #     sorting, allowing efficient querying across multiple dimensions.
+    #     This strategy is recommended when you need to query data across
+    #     multiple dimensions simultaneously. To use this strategy, you must
+    #     first define a sort order in your Iceberg table properties using
+    #     the `sort_order` table property.
+    #   @return [String]
+    #
     # @!attribute [rw] retention_metrics
     #   A `RetentionMetrics` object containing metrics for the optimizer
     #   run.
@@ -25360,6 +26219,7 @@ module Aws::Glue
       :metrics,
       :error,
       :compaction_metrics,
+      :compaction_strategy,
       :retention_metrics,
       :orphan_file_deletion_metrics)
       SENSITIVE = []
@@ -26936,6 +27796,42 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Input parameters specific to updating Apache Iceberg tables in Glue
+    # Data Catalog, containing the update operations to be applied to an
+    # existing Iceberg table.
+    #
+    # @!attribute [rw] update_iceberg_table_input
+    #   The specific update operations to be applied to the Iceberg table,
+    #   containing a list of updates that define the new state of the table
+    #   including schema, partitions, and properties.
+    #   @return [Types::UpdateIcebergTableInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateIcebergInput AWS API Documentation
+    #
+    class UpdateIcebergInput < Struct.new(
+      :update_iceberg_table_input)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the update operations to be applied to an existing Iceberg
+    # table in AWS Glue Data Catalog, defining the new state of the table
+    # metadata.
+    #
+    # @!attribute [rw] updates
+    #   The list of table update operations that specify the changes to be
+    #   made to the Iceberg table, including schema modifications, partition
+    #   specifications, and table properties.
+    #   @return [Array<Types::IcebergTableUpdate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateIcebergTableInput AWS API Documentation
+    #
+    class UpdateIcebergTableInput < Struct.new(
+      :updates)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The connection ARN of the source, or the database ARN of the target.
     #   @return [String]
@@ -27247,6 +28143,24 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Input parameters for updating open table format tables in GlueData
+    # Catalog, serving as a wrapper for format-specific update operations
+    # such as Apache Iceberg.
+    #
+    # @!attribute [rw] update_iceberg_input
+    #   Apache Iceberg-specific update parameters that define the table
+    #   modifications to be applied, including schema changes, partition
+    #   specifications, and table properties.
+    #   @return [Types::UpdateIcebergInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateOpenTableFormatInput AWS API Documentation
+    #
+    class UpdateOpenTableFormatInput < Struct.new(
+      :update_iceberg_input)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the partition to be updated
     #   resides. If none is provided, the Amazon Web Services account ID is
@@ -27501,6 +28415,11 @@ module Aws::Glue
     #   Hive compatibility, this name is entirely lowercase.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The unique identifier for the table within the specified database
+    #   that will be created in the Glue Data Catalog.
+    #   @return [String]
+    #
     # @!attribute [rw] table_input
     #   An updated `TableInput` object to define the metadata table in the
     #   catalog.
@@ -27529,17 +28448,25 @@ module Aws::Glue
     #   and subobject matching requirements.
     #   @return [Boolean]
     #
+    # @!attribute [rw] update_open_table_format_input
+    #   Input parameters for updating open table format tables in GlueData
+    #   Catalog, serving as a wrapper for format-specific update operations
+    #   such as Apache Iceberg.
+    #   @return [Types::UpdateOpenTableFormatInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTableRequest AWS API Documentation
     #
     class UpdateTableRequest < Struct.new(
       :catalog_id,
       :database_name,
+      :name,
       :table_input,
       :skip_archive,
       :transaction_id,
       :version_id,
       :view_update_action,
-      :force)
+      :force,
+      :update_open_table_format_input)
       SENSITIVE = []
       include Aws::Structure
     end

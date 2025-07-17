@@ -22,7 +22,7 @@ module Aws
       alias access_key_id id
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/AccessKey.html#status-instance_method
-      def status: () -> ("Active" | "Inactive")
+      def status: () -> ("Active" | "Inactive" | "Expired")
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/AccessKey.html#create_date-instance_method
       def create_date: () -> ::Time

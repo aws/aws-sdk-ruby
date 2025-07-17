@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.115.0 (2025-05-21)
+------------------
+
+* Feature - Adds support for setting up Contributor Insight rules on logs transformed via Logs Transformation feature.
+
+1.114.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.113.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.112.0 (2025-03-04)
 ------------------
 

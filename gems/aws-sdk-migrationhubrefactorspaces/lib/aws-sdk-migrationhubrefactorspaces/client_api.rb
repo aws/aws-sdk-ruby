@@ -205,7 +205,7 @@ module Aws::MigrationHubRefactorSpaces
     ConflictException.struct_class = Types::ConflictException
 
     CreateApplicationRequest.add_member(:api_gateway_proxy, Shapes::ShapeRef.new(shape: ApiGatewayProxyInput, location_name: "ApiGatewayProxy"))
-    CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateApplicationRequest.add_member(:environment_identifier, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location: "uri", location_name: "EnvironmentIdentifier"))
     CreateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "Name"))
     CreateApplicationRequest.add_member(:proxy_type, Shapes::ShapeRef.new(shape: ProxyType, required: true, location_name: "ProxyType"))
@@ -228,7 +228,7 @@ module Aws::MigrationHubRefactorSpaces
     CreateApplicationResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     CreateApplicationResponse.struct_class = Types::CreateApplicationResponse
 
-    CreateEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateEnvironmentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateEnvironmentRequest.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location_name: "Name"))
     CreateEnvironmentRequest.add_member(:network_fabric_type, Shapes::ShapeRef.new(shape: NetworkFabricType, required: true, location_name: "NetworkFabricType"))
@@ -248,7 +248,7 @@ module Aws::MigrationHubRefactorSpaces
     CreateEnvironmentResponse.struct_class = Types::CreateEnvironmentResponse
 
     CreateRouteRequest.add_member(:application_identifier, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "ApplicationIdentifier"))
-    CreateRouteRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateRouteRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateRouteRequest.add_member(:default_route, Shapes::ShapeRef.new(shape: DefaultRouteInput, location_name: "DefaultRoute"))
     CreateRouteRequest.add_member(:environment_identifier, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location: "uri", location_name: "EnvironmentIdentifier"))
     CreateRouteRequest.add_member(:route_type, Shapes::ShapeRef.new(shape: RouteType, required: true, location_name: "RouteType"))
@@ -272,7 +272,7 @@ module Aws::MigrationHubRefactorSpaces
     CreateRouteResponse.struct_class = Types::CreateRouteResponse
 
     CreateServiceRequest.add_member(:application_identifier, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "ApplicationIdentifier"))
-    CreateServiceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateServiceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateServiceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateServiceRequest.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: ServiceEndpointType, required: true, location_name: "EndpointType"))
     CreateServiceRequest.add_member(:environment_identifier, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location: "uri", location_name: "EnvironmentIdentifier"))

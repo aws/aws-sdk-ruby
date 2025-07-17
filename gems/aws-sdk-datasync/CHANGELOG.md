@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2025-07-16)
+------------------
+
+* Feature - AWS DataSync now supports IPv6 address inputs and outputs in create, update, and describe operations for NFS, SMB, and Object Storage locations
+
+1.105.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.104.0 (2025-05-29)
+------------------
+
+* Feature - AgentArns field is made optional for Object Storage and Azure Blob location create requests. Location credentials are now managed via Secrets Manager, and may be encrypted with service managed or customer managed keys. Authentication is now optional for Azure Blob locations.
+
+1.103.0 (2025-05-20)
+------------------
+
+* Feature - Remove Discovery APIs from the DataSync service
+
+1.102.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.101.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.100.0 (2025-03-05)
 ------------------
 

@@ -122,7 +122,7 @@ module Aws::Billing
     CreateBillingViewRequest.add_member(:description, Shapes::ShapeRef.new(shape: BillingViewDescription, location_name: "description"))
     CreateBillingViewRequest.add_member(:source_views, Shapes::ShapeRef.new(shape: BillingViewSourceViewsList, required: true, location_name: "sourceViews"))
     CreateBillingViewRequest.add_member(:data_filter_expression, Shapes::ShapeRef.new(shape: Expression, location_name: "dataFilterExpression"))
-    CreateBillingViewRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateBillingViewRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateBillingViewRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "resourceTags"))
     CreateBillingViewRequest.struct_class = Types::CreateBillingViewRequest
 

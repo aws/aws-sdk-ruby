@@ -8,6 +8,17 @@
 module Aws
   module B2bi
     module Waiters
+
+      class TransformerJobSucceeded
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    transformer_job_id: ::String,
+                    transformer_id: ::String
+                  ) -> Client::_GetTransformerJobResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetTransformerJobResponseSuccess
+      end
     end
   end
 end

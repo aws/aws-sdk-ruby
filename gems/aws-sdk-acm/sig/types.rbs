@@ -52,6 +52,7 @@ module Aws::ACM
 
     class CertificateOptions
       attr_accessor certificate_transparency_logging_preference: ("ENABLED" | "DISABLED")
+      attr_accessor export: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -65,6 +66,7 @@ module Aws::ACM
       attr_accessor key_algorithm: ("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1")
       attr_accessor key_usages: ::Array[("DIGITAL_SIGNATURE" | "NON_REPUDIATION" | "KEY_ENCIPHERMENT" | "DATA_ENCIPHERMENT" | "KEY_AGREEMENT" | "CERTIFICATE_SIGNING" | "CRL_SIGNING" | "ENCIPHER_ONLY" | "DECIPHER_ONLY" | "ANY" | "CUSTOM")]
       attr_accessor extended_key_usages: ::Array[("TLS_WEB_SERVER_AUTHENTICATION" | "TLS_WEB_CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "EMAIL_PROTECTION" | "TIME_STAMPING" | "OCSP_SIGNING" | "IPSEC_END_SYSTEM" | "IPSEC_TUNNEL" | "IPSEC_USER" | "ANY" | "NONE" | "CUSTOM")]
+      attr_accessor export_option: ("ENABLED" | "DISABLED")
       attr_accessor in_use: bool
       attr_accessor exported: bool
       attr_accessor renewal_eligibility: ("ELIGIBLE" | "INELIGIBLE")
@@ -143,6 +145,7 @@ module Aws::ACM
       attr_accessor extended_key_usage: ::Array[("TLS_WEB_SERVER_AUTHENTICATION" | "TLS_WEB_CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "EMAIL_PROTECTION" | "TIME_STAMPING" | "OCSP_SIGNING" | "IPSEC_END_SYSTEM" | "IPSEC_TUNNEL" | "IPSEC_USER" | "ANY" | "NONE" | "CUSTOM")]
       attr_accessor key_usage: ::Array[("DIGITAL_SIGNATURE" | "NON_REPUDIATION" | "KEY_ENCIPHERMENT" | "DATA_ENCIPHERMENT" | "KEY_AGREEMENT" | "CERTIFICATE_SIGNING" | "CRL_SIGNING" | "ENCIPHER_ONLY" | "DECIPHER_ONLY" | "ANY" | "CUSTOM")]
       attr_accessor key_types: ::Array[("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1")]
+      attr_accessor export_option: ("ENABLED" | "DISABLED")
       attr_accessor managed_by: ("CLOUDFRONT")
       SENSITIVE: []
     end
@@ -319,6 +322,17 @@ module Aws::ACM
       attr_accessor name: ::String
       attr_accessor type: ("CNAME")
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class RevokeCertificateRequest
+      attr_accessor certificate_arn: ::String
+      attr_accessor revocation_reason: ("UNSPECIFIED" | "KEY_COMPROMISE" | "CA_COMPROMISE" | "AFFILIATION_CHANGED" | "SUPERCEDED" | "SUPERSEDED" | "CESSATION_OF_OPERATION" | "CERTIFICATE_HOLD" | "REMOVE_FROM_CRL" | "PRIVILEGE_WITHDRAWN" | "A_A_COMPROMISE")
+      SENSITIVE: []
+    end
+
+    class RevokeCertificateResponse
+      attr_accessor certificate_arn: ::String
       SENSITIVE: []
     end
 

@@ -27,6 +27,7 @@ module Aws::IVSRealTime
       attr_accessor thumbnail_configuration: Types::ParticipantThumbnailConfiguration
       attr_accessor recording_reconnect_window_seconds: ::Integer
       attr_accessor hls_configuration: Types::ParticipantRecordingHlsConfiguration
+      attr_accessor record_participant_replicas: bool
       SENSITIVE: []
     end
 
@@ -248,11 +249,14 @@ module Aws::IVSRealTime
     end
 
     class Event
-      attr_accessor name: ("JOINED" | "LEFT" | "PUBLISH_STARTED" | "PUBLISH_STOPPED" | "SUBSCRIBE_STARTED" | "SUBSCRIBE_STOPPED" | "PUBLISH_ERROR" | "SUBSCRIBE_ERROR" | "JOIN_ERROR")
+      attr_accessor name: ("JOINED" | "LEFT" | "PUBLISH_STARTED" | "PUBLISH_STOPPED" | "SUBSCRIBE_STARTED" | "SUBSCRIBE_STOPPED" | "PUBLISH_ERROR" | "SUBSCRIBE_ERROR" | "JOIN_ERROR" | "REPLICATION_STARTED" | "REPLICATION_STOPPED")
       attr_accessor participant_id: ::String
       attr_accessor event_time: ::Time
       attr_accessor remote_participant_id: ::String
       attr_accessor error_code: ("INSUFFICIENT_CAPABILITIES" | "QUOTA_EXCEEDED" | "PUBLISHER_NOT_FOUND" | "BITRATE_EXCEEDED" | "RESOLUTION_EXCEEDED" | "STREAM_DURATION_EXCEEDED" | "INVALID_AUDIO_CODEC" | "INVALID_VIDEO_CODEC" | "INVALID_PROTOCOL" | "INVALID_STREAM_KEY" | "REUSE_OF_STREAM_KEY" | "B_FRAME_PRESENT" | "INVALID_INPUT" | "INTERNAL_SERVER_EXCEPTION")
+      attr_accessor destination_stage_arn: ::String
+      attr_accessor destination_session_id: ::String
+      attr_accessor replica: bool
       SENSITIVE: []
     end
 
@@ -459,6 +463,20 @@ module Aws::IVSRealTime
       SENSITIVE: []
     end
 
+    class ListParticipantReplicasRequest
+      attr_accessor source_stage_arn: ::String
+      attr_accessor participant_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListParticipantReplicasResponse
+      attr_accessor replicas: ::Array[Types::ParticipantReplica]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListParticipantsRequest
       attr_accessor stage_arn: ::String
       attr_accessor session_id: ::String
@@ -553,11 +571,25 @@ module Aws::IVSRealTime
       attr_accessor recording_s3_prefix: ::String
       attr_accessor recording_state: ("STARTING" | "ACTIVE" | "STOPPING" | "STOPPED" | "FAILED" | "DISABLED")
       attr_accessor protocol: ("UNKNOWN" | "WHIP" | "RTMP" | "RTMPS")
+      attr_accessor replication_type: ("SOURCE" | "REPLICA" | "NONE")
+      attr_accessor replication_state: ("ACTIVE" | "STOPPED")
+      attr_accessor source_stage_arn: ::String
+      attr_accessor source_session_id: ::String
       SENSITIVE: []
     end
 
     class ParticipantRecordingHlsConfiguration
       attr_accessor target_segment_duration_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ParticipantReplica
+      attr_accessor source_stage_arn: ::String
+      attr_accessor participant_id: ::String
+      attr_accessor source_session_id: ::String
+      attr_accessor destination_stage_arn: ::String
+      attr_accessor destination_session_id: ::String
+      attr_accessor replication_state: ("ACTIVE" | "STOPPED")
       SENSITIVE: []
     end
 
@@ -568,6 +600,10 @@ module Aws::IVSRealTime
       attr_accessor first_join_time: ::Time
       attr_accessor published: bool
       attr_accessor recording_state: ("STARTING" | "ACTIVE" | "STOPPING" | "STOPPED" | "FAILED" | "DISABLED")
+      attr_accessor replication_type: ("SOURCE" | "REPLICA" | "NONE")
+      attr_accessor replication_state: ("ACTIVE" | "STOPPED")
+      attr_accessor source_stage_arn: ::String
+      attr_accessor source_session_id: ::String
       SENSITIVE: []
     end
 
@@ -744,12 +780,50 @@ module Aws::IVSRealTime
       SENSITIVE: []
     end
 
+    class StartParticipantReplicationRequest
+      attr_accessor source_stage_arn: ::String
+      attr_accessor destination_stage_arn: ::String
+      attr_accessor participant_id: ::String
+      attr_accessor reconnect_window_seconds: ::Integer
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartParticipantReplicationResponse
+      attr_accessor access_control_allow_origin: ::String
+      attr_accessor access_control_expose_headers: ::String
+      attr_accessor cache_control: ::String
+      attr_accessor content_security_policy: ::String
+      attr_accessor strict_transport_security: ::String
+      attr_accessor x_content_type_options: ::String
+      attr_accessor x_frame_options: ::String
+      SENSITIVE: []
+    end
+
     class StopCompositionRequest
       attr_accessor arn: ::String
       SENSITIVE: []
     end
 
     class StopCompositionResponse < Aws::EmptyStructure
+    end
+
+    class StopParticipantReplicationRequest
+      attr_accessor source_stage_arn: ::String
+      attr_accessor destination_stage_arn: ::String
+      attr_accessor participant_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopParticipantReplicationResponse
+      attr_accessor access_control_allow_origin: ::String
+      attr_accessor access_control_expose_headers: ::String
+      attr_accessor cache_control: ::String
+      attr_accessor content_security_policy: ::String
+      attr_accessor strict_transport_security: ::String
+      attr_accessor x_content_type_options: ::String
+      attr_accessor x_frame_options: ::String
+      SENSITIVE: []
     end
 
     class StorageConfiguration

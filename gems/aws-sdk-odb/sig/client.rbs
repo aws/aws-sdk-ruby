@@ -1,0 +1,677 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Odb
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptMarketplaceRegistrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptMarketplaceRegistrationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#accept_marketplace_registration-instance_method
+      def accept_marketplace_registration: (
+                                             marketplace_registration_token: ::String
+                                           ) -> _AcceptMarketplaceRegistrationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptMarketplaceRegistrationResponseSuccess
+
+      interface _CreateCloudAutonomousVmClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCloudAutonomousVmClusterOutput]
+        def display_name: () -> ::String
+        def status: () -> ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+        def status_reason: () -> ::String
+        def cloud_autonomous_vm_cluster_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#create_cloud_autonomous_vm_cluster-instance_method
+      def create_cloud_autonomous_vm_cluster: (
+                                                cloud_exadata_infrastructure_id: ::String,
+                                                odb_network_id: ::String,
+                                                display_name: ::String,
+                                                ?client_token: ::String,
+                                                autonomous_data_storage_size_in_t_bs: ::Float,
+                                                cpu_core_count_per_node: ::Integer,
+                                                ?db_servers: Array[::String],
+                                                ?description: ::String,
+                                                ?is_mtls_enabled_vm_cluster: bool,
+                                                ?license_model: ("BRING_YOUR_OWN_LICENSE" | "LICENSE_INCLUDED"),
+                                                ?maintenance_window: {
+                                                  custom_action_timeout_in_mins: ::Integer?,
+                                                  days_of_week: Array[
+                                                    {
+                                                      name: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")?
+                                                    },
+                                                  ]?,
+                                                  hours_of_day: Array[::Integer]?,
+                                                  is_custom_action_timeout_enabled: bool?,
+                                                  lead_time_in_weeks: ::Integer?,
+                                                  months: Array[
+                                                    {
+                                                      name: ("JANUARY" | "FEBRUARY" | "MARCH" | "APRIL" | "MAY" | "JUNE" | "JULY" | "AUGUST" | "SEPTEMBER" | "OCTOBER" | "NOVEMBER" | "DECEMBER")?
+                                                    },
+                                                  ]?,
+                                                  patching_mode: ("ROLLING" | "NONROLLING")?,
+                                                  preference: ("NO_PREFERENCE" | "CUSTOM_PREFERENCE")?,
+                                                  skip_ru: bool?,
+                                                  weeks_of_month: Array[::Integer]?
+                                                },
+                                                memory_per_oracle_compute_unit_in_g_bs: ::Integer,
+                                                ?scan_listener_port_non_tls: ::Integer,
+                                                ?scan_listener_port_tls: ::Integer,
+                                                ?tags: Hash[::String, ::String],
+                                                ?time_zone: ::String,
+                                                total_container_databases: ::Integer
+                                              ) -> _CreateCloudAutonomousVmClusterResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCloudAutonomousVmClusterResponseSuccess
+
+      interface _CreateCloudExadataInfrastructureResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCloudExadataInfrastructureOutput]
+        def display_name: () -> ::String
+        def status: () -> ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+        def status_reason: () -> ::String
+        def cloud_exadata_infrastructure_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#create_cloud_exadata_infrastructure-instance_method
+      def create_cloud_exadata_infrastructure: (
+                                                 display_name: ::String,
+                                                 shape: ::String,
+                                                 ?availability_zone: ::String,
+                                                 ?availability_zone_id: ::String,
+                                                 ?tags: Hash[::String, ::String],
+                                                 compute_count: ::Integer,
+                                                 ?customer_contacts_to_send_to_oci: Array[
+                                                   {
+                                                     email: ::String?
+                                                   },
+                                                 ],
+                                                 ?maintenance_window: {
+                                                   custom_action_timeout_in_mins: ::Integer?,
+                                                   days_of_week: Array[
+                                                     {
+                                                       name: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")?
+                                                     },
+                                                   ]?,
+                                                   hours_of_day: Array[::Integer]?,
+                                                   is_custom_action_timeout_enabled: bool?,
+                                                   lead_time_in_weeks: ::Integer?,
+                                                   months: Array[
+                                                     {
+                                                       name: ("JANUARY" | "FEBRUARY" | "MARCH" | "APRIL" | "MAY" | "JUNE" | "JULY" | "AUGUST" | "SEPTEMBER" | "OCTOBER" | "NOVEMBER" | "DECEMBER")?
+                                                     },
+                                                   ]?,
+                                                   patching_mode: ("ROLLING" | "NONROLLING")?,
+                                                   preference: ("NO_PREFERENCE" | "CUSTOM_PREFERENCE")?,
+                                                   skip_ru: bool?,
+                                                   weeks_of_month: Array[::Integer]?
+                                                 },
+                                                 storage_count: ::Integer,
+                                                 ?client_token: ::String,
+                                                 ?database_server_type: ::String,
+                                                 ?storage_server_type: ::String
+                                               ) -> _CreateCloudExadataInfrastructureResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCloudExadataInfrastructureResponseSuccess
+
+      interface _CreateCloudVmClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCloudVmClusterOutput]
+        def display_name: () -> ::String
+        def status: () -> ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+        def status_reason: () -> ::String
+        def cloud_vm_cluster_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#create_cloud_vm_cluster-instance_method
+      def create_cloud_vm_cluster: (
+                                     cloud_exadata_infrastructure_id: ::String,
+                                     cpu_core_count: ::Integer,
+                                     display_name: ::String,
+                                     gi_version: ::String,
+                                     hostname: ::String,
+                                     ssh_public_keys: Array[::String],
+                                     odb_network_id: ::String,
+                                     ?cluster_name: ::String,
+                                     ?data_collection_options: {
+                                       is_diagnostics_events_enabled: bool?,
+                                       is_health_monitoring_enabled: bool?,
+                                       is_incident_logs_enabled: bool?
+                                     },
+                                     ?data_storage_size_in_t_bs: ::Float,
+                                     ?db_node_storage_size_in_g_bs: ::Integer,
+                                     ?db_servers: Array[::String],
+                                     ?tags: Hash[::String, ::String],
+                                     ?is_local_backup_enabled: bool,
+                                     ?is_sparse_diskgroup_enabled: bool,
+                                     ?license_model: ("BRING_YOUR_OWN_LICENSE" | "LICENSE_INCLUDED"),
+                                     ?memory_size_in_g_bs: ::Integer,
+                                     ?system_version: ::String,
+                                     ?time_zone: ::String,
+                                     ?client_token: ::String,
+                                     ?scan_listener_port_tcp: ::Integer
+                                   ) -> _CreateCloudVmClusterResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCloudVmClusterResponseSuccess
+
+      interface _CreateOdbNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOdbNetworkOutput]
+        def display_name: () -> ::String
+        def status: () -> ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+        def status_reason: () -> ::String
+        def odb_network_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#create_odb_network-instance_method
+      def create_odb_network: (
+                                display_name: ::String,
+                                ?availability_zone: ::String,
+                                ?availability_zone_id: ::String,
+                                client_subnet_cidr: ::String,
+                                ?backup_subnet_cidr: ::String,
+                                ?custom_domain_name: ::String,
+                                ?default_dns_prefix: ::String,
+                                ?client_token: ::String,
+                                ?s3_access: ("ENABLED" | "DISABLED"),
+                                ?zero_etl_access: ("ENABLED" | "DISABLED"),
+                                ?s3_policy_document: ::String,
+                                ?tags: Hash[::String, ::String]
+                              ) -> _CreateOdbNetworkResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOdbNetworkResponseSuccess
+
+      interface _CreateOdbPeeringConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOdbPeeringConnectionOutput]
+        def display_name: () -> ::String
+        def status: () -> ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+        def status_reason: () -> ::String
+        def odb_peering_connection_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#create_odb_peering_connection-instance_method
+      def create_odb_peering_connection: (
+                                           odb_network_id: ::String,
+                                           peer_network_id: ::String,
+                                           ?display_name: ::String,
+                                           ?client_token: ::String,
+                                           ?tags: Hash[::String, ::String]
+                                         ) -> _CreateOdbPeeringConnectionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOdbPeeringConnectionResponseSuccess
+
+      interface _DeleteCloudAutonomousVmClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCloudAutonomousVmClusterOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#delete_cloud_autonomous_vm_cluster-instance_method
+      def delete_cloud_autonomous_vm_cluster: (
+                                                cloud_autonomous_vm_cluster_id: ::String
+                                              ) -> _DeleteCloudAutonomousVmClusterResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCloudAutonomousVmClusterResponseSuccess
+
+      interface _DeleteCloudExadataInfrastructureResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCloudExadataInfrastructureOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#delete_cloud_exadata_infrastructure-instance_method
+      def delete_cloud_exadata_infrastructure: (
+                                                 cloud_exadata_infrastructure_id: ::String
+                                               ) -> _DeleteCloudExadataInfrastructureResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCloudExadataInfrastructureResponseSuccess
+
+      interface _DeleteCloudVmClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCloudVmClusterOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#delete_cloud_vm_cluster-instance_method
+      def delete_cloud_vm_cluster: (
+                                     cloud_vm_cluster_id: ::String
+                                   ) -> _DeleteCloudVmClusterResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCloudVmClusterResponseSuccess
+
+      interface _DeleteOdbNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteOdbNetworkOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#delete_odb_network-instance_method
+      def delete_odb_network: (
+                                odb_network_id: ::String,
+                                delete_associated_resources: bool
+                              ) -> _DeleteOdbNetworkResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteOdbNetworkResponseSuccess
+
+      interface _DeleteOdbPeeringConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteOdbPeeringConnectionOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#delete_odb_peering_connection-instance_method
+      def delete_odb_peering_connection: (
+                                           odb_peering_connection_id: ::String
+                                         ) -> _DeleteOdbPeeringConnectionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteOdbPeeringConnectionResponseSuccess
+
+      interface _GetCloudAutonomousVmClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCloudAutonomousVmClusterOutput]
+        def cloud_autonomous_vm_cluster: () -> Types::CloudAutonomousVmCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#get_cloud_autonomous_vm_cluster-instance_method
+      def get_cloud_autonomous_vm_cluster: (
+                                             cloud_autonomous_vm_cluster_id: ::String
+                                           ) -> _GetCloudAutonomousVmClusterResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCloudAutonomousVmClusterResponseSuccess
+
+      interface _GetCloudExadataInfrastructureResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCloudExadataInfrastructureOutput]
+        def cloud_exadata_infrastructure: () -> Types::CloudExadataInfrastructure
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#get_cloud_exadata_infrastructure-instance_method
+      def get_cloud_exadata_infrastructure: (
+                                              cloud_exadata_infrastructure_id: ::String
+                                            ) -> _GetCloudExadataInfrastructureResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCloudExadataInfrastructureResponseSuccess
+
+      interface _GetCloudExadataInfrastructureUnallocatedResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCloudExadataInfrastructureUnallocatedResourcesOutput]
+        def cloud_exadata_infrastructure_unallocated_resources: () -> Types::CloudExadataInfrastructureUnallocatedResources
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#get_cloud_exadata_infrastructure_unallocated_resources-instance_method
+      def get_cloud_exadata_infrastructure_unallocated_resources: (
+                                                                    cloud_exadata_infrastructure_id: ::String,
+                                                                    ?db_servers: Array[::String]
+                                                                  ) -> _GetCloudExadataInfrastructureUnallocatedResourcesResponseSuccess
+                                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCloudExadataInfrastructureUnallocatedResourcesResponseSuccess
+
+      interface _GetCloudVmClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCloudVmClusterOutput]
+        def cloud_vm_cluster: () -> Types::CloudVmCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#get_cloud_vm_cluster-instance_method
+      def get_cloud_vm_cluster: (
+                                  cloud_vm_cluster_id: ::String
+                                ) -> _GetCloudVmClusterResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCloudVmClusterResponseSuccess
+
+      interface _GetDbNodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDbNodeOutput]
+        def db_node: () -> Types::DbNode
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#get_db_node-instance_method
+      def get_db_node: (
+                         cloud_vm_cluster_id: ::String,
+                         db_node_id: ::String
+                       ) -> _GetDbNodeResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDbNodeResponseSuccess
+
+      interface _GetDbServerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDbServerOutput]
+        def db_server: () -> Types::DbServer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#get_db_server-instance_method
+      def get_db_server: (
+                           cloud_exadata_infrastructure_id: ::String,
+                           db_server_id: ::String
+                         ) -> _GetDbServerResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDbServerResponseSuccess
+
+      interface _GetOciOnboardingStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOciOnboardingStatusOutput]
+        def status: () -> ("NOT_STARTED" | "PENDING_LINK_GENERATION" | "PENDING_CUSTOMER_ACTION" | "PENDING_INITIALIZATION" | "ACTIVATING" | "ACTIVE_IN_HOME_REGION" | "ACTIVE" | "ACTIVE_LIMITED" | "FAILED" | "PUBLIC_OFFER_UNSUPPORTED" | "SUSPENDED" | "CANCELED")
+        def existing_tenancy_activation_link: () -> ::String
+        def new_tenancy_activation_link: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#get_oci_onboarding_status-instance_method
+      def get_oci_onboarding_status: (
+                                     ) -> _GetOciOnboardingStatusResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOciOnboardingStatusResponseSuccess
+
+      interface _GetOdbNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOdbNetworkOutput]
+        def odb_network: () -> Types::OdbNetwork
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#get_odb_network-instance_method
+      def get_odb_network: (
+                             odb_network_id: ::String
+                           ) -> _GetOdbNetworkResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOdbNetworkResponseSuccess
+
+      interface _GetOdbPeeringConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOdbPeeringConnectionOutput]
+        def odb_peering_connection: () -> Types::OdbPeeringConnection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#get_odb_peering_connection-instance_method
+      def get_odb_peering_connection: (
+                                        odb_peering_connection_id: ::String
+                                      ) -> _GetOdbPeeringConnectionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOdbPeeringConnectionResponseSuccess
+
+      interface _InitializeServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InitializeServiceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#initialize_service-instance_method
+      def initialize_service: (
+                              ) -> _InitializeServiceResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InitializeServiceResponseSuccess
+
+      interface _ListAutonomousVirtualMachinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAutonomousVirtualMachinesOutput]
+        def next_token: () -> ::String
+        def autonomous_virtual_machines: () -> ::Array[Types::AutonomousVirtualMachineSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#list_autonomous_virtual_machines-instance_method
+      def list_autonomous_virtual_machines: (
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String,
+                                              cloud_autonomous_vm_cluster_id: ::String
+                                            ) -> _ListAutonomousVirtualMachinesResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAutonomousVirtualMachinesResponseSuccess
+
+      interface _ListCloudAutonomousVmClustersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCloudAutonomousVmClustersOutput]
+        def next_token: () -> ::String
+        def cloud_autonomous_vm_clusters: () -> ::Array[Types::CloudAutonomousVmClusterSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#list_cloud_autonomous_vm_clusters-instance_method
+      def list_cloud_autonomous_vm_clusters: (
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String,
+                                               ?cloud_exadata_infrastructure_id: ::String
+                                             ) -> _ListCloudAutonomousVmClustersResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCloudAutonomousVmClustersResponseSuccess
+
+      interface _ListCloudExadataInfrastructuresResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCloudExadataInfrastructuresOutput]
+        def next_token: () -> ::String
+        def cloud_exadata_infrastructures: () -> ::Array[Types::CloudExadataInfrastructureSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#list_cloud_exadata_infrastructures-instance_method
+      def list_cloud_exadata_infrastructures: (
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _ListCloudExadataInfrastructuresResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCloudExadataInfrastructuresResponseSuccess
+
+      interface _ListCloudVmClustersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCloudVmClustersOutput]
+        def next_token: () -> ::String
+        def cloud_vm_clusters: () -> ::Array[Types::CloudVmClusterSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#list_cloud_vm_clusters-instance_method
+      def list_cloud_vm_clusters: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String,
+                                    ?cloud_exadata_infrastructure_id: ::String
+                                  ) -> _ListCloudVmClustersResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCloudVmClustersResponseSuccess
+
+      interface _ListDbNodesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDbNodesOutput]
+        def next_token: () -> ::String
+        def db_nodes: () -> ::Array[Types::DbNodeSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#list_db_nodes-instance_method
+      def list_db_nodes: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           cloud_vm_cluster_id: ::String
+                         ) -> _ListDbNodesResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDbNodesResponseSuccess
+
+      interface _ListDbServersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDbServersOutput]
+        def next_token: () -> ::String
+        def db_servers: () -> ::Array[Types::DbServerSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#list_db_servers-instance_method
+      def list_db_servers: (
+                             cloud_exadata_infrastructure_id: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListDbServersResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDbServersResponseSuccess
+
+      interface _ListDbSystemShapesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDbSystemShapesOutput]
+        def next_token: () -> ::String
+        def db_system_shapes: () -> ::Array[Types::DbSystemShapeSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#list_db_system_shapes-instance_method
+      def list_db_system_shapes: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   ?availability_zone: ::String,
+                                   ?availability_zone_id: ::String
+                                 ) -> _ListDbSystemShapesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDbSystemShapesResponseSuccess
+
+      interface _ListGiVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGiVersionsOutput]
+        def next_token: () -> ::String
+        def gi_versions: () -> ::Array[Types::GiVersionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#list_gi_versions-instance_method
+      def list_gi_versions: (
+                              ?max_results: ::Integer,
+                              ?next_token: ::String,
+                              ?shape: ::String
+                            ) -> _ListGiVersionsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGiVersionsResponseSuccess
+
+      interface _ListOdbNetworksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOdbNetworksOutput]
+        def next_token: () -> ::String
+        def odb_networks: () -> ::Array[Types::OdbNetworkSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#list_odb_networks-instance_method
+      def list_odb_networks: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListOdbNetworksResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOdbNetworksResponseSuccess
+
+      interface _ListOdbPeeringConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOdbPeeringConnectionsOutput]
+        def next_token: () -> ::String
+        def odb_peering_connections: () -> ::Array[Types::OdbPeeringConnectionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#list_odb_peering_connections-instance_method
+      def list_odb_peering_connections: (
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String,
+                                          ?odb_network_id: ::String
+                                        ) -> _ListOdbPeeringConnectionsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOdbPeeringConnectionsResponseSuccess
+
+      interface _ListSystemVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSystemVersionsOutput]
+        def next_token: () -> ::String
+        def system_versions: () -> ::Array[Types::SystemVersionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#list_system_versions-instance_method
+      def list_system_versions: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  gi_version: ::String,
+                                  shape: ::String
+                                ) -> _ListSystemVersionsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSystemVersionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RebootDbNodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RebootDbNodeOutput]
+        def db_node_id: () -> ::String
+        def status: () -> ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "STOPPING" | "STOPPED" | "STARTING")
+        def status_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#reboot_db_node-instance_method
+      def reboot_db_node: (
+                            cloud_vm_cluster_id: ::String,
+                            db_node_id: ::String
+                          ) -> _RebootDbNodeResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RebootDbNodeResponseSuccess
+
+      interface _StartDbNodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDbNodeOutput]
+        def db_node_id: () -> ::String
+        def status: () -> ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "STOPPING" | "STOPPED" | "STARTING")
+        def status_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#start_db_node-instance_method
+      def start_db_node: (
+                           cloud_vm_cluster_id: ::String,
+                           db_node_id: ::String
+                         ) -> _StartDbNodeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDbNodeResponseSuccess
+
+      interface _StopDbNodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopDbNodeOutput]
+        def db_node_id: () -> ::String
+        def status: () -> ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "STOPPING" | "STOPPED" | "STARTING")
+        def status_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#stop_db_node-instance_method
+      def stop_db_node: (
+                          cloud_vm_cluster_id: ::String,
+                          db_node_id: ::String
+                        ) -> _StopDbNodeResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopDbNodeResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateCloudExadataInfrastructureResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCloudExadataInfrastructureOutput]
+        def display_name: () -> ::String
+        def status: () -> ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+        def status_reason: () -> ::String
+        def cloud_exadata_infrastructure_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#update_cloud_exadata_infrastructure-instance_method
+      def update_cloud_exadata_infrastructure: (
+                                                 cloud_exadata_infrastructure_id: ::String,
+                                                 ?maintenance_window: {
+                                                   custom_action_timeout_in_mins: ::Integer?,
+                                                   days_of_week: Array[
+                                                     {
+                                                       name: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")?
+                                                     },
+                                                   ]?,
+                                                   hours_of_day: Array[::Integer]?,
+                                                   is_custom_action_timeout_enabled: bool?,
+                                                   lead_time_in_weeks: ::Integer?,
+                                                   months: Array[
+                                                     {
+                                                       name: ("JANUARY" | "FEBRUARY" | "MARCH" | "APRIL" | "MAY" | "JUNE" | "JULY" | "AUGUST" | "SEPTEMBER" | "OCTOBER" | "NOVEMBER" | "DECEMBER")?
+                                                     },
+                                                   ]?,
+                                                   patching_mode: ("ROLLING" | "NONROLLING")?,
+                                                   preference: ("NO_PREFERENCE" | "CUSTOM_PREFERENCE")?,
+                                                   skip_ru: bool?,
+                                                   weeks_of_month: Array[::Integer]?
+                                                 }
+                                               ) -> _UpdateCloudExadataInfrastructureResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCloudExadataInfrastructureResponseSuccess
+
+      interface _UpdateOdbNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOdbNetworkOutput]
+        def display_name: () -> ::String
+        def status: () -> ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+        def status_reason: () -> ::String
+        def odb_network_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#update_odb_network-instance_method
+      def update_odb_network: (
+                                odb_network_id: ::String,
+                                ?display_name: ::String,
+                                ?peered_cidrs_to_be_added: Array[::String],
+                                ?peered_cidrs_to_be_removed: Array[::String],
+                                ?s3_access: ("ENABLED" | "DISABLED"),
+                                ?zero_etl_access: ("ENABLED" | "DISABLED"),
+                                ?s3_policy_document: ::String
+                              ) -> _UpdateOdbNetworkResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOdbNetworkResponseSuccess
+    end
+  end
+end
+

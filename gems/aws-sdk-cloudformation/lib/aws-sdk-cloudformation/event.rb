@@ -152,8 +152,8 @@ module Aws::CloudFormation
       data[:hook_failure_mode]
     end
 
-    # An optional field containing information about the detailed status of
-    # the stack event.
+    # An optional field that contains information about the detailed status
+    # of the stack event.
     #
     # * `CONFIGURATION_COMPLETE` - all of the resources in the stack have
     #   reached that event. For more information, see [Understand

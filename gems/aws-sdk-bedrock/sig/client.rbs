@@ -88,6 +88,49 @@ module Aws
                                        ) -> _BatchDeleteEvaluationJobResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteEvaluationJobResponseSuccess
 
+      interface _CreateCustomModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCustomModelResponse]
+        def model_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#create_custom_model-instance_method
+      def create_custom_model: (
+                                 model_name: ::String,
+                                 model_source_config: {
+                                   s3_data_source: {
+                                     s3_uri: ::String
+                                   }?
+                                 },
+                                 ?model_kms_key_arn: ::String,
+                                 ?role_arn: ::String,
+                                 ?model_tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ],
+                                 ?client_request_token: ::String
+                               ) -> _CreateCustomModelResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomModelResponseSuccess
+
+      interface _CreateCustomModelDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCustomModelDeploymentResponse]
+        def custom_model_deployment_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#create_custom_model_deployment-instance_method
+      def create_custom_model_deployment: (
+                                            model_deployment_name: ::String,
+                                            model_arn: ::String,
+                                            ?description: ::String,
+                                            ?tags: Array[
+                                              {
+                                                key: ::String,
+                                                value: ::String
+                                              },
+                                            ],
+                                            ?client_request_token: ::String
+                                          ) -> _CreateCustomModelDeploymentResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomModelDeploymentResponseSuccess
+
       interface _CreateEvaluationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateEvaluationJobResponse]
         def job_arn: () -> ::String
@@ -266,6 +309,42 @@ module Aws
                                                    or_all: Array[
                                                      untyped,
                                                    ]?
+                                                 }?,
+                                                 implicit_filter_configuration: {
+                                                   metadata_attributes: Array[
+                                                     {
+                                                       key: ::String,
+                                                       type: ("STRING" | "NUMBER" | "BOOLEAN" | "STRING_LIST"),
+                                                       description: ::String
+                                                     },
+                                                   ],
+                                                   model_arn: ::String
+                                                 }?,
+                                                 reranking_configuration: {
+                                                   type: ("BEDROCK_RERANKING_MODEL"),
+                                                   bedrock_reranking_configuration: {
+                                                     model_configuration: {
+                                                       model_arn: ::String,
+                                                       additional_model_request_fields: Hash[::String, {
+                                                         }]?
+                                                     },
+                                                     number_of_reranked_results: ::Integer?,
+                                                     metadata_configuration: {
+                                                       selection_mode: ("SELECTIVE" | "ALL"),
+                                                       selective_mode_configuration: {
+                                                         fields_to_include: Array[
+                                                           {
+                                                             field_name: ::String
+                                                           },
+                                                         ]?,
+                                                         fields_to_exclude: Array[
+                                                           {
+                                                             field_name: ::String
+                                                           },
+                                                         ]?
+                                                       }?
+                                                     }?
+                                                   }?
                                                  }?
                                                }
                                              }
@@ -341,6 +420,42 @@ module Aws
                                                      or_all: Array[
                                                        untyped,
                                                      ]?
+                                                   }?,
+                                                   implicit_filter_configuration: {
+                                                     metadata_attributes: Array[
+                                                       {
+                                                         key: ::String,
+                                                         type: ("STRING" | "NUMBER" | "BOOLEAN" | "STRING_LIST"),
+                                                         description: ::String
+                                                       },
+                                                     ],
+                                                     model_arn: ::String
+                                                   }?,
+                                                   reranking_configuration: {
+                                                     type: ("BEDROCK_RERANKING_MODEL"),
+                                                     bedrock_reranking_configuration: {
+                                                       model_configuration: {
+                                                         model_arn: ::String,
+                                                         additional_model_request_fields: Hash[::String, {
+                                                           }]?
+                                                       },
+                                                       number_of_reranked_results: ::Integer?,
+                                                       metadata_configuration: {
+                                                         selection_mode: ("SELECTIVE" | "ALL"),
+                                                         selective_mode_configuration: {
+                                                           fields_to_include: Array[
+                                                             {
+                                                               field_name: ::String
+                                                             },
+                                                           ]?,
+                                                           fields_to_exclude: Array[
+                                                             {
+                                                               field_name: ::String
+                                                             },
+                                                           ]?
+                                                         }?
+                                                       }?
+                                                     }?
                                                    }?
                                                  }
                                                }?,
@@ -423,6 +538,17 @@ module Aws
                                  ) -> _CreateEvaluationJobResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEvaluationJobResponseSuccess
 
+      interface _CreateFoundationModelAgreementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFoundationModelAgreementResponse]
+        def model_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#create_foundation_model_agreement-instance_method
+      def create_foundation_model_agreement: (
+                                               offer_token: ::String,
+                                               model_id: ::String
+                                             ) -> _CreateFoundationModelAgreementResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFoundationModelAgreementResponseSuccess
+
       interface _CreateGuardrailResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateGuardrailResponse]
         def guardrail_id: () -> ::String
@@ -446,7 +572,10 @@ module Aws
                                     input_enabled: bool?,
                                     output_enabled: bool?
                                   },
-                                ]
+                                ],
+                                tier_config: {
+                                  tier_name: ("CLASSIC" | "STANDARD")
+                                }?
                               },
                               ?content_policy_config: {
                                 filters_config: Array[
@@ -461,7 +590,10 @@ module Aws
                                     input_enabled: bool?,
                                     output_enabled: bool?
                                   },
-                                ]
+                                ],
+                                tier_config: {
+                                  tier_name: ("CLASSIC" | "STANDARD")
+                                }?
                               },
                               ?word_policy_config: {
                                 words_config: Array[
@@ -516,6 +648,9 @@ module Aws
                                     enabled: bool?
                                   },
                                 ]
+                              },
+                              ?cross_region_config: {
+                                guardrail_profile_identifier: ::String
                               },
                               blocked_input_messaging: ::String,
                               blocked_outputs_messaging: ::String,
@@ -626,7 +761,7 @@ module Aws
                                             role_arn: ::String,
                                             ?client_request_token: ::String,
                                             base_model_identifier: ::String,
-                                            ?customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION"),
+                                            ?customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED"),
                                             ?custom_model_kms_key_id: ::String,
                                             ?job_tags: Array[
                                               {
@@ -822,6 +957,24 @@ module Aws
                                ) -> _DeleteCustomModelResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomModelResponseSuccess
 
+      interface _DeleteCustomModelDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCustomModelDeploymentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#delete_custom_model_deployment-instance_method
+      def delete_custom_model_deployment: (
+                                            custom_model_deployment_identifier: ::String
+                                          ) -> _DeleteCustomModelDeploymentResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomModelDeploymentResponseSuccess
+
+      interface _DeleteFoundationModelAgreementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFoundationModelAgreementResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#delete_foundation_model_agreement-instance_method
+      def delete_foundation_model_agreement: (
+                                               model_id: ::String
+                                             ) -> _DeleteFoundationModelAgreementResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFoundationModelAgreementResponseSuccess
+
       interface _DeleteGuardrailResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGuardrailResponse]
       end
@@ -901,7 +1054,7 @@ module Aws
         def job_name: () -> ::String
         def job_arn: () -> ::String
         def base_model_arn: () -> ::String
-        def customization_type: () -> ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION")
+        def customization_type: () -> ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
         def model_kms_key_arn: () -> ::String
         def hyper_parameters: () -> ::Hash[::String, ::String]
         def training_data_config: () -> Types::TrainingDataConfig
@@ -911,12 +1064,31 @@ module Aws
         def validation_metrics: () -> ::Array[Types::ValidatorMetric]
         def creation_time: () -> ::Time
         def customization_config: () -> Types::CustomizationConfig
+        def model_status: () -> ("Active" | "Creating" | "Failed")
+        def failure_message: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_custom_model-instance_method
       def get_custom_model: (
                               model_identifier: ::String
                             ) -> _GetCustomModelResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCustomModelResponseSuccess
+
+      interface _GetCustomModelDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCustomModelDeploymentResponse]
+        def custom_model_deployment_arn: () -> ::String
+        def model_deployment_name: () -> ::String
+        def model_arn: () -> ::String
+        def created_at: () -> ::Time
+        def status: () -> ("Creating" | "Active" | "Failed")
+        def description: () -> ::String
+        def failure_message: () -> ::String
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_custom_model_deployment-instance_method
+      def get_custom_model_deployment: (
+                                         custom_model_deployment_identifier: ::String
+                                       ) -> _GetCustomModelDeploymentResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCustomModelDeploymentResponseSuccess
 
       interface _GetEvaluationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetEvaluationJobResponse]
@@ -951,6 +1123,20 @@ module Aws
                                 ) -> _GetFoundationModelResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFoundationModelResponseSuccess
 
+      interface _GetFoundationModelAvailabilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFoundationModelAvailabilityResponse]
+        def model_id: () -> ::String
+        def agreement_availability: () -> Types::AgreementAvailability
+        def authorization_status: () -> ("AUTHORIZED" | "NOT_AUTHORIZED")
+        def entitlement_availability: () -> ("AVAILABLE" | "NOT_AVAILABLE")
+        def region_availability: () -> ("AVAILABLE" | "NOT_AVAILABLE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_foundation_model_availability-instance_method
+      def get_foundation_model_availability: (
+                                               model_id: ::String
+                                             ) -> _GetFoundationModelAvailabilityResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFoundationModelAvailabilityResponseSuccess
+
       interface _GetGuardrailResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetGuardrailResponse]
         def name: () -> ::String
@@ -964,6 +1150,7 @@ module Aws
         def word_policy: () -> Types::GuardrailWordPolicy
         def sensitive_information_policy: () -> Types::GuardrailSensitiveInformationPolicy
         def contextual_grounding_policy: () -> Types::GuardrailContextualGroundingPolicy
+        def cross_region_details: () -> Types::GuardrailCrossRegionDetails
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def status_reasons: () -> ::Array[::String]
@@ -1055,6 +1242,7 @@ module Aws
         def client_request_token: () -> ::String
         def role_arn: () -> ::String
         def status: () -> ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
+        def status_details: () -> Types::StatusDetails
         def failure_message: () -> ::String
         def creation_time: () -> ::Time
         def last_modified_time: () -> ::Time
@@ -1064,7 +1252,7 @@ module Aws
         def training_data_config: () -> Types::TrainingDataConfig
         def validation_data_config: () -> Types::ValidationDataConfig
         def output_data_config: () -> Types::OutputDataConfig
-        def customization_type: () -> ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION")
+        def customization_type: () -> ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
         def output_model_kms_key_arn: () -> ::String
         def training_metrics: () -> Types::TrainingMetrics
         def validation_metrics: () -> ::Array[Types::ValidatorMetric]
@@ -1173,6 +1361,34 @@ module Aws
                                             ) -> _GetProvisionedModelThroughputResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProvisionedModelThroughputResponseSuccess
 
+      interface _GetUseCaseForModelAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUseCaseForModelAccessResponse]
+        def form_data: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_use_case_for_model_access-instance_method
+      def get_use_case_for_model_access: (
+                                         ) -> _GetUseCaseForModelAccessResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUseCaseForModelAccessResponseSuccess
+
+      interface _ListCustomModelDeploymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomModelDeploymentsResponse]
+        def next_token: () -> ::String
+        def model_deployment_summaries: () -> ::Array[Types::CustomModelDeploymentSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_custom_model_deployments-instance_method
+      def list_custom_model_deployments: (
+                                           ?created_before: ::Time,
+                                           ?created_after: ::Time,
+                                           ?name_contains: ::String,
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String,
+                                           ?sort_by: ("CreationTime"),
+                                           ?sort_order: ("Ascending" | "Descending"),
+                                           ?status_equals: ("Creating" | "Active" | "Failed"),
+                                           ?model_arn_equals: ::String
+                                         ) -> _ListCustomModelDeploymentsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomModelDeploymentsResponseSuccess
+
       interface _ListCustomModelsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomModelsResponse]
         def next_token: () -> ::String
@@ -1189,7 +1405,8 @@ module Aws
                                 ?next_token: ::String,
                                 ?sort_by: ("CreationTime"),
                                 ?sort_order: ("Ascending" | "Descending"),
-                                ?is_owned: bool
+                                ?is_owned: bool,
+                                ?model_status: ("Active" | "Creating" | "Failed")
                               ) -> _ListCustomModelsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomModelsResponseSuccess
 
@@ -1211,6 +1428,18 @@ module Aws
                                   ?sort_order: ("Ascending" | "Descending")
                                 ) -> _ListEvaluationJobsResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEvaluationJobsResponseSuccess
+
+      interface _ListFoundationModelAgreementOffersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFoundationModelAgreementOffersResponse]
+        def model_id: () -> ::String
+        def offers: () -> ::Array[Types::Offer]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_foundation_model_agreement_offers-instance_method
+      def list_foundation_model_agreement_offers: (
+                                                    model_id: ::String,
+                                                    ?offer_type: ("ALL" | "PUBLIC")
+                                                  ) -> _ListFoundationModelAgreementOffersResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFoundationModelAgreementOffersResponseSuccess
 
       interface _ListFoundationModelsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFoundationModelsResponse]
@@ -1423,6 +1652,15 @@ module Aws
                                                       ) -> _PutModelInvocationLoggingConfigurationResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutModelInvocationLoggingConfigurationResponseSuccess
 
+      interface _PutUseCaseForModelAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutUseCaseForModelAccessResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#put_use_case_for_model_access-instance_method
+      def put_use_case_for_model_access: (
+                                           form_data: ::String
+                                         ) -> _PutUseCaseForModelAccessResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutUseCaseForModelAccessResponseSuccess
+
       interface _RegisterMarketplaceModelEndpointResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RegisterMarketplaceModelEndpointResponse]
         def marketplace_model_endpoint: () -> Types::MarketplaceModelEndpoint
@@ -1510,7 +1748,10 @@ module Aws
                                     input_enabled: bool?,
                                     output_enabled: bool?
                                   },
-                                ]
+                                ],
+                                tier_config: {
+                                  tier_name: ("CLASSIC" | "STANDARD")
+                                }?
                               },
                               ?content_policy_config: {
                                 filters_config: Array[
@@ -1525,7 +1766,10 @@ module Aws
                                     input_enabled: bool?,
                                     output_enabled: bool?
                                   },
-                                ]
+                                ],
+                                tier_config: {
+                                  tier_name: ("CLASSIC" | "STANDARD")
+                                }?
                               },
                               ?word_policy_config: {
                                 words_config: Array[
@@ -1580,6 +1824,9 @@ module Aws
                                     enabled: bool?
                                   },
                                 ]
+                              },
+                              ?cross_region_config: {
+                                guardrail_profile_identifier: ::String
                               },
                               blocked_input_messaging: ::String,
                               blocked_outputs_messaging: ::String,

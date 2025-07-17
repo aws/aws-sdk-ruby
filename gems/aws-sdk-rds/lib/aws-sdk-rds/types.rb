@@ -1070,7 +1070,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be between 0 and 3600.
+    #   * Must be between 0 and 300.
     #
     #   ^
     #   @return [Integer]
@@ -1090,15 +1090,20 @@ module Aws::RDS
     #   specify one or more SQL statements for the proxy to run when opening
     #   each new database connection. The setting is typically used with
     #   `SET` statements to make sure that each connection has identical
-    #   settings. Make sure that the query you add is valid. To include
-    #   multiple variables in a single `SET` statement, use comma
-    #   separators.
+    #   settings. Make sure the query added here is valid. This is an
+    #   optional field, so you can choose to leave it empty. For including
+    #   multiple variables in a single SET statement, use a comma separator.
     #
     #   For example: `SET variable1=value1, variable2=value2`
     #
-    #   For multiple statements, use semicolons as the separator.
-    #
     #   Default: no initialization query
+    #
+    #   Since you can access initialization query as part of target group
+    #   configuration, it is not protected by authentication or
+    #   cryptographic methods. Anyone with access to view or manage your
+    #   proxy target group configuration can view the initialization query.
+    #   You should not add sensitive data, such as passwords or long-lived
+    #   encryption keys, to this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ConnectionPoolConfiguration AWS API Documentation
@@ -1152,12 +1157,20 @@ module Aws::RDS
     #
     # @!attribute [rw] init_query
     #   One or more SQL statements for the proxy to run when opening each
-    #   new database connection. Typically used with `SET` statements to
-    #   make sure that each connection has identical settings such as time
-    #   zone and character set. This setting is empty by default. For
-    #   multiple statements, use semicolons as the separator. You can also
-    #   include multiple variables in a single `SET` statement, such as `SET
-    #   x=1, y=2`.
+    #   new database connection. The setting is typically used with `SET`
+    #   statements to make sure that each connection has identical settings.
+    #   The query added here must be valid. For including multiple variables
+    #   in a single SET statement, use a comma separator. This is an
+    #   optional field.
+    #
+    #   For example: `SET variable1=value1, variable2=value2`
+    #
+    #   Since you can access initialization query as part of target group
+    #   configuration, it is not protected by authentication or
+    #   cryptographic methods. Anyone with access to view or manage your
+    #   proxy target group configuration can view the initialization query.
+    #   You should not add sensitive data, such as passwords or long-lived
+    #   encryption keys, to this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ConnectionPoolConfigurationInfo AWS API Documentation
@@ -1712,6 +1725,24 @@ module Aws::RDS
     #   can be copied only with cross-account snapshot copy calls.
     #   @return [Boolean]
     #
+    # @!attribute [rw] snapshot_availability_zone
+    #   Specifies the name of the Availability Zone where RDS stores the DB
+    #   snapshot. This value is valid only for snapshots that RDS stores on
+    #   a Dedicated Local Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_target
+    #   Configures the location where RDS will store copied snapshots.
+    #
+    #   Valid Values:
+    #
+    #   * `local` (Dedicated Local Zone)
+    #
+    #   * `outposts` (Amazon Web Services Outposts)
+    #
+    #   * `region` (Amazon Web Services Region)
+    #   @return [String]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -1729,6 +1760,8 @@ module Aws::RDS
       :option_group_name,
       :target_custom_availability_zone,
       :copy_option_group,
+      :snapshot_availability_zone,
+      :snapshot_target,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -3125,11 +3158,11 @@ module Aws::RDS
     #   standard support for that engine version. For more information, see
     #   the following sections:
     #
-    #   * Amazon Aurora - [Using Amazon RDS Extended Support][1] in the
-    #     *Amazon Aurora User Guide*
+    #   * Amazon Aurora - [Amazon RDS Extended Support with Amazon
+    #     Aurora][1] in the *Amazon Aurora User Guide*
     #
-    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
-    #     RDS User Guide*
+    #   * Amazon RDS - [Amazon RDS Extended Support with Amazon RDS][2] in
+    #     the *Amazon RDS User Guide*
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -3979,12 +4012,8 @@ module Aws::RDS
     #   can't set the `AvailabilityZone` parameter if the DB instance is a
     #   Multi-AZ deployment.
     #
-    #   This setting doesn't apply to the following DB instances:
-    #
-    #   * Amazon Aurora (DB instance Availability Zones (AZs) are managed by
-    #     the DB cluster.)
-    #
-    #   * RDS Custom
+    #   This setting doesn't apply to Amazon Aurora because the DB instance
+    #   Availability Zones (AZs) are managed by the DB cluster.
     #   @return [Boolean]
     #
     # @!attribute [rw] engine_version
@@ -4635,6 +4664,8 @@ module Aws::RDS
     #
     #   Valid Values:
     #
+    #   * `local` (Dedicated Local Zone)
+    #
     #   * `outposts` (Amazon Web Services Outposts)
     #
     #   * `region` (Amazon Web Services Region)
@@ -4788,8 +4819,8 @@ module Aws::RDS
     #   Extended Support. With RDS Extended Support, you can run the
     #   selected major engine version on your DB instance past the end of
     #   standard support for that engine version. For more information, see
-    #   [Using Amazon RDS Extended Support][1] in the *Amazon RDS User
-    #   Guide*.
+    #   [Amazon RDS Extended Support with Amazon RDS][1] in the *Amazon RDS
+    #   User Guide*.
     #
     #   Valid Values: `open-source-rds-extended-support |
     #   open-source-rds-extended-support-disabled`
@@ -4881,8 +4912,13 @@ module Aws::RDS
     # @!attribute [rw] source_db_instance_identifier
     #   The identifier of the DB instance that will act as the source for
     #   the read replica. Each DB instance can have up to 15 read replicas,
-    #   with the exception of Oracle and SQL Server, which can have up to
-    #   five.
+    #   except for the following engines:
+    #
+    #   * Db2 - Can have up to three replicas.
+    #
+    #   * Oracle - Can have up to five read replicas.
+    #
+    #   * SQL Server - Can have up to five read replicas.
     #
     #   Constraints:
     #
@@ -5000,6 +5036,16 @@ module Aws::RDS
     #   The name of the DB parameter group to associate with this read
     #   replica DB instance.
     #
+    #   For the Db2 DB engine, if your source DB instance uses the Bring
+    #   Your Own License model, then a custom parameter group must be
+    #   associated with the replica. For a same Amazon Web Services Region
+    #   replica, if you don't specify a custom parameter group, Amazon RDS
+    #   associates the custom parameter group associated with the source DB
+    #   instance. For a cross-Region replica, you must specify a custom
+    #   parameter group. This custom parameter group must include your IBM
+    #   Site ID and IBM Customer ID. For more information, see [ IBM IDs for
+    #   Bring Your Own License for Db2][1].
+    #
     #   For Single-AZ or Multi-AZ DB instance read replica instances, if you
     #   don't specify a value for `DBParameterGroupName`, then Amazon RDS
     #   uses the `DBParameterGroup` of the source DB instance for a same
@@ -5012,9 +5058,9 @@ module Aws::RDS
     #
     #   Specifying a parameter group for this operation is only supported
     #   for MySQL DB instances for cross-Region read replicas, for Multi-AZ
-    #   DB cluster read replica instances, and for Oracle DB instances. It
-    #   isn't supported for MySQL DB instances for same Region read
-    #   replicas or for RDS Custom.
+    #   DB cluster read replica instances, for Db2 DB instances, and for
+    #   Oracle DB instances. It isn't supported for MySQL DB instances for
+    #   same Region read replicas or for RDS Custom.
     #
     #   Constraints:
     #
@@ -5023,6 +5069,10 @@ module Aws::RDS
     #   * First character must be a letter.
     #
     #   * Can't end with a hyphen or contain two consecutive hyphens.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html#db2-prereqs-ibm-info
     #   @return [String]
     #
     # @!attribute [rw] publicly_accessible
@@ -5432,31 +5482,50 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] replica_mode
-    #   The open mode of the replica database: mounted or read-only.
+    #   The open mode of the replica database.
     #
-    #   <note markdown="1"> This parameter is only supported for Oracle DB instances.
+    #   <note markdown="1"> This parameter is only supported for Db2 DB instances and Oracle DB
+    #   instances.
     #
     #    </note>
     #
-    #   Mounted DB replicas are included in Oracle Database Enterprise
-    #   Edition. The main use case for mounted replicas is cross-Region
-    #   disaster recovery. The primary database doesn't use Active Data
-    #   Guard to transmit information to the mounted replica. Because it
-    #   doesn't accept user connections, a mounted replica can't serve a
-    #   read-only workload.
+    #   Db2
     #
-    #   You can create a combination of mounted and read-only DB replicas
-    #   for the same primary DB instance. For more information, see [Working
-    #   with Oracle Read Replicas for Amazon RDS][1] in the *Amazon RDS User
-    #   Guide*.
+    #   : Standby DB replicas are included in Db2 Advanced Edition (AE) and
+    #     Db2 Standard Edition (SE). The main use case for standby replicas
+    #     is cross-Region disaster recovery. Because it doesn't accept user
+    #     connections, a standby replica can't serve a read-only workload.
     #
-    #   For RDS Custom, you must specify this parameter and set it to
-    #   `mounted`. The value won't be set by default. After replica
-    #   creation, you can manage the open mode manually.
+    #     You can create a combination of standby and read-only DB replicas
+    #     for the same primary DB instance. For more information, see
+    #     [Working with read replicas for Amazon RDS for Db2][1] in the
+    #     *Amazon RDS User Guide*.
+    #
+    #     To create standby DB replicas for RDS for Db2, set this parameter
+    #     to `mounted`.
+    #
+    #   Oracle
+    #
+    #   : Mounted DB replicas are included in Oracle Database Enterprise
+    #     Edition. The main use case for mounted replicas is cross-Region
+    #     disaster recovery. The primary database doesn't use Active Data
+    #     Guard to transmit information to the mounted replica. Because it
+    #     doesn't accept user connections, a mounted replica can't serve a
+    #     read-only workload.
+    #
+    #     You can create a combination of mounted and read-only DB replicas
+    #     for the same primary DB instance. For more information, see
+    #     [Working with read replicas for Amazon RDS for Oracle][2] in the
+    #     *Amazon RDS User Guide*.
+    #
+    #     For RDS Custom, you must specify this parameter and set it to
+    #     `mounted`. The value won't be set by default. After replica
+    #     creation, you can manage the open mode manually.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
     #   @return [String]
     #
     # @!attribute [rw] max_allocated_storage
@@ -5545,6 +5614,17 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
     #   @return [Boolean]
+    #
+    # @!attribute [rw] backup_target
+    #   The location where RDS stores automated backups and manual
+    #   snapshots.
+    #
+    #   Valid Values:
+    #
+    #   * `local` for Dedicated Local Zones
+    #
+    #   * `region` for Amazon Web Services Region
+    #   @return [String]
     #
     # @!attribute [rw] allocated_storage
     #   The amount of storage (in gibibytes) to allocate initially for the
@@ -5657,6 +5737,7 @@ module Aws::RDS
       :network_type,
       :storage_throughput,
       :enable_customer_owned_ip,
+      :backup_target,
       :allocated_storage,
       :source_db_cluster_identifier,
       :dedicated_log_volume,
@@ -6031,17 +6112,17 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] compute_redundancy
-    #   Specifies whether to create standby DB shard groups for the DB shard
-    #   group. Valid values are the following:
+    #   Specifies whether to create standby standby DB data access shard for
+    #   the DB shard group. Valid values are the following:
     #
-    #   * 0 - Creates a DB shard group without a standby DB shard group.
-    #     This is the default value.
+    #   * 0 - Creates a DB shard group without a standby DB data access
+    #     shard. This is the default value.
     #
-    #   * 1 - Creates a DB shard group with a standby DB shard group in a
-    #     different Availability Zone (AZ).
+    #   * 1 - Creates a DB shard group with a standby DB data access shard
+    #     in a different Availability Zone (AZ).
     #
-    #   * 2 - Creates a DB shard group with two standby DB shard groups in
-    #     two different AZs.
+    #   * 2 - Creates a DB shard group with two standby DB data access shard
+    #     in two different AZs.
     #   @return [Integer]
     #
     # @!attribute [rw] max_acu
@@ -6432,8 +6513,8 @@ module Aws::RDS
     #   RDS Extended Support. With RDS Extended Support, you can run the
     #   selected major engine version on your global cluster past the end of
     #   standard support for that engine version. For more information, see
-    #   [Using Amazon RDS Extended Support][1] in the *Amazon Aurora User
-    #   Guide*.
+    #   [Amazon RDS Extended Support with Amazon Aurora][1] in the *Amazon
+    #   Aurora User Guide*.
     #
     #   Valid Values: `open-source-rds-extended-support |
     #   open-source-rds-extended-support-disabled`
@@ -7220,6 +7301,12 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] global_cluster_identifier
+    #   Contains a user-supplied global database cluster identifier. This
+    #   identifier is the unique key that identifies a global database
+    #   cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] global_write_forwarding_status
     #   The status of write forwarding for a secondary cluster in an Aurora
     #   global database.
@@ -7448,7 +7535,7 @@ module Aws::RDS
     #   @return [Types::CertificateDetails]
     #
     # @!attribute [rw] engine_lifecycle_support
-    #   The life cycle type for the DB cluster.
+    #   The lifecycle type for the DB cluster.
     #
     #   For more information, see CreateDBCluster.
     #   @return [String]
@@ -7512,6 +7599,7 @@ module Aws::RDS
       :cross_account_clone,
       :domain_memberships,
       :tag_list,
+      :global_cluster_identifier,
       :global_write_forwarding_status,
       :global_write_forwarding_requested,
       :pending_modified_values,
@@ -9005,17 +9093,20 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] replica_mode
-    #   The open mode of an Oracle read replica. The default is
-    #   `open-read-only`. For more information, see [Working with Oracle
-    #   Read Replicas for Amazon RDS][1] in the *Amazon RDS User Guide*.
+    #   The open mode of a Db2 or an Oracle read replica. The default is
+    #   `open-read-only`. For more information, see [Working with read
+    #   replicas for Amazon RDS for Db2][1] and [Working with read replicas
+    #   for Amazon RDS for Oracle][2] in the *Amazon RDS User Guide*.
     #
-    #   <note markdown="1"> This attribute is only supported in RDS for Oracle.
+    #   <note markdown="1"> This attribute is only supported in RDS for Db2, RDS for Oracle, and
+    #   RDS Custom for Oracle.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
     #   @return [String]
     #
     # @!attribute [rw] license_model
@@ -9377,8 +9468,8 @@ module Aws::RDS
     #
     # @!attribute [rw] backup_target
     #   The location where automated backups and manual snapshots are
-    #   stored: Amazon Web Services Outposts or the Amazon Web Services
-    #   Region.
+    #   stored: Dedicated Local Zones, Amazon Web Services Outposts or the
+    #   Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] network_type
@@ -9464,7 +9555,7 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] engine_lifecycle_support
-    #   The life cycle type for the DB instance.
+    #   The lifecycle type for the DB instance.
     #
     #   For more information, see CreateDBInstance.
     #   @return [String]
@@ -9708,8 +9799,9 @@ module Aws::RDS
     #   @return [Array<Types::DBInstanceAutomatedBackupsReplication>]
     #
     # @!attribute [rw] backup_target
-    #   The location where automated backups are stored: Amazon Web Services
-    #   Outposts or the Amazon Web Services Region.
+    #   The location where automated backups are stored: Dedicated Local
+    #   Zones, Amazon Web Services Outposts or the Amazon Web Services
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] storage_throughput
@@ -9958,6 +10050,32 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBLogFileNotFoundFault AWS API Documentation
     #
     class DBLogFileNotFoundFault < Aws::EmptyStructure; end
+
+    # This data type is used as a response element in the operation
+    # `DescribeDBMajorEngineVersions`.
+    #
+    # @!attribute [rw] engine
+    #   The name of the database engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] major_engine_version
+    #   The major version number of the database engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_engine_lifecycles
+    #   A list of the lifecycles supported by this engine for the
+    #   `DescribeDBMajorEngineVersions` operation.
+    #   @return [Array<Types::SupportedEngineLifecycle>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBMajorEngineVersion AWS API Documentation
+    #
+    class DBMajorEngineVersion < Struct.new(
+      :engine,
+      :major_engine_version,
+      :supported_engine_lifecycles)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains the details of an Amazon RDS DB parameter group.
     #
@@ -11111,8 +11229,8 @@ module Aws::RDS
     #   @return [Time]
     #
     # @!attribute [rw] snapshot_target
-    #   Specifies where manual snapshots are stored: Amazon Web Services
-    #   Outposts or the Amazon Web Services Region.
+    #   Specifies where manual snapshots are stored: Dedicated Local Zones,
+    #   Amazon Web Services Outposts or the Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] storage_throughput
@@ -11135,6 +11253,12 @@ module Aws::RDS
     #   multi-tenant configuration (TRUE) or the single-tenant configuration
     #   (FALSE).
     #   @return [Boolean]
+    #
+    # @!attribute [rw] snapshot_availability_zone
+    #   Specifies the name of the Availability Zone where RDS stores the DB
+    #   snapshot. This value is valid only for snapshots that RDS stores on
+    #   a Dedicated Local Zone.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshot AWS API Documentation
     #
@@ -11174,7 +11298,8 @@ module Aws::RDS
       :storage_throughput,
       :db_system_id,
       :dedicated_log_volume,
-      :multi_tenant)
+      :multi_tenant,
+      :snapshot_availability_zone)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11406,7 +11531,10 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] subnets
-    #   Contains a list of `Subnet` elements.
+    #   Contains a list of `Subnet` elements. The list of subnets shown here
+    #   might not reflect the current state of your VPC. For the most
+    #   up-to-date information, we recommend checking your VPC configuration
+    #   directly.
     #   @return [Array<Types::Subnet>]
     #
     # @!attribute [rw] db_subnet_group_arn
@@ -13338,6 +13466,99 @@ module Aws::RDS
     #
     class DescribeDBLogFilesResponse < Struct.new(
       :describe_db_log_files,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] engine
+    #   The database engine to return major version details for.
+    #
+    #   Valid Values:
+    #
+    #   * `aurora-mysql`
+    #
+    #   * `aurora-postgresql`
+    #
+    #   * `custom-sqlserver-ee`
+    #
+    #   * `custom-sqlserver-se`
+    #
+    #   * `custom-sqlserver-web`
+    #
+    #   * `db2-ae`
+    #
+    #   * `db2-se`
+    #
+    #   * `mariadb`
+    #
+    #   * `mysql`
+    #
+    #   * `oracle-ee`
+    #
+    #   * `oracle-ee-cdb`
+    #
+    #   * `oracle-se2`
+    #
+    #   * `oracle-se2-cdb`
+    #
+    #   * `postgres`
+    #
+    #   * `sqlserver-ee`
+    #
+    #   * `sqlserver-se`
+    #
+    #   * `sqlserver-ex`
+    #
+    #   * `sqlserver-web`
+    #   @return [String]
+    #
+    # @!attribute [rw] major_engine_version
+    #   A specific database major engine version to return details for.
+    #
+    #   Example: `8.4`
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   than the `MaxRecords` value is available, a pagination token called
+    #   a marker is included in the response so you can retrieve the
+    #   remaining results.
+    #
+    #   Default: 100
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBMajorEngineVersionsRequest AWS API Documentation
+    #
+    class DescribeDBMajorEngineVersionsRequest < Struct.new(
+      :engine,
+      :major_engine_version,
+      :marker,
+      :max_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_major_engine_versions
+    #   A list of `DBMajorEngineVersion` elements.
+    #   @return [Array<Types::DBMajorEngineVersion>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBMajorEngineVersionsResponse AWS API Documentation
+    #
+    class DescribeDBMajorEngineVersionsResponse < Struct.new(
+      :db_major_engine_versions,
       :marker)
       SENSITIVE = []
       include Aws::Structure
@@ -16382,7 +16603,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] engine_lifecycle_support
-    #   The life cycle type for the global cluster.
+    #   The lifecycle type for the global cluster.
     #
     #   For more information, see CreateGlobalCluster.
     #   @return [String]
@@ -19347,26 +19568,50 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] replica_mode
-    #   A value that sets the open mode of a replica database to either
-    #   mounted or read-only.
+    #   The open mode of a replica database.
     #
-    #   <note markdown="1"> Currently, this parameter is only supported for Oracle DB instances.
+    #   <note markdown="1"> This parameter is only supported for Db2 DB instances and Oracle DB
+    #   instances.
     #
     #    </note>
     #
-    #   Mounted DB replicas are included in Oracle Enterprise Edition. The
-    #   main use case for mounted replicas is cross-Region disaster
-    #   recovery. The primary database doesn't use Active Data Guard to
-    #   transmit information to the mounted replica. Because it doesn't
-    #   accept user connections, a mounted replica can't serve a read-only
-    #   workload. For more information, see [Working with Oracle Read
-    #   Replicas for Amazon RDS][1] in the *Amazon RDS User Guide*.
+    #   Db2
     #
-    #   This setting doesn't apply to RDS Custom DB instances.
+    #   : Standby DB replicas are included in Db2 Advanced Edition (AE) and
+    #     Db2 Standard Edition (SE). The main use case for standby replicas
+    #     is cross-Region disaster recovery. Because it doesn't accept user
+    #     connections, a standby replica can't serve a read-only workload.
+    #
+    #     You can create a combination of standby and read-only DB replicas
+    #     for the same primary DB instance. For more information, see
+    #     [Working with read replicas for Amazon RDS for Db2][1] in the
+    #     *Amazon RDS User Guide*.
+    #
+    #     To create standby DB replicas for RDS for Db2, set this parameter
+    #     to `mounted`.
+    #
+    #   Oracle
+    #
+    #   : Mounted DB replicas are included in Oracle Database Enterprise
+    #     Edition. The main use case for mounted replicas is cross-Region
+    #     disaster recovery. The primary database doesn't use Active Data
+    #     Guard to transmit information to the mounted replica. Because it
+    #     doesn't accept user connections, a mounted replica can't serve a
+    #     read-only workload.
+    #
+    #     You can create a combination of mounted and read-only DB replicas
+    #     for the same primary DB instance. For more information, see
+    #     [Working with read replicas for Amazon RDS for Oracle][2] in the
+    #     *Amazon RDS User Guide*.
+    #
+    #     For RDS Custom, you must specify this parameter and set it to
+    #     `mounted`. The value won't be set by default. After replica
+    #     creation, you can manage the open mode manually.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
     #   @return [String]
     #
     # @!attribute [rw] enable_customer_owned_ip
@@ -23380,11 +23625,11 @@ module Aws::RDS
     #   standard support for that engine version. For more information, see
     #   the following sections:
     #
-    #   * Amazon Aurora - [Using Amazon RDS Extended Support][1] in the
-    #     *Amazon Aurora User Guide*
+    #   * Amazon Aurora - [Amazon RDS Extended Support with Amazon
+    #     Aurora][1] in the *Amazon Aurora User Guide*
     #
-    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
-    #     RDS User Guide*
+    #   * Amazon RDS - [Amazon RDS Extended Support with Amazon RDS][2] in
+    #     the *Amazon RDS User Guide*
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -24022,11 +24267,11 @@ module Aws::RDS
     #   standard support for that engine version. For more information, see
     #   the following sections:
     #
-    #   * Amazon Aurora - [Using Amazon RDS Extended Support][1] in the
-    #     *Amazon Aurora User Guide*
+    #   * Amazon Aurora - [Amazon RDS Extended Support with Amazon
+    #     Aurora][1] in the *Amazon Aurora User Guide*
     #
-    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
-    #     RDS User Guide*
+    #   * Amazon RDS - [Amazon RDS Extended Support with Amazon RDS][2] in
+    #     the *Amazon RDS User Guide*
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -24639,11 +24884,11 @@ module Aws::RDS
     #   standard support for that engine version. For more information, see
     #   the following sections:
     #
-    #   * Amazon Aurora - [Using Amazon RDS Extended Support][1] in the
-    #     *Amazon Aurora User Guide*
+    #   * Amazon Aurora - [Amazon RDS Extended Support with Amazon
+    #     Aurora][1] in the *Amazon Aurora User Guide*
     #
-    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
-    #     RDS User Guide*
+    #   * Amazon RDS - [Amazon RDS Extended Support with Amazon RDS][2] in
+    #     the *Amazon RDS User Guide*
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -25244,8 +25489,9 @@ module Aws::RDS
     #   Specifies where automated backups and manual snapshots are stored
     #   for the restored DB instance.
     #
-    #   Possible values are `outposts` (Amazon Web Services Outposts) and
-    #   `region` (Amazon Web Services Region). The default is `region`.
+    #   Possible values are `local` (Dedicated Local Zone), `outposts`
+    #   (Amazon Web Services Outposts), and `region` (Amazon Web Services
+    #   Region). The default is `region`.
     #
     #   For more information, see [Working with Amazon RDS on Amazon Web
     #   Services Outposts][1] in the *Amazon RDS User Guide*.
@@ -25362,8 +25608,8 @@ module Aws::RDS
     #   Extended Support. With RDS Extended Support, you can run the
     #   selected major engine version on your DB instance past the end of
     #   standard support for that engine version. For more information, see
-    #   [Using Amazon RDS Extended Support][1] in the *Amazon RDS User
-    #   Guide*.
+    #   [Amazon RDS Extended Support with Amazon RDS][1] in the *Amazon RDS
+    #   User Guide*.
     #
     #   This setting applies only to RDS for MySQL and RDS for PostgreSQL.
     #   For Amazon Aurora DB instances, the life cycle type is managed by
@@ -26095,7 +26341,7 @@ module Aws::RDS
     #   Extended Support. With RDS Extended Support, you can run the
     #   selected major engine version on your DB instance past the end of
     #   standard support for that engine version. For more information, see
-    #   [Using Amazon RDS Extended Support][1] in the *Amazon RDS User
+    #   [Amazon RDS Extended Support Amazon RDS][1] in the *Amazon RDS User
     #   Guide*.
     #
     #   This setting applies only to RDS for MySQL and RDS for PostgreSQL.
@@ -26745,6 +26991,8 @@ module Aws::RDS
     #
     #   Valid Values:
     #
+    #   * `local` (Dedicated Local Zone)
+    #
     #   * `outposts` (Amazon Web Services Outposts)
     #
     #   * `region` (Amazon Web Services Region)
@@ -26840,8 +27088,8 @@ module Aws::RDS
     #   Extended Support. With RDS Extended Support, you can run the
     #   selected major engine version on your DB instance past the end of
     #   standard support for that engine version. For more information, see
-    #   [Using Amazon RDS Extended Support][1] in the *Amazon RDS User
-    #   Guide*.
+    #   [Amazon RDS Extended Support with Amazon RDS][1] in the *Amazon RDS
+    #   User Guide*.
     #
     #   This setting applies only to RDS for MySQL and RDS for PostgreSQL.
     #   For Amazon Aurora DB instances, the life cycle type is managed by
@@ -27764,23 +28012,9 @@ module Aws::RDS
     #   operations. These can be set in the Amazon Web Services KMS key
     #   policy:
     #
-    #   * kms:Encrypt
-    #
-    #   * kms:Decrypt
-    #
-    #   * kms:GenerateDataKey
-    #
-    #   * kms:GenerateDataKeyWithoutPlaintext
-    #
-    #   * kms:ReEncryptFrom
-    #
-    #   * kms:ReEncryptTo
-    #
     #   * kms:CreateGrant
     #
     #   * kms:DescribeKey
-    #
-    #   * kms:RetireGrant
     #   @return [String]
     #
     # @!attribute [rw] s3_prefix
@@ -28073,6 +28307,66 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SubscriptionNotFoundFault AWS API Documentation
     #
     class SubscriptionNotFoundFault < Aws::EmptyStructure; end
+
+    # This data type is used as a response element in the operation
+    # `DescribeDBMajorEngineVersions`.
+    #
+    # You can use the information that this data type returns to plan for
+    # upgrades.
+    #
+    # This data type only returns information for the open source engines
+    # Amazon RDS for MariaDB, Amazon RDS for MySQL, Amazon RDS for
+    # PostgreSQL, Aurora MySQL, and Aurora PostgreSQL.
+    #
+    # @!attribute [rw] lifecycle_support_name
+    #   The type of lifecycle support that the engine version is in.
+    #
+    #   This parameter returns the following values:
+    #
+    #   * `open-source-rds-standard-support` - Indicates RDS standard
+    #     support or Aurora standard support.
+    #
+    #   * `open-source-rds-extended-support` - Indicates Amazon RDS Extended
+    #     Support.
+    #
+    #   For Amazon RDS for MySQL, Amazon RDS for PostgreSQL, Aurora MySQL,
+    #   and Aurora PostgreSQL, this parameter returns both
+    #   `open-source-rds-standard-support` and
+    #   `open-source-rds-extended-support`.
+    #
+    #   For Amazon RDS for MariaDB, this parameter only returns the value
+    #   `open-source-rds-standard-support`.
+    #
+    #   For information about Amazon RDS Extended Support, see [Amazon RDS
+    #   Extended Support with Amazon RDS][1] in the *Amazon RDS User Guide*
+    #   and [Amazon RDS Extended Support with Amazon Aurora][2] in the
+    #   *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_support_start_date
+    #   The start date for the type of support returned by
+    #   `LifecycleSupportName`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] lifecycle_support_end_date
+    #   The end date for the type of support returned by
+    #   `LifecycleSupportName`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SupportedEngineLifecycle AWS API Documentation
+    #
+    class SupportedEngineLifecycle < Struct.new(
+      :lifecycle_support_name,
+      :lifecycle_support_start_date,
+      :lifecycle_support_end_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] blue_green_deployment_identifier
     #   The resource ID of the blue/green deployment.

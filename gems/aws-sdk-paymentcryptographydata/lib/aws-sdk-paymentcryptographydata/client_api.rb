@@ -68,7 +68,7 @@ module Aws::PaymentCryptographyData
     GeneratePinDataInput = Shapes::StructureShape.new(name: 'GeneratePinDataInput')
     GeneratePinDataOutput = Shapes::StructureShape.new(name: 'GeneratePinDataOutput')
     HexEvenLengthBetween16And32 = Shapes::StringShape.new(name: 'HexEvenLengthBetween16And32')
-    HexLengthBetween10And24 = Shapes::StringShape.new(name: 'HexLengthBetween10And24')
+    HexLength16Or20Or24 = Shapes::StringShape.new(name: 'HexLength16Or20Or24')
     HexLengthBetween2And4 = Shapes::StringShape.new(name: 'HexLengthBetween2And4')
     HexLengthBetween2And8 = Shapes::StringShape.new(name: 'HexLengthBetween2And8')
     HexLengthEquals1 = Shapes::StringShape.new(name: 'HexLengthEquals1')
@@ -287,16 +287,16 @@ module Aws::PaymentCryptographyData
     DiscoverDynamicCardVerificationCode.add_member(:application_transaction_counter, Shapes::ShapeRef.new(shape: HexLengthBetween2And4, required: true, location_name: "ApplicationTransactionCounter"))
     DiscoverDynamicCardVerificationCode.struct_class = Types::DiscoverDynamicCardVerificationCode
 
-    DukptAttributes.add_member(:key_serial_number, Shapes::ShapeRef.new(shape: HexLengthBetween10And24, required: true, location_name: "KeySerialNumber"))
+    DukptAttributes.add_member(:key_serial_number, Shapes::ShapeRef.new(shape: HexLength16Or20Or24, required: true, location_name: "KeySerialNumber"))
     DukptAttributes.add_member(:dukpt_derivation_type, Shapes::ShapeRef.new(shape: DukptDerivationType, required: true, location_name: "DukptDerivationType"))
     DukptAttributes.struct_class = Types::DukptAttributes
 
-    DukptDerivationAttributes.add_member(:key_serial_number, Shapes::ShapeRef.new(shape: HexLengthBetween10And24, required: true, location_name: "KeySerialNumber"))
+    DukptDerivationAttributes.add_member(:key_serial_number, Shapes::ShapeRef.new(shape: HexLength16Or20Or24, required: true, location_name: "KeySerialNumber"))
     DukptDerivationAttributes.add_member(:dukpt_key_derivation_type, Shapes::ShapeRef.new(shape: DukptDerivationType, location_name: "DukptKeyDerivationType"))
     DukptDerivationAttributes.add_member(:dukpt_key_variant, Shapes::ShapeRef.new(shape: DukptKeyVariant, location_name: "DukptKeyVariant"))
     DukptDerivationAttributes.struct_class = Types::DukptDerivationAttributes
 
-    DukptEncryptionAttributes.add_member(:key_serial_number, Shapes::ShapeRef.new(shape: HexLengthBetween10And24, required: true, location_name: "KeySerialNumber"))
+    DukptEncryptionAttributes.add_member(:key_serial_number, Shapes::ShapeRef.new(shape: HexLength16Or20Or24, required: true, location_name: "KeySerialNumber"))
     DukptEncryptionAttributes.add_member(:mode, Shapes::ShapeRef.new(shape: DukptEncryptionMode, location_name: "Mode"))
     DukptEncryptionAttributes.add_member(:dukpt_key_derivation_type, Shapes::ShapeRef.new(shape: DukptDerivationType, location_name: "DukptKeyDerivationType"))
     DukptEncryptionAttributes.add_member(:dukpt_key_variant, Shapes::ShapeRef.new(shape: DukptKeyVariant, location_name: "DukptKeyVariant"))
@@ -459,7 +459,7 @@ module Aws::PaymentCryptographyData
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
-    MacAlgorithmDukpt.add_member(:key_serial_number, Shapes::ShapeRef.new(shape: HexLengthBetween10And24, required: true, location_name: "KeySerialNumber"))
+    MacAlgorithmDukpt.add_member(:key_serial_number, Shapes::ShapeRef.new(shape: HexLength16Or20Or24, required: true, location_name: "KeySerialNumber"))
     MacAlgorithmDukpt.add_member(:dukpt_key_variant, Shapes::ShapeRef.new(shape: DukptKeyVariant, required: true, location_name: "DukptKeyVariant"))
     MacAlgorithmDukpt.add_member(:dukpt_derivation_type, Shapes::ShapeRef.new(shape: DukptDerivationType, location_name: "DukptDerivationType"))
     MacAlgorithmDukpt.struct_class = Types::MacAlgorithmDukpt

@@ -31,7 +31,9 @@ module Aws::Kinesis
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A set of up to 10 key-value pairs to use to create the tags.
+    #   A set of up to 50 key-value pairs to use to create the tags. A tag
+    #   consists of a required key and an optional value. You can add up to
+    #   50 tags per resource.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] stream_arn
@@ -178,7 +180,8 @@ module Aws::Kinesis
     #   @return [Types::StreamModeDetails]
     #
     # @!attribute [rw] tags
-    #   A set of up to 10 key-value pairs to use to create the tags.
+    #   A set of up to 50 key-value pairs to use to create the tags. A tag
+    #   consists of a required key and an optional value.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateStreamInput AWS API Documentation
@@ -1318,6 +1321,31 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Kinesis resource for which to
+    #   list tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListTagsForResourceInput AWS API Documentation
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   An array of tags associated with the specified Kinesis resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListTagsForResourceOutput AWS API Documentation
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input for `ListTagsForStream`.
     #
     # @!attribute [rw] stream_name
@@ -1731,11 +1759,17 @@ module Aws::Kinesis
     #   streams.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A set of up to 50 key-value pairs. A tag consists of a required key
+    #   and an optional value.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RegisterStreamConsumerInput AWS API Documentation
     #
     class RegisterStreamConsumerInput < Struct.new(
       :stream_arn,
-      :consumer_name)
+      :consumer_name,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2446,7 +2480,8 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
-    # Metadata assigned to the stream, consisting of a key-value pair.
+    # Metadata assigned to the stream or consumer, consisting of a key-value
+    # pair.
     #
     # @!attribute [rw] key
     #   A unique identifier for the tag. Maximum length: 128 characters.
@@ -2465,6 +2500,49 @@ module Aws::Kinesis
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   An array of tags to be added to the Kinesis resource. A tag consists
+    #   of a required key and an optional value. You can add up to 50 tags
+    #   per resource.
+    #
+    #   Tags may only contain Unicode letters, digits, white space, or these
+    #   symbols: \_ . : / = + - @.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Kinesis resource to which to
+    #   add tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/TagResourceInput AWS API Documentation
+    #
+    class TagResourceInput < Struct.new(
+      :tags,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tag_keys
+    #   A list of tag key-value pairs. Existing tags of the resource whose
+    #   keys are members of this list will be removed from the Kinesis
+    #   resource.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Kinesis resource from which to
+    #   remove tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UntagResourceInput AWS API Documentation
+    #
+    class UntagResourceInput < Struct.new(
+      :tag_keys,
+      :resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end

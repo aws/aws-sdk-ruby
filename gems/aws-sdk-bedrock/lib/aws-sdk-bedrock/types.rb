@@ -23,6 +23,25 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Information about the agreement availability
+    #
+    # @!attribute [rw] status
+    #   Status of the agreement.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AgreementAvailability AWS API Documentation
+    #
+    class AgreementAvailability < Struct.new(
+      :status,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration details of an automated evaluation job. The
     # `EvaluationDatasetMetricConfig` object is used to specify the prompt
     # datasets, task type, and metric names.
@@ -264,6 +283,158 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # @!attribute [rw] model_deployment_name
+    #   The name for the custom model deployment. The name must be unique
+    #   within your Amazon Web Services account and Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) of the custom model to deploy for
+    #   on-demand inference. The custom model must be in the `Active` state.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the custom model deployment to help you identify
+    #   its purpose.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to assign to the custom model deployment. You can use tags to
+    #   organize and track your Amazon Web Services resources for cost
+    #   allocation and management purposes.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateCustomModelDeploymentRequest AWS API Documentation
+    #
+    class CreateCustomModelDeploymentRequest < Struct.new(
+      :model_deployment_name,
+      :model_arn,
+      :description,
+      :tags,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_model_deployment_arn
+    #   The Amazon Resource Name (ARN) of the custom model deployment. Use
+    #   this ARN as the `modelId` parameter when invoking the model with the
+    #   `InvokeModel` or `Converse` operations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateCustomModelDeploymentResponse AWS API Documentation
+    #
+    class CreateCustomModelDeploymentResponse < Struct.new(
+      :custom_model_deployment_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_name
+    #   A unique name for the custom model.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_source_config
+    #   The data source for the model. The Amazon S3 URI in the model source
+    #   must be for the Amazon-managed Amazon S3 bucket containing your
+    #   model artifacts.
+    #   @return [Types::ModelDataSource]
+    #
+    # @!attribute [rw] model_kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer managed KMS key to
+    #   encrypt the custom model. If you don't provide a KMS key, Amazon
+    #   Bedrock uses an Amazon Web Services-managed KMS key to encrypt the
+    #   model.
+    #
+    #   If you provide a customer managed KMS key, your Amazon Bedrock
+    #   service role must have permissions to use it. For more information
+    #   see [Encryption of imported models][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/encryption-import-model.html
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of an IAM service role that Amazon
+    #   Bedrock assumes to perform tasks on your behalf. This role must have
+    #   permissions to access the Amazon S3 bucket containing your model
+    #   artifacts and the KMS key (if specified). For more information, see
+    #   [Setting up an IAM service role for importing models][1] in the
+    #   Amazon Bedrock User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-import-iam-role.html
+    #   @return [String]
+    #
+    # @!attribute [rw] model_tags
+    #   A list of key-value pairs to associate with the custom model
+    #   resource. You can use these tags to organize and identify your
+    #   resources.
+    #
+    #   For more information, see [Tagging resources][1] in the [Amazon
+    #   Bedrock User Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateCustomModelRequest AWS API Documentation
+    #
+    class CreateCustomModelRequest < Struct.new(
+      :model_name,
+      :model_source_config,
+      :model_kms_key_arn,
+      :role_arn,
+      :model_tags,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) of the new custom model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateCustomModelResponse AWS API Documentation
+    #
+    class CreateCustomModelResponse < Struct.new(
+      :model_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] job_name
     #   A name for the evaluation job. Names must unique with your Amazon
     #   Web Services account, and your account's Amazon Web Services
@@ -365,6 +536,35 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # @!attribute [rw] offer_token
+    #   An offer token encapsulates the information for an offer.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_id
+    #   Model Id of the model for the access request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateFoundationModelAgreementRequest AWS API Documentation
+    #
+    class CreateFoundationModelAgreementRequest < Struct.new(
+      :offer_token,
+      :model_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_id
+    #   Model Id of the model for the access request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateFoundationModelAgreementResponse AWS API Documentation
+    #
+    class CreateFoundationModelAgreementResponse < Struct.new(
+      :model_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name to give the guardrail.
     #   @return [String]
@@ -393,6 +593,19 @@ module Aws::Bedrock
     #   The contextual grounding policy configuration used to create a
     #   guardrail.
     #   @return [Types::GuardrailContextualGroundingPolicyConfig]
+    #
+    # @!attribute [rw] cross_region_config
+    #   The system-defined guardrail profile that you're using with your
+    #   guardrail. Guardrail profiles define the destination Amazon Web
+    #   Services Regions where guardrail inference requests can be
+    #   automatically routed.
+    #
+    #   For more information, see the [Amazon Bedrock User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #   @return [Types::GuardrailCrossRegionConfig]
     #
     # @!attribute [rw] blocked_input_messaging
     #   The message to return when the guardrail blocks a prompt.
@@ -435,6 +648,7 @@ module Aws::Bedrock
       :word_policy_config,
       :sensitive_information_policy_config,
       :contextual_grounding_policy_config,
+      :cross_region_config,
       :blocked_input_messaging,
       :blocked_outputs_messaging,
       :kms_key_id,
@@ -1251,6 +1465,55 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Contains summary information about a custom model deployment,
+    # including its ARN, name, status, and associated custom model.
+    #
+    # @!attribute [rw] custom_model_deployment_arn
+    #   The Amazon Resource Name (ARN) of the custom model deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_model_deployment_name
+    #   The name of the custom model deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) of the custom model associated with
+    #   this deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the custom model deployment was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the custom model deployment. Possible values are
+    #   `CREATING`, `ACTIVE`, and `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The date and time when the custom model deployment was last
+    #   modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_message
+    #   If the deployment status is `FAILED`, this field contains a message
+    #   describing the failure reason.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CustomModelDeploymentSummary AWS API Documentation
+    #
+    class CustomModelDeploymentSummary < Struct.new(
+      :custom_model_deployment_arn,
+      :custom_model_deployment_name,
+      :model_arn,
+      :created_at,
+      :status,
+      :last_updated_at,
+      :failure_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Summary information for a custom model.
     #
     # @!attribute [rw] model_arn
@@ -1287,6 +1550,17 @@ module Aws::Bedrock
     #   The unique identifier of the account that owns the model.
     #   @return [String]
     #
+    # @!attribute [rw] model_status
+    #   The current status of the custom model. Possible values include:
+    #
+    #   * `Creating` - The model is being created and validated.
+    #
+    #   * `Active` - The model has been successfully created and is ready
+    #     for use.
+    #
+    #   * `Failed` - The model creation process failed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CustomModelSummary AWS API Documentation
     #
     class CustomModelSummary < Struct.new(
@@ -1296,7 +1570,8 @@ module Aws::Bedrock
       :base_model_arn,
       :base_model_name,
       :customization_type,
-      :owner_account_id)
+      :owner_account_id,
+      :model_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1337,7 +1612,7 @@ module Aws::Bedrock
     # @note CustomizationConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CustomizationConfig corresponding to the set member.
     #
     # @!attribute [rw] distillation_config
-    #   The distillation configuration for the custom model.
+    #   The Distillation configuration for the custom model.
     #   @return [Types::DistillationConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CustomizationConfig AWS API Documentation
@@ -1352,6 +1627,48 @@ module Aws::Bedrock
       class DistillationConfig < CustomizationConfig; end
       class Unknown < CustomizationConfig; end
     end
+
+    # For a Distillation job, the status details for the data processing
+    # sub-task of the job.
+    #
+    # @!attribute [rw] status
+    #   The status of the data processing sub-task of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The start time of the data processing sub-task of the job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The latest update to the data processing sub-task of the job.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DataProcessingDetails AWS API Documentation
+    #
+    class DataProcessingDetails < Struct.new(
+      :status,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_model_deployment_identifier
+    #   The Amazon Resource Name (ARN) or name of the custom model
+    #   deployment to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteCustomModelDeploymentRequest AWS API Documentation
+    #
+    class DeleteCustomModelDeploymentRequest < Struct.new(
+      :custom_model_deployment_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteCustomModelDeploymentResponse AWS API Documentation
+    #
+    class DeleteCustomModelDeploymentResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] model_identifier
     #   Name of the model to delete.
@@ -1368,6 +1685,22 @@ module Aws::Bedrock
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteCustomModelResponse AWS API Documentation
     #
     class DeleteCustomModelResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] model_id
+    #   Model Id of the model access to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteFoundationModelAgreementRequest AWS API Documentation
+    #
+    class DeleteFoundationModelAgreementRequest < Struct.new(
+      :model_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteFoundationModelAgreementResponse AWS API Documentation
+    #
+    class DeleteFoundationModelAgreementResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] guardrail_identifier
     #   The unique identifier of the guardrail. This can be an ID or the
@@ -1499,6 +1832,35 @@ module Aws::Bedrock
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeregisterMarketplaceModelEndpointResponse AWS API Documentation
     #
     class DeregisterMarketplaceModelEndpointResponse < Aws::EmptyStructure; end
+
+    # Dimensional price rate.
+    #
+    # @!attribute [rw] dimension
+    #   Dimension for the price rate.
+    #   @return [String]
+    #
+    # @!attribute [rw] price
+    #   Single-dimensional rate information.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description of the price rate.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   Unit associated with the price.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DimensionalPriceRate AWS API Documentation
+    #
+    class DimensionalPriceRate < Struct.new(
+      :dimension,
+      :price,
+      :description,
+      :unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Settings for distilling a foundation model into a smaller and more
     # efficient model.
@@ -2152,6 +2514,24 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Specifies a field to be used during the reranking process in a
+    # Knowledge Base vector search. This structure identifies metadata
+    # fields that should be considered when reordering search results to
+    # improve relevance.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the metadata field to be used during the reranking
+    #   process.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/FieldForReranking AWS API Documentation
+    #
+    class FieldForReranking < Struct.new(
+      :field_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the name of the metadata attribute/field to apply filters.
     # You must match the name of the attribute/field in your data
     # source/document metadata.
@@ -2344,6 +2724,77 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # @!attribute [rw] custom_model_deployment_identifier
+    #   The Amazon Resource Name (ARN) or name of the custom model
+    #   deployment to retrieve information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetCustomModelDeploymentRequest AWS API Documentation
+    #
+    class GetCustomModelDeploymentRequest < Struct.new(
+      :custom_model_deployment_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_model_deployment_arn
+    #   The Amazon Resource Name (ARN) of the custom model deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_deployment_name
+    #   The name of the custom model deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) of the custom model associated with
+    #   this deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the custom model deployment was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the custom model deployment. Possible values are:
+    #
+    #   * `CREATING` - The deployment is being set up and prepared for
+    #     inference.
+    #
+    #   * `ACTIVE` - The deployment is ready and available for inference
+    #     requests.
+    #
+    #   * `FAILED` - The deployment failed to be created or became
+    #     unavailable.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the custom model deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   If the deployment status is `FAILED`, this field contains a message
+    #   describing the failure reason.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The date and time when the custom model deployment was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetCustomModelDeploymentResponse AWS API Documentation
+    #
+    class GetCustomModelDeploymentResponse < Struct.new(
+      :custom_model_deployment_arn,
+      :model_deployment_name,
+      :model_arn,
+      :created_at,
+      :status,
+      :description,
+      :failure_message,
+      :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] model_identifier
     #   Name or Amazon Resource Name (ARN) of the custom model.
     #   @return [String]
@@ -2369,7 +2820,13 @@ module Aws::Bedrock
     #   @return [String]
     #
     # @!attribute [rw] job_arn
-    #   Job Amazon Resource Name (ARN) associated with this model.
+    #   Job Amazon Resource Name (ARN) associated with this model. For
+    #   models that you create with the [CreateCustomModel][1] API
+    #   operation, this is `NULL`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateCustomModel.html
     #   @return [String]
     #
     # @!attribute [rw] base_model_arn
@@ -2421,6 +2878,24 @@ module Aws::Bedrock
     #   The customization configuration for the custom model.
     #   @return [Types::CustomizationConfig]
     #
+    # @!attribute [rw] model_status
+    #   The current status of the custom model. Possible values include:
+    #
+    #   * `Creating` - The model is being created and validated.
+    #
+    #   * `Active` - The model has been successfully created and is ready
+    #     for use.
+    #
+    #   * `Failed` - The model creation process failed. Check the
+    #     `failureMessage` field for details.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   A failure message for any issues that occurred when creating the
+    #   custom model. This is included for only a failed CreateCustomModel
+    #   operation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetCustomModelResponse AWS API Documentation
     #
     class GetCustomModelResponse < Struct.new(
@@ -2438,7 +2913,9 @@ module Aws::Bedrock
       :training_metrics,
       :validation_metrics,
       :creation_time,
-      :customization_config)
+      :customization_config,
+      :model_status,
+      :failure_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2540,6 +3017,50 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # @!attribute [rw] model_id
+    #   The model Id of the foundation model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetFoundationModelAvailabilityRequest AWS API Documentation
+    #
+    class GetFoundationModelAvailabilityRequest < Struct.new(
+      :model_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_id
+    #   The model Id of the foundation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_availability
+    #   Agreement availability.
+    #   @return [Types::AgreementAvailability]
+    #
+    # @!attribute [rw] authorization_status
+    #   Authorization status.
+    #   @return [String]
+    #
+    # @!attribute [rw] entitlement_availability
+    #   Entitlement availability.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_availability
+    #   Region availability.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetFoundationModelAvailabilityResponse AWS API Documentation
+    #
+    class GetFoundationModelAvailabilityResponse < Struct.new(
+      :model_id,
+      :agreement_availability,
+      :authorization_status,
+      :entitlement_availability,
+      :region_availability)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] model_identifier
     #   The model identifier.
     #   @return [String]
@@ -2629,6 +3150,12 @@ module Aws::Bedrock
     #   The contextual grounding policy used in the guardrail.
     #   @return [Types::GuardrailContextualGroundingPolicy]
     #
+    # @!attribute [rw] cross_region_details
+    #   Details about the system-defined guardrail profile that you're
+    #   using with your guardrail, including the guardrail profile ID and
+    #   Amazon Resource Name (ARN).
+    #   @return [Types::GuardrailCrossRegionDetails]
+    #
     # @!attribute [rw] created_at
     #   The date and time at which the guardrail was created.
     #   @return [Time]
@@ -2674,6 +3201,7 @@ module Aws::Bedrock
       :word_policy,
       :sensitive_information_policy,
       :contextual_grounding_policy,
+      :cross_region_details,
       :created_at,
       :updated_at,
       :status_reasons,
@@ -2974,6 +3502,11 @@ module Aws::Bedrock
     #   failed.
     #   @return [String]
     #
+    # @!attribute [rw] status_details
+    #   For a Distillation job, the details about the statuses of the
+    #   sub-tasks of the customization job.
+    #   @return [Types::StatusDetails]
+    #
     # @!attribute [rw] failure_message
     #   Information about why the job failed.
     #   @return [String]
@@ -3050,6 +3583,7 @@ module Aws::Bedrock
       :client_request_token,
       :role_arn,
       :status,
+      :status_details,
       :failure_message,
       :creation_time,
       :last_modified_time,
@@ -3506,6 +4040,24 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetUseCaseForModelAccessRequest AWS API Documentation
+    #
+    class GetUseCaseForModelAccessRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] form_data
+    #   Get customer profile Response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetUseCaseForModelAccessResponse AWS API Documentation
+    #
+    class GetUseCaseForModelAccessResponse < Struct.new(
+      :form_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration details for the guardrail.
     #
     # @!attribute [rw] guardrail_id
@@ -3760,6 +4312,60 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # The tier that your guardrail uses for content filters.
+    #
+    # @!attribute [rw] tier_name
+    #   The tier that your guardrail uses for content filters. Valid values
+    #   include:
+    #
+    #   * `CLASSIC` tier – Provides established guardrails functionality
+    #     supporting English, French, and Spanish languages.
+    #
+    #   * `STANDARD` tier – Provides a more robust solution than the
+    #     `CLASSIC` tier and has more comprehensive language support. This
+    #     tier requires that your guardrail use [cross-Region inference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailContentFiltersTier AWS API Documentation
+    #
+    class GuardrailContentFiltersTier < Struct.new(
+      :tier_name)
+      SENSITIVE = [:tier_name]
+      include Aws::Structure
+    end
+
+    # The tier that your guardrail uses for content filters. Consider using
+    # a tier that balances performance, accuracy, and compatibility with
+    # your existing generative AI workflows.
+    #
+    # @!attribute [rw] tier_name
+    #   The tier that your guardrail uses for content filters. Valid values
+    #   include:
+    #
+    #   * `CLASSIC` tier – Provides established guardrails functionality
+    #     supporting English, French, and Spanish languages.
+    #
+    #   * `STANDARD` tier – Provides a more robust solution than the
+    #     `CLASSIC` tier and has more comprehensive language support. This
+    #     tier requires that your guardrail use [cross-Region inference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailContentFiltersTierConfig AWS API Documentation
+    #
+    class GuardrailContentFiltersTierConfig < Struct.new(
+      :tier_name)
+      SENSITIVE = [:tier_name]
+      include Aws::Structure
+    end
+
     # Contains details about how to handle harmful content.
     #
     # This data type is used in the following API operations:
@@ -3777,10 +4383,15 @@ module Aws::Bedrock
     #   apply to prompts and model responses.
     #   @return [Array<Types::GuardrailContentFilter>]
     #
+    # @!attribute [rw] tier
+    #   The tier that your guardrail uses for content filters.
+    #   @return [Types::GuardrailContentFiltersTier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailContentPolicy AWS API Documentation
     #
     class GuardrailContentPolicy < Struct.new(
-      :filters)
+      :filters,
+      :tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3792,10 +4403,15 @@ module Aws::Bedrock
     #   apply to prompts and model responses.
     #   @return [Array<Types::GuardrailContentFilterConfig>]
     #
+    # @!attribute [rw] tier_config
+    #   The tier that your guardrail uses for content filters.
+    #   @return [Types::GuardrailContentFiltersTierConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailContentPolicyConfig AWS API Documentation
     #
     class GuardrailContentPolicyConfig < Struct.new(
-      :filters_config)
+      :filters_config,
+      :tier_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3904,6 +4520,71 @@ module Aws::Bedrock
     #
     class GuardrailContextualGroundingPolicyConfig < Struct.new(
       :filters_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The system-defined guardrail profile that you're using with your
+    # guardrail. Guardrail profiles define the destination Amazon Web
+    # Services Regions where guardrail inference requests can be
+    # automatically routed. Using guardrail profiles helps maintain
+    # guardrail performance and reliability when demand increases.
+    #
+    # For more information, see the [Amazon Bedrock User Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #
+    # @!attribute [rw] guardrail_profile_identifier
+    #   The ID or Amazon Resource Name (ARN) of the guardrail profile that
+    #   your guardrail is using. Guardrail profile availability depends on
+    #   your current Amazon Web Services Region. For more information, see
+    #   the [Amazon Bedrock User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region-support.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailCrossRegionConfig AWS API Documentation
+    #
+    class GuardrailCrossRegionConfig < Struct.new(
+      :guardrail_profile_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the system-defined guardrail profile that
+    # you're using with your guardrail for cross-Region inference.
+    #
+    # For more information, see the [Amazon Bedrock User Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #
+    # @!attribute [rw] guardrail_profile_id
+    #   The ID of the guardrail profile that your guardrail is using.
+    #   Profile availability depends on your current Amazon Web Services
+    #   Region. For more information, see the [Amazon Bedrock User
+    #   Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region-support.html
+    #   @return [String]
+    #
+    # @!attribute [rw] guardrail_profile_arn
+    #   The Amazon Resource Name (ARN) of the guardrail profile that you're
+    #   using with your guardrail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailCrossRegionDetails AWS API Documentation
+    #
+    class GuardrailCrossRegionDetails < Struct.new(
+      :guardrail_profile_id,
+      :guardrail_profile_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4567,6 +5248,12 @@ module Aws::Bedrock
     #   The date and time at which the guardrail was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] cross_region_details
+    #   Details about the system-defined guardrail profile that you're
+    #   using with your guardrail, including the guardrail profile ID and
+    #   Amazon Resource Name (ARN).
+    #   @return [Types::GuardrailCrossRegionDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailSummary AWS API Documentation
     #
     class GuardrailSummary < Struct.new(
@@ -4577,7 +5264,8 @@ module Aws::Bedrock
       :description,
       :version,
       :created_at,
-      :updated_at)
+      :updated_at,
+      :cross_region_details)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -4741,10 +5429,15 @@ module Aws::Bedrock
     #   A list of policies related to topics that the guardrail should deny.
     #   @return [Array<Types::GuardrailTopic>]
     #
+    # @!attribute [rw] tier
+    #   The tier that your guardrail uses for denied topic filters.
+    #   @return [Types::GuardrailTopicsTier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailTopicPolicy AWS API Documentation
     #
     class GuardrailTopicPolicy < Struct.new(
-      :topics)
+      :topics,
+      :tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4756,11 +5449,70 @@ module Aws::Bedrock
     #   A list of policies related to topics that the guardrail should deny.
     #   @return [Array<Types::GuardrailTopicConfig>]
     #
+    # @!attribute [rw] tier_config
+    #   The tier that your guardrail uses for denied topic filters.
+    #   @return [Types::GuardrailTopicsTierConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailTopicPolicyConfig AWS API Documentation
     #
     class GuardrailTopicPolicyConfig < Struct.new(
-      :topics_config)
+      :topics_config,
+      :tier_config)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The tier that your guardrail uses for denied topic filters.
+    #
+    # @!attribute [rw] tier_name
+    #   The tier that your guardrail uses for denied topic filters. Valid
+    #   values include:
+    #
+    #   * `CLASSIC` tier – Provides established guardrails functionality
+    #     supporting English, French, and Spanish languages.
+    #
+    #   * `STANDARD` tier – Provides a more robust solution than the
+    #     `CLASSIC` tier and has more comprehensive language support. This
+    #     tier requires that your guardrail use [cross-Region inference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailTopicsTier AWS API Documentation
+    #
+    class GuardrailTopicsTier < Struct.new(
+      :tier_name)
+      SENSITIVE = [:tier_name]
+      include Aws::Structure
+    end
+
+    # The tier that your guardrail uses for denied topic filters. Consider
+    # using a tier that balances performance, accuracy, and compatibility
+    # with your existing generative AI workflows.
+    #
+    # @!attribute [rw] tier_name
+    #   The tier that your guardrail uses for denied topic filters. Valid
+    #   values include:
+    #
+    #   * `CLASSIC` tier – Provides established guardrails functionality
+    #     supporting English, French, and Spanish languages.
+    #
+    #   * `STANDARD` tier – Provides a more robust solution than the
+    #     `CLASSIC` tier and has more comprehensive language support. This
+    #     tier requires that your guardrail use [cross-Region inference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailTopicsTierConfig AWS API Documentation
+    #
+    class GuardrailTopicsTierConfig < Struct.new(
+      :tier_name)
+      SENSITIVE = [:tier_name]
       include Aws::Structure
     end
 
@@ -4996,6 +5748,32 @@ module Aws::Bedrock
       :flow_definition_arn,
       :instructions)
       SENSITIVE = [:instructions]
+      include Aws::Structure
+    end
+
+    # Configuration for implicit filtering in Knowledge Base vector
+    # searches. Implicit filtering allows you to automatically filter search
+    # results based on metadata attributes without requiring explicit filter
+    # expressions in each query.
+    #
+    # @!attribute [rw] metadata_attributes
+    #   A list of metadata attribute schemas that define the structure and
+    #   properties of metadata fields used for implicit filtering. Each
+    #   attribute defines a key, type, and optional description.
+    #   @return [Array<Types::MetadataAttributeSchema>]
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) of the foundation model used for
+    #   implicit filtering. This model processes the query to extract
+    #   relevant filtering criteria.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ImplicitFilterConfiguration AWS API Documentation
+    #
+    class ImplicitFilterConfiguration < Struct.new(
+      :metadata_attributes,
+      :model_arn)
+      SENSITIVE = [:metadata_attributes]
       include Aws::Structure
     end
 
@@ -5324,13 +6102,117 @@ module Aws::Bedrock
     #   base data sources before returning results.
     #   @return [Types::RetrievalFilter]
     #
+    # @!attribute [rw] implicit_filter_configuration
+    #   Configuration for implicit filtering in Knowledge Base vector
+    #   searches. This allows the system to automatically apply filters
+    #   based on the query context without requiring explicit filter
+    #   expressions.
+    #   @return [Types::ImplicitFilterConfiguration]
+    #
+    # @!attribute [rw] reranking_configuration
+    #   Configuration for reranking search results in Knowledge Base vector
+    #   searches. Reranking improves search relevance by reordering initial
+    #   vector search results using more sophisticated relevance models.
+    #   @return [Types::VectorSearchRerankingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/KnowledgeBaseVectorSearchConfiguration AWS API Documentation
     #
     class KnowledgeBaseVectorSearchConfiguration < Struct.new(
       :number_of_results,
       :override_search_type,
-      :filter)
+      :filter,
+      :implicit_filter_configuration,
+      :reranking_configuration)
       SENSITIVE = [:filter]
+      include Aws::Structure
+    end
+
+    # The legal term of the agreement.
+    #
+    # @!attribute [rw] url
+    #   URL to the legal term document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/LegalTerm AWS API Documentation
+    #
+    class LegalTerm < Struct.new(
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_before
+    #   Filters deployments created before the specified date and time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_after
+    #   Filters deployments created after the specified date and time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name_contains
+    #   Filters deployments whose names contain the specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use this token to retrieve
+    #   additional results when the response is truncated.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The field to sort the results by. The only supported value is
+    #   `CreationTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for the results. Valid values are `Ascending` and
+    #   `Descending`. Default is `Descending`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_equals
+    #   Filters deployments by status. Valid values are `CREATING`,
+    #   `ACTIVE`, and `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn_equals
+    #   Filters deployments by the Amazon Resource Name (ARN) of the
+    #   associated custom model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListCustomModelDeploymentsRequest AWS API Documentation
+    #
+    class ListCustomModelDeploymentsRequest < Struct.new(
+      :created_before,
+      :created_after,
+      :name_contains,
+      :max_results,
+      :next_token,
+      :sort_by,
+      :sort_order,
+      :status_equals,
+      :model_arn_equals)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. This value is null when there
+    #   are no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_deployment_summaries
+    #   A list of custom model deployment summaries.
+    #   @return [Array<Types::CustomModelDeploymentSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListCustomModelDeploymentsResponse AWS API Documentation
+    #
+    class ListCustomModelDeploymentsResponse < Struct.new(
+      :next_token,
+      :model_deployment_summaries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5383,6 +6265,22 @@ module Aws::Bedrock
     #   (`true`) or if they were shared with the current account (`false`).
     #   @return [Boolean]
     #
+    # @!attribute [rw] model_status
+    #   The status of them model to filter results by. Possible values
+    #   include:
+    #
+    #   * `Creating` - Include only models that are currently being created
+    #     and validated.
+    #
+    #   * `Active` - Include only models that have been successfully created
+    #     and are ready for use.
+    #
+    #   * `Failed` - Include only models where the creation process failed.
+    #
+    #   If you don't specify a status, the API returns models in all
+    #   states.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListCustomModelsRequest AWS API Documentation
     #
     class ListCustomModelsRequest < Struct.new(
@@ -5395,7 +6293,8 @@ module Aws::Bedrock
       :next_token,
       :sort_by,
       :sort_order,
-      :is_owned)
+      :is_owned,
+      :model_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5493,6 +6392,40 @@ module Aws::Bedrock
     class ListEvaluationJobsResponse < Struct.new(
       :next_token,
       :job_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_id
+    #   Model Id of the foundation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] offer_type
+    #   Type of offer associated with the model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListFoundationModelAgreementOffersRequest AWS API Documentation
+    #
+    class ListFoundationModelAgreementOffersRequest < Struct.new(
+      :model_id,
+      :offer_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_id
+    #   Model Id of the foundation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] offers
+    #   List of the offers associated with the specified model.
+    #   @return [Array<Types::Offer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListFoundationModelAgreementOffersResponse AWS API Documentation
+    #
+    class ListFoundationModelAgreementOffersResponse < Struct.new(
+      :model_id,
+      :offers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6419,6 +7352,62 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Defines the schema for a metadata attribute used in Knowledge Base
+    # vector searches. Metadata attributes provide additional context for
+    # documents and can be used for filtering and reranking search results.
+    #
+    # @!attribute [rw] key
+    #   The unique identifier for the metadata attribute. This key is used
+    #   to reference the attribute in filter expressions and reranking
+    #   configurations.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The data type of the metadata attribute. The type determines how the
+    #   attribute can be used in filter expressions and reranking.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional description of the metadata attribute that provides
+    #   additional context about its purpose and usage.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/MetadataAttributeSchema AWS API Documentation
+    #
+    class MetadataAttributeSchema < Struct.new(
+      :key,
+      :type,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for how metadata should be used during the reranking
+    # process in Knowledge Base vector searches. This determines which
+    # metadata fields are included or excluded when reordering search
+    # results.
+    #
+    # @!attribute [rw] selection_mode
+    #   The mode for selecting which metadata fields to include in the
+    #   reranking process. Valid values are ALL (use all available metadata
+    #   fields) or SELECTIVE (use only specified fields).
+    #   @return [String]
+    #
+    # @!attribute [rw] selective_mode_configuration
+    #   Configuration for selective mode, which allows you to explicitly
+    #   include or exclude specific metadata fields during reranking. This
+    #   is only used when selectionMode is set to SELECTIVE.
+    #   @return [Types::RerankingMetadataSelectiveModeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/MetadataConfigurationForReranking AWS API Documentation
+    #
+    class MetadataConfigurationForReranking < Struct.new(
+      :selection_mode,
+      :selective_mode_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details about each model copy job.
     #
     # This data type is used in the following API operations:
@@ -6514,6 +7503,10 @@ module Aws::Bedrock
     #   Status of the customization job.
     #   @return [String]
     #
+    # @!attribute [rw] status_details
+    #   Details about the status of the data processing sub-task of the job.
+    #   @return [Types::StatusDetails]
+    #
     # @!attribute [rw] last_modified_time
     #   Time that the customization job was last modified.
     #   @return [Time]
@@ -6551,6 +7544,7 @@ module Aws::Bedrock
       :base_model_arn,
       :job_name,
       :status,
+      :status_details,
       :last_modified_time,
       :creation_time,
       :end_time,
@@ -6561,14 +7555,14 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
-    # Data source for the imported model.
+    # The data source of the model to import.
     #
     # @note ModelDataSource is a union - when making an API calls you must set exactly one of the members.
     #
     # @note ModelDataSource is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ModelDataSource corresponding to the set member.
     #
     # @!attribute [rw] s3_data_source
-    #   The Amazon S3 data source of the imported model.
+    #   The Amazon S3 data source of the model to import.
     #   @return [Types::S3DataSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ModelDataSource AWS API Documentation
@@ -6886,6 +7880,30 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # An offer dictates usage terms for the model.
+    #
+    # @!attribute [rw] offer_id
+    #   Offer Id for a model offer.
+    #   @return [String]
+    #
+    # @!attribute [rw] offer_token
+    #   Offer token.
+    #   @return [String]
+    #
+    # @!attribute [rw] term_details
+    #   Details about the terms of the offer.
+    #   @return [Types::TermDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/Offer AWS API Documentation
+    #
+    class Offer < Struct.new(
+      :offer_id,
+      :offer_token,
+      :term_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration details for the model to process the prompt prior to
     # retrieval and response generation.
     #
@@ -6926,6 +7944,20 @@ module Aws::Bedrock
     #
     class PerformanceConfiguration < Struct.new(
       :latency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the usage-based pricing term.
+    #
+    # @!attribute [rw] rate_card
+    #   Describes a usage price for each dimension.
+    #   @return [Array<Types::DimensionalPriceRate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PricingTerm AWS API Documentation
+    #
+    class PricingTerm < Struct.new(
+      :rate_card)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7133,6 +8165,22 @@ module Aws::Bedrock
     #
     class PutModelInvocationLoggingConfigurationResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] form_data
+    #   Put customer profile Request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutUseCaseForModelAccessRequest AWS API Documentation
+    #
+    class PutUseCaseForModelAccessRequest < Struct.new(
+      :form_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutUseCaseForModelAccessResponse AWS API Documentation
+    #
+    class PutUseCaseForModelAccessResponse < Aws::EmptyStructure; end
+
     # The configuration details for transforming the prompt.
     #
     # @!attribute [rw] type
@@ -7324,6 +8372,43 @@ module Aws::Bedrock
       class AndAll < RequestMetadataFilters; end
       class OrAll < RequestMetadataFilters; end
       class Unknown < RequestMetadataFilters; end
+    end
+
+    # Configuration for selectively including or excluding metadata fields
+    # during the reranking process. This allows you to control which
+    # metadata attributes are considered when reordering search results.
+    #
+    # @note RerankingMetadataSelectiveModeConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note RerankingMetadataSelectiveModeConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RerankingMetadataSelectiveModeConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] fields_to_include
+    #   A list of metadata field names to explicitly include in the
+    #   reranking process. Only these fields will be considered when
+    #   reordering search results. This parameter cannot be used together
+    #   with fieldsToExclude.
+    #   @return [Array<Types::FieldForReranking>]
+    #
+    # @!attribute [rw] fields_to_exclude
+    #   A list of metadata field names to explicitly exclude from the
+    #   reranking process. All metadata fields except these will be
+    #   considered when reordering search results. This parameter cannot be
+    #   used together with fieldsToInclude.
+    #   @return [Array<Types::FieldForReranking>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/RerankingMetadataSelectiveModeConfiguration AWS API Documentation
+    #
+    class RerankingMetadataSelectiveModeConfiguration < Struct.new(
+      :fields_to_include,
+      :fields_to_exclude,
+      :unknown)
+      SENSITIVE = [:fields_to_include, :fields_to_exclude]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class FieldsToInclude < RerankingMetadataSelectiveModeConfiguration; end
+      class FieldsToExclude < RerankingMetadataSelectiveModeConfiguration; end
+      class Unknown < RerankingMetadataSelectiveModeConfiguration; end
     end
 
     # The specified resource Amazon Resource Name (ARN) was not found. Check
@@ -7598,7 +8683,7 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
-    # The Amazon S3 data source of the imported job.
+    # The Amazon S3 data source of the model to import.
     #
     # @!attribute [rw] s3_uri
     #   The URI of the Amazon S3 data source.
@@ -7693,6 +8778,43 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # For a Distillation job, the status details for sub-tasks of the job.
+    # Possible statuses for each sub-task include the following:
+    #
+    # * NotStarted
+    #
+    # * InProgress
+    #
+    # * Completed
+    #
+    # * Stopping
+    #
+    # * Stopped
+    #
+    # * Failed
+    #
+    # @!attribute [rw] validation_details
+    #   The status details for the validation sub-task of the job.
+    #   @return [Types::ValidationDetails]
+    #
+    # @!attribute [rw] data_processing_details
+    #   The status details for the data processing sub-task of the job.
+    #   @return [Types::DataProcessingDetails]
+    #
+    # @!attribute [rw] training_details
+    #   The status details for the training sub-task of the job.
+    #   @return [Types::TrainingDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StatusDetails AWS API Documentation
+    #
+    class StatusDetails < Struct.new(
+      :validation_details,
+      :data_processing_details,
+      :training_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] job_identifier
     #   The Amazon Resource Name (ARN) of the evaluation job you want to
     #   stop.
@@ -7741,6 +8863,20 @@ module Aws::Bedrock
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StopModelInvocationJobResponse AWS API Documentation
     #
     class StopModelInvocationJobResponse < Aws::EmptyStructure; end
+
+    # Describes a support term.
+    #
+    # @!attribute [rw] refund_policy_description
+    #   Describes the refund policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/SupportTerm AWS API Documentation
+    #
+    class SupportTerm < Struct.new(
+      :refund_policy_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Definition of the key/value pair for a tag.
     #
@@ -7798,6 +8934,35 @@ module Aws::Bedrock
     class TeacherModelConfig < Struct.new(
       :teacher_model_identifier,
       :max_response_length_for_inference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the usage terms of an offer.
+    #
+    # @!attribute [rw] usage_based_pricing_term
+    #   Describes the usage-based pricing term.
+    #   @return [Types::PricingTerm]
+    #
+    # @!attribute [rw] legal_term
+    #   Describes the legal terms.
+    #   @return [Types::LegalTerm]
+    #
+    # @!attribute [rw] support_term
+    #   Describes the support terms.
+    #   @return [Types::SupportTerm]
+    #
+    # @!attribute [rw] validity_term
+    #   Describes the validity terms.
+    #   @return [Types::ValidityTerm]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/TermDetails AWS API Documentation
+    #
+    class TermDetails < Struct.new(
+      :usage_based_pricing_term,
+      :legal_term,
+      :support_term,
+      :validity_term)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7899,6 +9064,31 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # For a Distillation job, the status details for the training sub-task
+    # of the job.
+    #
+    # @!attribute [rw] status
+    #   The status of the training sub-task of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The start time of the training sub-task of the job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The latest update to the training sub-task of the job.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/TrainingDetails AWS API Documentation
+    #
+    class TrainingDetails < Struct.new(
+      :status,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Metrics associated with the custom job.
     #
     # @!attribute [rw] training_loss
@@ -7968,6 +9158,19 @@ module Aws::Bedrock
     #   guardrail.
     #   @return [Types::GuardrailContextualGroundingPolicyConfig]
     #
+    # @!attribute [rw] cross_region_config
+    #   The system-defined guardrail profile that you're using with your
+    #   guardrail. Guardrail profiles define the destination Amazon Web
+    #   Services Regions where guardrail inference requests can be
+    #   automatically routed.
+    #
+    #   For more information, see the [Amazon Bedrock User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #   @return [Types::GuardrailCrossRegionConfig]
+    #
     # @!attribute [rw] blocked_input_messaging
     #   The message to return when the guardrail blocks a prompt.
     #   @return [String]
@@ -7991,6 +9194,7 @@ module Aws::Bedrock
       :word_policy_config,
       :sensitive_information_policy_config,
       :contextual_grounding_policy_config,
+      :cross_region_config,
       :blocked_input_messaging,
       :blocked_outputs_messaging,
       :kms_key_id)
@@ -8118,6 +9322,31 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # For a Distillation job, the status details for the validation sub-task
+    # of the job.
+    #
+    # @!attribute [rw] status
+    #   The status of the validation sub-task of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The start time of the validation sub-task of the job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The latest update to the validation sub-task of the job.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ValidationDetails AWS API Documentation
+    #
+    class ValidationDetails < Struct.new(
+      :status,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Input validation failed. Check your request parameters and retry the
     # request.
     #
@@ -8156,6 +9385,104 @@ module Aws::Bedrock
     #
     class ValidatorMetric < Struct.new(
       :validation_loss)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the validity terms.
+    #
+    # @!attribute [rw] agreement_duration
+    #   Describes the agreement duration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ValidityTerm AWS API Documentation
+    #
+    class ValidityTerm < Struct.new(
+      :agreement_duration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for using Amazon Bedrock foundation models to rerank
+    # Knowledge Base vector search results. This enables more sophisticated
+    # relevance ranking using large language models.
+    #
+    # @!attribute [rw] model_configuration
+    #   Configuration for the Amazon Bedrock foundation model used for
+    #   reranking. This includes the model ARN and any additional request
+    #   fields required by the model.
+    #   @return [Types::VectorSearchBedrockRerankingModelConfiguration]
+    #
+    # @!attribute [rw] number_of_reranked_results
+    #   The maximum number of results to rerank. This limits how many of the
+    #   initial vector search results will be processed by the reranking
+    #   model. A smaller number improves performance but may exclude
+    #   potentially relevant results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] metadata_configuration
+    #   Configuration for how document metadata should be used during the
+    #   reranking process. This determines which metadata fields are
+    #   included when reordering search results.
+    #   @return [Types::MetadataConfigurationForReranking]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/VectorSearchBedrockRerankingConfiguration AWS API Documentation
+    #
+    class VectorSearchBedrockRerankingConfiguration < Struct.new(
+      :model_configuration,
+      :number_of_reranked_results,
+      :metadata_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for the Amazon Bedrock foundation model used for
+    # reranking vector search results. This specifies which model to use and
+    # any additional parameters required by the model.
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) of the foundation model to use for
+    #   reranking. This model processes the query and search results to
+    #   determine a more relevant ordering.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_model_request_fields
+    #   A list of additional fields to include in the model request during
+    #   reranking. These fields provide extra context or configuration
+    #   options specific to the selected foundation model.
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/VectorSearchBedrockRerankingModelConfiguration AWS API Documentation
+    #
+    class VectorSearchBedrockRerankingModelConfiguration < Struct.new(
+      :model_arn,
+      :additional_model_request_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for reranking vector search results to improve
+    # relevance. Reranking applies additional relevance models to reorder
+    # the initial vector search results based on more sophisticated
+    # criteria.
+    #
+    # @!attribute [rw] type
+    #   The type of reranking to apply to vector search results. Currently,
+    #   the only supported value is BEDROCK, which uses Amazon Bedrock
+    #   foundation models for reranking.
+    #   @return [String]
+    #
+    # @!attribute [rw] bedrock_reranking_configuration
+    #   Configuration for using Amazon Bedrock foundation models to rerank
+    #   search results. This is required when the reranking type is set to
+    #   BEDROCK.
+    #   @return [Types::VectorSearchBedrockRerankingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/VectorSearchRerankingConfiguration AWS API Documentation
+    #
+    class VectorSearchRerankingConfiguration < Struct.new(
+      :type,
+      :bedrock_reranking_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

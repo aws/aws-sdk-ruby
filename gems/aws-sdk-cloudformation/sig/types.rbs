@@ -542,7 +542,7 @@ module Aws::CloudFormation
 
     class DescribeStackResourceDriftsInput
       attr_accessor stack_name: ::String
-      attr_accessor stack_resource_drift_status_filters: ::Array[("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED")]
+      attr_accessor stack_resource_drift_status_filters: ::Array[("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED" | "UNKNOWN")]
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -954,7 +954,7 @@ module Aws::CloudFormation
       attr_accessor stack_set_name: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
-      attr_accessor stack_instance_resource_drift_statuses: ::Array[("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED")]
+      attr_accessor stack_instance_resource_drift_statuses: ::Array[("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED" | "UNKNOWN")]
       attr_accessor stack_instance_account: ::String
       attr_accessor stack_instance_region: ::String
       attr_accessor operation_id: ::String
@@ -1574,7 +1574,7 @@ module Aws::CloudFormation
       attr_accessor physical_resource_id_context: ::Array[Types::PhysicalResourceIdContextKeyValuePair]
       attr_accessor resource_type: ::String
       attr_accessor property_differences: ::Array[Types::PropertyDifference]
-      attr_accessor stack_resource_drift_status: ("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED")
+      attr_accessor stack_resource_drift_status: ("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED" | "UNKNOWN")
       attr_accessor timestamp: ::Time
       SENSITIVE: []
     end
@@ -1664,20 +1664,21 @@ module Aws::CloudFormation
       attr_accessor expected_properties: ::String
       attr_accessor actual_properties: ::String
       attr_accessor property_differences: ::Array[Types::PropertyDifference]
-      attr_accessor stack_resource_drift_status: ("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED")
+      attr_accessor stack_resource_drift_status: ("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED" | "UNKNOWN")
       attr_accessor timestamp: ::Time
       attr_accessor module_info: Types::ModuleInfo
+      attr_accessor drift_status_reason: ::String
       SENSITIVE: []
     end
 
     class StackResourceDriftInformation
-      attr_accessor stack_resource_drift_status: ("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED")
+      attr_accessor stack_resource_drift_status: ("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED" | "UNKNOWN")
       attr_accessor last_check_timestamp: ::Time
       SENSITIVE: []
     end
 
     class StackResourceDriftInformationSummary
-      attr_accessor stack_resource_drift_status: ("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED")
+      attr_accessor stack_resource_drift_status: ("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED" | "UNKNOWN")
       attr_accessor last_check_timestamp: ::Time
       SENSITIVE: []
     end
@@ -2084,7 +2085,7 @@ module Aws::CloudFormation
     end
 
     class WarningDetail
-      attr_accessor type: ("MUTUALLY_EXCLUSIVE_PROPERTIES" | "UNSUPPORTED_PROPERTIES" | "MUTUALLY_EXCLUSIVE_TYPES")
+      attr_accessor type: ("MUTUALLY_EXCLUSIVE_PROPERTIES" | "UNSUPPORTED_PROPERTIES" | "MUTUALLY_EXCLUSIVE_TYPES" | "EXCLUDED_PROPERTIES")
       attr_accessor properties: ::Array[Types::WarningProperty]
       SENSITIVE: []
     end

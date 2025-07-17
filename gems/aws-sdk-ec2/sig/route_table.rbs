@@ -59,6 +59,7 @@ module Aws
                           ?local_gateway_id: ::String,
                           ?carrier_gateway_id: ::String,
                           ?core_network_arn: ::String,
+                          ?odb_network_arn: ::String,
                           ?dry_run: bool,
                           ?destination_cidr_block: ::String,
                           ?gateway_id: ::String,

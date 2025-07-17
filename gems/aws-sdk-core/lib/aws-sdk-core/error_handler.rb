@@ -1,12 +1,17 @@
 # frozen_string_literal: true
 
 module Aws
+  # @api private
   class ErrorHandler < Seahorse::Client::Handler
 
     private
 
     def error(context)
       body = context.http_response.body_contents
+      # This is not correct per protocol tests. Some headers will determine the error code.
+      # If the body is empty, there is still potentially an error code from the header, but
+      # we are making a generic http status error instead. In a new major version, we should
+      # always try to extract header, and during extraction, check headers and body.
       if body.empty?
         code, message, data = http_status_error(context)
       else

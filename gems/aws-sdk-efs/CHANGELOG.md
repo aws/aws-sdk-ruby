@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2025-06-09)
+------------------
+
+* Feature - Added support for Internet Protocol Version 6 (IPv6) on EFS Service APIs and mount targets.
+
+1.95.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.94.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.93.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.92.0 (2025-02-18)
 ------------------
 

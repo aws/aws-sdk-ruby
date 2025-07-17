@@ -67,7 +67,7 @@ module Aws
           }
 
           actual_url = pre.synthesize_speech_presigned_url(params)
-          expect(CGI.parse(actual_url)).to eq(CGI.parse(expected_url))
+          expect(URI.decode_www_form(actual_url)).to eq(URI.decode_www_form(expected_url))
         end
 
         it 'can presign #synthesize_speech using region and credentials' do
@@ -93,7 +93,7 @@ module Aws
           }
 
           actual_url = pre.synthesize_speech_presigned_url(params)
-          expect(CGI.parse(actual_url)).to eq(CGI.parse(expected_url))
+          expect(URI.decode_www_form(actual_url)).to eq(URI.decode_www_form(expected_url))
         end
 
       end

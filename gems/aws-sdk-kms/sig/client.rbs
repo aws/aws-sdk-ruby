@@ -157,7 +157,7 @@ module Aws
                         ?description: ::String,
                         ?key_usage: ("SIGN_VERIFY" | "ENCRYPT_DECRYPT" | "GENERATE_VERIFY_MAC" | "KEY_AGREEMENT"),
                         ?customer_master_key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2"),
-                        ?key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2"),
+                        ?key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2" | "ML_DSA_44" | "ML_DSA_65" | "ML_DSA_87"),
                         ?origin: ("AWS_KMS" | "EXTERNAL" | "AWS_CLOUDHSM" | "EXTERNAL_KEY_STORE"),
                         ?custom_key_store_id: ::String,
                         ?bypass_policy_lockout_safety_check: bool,
@@ -178,6 +178,7 @@ module Aws
         def plaintext: () -> ::String
         def encryption_algorithm: () -> ("SYMMETRIC_DEFAULT" | "RSAES_OAEP_SHA_1" | "RSAES_OAEP_SHA_256" | "SM2PKE")
         def ciphertext_for_recipient: () -> ::String
+        def key_material_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#decrypt-instance_method
       def decrypt: (
@@ -209,11 +210,17 @@ module Aws
                                    ) -> _DeleteCustomKeyStoreResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomKeyStoreResponseSuccess
 
+      interface _DeleteImportedKeyMaterialResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteImportedKeyMaterialResponse]
+        def key_id: () -> ::String
+        def key_material_id: () -> ::String
+      end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#delete_imported_key_material-instance_method
       def delete_imported_key_material: (
-                                          key_id: ::String
-                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
-                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                          key_id: ::String,
+                                          ?key_material_id: ::String
+                                        ) -> _DeleteImportedKeyMaterialResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteImportedKeyMaterialResponseSuccess
 
       interface _DeriveSharedSecretResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeriveSharedSecretResponse]
@@ -320,6 +327,7 @@ module Aws
         def plaintext: () -> ::String
         def key_id: () -> ::String
         def ciphertext_for_recipient: () -> ::String
+        def key_material_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#generate_data_key-instance_method
       def generate_data_key: (
@@ -344,6 +352,7 @@ module Aws
         def key_id: () -> ::String
         def key_pair_spec: () -> ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SM2")
         def ciphertext_for_recipient: () -> ::String
+        def key_material_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#generate_data_key_pair-instance_method
       def generate_data_key_pair: (
@@ -365,6 +374,7 @@ module Aws
         def public_key: () -> ::String
         def key_id: () -> ::String
         def key_pair_spec: () -> ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SM2")
+        def key_material_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#generate_data_key_pair_without_plaintext-instance_method
       def generate_data_key_pair_without_plaintext: (
@@ -380,6 +390,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GenerateDataKeyWithoutPlaintextResponse]
         def ciphertext_blob: () -> ::String
         def key_id: () -> ::String
+        def key_material_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#generate_data_key_without_plaintext-instance_method
       def generate_data_key_without_plaintext: (
@@ -470,10 +481,10 @@ module Aws
         def key_id: () -> ::String
         def public_key: () -> ::String
         def customer_master_key_spec: () -> ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2")
-        def key_spec: () -> ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2")
+        def key_spec: () -> ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2" | "ML_DSA_44" | "ML_DSA_65" | "ML_DSA_87")
         def key_usage: () -> ("SIGN_VERIFY" | "ENCRYPT_DECRYPT" | "GENERATE_VERIFY_MAC" | "KEY_AGREEMENT")
         def encryption_algorithms: () -> ::Array[("SYMMETRIC_DEFAULT" | "RSAES_OAEP_SHA_1" | "RSAES_OAEP_SHA_256" | "SM2PKE")]
-        def signing_algorithms: () -> ::Array[("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA")]
+        def signing_algorithms: () -> ::Array[("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA" | "ML_DSA_SHAKE_256")]
         def key_agreement_algorithms: () -> ::Array[("ECDH")]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#get_public_key-instance_method
@@ -485,6 +496,8 @@ module Aws
 
       interface _ImportKeyMaterialResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ImportKeyMaterialResponse]
+        def key_id: () -> ::String
+        def key_material_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#import_key_material-instance_method
       def import_key_material: (
@@ -492,7 +505,10 @@ module Aws
                                  import_token: ::String,
                                  encrypted_key_material: ::String,
                                  ?valid_to: ::Time,
-                                 ?expiration_model: ("KEY_MATERIAL_EXPIRES" | "KEY_MATERIAL_DOES_NOT_EXPIRE")
+                                 ?expiration_model: ("KEY_MATERIAL_EXPIRES" | "KEY_MATERIAL_DOES_NOT_EXPIRE"),
+                                 ?import_type: ("NEW_KEY_MATERIAL" | "EXISTING_KEY_MATERIAL"),
+                                 ?key_material_description: ::String,
+                                 ?key_material_id: ::String
                                ) -> _ImportKeyMaterialResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportKeyMaterialResponseSuccess
 
@@ -549,6 +565,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#list_key_rotations-instance_method
       def list_key_rotations: (
                                 key_id: ::String,
+                                ?include_key_material: ("ALL_KEY_MATERIAL" | "ROTATIONS_ONLY"),
                                 ?limit: ::Integer,
                                 ?marker: ::String
                               ) -> _ListKeyRotationsResponseSuccess
@@ -611,6 +628,8 @@ module Aws
         def key_id: () -> ::String
         def source_encryption_algorithm: () -> ("SYMMETRIC_DEFAULT" | "RSAES_OAEP_SHA_1" | "RSAES_OAEP_SHA_256" | "SM2PKE")
         def destination_encryption_algorithm: () -> ("SYMMETRIC_DEFAULT" | "RSAES_OAEP_SHA_1" | "RSAES_OAEP_SHA_256" | "SM2PKE")
+        def source_key_material_id: () -> ::String
+        def destination_key_material_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#re_encrypt-instance_method
       def re_encrypt: (
@@ -693,15 +712,15 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::SignResponse]
         def key_id: () -> ::String
         def signature: () -> ::String
-        def signing_algorithm: () -> ("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA")
+        def signing_algorithm: () -> ("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA" | "ML_DSA_SHAKE_256")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#sign-instance_method
       def sign: (
                   key_id: ::String,
                   message: ::String,
-                  ?message_type: ("RAW" | "DIGEST"),
+                  ?message_type: ("RAW" | "DIGEST" | "EXTERNAL_MU"),
                   ?grant_tokens: Array[::String],
-                  signing_algorithm: ("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA"),
+                  signing_algorithm: ("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA" | "ML_DSA_SHAKE_256"),
                   ?dry_run: bool
                 ) -> _SignResponseSuccess
               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SignResponseSuccess
@@ -770,15 +789,15 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::VerifyResponse]
         def key_id: () -> ::String
         def signature_valid: () -> bool
-        def signing_algorithm: () -> ("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA")
+        def signing_algorithm: () -> ("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA" | "ML_DSA_SHAKE_256")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#verify-instance_method
       def verify: (
                     key_id: ::String,
                     message: ::String,
-                    ?message_type: ("RAW" | "DIGEST"),
+                    ?message_type: ("RAW" | "DIGEST" | "EXTERNAL_MU"),
                     signature: ::String,
-                    signing_algorithm: ("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA"),
+                    signing_algorithm: ("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA" | "ML_DSA_SHAKE_256"),
                     ?grant_tokens: Array[::String],
                     ?dry_run: bool
                   ) -> _VerifyResponseSuccess

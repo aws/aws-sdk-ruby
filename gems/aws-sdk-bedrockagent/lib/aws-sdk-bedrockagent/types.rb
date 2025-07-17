@@ -386,7 +386,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] parent_action_signature
@@ -471,6 +471,13 @@ module Aws::BedrockAgent
     #   The unique identifier of the agent.
     #   @return [String]
     #
+    # @!attribute [rw] alias_invocation_state
+    #   The invocation state for the agent alias. If the agent alias is
+    #   running, the value is `ACCEPT_INVOCATIONS`. If the agent alias is
+    #   paused, the value is `REJECT_INVOCATIONS`. Use the
+    #   `UpdateAgentAlias` operation to change the invocation state.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure that the API request
     #   completes no more than one time. If this token matches a previous
@@ -512,6 +519,7 @@ module Aws::BedrockAgent
       :agent_alias_name,
       :agent_alias_status,
       :agent_id,
+      :alias_invocation_state,
       :client_token,
       :created_at,
       :description,
@@ -583,6 +591,13 @@ module Aws::BedrockAgent
     #   The status of the alias.
     #   @return [String]
     #
+    # @!attribute [rw] alias_invocation_state
+    #   The invocation state for the agent alias. If the agent alias is
+    #   running, the value is `ACCEPT_INVOCATIONS`. If the agent alias is
+    #   paused, the value is `REJECT_INVOCATIONS`. Use the
+    #   `UpdateAgentAlias` operation to change the invocation state.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The time at which the alias of the agent was created.
     #   @return [Time]
@@ -606,6 +621,7 @@ module Aws::BedrockAgent
       :agent_alias_id,
       :agent_alias_name,
       :agent_alias_status,
+      :alias_invocation_state,
       :created_at,
       :description,
       :routing_configuration,
@@ -742,8 +758,8 @@ module Aws::BedrockAgent
     end
 
     # Defines an agent node in your flow. You specify the agent to invoke at
-    # this point in the flow. For more information, see [Node types in
-    # Amazon Bedrock works][1] in the Amazon Bedrock User Guide.
+    # this point in the flow. For more information, see [Node types in a
+    # flow][1] in the Amazon Bedrock User Guide.
     #
     #
     #
@@ -1470,8 +1486,8 @@ module Aws::BedrockAgent
 
     # Defines a collector node in your flow. This node takes an iteration of
     # inputs and consolidates them into an array in the output. For more
-    # information, see [Node types in Amazon Bedrock works][1] in the Amazon
-    # Bedrock User Guide.
+    # information, see [Node types in a flow][1] in the Amazon Bedrock User
+    # Guide.
     #
     #
     #
@@ -1485,8 +1501,7 @@ module Aws::BedrockAgent
 
     # Defines a condition node in your flow. You can specify conditions that
     # determine which node comes next in the flow. For more information, see
-    # [Node types in Amazon Bedrock works][1] in the Amazon Bedrock User
-    # Guide.
+    # [Node types in a flow][1] in the Amazon Bedrock User Guide.
     #
     #
     #
@@ -1774,7 +1789,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #   @return [String]
     #
     # @!attribute [rw] parent_action_group_signature_params
@@ -1787,7 +1802,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateAgentActionGroupRequest AWS API Documentation
@@ -2134,6 +2149,11 @@ module Aws::BedrockAgent
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] concurrency_configuration
+    #   The configuration that specifies how nodes in the flow are executed
+    #   in parallel.
+    #   @return [Types::FlowAliasConcurrencyConfiguration]
+    #
     # @!attribute [rw] description
     #   A description for the alias.
     #   @return [String]
@@ -2163,6 +2183,7 @@ module Aws::BedrockAgent
     #
     class CreateFlowAliasRequest < Struct.new(
       :client_token,
+      :concurrency_configuration,
       :description,
       :flow_identifier,
       :name,
@@ -2175,6 +2196,11 @@ module Aws::BedrockAgent
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the alias.
     #   @return [String]
+    #
+    # @!attribute [rw] concurrency_configuration
+    #   The configuration that specifies how nodes in the flow are executed
+    #   in parallel.
+    #   @return [Types::FlowAliasConcurrencyConfiguration]
     #
     # @!attribute [rw] created_at
     #   The time at which the alias was created.
@@ -2208,6 +2234,7 @@ module Aws::BedrockAgent
     #
     class CreateFlowAliasResponse < Struct.new(
       :arn,
+      :concurrency_configuration,
       :created_at,
       :description,
       :flow_id,
@@ -3709,6 +3736,22 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # Specifies a metadata field to include or exclude during the reranking
+    # process.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the metadata field to include or exclude during
+    #   reranking.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/FieldForReranking AWS API Documentation
+    #
+    class FieldForReranking < Struct.new(
+      :field_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configurations for when you choose fixed-size chunking. If you set the
     # `chunkingStrategy` as `NONE`, exclude this field.
     #
@@ -3725,6 +3768,34 @@ module Aws::BedrockAgent
     class FixedSizeChunkingConfiguration < Struct.new(
       :max_tokens,
       :overlap_percentage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Determines how multiple nodes in a flow can run in parallel. Running
+    # nodes concurrently can improve your flow's performance.
+    #
+    # @!attribute [rw] max_concurrency
+    #   The maximum number of nodes that can be executed concurrently in the
+    #   flow.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] type
+    #   The type of concurrency to use for parallel node execution. Specify
+    #   one of the following options:
+    #
+    #   * `Automatic` - Amazon Bedrock determines which nodes can be
+    #     executed in parallel based on the flow definition and its
+    #     dependencies.
+    #
+    #   * `Manual` - You specify which nodes can be executed in parallel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/FlowAliasConcurrencyConfiguration AWS API Documentation
+    #
+    class FlowAliasConcurrencyConfiguration < Struct.new(
+      :max_concurrency,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3759,6 +3830,11 @@ module Aws::BedrockAgent
     #   The Amazon Resource Name (ARN) of the alias.
     #   @return [String]
     #
+    # @!attribute [rw] concurrency_configuration
+    #   The configuration that specifies how nodes in the flow are executed
+    #   concurrently.
+    #   @return [Types::FlowAliasConcurrencyConfiguration]
+    #
     # @!attribute [rw] created_at
     #   The time at which the alias was created.
     #   @return [Time]
@@ -3792,6 +3868,7 @@ module Aws::BedrockAgent
     #
     class FlowAliasSummary < Struct.new(
       :arn,
+      :concurrency_configuration,
       :created_at,
       :description,
       :flow_id,
@@ -3994,8 +4071,7 @@ module Aws::BedrockAgent
     end
 
     # Contains configurations for a node in your flow. For more information,
-    # see [Node types in Amazon Bedrock works][1] in the Amazon Bedrock User
-    # Guide.
+    # see [Node types in a flow][1] in the Amazon Bedrock User Guide.
     #
     #
     #
@@ -4017,9 +4093,16 @@ module Aws::BedrockAgent
     #   @return [Types::CollectorFlowNodeConfiguration]
     #
     # @!attribute [rw] condition
-    #   Contains configurations for a Condition node in your flow. Defines
+    #   Contains configurations for a condition node in your flow. Defines
     #   conditions that lead to different branches of the flow.
     #   @return [Types::ConditionFlowNodeConfiguration]
+    #
+    # @!attribute [rw] inline_code
+    #   Contains configurations for an inline code node in your flow. Inline
+    #   code nodes let you write and execute code directly within your flow,
+    #   enabling data transformations, custom logic, and integrations
+    #   without needing an external Lambda function.
+    #   @return [Types::InlineCodeFlowNodeConfiguration]
     #
     # @!attribute [rw] input
     #   Contains configurations for an input flow node in your flow. The
@@ -4054,6 +4137,19 @@ module Aws::BedrockAgent
     #   intent as the output.
     #   @return [Types::LexFlowNodeConfiguration]
     #
+    # @!attribute [rw] loop
+    #   Contains configurations for a DoWhile loop in your flow.
+    #   @return [Types::LoopFlowNodeConfiguration]
+    #
+    # @!attribute [rw] loop_controller
+    #   Contains controller node configurations for a DoWhile loop in your
+    #   flow.
+    #   @return [Types::LoopControllerFlowNodeConfiguration]
+    #
+    # @!attribute [rw] loop_input
+    #   Contains input node configurations for a DoWhile loop in your flow.
+    #   @return [Types::LoopInputFlowNodeConfiguration]
+    #
     # @!attribute [rw] output
     #   Contains configurations for an output flow node in your flow. The
     #   last node in the flow. `outputs` can't be specified for this node.
@@ -4066,12 +4162,12 @@ module Aws::BedrockAgent
     #   @return [Types::PromptFlowNodeConfiguration]
     #
     # @!attribute [rw] retrieval
-    #   Contains configurations for a Retrieval node in your flow. Retrieves
+    #   Contains configurations for a retrieval node in your flow. Retrieves
     #   data from an Amazon S3 location and returns it as the output.
     #   @return [Types::RetrievalFlowNodeConfiguration]
     #
     # @!attribute [rw] storage
-    #   Contains configurations for a Storage node in your flow. Stores an
+    #   Contains configurations for a storage node in your flow. Stores an
     #   input in an Amazon S3 location.
     #   @return [Types::StorageFlowNodeConfiguration]
     #
@@ -4081,11 +4177,15 @@ module Aws::BedrockAgent
       :agent,
       :collector,
       :condition,
+      :inline_code,
       :input,
       :iterator,
       :knowledge_base,
       :lambda_function,
       :lex,
+      :loop,
+      :loop_controller,
+      :loop_input,
       :output,
       :prompt,
       :retrieval,
@@ -4098,11 +4198,15 @@ module Aws::BedrockAgent
       class Agent < FlowNodeConfiguration; end
       class Collector < FlowNodeConfiguration; end
       class Condition < FlowNodeConfiguration; end
+      class InlineCode < FlowNodeConfiguration; end
       class Input < FlowNodeConfiguration; end
       class Iterator < FlowNodeConfiguration; end
       class KnowledgeBase < FlowNodeConfiguration; end
       class LambdaFunction < FlowNodeConfiguration; end
       class Lex < FlowNodeConfiguration; end
+      class Loop < FlowNodeConfiguration; end
+      class LoopController < FlowNodeConfiguration; end
+      class LoopInput < FlowNodeConfiguration; end
       class Output < FlowNodeConfiguration; end
       class Prompt < FlowNodeConfiguration; end
       class Retrieval < FlowNodeConfiguration; end
@@ -4110,7 +4214,24 @@ module Aws::BedrockAgent
       class Unknown < FlowNodeConfiguration; end
     end
 
-    # Contains configurations for an input to a node.
+    # Contains configurations for an input in an Amazon Bedrock Flows node.
+    #
+    # @!attribute [rw] category
+    #   Specifies how input data flows between iterations in a DoWhile loop.
+    #
+    #   * `LoopCondition` - Controls whether the loop continues by
+    #     evaluating condition expressions against the input data. Use this
+    #     category to define the condition that determines if the loop
+    #     should continue.
+    #
+    #   * `ReturnValueToLoopStart` - Defines data to pass back to the start
+    #     of the loop's next iteration. Use this category for variables
+    #     that you want to update for each loop iteration.
+    #
+    #   * `ExitLoop` - Defines the value that's available once the loop
+    #     ends. Use this category to expose loop results to nodes outside
+    #     the loop.
+    #   @return [String]
     #
     # @!attribute [rw] expression
     #   An expression that formats the input for the node. For an
@@ -4123,17 +4244,18 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   A name for the input that you can reference.
+    #   Specifies a name for the input that you can reference.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The data type of the input. If the input doesn't match this type at
-    #   runtime, a validation error will be thrown.
+    #   Specifies the data type of the input. If the input doesn't match
+    #   this type at runtime, a validation error will be thrown.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/FlowNodeInput AWS API Documentation
     #
     class FlowNodeInput < Struct.new(
+      :category,
       :expression,
       :name,
       :type)
@@ -4292,6 +4414,16 @@ module Aws::BedrockAgent
     #   Details about incompatible data types in a connection.
     #   @return [Types::IncompatibleConnectionDataTypeFlowValidationDetails]
     #
+    # @!attribute [rw] invalid_loop_boundary
+    #   Details about a flow that includes connections that violate loop
+    #   boundary rules.
+    #   @return [Types::InvalidLoopBoundaryFlowValidationDetails]
+    #
+    # @!attribute [rw] loop_incompatible_node_type
+    #   Details about a flow that includes incompatible node types in a
+    #   DoWhile loop.
+    #   @return [Types::LoopIncompatibleNodeTypeFlowValidationDetails]
+    #
     # @!attribute [rw] malformed_condition_expression
     #   Details about a malformed condition expression in a node.
     #   @return [Types::MalformedConditionExpressionFlowValidationDetails]
@@ -4320,6 +4452,16 @@ module Aws::BedrockAgent
     #   Details about missing ending nodes in the flow.
     #   @return [Types::MissingEndingNodesFlowValidationDetails]
     #
+    # @!attribute [rw] missing_loop_controller_node
+    #   Details about a flow that's missing a required `LoopController`
+    #   node in a DoWhile loop.
+    #   @return [Types::MissingLoopControllerNodeFlowValidationDetails]
+    #
+    # @!attribute [rw] missing_loop_input_node
+    #   Details about a flow that's missing a required `LoopInput` node in
+    #   a DoWhile loop.
+    #   @return [Types::MissingLoopInputNodeFlowValidationDetails]
+    #
     # @!attribute [rw] missing_node_configuration
     #   Details about missing configuration for a node.
     #   @return [Types::MissingNodeConfigurationFlowValidationDetails]
@@ -4335,6 +4477,16 @@ module Aws::BedrockAgent
     # @!attribute [rw] missing_starting_nodes
     #   Details about missing starting nodes in the flow.
     #   @return [Types::MissingStartingNodesFlowValidationDetails]
+    #
+    # @!attribute [rw] multiple_loop_controller_nodes
+    #   Details about a flow that contains multiple `LoopController` nodes
+    #   in a DoWhile loop.
+    #   @return [Types::MultipleLoopControllerNodesFlowValidationDetails]
+    #
+    # @!attribute [rw] multiple_loop_input_nodes
+    #   Details about a flow that contains multiple `LoopInput` nodes in a
+    #   DoWhile loop.
+    #   @return [Types::MultipleLoopInputNodesFlowValidationDetails]
     #
     # @!attribute [rw] multiple_node_input_connections
     #   Details about multiple connections to a single node input.
@@ -4391,6 +4543,8 @@ module Aws::BedrockAgent
       :duplicate_condition_expression,
       :duplicate_connections,
       :incompatible_connection_data_type,
+      :invalid_loop_boundary,
+      :loop_incompatible_node_type,
       :malformed_condition_expression,
       :malformed_node_input_expression,
       :mismatched_node_input_type,
@@ -4398,10 +4552,14 @@ module Aws::BedrockAgent
       :missing_connection_configuration,
       :missing_default_condition,
       :missing_ending_nodes,
+      :missing_loop_controller_node,
+      :missing_loop_input_node,
       :missing_node_configuration,
       :missing_node_input,
       :missing_node_output,
       :missing_starting_nodes,
+      :multiple_loop_controller_nodes,
+      :multiple_loop_input_nodes,
       :multiple_node_input_connections,
       :unfulfilled_node_input,
       :unknown_connection_condition,
@@ -4423,6 +4581,8 @@ module Aws::BedrockAgent
       class DuplicateConditionExpression < FlowValidationDetails; end
       class DuplicateConnections < FlowValidationDetails; end
       class IncompatibleConnectionDataType < FlowValidationDetails; end
+      class InvalidLoopBoundary < FlowValidationDetails; end
+      class LoopIncompatibleNodeType < FlowValidationDetails; end
       class MalformedConditionExpression < FlowValidationDetails; end
       class MalformedNodeInputExpression < FlowValidationDetails; end
       class MismatchedNodeInputType < FlowValidationDetails; end
@@ -4430,10 +4590,14 @@ module Aws::BedrockAgent
       class MissingConnectionConfiguration < FlowValidationDetails; end
       class MissingDefaultCondition < FlowValidationDetails; end
       class MissingEndingNodes < FlowValidationDetails; end
+      class MissingLoopControllerNode < FlowValidationDetails; end
+      class MissingLoopInputNode < FlowValidationDetails; end
       class MissingNodeConfiguration < FlowValidationDetails; end
       class MissingNodeInput < FlowValidationDetails; end
       class MissingNodeOutput < FlowValidationDetails; end
       class MissingStartingNodes < FlowValidationDetails; end
+      class MultipleLoopControllerNodes < FlowValidationDetails; end
+      class MultipleLoopInputNodes < FlowValidationDetails; end
       class MultipleNodeInputConnections < FlowValidationDetails; end
       class UnfulfilledNodeInput < FlowValidationDetails; end
       class UnknownConnectionCondition < FlowValidationDetails; end
@@ -4831,6 +4995,11 @@ module Aws::BedrockAgent
     #   The Amazon Resource Name (ARN) of the flow.
     #   @return [String]
     #
+    # @!attribute [rw] concurrency_configuration
+    #   The configuration that specifies how nodes in the flow are executed
+    #   in parallel.
+    #   @return [Types::FlowAliasConcurrencyConfiguration]
+    #
     # @!attribute [rw] created_at
     #   The time at which the flow was created.
     #   @return [Time]
@@ -4863,6 +5032,7 @@ module Aws::BedrockAgent
     #
     class GetFlowAliasResponse < Struct.new(
       :arn,
+      :concurrency_configuration,
       :created_at,
       :description,
       :flow_id,
@@ -5363,7 +5533,7 @@ module Aws::BedrockAgent
     #   the following token at each point of generation. The value that you
     #   set for `Top P` determines the number of most-likely candidates from
     #   which the model chooses the next token in the sequence. For example,
-    #   if you set `topP` to 80, the model only selects the next token from
+    #   if you set `topP` to 0.8, the model only selects the next token from
     #   the top 80% of the probability distribution of next tokens.
     #   @return [Float]
     #
@@ -5649,6 +5819,37 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # Contains configurations for an inline code node in your flow. Inline
+    # code nodes let you write and execute code directly within your flow,
+    # enabling data transformations, custom logic, and integrations without
+    # needing an external Lambda function.
+    #
+    # @!attribute [rw] code
+    #   The code that's executed in your inline code node. The code can
+    #   access input data from previous nodes in the flow, perform
+    #   operations on that data, and produce output that can be used by
+    #   other nodes in your flow.
+    #
+    #   The code must be valid in the programming `language` that you
+    #   specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The programming language used by your inline code node.
+    #
+    #   The code must be valid in the programming `language` that you
+    #   specify. Currently, only Python 3 (`Python_3`) is supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/InlineCodeFlowNodeConfiguration AWS API Documentation
+    #
+    class InlineCodeFlowNodeConfiguration < Struct.new(
+      :code,
+      :language)
+      SENSITIVE = [:code]
+      include Aws::Structure
+    end
+
     # Contains information about content defined inline to ingest into a
     # data source. Choose a `type` and include the field that corresponds to
     # it.
@@ -5709,6 +5910,33 @@ module Aws::BedrockAgent
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a flow that contains connections that violate loop
+    # boundary rules.
+    #
+    # @!attribute [rw] connection
+    #   The name of the connection that violates loop boundary rules.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source node of the connection that violates DoWhile loop
+    #   boundary rules.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The target node of the connection that violates DoWhile loop
+    #   boundary rules.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/InvalidLoopBoundaryFlowValidationDetails AWS API Documentation
+    #
+    class InvalidLoopBoundaryFlowValidationDetails < Struct.new(
+      :connection,
+      :source,
+      :target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5945,8 +6173,8 @@ module Aws::BedrockAgent
     # Contains configurations for a knowledge base node in a flow. This node
     # takes a query as the input and returns, as the output, the retrieved
     # responses directly (as an array) or a response generated based on the
-    # retrieved responses. For more information, see [Node types in Amazon
-    # Bedrock works][1] in the Amazon Bedrock User Guide.
+    # retrieved responses. For more information, see [Node types in a
+    # flow][1] in the Amazon Bedrock User Guide.
     #
     #
     #
@@ -5956,6 +6184,10 @@ module Aws::BedrockAgent
     #   Contains configurations for a guardrail to apply during query and
     #   response generation for the knowledge base in this configuration.
     #   @return [Types::GuardrailConfiguration]
+    #
+    # @!attribute [rw] inference_configuration
+    #   Contains inference configurations for the prompt.
+    #   @return [Types::PromptInferenceConfiguration]
     #
     # @!attribute [rw] knowledge_base_id
     #   The unique identifier of the knowledge base to query.
@@ -5971,13 +6203,86 @@ module Aws::BedrockAgent
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
     #   @return [String]
     #
+    # @!attribute [rw] number_of_results
+    #   The number of results to retrieve from the knowledge base.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] orchestration_configuration
+    #   The configuration for orchestrating the retrieval and generation
+    #   process in the knowledge base node.
+    #   @return [Types::KnowledgeBaseOrchestrationConfiguration]
+    #
+    # @!attribute [rw] prompt_template
+    #   A custom prompt template to use with the knowledge base for
+    #   generating responses.
+    #   @return [Types::KnowledgeBasePromptTemplate]
+    #
+    # @!attribute [rw] reranking_configuration
+    #   The configuration for reranking the retrieved results from the
+    #   knowledge base to improve relevance.
+    #   @return [Types::VectorSearchRerankingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/KnowledgeBaseFlowNodeConfiguration AWS API Documentation
     #
     class KnowledgeBaseFlowNodeConfiguration < Struct.new(
       :guardrail_configuration,
+      :inference_configuration,
       :knowledge_base_id,
-      :model_id)
+      :model_id,
+      :number_of_results,
+      :orchestration_configuration,
+      :prompt_template,
+      :reranking_configuration)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures how the knowledge base orchestrates the retrieval and
+    # generation process, allowing for customization of prompts, inference
+    # parameters, and performance settings.
+    #
+    # @!attribute [rw] additional_model_request_fields
+    #   The additional model-specific request parameters as key-value pairs
+    #   to be included in the request to the foundation model.
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
+    # @!attribute [rw] inference_config
+    #   Contains inference configurations for the prompt.
+    #   @return [Types::PromptInferenceConfiguration]
+    #
+    # @!attribute [rw] performance_config
+    #   The performance configuration options for the knowledge base
+    #   retrieval and generation process.
+    #   @return [Types::PerformanceConfiguration]
+    #
+    # @!attribute [rw] prompt_template
+    #   A custom prompt template for orchestrating the retrieval and
+    #   generation process.
+    #   @return [Types::KnowledgeBasePromptTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/KnowledgeBaseOrchestrationConfiguration AWS API Documentation
+    #
+    class KnowledgeBaseOrchestrationConfiguration < Struct.new(
+      :additional_model_request_fields,
+      :inference_config,
+      :performance_config,
+      :prompt_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a custom prompt template for orchestrating the retrieval and
+    # generation process.
+    #
+    # @!attribute [rw] text_prompt_template
+    #   The text of the prompt template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/KnowledgeBasePromptTemplate AWS API Documentation
+    #
+    class KnowledgeBasePromptTemplate < Struct.new(
+      :text_prompt_template)
+      SENSITIVE = [:text_prompt_template]
       include Aws::Structure
     end
 
@@ -6018,8 +6323,8 @@ module Aws::BedrockAgent
     # Contains configurations for a Lambda function node in the flow. You
     # specify the Lambda function to invoke and the inputs into the
     # function. The output is the response that is defined in the Lambda
-    # function. For more information, see [Node types in Amazon Bedrock
-    # works][1] in the Amazon Bedrock User Guide.
+    # function. For more information, see [Node types in a flow][1] in the
+    # Amazon Bedrock User Guide.
     #
     #
     #
@@ -6040,8 +6345,8 @@ module Aws::BedrockAgent
     # Contains configurations for a Lex node in the flow. You specify a
     # Amazon Lex bot to invoke. This node takes an utterance as the input
     # and returns as the output the intent identified by the Amazon Lex bot.
-    # For more information, see [Node types in Amazon Bedrock works][1] in
-    # the Amazon Bedrock User Guide.
+    # For more information, see [Node types in a flow][1] in the Amazon
+    # Bedrock User Guide.
     #
     #
     #
@@ -6795,6 +7100,106 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # Contains configurations for the controller node of a DoWhile loop in
+    # the flow.
+    #
+    # @!attribute [rw] continue_condition
+    #   Specifies the condition that determines when the flow exits the
+    #   DoWhile loop. The loop executes until this condition evaluates to
+    #   true.
+    #   @return [Types::FlowCondition]
+    #
+    # @!attribute [rw] max_iterations
+    #   Specifies the maximum number of times the DoWhile loop can iterate
+    #   before the flow exits the loop.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/LoopControllerFlowNodeConfiguration AWS API Documentation
+    #
+    class LoopControllerFlowNodeConfiguration < Struct.new(
+      :continue_condition,
+      :max_iterations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configurations for the nodes of a DoWhile loop in your flow.
+    #
+    # A DoWhile loop is made up of the following nodes:
+    #
+    # * `Loop` - The container node that holds the loop's flow definition.
+    #   This node encompasses the entire loop structure.
+    #
+    # * `LoopInput` - The entry point node for the loop. This node receives
+    #   inputs from nodes outside the loop and from previous loop
+    #   iterations.
+    #
+    # * Body nodes - The processing nodes that execute within each loop
+    #   iteration. These can be nodes for handling data in your flow, such
+    #   as a prompt or Lambda function nodes. Some node types aren't
+    #   supported inside a DoWhile loop body. For more information, see
+    #   [LoopIncompatibleNodeTypeFlowValidationDetails][1].
+    #
+    # * `LoopController` - The node that evaluates whether the loop should
+    #   continue or exit based on a condition.
+    #
+    # These nodes work together to create a loop that runs at least once and
+    # continues until a specified condition is met or a maximum number of
+    # iterations is reached.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_LoopIncompatibleNodeTypeFlowValidationDetails.html
+    #
+    # @!attribute [rw] definition
+    #   The definition of the DoWhile loop nodes and connections between
+    #   nodes in the flow.
+    #   @return [Types::FlowDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/LoopFlowNodeConfiguration AWS API Documentation
+    #
+    class LoopFlowNodeConfiguration < Struct.new(
+      :definition)
+      SENSITIVE = [:definition]
+      include Aws::Structure
+    end
+
+    # Details about a flow that contains an incompatible node in a DoWhile
+    # loop.
+    #
+    # @!attribute [rw] incompatible_node_name
+    #   The node that's incompatible in the DoWhile loop.
+    #   @return [String]
+    #
+    # @!attribute [rw] incompatible_node_type
+    #   The node type of the incompatible node in the DoWhile loop. Some
+    #   node types, like a condition node, aren't allowed in a DoWhile
+    #   loop.
+    #   @return [String]
+    #
+    # @!attribute [rw] node
+    #   The `Loop` container node that contains an incompatible node.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/LoopIncompatibleNodeTypeFlowValidationDetails AWS API Documentation
+    #
+    class LoopIncompatibleNodeTypeFlowValidationDetails < Struct.new(
+      :incompatible_node_name,
+      :incompatible_node_type,
+      :node)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configurations for the input node of a DoWhile loop in the
+    # flow.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/LoopInputFlowNodeConfiguration AWS API Documentation
+    #
+    class LoopInputFlowNodeConfiguration < Aws::EmptyStructure; end
+
     # Details about a malformed condition expression in a node.
     #
     # @!attribute [rw] cause
@@ -6948,6 +7353,27 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # Specifies how metadata fields should be handled during the reranking
+    # process.
+    #
+    # @!attribute [rw] selection_mode
+    #   The mode for selecting metadata fields for reranking.
+    #   @return [String]
+    #
+    # @!attribute [rw] selective_mode_configuration
+    #   The configuration for selective metadata field inclusion or
+    #   exclusion during reranking.
+    #   @return [Types::RerankingMetadataSelectiveModeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MetadataConfigurationForReranking AWS API Documentation
+    #
+    class MetadataConfigurationForReranking < Struct.new(
+      :selection_mode,
+      :selective_mode_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about mismatched input data types in a node.
     #
     # @!attribute [rw] expected_type
@@ -7033,10 +7459,42 @@ module Aws::BedrockAgent
     #
     class MissingEndingNodesFlowValidationDetails < Aws::EmptyStructure; end
 
-    # Details about a node missing required configuration.
+    # Details about a flow that's missing a required `LoopController` node
+    # in a DoWhile loop.
+    #
+    # @!attribute [rw] loop_node
+    #   The DoWhile loop in a flow that's missing a required
+    #   `LoopController` node.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MissingLoopControllerNodeFlowValidationDetails AWS API Documentation
+    #
+    class MissingLoopControllerNodeFlowValidationDetails < Struct.new(
+      :loop_node)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a flow that's missing a required `LoopInput` node in a
+    # DoWhile loop.
+    #
+    # @!attribute [rw] loop_node
+    #   The DoWhile loop in a flow that's missing a required `LoopInput`
+    #   node.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MissingLoopInputNodeFlowValidationDetails AWS API Documentation
+    #
+    class MissingLoopInputNodeFlowValidationDetails < Struct.new(
+      :loop_node)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a node missing a required configuration.
     #
     # @!attribute [rw] node
-    #   The name of the node missing configuration.
+    #   The name of the node missing a required configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MissingNodeConfigurationFlowValidationDetails AWS API Documentation
@@ -7174,6 +7632,37 @@ module Aws::BedrockAgent
       :metadata_field,
       :text_field,
       :vector_field)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a flow that contains multiple `LoopController` nodes in
+    # a DoWhile loop.
+    #
+    # @!attribute [rw] loop_node
+    #   The DoWhile loop in a flow that contains multiple `LoopController`
+    #   nodes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MultipleLoopControllerNodesFlowValidationDetails AWS API Documentation
+    #
+    class MultipleLoopControllerNodesFlowValidationDetails < Struct.new(
+      :loop_node)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a flow that contains multiple `LoopInput` nodes in a
+    # DoWhile loop.
+    #
+    # @!attribute [rw] loop_node
+    #   The DoWhile loop in a flow that contains multiple `LoopInput` nodes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MultipleLoopInputNodesFlowValidationDetails AWS API Documentation
+    #
+    class MultipleLoopInputNodesFlowValidationDetails < Struct.new(
+      :loop_node)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7562,6 +8051,21 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # The performance-related configuration options for the knowledge base
+    # retrieval and generation process.
+    #
+    # @!attribute [rw] latency
+    #   The latency optimization setting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/PerformanceConfiguration AWS API Documentation
+    #
+    class PerformanceConfiguration < Struct.new(
+      :latency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details about the storage configuration of the knowledge base
     # in Pinecone. For more information, see [Create a vector index in
     # Pinecone][1].
@@ -7788,7 +8292,7 @@ module Aws::BedrockAgent
     #   skips that step. The default state for each `promptType` is as
     #   follows.
     #
-    #   * `PRE_PROCESSING` – `ENABLED`
+    #   * `PRE_PROCESSING` – `DISABLED`
     #
     #   * `ORCHESTRATION` – `ENABLED`
     #
@@ -7821,8 +8325,8 @@ module Aws::BedrockAgent
     # prompt from Prompt management or you can define one in this node. If
     # the prompt contains variables, the inputs into this node will fill in
     # the variables. The output from this node is the response generated by
-    # the model. For more information, see [Node types in Amazon Bedrock
-    # works][1] in the Amazon Bedrock User Guide.
+    # the model. For more information, see [Node types in a flow][1] in the
+    # Amazon Bedrock User Guide.
     #
     #
     #
@@ -8728,6 +9232,36 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # Configures the metadata fields to include or exclude during the
+    # reranking process when using selective mode.
+    #
+    # @note RerankingMetadataSelectiveModeConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note RerankingMetadataSelectiveModeConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RerankingMetadataSelectiveModeConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] fields_to_exclude
+    #   Specifies the metadata fields to exclude from the reranking process.
+    #   @return [Array<Types::FieldForReranking>]
+    #
+    # @!attribute [rw] fields_to_include
+    #   Specifies the metadata fields to include in the reranking process.
+    #   @return [Array<Types::FieldForReranking>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/RerankingMetadataSelectiveModeConfiguration AWS API Documentation
+    #
+    class RerankingMetadataSelectiveModeConfiguration < Struct.new(
+      :fields_to_exclude,
+      :fields_to_include,
+      :unknown)
+      SENSITIVE = [:fields_to_exclude, :fields_to_include]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class FieldsToExclude < RerankingMetadataSelectiveModeConfiguration; end
+      class FieldsToInclude < RerankingMetadataSelectiveModeConfiguration; end
+      class Unknown < RerankingMetadataSelectiveModeConfiguration; end
+    end
+
     # The specified resource Amazon Resource Name (ARN) was not found. Check
     # the Amazon Resource Name (ARN) and try your request again.
     #
@@ -8875,6 +9409,36 @@ module Aws::BedrockAgent
     class S3Location < Struct.new(
       :uri)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the storage configuration of the knowledge base for S3
+    # vectors.
+    #
+    # @!attribute [rw] index_arn
+    #   The Amazon Resource Name (ARN) of the vector index used for the
+    #   knowledge base. This ARN identifies the specific vector index
+    #   resource within Amazon Bedrock.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the vector index used for the knowledge base. This name
+    #   identifies the vector index within the Amazon Bedrock service.
+    #   @return [String]
+    #
+    # @!attribute [rw] vector_bucket_arn
+    #   The Amazon Resource Name (ARN) of the S3 bucket where vector
+    #   embeddings are stored. This bucket contains the vector data used by
+    #   the knowledge base.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/S3VectorsConfiguration AWS API Documentation
+    #
+    class S3VectorsConfiguration < Struct.new(
+      :index_arn,
+      :index_name,
+      :vector_bucket_arn)
+      SENSITIVE = [:index_arn, :index_name, :vector_bucket_arn]
       include Aws::Structure
     end
 
@@ -9325,6 +9889,12 @@ module Aws::BedrockAgent
     #   Enterprise Cloud.
     #   @return [Types::RedisEnterpriseCloudConfiguration]
     #
+    # @!attribute [rw] s3_vectors_configuration
+    #   The configuration settings for storing knowledge base data using S3
+    #   vectors. This includes vector index information and S3 bucket
+    #   details for vector storage.
+    #   @return [Types::S3VectorsConfiguration]
+    #
     # @!attribute [rw] type
     #   The vector store service in which the knowledge base is stored.
     #   @return [String]
@@ -9339,6 +9909,7 @@ module Aws::BedrockAgent
       :pinecone_configuration,
       :rds_configuration,
       :redis_enterprise_cloud_configuration,
+      :s3_vectors_configuration,
       :type)
       SENSITIVE = []
       include Aws::Structure
@@ -10042,7 +10613,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #   [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
     #   @return [String]
     #
@@ -10056,7 +10627,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateAgentActionGroupRequest AWS API Documentation
@@ -10101,6 +10672,14 @@ module Aws::BedrockAgent
     #   The unique identifier of the agent.
     #   @return [String]
     #
+    # @!attribute [rw] alias_invocation_state
+    #   The invocation state for the agent alias. To pause the agent alias,
+    #   set the value to `REJECT_INVOCATIONS`. To start the agent alias
+    #   running again, set the value to `ACCEPT_INVOCATIONS`. Use the
+    #   `GetAgentAlias`, or `ListAgentAliases`, operation to get the
+    #   invocation state of an agent alias.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   Specifies a new description for the alias.
     #   @return [String]
@@ -10115,6 +10694,7 @@ module Aws::BedrockAgent
       :agent_alias_id,
       :agent_alias_name,
       :agent_id,
+      :alias_invocation_state,
       :description,
       :routing_configuration)
       SENSITIVE = []
@@ -10448,6 +11028,11 @@ module Aws::BedrockAgent
     #   The unique identifier of the alias.
     #   @return [String]
     #
+    # @!attribute [rw] concurrency_configuration
+    #   The configuration that specifies how nodes in the flow are executed
+    #   in parallel.
+    #   @return [Types::FlowAliasConcurrencyConfiguration]
+    #
     # @!attribute [rw] description
     #   A description for the alias.
     #   @return [String]
@@ -10468,6 +11053,7 @@ module Aws::BedrockAgent
     #
     class UpdateFlowAliasRequest < Struct.new(
       :alias_identifier,
+      :concurrency_configuration,
       :description,
       :flow_identifier,
       :name,
@@ -10479,6 +11065,11 @@ module Aws::BedrockAgent
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the flow.
     #   @return [String]
+    #
+    # @!attribute [rw] concurrency_configuration
+    #   The configuration that specifies how nodes in the flow are executed
+    #   in parallel.
+    #   @return [Types::FlowAliasConcurrencyConfiguration]
     #
     # @!attribute [rw] created_at
     #   The time at which the flow was created.
@@ -10512,6 +11103,7 @@ module Aws::BedrockAgent
     #
     class UpdateFlowAliasResponse < Struct.new(
       :arn,
+      :concurrency_configuration,
       :created_at,
       :description,
       :flow_id,
@@ -10947,6 +11539,76 @@ module Aws::BedrockAgent
       :embedding_model_arn,
       :embedding_model_configuration,
       :supplemental_data_storage_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures the Amazon Bedrock reranker model to improve the relevance
+    # of retrieved results.
+    #
+    # @!attribute [rw] metadata_configuration
+    #   Specifies how metadata fields should be handled during the reranking
+    #   process.
+    #   @return [Types::MetadataConfigurationForReranking]
+    #
+    # @!attribute [rw] model_configuration
+    #   Specifies the configuration for the Amazon Bedrock reranker model.
+    #   @return [Types::VectorSearchBedrockRerankingModelConfiguration]
+    #
+    # @!attribute [rw] number_of_reranked_results
+    #   Specifies the number of results to return after reranking.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/VectorSearchBedrockRerankingConfiguration AWS API Documentation
+    #
+    class VectorSearchBedrockRerankingConfiguration < Struct.new(
+      :metadata_configuration,
+      :model_configuration,
+      :number_of_reranked_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures the Amazon Bedrock model used for reranking retrieved
+    # results.
+    #
+    # @!attribute [rw] additional_model_request_fields
+    #   Specifies additional model-specific request parameters as key-value
+    #   pairs that are included in the request to the Amazon Bedrock
+    #   reranker model.
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Bedrock reranker model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/VectorSearchBedrockRerankingModelConfiguration AWS API Documentation
+    #
+    class VectorSearchBedrockRerankingModelConfiguration < Struct.new(
+      :additional_model_request_fields,
+      :model_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies how retrieved results from a knowledge base are reranked to
+    # improve relevance.
+    #
+    # @!attribute [rw] bedrock_reranking_configuration
+    #   Specifies the configuration for using an Amazon Bedrock reranker
+    #   model to rerank retrieved results.
+    #   @return [Types::VectorSearchBedrockRerankingConfiguration]
+    #
+    # @!attribute [rw] type
+    #   Specifies the type of reranking model to use. Currently, the only
+    #   supported value is `BEDROCK_RERANKING_MODEL`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/VectorSearchRerankingConfiguration AWS API Documentation
+    #
+    class VectorSearchRerankingConfiguration < Struct.new(
+      :bedrock_reranking_configuration,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end

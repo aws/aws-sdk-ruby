@@ -90,6 +90,7 @@ module Aws::CleanRoomsML
     class CancelTrainedModelRequest
       attr_accessor membership_identifier: ::String
       attr_accessor trained_model_arn: ::String
+      attr_accessor version_identifier: ::String
       SENSITIVE: []
     end
 
@@ -130,6 +131,7 @@ module Aws::CleanRoomsML
       attr_accessor description: ::String
       attr_accessor creator_account_id: ::String
       attr_accessor trained_model_arn: ::String
+      attr_accessor trained_model_version_identifier: ::String
       attr_accessor membership_identifier: ::String
       attr_accessor collaboration_identifier: ::String
       SENSITIVE: []
@@ -140,6 +142,7 @@ module Aws::CleanRoomsML
       attr_accessor configured_model_algorithm_association_arn: ::String
       attr_accessor membership_identifier: ::String
       attr_accessor trained_model_arn: ::String
+      attr_accessor trained_model_version_identifier: ::String
       attr_accessor collaboration_identifier: ::String
       attr_accessor status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "CANCEL_PENDING" | "CANCEL_IN_PROGRESS" | "CANCEL_FAILED" | "INACTIVE")
       attr_accessor output_configuration: Types::InferenceOutputConfiguration
@@ -160,6 +163,8 @@ module Aws::CleanRoomsML
       attr_accessor update_time: ::Time
       attr_accessor trained_model_arn: ::String
       attr_accessor name: ::String
+      attr_accessor version_identifier: ::String
+      attr_accessor incremental_training_data_channels: ::Array[Types::IncrementalTrainingDataChannelOutput]
       attr_accessor description: ::String
       attr_accessor membership_identifier: ::String
       attr_accessor collaboration_identifier: ::String
@@ -328,7 +333,9 @@ module Aws::CleanRoomsML
       attr_accessor environment: ::Hash[::String, ::String]
       attr_accessor resource_config: Types::ResourceConfig
       attr_accessor stopping_condition: Types::StoppingCondition
+      attr_accessor incremental_training_data_channels: ::Array[Types::IncrementalTrainingDataChannel]
       attr_accessor data_channels: ::Array[Types::ModelTrainingDataChannel]
+      attr_accessor training_input_mode: ("File" | "FastFile" | "Pipe")
       attr_accessor description: ::String
       attr_accessor kms_key_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -337,6 +344,7 @@ module Aws::CleanRoomsML
 
     class CreateTrainedModelResponse
       attr_accessor trained_model_arn: ::String
+      attr_accessor version_identifier: ::String
       SENSITIVE: []
     end
 
@@ -416,6 +424,7 @@ module Aws::CleanRoomsML
     class DeleteTrainedModelOutputRequest
       attr_accessor trained_model_arn: ::String
       attr_accessor membership_identifier: ::String
+      attr_accessor version_identifier: ::String
       SENSITIVE: []
     end
 
@@ -520,6 +529,7 @@ module Aws::CleanRoomsML
     class GetCollaborationTrainedModelRequest
       attr_accessor trained_model_arn: ::String
       attr_accessor collaboration_identifier: ::String
+      attr_accessor version_identifier: ::String
       SENSITIVE: []
     end
 
@@ -527,12 +537,15 @@ module Aws::CleanRoomsML
       attr_accessor membership_identifier: ::String
       attr_accessor collaboration_identifier: ::String
       attr_accessor trained_model_arn: ::String
+      attr_accessor version_identifier: ::String
+      attr_accessor incremental_training_data_channels: ::Array[Types::IncrementalTrainingDataChannelOutput]
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "INACTIVE" | "CANCEL_PENDING" | "CANCEL_IN_PROGRESS" | "CANCEL_FAILED")
       attr_accessor status_details: Types::StatusDetails
       attr_accessor configured_model_algorithm_association_arn: ::String
       attr_accessor resource_config: Types::ResourceConfig
+      attr_accessor training_input_mode: ("File" | "FastFile" | "Pipe")
       attr_accessor stopping_condition: Types::StoppingCondition
       attr_accessor metrics_status: ("PUBLISH_SUCCEEDED" | "PUBLISH_FAILED")
       attr_accessor metrics_status_details: ::String
@@ -673,6 +686,7 @@ module Aws::CleanRoomsML
       attr_accessor name: ::String
       attr_accessor status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "CANCEL_PENDING" | "CANCEL_IN_PROGRESS" | "CANCEL_FAILED" | "INACTIVE")
       attr_accessor trained_model_arn: ::String
+      attr_accessor trained_model_version_identifier: ::String
       attr_accessor resource_config: Types::InferenceResourceConfig
       attr_accessor output_configuration: Types::InferenceOutputConfiguration
       attr_accessor membership_identifier: ::String
@@ -694,6 +708,7 @@ module Aws::CleanRoomsML
     class GetTrainedModelRequest
       attr_accessor trained_model_arn: ::String
       attr_accessor membership_identifier: ::String
+      attr_accessor version_identifier: ::String
       SENSITIVE: []
     end
 
@@ -701,12 +716,15 @@ module Aws::CleanRoomsML
       attr_accessor membership_identifier: ::String
       attr_accessor collaboration_identifier: ::String
       attr_accessor trained_model_arn: ::String
+      attr_accessor version_identifier: ::String
+      attr_accessor incremental_training_data_channels: ::Array[Types::IncrementalTrainingDataChannelOutput]
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "INACTIVE" | "CANCEL_PENDING" | "CANCEL_IN_PROGRESS" | "CANCEL_FAILED")
       attr_accessor status_details: Types::StatusDetails
       attr_accessor configured_model_algorithm_association_arn: ::String
       attr_accessor resource_config: Types::ResourceConfig
+      attr_accessor training_input_mode: ("File" | "FastFile" | "Pipe")
       attr_accessor stopping_condition: Types::StoppingCondition
       attr_accessor metrics_status: ("PUBLISH_SUCCEEDED" | "PUBLISH_FAILED")
       attr_accessor metrics_status_details: ::String
@@ -745,6 +763,20 @@ module Aws::CleanRoomsML
       attr_accessor table_name: ::String
       attr_accessor database_name: ::String
       attr_accessor catalog_id: ::String
+      SENSITIVE: []
+    end
+
+    class IncrementalTrainingDataChannel
+      attr_accessor trained_model_arn: ::String
+      attr_accessor version_identifier: ::String
+      attr_accessor channel_name: ::String
+      SENSITIVE: []
+    end
+
+    class IncrementalTrainingDataChannelOutput
+      attr_accessor channel_name: ::String
+      attr_accessor version_identifier: ::String
+      attr_accessor model_name: ::String
       SENSITIVE: []
     end
 
@@ -790,6 +822,11 @@ module Aws::CleanRoomsML
       end
       class Unknown < InputChannelDataSource
       end
+    end
+
+    class InternalServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class ListAudienceExportJobsRequest
@@ -862,6 +899,7 @@ module Aws::CleanRoomsML
       attr_accessor max_results: ::Integer
       attr_accessor collaboration_identifier: ::String
       attr_accessor trained_model_arn: ::String
+      attr_accessor trained_model_version_identifier: ::String
       SENSITIVE: []
     end
 
@@ -876,6 +914,7 @@ module Aws::CleanRoomsML
       attr_accessor max_results: ::Integer
       attr_accessor collaboration_identifier: ::String
       attr_accessor trained_model_arn: ::String
+      attr_accessor trained_model_version_identifier: ::String
       SENSITIVE: []
     end
 
@@ -963,12 +1002,28 @@ module Aws::CleanRoomsML
       attr_accessor max_results: ::Integer
       attr_accessor membership_identifier: ::String
       attr_accessor trained_model_arn: ::String
+      attr_accessor trained_model_version_identifier: ::String
       SENSITIVE: []
     end
 
     class ListTrainedModelInferenceJobsResponse
       attr_accessor next_token: ::String
       attr_accessor trained_model_inference_jobs: ::Array[Types::TrainedModelInferenceJobSummary]
+      SENSITIVE: []
+    end
+
+    class ListTrainedModelVersionsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor membership_identifier: ::String
+      attr_accessor trained_model_arn: ::String
+      attr_accessor status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "INACTIVE" | "CANCEL_PENDING" | "CANCEL_IN_PROGRESS" | "CANCEL_FAILED")
+      SENSITIVE: []
+    end
+
+    class ListTrainedModelVersionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor trained_models: ::Array[Types::TrainedModelSummary]
       SENSITIVE: []
     end
 
@@ -1042,6 +1097,7 @@ module Aws::CleanRoomsML
     class ModelTrainingDataChannel
       attr_accessor ml_input_channel_arn: ::String
       attr_accessor channel_name: ::String
+      attr_accessor s3_data_distribution_type: ("FullyReplicated" | "ShardedByS3Key")
       SENSITIVE: []
     end
 
@@ -1115,6 +1171,8 @@ module Aws::CleanRoomsML
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
+      attr_accessor quota_name: ::String
+      attr_accessor quota_value: ::Float
       SENSITIVE: []
     end
 
@@ -1145,6 +1203,7 @@ module Aws::CleanRoomsML
     class StartTrainedModelExportJobRequest
       attr_accessor name: ::String
       attr_accessor trained_model_arn: ::String
+      attr_accessor trained_model_version_identifier: ::String
       attr_accessor membership_identifier: ::String
       attr_accessor output_configuration: Types::TrainedModelExportOutputConfiguration
       attr_accessor description: ::String
@@ -1155,6 +1214,7 @@ module Aws::CleanRoomsML
       attr_accessor membership_identifier: ::String
       attr_accessor name: ::String
       attr_accessor trained_model_arn: ::String
+      attr_accessor trained_model_version_identifier: ::String
       attr_accessor configured_model_algorithm_association_arn: ::String
       attr_accessor resource_config: Types::InferenceResourceConfig
       attr_accessor output_configuration: Types::InferenceOutputConfiguration
@@ -1192,6 +1252,17 @@ module Aws::CleanRoomsML
     class TagResourceResponse < Aws::EmptyStructure
     end
 
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TrainedModelArtifactMaxSize
+      attr_accessor unit: ("GB")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
     class TrainedModelExportOutputConfiguration
       attr_accessor members: ::Array[Types::TrainedModelExportReceiverMember]
       SENSITIVE: []
@@ -1219,6 +1290,7 @@ module Aws::CleanRoomsML
       attr_accessor configured_model_algorithm_association_arn: ::String
       attr_accessor membership_identifier: ::String
       attr_accessor trained_model_arn: ::String
+      attr_accessor trained_model_version_identifier: ::String
       attr_accessor collaboration_identifier: ::String
       attr_accessor status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "CANCEL_PENDING" | "CANCEL_IN_PROGRESS" | "CANCEL_FAILED" | "INACTIVE")
       attr_accessor output_configuration: Types::InferenceOutputConfiguration
@@ -1249,6 +1321,8 @@ module Aws::CleanRoomsML
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor trained_model_arn: ::String
+      attr_accessor version_identifier: ::String
+      attr_accessor incremental_training_data_channels: ::Array[Types::IncrementalTrainingDataChannelOutput]
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor membership_identifier: ::String
@@ -1261,6 +1335,7 @@ module Aws::CleanRoomsML
     class TrainedModelsConfigurationPolicy
       attr_accessor container_logs: ::Array[Types::LogsConfigurationPolicy]
       attr_accessor container_metrics: Types::MetricsConfigurationPolicy
+      attr_accessor max_artifact_size: Types::TrainedModelArtifactMaxSize
       SENSITIVE: []
     end
 

@@ -11,7 +11,13 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class InternalServerException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
       class ThrottlingException < ::Aws::Errors::ServiceError

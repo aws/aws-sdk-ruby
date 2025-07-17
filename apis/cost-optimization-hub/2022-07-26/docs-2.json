@@ -61,6 +61,18 @@
         "Ec2AutoScalingGroupConfiguration$allocationStrategy": "<p>The strategy used for allocating instances, based on a predefined priority order or based on the lowest available price.</p>"
       }
     },
+    "AuroraDbClusterStorage": {
+      "base": "<p>Contains the details of an Aurora DB cluster storage.</p>",
+      "refs": {
+        "ResourceDetails$auroraDbClusterStorage": "<p>The Aurora DB cluster storage recommendation details.</p>"
+      }
+    },
+    "AuroraDbClusterStorageConfiguration": {
+      "base": "<p>The Aurora DB cluster storage configuration used for recommendations.</p>",
+      "refs": {
+        "AuroraDbClusterStorage$configuration": "<p>The Aurora DB cluster storage configuration used for recommendations.</p>"
+      }
+    },
     "BlockStoragePerformanceConfiguration": {
       "base": "<p>Describes the Amazon Elastic Block Store performance configuration of the current and recommended resource configuration for a recommendation.</p>",
       "refs": {
@@ -400,13 +412,13 @@
       }
     },
     "MemoryDbReservedInstances": {
-      "base": "<p>The MemoryDB reserved instances recommendation details.</p> <note> <p>MemoryDB reserved instances are referred to as \"MemoryDB reserved nodes\" in customer-facing documentation.</p> </note>",
+      "base": "<p>The MemoryDB reserved instances recommendation details.</p> <note> <p>While the API reference uses \"MemoryDB reserved instances\", the user guide and other documentation refer to them as \"MemoryDB reserved nodes\", as the terms are used interchangeably.</p> </note>",
       "refs": {
         "ResourceDetails$memoryDbReservedInstances": "<p>The MemoryDB reserved instances recommendation details.</p>"
       }
     },
     "MemoryDbReservedInstancesConfiguration": {
-      "base": "<p>The MemoryDB reserved instances configuration used for recommendations.</p> <note> <p>MemoryDB reserved instances are referred to as \"MemoryDB reserved nodes\" in customer-facing documentation.</p> </note>",
+      "base": "<p>The MemoryDB reserved instances configuration used for recommendations.</p> <note> <p>While the API reference uses \"MemoryDB reserved instances\", the user guide and other documentation refer to them as \"MemoryDB reserved nodes\", as the terms are used interchangeably.</p> </note>",
       "refs": {
         "MemoryDbReservedInstances$configuration": "<p>The MemoryDB reserved instances configuration used for recommendations.</p>"
       }
@@ -445,6 +457,20 @@
       "base": "<p>Defines how rows will be sorted in the response.</p>",
       "refs": {
         "ListRecommendationsRequest$orderBy": "<p>The ordering of recommendations by a dimension.</p>"
+      }
+    },
+    "PaymentOption": {
+      "base": null,
+      "refs": {
+        "PreferredCommitment$paymentOption": "<p>The preferred upfront payment structure for commitments. If the value is null, it will default to <code>AllUpfront</code> (highest savings) where applicable.</p>"
+      }
+    },
+    "PreferredCommitment": {
+      "base": "<p>The preferred configuration for Reserved Instances and Savings Plans commitment-based discounts, consisting of a payment option and a commitment duration.</p>",
+      "refs": {
+        "GetPreferencesResponse$preferredCommitment": "<p>Retrieves the current preferences for how Reserved Instances and Savings Plans cost-saving opportunities are prioritized in terms of payment option and term length.</p>",
+        "UpdatePreferencesRequest$preferredCommitment": "<p>Sets the preferences for how Reserved Instances and Savings Plans cost-saving opportunities are prioritized in terms of payment option and term length.</p>",
+        "UpdatePreferencesResponse$preferredCommitment": "<p>Shows the updated preferences for how Reserved Instances and Savings Plans cost-saving opportunities are prioritized in terms of payment option and term length.</p>"
       }
     },
     "PrimitiveBoolean": {
@@ -565,6 +591,7 @@
     "ResourceCostCalculation": {
       "base": "<p>Cost impact of the resource recommendation.</p>",
       "refs": {
+        "AuroraDbClusterStorage$costCalculation": null,
         "EbsVolume$costCalculation": "<p>Cost impact of the recommendation.</p>",
         "Ec2AutoScalingGroup$costCalculation": "<p>Cost impact of the recommendation.</p>",
         "Ec2Instance$costCalculation": "<p>Cost impact of the recommendation.</p>",
@@ -663,6 +690,7 @@
       "base": null,
       "refs": {
         "AccessDeniedException$message": null,
+        "AuroraDbClusterStorageConfiguration$storageType": "<p>The storage type to associate with the Aurora DB cluster.</p>",
         "ComputeConfiguration$architecture": "<p>The architecture of the resource.</p>",
         "ComputeConfiguration$platform": "<p>The platform of the resource. The platform is the specific combination of operating system, license model, and software on an instance.</p>",
         "ComputeSavingsPlansConfiguration$accountScope": "<p>The account scope for which you want recommendations. Amazon Web Services calculates recommendations including the management account and member accounts if the value is set to <code>PAYER</code>. If the value is <code>LINKED</code>, recommendations are calculated for individual member accounts only.</p>",
@@ -853,6 +881,12 @@
         "Filter$tags": "<p>A list of tags assigned to the recommendation.</p>",
         "GetRecommendationResponse$tags": "<p>A list of tags associated with the resource for which the recommendation exists.</p>",
         "Recommendation$tags": "<p>A list of tags assigned to the recommendation.</p>"
+      }
+    },
+    "Term": {
+      "base": null,
+      "refs": {
+        "PreferredCommitment$term": "<p>The preferred length of the commitment period. If the value is null, it will default to <code>ThreeYears</code> (highest savings) where applicable.</p>"
       }
     },
     "ThrottlingException": {

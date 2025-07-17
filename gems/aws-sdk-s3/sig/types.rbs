@@ -81,6 +81,7 @@ module Aws::S3
       attr_accessor name: ::String
       attr_accessor creation_date: ::Time
       attr_accessor bucket_region: ::String
+      attr_accessor bucket_arn: ::String
       SENSITIVE: []
     end
 
@@ -177,7 +178,7 @@ module Aws::S3
       attr_accessor checksum_sha1: ::String
       attr_accessor checksum_sha256: ::String
       attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
-      attr_accessor server_side_encryption: ("AES256" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
       attr_accessor version_id: ::String
       attr_accessor ssekms_key_id: ::String
       attr_accessor bucket_key_enabled: bool
@@ -239,7 +240,7 @@ module Aws::S3
       attr_accessor expiration: ::String
       attr_accessor copy_source_version_id: ::String
       attr_accessor version_id: ::String
-      attr_accessor server_side_encryption: ("AES256" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor sse_customer_key_md5: ::String
       attr_accessor ssekms_key_id: ::String
@@ -272,8 +273,8 @@ module Aws::S3
       attr_accessor metadata: ::Hash[::String, ::String]
       attr_accessor metadata_directive: ("COPY" | "REPLACE")
       attr_accessor tagging_directive: ("COPY" | "REPLACE")
-      attr_accessor server_side_encryption: ("AES256" | "aws:kms" | "aws:kms:dsse")
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS")
       attr_accessor website_redirect_location: ::String
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor sse_customer_key: ::String
@@ -321,6 +322,16 @@ module Aws::S3
       attr_accessor location_constraint: ("af-south-1" | "ap-east-1" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-4" | "ap-southeast-5" | "ca-central-1" | "cn-north-1" | "cn-northwest-1" | "EU" | "eu-central-1" | "eu-central-2" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "il-central-1" | "me-central-1" | "me-south-1" | "sa-east-1" | "us-east-2" | "us-gov-east-1" | "us-gov-west-1" | "us-west-1" | "us-west-2")
       attr_accessor location: Types::LocationInfo
       attr_accessor bucket: Types::BucketInfo
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateBucketMetadataConfigurationRequest
+      attr_accessor bucket: ::String
+      attr_accessor content_md5: ::String
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
+      attr_accessor metadata_configuration: Types::MetadataConfiguration
+      attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
 
@@ -335,6 +346,7 @@ module Aws::S3
 
     class CreateBucketOutput
       attr_accessor location: ::String
+      attr_accessor bucket_arn: ::String
       SENSITIVE: []
     end
 
@@ -358,7 +370,7 @@ module Aws::S3
       attr_accessor bucket: ::String
       attr_accessor key: ::String
       attr_accessor upload_id: ::String
-      attr_accessor server_side_encryption: ("AES256" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor sse_customer_key_md5: ::String
       attr_accessor ssekms_key_id: ::String
@@ -385,8 +397,8 @@ module Aws::S3
       attr_accessor grant_write_acp: ::String
       attr_accessor key: ::String
       attr_accessor metadata: ::Hash[::String, ::String]
-      attr_accessor server_side_encryption: ("AES256" | "aws:kms" | "aws:kms:dsse")
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS")
       attr_accessor website_redirect_location: ::String
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor sse_customer_key: ::String
@@ -406,7 +418,7 @@ module Aws::S3
     end
 
     class CreateSessionOutput
-      attr_accessor server_side_encryption: ("AES256" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
       attr_accessor ssekms_key_id: ::String
       attr_accessor ssekms_encryption_context: ::String
       attr_accessor bucket_key_enabled: bool
@@ -417,7 +429,7 @@ module Aws::S3
     class CreateSessionRequest
       attr_accessor session_mode: ("ReadOnly" | "ReadWrite")
       attr_accessor bucket: ::String
-      attr_accessor server_side_encryption: ("AES256" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
       attr_accessor ssekms_key_id: ::String
       attr_accessor ssekms_encryption_context: ::String
       attr_accessor bucket_key_enabled: bool
@@ -459,6 +471,7 @@ module Aws::S3
     class DeleteBucketIntelligentTieringConfigurationRequest
       attr_accessor bucket: ::String
       attr_accessor id: ::String
+      attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
 
@@ -470,6 +483,12 @@ module Aws::S3
     end
 
     class DeleteBucketLifecycleRequest
+      attr_accessor bucket: ::String
+      attr_accessor expected_bucket_owner: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBucketMetadataConfigurationRequest
       attr_accessor bucket: ::String
       attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
@@ -607,7 +626,7 @@ module Aws::S3
     class Destination
       attr_accessor bucket: ::String
       attr_accessor account: ::String
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS")
       attr_accessor access_control_translation: Types::AccessControlTranslation
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
       attr_accessor replication_time: Types::ReplicationTime
@@ -615,8 +634,15 @@ module Aws::S3
       SENSITIVE: []
     end
 
+    class DestinationResult
+      attr_accessor table_bucket_type: ("aws" | "customer")
+      attr_accessor table_bucket_arn: ::String
+      attr_accessor table_namespace: ::String
+      SENSITIVE: []
+    end
+
     class Encryption
-      attr_accessor encryption_type: ("AES256" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor encryption_type: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
       attr_accessor kms_key_id: ::String
       attr_accessor kms_context: ::String
       SENSITIVE: [:kms_key_id]
@@ -735,6 +761,7 @@ module Aws::S3
     class GetBucketIntelligentTieringConfigurationRequest
       attr_accessor bucket: ::String
       attr_accessor id: ::String
+      attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
 
@@ -792,6 +819,22 @@ module Aws::S3
     class GetBucketLoggingRequest
       attr_accessor bucket: ::String
       attr_accessor expected_bucket_owner: ::String
+      SENSITIVE: []
+    end
+
+    class GetBucketMetadataConfigurationOutput
+      attr_accessor get_bucket_metadata_configuration_result: Types::GetBucketMetadataConfigurationResult
+      SENSITIVE: []
+    end
+
+    class GetBucketMetadataConfigurationRequest
+      attr_accessor bucket: ::String
+      attr_accessor expected_bucket_owner: ::String
+      SENSITIVE: []
+    end
+
+    class GetBucketMetadataConfigurationResult
+      attr_accessor metadata_configuration_result: Types::MetadataConfigurationResult
       SENSITIVE: []
     end
 
@@ -947,7 +990,7 @@ module Aws::S3
       attr_accessor etag: ::String
       attr_accessor checksum: Types::Checksum
       attr_accessor object_parts: Types::GetObjectAttributesParts
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS")
       attr_accessor object_size: ::Integer
       SENSITIVE: []
     end
@@ -1028,13 +1071,13 @@ module Aws::S3
       attr_accessor expires: ::Time
       attr_accessor expires_string: ::String
       attr_accessor website_redirect_location: ::String
-      attr_accessor server_side_encryption: ("AES256" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
       attr_accessor metadata: ::Hash[::String, ::String]
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor sse_customer_key_md5: ::String
       attr_accessor ssekms_key_id: ::String
       attr_accessor bucket_key_enabled: bool
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS")
       attr_accessor request_charged: ("requester")
       attr_accessor replication_status: ("COMPLETE" | "PENDING" | "FAILED" | "REPLICA" | "COMPLETED")
       attr_accessor parts_count: ::Integer
@@ -1145,6 +1188,7 @@ module Aws::S3
     end
 
     class HeadBucketOutput
+      attr_accessor bucket_arn: ::String
       attr_accessor bucket_location_type: ("AvailabilityZone" | "LocalZone")
       attr_accessor bucket_location_name: ::String
       attr_accessor bucket_region: ::String
@@ -1184,16 +1228,17 @@ module Aws::S3
       attr_accessor expires: ::Time
       attr_accessor expires_string: ::String
       attr_accessor website_redirect_location: ::String
-      attr_accessor server_side_encryption: ("AES256" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
       attr_accessor metadata: ::Hash[::String, ::String]
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor sse_customer_key_md5: ::String
       attr_accessor ssekms_key_id: ::String
       attr_accessor bucket_key_enabled: bool
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS")
       attr_accessor request_charged: ("requester")
       attr_accessor replication_status: ("COMPLETE" | "PENDING" | "FAILED" | "REPLICA" | "COMPLETED")
       attr_accessor parts_count: ::Integer
+      attr_accessor tag_count: ::Integer
       attr_accessor object_lock_mode: ("GOVERNANCE" | "COMPLIANCE")
       attr_accessor object_lock_retain_until_date: ::Time
       attr_accessor object_lock_legal_hold_status: ("ON" | "OFF")
@@ -1223,6 +1268,9 @@ module Aws::S3
       attr_accessor expected_bucket_owner: ::String
       attr_accessor checksum_mode: ("ENABLED")
       SENSITIVE: [:sse_customer_key]
+    end
+
+    class IdempotencyParameterMismatch < Aws::EmptyStructure
     end
 
     class IndexDocument
@@ -1266,7 +1314,7 @@ module Aws::S3
     end
 
     class InvalidObjectState
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS")
       attr_accessor access_tier: ("ARCHIVE_ACCESS" | "DEEP_ARCHIVE_ACCESS")
       SENSITIVE: []
     end
@@ -1318,6 +1366,27 @@ module Aws::S3
       SENSITIVE: []
     end
 
+    class InventoryTableConfiguration
+      attr_accessor configuration_state: ("ENABLED" | "DISABLED")
+      attr_accessor encryption_configuration: Types::MetadataTableEncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class InventoryTableConfigurationResult
+      attr_accessor configuration_state: ("ENABLED" | "DISABLED")
+      attr_accessor table_status: ::String
+      attr_accessor error: Types::ErrorDetails
+      attr_accessor table_name: ::String
+      attr_accessor table_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InventoryTableConfigurationUpdates
+      attr_accessor configuration_state: ("ENABLED" | "DISABLED")
+      attr_accessor encryption_configuration: Types::MetadataTableEncryptionConfiguration
+      SENSITIVE: []
+    end
+
     class JSONInput
       attr_accessor type: ("DOCUMENT" | "LINES")
       SENSITIVE: []
@@ -1325,6 +1394,26 @@ module Aws::S3
 
     class JSONOutput
       attr_accessor record_delimiter: ::String
+      SENSITIVE: []
+    end
+
+    class JournalTableConfiguration
+      attr_accessor record_expiration: Types::RecordExpiration
+      attr_accessor encryption_configuration: Types::MetadataTableEncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class JournalTableConfigurationResult
+      attr_accessor table_status: ::String
+      attr_accessor error: Types::ErrorDetails
+      attr_accessor table_name: ::String
+      attr_accessor table_arn: ::String
+      attr_accessor record_expiration: Types::RecordExpiration
+      SENSITIVE: []
+    end
+
+    class JournalTableConfigurationUpdates
+      attr_accessor record_expiration: Types::RecordExpiration
       SENSITIVE: []
     end
 
@@ -1404,6 +1493,7 @@ module Aws::S3
     class ListBucketIntelligentTieringConfigurationsRequest
       attr_accessor bucket: ::String
       attr_accessor continuation_token: ::String
+      attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
 
@@ -1600,7 +1690,7 @@ module Aws::S3
       attr_accessor parts: ::Array[Types::Part]
       attr_accessor initiator: Types::Initiator
       attr_accessor owner: Types::Owner
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS")
       attr_accessor request_charged: ("requester")
       attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
@@ -1635,6 +1725,19 @@ module Aws::S3
       SENSITIVE: []
     end
 
+    class MetadataConfiguration
+      attr_accessor journal_table_configuration: Types::JournalTableConfiguration
+      attr_accessor inventory_table_configuration: Types::InventoryTableConfiguration
+      SENSITIVE: []
+    end
+
+    class MetadataConfigurationResult
+      attr_accessor destination_result: Types::DestinationResult
+      attr_accessor journal_table_configuration_result: Types::JournalTableConfigurationResult
+      attr_accessor inventory_table_configuration_result: Types::InventoryTableConfigurationResult
+      SENSITIVE: []
+    end
+
     class MetadataEntry
       attr_accessor name: ::String
       attr_accessor value: ::String
@@ -1648,6 +1751,12 @@ module Aws::S3
 
     class MetadataTableConfigurationResult
       attr_accessor s3_tables_destination_result: Types::S3TablesDestinationResult
+      SENSITIVE: []
+    end
+
+    class MetadataTableEncryptionConfiguration
+      attr_accessor sse_algorithm: ("aws:kms" | "AES256")
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -1682,7 +1791,7 @@ module Aws::S3
       attr_accessor upload_id: ::String
       attr_accessor key: ::String
       attr_accessor initiated: ::Time
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS")
       attr_accessor owner: Types::Owner
       attr_accessor initiator: Types::Initiator
       attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
@@ -1739,7 +1848,7 @@ module Aws::S3
       attr_accessor checksum_algorithm: ::Array[("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")]
       attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
       attr_accessor size: ::Integer
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "GLACIER" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "GLACIER" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS")
       attr_accessor owner: Types::Owner
       attr_accessor restore_status: Types::RestoreStatus
       SENSITIVE: []
@@ -1934,6 +2043,7 @@ module Aws::S3
     class PutBucketIntelligentTieringConfigurationRequest
       attr_accessor bucket: ::String
       attr_accessor id: ::String
+      attr_accessor expected_bucket_owner: ::String
       attr_accessor intelligent_tiering_configuration: Types::IntelligentTieringConfiguration
       SENSITIVE: []
     end
@@ -2008,6 +2118,7 @@ module Aws::S3
       attr_accessor content_md5: ::String
       attr_accessor expected_bucket_owner: ::String
       attr_accessor ownership_controls: Types::OwnershipControls
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       SENSITIVE: []
     end
 
@@ -2133,7 +2244,7 @@ module Aws::S3
       attr_accessor checksum_sha1: ::String
       attr_accessor checksum_sha256: ::String
       attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
-      attr_accessor server_side_encryption: ("AES256" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
       attr_accessor version_id: ::String
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor sse_customer_key_md5: ::String
@@ -2172,8 +2283,8 @@ module Aws::S3
       attr_accessor key: ::String
       attr_accessor write_offset_bytes: ::Integer
       attr_accessor metadata: ::Hash[::String, ::String]
-      attr_accessor server_side_encryption: ("AES256" | "aws:kms" | "aws:kms:dsse")
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS")
       attr_accessor website_redirect_location: ::String
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor sse_customer_key: ::String
@@ -2250,6 +2361,12 @@ module Aws::S3
       SENSITIVE: []
     end
 
+    class RecordExpiration
+      attr_accessor expiration: ("ENABLED" | "DISABLED")
+      attr_accessor days: ::Integer
+      SENSITIVE: []
+    end
+
     class RecordsEvent
       attr_accessor payload: ::IO
       attr_accessor event_type: untyped
@@ -2268,6 +2385,25 @@ module Aws::S3
     class RedirectAllRequestsTo
       attr_accessor host_name: ::String
       attr_accessor protocol: ("http" | "https")
+      SENSITIVE: []
+    end
+
+    class RenameObjectOutput < Aws::EmptyStructure
+    end
+
+    class RenameObjectRequest
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      attr_accessor rename_source: ::String
+      attr_accessor destination_if_match: ::String
+      attr_accessor destination_if_none_match: ::String
+      attr_accessor destination_if_modified_since: ::Time
+      attr_accessor destination_if_unmodified_since: ::Time
+      attr_accessor source_if_match: ::String
+      attr_accessor source_if_none_match: ::String
+      attr_accessor source_if_modified_since: ::Time
+      attr_accessor source_if_unmodified_since: ::Time
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -2394,7 +2530,7 @@ module Aws::S3
       attr_accessor access_control_list: ::Array[Types::Grant]
       attr_accessor tagging: Types::Tagging
       attr_accessor user_metadata: ::Array[Types::MetadataEntry]
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS")
       SENSITIVE: []
     end
 
@@ -2456,7 +2592,7 @@ module Aws::S3
     end
 
     class ServerSideEncryptionByDefault
-      attr_accessor sse_algorithm: ("AES256" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor sse_algorithm: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
       attr_accessor kms_master_key_id: ::String
       SENSITIVE: [:kms_master_key_id]
     end
@@ -2573,10 +2709,28 @@ module Aws::S3
       SENSITIVE: []
     end
 
+    class UpdateBucketMetadataInventoryTableConfigurationRequest
+      attr_accessor bucket: ::String
+      attr_accessor content_md5: ::String
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
+      attr_accessor inventory_table_configuration: Types::InventoryTableConfigurationUpdates
+      attr_accessor expected_bucket_owner: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBucketMetadataJournalTableConfigurationRequest
+      attr_accessor bucket: ::String
+      attr_accessor content_md5: ::String
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
+      attr_accessor journal_table_configuration: Types::JournalTableConfigurationUpdates
+      attr_accessor expected_bucket_owner: ::String
+      SENSITIVE: []
+    end
+
     class UploadPartCopyOutput
       attr_accessor copy_source_version_id: ::String
       attr_accessor copy_part_result: Types::CopyPartResult
-      attr_accessor server_side_encryption: ("AES256" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor sse_customer_key_md5: ::String
       attr_accessor ssekms_key_id: ::String
@@ -2609,7 +2763,7 @@ module Aws::S3
     end
 
     class UploadPartOutput
-      attr_accessor server_side_encryption: ("AES256" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
       attr_accessor etag: ::String
       attr_accessor checksum_crc32: ::String
       attr_accessor checksum_crc32c: ::String
@@ -2694,11 +2848,11 @@ module Aws::S3
       attr_accessor replication_status: ("COMPLETE" | "PENDING" | "FAILED" | "REPLICA" | "COMPLETED")
       attr_accessor request_charged: ("requester")
       attr_accessor restore: ::String
-      attr_accessor server_side_encryption: ("AES256" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor ssekms_key_id: ::String
       attr_accessor sse_customer_key_md5: ::String
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS")
       attr_accessor tag_count: ::Integer
       attr_accessor version_id: ::String
       attr_accessor bucket_key_enabled: bool

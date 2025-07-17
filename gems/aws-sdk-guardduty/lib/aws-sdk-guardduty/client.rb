@@ -200,8 +200,7 @@ module Aws::GuardDuty
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -1061,6 +1060,10 @@ module Aws::GuardDuty
     # @option params [Hash<String,String>] :tags
     #   The tags to be added to a new IP set resource.
     #
+    # @option params [String] :expected_bucket_owner
+    #   The Amazon Web Services account ID that owns the Amazon S3 bucket
+    #   specified in the **location** parameter.
+    #
     # @return [Types::CreateIPSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIPSetResponse#ip_set_id #ip_set_id} => String
@@ -1077,6 +1080,7 @@ module Aws::GuardDuty
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     expected_bucket_owner: "AccountId",
     #   })
     #
     # @example Response structure
@@ -1378,6 +1382,10 @@ module Aws::GuardDuty
     # @option params [Hash<String,String>] :tags
     #   The tags to be added to a new threat list resource.
     #
+    # @option params [String] :expected_bucket_owner
+    #   The Amazon Web Services account ID that owns the Amazon S3 bucket
+    #   specified in the **location** parameter.
+    #
     # @return [Types::CreateThreatIntelSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateThreatIntelSetResponse#threat_intel_set_id #threat_intel_set_id} => String
@@ -1394,6 +1402,7 @@ module Aws::GuardDuty
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     expected_bucket_owner: "AccountId",
     #   })
     #
     # @example Response structure
@@ -2158,10 +2167,18 @@ module Aws::GuardDuty
     # Provides the details of the GuardDuty administrator account associated
     # with the current GuardDuty member account.
     #
-    # <note markdown="1"> If the organization's management account or a delegated administrator
-    # runs this API, it will return success (`HTTP 200`) but no content.
+    # Based on the type of account that runs this API, the following list
+    # shows how the API behavior varies:
     #
-    #  </note>
+    # * When the GuardDuty administrator account runs this API, it will
+    #   return success (`HTTP 200`) but no content.
+    #
+    # * When a member account runs this API, it will return the details of
+    #   the GuardDuty administrator account that is associated with this
+    #   calling member account.
+    #
+    # * When an individual account (not associated with an organization)
+    #   runs this API, it will return success (`HTTP 200`) but no content.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty member account.
@@ -2916,11 +2933,14 @@ module Aws::GuardDuty
     #   resp.findings[0].service.detection.sequence.actors[0].session.mfa_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.findings[0].service.detection.sequence.actors[0].session.created_time #=> Time
     #   resp.findings[0].service.detection.sequence.actors[0].session.issuer #=> String
+    #   resp.findings[0].service.detection.sequence.actors[0].process.name #=> String
+    #   resp.findings[0].service.detection.sequence.actors[0].process.path #=> String
+    #   resp.findings[0].service.detection.sequence.actors[0].process.sha_256 #=> String
     #   resp.findings[0].service.detection.sequence.resources #=> Array
     #   resp.findings[0].service.detection.sequence.resources[0].uid #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].name #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].account_id #=> String
-    #   resp.findings[0].service.detection.sequence.resources[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_NETWORK_INTERFACE", "S3_BUCKET", "S3_OBJECT", "ACCESS_KEY"
+    #   resp.findings[0].service.detection.sequence.resources[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_NETWORK_INTERFACE", "S3_BUCKET", "S3_OBJECT", "ACCESS_KEY", "EKS_CLUSTER", "KUBERNETES_WORKLOAD", "CONTAINER"
     #   resp.findings[0].service.detection.sequence.resources[0].region #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].service #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].cloud_partition #=> String
@@ -2974,6 +2994,18 @@ module Aws::GuardDuty
     #   resp.findings[0].service.detection.sequence.resources[0].data.s3_object.etag #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].data.s3_object.key #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].data.s3_object.version_id #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.eks_cluster.arn #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.eks_cluster.created_at #=> Time
+    #   resp.findings[0].service.detection.sequence.resources[0].data.eks_cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING", "PENDING"
+    #   resp.findings[0].service.detection.sequence.resources[0].data.eks_cluster.vpc_id #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.eks_cluster.ec2_instance_uids #=> Array
+    #   resp.findings[0].service.detection.sequence.resources[0].data.eks_cluster.ec2_instance_uids[0] #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.kubernetes_workload.container_uids #=> Array
+    #   resp.findings[0].service.detection.sequence.resources[0].data.kubernetes_workload.container_uids[0] #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.kubernetes_workload.namespace #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.kubernetes_workload.kubernetes_resources_types #=> String, one of "PODS", "JOBS", "CRONJOBS", "DEPLOYMENTS", "DAEMONSETS", "STATEFULSETS", "REPLICASETS", "REPLICATIONCONTROLLERS"
+    #   resp.findings[0].service.detection.sequence.resources[0].data.container.image #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.container.image_uid #=> String
     #   resp.findings[0].service.detection.sequence.endpoints #=> Array
     #   resp.findings[0].service.detection.sequence.endpoints[0].id #=> String
     #   resp.findings[0].service.detection.sequence.endpoints[0].ip #=> String
@@ -2988,7 +3020,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.detection.sequence.endpoints[0].connection.direction #=> String, one of "INBOUND", "OUTBOUND"
     #   resp.findings[0].service.detection.sequence.signals #=> Array
     #   resp.findings[0].service.detection.sequence.signals[0].uid #=> String
-    #   resp.findings[0].service.detection.sequence.signals[0].type #=> String, one of "FINDING", "CLOUD_TRAIL", "S3_DATA_EVENTS"
+    #   resp.findings[0].service.detection.sequence.signals[0].type #=> String, one of "FINDING", "CLOUD_TRAIL", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "FLOW_LOGS", "DNS_LOGS", "RUNTIME_MONITORING"
     #   resp.findings[0].service.detection.sequence.signals[0].description #=> String
     #   resp.findings[0].service.detection.sequence.signals[0].name #=> String
     #   resp.findings[0].service.detection.sequence.signals[0].created_at #=> Time
@@ -3004,15 +3036,17 @@ module Aws::GuardDuty
     #   resp.findings[0].service.detection.sequence.signals[0].endpoint_ids #=> Array
     #   resp.findings[0].service.detection.sequence.signals[0].endpoint_ids[0] #=> String
     #   resp.findings[0].service.detection.sequence.signals[0].signal_indicators #=> Array
-    #   resp.findings[0].service.detection.sequence.signals[0].signal_indicators[0].key #=> String, one of "SUSPICIOUS_USER_AGENT", "SUSPICIOUS_NETWORK", "MALICIOUS_IP", "TOR_IP", "ATTACK_TACTIC", "HIGH_RISK_API", "ATTACK_TECHNIQUE", "UNUSUAL_API_FOR_ACCOUNT", "UNUSUAL_ASN_FOR_ACCOUNT", "UNUSUAL_ASN_FOR_USER"
+    #   resp.findings[0].service.detection.sequence.signals[0].signal_indicators[0].key #=> String, one of "SUSPICIOUS_USER_AGENT", "SUSPICIOUS_NETWORK", "MALICIOUS_IP", "TOR_IP", "ATTACK_TACTIC", "HIGH_RISK_API", "ATTACK_TECHNIQUE", "UNUSUAL_API_FOR_ACCOUNT", "UNUSUAL_ASN_FOR_ACCOUNT", "UNUSUAL_ASN_FOR_USER", "SUSPICIOUS_PROCESS", "MALICIOUS_DOMAIN", "MALICIOUS_PROCESS", "CRYPTOMINING_IP", "CRYPTOMINING_DOMAIN", "CRYPTOMINING_PROCESS"
     #   resp.findings[0].service.detection.sequence.signals[0].signal_indicators[0].values #=> Array
     #   resp.findings[0].service.detection.sequence.signals[0].signal_indicators[0].values[0] #=> String
     #   resp.findings[0].service.detection.sequence.signals[0].signal_indicators[0].title #=> String
     #   resp.findings[0].service.detection.sequence.sequence_indicators #=> Array
-    #   resp.findings[0].service.detection.sequence.sequence_indicators[0].key #=> String, one of "SUSPICIOUS_USER_AGENT", "SUSPICIOUS_NETWORK", "MALICIOUS_IP", "TOR_IP", "ATTACK_TACTIC", "HIGH_RISK_API", "ATTACK_TECHNIQUE", "UNUSUAL_API_FOR_ACCOUNT", "UNUSUAL_ASN_FOR_ACCOUNT", "UNUSUAL_ASN_FOR_USER"
+    #   resp.findings[0].service.detection.sequence.sequence_indicators[0].key #=> String, one of "SUSPICIOUS_USER_AGENT", "SUSPICIOUS_NETWORK", "MALICIOUS_IP", "TOR_IP", "ATTACK_TACTIC", "HIGH_RISK_API", "ATTACK_TECHNIQUE", "UNUSUAL_API_FOR_ACCOUNT", "UNUSUAL_ASN_FOR_ACCOUNT", "UNUSUAL_ASN_FOR_USER", "SUSPICIOUS_PROCESS", "MALICIOUS_DOMAIN", "MALICIOUS_PROCESS", "CRYPTOMINING_IP", "CRYPTOMINING_DOMAIN", "CRYPTOMINING_PROCESS"
     #   resp.findings[0].service.detection.sequence.sequence_indicators[0].values #=> Array
     #   resp.findings[0].service.detection.sequence.sequence_indicators[0].values[0] #=> String
     #   resp.findings[0].service.detection.sequence.sequence_indicators[0].title #=> String
+    #   resp.findings[0].service.detection.sequence.additional_sequence_types #=> Array
+    #   resp.findings[0].service.detection.sequence.additional_sequence_types[0] #=> String
     #   resp.findings[0].service.malware_scan_details.threats #=> Array
     #   resp.findings[0].service.malware_scan_details.threats[0].name #=> String
     #   resp.findings[0].service.malware_scan_details.threats[0].source #=> String
@@ -3173,6 +3207,7 @@ module Aws::GuardDuty
     #   * {Types::GetIPSetResponse#location #location} => String
     #   * {Types::GetIPSetResponse#status #status} => String
     #   * {Types::GetIPSetResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetIPSetResponse#expected_bucket_owner #expected_bucket_owner} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3189,6 +3224,7 @@ module Aws::GuardDuty
     #   resp.status #=> String, one of "INACTIVE", "ACTIVATING", "ACTIVE", "DEACTIVATING", "ERROR", "DELETE_PENDING", "DELETED"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.expected_bucket_owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSet AWS API Documentation
     #
@@ -3596,6 +3632,7 @@ module Aws::GuardDuty
     #   * {Types::GetThreatIntelSetResponse#location #location} => String
     #   * {Types::GetThreatIntelSetResponse#status #status} => String
     #   * {Types::GetThreatIntelSetResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetThreatIntelSetResponse#expected_bucket_owner #expected_bucket_owner} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3612,6 +3649,7 @@ module Aws::GuardDuty
     #   resp.status #=> String, one of "INACTIVE", "ACTIVATING", "ACTIVE", "DEACTIVATING", "ERROR", "DELETE_PENDING", "DELETED"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.expected_bucket_owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSet AWS API Documentation
     #
@@ -5095,6 +5133,10 @@ module Aws::GuardDuty
     #   The updated Boolean value that specifies whether the IPSet is active
     #   or not.
     #
+    # @option params [String] :expected_bucket_owner
+    #   The Amazon Web Services account ID that owns the Amazon S3 bucket
+    #   specified in the **location** parameter.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -5105,6 +5147,7 @@ module Aws::GuardDuty
     #     name: "Name",
     #     location: "Location",
     #     activate: false,
+    #     expected_bucket_owner: "AccountId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateIPSet AWS API Documentation
@@ -5518,6 +5561,10 @@ module Aws::GuardDuty
     #   The updated Boolean value that specifies whether the ThreateIntelSet
     #   is active or not.
     #
+    # @option params [String] :expected_bucket_owner
+    #   The Amazon Web Services account ID that owns the Amazon S3 bucket
+    #   specified in the **location** parameter.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -5528,6 +5575,7 @@ module Aws::GuardDuty
     #     name: "Name",
     #     location: "Location",
     #     activate: false,
+    #     expected_bucket_owner: "AccountId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSet AWS API Documentation
@@ -5557,7 +5605,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.120.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

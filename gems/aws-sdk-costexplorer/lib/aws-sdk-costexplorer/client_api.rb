@@ -46,6 +46,8 @@ module Aws::CostExplorer
     BillExpirationException = Shapes::StructureShape.new(name: 'BillExpirationException')
     BillingViewArn = Shapes::StringShape.new(name: 'BillingViewArn')
     CommitmentPurchaseAnalysisConfiguration = Shapes::StructureShape.new(name: 'CommitmentPurchaseAnalysisConfiguration')
+    ComparisonMetricValue = Shapes::StructureShape.new(name: 'ComparisonMetricValue')
+    ComparisonMetrics = Shapes::MapShape.new(name: 'ComparisonMetrics')
     Context = Shapes::StringShape.new(name: 'Context')
     CostAllocationTag = Shapes::StructureShape.new(name: 'CostAllocationTag')
     CostAllocationTagBackfillRequest = Shapes::StructureShape.new(name: 'CostAllocationTagBackfillRequest')
@@ -58,6 +60,9 @@ module Aws::CostExplorer
     CostAllocationTagStatusList = Shapes::ListShape.new(name: 'CostAllocationTagStatusList')
     CostAllocationTagType = Shapes::StringShape.new(name: 'CostAllocationTagType')
     CostAllocationTagsMaxResults = Shapes::IntegerShape.new(name: 'CostAllocationTagsMaxResults')
+    CostAndUsageComparison = Shapes::StructureShape.new(name: 'CostAndUsageComparison')
+    CostAndUsageComparisons = Shapes::ListShape.new(name: 'CostAndUsageComparisons')
+    CostAndUsageComparisonsMaxResults = Shapes::IntegerShape.new(name: 'CostAndUsageComparisonsMaxResults')
     CostCategory = Shapes::StructureShape.new(name: 'CostCategory')
     CostCategoryInheritedValueDimension = Shapes::StructureShape.new(name: 'CostCategoryInheritedValueDimension')
     CostCategoryInheritedValueDimensionName = Shapes::StringShape.new(name: 'CostCategoryInheritedValueDimensionName')
@@ -85,6 +90,11 @@ module Aws::CostExplorer
     CostCategoryValue = Shapes::StringShape.new(name: 'CostCategoryValue')
     CostCategoryValues = Shapes::StructureShape.new(name: 'CostCategoryValues')
     CostCategoryValuesList = Shapes::ListShape.new(name: 'CostCategoryValuesList')
+    CostComparisonDriver = Shapes::StructureShape.new(name: 'CostComparisonDriver')
+    CostComparisonDrivers = Shapes::ListShape.new(name: 'CostComparisonDrivers')
+    CostComparisonDriversMaxResults = Shapes::IntegerShape.new(name: 'CostComparisonDriversMaxResults')
+    CostDriver = Shapes::StructureShape.new(name: 'CostDriver')
+    CostDrivers = Shapes::ListShape.new(name: 'CostDrivers')
     Coverage = Shapes::StructureShape.new(name: 'Coverage')
     CoverageByTime = Shapes::StructureShape.new(name: 'CoverageByTime')
     CoverageCost = Shapes::StructureShape.new(name: 'CoverageCost')
@@ -150,12 +160,16 @@ module Aws::CostExplorer
     GetApproximateUsageRecordsResponse = Shapes::StructureShape.new(name: 'GetApproximateUsageRecordsResponse')
     GetCommitmentPurchaseAnalysisRequest = Shapes::StructureShape.new(name: 'GetCommitmentPurchaseAnalysisRequest')
     GetCommitmentPurchaseAnalysisResponse = Shapes::StructureShape.new(name: 'GetCommitmentPurchaseAnalysisResponse')
+    GetCostAndUsageComparisonsRequest = Shapes::StructureShape.new(name: 'GetCostAndUsageComparisonsRequest')
+    GetCostAndUsageComparisonsResponse = Shapes::StructureShape.new(name: 'GetCostAndUsageComparisonsResponse')
     GetCostAndUsageRequest = Shapes::StructureShape.new(name: 'GetCostAndUsageRequest')
     GetCostAndUsageResponse = Shapes::StructureShape.new(name: 'GetCostAndUsageResponse')
     GetCostAndUsageWithResourcesRequest = Shapes::StructureShape.new(name: 'GetCostAndUsageWithResourcesRequest')
     GetCostAndUsageWithResourcesResponse = Shapes::StructureShape.new(name: 'GetCostAndUsageWithResourcesResponse')
     GetCostCategoriesRequest = Shapes::StructureShape.new(name: 'GetCostCategoriesRequest')
     GetCostCategoriesResponse = Shapes::StructureShape.new(name: 'GetCostCategoriesResponse')
+    GetCostComparisonDriversRequest = Shapes::StructureShape.new(name: 'GetCostComparisonDriversRequest')
+    GetCostComparisonDriversResponse = Shapes::StructureShape.new(name: 'GetCostComparisonDriversResponse')
     GetCostForecastRequest = Shapes::StructureShape.new(name: 'GetCostForecastRequest')
     GetCostForecastResponse = Shapes::StructureShape.new(name: 'GetCostForecastResponse')
     GetDimensionValuesRequest = Shapes::StructureShape.new(name: 'GetDimensionValuesRequest')
@@ -440,7 +454,7 @@ module Aws::CostExplorer
     AnomalySubscription.add_member(:account_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "AccountId"))
     AnomalySubscription.add_member(:monitor_arn_list, Shapes::ShapeRef.new(shape: MonitorArnList, required: true, location_name: "MonitorArnList"))
     AnomalySubscription.add_member(:subscribers, Shapes::ShapeRef.new(shape: Subscribers, required: true, location_name: "Subscribers"))
-    AnomalySubscription.add_member(:threshold, Shapes::ShapeRef.new(shape: NullableNonNegativeDouble, deprecated: true, location_name: "Threshold", metadata: {"deprecatedMessage"=>"Threshold has been deprecated in favor of ThresholdExpression"}))
+    AnomalySubscription.add_member(:threshold, Shapes::ShapeRef.new(shape: NullableNonNegativeDouble, deprecated: true, location_name: "Threshold", metadata: {"deprecatedMessage" => "Threshold has been deprecated in favor of ThresholdExpression"}))
     AnomalySubscription.add_member(:frequency, Shapes::ShapeRef.new(shape: AnomalySubscriptionFrequency, required: true, location_name: "Frequency"))
     AnomalySubscription.add_member(:subscription_name, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "SubscriptionName"))
     AnomalySubscription.add_member(:threshold_expression, Shapes::ShapeRef.new(shape: Expression, location_name: "ThresholdExpression"))
@@ -462,6 +476,15 @@ module Aws::CostExplorer
 
     CommitmentPurchaseAnalysisConfiguration.add_member(:savings_plans_purchase_analysis_configuration, Shapes::ShapeRef.new(shape: SavingsPlansPurchaseAnalysisConfiguration, location_name: "SavingsPlansPurchaseAnalysisConfiguration"))
     CommitmentPurchaseAnalysisConfiguration.struct_class = Types::CommitmentPurchaseAnalysisConfiguration
+
+    ComparisonMetricValue.add_member(:baseline_time_period_amount, Shapes::ShapeRef.new(shape: GenericString, location_name: "BaselineTimePeriodAmount"))
+    ComparisonMetricValue.add_member(:comparison_time_period_amount, Shapes::ShapeRef.new(shape: GenericString, location_name: "ComparisonTimePeriodAmount"))
+    ComparisonMetricValue.add_member(:difference, Shapes::ShapeRef.new(shape: GenericString, location_name: "Difference"))
+    ComparisonMetricValue.add_member(:unit, Shapes::ShapeRef.new(shape: GenericString, location_name: "Unit"))
+    ComparisonMetricValue.struct_class = Types::ComparisonMetricValue
+
+    ComparisonMetrics.key = Shapes::ShapeRef.new(shape: MetricName)
+    ComparisonMetrics.value = Shapes::ShapeRef.new(shape: ComparisonMetricValue)
 
     CostAllocationTag.add_member(:tag_key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "TagKey"))
     CostAllocationTag.add_member(:type, Shapes::ShapeRef.new(shape: CostAllocationTagType, required: true, location_name: "Type"))
@@ -488,6 +511,12 @@ module Aws::CostExplorer
     CostAllocationTagStatusEntry.struct_class = Types::CostAllocationTagStatusEntry
 
     CostAllocationTagStatusList.member = Shapes::ShapeRef.new(shape: CostAllocationTagStatusEntry)
+
+    CostAndUsageComparison.add_member(:cost_and_usage_selector, Shapes::ShapeRef.new(shape: Expression, location_name: "CostAndUsageSelector"))
+    CostAndUsageComparison.add_member(:metrics, Shapes::ShapeRef.new(shape: ComparisonMetrics, location_name: "Metrics"))
+    CostAndUsageComparison.struct_class = Types::CostAndUsageComparison
+
+    CostAndUsageComparisons.member = Shapes::ShapeRef.new(shape: CostAndUsageComparison)
 
     CostCategory.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CostCategoryArn"))
     CostCategory.add_member(:effective_start, Shapes::ShapeRef.new(shape: ZonedDateTime, required: true, location_name: "EffectiveStart"))
@@ -556,6 +585,20 @@ module Aws::CostExplorer
     CostCategoryValues.struct_class = Types::CostCategoryValues
 
     CostCategoryValuesList.member = Shapes::ShapeRef.new(shape: CostCategoryValue)
+
+    CostComparisonDriver.add_member(:cost_selector, Shapes::ShapeRef.new(shape: Expression, location_name: "CostSelector"))
+    CostComparisonDriver.add_member(:metrics, Shapes::ShapeRef.new(shape: ComparisonMetrics, location_name: "Metrics"))
+    CostComparisonDriver.add_member(:cost_drivers, Shapes::ShapeRef.new(shape: CostDrivers, location_name: "CostDrivers"))
+    CostComparisonDriver.struct_class = Types::CostComparisonDriver
+
+    CostComparisonDrivers.member = Shapes::ShapeRef.new(shape: CostComparisonDriver)
+
+    CostDriver.add_member(:type, Shapes::ShapeRef.new(shape: GenericString, location_name: "Type"))
+    CostDriver.add_member(:name, Shapes::ShapeRef.new(shape: GenericString, location_name: "Name"))
+    CostDriver.add_member(:metrics, Shapes::ShapeRef.new(shape: ComparisonMetrics, location_name: "Metrics"))
+    CostDriver.struct_class = Types::CostDriver
+
+    CostDrivers.member = Shapes::ShapeRef.new(shape: CostDriver)
 
     Coverage.add_member(:coverage_hours, Shapes::ShapeRef.new(shape: CoverageHours, location_name: "CoverageHours"))
     Coverage.add_member(:coverage_normalized_units, Shapes::ShapeRef.new(shape: CoverageNormalizedUnits, location_name: "CoverageNormalizedUnits"))
@@ -766,7 +809,7 @@ module Aws::CostExplorer
     GetAnomaliesRequest.add_member(:feedback, Shapes::ShapeRef.new(shape: AnomalyFeedbackType, location_name: "Feedback"))
     GetAnomaliesRequest.add_member(:total_impact, Shapes::ShapeRef.new(shape: TotalImpactFilter, location_name: "TotalImpact"))
     GetAnomaliesRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
-    GetAnomaliesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetAnomaliesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults", metadata: {"box" => true}))
     GetAnomaliesRequest.struct_class = Types::GetAnomaliesRequest
 
     GetAnomaliesResponse.add_member(:anomalies, Shapes::ShapeRef.new(shape: Anomalies, required: true, location_name: "Anomalies"))
@@ -775,7 +818,7 @@ module Aws::CostExplorer
 
     GetAnomalyMonitorsRequest.add_member(:monitor_arn_list, Shapes::ShapeRef.new(shape: Values, location_name: "MonitorArnList"))
     GetAnomalyMonitorsRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
-    GetAnomalyMonitorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetAnomalyMonitorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults", metadata: {"box" => true}))
     GetAnomalyMonitorsRequest.struct_class = Types::GetAnomalyMonitorsRequest
 
     GetAnomalyMonitorsResponse.add_member(:anomaly_monitors, Shapes::ShapeRef.new(shape: AnomalyMonitors, required: true, location_name: "AnomalyMonitors"))
@@ -785,7 +828,7 @@ module Aws::CostExplorer
     GetAnomalySubscriptionsRequest.add_member(:subscription_arn_list, Shapes::ShapeRef.new(shape: Values, location_name: "SubscriptionArnList"))
     GetAnomalySubscriptionsRequest.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: GenericString, location_name: "MonitorArn"))
     GetAnomalySubscriptionsRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
-    GetAnomalySubscriptionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetAnomalySubscriptionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults", metadata: {"box" => true}))
     GetAnomalySubscriptionsRequest.struct_class = Types::GetAnomalySubscriptionsRequest
 
     GetAnomalySubscriptionsResponse.add_member(:anomaly_subscriptions, Shapes::ShapeRef.new(shape: AnomalySubscriptions, required: true, location_name: "AnomalySubscriptions"))
@@ -814,6 +857,21 @@ module Aws::CostExplorer
     GetCommitmentPurchaseAnalysisResponse.add_member(:analysis_details, Shapes::ShapeRef.new(shape: AnalysisDetails, location_name: "AnalysisDetails"))
     GetCommitmentPurchaseAnalysisResponse.add_member(:commitment_purchase_analysis_configuration, Shapes::ShapeRef.new(shape: CommitmentPurchaseAnalysisConfiguration, required: true, location_name: "CommitmentPurchaseAnalysisConfiguration"))
     GetCommitmentPurchaseAnalysisResponse.struct_class = Types::GetCommitmentPurchaseAnalysisResponse
+
+    GetCostAndUsageComparisonsRequest.add_member(:billing_view_arn, Shapes::ShapeRef.new(shape: BillingViewArn, location_name: "BillingViewArn"))
+    GetCostAndUsageComparisonsRequest.add_member(:baseline_time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "BaselineTimePeriod"))
+    GetCostAndUsageComparisonsRequest.add_member(:comparison_time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "ComparisonTimePeriod"))
+    GetCostAndUsageComparisonsRequest.add_member(:metric_for_comparison, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricForComparison"))
+    GetCostAndUsageComparisonsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetCostAndUsageComparisonsRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: GroupDefinitions, location_name: "GroupBy"))
+    GetCostAndUsageComparisonsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostAndUsageComparisonsMaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    GetCostAndUsageComparisonsRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetCostAndUsageComparisonsRequest.struct_class = Types::GetCostAndUsageComparisonsRequest
+
+    GetCostAndUsageComparisonsResponse.add_member(:cost_and_usage_comparisons, Shapes::ShapeRef.new(shape: CostAndUsageComparisons, location_name: "CostAndUsageComparisons"))
+    GetCostAndUsageComparisonsResponse.add_member(:total_cost_and_usage, Shapes::ShapeRef.new(shape: ComparisonMetrics, location_name: "TotalCostAndUsage"))
+    GetCostAndUsageComparisonsResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetCostAndUsageComparisonsResponse.struct_class = Types::GetCostAndUsageComparisonsResponse
 
     GetCostAndUsageRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
     GetCostAndUsageRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, required: true, location_name: "Granularity"))
@@ -862,6 +920,20 @@ module Aws::CostExplorer
     GetCostCategoriesResponse.add_member(:total_size, Shapes::ShapeRef.new(shape: PageSize, required: true, location_name: "TotalSize"))
     GetCostCategoriesResponse.struct_class = Types::GetCostCategoriesResponse
 
+    GetCostComparisonDriversRequest.add_member(:billing_view_arn, Shapes::ShapeRef.new(shape: BillingViewArn, location_name: "BillingViewArn"))
+    GetCostComparisonDriversRequest.add_member(:baseline_time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "BaselineTimePeriod"))
+    GetCostComparisonDriversRequest.add_member(:comparison_time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "ComparisonTimePeriod"))
+    GetCostComparisonDriversRequest.add_member(:metric_for_comparison, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricForComparison"))
+    GetCostComparisonDriversRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetCostComparisonDriversRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: GroupDefinitions, location_name: "GroupBy"))
+    GetCostComparisonDriversRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostComparisonDriversMaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    GetCostComparisonDriversRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetCostComparisonDriversRequest.struct_class = Types::GetCostComparisonDriversRequest
+
+    GetCostComparisonDriversResponse.add_member(:cost_comparison_drivers, Shapes::ShapeRef.new(shape: CostComparisonDrivers, location_name: "CostComparisonDrivers"))
+    GetCostComparisonDriversResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetCostComparisonDriversResponse.struct_class = Types::GetCostComparisonDriversResponse
+
     GetCostForecastRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
     GetCostForecastRequest.add_member(:metric, Shapes::ShapeRef.new(shape: Metric, required: true, location_name: "Metric"))
     GetCostForecastRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, required: true, location_name: "Granularity"))
@@ -898,7 +970,7 @@ module Aws::CostExplorer
     GetReservationCoverageRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricNames, location_name: "Metrics"))
     GetReservationCoverageRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
     GetReservationCoverageRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortDefinition, location_name: "SortBy"))
-    GetReservationCoverageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetReservationCoverageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     GetReservationCoverageRequest.struct_class = Types::GetReservationCoverageRequest
 
     GetReservationCoverageResponse.add_member(:coverages_by_time, Shapes::ShapeRef.new(shape: CoveragesByTime, required: true, location_name: "CoveragesByTime"))
@@ -929,7 +1001,7 @@ module Aws::CostExplorer
     GetReservationUtilizationRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
     GetReservationUtilizationRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortDefinition, location_name: "SortBy"))
     GetReservationUtilizationRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
-    GetReservationUtilizationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetReservationUtilizationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     GetReservationUtilizationRequest.struct_class = Types::GetReservationUtilizationRequest
 
     GetReservationUtilizationResponse.add_member(:utilizations_by_time, Shapes::ShapeRef.new(shape: UtilizationsByTime, required: true, location_name: "UtilizationsByTime"))
@@ -964,7 +1036,7 @@ module Aws::CostExplorer
     GetSavingsPlansCoverageRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
     GetSavingsPlansCoverageRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricNames, location_name: "Metrics"))
     GetSavingsPlansCoverageRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
-    GetSavingsPlansCoverageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetSavingsPlansCoverageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     GetSavingsPlansCoverageRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortDefinition, location_name: "SortBy"))
     GetSavingsPlansCoverageRequest.struct_class = Types::GetSavingsPlansCoverageRequest
 
@@ -991,7 +1063,7 @@ module Aws::CostExplorer
     GetSavingsPlansUtilizationDetailsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
     GetSavingsPlansUtilizationDetailsRequest.add_member(:data_type, Shapes::ShapeRef.new(shape: SavingsPlansDataTypes, location_name: "DataType"))
     GetSavingsPlansUtilizationDetailsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
-    GetSavingsPlansUtilizationDetailsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetSavingsPlansUtilizationDetailsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     GetSavingsPlansUtilizationDetailsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortDefinition, location_name: "SortBy"))
     GetSavingsPlansUtilizationDetailsRequest.struct_class = Types::GetSavingsPlansUtilizationDetailsRequest
 
@@ -1085,7 +1157,7 @@ module Aws::CostExplorer
     ListCommitmentPurchaseAnalysesResponse.struct_class = Types::ListCommitmentPurchaseAnalysesResponse
 
     ListCostAllocationTagBackfillHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
-    ListCostAllocationTagBackfillHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostAllocationTagsMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListCostAllocationTagBackfillHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostAllocationTagsMaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListCostAllocationTagBackfillHistoryRequest.struct_class = Types::ListCostAllocationTagBackfillHistoryRequest
 
     ListCostAllocationTagBackfillHistoryResponse.add_member(:backfill_requests, Shapes::ShapeRef.new(shape: CostAllocationTagBackfillRequestList, location_name: "BackfillRequests"))
@@ -1096,7 +1168,7 @@ module Aws::CostExplorer
     ListCostAllocationTagsRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: CostAllocationTagKeyList, location_name: "TagKeys"))
     ListCostAllocationTagsRequest.add_member(:type, Shapes::ShapeRef.new(shape: CostAllocationTagType, location_name: "Type"))
     ListCostAllocationTagsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
-    ListCostAllocationTagsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostAllocationTagsMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListCostAllocationTagsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostAllocationTagsMaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListCostAllocationTagsRequest.struct_class = Types::ListCostAllocationTagsRequest
 
     ListCostAllocationTagsResponse.add_member(:cost_allocation_tags, Shapes::ShapeRef.new(shape: CostAllocationTagList, location_name: "CostAllocationTags"))
@@ -1105,7 +1177,7 @@ module Aws::CostExplorer
 
     ListCostCategoryDefinitionsRequest.add_member(:effective_on, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveOn"))
     ListCostCategoryDefinitionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
-    ListCostCategoryDefinitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostCategoryMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListCostCategoryDefinitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostCategoryMaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListCostCategoryDefinitionsRequest.struct_class = Types::ListCostCategoryDefinitionsRequest
 
     ListCostCategoryDefinitionsResponse.add_member(:cost_category_references, Shapes::ShapeRef.new(shape: CostCategoryReferencesList, location_name: "CostCategoryReferences"))
@@ -1631,7 +1703,7 @@ module Aws::CostExplorer
     UpdateAnomalyMonitorResponse.struct_class = Types::UpdateAnomalyMonitorResponse
 
     UpdateAnomalySubscriptionRequest.add_member(:subscription_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "SubscriptionArn"))
-    UpdateAnomalySubscriptionRequest.add_member(:threshold, Shapes::ShapeRef.new(shape: NullableNonNegativeDouble, deprecated: true, location_name: "Threshold", metadata: {"deprecatedMessage"=>"Threshold has been deprecated in favor of ThresholdExpression"}))
+    UpdateAnomalySubscriptionRequest.add_member(:threshold, Shapes::ShapeRef.new(shape: NullableNonNegativeDouble, deprecated: true, location_name: "Threshold", metadata: {"deprecatedMessage" => "Threshold has been deprecated in favor of ThresholdExpression"}))
     UpdateAnomalySubscriptionRequest.add_member(:frequency, Shapes::ShapeRef.new(shape: AnomalySubscriptionFrequency, location_name: "Frequency"))
     UpdateAnomalySubscriptionRequest.add_member(:monitor_arn_list, Shapes::ShapeRef.new(shape: MonitorArnList, location_name: "MonitorArnList"))
     UpdateAnomalySubscriptionRequest.add_member(:subscribers, Shapes::ShapeRef.new(shape: Subscribers, location_name: "Subscribers"))
@@ -1854,6 +1926,24 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_cost_and_usage_comparisons, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCostAndUsageComparisons"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCostAndUsageComparisonsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCostAndUsageComparisonsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_page_token" => "next_page_token"
+          }
+        )
+      end)
+
       api.add_operation(:get_cost_and_usage_with_resources, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetCostAndUsageWithResources"
         o.http_method = "POST"
@@ -1880,6 +1970,24 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_cost_comparison_drivers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCostComparisonDrivers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCostComparisonDriversRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCostComparisonDriversResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_page_token" => "next_page_token"
+          }
+        )
       end)
 
       api.add_operation(:get_cost_forecast, Seahorse::Model::Operation.new.tap do |o|

@@ -250,7 +250,8 @@ module Aws
                            ?structured_log_destinations: Array[::String],
                            ?s3_storage_options: {
                              directory_listing_optimization: ("ENABLED" | "DISABLED")?
-                           }
+                           },
+                           ?ip_address_type: ("IPV4" | "DUALSTACK")
                          ) -> _CreateServerResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServerResponseSuccess
 
@@ -1194,7 +1195,8 @@ module Aws
                            ?structured_log_destinations: Array[::String],
                            ?s3_storage_options: {
                              directory_listing_optimization: ("ENABLED" | "DISABLED")?
-                           }
+                           },
+                           ?ip_address_type: ("IPV4" | "DUALSTACK")
                          ) -> _UpdateServerResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServerResponseSuccess
 

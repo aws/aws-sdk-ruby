@@ -543,8 +543,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
-    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/describe-ssl-policies.html
+    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/describe-ssl-policies.html
     #   @return [String]
     #
     # @!attribute [rw] certificates
@@ -577,7 +577,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html#alpn-policies
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -1978,7 +1978,9 @@ module Aws::ElasticLoadBalancingV2
     #   The host names. The maximum size of each name is 128 characters. The
     #   comparison is case insensitive. The following wildcard characters
     #   are supported: * (matches 0 or more characters) and ? (matches
-    #   exactly 1 character).
+    #   exactly 1 character). You must include at least one "." character.
+    #   You can include only alphabetical characters after the final "."
+    #   character.
     #
     #   If you specify multiple strings, the condition is satisfied if one
     #   of the strings matches the host name.
@@ -2003,7 +2005,11 @@ module Aws::ElasticLoadBalancingV2
     #   characters are specified by RFC 7230. Wildcards are not supported.
     #
     #   You can't use an HTTP header condition to specify the host header.
-    #   Use HostHeaderConditionConfig to specify a host header condition.
+    #   Instead, use a [host condition][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#host-conditions
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -2893,8 +2899,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
-    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/describe-ssl-policies.html
+    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/describe-ssl-policies.html
     #   @return [String]
     #
     # @!attribute [rw] certificates
@@ -2927,7 +2933,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html#alpn-policies
     #   @return [Array<String>]
     #
     # @!attribute [rw] mutual_authentication
@@ -3238,7 +3244,11 @@ module Aws::ElasticLoadBalancingV2
     #   If you specify multiple strings, the condition is satisfied if one
     #   of them matches the request URL. The path pattern is compared only
     #   to the path of the URL, not to its query string. To compare against
-    #   the query string, use QueryStringConditionConfig.
+    #   the query string, use a [query string condition][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#query-string-conditions
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/PathPatternConditionConfig AWS API Documentation
@@ -3930,9 +3940,13 @@ module Aws::ElasticLoadBalancingV2
     #   source IP address of the request matches one of the CIDR blocks.
     #   This condition is not satisfied by the addresses in the
     #   X-Forwarded-For header. To search for addresses in the
-    #   X-Forwarded-For header, use HttpHeaderConditionConfig.
+    #   X-Forwarded-For header, use an [HTTP header condition][1].
     #
     #   The total number of values must be less than, or equal to five.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#http-header-conditions
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SourceIpConditionConfig AWS API Documentation
@@ -4270,7 +4284,7 @@ module Aws::ElasticLoadBalancingV2
     #     of healthy targets is below this value, mark the zone as unhealthy
     #     in DNS, so that traffic is routed only to healthy zones. The
     #     possible values are `off` or an integer from 1 to the maximum
-    #     number of targets. The default is `off`.
+    #     number of targets. The default is 1.
     #
     #   * `target_group_health.dns_failover.minimum_healthy_targets.percentage`
     #     - The minimum percentage of targets that must be healthy. If the
@@ -4428,7 +4442,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] duration_seconds
     #   The time period, in seconds, during which requests from a client
     #   should be routed to the same target group. The range is 1-604800
-    #   seconds (7 days).
+    #   seconds (7 days). You must specify this value when enabling target
+    #   group stickiness.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetGroupStickinessConfig AWS API Documentation
@@ -4773,14 +4788,14 @@ module Aws::ElasticLoadBalancingV2
     #
     class UnsupportedProtocolException < Aws::EmptyStructure; end
 
-    # The capacity reservation status for each availability zone.
+    # The capacity reservation status for each Availability Zone.
     #
     # @!attribute [rw] state
     #   The state of the capacity reservation.
     #   @return [Types::CapacityReservationStatus]
     #
     # @!attribute [rw] availability_zone
-    #   Information about the availability zone.
+    #   Information about the Availability Zone.
     #   @return [String]
     #
     # @!attribute [rw] effective_capacity_units

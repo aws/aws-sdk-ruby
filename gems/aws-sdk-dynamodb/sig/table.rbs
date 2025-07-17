@@ -25,7 +25,7 @@ module Aws
       def key_schema: () -> ::Array[Types::KeySchemaElement]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#table_status-instance_method
-      def table_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS" | "ARCHIVING" | "ARCHIVED")
+      def table_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS" | "ARCHIVING" | "ARCHIVED" | "REPLICATION_NOT_AUTHORIZED")
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#creation_date_time-instance_method
       def creation_date_time: () -> ::Time
@@ -68,6 +68,9 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#replicas-instance_method
       def replicas: () -> ::Array[Types::ReplicaDescription]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#global_table_witnesses-instance_method
+      def global_table_witnesses: () -> ::Array[Types::GlobalTableWitnessDescription]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#restore_summary-instance_method
       def restore_summary: () -> Types::RestoreSummary
@@ -335,6 +338,16 @@ module Aws
                     ?table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS"),
                     ?deletion_protection_enabled: bool,
                     ?multi_region_consistency: ("EVENTUAL" | "STRONG"),
+                    ?global_table_witness_updates: Array[
+                      {
+                        create: {
+                          region_name: ::String
+                        }?,
+                        delete: {
+                          region_name: ::String
+                        }?
+                      },
+                    ],
                     ?on_demand_throughput: {
                       max_read_request_units: ::Integer?,
                       max_write_request_units: ::Integer?

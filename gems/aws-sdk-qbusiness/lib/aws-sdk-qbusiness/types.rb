@@ -548,6 +548,12 @@ module Aws::QBusiness
     #   perform.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] conditions
+    #   The conditions that restrict when the permission is effective. These
+    #   conditions can be used to limit the permission based on specific
+    #   attributes of the request.
+    #   @return [Array<Types::PermissionCondition>]
+    #
     # @!attribute [rw] principal
     #   The Amazon Resource Name of the IAM role for the ISV that is being
     #   granted permission.
@@ -559,6 +565,7 @@ module Aws::QBusiness
       :application_id,
       :statement_id,
       :actions,
+      :conditions,
       :principal)
       SENSITIVE = []
       include Aws::Structure
@@ -1343,6 +1350,112 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
+    # Configuration details that define how Amazon Q Business generates and
+    # formats responses to user queries in chat interactions. This
+    # configuration allows administrators to customize response
+    # characteristics to meet specific organizational needs and
+    # communication standards.
+    #
+    # @!attribute [rw] chat_response_configuration_id
+    #   A unique identifier for your chat response configuration settings,
+    #   used to reference and manage the configuration within the Amazon Q
+    #   Business service.
+    #   @return [String]
+    #
+    # @!attribute [rw] chat_response_configuration_arn
+    #   The Amazon Resource Name (ARN) of the chat response configuration,
+    #   which uniquely identifies the resource across all Amazon Web
+    #   Services services and accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   A human-readable name for the chat response configuration, making it
+    #   easier to identify and manage multiple configurations within an
+    #   organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_configuration_summary
+    #   A summary of the response configuration settings, providing a
+    #   concise overview of the key parameters that define how responses are
+    #   generated and formatted.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the chat response configuration, indicating
+    #   whether it is active, pending, or in another state that affects its
+    #   availability for use in chat interactions.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp indicating when the chat response configuration was
+    #   initially created, useful for tracking the lifecycle of
+    #   configuration resources.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp indicating when the chat response configuration was
+    #   last modified, helping administrators track changes and maintain
+    #   version awareness.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ChatResponseConfiguration AWS API Documentation
+    #
+    class ChatResponseConfiguration < Struct.new(
+      :chat_response_configuration_id,
+      :chat_response_configuration_arn,
+      :display_name,
+      :response_configuration_summary,
+      :status,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detailed information about a chat response configuration, including
+    # comprehensive settings and parameters that define how Amazon Q
+    # Business generates and formats responses.
+    #
+    # @!attribute [rw] response_configurations
+    #   A collection of specific response configuration settings that
+    #   collectively define how responses are generated, formatted, and
+    #   presented to users in chat interactions.
+    #   @return [Hash<String,Types::ResponseConfiguration>]
+    #
+    # @!attribute [rw] response_configuration_summary
+    #   A summary of the response configuration details, providing a concise
+    #   overview of the key parameters and settings that define the response
+    #   generation behavior.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the chat response configuration, indicating
+    #   whether it is active, pending, or in another state that affects its
+    #   availability for use.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   Provides information about a Amazon Q Business request error.
+    #   @return [Types::ErrorDetail]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp indicating when the detailed chat response
+    #   configuration was last modified, helping administrators track
+    #   changes and maintain version awareness.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ChatResponseConfigurationDetail AWS API Documentation
+    #
+    class ChatResponseConfigurationDetail < Struct.new(
+      :response_configurations,
+      :response_configuration_summary,
+      :status,
+      :error,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] application_id
     #   The identifier of the Amazon Q Business application linked to the
     #   Amazon Q Business conversation.
@@ -1785,6 +1898,45 @@ module Aws::QBusiness
       class Unknown < CopyFromSource; end
     end
 
+    # @!attribute [rw] application_id
+    #   The identifier of the Amazon Q Business application environment
+    #   attached to the web experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] web_experience_id
+    #   The identifier of the web experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_duration_in_minutes
+    #   The duration of the session associated with the unique URL for the
+    #   web experience.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateAnonymousWebExperienceUrlRequest AWS API Documentation
+    #
+    class CreateAnonymousWebExperienceUrlRequest < Struct.new(
+      :application_id,
+      :web_experience_id,
+      :session_duration_in_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] anonymous_url
+    #   The unique URL for accessing the web experience.
+    #
+    #   This URL can only be used once and must be used within 5 minutes
+    #   after it's generated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateAnonymousWebExperienceUrlResponse AWS API Documentation
+    #
+    class CreateAnonymousWebExperienceUrlResponse < Struct.new(
+      :anonymous_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] display_name
     #   A name for the Amazon Q Business application.
     #   @return [String]
@@ -1914,6 +2066,70 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
+    #   The unique identifier of the Amazon Q Business application for which
+    #   to create the new chat response configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   A human-readable name for the new chat response configuration,
+    #   making it easier to identify and manage among multiple
+    #   configurations.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This helps prevent the same configuration from being
+    #   created multiple times if retries occur.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_configurations
+    #   A collection of response configuration settings that define how
+    #   Amazon Q Business will generate and format responses to user queries
+    #   in chat interactions.
+    #   @return [Hash<String,Types::ResponseConfiguration>]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs to apply as tags to the new chat response
+    #   configuration, enabling categorization and management of resources
+    #   across Amazon Web Services services.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateChatResponseConfigurationRequest AWS API Documentation
+    #
+    class CreateChatResponseConfigurationRequest < Struct.new(
+      :application_id,
+      :display_name,
+      :client_token,
+      :response_configurations,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] chat_response_configuration_id
+    #   The unique identifier assigned to a newly created chat response
+    #   configuration, used for subsequent operations on this resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] chat_response_configuration_arn
+    #   The Amazon Resource Name (ARN) of the newly created chat response
+    #   configuration, which uniquely identifies the resource across all
+    #   Amazon Web Services services.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateChatResponseConfigurationResponse AWS API Documentation
+    #
+    class CreateChatResponseConfigurationResponse < Struct.new(
+      :chat_response_configuration_id,
+      :chat_response_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_id
     #   The unique identifier of the Amazon Q Business application.
     #   @return [String]
     #
@@ -1939,6 +2155,12 @@ module Aws::QBusiness
     #   A friendly name for the data accessor.
     #   @return [String]
     #
+    # @!attribute [rw] authentication_detail
+    #   The authentication configuration details for the data accessor. This
+    #   specifies how the ISV will authenticate when accessing data through
+    #   this data accessor.
+    #   @return [Types::DataAccessorAuthenticationDetail]
+    #
     # @!attribute [rw] tags
     #   The tags to associate with the data accessor.
     #   @return [Array<Types::Tag>]
@@ -1951,6 +2173,7 @@ module Aws::QBusiness
       :action_configurations,
       :client_token,
       :display_name,
+      :authentication_detail,
       :tags)
       SENSITIVE = [:display_name]
       include Aws::Structure
@@ -2676,6 +2899,12 @@ module Aws::QBusiness
     #   associated with this data accessor.
     #   @return [String]
     #
+    # @!attribute [rw] authentication_detail
+    #   The authentication configuration details for the data accessor. This
+    #   specifies how the ISV authenticates when accessing data through this
+    #   data accessor.
+    #   @return [Types::DataAccessorAuthenticationDetail]
+    #
     # @!attribute [rw] created_at
     #   The timestamp when the data accessor was created.
     #   @return [Time]
@@ -2692,9 +2921,92 @@ module Aws::QBusiness
       :data_accessor_arn,
       :idc_application_arn,
       :principal,
+      :authentication_detail,
       :created_at,
       :updated_at)
       SENSITIVE = [:display_name]
+      include Aws::Structure
+    end
+
+    # A union type that contains the specific authentication configuration
+    # based on the authentication type selected.
+    #
+    # @note DataAccessorAuthenticationConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note DataAccessorAuthenticationConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DataAccessorAuthenticationConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] idc_trusted_token_issuer_configuration
+    #   Configuration for IAM Identity Center Trusted Token Issuer (TTI)
+    #   authentication used when the authentication type is
+    #   `AWS_IAM_IDC_TTI`.
+    #   @return [Types::DataAccessorIdcTrustedTokenIssuerConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DataAccessorAuthenticationConfiguration AWS API Documentation
+    #
+    class DataAccessorAuthenticationConfiguration < Struct.new(
+      :idc_trusted_token_issuer_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class IdcTrustedTokenIssuerConfiguration < DataAccessorAuthenticationConfiguration; end
+      class Unknown < DataAccessorAuthenticationConfiguration; end
+    end
+
+    # Contains the authentication configuration details for a data accessor.
+    # This structure defines how the ISV authenticates when accessing data
+    # through the data accessor.
+    #
+    # @!attribute [rw] authentication_type
+    #   The type of authentication to use for the data accessor. This
+    #   determines how the ISV authenticates when accessing data. You can
+    #   use one of two authentication types:
+    #
+    #   * `AWS_IAM_IDC_TTI` - Authentication using IAM Identity Center
+    #     Trusted Token Issuer (TTI). This authentication type allows the
+    #     ISV to use a trusted token issuer to generate tokens for accessing
+    #     the data.
+    #
+    #   * `AWS_IAM_IDC_AUTH_CODE` - Authentication using IAM Identity Center
+    #     authorization code flow. This authentication type uses the
+    #     standard OAuth 2.0 authorization code flow for authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_configuration
+    #   The specific authentication configuration based on the
+    #   authentication type.
+    #   @return [Types::DataAccessorAuthenticationConfiguration]
+    #
+    # @!attribute [rw] external_ids
+    #   A list of external identifiers associated with this authentication
+    #   configuration. These are used to correlate the data accessor with
+    #   external systems.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DataAccessorAuthenticationDetail AWS API Documentation
+    #
+    class DataAccessorAuthenticationDetail < Struct.new(
+      :authentication_type,
+      :authentication_configuration,
+      :external_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration details for IAM Identity Center Trusted Token Issuer
+    # (TTI) authentication.
+    #
+    # @!attribute [rw] idc_trusted_token_issuer_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center Trusted
+    #   Token Issuer that will be used for authentication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DataAccessorIdcTrustedTokenIssuerConfiguration AWS API Documentation
+    #
+    class DataAccessorIdcTrustedTokenIssuerConfiguration < Struct.new(
+      :idc_trusted_token_issuer_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2867,7 +3179,15 @@ module Aws::QBusiness
     # [1]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html
     #
     # @!attribute [rw] boosting_level
-    #   Specifies how much a document attribute is boosted.
+    #   Specifies the priority tier ranking of boosting applied to document
+    #   attributes. For version 2, this parameter indicates the relative
+    #   ranking between boosted fields (ONE being highest priority, TWO
+    #   being second highest, etc.) and determines the order in which
+    #   attributes influence document ranking in search results. For version
+    #   1, this parameter specifies the boosting intensity. For version 2,
+    #   boosting intensity (VERY HIGH, HIGH, MEDIUM, LOW, NONE) are not
+    #   supported. Note that in version 2, you are not allowed to boost on
+    #   only one field and make this value TWO.
     #   @return [String]
     #
     # @!attribute [rw] boosting_duration_in_seconds
@@ -2948,6 +3268,29 @@ module Aws::QBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DeleteChatControlsConfigurationResponse AWS API Documentation
     #
     class DeleteChatControlsConfigurationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] application_id
+    #   The unique identifier of theAmazon Q Business application from which
+    #   to delete the chat response configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] chat_response_configuration_id
+    #   The unique identifier of the chat response configuration to delete
+    #   from the specified application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DeleteChatResponseConfigurationRequest AWS API Documentation
+    #
+    class DeleteChatResponseConfigurationRequest < Struct.new(
+      :application_id,
+      :chat_response_configuration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DeleteChatResponseConfigurationResponse AWS API Documentation
+    #
+    class DeleteChatResponseConfigurationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] conversation_id
     #   The identifier of the Amazon Q Business web experience conversation
@@ -3414,6 +3757,11 @@ module Aws::QBusiness
     # generating responses from content that matches the boosted document
     # attributes.
     #
+    # In version 2, boosting uses numeric values (ONE, TWO) to indicate
+    # priority tiers that establish clear hierarchical relationships between
+    # boosted attributes. This allows for more precise control over how
+    # different attributes influence search results.
+    #
     # <note markdown="1"> For `STRING` and `STRING_LIST` type document attributes to be used for
     # boosting on the console and the API, they must be enabled for search
     # using the [DocumentAttributeConfiguration][1] object of the
@@ -3438,19 +3786,36 @@ module Aws::QBusiness
     #
     # @!attribute [rw] number_configuration
     #   Provides information on boosting `NUMBER` type document attributes.
+    #
+    #   `NUMBER` attributes are not supported when using
+    #   `NativeIndexConfiguration` version 2, which focuses on `DATE`
+    #   attributes for recency and `STRING` attributes for source
+    #   prioritization.
     #   @return [Types::NumberAttributeBoostingConfiguration]
     #
     # @!attribute [rw] string_configuration
     #   Provides information on boosting `STRING` type document attributes.
+    #
+    #   Version 2 assigns priority tiers to `STRING` attributes,
+    #   establishing clear hierarchical relationships with other boosted
+    #   attributes.
     #   @return [Types::StringAttributeBoostingConfiguration]
     #
     # @!attribute [rw] date_configuration
     #   Provides information on boosting `DATE` type document attributes.
+    #
+    #   Version 2 assigns priority tiers to `DATE` attributes, establishing
+    #   clear hierarchical relationships with other boosted attributes.
     #   @return [Types::DateAttributeBoostingConfiguration]
     #
     # @!attribute [rw] string_list_configuration
     #   Provides information on boosting `STRING_LIST` type document
     #   attributes.
+    #
+    #   `STRING_LIST` attributes are not supported when using
+    #   `NativeIndexConfiguration` version 2, which focuses on `DATE`
+    #   attributes for recency and `STRING` attributes for source
+    #   prioritization.
     #   @return [Types::StringListAttributeBoostingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DocumentAttributeBoostingConfiguration AWS API Documentation
@@ -4161,6 +4526,69 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
+    #   The unique identifier of the Amazon Q Business application
+    #   containing the chat response configuration to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] chat_response_configuration_id
+    #   The unique identifier of the chat response configuration to retrieve
+    #   from the specified application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetChatResponseConfigurationRequest AWS API Documentation
+    #
+    class GetChatResponseConfigurationRequest < Struct.new(
+      :application_id,
+      :chat_response_configuration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] chat_response_configuration_id
+    #   The unique identifier of the retrieved chat response configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] chat_response_configuration_arn
+    #   The Amazon Resource Name (ARN) of the retrieved chat response
+    #   configuration, which uniquely identifies the resource across all
+    #   Amazon Web Services services.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The human-readable name of the retrieved chat response
+    #   configuration, making it easier to identify among multiple
+    #   configurations.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp indicating when the chat response configuration was
+    #   initially created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] in_use_configuration
+    #   The currently active configuration settings that are being used to
+    #   generate responses in the Amazon Q Business application.
+    #   @return [Types::ChatResponseConfigurationDetail]
+    #
+    # @!attribute [rw] last_update_configuration
+    #   Information about the most recent update to the configuration,
+    #   including timestamp and modification details.
+    #   @return [Types::ChatResponseConfigurationDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetChatResponseConfigurationResponse AWS API Documentation
+    #
+    class GetChatResponseConfigurationResponse < Struct.new(
+      :chat_response_configuration_id,
+      :chat_response_configuration_arn,
+      :display_name,
+      :created_at,
+      :in_use_configuration,
+      :last_update_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_id
     #   The unique identifier of the Amazon Q Business application.
     #   @return [String]
     #
@@ -4209,6 +4637,12 @@ module Aws::QBusiness
     #   any associated filters.
     #   @return [Array<Types::ActionConfiguration>]
     #
+    # @!attribute [rw] authentication_detail
+    #   The authentication configuration details for the data accessor. This
+    #   specifies how the ISV authenticates when accessing data through this
+    #   data accessor.
+    #   @return [Types::DataAccessorAuthenticationDetail]
+    #
     # @!attribute [rw] created_at
     #   The timestamp when the data accessor was created.
     #   @return [Time]
@@ -4227,6 +4661,7 @@ module Aws::QBusiness
       :idc_application_arn,
       :principal,
       :action_configurations,
+      :authentication_detail,
       :created_at,
       :updated_at)
       SENSITIVE = [:display_name]
@@ -4978,13 +5413,16 @@ module Aws::QBusiness
     end
 
     # Configuration information required to setup hallucination reduction.
-    # For more information, see [hallucination
-    # reduction](amazonq/latest/qbusiness-ug/hallucination-reduction.html).
+    # For more information, see [ hallucination reduction][1].
     #
     # <note markdown="1"> The hallucination reduction feature won't work if chat orchestration
     # controls are enabled for your application.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/hallucination-reduction.html
     #
     # @!attribute [rw] hallucination_reduction_control
     #   Controls whether hallucination reduction has been enabled or
@@ -5029,7 +5467,7 @@ module Aws::QBusiness
     #   @return [Types::DocumentAttributeCondition]
     #
     # @!attribute [rw] lambda_arn
-    #   The Amazon Resource Name (ARN) of the Lambda function sduring
+    #   The Amazon Resource Name (ARN) of the Lambda function during
     #   ingestion. For more information, see [Using Lambda functions for
     #   Amazon Q Business document enrichment][1].
     #
@@ -5302,6 +5740,80 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
+    # A set of instructions that define how Amazon Q Business should
+    # generate and format responses to user queries. This collection
+    # includes parameters for controlling response characteristics such as
+    # length, audience targeting, perspective, style, identity, tone, and
+    # custom instructions.
+    #
+    # @!attribute [rw] response_length
+    #   Specifies the desired length of responses generated by Amazon Q
+    #   Business. This parameter allows administrators to control whether
+    #   responses are concise and brief or more detailed and comprehensive.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_audience
+    #   Defines the intended audience for the responses, allowing Amazon Q
+    #   Business to tailor its language, terminology, and explanations
+    #   appropriately. This could range from technical experts to general
+    #   users with varying levels of domain knowledge.
+    #   @return [String]
+    #
+    # @!attribute [rw] perspective
+    #   Determines the point of view or perspective from which Amazon Q
+    #   Business generates responses, such as first-person, second-person,
+    #   or third-person perspective, affecting how information is presented
+    #   to users.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_style
+    #   Specifies the formatting and structural style of responses, such as
+    #   bullet points, paragraphs, step-by-step instructions, or other
+    #   organizational formats that enhance readability and comprehension.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity
+    #   Defines the persona or identity that Amazon Q Business should adopt
+    #   when responding to users, allowing for customization of the
+    #   assistant's character, role, or representation within an
+    #   organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] tone
+    #   Controls the emotional tone and communication style of responses,
+    #   such as formal, casual, technical, friendly, or professional, to
+    #   align with organizational communication standards and user
+    #   expectations.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_instructions
+    #   Allows administrators to provide specific, custom instructions that
+    #   guide how Amazon Q Business should respond in particular scenarios
+    #   or to certain types of queries, enabling fine-grained control over
+    #   response generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] examples
+    #   Provides sample responses or templates that Amazon Q Business can
+    #   reference when generating responses, helping to establish consistent
+    #   patterns and formats for different types of user queries.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/InstructionCollection AWS API Documentation
+    #
+    class InstructionCollection < Struct.new(
+      :response_length,
+      :target_audience,
+      :perspective,
+      :output_style,
+      :identity,
+      :tone,
+      :custom_instructions,
+      :examples)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An issue occurred with the internal server used for your Amazon Q
     # Business service. Wait some minutes and try again, or contact
     # [Support][1] for help.
@@ -5440,6 +5952,53 @@ module Aws::QBusiness
     #
     class ListAttachmentsResponse < Struct.new(
       :attachments,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_id
+    #   The unique identifier of the Amazon Q Business application for which
+    #   to list available chat response configurations.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of chat response configurations to return in a
+    #   single response. This parameter helps control pagination of results
+    #   when many configurations exist.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token used to retrieve the next set of results when the
+    #   number of configurations exceeds the specified `maxResults` value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListChatResponseConfigurationsRequest AWS API Documentation
+    #
+    class ListChatResponseConfigurationsRequest < Struct.new(
+      :application_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] chat_response_configurations
+    #   A list of chat response configuration summaries, each containing key
+    #   information about an available configuration in the specified
+    #   application.
+    #   @return [Array<Types::ChatResponseConfiguration>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request to
+    #   retrieve additional chat response configurations if the results were
+    #   truncated due to the `maxResults` parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListChatResponseConfigurationsResponse AWS API Documentation
+    #
+    class ListChatResponseConfigurationsResponse < Struct.new(
+      :chat_response_configurations,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -6431,6 +6990,32 @@ module Aws::QBusiness
     #   The identifier for the Amazon Q Business index.
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   A read-only field that specifies the version of the
+    #   `NativeIndexConfiguration`.
+    #
+    #   Amazon Q Business introduces enhanced document retrieval
+    #   capabilities in version 2 of `NativeIndexConfiguration`, focusing on
+    #   streamlined metadata boosting that prioritizes recency and source
+    #   relevance to deliver more accurate responses to your queries.
+    #   Version 2 has the following differences from version 1:
+    #
+    #   * Version 2 supports a single Date field (created\_at OR
+    #     last\_updated\_at) for recency boosting
+    #
+    #   * Version 2 supports a single String field with an ordered list of
+    #     up to 5 values
+    #
+    #   * Version 2 introduces number-based boost levels (ONE, TWO)
+    #     alongside the text-based levels
+    #
+    #   * Version 2 allows specifying prioritization between Date and String
+    #     fields
+    #
+    #   * Version 2 maintains backward compatibility with existing
+    #     configurations
+    #   @return [Integer]
+    #
     # @!attribute [rw] boosting_override
     #   Overrides the default boosts applied by Amazon Q Business to
     #   supported document attribute data types.
@@ -6440,6 +7025,7 @@ module Aws::QBusiness
     #
     class NativeIndexConfiguration < Struct.new(
       :index_id,
+      :version,
       :boosting_override)
       SENSITIVE = []
       include Aws::Structure
@@ -6456,6 +7042,12 @@ module Aws::QBusiness
 
     # Provides information on boosting `NUMBER` type document attributes.
     #
+    # In the current boosting implementation, boosting focuses primarily on
+    # `DATE` attributes for recency and `STRING` attributes for source
+    # prioritization. `NUMBER` attributes can serve as additional boosting
+    # factors when needed, but are not supported when using
+    # `NativeIndexConfiguration` version 2.
+    #
     # For more information on how boosting document attributes work in
     # Amazon Q Business, see [Boosting using document attributes][1].
     #
@@ -6464,12 +7056,18 @@ module Aws::QBusiness
     # [1]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html
     #
     # @!attribute [rw] boosting_level
-    #   Specifies the duration, in seconds, of a boost applies to a `NUMBER`
-    #   type document attribute.
+    #   Specifies the priority of boosted document attributes in relation to
+    #   other boosted attributes. This parameter determines how strongly the
+    #   attribute influences document ranking in search results. `NUMBER`
+    #   attributes can serve as additional boosting factors when needed, but
+    #   are not supported when using `NativeIndexConfiguration` version 2.
     #   @return [String]
     #
     # @!attribute [rw] boosting_type
-    #   Specifies how much a document attribute is boosted.
+    #   Specifies whether higher or lower numeric values should be
+    #   prioritized when boosting. Valid values are ASCENDING (higher
+    #   numbers are more important) and DESCENDING (lower numbers are more
+    #   important).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/NumberAttributeBoostingConfiguration AWS API Documentation
@@ -6560,6 +7158,35 @@ module Aws::QBusiness
     #
     class OrchestrationConfiguration < Struct.new(
       :control)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a condition that restricts when a permission is effective.
+    # Conditions allow you to control access based on specific attributes of
+    # the request.
+    #
+    # @!attribute [rw] condition_operator
+    #   The operator to use for the condition evaluation. This determines
+    #   how the condition values are compared.
+    #   @return [String]
+    #
+    # @!attribute [rw] condition_key
+    #   The key for the condition. This identifies the attribute that the
+    #   condition applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] condition_values
+    #   The values to compare against using the specified condition
+    #   operator.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/PermissionCondition AWS API Documentation
+    #
+    class PermissionCondition < Struct.new(
+      :condition_operator,
+      :condition_key,
+      :condition_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7008,6 +7635,25 @@ module Aws::QBusiness
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings to define how Amazon Q Business generates and
+    # formats responses to user queries. This includes customization options
+    # for response style, tone, length, and other characteristics.
+    #
+    # @!attribute [rw] instruction_collection
+    #   A collection of instructions that guide how Amazon Q Business
+    #   generates responses, including parameters for response length,
+    #   target audience, perspective, output style, identity, tone, and
+    #   custom instructions.
+    #   @return [Types::InstructionCollection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ResponseConfiguration AWS API Documentation
+    #
+    class ResponseConfiguration < Struct.new(
+      :instruction_collection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7503,12 +8149,21 @@ module Aws::QBusiness
     # [3]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html
     #
     # @!attribute [rw] boosting_level
-    #   Specifies how much a document attribute is boosted.
+    #   Specifies the priority tier ranking of boosting applied to document
+    #   attributes. For version 2, this parameter indicates the relative
+    #   ranking between boosted fields (ONE being highest priority, TWO
+    #   being second highest, etc.) and determines the order in which
+    #   attributes influence document ranking in search results. For version
+    #   1, this parameter specifies the boosting intensity. For version 2,
+    #   boosting intensity (VERY HIGH, HIGH, MEDIUM, LOW, NONE) are not
+    #   supported. Note that in version 2, you are not allowed to boost on
+    #   only one field and make this value TWO.
     #   @return [String]
     #
     # @!attribute [rw] attribute_value_boosting
     #   Specifies specific values of a `STRING` type document attribute
-    #   being boosted.
+    #   being boosted. When using `NativeIndexConfiguration` version 2, you
+    #   can specify up to five values in order of priority.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/StringAttributeBoostingConfiguration AWS API Documentation
@@ -7522,6 +8177,12 @@ module Aws::QBusiness
 
     # Provides information on boosting `STRING_LIST` type document
     # attributes.
+    #
+    # In the current boosting implementation, boosting focuses primarily on
+    # `DATE` attributes for recency and `STRING` attributes for source
+    # prioritization. `STRING_LIST` attributes can serve as additional
+    # boosting factors when needed, but are not supported when using
+    # `NativeIndexConfiguration` version 2.
     #
     # <note markdown="1"> For `STRING` and `STRING_LIST` type document attributes to be used for
     # boosting on the console and the API, they must be enabled for search
@@ -7542,7 +8203,12 @@ module Aws::QBusiness
     # [3]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html
     #
     # @!attribute [rw] boosting_level
-    #   Specifies how much a document attribute is boosted.
+    #   Specifies the priority of boosted document attributes in relation to
+    #   other boosted attributes. This parameter determines how strongly the
+    #   attribute influences document ranking in search results.
+    #   `STRING_LIST` attributes can serve as additional boosting factors
+    #   when needed, but are not supported when using
+    #   `NativeIndexConfiguration` version 2.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/StringListAttributeBoostingConfiguration AWS API Documentation
@@ -8027,6 +8693,53 @@ module Aws::QBusiness
     class UpdateChatControlsConfigurationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] application_id
+    #   The unique identifier of the Amazon Q Business application
+    #   containing the chat response configuration to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] chat_response_configuration_id
+    #   The unique identifier of the chat response configuration to update
+    #   within the specified application.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The new human-readable name to assign to the chat response
+    #   configuration, making it easier to identify among multiple
+    #   configurations.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_configurations
+    #   The updated collection of response configuration settings that
+    #   define how Amazon Q Business generates and formats responses to user
+    #   queries.
+    #   @return [Hash<String,Types::ResponseConfiguration>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This helps prevent the same update from being processed
+    #   multiple times if retries occur.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/UpdateChatResponseConfigurationRequest AWS API Documentation
+    #
+    class UpdateChatResponseConfigurationRequest < Struct.new(
+      :application_id,
+      :chat_response_configuration_id,
+      :display_name,
+      :response_configurations,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/UpdateChatResponseConfigurationResponse AWS API Documentation
+    #
+    class UpdateChatResponseConfigurationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] application_id
     #   The unique identifier of the Amazon Q Business application.
     #   @return [String]
     #
@@ -8039,6 +8752,12 @@ module Aws::QBusiness
     #   actions and any associated filters.
     #   @return [Array<Types::ActionConfiguration>]
     #
+    # @!attribute [rw] authentication_detail
+    #   The updated authentication configuration details for the data
+    #   accessor. This specifies how the ISV will authenticate when
+    #   accessing data through this data accessor.
+    #   @return [Types::DataAccessorAuthenticationDetail]
+    #
     # @!attribute [rw] display_name
     #   The updated friendly name for the data accessor.
     #   @return [String]
@@ -8049,6 +8768,7 @@ module Aws::QBusiness
       :application_id,
       :data_accessor_id,
       :action_configurations,
+      :authentication_detail,
       :display_name)
       SENSITIVE = [:display_name]
       include Aws::Structure

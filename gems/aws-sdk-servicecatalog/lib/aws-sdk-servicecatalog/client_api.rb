@@ -543,7 +543,7 @@ module Aws::ServiceCatalog
     AssociateServiceActionWithProvisioningArtifactInput.add_member(:provisioning_artifact_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProvisioningArtifactId"))
     AssociateServiceActionWithProvisioningArtifactInput.add_member(:service_action_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ServiceActionId"))
     AssociateServiceActionWithProvisioningArtifactInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
-    AssociateServiceActionWithProvisioningArtifactInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    AssociateServiceActionWithProvisioningArtifactInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     AssociateServiceActionWithProvisioningArtifactInput.struct_class = Types::AssociateServiceActionWithProvisioningArtifactInput
 
     AssociateServiceActionWithProvisioningArtifactOutput.struct_class = Types::AssociateServiceActionWithProvisioningArtifactOutput
@@ -608,7 +608,7 @@ module Aws::ServiceCatalog
     CopyProductInput.add_member(:target_product_name, Shapes::ShapeRef.new(shape: ProductViewName, location_name: "TargetProductName"))
     CopyProductInput.add_member(:source_provisioning_artifact_identifiers, Shapes::ShapeRef.new(shape: SourceProvisioningArtifactProperties, location_name: "SourceProvisioningArtifactIdentifiers"))
     CopyProductInput.add_member(:copy_options, Shapes::ShapeRef.new(shape: CopyOptions, location_name: "CopyOptions"))
-    CopyProductInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CopyProductInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     CopyProductInput.struct_class = Types::CopyProductInput
 
     CopyProductOutput.add_member(:copy_product_token, Shapes::ShapeRef.new(shape: Id, location_name: "CopyProductToken"))
@@ -620,7 +620,7 @@ module Aws::ServiceCatalog
     CreateConstraintInput.add_member(:parameters, Shapes::ShapeRef.new(shape: ConstraintParameters, required: true, location_name: "Parameters"))
     CreateConstraintInput.add_member(:type, Shapes::ShapeRef.new(shape: ConstraintType, required: true, location_name: "Type"))
     CreateConstraintInput.add_member(:description, Shapes::ShapeRef.new(shape: ConstraintDescription, location_name: "Description"))
-    CreateConstraintInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreateConstraintInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     CreateConstraintInput.struct_class = Types::CreateConstraintInput
 
     CreateConstraintOutput.add_member(:constraint_detail, Shapes::ShapeRef.new(shape: ConstraintDetail, location_name: "ConstraintDetail"))
@@ -633,7 +633,7 @@ module Aws::ServiceCatalog
     CreatePortfolioInput.add_member(:description, Shapes::ShapeRef.new(shape: PortfolioDescription, location_name: "Description"))
     CreatePortfolioInput.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderName, required: true, location_name: "ProviderName"))
     CreatePortfolioInput.add_member(:tags, Shapes::ShapeRef.new(shape: AddTags, location_name: "Tags"))
-    CreatePortfolioInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreatePortfolioInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     CreatePortfolioInput.struct_class = Types::CreatePortfolioInput
 
     CreatePortfolioOutput.add_member(:portfolio_detail, Shapes::ShapeRef.new(shape: PortfolioDetail, location_name: "PortfolioDetail"))
@@ -662,7 +662,7 @@ module Aws::ServiceCatalog
     CreateProductInput.add_member(:product_type, Shapes::ShapeRef.new(shape: ProductType, required: true, location_name: "ProductType"))
     CreateProductInput.add_member(:tags, Shapes::ShapeRef.new(shape: AddTags, location_name: "Tags"))
     CreateProductInput.add_member(:provisioning_artifact_parameters, Shapes::ShapeRef.new(shape: ProvisioningArtifactProperties, location_name: "ProvisioningArtifactParameters"))
-    CreateProductInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreateProductInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     CreateProductInput.add_member(:source_connection, Shapes::ShapeRef.new(shape: SourceConnection, location_name: "SourceConnection"))
     CreateProductInput.struct_class = Types::CreateProductInput
 
@@ -680,7 +680,7 @@ module Aws::ServiceCatalog
     CreateProvisionedProductPlanInput.add_member(:provisioned_product_name, Shapes::ShapeRef.new(shape: ProvisionedProductName, required: true, location_name: "ProvisionedProductName"))
     CreateProvisionedProductPlanInput.add_member(:provisioning_artifact_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProvisioningArtifactId"))
     CreateProvisionedProductPlanInput.add_member(:provisioning_parameters, Shapes::ShapeRef.new(shape: UpdateProvisioningParameters, location_name: "ProvisioningParameters"))
-    CreateProvisionedProductPlanInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreateProvisionedProductPlanInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     CreateProvisionedProductPlanInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateProvisionedProductPlanInput.struct_class = Types::CreateProvisionedProductPlanInput
 
@@ -694,7 +694,7 @@ module Aws::ServiceCatalog
     CreateProvisioningArtifactInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     CreateProvisioningArtifactInput.add_member(:product_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProductId"))
     CreateProvisioningArtifactInput.add_member(:parameters, Shapes::ShapeRef.new(shape: ProvisioningArtifactProperties, required: true, location_name: "Parameters"))
-    CreateProvisioningArtifactInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreateProvisioningArtifactInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     CreateProvisioningArtifactInput.struct_class = Types::CreateProvisioningArtifactInput
 
     CreateProvisioningArtifactOutput.add_member(:provisioning_artifact_detail, Shapes::ShapeRef.new(shape: ProvisioningArtifactDetail, location_name: "ProvisioningArtifactDetail"))
@@ -707,7 +707,7 @@ module Aws::ServiceCatalog
     CreateServiceActionInput.add_member(:definition, Shapes::ShapeRef.new(shape: ServiceActionDefinitionMap, required: true, location_name: "Definition"))
     CreateServiceActionInput.add_member(:description, Shapes::ShapeRef.new(shape: ServiceActionDescription, location_name: "Description"))
     CreateServiceActionInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
-    CreateServiceActionInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreateServiceActionInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     CreateServiceActionInput.struct_class = Types::CreateServiceActionInput
 
     CreateServiceActionOutput.add_member(:service_action_detail, Shapes::ShapeRef.new(shape: ServiceActionDetail, location_name: "ServiceActionDetail"))
@@ -763,7 +763,7 @@ module Aws::ServiceCatalog
 
     DeleteServiceActionInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
     DeleteServiceActionInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
-    DeleteServiceActionInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    DeleteServiceActionInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     DeleteServiceActionInput.struct_class = Types::DeleteServiceActionInput
 
     DeleteServiceActionOutput.struct_class = Types::DeleteServiceActionOutput
@@ -902,7 +902,7 @@ module Aws::ServiceCatalog
     DescribeProvisioningParametersOutput.add_member(:usage_instructions, Shapes::ShapeRef.new(shape: UsageInstructions, location_name: "UsageInstructions"))
     DescribeProvisioningParametersOutput.add_member(:tag_options, Shapes::ShapeRef.new(shape: TagOptionSummaries, location_name: "TagOptions"))
     DescribeProvisioningParametersOutput.add_member(:provisioning_artifact_preferences, Shapes::ShapeRef.new(shape: ProvisioningArtifactPreferences, location_name: "ProvisioningArtifactPreferences"))
-    DescribeProvisioningParametersOutput.add_member(:provisioning_artifact_outputs, Shapes::ShapeRef.new(shape: ProvisioningArtifactOutputs, deprecated: true, location_name: "ProvisioningArtifactOutputs", metadata: {"deprecatedMessage"=>"This property is deprecated and returns the Id and Description of the Provisioning Artifact. Use ProvisioningArtifactOutputKeys instead to get the Keys and Descriptions of the outputs."}))
+    DescribeProvisioningParametersOutput.add_member(:provisioning_artifact_outputs, Shapes::ShapeRef.new(shape: ProvisioningArtifactOutputs, deprecated: true, location_name: "ProvisioningArtifactOutputs", metadata: {"deprecatedMessage" => "This property is deprecated and returns the Id and Description of the Provisioning Artifact. Use ProvisioningArtifactOutputKeys instead to get the Keys and Descriptions of the outputs."}))
     DescribeProvisioningParametersOutput.add_member(:provisioning_artifact_output_keys, Shapes::ShapeRef.new(shape: ProvisioningArtifactOutputs, location_name: "ProvisioningArtifactOutputKeys"))
     DescribeProvisioningParametersOutput.struct_class = Types::DescribeProvisioningParametersOutput
 
@@ -967,7 +967,7 @@ module Aws::ServiceCatalog
     DisassociateServiceActionFromProvisioningArtifactInput.add_member(:provisioning_artifact_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProvisioningArtifactId"))
     DisassociateServiceActionFromProvisioningArtifactInput.add_member(:service_action_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ServiceActionId"))
     DisassociateServiceActionFromProvisioningArtifactInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
-    DisassociateServiceActionFromProvisioningArtifactInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    DisassociateServiceActionFromProvisioningArtifactInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     DisassociateServiceActionFromProvisioningArtifactInput.struct_class = Types::DisassociateServiceActionFromProvisioningArtifactInput
 
     DisassociateServiceActionFromProvisioningArtifactOutput.struct_class = Types::DisassociateServiceActionFromProvisioningArtifactOutput
@@ -989,7 +989,7 @@ module Aws::ServiceCatalog
 
     ExecuteProvisionedProductPlanInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     ExecuteProvisionedProductPlanInput.add_member(:plan_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PlanId"))
-    ExecuteProvisionedProductPlanInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    ExecuteProvisionedProductPlanInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     ExecuteProvisionedProductPlanInput.struct_class = Types::ExecuteProvisionedProductPlanInput
 
     ExecuteProvisionedProductPlanOutput.add_member(:record_detail, Shapes::ShapeRef.new(shape: RecordDetail, location_name: "RecordDetail"))
@@ -997,7 +997,7 @@ module Aws::ServiceCatalog
 
     ExecuteProvisionedProductServiceActionInput.add_member(:provisioned_product_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProvisionedProductId"))
     ExecuteProvisionedProductServiceActionInput.add_member(:service_action_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ServiceActionId"))
-    ExecuteProvisionedProductServiceActionInput.add_member(:execute_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "ExecuteToken", metadata: {"idempotencyToken"=>true}))
+    ExecuteProvisionedProductServiceActionInput.add_member(:execute_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "ExecuteToken", metadata: {"idempotencyToken" => true}))
     ExecuteProvisionedProductServiceActionInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     ExecuteProvisionedProductServiceActionInput.add_member(:parameters, Shapes::ShapeRef.new(shape: ExecutionParameterMap, location_name: "Parameters"))
     ExecuteProvisionedProductServiceActionInput.struct_class = Types::ExecuteProvisionedProductServiceActionInput
@@ -1048,7 +1048,7 @@ module Aws::ServiceCatalog
     ImportAsProvisionedProductInput.add_member(:provisioning_artifact_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProvisioningArtifactId"))
     ImportAsProvisionedProductInput.add_member(:provisioned_product_name, Shapes::ShapeRef.new(shape: ProvisionedProductName, required: true, location_name: "ProvisionedProductName"))
     ImportAsProvisionedProductInput.add_member(:physical_id, Shapes::ShapeRef.new(shape: PhysicalId, required: true, location_name: "PhysicalId"))
-    ImportAsProvisionedProductInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    ImportAsProvisionedProductInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     ImportAsProvisionedProductInput.struct_class = Types::ImportAsProvisionedProductInput
 
     ImportAsProvisionedProductOutput.add_member(:record_detail, Shapes::ShapeRef.new(shape: RecordDetail, location_name: "RecordDetail"))
@@ -1281,7 +1281,7 @@ module Aws::ServiceCatalog
     NotifyProvisionProductEngineWorkflowResultInput.add_member(:failure_reason, Shapes::ShapeRef.new(shape: EngineWorkflowFailureReason, location_name: "FailureReason"))
     NotifyProvisionProductEngineWorkflowResultInput.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: EngineWorkflowResourceIdentifier, location_name: "ResourceIdentifier"))
     NotifyProvisionProductEngineWorkflowResultInput.add_member(:outputs, Shapes::ShapeRef.new(shape: RecordOutputs, location_name: "Outputs"))
-    NotifyProvisionProductEngineWorkflowResultInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    NotifyProvisionProductEngineWorkflowResultInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     NotifyProvisionProductEngineWorkflowResultInput.struct_class = Types::NotifyProvisionProductEngineWorkflowResultInput
 
     NotifyProvisionProductEngineWorkflowResultOutput.struct_class = Types::NotifyProvisionProductEngineWorkflowResultOutput
@@ -1290,7 +1290,7 @@ module Aws::ServiceCatalog
     NotifyTerminateProvisionedProductEngineWorkflowResultInput.add_member(:record_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "RecordId"))
     NotifyTerminateProvisionedProductEngineWorkflowResultInput.add_member(:status, Shapes::ShapeRef.new(shape: EngineWorkflowStatus, required: true, location_name: "Status"))
     NotifyTerminateProvisionedProductEngineWorkflowResultInput.add_member(:failure_reason, Shapes::ShapeRef.new(shape: EngineWorkflowFailureReason, location_name: "FailureReason"))
-    NotifyTerminateProvisionedProductEngineWorkflowResultInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    NotifyTerminateProvisionedProductEngineWorkflowResultInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     NotifyTerminateProvisionedProductEngineWorkflowResultInput.struct_class = Types::NotifyTerminateProvisionedProductEngineWorkflowResultInput
 
     NotifyTerminateProvisionedProductEngineWorkflowResultOutput.struct_class = Types::NotifyTerminateProvisionedProductEngineWorkflowResultOutput
@@ -1300,7 +1300,7 @@ module Aws::ServiceCatalog
     NotifyUpdateProvisionedProductEngineWorkflowResultInput.add_member(:status, Shapes::ShapeRef.new(shape: EngineWorkflowStatus, required: true, location_name: "Status"))
     NotifyUpdateProvisionedProductEngineWorkflowResultInput.add_member(:failure_reason, Shapes::ShapeRef.new(shape: EngineWorkflowFailureReason, location_name: "FailureReason"))
     NotifyUpdateProvisionedProductEngineWorkflowResultInput.add_member(:outputs, Shapes::ShapeRef.new(shape: RecordOutputs, location_name: "Outputs"))
-    NotifyUpdateProvisionedProductEngineWorkflowResultInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    NotifyUpdateProvisionedProductEngineWorkflowResultInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     NotifyUpdateProvisionedProductEngineWorkflowResultInput.struct_class = Types::NotifyUpdateProvisionedProductEngineWorkflowResultInput
 
     NotifyUpdateProvisionedProductEngineWorkflowResultOutput.struct_class = Types::NotifyUpdateProvisionedProductEngineWorkflowResultOutput
@@ -1399,7 +1399,7 @@ module Aws::ServiceCatalog
     ProvisionProductInput.add_member(:provisioning_preferences, Shapes::ShapeRef.new(shape: ProvisioningPreferences, location_name: "ProvisioningPreferences"))
     ProvisionProductInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     ProvisionProductInput.add_member(:notification_arns, Shapes::ShapeRef.new(shape: NotificationArns, location_name: "NotificationArns"))
-    ProvisionProductInput.add_member(:provision_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "ProvisionToken", metadata: {"idempotencyToken"=>true}))
+    ProvisionProductInput.add_member(:provision_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "ProvisionToken", metadata: {"idempotencyToken" => true}))
     ProvisionProductInput.struct_class = Types::ProvisionProductInput
 
     ProvisionProductOutput.add_member(:record_detail, Shapes::ShapeRef.new(shape: RecordDetail, location_name: "RecordDetail"))
@@ -1786,7 +1786,7 @@ module Aws::ServiceCatalog
 
     TerminateProvisionedProductInput.add_member(:provisioned_product_name, Shapes::ShapeRef.new(shape: ProvisionedProductNameOrArn, location_name: "ProvisionedProductName"))
     TerminateProvisionedProductInput.add_member(:provisioned_product_id, Shapes::ShapeRef.new(shape: Id, location_name: "ProvisionedProductId"))
-    TerminateProvisionedProductInput.add_member(:terminate_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "TerminateToken", metadata: {"idempotencyToken"=>true}))
+    TerminateProvisionedProductInput.add_member(:terminate_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "TerminateToken", metadata: {"idempotencyToken" => true}))
     TerminateProvisionedProductInput.add_member(:ignore_errors, Shapes::ShapeRef.new(shape: IgnoreErrors, location_name: "IgnoreErrors"))
     TerminateProvisionedProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     TerminateProvisionedProductInput.add_member(:retain_physical_resources, Shapes::ShapeRef.new(shape: RetainPhysicalResources, location_name: "RetainPhysicalResources"))
@@ -1865,7 +1865,7 @@ module Aws::ServiceCatalog
     UpdateProvisionedProductInput.add_member(:provisioning_parameters, Shapes::ShapeRef.new(shape: UpdateProvisioningParameters, location_name: "ProvisioningParameters"))
     UpdateProvisionedProductInput.add_member(:provisioning_preferences, Shapes::ShapeRef.new(shape: UpdateProvisioningPreferences, location_name: "ProvisioningPreferences"))
     UpdateProvisionedProductInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    UpdateProvisionedProductInput.add_member(:update_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "UpdateToken", metadata: {"idempotencyToken"=>true}))
+    UpdateProvisionedProductInput.add_member(:update_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "UpdateToken", metadata: {"idempotencyToken" => true}))
     UpdateProvisionedProductInput.struct_class = Types::UpdateProvisionedProductInput
 
     UpdateProvisionedProductOutput.add_member(:record_detail, Shapes::ShapeRef.new(shape: RecordDetail, location_name: "RecordDetail"))
@@ -1874,7 +1874,7 @@ module Aws::ServiceCatalog
     UpdateProvisionedProductPropertiesInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     UpdateProvisionedProductPropertiesInput.add_member(:provisioned_product_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProvisionedProductId"))
     UpdateProvisionedProductPropertiesInput.add_member(:provisioned_product_properties, Shapes::ShapeRef.new(shape: ProvisionedProductProperties, required: true, location_name: "ProvisionedProductProperties"))
-    UpdateProvisionedProductPropertiesInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    UpdateProvisionedProductPropertiesInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     UpdateProvisionedProductPropertiesInput.struct_class = Types::UpdateProvisionedProductPropertiesInput
 
     UpdateProvisionedProductPropertiesOutput.add_member(:provisioned_product_id, Shapes::ShapeRef.new(shape: Id, location_name: "ProvisionedProductId"))
@@ -2221,6 +2221,7 @@ module Aws::ServiceCatalog
         o.output = Shapes::ShapeRef.new(shape: DeleteServiceActionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
       end)
 
       api.add_operation(:delete_tag_option, Seahorse::Model::Operation.new.tap do |o|
@@ -2444,6 +2445,7 @@ module Aws::ServiceCatalog
         o.input = Shapes::ShapeRef.new(shape: DisassociateServiceActionFromProvisioningArtifactInput)
         o.output = Shapes::ShapeRef.new(shape: DisassociateServiceActionFromProvisioningArtifactOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
       end)
 
       api.add_operation(:disassociate_tag_option_from_resource, Seahorse::Model::Operation.new.tap do |o|

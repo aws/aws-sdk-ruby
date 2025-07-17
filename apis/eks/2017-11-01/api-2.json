@@ -1278,7 +1278,10 @@
     },
     "Category":{
       "type":"string",
-      "enum":["UPGRADE_READINESS"]
+      "enum":[
+        "UPGRADE_READINESS",
+        "MISCONFIGURATION"
+      ]
     },
     "CategoryList":{
       "type":"list",
@@ -1728,7 +1731,9 @@
           "shape":"String",
           "idempotencyToken":true
         },
-        "tags":{"shape":"TagMap"}
+        "tags":{"shape":"TagMap"},
+        "disableSessionTags":{"shape":"BoxedBoolean"},
+        "targetRoleArn":{"shape":"String"}
       }
     },
     "CreatePodIdentityAssociationResponse":{
@@ -1758,8 +1763,7 @@
     },
     "DeleteAccessEntryResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteAddonRequest":{
       "type":"structure",
@@ -2340,8 +2344,7 @@
     },
     "DisassociateAccessPolicyResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DisassociateIdentityProviderConfigRequest":{
       "type":"structure",
@@ -3451,7 +3454,10 @@
         "tags":{"shape":"TagMap"},
         "createdAt":{"shape":"Timestamp"},
         "modifiedAt":{"shape":"Timestamp"},
-        "ownerArn":{"shape":"String"}
+        "ownerArn":{"shape":"String"},
+        "disableSessionTags":{"shape":"BoxedBoolean"},
+        "targetRoleArn":{"shape":"String"},
+        "externalId":{"shape":"String"}
       }
     },
     "PodIdentityAssociationSummaries":{
@@ -3677,8 +3683,7 @@
     },
     "TagResourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "TagValue":{
       "type":"string",
@@ -3742,8 +3747,7 @@
     },
     "UntagResourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "Update":{
       "type":"structure",
@@ -4055,7 +4059,9 @@
         "clientRequestToken":{
           "shape":"String",
           "idempotencyToken":true
-        }
+        },
+        "disableSessionTags":{"shape":"BoxedBoolean"},
+        "targetRoleArn":{"shape":"String"}
       }
     },
     "UpdatePodIdentityAssociationResponse":{

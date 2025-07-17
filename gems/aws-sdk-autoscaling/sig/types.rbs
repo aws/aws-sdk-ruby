@@ -151,6 +151,7 @@ module Aws::AutoScaling
 
     class AutoScalingGroupNamesType
       attr_accessor auto_scaling_group_names: ::Array[::String]
+      attr_accessor include_instances: bool
       attr_accessor next_token: ::String
       attr_accessor max_records: ::Integer
       attr_accessor filters: ::Array[Types::Filter]
@@ -778,7 +779,7 @@ module Aws::AutoScaling
     class InstanceRequirements
       attr_accessor v_cpu_count: Types::VCpuCountRequest
       attr_accessor memory_mi_b: Types::MemoryMiBRequest
-      attr_accessor cpu_manufacturers: ::Array[("intel" | "amd" | "amazon-web-services")]
+      attr_accessor cpu_manufacturers: ::Array[("intel" | "amd" | "amazon-web-services" | "apple")]
       attr_accessor memory_gi_b_per_v_cpu: Types::MemoryGiBPerVCpuRequest
       attr_accessor excluded_instance_types: ::Array[::String]
       attr_accessor instance_generations: ::Array[("current" | "previous")]

@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2025-07-01)
+------------------
+
+* Feature - New ChatResponseConfiguration to Customize Q Business chat responses for specific use cases and communication needs. Updated Boosting capability allowing admins to provide preference on date attributes for recency and/or provide a preferred data source.
+
+1.41.0 (2025-06-26)
+------------------
+
+* Feature - Added support for App level authentication for QBusiness DataAccessor using AWS IAM Identity center Trusted Token issuer
+
+1.40.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.39.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.38.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.37.0 (2025-04-29)
+------------------
+
+* Feature - Add support for anonymous user access for Q Business applications
+
 1.36.0 (2025-04-28)
 ------------------
 

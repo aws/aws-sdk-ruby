@@ -184,8 +184,14 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status for a call to create a scope. The status can be one of
-    #   the following: `SUCCEEDED`, `IN_PROGRESS`, or `FAILED`.
+    #   The status for a scope. The status can be one of the following:
+    #   `SUCCEEDED`, `IN_PROGRESS`, `FAILED`, `DEACTIVATING`, or
+    #   `DEACTIVATED`.
+    #
+    #   A status of `DEACTIVATING` means that you've requested a scope to
+    #   be deactivated and Network Flow Monitor is in the process of
+    #   deactivating the scope. A status of `DEACTIVATED` means that the
+    #   deactivating process is complete.
     #   @return [String]
     #
     # @!attribute [rw] scope_arn
@@ -317,8 +323,8 @@ module Aws::NetworkFlowMonitor
     #
     # @!attribute [rw] query_id
     #   The identifier for the query. A query ID is an internally-generated
-    #   identifier for a specific query returned from an API call to start a
-    #   query.
+    #   identifier for a specific query returned from an API call to create
+    #   a query.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -374,8 +380,8 @@ module Aws::NetworkFlowMonitor
     #
     # @!attribute [rw] query_id
     #   The identifier for the query. A query ID is an internally-generated
-    #   identifier for a specific query returned from an API call to start a
-    #   query.
+    #   identifier for a specific query returned from an API call to create
+    #   a query.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -430,8 +436,8 @@ module Aws::NetworkFlowMonitor
     #
     # @!attribute [rw] query_id
     #   The identifier for the query. A query ID is an internally-generated
-    #   identifier for a specific query returned from an API call to start a
-    #   query.
+    #   identifier for a specific query returned from an API call to create
+    #   a query.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -629,8 +635,14 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of a scope. The status can be one of the following:
-    #   `SUCCEEDED`, `IN_PROGRESS`, or `FAILED`.
+    #   The status for a scope. The status can be one of the following:
+    #   `SUCCEEDED`, `IN_PROGRESS`, `FAILED`, `DEACTIVATING`, or
+    #   `DEACTIVATED`.
+    #
+    #   A status of `DEACTIVATING` means that you've requested a scope to
+    #   be deactivated and Network Flow Monitor is in the process of
+    #   deactivating the scope. A status of `DEACTIVATED` means that the
+    #   deactivating process is complete.
     #   @return [String]
     #
     # @!attribute [rw] scope_arn
@@ -1089,9 +1101,14 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of a scope. The status can be one of the following,
-    #   depending on the state of scope creation: `SUCCEEDED`,
-    #   `IN_PROGRESS`, or `FAILED`.
+    #   The status for a scope. The status can be one of the following:
+    #   `SUCCEEDED`, `IN_PROGRESS`, `FAILED`, `DEACTIVATING`, or
+    #   `DEACTIVATED`.
+    #
+    #   A status of `DEACTIVATING` means that you've requested a scope to
+    #   be deactivated and Network Flow Monitor is in the process of
+    #   deactivating the scope. A status of `DEACTIVATED` means that the
+    #   deactivating process is complete.
     #   @return [String]
     #
     # @!attribute [rw] scope_arn
@@ -1137,9 +1154,10 @@ module Aws::NetworkFlowMonitor
     #
     # @!attribute [rw] metric_name
     #   The metric that you want to query top contributors for. That is, you
-    #   can specify this metric to return the top contributor network flows,
-    #   for this type of metric, for a monitor and (optionally) within a
-    #   specific category, such as network flows between Availability Zones.
+    #   can specify a metric with this call and return the top contributor
+    #   network flows, for that type of metric, for a monitor and
+    #   (optionally) within a specific category, such as network flows
+    #   between Availability Zones.
     #   @return [String]
     #
     # @!attribute [rw] destination_category
@@ -1344,8 +1362,8 @@ module Aws::NetworkFlowMonitor
     #
     # @!attribute [rw] query_id
     #   The identifier for the query. A query ID is an internally-generated
-    #   identifier for a specific query returned from an API call to start a
-    #   query.
+    #   identifier for a specific query returned from an API call to create
+    #   a query.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/StopQueryMonitorTopContributorsInput AWS API Documentation
@@ -1370,8 +1388,8 @@ module Aws::NetworkFlowMonitor
     #
     # @!attribute [rw] query_id
     #   The identifier for the query. A query ID is an internally-generated
-    #   identifier for a specific query returned from an API call to start a
-    #   query.
+    #   identifier for a specific query returned from an API call to create
+    #   a query.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/StopQueryWorkloadInsightsTopContributorsDataInput AWS API Documentation
@@ -1396,8 +1414,8 @@ module Aws::NetworkFlowMonitor
     #
     # @!attribute [rw] query_id
     #   The identifier for the query. A query ID is an internally-generated
-    #   identifier for a specific query returned from an API call to start a
-    #   query.
+    #   identifier for a specific query returned from an API call to create
+    #   a query.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/StopQueryWorkloadInsightsTopContributorsInput AWS API Documentation
@@ -1705,8 +1723,14 @@ module Aws::NetworkFlowMonitor
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status for a call to update a scope. The status can be one of
-    #   the following: `SUCCEEDED`, `IN_PROGRESS`, or `FAILED`.
+    #   The status for a scope. The status can be one of the following:
+    #   `SUCCEEDED`, `IN_PROGRESS`, `FAILED`, `DEACTIVATING`, or
+    #   `DEACTIVATED`.
+    #
+    #   A status of `DEACTIVATING` means that you've requested a scope to
+    #   be deactivated and Network Flow Monitor is in the process of
+    #   deactivating the scope. A status of `DEACTIVATED` means that the
+    #   deactivating process is complete.
     #   @return [String]
     #
     # @!attribute [rw] scope_arn

@@ -256,8 +256,7 @@ module Aws::S3
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -1265,7 +1264,7 @@ module Aws::S3
     #   resp.checksum_sha1 #=> String
     #   resp.checksum_sha256 #=> String
     #   resp.checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
-    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
+    #   resp.server_side_encryption #=> String, one of "AES256", "aws:fsx", "aws:kms", "aws:kms:dsse"
     #   resp.version_id #=> String
     #   resp.ssekms_key_id #=> String
     #   resp.bucket_key_enabled #=> Boolean
@@ -1280,6 +1279,20 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # End of support notice: Beginning October 1, 2025, Amazon S3 will
+    # discontinue support for creating new Email Grantee Access Control
+    # Lists (ACL). Email Grantee ACLs created prior to this date will
+    # continue to work and remain accessible through the Amazon Web Services
+    # Management Console, Command Line Interface (CLI), SDKs, and REST API.
+    # However, you will no longer be able to create new Email Grantee ACLs.
+    #
+    #  This change affects the following Amazon Web Services Regions: US
+    # East
+    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
+    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
+    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
+    # America (São Paulo) Region.
+    #
     # Creates a copy of an object that is already stored in Amazon S3.
     #
     # <note markdown="1"> You can store individual objects of up to 5 TB in Amazon S3. You
@@ -1915,6 +1928,14 @@ module Aws::S3
     #     key is the same customer managed key that you specified for the
     #     directory bucket's default encryption configuration.
     #
+    #   * <b>S3 access points for Amazon FSx </b> - When accessing data stored
+    #     in Amazon FSx file systems using S3 access points, the only valid
+    #     server side encryption option is `aws:fsx`. All Amazon FSx file
+    #     systems have encryption configured by default and are encrypted at
+    #     rest. Data is automatically encrypted before being written to the
+    #     file system, and automatically decrypted as it is read. These
+    #     processes are handled transparently by Amazon FSx.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html
@@ -2298,8 +2319,8 @@ module Aws::S3
     #     },
     #     metadata_directive: "COPY", # accepts COPY, REPLACE
     #     tagging_directive: "COPY", # accepts COPY, REPLACE
-    #     server_side_encryption: "AES256", # accepts AES256, aws:kms, aws:kms:dsse
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE
+    #     server_side_encryption: "AES256", # accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -2332,7 +2353,7 @@ module Aws::S3
     #   resp.expiration #=> String
     #   resp.copy_source_version_id #=> String
     #   resp.version_id #=> String
-    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
+    #   resp.server_side_encryption #=> String, one of "AES256", "aws:fsx", "aws:kms", "aws:kms:dsse"
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
@@ -2349,6 +2370,33 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # End of support notice: Beginning October 1, 2025, Amazon S3 will
+    # discontinue support for creating new Email Grantee Access Control
+    # Lists (ACL). Email Grantee ACLs created prior to this date will
+    # continue to work and remain accessible through the Amazon Web Services
+    # Management Console, Command Line Interface (CLI), SDKs, and REST API.
+    # However, you will no longer be able to create new Email Grantee ACLs.
+    #
+    #  This change affects the following Amazon Web Services Regions: US
+    # East
+    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
+    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
+    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
+    # America (São Paulo) Region.
+    #
+    # End of support notice: Beginning October 1, 2025, Amazon S3 will stop
+    # returning `DisplayName`. Update your applications to use canonical IDs
+    # (unique identifier for Amazon Web Services accounts), Amazon Web
+    # Services account ID (12 digit identifier) or IAM ARNs (full resource
+    # naming) as a direct replacement of `DisplayName`.
+    #
+    #  This change affects the following Amazon Web Services Regions: US
+    # East
+    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
+    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
+    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
+    # America (São Paulo) Region.
+    #
     # <note markdown="1"> This action creates an Amazon S3 bucket. To create an Amazon S3 on
     # Outposts bucket, see [ `CreateBucket` ][1].
     #
@@ -2604,20 +2652,8 @@ module Aws::S3
     # @return [Types::CreateBucketOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBucketOutput#location #location} => String
+    #   * {Types::CreateBucketOutput#bucket_arn #bucket_arn} => String
     #
-    #
-    # @example Example: To create a bucket 
-    #
-    #   # The following example creates a bucket.
-    #
-    #   resp = client.create_bucket({
-    #     bucket: "examplebucket", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     location: "/examplebucket", 
-    #   }
     #
     # @example Example: To create a bucket in a specific region
     #
@@ -2635,6 +2671,19 @@ module Aws::S3
     #     location: "http://examplebucket.<Region>.s3.amazonaws.com/", 
     #   }
     #
+    # @example Example: To create a bucket 
+    #
+    #   # The following example creates a bucket.
+    #
+    #   resp = client.create_bucket({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     location: "/examplebucket", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_bucket({
@@ -2650,6 +2699,12 @@ module Aws::S3
     #         data_redundancy: "SingleAvailabilityZone", # accepts SingleAvailabilityZone, SingleLocalZone
     #         type: "Directory", # accepts Directory
     #       },
+    #       tags: [
+    #         {
+    #           key: "ObjectKey", # required
+    #           value: "Value", # required
+    #         },
+    #       ],
     #     },
     #     grant_full_control: "GrantFullControl",
     #     grant_read: "GrantRead",
@@ -2663,6 +2718,7 @@ module Aws::S3
     # @example Response structure
     #
     #   resp.location #=> String
+    #   resp.bucket_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucket AWS API Documentation
     #
@@ -2673,8 +2729,8 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Creates a metadata table configuration for a general purpose bucket.
-    # For more information, see [Accelerating data discovery with S3
+    # Creates an S3 Metadata V2 metadata configuration for a general purpose
+    # bucket. For more information, see [Accelerating data discovery with S3
     # Metadata][1] in the *Amazon S3 User Guide*.
     #
     # Permissions
@@ -2683,11 +2739,153 @@ module Aws::S3
     #   more information, see [Setting up permissions for configuring
     #   metadata tables][2] in the *Amazon S3 User Guide*.
     #
+    #   If you want to encrypt your metadata tables with server-side
+    #   encryption with Key Management Service (KMS) keys (SSE-KMS), you
+    #   need additional permissions in your KMS key policy. For more
+    #   information, see [ Setting up permissions for configuring metadata
+    #   tables][2] in the *Amazon S3 User Guide*.
+    #
     #   If you also want to integrate your table bucket with Amazon Web
     #   Services analytics services so that you can query your metadata
     #   table, you need additional permissions. For more information, see [
     #   Integrating Amazon S3 Tables with Amazon Web Services analytics
     #   services][3] in the *Amazon S3 User Guide*.
+    #
+    #   To query your metadata tables, you need additional permissions. For
+    #   more information, see [ Permissions for querying metadata tables][4]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #   * `s3:CreateBucketMetadataTableConfiguration`
+    #
+    #     <note markdown="1"> The IAM policy action name is the same for the V1 and V2 API
+    #     operations.
+    #
+    #      </note>
+    #
+    #   * `s3tables:CreateTableBucket`
+    #
+    #   * `s3tables:CreateNamespace`
+    #
+    #   * `s3tables:GetTable`
+    #
+    #   * `s3tables:CreateTable`
+    #
+    #   * `s3tables:PutTablePolicy`
+    #
+    #   * `s3tables:PutTableEncryption`
+    #
+    #   * `kms:DescribeKey`
+    #
+    # The following operations are related to
+    # `CreateBucketMetadataConfiguration`:
+    #
+    # * [DeleteBucketMetadataConfiguration][5]
+    #
+    # * [GetBucketMetadataConfiguration][6]
+    #
+    # * [UpdateBucketMetadataInventoryTableConfiguration][7]
+    #
+    # * [UpdateBucketMetadataJournalTableConfiguration][8]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-integrating-aws.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-bucket-query-permissions.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataConfiguration.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataInventoryTableConfiguration.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataJournalTableConfiguration.html
+    #
+    # @option params [required, String] :bucket
+    #   The general purpose bucket that you want to create the metadata
+    #   configuration for.
+    #
+    # @option params [String] :content_md5
+    #   The `Content-MD5` header for the metadata configuration.
+    #
+    # @option params [String] :checksum_algorithm
+    #   The checksum algorithm to use with your metadata configuration.
+    #
+    # @option params [required, Types::MetadataConfiguration] :metadata_configuration
+    #   The contents of your metadata configuration.
+    #
+    # @option params [String] :expected_bucket_owner
+    #   The expected owner of the general purpose bucket that corresponds to
+    #   your metadata configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_bucket_metadata_configuration({
+    #     bucket: "BucketName", # required
+    #     content_md5: "ContentMD5",
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
+    #     metadata_configuration: { # required
+    #       journal_table_configuration: { # required
+    #         record_expiration: { # required
+    #           expiration: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           days: 1,
+    #         },
+    #         encryption_configuration: {
+    #           sse_algorithm: "aws:kms", # required, accepts aws:kms, AES256
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #       },
+    #       inventory_table_configuration: {
+    #         configuration_state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         encryption_configuration: {
+    #           sse_algorithm: "aws:kms", # required, accepts aws:kms, AES256
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #       },
+    #     },
+    #     expected_bucket_owner: "AccountId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucketMetadataConfiguration AWS API Documentation
+    #
+    # @overload create_bucket_metadata_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_bucket_metadata_configuration(params = {}, options = {})
+      req = build_request(:create_bucket_metadata_configuration, params)
+      req.send_request(options)
+    end
+
+    # We recommend that you create your S3 Metadata configurations by using
+    # the V2 [CreateBucketMetadataConfiguration][1] API operation. We no
+    # longer recommend using the V1 `CreateBucketMetadataTableConfiguration`
+    # API operation.
+    #
+    #  If you created your S3 Metadata configuration before July 15, 2025,
+    # we
+    # recommend that you delete and re-create your configuration by using
+    # [CreateBucketMetadataConfiguration][1] so that you can expire journal
+    # table records and create a live inventory table.
+    #
+    # Creates a V1 S3 Metadata configuration for a general purpose bucket.
+    # For more information, see [Accelerating data discovery with S3
+    # Metadata][2] in the *Amazon S3 User Guide*.
+    #
+    # Permissions
+    #
+    # : To use this operation, you must have the following permissions. For
+    #   more information, see [Setting up permissions for configuring
+    #   metadata tables][3] in the *Amazon S3 User Guide*.
+    #
+    #   If you want to encrypt your metadata tables with server-side
+    #   encryption with Key Management Service (KMS) keys (SSE-KMS), you
+    #   need additional permissions. For more information, see [ Setting up
+    #   permissions for configuring metadata tables][3] in the *Amazon S3
+    #   User Guide*.
+    #
+    #   If you also want to integrate your table bucket with Amazon Web
+    #   Services analytics services so that you can query your metadata
+    #   table, you need additional permissions. For more information, see [
+    #   Integrating Amazon S3 Tables with Amazon Web Services analytics
+    #   services][4] in the *Amazon S3 User Guide*.
     #
     #   * `s3:CreateBucketMetadataTableConfiguration`
     #
@@ -2702,21 +2900,22 @@ module Aws::S3
     # The following operations are related to
     # `CreateBucketMetadataTableConfiguration`:
     #
-    # * [DeleteBucketMetadataTableConfiguration][4]
+    # * [DeleteBucketMetadataTableConfiguration][5]
     #
-    # * [GetBucketMetadataTableConfiguration][5]
+    # * [GetBucketMetadataTableConfiguration][6]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-integrating-aws.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataTableConfiguration.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataTableConfiguration.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-integrating-aws.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataTableConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataTableConfiguration.html
     #
     # @option params [required, String] :bucket
     #   The general purpose bucket that you want to create the metadata table
-    #   configuration in.
+    #   configuration for.
     #
     # @option params [String] :content_md5
     #   The `Content-MD5` header for the metadata table configuration.
@@ -2728,8 +2927,8 @@ module Aws::S3
     #   The contents of your metadata table configuration.
     #
     # @option params [String] :expected_bucket_owner
-    #   The expected owner of the general purpose bucket that contains your
-    #   metadata table configuration.
+    #   The expected owner of the general purpose bucket that corresponds to
+    #   your metadata table configuration.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2757,6 +2956,20 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # End of support notice: Beginning October 1, 2025, Amazon S3 will
+    # discontinue support for creating new Email Grantee Access Control
+    # Lists (ACL). Email Grantee ACLs created prior to this date will
+    # continue to work and remain accessible through the Amazon Web Services
+    # Management Console, Command Line Interface (CLI), SDKs, and REST API.
+    # However, you will no longer be able to create new Email Grantee ACLs.
+    #
+    #  This change affects the following Amazon Web Services Regions: US
+    # East
+    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
+    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
+    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
+    # America (São Paulo) Region.
+    #
     # This action initiates a multipart upload and returns an upload ID.
     # This upload ID is used to associate all of the parts in the specific
     # multipart upload. You specify this upload ID in each of your
@@ -3373,7 +3586,7 @@ module Aws::S3
     #
     # @option params [String] :server_side_encryption
     #   The server-side encryption algorithm used when you store this object
-    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
+    #   in Amazon S3 or Amazon FSx.
     #
     #   * <b>Directory buckets </b> - For directory buckets, there are only
     #     two supported options for server-side encryption: server-side
@@ -3414,6 +3627,14 @@ module Aws::S3
     #     default encryption configuration of the directory bucket.
     #
     #      </note>
+    #
+    #   * <b>S3 access points for Amazon FSx </b> - When accessing data stored
+    #     in Amazon FSx file systems using S3 access points, the only valid
+    #     server side encryption option is `aws:fsx`. All Amazon FSx file
+    #     systems have encryption configured by default and are encrypted at
+    #     rest. Data is automatically encrypted before being written to the
+    #     file system, and automatically decrypted as it is read. These
+    #     processes are handled transparently by Amazon FSx.
     #
     #
     #
@@ -3672,8 +3893,8 @@ module Aws::S3
     #     metadata: {
     #       "MetadataKey" => "MetadataValue",
     #     },
-    #     server_side_encryption: "AES256", # accepts AES256, aws:kms, aws:kms:dsse
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE
+    #     server_side_encryption: "AES256", # accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -3698,7 +3919,7 @@ module Aws::S3
     #   resp.bucket #=> String
     #   resp.key #=> String
     #   resp.upload_id #=> String
-    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
+    #   resp.server_side_encryption #=> String, one of "AES256", "aws:fsx", "aws:kms", "aws:kms:dsse"
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
@@ -3905,6 +4126,14 @@ module Aws::S3
     #   SSE-S3. For more information, see [Protecting data with server-side
     #   encryption][1] in the *Amazon S3 User Guide*.
     #
+    #   <b>S3 access points for Amazon FSx </b> - When accessing data stored
+    #   in Amazon FSx file systems using S3 access points, the only valid
+    #   server side encryption option is `aws:fsx`. All Amazon FSx file
+    #   systems have encryption configured by default and are encrypted at
+    #   rest. Data is automatically encrypted before being written to the file
+    #   system, and automatically decrypted as it is read. These processes are
+    #   handled transparently by Amazon FSx.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html
@@ -3985,7 +4214,7 @@ module Aws::S3
     #   resp = client.create_session({
     #     session_mode: "ReadOnly", # accepts ReadOnly, ReadWrite
     #     bucket: "BucketName", # required
-    #     server_side_encryption: "AES256", # accepts AES256, aws:kms, aws:kms:dsse
+    #     server_side_encryption: "AES256", # accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
     #     ssekms_key_id: "SSEKMSKeyId",
     #     ssekms_encryption_context: "SSEKMSEncryptionContext",
     #     bucket_key_enabled: false,
@@ -3993,7 +4222,7 @@ module Aws::S3
     #
     # @example Response structure
     #
-    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
+    #   resp.server_side_encryption #=> String, one of "AES256", "aws:fsx", "aws:kms", "aws:kms:dsse"
     #   resp.ssekms_key_id #=> String
     #   resp.ssekms_encryption_context #=> String
     #   resp.bucket_key_enabled #=> Boolean
@@ -4401,6 +4630,11 @@ module Aws::S3
     # @option params [required, String] :id
     #   The ID used to identify the S3 Intelligent-Tiering configuration.
     #
+    # @option params [String] :expected_bucket_owner
+    #   The account ID of the expected bucket owner. If the account ID that
+    #   you provide does not match the actual owner of the bucket, the request
+    #   fails with the HTTP status code `403 Forbidden` (access denied).
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -4408,6 +4642,7 @@ module Aws::S3
     #   resp = client.delete_bucket_intelligent_tiering_configuration({
     #     bucket: "BucketName", # required
     #     id: "IntelligentTieringId", # required
+    #     expected_bucket_owner: "AccountId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketIntelligentTieringConfiguration AWS API Documentation
@@ -4423,7 +4658,7 @@ module Aws::S3
     #
     #  </note>
     #
-    # Deletes an inventory configuration (identified by the inventory ID)
+    # Deletes an S3 Inventory configuration (identified by the inventory ID)
     # from the bucket.
     #
     # To use this operation, you must have permissions to perform the
@@ -4594,9 +4829,17 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Deletes a metadata table configuration from a general purpose bucket.
+    # Deletes an S3 Metadata configuration from a general purpose bucket.
     # For more information, see [Accelerating data discovery with S3
     # Metadata][1] in the *Amazon S3 User Guide*.
+    #
+    # <note markdown="1"> You can use the V2 `DeleteBucketMetadataConfiguration` API operation
+    # with V1 or V2 metadata configurations. However, if you try to use the
+    # V1 `DeleteBucketMetadataTableConfiguration` API operation with V2
+    # configurations, you will receive an HTTP `405 Method Not Allowed`
+    # error.
+    #
+    #  </note>
     #
     # Permissions
     #
@@ -4605,19 +4848,107 @@ module Aws::S3
     #   information, see [Setting up permissions for configuring metadata
     #   tables][2] in the *Amazon S3 User Guide*.
     #
+    #   <note markdown="1"> The IAM policy action name is the same for the V1 and V2 API
+    #   operations.
+    #
+    #    </note>
+    #
     # The following operations are related to
-    # `DeleteBucketMetadataTableConfiguration`:
+    # `DeleteBucketMetadataConfiguration`:
     #
-    # * [CreateBucketMetadataTableConfiguration][3]
+    # * [CreateBucketMetadataConfiguration][3]
     #
-    # * [GetBucketMetadataTableConfiguration][4]
+    # * [GetBucketMetadataConfiguration][4]
+    #
+    # * [UpdateBucketMetadataInventoryTableConfiguration][5]
+    #
+    # * [UpdateBucketMetadataJournalTableConfiguration][6]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataTableConfiguration.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataTableConfiguration.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataConfiguration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataInventoryTableConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataJournalTableConfiguration.html
+    #
+    # @option params [required, String] :bucket
+    #   The general purpose bucket that you want to remove the metadata
+    #   configuration from.
+    #
+    # @option params [String] :expected_bucket_owner
+    #   The expected bucket owner of the general purpose bucket that you want
+    #   to remove the metadata table configuration from.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_bucket_metadata_configuration({
+    #     bucket: "BucketName", # required
+    #     expected_bucket_owner: "AccountId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketMetadataConfiguration AWS API Documentation
+    #
+    # @overload delete_bucket_metadata_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_bucket_metadata_configuration(params = {}, options = {})
+      req = build_request(:delete_bucket_metadata_configuration, params)
+      req.send_request(options)
+    end
+
+    # We recommend that you delete your S3 Metadata configurations by using
+    # the V2 [DeleteBucketMetadataTableConfiguration][1] API operation. We
+    # no longer recommend using the V1
+    # `DeleteBucketMetadataTableConfiguration` API operation.
+    #
+    #  If you created your S3 Metadata configuration before July 15, 2025,
+    # we
+    # recommend that you delete and re-create your configuration by using
+    # [CreateBucketMetadataConfiguration][2] so that you can expire journal
+    # table records and create a live inventory table.
+    #
+    # Deletes a V1 S3 Metadata configuration from a general purpose bucket.
+    # For more information, see [Accelerating data discovery with S3
+    # Metadata][3] in the *Amazon S3 User Guide*.
+    #
+    # <note markdown="1"> You can use the V2 `DeleteBucketMetadataConfiguration` API operation
+    # with V1 or V2 metadata table configurations. However, if you try to
+    # use the V1 `DeleteBucketMetadataTableConfiguration` API operation with
+    # V2 configurations, you will receive an HTTP `405 Method Not Allowed`
+    # error.
+    #
+    #  Make sure that you update your processes to use the new V2 API
+    # operations (`CreateBucketMetadataConfiguration`,
+    # `GetBucketMetadataConfiguration`, and
+    # `DeleteBucketMetadataConfiguration`) instead of the V1 API operations.
+    #
+    #  </note>
+    #
+    # Permissions
+    #
+    # : To use this operation, you must have the
+    #   `s3:DeleteBucketMetadataTableConfiguration` permission. For more
+    #   information, see [Setting up permissions for configuring metadata
+    #   tables][4] in the *Amazon S3 User Guide*.
+    #
+    # The following operations are related to
+    # `DeleteBucketMetadataTableConfiguration`:
+    #
+    # * [CreateBucketMetadataTableConfiguration][5]
+    #
+    # * [GetBucketMetadataTableConfiguration][6]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataTableConfiguration.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataTableConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataTableConfiguration.html
     #
     # @option params [required, String] :bucket
     #   The general purpose bucket that you want to remove the metadata table
@@ -5797,42 +6128,6 @@ module Aws::S3
     #   * {Types::DeleteObjectsOutput#errors #errors} => Array&lt;Types::Error&gt;
     #
     #
-    # @example Example: To delete multiple object versions from a versioned bucket
-    #
-    #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object
-    #   # versions and returns the key and versions of deleted objects in the response.
-    #
-    #   resp = client.delete_objects({
-    #     bucket: "examplebucket", 
-    #     delete: {
-    #       objects: [
-    #         {
-    #           key: "HappyFace.jpg", 
-    #           version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
-    #         }, 
-    #         {
-    #           key: "HappyFace.jpg", 
-    #           version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
-    #         }, 
-    #       ], 
-    #       quiet: false, 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     deleted: [
-    #       {
-    #         key: "HappyFace.jpg", 
-    #         version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
-    #       }, 
-    #       {
-    #         key: "HappyFace.jpg", 
-    #         version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
-    #       }, 
-    #     ], 
-    #   }
-    #
     # @example Example: To delete multiple objects from a versioned bucket
     #
     #   # The following example deletes objects from a bucket. The bucket is versioned, and the request does not specify the
@@ -5865,6 +6160,42 @@ module Aws::S3
     #         delete_marker: true, 
     #         delete_marker_version_id: "iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt", 
     #         key: "objectkey2", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To delete multiple object versions from a versioned bucket
+    #
+    #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object
+    #   # versions and returns the key and versions of deleted objects in the response.
+    #
+    #   resp = client.delete_objects({
+    #     bucket: "examplebucket", 
+    #     delete: {
+    #       objects: [
+    #         {
+    #           key: "HappyFace.jpg", 
+    #           version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
+    #         }, 
+    #         {
+    #           key: "HappyFace.jpg", 
+    #           version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
+    #         }, 
+    #       ], 
+    #       quiet: false, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deleted: [
+    #       {
+    #         key: "HappyFace.jpg", 
+    #         version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
+    #       }, 
+    #       {
+    #         key: "HappyFace.jpg", 
+    #         version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
     #       }, 
     #     ], 
     #   }
@@ -6068,6 +6399,19 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # End of support notice: Beginning October 1, 2025, Amazon S3 will stop
+    # returning `DisplayName`. Update your applications to use canonical IDs
+    # (unique identifier for Amazon Web Services accounts), Amazon Web
+    # Services account ID (12 digit identifier) or IAM ARNs (full resource
+    # naming) as a direct replacement of `DisplayName`.
+    #
+    #  This change affects the following Amazon Web Services Regions: US
+    # East
+    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
+    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
+    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
+    # America (São Paulo) Region.
+    #
     # <note markdown="1"> This operation is not supported for directory buckets.
     #
     #  </note>
@@ -6471,7 +6815,7 @@ module Aws::S3
     # @example Response structure
     #
     #   resp.server_side_encryption_configuration.rules #=> Array
-    #   resp.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.sse_algorithm #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
+    #   resp.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.sse_algorithm #=> String, one of "AES256", "aws:fsx", "aws:kms", "aws:kms:dsse"
     #   resp.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.kms_master_key_id #=> String
     #   resp.server_side_encryption_configuration.rules[0].bucket_key_enabled #=> Boolean
     #
@@ -6533,6 +6877,11 @@ module Aws::S3
     # @option params [required, String] :id
     #   The ID used to identify the S3 Intelligent-Tiering configuration.
     #
+    # @option params [String] :expected_bucket_owner
+    #   The account ID of the expected bucket owner. If the account ID that
+    #   you provide does not match the actual owner of the bucket, the request
+    #   fails with the HTTP status code `403 Forbidden` (access denied).
+    #
     # @return [Types::GetBucketIntelligentTieringConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetBucketIntelligentTieringConfigurationOutput#intelligent_tiering_configuration #intelligent_tiering_configuration} => Types::IntelligentTieringConfiguration
@@ -6542,6 +6891,7 @@ module Aws::S3
     #   resp = client.get_bucket_intelligent_tiering_configuration({
     #     bucket: "BucketName", # required
     #     id: "IntelligentTieringId", # required
+    #     expected_bucket_owner: "AccountId",
     #   })
     #
     # @example Response structure
@@ -6572,7 +6922,7 @@ module Aws::S3
     #
     #  </note>
     #
-    # Returns an inventory configuration (identified by the inventory
+    # Returns an S3 Inventory configuration (identified by the inventory
     # configuration ID) from the bucket.
     #
     # To use this operation, you must have permissions to perform the
@@ -7052,6 +7402,19 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # End of support notice: Beginning October 1, 2025, Amazon S3 will stop
+    # returning `DisplayName`. Update your applications to use canonical IDs
+    # (unique identifier for Amazon Web Services accounts), Amazon Web
+    # Services account ID (12 digit identifier) or IAM ARNs (full resource
+    # naming) as a direct replacement of `DisplayName`.
+    #
+    #  This change affects the following Amazon Web Services Regions: US
+    # East
+    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
+    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
+    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
+    # America (São Paulo) Region.
+    #
     # <note markdown="1"> This operation is not supported for directory buckets.
     #
     #  </note>
@@ -7111,9 +7474,17 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Retrieves the metadata table configuration for a general purpose
-    # bucket. For more information, see [Accelerating data discovery with S3
+    # Retrieves the S3 Metadata configuration for a general purpose bucket.
+    # For more information, see [Accelerating data discovery with S3
     # Metadata][1] in the *Amazon S3 User Guide*.
+    #
+    # <note markdown="1"> You can use the V2 `GetBucketMetadataConfiguration` API operation with
+    # V1 or V2 metadata configurations. However, if you try to use the V1
+    # `GetBucketMetadataTableConfiguration` API operation with V2
+    # configurations, you will receive an HTTP `405 Method Not Allowed`
+    # error.
+    #
+    #  </note>
     #
     # Permissions
     #
@@ -7122,27 +7493,136 @@ module Aws::S3
     #   information, see [Setting up permissions for configuring metadata
     #   tables][2] in the *Amazon S3 User Guide*.
     #
+    #   <note markdown="1"> The IAM policy action name is the same for the V1 and V2 API
+    #   operations.
+    #
+    #    </note>
+    #
     # The following operations are related to
-    # `GetBucketMetadataTableConfiguration`:
+    # `GetBucketMetadataConfiguration`:
     #
-    # * [CreateBucketMetadataTableConfiguration][3]
+    # * [CreateBucketMetadataConfiguration][3]
     #
-    # * [DeleteBucketMetadataTableConfiguration][4]
+    # * [DeleteBucketMetadataConfiguration][4]
+    #
+    # * [UpdateBucketMetadataInventoryTableConfiguration][5]
+    #
+    # * [UpdateBucketMetadataJournalTableConfiguration][6]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataTableConfiguration.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataTableConfiguration.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataConfiguration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataInventoryTableConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataJournalTableConfiguration.html
     #
     # @option params [required, String] :bucket
-    #   The general purpose bucket that contains the metadata table
+    #   The general purpose bucket that corresponds to the metadata
     #   configuration that you want to retrieve.
     #
     # @option params [String] :expected_bucket_owner
     #   The expected owner of the general purpose bucket that you want to
-    #   retrieve the metadata table configuration from.
+    #   retrieve the metadata table configuration for.
+    #
+    # @return [Types::GetBucketMetadataConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBucketMetadataConfigurationOutput#get_bucket_metadata_configuration_result #get_bucket_metadata_configuration_result} => Types::GetBucketMetadataConfigurationResult
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_bucket_metadata_configuration({
+    #     bucket: "BucketName", # required
+    #     expected_bucket_owner: "AccountId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.destination_result.table_bucket_type #=> String, one of "aws", "customer"
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.destination_result.table_bucket_arn #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.destination_result.table_namespace #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.journal_table_configuration_result.table_status #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.journal_table_configuration_result.error.error_code #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.journal_table_configuration_result.error.error_message #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.journal_table_configuration_result.table_name #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.journal_table_configuration_result.table_arn #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.journal_table_configuration_result.record_expiration.expiration #=> String, one of "ENABLED", "DISABLED"
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.journal_table_configuration_result.record_expiration.days #=> Integer
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.inventory_table_configuration_result.configuration_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.inventory_table_configuration_result.table_status #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.inventory_table_configuration_result.error.error_code #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.inventory_table_configuration_result.error.error_message #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.inventory_table_configuration_result.table_name #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.inventory_table_configuration_result.table_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetadataConfiguration AWS API Documentation
+    #
+    # @overload get_bucket_metadata_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_bucket_metadata_configuration(params = {}, options = {})
+      req = build_request(:get_bucket_metadata_configuration, params)
+      req.send_request(options)
+    end
+
+    # We recommend that you retrieve your S3 Metadata configurations by
+    # using the V2 [GetBucketMetadataTableConfiguration][1] API operation.
+    # We no longer recommend using the V1
+    # `GetBucketMetadataTableConfiguration` API operation.
+    #
+    #  If you created your S3 Metadata configuration before July 15, 2025,
+    # we
+    # recommend that you delete and re-create your configuration by using
+    # [CreateBucketMetadataConfiguration][2] so that you can expire journal
+    # table records and create a live inventory table.
+    #
+    # Retrieves the V1 S3 Metadata configuration for a general purpose
+    # bucket. For more information, see [Accelerating data discovery with S3
+    # Metadata][3] in the *Amazon S3 User Guide*.
+    #
+    # <note markdown="1"> You can use the V2 `GetBucketMetadataConfiguration` API operation with
+    # V1 or V2 metadata table configurations. However, if you try to use the
+    # V1 `GetBucketMetadataTableConfiguration` API operation with V2
+    # configurations, you will receive an HTTP `405 Method Not Allowed`
+    # error.
+    #
+    #  Make sure that you update your processes to use the new V2 API
+    # operations (`CreateBucketMetadataConfiguration`,
+    # `GetBucketMetadataConfiguration`, and
+    # `DeleteBucketMetadataConfiguration`) instead of the V1 API operations.
+    #
+    #  </note>
+    #
+    # Permissions
+    #
+    # : To use this operation, you must have the
+    #   `s3:GetBucketMetadataTableConfiguration` permission. For more
+    #   information, see [Setting up permissions for configuring metadata
+    #   tables][4] in the *Amazon S3 User Guide*.
+    #
+    # The following operations are related to
+    # `GetBucketMetadataTableConfiguration`:
+    #
+    # * [CreateBucketMetadataTableConfiguration][5]
+    #
+    # * [DeleteBucketMetadataTableConfiguration][6]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataTableConfiguration.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataTableConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataTableConfiguration.html
+    #
+    # @option params [required, String] :bucket
+    #   The general purpose bucket that corresponds to the metadata table
+    #   configuration that you want to retrieve.
+    #
+    # @option params [String] :expected_bucket_owner
+    #   The expected owner of the general purpose bucket that you want to
+    #   retrieve the metadata table configuration for.
     #
     # @return [Types::GetBucketMetadataTableConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7514,6 +7994,21 @@ module Aws::S3
     # operation, you must have the `s3:GetBucketOwnershipControls`
     # permission. For more information about Amazon S3 permissions, see
     # [Specifying permissions in a policy][1].
+    #
+    # <note markdown="1"> A bucket doesn't have `OwnershipControls` settings in the following
+    # cases:
+    #
+    #  * The bucket was created before the `BucketOwnerEnforced` ownership
+    #   setting was introduced and you've never explicitly applied this
+    #   value
+    #
+    # * You've manually deleted the bucket ownership control value using
+    #   the `DeleteBucketOwnershipControls` API operation.
+    #
+    #  By default, Amazon S3 sets `OwnershipControls` for all newly created
+    # buckets.
+    #
+    #  </note>
     #
     # For information about Amazon S3 Object Ownership, see [Using Object
     # Ownership][2].
@@ -7898,7 +8393,7 @@ module Aws::S3
     #   resp.replication_configuration.rules[0].existing_object_replication.status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].destination.bucket #=> String
     #   resp.replication_configuration.rules[0].destination.account #=> String
-    #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE"
+    #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS"
     #   resp.replication_configuration.rules[0].destination.access_control_translation.owner #=> String, one of "Destination"
     #   resp.replication_configuration.rules[0].destination.encryption_configuration.replica_kms_key_id #=> String
     #   resp.replication_configuration.rules[0].destination.replication_time.status #=> String, one of "Enabled", "Disabled"
@@ -8752,28 +9247,6 @@ module Aws::S3
     #   * {Types::GetObjectOutput#object_lock_legal_hold_status #object_lock_legal_hold_status} => String
     #
     #
-    # @example Example: To retrieve an object
-    #
-    #   # The following example retrieves an object for an S3 bucket.
-    #
-    #   resp = client.get_object({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     accept_ranges: "bytes", 
-    #     content_length: 3191, 
-    #     content_type: "image/jpeg", 
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     last_modified: Time.parse("2016-12-15T01:19:41.000Z"), 
-    #     metadata: {
-    #     }, 
-    #     tag_count: 2, 
-    #     version_id: "null", 
-    #   }
-    #
     # @example Example: To retrieve a byte range of an object 
     #
     #   # The following example retrieves an object for an S3 bucket. The request specifies the range header to retrieve a
@@ -8795,6 +9268,28 @@ module Aws::S3
     #     last_modified: Time.parse("2014-10-09T22:57:28.000Z"), 
     #     metadata: {
     #     }, 
+    #     version_id: "null", 
+    #   }
+    #
+    # @example Example: To retrieve an object
+    #
+    #   # The following example retrieves an object for an S3 bucket.
+    #
+    #   resp = client.get_object({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     accept_ranges: "bytes", 
+    #     content_length: 3191, 
+    #     content_type: "image/jpeg", 
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     last_modified: Time.parse("2016-12-15T01:19:41.000Z"), 
+    #     metadata: {
+    #     }, 
+    #     tag_count: 2, 
     #     version_id: "null", 
     #   }
     #
@@ -8880,14 +9375,14 @@ module Aws::S3
     #   resp.expires #=> Time
     #   resp.expires_string #=> String
     #   resp.website_redirect_location #=> String
-    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
+    #   resp.server_side_encryption #=> String, one of "AES256", "aws:fsx", "aws:kms", "aws:kms:dsse"
     #   resp.metadata #=> Hash
     #   resp.metadata["MetadataKey"] #=> String
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
     #   resp.bucket_key_enabled #=> Boolean
-    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE"
+    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS"
     #   resp.request_charged #=> String, one of "requester"
     #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA", "COMPLETED"
     #   resp.parts_count #=> Integer
@@ -9091,12 +9586,12 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Retrieves all the metadata from an object without returning the object
-    # itself. This operation is useful if you're interested only in an
-    # object's metadata.
+    # Retrieves all of the metadata from an object without returning the
+    # object itself. This operation is useful if you're interested only in
+    # an object's metadata.
     #
     # `GetObjectAttributes` combines the functionality of `HeadObject` and
-    # `ListParts`. All of the data returned with each of those individual
+    # `ListParts`. All of the data returned with both of those individual
     # calls can be returned with a single call to `GetObjectAttributes`.
     #
     # <note markdown="1"> **Directory buckets** - For directory buckets, you must make requests
@@ -9115,16 +9610,23 @@ module Aws::S3
     # Permissions
     # : * **General purpose bucket permissions** - To use
     #     `GetObjectAttributes`, you must have READ access to the object.
-    #     The permissions that you need to use this operation depend on
-    #     whether the bucket is versioned. If the bucket is versioned, you
-    #     need both the `s3:GetObjectVersion` and
-    #     `s3:GetObjectVersionAttributes` permissions for this operation. If
-    #     the bucket is not versioned, you need the `s3:GetObject` and
-    #     `s3:GetObjectAttributes` permissions. For more information, see
-    #     [Specifying Permissions in a Policy][3] in the *Amazon S3 User
-    #     Guide*. If the object that you request does not exist, the error
-    #     Amazon S3 returns depends on whether you also have the
-    #     `s3:ListBucket` permission.
+    #
+    #     The other permissions that you need to use this operation depend
+    #     on whether the bucket is versioned and if a version ID is passed
+    #     in the `GetObjectAttributes` request.
+    #
+    #     * If you pass a version ID in your request, you need both the
+    #       `s3:GetObjectVersion` and `s3:GetObjectVersionAttributes`
+    #       permissions.
+    #
+    #     * If you do not pass a version ID in your request, you need the
+    #       `s3:GetObject` and `s3:GetObjectAttributes` permissions.
+    #     For more information, see [Specifying Permissions in a Policy][3]
+    #     in the *Amazon S3 User Guide*.
+    #
+    #     If the object that you request does not exist, the error Amazon S3
+    #     returns depends on whether you also have the `s3:ListBucket`
+    #     permission.
     #
     #     * If you have the `s3:ListBucket` permission on the bucket, Amazon
     #       S3 returns an HTTP status code `404 Not Found` ("no such key")
@@ -9168,12 +9670,12 @@ module Aws::S3
     #
     #    </note>
     #
-    #   If you encrypt an object by using server-side encryption with
-    #   customer-provided encryption keys (SSE-C) when you store the object
-    #   in Amazon S3, then when you retrieve the metadata from the object,
-    #   you must use the following headers to provide the encryption key for
-    #   the server to be able to retrieve the object's metadata. The
-    #   headers are:
+    #   If you encrypted an object when you stored the object in Amazon S3
+    #   by using server-side encryption with customer-provided encryption
+    #   keys (SSE-C), then when you retrieve the metadata from the object,
+    #   you must use the following headers. These headers provide the server
+    #   with the encryption key required to retrieve the object's metadata.
+    #   The headers are:
     #
     #   * `x-amz-server-side-encryption-customer-algorithm`
     #
@@ -9333,11 +9835,23 @@ module Aws::S3
     #    </note>
     #
     # @option params [Integer] :max_parts
-    #   Sets the maximum number of parts to return.
+    #   Sets the maximum number of parts to return. For more information, see
+    #   [Uploading and copying objects using multipart upload in Amazon S3
+    #   ][1] in the *Amazon Simple Storage Service user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html
     #
     # @option params [Integer] :part_number_marker
     #   Specifies the part after which listing should begin. Only parts with
-    #   higher part numbers will be listed.
+    #   higher part numbers will be listed. For more information, see
+    #   [Uploading and copying objects using multipart upload in Amazon S3
+    #   ][1] in the *Amazon Simple Storage Service user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html
     #
     # @option params [String] :sse_customer_algorithm
     #   Specifies the algorithm to use when encrypting the object (for
@@ -9447,7 +9961,7 @@ module Aws::S3
     #   resp.object_parts.parts[0].checksum_crc64nvme #=> String
     #   resp.object_parts.parts[0].checksum_sha1 #=> String
     #   resp.object_parts.parts[0].checksum_sha256 #=> String
-    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE"
+    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS"
     #   resp.object_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectAttributes AWS API Documentation
@@ -10214,6 +10728,7 @@ module Aws::S3
     #
     # @return [Types::HeadBucketOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::HeadBucketOutput#bucket_arn #bucket_arn} => String
     #   * {Types::HeadBucketOutput#bucket_location_type #bucket_location_type} => String
     #   * {Types::HeadBucketOutput#bucket_location_name #bucket_location_name} => String
     #   * {Types::HeadBucketOutput#bucket_region #bucket_region} => String
@@ -10237,6 +10752,7 @@ module Aws::S3
     #
     # @example Response structure
     #
+    #   resp.bucket_arn #=> String
     #   resp.bucket_location_type #=> String, one of "AvailabilityZone", "LocalZone"
     #   resp.bucket_location_name #=> String
     #   resp.bucket_region #=> String
@@ -10682,6 +11198,7 @@ module Aws::S3
     #   * {Types::HeadObjectOutput#request_charged #request_charged} => String
     #   * {Types::HeadObjectOutput#replication_status #replication_status} => String
     #   * {Types::HeadObjectOutput#parts_count #parts_count} => Integer
+    #   * {Types::HeadObjectOutput#tag_count #tag_count} => Integer
     #   * {Types::HeadObjectOutput#object_lock_mode #object_lock_mode} => String
     #   * {Types::HeadObjectOutput#object_lock_retain_until_date #object_lock_retain_until_date} => Time
     #   * {Types::HeadObjectOutput#object_lock_legal_hold_status #object_lock_legal_hold_status} => String
@@ -10761,17 +11278,18 @@ module Aws::S3
     #   resp.expires #=> Time
     #   resp.expires_string #=> String
     #   resp.website_redirect_location #=> String
-    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
+    #   resp.server_side_encryption #=> String, one of "AES256", "aws:fsx", "aws:kms", "aws:kms:dsse"
     #   resp.metadata #=> Hash
     #   resp.metadata["MetadataKey"] #=> String
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
     #   resp.bucket_key_enabled #=> Boolean
-    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE"
+    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS"
     #   resp.request_charged #=> String, one of "requester"
     #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA", "COMPLETED"
     #   resp.parts_count #=> Integer
+    #   resp.tag_count #=> Integer
     #   resp.object_lock_mode #=> String, one of "GOVERNANCE", "COMPLIANCE"
     #   resp.object_lock_retain_until_date #=> Time
     #   resp.object_lock_legal_hold_status #=> String, one of "ON", "OFF"
@@ -10942,6 +11460,11 @@ module Aws::S3
     #   The `ContinuationToken` that represents a placeholder from where this
     #   request should begin.
     #
+    # @option params [String] :expected_bucket_owner
+    #   The account ID of the expected bucket owner. If the account ID that
+    #   you provide does not match the actual owner of the bucket, the request
+    #   fails with the HTTP status code `403 Forbidden` (access denied).
+    #
     # @return [Types::ListBucketIntelligentTieringConfigurationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListBucketIntelligentTieringConfigurationsOutput#is_truncated #is_truncated} => Boolean
@@ -10954,6 +11477,7 @@ module Aws::S3
     #   resp = client.list_bucket_intelligent_tiering_configurations({
     #     bucket: "BucketName", # required
     #     continuation_token: "Token",
+    #     expected_bucket_owner: "AccountId",
     #   })
     #
     # @example Response structure
@@ -10988,7 +11512,7 @@ module Aws::S3
     #
     #  </note>
     #
-    # Returns a list of inventory configurations for the bucket. You can
+    # Returns a list of S3 Inventory configurations for the bucket. You can
     # have up to 1,000 analytics configurations per bucket.
     #
     # This action supports list pagination and does not return more than 100
@@ -11188,6 +11712,19 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # End of support notice: Beginning October 1, 2025, Amazon S3 will stop
+    # returning `DisplayName`. Update your applications to use canonical IDs
+    # (unique identifier for Amazon Web Services accounts), Amazon Web
+    # Services account ID (12 digit identifier) or IAM ARNs (full resource
+    # naming) as a direct replacement of `DisplayName`.
+    #
+    #  This change affects the following Amazon Web Services Regions: US
+    # East
+    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
+    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
+    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
+    # America (São Paulo) Region.
+    #
     # <note markdown="1"> This operation is not supported for directory buckets.
     #
     #  </note>
@@ -11312,6 +11849,7 @@ module Aws::S3
     #   resp.buckets[0].name #=> String
     #   resp.buckets[0].creation_date #=> Time
     #   resp.buckets[0].bucket_region #=> String
+    #   resp.buckets[0].bucket_arn #=> String
     #   resp.owner.display_name #=> String
     #   resp.owner.id #=> String
     #   resp.continuation_token #=> String
@@ -11403,6 +11941,7 @@ module Aws::S3
     #   resp.buckets[0].name #=> String
     #   resp.buckets[0].creation_date #=> Time
     #   resp.buckets[0].bucket_region #=> String
+    #   resp.buckets[0].bucket_arn #=> String
     #   resp.continuation_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListDirectoryBuckets AWS API Documentation
@@ -11414,6 +11953,19 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # End of support notice: Beginning October 1, 2025, Amazon S3 will stop
+    # returning `DisplayName`. Update your applications to use canonical IDs
+    # (unique identifier for Amazon Web Services accounts), Amazon Web
+    # Services account ID (12 digit identifier) or IAM ARNs (full resource
+    # naming) as a direct replacement of `DisplayName`.
+    #
+    #  This change affects the following Amazon Web Services Regions: US
+    # East
+    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
+    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
+    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
+    # America (São Paulo) Region.
+    #
     # This operation lists in-progress multipart uploads in a bucket. An
     # in-progress multipart upload is a multipart upload that has been
     # initiated by the `CreateMultipartUpload` request, but has not yet been
@@ -11589,6 +12141,9 @@ module Aws::S3
     #   don't specify the prefix parameter, then the substring starts at the
     #   beginning of the key. The keys that are grouped under `CommonPrefixes`
     #   result element are not returned elsewhere in the response.
+    #
+    #   `CommonPrefixes` is filtered out from results if it is not
+    #   lexicographically greater than the key-marker.
     #
     #   <note markdown="1"> **Directory buckets** - For directory buckets, `/` is the only
     #   supported delimiter.
@@ -11839,7 +12394,7 @@ module Aws::S3
     #   resp.uploads[0].upload_id #=> String
     #   resp.uploads[0].key #=> String
     #   resp.uploads[0].initiated #=> Time
-    #   resp.uploads[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE"
+    #   resp.uploads[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS"
     #   resp.uploads[0].owner.display_name #=> String
     #   resp.uploads[0].owner.id #=> String
     #   resp.uploads[0].initiator.id #=> String
@@ -11860,6 +12415,19 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # End of support notice: Beginning October 1, 2025, Amazon S3 will stop
+    # returning `DisplayName`. Update your applications to use canonical IDs
+    # (unique identifier for Amazon Web Services accounts), Amazon Web
+    # Services account ID (12 digit identifier) or IAM ARNs (full resource
+    # naming) as a direct replacement of `DisplayName`.
+    #
+    #  This change affects the following Amazon Web Services Regions: US
+    # East
+    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
+    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
+    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
+    # America (São Paulo) Region.
+    #
     # <note markdown="1"> This operation is not supported for directory buckets.
     #
     #  </note>
@@ -11906,6 +12474,9 @@ module Aws::S3
     #   in `CommonPrefixes`. These groups are counted as one result against
     #   the `max-keys` limitation. These keys are not returned elsewhere in
     #   the response.
+    #
+    #   `CommonPrefixes` is filtered out from results if it is not
+    #   lexicographically greater than the key-marker.
     #
     # @option params [String] :encoding_type
     #   Encoding type used by Amazon S3 to encode the [object keys][1] in the
@@ -12100,6 +12671,19 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # End of support notice: Beginning October 1, 2025, Amazon S3 will stop
+    # returning `DisplayName`. Update your applications to use canonical IDs
+    # (unique identifier for Amazon Web Services accounts), Amazon Web
+    # Services account ID (12 digit identifier) or IAM ARNs (full resource
+    # naming) as a direct replacement of `DisplayName`.
+    #
+    #  This change affects the following Amazon Web Services Regions: US
+    # East
+    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
+    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
+    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
+    # America (São Paulo) Region.
+    #
     # <note markdown="1"> This operation is not supported for directory buckets.
     #
     #  </note>
@@ -12181,6 +12765,9 @@ module Aws::S3
     #
     # @option params [String] :delimiter
     #   A delimiter is a character that you use to group keys.
+    #
+    #   `CommonPrefixes` is filtered out from results if it is not
+    #   lexicographically greater than the key-marker.
     #
     # @option params [String] :encoding_type
     #   Encoding type used by Amazon S3 to encode the [object keys][1] in the
@@ -12313,7 +12900,7 @@ module Aws::S3
     #   resp.contents[0].checksum_algorithm[0] #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256", "CRC64NVME"
     #   resp.contents[0].checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
     #   resp.contents[0].size #=> Integer
-    #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE"
+    #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS"
     #   resp.contents[0].owner.display_name #=> String
     #   resp.contents[0].owner.id #=> String
     #   resp.contents[0].restore_status.is_restore_in_progress #=> Boolean
@@ -12475,6 +13062,9 @@ module Aws::S3
     #
     # @option params [String] :delimiter
     #   A delimiter is a character that you use to group keys.
+    #
+    #   `CommonPrefixes` is filtered out from results if it is not
+    #   lexicographically greater than the `StartAfter` value.
     #
     #   <note markdown="1"> * **Directory buckets** - For directory buckets, `/` is the only
     #     supported delimiter.
@@ -12656,7 +13246,7 @@ module Aws::S3
     #   resp.contents[0].checksum_algorithm[0] #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256", "CRC64NVME"
     #   resp.contents[0].checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
     #   resp.contents[0].size #=> Integer
-    #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE"
+    #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS"
     #   resp.contents[0].owner.display_name #=> String
     #   resp.contents[0].owner.id #=> String
     #   resp.contents[0].restore_status.is_restore_in_progress #=> Boolean
@@ -12683,6 +13273,19 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # End of support notice: Beginning October 1, 2025, Amazon S3 will stop
+    # returning `DisplayName`. Update your applications to use canonical IDs
+    # (unique identifier for Amazon Web Services accounts), Amazon Web
+    # Services account ID (12 digit identifier) or IAM ARNs (full resource
+    # naming) as a direct replacement of `DisplayName`.
+    #
+    #  This change affects the following Amazon Web Services Regions: US
+    # East
+    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
+    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
+    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
+    # America (São Paulo) Region.
+    #
     # Lists the parts that have been uploaded for a specific multipart
     # upload.
     #
@@ -12998,7 +13601,7 @@ module Aws::S3
     #   resp.initiator.display_name #=> String
     #   resp.owner.display_name #=> String
     #   resp.owner.id #=> String
-    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE"
+    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS"
     #   resp.request_charged #=> String, one of "requester"
     #   resp.checksum_algorithm #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256", "CRC64NVME"
     #   resp.checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
@@ -13111,6 +13714,20 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # End of support notice: Beginning October 1, 2025, Amazon S3 will
+    # discontinue support for creating new Email Grantee Access Control
+    # Lists (ACL). Email Grantee ACLs created prior to this date will
+    # continue to work and remain accessible through the Amazon Web Services
+    # Management Console, Command Line Interface (CLI), SDKs, and REST API.
+    # However, you will no longer be able to create new Email Grantee ACLs.
+    #
+    #  This change affects the following Amazon Web Services Regions: US
+    # East
+    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
+    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
+    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
+    # America (São Paulo) Region.
+    #
     # <note markdown="1"> This operation is not supported for directory buckets.
     #
     #  </note>
@@ -13217,7 +13834,10 @@ module Aws::S3
     # Grantee Values
     #
     # : You can specify the person (grantee) to whom you're assigning
-    #   access rights (using request elements) in the following ways:
+    #   access rights (using request elements) in the following ways. For
+    #   examples of how to specify these grantee values in JSON format, see
+    #   the Amazon Web Services CLI example in [ Enabling Amazon S3 server
+    #   access logging][6] in the *Amazon S3 User Guide*.
     #
     #   * By the person's ID:
     #
@@ -13267,11 +13887,11 @@ module Aws::S3
     #
     # The following operations are related to `PutBucketAcl`:
     #
-    # * [CreateBucket][6]
+    # * [CreateBucket][7]
     #
-    # * [DeleteBucket][7]
+    # * [DeleteBucket][8]
     #
-    # * [GetObjectAcl][8]
+    # * [GetObjectAcl][9]
     #
     #
     #
@@ -13280,9 +13900,10 @@ module Aws::S3
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
     # [5]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the bucket.
@@ -13936,7 +14557,7 @@ module Aws::S3
     #       rules: [ # required
     #         {
     #           apply_server_side_encryption_by_default: {
-    #             sse_algorithm: "AES256", # required, accepts AES256, aws:kms, aws:kms:dsse
+    #             sse_algorithm: "AES256", # required, accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
     #             kms_master_key_id: "SSEKMSKeyId",
     #           },
     #           bucket_key_enabled: false,
@@ -14033,6 +14654,11 @@ module Aws::S3
     # @option params [required, String] :id
     #   The ID used to identify the S3 Intelligent-Tiering configuration.
     #
+    # @option params [String] :expected_bucket_owner
+    #   The account ID of the expected bucket owner. If the account ID that
+    #   you provide does not match the actual owner of the bucket, the request
+    #   fails with the HTTP status code `403 Forbidden` (access denied).
+    #
     # @option params [required, Types::IntelligentTieringConfiguration] :intelligent_tiering_configuration
     #   Container for S3 Intelligent-Tiering configuration.
     #
@@ -14043,6 +14669,7 @@ module Aws::S3
     #   resp = client.put_bucket_intelligent_tiering_configuration({
     #     bucket: "BucketName", # required
     #     id: "IntelligentTieringId", # required
+    #     expected_bucket_owner: "AccountId",
     #     intelligent_tiering_configuration: { # required
     #       id: "IntelligentTieringId", # required
     #       filter: {
@@ -14084,7 +14711,7 @@ module Aws::S3
     #
     #  </note>
     #
-    # This implementation of the `PUT` action adds an inventory
+    # This implementation of the `PUT` action adds an S3 Inventory
     # configuration (identified by the inventory ID) to the bucket. You can
     # have up to 1,000 inventory configurations per bucket.
     #
@@ -14681,6 +15308,20 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # End of support notice: Beginning October 1, 2025, Amazon S3 will
+    # discontinue support for creating new Email Grantee Access Control
+    # Lists (ACL). Email Grantee ACLs created prior to this date will
+    # continue to work and remain accessible through the Amazon Web Services
+    # Management Console, Command Line Interface (CLI), SDKs, and REST API.
+    # However, you will no longer be able to create new Email Grantee ACLs.
+    #
+    #  This change affects the following Amazon Web Services Regions: US
+    # East
+    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
+    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
+    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
+    # America (São Paulo) Region.
+    #
     # <note markdown="1"> This operation is not supported for directory buckets.
     #
     #  </note>
@@ -14704,7 +15345,10 @@ module Aws::S3
     # Grantee Values
     #
     # : You can specify the person (grantee) to whom you're assigning
-    #   access rights (by using request elements) in the following ways:
+    #   access rights (by using request elements) in the following ways. For
+    #   examples of how to specify these grantee values in JSON format, see
+    #   the Amazon Web Services CLI example in [ Enabling Amazon S3 server
+    #   access logging][2] in the *Amazon S3 User Guide*.
     #
     #   * By the person's ID:
     #
@@ -14735,30 +15379,31 @@ module Aws::S3
     # />`
     #
     # For more information about server access logging, see [Server Access
-    # Logging][2] in the *Amazon S3 User Guide*.
+    # Logging][3] in the *Amazon S3 User Guide*.
     #
-    # For more information about creating a bucket, see [CreateBucket][3].
+    # For more information about creating a bucket, see [CreateBucket][4].
     # For more information about returning the logging status of a bucket,
-    # see [GetBucketLogging][4].
+    # see [GetBucketLogging][5].
     #
     # The following operations are related to `PutBucketLogging`:
     #
-    # * [PutObject][5]
+    # * [PutObject][6]
     #
-    # * [DeleteBucket][6]
+    # * [DeleteBucket][7]
     #
-    # * [CreateBucket][3]
+    # * [CreateBucket][4]
     #
-    # * [GetBucketLogging][4]
+    # * [GetBucketLogging][5]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html#grant-log-delivery-permissions-general
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerLogs.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLogging.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerLogs.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLogging.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket for which to set the logging parameters.
@@ -15281,6 +15926,22 @@ module Aws::S3
     #   The `OwnershipControls` (BucketOwnerEnforced, BucketOwnerPreferred, or
     #   ObjectWriter) that you want to apply to this Amazon S3 bucket.
     #
+    # @option params [String] :checksum_algorithm
+    #   Indicates the algorithm used to create the checksum for the object
+    #   when you use the SDK. This header will not provide any additional
+    #   functionality if you don't use the SDK. When you send this header,
+    #   there must be a corresponding `x-amz-checksum-algorithm ` header sent.
+    #   Otherwise, Amazon S3 fails the request with the HTTP status code `400
+    #   Bad Request`. For more information, see [Checking object integrity][1]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #   If you provide an individual checksum, Amazon S3 ignores any provided
+    #   `ChecksumAlgorithm` parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -15296,6 +15957,7 @@ module Aws::S3
     #         },
     #       ],
     #     },
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketOwnershipControls AWS API Documentation
@@ -15713,7 +16375,7 @@ module Aws::S3
     #           destination: { # required
     #             bucket: "BucketName", # required
     #             account: "AccountId",
-    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE
+    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
     #             access_control_translation: {
     #               owner: "Destination", # required, accepts Destination
     #             },
@@ -16325,6 +16987,20 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # End of support notice: Beginning October 1, 2025, Amazon S3 will
+    # discontinue support for creating new Email Grantee Access Control
+    # Lists (ACL). Email Grantee ACLs created prior to this date will
+    # continue to work and remain accessible through the Amazon Web Services
+    # Management Console, Command Line Interface (CLI), SDKs, and REST API.
+    # However, you will no longer be able to create new Email Grantee ACLs.
+    #
+    #  This change affects the following Amazon Web Services Regions: US
+    # East
+    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
+    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
+    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
+    # America (São Paulo) Region.
+    #
     # Adds an object to a bucket.
     #
     # <note markdown="1"> * Amazon S3 never adds partial objects; if you receive a success
@@ -16833,8 +17509,7 @@ module Aws::S3
     #
     # @option params [String] :server_side_encryption
     #   The server-side encryption algorithm that was used when you store this
-    #   object in Amazon S3 (for example, `AES256`, `aws:kms`,
-    #   `aws:kms:dsse`).
+    #   object in Amazon S3 or Amazon FSx.
     #
     #   * <b>General purpose buckets </b> - You have four mutually exclusive
     #     options to protect data using server-side encryption in Amazon S3,
@@ -16887,6 +17562,14 @@ module Aws::S3
     #     default encryption configuration of the directory bucket.
     #
     #      </note>
+    #
+    #   * <b>S3 access points for Amazon FSx </b> - When accessing data stored
+    #     in Amazon FSx file systems using S3 access points, the only valid
+    #     server side encryption option is `aws:fsx`. All Amazon FSx file
+    #     systems have encryption configured by default and are encrypted at
+    #     rest. Data is automatically encrypted before being written to the
+    #     file system, and automatically decrypted as it is read. These
+    #     processes are handled transparently by Amazon FSx.
     #
     #
     #
@@ -17134,38 +17817,39 @@ module Aws::S3
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To create an object.
+    # @example Example: To upload an object and specify canned ACL.
     #
-    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
+    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
+    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
     #
     #   resp = client.put_object({
+    #     acl: "authenticated-read", 
     #     body: "filetoupload", 
     #     bucket: "examplebucket", 
-    #     key: "objectkey", 
+    #     key: "exampleobject", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
+    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
     #   }
     #
-    # @example Example: To upload an object and specify optional tags
+    # @example Example: To upload an object
     #
-    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
-    #   # S3 returns version ID of the newly created object.
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
+    #   # syntax. S3 returns VersionId of the newly created object.
     #
     #   resp = client.put_object({
-    #     body: "c:\\HappyFace.jpg", 
+    #     body: "HappyFace.jpg", 
     #     bucket: "examplebucket", 
     #     key: "HappyFace.jpg", 
-    #     tagging: "key1=value1&key2=value2", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
+    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
     #   }
     #
     # @example Example: To upload an object (specify optional headers)
@@ -17188,22 +17872,22 @@ module Aws::S3
     #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
     #   }
     #
-    # @example Example: To upload an object and specify canned ACL.
+    # @example Example: To upload an object and specify optional tags
     #
-    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
-    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
+    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
+    #   # S3 returns version ID of the newly created object.
     #
     #   resp = client.put_object({
-    #     acl: "authenticated-read", 
-    #     body: "filetoupload", 
+    #     body: "c:\\HappyFace.jpg", 
     #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
+    #     key: "HappyFace.jpg", 
+    #     tagging: "key1=value1&key2=value2", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
+    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
     #   }
     #
     # @example Example: To upload an object and specify server-side encryption and object tags
@@ -17247,21 +17931,20 @@ module Aws::S3
     #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
     #   }
     #
-    # @example Example: To upload an object
+    # @example Example: To create an object.
     #
-    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
-    #   # syntax. S3 returns VersionId of the newly created object.
+    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
     #
     #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
+    #     body: "filetoupload", 
     #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
+    #     key: "objectkey", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
+    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
     #   }
     #
     # @example Streaming a file from disk
@@ -17301,8 +17984,8 @@ module Aws::S3
     #     metadata: {
     #       "MetadataKey" => "MetadataValue",
     #     },
-    #     server_side_encryption: "AES256", # accepts AES256, aws:kms, aws:kms:dsse
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE
+    #     server_side_encryption: "AES256", # accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -17328,7 +18011,7 @@ module Aws::S3
     #   resp.checksum_sha1 #=> String
     #   resp.checksum_sha256 #=> String
     #   resp.checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
-    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
+    #   resp.server_side_encryption #=> String, one of "AES256", "aws:fsx", "aws:kms", "aws:kms:dsse"
     #   resp.version_id #=> String
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
@@ -17444,7 +18127,10 @@ module Aws::S3
     # Grantee Values
     #
     # : You can specify the person (grantee) to whom you're assigning
-    #   access rights (using request elements) in the following ways:
+    #   access rights (using request elements) in the following ways. For
+    #   examples of how to specify these grantee values in JSON format, see
+    #   the Amazon Web Services CLI example in [ Enabling Amazon S3 server
+    #   access logging][6] in the *Amazon S3 User Guide*.
     #
     #   * By the person's ID:
     #
@@ -17500,9 +18186,9 @@ module Aws::S3
     #
     # The following operations are related to `PutObjectAcl`:
     #
-    # * [CopyObject][6]
+    # * [CopyObject][7]
     #
-    # * [GetObject][7]
+    # * [GetObject][8]
     #
     #
     #
@@ -17511,8 +18197,9 @@ module Aws::S3
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
     # [5]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the object. For more information, see
@@ -18398,6 +19085,179 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # Renames an existing object in a directory bucket that uses the S3
+    # Express One Zone storage class. You can use `RenameObject` by
+    # specifying an existing object’s name as the source and the new name of
+    # the object as the destination within the same directory bucket.
+    #
+    # <note markdown="1"> `RenameObject` is only supported for objects stored in the S3 Express
+    # One Zone storage class.
+    #
+    #  </note>
+    #
+    # To prevent overwriting an object, you can use the `If-None-Match`
+    # conditional header.
+    #
+    # * **If-None-Match** - Renames the object only if an object with the
+    #   specified name does not already exist in the directory bucket. If
+    #   you don't want to overwrite an existing object, you can add the
+    #   `If-None-Match` conditional header with the value `‘*’` in the
+    #   `RenameObject` request. Amazon S3 then returns a `412 Precondition
+    #   Failed` error if the object with the specified name already exists.
+    #   For more information, see [RFC 7232][1].
+    #
+    # ^
+    #
+    # Permissions
+    #
+    # : To grant access to the `RenameObject` operation on a directory
+    #   bucket, we recommend that you use the `CreateSession` operation for
+    #   session-based authorization. Specifically, you grant the
+    #   `s3express:CreateSession` permission to the directory bucket in a
+    #   bucket policy or an IAM identity-based policy. Then, you make the
+    #   `CreateSession` API call on the directory bucket to obtain a session
+    #   token. With the session token in your request header, you can make
+    #   API requests to this operation. After the session token expires, you
+    #   make another `CreateSession` API call to generate a new session
+    #   token for use. The Amazon Web Services CLI and SDKs will create and
+    #   manage your session including refreshing the session token
+    #   automatically to avoid service interruptions when a session expires.
+    #   In your bucket policy, you can specify the `s3express:SessionMode`
+    #   condition key to control who can create a `ReadWrite` or `ReadOnly`
+    #   session. A `ReadWrite` session is required for executing all the
+    #   Zonal endpoint API operations, including `RenameObject`. For more
+    #   information about authorization, see [ `CreateSession` ][2]. To
+    #   learn more about Zonal endpoint API operations, see [Authorizing
+    #   Zonal endpoint API operations with CreateSession][3] in the *Amazon
+    #   S3 User Guide*.
+    #
+    # HTTP Host header syntax
+    #
+    # : <b>Directory buckets </b> - The HTTP Host header syntax is `
+    #   Bucket-name.s3express-zone-id.region-code.amazonaws.com`.
+    #
+    #
+    #
+    # [1]: https://datatracker.ietf.org/doc/rfc7232/
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-create-session.html
+    #
+    # @option params [required, String] :bucket
+    #   The bucket name of the directory bucket containing the object.
+    #
+    #   You must use virtual-hosted-style requests in the format
+    #   `Bucket-name.s3express-zone-id.region-code.amazonaws.com`. Path-style
+    #   requests are not supported. Directory bucket names must be unique in
+    #   the chosen Availability Zone. Bucket names must follow the format
+    #   `bucket-base-name--zone-id--x-s3 ` (for example,
+    #   `amzn-s3-demo-bucket--usw2-az1--x-s3`). For information about bucket
+    #   naming restrictions, see [Directory bucket naming rules][1] in the
+    #   *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-bucket-naming-rules.html
+    #
+    # @option params [required, String] :key
+    #   Key name of the object to rename.
+    #
+    # @option params [required, String] :rename_source
+    #   Specifies the source for the rename operation. The value must be URL
+    #   encoded.
+    #
+    # @option params [String] :destination_if_match
+    #   Renames the object only if the ETag (entity tag) value provided during
+    #   the operation matches the ETag of the object in S3. The `If-Match`
+    #   header field makes the request method conditional on ETags. If the
+    #   ETag values do not match, the operation returns a `412 Precondition
+    #   Failed` error.
+    #
+    #   Expects the ETag value as a string.
+    #
+    # @option params [String] :destination_if_none_match
+    #   Renames the object only if the destination does not already exist in
+    #   the specified directory bucket. If the object does exist when you send
+    #   a request with `If-None-Match:*`, the S3 API will return a `412
+    #   Precondition Failed` error, preventing an overwrite. The
+    #   `If-None-Match` header prevents overwrites of existing data by
+    #   validating that there's not an object with the same key name already
+    #   in your directory bucket.
+    #
+    #   Expects the `*` character (asterisk).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :destination_if_modified_since
+    #   Renames the object if the destination exists and if it has been
+    #   modified since the specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :destination_if_unmodified_since
+    #   Renames the object if it hasn't been modified since the specified
+    #   time.
+    #
+    # @option params [String] :source_if_match
+    #   Renames the object if the source exists and if its entity tag (ETag)
+    #   matches the specified ETag.
+    #
+    # @option params [String] :source_if_none_match
+    #   Renames the object if the source exists and if its entity tag (ETag)
+    #   is different than the specified ETag. If an asterisk (`*`) character
+    #   is provided, the operation will fail and return a `412 Precondition
+    #   Failed` error.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :source_if_modified_since
+    #   Renames the object if the source exists and if it has been modified
+    #   since the specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :source_if_unmodified_since
+    #   Renames the object if the source exists and hasn't been modified
+    #   since the specified time.
+    #
+    # @option params [String] :client_token
+    #   A unique string with a max of 64 ASCII characters in the ASCII range
+    #   of 33 - 126.
+    #
+    #   <note markdown="1"> `RenameObject` supports idempotency using a client token. To make an
+    #   idempotent API request using `RenameObject`, specify a client token in
+    #   the request. You should not reuse the same client token for other API
+    #   requests. If you retry a request that completed successfully using the
+    #   same client token and the same parameters, the retry succeeds without
+    #   performing any further actions. If you retry a successful request
+    #   using the same client token, but one or more of the parameters are
+    #   different, the retry fails and an `IdempotentParameterMismatch` error
+    #   is returned.
+    #
+    #    </note>
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.rename_object({
+    #     bucket: "BucketName", # required
+    #     key: "ObjectKey", # required
+    #     rename_source: "RenameSource", # required
+    #     destination_if_match: "IfMatch",
+    #     destination_if_none_match: "IfNoneMatch",
+    #     destination_if_modified_since: Time.now,
+    #     destination_if_unmodified_since: Time.now,
+    #     source_if_match: "RenameSourceIfMatch",
+    #     source_if_none_match: "RenameSourceIfNoneMatch",
+    #     source_if_modified_since: Time.now,
+    #     source_if_unmodified_since: Time.now,
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RenameObject AWS API Documentation
+    #
+    # @overload rename_object(params = {})
+    # @param [Hash] params ({})
+    def rename_object(params = {}, options = {})
+      req = build_request(:rename_object, params)
+      req.send_request(options)
+    end
+
     # <note markdown="1"> This operation is not supported for directory buckets.
     #
     #  </note>
@@ -18728,7 +19588,7 @@ module Aws::S3
     #           bucket_name: "BucketName", # required
     #           prefix: "LocationPrefix", # required
     #           encryption: {
-    #             encryption_type: "AES256", # required, accepts AES256, aws:kms, aws:kms:dsse
+    #             encryption_type: "AES256", # required, accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
     #             kms_key_id: "SSEKMSKeyId",
     #             kms_context: "KMSContext",
     #           },
@@ -18759,7 +19619,7 @@ module Aws::S3
     #               value: "MetadataValue",
     #             },
     #           ],
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
     #         },
     #       },
     #     },
@@ -19201,6 +20061,182 @@ module Aws::S3
       req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)
 
       req.send_request(options, &block)
+    end
+
+    # Enables or disables a live inventory table for an S3 Metadata
+    # configuration on a general purpose bucket. For more information, see
+    # [Accelerating data discovery with S3 Metadata][1] in the *Amazon S3
+    # User Guide*.
+    #
+    # Permissions
+    #
+    # : To use this operation, you must have the following permissions. For
+    #   more information, see [Setting up permissions for configuring
+    #   metadata tables][2] in the *Amazon S3 User Guide*.
+    #
+    #   If you want to encrypt your inventory table with server-side
+    #   encryption with Key Management Service (KMS) keys (SSE-KMS), you
+    #   need additional permissions in your KMS key policy. For more
+    #   information, see [ Setting up permissions for configuring metadata
+    #   tables][2] in the *Amazon S3 User Guide*.
+    #
+    #   * `s3:UpdateBucketMetadataInventoryTableConfiguration`
+    #
+    #   * `s3tables:CreateTableBucket`
+    #
+    #   * `s3tables:CreateNamespace`
+    #
+    #   * `s3tables:GetTable`
+    #
+    #   * `s3tables:CreateTable`
+    #
+    #   * `s3tables:PutTablePolicy`
+    #
+    #   * `s3tables:PutTableEncryption`
+    #
+    #   * `kms:DescribeKey`
+    #
+    # The following operations are related to
+    # `UpdateBucketMetadataInventoryTableConfiguration`:
+    #
+    # * [CreateBucketMetadataConfiguration][3]
+    #
+    # * [DeleteBucketMetadataConfiguration][4]
+    #
+    # * [GetBucketMetadataConfiguration][5]
+    #
+    # * [UpdateBucketMetadataJournalTableConfiguration][6]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataConfiguration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataJournalTableConfiguration.html
+    #
+    # @option params [required, String] :bucket
+    #   The general purpose bucket that corresponds to the metadata
+    #   configuration that you want to enable or disable an inventory table
+    #   for.
+    #
+    # @option params [String] :content_md5
+    #   The `Content-MD5` header for the inventory table configuration.
+    #
+    # @option params [String] :checksum_algorithm
+    #   The checksum algorithm to use with your inventory table configuration.
+    #
+    # @option params [required, Types::InventoryTableConfigurationUpdates] :inventory_table_configuration
+    #   The contents of your inventory table configuration.
+    #
+    # @option params [String] :expected_bucket_owner
+    #   The expected owner of the general purpose bucket that corresponds to
+    #   the metadata table configuration that you want to enable or disable an
+    #   inventory table for.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_bucket_metadata_inventory_table_configuration({
+    #     bucket: "BucketName", # required
+    #     content_md5: "ContentMD5",
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
+    #     inventory_table_configuration: { # required
+    #       configuration_state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       encryption_configuration: {
+    #         sse_algorithm: "aws:kms", # required, accepts aws:kms, AES256
+    #         kms_key_arn: "KmsKeyArn",
+    #       },
+    #     },
+    #     expected_bucket_owner: "AccountId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UpdateBucketMetadataInventoryTableConfiguration AWS API Documentation
+    #
+    # @overload update_bucket_metadata_inventory_table_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_bucket_metadata_inventory_table_configuration(params = {}, options = {})
+      req = build_request(:update_bucket_metadata_inventory_table_configuration, params)
+      req.send_request(options)
+    end
+
+    # Enables or disables journal table record expiration for an S3 Metadata
+    # configuration on a general purpose bucket. For more information, see
+    # [Accelerating data discovery with S3 Metadata][1] in the *Amazon S3
+    # User Guide*.
+    #
+    # Permissions
+    #
+    # : To use this operation, you must have the
+    #   `s3:UpdateBucketMetadataJournalTableConfiguration` permission. For
+    #   more information, see [Setting up permissions for configuring
+    #   metadata tables][2] in the *Amazon S3 User Guide*.
+    #
+    # The following operations are related to
+    # `UpdateBucketMetadataJournalTableConfiguration`:
+    #
+    # * [CreateBucketMetadataConfiguration][3]
+    #
+    # * [DeleteBucketMetadataConfiguration][4]
+    #
+    # * [GetBucketMetadataConfiguration][5]
+    #
+    # * [UpdateBucketMetadataInventoryTableConfiguration][6]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataConfiguration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataInventoryTableConfiguration.html
+    #
+    # @option params [required, String] :bucket
+    #   The general purpose bucket that corresponds to the metadata
+    #   configuration that you want to enable or disable journal table record
+    #   expiration for.
+    #
+    # @option params [String] :content_md5
+    #   The `Content-MD5` header for the journal table configuration.
+    #
+    # @option params [String] :checksum_algorithm
+    #   The checksum algorithm to use with your journal table configuration.
+    #
+    # @option params [required, Types::JournalTableConfigurationUpdates] :journal_table_configuration
+    #   The contents of your journal table configuration.
+    #
+    # @option params [String] :expected_bucket_owner
+    #   The expected owner of the general purpose bucket that corresponds to
+    #   the metadata table configuration that you want to enable or disable
+    #   journal table record expiration for.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_bucket_metadata_journal_table_configuration({
+    #     bucket: "BucketName", # required
+    #     content_md5: "ContentMD5",
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
+    #     journal_table_configuration: { # required
+    #       record_expiration: { # required
+    #         expiration: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         days: 1,
+    #       },
+    #     },
+    #     expected_bucket_owner: "AccountId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UpdateBucketMetadataJournalTableConfiguration AWS API Documentation
+    #
+    # @overload update_bucket_metadata_journal_table_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_bucket_metadata_journal_table_configuration(params = {}, options = {})
+      req = build_request(:update_bucket_metadata_journal_table_configuration, params)
+      req.send_request(options)
     end
 
     # Uploads a part in a multipart upload.
@@ -19652,7 +20688,7 @@ module Aws::S3
     #
     # @example Response structure
     #
-    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
+    #   resp.server_side_encryption #=> String, one of "AES256", "aws:fsx", "aws:kms", "aws:kms:dsse"
     #   resp.etag #=> String
     #   resp.checksum_crc32 #=> String
     #   resp.checksum_crc32c #=> String
@@ -20163,6 +21199,26 @@ module Aws::S3
     #   * {Types::UploadPartCopyOutput#request_charged #request_charged} => String
     #
     #
+    # @example Example: To upload a part by copying data from an existing object as data source
+    #
+    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
+    #
+    #   resp = client.upload_part_copy({
+    #     bucket: "examplebucket", 
+    #     copy_source: "/bucketname/sourceobjectkey", 
+    #     key: "examplelargeobject", 
+    #     part_number: 1, 
+    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     copy_part_result: {
+    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
+    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
+    #     }, 
+    #   }
+    #
     # @example Example: To upload a part by copying byte range from an existing object as data source
     #
     #   # The following example uploads a part of a multipart upload by copying a specified byte range from an existing object as
@@ -20182,26 +21238,6 @@ module Aws::S3
     #     copy_part_result: {
     #       etag: "\"65d16d19e65a7508a51f043180edcc36\"", 
     #       last_modified: Time.parse("2016-12-29T21:44:28.000Z"), 
-    #     }, 
-    #   }
-    #
-    # @example Example: To upload a part by copying data from an existing object as data source
-    #
-    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
-    #
-    #   resp = client.upload_part_copy({
-    #     bucket: "examplebucket", 
-    #     copy_source: "/bucketname/sourceobjectkey", 
-    #     key: "examplelargeobject", 
-    #     part_number: 1, 
-    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     copy_part_result: {
-    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
-    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
     #     }, 
     #   }
     #
@@ -20239,7 +21275,7 @@ module Aws::S3
     #   resp.copy_part_result.checksum_crc64nvme #=> String
     #   resp.copy_part_result.checksum_sha1 #=> String
     #   resp.copy_part_result.checksum_sha256 #=> String
-    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
+    #   resp.server_side_encryption #=> String, one of "AES256", "aws:fsx", "aws:kms", "aws:kms:dsse"
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
@@ -20548,11 +21584,17 @@ module Aws::S3
     #
     # @option params [String] :request_charged
     #   If present, indicates that the requester was successfully charged for
-    #   the request.
+    #   the request. For more information, see [Using Requester Pays buckets
+    #   for storage transfers and usage][1] in the *Amazon Simple Storage
+    #   Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #
     # @option params [String] :restore
     #   Provides information about object restoration operation and expiration
@@ -20560,7 +21602,12 @@ module Aws::S3
     #
     # @option params [String] :server_side_encryption
     #   The server-side encryption algorithm used when storing requested
-    #   object in Amazon S3 (for example, AES256, `aws:kms`).
+    #   object in Amazon S3 or Amazon FSx.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3 access
+    #   points, the only valid server side encryption option is `aws:fsx`.
+    #
+    #    </note>
     #
     # @option params [String] :sse_customer_algorithm
     #   Encryption algorithm used if server-side encryption with a
@@ -20644,11 +21691,11 @@ module Aws::S3
     #     replication_status: "COMPLETE", # accepts COMPLETE, PENDING, FAILED, REPLICA, COMPLETED
     #     request_charged: "requester", # accepts requester
     #     restore: "Restore",
-    #     server_side_encryption: "AES256", # accepts AES256, aws:kms, aws:kms:dsse
+    #     server_side_encryption: "AES256", # accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
     #     tag_count: 1,
     #     version_id: "ObjectVersionId",
     #     bucket_key_enabled: false,
@@ -20681,7 +21728,7 @@ module Aws::S3
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.184.0'
+      context[:gem_version] = '1.193.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

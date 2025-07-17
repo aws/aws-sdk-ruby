@@ -376,6 +376,42 @@ module Aws
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeSecurityGroupsResponseSuccess
       end
 
+      class SecurityGroupVpcAssociationAssociated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?next_token: ::String,
+                    ?max_results: ::Integer,
+                    ?dry_run: bool
+                  ) -> Client::_DescribeSecurityGroupVpcAssociationsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeSecurityGroupVpcAssociationsResponseSuccess
+      end
+
+      class SecurityGroupVpcAssociationDisassociated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?next_token: ::String,
+                    ?max_results: ::Integer,
+                    ?dry_run: bool
+                  ) -> Client::_DescribeSecurityGroupVpcAssociationsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeSecurityGroupVpcAssociationsResponseSuccess
+      end
+
       class SnapshotCompleted
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void

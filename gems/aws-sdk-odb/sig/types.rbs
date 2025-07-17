@@ -1,0 +1,1223 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Odb
+  module Types
+
+    class AcceptMarketplaceRegistrationInput
+      attr_accessor marketplace_registration_token: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptMarketplaceRegistrationOutput < Aws::EmptyStructure
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AutonomousVirtualMachineSummary
+      attr_accessor autonomous_virtual_machine_id: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor vm_name: ::String
+      attr_accessor db_server_id: ::String
+      attr_accessor db_server_display_name: ::String
+      attr_accessor cpu_core_count: ::Integer
+      attr_accessor memory_size_in_g_bs: ::Integer
+      attr_accessor db_node_storage_size_in_g_bs: ::Integer
+      attr_accessor client_ip_address: ::String
+      attr_accessor cloud_autonomous_vm_cluster_id: ::String
+      attr_accessor ocid: ::String
+      attr_accessor oci_resource_anchor_name: ::String
+      SENSITIVE: []
+    end
+
+    class CloudAutonomousVmCluster
+      attr_accessor cloud_autonomous_vm_cluster_id: ::String
+      attr_accessor cloud_autonomous_vm_cluster_arn: ::String
+      attr_accessor odb_network_id: ::String
+      attr_accessor oci_resource_anchor_name: ::String
+      attr_accessor percent_progress: ::Float
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      attr_accessor autonomous_data_storage_percentage: ::Float
+      attr_accessor autonomous_data_storage_size_in_t_bs: ::Float
+      attr_accessor available_autonomous_data_storage_size_in_t_bs: ::Float
+      attr_accessor available_container_databases: ::Integer
+      attr_accessor available_cpus: ::Float
+      attr_accessor compute_model: ("ECPU" | "OCPU")
+      attr_accessor cpu_core_count: ::Integer
+      attr_accessor cpu_core_count_per_node: ::Integer
+      attr_accessor cpu_percentage: ::Float
+      attr_accessor data_storage_size_in_g_bs: ::Float
+      attr_accessor data_storage_size_in_t_bs: ::Float
+      attr_accessor db_node_storage_size_in_g_bs: ::Integer
+      attr_accessor db_servers: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor domain: ::String
+      attr_accessor exadata_storage_in_t_bs_lowest_scaled_value: ::Float
+      attr_accessor hostname: ::String
+      attr_accessor ocid: ::String
+      attr_accessor oci_url: ::String
+      attr_accessor is_mtls_enabled_vm_cluster: bool
+      attr_accessor license_model: ("BRING_YOUR_OWN_LICENSE" | "LICENSE_INCLUDED")
+      attr_accessor maintenance_window: Types::MaintenanceWindow
+      attr_accessor max_acds_lowest_scaled_value: ::Integer
+      attr_accessor memory_per_oracle_compute_unit_in_g_bs: ::Integer
+      attr_accessor memory_size_in_g_bs: ::Integer
+      attr_accessor node_count: ::Integer
+      attr_accessor non_provisionable_autonomous_container_databases: ::Integer
+      attr_accessor provisionable_autonomous_container_databases: ::Integer
+      attr_accessor provisioned_autonomous_container_databases: ::Integer
+      attr_accessor provisioned_cpus: ::Float
+      attr_accessor reclaimable_cpus: ::Float
+      attr_accessor reserved_cpus: ::Float
+      attr_accessor scan_listener_port_non_tls: ::Integer
+      attr_accessor scan_listener_port_tls: ::Integer
+      attr_accessor shape: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor time_database_ssl_certificate_expires: ::Time
+      attr_accessor time_ords_certificate_expires: ::Time
+      attr_accessor time_zone: ::String
+      attr_accessor total_container_databases: ::Integer
+      SENSITIVE: []
+    end
+
+    class CloudAutonomousVmClusterResourceDetails
+      attr_accessor cloud_autonomous_vm_cluster_id: ::String
+      attr_accessor unallocated_adb_storage_in_t_bs: ::Float
+      SENSITIVE: []
+    end
+
+    class CloudAutonomousVmClusterSummary
+      attr_accessor cloud_autonomous_vm_cluster_id: ::String
+      attr_accessor cloud_autonomous_vm_cluster_arn: ::String
+      attr_accessor odb_network_id: ::String
+      attr_accessor oci_resource_anchor_name: ::String
+      attr_accessor percent_progress: ::Float
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      attr_accessor autonomous_data_storage_percentage: ::Float
+      attr_accessor autonomous_data_storage_size_in_t_bs: ::Float
+      attr_accessor available_autonomous_data_storage_size_in_t_bs: ::Float
+      attr_accessor available_container_databases: ::Integer
+      attr_accessor available_cpus: ::Float
+      attr_accessor compute_model: ("ECPU" | "OCPU")
+      attr_accessor cpu_core_count: ::Integer
+      attr_accessor cpu_core_count_per_node: ::Integer
+      attr_accessor cpu_percentage: ::Float
+      attr_accessor data_storage_size_in_g_bs: ::Float
+      attr_accessor data_storage_size_in_t_bs: ::Float
+      attr_accessor db_node_storage_size_in_g_bs: ::Integer
+      attr_accessor db_servers: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor domain: ::String
+      attr_accessor exadata_storage_in_t_bs_lowest_scaled_value: ::Float
+      attr_accessor hostname: ::String
+      attr_accessor ocid: ::String
+      attr_accessor oci_url: ::String
+      attr_accessor is_mtls_enabled_vm_cluster: bool
+      attr_accessor license_model: ("BRING_YOUR_OWN_LICENSE" | "LICENSE_INCLUDED")
+      attr_accessor maintenance_window: Types::MaintenanceWindow
+      attr_accessor max_acds_lowest_scaled_value: ::Integer
+      attr_accessor memory_per_oracle_compute_unit_in_g_bs: ::Integer
+      attr_accessor memory_size_in_g_bs: ::Integer
+      attr_accessor node_count: ::Integer
+      attr_accessor non_provisionable_autonomous_container_databases: ::Integer
+      attr_accessor provisionable_autonomous_container_databases: ::Integer
+      attr_accessor provisioned_autonomous_container_databases: ::Integer
+      attr_accessor provisioned_cpus: ::Float
+      attr_accessor reclaimable_cpus: ::Float
+      attr_accessor reserved_cpus: ::Float
+      attr_accessor scan_listener_port_non_tls: ::Integer
+      attr_accessor scan_listener_port_tls: ::Integer
+      attr_accessor shape: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor time_database_ssl_certificate_expires: ::Time
+      attr_accessor time_ords_certificate_expires: ::Time
+      attr_accessor time_zone: ::String
+      attr_accessor total_container_databases: ::Integer
+      SENSITIVE: []
+    end
+
+    class CloudExadataInfrastructure
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor cloud_exadata_infrastructure_arn: ::String
+      attr_accessor activated_storage_count: ::Integer
+      attr_accessor additional_storage_count: ::Integer
+      attr_accessor available_storage_size_in_g_bs: ::Integer
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor compute_count: ::Integer
+      attr_accessor cpu_count: ::Integer
+      attr_accessor customer_contacts_to_send_to_oci: ::Array[Types::CustomerContact]
+      attr_accessor data_storage_size_in_t_bs: ::Float
+      attr_accessor db_node_storage_size_in_g_bs: ::Integer
+      attr_accessor db_server_version: ::String
+      attr_accessor last_maintenance_run_id: ::String
+      attr_accessor maintenance_window: Types::MaintenanceWindow
+      attr_accessor max_cpu_count: ::Integer
+      attr_accessor max_data_storage_in_t_bs: ::Float
+      attr_accessor max_db_node_storage_size_in_g_bs: ::Integer
+      attr_accessor max_memory_in_g_bs: ::Integer
+      attr_accessor memory_size_in_g_bs: ::Integer
+      attr_accessor monthly_db_server_version: ::String
+      attr_accessor monthly_storage_server_version: ::String
+      attr_accessor next_maintenance_run_id: ::String
+      attr_accessor oci_resource_anchor_name: ::String
+      attr_accessor oci_url: ::String
+      attr_accessor ocid: ::String
+      attr_accessor shape: ::String
+      attr_accessor storage_count: ::Integer
+      attr_accessor storage_server_version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor total_storage_size_in_g_bs: ::Integer
+      attr_accessor percent_progress: ::Float
+      attr_accessor database_server_type: ::String
+      attr_accessor storage_server_type: ::String
+      attr_accessor compute_model: ("ECPU" | "OCPU")
+      SENSITIVE: []
+    end
+
+    class CloudExadataInfrastructureSummary
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor cloud_exadata_infrastructure_arn: ::String
+      attr_accessor activated_storage_count: ::Integer
+      attr_accessor additional_storage_count: ::Integer
+      attr_accessor available_storage_size_in_g_bs: ::Integer
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor compute_count: ::Integer
+      attr_accessor cpu_count: ::Integer
+      attr_accessor customer_contacts_to_send_to_oci: ::Array[Types::CustomerContact]
+      attr_accessor data_storage_size_in_t_bs: ::Float
+      attr_accessor db_node_storage_size_in_g_bs: ::Integer
+      attr_accessor db_server_version: ::String
+      attr_accessor last_maintenance_run_id: ::String
+      attr_accessor maintenance_window: Types::MaintenanceWindow
+      attr_accessor max_cpu_count: ::Integer
+      attr_accessor max_data_storage_in_t_bs: ::Float
+      attr_accessor max_db_node_storage_size_in_g_bs: ::Integer
+      attr_accessor max_memory_in_g_bs: ::Integer
+      attr_accessor memory_size_in_g_bs: ::Integer
+      attr_accessor monthly_db_server_version: ::String
+      attr_accessor monthly_storage_server_version: ::String
+      attr_accessor next_maintenance_run_id: ::String
+      attr_accessor oci_resource_anchor_name: ::String
+      attr_accessor oci_url: ::String
+      attr_accessor ocid: ::String
+      attr_accessor shape: ::String
+      attr_accessor storage_count: ::Integer
+      attr_accessor storage_server_version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor total_storage_size_in_g_bs: ::Integer
+      attr_accessor percent_progress: ::Float
+      attr_accessor database_server_type: ::String
+      attr_accessor storage_server_type: ::String
+      attr_accessor compute_model: ("ECPU" | "OCPU")
+      SENSITIVE: []
+    end
+
+    class CloudExadataInfrastructureUnallocatedResources
+      attr_accessor cloud_autonomous_vm_clusters: ::Array[Types::CloudAutonomousVmClusterResourceDetails]
+      attr_accessor cloud_exadata_infrastructure_display_name: ::String
+      attr_accessor exadata_storage_in_t_bs: ::Float
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      attr_accessor local_storage_in_g_bs: ::Integer
+      attr_accessor memory_in_g_bs: ::Integer
+      attr_accessor ocpus: ::Integer
+      SENSITIVE: []
+    end
+
+    class CloudVmCluster
+      attr_accessor cloud_vm_cluster_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor cloud_vm_cluster_arn: ::String
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor cpu_core_count: ::Integer
+      attr_accessor data_collection_options: Types::DataCollectionOptions
+      attr_accessor data_storage_size_in_t_bs: ::Float
+      attr_accessor db_node_storage_size_in_g_bs: ::Integer
+      attr_accessor db_servers: ::Array[::String]
+      attr_accessor disk_redundancy: ("HIGH" | "NORMAL")
+      attr_accessor gi_version: ::String
+      attr_accessor hostname: ::String
+      attr_accessor iorm_config_cache: Types::ExadataIormConfig
+      attr_accessor is_local_backup_enabled: bool
+      attr_accessor is_sparse_diskgroup_enabled: bool
+      attr_accessor last_update_history_entry_id: ::String
+      attr_accessor license_model: ("BRING_YOUR_OWN_LICENSE" | "LICENSE_INCLUDED")
+      attr_accessor listener_port: ::Integer
+      attr_accessor memory_size_in_g_bs: ::Integer
+      attr_accessor node_count: ::Integer
+      attr_accessor ocid: ::String
+      attr_accessor oci_resource_anchor_name: ::String
+      attr_accessor oci_url: ::String
+      attr_accessor domain: ::String
+      attr_accessor scan_dns_name: ::String
+      attr_accessor scan_dns_record_id: ::String
+      attr_accessor scan_ip_ids: ::Array[::String]
+      attr_accessor shape: ::String
+      attr_accessor ssh_public_keys: ::Array[::String]
+      attr_accessor storage_size_in_g_bs: ::Integer
+      attr_accessor system_version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor time_zone: ::String
+      attr_accessor vip_ids: ::Array[::String]
+      attr_accessor odb_network_id: ::String
+      attr_accessor percent_progress: ::Float
+      attr_accessor compute_model: ("ECPU" | "OCPU")
+      SENSITIVE: []
+    end
+
+    class CloudVmClusterSummary
+      attr_accessor cloud_vm_cluster_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor cloud_vm_cluster_arn: ::String
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor cpu_core_count: ::Integer
+      attr_accessor data_collection_options: Types::DataCollectionOptions
+      attr_accessor data_storage_size_in_t_bs: ::Float
+      attr_accessor db_node_storage_size_in_g_bs: ::Integer
+      attr_accessor db_servers: ::Array[::String]
+      attr_accessor disk_redundancy: ("HIGH" | "NORMAL")
+      attr_accessor gi_version: ::String
+      attr_accessor hostname: ::String
+      attr_accessor iorm_config_cache: Types::ExadataIormConfig
+      attr_accessor is_local_backup_enabled: bool
+      attr_accessor is_sparse_diskgroup_enabled: bool
+      attr_accessor last_update_history_entry_id: ::String
+      attr_accessor license_model: ("BRING_YOUR_OWN_LICENSE" | "LICENSE_INCLUDED")
+      attr_accessor listener_port: ::Integer
+      attr_accessor memory_size_in_g_bs: ::Integer
+      attr_accessor node_count: ::Integer
+      attr_accessor ocid: ::String
+      attr_accessor oci_resource_anchor_name: ::String
+      attr_accessor oci_url: ::String
+      attr_accessor domain: ::String
+      attr_accessor scan_dns_name: ::String
+      attr_accessor scan_dns_record_id: ::String
+      attr_accessor scan_ip_ids: ::Array[::String]
+      attr_accessor shape: ::String
+      attr_accessor ssh_public_keys: ::Array[::String]
+      attr_accessor storage_size_in_g_bs: ::Integer
+      attr_accessor system_version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor time_zone: ::String
+      attr_accessor vip_ids: ::Array[::String]
+      attr_accessor odb_network_id: ::String
+      attr_accessor percent_progress: ::Float
+      attr_accessor compute_model: ("ECPU" | "OCPU")
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCloudAutonomousVmClusterInput
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      attr_accessor odb_network_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor autonomous_data_storage_size_in_t_bs: ::Float
+      attr_accessor cpu_core_count_per_node: ::Integer
+      attr_accessor db_servers: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor is_mtls_enabled_vm_cluster: bool
+      attr_accessor license_model: ("BRING_YOUR_OWN_LICENSE" | "LICENSE_INCLUDED")
+      attr_accessor maintenance_window: Types::MaintenanceWindow
+      attr_accessor memory_per_oracle_compute_unit_in_g_bs: ::Integer
+      attr_accessor scan_listener_port_non_tls: ::Integer
+      attr_accessor scan_listener_port_tls: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor time_zone: ::String
+      attr_accessor total_container_databases: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateCloudAutonomousVmClusterOutput
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor cloud_autonomous_vm_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCloudExadataInfrastructureInput
+      attr_accessor display_name: ::String
+      attr_accessor shape: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor compute_count: ::Integer
+      attr_accessor customer_contacts_to_send_to_oci: ::Array[Types::CustomerContact]
+      attr_accessor maintenance_window: Types::MaintenanceWindow
+      attr_accessor storage_count: ::Integer
+      attr_accessor client_token: ::String
+      attr_accessor database_server_type: ::String
+      attr_accessor storage_server_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCloudExadataInfrastructureOutput
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCloudVmClusterInput
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      attr_accessor cpu_core_count: ::Integer
+      attr_accessor display_name: ::String
+      attr_accessor gi_version: ::String
+      attr_accessor hostname: ::String
+      attr_accessor ssh_public_keys: ::Array[::String]
+      attr_accessor odb_network_id: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor data_collection_options: Types::DataCollectionOptions
+      attr_accessor data_storage_size_in_t_bs: ::Float
+      attr_accessor db_node_storage_size_in_g_bs: ::Integer
+      attr_accessor db_servers: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor is_local_backup_enabled: bool
+      attr_accessor is_sparse_diskgroup_enabled: bool
+      attr_accessor license_model: ("BRING_YOUR_OWN_LICENSE" | "LICENSE_INCLUDED")
+      attr_accessor memory_size_in_g_bs: ::Integer
+      attr_accessor system_version: ::String
+      attr_accessor time_zone: ::String
+      attr_accessor client_token: ::String
+      attr_accessor scan_listener_port_tcp: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateCloudVmClusterOutput
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor cloud_vm_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateOdbNetworkInput
+      attr_accessor display_name: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor client_subnet_cidr: ::String
+      attr_accessor backup_subnet_cidr: ::String
+      attr_accessor custom_domain_name: ::String
+      attr_accessor default_dns_prefix: ::String
+      attr_accessor client_token: ::String
+      attr_accessor s3_access: ("ENABLED" | "DISABLED")
+      attr_accessor zero_etl_access: ("ENABLED" | "DISABLED")
+      attr_accessor s3_policy_document: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateOdbNetworkOutput
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor odb_network_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateOdbPeeringConnectionInput
+      attr_accessor odb_network_id: ::String
+      attr_accessor peer_network_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateOdbPeeringConnectionOutput
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor odb_peering_connection_id: ::String
+      SENSITIVE: []
+    end
+
+    class CustomerContact
+      attr_accessor email: ::String
+      SENSITIVE: [:email]
+    end
+
+    class DataCollectionOptions
+      attr_accessor is_diagnostics_events_enabled: bool
+      attr_accessor is_health_monitoring_enabled: bool
+      attr_accessor is_incident_logs_enabled: bool
+      SENSITIVE: []
+    end
+
+    class DayOfWeek
+      attr_accessor name: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")
+      SENSITIVE: []
+    end
+
+    class DbIormConfig
+      attr_accessor db_name: ::String
+      attr_accessor flash_cache_limit: ::String
+      attr_accessor share: ::Integer
+      SENSITIVE: []
+    end
+
+    class DbNode
+      attr_accessor db_node_id: ::String
+      attr_accessor db_node_arn: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "STOPPING" | "STOPPED" | "STARTING")
+      attr_accessor status_reason: ::String
+      attr_accessor additional_details: ::String
+      attr_accessor backup_ip_id: ::String
+      attr_accessor backup_vnic_2_id: ::String
+      attr_accessor backup_vnic_id: ::String
+      attr_accessor cpu_core_count: ::Integer
+      attr_accessor db_node_storage_size_in_g_bs: ::Integer
+      attr_accessor db_server_id: ::String
+      attr_accessor db_system_id: ::String
+      attr_accessor fault_domain: ::String
+      attr_accessor host_ip_id: ::String
+      attr_accessor hostname: ::String
+      attr_accessor ocid: ::String
+      attr_accessor oci_resource_anchor_name: ::String
+      attr_accessor maintenance_type: ("VMDB_REBOOT_MIGRATION")
+      attr_accessor memory_size_in_g_bs: ::Integer
+      attr_accessor software_storage_size_in_gb: ::Integer
+      attr_accessor created_at: ::Time
+      attr_accessor time_maintenance_window_end: ::String
+      attr_accessor time_maintenance_window_start: ::String
+      attr_accessor total_cpu_core_count: ::Integer
+      attr_accessor vnic2_id: ::String
+      attr_accessor vnic_id: ::String
+      attr_accessor private_ip_address: ::String
+      attr_accessor floating_ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class DbNodeSummary
+      attr_accessor db_node_id: ::String
+      attr_accessor db_node_arn: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "STOPPING" | "STOPPED" | "STARTING")
+      attr_accessor status_reason: ::String
+      attr_accessor additional_details: ::String
+      attr_accessor backup_ip_id: ::String
+      attr_accessor backup_vnic_2_id: ::String
+      attr_accessor backup_vnic_id: ::String
+      attr_accessor cpu_core_count: ::Integer
+      attr_accessor db_node_storage_size_in_g_bs: ::Integer
+      attr_accessor db_server_id: ::String
+      attr_accessor db_system_id: ::String
+      attr_accessor fault_domain: ::String
+      attr_accessor host_ip_id: ::String
+      attr_accessor hostname: ::String
+      attr_accessor ocid: ::String
+      attr_accessor oci_resource_anchor_name: ::String
+      attr_accessor maintenance_type: ("VMDB_REBOOT_MIGRATION")
+      attr_accessor memory_size_in_g_bs: ::Integer
+      attr_accessor software_storage_size_in_gb: ::Integer
+      attr_accessor created_at: ::Time
+      attr_accessor time_maintenance_window_end: ::String
+      attr_accessor time_maintenance_window_start: ::String
+      attr_accessor total_cpu_core_count: ::Integer
+      attr_accessor vnic2_id: ::String
+      attr_accessor vnic_id: ::String
+      SENSITIVE: []
+    end
+
+    class DbServer
+      attr_accessor db_server_id: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor cpu_core_count: ::Integer
+      attr_accessor db_node_storage_size_in_g_bs: ::Integer
+      attr_accessor db_server_patching_details: Types::DbServerPatchingDetails
+      attr_accessor display_name: ::String
+      attr_accessor exadata_infrastructure_id: ::String
+      attr_accessor ocid: ::String
+      attr_accessor oci_resource_anchor_name: ::String
+      attr_accessor max_cpu_count: ::Integer
+      attr_accessor max_db_node_storage_in_g_bs: ::Integer
+      attr_accessor max_memory_in_g_bs: ::Integer
+      attr_accessor memory_size_in_g_bs: ::Integer
+      attr_accessor shape: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor vm_cluster_ids: ::Array[::String]
+      attr_accessor compute_model: ("ECPU" | "OCPU")
+      attr_accessor autonomous_vm_cluster_ids: ::Array[::String]
+      attr_accessor autonomous_virtual_machine_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DbServerPatchingDetails
+      attr_accessor estimated_patch_duration: ::Integer
+      attr_accessor patching_status: ("COMPLETE" | "FAILED" | "MAINTENANCE_IN_PROGRESS" | "SCHEDULED")
+      attr_accessor time_patching_ended: ::String
+      attr_accessor time_patching_started: ::String
+      SENSITIVE: []
+    end
+
+    class DbServerSummary
+      attr_accessor db_server_id: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor cpu_core_count: ::Integer
+      attr_accessor db_node_storage_size_in_g_bs: ::Integer
+      attr_accessor db_server_patching_details: Types::DbServerPatchingDetails
+      attr_accessor display_name: ::String
+      attr_accessor exadata_infrastructure_id: ::String
+      attr_accessor ocid: ::String
+      attr_accessor oci_resource_anchor_name: ::String
+      attr_accessor max_cpu_count: ::Integer
+      attr_accessor max_db_node_storage_in_g_bs: ::Integer
+      attr_accessor max_memory_in_g_bs: ::Integer
+      attr_accessor memory_size_in_g_bs: ::Integer
+      attr_accessor shape: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor vm_cluster_ids: ::Array[::String]
+      attr_accessor compute_model: ("ECPU" | "OCPU")
+      attr_accessor autonomous_vm_cluster_ids: ::Array[::String]
+      attr_accessor autonomous_virtual_machine_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DbSystemShapeSummary
+      attr_accessor available_core_count: ::Integer
+      attr_accessor available_core_count_per_node: ::Integer
+      attr_accessor available_data_storage_in_t_bs: ::Integer
+      attr_accessor available_data_storage_per_server_in_t_bs: ::Integer
+      attr_accessor available_db_node_per_node_in_g_bs: ::Integer
+      attr_accessor available_db_node_storage_in_g_bs: ::Integer
+      attr_accessor available_memory_in_g_bs: ::Integer
+      attr_accessor available_memory_per_node_in_g_bs: ::Integer
+      attr_accessor core_count_increment: ::Integer
+      attr_accessor max_storage_count: ::Integer
+      attr_accessor maximum_node_count: ::Integer
+      attr_accessor min_core_count_per_node: ::Integer
+      attr_accessor min_data_storage_in_t_bs: ::Integer
+      attr_accessor min_db_node_storage_per_node_in_g_bs: ::Integer
+      attr_accessor min_memory_per_node_in_g_bs: ::Integer
+      attr_accessor min_storage_count: ::Integer
+      attr_accessor minimum_core_count: ::Integer
+      attr_accessor minimum_node_count: ::Integer
+      attr_accessor runtime_minimum_core_count: ::Integer
+      attr_accessor shape_family: ::String
+      attr_accessor shape_type: ("AMD" | "INTEL" | "INTEL_FLEX_X9" | "AMPERE_FLEX_A1")
+      attr_accessor name: ::String
+      attr_accessor compute_model: ("ECPU" | "OCPU")
+      attr_accessor are_server_types_supported: bool
+      SENSITIVE: []
+    end
+
+    class DeleteCloudAutonomousVmClusterInput
+      attr_accessor cloud_autonomous_vm_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCloudAutonomousVmClusterOutput < Aws::EmptyStructure
+    end
+
+    class DeleteCloudExadataInfrastructureInput
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCloudExadataInfrastructureOutput < Aws::EmptyStructure
+    end
+
+    class DeleteCloudVmClusterInput
+      attr_accessor cloud_vm_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCloudVmClusterOutput < Aws::EmptyStructure
+    end
+
+    class DeleteOdbNetworkInput
+      attr_accessor odb_network_id: ::String
+      attr_accessor delete_associated_resources: bool
+      SENSITIVE: []
+    end
+
+    class DeleteOdbNetworkOutput < Aws::EmptyStructure
+    end
+
+    class DeleteOdbPeeringConnectionInput
+      attr_accessor odb_peering_connection_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOdbPeeringConnectionOutput < Aws::EmptyStructure
+    end
+
+    class ExadataIormConfig
+      attr_accessor db_plans: ::Array[Types::DbIormConfig]
+      attr_accessor lifecycle_details: ::String
+      attr_accessor lifecycle_state: ("BOOTSTRAPPING" | "DISABLED" | "ENABLED" | "FAILED" | "UPDATING")
+      attr_accessor objective: ("AUTO" | "BALANCED" | "BASIC" | "HIGH_THROUGHPUT" | "LOW_LATENCY")
+      SENSITIVE: []
+    end
+
+    class GetCloudAutonomousVmClusterInput
+      attr_accessor cloud_autonomous_vm_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCloudAutonomousVmClusterOutput
+      attr_accessor cloud_autonomous_vm_cluster: Types::CloudAutonomousVmCluster
+      SENSITIVE: []
+    end
+
+    class GetCloudExadataInfrastructureInput
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCloudExadataInfrastructureOutput
+      attr_accessor cloud_exadata_infrastructure: Types::CloudExadataInfrastructure
+      SENSITIVE: []
+    end
+
+    class GetCloudExadataInfrastructureUnallocatedResourcesInput
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      attr_accessor db_servers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetCloudExadataInfrastructureUnallocatedResourcesOutput
+      attr_accessor cloud_exadata_infrastructure_unallocated_resources: Types::CloudExadataInfrastructureUnallocatedResources
+      SENSITIVE: []
+    end
+
+    class GetCloudVmClusterInput
+      attr_accessor cloud_vm_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCloudVmClusterOutput
+      attr_accessor cloud_vm_cluster: Types::CloudVmCluster
+      SENSITIVE: []
+    end
+
+    class GetDbNodeInput
+      attr_accessor cloud_vm_cluster_id: ::String
+      attr_accessor db_node_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDbNodeOutput
+      attr_accessor db_node: Types::DbNode
+      SENSITIVE: []
+    end
+
+    class GetDbServerInput
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      attr_accessor db_server_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDbServerOutput
+      attr_accessor db_server: Types::DbServer
+      SENSITIVE: []
+    end
+
+    class GetOciOnboardingStatusInput < Aws::EmptyStructure
+    end
+
+    class GetOciOnboardingStatusOutput
+      attr_accessor status: ("NOT_STARTED" | "PENDING_LINK_GENERATION" | "PENDING_CUSTOMER_ACTION" | "PENDING_INITIALIZATION" | "ACTIVATING" | "ACTIVE_IN_HOME_REGION" | "ACTIVE" | "ACTIVE_LIMITED" | "FAILED" | "PUBLIC_OFFER_UNSUPPORTED" | "SUSPENDED" | "CANCELED")
+      attr_accessor existing_tenancy_activation_link: ::String
+      attr_accessor new_tenancy_activation_link: ::String
+      SENSITIVE: []
+    end
+
+    class GetOdbNetworkInput
+      attr_accessor odb_network_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOdbNetworkOutput
+      attr_accessor odb_network: Types::OdbNetwork
+      SENSITIVE: []
+    end
+
+    class GetOdbPeeringConnectionInput
+      attr_accessor odb_peering_connection_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOdbPeeringConnectionOutput
+      attr_accessor odb_peering_connection: Types::OdbPeeringConnection
+      SENSITIVE: []
+    end
+
+    class GiVersionSummary
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class InitializeServiceInput < Aws::EmptyStructure
+    end
+
+    class InitializeServiceOutput < Aws::EmptyStructure
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAutonomousVirtualMachinesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor cloud_autonomous_vm_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListAutonomousVirtualMachinesOutput
+      attr_accessor next_token: ::String
+      attr_accessor autonomous_virtual_machines: ::Array[Types::AutonomousVirtualMachineSummary]
+      SENSITIVE: []
+    end
+
+    class ListCloudAutonomousVmClustersInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListCloudAutonomousVmClustersOutput
+      attr_accessor next_token: ::String
+      attr_accessor cloud_autonomous_vm_clusters: ::Array[Types::CloudAutonomousVmClusterSummary]
+      SENSITIVE: []
+    end
+
+    class ListCloudExadataInfrastructuresInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCloudExadataInfrastructuresOutput
+      attr_accessor next_token: ::String
+      attr_accessor cloud_exadata_infrastructures: ::Array[Types::CloudExadataInfrastructureSummary]
+      SENSITIVE: []
+    end
+
+    class ListCloudVmClustersInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListCloudVmClustersOutput
+      attr_accessor next_token: ::String
+      attr_accessor cloud_vm_clusters: ::Array[Types::CloudVmClusterSummary]
+      SENSITIVE: []
+    end
+
+    class ListDbNodesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor cloud_vm_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListDbNodesOutput
+      attr_accessor next_token: ::String
+      attr_accessor db_nodes: ::Array[Types::DbNodeSummary]
+      SENSITIVE: []
+    end
+
+    class ListDbServersInput
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDbServersOutput
+      attr_accessor next_token: ::String
+      attr_accessor db_servers: ::Array[Types::DbServerSummary]
+      SENSITIVE: []
+    end
+
+    class ListDbSystemShapesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListDbSystemShapesOutput
+      attr_accessor next_token: ::String
+      attr_accessor db_system_shapes: ::Array[Types::DbSystemShapeSummary]
+      SENSITIVE: []
+    end
+
+    class ListGiVersionsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor shape: ::String
+      SENSITIVE: []
+    end
+
+    class ListGiVersionsOutput
+      attr_accessor next_token: ::String
+      attr_accessor gi_versions: ::Array[Types::GiVersionSummary]
+      SENSITIVE: []
+    end
+
+    class ListOdbNetworksInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOdbNetworksOutput
+      attr_accessor next_token: ::String
+      attr_accessor odb_networks: ::Array[Types::OdbNetworkSummary]
+      SENSITIVE: []
+    end
+
+    class ListOdbPeeringConnectionsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor odb_network_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListOdbPeeringConnectionsOutput
+      attr_accessor next_token: ::String
+      attr_accessor odb_peering_connections: ::Array[Types::OdbPeeringConnectionSummary]
+      SENSITIVE: []
+    end
+
+    class ListSystemVersionsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor gi_version: ::String
+      attr_accessor shape: ::String
+      SENSITIVE: []
+    end
+
+    class ListSystemVersionsOutput
+      attr_accessor next_token: ::String
+      attr_accessor system_versions: ::Array[Types::SystemVersionSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MaintenanceWindow
+      attr_accessor custom_action_timeout_in_mins: ::Integer
+      attr_accessor days_of_week: ::Array[Types::DayOfWeek]
+      attr_accessor hours_of_day: ::Array[::Integer]
+      attr_accessor is_custom_action_timeout_enabled: bool
+      attr_accessor lead_time_in_weeks: ::Integer
+      attr_accessor months: ::Array[Types::Month]
+      attr_accessor patching_mode: ("ROLLING" | "NONROLLING")
+      attr_accessor preference: ("NO_PREFERENCE" | "CUSTOM_PREFERENCE")
+      attr_accessor skip_ru: bool
+      attr_accessor weeks_of_month: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class ManagedS3BackupAccess
+      attr_accessor status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING")
+      attr_accessor ipv4_addresses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ManagedServices
+      attr_accessor service_network_arn: ::String
+      attr_accessor resource_gateway_arn: ::String
+      attr_accessor managed_services_ipv_4_cidrs: ::Array[::String]
+      attr_accessor service_network_endpoint: Types::ServiceNetworkEndpoint
+      attr_accessor managed_s3_backup_access: Types::ManagedS3BackupAccess
+      attr_accessor zero_etl_access: Types::ZeroEtlAccess
+      attr_accessor s3_access: Types::S3Access
+      SENSITIVE: []
+    end
+
+    class Month
+      attr_accessor name: ("JANUARY" | "FEBRUARY" | "MARCH" | "APRIL" | "MAY" | "JUNE" | "JULY" | "AUGUST" | "SEPTEMBER" | "OCTOBER" | "NOVEMBER" | "DECEMBER")
+      SENSITIVE: []
+    end
+
+    class OciDnsForwardingConfig
+      attr_accessor domain_name: ::String
+      attr_accessor oci_dns_listener_ip: ::String
+      SENSITIVE: []
+    end
+
+    class OdbNetwork
+      attr_accessor odb_network_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor odb_network_arn: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor client_subnet_cidr: ::String
+      attr_accessor backup_subnet_cidr: ::String
+      attr_accessor custom_domain_name: ::String
+      attr_accessor default_dns_prefix: ::String
+      attr_accessor peered_cidrs: ::Array[::String]
+      attr_accessor oci_network_anchor_id: ::String
+      attr_accessor oci_network_anchor_url: ::String
+      attr_accessor oci_resource_anchor_name: ::String
+      attr_accessor oci_vcn_id: ::String
+      attr_accessor oci_vcn_url: ::String
+      attr_accessor oci_dns_forwarding_configs: ::Array[Types::OciDnsForwardingConfig]
+      attr_accessor created_at: ::Time
+      attr_accessor percent_progress: ::Float
+      attr_accessor managed_services: Types::ManagedServices
+      SENSITIVE: []
+    end
+
+    class OdbNetworkSummary
+      attr_accessor odb_network_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor odb_network_arn: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor client_subnet_cidr: ::String
+      attr_accessor backup_subnet_cidr: ::String
+      attr_accessor custom_domain_name: ::String
+      attr_accessor default_dns_prefix: ::String
+      attr_accessor peered_cidrs: ::Array[::String]
+      attr_accessor oci_network_anchor_id: ::String
+      attr_accessor oci_network_anchor_url: ::String
+      attr_accessor oci_resource_anchor_name: ::String
+      attr_accessor oci_vcn_id: ::String
+      attr_accessor oci_vcn_url: ::String
+      attr_accessor oci_dns_forwarding_configs: ::Array[Types::OciDnsForwardingConfig]
+      attr_accessor created_at: ::Time
+      attr_accessor percent_progress: ::Float
+      attr_accessor managed_services: Types::ManagedServices
+      SENSITIVE: []
+    end
+
+    class OdbPeeringConnection
+      attr_accessor odb_peering_connection_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor odb_peering_connection_arn: ::String
+      attr_accessor odb_network_arn: ::String
+      attr_accessor peer_network_arn: ::String
+      attr_accessor odb_peering_connection_type: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor percent_progress: ::Float
+      SENSITIVE: []
+    end
+
+    class OdbPeeringConnectionSummary
+      attr_accessor odb_peering_connection_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor odb_peering_connection_arn: ::String
+      attr_accessor odb_network_arn: ::String
+      attr_accessor peer_network_arn: ::String
+      attr_accessor odb_peering_connection_type: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor percent_progress: ::Float
+      SENSITIVE: []
+    end
+
+    class RebootDbNodeInput
+      attr_accessor cloud_vm_cluster_id: ::String
+      attr_accessor db_node_id: ::String
+      SENSITIVE: []
+    end
+
+    class RebootDbNodeOutput
+      attr_accessor db_node_id: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "STOPPING" | "STOPPED" | "STARTING")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class S3Access
+      attr_accessor status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING")
+      attr_accessor ipv4_addresses: ::Array[::String]
+      attr_accessor domain_name: ::String
+      attr_accessor s3_policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceNetworkEndpoint
+      attr_accessor vpc_endpoint_id: ::String
+      attr_accessor vpc_endpoint_type: ("SERVICENETWORK")
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class StartDbNodeInput
+      attr_accessor cloud_vm_cluster_id: ::String
+      attr_accessor db_node_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartDbNodeOutput
+      attr_accessor db_node_id: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "STOPPING" | "STOPPED" | "STARTING")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class StopDbNodeInput
+      attr_accessor cloud_vm_cluster_id: ::String
+      attr_accessor db_node_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopDbNodeOutput
+      attr_accessor db_node_id: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "STOPPING" | "STOPPED" | "STARTING")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class SystemVersionSummary
+      attr_accessor gi_version: ::String
+      attr_accessor shape: ::String
+      attr_accessor system_versions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateCloudExadataInfrastructureInput
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      attr_accessor maintenance_window: Types::MaintenanceWindow
+      SENSITIVE: []
+    end
+
+    class UpdateCloudExadataInfrastructureOutput
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateOdbNetworkInput
+      attr_accessor odb_network_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor peered_cidrs_to_be_added: ::Array[::String]
+      attr_accessor peered_cidrs_to_be_removed: ::Array[::String]
+      attr_accessor s3_access: ("ENABLED" | "DISABLED")
+      attr_accessor zero_etl_access: ("ENABLED" | "DISABLED")
+      attr_accessor s3_policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateOdbNetworkOutput
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor odb_network_id: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ZeroEtlAccess
+      attr_accessor status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING")
+      attr_accessor cidr: ::String
+      SENSITIVE: []
+    end
+  end
+end

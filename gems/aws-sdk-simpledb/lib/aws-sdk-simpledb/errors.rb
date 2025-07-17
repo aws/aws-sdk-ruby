@@ -47,7 +47,6 @@ module Aws::SimpleDB
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
-  # Some existing error classes may use a different class name than the one documented.
   module Errors
 
     extend Aws::Errors::DynamicErrors

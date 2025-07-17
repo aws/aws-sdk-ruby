@@ -78,6 +78,37 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _AcceptNetworkFirewallTransitGatewayAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptNetworkFirewallTransitGatewayAttachmentResponse]
+        def transit_gateway_attachment_id: () -> ::String
+        def transit_gateway_attachment_status: () -> ("CREATING" | "DELETING" | "DELETED" | "FAILED" | "ERROR" | "READY" | "PENDING_ACCEPTANCE" | "REJECTING" | "REJECTED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#accept_network_firewall_transit_gateway_attachment-instance_method
+      def accept_network_firewall_transit_gateway_attachment: (
+                                                                transit_gateway_attachment_id: ::String
+                                                              ) -> _AcceptNetworkFirewallTransitGatewayAttachmentResponseSuccess
+                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptNetworkFirewallTransitGatewayAttachmentResponseSuccess
+
+      interface _AssociateAvailabilityZonesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateAvailabilityZonesResponse]
+        def firewall_arn: () -> ::String
+        def firewall_name: () -> ::String
+        def availability_zone_mappings: () -> ::Array[Types::AvailabilityZoneMapping]
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#associate_availability_zones-instance_method
+      def associate_availability_zones: (
+                                          ?update_token: ::String,
+                                          ?firewall_arn: ::String,
+                                          ?firewall_name: ::String,
+                                          availability_zone_mappings: Array[
+                                            {
+                                              availability_zone: ::String
+                                            },
+                                          ]
+                                        ) -> _AssociateAvailabilityZonesResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateAvailabilityZonesResponseSuccess
+
       interface _AssociateFirewallPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateFirewallPolicyResponse]
         def firewall_arn: () -> ::String
@@ -145,7 +176,14 @@ module Aws
                                key_id: ::String?,
                                type: ("CUSTOMER_KMS" | "AWS_OWNED_KMS_KEY")
                              },
-                             ?enabled_analysis_types: Array[("TLS_SNI" | "HTTP_HOST")]
+                             ?enabled_analysis_types: Array[("TLS_SNI" | "HTTP_HOST")],
+                             ?transit_gateway_id: ::String,
+                             ?availability_zone_mappings: Array[
+                               {
+                                 availability_zone: ::String
+                               },
+                             ],
+                             ?availability_zone_change_protection: bool
                            ) -> _CreateFirewallResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFirewallResponseSuccess
 
@@ -186,7 +224,8 @@ module Aws
                                           priority: ::Integer?,
                                           override: {
                                             action: ("DROP_TO_ALERT")?
-                                          }?
+                                          }?,
+                                          deep_threat_inspection: bool?
                                         },
                                       ]?,
                                       stateful_default_actions: Array[::String]?,
@@ -252,7 +291,7 @@ module Aws
                                      {
                                        action: ("PASS" | "DROP" | "ALERT" | "REJECT"),
                                        header: {
-                                         protocol: ("IP" | "TCP" | "UDP" | "ICMP" | "HTTP" | "FTP" | "TLS" | "SMB" | "DNS" | "DCERPC" | "SSH" | "SMTP" | "IMAP" | "MSN" | "KRB5" | "IKEV2" | "TFTP" | "NTP" | "DHCP"),
+                                         protocol: ("IP" | "TCP" | "UDP" | "ICMP" | "HTTP" | "FTP" | "TLS" | "SMB" | "DNS" | "DCERPC" | "SSH" | "SMTP" | "IMAP" | "MSN" | "KRB5" | "IKEV2" | "TFTP" | "NTP" | "DHCP" | "HTTP2" | "QUIC"),
                                          source: ::String,
                                          source_port: ::String,
                                          direction: ("FORWARD" | "ANY"),
@@ -346,7 +385,10 @@ module Aws
                                  source_arn: ::String?,
                                  source_update_token: ::String?
                                },
-                               ?analyze_rule_group: bool
+                               ?analyze_rule_group: bool,
+                               ?summary_configuration: {
+                                 rule_options: Array[("SID" | "MSG" | "METADATA")]?
+                               }
                              ) -> _CreateRuleGroupResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRuleGroupResponseSuccess
 
@@ -415,6 +457,29 @@ module Aws
                                                ) -> _CreateTLSInspectionConfigurationResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTLSInspectionConfigurationResponseSuccess
 
+      interface _CreateVpcEndpointAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVpcEndpointAssociationResponse]
+        def vpc_endpoint_association: () -> Types::VpcEndpointAssociation
+        def vpc_endpoint_association_status: () -> Types::VpcEndpointAssociationStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#create_vpc_endpoint_association-instance_method
+      def create_vpc_endpoint_association: (
+                                             firewall_arn: ::String,
+                                             vpc_id: ::String,
+                                             subnet_mapping: {
+                                               subnet_id: ::String,
+                                               ip_address_type: ("DUALSTACK" | "IPV4" | "IPV6")?
+                                             },
+                                             ?description: ::String,
+                                             ?tags: Array[
+                                               {
+                                                 key: ::String,
+                                                 value: ::String
+                                               },
+                                             ]
+                                           ) -> _CreateVpcEndpointAssociationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVpcEndpointAssociationResponseSuccess
+
       interface _DeleteFirewallResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFirewallResponse]
         def firewall: () -> Types::Firewall
@@ -437,6 +502,17 @@ module Aws
                                     ?firewall_policy_arn: ::String
                                   ) -> _DeleteFirewallPolicyResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFirewallPolicyResponseSuccess
+
+      interface _DeleteNetworkFirewallTransitGatewayAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNetworkFirewallTransitGatewayAttachmentResponse]
+        def transit_gateway_attachment_id: () -> ::String
+        def transit_gateway_attachment_status: () -> ("CREATING" | "DELETING" | "DELETED" | "FAILED" | "ERROR" | "READY" | "PENDING_ACCEPTANCE" | "REJECTING" | "REJECTED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#delete_network_firewall_transit_gateway_attachment-instance_method
+      def delete_network_firewall_transit_gateway_attachment: (
+                                                                transit_gateway_attachment_id: ::String
+                                                              ) -> _DeleteNetworkFirewallTransitGatewayAttachmentResponseSuccess
+                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNetworkFirewallTransitGatewayAttachmentResponseSuccess
 
       interface _DeleteResourcePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePolicyResponse]
@@ -470,6 +546,17 @@ module Aws
                                                ) -> _DeleteTLSInspectionConfigurationResponseSuccess
                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTLSInspectionConfigurationResponseSuccess
 
+      interface _DeleteVpcEndpointAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVpcEndpointAssociationResponse]
+        def vpc_endpoint_association: () -> Types::VpcEndpointAssociation
+        def vpc_endpoint_association_status: () -> Types::VpcEndpointAssociationStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#delete_vpc_endpoint_association-instance_method
+      def delete_vpc_endpoint_association: (
+                                             vpc_endpoint_association_arn: ::String
+                                           ) -> _DeleteVpcEndpointAssociationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVpcEndpointAssociationResponseSuccess
+
       interface _DescribeFirewallResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFirewallResponse]
         def update_token: () -> ::String
@@ -482,6 +569,21 @@ module Aws
                                ?firewall_arn: ::String
                              ) -> _DescribeFirewallResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFirewallResponseSuccess
+
+      interface _DescribeFirewallMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFirewallMetadataResponse]
+        def firewall_arn: () -> ::String
+        def firewall_policy_arn: () -> ::String
+        def description: () -> ::String
+        def status: () -> ("PROVISIONING" | "DELETING" | "READY")
+        def supported_availability_zones: () -> ::Hash[::String, Types::AvailabilityZoneMetadata]
+        def transit_gateway_attachment_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_firewall_metadata-instance_method
+      def describe_firewall_metadata: (
+                                        ?firewall_arn: ::String
+                                      ) -> _DescribeFirewallMetadataResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFirewallMetadataResponseSuccess
 
       interface _DescribeFirewallPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFirewallPolicyResponse]
@@ -500,6 +602,8 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFlowOperationResponse]
         def firewall_arn: () -> ::String
         def availability_zone: () -> ::String
+        def vpc_endpoint_association_arn: () -> ::String
+        def vpc_endpoint_id: () -> ::String
         def flow_operation_id: () -> ::String
         def flow_operation_type: () -> ("FLOW_FLUSH" | "FLOW_CAPTURE")
         def flow_operation_status: () -> ("COMPLETED" | "IN_PROGRESS" | "FAILED" | "COMPLETED_WITH_ERRORS")
@@ -511,6 +615,8 @@ module Aws
       def describe_flow_operation: (
                                      firewall_arn: ::String,
                                      ?availability_zone: ::String,
+                                     ?vpc_endpoint_association_arn: ::String,
+                                     ?vpc_endpoint_id: ::String,
                                      flow_operation_id: ::String
                                    ) -> _DescribeFlowOperationResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFlowOperationResponseSuccess
@@ -519,6 +625,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLoggingConfigurationResponse]
         def firewall_arn: () -> ::String
         def logging_configuration: () -> Types::LoggingConfiguration
+        def enable_monitoring_dashboard: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_logging_configuration-instance_method
       def describe_logging_configuration: (
@@ -570,6 +677,20 @@ module Aws
                                         ) -> _DescribeRuleGroupMetadataResponseSuccess
                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRuleGroupMetadataResponseSuccess
 
+      interface _DescribeRuleGroupSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRuleGroupSummaryResponse]
+        def rule_group_name: () -> ::String
+        def description: () -> ::String
+        def summary: () -> Types::Summary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_rule_group_summary-instance_method
+      def describe_rule_group_summary: (
+                                         ?rule_group_name: ::String,
+                                         ?rule_group_arn: ::String,
+                                         ?type: ("STATELESS" | "STATEFUL")
+                                       ) -> _DescribeRuleGroupSummaryResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRuleGroupSummaryResponseSuccess
+
       interface _DescribeTLSInspectionConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTLSInspectionConfigurationResponse]
         def update_token: () -> ::String
@@ -582,6 +703,37 @@ module Aws
                                                    ?tls_inspection_configuration_name: ::String
                                                  ) -> _DescribeTLSInspectionConfigurationResponseSuccess
                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTLSInspectionConfigurationResponseSuccess
+
+      interface _DescribeVpcEndpointAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVpcEndpointAssociationResponse]
+        def vpc_endpoint_association: () -> Types::VpcEndpointAssociation
+        def vpc_endpoint_association_status: () -> Types::VpcEndpointAssociationStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_vpc_endpoint_association-instance_method
+      def describe_vpc_endpoint_association: (
+                                               vpc_endpoint_association_arn: ::String
+                                             ) -> _DescribeVpcEndpointAssociationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVpcEndpointAssociationResponseSuccess
+
+      interface _DisassociateAvailabilityZonesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateAvailabilityZonesResponse]
+        def firewall_arn: () -> ::String
+        def firewall_name: () -> ::String
+        def availability_zone_mappings: () -> ::Array[Types::AvailabilityZoneMapping]
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#disassociate_availability_zones-instance_method
+      def disassociate_availability_zones: (
+                                             ?update_token: ::String,
+                                             ?firewall_arn: ::String,
+                                             ?firewall_name: ::String,
+                                             availability_zone_mappings: Array[
+                                               {
+                                                 availability_zone: ::String
+                                               },
+                                             ]
+                                           ) -> _DisassociateAvailabilityZonesResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateAvailabilityZonesResponseSuccess
 
       interface _DisassociateSubnetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateSubnetsResponse]
@@ -662,6 +814,8 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFlowOperationResultsResponse]
         def firewall_arn: () -> ::String
         def availability_zone: () -> ::String
+        def vpc_endpoint_association_arn: () -> ::String
+        def vpc_endpoint_id: () -> ::String
         def flow_operation_id: () -> ::String
         def flow_operation_status: () -> ("COMPLETED" | "IN_PROGRESS" | "FAILED" | "COMPLETED_WITH_ERRORS")
         def status_message: () -> ::String
@@ -675,7 +829,9 @@ module Aws
                                          flow_operation_id: ::String,
                                          ?next_token: ::String,
                                          ?max_results: ::Integer,
-                                         ?availability_zone: ::String
+                                         ?availability_zone: ::String,
+                                         ?vpc_endpoint_id: ::String,
+                                         ?vpc_endpoint_association_arn: ::String
                                        ) -> _ListFlowOperationResultsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFlowOperationResultsResponseSuccess
 
@@ -688,6 +844,8 @@ module Aws
       def list_flow_operations: (
                                   firewall_arn: ::String,
                                   ?availability_zone: ::String,
+                                  ?vpc_endpoint_association_arn: ::String,
+                                  ?vpc_endpoint_id: ::String,
                                   ?flow_operation_type: ("FLOW_FLUSH" | "FLOW_CAPTURE"),
                                   ?next_token: ::String,
                                   ?max_results: ::Integer
@@ -704,7 +862,7 @@ module Aws
                               ?next_token: ::String,
                               ?max_results: ::Integer,
                               ?scope: ("MANAGED" | "ACCOUNT"),
-                              ?managed_type: ("AWS_MANAGED_THREAT_SIGNATURES" | "AWS_MANAGED_DOMAIN_LISTS"),
+                              ?managed_type: ("AWS_MANAGED_THREAT_SIGNATURES" | "AWS_MANAGED_DOMAIN_LISTS" | "ACTIVE_THREAT_DEFENSE"),
                               ?type: ("STATELESS" | "STATEFUL")
                             ) -> _ListRuleGroupsResponseSuccess
                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRuleGroupsResponseSuccess
@@ -734,6 +892,19 @@ module Aws
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
+      interface _ListVpcEndpointAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVpcEndpointAssociationsResponse]
+        def next_token: () -> ::String
+        def vpc_endpoint_associations: () -> ::Array[Types::VpcEndpointAssociationMetadata]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#list_vpc_endpoint_associations-instance_method
+      def list_vpc_endpoint_associations: (
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer,
+                                            ?firewall_arn: ::String
+                                          ) -> _ListVpcEndpointAssociationsResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVpcEndpointAssociationsResponseSuccess
+
       interface _PutResourcePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
       end
@@ -743,6 +914,17 @@ module Aws
                                  policy: ::String
                                ) -> _PutResourcePolicyResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _RejectNetworkFirewallTransitGatewayAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectNetworkFirewallTransitGatewayAttachmentResponse]
+        def transit_gateway_attachment_id: () -> ::String
+        def transit_gateway_attachment_status: () -> ("CREATING" | "DELETING" | "DELETED" | "FAILED" | "ERROR" | "READY" | "PENDING_ACCEPTANCE" | "REJECTING" | "REJECTED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#reject_network_firewall_transit_gateway_attachment-instance_method
+      def reject_network_firewall_transit_gateway_attachment: (
+                                                                transit_gateway_attachment_id: ::String
+                                                              ) -> _RejectNetworkFirewallTransitGatewayAttachmentResponseSuccess
+                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectNetworkFirewallTransitGatewayAttachmentResponseSuccess
 
       interface _StartAnalysisReportResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartAnalysisReportResponse]
@@ -766,6 +948,8 @@ module Aws
       def start_flow_capture: (
                                 firewall_arn: ::String,
                                 ?availability_zone: ::String,
+                                ?vpc_endpoint_association_arn: ::String,
+                                ?vpc_endpoint_id: ::String,
                                 ?minimum_flow_age_in_seconds: ::Integer,
                                 flow_filters: Array[
                                   {
@@ -793,6 +977,8 @@ module Aws
       def start_flow_flush: (
                               firewall_arn: ::String,
                               ?availability_zone: ::String,
+                              ?vpc_endpoint_association_arn: ::String,
+                              ?vpc_endpoint_id: ::String,
                               ?minimum_flow_age_in_seconds: ::Integer,
                               flow_filters: Array[
                                 {
@@ -834,6 +1020,22 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAvailabilityZoneChangeProtectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAvailabilityZoneChangeProtectionResponse]
+        def update_token: () -> ::String
+        def firewall_arn: () -> ::String
+        def firewall_name: () -> ::String
+        def availability_zone_change_protection: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#update_availability_zone_change_protection-instance_method
+      def update_availability_zone_change_protection: (
+                                                        ?update_token: ::String,
+                                                        ?firewall_arn: ::String,
+                                                        ?firewall_name: ::String,
+                                                        availability_zone_change_protection: bool
+                                                      ) -> _UpdateAvailabilityZoneChangeProtectionResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAvailabilityZoneChangeProtectionResponseSuccess
 
       interface _UpdateFirewallAnalysisSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFirewallAnalysisSettingsResponse]
@@ -941,7 +1143,8 @@ module Aws
                                           priority: ::Integer?,
                                           override: {
                                             action: ("DROP_TO_ALERT")?
-                                          }?
+                                          }?,
+                                          deep_threat_inspection: bool?
                                         },
                                       ]?,
                                       stateful_default_actions: Array[::String]?,
@@ -989,6 +1192,7 @@ module Aws
         def firewall_arn: () -> ::String
         def firewall_name: () -> ::String
         def logging_configuration: () -> Types::LoggingConfiguration
+        def enable_monitoring_dashboard: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#update_logging_configuration-instance_method
       def update_logging_configuration: (
@@ -1002,7 +1206,8 @@ module Aws
                                                 log_destination: Hash[::String, ::String]
                                               },
                                             ]
-                                          }
+                                          },
+                                          ?enable_monitoring_dashboard: bool
                                         ) -> _UpdateLoggingConfigurationResponseSuccess
                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLoggingConfigurationResponseSuccess
 
@@ -1041,7 +1246,7 @@ module Aws
                                      {
                                        action: ("PASS" | "DROP" | "ALERT" | "REJECT"),
                                        header: {
-                                         protocol: ("IP" | "TCP" | "UDP" | "ICMP" | "HTTP" | "FTP" | "TLS" | "SMB" | "DNS" | "DCERPC" | "SSH" | "SMTP" | "IMAP" | "MSN" | "KRB5" | "IKEV2" | "TFTP" | "NTP" | "DHCP"),
+                                         protocol: ("IP" | "TCP" | "UDP" | "ICMP" | "HTTP" | "FTP" | "TLS" | "SMB" | "DNS" | "DCERPC" | "SSH" | "SMTP" | "IMAP" | "MSN" | "KRB5" | "IKEV2" | "TFTP" | "NTP" | "DHCP" | "HTTP2" | "QUIC"),
                                          source: ::String,
                                          source_port: ::String,
                                          direction: ("FORWARD" | "ANY"),
@@ -1128,7 +1333,10 @@ module Aws
                                  source_arn: ::String?,
                                  source_update_token: ::String?
                                },
-                               ?analyze_rule_group: bool
+                               ?analyze_rule_group: bool,
+                               ?summary_configuration: {
+                                 rule_options: Array[("SID" | "MSG" | "METADATA")]?
+                               }
                              ) -> _UpdateRuleGroupResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRuleGroupResponseSuccess
 

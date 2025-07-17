@@ -17,11 +17,16 @@ module Aws::Bedrock
     AcceptEula = Shapes::BooleanShape.new(name: 'AcceptEula')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
+    AcknowledgementFormDataBody = Shapes::BlobShape.new(name: 'AcknowledgementFormDataBody')
     AdditionalModelRequestFields = Shapes::MapShape.new(name: 'AdditionalModelRequestFields')
     AdditionalModelRequestFieldsKey = Shapes::StringShape.new(name: 'AdditionalModelRequestFieldsKey')
     AdditionalModelRequestFieldsValue = Shapes::DocumentShape.new(name: 'AdditionalModelRequestFieldsValue', document: true)
+    AgreementAvailability = Shapes::StructureShape.new(name: 'AgreementAvailability')
+    AgreementStatus = Shapes::StringShape.new(name: 'AgreementStatus')
     ApplicationType = Shapes::StringShape.new(name: 'ApplicationType')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AttributeType = Shapes::StringShape.new(name: 'AttributeType')
+    AuthorizationStatus = Shapes::StringShape.new(name: 'AuthorizationStatus')
     AutomatedEvaluationConfig = Shapes::StructureShape.new(name: 'AutomatedEvaluationConfig')
     AutomatedEvaluationCustomMetricConfig = Shapes::StructureShape.new(name: 'AutomatedEvaluationCustomMetricConfig')
     AutomatedEvaluationCustomMetricSource = Shapes::UnionShape.new(name: 'AutomatedEvaluationCustomMetricSource')
@@ -37,6 +42,7 @@ module Aws::Bedrock
     BedrockEvaluatorModels = Shapes::ListShape.new(name: 'BedrockEvaluatorModels')
     BedrockModelArn = Shapes::StringShape.new(name: 'BedrockModelArn')
     BedrockModelId = Shapes::StringShape.new(name: 'BedrockModelId')
+    BedrockRerankingModelArn = Shapes::StringShape.new(name: 'BedrockRerankingModelArn')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BrandedName = Shapes::StringShape.new(name: 'BrandedName')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
@@ -46,8 +52,14 @@ module Aws::Bedrock
     CommitmentDuration = Shapes::StringShape.new(name: 'CommitmentDuration')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
+    CreateCustomModelDeploymentRequest = Shapes::StructureShape.new(name: 'CreateCustomModelDeploymentRequest')
+    CreateCustomModelDeploymentResponse = Shapes::StructureShape.new(name: 'CreateCustomModelDeploymentResponse')
+    CreateCustomModelRequest = Shapes::StructureShape.new(name: 'CreateCustomModelRequest')
+    CreateCustomModelResponse = Shapes::StructureShape.new(name: 'CreateCustomModelResponse')
     CreateEvaluationJobRequest = Shapes::StructureShape.new(name: 'CreateEvaluationJobRequest')
     CreateEvaluationJobResponse = Shapes::StructureShape.new(name: 'CreateEvaluationJobResponse')
+    CreateFoundationModelAgreementRequest = Shapes::StructureShape.new(name: 'CreateFoundationModelAgreementRequest')
+    CreateFoundationModelAgreementResponse = Shapes::StructureShape.new(name: 'CreateFoundationModelAgreementResponse')
     CreateGuardrailRequest = Shapes::StructureShape.new(name: 'CreateGuardrailRequest')
     CreateGuardrailResponse = Shapes::StructureShape.new(name: 'CreateGuardrailResponse')
     CreateGuardrailVersionRequest = Shapes::StructureShape.new(name: 'CreateGuardrailVersionRequest')
@@ -74,6 +86,12 @@ module Aws::Bedrock
     CustomMetricEvaluatorModelConfig = Shapes::StructureShape.new(name: 'CustomMetricEvaluatorModelConfig')
     CustomMetricInstructions = Shapes::StringShape.new(name: 'CustomMetricInstructions')
     CustomModelArn = Shapes::StringShape.new(name: 'CustomModelArn')
+    CustomModelDeploymentArn = Shapes::StringShape.new(name: 'CustomModelDeploymentArn')
+    CustomModelDeploymentDescription = Shapes::StringShape.new(name: 'CustomModelDeploymentDescription')
+    CustomModelDeploymentIdentifier = Shapes::StringShape.new(name: 'CustomModelDeploymentIdentifier')
+    CustomModelDeploymentStatus = Shapes::StringShape.new(name: 'CustomModelDeploymentStatus')
+    CustomModelDeploymentSummary = Shapes::StructureShape.new(name: 'CustomModelDeploymentSummary')
+    CustomModelDeploymentSummaryList = Shapes::ListShape.new(name: 'CustomModelDeploymentSummaryList')
     CustomModelName = Shapes::StringShape.new(name: 'CustomModelName')
     CustomModelSummary = Shapes::StructureShape.new(name: 'CustomModelSummary')
     CustomModelSummaryList = Shapes::ListShape.new(name: 'CustomModelSummaryList')
@@ -81,8 +99,13 @@ module Aws::Bedrock
     CustomModelUnitsVersion = Shapes::StringShape.new(name: 'CustomModelUnitsVersion')
     CustomizationConfig = Shapes::UnionShape.new(name: 'CustomizationConfig')
     CustomizationType = Shapes::StringShape.new(name: 'CustomizationType')
+    DataProcessingDetails = Shapes::StructureShape.new(name: 'DataProcessingDetails')
+    DeleteCustomModelDeploymentRequest = Shapes::StructureShape.new(name: 'DeleteCustomModelDeploymentRequest')
+    DeleteCustomModelDeploymentResponse = Shapes::StructureShape.new(name: 'DeleteCustomModelDeploymentResponse')
     DeleteCustomModelRequest = Shapes::StructureShape.new(name: 'DeleteCustomModelRequest')
     DeleteCustomModelResponse = Shapes::StructureShape.new(name: 'DeleteCustomModelResponse')
+    DeleteFoundationModelAgreementRequest = Shapes::StructureShape.new(name: 'DeleteFoundationModelAgreementRequest')
+    DeleteFoundationModelAgreementResponse = Shapes::StructureShape.new(name: 'DeleteFoundationModelAgreementResponse')
     DeleteGuardrailRequest = Shapes::StructureShape.new(name: 'DeleteGuardrailRequest')
     DeleteGuardrailResponse = Shapes::StructureShape.new(name: 'DeleteGuardrailResponse')
     DeleteImportedModelRequest = Shapes::StructureShape.new(name: 'DeleteImportedModelRequest')
@@ -99,9 +122,11 @@ module Aws::Bedrock
     DeleteProvisionedModelThroughputResponse = Shapes::StructureShape.new(name: 'DeleteProvisionedModelThroughputResponse')
     DeregisterMarketplaceModelEndpointRequest = Shapes::StructureShape.new(name: 'DeregisterMarketplaceModelEndpointRequest')
     DeregisterMarketplaceModelEndpointResponse = Shapes::StructureShape.new(name: 'DeregisterMarketplaceModelEndpointResponse')
+    DimensionalPriceRate = Shapes::StructureShape.new(name: 'DimensionalPriceRate')
     DistillationConfig = Shapes::StructureShape.new(name: 'DistillationConfig')
     EndpointConfig = Shapes::UnionShape.new(name: 'EndpointConfig')
     EndpointName = Shapes::StringShape.new(name: 'EndpointName')
+    EntitlementAvailability = Shapes::StringShape.new(name: 'EntitlementAvailability')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorMessages = Shapes::ListShape.new(name: 'ErrorMessages')
     EvaluationBedrockKnowledgeBaseIdentifiers = Shapes::ListShape.new(name: 'EvaluationBedrockKnowledgeBaseIdentifiers')
@@ -153,6 +178,9 @@ module Aws::Bedrock
     ExternalSources = Shapes::ListShape.new(name: 'ExternalSources')
     ExternalSourcesGenerationConfiguration = Shapes::StructureShape.new(name: 'ExternalSourcesGenerationConfiguration')
     ExternalSourcesRetrieveAndGenerateConfiguration = Shapes::StructureShape.new(name: 'ExternalSourcesRetrieveAndGenerateConfiguration')
+    FieldForReranking = Shapes::StructureShape.new(name: 'FieldForReranking')
+    FieldForRerankingFieldNameString = Shapes::StringShape.new(name: 'FieldForRerankingFieldNameString')
+    FieldsForReranking = Shapes::ListShape.new(name: 'FieldsForReranking')
     FilterAttribute = Shapes::StructureShape.new(name: 'FilterAttribute')
     FilterKey = Shapes::StringShape.new(name: 'FilterKey')
     FilterValue = Shapes::DocumentShape.new(name: 'FilterValue', document: true)
@@ -165,10 +193,14 @@ module Aws::Bedrock
     FoundationModelSummary = Shapes::StructureShape.new(name: 'FoundationModelSummary')
     FoundationModelSummaryList = Shapes::ListShape.new(name: 'FoundationModelSummaryList')
     GenerationConfiguration = Shapes::StructureShape.new(name: 'GenerationConfiguration')
+    GetCustomModelDeploymentRequest = Shapes::StructureShape.new(name: 'GetCustomModelDeploymentRequest')
+    GetCustomModelDeploymentResponse = Shapes::StructureShape.new(name: 'GetCustomModelDeploymentResponse')
     GetCustomModelRequest = Shapes::StructureShape.new(name: 'GetCustomModelRequest')
     GetCustomModelResponse = Shapes::StructureShape.new(name: 'GetCustomModelResponse')
     GetEvaluationJobRequest = Shapes::StructureShape.new(name: 'GetEvaluationJobRequest')
     GetEvaluationJobResponse = Shapes::StructureShape.new(name: 'GetEvaluationJobResponse')
+    GetFoundationModelAvailabilityRequest = Shapes::StructureShape.new(name: 'GetFoundationModelAvailabilityRequest')
+    GetFoundationModelAvailabilityResponse = Shapes::StructureShape.new(name: 'GetFoundationModelAvailabilityResponse')
     GetFoundationModelRequest = Shapes::StructureShape.new(name: 'GetFoundationModelRequest')
     GetFoundationModelResponse = Shapes::StructureShape.new(name: 'GetFoundationModelResponse')
     GetGuardrailRequest = Shapes::StructureShape.new(name: 'GetGuardrailRequest')
@@ -193,6 +225,8 @@ module Aws::Bedrock
     GetPromptRouterResponse = Shapes::StructureShape.new(name: 'GetPromptRouterResponse')
     GetProvisionedModelThroughputRequest = Shapes::StructureShape.new(name: 'GetProvisionedModelThroughputRequest')
     GetProvisionedModelThroughputResponse = Shapes::StructureShape.new(name: 'GetProvisionedModelThroughputResponse')
+    GetUseCaseForModelAccessRequest = Shapes::StructureShape.new(name: 'GetUseCaseForModelAccessRequest')
+    GetUseCaseForModelAccessResponse = Shapes::StructureShape.new(name: 'GetUseCaseForModelAccessResponse')
     GuardrailArn = Shapes::StringShape.new(name: 'GuardrailArn')
     GuardrailBlockedMessaging = Shapes::StringShape.new(name: 'GuardrailBlockedMessaging')
     GuardrailConfiguration = Shapes::StructureShape.new(name: 'GuardrailConfiguration')
@@ -204,6 +238,9 @@ module Aws::Bedrock
     GuardrailContentFilterType = Shapes::StringShape.new(name: 'GuardrailContentFilterType')
     GuardrailContentFilters = Shapes::ListShape.new(name: 'GuardrailContentFilters')
     GuardrailContentFiltersConfig = Shapes::ListShape.new(name: 'GuardrailContentFiltersConfig')
+    GuardrailContentFiltersTier = Shapes::StructureShape.new(name: 'GuardrailContentFiltersTier')
+    GuardrailContentFiltersTierConfig = Shapes::StructureShape.new(name: 'GuardrailContentFiltersTierConfig')
+    GuardrailContentFiltersTierName = Shapes::StringShape.new(name: 'GuardrailContentFiltersTierName')
     GuardrailContentPolicy = Shapes::StructureShape.new(name: 'GuardrailContentPolicy')
     GuardrailContentPolicyConfig = Shapes::StructureShape.new(name: 'GuardrailContentPolicyConfig')
     GuardrailContextualGroundingAction = Shapes::StringShape.new(name: 'GuardrailContextualGroundingAction')
@@ -216,6 +253,11 @@ module Aws::Bedrock
     GuardrailContextualGroundingFiltersConfig = Shapes::ListShape.new(name: 'GuardrailContextualGroundingFiltersConfig')
     GuardrailContextualGroundingPolicy = Shapes::StructureShape.new(name: 'GuardrailContextualGroundingPolicy')
     GuardrailContextualGroundingPolicyConfig = Shapes::StructureShape.new(name: 'GuardrailContextualGroundingPolicyConfig')
+    GuardrailCrossRegionConfig = Shapes::StructureShape.new(name: 'GuardrailCrossRegionConfig')
+    GuardrailCrossRegionDetails = Shapes::StructureShape.new(name: 'GuardrailCrossRegionDetails')
+    GuardrailCrossRegionGuardrailProfileArn = Shapes::StringShape.new(name: 'GuardrailCrossRegionGuardrailProfileArn')
+    GuardrailCrossRegionGuardrailProfileId = Shapes::StringShape.new(name: 'GuardrailCrossRegionGuardrailProfileId')
+    GuardrailCrossRegionGuardrailProfileIdentifier = Shapes::StringShape.new(name: 'GuardrailCrossRegionGuardrailProfileIdentifier')
     GuardrailDescription = Shapes::StringShape.new(name: 'GuardrailDescription')
     GuardrailDraftVersion = Shapes::StringShape.new(name: 'GuardrailDraftVersion')
     GuardrailFailureRecommendation = Shapes::StringShape.new(name: 'GuardrailFailureRecommendation')
@@ -267,6 +309,9 @@ module Aws::Bedrock
     GuardrailTopicType = Shapes::StringShape.new(name: 'GuardrailTopicType')
     GuardrailTopics = Shapes::ListShape.new(name: 'GuardrailTopics')
     GuardrailTopicsConfig = Shapes::ListShape.new(name: 'GuardrailTopicsConfig')
+    GuardrailTopicsTier = Shapes::StructureShape.new(name: 'GuardrailTopicsTier')
+    GuardrailTopicsTierConfig = Shapes::StructureShape.new(name: 'GuardrailTopicsTierConfig')
+    GuardrailTopicsTierName = Shapes::StringShape.new(name: 'GuardrailTopicsTierName')
     GuardrailVersion = Shapes::StringShape.new(name: 'GuardrailVersion')
     GuardrailWord = Shapes::StructureShape.new(name: 'GuardrailWord')
     GuardrailWordAction = Shapes::StringShape.new(name: 'GuardrailWordAction')
@@ -284,6 +329,7 @@ module Aws::Bedrock
     HumanWorkflowConfig = Shapes::StructureShape.new(name: 'HumanWorkflowConfig')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
+    ImplicitFilterConfiguration = Shapes::StructureShape.new(name: 'ImplicitFilterConfiguration')
     ImportedModelArn = Shapes::StringShape.new(name: 'ImportedModelArn')
     ImportedModelIdentifier = Shapes::StringShape.new(name: 'ImportedModelIdentifier')
     ImportedModelName = Shapes::StringShape.new(name: 'ImportedModelName')
@@ -312,6 +358,7 @@ module Aws::Bedrock
     InvocationLogSource = Shapes::UnionShape.new(name: 'InvocationLogSource')
     InvocationLogsConfig = Shapes::StructureShape.new(name: 'InvocationLogsConfig')
     JobName = Shapes::StringShape.new(name: 'JobName')
+    JobStatusDetails = Shapes::StringShape.new(name: 'JobStatusDetails')
     KbInferenceConfig = Shapes::StructureShape.new(name: 'KbInferenceConfig')
     KeyPrefix = Shapes::StringShape.new(name: 'KeyPrefix')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
@@ -322,10 +369,15 @@ module Aws::Bedrock
     KnowledgeBaseRetrieveAndGenerateConfiguration = Shapes::StructureShape.new(name: 'KnowledgeBaseRetrieveAndGenerateConfiguration')
     KnowledgeBaseVectorSearchConfiguration = Shapes::StructureShape.new(name: 'KnowledgeBaseVectorSearchConfiguration')
     KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger = Shapes::IntegerShape.new(name: 'KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger')
+    LegalTerm = Shapes::StructureShape.new(name: 'LegalTerm')
+    ListCustomModelDeploymentsRequest = Shapes::StructureShape.new(name: 'ListCustomModelDeploymentsRequest')
+    ListCustomModelDeploymentsResponse = Shapes::StructureShape.new(name: 'ListCustomModelDeploymentsResponse')
     ListCustomModelsRequest = Shapes::StructureShape.new(name: 'ListCustomModelsRequest')
     ListCustomModelsResponse = Shapes::StructureShape.new(name: 'ListCustomModelsResponse')
     ListEvaluationJobsRequest = Shapes::StructureShape.new(name: 'ListEvaluationJobsRequest')
     ListEvaluationJobsResponse = Shapes::StructureShape.new(name: 'ListEvaluationJobsResponse')
+    ListFoundationModelAgreementOffersRequest = Shapes::StructureShape.new(name: 'ListFoundationModelAgreementOffersRequest')
+    ListFoundationModelAgreementOffersResponse = Shapes::StructureShape.new(name: 'ListFoundationModelAgreementOffersResponse')
     ListFoundationModelsRequest = Shapes::StructureShape.new(name: 'ListFoundationModelsRequest')
     ListFoundationModelsResponse = Shapes::StructureShape.new(name: 'ListFoundationModelsResponse')
     ListGuardrailsRequest = Shapes::StructureShape.new(name: 'ListGuardrailsRequest')
@@ -358,6 +410,11 @@ module Aws::Bedrock
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxTokens = Shapes::IntegerShape.new(name: 'MaxTokens')
     Message = Shapes::StringShape.new(name: 'Message')
+    MetadataAttributeSchema = Shapes::StructureShape.new(name: 'MetadataAttributeSchema')
+    MetadataAttributeSchemaDescriptionString = Shapes::StringShape.new(name: 'MetadataAttributeSchemaDescriptionString')
+    MetadataAttributeSchemaKeyString = Shapes::StringShape.new(name: 'MetadataAttributeSchemaKeyString')
+    MetadataAttributeSchemaList = Shapes::ListShape.new(name: 'MetadataAttributeSchemaList')
+    MetadataConfigurationForReranking = Shapes::StructureShape.new(name: 'MetadataConfigurationForReranking')
     MetricFloat = Shapes::FloatShape.new(name: 'MetricFloat')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     ModelArchitecture = Shapes::StringShape.new(name: 'ModelArchitecture')
@@ -375,6 +432,7 @@ module Aws::Bedrock
     ModelCustomizationJobSummary = Shapes::StructureShape.new(name: 'ModelCustomizationJobSummary')
     ModelCustomizationList = Shapes::ListShape.new(name: 'ModelCustomizationList')
     ModelDataSource = Shapes::UnionShape.new(name: 'ModelDataSource')
+    ModelDeploymentName = Shapes::StringShape.new(name: 'ModelDeploymentName')
     ModelId = Shapes::StringShape.new(name: 'ModelId')
     ModelIdentifier = Shapes::StringShape.new(name: 'ModelIdentifier')
     ModelImportJobArn = Shapes::StringShape.new(name: 'ModelImportJobArn')
@@ -398,13 +456,20 @@ module Aws::Bedrock
     ModelModalityList = Shapes::ListShape.new(name: 'ModelModalityList')
     ModelName = Shapes::StringShape.new(name: 'ModelName')
     ModelSourceIdentifier = Shapes::StringShape.new(name: 'ModelSourceIdentifier')
+    ModelStatus = Shapes::StringShape.new(name: 'ModelStatus')
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
+    Offer = Shapes::StructureShape.new(name: 'Offer')
+    OfferId = Shapes::StringShape.new(name: 'OfferId')
+    OfferToken = Shapes::StringShape.new(name: 'OfferToken')
+    OfferType = Shapes::StringShape.new(name: 'OfferType')
+    Offers = Shapes::ListShape.new(name: 'Offers')
     OrchestrationConfiguration = Shapes::StructureShape.new(name: 'OrchestrationConfiguration')
     OutputDataConfig = Shapes::StructureShape.new(name: 'OutputDataConfig')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PerformanceConfigLatency = Shapes::StringShape.new(name: 'PerformanceConfigLatency')
     PerformanceConfiguration = Shapes::StructureShape.new(name: 'PerformanceConfiguration')
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
+    PricingTerm = Shapes::StructureShape.new(name: 'PricingTerm')
     PromptRouterArn = Shapes::StringShape.new(name: 'PromptRouterArn')
     PromptRouterDescription = Shapes::StringShape.new(name: 'PromptRouterDescription')
     PromptRouterName = Shapes::StringShape.new(name: 'PromptRouterName')
@@ -425,17 +490,21 @@ module Aws::Bedrock
     ProvisionedModelSummary = Shapes::StructureShape.new(name: 'ProvisionedModelSummary')
     PutModelInvocationLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'PutModelInvocationLoggingConfigurationRequest')
     PutModelInvocationLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'PutModelInvocationLoggingConfigurationResponse')
+    PutUseCaseForModelAccessRequest = Shapes::StructureShape.new(name: 'PutUseCaseForModelAccessRequest')
+    PutUseCaseForModelAccessResponse = Shapes::StructureShape.new(name: 'PutUseCaseForModelAccessResponse')
     QueryTransformationConfiguration = Shapes::StructureShape.new(name: 'QueryTransformationConfiguration')
     QueryTransformationType = Shapes::StringShape.new(name: 'QueryTransformationType')
     RAGConfig = Shapes::UnionShape.new(name: 'RAGConfig')
     RAGStopSequences = Shapes::ListShape.new(name: 'RAGStopSequences')
     RAGStopSequencesMemberString = Shapes::StringShape.new(name: 'RAGStopSequencesMemberString')
     RagConfigs = Shapes::ListShape.new(name: 'RagConfigs')
+    RateCard = Shapes::ListShape.new(name: 'RateCard')
     RatingScale = Shapes::ListShape.new(name: 'RatingScale')
     RatingScaleItem = Shapes::StructureShape.new(name: 'RatingScaleItem')
     RatingScaleItemDefinition = Shapes::StringShape.new(name: 'RatingScaleItemDefinition')
     RatingScaleItemValue = Shapes::UnionShape.new(name: 'RatingScaleItemValue')
     RatingScaleItemValueStringValueString = Shapes::StringShape.new(name: 'RatingScaleItemValueStringValueString')
+    RegionAvailability = Shapes::StringShape.new(name: 'RegionAvailability')
     RegisterMarketplaceModelEndpointRequest = Shapes::StructureShape.new(name: 'RegisterMarketplaceModelEndpointRequest')
     RegisterMarketplaceModelEndpointResponse = Shapes::StructureShape.new(name: 'RegisterMarketplaceModelEndpointResponse')
     RequestMetadataBaseFilters = Shapes::StructureShape.new(name: 'RequestMetadataBaseFilters')
@@ -444,6 +513,8 @@ module Aws::Bedrock
     RequestMetadataMap = Shapes::MapShape.new(name: 'RequestMetadataMap')
     RequestMetadataMapKeyString = Shapes::StringShape.new(name: 'RequestMetadataMapKeyString')
     RequestMetadataMapValueString = Shapes::StringShape.new(name: 'RequestMetadataMapValueString')
+    RerankingMetadataSelectionMode = Shapes::StringShape.new(name: 'RerankingMetadataSelectionMode')
+    RerankingMetadataSelectiveModeConfiguration = Shapes::UnionShape.new(name: 'RerankingMetadataSelectiveModeConfiguration')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RetrievalFilter = Shapes::UnionShape.new(name: 'RetrievalFilter')
     RetrievalFilterList = Shapes::ListShape.new(name: 'RetrievalFilterList')
@@ -470,6 +541,7 @@ module Aws::Bedrock
     SortModelsBy = Shapes::StringShape.new(name: 'SortModelsBy')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     Status = Shapes::StringShape.new(name: 'Status')
+    StatusDetails = Shapes::StructureShape.new(name: 'StatusDetails')
     StopEvaluationJobRequest = Shapes::StructureShape.new(name: 'StopEvaluationJobRequest')
     StopEvaluationJobResponse = Shapes::StructureShape.new(name: 'StopEvaluationJobResponse')
     StopModelCustomizationJobRequest = Shapes::StructureShape.new(name: 'StopModelCustomizationJobRequest')
@@ -479,6 +551,7 @@ module Aws::Bedrock
     String = Shapes::StringShape.new(name: 'String')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
+    SupportTerm = Shapes::StructureShape.new(name: 'SupportTerm')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -490,6 +563,7 @@ module Aws::Bedrock
     TeacherModelConfig = Shapes::StructureShape.new(name: 'TeacherModelConfig')
     TeacherModelIdentifier = Shapes::StringShape.new(name: 'TeacherModelIdentifier')
     Temperature = Shapes::FloatShape.new(name: 'Temperature')
+    TermDetails = Shapes::StructureShape.new(name: 'TermDetails')
     TextInferenceConfig = Shapes::StructureShape.new(name: 'TextInferenceConfig')
     TextPromptTemplate = Shapes::StringShape.new(name: 'TextPromptTemplate')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
@@ -497,6 +571,7 @@ module Aws::Bedrock
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     TopP = Shapes::FloatShape.new(name: 'TopP')
     TrainingDataConfig = Shapes::StructureShape.new(name: 'TrainingDataConfig')
+    TrainingDetails = Shapes::StructureShape.new(name: 'TrainingDetails')
     TrainingMetrics = Shapes::StructureShape.new(name: 'TrainingMetrics')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -508,11 +583,18 @@ module Aws::Bedrock
     UpdateProvisionedModelThroughputResponse = Shapes::StructureShape.new(name: 'UpdateProvisionedModelThroughputResponse')
     UsePromptResponse = Shapes::BooleanShape.new(name: 'UsePromptResponse')
     ValidationDataConfig = Shapes::StructureShape.new(name: 'ValidationDataConfig')
+    ValidationDetails = Shapes::StructureShape.new(name: 'ValidationDetails')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationMetrics = Shapes::ListShape.new(name: 'ValidationMetrics')
     Validator = Shapes::StructureShape.new(name: 'Validator')
     ValidatorMetric = Shapes::StructureShape.new(name: 'ValidatorMetric')
     Validators = Shapes::ListShape.new(name: 'Validators')
+    ValidityTerm = Shapes::StructureShape.new(name: 'ValidityTerm')
+    VectorSearchBedrockRerankingConfiguration = Shapes::StructureShape.new(name: 'VectorSearchBedrockRerankingConfiguration')
+    VectorSearchBedrockRerankingConfigurationNumberOfRerankedResultsInteger = Shapes::IntegerShape.new(name: 'VectorSearchBedrockRerankingConfigurationNumberOfRerankedResultsInteger')
+    VectorSearchBedrockRerankingModelConfiguration = Shapes::StructureShape.new(name: 'VectorSearchBedrockRerankingModelConfiguration')
+    VectorSearchRerankingConfiguration = Shapes::StructureShape.new(name: 'VectorSearchRerankingConfiguration')
+    VectorSearchRerankingConfigurationType = Shapes::StringShape.new(name: 'VectorSearchRerankingConfigurationType')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
     kBS3Uri = Shapes::StringShape.new(name: 'kBS3Uri')
 
@@ -521,6 +603,10 @@ module Aws::Bedrock
 
     AdditionalModelRequestFields.key = Shapes::ShapeRef.new(shape: AdditionalModelRequestFieldsKey)
     AdditionalModelRequestFields.value = Shapes::ShapeRef.new(shape: AdditionalModelRequestFieldsValue)
+
+    AgreementAvailability.add_member(:status, Shapes::ShapeRef.new(shape: AgreementStatus, required: true, location_name: "status"))
+    AgreementAvailability.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    AgreementAvailability.struct_class = Types::AgreementAvailability
 
     AutomatedEvaluationConfig.add_member(:dataset_metric_configs, Shapes::ShapeRef.new(shape: EvaluationDatasetMetricConfigs, required: true, location_name: "datasetMetricConfigs"))
     AutomatedEvaluationConfig.add_member(:evaluator_model_config, Shapes::ShapeRef.new(shape: EvaluatorModelConfig, location_name: "evaluatorModelConfig"))
@@ -577,9 +663,30 @@ module Aws::Bedrock
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
+    CreateCustomModelDeploymentRequest.add_member(:model_deployment_name, Shapes::ShapeRef.new(shape: ModelDeploymentName, required: true, location_name: "modelDeploymentName"))
+    CreateCustomModelDeploymentRequest.add_member(:model_arn, Shapes::ShapeRef.new(shape: CustomModelArn, required: true, location_name: "modelArn"))
+    CreateCustomModelDeploymentRequest.add_member(:description, Shapes::ShapeRef.new(shape: CustomModelDeploymentDescription, location_name: "description"))
+    CreateCustomModelDeploymentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateCustomModelDeploymentRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
+    CreateCustomModelDeploymentRequest.struct_class = Types::CreateCustomModelDeploymentRequest
+
+    CreateCustomModelDeploymentResponse.add_member(:custom_model_deployment_arn, Shapes::ShapeRef.new(shape: CustomModelDeploymentArn, required: true, location_name: "customModelDeploymentArn"))
+    CreateCustomModelDeploymentResponse.struct_class = Types::CreateCustomModelDeploymentResponse
+
+    CreateCustomModelRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: CustomModelName, required: true, location_name: "modelName"))
+    CreateCustomModelRequest.add_member(:model_source_config, Shapes::ShapeRef.new(shape: ModelDataSource, required: true, location_name: "modelSourceConfig"))
+    CreateCustomModelRequest.add_member(:model_kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "modelKmsKeyArn"))
+    CreateCustomModelRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    CreateCustomModelRequest.add_member(:model_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "modelTags"))
+    CreateCustomModelRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
+    CreateCustomModelRequest.struct_class = Types::CreateCustomModelRequest
+
+    CreateCustomModelResponse.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "modelArn"))
+    CreateCustomModelResponse.struct_class = Types::CreateCustomModelResponse
+
     CreateEvaluationJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: EvaluationJobName, required: true, location_name: "jobName"))
     CreateEvaluationJobRequest.add_member(:job_description, Shapes::ShapeRef.new(shape: EvaluationJobDescription, location_name: "jobDescription"))
-    CreateEvaluationJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateEvaluationJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateEvaluationJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     CreateEvaluationJobRequest.add_member(:customer_encryption_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "customerEncryptionKeyId"))
     CreateEvaluationJobRequest.add_member(:job_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "jobTags"))
@@ -592,6 +699,13 @@ module Aws::Bedrock
     CreateEvaluationJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: EvaluationJobArn, required: true, location_name: "jobArn"))
     CreateEvaluationJobResponse.struct_class = Types::CreateEvaluationJobResponse
 
+    CreateFoundationModelAgreementRequest.add_member(:offer_token, Shapes::ShapeRef.new(shape: OfferToken, required: true, location_name: "offerToken"))
+    CreateFoundationModelAgreementRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: BedrockModelId, required: true, location_name: "modelId"))
+    CreateFoundationModelAgreementRequest.struct_class = Types::CreateFoundationModelAgreementRequest
+
+    CreateFoundationModelAgreementResponse.add_member(:model_id, Shapes::ShapeRef.new(shape: BedrockModelId, required: true, location_name: "modelId"))
+    CreateFoundationModelAgreementResponse.struct_class = Types::CreateFoundationModelAgreementResponse
+
     CreateGuardrailRequest.add_member(:name, Shapes::ShapeRef.new(shape: GuardrailName, required: true, location_name: "name"))
     CreateGuardrailRequest.add_member(:description, Shapes::ShapeRef.new(shape: GuardrailDescription, location_name: "description"))
     CreateGuardrailRequest.add_member(:topic_policy_config, Shapes::ShapeRef.new(shape: GuardrailTopicPolicyConfig, location_name: "topicPolicyConfig"))
@@ -599,11 +713,12 @@ module Aws::Bedrock
     CreateGuardrailRequest.add_member(:word_policy_config, Shapes::ShapeRef.new(shape: GuardrailWordPolicyConfig, location_name: "wordPolicyConfig"))
     CreateGuardrailRequest.add_member(:sensitive_information_policy_config, Shapes::ShapeRef.new(shape: GuardrailSensitiveInformationPolicyConfig, location_name: "sensitiveInformationPolicyConfig"))
     CreateGuardrailRequest.add_member(:contextual_grounding_policy_config, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingPolicyConfig, location_name: "contextualGroundingPolicyConfig"))
+    CreateGuardrailRequest.add_member(:cross_region_config, Shapes::ShapeRef.new(shape: GuardrailCrossRegionConfig, location_name: "crossRegionConfig"))
     CreateGuardrailRequest.add_member(:blocked_input_messaging, Shapes::ShapeRef.new(shape: GuardrailBlockedMessaging, required: true, location_name: "blockedInputMessaging"))
     CreateGuardrailRequest.add_member(:blocked_outputs_messaging, Shapes::ShapeRef.new(shape: GuardrailBlockedMessaging, required: true, location_name: "blockedOutputsMessaging"))
     CreateGuardrailRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     CreateGuardrailRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
-    CreateGuardrailRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateGuardrailRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateGuardrailRequest.struct_class = Types::CreateGuardrailRequest
 
     CreateGuardrailResponse.add_member(:guardrail_id, Shapes::ShapeRef.new(shape: GuardrailId, required: true, location_name: "guardrailId"))
@@ -614,7 +729,7 @@ module Aws::Bedrock
 
     CreateGuardrailVersionRequest.add_member(:guardrail_identifier, Shapes::ShapeRef.new(shape: GuardrailIdentifier, required: true, location: "uri", location_name: "guardrailIdentifier"))
     CreateGuardrailVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: GuardrailDescription, location_name: "description"))
-    CreateGuardrailVersionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateGuardrailVersionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateGuardrailVersionRequest.struct_class = Types::CreateGuardrailVersionRequest
 
     CreateGuardrailVersionResponse.add_member(:guardrail_id, Shapes::ShapeRef.new(shape: GuardrailId, required: true, location_name: "guardrailId"))
@@ -623,7 +738,7 @@ module Aws::Bedrock
 
     CreateInferenceProfileRequest.add_member(:inference_profile_name, Shapes::ShapeRef.new(shape: InferenceProfileName, required: true, location_name: "inferenceProfileName"))
     CreateInferenceProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: InferenceProfileDescription, location_name: "description"))
-    CreateInferenceProfileRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateInferenceProfileRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateInferenceProfileRequest.add_member(:model_source, Shapes::ShapeRef.new(shape: InferenceProfileModelSource, required: true, location_name: "modelSource"))
     CreateInferenceProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateInferenceProfileRequest.struct_class = Types::CreateInferenceProfileRequest
@@ -636,7 +751,7 @@ module Aws::Bedrock
     CreateMarketplaceModelEndpointRequest.add_member(:endpoint_config, Shapes::ShapeRef.new(shape: EndpointConfig, required: true, location_name: "endpointConfig"))
     CreateMarketplaceModelEndpointRequest.add_member(:accept_eula, Shapes::ShapeRef.new(shape: AcceptEula, location_name: "acceptEula"))
     CreateMarketplaceModelEndpointRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "endpointName"))
-    CreateMarketplaceModelEndpointRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMarketplaceModelEndpointRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateMarketplaceModelEndpointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateMarketplaceModelEndpointRequest.struct_class = Types::CreateMarketplaceModelEndpointRequest
 
@@ -647,7 +762,7 @@ module Aws::Bedrock
     CreateModelCopyJobRequest.add_member(:target_model_name, Shapes::ShapeRef.new(shape: CustomModelName, required: true, location_name: "targetModelName"))
     CreateModelCopyJobRequest.add_member(:model_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "modelKmsKeyId"))
     CreateModelCopyJobRequest.add_member(:target_model_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "targetModelTags"))
-    CreateModelCopyJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateModelCopyJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateModelCopyJobRequest.struct_class = Types::CreateModelCopyJobRequest
 
     CreateModelCopyJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelCopyJobArn, required: true, location_name: "jobArn"))
@@ -656,7 +771,7 @@ module Aws::Bedrock
     CreateModelCustomizationJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "jobName"))
     CreateModelCustomizationJobRequest.add_member(:custom_model_name, Shapes::ShapeRef.new(shape: CustomModelName, required: true, location_name: "customModelName"))
     CreateModelCustomizationJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
-    CreateModelCustomizationJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateModelCustomizationJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateModelCustomizationJobRequest.add_member(:base_model_identifier, Shapes::ShapeRef.new(shape: BaseModelIdentifier, required: true, location_name: "baseModelIdentifier"))
     CreateModelCustomizationJobRequest.add_member(:customization_type, Shapes::ShapeRef.new(shape: CustomizationType, location_name: "customizationType"))
     CreateModelCustomizationJobRequest.add_member(:custom_model_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "customModelKmsKeyId"))
@@ -689,7 +804,7 @@ module Aws::Bedrock
 
     CreateModelInvocationJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: ModelInvocationJobName, required: true, location_name: "jobName"))
     CreateModelInvocationJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
-    CreateModelInvocationJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ModelInvocationIdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateModelInvocationJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ModelInvocationIdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateModelInvocationJobRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: ModelId, required: true, location_name: "modelId"))
     CreateModelInvocationJobRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: ModelInvocationJobInputDataConfig, required: true, location_name: "inputDataConfig"))
     CreateModelInvocationJobRequest.add_member(:output_data_config, Shapes::ShapeRef.new(shape: ModelInvocationJobOutputDataConfig, required: true, location_name: "outputDataConfig"))
@@ -701,7 +816,7 @@ module Aws::Bedrock
     CreateModelInvocationJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelInvocationJobArn, required: true, location_name: "jobArn"))
     CreateModelInvocationJobResponse.struct_class = Types::CreateModelInvocationJobResponse
 
-    CreatePromptRouterRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreatePromptRouterRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreatePromptRouterRequest.add_member(:prompt_router_name, Shapes::ShapeRef.new(shape: PromptRouterName, required: true, location_name: "promptRouterName"))
     CreatePromptRouterRequest.add_member(:models, Shapes::ShapeRef.new(shape: PromptRouterTargetModels, required: true, location_name: "models"))
     CreatePromptRouterRequest.add_member(:description, Shapes::ShapeRef.new(shape: PromptRouterDescription, location_name: "description"))
@@ -713,7 +828,7 @@ module Aws::Bedrock
     CreatePromptRouterResponse.add_member(:prompt_router_arn, Shapes::ShapeRef.new(shape: PromptRouterArn, location_name: "promptRouterArn"))
     CreatePromptRouterResponse.struct_class = Types::CreatePromptRouterResponse
 
-    CreateProvisionedModelThroughputRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateProvisionedModelThroughputRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateProvisionedModelThroughputRequest.add_member(:model_units, Shapes::ShapeRef.new(shape: PositiveInteger, required: true, location_name: "modelUnits"))
     CreateProvisionedModelThroughputRequest.add_member(:provisioned_model_name, Shapes::ShapeRef.new(shape: ProvisionedModelName, required: true, location_name: "provisionedModelName"))
     CreateProvisionedModelThroughputRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: ModelIdentifier, required: true, location_name: "modelId"))
@@ -737,6 +852,17 @@ module Aws::Bedrock
     CustomMetricEvaluatorModelConfig.add_member(:bedrock_evaluator_models, Shapes::ShapeRef.new(shape: CustomMetricBedrockEvaluatorModels, required: true, location_name: "bedrockEvaluatorModels"))
     CustomMetricEvaluatorModelConfig.struct_class = Types::CustomMetricEvaluatorModelConfig
 
+    CustomModelDeploymentSummary.add_member(:custom_model_deployment_arn, Shapes::ShapeRef.new(shape: CustomModelDeploymentArn, required: true, location_name: "customModelDeploymentArn"))
+    CustomModelDeploymentSummary.add_member(:custom_model_deployment_name, Shapes::ShapeRef.new(shape: ModelDeploymentName, required: true, location_name: "customModelDeploymentName"))
+    CustomModelDeploymentSummary.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "modelArn"))
+    CustomModelDeploymentSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    CustomModelDeploymentSummary.add_member(:status, Shapes::ShapeRef.new(shape: CustomModelDeploymentStatus, required: true, location_name: "status"))
+    CustomModelDeploymentSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
+    CustomModelDeploymentSummary.add_member(:failure_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "failureMessage"))
+    CustomModelDeploymentSummary.struct_class = Types::CustomModelDeploymentSummary
+
+    CustomModelDeploymentSummaryList.member = Shapes::ShapeRef.new(shape: CustomModelDeploymentSummary)
+
     CustomModelSummary.add_member(:model_arn, Shapes::ShapeRef.new(shape: CustomModelArn, required: true, location_name: "modelArn"))
     CustomModelSummary.add_member(:model_name, Shapes::ShapeRef.new(shape: CustomModelName, required: true, location_name: "modelName"))
     CustomModelSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTime"))
@@ -744,6 +870,7 @@ module Aws::Bedrock
     CustomModelSummary.add_member(:base_model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "baseModelName"))
     CustomModelSummary.add_member(:customization_type, Shapes::ShapeRef.new(shape: CustomizationType, location_name: "customizationType"))
     CustomModelSummary.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "ownerAccountId"))
+    CustomModelSummary.add_member(:model_status, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "modelStatus"))
     CustomModelSummary.struct_class = Types::CustomModelSummary
 
     CustomModelSummaryList.member = Shapes::ShapeRef.new(shape: CustomModelSummary)
@@ -758,10 +885,25 @@ module Aws::Bedrock
     CustomizationConfig.add_member_subclass(:unknown, Types::CustomizationConfig::Unknown)
     CustomizationConfig.struct_class = Types::CustomizationConfig
 
+    DataProcessingDetails.add_member(:status, Shapes::ShapeRef.new(shape: JobStatusDetails, location_name: "status"))
+    DataProcessingDetails.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
+    DataProcessingDetails.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    DataProcessingDetails.struct_class = Types::DataProcessingDetails
+
+    DeleteCustomModelDeploymentRequest.add_member(:custom_model_deployment_identifier, Shapes::ShapeRef.new(shape: CustomModelDeploymentIdentifier, required: true, location: "uri", location_name: "customModelDeploymentIdentifier"))
+    DeleteCustomModelDeploymentRequest.struct_class = Types::DeleteCustomModelDeploymentRequest
+
+    DeleteCustomModelDeploymentResponse.struct_class = Types::DeleteCustomModelDeploymentResponse
+
     DeleteCustomModelRequest.add_member(:model_identifier, Shapes::ShapeRef.new(shape: ModelIdentifier, required: true, location: "uri", location_name: "modelIdentifier"))
     DeleteCustomModelRequest.struct_class = Types::DeleteCustomModelRequest
 
     DeleteCustomModelResponse.struct_class = Types::DeleteCustomModelResponse
+
+    DeleteFoundationModelAgreementRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: BedrockModelId, required: true, location_name: "modelId"))
+    DeleteFoundationModelAgreementRequest.struct_class = Types::DeleteFoundationModelAgreementRequest
+
+    DeleteFoundationModelAgreementResponse.struct_class = Types::DeleteFoundationModelAgreementResponse
 
     DeleteGuardrailRequest.add_member(:guardrail_identifier, Shapes::ShapeRef.new(shape: GuardrailIdentifier, required: true, location: "uri", location_name: "guardrailIdentifier"))
     DeleteGuardrailRequest.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailNumericalVersion, location: "querystring", location_name: "guardrailVersion"))
@@ -802,6 +944,12 @@ module Aws::Bedrock
     DeregisterMarketplaceModelEndpointRequest.struct_class = Types::DeregisterMarketplaceModelEndpointRequest
 
     DeregisterMarketplaceModelEndpointResponse.struct_class = Types::DeregisterMarketplaceModelEndpointResponse
+
+    DimensionalPriceRate.add_member(:dimension, Shapes::ShapeRef.new(shape: String, location_name: "dimension"))
+    DimensionalPriceRate.add_member(:price, Shapes::ShapeRef.new(shape: String, location_name: "price"))
+    DimensionalPriceRate.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    DimensionalPriceRate.add_member(:unit, Shapes::ShapeRef.new(shape: String, location_name: "unit"))
+    DimensionalPriceRate.struct_class = Types::DimensionalPriceRate
 
     DistillationConfig.add_member(:teacher_model_config, Shapes::ShapeRef.new(shape: TeacherModelConfig, required: true, location_name: "teacherModelConfig"))
     DistillationConfig.struct_class = Types::DistillationConfig
@@ -914,8 +1062,8 @@ module Aws::Bedrock
     EvaluationSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTime"))
     EvaluationSummary.add_member(:job_type, Shapes::ShapeRef.new(shape: EvaluationJobType, required: true, location_name: "jobType"))
     EvaluationSummary.add_member(:evaluation_task_types, Shapes::ShapeRef.new(shape: EvaluationTaskTypes, required: true, location_name: "evaluationTaskTypes"))
-    EvaluationSummary.add_member(:model_identifiers, Shapes::ShapeRef.new(shape: EvaluationBedrockModelIdentifiers, deprecated: true, location_name: "modelIdentifiers", metadata: {"deprecatedMessage"=>"Inference identifiers should be retrieved from the inferenceConfigSummary", "deprecatedSince"=>"2025-03-07"}))
-    EvaluationSummary.add_member(:rag_identifiers, Shapes::ShapeRef.new(shape: EvaluationBedrockKnowledgeBaseIdentifiers, deprecated: true, location_name: "ragIdentifiers", metadata: {"deprecatedMessage"=>"Inference identifiers should be retrieved from the inferenceConfigSummary", "deprecatedSince"=>"2025-03-07"}))
+    EvaluationSummary.add_member(:model_identifiers, Shapes::ShapeRef.new(shape: EvaluationBedrockModelIdentifiers, deprecated: true, location_name: "modelIdentifiers", metadata: {"deprecatedMessage" => "Inference identifiers should be retrieved from the inferenceConfigSummary", "deprecatedSince" => "2025-03-07"}))
+    EvaluationSummary.add_member(:rag_identifiers, Shapes::ShapeRef.new(shape: EvaluationBedrockKnowledgeBaseIdentifiers, deprecated: true, location_name: "ragIdentifiers", metadata: {"deprecatedMessage" => "Inference identifiers should be retrieved from the inferenceConfigSummary", "deprecatedSince" => "2025-03-07"}))
     EvaluationSummary.add_member(:evaluator_model_identifiers, Shapes::ShapeRef.new(shape: EvaluatorModelIdentifiers, location_name: "evaluatorModelIdentifiers"))
     EvaluationSummary.add_member(:custom_metrics_evaluator_model_identifiers, Shapes::ShapeRef.new(shape: EvaluatorModelIdentifiers, location_name: "customMetricsEvaluatorModelIdentifiers"))
     EvaluationSummary.add_member(:inference_config_summary, Shapes::ShapeRef.new(shape: EvaluationInferenceConfigSummary, location_name: "inferenceConfigSummary"))
@@ -949,6 +1097,11 @@ module Aws::Bedrock
     ExternalSourcesRetrieveAndGenerateConfiguration.add_member(:sources, Shapes::ShapeRef.new(shape: ExternalSources, required: true, location_name: "sources"))
     ExternalSourcesRetrieveAndGenerateConfiguration.add_member(:generation_configuration, Shapes::ShapeRef.new(shape: ExternalSourcesGenerationConfiguration, location_name: "generationConfiguration"))
     ExternalSourcesRetrieveAndGenerateConfiguration.struct_class = Types::ExternalSourcesRetrieveAndGenerateConfiguration
+
+    FieldForReranking.add_member(:field_name, Shapes::ShapeRef.new(shape: FieldForRerankingFieldNameString, required: true, location_name: "fieldName"))
+    FieldForReranking.struct_class = Types::FieldForReranking
+
+    FieldsForReranking.member = Shapes::ShapeRef.new(shape: FieldForReranking)
 
     FilterAttribute.add_member(:key, Shapes::ShapeRef.new(shape: FilterKey, required: true, location_name: "key"))
     FilterAttribute.add_member(:value, Shapes::ShapeRef.new(shape: FilterValue, required: true, location_name: "value"))
@@ -989,24 +1142,39 @@ module Aws::Bedrock
     GenerationConfiguration.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: AdditionalModelRequestFields, location_name: "additionalModelRequestFields"))
     GenerationConfiguration.struct_class = Types::GenerationConfiguration
 
+    GetCustomModelDeploymentRequest.add_member(:custom_model_deployment_identifier, Shapes::ShapeRef.new(shape: CustomModelDeploymentIdentifier, required: true, location: "uri", location_name: "customModelDeploymentIdentifier"))
+    GetCustomModelDeploymentRequest.struct_class = Types::GetCustomModelDeploymentRequest
+
+    GetCustomModelDeploymentResponse.add_member(:custom_model_deployment_arn, Shapes::ShapeRef.new(shape: CustomModelDeploymentArn, required: true, location_name: "customModelDeploymentArn"))
+    GetCustomModelDeploymentResponse.add_member(:model_deployment_name, Shapes::ShapeRef.new(shape: ModelDeploymentName, required: true, location_name: "modelDeploymentName"))
+    GetCustomModelDeploymentResponse.add_member(:model_arn, Shapes::ShapeRef.new(shape: CustomModelArn, required: true, location_name: "modelArn"))
+    GetCustomModelDeploymentResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    GetCustomModelDeploymentResponse.add_member(:status, Shapes::ShapeRef.new(shape: CustomModelDeploymentStatus, required: true, location_name: "status"))
+    GetCustomModelDeploymentResponse.add_member(:description, Shapes::ShapeRef.new(shape: CustomModelDeploymentDescription, location_name: "description"))
+    GetCustomModelDeploymentResponse.add_member(:failure_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "failureMessage"))
+    GetCustomModelDeploymentResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
+    GetCustomModelDeploymentResponse.struct_class = Types::GetCustomModelDeploymentResponse
+
     GetCustomModelRequest.add_member(:model_identifier, Shapes::ShapeRef.new(shape: ModelIdentifier, required: true, location: "uri", location_name: "modelIdentifier"))
     GetCustomModelRequest.struct_class = Types::GetCustomModelRequest
 
     GetCustomModelResponse.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "modelArn"))
     GetCustomModelResponse.add_member(:model_name, Shapes::ShapeRef.new(shape: CustomModelName, required: true, location_name: "modelName"))
     GetCustomModelResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "jobName"))
-    GetCustomModelResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelCustomizationJobArn, required: true, location_name: "jobArn"))
-    GetCustomModelResponse.add_member(:base_model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "baseModelArn"))
+    GetCustomModelResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelCustomizationJobArn, location_name: "jobArn"))
+    GetCustomModelResponse.add_member(:base_model_arn, Shapes::ShapeRef.new(shape: ModelArn, location_name: "baseModelArn"))
     GetCustomModelResponse.add_member(:customization_type, Shapes::ShapeRef.new(shape: CustomizationType, location_name: "customizationType"))
     GetCustomModelResponse.add_member(:model_kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "modelKmsKeyArn"))
     GetCustomModelResponse.add_member(:hyper_parameters, Shapes::ShapeRef.new(shape: ModelCustomizationHyperParameters, location_name: "hyperParameters"))
-    GetCustomModelResponse.add_member(:training_data_config, Shapes::ShapeRef.new(shape: TrainingDataConfig, required: true, location_name: "trainingDataConfig"))
+    GetCustomModelResponse.add_member(:training_data_config, Shapes::ShapeRef.new(shape: TrainingDataConfig, location_name: "trainingDataConfig"))
     GetCustomModelResponse.add_member(:validation_data_config, Shapes::ShapeRef.new(shape: ValidationDataConfig, location_name: "validationDataConfig"))
-    GetCustomModelResponse.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, required: true, location_name: "outputDataConfig"))
+    GetCustomModelResponse.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "outputDataConfig"))
     GetCustomModelResponse.add_member(:training_metrics, Shapes::ShapeRef.new(shape: TrainingMetrics, location_name: "trainingMetrics"))
     GetCustomModelResponse.add_member(:validation_metrics, Shapes::ShapeRef.new(shape: ValidationMetrics, location_name: "validationMetrics"))
     GetCustomModelResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTime"))
     GetCustomModelResponse.add_member(:customization_config, Shapes::ShapeRef.new(shape: CustomizationConfig, location_name: "customizationConfig"))
+    GetCustomModelResponse.add_member(:model_status, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "modelStatus"))
+    GetCustomModelResponse.add_member(:failure_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "failureMessage"))
     GetCustomModelResponse.struct_class = Types::GetCustomModelResponse
 
     GetEvaluationJobRequest.add_member(:job_identifier, Shapes::ShapeRef.new(shape: EvaluationJobIdentifier, required: true, location: "uri", location_name: "jobIdentifier"))
@@ -1027,6 +1195,16 @@ module Aws::Bedrock
     GetEvaluationJobResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
     GetEvaluationJobResponse.add_member(:failure_messages, Shapes::ShapeRef.new(shape: ErrorMessages, location_name: "failureMessages"))
     GetEvaluationJobResponse.struct_class = Types::GetEvaluationJobResponse
+
+    GetFoundationModelAvailabilityRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: BedrockModelId, required: true, location: "uri", location_name: "modelId"))
+    GetFoundationModelAvailabilityRequest.struct_class = Types::GetFoundationModelAvailabilityRequest
+
+    GetFoundationModelAvailabilityResponse.add_member(:model_id, Shapes::ShapeRef.new(shape: BedrockModelId, required: true, location_name: "modelId"))
+    GetFoundationModelAvailabilityResponse.add_member(:agreement_availability, Shapes::ShapeRef.new(shape: AgreementAvailability, required: true, location_name: "agreementAvailability"))
+    GetFoundationModelAvailabilityResponse.add_member(:authorization_status, Shapes::ShapeRef.new(shape: AuthorizationStatus, required: true, location_name: "authorizationStatus"))
+    GetFoundationModelAvailabilityResponse.add_member(:entitlement_availability, Shapes::ShapeRef.new(shape: EntitlementAvailability, required: true, location_name: "entitlementAvailability"))
+    GetFoundationModelAvailabilityResponse.add_member(:region_availability, Shapes::ShapeRef.new(shape: RegionAvailability, required: true, location_name: "regionAvailability"))
+    GetFoundationModelAvailabilityResponse.struct_class = Types::GetFoundationModelAvailabilityResponse
 
     GetFoundationModelRequest.add_member(:model_identifier, Shapes::ShapeRef.new(shape: ModelIdentifier, required: true, location: "uri", location_name: "modelIdentifier"))
     GetFoundationModelRequest.struct_class = Types::GetFoundationModelRequest
@@ -1049,6 +1227,7 @@ module Aws::Bedrock
     GetGuardrailResponse.add_member(:word_policy, Shapes::ShapeRef.new(shape: GuardrailWordPolicy, location_name: "wordPolicy"))
     GetGuardrailResponse.add_member(:sensitive_information_policy, Shapes::ShapeRef.new(shape: GuardrailSensitiveInformationPolicy, location_name: "sensitiveInformationPolicy"))
     GetGuardrailResponse.add_member(:contextual_grounding_policy, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingPolicy, location_name: "contextualGroundingPolicy"))
+    GetGuardrailResponse.add_member(:cross_region_details, Shapes::ShapeRef.new(shape: GuardrailCrossRegionDetails, location_name: "crossRegionDetails"))
     GetGuardrailResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     GetGuardrailResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
     GetGuardrailResponse.add_member(:status_reasons, Shapes::ShapeRef.new(shape: GuardrailStatusReasons, location_name: "statusReasons"))
@@ -1119,6 +1298,7 @@ module Aws::Bedrock
     GetModelCustomizationJobResponse.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken"))
     GetModelCustomizationJobResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     GetModelCustomizationJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: ModelCustomizationJobStatus, location_name: "status"))
+    GetModelCustomizationJobResponse.add_member(:status_details, Shapes::ShapeRef.new(shape: StatusDetails, location_name: "statusDetails"))
     GetModelCustomizationJobResponse.add_member(:failure_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "failureMessage"))
     GetModelCustomizationJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTime"))
     GetModelCustomizationJobResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
@@ -1212,6 +1392,11 @@ module Aws::Bedrock
     GetProvisionedModelThroughputResponse.add_member(:commitment_expiration_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "commitmentExpirationTime"))
     GetProvisionedModelThroughputResponse.struct_class = Types::GetProvisionedModelThroughputResponse
 
+    GetUseCaseForModelAccessRequest.struct_class = Types::GetUseCaseForModelAccessRequest
+
+    GetUseCaseForModelAccessResponse.add_member(:form_data, Shapes::ShapeRef.new(shape: AcknowledgementFormDataBody, required: true, location_name: "formData"))
+    GetUseCaseForModelAccessResponse.struct_class = Types::GetUseCaseForModelAccessResponse
+
     GuardrailConfiguration.add_member(:guardrail_id, Shapes::ShapeRef.new(shape: GuardrailConfigurationGuardrailIdString, required: true, location_name: "guardrailId"))
     GuardrailConfiguration.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailConfigurationGuardrailVersionString, required: true, location_name: "guardrailVersion"))
     GuardrailConfiguration.struct_class = Types::GuardrailConfiguration
@@ -1242,10 +1427,18 @@ module Aws::Bedrock
 
     GuardrailContentFiltersConfig.member = Shapes::ShapeRef.new(shape: GuardrailContentFilterConfig)
 
+    GuardrailContentFiltersTier.add_member(:tier_name, Shapes::ShapeRef.new(shape: GuardrailContentFiltersTierName, required: true, location_name: "tierName"))
+    GuardrailContentFiltersTier.struct_class = Types::GuardrailContentFiltersTier
+
+    GuardrailContentFiltersTierConfig.add_member(:tier_name, Shapes::ShapeRef.new(shape: GuardrailContentFiltersTierName, required: true, location_name: "tierName"))
+    GuardrailContentFiltersTierConfig.struct_class = Types::GuardrailContentFiltersTierConfig
+
     GuardrailContentPolicy.add_member(:filters, Shapes::ShapeRef.new(shape: GuardrailContentFilters, location_name: "filters"))
+    GuardrailContentPolicy.add_member(:tier, Shapes::ShapeRef.new(shape: GuardrailContentFiltersTier, location_name: "tier"))
     GuardrailContentPolicy.struct_class = Types::GuardrailContentPolicy
 
     GuardrailContentPolicyConfig.add_member(:filters_config, Shapes::ShapeRef.new(shape: GuardrailContentFiltersConfig, required: true, location_name: "filtersConfig"))
+    GuardrailContentPolicyConfig.add_member(:tier_config, Shapes::ShapeRef.new(shape: GuardrailContentFiltersTierConfig, location_name: "tierConfig"))
     GuardrailContentPolicyConfig.struct_class = Types::GuardrailContentPolicyConfig
 
     GuardrailContextualGroundingFilter.add_member(:type, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingFilterType, required: true, location_name: "type"))
@@ -1269,6 +1462,13 @@ module Aws::Bedrock
 
     GuardrailContextualGroundingPolicyConfig.add_member(:filters_config, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingFiltersConfig, required: true, location_name: "filtersConfig"))
     GuardrailContextualGroundingPolicyConfig.struct_class = Types::GuardrailContextualGroundingPolicyConfig
+
+    GuardrailCrossRegionConfig.add_member(:guardrail_profile_identifier, Shapes::ShapeRef.new(shape: GuardrailCrossRegionGuardrailProfileIdentifier, required: true, location_name: "guardrailProfileIdentifier"))
+    GuardrailCrossRegionConfig.struct_class = Types::GuardrailCrossRegionConfig
+
+    GuardrailCrossRegionDetails.add_member(:guardrail_profile_id, Shapes::ShapeRef.new(shape: GuardrailCrossRegionGuardrailProfileId, location_name: "guardrailProfileId"))
+    GuardrailCrossRegionDetails.add_member(:guardrail_profile_arn, Shapes::ShapeRef.new(shape: GuardrailCrossRegionGuardrailProfileArn, location_name: "guardrailProfileArn"))
+    GuardrailCrossRegionDetails.struct_class = Types::GuardrailCrossRegionDetails
 
     GuardrailFailureRecommendations.member = Shapes::ShapeRef.new(shape: GuardrailFailureRecommendation)
 
@@ -1356,6 +1556,7 @@ module Aws::Bedrock
     GuardrailSummary.add_member(:version, Shapes::ShapeRef.new(shape: GuardrailVersion, required: true, location_name: "version"))
     GuardrailSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     GuardrailSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    GuardrailSummary.add_member(:cross_region_details, Shapes::ShapeRef.new(shape: GuardrailCrossRegionDetails, location_name: "crossRegionDetails"))
     GuardrailSummary.struct_class = Types::GuardrailSummary
 
     GuardrailTopic.add_member(:name, Shapes::ShapeRef.new(shape: GuardrailTopicName, required: true, location_name: "name"))
@@ -1381,14 +1582,22 @@ module Aws::Bedrock
     GuardrailTopicExamples.member = Shapes::ShapeRef.new(shape: GuardrailTopicExample)
 
     GuardrailTopicPolicy.add_member(:topics, Shapes::ShapeRef.new(shape: GuardrailTopics, required: true, location_name: "topics"))
+    GuardrailTopicPolicy.add_member(:tier, Shapes::ShapeRef.new(shape: GuardrailTopicsTier, location_name: "tier"))
     GuardrailTopicPolicy.struct_class = Types::GuardrailTopicPolicy
 
     GuardrailTopicPolicyConfig.add_member(:topics_config, Shapes::ShapeRef.new(shape: GuardrailTopicsConfig, required: true, location_name: "topicsConfig"))
+    GuardrailTopicPolicyConfig.add_member(:tier_config, Shapes::ShapeRef.new(shape: GuardrailTopicsTierConfig, location_name: "tierConfig"))
     GuardrailTopicPolicyConfig.struct_class = Types::GuardrailTopicPolicyConfig
 
     GuardrailTopics.member = Shapes::ShapeRef.new(shape: GuardrailTopic)
 
     GuardrailTopicsConfig.member = Shapes::ShapeRef.new(shape: GuardrailTopicConfig)
+
+    GuardrailTopicsTier.add_member(:tier_name, Shapes::ShapeRef.new(shape: GuardrailTopicsTierName, required: true, location_name: "tierName"))
+    GuardrailTopicsTier.struct_class = Types::GuardrailTopicsTier
+
+    GuardrailTopicsTierConfig.add_member(:tier_name, Shapes::ShapeRef.new(shape: GuardrailTopicsTierName, required: true, location_name: "tierName"))
+    GuardrailTopicsTierConfig.struct_class = Types::GuardrailTopicsTierConfig
 
     GuardrailWord.add_member(:text, Shapes::ShapeRef.new(shape: GuardrailWordTextString, required: true, location_name: "text"))
     GuardrailWord.add_member(:input_action, Shapes::ShapeRef.new(shape: GuardrailWordAction, location_name: "inputAction"))
@@ -1431,6 +1640,10 @@ module Aws::Bedrock
     HumanWorkflowConfig.add_member(:flow_definition_arn, Shapes::ShapeRef.new(shape: SageMakerFlowDefinitionArn, required: true, location_name: "flowDefinitionArn"))
     HumanWorkflowConfig.add_member(:instructions, Shapes::ShapeRef.new(shape: HumanTaskInstructions, location_name: "instructions"))
     HumanWorkflowConfig.struct_class = Types::HumanWorkflowConfig
+
+    ImplicitFilterConfiguration.add_member(:metadata_attributes, Shapes::ShapeRef.new(shape: MetadataAttributeSchemaList, required: true, location_name: "metadataAttributes"))
+    ImplicitFilterConfiguration.add_member(:model_arn, Shapes::ShapeRef.new(shape: BedrockModelArn, required: true, location_name: "modelArn"))
+    ImplicitFilterConfiguration.struct_class = Types::ImplicitFilterConfiguration
 
     ImportedModelSummary.add_member(:model_arn, Shapes::ShapeRef.new(shape: ImportedModelArn, required: true, location_name: "modelArn"))
     ImportedModelSummary.add_member(:model_name, Shapes::ShapeRef.new(shape: ImportedModelName, required: true, location_name: "modelName"))
@@ -1505,7 +1718,27 @@ module Aws::Bedrock
     KnowledgeBaseVectorSearchConfiguration.add_member(:number_of_results, Shapes::ShapeRef.new(shape: KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger, location_name: "numberOfResults"))
     KnowledgeBaseVectorSearchConfiguration.add_member(:override_search_type, Shapes::ShapeRef.new(shape: SearchType, location_name: "overrideSearchType"))
     KnowledgeBaseVectorSearchConfiguration.add_member(:filter, Shapes::ShapeRef.new(shape: RetrievalFilter, location_name: "filter"))
+    KnowledgeBaseVectorSearchConfiguration.add_member(:implicit_filter_configuration, Shapes::ShapeRef.new(shape: ImplicitFilterConfiguration, location_name: "implicitFilterConfiguration"))
+    KnowledgeBaseVectorSearchConfiguration.add_member(:reranking_configuration, Shapes::ShapeRef.new(shape: VectorSearchRerankingConfiguration, location_name: "rerankingConfiguration"))
     KnowledgeBaseVectorSearchConfiguration.struct_class = Types::KnowledgeBaseVectorSearchConfiguration
+
+    LegalTerm.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "url"))
+    LegalTerm.struct_class = Types::LegalTerm
+
+    ListCustomModelDeploymentsRequest.add_member(:created_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "createdBefore"))
+    ListCustomModelDeploymentsRequest.add_member(:created_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "createdAfter"))
+    ListCustomModelDeploymentsRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: ModelDeploymentName, location: "querystring", location_name: "nameContains"))
+    ListCustomModelDeploymentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListCustomModelDeploymentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListCustomModelDeploymentsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortModelsBy, location: "querystring", location_name: "sortBy"))
+    ListCustomModelDeploymentsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "sortOrder"))
+    ListCustomModelDeploymentsRequest.add_member(:status_equals, Shapes::ShapeRef.new(shape: CustomModelDeploymentStatus, location: "querystring", location_name: "statusEquals"))
+    ListCustomModelDeploymentsRequest.add_member(:model_arn_equals, Shapes::ShapeRef.new(shape: CustomModelArn, location: "querystring", location_name: "modelArnEquals"))
+    ListCustomModelDeploymentsRequest.struct_class = Types::ListCustomModelDeploymentsRequest
+
+    ListCustomModelDeploymentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListCustomModelDeploymentsResponse.add_member(:model_deployment_summaries, Shapes::ShapeRef.new(shape: CustomModelDeploymentSummaryList, location_name: "modelDeploymentSummaries"))
+    ListCustomModelDeploymentsResponse.struct_class = Types::ListCustomModelDeploymentsResponse
 
     ListCustomModelsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "creationTimeBefore"))
     ListCustomModelsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "creationTimeAfter"))
@@ -1517,6 +1750,7 @@ module Aws::Bedrock
     ListCustomModelsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortModelsBy, location: "querystring", location_name: "sortBy"))
     ListCustomModelsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "sortOrder"))
     ListCustomModelsRequest.add_member(:is_owned, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "isOwned"))
+    ListCustomModelsRequest.add_member(:model_status, Shapes::ShapeRef.new(shape: ModelStatus, location: "querystring", location_name: "modelStatus"))
     ListCustomModelsRequest.struct_class = Types::ListCustomModelsRequest
 
     ListCustomModelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
@@ -1537,6 +1771,14 @@ module Aws::Bedrock
     ListEvaluationJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListEvaluationJobsResponse.add_member(:job_summaries, Shapes::ShapeRef.new(shape: EvaluationSummaries, location_name: "jobSummaries"))
     ListEvaluationJobsResponse.struct_class = Types::ListEvaluationJobsResponse
+
+    ListFoundationModelAgreementOffersRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: BedrockModelId, required: true, location: "uri", location_name: "modelId"))
+    ListFoundationModelAgreementOffersRequest.add_member(:offer_type, Shapes::ShapeRef.new(shape: OfferType, location: "querystring", location_name: "offerType"))
+    ListFoundationModelAgreementOffersRequest.struct_class = Types::ListFoundationModelAgreementOffersRequest
+
+    ListFoundationModelAgreementOffersResponse.add_member(:model_id, Shapes::ShapeRef.new(shape: BedrockModelId, required: true, location_name: "modelId"))
+    ListFoundationModelAgreementOffersResponse.add_member(:offers, Shapes::ShapeRef.new(shape: Offers, required: true, location_name: "offers"))
+    ListFoundationModelAgreementOffersResponse.struct_class = Types::ListFoundationModelAgreementOffersResponse
 
     ListFoundationModelsRequest.add_member(:by_provider, Shapes::ShapeRef.new(shape: Provider, location: "querystring", location_name: "byProvider"))
     ListFoundationModelsRequest.add_member(:by_customization_type, Shapes::ShapeRef.new(shape: ModelCustomization, location: "querystring", location_name: "byCustomizationType"))
@@ -1704,6 +1946,17 @@ module Aws::Bedrock
     MarketplaceModelEndpointSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
     MarketplaceModelEndpointSummary.struct_class = Types::MarketplaceModelEndpointSummary
 
+    MetadataAttributeSchema.add_member(:key, Shapes::ShapeRef.new(shape: MetadataAttributeSchemaKeyString, required: true, location_name: "key"))
+    MetadataAttributeSchema.add_member(:type, Shapes::ShapeRef.new(shape: AttributeType, required: true, location_name: "type"))
+    MetadataAttributeSchema.add_member(:description, Shapes::ShapeRef.new(shape: MetadataAttributeSchemaDescriptionString, required: true, location_name: "description"))
+    MetadataAttributeSchema.struct_class = Types::MetadataAttributeSchema
+
+    MetadataAttributeSchemaList.member = Shapes::ShapeRef.new(shape: MetadataAttributeSchema)
+
+    MetadataConfigurationForReranking.add_member(:selection_mode, Shapes::ShapeRef.new(shape: RerankingMetadataSelectionMode, required: true, location_name: "selectionMode"))
+    MetadataConfigurationForReranking.add_member(:selective_mode_configuration, Shapes::ShapeRef.new(shape: RerankingMetadataSelectiveModeConfiguration, location_name: "selectiveModeConfiguration"))
+    MetadataConfigurationForReranking.struct_class = Types::MetadataConfigurationForReranking
+
     ModelCopyJobSummaries.member = Shapes::ShapeRef.new(shape: ModelCopyJobSummary)
 
     ModelCopyJobSummary.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelCopyJobArn, required: true, location_name: "jobArn"))
@@ -1728,6 +1981,7 @@ module Aws::Bedrock
     ModelCustomizationJobSummary.add_member(:base_model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "baseModelArn"))
     ModelCustomizationJobSummary.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "jobName"))
     ModelCustomizationJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: ModelCustomizationJobStatus, required: true, location_name: "status"))
+    ModelCustomizationJobSummary.add_member(:status_details, Shapes::ShapeRef.new(shape: StatusDetails, location_name: "statusDetails"))
     ModelCustomizationJobSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
     ModelCustomizationJobSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTime"))
     ModelCustomizationJobSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
@@ -1799,6 +2053,13 @@ module Aws::Bedrock
 
     ModelModalityList.member = Shapes::ShapeRef.new(shape: ModelModality)
 
+    Offer.add_member(:offer_id, Shapes::ShapeRef.new(shape: OfferId, location_name: "offerId"))
+    Offer.add_member(:offer_token, Shapes::ShapeRef.new(shape: OfferToken, required: true, location_name: "offerToken"))
+    Offer.add_member(:term_details, Shapes::ShapeRef.new(shape: TermDetails, required: true, location_name: "termDetails"))
+    Offer.struct_class = Types::Offer
+
+    Offers.member = Shapes::ShapeRef.new(shape: Offer)
+
     OrchestrationConfiguration.add_member(:query_transformation_configuration, Shapes::ShapeRef.new(shape: QueryTransformationConfiguration, required: true, location_name: "queryTransformationConfiguration"))
     OrchestrationConfiguration.struct_class = Types::OrchestrationConfiguration
 
@@ -1807,6 +2068,9 @@ module Aws::Bedrock
 
     PerformanceConfiguration.add_member(:latency, Shapes::ShapeRef.new(shape: PerformanceConfigLatency, location_name: "latency"))
     PerformanceConfiguration.struct_class = Types::PerformanceConfiguration
+
+    PricingTerm.add_member(:rate_card, Shapes::ShapeRef.new(shape: RateCard, required: true, location_name: "rateCard"))
+    PricingTerm.struct_class = Types::PricingTerm
 
     PromptRouterSummaries.member = Shapes::ShapeRef.new(shape: PromptRouterSummary)
 
@@ -1851,6 +2115,11 @@ module Aws::Bedrock
 
     PutModelInvocationLoggingConfigurationResponse.struct_class = Types::PutModelInvocationLoggingConfigurationResponse
 
+    PutUseCaseForModelAccessRequest.add_member(:form_data, Shapes::ShapeRef.new(shape: AcknowledgementFormDataBody, required: true, location_name: "formData"))
+    PutUseCaseForModelAccessRequest.struct_class = Types::PutUseCaseForModelAccessRequest
+
+    PutUseCaseForModelAccessResponse.struct_class = Types::PutUseCaseForModelAccessResponse
+
     QueryTransformationConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: QueryTransformationType, required: true, location_name: "type"))
     QueryTransformationConfiguration.struct_class = Types::QueryTransformationConfiguration
 
@@ -1865,6 +2134,8 @@ module Aws::Bedrock
     RAGStopSequences.member = Shapes::ShapeRef.new(shape: RAGStopSequencesMemberString)
 
     RagConfigs.member = Shapes::ShapeRef.new(shape: RAGConfig)
+
+    RateCard.member = Shapes::ShapeRef.new(shape: DimensionalPriceRate)
 
     RatingScale.member = Shapes::ShapeRef.new(shape: RatingScaleItem)
 
@@ -1907,6 +2178,14 @@ module Aws::Bedrock
 
     RequestMetadataMap.key = Shapes::ShapeRef.new(shape: RequestMetadataMapKeyString)
     RequestMetadataMap.value = Shapes::ShapeRef.new(shape: RequestMetadataMapValueString)
+
+    RerankingMetadataSelectiveModeConfiguration.add_member(:fields_to_include, Shapes::ShapeRef.new(shape: FieldsForReranking, location_name: "fieldsToInclude"))
+    RerankingMetadataSelectiveModeConfiguration.add_member(:fields_to_exclude, Shapes::ShapeRef.new(shape: FieldsForReranking, location_name: "fieldsToExclude"))
+    RerankingMetadataSelectiveModeConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RerankingMetadataSelectiveModeConfiguration.add_member_subclass(:fields_to_include, Types::RerankingMetadataSelectiveModeConfiguration::FieldsToInclude)
+    RerankingMetadataSelectiveModeConfiguration.add_member_subclass(:fields_to_exclude, Types::RerankingMetadataSelectiveModeConfiguration::FieldsToExclude)
+    RerankingMetadataSelectiveModeConfiguration.add_member_subclass(:unknown, Types::RerankingMetadataSelectiveModeConfiguration::Unknown)
+    RerankingMetadataSelectiveModeConfiguration.struct_class = Types::RerankingMetadataSelectiveModeConfiguration
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -1980,6 +2259,11 @@ module Aws::Bedrock
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
+    StatusDetails.add_member(:validation_details, Shapes::ShapeRef.new(shape: ValidationDetails, location_name: "validationDetails"))
+    StatusDetails.add_member(:data_processing_details, Shapes::ShapeRef.new(shape: DataProcessingDetails, location_name: "dataProcessingDetails"))
+    StatusDetails.add_member(:training_details, Shapes::ShapeRef.new(shape: TrainingDetails, location_name: "trainingDetails"))
+    StatusDetails.struct_class = Types::StatusDetails
+
     StopEvaluationJobRequest.add_member(:job_identifier, Shapes::ShapeRef.new(shape: EvaluationJobIdentifier, required: true, location: "uri", location_name: "jobIdentifier"))
     StopEvaluationJobRequest.struct_class = Types::StopEvaluationJobRequest
 
@@ -1996,6 +2280,9 @@ module Aws::Bedrock
     StopModelInvocationJobResponse.struct_class = Types::StopModelInvocationJobResponse
 
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
+
+    SupportTerm.add_member(:refund_policy_description, Shapes::ShapeRef.new(shape: String, location_name: "refundPolicyDescription"))
+    SupportTerm.struct_class = Types::SupportTerm
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "value"))
@@ -2015,6 +2302,12 @@ module Aws::Bedrock
     TeacherModelConfig.add_member(:max_response_length_for_inference, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResponseLengthForInference"))
     TeacherModelConfig.struct_class = Types::TeacherModelConfig
 
+    TermDetails.add_member(:usage_based_pricing_term, Shapes::ShapeRef.new(shape: PricingTerm, required: true, location_name: "usageBasedPricingTerm"))
+    TermDetails.add_member(:legal_term, Shapes::ShapeRef.new(shape: LegalTerm, required: true, location_name: "legalTerm"))
+    TermDetails.add_member(:support_term, Shapes::ShapeRef.new(shape: SupportTerm, required: true, location_name: "supportTerm"))
+    TermDetails.add_member(:validity_term, Shapes::ShapeRef.new(shape: ValidityTerm, location_name: "validityTerm"))
+    TermDetails.struct_class = Types::TermDetails
+
     TextInferenceConfig.add_member(:temperature, Shapes::ShapeRef.new(shape: Temperature, location_name: "temperature"))
     TextInferenceConfig.add_member(:top_p, Shapes::ShapeRef.new(shape: TopP, location_name: "topP"))
     TextInferenceConfig.add_member(:max_tokens, Shapes::ShapeRef.new(shape: MaxTokens, location_name: "maxTokens"))
@@ -2031,6 +2324,11 @@ module Aws::Bedrock
     TrainingDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "s3Uri"))
     TrainingDataConfig.add_member(:invocation_logs_config, Shapes::ShapeRef.new(shape: InvocationLogsConfig, location_name: "invocationLogsConfig"))
     TrainingDataConfig.struct_class = Types::TrainingDataConfig
+
+    TrainingDetails.add_member(:status, Shapes::ShapeRef.new(shape: JobStatusDetails, location_name: "status"))
+    TrainingDetails.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
+    TrainingDetails.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    TrainingDetails.struct_class = Types::TrainingDetails
 
     TrainingMetrics.add_member(:training_loss, Shapes::ShapeRef.new(shape: MetricFloat, location_name: "trainingLoss"))
     TrainingMetrics.struct_class = Types::TrainingMetrics
@@ -2049,6 +2347,7 @@ module Aws::Bedrock
     UpdateGuardrailRequest.add_member(:word_policy_config, Shapes::ShapeRef.new(shape: GuardrailWordPolicyConfig, location_name: "wordPolicyConfig"))
     UpdateGuardrailRequest.add_member(:sensitive_information_policy_config, Shapes::ShapeRef.new(shape: GuardrailSensitiveInformationPolicyConfig, location_name: "sensitiveInformationPolicyConfig"))
     UpdateGuardrailRequest.add_member(:contextual_grounding_policy_config, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingPolicyConfig, location_name: "contextualGroundingPolicyConfig"))
+    UpdateGuardrailRequest.add_member(:cross_region_config, Shapes::ShapeRef.new(shape: GuardrailCrossRegionConfig, location_name: "crossRegionConfig"))
     UpdateGuardrailRequest.add_member(:blocked_input_messaging, Shapes::ShapeRef.new(shape: GuardrailBlockedMessaging, required: true, location_name: "blockedInputMessaging"))
     UpdateGuardrailRequest.add_member(:blocked_outputs_messaging, Shapes::ShapeRef.new(shape: GuardrailBlockedMessaging, required: true, location_name: "blockedOutputsMessaging"))
     UpdateGuardrailRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
@@ -2062,7 +2361,7 @@ module Aws::Bedrock
 
     UpdateMarketplaceModelEndpointRequest.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "endpointArn"))
     UpdateMarketplaceModelEndpointRequest.add_member(:endpoint_config, Shapes::ShapeRef.new(shape: EndpointConfig, required: true, location_name: "endpointConfig"))
-    UpdateMarketplaceModelEndpointRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateMarketplaceModelEndpointRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdateMarketplaceModelEndpointRequest.struct_class = Types::UpdateMarketplaceModelEndpointRequest
 
     UpdateMarketplaceModelEndpointResponse.add_member(:marketplace_model_endpoint, Shapes::ShapeRef.new(shape: MarketplaceModelEndpoint, required: true, location_name: "marketplaceModelEndpoint"))
@@ -2078,6 +2377,11 @@ module Aws::Bedrock
     ValidationDataConfig.add_member(:validators, Shapes::ShapeRef.new(shape: Validators, required: true, location_name: "validators"))
     ValidationDataConfig.struct_class = Types::ValidationDataConfig
 
+    ValidationDetails.add_member(:status, Shapes::ShapeRef.new(shape: JobStatusDetails, location_name: "status"))
+    ValidationDetails.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
+    ValidationDetails.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    ValidationDetails.struct_class = Types::ValidationDetails
+
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
 
@@ -2091,6 +2395,22 @@ module Aws::Bedrock
 
     Validators.member = Shapes::ShapeRef.new(shape: Validator)
 
+    ValidityTerm.add_member(:agreement_duration, Shapes::ShapeRef.new(shape: String, location_name: "agreementDuration"))
+    ValidityTerm.struct_class = Types::ValidityTerm
+
+    VectorSearchBedrockRerankingConfiguration.add_member(:model_configuration, Shapes::ShapeRef.new(shape: VectorSearchBedrockRerankingModelConfiguration, required: true, location_name: "modelConfiguration"))
+    VectorSearchBedrockRerankingConfiguration.add_member(:number_of_reranked_results, Shapes::ShapeRef.new(shape: VectorSearchBedrockRerankingConfigurationNumberOfRerankedResultsInteger, location_name: "numberOfRerankedResults"))
+    VectorSearchBedrockRerankingConfiguration.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: MetadataConfigurationForReranking, location_name: "metadataConfiguration"))
+    VectorSearchBedrockRerankingConfiguration.struct_class = Types::VectorSearchBedrockRerankingConfiguration
+
+    VectorSearchBedrockRerankingModelConfiguration.add_member(:model_arn, Shapes::ShapeRef.new(shape: BedrockRerankingModelArn, required: true, location_name: "modelArn"))
+    VectorSearchBedrockRerankingModelConfiguration.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: AdditionalModelRequestFields, location_name: "additionalModelRequestFields"))
+    VectorSearchBedrockRerankingModelConfiguration.struct_class = Types::VectorSearchBedrockRerankingModelConfiguration
+
+    VectorSearchRerankingConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: VectorSearchRerankingConfigurationType, required: true, location_name: "type"))
+    VectorSearchRerankingConfiguration.add_member(:bedrock_reranking_configuration, Shapes::ShapeRef.new(shape: VectorSearchBedrockRerankingConfiguration, location_name: "bedrockRerankingConfiguration"))
+    VectorSearchRerankingConfiguration.struct_class = Types::VectorSearchRerankingConfiguration
+
     VpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "subnetIds"))
     VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, required: true, location_name: "securityGroupIds"))
     VpcConfig.struct_class = Types::VpcConfig
@@ -2103,7 +2423,7 @@ module Aws::Bedrock
 
       api.metadata = {
         "apiVersion" => "2023-04-20",
-        "auth" => ["aws.auth#sigv4"],
+        "auth" => ["aws.auth#sigv4", "smithy.api#httpBearerAuth"],
         "endpointPrefix" => "bedrock",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],
@@ -2128,6 +2448,37 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:create_custom_model, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCustomModel"
+        o.http_method = "POST"
+        o.http_request_uri = "/custom-models/create-custom-model"
+        o.input = Shapes::ShapeRef.new(shape: CreateCustomModelRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCustomModelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_custom_model_deployment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCustomModelDeployment"
+        o.http_method = "POST"
+        o.http_request_uri = "/model-customization/custom-model-deployments"
+        o.input = Shapes::ShapeRef.new(shape: CreateCustomModelDeploymentRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCustomModelDeploymentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_evaluation_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateEvaluationJob"
         o.http_method = "POST"
@@ -2140,6 +2491,20 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_foundation_model_agreement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateFoundationModelAgreement"
+        o.http_method = "POST"
+        o.http_request_uri = "/create-foundation-model-agreement"
+        o.input = Shapes::ShapeRef.new(shape: CreateFoundationModelAgreementRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateFoundationModelAgreementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
@@ -2309,6 +2674,34 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:delete_custom_model_deployment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCustomModelDeployment"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/model-customization/custom-model-deployments/{customModelDeploymentIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCustomModelDeploymentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCustomModelDeploymentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_foundation_model_agreement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFoundationModelAgreement"
+        o.http_method = "POST"
+        o.http_request_uri = "/delete-foundation-model-agreement"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFoundationModelAgreementRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteFoundationModelAgreementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:delete_guardrail, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteGuardrail"
         o.http_method = "DELETE"
@@ -2429,6 +2822,19 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:get_custom_model_deployment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCustomModelDeployment"
+        o.http_method = "GET"
+        o.http_request_uri = "/model-customization/custom-model-deployments/{customModelDeploymentIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetCustomModelDeploymentRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCustomModelDeploymentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_evaluation_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetEvaluationJob"
         o.http_method = "GET"
@@ -2448,6 +2854,19 @@ module Aws::Bedrock
         o.http_request_uri = "/foundation-models/{modelIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: GetFoundationModelRequest)
         o.output = Shapes::ShapeRef.new(shape: GetFoundationModelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_foundation_model_availability, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFoundationModelAvailability"
+        o.http_method = "GET"
+        o.http_request_uri = "/foundation-model-availability/{modelId}"
+        o.input = Shapes::ShapeRef.new(shape: GetFoundationModelAvailabilityRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFoundationModelAvailabilityResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2596,6 +3015,36 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:get_use_case_for_model_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetUseCaseForModelAccess"
+        o.http_method = "GET"
+        o.http_request_uri = "/use-case-for-model-access"
+        o.input = Shapes::ShapeRef.new(shape: GetUseCaseForModelAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetUseCaseForModelAccessResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:list_custom_model_deployments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCustomModelDeployments"
+        o.http_method = "GET"
+        o.http_request_uri = "/model-customization/custom-model-deployments"
+        o.input = Shapes::ShapeRef.new(shape: ListCustomModelDeploymentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCustomModelDeploymentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_custom_models, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListCustomModels"
         o.http_method = "GET"
@@ -2630,6 +3079,19 @@ module Aws::Bedrock
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_foundation_model_agreement_offers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFoundationModelAgreementOffers"
+        o.http_method = "GET"
+        o.http_request_uri = "/list-foundation-model-agreement-offers/{modelId}"
+        o.input = Shapes::ShapeRef.new(shape: ListFoundationModelAgreementOffersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFoundationModelAgreementOffersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:list_foundation_models, Seahorse::Model::Operation.new.tap do |o|
@@ -2846,6 +3308,18 @@ module Aws::Bedrock
         o.http_request_uri = "/logging/modelinvocations"
         o.input = Shapes::ShapeRef.new(shape: PutModelInvocationLoggingConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: PutModelInvocationLoggingConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:put_use_case_for_model_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutUseCaseForModelAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/use-case-for-model-access"
+        o.input = Shapes::ShapeRef.new(shape: PutUseCaseForModelAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutUseCaseForModelAccessResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

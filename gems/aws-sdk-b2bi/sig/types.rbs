@@ -13,6 +13,11 @@ module Aws::B2bi
       SENSITIVE: []
     end
 
+    class AdvancedOptions
+      attr_accessor x12: Types::X12AdvancedOptions
+      SENSITIVE: []
+    end
+
     class CapabilityConfiguration
       attr_accessor edi: Types::EdiConfiguration
       attr_accessor unknown: untyped
@@ -26,6 +31,7 @@ module Aws::B2bi
 
     class CapabilityOptions
       attr_accessor outbound_edi: Types::OutboundEdiOptions
+      attr_accessor inbound_edi: Types::InboundEdiOptions
       SENSITIVE: []
     end
 
@@ -338,9 +344,15 @@ module Aws::B2bi
       SENSITIVE: []
     end
 
+    class InboundEdiOptions
+      attr_accessor x12: Types::X12InboundEdiOptions
+      SENSITIVE: []
+    end
+
     class InputConversion
       attr_accessor from_format: ("X12")
       attr_accessor format_options: Types::FormatOptions
+      attr_accessor advanced_options: Types::AdvancedOptions
       SENSITIVE: []
     end
 
@@ -573,11 +585,13 @@ module Aws::B2bi
       attr_accessor input_file: Types::S3Location
       attr_accessor file_format: ("XML" | "JSON" | "NOT_USED")
       attr_accessor edi_type: Types::EdiType
+      attr_accessor advanced_options: Types::AdvancedOptions
       SENSITIVE: []
     end
 
     class TestParsingResponse
       attr_accessor parsed_file_content: ::String
+      attr_accessor parsed_split_file_contents: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -714,6 +728,31 @@ module Aws::B2bi
       SENSITIVE: []
     end
 
+    class WrapOptions
+      attr_accessor wrap_by: ("SEGMENT" | "ONE_LINE" | "LINE_LENGTH")
+      attr_accessor line_terminator: ("CRLF" | "LF" | "CR")
+      attr_accessor line_length: ::Integer
+      SENSITIVE: []
+    end
+
+    class X12AcknowledgmentOptions
+      attr_accessor functional_acknowledgment: ("DO_NOT_GENERATE" | "GENERATE_ALL_SEGMENTS" | "GENERATE_WITHOUT_TRANSACTION_SET_RESPONSE_LOOP")
+      attr_accessor technical_acknowledgment: ("DO_NOT_GENERATE" | "GENERATE_ALL_SEGMENTS")
+      SENSITIVE: []
+    end
+
+    class X12AdvancedOptions
+      attr_accessor split_options: Types::X12SplitOptions
+      SENSITIVE: []
+    end
+
+    class X12ControlNumbers
+      attr_accessor starting_interchange_control_number: ::Integer
+      attr_accessor starting_functional_group_control_number: ::Integer
+      attr_accessor starting_transaction_set_control_number: ::Integer
+      SENSITIVE: []
+    end
+
     class X12Delimiters
       attr_accessor component_separator: ::String
       attr_accessor data_element_separator: ::String
@@ -729,6 +768,7 @@ module Aws::B2bi
 
     class X12Envelope
       attr_accessor common: Types::X12OutboundEdiHeaders
+      attr_accessor wrap_options: Types::WrapOptions
       SENSITIVE: []
     end
 
@@ -736,6 +776,11 @@ module Aws::B2bi
       attr_accessor application_sender_code: ::String
       attr_accessor application_receiver_code: ::String
       attr_accessor responsible_agency_code: ::String
+      SENSITIVE: []
+    end
+
+    class X12InboundEdiOptions
+      attr_accessor acknowledgment_options: Types::X12AcknowledgmentOptions
       SENSITIVE: []
     end
 
@@ -755,6 +800,13 @@ module Aws::B2bi
       attr_accessor functional_group_headers: Types::X12FunctionalGroupHeaders
       attr_accessor delimiters: Types::X12Delimiters
       attr_accessor validate_edi: bool
+      attr_accessor control_numbers: Types::X12ControlNumbers
+      attr_accessor gs05_time_format: ("HHMM" | "HHMMSS" | "HHMMSSDD")
+      SENSITIVE: []
+    end
+
+    class X12SplitOptions
+      attr_accessor split_by: ("NONE" | "TRANSACTION")
       SENSITIVE: []
     end
   end

@@ -200,8 +200,7 @@ module Aws::Route53Resolver
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -613,7 +612,7 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.name #=> String
     #   resp.resolver_endpoint.security_group_ids #=> Array
     #   resp.resolver_endpoint.security_group_ids[0] #=> String
-    #   resp.resolver_endpoint.direction #=> String, one of "INBOUND", "OUTBOUND"
+    #   resp.resolver_endpoint.direction #=> String, one of "INBOUND", "OUTBOUND", "INBOUND_DELEGATION"
     #   resp.resolver_endpoint.ip_address_count #=> Integer
     #   resp.resolver_endpoint.host_vpc_id #=> String
     #   resp.resolver_endpoint.status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "AUTO_RECOVERING", "ACTION_NEEDED", "DELETING"
@@ -1191,10 +1190,13 @@ module Aws::Route53Resolver
     #   Specify the applicable value:
     #
     #   * `INBOUND`: Resolver forwards DNS queries to the DNS service for a
-    #     VPC from your network
+    #     VPC from your network.
     #
     #   * `OUTBOUND`: Resolver forwards DNS queries from the DNS service for a
-    #     VPC to your network
+    #     VPC to your network.
+    #
+    #   * `INBOUND_DELEGATION`: Resolver delegates queries to Route 53 private
+    #     hosted zones from your network.
     #
     # @option params [required, Array<Types::IpAddressRequest>] :ip_addresses
     #   The subnets and IP addresses in your VPC that DNS queries originate
@@ -1225,9 +1227,9 @@ module Aws::Route53Resolver
     #
     # @option params [Array<String>] :protocols
     #   The protocols you want to use for the endpoint. DoH-FIPS is applicable
-    #   for inbound endpoints only.
+    #   for default inbound endpoints only.
     #
-    #   For an inbound endpoint you can apply the protocols as follows:
+    #   For a default inbound endpoint you can apply the protocols as follows:
     #
     #   * Do53 and DoH in combination.
     #
@@ -1240,6 +1242,8 @@ module Aws::Route53Resolver
     #   * DoH-FIPS alone.
     #
     #   * None, which is treated as Do53.
+    #
+    #   For a delegation inbound endpoint you can use Do53 only.
     #
     #   For an outbound endpoint you can apply the protocols as follows:
     #
@@ -1261,7 +1265,7 @@ module Aws::Route53Resolver
     #     creator_request_id: "CreatorRequestId", # required
     #     name: "Name",
     #     security_group_ids: ["ResourceId"], # required
-    #     direction: "INBOUND", # required, accepts INBOUND, OUTBOUND
+    #     direction: "INBOUND", # required, accepts INBOUND, OUTBOUND, INBOUND_DELEGATION
     #     ip_addresses: [ # required
     #       {
     #         subnet_id: "SubnetId", # required
@@ -1289,7 +1293,7 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.name #=> String
     #   resp.resolver_endpoint.security_group_ids #=> Array
     #   resp.resolver_endpoint.security_group_ids[0] #=> String
-    #   resp.resolver_endpoint.direction #=> String, one of "INBOUND", "OUTBOUND"
+    #   resp.resolver_endpoint.direction #=> String, one of "INBOUND", "OUTBOUND", "INBOUND_DELEGATION"
     #   resp.resolver_endpoint.ip_address_count #=> Integer
     #   resp.resolver_endpoint.host_vpc_id #=> String
     #   resp.resolver_endpoint.status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "AUTO_RECOVERING", "ACTION_NEEDED", "DELETING"
@@ -1426,7 +1430,7 @@ module Aws::Route53Resolver
     #
     # @option params [required, String] :rule_type
     #   When you want to forward DNS queries for specified domain name to
-    #   resolvers on your network, specify `FORWARD`.
+    #   resolvers on your network, specify `FORWARD` or `DELEGATE`.
     #
     #   When you have a forwarding rule to forward DNS queries for a domain to
     #   your network and you want Resolver to process queries for a subdomain
@@ -1463,6 +1467,10 @@ module Aws::Route53Resolver
     #   A list of the tag keys and values that you want to associate with the
     #   endpoint.
     #
+    # @option params [String] :delegation_record
+    #   DNS queries with the delegation records that match this domain name
+    #   are forwarded to the resolvers on your network.
+    #
     # @return [Types::CreateResolverRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateResolverRuleResponse#resolver_rule #resolver_rule} => Types::ResolverRule
@@ -1472,7 +1480,7 @@ module Aws::Route53Resolver
     #   resp = client.create_resolver_rule({
     #     creator_request_id: "CreatorRequestId", # required
     #     name: "Name",
-    #     rule_type: "FORWARD", # required, accepts FORWARD, SYSTEM, RECURSIVE
+    #     rule_type: "FORWARD", # required, accepts FORWARD, SYSTEM, RECURSIVE, DELEGATE
     #     domain_name: "DomainName",
     #     target_ips: [
     #       {
@@ -1490,6 +1498,7 @@ module Aws::Route53Resolver
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     delegation_record: "DelegationRecord",
     #   })
     #
     # @example Response structure
@@ -1500,7 +1509,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.domain_name #=> String
     #   resp.resolver_rule.status #=> String, one of "COMPLETE", "DELETING", "UPDATING", "FAILED"
     #   resp.resolver_rule.status_message #=> String
-    #   resp.resolver_rule.rule_type #=> String, one of "FORWARD", "SYSTEM", "RECURSIVE"
+    #   resp.resolver_rule.rule_type #=> String, one of "FORWARD", "SYSTEM", "RECURSIVE", "DELEGATE"
     #   resp.resolver_rule.name #=> String
     #   resp.resolver_rule.target_ips #=> Array
     #   resp.resolver_rule.target_ips[0].ip #=> String
@@ -1513,6 +1522,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
     #   resp.resolver_rule.creation_time #=> String
     #   resp.resolver_rule.modification_time #=> String
+    #   resp.resolver_rule.delegation_record #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateResolverRule AWS API Documentation
     #
@@ -1763,7 +1773,7 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.name #=> String
     #   resp.resolver_endpoint.security_group_ids #=> Array
     #   resp.resolver_endpoint.security_group_ids[0] #=> String
-    #   resp.resolver_endpoint.direction #=> String, one of "INBOUND", "OUTBOUND"
+    #   resp.resolver_endpoint.direction #=> String, one of "INBOUND", "OUTBOUND", "INBOUND_DELEGATION"
     #   resp.resolver_endpoint.ip_address_count #=> Integer
     #   resp.resolver_endpoint.host_vpc_id #=> String
     #   resp.resolver_endpoint.status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "AUTO_RECOVERING", "ACTION_NEEDED", "DELETING"
@@ -1873,7 +1883,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.domain_name #=> String
     #   resp.resolver_rule.status #=> String, one of "COMPLETE", "DELETING", "UPDATING", "FAILED"
     #   resp.resolver_rule.status_message #=> String
-    #   resp.resolver_rule.rule_type #=> String, one of "FORWARD", "SYSTEM", "RECURSIVE"
+    #   resp.resolver_rule.rule_type #=> String, one of "FORWARD", "SYSTEM", "RECURSIVE", "DELEGATE"
     #   resp.resolver_rule.name #=> String
     #   resp.resolver_rule.target_ips #=> Array
     #   resp.resolver_rule.target_ips[0].ip #=> String
@@ -1886,6 +1896,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
     #   resp.resolver_rule.creation_time #=> String
     #   resp.resolver_rule.modification_time #=> String
+    #   resp.resolver_rule.delegation_record #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteResolverRule AWS API Documentation
     #
@@ -1979,7 +1990,7 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.name #=> String
     #   resp.resolver_endpoint.security_group_ids #=> Array
     #   resp.resolver_endpoint.security_group_ids[0] #=> String
-    #   resp.resolver_endpoint.direction #=> String, one of "INBOUND", "OUTBOUND"
+    #   resp.resolver_endpoint.direction #=> String, one of "INBOUND", "OUTBOUND", "INBOUND_DELEGATION"
     #   resp.resolver_endpoint.ip_address_count #=> Integer
     #   resp.resolver_endpoint.host_vpc_id #=> String
     #   resp.resolver_endpoint.status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "AUTO_RECOVERING", "ACTION_NEEDED", "DELETING"
@@ -2409,7 +2420,7 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.name #=> String
     #   resp.resolver_endpoint.security_group_ids #=> Array
     #   resp.resolver_endpoint.security_group_ids[0] #=> String
-    #   resp.resolver_endpoint.direction #=> String, one of "INBOUND", "OUTBOUND"
+    #   resp.resolver_endpoint.direction #=> String, one of "INBOUND", "OUTBOUND", "INBOUND_DELEGATION"
     #   resp.resolver_endpoint.ip_address_count #=> Integer
     #   resp.resolver_endpoint.host_vpc_id #=> String
     #   resp.resolver_endpoint.status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "AUTO_RECOVERING", "ACTION_NEEDED", "DELETING"
@@ -2565,7 +2576,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.domain_name #=> String
     #   resp.resolver_rule.status #=> String, one of "COMPLETE", "DELETING", "UPDATING", "FAILED"
     #   resp.resolver_rule.status_message #=> String
-    #   resp.resolver_rule.rule_type #=> String, one of "FORWARD", "SYSTEM", "RECURSIVE"
+    #   resp.resolver_rule.rule_type #=> String, one of "FORWARD", "SYSTEM", "RECURSIVE", "DELEGATE"
     #   resp.resolver_rule.name #=> String
     #   resp.resolver_rule.target_ips #=> Array
     #   resp.resolver_rule.target_ips[0].ip #=> String
@@ -2578,6 +2589,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
     #   resp.resolver_rule.creation_time #=> String
     #   resp.resolver_rule.modification_time #=> String
+    #   resp.resolver_rule.delegation_record #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverRule AWS API Documentation
     #
@@ -3357,7 +3369,7 @@ module Aws::Route53Resolver
     #   resp.ip_addresses[0].subnet_id #=> String
     #   resp.ip_addresses[0].ip #=> String
     #   resp.ip_addresses[0].ipv_6 #=> String
-    #   resp.ip_addresses[0].status #=> String, one of "CREATING", "FAILED_CREATION", "ATTACHING", "ATTACHED", "REMAP_DETACHING", "REMAP_ATTACHING", "DETACHING", "FAILED_RESOURCE_GONE", "DELETING", "DELETE_FAILED_FAS_EXPIRED", "UPDATING", "UPDATE_FAILED"
+    #   resp.ip_addresses[0].status #=> String, one of "CREATING", "FAILED_CREATION", "ATTACHING", "ATTACHED", "REMAP_DETACHING", "REMAP_ATTACHING", "DETACHING", "FAILED_RESOURCE_GONE", "DELETING", "DELETE_FAILED_FAS_EXPIRED", "UPDATING", "UPDATE_FAILED", "ISOLATED"
     #   resp.ip_addresses[0].status_message #=> String
     #   resp.ip_addresses[0].creation_time #=> String
     #   resp.ip_addresses[0].modification_time #=> String
@@ -3430,7 +3442,7 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoints[0].name #=> String
     #   resp.resolver_endpoints[0].security_group_ids #=> Array
     #   resp.resolver_endpoints[0].security_group_ids[0] #=> String
-    #   resp.resolver_endpoints[0].direction #=> String, one of "INBOUND", "OUTBOUND"
+    #   resp.resolver_endpoints[0].direction #=> String, one of "INBOUND", "OUTBOUND", "INBOUND_DELEGATION"
     #   resp.resolver_endpoints[0].ip_address_count #=> Integer
     #   resp.resolver_endpoints[0].host_vpc_id #=> String
     #   resp.resolver_endpoints[0].status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "AUTO_RECOVERING", "ACTION_NEEDED", "DELETING"
@@ -3866,7 +3878,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rules[0].domain_name #=> String
     #   resp.resolver_rules[0].status #=> String, one of "COMPLETE", "DELETING", "UPDATING", "FAILED"
     #   resp.resolver_rules[0].status_message #=> String
-    #   resp.resolver_rules[0].rule_type #=> String, one of "FORWARD", "SYSTEM", "RECURSIVE"
+    #   resp.resolver_rules[0].rule_type #=> String, one of "FORWARD", "SYSTEM", "RECURSIVE", "DELEGATE"
     #   resp.resolver_rules[0].name #=> String
     #   resp.resolver_rules[0].target_ips #=> Array
     #   resp.resolver_rules[0].target_ips[0].ip #=> String
@@ -3879,6 +3891,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rules[0].share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
     #   resp.resolver_rules[0].creation_time #=> String
     #   resp.resolver_rules[0].modification_time #=> String
+    #   resp.resolver_rules[0].delegation_record #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverRules AWS API Documentation
     #
@@ -4617,8 +4630,8 @@ module Aws::Route53Resolver
     # single VPC from Amazon Virtual Private Cloud.
     #
     # @option params [required, String] :resource_id
-    #   Resource ID of the Amazon VPC that you want to update the Resolver
-    #   configuration for.
+    #   The ID of the Amazon Virtual Private Cloud VPC or a Route 53 Profile
+    #   that you're configuring Resolver for.
     #
     # @option params [required, String] :autodefined_reverse_flag
     #   Indicates whether or not the Resolver will create autodefined rules
@@ -4732,9 +4745,9 @@ module Aws::Route53Resolver
     #
     # @option params [Array<String>] :protocols
     #   The protocols you want to use for the endpoint. DoH-FIPS is applicable
-    #   for inbound endpoints only.
+    #   for default inbound endpoints only.
     #
-    #   For an inbound endpoint you can apply the protocols as follows:
+    #   For a default inbound endpoint you can apply the protocols as follows:
     #
     #   * Do53 and DoH in combination.
     #
@@ -4747,6 +4760,8 @@ module Aws::Route53Resolver
     #   * DoH-FIPS alone.
     #
     #   * None, which is treated as Do53.
+    #
+    #   For a delegation inbound endpoint you can use Do53 only.
     #
     #   For an outbound endpoint you can apply the protocols as follows:
     #
@@ -4793,7 +4808,7 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.name #=> String
     #   resp.resolver_endpoint.security_group_ids #=> Array
     #   resp.resolver_endpoint.security_group_ids[0] #=> String
-    #   resp.resolver_endpoint.direction #=> String, one of "INBOUND", "OUTBOUND"
+    #   resp.resolver_endpoint.direction #=> String, one of "INBOUND", "OUTBOUND", "INBOUND_DELEGATION"
     #   resp.resolver_endpoint.ip_address_count #=> Integer
     #   resp.resolver_endpoint.host_vpc_id #=> String
     #   resp.resolver_endpoint.status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "AUTO_RECOVERING", "ACTION_NEEDED", "DELETING"
@@ -4856,7 +4871,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.domain_name #=> String
     #   resp.resolver_rule.status #=> String, one of "COMPLETE", "DELETING", "UPDATING", "FAILED"
     #   resp.resolver_rule.status_message #=> String
-    #   resp.resolver_rule.rule_type #=> String, one of "FORWARD", "SYSTEM", "RECURSIVE"
+    #   resp.resolver_rule.rule_type #=> String, one of "FORWARD", "SYSTEM", "RECURSIVE", "DELEGATE"
     #   resp.resolver_rule.name #=> String
     #   resp.resolver_rule.target_ips #=> Array
     #   resp.resolver_rule.target_ips[0].ip #=> String
@@ -4869,6 +4884,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
     #   resp.resolver_rule.creation_time #=> String
     #   resp.resolver_rule.modification_time #=> String
+    #   resp.resolver_rule.delegation_record #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverRule AWS API Documentation
     #
@@ -4897,7 +4913,7 @@ module Aws::Route53Resolver
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53resolver'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

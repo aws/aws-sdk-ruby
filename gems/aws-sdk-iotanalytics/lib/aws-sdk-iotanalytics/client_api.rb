@@ -940,7 +940,7 @@ module Aws::IoTAnalytics
 
     Variable.add_member(:name, Shapes::ShapeRef.new(shape: VariableName, required: true, location_name: "name"))
     Variable.add_member(:string_value, Shapes::ShapeRef.new(shape: StringValue, location_name: "stringValue"))
-    Variable.add_member(:double_value, Shapes::ShapeRef.new(shape: DoubleValue, location_name: "doubleValue", metadata: {"box"=>true}))
+    Variable.add_member(:double_value, Shapes::ShapeRef.new(shape: DoubleValue, location_name: "doubleValue", metadata: {"box" => true}))
     Variable.add_member(:dataset_content_version_value, Shapes::ShapeRef.new(shape: DatasetContentVersionValue, location_name: "datasetContentVersionValue"))
     Variable.add_member(:output_file_uri_value, Shapes::ShapeRef.new(shape: OutputFileUriValue, location_name: "outputFileUriValue"))
     Variable.struct_class = Types::Variable

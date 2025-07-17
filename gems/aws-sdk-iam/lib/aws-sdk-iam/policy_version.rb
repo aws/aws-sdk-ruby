@@ -45,12 +45,12 @@ module Aws::IAM
     # The policy document.
     #
     # The policy document is returned in the response to the
-    # GetPolicyVersion and GetAccountAuthorizationDetails operations. It is
-    # not returned in the response to the CreatePolicyVersion or
-    # ListPolicyVersions operations.
+    # [GetPolicyVersion][1] and [GetAccountAuthorizationDetails][2]
+    # operations. It is not returned in the response to the
+    # [CreatePolicyVersion][3] or [ListPolicyVersions][4] operations.
     #
     # The policy document returned in this structure is URL-encoded
-    # compliant with [RFC 3986][1]. You can use a URL decoding method to
+    # compliant with [RFC 3986][5]. You can use a URL decoding method to
     # convert the policy back to plain JSON text. For example, if you use
     # Java, you can use the `decode` method of the `java.net.URLDecoder`
     # utility class in the Java SDK. Other languages and SDKs provide
@@ -58,7 +58,11 @@ module Aws::IAM
     #
     #
     #
-    # [1]: https://tools.ietf.org/html/rfc3986
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountAuthorizationDetails.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicyVersion.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPolicyVersions.html
+    # [5]: https://tools.ietf.org/html/rfc3986
     # @return [String]
     def document
       data[:document]

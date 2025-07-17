@@ -254,8 +254,8 @@ module Aws::Outposts
 
     AccountIdList.member = Shapes::ShapeRef.new(shape: AccountId)
 
-    Address.add_member(:contact_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "ContactName"))
-    Address.add_member(:contact_phone_number, Shapes::ShapeRef.new(shape: ContactPhoneNumber, location_name: "ContactPhoneNumber"))
+    Address.add_member(:contact_name, Shapes::ShapeRef.new(shape: ContactName, required: true, location_name: "ContactName"))
+    Address.add_member(:contact_phone_number, Shapes::ShapeRef.new(shape: ContactPhoneNumber, required: true, location_name: "ContactPhoneNumber"))
     Address.add_member(:address_line_1, Shapes::ShapeRef.new(shape: AddressLine1, required: true, location_name: "AddressLine1"))
     Address.add_member(:address_line_2, Shapes::ShapeRef.new(shape: AddressLine2, location_name: "AddressLine2"))
     Address.add_member(:address_line_3, Shapes::ShapeRef.new(shape: AddressLine3, location_name: "AddressLine3"))

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.139.0 (2025-06-11)
+------------------
+
+* Feature - Release for EKS Pod Identity Cross Account feature and disableSessionTags flag.
+
+1.138.0 (2025-06-02)
+------------------
+
+* Feature - Add support for filtering ListInsights API calls on MISCONFIGURATION insight category
+
+1.137.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.136.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.135.0 (2025-04-16)
 ------------------
 

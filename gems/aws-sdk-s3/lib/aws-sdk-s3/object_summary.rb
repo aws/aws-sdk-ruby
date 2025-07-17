@@ -359,8 +359,8 @@ module Aws::S3
     #     },
     #     metadata_directive: "COPY", # accepts COPY, REPLACE
     #     tagging_directive: "COPY", # accepts COPY, REPLACE
-    #     server_side_encryption: "AES256", # accepts AES256, aws:kms, aws:kms:dsse
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE
+    #     server_side_encryption: "AES256", # accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -749,6 +749,14 @@ module Aws::S3
     #     encryption-related request headers, you must ensure the encryption
     #     key is the same customer managed key that you specified for the
     #     directory bucket's default encryption configuration.
+    #
+    #   * <b>S3 access points for Amazon FSx </b> - When accessing data stored
+    #     in Amazon FSx file systems using S3 access points, the only valid
+    #     server side encryption option is `aws:fsx`. All Amazon FSx file
+    #     systems have encryption configured by default and are encrypted at
+    #     rest. Data is automatically encrypted before being written to the
+    #     file system, and automatically decrypted as it is read. These
+    #     processes are handled transparently by Amazon FSx.
     #
     #
     #
@@ -1448,8 +1456,8 @@ module Aws::S3
     #     metadata: {
     #       "MetadataKey" => "MetadataValue",
     #     },
-    #     server_side_encryption: "AES256", # accepts AES256, aws:kms, aws:kms:dsse
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE
+    #     server_side_encryption: "AES256", # accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -1766,7 +1774,7 @@ module Aws::S3
     #   A map of metadata to store with the object in S3.
     # @option options [String] :server_side_encryption
     #   The server-side encryption algorithm used when you store this object
-    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
+    #   in Amazon S3 or Amazon FSx.
     #
     #   * <b>Directory buckets </b> - For directory buckets, there are only
     #     two supported options for server-side encryption: server-side
@@ -1807,6 +1815,14 @@ module Aws::S3
     #     default encryption configuration of the directory bucket.
     #
     #      </note>
+    #
+    #   * <b>S3 access points for Amazon FSx </b> - When accessing data stored
+    #     in Amazon FSx file systems using S3 access points, the only valid
+    #     server side encryption option is `aws:fsx`. All Amazon FSx file
+    #     systems have encryption configured by default and are encrypted at
+    #     rest. Data is automatically encrypted before being written to the
+    #     file system, and automatically decrypted as it is read. These
+    #     processes are handled transparently by Amazon FSx.
     #
     #
     #
@@ -2041,8 +2057,8 @@ module Aws::S3
     #     metadata: {
     #       "MetadataKey" => "MetadataValue",
     #     },
-    #     server_side_encryption: "AES256", # accepts AES256, aws:kms, aws:kms:dsse
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE
+    #     server_side_encryption: "AES256", # accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -2352,8 +2368,7 @@ module Aws::S3
     #   A map of metadata to store with the object in S3.
     # @option options [String] :server_side_encryption
     #   The server-side encryption algorithm that was used when you store this
-    #   object in Amazon S3 (for example, `AES256`, `aws:kms`,
-    #   `aws:kms:dsse`).
+    #   object in Amazon S3 or Amazon FSx.
     #
     #   * <b>General purpose buckets </b> - You have four mutually exclusive
     #     options to protect data using server-side encryption in Amazon S3,
@@ -2406,6 +2421,14 @@ module Aws::S3
     #     default encryption configuration of the directory bucket.
     #
     #      </note>
+    #
+    #   * <b>S3 access points for Amazon FSx </b> - When accessing data stored
+    #     in Amazon FSx file systems using S3 access points, the only valid
+    #     server side encryption option is `aws:fsx`. All Amazon FSx file
+    #     systems have encryption configured by default and are encrypted at
+    #     rest. Data is automatically encrypted before being written to the
+    #     file system, and automatically decrypted as it is read. These
+    #     processes are handled transparently by Amazon FSx.
     #
     #
     #
@@ -2679,7 +2702,7 @@ module Aws::S3
     #           bucket_name: "BucketName", # required
     #           prefix: "LocationPrefix", # required
     #           encryption: {
-    #             encryption_type: "AES256", # required, accepts AES256, aws:kms, aws:kms:dsse
+    #             encryption_type: "AES256", # required, accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
     #             kms_key_id: "SSEKMSKeyId",
     #             kms_context: "KMSContext",
     #           },
@@ -2710,7 +2733,7 @@ module Aws::S3
     #               value: "MetadataValue",
     #             },
     #           ],
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
     #         },
     #       },
     #     },

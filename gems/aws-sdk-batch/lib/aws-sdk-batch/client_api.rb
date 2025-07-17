@@ -275,6 +275,7 @@ module Aws::Batch
     UpdatePolicy = Shapes::StructureShape.new(name: 'UpdatePolicy')
     UpdateSchedulingPolicyRequest = Shapes::StructureShape.new(name: 'UpdateSchedulingPolicyRequest')
     UpdateSchedulingPolicyResponse = Shapes::StructureShape.new(name: 'UpdateSchedulingPolicyResponse')
+    UserdataType = Shapes::StringShape.new(name: 'UserdataType')
     Volume = Shapes::StructureShape.new(name: 'Volume')
     Volumes = Shapes::ListShape.new(name: 'Volumes')
 
@@ -363,7 +364,7 @@ module Aws::Batch
     ComputeResource.add_member(:maxv_cpus, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "maxvCpus"))
     ComputeResource.add_member(:desiredv_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "desiredvCpus"))
     ComputeResource.add_member(:instance_types, Shapes::ShapeRef.new(shape: StringList, location_name: "instanceTypes"))
-    ComputeResource.add_member(:image_id, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "imageId", metadata: {"deprecatedMessage"=>"This field is deprecated, use ec2Configuration[].imageIdOverride instead."}))
+    ComputeResource.add_member(:image_id, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "imageId", metadata: {"deprecatedMessage" => "This field is deprecated, use ec2Configuration[].imageIdOverride instead."}))
     ComputeResource.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "subnets"))
     ComputeResource.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "securityGroupIds"))
     ComputeResource.add_member(:ec2_key_pair, Shapes::ShapeRef.new(shape: String, location_name: "ec2KeyPair"))
@@ -445,8 +446,8 @@ module Aws::Batch
     ContainerDetail.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableExecuteCommand"))
     ContainerDetail.struct_class = Types::ContainerDetail
 
-    ContainerOverrides.add_member(:vcpus, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "vcpus", metadata: {"deprecatedMessage"=>"This field is deprecated, use resourceRequirements instead."}))
-    ContainerOverrides.add_member(:memory, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "memory", metadata: {"deprecatedMessage"=>"This field is deprecated, use resourceRequirements instead."}))
+    ContainerOverrides.add_member(:vcpus, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "vcpus", metadata: {"deprecatedMessage" => "This field is deprecated, use resourceRequirements instead."}))
+    ContainerOverrides.add_member(:memory, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "memory", metadata: {"deprecatedMessage" => "This field is deprecated, use resourceRequirements instead."}))
     ContainerOverrides.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
     ContainerOverrides.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     ContainerOverrides.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environment"))
@@ -454,8 +455,8 @@ module Aws::Batch
     ContainerOverrides.struct_class = Types::ContainerOverrides
 
     ContainerProperties.add_member(:image, Shapes::ShapeRef.new(shape: String, location_name: "image"))
-    ContainerProperties.add_member(:vcpus, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "vcpus", metadata: {"deprecatedMessage"=>"This field is deprecated, use resourceRequirements instead."}))
-    ContainerProperties.add_member(:memory, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "memory", metadata: {"deprecatedMessage"=>"This field is deprecated, use resourceRequirements instead."}))
+    ContainerProperties.add_member(:vcpus, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "vcpus", metadata: {"deprecatedMessage" => "This field is deprecated, use resourceRequirements instead."}))
+    ContainerProperties.add_member(:memory, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "memory", metadata: {"deprecatedMessage" => "This field is deprecated, use resourceRequirements instead."}))
     ContainerProperties.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
     ContainerProperties.add_member(:job_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "jobRoleArn"))
     ContainerProperties.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "executionRoleArn"))
@@ -1008,12 +1009,14 @@ module Aws::Batch
     LaunchTemplateSpecification.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateName"))
     LaunchTemplateSpecification.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     LaunchTemplateSpecification.add_member(:overrides, Shapes::ShapeRef.new(shape: LaunchTemplateSpecificationOverrideList, location_name: "overrides"))
+    LaunchTemplateSpecification.add_member(:userdata_type, Shapes::ShapeRef.new(shape: UserdataType, location_name: "userdataType"))
     LaunchTemplateSpecification.struct_class = Types::LaunchTemplateSpecification
 
     LaunchTemplateSpecificationOverride.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateId"))
     LaunchTemplateSpecificationOverride.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateName"))
     LaunchTemplateSpecificationOverride.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     LaunchTemplateSpecificationOverride.add_member(:target_instance_types, Shapes::ShapeRef.new(shape: StringList, location_name: "targetInstanceTypes"))
+    LaunchTemplateSpecificationOverride.add_member(:userdata_type, Shapes::ShapeRef.new(shape: UserdataType, location_name: "userdataType"))
     LaunchTemplateSpecificationOverride.struct_class = Types::LaunchTemplateSpecificationOverride
 
     LaunchTemplateSpecificationOverrideList.member = Shapes::ShapeRef.new(shape: LaunchTemplateSpecificationOverride)
@@ -1382,7 +1385,7 @@ module Aws::Batch
     UpdateConsumableResourceRequest.add_member(:consumable_resource, Shapes::ShapeRef.new(shape: String, required: true, location_name: "consumableResource"))
     UpdateConsumableResourceRequest.add_member(:operation, Shapes::ShapeRef.new(shape: String, location_name: "operation"))
     UpdateConsumableResourceRequest.add_member(:quantity, Shapes::ShapeRef.new(shape: Long, location_name: "quantity"))
-    UpdateConsumableResourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateConsumableResourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateConsumableResourceRequest.struct_class = Types::UpdateConsumableResourceRequest
 
     UpdateConsumableResourceResponse.add_member(:consumable_resource_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "consumableResourceName"))

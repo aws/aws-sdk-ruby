@@ -23,6 +23,7 @@ module Aws::EMRServerless
     ApplicationStateSet = Shapes::ListShape.new(name: 'ApplicationStateSet')
     ApplicationSummary = Shapes::StructureShape.new(name: 'ApplicationSummary')
     Architecture = Shapes::StringShape.new(name: 'Architecture')
+    Arn = Shapes::StringShape.new(name: 'Arn')
     AttemptNumber = Shapes::IntegerShape.new(name: 'AttemptNumber')
     AutoStartConfig = Shapes::StructureShape.new(name: 'AutoStartConfig')
     AutoStopConfig = Shapes::StructureShape.new(name: 'AutoStopConfig')
@@ -62,6 +63,10 @@ module Aws::EMRServerless
     Hive = Shapes::StructureShape.new(name: 'Hive')
     HiveCliParameters = Shapes::StringShape.new(name: 'HiveCliParameters')
     IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
+    IdentityCenterApplicationArn = Shapes::StringShape.new(name: 'IdentityCenterApplicationArn')
+    IdentityCenterConfiguration = Shapes::StructureShape.new(name: 'IdentityCenterConfiguration')
+    IdentityCenterConfigurationInput = Shapes::StructureShape.new(name: 'IdentityCenterConfigurationInput')
+    IdentityCenterInstanceArn = Shapes::StringShape.new(name: 'IdentityCenterInstanceArn')
     ImageConfiguration = Shapes::StructureShape.new(name: 'ImageConfiguration')
     ImageConfigurationInput = Shapes::StructureShape.new(name: 'ImageConfigurationInput')
     ImageDigest = Shapes::StringShape.new(name: 'ImageDigest')
@@ -77,6 +82,7 @@ module Aws::EMRServerless
     JobRun = Shapes::StructureShape.new(name: 'JobRun')
     JobRunAttemptSummary = Shapes::StructureShape.new(name: 'JobRunAttemptSummary')
     JobRunAttempts = Shapes::ListShape.new(name: 'JobRunAttempts')
+    JobRunExecutionIamPolicy = Shapes::StructureShape.new(name: 'JobRunExecutionIamPolicy')
     JobRunId = Shapes::StringShape.new(name: 'JobRunId')
     JobRunMode = Shapes::StringShape.new(name: 'JobRunMode')
     JobRunState = Shapes::StringShape.new(name: 'JobRunState')
@@ -107,6 +113,8 @@ module Aws::EMRServerless
     MonitoringConfiguration = Shapes::StructureShape.new(name: 'MonitoringConfiguration')
     NetworkConfiguration = Shapes::StructureShape.new(name: 'NetworkConfiguration')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    PolicyArnList = Shapes::ListShape.new(name: 'PolicyArnList')
+    PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
     PrometheusMonitoringConfiguration = Shapes::StructureShape.new(name: 'PrometheusMonitoringConfiguration')
     PrometheusUrlString = Shapes::StringShape.new(name: 'PrometheusUrlString')
     Query = Shapes::StringShape.new(name: 'Query')
@@ -123,6 +131,7 @@ module Aws::EMRServerless
     SecurityGroupString = Shapes::StringShape.new(name: 'SecurityGroupString')
     SensitivePropertiesMap = Shapes::MapShape.new(name: 'SensitivePropertiesMap')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    ShutdownGracePeriodInSeconds = Shapes::IntegerShape.new(name: 'ShutdownGracePeriodInSeconds')
     SparkSubmit = Shapes::StructureShape.new(name: 'SparkSubmit')
     SparkSubmitParameters = Shapes::StringShape.new(name: 'SparkSubmitParameters')
     StartApplicationRequest = Shapes::StructureShape.new(name: 'StartApplicationRequest')
@@ -179,6 +188,7 @@ module Aws::EMRServerless
     Application.add_member(:monitoring_configuration, Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoringConfiguration"))
     Application.add_member(:interactive_configuration, Shapes::ShapeRef.new(shape: InteractiveConfiguration, location_name: "interactiveConfiguration"))
     Application.add_member(:scheduler_configuration, Shapes::ShapeRef.new(shape: SchedulerConfiguration, location_name: "schedulerConfiguration"))
+    Application.add_member(:identity_center_configuration, Shapes::ShapeRef.new(shape: IdentityCenterConfiguration, location_name: "identityCenterConfiguration"))
     Application.struct_class = Types::Application
 
     ApplicationList.member = Shapes::ShapeRef.new(shape: ApplicationSummary)
@@ -206,6 +216,7 @@ module Aws::EMRServerless
 
     CancelJobRunRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
     CancelJobRunRequest.add_member(:job_run_id, Shapes::ShapeRef.new(shape: JobRunId, required: true, location: "uri", location_name: "jobRunId"))
+    CancelJobRunRequest.add_member(:shutdown_grace_period_in_seconds, Shapes::ShapeRef.new(shape: ShutdownGracePeriodInSeconds, location: "querystring", location_name: "shutdownGracePeriodInSeconds"))
     CancelJobRunRequest.struct_class = Types::CancelJobRunRequest
 
     CancelJobRunResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "applicationId"))
@@ -236,7 +247,7 @@ module Aws::EMRServerless
     CreateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "name"))
     CreateApplicationRequest.add_member(:release_label, Shapes::ShapeRef.new(shape: ReleaseLabel, required: true, location_name: "releaseLabel"))
     CreateApplicationRequest.add_member(:type, Shapes::ShapeRef.new(shape: EngineType, required: true, location_name: "type"))
-    CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateApplicationRequest.add_member(:initial_capacity, Shapes::ShapeRef.new(shape: InitialCapacityConfigMap, location_name: "initialCapacity"))
     CreateApplicationRequest.add_member(:maximum_capacity, Shapes::ShapeRef.new(shape: MaximumAllowedResources, location_name: "maximumCapacity"))
     CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -250,6 +261,7 @@ module Aws::EMRServerless
     CreateApplicationRequest.add_member(:monitoring_configuration, Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoringConfiguration"))
     CreateApplicationRequest.add_member(:interactive_configuration, Shapes::ShapeRef.new(shape: InteractiveConfiguration, location_name: "interactiveConfiguration"))
     CreateApplicationRequest.add_member(:scheduler_configuration, Shapes::ShapeRef.new(shape: SchedulerConfiguration, location_name: "schedulerConfiguration"))
+    CreateApplicationRequest.add_member(:identity_center_configuration, Shapes::ShapeRef.new(shape: IdentityCenterConfigurationInput, location_name: "identityCenterConfiguration"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "applicationId"))
@@ -292,6 +304,13 @@ module Aws::EMRServerless
     Hive.add_member(:parameters, Shapes::ShapeRef.new(shape: HiveCliParameters, location_name: "parameters"))
     Hive.struct_class = Types::Hive
 
+    IdentityCenterConfiguration.add_member(:identity_center_instance_arn, Shapes::ShapeRef.new(shape: IdentityCenterInstanceArn, location_name: "identityCenterInstanceArn"))
+    IdentityCenterConfiguration.add_member(:identity_center_application_arn, Shapes::ShapeRef.new(shape: IdentityCenterApplicationArn, location_name: "identityCenterApplicationArn"))
+    IdentityCenterConfiguration.struct_class = Types::IdentityCenterConfiguration
+
+    IdentityCenterConfigurationInput.add_member(:identity_center_instance_arn, Shapes::ShapeRef.new(shape: IdentityCenterInstanceArn, location_name: "identityCenterInstanceArn"))
+    IdentityCenterConfigurationInput.struct_class = Types::IdentityCenterConfigurationInput
+
     ImageConfiguration.add_member(:image_uri, Shapes::ShapeRef.new(shape: ImageUri, required: true, location_name: "imageUri"))
     ImageConfiguration.add_member(:resolved_image_digest, Shapes::ShapeRef.new(shape: ImageDigest, location_name: "resolvedImageDigest"))
     ImageConfiguration.struct_class = Types::ImageConfiguration
@@ -329,6 +348,7 @@ module Aws::EMRServerless
     JobRun.add_member(:created_at, Shapes::ShapeRef.new(shape: Date, required: true, location_name: "createdAt"))
     JobRun.add_member(:updated_at, Shapes::ShapeRef.new(shape: Date, required: true, location_name: "updatedAt"))
     JobRun.add_member(:execution_role, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "executionRole"))
+    JobRun.add_member(:execution_iam_policy, Shapes::ShapeRef.new(shape: JobRunExecutionIamPolicy, location_name: "executionIamPolicy"))
     JobRun.add_member(:state, Shapes::ShapeRef.new(shape: JobRunState, required: true, location_name: "state"))
     JobRun.add_member(:state_details, Shapes::ShapeRef.new(shape: String256, required: true, location_name: "stateDetails"))
     JobRun.add_member(:release_label, Shapes::ShapeRef.new(shape: ReleaseLabel, required: true, location_name: "releaseLabel"))
@@ -338,7 +358,7 @@ module Aws::EMRServerless
     JobRun.add_member(:total_resource_utilization, Shapes::ShapeRef.new(shape: TotalResourceUtilization, location_name: "totalResourceUtilization"))
     JobRun.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     JobRun.add_member(:total_execution_duration_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "totalExecutionDurationSeconds"))
-    JobRun.add_member(:execution_timeout_minutes, Shapes::ShapeRef.new(shape: Duration, location_name: "executionTimeoutMinutes", metadata: {"box"=>true}))
+    JobRun.add_member(:execution_timeout_minutes, Shapes::ShapeRef.new(shape: Duration, location_name: "executionTimeoutMinutes", metadata: {"box" => true}))
     JobRun.add_member(:billed_resource_utilization, Shapes::ShapeRef.new(shape: ResourceUtilization, location_name: "billedResourceUtilization"))
     JobRun.add_member(:mode, Shapes::ShapeRef.new(shape: JobRunMode, location_name: "mode"))
     JobRun.add_member(:retry_policy, Shapes::ShapeRef.new(shape: RetryPolicy, location_name: "retryPolicy"))
@@ -368,6 +388,10 @@ module Aws::EMRServerless
     JobRunAttemptSummary.struct_class = Types::JobRunAttemptSummary
 
     JobRunAttempts.member = Shapes::ShapeRef.new(shape: JobRunAttemptSummary)
+
+    JobRunExecutionIamPolicy.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "policy"))
+    JobRunExecutionIamPolicy.add_member(:policy_arns, Shapes::ShapeRef.new(shape: PolicyArnList, location_name: "policyArns"))
+    JobRunExecutionIamPolicy.struct_class = Types::JobRunExecutionIamPolicy
 
     JobRunStateSet.member = Shapes::ShapeRef.new(shape: JobRunState)
 
@@ -453,6 +477,8 @@ module Aws::EMRServerless
     NetworkConfiguration.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "securityGroupIds"))
     NetworkConfiguration.struct_class = Types::NetworkConfiguration
 
+    PolicyArnList.member = Shapes::ShapeRef.new(shape: Arn)
+
     PrometheusMonitoringConfiguration.add_member(:remote_write_url, Shapes::ShapeRef.new(shape: PrometheusUrlString, location_name: "remoteWriteUrl"))
     PrometheusMonitoringConfiguration.struct_class = Types::PrometheusMonitoringConfiguration
 
@@ -495,12 +521,13 @@ module Aws::EMRServerless
     StartApplicationResponse.struct_class = Types::StartApplicationResponse
 
     StartJobRunRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
-    StartJobRunRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartJobRunRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartJobRunRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "executionRoleArn"))
+    StartJobRunRequest.add_member(:execution_iam_policy, Shapes::ShapeRef.new(shape: JobRunExecutionIamPolicy, location_name: "executionIamPolicy"))
     StartJobRunRequest.add_member(:job_driver, Shapes::ShapeRef.new(shape: JobDriver, location_name: "jobDriver"))
     StartJobRunRequest.add_member(:configuration_overrides, Shapes::ShapeRef.new(shape: ConfigurationOverrides, location_name: "configurationOverrides"))
     StartJobRunRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    StartJobRunRequest.add_member(:execution_timeout_minutes, Shapes::ShapeRef.new(shape: Duration, location_name: "executionTimeoutMinutes", metadata: {"box"=>true}))
+    StartJobRunRequest.add_member(:execution_timeout_minutes, Shapes::ShapeRef.new(shape: Duration, location_name: "executionTimeoutMinutes", metadata: {"box" => true}))
     StartJobRunRequest.add_member(:name, Shapes::ShapeRef.new(shape: String256, location_name: "name"))
     StartJobRunRequest.add_member(:mode, Shapes::ShapeRef.new(shape: JobRunMode, location_name: "mode"))
     StartJobRunRequest.add_member(:retry_policy, Shapes::ShapeRef.new(shape: RetryPolicy, location_name: "retryPolicy"))
@@ -541,7 +568,7 @@ module Aws::EMRServerless
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateApplicationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
-    UpdateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateApplicationRequest.add_member(:initial_capacity, Shapes::ShapeRef.new(shape: InitialCapacityConfigMap, location_name: "initialCapacity"))
     UpdateApplicationRequest.add_member(:maximum_capacity, Shapes::ShapeRef.new(shape: MaximumAllowedResources, location_name: "maximumCapacity"))
     UpdateApplicationRequest.add_member(:auto_start_configuration, Shapes::ShapeRef.new(shape: AutoStartConfig, location_name: "autoStartConfiguration"))
@@ -555,6 +582,7 @@ module Aws::EMRServerless
     UpdateApplicationRequest.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "runtimeConfiguration"))
     UpdateApplicationRequest.add_member(:monitoring_configuration, Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoringConfiguration"))
     UpdateApplicationRequest.add_member(:scheduler_configuration, Shapes::ShapeRef.new(shape: SchedulerConfiguration, location_name: "schedulerConfiguration"))
+    UpdateApplicationRequest.add_member(:identity_center_configuration, Shapes::ShapeRef.new(shape: IdentityCenterConfigurationInput, location_name: "identityCenterConfiguration"))
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
     UpdateApplicationResponse.add_member(:application, Shapes::ShapeRef.new(shape: Application, required: true, location_name: "application"))
@@ -607,8 +635,8 @@ module Aws::EMRServerless
         o.input = Shapes::ShapeRef.new(shape: CancelJobRunRequest)
         o.output = Shapes::ShapeRef.new(shape: CancelJobRunResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:create_application, Seahorse::Model::Operation.new.tap do |o|
@@ -618,8 +646,8 @@ module Aws::EMRServerless
         o.input = Shapes::ShapeRef.new(shape: CreateApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateApplicationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -630,8 +658,8 @@ module Aws::EMRServerless
         o.input = Shapes::ShapeRef.new(shape: DeleteApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteApplicationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_application, Seahorse::Model::Operation.new.tap do |o|
@@ -641,8 +669,8 @@ module Aws::EMRServerless
         o.input = Shapes::ShapeRef.new(shape: GetApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetApplicationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_dashboard_for_job_run, Seahorse::Model::Operation.new.tap do |o|
@@ -663,8 +691,8 @@ module Aws::EMRServerless
         o.input = Shapes::ShapeRef.new(shape: GetJobRunRequest)
         o.output = Shapes::ShapeRef.new(shape: GetJobRunResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:list_applications, Seahorse::Model::Operation.new.tap do |o|
@@ -690,8 +718,8 @@ module Aws::EMRServerless
         o.input = Shapes::ShapeRef.new(shape: ListJobRunAttemptsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListJobRunAttemptsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -723,8 +751,8 @@ module Aws::EMRServerless
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:start_application, Seahorse::Model::Operation.new.tap do |o|
@@ -734,8 +762,8 @@ module Aws::EMRServerless
         o.input = Shapes::ShapeRef.new(shape: StartApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: StartApplicationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
@@ -758,8 +786,8 @@ module Aws::EMRServerless
         o.input = Shapes::ShapeRef.new(shape: StopApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: StopApplicationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -769,8 +797,8 @@ module Aws::EMRServerless
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -780,8 +808,8 @@ module Aws::EMRServerless
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_application, Seahorse::Model::Operation.new.tap do |o|
@@ -791,8 +819,8 @@ module Aws::EMRServerless
         o.input = Shapes::ShapeRef.new(shape: UpdateApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateApplicationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
     end
 

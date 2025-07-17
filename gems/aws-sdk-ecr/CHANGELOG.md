@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2025-06-16)
+------------------
+
+* Feature - The `DescribeImageScanning` API now includes `lastInUseAt` and `InUseCount` fields that can be used to prioritize vulnerability remediation for images that are actively being used.
+
+1.103.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.102.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.101.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2025-04-30)
+------------------
+
+* Feature - Adds dualstack support for Amazon Elastic Container Registry (Amazon ECR).
+
 1.99.0 (2025-04-02)
 ------------------
 

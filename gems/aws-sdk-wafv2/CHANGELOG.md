@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2025-06-17)
+------------------
+
+* Feature - AWS WAF can now suggest protection packs for you based on the application information you provide when you create a webACL.
+
+1.111.0 (2025-06-11)
+------------------
+
+* Feature - WAF now provides two DDoS protection options: resource-level monitoring for Application Load Balancers and the AWSManagedRulesAntiDDoSRuleSet managed rule group for CloudFront distributions.
+
+1.110.0 (2025-06-05)
+------------------
+
+* Feature - AWS WAF adds support for ASN-based traffic filtering and support for ASN-based rate limiting.
+
+1.109.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.108.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.107.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.106.0 (2025-03-26)
 ------------------
 

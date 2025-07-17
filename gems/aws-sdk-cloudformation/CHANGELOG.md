@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.134.0 (2025-06-30)
+------------------
+
+* Feature - Added support for UNKNOWN drift status.
+
+1.133.0 (2025-06-05)
+------------------
+
+* Feature - Add new warning type 'EXCLUDED_PROPERTIES'
+
+1.132.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.131.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.130.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.129.0 (2025-03-27)
 ------------------
 

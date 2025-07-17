@@ -309,7 +309,7 @@ module Aws::MediaTailor
     Channel.add_member(:audiences, Shapes::ShapeRef.new(shape: Audiences, location_name: "Audiences"))
     Channel.struct_class = Types::Channel
 
-    ClipRange.add_member(:end_offset_millis, Shapes::ShapeRef.new(shape: __long, location_name: "EndOffsetMillis", metadata: {"box"=>true}))
+    ClipRange.add_member(:end_offset_millis, Shapes::ShapeRef.new(shape: __long, location_name: "EndOffsetMillis", metadata: {"box" => true}))
     ClipRange.add_member(:start_offset_millis, Shapes::ShapeRef.new(shape: __long, location_name: "StartOffsetMillis"))
     ClipRange.struct_class = Types::ClipRange
 
@@ -756,7 +756,7 @@ module Aws::MediaTailor
     LiveSource.struct_class = Types::LiveSource
 
     LogConfiguration.add_member(:percent_enabled, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "PercentEnabled"))
-    LogConfiguration.add_member(:enabled_logging_strategies, Shapes::ShapeRef.new(shape: __listOfLoggingStrategies, location_name: "EnabledLoggingStrategies"))
+    LogConfiguration.add_member(:enabled_logging_strategies, Shapes::ShapeRef.new(shape: __listOfLoggingStrategies, required: true, location_name: "EnabledLoggingStrategies"))
     LogConfiguration.add_member(:ads_interaction_log, Shapes::ShapeRef.new(shape: AdsInteractionLog, location_name: "AdsInteractionLog"))
     LogConfiguration.add_member(:manifest_service_interaction_log, Shapes::ShapeRef.new(shape: ManifestServiceInteractionLog, location_name: "ManifestServiceInteractionLog"))
     LogConfiguration.struct_class = Types::LogConfiguration

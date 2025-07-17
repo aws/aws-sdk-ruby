@@ -2,13 +2,22 @@
     {
         "description": "Test cases for EmptyOperation operation",
         "metadata": {
+            "apiVersion": "2018-01-01",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "jsonprotocol",
+            "jsonVersion": "1.1",
             "protocol": "json",
             "protocols": [
                 "json"
             ],
-            "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1",
-            "targetPrefix": "JsonProtocol"
+            "serviceFullName": "JsonProtocol",
+            "serviceId": "Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "JsonProtocol",
+            "targetPrefix": "JsonProtocol",
+            "uid": "json-protocol-2018-01-01"
         },
         "shapes": {},
         "cases": [
@@ -78,13 +87,22 @@
     {
         "description": "Test cases for EndpointOperation operation",
         "metadata": {
+            "apiVersion": "2018-01-01",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "jsonprotocol",
+            "jsonVersion": "1.1",
             "protocol": "json",
             "protocols": [
                 "json"
             ],
-            "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1",
-            "targetPrefix": "JsonProtocol"
+            "serviceFullName": "JsonProtocol",
+            "serviceId": "Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "JsonProtocol",
+            "targetPrefix": "JsonProtocol",
+            "uid": "json-protocol-2018-01-01"
         },
         "shapes": {},
         "cases": [
@@ -119,13 +137,22 @@
     {
         "description": "Test cases for EndpointWithHostLabelOperation operation",
         "metadata": {
+            "apiVersion": "2018-01-01",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "jsonprotocol",
+            "jsonVersion": "1.1",
             "protocol": "json",
             "protocols": [
                 "json"
             ],
-            "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1",
-            "targetPrefix": "JsonProtocol"
+            "serviceFullName": "JsonProtocol",
+            "serviceId": "Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "JsonProtocol",
+            "targetPrefix": "JsonProtocol",
+            "uid": "json-protocol-2018-01-01"
         },
         "shapes": {
             "HostLabelInput": {
@@ -181,13 +208,22 @@
     {
         "description": "Test cases for HostWithPathOperation operation",
         "metadata": {
+            "apiVersion": "2018-01-01",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "jsonprotocol",
+            "jsonVersion": "1.1",
             "protocol": "json",
             "protocols": [
                 "json"
             ],
-            "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1",
-            "targetPrefix": "JsonProtocol"
+            "serviceFullName": "JsonProtocol",
+            "serviceId": "Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "JsonProtocol",
+            "targetPrefix": "JsonProtocol",
+            "uid": "json-protocol-2018-01-01"
         },
         "shapes": {},
         "cases": [
@@ -219,13 +255,22 @@
     {
         "description": "Test cases for JsonEnums operation",
         "metadata": {
+            "apiVersion": "2018-01-01",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "jsonprotocol",
+            "jsonVersion": "1.1",
             "protocol": "json",
             "protocols": [
                 "json"
             ],
-            "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1",
-            "targetPrefix": "JsonProtocol"
+            "serviceFullName": "JsonProtocol",
+            "serviceId": "Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "JsonProtocol",
+            "targetPrefix": "JsonProtocol",
+            "uid": "json-protocol-2018-01-01"
         },
         "shapes": {
             "JsonEnumsInputOutput": {
@@ -334,13 +379,22 @@
     {
         "description": "Test cases for JsonIntEnums operation",
         "metadata": {
+            "apiVersion": "2018-01-01",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "jsonprotocol",
+            "jsonVersion": "1.1",
             "protocol": "json",
             "protocols": [
                 "json"
             ],
-            "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1",
-            "targetPrefix": "JsonProtocol"
+            "serviceFullName": "JsonProtocol",
+            "serviceId": "Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "JsonProtocol",
+            "targetPrefix": "JsonProtocol",
+            "uid": "json-protocol-2018-01-01"
         },
         "shapes": {
             "JsonIntEnumsInputOutput": {
@@ -443,13 +497,22 @@
     {
         "description": "Test cases for JsonUnions operation",
         "metadata": {
+            "apiVersion": "2018-01-01",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "jsonprotocol",
+            "jsonVersion": "1.1",
             "protocol": "json",
             "protocols": [
                 "json"
             ],
-            "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1",
-            "targetPrefix": "JsonProtocol"
+            "serviceFullName": "JsonProtocol",
+            "serviceId": "Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "JsonProtocol",
+            "targetPrefix": "JsonProtocol",
+            "uid": "json-protocol-2018-01-01"
         },
         "shapes": {
             "UnionInputOutput": {
@@ -830,13 +893,22 @@
     {
         "description": "Test cases for KitchenSinkOperation operation",
         "metadata": {
+            "apiVersion": "2018-01-01",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "jsonprotocol",
+            "jsonVersion": "1.1",
             "protocol": "json",
             "protocols": [
                 "json"
             ],
-            "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1",
-            "targetPrefix": "JsonProtocol"
+            "serviceFullName": "JsonProtocol",
+            "serviceId": "Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "JsonProtocol",
+            "targetPrefix": "JsonProtocol",
+            "uid": "json-protocol-2018-01-01"
         },
         "shapes": {
             "KitchenSink": {
@@ -1970,13 +2042,22 @@
     {
         "description": "Test cases for NullOperation operation",
         "metadata": {
+            "apiVersion": "2018-01-01",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "jsonprotocol",
+            "jsonVersion": "1.1",
             "protocol": "json",
             "protocols": [
                 "json"
             ],
-            "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1",
-            "targetPrefix": "JsonProtocol"
+            "serviceFullName": "JsonProtocol",
+            "serviceId": "Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "JsonProtocol",
+            "targetPrefix": "JsonProtocol",
+            "uid": "json-protocol-2018-01-01"
         },
         "shapes": {
             "NullOperationInputOutput": {
@@ -2023,13 +2104,22 @@
     {
         "description": "Test cases for OperationWithOptionalInputOutput operation",
         "metadata": {
+            "apiVersion": "2018-01-01",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "jsonprotocol",
+            "jsonVersion": "1.1",
             "protocol": "json",
             "protocols": [
                 "json"
             ],
-            "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1",
-            "targetPrefix": "JsonProtocol"
+            "serviceFullName": "JsonProtocol",
+            "serviceId": "Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "JsonProtocol",
+            "targetPrefix": "JsonProtocol",
+            "uid": "json-protocol-2018-01-01"
         },
         "shapes": {
             "OperationWithOptionalInputOutputInput": {
@@ -2100,13 +2190,22 @@
     {
         "description": "Test cases for PutAndGetInlineDocuments operation",
         "metadata": {
+            "apiVersion": "2018-01-01",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "jsonprotocol",
+            "jsonVersion": "1.1",
             "protocol": "json",
             "protocols": [
                 "json"
             ],
-            "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1",
-            "targetPrefix": "JsonProtocol"
+            "serviceFullName": "JsonProtocol",
+            "serviceId": "Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "JsonProtocol",
+            "targetPrefix": "JsonProtocol",
+            "uid": "json-protocol-2018-01-01"
         },
         "shapes": {
             "PutAndGetInlineDocumentsInputOutput": {
@@ -2161,13 +2260,22 @@
     {
         "description": "Test cases for PutWithContentEncoding operation",
         "metadata": {
+            "apiVersion": "2018-01-01",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "jsonprotocol",
+            "jsonVersion": "1.1",
             "protocol": "json",
             "protocols": [
                 "json"
             ],
-            "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1",
-            "targetPrefix": "JsonProtocol"
+            "serviceFullName": "JsonProtocol",
+            "serviceId": "Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "JsonProtocol",
+            "targetPrefix": "JsonProtocol",
+            "uid": "json-protocol-2018-01-01"
         },
         "shapes": {
             "PutWithContentEncodingInput": {
@@ -2250,13 +2358,22 @@
     {
         "description": "Test cases for SimpleScalarProperties operation",
         "metadata": {
+            "apiVersion": "2018-01-01",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "jsonprotocol",
+            "jsonVersion": "1.1",
             "protocol": "json",
             "protocols": [
                 "json"
             ],
-            "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1",
-            "targetPrefix": "JsonProtocol"
+            "serviceFullName": "JsonProtocol",
+            "serviceId": "Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "JsonProtocol",
+            "targetPrefix": "JsonProtocol",
+            "uid": "json-protocol-2018-01-01"
         },
         "shapes": {
             "SimpleScalarPropertiesInputOutput": {

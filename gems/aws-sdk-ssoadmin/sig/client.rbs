@@ -83,12 +83,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#attach_customer_managed_policy_reference_to_permission_set-instance_method
       def attach_customer_managed_policy_reference_to_permission_set: (
+                                                                        instance_arn: ::String,
+                                                                        permission_set_arn: ::String,
                                                                         customer_managed_policy_reference: {
                                                                           name: ::String,
                                                                           path: ::String?
-                                                                        },
-                                                                        instance_arn: ::String,
-                                                                        permission_set_arn: ::String
+                                                                        }
                                                                       ) -> _AttachCustomerManagedPolicyReferenceToPermissionSetResponseSuccess
                                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachCustomerManagedPolicyReferenceToPermissionSetResponseSuccess
 
@@ -98,8 +98,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#attach_managed_policy_to_permission_set-instance_method
       def attach_managed_policy_to_permission_set: (
                                                      instance_arn: ::String,
-                                                     managed_policy_arn: ::String,
-                                                     permission_set_arn: ::String
+                                                     permission_set_arn: ::String,
+                                                     managed_policy_arn: ::String
                                                    ) -> _AttachManagedPolicyToPermissionSetResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachManagedPolicyToPermissionSetResponseSuccess
 
@@ -110,11 +110,11 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#create_account_assignment-instance_method
       def create_account_assignment: (
                                        instance_arn: ::String,
-                                       permission_set_arn: ::String,
-                                       principal_id: ::String,
-                                       principal_type: ("USER" | "GROUP"),
                                        target_id: ::String,
-                                       target_type: ("AWS_ACCOUNT")
+                                       target_type: ("AWS_ACCOUNT"),
+                                       permission_set_arn: ::String,
+                                       principal_type: ("USER" | "GROUP"),
+                                       principal_id: ::String
                                      ) -> _CreateAccountAssignmentResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccountAssignmentResponseSuccess
 
@@ -124,25 +124,25 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#create_application-instance_method
       def create_application: (
-                                application_provider_arn: ::String,
-                                ?client_token: ::String,
-                                ?description: ::String,
                                 instance_arn: ::String,
+                                application_provider_arn: ::String,
                                 name: ::String,
+                                ?description: ::String,
                                 ?portal_options: {
                                   sign_in_options: {
-                                    application_url: ::String?,
-                                    origin: ("IDENTITY_CENTER" | "APPLICATION")
+                                    origin: ("IDENTITY_CENTER" | "APPLICATION"),
+                                    application_url: ::String?
                                   }?,
                                   visibility: ("ENABLED" | "DISABLED")?
                                 },
-                                ?status: ("ENABLED" | "DISABLED"),
                                 ?tags: Array[
                                   {
                                     key: ::String,
                                     value: ::String
                                   },
-                                ]
+                                ],
+                                ?status: ("ENABLED" | "DISABLED"),
+                                ?client_token: ::String
                               ) -> _CreateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
 
@@ -163,8 +163,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#create_instance-instance_method
       def create_instance: (
-                             ?client_token: ::String,
                              ?name: ::String,
+                             ?client_token: ::String,
                              ?tags: Array[
                                {
                                  key: ::String,
@@ -179,6 +179,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#create_instance_access_control_attribute_configuration-instance_method
       def create_instance_access_control_attribute_configuration: (
+                                                                    instance_arn: ::String,
                                                                     instance_access_control_attribute_configuration: {
                                                                       access_control_attributes: Array[
                                                                         {
@@ -188,8 +189,7 @@ module Aws
                                                                           }
                                                                         },
                                                                       ]
-                                                                    },
-                                                                    instance_arn: ::String
+                                                                    }
                                                                   ) -> _CreateInstanceAccessControlAttributeConfigurationResponseSuccess
                                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInstanceAccessControlAttributeConfigurationResponseSuccess
 
@@ -199,11 +199,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#create_permission_set-instance_method
       def create_permission_set: (
+                                   name: ::String,
                                    ?description: ::String,
                                    instance_arn: ::String,
-                                   name: ::String,
-                                   ?relay_state: ::String,
                                    ?session_duration: ::String,
+                                   ?relay_state: ::String,
                                    ?tags: Array[
                                      {
                                        key: ::String,
@@ -219,24 +219,24 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#create_trusted_token_issuer-instance_method
       def create_trusted_token_issuer: (
-                                         ?client_token: ::String,
                                          instance_arn: ::String,
                                          name: ::String,
+                                         trusted_token_issuer_type: ("OIDC_JWT"),
+                                         trusted_token_issuer_configuration: {
+                                           oidc_jwt_configuration: {
+                                             issuer_url: ::String,
+                                             claim_attribute_path: ::String,
+                                             identity_store_attribute_path: ::String,
+                                             jwks_retrieval_option: ("OPEN_ID_DISCOVERY")
+                                           }?
+                                         },
+                                         ?client_token: ::String,
                                          ?tags: Array[
                                            {
                                              key: ::String,
                                              value: ::String
                                            },
-                                         ],
-                                         trusted_token_issuer_configuration: {
-                                           oidc_jwt_configuration: {
-                                             claim_attribute_path: ::String,
-                                             identity_store_attribute_path: ::String,
-                                             issuer_url: ::String,
-                                             jwks_retrieval_option: ("OPEN_ID_DISCOVERY")
-                                           }?
-                                         },
-                                         trusted_token_issuer_type: ("OIDC_JWT")
+                                         ]
                                        ) -> _CreateTrustedTokenIssuerResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrustedTokenIssuerResponseSuccess
 
@@ -247,11 +247,11 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#delete_account_assignment-instance_method
       def delete_account_assignment: (
                                        instance_arn: ::String,
-                                       permission_set_arn: ::String,
-                                       principal_id: ::String,
-                                       principal_type: ("USER" | "GROUP"),
                                        target_id: ::String,
-                                       target_type: ("AWS_ACCOUNT")
+                                       target_type: ("AWS_ACCOUNT"),
+                                       permission_set_arn: ::String,
+                                       principal_type: ("USER" | "GROUP"),
+                                       principal_id: ::String
                                      ) -> _DeleteAccountAssignmentResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccountAssignmentResponseSuccess
 
@@ -359,8 +359,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#describe_account_assignment_creation_status-instance_method
       def describe_account_assignment_creation_status: (
-                                                         account_assignment_creation_request_id: ::String,
-                                                         instance_arn: ::String
+                                                         instance_arn: ::String,
+                                                         account_assignment_creation_request_id: ::String
                                                        ) -> _DescribeAccountAssignmentCreationStatusResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountAssignmentCreationStatusResponseSuccess
 
@@ -370,22 +370,22 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#describe_account_assignment_deletion_status-instance_method
       def describe_account_assignment_deletion_status: (
-                                                         account_assignment_deletion_request_id: ::String,
-                                                         instance_arn: ::String
+                                                         instance_arn: ::String,
+                                                         account_assignment_deletion_request_id: ::String
                                                        ) -> _DescribeAccountAssignmentDeletionStatusResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountAssignmentDeletionStatusResponseSuccess
 
       interface _DescribeApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApplicationResponse]
-        def application_account: () -> ::String
         def application_arn: () -> ::String
         def application_provider_arn: () -> ::String
-        def created_date: () -> ::Time
-        def description: () -> ::String
-        def instance_arn: () -> ::String
         def name: () -> ::String
-        def portal_options: () -> Types::PortalOptions
+        def application_account: () -> ::String
+        def instance_arn: () -> ::String
         def status: () -> ("ENABLED" | "DISABLED")
+        def portal_options: () -> Types::PortalOptions
+        def description: () -> ::String
+        def created_date: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#describe_application-instance_method
       def describe_application: (
@@ -395,9 +395,9 @@ module Aws
 
       interface _DescribeApplicationAssignmentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApplicationAssignmentResponse]
-        def application_arn: () -> ::String
-        def principal_id: () -> ::String
         def principal_type: () -> ("USER" | "GROUP")
+        def principal_id: () -> ::String
+        def application_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#describe_application_assignment-instance_method
       def describe_application_assignment: (
@@ -410,8 +410,8 @@ module Aws
       interface _DescribeApplicationProviderResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApplicationProviderResponse]
         def application_provider_arn: () -> ::String
-        def display_data: () -> Types::DisplayData
         def federation_protocol: () -> ("SAML" | "OAUTH")
+        def display_data: () -> Types::DisplayData
         def resource_server_config: () -> Types::ResourceServerConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#describe_application_provider-instance_method
@@ -422,11 +422,11 @@ module Aws
 
       interface _DescribeInstanceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInstanceResponse]
-        def created_date: () -> ::Time
-        def identity_store_id: () -> ::String
         def instance_arn: () -> ::String
-        def name: () -> ::String
+        def identity_store_id: () -> ::String
         def owner_account_id: () -> ::String
+        def name: () -> ::String
+        def created_date: () -> ::Time
         def status: () -> ("CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "ACTIVE")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#describe_instance-instance_method
@@ -437,9 +437,9 @@ module Aws
 
       interface _DescribeInstanceAccessControlAttributeConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInstanceAccessControlAttributeConfigurationResponse]
-        def instance_access_control_attribute_configuration: () -> Types::InstanceAccessControlAttributeConfiguration
         def status: () -> ("ENABLED" | "CREATION_IN_PROGRESS" | "CREATION_FAILED")
         def status_reason: () -> ::String
+        def instance_access_control_attribute_configuration: () -> Types::InstanceAccessControlAttributeConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#describe_instance_access_control_attribute_configuration-instance_method
       def describe_instance_access_control_attribute_configuration: (
@@ -471,10 +471,10 @@ module Aws
 
       interface _DescribeTrustedTokenIssuerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTrustedTokenIssuerResponse]
-        def name: () -> ::String
         def trusted_token_issuer_arn: () -> ::String
-        def trusted_token_issuer_configuration: () -> Types::TrustedTokenIssuerConfiguration
+        def name: () -> ::String
         def trusted_token_issuer_type: () -> ("OIDC_JWT")
+        def trusted_token_issuer_configuration: () -> Types::TrustedTokenIssuerConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#describe_trusted_token_issuer-instance_method
       def describe_trusted_token_issuer: (
@@ -487,12 +487,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#detach_customer_managed_policy_reference_from_permission_set-instance_method
       def detach_customer_managed_policy_reference_from_permission_set: (
+                                                                          instance_arn: ::String,
+                                                                          permission_set_arn: ::String,
                                                                           customer_managed_policy_reference: {
                                                                             name: ::String,
                                                                             path: ::String?
-                                                                          },
-                                                                          instance_arn: ::String,
-                                                                          permission_set_arn: ::String
+                                                                          }
                                                                         ) -> _DetachCustomerManagedPolicyReferenceFromPermissionSetResponseSuccess
                                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetachCustomerManagedPolicyReferenceFromPermissionSetResponseSuccess
 
@@ -502,15 +502,15 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#detach_managed_policy_from_permission_set-instance_method
       def detach_managed_policy_from_permission_set: (
                                                        instance_arn: ::String,
-                                                       managed_policy_arn: ::String,
-                                                       permission_set_arn: ::String
+                                                       permission_set_arn: ::String,
+                                                       managed_policy_arn: ::String
                                                      ) -> _DetachManagedPolicyFromPermissionSetResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetachManagedPolicyFromPermissionSetResponseSuccess
 
       interface _GetApplicationAccessScopeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetApplicationAccessScopeResponse]
-        def authorized_targets: () -> ::Array[::String]
         def scope: () -> ::String
+        def authorized_targets: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#get_application_access_scope-instance_method
       def get_application_access_scope: (
@@ -580,12 +580,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#list_account_assignment_creation_status-instance_method
       def list_account_assignment_creation_status: (
-                                                     ?filter: {
-                                                       status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")?
-                                                     },
                                                      instance_arn: ::String,
                                                      ?max_results: ::Integer,
-                                                     ?next_token: ::String
+                                                     ?next_token: ::String,
+                                                     ?filter: {
+                                                       status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")?
+                                                     }
                                                    ) -> _ListAccountAssignmentCreationStatusResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccountAssignmentCreationStatusResponseSuccess
 
@@ -596,12 +596,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#list_account_assignment_deletion_status-instance_method
       def list_account_assignment_deletion_status: (
-                                                     ?filter: {
-                                                       status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")?
-                                                     },
                                                      instance_arn: ::String,
                                                      ?max_results: ::Integer,
-                                                     ?next_token: ::String
+                                                     ?next_token: ::String,
+                                                     ?filter: {
+                                                       status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")?
+                                                     }
                                                    ) -> _ListAccountAssignmentDeletionStatusResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccountAssignmentDeletionStatusResponseSuccess
 
@@ -612,11 +612,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#list_account_assignments-instance_method
       def list_account_assignments: (
-                                      account_id: ::String,
                                       instance_arn: ::String,
+                                      account_id: ::String,
+                                      permission_set_arn: ::String,
                                       ?max_results: ::Integer,
-                                      ?next_token: ::String,
-                                      permission_set_arn: ::String
+                                      ?next_token: ::String
                                     ) -> _ListAccountAssignmentsResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccountAssignmentsResponseSuccess
 
@@ -627,14 +627,14 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#list_account_assignments_for_principal-instance_method
       def list_account_assignments_for_principal: (
+                                                    instance_arn: ::String,
+                                                    principal_id: ::String,
+                                                    principal_type: ("USER" | "GROUP"),
                                                     ?filter: {
                                                       account_id: ::String?
                                                     },
-                                                    instance_arn: ::String,
-                                                    ?max_results: ::Integer,
                                                     ?next_token: ::String,
-                                                    principal_id: ::String,
-                                                    principal_type: ("USER" | "GROUP")
+                                                    ?max_results: ::Integer
                                                   ) -> _ListAccountAssignmentsForPrincipalResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccountAssignmentsForPrincipalResponseSuccess
 
@@ -646,17 +646,17 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#list_accounts_for_provisioned_permission_set-instance_method
       def list_accounts_for_provisioned_permission_set: (
                                                           instance_arn: ::String,
-                                                          ?max_results: ::Integer,
-                                                          ?next_token: ::String,
                                                           permission_set_arn: ::String,
-                                                          ?provisioning_status: ("LATEST_PERMISSION_SET_PROVISIONED" | "LATEST_PERMISSION_SET_NOT_PROVISIONED")
+                                                          ?provisioning_status: ("LATEST_PERMISSION_SET_PROVISIONED" | "LATEST_PERMISSION_SET_NOT_PROVISIONED"),
+                                                          ?max_results: ::Integer,
+                                                          ?next_token: ::String
                                                         ) -> _ListAccountsForProvisionedPermissionSetResponseSuccess
                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccountsForProvisionedPermissionSetResponseSuccess
 
       interface _ListApplicationAccessScopesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationAccessScopesResponse]
-        def next_token: () -> ::String
         def scopes: () -> ::Array[Types::ScopeDetails]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#list_application_access_scopes-instance_method
       def list_application_access_scopes: (
@@ -686,14 +686,14 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#list_application_assignments_for_principal-instance_method
       def list_application_assignments_for_principal: (
+                                                        instance_arn: ::String,
+                                                        principal_id: ::String,
+                                                        principal_type: ("USER" | "GROUP"),
                                                         ?filter: {
                                                           application_arn: ::String?
                                                         },
-                                                        instance_arn: ::String,
-                                                        ?max_results: ::Integer,
                                                         ?next_token: ::String,
-                                                        principal_id: ::String,
-                                                        principal_type: ("USER" | "GROUP")
+                                                        ?max_results: ::Integer
                                                       ) -> _ListApplicationAssignmentsForPrincipalResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationAssignmentsForPrincipalResponseSuccess
 
@@ -740,13 +740,13 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#list_applications-instance_method
       def list_applications: (
+                               instance_arn: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String,
                                ?filter: {
                                  application_account: ::String?,
                                  application_provider: ::String?
-                               },
-                               instance_arn: ::String,
-                               ?max_results: ::Integer,
-                               ?next_token: ::String
+                               }
                              ) -> _ListApplicationsResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationsResponseSuccess
 
@@ -758,9 +758,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#list_customer_managed_policy_references_in_permission_set-instance_method
       def list_customer_managed_policy_references_in_permission_set: (
                                                                        instance_arn: ::String,
+                                                                       permission_set_arn: ::String,
                                                                        ?max_results: ::Integer,
-                                                                       ?next_token: ::String,
-                                                                       permission_set_arn: ::String
+                                                                       ?next_token: ::String
                                                                      ) -> _ListCustomerManagedPolicyReferencesInPermissionSetResponseSuccess
                                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomerManagedPolicyReferencesInPermissionSetResponseSuccess
 
@@ -784,38 +784,38 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#list_managed_policies_in_permission_set-instance_method
       def list_managed_policies_in_permission_set: (
                                                      instance_arn: ::String,
+                                                     permission_set_arn: ::String,
                                                      ?max_results: ::Integer,
-                                                     ?next_token: ::String,
-                                                     permission_set_arn: ::String
+                                                     ?next_token: ::String
                                                    ) -> _ListManagedPoliciesInPermissionSetResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListManagedPoliciesInPermissionSetResponseSuccess
 
       interface _ListPermissionSetProvisioningStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPermissionSetProvisioningStatusResponse]
-        def next_token: () -> ::String
         def permission_sets_provisioning_status: () -> ::Array[Types::PermissionSetProvisioningStatusMetadata]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#list_permission_set_provisioning_status-instance_method
       def list_permission_set_provisioning_status: (
-                                                     ?filter: {
-                                                       status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")?
-                                                     },
                                                      instance_arn: ::String,
                                                      ?max_results: ::Integer,
-                                                     ?next_token: ::String
+                                                     ?next_token: ::String,
+                                                     ?filter: {
+                                                       status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")?
+                                                     }
                                                    ) -> _ListPermissionSetProvisioningStatusResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPermissionSetProvisioningStatusResponseSuccess
 
       interface _ListPermissionSetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPermissionSetsResponse]
-        def next_token: () -> ::String
         def permission_sets: () -> ::Array[::String]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#list_permission_sets-instance_method
       def list_permission_sets: (
                                   instance_arn: ::String,
-                                  ?max_results: ::Integer,
-                                  ?next_token: ::String
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
                                 ) -> _ListPermissionSetsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPermissionSetsResponseSuccess
 
@@ -826,31 +826,31 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#list_permission_sets_provisioned_to_account-instance_method
       def list_permission_sets_provisioned_to_account: (
-                                                         account_id: ::String,
                                                          instance_arn: ::String,
+                                                         account_id: ::String,
+                                                         ?provisioning_status: ("LATEST_PERMISSION_SET_PROVISIONED" | "LATEST_PERMISSION_SET_NOT_PROVISIONED"),
                                                          ?max_results: ::Integer,
-                                                         ?next_token: ::String,
-                                                         ?provisioning_status: ("LATEST_PERMISSION_SET_PROVISIONED" | "LATEST_PERMISSION_SET_NOT_PROVISIONED")
+                                                         ?next_token: ::String
                                                        ) -> _ListPermissionSetsProvisionedToAccountResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPermissionSetsProvisionedToAccountResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
-        def next_token: () -> ::String
         def tags: () -> ::Array[Types::Tag]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#list_tags_for_resource-instance_method
       def list_tags_for_resource: (
                                     ?instance_arn: ::String,
-                                    ?next_token: ::String,
-                                    resource_arn: ::String
+                                    resource_arn: ::String,
+                                    ?next_token: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
       interface _ListTrustedTokenIssuersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTrustedTokenIssuersResponse]
-        def next_token: () -> ::String
         def trusted_token_issuers: () -> ::Array[Types::TrustedTokenIssuerMetadata]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#list_trusted_token_issuers-instance_method
       def list_trusted_token_issuers: (
@@ -875,9 +875,9 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#put_application_access_scope-instance_method
       def put_application_access_scope: (
-                                          application_arn: ::String,
+                                          scope: ::String,
                                           ?authorized_targets: Array[::String],
-                                          scope: ::String
+                                          application_arn: ::String
                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -894,19 +894,20 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#put_application_authentication_method-instance_method
       def put_application_authentication_method: (
                                                    application_arn: ::String,
+                                                   authentication_method_type: ("IAM"),
                                                    authentication_method: {
                                                      iam: {
                                                        actor_policy: {
                                                        }
                                                      }?
-                                                   },
-                                                   authentication_method_type: ("IAM")
+                                                   }
                                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#put_application_grant-instance_method
       def put_application_grant: (
                                    application_arn: ::String,
+                                   grant_type: ("authorization_code" | "refresh_token" | "urn:ietf:params:oauth:grant-type:jwt-bearer" | "urn:ietf:params:oauth:grant-type:token-exchange"),
                                    grant: {
                                      authorization_code: {
                                        redirect_uris: Array[::String]?
@@ -914,8 +915,8 @@ module Aws
                                      jwt_bearer: {
                                        authorized_token_issuers: Array[
                                          {
-                                           authorized_audiences: Array[::String]?,
-                                           trusted_token_issuer_arn: ::String?
+                                           trusted_token_issuer_arn: ::String?,
+                                           authorized_audiences: Array[::String]?
                                          },
                                        ]?
                                      }?,
@@ -923,8 +924,7 @@ module Aws
                                      }?,
                                      token_exchange: {
                                      }?
-                                   },
-                                   grant_type: ("authorization_code" | "refresh_token" | "urn:ietf:params:oauth:grant-type:jwt-bearer" | "urn:ietf:params:oauth:grant-type:token-exchange")
+                                   }
                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -933,9 +933,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#put_inline_policy_to_permission_set-instance_method
       def put_inline_policy_to_permission_set: (
-                                                 inline_policy: ::String,
                                                  instance_arn: ::String,
-                                                 permission_set_arn: ::String
+                                                 permission_set_arn: ::String,
+                                                 inline_policy: ::String
                                                ) -> _PutInlinePolicyToPermissionSetResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutInlinePolicyToPermissionSetResponseSuccess
 
@@ -989,15 +989,15 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#update_application-instance_method
       def update_application: (
                                 application_arn: ::String,
-                                ?description: ::String,
                                 ?name: ::String,
+                                ?description: ::String,
+                                ?status: ("ENABLED" | "DISABLED"),
                                 ?portal_options: {
                                   sign_in_options: {
-                                    application_url: ::String?,
-                                    origin: ("IDENTITY_CENTER" | "APPLICATION")
+                                    origin: ("IDENTITY_CENTER" | "APPLICATION"),
+                                    application_url: ::String?
                                   }?
-                                },
-                                ?status: ("ENABLED" | "DISABLED")
+                                }
                               ) -> _UpdateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess
 
@@ -1006,8 +1006,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#update_instance-instance_method
       def update_instance: (
-                             instance_arn: ::String,
-                             name: ::String
+                             name: ::String,
+                             instance_arn: ::String
                            ) -> _UpdateInstanceResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInstanceResponseSuccess
 
@@ -1016,6 +1016,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#update_instance_access_control_attribute_configuration-instance_method
       def update_instance_access_control_attribute_configuration: (
+                                                                    instance_arn: ::String,
                                                                     instance_access_control_attribute_configuration: {
                                                                       access_control_attributes: Array[
                                                                         {
@@ -1025,8 +1026,7 @@ module Aws
                                                                           }
                                                                         },
                                                                       ]
-                                                                    },
-                                                                    instance_arn: ::String
+                                                                    }
                                                                   ) -> _UpdateInstanceAccessControlAttributeConfigurationResponseSuccess
                                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInstanceAccessControlAttributeConfigurationResponseSuccess
 
@@ -1035,11 +1035,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#update_permission_set-instance_method
       def update_permission_set: (
-                                   ?description: ::String,
                                    instance_arn: ::String,
                                    permission_set_arn: ::String,
-                                   ?relay_state: ::String,
-                                   ?session_duration: ::String
+                                   ?description: ::String,
+                                   ?session_duration: ::String,
+                                   ?relay_state: ::String
                                  ) -> _UpdatePermissionSetResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePermissionSetResponseSuccess
 
@@ -1048,8 +1048,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#update_trusted_token_issuer-instance_method
       def update_trusted_token_issuer: (
-                                         ?name: ::String,
                                          trusted_token_issuer_arn: ::String,
+                                         ?name: ::String,
                                          ?trusted_token_issuer_configuration: {
                                            oidc_jwt_configuration: {
                                              claim_attribute_path: ::String?,

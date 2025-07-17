@@ -202,8 +202,7 @@ module Aws::BedrockRuntime
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -825,7 +824,7 @@ module Aws::BedrockRuntime
     #               },
     #             },
     #             document: {
-    #               format: "pdf", # required, accepts pdf, csv, doc, docx, xls, xlsx, html, txt, md
+    #               format: "pdf", # accepts pdf, csv, doc, docx, xls, xlsx, html, txt, md
     #               name: "DocumentBlockNameString", # required
     #               source: { # required
     #                 bytes: "data",
@@ -833,6 +832,16 @@ module Aws::BedrockRuntime
     #                   uri: "S3Uri", # required
     #                   bucket_owner: "AccountId",
     #                 },
+    #                 text: "String",
+    #                 content: [
+    #                   {
+    #                     text: "String",
+    #                   },
+    #                 ],
+    #               },
+    #               context: "String",
+    #               citations: {
+    #                 enabled: false, # required
     #               },
     #             },
     #             video: {
@@ -869,7 +878,7 @@ module Aws::BedrockRuntime
     #                     },
     #                   },
     #                   document: {
-    #                     format: "pdf", # required, accepts pdf, csv, doc, docx, xls, xlsx, html, txt, md
+    #                     format: "pdf", # accepts pdf, csv, doc, docx, xls, xlsx, html, txt, md
     #                     name: "DocumentBlockNameString", # required
     #                     source: { # required
     #                       bytes: "data",
@@ -877,6 +886,16 @@ module Aws::BedrockRuntime
     #                         uri: "S3Uri", # required
     #                         bucket_owner: "AccountId",
     #                       },
+    #                       text: "String",
+    #                       content: [
+    #                         {
+    #                           text: "String",
+    #                         },
+    #                       ],
+    #                     },
+    #                     context: "String",
+    #                     citations: {
+    #                       enabled: false, # required
     #                     },
     #                   },
     #                   video: {
@@ -914,6 +933,40 @@ module Aws::BedrockRuntime
     #                 signature: "String",
     #               },
     #               redacted_content: "data",
+    #             },
+    #             citations_content: {
+    #               content: [
+    #                 {
+    #                   text: "String",
+    #                 },
+    #               ],
+    #               citations: [
+    #                 {
+    #                   title: "String",
+    #                   source_content: [
+    #                     {
+    #                       text: "String",
+    #                     },
+    #                   ],
+    #                   location: {
+    #                     document_char: {
+    #                       document_index: 1,
+    #                       start: 1,
+    #                       end: 1,
+    #                     },
+    #                     document_page: {
+    #                       document_index: 1,
+    #                       start: 1,
+    #                       end: 1,
+    #                     },
+    #                     document_chunk: {
+    #                       document_index: 1,
+    #                       start: 1,
+    #                       end: 1,
+    #                     },
+    #                   },
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -1006,6 +1059,11 @@ module Aws::BedrockRuntime
     #   resp.output.message.content[0].document.source.bytes #=> String
     #   resp.output.message.content[0].document.source.s3_location.uri #=> String
     #   resp.output.message.content[0].document.source.s3_location.bucket_owner #=> String
+    #   resp.output.message.content[0].document.source.text #=> String
+    #   resp.output.message.content[0].document.source.content #=> Array
+    #   resp.output.message.content[0].document.source.content[0].text #=> String
+    #   resp.output.message.content[0].document.context #=> String
+    #   resp.output.message.content[0].document.citations.enabled #=> Boolean
     #   resp.output.message.content[0].video.format #=> String, one of "mkv", "mov", "mp4", "webm", "flv", "mpeg", "mpg", "wmv", "three_gp"
     #   resp.output.message.content[0].video.source.bytes #=> String
     #   resp.output.message.content[0].video.source.s3_location.uri #=> String
@@ -1024,6 +1082,11 @@ module Aws::BedrockRuntime
     #   resp.output.message.content[0].tool_result.content[0].document.source.bytes #=> String
     #   resp.output.message.content[0].tool_result.content[0].document.source.s3_location.uri #=> String
     #   resp.output.message.content[0].tool_result.content[0].document.source.s3_location.bucket_owner #=> String
+    #   resp.output.message.content[0].tool_result.content[0].document.source.text #=> String
+    #   resp.output.message.content[0].tool_result.content[0].document.source.content #=> Array
+    #   resp.output.message.content[0].tool_result.content[0].document.source.content[0].text #=> String
+    #   resp.output.message.content[0].tool_result.content[0].document.context #=> String
+    #   resp.output.message.content[0].tool_result.content[0].document.citations.enabled #=> Boolean
     #   resp.output.message.content[0].tool_result.content[0].video.format #=> String, one of "mkv", "mov", "mp4", "webm", "flv", "mpeg", "mpg", "wmv", "three_gp"
     #   resp.output.message.content[0].tool_result.content[0].video.source.bytes #=> String
     #   resp.output.message.content[0].tool_result.content[0].video.source.s3_location.uri #=> String
@@ -1038,6 +1101,21 @@ module Aws::BedrockRuntime
     #   resp.output.message.content[0].reasoning_content.reasoning_text.text #=> String
     #   resp.output.message.content[0].reasoning_content.reasoning_text.signature #=> String
     #   resp.output.message.content[0].reasoning_content.redacted_content #=> String
+    #   resp.output.message.content[0].citations_content.content #=> Array
+    #   resp.output.message.content[0].citations_content.content[0].text #=> String
+    #   resp.output.message.content[0].citations_content.citations #=> Array
+    #   resp.output.message.content[0].citations_content.citations[0].title #=> String
+    #   resp.output.message.content[0].citations_content.citations[0].source_content #=> Array
+    #   resp.output.message.content[0].citations_content.citations[0].source_content[0].text #=> String
+    #   resp.output.message.content[0].citations_content.citations[0].location.document_char.document_index #=> Integer
+    #   resp.output.message.content[0].citations_content.citations[0].location.document_char.start #=> Integer
+    #   resp.output.message.content[0].citations_content.citations[0].location.document_char.end #=> Integer
+    #   resp.output.message.content[0].citations_content.citations[0].location.document_page.document_index #=> Integer
+    #   resp.output.message.content[0].citations_content.citations[0].location.document_page.start #=> Integer
+    #   resp.output.message.content[0].citations_content.citations[0].location.document_page.end #=> Integer
+    #   resp.output.message.content[0].citations_content.citations[0].location.document_chunk.document_index #=> Integer
+    #   resp.output.message.content[0].citations_content.citations[0].location.document_chunk.start #=> Integer
+    #   resp.output.message.content[0].citations_content.citations[0].location.document_chunk.end #=> Integer
     #   resp.stop_reason #=> String, one of "end_turn", "tool_use", "max_tokens", "stop_sequence", "guardrail_intervened", "content_filtered"
     #   resp.usage.input_tokens #=> Integer
     #   resp.usage.output_tokens #=> Integer
@@ -1548,7 +1626,7 @@ module Aws::BedrockRuntime
     #               },
     #             },
     #             document: {
-    #               format: "pdf", # required, accepts pdf, csv, doc, docx, xls, xlsx, html, txt, md
+    #               format: "pdf", # accepts pdf, csv, doc, docx, xls, xlsx, html, txt, md
     #               name: "DocumentBlockNameString", # required
     #               source: { # required
     #                 bytes: "data",
@@ -1556,6 +1634,16 @@ module Aws::BedrockRuntime
     #                   uri: "S3Uri", # required
     #                   bucket_owner: "AccountId",
     #                 },
+    #                 text: "String",
+    #                 content: [
+    #                   {
+    #                     text: "String",
+    #                   },
+    #                 ],
+    #               },
+    #               context: "String",
+    #               citations: {
+    #                 enabled: false, # required
     #               },
     #             },
     #             video: {
@@ -1592,7 +1680,7 @@ module Aws::BedrockRuntime
     #                     },
     #                   },
     #                   document: {
-    #                     format: "pdf", # required, accepts pdf, csv, doc, docx, xls, xlsx, html, txt, md
+    #                     format: "pdf", # accepts pdf, csv, doc, docx, xls, xlsx, html, txt, md
     #                     name: "DocumentBlockNameString", # required
     #                     source: { # required
     #                       bytes: "data",
@@ -1600,6 +1688,16 @@ module Aws::BedrockRuntime
     #                         uri: "S3Uri", # required
     #                         bucket_owner: "AccountId",
     #                       },
+    #                       text: "String",
+    #                       content: [
+    #                         {
+    #                           text: "String",
+    #                         },
+    #                       ],
+    #                     },
+    #                     context: "String",
+    #                     citations: {
+    #                       enabled: false, # required
     #                     },
     #                   },
     #                   video: {
@@ -1637,6 +1735,40 @@ module Aws::BedrockRuntime
     #                 signature: "String",
     #               },
     #               redacted_content: "data",
+    #             },
+    #             citations_content: {
+    #               content: [
+    #                 {
+    #                   text: "String",
+    #                 },
+    #               ],
+    #               citations: [
+    #                 {
+    #                   title: "String",
+    #                   source_content: [
+    #                     {
+    #                       text: "String",
+    #                     },
+    #                   ],
+    #                   location: {
+    #                     document_char: {
+    #                       document_index: 1,
+    #                       start: 1,
+    #                       end: 1,
+    #                     },
+    #                     document_page: {
+    #                       document_index: 1,
+    #                       start: 1,
+    #                       end: 1,
+    #                     },
+    #                     document_chunk: {
+    #                       document_index: 1,
+    #                       start: 1,
+    #                       end: 1,
+    #                     },
+    #                   },
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -1736,6 +1868,18 @@ module Aws::BedrockRuntime
     #   event.delta.reasoning_content.text #=> String
     #   event.delta.reasoning_content.redacted_content #=> String
     #   event.delta.reasoning_content.signature #=> String
+    #   event.delta.citation.title #=> String
+    #   event.delta.citation.source_content #=> Array
+    #   event.delta.citation.source_content[0].text #=> String
+    #   event.delta.citation.location.document_char.document_index #=> Integer
+    #   event.delta.citation.location.document_char.start #=> Integer
+    #   event.delta.citation.location.document_char.end #=> Integer
+    #   event.delta.citation.location.document_page.document_index #=> Integer
+    #   event.delta.citation.location.document_page.start #=> Integer
+    #   event.delta.citation.location.document_page.end #=> Integer
+    #   event.delta.citation.location.document_chunk.document_index #=> Integer
+    #   event.delta.citation.location.document_chunk.start #=> Integer
+    #   event.delta.citation.location.document_chunk.end #=> Integer
     #   event.content_block_index #=> Integer
     #
     #   # For :content_block_stop event available at #on_content_block_stop_event callback and response eventstream enumerator:
@@ -2015,10 +2159,10 @@ module Aws::BedrockRuntime
     #     Throughput. For more information, see [Run inference using a
     #     Provisioned Throughput][3] in the Amazon Bedrock User Guide.
     #
-    #   * If you use a custom model, first purchase Provisioned Throughput for
-    #     it. Then specify the ARN of the resulting provisioned model. For
-    #     more information, see [Use a custom model in Amazon Bedrock][4] in
-    #     the Amazon Bedrock User Guide.
+    #   * If you use a custom model, specify the ARN of the custom model
+    #     deployment (for on-demand inference) or the ARN of your provisioned
+    #     model (for Provisioned Throughput). For more information, see [Use a
+    #     custom model in Amazon Bedrock][4] in the Amazon Bedrock User Guide.
     #
     #   * If you use an [imported model][5], specify the ARN of the imported
     #     model. You can get the model ARN from a successful call to
@@ -2169,10 +2313,10 @@ module Aws::BedrockRuntime
     #     Throughput. For more information, see [Run inference using a
     #     Provisioned Throughput][3] in the Amazon Bedrock User Guide.
     #
-    #   * If you use a custom model, first purchase Provisioned Throughput for
-    #     it. Then specify the ARN of the resulting provisioned model. For
-    #     more information, see [Use a custom model in Amazon Bedrock][4] in
-    #     the Amazon Bedrock User Guide.
+    #   * If you use a custom model, specify the ARN of the custom model
+    #     deployment (for on-demand inference) or the ARN of your provisioned
+    #     model (for Provisioned Throughput). For more information, see [Use a
+    #     custom model in Amazon Bedrock][4] in the Amazon Bedrock User Guide.
     #
     #   * If you use an [imported model][5], specify the ARN of the imported
     #     model. You can get the model ARN from a successful call to
@@ -2600,7 +2744,7 @@ module Aws::BedrockRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

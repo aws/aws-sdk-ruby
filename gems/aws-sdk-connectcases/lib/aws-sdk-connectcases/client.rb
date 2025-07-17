@@ -200,8 +200,7 @@ module Aws::ConnectCases
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -638,19 +637,20 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # <note markdown="1"> If you provide a value for `PerformedBy.UserArn` you must also have
+    # <note markdown="1"> If you provide a value for `PerformedBy.UserArn`
+    # you must also have
     # [connect:DescribeUser][1] permission on the User ARN resource that you
     # provide
     #
     #  </note>
     #
-    # Creates a case in the specified Cases domain. Case system and custom
+    #  Creates a case in the specified Cases domain. Case system and custom
     # fields are taken as an array id/value pairs with a declared data
     # types.
     #
-    # The following fields are required when creating a case:
+    #  The following fields are required when creating a case:
     #
-    # * `customer_id` - You must provide the full customer profile ARN in
+    #  * `customer_id` - You must provide the full customer profile ARN in
     #   this format: `arn:aws:profile:your_AWS_Region:your_AWS_account
     #   ID:domains/your_profiles_domain_name/profiles/profile_ID`
     #
@@ -681,7 +681,7 @@ module Aws::ConnectCases
     #   and value union data.
     #
     # @option params [Types::UserUnion] :performed_by
-    #   Represents the identity of the person who performed the action.
+    #   Represents the entity that performed the action.
     #
     # @option params [required, String] :template_id
     #   A unique identifier of a template.
@@ -710,6 +710,7 @@ module Aws::ConnectCases
     #       },
     #     ],
     #     performed_by: {
+    #       custom_entity: "CustomEntity",
     #       user_arn: "UserArn",
     #     },
     #     template_id: "TemplateId", # required
@@ -1060,6 +1061,7 @@ module Aws::ConnectCases
     #     },
     #     domain_id: "DomainId", # required
     #     performed_by: {
+    #       custom_entity: "CustomEntity",
     #       user_arn: "UserArn",
     #     },
     #     type: "Contact", # required, accepts Contact, Comment, File, Sla
@@ -1171,6 +1173,43 @@ module Aws::ConnectCases
     # @param [Hash] params ({})
     def create_template(params = {}, options = {})
       req = build_request(:create_template, params)
+      req.send_request(options)
+    end
+
+    # The DeleteCase API permanently deletes a case and all its associated
+    # resources from the cases data store. After a successful deletion, you
+    # cannot:
+    #
+    # * Retrieve related items
+    #
+    # * Access audit history
+    #
+    # * Perform any operations that require the CaseID
+    #
+    # This action is irreversible. Once you delete a case, you cannot
+    # recover its data.
+    #
+    # @option params [required, String] :case_id
+    #   A unique identifier of the case.
+    #
+    # @option params [required, String] :domain_id
+    #   A unique identifier of the Cases domain.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_case({
+    #     case_id: "CaseId", # required
+    #     domain_id: "DomainId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteCase AWS API Documentation
+    #
+    # @overload delete_case(params = {})
+    # @param [Hash] params ({})
+    def delete_case(params = {}, options = {})
+      req = build_request(:delete_case, params)
       req.send_request(options)
     end
 
@@ -1341,6 +1380,45 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
+    # Deletes the related item resource under a case.
+    #
+    # <note markdown="1"> This API cannot be used on a FILE type related attachment. To delete
+    # this type of file, use the [DeleteAttachedFile][1] API
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteAttachedFile.html
+    #
+    # @option params [required, String] :case_id
+    #   A unique identifier of the case.
+    #
+    # @option params [required, String] :domain_id
+    #   A unique identifier of the Cases domain.
+    #
+    # @option params [required, String] :related_item_id
+    #   A unique identifier of a related item.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_related_item({
+    #     case_id: "CaseId", # required
+    #     domain_id: "DomainId", # required
+    #     related_item_id: "RelatedItemId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteRelatedItem AWS API Documentation
+    #
+    # @overload delete_related_item(params = {})
+    # @param [Hash] params ({})
+    def delete_related_item(params = {}, options = {})
+      req = build_request(:delete_related_item, params)
+      req.send_request(options)
+    end
+
     # Deletes a cases template. You can delete up to 100 templates per
     # domain.
     #
@@ -1487,6 +1565,7 @@ module Aws::ConnectCases
     #   resp.audit_events[0].fields[0].old_value.string_value #=> String
     #   resp.audit_events[0].fields[0].old_value.user_arn_value #=> String
     #   resp.audit_events[0].performed_by.iam_principal_arn #=> String
+    #   resp.audit_events[0].performed_by.user.custom_entity #=> String
     #   resp.audit_events[0].performed_by.user.user_arn #=> String
     #   resp.audit_events[0].performed_time #=> Time
     #   resp.audit_events[0].related_item_type #=> String, one of "Contact", "Comment", "File", "Sla"
@@ -2383,6 +2462,7 @@ module Aws::ConnectCases
     #   resp.related_items[0].content.sla.sla_configuration.target_field_values[0].user_arn_value #=> String
     #   resp.related_items[0].content.sla.sla_configuration.target_time #=> Time
     #   resp.related_items[0].content.sla.sla_configuration.type #=> String, one of "CaseField"
+    #   resp.related_items[0].performed_by.custom_entity #=> String
     #   resp.related_items[0].performed_by.user_arn #=> String
     #   resp.related_items[0].related_item_id #=> String
     #   resp.related_items[0].tags #=> Hash
@@ -2453,17 +2533,18 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # <note markdown="1"> If you provide a value for `PerformedBy.UserArn` you must also have
+    # <note markdown="1"> If you provide a value for `PerformedBy.UserArn`
+    # you must also have
     # [connect:DescribeUser][1] permission on the User ARN resource that you
     # provide
     #
     #  </note>
     #
-    # Updates the values of fields on a case. Fields to be updated are
+    #  Updates the values of fields on a case. Fields to be updated are
     # received as an array of id/value pairs identical to the `CreateCase`
     # input .
     #
-    # If the action is successful, the service sends back an HTTP 200
+    #  If the action is successful, the service sends back an HTTP 200
     # response with an empty HTTP body.
     #
     #
@@ -2481,7 +2562,7 @@ module Aws::ConnectCases
     #   and value union data, structured identical to `CreateCase`.
     #
     # @option params [Types::UserUnion] :performed_by
-    #   Represents the identity of the person who performed the action.
+    #   Represents the entity that performed the action.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2504,6 +2585,7 @@ module Aws::ConnectCases
     #       },
     #     ],
     #     performed_by: {
+    #       custom_entity: "CustomEntity",
     #       user_arn: "UserArn",
     #     },
     #   })
@@ -2814,7 +2896,7 @@ module Aws::ConnectCases
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

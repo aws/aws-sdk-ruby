@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2025-06-25)
+------------------
+
+* Feature - Add support for the ability to create Amazon S3 Access Points for Amazon FSx for OpenZFS file systems.
+
+1.114.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.113.0 (2025-05-29)
+------------------
+
+* Feature - FSx API changes to support the public launch of new Intelligent Tiering storage class on Amazon FSx for Lustre
+
+1.112.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.111.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.110.0 (2025-02-18)
 ------------------
 

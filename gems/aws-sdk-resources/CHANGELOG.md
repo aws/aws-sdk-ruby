@@ -1,6 +1,63 @@
 Unreleased Changes
 ------------------
 
+3.236.0 (2025-07-16)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-bedrockagentcorecontrol` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-bedrockagentcore` gem.
+
+3.235.0 (2025-07-15)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-s3vectors` gem.
+
+3.234.0 (2025-07-01)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-odb` gem.
+
+3.233.0 (2025-06-26)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-keyspacesstreams` gem.
+
+3.232.0 (2025-06-23)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-workspacesinstances` gem.
+
+3.231.0 (2025-06-18)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-aiops` gem.
+
+3.230.0 (2025-06-17)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mpa` gem.
+
+3.229.0 (2025-06-04)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-evs` gem.
+
+3.228.0 (2025-06-02)
+------------------
+
+* Feature - AWS SDK for Ruby no longer supports Ruby runtime versions 2.5 and 2.6.
+
+3.227.0 (2025-05-21)
+------------------
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-privatenetworks` gem.
+
+3.226.0 (2025-04-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-ssmguiconnect` gem.
+
 3.225.0 (2025-03-05)
 ------------------
 

@@ -63,10 +63,6 @@ module BuildTools
       end
     end
 
-    api('BedrockRuntime') do |api|
-      api['metadata']['protocolSettings'] = {'h2' => 'optional'}
-    end
-
     api('CloudFront') do |api|
       api['shapes'].each do |_, shape|
         if shape['members'] && shape['members']['MaxItems'] && shape['members']['MaxItems']['shape'] == 'string'
@@ -251,13 +247,6 @@ module BuildTools
     smoke('ElasticTranscoder') do |smoke|
       # discontinued service
       smoke['testCases'] = []
-    end
-
-    smoke('NetworkFlowMonitor') do |smoke|
-      test = smoke['testCases'].find do |test_case|
-        test_case['id'] == 'GetMonitorSuccess'
-      end
-      test['expectation'] = { 'failure' => {} }
     end
 
     smoke('ObservabilityAdmin') do |smoke|

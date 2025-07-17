@@ -186,7 +186,8 @@ module Aws::SupplyChain
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The name space of the dataset.
+    #   The namespace of the dataset, besides the custom defined namespace,
+    #   every instance comes with below pre-defined namespaces:
     #
     #   * **asc** - For information on the Amazon Web Services Supply Chain
     #     supported datasets see
@@ -210,13 +211,23 @@ module Aws::SupplyChain
     #   @return [String]
     #
     # @!attribute [rw] schema
-    #   The custom schema of the data lake dataset and is only required when
-    #   the name space is **default**.
+    #   The custom schema of the data lake dataset and required for dataset
+    #   in **default** and custom namespaces.
     #   @return [Types::DataLakeDatasetSchema]
     #
     # @!attribute [rw] description
     #   The description of the dataset.
     #   @return [String]
+    #
+    # @!attribute [rw] partition_spec
+    #   The partition specification of the dataset. Partitioning can
+    #   effectively improve the dataset query performance by reducing the
+    #   amount of data scanned during query execution. But partitioning or
+    #   not will affect how data get ingested by data ingestion methods,
+    #   such as SendDataIntegrationEvent's dataset UPSERT will upsert
+    #   records within partition (instead of within whole dataset). For more
+    #   details, refer to those data ingestion documentations.
+    #   @return [Types::DataLakeDatasetPartitionSpec]
     #
     # @!attribute [rw] tags
     #   The tags of the dataset.
@@ -230,6 +241,7 @@ module Aws::SupplyChain
       :name,
       :schema,
       :description,
+      :partition_spec,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -245,6 +257,51 @@ module Aws::SupplyChain
     #
     class CreateDataLakeDatasetResponse < Struct.new(
       :dataset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request parameters for CreateDataLakeNamespace.
+    #
+    # @!attribute [rw] instance_id
+    #   The Amazon Web Services Supply Chain instance identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the namespace. Noted you cannot create namespace with
+    #   name starting with **asc**, **default**, **scn**, **aws**,
+    #   **amazon**, **amzn**
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags of the namespace.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/CreateDataLakeNamespaceRequest AWS API Documentation
+    #
+    class CreateDataLakeNamespaceRequest < Struct.new(
+      :instance_id,
+      :name,
+      :description,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response parameters of CreateDataLakeNamespace.
+    #
+    # @!attribute [rw] namespace
+    #   The detail of created namespace.
+    #   @return [Types::DataLakeNamespace]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/CreateDataLakeNamespaceResponse AWS API Documentation
+    #
+    class CreateDataLakeNamespaceResponse < Struct.new(
+      :namespace)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -312,6 +369,131 @@ module Aws::SupplyChain
       include Aws::Structure
     end
 
+    # The data integration event details.
+    #
+    # @!attribute [rw] instance_id
+    #   The AWS Supply Chain instance identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_id
+    #   The unique event identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type
+    #   The data event type.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_group_id
+    #   Event identifier (for example, orderId for InboundOrder) used for
+    #   data sharding or partitioning.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_timestamp
+    #   The event timestamp (in epoch seconds).
+    #   @return [Time]
+    #
+    # @!attribute [rw] dataset_target_details
+    #   The target dataset details for a DATASET event type.
+    #   @return [Types::DataIntegrationEventDatasetTargetDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DataIntegrationEvent AWS API Documentation
+    #
+    class DataIntegrationEvent < Struct.new(
+      :instance_id,
+      :event_id,
+      :event_type,
+      :event_group_id,
+      :event_timestamp,
+      :dataset_target_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The target dataset load execution details.
+    #
+    # @!attribute [rw] status
+    #   The event load execution status to target dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The failure message (if any) of failed event load execution to
+    #   dataset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DataIntegrationEventDatasetLoadExecutionDetails AWS API Documentation
+    #
+    class DataIntegrationEventDatasetLoadExecutionDetails < Struct.new(
+      :status,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The target dataset configuration for a DATASET event type.
+    #
+    # @!attribute [rw] dataset_identifier
+    #   The datalake dataset ARN identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_type
+    #   The target dataset load operation type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DataIntegrationEventDatasetTargetConfiguration AWS API Documentation
+    #
+    class DataIntegrationEventDatasetTargetConfiguration < Struct.new(
+      :dataset_identifier,
+      :operation_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The target dataset details for a DATASET event type.
+    #
+    # @!attribute [rw] dataset_identifier
+    #   The datalake dataset ARN identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_type
+    #   The target dataset load operation type. The available options are:
+    #
+    #   * **APPEND** - Add new records to the dataset. Noted that this
+    #     operation type will just try to append records as-is without any
+    #     primary key or partition constraints.
+    #
+    #   * **UPSERT** - Modify existing records in the dataset with primary
+    #     key configured, events for datasets without primary keys are not
+    #     allowed. If event data contains primary keys that match records in
+    #     the dataset within same partition, then those existing records (in
+    #     that partition) will be updated. If primary keys do not match, new
+    #     records will be added. Note that if dataset contain records with
+    #     duplicate primary key values in the same partition, those
+    #     duplicate records will be deduped into one updated record.
+    #
+    #   * **DELETE** - Remove existing records in the dataset with primary
+    #     key configured, events for datasets without primary keys are not
+    #     allowed. If event data contains primary keys that match records in
+    #     the dataset within same partition, then those existing records (in
+    #     that partition) will be deleted. If primary keys do not match, no
+    #     actions will be done. Note that if dataset contain records with
+    #     duplicate primary key values in the same partition, all those
+    #     duplicates will be removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_load_execution
+    #   The target dataset load execution.
+    #   @return [Types::DataIntegrationEventDatasetLoadExecutionDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DataIntegrationEventDatasetTargetDetails AWS API Documentation
+    #
+    class DataIntegrationEventDatasetTargetDetails < Struct.new(
+      :dataset_identifier,
+      :operation_type,
+      :dataset_load_execution)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The DataIntegrationFlow details.
     #
     # @!attribute [rw] instance_id
@@ -359,18 +541,61 @@ module Aws::SupplyChain
     # The dataset options used in dataset source and target configurations.
     #
     # @!attribute [rw] load_type
-    #   The dataset data load type in dataset options.
+    #   The target dataset's data load type. This only affects how source
+    #   S3 files are selected in the S3-to-dataset flow.
+    #
+    #   * **REPLACE** - Target dataset will get replaced with the new file
+    #     added under the source s3 prefix.
+    #
+    #   * **INCREMENTAL** - Target dataset will get updated with the
+    #     up-to-date content under S3 prefix incorporating any file
+    #     additions or removals there.
     #   @return [String]
     #
     # @!attribute [rw] dedupe_records
-    #   The dataset load option to remove duplicates.
+    #   The option to perform deduplication on data records sharing same
+    #   primary key values. If disabled, transformed data with duplicate
+    #   primary key values will ingest into dataset, for datasets within
+    #   **asc** namespace, such duplicates will cause ingestion fail. If
+    #   enabled without dedupeStrategy, deduplication is done by retaining a
+    #   random data record among those sharing the same primary key values.
+    #   If enabled with dedupeStragtegy, the deduplication is done following
+    #   the strategy.
+    #
+    #   Note that target dataset may have partition configured, when dedupe
+    #   is enabled, it only dedupe against primary keys and retain only one
+    #   record out of those duplicates regardless of its partition status.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] dedupe_strategy
+    #   The deduplication strategy to dedupe the data records sharing same
+    #   primary key values of the target dataset. This strategy only applies
+    #   to target dataset with primary keys and with dedupeRecords option
+    #   enabled. If transformed data still got duplicates after the
+    #   dedupeStrategy evaluation, a random data record is chosen to be
+    #   retained.
+    #   @return [Types::DataIntegrationFlowDedupeStrategy]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DataIntegrationFlowDatasetOptions AWS API Documentation
     #
     class DataIntegrationFlowDatasetOptions < Struct.new(
       :load_type,
-      :dedupe_records)
+      :dedupe_records,
+      :dedupe_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of a flow execution with dataset source.
+    #
+    # @!attribute [rw] dataset_identifier
+    #   The ARN of the dataset source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DataIntegrationFlowDatasetSource AWS API Documentation
+    #
+    class DataIntegrationFlowDatasetSource < Struct.new(
+      :dataset_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -413,6 +638,162 @@ module Aws::SupplyChain
       include Aws::Structure
     end
 
+    # The deduplication strategy details.
+    #
+    # @!attribute [rw] type
+    #   The type of the deduplication strategy.
+    #
+    #   * **FIELD\_PRIORITY** - Field priority configuration for the
+    #     deduplication strategy specifies an ordered list of fields used to
+    #     tie-break the data records sharing the same primary key values.
+    #     Fields earlier in the list have higher priority for evaluation.
+    #     For each field, the sort order determines whether to retain data
+    #     record with larger or smaller field value.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] field_priority
+    #   The field priority deduplication strategy.
+    #   @return [Types::DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DataIntegrationFlowDedupeStrategy AWS API Documentation
+    #
+    class DataIntegrationFlowDedupeStrategy < Struct.new(
+      :type,
+      :field_priority)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The flow execution details.
+    #
+    # @!attribute [rw] instance_id
+    #   The flow execution's instanceId.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_name
+    #   The flow execution's flowName.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_id
+    #   The flow executionId.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of flow execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_info
+    #   The source information for a flow execution.
+    #   @return [Types::DataIntegrationFlowExecutionSourceInfo]
+    #
+    # @!attribute [rw] message
+    #   The failure message (if any) of failed flow execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The flow execution start timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The flow execution end timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] output_metadata
+    #   The flow execution output metadata.
+    #   @return [Types::DataIntegrationFlowExecutionOutputMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DataIntegrationFlowExecution AWS API Documentation
+    #
+    class DataIntegrationFlowExecution < Struct.new(
+      :instance_id,
+      :flow_name,
+      :execution_id,
+      :status,
+      :source_info,
+      :message,
+      :start_time,
+      :end_time,
+      :output_metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output metadata of the flow execution.
+    #
+    # @!attribute [rw] diagnostic_reports_root_s3uri
+    #   The S3 URI under which all diagnostic files (such as deduped records
+    #   if any) are stored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DataIntegrationFlowExecutionOutputMetadata AWS API Documentation
+    #
+    class DataIntegrationFlowExecutionOutputMetadata < Struct.new(
+      :diagnostic_reports_root_s3uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source information of a flow execution.
+    #
+    # @!attribute [rw] source_type
+    #   The data integration flow execution source type.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_source
+    #   The source details of a flow execution with S3 source.
+    #   @return [Types::DataIntegrationFlowS3Source]
+    #
+    # @!attribute [rw] dataset_source
+    #   The source details of a flow execution with dataset source.
+    #   @return [Types::DataIntegrationFlowDatasetSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DataIntegrationFlowExecutionSourceInfo AWS API Documentation
+    #
+    class DataIntegrationFlowExecutionSourceInfo < Struct.new(
+      :source_type,
+      :s3_source,
+      :dataset_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The field used in the field priority deduplication strategy.
+    #
+    # @!attribute [rw] name
+    #   The name of the deduplication field. Must exist in the dataset and
+    #   not be a primary key.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for the deduplication field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DataIntegrationFlowFieldPriorityDedupeField AWS API Documentation
+    #
+    class DataIntegrationFlowFieldPriorityDedupeField < Struct.new(
+      :name,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The field priority deduplication strategy details.
+    #
+    # @!attribute [rw] fields
+    #   The list of field names and their sort order for deduplication,
+    #   arranged in descending priority from highest to lowest.
+    #   @return [Array<Types::DataIntegrationFlowFieldPriorityDedupeField>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration AWS API Documentation
+    #
+    class DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration < Struct.new(
+      :fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon S3 options used in S3 source and target configurations.
     #
     # @!attribute [rw] file_type
@@ -427,6 +808,25 @@ module Aws::SupplyChain
       include Aws::Structure
     end
 
+    # The details of a flow execution with S3 source.
+    #
+    # @!attribute [rw] bucket_name
+    #   The S3 bucket name of the S3 source.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The S3 object key of the S3 source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DataIntegrationFlowS3Source AWS API Documentation
+    #
+    class DataIntegrationFlowS3Source < Struct.new(
+      :bucket_name,
+      :key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The S3 DataIntegrationFlow source configuration parameters.
     #
     # @!attribute [rw] bucket_name
@@ -434,7 +834,8 @@ module Aws::SupplyChain
     #   @return [String]
     #
     # @!attribute [rw] prefix
-    #   The prefix of the S3 source objects.
+    #   The prefix of the S3 source objects. To trigger data ingestion, S3
+    #   files need to be put under `s3://bucketName/prefix/`.
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -485,7 +886,7 @@ module Aws::SupplyChain
     #
     class DataIntegrationFlowSQLTransformationConfiguration < Struct.new(
       :query)
-      SENSITIVE = []
+      SENSITIVE = [:query]
       include Aws::Structure
     end
 
@@ -530,7 +931,10 @@ module Aws::SupplyChain
     #   @return [Types::DataIntegrationFlowS3TargetConfiguration]
     #
     # @!attribute [rw] dataset_target
-    #   The dataset DataIntegrationFlow target.
+    #   The dataset DataIntegrationFlow target. Note that for AWS Supply
+    #   Chain dataset under **asc** namespace, it has a connection\_id
+    #   internal field that is not allowed to be provided by client
+    #   directly, they will be auto populated.
     #   @return [Types::DataIntegrationFlowDatasetTargetConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DataIntegrationFlowTarget AWS API Documentation
@@ -569,7 +973,8 @@ module Aws::SupplyChain
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The name space of the dataset. The available values are:
+    #   The namespace of the dataset, besides the custom defined namespace,
+    #   every instance comes with below pre-defined namespaces:
     #
     #   * **asc** - For information on the Amazon Web Services Supply Chain
     #     supported datasets see
@@ -583,8 +988,8 @@ module Aws::SupplyChain
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the dataset. For **asc** name space, the name must be
-    #   one of the supported data entities under
+    #   The name of the dataset. For **asc** namespace, the name must be one
+    #   of the supported data entities under
     #   [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html][1].
     #
     #
@@ -604,6 +1009,10 @@ module Aws::SupplyChain
     #   The description of the dataset.
     #   @return [String]
     #
+    # @!attribute [rw] partition_spec
+    #   The partition specification for a dataset.
+    #   @return [Types::DataLakeDatasetPartitionSpec]
+    #
     # @!attribute [rw] created_time
     #   The creation time of the dataset.
     #   @return [Time]
@@ -621,13 +1030,99 @@ module Aws::SupplyChain
       :arn,
       :schema,
       :description,
+      :partition_spec,
       :created_time,
       :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The schema details of the dataset.
+    # The detail of the partition field.
+    #
+    # @!attribute [rw] name
+    #   The name of the partition field.
+    #   @return [String]
+    #
+    # @!attribute [rw] transform
+    #   The transformation of the partition field. A transformation
+    #   specifies how to partition on a given field. For example, with
+    #   timestamp you can specify that you'd like to partition fields by
+    #   day, e.g. data record with value 2025-01-03T00:00:00Z in partition
+    #   field is in 2025-01-03 partition. Also noted that data record
+    #   without any value in optional partition field is in NULL partition.
+    #   @return [Types::DataLakeDatasetPartitionFieldTransform]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DataLakeDatasetPartitionField AWS API Documentation
+    #
+    class DataLakeDatasetPartitionField < Struct.new(
+      :name,
+      :transform)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The detail of the partition field transformation.
+    #
+    # @!attribute [rw] type
+    #   The type of partitioning transformation for this field. The
+    #   available options are:
+    #
+    #   * **IDENTITY** - Partitions data on a given field by its exact
+    #     values.
+    #
+    #   * **YEAR** - Partitions data on a timestamp field using year
+    #     granularity.
+    #
+    #   * **MONTH** - Partitions data on a timestamp field using month
+    #     granularity.
+    #
+    #   * **DAY** - Partitions data on a timestamp field using day
+    #     granularity.
+    #
+    #   * **HOUR** - Partitions data on a timestamp field using hour
+    #     granularity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DataLakeDatasetPartitionFieldTransform AWS API Documentation
+    #
+    class DataLakeDatasetPartitionFieldTransform < Struct.new(
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The partition specification for a dataset.
+    #
+    # @!attribute [rw] fields
+    #   The fields on which to partition a dataset. The partitions will be
+    #   applied hierarchically based on the order of this list.
+    #   @return [Array<Types::DataLakeDatasetPartitionField>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DataLakeDatasetPartitionSpec AWS API Documentation
+    #
+    class DataLakeDatasetPartitionSpec < Struct.new(
+      :fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The detail of the primary key field.
+    #
+    # @!attribute [rw] name
+    #   The name of the primary key field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DataLakeDatasetPrimaryKeyField AWS API Documentation
+    #
+    class DataLakeDatasetPrimaryKeyField < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The schema details of the dataset. Note that for AWS Supply Chain
+    # dataset under **asc** namespace, it may have internal fields like
+    # connection\_id that will be auto populated by data ingestion methods.
     #
     # @!attribute [rw] name
     #   The name of the dataset schema.
@@ -637,11 +1132,27 @@ module Aws::SupplyChain
     #   The list of field details of the dataset schema.
     #   @return [Array<Types::DataLakeDatasetSchemaField>]
     #
+    # @!attribute [rw] primary_keys
+    #   The list of primary key fields for the dataset. Primary keys defined
+    #   can help data ingestion methods to ensure data uniqueness:
+    #   CreateDataIntegrationFlow's dedupe strategy will leverage primary
+    #   keys to perform records deduplication before write to dataset;
+    #   SendDataIntegrationEvent's UPSERT and DELETE can only work with
+    #   dataset with primary keys. For more details, refer to those data
+    #   ingestion documentations.
+    #
+    #   Note that defining primary keys does not necessarily mean the
+    #   dataset cannot have duplicate records, duplicate records can still
+    #   be ingested if CreateDataIntegrationFlow's dedupe disabled or
+    #   through SendDataIntegrationEvent's APPEND operation.
+    #   @return [Array<Types::DataLakeDatasetPrimaryKeyField>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DataLakeDatasetSchema AWS API Documentation
     #
     class DataLakeDatasetSchema < Struct.new(
       :name,
-      :fields)
+      :fields,
+      :primary_keys)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -666,6 +1177,45 @@ module Aws::SupplyChain
       :name,
       :type,
       :is_required)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The data lake namespace details.
+    #
+    # @!attribute [rw] instance_id
+    #   The Amazon Web Services Supply Chain instance identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The arn of the namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The creation time of the namespace.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last modified time of the namespace.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DataLakeNamespace AWS API Documentation
+    #
+    class DataLakeNamespace < Struct.new(
+      :instance_id,
+      :name,
+      :arn,
+      :description,
+      :created_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -715,7 +1265,8 @@ module Aws::SupplyChain
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The name space of the dataset. The available values are:
+    #   The namespace of the dataset, besides the custom defined namespace,
+    #   every instance comes with below pre-defined namespaces:
     #
     #   * **asc** - For information on the Amazon Web Services Supply Chain
     #     supported datasets see
@@ -729,8 +1280,8 @@ module Aws::SupplyChain
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the dataset. For **asc** name space, the name must be
-    #   one of the supported data entities under
+    #   The name of the dataset. For **asc** namespace, the name must be one
+    #   of the supported data entities under
     #   [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html][1].
     #
     #
@@ -755,7 +1306,7 @@ module Aws::SupplyChain
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The name space of deleted dataset.
+    #   The namespace of deleted dataset.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -767,6 +1318,46 @@ module Aws::SupplyChain
     class DeleteDataLakeDatasetResponse < Struct.new(
       :instance_id,
       :namespace,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request parameters of DeleteDataLakeNamespace.
+    #
+    # @!attribute [rw] instance_id
+    #   The AWS Supply Chain instance identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the namespace. Noted you cannot delete pre-defined
+    #   namespace like **asc**, **default** which are only deleted through
+    #   instance deletion.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DeleteDataLakeNamespaceRequest AWS API Documentation
+    #
+    class DeleteDataLakeNamespaceRequest < Struct.new(
+      :instance_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response parameters of DeleteDataLakeNamespace.
+    #
+    # @!attribute [rw] instance_id
+    #   The AWS Supply Chain instance identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of deleted namespace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DeleteDataLakeNamespaceResponse AWS API Documentation
+    #
+    class DeleteDataLakeNamespaceResponse < Struct.new(
+      :instance_id,
       :name)
       SENSITIVE = []
       include Aws::Structure
@@ -833,6 +1424,77 @@ module Aws::SupplyChain
       include Aws::Structure
     end
 
+    # The request parameters for GetDataIntegrationEvent.
+    #
+    # @!attribute [rw] instance_id
+    #   The Amazon Web Services Supply Chain instance identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_id
+    #   The unique event identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/GetDataIntegrationEventRequest AWS API Documentation
+    #
+    class GetDataIntegrationEventRequest < Struct.new(
+      :instance_id,
+      :event_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response parameters for GetDataIntegrationEvent.
+    #
+    # @!attribute [rw] event
+    #   The details of the DataIntegrationEvent returned.
+    #   @return [Types::DataIntegrationEvent]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/GetDataIntegrationEventResponse AWS API Documentation
+    #
+    class GetDataIntegrationEventResponse < Struct.new(
+      :event)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request parameters of GetFlowExecution.
+    #
+    # @!attribute [rw] instance_id
+    #   The AWS Supply Chain instance identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_name
+    #   The flow name.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_id
+    #   The flow execution identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/GetDataIntegrationFlowExecutionRequest AWS API Documentation
+    #
+    class GetDataIntegrationFlowExecutionRequest < Struct.new(
+      :instance_id,
+      :flow_name,
+      :execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response parameters of GetFlowExecution.
+    #
+    # @!attribute [rw] flow_execution
+    #   The flow execution details.
+    #   @return [Types::DataIntegrationFlowExecution]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/GetDataIntegrationFlowExecutionResponse AWS API Documentation
+    #
+    class GetDataIntegrationFlowExecutionResponse < Struct.new(
+      :flow_execution)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request parameters for GetDataIntegrationFlow.
     #
     # @!attribute [rw] instance_id
@@ -873,7 +1535,8 @@ module Aws::SupplyChain
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The name space of the dataset. The available values are:
+    #   The namespace of the dataset, besides the custom defined namespace,
+    #   every instance comes with below pre-defined namespaces:
     #
     #   * **asc** - For information on the Amazon Web Services Supply Chain
     #     supported datasets see
@@ -887,8 +1550,8 @@ module Aws::SupplyChain
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the dataset. For **asc** name space, the name must be
-    #   one of the supported data entities under
+    #   The name of the dataset. For **asc** namespace, the name must be one
+    #   of the supported data entities under
     #   [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html][1].
     #
     #
@@ -906,7 +1569,7 @@ module Aws::SupplyChain
       include Aws::Structure
     end
 
-    # The response parameters for UpdateDataLakeDataset.
+    # The response parameters for GetDataLakeDataset.
     #
     # @!attribute [rw] dataset
     #   The fetched dataset details.
@@ -916,6 +1579,51 @@ module Aws::SupplyChain
     #
     class GetDataLakeDatasetResponse < Struct.new(
       :dataset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request parameters for GetDataLakeNamespace.
+    #
+    # @!attribute [rw] instance_id
+    #   The Amazon Web Services Supply Chain instance identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the namespace. Besides the namespaces user created, you
+    #   can also specify the pre-defined namespaces:
+    #
+    #   * **asc** - Pre-defined namespace containing Amazon Web Services
+    #     Supply Chain supported datasets, see
+    #     [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html][1].
+    #
+    #   * **default** - Pre-defined namespace containing datasets with
+    #     custom user-defined schemas.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/GetDataLakeNamespaceRequest AWS API Documentation
+    #
+    class GetDataLakeNamespaceRequest < Struct.new(
+      :instance_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response parameters for GetDataLakeNamespace.
+    #
+    # @!attribute [rw] namespace
+    #   The fetched namespace details.
+    #   @return [Types::DataLakeNamespace]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/GetDataLakeNamespaceResponse AWS API Documentation
+    #
+    class GetDataLakeNamespaceResponse < Struct.new(
+      :namespace)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1031,6 +1739,106 @@ module Aws::SupplyChain
       include Aws::Structure
     end
 
+    # The request parameters for ListDataIntegrationEvents.
+    #
+    # @!attribute [rw] instance_id
+    #   The Amazon Web Services Supply Chain instance identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type
+    #   List data integration events for the specified eventType.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to fetch the next page of the data integration
+    #   events.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specify the maximum number of data integration events to fetch in
+    #   one paginated request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/ListDataIntegrationEventsRequest AWS API Documentation
+    #
+    class ListDataIntegrationEventsRequest < Struct.new(
+      :instance_id,
+      :event_type,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response parameters for ListDataIntegrationEvents.
+    #
+    # @!attribute [rw] events
+    #   The list of data integration events.
+    #   @return [Array<Types::DataIntegrationEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to fetch the next page of the
+    #   ListDataIntegrationEvents.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/ListDataIntegrationEventsResponse AWS API Documentation
+    #
+    class ListDataIntegrationEventsResponse < Struct.new(
+      :events,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request parameters of ListFlowExecutions.
+    #
+    # @!attribute [rw] instance_id
+    #   The AWS Supply Chain instance identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_name
+    #   The flow name.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to fetch next page of flow executions.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number to specify the max number of flow executions to fetch in
+    #   this paginated request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/ListDataIntegrationFlowExecutionsRequest AWS API Documentation
+    #
+    class ListDataIntegrationFlowExecutionsRequest < Struct.new(
+      :instance_id,
+      :flow_name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response parameters of ListFlowExecutions.
+    #
+    # @!attribute [rw] flow_executions
+    #   The list of flow executions.
+    #   @return [Array<Types::DataIntegrationFlowExecution>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to fetch next page of flow executions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/ListDataIntegrationFlowExecutionsResponse AWS API Documentation
+    #
+    class ListDataIntegrationFlowExecutionsResponse < Struct.new(
+      :flow_executions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request parameters for ListDataIntegrationFlows.
     #
     # @!attribute [rw] instance_id
@@ -1084,7 +1892,8 @@ module Aws::SupplyChain
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The name space of the dataset. The available values are:
+    #   The namespace of the dataset, besides the custom defined namespace,
+    #   every instance comes with below pre-defined namespaces:
     #
     #   * **asc** - For information on the Amazon Web Services Supply Chain
     #     supported datasets see
@@ -1130,6 +1939,50 @@ module Aws::SupplyChain
     #
     class ListDataLakeDatasetsResponse < Struct.new(
       :datasets,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request parameters of ListDataLakeNamespaces.
+    #
+    # @!attribute [rw] instance_id
+    #   The Amazon Web Services Supply Chain instance identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to fetch next page of namespaces.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The max number of namespaces to fetch in this paginated request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/ListDataLakeNamespacesRequest AWS API Documentation
+    #
+    class ListDataLakeNamespacesRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response parameters of ListDataLakeNamespaces.
+    #
+    # @!attribute [rw] namespaces
+    #   The list of fetched namespace details. Noted it only contains custom
+    #   namespaces, pre-defined namespaces are not included.
+    #   @return [Array<Types::DataLakeNamespace>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to fetch next page of namespaces.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/ListDataLakeNamespacesResponse AWS API Documentation
+    #
+    class ListDataLakeNamespacesResponse < Struct.new(
+      :namespaces,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1234,11 +2087,79 @@ module Aws::SupplyChain
     #
     # @!attribute [rw] event_type
     #   The data event type.
+    #
+    #   * **scn.data.dataset** - Send data directly to any specified
+    #     dataset.
+    #
+    #   * **scn.data.supplyplan** - Send data to [supply\_plan][1] dataset.
+    #
+    #   * **scn.data.shipmentstoporder** - Send data to
+    #     [shipment\_stop\_order][2] dataset.
+    #
+    #   * **scn.data.shipmentstop** - Send data to [shipment\_stop][3]
+    #     dataset.
+    #
+    #   * **scn.data.shipment** - Send data to [shipment][4] dataset.
+    #
+    #   * **scn.data.reservation** - Send data to [reservation][5] dataset.
+    #
+    #   * **scn.data.processproduct** - Send data to [process\_product][6]
+    #     dataset.
+    #
+    #   * **scn.data.processoperation** - Send data to
+    #     [process\_operation][7] dataset.
+    #
+    #   * **scn.data.processheader** - Send data to [process\_header][8]
+    #     dataset.
+    #
+    #   * **scn.data.forecast** - Send data to [forecast][9] dataset.
+    #
+    #   * **scn.data.inventorylevel** - Send data to [inv\_level][10]
+    #     dataset.
+    #
+    #   * **scn.data.inboundorder** - Send data to [inbound\_order][11]
+    #     dataset.
+    #
+    #   * **scn.data.inboundorderline** - Send data to
+    #     [inbound\_order\_line][12] dataset.
+    #
+    #   * **scn.data.inboundorderlineschedule** - Send data to
+    #     [inbound\_order\_line\_schedule][13] dataset.
+    #
+    #   * **scn.data.outboundorderline** - Send data to
+    #     [outbound\_order\_line][14] dataset.
+    #
+    #   * **scn.data.outboundshipment** - Send data to
+    #     [outbound\_shipment][15] dataset.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/supply-plan-entity.html
+    #   [2]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/replenishment-shipment-stop-order-entity.html
+    #   [3]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/replenishment-shipment-stop-entity.html
+    #   [4]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/replenishment-shipment-entity.html
+    #   [5]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/planning-reservation-entity.html
+    #   [6]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/operation-process-product-entity.html
+    #   [7]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/operation-process-operation-entity.html
+    #   [8]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/operation-process-header-entity.html
+    #   [9]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/forecast-forecast-entity.html
+    #   [10]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/inventory_mgmnt-inv-level-entity.html
+    #   [11]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/replenishment-inbound-order-entity.html
+    #   [12]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/replenishment-inbound-order-line-entity.html
+    #   [13]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/replenishment-inbound-order-line-schedule-entity.html
+    #   [14]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/outbound-fulfillment-order-line-entity.html
+    #   [15]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/outbound-fulfillment-shipment-entity.html
     #   @return [String]
     #
     # @!attribute [rw] data
-    #   The data payload of the event. For more information on the data
-    #   schema to use, see [Data entities supported in AWS Supply Chain][1].
+    #   The data payload of the event, should follow the data schema of the
+    #   target dataset, or see [Data entities supported in AWS Supply
+    #   Chain][1]. To send single data record, use JsonObject format; to
+    #   send multiple data records, use JsonArray format.
+    #
+    #   Note that for AWS Supply Chain dataset under **asc** namespace, it
+    #   has a connection\_id internal field that is not allowed to be
+    #   provided by client directly, they will be auto populated.
     #
     #
     #
@@ -1247,19 +2168,31 @@ module Aws::SupplyChain
     #
     # @!attribute [rw] event_group_id
     #   Event identifier (for example, orderId for InboundOrder) used for
-    #   data sharing or partitioning.
+    #   data sharding or partitioning. Noted under one eventGroupId of same
+    #   eventType and instanceId, events are processed sequentially in the
+    #   order they are received by the server.
     #   @return [String]
     #
     # @!attribute [rw] event_timestamp
-    #   The event timestamp (in epoch seconds).
+    #   The timestamp (in epoch seconds) associated with the event. If not
+    #   provided, it will be assigned with current timestamp.
     #   @return [Time]
     #
     # @!attribute [rw] client_token
-    #   The idempotent client token.
+    #   The idempotent client token. The token is active for 8 hours, and
+    #   within its lifetime, it ensures the request completes only once upon
+    #   retry with same client token. If omitted, the AWS SDK generates a
+    #   unique value so that AWS SDK can safely retry the request upon
+    #   network errors.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
+    #
+    # @!attribute [rw] dataset_target
+    #   The target dataset configuration for **scn.data.dataset** event
+    #   type.
+    #   @return [Types::DataIntegrationEventDatasetTargetConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/SendDataIntegrationEventRequest AWS API Documentation
     #
@@ -1269,7 +2202,8 @@ module Aws::SupplyChain
       :data,
       :event_group_id,
       :event_timestamp,
-      :client_token)
+      :client_token,
+      :dataset_target)
       SENSITIVE = [:data]
       include Aws::Structure
     end
@@ -1423,7 +2357,8 @@ module Aws::SupplyChain
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The name space of the dataset. The available values are:
+    #   The namespace of the dataset, besides the custom defined namespace,
+    #   every instance comes with below pre-defined namespaces:
     #
     #   * **asc** - For information on the Amazon Web Services Supply Chain
     #     supported datasets see
@@ -1437,8 +2372,8 @@ module Aws::SupplyChain
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the dataset. For **asc** name space, the name must be
-    #   one of the supported data entities under
+    #   The name of the dataset. For **asc** namespace, the name must be one
+    #   of the supported data entities under
     #   [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html][1].
     #
     #
@@ -1471,6 +2406,46 @@ module Aws::SupplyChain
     #
     class UpdateDataLakeDatasetResponse < Struct.new(
       :dataset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request parameters of UpdateDataLakeNamespace.
+    #
+    # @!attribute [rw] instance_id
+    #   The Amazon Web Services Chain instance identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the namespace. Noted you cannot update namespace with
+    #   name starting with **asc**, **default**, **scn**, **aws**,
+    #   **amazon**, **amzn**
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the data lake namespace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/UpdateDataLakeNamespaceRequest AWS API Documentation
+    #
+    class UpdateDataLakeNamespaceRequest < Struct.new(
+      :instance_id,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response parameters of UpdateDataLakeNamespace.
+    #
+    # @!attribute [rw] namespace
+    #   The updated namespace details.
+    #   @return [Types::DataLakeNamespace]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/UpdateDataLakeNamespaceResponse AWS API Documentation
+    #
+    class UpdateDataLakeNamespaceResponse < Struct.new(
+      :namespace)
       SENSITIVE = []
       include Aws::Structure
     end

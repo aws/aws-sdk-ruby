@@ -180,6 +180,42 @@ module Aws
                             ) -> _GetAgentMemoryResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentMemoryResponseSuccess
 
+      interface _GetExecutionFlowSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetExecutionFlowSnapshotResponse]
+        def customer_encryption_key_arn: () -> ::String
+        def definition: () -> ::String
+        def execution_role_arn: () -> ::String
+        def flow_alias_identifier: () -> ::String
+        def flow_identifier: () -> ::String
+        def flow_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#get_execution_flow_snapshot-instance_method
+      def get_execution_flow_snapshot: (
+                                         execution_identifier: ::String,
+                                         flow_alias_identifier: ::String,
+                                         flow_identifier: ::String
+                                       ) -> _GetExecutionFlowSnapshotResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExecutionFlowSnapshotResponseSuccess
+
+      interface _GetFlowExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFlowExecutionResponse]
+        def ended_at: () -> ::Time
+        def errors: () -> ::Array[Types::FlowExecutionError]
+        def execution_arn: () -> ::String
+        def flow_alias_identifier: () -> ::String
+        def flow_identifier: () -> ::String
+        def flow_version: () -> ::String
+        def started_at: () -> ::Time
+        def status: () -> ("Running" | "Succeeded" | "Failed" | "TimedOut" | "Aborted")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#get_flow_execution-instance_method
+      def get_flow_execution: (
+                                execution_identifier: ::String,
+                                flow_alias_identifier: ::String,
+                                flow_identifier: ::String
+                              ) -> _GetFlowExecutionResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFlowExecutionResponseSuccess
+
       interface _GetInvocationStepResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetInvocationStepResponse]
         def invocation_step: () -> Types::InvocationStep
@@ -228,6 +264,10 @@ module Aws
                           ?end_session: bool,
                           ?input_text: ::String,
                           ?memory_id: ::String,
+                          ?prompt_creation_configurations: {
+                            exclude_previous_thinking_steps: bool?,
+                            previous_conversation_turns_to_include: ::Integer?
+                          },
                           session_id: ::String,
                           ?session_state: {
                             conversation_history: {
@@ -494,6 +534,7 @@ module Aws
                                    },
                                  ],
                                  ?agent_collaboration: ("SUPERVISOR" | "SUPERVISOR_ROUTER" | "DISABLED"),
+                                 ?agent_name: ::String,
                                  ?bedrock_model_configurations: {
                                    performance_config: {
                                      latency: ("standard" | "optimized")?
@@ -695,6 +736,11 @@ module Aws
                                      }?
                                    },
                                  ],
+                                 ?custom_orchestration: {
+                                   executor: {
+                                     lambda: ::String?
+                                   }?
+                                 },
                                  ?customer_encryption_key_arn: ::String,
                                  ?enable_trace: bool,
                                  ?end_session: bool,
@@ -892,6 +938,11 @@ module Aws
                                      }?
                                    },
                                  ],
+                                 ?orchestration_type: ("DEFAULT" | "CUSTOM_ORCHESTRATION"),
+                                 ?prompt_creation_configurations: {
+                                   exclude_previous_thinking_steps: bool?,
+                                   previous_conversation_turns_to_include: ::Integer?
+                                 },
                                  ?prompt_override_configuration: {
                                    override_lambda: ::String?,
                                    prompt_configurations: Array[
@@ -921,6 +972,36 @@ module Aws
                                  }
                                ) ?{ (*untyped) -> void } -> _InvokeInlineAgentResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeInlineAgentResponseSuccess
+
+      interface _ListFlowExecutionEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFlowExecutionEventsResponse]
+        def flow_execution_events: () -> ::Array[Types::FlowExecutionEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#list_flow_execution_events-instance_method
+      def list_flow_execution_events: (
+                                        event_type: ("Node" | "Flow"),
+                                        execution_identifier: ::String,
+                                        flow_alias_identifier: ::String,
+                                        flow_identifier: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListFlowExecutionEventsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFlowExecutionEventsResponseSuccess
+
+      interface _ListFlowExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFlowExecutionsResponse]
+        def flow_execution_summaries: () -> ::Array[Types::FlowExecutionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#list_flow_executions-instance_method
+      def list_flow_executions: (
+                                  ?flow_alias_identifier: ::String,
+                                  flow_identifier: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListFlowExecutionsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFlowExecutionsResponseSuccess
 
       interface _ListInvocationStepsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListInvocationStepsResponse]
@@ -1604,6 +1685,47 @@ module Aws
                                           ?session_id: ::String
                                         ) ?{ (*untyped) -> void } -> _RetrieveAndGenerateStreamResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _RetrieveAndGenerateStreamResponseSuccess
+
+      interface _StartFlowExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartFlowExecutionResponse]
+        def execution_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#start_flow_execution-instance_method
+      def start_flow_execution: (
+                                  flow_alias_identifier: ::String,
+                                  ?flow_execution_name: ::String,
+                                  flow_identifier: ::String,
+                                  inputs: Array[
+                                    {
+                                      content: {
+                                        document: {
+                                        }?
+                                      },
+                                      node_input_name: ::String?,
+                                      node_name: ::String,
+                                      node_output_name: ::String?
+                                    },
+                                  ],
+                                  ?model_performance_configuration: {
+                                    performance_config: {
+                                      latency: ("standard" | "optimized")?
+                                    }?
+                                  }
+                                ) -> _StartFlowExecutionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFlowExecutionResponseSuccess
+
+      interface _StopFlowExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopFlowExecutionResponse]
+        def execution_arn: () -> ::String
+        def status: () -> ("Running" | "Succeeded" | "Failed" | "TimedOut" | "Aborted")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#stop_flow_execution-instance_method
+      def stop_flow_execution: (
+                                 execution_identifier: ::String,
+                                 flow_alias_identifier: ::String,
+                                 flow_identifier: ::String
+                               ) -> _StopFlowExecutionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopFlowExecutionResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]

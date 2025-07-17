@@ -103,12 +103,15 @@ module Aws::IAM
     # past, then this field contains the date and time the most recent
     # password was used.
     #
-    # This value is returned only in the GetUser and ListUsers operations.
+    # This value is returned only in the [GetUser][3] and [ListUsers][4]
+    # operations.
     #
     #
     #
     # [1]: http://www.iso.org/iso/iso8601
     # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetUser.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListUsers.html
     # @return [Time]
     def password_last_used
       data[:password_last_used]

@@ -1,0 +1,201 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AIOps
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateInvestigationGroupInput
+      attr_accessor name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor retention_in_days: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor tag_key_boundaries: ::Array[::String]
+      attr_accessor chatbot_notification_channel: ::Hash[::String, ::Array[::String]]
+      attr_accessor is_cloud_trail_event_history_enabled: bool
+      attr_accessor cross_account_configurations: ::Array[Types::CrossAccountConfiguration]
+      SENSITIVE: []
+    end
+
+    class CreateInvestigationGroupOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CrossAccountConfiguration
+      attr_accessor source_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInvestigationGroupPolicyOutput < Aws::EmptyStructure
+    end
+
+    class DeleteInvestigationGroupPolicyRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInvestigationGroupRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class EncryptionConfiguration
+      attr_accessor type: ("AWS_OWNED_KEY" | "CUSTOMER_MANAGED_KMS_KEY")
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetInvestigationGroupPolicyRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetInvestigationGroupPolicyResponse
+      attr_accessor investigation_group_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetInvestigationGroupRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetInvestigationGroupResponse
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor retention_in_days: ::Integer
+      attr_accessor chatbot_notification_channel: ::Hash[::String, ::Array[::String]]
+      attr_accessor tag_key_boundaries: ::Array[::String]
+      attr_accessor is_cloud_trail_event_history_enabled: bool
+      attr_accessor cross_account_configurations: ::Array[Types::CrossAccountConfiguration]
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListInvestigationGroupsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: [:next_token]
+    end
+
+    class ListInvestigationGroupsModel
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ListInvestigationGroupsOutput
+      attr_accessor next_token: ::String
+      attr_accessor investigation_groups: ::Array[Types::ListInvestigationGroupsModel]
+      SENSITIVE: [:next_token]
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutInvestigationGroupPolicyRequest
+      attr_accessor identifier: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutInvestigationGroupPolicyResponse
+      attr_accessor investigation_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateInvestigationGroupOutput < Aws::EmptyStructure
+    end
+
+    class UpdateInvestigationGroupRequest
+      attr_accessor identifier: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor tag_key_boundaries: ::Array[::String]
+      attr_accessor chatbot_notification_channel: ::Hash[::String, ::Array[::String]]
+      attr_accessor is_cloud_trail_event_history_enabled: bool
+      attr_accessor cross_account_configurations: ::Array[Types::CrossAccountConfiguration]
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

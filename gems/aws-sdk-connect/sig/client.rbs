@@ -426,7 +426,7 @@ module Aws
                             ?user_info: {
                               user_id: ::String?
                             },
-                            ?initiate_as: ("CONNECTED_TO_USER"),
+                            ?initiate_as: ("CONNECTED_TO_USER" | "COMPLETED"),
                             ?name: ::String,
                             ?description: ::String,
                             ?segment_attributes: Hash[::String, {

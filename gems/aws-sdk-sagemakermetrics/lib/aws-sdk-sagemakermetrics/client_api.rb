@@ -67,8 +67,8 @@ module Aws::SageMakerMetrics
     MetricQuery.add_member(:metric_stat, Shapes::ShapeRef.new(shape: MetricStatistic, required: true, location_name: "MetricStat"))
     MetricQuery.add_member(:period, Shapes::ShapeRef.new(shape: Period, required: true, location_name: "Period"))
     MetricQuery.add_member(:x_axis_type, Shapes::ShapeRef.new(shape: XAxisType, required: true, location_name: "XAxisType"))
-    MetricQuery.add_member(:start, Shapes::ShapeRef.new(shape: Long, location_name: "Start", metadata: {"box"=>true}))
-    MetricQuery.add_member(:end, Shapes::ShapeRef.new(shape: Long, location_name: "End", metadata: {"box"=>true}))
+    MetricQuery.add_member(:start, Shapes::ShapeRef.new(shape: Long, location_name: "Start", metadata: {"box" => true}))
+    MetricQuery.add_member(:end, Shapes::ShapeRef.new(shape: Long, location_name: "End", metadata: {"box" => true}))
     MetricQuery.struct_class = Types::MetricQuery
 
     MetricQueryList.member = Shapes::ShapeRef.new(shape: MetricQuery)

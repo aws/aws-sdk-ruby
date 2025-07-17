@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:arczonalshift)
 # structure.
 #
 #     arc_zonal_shift = Aws::ARCZonalShift::Client.new
-#     resp = arc_zonal_shift.cancel_zonal_shift(params)
+#     resp = arc_zonal_shift.cancel_practice_run(params)
 #
 # See {Client} for more information.
 #
@@ -49,12 +49,13 @@ module Aws::ARCZonalShift
   end
   autoload :Client, 'aws-sdk-arczonalshift/client'
   autoload :Errors, 'aws-sdk-arczonalshift/errors'
+  autoload :Waiters, 'aws-sdk-arczonalshift/waiters'
   autoload :Resource, 'aws-sdk-arczonalshift/resource'
   autoload :EndpointParameters, 'aws-sdk-arczonalshift/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-arczonalshift/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-arczonalshift/endpoints'
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.35.0'
 
 end
 

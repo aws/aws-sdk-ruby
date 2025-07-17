@@ -91,6 +91,31 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @!attribute [rw] backup_vault_name
+    #   The name of the backup vault to associate with the MPA approval
+    #   team.
+    #   @return [String]
+    #
+    # @!attribute [rw] mpa_approval_team_arn
+    #   The Amazon Resource Name (ARN) of the MPA approval team to associate
+    #   with the backup vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] requester_comment
+    #   A comment provided by the requester explaining the association
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/AssociateBackupVaultMpaApprovalTeamInput AWS API Documentation
+    #
+    class AssociateBackupVaultMpaApprovalTeamInput < Struct.new(
+      :backup_vault_name,
+      :mpa_approval_team_arn,
+      :requester_comment)
+      SENSITIVE = [:requester_comment]
+      include Aws::Structure
+    end
+
     # Contains detailed information about a backup job.
     #
     # @!attribute [rw] account_id
@@ -153,7 +178,38 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] backup_size_in_bytes
-    #   The size, in bytes, of a backup.
+    #   The size, in bytes, of a backup (recovery point).
+    #
+    #   This value can render differently depending on the resource type as
+    #   Backup pulls in data information from other Amazon Web Services
+    #   services. For example, the value returned may show a value of `0`,
+    #   which may differ from the anticipated value.
+    #
+    #   The expected behavior for values by resource type are described as
+    #   follows:
+    #
+    #   * Amazon Aurora, Amazon DocumentDB, and Amazon Neptune do not have
+    #     this value populate from the operation `GetBackupJobStatus`.
+    #
+    #   * For Amazon DynamoDB with advanced features, this value refers to
+    #     the size of the recovery point (backup).
+    #
+    #   * Amazon EC2 and Amazon EBS show volume size (provisioned storage)
+    #     returned as part of this value. Amazon EBS does not return backup
+    #     size information; snapshot size will have the same value as the
+    #     original resource that was backed up.
+    #
+    #   * For Amazon EFS, this value refers to the delta bytes transferred
+    #     during a backup.
+    #
+    #   * Amazon FSx does not populate this value from the operation
+    #     `GetBackupJobStatus` for FSx file systems.
+    #
+    #   * An Amazon RDS instance will show as `0`.
+    #
+    #   * For virtual machines running VMware, this value is passed to
+    #     Backup through an asynchronous workflow, which can mean this
+    #     displayed value can under-represent the actual backup size.
     #   @return [Integer]
     #
     # @!attribute [rw] iam_role_arn
@@ -532,13 +588,19 @@ module Aws::Backup
     #
     # @!attribute [rw] schedule_expression
     #   A cron expression in UTC specifying when Backup initiates a backup
-    #   job. For more information about Amazon Web Services cron
-    #   expressions, see [Schedule Expressions for Rules][1] in the *Amazon
-    #   CloudWatch Events User Guide.*. Two examples of Amazon Web Services
-    #   cron expressions are ` 15 * ? * * *` (take a backup every hour at 15
-    #   minutes past the hour) and `0 12 * * ? *` (take a backup every day
-    #   at 12 noon UTC). For a table of examples, click the preceding link
-    #   and scroll down the page.
+    #   job. When no CRON expression is provided, Backup will use the
+    #   default expression `cron(0 5 ? * * *)`.
+    #
+    #   For more information about Amazon Web Services cron expressions, see
+    #   [Schedule Expressions for Rules][1] in the *Amazon CloudWatch Events
+    #   User Guide*.
+    #
+    #   Two examples of Amazon Web Services cron expressions are ` 15 * ? *
+    #   * *` (take a backup every hour at 15 minutes past the hour) and `0
+    #   12 * * ? *` (take a backup every day at 12 noon UTC).
+    #
+    #   For a table of examples, click the preceding link and scroll down
+    #   the page.
     #
     #
     #
@@ -661,7 +723,8 @@ module Aws::Backup
     #
     # @!attribute [rw] schedule_expression
     #   A CRON expression in UTC specifying when Backup initiates a backup
-    #   job.
+    #   job. When no CRON expression is provided, Backup will use the
+    #   default expression `cron(0 5 ? * * *)`.
     #   @return [String]
     #
     # @!attribute [rw] start_window_minutes
@@ -1584,6 +1647,9 @@ module Aws::Backup
     #
     #   If used, this parameter must contain 1 to 50 alphanumeric or
     #   '-\_.' characters.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupPlanInput AWS API Documentation
@@ -1650,6 +1716,9 @@ module Aws::Backup
     #
     #   If used, this parameter must contain 1 to 50 alphanumeric or
     #   '-\_.' characters.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupSelectionInput AWS API Documentation
@@ -1712,6 +1781,9 @@ module Aws::Backup
     #
     #   If used, this parameter must contain 1 to 50 alphanumeric or
     #   '-\_.' characters.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupVaultInput AWS API Documentation
@@ -1829,6 +1901,9 @@ module Aws::Backup
     #   This is a user-chosen string used to distinguish between otherwise
     #   identical calls. Retrying a successful request with the same
     #   idempotency token results in a success message with no action taken.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] recovery_point_selection
@@ -1914,6 +1989,9 @@ module Aws::Backup
     #
     #   This parameter is optional. If used, this parameter must contain 1
     #   to 50 alphanumeric or '-\_.' characters.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] min_retention_days
@@ -2052,6 +2130,74 @@ module Aws::Backup
       :report_plan_name,
       :report_plan_arn,
       :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_backup_vault_arn
+    #   The ARN of the source backup vault containing the recovery points to
+    #   which temporary access is requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_name
+    #   The name of the backup vault to associate with an MPA approval team.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_tags
+    #   Optional tags to assign to the restore access backup vault.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] creator_request_id
+    #   A unique string that identifies the request and allows failed
+    #   requests to be retried without the risk of executing the operation
+    #   twice.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] requester_comment
+    #   A comment explaining the reason for requesting restore access to the
+    #   backup vault.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateRestoreAccessBackupVaultInput AWS API Documentation
+    #
+    class CreateRestoreAccessBackupVaultInput < Struct.new(
+      :source_backup_vault_arn,
+      :backup_vault_name,
+      :backup_vault_tags,
+      :creator_request_id,
+      :requester_comment)
+      SENSITIVE = [:backup_vault_tags, :requester_comment]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] restore_access_backup_vault_arn
+    #   The ARN that uniquely identifies the created restore access backup
+    #   vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] vault_state
+    #   The current state of the restore access backup vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_access_backup_vault_name
+    #   The name of the created restore access backup vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   &gt;The date and time when the restore access backup vault was
+    #   created, in Unix format and Coordinated Universal Time
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateRestoreAccessBackupVaultOutput AWS API Documentation
+    #
+    class CreateRestoreAccessBackupVaultOutput < Struct.new(
+      :restore_access_backup_vault_arn,
+      :vault_state,
+      :restore_access_backup_vault_name,
+      :creation_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2515,7 +2661,38 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] backup_size_in_bytes
-    #   The size, in bytes, of a backup.
+    #   The size, in bytes, of a backup (recovery point).
+    #
+    #   This value can render differently depending on the resource type as
+    #   Backup pulls in data information from other Amazon Web Services
+    #   services. For example, the value returned may show a value of `0`,
+    #   which may differ from the anticipated value.
+    #
+    #   The expected behavior for values by resource type are described as
+    #   follows:
+    #
+    #   * Amazon Aurora, Amazon DocumentDB, and Amazon Neptune do not have
+    #     this value populate from the operation `GetBackupJobStatus`.
+    #
+    #   * For Amazon DynamoDB with advanced features, this value refers to
+    #     the size of the recovery point (backup).
+    #
+    #   * Amazon EC2 and Amazon EBS show volume size (provisioned storage)
+    #     returned as part of this value. Amazon EBS does not return backup
+    #     size information; snapshot size will have the same value as the
+    #     original resource that was backed up.
+    #
+    #   * For Amazon EFS, this value refers to the delta bytes transferred
+    #     during a backup.
+    #
+    #   * Amazon FSx does not populate this value from the operation
+    #     `GetBackupJobStatus` for FSx file systems.
+    #
+    #   * An Amazon RDS instance will show as `0`.
+    #
+    #   * For virtual machines running VMware, this value is passed to
+    #     Backup through an asynchronous workflow, which can mean this
+    #     displayed value can under-represent the actual backup size.
     #   @return [Integer]
     #
     # @!attribute [rw] iam_role_arn
@@ -2706,6 +2883,14 @@ module Aws::Backup
     #
     # @!attribute [rw] number_of_recovery_points
     #   The number of recovery points that are stored in a backup vault.
+    #
+    #   Recovery point count value displayed in the console can be an
+    #   approximation. Use [ `ListRecoveryPointsByBackupVault` ][1] API to
+    #   obtain the exact count.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListRecoveryPointsByBackupVault.html
     #   @return [Integer]
     #
     # @!attribute [rw] locked
@@ -2759,6 +2944,24 @@ module Aws::Backup
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
     #   @return [Time]
     #
+    # @!attribute [rw] source_backup_vault_arn
+    #   The ARN of the source backup vault from which this restore access
+    #   backup vault was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] mpa_approval_team_arn
+    #   The ARN of the MPA approval team associated with this backup vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] mpa_session_arn
+    #   The ARN of the MPA session associated with this backup vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_mpa_approval_team_update
+    #   Information about the latest update to the MPA approval team
+    #   association for this backup vault.
+    #   @return [Types::LatestMpaApprovalTeamUpdate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupVaultOutput AWS API Documentation
     #
     class DescribeBackupVaultOutput < Struct.new(
@@ -2773,7 +2976,11 @@ module Aws::Backup
       :locked,
       :min_retention_days,
       :max_retention_days,
-      :lock_date)
+      :lock_date,
+      :source_backup_vault_arn,
+      :mpa_approval_team_arn,
+      :mpa_session_arn,
+      :latest_mpa_approval_team_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3062,43 +3269,51 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   A status code specifying the state of the recovery point.
+    #   A status code specifying the state of the recovery point. For more
+    #   information, see [ Recovery point status][1] in the *Backup
+    #   Developer Guide*.
     #
-    #   `PARTIAL` status indicates Backup could not create the recovery
-    #   point before the backup window closed. To increase your backup plan
-    #   window using the API, see [UpdateBackupPlan][1]. You can also
-    #   increase your backup plan window using the Console by choosing and
-    #   editing your backup plan.
+    #   * `CREATING` status indicates that an Backup job has been initiated
+    #     for a resource. The backup process has started and is actively
+    #     processing a backup job for the associated recovery point.
     #
-    #   `EXPIRED` status indicates that the recovery point has exceeded its
-    #   retention period, but Backup lacks permission or is otherwise unable
-    #   to delete it. To manually delete these recovery points, see [ Step
-    #   3: Delete the recovery points][2] in the *Clean up resources*
-    #   section of *Getting started*.
+    #   * `AVAILABLE` status indicates that the backup was successfully
+    #     created for the recovery point. The backup process has completed
+    #     without any issues, and the recovery point is now ready for use.
     #
-    #   `STOPPED` status occurs on a continuous backup where a user has
-    #   taken some action that causes the continuous backup to be disabled.
-    #   This can be caused by the removal of permissions, turning off
-    #   versioning, turning off events being sent to EventBridge, or
-    #   disabling the EventBridge rules that are put in place by Backup. For
-    #   recovery points of Amazon S3, Amazon RDS, and Amazon Aurora
-    #   resources, this status occurs when the retention period of a
-    #   continuous backup rule is changed.
+    #   * `PARTIAL` status indicates a composite recovery point has one or
+    #     more nested recovery points that were not in the backup.
     #
-    #   To resolve `STOPPED` status, ensure that all requested permissions
-    #   are in place and that versioning is enabled on the S3 bucket. Once
-    #   these conditions are met, the next instance of a backup rule running
-    #   will result in a new continuous recovery point being created. The
-    #   recovery points with STOPPED status do not need to be deleted.
+    #   * `EXPIRED` status indicates that the recovery point has exceeded
+    #     its retention period, but Backup lacks permission or is otherwise
+    #     unable to delete it. To manually delete these recovery points, see
+    #     [ Step 3: Delete the recovery points][2] in the *Clean up
+    #     resources* section of *Getting started*.
     #
-    #   For SAP HANA on Amazon EC2 `STOPPED` status occurs due to user
-    #   action, application misconfiguration, or backup failure. To ensure
-    #   that future continuous backups succeed, refer to the recovery point
-    #   status and check SAP HANA for details.
+    #   * `STOPPED` status occurs on a continuous backup where a user has
+    #     taken some action that causes the continuous backup to be
+    #     disabled. This can be caused by the removal of permissions,
+    #     turning off versioning, turning off events being sent to
+    #     EventBridge, or disabling the EventBridge rules that are put in
+    #     place by Backup. For recovery points of Amazon S3, Amazon RDS, and
+    #     Amazon Aurora resources, this status occurs when the retention
+    #     period of a continuous backup rule is changed.
+    #
+    #     To resolve `STOPPED` status, ensure that all requested permissions
+    #     are in place and that versioning is enabled on the S3 bucket. Once
+    #     these conditions are met, the next instance of a backup rule
+    #     running will result in a new continuous recovery point being
+    #     created. The recovery points with STOPPED status do not need to be
+    #     deleted.
+    #
+    #     For SAP HANA on Amazon EC2 `STOPPED` status occurs due to user
+    #     action, application misconfiguration, or backup failure. To ensure
+    #     that future continuous backups succeed, refer to the recovery
+    #     point status and check SAP HANA for details.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateBackupPlan.html
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/applicationstackbackups.html#cfnrecoverypointstatus
     #   [2]: https://docs.aws.amazon.com/aws-backup/latest/devguide/gs-cleanup-resources.html#cleanup-backups
     #   @return [String]
     #
@@ -3111,6 +3326,12 @@ module Aws::Backup
     #   and Coordinated Universal Time (UTC). The value of `CreationDate` is
     #   accurate to milliseconds. For example, the value 1516925490.087
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] initiation_date
+    #   The date and time when the backup job that created this recovery
+    #   point was initiated, in Unix format and Coordinated Universal Time
+    #   (UTC).
     #   @return [Time]
     #
     # @!attribute [rw] completion_date
@@ -3234,6 +3455,7 @@ module Aws::Backup
       :status,
       :status_message,
       :creation_date,
+      :initiation_date,
       :completion_date,
       :backup_size_in_bytes,
       :calculated_lifecycle,
@@ -3478,6 +3700,25 @@ module Aws::Backup
       :deletion_status,
       :deletion_status_message)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backup_vault_name
+    #   The name of the backup vault from which to disassociate the MPA
+    #   approval team.
+    #   @return [String]
+    #
+    # @!attribute [rw] requester_comment
+    #   An optional comment explaining the reason for disassociating the MPA
+    #   approval team from the backup vault.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DisassociateBackupVaultMpaApprovalTeamInput AWS API Documentation
+    #
+    class DisassociateBackupVaultMpaApprovalTeamInput < Struct.new(
+      :backup_vault_name,
+      :requester_comment)
+      SENSITIVE = [:requester_comment]
       include Aws::Structure
     end
 
@@ -4520,6 +4761,77 @@ module Aws::Backup
     class KeyValue < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the latest update to an MPA approval team
+    # association.
+    #
+    # @!attribute [rw] mpa_session_arn
+    #   The ARN of the MPA session associated with this update.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the MPA approval team update.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A message describing the current status of the MPA approval team
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] initiation_date
+    #   The date and time when the MPA approval team update was initiated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expiry_date
+    #   The date and time when the MPA approval team update will expire.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/LatestMpaApprovalTeamUpdate AWS API Documentation
+    #
+    class LatestMpaApprovalTeamUpdate < Struct.new(
+      :mpa_session_arn,
+      :status,
+      :status_message,
+      :initiation_date,
+      :expiry_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the latest request to revoke access to a
+    # backup vault.
+    #
+    # @!attribute [rw] mpa_session_arn
+    #   The ARN of the MPA session associated with this revoke request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the revoke request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A message describing the current status of the revoke request.
+    #   @return [String]
+    #
+    # @!attribute [rw] initiation_date
+    #   The date and time when the revoke request was initiated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expiry_date
+    #   The date and time when the revoke request will expire.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/LatestRevokeRequest AWS API Documentation
+    #
+    class LatestRevokeRequest < Struct.new(
+      :mpa_session_arn,
+      :status,
+      :status_message,
+      :initiation_date,
+      :expiry_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6075,6 +6387,49 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @!attribute [rw] backup_vault_name
+    #   The name of the backup vault for which to list associated restore
+    #   access backup vaults.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous request to retrieve the next
+    #   set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRestoreAccessBackupVaultsInput AWS API Documentation
+    #
+    class ListRestoreAccessBackupVaultsInput < Struct.new(
+      :backup_vault_name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token to use in a subsequent request to retrieve the
+    #   next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_access_backup_vaults
+    #   A list of restore access backup vaults associated with the specified
+    #   backup vault.
+    #   @return [Array<Types::RestoreAccessBackupVaultListMember>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRestoreAccessBackupVaultsOutput AWS API Documentation
+    #
+    class ListRestoreAccessBackupVaultsOutput < Struct.new(
+      :next_token,
+      :restore_access_backup_vaults)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] account_id
     #   Returns the job count for the specified account.
     #
@@ -6717,32 +7072,13 @@ module Aws::Backup
     #
     # @!attribute [rw] backup_vault_events
     #   An array of events that indicate the status of jobs to back up
-    #   resources to the backup vault.
-    #
-    #   For common use cases and code samples, see [Using Amazon SNS to
-    #   track Backup events][1].
-    #
-    #   The following events are supported:
-    #
-    #   * `BACKUP_JOB_STARTED` \| `BACKUP_JOB_COMPLETED`
-    #
-    #   * `COPY_JOB_STARTED` \| `COPY_JOB_SUCCESSFUL` \| `COPY_JOB_FAILED`
-    #
-    #   * `RESTORE_JOB_STARTED` \| `RESTORE_JOB_COMPLETED` \|
-    #     `RECOVERY_POINT_MODIFIED`
-    #
-    #   * `S3_BACKUP_OBJECT_FAILED` \| `S3_RESTORE_OBJECT_FAILED`
-    #
-    #   <note markdown="1"> The list below includes both supported events and deprecated events
-    #   that are no longer in use (for reference). Deprecated events do not
-    #   return statuses or notifications. Refer to the list above for the
-    #   supported events.
-    #
-    #    </note>
+    #   resources to the backup vault. For the list of supported events,
+    #   common use cases, and code samples, see [Notification options with
+    #   Backup][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/sns-notifications.html
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-notifications.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/PutBackupVaultNotificationsInput AWS API Documentation
@@ -6843,6 +7179,12 @@ module Aws::Backup
     #   Coordinated Universal Time (UTC). The value of `CreationDate` is
     #   accurate to milliseconds. For example, the value 1516925490.087
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] initiation_date
+    #   The date and time when the backup job that created this recovery
+    #   point was initiated, in Unix format and Coordinated Universal Time
+    #   (UTC).
     #   @return [Time]
     #
     # @!attribute [rw] completion_date
@@ -6959,6 +7301,7 @@ module Aws::Backup
       :status,
       :status_message,
       :creation_date,
+      :initiation_date,
       :completion_date,
       :backup_size_in_bytes,
       :calculated_lifecycle,
@@ -7451,6 +7794,41 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # Contains information about a restore access backup vault.
+    #
+    # @!attribute [rw] restore_access_backup_vault_arn
+    #   The ARN of the restore access backup vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time when the restore access backup vault was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] approval_date
+    #   The date and time when the restore access backup vault was approved.
+    #   @return [Time]
+    #
+    # @!attribute [rw] vault_state
+    #   The current state of the restore access backup vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_revoke_request
+    #   Information about the latest request to revoke access to this backup
+    #   vault.
+    #   @return [Types::LatestRevokeRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RestoreAccessBackupVaultListMember AWS API Documentation
+    #
+    class RestoreAccessBackupVaultListMember < Struct.new(
+      :restore_access_backup_vault_arn,
+      :creation_date,
+      :approval_date,
+      :vault_state,
+      :latest_revoke_request)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the restore testing plan that Backup used
     # to initiate the restore job.
     #
@@ -7692,7 +8070,8 @@ module Aws::Backup
     #
     # @!attribute [rw] schedule_expression
     #   A CRON expression in specified timezone when a restore testing plan
-    #   is executed.
+    #   is executed. When no CRON expression is provided, Backup will use
+    #   the default expression `cron(0 5 ? * * *)`.
     #   @return [String]
     #
     # @!attribute [rw] schedule_expression_timezone
@@ -7773,7 +8152,8 @@ module Aws::Backup
     #
     # @!attribute [rw] schedule_expression
     #   A CRON expression in specified timezone when a restore testing plan
-    #   is executed.
+    #   is executed. When no CRON expression is provided, Backup will use
+    #   the default expression `cron(0 5 ? * * *)`.
     #   @return [String]
     #
     # @!attribute [rw] schedule_expression_timezone
@@ -7844,7 +8224,8 @@ module Aws::Backup
     #
     # @!attribute [rw] schedule_expression
     #   A CRON expression in specified timezone when a restore testing plan
-    #   is executed.
+    #   is executed. When no CRON expression is provided, Backup will use
+    #   the default expression `cron(0 5 ? * * *)`.
     #   @return [String]
     #
     # @!attribute [rw] schedule_expression_timezone
@@ -7889,7 +8270,8 @@ module Aws::Backup
     #
     # @!attribute [rw] schedule_expression
     #   A CRON expression in specified timezone when a restore testing plan
-    #   is executed.
+    #   is executed. When no CRON expression is provided, Backup will use
+    #   the default expression `cron(0 5 ? * * *)`.
     #   @return [String]
     #
     # @!attribute [rw] schedule_expression_timezone
@@ -8074,7 +8456,7 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] validation_window_hours
-    #   This is amount of hours (1 to 168) available to run a validation
+    #   This is amount of hours (0 to 168) available to run a validation
     #   script on the data. The data will be deleted upon the completion of
     #   the validation script or the end of the specified retention period,
     #   whichever comes first.
@@ -8286,6 +8668,30 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @!attribute [rw] backup_vault_name
+    #   The name of the source backup vault associated with the restore
+    #   access backup vault to be revoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_access_backup_vault_arn
+    #   The ARN of the restore access backup vault to revoke.
+    #   @return [String]
+    #
+    # @!attribute [rw] requester_comment
+    #   A comment explaining the reason for revoking access to the restore
+    #   access backup vault.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RevokeRestoreAccessBackupVaultInput AWS API Documentation
+    #
+    class RevokeRestoreAccessBackupVaultInput < Struct.new(
+      :backup_vault_name,
+      :restore_access_backup_vault_arn,
+      :requester_comment)
+      SENSITIVE = [:requester_comment]
+      include Aws::Structure
+    end
+
     # The request failed due to a temporary failure of the server.
     #
     # @!attribute [rw] code
@@ -8333,6 +8739,9 @@ module Aws::Backup
     #   otherwise identical calls to `StartBackupJob`. Retrying a successful
     #   request with the same idempotency token results in a success message
     #   with no action taken.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] start_window_minutes
@@ -8501,6 +8910,9 @@ module Aws::Backup
     #   otherwise identical calls to `StartCopyJob`. Retrying a successful
     #   request with the same idempotency token results in a success message
     #   with no action taken.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] lifecycle
@@ -8680,6 +9092,9 @@ module Aws::Backup
     #   otherwise identical calls to `StartRestoreJob`. Retrying a
     #   successful request with the same idempotency token results in a
     #   success message with no action taken.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -8762,14 +9177,7 @@ module Aws::Backup
     end
 
     # @!attribute [rw] resource_arn
-    #   An ARN that uniquely identifies a resource. The format of the ARN
-    #   depends on the type of the tagged resource.
-    #
-    #   ARNs that do not include `backup` are incompatible with tagging.
-    #   `TagResource` and `UntagResource` with invalid ARNs will result in
-    #   an error. Acceptable ARN content can include
-    #   `arn:aws:backup:us-east`. Invalid ARN content may look like
-    #   `arn:aws:ec2:us-east`.
+    #   The ARN that uniquely identifies the resource.
     #   @return [String]
     #
     # @!attribute [rw] tags

@@ -380,7 +380,7 @@ module Aws::IoTFleetWise
     Actuator.add_member(:allowed_values, Shapes::ShapeRef.new(shape: listOfStrings, location_name: "allowedValues"))
     Actuator.add_member(:min, Shapes::ShapeRef.new(shape: double, location_name: "min"))
     Actuator.add_member(:max, Shapes::ShapeRef.new(shape: double, location_name: "max"))
-    Actuator.add_member(:assigned_value, Shapes::ShapeRef.new(shape: string, deprecated: true, location_name: "assignedValue", metadata: {"deprecatedMessage"=>"assignedValue is no longer in use"}))
+    Actuator.add_member(:assigned_value, Shapes::ShapeRef.new(shape: string, deprecated: true, location_name: "assignedValue", metadata: {"deprecatedMessage" => "assignedValue is no longer in use"}))
     Actuator.add_member(:deprecation_message, Shapes::ShapeRef.new(shape: message, location_name: "deprecationMessage"))
     Actuator.add_member(:comment, Shapes::ShapeRef.new(shape: message, location_name: "comment"))
     Actuator.add_member(:struct_fully_qualified_name, Shapes::ShapeRef.new(shape: NodePath, location_name: "structFullyQualifiedName"))
@@ -399,7 +399,7 @@ module Aws::IoTFleetWise
     Attribute.add_member(:allowed_values, Shapes::ShapeRef.new(shape: listOfStrings, location_name: "allowedValues"))
     Attribute.add_member(:min, Shapes::ShapeRef.new(shape: double, location_name: "min"))
     Attribute.add_member(:max, Shapes::ShapeRef.new(shape: double, location_name: "max"))
-    Attribute.add_member(:assigned_value, Shapes::ShapeRef.new(shape: string, deprecated: true, location_name: "assignedValue", metadata: {"deprecatedMessage"=>"assignedValue is no longer in use"}))
+    Attribute.add_member(:assigned_value, Shapes::ShapeRef.new(shape: string, deprecated: true, location_name: "assignedValue", metadata: {"deprecatedMessage" => "assignedValue is no longer in use"}))
     Attribute.add_member(:default_value, Shapes::ShapeRef.new(shape: string, location_name: "defaultValue"))
     Attribute.add_member(:deprecation_message, Shapes::ShapeRef.new(shape: message, location_name: "deprecationMessage"))
     Attribute.add_member(:comment, Shapes::ShapeRef.new(shape: message, location_name: "comment"))
@@ -493,7 +493,7 @@ module Aws::IoTFleetWise
     CreateCampaignRequest.add_member(:diagnostics_mode, Shapes::ShapeRef.new(shape: DiagnosticsMode, location_name: "diagnosticsMode"))
     CreateCampaignRequest.add_member(:spooling_mode, Shapes::ShapeRef.new(shape: SpoolingMode, location_name: "spoolingMode"))
     CreateCampaignRequest.add_member(:compression, Shapes::ShapeRef.new(shape: Compression, location_name: "compression"))
-    CreateCampaignRequest.add_member(:priority, Shapes::ShapeRef.new(shape: priority, deprecated: true, location_name: "priority", metadata: {"deprecatedMessage"=>"priority is no longer used or needed as input"}))
+    CreateCampaignRequest.add_member(:priority, Shapes::ShapeRef.new(shape: priority, deprecated: true, location_name: "priority", metadata: {"deprecatedMessage" => "priority is no longer used or needed as input"}))
     CreateCampaignRequest.add_member(:signals_to_collect, Shapes::ShapeRef.new(shape: SignalInformationList, location_name: "signalsToCollect"))
     CreateCampaignRequest.add_member(:collection_scheme, Shapes::ShapeRef.new(shape: CollectionScheme, required: true, location_name: "collectionScheme"))
     CreateCampaignRequest.add_member(:data_extra_dimensions, Shapes::ShapeRef.new(shape: DataExtraDimensionNodePathList, location_name: "dataExtraDimensions"))
@@ -1156,7 +1156,7 @@ module Aws::IoTFleetWise
     ObdSignal.add_member(:byte_length, Shapes::ShapeRef.new(shape: ObdByteLength, required: true, location_name: "byteLength"))
     ObdSignal.add_member(:bit_right_shift, Shapes::ShapeRef.new(shape: nonNegativeInteger, location_name: "bitRightShift"))
     ObdSignal.add_member(:bit_mask_length, Shapes::ShapeRef.new(shape: ObdBitmaskLength, location_name: "bitMaskLength"))
-    ObdSignal.add_member(:is_signed, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "isSigned", metadata: {"box"=>true}))
+    ObdSignal.add_member(:is_signed, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "isSigned", metadata: {"box" => true}))
     ObdSignal.add_member(:signal_value_type, Shapes::ShapeRef.new(shape: SignalValueType, location_name: "signalValueType"))
     ObdSignal.struct_class = Types::ObdSignal
 
@@ -1191,8 +1191,8 @@ module Aws::IoTFleetWise
     ROS2PrimitiveMessageDefinition.add_member(:upper_bound, Shapes::ShapeRef.new(shape: ROS2PrimitiveMessageDefinitionUpperBoundLong, location_name: "upperBound"))
     ROS2PrimitiveMessageDefinition.struct_class = Types::ROS2PrimitiveMessageDefinition
 
-    RegisterAccountRequest.add_member(:timestream_resources, Shapes::ShapeRef.new(shape: TimestreamResources, deprecated: true, location_name: "timestreamResources", metadata: {"deprecatedMessage"=>"Amazon Timestream metadata is now passed in the CreateCampaign API."}))
-    RegisterAccountRequest.add_member(:iam_resources, Shapes::ShapeRef.new(shape: IamResources, deprecated: true, location_name: "iamResources", metadata: {"deprecatedMessage"=>"iamResources is no longer used or needed as input"}))
+    RegisterAccountRequest.add_member(:timestream_resources, Shapes::ShapeRef.new(shape: TimestreamResources, deprecated: true, location_name: "timestreamResources", metadata: {"deprecatedMessage" => "Amazon Timestream metadata is now passed in the CreateCampaign API."}))
+    RegisterAccountRequest.add_member(:iam_resources, Shapes::ShapeRef.new(shape: IamResources, deprecated: true, location_name: "iamResources", metadata: {"deprecatedMessage" => "iamResources is no longer used or needed as input"}))
     RegisterAccountRequest.struct_class = Types::RegisterAccountRequest
 
     RegisterAccountResponse.add_member(:register_account_status, Shapes::ShapeRef.new(shape: RegistrationStatus, required: true, location_name: "registerAccountStatus"))

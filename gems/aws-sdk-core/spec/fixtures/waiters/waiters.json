@@ -7,10 +7,10 @@
       "maxAttempts": 25,
       "acceptors": [
         {
-          "expected": "ACTIVE",
+          "expected": "expected",
           "matcher": "path",
           "state": "success",
-          "argument": "Table.TableStatus"
+          "argument": "ComplexObject.StringMember"
         },
         {
           "expected": "ResourceNotFoundException",
@@ -108,21 +108,125 @@
       "acceptors": [
         {
           "matcher": "path",
-          "expected": "ACTIVE",
+          "expected": "expected",
           "state": "success",
-          "argument": "Table.TableStatus"
+          "argument": "ComplexObject.StringMember"
         },
         {
           "matcher": "path",
-          "expected": "FAILED",
+          "expected": "unexpected",
           "state": "failure",
-          "argument": "Table.TableStatus"
+          "argument": "ComplexObject.StringMember"
         },
         {
           "matcher": "path",
-          "expected": "UPDATING",
+          "expected": "retry",
           "state": "retry",
-          "argument": "Table.TableStatus"
+          "argument": "ComplexObject.StringMember"
+        }
+      ]
+    },
+    "PathMatcherObject": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "path",
+          "expected": {
+            "ObjectMember": {
+              "StringMember": "string"
+            },
+            "StringMember": "string",
+            "NumberMember": 1,
+            "BooleanMember": true,
+            "ArrayMember": [1, 2, 3],
+            "ObjectArrayMember": [
+              {
+                "ObjectMember": {
+                  "StringMember": "string"
+                },
+                "StringMember": "string"
+              }
+            ]
+          },
+          "state": "success",
+          "argument": "ComplexObject"
+        }
+      ]
+    },
+    "PathMatcherNumber": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "path",
+          "expected": 3,
+          "state": "success",
+          "argument": "length(ObjectList)"
+        }
+      ]
+    },
+    "PathMatcherArray": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "path",
+          "expected": [1, 2, 3],
+          "state": "success",
+          "argument": "NumberList"
+        }
+      ]
+    },
+    "PathMatcherObjectArray": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "path",
+          "expected": [
+            {
+              "ObjectMember": {
+                "StringMember": "string"
+              },
+              "StringMember": "string",
+              "NumberMember": 1,
+              "BooleanMember": true,
+              "ArrayMember": [1, 2, 3],
+              "ObjectArrayMember": [
+                {
+                  "ObjectMember": {
+                    "StringMember": "string"
+                  },
+                  "StringMember": "string"
+                }
+              ]
+            },
+            {
+              "ObjectMember": {
+                "StringMember": "string"
+              }
+            }
+          ],
+          "state": "success",
+          "argument": "ObjectList"
+        }
+      ]
+    },
+    "PathMatcherBoolean": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "path",
+          "expected": false,
+          "state": "success",
+          "argument": "Boolean"
         }
       ]
     },
@@ -133,21 +237,73 @@
       "acceptors": [
         {
           "matcher": "pathAll",
-          "expected": "ACTIVE",
+          "expected": "expected",
           "state": "success",
-          "argument": "TableList[].TableStatus"
+          "argument": "ObjectList[].StringMember"
         },
         {
           "matcher": "pathAll",
-          "expected": "FAILED",
+          "expected": "unexpected",
           "state": "failure",
-          "argument": "TableList[].TableStatus"
+          "argument": "ObjectList[].StringMember"
         },
         {
           "matcher": "pathAll",
-          "expected": "UPDATING",
+          "expected": "retry",
           "state": "retry",
-          "argument": "TableList[].TableStatus"
+          "argument": "ObjectList[].StringMember"
+        }
+      ]
+    },
+    "PathAllMatcherObject": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "pathAll",
+          "expected": {"StringMember": "expected"},
+          "state": "success",
+          "argument": "ObjectList"
+        }
+      ]
+    },
+    "PathAllMatcherNumber": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "pathAll",
+          "expected": 123,
+          "state": "success",
+          "argument": "NumberList"
+        }
+      ]
+    },
+    "PathAllMatcherArray": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "pathAll",
+          "expected": [1, 2, 3],
+          "state": "success",
+          "argument": "NestedList"
+        }
+      ]
+    },
+    "PathAllMatcherBoolean": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "pathAll",
+          "expected": false,
+          "state": "success",
+          "argument": "BooleanList"
         }
       ]
     },
@@ -158,21 +314,73 @@
       "acceptors": [
         {
           "matcher": "pathAny",
-          "expected": "ACTIVE",
+          "expected": "expected",
           "state": "success",
-          "argument": "TableList[].TableStatus"
+          "argument": "ObjectList[].StringMember"
         },
         {
           "matcher": "pathAny",
-          "expected": "FAILED",
+          "expected": "unexpected",
           "state": "failure",
-          "argument": "TableList[].TableStatus"
+          "argument": "ObjectList[].StringMember"
         },
         {
           "matcher": "pathAny",
-          "expected": "UPDATING",
+          "expected": "retry",
           "state": "retry",
-          "argument": "TableList[].TableStatus"
+          "argument": "ObjectList[].StringMember"
+        }
+      ]
+    },
+    "PathAnyMatcherObject": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "pathAny",
+          "expected": {"StringMember": "expected"},
+          "state": "success",
+          "argument": "ObjectList"
+        }
+      ]
+    },
+    "PathAnyMatcherNumber": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "pathAny",
+          "expected": 123,
+          "state": "success",
+          "argument": "NumberList"
+        }
+      ]
+    },
+    "PathAnyMatcherArray": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "pathAny",
+          "expected": [1, 2, 3],
+          "state": "success",
+          "argument": "NestedList"
+        }
+      ]
+    },
+    "PathAnyMatcherBoolean": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "pathAny",
+          "expected": false,
+          "state": "success",
+          "argument": "BooleanList"
         }
       ]
     }

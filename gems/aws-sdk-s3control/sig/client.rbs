@@ -775,6 +775,8 @@ module Aws
         def access_point_arn: () -> ::String
         def endpoints: () -> ::Hash[::String, ::String]
         def bucket_account_id: () -> ::String
+        def data_source_id: () -> ::String
+        def data_source_type: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_access_point-instance_method
       def get_access_point: (
@@ -1103,7 +1105,9 @@ module Aws
                                 ?account_id: ::String,
                                 ?bucket: ::String,
                                 ?next_token: ::String,
-                                ?max_results: ::Integer
+                                ?max_results: ::Integer,
+                                ?data_source_id: ::String,
+                                ?data_source_type: ::String
                               ) -> _ListAccessPointsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessPointsResponseSuccess
 

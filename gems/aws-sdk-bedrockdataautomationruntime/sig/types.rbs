@@ -13,6 +13,11 @@ module Aws::BedrockDataAutomationRuntime
       SENSITIVE: []
     end
 
+    class AssetProcessingConfiguration
+      attr_accessor video: Types::VideoAssetProcessingConfiguration
+      SENSITIVE: []
+    end
+
     class Blueprint
       attr_accessor blueprint_arn: ::String
       attr_accessor version: ::String
@@ -52,6 +57,7 @@ module Aws::BedrockDataAutomationRuntime
 
     class InputConfiguration
       attr_accessor s3_uri: ::String
+      attr_accessor asset_processing_configuration: Types::AssetProcessingConfiguration
       SENSITIVE: []
     end
 
@@ -128,6 +134,12 @@ module Aws::BedrockDataAutomationRuntime
       SENSITIVE: []
     end
 
+    class TimestampSegment
+      attr_accessor start_time_millis: ::Integer
+      attr_accessor end_time_millis: ::Integer
+      SENSITIVE: []
+    end
+
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
@@ -140,6 +152,22 @@ module Aws::BedrockDataAutomationRuntime
     class ValidationException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class VideoAssetProcessingConfiguration
+      attr_accessor segment_configuration: Types::VideoSegmentConfiguration
+      SENSITIVE: []
+    end
+
+    class VideoSegmentConfiguration
+      attr_accessor timestamp_segment: Types::TimestampSegment
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class TimestampSegment < VideoSegmentConfiguration
+      end
+      class Unknown < VideoSegmentConfiguration
+      end
     end
   end
 end

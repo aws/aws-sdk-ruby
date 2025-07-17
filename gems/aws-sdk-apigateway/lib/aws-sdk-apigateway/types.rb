@@ -896,6 +896,12 @@ module Aws::APIGateway
     #   configuration. Supported only for private custom domain names.
     #   @return [String]
     #
+    # @!attribute [rw] routing_mode
+    #   The routing mode for this domain name. The routing mode determines
+    #   how API Gateway sends traffic from your custom domain name to your
+    #   private APIs.
+    #   @return [String]
+    #
     class CreateDomainNameRequest < Struct.new(
       :domain_name,
       :certificate_name,
@@ -910,7 +916,8 @@ module Aws::APIGateway
       :security_policy,
       :mutual_tls_authentication,
       :ownership_verification_certificate_arn,
-      :policy)
+      :policy,
+      :routing_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1900,8 +1907,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] domain_name_arn
-    #   The ARN of the domain name. Supported only for private custom domain
-    #   names.
+    #   The ARN of the domain name.
     #   @return [String]
     #
     # @!attribute [rw] certificate_name
@@ -2015,6 +2021,12 @@ module Aws::APIGateway
     #   configuration. Supported only for private custom domain names.
     #   @return [String]
     #
+    # @!attribute [rw] routing_mode
+    #   The routing mode for this domain name. The routing mode determines
+    #   how API Gateway sends traffic from your custom domain name to your
+    #   private APIs.
+    #   @return [String]
+    #
     class DomainName < Struct.new(
       :domain_name,
       :domain_name_id,
@@ -2036,7 +2048,8 @@ module Aws::APIGateway
       :mutual_tls_authentication,
       :ownership_verification_certificate_arn,
       :management_policy,
-      :policy)
+      :policy,
+      :routing_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3588,7 +3601,8 @@ module Aws::APIGateway
     #
     # @!attribute [rw] timeout_in_millis
     #   Custom timeout between 50 and 29,000 milliseconds. The default value
-    #   is 29,000 milliseconds or 29 seconds.
+    #   is 29,000 milliseconds or 29 seconds. You can increase the default
+    #   value to longer than 29 seconds for Regional or private APIs only.
     #   @return [Integer]
     #
     # @!attribute [rw] cache_namespace
@@ -4284,7 +4298,8 @@ module Aws::APIGateway
     #
     # @!attribute [rw] timeout_in_millis
     #   Custom timeout between 50 and 29,000 milliseconds. The default value
-    #   is 29,000 milliseconds or 29 seconds.
+    #   is 29,000 milliseconds or 29 seconds. You can increase the default
+    #   value to longer than 29 seconds for Regional or private APIs only.
     #   @return [Integer]
     #
     # @!attribute [rw] tls_config

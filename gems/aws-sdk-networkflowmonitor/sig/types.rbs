@@ -49,7 +49,7 @@ module Aws::NetworkFlowMonitor
 
     class CreateScopeOutput
       attr_accessor scope_id: ::String
-      attr_accessor status: ("SUCCEEDED" | "IN_PROGRESS" | "FAILED")
+      attr_accessor status: ("SUCCEEDED" | "IN_PROGRESS" | "FAILED" | "DEACTIVATING" | "DEACTIVATED")
       attr_accessor scope_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -172,7 +172,7 @@ module Aws::NetworkFlowMonitor
 
     class GetScopeOutput
       attr_accessor scope_id: ::String
-      attr_accessor status: ("SUCCEEDED" | "IN_PROGRESS" | "FAILED")
+      attr_accessor status: ("SUCCEEDED" | "IN_PROGRESS" | "FAILED" | "DEACTIVATING" | "DEACTIVATED")
       attr_accessor scope_arn: ::String
       attr_accessor targets: ::Array[Types::TargetResource]
       attr_accessor tags: ::Hash[::String, ::String]
@@ -284,7 +284,7 @@ module Aws::NetworkFlowMonitor
 
     class ScopeSummary
       attr_accessor scope_id: ::String
-      attr_accessor status: ("SUCCEEDED" | "IN_PROGRESS" | "FAILED")
+      attr_accessor status: ("SUCCEEDED" | "IN_PROGRESS" | "FAILED" | "DEACTIVATING" | "DEACTIVATED")
       attr_accessor scope_arn: ::String
       SENSITIVE: []
     end
@@ -450,7 +450,7 @@ module Aws::NetworkFlowMonitor
 
     class UpdateScopeOutput
       attr_accessor scope_id: ::String
-      attr_accessor status: ("SUCCEEDED" | "IN_PROGRESS" | "FAILED")
+      attr_accessor status: ("SUCCEEDED" | "IN_PROGRESS" | "FAILED" | "DEACTIVATING" | "DEACTIVATED")
       attr_accessor scope_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []

@@ -33,6 +33,12 @@ module Aws::WAFV2
       SENSITIVE: []
     end
 
+    class AWSManagedRulesAntiDDoSRuleSet
+      attr_accessor client_side_action_config: Types::ClientSideActionConfig
+      attr_accessor sensitivity_to_block: ("LOW" | "MEDIUM" | "HIGH")
+      SENSITIVE: []
+    end
+
     class AWSManagedRulesBotControlRuleSet
       attr_accessor inspection_level: ("COMMON" | "TARGETED")
       attr_accessor enable_machine_learning: bool
@@ -62,6 +68,23 @@ module Aws::WAFV2
 
     class AndStatement
       attr_accessor statements: ::Array[Types::Statement]
+      SENSITIVE: []
+    end
+
+    class ApplicationAttribute
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ApplicationConfig
+      attr_accessor attributes: ::Array[Types::ApplicationAttribute]
+      SENSITIVE: []
+    end
+
+    class AsnMatchStatement
+      attr_accessor asn_list: ::Array[::Integer]
+      attr_accessor forwarded_ip_config: Types::ForwardedIPConfig
       SENSITIVE: []
     end
 
@@ -139,6 +162,18 @@ module Aws::WAFV2
 
     class CheckCapacityResponse
       attr_accessor capacity: ::Integer
+      SENSITIVE: []
+    end
+
+    class ClientSideAction
+      attr_accessor usage_of_action: ("ENABLED" | "DISABLED")
+      attr_accessor sensitivity: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor exempt_uri_regular_expressions: ::Array[Types::Regex]
+      SENSITIVE: []
+    end
+
+    class ClientSideActionConfig
+      attr_accessor challenge: Types::ClientSideAction
       SENSITIVE: []
     end
 
@@ -238,6 +273,8 @@ module Aws::WAFV2
       attr_accessor challenge_config: Types::ChallengeConfig
       attr_accessor token_domains: ::Array[::String]
       attr_accessor association_config: Types::AssociationConfig
+      attr_accessor on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig
+      attr_accessor application_config: Types::ApplicationConfig
       SENSITIVE: []
     end
 
@@ -966,6 +1003,7 @@ module Aws::WAFV2
       attr_accessor aws_managed_rules_bot_control_rule_set: Types::AWSManagedRulesBotControlRuleSet
       attr_accessor aws_managed_rules_atp_rule_set: Types::AWSManagedRulesATPRuleSet
       attr_accessor aws_managed_rules_acfp_rule_set: Types::AWSManagedRulesACFPRuleSet
+      attr_accessor aws_managed_rules_anti_d_do_s_rule_set: Types::AWSManagedRulesAntiDDoSRuleSet
       SENSITIVE: []
     end
 
@@ -1041,6 +1079,11 @@ module Aws::WAFV2
 
     class NotStatement
       attr_accessor statement: Types::Statement
+      SENSITIVE: []
+    end
+
+    class OnSourceDDoSProtectionConfig
+      attr_accessor alb_low_reputation_mode: ("ACTIVE_UNDER_DDOS" | "ALWAYS_ON")
       SENSITIVE: []
     end
 
@@ -1124,6 +1167,7 @@ module Aws::WAFV2
       attr_accessor uri_path: Types::RateLimitUriPath
       attr_accessor ja3_fingerprint: Types::RateLimitJA3Fingerprint
       attr_accessor ja4_fingerprint: Types::RateLimitJA4Fingerprint
+      attr_accessor asn: Types::RateLimitAsn
       SENSITIVE: []
     end
 
@@ -1131,6 +1175,9 @@ module Aws::WAFV2
       attr_accessor ip_address_version: ("IPV4" | "IPV6")
       attr_accessor addresses: ::Array[::String]
       SENSITIVE: []
+    end
+
+    class RateLimitAsn < Aws::EmptyStructure
     end
 
     class RateLimitCookie
@@ -1405,6 +1452,7 @@ module Aws::WAFV2
       attr_accessor managed_rule_group_statement: Types::ManagedRuleGroupStatement
       attr_accessor label_match_statement: Types::LabelMatchStatement
       attr_accessor regex_match_statement: Types::RegexMatchStatement
+      attr_accessor asn_match_statement: Types::AsnMatchStatement
       SENSITIVE: []
     end
 
@@ -1529,6 +1577,7 @@ module Aws::WAFV2
       attr_accessor challenge_config: Types::ChallengeConfig
       attr_accessor token_domains: ::Array[::String]
       attr_accessor association_config: Types::AssociationConfig
+      attr_accessor on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig
       SENSITIVE: []
     end
 
@@ -1595,7 +1644,7 @@ module Aws::WAFV2
 
     class WAFInvalidParameterException
       attr_accessor message: ::String
-      attr_accessor field: ("WEB_ACL" | "RULE_GROUP" | "REGEX_PATTERN_SET" | "IP_SET" | "MANAGED_RULE_SET" | "RULE" | "EXCLUDED_RULE" | "STATEMENT" | "BYTE_MATCH_STATEMENT" | "SQLI_MATCH_STATEMENT" | "XSS_MATCH_STATEMENT" | "SIZE_CONSTRAINT_STATEMENT" | "GEO_MATCH_STATEMENT" | "RATE_BASED_STATEMENT" | "RULE_GROUP_REFERENCE_STATEMENT" | "REGEX_PATTERN_REFERENCE_STATEMENT" | "IP_SET_REFERENCE_STATEMENT" | "MANAGED_RULE_SET_STATEMENT" | "LABEL_MATCH_STATEMENT" | "AND_STATEMENT" | "OR_STATEMENT" | "NOT_STATEMENT" | "IP_ADDRESS" | "IP_ADDRESS_VERSION" | "FIELD_TO_MATCH" | "TEXT_TRANSFORMATION" | "SINGLE_QUERY_ARGUMENT" | "SINGLE_HEADER" | "DEFAULT_ACTION" | "RULE_ACTION" | "ENTITY_LIMIT" | "OVERRIDE_ACTION" | "SCOPE_VALUE" | "RESOURCE_ARN" | "RESOURCE_TYPE" | "TAGS" | "TAG_KEYS" | "METRIC_NAME" | "FIREWALL_MANAGER_STATEMENT" | "FALLBACK_BEHAVIOR" | "POSITION" | "FORWARDED_IP_CONFIG" | "IP_SET_FORWARDED_IP_CONFIG" | "HEADER_NAME" | "CUSTOM_REQUEST_HANDLING" | "RESPONSE_CONTENT_TYPE" | "CUSTOM_RESPONSE" | "CUSTOM_RESPONSE_BODY" | "JSON_MATCH_PATTERN" | "JSON_MATCH_SCOPE" | "BODY_PARSING_FALLBACK_BEHAVIOR" | "LOGGING_FILTER" | "FILTER_CONDITION" | "EXPIRE_TIMESTAMP" | "CHANGE_PROPAGATION_STATUS" | "ASSOCIABLE_RESOURCE" | "LOG_DESTINATION" | "MANAGED_RULE_GROUP_CONFIG" | "PAYLOAD_TYPE" | "HEADER_MATCH_PATTERN" | "COOKIE_MATCH_PATTERN" | "MAP_MATCH_SCOPE" | "OVERSIZE_HANDLING" | "CHALLENGE_CONFIG" | "TOKEN_DOMAIN" | "ATP_RULE_SET_RESPONSE_INSPECTION" | "ASSOCIATED_RESOURCE_TYPE" | "SCOPE_DOWN" | "CUSTOM_KEYS" | "ACP_RULE_SET_RESPONSE_INSPECTION" | "DATA_PROTECTION_CONFIG")
+      attr_accessor field: ("WEB_ACL" | "RULE_GROUP" | "REGEX_PATTERN_SET" | "IP_SET" | "MANAGED_RULE_SET" | "RULE" | "EXCLUDED_RULE" | "STATEMENT" | "BYTE_MATCH_STATEMENT" | "SQLI_MATCH_STATEMENT" | "XSS_MATCH_STATEMENT" | "SIZE_CONSTRAINT_STATEMENT" | "GEO_MATCH_STATEMENT" | "RATE_BASED_STATEMENT" | "RULE_GROUP_REFERENCE_STATEMENT" | "REGEX_PATTERN_REFERENCE_STATEMENT" | "IP_SET_REFERENCE_STATEMENT" | "MANAGED_RULE_SET_STATEMENT" | "LABEL_MATCH_STATEMENT" | "AND_STATEMENT" | "OR_STATEMENT" | "NOT_STATEMENT" | "IP_ADDRESS" | "IP_ADDRESS_VERSION" | "FIELD_TO_MATCH" | "TEXT_TRANSFORMATION" | "SINGLE_QUERY_ARGUMENT" | "SINGLE_HEADER" | "DEFAULT_ACTION" | "RULE_ACTION" | "ENTITY_LIMIT" | "OVERRIDE_ACTION" | "SCOPE_VALUE" | "RESOURCE_ARN" | "RESOURCE_TYPE" | "TAGS" | "TAG_KEYS" | "METRIC_NAME" | "FIREWALL_MANAGER_STATEMENT" | "FALLBACK_BEHAVIOR" | "POSITION" | "FORWARDED_IP_CONFIG" | "IP_SET_FORWARDED_IP_CONFIG" | "HEADER_NAME" | "CUSTOM_REQUEST_HANDLING" | "RESPONSE_CONTENT_TYPE" | "CUSTOM_RESPONSE" | "CUSTOM_RESPONSE_BODY" | "JSON_MATCH_PATTERN" | "JSON_MATCH_SCOPE" | "BODY_PARSING_FALLBACK_BEHAVIOR" | "LOGGING_FILTER" | "FILTER_CONDITION" | "EXPIRE_TIMESTAMP" | "CHANGE_PROPAGATION_STATUS" | "ASSOCIABLE_RESOURCE" | "LOG_DESTINATION" | "MANAGED_RULE_GROUP_CONFIG" | "PAYLOAD_TYPE" | "HEADER_MATCH_PATTERN" | "COOKIE_MATCH_PATTERN" | "MAP_MATCH_SCOPE" | "OVERSIZE_HANDLING" | "CHALLENGE_CONFIG" | "TOKEN_DOMAIN" | "ATP_RULE_SET_RESPONSE_INSPECTION" | "ASSOCIATED_RESOURCE_TYPE" | "SCOPE_DOWN" | "CUSTOM_KEYS" | "ACP_RULE_SET_RESPONSE_INSPECTION" | "DATA_PROTECTION_CONFIG" | "LOW_REPUTATION_MODE")
       attr_accessor parameter: ::String
       attr_accessor reason: ::String
       SENSITIVE: []
@@ -1682,6 +1731,8 @@ module Aws::WAFV2
       attr_accessor token_domains: ::Array[::String]
       attr_accessor association_config: Types::AssociationConfig
       attr_accessor retrofitted_by_firewall_manager: bool
+      attr_accessor on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig
+      attr_accessor application_config: Types::ApplicationConfig
       SENSITIVE: []
     end
 

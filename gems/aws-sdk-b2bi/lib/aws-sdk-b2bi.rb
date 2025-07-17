@@ -49,12 +49,13 @@ module Aws::B2bi
   end
   autoload :Client, 'aws-sdk-b2bi/client'
   autoload :Errors, 'aws-sdk-b2bi/errors'
+  autoload :Waiters, 'aws-sdk-b2bi/waiters'
   autoload :Resource, 'aws-sdk-b2bi/resource'
   autoload :EndpointParameters, 'aws-sdk-b2bi/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-b2bi/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-b2bi/endpoints'
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.32.0'
 
 end
 

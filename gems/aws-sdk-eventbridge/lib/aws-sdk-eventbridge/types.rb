@@ -1232,6 +1232,17 @@ module Aws::EventBridge
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rule-event-delivery.html#eb-rule-dlq
     #   @return [Types::DeadLetterConfig]
     #
+    # @!attribute [rw] log_config
+    #   The logging configuration settings for the event bus.
+    #
+    #   For more information, see [Configuring logs for event buses][1] in
+    #   the *EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+    #   @return [Types::LogConfig]
+    #
     # @!attribute [rw] tags
     #   Tags to associate with the event bus.
     #   @return [Array<Types::Tag>]
@@ -1244,6 +1255,7 @@ module Aws::EventBridge
       :description,
       :kms_key_identifier,
       :dead_letter_config,
+      :log_config,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1281,13 +1293,25 @@ module Aws::EventBridge
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rule-event-delivery.html#eb-rule-dlq
     #   @return [Types::DeadLetterConfig]
     #
+    # @!attribute [rw] log_config
+    #   The logging configuration settings for the event bus.
+    #
+    #   For more information, see [Configuring logs for event buses][1] in
+    #   the *EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+    #   @return [Types::LogConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreateEventBusResponse AWS API Documentation
     #
     class CreateEventBusResponse < Struct.new(
       :event_bus_arn,
       :description,
       :kms_key_identifier,
-      :dead_letter_config)
+      :dead_letter_config,
+      :log_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2030,6 +2054,17 @@ module Aws::EventBridge
     #   account.
     #   @return [String]
     #
+    # @!attribute [rw] log_config
+    #   The logging configuration settings for the event bus.
+    #
+    #   For more information, see [Configuring logs for event buses][1] in
+    #   the *EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+    #   @return [Types::LogConfig]
+    #
     # @!attribute [rw] creation_time
     #   The time the event bus was created.
     #   @return [Time]
@@ -2047,6 +2082,7 @@ module Aws::EventBridge
       :kms_key_identifier,
       :dead_letter_config,
       :policy,
+      :log_config,
       :creation_time,
       :last_modified_time)
       SENSITIVE = []
@@ -3617,6 +3653,50 @@ module Aws::EventBridge
     class ListTargetsByRuleResponse < Struct.new(
       :targets,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The logging configuration settings for the event bus.
+    #
+    # For more information, see [Configuring logs for event buses][1] in the
+    # *EventBridge User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+    #
+    # @!attribute [rw] include_detail
+    #   Whether EventBridge include detailed event information in the
+    #   records it generates. Detailed data can be useful for
+    #   troubleshooting and debugging. This information includes details of
+    #   the event itself, as well as target details.
+    #
+    #   For more information, see [Including detail data in event bus
+    #   logs][1] in the *EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html#eb-event-logs-data
+    #   @return [String]
+    #
+    # @!attribute [rw] level
+    #   The level of logging detail to include. This applies to all log
+    #   destinations for the event bus.
+    #
+    #   For more information, see [Specifying event bus log level][1] in the
+    #   *EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html#eb-event-bus-logs-level
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/LogConfig AWS API Documentation
+    #
+    class LogConfig < Struct.new(
+      :include_detail,
+      :level)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5817,13 +5897,25 @@ module Aws::EventBridge
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rule-event-delivery.html#eb-rule-dlq
     #   @return [Types::DeadLetterConfig]
     #
+    # @!attribute [rw] log_config
+    #   The logging configuration settings for the event bus.
+    #
+    #   For more information, see [Configuring logs for event buses][1] in
+    #   the *EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+    #   @return [Types::LogConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UpdateEventBusRequest AWS API Documentation
     #
     class UpdateEventBusRequest < Struct.new(
       :name,
       :kms_key_identifier,
       :description,
-      :dead_letter_config)
+      :dead_letter_config,
+      :log_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5864,6 +5956,17 @@ module Aws::EventBridge
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rule-event-delivery.html#eb-rule-dlq
     #   @return [Types::DeadLetterConfig]
     #
+    # @!attribute [rw] log_config
+    #   The logging configuration settings for the event bus.
+    #
+    #   For more information, see [Configuring logs for event buses][1] in
+    #   the *EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+    #   @return [Types::LogConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UpdateEventBusResponse AWS API Documentation
     #
     class UpdateEventBusResponse < Struct.new(
@@ -5871,7 +5974,8 @@ module Aws::EventBridge
       :name,
       :kms_key_identifier,
       :description,
-      :dead_letter_config)
+      :dead_letter_config,
+      :log_config)
       SENSITIVE = []
       include Aws::Structure
     end

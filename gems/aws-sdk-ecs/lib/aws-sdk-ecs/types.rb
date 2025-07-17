@@ -16,6 +16,52 @@ module Aws::ECS
     #
     class AccessDeniedException < Aws::EmptyStructure; end
 
+    # The advanced settings for a load balancer used in blue/green
+    # deployments. Specify the alternate target group, listener rules, and
+    # IAM role required for traffic shifting during blue/green deployments.
+    # For more information, see [Required resources for Amazon ECS
+    # blue/green deployments][1] in the *Amazon Elastic Container Service
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-deployment-implementation.html
+    #
+    # @!attribute [rw] alternate_target_group_arn
+    #   The Amazon Resource Name (ARN) of the alternate target group for
+    #   Amazon ECS blue/green deployments.
+    #   @return [String]
+    #
+    # @!attribute [rw] production_listener_rule
+    #   The Amazon Resource Name (ARN) that that identifies the production
+    #   listener rule (in the case of an Application Load Balancer) or
+    #   listener (in the case for an Network Load Balancer) for routing
+    #   production traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_listener_rule
+    #   The Amazon Resource Name (ARN) that identifies ) that identifies the
+    #   test listener rule (in the case of an Application Load Balancer) or
+    #   listener (in the case for an Network Load Balancer) for routing test
+    #   traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   ECS permission to call the Elastic Load Balancing APIs for you.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AdvancedConfiguration AWS API Documentation
+    #
+    class AdvancedConfiguration < Struct.new(
+      :alternate_target_group_arn,
+      :production_listener_rule,
+      :test_listener_rule,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing a container instance or task attachment.
     #
     # @!attribute [rw] id
@@ -477,19 +523,6 @@ module Aws::ECS
     # have permissions to use the action or resource. Or, it might be
     # specifying an identifier that isn't valid.
     #
-    # The following list includes additional causes for the error:
-    #
-    # * The `RunTask` could not be processed because you use managed scaling
-    #   and there is a capacity error because the quota of tasks in the
-    #   `PROVISIONING` per cluster has been reached. For information about
-    #   the service quotas, see [Amazon ECS service quotas][1].
-    #
-    # ^
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-quotas.html
-    #
     # @!attribute [rw] message
     #   Message that describes the cause of the exception.
     #   @return [String]
@@ -523,7 +556,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   The execute command configuration for the cluster.
+    #   The execute command and managed storage configuration for the
+    #   cluster.
     #   @return [Types::ClusterConfiguration]
     #
     # @!attribute [rw] status
@@ -983,7 +1017,7 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] reason
-    #   A short (255 max characters) human-readable string to provide
+    #   A short (1024 max characters) human-readable string to provide
     #   additional details about a running or stopped container.
     #   @return [String]
     #
@@ -1065,11 +1099,18 @@ module Aws::ECS
     #   The image used to start a container. This string is passed directly
     #   to the Docker daemon. By default, images in the Docker Hub registry
     #   are available. Other repositories are specified with either `
-    #   repository-url/image:tag ` or ` repository-url/image@digest `. Up to
-    #   255 letters (uppercase and lowercase), numbers, hyphens,
-    #   underscores, colons, periods, forward slashes, and number signs are
-    #   allowed. This parameter maps to `Image` in the docker container
-    #   create command and the `IMAGE` parameter of docker run.
+    #   repository-url/image:tag ` or ` repository-url/image@digest `. For
+    #   images using tags (repository-url/image:tag), up to 255 characters
+    #   total are allowed, including letters (uppercase and lowercase),
+    #   numbers, hyphens, underscores, colons, periods, forward slashes, and
+    #   number signs (#). For images using digests
+    #   (repository-url/image@digest), the 255 character limit applies only
+    #   to the repository URL and image name (everything before the @ sign).
+    #   The only supported hash function is sha256, and the hash value after
+    #   sha256: must be exactly 64 characters (only letters A-F, a-f, and
+    #   numbers 0-9 are allowed). This parameter maps to `Image` in the
+    #   docker container create command and the `IMAGE` parameter of docker
+    #   run.
     #
     #   * When a new task starts, the Amazon ECS container agent pulls the
     #     latest version of the specified image and tag for the container to
@@ -2956,7 +2997,7 @@ module Aws::ECS
     #   ECS resources][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
-    #   When you use Amazon ECS managed tags, you need to set the
+    #   When you use Amazon ECS managed tags, you must set the
     #   `propagateTags` request parameter.
     #
     #
@@ -3286,12 +3327,15 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] principal_arn
-    #   The Amazon Resource Name (ARN) of the principal. It can be an user,
+    #   The Amazon Resource Name (ARN) of the principal. It can be a user,
     #   role, or the root user. If you specify the root user, it disables
     #   the account setting for all users, roles, and the root user of the
     #   account unless a user or role explicitly overrides these settings.
     #   If this field is omitted, the setting is changed only for the
     #   authenticated user.
+    #
+    #   In order to use this parameter, you must be the root user, or the
+    #   principal.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAccountSettingRequest AWS API Documentation
@@ -3732,7 +3776,7 @@ module Aws::ECS
     # your service to the last completed deployment after a failure.
     #
     # You can only use the `DeploymentAlarms` method to detect failures when
-    # the `DeploymentController` is set to `ECS` (rolling update).
+    # the `DeploymentController` is set to `ECS`.
     #
     # For more information, see [Rolling update][1] in the <i> <i>Amazon
     # Elastic Container Service Developer Guide</i> </i>.
@@ -3968,13 +4012,49 @@ module Aws::ECS
     #   Information about the CloudWatch alarms.
     #   @return [Types::DeploymentAlarms]
     #
+    # @!attribute [rw] strategy
+    #   The deployment strategy for the service. Choose from these valid
+    #   values:
+    #
+    #   * `ROLLING` - When you create a service which uses the rolling
+    #     update (`ROLLING`) deployment strategy, the Amazon ECS service
+    #     scheduler replaces the currently running tasks with new tasks. The
+    #     number of tasks that Amazon ECS adds or removes from the service
+    #     during a rolling update is controlled by the service deployment
+    #     configuration.
+    #
+    #   * `BLUE_GREEN` - A blue/green deployment strategy (`BLUE_GREEN`) is
+    #     a release methodology that reduces downtime and risk by running
+    #     two identical production environments called blue and green. With
+    #     Amazon ECS blue/green deployments, you can validate new service
+    #     revisions before directing production traffic to them. This
+    #     approach provides a safer way to deploy changes with the ability
+    #     to quickly roll back if needed.
+    #   @return [String]
+    #
+    # @!attribute [rw] bake_time_in_minutes
+    #   The time period when both blue and green service revisions are
+    #   running simultaneously after the production traffic has shifted.
+    #
+    #   You must provide this parameter when you use the `BLUE_GREEN`
+    #   deployment strategy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lifecycle_hooks
+    #   An array of deployment lifecycle hook objects to run custom logic at
+    #   specific stages of the deployment lifecycle.
+    #   @return [Array<Types::DeploymentLifecycleHook>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentConfiguration AWS API Documentation
     #
     class DeploymentConfiguration < Struct.new(
       :deployment_circuit_breaker,
       :maximum_percent,
       :minimum_healthy_percent,
-      :alarms)
+      :alarms,
+      :strategy,
+      :bake_time_in_minutes,
+      :lifecycle_hooks)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3984,49 +4064,92 @@ module Aws::ECS
     # @!attribute [rw] type
     #   The deployment controller type to use.
     #
-    #   There are three deployment controller types available:
+    #   The deployment controller is the mechanism that determines how tasks
+    #   are deployed for your service. The valid options are:
     #
-    #   ECS
+    #   * ECS
     #
-    #   : The rolling update (`ECS`) deployment type involves replacing the
-    #     current running version of the container with the latest version.
-    #     The number of containers Amazon ECS adds or removes from the
-    #     service during a rolling update is controlled by adjusting the
-    #     minimum and maximum number of healthy tasks allowed during a
-    #     service deployment, as specified in the
-    #     [DeploymentConfiguration][1].
+    #     When you create a service which uses the `ECS` deployment
+    #     controller, you can choose between the following deployment
+    #     strategies:
     #
-    #     For more information about rolling deployments, see [Deploy Amazon
-    #     ECS services by replacing tasks][2] in the *Amazon Elastic
-    #     Container Service Developer Guide*.
+    #     * `ROLLING`: When you create a service which uses the *rolling
+    #       update* (`ROLLING`) deployment strategy, the Amazon ECS service
+    #       scheduler replaces the currently running tasks with new tasks.
+    #       The number of tasks that Amazon ECS adds or removes from the
+    #       service during a rolling update is controlled by the service
+    #       deployment configuration.
     #
-    #   CODE\_DEPLOY
+    #       Rolling update deployments are best suited for the following
+    #       scenarios:
     #
-    #   : The blue/green (`CODE_DEPLOY`) deployment type uses the blue/green
-    #     deployment model powered by CodeDeploy, which allows you to verify
-    #     a new deployment of a service before sending production traffic to
-    #     it.
+    #       * Gradual service updates: You need to update your service
+    #         incrementally without taking the entire service offline at
+    #         once.
     #
-    #     For more information about blue/green deployments, see [Validate
-    #     the state of an Amazon ECS service before deployment ][3] in the
-    #     *Amazon Elastic Container Service Developer Guide*.
+    #       * Limited resource requirements: You want to avoid the
+    #         additional resource costs of running two complete environments
+    #         simultaneously (as required by blue/green deployments).
     #
-    #   EXTERNAL
+    #       * Acceptable deployment time: Your application can tolerate a
+    #         longer deployment process, as rolling updates replace tasks
+    #         one by one.
     #
-    #   : The external (`EXTERNAL`) deployment type enables you to use any
-    #     third-party deployment controller for full control over the
-    #     deployment process for an Amazon ECS service.
+    #       * No need for instant roll back: Your service can tolerate a
+    #         rollback process that takes minutes rather than seconds.
     #
-    #     For more information about external deployments, see [Deploy
-    #     Amazon ECS services using a third-party controller ][4] in the
-    #     *Amazon Elastic Container Service Developer Guide*.
+    #       * Simple deployment process: You prefer a straightforward
+    #         deployment approach without the complexity of managing
+    #         multiple environments, target groups, and listeners.
     #
+    #       * No load balancer requirement: Your service doesn't use or
+    #         require a load balancer, Application Load Balancer, Network
+    #         Load Balancer, or Service Connect (which are required for
+    #         blue/green deployments).
     #
+    #       * Stateful applications: Your application maintains state that
+    #         makes it difficult to run two parallel environments.
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeploymentConfiguration.html
-    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html
-    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html
-    #   [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-external.html
+    #       * Cost sensitivity: You want to minimize deployment costs by not
+    #         running duplicate environments during deployment.
+    #       Rolling updates are the default deployment strategy for services
+    #       and provide a balance between deployment safety and resource
+    #       efficiency for many common application scenarios.
+    #
+    #     * `BLUE_GREEN`: A *blue/green* deployment strategy (`BLUE_GREEN`)
+    #       is a release methodology that reduces downtime and risk by
+    #       running two identical production environments called blue and
+    #       green. With Amazon ECS blue/green deployments, you can validate
+    #       new service revisions before directing production traffic to
+    #       them. This approach provides a safer way to deploy changes with
+    #       the ability to quickly roll back if needed.
+    #
+    #       Amazon ECS blue/green deployments are best suited for the
+    #       following scenarios:
+    #
+    #       * Service validation: When you need to validate new service
+    #         revisions before directing production traffic to them
+    #
+    #       * Zero downtime: When your service requires zero-downtime
+    #         deployments
+    #
+    #       * Instant roll back: When you need the ability to quickly roll
+    #         back if issues are detected
+    #
+    #       * Load balancer requirement: When your service uses Application
+    #         Load Balancer, Network Load Balancer, or Service Connect
+    #   * External
+    #
+    #     Use a third-party deployment controller.
+    #
+    #   * Blue/green deployment (powered by CodeDeploy)
+    #
+    #     CodeDeploy installs an updated version of the application as a new
+    #     replacement task set and reroutes production traffic from the
+    #     original application task set to the replacement task set. The
+    #     original task set is terminated after a successful deployment. Use
+    #     this deployment controller to verify a new deployment of a service
+    #     before sending production traffic to it.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentController AWS API Documentation
@@ -4048,6 +4171,110 @@ module Aws::ECS
     #
     class DeploymentEphemeralStorage < Struct.new(
       :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A deployment lifecycle hook runs custom logic at specific stages of
+    # the deployment process. Currently, you can use Lambda functions as
+    # hook targets.
+    #
+    # For more information, see [Lifecycle hooks for Amazon ECS service
+    # deployments][1] in the <i> Amazon Elastic Container Service Developer
+    # Guide</i>.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-lifecycle-hooks.html
+    #
+    # @!attribute [rw] hook_target_arn
+    #   The Amazon Resource Name (ARN) of the hook target. Currently, only
+    #   Lambda function ARNs are supported.
+    #
+    #   You must provide this parameter when configuring a deployment
+    #   lifecycle hook.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   ECS permission to call Lambda functions on your behalf.
+    #
+    #   For more information, see [Permissions required for Lambda functions
+    #   in Amazon ECS blue/green deployments][1] in the <i> Amazon Elastic
+    #   Container Service Developer Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_stages
+    #   The lifecycle stages at which to run the hook. Choose from these
+    #   valid values:
+    #
+    #   * RECONCILE\_SERVICE
+    #
+    #     The reconciliation stage that only happens when you start a new
+    #     service deployment with more than 1 service revision in an ACTIVE
+    #     state.
+    #
+    #     You can use a lifecycle hook for this stage.
+    #
+    #   * PRE\_SCALE\_UP
+    #
+    #     The green service revision has not started. The blue service
+    #     revision is handling 100% of the production traffic. There is no
+    #     test traffic.
+    #
+    #     You can use a lifecycle hook for this stage.
+    #
+    #   * POST\_SCALE\_UP
+    #
+    #     The green service revision has started. The blue service revision
+    #     is handling 100% of the production traffic. There is no test
+    #     traffic.
+    #
+    #     You can use a lifecycle hook for this stage.
+    #
+    #   * TEST\_TRAFFIC\_SHIFT
+    #
+    #     The blue and green service revisions are running. The blue service
+    #     revision handles 100% of the production traffic. The green service
+    #     revision is migrating from 0% to 100% of test traffic.
+    #
+    #     You can use a lifecycle hook for this stage.
+    #
+    #   * POST\_TEST\_TRAFFIC\_SHIFT
+    #
+    #     The test traffic shift is complete. The green service revision
+    #     handles 100% of the test traffic.
+    #
+    #     You can use a lifecycle hook for this stage.
+    #
+    #   * PRODUCTION\_TRAFFIC\_SHIFT
+    #
+    #     Production traffic is shifting to the green service revision. The
+    #     green service revision is migrating from 0% to 100% of production
+    #     traffic.
+    #
+    #     You can use a lifecycle hook for this stage.
+    #
+    #   * POST\_PRODUCTION\_TRAFFIC\_SHIFT
+    #
+    #     The production traffic shift is complete.
+    #
+    #     You can use a lifecycle hook for this stage.
+    #
+    #   You must provide this parameter when configuring a deployment
+    #   lifecycle hook.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentLifecycleHook AWS API Documentation
+    #
+    class DeploymentLifecycleHook < Struct.new(
+      :hook_target_arn,
+      :role_arn,
+      :lifecycle_stages)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4548,8 +4775,8 @@ module Aws::ECS
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the task or tasks to describe. If you do not specify a
-    #   cluster, the default cluster is assumed. This parameter is required.
-    #   If you do not specify a value, the `default` cluster is used.
+    #   cluster, the default cluster is assumed. If you do not specify a
+    #   value, the `default` cluster is used.
     #   @return [String]
     #
     # @!attribute [rw] tasks
@@ -5391,6 +5618,45 @@ module Aws::ECS
     # are part of a service, if the task reports as unhealthy then the task
     # will be stopped and the service scheduler will replace it.
     #
+    # When a container health check fails for a task that is part of a
+    # service, the following process occurs:
+    #
+    # 1.  The task is marked as `UNHEALTHY`.
+    #
+    # 2.  The unhealthy task will be stopped, and during the stopping
+    #     process, it will go through the following states:
+    #
+    #     * `DEACTIVATING` - In this state, Amazon ECS performs additional
+    #       steps before stopping the task. For example, for tasks that are
+    #       part of services configured to use Elastic Load Balancing target
+    #       groups, target groups will be deregistered in this state.
+    #
+    #     * `STOPPING` - The task is in the process of being stopped.
+    #
+    #     * `DEPROVISIONING` - Resources associated with the task are being
+    #       cleaned up.
+    #
+    #     * `STOPPED` - The task has been completely stopped.
+    # 3.  After the old task stops, a new task will be launched to ensure
+    #     service operation, and the new task will go through the following
+    #     lifecycle:
+    #
+    #     * `PROVISIONING` - Resources required for the task are being
+    #       provisioned.
+    #
+    #     * `PENDING` - The task is waiting to be placed on a container
+    #       instance.
+    #
+    #     * `ACTIVATING` - In this state, Amazon ECS pulls container images,
+    #       creates containers, configures task networking, registers load
+    #       balancer target groups, and configures service discovery status.
+    #
+    #     * `RUNNING` - The task is running and performing its work.
+    #
+    # For more detailed information about task lifecycle states, see [Task
+    # lifecycle][1] in the *Amazon Elastic Container Service Developer
+    # Guide*.
+    #
     # The following are notes about container health check support:
     #
     # * If the Amazon ECS container agent becomes disconnected from the
@@ -5405,25 +5671,26 @@ module Aws::ECS
     #
     # * Container health checks require version `1.17.0` or greater of the
     #   Amazon ECS container agent. For more information, see [Updating the
-    #   Amazon ECS container agent][1].
+    #   Amazon ECS container agent][2].
     #
     # * Container health checks are supported for Fargate tasks if you're
     #   using platform version `1.1.0` or greater. For more information, see
-    #   [Fargate platform versions][2].
+    #   [Fargate platform versions][3].
     #
     # * Container health checks aren't supported for tasks that are part of
     #   a service that's configured to use a Classic Load Balancer.
     #
     # For an example of how to specify a task definition with multiple
     # containers where container dependency is specified, see [Container
-    # dependency][3] in the *Amazon Elastic Container Service Developer
+    # dependency][4] in the *Amazon Elastic Container Service Developer
     # Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
-    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
-    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/example_task_definitions.html#example_task_definition-containerdependency
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle-explanation.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/example_task_definitions.html#example_task_definition-containerdependency
     #
     # @!attribute [rw] command
     #   A string array representing the command that the container runs to
@@ -5887,6 +6154,9 @@ module Aws::ECS
     #   The ARN of the principal, which can be a user, role, or the root
     #   user. If this field is omitted, the account settings are listed only
     #   for the authenticated user.
+    #
+    #   In order to use this parameter, you must be the root user, or the
+    #   principal.
     #
     #   <note markdown="1"> Federated users assume the account setting of the root user and
     #   can't have explicit account settings set for them.
@@ -6796,13 +7066,21 @@ module Aws::ECS
     #   traffic on the `hostPort` of the port mapping.
     #   @return [Integer]
     #
+    # @!attribute [rw] advanced_configuration
+    #   The advanced settings for the load balancer used in blue/green
+    #   deployments. Specify the alternate target group, listener rules, and
+    #   IAM role required for traffic shifting during blue/green
+    #   deployments.
+    #   @return [Types::AdvancedConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LoadBalancer AWS API Documentation
     #
     class LoadBalancer < Struct.new(
       :target_group_arn,
       :load_balancer_name,
       :container_name,
-      :container_port)
+      :container_port,
+      :advanced_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7029,9 +7307,21 @@ module Aws::ECS
     #     Amazon Web Services Region by using the `defaultLogDriverMode`
     #     account setting. If you don't specify the `mode` option or
     #     configure the account setting, Amazon ECS will default to the
-    #     `blocking` mode. For more information about the account setting,
-    #     see [Default log driver mode][4] in the *Amazon Elastic Container
-    #     Service Developer Guide*.
+    #     `non-blocking` mode. For more information about the account
+    #     setting, see [Default log driver mode][4] in the *Amazon Elastic
+    #     Container Service Developer Guide*.
+    #
+    #     <note markdown="1"> On June 25, 2025, Amazon ECS changed the default log driver mode
+    #     from `blocking` to `non-blocking` to prioritize task availability
+    #     over logging. To continue using the `blocking` mode after this
+    #     change, do one of the following:
+    #
+    #      * Set the `mode` option in your container definition's
+    #       `logConfiguration` as `blocking`.
+    #
+    #     * Set the `defaultLogDriverMode` account setting to `blocking`.
+    #
+    #      </note>
     #
     #   max-buffer-size
     #
@@ -7248,17 +7538,40 @@ module Aws::ECS
     # The managed storage configuration for the cluster.
     #
     # @!attribute [rw] kms_key_id
-    #   Specify a Key Management Service key ID to encrypt the managed
-    #   storage.
+    #   Specify a Key Management Service key ID to encrypt Amazon ECS
+    #   managed storage.
+    #
+    #   When you specify a `kmsKeyId`, Amazon ECS uses the key to encrypt
+    #   data volumes managed by Amazon ECS that are attached to tasks in the
+    #   cluster. The following data volumes are managed by Amazon ECS:
+    #   Amazon EBS. For more information about encryption of Amazon EBS
+    #   volumes attached to Amazon ECS tasks, see [Encrypt data stored in
+    #   Amazon EBS volumes for Amazon ECS][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
     #
     #   The key must be a single Region key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-kms-encryption.html
     #   @return [String]
     #
     # @!attribute [rw] fargate_ephemeral_storage_kms_key_id
-    #   Specify the Key Management Service key ID for the Fargate ephemeral
+    #   Specify the Key Management Service key ID for Fargate ephemeral
     #   storage.
     #
+    #   When you specify a `fargateEphemeralStorageKmsKeyId`, Amazon Web
+    #   Services Fargate uses the key to encrypt data at rest in ephemeral
+    #   storage. For more information about Fargate ephemeral storage
+    #   encryption, see [Customer managed keys for Amazon Web Services
+    #   Fargate ephemeral storage for Amazon ECS][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
+    #
     #   The key must be a single Region key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-storage-encryption.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedStorageConfiguration AWS API Documentation
@@ -8000,6 +8313,18 @@ module Aws::ECS
     #     using this account setting will be used as the default. For more
     #     information about log delivery modes, see [LogConfiguration][7].
     #
+    #     <note markdown="1"> On June 25, 2025, Amazon ECS changed the default log driver mode
+    #     from `blocking` to `non-blocking` to prioritize task availability
+    #     over logging. To continue using the `blocking` mode after this
+    #     change, do one of the following:
+    #
+    #      * Set the `mode` option in your container definition's
+    #       `logConfiguration` as `blocking`.
+    #
+    #     * Set the `defaultLogDriverMode` account setting to `blocking`.
+    #
+    #      </note>
+    #
     #   * `guardDutyActivate` - The `guardDutyActivate` parameter is
     #     read-only in Amazon ECS and indicates whether Amazon ECS Runtime
     #     Monitoring is enabled or disabled by your security administrator
@@ -8155,6 +8480,18 @@ module Aws::ECS
     #     using this account setting will be used as the default. For more
     #     information about log delivery modes, see [LogConfiguration][7].
     #
+    #     <note markdown="1"> On June 25, 2025, Amazon ECS changed the default log driver mode
+    #     from `blocking` to `non-blocking` to prioritize task availability
+    #     over logging. To continue using the `blocking` mode after this
+    #     change, do one of the following:
+    #
+    #      * Set the `mode` option in your container definition's
+    #       `logConfiguration` as `blocking`.
+    #
+    #     * Set the `defaultLogDriverMode` account setting to `blocking`.
+    #
+    #      </note>
+    #
     #   * `guardDutyActivate` - The `guardDutyActivate` parameter is
     #     read-only in Amazon ECS and indicates whether Amazon ECS Runtime
     #     Monitoring is enabled or disabled by your security administrator
@@ -8197,6 +8534,9 @@ module Aws::ECS
     #   for all users, roles, and the root user of the account unless a user
     #   or role explicitly overrides these settings. If this field is
     #   omitted, the setting is changed only for the authenticated user.
+    #
+    #   In order to use this parameter, you must be the root user, or the
+    #   principal.
     #
     #   <note markdown="1"> You must use the root user when you set the Fargate wait time
     #   (`fargateTaskRetirementWaitPeriod`).
@@ -8830,6 +9170,24 @@ module Aws::ECS
     #
     class RepositoryCredentials < Struct.new(
       :credentials_parameter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resolved configuration for a service revision, which contains the
+    # actual resources your service revision uses, such as which target
+    # groups serve traffic.
+    #
+    # @!attribute [rw] load_balancers
+    #   The resolved load balancer configuration for the service revision.
+    #   This includes information about which target groups serve traffic
+    #   and which listener rules direct traffic to them.
+    #   @return [Array<Types::ServiceRevisionLoadBalancer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ResolvedConfiguration AWS API Documentation
+    #
+    class ResolvedConfiguration < Struct.new(
+      :load_balancers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9752,11 +10110,19 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
     #   @return [String]
     #
+    # @!attribute [rw] test_traffic_rules
+    #   The configuration for test traffic routing rules used during
+    #   blue/green deployments with Amazon ECS Service Connect. This allows
+    #   you to route a portion of traffic to the new service revision of
+    #   your service for testing before shifting all production traffic.
+    #   @return [Types::ServiceConnectTestTrafficRules]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceConnectClientAlias AWS API Documentation
     #
     class ServiceConnectClientAlias < Struct.new(
       :port,
-      :dns_name)
+      :dns_name,
+      :test_traffic_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9973,7 +10339,7 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] discovery_arn
-    #   The Amazon Resource Name (ARN) for the namespace in Cloud Map that
+    #   The Amazon Resource Name (ARN) for the service in Cloud Map that
     #   matches the discovery name for this Service Connect resource. You
     #   can use this ARN in other integrations with Cloud Map. However,
     #   Service Connect can't ensure connectivity outside of Amazon ECS.
@@ -9984,6 +10350,87 @@ module Aws::ECS
     class ServiceConnectServiceResource < Struct.new(
       :discovery_name,
       :discovery_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The header matching rules for test traffic routing in Amazon ECS
+    # blue/green deployments. These rules determine how incoming requests
+    # are matched based on HTTP headers to route test traffic to the new
+    # service revision.
+    #
+    # @!attribute [rw] exact
+    #   The exact value that the HTTP header must match for the test traffic
+    #   routing rule to apply. This provides precise control over which
+    #   requests are routed to the new service revision during blue/green
+    #   deployments.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceConnectTestTrafficHeaderMatchRules AWS API Documentation
+    #
+    class ServiceConnectTestTrafficHeaderMatchRules < Struct.new(
+      :exact)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The HTTP header rules used to identify and route test traffic during
+    # Amazon ECS blue/green deployments. These rules specify which HTTP
+    # headers to examine and what values to match for routing decisions.
+    #
+    # For more information, see [Service Connect for Amazon ECS blue/green
+    # deployments][1] in the <i> Amazon Elastic Container Service Developer
+    # Guide</i>.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect-blue-green.html
+    #
+    # @!attribute [rw] name
+    #   The name of the HTTP header to examine for test traffic routing.
+    #   Common examples include custom headers like `X-Test-Version` or
+    #   `X-Canary-Request` that can be used to identify test traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The header value matching configuration that determines how the HTTP
+    #   header value is evaluated for test traffic routing decisions.
+    #   @return [Types::ServiceConnectTestTrafficHeaderMatchRules]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceConnectTestTrafficHeaderRules AWS API Documentation
+    #
+    class ServiceConnectTestTrafficHeaderRules < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The test traffic routing configuration for Amazon ECS blue/green
+    # deployments. This configuration allows you to define rules for routing
+    # specific traffic to the new service revision during the deployment
+    # process, allowing for safe testing before full production traffic
+    # shift.
+    #
+    # For more information, see [Service Connect for Amazon ECS blue/green
+    # deployments][1] in the <i> Amazon Elastic Container Service Developer
+    # Guide</i>.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect-blue-green.html
+    #
+    # @!attribute [rw] header
+    #   The HTTP header-based routing rules that determine which requests
+    #   should be routed to the new service version during blue/green
+    #   deployment testing. These rules provide fine-grained control over
+    #   test traffic routing based on request headers.
+    #   @return [Types::ServiceConnectTestTrafficHeaderRules]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceConnectTestTrafficRules AWS API Documentation
+    #
+    class ServiceConnectTestTrafficRules < Struct.new(
+      :header)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10103,6 +10550,67 @@ module Aws::ECS
     #   status. For example, the circuit breaker detected a failure.
     #   @return [String]
     #
+    # @!attribute [rw] lifecycle_stage
+    #   The current lifecycle stage of the deployment. Possible values
+    #   include:
+    #
+    #   * RECONCILE\_SERVICE
+    #
+    #     The reconciliation stage that only happens when you start a new
+    #     service deployment with more than 1 service revision in an ACTIVE
+    #     state.
+    #
+    #   * PRE\_SCALE\_UP
+    #
+    #     The green service revision has not started. The blue service
+    #     revision is handling 100% of the production traffic. There is no
+    #     test traffic.
+    #
+    #   * SCALE\_UP
+    #
+    #     The stage when the green service revision scales up to 100% and
+    #     launches new tasks. The green service revision is not serving any
+    #     traffic at this point.
+    #
+    #   * POST\_SCALE\_UP
+    #
+    #     The green service revision has started. The blue service revision
+    #     is handling 100% of the production traffic. There is no test
+    #     traffic.
+    #
+    #   * TEST\_TRAFFIC\_SHIFT
+    #
+    #     The blue and green service revisions are running. The blue service
+    #     revision handles 100% of the production traffic. The green service
+    #     revision is migrating from 0% to 100% of test traffic.
+    #
+    #   * POST\_TEST\_TRAFFIC\_SHIFT
+    #
+    #     The test traffic shift is complete. The green service revision
+    #     handles 100% of the test traffic.
+    #
+    #   * PRODUCTION\_TRAFFIC\_SHIFT
+    #
+    #     Production traffic is shifting to the green service revision. The
+    #     green service revision is migrating from 0% to 100% of production
+    #     traffic.
+    #
+    #   * POST\_PRODUCTION\_TRAFFIC\_SHIFT
+    #
+    #     The production traffic shift is complete.
+    #
+    #   * BAKE\_TIME
+    #
+    #     The stage when both blue and green service revisions are running
+    #     simultaneously after the production traffic has shifted.
+    #
+    #   * CLEAN\_UP
+    #
+    #     The stage when the blue service revision has completely scaled
+    #     down to 0 running tasks. The green service revision is now the
+    #     production service revision after this stage.
+    #   @return [String]
+    #
     # @!attribute [rw] deployment_configuration
     #   Optional deployment parameters that control how many tasks run
     #   during a deployment and the ordering of stopping and starting tasks.
@@ -10138,6 +10646,7 @@ module Aws::ECS
       :target_service_revision,
       :status,
       :status_reason,
+      :lifecycle_stage,
       :deployment_configuration,
       :rollback,
       :deployment_circuit_breaker,
@@ -10339,10 +10848,12 @@ module Aws::ECS
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volumes-configuration
     #
     # @!attribute [rw] encrypted
-    #   Indicates whether the volume should be encrypted. If no value is
-    #   specified, encryption is turned on by default. This parameter maps
-    #   1:1 with the `Encrypted` parameter of the [CreateVolume API][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   Indicates whether the volume should be encrypted. If you turn on
+    #   Region-level Amazon EBS encryption by default but set this value as
+    #   `false`, the setting is overridden and the volume is encrypted with
+    #   the KMS key specified for Amazon EBS encryption by default. This
+    #   parameter maps 1:1 with the `Encrypted` parameter of the
+    #   [CreateVolume API][1] in the *Amazon EC2 API Reference*.
     #
     #
     #
@@ -10351,12 +10862,14 @@ module Aws::ECS
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Resource Name (ARN) identifier of the Amazon Web Services
-    #   Key Management Service key to use for Amazon EBS encryption. When
-    #   encryption is turned on and no Amazon Web Services Key Management
-    #   Service key is specified, the default Amazon Web Services managed
-    #   key for Amazon EBS volumes is used. This parameter maps 1:1 with the
-    #   `KmsKeyId` parameter of the [CreateVolume API][1] in the *Amazon EC2
-    #   API Reference*.
+    #   Key Management Service key to use for Amazon EBS encryption. When a
+    #   key is specified using this parameter, it overrides Amazon EBS
+    #   default encryption or any KMS key that you specified for
+    #   cluster-level managed storage encryption. This parameter maps 1:1
+    #   with the `KmsKeyId` parameter of the [CreateVolume API][1] in the
+    #   *Amazon EC2 API Reference*. For more information about encrypting
+    #   Amazon EBS volumes attached to tasks, see [Encrypt data stored in
+    #   Amazon EBS volumes attached to Amazon ECS tasks][2].
     #
     #   Amazon Web Services authenticates the Amazon Web Services Key
     #   Management Service key asynchronously. Therefore, if you specify an
@@ -10366,6 +10879,7 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-kms-encryption.html
     #   @return [String]
     #
     # @!attribute [rw] volume_type
@@ -10421,15 +10935,28 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] snapshot_id
-    #   The snapshot that Amazon ECS uses to create the volume. You must
-    #   specify either a snapshot ID or a volume size. This parameter maps
-    #   1:1 with the `SnapshotId` parameter of the [CreateVolume API][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   The snapshot that Amazon ECS uses to create volumes for attachment
+    #   to tasks maintained by the service. You must specify either
+    #   `snapshotId` or `sizeInGiB` in your volume configuration. This
+    #   parameter maps 1:1 with the `SnapshotId` parameter of the
+    #   [CreateVolume API][1] in the *Amazon EC2 API Reference*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html
     #   @return [String]
+    #
+    # @!attribute [rw] volume_initialization_rate
+    #   The rate, in MiB/s, at which data is fetched from a snapshot of an
+    #   existing EBS volume to create new volumes for attachment to the
+    #   tasks maintained by the service. This property can be specified only
+    #   if you specify a `snapshotId`. For more information, see [Initialize
+    #   Amazon EBS volumes][1] in the *Amazon EBS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html
+    #   @return [Integer]
     #
     # @!attribute [rw] iops
     #   The number of I/O operations per second (IOPS). For `gp3`, `io1`,
@@ -10499,7 +11026,7 @@ module Aws::ECS
     #   The filesystem type for the volume. For volumes created from a
     #   snapshot, you must specify the same filesystem type that the volume
     #   was using when the snapshot was created. If there is a filesystem
-    #   type mismatch, the task will fail to start.
+    #   type mismatch, the tasks will fail to start.
     #
     #   The available Linux filesystem types are  `ext3`, `ext4`, and `xfs`.
     #   If no value is specified, the `xfs` filesystem type is used by
@@ -10516,6 +11043,7 @@ module Aws::ECS
       :volume_type,
       :size_in_gi_b,
       :snapshot_id,
+      :volume_initialization_rate,
       :iops,
       :throughput,
       :tag_specifications,
@@ -10715,6 +11243,12 @@ module Aws::ECS
     #   The VPC Lattice configuration for the service revision.
     #   @return [Array<Types::VpcLatticeConfiguration>]
     #
+    # @!attribute [rw] resolved_configuration
+    #   The resolved configuration for the service revision which contains
+    #   the actual resources your service revision uses, such as which
+    #   target groups serve traffic.
+    #   @return [Types::ResolvedConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceRevision AWS API Documentation
     #
     class ServiceRevision < Struct.new(
@@ -10735,7 +11269,32 @@ module Aws::ECS
       :volume_configurations,
       :fargate_ephemeral_storage,
       :created_at,
-      :vpc_lattice_configurations)
+      :vpc_lattice_configurations,
+      :resolved_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resolved load balancer configuration for a service revision. This
+    # includes information about which target groups serve traffic and which
+    # listener rules direct traffic to them.
+    #
+    # @!attribute [rw] target_group_arn
+    #   The Amazon Resource Name (ARN) of the target group associated with
+    #   the service revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] production_listener_rule
+    #   The Amazon Resource Name (ARN) of the production listener rule or
+    #   listener that directs traffic to the target group associated with
+    #   the service revision.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceRevisionLoadBalancer AWS API Documentation
+    #
+    class ServiceRevisionLoadBalancer < Struct.new(
+      :target_group_arn,
+      :production_listener_rule)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11038,7 +11597,7 @@ module Aws::ECS
     # @!attribute [rw] stop_type
     #   How you want Amazon ECS to stop the service.
     #
-    #   The ROLLBACK and ABORT stopType aren't supported.
+    #   The valid values are `ROLLBACK`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopServiceDeploymentRequest AWS API Documentation
@@ -11324,7 +11883,9 @@ module Aws::ECS
     #   "kernel.shmmni" | "kernel.shm_rmid_forced"`, and `Sysctls` that
     #   start with `"fs.mqueue.*"`
     #
-    #   Valid network namespace values: `Sysctls` that start with `"net.*"`
+    #   Valid network namespace values: `Sysctls` that start with `"net.*"`.
+    #   Only namespaced `Sysctls` that exist within the container starting
+    #   with "net.* are accepted.
     #
     #   All of these values are supported by Fargate.
     #   @return [String]
@@ -12298,10 +12859,12 @@ module Aws::ECS
     # Amazon EBS volume, with one volume created for each task.
     #
     # @!attribute [rw] encrypted
-    #   Indicates whether the volume should be encrypted. If no value is
-    #   specified, encryption is turned on by default. This parameter maps
-    #   1:1 with the `Encrypted` parameter of the [CreateVolume API][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   Indicates whether the volume should be encrypted. If you turn on
+    #   Region-level Amazon EBS encryption by default but set this value as
+    #   `false`, the setting is overridden and the volume is encrypted with
+    #   the KMS key specified for Amazon EBS encryption by default. This
+    #   parameter maps 1:1 with the `Encrypted` parameter of the
+    #   [CreateVolume API][1] in the *Amazon EC2 API Reference*.
     #
     #
     #
@@ -12310,12 +12873,14 @@ module Aws::ECS
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Resource Name (ARN) identifier of the Amazon Web Services
-    #   Key Management Service key to use for Amazon EBS encryption. When
-    #   encryption is turned on and no Amazon Web Services Key Management
-    #   Service key is specified, the default Amazon Web Services managed
-    #   key for Amazon EBS volumes is used. This parameter maps 1:1 with the
-    #   `KmsKeyId` parameter of the [CreateVolume API][1] in the *Amazon EC2
-    #   API Reference*.
+    #   Key Management Service key to use for Amazon EBS encryption. When a
+    #   key is specified using this parameter, it overrides Amazon EBS
+    #   default encryption or any KMS key that you specified for
+    #   cluster-level managed storage encryption. This parameter maps 1:1
+    #   with the `KmsKeyId` parameter of the [CreateVolume API][1] in the
+    #   *Amazon EC2 API Reference*. For more information about encrypting
+    #   Amazon EBS volumes attached to a task, see [Encrypt data stored in
+    #   Amazon EBS volumes attached to Amazon ECS tasks][2].
     #
     #   Amazon Web Services authenticates the Amazon Web Services Key
     #   Management Service key asynchronously. Therefore, if you specify an
@@ -12325,6 +12890,7 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-kms-encryption.html
     #   @return [String]
     #
     # @!attribute [rw] volume_type
@@ -12389,6 +12955,18 @@ module Aws::ECS
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html
     #   @return [String]
+    #
+    # @!attribute [rw] volume_initialization_rate
+    #   The rate, in MiB/s, at which data is fetched from a snapshot of an
+    #   existing Amazon EBS volume to create a new volume for attachment to
+    #   the task. This property can be specified only if you specify a
+    #   `snapshotId`. For more information, see [Initialize Amazon EBS
+    #   volumes][1] in the *Amazon EBS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html
+    #   @return [Integer]
     #
     # @!attribute [rw] iops
     #   The number of I/O operations per second (IOPS). For `gp3`, `io1`,
@@ -12478,6 +13056,7 @@ module Aws::ECS
       :volume_type,
       :size_in_gi_b,
       :snapshot_id,
+      :volume_initialization_rate,
       :iops,
       :throughput,
       :tag_specifications,
@@ -13257,6 +13836,8 @@ module Aws::ECS
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that your service runs on. If you do not specify a cluster, the
     #   default cluster is assumed.
+    #
+    #   You can't change the cluster name.
     #   @return [String]
     #
     # @!attribute [rw] service
@@ -13278,44 +13859,42 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] capacity_provider_strategy
-    #   The capacity provider strategy to update the service to use.
+    #   The details of a capacity provider strategy. You can set a capacity
+    #   provider when you create a cluster, run a task, or update a service.
     #
-    #   if the service uses the default capacity provider strategy for the
-    #   cluster, the service can be updated to use one or more capacity
-    #   providers as opposed to the default capacity provider strategy.
-    #   However, when a service is using a capacity provider strategy
-    #   that's not the default capacity provider strategy, the service
-    #   can't be updated to use the cluster's default capacity provider
-    #   strategy.
+    #   When you use Fargate, the capacity providers are `FARGATE` or
+    #   `FARGATE_SPOT`.
     #
-    #   A capacity provider strategy consists of one or more capacity
-    #   providers along with the `base` and `weight` to assign to them. A
-    #   capacity provider must be associated with the cluster to be used in
-    #   a capacity provider strategy. The [PutClusterCapacityProviders][1]
-    #   API is used to associate a capacity provider with a cluster. Only
-    #   capacity providers with an `ACTIVE` or `UPDATING` status can be
-    #   used.
+    #   When you use Amazon EC2, the capacity providers are Auto Scaling
+    #   groups.
     #
-    #   If specifying a capacity provider that uses an Auto Scaling group,
-    #   the capacity provider must already be created. New capacity
-    #   providers can be created with the [CreateClusterCapacityProvider][2]
-    #   API operation.
+    #   You can change capacity providers for rolling deployments and
+    #   blue/green deployments.
     #
-    #   To use a Fargate capacity provider, specify either the `FARGATE` or
-    #   `FARGATE_SPOT` capacity providers. The Fargate capacity providers
-    #   are available to all accounts and only need to be associated with a
-    #   cluster to be used.
+    #   The following list provides the valid transitions:
     #
-    #   The [PutClusterCapacityProviders][1]API operation is used to update
-    #   the list of available capacity providers for a cluster after the
-    #   cluster is created.
+    #   * Update the Fargate launch type to an Auto Scaling group capacity
+    #     provider.
     #
+    #   * Update the Amazon EC2 launch type to a Fargate capacity provider.
     #
+    #   * Update the Fargate capacity provider to an Auto Scaling group
+    #     capacity provider.
     #
+    #   * Update the Amazon EC2 capacity provider to a Fargate capacity
+    #     provider.
+    #
+    #   * Update the Auto Scaling group or Fargate capacity provider back to
+    #     the launch type.
+    #
+    #     Pass an empty list in the `capacityProviderStrategy` parameter.
+    #
+    #   For information about Amazon Web Services CDK considerations, see
+    #   [Amazon Web Services CDK considerations][1].
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
-    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateClusterCapacityProvider.html
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service-parameters.html
     #   @return [Array<Types::CapacityProviderStrategyItem>]
     #
     # @!attribute [rw] deployment_configuration
@@ -13402,6 +13981,10 @@ module Aws::ECS
     #   and stopping them before they have time to come up.
     #   @return [Integer]
     #
+    # @!attribute [rw] deployment_controller
+    #   The deployment controller to use for the service.
+    #   @return [Types::DeploymentController]
+    #
     # @!attribute [rw] enable_execute_command
     #   If `true`, this enables execute command functionality on all task
     #   containers.
@@ -13427,6 +14010,10 @@ module Aws::ECS
     #   @return [Boolean]
     #
     # @!attribute [rw] load_balancers
+    #   <note markdown="1"> You must have a service-linked role when you update this property
+    #
+    #    </note>
+    #
     #   A list of Elastic Load Balancing load balancer objects. It contains
     #   the load balancer name, the container name, and the container port
     #   to access from the load balancer. The container name is as it
@@ -13475,8 +14062,15 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] service_registries
+    #   <note markdown="1"> You must have a service-linked role when you update this property.
+    #
+    #    For more information about the role see the `CreateService` request
+    #   parameter [ `role` ][1].
+    #
+    #    </note>
+    #
     #   The details for the service discovery registries to assign to this
-    #   service. For more information, see [Service Discovery][1].
+    #   service. For more information, see [Service Discovery][2].
     #
     #   When you add, update, or remove the service registries
     #   configuration, Amazon ECS starts new tasks with the updated service
@@ -13488,7 +14082,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html#ECS-CreateService-request-role
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
     #   @return [Array<Types::ServiceRegistry>]
     #
     # @!attribute [rw] service_connect_configuration
@@ -13545,6 +14140,7 @@ module Aws::ECS
       :platform_version,
       :force_new_deployment,
       :health_check_grace_period_seconds,
+      :deployment_controller,
       :enable_execute_command,
       :enable_ecs_managed_tags,
       :load_balancers,
@@ -13688,7 +14284,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://github.com/aws/amazon-ecs-agent/commits/master
+    #   [1]: https://github.com/aws/amazon-ecs-agent
     #   @return [String]
     #
     # @!attribute [rw] docker_version

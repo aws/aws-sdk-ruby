@@ -63,6 +63,11 @@ module Aws::CloudWatch
     class ConcurrentModificationException < Aws::EmptyStructure
     end
 
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class DashboardEntry
       attr_accessor dashboard_name: ::String
       attr_accessor dashboard_arn: ::String
@@ -388,6 +393,7 @@ module Aws::CloudWatch
       attr_accessor schema: ::String
       attr_accessor definition: ::String
       attr_accessor managed_rule: bool
+      attr_accessor apply_on_transformed_logs: bool
       SENSITIVE: []
     end
 
@@ -725,6 +731,7 @@ module Aws::CloudWatch
       attr_accessor rule_state: ::String
       attr_accessor rule_definition: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor apply_on_transformed_logs: bool
       SENSITIVE: []
     end
 

@@ -1,0 +1,21 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "GetCloudExadataInfrastructure_ValidationException",
+    "operationName" : "GetCloudExadataInfrastructure",
+    "input" : {
+      "cloudExadataInfrastructureId" : "exa-does-not-exist"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ValidationException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

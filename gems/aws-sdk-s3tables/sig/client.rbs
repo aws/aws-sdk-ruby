@@ -213,11 +213,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#get_table-instance_method
       def get_table: (
-                       table_bucket_arn: ::String,
-                       namespace: ::String,
-                       name: ::String
+                       ?table_bucket_arn: ::String,
+                       ?namespace: ::String,
+                       ?name: ::String,
+                       ?table_arn: ::String
                      ) -> _GetTableResponseSuccess
-                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableResponseSuccess
 
       interface _GetTableBucketResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTableBucketResponse]
@@ -226,6 +227,7 @@ module Aws
         def owner_account_id: () -> ::String
         def created_at: () -> ::Time
         def table_bucket_id: () -> ::String
+        def type: () -> ("customer" | "aws")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#get_table_bucket-instance_method
       def get_table_bucket: (
@@ -351,7 +353,8 @@ module Aws
       def list_table_buckets: (
                                 ?prefix: ::String,
                                 ?continuation_token: ::String,
-                                ?max_buckets: ::Integer
+                                ?max_buckets: ::Integer,
+                                ?type: ("customer" | "aws")
                               ) -> _ListTableBucketsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTableBucketsResponseSuccess
 
@@ -413,7 +416,8 @@ module Aws
                                                    status: ("enabled" | "disabled")?,
                                                    settings: {
                                                      iceberg_compaction: {
-                                                       target_file_size_mb: ::Integer?
+                                                       target_file_size_mb: ::Integer?,
+                                                       strategy: ("auto" | "binpack" | "sort" | "z-order")?
                                                      }?,
                                                      iceberg_snapshot_management: {
                                                        min_snapshots_to_keep: ::Integer?,

@@ -4,62 +4,70 @@ module Aws
   module Plugins
     # @api private
     class EndpointPattern < Seahorse::Client::Plugin
-
-      option(:disable_host_prefix_injection,
+      option(
+        :disable_host_prefix_injection,
         default: false,
         doc_type: 'Boolean',
-        docstring: <<-DOCS
-Set to true to disable SDK automatically adding host prefix
-to default service endpoint when available.
-        DOCS
-      )
+        docstring: 'When `true`, the SDK will not prepend the modeled host prefix to the endpoint.'
+      ) do |cfg|
+        resolve_disable_host_prefix_injection(cfg)
+      end
 
-      def add_handlers(handlers, config)
+      def add_handlers(handlers, _config)
         handlers.add(Handler, priority: 10)
       end
 
-      class Handler < Seahorse::Client::Handler
+      class << self
+        private
 
+        def resolve_disable_host_prefix_injection(cfg)
+          value = ENV['AWS_DISABLE_HOST_PREFIX_INJECTION'] ||
+                  Aws.shared_config.disable_host_prefix_injection(profile: cfg.profile) ||
+                  'false'
+          value = Aws::Util.str_2_bool(value)
+          unless [true, false].include?(value)
+            raise ArgumentError,
+                  'Must provide either `true` or `false` for '\
+                    'disable_host_prefix_injection profile option or for '\
+                    'ENV[\'AWS_DISABLE_HOST_PREFIX_INJECTION\']'
+          end
+          value
+        end
+      end
+
+      # @api private
+      class Handler < Seahorse::Client::Handler
         def call(context)
-          if !context.config.disable_host_prefix_injection
+          unless context.config.disable_host_prefix_injection
             endpoint_trait = context.operation.endpoint_pattern
-            if endpoint_trait && !endpoint_trait.empty?
-              _apply_endpoint_trait(context, endpoint_trait)
-            end
+            apply_endpoint_trait(context, endpoint_trait) if endpoint_trait && !endpoint_trait.empty?
           end
           @handler.call(context)
         end
 
         private
 
-        def _apply_endpoint_trait(context, trait)
-          # currently only support host pattern
-          ori_host = context.http_request.endpoint.host
-          if pattern = trait['hostPrefix']
-            host_prefix = pattern.gsub(/\{.+?\}/) do |label|
-              label = label.delete("{}")
-              _replace_label_value(
-                ori_host, label, context.operation.input, context.params)
-            end
-            context.http_request.endpoint.host = host_prefix + context.http_request.endpoint.host
+        def apply_endpoint_trait(context, trait)
+          pattern = trait['hostPrefix']
+          return unless pattern
+
+          host_prefix = pattern.gsub(/\{.+?}/) do |label|
+            label = label.delete('{}')
+            replace_label_value(label, context.operation.input, context.params)
           end
+          context.http_request.endpoint.host = host_prefix + context.http_request.endpoint.host
         end
 
-        def _replace_label_value(ori, label, input_ref, params)
+        def replace_label_value(label, input_ref, params)
           name = nil
           input_ref.shape.members.each do |m_name, ref|
-            if ref['hostLabel'] && ref['hostLabelName'] == label
-              name = m_name
-            end
+            name = m_name if ref['hostLabel'] && ref['hostLabelName'] == label
           end
-          if name.nil? || params[name].nil?
-            raise Errors::MissingEndpointHostLabelValue.new(name)
-          end
+          raise Errors::MissingEndpointHostLabelValue, name if name.nil? || params[name].nil?
+
           params[name]
         end
-
       end
-
     end
   end
 end

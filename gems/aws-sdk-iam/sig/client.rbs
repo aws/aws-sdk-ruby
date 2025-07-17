@@ -292,7 +292,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#create_service_specific_credential-instance_method
       def create_service_specific_credential: (
                                                 user_name: ::String,
-                                                service_name: ::String
+                                                service_name: ::String,
+                                                ?credential_age_days: ::Integer
                                               ) -> _CreateServiceSpecificCredentialResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceSpecificCredentialResponseSuccess
 
@@ -1316,11 +1317,16 @@ module Aws
       interface _ListServiceSpecificCredentialsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceSpecificCredentialsResponse]
         def service_specific_credentials: () -> ::Array[Types::ServiceSpecificCredentialMetadata]
+        def marker: () -> ::String
+        def is_truncated: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_service_specific_credentials-instance_method
       def list_service_specific_credentials: (
                                                ?user_name: ::String,
-                                               ?service_name: ::String
+                                               ?service_name: ::String,
+                                               ?all_users: bool,
+                                               ?marker: ::String,
+                                               ?max_items: ::Integer
                                              ) -> _ListServiceSpecificCredentialsResponseSuccess
                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceSpecificCredentialsResponseSuccess
 
@@ -1699,7 +1705,7 @@ module Aws
       def update_access_key: (
                                ?user_name: ::String,
                                access_key_id: ::String,
-                               status: ("Active" | "Inactive")
+                               status: ("Active" | "Inactive" | "Expired")
                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -1787,7 +1793,7 @@ module Aws
       def update_ssh_public_key: (
                                    user_name: ::String,
                                    ssh_public_key_id: ::String,
-                                   status: ("Active" | "Inactive")
+                                   status: ("Active" | "Inactive" | "Expired")
                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -1803,7 +1809,7 @@ module Aws
       def update_service_specific_credential: (
                                                 ?user_name: ::String,
                                                 service_specific_credential_id: ::String,
-                                                status: ("Active" | "Inactive")
+                                                status: ("Active" | "Inactive" | "Expired")
                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -1811,7 +1817,7 @@ module Aws
       def update_signing_certificate: (
                                         ?user_name: ::String,
                                         certificate_id: ::String,
-                                        status: ("Active" | "Inactive")
+                                        status: ("Active" | "Inactive" | "Expired")
                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 

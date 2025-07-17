@@ -146,7 +146,7 @@ module Aws::ConnectCases
     #   @return [String]
     #
     # @!attribute [rw] user
-    #   Represents the identity of the person who performed the action.
+    #   Represents the entity that performed the action.
     #   @return [Types::UserUnion]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/AuditEventPerformedBy AWS API Documentation
@@ -661,7 +661,7 @@ module Aws::ConnectCases
     #   @return [Array<Types::FieldValue>]
     #
     # @!attribute [rw] performed_by
-    #   Represents the identity of the person who performed the action.
+    #   Represents the entity that performed the action.
     #   @return [Types::UserUnion]
     #
     # @!attribute [rw] template_id
@@ -975,6 +975,27 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
+    # @!attribute [rw] case_id
+    #   A unique identifier of the case.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   A unique identifier of the Cases domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteCaseRequest AWS API Documentation
+    #
+    class DeleteCaseRequest < Struct.new(
+      :case_id,
+      :domain_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteCaseResponse AWS API Documentation
+    #
+    class DeleteCaseResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] case_rule_id
     #   Unique identifier of a case rule.
     #   @return [String]
@@ -1053,6 +1074,32 @@ module Aws::ConnectCases
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteLayoutResponse AWS API Documentation
     #
     class DeleteLayoutResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] case_id
+    #   A unique identifier of the case.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   A unique identifier of the Cases domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] related_item_id
+    #   A unique identifier of a related item.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteRelatedItemRequest AWS API Documentation
+    #
+    class DeleteRelatedItemRequest < Struct.new(
+      :case_id,
+      :domain_id,
+      :related_item_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteRelatedItemResponse AWS API Documentation
+    #
+    class DeleteRelatedItemResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] domain_id
     #   The unique identifier of the Cases domain.
@@ -3176,7 +3223,7 @@ module Aws::ConnectCases
     #   @return [Array<Types::FieldValue>]
     #
     # @!attribute [rw] performed_by
-    #   Represents the identity of the person who performed the action.
+    #   Represents the entity that performed the action.
     #   @return [Types::UserUnion]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/UpdateCaseRequest AWS API Documentation
@@ -3350,11 +3397,15 @@ module Aws::ConnectCases
     #
     class UpdateTemplateResponse < Aws::EmptyStructure; end
 
-    # Represents the identity of the person who performed the action.
+    # Represents the entity that performed the action.
     #
     # @note UserUnion is a union - when making an API calls you must set exactly one of the members.
     #
     # @note UserUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of UserUnion corresponding to the set member.
+    #
+    # @!attribute [rw] custom_entity
+    #   Any provided entity.
+    #   @return [String]
     #
     # @!attribute [rw] user_arn
     #   Represents the Amazon Connect ARN of the user.
@@ -3363,12 +3414,14 @@ module Aws::ConnectCases
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/UserUnion AWS API Documentation
     #
     class UserUnion < Struct.new(
+      :custom_entity,
       :user_arn,
       :unknown)
-      SENSITIVE = []
+      SENSITIVE = [:custom_entity]
       include Aws::Structure
       include Aws::Structure::Union
 
+      class CustomEntity < UserUnion; end
       class UserArn < UserUnion; end
       class Unknown < UserUnion; end
     end

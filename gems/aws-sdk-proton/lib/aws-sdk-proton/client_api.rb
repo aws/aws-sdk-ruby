@@ -458,7 +458,7 @@ module Aws::Proton
     CountsSummary.add_member(:services, Shapes::ShapeRef.new(shape: ResourceCountsSummary, location_name: "services"))
     CountsSummary.struct_class = Types::CountsSummary
 
-    CreateComponentInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateComponentInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateComponentInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateComponentInput.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "environmentName"))
     CreateComponentInput.add_member(:manifest, Shapes::ShapeRef.new(shape: TemplateManifestContents, required: true, location_name: "manifest"))
@@ -473,7 +473,7 @@ module Aws::Proton
     CreateComponentOutput.add_member(:component, Shapes::ShapeRef.new(shape: Component, required: true, location_name: "component"))
     CreateComponentOutput.struct_class = Types::CreateComponentOutput
 
-    CreateEnvironmentAccountConnectionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateEnvironmentAccountConnectionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateEnvironmentAccountConnectionInput.add_member(:codebuild_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "codebuildRoleArn"))
     CreateEnvironmentAccountConnectionInput.add_member(:component_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "componentRoleArn"))
     CreateEnvironmentAccountConnectionInput.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "environmentName"))
@@ -513,7 +513,7 @@ module Aws::Proton
     CreateEnvironmentTemplateOutput.add_member(:environment_template, Shapes::ShapeRef.new(shape: EnvironmentTemplate, required: true, location_name: "environmentTemplate"))
     CreateEnvironmentTemplateOutput.struct_class = Types::CreateEnvironmentTemplateOutput
 
-    CreateEnvironmentTemplateVersionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateEnvironmentTemplateVersionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateEnvironmentTemplateVersionInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateEnvironmentTemplateVersionInput.add_member(:major_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, location_name: "majorVersion"))
     CreateEnvironmentTemplateVersionInput.add_member(:source, Shapes::ShapeRef.new(shape: TemplateVersionSourceInput, required: true, location_name: "source"))
@@ -546,7 +546,7 @@ module Aws::Proton
     CreateServiceInput.add_member(:template_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "templateName"))
     CreateServiceInput.struct_class = Types::CreateServiceInput
 
-    CreateServiceInstanceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateServiceInstanceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateServiceInstanceInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     CreateServiceInstanceInput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceName"))
     CreateServiceInstanceInput.add_member(:spec, Shapes::ShapeRef.new(shape: SpecContents, required: true, location_name: "spec"))
@@ -582,7 +582,7 @@ module Aws::Proton
     CreateServiceTemplateOutput.add_member(:service_template, Shapes::ShapeRef.new(shape: ServiceTemplate, required: true, location_name: "serviceTemplate"))
     CreateServiceTemplateOutput.struct_class = Types::CreateServiceTemplateOutput
 
-    CreateServiceTemplateVersionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateServiceTemplateVersionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateServiceTemplateVersionInput.add_member(:compatible_environment_templates, Shapes::ShapeRef.new(shape: CompatibleEnvironmentTemplateInputList, required: true, location_name: "compatibleEnvironmentTemplates"))
     CreateServiceTemplateVersionInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateServiceTemplateVersionInput.add_member(:major_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, location_name: "majorVersion"))
@@ -1549,7 +1549,7 @@ module Aws::Proton
     UpdateAccountSettingsOutput.add_member(:account_settings, Shapes::ShapeRef.new(shape: AccountSettings, required: true, location_name: "accountSettings"))
     UpdateAccountSettingsOutput.struct_class = Types::UpdateAccountSettingsOutput
 
-    UpdateComponentInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateComponentInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateComponentInput.add_member(:deployment_type, Shapes::ShapeRef.new(shape: ComponentDeploymentUpdateType, required: true, location_name: "deploymentType"))
     UpdateComponentInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateComponentInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
@@ -1610,7 +1610,7 @@ module Aws::Proton
     UpdateServiceInput.add_member(:spec, Shapes::ShapeRef.new(shape: SpecContents, location_name: "spec"))
     UpdateServiceInput.struct_class = Types::UpdateServiceInput
 
-    UpdateServiceInstanceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateServiceInstanceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateServiceInstanceInput.add_member(:deployment_type, Shapes::ShapeRef.new(shape: DeploymentUpdateType, required: true, location_name: "deploymentType"))
     UpdateServiceInstanceInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     UpdateServiceInstanceInput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceName"))

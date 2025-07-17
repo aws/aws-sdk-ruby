@@ -340,11 +340,21 @@ module Aws::CleanRoomsML
     #   want to cancel.
     #   @return [String]
     #
+    # @!attribute [rw] version_identifier
+    #   The version identifier of the trained model to cancel. This
+    #   parameter allows you to specify which version of the trained model
+    #   you want to cancel when multiple versions exist.
+    #
+    #   If `versionIdentifier` is not specified, the base model will be
+    #   cancelled.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CancelTrainedModelRequest AWS API Documentation
     #
     class CancelTrainedModelRequest < Struct.new(
       :membership_identifier,
-      :trained_model_arn)
+      :trained_model_arn,
+      :version_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -515,6 +525,11 @@ module Aws::CleanRoomsML
     #   exported.
     #   @return [String]
     #
+    # @!attribute [rw] trained_model_version_identifier
+    #   The version identifier of the trained model that was exported in
+    #   this job.
+    #   @return [String]
+    #
     # @!attribute [rw] membership_identifier
     #   The membership ID of the member that created the trained model
     #   export job.
@@ -537,6 +552,7 @@ module Aws::CleanRoomsML
       :description,
       :creator_account_id,
       :trained_model_arn,
+      :trained_model_version_identifier,
       :membership_identifier,
       :collaboration_identifier)
       SENSITIVE = []
@@ -563,6 +579,11 @@ module Aws::CleanRoomsML
     # @!attribute [rw] trained_model_arn
     #   The Amazon Resource Name (ARN) of the trained model that is used for
     #   the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] trained_model_version_identifier
+    #   The version identifier of the trained model that was used for
+    #   inference in this job.
     #   @return [String]
     #
     # @!attribute [rw] collaboration_identifier
@@ -623,6 +644,7 @@ module Aws::CleanRoomsML
       :configured_model_algorithm_association_arn,
       :membership_identifier,
       :trained_model_arn,
+      :trained_model_version_identifier,
       :collaboration_identifier,
       :status,
       :output_configuration,
@@ -657,6 +679,15 @@ module Aws::CleanRoomsML
     #   The name of the trained model.
     #   @return [String]
     #
+    # @!attribute [rw] version_identifier
+    #   The version identifier of this trained model version.
+    #   @return [String]
+    #
+    # @!attribute [rw] incremental_training_data_channels
+    #   Information about the incremental training data channels used to
+    #   create this version of the trained model.
+    #   @return [Array<Types::IncrementalTrainingDataChannelOutput>]
+    #
     # @!attribute [rw] description
     #   The description of the trained model.
     #   @return [String]
@@ -690,6 +721,8 @@ module Aws::CleanRoomsML
       :update_time,
       :trained_model_arn,
       :name,
+      :version_identifier,
+      :incremental_training_data_channels,
       :description,
       :membership_identifier,
       :collaboration_identifier,
@@ -926,10 +959,10 @@ module Aws::CleanRoomsML
     #
     # @!attribute [rw] image_uri
     #   The registry path of the docker image that contains the algorithm.
-    #   Clean Rooms ML supports both `registry/repository[:tag]` and
-    #   `registry/repositry[@digest]` image path formats. For more
-    #   information about using images in Clean Rooms ML, see the [Sagemaker
-    #   API reference][1].
+    #   Clean Rooms ML currently only supports the
+    #   `registry/repository[:tag]` image path format. For more information
+    #   about using images in Clean Rooms ML, see the [Sagemaker API
+    #   reference][1].
     #
     #
     #
@@ -1475,10 +1508,43 @@ module Aws::CleanRoomsML
     #   The criteria that is used to stop model training.
     #   @return [Types::StoppingCondition]
     #
+    # @!attribute [rw] incremental_training_data_channels
+    #   Specifies the incremental training data channels for the trained
+    #   model.
+    #
+    #   Incremental training allows you to create a new trained model with
+    #   updates without retraining from scratch. You can specify up to one
+    #   incremental training data channel that references a previously
+    #   trained model and its version.
+    #
+    #   Limit: Maximum of 20 channels total (including both
+    #   `incrementalTrainingDataChannels` and `dataChannels`).
+    #   @return [Array<Types::IncrementalTrainingDataChannel>]
+    #
     # @!attribute [rw] data_channels
     #   Defines the data channels that are used as input for the trained
     #   model request.
+    #
+    #   Limit: Maximum of 20 channels total (including both `dataChannels`
+    #   and `incrementalTrainingDataChannels`).
     #   @return [Array<Types::ModelTrainingDataChannel>]
+    #
+    # @!attribute [rw] training_input_mode
+    #   The input mode for accessing the training data. This parameter
+    #   determines how the training data is made available to the training
+    #   algorithm. Valid values are:
+    #
+    #   * `File` - The training data is downloaded to the training instance
+    #     and made available as files.
+    #
+    #   * `FastFile` - The training data is streamed directly from Amazon S3
+    #     to the training algorithm, providing faster access for large
+    #     datasets.
+    #
+    #   * `Pipe` - The training data is streamed to the training algorithm
+    #     using named pipes, which can improve performance for certain
+    #     algorithms.
+    #   @return [String]
     #
     # @!attribute [rw] description
     #   The description of the trained model.
@@ -1533,7 +1599,9 @@ module Aws::CleanRoomsML
       :environment,
       :resource_config,
       :stopping_condition,
+      :incremental_training_data_channels,
       :data_channels,
+      :training_input_mode,
       :description,
       :kms_key_arn,
       :tags)
@@ -1545,10 +1613,21 @@ module Aws::CleanRoomsML
     #   The Amazon Resource Name (ARN) of the trained model.
     #   @return [String]
     #
+    # @!attribute [rw] version_identifier
+    #   The unique version identifier assigned to the newly created trained
+    #   model. This identifier can be used to reference this specific
+    #   version of the trained model in subsequent operations such as
+    #   inference jobs or incremental training.
+    #
+    #   The initial version identifier for the base version of the trained
+    #   model is "NULL".
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CreateTrainedModelResponse AWS API Documentation
     #
     class CreateTrainedModelResponse < Struct.new(
-      :trained_model_arn)
+      :trained_model_arn,
+      :version_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1817,11 +1896,18 @@ module Aws::CleanRoomsML
     #   output.
     #   @return [String]
     #
+    # @!attribute [rw] version_identifier
+    #   The version identifier of the trained model to delete. If not
+    #   specified, the operation will delete the base version of the trained
+    #   model. When specified, only the particular version will be deleted.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/DeleteTrainedModelOutputRequest AWS API Documentation
     #
     class DeleteTrainedModelOutputRequest < Struct.new(
       :trained_model_arn,
-      :membership_identifier)
+      :membership_identifier,
+      :version_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2231,11 +2317,18 @@ module Aws::CleanRoomsML
     #   to return information about.
     #   @return [String]
     #
+    # @!attribute [rw] version_identifier
+    #   The version identifier of the trained model to retrieve. If not
+    #   specified, the operation returns information about the latest
+    #   version of the trained model.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetCollaborationTrainedModelRequest AWS API Documentation
     #
     class GetCollaborationTrainedModelRequest < Struct.new(
       :trained_model_arn,
-      :collaboration_identifier)
+      :collaboration_identifier,
+      :version_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2252,6 +2345,19 @@ module Aws::CleanRoomsML
     # @!attribute [rw] trained_model_arn
     #   The Amazon Resource Name (ARN) of the trained model.
     #   @return [String]
+    #
+    # @!attribute [rw] version_identifier
+    #   The version identifier of the trained model. This unique identifier
+    #   distinguishes this version from other versions of the same trained
+    #   model.
+    #   @return [String]
+    #
+    # @!attribute [rw] incremental_training_data_channels
+    #   Information about the incremental training data channels used to
+    #   create this version of the trained model. This includes details
+    #   about the base model that was used for incremental training and the
+    #   channel configuration.
+    #   @return [Array<Types::IncrementalTrainingDataChannelOutput>]
     #
     # @!attribute [rw] name
     #   The name of the trained model.
@@ -2277,6 +2383,12 @@ module Aws::CleanRoomsML
     # @!attribute [rw] resource_config
     #   The EC2 resource configuration that was used to train this model.
     #   @return [Types::ResourceConfig]
+    #
+    # @!attribute [rw] training_input_mode
+    #   The input mode that was used for accessing the training data when
+    #   this trained model was created. This indicates how the training data
+    #   was made available to the training algorithm.
+    #   @return [String]
     #
     # @!attribute [rw] stopping_condition
     #   The stopping condition that determined when model training ended.
@@ -2320,12 +2432,15 @@ module Aws::CleanRoomsML
       :membership_identifier,
       :collaboration_identifier,
       :trained_model_arn,
+      :version_identifier,
+      :incremental_training_data_channels,
       :name,
       :description,
       :status,
       :status_details,
       :configured_model_algorithm_association_arn,
       :resource_config,
+      :training_input_mode,
       :stopping_condition,
       :metrics_status,
       :metrics_status_details,
@@ -2928,6 +3043,12 @@ module Aws::CleanRoomsML
     #   for the trained model inference job.
     #   @return [String]
     #
+    # @!attribute [rw] trained_model_version_identifier
+    #   The version identifier of the trained model used for this inference
+    #   job. This identifies the specific version of the trained model that
+    #   was used to generate the inference results.
+    #   @return [String]
+    #
     # @!attribute [rw] resource_config
     #   The resource configuration information for the trained model
     #   inference job.
@@ -3033,6 +3154,7 @@ module Aws::CleanRoomsML
       :name,
       :status,
       :trained_model_arn,
+      :trained_model_version_identifier,
       :resource_config,
       :output_configuration,
       :membership_identifier,
@@ -3062,11 +3184,18 @@ module Aws::CleanRoomsML
     #   you are interested in.
     #   @return [String]
     #
+    # @!attribute [rw] version_identifier
+    #   The version identifier of the trained model to retrieve. If not
+    #   specified, the operation returns information about the latest
+    #   version of the trained model.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetTrainedModelRequest AWS API Documentation
     #
     class GetTrainedModelRequest < Struct.new(
       :trained_model_arn,
-      :membership_identifier)
+      :membership_identifier,
+      :version_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3083,6 +3212,19 @@ module Aws::CleanRoomsML
     # @!attribute [rw] trained_model_arn
     #   The Amazon Resource Name (ARN) of the trained model.
     #   @return [String]
+    #
+    # @!attribute [rw] version_identifier
+    #   The version identifier of the trained model. This unique identifier
+    #   distinguishes this version from other versions of the same trained
+    #   model.
+    #   @return [String]
+    #
+    # @!attribute [rw] incremental_training_data_channels
+    #   Information about the incremental training data channels used to
+    #   create this version of the trained model. This includes details
+    #   about the base model that was used for incremental training and the
+    #   channel configuration.
+    #   @return [Array<Types::IncrementalTrainingDataChannelOutput>]
     #
     # @!attribute [rw] name
     #   The name of the trained model.
@@ -3109,6 +3251,12 @@ module Aws::CleanRoomsML
     #   The EC2 resource configuration that was used to create the trained
     #   model.
     #   @return [Types::ResourceConfig]
+    #
+    # @!attribute [rw] training_input_mode
+    #   The input mode that was used for accessing the training data when
+    #   this trained model was created. This indicates how the training data
+    #   was made available to the training algorithm.
+    #   @return [String]
     #
     # @!attribute [rw] stopping_condition
     #   The stopping condition that was used to terminate model training.
@@ -3199,12 +3347,15 @@ module Aws::CleanRoomsML
       :membership_identifier,
       :collaboration_identifier,
       :trained_model_arn,
+      :version_identifier,
+      :incremental_training_data_channels,
       :name,
       :description,
       :status,
       :status_details,
       :configured_model_algorithm_association_arn,
       :resource_config,
+      :training_input_mode,
       :stopping_condition,
       :metrics_status,
       :metrics_status_details,
@@ -3311,14 +3462,78 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
+    # Defines an incremental training data channel that references a
+    # previously trained model. Incremental training allows you to update an
+    # existing trained model with new data, building upon the knowledge from
+    # a base model rather than training from scratch. This can significantly
+    # reduce training time and computational costs while improving model
+    # performance with additional data.
+    #
+    # @!attribute [rw] trained_model_arn
+    #   The Amazon Resource Name (ARN) of the base trained model to use for
+    #   incremental training. This model serves as the starting point for
+    #   the incremental training process.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_identifier
+    #   The version identifier of the base trained model to use for
+    #   incremental training. If not specified, the latest version of the
+    #   trained model is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_name
+    #   The name of the incremental training data channel. This name is used
+    #   to identify the channel during the training process and must be
+    #   unique within the training job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/IncrementalTrainingDataChannel AWS API Documentation
+    #
+    class IncrementalTrainingDataChannel < Struct.new(
+      :trained_model_arn,
+      :version_identifier,
+      :channel_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an incremental training data channel that
+    # was used to create a trained model. This structure provides details
+    # about the base model and channel configuration used during incremental
+    # training.
+    #
+    # @!attribute [rw] channel_name
+    #   The name of the incremental training data channel that was used.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_identifier
+    #   The version identifier of the trained model that was used for
+    #   incremental training.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_name
+    #   The name of the base trained model that was used for incremental
+    #   training.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/IncrementalTrainingDataChannelOutput AWS API Documentation
+    #
+    class IncrementalTrainingDataChannelOutput < Struct.new(
+      :channel_name,
+      :version_identifier,
+      :model_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides configuration information for the inference container.
     #
     # @!attribute [rw] image_uri
     #   The registry path of the docker image that contains the inference
-    #   algorithm. Clean Rooms ML supports both `registry/repository[:tag]`
-    #   and `registry/repositry[@digest]` image path formats. For more
-    #   information about using images in Clean Rooms ML, see the [Sagemaker
-    #   API reference][1].
+    #   algorithm. Clean Rooms ML currently only supports the
+    #   `registry/repository[:tag]` image path format. For more information
+    #   about using images in Clean Rooms ML, see the [Sagemaker API
+    #   reference][1].
     #
     #
     #
@@ -3408,8 +3623,8 @@ module Aws::CleanRoomsML
     #   @return [Types::InputChannelDataSource]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the IAM role that Clean Rooms ML can assume to read the
-    #   data referred to in the `dataSource` field the input channel.
+    #   The Amazon Resource Name (ARN) of the role used to run the query
+    #   specified in the `dataSource` field of the input channel.
     #
     #   Passing a role across AWS accounts is not allowed. If you pass a
     #   role that isn't in your account, you get an `AccessDeniedException`
@@ -3446,6 +3661,20 @@ module Aws::CleanRoomsML
 
       class ProtectedQueryInputParameters < InputChannelDataSource; end
       class Unknown < InputChannelDataSource; end
+    end
+
+    # An internal service error occurred. Retry your request. If the problem
+    # persists, contact AWS Support.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/InternalServiceException AWS API Documentation
+    #
+    class InternalServiceException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # @!attribute [rw] next_token
@@ -3674,13 +3903,20 @@ module Aws::CleanRoomsML
     #   create the export jobs that you are interested in.
     #   @return [String]
     #
+    # @!attribute [rw] trained_model_version_identifier
+    #   The version identifier of the trained model to filter export jobs
+    #   by. When specified, only export jobs for this specific version of
+    #   the trained model are returned.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListCollaborationTrainedModelExportJobsRequest AWS API Documentation
     #
     class ListCollaborationTrainedModelExportJobsRequest < Struct.new(
       :next_token,
       :max_results,
       :collaboration_identifier,
-      :trained_model_arn)
+      :trained_model_arn,
+      :trained_model_version_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3722,13 +3958,20 @@ module Aws::CleanRoomsML
     #   create the trained model inference jobs that you are interested in.
     #   @return [String]
     #
+    # @!attribute [rw] trained_model_version_identifier
+    #   The version identifier of the trained model to filter inference jobs
+    #   by. When specified, only inference jobs that used this specific
+    #   version of the trained model are returned.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListCollaborationTrainedModelInferenceJobsRequest AWS API Documentation
     #
     class ListCollaborationTrainedModelInferenceJobsRequest < Struct.new(
       :next_token,
       :max_results,
       :collaboration_identifier,
-      :trained_model_arn)
+      :trained_model_arn,
+      :trained_model_version_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3986,13 +4229,20 @@ module Aws::CleanRoomsML
     #   create the trained model inference jobs that you are interested in.
     #   @return [String]
     #
+    # @!attribute [rw] trained_model_version_identifier
+    #   The version identifier of the trained model to filter inference jobs
+    #   by. When specified, only inference jobs that used this specific
+    #   version of the trained model are returned.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListTrainedModelInferenceJobsRequest AWS API Documentation
     #
     class ListTrainedModelInferenceJobsRequest < Struct.new(
       :next_token,
       :max_results,
       :membership_identifier,
-      :trained_model_arn)
+      :trained_model_arn,
+      :trained_model_version_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4010,6 +4260,67 @@ module Aws::CleanRoomsML
     class ListTrainedModelInferenceJobsResponse < Struct.new(
       :next_token,
       :trained_model_inference_jobs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous `ListTrainedModelVersions`
+    #   request. Use this token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of trained model versions to return in a single
+    #   page. The default value is 10, and the maximum value is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership identifier for the collaboration that contains the
+    #   trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model for which to
+    #   list versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Filter the results to only include trained model versions with the
+    #   specified status. Valid values include `CREATE_PENDING`,
+    #   `CREATE_IN_PROGRESS`, `ACTIVE`, `CREATE_FAILED`, and others.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListTrainedModelVersionsRequest AWS API Documentation
+    #
+    class ListTrainedModelVersionsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :membership_identifier,
+      :trained_model_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token to use in a subsequent
+    #   `ListTrainedModelVersions` request to retrieve the next page of
+    #   results. This value is null when there are no more results to
+    #   return.
+    #   @return [String]
+    #
+    # @!attribute [rw] trained_models
+    #   A list of trained model versions that match the specified criteria.
+    #   Each entry contains summary information about a trained model
+    #   version, including its version identifier, status, and creation
+    #   details.
+    #   @return [Array<Types::TrainedModelSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListTrainedModelVersionsResponse AWS API Documentation
+    #
+    class ListTrainedModelVersionsResponse < Struct.new(
+      :next_token,
+      :trained_models)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4257,11 +4568,27 @@ module Aws::CleanRoomsML
     #   The name of the training data channel.
     #   @return [String]
     #
+    # @!attribute [rw] s3_data_distribution_type
+    #   Specifies how the training data stored in Amazon S3 should be
+    #   distributed to training instances. This parameter controls the data
+    #   distribution strategy for the training job:
+    #
+    #   * `FullyReplicated` - The entire dataset is replicated on each
+    #     training instance. This is suitable for smaller datasets and
+    #     algorithms that require access to the complete dataset.
+    #
+    #   * `ShardedByS3Key` - The dataset is distributed across training
+    #     instances based on Amazon S3 key names. This is suitable for
+    #     larger datasets and distributed training scenarios where each
+    #     instance processes a subset of the data.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ModelTrainingDataChannel AWS API Documentation
     #
     class ModelTrainingDataChannel < Struct.new(
       :ml_input_channel_arn,
-      :channel_name)
+      :channel_name,
+      :s3_data_distribution_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4494,10 +4821,20 @@ module Aws::CleanRoomsML
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] quota_name
+    #   The name of the service quota limit that was exceeded
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_value
+    #   The current limit on the service quota that was exceeded
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ServiceQuotaExceededException AWS API Documentation
     #
     class ServiceQuotaExceededException < Struct.new(
-      :message)
+      :message,
+      :quota_name,
+      :quota_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4626,6 +4963,12 @@ module Aws::CleanRoomsML
     #   export.
     #   @return [String]
     #
+    # @!attribute [rw] trained_model_version_identifier
+    #   The version identifier of the trained model to export. This
+    #   specifies which version of the trained model should be exported to
+    #   the specified destination.
+    #   @return [String]
+    #
     # @!attribute [rw] membership_identifier
     #   The membership ID of the member that is receiving the exported
     #   trained model artifacts.
@@ -4645,6 +4988,7 @@ module Aws::CleanRoomsML
     class StartTrainedModelExportJobRequest < Struct.new(
       :name,
       :trained_model_arn,
+      :trained_model_version_identifier,
       :membership_identifier,
       :output_configuration,
       :description)
@@ -4664,6 +5008,12 @@ module Aws::CleanRoomsML
     # @!attribute [rw] trained_model_arn
     #   The Amazon Resource Name (ARN) of the trained model that is used for
     #   this trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] trained_model_version_identifier
+    #   The version identifier of the trained model to use for inference.
+    #   This specifies which version of the trained model should be used to
+    #   generate predictions on the input data.
     #   @return [String]
     #
     # @!attribute [rw] configured_model_algorithm_association_arn
@@ -4743,6 +5093,7 @@ module Aws::CleanRoomsML
       :membership_identifier,
       :name,
       :trained_model_arn,
+      :trained_model_version_identifier,
       :configured_model_algorithm_association_arn,
       :resource_config,
       :output_configuration,
@@ -4857,6 +5208,45 @@ module Aws::CleanRoomsML
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # The request was denied due to request throttling.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the maximum size limit for trained model artifacts. This
+    # configuration helps control storage costs and ensures that trained
+    # models don't exceed specified size constraints. The size limit
+    # applies to the total size of all artifacts produced by the training
+    # job.
+    #
+    # @!attribute [rw] unit
+    #   The unit of measurement for the maximum artifact size. Valid values
+    #   include common storage units such as bytes, kilobytes, megabytes,
+    #   gigabytes, and terabytes.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The numerical value for the maximum artifact size limit. This value
+    #   is interpreted according to the specified unit.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/TrainedModelArtifactMaxSize AWS API Documentation
+    #
+    class TrainedModelArtifactMaxSize < Struct.new(
+      :unit,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the output of the trained model export job.
     #
     # @!attribute [rw] members
@@ -4947,6 +5337,11 @@ module Aws::CleanRoomsML
     #   the trained model inference job.
     #   @return [String]
     #
+    # @!attribute [rw] trained_model_version_identifier
+    #   The version identifier of the trained model that was used for
+    #   inference in this job.
+    #   @return [String]
+    #
     # @!attribute [rw] collaboration_identifier
     #   The collaboration ID of the collaboration that contains the trained
     #   model inference job.
@@ -5001,6 +5396,7 @@ module Aws::CleanRoomsML
       :configured_model_algorithm_association_arn,
       :membership_identifier,
       :trained_model_arn,
+      :trained_model_version_identifier,
       :collaboration_identifier,
       :status,
       :output_configuration,
@@ -5071,6 +5467,15 @@ module Aws::CleanRoomsML
     #   The Amazon Resource Name (ARN) of the trained model.
     #   @return [String]
     #
+    # @!attribute [rw] version_identifier
+    #   The version identifier of this trained model version.
+    #   @return [String]
+    #
+    # @!attribute [rw] incremental_training_data_channels
+    #   Information about the incremental training data channels used to
+    #   create this version of the trained model.
+    #   @return [Array<Types::IncrementalTrainingDataChannelOutput>]
+    #
     # @!attribute [rw] name
     #   The name of the trained model.
     #   @return [String]
@@ -5103,6 +5508,8 @@ module Aws::CleanRoomsML
       :create_time,
       :update_time,
       :trained_model_arn,
+      :version_identifier,
+      :incremental_training_data_channels,
       :name,
       :description,
       :membership_identifier,
@@ -5123,11 +5530,18 @@ module Aws::CleanRoomsML
     #   The container for the metrics of the trained model.
     #   @return [Types::MetricsConfigurationPolicy]
     #
+    # @!attribute [rw] max_artifact_size
+    #   The maximum size limit for trained model artifacts as defined in the
+    #   configuration policy. This setting helps enforce consistent size
+    #   limits across trained models in the collaboration.
+    #   @return [Types::TrainedModelArtifactMaxSize]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/TrainedModelsConfigurationPolicy AWS API Documentation
     #
     class TrainedModelsConfigurationPolicy < Struct.new(
       :container_logs,
-      :container_metrics)
+      :container_metrics,
+      :max_artifact_size)
       SENSITIVE = []
       include Aws::Structure
     end

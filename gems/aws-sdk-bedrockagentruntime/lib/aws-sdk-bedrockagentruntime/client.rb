@@ -202,8 +202,7 @@ module Aws::BedrockAgentRuntime
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -860,6 +859,116 @@ module Aws::BedrockAgentRuntime
       req.send_request(options)
     end
 
+    # Retrieves the flow definition snapshot used for a flow execution. The
+    # snapshot represents the flow metadata and definition as it existed at
+    # the time the execution was started. Note that even if the flow is
+    # edited after an execution starts, the snapshot connected to the
+    # execution remains unchanged.
+    #
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :execution_identifier
+    #   The unique identifier of the flow execution.
+    #
+    # @option params [required, String] :flow_alias_identifier
+    #   The unique identifier of the flow alias used for the flow execution.
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow.
+    #
+    # @return [Types::GetExecutionFlowSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetExecutionFlowSnapshotResponse#customer_encryption_key_arn #customer_encryption_key_arn} => String
+    #   * {Types::GetExecutionFlowSnapshotResponse#definition #definition} => String
+    #   * {Types::GetExecutionFlowSnapshotResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::GetExecutionFlowSnapshotResponse#flow_alias_identifier #flow_alias_identifier} => String
+    #   * {Types::GetExecutionFlowSnapshotResponse#flow_identifier #flow_identifier} => String
+    #   * {Types::GetExecutionFlowSnapshotResponse#flow_version #flow_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_execution_flow_snapshot({
+    #     execution_identifier: "FlowExecutionIdentifier", # required
+    #     flow_alias_identifier: "FlowAliasIdentifier", # required
+    #     flow_identifier: "FlowIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.customer_encryption_key_arn #=> String
+    #   resp.definition #=> String
+    #   resp.execution_role_arn #=> String
+    #   resp.flow_alias_identifier #=> String
+    #   resp.flow_identifier #=> String
+    #   resp.flow_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GetExecutionFlowSnapshot AWS API Documentation
+    #
+    # @overload get_execution_flow_snapshot(params = {})
+    # @param [Hash] params ({})
+    def get_execution_flow_snapshot(params = {}, options = {})
+      req = build_request(:get_execution_flow_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Retrieves details about a specific flow execution, including its
+    # status, start and end times, and any errors that occurred during
+    # execution.
+    #
+    # @option params [required, String] :execution_identifier
+    #   The unique identifier of the flow execution to retrieve.
+    #
+    # @option params [required, String] :flow_alias_identifier
+    #   The unique identifier of the flow alias used for the execution.
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow.
+    #
+    # @return [Types::GetFlowExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFlowExecutionResponse#ended_at #ended_at} => Time
+    #   * {Types::GetFlowExecutionResponse#errors #errors} => Array&lt;Types::FlowExecutionError&gt;
+    #   * {Types::GetFlowExecutionResponse#execution_arn #execution_arn} => String
+    #   * {Types::GetFlowExecutionResponse#flow_alias_identifier #flow_alias_identifier} => String
+    #   * {Types::GetFlowExecutionResponse#flow_identifier #flow_identifier} => String
+    #   * {Types::GetFlowExecutionResponse#flow_version #flow_version} => String
+    #   * {Types::GetFlowExecutionResponse#started_at #started_at} => Time
+    #   * {Types::GetFlowExecutionResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_flow_execution({
+    #     execution_identifier: "FlowExecutionIdentifier", # required
+    #     flow_alias_identifier: "FlowAliasIdentifier", # required
+    #     flow_identifier: "FlowIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ended_at #=> Time
+    #   resp.errors #=> Array
+    #   resp.errors[0].error #=> String, one of "ExecutionTimedOut"
+    #   resp.errors[0].message #=> String
+    #   resp.errors[0].node_name #=> String
+    #   resp.execution_arn #=> String
+    #   resp.flow_alias_identifier #=> String
+    #   resp.flow_identifier #=> String
+    #   resp.flow_version #=> String
+    #   resp.started_at #=> Time
+    #   resp.status #=> String, one of "Running", "Succeeded", "Failed", "TimedOut", "Aborted"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GetFlowExecution AWS API Documentation
+    #
+    # @overload get_flow_execution(params = {})
+    # @param [Hash] params ({})
+    def get_flow_execution(params = {}, options = {})
+      req = build_request(:get_flow_execution, params)
+      req.send_request(options)
+    end
+
     # Retrieves the details of a specific invocation step within an
     # invocation in a session. For more information about sessions, see
     # [Store and retrieve conversation history and context with Amazon
@@ -964,10 +1073,10 @@ module Aws::BedrockAgentRuntime
 
     # <note> </note>
     #
-    # Sends a prompt for the agent to process and respond to. Note the
+    #  Sends a prompt for the agent to process and respond to. Note the
     # following fields for the request:
     #
-    # * To continue the same conversation with an agent, use the same
+    #  * To continue the same conversation with an agent, use the same
     #   `sessionId` value in the request.
     #
     # * To activate trace enablement, turn `enableTrace` to `true`. Trace
@@ -982,13 +1091,13 @@ module Aws::BedrockAgentRuntime
     #   session or prompt or, if you configured an action group to return
     #   control, results from invocation of the action group.
     #
-    # The response contains both **chunk** and **trace** attributes.
+    #  The response contains both **chunk** and **trace** attributes.
     #
-    # The final response is returned in the `bytes` field of the `chunk`
+    #  The final response is returned in the `bytes` field of the `chunk`
     # object. The `InvokeAgent` returns one chunk for the entire
     # interaction.
     #
-    # * The `attribution` object contains citations for parts of the
+    #  * The `attribution` object contains citations for parts of the
     #   response.
     #
     # * If you set `enableTrace` to `true` in the request, you can trace the
@@ -1034,6 +1143,13 @@ module Aws::BedrockAgentRuntime
     #
     # @option params [String] :memory_id
     #   The unique identifier of the agent memory.
+    #
+    # @option params [Types::PromptCreationConfigurations] :prompt_creation_configurations
+    #   Specifies parameters that control how the service populates the agent
+    #   prompt for an `InvokeAgent` request. You can control which aspects of
+    #   previous invocations in the same agent session the service uses to
+    #   populate the agent prompt. This gives you more granular control over
+    #   the contextual history that is used to process the current request.
     #
     # @option params [required, String] :session_id
     #   The unique identifier of the session. Use the same value across
@@ -1290,6 +1406,10 @@ module Aws::BedrockAgentRuntime
     #     end_session: false,
     #     input_text: "InputText",
     #     memory_id: "MemoryId",
+    #     prompt_creation_configurations: {
+    #       exclude_previous_thinking_steps: false,
+    #       previous_conversation_turns_to_include: 1,
+    #     },
     #     session_id: "SessionId", # required
     #     session_state: {
     #       conversation_history: {
@@ -1603,7 +1723,15 @@ module Aws::BedrockAgentRuntime
     #   event.session_id #=> String
     #   event.trace.custom_orchestration_trace.event.text #=> String
     #   event.trace.custom_orchestration_trace.trace_id #=> String
+    #   event.trace.failure_trace.failure_code #=> Integer
     #   event.trace.failure_trace.failure_reason #=> String
+    #   event.trace.failure_trace.metadata.client_request_id #=> String
+    #   event.trace.failure_trace.metadata.end_time #=> Time
+    #   event.trace.failure_trace.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.failure_trace.metadata.start_time #=> Time
+    #   event.trace.failure_trace.metadata.total_time_ms #=> Integer
+    #   event.trace.failure_trace.metadata.usage.input_tokens #=> Integer
+    #   event.trace.failure_trace.metadata.usage.output_tokens #=> Integer
     #   event.trace.failure_trace.trace_id #=> String
     #   event.trace.guardrail_trace.action #=> String, one of "INTERVENED", "NONE"
     #   event.trace.guardrail_trace.input_assessments #=> Array
@@ -1631,6 +1759,13 @@ module Aws::BedrockAgentRuntime
     #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
     #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].match #=> String
     #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
+    #   event.trace.guardrail_trace.metadata.client_request_id #=> String
+    #   event.trace.guardrail_trace.metadata.end_time #=> Time
+    #   event.trace.guardrail_trace.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.guardrail_trace.metadata.start_time #=> Time
+    #   event.trace.guardrail_trace.metadata.total_time_ms #=> Integer
+    #   event.trace.guardrail_trace.metadata.usage.input_tokens #=> Integer
+    #   event.trace.guardrail_trace.metadata.usage.output_tokens #=> Integer
     #   event.trace.guardrail_trace.output_assessments #=> Array
     #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters #=> Array
     #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
@@ -1720,6 +1855,11 @@ module Aws::BedrockAgentRuntime
     #   event.trace.orchestration_trace.model_invocation_input.text #=> String
     #   event.trace.orchestration_trace.model_invocation_input.trace_id #=> String
     #   event.trace.orchestration_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.total_time_ms #=> Integer
     #   event.trace.orchestration_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
     #   event.trace.orchestration_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.orchestration_trace.model_invocation_output.raw_response.content #=> String
@@ -1727,9 +1867,23 @@ module Aws::BedrockAgentRuntime
     #   event.trace.orchestration_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
     #   event.trace.orchestration_trace.model_invocation_output.reasoning_content.redacted_content #=> String
     #   event.trace.orchestration_trace.model_invocation_output.trace_id #=> String
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.orchestration_trace.observation.action_group_invocation_output.text #=> String
     #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_alias_arn #=> String
     #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
     #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs #=> Array
     #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_group #=> String
@@ -1763,7 +1917,28 @@ module Aws::BedrockAgentRuntime
     #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
     #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.files #=> Array
     #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.files[0] #=> String
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.final_response.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.final_response.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
     #   event.trace.orchestration_trace.observation.final_response.text #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
     #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.byte_content #=> String
     #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row #=> Array
@@ -1801,6 +1976,11 @@ module Aws::BedrockAgentRuntime
     #   event.trace.post_processing_trace.model_invocation_input.text #=> String
     #   event.trace.post_processing_trace.model_invocation_input.trace_id #=> String
     #   event.trace.post_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
     #   event.trace.post_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
     #   event.trace.post_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.post_processing_trace.model_invocation_output.parsed_response.text #=> String
@@ -1822,6 +2002,11 @@ module Aws::BedrockAgentRuntime
     #   event.trace.pre_processing_trace.model_invocation_input.text #=> String
     #   event.trace.pre_processing_trace.model_invocation_input.trace_id #=> String
     #   event.trace.pre_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
     #   event.trace.pre_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
     #   event.trace.pre_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.pre_processing_trace.model_invocation_output.parsed_response.is_valid #=> Boolean
@@ -1894,13 +2079,32 @@ module Aws::BedrockAgentRuntime
     #   event.trace.routing_classifier_trace.model_invocation_input.text #=> String
     #   event.trace.routing_classifier_trace.model_invocation_input.trace_id #=> String
     #   event.trace.routing_classifier_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.total_time_ms #=> Integer
     #   event.trace.routing_classifier_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
     #   event.trace.routing_classifier_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.routing_classifier_trace.model_invocation_output.raw_response.content #=> String
     #   event.trace.routing_classifier_trace.model_invocation_output.trace_id #=> String
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.text #=> String
     #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_alias_arn #=> String
     #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
     #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs #=> Array
     #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_group #=> String
@@ -1934,7 +2138,28 @@ module Aws::BedrockAgentRuntime
     #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
     #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files #=> Array
     #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files[0] #=> String
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
     #   event.trace.routing_classifier_trace.observation.final_response.text #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
     #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.byte_content #=> String
     #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row #=> Array
@@ -2390,6 +2615,9 @@ module Aws::BedrockAgentRuntime
     #   multiple collaborator agents to coordinate a final response. The
     #   inline collaborator agent can also be the supervisor.
     #
+    # @option params [String] :agent_name
+    #   The name for the agent.
+    #
     # @option params [Types::InlineBedrockModelConfigurations] :bedrock_model_configurations
     #   Model settings for the request.
     #
@@ -2404,6 +2632,9 @@ module Aws::BedrockAgentRuntime
     # @option params [Array<Types::Collaborator>] :collaborators
     #   List of collaborator inline agents.
     #
+    # @option params [Types::CustomOrchestration] :custom_orchestration
+    #   Contains details of the custom orchestration configured for the agent.
+    #
     # @option params [String] :customer_encryption_key_arn
     #   The Amazon Resource Name (ARN) of the Amazon Web Services KMS key to
     #   use to encrypt your inline agent.
@@ -2411,7 +2642,6 @@ module Aws::BedrockAgentRuntime
     # @option params [Boolean] :enable_trace
     #   Specifies whether to turn on the trace or not to track the agent's
     #   reasoning process. For more information, see [Using trace][1].
-    #   </p>
     #
     #
     #
@@ -2473,6 +2703,18 @@ module Aws::BedrockAgentRuntime
     #
     # @option params [Array<Types::KnowledgeBase>] :knowledge_bases
     #   Contains information of the knowledge bases to associate with.
+    #
+    # @option params [String] :orchestration_type
+    #   Specifies the type of orchestration strategy for the agent. This is
+    #   set to DEFAULT orchestration type, by default.
+    #
+    # @option params [Types::PromptCreationConfigurations] :prompt_creation_configurations
+    #   Specifies parameters that control how the service populates the agent
+    #   prompt for an `InvokeInlineAgent` request. You can control which
+    #   aspects of previous invocations in the same agent session the service
+    #   uses to populate the agent prompt. This gives you more granular
+    #   control over the contextual history that is used to process the
+    #   current request.
     #
     # @option params [Types::PromptOverrideConfiguration] :prompt_override_configuration
     #   Configurations for advanced prompts used to override the default
@@ -2734,6 +2976,7 @@ module Aws::BedrockAgentRuntime
     #       },
     #     ],
     #     agent_collaboration: "SUPERVISOR", # accepts SUPERVISOR, SUPERVISOR_ROUTER, DISABLED
+    #     agent_name: "Name",
     #     bedrock_model_configurations: {
     #       performance_config: {
     #         latency: "standard", # accepts standard, optimized
@@ -2945,6 +3188,11 @@ module Aws::BedrockAgentRuntime
     #         },
     #       },
     #     ],
+    #     custom_orchestration: {
+    #       executor: {
+    #         lambda: "LambdaArn",
+    #       },
+    #     },
     #     customer_encryption_key_arn: "KmsKeyArn",
     #     enable_trace: false,
     #     end_session: false,
@@ -3156,6 +3404,11 @@ module Aws::BedrockAgentRuntime
     #         },
     #       },
     #     ],
+    #     orchestration_type: "DEFAULT", # accepts DEFAULT, CUSTOM_ORCHESTRATION
+    #     prompt_creation_configurations: {
+    #       exclude_previous_thinking_steps: false,
+    #       previous_conversation_turns_to_include: 1,
+    #     },
     #     prompt_override_configuration: {
     #       override_lambda: "LambdaResourceArn",
     #       prompt_configurations: [ # required
@@ -3278,10 +3531,22 @@ module Aws::BedrockAgentRuntime
     #   event.message #=> String
     #
     #   # For :trace event available at #on_trace_event callback and response eventstream enumerator:
+    #   event.caller_chain #=> Array
+    #   event.caller_chain[0].agent_alias_arn #=> String
+    #   event.collaborator_name #=> String
+    #   event.event_time #=> Time
     #   event.session_id #=> String
     #   event.trace.custom_orchestration_trace.event.text #=> String
     #   event.trace.custom_orchestration_trace.trace_id #=> String
+    #   event.trace.failure_trace.failure_code #=> Integer
     #   event.trace.failure_trace.failure_reason #=> String
+    #   event.trace.failure_trace.metadata.client_request_id #=> String
+    #   event.trace.failure_trace.metadata.end_time #=> Time
+    #   event.trace.failure_trace.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.failure_trace.metadata.start_time #=> Time
+    #   event.trace.failure_trace.metadata.total_time_ms #=> Integer
+    #   event.trace.failure_trace.metadata.usage.input_tokens #=> Integer
+    #   event.trace.failure_trace.metadata.usage.output_tokens #=> Integer
     #   event.trace.failure_trace.trace_id #=> String
     #   event.trace.guardrail_trace.action #=> String, one of "INTERVENED", "NONE"
     #   event.trace.guardrail_trace.input_assessments #=> Array
@@ -3309,6 +3574,13 @@ module Aws::BedrockAgentRuntime
     #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
     #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].match #=> String
     #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
+    #   event.trace.guardrail_trace.metadata.client_request_id #=> String
+    #   event.trace.guardrail_trace.metadata.end_time #=> Time
+    #   event.trace.guardrail_trace.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.guardrail_trace.metadata.start_time #=> Time
+    #   event.trace.guardrail_trace.metadata.total_time_ms #=> Integer
+    #   event.trace.guardrail_trace.metadata.usage.input_tokens #=> Integer
+    #   event.trace.guardrail_trace.metadata.usage.output_tokens #=> Integer
     #   event.trace.guardrail_trace.output_assessments #=> Array
     #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters #=> Array
     #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
@@ -3398,6 +3670,11 @@ module Aws::BedrockAgentRuntime
     #   event.trace.orchestration_trace.model_invocation_input.text #=> String
     #   event.trace.orchestration_trace.model_invocation_input.trace_id #=> String
     #   event.trace.orchestration_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.total_time_ms #=> Integer
     #   event.trace.orchestration_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
     #   event.trace.orchestration_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.orchestration_trace.model_invocation_output.raw_response.content #=> String
@@ -3405,9 +3682,23 @@ module Aws::BedrockAgentRuntime
     #   event.trace.orchestration_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
     #   event.trace.orchestration_trace.model_invocation_output.reasoning_content.redacted_content #=> String
     #   event.trace.orchestration_trace.model_invocation_output.trace_id #=> String
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.orchestration_trace.observation.action_group_invocation_output.text #=> String
     #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_alias_arn #=> String
     #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
     #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs #=> Array
     #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_group #=> String
@@ -3441,7 +3732,28 @@ module Aws::BedrockAgentRuntime
     #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
     #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.files #=> Array
     #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.files[0] #=> String
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.final_response.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.final_response.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
     #   event.trace.orchestration_trace.observation.final_response.text #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
     #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.byte_content #=> String
     #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row #=> Array
@@ -3479,6 +3791,11 @@ module Aws::BedrockAgentRuntime
     #   event.trace.post_processing_trace.model_invocation_input.text #=> String
     #   event.trace.post_processing_trace.model_invocation_input.trace_id #=> String
     #   event.trace.post_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
     #   event.trace.post_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
     #   event.trace.post_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.post_processing_trace.model_invocation_output.parsed_response.text #=> String
@@ -3500,6 +3817,11 @@ module Aws::BedrockAgentRuntime
     #   event.trace.pre_processing_trace.model_invocation_input.text #=> String
     #   event.trace.pre_processing_trace.model_invocation_input.trace_id #=> String
     #   event.trace.pre_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
     #   event.trace.pre_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
     #   event.trace.pre_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.pre_processing_trace.model_invocation_output.parsed_response.is_valid #=> Boolean
@@ -3572,13 +3894,32 @@ module Aws::BedrockAgentRuntime
     #   event.trace.routing_classifier_trace.model_invocation_input.text #=> String
     #   event.trace.routing_classifier_trace.model_invocation_input.trace_id #=> String
     #   event.trace.routing_classifier_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.total_time_ms #=> Integer
     #   event.trace.routing_classifier_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
     #   event.trace.routing_classifier_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.routing_classifier_trace.model_invocation_output.raw_response.content #=> String
     #   event.trace.routing_classifier_trace.model_invocation_output.trace_id #=> String
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.text #=> String
     #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_alias_arn #=> String
     #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
     #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs #=> Array
     #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_group #=> String
@@ -3612,7 +3953,28 @@ module Aws::BedrockAgentRuntime
     #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
     #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files #=> Array
     #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files[0] #=> String
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
     #   event.trace.routing_classifier_trace.observation.final_response.text #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
     #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.byte_content #=> String
     #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row #=> Array
@@ -3667,6 +4029,159 @@ module Aws::BedrockAgentRuntime
       req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)
 
       req.send_request(options, &block)
+    end
+
+    # Lists events that occurred during a flow execution. Events provide
+    # detailed information about the execution progress, including node
+    # inputs and outputs, flow inputs and outputs, condition results, and
+    # failure events.
+    #
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :event_type
+    #   The type of events to retrieve. Specify `Node` for node-level events
+    #   or `Flow` for flow-level events.
+    #
+    # @option params [required, String] :execution_identifier
+    #   The unique identifier of the flow execution.
+    #
+    # @option params [required, String] :flow_alias_identifier
+    #   The unique identifier of the flow alias used for the execution.
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of events to return in a single response. If more
+    #   events exist than the specified maxResults value, a token is included
+    #   in the response so that the remaining results can be retrieved.
+    #
+    # @option params [String] :next_token
+    #   A token to retrieve the next set of results. This value is returned in
+    #   the response if more results are available.
+    #
+    # @return [Types::ListFlowExecutionEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFlowExecutionEventsResponse#flow_execution_events #flow_execution_events} => Array&lt;Types::FlowExecutionEvent&gt;
+    #   * {Types::ListFlowExecutionEventsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_flow_execution_events({
+    #     event_type: "Node", # required, accepts Node, Flow
+    #     execution_identifier: "FlowExecutionIdentifier", # required
+    #     flow_alias_identifier: "FlowAliasIdentifier", # required
+    #     flow_identifier: "FlowIdentifier", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow_execution_events #=> Array
+    #   resp.flow_execution_events[0].condition_result_event.node_name #=> String
+    #   resp.flow_execution_events[0].condition_result_event.satisfied_conditions #=> Array
+    #   resp.flow_execution_events[0].condition_result_event.satisfied_conditions[0].condition_name #=> String
+    #   resp.flow_execution_events[0].condition_result_event.timestamp #=> Time
+    #   resp.flow_execution_events[0].flow_failure_event.error_code #=> String, one of "VALIDATION", "INTERNAL_SERVER", "NODE_EXECUTION_FAILED"
+    #   resp.flow_execution_events[0].flow_failure_event.error_message #=> String
+    #   resp.flow_execution_events[0].flow_failure_event.timestamp #=> Time
+    #   resp.flow_execution_events[0].flow_input_event.fields #=> Array
+    #   resp.flow_execution_events[0].flow_input_event.fields[0].name #=> String
+    #   resp.flow_execution_events[0].flow_input_event.node_name #=> String
+    #   resp.flow_execution_events[0].flow_input_event.timestamp #=> Time
+    #   resp.flow_execution_events[0].flow_output_event.fields #=> Array
+    #   resp.flow_execution_events[0].flow_output_event.fields[0].name #=> String
+    #   resp.flow_execution_events[0].flow_output_event.node_name #=> String
+    #   resp.flow_execution_events[0].flow_output_event.timestamp #=> Time
+    #   resp.flow_execution_events[0].node_failure_event.error_code #=> String, one of "VALIDATION", "DEPENDENCY_FAILED", "BAD_GATEWAY", "INTERNAL_SERVER"
+    #   resp.flow_execution_events[0].node_failure_event.error_message #=> String
+    #   resp.flow_execution_events[0].node_failure_event.node_name #=> String
+    #   resp.flow_execution_events[0].node_failure_event.timestamp #=> Time
+    #   resp.flow_execution_events[0].node_input_event.fields #=> Array
+    #   resp.flow_execution_events[0].node_input_event.fields[0].name #=> String
+    #   resp.flow_execution_events[0].node_input_event.node_name #=> String
+    #   resp.flow_execution_events[0].node_input_event.timestamp #=> Time
+    #   resp.flow_execution_events[0].node_output_event.fields #=> Array
+    #   resp.flow_execution_events[0].node_output_event.fields[0].name #=> String
+    #   resp.flow_execution_events[0].node_output_event.node_name #=> String
+    #   resp.flow_execution_events[0].node_output_event.timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ListFlowExecutionEvents AWS API Documentation
+    #
+    # @overload list_flow_execution_events(params = {})
+    # @param [Hash] params ({})
+    def list_flow_execution_events(params = {}, options = {})
+      req = build_request(:list_flow_execution_events, params)
+      req.send_request(options)
+    end
+
+    # Lists all executions of a flow. Results can be paginated and include
+    # summary information about each execution, such as status, start and
+    # end times, and the execution's Amazon Resource Name (ARN).
+    #
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    # @option params [String] :flow_alias_identifier
+    #   The unique identifier of the flow alias to list executions for.
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow to list executions for.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of flow executions to return in a single response.
+    #   If more executions exist than the specified `maxResults` value, a
+    #   token is included in the response so that the remaining results can be
+    #   retrieved.
+    #
+    # @option params [String] :next_token
+    #   A token to retrieve the next set of results. This value is returned in
+    #   the response if more results are available.
+    #
+    # @return [Types::ListFlowExecutionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFlowExecutionsResponse#flow_execution_summaries #flow_execution_summaries} => Array&lt;Types::FlowExecutionSummary&gt;
+    #   * {Types::ListFlowExecutionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_flow_executions({
+    #     flow_alias_identifier: "FlowAliasIdentifier",
+    #     flow_identifier: "FlowIdentifier", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow_execution_summaries #=> Array
+    #   resp.flow_execution_summaries[0].created_at #=> Time
+    #   resp.flow_execution_summaries[0].ended_at #=> Time
+    #   resp.flow_execution_summaries[0].execution_arn #=> String
+    #   resp.flow_execution_summaries[0].flow_alias_identifier #=> String
+    #   resp.flow_execution_summaries[0].flow_identifier #=> String
+    #   resp.flow_execution_summaries[0].flow_version #=> String
+    #   resp.flow_execution_summaries[0].status #=> String, one of "Running", "Succeeded", "Failed", "TimedOut", "Aborted"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ListFlowExecutions AWS API Documentation
+    #
+    # @overload list_flow_executions(params = {})
+    # @param [Hash] params ({})
+    def list_flow_executions(params = {}, options = {})
+      req = build_request(:list_flow_executions, params)
+      req.send_request(options)
     end
 
     # Lists all invocation steps associated with a session and optionally,
@@ -5327,6 +5842,118 @@ module Aws::BedrockAgentRuntime
       req.send_request(options, &block)
     end
 
+    # Starts an execution of an Amazon Bedrock flow. Unlike flows that run
+    # until completion or time out after five minutes, flow executions let
+    # you run flows asynchronously for longer durations. Flow executions
+    # also yield control so that your application can perform other tasks.
+    #
+    # This operation returns an Amazon Resource Name (ARN) that you can use
+    # to track and manage your flow execution.
+    #
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :flow_alias_identifier
+    #   The unique identifier of the flow alias to use for the flow execution.
+    #
+    # @option params [String] :flow_execution_name
+    #   The unique name for the flow execution. If you don't provide one, a
+    #   system-generated name is used.
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow to execute.
+    #
+    # @option params [required, Array<Types::FlowInput>] :inputs
+    #   The input data required for the flow execution. This must match the
+    #   input schema defined in the flow.
+    #
+    # @option params [Types::ModelPerformanceConfiguration] :model_performance_configuration
+    #   The performance settings for the foundation model used in the flow
+    #   execution.
+    #
+    # @return [Types::StartFlowExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartFlowExecutionResponse#execution_arn #execution_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_flow_execution({
+    #     flow_alias_identifier: "FlowAliasIdentifier", # required
+    #     flow_execution_name: "FlowExecutionName",
+    #     flow_identifier: "FlowIdentifier", # required
+    #     inputs: [ # required
+    #       {
+    #         content: { # required
+    #           document: {
+    #           },
+    #         },
+    #         node_input_name: "NodeInputName",
+    #         node_name: "NodeName", # required
+    #         node_output_name: "NodeOutputName",
+    #       },
+    #     ],
+    #     model_performance_configuration: {
+    #       performance_config: {
+    #         latency: "standard", # accepts standard, optimized
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.execution_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/StartFlowExecution AWS API Documentation
+    #
+    # @overload start_flow_execution(params = {})
+    # @param [Hash] params ({})
+    def start_flow_execution(params = {}, options = {})
+      req = build_request(:start_flow_execution, params)
+      req.send_request(options)
+    end
+
+    # Stops an Amazon Bedrock flow's execution. This operation prevents
+    # further processing of the flow and changes the execution status to
+    # `Aborted`.
+    #
+    # @option params [required, String] :execution_identifier
+    #   The unique identifier of the flow execution to stop.
+    #
+    # @option params [required, String] :flow_alias_identifier
+    #   The unique identifier of the flow alias used for the execution.
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow.
+    #
+    # @return [Types::StopFlowExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopFlowExecutionResponse#execution_arn #execution_arn} => String
+    #   * {Types::StopFlowExecutionResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_flow_execution({
+    #     execution_identifier: "FlowExecutionIdentifier", # required
+    #     flow_alias_identifier: "FlowAliasIdentifier", # required
+    #     flow_identifier: "FlowIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.execution_arn #=> String
+    #   resp.status #=> String, one of "Running", "Succeeded", "Failed", "TimedOut", "Aborted"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/StopFlowExecution AWS API Documentation
+    #
+    # @overload stop_flow_execution(params = {})
+    # @param [Hash] params ({})
+    def stop_flow_execution(params = {}, options = {})
+      req = build_request(:stop_flow_execution, params)
+      req.send_request(options)
+    end
+
     # Associate tags with a resource. For more information, see [Tagging
     # resources][1] in the Amazon Bedrock User Guide.
     #
@@ -5457,7 +6084,7 @@ module Aws::BedrockAgentRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.56.0 (2025-05-16)
+------------------
+
+* Feature - This release introduces CreateSupportCase operation to SDK.
+
+1.55.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.53.0 (2025-04-18)
 ------------------
 

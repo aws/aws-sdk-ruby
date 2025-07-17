@@ -200,8 +200,7 @@ module Aws::DatabaseMigrationService
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -600,9 +599,16 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # End of support notice: On May 20, 2026, Amazon Web Services will end
+    # support for Amazon Web Services DMS Fleet Advisor;. After May 20,
+    # 2026, you will no longer be able to access the Amazon Web Services DMS
+    # Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor;
+    # resources. For more information, see [Amazon Web Services DMS Fleet
+    # Advisor end of support][1].
+    #
     # Starts the analysis of up to 20 source databases to recommend target
     # engines for each source database. This is a batch version of
-    # [StartRecommendations][1].
+    # [StartRecommendations][2].
     #
     # The result of analysis of each source database is reported
     # individually in the response. Because the batch request can result in
@@ -612,7 +618,8 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartRecommendations.html
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html
+    # [2]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartRecommendations.html
     #
     # @option params [Array<Types::StartRecommendationsRequestEntry>] :data
     #   Provides information about source databases to analyze. After this
@@ -847,6 +854,9 @@ module Aws::DatabaseMigrationService
     #   `db2-zos` and `docdb`. A value of `"aurora"` represents Amazon Aurora
     #   MySQL-Compatible Edition.
     #
+    # @option params [Boolean] :virtual
+    #   Indicates whether the data provider is virtual.
+    #
     # @option params [required, Types::DataProviderSettings] :settings
     #   The settings in JSON format for a data provider.
     #
@@ -906,11 +916,14 @@ module Aws::DatabaseMigrationService
     #     data_provider_name: "String",
     #     description: "String",
     #     engine: "String", # required
+    #     virtual: false,
     #     settings: { # required
     #       redshift_settings: {
     #         server_name: "String",
     #         port: 1,
     #         database_name: "String",
+    #         s3_path: "String",
+    #         s3_access_role_arn: "String",
     #       },
     #       postgre_sql_settings: {
     #         server_name: "String",
@@ -918,12 +931,16 @@ module Aws::DatabaseMigrationService
     #         database_name: "String",
     #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
     #         certificate_arn: "String",
+    #         s3_path: "String",
+    #         s3_access_role_arn: "String",
     #       },
     #       my_sql_settings: {
     #         server_name: "String",
     #         port: 1,
     #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
     #         certificate_arn: "String",
+    #         s3_path: "String",
+    #         s3_access_role_arn: "String",
     #       },
     #       oracle_settings: {
     #         server_name: "String",
@@ -936,6 +953,8 @@ module Aws::DatabaseMigrationService
     #         secrets_manager_oracle_asm_access_role_arn: "String",
     #         secrets_manager_security_db_encryption_secret_id: "String",
     #         secrets_manager_security_db_encryption_access_role_arn: "String",
+    #         s3_path: "String",
+    #         s3_access_role_arn: "String",
     #       },
     #       microsoft_sql_server_settings: {
     #         server_name: "String",
@@ -943,6 +962,8 @@ module Aws::DatabaseMigrationService
     #         database_name: "String",
     #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
     #         certificate_arn: "String",
+    #         s3_path: "String",
+    #         s3_access_role_arn: "String",
     #       },
     #       doc_db_settings: {
     #         server_name: "String",
@@ -956,6 +977,8 @@ module Aws::DatabaseMigrationService
     #         port: 1,
     #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
     #         certificate_arn: "String",
+    #         s3_path: "String",
+    #         s3_access_role_arn: "String",
     #       },
     #       ibm_db_2_luw_settings: {
     #         server_name: "String",
@@ -963,6 +986,8 @@ module Aws::DatabaseMigrationService
     #         database_name: "String",
     #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
     #         certificate_arn: "String",
+    #         s3_path: "String",
+    #         s3_access_role_arn: "String",
     #       },
     #       ibm_db_2z_os_settings: {
     #         server_name: "String",
@@ -970,6 +995,8 @@ module Aws::DatabaseMigrationService
     #         database_name: "String",
     #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
     #         certificate_arn: "String",
+    #         s3_path: "String",
+    #         s3_access_role_arn: "String",
     #       },
     #       mongo_db_settings: {
     #         server_name: "String",
@@ -998,18 +1025,25 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.data_provider_creation_time #=> Time
     #   resp.data_provider.description #=> String
     #   resp.data_provider.engine #=> String
+    #   resp.data_provider.virtual #=> Boolean
     #   resp.data_provider.settings.redshift_settings.server_name #=> String
     #   resp.data_provider.settings.redshift_settings.port #=> Integer
     #   resp.data_provider.settings.redshift_settings.database_name #=> String
+    #   resp.data_provider.settings.redshift_settings.s3_path #=> String
+    #   resp.data_provider.settings.redshift_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.postgre_sql_settings.server_name #=> String
     #   resp.data_provider.settings.postgre_sql_settings.port #=> Integer
     #   resp.data_provider.settings.postgre_sql_settings.database_name #=> String
     #   resp.data_provider.settings.postgre_sql_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.postgre_sql_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.postgre_sql_settings.s3_path #=> String
+    #   resp.data_provider.settings.postgre_sql_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.my_sql_settings.server_name #=> String
     #   resp.data_provider.settings.my_sql_settings.port #=> Integer
     #   resp.data_provider.settings.my_sql_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.my_sql_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.my_sql_settings.s3_path #=> String
+    #   resp.data_provider.settings.my_sql_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.oracle_settings.server_name #=> String
     #   resp.data_provider.settings.oracle_settings.port #=> Integer
     #   resp.data_provider.settings.oracle_settings.database_name #=> String
@@ -1020,11 +1054,15 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.settings.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
     #   resp.data_provider.settings.oracle_settings.secrets_manager_security_db_encryption_secret_id #=> String
     #   resp.data_provider.settings.oracle_settings.secrets_manager_security_db_encryption_access_role_arn #=> String
+    #   resp.data_provider.settings.oracle_settings.s3_path #=> String
+    #   resp.data_provider.settings.oracle_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.microsoft_sql_server_settings.server_name #=> String
     #   resp.data_provider.settings.microsoft_sql_server_settings.port #=> Integer
     #   resp.data_provider.settings.microsoft_sql_server_settings.database_name #=> String
     #   resp.data_provider.settings.microsoft_sql_server_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.microsoft_sql_server_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.microsoft_sql_server_settings.s3_path #=> String
+    #   resp.data_provider.settings.microsoft_sql_server_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.doc_db_settings.server_name #=> String
     #   resp.data_provider.settings.doc_db_settings.port #=> Integer
     #   resp.data_provider.settings.doc_db_settings.database_name #=> String
@@ -1034,16 +1072,22 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.settings.maria_db_settings.port #=> Integer
     #   resp.data_provider.settings.maria_db_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.maria_db_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.maria_db_settings.s3_path #=> String
+    #   resp.data_provider.settings.maria_db_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.ibm_db_2_luw_settings.server_name #=> String
     #   resp.data_provider.settings.ibm_db_2_luw_settings.port #=> Integer
     #   resp.data_provider.settings.ibm_db_2_luw_settings.database_name #=> String
     #   resp.data_provider.settings.ibm_db_2_luw_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.ibm_db_2_luw_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.ibm_db_2_luw_settings.s3_path #=> String
+    #   resp.data_provider.settings.ibm_db_2_luw_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.ibm_db_2z_os_settings.server_name #=> String
     #   resp.data_provider.settings.ibm_db_2z_os_settings.port #=> Integer
     #   resp.data_provider.settings.ibm_db_2z_os_settings.database_name #=> String
     #   resp.data_provider.settings.ibm_db_2z_os_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.ibm_db_2z_os_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.ibm_db_2z_os_settings.s3_path #=> String
+    #   resp.data_provider.settings.ibm_db_2z_os_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.mongo_db_settings.server_name #=> String
     #   resp.data_provider.settings.mongo_db_settings.port #=> Integer
     #   resp.data_provider.settings.mongo_db_settings.database_name #=> String
@@ -1583,6 +1627,8 @@ module Aws::DatabaseMigrationService
     #       database_mode: "default", # accepts default, babelfish
     #       babelfish_database_name: "String",
     #       disable_unicode_source_filter: false,
+    #       service_access_role_arn: "String",
+    #       authentication_method: "password", # accepts password, iam
     #     },
     #     my_sql_settings: {
     #       after_connect_script: "String",
@@ -1600,6 +1646,8 @@ module Aws::DatabaseMigrationService
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
     #       execute_timeout: 1,
+    #       service_access_role_arn: "String",
+    #       authentication_method: "password", # accepts password, iam
     #     },
     #     oracle_settings: {
     #       add_supplemental_logging: false,
@@ -1921,6 +1969,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.database_mode #=> String, one of "default", "babelfish"
     #   resp.endpoint.postgre_sql_settings.babelfish_database_name #=> String
     #   resp.endpoint.postgre_sql_settings.disable_unicode_source_filter #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.service_access_role_arn #=> String
+    #   resp.endpoint.postgre_sql_settings.authentication_method #=> String, one of "password", "iam"
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -1936,6 +1986,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.my_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.my_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.my_sql_settings.execute_timeout #=> Integer
+    #   resp.endpoint.my_sql_settings.service_access_role_arn #=> String
+    #   resp.endpoint.my_sql_settings.authentication_method #=> String, one of "password", "iam"
     #   resp.endpoint.oracle_settings.add_supplemental_logging #=> Boolean
     #   resp.endpoint.oracle_settings.archived_log_dest_id #=> Integer
     #   resp.endpoint.oracle_settings.additional_archived_log_dest_id #=> Integer
@@ -2179,7 +2231,18 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # End of support notice: On May 20, 2026, Amazon Web Services will end
+    # support for Amazon Web Services DMS Fleet Advisor;. After May 20,
+    # 2026, you will no longer be able to access the Amazon Web Services DMS
+    # Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor;
+    # resources. For more information, see [Amazon Web Services DMS Fleet
+    # Advisor end of support][1].
+    #
     # Creates a Fleet Advisor collector using the specified parameters.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html
     #
     # @option params [required, String] :collector_name
     #   The name of your Fleet Advisor collector (for example,
@@ -2283,6 +2346,41 @@ module Aws::DatabaseMigrationService
     # @return [Types::CreateInstanceProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateInstanceProfileResponse#instance_profile #instance_profile} => Types::InstanceProfile
+    #
+    #
+    # @example Example: Create Instance Profile
+    #
+    #   # Creates the instance profile using the specified parameters.
+    #
+    #   resp = client.create_instance_profile({
+    #     description: "Description", 
+    #     instance_profile_name: "my-instance-profile", 
+    #     kms_key_arn: "arn:aws:kms:us-east-1:012345678901:key/01234567-89ab-cdef-0123-456789abcdef", 
+    #     network_type: "DUAL", 
+    #     publicly_accessible: true, 
+    #     subnet_group_identifier: "my-subnet-group", 
+    #     tags: [
+    #       {
+    #         key: "access", 
+    #         value: "authorizedusers", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instance_profile: {
+    #       instance_profile_arn: "arn:aws:dms:us-east-1:012345678901:instance-profile:my-instance-profile", 
+    #       instance_profile_creation_time: Time.parse("2022-12-16T09:44:43.543246Z"), 
+    #       instance_profile_name: "my-instance-profile", 
+    #       kms_key_arn: "arn:aws:kms:us-east-1:012345678901:key/01234567-89ab-cdef-0123-456789abcdef", 
+    #       publicly_accessible: true, 
+    #       subnet_group_identifier: "public-subnets", 
+    #       vpc_security_groups: [
+    #         "sg-0123456", 
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3015,6 +3113,9 @@ module Aws::DatabaseMigrationService
     # @option params [required, String] :replication_subnet_group_description
     #   The description for the subnet group.
     #
+    #   Constraints: This parameter Must not contain non-printable control
+    #   characters.
+    #
     # @option params [required, Array<String>] :subnet_ids
     #   Two or more subnet IDs to be assigned to the subnet group.
     #
@@ -3532,18 +3633,25 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.data_provider_creation_time #=> Time
     #   resp.data_provider.description #=> String
     #   resp.data_provider.engine #=> String
+    #   resp.data_provider.virtual #=> Boolean
     #   resp.data_provider.settings.redshift_settings.server_name #=> String
     #   resp.data_provider.settings.redshift_settings.port #=> Integer
     #   resp.data_provider.settings.redshift_settings.database_name #=> String
+    #   resp.data_provider.settings.redshift_settings.s3_path #=> String
+    #   resp.data_provider.settings.redshift_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.postgre_sql_settings.server_name #=> String
     #   resp.data_provider.settings.postgre_sql_settings.port #=> Integer
     #   resp.data_provider.settings.postgre_sql_settings.database_name #=> String
     #   resp.data_provider.settings.postgre_sql_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.postgre_sql_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.postgre_sql_settings.s3_path #=> String
+    #   resp.data_provider.settings.postgre_sql_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.my_sql_settings.server_name #=> String
     #   resp.data_provider.settings.my_sql_settings.port #=> Integer
     #   resp.data_provider.settings.my_sql_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.my_sql_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.my_sql_settings.s3_path #=> String
+    #   resp.data_provider.settings.my_sql_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.oracle_settings.server_name #=> String
     #   resp.data_provider.settings.oracle_settings.port #=> Integer
     #   resp.data_provider.settings.oracle_settings.database_name #=> String
@@ -3554,11 +3662,15 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.settings.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
     #   resp.data_provider.settings.oracle_settings.secrets_manager_security_db_encryption_secret_id #=> String
     #   resp.data_provider.settings.oracle_settings.secrets_manager_security_db_encryption_access_role_arn #=> String
+    #   resp.data_provider.settings.oracle_settings.s3_path #=> String
+    #   resp.data_provider.settings.oracle_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.microsoft_sql_server_settings.server_name #=> String
     #   resp.data_provider.settings.microsoft_sql_server_settings.port #=> Integer
     #   resp.data_provider.settings.microsoft_sql_server_settings.database_name #=> String
     #   resp.data_provider.settings.microsoft_sql_server_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.microsoft_sql_server_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.microsoft_sql_server_settings.s3_path #=> String
+    #   resp.data_provider.settings.microsoft_sql_server_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.doc_db_settings.server_name #=> String
     #   resp.data_provider.settings.doc_db_settings.port #=> Integer
     #   resp.data_provider.settings.doc_db_settings.database_name #=> String
@@ -3568,16 +3680,22 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.settings.maria_db_settings.port #=> Integer
     #   resp.data_provider.settings.maria_db_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.maria_db_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.maria_db_settings.s3_path #=> String
+    #   resp.data_provider.settings.maria_db_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.ibm_db_2_luw_settings.server_name #=> String
     #   resp.data_provider.settings.ibm_db_2_luw_settings.port #=> Integer
     #   resp.data_provider.settings.ibm_db_2_luw_settings.database_name #=> String
     #   resp.data_provider.settings.ibm_db_2_luw_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.ibm_db_2_luw_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.ibm_db_2_luw_settings.s3_path #=> String
+    #   resp.data_provider.settings.ibm_db_2_luw_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.ibm_db_2z_os_settings.server_name #=> String
     #   resp.data_provider.settings.ibm_db_2z_os_settings.port #=> Integer
     #   resp.data_provider.settings.ibm_db_2z_os_settings.database_name #=> String
     #   resp.data_provider.settings.ibm_db_2z_os_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.ibm_db_2z_os_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.ibm_db_2z_os_settings.s3_path #=> String
+    #   resp.data_provider.settings.ibm_db_2z_os_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.mongo_db_settings.server_name #=> String
     #   resp.data_provider.settings.mongo_db_settings.port #=> Integer
     #   resp.data_provider.settings.mongo_db_settings.database_name #=> String
@@ -3821,6 +3939,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.database_mode #=> String, one of "default", "babelfish"
     #   resp.endpoint.postgre_sql_settings.babelfish_database_name #=> String
     #   resp.endpoint.postgre_sql_settings.disable_unicode_source_filter #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.service_access_role_arn #=> String
+    #   resp.endpoint.postgre_sql_settings.authentication_method #=> String, one of "password", "iam"
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -3836,6 +3956,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.my_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.my_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.my_sql_settings.execute_timeout #=> Integer
+    #   resp.endpoint.my_sql_settings.service_access_role_arn #=> String
+    #   resp.endpoint.my_sql_settings.authentication_method #=> String, one of "password", "iam"
     #   resp.endpoint.oracle_settings.add_supplemental_logging #=> Boolean
     #   resp.endpoint.oracle_settings.archived_log_dest_id #=> Integer
     #   resp.endpoint.oracle_settings.additional_archived_log_dest_id #=> Integer
@@ -4007,7 +4129,18 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # End of support notice: On May 20, 2026, Amazon Web Services will end
+    # support for Amazon Web Services DMS Fleet Advisor;. After May 20,
+    # 2026, you will no longer be able to access the Amazon Web Services DMS
+    # Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor;
+    # resources. For more information, see [Amazon Web Services DMS Fleet
+    # Advisor end of support][1].
+    #
     # Deletes the specified Fleet Advisor collector.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html
     #
     # @option params [required, String] :collector_referenced_id
     #   The reference ID of the Fleet Advisor collector to delete.
@@ -4029,7 +4162,18 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # End of support notice: On May 20, 2026, Amazon Web Services will end
+    # support for Amazon Web Services DMS Fleet Advisor;. After May 20,
+    # 2026, you will no longer be able to access the Amazon Web Services DMS
+    # Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor;
+    # resources. For more information, see [Amazon Web Services DMS Fleet
+    # Advisor end of support][1].
+    #
     # Deletes the specified Fleet Advisor collector databases.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html
     #
     # @option params [required, Array<String>] :database_ids
     #   The IDs of the Fleet Advisor collector databases to delete.
@@ -4071,6 +4215,30 @@ module Aws::DatabaseMigrationService
     # @return [Types::DeleteInstanceProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteInstanceProfileResponse#instance_profile #instance_profile} => Types::InstanceProfile
+    #
+    #
+    # @example Example: Delete Instance Profile
+    #
+    #   # Deletes the specified instance profile.
+    #
+    #   resp = client.delete_instance_profile({
+    #     instance_profile_identifier: "arn:aws:dms:us-east-1:012345678901:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instance_profile: {
+    #       instance_profile_arn: "arn:aws:dms:us-east-1:012345678901:instance-profile:my-instance-profile", 
+    #       instance_profile_creation_time: Time.parse("2022-12-16T09:44:43.543246Z"), 
+    #       instance_profile_name: "my-instance-profile", 
+    #       kms_key_arn: "arn:aws:kms:us-east-1:012345678901:key/01234567-89ab-cdef-0123-456789abcdef", 
+    #       publicly_accessible: true, 
+    #       subnet_group_identifier: "public-subnets", 
+    #       vpc_security_groups: [
+    #         "sg-0123456", 
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4933,7 +5101,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_conversion_configuration({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -5140,18 +5308,25 @@ module Aws::DatabaseMigrationService
     #   resp.data_providers[0].data_provider_creation_time #=> Time
     #   resp.data_providers[0].description #=> String
     #   resp.data_providers[0].engine #=> String
+    #   resp.data_providers[0].virtual #=> Boolean
     #   resp.data_providers[0].settings.redshift_settings.server_name #=> String
     #   resp.data_providers[0].settings.redshift_settings.port #=> Integer
     #   resp.data_providers[0].settings.redshift_settings.database_name #=> String
+    #   resp.data_providers[0].settings.redshift_settings.s3_path #=> String
+    #   resp.data_providers[0].settings.redshift_settings.s3_access_role_arn #=> String
     #   resp.data_providers[0].settings.postgre_sql_settings.server_name #=> String
     #   resp.data_providers[0].settings.postgre_sql_settings.port #=> Integer
     #   resp.data_providers[0].settings.postgre_sql_settings.database_name #=> String
     #   resp.data_providers[0].settings.postgre_sql_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_providers[0].settings.postgre_sql_settings.certificate_arn #=> String
+    #   resp.data_providers[0].settings.postgre_sql_settings.s3_path #=> String
+    #   resp.data_providers[0].settings.postgre_sql_settings.s3_access_role_arn #=> String
     #   resp.data_providers[0].settings.my_sql_settings.server_name #=> String
     #   resp.data_providers[0].settings.my_sql_settings.port #=> Integer
     #   resp.data_providers[0].settings.my_sql_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_providers[0].settings.my_sql_settings.certificate_arn #=> String
+    #   resp.data_providers[0].settings.my_sql_settings.s3_path #=> String
+    #   resp.data_providers[0].settings.my_sql_settings.s3_access_role_arn #=> String
     #   resp.data_providers[0].settings.oracle_settings.server_name #=> String
     #   resp.data_providers[0].settings.oracle_settings.port #=> Integer
     #   resp.data_providers[0].settings.oracle_settings.database_name #=> String
@@ -5162,11 +5337,15 @@ module Aws::DatabaseMigrationService
     #   resp.data_providers[0].settings.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
     #   resp.data_providers[0].settings.oracle_settings.secrets_manager_security_db_encryption_secret_id #=> String
     #   resp.data_providers[0].settings.oracle_settings.secrets_manager_security_db_encryption_access_role_arn #=> String
+    #   resp.data_providers[0].settings.oracle_settings.s3_path #=> String
+    #   resp.data_providers[0].settings.oracle_settings.s3_access_role_arn #=> String
     #   resp.data_providers[0].settings.microsoft_sql_server_settings.server_name #=> String
     #   resp.data_providers[0].settings.microsoft_sql_server_settings.port #=> Integer
     #   resp.data_providers[0].settings.microsoft_sql_server_settings.database_name #=> String
     #   resp.data_providers[0].settings.microsoft_sql_server_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_providers[0].settings.microsoft_sql_server_settings.certificate_arn #=> String
+    #   resp.data_providers[0].settings.microsoft_sql_server_settings.s3_path #=> String
+    #   resp.data_providers[0].settings.microsoft_sql_server_settings.s3_access_role_arn #=> String
     #   resp.data_providers[0].settings.doc_db_settings.server_name #=> String
     #   resp.data_providers[0].settings.doc_db_settings.port #=> Integer
     #   resp.data_providers[0].settings.doc_db_settings.database_name #=> String
@@ -5176,16 +5355,22 @@ module Aws::DatabaseMigrationService
     #   resp.data_providers[0].settings.maria_db_settings.port #=> Integer
     #   resp.data_providers[0].settings.maria_db_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_providers[0].settings.maria_db_settings.certificate_arn #=> String
+    #   resp.data_providers[0].settings.maria_db_settings.s3_path #=> String
+    #   resp.data_providers[0].settings.maria_db_settings.s3_access_role_arn #=> String
     #   resp.data_providers[0].settings.ibm_db_2_luw_settings.server_name #=> String
     #   resp.data_providers[0].settings.ibm_db_2_luw_settings.port #=> Integer
     #   resp.data_providers[0].settings.ibm_db_2_luw_settings.database_name #=> String
     #   resp.data_providers[0].settings.ibm_db_2_luw_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_providers[0].settings.ibm_db_2_luw_settings.certificate_arn #=> String
+    #   resp.data_providers[0].settings.ibm_db_2_luw_settings.s3_path #=> String
+    #   resp.data_providers[0].settings.ibm_db_2_luw_settings.s3_access_role_arn #=> String
     #   resp.data_providers[0].settings.ibm_db_2z_os_settings.server_name #=> String
     #   resp.data_providers[0].settings.ibm_db_2z_os_settings.port #=> Integer
     #   resp.data_providers[0].settings.ibm_db_2z_os_settings.database_name #=> String
     #   resp.data_providers[0].settings.ibm_db_2z_os_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_providers[0].settings.ibm_db_2z_os_settings.certificate_arn #=> String
+    #   resp.data_providers[0].settings.ibm_db_2z_os_settings.s3_path #=> String
+    #   resp.data_providers[0].settings.ibm_db_2z_os_settings.s3_access_role_arn #=> String
     #   resp.data_providers[0].settings.mongo_db_settings.server_name #=> String
     #   resp.data_providers[0].settings.mongo_db_settings.port #=> Integer
     #   resp.data_providers[0].settings.mongo_db_settings.database_name #=> String
@@ -5598,6 +5783,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].postgre_sql_settings.database_mode #=> String, one of "default", "babelfish"
     #   resp.endpoints[0].postgre_sql_settings.babelfish_database_name #=> String
     #   resp.endpoints[0].postgre_sql_settings.disable_unicode_source_filter #=> Boolean
+    #   resp.endpoints[0].postgre_sql_settings.service_access_role_arn #=> String
+    #   resp.endpoints[0].postgre_sql_settings.authentication_method #=> String, one of "password", "iam"
     #   resp.endpoints[0].my_sql_settings.after_connect_script #=> String
     #   resp.endpoints[0].my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoints[0].my_sql_settings.database_name #=> String
@@ -5613,6 +5800,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].my_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoints[0].my_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoints[0].my_sql_settings.execute_timeout #=> Integer
+    #   resp.endpoints[0].my_sql_settings.service_access_role_arn #=> String
+    #   resp.endpoints[0].my_sql_settings.authentication_method #=> String, one of "password", "iam"
     #   resp.endpoints[0].oracle_settings.add_supplemental_logging #=> Boolean
     #   resp.endpoints[0].oracle_settings.archived_log_dest_id #=> Integer
     #   resp.endpoints[0].oracle_settings.additional_archived_log_dest_id #=> Integer
@@ -5865,7 +6054,8 @@ module Aws::DatabaseMigrationService
     # @option params [Array<Types::Filter>] :filters
     #   Filters applied to event subscriptions.
     #
-    #   Valid filter names: event-subscription-arn \| event-subscription-id
+    #   Valid filter names: `event-subscription-arn` \|
+    #   `event-subscription-id`
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -6092,7 +6282,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_extension_pack_associations({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     filters: [
     #       {
     #         name: "String", # required
@@ -6123,7 +6313,18 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # End of support notice: On May 20, 2026, Amazon Web Services will end
+    # support for Amazon Web Services DMS Fleet Advisor;. After May 20,
+    # 2026, you will no longer be able to access the Amazon Web Services DMS
+    # Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor;
+    # resources. For more information, see [Amazon Web Services DMS Fleet
+    # Advisor end of support][1].
+    #
     # Returns a list of the Fleet Advisor collectors in your account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   If you specify any of the following filters, the output includes
@@ -6197,7 +6398,18 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # End of support notice: On May 20, 2026, Amazon Web Services will end
+    # support for Amazon Web Services DMS Fleet Advisor;. After May 20,
+    # 2026, you will no longer be able to access the Amazon Web Services DMS
+    # Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor;
+    # resources. For more information, see [Amazon Web Services DMS Fleet
+    # Advisor end of support][1].
+    #
     # Returns a list of Fleet Advisor databases in your account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   If you specify any of the following filters, the output includes
@@ -6279,8 +6491,19 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # End of support notice: On May 20, 2026, Amazon Web Services will end
+    # support for Amazon Web Services DMS Fleet Advisor;. After May 20,
+    # 2026, you will no longer be able to access the Amazon Web Services DMS
+    # Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor;
+    # resources. For more information, see [Amazon Web Services DMS Fleet
+    # Advisor end of support][1].
+    #
     # Provides descriptions of large-scale assessment (LSA) analyses
     # produced by your Fleet Advisor collectors.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html
     #
     # @option params [Integer] :max_records
     #   Sets the maximum number of records returned in the response.
@@ -6321,8 +6544,19 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # End of support notice: On May 20, 2026, Amazon Web Services will end
+    # support for Amazon Web Services DMS Fleet Advisor;. After May 20,
+    # 2026, you will no longer be able to access the Amazon Web Services DMS
+    # Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor;
+    # resources. For more information, see [Amazon Web Services DMS Fleet
+    # Advisor end of support][1].
+    #
     # Provides descriptions of the schemas discovered by your Fleet Advisor
     # collectors.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   If you specify any of the following filters, the output includes
@@ -6338,7 +6572,18 @@ module Aws::DatabaseMigrationService
     #   Name="schema-id",Values="50"`
     #
     # @option params [Integer] :max_records
+    #   End of support notice: On May 20, 2026, Amazon Web Services will end
+    #   support for Amazon Web Services DMS Fleet Advisor;. After May 20,
+    #   2026, you will no longer be able to access the Amazon Web Services DMS
+    #   Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor;
+    #   resources. For more information, see [Amazon Web Services DMS Fleet
+    #   Advisor end of support][1].
+    #
     #   Sets the maximum number of records returned in the response.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html
     #
     # @option params [String] :next_token
     #   If `NextToken` is returned by a previous response, there are more
@@ -6385,8 +6630,19 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # End of support notice: On May 20, 2026, Amazon Web Services will end
+    # support for Amazon Web Services DMS Fleet Advisor;. After May 20,
+    # 2026, you will no longer be able to access the Amazon Web Services DMS
+    # Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor;
+    # resources. For more information, see [Amazon Web Services DMS Fleet
+    # Advisor end of support][1].
+    #
     # Returns a list of schemas detected by Fleet Advisor Collectors in your
     # account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   If you specify any of the following filters, the output includes
@@ -6510,6 +6766,39 @@ module Aws::DatabaseMigrationService
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: Describe Instance Profiles
+    #
+    #   # Returns a paginated list of instance profiles for your account in the current region.
+    #
+    #   resp = client.describe_instance_profiles({
+    #     filters: [
+    #       {
+    #         name: "instance-profile-identifier", 
+    #         values: [
+    #           "arn:aws:dms:us-east-1:012345678901:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     marker: "0123456789abcdefghijklmnopqrs", 
+    #     max_records: 20, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instance_profiles: [
+    #       {
+    #         instance_profile_arn: "arn:aws:dms:us-east-1:012345678901:instance-profile:my-instance-profile", 
+    #         instance_profile_creation_time: Time.parse("2022-12-16T09:44:43.543246Z"), 
+    #         instance_profile_name: "my-instance-profile", 
+    #         kms_key_arn: "arn:aws:kms:us-east-1:012345678901:key/01234567-89ab-cdef-0123-456789abcdef", 
+    #         publicly_accessible: true, 
+    #         subnet_group_identifier: "public-subnets", 
+    #       }, 
+    #     ], 
+    #     marker: "0123456789abcdefghijklmnopqrs", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_instance_profiles({
@@ -6616,7 +6905,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_metadata_model_assessments({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     filters: [
     #       {
     #         name: "String", # required
@@ -6715,7 +7004,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_metadata_model_conversions({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     filters: [
     #       {
     #         name: "String", # required
@@ -6813,7 +7102,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_metadata_model_exports_as_script({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     filters: [
     #       {
     #         name: "String", # required
@@ -6911,7 +7200,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_metadata_model_exports_to_target({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     filters: [
     #       {
     #         name: "String", # required
@@ -7006,7 +7295,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_metadata_model_imports({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     filters: [
     #       {
     #         name: "String", # required
@@ -7313,12 +7602,25 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # End of support notice: On May 20, 2026, Amazon Web Services will end
+    # support for Amazon Web Services DMS Fleet Advisor;. After May 20,
+    # 2026, you will no longer be able to access the Amazon Web Services DMS
+    # Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor;
+    # resources. For more information, see [Amazon Web Services DMS Fleet
+    # Advisor end of support][1].
+    #
     # Returns a paginated list of limitations for recommendations of target
     # Amazon Web Services engines.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   Filters applied to the limitations described in the form of key-value
     #   pairs.
+    #
+    #   Valid filter names: `database-id` \| `engine-name`
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -7377,12 +7679,25 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # End of support notice: On May 20, 2026, Amazon Web Services will end
+    # support for Amazon Web Services DMS Fleet Advisor;. After May 20,
+    # 2026, you will no longer be able to access the Amazon Web Services DMS
+    # Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor;
+    # resources. For more information, see [Amazon Web Services DMS Fleet
+    # Advisor end of support][1].
+    #
     # Returns a paginated list of target engine recommendations for your
     # source databases.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   Filters applied to the target engine recommendations described in the
     #   form of key-value pairs.
+    #
+    #   Valid filter names: `database-id` \| `engine-name`
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -7931,6 +8246,11 @@ module Aws::DatabaseMigrationService
     #   resp.replication_table_statistics[0].validation_suspended_records #=> Integer
     #   resp.replication_table_statistics[0].validation_state #=> String
     #   resp.replication_table_statistics[0].validation_state_details #=> String
+    #   resp.replication_table_statistics[0].resync_state #=> String
+    #   resp.replication_table_statistics[0].resync_rows_attempted #=> Integer
+    #   resp.replication_table_statistics[0].resync_rows_succeeded #=> Integer
+    #   resp.replication_table_statistics[0].resync_rows_failed #=> Integer
+    #   resp.replication_table_statistics[0].resync_progress #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTableStatistics AWS API Documentation
     #
@@ -8292,6 +8612,9 @@ module Aws::DatabaseMigrationService
     # @option params [Array<Types::Filter>] :filters
     #   Filters applied to the replications.
     #
+    #   Valid filter names: `replication-config-arn` \|
+    #   `replication-config-id`
+    #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
@@ -8561,6 +8884,11 @@ module Aws::DatabaseMigrationService
     #   resp.table_statistics[0].validation_suspended_records #=> Integer
     #   resp.table_statistics[0].validation_state #=> String
     #   resp.table_statistics[0].validation_state_details #=> String
+    #   resp.table_statistics[0].resync_state #=> String
+    #   resp.table_statistics[0].resync_rows_attempted #=> Integer
+    #   resp.table_statistics[0].resync_rows_succeeded #=> Integer
+    #   resp.table_statistics[0].resync_rows_failed #=> Integer
+    #   resp.table_statistics[0].resync_progress #=> Float
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeTableStatistics AWS API Documentation
@@ -8623,7 +8951,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.export_metadata_model_assessment({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     selection_rules: "String", # required
     #     file_name: "String",
     #     assessment_report_types: ["pdf"], # accepts pdf, csv
@@ -8816,7 +9144,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_conversion_configuration({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     conversion_configuration: "String", # required
     #   })
     #
@@ -8966,6 +9294,9 @@ module Aws::DatabaseMigrationService
     #   `db2-zos` and `docdb`. A value of `"aurora"` represents Amazon Aurora
     #   MySQL-Compatible Edition.
     #
+    # @option params [Boolean] :virtual
+    #   Indicates whether the data provider is virtual.
+    #
     # @option params [Boolean] :exact_settings
     #   If this attribute is Y, the current call to `ModifyDataProvider`
     #   replaces all existing data provider settings with the exact settings
@@ -9030,12 +9361,15 @@ module Aws::DatabaseMigrationService
     #     data_provider_name: "String",
     #     description: "String",
     #     engine: "String",
+    #     virtual: false,
     #     exact_settings: false,
     #     settings: {
     #       redshift_settings: {
     #         server_name: "String",
     #         port: 1,
     #         database_name: "String",
+    #         s3_path: "String",
+    #         s3_access_role_arn: "String",
     #       },
     #       postgre_sql_settings: {
     #         server_name: "String",
@@ -9043,12 +9377,16 @@ module Aws::DatabaseMigrationService
     #         database_name: "String",
     #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
     #         certificate_arn: "String",
+    #         s3_path: "String",
+    #         s3_access_role_arn: "String",
     #       },
     #       my_sql_settings: {
     #         server_name: "String",
     #         port: 1,
     #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
     #         certificate_arn: "String",
+    #         s3_path: "String",
+    #         s3_access_role_arn: "String",
     #       },
     #       oracle_settings: {
     #         server_name: "String",
@@ -9061,6 +9399,8 @@ module Aws::DatabaseMigrationService
     #         secrets_manager_oracle_asm_access_role_arn: "String",
     #         secrets_manager_security_db_encryption_secret_id: "String",
     #         secrets_manager_security_db_encryption_access_role_arn: "String",
+    #         s3_path: "String",
+    #         s3_access_role_arn: "String",
     #       },
     #       microsoft_sql_server_settings: {
     #         server_name: "String",
@@ -9068,6 +9408,8 @@ module Aws::DatabaseMigrationService
     #         database_name: "String",
     #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
     #         certificate_arn: "String",
+    #         s3_path: "String",
+    #         s3_access_role_arn: "String",
     #       },
     #       doc_db_settings: {
     #         server_name: "String",
@@ -9081,6 +9423,8 @@ module Aws::DatabaseMigrationService
     #         port: 1,
     #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
     #         certificate_arn: "String",
+    #         s3_path: "String",
+    #         s3_access_role_arn: "String",
     #       },
     #       ibm_db_2_luw_settings: {
     #         server_name: "String",
@@ -9088,6 +9432,8 @@ module Aws::DatabaseMigrationService
     #         database_name: "String",
     #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
     #         certificate_arn: "String",
+    #         s3_path: "String",
+    #         s3_access_role_arn: "String",
     #       },
     #       ibm_db_2z_os_settings: {
     #         server_name: "String",
@@ -9095,6 +9441,8 @@ module Aws::DatabaseMigrationService
     #         database_name: "String",
     #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
     #         certificate_arn: "String",
+    #         s3_path: "String",
+    #         s3_access_role_arn: "String",
     #       },
     #       mongo_db_settings: {
     #         server_name: "String",
@@ -9116,18 +9464,25 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.data_provider_creation_time #=> Time
     #   resp.data_provider.description #=> String
     #   resp.data_provider.engine #=> String
+    #   resp.data_provider.virtual #=> Boolean
     #   resp.data_provider.settings.redshift_settings.server_name #=> String
     #   resp.data_provider.settings.redshift_settings.port #=> Integer
     #   resp.data_provider.settings.redshift_settings.database_name #=> String
+    #   resp.data_provider.settings.redshift_settings.s3_path #=> String
+    #   resp.data_provider.settings.redshift_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.postgre_sql_settings.server_name #=> String
     #   resp.data_provider.settings.postgre_sql_settings.port #=> Integer
     #   resp.data_provider.settings.postgre_sql_settings.database_name #=> String
     #   resp.data_provider.settings.postgre_sql_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.postgre_sql_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.postgre_sql_settings.s3_path #=> String
+    #   resp.data_provider.settings.postgre_sql_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.my_sql_settings.server_name #=> String
     #   resp.data_provider.settings.my_sql_settings.port #=> Integer
     #   resp.data_provider.settings.my_sql_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.my_sql_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.my_sql_settings.s3_path #=> String
+    #   resp.data_provider.settings.my_sql_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.oracle_settings.server_name #=> String
     #   resp.data_provider.settings.oracle_settings.port #=> Integer
     #   resp.data_provider.settings.oracle_settings.database_name #=> String
@@ -9138,11 +9493,15 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.settings.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
     #   resp.data_provider.settings.oracle_settings.secrets_manager_security_db_encryption_secret_id #=> String
     #   resp.data_provider.settings.oracle_settings.secrets_manager_security_db_encryption_access_role_arn #=> String
+    #   resp.data_provider.settings.oracle_settings.s3_path #=> String
+    #   resp.data_provider.settings.oracle_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.microsoft_sql_server_settings.server_name #=> String
     #   resp.data_provider.settings.microsoft_sql_server_settings.port #=> Integer
     #   resp.data_provider.settings.microsoft_sql_server_settings.database_name #=> String
     #   resp.data_provider.settings.microsoft_sql_server_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.microsoft_sql_server_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.microsoft_sql_server_settings.s3_path #=> String
+    #   resp.data_provider.settings.microsoft_sql_server_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.doc_db_settings.server_name #=> String
     #   resp.data_provider.settings.doc_db_settings.port #=> Integer
     #   resp.data_provider.settings.doc_db_settings.database_name #=> String
@@ -9152,16 +9511,22 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.settings.maria_db_settings.port #=> Integer
     #   resp.data_provider.settings.maria_db_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.maria_db_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.maria_db_settings.s3_path #=> String
+    #   resp.data_provider.settings.maria_db_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.ibm_db_2_luw_settings.server_name #=> String
     #   resp.data_provider.settings.ibm_db_2_luw_settings.port #=> Integer
     #   resp.data_provider.settings.ibm_db_2_luw_settings.database_name #=> String
     #   resp.data_provider.settings.ibm_db_2_luw_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.ibm_db_2_luw_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.ibm_db_2_luw_settings.s3_path #=> String
+    #   resp.data_provider.settings.ibm_db_2_luw_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.ibm_db_2z_os_settings.server_name #=> String
     #   resp.data_provider.settings.ibm_db_2z_os_settings.port #=> Integer
     #   resp.data_provider.settings.ibm_db_2z_os_settings.database_name #=> String
     #   resp.data_provider.settings.ibm_db_2z_os_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.ibm_db_2z_os_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.ibm_db_2z_os_settings.s3_path #=> String
+    #   resp.data_provider.settings.ibm_db_2z_os_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.mongo_db_settings.server_name #=> String
     #   resp.data_provider.settings.mongo_db_settings.port #=> Integer
     #   resp.data_provider.settings.mongo_db_settings.database_name #=> String
@@ -9677,6 +10042,8 @@ module Aws::DatabaseMigrationService
     #       database_mode: "default", # accepts default, babelfish
     #       babelfish_database_name: "String",
     #       disable_unicode_source_filter: false,
+    #       service_access_role_arn: "String",
+    #       authentication_method: "password", # accepts password, iam
     #     },
     #     my_sql_settings: {
     #       after_connect_script: "String",
@@ -9694,6 +10061,8 @@ module Aws::DatabaseMigrationService
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
     #       execute_timeout: 1,
+    #       service_access_role_arn: "String",
+    #       authentication_method: "password", # accepts password, iam
     #     },
     #     oracle_settings: {
     #       add_supplemental_logging: false,
@@ -10015,6 +10384,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.database_mode #=> String, one of "default", "babelfish"
     #   resp.endpoint.postgre_sql_settings.babelfish_database_name #=> String
     #   resp.endpoint.postgre_sql_settings.disable_unicode_source_filter #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.service_access_role_arn #=> String
+    #   resp.endpoint.postgre_sql_settings.authentication_method #=> String, one of "password", "iam"
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -10030,6 +10401,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.my_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.my_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.my_sql_settings.execute_timeout #=> Integer
+    #   resp.endpoint.my_sql_settings.service_access_role_arn #=> String
+    #   resp.endpoint.my_sql_settings.authentication_method #=> String, one of "password", "iam"
     #   resp.endpoint.oracle_settings.add_supplemental_logging #=> Boolean
     #   resp.endpoint.oracle_settings.archived_log_dest_id #=> Integer
     #   resp.endpoint.oracle_settings.additional_archived_log_dest_id #=> Integer
@@ -10281,6 +10654,39 @@ module Aws::DatabaseMigrationService
     # @return [Types::ModifyInstanceProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyInstanceProfileResponse#instance_profile #instance_profile} => Types::InstanceProfile
+    #
+    #
+    # @example Example: Modify Instance Profile
+    #
+    #   # Modifies the specified instance profile using the provided parameters.
+    #
+    #   resp = client.modify_instance_profile({
+    #     availability_zone: "", 
+    #     description: "", 
+    #     instance_profile_identifier: "", 
+    #     instance_profile_name: "", 
+    #     kms_key_arn: "", 
+    #     network_type: "", 
+    #     publicly_accessible: true, 
+    #     subnet_group_identifier: "", 
+    #     vpc_security_groups: [
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instance_profile: {
+    #       instance_profile_arn: "arn:aws:dms:us-east-1:012345678901:instance-profile:my-instance-profile", 
+    #       instance_profile_creation_time: Time.parse("2022-12-16T09:44:43.543246Z"), 
+    #       instance_profile_name: "my-instance-profile", 
+    #       kms_key_arn: "arn:aws:kms:us-east-1:012345678901:key/01234567-89ab-cdef-0123-456789abcdef", 
+    #       publicly_accessible: true, 
+    #       subnet_group_identifier: "public-subnets", 
+    #       vpc_security_groups: [
+    #         "sg-0123456", 
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -11422,8 +11828,19 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # End of support notice: On May 20, 2026, Amazon Web Services will end
+    # support for Amazon Web Services DMS Fleet Advisor;. After May 20,
+    # 2026, you will no longer be able to access the Amazon Web Services DMS
+    # Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor;
+    # resources. For more information, see [Amazon Web Services DMS Fleet
+    # Advisor end of support][1].
+    #
     # Runs large-scale assessment (LSA) analysis on every Fleet Advisor
     # collector in your account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html
     #
     # @return [Types::RunFleetAdvisorLsaAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11539,7 +11956,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_extension_pack_association({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -11590,7 +12007,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_metadata_model_assessment({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     selection_rules: "String", # required
     #   })
     #
@@ -11638,7 +12055,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_metadata_model_conversion({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     selection_rules: "String", # required
     #   })
     #
@@ -11694,7 +12111,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_metadata_model_export_as_script({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     selection_rules: "String", # required
     #     origin: "SOURCE", # required, accepts SOURCE, TARGET
     #     file_name: "String",
@@ -11750,7 +12167,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_metadata_model_export_to_target({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     selection_rules: "String", # required
     #     overwrite_extension_pack: false,
     #   })
@@ -11811,7 +12228,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_metadata_model_import({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     selection_rules: "String", # required
     #     origin: "SOURCE", # required, accepts SOURCE, TARGET
     #     refresh: false,
@@ -11830,15 +12247,23 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # End of support notice: On May 20, 2026, Amazon Web Services will end
+    # support for Amazon Web Services DMS Fleet Advisor;. After May 20,
+    # 2026, you will no longer be able to access the Amazon Web Services DMS
+    # Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor;
+    # resources. For more information, see [Amazon Web Services DMS Fleet
+    # Advisor end of support][1].
+    #
     # Starts the analysis of your source database to provide recommendations
     # of target engines.
     #
     # You can create recommendations for multiple source databases using
-    # [BatchStartRecommendations][1].
+    # [BatchStartRecommendations][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_BatchStartRecommendations.html
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html
+    # [2]: https://docs.aws.amazon.com/dms/latest/APIReference/API_BatchStartRecommendations.html
     #
     # @option params [required, String] :database_id
     #   The identifier of the source database to analyze and provide
@@ -12054,22 +12479,33 @@ module Aws::DatabaseMigrationService
     # @option params [required, String] :start_replication_task_type
     #   The type of replication task to start.
     #
-    #   When the migration type is `full-load` or `full-load-and-cdc`, the
-    #   only valid value for the first run of the task is `start-replication`.
-    #   This option will start the migration.
+    #   `start-replication` is the only valid action that can be used for the
+    #   first time a task with the migration type of `full-load`full-load,
+    #   `full-load-and-cdc` or `cdc` is run. Any other action used for the
+    #   first time on a given task, such as `resume-processing` and
+    #   reload-target will result in data errors.
     #
     #   You can also use ReloadTables to reload specific tables that failed
     #   during migration instead of restarting the task.
     #
-    #   The `resume-processing` option isn't applicable for a full-load task,
-    #   because you can't resume partially loaded tables during the full load
-    #   phase.
+    #   For a `full-load` task, the resume-processing option will reload any
+    #   tables that were partially loaded or not yet loaded during the full
+    #   load phase.
     #
     #   For a `full-load-and-cdc` task, DMS migrates table data, and then
     #   applies data changes that occur on the source. To load all the tables
     #   again, and start capturing source changes, use `reload-target`.
     #   Otherwise use `resume-processing`, to replicate the changes from the
     #   last stop position.
+    #
+    #   For a `cdc` only task, to start from a specific position, you must use
+    #   start-replication and also specify the start position. Check the
+    #   source endpoint DMS documentation for any limitations. For example,
+    #   not all sources support starting from a time.
+    #
+    #   <note markdown="1"> `resume-processing` is only available for previously executed tasks.
+    #
+    #    </note>
     #
     # @option params [Time,DateTime,Date,Integer,String] :cdc_start_time
     #   Indicates the start time for a change data capture (CDC) operation.
@@ -12757,7 +13193,7 @@ module Aws::DatabaseMigrationService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.119.0'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

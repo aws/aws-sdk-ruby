@@ -27,6 +27,7 @@ module Aws::FSx
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {AccessPointAlreadyOwnedByYou}
   # * {ActiveDirectoryError}
   # * {BackupBeingCopied}
   # * {BackupInProgress}
@@ -42,6 +43,7 @@ module Aws::FSx
   # * {IncompatibleParameterError}
   # * {IncompatibleRegionForMultiAZ}
   # * {InternalServerError}
+  # * {InvalidAccessPoint}
   # * {InvalidDataRepositoryType}
   # * {InvalidDestinationKmsKey}
   # * {InvalidExportPath}
@@ -49,6 +51,7 @@ module Aws::FSx
   # * {InvalidNetworkSettings}
   # * {InvalidPerUnitStorageThroughput}
   # * {InvalidRegion}
+  # * {InvalidRequest}
   # * {InvalidSourceKmsKey}
   # * {MissingFileCacheConfiguration}
   # * {MissingFileSystemConfiguration}
@@ -56,10 +59,12 @@ module Aws::FSx
   # * {NotServiceResourceError}
   # * {ResourceDoesNotSupportTagging}
   # * {ResourceNotFound}
+  # * {S3AccessPointAttachmentNotFound}
   # * {ServiceLimitExceeded}
   # * {SnapshotNotFound}
   # * {SourceBackupUnavailable}
   # * {StorageVirtualMachineNotFound}
+  # * {TooManyAccessPoints}
   # * {UnsupportedOperation}
   # * {VolumeNotFound}
   #
@@ -68,6 +73,26 @@ module Aws::FSx
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class AccessPointAlreadyOwnedByYou < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::FSx::Types::AccessPointAlreadyOwnedByYou] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def error_code
+        @data[:error_code]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class ActiveDirectoryError < ServiceError
 
@@ -319,6 +344,26 @@ module Aws::FSx
       end
     end
 
+    class InvalidAccessPoint < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::FSx::Types::InvalidAccessPoint] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def error_code
+        @data[:error_code]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class InvalidDataRepositoryType < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -431,6 +476,26 @@ module Aws::FSx
       # @param [Aws::FSx::Types::InvalidRegion] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidRequest < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::FSx::Types::InvalidRequest] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def error_code
+        @data[:error_code]
       end
 
       # @return [String]
@@ -559,6 +624,21 @@ module Aws::FSx
       end
     end
 
+    class S3AccessPointAttachmentNotFound < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::FSx::Types::S3AccessPointAttachmentNotFound] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class ServiceLimitExceeded < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -621,6 +701,26 @@ module Aws::FSx
       # @param [Aws::FSx::Types::StorageVirtualMachineNotFound] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyAccessPoints < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::FSx::Types::TooManyAccessPoints] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def error_code
+        @data[:error_code]
       end
 
       # @return [String]

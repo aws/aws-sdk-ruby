@@ -1,0 +1,91 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SSMGuiConnect
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectionRecordingPreferences
+      attr_accessor kms_key_arn: ::String
+      attr_accessor recording_destinations: Types::RecordingDestinations
+      SENSITIVE: []
+    end
+
+    class DeleteConnectionRecordingPreferencesRequest
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectionRecordingPreferencesResponse
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectionRecordingPreferencesResponse
+      attr_accessor client_token: ::String
+      attr_accessor connection_recording_preferences: Types::ConnectionRecordingPreferences
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RecordingDestinations
+      attr_accessor s3_buckets: ::Array[Types::S3Bucket]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3Bucket
+      attr_accessor bucket_name: ::String
+      attr_accessor bucket_owner: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConnectionRecordingPreferencesRequest
+      attr_accessor client_token: ::String
+      attr_accessor connection_recording_preferences: Types::ConnectionRecordingPreferences
+      SENSITIVE: []
+    end
+
+    class UpdateConnectionRecordingPreferencesResponse
+      attr_accessor client_token: ::String
+      attr_accessor connection_recording_preferences: Types::ConnectionRecordingPreferences
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

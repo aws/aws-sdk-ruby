@@ -88,7 +88,11 @@ module Aws::States
     #
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
-    #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #   * control characters (`U+0000-001F`, `U+007F-009F`, `U+FFFE-FFFF`)
+    #
+    #   * surrogates (`U+D800-DFFF`)
+    #
+    #   * invalid characters (` U+10FFFF`)
     #
     #   To enable logging with CloudWatch Logs, the name should only contain
     #   0-9, A-Z, a-z, - and \_.
@@ -332,7 +336,11 @@ module Aws::States
     #
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
-    #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #   * control characters (`U+0000-001F`, `U+007F-009F`, `U+FFFE-FFFF`)
+    #
+    #   * surrogates (`U+D800-DFFF`)
+    #
+    #   * invalid characters (` U+10FFFF`)
     #
     #   To enable logging with CloudWatch Logs, the name should only contain
     #   0-9, A-Z, a-z, - and \_.
@@ -451,7 +459,11 @@ module Aws::States
     #
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
-    #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #   * control characters (`U+0000-001F`, `U+007F-009F`, `U+FFFE-FFFF`)
+    #
+    #   * surrogates (`U+D800-DFFF`)
+    #
+    #   * invalid characters (` U+10FFFF`)
     #
     #   To enable logging with CloudWatch Logs, the name should only contain
     #   0-9, A-Z, a-z, - and \_.
@@ -663,7 +675,11 @@ module Aws::States
     #
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
-    #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #   * control characters (`U+0000-001F`, `U+007F-009F`, `U+FFFE-FFFF`)
+    #
+    #   * surrogates (`U+D800-DFFF`)
+    #
+    #   * invalid characters (` U+10FFFF`)
     #
     #   To enable logging with CloudWatch Logs, the name should only contain
     #   0-9, A-Z, a-z, - and \_.
@@ -730,7 +746,11 @@ module Aws::States
     #
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
-    #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #   * control characters (`U+0000-001F`, `U+007F-009F`, `U+FFFE-FFFF`)
+    #
+    #   * surrogates (`U+D800-DFFF`)
+    #
+    #   * invalid characters (` U+10FFFF`)
     #
     #   To enable logging with CloudWatch Logs, the name should only contain
     #   0-9, A-Z, a-z, - and \_.
@@ -774,6 +794,16 @@ module Aws::States
     #
     # @!attribute [rw] trace_header
     #   The X-Ray trace header that was passed to the execution.
+    #
+    #   <note markdown="1"> For X-Ray traces, all Amazon Web Services services use the
+    #   `X-Amzn-Trace-Id` header from the HTTP request. Using the header is
+    #   the preferred mechanism to identify a trace. `StartExecution` and
+    #   `StartSyncExecution` API operations can also use `traceHeader` from
+    #   the body of the request payload. If **both** sources are provided,
+    #   Step Functions will use the **header value** (preferred) over the
+    #   value in the request body.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] map_run_arn
@@ -1115,7 +1145,7 @@ module Aws::States
     #
     # @!attribute [rw] label
     #   A user-defined or an auto-generated string that identifies a `Map`
-    #   state. This ﬁeld is returned only if the `executionArn` is a child
+    #   state. This field is returned only if the `executionArn` is a child
     #   workflow execution that was started by a Distributed Map state.
     #   @return [String]
     #
@@ -1215,7 +1245,11 @@ module Aws::States
     #
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
-    #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #   * control characters (`U+0000-001F`, `U+007F-009F`, `U+FFFE-FFFF`)
+    #
+    #   * surrogates (`U+D800-DFFF`)
+    #
+    #   * invalid characters (` U+10FFFF`)
     #
     #   To enable logging with CloudWatch Logs, the name should only contain
     #   0-9, A-Z, a-z, - and \_.
@@ -1504,7 +1538,11 @@ module Aws::States
     #
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
-    #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #   * control characters (`U+0000-001F`, `U+007F-009F`, `U+FFFE-FFFF`)
+    #
+    #   * surrogates (`U+D800-DFFF`)
+    #
+    #   * invalid characters (` U+10FFFF`)
     #
     #   To enable logging with CloudWatch Logs, the name should only contain
     #   0-9, A-Z, a-z, - and \_.
@@ -2588,6 +2626,17 @@ module Aws::States
     # @!attribute [rw] status_filter
     #   If specified, only list the executions whose current execution
     #   status matches the given filter.
+    #
+    #   If you provide a `PENDING_REDRIVE` statusFilter, you must specify
+    #   `mapRunArn`. For more information, see [Child workflow execution
+    #   redrive behaviour][1] in the *Step Functions Developer Guide*.
+    #
+    #   If you provide a stateMachineArn and a `PENDING_REDRIVE`
+    #   statusFilter, the API returns a validation exception.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html#redrive-child-workflow-behavior
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -3557,7 +3606,11 @@ module Aws::States
     #
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
-    #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #   * control characters (`U+0000-001F`, `U+007F-009F`, `U+FFFE-FFFF`)
+    #
+    #   * surrogates (`U+D800-DFFF`)
+    #
+    #   * invalid characters (` U+10FFFF`)
     #
     #   To enable logging with CloudWatch Logs, the name should only contain
     #   0-9, A-Z, a-z, - and \_.
@@ -3571,10 +3624,10 @@ module Aws::States
     #   The string that contains the JSON input data for the execution, for
     #   example:
     #
-    #   `"input": "{"first_name" : "test"}"`
+    #   `"{"first_name" : "Tim"}"`
     #
     #   <note markdown="1"> If you don't include any JSON input data, you still must include
-    #   the two braces, for example: `"input": "{}"`
+    #   the two braces, for example: `"{}"`
     #
     #    </note>
     #
@@ -3585,6 +3638,16 @@ module Aws::States
     # @!attribute [rw] trace_header
     #   Passes the X-Ray trace header. The trace header can also be passed
     #   in the request payload.
+    #
+    #   <note markdown="1"> For X-Ray traces, all Amazon Web Services services use the
+    #   `X-Amzn-Trace-Id` header from the HTTP request. Using the header is
+    #   the preferred mechanism to identify a trace. `StartExecution` and
+    #   `StartSyncExecution` API operations can also use `traceHeader` from
+    #   the body of the request payload. If **both** sources are provided,
+    #   Step Functions will use the **header value** (preferred) over the
+    #   value in the request body.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartExecutionInput AWS API Documentation
@@ -3627,10 +3690,10 @@ module Aws::States
     #   The string that contains the JSON input data for the execution, for
     #   example:
     #
-    #   `"input": "{"first_name" : "test"}"`
+    #   `"{"first_name" : "Tim"}"`
     #
     #   <note markdown="1"> If you don't include any JSON input data, you still must include
-    #   the two braces, for example: `"input": "{}"`
+    #   the two braces, for example: `"{}"`
     #
     #    </note>
     #
@@ -3641,6 +3704,16 @@ module Aws::States
     # @!attribute [rw] trace_header
     #   Passes the X-Ray trace header. The trace header can also be passed
     #   in the request payload.
+    #
+    #   <note markdown="1"> For X-Ray traces, all Amazon Web Services services use the
+    #   `X-Amzn-Trace-Id` header from the HTTP request. Using the header is
+    #   the preferred mechanism to identify a trace. `StartExecution` and
+    #   `StartSyncExecution` API operations can also use `traceHeader` from
+    #   the body of the request payload. If **both** sources are provided,
+    #   Step Functions will use the **header value** (preferred) over the
+    #   value in the request body.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] included_data
@@ -3721,6 +3794,16 @@ module Aws::States
     #
     # @!attribute [rw] trace_header
     #   The X-Ray trace header that was passed to the execution.
+    #
+    #   <note markdown="1"> For X-Ray traces, all Amazon Web Services services use the
+    #   `X-Amzn-Trace-Id` header from the HTTP request. Using the header is
+    #   the preferred mechanism to identify a trace. `StartExecution` and
+    #   `StartSyncExecution` API operations can also use `traceHeader` from
+    #   the body of the request payload. If **both** sources are provided,
+    #   Step Functions will use the **header value** (preferred) over the
+    #   value in the request body.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] billing_details
@@ -3790,7 +3873,11 @@ module Aws::States
     #
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
-    #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #   * control characters (`U+0000-001F`, `U+007F-009F`, `U+FFFE-FFFF`)
+    #
+    #   * surrogates (`U+D800-DFFF`)
+    #
+    #   * invalid characters (` U+10FFFF`)
     #
     #   To enable logging with CloudWatch Logs, the name should only contain
     #   0-9, A-Z, a-z, - and \_.
@@ -3921,7 +4008,11 @@ module Aws::States
     #
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
-    #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #   * control characters (`U+0000-001F`, `U+007F-009F`, `U+FFFE-FFFF`)
+    #
+    #   * surrogates (`U+D800-DFFF`)
+    #
+    #   * invalid characters (` U+10FFFF`)
     #
     #   To enable logging with CloudWatch Logs, the name should only contain
     #   0-9, A-Z, a-z, - and \_.
@@ -4460,7 +4551,7 @@ module Aws::States
     # @!attribute [rw] next_state
     #   The name of the next state to transition to. If you haven't defined
     #   a next state in your definition or if the execution of the state
-    #   fails, this ﬁeld doesn't contain a value.
+    #   fails, this field doesn't contain a value.
     #   @return [String]
     #
     # @!attribute [rw] status

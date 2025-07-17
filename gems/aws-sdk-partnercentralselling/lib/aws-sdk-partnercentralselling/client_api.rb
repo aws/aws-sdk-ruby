@@ -464,7 +464,7 @@ module Aws::PartnerCentralSelling
     Contact.struct_class = Types::Contact
 
     CreateEngagementInvitationRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    CreateEngagementInvitationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateEngagementInvitationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateEngagementInvitationRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifier, required: true, location_name: "EngagementIdentifier"))
     CreateEngagementInvitationRequest.add_member(:invitation, Shapes::ShapeRef.new(shape: Invitation, required: true, location_name: "Invitation"))
     CreateEngagementInvitationRequest.struct_class = Types::CreateEngagementInvitationRequest
@@ -474,7 +474,7 @@ module Aws::PartnerCentralSelling
     CreateEngagementInvitationResponse.struct_class = Types::CreateEngagementInvitationResponse
 
     CreateEngagementRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    CreateEngagementRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateEngagementRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateEngagementRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateEngagementRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateEngagementRequest.add_member(:contexts, Shapes::ShapeRef.new(shape: EngagementContexts, location_name: "Contexts"))
     CreateEngagementRequest.add_member(:description, Shapes::ShapeRef.new(shape: EngagementDescription, required: true, location_name: "Description"))
     CreateEngagementRequest.add_member(:title, Shapes::ShapeRef.new(shape: EngagementTitle, required: true, location_name: "Title"))
@@ -485,7 +485,7 @@ module Aws::PartnerCentralSelling
     CreateEngagementResponse.struct_class = Types::CreateEngagementResponse
 
     CreateOpportunityRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    CreateOpportunityRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateOpportunityRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateOpportunityRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateOpportunityRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateOpportunityRequest.add_member(:customer, Shapes::ShapeRef.new(shape: Customer, location_name: "Customer"))
     CreateOpportunityRequest.add_member(:life_cycle, Shapes::ShapeRef.new(shape: LifeCycle, location_name: "LifeCycle"))
     CreateOpportunityRequest.add_member(:marketing, Shapes::ShapeRef.new(shape: Marketing, location_name: "Marketing"))
@@ -505,7 +505,7 @@ module Aws::PartnerCentralSelling
     CreateOpportunityResponse.struct_class = Types::CreateOpportunityResponse
 
     CreateResourceSnapshotJobRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    CreateResourceSnapshotJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateResourceSnapshotJobRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateResourceSnapshotJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateResourceSnapshotJobRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateResourceSnapshotJobRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifier, required: true, location_name: "EngagementIdentifier"))
     CreateResourceSnapshotJobRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "ResourceIdentifier"))
     CreateResourceSnapshotJobRequest.add_member(:resource_snapshot_template_identifier, Shapes::ShapeRef.new(shape: ResourceTemplateName, required: true, location_name: "ResourceSnapshotTemplateIdentifier"))
@@ -518,7 +518,7 @@ module Aws::PartnerCentralSelling
     CreateResourceSnapshotJobResponse.struct_class = Types::CreateResourceSnapshotJobResponse
 
     CreateResourceSnapshotRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    CreateResourceSnapshotRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateResourceSnapshotRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateResourceSnapshotRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateResourceSnapshotRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateResourceSnapshotRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifier, required: true, location_name: "EngagementIdentifier"))
     CreateResourceSnapshotRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "ResourceIdentifier"))
     CreateResourceSnapshotRequest.add_member(:resource_snapshot_template_identifier, Shapes::ShapeRef.new(shape: ResourceTemplateName, required: true, location_name: "ResourceSnapshotTemplateIdentifier"))
@@ -1186,7 +1186,7 @@ module Aws::PartnerCentralSelling
     SortObject.struct_class = Types::SortObject
 
     StartEngagementByAcceptingInvitationTaskRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    StartEngagementByAcceptingInvitationTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: StartEngagementByAcceptingInvitationTaskRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartEngagementByAcceptingInvitationTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: StartEngagementByAcceptingInvitationTaskRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     StartEngagementByAcceptingInvitationTaskRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: EngagementInvitationArnOrIdentifier, required: true, location_name: "Identifier"))
     StartEngagementByAcceptingInvitationTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartEngagementByAcceptingInvitationTaskRequest.struct_class = Types::StartEngagementByAcceptingInvitationTaskRequest
@@ -1204,7 +1204,7 @@ module Aws::PartnerCentralSelling
 
     StartEngagementFromOpportunityTaskRequest.add_member(:aws_submission, Shapes::ShapeRef.new(shape: AwsSubmission, required: true, location_name: "AwsSubmission"))
     StartEngagementFromOpportunityTaskRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    StartEngagementFromOpportunityTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: StartEngagementFromOpportunityTaskRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartEngagementFromOpportunityTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: StartEngagementFromOpportunityTaskRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     StartEngagementFromOpportunityTaskRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: OpportunityIdentifier, required: true, location_name: "Identifier"))
     StartEngagementFromOpportunityTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartEngagementFromOpportunityTaskRequest.struct_class = Types::StartEngagementFromOpportunityTaskRequest
@@ -1321,8 +1321,8 @@ module Aws::PartnerCentralSelling
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AcceptEngagementInvitationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1361,8 +1361,8 @@ module Aws::PartnerCentralSelling
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateEngagementRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateEngagementResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1375,8 +1375,8 @@ module Aws::PartnerCentralSelling
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateEngagementInvitationRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateEngagementInvitationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1389,8 +1389,8 @@ module Aws::PartnerCentralSelling
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateOpportunityRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateOpportunityResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1403,8 +1403,8 @@ module Aws::PartnerCentralSelling
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateResourceSnapshotRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateResourceSnapshotResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1417,8 +1417,8 @@ module Aws::PartnerCentralSelling
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateResourceSnapshotJobRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateResourceSnapshotJobResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1431,8 +1431,8 @@ module Aws::PartnerCentralSelling
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteResourceSnapshotJobRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1751,8 +1751,8 @@ module Aws::PartnerCentralSelling
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RejectEngagementInvitationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1765,8 +1765,8 @@ module Aws::PartnerCentralSelling
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartEngagementByAcceptingInvitationTaskRequest)
         o.output = Shapes::ShapeRef.new(shape: StartEngagementByAcceptingInvitationTaskResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1780,8 +1780,8 @@ module Aws::PartnerCentralSelling
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartEngagementFromOpportunityTaskRequest)
         o.output = Shapes::ShapeRef.new(shape: StartEngagementFromOpportunityTaskResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1832,8 +1832,8 @@ module Aws::PartnerCentralSelling
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1846,8 +1846,8 @@ module Aws::PartnerCentralSelling
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1860,8 +1860,8 @@ module Aws::PartnerCentralSelling
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateOpportunityRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateOpportunityResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

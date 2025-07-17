@@ -1147,7 +1147,9 @@
       "type":"string",
       "enum":[
         "DOCUMENT",
-        "IMAGE"
+        "IMAGE",
+        "AUDIO",
+        "VIDEO"
       ]
     },
     "UntagResourceRequest":{

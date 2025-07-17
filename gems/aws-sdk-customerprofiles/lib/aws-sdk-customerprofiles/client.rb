@@ -200,8 +200,7 @@ module Aws::CustomerProfiles
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -572,6 +571,7 @@ module Aws::CustomerProfiles
     #   resp.calculated_attribute_values[0].is_data_partial #=> String
     #   resp.calculated_attribute_values[0].profile_id #=> String
     #   resp.calculated_attribute_values[0].value #=> String
+    #   resp.calculated_attribute_values[0].last_object_timestamp #=> Time
     #   resp.condition_overrides.range.start #=> Integer
     #   resp.condition_overrides.range.end #=> Integer
     #   resp.condition_overrides.range.unit #=> String, one of "DAYS"
@@ -726,6 +726,10 @@ module Aws::CustomerProfiles
     # @option params [required, String] :statistic
     #   The aggregation operation to perform for the calculated attribute.
     #
+    # @option params [Boolean] :use_historical_data
+    #   Whether historical data ingested before the Calculated Attribute was
+    #   created should be included in calculations.
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
     #
@@ -740,6 +744,9 @@ module Aws::CustomerProfiles
     #   * {Types::CreateCalculatedAttributeDefinitionResponse#statistic #statistic} => String
     #   * {Types::CreateCalculatedAttributeDefinitionResponse#created_at #created_at} => Time
     #   * {Types::CreateCalculatedAttributeDefinitionResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::CreateCalculatedAttributeDefinitionResponse#use_historical_data #use_historical_data} => Boolean
+    #   * {Types::CreateCalculatedAttributeDefinitionResponse#status #status} => String
+    #   * {Types::CreateCalculatedAttributeDefinitionResponse#readiness #readiness} => Types::Readiness
     #   * {Types::CreateCalculatedAttributeDefinitionResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -759,8 +766,14 @@ module Aws::CustomerProfiles
     #     },
     #     conditions: {
     #       range: {
-    #         value: 1, # required
-    #         unit: "DAYS", # required, accepts DAYS
+    #         value: 1,
+    #         unit: "DAYS", # accepts DAYS
+    #         value_range: {
+    #           start: 1, # required
+    #           end: 1, # required
+    #         },
+    #         timestamp_source: "string1To255",
+    #         timestamp_format: "string1To255",
     #       },
     #       object_count: 1,
     #       threshold: {
@@ -787,6 +800,7 @@ module Aws::CustomerProfiles
     #       ],
     #     },
     #     statistic: "FIRST_OCCURRENCE", # required, accepts FIRST_OCCURRENCE, LAST_OCCURRENCE, COUNT, SUM, MINIMUM, MAXIMUM, AVERAGE, MAX_OCCURRENCE
+    #     use_historical_data: false,
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -802,6 +816,10 @@ module Aws::CustomerProfiles
     #   resp.attribute_details.expression #=> String
     #   resp.conditions.range.value #=> Integer
     #   resp.conditions.range.unit #=> String, one of "DAYS"
+    #   resp.conditions.range.value_range.start #=> Integer
+    #   resp.conditions.range.value_range.end #=> Integer
+    #   resp.conditions.range.timestamp_source #=> String
+    #   resp.conditions.range.timestamp_format #=> String
     #   resp.conditions.object_count #=> Integer
     #   resp.conditions.threshold.value #=> String
     #   resp.conditions.threshold.operator #=> String, one of "EQUAL_TO", "GREATER_THAN", "LESS_THAN", "NOT_EQUAL_TO"
@@ -816,6 +834,10 @@ module Aws::CustomerProfiles
     #   resp.statistic #=> String, one of "FIRST_OCCURRENCE", "LAST_OCCURRENCE", "COUNT", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "MAX_OCCURRENCE"
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
+    #   resp.use_historical_data #=> Boolean
+    #   resp.status #=> String, one of "PREPARING", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.readiness.progress_percentage #=> Integer
+    #   resp.readiness.message #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1030,6 +1052,89 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def create_domain(params = {}, options = {})
       req = build_request(:create_domain, params)
+      req.send_request(options)
+    end
+
+    # Creates the layout to view data for a specific domain. This API can
+    # only be invoked from the Amazon Connect admin website.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :layout_definition_name
+    #   The unique name of the layout.
+    #
+    # @option params [required, String] :description
+    #   The description of the layout
+    #
+    # @option params [required, String] :display_name
+    #   The display name of the layout
+    #
+    # @option params [Boolean] :is_default
+    #   If set to true for a layout, this layout will be used by default to
+    #   view data. If set to false, then the layout will not be used by
+    #   default, but it can be used to view data by explicitly selecting it in
+    #   the console.
+    #
+    # @option params [required, String] :layout_type
+    #   The type of layout that can be used to view data under a Customer
+    #   Profiles domain.
+    #
+    # @option params [required, String] :layout
+    #   A customizable layout that can be used to view data under a Customer
+    #   Profiles domain.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @return [Types::CreateDomainLayoutResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDomainLayoutResponse#layout_definition_name #layout_definition_name} => String
+    #   * {Types::CreateDomainLayoutResponse#description #description} => String
+    #   * {Types::CreateDomainLayoutResponse#display_name #display_name} => String
+    #   * {Types::CreateDomainLayoutResponse#is_default #is_default} => Boolean
+    #   * {Types::CreateDomainLayoutResponse#layout_type #layout_type} => String
+    #   * {Types::CreateDomainLayoutResponse#layout #layout} => String
+    #   * {Types::CreateDomainLayoutResponse#version #version} => String
+    #   * {Types::CreateDomainLayoutResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::CreateDomainLayoutResponse#created_at #created_at} => Time
+    #   * {Types::CreateDomainLayoutResponse#last_updated_at #last_updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_domain_layout({
+    #     domain_name: "name", # required
+    #     layout_definition_name: "name", # required
+    #     description: "sensitiveText", # required
+    #     display_name: "displayName", # required
+    #     is_default: false,
+    #     layout_type: "PROFILE_EXPLORER", # required, accepts PROFILE_EXPLORER
+    #     layout: "sensitiveString1To2000000", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.layout_definition_name #=> String
+    #   resp.description #=> String
+    #   resp.display_name #=> String
+    #   resp.is_default #=> Boolean
+    #   resp.layout_type #=> String, one of "PROFILE_EXPLORER"
+    #   resp.layout #=> String
+    #   resp.version #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateDomainLayout AWS API Documentation
+    #
+    # @overload create_domain_layout(params = {})
+    # @param [Hash] params ({})
+    def create_domain_layout(params = {}, options = {})
+      req = build_request(:create_domain_layout, params)
       req.send_request(options)
     end
 
@@ -1346,7 +1451,7 @@ module Aws::CustomerProfiles
     #   The unique name of the domain.
     #
     # @option params [String] :account_number
-    #   An account number that you have given to the customer.
+    #   An account number that you have assigned to the customer.
     #
     # @option params [String] :additional_information
     #   Any additional information relevant to the customer’s profile.
@@ -2072,6 +2177,62 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Creates an Upload job to ingest data for segment imports. The metadata
+    # is created for the job with the provided field mapping and unique key.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain. Domain should be exists for the upload
+    #   job to be created.
+    #
+    # @option params [required, String] :display_name
+    #   The unique name of the upload job. Could be a file name to identify
+    #   the upload job.
+    #
+    # @option params [required, Hash<String,Types::ObjectTypeField>] :fields
+    #   The mapping between CSV Columns and Profile Object attributes. A map
+    #   of the name and ObjectType field.
+    #
+    # @option params [required, String] :unique_key
+    #   The unique key columns for de-duping the profiles used to map data to
+    #   the profile.
+    #
+    # @option params [Integer] :data_expiry
+    #   The expiry duration for the profiles ingested with the job. If not
+    #   provided, the system default of 2 weeks is used.
+    #
+    # @return [Types::CreateUploadJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUploadJobResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_upload_job({
+    #     domain_name: "name", # required
+    #     display_name: "string1To255", # required
+    #     fields: { # required
+    #       "fieldName" => {
+    #         source: "text",
+    #         target: "text",
+    #         content_type: "STRING", # accepts STRING, NUMBER, PHONE_NUMBER, EMAIL_ADDRESS, NAME
+    #       },
+    #     },
+    #     unique_key: "text", # required
+    #     data_expiry: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateUploadJob AWS API Documentation
+    #
+    # @overload create_upload_job(params = {})
+    # @param [Hash] params ({})
+    def create_upload_job(params = {}, options = {})
+      req = build_request(:create_upload_job, params)
+      req.send_request(options)
+    end
+
     # Deletes an existing calculated attribute definition. Note that
     # deleting a default calculated attribute is possible, however once
     # deleted, you will be unable to undo that action and will need to
@@ -2128,6 +2289,39 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def delete_domain(params = {}, options = {})
       req = build_request(:delete_domain, params)
+      req.send_request(options)
+    end
+
+    # Deletes the layout used to view data for a specific domain. This API
+    # can only be invoked from the Amazon Connect admin website.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :layout_definition_name
+    #   The unique name of the layout.
+    #
+    # @return [Types::DeleteDomainLayoutResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDomainLayoutResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_domain_layout({
+    #     domain_name: "name", # required
+    #     layout_definition_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteDomainLayout AWS API Documentation
+    #
+    # @overload delete_domain_layout(params = {})
+    # @param [Hash] params ({})
+    def delete_domain_layout(params = {}, options = {})
+      req = build_request(:delete_domain_layout, params)
       req.send_request(options)
     end
 
@@ -2460,13 +2654,13 @@ module Aws::CustomerProfiles
     #   resp.detected_profile_object_types #=> Array
     #   resp.detected_profile_object_types[0].source_last_updated_timestamp_format #=> String
     #   resp.detected_profile_object_types[0].fields #=> Hash
-    #   resp.detected_profile_object_types[0].fields["name"].source #=> String
-    #   resp.detected_profile_object_types[0].fields["name"].target #=> String
-    #   resp.detected_profile_object_types[0].fields["name"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
+    #   resp.detected_profile_object_types[0].fields["fieldName"].source #=> String
+    #   resp.detected_profile_object_types[0].fields["fieldName"].target #=> String
+    #   resp.detected_profile_object_types[0].fields["fieldName"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
     #   resp.detected_profile_object_types[0].keys #=> Hash
     #   resp.detected_profile_object_types[0].keys["name"] #=> Array
     #   resp.detected_profile_object_types[0].keys["name"][0].standard_identifiers #=> Array
-    #   resp.detected_profile_object_types[0].keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.detected_profile_object_types[0].keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
     #   resp.detected_profile_object_types[0].keys["name"][0].field_names #=> Array
     #   resp.detected_profile_object_types[0].keys["name"][0].field_names[0] #=> String
     #
@@ -2569,6 +2763,9 @@ module Aws::CustomerProfiles
     #   * {Types::GetCalculatedAttributeDefinitionResponse#filter #data.filter} => Types::Filter (This method conflicts with a method on Response, call it through the data member)
     #   * {Types::GetCalculatedAttributeDefinitionResponse#conditions #conditions} => Types::Conditions
     #   * {Types::GetCalculatedAttributeDefinitionResponse#attribute_details #attribute_details} => Types::AttributeDetails
+    #   * {Types::GetCalculatedAttributeDefinitionResponse#use_historical_data #use_historical_data} => Boolean
+    #   * {Types::GetCalculatedAttributeDefinitionResponse#status #status} => String
+    #   * {Types::GetCalculatedAttributeDefinitionResponse#readiness #readiness} => Types::Readiness
     #   * {Types::GetCalculatedAttributeDefinitionResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -2596,12 +2793,20 @@ module Aws::CustomerProfiles
     #   resp.data.filter.groups[0].dimensions[0].attributes["attributeName"].values[0] #=> String
     #   resp.conditions.range.value #=> Integer
     #   resp.conditions.range.unit #=> String, one of "DAYS"
+    #   resp.conditions.range.value_range.start #=> Integer
+    #   resp.conditions.range.value_range.end #=> Integer
+    #   resp.conditions.range.timestamp_source #=> String
+    #   resp.conditions.range.timestamp_format #=> String
     #   resp.conditions.object_count #=> Integer
     #   resp.conditions.threshold.value #=> String
     #   resp.conditions.threshold.operator #=> String, one of "EQUAL_TO", "GREATER_THAN", "LESS_THAN", "NOT_EQUAL_TO"
     #   resp.attribute_details.attributes #=> Array
     #   resp.attribute_details.attributes[0].name #=> String
     #   resp.attribute_details.expression #=> String
+    #   resp.use_historical_data #=> Boolean
+    #   resp.status #=> String, one of "PREPARING", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.readiness.progress_percentage #=> Integer
+    #   resp.readiness.message #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -2631,6 +2836,7 @@ module Aws::CustomerProfiles
     #   * {Types::GetCalculatedAttributeForProfileResponse#display_name #display_name} => String
     #   * {Types::GetCalculatedAttributeForProfileResponse#is_data_partial #is_data_partial} => String
     #   * {Types::GetCalculatedAttributeForProfileResponse#value #value} => String
+    #   * {Types::GetCalculatedAttributeForProfileResponse#last_object_timestamp #last_object_timestamp} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -2646,6 +2852,7 @@ module Aws::CustomerProfiles
     #   resp.display_name #=> String
     #   resp.is_data_partial #=> String
     #   resp.value #=> String
+    #   resp.last_object_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetCalculatedAttributeForProfile AWS API Documentation
     #
@@ -2731,6 +2938,58 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def get_domain(params = {}, options = {})
       req = build_request(:get_domain, params)
+      req.send_request(options)
+    end
+
+    # Gets the layout to view data for a specific domain. This API can only
+    # be invoked from the Amazon Connect admin website.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :layout_definition_name
+    #   The unique name of the layout.
+    #
+    # @return [Types::GetDomainLayoutResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDomainLayoutResponse#layout_definition_name #layout_definition_name} => String
+    #   * {Types::GetDomainLayoutResponse#description #description} => String
+    #   * {Types::GetDomainLayoutResponse#display_name #display_name} => String
+    #   * {Types::GetDomainLayoutResponse#is_default #is_default} => Boolean
+    #   * {Types::GetDomainLayoutResponse#layout_type #layout_type} => String
+    #   * {Types::GetDomainLayoutResponse#layout #layout} => String
+    #   * {Types::GetDomainLayoutResponse#version #version} => String
+    #   * {Types::GetDomainLayoutResponse#created_at #created_at} => Time
+    #   * {Types::GetDomainLayoutResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetDomainLayoutResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_domain_layout({
+    #     domain_name: "name", # required
+    #     layout_definition_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.layout_definition_name #=> String
+    #   resp.description #=> String
+    #   resp.display_name #=> String
+    #   resp.is_default #=> Boolean
+    #   resp.layout_type #=> String, one of "PROFILE_EXPLORER"
+    #   resp.layout #=> String
+    #   resp.version #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetDomainLayout AWS API Documentation
+    #
+    # @overload get_domain_layout(params = {})
+    # @param [Hash] params ({})
+    def get_domain_layout(params = {}, options = {})
+      req = build_request(:get_domain_layout, params)
       req.send_request(options)
     end
 
@@ -3109,13 +3368,13 @@ module Aws::CustomerProfiles
     #   resp.max_available_profile_object_count #=> Integer
     #   resp.max_profile_object_count #=> Integer
     #   resp.fields #=> Hash
-    #   resp.fields["name"].source #=> String
-    #   resp.fields["name"].target #=> String
-    #   resp.fields["name"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
+    #   resp.fields["fieldName"].source #=> String
+    #   resp.fields["fieldName"].target #=> String
+    #   resp.fields["fieldName"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
-    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
     #   resp.keys["name"][0].field_names #=> Array
     #   resp.keys["name"][0].field_names[0] #=> String
     #   resp.created_at #=> Time
@@ -3167,13 +3426,13 @@ module Aws::CustomerProfiles
     #   resp.allow_profile_creation #=> Boolean
     #   resp.source_last_updated_timestamp_format #=> String
     #   resp.fields #=> Hash
-    #   resp.fields["name"].source #=> String
-    #   resp.fields["name"].target #=> String
-    #   resp.fields["name"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
+    #   resp.fields["fieldName"].source #=> String
+    #   resp.fields["fieldName"].target #=> String
+    #   resp.fields["fieldName"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
-    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
     #   resp.keys["name"][0].field_names #=> Array
     #   resp.keys["name"][0].field_names[0] #=> String
     #
@@ -3633,6 +3892,99 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # This API retrieves the details of a specific upload job.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain containing the upload job.
+    #
+    # @option params [required, String] :job_id
+    #   The unique identifier of the upload job to retrieve.
+    #
+    # @return [Types::GetUploadJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUploadJobResponse#job_id #job_id} => String
+    #   * {Types::GetUploadJobResponse#display_name #display_name} => String
+    #   * {Types::GetUploadJobResponse#status #status} => String
+    #   * {Types::GetUploadJobResponse#status_reason #status_reason} => String
+    #   * {Types::GetUploadJobResponse#created_at #created_at} => Time
+    #   * {Types::GetUploadJobResponse#completed_at #completed_at} => Time
+    #   * {Types::GetUploadJobResponse#fields #fields} => Hash&lt;String,Types::ObjectTypeField&gt;
+    #   * {Types::GetUploadJobResponse#unique_key #unique_key} => String
+    #   * {Types::GetUploadJobResponse#results_summary #results_summary} => Types::ResultsSummary
+    #   * {Types::GetUploadJobResponse#data_expiry #data_expiry} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_upload_job({
+    #     domain_name: "name", # required
+    #     job_id: "uuid", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.display_name #=> String
+    #   resp.status #=> String, one of "CREATED", "IN_PROGRESS", "PARTIALLY_SUCCEEDED", "SUCCEEDED", "FAILED", "STOPPED"
+    #   resp.status_reason #=> String, one of "VALIDATION_FAILURE", "INTERNAL_FAILURE"
+    #   resp.created_at #=> Time
+    #   resp.completed_at #=> Time
+    #   resp.fields #=> Hash
+    #   resp.fields["fieldName"].source #=> String
+    #   resp.fields["fieldName"].target #=> String
+    #   resp.fields["fieldName"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
+    #   resp.unique_key #=> String
+    #   resp.results_summary.updated_records #=> Integer
+    #   resp.results_summary.created_records #=> Integer
+    #   resp.results_summary.failed_records #=> Integer
+    #   resp.data_expiry #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetUploadJob AWS API Documentation
+    #
+    # @overload get_upload_job(params = {})
+    # @param [Hash] params ({})
+    def get_upload_job(params = {}, options = {})
+      req = build_request(:get_upload_job, params)
+      req.send_request(options)
+    end
+
+    # This API retrieves the pre-signed URL and client token for uploading
+    # the file associated with the upload job.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain containing the upload job.
+    #
+    # @option params [required, String] :job_id
+    #   The unique identifier of the upload job to retrieve the upload path
+    #   for. This is generated from the CreateUploadJob API.
+    #
+    # @return [Types::GetUploadJobPathResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUploadJobPathResponse#url #url} => String
+    #   * {Types::GetUploadJobPathResponse#client_token #client_token} => String
+    #   * {Types::GetUploadJobPathResponse#valid_until #valid_until} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_upload_job_path({
+    #     domain_name: "name", # required
+    #     job_id: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.url #=> String
+    #   resp.client_token #=> String
+    #   resp.valid_until #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetUploadJobPath AWS API Documentation
+    #
+    # @overload get_upload_job_path(params = {})
+    # @param [Hash] params ({})
+    def get_upload_job_path(params = {}, options = {})
+      req = build_request(:get_upload_job_path, params)
+      req.send_request(options)
+    end
+
     # Get details of specified workflow.
     #
     # @option params [required, String] :domain_name
@@ -3832,6 +4184,8 @@ module Aws::CustomerProfiles
     #   resp.items[0].description #=> String
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].last_updated_at #=> Time
+    #   resp.items[0].use_historical_data #=> Boolean
+    #   resp.items[0].status #=> String, one of "PREPARING", "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -3881,6 +4235,7 @@ module Aws::CustomerProfiles
     #   resp.items[0].display_name #=> String
     #   resp.items[0].is_data_partial #=> String
     #   resp.items[0].value #=> String
+    #   resp.items[0].last_object_timestamp #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListCalculatedAttributesForProfile AWS API Documentation
@@ -3889,6 +4244,57 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def list_calculated_attributes_for_profile(params = {}, options = {})
       req = build_request(:list_calculated_attributes_for_profile, params)
+      req.send_request(options)
+    end
+
+    # Lists the existing layouts that can be used to view data for a
+    # specific domain. This API can only be invoked from the Amazon Connect
+    # admin website.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects returned per page.
+    #
+    # @return [Types::ListDomainLayoutsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDomainLayoutsResponse#items #items} => Array&lt;Types::LayoutItem&gt;
+    #   * {Types::ListDomainLayoutsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_domain_layouts({
+    #     domain_name: "name", # required
+    #     next_token: "token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].layout_definition_name #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].display_name #=> String
+    #   resp.items[0].is_default #=> Boolean
+    #   resp.items[0].layout_type #=> String, one of "PROFILE_EXPLORER"
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].last_updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListDomainLayouts AWS API Documentation
+    #
+    # @overload list_domain_layouts(params = {})
+    # @param [Hash] params ({})
+    def list_domain_layouts(params = {}, options = {})
+      req = build_request(:list_domain_layouts, params)
       req.send_request(options)
     end
 
@@ -4485,6 +4891,54 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # This API retrieves a list of upload jobs for the specified domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain to list upload jobs for.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of upload jobs to return per page.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from the previous call to retrieve the next page
+    #   of results.
+    #
+    # @return [Types::ListUploadJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListUploadJobsResponse#next_token #next_token} => String
+    #   * {Types::ListUploadJobsResponse#items #items} => Array&lt;Types::UploadJobItem&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_upload_jobs({
+    #     domain_name: "name", # required
+    #     max_results: 1,
+    #     next_token: "token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.items #=> Array
+    #   resp.items[0].job_id #=> String
+    #   resp.items[0].display_name #=> String
+    #   resp.items[0].status #=> String, one of "CREATED", "IN_PROGRESS", "PARTIALLY_SUCCEEDED", "SUCCEEDED", "FAILED", "STOPPED"
+    #   resp.items[0].status_reason #=> String, one of "VALIDATION_FAILURE", "INTERNAL_FAILURE"
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].completed_at #=> Time
+    #   resp.items[0].data_expiry #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListUploadJobs AWS API Documentation
+    #
+    # @overload list_upload_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_upload_jobs(params = {}, options = {})
+      req = build_request(:list_upload_jobs, params)
+      req.send_request(options)
+    end
+
     # Query to list all workflows.
     #
     # @option params [required, String] :domain_name
@@ -4952,7 +5406,7 @@ module Aws::CustomerProfiles
     #     source_last_updated_timestamp_format: "string1To255",
     #     max_profile_object_count: 1,
     #     fields: {
-    #       "name" => {
+    #       "fieldName" => {
     #         source: "text",
     #         target: "text",
     #         content_type: "STRING", # accepts STRING, NUMBER, PHONE_NUMBER, EMAIL_ADDRESS, NAME
@@ -4961,7 +5415,7 @@ module Aws::CustomerProfiles
     #     keys: {
     #       "name" => [
     #         {
-    #           standard_identifiers: ["PROFILE"], # accepts PROFILE, ASSET, CASE, ORDER, COMMUNICATION_RECORD, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY
+    #           standard_identifiers: ["PROFILE"], # accepts PROFILE, ASSET, CASE, ORDER, COMMUNICATION_RECORD, AIR_PREFERENCE, HOTEL_PREFERENCE, AIR_BOOKING, AIR_SEGMENT, HOTEL_RESERVATION, HOTEL_STAY_REVENUE, LOYALTY, LOYALTY_TRANSACTION, LOYALTY_PROMOTION, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY
     #           field_names: ["name"],
     #         },
     #       ],
@@ -4983,13 +5437,13 @@ module Aws::CustomerProfiles
     #   resp.max_profile_object_count #=> Integer
     #   resp.max_available_profile_object_count #=> Integer
     #   resp.fields #=> Hash
-    #   resp.fields["name"].source #=> String
-    #   resp.fields["name"].target #=> String
-    #   resp.fields["name"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
+    #   resp.fields["fieldName"].source #=> String
+    #   resp.fields["fieldName"].target #=> String
+    #   resp.fields["fieldName"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
-    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
     #   resp.keys["name"][0].field_names #=> Array
     #   resp.keys["name"][0].field_names[0] #=> String
     #   resp.created_at #=> Time
@@ -5166,6 +5620,59 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # This API starts the processing of an upload job to ingest profile
+    # data.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain containing the upload job to start.
+    #
+    # @option params [required, String] :job_id
+    #   The unique identifier of the upload job to start.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_upload_job({
+    #     domain_name: "name", # required
+    #     job_id: "name", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/StartUploadJob AWS API Documentation
+    #
+    # @overload start_upload_job(params = {})
+    # @param [Hash] params ({})
+    def start_upload_job(params = {}, options = {})
+      req = build_request(:start_upload_job, params)
+      req.send_request(options)
+    end
+
+    # This API stops the processing of an upload job.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain containing the upload job to stop.
+    #
+    # @option params [required, String] :job_id
+    #   The unique identifier of the upload job to stop.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_upload_job({
+    #     domain_name: "name", # required
+    #     job_id: "name", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/StopUploadJob AWS API Documentation
+    #
+    # @overload stop_upload_job(params = {})
+    # @param [Hash] params ({})
+    def stop_upload_job(params = {}, options = {})
+      req = build_request(:stop_upload_job, params)
+      req.send_request(options)
+    end
+
     # Assigns one or more tags (key-value pairs) to the specified Amazon
     # Connect Customer Profiles resource. Tags can help you organize and
     # categorize your resources. You can also use them to scope user
@@ -5269,6 +5776,9 @@ module Aws::CustomerProfiles
     #   * {Types::UpdateCalculatedAttributeDefinitionResponse#statistic #statistic} => String
     #   * {Types::UpdateCalculatedAttributeDefinitionResponse#conditions #conditions} => Types::Conditions
     #   * {Types::UpdateCalculatedAttributeDefinitionResponse#attribute_details #attribute_details} => Types::AttributeDetails
+    #   * {Types::UpdateCalculatedAttributeDefinitionResponse#use_historical_data #use_historical_data} => Boolean
+    #   * {Types::UpdateCalculatedAttributeDefinitionResponse#status #status} => String
+    #   * {Types::UpdateCalculatedAttributeDefinitionResponse#readiness #readiness} => Types::Readiness
     #   * {Types::UpdateCalculatedAttributeDefinitionResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -5280,8 +5790,14 @@ module Aws::CustomerProfiles
     #     description: "sensitiveText",
     #     conditions: {
     #       range: {
-    #         value: 1, # required
-    #         unit: "DAYS", # required, accepts DAYS
+    #         value: 1,
+    #         unit: "DAYS", # accepts DAYS
+    #         value_range: {
+    #           start: 1, # required
+    #           end: 1, # required
+    #         },
+    #         timestamp_source: "string1To255",
+    #         timestamp_format: "string1To255",
     #       },
     #       object_count: 1,
     #       threshold: {
@@ -5301,12 +5817,20 @@ module Aws::CustomerProfiles
     #   resp.statistic #=> String, one of "FIRST_OCCURRENCE", "LAST_OCCURRENCE", "COUNT", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "MAX_OCCURRENCE"
     #   resp.conditions.range.value #=> Integer
     #   resp.conditions.range.unit #=> String, one of "DAYS"
+    #   resp.conditions.range.value_range.start #=> Integer
+    #   resp.conditions.range.value_range.end #=> Integer
+    #   resp.conditions.range.timestamp_source #=> String
+    #   resp.conditions.range.timestamp_format #=> String
     #   resp.conditions.object_count #=> Integer
     #   resp.conditions.threshold.value #=> String
     #   resp.conditions.threshold.operator #=> String, one of "EQUAL_TO", "GREATER_THAN", "LESS_THAN", "NOT_EQUAL_TO"
     #   resp.attribute_details.attributes #=> Array
     #   resp.attribute_details.attributes[0].name #=> String
     #   resp.attribute_details.expression #=> String
+    #   resp.use_historical_data #=> Boolean
+    #   resp.status #=> String, one of "PREPARING", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.readiness.progress_percentage #=> Integer
+    #   resp.readiness.message #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -5516,6 +6040,83 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Updates the layout used to view data for a specific domain. This API
+    # can only be invoked from the Amazon Connect admin website.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :layout_definition_name
+    #   The unique name of the layout.
+    #
+    # @option params [String] :description
+    #   The description of the layout
+    #
+    # @option params [String] :display_name
+    #   The display name of the layout
+    #
+    # @option params [Boolean] :is_default
+    #   If set to true for a layout, this layout will be used by default to
+    #   view data. If set to false, then the layout will not be used by
+    #   default, but it can be used to view data by explicitly selecting it in
+    #   the console.
+    #
+    # @option params [String] :layout_type
+    #   The type of layout that can be used to view data under a Customer
+    #   Profiles domain.
+    #
+    # @option params [String] :layout
+    #   A customizable layout that can be used to view data under a Customer
+    #   Profiles domain.
+    #
+    # @return [Types::UpdateDomainLayoutResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDomainLayoutResponse#layout_definition_name #layout_definition_name} => String
+    #   * {Types::UpdateDomainLayoutResponse#description #description} => String
+    #   * {Types::UpdateDomainLayoutResponse#display_name #display_name} => String
+    #   * {Types::UpdateDomainLayoutResponse#is_default #is_default} => Boolean
+    #   * {Types::UpdateDomainLayoutResponse#layout_type #layout_type} => String
+    #   * {Types::UpdateDomainLayoutResponse#layout #layout} => String
+    #   * {Types::UpdateDomainLayoutResponse#version #version} => String
+    #   * {Types::UpdateDomainLayoutResponse#created_at #created_at} => Time
+    #   * {Types::UpdateDomainLayoutResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::UpdateDomainLayoutResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_domain_layout({
+    #     domain_name: "name", # required
+    #     layout_definition_name: "name", # required
+    #     description: "sensitiveText",
+    #     display_name: "displayName",
+    #     is_default: false,
+    #     layout_type: "PROFILE_EXPLORER", # accepts PROFILE_EXPLORER
+    #     layout: "sensitiveString1To2000000",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.layout_definition_name #=> String
+    #   resp.description #=> String
+    #   resp.display_name #=> String
+    #   resp.is_default #=> Boolean
+    #   resp.layout_type #=> String, one of "PROFILE_EXPLORER"
+    #   resp.layout #=> String
+    #   resp.version #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/UpdateDomainLayout AWS API Documentation
+    #
+    # @overload update_domain_layout(params = {})
+    # @param [Hash] params ({})
+    def update_domain_layout(params = {}, options = {})
+      req = build_request(:update_domain_layout, params)
+      req.send_request(options)
+    end
+
     # Update the properties of an Event Trigger.
     #
     # @option params [required, String] :domain_name
@@ -5645,7 +6246,7 @@ module Aws::CustomerProfiles
     #   Any additional information relevant to the customer’s profile.
     #
     # @option params [String] :account_number
-    #   An account number that you have given to the customer.
+    #   An account number that you have assigned to the customer.
     #
     # @option params [String] :party_type
     #   The type of profile used to describe the customer.
@@ -5824,7 +6425,7 @@ module Aws::CustomerProfiles
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

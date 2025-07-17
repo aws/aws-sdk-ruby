@@ -212,8 +212,7 @@ module Aws::DynamoDB
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -1310,7 +1309,7 @@ module Aws::DynamoDB
     #
     #   resp.global_table_description.replication_group #=> Array
     #   resp.global_table_description.replication_group[0].region_name #=> String
-    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
+    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.global_table_description.replication_group[0].replica_status_description #=> String
     #   resp.global_table_description.replication_group[0].replica_status_percent_progress #=> String
     #   resp.global_table_description.replication_group[0].kms_master_key_id #=> String
@@ -1318,7 +1317,7 @@ module Aws::DynamoDB
     #   resp.global_table_description.replication_group[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.global_table_description.replication_group[0].warm_throughput.read_units_per_second #=> Integer
     #   resp.global_table_description.replication_group[0].warm_throughput.write_units_per_second #=> Integer
-    #   resp.global_table_description.replication_group[0].warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.global_table_description.replication_group[0].warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.global_table_description.replication_group[0].global_secondary_indexes #=> Array
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].index_name #=> String
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
@@ -1782,7 +1781,7 @@ module Aws::DynamoDB
     #   resp.table_description.key_schema #=> Array
     #   resp.table_description.key_schema[0].attribute_name #=> String
     #   resp.table_description.key_schema[0].key_type #=> String, one of "HASH", "RANGE"
-    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.creation_date_time #=> Time
     #   resp.table_description.provisioned_throughput.last_increase_date_time #=> Time
     #   resp.table_description.provisioned_throughput.last_decrease_date_time #=> Time
@@ -1836,7 +1835,7 @@ module Aws::DynamoDB
     #   resp.table_description.global_table_version #=> String
     #   resp.table_description.replicas #=> Array
     #   resp.table_description.replicas[0].region_name #=> String
-    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
+    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.replicas[0].replica_status_description #=> String
     #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
     #   resp.table_description.replicas[0].kms_master_key_id #=> String
@@ -1844,7 +1843,7 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.table_description.replicas[0].warm_throughput.read_units_per_second #=> Integer
     #   resp.table_description.replicas[0].warm_throughput.write_units_per_second #=> Integer
-    #   resp.table_description.replicas[0].warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.table_description.replicas[0].warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.replicas[0].global_secondary_indexes #=> Array
     #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
@@ -1855,6 +1854,9 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table_description.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
+    #   resp.table_description.global_table_witnesses #=> Array
+    #   resp.table_description.global_table_witnesses[0].region_name #=> String
+    #   resp.table_description.global_table_witnesses[0].witness_status #=> String, one of "CREATING", "DELETING", "ACTIVE"
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -1873,7 +1875,7 @@ module Aws::DynamoDB
     #   resp.table_description.on_demand_throughput.max_write_request_units #=> Integer
     #   resp.table_description.warm_throughput.read_units_per_second #=> Integer
     #   resp.table_description.warm_throughput.write_units_per_second #=> Integer
-    #   resp.table_description.warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.table_description.warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.multi_region_consistency #=> String, one of "EVENTUAL", "STRONG"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTable AWS API Documentation
@@ -2319,9 +2321,6 @@ module Aws::DynamoDB
     # DynamoDB returns a `ResourceNotFoundException`. If table is already in
     # the `DELETING` state, no error is returned.
     #
-    # For global tables, this operation only applies to global tables using
-    # Version 2019.11.21 (Current version).
-    #
     # <note markdown="1"> DynamoDB might continue to accept data read and write operations, such
     # as `GetItem` and `PutItem`, on a table in the `DELETING` state until
     # the table deletion is complete. For the full list of table states, see
@@ -2388,7 +2387,7 @@ module Aws::DynamoDB
     #   resp.table_description.key_schema #=> Array
     #   resp.table_description.key_schema[0].attribute_name #=> String
     #   resp.table_description.key_schema[0].key_type #=> String, one of "HASH", "RANGE"
-    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.creation_date_time #=> Time
     #   resp.table_description.provisioned_throughput.last_increase_date_time #=> Time
     #   resp.table_description.provisioned_throughput.last_decrease_date_time #=> Time
@@ -2442,7 +2441,7 @@ module Aws::DynamoDB
     #   resp.table_description.global_table_version #=> String
     #   resp.table_description.replicas #=> Array
     #   resp.table_description.replicas[0].region_name #=> String
-    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
+    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.replicas[0].replica_status_description #=> String
     #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
     #   resp.table_description.replicas[0].kms_master_key_id #=> String
@@ -2450,7 +2449,7 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.table_description.replicas[0].warm_throughput.read_units_per_second #=> Integer
     #   resp.table_description.replicas[0].warm_throughput.write_units_per_second #=> Integer
-    #   resp.table_description.replicas[0].warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.table_description.replicas[0].warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.replicas[0].global_secondary_indexes #=> Array
     #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
@@ -2461,6 +2460,9 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table_description.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
+    #   resp.table_description.global_table_witnesses #=> Array
+    #   resp.table_description.global_table_witnesses[0].region_name #=> String
+    #   resp.table_description.global_table_witnesses[0].witness_status #=> String, one of "CREATING", "DELETING", "ACTIVE"
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -2479,7 +2481,7 @@ module Aws::DynamoDB
     #   resp.table_description.on_demand_throughput.max_write_request_units #=> Integer
     #   resp.table_description.warm_throughput.read_units_per_second #=> Integer
     #   resp.table_description.warm_throughput.write_units_per_second #=> Integer
-    #   resp.table_description.warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.table_description.warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.multi_region_consistency #=> String, one of "EVENTUAL", "STRONG"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTable AWS API Documentation
@@ -2779,7 +2781,7 @@ module Aws::DynamoDB
     #
     #   resp.global_table_description.replication_group #=> Array
     #   resp.global_table_description.replication_group[0].region_name #=> String
-    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
+    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.global_table_description.replication_group[0].replica_status_description #=> String
     #   resp.global_table_description.replication_group[0].replica_status_percent_progress #=> String
     #   resp.global_table_description.replication_group[0].kms_master_key_id #=> String
@@ -2787,7 +2789,7 @@ module Aws::DynamoDB
     #   resp.global_table_description.replication_group[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.global_table_description.replication_group[0].warm_throughput.read_units_per_second #=> Integer
     #   resp.global_table_description.replication_group[0].warm_throughput.write_units_per_second #=> Integer
-    #   resp.global_table_description.replication_group[0].warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.global_table_description.replication_group[0].warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.global_table_description.replication_group[0].global_secondary_indexes #=> Array
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].index_name #=> String
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
@@ -2850,7 +2852,7 @@ module Aws::DynamoDB
     #   resp.global_table_name #=> String
     #   resp.replica_settings #=> Array
     #   resp.replica_settings[0].region_name #=> String
-    #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
+    #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.replica_settings[0].replica_billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
     #   resp.replica_settings[0].replica_billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.replica_settings[0].replica_provisioned_read_capacity_units #=> Integer
@@ -3139,9 +3141,6 @@ module Aws::DynamoDB
     # the table, when it was created, the primary key schema, and any
     # indexes on the table.
     #
-    # For global tables, this operation only applies to global tables using
-    # Version 2019.11.21 (Current version).
-    #
     # <note markdown="1"> If you issue a `DescribeTable` request immediately after a
     # `CreateTable` request, DynamoDB might return a
     # `ResourceNotFoundException`. This is because `DescribeTable` uses an
@@ -3219,7 +3218,7 @@ module Aws::DynamoDB
     #   resp.table.key_schema #=> Array
     #   resp.table.key_schema[0].attribute_name #=> String
     #   resp.table.key_schema[0].key_type #=> String, one of "HASH", "RANGE"
-    #   resp.table.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.table.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table.creation_date_time #=> Time
     #   resp.table.provisioned_throughput.last_increase_date_time #=> Time
     #   resp.table.provisioned_throughput.last_decrease_date_time #=> Time
@@ -3273,7 +3272,7 @@ module Aws::DynamoDB
     #   resp.table.global_table_version #=> String
     #   resp.table.replicas #=> Array
     #   resp.table.replicas[0].region_name #=> String
-    #   resp.table.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
+    #   resp.table.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table.replicas[0].replica_status_description #=> String
     #   resp.table.replicas[0].replica_status_percent_progress #=> String
     #   resp.table.replicas[0].kms_master_key_id #=> String
@@ -3281,7 +3280,7 @@ module Aws::DynamoDB
     #   resp.table.replicas[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.table.replicas[0].warm_throughput.read_units_per_second #=> Integer
     #   resp.table.replicas[0].warm_throughput.write_units_per_second #=> Integer
-    #   resp.table.replicas[0].warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.table.replicas[0].warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table.replicas[0].global_secondary_indexes #=> Array
     #   resp.table.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
@@ -3292,6 +3291,9 @@ module Aws::DynamoDB
     #   resp.table.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
+    #   resp.table.global_table_witnesses #=> Array
+    #   resp.table.global_table_witnesses[0].region_name #=> String
+    #   resp.table.global_table_witnesses[0].witness_status #=> String, one of "CREATING", "DELETING", "ACTIVE"
     #   resp.table.restore_summary.source_backup_arn #=> String
     #   resp.table.restore_summary.source_table_arn #=> String
     #   resp.table.restore_summary.restore_date_time #=> Time
@@ -3310,7 +3312,7 @@ module Aws::DynamoDB
     #   resp.table.on_demand_throughput.max_write_request_units #=> Integer
     #   resp.table.warm_throughput.read_units_per_second #=> Integer
     #   resp.table.warm_throughput.write_units_per_second #=> Integer
-    #   resp.table.warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.table.warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table.multi_region_consistency #=> String, one of "EVENTUAL", "STRONG"
     #
     #
@@ -3331,9 +3333,6 @@ module Aws::DynamoDB
     # Describes auto scaling settings across replicas of the global table at
     # once.
     #
-    # For global tables, this operation only applies to global tables using
-    # Version 2019.11.21 (Current version).
-    #
     # @option params [required, String] :table_name
     #   The name of the table. You can also provide the Amazon Resource Name
     #   (ARN) of the table in this parameter.
@@ -3351,7 +3350,7 @@ module Aws::DynamoDB
     # @example Response structure
     #
     #   resp.table_auto_scaling_description.table_name #=> String
-    #   resp.table_auto_scaling_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.table_auto_scaling_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_auto_scaling_description.replicas #=> Array
     #   resp.table_auto_scaling_description.replicas[0].region_name #=> String
     #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes #=> Array
@@ -3397,7 +3396,7 @@ module Aws::DynamoDB
     #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
     #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
     #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
-    #   resp.table_auto_scaling_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
+    #   resp.table_auto_scaling_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTableReplicaAutoScaling AWS API Documentation
     #
@@ -5819,7 +5818,7 @@ module Aws::DynamoDB
     #   resp.table_description.key_schema #=> Array
     #   resp.table_description.key_schema[0].attribute_name #=> String
     #   resp.table_description.key_schema[0].key_type #=> String, one of "HASH", "RANGE"
-    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.creation_date_time #=> Time
     #   resp.table_description.provisioned_throughput.last_increase_date_time #=> Time
     #   resp.table_description.provisioned_throughput.last_decrease_date_time #=> Time
@@ -5873,7 +5872,7 @@ module Aws::DynamoDB
     #   resp.table_description.global_table_version #=> String
     #   resp.table_description.replicas #=> Array
     #   resp.table_description.replicas[0].region_name #=> String
-    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
+    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.replicas[0].replica_status_description #=> String
     #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
     #   resp.table_description.replicas[0].kms_master_key_id #=> String
@@ -5881,7 +5880,7 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.table_description.replicas[0].warm_throughput.read_units_per_second #=> Integer
     #   resp.table_description.replicas[0].warm_throughput.write_units_per_second #=> Integer
-    #   resp.table_description.replicas[0].warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.table_description.replicas[0].warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.replicas[0].global_secondary_indexes #=> Array
     #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
@@ -5892,6 +5891,9 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table_description.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
+    #   resp.table_description.global_table_witnesses #=> Array
+    #   resp.table_description.global_table_witnesses[0].region_name #=> String
+    #   resp.table_description.global_table_witnesses[0].witness_status #=> String, one of "CREATING", "DELETING", "ACTIVE"
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -5910,7 +5912,7 @@ module Aws::DynamoDB
     #   resp.table_description.on_demand_throughput.max_write_request_units #=> Integer
     #   resp.table_description.warm_throughput.read_units_per_second #=> Integer
     #   resp.table_description.warm_throughput.write_units_per_second #=> Integer
-    #   resp.table_description.warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.table_description.warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.multi_region_consistency #=> String, one of "EVENTUAL", "STRONG"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableFromBackup AWS API Documentation
@@ -6084,7 +6086,7 @@ module Aws::DynamoDB
     #   resp.table_description.key_schema #=> Array
     #   resp.table_description.key_schema[0].attribute_name #=> String
     #   resp.table_description.key_schema[0].key_type #=> String, one of "HASH", "RANGE"
-    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.creation_date_time #=> Time
     #   resp.table_description.provisioned_throughput.last_increase_date_time #=> Time
     #   resp.table_description.provisioned_throughput.last_decrease_date_time #=> Time
@@ -6138,7 +6140,7 @@ module Aws::DynamoDB
     #   resp.table_description.global_table_version #=> String
     #   resp.table_description.replicas #=> Array
     #   resp.table_description.replicas[0].region_name #=> String
-    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
+    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.replicas[0].replica_status_description #=> String
     #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
     #   resp.table_description.replicas[0].kms_master_key_id #=> String
@@ -6146,7 +6148,7 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.table_description.replicas[0].warm_throughput.read_units_per_second #=> Integer
     #   resp.table_description.replicas[0].warm_throughput.write_units_per_second #=> Integer
-    #   resp.table_description.replicas[0].warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.table_description.replicas[0].warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.replicas[0].global_secondary_indexes #=> Array
     #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
@@ -6157,6 +6159,9 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table_description.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
+    #   resp.table_description.global_table_witnesses #=> Array
+    #   resp.table_description.global_table_witnesses[0].region_name #=> String
+    #   resp.table_description.global_table_witnesses[0].witness_status #=> String, one of "CREATING", "DELETING", "ACTIVE"
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -6175,7 +6180,7 @@ module Aws::DynamoDB
     #   resp.table_description.on_demand_throughput.max_write_request_units #=> Integer
     #   resp.table_description.warm_throughput.read_units_per_second #=> Integer
     #   resp.table_description.warm_throughput.write_units_per_second #=> Integer
-    #   resp.table_description.warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.table_description.warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.multi_region_consistency #=> String, one of "EVENTUAL", "STRONG"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableToPointInTime AWS API Documentation
@@ -7185,9 +7190,8 @@ module Aws::DynamoDB
     # version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see
     # [Upgrading global tables][3].
     #
-    # <note markdown="1"> For global tables, this operation only applies to global tables using
-    # Version 2019.11.21 (Current version). If you are using global tables
-    # [Version 2019.11.21][1] you can use [UpdateTable][4] instead.
+    # <note markdown="1"> If you are using global tables [Version 2019.11.21][1] (Current) you
+    # can use [UpdateTable][4] instead.
     #
     #  Although you can use `UpdateGlobalTable` to add replicas and remove
     # replicas in a single request, for simplicity we recommend that you
@@ -7244,7 +7248,7 @@ module Aws::DynamoDB
     #
     #   resp.global_table_description.replication_group #=> Array
     #   resp.global_table_description.replication_group[0].region_name #=> String
-    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
+    #   resp.global_table_description.replication_group[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.global_table_description.replication_group[0].replica_status_description #=> String
     #   resp.global_table_description.replication_group[0].replica_status_percent_progress #=> String
     #   resp.global_table_description.replication_group[0].kms_master_key_id #=> String
@@ -7252,7 +7256,7 @@ module Aws::DynamoDB
     #   resp.global_table_description.replication_group[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.global_table_description.replication_group[0].warm_throughput.read_units_per_second #=> Integer
     #   resp.global_table_description.replication_group[0].warm_throughput.write_units_per_second #=> Integer
-    #   resp.global_table_description.replication_group[0].warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.global_table_description.replication_group[0].warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.global_table_description.replication_group[0].global_secondary_indexes #=> Array
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].index_name #=> String
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
@@ -7430,7 +7434,7 @@ module Aws::DynamoDB
     #   resp.global_table_name #=> String
     #   resp.replica_settings #=> Array
     #   resp.replica_settings[0].region_name #=> String
-    #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
+    #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.replica_settings[0].replica_billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
     #   resp.replica_settings[0].replica_billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.replica_settings[0].replica_provisioned_read_capacity_units #=> Integer
@@ -7941,9 +7945,6 @@ module Aws::DynamoDB
     # Modifies the provisioned throughput settings, global secondary
     # indexes, or DynamoDB Streams settings for a given table.
     #
-    # For global tables, this operation only applies to global tables using
-    # Version 2019.11.21 (Current version).
-    #
     # You can only perform one of the following operations at once:
     #
     # * Modify the provisioned throughput settings of the table.
@@ -8033,11 +8034,6 @@ module Aws::DynamoDB
     #   A list of replica update actions (create, delete, or update) for the
     #   table.
     #
-    #   <note markdown="1"> For global tables, this property only applies to global tables using
-    #   Version 2019.11.21 (Current version).
-    #
-    #    </note>
-    #
     # @option params [String] :table_class
     #   The table class of the table to be updated. Valid values are
     #   `STANDARD` and `STANDARD_INFREQUENT_ACCESS`.
@@ -8054,25 +8050,42 @@ module Aws::DynamoDB
     #   You can specify one of the following consistency modes:
     #
     #   * `EVENTUAL`: Configures a new global table for multi-Region eventual
-    #     consistency. This is the default consistency mode for global tables.
+    #     consistency (MREC). This is the default consistency mode for global
+    #     tables.
     #
     #   * `STRONG`: Configures a new global table for multi-Region strong
-    #     consistency (preview).
+    #     consistency (MRSC).
     #
-    #     <note markdown="1"> Multi-Region strong consistency (MRSC) is a new DynamoDB global
-    #     tables capability currently available in preview mode. For more
-    #     information, see [Global tables multi-Region strong consistency][3].
-    #
-    #      </note>
-    #
-    #   If you don't specify this parameter, the global table consistency
-    #   mode defaults to `EVENTUAL`.
+    #   If you don't specify this field, the global table consistency mode
+    #   defaults to `EVENTUAL`. For more information about global tables
+    #   consistency modes, see [ Consistency modes][3] in DynamoDB developer
+    #   guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ReplicationGroupUpdate.html#DDB-Type-ReplicationGroupUpdate-Create
     #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTable.html#DDB-UpdateTable-request-ReplicaUpdates
-    #   [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/PreviewFeatures.html#multi-region-strong-consistency-gt
+    #   [3]: https://docs.aws.amazon.com/V2globaltables_HowItWorks.html#V2globaltables_HowItWorks.consistency-modes
+    #
+    # @option params [Array<Types::GlobalTableWitnessGroupUpdate>] :global_table_witness_updates
+    #   A list of witness updates for a MRSC global table. A witness provides
+    #   a cost-effective alternative to a full replica in a MRSC global table
+    #   by maintaining replicated change data written to global table
+    #   replicas. You cannot perform read or write operations on a witness.
+    #   For each witness, you can request one action:
+    #
+    #   * `Create` - add a new witness to the global table.
+    #
+    #   * `Delete` - remove a witness from the global table.
+    #
+    #   You can create or delete only one witness per `UpdateTable` operation.
+    #
+    #   For more information, see [Multi-Region strong consistency (MRSC)][1]
+    #   in the Amazon DynamoDB Developer Guide
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_HowItWorks.html#V2globaltables_HowItWorks.consistency-modes
     #
     # @option params [Types::OnDemandThroughput] :on_demand_throughput
     #   Updates the maximum number of read and write units for the specified
@@ -8262,6 +8275,16 @@ module Aws::DynamoDB
     #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #     deletion_protection_enabled: false,
     #     multi_region_consistency: "EVENTUAL", # accepts EVENTUAL, STRONG
+    #     global_table_witness_updates: [
+    #       {
+    #         create: {
+    #           region_name: "RegionName", # required
+    #         },
+    #         delete: {
+    #           region_name: "RegionName", # required
+    #         },
+    #       },
+    #     ],
     #     on_demand_throughput: {
     #       max_read_request_units: 1,
     #       max_write_request_units: 1,
@@ -8281,7 +8304,7 @@ module Aws::DynamoDB
     #   resp.table_description.key_schema #=> Array
     #   resp.table_description.key_schema[0].attribute_name #=> String
     #   resp.table_description.key_schema[0].key_type #=> String, one of "HASH", "RANGE"
-    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.creation_date_time #=> Time
     #   resp.table_description.provisioned_throughput.last_increase_date_time #=> Time
     #   resp.table_description.provisioned_throughput.last_decrease_date_time #=> Time
@@ -8335,7 +8358,7 @@ module Aws::DynamoDB
     #   resp.table_description.global_table_version #=> String
     #   resp.table_description.replicas #=> Array
     #   resp.table_description.replicas[0].region_name #=> String
-    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
+    #   resp.table_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.replicas[0].replica_status_description #=> String
     #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
     #   resp.table_description.replicas[0].kms_master_key_id #=> String
@@ -8343,7 +8366,7 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.table_description.replicas[0].warm_throughput.read_units_per_second #=> Integer
     #   resp.table_description.replicas[0].warm_throughput.write_units_per_second #=> Integer
-    #   resp.table_description.replicas[0].warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.table_description.replicas[0].warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.replicas[0].global_secondary_indexes #=> Array
     #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
@@ -8354,6 +8377,9 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table_description.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
+    #   resp.table_description.global_table_witnesses #=> Array
+    #   resp.table_description.global_table_witnesses[0].region_name #=> String
+    #   resp.table_description.global_table_witnesses[0].witness_status #=> String, one of "CREATING", "DELETING", "ACTIVE"
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -8372,7 +8398,7 @@ module Aws::DynamoDB
     #   resp.table_description.on_demand_throughput.max_write_request_units #=> Integer
     #   resp.table_description.warm_throughput.read_units_per_second #=> Integer
     #   resp.table_description.warm_throughput.write_units_per_second #=> Integer
-    #   resp.table_description.warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.table_description.warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.multi_region_consistency #=> String, one of "EVENTUAL", "STRONG"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTable AWS API Documentation
@@ -8385,9 +8411,6 @@ module Aws::DynamoDB
     end
 
     # Updates auto scaling settings on your global tables at once.
-    #
-    # For global tables, this operation only applies to global tables using
-    # Version 2019.11.21 (Current version).
     #
     # @option params [Array<Types::GlobalSecondaryIndexAutoScalingUpdate>] :global_secondary_index_updates
     #   Represents the auto scaling settings of the global secondary indexes
@@ -8493,7 +8516,7 @@ module Aws::DynamoDB
     # @example Response structure
     #
     #   resp.table_auto_scaling_description.table_name #=> String
-    #   resp.table_auto_scaling_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
+    #   resp.table_auto_scaling_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_auto_scaling_description.replicas #=> Array
     #   resp.table_auto_scaling_description.replicas[0].region_name #=> String
     #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes #=> Array
@@ -8539,7 +8562,7 @@ module Aws::DynamoDB
     #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
     #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
     #   resp.table_auto_scaling_description.replicas[0].replica_provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
-    #   resp.table_auto_scaling_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
+    #   resp.table_auto_scaling_description.replicas[0].replica_status #=> String, one of "CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTableReplicaAutoScaling AWS API Documentation
     #
@@ -8641,7 +8664,7 @@ module Aws::DynamoDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.142.0'
+      context[:gem_version] = '1.146.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

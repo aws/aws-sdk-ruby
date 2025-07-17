@@ -687,6 +687,10 @@ module Aws::DatabaseMigrationService
     #   Amazon Aurora MySQL-Compatible Edition.
     #   @return [String]
     #
+    # @!attribute [rw] virtual
+    #   Indicates whether the data provider is virtual.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] settings
     #   The settings in JSON format for a data provider.
     #   @return [Types::DataProviderSettings]
@@ -701,6 +705,7 @@ module Aws::DatabaseMigrationService
       :data_provider_name,
       :description,
       :engine,
+      :virtual,
       :settings,
       :tags)
       SENSITIVE = []
@@ -1686,6 +1691,9 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] replication_subnet_group_description
     #   The description for the subnet group.
+    #
+    #   Constraints: This parameter Must not contain non-printable control
+    #   characters.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
@@ -2095,6 +2103,10 @@ module Aws::DatabaseMigrationService
     #   Amazon Aurora MySQL-Compatible Edition.
     #   @return [String]
     #
+    # @!attribute [rw] virtual
+    #   Indicates whether the data provider is virtual.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] settings
     #   The settings in JSON format for a data provider.
     #   @return [Types::DataProviderSettings]
@@ -2107,6 +2119,7 @@ module Aws::DatabaseMigrationService
       :data_provider_creation_time,
       :description,
       :engine,
+      :virtual,
       :settings)
       SENSITIVE = []
       include Aws::Structure
@@ -3350,7 +3363,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] filters
     #   Filters applied to event subscriptions.
     #
-    #   Valid filter names: event-subscription-arn \| event-subscription-id
+    #   Valid filter names: `event-subscription-arn` \|
+    #   `event-subscription-id`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -3721,7 +3735,18 @@ module Aws::DatabaseMigrationService
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
+    #   End of support notice: On May 20, 2026, Amazon Web Services will end
+    #   support for Amazon Web Services DMS Fleet Advisor;. After May 20,
+    #   2026, you will no longer be able to access the Amazon Web Services
+    #   DMS Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor;
+    #   resources. For more information, see [Amazon Web Services DMS Fleet
+    #   Advisor end of support][1].
+    #
     #   Sets the maximum number of records returned in the response.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -4379,6 +4404,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] filters
     #   Filters applied to the limitations described in the form of
     #   key-value pairs.
+    #
+    #   Valid filter names: `database-id` \| `engine-name`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -4435,6 +4462,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] filters
     #   Filters applied to the target engine recommendations described in
     #   the form of key-value pairs.
+    #
+    #   Valid filter names: `database-id` \| `engine-name`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -5003,6 +5032,9 @@ module Aws::DatabaseMigrationService
 
     # @!attribute [rw] filters
     #   Filters applied to the replications.
+    #
+    #   Valid filter names: `replication-config-arn` \|
+    #   `replication-config-id`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -6380,6 +6412,16 @@ module Aws::DatabaseMigrationService
     #   connection.
     #   @return [String]
     #
+    # @!attribute [rw] s3_path
+    #   The path for the Amazon S3 bucket that the application uses for
+    #   accessing the user-defined schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_access_role_arn
+    #   The ARN for the role the application uses to access its Amazon S3
+    #   bucket.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/IbmDb2LuwDataProviderSettings AWS API Documentation
     #
     class IbmDb2LuwDataProviderSettings < Struct.new(
@@ -6387,7 +6429,9 @@ module Aws::DatabaseMigrationService
       :port,
       :database_name,
       :ssl_mode,
-      :certificate_arn)
+      :certificate_arn,
+      :s3_path,
+      :s3_access_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6416,6 +6460,16 @@ module Aws::DatabaseMigrationService
     #   connection.
     #   @return [String]
     #
+    # @!attribute [rw] s3_path
+    #   The path for the Amazon S3 bucket that the application uses for
+    #   accessing the user-defined schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_access_role_arn
+    #   The ARN for the role the application uses to access its Amazon S3
+    #   bucket.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/IbmDb2zOsDataProviderSettings AWS API Documentation
     #
     class IbmDb2zOsDataProviderSettings < Struct.new(
@@ -6423,7 +6477,9 @@ module Aws::DatabaseMigrationService
       :port,
       :database_name,
       :ssl_mode,
-      :certificate_arn)
+      :certificate_arn,
+      :s3_path,
+      :s3_access_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7135,13 +7191,25 @@ module Aws::DatabaseMigrationService
     #   connection.
     #   @return [String]
     #
+    # @!attribute [rw] s3_path
+    #   The path for the Amazon S3 bucket that the application uses for
+    #   accessing the user-defined schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_access_role_arn
+    #   The ARN for the role the application uses to access its Amazon S3
+    #   bucket.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MariaDbDataProviderSettings AWS API Documentation
     #
     class MariaDbDataProviderSettings < Struct.new(
       :server_name,
       :port,
       :ssl_mode,
-      :certificate_arn)
+      :certificate_arn,
+      :s3_path,
+      :s3_access_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7337,6 +7405,16 @@ module Aws::DatabaseMigrationService
     #   connection.
     #   @return [String]
     #
+    # @!attribute [rw] s3_path
+    #   The path for the Amazon S3 bucket that the application uses for
+    #   accessing the user-defined schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_access_role_arn
+    #   The ARN for the role the application uses to access its Amazon S3
+    #   bucket.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MicrosoftSqlServerDataProviderSettings AWS API Documentation
     #
     class MicrosoftSqlServerDataProviderSettings < Struct.new(
@@ -7344,7 +7422,9 @@ module Aws::DatabaseMigrationService
       :port,
       :database_name,
       :ssl_mode,
-      :certificate_arn)
+      :certificate_arn,
+      :s3_path,
+      :s3_access_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7536,6 +7616,10 @@ module Aws::DatabaseMigrationService
     #   Amazon Aurora MySQL-Compatible Edition.
     #   @return [String]
     #
+    # @!attribute [rw] virtual
+    #   Indicates whether the data provider is virtual.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] exact_settings
     #   If this attribute is Y, the current call to `ModifyDataProvider`
     #   replaces all existing data provider settings with the exact settings
@@ -7560,6 +7644,7 @@ module Aws::DatabaseMigrationService
       :data_provider_name,
       :description,
       :engine,
+      :virtual,
       :exact_settings,
       :settings)
       SENSITIVE = []
@@ -8869,6 +8954,17 @@ module Aws::DatabaseMigrationService
     #   endpoint.
     #   @return [Integer]
     #
+    # @!attribute [rw] service_access_role_arn
+    #   The IAM role you can use to authenticate when connecting to your
+    #   endpoint. Ensure to include `iam:PassRole` and `rds-db:connect`
+    #   actions in permission policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_method
+    #   This attribute allows you to specify the authentication method as
+    #   "iam auth".
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MySQLSettings AWS API Documentation
     #
     class MySQLSettings < Struct.new(
@@ -8886,7 +8982,9 @@ module Aws::DatabaseMigrationService
       :username,
       :secrets_manager_access_role_arn,
       :secrets_manager_secret_id,
-      :execute_timeout)
+      :execute_timeout,
+      :service_access_role_arn,
+      :authentication_method)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -8911,13 +9009,25 @@ module Aws::DatabaseMigrationService
     #   connection.
     #   @return [String]
     #
+    # @!attribute [rw] s3_path
+    #   The path for the Amazon S3 bucket that the application uses for
+    #   accessing the user-defined schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_access_role_arn
+    #   The ARN for the role the application uses to access its Amazon S3
+    #   bucket.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MySqlDataProviderSettings AWS API Documentation
     #
     class MySqlDataProviderSettings < Struct.new(
       :server_name,
       :port,
       :ssl_mode,
-      :certificate_arn)
+      :certificate_arn,
+      :s3_path,
+      :s3_access_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9050,6 +9160,16 @@ module Aws::DatabaseMigrationService
     #   Secrets Manager that contains the TDE password.
     #   @return [String]
     #
+    # @!attribute [rw] s3_path
+    #   The path for the Amazon S3 bucket that the application uses for
+    #   accessing the user-defined schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_access_role_arn
+    #   The ARN for the role the application uses to access its Amazon S3
+    #   bucket.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/OracleDataProviderSettings AWS API Documentation
     #
     class OracleDataProviderSettings < Struct.new(
@@ -9062,7 +9182,9 @@ module Aws::DatabaseMigrationService
       :secrets_manager_oracle_asm_secret_id,
       :secrets_manager_oracle_asm_access_role_arn,
       :secrets_manager_security_db_encryption_secret_id,
-      :secrets_manager_security_db_encryption_access_role_arn)
+      :secrets_manager_security_db_encryption_access_role_arn,
+      :s3_path,
+      :s3_access_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9902,6 +10024,17 @@ module Aws::DatabaseMigrationService
     #   filter is on a text column in the Source database that is indexed.
     #   @return [Boolean]
     #
+    # @!attribute [rw] service_access_role_arn
+    #   The IAM role arn you can use to authenticate the connection to your
+    #   endpoint. Ensure to include `iam:PassRole` and `rds-db:connect`
+    #   actions in permission policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_method
+    #   This attribute allows you to specify the authentication method as
+    #   "iam auth".
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/PostgreSQLSettings AWS API Documentation
     #
     class PostgreSQLSettings < Struct.new(
@@ -9929,7 +10062,9 @@ module Aws::DatabaseMigrationService
       :map_long_varchar_as,
       :database_mode,
       :babelfish_database_name,
-      :disable_unicode_source_filter)
+      :disable_unicode_source_filter,
+      :service_access_role_arn,
+      :authentication_method)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -9958,6 +10093,16 @@ module Aws::DatabaseMigrationService
     #   connection.
     #   @return [String]
     #
+    # @!attribute [rw] s3_path
+    #   The path for the Amazon S3 bucket that the application uses for
+    #   accessing the user-defined schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_access_role_arn
+    #   The ARN for the role the application uses to access its Amazon S3
+    #   bucket.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/PostgreSqlDataProviderSettings AWS API Documentation
     #
     class PostgreSqlDataProviderSettings < Struct.new(
@@ -9965,7 +10110,9 @@ module Aws::DatabaseMigrationService
       :port,
       :database_name,
       :ssl_mode,
-      :certificate_arn)
+      :certificate_arn,
+      :s3_path,
+      :s3_access_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10481,12 +10628,24 @@ module Aws::DatabaseMigrationService
     #   The database name on the Amazon Redshift data provider.
     #   @return [String]
     #
+    # @!attribute [rw] s3_path
+    #   The path for the Amazon S3 bucket that the application uses for
+    #   accessing the user-defined schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_access_role_arn
+    #   The ARN for the role the application uses to access its Amazon S3
+    #   bucket.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RedshiftDataProviderSettings AWS API Documentation
     #
     class RedshiftDataProviderSettings < Struct.new(
       :server_name,
       :port,
-      :database_name)
+      :database_name,
+      :s3_path,
+      :s3_access_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12894,8 +13053,8 @@ module Aws::DatabaseMigrationService
     #   convert the current UTC time into a specified time zone. The
     #   conversion occurs when a date partition folder is created and a CDC
     #   filename is generated. The time zone format is Area/Location. Use
-    #   this parameter when `DatePartitionedEnabled` is set to `true`, as
-    #   shown in the following example.
+    #   this parameter when `DatePartitionedEnabled` is set to true, as
+    #   shown in the following example:
     #
     #   `s3-settings='{"DatePartitionEnabled": true,
     #   "DatePartitionSequence": "YYYYMMDDHH", "DatePartitionDelimiter":
@@ -13731,22 +13890,33 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] start_replication_task_type
     #   The type of replication task to start.
     #
-    #   When the migration type is `full-load` or `full-load-and-cdc`, the
-    #   only valid value for the first run of the task is
-    #   `start-replication`. This option will start the migration.
+    #   `start-replication` is the only valid action that can be used for
+    #   the first time a task with the migration type of
+    #   `full-load`full-load, `full-load-and-cdc` or `cdc` is run. Any other
+    #   action used for the first time on a given task, such as
+    #   `resume-processing` and reload-target will result in data errors.
     #
     #   You can also use ReloadTables to reload specific tables that failed
     #   during migration instead of restarting the task.
     #
-    #   The `resume-processing` option isn't applicable for a full-load
-    #   task, because you can't resume partially loaded tables during the
-    #   full load phase.
+    #   For a `full-load` task, the resume-processing option will reload any
+    #   tables that were partially loaded or not yet loaded during the full
+    #   load phase.
     #
     #   For a `full-load-and-cdc` task, DMS migrates table data, and then
     #   applies data changes that occur on the source. To load all the
     #   tables again, and start capturing source changes, use
     #   `reload-target`. Otherwise use `resume-processing`, to replicate the
     #   changes from the last stop position.
+    #
+    #   For a `cdc` only task, to start from a specific position, you must
+    #   use start-replication and also specify the start position. Check the
+    #   source endpoint DMS documentation for any limitations. For example,
+    #   not all sources support starting from a time.
+    #
+    #   <note markdown="1"> `resume-processing` is only available for previously executed tasks.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] cdc_start_time
@@ -14198,6 +14368,46 @@ module Aws::DatabaseMigrationService
     #   Additional details about the state of validation.
     #   @return [String]
     #
+    # @!attribute [rw] resync_state
+    #   Records the current state of table resynchronization in the
+    #   migration task.
+    #
+    #   This parameter can have the following values:
+    #
+    #   * Not enabled – Resync is not enabled for the table in the migration
+    #     task.
+    #
+    #   * Pending – The tables are waiting for resync.
+    #
+    #   * In progress – Resync in progress for some records in the table.
+    #
+    #   * No primary key – The table could not be resynced because it has no
+    #     primary key.
+    #
+    #   * Last resync at: `date/time` – Resync session is finished at time.
+    #     Time provided in UTC format.
+    #   @return [String]
+    #
+    # @!attribute [rw] resync_rows_attempted
+    #   Records the total number of mismatched data rows where the system
+    #   attempted to apply fixes in the target database.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resync_rows_succeeded
+    #   Records the total number of mismatched data rows where fixes were
+    #   successfully applied in the target database.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resync_rows_failed
+    #   Records the total number of mismatched data rows where fix attempts
+    #   failed in the target database.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resync_progress
+    #   Calculates the percentage of failed validations that were
+    #   successfully resynced to the system.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/TableStatistics AWS API Documentation
     #
     class TableStatistics < Struct.new(
@@ -14223,7 +14433,12 @@ module Aws::DatabaseMigrationService
       :validation_failed_records,
       :validation_suspended_records,
       :validation_state,
-      :validation_state_details)
+      :validation_state_details,
+      :resync_state,
+      :resync_rows_attempted,
+      :resync_rows_succeeded,
+      :resync_rows_failed,
+      :resync_progress)
       SENSITIVE = []
       include Aws::Structure
     end

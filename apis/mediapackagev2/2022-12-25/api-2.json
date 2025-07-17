@@ -612,6 +612,32 @@
       "members":{
       }
     },
+    "CdnAuthConfiguration":{
+      "type":"structure",
+      "required":[
+        "CdnIdentifierSecretArns",
+        "SecretsRoleArn"
+      ],
+      "members":{
+        "CdnIdentifierSecretArns":{"shape":"CdnAuthConfigurationCdnIdentifierSecretArnsList"},
+        "SecretsRoleArn":{"shape":"CdnAuthConfigurationSecretsRoleArnString"}
+      }
+    },
+    "CdnAuthConfigurationCdnIdentifierSecretArnsList":{
+      "type":"list",
+      "member":{"shape":"CdnIdentifierSecretArn"},
+      "min":1
+    },
+    "CdnAuthConfigurationSecretsRoleArnString":{
+      "type":"string",
+      "max":2048,
+      "min":20
+    },
+    "CdnIdentifierSecretArn":{
+      "type":"string",
+      "max":2048,
+      "min":20
+    },
     "ChannelGroupListConfiguration":{
       "type":"structure",
       "required":[
@@ -687,7 +713,8 @@
       "type":"string",
       "enum":[
         "TS",
-        "CMAF"
+        "CMAF",
+        "ISM"
       ]
     },
     "CreateChannelGroupRequest":{
@@ -795,7 +822,13 @@
         "PeriodTriggers":{"shape":"DashPeriodTriggers"},
         "ScteDash":{"shape":"ScteDash"},
         "DrmSignaling":{"shape":"DashDrmSignaling"},
-        "UtcTiming":{"shape":"DashUtcTiming"}
+        "UtcTiming":{"shape":"DashUtcTiming"},
+        "Profiles":{"shape":"DashProfiles"},
+        "BaseUrls":{"shape":"DashBaseUrls"},
+        "ProgramInformation":{"shape":"DashProgramInformation"},
+        "DvbSettings":{"shape":"DashDvbSettings"},
+        "Compactness":{"shape":"DashCompactness"},
+        "SubtitleConfiguration":{"shape":"DashSubtitleConfiguration"}
       }
     },
     "CreateDashManifestConfigurationManifestWindowSecondsInteger":{
@@ -956,6 +989,25 @@
       "type":"list",
       "member":{"shape":"CreateLowLatencyHlsManifestConfiguration"}
     },
+    "CreateMssManifestConfiguration":{
+      "type":"structure",
+      "required":["ManifestName"],
+      "members":{
+        "ManifestName":{"shape":"ManifestName"},
+        "ManifestWindowSeconds":{"shape":"CreateMssManifestConfigurationManifestWindowSecondsInteger"},
+        "FilterConfiguration":{"shape":"FilterConfiguration"},
+        "ManifestLayout":{"shape":"MssManifestLayout"}
+      }
+    },
+    "CreateMssManifestConfigurationManifestWindowSecondsInteger":{
+      "type":"integer",
+      "box":true,
+      "min":30
+    },
+    "CreateMssManifests":{
+      "type":"list",
+      "member":{"shape":"CreateMssManifestConfiguration"}
+    },
     "CreateOriginEndpointRequest":{
       "type":"structure",
       "required":[
@@ -989,6 +1041,7 @@
         "HlsManifests":{"shape":"CreateHlsManifests"},
         "LowLatencyHlsManifests":{"shape":"CreateLowLatencyHlsManifests"},
         "DashManifests":{"shape":"CreateDashManifests"},
+        "MssManifests":{"shape":"CreateMssManifests"},
         "ForceEndpointErrorConfiguration":{"shape":"ForceEndpointErrorConfiguration"},
         "Tags":{"shape":"TagMap"}
       }
@@ -1025,10 +1078,56 @@
         "HlsManifests":{"shape":"GetHlsManifests"},
         "LowLatencyHlsManifests":{"shape":"GetLowLatencyHlsManifests"},
         "DashManifests":{"shape":"GetDashManifests"},
+        "MssManifests":{"shape":"GetMssManifests"},
         "ForceEndpointErrorConfiguration":{"shape":"ForceEndpointErrorConfiguration"},
         "ETag":{"shape":"EntityTag"},
         "Tags":{"shape":"TagMap"}
       }
+    },
+    "DashBaseUrl":{
+      "type":"structure",
+      "required":["Url"],
+      "members":{
+        "Url":{"shape":"DashBaseUrlUrlString"},
+        "ServiceLocation":{"shape":"DashBaseUrlServiceLocationString"},
+        "DvbPriority":{"shape":"DashBaseUrlDvbPriorityInteger"},
+        "DvbWeight":{"shape":"DashBaseUrlDvbWeightInteger"}
+      }
+    },
+    "DashBaseUrlDvbPriorityInteger":{
+      "type":"integer",
+      "box":true,
+      "max":15000,
+      "min":1
+    },
+    "DashBaseUrlDvbWeightInteger":{
+      "type":"integer",
+      "box":true,
+      "max":15000,
+      "min":1
+    },
+    "DashBaseUrlServiceLocationString":{
+      "type":"string",
+      "max":2048,
+      "min":1
+    },
+    "DashBaseUrlUrlString":{
+      "type":"string",
+      "max":2048,
+      "min":1
+    },
+    "DashBaseUrls":{
+      "type":"list",
+      "member":{"shape":"DashBaseUrl"},
+      "max":20,
+      "min":0
+    },
+    "DashCompactness":{
+      "type":"string",
+      "enum":[
+        "STANDARD",
+        "NONE"
+      ]
     },
     "DashDrmSignaling":{
       "type":"string",
@@ -1036,6 +1135,62 @@
         "INDIVIDUAL",
         "REFERENCED"
       ]
+    },
+    "DashDvbErrorMetrics":{
+      "type":"list",
+      "member":{"shape":"DashDvbMetricsReporting"},
+      "max":20,
+      "min":0
+    },
+    "DashDvbFontDownload":{
+      "type":"structure",
+      "members":{
+        "Url":{"shape":"DashDvbFontDownloadUrlString"},
+        "MimeType":{"shape":"DashDvbFontDownloadMimeTypeString"},
+        "FontFamily":{"shape":"DashDvbFontDownloadFontFamilyString"}
+      }
+    },
+    "DashDvbFontDownloadFontFamilyString":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "DashDvbFontDownloadMimeTypeString":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"[a-zA-Z0-9][a-zA-Z0-9_/-]*[a-zA-Z0-9]"
+    },
+    "DashDvbFontDownloadUrlString":{
+      "type":"string",
+      "max":2048,
+      "min":1
+    },
+    "DashDvbMetricsReporting":{
+      "type":"structure",
+      "required":["ReportingUrl"],
+      "members":{
+        "ReportingUrl":{"shape":"DashDvbMetricsReportingReportingUrlString"},
+        "Probability":{"shape":"DashDvbMetricsReportingProbabilityInteger"}
+      }
+    },
+    "DashDvbMetricsReportingProbabilityInteger":{
+      "type":"integer",
+      "box":true,
+      "max":1000,
+      "min":1
+    },
+    "DashDvbMetricsReportingReportingUrlString":{
+      "type":"string",
+      "max":2048,
+      "min":1
+    },
+    "DashDvbSettings":{
+      "type":"structure",
+      "members":{
+        "FontDownload":{"shape":"DashDvbFontDownload"},
+        "ErrorMetrics":{"shape":"DashDvbErrorMetrics"}
+      }
     },
     "DashPeriodTrigger":{
       "type":"string",
@@ -1053,9 +1208,75 @@
       "max":100,
       "min":0
     },
+    "DashProfile":{
+      "type":"string",
+      "enum":["DVB_DASH"]
+    },
+    "DashProfiles":{
+      "type":"list",
+      "member":{"shape":"DashProfile"},
+      "max":5,
+      "min":0
+    },
+    "DashProgramInformation":{
+      "type":"structure",
+      "members":{
+        "Title":{"shape":"DashProgramInformationTitleString"},
+        "Source":{"shape":"DashProgramInformationSourceString"},
+        "Copyright":{"shape":"DashProgramInformationCopyrightString"},
+        "LanguageCode":{"shape":"DashProgramInformationLanguageCodeString"},
+        "MoreInformationUrl":{"shape":"DashProgramInformationMoreInformationUrlString"}
+      }
+    },
+    "DashProgramInformationCopyrightString":{
+      "type":"string",
+      "max":2048,
+      "min":1
+    },
+    "DashProgramInformationLanguageCodeString":{
+      "type":"string",
+      "max":5,
+      "min":2,
+      "pattern":"[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]"
+    },
+    "DashProgramInformationMoreInformationUrlString":{
+      "type":"string",
+      "max":2048,
+      "min":1
+    },
+    "DashProgramInformationSourceString":{
+      "type":"string",
+      "max":2048,
+      "min":1
+    },
+    "DashProgramInformationTitleString":{
+      "type":"string",
+      "max":2048,
+      "min":1
+    },
     "DashSegmentTemplateFormat":{
       "type":"string",
       "enum":["NUMBER_WITH_TIMELINE"]
+    },
+    "DashSubtitleConfiguration":{
+      "type":"structure",
+      "members":{
+        "TtmlConfiguration":{"shape":"DashTtmlConfiguration"}
+      }
+    },
+    "DashTtmlConfiguration":{
+      "type":"structure",
+      "required":["TtmlProfile"],
+      "members":{
+        "TtmlProfile":{"shape":"DashTtmlProfile"}
+      }
+    },
+    "DashTtmlProfile":{
+      "type":"string",
+      "enum":[
+        "IMSC_1",
+        "EBU_TT_D_101"
+      ]
     },
     "DashUtcTiming":{
       "type":"structure",
@@ -1229,6 +1450,7 @@
         "ConstantInitializationVector":{"shape":"EncryptionConstantInitializationVectorString"},
         "EncryptionMethod":{"shape":"EncryptionMethod"},
         "KeyRotationIntervalSeconds":{"shape":"EncryptionKeyRotationIntervalSecondsInteger"},
+        "CmafExcludeSegmentDrmMetadata":{"shape":"Boolean"},
         "SpekeKeyProvider":{"shape":"SpekeKeyProvider"}
       }
     },
@@ -1259,7 +1481,8 @@
       "type":"structure",
       "members":{
         "TsEncryptionMethod":{"shape":"TsEncryptionMethod"},
-        "CmafEncryptionMethod":{"shape":"CmafEncryptionMethod"}
+        "CmafEncryptionMethod":{"shape":"CmafEncryptionMethod"},
+        "IsmEncryptionMethod":{"shape":"IsmEncryptionMethod"}
       }
     },
     "EndpointErrorCondition":{
@@ -1440,7 +1663,13 @@
         "PeriodTriggers":{"shape":"DashPeriodTriggers"},
         "ScteDash":{"shape":"ScteDash"},
         "DrmSignaling":{"shape":"DashDrmSignaling"},
-        "UtcTiming":{"shape":"DashUtcTiming"}
+        "UtcTiming":{"shape":"DashUtcTiming"},
+        "Profiles":{"shape":"DashProfiles"},
+        "BaseUrls":{"shape":"DashBaseUrls"},
+        "ProgramInformation":{"shape":"DashProgramInformation"},
+        "DvbSettings":{"shape":"DashDvbSettings"},
+        "Compactness":{"shape":"DashCompactness"},
+        "SubtitleConfiguration":{"shape":"DashSubtitleConfiguration"}
       }
     },
     "GetDashManifests":{
@@ -1555,6 +1784,24 @@
       "type":"list",
       "member":{"shape":"GetLowLatencyHlsManifestConfiguration"}
     },
+    "GetMssManifestConfiguration":{
+      "type":"structure",
+      "required":[
+        "ManifestName",
+        "Url"
+      ],
+      "members":{
+        "ManifestName":{"shape":"ManifestName"},
+        "Url":{"shape":"String"},
+        "FilterConfiguration":{"shape":"FilterConfiguration"},
+        "ManifestWindowSeconds":{"shape":"Integer"},
+        "ManifestLayout":{"shape":"MssManifestLayout"}
+      }
+    },
+    "GetMssManifests":{
+      "type":"list",
+      "member":{"shape":"GetMssManifestConfiguration"}
+    },
     "GetOriginEndpointPolicyRequest":{
       "type":"structure",
       "required":[
@@ -1592,7 +1839,8 @@
         "ChannelGroupName":{"shape":"ResourceName"},
         "ChannelName":{"shape":"ResourceName"},
         "OriginEndpointName":{"shape":"ResourceName"},
-        "Policy":{"shape":"PolicyText"}
+        "Policy":{"shape":"PolicyText"},
+        "CdnAuthConfiguration":{"shape":"CdnAuthConfiguration"}
       }
     },
     "GetOriginEndpointRequest":{
@@ -1647,6 +1895,7 @@
         "HlsManifests":{"shape":"GetHlsManifests"},
         "LowLatencyHlsManifests":{"shape":"GetLowLatencyHlsManifests"},
         "DashManifests":{"shape":"GetDashManifests"},
+        "MssManifests":{"shape":"GetMssManifests"},
         "ForceEndpointErrorConfiguration":{"shape":"ForceEndpointErrorConfiguration"},
         "ETag":{"shape":"EntityTag"},
         "Tags":{"shape":"TagMap"}
@@ -1792,6 +2041,10 @@
       "error":{"httpStatusCode":500},
       "exception":true,
       "fault":true
+    },
+    "IsmEncryptionMethod":{
+      "type":"string",
+      "enum":["CENC"]
     },
     "ListChannelGroupsRequest":{
       "type":"structure",
@@ -1942,6 +2195,18 @@
       "type":"list",
       "member":{"shape":"ListLowLatencyHlsManifestConfiguration"}
     },
+    "ListMssManifestConfiguration":{
+      "type":"structure",
+      "required":["ManifestName"],
+      "members":{
+        "ManifestName":{"shape":"ResourceName"},
+        "Url":{"shape":"String"}
+      }
+    },
+    "ListMssManifests":{
+      "type":"list",
+      "member":{"shape":"ListMssManifestConfiguration"}
+    },
     "ListOriginEndpointsRequest":{
       "type":"structure",
       "required":[
@@ -2010,6 +2275,13 @@
       "min":1,
       "pattern":"[a-zA-Z0-9-]+"
     },
+    "MssManifestLayout":{
+      "type":"string",
+      "enum":[
+        "FULL",
+        "COMPACT"
+      ]
+    },
     "OriginEndpointListConfiguration":{
       "type":"structure",
       "required":[
@@ -2031,6 +2303,7 @@
         "HlsManifests":{"shape":"ListHlsManifests"},
         "LowLatencyHlsManifests":{"shape":"ListLowLatencyHlsManifests"},
         "DashManifests":{"shape":"ListDashManifests"},
+        "MssManifests":{"shape":"ListMssManifests"},
         "ForceEndpointErrorConfiguration":{"shape":"ForceEndpointErrorConfiguration"}
       }
     },
@@ -2124,7 +2397,8 @@
           "location":"uri",
           "locationName":"OriginEndpointName"
         },
-        "Policy":{"shape":"PolicyText"}
+        "Policy":{"shape":"PolicyText"},
+        "CdnAuthConfiguration":{"shape":"CdnAuthConfiguration"}
       }
     },
     "PutOriginEndpointPolicyResponse":{
@@ -2576,6 +2850,7 @@
         "HlsManifests":{"shape":"CreateHlsManifests"},
         "LowLatencyHlsManifests":{"shape":"CreateLowLatencyHlsManifests"},
         "DashManifests":{"shape":"CreateDashManifests"},
+        "MssManifests":{"shape":"CreateMssManifests"},
         "ForceEndpointErrorConfiguration":{"shape":"ForceEndpointErrorConfiguration"},
         "ETag":{
           "shape":"EntityTag",
@@ -2615,6 +2890,7 @@
         "StartoverWindowSeconds":{"shape":"Integer"},
         "HlsManifests":{"shape":"GetHlsManifests"},
         "LowLatencyHlsManifests":{"shape":"GetLowLatencyHlsManifests"},
+        "MssManifests":{"shape":"GetMssManifests"},
         "ForceEndpointErrorConfiguration":{"shape":"ForceEndpointErrorConfiguration"},
         "ETag":{"shape":"EntityTag"},
         "Tags":{
@@ -2644,6 +2920,7 @@
         "ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH",
         "CENC_IV_INCOMPATIBLE",
         "ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE",
+        "ENCRYPTION_CONTRACT_WITH_ISM_CONTAINER_INCOMPATIBLE",
         "ENCRYPTION_CONTRACT_UNENCRYPTED",
         "ENCRYPTION_CONTRACT_SHARED",
         "NUM_MANIFESTS_LOW",
@@ -2692,8 +2969,35 @@
         "HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED",
         "CLIP_START_TIME_WITH_START_OR_END",
         "START_TAG_TIME_OFFSET_INVALID",
+        "INCOMPATIBLE_DASH_PROFILE_DVB_DASH_CONFIGURATION",
+        "DASH_DVB_ATTRIBUTES_WITHOUT_DVB_DASH_PROFILE",
+        "INCOMPATIBLE_DASH_COMPACTNESS_CONFIGURATION",
+        "INCOMPATIBLE_XML_ENCODING",
+        "CMAF_EXCLUDE_SEGMENT_DRM_METADATA_INCOMPATIBLE_CONTAINER_TYPE",
         "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING",
-        "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION"
+        "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION",
+        "TS_CONTAINER_TYPE_WITH_MSS_MANIFEST",
+        "CMAF_CONTAINER_TYPE_WITH_MSS_MANIFEST",
+        "ISM_CONTAINER_TYPE_WITH_HLS_MANIFEST",
+        "ISM_CONTAINER_TYPE_WITH_LL_HLS_MANIFEST",
+        "ISM_CONTAINER_TYPE_WITH_DASH_MANIFEST",
+        "ISM_CONTAINER_TYPE_WITH_SCTE",
+        "ISM_CONTAINER_WITH_KEY_ROTATION",
+        "BATCH_GET_SECRET_VALUE_DENIED",
+        "GET_SECRET_VALUE_DENIED",
+        "DESCRIBE_SECRET_DENIED",
+        "INVALID_SECRET_FORMAT",
+        "SECRET_IS_NOT_ONE_KEY_VALUE_PAIR",
+        "INVALID_SECRET_KEY",
+        "INVALID_SECRET_VALUE",
+        "SECRET_ARN_RESOURCE_NOT_FOUND",
+        "DECRYPT_SECRET_FAILED",
+        "TOO_MANY_SECRETS",
+        "DUPLICATED_SECRET",
+        "MALFORMED_SECRET_ARN",
+        "SECRET_FROM_DIFFERENT_ACCOUNT",
+        "SECRET_FROM_DIFFERENT_REGION",
+        "INVALID_SECRET"
       ]
     }
   }

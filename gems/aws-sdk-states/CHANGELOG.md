@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2025-07-16)
+------------------
+
+* Feature - Doc-only update to introduction, and edits to clarify input parameter and the set of control characters.
+
+1.90.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.89.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.88.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.87.0 (2025-02-18)
 ------------------
 

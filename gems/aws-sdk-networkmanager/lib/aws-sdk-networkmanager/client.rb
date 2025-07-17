@@ -200,8 +200,7 @@ module Aws::NetworkManager
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -1746,6 +1745,8 @@ module Aws::NetworkManager
     #     options: {
     #       ipv_6_support: false,
     #       appliance_mode_support: false,
+    #       dns_support: false,
+    #       security_group_referencing_support: false,
     #     },
     #     tags: [
     #       {
@@ -1795,6 +1796,8 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.subnet_arns[0] #=> String
     #   resp.vpc_attachment.options.ipv_6_support #=> Boolean
     #   resp.vpc_attachment.options.appliance_mode_support #=> Boolean
+    #   resp.vpc_attachment.options.dns_support #=> Boolean
+    #   resp.vpc_attachment.options.security_group_referencing_support #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateVpcAttachment AWS API Documentation
     #
@@ -2964,6 +2967,9 @@ module Aws::NetworkManager
     #   resp.core_network_changes[0].previous_values.service_insertion_actions[0].via.with_edge_overrides[0].edge_sets[0] #=> Array
     #   resp.core_network_changes[0].previous_values.service_insertion_actions[0].via.with_edge_overrides[0].edge_sets[0][0] #=> String
     #   resp.core_network_changes[0].previous_values.service_insertion_actions[0].via.with_edge_overrides[0].use_edge #=> String
+    #   resp.core_network_changes[0].previous_values.vpn_ecmp_support #=> Boolean
+    #   resp.core_network_changes[0].previous_values.dns_support #=> Boolean
+    #   resp.core_network_changes[0].previous_values.security_group_referencing_support #=> Boolean
     #   resp.core_network_changes[0].new_values.segment_name #=> String
     #   resp.core_network_changes[0].new_values.network_function_group_name #=> String
     #   resp.core_network_changes[0].new_values.edge_locations #=> Array
@@ -2987,6 +2993,9 @@ module Aws::NetworkManager
     #   resp.core_network_changes[0].new_values.service_insertion_actions[0].via.with_edge_overrides[0].edge_sets[0] #=> Array
     #   resp.core_network_changes[0].new_values.service_insertion_actions[0].via.with_edge_overrides[0].edge_sets[0][0] #=> String
     #   resp.core_network_changes[0].new_values.service_insertion_actions[0].via.with_edge_overrides[0].use_edge #=> String
+    #   resp.core_network_changes[0].new_values.vpn_ecmp_support #=> Boolean
+    #   resp.core_network_changes[0].new_values.dns_support #=> Boolean
+    #   resp.core_network_changes[0].new_values.security_group_referencing_support #=> Boolean
     #   resp.core_network_changes[0].identifier_path #=> String
     #   resp.next_token #=> String
     #
@@ -4334,6 +4343,8 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.subnet_arns[0] #=> String
     #   resp.vpc_attachment.options.ipv_6_support #=> Boolean
     #   resp.vpc_attachment.options.appliance_mode_support #=> Boolean
+    #   resp.vpc_attachment.options.dns_support #=> Boolean
+    #   resp.vpc_attachment.options.security_group_referencing_support #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetVpcAttachment AWS API Documentation
     #
@@ -5676,6 +5687,8 @@ module Aws::NetworkManager
     #     options: {
     #       ipv_6_support: false,
     #       appliance_mode_support: false,
+    #       dns_support: false,
+    #       security_group_referencing_support: false,
     #     },
     #   })
     #
@@ -5718,6 +5731,8 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.subnet_arns[0] #=> String
     #   resp.vpc_attachment.options.ipv_6_support #=> Boolean
     #   resp.vpc_attachment.options.appliance_mode_support #=> Boolean
+    #   resp.vpc_attachment.options.dns_support #=> Boolean
+    #   resp.vpc_attachment.options.security_group_referencing_support #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateVpcAttachment AWS API Documentation
     #
@@ -5746,7 +5761,7 @@ module Aws::NetworkManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkmanager'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

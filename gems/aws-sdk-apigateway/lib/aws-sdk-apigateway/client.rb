@@ -202,8 +202,7 @@ module Aws::APIGateway
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -991,6 +990,11 @@ module Aws::APIGateway
     #   service for this DomainName regardless of the caller and Method
     #   configuration. Supported only for private custom domain names.
     #
+    # @option params [String] :routing_mode
+    #   The routing mode for this domain name. The routing mode determines how
+    #   API Gateway sends traffic from your custom domain name to your private
+    #   APIs.
+    #
     # @return [Types::DomainName] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DomainName#domain_name #domain_name} => String
@@ -1014,6 +1018,7 @@ module Aws::APIGateway
     #   * {Types::DomainName#ownership_verification_certificate_arn #ownership_verification_certificate_arn} => String
     #   * {Types::DomainName#management_policy #management_policy} => String
     #   * {Types::DomainName#policy #policy} => String
+    #   * {Types::DomainName#routing_mode #routing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1041,6 +1046,7 @@ module Aws::APIGateway
     #     },
     #     ownership_verification_certificate_arn: "String",
     #     policy: "String",
+    #     routing_mode: "BASE_PATH_MAPPING_ONLY", # accepts BASE_PATH_MAPPING_ONLY, ROUTING_RULE_ONLY, ROUTING_RULE_THEN_BASE_PATH_MAPPING
     #   })
     #
     # @example Response structure
@@ -1074,6 +1080,7 @@ module Aws::APIGateway
     #   resp.ownership_verification_certificate_arn #=> String
     #   resp.management_policy #=> String
     #   resp.policy #=> String
+    #   resp.routing_mode #=> String, one of "BASE_PATH_MAPPING_ONLY", "ROUTING_RULE_ONLY", "ROUTING_RULE_THEN_BASE_PATH_MAPPING"
     #
     # @overload create_domain_name(params = {})
     # @param [Hash] params ({})
@@ -3127,6 +3134,7 @@ module Aws::APIGateway
     #   * {Types::DomainName#ownership_verification_certificate_arn #ownership_verification_certificate_arn} => String
     #   * {Types::DomainName#management_policy #management_policy} => String
     #   * {Types::DomainName#policy #policy} => String
+    #   * {Types::DomainName#routing_mode #routing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3166,6 +3174,7 @@ module Aws::APIGateway
     #   resp.ownership_verification_certificate_arn #=> String
     #   resp.management_policy #=> String
     #   resp.policy #=> String
+    #   resp.routing_mode #=> String, one of "BASE_PATH_MAPPING_ONLY", "ROUTING_RULE_ONLY", "ROUTING_RULE_THEN_BASE_PATH_MAPPING"
     #
     # @overload get_domain_name(params = {})
     # @param [Hash] params ({})
@@ -3280,6 +3289,7 @@ module Aws::APIGateway
     #   resp.items[0].ownership_verification_certificate_arn #=> String
     #   resp.items[0].management_policy #=> String
     #   resp.items[0].policy #=> String
+    #   resp.items[0].routing_mode #=> String, one of "BASE_PATH_MAPPING_ONLY", "ROUTING_RULE_ONLY", "ROUTING_RULE_THEN_BASE_PATH_MAPPING"
     #
     # @overload get_domain_names(params = {})
     # @param [Hash] params ({})
@@ -5175,7 +5185,8 @@ module Aws::APIGateway
     #
     # @option params [Integer] :timeout_in_millis
     #   Custom timeout between 50 and 29,000 milliseconds. The default value
-    #   is 29,000 milliseconds or 29 seconds.
+    #   is 29,000 milliseconds or 29 seconds. You can increase the default
+    #   value to longer than 29 seconds for Regional or private APIs only.
     #
     # @option params [Types::TlsConfig] :tls_config
     #   Specifies the TLS configuration for an integration.
@@ -6389,6 +6400,7 @@ module Aws::APIGateway
     #   * {Types::DomainName#ownership_verification_certificate_arn #ownership_verification_certificate_arn} => String
     #   * {Types::DomainName#management_policy #management_policy} => String
     #   * {Types::DomainName#policy #policy} => String
+    #   * {Types::DomainName#routing_mode #routing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -6436,6 +6448,7 @@ module Aws::APIGateway
     #   resp.ownership_verification_certificate_arn #=> String
     #   resp.management_policy #=> String
     #   resp.policy #=> String
+    #   resp.routing_mode #=> String, one of "BASE_PATH_MAPPING_ONLY", "ROUTING_RULE_ONLY", "ROUTING_RULE_THEN_BASE_PATH_MAPPING"
     #
     # @overload update_domain_name(params = {})
     # @param [Hash] params ({})
@@ -7389,7 +7402,7 @@ module Aws::APIGateway
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.114.0'
+      context[:gem_version] = '1.119.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

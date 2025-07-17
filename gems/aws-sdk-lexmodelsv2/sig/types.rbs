@@ -2566,6 +2566,11 @@ module Aws::LexModelsV2
       SENSITIVE: []
     end
 
+    class NluImprovementSpecification
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
     class ObfuscationSetting
       attr_accessor obfuscation_setting_type: ("None" | "DefaultObfuscation")
       SENSITIVE: []
@@ -2736,6 +2741,7 @@ module Aws::LexModelsV2
 
     class RuntimeSettings
       attr_accessor slot_resolution_improvement: Types::SlotResolutionImprovementSpecification
+      attr_accessor nlu_improvement: Types::NluImprovementSpecification
       SENSITIVE: []
     end
 

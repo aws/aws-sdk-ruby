@@ -43,6 +43,10 @@ module Aws::Rekognition
     CelebrityRecognition = Shapes::StructureShape.new(name: 'CelebrityRecognition')
     CelebrityRecognitionSortBy = Shapes::StringShape.new(name: 'CelebrityRecognitionSortBy')
     CelebrityRecognitions = Shapes::ListShape.new(name: 'CelebrityRecognitions')
+    Challenge = Shapes::StructureShape.new(name: 'Challenge')
+    ChallengePreference = Shapes::StructureShape.new(name: 'ChallengePreference')
+    ChallengePreferences = Shapes::ListShape.new(name: 'ChallengePreferences')
+    ChallengeType = Shapes::StringShape.new(name: 'ChallengeType')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     CollectionId = Shapes::StringShape.new(name: 'CollectionId')
     CollectionIdList = Shapes::ListShape.new(name: 'CollectionIdList')
@@ -542,9 +546,11 @@ module Aws::Rekognition
     UserMatchList = Shapes::ListShape.new(name: 'UserMatchList')
     UserStatus = Shapes::StringShape.new(name: 'UserStatus')
     ValidationData = Shapes::StructureShape.new(name: 'ValidationData')
+    Version = Shapes::StringShape.new(name: 'Version')
     VersionDescription = Shapes::StringShape.new(name: 'VersionDescription')
     VersionName = Shapes::StringShape.new(name: 'VersionName')
     VersionNames = Shapes::ListShape.new(name: 'VersionNames')
+    Versions = Shapes::StructureShape.new(name: 'Versions')
     Video = Shapes::StructureShape.new(name: 'Video')
     VideoColorRange = Shapes::StringShape.new(name: 'VideoColorRange')
     VideoJobStatus = Shapes::StringShape.new(name: 'VideoJobStatus')
@@ -567,7 +573,7 @@ module Aws::Rekognition
     AssociateFacesRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location_name: "UserId"))
     AssociateFacesRequest.add_member(:face_ids, Shapes::ShapeRef.new(shape: UserFaceIdList, required: true, location_name: "FaceIds"))
     AssociateFacesRequest.add_member(:user_match_threshold, Shapes::ShapeRef.new(shape: Percent, location_name: "UserMatchThreshold"))
-    AssociateFacesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    AssociateFacesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     AssociateFacesRequest.struct_class = Types::AssociateFacesRequest
 
     AssociateFacesResponse.add_member(:associated_faces, Shapes::ShapeRef.new(shape: AssociatedFacesList, location_name: "AssociatedFaces"))
@@ -637,6 +643,16 @@ module Aws::Rekognition
     CelebrityRecognition.struct_class = Types::CelebrityRecognition
 
     CelebrityRecognitions.member = Shapes::ShapeRef.new(shape: CelebrityRecognition)
+
+    Challenge.add_member(:type, Shapes::ShapeRef.new(shape: ChallengeType, required: true, location_name: "Type"))
+    Challenge.add_member(:version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "Version"))
+    Challenge.struct_class = Types::Challenge
+
+    ChallengePreference.add_member(:type, Shapes::ShapeRef.new(shape: ChallengeType, required: true, location_name: "Type"))
+    ChallengePreference.add_member(:versions, Shapes::ShapeRef.new(shape: Versions, location_name: "Versions"))
+    ChallengePreference.struct_class = Types::ChallengePreference
+
+    ChallengePreferences.member = Shapes::ShapeRef.new(shape: ChallengePreference)
 
     CollectionIdList.member = Shapes::ShapeRef.new(shape: CollectionId)
 
@@ -747,6 +763,7 @@ module Aws::Rekognition
 
     CreateFaceLivenessSessionRequestSettings.add_member(:output_config, Shapes::ShapeRef.new(shape: LivenessOutputConfig, location_name: "OutputConfig"))
     CreateFaceLivenessSessionRequestSettings.add_member(:audit_images_limit, Shapes::ShapeRef.new(shape: AuditImagesLimit, location_name: "AuditImagesLimit"))
+    CreateFaceLivenessSessionRequestSettings.add_member(:challenge_preferences, Shapes::ShapeRef.new(shape: ChallengePreferences, location_name: "ChallengePreferences"))
     CreateFaceLivenessSessionRequestSettings.struct_class = Types::CreateFaceLivenessSessionRequestSettings
 
     CreateFaceLivenessSessionResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: LivenessSessionId, required: true, location_name: "SessionId"))
@@ -792,7 +809,7 @@ module Aws::Rekognition
 
     CreateUserRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "CollectionId"))
     CreateUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location_name: "UserId"))
-    CreateUserRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateUserRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateUserRequest.struct_class = Types::CreateUserRequest
 
     CreateUserResponse.struct_class = Types::CreateUserResponse
@@ -902,7 +919,7 @@ module Aws::Rekognition
 
     DeleteUserRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "CollectionId"))
     DeleteUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location_name: "UserId"))
-    DeleteUserRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteUserRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DeleteUserRequest.struct_class = Types::DeleteUserRequest
 
     DeleteUserResponse.struct_class = Types::DeleteUserResponse
@@ -1061,7 +1078,7 @@ module Aws::Rekognition
 
     DisassociateFacesRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "CollectionId"))
     DisassociateFacesRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location_name: "UserId"))
-    DisassociateFacesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DisassociateFacesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DisassociateFacesRequest.add_member(:face_ids, Shapes::ShapeRef.new(shape: UserFaceIdList, required: true, location_name: "FaceIds"))
     DisassociateFacesRequest.struct_class = Types::DisassociateFacesRequest
 
@@ -1275,6 +1292,7 @@ module Aws::Rekognition
     GetFaceLivenessSessionResultsResponse.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     GetFaceLivenessSessionResultsResponse.add_member(:reference_image, Shapes::ShapeRef.new(shape: AuditImage, location_name: "ReferenceImage"))
     GetFaceLivenessSessionResultsResponse.add_member(:audit_images, Shapes::ShapeRef.new(shape: AuditImages, location_name: "AuditImages"))
+    GetFaceLivenessSessionResultsResponse.add_member(:challenge, Shapes::ShapeRef.new(shape: Challenge, location_name: "Challenge"))
     GetFaceLivenessSessionResultsResponse.struct_class = Types::GetFaceLivenessSessionResultsResponse
 
     GetFaceSearchRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
@@ -1387,7 +1405,7 @@ module Aws::Rekognition
 
     HumanLoopActivationOutput.add_member(:human_loop_arn, Shapes::ShapeRef.new(shape: HumanLoopArn, location_name: "HumanLoopArn"))
     HumanLoopActivationOutput.add_member(:human_loop_activation_reasons, Shapes::ShapeRef.new(shape: HumanLoopActivationReasons, location_name: "HumanLoopActivationReasons"))
-    HumanLoopActivationOutput.add_member(:human_loop_activation_conditions_evaluation_results, Shapes::ShapeRef.new(shape: HumanLoopActivationConditionsEvaluationResults, location_name: "HumanLoopActivationConditionsEvaluationResults", metadata: {"jsonvalue"=>true}))
+    HumanLoopActivationOutput.add_member(:human_loop_activation_conditions_evaluation_results, Shapes::ShapeRef.new(shape: HumanLoopActivationConditionsEvaluationResults, location_name: "HumanLoopActivationConditionsEvaluationResults", metadata: {"jsonvalue" => true}))
     HumanLoopActivationOutput.struct_class = Types::HumanLoopActivationOutput
 
     HumanLoopActivationReasons.member = Shapes::ShapeRef.new(shape: HumanLoopActivationReason)
@@ -1965,7 +1983,7 @@ module Aws::Rekognition
     StartLabelDetectionResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     StartLabelDetectionResponse.struct_class = Types::StartLabelDetectionResponse
 
-    StartMediaAnalysisJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartMediaAnalysisJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     StartMediaAnalysisJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: MediaAnalysisJobName, location_name: "JobName"))
     StartMediaAnalysisJobRequest.add_member(:operations_config, Shapes::ShapeRef.new(shape: MediaAnalysisOperationsConfig, required: true, location_name: "OperationsConfig"))
     StartMediaAnalysisJobRequest.add_member(:input, Shapes::ShapeRef.new(shape: MediaAnalysisInput, required: true, location_name: "Input"))
@@ -2222,6 +2240,10 @@ module Aws::Rekognition
     ValidationData.struct_class = Types::ValidationData
 
     VersionNames.member = Shapes::ShapeRef.new(shape: VersionName)
+
+    Versions.add_member(:minimum, Shapes::ShapeRef.new(shape: Version, location_name: "Minimum"))
+    Versions.add_member(:maximum, Shapes::ShapeRef.new(shape: Version, location_name: "Maximum"))
+    Versions.struct_class = Types::Versions
 
     Video.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "S3Object"))
     Video.struct_class = Types::Video

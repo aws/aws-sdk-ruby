@@ -113,7 +113,7 @@ module Aws
                                       min: ::Integer,
                                       max: ::Integer?
                                     },
-                                    cpu_manufacturers: Array[("intel" | "amd" | "amazon-web-services")]?,
+                                    cpu_manufacturers: Array[("intel" | "amd" | "amazon-web-services" | "apple")]?,
                                     memory_gi_b_per_v_cpu: {
                                       min: ::Float?,
                                       max: ::Float?
@@ -309,6 +309,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Resource.html#groups-instance_method
       def groups: (
                     ?auto_scaling_group_names: Array[::String],
+                    ?include_instances: bool,
                     ?filters: Array[
                       {
                         name: ::String?,

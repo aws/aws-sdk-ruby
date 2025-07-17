@@ -103,8 +103,14 @@ module Aws::IAM
 
     # A friendly description of the policy.
     #
-    # This element is included in the response to the GetPolicy operation.
-    # It is not included in the response to the ListPolicies operation.
+    # This element is included in the response to the [GetPolicy][1]
+    # operation. It is not included in the response to the [ListPolicies][2]
+    # operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicy.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPolicies.html
     # @return [String]
     def description
       data[:description]

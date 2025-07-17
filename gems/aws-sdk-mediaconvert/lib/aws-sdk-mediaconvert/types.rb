@@ -813,7 +813,21 @@ module Aws::MediaConvert
     #   @return [Types::RemixSettings]
     #
     # @!attribute [rw] selector_type
-    #   Specifies the type of the audio selector.
+    #   Specify how MediaConvert selects audio content within your input.
+    #   The default is Track. PID: Select audio by specifying the Packet
+    #   Identifier (PID) values for MPEG Transport Stream inputs. Use this
+    #   when you know the exact PID values of your audio streams. Track:
+    #   Default. Select audio by track number. This is the most common
+    #   option and works with most input container formats. Language code:
+    #   Select audio by language using ISO 639-2 or ISO 639-3 three-letter
+    #   language codes. Use this when your source has embedded language
+    #   metadata and you want to select tracks based on their language. HLS
+    #   rendition group: Select audio from an HLS rendition group. Use this
+    #   when your input is an HLS package with multiple audio renditions and
+    #   you want to select specific rendition groups. All PCM: Select all
+    #   uncompressed PCM audio tracks from your input automatically. This is
+    #   useful when you want to include all PCM audio tracks without
+    #   specifying individual track numbers.
     #   @return [String]
     #
     # @!attribute [rw] tracks
@@ -973,8 +987,8 @@ module Aws::MediaConvert
     #   Optional. Specify the QVBR quality level to use for all renditions
     #   in your automated ABR stack. To have MediaConvert automatically
     #   determine the quality level: Leave blank. To manually specify a
-    #   quality level: Enter an integer from 1 to 10. MediaConvert will use
-    #   a quality level up to the value that you specify, depending on your
+    #   quality level: Enter a value from 1 to 10. MediaConvert will use a
+    #   quality level up to the value that you specify, depending on your
     #   source. For more information about QVBR quality levels, see:
     #   https://docs.aws.amazon.com/mediaconvert/latest/ug/qvbr-guidelines.html
     #   @return [Float]
@@ -1168,6 +1182,29 @@ module Aws::MediaConvert
     #   better video quality.
     #   @return [Integer]
     #
+    # @!attribute [rw] per_frame_metrics
+    #   Optionally choose one or more per frame metric reports to generate
+    #   along with your output. You can use these metrics to analyze your
+    #   video output according to one or more commonly used image quality
+    #   metrics. You can specify per frame metrics for output groups or for
+    #   individual outputs. When you do, MediaConvert writes a CSV
+    #   (Comma-Separated Values) file to your S3 output destination, named
+    #   after the output name and metric type. For example:
+    #   videofile\_PSNR.csv Jobs that generate per frame metrics will take
+    #   longer to complete, depending on the resolution and complexity of
+    #   your output. For example, some 4K jobs might take up to twice as
+    #   long to complete. Note that when analyzing the video quality of your
+    #   output, or when comparing the video quality of multiple different
+    #   outputs, we generally also recommend a detailed visual review in a
+    #   controlled environment. You can choose from the following per frame
+    #   metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural
+    #   Similarity Index Measure * MS\_SSIM: Multi-Scale Similarity Index
+    #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
+    #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+    #   Quality-Defined Variable Bitrate. This option is only available when
+    #   your output uses the QVBR rate control mode.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] qvbr_settings
     #   Settings for quality-defined variable bitrate encoding with the
     #   H.265 codec. Use these settings only when you set QVBR for Rate
@@ -1221,6 +1258,7 @@ module Aws::MediaConvert
       :gop_size,
       :max_bitrate,
       :number_b_frames_between_reference_frames,
+      :per_frame_metrics,
       :qvbr_settings,
       :rate_control_mode,
       :slices,
@@ -1334,6 +1372,29 @@ module Aws::MediaConvert
     #   field first, depending on which of the Follow options you choose.
     #   @return [String]
     #
+    # @!attribute [rw] per_frame_metrics
+    #   Optionally choose one or more per frame metric reports to generate
+    #   along with your output. You can use these metrics to analyze your
+    #   video output according to one or more commonly used image quality
+    #   metrics. You can specify per frame metrics for output groups or for
+    #   individual outputs. When you do, MediaConvert writes a CSV
+    #   (Comma-Separated Values) file to your S3 output destination, named
+    #   after the output name and metric type. For example:
+    #   videofile\_PSNR.csv Jobs that generate per frame metrics will take
+    #   longer to complete, depending on the resolution and complexity of
+    #   your output. For example, some 4K jobs might take up to twice as
+    #   long to complete. Note that when analyzing the video quality of your
+    #   output, or when comparing the video quality of multiple different
+    #   outputs, we generally also recommend a detailed visual review in a
+    #   controlled environment. You can choose from the following per frame
+    #   metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural
+    #   Similarity Index Measure * MS\_SSIM: Multi-Scale Similarity Index
+    #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
+    #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+    #   Quality-Defined Variable Bitrate. This option is only available when
+    #   your output uses the QVBR rate control mode.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] scan_type_conversion_mode
     #   Use this setting for interlaced outputs, when your output frame rate
     #   is half of your input frame rate. In this situation, choose
@@ -1380,6 +1441,7 @@ module Aws::MediaConvert
       :framerate_denominator,
       :framerate_numerator,
       :interlace_mode,
+      :per_frame_metrics,
       :scan_type_conversion_mode,
       :slow_pal,
       :telecine)
@@ -3055,12 +3117,10 @@ module Aws::MediaConvert
     #   @return [Types::AccelerationSettings]
     #
     # @!attribute [rw] billing_tags_source
-    #   Optional. Choose a tag type that AWS Billing and Cost Management
-    #   will use to sort your AWS Elemental MediaConvert costs on any
-    #   billing report that you set up. Any transcoding outputs that don't
-    #   have an associated tag will appear in your billing report unsorted.
-    #   If you don't choose a valid value for this field, your job outputs
-    #   will appear on the billing report unsorted.
+    #   Optionally choose a Billing tags source that AWS Billing and Cost
+    #   Management will use to display tags for individual output costs on
+    #   any billing report that you set up. Leave blank to use the default
+    #   value, Job.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -4187,7 +4247,14 @@ module Aws::MediaConvert
     #   (PCS) with DDS x-coordinate and DDS y-coordinate. For video
     #   resolutions with a height of 576 pixels or less, MediaConvert
     #   doesn't include the DDS, regardless of the value you choose for DDS
-    #   handling. All burn-in and DVB-Sub font settings must match.
+    #   handling. All burn-in and DVB-Sub font settings must match. To
+    #   include the DDS, with optimized subtitle placement and reduced data
+    #   overhead: We recommend that you choose Specified (optimal). This
+    #   option provides the same visual positioning as Specified while using
+    #   less bandwidth. This also supports resolutions higher than 1080p
+    #   while maintaining full DVB-Sub compatibility. When you do, also
+    #   specify the offset coordinates of the display window with DDS
+    #   x-coordinate and DDS y-coordinate.
     #   @return [String]
     #
     # @!attribute [rw] dds_x_coordinate
@@ -4481,10 +4548,10 @@ module Aws::MediaConvert
     # your source when you submit your job, but want to select multiple
     # audio tracks. When you include an audio track in your output and
     # specify this Dynamic audio selector as the Audio source, MediaConvert
-    # creates an output audio track for each dynamically selected track.
-    # Note that when you include a Dynamic audio selector for two or more
-    # inputs, each input must have the same number of audio tracks and audio
-    # channels.
+    # creates an audio track within that output for each dynamically
+    # selected track. Note that when you include a Dynamic audio selector
+    # for two or more inputs, each input must have the same number of audio
+    # tracks and audio channels.
     #
     # @!attribute [rw] audio_duration_correction
     #   Apply audio timing corrections to help synchronize audio and video
@@ -5263,6 +5330,15 @@ module Aws::MediaConvert
     #   value for Time delta units, MediaConvert uses seconds by default.
     #   @return [String]
     #
+    # @!attribute [rw] upconvert_stl_to_teletext
+    #   Specify whether this set of input captions appears in your outputs
+    #   in both STL and Teletext format. If you choose Upconvert,
+    #   MediaConvert includes the captions data in two ways: it passes the
+    #   STL data through using the Teletext compatibility bytes fields of
+    #   the Teletext wrapper, and it also translates the STL data into
+    #   Teletext.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/FileSourceSettings AWS API Documentation
     #
     class FileSourceSettings < Struct.new(
@@ -5272,7 +5348,8 @@ module Aws::MediaConvert
       :framerate,
       :source_file,
       :time_delta,
-      :time_delta_units)
+      :time_delta_units,
+      :upconvert_stl_to_teletext)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5962,6 +6039,29 @@ module Aws::MediaConvert
     #   ratio 40:33. In this example, the value for parNumerator is 40.
     #   @return [Integer]
     #
+    # @!attribute [rw] per_frame_metrics
+    #   Optionally choose one or more per frame metric reports to generate
+    #   along with your output. You can use these metrics to analyze your
+    #   video output according to one or more commonly used image quality
+    #   metrics. You can specify per frame metrics for output groups or for
+    #   individual outputs. When you do, MediaConvert writes a CSV
+    #   (Comma-Separated Values) file to your S3 output destination, named
+    #   after the output name and metric type. For example:
+    #   videofile\_PSNR.csv Jobs that generate per frame metrics will take
+    #   longer to complete, depending on the resolution and complexity of
+    #   your output. For example, some 4K jobs might take up to twice as
+    #   long to complete. Note that when analyzing the video quality of your
+    #   output, or when comparing the video quality of multiple different
+    #   outputs, we generally also recommend a detailed visual review in a
+    #   controlled environment. You can choose from the following per frame
+    #   metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural
+    #   Similarity Index Measure * MS\_SSIM: Multi-Scale Similarity Index
+    #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
+    #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+    #   Quality-Defined Variable Bitrate. This option is only available when
+    #   your output uses the QVBR rate control mode.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] quality_tuning_level
     #   The Quality tuning level you choose represents a trade-off between
     #   the encoding speed of your job and the output video quality. For the
@@ -6179,6 +6279,7 @@ module Aws::MediaConvert
       :par_control,
       :par_denominator,
       :par_numerator,
+      :per_frame_metrics,
       :quality_tuning_level,
       :qvbr_settings,
       :rate_control_mode,
@@ -6535,6 +6636,29 @@ module Aws::MediaConvert
     #   ratio 40:33. In this example, the value for parNumerator is 40.
     #   @return [Integer]
     #
+    # @!attribute [rw] per_frame_metrics
+    #   Optionally choose one or more per frame metric reports to generate
+    #   along with your output. You can use these metrics to analyze your
+    #   video output according to one or more commonly used image quality
+    #   metrics. You can specify per frame metrics for output groups or for
+    #   individual outputs. When you do, MediaConvert writes a CSV
+    #   (Comma-Separated Values) file to your S3 output destination, named
+    #   after the output name and metric type. For example:
+    #   videofile\_PSNR.csv Jobs that generate per frame metrics will take
+    #   longer to complete, depending on the resolution and complexity of
+    #   your output. For example, some 4K jobs might take up to twice as
+    #   long to complete. Note that when analyzing the video quality of your
+    #   output, or when comparing the video quality of multiple different
+    #   outputs, we generally also recommend a detailed visual review in a
+    #   controlled environment. You can choose from the following per frame
+    #   metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural
+    #   Similarity Index Measure * MS\_SSIM: Multi-Scale Similarity Index
+    #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
+    #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+    #   Quality-Defined Variable Bitrate. This option is only available when
+    #   your output uses the QVBR rate control mode.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] quality_tuning_level
     #   Optional. Use Quality tuning level to choose how you want to trade
     #   off encoding speed for output video quality. The default behavior is
@@ -6716,6 +6840,7 @@ module Aws::MediaConvert
       :par_control,
       :par_denominator,
       :par_numerator,
+      :per_frame_metrics,
       :quality_tuning_level,
       :qvbr_settings,
       :rate_control_mode,
@@ -10260,6 +10385,23 @@ module Aws::MediaConvert
     #   output audio codec.
     #   @return [String]
     #
+    # @!attribute [rw] c2pa_manifest
+    #   When enabled, a C2PA compliant manifest will be generated, signed
+    #   and embeded in the output. For more information on C2PA, see
+    #   https://c2pa.org/specifications/specifications/2.1/index.html
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_secret
+    #   Specify the name or ARN of the AWS Secrets Manager secret that
+    #   contains your C2PA public certificate chain in PEM format. Provide a
+    #   valid secret name or ARN. Note that your MediaConvert service role
+    #   must allow access to this secret. The public certificate chain is
+    #   added to the COSE header (x5chain) for signature validation. Include
+    #   the signer's certificate and all intermediate certificates. Do not
+    #   include the root certificate. For details on COSE, see:
+    #   https://opensource.contentauthenticity.org/docs/manifest/signing-manifests
+    #   @return [String]
+    #
     # @!attribute [rw] cslg_atom
     #   When enabled, file composition times will start at zero, composition
     #   times in the 'ctts' (composition time to sample) box for B-frames
@@ -10294,15 +10436,24 @@ module Aws::MediaConvert
     #   necessary to specify.
     #   @return [String]
     #
+    # @!attribute [rw] signing_kms_key
+    #   Specify the ID or ARN of the AWS KMS key used to sign the C2PA
+    #   manifest in your MP4 output. Provide a valid KMS key ARN. Note that
+    #   your MediaConvert service role must allow access to this key.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Mp4Settings AWS API Documentation
     #
     class Mp4Settings < Struct.new(
       :audio_duration,
+      :c2pa_manifest,
+      :certificate_secret,
       :cslg_atom,
       :ctts_version,
       :free_space_box,
       :moov_placement,
-      :mp_4_major_brand)
+      :mp_4_major_brand,
+      :signing_kms_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10631,6 +10782,29 @@ module Aws::MediaConvert
     #   ratio 40:33. In this example, the value for parNumerator is 40.
     #   @return [Integer]
     #
+    # @!attribute [rw] per_frame_metrics
+    #   Optionally choose one or more per frame metric reports to generate
+    #   along with your output. You can use these metrics to analyze your
+    #   video output according to one or more commonly used image quality
+    #   metrics. You can specify per frame metrics for output groups or for
+    #   individual outputs. When you do, MediaConvert writes a CSV
+    #   (Comma-Separated Values) file to your S3 output destination, named
+    #   after the output name and metric type. For example:
+    #   videofile\_PSNR.csv Jobs that generate per frame metrics will take
+    #   longer to complete, depending on the resolution and complexity of
+    #   your output. For example, some 4K jobs might take up to twice as
+    #   long to complete. Note that when analyzing the video quality of your
+    #   output, or when comparing the video quality of multiple different
+    #   outputs, we generally also recommend a detailed visual review in a
+    #   controlled environment. You can choose from the following per frame
+    #   metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural
+    #   Similarity Index Measure * MS\_SSIM: Multi-Scale Similarity Index
+    #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
+    #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+    #   Quality-Defined Variable Bitrate. This option is only available when
+    #   your output uses the QVBR rate control mode.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] quality_tuning_level
     #   Optional. Use Quality tuning level to choose how you want to trade
     #   off encoding speed for output video quality. The default behavior is
@@ -10770,6 +10944,7 @@ module Aws::MediaConvert
       :par_control,
       :par_denominator,
       :par_numerator,
+      :per_frame_metrics,
       :quality_tuning_level,
       :rate_control_mode,
       :scan_type_conversion_mode,
@@ -11538,6 +11713,29 @@ module Aws::MediaConvert
     #   https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html.
     #   @return [Types::MsSmoothGroupSettings]
     #
+    # @!attribute [rw] per_frame_metrics
+    #   Optionally choose one or more per frame metric reports to generate
+    #   along with your output. You can use these metrics to analyze your
+    #   video output according to one or more commonly used image quality
+    #   metrics. You can specify per frame metrics for output groups or for
+    #   individual outputs. When you do, MediaConvert writes a CSV
+    #   (Comma-Separated Values) file to your S3 output destination, named
+    #   after the output name and metric type. For example:
+    #   videofile\_PSNR.csv Jobs that generate per frame metrics will take
+    #   longer to complete, depending on the resolution and complexity of
+    #   your output. For example, some 4K jobs might take up to twice as
+    #   long to complete. Note that when analyzing the video quality of your
+    #   output, or when comparing the video quality of multiple different
+    #   outputs, we generally also recommend a detailed visual review in a
+    #   controlled environment. You can choose from the following per frame
+    #   metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural
+    #   Similarity Index Measure * MS\_SSIM: Multi-Scale Similarity Index
+    #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
+    #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+    #   Quality-Defined Variable Bitrate. This option is only available when
+    #   your output uses the QVBR rate control mode.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] type
     #   Type of output group (File group, Apple HLS, DASH ISO, Microsoft
     #   Smooth Streaming, CMAF)
@@ -11551,6 +11749,7 @@ module Aws::MediaConvert
       :file_group_settings,
       :hls_group_settings,
       :ms_smooth_group_settings,
+      :per_frame_metrics,
       :type)
       SENSITIVE = []
       include Aws::Structure
@@ -11887,6 +12086,29 @@ module Aws::MediaConvert
     #   ratio 40:33. In this example, the value for parNumerator is 40.
     #   @return [Integer]
     #
+    # @!attribute [rw] per_frame_metrics
+    #   Optionally choose one or more per frame metric reports to generate
+    #   along with your output. You can use these metrics to analyze your
+    #   video output according to one or more commonly used image quality
+    #   metrics. You can specify per frame metrics for output groups or for
+    #   individual outputs. When you do, MediaConvert writes a CSV
+    #   (Comma-Separated Values) file to your S3 output destination, named
+    #   after the output name and metric type. For example:
+    #   videofile\_PSNR.csv Jobs that generate per frame metrics will take
+    #   longer to complete, depending on the resolution and complexity of
+    #   your output. For example, some 4K jobs might take up to twice as
+    #   long to complete. Note that when analyzing the video quality of your
+    #   output, or when comparing the video quality of multiple different
+    #   outputs, we generally also recommend a detailed visual review in a
+    #   controlled environment. You can choose from the following per frame
+    #   metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural
+    #   Similarity Index Measure * MS\_SSIM: Multi-Scale Similarity Index
+    #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
+    #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+    #   Quality-Defined Variable Bitrate. This option is only available when
+    #   your output uses the QVBR rate control mode.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] scan_type_conversion_mode
     #   Use this setting for interlaced outputs, when your output frame rate
     #   is half of your input frame rate. In this situation, choose
@@ -11936,6 +12158,7 @@ module Aws::MediaConvert
       :par_control,
       :par_denominator,
       :par_numerator,
+      :per_frame_metrics,
       :scan_type_conversion_mode,
       :slow_pal,
       :telecine)
@@ -13779,6 +14002,13 @@ module Aws::MediaConvert
     # information, see
     # https://docs.aws.amazon.com/mediaconvert/latest/ug/video-overlays.html
     #
+    # @!attribute [rw] crop
+    #   Specify a rectangle of content to crop and use from your video
+    #   overlay's input video. When you do, MediaConvert uses the cropped
+    #   dimensions that you specify under X offset, Y offset, Width, and
+    #   Height.
+    #   @return [Types::VideoOverlayCrop]
+    #
     # @!attribute [rw] end_timecode
     #   Enter the end timecode in the base input video for this overlay.
     #   Your overlay will be active through this frame. To display your
@@ -13837,12 +14067,86 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoOverlay AWS API Documentation
     #
     class VideoOverlay < Struct.new(
+      :crop,
       :end_timecode,
       :initial_position,
       :input,
       :playback,
       :start_timecode,
       :transitions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specify a rectangle of content to crop and use from your video
+    # overlay's input video. When you do, MediaConvert uses the cropped
+    # dimensions that you specify under X offset, Y offset, Width, and
+    # Height.
+    #
+    # @!attribute [rw] height
+    #   Specify the height of the video overlay cropping rectangle. To use
+    #   the same height as your overlay input video: Keep blank, or enter 0.
+    #   To specify a different height for the cropping rectangle: Enter an
+    #   integer representing the Unit type that you choose, either Pixels or
+    #   Percentage. For example, when you enter 100 and choose Pixels, the
+    #   cropping rectangle will 100 pixels high. When you enter 10, choose
+    #   Percentage, and your overlay input video is 1920x1080, the cropping
+    #   rectangle will be 108 pixels high.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unit
+    #   Specify the Unit type to use when you enter a value for X position,
+    #   Y position, Width, or Height. You can choose Pixels or Percentage.
+    #   Leave blank to use the default value, Pixels.
+    #   @return [String]
+    #
+    # @!attribute [rw] width
+    #   Specify the width of the video overlay cropping rectangle. To use
+    #   the same width as your overlay input video: Keep blank, or enter 0.
+    #   To specify a different width for the cropping rectangle: Enter an
+    #   integer representing the Unit type that you choose, either Pixels or
+    #   Percentage. For example, when you enter 100 and choose Pixels, the
+    #   cropping rectangle will 100 pixels wide. When you enter 10, choose
+    #   Percentage, and your overlay input video is 1920x1080, the cropping
+    #   rectangle will be 192 pixels wide.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] x
+    #   Specify the distance between the cropping rectangle and the left
+    #   edge of your overlay video's frame. To position the cropping
+    #   rectangle along the left edge: Keep blank, or enter 0. To position
+    #   the cropping rectangle to the right, relative to the left edge of
+    #   your overlay video's frame: Enter an integer representing the Unit
+    #   type that you choose, either Pixels or Percentage. For example, when
+    #   you enter 10 and choose Pixels, the cropping rectangle will be
+    #   positioned 10 pixels from the left edge of the overlay video's
+    #   frame. When you enter 10, choose Percentage, and your overlay input
+    #   video is 1920x1080, the cropping rectangle will be positioned 192
+    #   pixels from the left edge of the overlay video's frame.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] y
+    #   Specify the distance between the cropping rectangle and the top edge
+    #   of your overlay video's frame. To position the cropping rectangle
+    #   along the top edge: Keep blank, or enter 0. To position the cropping
+    #   rectangle down, relative to the top edge of your overlay video's
+    #   frame: Enter an integer representing the Unit type that you choose,
+    #   either Pixels or Percentage. For example, when you enter 10 and
+    #   choose Pixels, the cropping rectangle will be positioned 10 pixels
+    #   from the top edge of the overlay video's frame. When you enter 10,
+    #   choose Percentage, and your overlay input video is 1920x1080, the
+    #   cropping rectangle will be positioned 108 pixels from the top edge
+    #   of the overlay video's frame.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoOverlayCrop AWS API Documentation
+    #
+    class VideoOverlayCrop < Struct.new(
+      :height,
+      :unit,
+      :width,
+      :x,
+      :y)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15024,6 +15328,29 @@ module Aws::MediaConvert
     #   Framerate. In this example, specify 23.976.
     #   @return [Integer]
     #
+    # @!attribute [rw] per_frame_metrics
+    #   Optionally choose one or more per frame metric reports to generate
+    #   along with your output. You can use these metrics to analyze your
+    #   video output according to one or more commonly used image quality
+    #   metrics. You can specify per frame metrics for output groups or for
+    #   individual outputs. When you do, MediaConvert writes a CSV
+    #   (Comma-Separated Values) file to your S3 output destination, named
+    #   after the output name and metric type. For example:
+    #   videofile\_PSNR.csv Jobs that generate per frame metrics will take
+    #   longer to complete, depending on the resolution and complexity of
+    #   your output. For example, some 4K jobs might take up to twice as
+    #   long to complete. Note that when analyzing the video quality of your
+    #   output, or when comparing the video quality of multiple different
+    #   outputs, we generally also recommend a detailed visual review in a
+    #   controlled environment. You can choose from the following per frame
+    #   metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural
+    #   Similarity Index Measure * MS\_SSIM: Multi-Scale Similarity Index
+    #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
+    #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+    #   Quality-Defined Variable Bitrate. This option is only available when
+    #   your output uses the QVBR rate control mode.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] profile
     #   Specify the XAVC profile for this output. For more information, see
     #   the Sony documentation at https://www.xavc-info.org/. Note that
@@ -15131,6 +15458,7 @@ module Aws::MediaConvert
       :framerate_conversion_algorithm,
       :framerate_denominator,
       :framerate_numerator,
+      :per_frame_metrics,
       :profile,
       :slow_pal,
       :softness,

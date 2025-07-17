@@ -1,10 +1,40 @@
 {
   "version" : 2,
   "testCases" : [ {
+    "id" : "ReverseGeocodeSuccess",
+    "operationName" : "ReverseGeocode",
+    "input" : {
+      "QueryPosition" : [ 2.2945, 48.85824 ]
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
     "id" : "AutocompleteSuccess",
     "operationName" : "Autocomplete",
     "input" : {
       "QueryText" : "Star"
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "SearchNearbySuccess",
+    "operationName" : "SearchNearby",
+    "input" : {
+      "QueryPosition" : [ 2.2945, 48.85824 ]
     },
     "expectation" : {
       "success" : { }
@@ -32,40 +62,10 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "SearchNearbySuccess",
-    "operationName" : "SearchNearby",
-    "input" : {
-      "QueryPosition" : [ 2.2945, 48.85824 ]
-    },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
     "id" : "GeocodeSuccess",
     "operationName" : "Geocode",
     "input" : {
       "QueryText" : "Starbucks"
-    },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ReverseGeocodeSuccess",
-    "operationName" : "ReverseGeocode",
-    "input" : {
-      "QueryPosition" : [ 2.2945, 48.85824 ]
     },
     "expectation" : {
       "success" : { }

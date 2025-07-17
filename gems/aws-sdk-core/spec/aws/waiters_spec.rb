@@ -89,15 +89,15 @@ module Aws
         end
 
         it 'returns when successful' do
-          client.stub_responses(:waiter_operation, table: { table_status: 'ACTIVE' })
+          client.stub_responses(:waiter_operation, complex_object: { string_member: 'expected' })
           expect { client.wait_until(:generic_waiter) }
             .not_to raise_error
         end
 
         it 'returns the client response' do
-          client.stub_responses(:waiter_operation, table: { table_status: 'ACTIVE' })
+          client.stub_responses(:waiter_operation, complex_object: { string_member: 'expected' })
           resp = client.wait_until(:generic_waiter)
-          expect(resp.table.table_status).to eq('ACTIVE')
+          expect(resp.complex_object.string_member).to eq('expected')
         end
 
         it 'raises an error when failed' do
@@ -231,14 +231,14 @@ module Aws
               client.stub_responses(
                 :waiter_operation,
                 'ResourceNotFoundException',
-                { table: { table_status: 'ACTIVE' } }
+                { complex_object: { string_member: 'expected' } }
               )
               expect { client.wait_until(:error_matcher_with_false) }
                 .not_to raise_error
             end
 
             it 'fails when matched' do
-              client.stub_responses(:waiter_operation, table: { table_status: 'ACTIVE' })
+              client.stub_responses(:waiter_operation, complex_object: { string_member: 'expected' })
               expect { client.wait_until(:error_matcher_with_false_fails) }
                 .to raise_error(Errors::WaiterFailed)
             end
@@ -246,7 +246,7 @@ module Aws
             it 'retries when matched' do
               client.stub_responses(
                 :waiter_operation,
-                { table: { table_status: 'ACTIVE' } },
+                { complex_object: { string_member: 'expected' } },
                 'ResourceNotFoundException'
               )
               retries = 0
@@ -261,8 +261,8 @@ module Aws
             it 'retries and succeed when matched' do
               client.stub_responses(
                 :waiter_operation,
-                { table: { table_status: 'UPDATING' } },
-                { table: { table_status: 'ACTIVE' } }
+                { complex_object: { string_member: 'retry' } },
+                { complex_object: { string_member: 'expected' } }
               )
               retries = 0
               expect do
@@ -272,9 +272,77 @@ module Aws
             end
 
             it 'fails when matched' do
-              client.stub_responses(:waiter_operation, table: { table_status: 'FAILED' })
+              client.stub_responses(:waiter_operation, complex_object: { string_member: 'unexpected' })
               expect { client.wait_until(:path_matcher) }
                 .to raise_error(Errors::FailureStateError)
+            end
+
+            it 'can match objects' do
+              object = {
+                object_member: { string_member: 'string' },
+                string_member: 'string',
+                number_member: 1,
+                boolean_member: true,
+                array_member: [1, 2, 3],
+                object_array_member: [
+                  {
+                    object_member: { string_member: 'string' },
+                    string_member: 'string'
+                  }
+                ]
+              }
+              client.stub_responses(:waiter_operation, complex_object: object)
+              expect { client.wait_until(:path_matcher_object) }
+                .to_not raise_error
+            end
+
+            it 'can match numbers' do
+              resp = {
+                object_list: [
+                  { string_member: 'expected' },
+                  { string_member: 'expected' },
+                  { string_member: 'expected' }
+                ]
+              }
+              client.stub_responses(:waiter_operation, resp)
+              expect { client.wait_until(:path_matcher_number) }
+                .to_not raise_error
+            end
+
+            it 'can match arrays' do
+              client.stub_responses(:waiter_operation, number_list: [1, 2, 3])
+              expect { client.wait_until(:path_matcher_array) }
+                .to_not raise_error
+            end
+
+            it 'can match array of objects' do
+              list = [
+                {
+                  object_member: { string_member: 'string' },
+                  string_member: 'string',
+                  number_member: 1,
+                  boolean_member: true,
+                  array_member: [1, 2, 3],
+                  object_array_member: [
+                    {
+                      object_member: { string_member: 'string' },
+                      string_member: 'string'
+                    }
+                  ]
+                },
+                {
+                  object_member: { string_member: 'string' }
+                }
+              ]
+              client.stub_responses(:waiter_operation, object_list: list)
+              expect { client.wait_until(:path_matcher_object_array) }
+                .to_not raise_error
+            end
+
+            it 'can match booleans' do
+              client.stub_responses(:waiter_operation, boolean: false)
+              expect { client.wait_until(:path_matcher_boolean) }
+                .to_not raise_error
             end
           end
 
@@ -282,8 +350,8 @@ module Aws
             it 'retries and succeed when matched' do
               client.stub_responses(
                 :waiter_operation,
-                { table_list: [{ table_status: 'UPDATING' }] },
-                { table_list: [{ table_status: 'ACTIVE' }] }
+                { object_list: [{ string_member: 'retry' }] },
+                { object_list: [{ string_member: 'expected' }] }
               )
               retries = 0
               expect do
@@ -292,10 +360,37 @@ module Aws
               expect(retries).to be(1)
             end
 
+            it 'can match array of objects' do
+              client.stub_responses(
+                :waiter_operation,
+                object_list: [{ string_member: 'expected' }, { string_member: 'expected' }]
+              )
+              expect { client.wait_until(:path_all_matcher_object) }
+                .to_not raise_error
+            end
+
+            it 'can match array of numbers' do
+              client.stub_responses(:waiter_operation, number_list: [123, 123, 123])
+              expect { client.wait_until(:path_all_matcher_number) }
+                .to_not raise_error
+            end
+
+            it 'can match array of arrays' do
+              client.stub_responses(:waiter_operation, nested_list: [[1, 2, 3], [1, 2, 3], [1, 2, 3]])
+              expect { client.wait_until(:path_all_matcher_array) }
+                .to_not raise_error
+            end
+
+            it 'can match array of booleans' do
+              client.stub_responses(:waiter_operation, boolean_list: [false, false, false])
+              expect { client.wait_until(:path_all_matcher_boolean) }
+                .to_not raise_error
+            end
+
             it 'fails when matched' do
               client.stub_responses(
                 :waiter_operation,
-                table_list: [{ table_status: 'FAILED' }]
+                object_list: [{ string_member: 'unexpected' }]
               )
               expect { client.wait_until(:path_all_matcher) }
                 .to raise_error(Errors::FailureStateError)
@@ -304,7 +399,7 @@ module Aws
             it 'fails when none are matched' do
               client.stub_responses(
                 :waiter_operation,
-                table_list: [{ table_status: 'UPDATING' }, { table_status: 'ACTIVE' }]
+                object_list: [{ string_member: 'retry' }, { string_member: 'expected' }]
               )
               expect { client.wait_until(:path_all_matcher) }
                 .to raise_error(Errors::TooManyAttemptsError)
@@ -313,7 +408,27 @@ module Aws
             it 'fails when none of the path matches' do
               client.stub_responses(
                 :waiter_operation,
-                table_list: [{ table_status: 'UPDATING' }, { table_status: 'ACTIVE' }]
+                object_list: [{ string_member: 'retry' }, { string_member: 'expected' }]
+              )
+              expect do
+                client.wait_until(:path_all_matcher) { |w| w.max_attempts = 1 }
+              end.to raise_error(Errors::TooManyAttemptsError)
+            end
+
+            it 'fails when array is empty' do
+              client.stub_responses(
+                :waiter_operation,
+                object_list: []
+              )
+              expect do
+                client.wait_until(:path_all_matcher) { |w| w.max_attempts = 1 }
+              end.to raise_error(Errors::TooManyAttemptsError)
+            end
+
+            it 'fails when array is nil' do
+              client.stub_responses(
+                :waiter_operation,
+                object_list: nil
               )
               expect do
                 client.wait_until(:path_all_matcher) { |w| w.max_attempts = 1 }
@@ -325,8 +440,8 @@ module Aws
             it 'retries and succeed when matched' do
               client.stub_responses(
                 :waiter_operation,
-                { table_list: [{ table_status: 'UPDATING' }, { table_status: 'CREATING' }] },
-                { table_list: [{ table_status: 'ACTIVE' }, { table_status: 'CREATING' }] }
+                { object_list: [{ string_member: 'retry' }, { string_member: 'other' }] },
+                { object_list: [{ string_member: 'expected' }, { string_member: 'retry' }] }
               )
               retries = 0
               expect do
@@ -335,10 +450,37 @@ module Aws
               expect(retries).to be(1)
             end
 
+            it 'can match array of objects' do
+              client.stub_responses(
+                :waiter_operation,
+                object_list: [{ string_member: 'unexpected' }, { string_member: 'expected' }]
+              )
+              expect { client.wait_until(:path_any_matcher_object) }
+                .to_not raise_error
+            end
+
+            it 'can match array of numbers' do
+              client.stub_responses(:waiter_operation, number_list: [456, 789, 123])
+              expect { client.wait_until(:path_any_matcher_number) }
+                .to_not raise_error
+            end
+
+            it 'can match array of arrays' do
+              client.stub_responses(:waiter_operation, nested_list: [[4, 5, 6], [1, 2, 3], [7, 8, 9]])
+              expect { client.wait_until(:path_any_matcher_array) }
+                .to_not raise_error
+            end
+
+            it 'can match array of booleans' do
+              client.stub_responses(:waiter_operation, boolean_list: [true, false, true])
+              expect { client.wait_until(:path_any_matcher_boolean) }
+                .to_not raise_error
+            end
+
             it 'fails when matched' do
               client.stub_responses(
                 :waiter_operation,
-                { table_list: [{ table_status: 'FAILED' }, { table_status: 'CREATING' }] }
+                { object_list: [{ string_member: 'unexpected' }, { string_member: 'retry' }] }
               )
               expect { client.wait_until(:path_any_matcher) }
                 .to raise_error(Errors::FailureStateError)
@@ -347,10 +489,30 @@ module Aws
             it 'fails when none of the path matches' do
               client.stub_responses(
                 :waiter_operation,
-                table_list: [{ table_status: 'CREATING' }, { table_status: 'FOO' }]
+                object_list: [{ string_member: 'other' }, { string_member: 'other' }]
               )
               expect { client.wait_until(:path_any_matcher) }
                 .to raise_error(Errors::TooManyAttemptsError)
+            end
+
+            it 'fails when array is empty' do
+              client.stub_responses(
+                :waiter_operation,
+                object_list: []
+              )
+              expect do
+                client.wait_until(:path_any_matcher) { |w| w.max_attempts = 1 }
+              end.to raise_error(Errors::TooManyAttemptsError)
+            end
+
+            it 'fails when array is nil' do
+              client.stub_responses(
+                :waiter_operation,
+                object_list: nil
+              )
+              expect do
+                client.wait_until(:path_any_matcher) { |w| w.max_attempts = 1 }
+              end.to raise_error(Errors::TooManyAttemptsError)
             end
           end
         end

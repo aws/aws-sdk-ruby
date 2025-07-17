@@ -262,8 +262,8 @@ module Aws::Transfer
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
-    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `PATH`.
+    #   <note markdown="1"> You can use the `HomeDirectory` parameter for `HomeDirectoryType`
+    #   when it is set to either `PATH` or `LOGICAL`.
     #
     #    </note>
     #   @return [String]
@@ -1016,6 +1016,31 @@ module Aws::Transfer
     #   have a file target.
     #   @return [Types::S3StorageOptions]
     #
+    # @!attribute [rw] ip_address_type
+    #   Specifies whether to use IPv4 only, or to use dual-stack (IPv4 and
+    #   IPv6) for your Transfer Family endpoint. The default value is
+    #   `IPV4`.
+    #
+    #   The `IpAddressType` parameter has the following limitations:
+    #
+    #    * It cannot be changed while the server is online. You must stop
+    #   the
+    #     server before modifying this parameter.
+    #
+    #   * It cannot be updated to `DUALSTACK` if the server has
+    #     `AddressAllocationIds` specified.
+    #
+    #   <note markdown="1"> When using `DUALSTACK` as the `IpAddressType`, you cannot set the
+    #   `AddressAllocationIds` parameter for the [EndpointDetails][1] for
+    #   the server.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateServerRequest AWS API Documentation
     #
     class CreateServerRequest < Struct.new(
@@ -1035,7 +1060,8 @@ module Aws::Transfer
       :tags,
       :workflow_details,
       :structured_log_destinations,
-      :s3_storage_options)
+      :s3_storage_options,
+      :ip_address_type)
       SENSITIVE = [:host_key]
       include Aws::Structure
     end
@@ -1058,8 +1084,8 @@ module Aws::Transfer
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
-    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `PATH`.
+    #   <note markdown="1"> You can use the `HomeDirectory` parameter for `HomeDirectoryType`
+    #   when it is set to either `PATH` or `LOGICAL`.
     #
     #    </note>
     #   @return [String]
@@ -2125,8 +2151,8 @@ module Aws::Transfer
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
-    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `PATH`.
+    #   <note markdown="1"> You can use the `HomeDirectory` parameter for `HomeDirectoryType`
+    #   when it is set to either `PATH` or `LOGICAL`.
     #
     #    </note>
     #   @return [String]
@@ -3095,6 +3121,31 @@ module Aws::Transfer
     #   AS2 protocol, static IP addresses are assigned as well.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ip_address_type
+    #   Specifies whether to use IPv4 only, or to use dual-stack (IPv4 and
+    #   IPv6) for your Transfer Family endpoint. The default value is
+    #   `IPV4`.
+    #
+    #   The `IpAddressType` parameter has the following limitations:
+    #
+    #    * It cannot be changed while the server is online. You must stop
+    #   the
+    #     server before modifying this parameter.
+    #
+    #   * It cannot be updated to `DUALSTACK` if the server has
+    #     `AddressAllocationIds` specified.
+    #
+    #   <note markdown="1"> When using `DUALSTACK` as the `IpAddressType`, you cannot set the
+    #   `AddressAllocationIds` parameter for the [EndpointDetails][1] for
+    #   the server.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedServer AWS API Documentation
     #
     class DescribedServer < Struct.new(
@@ -3119,7 +3170,8 @@ module Aws::Transfer
       :workflow_details,
       :structured_log_destinations,
       :s3_storage_options,
-      :as_2_service_managed_egress_ip_addresses)
+      :as_2_service_managed_egress_ip_addresses,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3137,8 +3189,8 @@ module Aws::Transfer
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
-    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `PATH`.
+    #   <note markdown="1"> You can use the `HomeDirectory` parameter for `HomeDirectoryType`
+    #   when it is set to either `PATH` or `LOGICAL`.
     #
     #    </note>
     #   @return [String]
@@ -3489,6 +3541,10 @@ module Aws::Transfer
     #     subnet IDs, you must also specify three address allocation IDs.
     #
     #   * Call the `UpdateServer` API to set or change this parameter.
+    #
+    #   * You can't set address allocation IDs for servers that have an
+    #     `IpAddressType` set to `DUALSTACK` You can only set this property
+    #     if `IpAddressType` is set to `IPV4`.
     #
     #    </note>
     #
@@ -4741,8 +4797,8 @@ module Aws::Transfer
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
-    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `PATH`.
+    #   <note markdown="1"> You can use the `HomeDirectory` parameter for `HomeDirectoryType`
+    #   when it is set to either `PATH` or `LOGICAL`.
     #
     #    </note>
     #   @return [String]
@@ -5171,8 +5227,8 @@ module Aws::Transfer
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
-    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `PATH`.
+    #   <note markdown="1"> You can use the `HomeDirectory` parameter for `HomeDirectoryType`
+    #   when it is set to either `PATH` or `LOGICAL`.
     #
     #    </note>
     #   @return [String]
@@ -6263,8 +6319,8 @@ module Aws::Transfer
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
-    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `PATH`.
+    #   <note markdown="1"> You can use the `HomeDirectory` parameter for `HomeDirectoryType`
+    #   when it is set to either `PATH` or `LOGICAL`.
     #
     #    </note>
     #   @return [String]
@@ -7047,6 +7103,31 @@ module Aws::Transfer
     #   have a file target.
     #   @return [Types::S3StorageOptions]
     #
+    # @!attribute [rw] ip_address_type
+    #   Specifies whether to use IPv4 only, or to use dual-stack (IPv4 and
+    #   IPv6) for your Transfer Family endpoint. The default value is
+    #   `IPV4`.
+    #
+    #   The `IpAddressType` parameter has the following limitations:
+    #
+    #    * It cannot be changed while the server is online. You must stop
+    #   the
+    #     server before modifying this parameter.
+    #
+    #   * It cannot be updated to `DUALSTACK` if the server has
+    #     `AddressAllocationIds` specified.
+    #
+    #   <note markdown="1"> When using `DUALSTACK` as the `IpAddressType`, you cannot set the
+    #   `AddressAllocationIds` parameter for the [EndpointDetails][1] for
+    #   the server.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateServerRequest AWS API Documentation
     #
     class UpdateServerRequest < Struct.new(
@@ -7064,7 +7145,8 @@ module Aws::Transfer
       :server_id,
       :workflow_details,
       :structured_log_destinations,
-      :s3_storage_options)
+      :s3_storage_options,
+      :ip_address_type)
       SENSITIVE = [:host_key]
       include Aws::Structure
     end
@@ -7088,8 +7170,8 @@ module Aws::Transfer
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
-    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
-    #   set to `PATH`.
+    #   <note markdown="1"> You can use the `HomeDirectory` parameter for `HomeDirectoryType`
+    #   when it is set to either `PATH` or `LOGICAL`.
     #
     #    </note>
     #   @return [String]

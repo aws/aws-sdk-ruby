@@ -204,7 +204,18 @@ module Aws
                                 }?
                               }?
                             },
-                          ]
+                          ],
+                          ?cdc_specification: {
+                            status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING"),
+                            view_type: ("NEW_IMAGE" | "OLD_IMAGE" | "KEYS_ONLY" | "NEW_AND_OLD_IMAGES")?,
+                            tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]?,
+                            propagate_tags: ("TABLE" | "NONE")?
+                          }
                         ) -> _CreateTableResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTableResponseSuccess
 
@@ -287,6 +298,8 @@ module Aws
         def comment: () -> Types::Comment
         def client_side_timestamps: () -> Types::ClientSideTimestamps
         def replica_specifications: () -> ::Array[Types::ReplicaSpecificationSummary]
+        def latest_stream_arn: () -> ::String
+        def cdc_specification: () -> Types::CdcSpecificationSummary
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#get_table-instance_method
       def get_table: (
@@ -585,7 +598,18 @@ module Aws
                                 }?
                               }?
                             },
-                          ]
+                          ],
+                          ?cdc_specification: {
+                            status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING"),
+                            view_type: ("NEW_IMAGE" | "OLD_IMAGE" | "KEYS_ONLY" | "NEW_AND_OLD_IMAGES")?,
+                            tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]?,
+                            propagate_tags: ("TABLE" | "NONE")?
+                          }
                         ) -> _UpdateTableResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTableResponseSuccess
     end

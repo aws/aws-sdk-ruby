@@ -1,11 +1,9 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "GetMonitorSuccess",
-    "operationName" : "GetMonitor",
-    "input" : {
-      "monitorName" : "SmokeTestMonitor"
-    },
+    "id" : "ListMonitors",
+    "operationName" : "ListMonitors",
+    "input" : { },
     "expectation" : {
       "success" : { }
     },

@@ -442,6 +442,10 @@ module Aws::CleanRooms
     ProtectedJobSummaryList = Shapes::ListShape.new(name: 'ProtectedJobSummaryList')
     ProtectedJobType = Shapes::StringShape.new(name: 'ProtectedJobType')
     ProtectedQuery = Shapes::StructureShape.new(name: 'ProtectedQuery')
+    ProtectedQueryDistributeOutput = Shapes::StructureShape.new(name: 'ProtectedQueryDistributeOutput')
+    ProtectedQueryDistributeOutputConfiguration = Shapes::StructureShape.new(name: 'ProtectedQueryDistributeOutputConfiguration')
+    ProtectedQueryDistributeOutputConfigurationLocation = Shapes::UnionShape.new(name: 'ProtectedQueryDistributeOutputConfigurationLocation')
+    ProtectedQueryDistributeOutputConfigurationLocationsList = Shapes::ListShape.new(name: 'ProtectedQueryDistributeOutputConfigurationLocationsList')
     ProtectedQueryError = Shapes::StructureShape.new(name: 'ProtectedQueryError')
     ProtectedQueryIdentifier = Shapes::StringShape.new(name: 'ProtectedQueryIdentifier')
     ProtectedQueryMemberOutputConfiguration = Shapes::StructureShape.new(name: 'ProtectedQueryMemberOutputConfiguration')
@@ -2196,6 +2200,23 @@ module Aws::CleanRooms
     ProtectedQuery.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "computeConfiguration"))
     ProtectedQuery.struct_class = Types::ProtectedQuery
 
+    ProtectedQueryDistributeOutput.add_member(:s3, Shapes::ShapeRef.new(shape: ProtectedQueryS3Output, location_name: "s3"))
+    ProtectedQueryDistributeOutput.add_member(:member_list, Shapes::ShapeRef.new(shape: ProtectedQueryMemberOutputList, location_name: "memberList"))
+    ProtectedQueryDistributeOutput.struct_class = Types::ProtectedQueryDistributeOutput
+
+    ProtectedQueryDistributeOutputConfiguration.add_member(:locations, Shapes::ShapeRef.new(shape: ProtectedQueryDistributeOutputConfigurationLocationsList, required: true, location_name: "locations"))
+    ProtectedQueryDistributeOutputConfiguration.struct_class = Types::ProtectedQueryDistributeOutputConfiguration
+
+    ProtectedQueryDistributeOutputConfigurationLocation.add_member(:s3, Shapes::ShapeRef.new(shape: ProtectedQueryS3OutputConfiguration, location_name: "s3"))
+    ProtectedQueryDistributeOutputConfigurationLocation.add_member(:member, Shapes::ShapeRef.new(shape: ProtectedQueryMemberOutputConfiguration, location_name: "member"))
+    ProtectedQueryDistributeOutputConfigurationLocation.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ProtectedQueryDistributeOutputConfigurationLocation.add_member_subclass(:s3, Types::ProtectedQueryDistributeOutputConfigurationLocation::S3)
+    ProtectedQueryDistributeOutputConfigurationLocation.add_member_subclass(:member, Types::ProtectedQueryDistributeOutputConfigurationLocation::Member)
+    ProtectedQueryDistributeOutputConfigurationLocation.add_member_subclass(:unknown, Types::ProtectedQueryDistributeOutputConfigurationLocation::Unknown)
+    ProtectedQueryDistributeOutputConfigurationLocation.struct_class = Types::ProtectedQueryDistributeOutputConfigurationLocation
+
+    ProtectedQueryDistributeOutputConfigurationLocationsList.member = Shapes::ShapeRef.new(shape: ProtectedQueryDistributeOutputConfigurationLocation)
+
     ProtectedQueryError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ProtectedQueryError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
     ProtectedQueryError.struct_class = Types::ProtectedQueryError
@@ -2207,17 +2228,21 @@ module Aws::CleanRooms
 
     ProtectedQueryOutput.add_member(:s3, Shapes::ShapeRef.new(shape: ProtectedQueryS3Output, location_name: "s3"))
     ProtectedQueryOutput.add_member(:member_list, Shapes::ShapeRef.new(shape: ProtectedQueryMemberOutputList, location_name: "memberList"))
+    ProtectedQueryOutput.add_member(:distribute, Shapes::ShapeRef.new(shape: ProtectedQueryDistributeOutput, location_name: "distribute"))
     ProtectedQueryOutput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProtectedQueryOutput.add_member_subclass(:s3, Types::ProtectedQueryOutput::S3)
     ProtectedQueryOutput.add_member_subclass(:member_list, Types::ProtectedQueryOutput::MemberList)
+    ProtectedQueryOutput.add_member_subclass(:distribute, Types::ProtectedQueryOutput::Distribute)
     ProtectedQueryOutput.add_member_subclass(:unknown, Types::ProtectedQueryOutput::Unknown)
     ProtectedQueryOutput.struct_class = Types::ProtectedQueryOutput
 
     ProtectedQueryOutputConfiguration.add_member(:s3, Shapes::ShapeRef.new(shape: ProtectedQueryS3OutputConfiguration, location_name: "s3"))
     ProtectedQueryOutputConfiguration.add_member(:member, Shapes::ShapeRef.new(shape: ProtectedQueryMemberOutputConfiguration, location_name: "member"))
+    ProtectedQueryOutputConfiguration.add_member(:distribute, Shapes::ShapeRef.new(shape: ProtectedQueryDistributeOutputConfiguration, location_name: "distribute"))
     ProtectedQueryOutputConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProtectedQueryOutputConfiguration.add_member_subclass(:s3, Types::ProtectedQueryOutputConfiguration::S3)
     ProtectedQueryOutputConfiguration.add_member_subclass(:member, Types::ProtectedQueryOutputConfiguration::Member)
+    ProtectedQueryOutputConfiguration.add_member_subclass(:distribute, Types::ProtectedQueryOutputConfiguration::Distribute)
     ProtectedQueryOutputConfiguration.add_member_subclass(:unknown, Types::ProtectedQueryOutputConfiguration::Unknown)
     ProtectedQueryOutputConfiguration.struct_class = Types::ProtectedQueryOutputConfiguration
 

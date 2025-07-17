@@ -118,6 +118,11 @@ module Aws::EMRServerless
     #   this application. Supported with release labels emr-7.0.0 and above.
     #   @return [Types::SchedulerConfiguration]
     #
+    # @!attribute [rw] identity_center_configuration
+    #   The IAM Identity Center configuration applied to enable trusted
+    #   identity propagation.
+    #   @return [Types::IdentityCenterConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/Application AWS API Documentation
     #
     class Application < Struct.new(
@@ -142,7 +147,8 @@ module Aws::EMRServerless
       :runtime_configuration,
       :monitoring_configuration,
       :interactive_configuration,
-      :scheduler_configuration)
+      :scheduler_configuration,
+      :identity_center_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -252,11 +258,17 @@ module Aws::EMRServerless
     #   The ID of the job run to cancel.
     #   @return [String]
     #
+    # @!attribute [rw] shutdown_grace_period_in_seconds
+    #   The duration in seconds to wait before forcefully terminating the
+    #   job after cancellation is requested.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/CancelJobRunRequest AWS API Documentation
     #
     class CancelJobRunRequest < Struct.new(
       :application_id,
-      :job_run_id)
+      :job_run_id,
+      :shutdown_grace_period_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -487,6 +499,13 @@ module Aws::EMRServerless
     #   this application. Supported with release labels emr-7.0.0 and above.
     #   @return [Types::SchedulerConfiguration]
     #
+    # @!attribute [rw] identity_center_configuration
+    #   The IAM Identity Center Configuration accepts the Identity Center
+    #   instance parameter required to enable trusted identity propagation.
+    #   This configuration allows identity propagation between integrated
+    #   services and the Identity Center instance.
+    #   @return [Types::IdentityCenterConfigurationInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
@@ -506,7 +525,8 @@ module Aws::EMRServerless
       :runtime_configuration,
       :monitoring_configuration,
       :interactive_configuration,
-      :scheduler_configuration)
+      :scheduler_configuration,
+      :identity_center_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -675,6 +695,45 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
+    # The IAM Identity Center Configuration that includes the Identify
+    # Center instance and application ARNs that provide trusted-identity
+    # propagation.
+    #
+    # @!attribute [rw] identity_center_instance_arn
+    #   The ARN of the IAM Identity Center instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_center_application_arn
+    #   The ARN of the EMR Serverless created IAM Identity Center
+    #   Application that provides trusted-identity propagation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/IdentityCenterConfiguration AWS API Documentation
+    #
+    class IdentityCenterConfiguration < Struct.new(
+      :identity_center_instance_arn,
+      :identity_center_application_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the IAM Identity Center configuration used to enable or
+    # disable trusted identity propagation. When provided, this
+    # configuration determines how the application interacts with IAM
+    # Identity Center for user authentication and access control.
+    #
+    # @!attribute [rw] identity_center_instance_arn
+    #   The ARN of the IAM Identity Center instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/IdentityCenterConfigurationInput AWS API Documentation
+    #
+    class IdentityCenterConfigurationInput < Struct.new(
+      :identity_center_instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The applied image configuration.
     #
     # @!attribute [rw] image_uri
@@ -832,6 +891,12 @@ module Aws::EMRServerless
     #   The execution role ARN of the job run.
     #   @return [String]
     #
+    # @!attribute [rw] execution_iam_policy
+    #   Optional IAM policy. The resulting job IAM role permissions will be
+    #   an intersection of the policies passed and the policy associated
+    #   with your job execution role.
+    #   @return [Types::JobRunExecutionIamPolicy]
+    #
     # @!attribute [rw] state
     #   The state of the job run.
     #   @return [String]
@@ -931,6 +996,7 @@ module Aws::EMRServerless
       :created_at,
       :updated_at,
       :execution_role,
+      :execution_iam_policy,
       :state,
       :state_details,
       :release_label,
@@ -1035,6 +1101,28 @@ module Aws::EMRServerless
       :release_label,
       :type,
       :attempt)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Optional IAM policy. The resulting job IAM role permissions will be an
+    # intersection of the policies passed and the policy associated with
+    # your job execution role.
+    #
+    # @!attribute [rw] policy
+    #   An IAM inline policy to use as an execution IAM policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_arns
+    #   A list of Amazon Resource Names (ARNs) to use as an execution IAM
+    #   policy.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/JobRunExecutionIamPolicy AWS API Documentation
+    #
+    class JobRunExecutionIamPolicy < Struct.new(
+      :policy,
+      :policy_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1594,6 +1682,12 @@ module Aws::EMRServerless
     #   The execution role ARN for the job run.
     #   @return [String]
     #
+    # @!attribute [rw] execution_iam_policy
+    #   You can pass an optional IAM policy. The resulting job IAM role
+    #   permissions will be an intersection of this policy and the policy
+    #   associated with your job execution role.
+    #   @return [Types::JobRunExecutionIamPolicy]
+    #
     # @!attribute [rw] job_driver
     #   The job driver for the job run.
     #   @return [Types::JobDriver]
@@ -1629,6 +1723,7 @@ module Aws::EMRServerless
       :application_id,
       :client_token,
       :execution_role_arn,
+      :execution_iam_policy,
       :job_driver,
       :configuration_overrides,
       :tags,
@@ -1842,6 +1937,13 @@ module Aws::EMRServerless
     #   this application. Supported with release labels emr-7.0.0 and above.
     #   @return [Types::SchedulerConfiguration]
     #
+    # @!attribute [rw] identity_center_configuration
+    #   Specifies the IAM Identity Center configuration used to enable or
+    #   disable trusted identity propagation. When provided, this
+    #   configuration determines how the application interacts with IAM
+    #   Identity Center for user authentication and access control.
+    #   @return [Types::IdentityCenterConfigurationInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/UpdateApplicationRequest AWS API Documentation
     #
     class UpdateApplicationRequest < Struct.new(
@@ -1859,7 +1961,8 @@ module Aws::EMRServerless
       :release_label,
       :runtime_configuration,
       :monitoring_configuration,
-      :scheduler_configuration)
+      :scheduler_configuration,
+      :identity_center_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

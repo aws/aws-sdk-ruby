@@ -169,7 +169,7 @@ module Aws::Health
 
     DescribeAffectedEntitiesForOrganizationFailedSet.member = Shapes::ShapeRef.new(shape: OrganizationAffectedEntitiesErrorItem)
 
-    DescribeAffectedEntitiesForOrganizationRequest.add_member(:organization_entity_filters, Shapes::ShapeRef.new(shape: OrganizationEntityFiltersList, deprecated: true, location_name: "organizationEntityFilters", metadata: {"deprecatedMessage"=>"This property is deprecated, use organizationEntityAccountFilters instead."}))
+    DescribeAffectedEntitiesForOrganizationRequest.add_member(:organization_entity_filters, Shapes::ShapeRef.new(shape: OrganizationEntityFiltersList, deprecated: true, location_name: "organizationEntityFilters", metadata: {"deprecatedMessage" => "This property is deprecated, use organizationEntityAccountFilters instead."}))
     DescribeAffectedEntitiesForOrganizationRequest.add_member(:locale, Shapes::ShapeRef.new(shape: locale, location_name: "locale"))
     DescribeAffectedEntitiesForOrganizationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
     DescribeAffectedEntitiesForOrganizationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxResultsLowerRange, location_name: "maxResults"))

@@ -224,7 +224,7 @@ module Aws
                                       creator_request_id: ::String,
                                       ?name: ::String,
                                       security_group_ids: Array[::String],
-                                      direction: ("INBOUND" | "OUTBOUND"),
+                                      direction: ("INBOUND" | "OUTBOUND" | "INBOUND_DELEGATION"),
                                       ip_addresses: Array[
                                         {
                                           subnet_id: ::String,
@@ -271,7 +271,7 @@ module Aws
       def create_resolver_rule: (
                                   creator_request_id: ::String,
                                   ?name: ::String,
-                                  rule_type: ("FORWARD" | "SYSTEM" | "RECURSIVE"),
+                                  rule_type: ("FORWARD" | "SYSTEM" | "RECURSIVE" | "DELEGATE"),
                                   ?domain_name: ::String,
                                   ?target_ips: Array[
                                     {
@@ -288,7 +288,8 @@ module Aws
                                       key: ::String,
                                       value: ::String
                                     },
-                                  ]
+                                  ],
+                                  ?delegation_record: ::String
                                 ) -> _CreateResolverRuleResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResolverRuleResponseSuccess
 

@@ -34,6 +34,76 @@ module Aws::PCS
       include Aws::Structure
     end
 
+    # The accounting configuration includes configurable settings for Slurm
+    # accounting. It's a property of the **ClusterSlurmConfiguration**
+    # object.
+    #
+    # @!attribute [rw] mode
+    #   The default value for `mode` is `STANDARD`. A value of `STANDARD`
+    #   means Slurm accounting is enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_purge_time_in_days
+    #   The default value for all purge settings for `slurmdbd.conf`. For
+    #   more information, see the [slurmdbd.conf documentation at
+    #   SchedMD][1].
+    #
+    #   The default value for `defaultPurgeTimeInDays` is `-1`.
+    #
+    #   A value of `-1` means there is no purge time and records persist as
+    #   long as the cluster exists.
+    #
+    #   `0` isn't a valid value.
+    #
+    #
+    #
+    #   [1]: https://slurm.schedmd.com/slurmdbd.conf.html
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/Accounting AWS API Documentation
+    #
+    class Accounting < Struct.new(
+      :mode,
+      :default_purge_time_in_days)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The accounting configuration includes configurable settings for Slurm
+    # accounting. It's a property of the **ClusterSlurmConfiguration**
+    # object.
+    #
+    # @!attribute [rw] mode
+    #   The default value for `mode` is `STANDARD`. A value of `STANDARD`
+    #   means Slurm accounting is enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_purge_time_in_days
+    #   The default value for all purge settings for `slurmdbd.conf`. For
+    #   more information, see the [slurmdbd.conf documentation at
+    #   SchedMD][1].
+    #
+    #   The default value for `defaultPurgeTimeInDays` is `-1`.
+    #
+    #   A value of `-1` means there is no purge time and records persist as
+    #   long as the cluster exists.
+    #
+    #   `0` isn't a valid value.
+    #
+    #
+    #
+    #   [1]: https://slurm.schedmd.com/slurmdbd.conf.html
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/AccountingRequest AWS API Documentation
+    #
+    class AccountingRequest < Struct.new(
+      :mode,
+      :default_purge_time_in_days)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The cluster resource and configuration.
     #
     # @!attribute [rw] name
@@ -55,6 +125,19 @@ module Aws::PCS
     #   cluster.
     #
     #    </note>
+    #
+    #   The resource enters the `SUSPENDING` and `SUSPENDED` states when the
+    #   scheduler is beyond end of life and we have suspended the cluster.
+    #   When in these states, you can't use the cluster. The cluster
+    #   controller is down and all compute instances are terminated. The
+    #   resources still count toward your service quotas. You can delete a
+    #   resource if its status is `SUSPENDED`. For more information, see
+    #   [Frequently asked questions about Slurm versions in PCS][1] in the
+    #   *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -133,12 +216,18 @@ module Aws::PCS
     #   secret**.
     #   @return [Types::SlurmAuthKey]
     #
+    # @!attribute [rw] accounting
+    #   The accounting configuration includes configurable settings for
+    #   Slurm accounting.
+    #   @return [Types::Accounting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/ClusterSlurmConfiguration AWS API Documentation
     #
     class ClusterSlurmConfiguration < Struct.new(
       :scale_down_idle_time_in_seconds,
       :slurm_custom_settings,
-      :auth_key)
+      :auth_key,
+      :accounting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -156,11 +245,17 @@ module Aws::PCS
     #   settings.
     #   @return [Array<Types::SlurmCustomSetting>]
     #
+    # @!attribute [rw] accounting
+    #   The accounting configuration includes configurable settings for
+    #   Slurm accounting.
+    #   @return [Types::AccountingRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/ClusterSlurmConfigurationRequest AWS API Documentation
     #
     class ClusterSlurmConfigurationRequest < Struct.new(
       :scale_down_idle_time_in_seconds,
-      :slurm_custom_settings)
+      :slurm_custom_settings,
+      :accounting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -194,6 +289,19 @@ module Aws::PCS
     #   cluster.
     #
     #    </note>
+    #
+    #   The resource enters the `SUSPENDING` and `SUSPENDED` states when the
+    #   scheduler is beyond end of life and we have suspended the cluster.
+    #   When in these states, you can't use the cluster. The cluster
+    #   controller is down and all compute instances are terminated. The
+    #   resources still count toward your service quotas. You can delete a
+    #   resource if its status is `SUSPENDED`. For more information, see
+    #   [Frequently asked questions about Slurm versions in PCS][1] in the
+    #   *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/ClusterSummary AWS API Documentation
@@ -242,6 +350,19 @@ module Aws::PCS
     #   compute node group.
     #
     #    </note>
+    #
+    #   The resource enters the `SUSPENDING` and `SUSPENDED` states when the
+    #   scheduler is beyond end of life and we have suspended the cluster.
+    #   When in these states, you can't use the cluster. The cluster
+    #   controller is down and all compute instances are terminated. The
+    #   resources still count toward your service quotas. You can delete a
+    #   resource if its status is `SUSPENDED`. For more information, see
+    #   [Frequently asked questions about Slurm versions in PCS][1] in the
+    #   *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html
     #   @return [String]
     #
     # @!attribute [rw] ami_id
@@ -412,6 +533,19 @@ module Aws::PCS
     #   compute node group.
     #
     #    </note>
+    #
+    #   The resource enters the `SUSPENDING` and `SUSPENDED` states when the
+    #   scheduler is beyond end of life and we have suspended the cluster.
+    #   When in these states, you can't use the cluster. The cluster
+    #   controller is down and all compute instances are terminated. The
+    #   resources still count toward your service quotas. You can delete a
+    #   resource if its status is `SUSPENDED`. For more information, see
+    #   [Frequently asked questions about Slurm versions in PCS][1] in the
+    #   *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/ComputeNodeGroupSummary AWS API Documentation
@@ -1296,6 +1430,19 @@ module Aws::PCS
     #   queue.
     #
     #    </note>
+    #
+    #   The resource enters the `SUSPENDING` and `SUSPENDED` states when the
+    #   scheduler is beyond end of life and we have suspended the cluster.
+    #   When in these states, you can't use the cluster. The cluster
+    #   controller is down and all compute instances are terminated. The
+    #   resources still count toward your service quotas. You can delete a
+    #   resource if its status is `SUSPENDED`. For more information, see
+    #   [Frequently asked questions about Slurm versions in PCS][1] in the
+    #   *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html
     #   @return [String]
     #
     # @!attribute [rw] compute_node_group_configurations
@@ -1356,6 +1503,19 @@ module Aws::PCS
     #   queue.
     #
     #    </note>
+    #
+    #   The resource enters the `SUSPENDING` and `SUSPENDED` states when the
+    #   scheduler is beyond end of life and we have suspended the cluster.
+    #   When in these states, you can't use the cluster. The cluster
+    #   controller is down and all compute instances are terminated. The
+    #   resources still count toward your service quotas. You can delete a
+    #   resource if its status is `SUSPENDED`. For more information, see
+    #   [Frequently asked questions about Slurm versions in PCS][1] in the
+    #   *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/QueueSummary AWS API Documentation
@@ -1496,7 +1656,7 @@ module Aws::PCS
     #   more information, see [Slurm versions in Amazon Web Services PCS][1]
     #   in the *Amazon Web Services PCS User Guide*.
     #
-    #   Valid Values: `23.11 | 24.05`
+    #   Valid Values: `23.11 | 24.05 | 24.11`
     #
     #
     #
@@ -1526,7 +1686,7 @@ module Aws::PCS
     #   more information, see [Slurm versions in Amazon Web Services PCS][1]
     #   in the *Amazon Web Services PCS User Guide*.
     #
-    #   Valid Values: `23.11 | 24.05`
+    #   Valid Values: `23.11 | 24.05 | 24.11`
     #
     #
     #

@@ -206,8 +206,7 @@ module Aws::S3Control
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -844,17 +843,20 @@ module Aws::S3Control
     end
 
     # Creates an access point and associates it to a specified bucket. For
-    # more information, see [Managing access to shared datasets in general
-    # purpose buckets with access points][1] or [Managing access to shared
-    # datasets in directory buckets with access points][2] in the *Amazon S3
-    # User Guide*.
+    # more information, see [Managing access to shared datasets with access
+    # points][1] or [Managing access to shared datasets in directory buckets
+    # with access points][2] in the *Amazon S3 User Guide*.
+    #
+    # To create an access point and attach it to a volume on an Amazon FSx
+    # file system, see [CreateAndAttachS3AccessPoint][3] in the *Amazon FSx
+    # API Reference*.
     #
     #
     #
     # <note markdown="1"> S3 on Outposts only supports VPC-style access points.
     #
     #  For more information, see [ Accessing Amazon S3 on Outposts using
-    # virtual private cloud (VPC) only access points][3] in the *Amazon S3
+    # virtual private cloud (VPC) only access points][4] in the *Amazon S3
     # User Guide*.
     #
     #  </note>
@@ -865,30 +867,31 @@ module Aws::S3Control
     # prefix instead of `s3-control`. For an example of the request syntax
     # for Amazon S3 on Outposts that uses the S3 on Outposts endpoint
     # hostname prefix and the `x-amz-outpost-id` derived by using the access
-    # point ARN, see the [Examples][4] section.
+    # point ARN, see the [Examples][5] section.
     #
     #
     #
     # The following actions are related to `CreateAccessPoint`:
     #
-    # * [GetAccessPoint][5]
+    # * [GetAccessPoint][6]
     #
-    # * [DeleteAccessPoint][6]
+    # * [DeleteAccessPoint][7]
     #
-    # * [ListAccessPoints][7]
+    # * [ListAccessPoints][8]
     #
-    # * [ListAccessPointsForDirectoryBuckets][8]
+    # * [ListAccessPointsForDirectoryBuckets][9]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html#API_control_CreateAccessPoint_Examples
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForDirectoryBuckets.html
+    # [3]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateAndAttachS3AccessPoint.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html#API_control_CreateAccessPoint_Examples
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForDirectoryBuckets.html
     #
     # @option params [String] :account_id
     #   The Amazon Web Services account ID for the account that owns the
@@ -902,7 +905,7 @@ module Aws::S3Control
     #   Web Services Availability Zone or Local Zone) of your bucket location,
     #   followed by `--xa-s3`. For more information, see [Managing access to
     #   shared datasets in directory buckets with access points][1] in the
-    #   Amazon S3 User Guide.
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -951,9 +954,10 @@ module Aws::S3Control
     #   For directory buckets, you can filter access control to specific
     #   prefixes, API operations, or a combination of both. For more
     #   information, see [Managing access to shared datasets in directory
-    #   buckets with access points][1] in the Amazon S3 User Guide.
+    #   buckets with access points][1] in the *Amazon S3 User Guide*.
     #
-    #   <note markdown="1"> Scope is not supported for access points for general purpose buckets.
+    #   <note markdown="1"> Scope is only supported for access points attached to directory
+    #   buckets.
     #
     #    </note>
     #
@@ -3420,6 +3424,8 @@ module Aws::S3Control
     #   * {Types::GetAccessPointResult#access_point_arn #access_point_arn} => String
     #   * {Types::GetAccessPointResult#endpoints #endpoints} => Hash&lt;String,String&gt;
     #   * {Types::GetAccessPointResult#bucket_account_id #bucket_account_id} => String
+    #   * {Types::GetAccessPointResult#data_source_id #data_source_id} => String
+    #   * {Types::GetAccessPointResult#data_source_type #data_source_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3444,6 +3450,8 @@ module Aws::S3Control
     #   resp.endpoints #=> Hash
     #   resp.endpoints["NonEmptyMaxLength64String"] #=> String
     #   resp.bucket_account_id #=> String
+    #   resp.data_source_id #=> String
+    #   resp.data_source_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPoint AWS API Documentation
     #
@@ -5343,12 +5351,14 @@ module Aws::S3Control
     #
     #  </note>
     #
-    # Returns a list of the access points that are owned by the current
-    # account that's associated with the specified bucket. You can retrieve
-    # up to 1000 access points per call. If the specified bucket has more
-    # than 1,000 access points (or the number specified in `maxResults`,
-    # whichever is less), the response will include a continuation token
-    # that you can use to list the additional access points.
+    # Returns a list of the access points. You can retrieve up to 1,000
+    # access points per call. If the call returns more than 1,000 access
+    # points (or the number specified in `maxResults`, whichever is less),
+    # the response will include a continuation token that you can use to
+    # list the additional access points.
+    #
+    # Returns only access points attached to S3 buckets by default. To
+    # return all access points specify `DataSourceType` as `ALL`.
     #
     #
     #
@@ -5408,6 +5418,14 @@ module Aws::S3Control
     #   `NextToken` field that you can use to retrieve the next page of access
     #   points.
     #
+    # @option params [String] :data_source_id
+    #   The unique identifier for the data source of the access point.
+    #
+    # @option params [String] :data_source_type
+    #   The type of the data source that the access point is attached to.
+    #   Returns only access points attached to S3 buckets by default. To
+    #   return all access points specify `DataSourceType` as `ALL`.
+    #
     # @return [Types::ListAccessPointsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAccessPointsResult#access_point_list #access_point_list} => Array&lt;Types::AccessPoint&gt;
@@ -5422,6 +5440,8 @@ module Aws::S3Control
     #     bucket: "BucketName",
     #     next_token: "NonEmptyMaxLength1024String",
     #     max_results: 1,
+    #     data_source_id: "DataSourceId",
+    #     data_source_type: "DataSourceType",
     #   })
     #
     # @example Response structure
@@ -5434,6 +5454,8 @@ module Aws::S3Control
     #   resp.access_point_list[0].access_point_arn #=> String
     #   resp.access_point_list[0].alias #=> String
     #   resp.access_point_list[0].bucket_account_id #=> String
+    #   resp.access_point_list[0].data_source_id #=> String
+    #   resp.access_point_list[0].data_source_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessPoints AWS API Documentation
@@ -5509,6 +5531,8 @@ module Aws::S3Control
     #   resp.access_point_list[0].access_point_arn #=> String
     #   resp.access_point_list[0].alias #=> String
     #   resp.access_point_list[0].bucket_account_id #=> String
+    #   resp.access_point_list[0].data_source_id #=> String
+    #   resp.access_point_list[0].data_source_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessPointsForDirectoryBuckets AWS API Documentation
@@ -6030,44 +6054,63 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # This operation allows you to list all the Amazon Web Services resource
-    # tags for a specified resource. Each tag is a label consisting of a
-    # user-defined key and value. Tags can help you manage, identify,
-    # organize, search for, and filter resources.
+    # This operation allows you to list all of the tags for a specified
+    # resource. Each tag is a label consisting of a key and value. Tags can
+    # help you organize, track costs for, and control access to resources.
     #
-    # Permissions
+    # <note markdown="1"> This operation is only supported for the following Amazon S3
+    # resources:
     #
-    # : You must have the `s3:ListTagsForResource` permission to use this
-    #   operation.
+    #  * [Directory buckets][1]
     #
-    # <note markdown="1"> This operation is only supported for [S3 Storage Lens groups][1] and
-    # for [S3 Access Grants][2]. The tagged resource can be an S3 Storage
-    # Lens group or S3 Access Grants instance, registered location, or
-    # grant.
+    # * [Storage Lens groups][2]
+    #
+    # * [S3 Access Grants instances, registered locations, and grants][3].
     #
     #  </note>
     #
-    # For more information about the required Storage Lens Groups
-    # permissions, see [Setting account permissions to use S3 Storage Lens
-    # groups][3].
+    # Permissions
+    #
+    # : For Storage Lens groups and S3 Access Grants, you must have the
+    #   `s3:ListTagsForResource` permission to use this operation.
+    #
+    #   For more information about the required Storage Lens Groups
+    #   permissions, see [Setting account permissions to use S3 Storage Lens
+    #   groups][4].
+    #
+    # Directory bucket permissions
+    #
+    # : For directory buckets, you must have the
+    #   `s3express:ListTagsForResource` permission to use this operation.
+    #   For more information about directory buckets policies and
+    #   permissions, see [Identity and Access Management (IAM) for S3
+    #   Express One Zone][5] in the *Amazon S3 User Guide*.
+    #
+    # HTTP Host header syntax
+    #
+    # : <b>Directory buckets </b> - The HTTP Host header syntax is
+    #   `s3express-control.region.amazonaws.com`.
     #
     # For information about S3 Tagging errors, see [List of Amazon S3
-    # Tagging error codes][4].
+    # Tagging error codes][6].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-permissions.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
     #
     # @option params [String] :account_id
     #   The Amazon Web Services account ID of the resource owner.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the S3 resource that you want to
-    #   list the tags for. The tagged resource can be an S3 Storage Lens group
-    #   or S3 Access Grants instance, registered location, or grant.
+    #   list tags for. The tagged resource can be a directory bucket, S3
+    #   Storage Lens group or S3 Access Grants instance, registered location,
+    #   or grant.
     #
     # @return [Types::ListTagsForResourceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6253,15 +6296,15 @@ module Aws::S3Control
     #
     # @option params [required, String] :policy
     #   The policy that you want to apply to the specified access point. For
-    #   more information about access point policies, see [Managing access to
-    #   shared datasets in general purpose buckets with access points][1] or
-    #   [Managing access to shared datasets in directory bucekts with access
-    #   points](AmazonS3/latest/userguide/access-points-directory-buckets.html)
-    #   in the *Amazon S3 User Guide*.
+    #   more information about access point policies, see [Managing data
+    #   access with Amazon S3 access points][1] or [Managing access to shared
+    #   datasets in directory buckets with access points][2] in the *Amazon S3
+    #   User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -7534,45 +7577,65 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Creates a new Amazon Web Services resource tag or updates an existing
-    # resource tag. Each tag is a label consisting of a user-defined key and
-    # value. Tags can help you manage, identify, organize, search for, and
-    # filter resources. You can add up to 50 Amazon Web Services resource
-    # tags for each S3 resource.
+    # Creates a new user-defined tag or updates an existing tag. Each tag is
+    # a label consisting of a key and value that is applied to your
+    # resource. Tags can help you organize, track costs for, and control
+    # access to your resources. You can add up to 50 Amazon Web Services
+    # resource tags for each S3 resource.
     #
-    # <note markdown="1"> This operation is only supported for [S3 Storage Lens groups][1] and
-    # for [S3 Access Grants][2]. The tagged resource can be an S3 Storage
-    # Lens group or S3 Access Grants instance, registered location, or
-    # grant.
+    # <note markdown="1"> This operation is only supported for the following Amazon S3 resource:
+    #
+    #  * [Directory buckets][1]
+    #
+    # * [S3 Storage Lens groups][2]
+    #
+    # * [S3 Access Grants instances, registered locations, or grants][3].
     #
     #  </note>
     #
     # Permissions
     #
-    # : You must have the `s3:TagResource` permission to use this operation.
+    # : For Storage Lens groups and S3 Access Grants, you must have the
+    #   `s3:TagResource` permission to use this operation.
     #
-    # For more information about the required Storage Lens Groups
-    # permissions, see [Setting account permissions to use S3 Storage Lens
-    # groups][3].
+    #   For more information about the required Storage Lens Groups
+    #   permissions, see [Setting account permissions to use S3 Storage Lens
+    #   groups][4].
+    #
+    # Directory bucket permissions
+    #
+    # : For directory buckets, you must have the `s3express:TagResource`
+    #   permission to use this operation. For more information about
+    #   directory buckets policies and permissions, see [Identity and Access
+    #   Management (IAM) for S3 Express One Zone][5] in the *Amazon S3 User
+    #   Guide*.
+    #
+    # HTTP Host header syntax
+    #
+    # : <b>Directory buckets </b> - The HTTP Host header syntax is
+    #   `s3express-control.region.amazonaws.com`.
     #
     # For information about S3 Tagging errors, see [List of Amazon S3
-    # Tagging error codes][4].
+    # Tagging error codes][6].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-permissions.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
     #
     # @option params [String] :account_id
     #   The Amazon Web Services account ID that created the S3 resource that
     #   you're trying to add tags to or the requester's account ID.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the S3 resource that you're trying
-    #   to add tags to. The tagged resource can be an S3 Storage Lens group or
-    #   S3 Access Grants instance, registered location, or grant.
+    #   The Amazon Resource Name (ARN) of the S3 resource that you're
+    #   applying tags to. The tagged resource can be a directory bucket, S3
+    #   Storage Lens group or S3 Access Grants instance, registered location,
+    #   or grant.
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The Amazon Web Services resource tags that you want to add to the
@@ -7602,44 +7665,63 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # This operation removes the specified Amazon Web Services resource tags
-    # from an S3 resource. Each tag is a label consisting of a user-defined
-    # key and value. Tags can help you manage, identify, organize, search
-    # for, and filter resources.
+    # This operation removes the specified user-defined tags from an S3
+    # resource. You can pass one or more tag keys.
     #
-    # <note markdown="1"> This operation is only supported for [S3 Storage Lens groups][1] and
-    # for [S3 Access Grants][2]. The tagged resource can be an S3 Storage
-    # Lens group or S3 Access Grants instance, registered location, or
-    # grant.
+    # <note markdown="1"> This operation is only supported for the following Amazon S3
+    # resources:
+    #
+    #  * [Directory buckets][1]
+    #
+    # * [Storage Lens groups][2]
+    #
+    # * [S3 Access Grants instances, registered locations, and grants][3].
     #
     #  </note>
     #
     # Permissions
     #
-    # : You must have the `s3:UntagResource` permission to use this
-    #   operation.
+    # : For Storage Lens groups and S3 Access Grants, you must have the
+    #   `s3:UntagResource` permission to use this operation.
     #
-    # For more information about the required Storage Lens Groups
-    # permissions, see [Setting account permissions to use S3 Storage Lens
-    # groups][3].
+    #   For more information about the required Storage Lens Groups
+    #   permissions, see [Setting account permissions to use S3 Storage Lens
+    #   groups][4].
+    #
+    # Directory bucket permissions
+    #
+    # : For directory buckets, you must have the `s3express:UntagResource`
+    #   permission to use this operation. For more information about
+    #   directory buckets policies and permissions, see [Identity and Access
+    #   Management (IAM) for S3 Express One Zone][5] in the *Amazon S3 User
+    #   Guide*.
+    #
+    # HTTP Host header syntax
+    #
+    # : <b>Directory buckets </b> - The HTTP Host header syntax is
+    #   `s3express-control.region.amazonaws.com`.
     #
     # For information about S3 Tagging errors, see [List of Amazon S3
-    # Tagging error codes][4].
+    # Tagging error codes][6].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-permissions.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
     #
     # @option params [String] :account_id
     #   The Amazon Web Services account ID that owns the resource that you're
     #   trying to remove the tags from.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the S3 resource that you're trying
-    #   to remove the tags from.
+    #   The Amazon Resource Name (ARN) of the S3 resource that you're
+    #   removing tags from. The tagged resource can be a directory bucket, S3
+    #   Storage Lens group or S3 Access Grants instance, registered location,
+    #   or grant.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The array of tag key-value pairs that you're trying to remove from of
@@ -7986,7 +8068,7 @@ module Aws::S3Control
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.112.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

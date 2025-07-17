@@ -23,6 +23,22 @@ module Aws::B2bi
       include Aws::Structure
     end
 
+    # A structure that contains advanced options for EDI processing.
+    # Currently, only X12 advanced options are supported.
+    #
+    # @!attribute [rw] x12
+    #   A structure that contains X12-specific advanced options, such as
+    #   split options for processing X12 EDI files.
+    #   @return [Types::X12AdvancedOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/AdvancedOptions AWS API Documentation
+    #
+    class AdvancedOptions < Struct.new(
+      :x12)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A capability object. Currently, only EDI (electronic data interchange)
     # capabilities are supported. A trading capability contains the
     # information required to transform incoming EDI documents into JSON or
@@ -55,10 +71,16 @@ module Aws::B2bi
     #   A structure that contains the outbound EDI options.
     #   @return [Types::OutboundEdiOptions]
     #
+    # @!attribute [rw] inbound_edi
+    #   A structure that contains the inbound EDI options for the
+    #   capability.
+    #   @return [Types::InboundEdiOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/CapabilityOptions AWS API Documentation
     #
     class CapabilityOptions < Struct.new(
-      :outbound_edi)
+      :outbound_edi,
+      :inbound_edi)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -866,14 +888,13 @@ module Aws::B2bi
     end
 
     # @!attribute [rw] input_file_content
-    #   Provide the contents of a sample X12 EDI file (for inbound EDI) or
-    #   JSON/XML file (for outbound EDI) to use as a starting point for the
-    #   mapping.
+    #   Provide the contents of a sample X12 EDI file, either in JSON or XML
+    #   format, to use as a starting point for the mapping.
     #   @return [String]
     #
     # @!attribute [rw] output_file_content
-    #   Provide the contents of a sample X12 EDI file (for outbound EDI) or
-    #   JSON/XML file (for inbound EDI) to use as a target for the mapping.
+    #   Provide the contents of a sample X12 EDI file, either in JSON or XML
+    #   format, to use as a target for the mapping.
     #   @return [String]
     #
     # @!attribute [rw] mapping_type
@@ -1270,6 +1291,22 @@ module Aws::B2bi
       include Aws::Structure
     end
 
+    # Contains options for processing inbound EDI files. These options allow
+    # for customizing how incoming EDI documents are processed.
+    #
+    # @!attribute [rw] x12
+    #   A structure that contains X12-specific options for processing
+    #   inbound X12 EDI files.
+    #   @return [Types::X12InboundEdiOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/InboundEdiOptions AWS API Documentation
+    #
+    class InboundEdiOptions < Struct.new(
+      :x12)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the input formatting options for an inbound transformer
     # (takes an X12-formatted EDI document as input and converts it to JSON
     # or XML.
@@ -1284,11 +1321,18 @@ module Aws::B2bi
     #   transformer.
     #   @return [Types::FormatOptions]
     #
+    # @!attribute [rw] advanced_options
+    #   Specifies advanced options for the input conversion process. These
+    #   options provide additional control over how EDI files are processed
+    #   during transformation.
+    #   @return [Types::AdvancedOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/InputConversion AWS API Documentation
     #
     class InputConversion < Struct.new(
       :from_format,
-      :format_options)
+      :format_options,
+      :advanced_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2067,12 +2111,19 @@ module Aws::B2bi
     #   documents.
     #   @return [Types::EdiType]
     #
+    # @!attribute [rw] advanced_options
+    #   Specifies advanced options for parsing the input EDI file. These
+    #   options allow for more granular control over the parsing process,
+    #   including split options for X12 files.
+    #   @return [Types::AdvancedOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/TestParsingRequest AWS API Documentation
     #
     class TestParsingRequest < Struct.new(
       :input_file,
       :file_format,
-      :edi_type)
+      :edi_type,
+      :advanced_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2082,10 +2133,17 @@ module Aws::B2bi
     #   according to the specified EDI (electronic data interchange) type.
     #   @return [String]
     #
+    # @!attribute [rw] parsed_split_file_contents
+    #   Returns an array of parsed file contents when the input file is
+    #   split according to the specified split options. Each element in the
+    #   array represents a separate split file's parsed content.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/TestParsingResponse AWS API Documentation
     #
     class TestParsingResponse < Struct.new(
-      :parsed_file_content)
+      :parsed_file_content,
+      :parsed_split_file_contents)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2682,6 +2740,135 @@ module Aws::B2bi
       include Aws::Structure
     end
 
+    # Contains options for wrapping (line folding) in X12 EDI files.
+    # Wrapping controls how long lines are handled in the EDI output.
+    #
+    # @!attribute [rw] wrap_by
+    #   Specifies the method used for wrapping lines in the EDI output.
+    #   Valid values:
+    #
+    #   * `SEGMENT`: Wraps by segment.
+    #
+    #   * `ONE_LINE`: Indicates that the entire content is on a single line.
+    #
+    #     <note markdown="1"> When you specify `ONE_LINE`, do not provide either the line length
+    #     nor the line terminator value.
+    #
+    #      </note>
+    #
+    #   * `LINE_LENGTH`: Wraps by character count, as specified by
+    #     `lineLength` value.
+    #   @return [String]
+    #
+    # @!attribute [rw] line_terminator
+    #   Specifies the character sequence used to terminate lines when
+    #   wrapping. Valid values:
+    #
+    #   * `CRLF`: carriage return and line feed
+    #
+    #   * `LF`: line feed)
+    #
+    #   * `CR`: carriage return
+    #   @return [String]
+    #
+    # @!attribute [rw] line_length
+    #   Specifies the maximum length of a line before wrapping occurs. This
+    #   value is used when `wrapBy` is set to `LINE_LENGTH`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/WrapOptions AWS API Documentation
+    #
+    class WrapOptions < Struct.new(
+      :wrap_by,
+      :line_terminator,
+      :line_length)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains options for configuring X12 acknowledgments. These options
+    # control how functional and technical acknowledgments are handled.
+    #
+    # @!attribute [rw] functional_acknowledgment
+    #   Specifies whether functional acknowledgments (997/999) should be
+    #   generated for incoming X12 transactions. Valid values are
+    #   `DO_NOT_GENERATE`, `GENERATE_ALL_SEGMENTS` and
+    #   `GENERATE_WITHOUT_TRANSACTION_SET_RESPONSE_LOOP`.
+    #
+    #   If you choose `GENERATE_WITHOUT_TRANSACTION_SET_RESPONSE_LOOP`,
+    #   Amazon Web Services B2B Data Interchange skips the AK2\_Loop when
+    #   generating an acknowledgment document.
+    #   @return [String]
+    #
+    # @!attribute [rw] technical_acknowledgment
+    #   Specifies whether technical acknowledgments (TA1) should be
+    #   generated for incoming X12 interchanges. Valid values are
+    #   `DO_NOT_GENERATE` and `GENERATE_ALL_SEGMENTS` and.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/X12AcknowledgmentOptions AWS API Documentation
+    #
+    class X12AcknowledgmentOptions < Struct.new(
+      :functional_acknowledgment,
+      :technical_acknowledgment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains advanced options specific to X12 EDI processing, such as
+    # splitting large X12 files into smaller units.
+    #
+    # @!attribute [rw] split_options
+    #   Specifies options for splitting X12 EDI files. These options control
+    #   how large X12 files are divided into smaller, more manageable units.
+    #   @return [Types::X12SplitOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/X12AdvancedOptions AWS API Documentation
+    #
+    class X12AdvancedOptions < Struct.new(
+      :split_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configuration for X12 control numbers used in X12 EDI
+    # generation. Control numbers are used to uniquely identify
+    # interchanges, functional groups, and transaction sets.
+    #
+    # @!attribute [rw] starting_interchange_control_number
+    #   Specifies the starting interchange control number (ISA13) to use for
+    #   X12 EDI generation. This number is incremented for each new
+    #   interchange. For the ISA (interchange) envelope, Amazon Web Services
+    #   B2B Data Interchange generates an interchange control number that is
+    #   unique for the ISA05 and ISA06 (sender) &amp; ISA07 and ISA08
+    #   (receiver) combination.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] starting_functional_group_control_number
+    #   Specifies the starting functional group control number (GS06) to use
+    #   for X12 EDI generation. This number is incremented for each new
+    #   functional group. For the GS (functional group) envelope, Amazon Web
+    #   Services B2B Data Interchange generates a functional group control
+    #   number that is unique to the sender ID, receiver ID, and functional
+    #   identifier code combination.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] starting_transaction_set_control_number
+    #   Specifies the starting transaction set control number (ST02) to use
+    #   for X12 EDI generation. This number is incremented for each new
+    #   transaction set.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/X12ControlNumbers AWS API Documentation
+    #
+    class X12ControlNumbers < Struct.new(
+      :starting_interchange_control_number,
+      :starting_functional_group_control_number,
+      :starting_transaction_set_control_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # In X12 EDI messages, delimiters are used to mark the end of segments
     # or elements, and are defined in the interchange control header. The
     # delimiters are part of the message's syntax and divide up its
@@ -2755,10 +2942,16 @@ module Aws::B2bi
     #   A container for the X12 outbound EDI headers.
     #   @return [Types::X12OutboundEdiHeaders]
     #
+    # @!attribute [rw] wrap_options
+    #   Contains options for wrapping (line folding) in X12 EDI files.
+    #   Wrapping controls how long lines are handled in the EDI output.
+    #   @return [Types::WrapOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/X12Envelope AWS API Documentation
     #
     class X12Envelope < Struct.new(
-      :common)
+      :common,
+      :wrap_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2787,6 +2980,22 @@ module Aws::B2bi
       :application_sender_code,
       :application_receiver_code,
       :responsible_agency_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains options specific to processing inbound X12 EDI files.
+    #
+    # @!attribute [rw] acknowledgment_options
+    #   Specifies acknowledgment options for inbound X12 EDI files. These
+    #   options control how functional and technical acknowledgments are
+    #   handled.
+    #   @return [Types::X12AcknowledgmentOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/X12InboundEdiOptions AWS API Documentation
+    #
+    class X12InboundEdiOptions < Struct.new(
+      :acknowledgment_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2890,13 +3099,60 @@ module Aws::B2bi
     #   `TRUE` or `FALSE`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] control_numbers
+    #   Specifies control number configuration for outbound X12 EDI headers.
+    #   These settings determine the starting values for interchange,
+    #   functional group, and transaction set control numbers.
+    #   @return [Types::X12ControlNumbers]
+    #
+    # @!attribute [rw] gs05_time_format
+    #   Specifies the time format in the GS05 element (time) of the
+    #   functional group header. The following formats use 24-hour clock
+    #   time:
+    #
+    #   * `HHMM` - Hours and minutes
+    #
+    #   * `HHMMSS` - Hours, minutes, and seconds
+    #
+    #   * `HHMMSSDD` - Hours, minutes, seconds, and decimal seconds
+    #
+    #   Where:
+    #
+    #   * `HH` - Hours (00-23)
+    #
+    #   * `MM` - Minutes (00-59)
+    #
+    #   * `SS` - Seconds (00-59)
+    #
+    #   * `DD` - Hundredths of seconds (00-99)
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/X12OutboundEdiHeaders AWS API Documentation
     #
     class X12OutboundEdiHeaders < Struct.new(
       :interchange_control_headers,
       :functional_group_headers,
       :delimiters,
-      :validate_edi)
+      :validate_edi,
+      :control_numbers,
+      :gs05_time_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains options for splitting X12 EDI files into smaller units. This
+    # is useful for processing large EDI files more efficiently.
+    #
+    # @!attribute [rw] split_by
+    #   Specifies the method used to split X12 EDI files. Valid values
+    #   include `TRANSACTION` (split by individual transaction sets), or
+    #   `NONE` (no splitting).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/X12SplitOptions AWS API Documentation
+    #
+    class X12SplitOptions < Struct.new(
+      :split_by)
       SENSITIVE = []
       include Aws::Structure
     end

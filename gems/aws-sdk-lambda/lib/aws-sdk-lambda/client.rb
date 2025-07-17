@@ -202,8 +202,7 @@ module Aws::Lambda
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -949,27 +948,28 @@ module Aws::Lambda
     # For stream sources (DynamoDB, Kinesis, Amazon MSK, and self-managed
     # Apache Kafka), the following option is also available:
     #
-    # * `DestinationConfig` – Send discarded records to an Amazon SQS queue,
-    #   Amazon SNS topic, or Amazon S3 bucket.
+    # * `OnFailure` – Send discarded records to an Amazon SQS queue, Amazon
+    #   SNS topic, or Amazon S3 bucket. For more information, see [Adding a
+    #   destination][8].
     #
     # ^
     #
     # For information about which configuration parameters apply to each
     # event source, see the following topics.
     #
-    # * [ Amazon DynamoDB Streams][8]
+    # * [ Amazon DynamoDB Streams][9]
     #
-    # * [ Amazon Kinesis][9]
+    # * [ Amazon Kinesis][10]
     #
-    # * [ Amazon SQS][10]
+    # * [ Amazon SQS][11]
     #
-    # * [ Amazon MQ and RabbitMQ][11]
+    # * [ Amazon MQ and RabbitMQ][12]
     #
-    # * [ Amazon MSK][12]
+    # * [ Amazon MSK][13]
     #
-    # * [ Apache Kafka][13]
+    # * [ Apache Kafka][14]
     #
-    # * [ Amazon DocumentDB][14]
+    # * [ Amazon DocumentDB][15]
     #
     #
     #
@@ -980,13 +980,14 @@ module Aws::Lambda
     # [5]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html
     # [6]: https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html
     # [7]: https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html
-    # [8]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params
-    # [9]: https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params
-    # [10]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params
-    # [11]: https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params
-    # [12]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms
-    # [13]: https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms
-    # [14]: https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html#docdb-configuration
+    # [8]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-async-destinations
+    # [9]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params
+    # [10]: https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params
+    # [11]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params
+    # [12]: https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params
+    # [13]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms
+    # [14]: https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms
+    # [15]: https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html#docdb-configuration
     #
     # @option params [String] :event_source_arn
     #   The Amazon Resource Name (ARN) of the event source.
@@ -1295,9 +1296,39 @@ module Aws::Lambda
     #     function_response_types: ["ReportBatchItemFailures"], # accepts ReportBatchItemFailures
     #     amazon_managed_kafka_event_source_config: {
     #       consumer_group_id: "URI",
+    #       schema_registry_config: {
+    #         schema_registry_uri: "SchemaRegistryUri",
+    #         event_record_format: "JSON", # accepts JSON, SOURCE
+    #         access_configs: [
+    #           {
+    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
+    #             uri: "Arn",
+    #           },
+    #         ],
+    #         schema_validation_configs: [
+    #           {
+    #             attribute: "KEY", # accepts KEY, VALUE
+    #           },
+    #         ],
+    #       },
     #     },
     #     self_managed_kafka_event_source_config: {
     #       consumer_group_id: "URI",
+    #       schema_registry_config: {
+    #         schema_registry_uri: "SchemaRegistryUri",
+    #         event_record_format: "JSON", # accepts JSON, SOURCE
+    #         access_configs: [
+    #           {
+    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
+    #             uri: "Arn",
+    #           },
+    #         ],
+    #         schema_validation_configs: [
+    #           {
+    #             attribute: "KEY", # accepts KEY, VALUE
+    #           },
+    #         ],
+    #       },
     #     },
     #     scaling_config: {
     #       maximum_concurrency: 1,
@@ -1352,7 +1383,21 @@ module Aws::Lambda
     #   resp.function_response_types #=> Array
     #   resp.function_response_types[0] #=> String, one of "ReportBatchItemFailures"
     #   resp.amazon_managed_kafka_event_source_config.consumer_group_id #=> String
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
     #   resp.self_managed_kafka_event_source_config.consumer_group_id #=> String
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
     #   resp.scaling_config.maximum_concurrency #=> Integer
     #   resp.document_db_event_source_config.database_name #=> String
     #   resp.document_db_event_source_config.collection_name #=> String
@@ -2141,7 +2186,7 @@ module Aws::Lambda
     #     batch_size: 5, 
     #     event_source_arn: "arn:aws:sqs:us-west-2:123456789012:my-queue", 
     #     function_arn: "arn:aws:lambda:us-east-2:123456789012:function:my-function", 
-    #     last_modified: Time.parse("${timestamp}"), 
+    #     last_modified: Time.parse("2016-11-21T19:49:20.006Z"), 
     #     state: "Enabled", 
     #     state_transition_reason: "USER_INITIATED", 
     #     uuid: "14e0db71-xmpl-4eb5-b481-8945cf9d10c2", 
@@ -2188,7 +2233,21 @@ module Aws::Lambda
     #   resp.function_response_types #=> Array
     #   resp.function_response_types[0] #=> String, one of "ReportBatchItemFailures"
     #   resp.amazon_managed_kafka_event_source_config.consumer_group_id #=> String
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
     #   resp.self_managed_kafka_event_source_config.consumer_group_id #=> String
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
     #   resp.scaling_config.maximum_concurrency #=> Integer
     #   resp.document_db_event_source_config.database_name #=> String
     #   resp.document_db_event_source_config.collection_name #=> String
@@ -2758,7 +2817,7 @@ module Aws::Lambda
     #     }, 
     #     event_source_arn: "arn:aws:sqs:us-east-2:123456789012:mySQSqueue", 
     #     function_arn: "arn:aws:lambda:us-east-2:123456789012:function:myFunction", 
-    #     last_modified: Time.parse("${timestamp}"), 
+    #     last_modified: Time.parse("2016-11-21T19:49:20.006Z"), 
     #     last_processing_result: "No records processed", 
     #     maximum_record_age_in_seconds: 604800, 
     #     maximum_retry_attempts: 10000, 
@@ -2808,7 +2867,21 @@ module Aws::Lambda
     #   resp.function_response_types #=> Array
     #   resp.function_response_types[0] #=> String, one of "ReportBatchItemFailures"
     #   resp.amazon_managed_kafka_event_source_config.consumer_group_id #=> String
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
     #   resp.self_managed_kafka_event_source_config.consumer_group_id #=> String
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
     #   resp.scaling_config.maximum_concurrency #=> Integer
     #   resp.document_db_event_source_config.database_name #=> String
     #   resp.document_db_event_source_config.collection_name #=> String
@@ -3360,7 +3433,7 @@ module Aws::Lambda
     #       }, 
     #     }, 
     #     function_arn: "arn:aws:lambda:us-east-2:123456789012:function:my-function:BLUE", 
-    #     last_modified: Time.parse("${timestamp}"), 
+    #     last_modified: Time.parse("2016-11-21T19:49:20.006Z"), 
     #     maximum_event_age_in_seconds: 3600, 
     #     maximum_retry_attempts: 0, 
     #   }
@@ -4662,7 +4735,21 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].function_response_types #=> Array
     #   resp.event_source_mappings[0].function_response_types[0] #=> String, one of "ReportBatchItemFailures"
     #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.consumer_group_id #=> String
+    #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
+    #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
+    #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
+    #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
+    #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
+    #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
     #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.consumer_group_id #=> String
+    #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
+    #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
+    #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
+    #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
+    #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
+    #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
     #   resp.event_source_mappings[0].scaling_config.maximum_concurrency #=> Integer
     #   resp.event_source_mappings[0].document_db_event_source_config.database_name #=> String
     #   resp.event_source_mappings[0].document_db_event_source_config.collection_name #=> String
@@ -6219,7 +6306,7 @@ module Aws::Lambda
     #       }, 
     #     }, 
     #     function_arn: "arn:aws:lambda:us-east-2:123456789012:function:my-function:$LATEST", 
-    #     last_modified: Time.parse("${timestamp}"), 
+    #     last_modified: Time.parse("2016-11-21T19:49:20.006Z"), 
     #     maximum_event_age_in_seconds: 3600, 
     #     maximum_retry_attempts: 0, 
     #   }
@@ -6931,27 +7018,28 @@ module Aws::Lambda
     # For stream sources (DynamoDB, Kinesis, Amazon MSK, and self-managed
     # Apache Kafka), the following option is also available:
     #
-    # * `DestinationConfig` – Send discarded records to an Amazon SQS queue,
-    #   Amazon SNS topic, or Amazon S3 bucket.
+    # * `OnFailure` – Send discarded records to an Amazon SQS queue, Amazon
+    #   SNS topic, or Amazon S3 bucket. For more information, see [Adding a
+    #   destination][8].
     #
     # ^
     #
     # For information about which configuration parameters apply to each
     # event source, see the following topics.
     #
-    # * [ Amazon DynamoDB Streams][8]
+    # * [ Amazon DynamoDB Streams][9]
     #
-    # * [ Amazon Kinesis][9]
+    # * [ Amazon Kinesis][10]
     #
-    # * [ Amazon SQS][10]
+    # * [ Amazon SQS][11]
     #
-    # * [ Amazon MQ and RabbitMQ][11]
+    # * [ Amazon MQ and RabbitMQ][12]
     #
-    # * [ Amazon MSK][12]
+    # * [ Amazon MSK][13]
     #
-    # * [ Apache Kafka][13]
+    # * [ Apache Kafka][14]
     #
-    # * [ Amazon DocumentDB][14]
+    # * [ Amazon DocumentDB][15]
     #
     #
     #
@@ -6962,13 +7050,14 @@ module Aws::Lambda
     # [5]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html
     # [6]: https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html
     # [7]: https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html
-    # [8]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params
-    # [9]: https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params
-    # [10]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params
-    # [11]: https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params
-    # [12]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms
-    # [13]: https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms
-    # [14]: https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html#docdb-configuration
+    # [8]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-async-destinations
+    # [9]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params
+    # [10]: https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params
+    # [11]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params
+    # [12]: https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params
+    # [13]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms
+    # [14]: https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms
+    # [15]: https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html#docdb-configuration
     #
     # @option params [required, String] :uuid
     #   The identifier of the event source mapping.
@@ -7092,6 +7181,14 @@ module Aws::Lambda
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency
     #
+    # @option params [Types::AmazonManagedKafkaEventSourceConfig] :amazon_managed_kafka_event_source_config
+    #   Specific configuration settings for an Amazon Managed Streaming for
+    #   Apache Kafka (Amazon MSK) event source.
+    #
+    # @option params [Types::SelfManagedKafkaEventSourceConfig] :self_managed_kafka_event_source_config
+    #   Specific configuration settings for a self-managed Apache Kafka event
+    #   source.
+    #
     # @option params [Types::DocumentDBEventSourceConfig] :document_db_event_source_config
     #   Specific configuration settings for a DocumentDB event source.
     #
@@ -7174,7 +7271,7 @@ module Aws::Lambda
     #     batch_size: 123, 
     #     event_source_arn: "arn:aws:s3:::examplebucket/*", 
     #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:myFunction", 
-    #     last_modified: Time.parse("2016-11-21T19:49:20.006+0000"), 
+    #     last_modified: Time.parse("2016-11-21T19:49:20.006Z"), 
     #     last_processing_result: "", 
     #     state: "", 
     #     state_transition_reason: "", 
@@ -7218,6 +7315,42 @@ module Aws::Lambda
     #     function_response_types: ["ReportBatchItemFailures"], # accepts ReportBatchItemFailures
     #     scaling_config: {
     #       maximum_concurrency: 1,
+    #     },
+    #     amazon_managed_kafka_event_source_config: {
+    #       consumer_group_id: "URI",
+    #       schema_registry_config: {
+    #         schema_registry_uri: "SchemaRegistryUri",
+    #         event_record_format: "JSON", # accepts JSON, SOURCE
+    #         access_configs: [
+    #           {
+    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
+    #             uri: "Arn",
+    #           },
+    #         ],
+    #         schema_validation_configs: [
+    #           {
+    #             attribute: "KEY", # accepts KEY, VALUE
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     self_managed_kafka_event_source_config: {
+    #       consumer_group_id: "URI",
+    #       schema_registry_config: {
+    #         schema_registry_uri: "SchemaRegistryUri",
+    #         event_record_format: "JSON", # accepts JSON, SOURCE
+    #         access_configs: [
+    #           {
+    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
+    #             uri: "Arn",
+    #           },
+    #         ],
+    #         schema_validation_configs: [
+    #           {
+    #             attribute: "KEY", # accepts KEY, VALUE
+    #           },
+    #         ],
+    #       },
     #     },
     #     document_db_event_source_config: {
     #       database_name: "DatabaseName",
@@ -7269,7 +7402,21 @@ module Aws::Lambda
     #   resp.function_response_types #=> Array
     #   resp.function_response_types[0] #=> String, one of "ReportBatchItemFailures"
     #   resp.amazon_managed_kafka_event_source_config.consumer_group_id #=> String
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
     #   resp.self_managed_kafka_event_source_config.consumer_group_id #=> String
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
     #   resp.scaling_config.maximum_concurrency #=> Integer
     #   resp.document_db_event_source_config.database_name #=> String
     #   resp.document_db_event_source_config.collection_name #=> String
@@ -8205,7 +8352,7 @@ module Aws::Lambda
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.149.0'
+      context[:gem_version] = '1.153.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

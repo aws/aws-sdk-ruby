@@ -1,0 +1,402 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MPA
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CancelSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelSessionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#cancel_session-instance_method
+      def cancel_session: (
+                            session_arn: ::String
+                          ) -> _CancelSessionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelSessionResponseSuccess
+
+      interface _CreateApprovalTeamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApprovalTeamResponse]
+        def creation_time: () -> ::Time
+        def arn: () -> ::String
+        def name: () -> ::String
+        def version_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#create_approval_team-instance_method
+      def create_approval_team: (
+                                  ?client_token: ::String,
+                                  approval_strategy: {
+                                    mof_n: {
+                                      min_approvals_required: ::Integer
+                                    }?
+                                  },
+                                  approvers: Array[
+                                    {
+                                      primary_identity_id: ::String,
+                                      primary_identity_source_arn: ::String
+                                    },
+                                  ],
+                                  description: ::String,
+                                  policies: Array[
+                                    {
+                                      policy_arn: ::String
+                                    },
+                                  ],
+                                  name: ::String,
+                                  ?tags: Hash[::String, ::String]
+                                ) -> _CreateApprovalTeamResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApprovalTeamResponseSuccess
+
+      interface _CreateIdentitySourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIdentitySourceResponse]
+        def identity_source_type: () -> ("IAM_IDENTITY_CENTER")
+        def identity_source_arn: () -> ::String
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#create_identity_source-instance_method
+      def create_identity_source: (
+                                    identity_source_parameters: {
+                                      iam_identity_center: {
+                                        instance_arn: ::String,
+                                        region: ::String
+                                      }?
+                                    },
+                                    ?client_token: ::String,
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _CreateIdentitySourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIdentitySourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#delete_identity_source-instance_method
+      def delete_identity_source: (
+                                    identity_source_arn: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteInactiveApprovalTeamVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInactiveApprovalTeamVersionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#delete_inactive_approval_team_version-instance_method
+      def delete_inactive_approval_team_version: (
+                                                   arn: ::String,
+                                                   version_id: ::String
+                                                 ) -> _DeleteInactiveApprovalTeamVersionResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInactiveApprovalTeamVersionResponseSuccess
+
+      interface _GetApprovalTeamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApprovalTeamResponse]
+        def creation_time: () -> ::Time
+        def approval_strategy: () -> Types::ApprovalStrategyResponse
+        def number_of_approvers: () -> ::Integer
+        def approvers: () -> ::Array[Types::GetApprovalTeamResponseApprover]
+        def arn: () -> ::String
+        def description: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("ACTIVE" | "INACTIVE" | "DELETING" | "PENDING")
+        def status_code: () -> ("VALIDATING" | "PENDING_ACTIVATION" | "FAILED_VALIDATION" | "FAILED_ACTIVATION" | "UPDATE_PENDING_APPROVAL" | "UPDATE_PENDING_ACTIVATION" | "UPDATE_FAILED_APPROVAL" | "UPDATE_FAILED_ACTIVATION" | "UPDATE_FAILED_VALIDATION" | "DELETE_PENDING_APPROVAL" | "DELETE_FAILED_APPROVAL" | "DELETE_FAILED_VALIDATION")
+        def status_message: () -> ::String
+        def update_session_arn: () -> ::String
+        def version_id: () -> ::String
+        def policies: () -> ::Array[Types::PolicyReference]
+        def last_update_time: () -> ::Time
+        def pending_update: () -> Types::PendingUpdate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#get_approval_team-instance_method
+      def get_approval_team: (
+                               arn: ::String
+                             ) -> _GetApprovalTeamResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApprovalTeamResponseSuccess
+
+      interface _GetIdentitySourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIdentitySourceResponse]
+        def identity_source_type: () -> ("IAM_IDENTITY_CENTER")
+        def identity_source_parameters: () -> Types::IdentitySourceParametersForGet
+        def identity_source_arn: () -> ::String
+        def creation_time: () -> ::Time
+        def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "ERROR")
+        def status_code: () -> ("ACCESS_DENIED" | "DELETION_FAILED" | "IDC_INSTANCE_NOT_FOUND" | "IDC_INSTANCE_NOT_VALID")
+        def status_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#get_identity_source-instance_method
+      def get_identity_source: (
+                                 identity_source_arn: ::String
+                               ) -> _GetIdentitySourceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdentitySourceResponseSuccess
+
+      interface _GetPolicyVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyVersionResponse]
+        def policy_version: () -> Types::PolicyVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#get_policy_version-instance_method
+      def get_policy_version: (
+                                policy_version_arn: ::String
+                              ) -> _GetPolicyVersionResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicyVersionResponseSuccess
+
+      interface _GetResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyResponse]
+        def resource_arn: () -> ::String
+        def policy_type: () -> ("AWS_MANAGED" | "AWS_RAM")
+        def policy_version_arn: () -> ::String
+        def policy_name: () -> ::String
+        def policy_document: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#get_resource_policy-instance_method
+      def get_resource_policy: (
+                                 resource_arn: ::String,
+                                 policy_name: ::String,
+                                 policy_type: ("AWS_MANAGED" | "AWS_RAM")
+                               ) -> _GetResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
+      interface _GetSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSessionResponse]
+        def session_arn: () -> ::String
+        def approval_team_arn: () -> ::String
+        def approval_team_name: () -> ::String
+        def protected_resource_arn: () -> ::String
+        def approval_strategy: () -> Types::ApprovalStrategyResponse
+        def number_of_approvers: () -> ::Integer
+        def initiation_time: () -> ::Time
+        def expiration_time: () -> ::Time
+        def completion_time: () -> ::Time
+        def description: () -> ::String
+        def metadata: () -> ::Hash[::String, ::String]
+        def status: () -> ("PENDING" | "CANCELLED" | "APPROVED" | "FAILED" | "CREATING")
+        def status_code: () -> ("REJECTED" | "EXPIRED" | "CONFIGURATION_CHANGED")
+        def status_message: () -> ::String
+        def execution_status: () -> ("EXECUTED" | "FAILED" | "PENDING")
+        def action_name: () -> ::String
+        def requester_service_principal: () -> ::String
+        def requester_principal_arn: () -> ::String
+        def requester_account_id: () -> ::String
+        def requester_region: () -> ::String
+        def requester_comment: () -> ::String
+        def action_completion_strategy: () -> ("AUTO_COMPLETION_UPON_APPROVAL")
+        def approver_responses: () -> ::Array[Types::GetSessionResponseApproverResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#get_session-instance_method
+      def get_session: (
+                         session_arn: ::String
+                       ) -> _GetSessionResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSessionResponseSuccess
+
+      interface _ListApprovalTeamsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApprovalTeamsResponse]
+        def next_token: () -> ::String
+        def approval_teams: () -> ::Array[Types::ListApprovalTeamsResponseApprovalTeam]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#list_approval_teams-instance_method
+      def list_approval_teams: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListApprovalTeamsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApprovalTeamsResponseSuccess
+
+      interface _ListIdentitySourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIdentitySourcesResponse]
+        def next_token: () -> ::String
+        def identity_sources: () -> ::Array[Types::IdentitySourceForList]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#list_identity_sources-instance_method
+      def list_identity_sources: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListIdentitySourcesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdentitySourcesResponseSuccess
+
+      interface _ListPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPoliciesResponse]
+        def next_token: () -> ::String
+        def policies: () -> ::Array[Types::Policy]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#list_policies-instance_method
+      def list_policies: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListPoliciesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPoliciesResponseSuccess
+
+      interface _ListPolicyVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPolicyVersionsResponse]
+        def next_token: () -> ::String
+        def policy_versions: () -> ::Array[Types::PolicyVersionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#list_policy_versions-instance_method
+      def list_policy_versions: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  policy_arn: ::String
+                                ) -> _ListPolicyVersionsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPolicyVersionsResponseSuccess
+
+      interface _ListResourcePoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourcePoliciesResponse]
+        def next_token: () -> ::String
+        def resource_policies: () -> ::Array[Types::ListResourcePoliciesResponseResourcePolicy]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#list_resource_policies-instance_method
+      def list_resource_policies: (
+                                    resource_arn: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListResourcePoliciesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourcePoliciesResponseSuccess
+
+      interface _ListSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSessionsResponse]
+        def next_token: () -> ::String
+        def sessions: () -> ::Array[Types::ListSessionsResponseSession]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#list_sessions-instance_method
+      def list_sessions: (
+                           approval_team_arn: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           ?filters: Array[
+                             {
+                               field_name: ("ActionName" | "ApprovalTeamName" | "VotingTime" | "Vote" | "SessionStatus" | "InitiationTime")?,
+                               operator: ("EQ" | "NE" | "GT" | "LT" | "GTE" | "LTE" | "CONTAINS" | "NOT_CONTAINS" | "BETWEEN")?,
+                               value: ::String?
+                             },
+                           ]
+                         ) -> _ListSessionsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSessionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartActiveApprovalTeamDeletionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartActiveApprovalTeamDeletionResponse]
+        def deletion_completion_time: () -> ::Time
+        def deletion_start_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#start_active_approval_team_deletion-instance_method
+      def start_active_approval_team_deletion: (
+                                                 ?pending_window_days: ::Integer,
+                                                 arn: ::String
+                                               ) -> _StartActiveApprovalTeamDeletionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartActiveApprovalTeamDeletionResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateApprovalTeamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApprovalTeamResponse]
+        def version_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#update_approval_team-instance_method
+      def update_approval_team: (
+                                  ?approval_strategy: {
+                                    mof_n: {
+                                      min_approvals_required: ::Integer
+                                    }?
+                                  },
+                                  ?approvers: Array[
+                                    {
+                                      primary_identity_id: ::String,
+                                      primary_identity_source_arn: ::String
+                                    },
+                                  ],
+                                  ?description: ::String,
+                                  arn: ::String
+                                ) -> _UpdateApprovalTeamResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApprovalTeamResponseSuccess
+    end
+  end
+end
+

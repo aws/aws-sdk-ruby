@@ -25,7 +25,7 @@ module Aws
       def certificate_body: () -> ::String
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SigningCertificate.html#status-instance_method
-      def status: () -> ("Active" | "Inactive")
+      def status: () -> ("Active" | "Inactive" | "Expired")
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SigningCertificate.html#upload_date-instance_method
       def upload_date: () -> ::Time

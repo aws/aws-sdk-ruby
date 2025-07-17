@@ -233,10 +233,40 @@ module Aws
                                          },
                                          ?function_response_types: Array[("ReportBatchItemFailures")],
                                          ?amazon_managed_kafka_event_source_config: {
-                                           consumer_group_id: ::String?
+                                           consumer_group_id: ::String?,
+                                           schema_registry_config: {
+                                             schema_registry_uri: ::String?,
+                                             event_record_format: ("JSON" | "SOURCE")?,
+                                             access_configs: Array[
+                                               {
+                                                 type: ("BASIC_AUTH" | "CLIENT_CERTIFICATE_TLS_AUTH" | "SERVER_ROOT_CA_CERTIFICATE")?,
+                                                 uri: ::String?
+                                               },
+                                             ]?,
+                                             schema_validation_configs: Array[
+                                               {
+                                                 attribute: ("KEY" | "VALUE")?
+                                               },
+                                             ]?
+                                           }?
                                          },
                                          ?self_managed_kafka_event_source_config: {
-                                           consumer_group_id: ::String?
+                                           consumer_group_id: ::String?,
+                                           schema_registry_config: {
+                                             schema_registry_uri: ::String?,
+                                             event_record_format: ("JSON" | "SOURCE")?,
+                                             access_configs: Array[
+                                               {
+                                                 type: ("BASIC_AUTH" | "CLIENT_CERTIFICATE_TLS_AUTH" | "SERVER_ROOT_CA_CERTIFICATE")?,
+                                                 uri: ::String?
+                                               },
+                                             ]?,
+                                             schema_validation_configs: Array[
+                                               {
+                                                 attribute: ("KEY" | "VALUE")?
+                                               },
+                                             ]?
+                                           }?
                                          },
                                          ?scaling_config: {
                                            maximum_concurrency: ::Integer?
@@ -1296,6 +1326,42 @@ module Aws
                                          ?function_response_types: Array[("ReportBatchItemFailures")],
                                          ?scaling_config: {
                                            maximum_concurrency: ::Integer?
+                                         },
+                                         ?amazon_managed_kafka_event_source_config: {
+                                           consumer_group_id: ::String?,
+                                           schema_registry_config: {
+                                             schema_registry_uri: ::String?,
+                                             event_record_format: ("JSON" | "SOURCE")?,
+                                             access_configs: Array[
+                                               {
+                                                 type: ("BASIC_AUTH" | "CLIENT_CERTIFICATE_TLS_AUTH" | "SERVER_ROOT_CA_CERTIFICATE")?,
+                                                 uri: ::String?
+                                               },
+                                             ]?,
+                                             schema_validation_configs: Array[
+                                               {
+                                                 attribute: ("KEY" | "VALUE")?
+                                               },
+                                             ]?
+                                           }?
+                                         },
+                                         ?self_managed_kafka_event_source_config: {
+                                           consumer_group_id: ::String?,
+                                           schema_registry_config: {
+                                             schema_registry_uri: ::String?,
+                                             event_record_format: ("JSON" | "SOURCE")?,
+                                             access_configs: Array[
+                                               {
+                                                 type: ("BASIC_AUTH" | "CLIENT_CERTIFICATE_TLS_AUTH" | "SERVER_ROOT_CA_CERTIFICATE")?,
+                                                 uri: ::String?
+                                               },
+                                             ]?,
+                                             schema_validation_configs: Array[
+                                               {
+                                                 attribute: ("KEY" | "VALUE")?
+                                               },
+                                             ]?
+                                           }?
                                          },
                                          ?document_db_event_source_config: {
                                            database_name: ::String?,

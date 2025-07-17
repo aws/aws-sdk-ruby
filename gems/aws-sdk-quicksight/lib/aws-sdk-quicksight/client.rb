@@ -200,8 +200,7 @@ module Aws::QuickSight
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -2039,6 +2038,8 @@ module Aws::QuickSight
     #     capabilities: {
     #       export_to_csv: "DENY", # accepts DENY
     #       export_to_excel: "DENY", # accepts DENY
+    #       export_to_pdf: "DENY", # accepts DENY
+    #       print_reports: "DENY", # accepts DENY
     #       create_and_update_themes: "DENY", # accepts DENY
     #       add_or_run_anomaly_detection_for_analyses: "DENY", # accepts DENY
     #       share_analyses: "DENY", # accepts DENY
@@ -2054,6 +2055,10 @@ module Aws::QuickSight
     #       share_data_sources: "DENY", # accepts DENY
     #       view_account_spice_capacity: "DENY", # accepts DENY
     #       create_spice_dataset: "DENY", # accepts DENY
+    #       export_to_pdf_in_scheduled_reports: "DENY", # accepts DENY
+    #       export_to_csv_in_scheduled_reports: "DENY", # accepts DENY
+    #       export_to_excel_in_scheduled_reports: "DENY", # accepts DENY
+    #       include_content_in_scheduled_reports_email: "DENY", # accepts DENY
     #     },
     #     tags: [
     #       {
@@ -2612,6 +2617,9 @@ module Aws::QuickSight
     #       athena_parameters: {
     #         work_group: "WorkGroup",
     #         role_arn: "RoleArn",
+    #         identity_center_configuration: {
+    #           enable_identity_propagation: false,
+    #         },
     #       },
     #       aurora_parameters: {
     #         host: "Host", # required
@@ -2767,6 +2775,9 @@ module Aws::QuickSight
     #             athena_parameters: {
     #               work_group: "WorkGroup",
     #               role_arn: "RoleArn",
+    #               identity_center_configuration: {
+    #                 enable_identity_propagation: false,
+    #               },
     #             },
     #             aurora_parameters: {
     #               host: "Host", # required
@@ -3857,6 +3868,9 @@ module Aws::QuickSight
     # @option params [Array<String>] :folder_arns
     #   The Folder ARN of the folder that you want the topic to reside in.
     #
+    # @option params [Types::CustomInstructions] :custom_instructions
+    #   Custom instructions for the topic.
+    #
     # @return [Types::CreateTopicResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTopicResponse#arn #arn} => String
@@ -4100,6 +4114,9 @@ module Aws::QuickSight
     #       },
     #     ],
     #     folder_arns: ["Arn"],
+    #     custom_instructions: {
+    #       custom_instructions_string: "CustomInstructionsString", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -4930,7 +4947,7 @@ module Aws::QuickSight
     #
     #   resp = client.delete_identity_propagation_config({
     #     aws_account_id: "AwsAccountId", # required
-    #     service: "REDSHIFT", # required, accepts REDSHIFT, QBUSINESS
+    #     service: "REDSHIFT", # required, accepts REDSHIFT, QBUSINESS, ATHENA
     #   })
     #
     # @example Response structure
@@ -6122,6 +6139,7 @@ module Aws::QuickSight
     #   resp.override_parameters.data_sources[0].data_source_parameters.amazon_elasticsearch_parameters.domain #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.athena_parameters.work_group #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.athena_parameters.role_arn #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.athena_parameters.identity_center_configuration.enable_identity_propagation #=> Boolean
     #   resp.override_parameters.data_sources[0].data_source_parameters.aurora_parameters.host #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.aurora_parameters.port #=> Integer
     #   resp.override_parameters.data_sources[0].data_source_parameters.aurora_parameters.database #=> String
@@ -6579,6 +6597,8 @@ module Aws::QuickSight
     #   resp.custom_permissions.custom_permissions_name #=> String
     #   resp.custom_permissions.capabilities.export_to_csv #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.export_to_excel #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.export_to_pdf #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.print_reports #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.create_and_update_themes #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.add_or_run_anomaly_detection_for_analyses #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.share_analyses #=> String, one of "DENY"
@@ -6594,6 +6614,10 @@ module Aws::QuickSight
     #   resp.custom_permissions.capabilities.share_data_sources #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.view_account_spice_capacity #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.create_spice_dataset #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.export_to_pdf_in_scheduled_reports #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.export_to_csv_in_scheduled_reports #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.export_to_excel_in_scheduled_reports #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.include_content_in_scheduled_reports_email #=> String, one of "DENY"
     #   resp.request_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeCustomPermissions AWS API Documentation
@@ -7306,6 +7330,7 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.amazon_elasticsearch_parameters.domain #=> String
     #   resp.data_source.data_source_parameters.athena_parameters.work_group #=> String
     #   resp.data_source.data_source_parameters.athena_parameters.role_arn #=> String
+    #   resp.data_source.data_source_parameters.athena_parameters.identity_center_configuration.enable_identity_propagation #=> Boolean
     #   resp.data_source.data_source_parameters.aurora_parameters.host #=> String
     #   resp.data_source.data_source_parameters.aurora_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.aurora_parameters.database #=> String
@@ -7390,6 +7415,7 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].amazon_elasticsearch_parameters.domain #=> String
     #   resp.data_source.alternate_data_source_parameters[0].athena_parameters.work_group #=> String
     #   resp.data_source.alternate_data_source_parameters[0].athena_parameters.role_arn #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].athena_parameters.identity_center_configuration.enable_identity_propagation #=> Boolean
     #   resp.data_source.alternate_data_source_parameters[0].aurora_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].aurora_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].aurora_parameters.database #=> String
@@ -8680,6 +8706,7 @@ module Aws::QuickSight
     #   * {Types::DescribeTopicResponse#topic #topic} => Types::TopicDetails
     #   * {Types::DescribeTopicResponse#request_id #request_id} => String
     #   * {Types::DescribeTopicResponse#status #status} => Integer
+    #   * {Types::DescribeTopicResponse#custom_instructions #custom_instructions} => Types::CustomInstructions
     #
     # @example Request syntax with placeholder values
     #
@@ -8850,6 +8877,7 @@ module Aws::QuickSight
     #   resp.topic.config_options.q_business_insights_enabled #=> Boolean
     #   resp.request_id #=> String
     #   resp.status #=> Integer
+    #   resp.custom_instructions.custom_instructions_string #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeTopic AWS API Documentation
     #
@@ -10060,6 +10088,8 @@ module Aws::QuickSight
     #   resp.custom_permissions_list[0].custom_permissions_name #=> String
     #   resp.custom_permissions_list[0].capabilities.export_to_csv #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.export_to_excel #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.export_to_pdf #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.print_reports #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.create_and_update_themes #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.add_or_run_anomaly_detection_for_analyses #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.share_analyses #=> String, one of "DENY"
@@ -10075,6 +10105,10 @@ module Aws::QuickSight
     #   resp.custom_permissions_list[0].capabilities.share_data_sources #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.view_account_spice_capacity #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.create_spice_dataset #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.export_to_pdf_in_scheduled_reports #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.export_to_csv_in_scheduled_reports #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.export_to_excel_in_scheduled_reports #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.include_content_in_scheduled_reports_email #=> String, one of "DENY"
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #
@@ -10303,6 +10337,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.amazon_elasticsearch_parameters.domain #=> String
     #   resp.data_sources[0].data_source_parameters.athena_parameters.work_group #=> String
     #   resp.data_sources[0].data_source_parameters.athena_parameters.role_arn #=> String
+    #   resp.data_sources[0].data_source_parameters.athena_parameters.identity_center_configuration.enable_identity_propagation #=> Boolean
     #   resp.data_sources[0].data_source_parameters.aurora_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.aurora_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.aurora_parameters.database #=> String
@@ -10387,6 +10422,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].amazon_elasticsearch_parameters.domain #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].athena_parameters.work_group #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].athena_parameters.role_arn #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].athena_parameters.identity_center_configuration.enable_identity_propagation #=> Boolean
     #   resp.data_sources[0].alternate_data_source_parameters[0].aurora_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].aurora_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].aurora_parameters.database #=> String
@@ -10899,7 +10935,7 @@ module Aws::QuickSight
     # @example Response structure
     #
     #   resp.services #=> Array
-    #   resp.services[0].service #=> String, one of "REDSHIFT", "QBUSINESS"
+    #   resp.services[0].service #=> String, one of "REDSHIFT", "QBUSINESS", "ATHENA"
     #   resp.services[0].authorized_targets #=> Array
     #   resp.services[0].authorized_targets[0] #=> String
     #   resp.next_token #=> String
@@ -10915,7 +10951,8 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Lists the history of SPICE ingestions for a dataset.
+    # Lists the history of SPICE ingestions for a dataset. Limited to 5 TPS
+    # per user and 25 TPS per account.
     #
     # @option params [required, String] :data_set_id
     #   The ID of the dataset used in the ingestion.
@@ -13422,6 +13459,9 @@ module Aws::QuickSight
     #             athena_parameters: {
     #               work_group: "WorkGroup",
     #               role_arn: "RoleArn",
+    #               identity_center_configuration: {
+    #                 enable_identity_propagation: false,
+    #               },
     #             },
     #             aurora_parameters: {
     #               host: "Host", # required
@@ -14710,6 +14750,8 @@ module Aws::QuickSight
     #     capabilities: {
     #       export_to_csv: "DENY", # accepts DENY
     #       export_to_excel: "DENY", # accepts DENY
+    #       export_to_pdf: "DENY", # accepts DENY
+    #       print_reports: "DENY", # accepts DENY
     #       create_and_update_themes: "DENY", # accepts DENY
     #       add_or_run_anomaly_detection_for_analyses: "DENY", # accepts DENY
     #       share_analyses: "DENY", # accepts DENY
@@ -14725,6 +14767,10 @@ module Aws::QuickSight
     #       share_data_sources: "DENY", # accepts DENY
     #       view_account_spice_capacity: "DENY", # accepts DENY
     #       create_spice_dataset: "DENY", # accepts DENY
+    #       export_to_pdf_in_scheduled_reports: "DENY", # accepts DENY
+    #       export_to_csv_in_scheduled_reports: "DENY", # accepts DENY
+    #       export_to_excel_in_scheduled_reports: "DENY", # accepts DENY
+    #       include_content_in_scheduled_reports_email: "DENY", # accepts DENY
     #     },
     #   })
     #
@@ -15471,6 +15517,9 @@ module Aws::QuickSight
     #       athena_parameters: {
     #         work_group: "WorkGroup",
     #         role_arn: "RoleArn",
+    #         identity_center_configuration: {
+    #           enable_identity_propagation: false,
+    #         },
     #       },
     #       aurora_parameters: {
     #         host: "Host", # required
@@ -15626,6 +15675,9 @@ module Aws::QuickSight
     #             athena_parameters: {
     #               work_group: "WorkGroup",
     #               role_arn: "RoleArn",
+    #               identity_center_configuration: {
+    #                 enable_identity_propagation: false,
+    #               },
     #             },
     #             aurora_parameters: {
     #               host: "Host", # required
@@ -16163,7 +16215,7 @@ module Aws::QuickSight
     #
     #   resp = client.update_identity_propagation_config({
     #     aws_account_id: "AwsAccountId", # required
-    #     service: "REDSHIFT", # required, accepts REDSHIFT, QBUSINESS
+    #     service: "REDSHIFT", # required, accepts REDSHIFT, QBUSINESS, ATHENA
     #     authorized_targets: ["String"],
     #   })
     #
@@ -17019,6 +17071,9 @@ module Aws::QuickSight
     # @option params [required, Types::TopicDetails] :topic
     #   The definition of the topic that you want to update.
     #
+    # @option params [Types::CustomInstructions] :custom_instructions
+    #   Custom instructions for the topic.
+    #
     # @return [Types::UpdateTopicResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTopicResponse#topic_id #topic_id} => String
@@ -17254,6 +17309,9 @@ module Aws::QuickSight
     #       config_options: {
     #         q_business_insights_enabled: false,
     #       },
+    #     },
+    #     custom_instructions: {
+    #       custom_instructions_string: "CustomInstructionsString", # required
     #     },
     #   })
     #
@@ -17677,7 +17735,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.146.0'
+      context[:gem_version] = '1.151.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

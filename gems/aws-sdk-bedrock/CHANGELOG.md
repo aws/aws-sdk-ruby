@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2025-07-16)
+------------------
+
+* Feature - This release adds support for on-demand custom model inference through CustomModelDeployment APIs for Amazon Bedrock.
+
+1.53.0 (2025-06-30)
+------------------
+
+* Feature - Add support for API Keys, Re-Ranker, implicit filter for RAG / KB evaluation for Bedrock APIs.
+
+1.52.0 (2025-06-24)
+------------------
+
+* Feature - We are making ListFoundationModelAgreementOffers, DeleteFoundationModelAgreement, CreateFoundationModelAgreement, GetFoundationModelAvailability, PutUseCaseForModelAccess and GetUseCaseForModelAccess APIs public, previously they were console.
+
+1.51.0 (2025-06-20)
+------------------
+
+* Feature - Add support for tiers in Content Filters and Denied Topics for Amazon Bedrock Guardrails.
+
+1.50.0 (2025-06-19)
+------------------
+
+* Feature - This release of the SDK has the API and documentation for the createcustommodel API. This feature lets you copy a trained model into Amazon Bedrock for inference.
+
+1.49.0 (2025-06-17)
+------------------
+
+* Feature - This release of the SDK has the API and documentation for the createcustommodel API. This feature lets you copy a trained model into Amazon Bedrock for inference.
+
+1.48.0 (2025-06-16)
+------------------
+
+* Feature - This release of the SDK has the API and documentation for the createcustommodel API. This feature lets you copy a Amazon SageMaker trained Amazon Nova model into Amazon Bedrock for inference.
+
+1.47.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.46.0 (2025-05-13)
+------------------
+
+* Feature - Enable cross-Region inference for Amazon Bedrock Guardrails by using the crossRegionConfig parameter when calling the CreateGuardrail or UpdateGuardrail operation.
+
+1.45.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.44.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2025-04-30)
+------------------
+
+* Feature - You can now specify a cross region inference profile as a teacher model for the CreateModelCustomizationJob API. Additionally, the GetModelCustomizationJob API has been enhanced to return the sub-task statuses of a customization job within the StatusDetails response field.
+
 1.42.0 (2025-04-17)
 ------------------
 

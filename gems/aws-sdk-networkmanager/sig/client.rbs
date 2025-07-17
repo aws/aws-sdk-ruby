@@ -401,7 +401,9 @@ module Aws
                                    subnet_arns: Array[::String],
                                    ?options: {
                                      ipv_6_support: bool?,
-                                     appliance_mode_support: bool?
+                                     appliance_mode_support: bool?,
+                                     dns_support: bool?,
+                                     security_group_referencing_support: bool?
                                    },
                                    ?tags: Array[
                                      {
@@ -1321,7 +1323,9 @@ module Aws
                                    ?remove_subnet_arns: Array[::String],
                                    ?options: {
                                      ipv_6_support: bool?,
-                                     appliance_mode_support: bool?
+                                     appliance_mode_support: bool?,
+                                     dns_support: bool?,
+                                     security_group_referencing_support: bool?
                                    }
                                  ) -> _UpdateVpcAttachmentResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVpcAttachmentResponseSuccess

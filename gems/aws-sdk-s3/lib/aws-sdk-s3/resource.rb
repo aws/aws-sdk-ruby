@@ -50,6 +50,12 @@ module Aws::S3
     #         data_redundancy: "SingleAvailabilityZone", # accepts SingleAvailabilityZone, SingleLocalZone
     #         type: "Directory", # accepts Directory
     #       },
+    #       tags: [
+    #         {
+    #           key: "ObjectKey", # required
+    #           value: "Value", # required
+    #         },
+    #       ],
     #     },
     #     grant_full_control: "GrantFullControl",
     #     grant_read: "GrantRead",

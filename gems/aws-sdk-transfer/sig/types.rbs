@@ -133,6 +133,7 @@ module Aws::Transfer
       attr_accessor workflow_details: Types::WorkflowDetails
       attr_accessor structured_log_destinations: ::Array[::String]
       attr_accessor s3_storage_options: Types::S3StorageOptions
+      attr_accessor ip_address_type: ("IPV4" | "DUALSTACK")
       SENSITIVE: [:host_key]
     end
 
@@ -560,6 +561,7 @@ module Aws::Transfer
       attr_accessor structured_log_destinations: ::Array[::String]
       attr_accessor s3_storage_options: Types::S3StorageOptions
       attr_accessor as_2_service_managed_egress_ip_addresses: ::Array[::String]
+      attr_accessor ip_address_type: ("IPV4" | "DUALSTACK")
       SENSITIVE: []
     end
 
@@ -1358,6 +1360,7 @@ module Aws::Transfer
       attr_accessor workflow_details: Types::WorkflowDetails
       attr_accessor structured_log_destinations: ::Array[::String]
       attr_accessor s3_storage_options: Types::S3StorageOptions
+      attr_accessor ip_address_type: ("IPV4" | "DUALSTACK")
       SENSITIVE: [:host_key]
     end
 

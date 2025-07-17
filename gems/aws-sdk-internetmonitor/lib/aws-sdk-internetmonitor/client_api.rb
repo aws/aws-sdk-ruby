@@ -147,7 +147,7 @@ module Aws::InternetMonitor
 
     CreateMonitorInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "MonitorName"))
     CreateMonitorInput.add_member(:resources, Shapes::ShapeRef.new(shape: SetOfARNs, location_name: "Resources"))
-    CreateMonitorInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateMonitorInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateMonitorInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateMonitorInput.add_member(:max_city_networks_to_monitor, Shapes::ShapeRef.new(shape: MaxCityNetworksToMonitor, location_name: "MaxCityNetworksToMonitor"))
     CreateMonitorInput.add_member(:internet_measurements_log_delivery, Shapes::ShapeRef.new(shape: InternetMeasurementsLogDelivery, location_name: "InternetMeasurementsLogDelivery"))
@@ -452,7 +452,7 @@ module Aws::InternetMonitor
     UpdateMonitorInput.add_member(:resources_to_add, Shapes::ShapeRef.new(shape: SetOfARNs, location_name: "ResourcesToAdd"))
     UpdateMonitorInput.add_member(:resources_to_remove, Shapes::ShapeRef.new(shape: SetOfARNs, location_name: "ResourcesToRemove"))
     UpdateMonitorInput.add_member(:status, Shapes::ShapeRef.new(shape: MonitorConfigState, location_name: "Status"))
-    UpdateMonitorInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateMonitorInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     UpdateMonitorInput.add_member(:max_city_networks_to_monitor, Shapes::ShapeRef.new(shape: MaxCityNetworksToMonitor, location_name: "MaxCityNetworksToMonitor"))
     UpdateMonitorInput.add_member(:internet_measurements_log_delivery, Shapes::ShapeRef.new(shape: InternetMeasurementsLogDelivery, location_name: "InternetMeasurementsLogDelivery"))
     UpdateMonitorInput.add_member(:traffic_percentage_to_monitor, Shapes::ShapeRef.new(shape: TrafficPercentageToMonitor, location_name: "TrafficPercentageToMonitor"))

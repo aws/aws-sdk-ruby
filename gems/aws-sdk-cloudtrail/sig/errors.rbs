@@ -75,6 +75,8 @@ module Aws
       end
       class InsufficientEncryptionPolicyException < ::Aws::Errors::ServiceError
       end
+      class InsufficientIAMAccessPermissionException < ::Aws::Errors::ServiceError
+      end
       class InsufficientS3BucketPolicyException < ::Aws::Errors::ServiceError
       end
       class InsufficientSnsTopicPolicyException < ::Aws::Errors::ServiceError

@@ -3,7 +3,7 @@
   "service": "<p>An Amazon S3 table represents a structured dataset consisting of tabular data in <a href=\"https://parquet.apache.org/docs/\">Apache Parquet</a> format and related metadata. This data is stored inside an S3 table as a subresource. All tables in a table bucket are stored in the <a href=\"https://iceberg.apache.org/docs/latest/\">Apache Iceberg</a> table format. Through integration with the <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/glue/latest/dg/catalog-and-crawler.html\">Amazon Web Services Glue Data Catalog</a> you can interact with your tables using Amazon Web Services analytics services, such as <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/athena/\">Amazon Athena</a> and <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/redshift/\">Amazon Redshift</a>. Amazon S3 manages maintenance of your tables through automatic file compaction and snapshot management. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets.html\">Amazon S3 table buckets</a>.</p>",
   "operations": {
     "CreateNamespace": "<p>Creates a namespace. A namespace is a logical grouping of tables within your table bucket, which you can use to organize tables. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-namespace-create.html\">Create a namespace</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:CreateNamespace</code> permission to use this operation. </p> </dd> </dl>",
-    "CreateTable": "<p>Creates a new table associated with the given namespace in a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-create.html\">Creating an Amazon S3 table</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p>You must have the <code>s3tables:CreateTable</code> permission to use this operation. </p> </li> <li> <p>If you use this operation with the optional <code>metadata</code> request parameter you must have the <code>s3tables:PutTableData</code> permission. </p> </li> <li> <p>If you use this operation with the optional <code>encryptionConfiguration</code> request parameter you must have the <code>s3tables:PutTableEncryption</code> permission. </p> </li> </ul> <note> <p>Additionally, </p> </note> </dd> </dl>",
+    "CreateTable": "<p>Creates a new table associated with the given namespace in a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-create.html\">Creating an Amazon S3 table</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p>You must have the <code>s3tables:CreateTable</code> permission to use this operation. </p> </li> <li> <p>If you use this operation with the optional <code>metadata</code> request parameter you must have the <code>s3tables:PutTableData</code> permission. </p> </li> <li> <p>If you use this operation with the optional <code>encryptionConfiguration</code> request parameter you must have the <code>s3tables:PutTableEncryption</code> permission. </p> </li> </ul> <note> <p>Additionally, If you choose SSE-KMS encryption you must grant the S3 Tables maintenance principal access to your KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html\">Permissions requirements for S3 Tables SSE-KMS encryption</a>. </p> </note> </dd> </dl>",
     "CreateTableBucket": "<p>Creates a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-create.html\">Creating a table bucket</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p>You must have the <code>s3tables:CreateTableBucket</code> permission to use this operation. </p> </li> <li> <p>If you use this operation with the optional <code>encryptionConfiguration</code> parameter you must have the <code>s3tables:PutTableBucketEncryption</code> permission.</p> </li> </ul> </dd> </dl>",
     "DeleteNamespace": "<p>Deletes a namespace. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-namespace-delete.html\">Delete a namespace</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:DeleteNamespace</code> permission to use this operation. </p> </dd> </dl>",
     "DeleteTable": "<p>Deletes a table. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-delete.html\">Deleting an Amazon S3 table</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:DeleteTable</code> permission to use this operation. </p> </dd> </dl>",
@@ -18,14 +18,14 @@
     "GetTableBucketMaintenanceConfiguration": "<p>Gets details about a maintenance configuration for a given table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-table-buckets-maintenance.html\">Amazon S3 table bucket maintenance</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableBucketMaintenanceConfiguration</code> permission to use this operation. </p> </dd> </dl>",
     "GetTableBucketPolicy": "<p>Gets details about a table bucket policy. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-bucket-policy.html#table-bucket-policy-get\">Viewing a table bucket policy</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableBucketPolicy</code> permission to use this operation. </p> </dd> </dl>",
     "GetTableEncryption": "<p>Gets the encryption configuration for a table.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableEncryption</code> permission to use this operation.</p> </dd> </dl>",
-    "GetTableMaintenanceConfiguration": "<p>Gets details about the maintenance configuration of a table. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-maintenance.html\">S3 Tables maintenance</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableMaintenanceConfiguration</code> permission to use this operation. </p> </dd> </dl>",
+    "GetTableMaintenanceConfiguration": "<p>Gets details about the maintenance configuration of a table. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-maintenance.html\">S3 Tables maintenance</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p>You must have the <code>s3tables:GetTableMaintenanceConfiguration</code> permission to use this operation. </p> </li> <li> <p>You must have the <code>s3tables:GetTableData</code> permission to use set the compaction strategy to <code>sort</code> or <code>zorder</code>.</p> </li> </ul> </dd> </dl>",
     "GetTableMaintenanceJobStatus": "<p>Gets the status of a maintenance job for a table. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-maintenance.html\">S3 Tables maintenance</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableMaintenanceJobStatus</code> permission to use this operation. </p> </dd> </dl>",
     "GetTableMetadataLocation": "<p>Gets the location of the table metadata.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableMetadataLocation</code> permission to use this operation. </p> </dd> </dl>",
     "GetTablePolicy": "<p>Gets details about a table policy. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-table-policy.html#table-policy-get\">Viewing a table policy</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTablePolicy</code> permission to use this operation. </p> </dd> </dl>",
     "ListNamespaces": "<p>Lists the namespaces within a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-namespace.html\">Table namespaces</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:ListNamespaces</code> permission to use this operation. </p> </dd> </dl>",
     "ListTableBuckets": "<p>Lists table buckets for your account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets.html\">S3 Table buckets</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:ListTableBuckets</code> permission to use this operation. </p> </dd> </dl>",
     "ListTables": "<p>List tables in the given table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-tables.html\">S3 Tables</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:ListTables</code> permission to use this operation. </p> </dd> </dl>",
-    "PutTableBucketEncryption": "<p>Sets the encryption configuration for a table bucket.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTableBucketEncryption</code> permission to use this operation.</p> <note> <p>If you choose SSE-KMS encryption you must grant the S3 Tables maintenance principal access to your KMS key. For more information, see <a href=\"AmazonS3/latest/userguide/s3-tables-kms-permissions.html\">Permissions requirements for S3 Tables SSE-KMS encryption</a> </p> </note> </dd> </dl>",
+    "PutTableBucketEncryption": "<p>Sets the encryption configuration for a table bucket.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTableBucketEncryption</code> permission to use this operation.</p> <note> <p>If you choose SSE-KMS encryption you must grant the S3 Tables maintenance principal access to your KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html\">Permissions requirements for S3 Tables SSE-KMS encryption</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> </note> </dd> </dl>",
     "PutTableBucketMaintenanceConfiguration": "<p>Creates a new maintenance configuration or replaces an existing maintenance configuration for a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-table-buckets-maintenance.html\">Amazon S3 table bucket maintenance</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTableBucketMaintenanceConfiguration</code> permission to use this operation. </p> </dd> </dl>",
     "PutTableBucketPolicy": "<p>Creates a new maintenance configuration or replaces an existing table bucket policy for a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-bucket-policy.html#table-bucket-policy-add\">Adding a table bucket policy</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTableBucketPolicy</code> permission to use this operation. </p> </dd> </dl>",
     "PutTableMaintenanceConfiguration": "<p>Creates a new maintenance configuration or replaces an existing maintenance configuration for a table. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-maintenance.html\">S3 Tables maintenance</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTableMaintenanceConfiguration</code> permission to use this operation. </p> </dd> </dl>",
@@ -36,8 +36,7 @@
   "shapes": {
     "AccessDeniedException": {
       "base": "<p>The action cannot be performed because you do not have the required permission.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "AccountId": {
       "base": null,
@@ -55,8 +54,7 @@
     },
     "BadRequestException": {
       "base": "<p>The request is invalid or malformed.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "Boolean": {
       "base": null,
@@ -66,13 +64,11 @@
     },
     "ConflictException": {
       "base": "<p>The request failed because there is a conflict with a previous write. You can retry the request.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateNamespaceRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateNamespaceRequestNamespaceList": {
       "base": null,
@@ -82,58 +78,47 @@
     },
     "CreateNamespaceResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateTableBucketRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateTableBucketResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateTableRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateTableResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteNamespaceRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteTableBucketEncryptionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteTableBucketPolicyRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteTableBucketRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteTablePolicyRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteTableRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "EncryptionConfiguration": {
       "base": "<p>Configuration specifying how data should be encrypted. This structure defines the encryption algorithm and optional KMS key to be used for server-side encryption.</p>",
@@ -165,123 +150,106 @@
     },
     "ForbiddenException": {
       "base": "<p>The caller isn't authorized to make the request.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "GetNamespaceRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetNamespaceResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableBucketEncryptionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableBucketEncryptionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableBucketMaintenanceConfigurationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableBucketMaintenanceConfigurationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableBucketPolicyRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableBucketPolicyResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableBucketRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableBucketResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableEncryptionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableEncryptionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableMaintenanceConfigurationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableMaintenanceConfigurationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableMaintenanceJobStatusRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableMaintenanceJobStatusResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableMetadataLocationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableMetadataLocationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTablePolicyRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTablePolicyResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetTableResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "IcebergCompactionSettings": {
       "base": "<p>Contains details about the compaction settings for an Iceberg table.</p>",
       "refs": {
         "TableMaintenanceSettings$icebergCompaction": "<p>Contains details about the Iceberg compaction settings for the table.</p>"
+      }
+    },
+    "IcebergCompactionStrategy": {
+      "base": null,
+      "refs": {
+        "IcebergCompactionSettings$strategy": "<p>The compaction strategy to use for the table. This determines how files are selected and combined during compaction operations.</p>"
       }
     },
     "IcebergMetadata": {
@@ -310,8 +278,7 @@
     },
     "InternalServerErrorException": {
       "base": "<p>The request failed due to an internal server error.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "JobStatus": {
       "base": null,
@@ -327,8 +294,7 @@
     },
     "ListNamespacesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListNamespacesRequestPrefixString": {
       "base": null,
@@ -338,8 +304,7 @@
     },
     "ListNamespacesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListTableBucketsLimit": {
       "base": null,
@@ -349,8 +314,7 @@
     },
     "ListTableBucketsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListTableBucketsRequestPrefixString": {
       "base": null,
@@ -360,8 +324,7 @@
     },
     "ListTableBucketsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListTablesLimit": {
       "base": null,
@@ -371,8 +334,7 @@
     },
     "ListTablesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListTablesRequestPrefixString": {
       "base": null,
@@ -382,8 +344,7 @@
     },
     "ListTablesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "MaintenanceStatus": {
       "base": null,
@@ -432,7 +393,7 @@
         "GetNamespaceRequest$namespace": "<p>The name of the namespace.</p>",
         "GetTableEncryptionRequest$namespace": "<p>The namespace associated with the table.</p>",
         "GetTableMaintenanceConfigurationRequest$namespace": "<p>The namespace associated with the table.</p>",
-        "GetTableMaintenanceJobStatusRequest$namespace": "<p>The name of the namespace the table is associated with. <pre><code>&lt;/p&gt; </code></pre>",
+        "GetTableMaintenanceJobStatusRequest$namespace": "<p>The name of the namespace the table is associated with. </p>",
         "GetTableMetadataLocationRequest$namespace": "<p>The namespace of the table.</p>",
         "GetTablePolicyRequest$namespace": "<p>The namespace associated with the table.</p>",
         "GetTableRequest$namespace": "<p>The name of the namespace the table is associated with.</p>",
@@ -470,8 +431,7 @@
     },
     "NotFoundException": {
       "base": "<p>The request was rejected because the specified resource could not be found.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "OpenTableFormat": {
       "base": null,
@@ -492,33 +452,27 @@
     },
     "PutTableBucketEncryptionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "PutTableBucketMaintenanceConfigurationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "PutTableBucketPolicyRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "PutTableMaintenanceConfigurationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "PutTablePolicyRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "RenameTableRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ResourcePolicy": {
       "base": null,
@@ -576,6 +530,7 @@
         "CreateTableResponse$tableARN": "<p>The Amazon Resource Name (ARN) of the table.</p>",
         "GetTableMaintenanceConfigurationResponse$tableARN": "<p>The Amazon Resource Name (ARN) of the table.</p>",
         "GetTableMaintenanceJobStatusResponse$tableARN": "<p>The Amazon Resource Name (ARN) of the table.</p>",
+        "GetTableRequest$tableArn": "<p>The Amazon Resource Name (ARN) of the table.</p>",
         "GetTableResponse$tableARN": "<p>The Amazon Resource Name (ARN) of the table.</p>",
         "TableSummary$tableARN": "<p>The Amazon Resource Name (ARN) of the table.</p>",
         "UpdateTableMetadataLocationResponse$tableARN": "<p>The Amazon Resource Name (ARN) of the table.</p>"
@@ -676,6 +631,14 @@
         "ListTableBucketsResponse$tableBuckets": "<p>A list of table buckets.</p>"
       }
     },
+    "TableBucketType": {
+      "base": null,
+      "refs": {
+        "GetTableBucketResponse$type": "<p>The type of the table bucket.</p>",
+        "ListTableBucketsRequest$type": "<p>The type of table buckets to filter by in the list.</p>",
+        "TableBucketSummary$type": "<p>The type of the table bucket.</p>"
+      }
+    },
     "TableMaintenanceConfiguration": {
       "base": null,
       "refs": {
@@ -769,18 +732,15 @@
     },
     "TooManyRequestsException": {
       "base": "<p>The limit on the number of requests per second was exceeded.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateTableMetadataLocationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateTableMetadataLocationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "VersionToken": {
       "base": null,

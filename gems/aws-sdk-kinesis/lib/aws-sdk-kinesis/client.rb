@@ -202,8 +202,7 @@ module Aws::Kinesis
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -508,7 +507,9 @@ module Aws::Kinesis
     #   The name of the stream.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   A set of up to 10 key-value pairs to use to create the tags.
+    #   A set of up to 50 key-value pairs to use to create the tags. A tag
+    #   consists of a required key and an optional value. You can add up to 50
+    #   tags per resource.
     #
     # @option params [String] :stream_arn
     #   The ARN of the stream.
@@ -584,11 +585,13 @@ module Aws::Kinesis
     # CreateStream has a limit of five transactions per second per account.
     #
     # You can add tags to the stream when making a `CreateStream` request by
-    # setting the `Tags` parameter. If you pass `Tags` parameter, in
-    # addition to having `kinesis:createStream` permission, you must also
-    # have `kinesis:addTagsToStream` permission for the stream that will be
-    # created. Tags will take effect from the `CREATING` status of the
-    # stream.
+    # setting the `Tags` parameter. If you pass the `Tags` parameter, in
+    # addition to having the `kinesis:CreateStream` permission, you must
+    # also have the `kinesis:AddTagsToStream` permission for the stream that
+    # will be created. The `kinesis:TagResource` permission won’t work to
+    # tag streams on creation. Tags will take effect from the `CREATING`
+    # status of the stream, but you can't make any updates to the tags
+    # until the stream is in `ACTIVE` state.
     #
     #
     #
@@ -614,7 +617,8 @@ module Aws::Kinesis
     #   and a **provisioned** capacity mode for your data streams.
     #
     # @option params [Hash<String,String>] :tags
-    #   A set of up to 10 key-value pairs to use to create the tags.
+    #   A set of up to 50 key-value pairs to use to create the tags. A tag
+    #   consists of a required key and an optional value.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1891,6 +1895,46 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
+    # List all tags added to the specified Kinesis resource. Each tag is a
+    # label consisting of a user-defined key and value. Tags can help you
+    # manage, identify, organize, search for, and filter resources.
+    #
+    # For more information about tagging Kinesis resources, see [Tag your
+    # Amazon Kinesis Data Streams resources][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/streams/latest/dev/tagging.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Kinesis resource for which to
+    #   list tags.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Lists the tags for the specified Kinesis data stream. This operation
     # has a limit of five transactions per second per account.
     #
@@ -2353,6 +2397,14 @@ module Aws::Kinesis
     # unaffected by the total number of consumers that read from the same
     # stream.
     #
+    # You can add tags to the registered consumer when making a
+    # `RegisterStreamConsumer` request by setting the `Tags` parameter. If
+    # you pass the `Tags` parameter, in addition to having the
+    # `kinesis:RegisterStreamConsumer` permission, you must also have the
+    # `kinesis:TagResource` permission for the consumer that will be
+    # registered. Tags will take effect from the `CREATING` status of the
+    # consumer.
+    #
     # You can register up to 20 consumers per stream. A given consumer can
     # only be registered with one stream at a time.
     #
@@ -2383,6 +2435,10 @@ module Aws::Kinesis
     #   name. However, consumer names don't have to be unique across data
     #   streams.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A set of up to 50 key-value pairs. A tag consists of a required key
+    #   and an optional value.
+    #
     # @return [Types::RegisterStreamConsumerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterStreamConsumerOutput#consumer #consumer} => Types::Consumer
@@ -2392,6 +2448,9 @@ module Aws::Kinesis
     #   resp = client.register_stream_consumer({
     #     stream_arn: "StreamARN", # required
     #     consumer_name: "ConsumerName", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2710,6 +2769,74 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
+    # Adds or updates tags for the specified Kinesis resource. Each tag is a
+    # label consisting of a user-defined key and value. Tags can help you
+    # manage, identify, organize, search for, and filter resources. You can
+    # assign up to 50 tags to a Kinesis resource.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   An array of tags to be added to the Kinesis resource. A tag consists
+    #   of a required key and an optional value. You can add up to 50 tags per
+    #   resource.
+    #
+    #   Tags may only contain Unicode letters, digits, white space, or these
+    #   symbols: \_ . : / = + - @.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Kinesis resource to which to add
+    #   tags.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #     resource_arn: "ResourceARN", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from the specified Kinesis resource. Removed tags are
+    # deleted and can't be recovered after this operation completes
+    # successfully.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of tag key-value pairs. Existing tags of the resource whose
+    #   keys are members of this list will be removed from the Kinesis
+    #   resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Kinesis resource from which to
+    #   remove tags.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     tag_keys: ["TagKey"], # required
+    #     resource_arn: "ResourceARN", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates the shard count of the specified stream to the specified
     # number of shards. This API is only supported for the data streams with
     # the provisioned capacity mode.
@@ -2877,7 +3004,7 @@ module Aws::Kinesis
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

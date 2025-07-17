@@ -5,6 +5,9 @@
   "ACMPCA": {
     "models": "acm-pca/2017-08-22"
   },
+  "AIOps": {
+    "models": "aiops/2018-05-10"
+  },
   "APIGateway": {
     "models": "apigateway/2015-07-09",
     "addPlugins": [
@@ -128,6 +131,12 @@
   },
   "BedrockAgent": {
     "models": "bedrock-agent/2023-06-05"
+  },
+  "BedrockAgentCore": {
+    "models": "bedrock-agentcore/2024-02-28"
+  },
+  "BedrockAgentCoreControl": {
+    "models": "bedrock-agentcore-control/2023-06-05"
   },
   "BedrockAgentRuntime": {
     "models": "bedrock-agent-runtime/2023-07-26"
@@ -473,6 +482,9 @@
   "EventBridge": {
     "models": "eventbridge/2015-10-07"
   },
+  "Evs": {
+    "models": "evs/2023-07-27"
+  },
   "FIS": {
     "models": "fis/2020-12-01"
   },
@@ -659,6 +671,9 @@
   "Keyspaces": {
     "models": "keyspaces/2022-02-10"
   },
+  "KeyspacesStreams": {
+    "models": "keyspacesstreams/2024-09-09"
+  },
   "Kinesis": {
     "models": "kinesis/2013-12-02"
   },
@@ -727,6 +742,9 @@
   },
   "LookoutforVision": {
     "models": "lookoutvision/2020-11-20"
+  },
+  "MPA": {
+    "models": "mpa/2022-07-26"
   },
   "MQ": {
     "models": "mq/2017-11-27"
@@ -872,6 +890,9 @@
   "ObservabilityAdmin": {
     "models": "observabilityadmin/2018-05-10"
   },
+  "Odb": {
+    "models": "odb/2024-08-20"
+  },
   "Omics": {
     "models": "omics/2022-11-28"
   },
@@ -946,9 +967,6 @@
   },
   "Pricing": {
     "models": "pricing/2017-10-15"
-  },
-  "PrivateNetworks": {
-    "models": "privatenetworks/2021-12-03"
   },
   "PrometheusService": {
     "models": "amp/2020-08-01"
@@ -1089,6 +1107,9 @@
   "S3Tables": {
     "models": "s3tables/2018-05-10"
   },
+  "S3Vectors": {
+    "models": "s3vectors/2025-07-15"
+  },
   "SES": {
     "models": "email/2010-12-01"
   },
@@ -1113,6 +1134,9 @@
   },
   "SSMContacts": {
     "models": "ssm-contacts/2021-05-03"
+  },
+  "SSMGuiConnect": {
+    "models": "ssm-guiconnect/2021-05-01"
   },
   "SSMIncidents": {
     "models": "ssm-incidents/2018-05-10"
@@ -1312,6 +1336,9 @@
   },
   "WorkSpacesWeb": {
     "models": "workspaces-web/2020-07-08"
+  },
+  "WorkspacesInstances": {
+    "models": "workspaces-instances/2022-07-26"
   },
   "XRay": {
     "models": "xray/2016-04-12"

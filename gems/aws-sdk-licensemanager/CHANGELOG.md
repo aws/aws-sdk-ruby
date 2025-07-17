@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2025-06-24)
+------------------
+
+* Feature - AWS License Manager now supports license type conversions for AWS Marketplace products. Customers can provide Marketplace codes in the source license context or destination license context in the CreateLicenseConversionTaskForResource requests.
+
+1.74.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2025-05-13)
+------------------
+
+* Feature - Add Tagging feature to resources in the Managed Entitlements service. License and Grant resources can now be tagged.
+
+1.72.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.71.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.70.0 (2025-02-18)
 ------------------
 

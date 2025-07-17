@@ -31,6 +31,7 @@ module Aws::EMRServerless
       attr_accessor monitoring_configuration: Types::MonitoringConfiguration
       attr_accessor interactive_configuration: Types::InteractiveConfiguration
       attr_accessor scheduler_configuration: Types::SchedulerConfiguration
+      attr_accessor identity_center_configuration: Types::IdentityCenterConfiguration
       SENSITIVE: []
     end
 
@@ -62,6 +63,7 @@ module Aws::EMRServerless
     class CancelJobRunRequest
       attr_accessor application_id: ::String
       attr_accessor job_run_id: ::String
+      attr_accessor shutdown_grace_period_in_seconds: ::Integer
       SENSITIVE: []
     end
 
@@ -116,6 +118,7 @@ module Aws::EMRServerless
       attr_accessor monitoring_configuration: Types::MonitoringConfiguration
       attr_accessor interactive_configuration: Types::InteractiveConfiguration
       attr_accessor scheduler_configuration: Types::SchedulerConfiguration
+      attr_accessor identity_center_configuration: Types::IdentityCenterConfigurationInput
       SENSITIVE: []
     end
 
@@ -176,6 +179,17 @@ module Aws::EMRServerless
       SENSITIVE: [:query, :init_query_file, :parameters]
     end
 
+    class IdentityCenterConfiguration
+      attr_accessor identity_center_instance_arn: ::String
+      attr_accessor identity_center_application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class IdentityCenterConfigurationInput
+      attr_accessor identity_center_instance_arn: ::String
+      SENSITIVE: []
+    end
+
     class ImageConfiguration
       attr_accessor image_uri: ::String
       attr_accessor resolved_image_digest: ::String
@@ -227,6 +241,7 @@ module Aws::EMRServerless
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor execution_role: ::String
+      attr_accessor execution_iam_policy: Types::JobRunExecutionIamPolicy
       attr_accessor state: ("SUBMITTED" | "PENDING" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "FAILED" | "CANCELLING" | "CANCELLED" | "QUEUED")
       attr_accessor state_details: ::String
       attr_accessor release_label: ::String
@@ -265,6 +280,12 @@ module Aws::EMRServerless
       attr_accessor release_label: ::String
       attr_accessor type: ::String
       attr_accessor attempt: ::Integer
+      SENSITIVE: []
+    end
+
+    class JobRunExecutionIamPolicy
+      attr_accessor policy: ::String
+      attr_accessor policy_arns: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -428,6 +449,7 @@ module Aws::EMRServerless
       attr_accessor application_id: ::String
       attr_accessor client_token: ::String
       attr_accessor execution_role_arn: ::String
+      attr_accessor execution_iam_policy: Types::JobRunExecutionIamPolicy
       attr_accessor job_driver: Types::JobDriver
       attr_accessor configuration_overrides: Types::ConfigurationOverrides
       attr_accessor tags: ::Hash[::String, ::String]
@@ -494,6 +516,7 @@ module Aws::EMRServerless
       attr_accessor runtime_configuration: ::Array[Types::Configuration]
       attr_accessor monitoring_configuration: Types::MonitoringConfiguration
       attr_accessor scheduler_configuration: Types::SchedulerConfiguration
+      attr_accessor identity_center_configuration: Types::IdentityCenterConfigurationInput
       SENSITIVE: []
     end
 

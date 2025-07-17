@@ -60,6 +60,11 @@ module Aws::S3Control
   #
   #   @return [Boolean]
   #
+  # @!attribute resource_arn
+  #   The resource ARN included in the request.  Only set on TagResource, UntagResourceand ListTagsForResource
+  #
+  #   @return [String]
+  #
   # @!attribute use_s3_express_control_endpoint
   #   Internal parameter to indicate whether S3Express operation should use control plane, (ex. ListDirectoryAccessPoints)
   #
@@ -76,6 +81,7 @@ module Aws::S3Control
     :bucket,
     :access_point_name,
     :use_arn_region,
+    :resource_arn,
     :use_s3_express_control_endpoint,
   ) do
     include Aws::Structure
@@ -93,6 +99,7 @@ module Aws::S3Control
         'Bucket' => :bucket,
         'AccessPointName' => :access_point_name,
         'UseArnRegion' => :use_arn_region,
+        'ResourceArn' => :resource_arn,
         'UseS3ExpressControlEndpoint' => :use_s3_express_control_endpoint,
       }.freeze
     end
@@ -110,6 +117,7 @@ module Aws::S3Control
       self[:bucket] = options[:bucket]
       self[:access_point_name] = options[:access_point_name]
       self[:use_arn_region] = options[:use_arn_region]
+      self[:resource_arn] = options[:resource_arn]
       self[:use_s3_express_control_endpoint] = options[:use_s3_express_control_endpoint]
     end
 

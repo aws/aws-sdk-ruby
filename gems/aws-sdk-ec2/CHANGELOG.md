@@ -1,6 +1,116 @@
 Unreleased Changes
 ------------------
 
+1.538.0 (2025-07-15)
+------------------
+
+* Feature - This release adds support for volume initialization status, which enables you to monitor when the initialization process for an EBS volume is completed. This release also adds IPv6 support to EC2 Instance Connect Endpoints, allowing you to connect to your EC2 Instance via a private IPv6 address.
+
+1.537.0 (2025-07-09)
+------------------
+
+* Feature - Adds support to Capacity Blocks for ML for purchasing EC2 P6e-GB200 UltraServers. Customers can now purchase u-p6e-gb200x72 and u-p6e-gb200x36 UltraServers. Adds new DescribeCapacityBlocks andDescribeCapacityBlockStatus APIs. Adds support for CapacityBlockId to DescribeInstanceTopology.
+
+1.536.0 (2025-07-03)
+------------------
+
+* Feature - This release adds GroupOwnerId as a response member to the DescribeSecurityGroupVpcAssociations API and also adds waiters for SecurityGroupVpcAssociations (SecurityGroupVpcAssociationAssociated and SecurityGroupVpcAssociationDisassociated).
+
+1.535.0 (2025-07-02)
+------------------
+
+* Feature - AWS Site-to-Site VPN now supports IPv6 addresses on outer tunnel IPs, making it easier for customers to build or transition to IPv6-only networks.
+
+1.534.0 (2025-07-01)
+------------------
+
+* Feature - Add Context to GetInstanceTypesFromInstanceRequirements API
+
+1.533.0 (2025-06-26)
+------------------
+
+* Feature - This release adds support for OdbNetworkArn as a target in VPC Route Tables
+
+1.532.0 (2025-06-24)
+------------------
+
+* Feature - This release allows you to create and register AMIs while maintaining their underlying EBS snapshots within Local Zones.
+
+1.531.0 (2025-06-09)
+------------------
+
+* Feature - Release to support Elastic VMware Service (Amazon EVS) Subnet and Amazon EVS Network Interface Types.
+
+1.530.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.529.0 (2025-05-28)
+------------------
+
+* Feature - Enable the option to automatically delete underlying Amazon EBS snapshots when deregistering Amazon Machine Images (AMIs)
+
+1.528.0 (2025-05-27)
+------------------
+
+* Feature - This release adds three features - option to store AWS Site-to-Site VPN pre-shared keys in AWS Secrets Manager, GetActiveVpnTunnelStatus API to check the in-use VPN algorithms, and SampleType option in GetVpnConnectionDeviceSampleConfiguration API to get recommended sample configs for VPN devices.
+
+1.527.0 (2025-05-23)
+------------------
+
+* Feature - This release adds support for the C7i-flex, M7i-flex, I7i, I7ie, I8g, P6-b200, Trn2, C8gd, M8gd and R8gd instances
+
+1.526.0 (2025-05-21)
+------------------
+
+* Feature - Release of Dualstack and Ipv6-only EC2 Public DNS hostnames
+
+1.525.0 (2025-05-20)
+------------------
+
+* Feature - This release expands the ModifyInstanceMaintenanceOptions API to enable or disable instance migration during customer-initiated reboots for EC2 Scheduled Reboot Events.
+
+1.524.0 (2025-05-19)
+------------------
+
+* Feature - This release includes new APIs for System Integrity Protection (SIP) configuration and automated root volume ownership delegation for EC2 Mac instances.
+
+1.523.0 (2025-05-12)
+------------------
+
+* Feature - EC2 - Adding support for AvailabilityZoneId
+
+1.522.0 (2025-05-08)
+------------------
+
+* Feature - Launching the feature to support ENA queues offering flexibility to support multiple queues per Enhanced Network Interface (ENI)
+
+1.521.0 (2025-05-07)
+------------------
+
+* Feature - This release adds API support for Path Component Exclusion (Filter Out ARN) for Reachability Analyzer
+
+1.520.0 (2025-05-06)
+------------------
+
+* Feature - This release adds support for Amazon EBS Provisioned Rate for Volume Initialization, which lets you specify a volume initialization rate to ensure that your EBS volumes are initialized in a predictable amount of time.
+
+1.519.0 (2025-05-05)
+------------------
+
+* Feature - This update introduces API operations to manage and create local gateway VIF and VIF groups. It also includes API operations to describe Outpost LAGs and service link VIFs.
+
+1.518.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.517.0 (2025-04-30)
+------------------
+
+* Feature - Launch of cost distribution feature for IPAM owners to distribute costs to internal teams.
+
 1.516.0 (2025-04-22)
 ------------------
 

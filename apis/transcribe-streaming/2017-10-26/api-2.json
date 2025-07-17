@@ -640,7 +640,12 @@
       "type":"string",
       "enum":[
         "HISTORY_AND_PHYSICAL",
-        "GIRPP"
+        "GIRPP",
+        "DAP",
+        "SIRP",
+        "BIRP",
+        "BEHAVIORAL_SOAP",
+        "PHYSICAL_SOAP"
       ]
     },
     "MedicalScribeParticipantRole":{

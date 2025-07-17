@@ -200,8 +200,7 @@ module Aws::S3Tables
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -533,13 +532,17 @@ module Aws::S3Tables
     #     `encryptionConfiguration` request parameter you must have the
     #     `s3tables:PutTableEncryption` permission.
     #
-    #   <note markdown="1"> Additionally,
+    #   <note markdown="1"> Additionally, If you choose SSE-KMS encryption you must grant the S3
+    #   Tables maintenance principal access to your KMS key. For more
+    #   information, see [Permissions requirements for S3 Tables SSE-KMS
+    #   encryption][2].
     #
     #    </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-create.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html
     #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket to create the table
@@ -949,15 +952,18 @@ module Aws::S3Tables
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-tables.html
     #
-    # @option params [required, String] :table_bucket_arn
+    # @option params [String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket associated with the
     #   table.
     #
-    # @option params [required, String] :namespace
+    # @option params [String] :namespace
     #   The name of the namespace the table is associated with.
     #
-    # @option params [required, String] :name
+    # @option params [String] :name
     #   The name of the table.
+    #
+    # @option params [String] :table_arn
+    #   The Amazon Resource Name (ARN) of the table.
     #
     # @return [Types::GetTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -981,9 +987,10 @@ module Aws::S3Tables
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_table({
-    #     table_bucket_arn: "TableBucketARN", # required
-    #     namespace: "NamespaceName", # required
-    #     name: "TableName", # required
+    #     table_bucket_arn: "TableBucketARN",
+    #     namespace: "NamespaceName",
+    #     name: "TableName",
+    #     table_arn: "TableARN",
     #   })
     #
     # @example Response structure
@@ -1038,6 +1045,7 @@ module Aws::S3Tables
     #   * {Types::GetTableBucketResponse#owner_account_id #owner_account_id} => String
     #   * {Types::GetTableBucketResponse#created_at #created_at} => Time
     #   * {Types::GetTableBucketResponse#table_bucket_id #table_bucket_id} => String
+    #   * {Types::GetTableBucketResponse#type #type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1052,6 +1060,7 @@ module Aws::S3Tables
     #   resp.owner_account_id #=> String
     #   resp.created_at #=> Time
     #   resp.table_bucket_id #=> String
+    #   resp.type #=> String, one of "customer", "aws"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/GetTableBucket AWS API Documentation
     #
@@ -1228,9 +1237,11 @@ module Aws::S3Tables
     # Storage Service User Guide*.
     #
     # Permissions
+    # : * You must have the `s3tables:GetTableMaintenanceConfiguration`
+    #     permission to use this operation.
     #
-    # : You must have the `s3tables:GetTableMaintenanceConfiguration`
-    #   permission to use this operation.
+    #   * You must have the `s3tables:GetTableData` permission to use set
+    #     the compaction strategy to `sort` or `zorder`.
     #
     #
     #
@@ -1264,6 +1275,7 @@ module Aws::S3Tables
     #   resp.configuration #=> Hash
     #   resp.configuration["TableMaintenanceType"].status #=> String, one of "enabled", "disabled"
     #   resp.configuration["TableMaintenanceType"].settings.iceberg_compaction.target_file_size_mb #=> Integer
+    #   resp.configuration["TableMaintenanceType"].settings.iceberg_compaction.strategy #=> String, one of "auto", "binpack", "sort", "z-order"
     #   resp.configuration["TableMaintenanceType"].settings.iceberg_snapshot_management.min_snapshots_to_keep #=> Integer
     #   resp.configuration["TableMaintenanceType"].settings.iceberg_snapshot_management.max_snapshot_age_hours #=> Integer
     #
@@ -1293,7 +1305,7 @@ module Aws::S3Tables
     #   The Amazon Resource Name (ARN) of the table bucket.
     #
     # @option params [required, String] :namespace
-    #   The name of the namespace the table is associated with.     </p>
+    #   The name of the namespace the table is associated with.
     #
     # @option params [required, String] :name
     #   The name of the maintenance job.
@@ -1509,6 +1521,9 @@ module Aws::S3Tables
     # @option params [Integer] :max_buckets
     #   The maximum number of table buckets to return in the list.
     #
+    # @option params [String] :type
+    #   The type of table buckets to filter by in the list.
+    #
     # @return [Types::ListTableBucketsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTableBucketsResponse#table_buckets #table_buckets} => Array&lt;Types::TableBucketSummary&gt;
@@ -1522,6 +1537,7 @@ module Aws::S3Tables
     #     prefix: "ListTableBucketsRequestPrefixString",
     #     continuation_token: "NextToken",
     #     max_buckets: 1,
+    #     type: "customer", # accepts customer, aws
     #   })
     #
     # @example Response structure
@@ -1532,6 +1548,7 @@ module Aws::S3Tables
     #   resp.table_buckets[0].owner_account_id #=> String
     #   resp.table_buckets[0].created_at #=> Time
     #   resp.table_buckets[0].table_bucket_id #=> String
+    #   resp.table_buckets[0].type #=> String, one of "customer", "aws"
     #   resp.continuation_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/ListTableBuckets AWS API Documentation
@@ -1622,10 +1639,14 @@ module Aws::S3Tables
     #
     #   <note markdown="1"> If you choose SSE-KMS encryption you must grant the S3 Tables
     #   maintenance principal access to your KMS key. For more information,
-    #   see [Permissions requirements for S3 Tables SSE-KMS
-    #   encryption](AmazonS3/latest/userguide/s3-tables-kms-permissions.html)
+    #   see [Permissions requirements for S3 Tables SSE-KMS encryption][1]
+    #   in the *Amazon Simple Storage Service User Guide*.
     #
     #    </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html
     #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket.
@@ -1788,6 +1809,7 @@ module Aws::S3Tables
     #       settings: {
     #         iceberg_compaction: {
     #           target_file_size_mb: 1,
+    #           strategy: "auto", # accepts auto, binpack, sort, z-order
     #         },
     #         iceberg_snapshot_management: {
     #           min_snapshots_to_keep: 1,
@@ -1984,7 +2006,7 @@ module Aws::S3Tables
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3tables'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

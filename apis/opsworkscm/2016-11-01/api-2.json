@@ -469,8 +469,7 @@
     },
     "DeleteBackupResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteServerRequest":{
       "type":"structure",
@@ -481,13 +480,11 @@
     },
     "DeleteServerResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DescribeAccountAttributesRequest":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DescribeAccountAttributesResponse":{
       "type":"structure",
@@ -874,8 +871,7 @@
     },
     "TagResourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "TagValue":{
       "type":"string",
@@ -902,8 +898,7 @@
     },
     "UntagResourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "UpdateServerEngineAttributesRequest":{
       "type":"structure",

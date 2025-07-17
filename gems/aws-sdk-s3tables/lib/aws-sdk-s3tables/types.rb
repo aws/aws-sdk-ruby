@@ -501,6 +501,10 @@ module Aws::S3Tables
     #   The unique identifier of the table bucket.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of the table bucket.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/GetTableBucketResponse AWS API Documentation
     #
     class GetTableBucketResponse < Struct.new(
@@ -508,7 +512,8 @@ module Aws::S3Tables
       :name,
       :owner_account_id,
       :created_at,
-      :table_bucket_id)
+      :table_bucket_id,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -592,7 +597,7 @@ module Aws::S3Tables
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The name of the namespace the table is associated with.     </p>
+    #   The name of the namespace the table is associated with.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -718,12 +723,17 @@ module Aws::S3Tables
     #   The name of the table.
     #   @return [String]
     #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) of the table.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/GetTableRequest AWS API Documentation
     #
     class GetTableRequest < Struct.new(
       :table_bucket_arn,
       :namespace,
-      :name)
+      :name,
+      :table_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -821,10 +831,16 @@ module Aws::S3Tables
     #   The target file size for the table in MB.
     #   @return [Integer]
     #
+    # @!attribute [rw] strategy
+    #   The compaction strategy to use for the table. This determines how
+    #   files are selected and combined during compaction operations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/IcebergCompactionSettings AWS API Documentation
     #
     class IcebergCompactionSettings < Struct.new(
-      :target_file_size_mb)
+      :target_file_size_mb,
+      :strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -977,12 +993,17 @@ module Aws::S3Tables
     #   The maximum number of table buckets to return in the list.
     #   @return [Integer]
     #
+    # @!attribute [rw] type
+    #   The type of table buckets to filter by in the list.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/ListTableBucketsRequest AWS API Documentation
     #
     class ListTableBucketsRequest < Struct.new(
       :prefix,
       :continuation_token,
-      :max_buckets)
+      :max_buckets,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1367,6 +1388,10 @@ module Aws::S3Tables
     #   The system-assigned unique identifier for the table bucket.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of the table bucket.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/TableBucketSummary AWS API Documentation
     #
     class TableBucketSummary < Struct.new(
@@ -1374,7 +1399,8 @@ module Aws::S3Tables
       :name,
       :owner_account_id,
       :created_at,
-      :table_bucket_id)
+      :table_bucket_id,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -200,8 +200,7 @@ module Aws::DataZone
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -771,11 +770,14 @@ module Aws::DataZone
     #       override_project_owners: {
     #         include_child_domain_units: false,
     #       },
+    #       use_asset_type: {
+    #         domain_unit_id: "DomainUnitId",
+    #       },
     #     },
     #     domain_identifier: "DomainId", # required
     #     entity_identifier: "String", # required
-    #     entity_type: "DOMAIN_UNIT", # required, accepts DOMAIN_UNIT, ENVIRONMENT_BLUEPRINT_CONFIGURATION, ENVIRONMENT_PROFILE
-    #     policy_type: "CREATE_DOMAIN_UNIT", # required, accepts CREATE_DOMAIN_UNIT, OVERRIDE_DOMAIN_UNIT_OWNERS, ADD_TO_PROJECT_MEMBER_POOL, OVERRIDE_PROJECT_OWNERS, CREATE_GLOSSARY, CREATE_FORM_TYPE, CREATE_ASSET_TYPE, CREATE_PROJECT, CREATE_ENVIRONMENT_PROFILE, DELEGATE_CREATE_ENVIRONMENT_PROFILE, CREATE_ENVIRONMENT, CREATE_ENVIRONMENT_FROM_BLUEPRINT, CREATE_PROJECT_FROM_PROJECT_PROFILE
+    #     entity_type: "DOMAIN_UNIT", # required, accepts DOMAIN_UNIT, ENVIRONMENT_BLUEPRINT_CONFIGURATION, ENVIRONMENT_PROFILE, ASSET_TYPE
+    #     policy_type: "CREATE_DOMAIN_UNIT", # required, accepts CREATE_DOMAIN_UNIT, OVERRIDE_DOMAIN_UNIT_OWNERS, ADD_TO_PROJECT_MEMBER_POOL, OVERRIDE_PROJECT_OWNERS, CREATE_GLOSSARY, CREATE_FORM_TYPE, CREATE_ASSET_TYPE, CREATE_PROJECT, CREATE_ENVIRONMENT_PROFILE, DELEGATE_CREATE_ENVIRONMENT_PROFILE, CREATE_ENVIRONMENT, CREATE_ENVIRONMENT_FROM_BLUEPRINT, CREATE_PROJECT_FROM_PROJECT_PROFILE, USE_ASSET_TYPE
     #     principal: { # required
     #       domain_unit: {
     #         domain_unit_designation: "OWNER", # required, accepts OWNER
@@ -1617,6 +1619,10 @@ module Aws::DataZone
     #           workgroup_name: "RedshiftStoragePropertiesWorkgroupNameString",
     #         },
     #       },
+    #       s3_properties: {
+    #         s3_access_grant_location_id: "S3AccessGrantLocationId",
+    #         s3_uri: "S3Uri", # required
+    #       },
     #       spark_emr_properties: {
     #         compute_arn: "SparkEmrPropertiesInputComputeArnString",
     #         instance_profile_arn: "SparkEmrPropertiesInputInstanceProfileArnString",
@@ -1675,7 +1681,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].glue_connection.connection_properties #=> Hash
     #   resp.physical_endpoints[0].glue_connection.connection_properties["String"] #=> String
     #   resp.physical_endpoints[0].glue_connection.connection_schema_version #=> Integer
-    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
     #   resp.physical_endpoints[0].glue_connection.creation_time #=> Time
     #   resp.physical_endpoints[0].glue_connection.description #=> String
     #   resp.physical_endpoints[0].glue_connection.last_connection_validation_time #=> Time
@@ -1724,6 +1730,10 @@ module Aws::DataZone
     #   resp.props.redshift_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
     #   resp.props.redshift_properties.storage.cluster_name #=> String
     #   resp.props.redshift_properties.storage.workgroup_name #=> String
+    #   resp.props.s3_properties.error_message #=> String
+    #   resp.props.s3_properties.s3_access_grant_location_id #=> String
+    #   resp.props.s3_properties.s3_uri #=> String
+    #   resp.props.s3_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
     #   resp.props.spark_emr_properties.compute_arn #=> String
     #   resp.props.spark_emr_properties.credentials.password #=> String
     #   resp.props.spark_emr_properties.credentials.username #=> String
@@ -1744,7 +1754,7 @@ module Aws::DataZone
     #   resp.props.spark_glue_properties.number_of_workers #=> Integer
     #   resp.props.spark_glue_properties.python_virtual_env #=> String
     #   resp.props.spark_glue_properties.worker_type #=> String
-    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateConnection AWS API Documentation
     #
@@ -2396,7 +2406,7 @@ module Aws::DataZone
     # @option params [String] :environment_configuration_id
     #   The configuration ID of the environment.
     #
-    # @option params [required, String] :environment_profile_identifier
+    # @option params [String] :environment_profile_identifier
     #   The identifier of the environment profile that is used to create this
     #   Amazon DataZone environment.
     #
@@ -2449,7 +2459,7 @@ module Aws::DataZone
     #     environment_account_region: "String",
     #     environment_blueprint_identifier: "String",
     #     environment_configuration_id: "String",
-    #     environment_profile_identifier: "EnvironmentProfileId", # required
+    #     environment_profile_identifier: "EnvironmentProfileId",
     #     glossary_terms: ["GlossaryTermId"],
     #     name: "String", # required
     #     project_identifier: "ProjectId", # required
@@ -4955,7 +4965,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].glue_connection.connection_properties #=> Hash
     #   resp.physical_endpoints[0].glue_connection.connection_properties["String"] #=> String
     #   resp.physical_endpoints[0].glue_connection.connection_schema_version #=> Integer
-    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
     #   resp.physical_endpoints[0].glue_connection.creation_time #=> Time
     #   resp.physical_endpoints[0].glue_connection.description #=> String
     #   resp.physical_endpoints[0].glue_connection.last_connection_validation_time #=> Time
@@ -5004,6 +5014,10 @@ module Aws::DataZone
     #   resp.props.redshift_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
     #   resp.props.redshift_properties.storage.cluster_name #=> String
     #   resp.props.redshift_properties.storage.workgroup_name #=> String
+    #   resp.props.s3_properties.error_message #=> String
+    #   resp.props.s3_properties.s3_access_grant_location_id #=> String
+    #   resp.props.s3_properties.s3_uri #=> String
+    #   resp.props.s3_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
     #   resp.props.spark_emr_properties.compute_arn #=> String
     #   resp.props.spark_emr_properties.credentials.password #=> String
     #   resp.props.spark_emr_properties.credentials.username #=> String
@@ -5024,7 +5038,7 @@ module Aws::DataZone
     #   resp.props.spark_glue_properties.number_of_workers #=> Integer
     #   resp.props.spark_glue_properties.python_virtual_env #=> String
     #   resp.props.spark_glue_properties.worker_type #=> String
-    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetConnection AWS API Documentation
     #
@@ -7136,7 +7150,7 @@ module Aws::DataZone
     #     project_identifier: "ProjectId", # required
     #     sort_by: "NAME", # accepts NAME
     #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #     type: "ATHENA", # accepts ATHENA, BIGQUERY, DATABRICKS, DOCUMENTDB, DYNAMODB, HYPERPOD, IAM, MYSQL, OPENSEARCH, ORACLE, POSTGRESQL, REDSHIFT, SAPHANA, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, VERTICA, WORKFLOWS_MWAA
+    #     type: "ATHENA", # accepts ATHENA, BIGQUERY, DATABRICKS, DOCUMENTDB, DYNAMODB, HYPERPOD, IAM, MYSQL, OPENSEARCH, ORACLE, POSTGRESQL, REDSHIFT, S3, SAPHANA, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, VERTICA, WORKFLOWS_MWAA
     #   })
     #
     # @example Response structure
@@ -7173,7 +7187,7 @@ module Aws::DataZone
     #   resp.items[0].physical_endpoints[0].glue_connection.connection_properties #=> Hash
     #   resp.items[0].physical_endpoints[0].glue_connection.connection_properties["String"] #=> String
     #   resp.items[0].physical_endpoints[0].glue_connection.connection_schema_version #=> Integer
-    #   resp.items[0].physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.items[0].physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
     #   resp.items[0].physical_endpoints[0].glue_connection.creation_time #=> Time
     #   resp.items[0].physical_endpoints[0].glue_connection.description #=> String
     #   resp.items[0].physical_endpoints[0].glue_connection.last_connection_validation_time #=> Time
@@ -7222,6 +7236,10 @@ module Aws::DataZone
     #   resp.items[0].props.redshift_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
     #   resp.items[0].props.redshift_properties.storage.cluster_name #=> String
     #   resp.items[0].props.redshift_properties.storage.workgroup_name #=> String
+    #   resp.items[0].props.s3_properties.error_message #=> String
+    #   resp.items[0].props.s3_properties.s3_access_grant_location_id #=> String
+    #   resp.items[0].props.s3_properties.s3_uri #=> String
+    #   resp.items[0].props.s3_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
     #   resp.items[0].props.spark_emr_properties.compute_arn #=> String
     #   resp.items[0].props.spark_emr_properties.credentials.password #=> String
     #   resp.items[0].props.spark_emr_properties.credentials.username #=> String
@@ -7242,7 +7260,7 @@ module Aws::DataZone
     #   resp.items[0].props.spark_glue_properties.number_of_workers #=> Integer
     #   resp.items[0].props.spark_glue_properties.python_virtual_env #=> String
     #   resp.items[0].props.spark_glue_properties.worker_type #=> String
-    #   resp.items[0].type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.items[0].type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListConnections AWS API Documentation
@@ -8536,10 +8554,10 @@ module Aws::DataZone
     #   resp = client.list_policy_grants({
     #     domain_identifier: "DomainId", # required
     #     entity_identifier: "String", # required
-    #     entity_type: "DOMAIN_UNIT", # required, accepts DOMAIN_UNIT, ENVIRONMENT_BLUEPRINT_CONFIGURATION, ENVIRONMENT_PROFILE
+    #     entity_type: "DOMAIN_UNIT", # required, accepts DOMAIN_UNIT, ENVIRONMENT_BLUEPRINT_CONFIGURATION, ENVIRONMENT_PROFILE, ASSET_TYPE
     #     max_results: 1,
     #     next_token: "PaginationToken",
-    #     policy_type: "CREATE_DOMAIN_UNIT", # required, accepts CREATE_DOMAIN_UNIT, OVERRIDE_DOMAIN_UNIT_OWNERS, ADD_TO_PROJECT_MEMBER_POOL, OVERRIDE_PROJECT_OWNERS, CREATE_GLOSSARY, CREATE_FORM_TYPE, CREATE_ASSET_TYPE, CREATE_PROJECT, CREATE_ENVIRONMENT_PROFILE, DELEGATE_CREATE_ENVIRONMENT_PROFILE, CREATE_ENVIRONMENT, CREATE_ENVIRONMENT_FROM_BLUEPRINT, CREATE_PROJECT_FROM_PROJECT_PROFILE
+    #     policy_type: "CREATE_DOMAIN_UNIT", # required, accepts CREATE_DOMAIN_UNIT, OVERRIDE_DOMAIN_UNIT_OWNERS, ADD_TO_PROJECT_MEMBER_POOL, OVERRIDE_PROJECT_OWNERS, CREATE_GLOSSARY, CREATE_FORM_TYPE, CREATE_ASSET_TYPE, CREATE_PROJECT, CREATE_ENVIRONMENT_PROFILE, DELEGATE_CREATE_ENVIRONMENT_PROFILE, CREATE_ENVIRONMENT, CREATE_ENVIRONMENT_FROM_BLUEPRINT, CREATE_PROJECT_FROM_PROJECT_PROFILE, USE_ASSET_TYPE
     #   })
     #
     # @example Response structure
@@ -8559,6 +8577,7 @@ module Aws::DataZone
     #   resp.grant_list[0].detail.create_project_from_project_profile.project_profiles[0] #=> String
     #   resp.grant_list[0].detail.override_domain_unit_owners.include_child_domain_units #=> Boolean
     #   resp.grant_list[0].detail.override_project_owners.include_child_domain_units #=> Boolean
+    #   resp.grant_list[0].detail.use_asset_type.domain_unit_id #=> String
     #   resp.grant_list[0].principal.domain_unit.domain_unit_designation #=> String, one of "OWNER"
     #   resp.grant_list[0].principal.domain_unit.domain_unit_identifier #=> String
     #   resp.grant_list[0].principal.group.group_identifier #=> String
@@ -9888,8 +9907,8 @@ module Aws::DataZone
     #     client_token: "ClientToken",
     #     domain_identifier: "DomainId", # required
     #     entity_identifier: "String", # required
-    #     entity_type: "DOMAIN_UNIT", # required, accepts DOMAIN_UNIT, ENVIRONMENT_BLUEPRINT_CONFIGURATION, ENVIRONMENT_PROFILE
-    #     policy_type: "CREATE_DOMAIN_UNIT", # required, accepts CREATE_DOMAIN_UNIT, OVERRIDE_DOMAIN_UNIT_OWNERS, ADD_TO_PROJECT_MEMBER_POOL, OVERRIDE_PROJECT_OWNERS, CREATE_GLOSSARY, CREATE_FORM_TYPE, CREATE_ASSET_TYPE, CREATE_PROJECT, CREATE_ENVIRONMENT_PROFILE, DELEGATE_CREATE_ENVIRONMENT_PROFILE, CREATE_ENVIRONMENT, CREATE_ENVIRONMENT_FROM_BLUEPRINT, CREATE_PROJECT_FROM_PROJECT_PROFILE
+    #     entity_type: "DOMAIN_UNIT", # required, accepts DOMAIN_UNIT, ENVIRONMENT_BLUEPRINT_CONFIGURATION, ENVIRONMENT_PROFILE, ASSET_TYPE
+    #     policy_type: "CREATE_DOMAIN_UNIT", # required, accepts CREATE_DOMAIN_UNIT, OVERRIDE_DOMAIN_UNIT_OWNERS, ADD_TO_PROJECT_MEMBER_POOL, OVERRIDE_PROJECT_OWNERS, CREATE_GLOSSARY, CREATE_FORM_TYPE, CREATE_ASSET_TYPE, CREATE_PROJECT, CREATE_ENVIRONMENT_PROFILE, DELEGATE_CREATE_ENVIRONMENT_PROFILE, CREATE_ENVIRONMENT, CREATE_ENVIRONMENT_FROM_BLUEPRINT, CREATE_PROJECT_FROM_PROJECT_PROFILE, USE_ASSET_TYPE
     #     principal: { # required
     #       domain_unit: {
     #         domain_unit_designation: "OWNER", # required, accepts OWNER
@@ -11030,6 +11049,10 @@ module Aws::DataZone
     #           workgroup_name: "RedshiftStoragePropertiesWorkgroupNameString",
     #         },
     #       },
+    #       s3_properties: {
+    #         s3_access_grant_location_id: "S3AccessGrantLocationId",
+    #         s3_uri: "S3Uri", # required
+    #       },
     #       spark_emr_properties: {
     #         compute_arn: "SparkEmrPropertiesPatchComputeArnString",
     #         instance_profile_arn: "SparkEmrPropertiesPatchInstanceProfileArnString",
@@ -11076,7 +11099,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].glue_connection.connection_properties #=> Hash
     #   resp.physical_endpoints[0].glue_connection.connection_properties["String"] #=> String
     #   resp.physical_endpoints[0].glue_connection.connection_schema_version #=> Integer
-    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
     #   resp.physical_endpoints[0].glue_connection.creation_time #=> Time
     #   resp.physical_endpoints[0].glue_connection.description #=> String
     #   resp.physical_endpoints[0].glue_connection.last_connection_validation_time #=> Time
@@ -11125,6 +11148,10 @@ module Aws::DataZone
     #   resp.props.redshift_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
     #   resp.props.redshift_properties.storage.cluster_name #=> String
     #   resp.props.redshift_properties.storage.workgroup_name #=> String
+    #   resp.props.s3_properties.error_message #=> String
+    #   resp.props.s3_properties.s3_access_grant_location_id #=> String
+    #   resp.props.s3_properties.s3_uri #=> String
+    #   resp.props.s3_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
     #   resp.props.spark_emr_properties.compute_arn #=> String
     #   resp.props.spark_emr_properties.credentials.password #=> String
     #   resp.props.spark_emr_properties.credentials.username #=> String
@@ -11145,7 +11172,7 @@ module Aws::DataZone
     #   resp.props.spark_glue_properties.number_of_workers #=> Integer
     #   resp.props.spark_glue_properties.python_virtual_env #=> String
     #   resp.props.spark_glue_properties.worker_type #=> String
-    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateConnection AWS API Documentation
     #
@@ -11992,6 +12019,9 @@ module Aws::DataZone
     # @option params [required, String] :domain_identifier
     #   The ID of the Amazon DataZone domain where a project is being updated.
     #
+    # @option params [String] :domain_unit_id
+    #   The ID of the domain unit.
+    #
     # @option params [Types::EnvironmentDeploymentDetails] :environment_deployment_details
     #   The environment deployment details of the project.
     #
@@ -12035,6 +12065,7 @@ module Aws::DataZone
     #   resp = client.update_project({
     #     description: "Description",
     #     domain_identifier: "DomainId", # required
+    #     domain_unit_id: "DomainUnitId",
     #     environment_deployment_details: {
     #       environment_failure_reasons: {
     #         "String" => [
@@ -12700,7 +12731,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

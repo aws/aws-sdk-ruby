@@ -200,8 +200,7 @@ module Aws::BedrockAgent
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -966,7 +965,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #
     # @option params [Hash<String,String>] :parent_action_group_signature_params
     #   The configuration settings for a computer use action.
@@ -978,7 +977,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #
     # @return [Types::CreateAgentActionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1128,6 +1127,7 @@ module Aws::BedrockAgent
     #   resp.agent_alias.agent_alias_name #=> String
     #   resp.agent_alias.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING", "DISSOCIATED"
     #   resp.agent_alias.agent_id #=> String
+    #   resp.agent_alias.alias_invocation_state #=> String, one of "ACCEPT_INVOCATIONS", "REJECT_INVOCATIONS"
     #   resp.agent_alias.client_token #=> String
     #   resp.agent_alias.created_at #=> Time
     #   resp.agent_alias.description #=> String
@@ -1579,6 +1579,10 @@ module Aws::BedrockAgent
     #                 },
     #               ],
     #             },
+    #             inline_code: {
+    #               code: "InlineCode", # required
+    #               language: "Python_3", # required, accepts Python_3
+    #             },
     #             input: {
     #             },
     #             iterator: {
@@ -1588,8 +1592,68 @@ module Aws::BedrockAgent
     #                 guardrail_identifier: "GuardrailIdentifier",
     #                 guardrail_version: "GuardrailVersion",
     #               },
+    #               inference_configuration: {
+    #                 text: {
+    #                   max_tokens: 1,
+    #                   stop_sequences: ["String"],
+    #                   temperature: 1.0,
+    #                   top_p: 1.0,
+    #                 },
+    #               },
     #               knowledge_base_id: "KnowledgeBaseId", # required
     #               model_id: "KnowledgeBaseModelIdentifier",
+    #               number_of_results: 1,
+    #               orchestration_configuration: {
+    #                 additional_model_request_fields: {
+    #                   "AdditionalModelRequestFieldsKey" => {
+    #                   },
+    #                 },
+    #                 inference_config: {
+    #                   text: {
+    #                     max_tokens: 1,
+    #                     stop_sequences: ["String"],
+    #                     temperature: 1.0,
+    #                     top_p: 1.0,
+    #                   },
+    #                 },
+    #                 performance_config: {
+    #                   latency: "standard", # accepts standard, optimized
+    #                 },
+    #                 prompt_template: {
+    #                   text_prompt_template: "KnowledgeBaseTextPrompt",
+    #                 },
+    #               },
+    #               prompt_template: {
+    #                 text_prompt_template: "KnowledgeBaseTextPrompt",
+    #               },
+    #               reranking_configuration: {
+    #                 bedrock_reranking_configuration: {
+    #                   metadata_configuration: {
+    #                     selection_mode: "SELECTIVE", # required, accepts SELECTIVE, ALL
+    #                     selective_mode_configuration: {
+    #                       fields_to_exclude: [
+    #                         {
+    #                           field_name: "FieldForRerankingFieldNameString", # required
+    #                         },
+    #                       ],
+    #                       fields_to_include: [
+    #                         {
+    #                           field_name: "FieldForRerankingFieldNameString", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   model_configuration: { # required
+    #                     additional_model_request_fields: {
+    #                       "AdditionalModelRequestFieldsKey" => {
+    #                       },
+    #                     },
+    #                     model_arn: "BedrockRerankingModelArn", # required
+    #                   },
+    #                   number_of_reranked_results: 1,
+    #                 },
+    #                 type: "BEDROCK_RERANKING_MODEL", # required, accepts BEDROCK_RERANKING_MODEL
+    #               },
     #             },
     #             lambda_function: {
     #               lambda_arn: "LambdaArn", # required
@@ -1597,6 +1661,20 @@ module Aws::BedrockAgent
     #             lex: {
     #               bot_alias_arn: "LexBotAliasArn", # required
     #               locale_id: "LexBotLocaleId", # required
+    #             },
+    #             loop: {
+    #               definition: { # required
+    #                 # recursive FlowDefinition
+    #               },
+    #             },
+    #             loop_controller: {
+    #               continue_condition: { # required
+    #                 expression: "FlowConditionExpression",
+    #                 name: "FlowConditionName", # required
+    #               },
+    #               max_iterations: 1,
+    #             },
+    #             loop_input: {
     #             },
     #             output: {
     #             },
@@ -1709,6 +1787,7 @@ module Aws::BedrockAgent
     #           },
     #           inputs: [
     #             {
+    #               category: "LoopCondition", # accepts LoopCondition, ReturnValueToLoopStart, ExitLoop
     #               expression: "FlowNodeInputExpression", # required
     #               name: "FlowNodeInputName", # required
     #               type: "String", # required, accepts String, Number, Boolean, Object, Array
@@ -1721,7 +1800,7 @@ module Aws::BedrockAgent
     #               type: "String", # required, accepts String, Number, Boolean, Object, Array
     #             },
     #           ],
-    #           type: "Input", # required, accepts Input, Output, KnowledgeBase, Condition, Lex, Prompt, LambdaFunction, Storage, Agent, Retrieval, Iterator, Collector
+    #           type: "Input", # required, accepts Input, Output, KnowledgeBase, Condition, Lex, Prompt, LambdaFunction, Storage, Agent, Retrieval, Iterator, Collector, InlineCode, Loop, LoopInput, LoopController
     #         },
     #       ],
     #     },
@@ -1751,13 +1830,43 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.condition.conditions #=> Array
     #   resp.definition.nodes[0].configuration.condition.conditions[0].expression #=> String
     #   resp.definition.nodes[0].configuration.condition.conditions[0].name #=> String
+    #   resp.definition.nodes[0].configuration.inline_code.code #=> String
+    #   resp.definition.nodes[0].configuration.inline_code.language #=> String, one of "Python_3"
     #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_identifier #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_version #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.max_tokens #=> Integer
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.stop_sequences #=> Array
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.stop_sequences[0] #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.temperature #=> Float
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.top_p #=> Float
     #   resp.definition.nodes[0].configuration.knowledge_base.knowledge_base_id #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.model_id #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.number_of_results #=> Integer
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.additional_model_request_fields #=> Hash
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.max_tokens #=> Integer
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.stop_sequences #=> Array
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.stop_sequences[0] #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.temperature #=> Float
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.top_p #=> Float
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.performance_config.latency #=> String, one of "standard", "optimized"
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.prompt_template.text_prompt_template #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.prompt_template.text_prompt_template #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selection_mode #=> String, one of "SELECTIVE", "ALL"
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_exclude #=> Array
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_exclude[0].field_name #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_include #=> Array
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_include[0].field_name #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.model_configuration.additional_model_request_fields #=> Hash
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.model_configuration.model_arn #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.number_of_reranked_results #=> Integer
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.type #=> String, one of "BEDROCK_RERANKING_MODEL"
     #   resp.definition.nodes[0].configuration.lambda_function.lambda_arn #=> String
     #   resp.definition.nodes[0].configuration.lex.bot_alias_arn #=> String
     #   resp.definition.nodes[0].configuration.lex.locale_id #=> String
+    #   resp.definition.nodes[0].configuration.loop.definition #=> Types::FlowDefinition
+    #   resp.definition.nodes[0].configuration.loop_controller.continue_condition.expression #=> String
+    #   resp.definition.nodes[0].configuration.loop_controller.continue_condition.name #=> String
+    #   resp.definition.nodes[0].configuration.loop_controller.max_iterations #=> Integer
     #   resp.definition.nodes[0].configuration.prompt.guardrail_configuration.guardrail_identifier #=> String
     #   resp.definition.nodes[0].configuration.prompt.guardrail_configuration.guardrail_version #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.max_tokens #=> Integer
@@ -1790,6 +1899,7 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.retrieval.service_configuration.s3.bucket_name #=> String
     #   resp.definition.nodes[0].configuration.storage.service_configuration.s3.bucket_name #=> String
     #   resp.definition.nodes[0].inputs #=> Array
+    #   resp.definition.nodes[0].inputs[0].category #=> String, one of "LoopCondition", "ReturnValueToLoopStart", "ExitLoop"
     #   resp.definition.nodes[0].inputs[0].expression #=> String
     #   resp.definition.nodes[0].inputs[0].name #=> String
     #   resp.definition.nodes[0].inputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
@@ -1797,7 +1907,7 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].outputs #=> Array
     #   resp.definition.nodes[0].outputs[0].name #=> String
     #   resp.definition.nodes[0].outputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
-    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector"
+    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector", "InlineCode", "Loop", "LoopInput", "LoopController"
     #   resp.description #=> String
     #   resp.execution_role_arn #=> String
     #   resp.id #=> String
@@ -1835,6 +1945,10 @@ module Aws::BedrockAgent
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
+    # @option params [Types::FlowAliasConcurrencyConfiguration] :concurrency_configuration
+    #   The configuration that specifies how nodes in the flow are executed in
+    #   parallel.
+    #
     # @option params [String] :description
     #   A description for the alias.
     #
@@ -1858,6 +1972,7 @@ module Aws::BedrockAgent
     # @return [Types::CreateFlowAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFlowAliasResponse#arn #arn} => String
+    #   * {Types::CreateFlowAliasResponse#concurrency_configuration #concurrency_configuration} => Types::FlowAliasConcurrencyConfiguration
     #   * {Types::CreateFlowAliasResponse#created_at #created_at} => Time
     #   * {Types::CreateFlowAliasResponse#description #description} => String
     #   * {Types::CreateFlowAliasResponse#flow_id #flow_id} => String
@@ -1870,6 +1985,10 @@ module Aws::BedrockAgent
     #
     #   resp = client.create_flow_alias({
     #     client_token: "ClientToken",
+    #     concurrency_configuration: {
+    #       max_concurrency: 1,
+    #       type: "Automatic", # required, accepts Automatic, Manual
+    #     },
     #     description: "Description",
     #     flow_identifier: "FlowIdentifier", # required
     #     name: "Name", # required
@@ -1886,6 +2005,8 @@ module Aws::BedrockAgent
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.concurrency_configuration.max_concurrency #=> Integer
+    #   resp.concurrency_configuration.type #=> String, one of "Automatic", "Manual"
     #   resp.created_at #=> Time
     #   resp.description #=> String
     #   resp.flow_id #=> String
@@ -1971,13 +2092,43 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.condition.conditions #=> Array
     #   resp.definition.nodes[0].configuration.condition.conditions[0].expression #=> String
     #   resp.definition.nodes[0].configuration.condition.conditions[0].name #=> String
+    #   resp.definition.nodes[0].configuration.inline_code.code #=> String
+    #   resp.definition.nodes[0].configuration.inline_code.language #=> String, one of "Python_3"
     #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_identifier #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_version #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.max_tokens #=> Integer
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.stop_sequences #=> Array
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.stop_sequences[0] #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.temperature #=> Float
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.top_p #=> Float
     #   resp.definition.nodes[0].configuration.knowledge_base.knowledge_base_id #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.model_id #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.number_of_results #=> Integer
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.additional_model_request_fields #=> Hash
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.max_tokens #=> Integer
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.stop_sequences #=> Array
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.stop_sequences[0] #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.temperature #=> Float
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.top_p #=> Float
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.performance_config.latency #=> String, one of "standard", "optimized"
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.prompt_template.text_prompt_template #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.prompt_template.text_prompt_template #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selection_mode #=> String, one of "SELECTIVE", "ALL"
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_exclude #=> Array
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_exclude[0].field_name #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_include #=> Array
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_include[0].field_name #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.model_configuration.additional_model_request_fields #=> Hash
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.model_configuration.model_arn #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.number_of_reranked_results #=> Integer
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.type #=> String, one of "BEDROCK_RERANKING_MODEL"
     #   resp.definition.nodes[0].configuration.lambda_function.lambda_arn #=> String
     #   resp.definition.nodes[0].configuration.lex.bot_alias_arn #=> String
     #   resp.definition.nodes[0].configuration.lex.locale_id #=> String
+    #   resp.definition.nodes[0].configuration.loop.definition #=> Types::FlowDefinition
+    #   resp.definition.nodes[0].configuration.loop_controller.continue_condition.expression #=> String
+    #   resp.definition.nodes[0].configuration.loop_controller.continue_condition.name #=> String
+    #   resp.definition.nodes[0].configuration.loop_controller.max_iterations #=> Integer
     #   resp.definition.nodes[0].configuration.prompt.guardrail_configuration.guardrail_identifier #=> String
     #   resp.definition.nodes[0].configuration.prompt.guardrail_configuration.guardrail_version #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.max_tokens #=> Integer
@@ -2010,6 +2161,7 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.retrieval.service_configuration.s3.bucket_name #=> String
     #   resp.definition.nodes[0].configuration.storage.service_configuration.s3.bucket_name #=> String
     #   resp.definition.nodes[0].inputs #=> Array
+    #   resp.definition.nodes[0].inputs[0].category #=> String, one of "LoopCondition", "ReturnValueToLoopStart", "ExitLoop"
     #   resp.definition.nodes[0].inputs[0].expression #=> String
     #   resp.definition.nodes[0].inputs[0].name #=> String
     #   resp.definition.nodes[0].inputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
@@ -2017,7 +2169,7 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].outputs #=> Array
     #   resp.definition.nodes[0].outputs[0].name #=> String
     #   resp.definition.nodes[0].outputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
-    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector"
+    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector", "InlineCode", "Loop", "LoopInput", "LoopController"
     #   resp.description #=> String
     #   resp.execution_role_arn #=> String
     #   resp.id #=> String
@@ -2284,7 +2436,12 @@ module Aws::BedrockAgent
     #         },
     #         vector_index_name: "RedisEnterpriseCloudIndexName", # required
     #       },
-    #       type: "OPENSEARCH_SERVERLESS", # required, accepts OPENSEARCH_SERVERLESS, PINECONE, REDIS_ENTERPRISE_CLOUD, RDS, MONGO_DB_ATLAS, NEPTUNE_ANALYTICS, OPENSEARCH_MANAGED_CLUSTER
+    #       s3_vectors_configuration: {
+    #         index_arn: "IndexArn",
+    #         index_name: "IndexName",
+    #         vector_bucket_arn: "VectorBucketArn",
+    #       },
+    #       type: "OPENSEARCH_SERVERLESS", # required, accepts OPENSEARCH_SERVERLESS, PINECONE, REDIS_ENTERPRISE_CLOUD, RDS, MONGO_DB_ATLAS, NEPTUNE_ANALYTICS, OPENSEARCH_MANAGED_CLUSTER, S3_VECTORS
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -2380,7 +2537,10 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.text_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.vector_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.vector_index_name #=> String
-    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS", "MONGO_DB_ATLAS", "NEPTUNE_ANALYTICS", "OPENSEARCH_MANAGED_CLUSTER"
+    #   resp.knowledge_base.storage_configuration.s3_vectors_configuration.index_arn #=> String
+    #   resp.knowledge_base.storage_configuration.s3_vectors_configuration.index_name #=> String
+    #   resp.knowledge_base.storage_configuration.s3_vectors_configuration.vector_bucket_arn #=> String
+    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS", "MONGO_DB_ATLAS", "NEPTUNE_ANALYTICS", "OPENSEARCH_MANAGED_CLUSTER", "S3_VECTORS"
     #   resp.knowledge_base.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateKnowledgeBase AWS API Documentation
@@ -3410,6 +3570,7 @@ module Aws::BedrockAgent
     #   resp.agent_alias.agent_alias_name #=> String
     #   resp.agent_alias.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING", "DISSOCIATED"
     #   resp.agent_alias.agent_id #=> String
+    #   resp.agent_alias.alias_invocation_state #=> String, one of "ACCEPT_INVOCATIONS", "REJECT_INVOCATIONS"
     #   resp.agent_alias.client_token #=> String
     #   resp.agent_alias.created_at #=> Time
     #   resp.agent_alias.description #=> String
@@ -3749,13 +3910,43 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.condition.conditions #=> Array
     #   resp.definition.nodes[0].configuration.condition.conditions[0].expression #=> String
     #   resp.definition.nodes[0].configuration.condition.conditions[0].name #=> String
+    #   resp.definition.nodes[0].configuration.inline_code.code #=> String
+    #   resp.definition.nodes[0].configuration.inline_code.language #=> String, one of "Python_3"
     #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_identifier #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_version #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.max_tokens #=> Integer
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.stop_sequences #=> Array
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.stop_sequences[0] #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.temperature #=> Float
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.top_p #=> Float
     #   resp.definition.nodes[0].configuration.knowledge_base.knowledge_base_id #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.model_id #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.number_of_results #=> Integer
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.additional_model_request_fields #=> Hash
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.max_tokens #=> Integer
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.stop_sequences #=> Array
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.stop_sequences[0] #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.temperature #=> Float
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.top_p #=> Float
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.performance_config.latency #=> String, one of "standard", "optimized"
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.prompt_template.text_prompt_template #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.prompt_template.text_prompt_template #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selection_mode #=> String, one of "SELECTIVE", "ALL"
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_exclude #=> Array
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_exclude[0].field_name #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_include #=> Array
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_include[0].field_name #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.model_configuration.additional_model_request_fields #=> Hash
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.model_configuration.model_arn #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.number_of_reranked_results #=> Integer
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.type #=> String, one of "BEDROCK_RERANKING_MODEL"
     #   resp.definition.nodes[0].configuration.lambda_function.lambda_arn #=> String
     #   resp.definition.nodes[0].configuration.lex.bot_alias_arn #=> String
     #   resp.definition.nodes[0].configuration.lex.locale_id #=> String
+    #   resp.definition.nodes[0].configuration.loop.definition #=> Types::FlowDefinition
+    #   resp.definition.nodes[0].configuration.loop_controller.continue_condition.expression #=> String
+    #   resp.definition.nodes[0].configuration.loop_controller.continue_condition.name #=> String
+    #   resp.definition.nodes[0].configuration.loop_controller.max_iterations #=> Integer
     #   resp.definition.nodes[0].configuration.prompt.guardrail_configuration.guardrail_identifier #=> String
     #   resp.definition.nodes[0].configuration.prompt.guardrail_configuration.guardrail_version #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.max_tokens #=> Integer
@@ -3788,6 +3979,7 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.retrieval.service_configuration.s3.bucket_name #=> String
     #   resp.definition.nodes[0].configuration.storage.service_configuration.s3.bucket_name #=> String
     #   resp.definition.nodes[0].inputs #=> Array
+    #   resp.definition.nodes[0].inputs[0].category #=> String, one of "LoopCondition", "ReturnValueToLoopStart", "ExitLoop"
     #   resp.definition.nodes[0].inputs[0].expression #=> String
     #   resp.definition.nodes[0].inputs[0].name #=> String
     #   resp.definition.nodes[0].inputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
@@ -3795,7 +3987,7 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].outputs #=> Array
     #   resp.definition.nodes[0].outputs[0].name #=> String
     #   resp.definition.nodes[0].outputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
-    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector"
+    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector", "InlineCode", "Loop", "LoopInput", "LoopController"
     #   resp.description #=> String
     #   resp.execution_role_arn #=> String
     #   resp.id #=> String
@@ -3809,6 +4001,12 @@ module Aws::BedrockAgent
     #   resp.validations[0].details.duplicate_connections.source #=> String
     #   resp.validations[0].details.duplicate_connections.target #=> String
     #   resp.validations[0].details.incompatible_connection_data_type.connection #=> String
+    #   resp.validations[0].details.invalid_loop_boundary.connection #=> String
+    #   resp.validations[0].details.invalid_loop_boundary.source #=> String
+    #   resp.validations[0].details.invalid_loop_boundary.target #=> String
+    #   resp.validations[0].details.loop_incompatible_node_type.incompatible_node_name #=> String
+    #   resp.validations[0].details.loop_incompatible_node_type.incompatible_node_type #=> String, one of "Input", "Condition", "Iterator", "Collector"
+    #   resp.validations[0].details.loop_incompatible_node_type.node #=> String
     #   resp.validations[0].details.malformed_condition_expression.cause #=> String
     #   resp.validations[0].details.malformed_condition_expression.condition #=> String
     #   resp.validations[0].details.malformed_condition_expression.node #=> String
@@ -3823,11 +4021,15 @@ module Aws::BedrockAgent
     #   resp.validations[0].details.mismatched_node_output_type.output #=> String
     #   resp.validations[0].details.missing_connection_configuration.connection #=> String
     #   resp.validations[0].details.missing_default_condition.node #=> String
+    #   resp.validations[0].details.missing_loop_controller_node.loop_node #=> String
+    #   resp.validations[0].details.missing_loop_input_node.loop_node #=> String
     #   resp.validations[0].details.missing_node_configuration.node #=> String
     #   resp.validations[0].details.missing_node_input.input #=> String
     #   resp.validations[0].details.missing_node_input.node #=> String
     #   resp.validations[0].details.missing_node_output.node #=> String
     #   resp.validations[0].details.missing_node_output.output #=> String
+    #   resp.validations[0].details.multiple_loop_controller_nodes.loop_node #=> String
+    #   resp.validations[0].details.multiple_loop_input_nodes.loop_node #=> String
     #   resp.validations[0].details.multiple_node_input_connections.input #=> String
     #   resp.validations[0].details.multiple_node_input_connections.node #=> String
     #   resp.validations[0].details.unfulfilled_node_input.input #=> String
@@ -3845,7 +4047,7 @@ module Aws::BedrockAgent
     #   resp.validations[0].details.unsatisfied_connection_conditions.connection #=> String
     #   resp.validations[0].message #=> String
     #   resp.validations[0].severity #=> String, one of "Warning", "Error"
-    #   resp.validations[0].type #=> String, one of "CyclicConnection", "DuplicateConnections", "DuplicateConditionExpression", "UnreachableNode", "UnknownConnectionSource", "UnknownConnectionSourceOutput", "UnknownConnectionTarget", "UnknownConnectionTargetInput", "UnknownConnectionCondition", "MalformedConditionExpression", "MalformedNodeInputExpression", "MismatchedNodeInputType", "MismatchedNodeOutputType", "IncompatibleConnectionDataType", "MissingConnectionConfiguration", "MissingDefaultCondition", "MissingEndingNodes", "MissingNodeConfiguration", "MissingNodeInput", "MissingNodeOutput", "MissingStartingNodes", "MultipleNodeInputConnections", "UnfulfilledNodeInput", "UnsatisfiedConnectionConditions", "Unspecified", "UnknownNodeInput", "UnknownNodeOutput"
+    #   resp.validations[0].type #=> String, one of "CyclicConnection", "DuplicateConnections", "DuplicateConditionExpression", "UnreachableNode", "UnknownConnectionSource", "UnknownConnectionSourceOutput", "UnknownConnectionTarget", "UnknownConnectionTargetInput", "UnknownConnectionCondition", "MalformedConditionExpression", "MalformedNodeInputExpression", "MismatchedNodeInputType", "MismatchedNodeOutputType", "IncompatibleConnectionDataType", "MissingConnectionConfiguration", "MissingDefaultCondition", "MissingEndingNodes", "MissingNodeConfiguration", "MissingNodeInput", "MissingNodeOutput", "MissingStartingNodes", "MultipleNodeInputConnections", "UnfulfilledNodeInput", "UnsatisfiedConnectionConditions", "Unspecified", "UnknownNodeInput", "UnknownNodeOutput", "MissingLoopInputNode", "MissingLoopControllerNode", "MultipleLoopInputNodes", "MultipleLoopControllerNodes", "LoopIncompatibleNodeType", "InvalidLoopBoundary"
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetFlow AWS API Documentation
@@ -3873,6 +4075,7 @@ module Aws::BedrockAgent
     # @return [Types::GetFlowAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetFlowAliasResponse#arn #arn} => String
+    #   * {Types::GetFlowAliasResponse#concurrency_configuration #concurrency_configuration} => Types::FlowAliasConcurrencyConfiguration
     #   * {Types::GetFlowAliasResponse#created_at #created_at} => Time
     #   * {Types::GetFlowAliasResponse#description #description} => String
     #   * {Types::GetFlowAliasResponse#flow_id #flow_id} => String
@@ -3891,6 +4094,8 @@ module Aws::BedrockAgent
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.concurrency_configuration.max_concurrency #=> Integer
+    #   resp.concurrency_configuration.type #=> String, one of "Automatic", "Manual"
     #   resp.created_at #=> Time
     #   resp.description #=> String
     #   resp.flow_id #=> String
@@ -3961,13 +4166,43 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.condition.conditions #=> Array
     #   resp.definition.nodes[0].configuration.condition.conditions[0].expression #=> String
     #   resp.definition.nodes[0].configuration.condition.conditions[0].name #=> String
+    #   resp.definition.nodes[0].configuration.inline_code.code #=> String
+    #   resp.definition.nodes[0].configuration.inline_code.language #=> String, one of "Python_3"
     #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_identifier #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_version #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.max_tokens #=> Integer
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.stop_sequences #=> Array
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.stop_sequences[0] #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.temperature #=> Float
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.top_p #=> Float
     #   resp.definition.nodes[0].configuration.knowledge_base.knowledge_base_id #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.model_id #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.number_of_results #=> Integer
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.additional_model_request_fields #=> Hash
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.max_tokens #=> Integer
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.stop_sequences #=> Array
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.stop_sequences[0] #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.temperature #=> Float
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.top_p #=> Float
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.performance_config.latency #=> String, one of "standard", "optimized"
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.prompt_template.text_prompt_template #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.prompt_template.text_prompt_template #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selection_mode #=> String, one of "SELECTIVE", "ALL"
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_exclude #=> Array
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_exclude[0].field_name #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_include #=> Array
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_include[0].field_name #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.model_configuration.additional_model_request_fields #=> Hash
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.model_configuration.model_arn #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.number_of_reranked_results #=> Integer
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.type #=> String, one of "BEDROCK_RERANKING_MODEL"
     #   resp.definition.nodes[0].configuration.lambda_function.lambda_arn #=> String
     #   resp.definition.nodes[0].configuration.lex.bot_alias_arn #=> String
     #   resp.definition.nodes[0].configuration.lex.locale_id #=> String
+    #   resp.definition.nodes[0].configuration.loop.definition #=> Types::FlowDefinition
+    #   resp.definition.nodes[0].configuration.loop_controller.continue_condition.expression #=> String
+    #   resp.definition.nodes[0].configuration.loop_controller.continue_condition.name #=> String
+    #   resp.definition.nodes[0].configuration.loop_controller.max_iterations #=> Integer
     #   resp.definition.nodes[0].configuration.prompt.guardrail_configuration.guardrail_identifier #=> String
     #   resp.definition.nodes[0].configuration.prompt.guardrail_configuration.guardrail_version #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.max_tokens #=> Integer
@@ -4000,6 +4235,7 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.retrieval.service_configuration.s3.bucket_name #=> String
     #   resp.definition.nodes[0].configuration.storage.service_configuration.s3.bucket_name #=> String
     #   resp.definition.nodes[0].inputs #=> Array
+    #   resp.definition.nodes[0].inputs[0].category #=> String, one of "LoopCondition", "ReturnValueToLoopStart", "ExitLoop"
     #   resp.definition.nodes[0].inputs[0].expression #=> String
     #   resp.definition.nodes[0].inputs[0].name #=> String
     #   resp.definition.nodes[0].inputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
@@ -4007,7 +4243,7 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].outputs #=> Array
     #   resp.definition.nodes[0].outputs[0].name #=> String
     #   resp.definition.nodes[0].outputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
-    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector"
+    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector", "InlineCode", "Loop", "LoopInput", "LoopController"
     #   resp.description #=> String
     #   resp.execution_role_arn #=> String
     #   resp.id #=> String
@@ -4185,7 +4421,10 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.text_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.vector_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.vector_index_name #=> String
-    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS", "MONGO_DB_ATLAS", "NEPTUNE_ANALYTICS", "OPENSEARCH_MANAGED_CLUSTER"
+    #   resp.knowledge_base.storage_configuration.s3_vectors_configuration.index_arn #=> String
+    #   resp.knowledge_base.storage_configuration.s3_vectors_configuration.index_name #=> String
+    #   resp.knowledge_base.storage_configuration.s3_vectors_configuration.vector_bucket_arn #=> String
+    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS", "MONGO_DB_ATLAS", "NEPTUNE_ANALYTICS", "OPENSEARCH_MANAGED_CLUSTER", "S3_VECTORS"
     #   resp.knowledge_base.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetKnowledgeBase AWS API Documentation
@@ -4564,6 +4803,7 @@ module Aws::BedrockAgent
     #   resp.agent_alias_summaries[0].agent_alias_id #=> String
     #   resp.agent_alias_summaries[0].agent_alias_name #=> String
     #   resp.agent_alias_summaries[0].agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING", "DISSOCIATED"
+    #   resp.agent_alias_summaries[0].alias_invocation_state #=> String, one of "ACCEPT_INVOCATIONS", "REJECT_INVOCATIONS"
     #   resp.agent_alias_summaries[0].created_at #=> Time
     #   resp.agent_alias_summaries[0].description #=> String
     #   resp.agent_alias_summaries[0].routing_configuration #=> Array
@@ -4889,6 +5129,8 @@ module Aws::BedrockAgent
     #
     #   resp.flow_alias_summaries #=> Array
     #   resp.flow_alias_summaries[0].arn #=> String
+    #   resp.flow_alias_summaries[0].concurrency_configuration.max_concurrency #=> Integer
+    #   resp.flow_alias_summaries[0].concurrency_configuration.type #=> String, one of "Automatic", "Manual"
     #   resp.flow_alias_summaries[0].created_at #=> Time
     #   resp.flow_alias_summaries[0].description #=> String
     #   resp.flow_alias_summaries[0].flow_id #=> String
@@ -5858,7 +6100,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #   [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
     #
     # @option params [Hash<String,String>] :parent_action_group_signature_params
@@ -5871,7 +6113,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #
     # @return [Types::UpdateAgentActionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5967,6 +6209,13 @@ module Aws::BedrockAgent
     # @option params [required, String] :agent_id
     #   The unique identifier of the agent.
     #
+    # @option params [String] :alias_invocation_state
+    #   The invocation state for the agent alias. To pause the agent alias,
+    #   set the value to `REJECT_INVOCATIONS`. To start the agent alias
+    #   running again, set the value to `ACCEPT_INVOCATIONS`. Use the
+    #   `GetAgentAlias`, or `ListAgentAliases`, operation to get the
+    #   invocation state of an agent alias.
+    #
     # @option params [String] :description
     #   Specifies a new description for the alias.
     #
@@ -5983,6 +6232,7 @@ module Aws::BedrockAgent
     #     agent_alias_id: "AgentAliasId", # required
     #     agent_alias_name: "Name", # required
     #     agent_id: "Id", # required
+    #     alias_invocation_state: "ACCEPT_INVOCATIONS", # accepts ACCEPT_INVOCATIONS, REJECT_INVOCATIONS
     #     description: "Description",
     #     routing_configuration: [
     #       {
@@ -6005,6 +6255,7 @@ module Aws::BedrockAgent
     #   resp.agent_alias.agent_alias_name #=> String
     #   resp.agent_alias.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING", "DISSOCIATED"
     #   resp.agent_alias.agent_id #=> String
+    #   resp.agent_alias.alias_invocation_state #=> String, one of "ACCEPT_INVOCATIONS", "REJECT_INVOCATIONS"
     #   resp.agent_alias.client_token #=> String
     #   resp.agent_alias.created_at #=> Time
     #   resp.agent_alias.description #=> String
@@ -6534,6 +6785,10 @@ module Aws::BedrockAgent
     #                 },
     #               ],
     #             },
+    #             inline_code: {
+    #               code: "InlineCode", # required
+    #               language: "Python_3", # required, accepts Python_3
+    #             },
     #             input: {
     #             },
     #             iterator: {
@@ -6543,8 +6798,68 @@ module Aws::BedrockAgent
     #                 guardrail_identifier: "GuardrailIdentifier",
     #                 guardrail_version: "GuardrailVersion",
     #               },
+    #               inference_configuration: {
+    #                 text: {
+    #                   max_tokens: 1,
+    #                   stop_sequences: ["String"],
+    #                   temperature: 1.0,
+    #                   top_p: 1.0,
+    #                 },
+    #               },
     #               knowledge_base_id: "KnowledgeBaseId", # required
     #               model_id: "KnowledgeBaseModelIdentifier",
+    #               number_of_results: 1,
+    #               orchestration_configuration: {
+    #                 additional_model_request_fields: {
+    #                   "AdditionalModelRequestFieldsKey" => {
+    #                   },
+    #                 },
+    #                 inference_config: {
+    #                   text: {
+    #                     max_tokens: 1,
+    #                     stop_sequences: ["String"],
+    #                     temperature: 1.0,
+    #                     top_p: 1.0,
+    #                   },
+    #                 },
+    #                 performance_config: {
+    #                   latency: "standard", # accepts standard, optimized
+    #                 },
+    #                 prompt_template: {
+    #                   text_prompt_template: "KnowledgeBaseTextPrompt",
+    #                 },
+    #               },
+    #               prompt_template: {
+    #                 text_prompt_template: "KnowledgeBaseTextPrompt",
+    #               },
+    #               reranking_configuration: {
+    #                 bedrock_reranking_configuration: {
+    #                   metadata_configuration: {
+    #                     selection_mode: "SELECTIVE", # required, accepts SELECTIVE, ALL
+    #                     selective_mode_configuration: {
+    #                       fields_to_exclude: [
+    #                         {
+    #                           field_name: "FieldForRerankingFieldNameString", # required
+    #                         },
+    #                       ],
+    #                       fields_to_include: [
+    #                         {
+    #                           field_name: "FieldForRerankingFieldNameString", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   model_configuration: { # required
+    #                     additional_model_request_fields: {
+    #                       "AdditionalModelRequestFieldsKey" => {
+    #                       },
+    #                     },
+    #                     model_arn: "BedrockRerankingModelArn", # required
+    #                   },
+    #                   number_of_reranked_results: 1,
+    #                 },
+    #                 type: "BEDROCK_RERANKING_MODEL", # required, accepts BEDROCK_RERANKING_MODEL
+    #               },
     #             },
     #             lambda_function: {
     #               lambda_arn: "LambdaArn", # required
@@ -6552,6 +6867,20 @@ module Aws::BedrockAgent
     #             lex: {
     #               bot_alias_arn: "LexBotAliasArn", # required
     #               locale_id: "LexBotLocaleId", # required
+    #             },
+    #             loop: {
+    #               definition: { # required
+    #                 # recursive FlowDefinition
+    #               },
+    #             },
+    #             loop_controller: {
+    #               continue_condition: { # required
+    #                 expression: "FlowConditionExpression",
+    #                 name: "FlowConditionName", # required
+    #               },
+    #               max_iterations: 1,
+    #             },
+    #             loop_input: {
     #             },
     #             output: {
     #             },
@@ -6664,6 +6993,7 @@ module Aws::BedrockAgent
     #           },
     #           inputs: [
     #             {
+    #               category: "LoopCondition", # accepts LoopCondition, ReturnValueToLoopStart, ExitLoop
     #               expression: "FlowNodeInputExpression", # required
     #               name: "FlowNodeInputName", # required
     #               type: "String", # required, accepts String, Number, Boolean, Object, Array
@@ -6676,7 +7006,7 @@ module Aws::BedrockAgent
     #               type: "String", # required, accepts String, Number, Boolean, Object, Array
     #             },
     #           ],
-    #           type: "Input", # required, accepts Input, Output, KnowledgeBase, Condition, Lex, Prompt, LambdaFunction, Storage, Agent, Retrieval, Iterator, Collector
+    #           type: "Input", # required, accepts Input, Output, KnowledgeBase, Condition, Lex, Prompt, LambdaFunction, Storage, Agent, Retrieval, Iterator, Collector, InlineCode, Loop, LoopInput, LoopController
     #         },
     #       ],
     #     },
@@ -6704,13 +7034,43 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.condition.conditions #=> Array
     #   resp.definition.nodes[0].configuration.condition.conditions[0].expression #=> String
     #   resp.definition.nodes[0].configuration.condition.conditions[0].name #=> String
+    #   resp.definition.nodes[0].configuration.inline_code.code #=> String
+    #   resp.definition.nodes[0].configuration.inline_code.language #=> String, one of "Python_3"
     #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_identifier #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_version #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.max_tokens #=> Integer
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.stop_sequences #=> Array
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.stop_sequences[0] #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.temperature #=> Float
+    #   resp.definition.nodes[0].configuration.knowledge_base.inference_configuration.text.top_p #=> Float
     #   resp.definition.nodes[0].configuration.knowledge_base.knowledge_base_id #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.model_id #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.number_of_results #=> Integer
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.additional_model_request_fields #=> Hash
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.max_tokens #=> Integer
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.stop_sequences #=> Array
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.stop_sequences[0] #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.temperature #=> Float
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.inference_config.text.top_p #=> Float
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.performance_config.latency #=> String, one of "standard", "optimized"
+    #   resp.definition.nodes[0].configuration.knowledge_base.orchestration_configuration.prompt_template.text_prompt_template #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.prompt_template.text_prompt_template #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selection_mode #=> String, one of "SELECTIVE", "ALL"
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_exclude #=> Array
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_exclude[0].field_name #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_include #=> Array
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.metadata_configuration.selective_mode_configuration.fields_to_include[0].field_name #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.model_configuration.additional_model_request_fields #=> Hash
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.model_configuration.model_arn #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.bedrock_reranking_configuration.number_of_reranked_results #=> Integer
+    #   resp.definition.nodes[0].configuration.knowledge_base.reranking_configuration.type #=> String, one of "BEDROCK_RERANKING_MODEL"
     #   resp.definition.nodes[0].configuration.lambda_function.lambda_arn #=> String
     #   resp.definition.nodes[0].configuration.lex.bot_alias_arn #=> String
     #   resp.definition.nodes[0].configuration.lex.locale_id #=> String
+    #   resp.definition.nodes[0].configuration.loop.definition #=> Types::FlowDefinition
+    #   resp.definition.nodes[0].configuration.loop_controller.continue_condition.expression #=> String
+    #   resp.definition.nodes[0].configuration.loop_controller.continue_condition.name #=> String
+    #   resp.definition.nodes[0].configuration.loop_controller.max_iterations #=> Integer
     #   resp.definition.nodes[0].configuration.prompt.guardrail_configuration.guardrail_identifier #=> String
     #   resp.definition.nodes[0].configuration.prompt.guardrail_configuration.guardrail_version #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.max_tokens #=> Integer
@@ -6743,6 +7103,7 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.retrieval.service_configuration.s3.bucket_name #=> String
     #   resp.definition.nodes[0].configuration.storage.service_configuration.s3.bucket_name #=> String
     #   resp.definition.nodes[0].inputs #=> Array
+    #   resp.definition.nodes[0].inputs[0].category #=> String, one of "LoopCondition", "ReturnValueToLoopStart", "ExitLoop"
     #   resp.definition.nodes[0].inputs[0].expression #=> String
     #   resp.definition.nodes[0].inputs[0].name #=> String
     #   resp.definition.nodes[0].inputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
@@ -6750,7 +7111,7 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].outputs #=> Array
     #   resp.definition.nodes[0].outputs[0].name #=> String
     #   resp.definition.nodes[0].outputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
-    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector"
+    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector", "InlineCode", "Loop", "LoopInput", "LoopController"
     #   resp.description #=> String
     #   resp.execution_role_arn #=> String
     #   resp.id #=> String
@@ -6779,6 +7140,10 @@ module Aws::BedrockAgent
     # @option params [required, String] :alias_identifier
     #   The unique identifier of the alias.
     #
+    # @option params [Types::FlowAliasConcurrencyConfiguration] :concurrency_configuration
+    #   The configuration that specifies how nodes in the flow are executed in
+    #   parallel.
+    #
     # @option params [String] :description
     #   A description for the alias.
     #
@@ -6794,6 +7159,7 @@ module Aws::BedrockAgent
     # @return [Types::UpdateFlowAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFlowAliasResponse#arn #arn} => String
+    #   * {Types::UpdateFlowAliasResponse#concurrency_configuration #concurrency_configuration} => Types::FlowAliasConcurrencyConfiguration
     #   * {Types::UpdateFlowAliasResponse#created_at #created_at} => Time
     #   * {Types::UpdateFlowAliasResponse#description #description} => String
     #   * {Types::UpdateFlowAliasResponse#flow_id #flow_id} => String
@@ -6806,6 +7172,10 @@ module Aws::BedrockAgent
     #
     #   resp = client.update_flow_alias({
     #     alias_identifier: "FlowAliasIdentifier", # required
+    #     concurrency_configuration: {
+    #       max_concurrency: 1,
+    #       type: "Automatic", # required, accepts Automatic, Manual
+    #     },
     #     description: "Description",
     #     flow_identifier: "FlowIdentifier", # required
     #     name: "Name", # required
@@ -6819,6 +7189,8 @@ module Aws::BedrockAgent
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.concurrency_configuration.max_concurrency #=> Integer
+    #   resp.concurrency_configuration.type #=> String, one of "Automatic", "Manual"
     #   resp.created_at #=> Time
     #   resp.description #=> String
     #   resp.flow_id #=> String
@@ -7049,7 +7421,12 @@ module Aws::BedrockAgent
     #         },
     #         vector_index_name: "RedisEnterpriseCloudIndexName", # required
     #       },
-    #       type: "OPENSEARCH_SERVERLESS", # required, accepts OPENSEARCH_SERVERLESS, PINECONE, REDIS_ENTERPRISE_CLOUD, RDS, MONGO_DB_ATLAS, NEPTUNE_ANALYTICS, OPENSEARCH_MANAGED_CLUSTER
+    #       s3_vectors_configuration: {
+    #         index_arn: "IndexArn",
+    #         index_name: "IndexName",
+    #         vector_bucket_arn: "VectorBucketArn",
+    #       },
+    #       type: "OPENSEARCH_SERVERLESS", # required, accepts OPENSEARCH_SERVERLESS, PINECONE, REDIS_ENTERPRISE_CLOUD, RDS, MONGO_DB_ATLAS, NEPTUNE_ANALYTICS, OPENSEARCH_MANAGED_CLUSTER, S3_VECTORS
     #     },
     #   })
     #
@@ -7142,7 +7519,10 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.text_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.vector_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.vector_index_name #=> String
-    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS", "MONGO_DB_ATLAS", "NEPTUNE_ANALYTICS", "OPENSEARCH_MANAGED_CLUSTER"
+    #   resp.knowledge_base.storage_configuration.s3_vectors_configuration.index_arn #=> String
+    #   resp.knowledge_base.storage_configuration.s3_vectors_configuration.index_name #=> String
+    #   resp.knowledge_base.storage_configuration.s3_vectors_configuration.vector_bucket_arn #=> String
+    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS", "MONGO_DB_ATLAS", "NEPTUNE_ANALYTICS", "OPENSEARCH_MANAGED_CLUSTER", "S3_VECTORS"
     #   resp.knowledge_base.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateKnowledgeBase AWS API Documentation
@@ -7405,6 +7785,10 @@ module Aws::BedrockAgent
     #                 },
     #               ],
     #             },
+    #             inline_code: {
+    #               code: "InlineCode", # required
+    #               language: "Python_3", # required, accepts Python_3
+    #             },
     #             input: {
     #             },
     #             iterator: {
@@ -7414,8 +7798,68 @@ module Aws::BedrockAgent
     #                 guardrail_identifier: "GuardrailIdentifier",
     #                 guardrail_version: "GuardrailVersion",
     #               },
+    #               inference_configuration: {
+    #                 text: {
+    #                   max_tokens: 1,
+    #                   stop_sequences: ["String"],
+    #                   temperature: 1.0,
+    #                   top_p: 1.0,
+    #                 },
+    #               },
     #               knowledge_base_id: "KnowledgeBaseId", # required
     #               model_id: "KnowledgeBaseModelIdentifier",
+    #               number_of_results: 1,
+    #               orchestration_configuration: {
+    #                 additional_model_request_fields: {
+    #                   "AdditionalModelRequestFieldsKey" => {
+    #                   },
+    #                 },
+    #                 inference_config: {
+    #                   text: {
+    #                     max_tokens: 1,
+    #                     stop_sequences: ["String"],
+    #                     temperature: 1.0,
+    #                     top_p: 1.0,
+    #                   },
+    #                 },
+    #                 performance_config: {
+    #                   latency: "standard", # accepts standard, optimized
+    #                 },
+    #                 prompt_template: {
+    #                   text_prompt_template: "KnowledgeBaseTextPrompt",
+    #                 },
+    #               },
+    #               prompt_template: {
+    #                 text_prompt_template: "KnowledgeBaseTextPrompt",
+    #               },
+    #               reranking_configuration: {
+    #                 bedrock_reranking_configuration: {
+    #                   metadata_configuration: {
+    #                     selection_mode: "SELECTIVE", # required, accepts SELECTIVE, ALL
+    #                     selective_mode_configuration: {
+    #                       fields_to_exclude: [
+    #                         {
+    #                           field_name: "FieldForRerankingFieldNameString", # required
+    #                         },
+    #                       ],
+    #                       fields_to_include: [
+    #                         {
+    #                           field_name: "FieldForRerankingFieldNameString", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   model_configuration: { # required
+    #                     additional_model_request_fields: {
+    #                       "AdditionalModelRequestFieldsKey" => {
+    #                       },
+    #                     },
+    #                     model_arn: "BedrockRerankingModelArn", # required
+    #                   },
+    #                   number_of_reranked_results: 1,
+    #                 },
+    #                 type: "BEDROCK_RERANKING_MODEL", # required, accepts BEDROCK_RERANKING_MODEL
+    #               },
     #             },
     #             lambda_function: {
     #               lambda_arn: "LambdaArn", # required
@@ -7423,6 +7867,20 @@ module Aws::BedrockAgent
     #             lex: {
     #               bot_alias_arn: "LexBotAliasArn", # required
     #               locale_id: "LexBotLocaleId", # required
+    #             },
+    #             loop: {
+    #               definition: { # required
+    #                 # recursive FlowDefinition
+    #               },
+    #             },
+    #             loop_controller: {
+    #               continue_condition: { # required
+    #                 expression: "FlowConditionExpression",
+    #                 name: "FlowConditionName", # required
+    #               },
+    #               max_iterations: 1,
+    #             },
+    #             loop_input: {
     #             },
     #             output: {
     #             },
@@ -7535,6 +7993,7 @@ module Aws::BedrockAgent
     #           },
     #           inputs: [
     #             {
+    #               category: "LoopCondition", # accepts LoopCondition, ReturnValueToLoopStart, ExitLoop
     #               expression: "FlowNodeInputExpression", # required
     #               name: "FlowNodeInputName", # required
     #               type: "String", # required, accepts String, Number, Boolean, Object, Array
@@ -7547,7 +8006,7 @@ module Aws::BedrockAgent
     #               type: "String", # required, accepts String, Number, Boolean, Object, Array
     #             },
     #           ],
-    #           type: "Input", # required, accepts Input, Output, KnowledgeBase, Condition, Lex, Prompt, LambdaFunction, Storage, Agent, Retrieval, Iterator, Collector
+    #           type: "Input", # required, accepts Input, Output, KnowledgeBase, Condition, Lex, Prompt, LambdaFunction, Storage, Agent, Retrieval, Iterator, Collector, InlineCode, Loop, LoopInput, LoopController
     #         },
     #       ],
     #     },
@@ -7562,6 +8021,12 @@ module Aws::BedrockAgent
     #   resp.validations[0].details.duplicate_connections.source #=> String
     #   resp.validations[0].details.duplicate_connections.target #=> String
     #   resp.validations[0].details.incompatible_connection_data_type.connection #=> String
+    #   resp.validations[0].details.invalid_loop_boundary.connection #=> String
+    #   resp.validations[0].details.invalid_loop_boundary.source #=> String
+    #   resp.validations[0].details.invalid_loop_boundary.target #=> String
+    #   resp.validations[0].details.loop_incompatible_node_type.incompatible_node_name #=> String
+    #   resp.validations[0].details.loop_incompatible_node_type.incompatible_node_type #=> String, one of "Input", "Condition", "Iterator", "Collector"
+    #   resp.validations[0].details.loop_incompatible_node_type.node #=> String
     #   resp.validations[0].details.malformed_condition_expression.cause #=> String
     #   resp.validations[0].details.malformed_condition_expression.condition #=> String
     #   resp.validations[0].details.malformed_condition_expression.node #=> String
@@ -7576,11 +8041,15 @@ module Aws::BedrockAgent
     #   resp.validations[0].details.mismatched_node_output_type.output #=> String
     #   resp.validations[0].details.missing_connection_configuration.connection #=> String
     #   resp.validations[0].details.missing_default_condition.node #=> String
+    #   resp.validations[0].details.missing_loop_controller_node.loop_node #=> String
+    #   resp.validations[0].details.missing_loop_input_node.loop_node #=> String
     #   resp.validations[0].details.missing_node_configuration.node #=> String
     #   resp.validations[0].details.missing_node_input.input #=> String
     #   resp.validations[0].details.missing_node_input.node #=> String
     #   resp.validations[0].details.missing_node_output.node #=> String
     #   resp.validations[0].details.missing_node_output.output #=> String
+    #   resp.validations[0].details.multiple_loop_controller_nodes.loop_node #=> String
+    #   resp.validations[0].details.multiple_loop_input_nodes.loop_node #=> String
     #   resp.validations[0].details.multiple_node_input_connections.input #=> String
     #   resp.validations[0].details.multiple_node_input_connections.node #=> String
     #   resp.validations[0].details.unfulfilled_node_input.input #=> String
@@ -7598,7 +8067,7 @@ module Aws::BedrockAgent
     #   resp.validations[0].details.unsatisfied_connection_conditions.connection #=> String
     #   resp.validations[0].message #=> String
     #   resp.validations[0].severity #=> String, one of "Warning", "Error"
-    #   resp.validations[0].type #=> String, one of "CyclicConnection", "DuplicateConnections", "DuplicateConditionExpression", "UnreachableNode", "UnknownConnectionSource", "UnknownConnectionSourceOutput", "UnknownConnectionTarget", "UnknownConnectionTargetInput", "UnknownConnectionCondition", "MalformedConditionExpression", "MalformedNodeInputExpression", "MismatchedNodeInputType", "MismatchedNodeOutputType", "IncompatibleConnectionDataType", "MissingConnectionConfiguration", "MissingDefaultCondition", "MissingEndingNodes", "MissingNodeConfiguration", "MissingNodeInput", "MissingNodeOutput", "MissingStartingNodes", "MultipleNodeInputConnections", "UnfulfilledNodeInput", "UnsatisfiedConnectionConditions", "Unspecified", "UnknownNodeInput", "UnknownNodeOutput"
+    #   resp.validations[0].type #=> String, one of "CyclicConnection", "DuplicateConnections", "DuplicateConditionExpression", "UnreachableNode", "UnknownConnectionSource", "UnknownConnectionSourceOutput", "UnknownConnectionTarget", "UnknownConnectionTargetInput", "UnknownConnectionCondition", "MalformedConditionExpression", "MalformedNodeInputExpression", "MismatchedNodeInputType", "MismatchedNodeOutputType", "IncompatibleConnectionDataType", "MissingConnectionConfiguration", "MissingDefaultCondition", "MissingEndingNodes", "MissingNodeConfiguration", "MissingNodeInput", "MissingNodeOutput", "MissingStartingNodes", "MultipleNodeInputConnections", "UnfulfilledNodeInput", "UnsatisfiedConnectionConditions", "Unspecified", "UnknownNodeInput", "UnknownNodeOutput", "MissingLoopInputNode", "MissingLoopControllerNode", "MultipleLoopInputNodes", "MultipleLoopControllerNodes", "LoopIncompatibleNodeType", "InvalidLoopBoundary"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ValidateFlowDefinition AWS API Documentation
     #
@@ -7627,7 +8096,7 @@ module Aws::BedrockAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

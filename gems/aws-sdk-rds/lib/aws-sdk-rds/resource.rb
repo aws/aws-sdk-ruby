@@ -962,11 +962,11 @@ module Aws::RDS
     #   support for that engine version. For more information, see the
     #   following sections:
     #
-    #   * Amazon Aurora - [Using Amazon RDS Extended Support][1] in the
-    #     *Amazon Aurora User Guide*
+    #   * Amazon Aurora - [Amazon RDS Extended Support with Amazon Aurora][1]
+    #     in the *Amazon Aurora User Guide*
     #
-    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
-    #     RDS User Guide*
+    #   * Amazon RDS - [Amazon RDS Extended Support with Amazon RDS][2] in the
+    #     *Amazon RDS User Guide*
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -1696,12 +1696,8 @@ module Aws::RDS
     #   set the `AvailabilityZone` parameter if the DB instance is a Multi-AZ
     #   deployment.
     #
-    #   This setting doesn't apply to the following DB instances:
-    #
-    #   * Amazon Aurora (DB instance Availability Zones (AZs) are managed by
-    #     the DB cluster.)
-    #
-    #   * RDS Custom
+    #   This setting doesn't apply to Amazon Aurora because the DB instance
+    #   Availability Zones (AZs) are managed by the DB cluster.
     # @option options [String] :engine_version
     #   The version number of the database engine to use.
     #
@@ -2270,6 +2266,8 @@ module Aws::RDS
     #
     #   Valid Values:
     #
+    #   * `local` (Dedicated Local Zone)
+    #
     #   * `outposts` (Amazon Web Services Outposts)
     #
     #   * `region` (Amazon Web Services Region)
@@ -2404,8 +2402,8 @@ module Aws::RDS
     #   You can use this setting to enroll your DB instance into Amazon RDS
     #   Extended Support. With RDS Extended Support, you can run the selected
     #   major engine version on your DB instance past the end of standard
-    #   support for that engine version. For more information, see [Using
-    #   Amazon RDS Extended Support][1] in the *Amazon RDS User Guide*.
+    #   support for that engine version. For more information, see [Amazon RDS
+    #   Extended Support with Amazon RDS][1] in the *Amazon RDS User Guide*.
     #
     #   Valid Values: `open-source-rds-extended-support |
     #   open-source-rds-extended-support-disabled`

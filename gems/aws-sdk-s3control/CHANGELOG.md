@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2025-07-02)
+------------------
+
+* Feature - Added TagResource, UntagResource, and ListTagsForResource support for directory bucket
+
+1.111.0 (2025-06-25)
+------------------
+
+* Feature - Add support for the ability to use Amazon S3 Access Points with Amazon FSx for OpenZFS file systems.
+
+1.110.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.109.0 (2025-05-12)
+------------------
+
+* Feature - Updates to support S3 Express zonal endpoints for directory buckets in AWS CLI
+
+1.108.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.107.0 (2025-04-22)
 ------------------
 

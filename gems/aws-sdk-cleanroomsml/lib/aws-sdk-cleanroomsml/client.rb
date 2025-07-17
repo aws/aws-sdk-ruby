@@ -200,8 +200,7 @@ module Aws::CleanRoomsML
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -479,6 +478,14 @@ module Aws::CleanRoomsML
     #   The Amazon Resource Name (ARN) of the trained model job that you want
     #   to cancel.
     #
+    # @option params [String] :version_identifier
+    #   The version identifier of the trained model to cancel. This parameter
+    #   allows you to specify which version of the trained model you want to
+    #   cancel when multiple versions exist.
+    #
+    #   If `versionIdentifier` is not specified, the base model will be
+    #   cancelled.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -486,6 +493,7 @@ module Aws::CleanRoomsML
     #   resp = client.cancel_trained_model({
     #     membership_identifier: "UUID", # required
     #     trained_model_arn: "TrainedModelArn", # required
+    #     version_identifier: "UUID",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CancelTrainedModel AWS API Documentation
@@ -919,6 +927,10 @@ module Aws::CleanRoomsML
     #           container_metrics: {
     #             noise_level: "HIGH", # required, accepts HIGH, MEDIUM, LOW, NONE
     #           },
+    #           max_artifact_size: {
+    #             unit: "GB", # required, accepts GB
+    #             value: 1.0, # required
+    #           },
     #         },
     #         trained_model_exports: {
     #           max_size: { # required
@@ -1093,9 +1105,40 @@ module Aws::CleanRoomsML
     # @option params [Types::StoppingCondition] :stopping_condition
     #   The criteria that is used to stop model training.
     #
+    # @option params [Array<Types::IncrementalTrainingDataChannel>] :incremental_training_data_channels
+    #   Specifies the incremental training data channels for the trained
+    #   model.
+    #
+    #   Incremental training allows you to create a new trained model with
+    #   updates without retraining from scratch. You can specify up to one
+    #   incremental training data channel that references a previously trained
+    #   model and its version.
+    #
+    #   Limit: Maximum of 20 channels total (including both
+    #   `incrementalTrainingDataChannels` and `dataChannels`).
+    #
     # @option params [required, Array<Types::ModelTrainingDataChannel>] :data_channels
     #   Defines the data channels that are used as input for the trained model
     #   request.
+    #
+    #   Limit: Maximum of 20 channels total (including both `dataChannels` and
+    #   `incrementalTrainingDataChannels`).
+    #
+    # @option params [String] :training_input_mode
+    #   The input mode for accessing the training data. This parameter
+    #   determines how the training data is made available to the training
+    #   algorithm. Valid values are:
+    #
+    #   * `File` - The training data is downloaded to the training instance
+    #     and made available as files.
+    #
+    #   * `FastFile` - The training data is streamed directly from Amazon S3
+    #     to the training algorithm, providing faster access for large
+    #     datasets.
+    #
+    #   * `Pipe` - The training data is streamed to the training algorithm
+    #     using named pipes, which can improve performance for certain
+    #     algorithms.
     #
     # @option params [String] :description
     #   The description of the trained model.
@@ -1140,6 +1183,7 @@ module Aws::CleanRoomsML
     # @return [Types::CreateTrainedModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTrainedModelResponse#trained_model_arn #trained_model_arn} => String
+    #   * {Types::CreateTrainedModelResponse#version_identifier #version_identifier} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1161,12 +1205,21 @@ module Aws::CleanRoomsML
     #     stopping_condition: {
     #       max_runtime_in_seconds: 1,
     #     },
+    #     incremental_training_data_channels: [
+    #       {
+    #         trained_model_arn: "TrainedModelArn", # required
+    #         version_identifier: "UUID",
+    #         channel_name: "ModelTrainingDataChannelName", # required
+    #       },
+    #     ],
     #     data_channels: [ # required
     #       {
     #         ml_input_channel_arn: "MLInputChannelArn", # required
     #         channel_name: "ModelTrainingDataChannelName", # required
+    #         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #       },
     #     ],
+    #     training_input_mode: "File", # accepts File, FastFile, Pipe
     #     description: "ResourceDescription",
     #     kms_key_arn: "KmsKeyArn",
     #     tags: {
@@ -1177,6 +1230,7 @@ module Aws::CleanRoomsML
     # @example Response structure
     #
     #   resp.trained_model_arn #=> String
+    #   resp.version_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CreateTrainedModel AWS API Documentation
     #
@@ -1491,7 +1545,7 @@ module Aws::CleanRoomsML
       req.send_request(options)
     end
 
-    # Deletes the output of a trained model.
+    # Deletes the model artifacts stored by the service.
     #
     # @option params [required, String] :trained_model_arn
     #   The Amazon Resource Name (ARN) of the trained model whose output you
@@ -1501,6 +1555,11 @@ module Aws::CleanRoomsML
     #   The membership ID of the member that is deleting the trained model
     #   output.
     #
+    # @option params [String] :version_identifier
+    #   The version identifier of the trained model to delete. If not
+    #   specified, the operation will delete the base version of the trained
+    #   model. When specified, only the particular version will be deleted.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1508,6 +1567,7 @@ module Aws::CleanRoomsML
     #   resp = client.delete_trained_model_output({
     #     trained_model_arn: "TrainedModelArn", # required
     #     membership_identifier: "UUID", # required
+    #     version_identifier: "UUID",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/DeleteTrainedModelOutput AWS API Documentation
@@ -1717,6 +1777,8 @@ module Aws::CleanRoomsML
     #   resp.privacy_configuration.policies.trained_models.container_logs[0].allowed_account_ids[0] #=> String
     #   resp.privacy_configuration.policies.trained_models.container_logs[0].filter_pattern #=> String
     #   resp.privacy_configuration.policies.trained_models.container_metrics.noise_level #=> String, one of "HIGH", "MEDIUM", "LOW", "NONE"
+    #   resp.privacy_configuration.policies.trained_models.max_artifact_size.unit #=> String, one of "GB"
+    #   resp.privacy_configuration.policies.trained_models.max_artifact_size.value #=> Float
     #   resp.privacy_configuration.policies.trained_model_exports.max_size.unit #=> String, one of "GB"
     #   resp.privacy_configuration.policies.trained_model_exports.max_size.value #=> Float
     #   resp.privacy_configuration.policies.trained_model_exports.files_to_export #=> Array
@@ -1808,17 +1870,25 @@ module Aws::CleanRoomsML
     #   The collaboration ID that contains the trained model that you want to
     #   return information about.
     #
+    # @option params [String] :version_identifier
+    #   The version identifier of the trained model to retrieve. If not
+    #   specified, the operation returns information about the latest version
+    #   of the trained model.
+    #
     # @return [Types::GetCollaborationTrainedModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetCollaborationTrainedModelResponse#membership_identifier #membership_identifier} => String
     #   * {Types::GetCollaborationTrainedModelResponse#collaboration_identifier #collaboration_identifier} => String
     #   * {Types::GetCollaborationTrainedModelResponse#trained_model_arn #trained_model_arn} => String
+    #   * {Types::GetCollaborationTrainedModelResponse#version_identifier #version_identifier} => String
+    #   * {Types::GetCollaborationTrainedModelResponse#incremental_training_data_channels #incremental_training_data_channels} => Array&lt;Types::IncrementalTrainingDataChannelOutput&gt;
     #   * {Types::GetCollaborationTrainedModelResponse#name #name} => String
     #   * {Types::GetCollaborationTrainedModelResponse#description #description} => String
     #   * {Types::GetCollaborationTrainedModelResponse#status #status} => String
     #   * {Types::GetCollaborationTrainedModelResponse#status_details #status_details} => Types::StatusDetails
     #   * {Types::GetCollaborationTrainedModelResponse#configured_model_algorithm_association_arn #configured_model_algorithm_association_arn} => String
     #   * {Types::GetCollaborationTrainedModelResponse#resource_config #resource_config} => Types::ResourceConfig
+    #   * {Types::GetCollaborationTrainedModelResponse#training_input_mode #training_input_mode} => String
     #   * {Types::GetCollaborationTrainedModelResponse#stopping_condition #stopping_condition} => Types::StoppingCondition
     #   * {Types::GetCollaborationTrainedModelResponse#metrics_status #metrics_status} => String
     #   * {Types::GetCollaborationTrainedModelResponse#metrics_status_details #metrics_status_details} => String
@@ -1834,6 +1904,7 @@ module Aws::CleanRoomsML
     #   resp = client.get_collaboration_trained_model({
     #     trained_model_arn: "TrainedModelArn", # required
     #     collaboration_identifier: "UUID", # required
+    #     version_identifier: "UUID",
     #   })
     #
     # @example Response structure
@@ -1841,6 +1912,11 @@ module Aws::CleanRoomsML
     #   resp.membership_identifier #=> String
     #   resp.collaboration_identifier #=> String
     #   resp.trained_model_arn #=> String
+    #   resp.version_identifier #=> String
+    #   resp.incremental_training_data_channels #=> Array
+    #   resp.incremental_training_data_channels[0].channel_name #=> String
+    #   resp.incremental_training_data_channels[0].version_identifier #=> String
+    #   resp.incremental_training_data_channels[0].model_name #=> String
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED", "INACTIVE", "CANCEL_PENDING", "CANCEL_IN_PROGRESS", "CANCEL_FAILED"
@@ -1850,6 +1926,7 @@ module Aws::CleanRoomsML
     #   resp.resource_config.instance_count #=> Integer
     #   resp.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.m6i.large", "ml.m6i.xlarge", "ml.m6i.2xlarge", "ml.m6i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.12xlarge", "ml.m6i.16xlarge", "ml.m6i.24xlarge", "ml.m6i.32xlarge", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.8xlarge", "ml.c6i.4xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.8xlarge", "ml.r5d.12xlarge", "ml.r5d.16xlarge", "ml.r5d.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge"
     #   resp.resource_config.volume_size_in_gb #=> Integer
+    #   resp.training_input_mode #=> String, one of "File", "FastFile", "Pipe"
     #   resp.stopping_condition.max_runtime_in_seconds #=> Integer
     #   resp.metrics_status #=> String, one of "PUBLISH_SUCCEEDED", "PUBLISH_FAILED"
     #   resp.metrics_status_details #=> String
@@ -2059,6 +2136,8 @@ module Aws::CleanRoomsML
     #   resp.privacy_configuration.policies.trained_models.container_logs[0].allowed_account_ids[0] #=> String
     #   resp.privacy_configuration.policies.trained_models.container_logs[0].filter_pattern #=> String
     #   resp.privacy_configuration.policies.trained_models.container_metrics.noise_level #=> String, one of "HIGH", "MEDIUM", "LOW", "NONE"
+    #   resp.privacy_configuration.policies.trained_models.max_artifact_size.unit #=> String, one of "GB"
+    #   resp.privacy_configuration.policies.trained_models.max_artifact_size.value #=> Float
     #   resp.privacy_configuration.policies.trained_model_exports.max_size.unit #=> String, one of "GB"
     #   resp.privacy_configuration.policies.trained_model_exports.max_size.value #=> Float
     #   resp.privacy_configuration.policies.trained_model_exports.files_to_export #=> Array
@@ -2205,17 +2284,25 @@ module Aws::CleanRoomsML
     #   The membership ID of the member that created the trained model that
     #   you are interested in.
     #
+    # @option params [String] :version_identifier
+    #   The version identifier of the trained model to retrieve. If not
+    #   specified, the operation returns information about the latest version
+    #   of the trained model.
+    #
     # @return [Types::GetTrainedModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTrainedModelResponse#membership_identifier #membership_identifier} => String
     #   * {Types::GetTrainedModelResponse#collaboration_identifier #collaboration_identifier} => String
     #   * {Types::GetTrainedModelResponse#trained_model_arn #trained_model_arn} => String
+    #   * {Types::GetTrainedModelResponse#version_identifier #version_identifier} => String
+    #   * {Types::GetTrainedModelResponse#incremental_training_data_channels #incremental_training_data_channels} => Array&lt;Types::IncrementalTrainingDataChannelOutput&gt;
     #   * {Types::GetTrainedModelResponse#name #name} => String
     #   * {Types::GetTrainedModelResponse#description #description} => String
     #   * {Types::GetTrainedModelResponse#status #status} => String
     #   * {Types::GetTrainedModelResponse#status_details #status_details} => Types::StatusDetails
     #   * {Types::GetTrainedModelResponse#configured_model_algorithm_association_arn #configured_model_algorithm_association_arn} => String
     #   * {Types::GetTrainedModelResponse#resource_config #resource_config} => Types::ResourceConfig
+    #   * {Types::GetTrainedModelResponse#training_input_mode #training_input_mode} => String
     #   * {Types::GetTrainedModelResponse#stopping_condition #stopping_condition} => Types::StoppingCondition
     #   * {Types::GetTrainedModelResponse#metrics_status #metrics_status} => String
     #   * {Types::GetTrainedModelResponse#metrics_status_details #metrics_status_details} => String
@@ -2235,6 +2322,7 @@ module Aws::CleanRoomsML
     #   resp = client.get_trained_model({
     #     trained_model_arn: "TrainedModelArn", # required
     #     membership_identifier: "UUID", # required
+    #     version_identifier: "UUID",
     #   })
     #
     # @example Response structure
@@ -2242,6 +2330,11 @@ module Aws::CleanRoomsML
     #   resp.membership_identifier #=> String
     #   resp.collaboration_identifier #=> String
     #   resp.trained_model_arn #=> String
+    #   resp.version_identifier #=> String
+    #   resp.incremental_training_data_channels #=> Array
+    #   resp.incremental_training_data_channels[0].channel_name #=> String
+    #   resp.incremental_training_data_channels[0].version_identifier #=> String
+    #   resp.incremental_training_data_channels[0].model_name #=> String
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED", "INACTIVE", "CANCEL_PENDING", "CANCEL_IN_PROGRESS", "CANCEL_FAILED"
@@ -2251,6 +2344,7 @@ module Aws::CleanRoomsML
     #   resp.resource_config.instance_count #=> Integer
     #   resp.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.m6i.large", "ml.m6i.xlarge", "ml.m6i.2xlarge", "ml.m6i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.12xlarge", "ml.m6i.16xlarge", "ml.m6i.24xlarge", "ml.m6i.32xlarge", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.8xlarge", "ml.c6i.4xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.8xlarge", "ml.r5d.12xlarge", "ml.r5d.16xlarge", "ml.r5d.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge"
     #   resp.resource_config.volume_size_in_gb #=> Integer
+    #   resp.training_input_mode #=> String, one of "File", "FastFile", "Pipe"
     #   resp.stopping_condition.max_runtime_in_seconds #=> Integer
     #   resp.metrics_status #=> String, one of "PUBLISH_SUCCEEDED", "PUBLISH_FAILED"
     #   resp.metrics_status_details #=> String
@@ -2269,6 +2363,7 @@ module Aws::CleanRoomsML
     #   resp.data_channels #=> Array
     #   resp.data_channels[0].ml_input_channel_arn #=> String
     #   resp.data_channels[0].channel_name #=> String
+    #   resp.data_channels[0].s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetTrainedModel AWS API Documentation
     #
@@ -2298,6 +2393,7 @@ module Aws::CleanRoomsML
     #   * {Types::GetTrainedModelInferenceJobResponse#name #name} => String
     #   * {Types::GetTrainedModelInferenceJobResponse#status #status} => String
     #   * {Types::GetTrainedModelInferenceJobResponse#trained_model_arn #trained_model_arn} => String
+    #   * {Types::GetTrainedModelInferenceJobResponse#trained_model_version_identifier #trained_model_version_identifier} => String
     #   * {Types::GetTrainedModelInferenceJobResponse#resource_config #resource_config} => Types::InferenceResourceConfig
     #   * {Types::GetTrainedModelInferenceJobResponse#output_configuration #output_configuration} => Types::InferenceOutputConfiguration
     #   * {Types::GetTrainedModelInferenceJobResponse#membership_identifier #membership_identifier} => String
@@ -2330,6 +2426,7 @@ module Aws::CleanRoomsML
     #   resp.name #=> String
     #   resp.status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "CANCEL_PENDING", "CANCEL_IN_PROGRESS", "CANCEL_FAILED", "INACTIVE"
     #   resp.trained_model_arn #=> String
+    #   resp.trained_model_version_identifier #=> String
     #   resp.resource_config.instance_type #=> String, one of "ml.r7i.48xlarge", "ml.r6i.16xlarge", "ml.m6i.xlarge", "ml.m5.4xlarge", "ml.p2.xlarge", "ml.m4.16xlarge", "ml.r7i.16xlarge", "ml.m7i.xlarge", "ml.m6i.12xlarge", "ml.r7i.8xlarge", "ml.r7i.large", "ml.m7i.12xlarge", "ml.m6i.24xlarge", "ml.m7i.24xlarge", "ml.r6i.8xlarge", "ml.r6i.large", "ml.g5.2xlarge", "ml.m5.large", "ml.p3.16xlarge", "ml.m7i.48xlarge", "ml.m6i.16xlarge", "ml.p2.16xlarge", "ml.g5.4xlarge", "ml.m7i.16xlarge", "ml.c4.2xlarge", "ml.c5.2xlarge", "ml.c6i.32xlarge", "ml.c4.4xlarge", "ml.g5.8xlarge", "ml.c6i.xlarge", "ml.c5.4xlarge", "ml.g4dn.xlarge", "ml.c7i.xlarge", "ml.c6i.12xlarge", "ml.g4dn.12xlarge", "ml.c7i.12xlarge", "ml.c6i.24xlarge", "ml.g4dn.2xlarge", "ml.c7i.24xlarge", "ml.c7i.2xlarge", "ml.c4.8xlarge", "ml.c6i.2xlarge", "ml.g4dn.4xlarge", "ml.c7i.48xlarge", "ml.c7i.4xlarge", "ml.c6i.16xlarge", "ml.c5.9xlarge", "ml.g4dn.16xlarge", "ml.c7i.16xlarge", "ml.c6i.4xlarge", "ml.c5.xlarge", "ml.c4.xlarge", "ml.g4dn.8xlarge", "ml.c7i.8xlarge", "ml.c7i.large", "ml.g5.xlarge", "ml.c6i.8xlarge", "ml.c6i.large", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.m7i.2xlarge", "ml.c5.18xlarge", "ml.g5.48xlarge", "ml.m6i.2xlarge", "ml.g5.16xlarge", "ml.m7i.4xlarge", "ml.p3.2xlarge", "ml.r6i.32xlarge", "ml.m6i.4xlarge", "ml.m5.xlarge", "ml.m4.10xlarge", "ml.r6i.xlarge", "ml.m5.12xlarge", "ml.m4.xlarge", "ml.r7i.2xlarge", "ml.r7i.xlarge", "ml.r6i.12xlarge", "ml.m5.24xlarge", "ml.r7i.12xlarge", "ml.m7i.8xlarge", "ml.m7i.large", "ml.r6i.24xlarge", "ml.r6i.2xlarge", "ml.m4.2xlarge", "ml.r7i.24xlarge", "ml.r7i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.large", "ml.m5.2xlarge", "ml.p2.8xlarge", "ml.r6i.4xlarge", "ml.m6i.32xlarge", "ml.p3.8xlarge", "ml.m4.4xlarge"
     #   resp.resource_config.instance_count #=> Integer
     #   resp.output_configuration.accept #=> String
@@ -2691,6 +2788,11 @@ module Aws::CleanRoomsML
     #   The Amazon Resource Name (ARN) of the trained model that was used to
     #   create the export jobs that you are interested in.
     #
+    # @option params [String] :trained_model_version_identifier
+    #   The version identifier of the trained model to filter export jobs by.
+    #   When specified, only export jobs for this specific version of the
+    #   trained model are returned.
+    #
     # @return [Types::ListCollaborationTrainedModelExportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListCollaborationTrainedModelExportJobsResponse#next_token #next_token} => String
@@ -2705,6 +2807,7 @@ module Aws::CleanRoomsML
     #     max_results: 1,
     #     collaboration_identifier: "UUID", # required
     #     trained_model_arn: "TrainedModelArn", # required
+    #     trained_model_version_identifier: "UUID",
     #   })
     #
     # @example Response structure
@@ -2722,6 +2825,7 @@ module Aws::CleanRoomsML
     #   resp.collaboration_trained_model_export_jobs[0].description #=> String
     #   resp.collaboration_trained_model_export_jobs[0].creator_account_id #=> String
     #   resp.collaboration_trained_model_export_jobs[0].trained_model_arn #=> String
+    #   resp.collaboration_trained_model_export_jobs[0].trained_model_version_identifier #=> String
     #   resp.collaboration_trained_model_export_jobs[0].membership_identifier #=> String
     #   resp.collaboration_trained_model_export_jobs[0].collaboration_identifier #=> String
     #
@@ -2752,6 +2856,11 @@ module Aws::CleanRoomsML
     #   The Amazon Resource Name (ARN) of the trained model that was used to
     #   create the trained model inference jobs that you are interested in.
     #
+    # @option params [String] :trained_model_version_identifier
+    #   The version identifier of the trained model to filter inference jobs
+    #   by. When specified, only inference jobs that used this specific
+    #   version of the trained model are returned.
+    #
     # @return [Types::ListCollaborationTrainedModelInferenceJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListCollaborationTrainedModelInferenceJobsResponse#next_token #next_token} => String
@@ -2766,6 +2875,7 @@ module Aws::CleanRoomsML
     #     max_results: 1,
     #     collaboration_identifier: "UUID", # required
     #     trained_model_arn: "TrainedModelArn",
+    #     trained_model_version_identifier: "UUID",
     #   })
     #
     # @example Response structure
@@ -2776,6 +2886,7 @@ module Aws::CleanRoomsML
     #   resp.collaboration_trained_model_inference_jobs[0].configured_model_algorithm_association_arn #=> String
     #   resp.collaboration_trained_model_inference_jobs[0].membership_identifier #=> String
     #   resp.collaboration_trained_model_inference_jobs[0].trained_model_arn #=> String
+    #   resp.collaboration_trained_model_inference_jobs[0].trained_model_version_identifier #=> String
     #   resp.collaboration_trained_model_inference_jobs[0].collaboration_identifier #=> String
     #   resp.collaboration_trained_model_inference_jobs[0].status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "CANCEL_PENDING", "CANCEL_IN_PROGRESS", "CANCEL_FAILED", "INACTIVE"
     #   resp.collaboration_trained_model_inference_jobs[0].output_configuration.accept #=> String
@@ -2836,6 +2947,11 @@ module Aws::CleanRoomsML
     #   resp.collaboration_trained_models[0].update_time #=> Time
     #   resp.collaboration_trained_models[0].trained_model_arn #=> String
     #   resp.collaboration_trained_models[0].name #=> String
+    #   resp.collaboration_trained_models[0].version_identifier #=> String
+    #   resp.collaboration_trained_models[0].incremental_training_data_channels #=> Array
+    #   resp.collaboration_trained_models[0].incremental_training_data_channels[0].channel_name #=> String
+    #   resp.collaboration_trained_models[0].incremental_training_data_channels[0].version_identifier #=> String
+    #   resp.collaboration_trained_models[0].incremental_training_data_channels[0].model_name #=> String
     #   resp.collaboration_trained_models[0].description #=> String
     #   resp.collaboration_trained_models[0].membership_identifier #=> String
     #   resp.collaboration_trained_models[0].collaboration_identifier #=> String
@@ -3090,6 +3206,11 @@ module Aws::CleanRoomsML
     #   The Amazon Resource Name (ARN) of a trained model that was used to
     #   create the trained model inference jobs that you are interested in.
     #
+    # @option params [String] :trained_model_version_identifier
+    #   The version identifier of the trained model to filter inference jobs
+    #   by. When specified, only inference jobs that used this specific
+    #   version of the trained model are returned.
+    #
     # @return [Types::ListTrainedModelInferenceJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTrainedModelInferenceJobsResponse#next_token #next_token} => String
@@ -3104,6 +3225,7 @@ module Aws::CleanRoomsML
     #     max_results: 1,
     #     membership_identifier: "UUID", # required
     #     trained_model_arn: "TrainedModelArn",
+    #     trained_model_version_identifier: "UUID",
     #   })
     #
     # @example Response structure
@@ -3114,6 +3236,7 @@ module Aws::CleanRoomsML
     #   resp.trained_model_inference_jobs[0].configured_model_algorithm_association_arn #=> String
     #   resp.trained_model_inference_jobs[0].membership_identifier #=> String
     #   resp.trained_model_inference_jobs[0].trained_model_arn #=> String
+    #   resp.trained_model_inference_jobs[0].trained_model_version_identifier #=> String
     #   resp.trained_model_inference_jobs[0].collaboration_identifier #=> String
     #   resp.trained_model_inference_jobs[0].status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "CANCEL_PENDING", "CANCEL_IN_PROGRESS", "CANCEL_FAILED", "INACTIVE"
     #   resp.trained_model_inference_jobs[0].output_configuration.accept #=> String
@@ -3134,6 +3257,78 @@ module Aws::CleanRoomsML
     # @param [Hash] params ({})
     def list_trained_model_inference_jobs(params = {}, options = {})
       req = build_request(:list_trained_model_inference_jobs, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of trained model versions for a specified trained
+    # model. This operation allows you to view all versions of a trained
+    # model, including information about their status and creation details.
+    # You can use this to track the evolution of your trained models and
+    # select specific versions for inference or further training.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous `ListTrainedModelVersions`
+    #   request. Use this token to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of trained model versions to return in a single
+    #   page. The default value is 10, and the maximum value is 100.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership identifier for the collaboration that contains the
+    #   trained model.
+    #
+    # @option params [required, String] :trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model for which to list
+    #   versions.
+    #
+    # @option params [String] :status
+    #   Filter the results to only include trained model versions with the
+    #   specified status. Valid values include `CREATE_PENDING`,
+    #   `CREATE_IN_PROGRESS`, `ACTIVE`, `CREATE_FAILED`, and others.
+    #
+    # @return [Types::ListTrainedModelVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTrainedModelVersionsResponse#next_token #next_token} => String
+    #   * {Types::ListTrainedModelVersionsResponse#trained_models #trained_models} => Array&lt;Types::TrainedModelSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_trained_model_versions({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     membership_identifier: "UUID", # required
+    #     trained_model_arn: "TrainedModelArn", # required
+    #     status: "CREATE_PENDING", # accepts CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED, ACTIVE, DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED, INACTIVE, CANCEL_PENDING, CANCEL_IN_PROGRESS, CANCEL_FAILED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.trained_models #=> Array
+    #   resp.trained_models[0].create_time #=> Time
+    #   resp.trained_models[0].update_time #=> Time
+    #   resp.trained_models[0].trained_model_arn #=> String
+    #   resp.trained_models[0].version_identifier #=> String
+    #   resp.trained_models[0].incremental_training_data_channels #=> Array
+    #   resp.trained_models[0].incremental_training_data_channels[0].channel_name #=> String
+    #   resp.trained_models[0].incremental_training_data_channels[0].version_identifier #=> String
+    #   resp.trained_models[0].incremental_training_data_channels[0].model_name #=> String
+    #   resp.trained_models[0].name #=> String
+    #   resp.trained_models[0].description #=> String
+    #   resp.trained_models[0].membership_identifier #=> String
+    #   resp.trained_models[0].collaboration_identifier #=> String
+    #   resp.trained_models[0].status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED", "INACTIVE", "CANCEL_PENDING", "CANCEL_IN_PROGRESS", "CANCEL_FAILED"
+    #   resp.trained_models[0].configured_model_algorithm_association_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListTrainedModelVersions AWS API Documentation
+    #
+    # @overload list_trained_model_versions(params = {})
+    # @param [Hash] params ({})
+    def list_trained_model_versions(params = {}, options = {})
+      req = build_request(:list_trained_model_versions, params)
       req.send_request(options)
     end
 
@@ -3172,6 +3367,11 @@ module Aws::CleanRoomsML
     #   resp.trained_models[0].create_time #=> Time
     #   resp.trained_models[0].update_time #=> Time
     #   resp.trained_models[0].trained_model_arn #=> String
+    #   resp.trained_models[0].version_identifier #=> String
+    #   resp.trained_models[0].incremental_training_data_channels #=> Array
+    #   resp.trained_models[0].incremental_training_data_channels[0].channel_name #=> String
+    #   resp.trained_models[0].incremental_training_data_channels[0].version_identifier #=> String
+    #   resp.trained_models[0].incremental_training_data_channels[0].model_name #=> String
     #   resp.trained_models[0].name #=> String
     #   resp.trained_models[0].description #=> String
     #   resp.trained_models[0].membership_identifier #=> String
@@ -3463,6 +3663,11 @@ module Aws::CleanRoomsML
     #   The Amazon Resource Name (ARN) of the trained model that you want to
     #   export.
     #
+    # @option params [String] :trained_model_version_identifier
+    #   The version identifier of the trained model to export. This specifies
+    #   which version of the trained model should be exported to the specified
+    #   destination.
+    #
     # @option params [required, String] :membership_identifier
     #   The membership ID of the member that is receiving the exported trained
     #   model artifacts.
@@ -3480,6 +3685,7 @@ module Aws::CleanRoomsML
     #   resp = client.start_trained_model_export_job({
     #     name: "NameString", # required
     #     trained_model_arn: "TrainedModelArn", # required
+    #     trained_model_version_identifier: "UUID",
     #     membership_identifier: "UUID", # required
     #     output_configuration: { # required
     #       members: [ # required
@@ -3513,6 +3719,11 @@ module Aws::CleanRoomsML
     # @option params [required, String] :trained_model_arn
     #   The Amazon Resource Name (ARN) of the trained model that is used for
     #   this trained model inference job.
+    #
+    # @option params [String] :trained_model_version_identifier
+    #   The version identifier of the trained model to use for inference. This
+    #   specifies which version of the trained model should be used to
+    #   generate predictions on the input data.
     #
     # @option params [String] :configured_model_algorithm_association_arn
     #   The Amazon Resource Name (ARN) of the configured model algorithm
@@ -3586,6 +3797,7 @@ module Aws::CleanRoomsML
     #     membership_identifier: "UUID", # required
     #     name: "NameString", # required
     #     trained_model_arn: "TrainedModelArn", # required
+    #     trained_model_version_identifier: "UUID",
     #     configured_model_algorithm_association_arn: "ConfiguredModelAlgorithmAssociationArn",
     #     resource_config: { # required
     #       instance_type: "ml.r7i.48xlarge", # required, accepts ml.r7i.48xlarge, ml.r6i.16xlarge, ml.m6i.xlarge, ml.m5.4xlarge, ml.p2.xlarge, ml.m4.16xlarge, ml.r7i.16xlarge, ml.m7i.xlarge, ml.m6i.12xlarge, ml.r7i.8xlarge, ml.r7i.large, ml.m7i.12xlarge, ml.m6i.24xlarge, ml.m7i.24xlarge, ml.r6i.8xlarge, ml.r6i.large, ml.g5.2xlarge, ml.m5.large, ml.p3.16xlarge, ml.m7i.48xlarge, ml.m6i.16xlarge, ml.p2.16xlarge, ml.g5.4xlarge, ml.m7i.16xlarge, ml.c4.2xlarge, ml.c5.2xlarge, ml.c6i.32xlarge, ml.c4.4xlarge, ml.g5.8xlarge, ml.c6i.xlarge, ml.c5.4xlarge, ml.g4dn.xlarge, ml.c7i.xlarge, ml.c6i.12xlarge, ml.g4dn.12xlarge, ml.c7i.12xlarge, ml.c6i.24xlarge, ml.g4dn.2xlarge, ml.c7i.24xlarge, ml.c7i.2xlarge, ml.c4.8xlarge, ml.c6i.2xlarge, ml.g4dn.4xlarge, ml.c7i.48xlarge, ml.c7i.4xlarge, ml.c6i.16xlarge, ml.c5.9xlarge, ml.g4dn.16xlarge, ml.c7i.16xlarge, ml.c6i.4xlarge, ml.c5.xlarge, ml.c4.xlarge, ml.g4dn.8xlarge, ml.c7i.8xlarge, ml.c7i.large, ml.g5.xlarge, ml.c6i.8xlarge, ml.c6i.large, ml.g5.12xlarge, ml.g5.24xlarge, ml.m7i.2xlarge, ml.c5.18xlarge, ml.g5.48xlarge, ml.m6i.2xlarge, ml.g5.16xlarge, ml.m7i.4xlarge, ml.p3.2xlarge, ml.r6i.32xlarge, ml.m6i.4xlarge, ml.m5.xlarge, ml.m4.10xlarge, ml.r6i.xlarge, ml.m5.12xlarge, ml.m4.xlarge, ml.r7i.2xlarge, ml.r7i.xlarge, ml.r6i.12xlarge, ml.m5.24xlarge, ml.r7i.12xlarge, ml.m7i.8xlarge, ml.m7i.large, ml.r6i.24xlarge, ml.r6i.2xlarge, ml.m4.2xlarge, ml.r7i.24xlarge, ml.r7i.4xlarge, ml.m6i.8xlarge, ml.m6i.large, ml.m5.2xlarge, ml.p2.8xlarge, ml.r6i.4xlarge, ml.m6i.32xlarge, ml.p3.8xlarge, ml.m4.4xlarge
@@ -3798,7 +4010,7 @@ module Aws::CleanRoomsML
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanroomsml'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

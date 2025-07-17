@@ -35,11 +35,17 @@ module Aws::S3
 
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbortMultipartUploadOutput AWS API Documentation
@@ -366,12 +372,28 @@ module Aws::S3
     #   parameter, it is included in the response.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_arn
+    #   The Amazon Resource Name (ARN) of the S3 bucket. ARNs uniquely
+    #   identify Amazon Web Services resources across all of Amazon Web
+    #   Services.
+    #
+    #   <note markdown="1"> This parameter is only supported for S3 directory buckets. For more
+    #   information, see [Using tags with directory buckets][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Bucket AWS API Documentation
     #
     class Bucket < Struct.new(
       :name,
       :creation_date,
-      :bucket_region)
+      :bucket_region,
+      :bucket_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -939,7 +961,13 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
+    #   in Amazon S3.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3
+    #   access points, the only valid server side encryption option is
+    #   `aws:fsx`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -964,11 +992,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompleteMultipartUploadOutput AWS API Documentation
@@ -1469,7 +1503,13 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when you store this object
-    #   in Amazon S3 (for example, `AES256`, `aws:kms`, `aws:kms:dsse`).
+    #   in Amazon S3 or Amazon FSx.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3
+    #   access points, the only valid server side encryption option is
+    #   `aws:fsx`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -1513,11 +1553,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyObjectOutput AWS API Documentation
@@ -2019,6 +2065,14 @@ module Aws::S3
     #     encryption-related request headers, you must ensure the encryption
     #     key is the same customer managed key that you specified for the
     #     directory bucket's default encryption configuration.
+    #
+    #   * <b>S3 access points for Amazon FSx </b> - When accessing data
+    #     stored in Amazon FSx file systems using S3 access points, the only
+    #     valid server side encryption option is `aws:fsx`. All Amazon FSx
+    #     file systems have encryption configured by default and are
+    #     encrypted at rest. Data is automatically encrypted before being
+    #     written to the file system, and automatically decrypted as it is
+    #     read. These processes are handled transparently by Amazon FSx.
     #
     #
     #
@@ -2621,10 +2675,10 @@ module Aws::S3
     #
     #   <b>Directory buckets </b> - The location type is Availability Zone
     #   or Local Zone. To use the Local Zone location type, your account
-    #   must be enabled for Dedicated Local Zones. Otherwise, you get an
-    #   HTTP `403 Forbidden` error with the error code `AccessDenied`. To
-    #   learn more, see [Enable accounts for Dedicated Local Zones][1] in
-    #   the *Amazon S3 User Guide*.
+    #   must be enabled for Local Zones. Otherwise, you get an HTTP `403
+    #   Forbidden` error with the error code `AccessDenied`. To learn more,
+    #   see [Enable accounts for Local Zones][1] in the *Amazon S3 User
+    #   Guide*.
     #
     #   <note markdown="1"> This functionality is only supported by directory buckets.
     #
@@ -2643,19 +2697,69 @@ module Aws::S3
     #    </note>
     #   @return [Types::BucketInfo]
     #
+    # @!attribute [rw] tags
+    #   An array of tags that you can apply to the bucket that you're
+    #   creating. Tags are key-value pairs of metadata used to categorize
+    #   and organize your buckets, track costs, and control access.
+    #
+    #   <note markdown="1"> This parameter is only supported for S3 directory buckets. For more
+    #   information, see [Using tags with directory buckets][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucketConfiguration AWS API Documentation
     #
     class CreateBucketConfiguration < Struct.new(
       :location_constraint,
       :location,
-      :bucket)
+      :bucket,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] bucket
     #   The general purpose bucket that you want to create the metadata
-    #   table configuration in.
+    #   configuration for.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_md5
+    #   The `Content-MD5` header for the metadata configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] checksum_algorithm
+    #   The checksum algorithm to use with your metadata configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_configuration
+    #   The contents of your metadata configuration.
+    #   @return [Types::MetadataConfiguration]
+    #
+    # @!attribute [rw] expected_bucket_owner
+    #   The expected owner of the general purpose bucket that corresponds to
+    #   your metadata configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucketMetadataConfigurationRequest AWS API Documentation
+    #
+    class CreateBucketMetadataConfigurationRequest < Struct.new(
+      :bucket,
+      :content_md5,
+      :checksum_algorithm,
+      :metadata_configuration,
+      :expected_bucket_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bucket
+    #   The general purpose bucket that you want to create the metadata
+    #   table configuration for.
     #   @return [String]
     #
     # @!attribute [rw] content_md5
@@ -2672,8 +2776,8 @@ module Aws::S3
     #   @return [Types::MetadataTableConfiguration]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The expected owner of the general purpose bucket that contains your
-    #   metadata table configuration.
+    #   The expected owner of the general purpose bucket that corresponds to
+    #   your metadata table configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucketMetadataTableConfigurationRequest AWS API Documentation
@@ -2692,10 +2796,26 @@ module Aws::S3
     #   A forward slash followed by the name of the bucket.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_arn
+    #   The Amazon Resource Name (ARN) of the S3 bucket. ARNs uniquely
+    #   identify Amazon Web Services resources across all of Amazon Web
+    #   Services.
+    #
+    #   <note markdown="1"> This parameter is only supported for S3 directory buckets. For more
+    #   information, see [Using tags with directory buckets][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucketOutput AWS API Documentation
     #
     class CreateBucketOutput < Struct.new(
-      :location)
+      :location,
+      :bucket_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2894,7 +3014,13 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when you store this object
-    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
+    #   in Amazon S3 or Amazon FSx.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3
+    #   access points, the only valid server side encryption option is
+    #   `aws:fsx`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -2938,11 +3064,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] checksum_algorithm
@@ -3356,7 +3488,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when you store this object
-    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
+    #   in Amazon S3 or Amazon FSx.
     #
     #   * <b>Directory buckets </b> - For directory buckets, there are only
     #     two supported options for server-side encryption: server-side
@@ -3398,6 +3530,14 @@ module Aws::S3
     #     directory bucket.
     #
     #      </note>
+    #
+    #   * <b>S3 access points for Amazon FSx </b> - When accessing data
+    #     stored in Amazon FSx file systems using S3 access points, the only
+    #     valid server side encryption option is `aws:fsx`. All Amazon FSx
+    #     file systems have encryption configured by default and are
+    #     encrypted at rest. Data is automatically encrypted before being
+    #     written to the file system, and automatically decrypted as it is
+    #     read. These processes are handled transparently by Amazon FSx.
     #
     #
     #
@@ -3665,6 +3805,12 @@ module Aws::S3
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when you store objects in
     #   the directory bucket.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3
+    #   access points, the only valid server side encryption option is
+    #   `aws:fsx`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
@@ -3728,6 +3874,14 @@ module Aws::S3
     #   keys (SSE-KMS) (`aws:kms`). By default, Amazon S3 encrypts data with
     #   SSE-S3. For more information, see [Protecting data with server-side
     #   encryption][1] in the *Amazon S3 User Guide*.
+    #
+    #   <b>S3 access points for Amazon FSx </b> - When accessing data stored
+    #   in Amazon FSx file systems using S3 access points, the only valid
+    #   server side encryption option is `aws:fsx`. All Amazon FSx file
+    #   systems have encryption configured by default and are encrypted at
+    #   rest. Data is automatically encrypted before being written to the
+    #   file system, and automatically decrypted as it is read. These
+    #   processes are handled transparently by Amazon FSx.
     #
     #
     #
@@ -3976,11 +4130,19 @@ module Aws::S3
     #   The ID used to identify the S3 Intelligent-Tiering configuration.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account ID of the expected bucket owner. If the account ID that
+    #   you provide does not match the actual owner of the bucket, the
+    #   request fails with the HTTP status code `403 Forbidden` (access
+    #   denied).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketIntelligentTieringConfigurationRequest AWS API Documentation
     #
     class DeleteBucketIntelligentTieringConfigurationRequest < Struct.new(
       :bucket,
-      :id)
+      :id,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4030,6 +4192,25 @@ module Aws::S3
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketLifecycleRequest AWS API Documentation
     #
     class DeleteBucketLifecycleRequest < Struct.new(
+      :bucket,
+      :expected_bucket_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bucket
+    #   The general purpose bucket that you want to remove the metadata
+    #   configuration from.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_bucket_owner
+    #   The expected bucket owner of the general purpose bucket that you
+    #   want to remove the metadata table configuration from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketMetadataConfigurationRequest AWS API Documentation
+    #
+    class DeleteBucketMetadataConfigurationRequest < Struct.new(
       :bucket,
       :expected_bucket_owner)
       SENSITIVE = []
@@ -4348,11 +4529,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectOutput AWS API Documentation
@@ -4613,11 +4800,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] errors
@@ -4902,6 +5095,8 @@ module Aws::S3
     #   For valid values, see the `StorageClass` element of the [PUT Bucket
     #   replication][1] action in the *Amazon S3 API Reference*.
     #
+    #   `FSX_OPENZFS` is not an accepted value when replicating objects.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html
@@ -4944,6 +5139,37 @@ module Aws::S3
       :encryption_configuration,
       :replication_time,
       :metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The destination information for the S3 Metadata configuration.
+    #
+    # @!attribute [rw] table_bucket_type
+    #   The type of the table bucket where the metadata configuration is
+    #   stored. The `aws` value indicates an Amazon Web Services managed
+    #   table bucket, and the `customer` value indicates a customer-managed
+    #   table bucket. V2 metadata configurations are stored in Amazon Web
+    #   Services managed table buckets, and V1 metadata configurations are
+    #   stored in customer-managed table buckets.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_bucket_arn
+    #   The Amazon Resource Name (ARN) of the table bucket where the
+    #   metadata configuration is stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_namespace
+    #   The namespace in the table bucket where the metadata tables for a
+    #   metadata configuration are stored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DestinationResult AWS API Documentation
+    #
+    class DestinationResult < Struct.new(
+      :table_bucket_type,
+      :table_bucket_arn,
+      :table_namespace)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5789,12 +6015,24 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # If the `CreateBucketMetadataTableConfiguration` request succeeds, but
-    # S3 Metadata was unable to create the table, this structure contains
-    # the error code and error message.
+    # If an S3 Metadata V1 `CreateBucketMetadataTableConfiguration` or V2
+    # `CreateBucketMetadataConfiguration` request succeeds, but S3 Metadata
+    # was unable to create the table, this structure contains the error code
+    # and error message.
+    #
+    # <note markdown="1"> If you created your S3 Metadata configuration before July 15, 2025, we
+    # recommend that you delete and re-create your configuration by using
+    # [CreateBucketMetadataConfiguration][1] so that you can expire journal
+    # table records and create a live inventory table.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
     #
     # @!attribute [rw] error_code
-    #   If the `CreateBucketMetadataTableConfiguration` request succeeds,
+    #   If the V1 `CreateBucketMetadataTableConfiguration` request succeeds,
     #   but S3 Metadata was unable to create the table, this structure
     #   contains the error code. The possible error codes and error messages
     #   are as follows:
@@ -5833,10 +6071,65 @@ module Aws::S3
     #     Create or choose a different table bucket. To create a new
     #     metadata table, you must delete the metadata configuration for
     #     this bucket, and then create a new metadata configuration.
+    #
+    #   If the V2 `CreateBucketMetadataConfiguration` request succeeds, but
+    #   S3 Metadata was unable to create the table, this structure contains
+    #   the error code. The possible error codes and error messages are as
+    #   follows:
+    #
+    #   * `AccessDeniedCreatingResources` - You don't have sufficient
+    #     permissions to create the required resources. Make sure that you
+    #     have `s3tables:CreateTableBucket`, `s3tables:CreateNamespace`,
+    #     `s3tables:CreateTable`, `s3tables:GetTable`,
+    #     `s3tables:PutTablePolicy`, `kms:DescribeKey`, and
+    #     `s3tables:PutTableEncryption` permissions. Additionally, ensure
+    #     that the KMS key used to encrypt the table still exists, is active
+    #     and has a resource policy granting access to the S3 service
+    #     principals '`maintenance.s3tables.amazonaws.com`' and
+    #     '`metadata.s3.amazonaws.com`'. To create a new metadata table,
+    #     you must delete the metadata configuration for this bucket, and
+    #     then create a new metadata configuration.
+    #
+    #   * `AccessDeniedWritingToTable` - Unable to write to the metadata
+    #     table because of missing resource permissions. To fix the resource
+    #     policy, Amazon S3 needs to create a new metadata table. To create
+    #     a new metadata table, you must delete the metadata configuration
+    #     for this bucket, and then create a new metadata configuration.
+    #
+    #   * `DestinationTableNotFound` - The destination table doesn't exist.
+    #     To create a new metadata table, you must delete the metadata
+    #     configuration for this bucket, and then create a new metadata
+    #     configuration.
+    #
+    #   * `ServerInternalError` - An internal error has occurred. To create
+    #     a new metadata table, you must delete the metadata configuration
+    #     for this bucket, and then create a new metadata configuration.
+    #
+    #   * `JournalTableAlreadyExists` - A journal table already exists in
+    #     the Amazon Web Services managed table bucket's namespace. Delete
+    #     the journal table, and then try again. To create a new metadata
+    #     table, you must delete the metadata configuration for this bucket,
+    #     and then create a new metadata configuration.
+    #
+    #   * `InventoryTableAlreadyExists` - An inventory table already exists
+    #     in the Amazon Web Services managed table bucket's namespace.
+    #     Delete the inventory table, and then try again. To create a new
+    #     metadata table, you must delete the metadata configuration for
+    #     this bucket, and then create a new metadata configuration.
+    #
+    #   * `JournalTableNotAvailable` - The journal table that the inventory
+    #     table relies on has a `FAILED` status. An inventory table requires
+    #     a journal table with an `ACTIVE` status. To create a new journal
+    #     or inventory table, you must delete the metadata configuration for
+    #     this bucket, along with any journal or inventory tables, and then
+    #     create a new metadata configuration.
+    #
+    #   * `NoSuchBucket` - The specified general purpose bucket does not
+    #     exist.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   If the `CreateBucketMetadataTableConfiguration` request succeeds,
+    #   If the V1 `CreateBucketMetadataTableConfiguration` request succeeds,
     #   but S3 Metadata was unable to create the table, this structure
     #   contains the error message. The possible error codes and error
     #   messages are as follows:
@@ -5875,6 +6168,61 @@ module Aws::S3
     #     Create or choose a different table bucket. To create a new
     #     metadata table, you must delete the metadata configuration for
     #     this bucket, and then create a new metadata configuration.
+    #
+    #   If the V2 `CreateBucketMetadataConfiguration` request succeeds, but
+    #   S3 Metadata was unable to create the table, this structure contains
+    #   the error code. The possible error codes and error messages are as
+    #   follows:
+    #
+    #   * `AccessDeniedCreatingResources` - You don't have sufficient
+    #     permissions to create the required resources. Make sure that you
+    #     have `s3tables:CreateTableBucket`, `s3tables:CreateNamespace`,
+    #     `s3tables:CreateTable`, `s3tables:GetTable`,
+    #     `s3tables:PutTablePolicy`, `kms:DescribeKey`, and
+    #     `s3tables:PutTableEncryption` permissions. Additionally, ensure
+    #     that the KMS key used to encrypt the table still exists, is active
+    #     and has a resource policy granting access to the S3 service
+    #     principals '`maintenance.s3tables.amazonaws.com`' and
+    #     '`metadata.s3.amazonaws.com`'. To create a new metadata table,
+    #     you must delete the metadata configuration for this bucket, and
+    #     then create a new metadata configuration.
+    #
+    #   * `AccessDeniedWritingToTable` - Unable to write to the metadata
+    #     table because of missing resource permissions. To fix the resource
+    #     policy, Amazon S3 needs to create a new metadata table. To create
+    #     a new metadata table, you must delete the metadata configuration
+    #     for this bucket, and then create a new metadata configuration.
+    #
+    #   * `DestinationTableNotFound` - The destination table doesn't exist.
+    #     To create a new metadata table, you must delete the metadata
+    #     configuration for this bucket, and then create a new metadata
+    #     configuration.
+    #
+    #   * `ServerInternalError` - An internal error has occurred. To create
+    #     a new metadata table, you must delete the metadata configuration
+    #     for this bucket, and then create a new metadata configuration.
+    #
+    #   * `JournalTableAlreadyExists` - A journal table already exists in
+    #     the Amazon Web Services managed table bucket's namespace. Delete
+    #     the journal table, and then try again. To create a new metadata
+    #     table, you must delete the metadata configuration for this bucket,
+    #     and then create a new metadata configuration.
+    #
+    #   * `InventoryTableAlreadyExists` - An inventory table already exists
+    #     in the Amazon Web Services managed table bucket's namespace.
+    #     Delete the inventory table, and then try again. To create a new
+    #     metadata table, you must delete the metadata configuration for
+    #     this bucket, and then create a new metadata configuration.
+    #
+    #   * `JournalTableNotAvailable` - The journal table that the inventory
+    #     table relies on has a `FAILED` status. An inventory table requires
+    #     a journal table with an `ACTIVE` status. To create a new journal
+    #     or inventory table, you must delete the metadata configuration for
+    #     this bucket, along with any journal or inventory tables, and then
+    #     create a new metadata configuration.
+    #
+    #   * `NoSuchBucket` - The specified general purpose bucket does not
+    #     exist.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ErrorDetails AWS API Documentation
@@ -5983,11 +6331,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAccelerateConfigurationOutput AWS API Documentation
@@ -6250,11 +6604,19 @@ module Aws::S3
     #   The ID used to identify the S3 Intelligent-Tiering configuration.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account ID of the expected bucket owner. If the account ID that
+    #   you provide does not match the actual owner of the bucket, the
+    #   request fails with the HTTP status code `403 Forbidden` (access
+    #   denied).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketIntelligentTieringConfigurationRequest AWS API Documentation
     #
     class GetBucketIntelligentTieringConfigurationRequest < Struct.new(
       :bucket,
-      :id)
+      :id,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6483,6 +6845,51 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @!attribute [rw] get_bucket_metadata_configuration_result
+    #   The metadata configuration for the general purpose bucket.
+    #   @return [Types::GetBucketMetadataConfigurationResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetadataConfigurationOutput AWS API Documentation
+    #
+    class GetBucketMetadataConfigurationOutput < Struct.new(
+      :get_bucket_metadata_configuration_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bucket
+    #   The general purpose bucket that corresponds to the metadata
+    #   configuration that you want to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_bucket_owner
+    #   The expected owner of the general purpose bucket that you want to
+    #   retrieve the metadata table configuration for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetadataConfigurationRequest AWS API Documentation
+    #
+    class GetBucketMetadataConfigurationRequest < Struct.new(
+      :bucket,
+      :expected_bucket_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The S3 Metadata configuration for a general purpose bucket.
+    #
+    # @!attribute [rw] metadata_configuration_result
+    #   The metadata configuration for a general purpose bucket.
+    #   @return [Types::MetadataConfigurationResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetadataConfigurationResult AWS API Documentation
+    #
+    class GetBucketMetadataConfigurationResult < Struct.new(
+      :metadata_configuration_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] get_bucket_metadata_table_configuration_result
     #   The metadata table configuration for the general purpose bucket.
     #   @return [Types::GetBucketMetadataTableConfigurationResult]
@@ -6496,13 +6903,13 @@ module Aws::S3
     end
 
     # @!attribute [rw] bucket
-    #   The general purpose bucket that contains the metadata table
+    #   The general purpose bucket that corresponds to the metadata table
     #   configuration that you want to retrieve.
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
     #   The expected owner of the general purpose bucket that you want to
-    #   retrieve the metadata table configuration from.
+    #   retrieve the metadata table configuration for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetadataTableConfigurationRequest AWS API Documentation
@@ -6514,10 +6921,21 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # The metadata table configuration for a general purpose bucket.
+    # The V1 S3 Metadata configuration for a general purpose bucket.
+    #
+    # <note markdown="1"> If you created your S3 Metadata configuration before July 15, 2025, we
+    # recommend that you delete and re-create your configuration by using
+    # [CreateBucketMetadataConfiguration][1] so that you can expire journal
+    # table records and create a live inventory table.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
     #
     # @!attribute [rw] metadata_table_configuration_result
-    #   The metadata table configuration for a general purpose bucket.
+    #   The V1 S3 Metadata configuration for a general purpose bucket.
     #   @return [Types::MetadataTableConfigurationResult]
     #
     # @!attribute [rw] status
@@ -6526,7 +6944,7 @@ module Aws::S3
     #   * `CREATING` - The metadata table is in the process of being created
     #     in the specified table bucket.
     #
-    #   * `ACTIVE` - The metadata table has been created successfully and
+    #   * `ACTIVE` - The metadata table has been created successfully, and
     #     records are being delivered to the table.
     #
     #   * `FAILED` - Amazon S3 is unable to create the metadata table, or
@@ -6960,11 +7378,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectAclOutput AWS API Documentation
@@ -7078,11 +7502,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -7168,15 +7598,15 @@ module Aws::S3
     #   A container for elements related to a particular part. A response
     #   can contain zero or more `Parts` elements.
     #
-    #   <note markdown="1"> * **General purpose buckets** - For `GetObjectAttributes`, if a
+    #   <note markdown="1"> * **General purpose buckets** - For `GetObjectAttributes`, if an
     #     additional checksum (including `x-amz-checksum-crc32`,
     #     `x-amz-checksum-crc32c`, `x-amz-checksum-sha1`, or
     #     `x-amz-checksum-sha256`) isn't applied to the object specified in
-    #     the request, the response doesn't return `Part`.
+    #     the request, the response doesn't return the `Part` element.
     #
-    #   * **Directory buckets** - For `GetObjectAttributes`, no matter
-    #     whether a additional checksum is applied to the object specified
-    #     in the request, the response returns `Part`.
+    #   * **Directory buckets** - For `GetObjectAttributes`, regardless of
+    #     whether an additional checksum is applied to the object specified
+    #     in the request, the response returns the `Part` element.
     #
     #    </note>
     #   @return [Array<Types::ObjectPart>]
@@ -7257,12 +7687,24 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] max_parts
-    #   Sets the maximum number of parts to return.
+    #   Sets the maximum number of parts to return. For more information,
+    #   see [Uploading and copying objects using multipart upload in Amazon
+    #   S3 ][1] in the *Amazon Simple Storage Service user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html
     #   @return [Integer]
     #
     # @!attribute [rw] part_number_marker
     #   Specifies the part after which listing should begin. Only parts with
-    #   higher part numbers will be listed.
+    #   higher part numbers will be listed. For more information, see
+    #   [Uploading and copying objects using multipart upload in Amazon S3
+    #   ][1] in the *Amazon Simple Storage Service user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html
     #   @return [Integer]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -7681,7 +8123,13 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when you store this object
-    #   in Amazon S3.
+    #   in Amazon S3 or Amazon FSx.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3
+    #   access points, the only valid server side encryption option is
+    #   `aws:fsx`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -7734,11 +8182,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] replication_status
@@ -8377,11 +8831,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTorrentOutput AWS API Documentation
@@ -8568,6 +9028,21 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @!attribute [rw] bucket_arn
+    #   The Amazon Resource Name (ARN) of the S3 bucket. ARNs uniquely
+    #   identify Amazon Web Services resources across all of Amazon Web
+    #   Services.
+    #
+    #   <note markdown="1"> This parameter is only supported for S3 directory buckets. For more
+    #   information, see [Using tags with directory buckets][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html
+    #   @return [String]
+    #
     # @!attribute [rw] bucket_location_type
     #   The type of location where the bucket is created.
     #
@@ -8604,6 +9079,7 @@ module Aws::S3
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadBucketOutput AWS API Documentation
     #
     class HeadBucketOutput < Struct.new(
+      :bucket_arn,
       :bucket_location_type,
       :bucket_location_name,
       :bucket_region,
@@ -8917,7 +9393,13 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when you store this object
-    #   in Amazon S3 (for example, `AES256`, `aws:kms`, `aws:kms:dsse`).
+    #   in Amazon S3 or Amazon FSx.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3
+    #   access points, the only valid server side encryption option is
+    #   `aws:fsx`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -8976,11 +9458,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] replication_status
@@ -9035,6 +9523,22 @@ module Aws::S3
     #   The count of parts this object has. This value is only returned if
     #   you specify `partNumber` in your request and the object was uploaded
     #   as a multipart upload.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tag_count
+    #   The number of tags, if any, on the object, when you have the
+    #   relevant permission to read object tags.
+    #
+    #   You can use [GetObjectTagging][1] to retrieve the tag set associated
+    #   with an object.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html
     #   @return [Integer]
     #
     # @!attribute [rw] object_lock_mode
@@ -9117,6 +9621,7 @@ module Aws::S3
       :request_charged,
       :replication_status,
       :parts_count,
+      :tag_count,
       :object_lock_mode,
       :object_lock_retain_until_date,
       :object_lock_legal_hold_status)
@@ -9405,6 +9910,27 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Parameters on this idempotent request are inconsistent with parameters
+    # used in previous request(s).
+    #
+    # For a list of error codes and more information on Amazon S3 errors,
+    # see [Error codes][1].
+    #
+    # <note markdown="1"> Idempotency ensures that an API request completes no more than one
+    # time. With an idempotent request, if the original request completes
+    # successfully, any subsequent retries complete successfully without
+    # performing any further actions.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/IdempotencyParameterMismatch AWS API Documentation
+    #
+    class IdempotencyParameterMismatch < Aws::EmptyStructure; end
+
     # Container for the `Suffix` element.
     #
     # @!attribute [rw] suffix
@@ -9645,7 +10171,7 @@ module Aws::S3
     #
     class InvalidWriteOffset < Aws::EmptyStructure; end
 
-    # Specifies the inventory configuration for an Amazon S3 bucket. For
+    # Specifies the S3 Inventory configuration for an Amazon S3 bucket. For
     # more information, see [GET Bucket inventory][1] in the *Amazon S3 API
     # Reference*.
     #
@@ -9703,7 +10229,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Specifies the inventory configuration for an Amazon S3 bucket.
+    # Specifies the S3 Inventory configuration for an Amazon S3 bucket.
     #
     # @!attribute [rw] s3_bucket_destination
     #   Contains the bucket name, file format, bucket owner (optional), and
@@ -9718,8 +10244,8 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Contains the type of server-side encryption used to encrypt the
-    # inventory results.
+    # Contains the type of server-side encryption used to encrypt the S3
+    # Inventory results.
     #
     # @!attribute [rw] sses3
     #   Specifies the use of SSE-S3 to encrypt delivered inventory reports.
@@ -9738,7 +10264,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Specifies an inventory filter. The inventory only includes objects
+    # Specifies an S3 Inventory filter. The inventory only includes objects
     # that meet the filter's criteria.
     #
     # @!attribute [rw] prefix
@@ -9755,7 +10281,7 @@ module Aws::S3
     end
 
     # Contains the bucket name, file format, bucket owner (optional), and
-    # prefix (optional) where inventory results are published.
+    # prefix (optional) where S3 Inventory results are published.
     #
     # @!attribute [rw] account_id
     #   The account ID that owns the destination S3 bucket. If no account ID
@@ -9798,7 +10324,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Specifies the schedule for generating inventory results.
+    # Specifies the schedule for generating S3 Inventory results.
     #
     # @!attribute [rw] frequency
     #   Specifies how frequently inventory results are produced.
@@ -9808,6 +10334,117 @@ module Aws::S3
     #
     class InventorySchedule < Struct.new(
       :frequency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The inventory table configuration for an S3 Metadata configuration.
+    #
+    # @!attribute [rw] configuration_state
+    #   The configuration state of the inventory table, indicating whether
+    #   the inventory table is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for the inventory table.
+    #   @return [Types::MetadataTableEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryTableConfiguration AWS API Documentation
+    #
+    class InventoryTableConfiguration < Struct.new(
+      :configuration_state,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The inventory table configuration for an S3 Metadata configuration.
+    #
+    # @!attribute [rw] configuration_state
+    #   The configuration state of the inventory table, indicating whether
+    #   the inventory table is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_status
+    #   The status of the inventory table. The status values are:
+    #
+    #   * `CREATING` - The inventory table is in the process of being
+    #     created in the specified Amazon Web Services managed table bucket.
+    #
+    #   * `BACKFILLING` - The inventory table is in the process of being
+    #     backfilled. When you enable the inventory table for your metadata
+    #     configuration, the table goes through a process known as
+    #     backfilling, during which Amazon S3 scans your general purpose
+    #     bucket to retrieve the initial metadata for all objects in the
+    #     bucket. Depending on the number of objects in your bucket, this
+    #     process can take several hours. When the backfilling process is
+    #     finished, the status of your inventory table changes from
+    #     `BACKFILLING` to `ACTIVE`. After backfilling is completed, updates
+    #     to your objects are reflected in the inventory table within one
+    #     hour.
+    #
+    #   * `ACTIVE` - The inventory table has been created successfully, and
+    #     records are being delivered to the table.
+    #
+    #   * `FAILED` - Amazon S3 is unable to create the inventory table, or
+    #     Amazon S3 is unable to deliver records.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   If an S3 Metadata V1 `CreateBucketMetadataTableConfiguration` or V2
+    #   `CreateBucketMetadataConfiguration` request succeeds, but S3
+    #   Metadata was unable to create the table, this structure contains the
+    #   error code and error message.
+    #
+    #   <note markdown="1"> If you created your S3 Metadata configuration before July 15, 2025,
+    #   we recommend that you delete and re-create your configuration by
+    #   using [CreateBucketMetadataConfiguration][1] so that you can expire
+    #   journal table records and create a live inventory table.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
+    #   @return [Types::ErrorDetails]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the inventory table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) for the inventory table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryTableConfigurationResult AWS API Documentation
+    #
+    class InventoryTableConfigurationResult < Struct.new(
+      :configuration_state,
+      :table_status,
+      :error,
+      :table_name,
+      :table_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified updates to the S3 Metadata inventory table
+    # configuration.
+    #
+    # @!attribute [rw] configuration_state
+    #   The configuration state of the inventory table, indicating whether
+    #   the inventory table is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for the inventory table.
+    #   @return [Types::MetadataTableEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryTableConfigurationUpdates AWS API Documentation
+    #
+    class InventoryTableConfigurationUpdates < Struct.new(
+      :configuration_state,
+      :encryption_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9837,6 +10474,96 @@ module Aws::S3
     #
     class JSONOutput < Struct.new(
       :record_delimiter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The journal table configuration for an S3 Metadata configuration.
+    #
+    # @!attribute [rw] record_expiration
+    #   The journal table record expiration settings for the journal table.
+    #   @return [Types::RecordExpiration]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for the journal table.
+    #   @return [Types::MetadataTableEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/JournalTableConfiguration AWS API Documentation
+    #
+    class JournalTableConfiguration < Struct.new(
+      :record_expiration,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The journal table configuration for the S3 Metadata configuration.
+    #
+    # @!attribute [rw] table_status
+    #   The status of the journal table. The status values are:
+    #
+    #   * `CREATING` - The journal table is in the process of being created
+    #     in the specified table bucket.
+    #
+    #   * `ACTIVE` - The journal table has been created successfully, and
+    #     records are being delivered to the table.
+    #
+    #   * `FAILED` - Amazon S3 is unable to create the journal table, or
+    #     Amazon S3 is unable to deliver records.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   If an S3 Metadata V1 `CreateBucketMetadataTableConfiguration` or V2
+    #   `CreateBucketMetadataConfiguration` request succeeds, but S3
+    #   Metadata was unable to create the table, this structure contains the
+    #   error code and error message.
+    #
+    #   <note markdown="1"> If you created your S3 Metadata configuration before July 15, 2025,
+    #   we recommend that you delete and re-create your configuration by
+    #   using [CreateBucketMetadataConfiguration][1] so that you can expire
+    #   journal table records and create a live inventory table.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
+    #   @return [Types::ErrorDetails]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the journal table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) for the journal table.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_expiration
+    #   The journal table record expiration settings for the journal table.
+    #   @return [Types::RecordExpiration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/JournalTableConfigurationResult AWS API Documentation
+    #
+    class JournalTableConfigurationResult < Struct.new(
+      :table_status,
+      :error,
+      :table_name,
+      :table_arn,
+      :record_expiration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified updates to the S3 Metadata journal table configuration.
+    #
+    # @!attribute [rw] record_expiration
+    #   The journal table record expiration settings for the journal table.
+    #   @return [Types::RecordExpiration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/JournalTableConfigurationUpdates AWS API Documentation
+    #
+    class JournalTableConfigurationUpdates < Struct.new(
+      :record_expiration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9987,13 +10714,21 @@ module Aws::S3
     #
     # @!attribute [rw] filter
     #   The `Filter` is used to identify objects that a Lifecycle Rule
-    #   applies to. A `Filter` must have exactly one of `Prefix`, `Tag`, or
-    #   `And` specified. `Filter` is required if the `LifecycleRule` does
-    #   not contain a `Prefix` element.
+    #   applies to. A `Filter` must have exactly one of `Prefix`, `Tag`,
+    #   `ObjectSizeGreaterThan`, `ObjectSizeLessThan`, or `And` specified.
+    #   `Filter` is required if the `LifecycleRule` does not contain a
+    #   `Prefix` element.
+    #
+    #   For more information about `Tag` filters, see [Adding filters to
+    #   Lifecycle rules][1] in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> `Tag` filters are not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-filters.html
     #   @return [Types::LifecycleRuleFilter]
     #
     # @!attribute [rw] status
@@ -10259,11 +10994,19 @@ module Aws::S3
     #   this request should begin.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account ID of the expected bucket owner. If the account ID that
+    #   you provide does not match the actual owner of the bucket, the
+    #   request fails with the HTTP status code `403 Forbidden` (access
+    #   denied).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketIntelligentTieringConfigurationsRequest AWS API Documentation
     #
     class ListBucketIntelligentTieringConfigurationsRequest < Struct.new(
       :bucket,
-      :continuation_token)
+      :continuation_token,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10633,11 +11376,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListMultipartUploadsOutput AWS API Documentation
@@ -10717,6 +11466,9 @@ module Aws::S3
     #   starts at the beginning of the key. The keys that are grouped under
     #   `CommonPrefixes` result element are not returned elsewhere in the
     #   response.
+    #
+    #   `CommonPrefixes` is filtered out from results if it is not
+    #   lexicographically greater than the key-marker.
     #
     #   <note markdown="1"> **Directory buckets** - For directory buckets, `/` is the only
     #   supported delimiter.
@@ -10932,11 +11684,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectVersionsOutput AWS API Documentation
@@ -10971,6 +11729,9 @@ module Aws::S3
     #   element in `CommonPrefixes`. These groups are counted as one result
     #   against the `max-keys` limitation. These keys are not returned
     #   elsewhere in the response.
+    #
+    #   `CommonPrefixes` is filtered out from results if it is not
+    #   lexicographically greater than the key-marker.
     #   @return [String]
     #
     # @!attribute [rw] encoding_type
@@ -11164,11 +11925,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsOutput AWS API Documentation
@@ -11238,6 +12005,9 @@ module Aws::S3
     #
     # @!attribute [rw] delimiter
     #   A delimiter is a character that you use to group keys.
+    #
+    #   `CommonPrefixes` is filtered out from results if it is not
+    #   lexicographically greater than the key-marker.
     #   @return [String]
     #
     # @!attribute [rw] encoding_type
@@ -11414,8 +12184,7 @@ module Aws::S3
     # @!attribute [rw] continuation_token
     #   If `ContinuationToken` was sent with the request, it is included in
     #   the response. You can use the returned `ContinuationToken` for
-    #   pagination of the list response. You can use this
-    #   `ContinuationToken` for pagination of the list results.
+    #   pagination of the list response.
     #   @return [String]
     #
     # @!attribute [rw] next_continuation_token
@@ -11437,11 +12206,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsV2Output AWS API Documentation
@@ -11511,6 +12286,9 @@ module Aws::S3
     #
     # @!attribute [rw] delimiter
     #   A delimiter is a character that you use to group keys.
+    #
+    #   `CommonPrefixes` is filtered out from results if it is not
+    #   lexicographically greater than the `StartAfter` value.
     #
     #   <note markdown="1"> * **Directory buckets** - For directory buckets, `/` is the only
     #     supported delimiter.
@@ -11744,11 +12522,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] checksum_algorithm
@@ -12030,6 +12814,49 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # The S3 Metadata configuration for a general purpose bucket.
+    #
+    # @!attribute [rw] journal_table_configuration
+    #   The journal table configuration for a metadata configuration.
+    #   @return [Types::JournalTableConfiguration]
+    #
+    # @!attribute [rw] inventory_table_configuration
+    #   The inventory table configuration for a metadata configuration.
+    #   @return [Types::InventoryTableConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetadataConfiguration AWS API Documentation
+    #
+    class MetadataConfiguration < Struct.new(
+      :journal_table_configuration,
+      :inventory_table_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The S3 Metadata configuration for a general purpose bucket.
+    #
+    # @!attribute [rw] destination_result
+    #   The destination settings for a metadata configuration.
+    #   @return [Types::DestinationResult]
+    #
+    # @!attribute [rw] journal_table_configuration_result
+    #   The journal table configuration for a metadata configuration.
+    #   @return [Types::JournalTableConfigurationResult]
+    #
+    # @!attribute [rw] inventory_table_configuration_result
+    #   The inventory table configuration for a metadata configuration.
+    #   @return [Types::InventoryTableConfigurationResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetadataConfigurationResult AWS API Documentation
+    #
+    class MetadataConfigurationResult < Struct.new(
+      :destination_result,
+      :journal_table_configuration_result,
+      :inventory_table_configuration_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A metadata key-value pair to store with an object.
     #
     # @!attribute [rw] name
@@ -12049,7 +12876,18 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # The metadata table configuration for a general purpose bucket.
+    # The V1 S3 Metadata configuration for a general purpose bucket.
+    #
+    # <note markdown="1"> If you created your S3 Metadata configuration before July 15, 2025, we
+    # recommend that you delete and re-create your configuration by using
+    # [CreateBucketMetadataConfiguration][1] so that you can expire journal
+    # table records and create a live inventory table.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
     #
     # @!attribute [rw] s3_tables_destination
     #   The destination information for the metadata table configuration.
@@ -12067,11 +12905,22 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # The metadata table configuration for a general purpose bucket. The
+    # The V1 S3 Metadata configuration for a general purpose bucket. The
     # destination table bucket must be in the same Region and Amazon Web
     # Services account as the general purpose bucket. The specified metadata
     # table name must be unique within the `aws_s3_metadata` namespace in
     # the destination table bucket.
+    #
+    # <note markdown="1"> If you created your S3 Metadata configuration before July 15, 2025, we
+    # recommend that you delete and re-create your configuration by using
+    # [CreateBucketMetadataConfiguration][1] so that you can expire journal
+    # table records and create a live inventory table.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
     #
     # @!attribute [rw] s3_tables_destination_result
     #   The destination information for the metadata table configuration.
@@ -12085,6 +12934,34 @@ module Aws::S3
     #
     class MetadataTableConfigurationResult < Struct.new(
       :s3_tables_destination_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The encryption settings for an S3 Metadata journal table or inventory
+    # table configuration.
+    #
+    # @!attribute [rw] sse_algorithm
+    #   The encryption type specified for a metadata table. To specify
+    #   server-side encryption with Key Management Service (KMS) keys
+    #   (SSE-KMS), use the `aws:kms` value. To specify server-side
+    #   encryption with Amazon S3 managed keys (SSE-S3), use the `AES256`
+    #   value.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   If server-side encryption with Key Management Service (KMS) keys
+    #   (SSE-KMS) is specified, you must also specify the KMS key Amazon
+    #   Resource Name (ARN). You must specify a customer-managed KMS key
+    #   that's located in the same Region as the general purpose bucket
+    #   that corresponds to the metadata table configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetadataTableEncryptionConfiguration AWS API Documentation
+    #
+    class MetadataTableEncryptionConfiguration < Struct.new(
+      :sse_algorithm,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12940,6 +13817,19 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # End of support notice: Beginning October 1, 2025, Amazon S3 will stop
+    # returning `DisplayName`. Update your applications to use canonical IDs
+    # (unique identifier for Amazon Web Services accounts), Amazon Web
+    # Services account ID (12 digit identifier) or IAM ARNs (full resource
+    # naming) as a direct replacement of `DisplayName`.
+    #
+    #  This change affects the following Amazon Web Services Regions: US
+    # East
+    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
+    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
+    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
+    # America (São Paulo) Region.
+    #
     # Container for the owner's display name and ID.
     #
     # @!attribute [rw] display_name
@@ -13621,6 +14511,13 @@ module Aws::S3
     #   The ID used to identify the S3 Intelligent-Tiering configuration.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account ID of the expected bucket owner. If the account ID that
+    #   you provide does not match the actual owner of the bucket, the
+    #   request fails with the HTTP status code `403 Forbidden` (access
+    #   denied).
+    #   @return [String]
+    #
     # @!attribute [rw] intelligent_tiering_configuration
     #   Container for S3 Intelligent-Tiering configuration.
     #   @return [Types::IntelligentTieringConfiguration]
@@ -13630,6 +14527,7 @@ module Aws::S3
     class PutBucketIntelligentTieringConfigurationRequest < Struct.new(
       :bucket,
       :id,
+      :expected_bucket_owner,
       :intelligent_tiering_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -14011,13 +14909,31 @@ module Aws::S3
     #   or ObjectWriter) that you want to apply to this Amazon S3 bucket.
     #   @return [Types::OwnershipControls]
     #
+    # @!attribute [rw] checksum_algorithm
+    #   Indicates the algorithm used to create the checksum for the object
+    #   when you use the SDK. This header will not provide any additional
+    #   functionality if you don't use the SDK. When you send this header,
+    #   there must be a corresponding `x-amz-checksum-algorithm ` header
+    #   sent. Otherwise, Amazon S3 fails the request with the HTTP status
+    #   code `400 Bad Request`. For more information, see [Checking object
+    #   integrity][1] in the *Amazon S3 User Guide*.
+    #
+    #   If you provide an individual checksum, Amazon S3 ignores any
+    #   provided `ChecksumAlgorithm` parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketOwnershipControlsRequest AWS API Documentation
     #
     class PutBucketOwnershipControlsRequest < Struct.new(
       :bucket,
       :content_md5,
       :expected_bucket_owner,
-      :ownership_controls)
+      :ownership_controls,
+      :checksum_algorithm)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14445,11 +15361,17 @@ module Aws::S3
 
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectAclOutput AWS API Documentation
@@ -14631,11 +15553,17 @@ module Aws::S3
 
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectLegalHoldOutput AWS API Documentation
@@ -14749,11 +15677,17 @@ module Aws::S3
 
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectLockConfigurationOutput AWS API Documentation
@@ -14964,7 +15898,13 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when you store this object
-    #   in Amazon S3.
+    #   in Amazon S3 or Amazon FSx.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3
+    #   access points, the only valid server side encryption option is
+    #   `aws:fsx`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -15043,11 +15983,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectOutput AWS API Documentation
@@ -15470,8 +16416,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm that was used when you store
-    #   this object in Amazon S3 (for example, `AES256`, `aws:kms`,
-    #   `aws:kms:dsse`).
+    #   this object in Amazon S3 or Amazon FSx.
     #
     #   * <b>General purpose buckets </b> - You have four mutually exclusive
     #     options to protect data using server-side encryption in Amazon S3,
@@ -15525,6 +16470,14 @@ module Aws::S3
     #     directory bucket.
     #
     #      </note>
+    #
+    #   * <b>S3 access points for Amazon FSx </b> - When accessing data
+    #     stored in Amazon FSx file systems using S3 access points, the only
+    #     valid server side encryption option is `aws:fsx`. All Amazon FSx
+    #     file systems have encryption configured by default and are
+    #     encrypted at rest. Data is automatically encrypted before being
+    #     written to the file system, and automatically decrypted as it is
+    #     read. These processes are handled transparently by Amazon FSx.
     #
     #
     #
@@ -15819,11 +16772,17 @@ module Aws::S3
 
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectRetentionOutput AWS API Documentation
@@ -16205,6 +17164,32 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # The journal table record expiration settings for a journal table in an
+    # S3 Metadata configuration.
+    #
+    # @!attribute [rw] expiration
+    #   Specifies whether journal table record expiration is enabled or
+    #   disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] days
+    #   If you enable journal table record expiration, you can set the
+    #   number of days to retain your journal table records. Journal table
+    #   records must be retained for a minimum of 7 days. To set this value,
+    #   specify any whole number from `7` to `2147483647`. For example, to
+    #   retain your journal table records for one year, set this value to
+    #   `365`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RecordExpiration AWS API Documentation
+    #
+    class RecordExpiration < Struct.new(
+      :expiration,
+      :days)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The container for the records event.
     #
     # @!attribute [rw] payload
@@ -16307,6 +17292,129 @@ module Aws::S3
     class RedirectAllRequestsTo < Struct.new(
       :host_name,
       :protocol)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RenameObjectOutput AWS API Documentation
+    #
+    class RenameObjectOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] bucket
+    #   The bucket name of the directory bucket containing the object.
+    #
+    #   You must use virtual-hosted-style requests in the format
+    #   `Bucket-name.s3express-zone-id.region-code.amazonaws.com`.
+    #   Path-style requests are not supported. Directory bucket names must
+    #   be unique in the chosen Availability Zone. Bucket names must follow
+    #   the format `bucket-base-name--zone-id--x-s3 ` (for example,
+    #   `amzn-s3-demo-bucket--usw2-az1--x-s3`). For information about bucket
+    #   naming restrictions, see [Directory bucket naming rules][1] in the
+    #   *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-bucket-naming-rules.html
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   Key name of the object to rename.
+    #   @return [String]
+    #
+    # @!attribute [rw] rename_source
+    #   Specifies the source for the rename operation. The value must be URL
+    #   encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_if_match
+    #   Renames the object only if the ETag (entity tag) value provided
+    #   during the operation matches the ETag of the object in S3. The
+    #   `If-Match` header field makes the request method conditional on
+    #   ETags. If the ETag values do not match, the operation returns a `412
+    #   Precondition Failed` error.
+    #
+    #   Expects the ETag value as a string.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_if_none_match
+    #   Renames the object only if the destination does not already exist in
+    #   the specified directory bucket. If the object does exist when you
+    #   send a request with `If-None-Match:*`, the S3 API will return a `412
+    #   Precondition Failed` error, preventing an overwrite. The
+    #   `If-None-Match` header prevents overwrites of existing data by
+    #   validating that there's not an object with the same key name
+    #   already in your directory bucket.
+    #
+    #   Expects the `*` character (asterisk).
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_if_modified_since
+    #   Renames the object if the destination exists and if it has been
+    #   modified since the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] destination_if_unmodified_since
+    #   Renames the object if it hasn't been modified since the specified
+    #   time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_if_match
+    #   Renames the object if the source exists and if its entity tag (ETag)
+    #   matches the specified ETag.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_if_none_match
+    #   Renames the object if the source exists and if its entity tag (ETag)
+    #   is different than the specified ETag. If an asterisk (`*`) character
+    #   is provided, the operation will fail and return a `412 Precondition
+    #   Failed` error.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_if_modified_since
+    #   Renames the object if the source exists and if it has been modified
+    #   since the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_if_unmodified_since
+    #   Renames the object if the source exists and hasn't been modified
+    #   since the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] client_token
+    #   A unique string with a max of 64 ASCII characters in the ASCII range
+    #   of 33 - 126.
+    #
+    #   <note markdown="1"> `RenameObject` supports idempotency using a client token. To make an
+    #   idempotent API request using `RenameObject`, specify a client token
+    #   in the request. You should not reuse the same client token for other
+    #   API requests. If you retry a request that completed successfully
+    #   using the same client token and the same parameters, the retry
+    #   succeeds without performing any further actions. If you retry a
+    #   successful request using the same client token, but one or more of
+    #   the parameters are different, the retry fails and an
+    #   `IdempotentParameterMismatch` error is returned.
+    #
+    #    </note>
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RenameObjectRequest AWS API Documentation
+    #
+    class RenameObjectRequest < Struct.new(
+      :bucket,
+      :key,
+      :rename_source,
+      :destination_if_match,
+      :destination_if_none_match,
+      :destination_if_modified_since,
+      :destination_if_unmodified_since,
+      :source_if_match,
+      :source_if_none_match,
+      :source_if_modified_since,
+      :source_if_unmodified_since,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16630,11 +17738,17 @@ module Aws::S3
 
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] restore_output_path
@@ -17064,11 +18178,22 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # The destination information for the metadata table configuration. The
+    # The destination information for a V1 S3 Metadata configuration. The
     # destination table bucket must be in the same Region and Amazon Web
     # Services account as the general purpose bucket. The specified metadata
     # table name must be unique within the `aws_s3_metadata` namespace in
     # the destination table bucket.
+    #
+    # <note markdown="1"> If you created your S3 Metadata configuration before July 15, 2025, we
+    # recommend that you delete and re-create your configuration by using
+    # [CreateBucketMetadataConfiguration][1] so that you can expire journal
+    # table records and create a live inventory table.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
     #
     # @!attribute [rw] table_bucket_arn
     #   The Amazon Resource Name (ARN) for the table bucket that's
@@ -17093,11 +18218,22 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # The destination information for the metadata table configuration. The
+    # The destination information for a V1 S3 Metadata configuration. The
     # destination table bucket must be in the same Region and Amazon Web
     # Services account as the general purpose bucket. The specified metadata
     # table name must be unique within the `aws_s3_metadata` namespace in
     # the destination table bucket.
+    #
+    # <note markdown="1"> If you created your S3 Metadata configuration before July 15, 2025, we
+    # recommend that you delete and re-create your configuration by using
+    # [CreateBucketMetadataConfiguration][1] so that you can expire journal
+    # table records and create a live inventory table.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
     #
     # @!attribute [rw] table_bucket_arn
     #   The Amazon Resource Name (ARN) for the table bucket that's
@@ -18004,6 +19140,79 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @!attribute [rw] bucket
+    #   The general purpose bucket that corresponds to the metadata
+    #   configuration that you want to enable or disable an inventory table
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_md5
+    #   The `Content-MD5` header for the inventory table configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] checksum_algorithm
+    #   The checksum algorithm to use with your inventory table
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] inventory_table_configuration
+    #   The contents of your inventory table configuration.
+    #   @return [Types::InventoryTableConfigurationUpdates]
+    #
+    # @!attribute [rw] expected_bucket_owner
+    #   The expected owner of the general purpose bucket that corresponds to
+    #   the metadata table configuration that you want to enable or disable
+    #   an inventory table for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UpdateBucketMetadataInventoryTableConfigurationRequest AWS API Documentation
+    #
+    class UpdateBucketMetadataInventoryTableConfigurationRequest < Struct.new(
+      :bucket,
+      :content_md5,
+      :checksum_algorithm,
+      :inventory_table_configuration,
+      :expected_bucket_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bucket
+    #   The general purpose bucket that corresponds to the metadata
+    #   configuration that you want to enable or disable journal table
+    #   record expiration for.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_md5
+    #   The `Content-MD5` header for the journal table configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] checksum_algorithm
+    #   The checksum algorithm to use with your journal table configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] journal_table_configuration
+    #   The contents of your journal table configuration.
+    #   @return [Types::JournalTableConfigurationUpdates]
+    #
+    # @!attribute [rw] expected_bucket_owner
+    #   The expected owner of the general purpose bucket that corresponds to
+    #   the metadata table configuration that you want to enable or disable
+    #   journal table record expiration for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UpdateBucketMetadataJournalTableConfigurationRequest AWS API Documentation
+    #
+    class UpdateBucketMetadataJournalTableConfigurationRequest < Struct.new(
+      :bucket,
+      :content_md5,
+      :checksum_algorithm,
+      :journal_table_configuration,
+      :expected_bucket_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] copy_source_version_id
     #   The version of the source object that was copied, if you have
     #   enabled versioning on the source bucket.
@@ -18020,7 +19229,13 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when you store this object
-    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
+    #   in Amazon S3 or Amazon FSx.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3
+    #   access points, the only valid server side encryption option is
+    #   `aws:fsx`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -18057,11 +19272,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartCopyOutput AWS API Documentation
@@ -18412,7 +19633,13 @@ module Aws::S3
 
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when you store this object
-    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
+    #   in Amazon S3 or Amazon FSx.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3
+    #   access points, the only valid server side encryption option is
+    #   `aws:fsx`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -18525,11 +19752,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartOutput AWS API Documentation
@@ -19119,11 +20352,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] restore
@@ -19133,7 +20372,13 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing requested
-    #   object in Amazon S3 (for example, AES256, `aws:kms`).
+    #   object in Amazon S3 or Amazon FSx.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3
+    #   access points, the only valid server side encryption option is
+    #   `aws:fsx`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm

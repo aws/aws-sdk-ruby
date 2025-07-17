@@ -80,6 +80,7 @@ module Aws
       interface _GetControlResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetControlResponse]
         def arn: () -> ::String
+        def aliases: () -> ::Array[::String]
         def name: () -> ::String
         def description: () -> ::String
         def behavior: () -> ("PREVENTIVE" | "PROACTIVE" | "DETECTIVE")
@@ -88,6 +89,7 @@ module Aws
         def implementation: () -> Types::ImplementationDetails
         def parameters: () -> ::Array[Types::ControlParameter]
         def create_time: () -> ::Time
+        def governed_resources: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlCatalog/Client.html#get_control-instance_method
       def get_control: (
@@ -114,6 +116,23 @@ module Aws
                                 ) -> _ListCommonControlsResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCommonControlsResponseSuccess
 
+      interface _ListControlMappingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListControlMappingsResponse]
+        def control_mappings: () -> ::Array[Types::ControlMapping]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlCatalog/Client.html#list_control_mappings-instance_method
+      def list_control_mappings: (
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer,
+                                   ?filter: {
+                                     control_arns: Array[::String]?,
+                                     common_control_arns: Array[::String]?,
+                                     mapping_types: Array[("FRAMEWORK" | "COMMON_CONTROL")]?
+                                   }
+                                 ) -> _ListControlMappingsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListControlMappingsResponseSuccess
+
       interface _ListControlsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListControlsResponse]
         def controls: () -> ::Array[Types::ControlSummary]
@@ -122,7 +141,13 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlCatalog/Client.html#list_controls-instance_method
       def list_controls: (
                            ?next_token: ::String,
-                           ?max_results: ::Integer
+                           ?max_results: ::Integer,
+                           ?filter: {
+                             implementations: {
+                               types: Array[::String]?,
+                               identifiers: Array[::String]?
+                             }?
+                           }
                          ) -> _ListControlsResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListControlsResponseSuccess
 

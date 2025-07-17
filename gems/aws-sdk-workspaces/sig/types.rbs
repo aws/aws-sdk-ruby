@@ -24,6 +24,18 @@ module Aws::WorkSpaces
       SENSITIVE: []
     end
 
+    class AccessEndpoint
+      attr_accessor access_endpoint_type: ("STREAMING_WSP")
+      attr_accessor vpc_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class AccessEndpointConfig
+      attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
+      attr_accessor internet_fallback_protocols: ::Array[("PCOIP")]
+      SENSITIVE: []
+    end
+
     class AccountLink
       attr_accessor account_link_id: ::String
       attr_accessor account_link_status: ("LINKED" | "LINKING_FAILED" | "LINK_NOT_FOUND" | "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT" | "REJECTED")
@@ -347,6 +359,7 @@ module Aws::WorkSpaces
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor application_settings: Types::ApplicationSettingsRequest
       attr_accessor timeout_settings: Types::TimeoutSettings
+      attr_accessor running_mode: ("AUTO_STOP" | "ALWAYS_ON")
       SENSITIVE: []
     end
 
@@ -391,7 +404,6 @@ module Aws::WorkSpaces
     end
 
     class DefaultWorkspaceCreationProperties
-      attr_accessor enable_work_docs: bool
       attr_accessor enable_internet_access: bool
       attr_accessor default_ou: ::String
       attr_accessor custom_security_group_id: ::String
@@ -830,7 +842,7 @@ module Aws::WorkSpaces
     end
 
     class ErrorDetails
-      attr_accessor error_code: ("OutdatedPowershellVersion" | "OfficeInstalled" | "PCoIPAgentInstalled" | "WindowsUpdatesEnabled" | "AutoMountDisabled" | "WorkspacesBYOLAccountNotFound" | "WorkspacesBYOLAccountDisabled" | "DHCPDisabled" | "DiskFreeSpace" | "AdditionalDrivesAttached" | "OSNotSupported" | "DomainJoined" | "AzureDomainJoined" | "FirewallEnabled" | "VMWareToolsInstalled" | "DiskSizeExceeded" | "IncompatiblePartitioning" | "PendingReboot" | "AutoLogonEnabled" | "RealTimeUniversalDisabled" | "MultipleBootPartition" | "Requires64BitOS" | "ZeroRearmCount" | "InPlaceUpgrade" | "AntiVirusInstalled" | "UEFINotSupported" | "UnknownError" | "AppXPackagesInstalled" | "ReservedStorageInUse" | "AdditionalDrivesPresent" | "WindowsUpdatesRequired" | "SysPrepFileMissing" | "UserProfileMissing" | "InsufficientDiskSpace" | "EnvironmentVariablesPathMissingEntries" | "DomainAccountServicesFound" | "InvalidIp" | "RemoteDesktopServicesDisabled" | "WindowsModulesInstallerDisabled" | "AmazonSsmAgentEnabled" | "UnsupportedSecurityProtocol" | "MultipleUserProfiles" | "StagedAppxPackage" | "UnsupportedOsUpgrade" | "InsufficientRearmCount")
+      attr_accessor error_code: ("OutdatedPowershellVersion" | "OfficeInstalled" | "PCoIPAgentInstalled" | "WindowsUpdatesEnabled" | "AutoMountDisabled" | "WorkspacesBYOLAccountNotFound" | "WorkspacesBYOLAccountDisabled" | "DHCPDisabled" | "DiskFreeSpace" | "AdditionalDrivesAttached" | "OSNotSupported" | "DomainJoined" | "AzureDomainJoined" | "FirewallEnabled" | "VMWareToolsInstalled" | "DiskSizeExceeded" | "IncompatiblePartitioning" | "PendingReboot" | "AutoLogonEnabled" | "RealTimeUniversalDisabled" | "MultipleBootPartition" | "Requires64BitOS" | "ZeroRearmCount" | "InPlaceUpgrade" | "AntiVirusInstalled" | "UEFINotSupported" | "UnknownError" | "AppXPackagesInstalled" | "ReservedStorageInUse" | "AdditionalDrivesPresent" | "WindowsUpdatesRequired" | "SysPrepFileMissing" | "UserProfileMissing" | "InsufficientDiskSpace" | "EnvironmentVariablesPathMissingEntries" | "DomainAccountServicesFound" | "InvalidIp" | "RemoteDesktopServicesDisabled" | "WindowsModulesInstallerDisabled" | "AmazonSsmAgentEnabled" | "UnsupportedSecurityProtocol" | "MultipleUserProfiles" | "StagedAppxPackage" | "UnsupportedOsUpgrade" | "InsufficientRearmCount" | "ProtocolOSIncompatibility" | "MemoryIntegrityIncompatibility" | "RestrictedDriveLetterInUse")
       attr_accessor error_message: ::String
       SENSITIVE: []
     end
@@ -941,6 +953,11 @@ module Aws::WorkSpaces
     end
 
     class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterCombinationException
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -1201,7 +1218,6 @@ module Aws::WorkSpaces
     class RegisterWorkspaceDirectoryRequest
       attr_accessor directory_id: ::String
       attr_accessor subnet_ids: ::Array[::String]
-      attr_accessor enable_work_docs: bool
       attr_accessor enable_self_service: bool
       attr_accessor tenancy: ("DEDICATED" | "SHARED")
       attr_accessor tags: ::Array[Types::Tag]
@@ -1513,6 +1529,7 @@ module Aws::WorkSpaces
       attr_accessor capacity: Types::Capacity
       attr_accessor application_settings: Types::ApplicationSettingsRequest
       attr_accessor timeout_settings: Types::TimeoutSettings
+      attr_accessor running_mode: ("AUTO_STOP" | "ALWAYS_ON")
       SENSITIVE: []
     end
 
@@ -1589,6 +1606,7 @@ module Aws::WorkSpaces
       attr_accessor device_type_zero_client: ("ALLOW" | "DENY")
       attr_accessor device_type_linux: ("ALLOW" | "DENY")
       attr_accessor device_type_work_spaces_thin_client: ("ALLOW" | "DENY")
+      attr_accessor access_endpoint_config: Types::AccessEndpointConfig
       SENSITIVE: []
     end
 
@@ -1617,7 +1635,6 @@ module Aws::WorkSpaces
     end
 
     class WorkspaceCreationProperties
-      attr_accessor enable_work_docs: bool
       attr_accessor enable_internet_access: bool
       attr_accessor default_ou: ::String
       attr_accessor custom_security_group_id: ::String
@@ -1737,6 +1754,7 @@ module Aws::WorkSpaces
       attr_accessor errors: ::Array[Types::WorkspacesPoolError]
       attr_accessor application_settings: Types::ApplicationSettingsResponse
       attr_accessor timeout_settings: Types::TimeoutSettings
+      attr_accessor running_mode: ("AUTO_STOP" | "ALWAYS_ON")
       SENSITIVE: []
     end
 

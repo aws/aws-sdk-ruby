@@ -49,6 +49,23 @@ module Aws::S3
       data[:bucket_region]
     end
 
+    # The Amazon Resource Name (ARN) of the S3 bucket. ARNs uniquely
+    # identify Amazon Web Services resources across all of Amazon Web
+    # Services.
+    #
+    # <note markdown="1"> This parameter is only supported for S3 directory buckets. For more
+    # information, see [Using tags with directory buckets][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html
+    # @return [String]
+    def bucket_arn
+      data[:bucket_arn]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -246,6 +263,12 @@ module Aws::S3
     #         data_redundancy: "SingleAvailabilityZone", # accepts SingleAvailabilityZone, SingleLocalZone
     #         type: "Directory", # accepts Directory
     #       },
+    #       tags: [
+    #         {
+    #           key: "ObjectKey", # required
+    #           value: "Value", # required
+    #         },
+    #       ],
     #     },
     #     grant_full_control: "GrantFullControl",
     #     grant_read: "GrantRead",
@@ -521,8 +544,8 @@ module Aws::S3
     #     metadata: {
     #       "MetadataKey" => "MetadataValue",
     #     },
-    #     server_side_encryption: "AES256", # accepts AES256, aws:kms, aws:kms:dsse
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE
+    #     server_side_encryption: "AES256", # accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -834,8 +857,7 @@ module Aws::S3
     #   A map of metadata to store with the object in S3.
     # @option options [String] :server_side_encryption
     #   The server-side encryption algorithm that was used when you store this
-    #   object in Amazon S3 (for example, `AES256`, `aws:kms`,
-    #   `aws:kms:dsse`).
+    #   object in Amazon S3 or Amazon FSx.
     #
     #   * <b>General purpose buckets </b> - You have four mutually exclusive
     #     options to protect data using server-side encryption in Amazon S3,
@@ -888,6 +910,14 @@ module Aws::S3
     #     default encryption configuration of the directory bucket.
     #
     #      </note>
+    #
+    #   * <b>S3 access points for Amazon FSx </b> - When accessing data stored
+    #     in Amazon FSx file systems using S3 access points, the only valid
+    #     server side encryption option is `aws:fsx`. All Amazon FSx file
+    #     systems have encryption configured by default and are encrypted at
+    #     rest. Data is automatically encrypted before being written to the
+    #     file system, and automatically decrypted as it is read. These
+    #     processes are handled transparently by Amazon FSx.
     #
     #
     #
@@ -1176,6 +1206,9 @@ module Aws::S3
     #   beginning of the key. The keys that are grouped under `CommonPrefixes`
     #   result element are not returned elsewhere in the response.
     #
+    #   `CommonPrefixes` is filtered out from results if it is not
+    #   lexicographically greater than the key-marker.
+    #
     #   <note markdown="1"> **Directory buckets** - For directory buckets, `/` is the only
     #   supported delimiter.
     #
@@ -1332,6 +1365,9 @@ module Aws::S3
     #   in `CommonPrefixes`. These groups are counted as one result against
     #   the `max-keys` limitation. These keys are not returned elsewhere in
     #   the response.
+    #
+    #   `CommonPrefixes` is filtered out from results if it is not
+    #   lexicographically greater than the key-marker.
     # @option options [String] :encoding_type
     #   Encoding type used by Amazon S3 to encode the [object keys][1] in the
     #   response. Responses are encoded only in UTF-8. An object key can
@@ -1426,6 +1462,9 @@ module Aws::S3
     # @param [Hash] options ({})
     # @option options [String] :delimiter
     #   A delimiter is a character that you use to group keys.
+    #
+    #   `CommonPrefixes` is filtered out from results if it is not
+    #   lexicographically greater than the `StartAfter` value.
     #
     #   <note markdown="1"> * **Directory buckets** - For directory buckets, `/` is the only
     #     supported delimiter.

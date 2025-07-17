@@ -103,7 +103,7 @@ module Aws::CloudControlApi
     CreateResourceInput.add_member(:type_name, Shapes::ShapeRef.new(shape: TypeName, required: true, location_name: "TypeName"))
     CreateResourceInput.add_member(:type_version_id, Shapes::ShapeRef.new(shape: TypeVersionId, location_name: "TypeVersionId"))
     CreateResourceInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
-    CreateResourceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateResourceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateResourceInput.add_member(:desired_state, Shapes::ShapeRef.new(shape: Properties, required: true, location_name: "DesiredState"))
     CreateResourceInput.struct_class = Types::CreateResourceInput
 
@@ -113,7 +113,7 @@ module Aws::CloudControlApi
     DeleteResourceInput.add_member(:type_name, Shapes::ShapeRef.new(shape: TypeName, required: true, location_name: "TypeName"))
     DeleteResourceInput.add_member(:type_version_id, Shapes::ShapeRef.new(shape: TypeVersionId, location_name: "TypeVersionId"))
     DeleteResourceInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
-    DeleteResourceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteResourceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     DeleteResourceInput.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "Identifier"))
     DeleteResourceInput.struct_class = Types::DeleteResourceInput
 
@@ -254,7 +254,7 @@ module Aws::CloudControlApi
     UpdateResourceInput.add_member(:type_name, Shapes::ShapeRef.new(shape: TypeName, required: true, location_name: "TypeName"))
     UpdateResourceInput.add_member(:type_version_id, Shapes::ShapeRef.new(shape: TypeVersionId, location_name: "TypeVersionId"))
     UpdateResourceInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
-    UpdateResourceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateResourceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     UpdateResourceInput.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "Identifier"))
     UpdateResourceInput.add_member(:patch_document, Shapes::ShapeRef.new(shape: PatchDocument, required: true, location_name: "PatchDocument"))
     UpdateResourceInput.struct_class = Types::UpdateResourceInput

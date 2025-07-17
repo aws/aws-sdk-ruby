@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.225.0 (2025-07-16)
+------------------
+
+* Feature - AWS Glue now supports schema, partition and sort management of Apache Iceberg tables using Glue SDK
+
+1.224.0 (2025-06-30)
+------------------
+
+* Feature - releasing source processing properties to support source properties for ODB integrations
+
+1.223.0 (2025-06-27)
+------------------
+
+* Feature - AWS Glue now supports schema, partition and sort management of Apache Iceberg tables using Glue SDK
+
+1.222.0 (2025-06-23)
+------------------
+
+* Feature - AWS Glue now supports sort and z-order strategy for managed automated compaction for Iceberg tables in addition to binpack.
+
+1.221.0 (2025-06-20)
+------------------
+
+* Feature - AWS Glue Data Quality now provides aggregated metrics in evaluation results when publishAggregatedMetrics with row-level results are enabled. These metrics include summary statistics showing total counts of processed, passed, and failed rows and rules in a single view.
+
+1.220.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.219.0 (2025-05-22)
+------------------
+
+* Feature - This release supports additional ConversionSpec parameter as part of IntegrationPartition Structure in CreateIntegrationTableProperty API. This parameter is referred to apply appropriate column transformation for columns that are used for timestamp based partitioning
+
+1.218.0 (2025-05-20)
+------------------
+
+* Feature - Enhanced AWS Glue ListConnectionTypes API Model with additional metadata fields.
+
+1.217.0 (2025-05-16)
+------------------
+
+* Feature - Changes include (1) Excel as S3 Source type and XML and Tableau's Hyper as S3 Sink types, (2) targeted number of partitions parameter in S3 sinks and (3) new compression types in CSV/JSON and Parquet S3 sinks.
+
+1.216.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.215.0 (2025-05-08)
+------------------
+
+* Feature - This new release supports customizable RefreshInterval for all Saas ZETL integrations from 15 minutes to 6 days.
+
+1.214.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.213.0 (2025-04-09)
 ------------------
 

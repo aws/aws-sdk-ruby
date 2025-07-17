@@ -165,6 +165,7 @@ module Aws
         def created_at: () -> ::Time
         def event: () -> Types::Event
         def id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
         def updated_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#create_event_action-instance_method
@@ -185,7 +186,8 @@ module Aws
                                    revision_published: {
                                      data_set_id: ::String
                                    }?
-                                 }
+                                 },
+                                 ?tags: Hash[::String, ::String]
                                ) -> _CreateEventActionResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventActionResponseSuccess
 
@@ -444,6 +446,7 @@ module Aws
         def created_at: () -> ::Time
         def event: () -> Types::Event
         def id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
         def updated_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#get_event_action-instance_method

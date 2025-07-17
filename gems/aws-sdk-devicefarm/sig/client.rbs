@@ -394,7 +394,8 @@ module Aws
                                              }?,
                                              auxiliary_apps: Array[::String]?,
                                              billing_method: ("METERED" | "UNMETERED")?
-                                           }
+                                           },
+                                           ?project_arn: ::String
                                          ) -> _GetDevicePoolCompatibilityResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDevicePoolCompatibilityResponseSuccess
 
