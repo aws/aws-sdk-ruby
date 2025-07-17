@@ -74,7 +74,7 @@ module Aws
         rbs_type: '(:none | :equal | :full | ^(Integer) -> Integer)',
         docstring: <<~DOCS)
           A delay randomiser function used by the default backoff function.
-          Some predefined functions can be referenced by name - :none, :equal, :full,
+          Some predefined functions can be referenced by name - `:none`, `:equal`, `:full`,
           otherwise a Proc that takes and returns a number. This option is only used
           in the `legacy` retry mode.
 
@@ -86,7 +86,7 @@ module Aws
         default: DEFAULT_BACKOFF,
         doc_type: Proc,
         docstring: <<~DOCS)
-          A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+          A proc or lambda used for backoff. Defaults to `2**retries * retry_base_delay`.
           This option is only used in the `legacy` retry mode.
         DOCS
 

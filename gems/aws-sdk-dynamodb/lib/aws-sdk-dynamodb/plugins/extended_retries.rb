@@ -46,7 +46,7 @@ module Aws
           default: DEFAULT_BACKOFF,
           doc_type: Proc,
           docstring: <<~DOCS)
-            A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+            A proc or lambda used for backoff. Defaults to `2**retries * retry_base_delay`.
             This option is only used in the `legacy` retry mode.
           DOCS
 
