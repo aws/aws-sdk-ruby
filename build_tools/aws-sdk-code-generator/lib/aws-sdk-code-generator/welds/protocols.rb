@@ -40,6 +40,22 @@ module AwsSdkCodeGenerator
           { 'smithy-json' => '1.0.0.pre1' }
         end
       end
+
+      def protocol_test_vendor_code
+        {
+          'aws.protocoltests.config#ErrorCodeParams' => ErrorCodeParams.new
+        }
+      end
+
+      # Used for generating error code expectations in protocol tests.
+      class ErrorCodeParams
+        def error_expect_code(params)
+          <<~CODE
+            expect(e.code).to eq('#{params['code']}')
+            # except(e.type).to eq('#{params['type']}')
+          CODE
+        end
+      end
     end
   end
 end
