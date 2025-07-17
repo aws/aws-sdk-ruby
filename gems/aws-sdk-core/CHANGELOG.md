@@ -3,6 +3,10 @@ Unreleased Changes
 
 * Feature - Set the default `retry_mode` to `standard` for all clients.
 
+* Issue - Skip `Aws::InstanceProfileCredentials` instantiation when `ENV['AWS_EC2_METADATA_DISABLED']` is set to `true` in the credential resolution chain.
+
+* Issue - Refactor `InstanceProfileCredentials` to improve code clarity and documentation. 
+
 3.226.2 (2025-07-01)
 ------------------
 

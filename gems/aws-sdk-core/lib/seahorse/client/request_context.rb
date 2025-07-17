@@ -5,7 +5,7 @@ require 'stringio'
 module Seahorse
   module Client
     class RequestContext
-
+      # @param [Hash] options
       # @option options [required,Symbol] :operation_name (nil)
       # @option options [required,Model::Operation] :operation (nil)
       # @option options [Model::Authorizer] :authorizer (nil)
@@ -16,7 +16,7 @@ module Seahorse
       # @option options [Http::Response] :http_response (Http::Response.new)
       # @option options [Integer] :retries (0)
       # @option options [Aws::Telemetry::TracerBase] :tracer (Aws::Telemetry::NoOpTracer.new)
-      # @options options [Hash] :metadata ({})
+      # @option options [Hash] :metadata ({})
       def initialize(options = {})
         @operation_name = options[:operation_name]
         @operation = options[:operation]

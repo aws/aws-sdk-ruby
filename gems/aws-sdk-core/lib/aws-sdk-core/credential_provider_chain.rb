@@ -191,7 +191,7 @@ module Aws
       if ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] ||
          ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI']
         ECSCredentials.new(options)
-      else
+      elsif !(ENV.fetch('AWS_EC2_METADATA_DISABLED', 'false').downcase == 'true')
         InstanceProfileCredentials.new(options.merge(profile: profile_name))
       end
     end
