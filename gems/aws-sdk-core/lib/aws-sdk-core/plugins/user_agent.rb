@@ -23,7 +23,7 @@ module Aws
         end
 
         # @api private
-        option(:user_agent_frameworks, default: [])
+        option(:user_agent_frameworks) { [] }
 
         class Handler < Smithy::Client::Handler
           def call(context)
