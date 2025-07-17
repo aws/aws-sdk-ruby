@@ -61,7 +61,7 @@ module Aws
       # @api private
       option(:user_agent_suffix)
       # @api private
-      option(:user_agent_frameworks, default: [])
+      option(:user_agent_frameworks) { [] }
 
       option(
         :sdk_ua_app_id,

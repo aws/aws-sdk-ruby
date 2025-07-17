@@ -40,12 +40,10 @@ module Aws
         default: 3,
         doc_type: Integer,
         docstring: <<~DOCS)
-          The maximum number of times to retry failed requests.  Only
-          ~ 500 level server errors and certain ~ 400 level client errors
-          are retried.  Generally, these are throttling errors, data
-          checksum errors, networking errors, timeout errors, auth errors,
-          endpoint discovery, and errors from expired credentials.
-          This option is only used in the `legacy` retry mode.
+          The maximum number of times to retry failed requests. Only ~500 level server errors
+          and certain ~400 level client errors are retried. Generally, these are throttling errors,
+          data checksum errors, networking errors, timeout errors, auth errors, and errors from
+          expired credentials. This option is only used in the `legacy` retry mode.
         DOCS
 
       option(
@@ -53,9 +51,8 @@ module Aws
         default: 0,
         doc_type: Integer,
         docstring: <<~DOCS)
-          The maximum number of seconds to delay between retries (0 for no limit)
-          used by the default backoff function. This option is only used in the
-          `legacy` retry mode.
+          The maximum number of seconds to delay between retries (0 for no limit) used by the
+          default backoff function. This option is only used in the `legacy` retry mode.
         DOCS
 
       option(
@@ -73,12 +70,11 @@ module Aws
         doc_type: Symbol,
         rbs_type: '(:none | :equal | :full | ^(Integer) -> Integer)',
         docstring: <<~DOCS)
-          A delay randomiser function used by the default backoff function.
-          Some predefined functions can be referenced by name - `:none`, `:equal`, `:full`,
-          otherwise a Proc that takes and returns a number. This option is only used
-          in the `legacy` retry mode.
+          A delay randomizer function used by the default backoff function. Some predefined
+          functions can be referenced by name - `:none`, `:equal`, `:full`, otherwise a Proc that
+          takes and returns a number. This option is only used in the `legacy` retry mode.
 
-          @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+          @see https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/
         DOCS
 
       option(
@@ -99,17 +95,16 @@ module Aws
         rbs_type: '("legacy" | "standard" | "adaptive")',
         docstring: <<~DOCS) do |cfg|
           Specifies which retry algorithm to use. Values are:
-
           * `legacy` - The pre-existing retry behavior.
-
           * `standard` - A standardized set of retry rules across the AWS SDKs.
             This includes support for retry quotas, which limit the number of
             unsuccessful retries a client can make.
-
           * `adaptive` - An experimental retry mode that includes all the
             functionality of `standard` mode along with automatic client side
             throttling.  This is a provisional mode that may change behavior
             in the future.
+
+          @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
         DOCS
         resolve_retry_mode(cfg)
       end
@@ -119,10 +114,9 @@ module Aws
         default: 3,
         doc_type: Integer,
         docstring: <<~DOCS) do |cfg|
-          An integer representing the maximum number attempts that will be made for
-          a single request, including the initial attempt.  For example,
-          setting this value to 5 will result in a request being retried up to
-          4 times. Used in `standard` and `adaptive` retry modes.
+          An integer representing the maximum number attempts that will be made for a single request,
+          including the initial attempt. For example, setting this value to 5 will result in a
+          request being retried up to 4 times. Used in `standard` and `adaptive` retry modes.
         DOCS
         resolve_max_attempts(cfg)
       end
@@ -132,10 +126,9 @@ module Aws
         default: true,
         doc_type: 'Boolean',
         docstring: <<~DOCS) do |cfg|
-          Used only in `adaptive` retry mode.  When true, the request will sleep
-          until there is sufficent client side capacity to retry the request.
-          When false, the request will raise a `RetryCapacityNotAvailableError` and will
-          not retry instead of sleeping.
+          Used only in `adaptive` retry mode. When true, the request will sleep until there is
+          sufficient client side capacity to retry the request. When false, the request will raise
+          a `RetryCapacityNotAvailableError` and will not retry instead of sleeping.
         DOCS
         resolve_adaptive_retry_wait_to_fill(cfg)
       end
@@ -145,8 +138,8 @@ module Aws
         default: true,
         doc_type: 'Boolean',
         docstring: <<~DOCS) do |cfg|
-          Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-          a clock skew correction and retry requests with skewed client clocks.
+          Specifies whether to apply a clock skew correction and retry requests with skewed
+          client clocks. Used only in `standard` and `adaptive` retry modes.
         DOCS
         resolve_correct_clock_skew(cfg)
       end
