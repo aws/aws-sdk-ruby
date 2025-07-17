@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'aws-sdk-core/plugins/sigv4'
 require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
@@ -14,13 +13,15 @@ require 'smithy-client/plugins/net_http'
 require 'smithy-client/plugins/pageable_response'
 require 'smithy-client/plugins/param_converter'
 require 'smithy-client/plugins/param_validator'
-require 'smithy-client/plugins/protocol'
 require 'smithy-client/plugins/raise_response_errors'
 require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
 require 'smithy-client/plugins/stub_responses'
+require 'aws-sdk-core/plugins/sigv4'
+require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/rest_json'
 
 module Aws::Lambda
   # An API client for Aws::Lambda.
@@ -31,7 +32,6 @@ module Aws::Lambda
     self.service = Schema::AWSGirApiService
 
     add_plugin(::Aws::Lambda::Plugins::Endpoint)
-    add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
@@ -42,13 +42,15 @@ module Aws::Lambda
     add_plugin(Smithy::Client::Plugins::PageableResponse)
     add_plugin(Smithy::Client::Plugins::ParamConverter)
     add_plugin(Smithy::Client::Plugins::ParamValidator)
-    add_plugin(Smithy::Client::Plugins::Protocol)
     add_plugin(Smithy::Client::Plugins::RaiseResponseErrors)
     add_plugin(Smithy::Client::Plugins::RequestCompression)
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
     add_plugin(Smithy::Client::Plugins::StubResponses)
+    add_plugin(Aws::Core::Plugins::SigV4)
+    add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::RestJson)
 
     # @param options [Hash] Client options
     # @option options [String] :access_key_id
@@ -134,8 +136,6 @@ module Aws::Lambda
     #  The log level to send messages to the logger at.
     # @option options [Logger] :logger
     #  The Logger instance to send log messages to. If this option is not set, logging is disabled.
-    # @option options [String, Class] :protocol (restJson1)
-    #  The protocol to use for request serialization and response deserialization.
     # @option options [Boolean] :raise_response_errors (true)
     #  When `true`, response errors are raised. When `false`, the error is placed on the
     #  output in the {Smithy::Client::Response#error error accessor}.
@@ -162,6 +162,10 @@ module Aws::Lambda
     #    - `acquire_initial_retry_token(token_scope)`
     #    - `refresh_retry_token(retry_token, error_info)`
     #    - `record_success(retry_token)`
+    # @option options [String] :sdk_ua_app_id
+    #  A unique and opaque application ID that is appended to the User-Agent header as app/sdk_ua_app_id.
+    #  It should have a maximum length of 50. This variable is sourced from environment variable
+    #  `AWS_SDK_UA_APP_ID` or the shared config profile attribute `sdk_ua_app_id`.
     # @option options [String] :secret_access_key
     # @option options [String] :session_token
     # @option options [Boolean] :stub_responses
@@ -6739,11 +6743,6 @@ module Aws::Lambda
       # @api private
       def errors_module
         Errors
-      end
-
-      # @api private
-      def protocols
-        {"restJson1" => Aws::Core::RestJson::Protocol}
       end
     end
   end

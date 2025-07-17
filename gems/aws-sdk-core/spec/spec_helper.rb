@@ -3,9 +3,9 @@
 $LOAD_PATH.unshift(File.expand_path('../lib', __dir__))
 
 require_relative 'client_helper'
+require 'smithy-client'
 require 'aws-sdk-core'
 require 'rspec'
-require 'smithy-client'
 require 'webmock/rspec'
 
 def mock_shared_config(config_contents = '', credentials_contents = '')
@@ -39,6 +39,6 @@ RSpec.configure do |config|
     stub_const('ENV', {})
 
     # Default all shared config to be empty
-    mock_shared_config
+    # mock_shared_config
   end
 end

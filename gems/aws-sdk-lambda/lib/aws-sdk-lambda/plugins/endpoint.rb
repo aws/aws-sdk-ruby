@@ -43,7 +43,7 @@ module Aws::Lambda
       class Handler < Smithy::Client::Handler
         def call(context)
           params = EndpointParameters.create(context)
-          endpoint = context.config.endpoint_provider.resolve(params)\
+          endpoint = context.config.endpoint_provider.resolve(params)
 
           context.http_request.endpoint = endpoint.uri
           apply_endpoint_headers(context, endpoint.headers)

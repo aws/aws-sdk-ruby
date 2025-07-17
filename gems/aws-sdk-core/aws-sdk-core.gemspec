@@ -9,7 +9,8 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
   spec.require_paths = ['lib']
-  spec.files         = Dir['LICENSE', 'CHANGELOG.md', 'VERSION', 'lib/**/*.rb', 'sig/**/*.rbs']
+  spec.files         = Dir['LICENSE', 'CHANGELOG.md', 'VERSION', 'user_agent_metrics.json', 'lib/**/*.rb',
+                           'sig/**/*.rbs']
 
   spec.add_dependency('base64')
   spec.add_dependency('logger')

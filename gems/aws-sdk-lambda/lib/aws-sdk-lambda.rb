@@ -3,6 +3,7 @@
 # This is generated code!
 
 require 'aws-sdk-core'
+require 'smithy-json'
 require 'smithy-client'
 
 
