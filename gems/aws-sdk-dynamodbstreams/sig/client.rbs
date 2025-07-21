@@ -87,7 +87,11 @@ module Aws
       def describe_stream: (
                              stream_arn: ::String,
                              ?limit: ::Integer,
-                             ?exclusive_start_shard_id: ::String
+                             ?exclusive_start_shard_id: ::String,
+                             ?shard_filter: {
+                               type: ("CHILD_SHARDS")?,
+                               shard_id: ::String?
+                             }
                            ) -> _DescribeStreamResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStreamResponseSuccess
 

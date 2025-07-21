@@ -6,6 +6,10 @@ module Aws
     # @return [Token]
     attr_reader :token
 
+    # @api private
+    # Returns UserAgent metrics for tokens.
+    attr_accessor :metrics
+
     # @return [Boolean]
     def set?
       !!token && token.set?

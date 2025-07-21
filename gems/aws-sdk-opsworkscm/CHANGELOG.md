@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2025-07-09)
+------------------
+
+* Feature - Removing content that refers to an S3 bucket that is no longer in use.
+
 1.84.0 (2025-06-02)
 ------------------
 

@@ -99,7 +99,13 @@ module Aws
                              s3_key: ::String?,
                              s3_version: ::String?,
                              zip_file: ::String?,
-                             handler: ::String
+                             handler: ::String,
+                             dependencies: Array[
+                               {
+                                 type: ("LambdaLayer")?,
+                                 reference: ::String
+                               },
+                             ]?
                            },
                            artifact_s3_location: ::String,
                            execution_role_arn: ::String,
@@ -320,7 +326,13 @@ module Aws
                                     s3_key: ::String?,
                                     s3_version: ::String?,
                                     zip_file: ::String?,
-                                    handler: ::String
+                                    handler: ::String,
+                                    dependencies: Array[
+                                      {
+                                        type: ("LambdaLayer")?,
+                                        reference: ::String
+                                      },
+                                    ]?
                                   },
                                   ?runtime_version: ::String,
                                   ?run_config: {
@@ -398,7 +410,13 @@ module Aws
                              s3_key: ::String?,
                              s3_version: ::String?,
                              zip_file: ::String?,
-                             handler: ::String
+                             handler: ::String,
+                             dependencies: Array[
+                               {
+                                 type: ("LambdaLayer")?,
+                                 reference: ::String
+                               },
+                             ]?
                            },
                            ?execution_role_arn: ::String,
                            ?runtime_version: ::String,

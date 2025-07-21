@@ -3073,6 +3073,7 @@ module Aws::MediaPackageV2
     #   * {Types::GetOriginEndpointPolicyResponse#channel_name #channel_name} => String
     #   * {Types::GetOriginEndpointPolicyResponse#origin_endpoint_name #origin_endpoint_name} => String
     #   * {Types::GetOriginEndpointPolicyResponse#policy #policy} => String
+    #   * {Types::GetOriginEndpointPolicyResponse#cdn_auth_configuration #cdn_auth_configuration} => Types::CdnAuthConfiguration
     #
     #
     # @example Example: Getting an Origin Endpoint Policy
@@ -3105,6 +3106,9 @@ module Aws::MediaPackageV2
     #   resp.channel_name #=> String
     #   resp.origin_endpoint_name #=> String
     #   resp.policy #=> String
+    #   resp.cdn_auth_configuration.cdn_identifier_secret_arns #=> Array
+    #   resp.cdn_auth_configuration.cdn_identifier_secret_arns[0] #=> String
+    #   resp.cdn_auth_configuration.secrets_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetOriginEndpointPolicy AWS API Documentation
     #
@@ -3972,6 +3976,17 @@ module Aws::MediaPackageV2
     # @option params [required, String] :policy
     #   The policy to attach to the specified origin endpoint.
     #
+    # @option params [Types::CdnAuthConfiguration] :cdn_auth_configuration
+    #   The settings for using authorization headers between the MediaPackage
+    #   endpoint and your CDN.
+    #
+    #   For information about CDN authorization, see [CDN authorization in
+    #   Elemental MediaPackage][1] in the MediaPackage user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediapackage/latest/userguide/cdn-auth.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -3995,6 +4010,10 @@ module Aws::MediaPackageV2
     #     channel_name: "ResourceName", # required
     #     origin_endpoint_name: "ResourceName", # required
     #     policy: "PolicyText", # required
+    #     cdn_auth_configuration: {
+    #       cdn_identifier_secret_arns: ["CdnIdentifierSecretArn"], # required
+    #       secrets_role_arn: "CdnAuthConfigurationSecretsRoleArnString", # required
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/PutOriginEndpointPolicy AWS API Documentation
@@ -5145,7 +5164,7 @@ module Aws::MediaPackageV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

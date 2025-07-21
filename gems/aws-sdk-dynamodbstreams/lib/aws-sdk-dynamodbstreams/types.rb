@@ -126,12 +126,18 @@ module Aws::DynamoDBStreams
     #   previous operation.
     #   @return [String]
     #
+    # @!attribute [rw] shard_filter
+    #   This optional field contains the filter definition for the
+    #   `DescribeStream` API.
+    #   @return [Types::ShardFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/DescribeStreamInput AWS API Documentation
     #
     class DescribeStreamInput < Struct.new(
       :stream_arn,
       :limit,
-      :exclusive_start_shard_id)
+      :exclusive_start_shard_id,
+      :shard_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -585,6 +591,31 @@ module Aws::DynamoDBStreams
       include Aws::Structure
     end
 
+    # This optional field contains the filter definition for the
+    # `DescribeStream` API.
+    #
+    # @!attribute [rw] type
+    #   Contains the type of filter to be applied on the `DescribeStream`
+    #   API. Currently, the only value this parameter accepts is
+    #   `CHILD_SHARDS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] shard_id
+    #   Contains the `shardId` of the parent shard for which you are
+    #   requesting child shards.
+    #
+    #   *Sample request:*
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/ShardFilter AWS API Documentation
+    #
+    class ShardFilter < Struct.new(
+      :type,
+      :shard_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents all of the data describing a particular stream.
     #
     # @!attribute [rw] stream_arn
@@ -723,11 +754,11 @@ module Aws::DynamoDBStreams
     #
     # @!attribute [rw] approximate_creation_date_time
     #   The approximate date and time when the stream record was created, in
-    #   [UNIX epoch time][1] format and rounded down to the closest second.
+    #   [ISO 8601][1] format and rounded down to the closest second.
     #
     #
     #
-    #   [1]: http://www.epochconverter.com/
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
     #
     # @!attribute [rw] keys

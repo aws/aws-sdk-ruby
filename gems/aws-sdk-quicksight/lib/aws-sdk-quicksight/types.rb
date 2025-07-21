@@ -7355,6 +7355,10 @@ module Aws::QuickSight
     #   The Folder ARN of the folder that you want the topic to reside in.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] custom_instructions
+    #   Custom instructions for the topic.
+    #   @return [Types::CustomInstructions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateTopicRequest AWS API Documentation
     #
     class CreateTopicRequest < Struct.new(
@@ -7362,7 +7366,8 @@ module Aws::QuickSight
       :topic_id,
       :topic,
       :tags,
-      :folder_arns)
+      :folder_arns,
+      :custom_instructions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7897,6 +7902,22 @@ module Aws::QuickSight
       :select_all_options,
       :null_option)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Instructions that provide additional guidance and context for response
+    # generation.
+    #
+    # @!attribute [rw] custom_instructions_string
+    #   A text field for providing additional guidance or context for
+    #   response generation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CustomInstructions AWS API Documentation
+    #
+    class CustomInstructions < Struct.new(
+      :custom_instructions_string)
+      SENSITIVE = [:custom_instructions_string]
       include Aws::Structure
     end
 
@@ -14952,6 +14973,10 @@ module Aws::QuickSight
     #   The HTTP status of the request.
     #   @return [Integer]
     #
+    # @!attribute [rw] custom_instructions
+    #   Custom instructions for the topic.
+    #   @return [Types::CustomInstructions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeTopicResponse AWS API Documentation
     #
     class DescribeTopicResponse < Struct.new(
@@ -14959,7 +14984,8 @@ module Aws::QuickSight
       :topic_id,
       :topic,
       :request_id,
-      :status)
+      :status,
+      :custom_instructions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38131,12 +38157,17 @@ module Aws::QuickSight
     #   The definition of the topic that you want to update.
     #   @return [Types::TopicDetails]
     #
+    # @!attribute [rw] custom_instructions
+    #   Custom instructions for the topic.
+    #   @return [Types::CustomInstructions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateTopicRequest AWS API Documentation
     #
     class UpdateTopicRequest < Struct.new(
       :aws_account_id,
       :topic_id,
-      :topic)
+      :topic,
+      :custom_instructions)
       SENSITIVE = []
       include Aws::Structure
     end

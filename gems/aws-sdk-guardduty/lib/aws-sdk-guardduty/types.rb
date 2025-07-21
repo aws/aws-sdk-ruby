@@ -1726,6 +1726,11 @@ module Aws::GuardDuty
     #   The tags to be added to a new IP set resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The Amazon Web Services account ID that owns the Amazon S3 bucket
+    #   specified in the **location** parameter.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateIPSetRequest AWS API Documentation
     #
     class CreateIPSetRequest < Struct.new(
@@ -1735,7 +1740,8 @@ module Aws::GuardDuty
       :location,
       :activate,
       :client_token,
-      :tags)
+      :tags,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2002,6 +2008,11 @@ module Aws::GuardDuty
     #   The tags to be added to a new threat list resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The Amazon Web Services account ID that owns the Amazon S3 bucket
+    #   specified in the **location** parameter.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateThreatIntelSetRequest AWS API Documentation
     #
     class CreateThreatIntelSetRequest < Struct.new(
@@ -2011,7 +2022,8 @@ module Aws::GuardDuty
       :location,
       :activate,
       :client_token,
-      :tags)
+      :tags,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4148,6 +4160,12 @@ module Aws::GuardDuty
     #   The tags of the IPSet resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The Amazon Web Services account ID that owns the Amazon S3 bucket
+    #   specified in the **location** parameter. This field appears in the
+    #   response only if it was provided during IPSet creation or update.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSetResponse AWS API Documentation
     #
     class GetIPSetResponse < Struct.new(
@@ -4155,7 +4173,8 @@ module Aws::GuardDuty
       :format,
       :location,
       :status,
-      :tags)
+      :tags,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4501,6 +4520,13 @@ module Aws::GuardDuty
     #   The tags of the threat list resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The Amazon Web Services account ID that owns the Amazon S3 bucket
+    #   specified in the **location** parameter. This field appears in the
+    #   response only if it was provided during ThreatIntelSet creation or
+    #   update.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSetResponse AWS API Documentation
     #
     class GetThreatIntelSetResponse < Struct.new(
@@ -4508,7 +4534,8 @@ module Aws::GuardDuty
       :format,
       :location,
       :status,
-      :tags)
+      :tags,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9717,6 +9744,11 @@ module Aws::GuardDuty
     #   or not.
     #   @return [Boolean]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The Amazon Web Services account ID that owns the Amazon S3 bucket
+    #   specified in the **location** parameter.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateIPSetRequest AWS API Documentation
     #
     class UpdateIPSetRequest < Struct.new(
@@ -9724,7 +9756,8 @@ module Aws::GuardDuty
       :ip_set_id,
       :name,
       :location,
-      :activate)
+      :activate,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10023,6 +10056,11 @@ module Aws::GuardDuty
     #   is active or not.
     #   @return [Boolean]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The Amazon Web Services account ID that owns the Amazon S3 bucket
+    #   specified in the **location** parameter.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSetRequest AWS API Documentation
     #
     class UpdateThreatIntelSetRequest < Struct.new(
@@ -10030,7 +10068,8 @@ module Aws::GuardDuty
       :threat_intel_set_id,
       :name,
       :location,
-      :activate)
+      :activate,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end

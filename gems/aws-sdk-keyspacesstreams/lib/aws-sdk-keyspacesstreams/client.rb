@@ -487,13 +487,13 @@ module Aws::KeyspacesStreams
     #   The unique identifier of the shard iterator. A shard iterator
     #   specifies the position in the shard from which you want to start
     #   reading data records sequentially. You obtain this value by calling
-    #   the `GetShardIterator` operation. Each shard iterator is valid for 5
+    #   the `GetShardIterator` operation. Each shard iterator is valid for 15
     #   minutes after creation.
     #
     # @option params [Integer] :max_results
     #   The maximum number of records to return in a single `GetRecords`
     #   request. Default value is 1000. You can specify a limit between 1 and
-    #   10000, but the actual number returned might be less than the specified
+    #   1000, but the actual number returned might be less than the specified
     #   maximum if the size of the data for the returned records exceeds the
     #   internal size limit.
     #
@@ -839,7 +839,7 @@ module Aws::KeyspacesStreams
     # @option params [Integer] :max_results
     #   The maximum number of shard objects to return in a single `GetStream`
     #   request. Default value is 100. The minimum value is 1 and the maximum
-    #   value is 1000.
+    #   value is 100.
     #
     # @option params [Types::ShardFilter] :shard_filter
     #   Optional filter criteria to apply when retrieving shards. You can
@@ -922,7 +922,7 @@ module Aws::KeyspacesStreams
     # @option params [Integer] :max_results
     #   The maximum number of streams to return in a single `ListStreams`
     #   request. Default value is 100. The minimum value is 1 and the maximum
-    #   value is 1000.
+    #   value is 100.
     #
     # @option params [String] :next_token
     #   An optional pagination token provided by a previous `ListStreams`
@@ -981,7 +981,7 @@ module Aws::KeyspacesStreams
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-keyspacesstreams'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

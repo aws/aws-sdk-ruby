@@ -585,6 +585,10 @@ module Aws::IoTWireless
 
     # @!attribute [rw] name
     #   The name of the new resource.
+    #
+    #   <note markdown="1"> The following special characters aren't accepted: `<>^#~$`
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] lo_ra_wan
@@ -898,6 +902,10 @@ module Aws::IoTWireless
 
     # @!attribute [rw] name
     #   The name of the new resource.
+    #
+    #   <note markdown="1"> The following special characters aren't accepted: `<>^#~$`
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] lo_ra_wan
@@ -959,6 +967,10 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] name
     #   The name of the new resource.
+    #
+    #   <note markdown="1"> The following special characters aren't accepted: `<>^#~$`
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1039,6 +1051,10 @@ module Aws::IoTWireless
 
     # @!attribute [rw] name
     #   The name of the new resource.
+    #
+    #   <note markdown="1"> The following special characters aren't accepted: `<>^#~$`
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4508,6 +4524,13 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] session_timeout
     #   How long before a multicast group session is to timeout.
+    #
+    #   <note markdown="1"> We recommend that you provide a timeout value that is a power-of-two
+    #   (such as 64, 128, 256). If a non-power-of-two value is provided, it
+    #   will automatically be rounded up to the next supported power-of-two
+    #   within the allowed range.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] ping_slot_period
@@ -6799,6 +6822,10 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] name
     #   The new name of the resource.
+    #
+    #   <note markdown="1"> The following special characters aren't accepted: `<>^#~$`
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -6833,6 +6860,10 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] name
     #   The new name of the resource.
+    #
+    #   <note markdown="1"> The following special characters aren't accepted: `<>^#~$`
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] description

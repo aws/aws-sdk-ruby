@@ -1308,6 +1308,9 @@ module Aws::OpenSearchService
     #       natural_language_query_generation_options: {
     #         desired_state: "ENABLED", # accepts ENABLED, DISABLED
     #       },
+    #       s3_vectors_engine: {
+    #         enabled: false,
+    #       },
     #     },
     #   })
     #
@@ -1424,6 +1427,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #   resp.domain_status.aiml_options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.domain_status.aiml_options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
+    #   resp.domain_status.aiml_options.s3_vectors_engine.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateDomain AWS API Documentation
     #
@@ -1887,6 +1891,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #   resp.domain_status.aiml_options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.domain_status.aiml_options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
+    #   resp.domain_status.aiml_options.s3_vectors_engine.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteDomain AWS API Documentation
     #
@@ -2208,6 +2213,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #   resp.domain_status.aiml_options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.domain_status.aiml_options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
+    #   resp.domain_status.aiml_options.s3_vectors_engine.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomain AWS API Documentation
     #
@@ -2532,6 +2538,7 @@ module Aws::OpenSearchService
     #   resp.domain_config.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #   resp.domain_config.aiml_options.options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.domain_config.aiml_options.options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
+    #   resp.domain_config.aiml_options.options.s3_vectors_engine.enabled #=> Boolean
     #   resp.domain_config.aiml_options.status.creation_date #=> Time
     #   resp.domain_config.aiml_options.status.update_date #=> Time
     #   resp.domain_config.aiml_options.status.update_version #=> Integer
@@ -2777,6 +2784,7 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #   resp.domain_status_list[0].aiml_options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.domain_status_list[0].aiml_options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
+    #   resp.domain_status_list[0].aiml_options.s3_vectors_engine.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomains AWS API Documentation
     #
@@ -2940,6 +2948,7 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #   resp.dry_run_config.aiml_options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.dry_run_config.aiml_options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
+    #   resp.dry_run_config.aiml_options.s3_vectors_engine.enabled #=> Boolean
     #   resp.dry_run_results.deployment_type #=> String
     #   resp.dry_run_results.message #=> String
     #
@@ -5229,6 +5238,9 @@ module Aws::OpenSearchService
     #       natural_language_query_generation_options: {
     #         desired_state: "ENABLED", # accepts ENABLED, DISABLED
     #       },
+    #       s3_vectors_engine: {
+    #         enabled: false,
+    #       },
     #     },
     #   })
     #
@@ -5420,6 +5432,7 @@ module Aws::OpenSearchService
     #   resp.domain_config.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #   resp.domain_config.aiml_options.options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.domain_config.aiml_options.options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
+    #   resp.domain_config.aiml_options.options.s3_vectors_engine.enabled #=> Boolean
     #   resp.domain_config.aiml_options.status.creation_date #=> Time
     #   resp.domain_config.aiml_options.status.update_date #=> Time
     #   resp.domain_config.aiml_options.status.update_version #=> Integer
@@ -5792,7 +5805,7 @@ module Aws::OpenSearchService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

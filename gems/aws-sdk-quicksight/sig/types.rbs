@@ -1834,6 +1834,7 @@ module Aws::QuickSight
       attr_accessor topic: Types::TopicDetails
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor folder_arns: ::Array[::String]
+      attr_accessor custom_instructions: Types::CustomInstructions
       SENSITIVE: []
     end
 
@@ -1960,6 +1961,11 @@ module Aws::QuickSight
       attr_accessor select_all_options: ("FILTER_ALL_VALUES")
       attr_accessor null_option: ("ALL_VALUES" | "NULLS_ONLY" | "NON_NULLS_ONLY")
       SENSITIVE: []
+    end
+
+    class CustomInstructions
+      attr_accessor custom_instructions_string: ::String
+      SENSITIVE: [:custom_instructions_string]
     end
 
     class CustomNarrativeOptions
@@ -3838,6 +3844,7 @@ module Aws::QuickSight
       attr_accessor topic: Types::TopicDetails
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
+      attr_accessor custom_instructions: Types::CustomInstructions
       SENSITIVE: []
     end
 
@@ -9856,6 +9863,7 @@ module Aws::QuickSight
       attr_accessor aws_account_id: ::String
       attr_accessor topic_id: ::String
       attr_accessor topic: Types::TopicDetails
+      attr_accessor custom_instructions: Types::CustomInstructions
       SENSITIVE: []
     end
 

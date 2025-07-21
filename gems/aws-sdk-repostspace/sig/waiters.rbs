@@ -8,6 +8,48 @@
 module Aws
   module Repostspace
     module Waiters
+
+      class ChannelCreated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    space_id: ::String,
+                    channel_id: ::String
+                  ) -> Client::_GetChannelResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetChannelResponseSuccess
+      end
+
+      class ChannelDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    space_id: ::String,
+                    channel_id: ::String
+                  ) -> Client::_GetChannelResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetChannelResponseSuccess
+      end
+
+      class SpaceCreated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    space_id: ::String
+                  ) -> Client::_GetSpaceResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetSpaceResponseSuccess
+      end
+
+      class SpaceDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    space_id: ::String
+                  ) -> Client::_GetSpaceResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetSpaceResponseSuccess
+      end
     end
   end
 end

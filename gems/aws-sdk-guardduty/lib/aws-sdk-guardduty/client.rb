@@ -1060,6 +1060,10 @@ module Aws::GuardDuty
     # @option params [Hash<String,String>] :tags
     #   The tags to be added to a new IP set resource.
     #
+    # @option params [String] :expected_bucket_owner
+    #   The Amazon Web Services account ID that owns the Amazon S3 bucket
+    #   specified in the **location** parameter.
+    #
     # @return [Types::CreateIPSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIPSetResponse#ip_set_id #ip_set_id} => String
@@ -1076,6 +1080,7 @@ module Aws::GuardDuty
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     expected_bucket_owner: "AccountId",
     #   })
     #
     # @example Response structure
@@ -1377,6 +1382,10 @@ module Aws::GuardDuty
     # @option params [Hash<String,String>] :tags
     #   The tags to be added to a new threat list resource.
     #
+    # @option params [String] :expected_bucket_owner
+    #   The Amazon Web Services account ID that owns the Amazon S3 bucket
+    #   specified in the **location** parameter.
+    #
     # @return [Types::CreateThreatIntelSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateThreatIntelSetResponse#threat_intel_set_id #threat_intel_set_id} => String
@@ -1393,6 +1402,7 @@ module Aws::GuardDuty
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     expected_bucket_owner: "AccountId",
     #   })
     #
     # @example Response structure
@@ -3197,6 +3207,7 @@ module Aws::GuardDuty
     #   * {Types::GetIPSetResponse#location #location} => String
     #   * {Types::GetIPSetResponse#status #status} => String
     #   * {Types::GetIPSetResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetIPSetResponse#expected_bucket_owner #expected_bucket_owner} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3213,6 +3224,7 @@ module Aws::GuardDuty
     #   resp.status #=> String, one of "INACTIVE", "ACTIVATING", "ACTIVE", "DEACTIVATING", "ERROR", "DELETE_PENDING", "DELETED"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.expected_bucket_owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSet AWS API Documentation
     #
@@ -3620,6 +3632,7 @@ module Aws::GuardDuty
     #   * {Types::GetThreatIntelSetResponse#location #location} => String
     #   * {Types::GetThreatIntelSetResponse#status #status} => String
     #   * {Types::GetThreatIntelSetResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetThreatIntelSetResponse#expected_bucket_owner #expected_bucket_owner} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3636,6 +3649,7 @@ module Aws::GuardDuty
     #   resp.status #=> String, one of "INACTIVE", "ACTIVATING", "ACTIVE", "DEACTIVATING", "ERROR", "DELETE_PENDING", "DELETED"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.expected_bucket_owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSet AWS API Documentation
     #
@@ -5119,6 +5133,10 @@ module Aws::GuardDuty
     #   The updated Boolean value that specifies whether the IPSet is active
     #   or not.
     #
+    # @option params [String] :expected_bucket_owner
+    #   The Amazon Web Services account ID that owns the Amazon S3 bucket
+    #   specified in the **location** parameter.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -5129,6 +5147,7 @@ module Aws::GuardDuty
     #     name: "Name",
     #     location: "Location",
     #     activate: false,
+    #     expected_bucket_owner: "AccountId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateIPSet AWS API Documentation
@@ -5542,6 +5561,10 @@ module Aws::GuardDuty
     #   The updated Boolean value that specifies whether the ThreateIntelSet
     #   is active or not.
     #
+    # @option params [String] :expected_bucket_owner
+    #   The Amazon Web Services account ID that owns the Amazon S3 bucket
+    #   specified in the **location** parameter.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -5552,6 +5575,7 @@ module Aws::GuardDuty
     #     name: "Name",
     #     location: "Location",
     #     activate: false,
+    #     expected_bucket_owner: "AccountId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSet AWS API Documentation
@@ -5581,7 +5605,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.119.0'
+      context[:gem_version] = '1.120.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

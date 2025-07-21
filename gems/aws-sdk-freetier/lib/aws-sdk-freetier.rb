@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:freetier)
 # structure.
 #
 #     free_tier = Aws::FreeTier::Client.new
-#     resp = free_tier.get_free_tier_usage(params)
+#     resp = free_tier.get_account_activity(params)
 #
 # See {Client} for more information.
 #
@@ -49,12 +49,13 @@ module Aws::FreeTier
   end
   autoload :Client, 'aws-sdk-freetier/client'
   autoload :Errors, 'aws-sdk-freetier/errors'
+  autoload :Waiters, 'aws-sdk-freetier/waiters'
   autoload :Resource, 'aws-sdk-freetier/resource'
   autoload :EndpointParameters, 'aws-sdk-freetier/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-freetier/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-freetier/endpoints'
 
-  GEM_VERSION = '1.22.0'
+  GEM_VERSION = '1.23.0'
 
 end
 

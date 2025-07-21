@@ -298,6 +298,7 @@ module Aws::EventBridge
       attr_accessor description: ::String
       attr_accessor kms_key_identifier: ::String
       attr_accessor dead_letter_config: Types::DeadLetterConfig
+      attr_accessor log_config: Types::LogConfig
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -307,6 +308,7 @@ module Aws::EventBridge
       attr_accessor description: ::String
       attr_accessor kms_key_identifier: ::String
       attr_accessor dead_letter_config: Types::DeadLetterConfig
+      attr_accessor log_config: Types::LogConfig
       SENSITIVE: []
     end
 
@@ -509,6 +511,7 @@ module Aws::EventBridge
       attr_accessor kms_key_identifier: ::String
       attr_accessor dead_letter_config: Types::DeadLetterConfig
       attr_accessor policy: ::String
+      attr_accessor log_config: Types::LogConfig
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
       SENSITIVE: []
@@ -865,6 +868,12 @@ module Aws::EventBridge
     class ListTargetsByRuleResponse
       attr_accessor targets: ::Array[Types::Target]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LogConfig
+      attr_accessor include_detail: ("NONE" | "FULL")
+      attr_accessor level: ("OFF" | "ERROR" | "INFO" | "TRACE")
       SENSITIVE: []
     end
 
@@ -1336,6 +1345,7 @@ module Aws::EventBridge
       attr_accessor kms_key_identifier: ::String
       attr_accessor description: ::String
       attr_accessor dead_letter_config: Types::DeadLetterConfig
+      attr_accessor log_config: Types::LogConfig
       SENSITIVE: []
     end
 
@@ -1345,6 +1355,7 @@ module Aws::EventBridge
       attr_accessor kms_key_identifier: ::String
       attr_accessor description: ::String
       attr_accessor dead_letter_config: Types::DeadLetterConfig
+      attr_accessor log_config: Types::LogConfig
       SENSITIVE: []
     end
   end

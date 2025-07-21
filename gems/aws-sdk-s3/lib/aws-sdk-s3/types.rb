@@ -2725,7 +2725,41 @@ module Aws::S3
 
     # @!attribute [rw] bucket
     #   The general purpose bucket that you want to create the metadata
-    #   table configuration in.
+    #   configuration for.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_md5
+    #   The `Content-MD5` header for the metadata configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] checksum_algorithm
+    #   The checksum algorithm to use with your metadata configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_configuration
+    #   The contents of your metadata configuration.
+    #   @return [Types::MetadataConfiguration]
+    #
+    # @!attribute [rw] expected_bucket_owner
+    #   The expected owner of the general purpose bucket that corresponds to
+    #   your metadata configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucketMetadataConfigurationRequest AWS API Documentation
+    #
+    class CreateBucketMetadataConfigurationRequest < Struct.new(
+      :bucket,
+      :content_md5,
+      :checksum_algorithm,
+      :metadata_configuration,
+      :expected_bucket_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bucket
+    #   The general purpose bucket that you want to create the metadata
+    #   table configuration for.
     #   @return [String]
     #
     # @!attribute [rw] content_md5
@@ -2742,8 +2776,8 @@ module Aws::S3
     #   @return [Types::MetadataTableConfiguration]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The expected owner of the general purpose bucket that contains your
-    #   metadata table configuration.
+    #   The expected owner of the general purpose bucket that corresponds to
+    #   your metadata table configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucketMetadataTableConfigurationRequest AWS API Documentation
@@ -4166,6 +4200,25 @@ module Aws::S3
 
     # @!attribute [rw] bucket
     #   The general purpose bucket that you want to remove the metadata
+    #   configuration from.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_bucket_owner
+    #   The expected bucket owner of the general purpose bucket that you
+    #   want to remove the metadata table configuration from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketMetadataConfigurationRequest AWS API Documentation
+    #
+    class DeleteBucketMetadataConfigurationRequest < Struct.new(
+      :bucket,
+      :expected_bucket_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bucket
+    #   The general purpose bucket that you want to remove the metadata
     #   table configuration from.
     #   @return [String]
     #
@@ -5090,6 +5143,37 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # The destination information for the S3 Metadata configuration.
+    #
+    # @!attribute [rw] table_bucket_type
+    #   The type of the table bucket where the metadata configuration is
+    #   stored. The `aws` value indicates an Amazon Web Services managed
+    #   table bucket, and the `customer` value indicates a customer-managed
+    #   table bucket. V2 metadata configurations are stored in Amazon Web
+    #   Services managed table buckets, and V1 metadata configurations are
+    #   stored in customer-managed table buckets.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_bucket_arn
+    #   The Amazon Resource Name (ARN) of the table bucket where the
+    #   metadata configuration is stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_namespace
+    #   The namespace in the table bucket where the metadata tables for a
+    #   metadata configuration are stored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DestinationResult AWS API Documentation
+    #
+    class DestinationResult < Struct.new(
+      :table_bucket_type,
+      :table_bucket_arn,
+      :table_namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the type of server-side encryption used.
     #
     # @!attribute [rw] encryption_type
@@ -5931,12 +6015,24 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # If the `CreateBucketMetadataTableConfiguration` request succeeds, but
-    # S3 Metadata was unable to create the table, this structure contains
-    # the error code and error message.
+    # If an S3 Metadata V1 `CreateBucketMetadataTableConfiguration` or V2
+    # `CreateBucketMetadataConfiguration` request succeeds, but S3 Metadata
+    # was unable to create the table, this structure contains the error code
+    # and error message.
+    #
+    # <note markdown="1"> If you created your S3 Metadata configuration before July 15, 2025, we
+    # recommend that you delete and re-create your configuration by using
+    # [CreateBucketMetadataConfiguration][1] so that you can expire journal
+    # table records and create a live inventory table.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
     #
     # @!attribute [rw] error_code
-    #   If the `CreateBucketMetadataTableConfiguration` request succeeds,
+    #   If the V1 `CreateBucketMetadataTableConfiguration` request succeeds,
     #   but S3 Metadata was unable to create the table, this structure
     #   contains the error code. The possible error codes and error messages
     #   are as follows:
@@ -5975,10 +6071,65 @@ module Aws::S3
     #     Create or choose a different table bucket. To create a new
     #     metadata table, you must delete the metadata configuration for
     #     this bucket, and then create a new metadata configuration.
+    #
+    #   If the V2 `CreateBucketMetadataConfiguration` request succeeds, but
+    #   S3 Metadata was unable to create the table, this structure contains
+    #   the error code. The possible error codes and error messages are as
+    #   follows:
+    #
+    #   * `AccessDeniedCreatingResources` - You don't have sufficient
+    #     permissions to create the required resources. Make sure that you
+    #     have `s3tables:CreateTableBucket`, `s3tables:CreateNamespace`,
+    #     `s3tables:CreateTable`, `s3tables:GetTable`,
+    #     `s3tables:PutTablePolicy`, `kms:DescribeKey`, and
+    #     `s3tables:PutTableEncryption` permissions. Additionally, ensure
+    #     that the KMS key used to encrypt the table still exists, is active
+    #     and has a resource policy granting access to the S3 service
+    #     principals '`maintenance.s3tables.amazonaws.com`' and
+    #     '`metadata.s3.amazonaws.com`'. To create a new metadata table,
+    #     you must delete the metadata configuration for this bucket, and
+    #     then create a new metadata configuration.
+    #
+    #   * `AccessDeniedWritingToTable` - Unable to write to the metadata
+    #     table because of missing resource permissions. To fix the resource
+    #     policy, Amazon S3 needs to create a new metadata table. To create
+    #     a new metadata table, you must delete the metadata configuration
+    #     for this bucket, and then create a new metadata configuration.
+    #
+    #   * `DestinationTableNotFound` - The destination table doesn't exist.
+    #     To create a new metadata table, you must delete the metadata
+    #     configuration for this bucket, and then create a new metadata
+    #     configuration.
+    #
+    #   * `ServerInternalError` - An internal error has occurred. To create
+    #     a new metadata table, you must delete the metadata configuration
+    #     for this bucket, and then create a new metadata configuration.
+    #
+    #   * `JournalTableAlreadyExists` - A journal table already exists in
+    #     the Amazon Web Services managed table bucket's namespace. Delete
+    #     the journal table, and then try again. To create a new metadata
+    #     table, you must delete the metadata configuration for this bucket,
+    #     and then create a new metadata configuration.
+    #
+    #   * `InventoryTableAlreadyExists` - An inventory table already exists
+    #     in the Amazon Web Services managed table bucket's namespace.
+    #     Delete the inventory table, and then try again. To create a new
+    #     metadata table, you must delete the metadata configuration for
+    #     this bucket, and then create a new metadata configuration.
+    #
+    #   * `JournalTableNotAvailable` - The journal table that the inventory
+    #     table relies on has a `FAILED` status. An inventory table requires
+    #     a journal table with an `ACTIVE` status. To create a new journal
+    #     or inventory table, you must delete the metadata configuration for
+    #     this bucket, along with any journal or inventory tables, and then
+    #     create a new metadata configuration.
+    #
+    #   * `NoSuchBucket` - The specified general purpose bucket does not
+    #     exist.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   If the `CreateBucketMetadataTableConfiguration` request succeeds,
+    #   If the V1 `CreateBucketMetadataTableConfiguration` request succeeds,
     #   but S3 Metadata was unable to create the table, this structure
     #   contains the error message. The possible error codes and error
     #   messages are as follows:
@@ -6017,6 +6168,61 @@ module Aws::S3
     #     Create or choose a different table bucket. To create a new
     #     metadata table, you must delete the metadata configuration for
     #     this bucket, and then create a new metadata configuration.
+    #
+    #   If the V2 `CreateBucketMetadataConfiguration` request succeeds, but
+    #   S3 Metadata was unable to create the table, this structure contains
+    #   the error code. The possible error codes and error messages are as
+    #   follows:
+    #
+    #   * `AccessDeniedCreatingResources` - You don't have sufficient
+    #     permissions to create the required resources. Make sure that you
+    #     have `s3tables:CreateTableBucket`, `s3tables:CreateNamespace`,
+    #     `s3tables:CreateTable`, `s3tables:GetTable`,
+    #     `s3tables:PutTablePolicy`, `kms:DescribeKey`, and
+    #     `s3tables:PutTableEncryption` permissions. Additionally, ensure
+    #     that the KMS key used to encrypt the table still exists, is active
+    #     and has a resource policy granting access to the S3 service
+    #     principals '`maintenance.s3tables.amazonaws.com`' and
+    #     '`metadata.s3.amazonaws.com`'. To create a new metadata table,
+    #     you must delete the metadata configuration for this bucket, and
+    #     then create a new metadata configuration.
+    #
+    #   * `AccessDeniedWritingToTable` - Unable to write to the metadata
+    #     table because of missing resource permissions. To fix the resource
+    #     policy, Amazon S3 needs to create a new metadata table. To create
+    #     a new metadata table, you must delete the metadata configuration
+    #     for this bucket, and then create a new metadata configuration.
+    #
+    #   * `DestinationTableNotFound` - The destination table doesn't exist.
+    #     To create a new metadata table, you must delete the metadata
+    #     configuration for this bucket, and then create a new metadata
+    #     configuration.
+    #
+    #   * `ServerInternalError` - An internal error has occurred. To create
+    #     a new metadata table, you must delete the metadata configuration
+    #     for this bucket, and then create a new metadata configuration.
+    #
+    #   * `JournalTableAlreadyExists` - A journal table already exists in
+    #     the Amazon Web Services managed table bucket's namespace. Delete
+    #     the journal table, and then try again. To create a new metadata
+    #     table, you must delete the metadata configuration for this bucket,
+    #     and then create a new metadata configuration.
+    #
+    #   * `InventoryTableAlreadyExists` - An inventory table already exists
+    #     in the Amazon Web Services managed table bucket's namespace.
+    #     Delete the inventory table, and then try again. To create a new
+    #     metadata table, you must delete the metadata configuration for
+    #     this bucket, and then create a new metadata configuration.
+    #
+    #   * `JournalTableNotAvailable` - The journal table that the inventory
+    #     table relies on has a `FAILED` status. An inventory table requires
+    #     a journal table with an `ACTIVE` status. To create a new journal
+    #     or inventory table, you must delete the metadata configuration for
+    #     this bucket, along with any journal or inventory tables, and then
+    #     create a new metadata configuration.
+    #
+    #   * `NoSuchBucket` - The specified general purpose bucket does not
+    #     exist.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ErrorDetails AWS API Documentation
@@ -6639,6 +6845,51 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @!attribute [rw] get_bucket_metadata_configuration_result
+    #   The metadata configuration for the general purpose bucket.
+    #   @return [Types::GetBucketMetadataConfigurationResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetadataConfigurationOutput AWS API Documentation
+    #
+    class GetBucketMetadataConfigurationOutput < Struct.new(
+      :get_bucket_metadata_configuration_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bucket
+    #   The general purpose bucket that corresponds to the metadata
+    #   configuration that you want to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_bucket_owner
+    #   The expected owner of the general purpose bucket that you want to
+    #   retrieve the metadata table configuration for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetadataConfigurationRequest AWS API Documentation
+    #
+    class GetBucketMetadataConfigurationRequest < Struct.new(
+      :bucket,
+      :expected_bucket_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The S3 Metadata configuration for a general purpose bucket.
+    #
+    # @!attribute [rw] metadata_configuration_result
+    #   The metadata configuration for a general purpose bucket.
+    #   @return [Types::MetadataConfigurationResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetadataConfigurationResult AWS API Documentation
+    #
+    class GetBucketMetadataConfigurationResult < Struct.new(
+      :metadata_configuration_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] get_bucket_metadata_table_configuration_result
     #   The metadata table configuration for the general purpose bucket.
     #   @return [Types::GetBucketMetadataTableConfigurationResult]
@@ -6652,13 +6903,13 @@ module Aws::S3
     end
 
     # @!attribute [rw] bucket
-    #   The general purpose bucket that contains the metadata table
+    #   The general purpose bucket that corresponds to the metadata table
     #   configuration that you want to retrieve.
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
     #   The expected owner of the general purpose bucket that you want to
-    #   retrieve the metadata table configuration from.
+    #   retrieve the metadata table configuration for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetadataTableConfigurationRequest AWS API Documentation
@@ -6670,10 +6921,21 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # The metadata table configuration for a general purpose bucket.
+    # The V1 S3 Metadata configuration for a general purpose bucket.
+    #
+    # <note markdown="1"> If you created your S3 Metadata configuration before July 15, 2025, we
+    # recommend that you delete and re-create your configuration by using
+    # [CreateBucketMetadataConfiguration][1] so that you can expire journal
+    # table records and create a live inventory table.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
     #
     # @!attribute [rw] metadata_table_configuration_result
-    #   The metadata table configuration for a general purpose bucket.
+    #   The V1 S3 Metadata configuration for a general purpose bucket.
     #   @return [Types::MetadataTableConfigurationResult]
     #
     # @!attribute [rw] status
@@ -6682,7 +6944,7 @@ module Aws::S3
     #   * `CREATING` - The metadata table is in the process of being created
     #     in the specified table bucket.
     #
-    #   * `ACTIVE` - The metadata table has been created successfully and
+    #   * `ACTIVE` - The metadata table has been created successfully, and
     #     records are being delivered to the table.
     #
     #   * `FAILED` - Amazon S3 is unable to create the metadata table, or
@@ -9909,7 +10171,7 @@ module Aws::S3
     #
     class InvalidWriteOffset < Aws::EmptyStructure; end
 
-    # Specifies the inventory configuration for an Amazon S3 bucket. For
+    # Specifies the S3 Inventory configuration for an Amazon S3 bucket. For
     # more information, see [GET Bucket inventory][1] in the *Amazon S3 API
     # Reference*.
     #
@@ -9967,7 +10229,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Specifies the inventory configuration for an Amazon S3 bucket.
+    # Specifies the S3 Inventory configuration for an Amazon S3 bucket.
     #
     # @!attribute [rw] s3_bucket_destination
     #   Contains the bucket name, file format, bucket owner (optional), and
@@ -9982,8 +10244,8 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Contains the type of server-side encryption used to encrypt the
-    # inventory results.
+    # Contains the type of server-side encryption used to encrypt the S3
+    # Inventory results.
     #
     # @!attribute [rw] sses3
     #   Specifies the use of SSE-S3 to encrypt delivered inventory reports.
@@ -10002,7 +10264,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Specifies an inventory filter. The inventory only includes objects
+    # Specifies an S3 Inventory filter. The inventory only includes objects
     # that meet the filter's criteria.
     #
     # @!attribute [rw] prefix
@@ -10019,7 +10281,7 @@ module Aws::S3
     end
 
     # Contains the bucket name, file format, bucket owner (optional), and
-    # prefix (optional) where inventory results are published.
+    # prefix (optional) where S3 Inventory results are published.
     #
     # @!attribute [rw] account_id
     #   The account ID that owns the destination S3 bucket. If no account ID
@@ -10062,7 +10324,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Specifies the schedule for generating inventory results.
+    # Specifies the schedule for generating S3 Inventory results.
     #
     # @!attribute [rw] frequency
     #   Specifies how frequently inventory results are produced.
@@ -10072,6 +10334,117 @@ module Aws::S3
     #
     class InventorySchedule < Struct.new(
       :frequency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The inventory table configuration for an S3 Metadata configuration.
+    #
+    # @!attribute [rw] configuration_state
+    #   The configuration state of the inventory table, indicating whether
+    #   the inventory table is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for the inventory table.
+    #   @return [Types::MetadataTableEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryTableConfiguration AWS API Documentation
+    #
+    class InventoryTableConfiguration < Struct.new(
+      :configuration_state,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The inventory table configuration for an S3 Metadata configuration.
+    #
+    # @!attribute [rw] configuration_state
+    #   The configuration state of the inventory table, indicating whether
+    #   the inventory table is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_status
+    #   The status of the inventory table. The status values are:
+    #
+    #   * `CREATING` - The inventory table is in the process of being
+    #     created in the specified Amazon Web Services managed table bucket.
+    #
+    #   * `BACKFILLING` - The inventory table is in the process of being
+    #     backfilled. When you enable the inventory table for your metadata
+    #     configuration, the table goes through a process known as
+    #     backfilling, during which Amazon S3 scans your general purpose
+    #     bucket to retrieve the initial metadata for all objects in the
+    #     bucket. Depending on the number of objects in your bucket, this
+    #     process can take several hours. When the backfilling process is
+    #     finished, the status of your inventory table changes from
+    #     `BACKFILLING` to `ACTIVE`. After backfilling is completed, updates
+    #     to your objects are reflected in the inventory table within one
+    #     hour.
+    #
+    #   * `ACTIVE` - The inventory table has been created successfully, and
+    #     records are being delivered to the table.
+    #
+    #   * `FAILED` - Amazon S3 is unable to create the inventory table, or
+    #     Amazon S3 is unable to deliver records.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   If an S3 Metadata V1 `CreateBucketMetadataTableConfiguration` or V2
+    #   `CreateBucketMetadataConfiguration` request succeeds, but S3
+    #   Metadata was unable to create the table, this structure contains the
+    #   error code and error message.
+    #
+    #   <note markdown="1"> If you created your S3 Metadata configuration before July 15, 2025,
+    #   we recommend that you delete and re-create your configuration by
+    #   using [CreateBucketMetadataConfiguration][1] so that you can expire
+    #   journal table records and create a live inventory table.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
+    #   @return [Types::ErrorDetails]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the inventory table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) for the inventory table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryTableConfigurationResult AWS API Documentation
+    #
+    class InventoryTableConfigurationResult < Struct.new(
+      :configuration_state,
+      :table_status,
+      :error,
+      :table_name,
+      :table_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified updates to the S3 Metadata inventory table
+    # configuration.
+    #
+    # @!attribute [rw] configuration_state
+    #   The configuration state of the inventory table, indicating whether
+    #   the inventory table is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for the inventory table.
+    #   @return [Types::MetadataTableEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryTableConfigurationUpdates AWS API Documentation
+    #
+    class InventoryTableConfigurationUpdates < Struct.new(
+      :configuration_state,
+      :encryption_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10101,6 +10474,96 @@ module Aws::S3
     #
     class JSONOutput < Struct.new(
       :record_delimiter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The journal table configuration for an S3 Metadata configuration.
+    #
+    # @!attribute [rw] record_expiration
+    #   The journal table record expiration settings for the journal table.
+    #   @return [Types::RecordExpiration]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for the journal table.
+    #   @return [Types::MetadataTableEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/JournalTableConfiguration AWS API Documentation
+    #
+    class JournalTableConfiguration < Struct.new(
+      :record_expiration,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The journal table configuration for the S3 Metadata configuration.
+    #
+    # @!attribute [rw] table_status
+    #   The status of the journal table. The status values are:
+    #
+    #   * `CREATING` - The journal table is in the process of being created
+    #     in the specified table bucket.
+    #
+    #   * `ACTIVE` - The journal table has been created successfully, and
+    #     records are being delivered to the table.
+    #
+    #   * `FAILED` - Amazon S3 is unable to create the journal table, or
+    #     Amazon S3 is unable to deliver records.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   If an S3 Metadata V1 `CreateBucketMetadataTableConfiguration` or V2
+    #   `CreateBucketMetadataConfiguration` request succeeds, but S3
+    #   Metadata was unable to create the table, this structure contains the
+    #   error code and error message.
+    #
+    #   <note markdown="1"> If you created your S3 Metadata configuration before July 15, 2025,
+    #   we recommend that you delete and re-create your configuration by
+    #   using [CreateBucketMetadataConfiguration][1] so that you can expire
+    #   journal table records and create a live inventory table.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
+    #   @return [Types::ErrorDetails]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the journal table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) for the journal table.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_expiration
+    #   The journal table record expiration settings for the journal table.
+    #   @return [Types::RecordExpiration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/JournalTableConfigurationResult AWS API Documentation
+    #
+    class JournalTableConfigurationResult < Struct.new(
+      :table_status,
+      :error,
+      :table_name,
+      :table_arn,
+      :record_expiration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified updates to the S3 Metadata journal table configuration.
+    #
+    # @!attribute [rw] record_expiration
+    #   The journal table record expiration settings for the journal table.
+    #   @return [Types::RecordExpiration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/JournalTableConfigurationUpdates AWS API Documentation
+    #
+    class JournalTableConfigurationUpdates < Struct.new(
+      :record_expiration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12351,6 +12814,49 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # The S3 Metadata configuration for a general purpose bucket.
+    #
+    # @!attribute [rw] journal_table_configuration
+    #   The journal table configuration for a metadata configuration.
+    #   @return [Types::JournalTableConfiguration]
+    #
+    # @!attribute [rw] inventory_table_configuration
+    #   The inventory table configuration for a metadata configuration.
+    #   @return [Types::InventoryTableConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetadataConfiguration AWS API Documentation
+    #
+    class MetadataConfiguration < Struct.new(
+      :journal_table_configuration,
+      :inventory_table_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The S3 Metadata configuration for a general purpose bucket.
+    #
+    # @!attribute [rw] destination_result
+    #   The destination settings for a metadata configuration.
+    #   @return [Types::DestinationResult]
+    #
+    # @!attribute [rw] journal_table_configuration_result
+    #   The journal table configuration for a metadata configuration.
+    #   @return [Types::JournalTableConfigurationResult]
+    #
+    # @!attribute [rw] inventory_table_configuration_result
+    #   The inventory table configuration for a metadata configuration.
+    #   @return [Types::InventoryTableConfigurationResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetadataConfigurationResult AWS API Documentation
+    #
+    class MetadataConfigurationResult < Struct.new(
+      :destination_result,
+      :journal_table_configuration_result,
+      :inventory_table_configuration_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A metadata key-value pair to store with an object.
     #
     # @!attribute [rw] name
@@ -12370,7 +12876,18 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # The metadata table configuration for a general purpose bucket.
+    # The V1 S3 Metadata configuration for a general purpose bucket.
+    #
+    # <note markdown="1"> If you created your S3 Metadata configuration before July 15, 2025, we
+    # recommend that you delete and re-create your configuration by using
+    # [CreateBucketMetadataConfiguration][1] so that you can expire journal
+    # table records and create a live inventory table.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
     #
     # @!attribute [rw] s3_tables_destination
     #   The destination information for the metadata table configuration.
@@ -12388,11 +12905,22 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # The metadata table configuration for a general purpose bucket. The
+    # The V1 S3 Metadata configuration for a general purpose bucket. The
     # destination table bucket must be in the same Region and Amazon Web
     # Services account as the general purpose bucket. The specified metadata
     # table name must be unique within the `aws_s3_metadata` namespace in
     # the destination table bucket.
+    #
+    # <note markdown="1"> If you created your S3 Metadata configuration before July 15, 2025, we
+    # recommend that you delete and re-create your configuration by using
+    # [CreateBucketMetadataConfiguration][1] so that you can expire journal
+    # table records and create a live inventory table.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
     #
     # @!attribute [rw] s3_tables_destination_result
     #   The destination information for the metadata table configuration.
@@ -12406,6 +12934,34 @@ module Aws::S3
     #
     class MetadataTableConfigurationResult < Struct.new(
       :s3_tables_destination_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The encryption settings for an S3 Metadata journal table or inventory
+    # table configuration.
+    #
+    # @!attribute [rw] sse_algorithm
+    #   The encryption type specified for a metadata table. To specify
+    #   server-side encryption with Key Management Service (KMS) keys
+    #   (SSE-KMS), use the `aws:kms` value. To specify server-side
+    #   encryption with Amazon S3 managed keys (SSE-S3), use the `AES256`
+    #   value.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   If server-side encryption with Key Management Service (KMS) keys
+    #   (SSE-KMS) is specified, you must also specify the KMS key Amazon
+    #   Resource Name (ARN). You must specify a customer-managed KMS key
+    #   that's located in the same Region as the general purpose bucket
+    #   that corresponds to the metadata table configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetadataTableEncryptionConfiguration AWS API Documentation
+    #
+    class MetadataTableEncryptionConfiguration < Struct.new(
+      :sse_algorithm,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16608,6 +17164,32 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # The journal table record expiration settings for a journal table in an
+    # S3 Metadata configuration.
+    #
+    # @!attribute [rw] expiration
+    #   Specifies whether journal table record expiration is enabled or
+    #   disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] days
+    #   If you enable journal table record expiration, you can set the
+    #   number of days to retain your journal table records. Journal table
+    #   records must be retained for a minimum of 7 days. To set this value,
+    #   specify any whole number from `7` to `2147483647`. For example, to
+    #   retain your journal table records for one year, set this value to
+    #   `365`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RecordExpiration AWS API Documentation
+    #
+    class RecordExpiration < Struct.new(
+      :expiration,
+      :days)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The container for the records event.
     #
     # @!attribute [rw] payload
@@ -17596,11 +18178,22 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # The destination information for the metadata table configuration. The
+    # The destination information for a V1 S3 Metadata configuration. The
     # destination table bucket must be in the same Region and Amazon Web
     # Services account as the general purpose bucket. The specified metadata
     # table name must be unique within the `aws_s3_metadata` namespace in
     # the destination table bucket.
+    #
+    # <note markdown="1"> If you created your S3 Metadata configuration before July 15, 2025, we
+    # recommend that you delete and re-create your configuration by using
+    # [CreateBucketMetadataConfiguration][1] so that you can expire journal
+    # table records and create a live inventory table.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
     #
     # @!attribute [rw] table_bucket_arn
     #   The Amazon Resource Name (ARN) for the table bucket that's
@@ -17625,11 +18218,22 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # The destination information for the metadata table configuration. The
+    # The destination information for a V1 S3 Metadata configuration. The
     # destination table bucket must be in the same Region and Amazon Web
     # Services account as the general purpose bucket. The specified metadata
     # table name must be unique within the `aws_s3_metadata` namespace in
     # the destination table bucket.
+    #
+    # <note markdown="1"> If you created your S3 Metadata configuration before July 15, 2025, we
+    # recommend that you delete and re-create your configuration by using
+    # [CreateBucketMetadataConfiguration][1] so that you can expire journal
+    # table records and create a live inventory table.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
     #
     # @!attribute [rw] table_bucket_arn
     #   The Amazon Resource Name (ARN) for the table bucket that's
@@ -18532,6 +19136,79 @@ module Aws::S3
       :date,
       :days,
       :storage_class)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bucket
+    #   The general purpose bucket that corresponds to the metadata
+    #   configuration that you want to enable or disable an inventory table
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_md5
+    #   The `Content-MD5` header for the inventory table configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] checksum_algorithm
+    #   The checksum algorithm to use with your inventory table
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] inventory_table_configuration
+    #   The contents of your inventory table configuration.
+    #   @return [Types::InventoryTableConfigurationUpdates]
+    #
+    # @!attribute [rw] expected_bucket_owner
+    #   The expected owner of the general purpose bucket that corresponds to
+    #   the metadata table configuration that you want to enable or disable
+    #   an inventory table for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UpdateBucketMetadataInventoryTableConfigurationRequest AWS API Documentation
+    #
+    class UpdateBucketMetadataInventoryTableConfigurationRequest < Struct.new(
+      :bucket,
+      :content_md5,
+      :checksum_algorithm,
+      :inventory_table_configuration,
+      :expected_bucket_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bucket
+    #   The general purpose bucket that corresponds to the metadata
+    #   configuration that you want to enable or disable journal table
+    #   record expiration for.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_md5
+    #   The `Content-MD5` header for the journal table configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] checksum_algorithm
+    #   The checksum algorithm to use with your journal table configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] journal_table_configuration
+    #   The contents of your journal table configuration.
+    #   @return [Types::JournalTableConfigurationUpdates]
+    #
+    # @!attribute [rw] expected_bucket_owner
+    #   The expected owner of the general purpose bucket that corresponds to
+    #   the metadata table configuration that you want to enable or disable
+    #   journal table record expiration for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UpdateBucketMetadataJournalTableConfigurationRequest AWS API Documentation
+    #
+    class UpdateBucketMetadataJournalTableConfigurationRequest < Struct.new(
+      :bucket,
+      :content_md5,
+      :checksum_algorithm,
+      :journal_table_configuration,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end

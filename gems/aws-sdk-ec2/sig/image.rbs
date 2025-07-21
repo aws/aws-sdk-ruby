@@ -90,6 +90,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#source_image_region-instance_method
       def source_image_region: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#free_tier_eligible-instance_method
+      def free_tier_eligible: () -> bool
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#image_location-instance_method
       def image_location: () -> ::String
 

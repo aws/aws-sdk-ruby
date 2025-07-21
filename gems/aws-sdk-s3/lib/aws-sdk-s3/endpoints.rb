@@ -63,6 +63,18 @@ module Aws::S3
       end
     end
 
+    class CreateBucketMetadataConfiguration
+      def self.build(context)
+        Aws::S3::EndpointParameters.create(
+          context.config,
+          bucket: context.params[:bucket],
+          use_dual_stack: context[:use_dualstack_endpoint],
+          accelerate: context[:use_accelerate_endpoint],
+          use_s3_express_control_endpoint: true,
+        )
+      end
+    end
+
     class CreateBucketMetadataTableConfiguration
       def self.build(context)
         Aws::S3::EndpointParameters.create(
@@ -172,6 +184,18 @@ module Aws::S3
     end
 
     class DeleteBucketLifecycle
+      def self.build(context)
+        Aws::S3::EndpointParameters.create(
+          context.config,
+          bucket: context.params[:bucket],
+          use_dual_stack: context[:use_dualstack_endpoint],
+          accelerate: context[:use_accelerate_endpoint],
+          use_s3_express_control_endpoint: true,
+        )
+      end
+    end
+
+    class DeleteBucketMetadataConfiguration
       def self.build(context)
         Aws::S3::EndpointParameters.create(
           context.config,
@@ -434,6 +458,18 @@ module Aws::S3
     end
 
     class GetBucketLogging
+      def self.build(context)
+        Aws::S3::EndpointParameters.create(
+          context.config,
+          bucket: context.params[:bucket],
+          use_dual_stack: context[:use_dualstack_endpoint],
+          accelerate: context[:use_accelerate_endpoint],
+          use_s3_express_control_endpoint: true,
+        )
+      end
+    end
+
+    class GetBucketMetadataConfiguration
       def self.build(context)
         Aws::S3::EndpointParameters.create(
           context.config,
@@ -1196,6 +1232,30 @@ module Aws::S3
       end
     end
 
+    class UpdateBucketMetadataInventoryTableConfiguration
+      def self.build(context)
+        Aws::S3::EndpointParameters.create(
+          context.config,
+          bucket: context.params[:bucket],
+          use_dual_stack: context[:use_dualstack_endpoint],
+          accelerate: context[:use_accelerate_endpoint],
+          use_s3_express_control_endpoint: true,
+        )
+      end
+    end
+
+    class UpdateBucketMetadataJournalTableConfiguration
+      def self.build(context)
+        Aws::S3::EndpointParameters.create(
+          context.config,
+          bucket: context.params[:bucket],
+          use_dual_stack: context[:use_dualstack_endpoint],
+          accelerate: context[:use_accelerate_endpoint],
+          use_s3_express_control_endpoint: true,
+        )
+      end
+    end
+
     class UploadPart
       def self.build(context)
         Aws::S3::EndpointParameters.create(
@@ -1242,6 +1302,8 @@ module Aws::S3
         CopyObject.build(context)
       when :create_bucket
         CreateBucket.build(context)
+      when :create_bucket_metadata_configuration
+        CreateBucketMetadataConfiguration.build(context)
       when :create_bucket_metadata_table_configuration
         CreateBucketMetadataTableConfiguration.build(context)
       when :create_multipart_upload
@@ -1262,6 +1324,8 @@ module Aws::S3
         DeleteBucketInventoryConfiguration.build(context)
       when :delete_bucket_lifecycle
         DeleteBucketLifecycle.build(context)
+      when :delete_bucket_metadata_configuration
+        DeleteBucketMetadataConfiguration.build(context)
       when :delete_bucket_metadata_table_configuration
         DeleteBucketMetadataTableConfiguration.build(context)
       when :delete_bucket_metrics_configuration
@@ -1306,6 +1370,8 @@ module Aws::S3
         GetBucketLocation.build(context)
       when :get_bucket_logging
         GetBucketLogging.build(context)
+      when :get_bucket_metadata_configuration
+        GetBucketMetadataConfiguration.build(context)
       when :get_bucket_metadata_table_configuration
         GetBucketMetadataTableConfiguration.build(context)
       when :get_bucket_metrics_configuration
@@ -1434,6 +1500,10 @@ module Aws::S3
         RestoreObject.build(context)
       when :select_object_content
         SelectObjectContent.build(context)
+      when :update_bucket_metadata_inventory_table_configuration
+        UpdateBucketMetadataInventoryTableConfiguration.build(context)
+      when :update_bucket_metadata_journal_table_configuration
+        UpdateBucketMetadataJournalTableConfiguration.build(context)
       when :upload_part
         UploadPart.build(context)
       when :upload_part_copy

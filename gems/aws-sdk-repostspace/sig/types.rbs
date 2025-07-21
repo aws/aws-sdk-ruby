@@ -13,10 +13,24 @@ module Aws::Repostspace
       SENSITIVE: []
     end
 
+    class BatchAddChannelRoleToAccessorsInput
+      attr_accessor space_id: ::String
+      attr_accessor channel_id: ::String
+      attr_accessor accessor_ids: ::Array[::String]
+      attr_accessor channel_role: ("ASKER" | "EXPERT" | "MODERATOR" | "SUPPORTREQUESTOR")
+      SENSITIVE: []
+    end
+
+    class BatchAddChannelRoleToAccessorsOutput
+      attr_accessor added_accessor_ids: ::Array[::String]
+      attr_accessor errors: ::Array[Types::BatchError]
+      SENSITIVE: []
+    end
+
     class BatchAddRoleInput
+      attr_accessor space_id: ::String
       attr_accessor accessor_ids: ::Array[::String]
       attr_accessor role: ("EXPERT" | "MODERATOR" | "ADMINISTRATOR" | "SUPPORTREQUESTOR")
-      attr_accessor space_id: ::String
       SENSITIVE: []
     end
 
@@ -33,17 +47,44 @@ module Aws::Repostspace
       SENSITIVE: []
     end
 
+    class BatchRemoveChannelRoleFromAccessorsInput
+      attr_accessor space_id: ::String
+      attr_accessor channel_id: ::String
+      attr_accessor accessor_ids: ::Array[::String]
+      attr_accessor channel_role: ("ASKER" | "EXPERT" | "MODERATOR" | "SUPPORTREQUESTOR")
+      SENSITIVE: []
+    end
+
+    class BatchRemoveChannelRoleFromAccessorsOutput
+      attr_accessor removed_accessor_ids: ::Array[::String]
+      attr_accessor errors: ::Array[Types::BatchError]
+      SENSITIVE: []
+    end
+
     class BatchRemoveRoleInput
+      attr_accessor space_id: ::String
       attr_accessor accessor_ids: ::Array[::String]
       attr_accessor role: ("EXPERT" | "MODERATOR" | "ADMINISTRATOR" | "SUPPORTREQUESTOR")
-      attr_accessor space_id: ::String
       SENSITIVE: []
     end
 
     class BatchRemoveRoleOutput
-      attr_accessor errors: ::Array[Types::BatchError]
       attr_accessor removed_accessor_ids: ::Array[::String]
+      attr_accessor errors: ::Array[Types::BatchError]
       SENSITIVE: []
+    end
+
+    class ChannelData
+      attr_accessor space_id: ::String
+      attr_accessor channel_id: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor channel_description: ::String
+      attr_accessor create_date_time: ::Time
+      attr_accessor delete_date_time: ::Time
+      attr_accessor channel_status: ("CREATED" | "CREATING" | "CREATE_FAILED" | "DELETED" | "DELETING" | "DELETE_FAILED")
+      attr_accessor user_count: ::Integer
+      attr_accessor group_count: ::Integer
+      SENSITIVE: [:channel_name, :channel_description]
     end
 
     class ConflictException
@@ -53,15 +94,28 @@ module Aws::Repostspace
       SENSITIVE: []
     end
 
+    class CreateChannelInput
+      attr_accessor space_id: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor channel_description: ::String
+      SENSITIVE: [:channel_name, :channel_description]
+    end
+
+    class CreateChannelOutput
+      attr_accessor channel_id: ::String
+      SENSITIVE: []
+    end
+
     class CreateSpaceInput
-      attr_accessor description: ::String
       attr_accessor name: ::String
-      attr_accessor role_arn: ::String
       attr_accessor subdomain: ::String
-      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor tier: ("BASIC" | "STANDARD")
+      attr_accessor description: ::String
       attr_accessor user_kms_key: ::String
-      SENSITIVE: [:description, :name, :tags]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor role_arn: ::String
+      attr_accessor supported_email_domains: Types::SupportedEmailDomainsParameters
+      SENSITIVE: [:name, :description, :tags]
     end
 
     class CreateSpaceOutput
@@ -75,9 +129,27 @@ module Aws::Repostspace
     end
 
     class DeregisterAdminInput
-      attr_accessor admin_id: ::String
       attr_accessor space_id: ::String
+      attr_accessor admin_id: ::String
       SENSITIVE: []
+    end
+
+    class GetChannelInput
+      attr_accessor space_id: ::String
+      attr_accessor channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetChannelOutput
+      attr_accessor space_id: ::String
+      attr_accessor channel_id: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor channel_description: ::String
+      attr_accessor create_date_time: ::Time
+      attr_accessor delete_date_time: ::Time
+      attr_accessor channel_roles: ::Hash[::String, ::Array[("ASKER" | "EXPERT" | "MODERATOR" | "SUPPORTREQUESTOR")]]
+      attr_accessor channel_status: ("CREATED" | "CREATING" | "CREATE_FAILED" | "DELETED" | "DELETING" | "DELETE_FAILED")
+      SENSITIVE: [:channel_name, :channel_description]
     end
 
     class GetSpaceInput
@@ -86,28 +158,31 @@ module Aws::Repostspace
     end
 
     class GetSpaceOutput
-      attr_accessor arn: ::String
-      attr_accessor client_id: ::String
-      attr_accessor configuration_status: ("CONFIGURED" | "UNCONFIGURED")
-      attr_accessor content_size: ::Integer
-      attr_accessor create_date_time: ::Time
-      attr_accessor customer_role_arn: ::String
-      attr_accessor delete_date_time: ::Time
-      attr_accessor description: ::String
-      attr_accessor group_admins: ::Array[::String]
-      attr_accessor name: ::String
-      attr_accessor random_domain: ::String
-      attr_accessor roles: ::Hash[::String, ::Array[("EXPERT" | "MODERATOR" | "ADMINISTRATOR" | "SUPPORTREQUESTOR")]]
       attr_accessor space_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
       attr_accessor status: ::String
-      attr_accessor storage_limit: ::Integer
-      attr_accessor tier: ("BASIC" | "STANDARD")
-      attr_accessor user_admins: ::Array[::String]
-      attr_accessor user_count: ::Integer
-      attr_accessor user_kms_key: ::String
-      attr_accessor vanity_domain: ::String
+      attr_accessor configuration_status: ("CONFIGURED" | "UNCONFIGURED")
+      attr_accessor client_id: ::String
+      attr_accessor identity_store_id: ::String
+      attr_accessor application_arn: ::String
+      attr_accessor description: ::String
       attr_accessor vanity_domain_status: ("PENDING" | "APPROVED" | "UNAPPROVED")
-      SENSITIVE: [:description, :name]
+      attr_accessor vanity_domain: ::String
+      attr_accessor random_domain: ::String
+      attr_accessor customer_role_arn: ::String
+      attr_accessor create_date_time: ::Time
+      attr_accessor delete_date_time: ::Time
+      attr_accessor tier: ("BASIC" | "STANDARD")
+      attr_accessor storage_limit: ::Integer
+      attr_accessor user_admins: ::Array[::String]
+      attr_accessor group_admins: ::Array[::String]
+      attr_accessor roles: ::Hash[::String, ::Array[("EXPERT" | "MODERATOR" | "ADMINISTRATOR" | "SUPPORTREQUESTOR")]]
+      attr_accessor user_kms_key: ::String
+      attr_accessor user_count: ::Integer
+      attr_accessor content_size: ::Integer
+      attr_accessor supported_email_domains: Types::SupportedEmailDomainsStatus
+      SENSITIVE: [:name, :description]
     end
 
     class InternalServerException
@@ -116,15 +191,28 @@ module Aws::Repostspace
       SENSITIVE: []
     end
 
-    class ListSpacesInput
+    class ListChannelsInput
+      attr_accessor space_id: ::String
+      attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListChannelsOutput
+      attr_accessor channels: ::Array[Types::ChannelData]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
-    class ListSpacesOutput
+    class ListSpacesInput
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSpacesOutput
       attr_accessor spaces: ::Array[Types::SpaceData]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -139,8 +227,8 @@ module Aws::Repostspace
     end
 
     class RegisterAdminInput
-      attr_accessor admin_id: ::String
       attr_accessor space_id: ::String
+      attr_accessor admin_id: ::String
       SENSITIVE: []
     end
 
@@ -152,40 +240,53 @@ module Aws::Repostspace
     end
 
     class SendInvitesInput
-      attr_accessor accessor_ids: ::Array[::String]
-      attr_accessor body: ::String
       attr_accessor space_id: ::String
+      attr_accessor accessor_ids: ::Array[::String]
       attr_accessor title: ::String
-      SENSITIVE: [:body, :title]
+      attr_accessor body: ::String
+      SENSITIVE: [:title, :body]
     end
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
-      attr_accessor quota_code: ::String
       attr_accessor resource_id: ::String
       attr_accessor resource_type: ::String
       attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
       SENSITIVE: []
     end
 
     class SpaceData
+      attr_accessor space_id: ::String
       attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ::String
       attr_accessor configuration_status: ("CONFIGURED" | "UNCONFIGURED")
-      attr_accessor content_size: ::Integer
+      attr_accessor vanity_domain_status: ("PENDING" | "APPROVED" | "UNAPPROVED")
+      attr_accessor vanity_domain: ::String
+      attr_accessor random_domain: ::String
+      attr_accessor tier: ("BASIC" | "STANDARD")
+      attr_accessor storage_limit: ::Integer
       attr_accessor create_date_time: ::Time
       attr_accessor delete_date_time: ::Time
-      attr_accessor description: ::String
-      attr_accessor name: ::String
-      attr_accessor random_domain: ::String
-      attr_accessor space_id: ::String
-      attr_accessor status: ::String
-      attr_accessor storage_limit: ::Integer
-      attr_accessor tier: ("BASIC" | "STANDARD")
-      attr_accessor user_count: ::Integer
       attr_accessor user_kms_key: ::String
-      attr_accessor vanity_domain: ::String
-      attr_accessor vanity_domain_status: ("PENDING" | "APPROVED" | "UNAPPROVED")
-      SENSITIVE: [:description, :name]
+      attr_accessor user_count: ::Integer
+      attr_accessor content_size: ::Integer
+      attr_accessor supported_email_domains: Types::SupportedEmailDomainsStatus
+      SENSITIVE: [:name, :description]
+    end
+
+    class SupportedEmailDomainsParameters
+      attr_accessor enabled: ("ENABLED" | "DISABLED")
+      attr_accessor allowed_domains: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SupportedEmailDomainsStatus
+      attr_accessor enabled: ("ENABLED" | "DISABLED" | "NOT_ALLOWED")
+      attr_accessor allowed_domains: ::Array[::String]
+      SENSITIVE: []
     end
 
     class TagResourceRequest
@@ -199,9 +300,9 @@ module Aws::Repostspace
 
     class ThrottlingException
       attr_accessor message: ::String
+      attr_accessor service_code: ::String
       attr_accessor quota_code: ::String
       attr_accessor retry_after_seconds: ::Integer
-      attr_accessor service_code: ::String
       SENSITIVE: []
     end
 
@@ -214,24 +315,36 @@ module Aws::Repostspace
     class UntagResourceResponse < Aws::EmptyStructure
     end
 
-    class UpdateSpaceInput
-      attr_accessor description: ::String
-      attr_accessor role_arn: ::String
+    class UpdateChannelInput
       attr_accessor space_id: ::String
+      attr_accessor channel_id: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor channel_description: ::String
+      SENSITIVE: [:channel_name, :channel_description]
+    end
+
+    class UpdateChannelOutput < Aws::EmptyStructure
+    end
+
+    class UpdateSpaceInput
+      attr_accessor space_id: ::String
+      attr_accessor description: ::String
       attr_accessor tier: ("BASIC" | "STANDARD")
+      attr_accessor role_arn: ::String
+      attr_accessor supported_email_domains: Types::SupportedEmailDomainsParameters
       SENSITIVE: [:description]
     end
 
     class ValidationException
-      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       attr_accessor message: ::String
       attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       SENSITIVE: []
     end
 
     class ValidationExceptionField
-      attr_accessor message: ::String
       attr_accessor name: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
   end

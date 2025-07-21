@@ -113685,7 +113685,10 @@ module Aws
                               value: ::String
                             },
                           ],
-                          ?folder_arns: Array[::String]
+                          ?folder_arns: Array[::String],
+                          ?custom_instructions: {
+                            custom_instructions_string: ::String
+                          }
                         ) -> _CreateTopicResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTopicResponseSuccess
 
@@ -114863,6 +114866,7 @@ module Aws
         def topic: () -> Types::TopicDetails
         def request_id: () -> ::String
         def status: () -> ::Integer
+        def custom_instructions: () -> Types::CustomInstructions
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_topic-instance_method
       def describe_topic: (
@@ -229579,6 +229583,9 @@ module Aws
                             config_options: {
                               q_business_insights_enabled: bool?
                             }?
+                          },
+                          ?custom_instructions: {
+                            custom_instructions_string: ::String
                           }
                         ) -> _UpdateTopicResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTopicResponseSuccess

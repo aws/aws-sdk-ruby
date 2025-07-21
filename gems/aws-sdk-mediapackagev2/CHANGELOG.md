@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2025-07-16)
+------------------
+
+* Feature - This release adds support for CDN Authentication using Static Headers in MediaPackage v2.
+
 1.42.0 (2025-07-03)
 ------------------
 

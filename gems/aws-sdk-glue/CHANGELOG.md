@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.225.0 (2025-07-16)
+------------------
+
+* Feature - AWS Glue now supports schema, partition and sort management of Apache Iceberg tables using Glue SDK
+
 1.224.0 (2025-06-30)
 ------------------
 

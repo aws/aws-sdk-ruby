@@ -327,6 +327,10 @@ module Aws::SageMaker
     ClusterPrivateDnsHostname = Shapes::StringShape.new(name: 'ClusterPrivateDnsHostname')
     ClusterPrivatePrimaryIp = Shapes::StringShape.new(name: 'ClusterPrivatePrimaryIp')
     ClusterPrivatePrimaryIpv6 = Shapes::StringShape.new(name: 'ClusterPrivatePrimaryIpv6')
+    ClusterRestrictedInstanceGroupDetails = Shapes::StructureShape.new(name: 'ClusterRestrictedInstanceGroupDetails')
+    ClusterRestrictedInstanceGroupDetailsList = Shapes::ListShape.new(name: 'ClusterRestrictedInstanceGroupDetailsList')
+    ClusterRestrictedInstanceGroupSpecification = Shapes::StructureShape.new(name: 'ClusterRestrictedInstanceGroupSpecification')
+    ClusterRestrictedInstanceGroupSpecifications = Shapes::ListShape.new(name: 'ClusterRestrictedInstanceGroupSpecifications')
     ClusterSchedulerConfigArn = Shapes::StringShape.new(name: 'ClusterSchedulerConfigArn')
     ClusterSchedulerConfigId = Shapes::StringShape.new(name: 'ClusterSchedulerConfigId')
     ClusterSchedulerConfigSummary = Shapes::StructureShape.new(name: 'ClusterSchedulerConfigSummary')
@@ -937,6 +941,8 @@ module Aws::SageMaker
     Endpoints = Shapes::ListShape.new(name: 'Endpoints')
     EntityDescription = Shapes::StringShape.new(name: 'EntityDescription')
     EntityName = Shapes::StringShape.new(name: 'EntityName')
+    EnvironmentConfig = Shapes::StructureShape.new(name: 'EnvironmentConfig')
+    EnvironmentConfigDetails = Shapes::StructureShape.new(name: 'EnvironmentConfigDetails')
     EnvironmentKey = Shapes::StringShape.new(name: 'EnvironmentKey')
     EnvironmentMap = Shapes::MapShape.new(name: 'EnvironmentMap')
     EnvironmentParameter = Shapes::StructureShape.new(name: 'EnvironmentParameter')
@@ -963,8 +969,11 @@ module Aws::SageMaker
     Explainability = Shapes::StructureShape.new(name: 'Explainability')
     ExplainabilityLocation = Shapes::StringShape.new(name: 'ExplainabilityLocation')
     ExplainerConfig = Shapes::StructureShape.new(name: 'ExplainerConfig')
+    FSxLustreConfig = Shapes::StructureShape.new(name: 'FSxLustreConfig')
     FSxLustreFileSystem = Shapes::StructureShape.new(name: 'FSxLustreFileSystem')
     FSxLustreFileSystemConfig = Shapes::StructureShape.new(name: 'FSxLustreFileSystemConfig')
+    FSxLustrePerUnitStorageThroughput = Shapes::IntegerShape.new(name: 'FSxLustrePerUnitStorageThroughput')
+    FSxLustreSizeInGiB = Shapes::IntegerShape.new(name: 'FSxLustreSizeInGiB')
     FailStepMetadata = Shapes::StructureShape.new(name: 'FailStepMetadata')
     FailureHandlingPolicy = Shapes::StringShape.new(name: 'FailureHandlingPolicy')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
@@ -1445,6 +1454,8 @@ module Aws::SageMaker
     ListPipelineExecutionsResponse = Shapes::StructureShape.new(name: 'ListPipelineExecutionsResponse')
     ListPipelineParametersForExecutionRequest = Shapes::StructureShape.new(name: 'ListPipelineParametersForExecutionRequest')
     ListPipelineParametersForExecutionResponse = Shapes::StructureShape.new(name: 'ListPipelineParametersForExecutionResponse')
+    ListPipelineVersionsRequest = Shapes::StructureShape.new(name: 'ListPipelineVersionsRequest')
+    ListPipelineVersionsResponse = Shapes::StructureShape.new(name: 'ListPipelineVersionsResponse')
     ListPipelinesRequest = Shapes::StructureShape.new(name: 'ListPipelinesRequest')
     ListPipelinesResponse = Shapes::StructureShape.new(name: 'ListPipelinesResponse')
     ListProcessingJobsRequest = Shapes::StructureShape.new(name: 'ListProcessingJobsRequest')
@@ -1851,6 +1862,12 @@ module Aws::SageMaker
     PipelineStatus = Shapes::StringShape.new(name: 'PipelineStatus')
     PipelineSummary = Shapes::StructureShape.new(name: 'PipelineSummary')
     PipelineSummaryList = Shapes::ListShape.new(name: 'PipelineSummaryList')
+    PipelineVersion = Shapes::StructureShape.new(name: 'PipelineVersion')
+    PipelineVersionDescription = Shapes::StringShape.new(name: 'PipelineVersionDescription')
+    PipelineVersionId = Shapes::IntegerShape.new(name: 'PipelineVersionId')
+    PipelineVersionName = Shapes::StringShape.new(name: 'PipelineVersionName')
+    PipelineVersionSummary = Shapes::StructureShape.new(name: 'PipelineVersionSummary')
+    PipelineVersionSummaryList = Shapes::ListShape.new(name: 'PipelineVersionSummaryList')
     PlatformIdentifier = Shapes::StringShape.new(name: 'PlatformIdentifier')
     PolicyString = Shapes::StringShape.new(name: 'PolicyString')
     PredefinedMetricSpecification = Shapes::StructureShape.new(name: 'PredefinedMetricSpecification')
@@ -2506,6 +2523,8 @@ module Aws::SageMaker
     UpdatePipelineExecutionResponse = Shapes::StructureShape.new(name: 'UpdatePipelineExecutionResponse')
     UpdatePipelineRequest = Shapes::StructureShape.new(name: 'UpdatePipelineRequest')
     UpdatePipelineResponse = Shapes::StructureShape.new(name: 'UpdatePipelineResponse')
+    UpdatePipelineVersionRequest = Shapes::StructureShape.new(name: 'UpdatePipelineVersionRequest')
+    UpdatePipelineVersionResponse = Shapes::StructureShape.new(name: 'UpdatePipelineVersionResponse')
     UpdateProjectInput = Shapes::StructureShape.new(name: 'UpdateProjectInput')
     UpdateProjectOutput = Shapes::StructureShape.new(name: 'UpdateProjectOutput')
     UpdateSpaceRequest = Shapes::StructureShape.new(name: 'UpdateSpaceRequest')
@@ -3003,7 +3022,7 @@ module Aws::SageMaker
     BatchDeleteClusterNodesErrorList.member = Shapes::ShapeRef.new(shape: BatchDeleteClusterNodesError)
 
     BatchDeleteClusterNodesRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
-    BatchDeleteClusterNodesRequest.add_member(:node_ids, Shapes::ShapeRef.new(shape: ClusterNodeIds, required: true, location_name: "NodeIds"))
+    BatchDeleteClusterNodesRequest.add_member(:node_ids, Shapes::ShapeRef.new(shape: ClusterNodeIds, location_name: "NodeIds"))
     BatchDeleteClusterNodesRequest.struct_class = Types::BatchDeleteClusterNodesRequest
 
     BatchDeleteClusterNodesResponse.add_member(:failed, Shapes::ShapeRef.new(shape: BatchDeleteClusterNodesErrorList, location_name: "Failed"))
@@ -3335,6 +3354,39 @@ module Aws::SageMaker
     ClusterOrchestratorEksConfig.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: EksClusterArn, required: true, location_name: "ClusterArn"))
     ClusterOrchestratorEksConfig.struct_class = Types::ClusterOrchestratorEksConfig
 
+    ClusterRestrictedInstanceGroupDetails.add_member(:current_count, Shapes::ShapeRef.new(shape: ClusterNonNegativeInstanceCount, location_name: "CurrentCount"))
+    ClusterRestrictedInstanceGroupDetails.add_member(:target_count, Shapes::ShapeRef.new(shape: ClusterInstanceCount, location_name: "TargetCount"))
+    ClusterRestrictedInstanceGroupDetails.add_member(:instance_group_name, Shapes::ShapeRef.new(shape: ClusterInstanceGroupName, location_name: "InstanceGroupName"))
+    ClusterRestrictedInstanceGroupDetails.add_member(:instance_type, Shapes::ShapeRef.new(shape: ClusterInstanceType, location_name: "InstanceType"))
+    ClusterRestrictedInstanceGroupDetails.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRole"))
+    ClusterRestrictedInstanceGroupDetails.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: ClusterThreadsPerCore, location_name: "ThreadsPerCore"))
+    ClusterRestrictedInstanceGroupDetails.add_member(:instance_storage_configs, Shapes::ShapeRef.new(shape: ClusterInstanceStorageConfigs, location_name: "InstanceStorageConfigs"))
+    ClusterRestrictedInstanceGroupDetails.add_member(:on_start_deep_health_checks, Shapes::ShapeRef.new(shape: OnStartDeepHealthChecks, location_name: "OnStartDeepHealthChecks"))
+    ClusterRestrictedInstanceGroupDetails.add_member(:status, Shapes::ShapeRef.new(shape: InstanceGroupStatus, location_name: "Status"))
+    ClusterRestrictedInstanceGroupDetails.add_member(:training_plan_arn, Shapes::ShapeRef.new(shape: TrainingPlanArn, location_name: "TrainingPlanArn"))
+    ClusterRestrictedInstanceGroupDetails.add_member(:training_plan_status, Shapes::ShapeRef.new(shape: InstanceGroupTrainingPlanStatus, location_name: "TrainingPlanStatus"))
+    ClusterRestrictedInstanceGroupDetails.add_member(:override_vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "OverrideVpcConfig"))
+    ClusterRestrictedInstanceGroupDetails.add_member(:scheduled_update_config, Shapes::ShapeRef.new(shape: ScheduledUpdateConfig, location_name: "ScheduledUpdateConfig"))
+    ClusterRestrictedInstanceGroupDetails.add_member(:environment_config, Shapes::ShapeRef.new(shape: EnvironmentConfigDetails, location_name: "EnvironmentConfig"))
+    ClusterRestrictedInstanceGroupDetails.struct_class = Types::ClusterRestrictedInstanceGroupDetails
+
+    ClusterRestrictedInstanceGroupDetailsList.member = Shapes::ShapeRef.new(shape: ClusterRestrictedInstanceGroupDetails)
+
+    ClusterRestrictedInstanceGroupSpecification.add_member(:instance_count, Shapes::ShapeRef.new(shape: ClusterInstanceCount, required: true, location_name: "InstanceCount"))
+    ClusterRestrictedInstanceGroupSpecification.add_member(:instance_group_name, Shapes::ShapeRef.new(shape: ClusterInstanceGroupName, required: true, location_name: "InstanceGroupName"))
+    ClusterRestrictedInstanceGroupSpecification.add_member(:instance_type, Shapes::ShapeRef.new(shape: ClusterInstanceType, required: true, location_name: "InstanceType"))
+    ClusterRestrictedInstanceGroupSpecification.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "ExecutionRole"))
+    ClusterRestrictedInstanceGroupSpecification.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: ClusterThreadsPerCore, location_name: "ThreadsPerCore"))
+    ClusterRestrictedInstanceGroupSpecification.add_member(:instance_storage_configs, Shapes::ShapeRef.new(shape: ClusterInstanceStorageConfigs, location_name: "InstanceStorageConfigs"))
+    ClusterRestrictedInstanceGroupSpecification.add_member(:on_start_deep_health_checks, Shapes::ShapeRef.new(shape: OnStartDeepHealthChecks, location_name: "OnStartDeepHealthChecks"))
+    ClusterRestrictedInstanceGroupSpecification.add_member(:training_plan_arn, Shapes::ShapeRef.new(shape: TrainingPlanArn, location_name: "TrainingPlanArn"))
+    ClusterRestrictedInstanceGroupSpecification.add_member(:override_vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "OverrideVpcConfig"))
+    ClusterRestrictedInstanceGroupSpecification.add_member(:scheduled_update_config, Shapes::ShapeRef.new(shape: ScheduledUpdateConfig, location_name: "ScheduledUpdateConfig"))
+    ClusterRestrictedInstanceGroupSpecification.add_member(:environment_config, Shapes::ShapeRef.new(shape: EnvironmentConfig, required: true, location_name: "EnvironmentConfig"))
+    ClusterRestrictedInstanceGroupSpecification.struct_class = Types::ClusterRestrictedInstanceGroupSpecification
+
+    ClusterRestrictedInstanceGroupSpecifications.member = Shapes::ShapeRef.new(shape: ClusterRestrictedInstanceGroupSpecification)
+
     ClusterSchedulerConfigSummary.add_member(:cluster_scheduler_config_arn, Shapes::ShapeRef.new(shape: ClusterSchedulerConfigArn, required: true, location_name: "ClusterSchedulerConfigArn"))
     ClusterSchedulerConfigSummary.add_member(:cluster_scheduler_config_id, Shapes::ShapeRef.new(shape: ClusterSchedulerConfigId, required: true, location_name: "ClusterSchedulerConfigId"))
     ClusterSchedulerConfigSummary.add_member(:cluster_scheduler_config_version, Shapes::ShapeRef.new(shape: Integer, location_name: "ClusterSchedulerConfigVersion", metadata: {"box" => true}))
@@ -3608,6 +3660,7 @@ module Aws::SageMaker
 
     CreateClusterRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, required: true, location_name: "ClusterName"))
     CreateClusterRequest.add_member(:instance_groups, Shapes::ShapeRef.new(shape: ClusterInstanceGroupSpecifications, location_name: "InstanceGroups"))
+    CreateClusterRequest.add_member(:restricted_instance_groups, Shapes::ShapeRef.new(shape: ClusterRestrictedInstanceGroupSpecifications, location_name: "RestrictedInstanceGroups"))
     CreateClusterRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateClusterRequest.add_member(:orchestrator, Shapes::ShapeRef.new(shape: ClusterOrchestrator, location_name: "Orchestrator"))
@@ -4915,7 +4968,7 @@ module Aws::SageMaker
     DescribeAutoMLJobV2Response.struct_class = Types::DescribeAutoMLJobV2Response
 
     DescribeClusterNodeRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
-    DescribeClusterNodeRequest.add_member(:node_id, Shapes::ShapeRef.new(shape: ClusterNodeId, required: true, location_name: "NodeId"))
+    DescribeClusterNodeRequest.add_member(:node_id, Shapes::ShapeRef.new(shape: ClusterNodeId, location_name: "NodeId"))
     DescribeClusterNodeRequest.struct_class = Types::DescribeClusterNodeRequest
 
     DescribeClusterNodeResponse.add_member(:node_details, Shapes::ShapeRef.new(shape: ClusterNodeDetails, required: true, location_name: "NodeDetails"))
@@ -4930,6 +4983,7 @@ module Aws::SageMaker
     DescribeClusterResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribeClusterResponse.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
     DescribeClusterResponse.add_member(:instance_groups, Shapes::ShapeRef.new(shape: ClusterInstanceGroupDetailsList, required: true, location_name: "InstanceGroups"))
+    DescribeClusterResponse.add_member(:restricted_instance_groups, Shapes::ShapeRef.new(shape: ClusterRestrictedInstanceGroupDetailsList, location_name: "RestrictedInstanceGroups"))
     DescribeClusterResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     DescribeClusterResponse.add_member(:orchestrator, Shapes::ShapeRef.new(shape: ClusterOrchestrator, location_name: "Orchestrator"))
     DescribeClusterResponse.add_member(:node_recovery, Shapes::ShapeRef.new(shape: ClusterNodeRecovery, location_name: "NodeRecovery"))
@@ -5727,9 +5781,11 @@ module Aws::SageMaker
     DescribePipelineExecutionResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "LastModifiedBy"))
     DescribePipelineExecutionResponse.add_member(:parallelism_configuration, Shapes::ShapeRef.new(shape: ParallelismConfiguration, location_name: "ParallelismConfiguration"))
     DescribePipelineExecutionResponse.add_member(:selective_execution_config, Shapes::ShapeRef.new(shape: SelectiveExecutionConfig, location_name: "SelectiveExecutionConfig"))
+    DescribePipelineExecutionResponse.add_member(:pipeline_version_id, Shapes::ShapeRef.new(shape: PipelineVersionId, location_name: "PipelineVersionId"))
     DescribePipelineExecutionResponse.struct_class = Types::DescribePipelineExecutionResponse
 
     DescribePipelineRequest.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineNameOrArn, required: true, location_name: "PipelineName"))
+    DescribePipelineRequest.add_member(:pipeline_version_id, Shapes::ShapeRef.new(shape: PipelineVersionId, location_name: "PipelineVersionId"))
     DescribePipelineRequest.struct_class = Types::DescribePipelineRequest
 
     DescribePipelineResponse.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "PipelineArn"))
@@ -5745,6 +5801,8 @@ module Aws::SageMaker
     DescribePipelineResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "CreatedBy"))
     DescribePipelineResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "LastModifiedBy"))
     DescribePipelineResponse.add_member(:parallelism_configuration, Shapes::ShapeRef.new(shape: ParallelismConfiguration, location_name: "ParallelismConfiguration"))
+    DescribePipelineResponse.add_member(:pipeline_version_display_name, Shapes::ShapeRef.new(shape: PipelineVersionName, location_name: "PipelineVersionDisplayName"))
+    DescribePipelineResponse.add_member(:pipeline_version_description, Shapes::ShapeRef.new(shape: PipelineVersionDescription, location_name: "PipelineVersionDescription"))
     DescribePipelineResponse.struct_class = Types::DescribePipelineResponse
 
     DescribeProcessingJobRequest.add_member(:processing_job_name, Shapes::ShapeRef.new(shape: ProcessingJobName, required: true, location_name: "ProcessingJobName"))
@@ -6332,6 +6390,13 @@ module Aws::SageMaker
 
     Endpoints.member = Shapes::ShapeRef.new(shape: EndpointInfo)
 
+    EnvironmentConfig.add_member(:f_sx_lustre_config, Shapes::ShapeRef.new(shape: FSxLustreConfig, location_name: "FSxLustreConfig"))
+    EnvironmentConfig.struct_class = Types::EnvironmentConfig
+
+    EnvironmentConfigDetails.add_member(:f_sx_lustre_config, Shapes::ShapeRef.new(shape: FSxLustreConfig, location_name: "FSxLustreConfig"))
+    EnvironmentConfigDetails.add_member(:s3_output_path, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3OutputPath"))
+    EnvironmentConfigDetails.struct_class = Types::EnvironmentConfigDetails
+
     EnvironmentMap.key = Shapes::ShapeRef.new(shape: EnvironmentKey)
     EnvironmentMap.value = Shapes::ShapeRef.new(shape: EnvironmentValue)
 
@@ -6388,6 +6453,10 @@ module Aws::SageMaker
 
     ExplainerConfig.add_member(:clarify_explainer_config, Shapes::ShapeRef.new(shape: ClarifyExplainerConfig, location_name: "ClarifyExplainerConfig"))
     ExplainerConfig.struct_class = Types::ExplainerConfig
+
+    FSxLustreConfig.add_member(:size_in_gi_b, Shapes::ShapeRef.new(shape: FSxLustreSizeInGiB, required: true, location_name: "SizeInGiB"))
+    FSxLustreConfig.add_member(:per_unit_storage_throughput, Shapes::ShapeRef.new(shape: FSxLustrePerUnitStorageThroughput, required: true, location_name: "PerUnitStorageThroughput"))
+    FSxLustreConfig.struct_class = Types::FSxLustreConfig
 
     FSxLustreFileSystem.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     FSxLustreFileSystem.struct_class = Types::FSxLustreFileSystem
@@ -8119,6 +8188,18 @@ module Aws::SageMaker
     ListPipelineParametersForExecutionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListPipelineParametersForExecutionResponse.struct_class = Types::ListPipelineParametersForExecutionResponse
 
+    ListPipelineVersionsRequest.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineNameOrArn, required: true, location_name: "PipelineName"))
+    ListPipelineVersionsRequest.add_member(:created_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAfter"))
+    ListPipelineVersionsRequest.add_member(:created_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedBefore"))
+    ListPipelineVersionsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    ListPipelineVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListPipelineVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListPipelineVersionsRequest.struct_class = Types::ListPipelineVersionsRequest
+
+    ListPipelineVersionsResponse.add_member(:pipeline_version_summaries, Shapes::ShapeRef.new(shape: PipelineVersionSummaryList, location_name: "PipelineVersionSummaries"))
+    ListPipelineVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListPipelineVersionsResponse.struct_class = Types::ListPipelineVersionsResponse
+
     ListPipelinesRequest.add_member(:pipeline_name_prefix, Shapes::ShapeRef.new(shape: PipelineName, location_name: "PipelineNamePrefix"))
     ListPipelinesRequest.add_member(:created_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAfter"))
     ListPipelinesRequest.add_member(:created_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedBefore"))
@@ -9267,6 +9348,8 @@ module Aws::SageMaker
     PipelineExecution.add_member(:parallelism_configuration, Shapes::ShapeRef.new(shape: ParallelismConfiguration, location_name: "ParallelismConfiguration"))
     PipelineExecution.add_member(:selective_execution_config, Shapes::ShapeRef.new(shape: SelectiveExecutionConfig, location_name: "SelectiveExecutionConfig"))
     PipelineExecution.add_member(:pipeline_parameters, Shapes::ShapeRef.new(shape: ParameterList, location_name: "PipelineParameters"))
+    PipelineExecution.add_member(:pipeline_version_id, Shapes::ShapeRef.new(shape: PipelineVersionId, location_name: "PipelineVersionId"))
+    PipelineExecution.add_member(:pipeline_version_display_name, Shapes::ShapeRef.new(shape: PipelineVersionName, location_name: "PipelineVersionDisplayName"))
     PipelineExecution.struct_class = Types::PipelineExecution
 
     PipelineExecutionStep.add_member(:step_name, Shapes::ShapeRef.new(shape: StepName, location_name: "StepName"))
@@ -9327,6 +9410,29 @@ module Aws::SageMaker
     PipelineSummary.struct_class = Types::PipelineSummary
 
     PipelineSummaryList.member = Shapes::ShapeRef.new(shape: PipelineSummary)
+
+    PipelineVersion.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "PipelineArn"))
+    PipelineVersion.add_member(:pipeline_version_id, Shapes::ShapeRef.new(shape: PipelineVersionId, location_name: "PipelineVersionId"))
+    PipelineVersion.add_member(:pipeline_version_display_name, Shapes::ShapeRef.new(shape: PipelineVersionName, location_name: "PipelineVersionDisplayName"))
+    PipelineVersion.add_member(:pipeline_version_description, Shapes::ShapeRef.new(shape: PipelineVersionDescription, location_name: "PipelineVersionDescription"))
+    PipelineVersion.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    PipelineVersion.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    PipelineVersion.add_member(:created_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "CreatedBy"))
+    PipelineVersion.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "LastModifiedBy"))
+    PipelineVersion.add_member(:last_executed_pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "LastExecutedPipelineExecutionArn"))
+    PipelineVersion.add_member(:last_executed_pipeline_execution_display_name, Shapes::ShapeRef.new(shape: PipelineExecutionName, location_name: "LastExecutedPipelineExecutionDisplayName"))
+    PipelineVersion.add_member(:last_executed_pipeline_execution_status, Shapes::ShapeRef.new(shape: PipelineExecutionStatus, location_name: "LastExecutedPipelineExecutionStatus"))
+    PipelineVersion.struct_class = Types::PipelineVersion
+
+    PipelineVersionSummary.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "PipelineArn"))
+    PipelineVersionSummary.add_member(:pipeline_version_id, Shapes::ShapeRef.new(shape: PipelineVersionId, location_name: "PipelineVersionId"))
+    PipelineVersionSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    PipelineVersionSummary.add_member(:pipeline_version_description, Shapes::ShapeRef.new(shape: PipelineVersionDescription, location_name: "PipelineVersionDescription"))
+    PipelineVersionSummary.add_member(:pipeline_version_display_name, Shapes::ShapeRef.new(shape: PipelineVersionName, location_name: "PipelineVersionDisplayName"))
+    PipelineVersionSummary.add_member(:last_execution_pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "LastExecutionPipelineExecutionArn"))
+    PipelineVersionSummary.struct_class = Types::PipelineVersionSummary
+
+    PipelineVersionSummaryList.member = Shapes::ShapeRef.new(shape: PipelineVersionSummary)
 
     PredefinedMetricSpecification.add_member(:predefined_metric_type, Shapes::ShapeRef.new(shape: String, location_name: "PredefinedMetricType"))
     PredefinedMetricSpecification.struct_class = Types::PredefinedMetricSpecification
@@ -9973,6 +10079,7 @@ module Aws::SageMaker
     SearchRecord.add_member(:model_package_group, Shapes::ShapeRef.new(shape: ModelPackageGroup, location_name: "ModelPackageGroup"))
     SearchRecord.add_member(:pipeline, Shapes::ShapeRef.new(shape: Pipeline, location_name: "Pipeline"))
     SearchRecord.add_member(:pipeline_execution, Shapes::ShapeRef.new(shape: PipelineExecution, location_name: "PipelineExecution"))
+    SearchRecord.add_member(:pipeline_version, Shapes::ShapeRef.new(shape: PipelineVersion, location_name: "PipelineVersion"))
     SearchRecord.add_member(:feature_group, Shapes::ShapeRef.new(shape: FeatureGroup, location_name: "FeatureGroup"))
     SearchRecord.add_member(:feature_metadata, Shapes::ShapeRef.new(shape: FeatureMetadata, location_name: "FeatureMetadata"))
     SearchRecord.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "Project"))
@@ -10183,6 +10290,7 @@ module Aws::SageMaker
     StartPipelineExecutionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     StartPipelineExecutionRequest.add_member(:parallelism_configuration, Shapes::ShapeRef.new(shape: ParallelismConfiguration, location_name: "ParallelismConfiguration"))
     StartPipelineExecutionRequest.add_member(:selective_execution_config, Shapes::ShapeRef.new(shape: SelectiveExecutionConfig, location_name: "SelectiveExecutionConfig"))
+    StartPipelineExecutionRequest.add_member(:pipeline_version_id, Shapes::ShapeRef.new(shape: PipelineVersionId, location_name: "PipelineVersionId"))
     StartPipelineExecutionRequest.struct_class = Types::StartPipelineExecutionRequest
 
     StartPipelineExecutionResponse.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))
@@ -10821,6 +10929,7 @@ module Aws::SageMaker
 
     UpdateClusterRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
     UpdateClusterRequest.add_member(:instance_groups, Shapes::ShapeRef.new(shape: ClusterInstanceGroupSpecifications, location_name: "InstanceGroups"))
+    UpdateClusterRequest.add_member(:restricted_instance_groups, Shapes::ShapeRef.new(shape: ClusterRestrictedInstanceGroupSpecifications, location_name: "RestrictedInstanceGroups"))
     UpdateClusterRequest.add_member(:node_recovery, Shapes::ShapeRef.new(shape: ClusterNodeRecovery, location_name: "NodeRecovery"))
     UpdateClusterRequest.add_member(:instance_groups_to_delete, Shapes::ShapeRef.new(shape: ClusterInstanceGroupsToDelete, location_name: "InstanceGroupsToDelete"))
     UpdateClusterRequest.struct_class = Types::UpdateClusterRequest
@@ -11140,7 +11249,18 @@ module Aws::SageMaker
     UpdatePipelineRequest.struct_class = Types::UpdatePipelineRequest
 
     UpdatePipelineResponse.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "PipelineArn"))
+    UpdatePipelineResponse.add_member(:pipeline_version_id, Shapes::ShapeRef.new(shape: PipelineVersionId, location_name: "PipelineVersionId"))
     UpdatePipelineResponse.struct_class = Types::UpdatePipelineResponse
+
+    UpdatePipelineVersionRequest.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, required: true, location_name: "PipelineArn"))
+    UpdatePipelineVersionRequest.add_member(:pipeline_version_id, Shapes::ShapeRef.new(shape: PipelineVersionId, required: true, location_name: "PipelineVersionId"))
+    UpdatePipelineVersionRequest.add_member(:pipeline_version_display_name, Shapes::ShapeRef.new(shape: PipelineVersionName, location_name: "PipelineVersionDisplayName"))
+    UpdatePipelineVersionRequest.add_member(:pipeline_version_description, Shapes::ShapeRef.new(shape: PipelineVersionDescription, location_name: "PipelineVersionDescription"))
+    UpdatePipelineVersionRequest.struct_class = Types::UpdatePipelineVersionRequest
+
+    UpdatePipelineVersionResponse.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "PipelineArn"))
+    UpdatePipelineVersionResponse.add_member(:pipeline_version_id, Shapes::ShapeRef.new(shape: PipelineVersionId, location_name: "PipelineVersionId"))
+    UpdatePipelineVersionResponse.struct_class = Types::UpdatePipelineVersionResponse
 
     UpdateProjectInput.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectEntityName, required: true, location_name: "ProjectName"))
     UpdateProjectInput.add_member(:project_description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "ProjectDescription"))
@@ -14123,6 +14243,21 @@ module Aws::SageMaker
         )
       end)
 
+      api.add_operation(:list_pipeline_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPipelineVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListPipelineVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPipelineVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_pipelines, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListPipelines"
         o.http_method = "POST"
@@ -15026,6 +15161,16 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdatePipelineExecutionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdatePipelineExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:update_pipeline_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePipelineVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePipelineVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePipelineVersionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)

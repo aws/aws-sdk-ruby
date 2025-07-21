@@ -57,7 +57,7 @@ module Aws::BedrockRuntime
   autoload :AsyncClient, 'aws-sdk-bedrockruntime/async_client'
   autoload :EventStreams, 'aws-sdk-bedrockruntime/event_streams'
 
-  GEM_VERSION = '1.50.0'
+  GEM_VERSION = '1.51.0'
 
 end
 

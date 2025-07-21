@@ -18,10 +18,16 @@ module Aws::OpenSearchService
     #   generation on the specified domain.
     #   @return [Types::NaturalLanguageQueryGenerationOptionsInput]
     #
+    # @!attribute [rw] s3_vectors_engine
+    #   Container for parameters required to enable S3 vectors engine
+    #   features on the specified domain.
+    #   @return [Types::S3VectorsEngine]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AIMLOptionsInput AWS API Documentation
     #
     class AIMLOptionsInput < Struct.new(
-      :natural_language_query_generation_options)
+      :natural_language_query_generation_options,
+      :s3_vectors_engine)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34,10 +40,16 @@ module Aws::OpenSearchService
     #   generation on the specified domain.
     #   @return [Types::NaturalLanguageQueryGenerationOptionsOutput]
     #
+    # @!attribute [rw] s3_vectors_engine
+    #   Container for parameters representing the state of S3 vectors engine
+    #   features on the specified domain.
+    #   @return [Types::S3VectorsEngine]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AIMLOptionsOutput AWS API Documentation
     #
     class AIMLOptionsOutput < Struct.new(
-      :natural_language_query_generation_options)
+      :natural_language_query_generation_options,
+      :s3_vectors_engine)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1996,7 +2008,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Data sources that are associated with an OpenSearch Application.
+    # Data sources that are associated with an OpenSearch application.
     #
     # @!attribute [rw] data_source_arn
     #   The Amazon Resource Name (ARN) of the domain. See [Identifiers for
@@ -4477,11 +4489,11 @@ module Aws::OpenSearchService
     end
 
     # Configuration settings for IAM Identity Center in an OpenSearch
-    # Application.
+    # application.
     #
     # @!attribute [rw] enabled
     #   Indicates whether IAM Identity Center is enabled for the OpenSearch
-    #   Application.
+    #   application.
     #   @return [Boolean]
     #
     # @!attribute [rw] iam_identity_center_instance_arn
@@ -4496,7 +4508,7 @@ module Aws::OpenSearchService
     #
     # @!attribute [rw] iam_role_for_identity_center_application_arn
     #   The Amazon Resource Name (ARN) of the IAM role assigned to the IAM
-    #   Identity Center application for the OpenSearch Application.
+    #   Identity Center application for the OpenSearch application.
     #   @return [String]
     #
     # @!attribute [rw] iam_identity_center_application_arn
@@ -6616,6 +6628,21 @@ module Aws::OpenSearchService
     #
     class S3GlueDataCatalog < Struct.new(
       :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Options for enabling S3 vectors engine features on the specified
+    # domain.
+    #
+    # @!attribute [rw] enabled
+    #   Enables S3 vectors engine features.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/S3VectorsEngine AWS API Documentation
+    #
+    class S3VectorsEngine < Struct.new(
+      :enabled)
       SENSITIVE = []
       include Aws::Structure
     end

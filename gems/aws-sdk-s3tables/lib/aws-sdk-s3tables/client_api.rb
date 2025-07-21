@@ -111,6 +111,7 @@ module Aws::S3Tables
     TableBucketName = Shapes::StringShape.new(name: 'TableBucketName')
     TableBucketSummary = Shapes::StructureShape.new(name: 'TableBucketSummary')
     TableBucketSummaryList = Shapes::ListShape.new(name: 'TableBucketSummaryList')
+    TableBucketType = Shapes::StringShape.new(name: 'TableBucketType')
     TableMaintenanceConfiguration = Shapes::MapShape.new(name: 'TableMaintenanceConfiguration')
     TableMaintenanceConfigurationValue = Shapes::StructureShape.new(name: 'TableMaintenanceConfigurationValue')
     TableMaintenanceJobStatus = Shapes::MapShape.new(name: 'TableMaintenanceJobStatus')
@@ -237,6 +238,7 @@ module Aws::S3Tables
     GetTableBucketResponse.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "ownerAccountId"))
     GetTableBucketResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
     GetTableBucketResponse.add_member(:table_bucket_id, Shapes::ShapeRef.new(shape: TableBucketId, location_name: "tableBucketId"))
+    GetTableBucketResponse.add_member(:type, Shapes::ShapeRef.new(shape: TableBucketType, location_name: "type"))
     GetTableBucketResponse.struct_class = Types::GetTableBucketResponse
 
     GetTableEncryptionRequest.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: TableBucketARN, required: true, location: "uri", location_name: "tableBucketARN"))
@@ -341,6 +343,7 @@ module Aws::S3Tables
     ListTableBucketsRequest.add_member(:prefix, Shapes::ShapeRef.new(shape: ListTableBucketsRequestPrefixString, location: "querystring", location_name: "prefix"))
     ListTableBucketsRequest.add_member(:continuation_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "continuationToken"))
     ListTableBucketsRequest.add_member(:max_buckets, Shapes::ShapeRef.new(shape: ListTableBucketsLimit, location: "querystring", location_name: "maxBuckets"))
+    ListTableBucketsRequest.add_member(:type, Shapes::ShapeRef.new(shape: TableBucketType, location: "querystring", location_name: "type"))
     ListTableBucketsRequest.struct_class = Types::ListTableBucketsRequest
 
     ListTableBucketsResponse.add_member(:table_buckets, Shapes::ShapeRef.new(shape: TableBucketSummaryList, required: true, location_name: "tableBuckets"))
@@ -432,6 +435,7 @@ module Aws::S3Tables
     TableBucketSummary.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "ownerAccountId"))
     TableBucketSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
     TableBucketSummary.add_member(:table_bucket_id, Shapes::ShapeRef.new(shape: TableBucketId, location_name: "tableBucketId"))
+    TableBucketSummary.add_member(:type, Shapes::ShapeRef.new(shape: TableBucketType, location_name: "type"))
     TableBucketSummary.struct_class = Types::TableBucketSummary
 
     TableBucketSummaryList.member = Shapes::ShapeRef.new(shape: TableBucketSummary)

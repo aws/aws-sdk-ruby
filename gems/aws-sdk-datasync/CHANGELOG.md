@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2025-07-16)
+------------------
+
+* Feature - AWS DataSync now supports IPv6 address inputs and outputs in create, update, and describe operations for NFS, SMB, and Object Storage locations
+
 1.105.0 (2025-06-02)
 ------------------
 

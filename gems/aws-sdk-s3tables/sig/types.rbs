@@ -167,6 +167,7 @@ module Aws::S3Tables
       attr_accessor owner_account_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor table_bucket_id: ::String
+      attr_accessor type: ("customer" | "aws")
       SENSITIVE: []
     end
 
@@ -313,6 +314,7 @@ module Aws::S3Tables
       attr_accessor prefix: ::String
       attr_accessor continuation_token: ::String
       attr_accessor max_buckets: ::Integer
+      attr_accessor type: ("customer" | "aws")
       SENSITIVE: []
     end
 
@@ -428,6 +430,7 @@ module Aws::S3Tables
       attr_accessor owner_account_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor table_bucket_id: ::String
+      attr_accessor type: ("customer" | "aws")
       SENSITIVE: []
     end
 

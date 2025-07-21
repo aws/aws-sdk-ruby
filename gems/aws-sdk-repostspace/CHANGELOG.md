@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2025-07-15)
+------------------
+
+* Feature - This release introduces Channels functionality with CreateChannel, GetChannel, ListChannels, and UpdateChannel operations. Channels provide dedicated collaboration spaces where teams can organize discussions and knowledge by projects, business units, or areas of responsibility.
+
 1.22.0 (2025-06-02)
 ------------------
 

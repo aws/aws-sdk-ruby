@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2025-07-16)
+------------------
+
+* Feature - Expand length of message data field for Mac generation and validation to 8192 characters.
+
 1.34.0 (2025-06-19)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2025-07-16)
+------------------
+
+* Feature - FuotaTaskId is not a valid IdentifierType for EventConfiguration and is being removed from possible IdentifierType values.
+
 1.68.0 (2025-06-02)
 ------------------
 

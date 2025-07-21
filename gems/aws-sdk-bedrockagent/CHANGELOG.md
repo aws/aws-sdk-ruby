@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2025-07-15)
+------------------
+
+* Feature - Add support for S3 Vectors as a vector store.
+
 1.58.0 (2025-06-02)
 ------------------
 

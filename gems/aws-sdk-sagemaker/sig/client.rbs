@@ -127,7 +127,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#batch_delete_cluster_nodes-instance_method
       def batch_delete_cluster_nodes: (
                                         cluster_name: ::String,
-                                        node_ids: Array[::String]
+                                        ?node_ids: Array[::String]
                                       ) -> _BatchDeleteClusterNodesResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteClusterNodesResponseSuccess
 
@@ -770,6 +770,55 @@ module Aws
                                     ]?
                                   }?
                                 }?
+                              },
+                            ],
+                            ?restricted_instance_groups: Array[
+                              {
+                                instance_count: ::Integer,
+                                instance_group_name: ::String,
+                                instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.12xlarge" | "ml.c5.18xlarge" | "ml.c5.24xlarge" | "ml.c5n.large" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.8xlarge" | "ml.m5.12xlarge" | "ml.m5.16xlarge" | "ml.m5.24xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.16xlarge" | "ml.g6.12xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.gr6.4xlarge" | "ml.gr6.8xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.16xlarge" | "ml.g6e.12xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.p6-b200.48xlarge" | "ml.trn2.48xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.i3en.large" | "ml.i3en.xlarge" | "ml.i3en.2xlarge" | "ml.i3en.3xlarge" | "ml.i3en.6xlarge" | "ml.i3en.12xlarge" | "ml.i3en.24xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge"),
+                                execution_role: ::String,
+                                threads_per_core: ::Integer?,
+                                instance_storage_configs: Array[
+                                  {
+                                    ebs_volume_config: {
+                                      volume_size_in_gb: ::Integer
+                                    }?
+                                  },
+                                ]?,
+                                on_start_deep_health_checks: Array[("InstanceStress" | "InstanceConnectivity")]?,
+                                training_plan_arn: ::String?,
+                                override_vpc_config: {
+                                  security_group_ids: Array[::String],
+                                  subnets: Array[::String]
+                                }?,
+                                scheduled_update_config: {
+                                  schedule_expression: ::String,
+                                  deployment_config: {
+                                    rolling_update_policy: {
+                                      maximum_batch_size: {
+                                        type: ("INSTANCE_COUNT" | "CAPACITY_PERCENTAGE"),
+                                        value: ::Integer
+                                      },
+                                      rollback_maximum_batch_size: {
+                                        type: ("INSTANCE_COUNT" | "CAPACITY_PERCENTAGE"),
+                                        value: ::Integer
+                                      }?
+                                    }?,
+                                    wait_interval_in_seconds: ::Integer?,
+                                    auto_rollback_configuration: Array[
+                                      {
+                                        alarm_name: ::String
+                                      },
+                                    ]?
+                                  }?
+                                }?,
+                                environment_config: {
+                                  f_sx_lustre_config: {
+                                    size_in_gi_b: ::Integer,
+                                    per_unit_storage_throughput: ::Integer
+                                  }?
+                                }
                               },
                             ],
                             ?vpc_config: {
@@ -5256,6 +5305,7 @@ module Aws
         def creation_time: () -> ::Time
         def failure_message: () -> ::String
         def instance_groups: () -> ::Array[Types::ClusterInstanceGroupDetails]
+        def restricted_instance_groups: () -> ::Array[Types::ClusterRestrictedInstanceGroupDetails]
         def vpc_config: () -> Types::VpcConfig
         def orchestrator: () -> Types::ClusterOrchestrator
         def node_recovery: () -> ("Automatic" | "None")
@@ -5273,7 +5323,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_cluster_node-instance_method
       def describe_cluster_node: (
                                    cluster_name: ::String,
-                                   node_id: ::String
+                                   ?node_id: ::String
                                  ) -> _DescribeClusterNodeResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterNodeResponseSuccess
 
@@ -6228,10 +6278,13 @@ module Aws
         def created_by: () -> Types::UserContext
         def last_modified_by: () -> Types::UserContext
         def parallelism_configuration: () -> Types::ParallelismConfiguration
+        def pipeline_version_display_name: () -> ::String
+        def pipeline_version_description: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_pipeline-instance_method
       def describe_pipeline: (
-                               pipeline_name: ::String
+                               pipeline_name: ::String,
+                               ?pipeline_version_id: ::Integer
                              ) -> _DescribePipelineResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePipelineResponseSuccess
 
@@ -6261,6 +6314,7 @@ module Aws
         def last_modified_by: () -> Types::UserContext
         def parallelism_configuration: () -> Types::ParallelismConfiguration
         def selective_execution_config: () -> Types::SelectiveExecutionConfig
+        def pipeline_version_id: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_pipeline_execution-instance_method
       def describe_pipeline_execution: (
@@ -6664,7 +6718,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#get_search_suggestions-instance_method
       def get_search_suggestions: (
-                                    resource: ("TrainingJob" | "Experiment" | "ExperimentTrial" | "ExperimentTrialComponent" | "Endpoint" | "Model" | "ModelPackage" | "ModelPackageGroup" | "Pipeline" | "PipelineExecution" | "FeatureGroup" | "FeatureMetadata" | "Image" | "ImageVersion" | "Project" | "HyperParameterTuningJob" | "ModelCard"),
+                                    resource: ("TrainingJob" | "Experiment" | "ExperimentTrial" | "ExperimentTrialComponent" | "Endpoint" | "Model" | "ModelPackage" | "ModelPackageGroup" | "Pipeline" | "PipelineExecution" | "FeatureGroup" | "FeatureMetadata" | "Image" | "ImageVersion" | "Project" | "HyperParameterTuningJob" | "ModelCard" | "PipelineVersion"),
                                     ?suggestion_query: {
                                       property_name_query: {
                                         property_name_hint: ::String
@@ -7854,6 +7908,22 @@ module Aws
                                                   ) -> _ListPipelineParametersForExecutionResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipelineParametersForExecutionResponseSuccess
 
+      interface _ListPipelineVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPipelineVersionsResponse]
+        def pipeline_version_summaries: () -> ::Array[Types::PipelineVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_pipeline_versions-instance_method
+      def list_pipeline_versions: (
+                                    pipeline_name: ::String,
+                                    ?created_after: ::Time,
+                                    ?created_before: ::Time,
+                                    ?sort_order: ("Ascending" | "Descending"),
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListPipelineVersionsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipelineVersionsResponseSuccess
+
       interface _ListPipelinesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPipelinesResponse]
         def pipeline_summaries: () -> ::Array[Types::PipelineSummary]
@@ -8261,7 +8331,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#search-instance_method
       def search: (
-                    resource: ("TrainingJob" | "Experiment" | "ExperimentTrial" | "ExperimentTrialComponent" | "Endpoint" | "Model" | "ModelPackage" | "ModelPackageGroup" | "Pipeline" | "PipelineExecution" | "FeatureGroup" | "FeatureMetadata" | "Image" | "ImageVersion" | "Project" | "HyperParameterTuningJob" | "ModelCard"),
+                    resource: ("TrainingJob" | "Experiment" | "ExperimentTrial" | "ExperimentTrialComponent" | "Endpoint" | "Model" | "ModelPackage" | "ModelPackageGroup" | "Pipeline" | "PipelineExecution" | "FeatureGroup" | "FeatureMetadata" | "Image" | "ImageVersion" | "Project" | "HyperParameterTuningJob" | "ModelCard" | "PipelineVersion"),
                     ?search_expression: {
                       filters: Array[
                         {
@@ -8410,7 +8480,8 @@ module Aws
                                             step_name: ::String
                                           },
                                         ]
-                                      }
+                                      },
+                                      ?pipeline_version_id: ::Integer
                                     ) -> _StartPipelineExecutionResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPipelineExecutionResponseSuccess
 
@@ -8678,6 +8749,55 @@ module Aws
                                     ]?
                                   }?
                                 }?
+                              },
+                            ],
+                            ?restricted_instance_groups: Array[
+                              {
+                                instance_count: ::Integer,
+                                instance_group_name: ::String,
+                                instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.12xlarge" | "ml.c5.18xlarge" | "ml.c5.24xlarge" | "ml.c5n.large" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.8xlarge" | "ml.m5.12xlarge" | "ml.m5.16xlarge" | "ml.m5.24xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.16xlarge" | "ml.g6.12xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.gr6.4xlarge" | "ml.gr6.8xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.16xlarge" | "ml.g6e.12xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.p6-b200.48xlarge" | "ml.trn2.48xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.i3en.large" | "ml.i3en.xlarge" | "ml.i3en.2xlarge" | "ml.i3en.3xlarge" | "ml.i3en.6xlarge" | "ml.i3en.12xlarge" | "ml.i3en.24xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge"),
+                                execution_role: ::String,
+                                threads_per_core: ::Integer?,
+                                instance_storage_configs: Array[
+                                  {
+                                    ebs_volume_config: {
+                                      volume_size_in_gb: ::Integer
+                                    }?
+                                  },
+                                ]?,
+                                on_start_deep_health_checks: Array[("InstanceStress" | "InstanceConnectivity")]?,
+                                training_plan_arn: ::String?,
+                                override_vpc_config: {
+                                  security_group_ids: Array[::String],
+                                  subnets: Array[::String]
+                                }?,
+                                scheduled_update_config: {
+                                  schedule_expression: ::String,
+                                  deployment_config: {
+                                    rolling_update_policy: {
+                                      maximum_batch_size: {
+                                        type: ("INSTANCE_COUNT" | "CAPACITY_PERCENTAGE"),
+                                        value: ::Integer
+                                      },
+                                      rollback_maximum_batch_size: {
+                                        type: ("INSTANCE_COUNT" | "CAPACITY_PERCENTAGE"),
+                                        value: ::Integer
+                                      }?
+                                    }?,
+                                    wait_interval_in_seconds: ::Integer?,
+                                    auto_rollback_configuration: Array[
+                                      {
+                                        alarm_name: ::String
+                                      },
+                                    ]?
+                                  }?
+                                }?,
+                                environment_config: {
+                                  f_sx_lustre_config: {
+                                    size_in_gi_b: ::Integer,
+                                    per_unit_storage_throughput: ::Integer
+                                  }?
+                                }
                               },
                             ],
                             ?node_recovery: ("Automatic" | "None"),
@@ -9836,6 +9956,7 @@ module Aws
       interface _UpdatePipelineResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePipelineResponse]
         def pipeline_arn: () -> ::String
+        def pipeline_version_id: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#update_pipeline-instance_method
       def update_pipeline: (
@@ -9869,6 +9990,20 @@ module Aws
                                        }
                                      ) -> _UpdatePipelineExecutionResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePipelineExecutionResponseSuccess
+
+      interface _UpdatePipelineVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePipelineVersionResponse]
+        def pipeline_arn: () -> ::String
+        def pipeline_version_id: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#update_pipeline_version-instance_method
+      def update_pipeline_version: (
+                                     pipeline_arn: ::String,
+                                     pipeline_version_id: ::Integer,
+                                     ?pipeline_version_display_name: ::String,
+                                     ?pipeline_version_description: ::String
+                                   ) -> _UpdatePipelineVersionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePipelineVersionResponseSuccess
 
       interface _UpdateProjectResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProjectOutput]

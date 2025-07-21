@@ -20,6 +20,10 @@ module Aws::MediaPackageV2
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelHarvestJobRequest = Shapes::StructureShape.new(name: 'CancelHarvestJobRequest')
     CancelHarvestJobResponse = Shapes::StructureShape.new(name: 'CancelHarvestJobResponse')
+    CdnAuthConfiguration = Shapes::StructureShape.new(name: 'CdnAuthConfiguration')
+    CdnAuthConfigurationCdnIdentifierSecretArnsList = Shapes::ListShape.new(name: 'CdnAuthConfigurationCdnIdentifierSecretArnsList')
+    CdnAuthConfigurationSecretsRoleArnString = Shapes::StringShape.new(name: 'CdnAuthConfigurationSecretsRoleArnString')
+    CdnIdentifierSecretArn = Shapes::StringShape.new(name: 'CdnIdentifierSecretArn')
     ChannelGroupListConfiguration = Shapes::StructureShape.new(name: 'ChannelGroupListConfiguration')
     ChannelGroupsList = Shapes::ListShape.new(name: 'ChannelGroupsList')
     ChannelList = Shapes::ListShape.new(name: 'ChannelList')
@@ -244,6 +248,12 @@ module Aws::MediaPackageV2
     CancelHarvestJobRequest.struct_class = Types::CancelHarvestJobRequest
 
     CancelHarvestJobResponse.struct_class = Types::CancelHarvestJobResponse
+
+    CdnAuthConfiguration.add_member(:cdn_identifier_secret_arns, Shapes::ShapeRef.new(shape: CdnAuthConfigurationCdnIdentifierSecretArnsList, required: true, location_name: "CdnIdentifierSecretArns"))
+    CdnAuthConfiguration.add_member(:secrets_role_arn, Shapes::ShapeRef.new(shape: CdnAuthConfigurationSecretsRoleArnString, required: true, location_name: "SecretsRoleArn"))
+    CdnAuthConfiguration.struct_class = Types::CdnAuthConfiguration
+
+    CdnAuthConfigurationCdnIdentifierSecretArnsList.member = Shapes::ShapeRef.new(shape: CdnIdentifierSecretArn)
 
     ChannelGroupListConfiguration.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ChannelGroupName"))
     ChannelGroupListConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
@@ -662,6 +672,7 @@ module Aws::MediaPackageV2
     GetOriginEndpointPolicyResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ChannelName"))
     GetOriginEndpointPolicyResponse.add_member(:origin_endpoint_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "OriginEndpointName"))
     GetOriginEndpointPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyText, required: true, location_name: "Policy"))
+    GetOriginEndpointPolicyResponse.add_member(:cdn_auth_configuration, Shapes::ShapeRef.new(shape: CdnAuthConfiguration, location_name: "CdnAuthConfiguration"))
     GetOriginEndpointPolicyResponse.struct_class = Types::GetOriginEndpointPolicyResponse
 
     GetOriginEndpointRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelGroupName"))
@@ -845,6 +856,7 @@ module Aws::MediaPackageV2
     PutOriginEndpointPolicyRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelName"))
     PutOriginEndpointPolicyRequest.add_member(:origin_endpoint_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "OriginEndpointName"))
     PutOriginEndpointPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyText, required: true, location_name: "Policy"))
+    PutOriginEndpointPolicyRequest.add_member(:cdn_auth_configuration, Shapes::ShapeRef.new(shape: CdnAuthConfiguration, location_name: "CdnAuthConfiguration"))
     PutOriginEndpointPolicyRequest.struct_class = Types::PutOriginEndpointPolicyRequest
 
     PutOriginEndpointPolicyResponse.struct_class = Types::PutOriginEndpointPolicyResponse

@@ -2729,8 +2729,8 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Creates a metadata table configuration for a general purpose bucket.
-    # For more information, see [Accelerating data discovery with S3
+    # Creates an S3 Metadata V2 metadata configuration for a general purpose
+    # bucket. For more information, see [Accelerating data discovery with S3
     # Metadata][1] in the *Amazon S3 User Guide*.
     #
     # Permissions
@@ -2739,11 +2739,153 @@ module Aws::S3
     #   more information, see [Setting up permissions for configuring
     #   metadata tables][2] in the *Amazon S3 User Guide*.
     #
+    #   If you want to encrypt your metadata tables with server-side
+    #   encryption with Key Management Service (KMS) keys (SSE-KMS), you
+    #   need additional permissions in your KMS key policy. For more
+    #   information, see [ Setting up permissions for configuring metadata
+    #   tables][2] in the *Amazon S3 User Guide*.
+    #
     #   If you also want to integrate your table bucket with Amazon Web
     #   Services analytics services so that you can query your metadata
     #   table, you need additional permissions. For more information, see [
     #   Integrating Amazon S3 Tables with Amazon Web Services analytics
     #   services][3] in the *Amazon S3 User Guide*.
+    #
+    #   To query your metadata tables, you need additional permissions. For
+    #   more information, see [ Permissions for querying metadata tables][4]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #   * `s3:CreateBucketMetadataTableConfiguration`
+    #
+    #     <note markdown="1"> The IAM policy action name is the same for the V1 and V2 API
+    #     operations.
+    #
+    #      </note>
+    #
+    #   * `s3tables:CreateTableBucket`
+    #
+    #   * `s3tables:CreateNamespace`
+    #
+    #   * `s3tables:GetTable`
+    #
+    #   * `s3tables:CreateTable`
+    #
+    #   * `s3tables:PutTablePolicy`
+    #
+    #   * `s3tables:PutTableEncryption`
+    #
+    #   * `kms:DescribeKey`
+    #
+    # The following operations are related to
+    # `CreateBucketMetadataConfiguration`:
+    #
+    # * [DeleteBucketMetadataConfiguration][5]
+    #
+    # * [GetBucketMetadataConfiguration][6]
+    #
+    # * [UpdateBucketMetadataInventoryTableConfiguration][7]
+    #
+    # * [UpdateBucketMetadataJournalTableConfiguration][8]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-integrating-aws.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-bucket-query-permissions.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataConfiguration.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataInventoryTableConfiguration.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataJournalTableConfiguration.html
+    #
+    # @option params [required, String] :bucket
+    #   The general purpose bucket that you want to create the metadata
+    #   configuration for.
+    #
+    # @option params [String] :content_md5
+    #   The `Content-MD5` header for the metadata configuration.
+    #
+    # @option params [String] :checksum_algorithm
+    #   The checksum algorithm to use with your metadata configuration.
+    #
+    # @option params [required, Types::MetadataConfiguration] :metadata_configuration
+    #   The contents of your metadata configuration.
+    #
+    # @option params [String] :expected_bucket_owner
+    #   The expected owner of the general purpose bucket that corresponds to
+    #   your metadata configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_bucket_metadata_configuration({
+    #     bucket: "BucketName", # required
+    #     content_md5: "ContentMD5",
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
+    #     metadata_configuration: { # required
+    #       journal_table_configuration: { # required
+    #         record_expiration: { # required
+    #           expiration: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           days: 1,
+    #         },
+    #         encryption_configuration: {
+    #           sse_algorithm: "aws:kms", # required, accepts aws:kms, AES256
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #       },
+    #       inventory_table_configuration: {
+    #         configuration_state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         encryption_configuration: {
+    #           sse_algorithm: "aws:kms", # required, accepts aws:kms, AES256
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #       },
+    #     },
+    #     expected_bucket_owner: "AccountId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucketMetadataConfiguration AWS API Documentation
+    #
+    # @overload create_bucket_metadata_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_bucket_metadata_configuration(params = {}, options = {})
+      req = build_request(:create_bucket_metadata_configuration, params)
+      req.send_request(options)
+    end
+
+    # We recommend that you create your S3 Metadata configurations by using
+    # the V2 [CreateBucketMetadataConfiguration][1] API operation. We no
+    # longer recommend using the V1 `CreateBucketMetadataTableConfiguration`
+    # API operation.
+    #
+    #  If you created your S3 Metadata configuration before July 15, 2025,
+    # we
+    # recommend that you delete and re-create your configuration by using
+    # [CreateBucketMetadataConfiguration][1] so that you can expire journal
+    # table records and create a live inventory table.
+    #
+    # Creates a V1 S3 Metadata configuration for a general purpose bucket.
+    # For more information, see [Accelerating data discovery with S3
+    # Metadata][2] in the *Amazon S3 User Guide*.
+    #
+    # Permissions
+    #
+    # : To use this operation, you must have the following permissions. For
+    #   more information, see [Setting up permissions for configuring
+    #   metadata tables][3] in the *Amazon S3 User Guide*.
+    #
+    #   If you want to encrypt your metadata tables with server-side
+    #   encryption with Key Management Service (KMS) keys (SSE-KMS), you
+    #   need additional permissions. For more information, see [ Setting up
+    #   permissions for configuring metadata tables][3] in the *Amazon S3
+    #   User Guide*.
+    #
+    #   If you also want to integrate your table bucket with Amazon Web
+    #   Services analytics services so that you can query your metadata
+    #   table, you need additional permissions. For more information, see [
+    #   Integrating Amazon S3 Tables with Amazon Web Services analytics
+    #   services][4] in the *Amazon S3 User Guide*.
     #
     #   * `s3:CreateBucketMetadataTableConfiguration`
     #
@@ -2758,21 +2900,22 @@ module Aws::S3
     # The following operations are related to
     # `CreateBucketMetadataTableConfiguration`:
     #
-    # * [DeleteBucketMetadataTableConfiguration][4]
+    # * [DeleteBucketMetadataTableConfiguration][5]
     #
-    # * [GetBucketMetadataTableConfiguration][5]
+    # * [GetBucketMetadataTableConfiguration][6]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-integrating-aws.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataTableConfiguration.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataTableConfiguration.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-integrating-aws.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataTableConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataTableConfiguration.html
     #
     # @option params [required, String] :bucket
     #   The general purpose bucket that you want to create the metadata table
-    #   configuration in.
+    #   configuration for.
     #
     # @option params [String] :content_md5
     #   The `Content-MD5` header for the metadata table configuration.
@@ -2784,8 +2927,8 @@ module Aws::S3
     #   The contents of your metadata table configuration.
     #
     # @option params [String] :expected_bucket_owner
-    #   The expected owner of the general purpose bucket that contains your
-    #   metadata table configuration.
+    #   The expected owner of the general purpose bucket that corresponds to
+    #   your metadata table configuration.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4515,7 +4658,7 @@ module Aws::S3
     #
     #  </note>
     #
-    # Deletes an inventory configuration (identified by the inventory ID)
+    # Deletes an S3 Inventory configuration (identified by the inventory ID)
     # from the bucket.
     #
     # To use this operation, you must have permissions to perform the
@@ -4686,9 +4829,17 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Deletes a metadata table configuration from a general purpose bucket.
+    # Deletes an S3 Metadata configuration from a general purpose bucket.
     # For more information, see [Accelerating data discovery with S3
     # Metadata][1] in the *Amazon S3 User Guide*.
+    #
+    # <note markdown="1"> You can use the V2 `DeleteBucketMetadataConfiguration` API operation
+    # with V1 or V2 metadata configurations. However, if you try to use the
+    # V1 `DeleteBucketMetadataTableConfiguration` API operation with V2
+    # configurations, you will receive an HTTP `405 Method Not Allowed`
+    # error.
+    #
+    #  </note>
     #
     # Permissions
     #
@@ -4697,19 +4848,107 @@ module Aws::S3
     #   information, see [Setting up permissions for configuring metadata
     #   tables][2] in the *Amazon S3 User Guide*.
     #
+    #   <note markdown="1"> The IAM policy action name is the same for the V1 and V2 API
+    #   operations.
+    #
+    #    </note>
+    #
     # The following operations are related to
-    # `DeleteBucketMetadataTableConfiguration`:
+    # `DeleteBucketMetadataConfiguration`:
     #
-    # * [CreateBucketMetadataTableConfiguration][3]
+    # * [CreateBucketMetadataConfiguration][3]
     #
-    # * [GetBucketMetadataTableConfiguration][4]
+    # * [GetBucketMetadataConfiguration][4]
+    #
+    # * [UpdateBucketMetadataInventoryTableConfiguration][5]
+    #
+    # * [UpdateBucketMetadataJournalTableConfiguration][6]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataTableConfiguration.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataTableConfiguration.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataConfiguration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataInventoryTableConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataJournalTableConfiguration.html
+    #
+    # @option params [required, String] :bucket
+    #   The general purpose bucket that you want to remove the metadata
+    #   configuration from.
+    #
+    # @option params [String] :expected_bucket_owner
+    #   The expected bucket owner of the general purpose bucket that you want
+    #   to remove the metadata table configuration from.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_bucket_metadata_configuration({
+    #     bucket: "BucketName", # required
+    #     expected_bucket_owner: "AccountId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketMetadataConfiguration AWS API Documentation
+    #
+    # @overload delete_bucket_metadata_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_bucket_metadata_configuration(params = {}, options = {})
+      req = build_request(:delete_bucket_metadata_configuration, params)
+      req.send_request(options)
+    end
+
+    # We recommend that you delete your S3 Metadata configurations by using
+    # the V2 [DeleteBucketMetadataTableConfiguration][1] API operation. We
+    # no longer recommend using the V1
+    # `DeleteBucketMetadataTableConfiguration` API operation.
+    #
+    #  If you created your S3 Metadata configuration before July 15, 2025,
+    # we
+    # recommend that you delete and re-create your configuration by using
+    # [CreateBucketMetadataConfiguration][2] so that you can expire journal
+    # table records and create a live inventory table.
+    #
+    # Deletes a V1 S3 Metadata configuration from a general purpose bucket.
+    # For more information, see [Accelerating data discovery with S3
+    # Metadata][3] in the *Amazon S3 User Guide*.
+    #
+    # <note markdown="1"> You can use the V2 `DeleteBucketMetadataConfiguration` API operation
+    # with V1 or V2 metadata table configurations. However, if you try to
+    # use the V1 `DeleteBucketMetadataTableConfiguration` API operation with
+    # V2 configurations, you will receive an HTTP `405 Method Not Allowed`
+    # error.
+    #
+    #  Make sure that you update your processes to use the new V2 API
+    # operations (`CreateBucketMetadataConfiguration`,
+    # `GetBucketMetadataConfiguration`, and
+    # `DeleteBucketMetadataConfiguration`) instead of the V1 API operations.
+    #
+    #  </note>
+    #
+    # Permissions
+    #
+    # : To use this operation, you must have the
+    #   `s3:DeleteBucketMetadataTableConfiguration` permission. For more
+    #   information, see [Setting up permissions for configuring metadata
+    #   tables][4] in the *Amazon S3 User Guide*.
+    #
+    # The following operations are related to
+    # `DeleteBucketMetadataTableConfiguration`:
+    #
+    # * [CreateBucketMetadataTableConfiguration][5]
+    #
+    # * [GetBucketMetadataTableConfiguration][6]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataTableConfiguration.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataTableConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataTableConfiguration.html
     #
     # @option params [required, String] :bucket
     #   The general purpose bucket that you want to remove the metadata table
@@ -6683,7 +6922,7 @@ module Aws::S3
     #
     #  </note>
     #
-    # Returns an inventory configuration (identified by the inventory
+    # Returns an S3 Inventory configuration (identified by the inventory
     # configuration ID) from the bucket.
     #
     # To use this operation, you must have permissions to perform the
@@ -7235,9 +7474,17 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Retrieves the metadata table configuration for a general purpose
-    # bucket. For more information, see [Accelerating data discovery with S3
+    # Retrieves the S3 Metadata configuration for a general purpose bucket.
+    # For more information, see [Accelerating data discovery with S3
     # Metadata][1] in the *Amazon S3 User Guide*.
+    #
+    # <note markdown="1"> You can use the V2 `GetBucketMetadataConfiguration` API operation with
+    # V1 or V2 metadata configurations. However, if you try to use the V1
+    # `GetBucketMetadataTableConfiguration` API operation with V2
+    # configurations, you will receive an HTTP `405 Method Not Allowed`
+    # error.
+    #
+    #  </note>
     #
     # Permissions
     #
@@ -7246,27 +7493,136 @@ module Aws::S3
     #   information, see [Setting up permissions for configuring metadata
     #   tables][2] in the *Amazon S3 User Guide*.
     #
+    #   <note markdown="1"> The IAM policy action name is the same for the V1 and V2 API
+    #   operations.
+    #
+    #    </note>
+    #
     # The following operations are related to
-    # `GetBucketMetadataTableConfiguration`:
+    # `GetBucketMetadataConfiguration`:
     #
-    # * [CreateBucketMetadataTableConfiguration][3]
+    # * [CreateBucketMetadataConfiguration][3]
     #
-    # * [DeleteBucketMetadataTableConfiguration][4]
+    # * [DeleteBucketMetadataConfiguration][4]
+    #
+    # * [UpdateBucketMetadataInventoryTableConfiguration][5]
+    #
+    # * [UpdateBucketMetadataJournalTableConfiguration][6]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataTableConfiguration.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataTableConfiguration.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataConfiguration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataInventoryTableConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataJournalTableConfiguration.html
     #
     # @option params [required, String] :bucket
-    #   The general purpose bucket that contains the metadata table
+    #   The general purpose bucket that corresponds to the metadata
     #   configuration that you want to retrieve.
     #
     # @option params [String] :expected_bucket_owner
     #   The expected owner of the general purpose bucket that you want to
-    #   retrieve the metadata table configuration from.
+    #   retrieve the metadata table configuration for.
+    #
+    # @return [Types::GetBucketMetadataConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBucketMetadataConfigurationOutput#get_bucket_metadata_configuration_result #get_bucket_metadata_configuration_result} => Types::GetBucketMetadataConfigurationResult
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_bucket_metadata_configuration({
+    #     bucket: "BucketName", # required
+    #     expected_bucket_owner: "AccountId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.destination_result.table_bucket_type #=> String, one of "aws", "customer"
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.destination_result.table_bucket_arn #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.destination_result.table_namespace #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.journal_table_configuration_result.table_status #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.journal_table_configuration_result.error.error_code #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.journal_table_configuration_result.error.error_message #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.journal_table_configuration_result.table_name #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.journal_table_configuration_result.table_arn #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.journal_table_configuration_result.record_expiration.expiration #=> String, one of "ENABLED", "DISABLED"
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.journal_table_configuration_result.record_expiration.days #=> Integer
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.inventory_table_configuration_result.configuration_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.inventory_table_configuration_result.table_status #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.inventory_table_configuration_result.error.error_code #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.inventory_table_configuration_result.error.error_message #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.inventory_table_configuration_result.table_name #=> String
+    #   resp.get_bucket_metadata_configuration_result.metadata_configuration_result.inventory_table_configuration_result.table_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetadataConfiguration AWS API Documentation
+    #
+    # @overload get_bucket_metadata_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_bucket_metadata_configuration(params = {}, options = {})
+      req = build_request(:get_bucket_metadata_configuration, params)
+      req.send_request(options)
+    end
+
+    # We recommend that you retrieve your S3 Metadata configurations by
+    # using the V2 [GetBucketMetadataTableConfiguration][1] API operation.
+    # We no longer recommend using the V1
+    # `GetBucketMetadataTableConfiguration` API operation.
+    #
+    #  If you created your S3 Metadata configuration before July 15, 2025,
+    # we
+    # recommend that you delete and re-create your configuration by using
+    # [CreateBucketMetadataConfiguration][2] so that you can expire journal
+    # table records and create a live inventory table.
+    #
+    # Retrieves the V1 S3 Metadata configuration for a general purpose
+    # bucket. For more information, see [Accelerating data discovery with S3
+    # Metadata][3] in the *Amazon S3 User Guide*.
+    #
+    # <note markdown="1"> You can use the V2 `GetBucketMetadataConfiguration` API operation with
+    # V1 or V2 metadata table configurations. However, if you try to use the
+    # V1 `GetBucketMetadataTableConfiguration` API operation with V2
+    # configurations, you will receive an HTTP `405 Method Not Allowed`
+    # error.
+    #
+    #  Make sure that you update your processes to use the new V2 API
+    # operations (`CreateBucketMetadataConfiguration`,
+    # `GetBucketMetadataConfiguration`, and
+    # `DeleteBucketMetadataConfiguration`) instead of the V1 API operations.
+    #
+    #  </note>
+    #
+    # Permissions
+    #
+    # : To use this operation, you must have the
+    #   `s3:GetBucketMetadataTableConfiguration` permission. For more
+    #   information, see [Setting up permissions for configuring metadata
+    #   tables][4] in the *Amazon S3 User Guide*.
+    #
+    # The following operations are related to
+    # `GetBucketMetadataTableConfiguration`:
+    #
+    # * [CreateBucketMetadataTableConfiguration][5]
+    #
+    # * [DeleteBucketMetadataTableConfiguration][6]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataTableConfiguration.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataTableConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataTableConfiguration.html
+    #
+    # @option params [required, String] :bucket
+    #   The general purpose bucket that corresponds to the metadata table
+    #   configuration that you want to retrieve.
+    #
+    # @option params [String] :expected_bucket_owner
+    #   The expected owner of the general purpose bucket that you want to
+    #   retrieve the metadata table configuration for.
     #
     # @return [Types::GetBucketMetadataTableConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11156,7 +11512,7 @@ module Aws::S3
     #
     #  </note>
     #
-    # Returns a list of inventory configurations for the bucket. You can
+    # Returns a list of S3 Inventory configurations for the bucket. You can
     # have up to 1,000 analytics configurations per bucket.
     #
     # This action supports list pagination and does not return more than 100
@@ -14355,7 +14711,7 @@ module Aws::S3
     #
     #  </note>
     #
-    # This implementation of the `PUT` action adds an inventory
+    # This implementation of the `PUT` action adds an S3 Inventory
     # configuration (identified by the inventory ID) to the bucket. You can
     # have up to 1,000 inventory configurations per bucket.
     #
@@ -19707,6 +20063,182 @@ module Aws::S3
       req.send_request(options, &block)
     end
 
+    # Enables or disables a live inventory table for an S3 Metadata
+    # configuration on a general purpose bucket. For more information, see
+    # [Accelerating data discovery with S3 Metadata][1] in the *Amazon S3
+    # User Guide*.
+    #
+    # Permissions
+    #
+    # : To use this operation, you must have the following permissions. For
+    #   more information, see [Setting up permissions for configuring
+    #   metadata tables][2] in the *Amazon S3 User Guide*.
+    #
+    #   If you want to encrypt your inventory table with server-side
+    #   encryption with Key Management Service (KMS) keys (SSE-KMS), you
+    #   need additional permissions in your KMS key policy. For more
+    #   information, see [ Setting up permissions for configuring metadata
+    #   tables][2] in the *Amazon S3 User Guide*.
+    #
+    #   * `s3:UpdateBucketMetadataInventoryTableConfiguration`
+    #
+    #   * `s3tables:CreateTableBucket`
+    #
+    #   * `s3tables:CreateNamespace`
+    #
+    #   * `s3tables:GetTable`
+    #
+    #   * `s3tables:CreateTable`
+    #
+    #   * `s3tables:PutTablePolicy`
+    #
+    #   * `s3tables:PutTableEncryption`
+    #
+    #   * `kms:DescribeKey`
+    #
+    # The following operations are related to
+    # `UpdateBucketMetadataInventoryTableConfiguration`:
+    #
+    # * [CreateBucketMetadataConfiguration][3]
+    #
+    # * [DeleteBucketMetadataConfiguration][4]
+    #
+    # * [GetBucketMetadataConfiguration][5]
+    #
+    # * [UpdateBucketMetadataJournalTableConfiguration][6]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataConfiguration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataJournalTableConfiguration.html
+    #
+    # @option params [required, String] :bucket
+    #   The general purpose bucket that corresponds to the metadata
+    #   configuration that you want to enable or disable an inventory table
+    #   for.
+    #
+    # @option params [String] :content_md5
+    #   The `Content-MD5` header for the inventory table configuration.
+    #
+    # @option params [String] :checksum_algorithm
+    #   The checksum algorithm to use with your inventory table configuration.
+    #
+    # @option params [required, Types::InventoryTableConfigurationUpdates] :inventory_table_configuration
+    #   The contents of your inventory table configuration.
+    #
+    # @option params [String] :expected_bucket_owner
+    #   The expected owner of the general purpose bucket that corresponds to
+    #   the metadata table configuration that you want to enable or disable an
+    #   inventory table for.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_bucket_metadata_inventory_table_configuration({
+    #     bucket: "BucketName", # required
+    #     content_md5: "ContentMD5",
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
+    #     inventory_table_configuration: { # required
+    #       configuration_state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       encryption_configuration: {
+    #         sse_algorithm: "aws:kms", # required, accepts aws:kms, AES256
+    #         kms_key_arn: "KmsKeyArn",
+    #       },
+    #     },
+    #     expected_bucket_owner: "AccountId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UpdateBucketMetadataInventoryTableConfiguration AWS API Documentation
+    #
+    # @overload update_bucket_metadata_inventory_table_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_bucket_metadata_inventory_table_configuration(params = {}, options = {})
+      req = build_request(:update_bucket_metadata_inventory_table_configuration, params)
+      req.send_request(options)
+    end
+
+    # Enables or disables journal table record expiration for an S3 Metadata
+    # configuration on a general purpose bucket. For more information, see
+    # [Accelerating data discovery with S3 Metadata][1] in the *Amazon S3
+    # User Guide*.
+    #
+    # Permissions
+    #
+    # : To use this operation, you must have the
+    #   `s3:UpdateBucketMetadataJournalTableConfiguration` permission. For
+    #   more information, see [Setting up permissions for configuring
+    #   metadata tables][2] in the *Amazon S3 User Guide*.
+    #
+    # The following operations are related to
+    # `UpdateBucketMetadataJournalTableConfiguration`:
+    #
+    # * [CreateBucketMetadataConfiguration][3]
+    #
+    # * [DeleteBucketMetadataConfiguration][4]
+    #
+    # * [GetBucketMetadataConfiguration][5]
+    #
+    # * [UpdateBucketMetadataInventoryTableConfiguration][6]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataConfiguration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataInventoryTableConfiguration.html
+    #
+    # @option params [required, String] :bucket
+    #   The general purpose bucket that corresponds to the metadata
+    #   configuration that you want to enable or disable journal table record
+    #   expiration for.
+    #
+    # @option params [String] :content_md5
+    #   The `Content-MD5` header for the journal table configuration.
+    #
+    # @option params [String] :checksum_algorithm
+    #   The checksum algorithm to use with your journal table configuration.
+    #
+    # @option params [required, Types::JournalTableConfigurationUpdates] :journal_table_configuration
+    #   The contents of your journal table configuration.
+    #
+    # @option params [String] :expected_bucket_owner
+    #   The expected owner of the general purpose bucket that corresponds to
+    #   the metadata table configuration that you want to enable or disable
+    #   journal table record expiration for.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_bucket_metadata_journal_table_configuration({
+    #     bucket: "BucketName", # required
+    #     content_md5: "ContentMD5",
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
+    #     journal_table_configuration: { # required
+    #       record_expiration: { # required
+    #         expiration: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         days: 1,
+    #       },
+    #     },
+    #     expected_bucket_owner: "AccountId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UpdateBucketMetadataJournalTableConfiguration AWS API Documentation
+    #
+    # @overload update_bucket_metadata_journal_table_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_bucket_metadata_journal_table_configuration(params = {}, options = {})
+      req = build_request(:update_bucket_metadata_journal_table_configuration, params)
+      req.send_request(options)
+    end
+
     # Uploads a part in a multipart upload.
     #
     # <note markdown="1"> In this operation, you provide new data as a part of an object in your
@@ -21196,7 +21728,7 @@ module Aws::S3
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.192.0'
+      context[:gem_version] = '1.193.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

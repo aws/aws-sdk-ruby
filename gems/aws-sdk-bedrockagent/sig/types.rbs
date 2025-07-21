@@ -2394,6 +2394,13 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class S3VectorsConfiguration
+      attr_accessor index_arn: ::String
+      attr_accessor index_name: ::String
+      attr_accessor vector_bucket_arn: ::String
+      SENSITIVE: [:index_arn, :index_name, :vector_bucket_arn]
+    end
+
     class SalesforceCrawlerConfiguration
       attr_accessor filter_configuration: Types::CrawlFilterConfiguration
       SENSITIVE: []
@@ -2504,7 +2511,8 @@ module Aws::BedrockAgent
       attr_accessor pinecone_configuration: Types::PineconeConfiguration
       attr_accessor rds_configuration: Types::RdsConfiguration
       attr_accessor redis_enterprise_cloud_configuration: Types::RedisEnterpriseCloudConfiguration
-      attr_accessor type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS" | "MONGO_DB_ATLAS" | "NEPTUNE_ANALYTICS" | "OPENSEARCH_MANAGED_CLUSTER")
+      attr_accessor s3_vectors_configuration: Types::S3VectorsConfiguration
+      attr_accessor type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS" | "MONGO_DB_ATLAS" | "NEPTUNE_ANALYTICS" | "OPENSEARCH_MANAGED_CLUSTER" | "S3_VECTORS")
       SENSITIVE: []
     end
 

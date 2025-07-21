@@ -16,6 +16,52 @@ module Aws::ECS
     #
     class AccessDeniedException < Aws::EmptyStructure; end
 
+    # The advanced settings for a load balancer used in blue/green
+    # deployments. Specify the alternate target group, listener rules, and
+    # IAM role required for traffic shifting during blue/green deployments.
+    # For more information, see [Required resources for Amazon ECS
+    # blue/green deployments][1] in the *Amazon Elastic Container Service
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-deployment-implementation.html
+    #
+    # @!attribute [rw] alternate_target_group_arn
+    #   The Amazon Resource Name (ARN) of the alternate target group for
+    #   Amazon ECS blue/green deployments.
+    #   @return [String]
+    #
+    # @!attribute [rw] production_listener_rule
+    #   The Amazon Resource Name (ARN) that that identifies the production
+    #   listener rule (in the case of an Application Load Balancer) or
+    #   listener (in the case for an Network Load Balancer) for routing
+    #   production traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_listener_rule
+    #   The Amazon Resource Name (ARN) that identifies ) that identifies the
+    #   test listener rule (in the case of an Application Load Balancer) or
+    #   listener (in the case for an Network Load Balancer) for routing test
+    #   traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   ECS permission to call the Elastic Load Balancing APIs for you.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AdvancedConfiguration AWS API Documentation
+    #
+    class AdvancedConfiguration < Struct.new(
+      :alternate_target_group_arn,
+      :production_listener_rule,
+      :test_listener_rule,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing a container instance or task attachment.
     #
     # @!attribute [rw] id
@@ -2951,7 +2997,7 @@ module Aws::ECS
     #   ECS resources][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
-    #   When you use Amazon ECS managed tags, you need to set the
+    #   When you use Amazon ECS managed tags, you must set the
     #   `propagateTags` request parameter.
     #
     #
@@ -3730,7 +3776,7 @@ module Aws::ECS
     # your service to the last completed deployment after a failure.
     #
     # You can only use the `DeploymentAlarms` method to detect failures when
-    # the `DeploymentController` is set to `ECS` (rolling update).
+    # the `DeploymentController` is set to `ECS`.
     #
     # For more information, see [Rolling update][1] in the <i> <i>Amazon
     # Elastic Container Service Developer Guide</i> </i>.
@@ -3966,13 +4012,49 @@ module Aws::ECS
     #   Information about the CloudWatch alarms.
     #   @return [Types::DeploymentAlarms]
     #
+    # @!attribute [rw] strategy
+    #   The deployment strategy for the service. Choose from these valid
+    #   values:
+    #
+    #   * `ROLLING` - When you create a service which uses the rolling
+    #     update (`ROLLING`) deployment strategy, the Amazon ECS service
+    #     scheduler replaces the currently running tasks with new tasks. The
+    #     number of tasks that Amazon ECS adds or removes from the service
+    #     during a rolling update is controlled by the service deployment
+    #     configuration.
+    #
+    #   * `BLUE_GREEN` - A blue/green deployment strategy (`BLUE_GREEN`) is
+    #     a release methodology that reduces downtime and risk by running
+    #     two identical production environments called blue and green. With
+    #     Amazon ECS blue/green deployments, you can validate new service
+    #     revisions before directing production traffic to them. This
+    #     approach provides a safer way to deploy changes with the ability
+    #     to quickly roll back if needed.
+    #   @return [String]
+    #
+    # @!attribute [rw] bake_time_in_minutes
+    #   The time period when both blue and green service revisions are
+    #   running simultaneously after the production traffic has shifted.
+    #
+    #   You must provide this parameter when you use the `BLUE_GREEN`
+    #   deployment strategy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lifecycle_hooks
+    #   An array of deployment lifecycle hook objects to run custom logic at
+    #   specific stages of the deployment lifecycle.
+    #   @return [Array<Types::DeploymentLifecycleHook>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentConfiguration AWS API Documentation
     #
     class DeploymentConfiguration < Struct.new(
       :deployment_circuit_breaker,
       :maximum_percent,
       :minimum_healthy_percent,
-      :alarms)
+      :alarms,
+      :strategy,
+      :bake_time_in_minutes,
+      :lifecycle_hooks)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3982,49 +4064,92 @@ module Aws::ECS
     # @!attribute [rw] type
     #   The deployment controller type to use.
     #
-    #   There are three deployment controller types available:
+    #   The deployment controller is the mechanism that determines how tasks
+    #   are deployed for your service. The valid options are:
     #
-    #   ECS
+    #   * ECS
     #
-    #   : The rolling update (`ECS`) deployment type involves replacing the
-    #     current running version of the container with the latest version.
-    #     The number of containers Amazon ECS adds or removes from the
-    #     service during a rolling update is controlled by adjusting the
-    #     minimum and maximum number of healthy tasks allowed during a
-    #     service deployment, as specified in the
-    #     [DeploymentConfiguration][1].
+    #     When you create a service which uses the `ECS` deployment
+    #     controller, you can choose between the following deployment
+    #     strategies:
     #
-    #     For more information about rolling deployments, see [Deploy Amazon
-    #     ECS services by replacing tasks][2] in the *Amazon Elastic
-    #     Container Service Developer Guide*.
+    #     * `ROLLING`: When you create a service which uses the *rolling
+    #       update* (`ROLLING`) deployment strategy, the Amazon ECS service
+    #       scheduler replaces the currently running tasks with new tasks.
+    #       The number of tasks that Amazon ECS adds or removes from the
+    #       service during a rolling update is controlled by the service
+    #       deployment configuration.
     #
-    #   CODE\_DEPLOY
+    #       Rolling update deployments are best suited for the following
+    #       scenarios:
     #
-    #   : The blue/green (`CODE_DEPLOY`) deployment type uses the blue/green
-    #     deployment model powered by CodeDeploy, which allows you to verify
-    #     a new deployment of a service before sending production traffic to
-    #     it.
+    #       * Gradual service updates: You need to update your service
+    #         incrementally without taking the entire service offline at
+    #         once.
     #
-    #     For more information about blue/green deployments, see [Validate
-    #     the state of an Amazon ECS service before deployment ][3] in the
-    #     *Amazon Elastic Container Service Developer Guide*.
+    #       * Limited resource requirements: You want to avoid the
+    #         additional resource costs of running two complete environments
+    #         simultaneously (as required by blue/green deployments).
     #
-    #   EXTERNAL
+    #       * Acceptable deployment time: Your application can tolerate a
+    #         longer deployment process, as rolling updates replace tasks
+    #         one by one.
     #
-    #   : The external (`EXTERNAL`) deployment type enables you to use any
-    #     third-party deployment controller for full control over the
-    #     deployment process for an Amazon ECS service.
+    #       * No need for instant roll back: Your service can tolerate a
+    #         rollback process that takes minutes rather than seconds.
     #
-    #     For more information about external deployments, see [Deploy
-    #     Amazon ECS services using a third-party controller ][4] in the
-    #     *Amazon Elastic Container Service Developer Guide*.
+    #       * Simple deployment process: You prefer a straightforward
+    #         deployment approach without the complexity of managing
+    #         multiple environments, target groups, and listeners.
     #
+    #       * No load balancer requirement: Your service doesn't use or
+    #         require a load balancer, Application Load Balancer, Network
+    #         Load Balancer, or Service Connect (which are required for
+    #         blue/green deployments).
     #
+    #       * Stateful applications: Your application maintains state that
+    #         makes it difficult to run two parallel environments.
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeploymentConfiguration.html
-    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html
-    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html
-    #   [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-external.html
+    #       * Cost sensitivity: You want to minimize deployment costs by not
+    #         running duplicate environments during deployment.
+    #       Rolling updates are the default deployment strategy for services
+    #       and provide a balance between deployment safety and resource
+    #       efficiency for many common application scenarios.
+    #
+    #     * `BLUE_GREEN`: A *blue/green* deployment strategy (`BLUE_GREEN`)
+    #       is a release methodology that reduces downtime and risk by
+    #       running two identical production environments called blue and
+    #       green. With Amazon ECS blue/green deployments, you can validate
+    #       new service revisions before directing production traffic to
+    #       them. This approach provides a safer way to deploy changes with
+    #       the ability to quickly roll back if needed.
+    #
+    #       Amazon ECS blue/green deployments are best suited for the
+    #       following scenarios:
+    #
+    #       * Service validation: When you need to validate new service
+    #         revisions before directing production traffic to them
+    #
+    #       * Zero downtime: When your service requires zero-downtime
+    #         deployments
+    #
+    #       * Instant roll back: When you need the ability to quickly roll
+    #         back if issues are detected
+    #
+    #       * Load balancer requirement: When your service uses Application
+    #         Load Balancer, Network Load Balancer, or Service Connect
+    #   * External
+    #
+    #     Use a third-party deployment controller.
+    #
+    #   * Blue/green deployment (powered by CodeDeploy)
+    #
+    #     CodeDeploy installs an updated version of the application as a new
+    #     replacement task set and reroutes production traffic from the
+    #     original application task set to the replacement task set. The
+    #     original task set is terminated after a successful deployment. Use
+    #     this deployment controller to verify a new deployment of a service
+    #     before sending production traffic to it.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentController AWS API Documentation
@@ -4046,6 +4171,110 @@ module Aws::ECS
     #
     class DeploymentEphemeralStorage < Struct.new(
       :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A deployment lifecycle hook runs custom logic at specific stages of
+    # the deployment process. Currently, you can use Lambda functions as
+    # hook targets.
+    #
+    # For more information, see [Lifecycle hooks for Amazon ECS service
+    # deployments][1] in the <i> Amazon Elastic Container Service Developer
+    # Guide</i>.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-lifecycle-hooks.html
+    #
+    # @!attribute [rw] hook_target_arn
+    #   The Amazon Resource Name (ARN) of the hook target. Currently, only
+    #   Lambda function ARNs are supported.
+    #
+    #   You must provide this parameter when configuring a deployment
+    #   lifecycle hook.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   ECS permission to call Lambda functions on your behalf.
+    #
+    #   For more information, see [Permissions required for Lambda functions
+    #   in Amazon ECS blue/green deployments][1] in the <i> Amazon Elastic
+    #   Container Service Developer Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_stages
+    #   The lifecycle stages at which to run the hook. Choose from these
+    #   valid values:
+    #
+    #   * RECONCILE\_SERVICE
+    #
+    #     The reconciliation stage that only happens when you start a new
+    #     service deployment with more than 1 service revision in an ACTIVE
+    #     state.
+    #
+    #     You can use a lifecycle hook for this stage.
+    #
+    #   * PRE\_SCALE\_UP
+    #
+    #     The green service revision has not started. The blue service
+    #     revision is handling 100% of the production traffic. There is no
+    #     test traffic.
+    #
+    #     You can use a lifecycle hook for this stage.
+    #
+    #   * POST\_SCALE\_UP
+    #
+    #     The green service revision has started. The blue service revision
+    #     is handling 100% of the production traffic. There is no test
+    #     traffic.
+    #
+    #     You can use a lifecycle hook for this stage.
+    #
+    #   * TEST\_TRAFFIC\_SHIFT
+    #
+    #     The blue and green service revisions are running. The blue service
+    #     revision handles 100% of the production traffic. The green service
+    #     revision is migrating from 0% to 100% of test traffic.
+    #
+    #     You can use a lifecycle hook for this stage.
+    #
+    #   * POST\_TEST\_TRAFFIC\_SHIFT
+    #
+    #     The test traffic shift is complete. The green service revision
+    #     handles 100% of the test traffic.
+    #
+    #     You can use a lifecycle hook for this stage.
+    #
+    #   * PRODUCTION\_TRAFFIC\_SHIFT
+    #
+    #     Production traffic is shifting to the green service revision. The
+    #     green service revision is migrating from 0% to 100% of production
+    #     traffic.
+    #
+    #     You can use a lifecycle hook for this stage.
+    #
+    #   * POST\_PRODUCTION\_TRAFFIC\_SHIFT
+    #
+    #     The production traffic shift is complete.
+    #
+    #     You can use a lifecycle hook for this stage.
+    #
+    #   You must provide this parameter when configuring a deployment
+    #   lifecycle hook.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentLifecycleHook AWS API Documentation
+    #
+    class DeploymentLifecycleHook < Struct.new(
+      :hook_target_arn,
+      :role_arn,
+      :lifecycle_stages)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4546,8 +4775,8 @@ module Aws::ECS
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the task or tasks to describe. If you do not specify a
-    #   cluster, the default cluster is assumed. This parameter is required.
-    #   If you do not specify a value, the `default` cluster is used.
+    #   cluster, the default cluster is assumed. If you do not specify a
+    #   value, the `default` cluster is used.
     #   @return [String]
     #
     # @!attribute [rw] tasks
@@ -6837,13 +7066,21 @@ module Aws::ECS
     #   traffic on the `hostPort` of the port mapping.
     #   @return [Integer]
     #
+    # @!attribute [rw] advanced_configuration
+    #   The advanced settings for the load balancer used in blue/green
+    #   deployments. Specify the alternate target group, listener rules, and
+    #   IAM role required for traffic shifting during blue/green
+    #   deployments.
+    #   @return [Types::AdvancedConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LoadBalancer AWS API Documentation
     #
     class LoadBalancer < Struct.new(
       :target_group_arn,
       :load_balancer_name,
       :container_name,
-      :container_port)
+      :container_port,
+      :advanced_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8937,6 +9174,24 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The resolved configuration for a service revision, which contains the
+    # actual resources your service revision uses, such as which target
+    # groups serve traffic.
+    #
+    # @!attribute [rw] load_balancers
+    #   The resolved load balancer configuration for the service revision.
+    #   This includes information about which target groups serve traffic
+    #   and which listener rules direct traffic to them.
+    #   @return [Array<Types::ServiceRevisionLoadBalancer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ResolvedConfiguration AWS API Documentation
+    #
+    class ResolvedConfiguration < Struct.new(
+      :load_balancers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the resources available for a container instance.
     #
     # @!attribute [rw] name
@@ -9855,11 +10110,19 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
     #   @return [String]
     #
+    # @!attribute [rw] test_traffic_rules
+    #   The configuration for test traffic routing rules used during
+    #   blue/green deployments with Amazon ECS Service Connect. This allows
+    #   you to route a portion of traffic to the new service revision of
+    #   your service for testing before shifting all production traffic.
+    #   @return [Types::ServiceConnectTestTrafficRules]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceConnectClientAlias AWS API Documentation
     #
     class ServiceConnectClientAlias < Struct.new(
       :port,
-      :dns_name)
+      :dns_name,
+      :test_traffic_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10076,7 +10339,7 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] discovery_arn
-    #   The Amazon Resource Name (ARN) for the namespace in Cloud Map that
+    #   The Amazon Resource Name (ARN) for the service in Cloud Map that
     #   matches the discovery name for this Service Connect resource. You
     #   can use this ARN in other integrations with Cloud Map. However,
     #   Service Connect can't ensure connectivity outside of Amazon ECS.
@@ -10087,6 +10350,87 @@ module Aws::ECS
     class ServiceConnectServiceResource < Struct.new(
       :discovery_name,
       :discovery_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The header matching rules for test traffic routing in Amazon ECS
+    # blue/green deployments. These rules determine how incoming requests
+    # are matched based on HTTP headers to route test traffic to the new
+    # service revision.
+    #
+    # @!attribute [rw] exact
+    #   The exact value that the HTTP header must match for the test traffic
+    #   routing rule to apply. This provides precise control over which
+    #   requests are routed to the new service revision during blue/green
+    #   deployments.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceConnectTestTrafficHeaderMatchRules AWS API Documentation
+    #
+    class ServiceConnectTestTrafficHeaderMatchRules < Struct.new(
+      :exact)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The HTTP header rules used to identify and route test traffic during
+    # Amazon ECS blue/green deployments. These rules specify which HTTP
+    # headers to examine and what values to match for routing decisions.
+    #
+    # For more information, see [Service Connect for Amazon ECS blue/green
+    # deployments][1] in the <i> Amazon Elastic Container Service Developer
+    # Guide</i>.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect-blue-green.html
+    #
+    # @!attribute [rw] name
+    #   The name of the HTTP header to examine for test traffic routing.
+    #   Common examples include custom headers like `X-Test-Version` or
+    #   `X-Canary-Request` that can be used to identify test traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The header value matching configuration that determines how the HTTP
+    #   header value is evaluated for test traffic routing decisions.
+    #   @return [Types::ServiceConnectTestTrafficHeaderMatchRules]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceConnectTestTrafficHeaderRules AWS API Documentation
+    #
+    class ServiceConnectTestTrafficHeaderRules < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The test traffic routing configuration for Amazon ECS blue/green
+    # deployments. This configuration allows you to define rules for routing
+    # specific traffic to the new service revision during the deployment
+    # process, allowing for safe testing before full production traffic
+    # shift.
+    #
+    # For more information, see [Service Connect for Amazon ECS blue/green
+    # deployments][1] in the <i> Amazon Elastic Container Service Developer
+    # Guide</i>.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect-blue-green.html
+    #
+    # @!attribute [rw] header
+    #   The HTTP header-based routing rules that determine which requests
+    #   should be routed to the new service version during blue/green
+    #   deployment testing. These rules provide fine-grained control over
+    #   test traffic routing based on request headers.
+    #   @return [Types::ServiceConnectTestTrafficHeaderRules]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceConnectTestTrafficRules AWS API Documentation
+    #
+    class ServiceConnectTestTrafficRules < Struct.new(
+      :header)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10206,6 +10550,67 @@ module Aws::ECS
     #   status. For example, the circuit breaker detected a failure.
     #   @return [String]
     #
+    # @!attribute [rw] lifecycle_stage
+    #   The current lifecycle stage of the deployment. Possible values
+    #   include:
+    #
+    #   * RECONCILE\_SERVICE
+    #
+    #     The reconciliation stage that only happens when you start a new
+    #     service deployment with more than 1 service revision in an ACTIVE
+    #     state.
+    #
+    #   * PRE\_SCALE\_UP
+    #
+    #     The green service revision has not started. The blue service
+    #     revision is handling 100% of the production traffic. There is no
+    #     test traffic.
+    #
+    #   * SCALE\_UP
+    #
+    #     The stage when the green service revision scales up to 100% and
+    #     launches new tasks. The green service revision is not serving any
+    #     traffic at this point.
+    #
+    #   * POST\_SCALE\_UP
+    #
+    #     The green service revision has started. The blue service revision
+    #     is handling 100% of the production traffic. There is no test
+    #     traffic.
+    #
+    #   * TEST\_TRAFFIC\_SHIFT
+    #
+    #     The blue and green service revisions are running. The blue service
+    #     revision handles 100% of the production traffic. The green service
+    #     revision is migrating from 0% to 100% of test traffic.
+    #
+    #   * POST\_TEST\_TRAFFIC\_SHIFT
+    #
+    #     The test traffic shift is complete. The green service revision
+    #     handles 100% of the test traffic.
+    #
+    #   * PRODUCTION\_TRAFFIC\_SHIFT
+    #
+    #     Production traffic is shifting to the green service revision. The
+    #     green service revision is migrating from 0% to 100% of production
+    #     traffic.
+    #
+    #   * POST\_PRODUCTION\_TRAFFIC\_SHIFT
+    #
+    #     The production traffic shift is complete.
+    #
+    #   * BAKE\_TIME
+    #
+    #     The stage when both blue and green service revisions are running
+    #     simultaneously after the production traffic has shifted.
+    #
+    #   * CLEAN\_UP
+    #
+    #     The stage when the blue service revision has completely scaled
+    #     down to 0 running tasks. The green service revision is now the
+    #     production service revision after this stage.
+    #   @return [String]
+    #
     # @!attribute [rw] deployment_configuration
     #   Optional deployment parameters that control how many tasks run
     #   during a deployment and the ordering of stopping and starting tasks.
@@ -10241,6 +10646,7 @@ module Aws::ECS
       :target_service_revision,
       :status,
       :status_reason,
+      :lifecycle_stage,
       :deployment_configuration,
       :rollback,
       :deployment_circuit_breaker,
@@ -10837,6 +11243,12 @@ module Aws::ECS
     #   The VPC Lattice configuration for the service revision.
     #   @return [Array<Types::VpcLatticeConfiguration>]
     #
+    # @!attribute [rw] resolved_configuration
+    #   The resolved configuration for the service revision which contains
+    #   the actual resources your service revision uses, such as which
+    #   target groups serve traffic.
+    #   @return [Types::ResolvedConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceRevision AWS API Documentation
     #
     class ServiceRevision < Struct.new(
@@ -10857,7 +11269,32 @@ module Aws::ECS
       :volume_configurations,
       :fargate_ephemeral_storage,
       :created_at,
-      :vpc_lattice_configurations)
+      :vpc_lattice_configurations,
+      :resolved_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resolved load balancer configuration for a service revision. This
+    # includes information about which target groups serve traffic and which
+    # listener rules direct traffic to them.
+    #
+    # @!attribute [rw] target_group_arn
+    #   The Amazon Resource Name (ARN) of the target group associated with
+    #   the service revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] production_listener_rule
+    #   The Amazon Resource Name (ARN) of the production listener rule or
+    #   listener that directs traffic to the target group associated with
+    #   the service revision.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceRevisionLoadBalancer AWS API Documentation
+    #
+    class ServiceRevisionLoadBalancer < Struct.new(
+      :target_group_arn,
+      :production_listener_rule)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13544,6 +13981,10 @@ module Aws::ECS
     #   and stopping them before they have time to come up.
     #   @return [Integer]
     #
+    # @!attribute [rw] deployment_controller
+    #   The deployment controller to use for the service.
+    #   @return [Types::DeploymentController]
+    #
     # @!attribute [rw] enable_execute_command
     #   If `true`, this enables execute command functionality on all task
     #   containers.
@@ -13699,6 +14140,7 @@ module Aws::ECS
       :platform_version,
       :force_new_deployment,
       :health_check_grace_period_seconds,
+      :deployment_controller,
       :enable_execute_command,
       :enable_ecs_managed_tags,
       :load_balancers,

@@ -8,32 +8,88 @@
 module Aws::FreeTier
   module Types
 
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ActivityReward
+      attr_accessor credit: Types::MonetaryAmount
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Credit < ActivityReward
+      end
+      class Unknown < ActivityReward
+      end
+    end
+
+    class ActivitySummary
+      attr_accessor activity_id: ::String
+      attr_accessor title: ::String
+      attr_accessor reward: Types::ActivityReward
+      attr_accessor status: ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETED" | "EXPIRING")
+      SENSITIVE: []
+    end
+
     class DimensionValues
       attr_accessor key: ("SERVICE" | "OPERATION" | "USAGE_TYPE" | "REGION" | "FREE_TIER_TYPE" | "DESCRIPTION" | "USAGE_PERCENTAGE")
-      attr_accessor match_options: ::Array[("EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL")]
       attr_accessor values: ::Array[::String]
+      attr_accessor match_options: ::Array[("EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL")]
       SENSITIVE: []
     end
 
     class Expression
-      attr_accessor and: ::Array[Types::Expression]
-      attr_accessor dimensions: Types::DimensionValues
-      attr_accessor not: Types::Expression
       attr_accessor or: ::Array[Types::Expression]
+      attr_accessor and: ::Array[Types::Expression]
+      attr_accessor not: Types::Expression
+      attr_accessor dimensions: Types::DimensionValues
       SENSITIVE: []
     end
 
     class FreeTierUsage
-      attr_accessor actual_usage_amount: ::Float
-      attr_accessor description: ::String
-      attr_accessor forecasted_usage_amount: ::Float
-      attr_accessor free_tier_type: ::String
-      attr_accessor limit: ::Float
-      attr_accessor operation: ::String
-      attr_accessor region: ::String
       attr_accessor service: ::String
-      attr_accessor unit: ::String
+      attr_accessor operation: ::String
       attr_accessor usage_type: ::String
+      attr_accessor region: ::String
+      attr_accessor actual_usage_amount: ::Float
+      attr_accessor forecasted_usage_amount: ::Float
+      attr_accessor limit: ::Float
+      attr_accessor unit: ::String
+      attr_accessor description: ::String
+      attr_accessor free_tier_type: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccountActivityRequest
+      attr_accessor activity_id: ::String
+      attr_accessor language_code: ("en-US" | "en-GB" | "id-ID" | "de-DE" | "es-ES" | "fr-FR" | "ja-JP" | "it-IT" | "pt-PT" | "ko-KR" | "zh-CN" | "zh-TW" | "tr-TR")
+      SENSITIVE: []
+    end
+
+    class GetAccountActivityResponse
+      attr_accessor activity_id: ::String
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETED" | "EXPIRING")
+      attr_accessor instructions_url: ::String
+      attr_accessor reward: Types::ActivityReward
+      attr_accessor estimated_time_to_complete_in_minutes: ::Integer
+      attr_accessor expires_at: ::Time
+      attr_accessor started_at: ::Time
+      attr_accessor completed_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetAccountPlanStateRequest < Aws::EmptyStructure
+    end
+
+    class GetAccountPlanStateResponse
+      attr_accessor account_id: ::String
+      attr_accessor account_plan_type: ("FREE" | "PAID")
+      attr_accessor account_plan_status: ("NOT_STARTED" | "ACTIVE" | "EXPIRED")
+      attr_accessor account_plan_remaining_credits: Types::MonetaryAmount
+      attr_accessor account_plan_expiration_date: ::Time
       SENSITIVE: []
     end
 
@@ -55,8 +111,45 @@ module Aws::FreeTier
       SENSITIVE: []
     end
 
+    class ListAccountActivitiesRequest
+      attr_accessor filter_activity_statuses: ::Array[("NOT_STARTED" | "IN_PROGRESS" | "COMPLETED" | "EXPIRING")]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor language_code: ("en-US" | "en-GB" | "id-ID" | "de-DE" | "es-ES" | "fr-FR" | "ja-JP" | "it-IT" | "pt-PT" | "ko-KR" | "zh-CN" | "zh-TW" | "tr-TR")
+      SENSITIVE: []
+    end
+
+    class ListAccountActivitiesResponse
+      attr_accessor activities: ::Array[Types::ActivitySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MonetaryAmount
+      attr_accessor amount: ::Float
+      attr_accessor unit: ("USD")
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ThrottlingException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpgradeAccountPlanRequest
+      attr_accessor account_plan_type: ("FREE" | "PAID")
+      SENSITIVE: []
+    end
+
+    class UpgradeAccountPlanResponse
+      attr_accessor account_id: ::String
+      attr_accessor account_plan_type: ("FREE" | "PAID")
+      attr_accessor account_plan_status: ("NOT_STARTED" | "ACTIVE" | "EXPIRED")
       SENSITIVE: []
     end
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.539.0 (2025-07-17)
+------------------
+
+* Feature - AWS Free Tier Version2 Support
+
+1.538.0 (2025-07-15)
+------------------
+
+* Feature - This release adds support for volume initialization status, which enables you to monitor when the initialization process for an EBS volume is completed. This release also adds IPv6 support to EC2 Instance Connect Endpoints, allowing you to connect to your EC2 Instance via a private IPv6 address.
+
+1.537.0 (2025-07-09)
+------------------
+
+* Feature - Adds support to Capacity Blocks for ML for purchasing EC2 P6e-GB200 UltraServers. Customers can now purchase u-p6e-gb200x72 and u-p6e-gb200x36 UltraServers. Adds new DescribeCapacityBlocks andDescribeCapacityBlockStatus APIs. Adds support for CapacityBlockId to DescribeInstanceTopology.
+
 1.536.0 (2025-07-03)
 ------------------
 

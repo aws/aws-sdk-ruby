@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2025-07-18)
+------------------
+
+* Feature - CloudWatchLogs launches GetLogObject API with streaming support for efficient log data retrieval. Logs added support for new AccountPolicy type METRIC_EXTRACTION_POLICY. For more information, see CloudWatch Logs API documentation
+
+1.120.0 (2025-07-16)
+------------------
+
+* Feature - CloudWatch Logs updates: Added X-Ray tracing for Amazon Bedrock Agent resources. Logs introduced Log Group level resource policies (managed through Put/Delete/Describe Resource Policy APIs). For more information, see CloudWatch Logs API documentation.
+
 1.119.0 (2025-06-30)
 ------------------
 

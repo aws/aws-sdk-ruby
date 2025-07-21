@@ -357,6 +357,12 @@ module Aws::Synthetics
     #   where canary scripts reside as ` folder/fileName.functionName `.
     #   @return [String]
     #
+    # @!attribute [rw] dependencies
+    #   A list of dependencies that should be used for running this canary.
+    #   Specify the dependencies as a key-value pair, where the key is the
+    #   type of dependency and the value is the dependency reference.
+    #   @return [Array<Types::Dependency>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/CanaryCodeInput AWS API Documentation
     #
     class CanaryCodeInput < Struct.new(
@@ -364,7 +370,8 @@ module Aws::Synthetics
       :s3_key,
       :s3_version,
       :zip_file,
-      :handler)
+      :handler,
+      :dependencies)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -381,11 +388,18 @@ module Aws::Synthetics
     #   The entry point to use for the source code when running the canary.
     #   @return [String]
     #
+    # @!attribute [rw] dependencies
+    #   A list of dependencies that are used for running this canary. The
+    #   dependencies are specified as a key-value pair, where the key is the
+    #   type of dependency and the value is the dependency reference.
+    #   @return [Array<Types::Dependency>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/CanaryCodeOutput AWS API Documentation
     #
     class CanaryCodeOutput < Struct.new(
       :source_location_arn,
-      :handler)
+      :handler,
+      :dependencies)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1107,6 +1121,31 @@ module Aws::Synthetics
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/DeleteGroupResponse AWS API Documentation
     #
     class DeleteGroupResponse < Aws::EmptyStructure; end
+
+    # A structure that contains information about a dependency for a canary.
+    #
+    # @!attribute [rw] type
+    #   The type of dependency. Valid value is `LambdaLayer`.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference
+    #   The dependency reference. For Lambda layers, this is the ARN of the
+    #   Lambda layer. For more information about Lambda ARN format, see
+    #   [Lambda][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/api/API_Layer.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/Dependency AWS API Documentation
+    #
+    class Dependency < Struct.new(
+      :type,
+      :reference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] next_token
     #   A token that indicates that there is more data available. You can

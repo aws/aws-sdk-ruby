@@ -29,6 +29,12 @@ requests are made, and retries are disabled.
         end
       end
 
+      option(:token_provider) do |config|
+        if config.stub_responses
+          StaticTokenProvider.new('stubbed-token')
+        end
+      end
+
       option(:stubs) { {} }
       option(:stubs_mutex) { Mutex.new }
       option(:api_requests) { [] }

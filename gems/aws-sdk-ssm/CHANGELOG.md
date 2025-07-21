@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.198.0 (2025-07-18)
+------------------
+
+* Feature - July 2025 doc-only updates for Systems Manager.
+
 1.197.0 (2025-06-30)
 ------------------
 

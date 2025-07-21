@@ -404,6 +404,9 @@ module Aws
                            ?aiml_options: {
                              natural_language_query_generation_options: {
                                desired_state: ("ENABLED" | "DISABLED")?
+                             }?,
+                             s3_vectors_engine: {
+                               enabled: bool?
                              }?
                            }
                          ) -> _CreateDomainResponseSuccess
@@ -1351,6 +1354,9 @@ module Aws
                                   ?aiml_options: {
                                     natural_language_query_generation_options: {
                                       desired_state: ("ENABLED" | "DISABLED")?
+                                    }?,
+                                    s3_vectors_engine: {
+                                      enabled: bool?
                                     }?
                                   }
                                 ) -> _UpdateDomainConfigResponseSuccess

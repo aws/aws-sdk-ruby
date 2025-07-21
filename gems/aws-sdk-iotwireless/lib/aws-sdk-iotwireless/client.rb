@@ -779,6 +779,10 @@ module Aws::IoTWireless
     # @option params [String] :name
     #   The name of the new resource.
     #
+    #   <note markdown="1"> The following special characters aren't accepted: `<>^#~$`
+    #
+    #    </note>
+    #
     # @option params [Types::LoRaWANDeviceProfile] :lo_ra_wan
     #   The device profile information to use to create the device profile.
     #
@@ -1132,6 +1136,10 @@ module Aws::IoTWireless
     # @option params [String] :name
     #   The name of the new resource.
     #
+    #   <note markdown="1"> The following special characters aren't accepted: `<>^#~$`
+    #
+    #    </note>
+    #
     # @option params [Types::LoRaWANServiceProfile] :lo_ra_wan
     #   The service profile information to use to create the service profile.
     #
@@ -1201,6 +1209,10 @@ module Aws::IoTWireless
     #
     # @option params [String] :name
     #   The name of the new resource.
+    #
+    #   <note markdown="1"> The following special characters aren't accepted: `<>^#~$`
+    #
+    #    </note>
     #
     # @option params [String] :description
     #   The description of the new resource.
@@ -1347,6 +1359,10 @@ module Aws::IoTWireless
     #
     # @option params [String] :name
     #   The name of the new resource.
+    #
+    #   <note markdown="1"> The following special characters aren't accepted: `<>^#~$`
+    #
+    #    </note>
     #
     # @option params [String] :description
     #   The description of the new resource.
@@ -2738,7 +2754,7 @@ module Aws::IoTWireless
     #
     #   resp = client.get_resource_event_configuration({
     #     identifier: "Identifier", # required
-    #     identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId, DevEui, FuotaTaskId, GatewayEui, WirelessDeviceId, WirelessGatewayId
+    #     identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId, DevEui, GatewayEui, WirelessDeviceId, WirelessGatewayId
     #     partner_type: "Sidewalk", # accepts Sidewalk
     #   })
     #
@@ -3481,7 +3497,7 @@ module Aws::IoTWireless
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_event_configurations({
-    #     resource_type: "FuotaTask", # required, accepts FuotaTask, SidewalkAccount, WirelessDevice, WirelessGateway
+    #     resource_type: "SidewalkAccount", # required, accepts SidewalkAccount, WirelessDevice, WirelessGateway
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -3491,7 +3507,7 @@ module Aws::IoTWireless
     #   resp.next_token #=> String
     #   resp.event_configurations_list #=> Array
     #   resp.event_configurations_list[0].identifier #=> String
-    #   resp.event_configurations_list[0].identifier_type #=> String, one of "PartnerAccountId", "DevEui", "FuotaTaskId", "GatewayEui", "WirelessDeviceId", "WirelessGatewayId"
+    #   resp.event_configurations_list[0].identifier_type #=> String, one of "PartnerAccountId", "DevEui", "GatewayEui", "WirelessDeviceId", "WirelessGatewayId"
     #   resp.event_configurations_list[0].partner_type #=> String, one of "Sidewalk"
     #   resp.event_configurations_list[0].events.device_registration_state.sidewalk.amazon_id_event_topic #=> String, one of "Enabled", "Disabled"
     #   resp.event_configurations_list[0].events.device_registration_state.wireless_device_id_event_topic #=> String, one of "Enabled", "Disabled"
@@ -5148,7 +5164,7 @@ module Aws::IoTWireless
     #
     #   resp = client.update_resource_event_configuration({
     #     identifier: "Identifier", # required
-    #     identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId, DevEui, FuotaTaskId, GatewayEui, WirelessDeviceId, WirelessGatewayId
+    #     identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId, DevEui, GatewayEui, WirelessDeviceId, WirelessGatewayId
     #     partner_type: "Sidewalk", # accepts Sidewalk
     #     device_registration_state: {
     #       sidewalk: {
@@ -5244,6 +5260,10 @@ module Aws::IoTWireless
     # @option params [String] :name
     #   The new name of the resource.
     #
+    #   <note markdown="1"> The following special characters aren't accepted: `<>^#~$`
+    #
+    #    </note>
+    #
     # @option params [String] :description
     #   A new description of the resource.
     #
@@ -5331,6 +5351,10 @@ module Aws::IoTWireless
     # @option params [String] :name
     #   The new name of the resource.
     #
+    #   <note markdown="1"> The following special characters aren't accepted: `<>^#~$`
+    #
+    #    </note>
+    #
     # @option params [String] :description
     #   A new description of the resource.
     #
@@ -5384,7 +5408,7 @@ module Aws::IoTWireless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -682,6 +682,12 @@ module Aws::Synthetics
     #       s3_version: "String",
     #       zip_file: "data",
     #       handler: "CodeHandler", # required
+    #       dependencies: [
+    #         {
+    #           type: "LambdaLayer", # accepts LambdaLayer
+    #           reference: "String", # required
+    #         },
+    #       ],
     #     },
     #     artifact_s3_location: "String", # required
     #     execution_role_arn: "RoleArn", # required
@@ -728,6 +734,9 @@ module Aws::Synthetics
     #   resp.canary.name #=> String
     #   resp.canary.code.source_location_arn #=> String
     #   resp.canary.code.handler #=> String
+    #   resp.canary.code.dependencies #=> Array
+    #   resp.canary.code.dependencies[0].type #=> String, one of "LambdaLayer"
+    #   resp.canary.code.dependencies[0].reference #=> String
     #   resp.canary.execution_role_arn #=> String
     #   resp.canary.schedule.expression #=> String
     #   resp.canary.schedule.duration_in_seconds #=> Integer
@@ -1014,6 +1023,9 @@ module Aws::Synthetics
     #   resp.canaries[0].name #=> String
     #   resp.canaries[0].code.source_location_arn #=> String
     #   resp.canaries[0].code.handler #=> String
+    #   resp.canaries[0].code.dependencies #=> Array
+    #   resp.canaries[0].code.dependencies[0].type #=> String, one of "LambdaLayer"
+    #   resp.canaries[0].code.dependencies[0].reference #=> String
     #   resp.canaries[0].execution_role_arn #=> String
     #   resp.canaries[0].schedule.expression #=> String
     #   resp.canaries[0].schedule.duration_in_seconds #=> Integer
@@ -1263,6 +1275,9 @@ module Aws::Synthetics
     #   resp.canary.name #=> String
     #   resp.canary.code.source_location_arn #=> String
     #   resp.canary.code.handler #=> String
+    #   resp.canary.code.dependencies #=> Array
+    #   resp.canary.code.dependencies[0].type #=> String, one of "LambdaLayer"
+    #   resp.canary.code.dependencies[0].reference #=> String
     #   resp.canary.execution_role_arn #=> String
     #   resp.canary.schedule.expression #=> String
     #   resp.canary.schedule.duration_in_seconds #=> Integer
@@ -1779,6 +1794,12 @@ module Aws::Synthetics
     #       s3_version: "String",
     #       zip_file: "data",
     #       handler: "CodeHandler", # required
+    #       dependencies: [
+    #         {
+    #           type: "LambdaLayer", # accepts LambdaLayer
+    #           reference: "String", # required
+    #         },
+    #       ],
     #     },
     #     runtime_version: "String",
     #     run_config: {
@@ -2112,6 +2133,12 @@ module Aws::Synthetics
     #       s3_version: "String",
     #       zip_file: "data",
     #       handler: "CodeHandler", # required
+    #       dependencies: [
+    #         {
+    #           type: "LambdaLayer", # accepts LambdaLayer
+    #           reference: "String", # required
+    #         },
+    #       ],
     #     },
     #     execution_role_arn: "RoleArn",
     #     runtime_version: "String",
@@ -2185,7 +2212,7 @@ module Aws::Synthetics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-synthetics'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

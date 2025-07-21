@@ -552,6 +552,7 @@ module Aws
         def channel_name: () -> ::String
         def origin_endpoint_name: () -> ::String
         def policy: () -> ::String
+        def cdn_auth_configuration: () -> Types::CdnAuthConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#get_origin_endpoint_policy-instance_method
       def get_origin_endpoint_policy: (
@@ -645,7 +646,11 @@ module Aws
                                         channel_group_name: ::String,
                                         channel_name: ::String,
                                         origin_endpoint_name: ::String,
-                                        policy: ::String
+                                        policy: ::String,
+                                        ?cdn_auth_configuration: {
+                                          cdn_identifier_secret_arns: Array[::String],
+                                          secrets_role_arn: ::String
+                                        }
                                       ) -> _PutOriginEndpointPolicyResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutOriginEndpointPolicyResponseSuccess
 

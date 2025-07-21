@@ -1045,6 +1045,7 @@ module Aws::S3Tables
     #   * {Types::GetTableBucketResponse#owner_account_id #owner_account_id} => String
     #   * {Types::GetTableBucketResponse#created_at #created_at} => Time
     #   * {Types::GetTableBucketResponse#table_bucket_id #table_bucket_id} => String
+    #   * {Types::GetTableBucketResponse#type #type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1059,6 +1060,7 @@ module Aws::S3Tables
     #   resp.owner_account_id #=> String
     #   resp.created_at #=> Time
     #   resp.table_bucket_id #=> String
+    #   resp.type #=> String, one of "customer", "aws"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/GetTableBucket AWS API Documentation
     #
@@ -1519,6 +1521,9 @@ module Aws::S3Tables
     # @option params [Integer] :max_buckets
     #   The maximum number of table buckets to return in the list.
     #
+    # @option params [String] :type
+    #   The type of table buckets to filter by in the list.
+    #
     # @return [Types::ListTableBucketsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTableBucketsResponse#table_buckets #table_buckets} => Array&lt;Types::TableBucketSummary&gt;
@@ -1532,6 +1537,7 @@ module Aws::S3Tables
     #     prefix: "ListTableBucketsRequestPrefixString",
     #     continuation_token: "NextToken",
     #     max_buckets: 1,
+    #     type: "customer", # accepts customer, aws
     #   })
     #
     # @example Response structure
@@ -1542,6 +1548,7 @@ module Aws::S3Tables
     #   resp.table_buckets[0].owner_account_id #=> String
     #   resp.table_buckets[0].created_at #=> Time
     #   resp.table_buckets[0].table_bucket_id #=> String
+    #   resp.table_buckets[0].type #=> String, one of "customer", "aws"
     #   resp.continuation_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/ListTableBuckets AWS API Documentation
@@ -1999,7 +2006,7 @@ module Aws::S3Tables
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3tables'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

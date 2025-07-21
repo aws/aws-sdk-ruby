@@ -1116,6 +1116,7 @@ module Aws::CleanRoomsML
     class ProtectedQueryInputParameters
       attr_accessor sql_parameters: Types::ProtectedQuerySQLParameters
       attr_accessor compute_configuration: Types::ComputeConfiguration
+      attr_accessor result_format: ("CSV" | "PARQUET")
       SENSITIVE: [:sql_parameters]
     end
 

@@ -353,11 +353,13 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] target_distribution_id
-    #   The ID of the distribution that you're associating the alias with.
+    #   The ID of the standard distribution that you're associating the
+    #   alias with.
     #   @return [String]
     #
     # @!attribute [rw] alias
-    #   The alias (also known as a CNAME) to add to the target distribution.
+    #   The alias (also known as a CNAME) to add to the target standard
+    #   distribution.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/AssociateAliasRequest AWS API Documentation
@@ -557,6 +559,14 @@ module Aws::CloudFront
     # @!attribute [rw] trusted_signers
     #   We recommend using `TrustedKeyGroups` instead of `TrustedSigners`.
     #
+    #    <note markdown="1"> This field only supports standard
+    #   distributions. You can't specify
+    #   this field for multi-tenant distributions. For more information, see
+    #   [Unsupported features for SaaS Manager for Amazon CloudFront][1] in
+    #   the *Amazon CloudFront Developer Guide*.
+    #
+    #    </note>
+    #
     #    A list of Amazon Web Services account IDs whose public keys
     #   CloudFront can use to validate signed URLs or signed cookies.
     #
@@ -566,12 +576,13 @@ module Aws::CloudFront
     #   a CloudFront key pair in the trusted signer's Amazon Web Services
     #   account. The signed URL or cookie contains information about which
     #   public key CloudFront should use to verify the signature. For more
-    #   information, see [Serving private content][1] in the *Amazon
+    #   information, see [Serving private content][2] in the *Amazon
     #   CloudFront Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
     #   @return [Types::TrustedSigners]
     #
     # @!attribute [rw] trusted_key_groups
@@ -649,12 +660,24 @@ module Aws::CloudFront
     #   @return [Types::AllowedMethods]
     #
     # @!attribute [rw] smooth_streaming
-    #   Indicates whether you want to distribute media files in the
+    #   <note markdown="1"> This field only supports standard distributions.
+    #   You can't specify
+    #   this field for multi-tenant distributions. For more information, see
+    #   [Unsupported features for SaaS Manager for Amazon CloudFront][1] in
+    #   the *Amazon CloudFront Developer Guide*.
+    #
+    #    </note>
+    #
+    #    Indicates whether you want to distribute media files in the
     #   Microsoft Smooth Streaming format using the origin that is
     #   associated with this cache behavior. If so, specify `true`; if not,
     #   specify `false`. If you specify `true` for `SmoothStreaming`, you
     #   can still distribute other content using this cache behavior if the
     #   content matches the value of `PathPattern`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas
     #   @return [Boolean]
     #
     # @!attribute [rw] compress
@@ -762,70 +785,98 @@ module Aws::CloudFront
     #   @return [Types::ForwardedValues]
     #
     # @!attribute [rw] min_ttl
-    #   This field is deprecated. We recommend that you use the `MinTTL`
-    #   field in a cache policy instead of this field. For more information,
-    #   see [Creating cache policies][1] or [Using the managed cache
-    #   policies][2] in the *Amazon CloudFront Developer Guide*.
+    #   <note markdown="1"> This field only supports standard distributions.
+    #   You can't specify
+    #   this field for multi-tenant distributions. For more information, see
+    #   [Unsupported features for SaaS Manager for Amazon CloudFront][1] in
+    #   the *Amazon CloudFront Developer Guide*.
     #
-    #   The minimum amount of time that you want objects to stay in
+    #    </note>
+    #
+    #    This field is deprecated. We recommend that you use the `MinTTL`
+    #   field in a cache policy instead of this field. For more information,
+    #   see [Creating cache policies][2] or [Using the managed cache
+    #   policies][3] in the *Amazon CloudFront Developer Guide*.
+    #
+    #    The minimum amount of time that you want objects to stay in
     #   CloudFront caches before CloudFront forwards another request to your
     #   origin to determine whether the object has been updated. For more
     #   information, see [ Managing How Long Content Stays in an Edge Cache
-    #   (Expiration)][3] in the <i> Amazon CloudFront Developer Guide</i>.
+    #   (Expiration)][4] in the <i> Amazon CloudFront Developer Guide</i>.
     #
-    #   You must specify `0` for `MinTTL` if you configure CloudFront to
+    #    You must specify `0` for `MinTTL` if you configure CloudFront to
     #   forward all headers to your origin (under `Headers`, if you specify
     #   `1` for `Quantity` and `*` for `Name`).
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
-    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
-    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [4]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
     #   @return [Integer]
     #
     # @!attribute [rw] default_ttl
-    #   This field is deprecated. We recommend that you use the `DefaultTTL`
-    #   field in a cache policy instead of this field. For more information,
-    #   see [Creating cache policies][1] or [Using the managed cache
-    #   policies][2] in the *Amazon CloudFront Developer Guide*.
+    #   <note markdown="1"> This field only supports standard distributions.
+    #   You can't specify
+    #   this field for multi-tenant distributions. For more information, see
+    #   [Unsupported features for SaaS Manager for Amazon CloudFront][1] in
+    #   the *Amazon CloudFront Developer Guide*.
     #
-    #   The default amount of time that you want objects to stay in
+    #    </note>
+    #
+    #    This field is deprecated. We recommend that you use the
+    #   `DefaultTTL`
+    #   field in a cache policy instead of this field. For more information,
+    #   see [Creating cache policies][2] or [Using the managed cache
+    #   policies][3] in the *Amazon CloudFront Developer Guide*.
+    #
+    #    The default amount of time that you want objects to stay in
     #   CloudFront caches before CloudFront forwards another request to your
     #   origin to determine whether the object has been updated. The value
     #   that you specify applies only when your origin does not add HTTP
     #   headers such as `Cache-Control max-age`, `Cache-Control s-maxage`,
     #   and `Expires` to objects. For more information, see [Managing How
-    #   Long Content Stays in an Edge Cache (Expiration)][3] in the *Amazon
+    #   Long Content Stays in an Edge Cache (Expiration)][4] in the *Amazon
     #   CloudFront Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
-    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
-    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [4]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
     #   @return [Integer]
     #
     # @!attribute [rw] max_ttl
-    #   This field is deprecated. We recommend that you use the `MaxTTL`
-    #   field in a cache policy instead of this field. For more information,
-    #   see [Creating cache policies][1] or [Using the managed cache
-    #   policies][2] in the *Amazon CloudFront Developer Guide*.
+    #   <note markdown="1"> This field only supports standard distributions.
+    #   You can't specify
+    #   this field for multi-tenant distributions. For more information, see
+    #   [Unsupported features for SaaS Manager for Amazon CloudFront][1] in
+    #   the *Amazon CloudFront Developer Guide*.
     #
-    #   The maximum amount of time that you want objects to stay in
+    #    </note>
+    #
+    #    This field is deprecated. We recommend that you use the `MaxTTL`
+    #   field in a cache policy instead of this field. For more information,
+    #   see [Creating cache policies][2] or [Using the managed cache
+    #   policies][3] in the *Amazon CloudFront Developer Guide*.
+    #
+    #    The maximum amount of time that you want objects to stay in
     #   CloudFront caches before CloudFront forwards another request to your
     #   origin to determine whether the object has been updated. The value
     #   that you specify applies only when your origin adds HTTP headers
     #   such as `Cache-Control max-age`, `Cache-Control s-maxage`, and
     #   `Expires` to objects. For more information, see [Managing How Long
-    #   Content Stays in an Edge Cache (Expiration)][3] in the *Amazon
+    #   Content Stays in an Edge Cache (Expiration)][4] in the *Amazon
     #   CloudFront Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
-    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
-    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [4]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CacheBehavior AWS API Documentation
@@ -1488,24 +1539,25 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # An alias (also called a CNAME) and the CloudFront distribution and
-    # Amazon Web Services account ID that it's associated with. The
-    # distribution and account IDs are partially hidden, which allows you to
-    # identify the distributions and accounts that you own, but helps to
-    # protect the information of ones that you don't own.
+    # An alias (also called a CNAME) and the CloudFront standard
+    # distribution and Amazon Web Services account ID that it's associated
+    # with. The standard distribution and account IDs are partially hidden,
+    # which allows you to identify the standard distributions and accounts
+    # that you own, and helps to protect the information of ones that you
+    # don't own.
     #
     # @!attribute [rw] alias
     #   An alias (also called a CNAME).
     #   @return [String]
     #
     # @!attribute [rw] distribution_id
-    #   The (partially hidden) ID of the CloudFront distribution associated
-    #   with the alias.
+    #   The (partially hidden) ID of the CloudFront standard distribution
+    #   associated with the alias.
     #   @return [String]
     #
     # @!attribute [rw] account_id
     #   The (partially hidden) ID of the Amazon Web Services account that
-    #   owns the distribution that's associated with the alias.
+    #   owns the standard distribution that's associated with the alias.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ConflictingAlias AWS API Documentation
@@ -1518,12 +1570,12 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A list of aliases (also called CNAMEs) and the CloudFront
+    # A list of aliases (also called CNAMEs) and the CloudFront standard
     # distributions and Amazon Web Services accounts that they are
-    # associated with. In the list, the distribution and account IDs are
-    # partially hidden, which allows you to identify the distributions and
-    # accounts that you own, but helps to protect the information of ones
-    # that you don't own.
+    # associated with. In the list, the standard distribution and account
+    # IDs are partially hidden, which allows you to identify the standard
+    # distributions and accounts that you own, but helps to protect the
+    # information of ones that you don't own.
     #
     # @!attribute [rw] next_marker
     #   If there are more items in the list than are in this response, this
@@ -3336,13 +3388,13 @@ module Aws::CloudFront
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginSSLProtocols
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginSSLProtocols
     #   @return [Types::OriginSslProtocols]
     #
     # @!attribute [rw] origin_read_timeout
     #   Specifies how long, in seconds, CloudFront waits for a response from
     #   the origin. This is also known as the *origin response timeout*. The
-    #   minimum timeout is 1 second, the maximum is 60 seconds, and the
+    #   minimum timeout is 1 second, the maximum is 120 seconds, and the
     #   default (if you don't specify otherwise) is 30 seconds.
     #
     #   For more information, see [Response timeout (custom origins
@@ -3350,12 +3402,12 @@ module Aws::CloudFront
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginResponseTimeout
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginResponseTimeout
     #   @return [Integer]
     #
     # @!attribute [rw] origin_keepalive_timeout
     #   Specifies how long, in seconds, CloudFront persists its connection
-    #   to the origin. The minimum timeout is 1 second, the maximum is 60
+    #   to the origin. The minimum timeout is 1 second, the maximum is 120
     #   seconds, and the default (if you don't specify otherwise) is 5
     #   seconds.
     #
@@ -3364,7 +3416,7 @@ module Aws::CloudFront
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginKeepaliveTimeout
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginKeepaliveTimeout
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CustomOriginConfig AWS API Documentation
@@ -3422,6 +3474,14 @@ module Aws::CloudFront
     # @!attribute [rw] trusted_signers
     #   We recommend using `TrustedKeyGroups` instead of `TrustedSigners`.
     #
+    #    <note markdown="1"> This field only supports standard
+    #   distributions. You can't specify
+    #   this field for multi-tenant distributions. For more information, see
+    #   [Unsupported features for SaaS Manager for Amazon CloudFront][1] in
+    #   the *Amazon CloudFront Developer Guide*.
+    #
+    #    </note>
+    #
     #    A list of Amazon Web Services account IDs whose public keys
     #   CloudFront can use to validate signed URLs or signed cookies.
     #
@@ -3431,12 +3491,13 @@ module Aws::CloudFront
     #   a CloudFront key pair in a trusted signer's Amazon Web Services
     #   account. The signed URL or cookie contains information about which
     #   public key CloudFront should use to verify the signature. For more
-    #   information, see [Serving private content][1] in the *Amazon
+    #   information, see [Serving private content][2] in the *Amazon
     #   CloudFront Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
     #   @return [Types::TrustedSigners]
     #
     # @!attribute [rw] trusted_key_groups
@@ -3514,12 +3575,24 @@ module Aws::CloudFront
     #   @return [Types::AllowedMethods]
     #
     # @!attribute [rw] smooth_streaming
-    #   Indicates whether you want to distribute media files in the
+    #   <note markdown="1"> This field only supports standard distributions.
+    #   You can't specify
+    #   this field for multi-tenant distributions. For more information, see
+    #   [Unsupported features for SaaS Manager for Amazon CloudFront][1] in
+    #   the *Amazon CloudFront Developer Guide*.
+    #
+    #    </note>
+    #
+    #    Indicates whether you want to distribute media files in the
     #   Microsoft Smooth Streaming format using the origin that is
     #   associated with this cache behavior. If so, specify `true`; if not,
     #   specify `false`. If you specify `true` for `SmoothStreaming`, you
     #   can still distribute other content using this cache behavior if the
     #   content matches the value of `PathPattern`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas
     #   @return [Boolean]
     #
     # @!attribute [rw] compress
@@ -3627,70 +3700,98 @@ module Aws::CloudFront
     #   @return [Types::ForwardedValues]
     #
     # @!attribute [rw] min_ttl
-    #   This field is deprecated. We recommend that you use the `MinTTL`
-    #   field in a cache policy instead of this field. For more information,
-    #   see [Creating cache policies][1] or [Using the managed cache
-    #   policies][2] in the *Amazon CloudFront Developer Guide*.
+    #   <note markdown="1"> This field only supports standard distributions.
+    #   You can't specify
+    #   this field for multi-tenant distributions. For more information, see
+    #   [Unsupported features for SaaS Manager for Amazon CloudFront][1] in
+    #   the *Amazon CloudFront Developer Guide*.
     #
-    #   The minimum amount of time that you want objects to stay in
+    #    </note>
+    #
+    #    This field is deprecated. We recommend that you use the `MinTTL`
+    #   field in a cache policy instead of this field. For more information,
+    #   see [Creating cache policies][2] or [Using the managed cache
+    #   policies][3] in the *Amazon CloudFront Developer Guide*.
+    #
+    #    The minimum amount of time that you want objects to stay in
     #   CloudFront caches before CloudFront forwards another request to your
     #   origin to determine whether the object has been updated. For more
     #   information, see [Managing How Long Content Stays in an Edge Cache
-    #   (Expiration)][3] in the *Amazon CloudFront Developer Guide*.
+    #   (Expiration)][4] in the *Amazon CloudFront Developer Guide*.
     #
-    #   You must specify `0` for `MinTTL` if you configure CloudFront to
+    #    You must specify `0` for `MinTTL` if you configure CloudFront to
     #   forward all headers to your origin (under `Headers`, if you specify
     #   `1` for `Quantity` and `*` for `Name`).
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
-    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
-    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [4]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
     #   @return [Integer]
     #
     # @!attribute [rw] default_ttl
-    #   This field is deprecated. We recommend that you use the `DefaultTTL`
-    #   field in a cache policy instead of this field. For more information,
-    #   see [Creating cache policies][1] or [Using the managed cache
-    #   policies][2] in the *Amazon CloudFront Developer Guide*.
+    #   <note markdown="1"> This field only supports standard distributions.
+    #   You can't specify
+    #   this field for multi-tenant distributions. For more information, see
+    #   [Unsupported features for SaaS Manager for Amazon CloudFront][1] in
+    #   the *Amazon CloudFront Developer Guide*.
     #
-    #   The default amount of time that you want objects to stay in
+    #    </note>
+    #
+    #    This field is deprecated. We recommend that you use the
+    #   `DefaultTTL`
+    #   field in a cache policy instead of this field. For more information,
+    #   see [Creating cache policies][2] or [Using the managed cache
+    #   policies][3] in the *Amazon CloudFront Developer Guide*.
+    #
+    #    The default amount of time that you want objects to stay in
     #   CloudFront caches before CloudFront forwards another request to your
     #   origin to determine whether the object has been updated. The value
     #   that you specify applies only when your origin does not add HTTP
     #   headers such as `Cache-Control max-age`, `Cache-Control s-maxage`,
     #   and `Expires` to objects. For more information, see [Managing How
-    #   Long Content Stays in an Edge Cache (Expiration)][3] in the *Amazon
+    #   Long Content Stays in an Edge Cache (Expiration)][4] in the *Amazon
     #   CloudFront Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
-    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
-    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [4]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
     #   @return [Integer]
     #
     # @!attribute [rw] max_ttl
-    #   This field is deprecated. We recommend that you use the `MaxTTL`
-    #   field in a cache policy instead of this field. For more information,
-    #   see [Creating cache policies][1] or [Using the managed cache
-    #   policies][2] in the *Amazon CloudFront Developer Guide*.
+    #   <note markdown="1"> This field only supports standard distributions.
+    #   You can't specify
+    #   this field for multi-tenant distributions. For more information, see
+    #   [Unsupported features for SaaS Manager for Amazon CloudFront][1] in
+    #   the *Amazon CloudFront Developer Guide*.
     #
-    #   The maximum amount of time that you want objects to stay in
+    #    </note>
+    #
+    #    This field is deprecated. We recommend that you use the `MaxTTL`
+    #   field in a cache policy instead of this field. For more information,
+    #   see [Creating cache policies][2] or [Using the managed cache
+    #   policies][3] in the *Amazon CloudFront Developer Guide*.
+    #
+    #    The maximum amount of time that you want objects to stay in
     #   CloudFront caches before CloudFront forwards another request to your
     #   origin to determine whether the object has been updated. The value
     #   that you specify applies only when your origin adds HTTP headers
     #   such as `Cache-Control max-age`, `Cache-Control s-maxage`, and
     #   `Expires` to objects. For more information, see [Managing How Long
-    #   Content Stays in an Edge Cache (Expiration)][3] in the *Amazon
+    #   Content Stays in an Edge Cache (Expiration)][4] in the *Amazon
     #   CloudFront Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
-    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
-    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [4]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DefaultCacheBehavior AWS API Documentation
@@ -4406,8 +4507,20 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] aliases
-    #   A complex type that contains information about CNAMEs (alternate
+    #   <note markdown="1"> This field only supports standard distributions.
+    #   You can't specify
+    #   this field for multi-tenant distributions. For more information, see
+    #   [Unsupported features for SaaS Manager for Amazon CloudFront][1] in
+    #   the *Amazon CloudFront Developer Guide*.
+    #
+    #    </note>
+    #
+    #    A complex type that contains information about CNAMEs (alternate
     #   domain names), if any, for this distribution.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas
     #   @return [Types::Aliases]
     #
     # @!attribute [rw] default_root_object
@@ -4501,27 +4614,37 @@ module Aws::CloudFront
     #   @return [Types::LoggingConfig]
     #
     # @!attribute [rw] price_class
-    #   The price class that corresponds with the maximum price that you
+    #   <note markdown="1"> This field only supports standard distributions.
+    #   You can't specify
+    #   this field for multi-tenant distributions. For more information, see
+    #   [Unsupported features for SaaS Manager for Amazon CloudFront][1] in
+    #   the *Amazon CloudFront Developer Guide*.
+    #
+    #    </note>
+    #
+    #    The price class that corresponds with the maximum price that you
     #   want to pay for CloudFront service. If you specify `PriceClass_All`,
     #   CloudFront responds to requests for your objects from all CloudFront
     #   edge locations.
     #
-    #   If you specify a price class other than `PriceClass_All`, CloudFront
+    #    If you specify a price class other than `PriceClass_All`,
+    #   CloudFront
     #   serves your objects from the CloudFront edge location that has the
     #   lowest latency among the edge locations in your price class. Viewers
     #   who are in or near regions that are excluded from your specified
     #   price class may encounter slower performance.
     #
-    #   For more information about price classes, see [Choosing the Price
-    #   Class for a CloudFront Distribution][1] in the *Amazon CloudFront
+    #    For more information about price classes, see [Choosing the Price
+    #   Class for a CloudFront Distribution][2] in the *Amazon CloudFront
     #   Developer Guide*. For information about CloudFront pricing,
     #   including how price classes (such as Price Class 100) map to
-    #   CloudFront regions, see [Amazon CloudFront Pricing][2].
+    #   CloudFront regions, see [Amazon CloudFront Pricing][3].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PriceClass.html
-    #   [2]: http://aws.amazon.com/cloudfront/pricing/
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PriceClass.html
+    #   [3]: http://aws.amazon.com/cloudfront/pricing/
     #   @return [String]
     #
     # @!attribute [rw] enabled
@@ -4540,14 +4663,20 @@ module Aws::CloudFront
     #   @return [Types::Restrictions]
     #
     # @!attribute [rw] web_acl_id
-    #   A unique identifier that specifies the WAF web ACL, if any, to
+    #   <note markdown="1"> Multi-tenant distributions only support WAF V2
+    #   web ACLs.
+    #
+    #    </note>
+    #
+    #    A unique identifier that specifies the WAF web ACL, if any, to
     #   associate with this distribution. To specify a web ACL created using
     #   the latest version of WAF, use the ACL ARN, for example
     #   `arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
     #   To specify a web ACL created using WAF Classic, use the ACL ID, for
     #   example `a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
     #
-    #   WAF is a web application firewall that lets you monitor the HTTP and
+    #    WAF is a web application firewall that lets you monitor the HTTP
+    #   and
     #   HTTPS requests that are forwarded to CloudFront, and lets you
     #   control access to your content. Based on conditions that you
     #   specify, such as the IP addresses that requests originate from or
@@ -4586,14 +4715,20 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] is_ipv6_enabled
-    #   If you want CloudFront to respond to IPv6 DNS requests with an IPv6
+    #   <note markdown="1"> To use this field for a multi-tenant
+    #   distribution, use a connection
+    #   group instead. For more information, see [ConnectionGroup][1].
+    #
+    #    </note>
+    #
+    #    If you want CloudFront to respond to IPv6 DNS requests with an IPv6
     #   address for your distribution, specify `true`. If you specify
     #   `false`, CloudFront responds to IPv6 DNS requests with the DNS
     #   response code `NOERROR` and with no IP addresses. This allows
     #   viewers to submit a second request, for an IPv4 address for your
     #   distribution.
     #
-    #   In general, you should enable IPv6 if you have users on IPv6
+    #    In general, you should enable IPv6 if you have users on IPv6
     #   networks who want to access your content. However, if you're using
     #   signed URLs or signed cookies to restrict access to your content,
     #   and if you're using a custom policy that includes the `IpAddress`
@@ -4602,22 +4737,22 @@ module Aws::CloudFront
     #   by IP address and not restrict access to other content (or restrict
     #   access but not by IP address), you can create two distributions. For
     #   more information, see [Creating a Signed URL Using a Custom
-    #   Policy][1] in the *Amazon CloudFront Developer Guide*.
+    #   Policy][2] in the *Amazon CloudFront Developer Guide*.
     #
-    #   If you're using an Route 53 Amazon Web Services Integration alias
+    #    If you're using an Route 53 Amazon Web Services Integration alias
     #   resource record set to route traffic to your CloudFront
     #   distribution, you need to create a second alias resource record set
     #   when both of the following are true:
     #
-    #   * You enable IPv6 for the distribution
+    #    * You enable IPv6 for the distribution
     #
     #   * You're using alternate domain names in the URLs for your objects
     #
-    #   For more information, see [Routing Traffic to an Amazon CloudFront
-    #   Web Distribution by Using Your Domain Name][2] in the *Route 53
+    #    For more information, see [Routing Traffic to an Amazon CloudFront
+    #   Web Distribution by Using Your Domain Name][3] in the *Route 53
     #   Amazon Web Services Integration Developer Guide*.
     #
-    #   If you created a CNAME resource record set, either with Route 53
+    #    If you created a CNAME resource record set, either with Route 53
     #   Amazon Web Services Integration or with another DNS service, you
     #   don't need to make any changes. A CNAME record will route traffic
     #   to your distribution regardless of the IP address format of the
@@ -4625,32 +4760,81 @@ module Aws::CloudFront
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-creating-signed-url-custom-policy.html
-    #   [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html
+    #   [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ConnectionGroup.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-creating-signed-url-custom-policy.html
+    #   [3]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html
     #   @return [Boolean]
     #
     # @!attribute [rw] continuous_deployment_policy_id
-    #   The identifier of a continuous deployment policy. For more
+    #   <note markdown="1"> This field only supports standard distributions.
+    #   You can't specify
+    #   this field for multi-tenant distributions. For more information, see
+    #   [Unsupported features for SaaS Manager for Amazon CloudFront][1] in
+    #   the *Amazon CloudFront Developer Guide*.
+    #
+    #    </note>
+    #
+    #    The identifier of a continuous deployment policy. For more
     #   information, see `CreateContinuousDeploymentPolicy`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas
     #   @return [String]
     #
     # @!attribute [rw] staging
-    #   A Boolean that indicates whether this is a staging distribution.
+    #   <note markdown="1"> This field only supports standard distributions.
+    #   You can't specify
+    #   this field for multi-tenant distributions. For more information, see
+    #   [Unsupported features for SaaS Manager for Amazon CloudFront][1] in
+    #   the *Amazon CloudFront Developer Guide*.
+    #
+    #    </note>
+    #
+    #    A Boolean that indicates whether this is a staging distribution.
     #   When this value is `true`, this is a staging distribution. When this
     #   value is `false`, this is not a staging distribution.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas
     #   @return [Boolean]
     #
     # @!attribute [rw] anycast_ip_list_id
-    #   ID of the Anycast static IP list that is associated with the
+    #   <note markdown="1"> To use this field for a multi-tenant
+    #   distribution, use a connection
+    #   group instead. For more information, see [ConnectionGroup][1].
+    #
+    #    </note>
+    #
+    #    ID of the Anycast static IP list that is associated with the
     #   distribution.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ConnectionGroup.html
     #   @return [String]
     #
     # @!attribute [rw] tenant_config
-    #   A distribution tenant configuration.
+    #   <note markdown="1"> This field only supports multi-tenant
+    #   distributions. You can't
+    #   specify this field for standard distributions. For more information,
+    #   see [Unsupported features for SaaS Manager for Amazon CloudFront][1]
+    #   in the *Amazon CloudFront Developer Guide*.
+    #
+    #    </note>
+    #
+    #    A distribution tenant configuration.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas
     #   @return [Types::TenantConfig]
     #
     # @!attribute [rw] connection_mode
-    #   The connection mode to filter distributions by.
+    #   This field specifies whether the connection mode is through a
+    #   standard distribution (direct) or a multi-tenant distribution with
+    #   distribution tenants(tenant-only).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DistributionConfig AWS API Documentation
@@ -4893,8 +5077,20 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] price_class
-    #   A complex type that contains information about price class for this
+    #   <note markdown="1"> This field only supports standard distributions.
+    #   You can't specify
+    #   this field for multi-tenant distributions. For more information, see
+    #   [Unsupported features for SaaS Manager for Amazon CloudFront][1] in
+    #   the *Amazon CloudFront Developer Guide*.
+    #
+    #    </note>
+    #
+    #    A complex type that contains information about price class for this
     #   streaming distribution.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas
     #   @return [String]
     #
     # @!attribute [rw] enabled
@@ -4951,7 +5147,9 @@ module Aws::CloudFront
     #   @return [Boolean]
     #
     # @!attribute [rw] connection_mode
-    #   The connection mode to filter distributions by.
+    #   This field specifies whether the connection mode is through a
+    #   standard distribution (direct) or a multi-tenant distribution with
+    #   distribution tenants(tenant-only).
     #   @return [String]
     #
     # @!attribute [rw] anycast_ip_list_id
@@ -5750,25 +5948,34 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # This field is deprecated. We recommend that you use a cache policy or
+    # <note markdown="1"> This field only supports standard distributions.
+    # You can't specify
+    # this field for multi-tenant distributions. For more information, see
+    # [Unsupported features for SaaS Manager for Amazon CloudFront][1] in
+    # the *Amazon CloudFront Developer Guide*.
+    #
+    #  </note>
+    #
+    #  This field is deprecated. We recommend that you use a cache policy or
     # an origin request policy instead of this field.
     #
-    # If you want to include values in the cache key, use a cache policy.
-    # For more information, see [Creating cache policies][1] in the *Amazon
+    #  If you want to include values in the cache key, use a cache policy.
+    # For more information, see [Creating cache policies][2] in the *Amazon
     # CloudFront Developer Guide*.
     #
-    # If you want to send values to the origin but not include them in the
+    #  If you want to send values to the origin but not include them in the
     # cache key, use an origin request policy. For more information, see
-    # [Creating origin request policies][2] in the *Amazon CloudFront
+    # [Creating origin request policies][3] in the *Amazon CloudFront
     # Developer Guide*.
     #
-    # A complex type that specifies how CloudFront handles query strings,
+    #  A complex type that specifies how CloudFront handles query strings,
     # cookies, and HTTP headers.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
-    # [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas
+    # [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    # [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
     #
     # @!attribute [rw] query_string
     #   This field is deprecated. We recommend that you use a cache policy
@@ -8507,8 +8714,8 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] distribution_id
-    #   The ID of a distribution in your account that has an attached
-    #   SSL/TLS certificate that includes the provided alias.
+    #   The ID of a standard distribution in your account that has an
+    #   attached TLS certificate that includes the provided alias.
     #   @return [String]
     #
     # @!attribute [rw] alias
@@ -8802,7 +9009,9 @@ module Aws::CloudFront
     #   @return [Integer]
     #
     # @!attribute [rw] connection_mode
-    #   The connection mode to filter distributions by.
+    #   This field specifies whether the connection mode is through a
+    #   standard distribution (direct) or a multi-tenant distribution with
+    #   distribution tenants(tenant-only).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByConnectionModeRequest AWS API Documentation
@@ -9125,9 +9334,9 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] domain_control_validation_resource
-    #   The distribution resource identifier. This can be the distribution
-    #   or distribution tenant that has a valid certificate, which covers
-    #   the domain that you specify.
+    #   The distribution resource identifier. This can be the standard
+    #   distribution or distribution tenant that has a valid certificate,
+    #   which covers the domain that you specify.
     #   @return [Types::DistributionResourceId]
     #
     # @!attribute [rw] max_items
@@ -13406,7 +13615,19 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # The configuration for a distribution tenant.
+    # <note markdown="1"> This field only supports multi-tenant
+    # distributions. You can't
+    # specify this field for standard distributions. For more information,
+    # see [Unsupported features for SaaS Manager for Amazon CloudFront][1]
+    # in the *Amazon CloudFront Developer Guide*.
+    #
+    #  </note>
+    #
+    #  The configuration for a distribution tenant.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas
     #
     # @!attribute [rw] parameter_definitions
     #   The parameters that you specify for a distribution tenant.
@@ -14895,12 +15116,13 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] target_resource
-    #   The target distribution resource for the domain. You can specify
-    #   either `DistributionId` or `DistributionTenantId`, but not both.
+    #   The target standard distribution or distribution tenant resource for
+    #   the domain. You can specify either `DistributionId` or
+    #   `DistributionTenantId`, but not both.
     #   @return [Types::DistributionResourceId]
     #
     # @!attribute [rw] if_match
-    #   The value of the `ETag` identifier for the distribution or
+    #   The value of the `ETag` identifier for the standard distribution or
     #   distribution tenant that will be associated with the domain.
     #   @return [String]
     #
@@ -14923,8 +15145,8 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] etag
-    #   The current version of the target distribution or distribution
-    #   tenant that was associated with the domain.
+    #   The current version of the target standard distribution or
+    #   distribution tenant that was associated with the domain.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateDomainAssociationResult AWS API Documentation
@@ -15589,16 +15811,25 @@ module Aws::CloudFront
     #   @return [Boolean]
     #
     # @!attribute [rw] iam_certificate_id
-    #   If the distribution uses `Aliases` (alternate domain names or
-    #   CNAMEs) and the SSL/TLS certificate is stored in [Identity and
-    #   Access Management (IAM)][1], provide the ID of the IAM certificate.
+    #   <note markdown="1"> This field only supports standard distributions.
+    #   You can't specify
+    #   this field for multi-tenant distributions. For more information, see
+    #   [Unsupported features for SaaS Manager for Amazon CloudFront][1] in
+    #   the *Amazon CloudFront Developer Guide*.
     #
-    #   If you specify an IAM certificate ID, you must also specify values
+    #    </note>
+    #
+    #    If the distribution uses `Aliases` (alternate domain names or
+    #   CNAMEs) and the SSL/TLS certificate is stored in [Identity and
+    #   Access Management (IAM)][2], provide the ID of the IAM certificate.
+    #
+    #    If you specify an IAM certificate ID, you must also specify values
     #   for `MinimumProtocolVersion` and `SSLSupportMethod`.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html
     #   @return [String]
     #
     # @!attribute [rw] acm_certificate_arn
@@ -15763,7 +15994,7 @@ module Aws::CloudFront
     # @!attribute [rw] origin_read_timeout
     #   Specifies how long, in seconds, CloudFront waits for a response from
     #   the origin. This is also known as the *origin response timeout*. The
-    #   minimum timeout is 1 second, the maximum is 60 seconds, and the
+    #   minimum timeout is 1 second, the maximum is 120 seconds, and the
     #   default (if you don't specify otherwise) is 30 seconds.
     #
     #   For more information, see [Response timeout (custom origins
@@ -15771,12 +16002,12 @@ module Aws::CloudFront
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginResponseTimeout
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginResponseTimeout
     #   @return [Integer]
     #
     # @!attribute [rw] origin_keepalive_timeout
     #   Specifies how long, in seconds, CloudFront persists its connection
-    #   to the origin. The minimum timeout is 1 second, the maximum is 60
+    #   to the origin. The minimum timeout is 1 second, the maximum is 120
     #   seconds, and the default (if you don't specify otherwise) is 5
     #   seconds.
     #
@@ -15785,7 +16016,7 @@ module Aws::CloudFront
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginKeepaliveTimeout
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginKeepaliveTimeout
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/VpcOriginConfig AWS API Documentation

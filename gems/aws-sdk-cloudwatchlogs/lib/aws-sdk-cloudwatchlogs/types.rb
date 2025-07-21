@@ -1079,7 +1079,7 @@ module Aws::CloudWatchLogs
 
     # @!attribute [rw] name
     #   The name of the delivery destination that you want to delete. You
-    #   can find a list of delivery destionation names by using the
+    #   can find a list of delivery destination names by using the
     #   [DescribeDeliveryDestinations][1] operation.
     #
     #
@@ -1303,10 +1303,23 @@ module Aws::CloudWatchLogs
     #   The name of the policy to be revoked. This parameter is required.
     #   @return [String]
     #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the CloudWatch Logs resource for which the resource
+    #   policy needs to be deleted
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_revision_id
+    #   The expected revision ID of the resource policy. Required when
+    #   deleting a resource-scoped policy to prevent concurrent
+    #   modifications.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteResourcePolicyRequest AWS API Documentation
     #
     class DeleteResourcePolicyRequest < Struct.new(
-      :policy_name)
+      :policy_name,
+      :resource_arn,
+      :expected_revision_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1391,7 +1404,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] delivery_destination_type
     #   Displays whether the delivery destination associated with this
-    #   delivery is CloudWatch Logs, Amazon S3, or Firehose.
+    #   delivery is CloudWatch Logs, Amazon S3, Firehose, or X-Ray.
     #   @return [String]
     #
     # @!attribute [rw] record_fields
@@ -1432,8 +1445,8 @@ module Aws::CloudWatchLogs
     # This structure contains information about one *delivery destination*
     # in your account. A delivery destination is an Amazon Web Services
     # resource that represents an Amazon Web Services service that logs can
-    # be sent to. CloudWatch Logs, Amazon S3, are supported as Firehose
-    # delivery destinations.
+    # be sent to. CloudWatch Logs, Amazon S3, Firehose, and X-Ray are
+    # supported as delivery destinations.
     #
     # To configure logs delivery between a supported Amazon Web Services
     # service and a destination, you must do the following:
@@ -1475,7 +1488,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] delivery_destination_type
     #   Displays whether this delivery destination is CloudWatch Logs,
-    #   Amazon S3, or Firehose.
+    #   Amazon S3, Firehose, or X-Ray.
     #   @return [String]
     #
     # @!attribute [rw] output_format
@@ -2025,9 +2038,10 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_group_name_pattern
     #   If you specify a string for this parameter, the operation returns
     #   only log groups that have names that match the string based on a
-    #   case-sensitive substring search. For example, if you specify `Foo`,
-    #   log groups named `FooBar`, `aws/Foo`, and `GroupFoo` would match,
-    #   but `foo`, `F/o/o` and `Froo` would not match.
+    #   case-sensitive substring search. For example, if you specify
+    #   `DataLogs`, log groups named `DataLogs`, `aws/DataLogs`, and
+    #   `GroupDataLogs` would match, but `datalogs`, `Data/log/s` and
+    #   `Groupdata` would not match.
     #
     #   If you specify `logGroupNamePattern` in your request, then only
     #   `arn`, `creationTime`, and `logGroupName` are included in the
@@ -2407,11 +2421,23 @@ module Aws::CloudWatchLogs
     #   call of this API.
     #   @return [Integer]
     #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the CloudWatch Logs resource for which to query the
+    #   resource policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_scope
+    #   Specifies the scope of the resource policy. Valid values are
+    #   `ACCOUNT` or `RESOURCE`. When not specified, defaults to `ACCOUNT`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeResourcePoliciesRequest AWS API Documentation
     #
     class DescribeResourcePoliciesRequest < Struct.new(
       :next_token,
-      :limit)
+      :limit,
+      :resource_arn,
+      :policy_scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2746,6 +2772,25 @@ module Aws::CloudWatchLogs
       :last_scan_time,
       :first_event_time,
       :last_event_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure containing the extracted fields from a log event. These
+    # fields are extracted based on the log format and can be used for
+    # structured querying and analysis.
+    #
+    # @!attribute [rw] data
+    #   The actual log data content returned in the streaming response. This
+    #   contains the fields and values of the log event in a structured
+    #   format that can be parsed and processed by the client.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/FieldsData AWS API Documentation
+    #
+    class FieldsData < Struct.new(
+      :data,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3354,6 +3399,46 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # The parameters for the GetLogObject operation.
+    #
+    # @!attribute [rw] unmask
+    #   A boolean flag that indicates whether to unmask sensitive log data.
+    #   When set to true, any masked or redacted data in the log object will
+    #   be displayed in its original form. Default is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] log_object_pointer
+    #   A pointer to the specific log object to retrieve. This is a required
+    #   parameter that uniquely identifies the log object within CloudWatch
+    #   Logs. The pointer is typically obtained from a previous query or
+    #   filter operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogObjectRequest AWS API Documentation
+    #
+    class GetLogObjectRequest < Struct.new(
+      :unmask,
+      :log_object_pointer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response from the GetLogObject operation.
+    #
+    # @!attribute [rw] field_stream
+    #   A stream of structured log data returned by the GetLogObject
+    #   operation. This stream contains log events with their associated
+    #   metadata and extracted fields.
+    #   @return [Types::GetLogObjectResponseStream]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogObjectResponse AWS API Documentation
+    #
+    class GetLogObjectResponse < Struct.new(
+      :field_stream)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] log_record_pointer
     #   The pointer corresponding to the log event record you want to
     #   retrieve. You get this from the response of a `GetQueryResults`
@@ -3659,6 +3744,22 @@ module Aws::CloudWatchLogs
       :integration_name,
       :integration_type,
       :integration_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An internal error occurred during the streaming of log data. This
+    # exception is thrown when there's an issue with the internal streaming
+    # mechanism used by the GetLogObject operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/InternalStreamingException AWS API Documentation
+    #
+    class InternalStreamingException < Struct.new(
+      :message,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5715,8 +5816,8 @@ module Aws::CloudWatchLogs
     #   @return [Types::ParseRoute53]
     #
     # @!attribute [rw] parse_to_ocsf
-    #   Use this processor to convert logs into Open Cybersecurity Schema
-    #   Framework (OCSF) format
+    #   Use this parameter to convert logs into Open Cybersecurity Schema
+    #   (OCSF) format.
     #   @return [Types::ParseToOCSF]
     #
     # @!attribute [rw] parse_postgres
@@ -5965,7 +6066,7 @@ module Aws::CloudWatchLogs
     #   Use this parameter to apply the new policy to a subset of log groups
     #   in the account.
     #
-    #   Specifing `selectionCriteria` is valid only when you specify
+    #   Specifying `selectionCriteria` is valid only when you specify
     #   `SUBSCRIPTION_FILTER_POLICY`, `FIELD_INDEX_POLICY` or
     #   `TRANSFORMER_POLICY`for `policyType`.
     #
@@ -6132,7 +6233,33 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] delivery_destination_configuration
     #   A structure that contains the ARN of the Amazon Web Services
     #   resource that will receive the logs.
+    #
+    #   <note markdown="1"> `deliveryDestinationConfiguration` is required for CloudWatch Logs,
+    #   Amazon S3, Firehose log delivery destinations and not required for
+    #   X-Ray trace delivery destinations. `deliveryDestinationType` is
+    #   needed for X-Ray trace delivery destinations but not required for
+    #   other logs delivery destinations.
+    #
+    #    </note>
     #   @return [Types::DeliveryDestinationConfiguration]
+    #
+    # @!attribute [rw] delivery_destination_type
+    #   The type of delivery destination. This parameter specifies the
+    #   target service where log data will be delivered. Valid values
+    #   include:
+    #
+    #   * `S3` - Amazon S3 for long-term storage and analytics
+    #
+    #   * `CWL` - CloudWatch Logs for centralized log management
+    #
+    #   * `FH` - Amazon Kinesis Data Firehose for real-time data streaming
+    #
+    #   * `XRAY` - Amazon Web Services X-Ray for distributed tracing and
+    #     application monitoring
+    #
+    #   The delivery destination type determines the format and
+    #   configuration options available for log delivery.
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   An optional list of key-value pairs to associate with the resource.
@@ -6151,6 +6278,7 @@ module Aws::CloudWatchLogs
       :name,
       :output_format,
       :delivery_destination_configuration,
+      :delivery_destination_type,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -6183,7 +6311,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_type
     #   Defines the type of log that the source is sending.
     #
-    #   * For Amazon Bedrock, the valid value is `APPLICATION_LOGS`.
+    #   * For Amazon Bedrock, the valid value is `APPLICATION_LOGS` and
+    #     `TRACES`.
     #
     #   * For CloudFront, the valid value is `ACCESS_LOGS`.
     #
@@ -6200,6 +6329,9 @@ module Aws::CloudWatchLogs
     #
     #   * For IAM Identity Center, the valid value is `ERROR_LOGS`.
     #
+    #   * For PCS, the valid values are `PCS_SCHEDULER_LOGS` and
+    #     `PCS_JOBCOMP_LOGS`.
+    #
     #   * For Amazon Q, the valid value is `EVENT_LOGS`.
     #
     #   * For Amazon SES mail manager, the valid values are
@@ -6209,6 +6341,8 @@ module Aws::CloudWatchLogs
     #     `AUTHENTICATION_LOGS`, `WORKMAIL_AVAILABILITY_PROVIDER_LOGS`,
     #     `WORKMAIL_MAILBOX_ACCESS_LOGS`, and
     #     `WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS`.
+    #
+    #   * For Amazon VPC Route Server, the valid value is `EVENT_LOGS`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -6669,11 +6803,24 @@ module Aws::CloudWatchLogs
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount
     #   @return [String]
     #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the CloudWatch Logs resource to which the resource policy
+    #   needs to be added or attached. Currently only supports LogGroup ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_revision_id
+    #   The expected revision ID of the resource policy. Required when
+    #   `resourceArn` is provided to prevent concurrent modifications. Use
+    #   `null` when creating a resource policy for the first time.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutResourcePolicyRequest AWS API Documentation
     #
     class PutResourcePolicyRequest < Struct.new(
       :policy_name,
-      :policy_document)
+      :policy_document,
+      :resource_arn,
+      :expected_revision_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6682,10 +6829,16 @@ module Aws::CloudWatchLogs
     #   The new policy.
     #   @return [Types::ResourcePolicy]
     #
+    # @!attribute [rw] revision_id
+    #   The revision ID of the created or updated resource policy. Only
+    #   returned for resource-scoped policies.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutResourcePolicyResponse AWS API Documentation
     #
     class PutResourcePolicyResponse < Struct.new(
-      :resource_policy)
+      :resource_policy,
+      :revision_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7210,12 +7363,30 @@ module Aws::CloudWatchLogs
     #   the number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
     #   @return [Integer]
     #
+    # @!attribute [rw] policy_scope
+    #   Specifies scope of the resource policy. Valid values are ACCOUNT or
+    #   RESOURCE.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the CloudWatch Logs resource to which the resource policy
+    #   is attached. Only populated for resource-scoped policies.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID of the resource policy. Only populated for
+    #   resource-scoped policies.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ResourcePolicy AWS API Documentation
     #
     class ResourcePolicy < Struct.new(
       :policy_name,
       :policy_document,
-      :last_updated_time)
+      :last_updated_time,
+      :policy_scope,
+      :resource_arn,
+      :revision_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8200,6 +8371,26 @@ module Aws::CloudWatchLogs
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ValidationException AWS API Documentation
     #
     class ValidationException < Aws::EmptyStructure; end
+
+    # A stream of structured log data returned by the GetLogObject
+    # operation. This stream contains log events with their associated
+    # metadata and extracted fields.
+    #
+    # EventStream is an Enumerator of Events.
+    #  #event_types #=> Array, returns all modeled event types in the stream
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogObjectResponseStream AWS API Documentation
+    #
+    class GetLogObjectResponseStream < Enumerator
+
+      def event_types
+        [
+          :fields,
+          :internal_streaming_exception
+        ]
+      end
+
+    end
 
     # This object includes the stream returned by your [StartLiveTail][1]
     # request.

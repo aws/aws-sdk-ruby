@@ -501,6 +501,10 @@ module Aws::S3Tables
     #   The unique identifier of the table bucket.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of the table bucket.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/GetTableBucketResponse AWS API Documentation
     #
     class GetTableBucketResponse < Struct.new(
@@ -508,7 +512,8 @@ module Aws::S3Tables
       :name,
       :owner_account_id,
       :created_at,
-      :table_bucket_id)
+      :table_bucket_id,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -988,12 +993,17 @@ module Aws::S3Tables
     #   The maximum number of table buckets to return in the list.
     #   @return [Integer]
     #
+    # @!attribute [rw] type
+    #   The type of table buckets to filter by in the list.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/ListTableBucketsRequest AWS API Documentation
     #
     class ListTableBucketsRequest < Struct.new(
       :prefix,
       :continuation_token,
-      :max_buckets)
+      :max_buckets,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1378,6 +1388,10 @@ module Aws::S3Tables
     #   The system-assigned unique identifier for the table bucket.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of the table bucket.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/TableBucketSummary AWS API Documentation
     #
     class TableBucketSummary < Struct.new(
@@ -1385,7 +1399,8 @@ module Aws::S3Tables
       :name,
       :owner_account_id,
       :created_at,
-      :table_bucket_id)
+      :table_bucket_id,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end

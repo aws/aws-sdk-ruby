@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2025-07-15)
+------------------
+
+* Feature - This release adds support for new filter types in GetProducts API, including EQUALS, CONTAINS, ANY_OF, and NONE_OF.
+
 1.77.0 (2025-06-02)
 ------------------
 

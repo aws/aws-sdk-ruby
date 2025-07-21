@@ -112,6 +112,25 @@ module Aws
                                ) -> _CreateCustomModelResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomModelResponseSuccess
 
+      interface _CreateCustomModelDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCustomModelDeploymentResponse]
+        def custom_model_deployment_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#create_custom_model_deployment-instance_method
+      def create_custom_model_deployment: (
+                                            model_deployment_name: ::String,
+                                            model_arn: ::String,
+                                            ?description: ::String,
+                                            ?tags: Array[
+                                              {
+                                                key: ::String,
+                                                value: ::String
+                                              },
+                                            ],
+                                            ?client_request_token: ::String
+                                          ) -> _CreateCustomModelDeploymentResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomModelDeploymentResponseSuccess
+
       interface _CreateEvaluationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateEvaluationJobResponse]
         def job_arn: () -> ::String
@@ -938,6 +957,15 @@ module Aws
                                ) -> _DeleteCustomModelResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomModelResponseSuccess
 
+      interface _DeleteCustomModelDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCustomModelDeploymentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#delete_custom_model_deployment-instance_method
+      def delete_custom_model_deployment: (
+                                            custom_model_deployment_identifier: ::String
+                                          ) -> _DeleteCustomModelDeploymentResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomModelDeploymentResponseSuccess
+
       interface _DeleteFoundationModelAgreementResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFoundationModelAgreementResponse]
       end
@@ -1044,6 +1072,23 @@ module Aws
                               model_identifier: ::String
                             ) -> _GetCustomModelResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCustomModelResponseSuccess
+
+      interface _GetCustomModelDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCustomModelDeploymentResponse]
+        def custom_model_deployment_arn: () -> ::String
+        def model_deployment_name: () -> ::String
+        def model_arn: () -> ::String
+        def created_at: () -> ::Time
+        def status: () -> ("Creating" | "Active" | "Failed")
+        def description: () -> ::String
+        def failure_message: () -> ::String
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_custom_model_deployment-instance_method
+      def get_custom_model_deployment: (
+                                         custom_model_deployment_identifier: ::String
+                                       ) -> _GetCustomModelDeploymentResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCustomModelDeploymentResponseSuccess
 
       interface _GetEvaluationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetEvaluationJobResponse]
@@ -1324,6 +1369,25 @@ module Aws
       def get_use_case_for_model_access: (
                                          ) -> _GetUseCaseForModelAccessResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUseCaseForModelAccessResponseSuccess
+
+      interface _ListCustomModelDeploymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomModelDeploymentsResponse]
+        def next_token: () -> ::String
+        def model_deployment_summaries: () -> ::Array[Types::CustomModelDeploymentSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_custom_model_deployments-instance_method
+      def list_custom_model_deployments: (
+                                           ?created_before: ::Time,
+                                           ?created_after: ::Time,
+                                           ?name_contains: ::String,
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String,
+                                           ?sort_by: ("CreationTime"),
+                                           ?sort_order: ("Ascending" | "Descending"),
+                                           ?status_equals: ("Creating" | "Active" | "Failed"),
+                                           ?model_arn_equals: ::String
+                                         ) -> _ListCustomModelDeploymentsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomModelDeploymentsResponseSuccess
 
       interface _ListCustomModelsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomModelsResponse]

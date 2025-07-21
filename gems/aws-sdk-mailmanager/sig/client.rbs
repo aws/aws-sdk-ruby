@@ -84,8 +84,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#create_addon_instance-instance_method
       def create_addon_instance: (
-                                   addon_subscription_id: ::String,
                                    ?client_token: ::String,
+                                   addon_subscription_id: ::String,
                                    ?tags: Array[
                                      {
                                        key: ::String,
@@ -101,8 +101,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#create_addon_subscription-instance_method
       def create_addon_subscription: (
-                                       addon_name: ::String,
                                        ?client_token: ::String,
+                                       addon_name: ::String,
                                        ?tags: Array[
                                          {
                                            key: ::String,
@@ -118,8 +118,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#create_address_list-instance_method
       def create_address_list: (
-                                 address_list_name: ::String,
                                  ?client_token: ::String,
+                                 address_list_name: ::String,
                                  ?tags: Array[
                                    {
                                      key: ::String,
@@ -136,12 +136,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#create_address_list_import_job-instance_method
       def create_address_list_import_job: (
-                                            address_list_id: ::String,
                                             ?client_token: ::String,
+                                            address_list_id: ::String,
+                                            name: ::String,
                                             import_data_format: {
                                               import_data_type: ("CSV" | "JSON")
-                                            },
-                                            name: ::String
+                                            }
                                           ) -> _CreateAddressListImportJobResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAddressListImportJobResponseSuccess
 
@@ -151,12 +151,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#create_archive-instance_method
       def create_archive: (
-                            archive_name: ::String,
                             ?client_token: ::String,
-                            ?kms_key_arn: ::String,
+                            archive_name: ::String,
                             ?retention: {
                               retention_period: ("THREE_MONTHS" | "SIX_MONTHS" | "NINE_MONTHS" | "ONE_YEAR" | "EIGHTEEN_MONTHS" | "TWO_YEARS" | "THIRTY_MONTHS" | "THREE_YEARS" | "FOUR_YEARS" | "FIVE_YEARS" | "SIX_YEARS" | "SEVEN_YEARS" | "EIGHT_YEARS" | "NINE_YEARS" | "TEN_YEARS" | "PERMANENT")?
                             },
+                            ?kms_key_arn: ::String,
                             ?tags: Array[
                               {
                                 key: ::String,
@@ -173,28 +173,28 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#create_ingress_point-instance_method
       def create_ingress_point: (
                                   ?client_token: ::String,
-                                  ?ingress_point_configuration: {
-                                    secret_arn: ::String?,
-                                    smtp_password: ::String?
-                                  },
                                   ingress_point_name: ::String,
+                                  type: ("OPEN" | "AUTH"),
+                                  rule_set_id: ::String,
+                                  traffic_policy_id: ::String,
+                                  ?ingress_point_configuration: {
+                                    smtp_password: ::String?,
+                                    secret_arn: ::String?
+                                  },
                                   ?network_configuration: {
-                                    private_network_configuration: {
-                                      vpc_endpoint_id: ::String
-                                    }?,
                                     public_network_configuration: {
                                       ip_type: ("IPV4" | "DUAL_STACK")
+                                    }?,
+                                    private_network_configuration: {
+                                      vpc_endpoint_id: ::String
                                     }?
                                   },
-                                  rule_set_id: ::String,
                                   ?tags: Array[
                                     {
                                       key: ::String,
                                       value: ::String
                                     },
-                                  ],
-                                  traffic_policy_id: ::String,
-                                  type: ("OPEN" | "AUTH")
+                                  ]
                                 ) -> _CreateIngressPointResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIngressPointResponseSuccess
 
@@ -204,15 +204,15 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#create_relay-instance_method
       def create_relay: (
-                          authentication: {
-                            no_authentication: {
-                            }?,
-                            secret_arn: ::String?
-                          },
                           ?client_token: ::String,
                           relay_name: ::String,
                           server_name: ::String,
                           server_port: ::Integer,
+                          authentication: {
+                            secret_arn: ::String?,
+                            no_authentication: {
+                            }?
+                          },
                           ?tags: Array[
                             {
                               key: ::String,
@@ -232,15 +232,155 @@ module Aws
                              rule_set_name: ::String,
                              rules: Array[
                                {
+                                 name: ::String?,
+                                 conditions: Array[
+                                   {
+                                     boolean_expression: {
+                                       evaluate: {
+                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?,
+                                         is_in_address_list: {
+                                           attribute: ("RECIPIENT" | "MAIL_FROM" | "SENDER" | "FROM" | "TO" | "CC"),
+                                           address_lists: Array[::String]
+                                         }?
+                                       },
+                                       operator: ("IS_TRUE" | "IS_FALSE")
+                                     }?,
+                                     string_expression: {
+                                       evaluate: {
+                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
+                                         mime_header_attribute: ::String?,
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
+                                       values: Array[::String]
+                                     }?,
+                                     number_expression: {
+                                       evaluate: {
+                                         attribute: ("MESSAGE_SIZE")?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN_OR_EQUAL"),
+                                       value: ::Float
+                                     }?,
+                                     ip_expression: {
+                                       evaluate: {
+                                         attribute: ("SOURCE_IP")?
+                                       },
+                                       operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
+                                       values: Array[::String]
+                                     }?,
+                                     verdict_expression: {
+                                       evaluate: {
+                                         attribute: ("SPF" | "DKIM")?,
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS"),
+                                       values: Array[("PASS" | "FAIL" | "GRAY" | "PROCESSING_FAILED")]
+                                     }?,
+                                     dmarc_expression: {
+                                       operator: ("EQUALS" | "NOT_EQUALS"),
+                                       values: Array[("NONE" | "QUARANTINE" | "REJECT")]
+                                     }?
+                                   },
+                                 ]?,
+                                 unless: Array[
+                                   {
+                                     boolean_expression: {
+                                       evaluate: {
+                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?,
+                                         is_in_address_list: {
+                                           attribute: ("RECIPIENT" | "MAIL_FROM" | "SENDER" | "FROM" | "TO" | "CC"),
+                                           address_lists: Array[::String]
+                                         }?
+                                       },
+                                       operator: ("IS_TRUE" | "IS_FALSE")
+                                     }?,
+                                     string_expression: {
+                                       evaluate: {
+                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
+                                         mime_header_attribute: ::String?,
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
+                                       values: Array[::String]
+                                     }?,
+                                     number_expression: {
+                                       evaluate: {
+                                         attribute: ("MESSAGE_SIZE")?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN_OR_EQUAL"),
+                                       value: ::Float
+                                     }?,
+                                     ip_expression: {
+                                       evaluate: {
+                                         attribute: ("SOURCE_IP")?
+                                       },
+                                       operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
+                                       values: Array[::String]
+                                     }?,
+                                     verdict_expression: {
+                                       evaluate: {
+                                         attribute: ("SPF" | "DKIM")?,
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS"),
+                                       values: Array[("PASS" | "FAIL" | "GRAY" | "PROCESSING_FAILED")]
+                                     }?,
+                                     dmarc_expression: {
+                                       operator: ("EQUALS" | "NOT_EQUALS"),
+                                       values: Array[("NONE" | "QUARANTINE" | "REJECT")]
+                                     }?
+                                   },
+                                 ]?,
                                  actions: Array[
                                    {
-                                     add_header: {
-                                       header_name: ::String,
-                                       header_value: ::String
+                                     drop: {
+                                     }?,
+                                     relay: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       relay: ::String,
+                                       mail_from: ("REPLACE" | "PRESERVE")?
                                      }?,
                                      archive: {
                                        action_failure_policy: ("CONTINUE" | "DROP")?,
                                        target_archive: ::String
+                                     }?,
+                                     write_to_s3: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       role_arn: ::String,
+                                       s3_bucket: ::String,
+                                       s3_prefix: ::String?,
+                                       s3_sse_kms_key_id: ::String?
+                                     }?,
+                                     send: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       role_arn: ::String
+                                     }?,
+                                     add_header: {
+                                       header_name: ::String,
+                                       header_value: ::String
+                                     }?,
+                                     replace_recipient: {
+                                       replace_with: Array[::String]?
                                      }?,
                                      deliver_to_mailbox: {
                                        action_failure_policy: ("CONTINUE" | "DROP")?,
@@ -253,155 +393,15 @@ module Aws
                                        index_id: ::String,
                                        role_arn: ::String
                                      }?,
-                                     drop: {
-                                     }?,
                                      publish_to_sns: {
                                        action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       topic_arn: ::String,
+                                       role_arn: ::String,
                                        encoding: ("UTF-8" | "BASE64")?,
-                                       payload_type: ("HEADERS" | "CONTENT")?,
-                                       role_arn: ::String,
-                                       topic_arn: ::String
-                                     }?,
-                                     relay: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       mail_from: ("REPLACE" | "PRESERVE")?,
-                                       relay: ::String
-                                     }?,
-                                     replace_recipient: {
-                                       replace_with: Array[::String]?
-                                     }?,
-                                     send: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       role_arn: ::String
-                                     }?,
-                                     write_to_s3: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       role_arn: ::String,
-                                       s3_bucket: ::String,
-                                       s3_prefix: ::String?,
-                                       s3_sse_kms_key_id: ::String?
+                                       payload_type: ("HEADERS" | "CONTENT")?
                                      }?
                                    },
-                                 ],
-                                 conditions: Array[
-                                   {
-                                     boolean_expression: {
-                                       evaluate: {
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?,
-                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
-                                         is_in_address_list: {
-                                           address_lists: Array[::String],
-                                           attribute: ("RECIPIENT" | "MAIL_FROM" | "SENDER" | "FROM" | "TO" | "CC")
-                                         }?
-                                       },
-                                       operator: ("IS_TRUE" | "IS_FALSE")
-                                     }?,
-                                     dmarc_expression: {
-                                       operator: ("EQUALS" | "NOT_EQUALS"),
-                                       values: Array[("NONE" | "QUARANTINE" | "REJECT")]
-                                     }?,
-                                     ip_expression: {
-                                       evaluate: {
-                                         attribute: ("SOURCE_IP")?
-                                       },
-                                       operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
-                                       values: Array[::String]
-                                     }?,
-                                     number_expression: {
-                                       evaluate: {
-                                         attribute: ("MESSAGE_SIZE")?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN_OR_EQUAL"),
-                                       value: ::Float
-                                     }?,
-                                     string_expression: {
-                                       evaluate: {
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?,
-                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
-                                         mime_header_attribute: ::String?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
-                                       values: Array[::String]
-                                     }?,
-                                     verdict_expression: {
-                                       evaluate: {
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?,
-                                         attribute: ("SPF" | "DKIM")?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS"),
-                                       values: Array[("PASS" | "FAIL" | "GRAY" | "PROCESSING_FAILED")]
-                                     }?
-                                   },
-                                 ]?,
-                                 name: ::String?,
-                                 unless: Array[
-                                   {
-                                     boolean_expression: {
-                                       evaluate: {
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?,
-                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
-                                         is_in_address_list: {
-                                           address_lists: Array[::String],
-                                           attribute: ("RECIPIENT" | "MAIL_FROM" | "SENDER" | "FROM" | "TO" | "CC")
-                                         }?
-                                       },
-                                       operator: ("IS_TRUE" | "IS_FALSE")
-                                     }?,
-                                     dmarc_expression: {
-                                       operator: ("EQUALS" | "NOT_EQUALS"),
-                                       values: Array[("NONE" | "QUARANTINE" | "REJECT")]
-                                     }?,
-                                     ip_expression: {
-                                       evaluate: {
-                                         attribute: ("SOURCE_IP")?
-                                       },
-                                       operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
-                                       values: Array[::String]
-                                     }?,
-                                     number_expression: {
-                                       evaluate: {
-                                         attribute: ("MESSAGE_SIZE")?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN_OR_EQUAL"),
-                                       value: ::Float
-                                     }?,
-                                     string_expression: {
-                                       evaluate: {
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?,
-                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
-                                         mime_header_attribute: ::String?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
-                                       values: Array[::String]
-                                     }?,
-                                     verdict_expression: {
-                                       evaluate: {
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?,
-                                         attribute: ("SPF" | "DKIM")?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS"),
-                                       values: Array[("PASS" | "FAIL" | "GRAY" | "PROCESSING_FAILED")]
-                                     }?
-                                   },
-                                 ]?
+                                 ]
                                },
                              ],
                              ?tags: Array[
@@ -420,25 +420,21 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#create_traffic_policy-instance_method
       def create_traffic_policy: (
                                    ?client_token: ::String,
-                                   default_action: ("ALLOW" | "DENY"),
-                                   ?max_message_size_bytes: ::Integer,
+                                   traffic_policy_name: ::String,
                                    policy_statements: Array[
                                      {
-                                       action: ("ALLOW" | "DENY"),
                                        conditions: Array[
                                          {
-                                           boolean_expression: {
+                                           string_expression: {
                                              evaluate: {
+                                               attribute: ("RECIPIENT")?,
                                                analysis: {
                                                  analyzer: ::String,
                                                  result_field: ::String
-                                               }?,
-                                               is_in_address_list: {
-                                                 address_lists: Array[::String],
-                                                 attribute: ("RECIPIENT")
                                                }?
                                              },
-                                             operator: ("IS_TRUE" | "IS_FALSE")
+                                             operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
+                                             values: Array[::String]
                                            }?,
                                            ip_expression: {
                                              evaluate: {
@@ -454,35 +450,39 @@ module Aws
                                              operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
                                              values: Array[::String]
                                            }?,
-                                           string_expression: {
-                                             evaluate: {
-                                               analysis: {
-                                                 analyzer: ::String,
-                                                 result_field: ::String
-                                               }?,
-                                               attribute: ("RECIPIENT")?
-                                             },
-                                             operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
-                                             values: Array[::String]
-                                           }?,
                                            tls_expression: {
                                              evaluate: {
                                                attribute: ("TLS_PROTOCOL")?
                                              },
                                              operator: ("MINIMUM_TLS_VERSION" | "IS"),
                                              value: ("TLS1_2" | "TLS1_3")
+                                           }?,
+                                           boolean_expression: {
+                                             evaluate: {
+                                               analysis: {
+                                                 analyzer: ::String,
+                                                 result_field: ::String
+                                               }?,
+                                               is_in_address_list: {
+                                                 attribute: ("RECIPIENT"),
+                                                 address_lists: Array[::String]
+                                               }?
+                                             },
+                                             operator: ("IS_TRUE" | "IS_FALSE")
                                            }?
                                          },
-                                       ]
+                                       ],
+                                       action: ("ALLOW" | "DENY")
                                      },
                                    ],
+                                   default_action: ("ALLOW" | "DENY"),
+                                   ?max_message_size_bytes: ::Integer,
                                    ?tags: Array[
                                      {
                                        key: ::String,
                                        value: ::String
                                      },
-                                   ],
-                                   traffic_policy_name: ::String
+                                   ]
                                  ) -> _CreateTrafficPolicyResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrafficPolicyResponseSuccess
 
@@ -563,16 +563,16 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#deregister_member_from_address_list-instance_method
       def deregister_member_from_address_list: (
-                                                 address: ::String,
-                                                 address_list_id: ::String
+                                                 address_list_id: ::String,
+                                                 address: ::String
                                                ) -> _DeregisterMemberFromAddressListResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterMemberFromAddressListResponseSuccess
 
       interface _GetAddonInstanceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAddonInstanceResponse]
-        def addon_instance_arn: () -> ::String
-        def addon_name: () -> ::String
         def addon_subscription_id: () -> ::String
+        def addon_name: () -> ::String
+        def addon_instance_arn: () -> ::String
         def created_timestamp: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_addon_instance-instance_method
@@ -595,8 +595,8 @@ module Aws
 
       interface _GetAddressListResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAddressListResponse]
-        def address_list_arn: () -> ::String
         def address_list_id: () -> ::String
+        def address_list_arn: () -> ::String
         def address_list_name: () -> ::String
         def created_timestamp: () -> ::Time
         def last_updated_timestamp: () -> ::Time
@@ -609,17 +609,17 @@ module Aws
 
       interface _GetAddressListImportJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAddressListImportJobResponse]
-        def address_list_id: () -> ::String
-        def completed_timestamp: () -> ::Time
-        def created_timestamp: () -> ::Time
-        def failed_items_count: () -> ::Integer
-        def import_data_format: () -> Types::ImportDataFormat
-        def imported_items_count: () -> ::Integer
         def job_id: () -> ::String
         def name: () -> ::String
-        def pre_signed_url: () -> ::String
-        def start_timestamp: () -> ::Time
         def status: () -> ("CREATED" | "PROCESSING" | "COMPLETED" | "FAILED" | "STOPPED")
+        def pre_signed_url: () -> ::String
+        def imported_items_count: () -> ::Integer
+        def failed_items_count: () -> ::Integer
+        def import_data_format: () -> Types::ImportDataFormat
+        def address_list_id: () -> ::String
+        def created_timestamp: () -> ::Time
+        def start_timestamp: () -> ::Time
+        def completed_timestamp: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_address_list_import_job-instance_method
       def get_address_list_import_job: (
@@ -629,14 +629,14 @@ module Aws
 
       interface _GetArchiveResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetArchiveResponse]
-        def archive_arn: () -> ::String
         def archive_id: () -> ::String
         def archive_name: () -> ::String
+        def archive_arn: () -> ::String
         def archive_state: () -> ("ACTIVE" | "PENDING_DELETION")
-        def created_timestamp: () -> ::Time
-        def kms_key_arn: () -> ::String
-        def last_updated_timestamp: () -> ::Time
         def retention: () -> Types::ArchiveRetention
+        def created_timestamp: () -> ::Time
+        def last_updated_timestamp: () -> ::Time
+        def kms_key_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_archive-instance_method
       def get_archive: (
@@ -647,12 +647,12 @@ module Aws
       interface _GetArchiveExportResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetArchiveExportResponse]
         def archive_id: () -> ::String
-        def export_destination_configuration: () -> Types::ExportDestinationConfiguration
         def filters: () -> Types::ArchiveFilters
         def from_timestamp: () -> ::Time
-        def max_results: () -> ::Integer
-        def status: () -> Types::ExportStatus
         def to_timestamp: () -> ::Time
+        def max_results: () -> ::Integer
+        def export_destination_configuration: () -> Types::ExportDestinationConfiguration
+        def status: () -> Types::ExportStatus
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_archive_export-instance_method
       def get_archive_export: (
@@ -662,9 +662,9 @@ module Aws
 
       interface _GetArchiveMessageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetArchiveMessageResponse]
-        def envelope: () -> Types::Envelope
         def message_download_link: () -> ::String
         def metadata: () -> Types::Metadata
+        def envelope: () -> Types::Envelope
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_archive_message-instance_method
       def get_archive_message: (
@@ -687,9 +687,9 @@ module Aws
         def archive_id: () -> ::String
         def filters: () -> Types::ArchiveFilters
         def from_timestamp: () -> ::Time
+        def to_timestamp: () -> ::Time
         def max_results: () -> ::Integer
         def status: () -> Types::SearchStatus
-        def to_timestamp: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_archive_search-instance_method
       def get_archive_search: (
@@ -709,18 +709,18 @@ module Aws
 
       interface _GetIngressPointResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetIngressPointResponse]
-        def a_record: () -> ::String
-        def created_timestamp: () -> ::Time
-        def ingress_point_arn: () -> ::String
-        def ingress_point_auth_configuration: () -> Types::IngressPointAuthConfiguration
         def ingress_point_id: () -> ::String
         def ingress_point_name: () -> ::String
-        def last_updated_timestamp: () -> ::Time
-        def network_configuration: () -> Types::NetworkConfiguration
-        def rule_set_id: () -> ::String
+        def ingress_point_arn: () -> ::String
         def status: () -> ("PROVISIONING" | "DEPROVISIONING" | "UPDATING" | "ACTIVE" | "CLOSED" | "FAILED")
-        def traffic_policy_id: () -> ::String
         def type: () -> ("OPEN" | "AUTH")
+        def a_record: () -> ::String
+        def rule_set_id: () -> ::String
+        def traffic_policy_id: () -> ::String
+        def ingress_point_auth_configuration: () -> Types::IngressPointAuthConfiguration
+        def network_configuration: () -> Types::NetworkConfiguration
+        def created_timestamp: () -> ::Time
+        def last_updated_timestamp: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_ingress_point-instance_method
       def get_ingress_point: (
@@ -735,21 +735,21 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_member_of_address_list-instance_method
       def get_member_of_address_list: (
-                                        address: ::String,
-                                        address_list_id: ::String
+                                        address_list_id: ::String,
+                                        address: ::String
                                       ) -> _GetMemberOfAddressListResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMemberOfAddressListResponseSuccess
 
       interface _GetRelayResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRelayResponse]
-        def authentication: () -> Types::RelayAuthentication
-        def created_timestamp: () -> ::Time
-        def last_modified_timestamp: () -> ::Time
-        def relay_arn: () -> ::String
         def relay_id: () -> ::String
+        def relay_arn: () -> ::String
         def relay_name: () -> ::String
         def server_name: () -> ::String
         def server_port: () -> ::Integer
+        def authentication: () -> Types::RelayAuthentication
+        def created_timestamp: () -> ::Time
+        def last_modified_timestamp: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_relay-instance_method
       def get_relay: (
@@ -759,11 +759,11 @@ module Aws
 
       interface _GetRuleSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRuleSetResponse]
+        def rule_set_id: () -> ::String
+        def rule_set_arn: () -> ::String
+        def rule_set_name: () -> ::String
         def created_date: () -> ::Time
         def last_modification_date: () -> ::Time
-        def rule_set_arn: () -> ::String
-        def rule_set_id: () -> ::String
-        def rule_set_name: () -> ::String
         def rules: () -> ::Array[Types::Rule]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_rule_set-instance_method
@@ -774,14 +774,14 @@ module Aws
 
       interface _GetTrafficPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTrafficPolicyResponse]
-        def created_timestamp: () -> ::Time
-        def default_action: () -> ("ALLOW" | "DENY")
-        def last_updated_timestamp: () -> ::Time
-        def max_message_size_bytes: () -> ::Integer
-        def policy_statements: () -> ::Array[Types::PolicyStatement]
-        def traffic_policy_arn: () -> ::String
-        def traffic_policy_id: () -> ::String
         def traffic_policy_name: () -> ::String
+        def traffic_policy_id: () -> ::String
+        def traffic_policy_arn: () -> ::String
+        def policy_statements: () -> ::Array[Types::PolicyStatement]
+        def max_message_size_bytes: () -> ::Integer
+        def default_action: () -> ("ALLOW" | "DENY")
+        def created_timestamp: () -> ::Time
+        def last_updated_timestamp: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_traffic_policy-instance_method
       def get_traffic_policy: (
@@ -853,8 +853,8 @@ module Aws
 
       interface _ListArchiveSearchesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListArchiveSearchesResponse]
-        def next_token: () -> ::String
         def searches: () -> ::Array[Types::SearchSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#list_archive_searches-instance_method
       def list_archive_searches: (
@@ -883,8 +883,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#list_ingress_points-instance_method
       def list_ingress_points: (
-                                 ?next_token: ::String,
-                                 ?page_size: ::Integer
+                                 ?page_size: ::Integer,
+                                 ?next_token: ::String
                                ) -> _ListIngressPointsResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIngressPointsResponseSuccess
 
@@ -906,20 +906,20 @@ module Aws
 
       interface _ListRelaysResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRelaysResponse]
-        def next_token: () -> ::String
         def relays: () -> ::Array[Types::Relay]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#list_relays-instance_method
       def list_relays: (
-                         ?next_token: ::String,
-                         ?page_size: ::Integer
+                         ?page_size: ::Integer,
+                         ?next_token: ::String
                        ) -> _ListRelaysResponseSuccess
                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRelaysResponseSuccess
 
       interface _ListRuleSetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRuleSetsResponse]
-        def next_token: () -> ::String
         def rule_sets: () -> ::Array[Types::RuleSet]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#list_rule_sets-instance_method
       def list_rule_sets: (
@@ -940,13 +940,13 @@ module Aws
 
       interface _ListTrafficPoliciesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTrafficPoliciesResponse]
-        def next_token: () -> ::String
         def traffic_policies: () -> ::Array[Types::TrafficPolicy]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#list_traffic_policies-instance_method
       def list_traffic_policies: (
-                                   ?next_token: ::String,
-                                   ?page_size: ::Integer
+                                   ?page_size: ::Integer,
+                                   ?next_token: ::String
                                  ) -> _ListTrafficPoliciesResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrafficPoliciesResponseSuccess
 
@@ -955,8 +955,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#register_member_to_address_list-instance_method
       def register_member_to_address_list: (
-                                             address: ::String,
-                                             address_list_id: ::String
+                                             address_list_id: ::String,
+                                             address: ::String
                                            ) -> _RegisterMemberToAddressListResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterMemberToAddressListResponseSuccess
 
@@ -976,51 +976,51 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#start_archive_export-instance_method
       def start_archive_export: (
                                   archive_id: ::String,
-                                  export_destination_configuration: {
-                                    s3: {
-                                      s3_location: ::String?
-                                    }?
-                                  },
                                   ?filters: {
                                     include: Array[
                                       {
-                                        boolean_expression: {
-                                          evaluate: {
-                                            attribute: ("HAS_ATTACHMENTS")?
-                                          },
-                                          operator: ("IS_TRUE" | "IS_FALSE")
-                                        }?,
                                         string_expression: {
                                           evaluate: {
                                             attribute: ("TO" | "FROM" | "CC" | "SUBJECT" | "ENVELOPE_TO" | "ENVELOPE_FROM")?
                                           },
                                           operator: ("CONTAINS"),
                                           values: Array[::String]
+                                        }?,
+                                        boolean_expression: {
+                                          evaluate: {
+                                            attribute: ("HAS_ATTACHMENTS")?
+                                          },
+                                          operator: ("IS_TRUE" | "IS_FALSE")
                                         }?
                                       },
                                     ]?,
                                     unless: Array[
                                       {
-                                        boolean_expression: {
-                                          evaluate: {
-                                            attribute: ("HAS_ATTACHMENTS")?
-                                          },
-                                          operator: ("IS_TRUE" | "IS_FALSE")
-                                        }?,
                                         string_expression: {
                                           evaluate: {
                                             attribute: ("TO" | "FROM" | "CC" | "SUBJECT" | "ENVELOPE_TO" | "ENVELOPE_FROM")?
                                           },
                                           operator: ("CONTAINS"),
                                           values: Array[::String]
+                                        }?,
+                                        boolean_expression: {
+                                          evaluate: {
+                                            attribute: ("HAS_ATTACHMENTS")?
+                                          },
+                                          operator: ("IS_TRUE" | "IS_FALSE")
                                         }?
                                       },
                                     ]?
                                   },
                                   from_timestamp: ::Time,
-                                  ?include_metadata: bool,
+                                  to_timestamp: ::Time,
                                   ?max_results: ::Integer,
-                                  to_timestamp: ::Time
+                                  export_destination_configuration: {
+                                    s3: {
+                                      s3_location: ::String?
+                                    }?
+                                  },
+                                  ?include_metadata: bool
                                 ) -> _StartArchiveExportResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartArchiveExportResponseSuccess
 
@@ -1034,42 +1034,42 @@ module Aws
                                   ?filters: {
                                     include: Array[
                                       {
-                                        boolean_expression: {
-                                          evaluate: {
-                                            attribute: ("HAS_ATTACHMENTS")?
-                                          },
-                                          operator: ("IS_TRUE" | "IS_FALSE")
-                                        }?,
                                         string_expression: {
                                           evaluate: {
                                             attribute: ("TO" | "FROM" | "CC" | "SUBJECT" | "ENVELOPE_TO" | "ENVELOPE_FROM")?
                                           },
                                           operator: ("CONTAINS"),
                                           values: Array[::String]
+                                        }?,
+                                        boolean_expression: {
+                                          evaluate: {
+                                            attribute: ("HAS_ATTACHMENTS")?
+                                          },
+                                          operator: ("IS_TRUE" | "IS_FALSE")
                                         }?
                                       },
                                     ]?,
                                     unless: Array[
                                       {
-                                        boolean_expression: {
-                                          evaluate: {
-                                            attribute: ("HAS_ATTACHMENTS")?
-                                          },
-                                          operator: ("IS_TRUE" | "IS_FALSE")
-                                        }?,
                                         string_expression: {
                                           evaluate: {
                                             attribute: ("TO" | "FROM" | "CC" | "SUBJECT" | "ENVELOPE_TO" | "ENVELOPE_FROM")?
                                           },
                                           operator: ("CONTAINS"),
                                           values: Array[::String]
+                                        }?,
+                                        boolean_expression: {
+                                          evaluate: {
+                                            attribute: ("HAS_ATTACHMENTS")?
+                                          },
+                                          operator: ("IS_TRUE" | "IS_FALSE")
                                         }?
                                       },
                                     ]?
                                   },
                                   from_timestamp: ::Time,
-                                  max_results: ::Integer,
-                                  to_timestamp: ::Time
+                                  to_timestamp: ::Time,
+                                  max_results: ::Integer
                                 ) -> _StartArchiveSearchResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartArchiveSearchResponseSuccess
 
@@ -1143,15 +1143,15 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#update_ingress_point-instance_method
       def update_ingress_point: (
-                                  ?ingress_point_configuration: {
-                                    secret_arn: ::String?,
-                                    smtp_password: ::String?
-                                  },
                                   ingress_point_id: ::String,
                                   ?ingress_point_name: ::String,
-                                  ?rule_set_id: ::String,
                                   ?status_to_update: ("ACTIVE" | "CLOSED"),
-                                  ?traffic_policy_id: ::String
+                                  ?rule_set_id: ::String,
+                                  ?traffic_policy_id: ::String,
+                                  ?ingress_point_configuration: {
+                                    smtp_password: ::String?,
+                                    secret_arn: ::String?
+                                  }
                                 ) -> _UpdateIngressPointResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIngressPointResponseSuccess
 
@@ -1160,15 +1160,15 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#update_relay-instance_method
       def update_relay: (
-                          ?authentication: {
-                            no_authentication: {
-                            }?,
-                            secret_arn: ::String?
-                          },
                           relay_id: ::String,
                           ?relay_name: ::String,
                           ?server_name: ::String,
-                          ?server_port: ::Integer
+                          ?server_port: ::Integer,
+                          ?authentication: {
+                            secret_arn: ::String?,
+                            no_authentication: {
+                            }?
+                          }
                         ) -> _UpdateRelayResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRelayResponseSuccess
 
@@ -1181,15 +1181,155 @@ module Aws
                              ?rule_set_name: ::String,
                              ?rules: Array[
                                {
+                                 name: ::String?,
+                                 conditions: Array[
+                                   {
+                                     boolean_expression: {
+                                       evaluate: {
+                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?,
+                                         is_in_address_list: {
+                                           attribute: ("RECIPIENT" | "MAIL_FROM" | "SENDER" | "FROM" | "TO" | "CC"),
+                                           address_lists: Array[::String]
+                                         }?
+                                       },
+                                       operator: ("IS_TRUE" | "IS_FALSE")
+                                     }?,
+                                     string_expression: {
+                                       evaluate: {
+                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
+                                         mime_header_attribute: ::String?,
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
+                                       values: Array[::String]
+                                     }?,
+                                     number_expression: {
+                                       evaluate: {
+                                         attribute: ("MESSAGE_SIZE")?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN_OR_EQUAL"),
+                                       value: ::Float
+                                     }?,
+                                     ip_expression: {
+                                       evaluate: {
+                                         attribute: ("SOURCE_IP")?
+                                       },
+                                       operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
+                                       values: Array[::String]
+                                     }?,
+                                     verdict_expression: {
+                                       evaluate: {
+                                         attribute: ("SPF" | "DKIM")?,
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS"),
+                                       values: Array[("PASS" | "FAIL" | "GRAY" | "PROCESSING_FAILED")]
+                                     }?,
+                                     dmarc_expression: {
+                                       operator: ("EQUALS" | "NOT_EQUALS"),
+                                       values: Array[("NONE" | "QUARANTINE" | "REJECT")]
+                                     }?
+                                   },
+                                 ]?,
+                                 unless: Array[
+                                   {
+                                     boolean_expression: {
+                                       evaluate: {
+                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?,
+                                         is_in_address_list: {
+                                           attribute: ("RECIPIENT" | "MAIL_FROM" | "SENDER" | "FROM" | "TO" | "CC"),
+                                           address_lists: Array[::String]
+                                         }?
+                                       },
+                                       operator: ("IS_TRUE" | "IS_FALSE")
+                                     }?,
+                                     string_expression: {
+                                       evaluate: {
+                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
+                                         mime_header_attribute: ::String?,
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
+                                       values: Array[::String]
+                                     }?,
+                                     number_expression: {
+                                       evaluate: {
+                                         attribute: ("MESSAGE_SIZE")?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN_OR_EQUAL"),
+                                       value: ::Float
+                                     }?,
+                                     ip_expression: {
+                                       evaluate: {
+                                         attribute: ("SOURCE_IP")?
+                                       },
+                                       operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
+                                       values: Array[::String]
+                                     }?,
+                                     verdict_expression: {
+                                       evaluate: {
+                                         attribute: ("SPF" | "DKIM")?,
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS"),
+                                       values: Array[("PASS" | "FAIL" | "GRAY" | "PROCESSING_FAILED")]
+                                     }?,
+                                     dmarc_expression: {
+                                       operator: ("EQUALS" | "NOT_EQUALS"),
+                                       values: Array[("NONE" | "QUARANTINE" | "REJECT")]
+                                     }?
+                                   },
+                                 ]?,
                                  actions: Array[
                                    {
-                                     add_header: {
-                                       header_name: ::String,
-                                       header_value: ::String
+                                     drop: {
+                                     }?,
+                                     relay: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       relay: ::String,
+                                       mail_from: ("REPLACE" | "PRESERVE")?
                                      }?,
                                      archive: {
                                        action_failure_policy: ("CONTINUE" | "DROP")?,
                                        target_archive: ::String
+                                     }?,
+                                     write_to_s3: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       role_arn: ::String,
+                                       s3_bucket: ::String,
+                                       s3_prefix: ::String?,
+                                       s3_sse_kms_key_id: ::String?
+                                     }?,
+                                     send: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       role_arn: ::String
+                                     }?,
+                                     add_header: {
+                                       header_name: ::String,
+                                       header_value: ::String
+                                     }?,
+                                     replace_recipient: {
+                                       replace_with: Array[::String]?
                                      }?,
                                      deliver_to_mailbox: {
                                        action_failure_policy: ("CONTINUE" | "DROP")?,
@@ -1202,155 +1342,15 @@ module Aws
                                        index_id: ::String,
                                        role_arn: ::String
                                      }?,
-                                     drop: {
-                                     }?,
                                      publish_to_sns: {
                                        action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       topic_arn: ::String,
+                                       role_arn: ::String,
                                        encoding: ("UTF-8" | "BASE64")?,
-                                       payload_type: ("HEADERS" | "CONTENT")?,
-                                       role_arn: ::String,
-                                       topic_arn: ::String
-                                     }?,
-                                     relay: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       mail_from: ("REPLACE" | "PRESERVE")?,
-                                       relay: ::String
-                                     }?,
-                                     replace_recipient: {
-                                       replace_with: Array[::String]?
-                                     }?,
-                                     send: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       role_arn: ::String
-                                     }?,
-                                     write_to_s3: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       role_arn: ::String,
-                                       s3_bucket: ::String,
-                                       s3_prefix: ::String?,
-                                       s3_sse_kms_key_id: ::String?
+                                       payload_type: ("HEADERS" | "CONTENT")?
                                      }?
                                    },
-                                 ],
-                                 conditions: Array[
-                                   {
-                                     boolean_expression: {
-                                       evaluate: {
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?,
-                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
-                                         is_in_address_list: {
-                                           address_lists: Array[::String],
-                                           attribute: ("RECIPIENT" | "MAIL_FROM" | "SENDER" | "FROM" | "TO" | "CC")
-                                         }?
-                                       },
-                                       operator: ("IS_TRUE" | "IS_FALSE")
-                                     }?,
-                                     dmarc_expression: {
-                                       operator: ("EQUALS" | "NOT_EQUALS"),
-                                       values: Array[("NONE" | "QUARANTINE" | "REJECT")]
-                                     }?,
-                                     ip_expression: {
-                                       evaluate: {
-                                         attribute: ("SOURCE_IP")?
-                                       },
-                                       operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
-                                       values: Array[::String]
-                                     }?,
-                                     number_expression: {
-                                       evaluate: {
-                                         attribute: ("MESSAGE_SIZE")?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN_OR_EQUAL"),
-                                       value: ::Float
-                                     }?,
-                                     string_expression: {
-                                       evaluate: {
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?,
-                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
-                                         mime_header_attribute: ::String?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
-                                       values: Array[::String]
-                                     }?,
-                                     verdict_expression: {
-                                       evaluate: {
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?,
-                                         attribute: ("SPF" | "DKIM")?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS"),
-                                       values: Array[("PASS" | "FAIL" | "GRAY" | "PROCESSING_FAILED")]
-                                     }?
-                                   },
-                                 ]?,
-                                 name: ::String?,
-                                 unless: Array[
-                                   {
-                                     boolean_expression: {
-                                       evaluate: {
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?,
-                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
-                                         is_in_address_list: {
-                                           address_lists: Array[::String],
-                                           attribute: ("RECIPIENT" | "MAIL_FROM" | "SENDER" | "FROM" | "TO" | "CC")
-                                         }?
-                                       },
-                                       operator: ("IS_TRUE" | "IS_FALSE")
-                                     }?,
-                                     dmarc_expression: {
-                                       operator: ("EQUALS" | "NOT_EQUALS"),
-                                       values: Array[("NONE" | "QUARANTINE" | "REJECT")]
-                                     }?,
-                                     ip_expression: {
-                                       evaluate: {
-                                         attribute: ("SOURCE_IP")?
-                                       },
-                                       operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
-                                       values: Array[::String]
-                                     }?,
-                                     number_expression: {
-                                       evaluate: {
-                                         attribute: ("MESSAGE_SIZE")?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN_OR_EQUAL"),
-                                       value: ::Float
-                                     }?,
-                                     string_expression: {
-                                       evaluate: {
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?,
-                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
-                                         mime_header_attribute: ::String?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
-                                       values: Array[::String]
-                                     }?,
-                                     verdict_expression: {
-                                       evaluate: {
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?,
-                                         attribute: ("SPF" | "DKIM")?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS"),
-                                       values: Array[("PASS" | "FAIL" | "GRAY" | "PROCESSING_FAILED")]
-                                     }?
-                                   },
-                                 ]?
+                                 ]
                                },
                              ]
                            ) -> _UpdateRuleSetResponseSuccess
@@ -1361,25 +1361,22 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#update_traffic_policy-instance_method
       def update_traffic_policy: (
-                                   ?default_action: ("ALLOW" | "DENY"),
-                                   ?max_message_size_bytes: ::Integer,
+                                   traffic_policy_id: ::String,
+                                   ?traffic_policy_name: ::String,
                                    ?policy_statements: Array[
                                      {
-                                       action: ("ALLOW" | "DENY"),
                                        conditions: Array[
                                          {
-                                           boolean_expression: {
+                                           string_expression: {
                                              evaluate: {
+                                               attribute: ("RECIPIENT")?,
                                                analysis: {
                                                  analyzer: ::String,
                                                  result_field: ::String
-                                               }?,
-                                               is_in_address_list: {
-                                                 address_lists: Array[::String],
-                                                 attribute: ("RECIPIENT")
                                                }?
                                              },
-                                             operator: ("IS_TRUE" | "IS_FALSE")
+                                             operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
+                                             values: Array[::String]
                                            }?,
                                            ip_expression: {
                                              evaluate: {
@@ -1395,30 +1392,33 @@ module Aws
                                              operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
                                              values: Array[::String]
                                            }?,
-                                           string_expression: {
-                                             evaluate: {
-                                               analysis: {
-                                                 analyzer: ::String,
-                                                 result_field: ::String
-                                               }?,
-                                               attribute: ("RECIPIENT")?
-                                             },
-                                             operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
-                                             values: Array[::String]
-                                           }?,
                                            tls_expression: {
                                              evaluate: {
                                                attribute: ("TLS_PROTOCOL")?
                                              },
                                              operator: ("MINIMUM_TLS_VERSION" | "IS"),
                                              value: ("TLS1_2" | "TLS1_3")
+                                           }?,
+                                           boolean_expression: {
+                                             evaluate: {
+                                               analysis: {
+                                                 analyzer: ::String,
+                                                 result_field: ::String
+                                               }?,
+                                               is_in_address_list: {
+                                                 attribute: ("RECIPIENT"),
+                                                 address_lists: Array[::String]
+                                               }?
+                                             },
+                                             operator: ("IS_TRUE" | "IS_FALSE")
                                            }?
                                          },
-                                       ]
+                                       ],
+                                       action: ("ALLOW" | "DENY")
                                      },
                                    ],
-                                   traffic_policy_id: ::String,
-                                   ?traffic_policy_name: ::String
+                                   ?default_action: ("ALLOW" | "DENY"),
+                                   ?max_message_size_bytes: ::Integer
                                  ) -> _UpdateTrafficPolicyResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTrafficPolicyResponseSuccess
     end

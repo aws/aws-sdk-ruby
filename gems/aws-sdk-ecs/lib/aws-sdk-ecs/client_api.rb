@@ -15,6 +15,7 @@ module Aws::ECS
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AdvancedConfiguration = Shapes::StructureShape.new(name: 'AdvancedConfiguration')
     AgentUpdateStatus = Shapes::StringShape.new(name: 'AgentUpdateStatus')
     ApplicationProtocol = Shapes::StringShape.new(name: 'ApplicationProtocol')
     AssignPublicIp = Shapes::StringShape.new(name: 'AssignPublicIp')
@@ -114,7 +115,12 @@ module Aws::ECS
     DeploymentController = Shapes::StructureShape.new(name: 'DeploymentController')
     DeploymentControllerType = Shapes::StringShape.new(name: 'DeploymentControllerType')
     DeploymentEphemeralStorage = Shapes::StructureShape.new(name: 'DeploymentEphemeralStorage')
+    DeploymentLifecycleHook = Shapes::StructureShape.new(name: 'DeploymentLifecycleHook')
+    DeploymentLifecycleHookList = Shapes::ListShape.new(name: 'DeploymentLifecycleHookList')
+    DeploymentLifecycleHookStage = Shapes::StringShape.new(name: 'DeploymentLifecycleHookStage')
+    DeploymentLifecycleHookStageList = Shapes::ListShape.new(name: 'DeploymentLifecycleHookStageList')
     DeploymentRolloutState = Shapes::StringShape.new(name: 'DeploymentRolloutState')
+    DeploymentStrategy = Shapes::StringShape.new(name: 'DeploymentStrategy')
     Deployments = Shapes::ListShape.new(name: 'Deployments')
     DeregisterContainerInstanceRequest = Shapes::StructureShape.new(name: 'DeregisterContainerInstanceRequest')
     DeregisterContainerInstanceResponse = Shapes::StructureShape.new(name: 'DeregisterContainerInstanceResponse')
@@ -291,6 +297,7 @@ module Aws::ECS
     RegisterTaskDefinitionResponse = Shapes::StructureShape.new(name: 'RegisterTaskDefinitionResponse')
     RepositoryCredentials = Shapes::StructureShape.new(name: 'RepositoryCredentials')
     RequiresAttributes = Shapes::ListShape.new(name: 'RequiresAttributes')
+    ResolvedConfiguration = Shapes::StructureShape.new(name: 'ResolvedConfiguration')
     Resource = Shapes::StructureShape.new(name: 'Resource')
     ResourceIds = Shapes::ListShape.new(name: 'ResourceIds')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
@@ -319,12 +326,16 @@ module Aws::ECS
     ServiceConnectServiceList = Shapes::ListShape.new(name: 'ServiceConnectServiceList')
     ServiceConnectServiceResource = Shapes::StructureShape.new(name: 'ServiceConnectServiceResource')
     ServiceConnectServiceResourceList = Shapes::ListShape.new(name: 'ServiceConnectServiceResourceList')
+    ServiceConnectTestTrafficHeaderMatchRules = Shapes::StructureShape.new(name: 'ServiceConnectTestTrafficHeaderMatchRules')
+    ServiceConnectTestTrafficHeaderRules = Shapes::StructureShape.new(name: 'ServiceConnectTestTrafficHeaderRules')
+    ServiceConnectTestTrafficRules = Shapes::StructureShape.new(name: 'ServiceConnectTestTrafficRules')
     ServiceConnectTlsCertificateAuthority = Shapes::StructureShape.new(name: 'ServiceConnectTlsCertificateAuthority')
     ServiceConnectTlsConfiguration = Shapes::StructureShape.new(name: 'ServiceConnectTlsConfiguration')
     ServiceDeployment = Shapes::StructureShape.new(name: 'ServiceDeployment')
     ServiceDeploymentAlarms = Shapes::StructureShape.new(name: 'ServiceDeploymentAlarms')
     ServiceDeploymentBrief = Shapes::StructureShape.new(name: 'ServiceDeploymentBrief')
     ServiceDeploymentCircuitBreaker = Shapes::StructureShape.new(name: 'ServiceDeploymentCircuitBreaker')
+    ServiceDeploymentLifecycleStage = Shapes::StringShape.new(name: 'ServiceDeploymentLifecycleStage')
     ServiceDeploymentNotFoundException = Shapes::StructureShape.new(name: 'ServiceDeploymentNotFoundException')
     ServiceDeploymentRollbackMonitorsStatus = Shapes::StringShape.new(name: 'ServiceDeploymentRollbackMonitorsStatus')
     ServiceDeploymentStatus = Shapes::StringShape.new(name: 'ServiceDeploymentStatus')
@@ -341,6 +352,8 @@ module Aws::ECS
     ServiceRegistries = Shapes::ListShape.new(name: 'ServiceRegistries')
     ServiceRegistry = Shapes::StructureShape.new(name: 'ServiceRegistry')
     ServiceRevision = Shapes::StructureShape.new(name: 'ServiceRevision')
+    ServiceRevisionLoadBalancer = Shapes::StructureShape.new(name: 'ServiceRevisionLoadBalancer')
+    ServiceRevisionLoadBalancers = Shapes::ListShape.new(name: 'ServiceRevisionLoadBalancers')
     ServiceRevisionSummary = Shapes::StructureShape.new(name: 'ServiceRevisionSummary')
     ServiceRevisions = Shapes::ListShape.new(name: 'ServiceRevisions')
     ServiceRevisionsSummaryList = Shapes::ListShape.new(name: 'ServiceRevisionsSummaryList')
@@ -449,6 +462,12 @@ module Aws::ECS
     VpcLatticeConfigurations = Shapes::ListShape.new(name: 'VpcLatticeConfigurations')
 
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AdvancedConfiguration.add_member(:alternate_target_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "alternateTargetGroupArn"))
+    AdvancedConfiguration.add_member(:production_listener_rule, Shapes::ShapeRef.new(shape: String, location_name: "productionListenerRule"))
+    AdvancedConfiguration.add_member(:test_listener_rule, Shapes::ShapeRef.new(shape: String, location_name: "testListenerRule"))
+    AdvancedConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "roleArn"))
+    AdvancedConfiguration.struct_class = Types::AdvancedConfiguration
 
     Attachment.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     Attachment.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
@@ -863,6 +882,9 @@ module Aws::ECS
     DeploymentConfiguration.add_member(:maximum_percent, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "maximumPercent"))
     DeploymentConfiguration.add_member(:minimum_healthy_percent, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "minimumHealthyPercent"))
     DeploymentConfiguration.add_member(:alarms, Shapes::ShapeRef.new(shape: DeploymentAlarms, location_name: "alarms"))
+    DeploymentConfiguration.add_member(:strategy, Shapes::ShapeRef.new(shape: DeploymentStrategy, location_name: "strategy"))
+    DeploymentConfiguration.add_member(:bake_time_in_minutes, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "bakeTimeInMinutes"))
+    DeploymentConfiguration.add_member(:lifecycle_hooks, Shapes::ShapeRef.new(shape: DeploymentLifecycleHookList, location_name: "lifecycleHooks"))
     DeploymentConfiguration.struct_class = Types::DeploymentConfiguration
 
     DeploymentController.add_member(:type, Shapes::ShapeRef.new(shape: DeploymentControllerType, required: true, location_name: "type"))
@@ -870,6 +892,15 @@ module Aws::ECS
 
     DeploymentEphemeralStorage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
     DeploymentEphemeralStorage.struct_class = Types::DeploymentEphemeralStorage
+
+    DeploymentLifecycleHook.add_member(:hook_target_arn, Shapes::ShapeRef.new(shape: String, location_name: "hookTargetArn"))
+    DeploymentLifecycleHook.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "roleArn"))
+    DeploymentLifecycleHook.add_member(:lifecycle_stages, Shapes::ShapeRef.new(shape: DeploymentLifecycleHookStageList, location_name: "lifecycleStages"))
+    DeploymentLifecycleHook.struct_class = Types::DeploymentLifecycleHook
+
+    DeploymentLifecycleHookList.member = Shapes::ShapeRef.new(shape: DeploymentLifecycleHook)
+
+    DeploymentLifecycleHookStageList.member = Shapes::ShapeRef.new(shape: DeploymentLifecycleHookStage)
 
     Deployments.member = Shapes::ShapeRef.new(shape: Deployment)
 
@@ -1262,6 +1293,7 @@ module Aws::ECS
     LoadBalancer.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: String, location_name: "loadBalancerName"))
     LoadBalancer.add_member(:container_name, Shapes::ShapeRef.new(shape: String, location_name: "containerName"))
     LoadBalancer.add_member(:container_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "containerPort"))
+    LoadBalancer.add_member(:advanced_configuration, Shapes::ShapeRef.new(shape: AdvancedConfiguration, location_name: "advancedConfiguration"))
     LoadBalancer.struct_class = Types::LoadBalancer
 
     LoadBalancers.member = Shapes::ShapeRef.new(shape: LoadBalancer)
@@ -1453,6 +1485,9 @@ module Aws::ECS
 
     RequiresAttributes.member = Shapes::ShapeRef.new(shape: Attribute)
 
+    ResolvedConfiguration.add_member(:load_balancers, Shapes::ShapeRef.new(shape: ServiceRevisionLoadBalancers, location_name: "loadBalancers"))
+    ResolvedConfiguration.struct_class = Types::ResolvedConfiguration
+
     Resource.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     Resource.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
     Resource.add_member(:double_value, Shapes::ShapeRef.new(shape: Double, location_name: "doubleValue"))
@@ -1558,6 +1593,7 @@ module Aws::ECS
 
     ServiceConnectClientAlias.add_member(:port, Shapes::ShapeRef.new(shape: PortNumber, required: true, location_name: "port"))
     ServiceConnectClientAlias.add_member(:dns_name, Shapes::ShapeRef.new(shape: String, location_name: "dnsName"))
+    ServiceConnectClientAlias.add_member(:test_traffic_rules, Shapes::ShapeRef.new(shape: ServiceConnectTestTrafficRules, location_name: "testTrafficRules"))
     ServiceConnectClientAlias.struct_class = Types::ServiceConnectClientAlias
 
     ServiceConnectClientAliasList.member = Shapes::ShapeRef.new(shape: ServiceConnectClientAlias)
@@ -1584,6 +1620,16 @@ module Aws::ECS
 
     ServiceConnectServiceResourceList.member = Shapes::ShapeRef.new(shape: ServiceConnectServiceResource)
 
+    ServiceConnectTestTrafficHeaderMatchRules.add_member(:exact, Shapes::ShapeRef.new(shape: String, required: true, location_name: "exact"))
+    ServiceConnectTestTrafficHeaderMatchRules.struct_class = Types::ServiceConnectTestTrafficHeaderMatchRules
+
+    ServiceConnectTestTrafficHeaderRules.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    ServiceConnectTestTrafficHeaderRules.add_member(:value, Shapes::ShapeRef.new(shape: ServiceConnectTestTrafficHeaderMatchRules, location_name: "value"))
+    ServiceConnectTestTrafficHeaderRules.struct_class = Types::ServiceConnectTestTrafficHeaderRules
+
+    ServiceConnectTestTrafficRules.add_member(:header, Shapes::ShapeRef.new(shape: ServiceConnectTestTrafficHeaderRules, required: true, location_name: "header"))
+    ServiceConnectTestTrafficRules.struct_class = Types::ServiceConnectTestTrafficRules
+
     ServiceConnectTlsCertificateAuthority.add_member(:aws_pca_authority_arn, Shapes::ShapeRef.new(shape: String, location_name: "awsPcaAuthorityArn"))
     ServiceConnectTlsCertificateAuthority.struct_class = Types::ServiceConnectTlsCertificateAuthority
 
@@ -1604,6 +1650,7 @@ module Aws::ECS
     ServiceDeployment.add_member(:target_service_revision, Shapes::ShapeRef.new(shape: ServiceRevisionSummary, location_name: "targetServiceRevision"))
     ServiceDeployment.add_member(:status, Shapes::ShapeRef.new(shape: ServiceDeploymentStatus, location_name: "status"))
     ServiceDeployment.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    ServiceDeployment.add_member(:lifecycle_stage, Shapes::ShapeRef.new(shape: ServiceDeploymentLifecycleStage, location_name: "lifecycleStage"))
     ServiceDeployment.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: DeploymentConfiguration, location_name: "deploymentConfiguration"))
     ServiceDeployment.add_member(:rollback, Shapes::ShapeRef.new(shape: Rollback, location_name: "rollback"))
     ServiceDeployment.add_member(:deployment_circuit_breaker, Shapes::ShapeRef.new(shape: ServiceDeploymentCircuitBreaker, location_name: "deploymentCircuitBreaker"))
@@ -1691,7 +1738,14 @@ module Aws::ECS
     ServiceRevision.add_member(:fargate_ephemeral_storage, Shapes::ShapeRef.new(shape: DeploymentEphemeralStorage, location_name: "fargateEphemeralStorage"))
     ServiceRevision.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     ServiceRevision.add_member(:vpc_lattice_configurations, Shapes::ShapeRef.new(shape: VpcLatticeConfigurations, location_name: "vpcLatticeConfigurations"))
+    ServiceRevision.add_member(:resolved_configuration, Shapes::ShapeRef.new(shape: ResolvedConfiguration, location_name: "resolvedConfiguration"))
     ServiceRevision.struct_class = Types::ServiceRevision
+
+    ServiceRevisionLoadBalancer.add_member(:target_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "targetGroupArn"))
+    ServiceRevisionLoadBalancer.add_member(:production_listener_rule, Shapes::ShapeRef.new(shape: String, location_name: "productionListenerRule"))
+    ServiceRevisionLoadBalancer.struct_class = Types::ServiceRevisionLoadBalancer
+
+    ServiceRevisionLoadBalancers.member = Shapes::ShapeRef.new(shape: ServiceRevisionLoadBalancer)
 
     ServiceRevisionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     ServiceRevisionSummary.add_member(:requested_task_count, Shapes::ShapeRef.new(shape: Integer, location_name: "requestedTaskCount"))
@@ -2061,6 +2115,7 @@ module Aws::ECS
     UpdateServiceRequest.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
     UpdateServiceRequest.add_member(:force_new_deployment, Shapes::ShapeRef.new(shape: Boolean, location_name: "forceNewDeployment"))
     UpdateServiceRequest.add_member(:health_check_grace_period_seconds, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "healthCheckGracePeriodSeconds"))
+    UpdateServiceRequest.add_member(:deployment_controller, Shapes::ShapeRef.new(shape: DeploymentController, location_name: "deploymentController"))
     UpdateServiceRequest.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "enableExecuteCommand"))
     UpdateServiceRequest.add_member(:enable_ecs_managed_tags, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "enableECSManagedTags"))
     UpdateServiceRequest.add_member(:load_balancers, Shapes::ShapeRef.new(shape: LoadBalancers, location_name: "loadBalancers"))

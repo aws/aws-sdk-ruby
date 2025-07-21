@@ -469,31 +469,45 @@ module Aws::CloudFront
 
     # @!group API Operations
 
-    # Associates an alias (also known as a CNAME or an alternate domain
-    # name) with a CloudFront distribution.
+    # <note markdown="1"> The `AssociateAlias` API operation only supports
+    # standard
+    # distributions. To move domains between distribution tenants and/or
+    # standard distributions, we recommend that you use the
+    # [UpdateDomainAssociation][1] API operation instead.
     #
-    # With this operation you can move an alias that's already in use on a
-    # CloudFront distribution to a different distribution in one step. This
+    #  </note>
+    #
+    #  Associates an alias with a CloudFront standard distribution. An alias
+    # is commonly known as a custom domain or vanity domain. It can also be
+    # called a CNAME or alternate domain name.
+    #
+    #  With this operation, you can move an alias that's already used for a
+    # standard distribution to a different standard distribution. This
     # prevents the downtime that could occur if you first remove the alias
-    # from one distribution and then separately add the alias to another
-    # distribution.
+    # from one standard distribution and then separately add the alias to
+    # another standard distribution.
     #
-    # To use this operation to associate an alias with a distribution, you
-    # provide the alias and the ID of the target distribution for the alias.
-    # For more information, including how to set up the target distribution,
-    # prerequisites that you must complete, and other restrictions, see
-    # [Moving an alternate domain name to a different distribution][1] in
-    # the *Amazon CloudFront Developer Guide*.
+    #  To use this operation, specify the alias and the ID of the target
+    # standard distribution.
+    #
+    #  For more information, including how to set up the target standard
+    # distribution, prerequisites that you must complete, and other
+    # restrictions, see [Moving an alternate domain name to a different
+    # standard distribution or distribution tenant][2] in the *Amazon
+    # CloudFront Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-move
+    # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDomainAssociation.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-move
     #
     # @option params [required, String] :target_distribution_id
-    #   The ID of the distribution that you're associating the alias with.
+    #   The ID of the standard distribution that you're associating the alias
+    #   with.
     #
     # @option params [required, String] :alias
-    #   The alias (also known as a CNAME) to add to the target distribution.
+    #   The alias (also known as a CNAME) to add to the target standard
+    #   distribution.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6834,44 +6848,54 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Gets a list of aliases (also called CNAMEs or alternate domain names)
-    # that conflict or overlap with the provided alias, and the associated
-    # CloudFront distributions and Amazon Web Services accounts for each
-    # conflicting alias. In the returned list, the distribution and account
-    # IDs are partially hidden, which allows you to identify the
-    # distributions and accounts that you own, but helps to protect the
+    # <note markdown="1"> The `ListConflictingAliases` API operation only
+    # supports standard
+    # distributions. To list domain conflicts for both standard
+    # distributions and distribution tenants, we recommend that you use the
+    # [ListDomainConflicts][1] API operation instead.
+    #
+    #  </note>
+    #
+    #  Gets a list of aliases that conflict or overlap with the provided
+    # alias, and the associated CloudFront standard distribution and Amazon
+    # Web Services accounts for each conflicting alias. An alias is commonly
+    # known as a custom domain or vanity domain. It can also be called a
+    # CNAME or alternate domain name.
+    #
+    #  In the returned list, the standard distribution and account IDs are
+    # partially hidden, which allows you to identify the standard
+    # distribution and accounts that you own, and helps to protect the
     # information of ones that you don't own.
     #
-    # Use this operation to find aliases that are in use in CloudFront that
+    #  Use this operation to find aliases that are in use in CloudFront that
     # conflict or overlap with the provided alias. For example, if you
     # provide `www.example.com` as input, the returned list can include
     # `www.example.com` and the overlapping wildcard alternate domain name
-    # (`*.example.com`), if they exist. If you provide `*.example.com` as
-    # input, the returned list can include `*.example.com` and any alternate
-    # domain names covered by that wildcard (for example, `www.example.com`,
-    # `test.example.com`, `dev.example.com`, and so on), if they exist.
-    #
-    # To list conflicting aliases, you provide the alias to search and the
-    # ID of a distribution in your account that has an attached SSL/TLS
-    # certificate that includes the provided alias. For more information,
-    # including how to set up the distribution and certificate, see [Moving
-    # an alternate domain name to a different distribution][1] in the
-    # *Amazon CloudFront Developer Guide*.
-    #
-    # You can optionally specify the maximum number of items to receive in
-    # the response. If the total number of items in the list exceeds the
-    # maximum that you specify, or the default maximum, the response is
-    # paginated. To get the next page of items, send a subsequent request
-    # that specifies the `NextMarker` value from the current response as the
-    # `Marker` value in the subsequent request.
-    #
+    # (`.example.com</code>), if they exist. If you provide
+    # </em>.example.com as input, the returned list can include
+    # *.example.com and any alternate domain names covered by that wildcard
+    # (for example, www.example.com, test.example.com, dev.example.com, and
+    # so on), if they exist.</p> To list conflicting aliases, specify the
+    # alias to search and the ID of a standard distribution in your account
+    # that has an attached TLS certificate that includes the provided alias.
+    # For more information, including how to set up the standard
+    # distribution and certificate, see Moving an alternate domain name to a
+    # different standard distribution or distribution tenant in the Amazon
+    # CloudFront Developer Guide. You can optionally specify the maximum
+    # number of items to receive in the response. If the total number of
+    # items in the list exceeds the maximum that you specify, or the default
+    # maximum, the response is paginated. To get the next page of items,
+    # send a subsequent request that specifies the NextMarker value from the
+    # current response as the Marker value in the subsequent request.</p>
+    # `
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-move
+    #
+    # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDomainConflicts.html
     #
     # @option params [required, String] :distribution_id
-    #   The ID of a distribution in your account that has an attached SSL/TLS
-    #   certificate that includes the provided alias.
+    #   The ID of a standard distribution in your account that has an attached
+    #   TLS certificate that includes the provided alias.
     #
     # @option params [required, String] :alias
     #   The alias (also called a CNAME) to search for conflicting aliases.
@@ -7656,7 +7680,9 @@ module Aws::CloudFront
     #   The maximum number of distributions to return.
     #
     # @option params [required, String] :connection_mode
-    #   The connection mode to filter distributions by.
+    #   This field specifies whether the connection mode is through a standard
+    #   distribution (direct) or a multi-tenant distribution with distribution
+    #   tenants(tenant-only).
     #
     # @return [Types::ListDistributionsByConnectionModeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8553,20 +8579,55 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Lists existing domain associations that conflict with the domain that
+    # <note markdown="1"> We recommend that you use the
+    # `ListDomainConflicts` API operation to
+    # check for domain conflicts, as it supports both standard distributions
+    # and distribution tenants. [ListConflictingAliases][1] performs similar
+    # checks but only supports standard distributions.
+    #
+    #  </note>
+    #
+    #  Lists existing domain associations that conflict with the domain that
     # you specify.
     #
-    # You can use this API operation when transferring domains to identify
-    # potential domain conflicts. Domain conflicts must be resolved first
-    # before they can be moved.
+    #  You can use this API operation to identify potential domain conflicts
+    # when moving domains between standard distributions and/or distribution
+    # tenants. Domain conflicts must be resolved first before they can be
+    # moved.
+    #
+    #  For example, if you provide `www.example.com` as input, the returned
+    # list can include `www.example.com` and the overlapping wildcard
+    # alternate domain name (`.example.com</code>), if they exist. If you
+    # provide </em>.example.com as input, the returned list can include
+    # *.example.com and any alternate domain names covered by that wildcard
+    # (for example, www.example.com, test.example.com, dev.example.com, and
+    # so on), if they exist.</p> To list conflicting domains, specify the
+    # following:   The domain to search for   The ID of a standard
+    # distribution or distribution tenant in your account that has an
+    # attached TLS certificate, which covers the specified domain   For more
+    # information, including how to set up the standard distribution or
+    # distribution tenant, and the certificate, see Moving an alternate
+    # domain name to a different standard distribution or distribution
+    # tenant in the Amazon CloudFront Developer Guide. You can optionally
+    # specify the maximum number of items to receive in the response. If the
+    # total number of items in the list exceeds the maximum that you
+    # specify, or the default maximum, the response is paginated. To get the
+    # next page of items, send a subsequent request that specifies the
+    # NextMarker value from the current response as the Marker value in the
+    # subsequent request.</p>
+    # `
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListConflictingAliases.html
     #
     # @option params [required, String] :domain
     #   The domain to check for conflicts.
     #
     # @option params [required, Types::DistributionResourceId] :domain_control_validation_resource
-    #   The distribution resource identifier. This can be the distribution or
-    #   distribution tenant that has a valid certificate, which covers the
-    #   domain that you specify.
+    #   The distribution resource identifier. This can be the standard
+    #   distribution or distribution tenant that has a valid certificate,
+    #   which covers the domain that you specify.
     #
     # @option params [Integer] :max_items
     #   The maximum number of domain conflicts to return.
@@ -10979,18 +11040,44 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Moves a domain from its current distribution or distribution tenant to
-    # another one.
+    # <note markdown="1"> We recommend that you use the
+    # `UpdateDomainAssociation` API operation
+    # to move a domain association, as it supports both standard
+    # distributions and distribution tenants. [AssociateAlias][1] performs
+    # similar checks but only supports standard distributions.
+    #
+    #  </note>
+    #
+    #  Moves a domain from its current standard distribution or distribution
+    # tenant to another one.
+    #
+    #  You must first disable the source distribution (standard distribution
+    # or distribution tenant) and then separately call this operation to
+    # move the domain to another target distribution (standard distribution
+    # or distribution tenant).
+    #
+    #  To use this operation, specify the domain and the ID of the target
+    # resource (standard distribution or distribution tenant). For more
+    # information, including how to set up the target resource,
+    # prerequisites that you must complete, and other restrictions, see
+    # [Moving an alternate domain name to a different standard distribution
+    # or distribution tenant][2] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_AssociateAlias.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-move
     #
     # @option params [required, String] :domain
     #   The domain to update.
     #
     # @option params [required, Types::DistributionResourceId] :target_resource
-    #   The target distribution resource for the domain. You can specify
-    #   either `DistributionId` or `DistributionTenantId`, but not both.
+    #   The target standard distribution or distribution tenant resource for
+    #   the domain. You can specify either `DistributionId` or
+    #   `DistributionTenantId`, but not both.
     #
     # @option params [String] :if_match
-    #   The value of the `ETag` identifier for the distribution or
+    #   The value of the `ETag` identifier for the standard distribution or
     #   distribution tenant that will be associated with the domain.
     #
     # @return [Types::UpdateDomainAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -12145,7 +12232,7 @@ module Aws::CloudFront
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.119.0'
+      context[:gem_version] = '1.120.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

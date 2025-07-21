@@ -10,10 +10,14 @@
 module Aws::MediaPackageV2
   module Types
 
-    # You don't have permissions to perform the requested operation. The
-    # user or role that is making the request must have at least one IAM
-    # permissions policy attached that grants the required permissions. For
-    # more information, see Access Management in the IAM User Guide.
+    # Access is denied because either you don't have permissions to perform
+    # the requested operation or MediaPackage is getting throttling errors
+    # with CDN authorization. The user or role that is making the request
+    # must have at least one IAM permissions policy attached that grants the
+    # required permissions. For more information, see Access Management in
+    # the IAM User Guide. Or, if you're using CDN authorization, you will
+    # receive this exception if MediaPackage receives a throttling error
+    # from Secrets Manager.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -66,6 +70,27 @@ module Aws::MediaPackageV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/CancelHarvestJobResponse AWS API Documentation
     #
     class CancelHarvestJobResponse < Aws::EmptyStructure; end
+
+    # The settings to enable CDN authorization headers in MediaPackage.
+    #
+    # @!attribute [rw] cdn_identifier_secret_arns
+    #   The ARN for the secret in Secrets Manager that your CDN uses for
+    #   authorization to access the endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] secrets_role_arn
+    #   The ARN for the IAM role that gives MediaPackage read access to
+    #   Secrets Manager and KMS for CDN authorization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/CdnAuthConfiguration AWS API Documentation
+    #
+    class CdnAuthConfiguration < Struct.new(
+      :cdn_identifier_secret_arns,
+      :secrets_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The configuration of the channel group.
     #
@@ -2499,13 +2524,26 @@ module Aws::MediaPackageV2
     #   The policy assigned to the origin endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] cdn_auth_configuration
+    #   The settings for using authorization headers between the
+    #   MediaPackage endpoint and your CDN.
+    #
+    #   For information about CDN authorization, see [CDN authorization in
+    #   Elemental MediaPackage][1] in the MediaPackage user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediapackage/latest/userguide/cdn-auth.html
+    #   @return [Types::CdnAuthConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetOriginEndpointPolicyResponse AWS API Documentation
     #
     class GetOriginEndpointPolicyResponse < Struct.new(
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
-      :policy)
+      :policy,
+      :cdn_auth_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3353,13 +3391,26 @@ module Aws::MediaPackageV2
     #   The policy to attach to the specified origin endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] cdn_auth_configuration
+    #   The settings for using authorization headers between the
+    #   MediaPackage endpoint and your CDN.
+    #
+    #   For information about CDN authorization, see [CDN authorization in
+    #   Elemental MediaPackage][1] in the MediaPackage user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediapackage/latest/userguide/cdn-auth.html
+    #   @return [Types::CdnAuthConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/PutOriginEndpointPolicyRequest AWS API Documentation
     #
     class PutOriginEndpointPolicyRequest < Struct.new(
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
-      :policy)
+      :policy,
+      :cdn_auth_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

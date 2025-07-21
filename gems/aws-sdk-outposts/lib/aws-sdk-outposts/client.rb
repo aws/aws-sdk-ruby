@@ -1057,6 +1057,58 @@ module Aws::Outposts
       req.send_request(options)
     end
 
+    # Gets current and historical billing information about the specified
+    # Outpost.
+    #
+    # @option params [String] :next_token
+    #   The pagination token.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum page size.
+    #
+    # @option params [required, String] :outpost_identifier
+    #   The ID or ARN of the Outpost.
+    #
+    # @return [Types::GetOutpostBillingInformationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOutpostBillingInformationOutput#next_token #next_token} => String
+    #   * {Types::GetOutpostBillingInformationOutput#subscriptions #subscriptions} => Array&lt;Types::Subscription&gt;
+    #   * {Types::GetOutpostBillingInformationOutput#contract_end_date #contract_end_date} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_outpost_billing_information({
+    #     next_token: "Token",
+    #     max_results: 1,
+    #     outpost_identifier: "OutpostIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.subscriptions #=> Array
+    #   resp.subscriptions[0].subscription_id #=> String
+    #   resp.subscriptions[0].subscription_type #=> String, one of "ORIGINAL", "RENEWAL", "CAPACITY_INCREASE"
+    #   resp.subscriptions[0].subscription_status #=> String, one of "ACTIVE", "INACTIVE", "CANCELLED"
+    #   resp.subscriptions[0].order_ids #=> Array
+    #   resp.subscriptions[0].order_ids[0] #=> String
+    #   resp.subscriptions[0].begin_date #=> Time
+    #   resp.subscriptions[0].end_date #=> Time
+    #   resp.subscriptions[0].monthly_recurring_price #=> Float
+    #   resp.subscriptions[0].upfront_price #=> Float
+    #   resp.contract_end_date #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOutpostBillingInformation AWS API Documentation
+    #
+    # @overload get_outpost_billing_information(params = {})
+    # @param [Hash] params ({})
+    def get_outpost_billing_information(params = {}, options = {})
+      req = build_request(:get_outpost_billing_information, params)
+      req.send_request(options)
+    end
+
     # Gets the instance types for the specified Outpost.
     #
     # @option params [required, String] :outpost_id
@@ -2350,7 +2402,7 @@ module Aws::Outposts
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

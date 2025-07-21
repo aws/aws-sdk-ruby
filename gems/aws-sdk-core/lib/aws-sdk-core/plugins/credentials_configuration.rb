@@ -103,11 +103,7 @@ module Aws
           will be used to search for tokens configured for your profile in shared configuration files.
         DOCS
       ) do |config|
-        if config.stub_responses
-          StaticTokenProvider.new('token')
-        else
-          TokenProviderChain.new(config).resolve
-        end
+        TokenProviderChain.new(config).resolve
       end
 
       option(:auth_scheme_preference,

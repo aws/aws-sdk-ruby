@@ -59,6 +59,9 @@ module Aws::Synthetics
     DeleteCanaryResponse = Shapes::StructureShape.new(name: 'DeleteCanaryResponse')
     DeleteGroupRequest = Shapes::StructureShape.new(name: 'DeleteGroupRequest')
     DeleteGroupResponse = Shapes::StructureShape.new(name: 'DeleteGroupResponse')
+    Dependencies = Shapes::ListShape.new(name: 'Dependencies')
+    Dependency = Shapes::StructureShape.new(name: 'Dependency')
+    DependencyType = Shapes::StringShape.new(name: 'DependencyType')
     DescribeCanariesLastRunNameFilter = Shapes::ListShape.new(name: 'DescribeCanariesLastRunNameFilter')
     DescribeCanariesLastRunRequest = Shapes::StructureShape.new(name: 'DescribeCanariesLastRunRequest')
     DescribeCanariesLastRunResponse = Shapes::StructureShape.new(name: 'DescribeCanariesLastRunResponse')
@@ -216,10 +219,12 @@ module Aws::Synthetics
     CanaryCodeInput.add_member(:s3_version, Shapes::ShapeRef.new(shape: String, location_name: "S3Version"))
     CanaryCodeInput.add_member(:zip_file, Shapes::ShapeRef.new(shape: Blob, location_name: "ZipFile"))
     CanaryCodeInput.add_member(:handler, Shapes::ShapeRef.new(shape: CodeHandler, required: true, location_name: "Handler"))
+    CanaryCodeInput.add_member(:dependencies, Shapes::ShapeRef.new(shape: Dependencies, location_name: "Dependencies"))
     CanaryCodeInput.struct_class = Types::CanaryCodeInput
 
     CanaryCodeOutput.add_member(:source_location_arn, Shapes::ShapeRef.new(shape: String, location_name: "SourceLocationArn"))
     CanaryCodeOutput.add_member(:handler, Shapes::ShapeRef.new(shape: String, location_name: "Handler"))
+    CanaryCodeOutput.add_member(:dependencies, Shapes::ShapeRef.new(shape: Dependencies, location_name: "Dependencies"))
     CanaryCodeOutput.struct_class = Types::CanaryCodeOutput
 
     CanaryDryRunConfigOutput.add_member(:dry_run_id, Shapes::ShapeRef.new(shape: UUID, location_name: "DryRunId"))
@@ -325,6 +330,12 @@ module Aws::Synthetics
     DeleteGroupRequest.struct_class = Types::DeleteGroupRequest
 
     DeleteGroupResponse.struct_class = Types::DeleteGroupResponse
+
+    Dependencies.member = Shapes::ShapeRef.new(shape: Dependency)
+
+    Dependency.add_member(:type, Shapes::ShapeRef.new(shape: DependencyType, location_name: "Type"))
+    Dependency.add_member(:reference, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Reference"))
+    Dependency.struct_class = Types::Dependency
 
     DescribeCanariesLastRunNameFilter.member = Shapes::ShapeRef.new(shape: CanaryName)
 

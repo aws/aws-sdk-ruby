@@ -388,6 +388,7 @@ module Aws::GuardDuty
       attr_accessor activate: bool
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
 
@@ -462,6 +463,7 @@ module Aws::GuardDuty
       attr_accessor activate: bool
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
 
@@ -1026,6 +1028,7 @@ module Aws::GuardDuty
       attr_accessor location: ::String
       attr_accessor status: ("INACTIVE" | "ACTIVATING" | "ACTIVE" | "DEACTIVATING" | "ERROR" | "DELETE_PENDING" | "DELETED")
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
 
@@ -1128,6 +1131,7 @@ module Aws::GuardDuty
       attr_accessor location: ::String
       attr_accessor status: ("INACTIVE" | "ACTIVATING" | "ACTIVE" | "DEACTIVATING" | "ERROR" | "DELETE_PENDING" | "DELETED")
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
 
@@ -2420,6 +2424,7 @@ module Aws::GuardDuty
       attr_accessor name: ::String
       attr_accessor location: ::String
       attr_accessor activate: bool
+      attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
 
@@ -2495,6 +2500,7 @@ module Aws::GuardDuty
       attr_accessor name: ::String
       attr_accessor location: ::String
       attr_accessor activate: bool
+      attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
 

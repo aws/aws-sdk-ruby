@@ -53,13 +53,9 @@ module Aws
           use_fips: context.config.use_fips_endpoint,
           use_global_endpoint: context.config.sts_regional_endpoints == 'legacy'
         )
-        endpoint = context.config.endpoint_provider
-                          .resolve_endpoint(endpoint_params)
+        endpoint = context.config.endpoint_provider.resolve_endpoint(endpoint_params)
         auth_scheme = Aws::Endpoints.resolve_auth_scheme(context, endpoint)
-
-        signer = Aws::Plugins::Sign.signer_for(
-          auth_scheme, context.config
-        )
+        signer = Aws::Plugins::Sign.signer_for(auth_scheme, context.config)
 
         signer.presign_url(
           http_method: 'GET',

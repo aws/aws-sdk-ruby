@@ -203,7 +203,7 @@ module Aws
               )
             end
 
-            let(:auth) { ['aws.auth#sigv4a', 'aws.auth#sigv4'] }
+            let(:auth) { %w[aws.auth#sigv4a aws.auth#sigv4] }
 
             it 'prefers the first supported auth trait' do
               expect_auth({ 'name' => 'sigv4' })

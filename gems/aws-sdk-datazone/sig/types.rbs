@@ -433,6 +433,7 @@ module Aws::DataZone
       attr_accessor hyper_pod_properties: Types::HyperPodPropertiesInput
       attr_accessor iam_properties: Types::IamPropertiesInput
       attr_accessor redshift_properties: Types::RedshiftPropertiesInput
+      attr_accessor s3_properties: Types::S3PropertiesInput
       attr_accessor spark_emr_properties: Types::SparkEmrPropertiesInput
       attr_accessor spark_glue_properties: Types::SparkGluePropertiesInput
       attr_accessor unknown: untyped
@@ -448,6 +449,8 @@ module Aws::DataZone
       end
       class RedshiftProperties < ConnectionPropertiesInput
       end
+      class S3Properties < ConnectionPropertiesInput
+      end
       class SparkEmrProperties < ConnectionPropertiesInput
       end
       class SparkGlueProperties < ConnectionPropertiesInput
@@ -462,6 +465,7 @@ module Aws::DataZone
       attr_accessor hyper_pod_properties: Types::HyperPodPropertiesOutput
       attr_accessor iam_properties: Types::IamPropertiesOutput
       attr_accessor redshift_properties: Types::RedshiftPropertiesOutput
+      attr_accessor s3_properties: Types::S3PropertiesOutput
       attr_accessor spark_emr_properties: Types::SparkEmrPropertiesOutput
       attr_accessor spark_glue_properties: Types::SparkGluePropertiesOutput
       attr_accessor unknown: untyped
@@ -477,6 +481,8 @@ module Aws::DataZone
       end
       class RedshiftProperties < ConnectionPropertiesOutput
       end
+      class S3Properties < ConnectionPropertiesOutput
+      end
       class SparkEmrProperties < ConnectionPropertiesOutput
       end
       class SparkGlueProperties < ConnectionPropertiesOutput
@@ -490,6 +496,7 @@ module Aws::DataZone
       attr_accessor glue_properties: Types::GluePropertiesPatch
       attr_accessor iam_properties: Types::IamPropertiesPatch
       attr_accessor redshift_properties: Types::RedshiftPropertiesPatch
+      attr_accessor s3_properties: Types::S3PropertiesPatch
       attr_accessor spark_emr_properties: Types::SparkEmrPropertiesPatch
       attr_accessor unknown: untyped
       SENSITIVE: []
@@ -501,6 +508,8 @@ module Aws::DataZone
       class IamProperties < ConnectionPropertiesPatch
       end
       class RedshiftProperties < ConnectionPropertiesPatch
+      end
+      class S3Properties < ConnectionPropertiesPatch
       end
       class SparkEmrProperties < ConnectionPropertiesPatch
       end
@@ -517,7 +526,7 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
       SENSITIVE: []
     end
 
@@ -671,7 +680,7 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
       SENSITIVE: [:description]
     end
 
@@ -2075,7 +2084,7 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
       SENSITIVE: [:connection_credentials, :description]
     end
 
@@ -2756,7 +2765,7 @@ module Aws::DataZone
       attr_accessor compatible_compute_environments: ::Array[("SPARK" | "ATHENA" | "PYTHON")]
       attr_accessor connection_properties: ::Hash[::String, ::String]
       attr_accessor connection_schema_version: ::Integer
-      attr_accessor connection_type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
+      attr_accessor connection_type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
       attr_accessor creation_time: ::Time
       attr_accessor description: ::String
       attr_accessor last_connection_validation_time: ::Time
@@ -3125,7 +3134,7 @@ module Aws::DataZone
       attr_accessor project_identifier: ::String
       attr_accessor sort_by: ("NAME")
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
       SENSITIVE: []
     end
 
@@ -4466,6 +4475,26 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class S3PropertiesInput
+      attr_accessor s3_access_grant_location_id: ::String
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class S3PropertiesOutput
+      attr_accessor error_message: ::String
+      attr_accessor s3_access_grant_location_id: ::String
+      attr_accessor s3_uri: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "DELETING" | "DELETE_FAILED" | "READY" | "UPDATING" | "UPDATE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class S3PropertiesPatch
+      attr_accessor s3_access_grant_location_id: ::String
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
     class SageMakerRunConfigurationInput
       attr_accessor tracking_assets: ::Hash[::String, ::Array[::String]]
       SENSITIVE: []
@@ -5072,7 +5101,7 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
       SENSITIVE: [:description]
     end
 

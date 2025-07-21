@@ -127,10 +127,19 @@
     "models": "batch/2016-08-10"
   },
   "Bedrock": {
-    "models": "bedrock/2023-04-20"
+    "models": "bedrock/2023-04-20",
+    "addPlugins": [
+      "Aws::Bedrock::Plugins::BearerAuthorization"
+    ]
   },
   "BedrockAgent": {
     "models": "bedrock-agent/2023-06-05"
+  },
+  "BedrockAgentCore": {
+    "models": "bedrock-agentcore/2024-02-28"
+  },
+  "BedrockAgentCoreControl": {
+    "models": "bedrock-agentcore-control/2023-06-05"
   },
   "BedrockAgentRuntime": {
     "models": "bedrock-agent-runtime/2023-07-26"
@@ -142,7 +151,10 @@
     "models": "bedrock-data-automation-runtime/2024-06-13"
   },
   "BedrockRuntime": {
-    "models": "bedrock-runtime/2023-09-30"
+    "models": "bedrock-runtime/2023-09-30",
+    "addPlugins": [
+      "Aws::BedrockRuntime::Plugins::BearerAuthorization"
+    ]
   },
   "Billing": {
     "models": "billing/2023-09-07"
@@ -1100,6 +1112,9 @@
   },
   "S3Tables": {
     "models": "s3tables/2018-05-10"
+  },
+  "S3Vectors": {
+    "models": "s3vectors/2025-07-15"
   },
   "SES": {
     "models": "email/2010-12-01"

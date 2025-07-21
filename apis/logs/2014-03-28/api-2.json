@@ -337,6 +337,7 @@
       "errors":[
         {"shape":"InvalidParameterException"},
         {"shape":"ResourceNotFoundException"},
+        {"shape":"OperationAbortedException"},
         {"shape":"ServiceUnavailableException"}
       ]
     },
@@ -774,6 +775,23 @@
         {"shape":"ServiceUnavailableException"}
       ]
     },
+    "GetLogObject":{
+      "name":"GetLogObject",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetLogObjectRequest"},
+      "output":{"shape":"GetLogObjectResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidOperationException"}
+      ],
+      "endpoint":{"hostPrefix":"streaming-"}
+    },
     "GetLogRecord":{
       "name":"GetLogRecord",
       "http":{
@@ -1115,6 +1133,8 @@
       "errors":[
         {"shape":"InvalidParameterException"},
         {"shape":"LimitExceededException"},
+        {"shape":"OperationAbortedException"},
+        {"shape":"ResourceNotFoundException"},
         {"shape":"ServiceUnavailableException"}
       ]
     },
@@ -1707,6 +1727,7 @@
       "type":"list",
       "member":{"shape":"Arn"}
     },
+    "Data":{"type":"blob"},
     "DataAlreadyAcceptedException":{
       "type":"structure",
       "members":{
@@ -1878,7 +1899,9 @@
     "DeleteResourcePolicyRequest":{
       "type":"structure",
       "members":{
-        "policyName":{"shape":"PolicyName"}
+        "policyName":{"shape":"PolicyName"},
+        "resourceArn":{"shape":"Arn"},
+        "expectedRevisionId":{"shape":"ExpectedRevisionId"}
       }
     },
     "DeleteRetentionPolicyRequest":{
@@ -1969,13 +1992,14 @@
       "enum":[
         "S3",
         "CWL",
-        "FH"
+        "FH",
+        "XRAY"
       ]
     },
     "DeliveryDestinationTypes":{
       "type":"list",
       "member":{"shape":"DeliveryDestinationType"},
-      "max":3,
+      "max":4,
       "min":1
     },
     "DeliveryDestinations":{
@@ -2275,7 +2299,9 @@
       "type":"structure",
       "members":{
         "nextToken":{"shape":"NextToken"},
-        "limit":{"shape":"DescribeLimit"}
+        "limit":{"shape":"DescribeLimit"},
+        "resourceArn":{"shape":"Arn"},
+        "policyScope":{"shape":"PolicyScope"}
       }
     },
     "DescribeResourcePoliciesResponse":{
@@ -2471,6 +2497,10 @@
       "max":10000,
       "min":1
     },
+    "ExpectedRevisionId":{
+      "type":"string",
+      "min":1
+    },
     "ExportDestinationBucket":{
       "type":"string",
       "max":512,
@@ -2566,6 +2596,13 @@
     "FieldIndexes":{
       "type":"list",
       "member":{"shape":"FieldIndex"}
+    },
+    "FieldsData":{
+      "type":"structure",
+      "members":{
+        "data":{"shape":"Data"}
+      },
+      "event":true
     },
     "FilterCount":{"type":"integer"},
     "FilterLogEventsRequest":{
@@ -2777,6 +2814,28 @@
         "logGroupFields":{"shape":"LogGroupFieldList"}
       }
     },
+    "GetLogObjectRequest":{
+      "type":"structure",
+      "required":["logObjectPointer"],
+      "members":{
+        "unmask":{"shape":"Unmask"},
+        "logObjectPointer":{"shape":"LogObjectPointer"}
+      }
+    },
+    "GetLogObjectResponse":{
+      "type":"structure",
+      "members":{
+        "fieldStream":{"shape":"GetLogObjectResponseStream"}
+      }
+    },
+    "GetLogObjectResponseStream":{
+      "type":"structure",
+      "members":{
+        "fields":{"shape":"FieldsData"},
+        "InternalStreamingException":{"shape":"InternalStreamingException"}
+      },
+      "eventstream":true
+    },
     "GetLogRecordRequest":{
       "type":"structure",
       "required":["logRecordPointer"],
@@ -2948,6 +3007,13 @@
       "enum":["OPENSEARCH"]
     },
     "Interleaved":{"type":"boolean"},
+    "InternalStreamingException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"Message"}
+      },
+      "exception":true
+    },
     "InvalidOperationException":{
       "type":"structure",
       "members":{},
@@ -3278,6 +3344,11 @@
     "LogGroups":{
       "type":"list",
       "member":{"shape":"LogGroup"}
+    },
+    "LogObjectPointer":{
+      "type":"string",
+      "max":512,
+      "min":1
     },
     "LogRecord":{
       "type":"map",
@@ -3748,13 +3819,21 @@
       "min":1
     },
     "PolicyName":{"type":"string"},
+    "PolicyScope":{
+      "type":"string",
+      "enum":[
+        "ACCOUNT",
+        "RESOURCE"
+      ]
+    },
     "PolicyType":{
       "type":"string",
       "enum":[
         "DATA_PROTECTION_POLICY",
         "SUBSCRIPTION_FILTER_POLICY",
         "FIELD_INDEX_POLICY",
-        "TRANSFORMER_POLICY"
+        "TRANSFORMER_POLICY",
+        "METRIC_EXTRACTION_POLICY"
       ]
     },
     "Priority":{
@@ -3854,14 +3933,12 @@
     },
     "PutDeliveryDestinationRequest":{
       "type":"structure",
-      "required":[
-        "name",
-        "deliveryDestinationConfiguration"
-      ],
+      "required":["name"],
       "members":{
         "name":{"shape":"DeliveryDestinationName"},
         "outputFormat":{"shape":"OutputFormat"},
         "deliveryDestinationConfiguration":{"shape":"DeliveryDestinationConfiguration"},
+        "deliveryDestinationType":{"shape":"DeliveryDestinationType"},
         "tags":{"shape":"Tags"}
       }
     },
@@ -4027,13 +4104,16 @@
       "type":"structure",
       "members":{
         "policyName":{"shape":"PolicyName"},
-        "policyDocument":{"shape":"PolicyDocument"}
+        "policyDocument":{"shape":"PolicyDocument"},
+        "resourceArn":{"shape":"Arn"},
+        "expectedRevisionId":{"shape":"ExpectedRevisionId"}
       }
     },
     "PutResourcePolicyResponse":{
       "type":"structure",
       "members":{
-        "resourcePolicy":{"shape":"ResourcePolicy"}
+        "resourcePolicy":{"shape":"ResourcePolicy"},
+        "revisionId":{"shape":"ExpectedRevisionId"}
       }
     },
     "PutRetentionPolicyRequest":{
@@ -4285,7 +4365,10 @@
       "members":{
         "policyName":{"shape":"PolicyName"},
         "policyDocument":{"shape":"PolicyDocument"},
-        "lastUpdatedTime":{"shape":"Timestamp"}
+        "lastUpdatedTime":{"shape":"Timestamp"},
+        "policyScope":{"shape":"PolicyScope"},
+        "resourceArn":{"shape":"Arn"},
+        "revisionId":{"shape":"ExpectedRevisionId"}
       }
     },
     "ResourceType":{

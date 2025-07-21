@@ -39,7 +39,7 @@ module Aws::Pricing
     end
 
     class Filter
-      attr_accessor type: ("TERM_MATCH")
+      attr_accessor type: ("TERM_MATCH" | "EQUALS" | "CONTAINS" | "ANY_OF" | "NONE_OF")
       attr_accessor field: ::String
       attr_accessor value: ::String
       SENSITIVE: []

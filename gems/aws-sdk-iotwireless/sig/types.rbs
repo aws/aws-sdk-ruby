@@ -564,7 +564,7 @@ module Aws::IoTWireless
 
     class EventConfigurationItem
       attr_accessor identifier: ::String
-      attr_accessor identifier_type: ("PartnerAccountId" | "DevEui" | "FuotaTaskId" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId")
+      attr_accessor identifier_type: ("PartnerAccountId" | "DevEui" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId")
       attr_accessor partner_type: ("Sidewalk")
       attr_accessor events: Types::EventNotificationItemConfigurations
       SENSITIVE: []
@@ -804,7 +804,7 @@ module Aws::IoTWireless
 
     class GetResourceEventConfigurationRequest
       attr_accessor identifier: ::String
-      attr_accessor identifier_type: ("PartnerAccountId" | "DevEui" | "FuotaTaskId" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId")
+      attr_accessor identifier_type: ("PartnerAccountId" | "DevEui" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId")
       attr_accessor partner_type: ("Sidewalk")
       SENSITIVE: []
     end
@@ -1113,7 +1113,7 @@ module Aws::IoTWireless
     end
 
     class ListEventConfigurationsRequest
-      attr_accessor resource_type: ("FuotaTask" | "SidewalkAccount" | "WirelessDevice" | "WirelessGateway")
+      attr_accessor resource_type: ("SidewalkAccount" | "WirelessDevice" | "WirelessGateway")
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -2152,7 +2152,7 @@ module Aws::IoTWireless
 
     class UpdateResourceEventConfigurationRequest
       attr_accessor identifier: ::String
-      attr_accessor identifier_type: ("PartnerAccountId" | "DevEui" | "FuotaTaskId" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId")
+      attr_accessor identifier_type: ("PartnerAccountId" | "DevEui" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId")
       attr_accessor partner_type: ("Sidewalk")
       attr_accessor device_registration_state: Types::DeviceRegistrationStateEventConfiguration
       attr_accessor proximity: Types::ProximityEventConfiguration

@@ -257,6 +257,34 @@ module Aws
                          ) -> _CreateBucketResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBucketResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#create_bucket_metadata_configuration-instance_method
+      def create_bucket_metadata_configuration: (
+                                                  bucket: ::String,
+                                                  ?content_md5: ::String,
+                                                  ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
+                                                  metadata_configuration: {
+                                                    journal_table_configuration: {
+                                                      record_expiration: {
+                                                        expiration: ("ENABLED" | "DISABLED"),
+                                                        days: ::Integer?
+                                                      },
+                                                      encryption_configuration: {
+                                                        sse_algorithm: ("aws:kms" | "AES256"),
+                                                        kms_key_arn: ::String?
+                                                      }?
+                                                    },
+                                                    inventory_table_configuration: {
+                                                      configuration_state: ("ENABLED" | "DISABLED"),
+                                                      encryption_configuration: {
+                                                        sse_algorithm: ("aws:kms" | "AES256"),
+                                                        kms_key_arn: ::String?
+                                                      }?
+                                                    }?
+                                                  },
+                                                  ?expected_bucket_owner: ::String
+                                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#create_bucket_metadata_table_configuration-instance_method
       def create_bucket_metadata_table_configuration: (
                                                         bucket: ::String,
@@ -395,6 +423,13 @@ module Aws
                                      ?expected_bucket_owner: ::String
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#delete_bucket_metadata_configuration-instance_method
+      def delete_bucket_metadata_configuration: (
+                                                  bucket: ::String,
+                                                  ?expected_bucket_owner: ::String
+                                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#delete_bucket_metadata_table_configuration-instance_method
       def delete_bucket_metadata_table_configuration: (
@@ -643,6 +678,17 @@ module Aws
                                 ?expected_bucket_owner: ::String
                               ) -> _GetBucketLoggingResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBucketLoggingResponseSuccess
+
+      interface _GetBucketMetadataConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBucketMetadataConfigurationOutput]
+        def get_bucket_metadata_configuration_result: () -> Types::GetBucketMetadataConfigurationResult
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#get_bucket_metadata_configuration-instance_method
+      def get_bucket_metadata_configuration: (
+                                               bucket: ::String,
+                                               ?expected_bucket_owner: ::String
+                                             ) -> _GetBucketMetadataConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBucketMetadataConfigurationResponseSuccess
 
       interface _GetBucketMetadataTableConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetBucketMetadataTableConfigurationOutput]
@@ -2321,6 +2367,37 @@ module Aws
                                    ?expected_bucket_owner: ::String
                                  ) ?{ (*untyped) -> void } -> _SelectObjectContentResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _SelectObjectContentResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#update_bucket_metadata_inventory_table_configuration-instance_method
+      def update_bucket_metadata_inventory_table_configuration: (
+                                                                  bucket: ::String,
+                                                                  ?content_md5: ::String,
+                                                                  ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
+                                                                  inventory_table_configuration: {
+                                                                    configuration_state: ("ENABLED" | "DISABLED"),
+                                                                    encryption_configuration: {
+                                                                      sse_algorithm: ("aws:kms" | "AES256"),
+                                                                      kms_key_arn: ::String?
+                                                                    }?
+                                                                  },
+                                                                  ?expected_bucket_owner: ::String
+                                                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#update_bucket_metadata_journal_table_configuration-instance_method
+      def update_bucket_metadata_journal_table_configuration: (
+                                                                bucket: ::String,
+                                                                ?content_md5: ::String,
+                                                                ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
+                                                                journal_table_configuration: {
+                                                                  record_expiration: {
+                                                                    expiration: ("ENABLED" | "DISABLED"),
+                                                                    days: ::Integer?
+                                                                  }
+                                                                },
+                                                                ?expected_bucket_owner: ::String
+                                                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       interface _UploadPartResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UploadPartOutput]

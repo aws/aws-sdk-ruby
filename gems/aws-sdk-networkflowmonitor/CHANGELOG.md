@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2025-07-16)
+------------------
+
+* Feature - Introducing 2 new scope status types - DEACTIVATING and DEACTIVATED.
+
 1.8.0 (2025-06-30)
 ------------------
 

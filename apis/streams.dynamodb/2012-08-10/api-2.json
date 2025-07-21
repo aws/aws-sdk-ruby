@@ -110,7 +110,8 @@
       "members":{
         "StreamArn":{"shape":"StreamArn"},
         "Limit":{"shape":"PositiveIntegerObject"},
-        "ExclusiveStartShardId":{"shape":"ShardId"}
+        "ExclusiveStartShardId":{"shape":"ShardId"},
+        "ShardFilter":{"shape":"ShardFilter"}
       }
     },
     "DescribeStreamOutput":{
@@ -305,6 +306,17 @@
     "ShardDescriptionList":{
       "type":"list",
       "member":{"shape":"Shard"}
+    },
+    "ShardFilter":{
+      "type":"structure",
+      "members":{
+        "Type":{"shape":"ShardFilterType"},
+        "ShardId":{"shape":"ShardId"}
+      }
+    },
+    "ShardFilterType":{
+      "type":"string",
+      "enum":["CHILD_SHARDS"]
     },
     "ShardId":{
       "type":"string",

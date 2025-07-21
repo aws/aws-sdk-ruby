@@ -454,6 +454,8 @@ module Aws::QuickSight
     CustomContentVisual = Shapes::StructureShape.new(name: 'CustomContentVisual')
     CustomFilterConfiguration = Shapes::StructureShape.new(name: 'CustomFilterConfiguration')
     CustomFilterListConfiguration = Shapes::StructureShape.new(name: 'CustomFilterListConfiguration')
+    CustomInstructions = Shapes::StructureShape.new(name: 'CustomInstructions')
+    CustomInstructionsString = Shapes::StringShape.new(name: 'CustomInstructionsString')
     CustomLabel = Shapes::StringShape.new(name: 'CustomLabel')
     CustomNarrativeOptions = Shapes::StructureShape.new(name: 'CustomNarrativeOptions')
     CustomParameterValues = Shapes::StructureShape.new(name: 'CustomParameterValues')
@@ -3698,6 +3700,7 @@ module Aws::QuickSight
     CreateTopicRequest.add_member(:topic, Shapes::ShapeRef.new(shape: TopicDetails, required: true, location_name: "Topic"))
     CreateTopicRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateTopicRequest.add_member(:folder_arns, Shapes::ShapeRef.new(shape: FolderArnList, location_name: "FolderArns"))
+    CreateTopicRequest.add_member(:custom_instructions, Shapes::ShapeRef.new(shape: CustomInstructions, location_name: "CustomInstructions"))
     CreateTopicRequest.struct_class = Types::CreateTopicRequest
 
     CreateTopicResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -3800,6 +3803,9 @@ module Aws::QuickSight
     CustomFilterListConfiguration.add_member(:select_all_options, Shapes::ShapeRef.new(shape: CategoryFilterSelectAllOptions, location_name: "SelectAllOptions"))
     CustomFilterListConfiguration.add_member(:null_option, Shapes::ShapeRef.new(shape: FilterNullOption, required: true, location_name: "NullOption"))
     CustomFilterListConfiguration.struct_class = Types::CustomFilterListConfiguration
+
+    CustomInstructions.add_member(:custom_instructions_string, Shapes::ShapeRef.new(shape: CustomInstructionsString, required: true, location_name: "CustomInstructionsString"))
+    CustomInstructions.struct_class = Types::CustomInstructions
 
     CustomNarrativeOptions.add_member(:narrative, Shapes::ShapeRef.new(shape: NarrativeString, required: true, location_name: "Narrative"))
     CustomNarrativeOptions.struct_class = Types::CustomNarrativeOptions
@@ -5232,6 +5238,7 @@ module Aws::QuickSight
     DescribeTopicResponse.add_member(:topic, Shapes::ShapeRef.new(shape: TopicDetails, location_name: "Topic"))
     DescribeTopicResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DescribeTopicResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeTopicResponse.add_member(:custom_instructions, Shapes::ShapeRef.new(shape: CustomInstructions, location_name: "CustomInstructions"))
     DescribeTopicResponse.struct_class = Types::DescribeTopicResponse
 
     DescribeUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, required: true, location: "uri", location_name: "UserName"))
@@ -10010,6 +10017,7 @@ module Aws::QuickSight
     UpdateTopicRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     UpdateTopicRequest.add_member(:topic_id, Shapes::ShapeRef.new(shape: TopicId, required: true, location: "uri", location_name: "TopicId"))
     UpdateTopicRequest.add_member(:topic, Shapes::ShapeRef.new(shape: TopicDetails, required: true, location_name: "Topic"))
+    UpdateTopicRequest.add_member(:custom_instructions, Shapes::ShapeRef.new(shape: CustomInstructions, location_name: "CustomInstructions"))
     UpdateTopicRequest.struct_class = Types::UpdateTopicRequest
 
     UpdateTopicResponse.add_member(:topic_id, Shapes::ShapeRef.new(shape: TopicId, location_name: "TopicId"))

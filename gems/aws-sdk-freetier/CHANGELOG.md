@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2025-07-09)
+------------------
+
+* Feature - This release introduces four new APIs: GetAccountPlanState and UpgradeAccountPlan for AWS account plan management; ListAccountActivities and GetAccountActivity that provide activity tracking capabilities.
+
 1.22.0 (2025-06-02)
 ------------------
 

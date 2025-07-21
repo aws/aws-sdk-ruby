@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.120.0 (2025-07-16)
+------------------
+
+* Feature - Add expectedBucketOwner parameter to ThreatIntel and IPSet APIs.
+
 1.119.0 (2025-06-27)
 ------------------
 

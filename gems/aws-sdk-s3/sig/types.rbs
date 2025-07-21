@@ -326,6 +326,15 @@ module Aws::S3
       SENSITIVE: []
     end
 
+    class CreateBucketMetadataConfigurationRequest
+      attr_accessor bucket: ::String
+      attr_accessor content_md5: ::String
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
+      attr_accessor metadata_configuration: Types::MetadataConfiguration
+      attr_accessor expected_bucket_owner: ::String
+      SENSITIVE: []
+    end
+
     class CreateBucketMetadataTableConfigurationRequest
       attr_accessor bucket: ::String
       attr_accessor content_md5: ::String
@@ -479,6 +488,12 @@ module Aws::S3
       SENSITIVE: []
     end
 
+    class DeleteBucketMetadataConfigurationRequest
+      attr_accessor bucket: ::String
+      attr_accessor expected_bucket_owner: ::String
+      SENSITIVE: []
+    end
+
     class DeleteBucketMetadataTableConfigurationRequest
       attr_accessor bucket: ::String
       attr_accessor expected_bucket_owner: ::String
@@ -616,6 +631,13 @@ module Aws::S3
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
       attr_accessor replication_time: Types::ReplicationTime
       attr_accessor metrics: Types::Metrics
+      SENSITIVE: []
+    end
+
+    class DestinationResult
+      attr_accessor table_bucket_type: ("aws" | "customer")
+      attr_accessor table_bucket_arn: ::String
+      attr_accessor table_namespace: ::String
       SENSITIVE: []
     end
 
@@ -797,6 +819,22 @@ module Aws::S3
     class GetBucketLoggingRequest
       attr_accessor bucket: ::String
       attr_accessor expected_bucket_owner: ::String
+      SENSITIVE: []
+    end
+
+    class GetBucketMetadataConfigurationOutput
+      attr_accessor get_bucket_metadata_configuration_result: Types::GetBucketMetadataConfigurationResult
+      SENSITIVE: []
+    end
+
+    class GetBucketMetadataConfigurationRequest
+      attr_accessor bucket: ::String
+      attr_accessor expected_bucket_owner: ::String
+      SENSITIVE: []
+    end
+
+    class GetBucketMetadataConfigurationResult
+      attr_accessor metadata_configuration_result: Types::MetadataConfigurationResult
       SENSITIVE: []
     end
 
@@ -1328,6 +1366,27 @@ module Aws::S3
       SENSITIVE: []
     end
 
+    class InventoryTableConfiguration
+      attr_accessor configuration_state: ("ENABLED" | "DISABLED")
+      attr_accessor encryption_configuration: Types::MetadataTableEncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class InventoryTableConfigurationResult
+      attr_accessor configuration_state: ("ENABLED" | "DISABLED")
+      attr_accessor table_status: ::String
+      attr_accessor error: Types::ErrorDetails
+      attr_accessor table_name: ::String
+      attr_accessor table_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InventoryTableConfigurationUpdates
+      attr_accessor configuration_state: ("ENABLED" | "DISABLED")
+      attr_accessor encryption_configuration: Types::MetadataTableEncryptionConfiguration
+      SENSITIVE: []
+    end
+
     class JSONInput
       attr_accessor type: ("DOCUMENT" | "LINES")
       SENSITIVE: []
@@ -1335,6 +1394,26 @@ module Aws::S3
 
     class JSONOutput
       attr_accessor record_delimiter: ::String
+      SENSITIVE: []
+    end
+
+    class JournalTableConfiguration
+      attr_accessor record_expiration: Types::RecordExpiration
+      attr_accessor encryption_configuration: Types::MetadataTableEncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class JournalTableConfigurationResult
+      attr_accessor table_status: ::String
+      attr_accessor error: Types::ErrorDetails
+      attr_accessor table_name: ::String
+      attr_accessor table_arn: ::String
+      attr_accessor record_expiration: Types::RecordExpiration
+      SENSITIVE: []
+    end
+
+    class JournalTableConfigurationUpdates
+      attr_accessor record_expiration: Types::RecordExpiration
       SENSITIVE: []
     end
 
@@ -1646,6 +1725,19 @@ module Aws::S3
       SENSITIVE: []
     end
 
+    class MetadataConfiguration
+      attr_accessor journal_table_configuration: Types::JournalTableConfiguration
+      attr_accessor inventory_table_configuration: Types::InventoryTableConfiguration
+      SENSITIVE: []
+    end
+
+    class MetadataConfigurationResult
+      attr_accessor destination_result: Types::DestinationResult
+      attr_accessor journal_table_configuration_result: Types::JournalTableConfigurationResult
+      attr_accessor inventory_table_configuration_result: Types::InventoryTableConfigurationResult
+      SENSITIVE: []
+    end
+
     class MetadataEntry
       attr_accessor name: ::String
       attr_accessor value: ::String
@@ -1659,6 +1751,12 @@ module Aws::S3
 
     class MetadataTableConfigurationResult
       attr_accessor s3_tables_destination_result: Types::S3TablesDestinationResult
+      SENSITIVE: []
+    end
+
+    class MetadataTableEncryptionConfiguration
+      attr_accessor sse_algorithm: ("aws:kms" | "AES256")
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -2263,6 +2361,12 @@ module Aws::S3
       SENSITIVE: []
     end
 
+    class RecordExpiration
+      attr_accessor expiration: ("ENABLED" | "DISABLED")
+      attr_accessor days: ::Integer
+      SENSITIVE: []
+    end
+
     class RecordsEvent
       attr_accessor payload: ::IO
       attr_accessor event_type: untyped
@@ -2602,6 +2706,24 @@ module Aws::S3
       attr_accessor date: ::Time
       attr_accessor days: ::Integer
       attr_accessor storage_class: ("GLACIER" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE" | "GLACIER_IR")
+      SENSITIVE: []
+    end
+
+    class UpdateBucketMetadataInventoryTableConfigurationRequest
+      attr_accessor bucket: ::String
+      attr_accessor content_md5: ::String
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
+      attr_accessor inventory_table_configuration: Types::InventoryTableConfigurationUpdates
+      attr_accessor expected_bucket_owner: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBucketMetadataJournalTableConfigurationRequest
+      attr_accessor bucket: ::String
+      attr_accessor content_md5: ::String
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
+      attr_accessor journal_table_configuration: Types::JournalTableConfigurationUpdates
+      attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
 

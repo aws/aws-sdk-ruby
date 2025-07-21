@@ -503,7 +503,7 @@ module Aws
         def physical_endpoints: () -> ::Array[Types::PhysicalEndpoint]
         def project_id: () -> ::String
         def props: () -> Types::ConnectionPropertiesOutput
-        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
+        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_connection-instance_method
       def create_connection: (
@@ -598,6 +598,10 @@ module Aws
                                      cluster_name: ::String?,
                                      workgroup_name: ::String?
                                    }?
+                                 }?,
+                                 s3_properties: {
+                                   s3_access_grant_location_id: ::String?,
+                                   s3_uri: ::String
                                  }?,
                                  spark_emr_properties: {
                                    compute_arn: ::String?,
@@ -904,7 +908,7 @@ module Aws
                                 ?environment_account_region: ::String,
                                 ?environment_blueprint_identifier: ::String,
                                 ?environment_configuration_id: ::String,
-                                environment_profile_identifier: ::String,
+                                ?environment_profile_identifier: ::String,
                                 ?glossary_terms: Array[::String],
                                 name: ::String,
                                 project_identifier: ::String,
@@ -1743,7 +1747,7 @@ module Aws
         def physical_endpoints: () -> ::Array[Types::PhysicalEndpoint]
         def project_id: () -> ::String
         def props: () -> Types::ConnectionPropertiesOutput
-        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
+        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_connection-instance_method
       def get_connection: (
@@ -2437,7 +2441,7 @@ module Aws
                               project_identifier: ::String,
                               ?sort_by: ("NAME"),
                               ?sort_order: ("ASCENDING" | "DESCENDING"),
-                              ?type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
+                              ?type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
                             ) -> _ListConnectionsResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectionsResponseSuccess
 
@@ -3414,7 +3418,7 @@ module Aws
         def physical_endpoints: () -> ::Array[Types::PhysicalEndpoint]
         def project_id: () -> ::String
         def props: () -> Types::ConnectionPropertiesOutput
-        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
+        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_connection-instance_method
       def update_connection: (
@@ -3468,6 +3472,10 @@ module Aws
                                      cluster_name: ::String?,
                                      workgroup_name: ::String?
                                    }?
+                                 }?,
+                                 s3_properties: {
+                                   s3_access_grant_location_id: ::String?,
+                                   s3_uri: ::String
                                  }?,
                                  spark_emr_properties: {
                                    compute_arn: ::String?,

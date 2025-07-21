@@ -120,6 +120,7 @@ module Aws::S3
     CopySourceSSECustomerKeyMD5 = Shapes::StringShape.new(name: 'CopySourceSSECustomerKeyMD5')
     CopySourceVersionId = Shapes::StringShape.new(name: 'CopySourceVersionId')
     CreateBucketConfiguration = Shapes::StructureShape.new(name: 'CreateBucketConfiguration')
+    CreateBucketMetadataConfigurationRequest = Shapes::StructureShape.new(name: 'CreateBucketMetadataConfigurationRequest')
     CreateBucketMetadataTableConfigurationRequest = Shapes::StructureShape.new(name: 'CreateBucketMetadataTableConfigurationRequest')
     CreateBucketOutput = Shapes::StructureShape.new(name: 'CreateBucketOutput')
     CreateBucketRequest = Shapes::StructureShape.new(name: 'CreateBucketRequest')
@@ -140,6 +141,7 @@ module Aws::S3
     DeleteBucketIntelligentTieringConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteBucketIntelligentTieringConfigurationRequest')
     DeleteBucketInventoryConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteBucketInventoryConfigurationRequest')
     DeleteBucketLifecycleRequest = Shapes::StructureShape.new(name: 'DeleteBucketLifecycleRequest')
+    DeleteBucketMetadataConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteBucketMetadataConfigurationRequest')
     DeleteBucketMetadataTableConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteBucketMetadataTableConfigurationRequest')
     DeleteBucketMetricsConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteBucketMetricsConfigurationRequest')
     DeleteBucketOwnershipControlsRequest = Shapes::StructureShape.new(name: 'DeleteBucketOwnershipControlsRequest')
@@ -166,6 +168,7 @@ module Aws::S3
     Delimiter = Shapes::StringShape.new(name: 'Delimiter')
     Description = Shapes::StringShape.new(name: 'Description')
     Destination = Shapes::StructureShape.new(name: 'Destination')
+    DestinationResult = Shapes::StructureShape.new(name: 'DestinationResult')
     DirectoryBucketToken = Shapes::StringShape.new(name: 'DirectoryBucketToken')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
     ETag = Shapes::StringShape.new(name: 'ETag')
@@ -189,6 +192,7 @@ module Aws::S3
     ExistingObjectReplication = Shapes::StructureShape.new(name: 'ExistingObjectReplication')
     ExistingObjectReplicationStatus = Shapes::StringShape.new(name: 'ExistingObjectReplicationStatus')
     Expiration = Shapes::StringShape.new(name: 'Expiration')
+    ExpirationState = Shapes::StringShape.new(name: 'ExpirationState')
     ExpirationStatus = Shapes::StringShape.new(name: 'ExpirationStatus')
     ExpiredObjectDeleteMarker = Shapes::BooleanShape.new(name: 'ExpiredObjectDeleteMarker')
     Expires = Shapes::TimestampShape.new(name: 'Expires')
@@ -226,6 +230,9 @@ module Aws::S3
     GetBucketLocationRequest = Shapes::StructureShape.new(name: 'GetBucketLocationRequest')
     GetBucketLoggingOutput = Shapes::StructureShape.new(name: 'GetBucketLoggingOutput')
     GetBucketLoggingRequest = Shapes::StructureShape.new(name: 'GetBucketLoggingRequest')
+    GetBucketMetadataConfigurationOutput = Shapes::StructureShape.new(name: 'GetBucketMetadataConfigurationOutput')
+    GetBucketMetadataConfigurationRequest = Shapes::StructureShape.new(name: 'GetBucketMetadataConfigurationRequest')
+    GetBucketMetadataConfigurationResult = Shapes::StructureShape.new(name: 'GetBucketMetadataConfigurationResult')
     GetBucketMetadataTableConfigurationOutput = Shapes::StructureShape.new(name: 'GetBucketMetadataTableConfigurationOutput')
     GetBucketMetadataTableConfigurationRequest = Shapes::StructureShape.new(name: 'GetBucketMetadataTableConfigurationRequest')
     GetBucketMetadataTableConfigurationResult = Shapes::StructureShape.new(name: 'GetBucketMetadataTableConfigurationResult')
@@ -310,6 +317,7 @@ module Aws::S3
     InvalidWriteOffset = Shapes::StructureShape.new(name: 'InvalidWriteOffset')
     InventoryConfiguration = Shapes::StructureShape.new(name: 'InventoryConfiguration')
     InventoryConfigurationList = Shapes::ListShape.new(name: 'InventoryConfigurationList', flattened: true)
+    InventoryConfigurationState = Shapes::StringShape.new(name: 'InventoryConfigurationState')
     InventoryDestination = Shapes::StructureShape.new(name: 'InventoryDestination')
     InventoryEncryption = Shapes::StructureShape.new(name: 'InventoryEncryption')
     InventoryFilter = Shapes::StructureShape.new(name: 'InventoryFilter')
@@ -321,6 +329,9 @@ module Aws::S3
     InventoryOptionalFields = Shapes::ListShape.new(name: 'InventoryOptionalFields')
     InventoryS3BucketDestination = Shapes::StructureShape.new(name: 'InventoryS3BucketDestination')
     InventorySchedule = Shapes::StructureShape.new(name: 'InventorySchedule')
+    InventoryTableConfiguration = Shapes::StructureShape.new(name: 'InventoryTableConfiguration')
+    InventoryTableConfigurationResult = Shapes::StructureShape.new(name: 'InventoryTableConfigurationResult')
+    InventoryTableConfigurationUpdates = Shapes::StructureShape.new(name: 'InventoryTableConfigurationUpdates')
     IsEnabled = Shapes::BooleanShape.new(name: 'IsEnabled')
     IsLatest = Shapes::BooleanShape.new(name: 'IsLatest')
     IsPublic = Shapes::BooleanShape.new(name: 'IsPublic')
@@ -329,10 +340,14 @@ module Aws::S3
     JSONInput = Shapes::StructureShape.new(name: 'JSONInput')
     JSONOutput = Shapes::StructureShape.new(name: 'JSONOutput')
     JSONType = Shapes::StringShape.new(name: 'JSONType')
+    JournalTableConfiguration = Shapes::StructureShape.new(name: 'JournalTableConfiguration')
+    JournalTableConfigurationResult = Shapes::StructureShape.new(name: 'JournalTableConfigurationResult')
+    JournalTableConfigurationUpdates = Shapes::StructureShape.new(name: 'JournalTableConfigurationUpdates')
     KMSContext = Shapes::StringShape.new(name: 'KMSContext')
     KeyCount = Shapes::IntegerShape.new(name: 'KeyCount')
     KeyMarker = Shapes::StringShape.new(name: 'KeyMarker')
     KeyPrefixEquals = Shapes::StringShape.new(name: 'KeyPrefixEquals')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LambdaFunctionArn = Shapes::StringShape.new(name: 'LambdaFunctionArn')
     LambdaFunctionConfiguration = Shapes::StructureShape.new(name: 'LambdaFunctionConfiguration')
     LambdaFunctionConfigurationList = Shapes::ListShape.new(name: 'LambdaFunctionConfigurationList', flattened: true)
@@ -384,11 +399,14 @@ module Aws::S3
     MaxUploads = Shapes::IntegerShape.new(name: 'MaxUploads')
     Message = Shapes::StringShape.new(name: 'Message')
     Metadata = Shapes::MapShape.new(name: 'Metadata')
+    MetadataConfiguration = Shapes::StructureShape.new(name: 'MetadataConfiguration')
+    MetadataConfigurationResult = Shapes::StructureShape.new(name: 'MetadataConfigurationResult')
     MetadataDirective = Shapes::StringShape.new(name: 'MetadataDirective')
     MetadataEntry = Shapes::StructureShape.new(name: 'MetadataEntry')
     MetadataKey = Shapes::StringShape.new(name: 'MetadataKey')
     MetadataTableConfiguration = Shapes::StructureShape.new(name: 'MetadataTableConfiguration')
     MetadataTableConfigurationResult = Shapes::StructureShape.new(name: 'MetadataTableConfigurationResult')
+    MetadataTableEncryptionConfiguration = Shapes::StructureShape.new(name: 'MetadataTableEncryptionConfiguration')
     MetadataTableStatus = Shapes::StringShape.new(name: 'MetadataTableStatus')
     MetadataValue = Shapes::StringShape.new(name: 'MetadataValue')
     Metrics = Shapes::StructureShape.new(name: 'Metrics')
@@ -523,6 +541,8 @@ module Aws::S3
     QuoteFields = Shapes::StringShape.new(name: 'QuoteFields')
     Range = Shapes::StringShape.new(name: 'Range')
     RecordDelimiter = Shapes::StringShape.new(name: 'RecordDelimiter')
+    RecordExpiration = Shapes::StructureShape.new(name: 'RecordExpiration')
+    RecordExpirationDays = Shapes::IntegerShape.new(name: 'RecordExpirationDays')
     RecordsEvent = Shapes::StructureShape.new(name: 'RecordsEvent')
     Redirect = Shapes::StructureShape.new(name: 'Redirect')
     RedirectAllRequestsTo = Shapes::StructureShape.new(name: 'RedirectAllRequestsTo')
@@ -579,6 +599,7 @@ module Aws::S3
     S3RegionalOrS3ExpressBucketArnString = Shapes::StringShape.new(name: 'S3RegionalOrS3ExpressBucketArnString')
     S3TablesArn = Shapes::StringShape.new(name: 'S3TablesArn')
     S3TablesBucketArn = Shapes::StringShape.new(name: 'S3TablesBucketArn')
+    S3TablesBucketType = Shapes::StringShape.new(name: 'S3TablesBucketType')
     S3TablesDestination = Shapes::StructureShape.new(name: 'S3TablesDestination')
     S3TablesDestinationResult = Shapes::StructureShape.new(name: 'S3TablesDestinationResult')
     S3TablesName = Shapes::StringShape.new(name: 'S3TablesName')
@@ -620,6 +641,7 @@ module Aws::S3
     StorageClassAnalysisDataExport = Shapes::StructureShape.new(name: 'StorageClassAnalysisDataExport')
     StorageClassAnalysisSchemaVersion = Shapes::StringShape.new(name: 'StorageClassAnalysisSchemaVersion')
     Suffix = Shapes::StringShape.new(name: 'Suffix')
+    TableSseAlgorithm = Shapes::StringShape.new(name: 'TableSseAlgorithm')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagCount = Shapes::IntegerShape.new(name: 'TagCount')
     TagSet = Shapes::ListShape.new(name: 'TagSet')
@@ -646,6 +668,8 @@ module Aws::S3
     TransitionStorageClass = Shapes::StringShape.new(name: 'TransitionStorageClass')
     Type = Shapes::StringShape.new(name: 'Type')
     URI = Shapes::StringShape.new(name: 'URI')
+    UpdateBucketMetadataInventoryTableConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateBucketMetadataInventoryTableConfigurationRequest')
+    UpdateBucketMetadataJournalTableConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateBucketMetadataJournalTableConfigurationRequest')
     UploadIdMarker = Shapes::StringShape.new(name: 'UploadIdMarker')
     UploadPartCopyOutput = Shapes::StructureShape.new(name: 'UploadPartCopyOutput')
     UploadPartCopyRequest = Shapes::StructureShape.new(name: 'UploadPartCopyRequest')
@@ -933,6 +957,15 @@ module Aws::S3
     CreateBucketConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: TagSet, location_name: "Tags"))
     CreateBucketConfiguration.struct_class = Types::CreateBucketConfiguration
 
+    CreateBucketMetadataConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
+    CreateBucketMetadataConfigurationRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    CreateBucketMetadataConfigurationRequest.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location: "header", location_name: "x-amz-sdk-checksum-algorithm"))
+    CreateBucketMetadataConfigurationRequest.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: MetadataConfiguration, required: true, location_name: "MetadataConfiguration", metadata: {"xmlNamespace" => {"uri" => "http://s3.amazonaws.com/doc/2006-03-01/"}}))
+    CreateBucketMetadataConfigurationRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    CreateBucketMetadataConfigurationRequest.struct_class = Types::CreateBucketMetadataConfigurationRequest
+    CreateBucketMetadataConfigurationRequest[:payload] = :metadata_configuration
+    CreateBucketMetadataConfigurationRequest[:payload_member] = CreateBucketMetadataConfigurationRequest.member(:metadata_configuration)
+
     CreateBucketMetadataTableConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
     CreateBucketMetadataTableConfigurationRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     CreateBucketMetadataTableConfigurationRequest.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location: "header", location_name: "x-amz-sdk-checksum-algorithm"))
@@ -1060,6 +1093,10 @@ module Aws::S3
     DeleteBucketLifecycleRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     DeleteBucketLifecycleRequest.struct_class = Types::DeleteBucketLifecycleRequest
 
+    DeleteBucketMetadataConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
+    DeleteBucketMetadataConfigurationRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    DeleteBucketMetadataConfigurationRequest.struct_class = Types::DeleteBucketMetadataConfigurationRequest
+
     DeleteBucketMetadataTableConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
     DeleteBucketMetadataTableConfigurationRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     DeleteBucketMetadataTableConfigurationRequest.struct_class = Types::DeleteBucketMetadataTableConfigurationRequest
@@ -1167,6 +1204,11 @@ module Aws::S3
     Destination.add_member(:replication_time, Shapes::ShapeRef.new(shape: ReplicationTime, location_name: "ReplicationTime"))
     Destination.add_member(:metrics, Shapes::ShapeRef.new(shape: Metrics, location_name: "Metrics"))
     Destination.struct_class = Types::Destination
+
+    DestinationResult.add_member(:table_bucket_type, Shapes::ShapeRef.new(shape: S3TablesBucketType, location_name: "TableBucketType"))
+    DestinationResult.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: S3TablesBucketArn, location_name: "TableBucketArn"))
+    DestinationResult.add_member(:table_namespace, Shapes::ShapeRef.new(shape: S3TablesNamespace, location_name: "TableNamespace"))
+    DestinationResult.struct_class = Types::DestinationResult
 
     Encryption.add_member(:encryption_type, Shapes::ShapeRef.new(shape: ServerSideEncryption, required: true, location_name: "EncryptionType"))
     Encryption.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "KMSKeyId"))
@@ -1301,6 +1343,18 @@ module Aws::S3
     GetBucketLoggingRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
     GetBucketLoggingRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     GetBucketLoggingRequest.struct_class = Types::GetBucketLoggingRequest
+
+    GetBucketMetadataConfigurationOutput.add_member(:get_bucket_metadata_configuration_result, Shapes::ShapeRef.new(shape: GetBucketMetadataConfigurationResult, location_name: "GetBucketMetadataConfigurationResult"))
+    GetBucketMetadataConfigurationOutput.struct_class = Types::GetBucketMetadataConfigurationOutput
+    GetBucketMetadataConfigurationOutput[:payload] = :get_bucket_metadata_configuration_result
+    GetBucketMetadataConfigurationOutput[:payload_member] = GetBucketMetadataConfigurationOutput.member(:get_bucket_metadata_configuration_result)
+
+    GetBucketMetadataConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
+    GetBucketMetadataConfigurationRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    GetBucketMetadataConfigurationRequest.struct_class = Types::GetBucketMetadataConfigurationRequest
+
+    GetBucketMetadataConfigurationResult.add_member(:metadata_configuration_result, Shapes::ShapeRef.new(shape: MetadataConfigurationResult, required: true, location_name: "MetadataConfigurationResult"))
+    GetBucketMetadataConfigurationResult.struct_class = Types::GetBucketMetadataConfigurationResult
 
     GetBucketMetadataTableConfigurationOutput.add_member(:get_bucket_metadata_table_configuration_result, Shapes::ShapeRef.new(shape: GetBucketMetadataTableConfigurationResult, location_name: "GetBucketMetadataTableConfigurationResult"))
     GetBucketMetadataTableConfigurationOutput.struct_class = Types::GetBucketMetadataTableConfigurationOutput
@@ -1737,11 +1791,40 @@ module Aws::S3
     InventorySchedule.add_member(:frequency, Shapes::ShapeRef.new(shape: InventoryFrequency, required: true, location_name: "Frequency"))
     InventorySchedule.struct_class = Types::InventorySchedule
 
+    InventoryTableConfiguration.add_member(:configuration_state, Shapes::ShapeRef.new(shape: InventoryConfigurationState, required: true, location_name: "ConfigurationState"))
+    InventoryTableConfiguration.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: MetadataTableEncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    InventoryTableConfiguration.struct_class = Types::InventoryTableConfiguration
+
+    InventoryTableConfigurationResult.add_member(:configuration_state, Shapes::ShapeRef.new(shape: InventoryConfigurationState, required: true, location_name: "ConfigurationState"))
+    InventoryTableConfigurationResult.add_member(:table_status, Shapes::ShapeRef.new(shape: MetadataTableStatus, location_name: "TableStatus"))
+    InventoryTableConfigurationResult.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "Error"))
+    InventoryTableConfigurationResult.add_member(:table_name, Shapes::ShapeRef.new(shape: S3TablesName, location_name: "TableName"))
+    InventoryTableConfigurationResult.add_member(:table_arn, Shapes::ShapeRef.new(shape: S3TablesArn, location_name: "TableArn"))
+    InventoryTableConfigurationResult.struct_class = Types::InventoryTableConfigurationResult
+
+    InventoryTableConfigurationUpdates.add_member(:configuration_state, Shapes::ShapeRef.new(shape: InventoryConfigurationState, required: true, location_name: "ConfigurationState"))
+    InventoryTableConfigurationUpdates.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: MetadataTableEncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    InventoryTableConfigurationUpdates.struct_class = Types::InventoryTableConfigurationUpdates
+
     JSONInput.add_member(:type, Shapes::ShapeRef.new(shape: JSONType, location_name: "Type"))
     JSONInput.struct_class = Types::JSONInput
 
     JSONOutput.add_member(:record_delimiter, Shapes::ShapeRef.new(shape: RecordDelimiter, location_name: "RecordDelimiter"))
     JSONOutput.struct_class = Types::JSONOutput
+
+    JournalTableConfiguration.add_member(:record_expiration, Shapes::ShapeRef.new(shape: RecordExpiration, required: true, location_name: "RecordExpiration"))
+    JournalTableConfiguration.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: MetadataTableEncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    JournalTableConfiguration.struct_class = Types::JournalTableConfiguration
+
+    JournalTableConfigurationResult.add_member(:table_status, Shapes::ShapeRef.new(shape: MetadataTableStatus, required: true, location_name: "TableStatus"))
+    JournalTableConfigurationResult.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "Error"))
+    JournalTableConfigurationResult.add_member(:table_name, Shapes::ShapeRef.new(shape: S3TablesName, required: true, location_name: "TableName"))
+    JournalTableConfigurationResult.add_member(:table_arn, Shapes::ShapeRef.new(shape: S3TablesArn, location_name: "TableArn"))
+    JournalTableConfigurationResult.add_member(:record_expiration, Shapes::ShapeRef.new(shape: RecordExpiration, required: true, location_name: "RecordExpiration"))
+    JournalTableConfigurationResult.struct_class = Types::JournalTableConfigurationResult
+
+    JournalTableConfigurationUpdates.add_member(:record_expiration, Shapes::ShapeRef.new(shape: RecordExpiration, required: true, location_name: "RecordExpiration"))
+    JournalTableConfigurationUpdates.struct_class = Types::JournalTableConfigurationUpdates
 
     LambdaFunctionConfiguration.add_member(:id, Shapes::ShapeRef.new(shape: NotificationId, location_name: "Id"))
     LambdaFunctionConfiguration.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: LambdaFunctionArn, required: true, location_name: "CloudFunction"))
@@ -1998,6 +2081,15 @@ module Aws::S3
     Metadata.key = Shapes::ShapeRef.new(shape: MetadataKey)
     Metadata.value = Shapes::ShapeRef.new(shape: MetadataValue)
 
+    MetadataConfiguration.add_member(:journal_table_configuration, Shapes::ShapeRef.new(shape: JournalTableConfiguration, required: true, location_name: "JournalTableConfiguration"))
+    MetadataConfiguration.add_member(:inventory_table_configuration, Shapes::ShapeRef.new(shape: InventoryTableConfiguration, location_name: "InventoryTableConfiguration"))
+    MetadataConfiguration.struct_class = Types::MetadataConfiguration
+
+    MetadataConfigurationResult.add_member(:destination_result, Shapes::ShapeRef.new(shape: DestinationResult, required: true, location_name: "DestinationResult"))
+    MetadataConfigurationResult.add_member(:journal_table_configuration_result, Shapes::ShapeRef.new(shape: JournalTableConfigurationResult, location_name: "JournalTableConfigurationResult"))
+    MetadataConfigurationResult.add_member(:inventory_table_configuration_result, Shapes::ShapeRef.new(shape: InventoryTableConfigurationResult, location_name: "InventoryTableConfigurationResult"))
+    MetadataConfigurationResult.struct_class = Types::MetadataConfigurationResult
+
     MetadataEntry.add_member(:name, Shapes::ShapeRef.new(shape: MetadataKey, location_name: "Name"))
     MetadataEntry.add_member(:value, Shapes::ShapeRef.new(shape: MetadataValue, location_name: "Value"))
     MetadataEntry.struct_class = Types::MetadataEntry
@@ -2007,6 +2099,10 @@ module Aws::S3
 
     MetadataTableConfigurationResult.add_member(:s3_tables_destination_result, Shapes::ShapeRef.new(shape: S3TablesDestinationResult, required: true, location_name: "S3TablesDestinationResult"))
     MetadataTableConfigurationResult.struct_class = Types::MetadataTableConfigurationResult
+
+    MetadataTableEncryptionConfiguration.add_member(:sse_algorithm, Shapes::ShapeRef.new(shape: TableSseAlgorithm, required: true, location_name: "SseAlgorithm"))
+    MetadataTableEncryptionConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    MetadataTableEncryptionConfiguration.struct_class = Types::MetadataTableEncryptionConfiguration
 
     Metrics.add_member(:status, Shapes::ShapeRef.new(shape: MetricsStatus, required: true, location_name: "Status"))
     Metrics.add_member(:event_threshold, Shapes::ShapeRef.new(shape: ReplicationTimeValue, location_name: "EventThreshold"))
@@ -2550,6 +2646,10 @@ module Aws::S3
 
     QueueConfigurationList.member = Shapes::ShapeRef.new(shape: QueueConfiguration)
 
+    RecordExpiration.add_member(:expiration, Shapes::ShapeRef.new(shape: ExpirationState, required: true, location_name: "Expiration"))
+    RecordExpiration.add_member(:days, Shapes::ShapeRef.new(shape: RecordExpirationDays, location_name: "Days", metadata: {"box" => true}))
+    RecordExpiration.struct_class = Types::RecordExpiration
+
     RecordsEvent.add_member(:payload, Shapes::ShapeRef.new(shape: Body, eventpayload: true, eventpayload_type: 'blob', location_name: "Payload", metadata: {"eventpayload" => true}))
     RecordsEvent.struct_class = Types::RecordsEvent
 
@@ -2823,6 +2923,24 @@ module Aws::S3
 
     TransitionList.member = Shapes::ShapeRef.new(shape: Transition)
 
+    UpdateBucketMetadataInventoryTableConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
+    UpdateBucketMetadataInventoryTableConfigurationRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    UpdateBucketMetadataInventoryTableConfigurationRequest.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location: "header", location_name: "x-amz-sdk-checksum-algorithm"))
+    UpdateBucketMetadataInventoryTableConfigurationRequest.add_member(:inventory_table_configuration, Shapes::ShapeRef.new(shape: InventoryTableConfigurationUpdates, required: true, location_name: "InventoryTableConfiguration", metadata: {"xmlNamespace" => {"uri" => "http://s3.amazonaws.com/doc/2006-03-01/"}}))
+    UpdateBucketMetadataInventoryTableConfigurationRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    UpdateBucketMetadataInventoryTableConfigurationRequest.struct_class = Types::UpdateBucketMetadataInventoryTableConfigurationRequest
+    UpdateBucketMetadataInventoryTableConfigurationRequest[:payload] = :inventory_table_configuration
+    UpdateBucketMetadataInventoryTableConfigurationRequest[:payload_member] = UpdateBucketMetadataInventoryTableConfigurationRequest.member(:inventory_table_configuration)
+
+    UpdateBucketMetadataJournalTableConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
+    UpdateBucketMetadataJournalTableConfigurationRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    UpdateBucketMetadataJournalTableConfigurationRequest.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location: "header", location_name: "x-amz-sdk-checksum-algorithm"))
+    UpdateBucketMetadataJournalTableConfigurationRequest.add_member(:journal_table_configuration, Shapes::ShapeRef.new(shape: JournalTableConfigurationUpdates, required: true, location_name: "JournalTableConfiguration", metadata: {"xmlNamespace" => {"uri" => "http://s3.amazonaws.com/doc/2006-03-01/"}}))
+    UpdateBucketMetadataJournalTableConfigurationRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    UpdateBucketMetadataJournalTableConfigurationRequest.struct_class = Types::UpdateBucketMetadataJournalTableConfigurationRequest
+    UpdateBucketMetadataJournalTableConfigurationRequest[:payload] = :journal_table_configuration
+    UpdateBucketMetadataJournalTableConfigurationRequest[:payload_member] = UpdateBucketMetadataJournalTableConfigurationRequest.member(:journal_table_configuration)
+
     UploadPartCopyOutput.add_member(:copy_source_version_id, Shapes::ShapeRef.new(shape: CopySourceVersionId, location: "header", location_name: "x-amz-copy-source-version-id"))
     UploadPartCopyOutput.add_member(:copy_part_result, Shapes::ShapeRef.new(shape: CopyPartResult, location_name: "CopyPartResult"))
     UploadPartCopyOutput.add_member(:server_side_encryption, Shapes::ShapeRef.new(shape: ServerSideEncryption, location: "header", location_name: "x-amz-server-side-encryption"))
@@ -3005,6 +3123,22 @@ module Aws::S3
         o.errors << Shapes::ShapeRef.new(shape: BucketAlreadyOwnedByYou)
       end)
 
+      api.add_operation(:create_bucket_metadata_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateBucketMetadataConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/?metadataConfiguration"
+        o.http_checksum = {
+          "requestAlgorithmMember" => "checksum_algorithm",
+          "requestChecksumRequired" => true,
+        }
+        o.http_checksum = {
+          "requestAlgorithmMember" => "checksum_algorithm",
+          "requestChecksumRequired" => true,
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateBucketMetadataConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
       api.add_operation(:create_bucket_metadata_table_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateBucketMetadataTableConfiguration"
         o.http_method = "POST"
@@ -3091,6 +3225,14 @@ module Aws::S3
         o.http_method = "DELETE"
         o.http_request_uri = "/?lifecycle"
         o.input = Shapes::ShapeRef.new(shape: DeleteBucketLifecycleRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:delete_bucket_metadata_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBucketMetadataConfiguration"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/?metadataConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: DeleteBucketMetadataConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
@@ -3277,6 +3419,14 @@ module Aws::S3
         o.http_request_uri = "/?logging"
         o.input = Shapes::ShapeRef.new(shape: GetBucketLoggingRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketLoggingOutput)
+      end)
+
+      api.add_operation(:get_bucket_metadata_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBucketMetadataConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/?metadataConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: GetBucketMetadataConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBucketMetadataConfigurationOutput)
       end)
 
       api.add_operation(:get_bucket_metadata_table_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -4052,6 +4202,38 @@ module Aws::S3
           }
         )
         o.output = Shapes::ShapeRef.new(shape: SelectObjectContentOutput)
+      end)
+
+      api.add_operation(:update_bucket_metadata_inventory_table_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateBucketMetadataInventoryTableConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/?metadataInventoryTable"
+        o.http_checksum = {
+          "requestAlgorithmMember" => "checksum_algorithm",
+          "requestChecksumRequired" => true,
+        }
+        o.http_checksum = {
+          "requestAlgorithmMember" => "checksum_algorithm",
+          "requestChecksumRequired" => true,
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateBucketMetadataInventoryTableConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:update_bucket_metadata_journal_table_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateBucketMetadataJournalTableConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/?metadataJournalTable"
+        o.http_checksum = {
+          "requestAlgorithmMember" => "checksum_algorithm",
+          "requestChecksumRequired" => true,
+        }
+        o.http_checksum = {
+          "requestAlgorithmMember" => "checksum_algorithm",
+          "requestChecksumRequired" => true,
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateBucketMetadataJournalTableConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
       api.add_operation(:upload_part, Seahorse::Model::Operation.new.tap do |o|

@@ -259,6 +259,7 @@ module Aws::CleanRoomsML
     ResourceDescription = Shapes::StringShape.new(name: 'ResourceDescription')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourcePolicy = Shapes::StringShape.new(name: 'ResourcePolicy')
+    ResultFormat = Shapes::StringShape.new(name: 'ResultFormat')
     S3ConfigMap = Shapes::StructureShape.new(name: 'S3ConfigMap')
     S3DataDistributionType = Shapes::StringShape.new(name: 'S3DataDistributionType')
     S3Path = Shapes::StringShape.new(name: 'S3Path')
@@ -1235,6 +1236,7 @@ module Aws::CleanRoomsML
 
     ProtectedQueryInputParameters.add_member(:sql_parameters, Shapes::ShapeRef.new(shape: ProtectedQuerySQLParameters, required: true, location_name: "sqlParameters"))
     ProtectedQueryInputParameters.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "computeConfiguration"))
+    ProtectedQueryInputParameters.add_member(:result_format, Shapes::ShapeRef.new(shape: ResultFormat, location_name: "resultFormat"))
     ProtectedQueryInputParameters.struct_class = Types::ProtectedQueryInputParameters
 
     ProtectedQuerySQLParameters.add_member(:query_string, Shapes::ShapeRef.new(shape: ProtectedQuerySQLParametersQueryStringString, location_name: "queryString"))
@@ -1473,8 +1475,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/memberships/{membershipIdentifier}/trained-models/{trainedModelArn}"
         o.input = Shapes::ShapeRef.new(shape: CancelTrainedModelRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1486,8 +1488,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/memberships/{membershipIdentifier}/trained-model-inference-jobs/{trainedModelInferenceJobArn}"
         o.input = Shapes::ShapeRef.new(shape: CancelTrainedModelInferenceJobRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1499,8 +1501,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/audience-model"
         o.input = Shapes::ShapeRef.new(shape: CreateAudienceModelRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateAudienceModelResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1512,8 +1514,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/configured-audience-model"
         o.input = Shapes::ShapeRef.new(shape: CreateConfiguredAudienceModelRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateConfiguredAudienceModelResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1525,8 +1527,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/configured-model-algorithms"
         o.input = Shapes::ShapeRef.new(shape: CreateConfiguredModelAlgorithmRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateConfiguredModelAlgorithmResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
@@ -1537,8 +1539,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/memberships/{membershipIdentifier}/configured-model-algorithm-associations"
         o.input = Shapes::ShapeRef.new(shape: CreateConfiguredModelAlgorithmAssociationRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateConfiguredModelAlgorithmAssociationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1551,8 +1553,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/memberships/{membershipIdentifier}/ml-input-channels"
         o.input = Shapes::ShapeRef.new(shape: CreateMLInputChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateMLInputChannelResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1565,12 +1567,12 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/memberships/{membershipIdentifier}/trained-models"
         o.input = Shapes::ShapeRef.new(shape: CreateTrainedModelRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateTrainedModelResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
@@ -1580,8 +1582,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/training-dataset"
         o.input = Shapes::ShapeRef.new(shape: CreateTrainingDatasetRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateTrainingDatasetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
@@ -1591,8 +1593,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/audience-generation-job/{audienceGenerationJobArn}"
         o.input = Shapes::ShapeRef.new(shape: DeleteAudienceGenerationJobRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1603,8 +1605,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/audience-model/{audienceModelArn}"
         o.input = Shapes::ShapeRef.new(shape: DeleteAudienceModelRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1615,8 +1617,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/configured-audience-model/{configuredAudienceModelArn}"
         o.input = Shapes::ShapeRef.new(shape: DeleteConfiguredAudienceModelRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1638,8 +1640,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/configured-model-algorithms/{configuredModelAlgorithmArn}"
         o.input = Shapes::ShapeRef.new(shape: DeleteConfiguredModelAlgorithmRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1650,8 +1652,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/memberships/{membershipIdentifier}/configured-model-algorithm-associations/{configuredModelAlgorithmAssociationArn}"
         o.input = Shapes::ShapeRef.new(shape: DeleteConfiguredModelAlgorithmAssociationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1675,8 +1677,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/memberships/{membershipIdentifier}/ml-input-channels/{mlInputChannelArn}"
         o.input = Shapes::ShapeRef.new(shape: DeleteMLInputChannelDataRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1688,8 +1690,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/memberships/{membershipIdentifier}/trained-models/{trainedModelArn}"
         o.input = Shapes::ShapeRef.new(shape: DeleteTrainedModelOutputRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1701,8 +1703,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/training-dataset/{trainingDatasetArn}"
         o.input = Shapes::ShapeRef.new(shape: DeleteTrainingDatasetRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -2175,8 +2177,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/audience-export-job"
         o.input = Shapes::ShapeRef.new(shape: StartAudienceExportJobRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -2188,8 +2190,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/audience-generation-job"
         o.input = Shapes::ShapeRef.new(shape: StartAudienceGenerationJobRequest)
         o.output = Shapes::ShapeRef.new(shape: StartAudienceGenerationJobResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -2202,8 +2204,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/memberships/{membershipIdentifier}/trained-models/{trainedModelArn}/export-jobs"
         o.input = Shapes::ShapeRef.new(shape: StartTrainedModelExportJobRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -2215,8 +2217,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/memberships/{membershipIdentifier}/trained-model-inference-jobs"
         o.input = Shapes::ShapeRef.new(shape: StartTrainedModelInferenceJobRequest)
         o.output = Shapes::ShapeRef.new(shape: StartTrainedModelInferenceJobResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -2251,8 +2253,8 @@ module Aws::CleanRoomsML
         o.http_request_uri = "/configured-audience-model/{configuredAudienceModelArn}"
         o.input = Shapes::ShapeRef.new(shape: UpdateConfiguredAudienceModelRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateConfiguredAudienceModelResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)

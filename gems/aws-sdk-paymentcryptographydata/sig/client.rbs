@@ -124,7 +124,7 @@ module Aws
                                 shared_information: ::String
                               }?
                             },
-                            key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC")?
+                            key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")?
                           }
                         ) -> _DecryptDataResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DecryptDataResponseSuccess
@@ -176,7 +176,7 @@ module Aws
                                 shared_information: ::String
                               }?
                             },
-                            key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC")?
+                            key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")?
                           }
                         ) -> _EncryptDataResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EncryptDataResponseSuccess
@@ -239,7 +239,7 @@ module Aws
                           key_identifier: ::String,
                           message_data: ::String,
                           generation_attributes: {
-                            algorithm: ("ISO9797_ALGORITHM1" | "ISO9797_ALGORITHM3" | "CMAC" | "HMAC_SHA224" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512")?,
+                            algorithm: ("ISO9797_ALGORITHM1" | "ISO9797_ALGORITHM3" | "CMAC" | "HMAC" | "HMAC_SHA224" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512")?,
                             emv_mac: {
                               major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
                               primary_account_number: ::String,
@@ -397,7 +397,7 @@ module Aws
                                      shared_information: ::String
                                    }?
                                  },
-                                 key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC")?
+                                 key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")?
                                }
                              ) -> _GeneratePinDataResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GeneratePinDataResponseSuccess
@@ -453,7 +453,7 @@ module Aws
                                    shared_information: ::String
                                  }?
                                },
-                               key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC")?
+                               key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")?
                              },
                              ?outgoing_wrapped_key: {
                                wrapped_key_material: {
@@ -467,7 +467,7 @@ module Aws
                                    shared_information: ::String
                                  }?
                                },
-                               key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC")?
+                               key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")?
                              }
                            ) -> _ReEncryptDataResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReEncryptDataResponseSuccess
@@ -531,7 +531,7 @@ module Aws
                                       shared_information: ::String
                                     }?
                                   },
-                                  key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC")?
+                                  key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")?
                                 },
                                 ?outgoing_wrapped_key: {
                                   wrapped_key_material: {
@@ -545,7 +545,7 @@ module Aws
                                       shared_information: ::String
                                     }?
                                   },
-                                  key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC")?
+                                  key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")?
                                 }
                               ) -> _TranslatePinDataResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TranslatePinDataResponseSuccess
@@ -662,7 +662,7 @@ module Aws
                         message_data: ::String,
                         mac: ::String,
                         verification_attributes: {
-                          algorithm: ("ISO9797_ALGORITHM1" | "ISO9797_ALGORITHM3" | "CMAC" | "HMAC_SHA224" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512")?,
+                          algorithm: ("ISO9797_ALGORITHM1" | "ISO9797_ALGORITHM3" | "CMAC" | "HMAC" | "HMAC_SHA224" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512")?,
                           emv_mac: {
                             major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
                             primary_account_number: ::String,
@@ -736,7 +736,7 @@ module Aws
                                    shared_information: ::String
                                  }?
                                },
-                               key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC")?
+                               key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")?
                              }
                            ) -> _VerifyPinDataResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VerifyPinDataResponseSuccess

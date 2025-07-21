@@ -469,7 +469,77 @@ module Aws::Repostspace
 
     # @!group API Operations
 
-    # Add role to multiple users or groups in a private re:Post.
+    # Add role to multiple users or groups in a private re:Post channel.
+    #
+    # @option params [required, String] :space_id
+    #   The unique ID of the private re:Post.
+    #
+    # @option params [required, String] :channel_id
+    #   The unique ID of the private re:Post channel.
+    #
+    # @option params [required, Array<String>] :accessor_ids
+    #   The user or group identifiers to add the role to.
+    #
+    # @option params [required, String] :channel_role
+    #   The channel role to add to the users or groups.
+    #
+    # @return [Types::BatchAddChannelRoleToAccessorsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchAddChannelRoleToAccessorsOutput#added_accessor_ids #added_accessor_ids} => Array&lt;String&gt;
+    #   * {Types::BatchAddChannelRoleToAccessorsOutput#errors #errors} => Array&lt;Types::BatchError&gt;
+    #
+    #
+    # @example Example: BatchAddChannelRoleToAccessors
+    #
+    #   resp = client.batch_add_channel_role_to_accessors({
+    #     accessor_ids: [
+    #       "12345678-1234-1234-1234-1234567890ab", 
+    #     ], 
+    #     channel_id: "WS1234567890abcdefghijkl", 
+    #     channel_role: "MODERATOR", 
+    #     space_id: "SP1234567890abcdefghijkl", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     errors: [
+    #     ], 
+    #     added_accessor_ids: [
+    #       "12345678-1234-1234-1234-1234567890ab", 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_add_channel_role_to_accessors({
+    #     space_id: "SpaceId", # required
+    #     channel_id: "ChannelId", # required
+    #     accessor_ids: ["AccessorId"], # required
+    #     channel_role: "ASKER", # required, accepts ASKER, EXPERT, MODERATOR, SUPPORTREQUESTOR
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.added_accessor_ids #=> Array
+    #   resp.added_accessor_ids[0] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].accessor_id #=> String
+    #   resp.errors[0].error #=> Integer
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/repostspace-2022-05-13/BatchAddChannelRoleToAccessors AWS API Documentation
+    #
+    # @overload batch_add_channel_role_to_accessors(params = {})
+    # @param [Hash] params ({})
+    def batch_add_channel_role_to_accessors(params = {}, options = {})
+      req = build_request(:batch_add_channel_role_to_accessors, params)
+      req.send_request(options)
+    end
+
+    # Add a role to multiple users or groups in a private re:Post.
+    #
+    # @option params [required, String] :space_id
+    #   The unique ID of the private re:Post.
     #
     # @option params [required, Array<String>] :accessor_ids
     #   The user or group accessor identifiers to add the role to.
@@ -477,20 +547,37 @@ module Aws::Repostspace
     # @option params [required, String] :role
     #   The role to add to the users or groups.
     #
-    # @option params [required, String] :space_id
-    #   The unique ID of the private re:Post.
-    #
     # @return [Types::BatchAddRoleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchAddRoleOutput#added_accessor_ids #added_accessor_ids} => Array&lt;String&gt;
     #   * {Types::BatchAddRoleOutput#errors #errors} => Array&lt;Types::BatchError&gt;
     #
+    #
+    # @example Example: BatchAddRole
+    #
+    #   resp = client.batch_add_role({
+    #     accessor_ids: [
+    #       "12345678-1234-1234-1234-1234567890ab", 
+    #     ], 
+    #     role: "EXPERT", 
+    #     space_id: "SP1234567890abcdefghijkl", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     errors: [
+    #     ], 
+    #     added_accessor_ids: [
+    #       "12345678-1234-1234-1234-1234567890ab", 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_add_role({
+    #     space_id: "SpaceId", # required
     #     accessor_ids: ["AccessorId"], # required
     #     role: "EXPERT", # required, accepts EXPERT, MODERATOR, ADMINISTRATOR, SUPPORTREQUESTOR
-    #     space_id: "SpaceId", # required
     #   })
     #
     # @example Response structure
@@ -511,7 +598,78 @@ module Aws::Repostspace
       req.send_request(options)
     end
 
-    # Remove role from multiple users or groups in a private re:Post.
+    # Remove a role from multiple users or groups in a private re:Post
+    # channel.
+    #
+    # @option params [required, String] :space_id
+    #   The unique ID of the private re:Post.
+    #
+    # @option params [required, String] :channel_id
+    #   The unique ID of the private re:Post channel.
+    #
+    # @option params [required, Array<String>] :accessor_ids
+    #   The users or groups identifiers to remove the role from.
+    #
+    # @option params [required, String] :channel_role
+    #   The channel role to remove from the users or groups.
+    #
+    # @return [Types::BatchRemoveChannelRoleFromAccessorsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchRemoveChannelRoleFromAccessorsOutput#removed_accessor_ids #removed_accessor_ids} => Array&lt;String&gt;
+    #   * {Types::BatchRemoveChannelRoleFromAccessorsOutput#errors #errors} => Array&lt;Types::BatchError&gt;
+    #
+    #
+    # @example Example: BatchRemoveChannelRoleFromAccessors
+    #
+    #   resp = client.batch_remove_channel_role_from_accessors({
+    #     accessor_ids: [
+    #       "12345678-1234-1234-1234-1234567890ab", 
+    #     ], 
+    #     channel_id: "WS1234567890abcdefghijkl", 
+    #     channel_role: "MODERATOR", 
+    #     space_id: "SP1234567890abcdefghijkl", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     errors: [
+    #     ], 
+    #     removed_accessor_ids: [
+    #       "12345678-1234-1234-1234-1234567890ab", 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_remove_channel_role_from_accessors({
+    #     space_id: "SpaceId", # required
+    #     channel_id: "ChannelId", # required
+    #     accessor_ids: ["AccessorId"], # required
+    #     channel_role: "ASKER", # required, accepts ASKER, EXPERT, MODERATOR, SUPPORTREQUESTOR
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.removed_accessor_ids #=> Array
+    #   resp.removed_accessor_ids[0] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].accessor_id #=> String
+    #   resp.errors[0].error #=> Integer
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/repostspace-2022-05-13/BatchRemoveChannelRoleFromAccessors AWS API Documentation
+    #
+    # @overload batch_remove_channel_role_from_accessors(params = {})
+    # @param [Hash] params ({})
+    def batch_remove_channel_role_from_accessors(params = {}, options = {})
+      req = build_request(:batch_remove_channel_role_from_accessors, params)
+      req.send_request(options)
+    end
+
+    # Remove a role from multiple users or groups in a private re:Post.
+    #
+    # @option params [required, String] :space_id
+    #   The unique ID of the private re:Post.
     #
     # @option params [required, Array<String>] :accessor_ids
     #   The user or group accessor identifiers to remove the role from.
@@ -519,30 +677,47 @@ module Aws::Repostspace
     # @option params [required, String] :role
     #   The role to remove from the users or groups.
     #
-    # @option params [required, String] :space_id
-    #   The unique ID of the private re:Post.
-    #
     # @return [Types::BatchRemoveRoleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::BatchRemoveRoleOutput#errors #errors} => Array&lt;Types::BatchError&gt;
     #   * {Types::BatchRemoveRoleOutput#removed_accessor_ids #removed_accessor_ids} => Array&lt;String&gt;
+    #   * {Types::BatchRemoveRoleOutput#errors #errors} => Array&lt;Types::BatchError&gt;
+    #
+    #
+    # @example Example: BatchRemoveRole
+    #
+    #   resp = client.batch_remove_role({
+    #     accessor_ids: [
+    #       "12345678-1234-1234-1234-1234567890ab", 
+    #     ], 
+    #     role: "EXPERT", 
+    #     space_id: "SP1234567890abcdefghijkl", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     errors: [
+    #     ], 
+    #     removed_accessor_ids: [
+    #       "12345678-1234-1234-1234-1234567890ab", 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_remove_role({
+    #     space_id: "SpaceId", # required
     #     accessor_ids: ["AccessorId"], # required
     #     role: "EXPERT", # required, accepts EXPERT, MODERATOR, ADMINISTRATOR, SUPPORTREQUESTOR
-    #     space_id: "SpaceId", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.removed_accessor_ids #=> Array
+    #   resp.removed_accessor_ids[0] #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].accessor_id #=> String
     #   resp.errors[0].error #=> Integer
     #   resp.errors[0].message #=> String
-    #   resp.removed_accessor_ids #=> Array
-    #   resp.removed_accessor_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/repostspace-2022-05-13/BatchRemoveRole AWS API Documentation
     #
@@ -553,18 +728,61 @@ module Aws::Repostspace
       req.send_request(options)
     end
 
-    # Creates an AWS re:Post Private private re:Post.
+    # Creates a channel in an AWS re:Post Private private re:Post.
     #
-    # @option params [String] :description
-    #   A description for the private re:Post. This is used only to help you
-    #   identify this private re:Post.
+    # @option params [required, String] :space_id
+    #   The unique ID of the private re:Post.
+    #
+    # @option params [required, String] :channel_name
+    #   The name for the channel. This must be unique per private re:Post.
+    #
+    # @option params [String] :channel_description
+    #   A description for the channel. This is used only to help you identify
+    #   this channel.
+    #
+    # @return [Types::CreateChannelOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateChannelOutput#channel_id #channel_id} => String
+    #
+    #
+    # @example Example: CreateChannel
+    #
+    #   resp = client.create_channel({
+    #     channel_description: "Useful channel description", 
+    #     channel_name: "My First Channel", 
+    #     space_id: "SP1234567890abcdefghijkl", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     channel_id: "WS1234567890abcdefghijkl", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_channel({
+    #     space_id: "SpaceId", # required
+    #     channel_name: "ChannelName", # required
+    #     channel_description: "ChannelDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/repostspace-2022-05-13/CreateChannel AWS API Documentation
+    #
+    # @overload create_channel(params = {})
+    # @param [Hash] params ({})
+    def create_channel(params = {}, options = {})
+      req = build_request(:create_channel, params)
+      req.send_request(options)
+    end
+
+    # Creates an AWS re:Post Private private re:Post.
     #
     # @option params [required, String] :name
     #   The name for the private re:Post. This must be unique in your account.
-    #
-    # @option params [String] :role_arn
-    #   The IAM role that grants permissions to the private re:Post to convert
-    #   unanswered questions into AWS support tickets.
     #
     # @option params [required, String] :subdomain
     #   The subdomain that you use to access your AWS re:Post Private private
@@ -572,16 +790,26 @@ module Aws::Repostspace
     #   addition to your custom subdomain, all private re:Posts are issued an
     #   AWS generated subdomain for immediate use.
     #
-    # @option params [Hash<String,String>] :tags
-    #   The list of tags associated with the private re:Post.
-    #
     # @option params [required, String] :tier
     #   The pricing tier for the private re:Post.
+    #
+    # @option params [String] :description
+    #   A description for the private re:Post. This is used only to help you
+    #   identify this private re:Post.
     #
     # @option params [String] :user_kms_key
     #   The AWS KMS key ARN that’s used for the AWS KMS encryption. If you
     #   don't provide a key, your data is encrypted by default with a key
     #   that AWS owns and manages for you.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The list of tags associated with the private re:Post.
+    #
+    # @option params [String] :role_arn
+    #   The IAM role that grants permissions to the private re:Post to convert
+    #   unanswered questions into AWS support tickets.
+    #
+    # @option params [Types::SupportedEmailDomainsParameters] :supported_email_domains
     #
     # @return [Types::CreateSpaceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -590,15 +818,19 @@ module Aws::Repostspace
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_space({
-    #     description: "SpaceDescription",
     #     name: "SpaceName", # required
-    #     role_arn: "Arn",
     #     subdomain: "SpaceSubdomain", # required
+    #     tier: "BASIC", # required, accepts BASIC, STANDARD
+    #     description: "SpaceDescription",
+    #     user_kms_key: "KMSKey",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     tier: "BASIC", # required, accepts BASIC, STANDARD
-    #     user_kms_key: "KMSKey",
+    #     role_arn: "Arn",
+    #     supported_email_domains: {
+    #       enabled: "ENABLED", # accepts ENABLED, DISABLED
+    #       allowed_domains: ["EmailDomain"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -639,19 +871,19 @@ module Aws::Repostspace
     # Removes the user or group from the list of administrators of the
     # private re:Post.
     #
-    # @option params [required, String] :admin_id
-    #   The ID of the admin to remove.
-    #
     # @option params [required, String] :space_id
     #   The ID of the private re:Post to remove the admin from.
+    #
+    # @option params [required, String] :admin_id
+    #   The ID of the admin to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.deregister_admin({
-    #     admin_id: "AdminId", # required
     #     space_id: "SpaceId", # required
+    #     admin_id: "AdminId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/repostspace-2022-05-13/DeregisterAdmin AWS API Documentation
@@ -663,6 +895,83 @@ module Aws::Repostspace
       req.send_request(options)
     end
 
+    # Displays information about a channel in a private re:Post.
+    #
+    # @option params [required, String] :space_id
+    #   The unique ID of the private re:Post.
+    #
+    # @option params [required, String] :channel_id
+    #   The unique ID of the private re:Post channel.
+    #
+    # @return [Types::GetChannelOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetChannelOutput#space_id #space_id} => String
+    #   * {Types::GetChannelOutput#channel_id #channel_id} => String
+    #   * {Types::GetChannelOutput#channel_name #channel_name} => String
+    #   * {Types::GetChannelOutput#channel_description #channel_description} => String
+    #   * {Types::GetChannelOutput#create_date_time #create_date_time} => Time
+    #   * {Types::GetChannelOutput#delete_date_time #delete_date_time} => Time
+    #   * {Types::GetChannelOutput#channel_roles #channel_roles} => Hash&lt;String,Array&lt;String&gt;&gt;
+    #   * {Types::GetChannelOutput#channel_status #channel_status} => String
+    #
+    #
+    # @example Example: GetChannel
+    #
+    #   resp = client.get_channel({
+    #     channel_id: "WS1234567890abcdefghijkl", 
+    #     space_id: "SP1234567890abcdefghijkl", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     channel_description: "Useful channel description", 
+    #     channel_id: "WS1234567890abcdefghijkl", 
+    #     channel_name: "My First Channel", 
+    #     channel_roles: {
+    #       "12345678-1234-1234-1234-1234567890ab" => [
+    #         "ASKER", 
+    #       ], 
+    #     }, 
+    #     channel_status: "CREATED", 
+    #     create_date_time: Time.parse("2025-02-13T18:49:13.713Z"), 
+    #     space_id: "SP1234567890abcdefghijkl", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_channel({
+    #     space_id: "SpaceId", # required
+    #     channel_id: "ChannelId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.space_id #=> String
+    #   resp.channel_id #=> String
+    #   resp.channel_name #=> String
+    #   resp.channel_description #=> String
+    #   resp.create_date_time #=> Time
+    #   resp.delete_date_time #=> Time
+    #   resp.channel_roles #=> Hash
+    #   resp.channel_roles["AccessorId"] #=> Array
+    #   resp.channel_roles["AccessorId"][0] #=> String, one of "ASKER", "EXPERT", "MODERATOR", "SUPPORTREQUESTOR"
+    #   resp.channel_status #=> String, one of "CREATED", "CREATING", "CREATE_FAILED", "DELETED", "DELETING", "DELETE_FAILED"
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * channel_created
+    #   * channel_deleted
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/repostspace-2022-05-13/GetChannel AWS API Documentation
+    #
+    # @overload get_channel(params = {})
+    # @param [Hash] params ({})
+    def get_channel(params = {}, options = {})
+      req = build_request(:get_channel, params)
+      req.send_request(options)
+    end
+
     # Displays information about the AWS re:Post Private private re:Post.
     #
     # @option params [required, String] :space_id
@@ -670,27 +979,30 @@ module Aws::Repostspace
     #
     # @return [Types::GetSpaceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetSpaceOutput#arn #arn} => String
-    #   * {Types::GetSpaceOutput#client_id #client_id} => String
-    #   * {Types::GetSpaceOutput#configuration_status #configuration_status} => String
-    #   * {Types::GetSpaceOutput#content_size #content_size} => Integer
-    #   * {Types::GetSpaceOutput#create_date_time #create_date_time} => Time
-    #   * {Types::GetSpaceOutput#customer_role_arn #customer_role_arn} => String
-    #   * {Types::GetSpaceOutput#delete_date_time #delete_date_time} => Time
-    #   * {Types::GetSpaceOutput#description #description} => String
-    #   * {Types::GetSpaceOutput#group_admins #group_admins} => Array&lt;String&gt;
-    #   * {Types::GetSpaceOutput#name #name} => String
-    #   * {Types::GetSpaceOutput#random_domain #random_domain} => String
-    #   * {Types::GetSpaceOutput#roles #roles} => Hash&lt;String,Array&lt;String&gt;&gt;
     #   * {Types::GetSpaceOutput#space_id #space_id} => String
+    #   * {Types::GetSpaceOutput#arn #arn} => String
+    #   * {Types::GetSpaceOutput#name #name} => String
     #   * {Types::GetSpaceOutput#status #status} => String
-    #   * {Types::GetSpaceOutput#storage_limit #storage_limit} => Integer
-    #   * {Types::GetSpaceOutput#tier #tier} => String
-    #   * {Types::GetSpaceOutput#user_admins #user_admins} => Array&lt;String&gt;
-    #   * {Types::GetSpaceOutput#user_count #user_count} => Integer
-    #   * {Types::GetSpaceOutput#user_kms_key #user_kms_key} => String
-    #   * {Types::GetSpaceOutput#vanity_domain #vanity_domain} => String
+    #   * {Types::GetSpaceOutput#configuration_status #configuration_status} => String
+    #   * {Types::GetSpaceOutput#client_id #client_id} => String
+    #   * {Types::GetSpaceOutput#identity_store_id #identity_store_id} => String
+    #   * {Types::GetSpaceOutput#application_arn #application_arn} => String
+    #   * {Types::GetSpaceOutput#description #description} => String
     #   * {Types::GetSpaceOutput#vanity_domain_status #vanity_domain_status} => String
+    #   * {Types::GetSpaceOutput#vanity_domain #vanity_domain} => String
+    #   * {Types::GetSpaceOutput#random_domain #random_domain} => String
+    #   * {Types::GetSpaceOutput#customer_role_arn #customer_role_arn} => String
+    #   * {Types::GetSpaceOutput#create_date_time #create_date_time} => Time
+    #   * {Types::GetSpaceOutput#delete_date_time #delete_date_time} => Time
+    #   * {Types::GetSpaceOutput#tier #tier} => String
+    #   * {Types::GetSpaceOutput#storage_limit #storage_limit} => Integer
+    #   * {Types::GetSpaceOutput#user_admins #user_admins} => Array&lt;String&gt;
+    #   * {Types::GetSpaceOutput#group_admins #group_admins} => Array&lt;String&gt;
+    #   * {Types::GetSpaceOutput#roles #roles} => Hash&lt;String,Array&lt;String&gt;&gt;
+    #   * {Types::GetSpaceOutput#user_kms_key #user_kms_key} => String
+    #   * {Types::GetSpaceOutput#user_count #user_count} => Integer
+    #   * {Types::GetSpaceOutput#content_size #content_size} => Integer
+    #   * {Types::GetSpaceOutput#supported_email_domains #supported_email_domains} => Types::SupportedEmailDomainsStatus
     #
     # @example Request syntax with placeholder values
     #
@@ -700,31 +1012,42 @@ module Aws::Repostspace
     #
     # @example Response structure
     #
+    #   resp.space_id #=> String
     #   resp.arn #=> String
-    #   resp.client_id #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String
     #   resp.configuration_status #=> String, one of "CONFIGURED", "UNCONFIGURED"
-    #   resp.content_size #=> Integer
-    #   resp.create_date_time #=> Time
-    #   resp.customer_role_arn #=> String
-    #   resp.delete_date_time #=> Time
+    #   resp.client_id #=> String
+    #   resp.identity_store_id #=> String
+    #   resp.application_arn #=> String
     #   resp.description #=> String
+    #   resp.vanity_domain_status #=> String, one of "PENDING", "APPROVED", "UNAPPROVED"
+    #   resp.vanity_domain #=> String
+    #   resp.random_domain #=> String
+    #   resp.customer_role_arn #=> String
+    #   resp.create_date_time #=> Time
+    #   resp.delete_date_time #=> Time
+    #   resp.tier #=> String, one of "BASIC", "STANDARD"
+    #   resp.storage_limit #=> Integer
+    #   resp.user_admins #=> Array
+    #   resp.user_admins[0] #=> String
     #   resp.group_admins #=> Array
     #   resp.group_admins[0] #=> String
-    #   resp.name #=> String
-    #   resp.random_domain #=> String
     #   resp.roles #=> Hash
     #   resp.roles["AccessorId"] #=> Array
     #   resp.roles["AccessorId"][0] #=> String, one of "EXPERT", "MODERATOR", "ADMINISTRATOR", "SUPPORTREQUESTOR"
-    #   resp.space_id #=> String
-    #   resp.status #=> String
-    #   resp.storage_limit #=> Integer
-    #   resp.tier #=> String, one of "BASIC", "STANDARD"
-    #   resp.user_admins #=> Array
-    #   resp.user_admins[0] #=> String
-    #   resp.user_count #=> Integer
     #   resp.user_kms_key #=> String
-    #   resp.vanity_domain #=> String
-    #   resp.vanity_domain_status #=> String, one of "PENDING", "APPROVED", "UNAPPROVED"
+    #   resp.user_count #=> Integer
+    #   resp.content_size #=> Integer
+    #   resp.supported_email_domains.enabled #=> String, one of "ENABLED", "DISABLED", "NOT_ALLOWED"
+    #   resp.supported_email_domains.allowed_domains #=> Array
+    #   resp.supported_email_domains.allowed_domains[0] #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * space_created
+    #   * space_deleted
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/repostspace-2022-05-13/GetSpace AWS API Documentation
     #
@@ -735,50 +1058,137 @@ module Aws::Repostspace
       req.send_request(options)
     end
 
-    # Returns a list of AWS re:Post Private private re:Posts in the account
-    # with some information about each private re:Post.
+    # Returns the list of channel within a private re:Post with some
+    # information about each channel.
+    #
+    # @option params [required, String] :space_id
+    #   The unique ID of the private re:Post.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of channel to return. You receive this
+    #   token from a previous ListChannels operation.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of private re:Posts to include in the results.
+    #   The maximum number of channels to include in the results.
+    #
+    # @return [Types::ListChannelsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListChannelsOutput#channels #channels} => Array&lt;Types::ChannelData&gt;
+    #   * {Types::ListChannelsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: ListChannels
+    #
+    #   resp = client.list_channels({
+    #     space_id: "SP1234567890abcdefghijkl", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     channels: [
+    #       {
+    #         channel_description: "Useful channel description", 
+    #         channel_id: "WS1234567890abcdefghijkl", 
+    #         channel_name: "My First Channel", 
+    #         channel_status: "CREATED", 
+    #         create_date_time: Time.parse("2020-02-20T20:20:20.420Z"), 
+    #         group_count: 1, 
+    #         space_id: "SP1234567890abcdefghijkl", 
+    #         user_count: 5, 
+    #       }, 
+    #       {
+    #         channel_description: "Better channel description", 
+    #         channel_id: "WSabcdefghijkl1234567890", 
+    #         channel_name: "Better Channel", 
+    #         channel_status: "CREATED", 
+    #         create_date_time: Time.parse("2025-06-20T14:43:34.201Z"), 
+    #         group_count: 0, 
+    #         space_id: "SP1234567890abcdefghijkl", 
+    #         user_count: 1, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_channels({
+    #     space_id: "SpaceId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channels #=> Array
+    #   resp.channels[0].space_id #=> String
+    #   resp.channels[0].channel_id #=> String
+    #   resp.channels[0].channel_name #=> String
+    #   resp.channels[0].channel_description #=> String
+    #   resp.channels[0].create_date_time #=> Time
+    #   resp.channels[0].delete_date_time #=> Time
+    #   resp.channels[0].channel_status #=> String, one of "CREATED", "CREATING", "CREATE_FAILED", "DELETED", "DELETING", "DELETE_FAILED"
+    #   resp.channels[0].user_count #=> Integer
+    #   resp.channels[0].group_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/repostspace-2022-05-13/ListChannels AWS API Documentation
+    #
+    # @overload list_channels(params = {})
+    # @param [Hash] params ({})
+    def list_channels(params = {}, options = {})
+      req = build_request(:list_channels, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of AWS re:Post Private private re:Posts in the account
+    # with some information about each private re:Post.
     #
     # @option params [String] :next_token
     #   The token for the next set of private re:Posts to return. You receive
     #   this token from a previous ListSpaces operation.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of private re:Posts to include in the results.
+    #
     # @return [Types::ListSpacesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListSpacesOutput#next_token #next_token} => String
     #   * {Types::ListSpacesOutput#spaces #spaces} => Array&lt;Types::SpaceData&gt;
+    #   * {Types::ListSpacesOutput#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_spaces({
-    #     max_results: 1,
     #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.spaces #=> Array
+    #   resp.spaces[0].space_id #=> String
     #   resp.spaces[0].arn #=> String
+    #   resp.spaces[0].name #=> String
+    #   resp.spaces[0].description #=> String
+    #   resp.spaces[0].status #=> String
     #   resp.spaces[0].configuration_status #=> String, one of "CONFIGURED", "UNCONFIGURED"
-    #   resp.spaces[0].content_size #=> Integer
+    #   resp.spaces[0].vanity_domain_status #=> String, one of "PENDING", "APPROVED", "UNAPPROVED"
+    #   resp.spaces[0].vanity_domain #=> String
+    #   resp.spaces[0].random_domain #=> String
+    #   resp.spaces[0].tier #=> String, one of "BASIC", "STANDARD"
+    #   resp.spaces[0].storage_limit #=> Integer
     #   resp.spaces[0].create_date_time #=> Time
     #   resp.spaces[0].delete_date_time #=> Time
-    #   resp.spaces[0].description #=> String
-    #   resp.spaces[0].name #=> String
-    #   resp.spaces[0].random_domain #=> String
-    #   resp.spaces[0].space_id #=> String
-    #   resp.spaces[0].status #=> String
-    #   resp.spaces[0].storage_limit #=> Integer
-    #   resp.spaces[0].tier #=> String, one of "BASIC", "STANDARD"
-    #   resp.spaces[0].user_count #=> Integer
     #   resp.spaces[0].user_kms_key #=> String
-    #   resp.spaces[0].vanity_domain #=> String
-    #   resp.spaces[0].vanity_domain_status #=> String, one of "PENDING", "APPROVED", "UNAPPROVED"
+    #   resp.spaces[0].user_count #=> Integer
+    #   resp.spaces[0].content_size #=> Integer
+    #   resp.spaces[0].supported_email_domains.enabled #=> String, one of "ENABLED", "DISABLED", "NOT_ALLOWED"
+    #   resp.spaces[0].supported_email_domains.allowed_domains #=> Array
+    #   resp.spaces[0].supported_email_domains.allowed_domains[0] #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/repostspace-2022-05-13/ListSpaces AWS API Documentation
     #
@@ -823,19 +1233,19 @@ module Aws::Repostspace
     # Adds a user or group to the list of administrators of the private
     # re:Post.
     #
-    # @option params [required, String] :admin_id
-    #   The ID of the administrator.
-    #
     # @option params [required, String] :space_id
     #   The ID of the private re:Post.
+    #
+    # @option params [required, String] :admin_id
+    #   The ID of the administrator.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_admin({
-    #     admin_id: "AdminId", # required
     #     space_id: "SpaceId", # required
+    #     admin_id: "AdminId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/repostspace-2022-05-13/RegisterAdmin AWS API Documentation
@@ -849,27 +1259,27 @@ module Aws::Repostspace
 
     # Sends an invitation email to selected users and groups.
     #
-    # @option params [required, Array<String>] :accessor_ids
-    #   The array of identifiers for the users and groups.
-    #
-    # @option params [required, String] :body
-    #   The body of the invite.
-    #
     # @option params [required, String] :space_id
     #   The ID of the private re:Post.
     #
+    # @option params [required, Array<String>] :accessor_ids
+    #   The array of identifiers for the users and groups.
+    #
     # @option params [required, String] :title
     #   The title of the invite.
+    #
+    # @option params [required, String] :body
+    #   The body of the invite.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.send_invites({
-    #     accessor_ids: ["AccessorId"], # required
-    #     body: "InviteBody", # required
     #     space_id: "SpaceId", # required
+    #     accessor_ids: ["AccessorId"], # required
     #     title: "InviteTitle", # required
+    #     body: "InviteBody", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/repostspace-2022-05-13/SendInvites AWS API Documentation
@@ -943,31 +1353,82 @@ module Aws::Repostspace
       req.send_request(options)
     end
 
+    # Modifies an existing channel.
+    #
+    # @option params [required, String] :space_id
+    #   The unique ID of the private re:Post.
+    #
+    # @option params [required, String] :channel_id
+    #   The unique ID of the private re:Post channel.
+    #
+    # @option params [required, String] :channel_name
+    #   The name for the channel. This must be unique per private re:Post.
+    #
+    # @option params [String] :channel_description
+    #   A description for the channel. This is used only to help you identify
+    #   this channel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: UpdateChannel
+    #
+    #   resp = client.update_channel({
+    #     channel_description: "Better channel description", 
+    #     channel_id: "WS1234567890abcdefghijkl", 
+    #     channel_name: "Better Channel", 
+    #     space_id: "SP1234567890abcdefghijkl", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_channel({
+    #     space_id: "SpaceId", # required
+    #     channel_id: "ChannelId", # required
+    #     channel_name: "ChannelName", # required
+    #     channel_description: "ChannelDescription",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/repostspace-2022-05-13/UpdateChannel AWS API Documentation
+    #
+    # @overload update_channel(params = {})
+    # @param [Hash] params ({})
+    def update_channel(params = {}, options = {})
+      req = build_request(:update_channel, params)
+      req.send_request(options)
+    end
+
     # Modifies an existing AWS re:Post Private private re:Post.
+    #
+    # @option params [required, String] :space_id
+    #   The unique ID of this private re:Post.
     #
     # @option params [String] :description
     #   A description for the private re:Post. This is used only to help you
     #   identify this private re:Post.
     #
+    # @option params [String] :tier
+    #   The pricing tier of this private re:Post.
+    #
     # @option params [String] :role_arn
     #   The IAM role that grants permissions to the private re:Post to convert
     #   unanswered questions into AWS support tickets.
     #
-    # @option params [required, String] :space_id
-    #   The unique ID of this private re:Post.
-    #
-    # @option params [String] :tier
-    #   The pricing tier of this private re:Post.
+    # @option params [Types::SupportedEmailDomainsParameters] :supported_email_domains
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_space({
-    #     description: "SpaceDescription",
-    #     role_arn: "Arn",
     #     space_id: "SpaceId", # required
+    #     description: "SpaceDescription",
     #     tier: "BASIC", # accepts BASIC, STANDARD
+    #     role_arn: "Arn",
+    #     supported_email_domains: {
+    #       enabled: "ENABLED", # accepts ENABLED, DISABLED
+    #       allowed_domains: ["EmailDomain"],
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/repostspace-2022-05-13/UpdateSpace AWS API Documentation
@@ -997,14 +1458,133 @@ module Aws::Repostspace
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-repostspace'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # Polls an API operation until a resource enters a desired state.
+    #
+    # ## Basic Usage
+    #
+    # A waiter will call an API operation until:
+    #
+    # * It is successful
+    # * It enters a terminal state
+    # * It makes the maximum number of attempts
+    #
+    # In between attempts, the waiter will sleep.
+    #
+    #     # polls in a loop, sleeping between attempts
+    #     client.wait_until(waiter_name, params)
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. You can pass
+    # configuration as the final arguments hash.
+    #
+    #     # poll for ~25 seconds
+    #     client.wait_until(waiter_name, params, {
+    #       max_attempts: 5,
+    #       delay: 5,
+    #     })
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     client.wait_until(waiter_name, params, {
+    #
+    #       # disable max attempts
+    #       max_attempts: nil,
+    #
+    #       # poll for 1 hour, instead of a number of attempts
+    #       before_wait: -> (attempts, response) do
+    #         throw :failure if Time.now - started_at > 3600
+    #       end
+    #     })
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is unsuccessful, it will raise an error.
+    # All of the failure errors extend from
+    # {Aws::Waiters::Errors::WaiterFailed}.
+    #
+    #     begin
+    #       client.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    # ## Valid Waiters
+    #
+    # The following table lists the valid waiter names, the operations they call,
+    # and the default `:delay` and `:max_attempts` values.
+    #
+    # | waiter_name     | params               | :delay   | :max_attempts |
+    # | --------------- | -------------------- | -------- | ------------- |
+    # | channel_created | {Client#get_channel} | 2        | 60            |
+    # | channel_deleted | {Client#get_channel} | 2        | 60            |
+    # | space_created   | {Client#get_space}   | 300      | 24            |
+    # | space_deleted   | {Client#get_space}   | 300      | 24            |
+    #
+    # @raise [Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    # @raise [Errors::TooManyAttemptsError] Raised when the configured
+    #   maximum number of attempts have been made, and the waiter is not
+    #   yet successful.
+    #
+    # @raise [Errors::UnexpectedError] Raised when an error is encounted
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [Errors::NoSuchWaiterError] Raised when you request to wait
+    #   for an unknown state.
+    #
+    # @return [Boolean] Returns `true` if the waiter was successful.
+    # @param [Symbol] waiter_name
+    # @param [Hash] params ({})
+    # @param [Hash] options ({})
+    # @option options [Integer] :max_attempts
+    # @option options [Integer] :delay
+    # @option options [Proc] :before_attempt
+    # @option options [Proc] :before_wait
+    def wait_until(waiter_name, params = {}, options = {})
+      w = waiter(waiter_name, options)
+      yield(w.waiter) if block_given? # deprecated
+      w.wait(params)
     end
 
     # @api private
     # @deprecated
     def waiter_names
-      []
+      waiters.keys
+    end
+
+    private
+
+    # @param [Symbol] waiter_name
+    # @param [Hash] options ({})
+    def waiter(waiter_name, options = {})
+      waiter_class = waiters[waiter_name]
+      if waiter_class
+        waiter_class.new(options.merge(client: self))
+      else
+        raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
+      end
+    end
+
+    def waiters
+      {
+        channel_created: Waiters::ChannelCreated,
+        channel_deleted: Waiters::ChannelDeleted,
+        space_created: Waiters::SpaceCreated,
+        space_deleted: Waiters::SpaceDeleted
+      }
     end
 
     class << self

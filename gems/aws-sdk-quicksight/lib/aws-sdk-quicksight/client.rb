@@ -3868,6 +3868,9 @@ module Aws::QuickSight
     # @option params [Array<String>] :folder_arns
     #   The Folder ARN of the folder that you want the topic to reside in.
     #
+    # @option params [Types::CustomInstructions] :custom_instructions
+    #   Custom instructions for the topic.
+    #
     # @return [Types::CreateTopicResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTopicResponse#arn #arn} => String
@@ -4111,6 +4114,9 @@ module Aws::QuickSight
     #       },
     #     ],
     #     folder_arns: ["Arn"],
+    #     custom_instructions: {
+    #       custom_instructions_string: "CustomInstructionsString", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -8700,6 +8706,7 @@ module Aws::QuickSight
     #   * {Types::DescribeTopicResponse#topic #topic} => Types::TopicDetails
     #   * {Types::DescribeTopicResponse#request_id #request_id} => String
     #   * {Types::DescribeTopicResponse#status #status} => Integer
+    #   * {Types::DescribeTopicResponse#custom_instructions #custom_instructions} => Types::CustomInstructions
     #
     # @example Request syntax with placeholder values
     #
@@ -8870,6 +8877,7 @@ module Aws::QuickSight
     #   resp.topic.config_options.q_business_insights_enabled #=> Boolean
     #   resp.request_id #=> String
     #   resp.status #=> Integer
+    #   resp.custom_instructions.custom_instructions_string #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeTopic AWS API Documentation
     #
@@ -10943,7 +10951,8 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Lists the history of SPICE ingestions for a dataset.
+    # Lists the history of SPICE ingestions for a dataset. Limited to 5 TPS
+    # per user and 25 TPS per account.
     #
     # @option params [required, String] :data_set_id
     #   The ID of the dataset used in the ingestion.
@@ -17062,6 +17071,9 @@ module Aws::QuickSight
     # @option params [required, Types::TopicDetails] :topic
     #   The definition of the topic that you want to update.
     #
+    # @option params [Types::CustomInstructions] :custom_instructions
+    #   Custom instructions for the topic.
+    #
     # @return [Types::UpdateTopicResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTopicResponse#topic_id #topic_id} => String
@@ -17297,6 +17309,9 @@ module Aws::QuickSight
     #       config_options: {
     #         q_business_insights_enabled: false,
     #       },
+    #     },
+    #     custom_instructions: {
+    #       custom_instructions_string: "CustomInstructionsString", # required
     #     },
     #   })
     #
@@ -17720,7 +17735,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.150.0'
+      context[:gem_version] = '1.151.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

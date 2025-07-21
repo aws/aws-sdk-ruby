@@ -283,6 +283,67 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # @!attribute [rw] model_deployment_name
+    #   The name for the custom model deployment. The name must be unique
+    #   within your Amazon Web Services account and Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) of the custom model to deploy for
+    #   on-demand inference. The custom model must be in the `Active` state.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the custom model deployment to help you identify
+    #   its purpose.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to assign to the custom model deployment. You can use tags to
+    #   organize and track your Amazon Web Services resources for cost
+    #   allocation and management purposes.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateCustomModelDeploymentRequest AWS API Documentation
+    #
+    class CreateCustomModelDeploymentRequest < Struct.new(
+      :model_deployment_name,
+      :model_arn,
+      :description,
+      :tags,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_model_deployment_arn
+    #   The Amazon Resource Name (ARN) of the custom model deployment. Use
+    #   this ARN as the `modelId` parameter when invoking the model with the
+    #   `InvokeModel` or `Converse` operations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateCustomModelDeploymentResponse AWS API Documentation
+    #
+    class CreateCustomModelDeploymentResponse < Struct.new(
+      :custom_model_deployment_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] model_name
     #   A unique name for the custom model.
     #   @return [String]
@@ -1404,6 +1465,55 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Contains summary information about a custom model deployment,
+    # including its ARN, name, status, and associated custom model.
+    #
+    # @!attribute [rw] custom_model_deployment_arn
+    #   The Amazon Resource Name (ARN) of the custom model deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_model_deployment_name
+    #   The name of the custom model deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) of the custom model associated with
+    #   this deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the custom model deployment was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the custom model deployment. Possible values are
+    #   `CREATING`, `ACTIVE`, and `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The date and time when the custom model deployment was last
+    #   modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_message
+    #   If the deployment status is `FAILED`, this field contains a message
+    #   describing the failure reason.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CustomModelDeploymentSummary AWS API Documentation
+    #
+    class CustomModelDeploymentSummary < Struct.new(
+      :custom_model_deployment_arn,
+      :custom_model_deployment_name,
+      :model_arn,
+      :created_at,
+      :status,
+      :last_updated_at,
+      :failure_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Summary information for a custom model.
     #
     # @!attribute [rw] model_arn
@@ -1542,6 +1652,23 @@ module Aws::Bedrock
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] custom_model_deployment_identifier
+    #   The Amazon Resource Name (ARN) or name of the custom model
+    #   deployment to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteCustomModelDeploymentRequest AWS API Documentation
+    #
+    class DeleteCustomModelDeploymentRequest < Struct.new(
+      :custom_model_deployment_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteCustomModelDeploymentResponse AWS API Documentation
+    #
+    class DeleteCustomModelDeploymentResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] model_identifier
     #   Name of the model to delete.
@@ -2593,6 +2720,77 @@ module Aws::Bedrock
       :guardrail_configuration,
       :kb_inference_config,
       :additional_model_request_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_model_deployment_identifier
+    #   The Amazon Resource Name (ARN) or name of the custom model
+    #   deployment to retrieve information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetCustomModelDeploymentRequest AWS API Documentation
+    #
+    class GetCustomModelDeploymentRequest < Struct.new(
+      :custom_model_deployment_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_model_deployment_arn
+    #   The Amazon Resource Name (ARN) of the custom model deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_deployment_name
+    #   The name of the custom model deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) of the custom model associated with
+    #   this deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the custom model deployment was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the custom model deployment. Possible values are:
+    #
+    #   * `CREATING` - The deployment is being set up and prepared for
+    #     inference.
+    #
+    #   * `ACTIVE` - The deployment is ready and available for inference
+    #     requests.
+    #
+    #   * `FAILED` - The deployment failed to be created or became
+    #     unavailable.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the custom model deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   If the deployment status is `FAILED`, this field contains a message
+    #   describing the failure reason.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The date and time when the custom model deployment was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetCustomModelDeploymentResponse AWS API Documentation
+    #
+    class GetCustomModelDeploymentResponse < Struct.new(
+      :custom_model_deployment_arn,
+      :model_deployment_name,
+      :model_arn,
+      :created_at,
+      :status,
+      :description,
+      :failure_message,
+      :last_updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5939,6 +6137,81 @@ module Aws::Bedrock
     #
     class LegalTerm < Struct.new(
       :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_before
+    #   Filters deployments created before the specified date and time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_after
+    #   Filters deployments created after the specified date and time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name_contains
+    #   Filters deployments whose names contain the specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use this token to retrieve
+    #   additional results when the response is truncated.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The field to sort the results by. The only supported value is
+    #   `CreationTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for the results. Valid values are `Ascending` and
+    #   `Descending`. Default is `Descending`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_equals
+    #   Filters deployments by status. Valid values are `CREATING`,
+    #   `ACTIVE`, and `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn_equals
+    #   Filters deployments by the Amazon Resource Name (ARN) of the
+    #   associated custom model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListCustomModelDeploymentsRequest AWS API Documentation
+    #
+    class ListCustomModelDeploymentsRequest < Struct.new(
+      :created_before,
+      :created_after,
+      :name_contains,
+      :max_results,
+      :next_token,
+      :sort_by,
+      :sort_order,
+      :status_equals,
+      :model_arn_equals)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. This value is null when there
+    #   are no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_deployment_summaries
+    #   A list of custom model deployment summaries.
+    #   @return [Array<Types::CustomModelDeploymentSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListCustomModelDeploymentsResponse AWS API Documentation
+    #
+    class ListCustomModelDeploymentsResponse < Struct.new(
+      :next_token,
+      :model_deployment_summaries)
       SENSITIVE = []
       include Aws::Structure
     end
