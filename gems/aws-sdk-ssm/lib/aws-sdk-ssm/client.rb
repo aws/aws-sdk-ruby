@@ -5253,6 +5253,11 @@ module Aws::SSM
     # You can specify the `NextToken` in a subsequent call to get the next
     # set of results.
     #
+    # Parameter names can't contain spaces. The service removes any spaces
+    # specified for the beginning or end of a parameter name. If the
+    # specified name for a parameter contains spaces between characters, the
+    # request fails with a `ValidationException` error.
+    #
     # If you change the KMS key alias for the KMS key used to encrypt a
     # parameter, then you must also update the key alias the parameter uses
     # to reference KMS. Otherwise, `DescribeParameters` retrieves whatever
@@ -7163,6 +7168,11 @@ module Aws::SSM
     # Get information about a single parameter by specifying the parameter
     # name.
     #
+    # Parameter names can't contain spaces. The service removes any spaces
+    # specified for the beginning or end of a parameter name. If the
+    # specified name for a parameter contains spaces between characters, the
+    # request fails with a `ValidationException` error.
+    #
     # <note markdown="1"> To get information about more than one parameter at a time, use the
     # GetParameters operation.
     #
@@ -7221,6 +7231,11 @@ module Aws::SSM
     end
 
     # Retrieves the history of all changes to a parameter.
+    #
+    # Parameter names can't contain spaces. The service removes any spaces
+    # specified for the beginning or end of a parameter name. If the
+    # specified name for a parameter contains spaces between characters, the
+    # request fails with a `ValidationException` error.
     #
     # If you change the KMS key alias for the KMS key used to encrypt a
     # parameter, then you must also update the key alias the parameter uses
@@ -7300,6 +7315,11 @@ module Aws::SSM
     #
     #  </note>
     #
+    # Parameter names can't contain spaces. The service removes any spaces
+    # specified for the beginning or end of a parameter name. If the
+    # specified name for a parameter contains spaces between characters, the
+    # request fails with a `ValidationException` error.
+    #
     # @option params [required, Array<String>] :names
     #   The names or Amazon Resource Names (ARNs) of the parameters that you
     #   want to query. For parameters shared with you from another account,
@@ -7373,6 +7393,11 @@ module Aws::SSM
     # and returns the matching values up to that point and a `NextToken`.
     # You can specify the `NextToken` in a subsequent call to get the next
     # set of results.
+    #
+    # Parameter names can't contain spaces. The service removes any spaces
+    # specified for the beginning or end of a parameter name. If the
+    # specified name for a parameter contains spaces between characters, the
+    # request fails with a `ValidationException` error.
     #
     # @option params [required, String] :path
     #   The hierarchy for the parameter. Hierarchies start with a forward
@@ -7735,6 +7760,11 @@ module Aws::SSM
     #   sensitive). If a label fails to meet these requirements, then the
     #   label isn't associated with a parameter and the system displays it
     #   in the list of InvalidLabels.
+    #
+    # * Parameter names can't contain spaces. The service removes any
+    #   spaces specified for the beginning or end of a parameter name. If
+    #   the specified name for a parameter contains spaces between
+    #   characters, the request fails with a `ValidationException` error.
     #
     # @option params [required, String] :name
     #   The parameter name on which you want to attach one or more labels.
@@ -9273,6 +9303,14 @@ module Aws::SSM
     # * ExecutionTime. The time the patch, association, or custom compliance
     #   item was applied to the managed node.
     #
+    #   For State Manager associations, this represents the time when
+    #   compliance status was captured by the Systems Manager service during
+    #   its internal compliance aggregation workflow, not necessarily when
+    #   the association was executed on the managed node. State Manager
+    #   updates compliance information for all associations on an instance
+    #   whenever any association executes, which may result in multiple
+    #   associations showing the same execution time.
+    #
     # * Id: The patch, association, or custom compliance ID.
     #
     # * Title: A title.
@@ -9464,7 +9502,10 @@ module Aws::SSM
     #     hierarchies in parameter names. For example:
     #     `/Dev/Production/East/Project-ABC/MyParameter`
     #
-    #   * A parameter name can't include spaces.
+    #   * Parameter names can't contain spaces. The service removes any
+    #     spaces specified for the beginning or end of a parameter name. If
+    #     the specified name for a parameter contains spaces between
+    #     characters, the request fails with a `ValidationException` error.
     #
     #   * Parameter hierarchies are limited to a maximum depth of fifteen
     #     levels.
@@ -11450,6 +11491,11 @@ module Aws::SSM
     end
 
     # Remove a label or labels from a parameter.
+    #
+    # Parameter names can't contain spaces. The service removes any spaces
+    # specified for the beginning or end of a parameter name. If the
+    # specified name for a parameter contains spaces between characters, the
+    # request fails with a `ValidationException` error.
     #
     # @option params [required, String] :name
     #   The name of the parameter from which you want to delete one or more
@@ -13457,7 +13503,7 @@ module Aws::SSM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.197.0'
+      context[:gem_version] = '1.198.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - Support `ENV['AWS_BEARER_TOKEN_BEDROCK']` for authentication with Amazon Bedrock APIs.
 
+1.51.0 (2025-07-16)
+------------------
+
+* Feature - document update to support on demand custom model.
+
 1.50.0 (2025-06-30)
 ------------------
 

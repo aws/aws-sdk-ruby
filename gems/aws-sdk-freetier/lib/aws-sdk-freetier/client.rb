@@ -476,6 +476,152 @@ module Aws::FreeTier
 
     # @!group API Operations
 
+    # Returns a specific activity record that is available to the customer.
+    #
+    # @option params [required, String] :activity_id
+    #   A unique identifier that identifies the activity.
+    #
+    # @option params [String] :language_code
+    #   The language code used to return translated title and description
+    #   fields.
+    #
+    # @return [Types::GetAccountActivityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccountActivityResponse#activity_id #activity_id} => String
+    #   * {Types::GetAccountActivityResponse#title #title} => String
+    #   * {Types::GetAccountActivityResponse#description #description} => String
+    #   * {Types::GetAccountActivityResponse#status #status} => String
+    #   * {Types::GetAccountActivityResponse#instructions_url #instructions_url} => String
+    #   * {Types::GetAccountActivityResponse#reward #reward} => Types::ActivityReward
+    #   * {Types::GetAccountActivityResponse#estimated_time_to_complete_in_minutes #estimated_time_to_complete_in_minutes} => Integer
+    #   * {Types::GetAccountActivityResponse#expires_at #expires_at} => Time
+    #   * {Types::GetAccountActivityResponse#started_at #started_at} => Time
+    #   * {Types::GetAccountActivityResponse#completed_at #completed_at} => Time
+    #
+    #
+    # @example Example: Fetching an Account activity by id
+    #
+    #   resp = client.get_account_activity({
+    #     activity_id: "d622f48bf4014286a2686ab10cacfb2e", 
+    #     language_code: "en-US", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     activity_id: "d622f48bf4014286a2686ab10cacfb2e", 
+    #     completed_at: Time.parse("1985-06-12T23:20:50.520Z"), 
+    #     description: "Set up three notifications: one for your costs reach ...", 
+    #     estimated_time_to_complete_in_minutes: 15, 
+    #     expires_at: Time.parse("1985-10-12T23:20:50.520Z"), 
+    #     instructions_url: "https://catalog.us-east-1.prod.workshops.aws/workshops/2a5fc82d-2b5f-4105-83c2-91a1b4d7abfe/en-US/2-foundation/lab1-create", 
+    #     reward: {
+    #       credit: {
+    #         amount: 20.0, 
+    #         unit: "USD", 
+    #       }, 
+    #     }, 
+    #     started_at: Time.parse("1985-04-12T23:20:50.520Z"), 
+    #     status: "COMPLETED", 
+    #     title: "Configure Your Access in the AWS Identity and Access Management (IAM) center", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_account_activity({
+    #     activity_id: "ActivityId", # required
+    #     language_code: "en-US", # accepts en-US, en-GB, id-ID, de-DE, es-ES, fr-FR, ja-JP, it-IT, pt-PT, ko-KR, zh-CN, zh-TW, tr-TR
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.activity_id #=> String
+    #   resp.title #=> String
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED", "EXPIRING"
+    #   resp.instructions_url #=> String
+    #   resp.reward.credit.amount #=> Float
+    #   resp.reward.credit.unit #=> String, one of "USD"
+    #   resp.estimated_time_to_complete_in_minutes #=> Integer
+    #   resp.expires_at #=> Time
+    #   resp.started_at #=> Time
+    #   resp.completed_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/freetier-2023-09-07/GetAccountActivity AWS API Documentation
+    #
+    # @overload get_account_activity(params = {})
+    # @param [Hash] params ({})
+    def get_account_activity(params = {}, options = {})
+      req = build_request(:get_account_activity, params)
+      req.send_request(options)
+    end
+
+    # This returns all of the information related to the state of the
+    # account plan related to Free Tier.
+    #
+    # @return [Types::GetAccountPlanStateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccountPlanStateResponse#account_id #account_id} => String
+    #   * {Types::GetAccountPlanStateResponse#account_plan_type #account_plan_type} => String
+    #   * {Types::GetAccountPlanStateResponse#account_plan_status #account_plan_status} => String
+    #   * {Types::GetAccountPlanStateResponse#account_plan_remaining_credits #account_plan_remaining_credits} => Types::MonetaryAmount
+    #   * {Types::GetAccountPlanStateResponse#account_plan_expiration_date #account_plan_expiration_date} => Time
+    #
+    #
+    # @example Example: Fetching account plan state by id
+    #
+    #   resp = client.get_account_plan_state({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     account_id: "111122223333", 
+    #     account_plan_expiration_date: Time.parse("2025-06-30T23:59:59Z"), 
+    #     account_plan_remaining_credits: {
+    #       amount: 25.0, 
+    #       unit: "USD", 
+    #     }, 
+    #     account_plan_status: "ACTIVE", 
+    #     account_plan_type: "FREE", 
+    #   }
+    #
+    # @example Example: Attempt to fetch account plan state by id with insufficient permissions
+    #
+    #   resp = client.get_account_plan_state({
+    #   })
+    #
+    # @example Example: Internal service error
+    #
+    #   resp = client.get_account_plan_state({
+    #   })
+    #
+    # @example Example: Attempt to fetch plan state by id for an account without account plan
+    #
+    #   resp = client.get_account_plan_state({
+    #   })
+    #
+    # @example Example: Request rate exceeds limits
+    #
+    #   resp = client.get_account_plan_state({
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_id #=> String
+    #   resp.account_plan_type #=> String, one of "FREE", "PAID"
+    #   resp.account_plan_status #=> String, one of "NOT_STARTED", "ACTIVE", "EXPIRED"
+    #   resp.account_plan_remaining_credits.amount #=> Float
+    #   resp.account_plan_remaining_credits.unit #=> String, one of "USD"
+    #   resp.account_plan_expiration_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/freetier-2023-09-07/GetAccountPlanState AWS API Documentation
+    #
+    # @overload get_account_plan_state(params = {})
+    # @param [Hash] params ({})
+    def get_account_plan_state(params = {}, options = {})
+      req = build_request(:get_account_plan_state, params)
+      req.send_request(options)
+    end
+
     # Returns a list of all Free Tier usage objects that match your filters.
     #
     # @option params [Types::Expression] :filter
@@ -502,24 +648,24 @@ module Aws::FreeTier
     #
     #   resp = client.get_free_tier_usage({
     #     filter: {
-    #       and: [
-    #         {
-    #           # recursive Expression
-    #         },
-    #       ],
-    #       dimensions: {
-    #         key: "SERVICE", # required, accepts SERVICE, OPERATION, USAGE_TYPE, REGION, FREE_TIER_TYPE, DESCRIPTION, USAGE_PERCENTAGE
-    #         match_options: ["EQUALS"], # required, accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL
-    #         values: ["Value"], # required
-    #       },
-    #       not: {
-    #         # recursive Expression
-    #       },
     #       or: [
     #         {
     #           # recursive Expression
     #         },
     #       ],
+    #       and: [
+    #         {
+    #           # recursive Expression
+    #         },
+    #       ],
+    #       not: {
+    #         # recursive Expression
+    #       },
+    #       dimensions: {
+    #         key: "SERVICE", # required, accepts SERVICE, OPERATION, USAGE_TYPE, REGION, FREE_TIER_TYPE, DESCRIPTION, USAGE_PERCENTAGE
+    #         values: ["Value"], # required
+    #         match_options: ["EQUALS"], # required, accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL
+    #       },
     #     },
     #     max_results: 1,
     #     next_token: "NextPageToken",
@@ -528,16 +674,16 @@ module Aws::FreeTier
     # @example Response structure
     #
     #   resp.free_tier_usages #=> Array
-    #   resp.free_tier_usages[0].actual_usage_amount #=> Float
-    #   resp.free_tier_usages[0].description #=> String
-    #   resp.free_tier_usages[0].forecasted_usage_amount #=> Float
-    #   resp.free_tier_usages[0].free_tier_type #=> String
-    #   resp.free_tier_usages[0].limit #=> Float
-    #   resp.free_tier_usages[0].operation #=> String
-    #   resp.free_tier_usages[0].region #=> String
     #   resp.free_tier_usages[0].service #=> String
-    #   resp.free_tier_usages[0].unit #=> String
+    #   resp.free_tier_usages[0].operation #=> String
     #   resp.free_tier_usages[0].usage_type #=> String
+    #   resp.free_tier_usages[0].region #=> String
+    #   resp.free_tier_usages[0].actual_usage_amount #=> Float
+    #   resp.free_tier_usages[0].forecasted_usage_amount #=> Float
+    #   resp.free_tier_usages[0].limit #=> Float
+    #   resp.free_tier_usages[0].unit #=> String
+    #   resp.free_tier_usages[0].description #=> String
+    #   resp.free_tier_usages[0].free_tier_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/freetier-2023-09-07/GetFreeTierUsage AWS API Documentation
@@ -546,6 +692,167 @@ module Aws::FreeTier
     # @param [Hash] params ({})
     def get_free_tier_usage(params = {}, options = {})
       req = build_request(:get_free_tier_usage, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of activities that are available. This operation
+    # supports pagination and filtering by status.
+    #
+    # @option params [Array<String>] :filter_activity_statuses
+    #   The activity status filter. This field can be used to filter the
+    #   response by activities status.
+    #
+    # @option params [String] :next_token
+    #   A token from a previous paginated response. If this is specified, the
+    #   response includes records beginning from this token (inclusive), up to
+    #   the number specified by `maxResults`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output.
+    #
+    # @option params [String] :language_code
+    #   The language code used to return translated titles.
+    #
+    # @return [Types::ListAccountActivitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccountActivitiesResponse#activities #activities} => Array&lt;Types::ActivitySummary&gt;
+    #   * {Types::ListAccountActivitiesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Fetching a page of completed activities
+    #
+    #   resp = client.list_account_activities({
+    #     filter_activity_statuses: [
+    #       "COMPLETED", 
+    #     ], 
+    #     language_code: "en-US", 
+    #     max_results: 1, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     activities: [
+    #       {
+    #         activity_id: "d622f48bf4014286a2686ab10cacfb2e", 
+    #         reward: {
+    #           credit: {
+    #             amount: 20.0, 
+    #             unit: "USD", 
+    #           }, 
+    #         }, 
+    #         status: "COMPLETED", 
+    #         title: "Configure Your Access in the AWS Identity and Access Management (IAM) center", 
+    #       }, 
+    #     ], 
+    #     next_token: "a95f3d9e7710c6ca8ba4f640b40bbc40", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_account_activities({
+    #     filter_activity_statuses: ["NOT_STARTED"], # accepts NOT_STARTED, IN_PROGRESS, COMPLETED, EXPIRING
+    #     next_token: "NextPageToken",
+    #     max_results: 1,
+    #     language_code: "en-US", # accepts en-US, en-GB, id-ID, de-DE, es-ES, fr-FR, ja-JP, it-IT, pt-PT, ko-KR, zh-CN, zh-TW, tr-TR
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.activities #=> Array
+    #   resp.activities[0].activity_id #=> String
+    #   resp.activities[0].title #=> String
+    #   resp.activities[0].reward.credit.amount #=> Float
+    #   resp.activities[0].reward.credit.unit #=> String, one of "USD"
+    #   resp.activities[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED", "EXPIRING"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/freetier-2023-09-07/ListAccountActivities AWS API Documentation
+    #
+    # @overload list_account_activities(params = {})
+    # @param [Hash] params ({})
+    def list_account_activities(params = {}, options = {})
+      req = build_request(:list_account_activities, params)
+      req.send_request(options)
+    end
+
+    # The account plan type for the Amazon Web Services account.
+    #
+    # @option params [required, String] :account_plan_type
+    #   The target account plan type. This makes it explicit about the change
+    #   and latest value of the `accountPlanType`.
+    #
+    # @return [Types::UpgradeAccountPlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpgradeAccountPlanResponse#account_id #account_id} => String
+    #   * {Types::UpgradeAccountPlanResponse#account_plan_type #account_plan_type} => String
+    #   * {Types::UpgradeAccountPlanResponse#account_plan_status #account_plan_status} => String
+    #
+    #
+    # @example Example: Upgrading an account plan to PAID
+    #
+    #   resp = client.upgrade_account_plan({
+    #     account_plan_type: "PAID", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     account_id: "111122223333", 
+    #     account_plan_status: "NOT_STARTED", 
+    #     account_plan_type: "PAID", 
+    #   }
+    #
+    # @example Example: Attempt to upgrade an account with insufficient permissions
+    #
+    #   resp = client.upgrade_account_plan({
+    #     account_plan_type: "PAID", 
+    #   })
+    #
+    # @example Example: Attempt to downgrade an account from PAID to FREE
+    #
+    #   resp = client.upgrade_account_plan({
+    #     account_plan_type: "FREE", 
+    #   })
+    #
+    # @example Example: Internal service error
+    #
+    #   resp = client.upgrade_account_plan({
+    #     account_plan_type: "PAID", 
+    #   })
+    #
+    # @example Example: Attempt to upgrade a non-existent account plan
+    #
+    #   resp = client.upgrade_account_plan({
+    #     account_plan_type: "PAID", 
+    #   })
+    #
+    # @example Example: Request rate exceeds limits
+    #
+    #   resp = client.upgrade_account_plan({
+    #     account_plan_type: "PAID", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.upgrade_account_plan({
+    #     account_plan_type: "FREE", # required, accepts FREE, PAID
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_id #=> String
+    #   resp.account_plan_type #=> String, one of "FREE", "PAID"
+    #   resp.account_plan_status #=> String, one of "NOT_STARTED", "ACTIVE", "EXPIRED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/freetier-2023-09-07/UpgradeAccountPlan AWS API Documentation
+    #
+    # @overload upgrade_account_plan(params = {})
+    # @param [Hash] params ({})
+    def upgrade_account_plan(params = {}, options = {})
+      req = build_request(:upgrade_account_plan, params)
       req.send_request(options)
     end
 
@@ -567,7 +874,7 @@ module Aws::FreeTier
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-freetier'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

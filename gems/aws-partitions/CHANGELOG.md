@@ -1,6 +1,43 @@
 Unreleased Changes
 ------------------
 
+1.1131.0 (2025-07-18)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1130.0 (2025-07-17)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1129.0 (2025-07-16)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::BedrockAgentCoreControl`.
+
+* Feature - Added support for enumerating regions for  `Aws::BedrockAgentCore`.
+
+1.1128.0 (2025-07-16)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1127.0 (2025-07-15)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::S3Vectors`.
+
+1.1126.0 (2025-07-09)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1125.0 (2025-07-03)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.1124.0 (2025-07-01)
 ------------------
 

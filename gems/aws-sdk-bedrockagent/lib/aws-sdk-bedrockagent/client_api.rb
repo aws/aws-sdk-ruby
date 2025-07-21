@@ -298,6 +298,8 @@ module Aws::BedrockAgent
     IncludeExclude = Shapes::StringShape.new(name: 'IncludeExclude')
     IncompatibleConnectionDataTypeFlowValidationDetails = Shapes::StructureShape.new(name: 'IncompatibleConnectionDataTypeFlowValidationDetails')
     IncompatibleLoopNodeType = Shapes::StringShape.new(name: 'IncompatibleLoopNodeType')
+    IndexArn = Shapes::StringShape.new(name: 'IndexArn')
+    IndexName = Shapes::StringShape.new(name: 'IndexName')
     InferenceConfiguration = Shapes::StructureShape.new(name: 'InferenceConfiguration')
     IngestKnowledgeBaseDocumentsRequest = Shapes::StructureShape.new(name: 'IngestKnowledgeBaseDocumentsRequest')
     IngestKnowledgeBaseDocumentsResponse = Shapes::StructureShape.new(name: 'IngestKnowledgeBaseDocumentsResponse')
@@ -561,6 +563,7 @@ module Aws::BedrockAgent
     S3ObjectUri = Shapes::StringShape.new(name: 'S3ObjectUri')
     S3Prefix = Shapes::StringShape.new(name: 'S3Prefix')
     S3Prefixes = Shapes::ListShape.new(name: 'S3Prefixes')
+    S3VectorsConfiguration = Shapes::StructureShape.new(name: 'S3VectorsConfiguration')
     SalesforceAuthType = Shapes::StringShape.new(name: 'SalesforceAuthType')
     SalesforceCrawlerConfiguration = Shapes::StructureShape.new(name: 'SalesforceCrawlerConfiguration')
     SalesforceDataSourceConfiguration = Shapes::StructureShape.new(name: 'SalesforceDataSourceConfiguration')
@@ -675,6 +678,7 @@ module Aws::BedrockAgent
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
+    VectorBucketArn = Shapes::StringShape.new(name: 'VectorBucketArn')
     VectorIngestionConfiguration = Shapes::StructureShape.new(name: 'VectorIngestionConfiguration')
     VectorKnowledgeBaseConfiguration = Shapes::StructureShape.new(name: 'VectorKnowledgeBaseConfiguration')
     VectorSearchBedrockRerankingConfiguration = Shapes::StructureShape.new(name: 'VectorSearchBedrockRerankingConfiguration')
@@ -2497,6 +2501,11 @@ module Aws::BedrockAgent
 
     S3Prefixes.member = Shapes::ShapeRef.new(shape: S3Prefix)
 
+    S3VectorsConfiguration.add_member(:index_arn, Shapes::ShapeRef.new(shape: IndexArn, location_name: "indexArn"))
+    S3VectorsConfiguration.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
+    S3VectorsConfiguration.add_member(:vector_bucket_arn, Shapes::ShapeRef.new(shape: VectorBucketArn, location_name: "vectorBucketArn"))
+    S3VectorsConfiguration.struct_class = Types::S3VectorsConfiguration
+
     SalesforceCrawlerConfiguration.add_member(:filter_configuration, Shapes::ShapeRef.new(shape: CrawlFilterConfiguration, location_name: "filterConfiguration"))
     SalesforceCrawlerConfiguration.struct_class = Types::SalesforceCrawlerConfiguration
 
@@ -2578,6 +2587,7 @@ module Aws::BedrockAgent
     StorageConfiguration.add_member(:pinecone_configuration, Shapes::ShapeRef.new(shape: PineconeConfiguration, location_name: "pineconeConfiguration"))
     StorageConfiguration.add_member(:rds_configuration, Shapes::ShapeRef.new(shape: RdsConfiguration, location_name: "rdsConfiguration"))
     StorageConfiguration.add_member(:redis_enterprise_cloud_configuration, Shapes::ShapeRef.new(shape: RedisEnterpriseCloudConfiguration, location_name: "redisEnterpriseCloudConfiguration"))
+    StorageConfiguration.add_member(:s3_vectors_configuration, Shapes::ShapeRef.new(shape: S3VectorsConfiguration, location_name: "s3VectorsConfiguration"))
     StorageConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: KnowledgeBaseStorageType, required: true, location_name: "type"))
     StorageConfiguration.struct_class = Types::StorageConfiguration
 

@@ -135,6 +135,12 @@
   "BedrockAgent": {
     "models": "bedrock-agent/2023-06-05"
   },
+  "BedrockAgentCore": {
+    "models": "bedrock-agentcore/2024-02-28"
+  },
+  "BedrockAgentCoreControl": {
+    "models": "bedrock-agentcore-control/2023-06-05"
+  },
   "BedrockAgentRuntime": {
     "models": "bedrock-agent-runtime/2023-07-26"
   },
@@ -1106,6 +1112,9 @@
   },
   "S3Tables": {
     "models": "s3tables/2018-05-10"
+  },
+  "S3Vectors": {
+    "models": "s3vectors/2025-07-15"
   },
   "SES": {
     "models": "email/2010-12-01"

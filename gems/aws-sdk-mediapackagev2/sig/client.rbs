@@ -205,7 +205,7 @@ module Aws
         def channel_group_name: () -> ::String
         def channel_name: () -> ::String
         def origin_endpoint_name: () -> ::String
-        def container_type: () -> ("TS" | "CMAF")
+        def container_type: () -> ("TS" | "CMAF" | "ISM")
         def segment: () -> Types::Segment
         def created_at: () -> ::Time
         def modified_at: () -> ::Time
@@ -214,6 +214,7 @@ module Aws
         def hls_manifests: () -> ::Array[Types::GetHlsManifestConfiguration]
         def low_latency_hls_manifests: () -> ::Array[Types::GetLowLatencyHlsManifestConfiguration]
         def dash_manifests: () -> ::Array[Types::GetDashManifestConfiguration]
+        def mss_manifests: () -> ::Array[Types::GetMssManifestConfiguration]
         def force_endpoint_error_configuration: () -> Types::ForceEndpointErrorConfiguration
         def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
@@ -223,7 +224,7 @@ module Aws
                                     channel_group_name: ::String,
                                     channel_name: ::String,
                                     origin_endpoint_name: ::String,
-                                    container_type: ("TS" | "CMAF"),
+                                    container_type: ("TS" | "CMAF" | "ISM"),
                                     ?segment: {
                                       segment_duration_seconds: ::Integer?,
                                       segment_name: ::String?,
@@ -237,9 +238,11 @@ module Aws
                                         constant_initialization_vector: ::String?,
                                         encryption_method: {
                                           ts_encryption_method: ("AES_128" | "SAMPLE_AES")?,
-                                          cmaf_encryption_method: ("CENC" | "CBCS")?
+                                          cmaf_encryption_method: ("CENC" | "CBCS")?,
+                                          ism_encryption_method: ("CENC")?
                                         },
                                         key_rotation_interval_seconds: ::Integer?,
+                                        cmaf_exclude_segment_drm_metadata: bool?,
                                         speke_key_provider: {
                                           encryption_contract_configuration: {
                                             preset_speke_20_audio: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED"),
@@ -360,6 +363,20 @@ module Aws
                                             ttml_profile: ("IMSC_1" | "EBU_TT_D_101")
                                           }?
                                         }?
+                                      },
+                                    ],
+                                    ?mss_manifests: Array[
+                                      {
+                                        manifest_name: ::String,
+                                        manifest_window_seconds: ::Integer?,
+                                        filter_configuration: {
+                                          manifest_filter: ::String?,
+                                          start: ::Time?,
+                                          end: ::Time?,
+                                          time_delay_seconds: ::Integer?,
+                                          clip_start_time: ::Time?
+                                        }?,
+                                        manifest_layout: ("FULL" | "COMPACT")?
                                       },
                                     ],
                                     ?force_endpoint_error_configuration: {
@@ -506,7 +523,7 @@ module Aws
         def channel_group_name: () -> ::String
         def channel_name: () -> ::String
         def origin_endpoint_name: () -> ::String
-        def container_type: () -> ("TS" | "CMAF")
+        def container_type: () -> ("TS" | "CMAF" | "ISM")
         def segment: () -> Types::Segment
         def created_at: () -> ::Time
         def modified_at: () -> ::Time
@@ -516,6 +533,7 @@ module Aws
         def hls_manifests: () -> ::Array[Types::GetHlsManifestConfiguration]
         def low_latency_hls_manifests: () -> ::Array[Types::GetLowLatencyHlsManifestConfiguration]
         def dash_manifests: () -> ::Array[Types::GetDashManifestConfiguration]
+        def mss_manifests: () -> ::Array[Types::GetMssManifestConfiguration]
         def force_endpoint_error_configuration: () -> Types::ForceEndpointErrorConfiguration
         def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
@@ -534,6 +552,7 @@ module Aws
         def channel_name: () -> ::String
         def origin_endpoint_name: () -> ::String
         def policy: () -> ::String
+        def cdn_auth_configuration: () -> Types::CdnAuthConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#get_origin_endpoint_policy-instance_method
       def get_origin_endpoint_policy: (
@@ -627,7 +646,11 @@ module Aws
                                         channel_group_name: ::String,
                                         channel_name: ::String,
                                         origin_endpoint_name: ::String,
-                                        policy: ::String
+                                        policy: ::String,
+                                        ?cdn_auth_configuration: {
+                                          cdn_identifier_secret_arns: Array[::String],
+                                          secrets_role_arn: ::String
+                                        }
                                       ) -> _PutOriginEndpointPolicyResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutOriginEndpointPolicyResponseSuccess
 
@@ -730,7 +753,7 @@ module Aws
         def channel_group_name: () -> ::String
         def channel_name: () -> ::String
         def origin_endpoint_name: () -> ::String
-        def container_type: () -> ("TS" | "CMAF")
+        def container_type: () -> ("TS" | "CMAF" | "ISM")
         def segment: () -> Types::Segment
         def created_at: () -> ::Time
         def modified_at: () -> ::Time
@@ -738,6 +761,7 @@ module Aws
         def startover_window_seconds: () -> ::Integer
         def hls_manifests: () -> ::Array[Types::GetHlsManifestConfiguration]
         def low_latency_hls_manifests: () -> ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+        def mss_manifests: () -> ::Array[Types::GetMssManifestConfiguration]
         def force_endpoint_error_configuration: () -> Types::ForceEndpointErrorConfiguration
         def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
@@ -748,7 +772,7 @@ module Aws
                                     channel_group_name: ::String,
                                     channel_name: ::String,
                                     origin_endpoint_name: ::String,
-                                    container_type: ("TS" | "CMAF"),
+                                    container_type: ("TS" | "CMAF" | "ISM"),
                                     ?segment: {
                                       segment_duration_seconds: ::Integer?,
                                       segment_name: ::String?,
@@ -762,9 +786,11 @@ module Aws
                                         constant_initialization_vector: ::String?,
                                         encryption_method: {
                                           ts_encryption_method: ("AES_128" | "SAMPLE_AES")?,
-                                          cmaf_encryption_method: ("CENC" | "CBCS")?
+                                          cmaf_encryption_method: ("CENC" | "CBCS")?,
+                                          ism_encryption_method: ("CENC")?
                                         },
                                         key_rotation_interval_seconds: ::Integer?,
+                                        cmaf_exclude_segment_drm_metadata: bool?,
                                         speke_key_provider: {
                                           encryption_contract_configuration: {
                                             preset_speke_20_audio: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED"),
@@ -884,6 +910,20 @@ module Aws
                                             ttml_profile: ("IMSC_1" | "EBU_TT_D_101")
                                           }?
                                         }?
+                                      },
+                                    ],
+                                    ?mss_manifests: Array[
+                                      {
+                                        manifest_name: ::String,
+                                        manifest_window_seconds: ::Integer?,
+                                        filter_configuration: {
+                                          manifest_filter: ::String?,
+                                          start: ::Time?,
+                                          end: ::Time?,
+                                          time_delay_seconds: ::Integer?,
+                                          clip_start_time: ::Time?
+                                        }?,
+                                        manifest_layout: ("FULL" | "COMPACT")?
                                       },
                                     ],
                                     ?force_endpoint_error_configuration: {

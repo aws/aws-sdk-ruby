@@ -350,6 +350,16 @@ module Aws
                            ) -> _CreateTemplateResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTemplateResponseSuccess
 
+      interface _DeleteCaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCaseResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#delete_case-instance_method
+      def delete_case: (
+                         case_id: ::String,
+                         domain_id: ::String
+                       ) -> _DeleteCaseResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCaseResponseSuccess
+
       interface _DeleteCaseRuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCaseRuleResponse]
       end
@@ -388,6 +398,17 @@ module Aws
                            layout_id: ::String
                          ) -> _DeleteLayoutResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLayoutResponseSuccess
+
+      interface _DeleteRelatedItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRelatedItemResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#delete_related_item-instance_method
+      def delete_related_item: (
+                                 case_id: ::String,
+                                 domain_id: ::String,
+                                 related_item_id: ::String
+                               ) -> _DeleteRelatedItemResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRelatedItemResponseSuccess
 
       interface _DeleteTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTemplateResponse]

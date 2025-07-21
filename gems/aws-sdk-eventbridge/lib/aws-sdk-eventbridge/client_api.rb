@@ -174,6 +174,7 @@ module Aws::EventBridge
     HttpsEndpoint = Shapes::StringShape.new(name: 'HttpsEndpoint')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     IllegalStatusException = Shapes::StructureShape.new(name: 'IllegalStatusException')
+    IncludeDetail = Shapes::StringShape.new(name: 'IncludeDetail')
     InputTransformer = Shapes::StructureShape.new(name: 'InputTransformer')
     InputTransformerPathKey = Shapes::StringShape.new(name: 'InputTransformerPathKey')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -183,6 +184,7 @@ module Aws::EventBridge
     KinesisParameters = Shapes::StructureShape.new(name: 'KinesisParameters')
     KmsKeyIdentifier = Shapes::StringShape.new(name: 'KmsKeyIdentifier')
     LaunchType = Shapes::StringShape.new(name: 'LaunchType')
+    Level = Shapes::StringShape.new(name: 'Level')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LimitMax100 = Shapes::IntegerShape.new(name: 'LimitMax100')
     LimitMin1 = Shapes::IntegerShape.new(name: 'LimitMin1')
@@ -212,6 +214,7 @@ module Aws::EventBridge
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTargetsByRuleRequest = Shapes::StructureShape.new(name: 'ListTargetsByRuleRequest')
     ListTargetsByRuleResponse = Shapes::StructureShape.new(name: 'ListTargetsByRuleResponse')
+    LogConfig = Shapes::StructureShape.new(name: 'LogConfig')
     Long = Shapes::IntegerShape.new(name: 'Long')
     ManagedBy = Shapes::StringShape.new(name: 'ManagedBy')
     ManagedRuleException = Shapes::StructureShape.new(name: 'ManagedRuleException')
@@ -593,6 +596,7 @@ module Aws::EventBridge
     CreateEventBusRequest.add_member(:description, Shapes::ShapeRef.new(shape: EventBusDescription, location_name: "Description"))
     CreateEventBusRequest.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifier, location_name: "KmsKeyIdentifier"))
     CreateEventBusRequest.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
+    CreateEventBusRequest.add_member(:log_config, Shapes::ShapeRef.new(shape: LogConfig, location_name: "LogConfig"))
     CreateEventBusRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateEventBusRequest.struct_class = Types::CreateEventBusRequest
 
@@ -600,6 +604,7 @@ module Aws::EventBridge
     CreateEventBusResponse.add_member(:description, Shapes::ShapeRef.new(shape: EventBusDescription, location_name: "Description"))
     CreateEventBusResponse.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifier, location_name: "KmsKeyIdentifier"))
     CreateEventBusResponse.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
+    CreateEventBusResponse.add_member(:log_config, Shapes::ShapeRef.new(shape: LogConfig, location_name: "LogConfig"))
     CreateEventBusResponse.struct_class = Types::CreateEventBusResponse
 
     CreatePartnerEventSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventSourceName, required: true, location_name: "Name"))
@@ -747,6 +752,7 @@ module Aws::EventBridge
     DescribeEventBusResponse.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifier, location_name: "KmsKeyIdentifier"))
     DescribeEventBusResponse.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
     DescribeEventBusResponse.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
+    DescribeEventBusResponse.add_member(:log_config, Shapes::ShapeRef.new(shape: LogConfig, location_name: "LogConfig"))
     DescribeEventBusResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribeEventBusResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DescribeEventBusResponse.struct_class = Types::DescribeEventBusResponse
@@ -1022,6 +1028,10 @@ module Aws::EventBridge
     ListTargetsByRuleResponse.add_member(:targets, Shapes::ShapeRef.new(shape: TargetList, location_name: "Targets"))
     ListTargetsByRuleResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTargetsByRuleResponse.struct_class = Types::ListTargetsByRuleResponse
+
+    LogConfig.add_member(:include_detail, Shapes::ShapeRef.new(shape: IncludeDetail, location_name: "IncludeDetail"))
+    LogConfig.add_member(:level, Shapes::ShapeRef.new(shape: Level, location_name: "Level"))
+    LogConfig.struct_class = Types::LogConfig
 
     ManagedRuleException.struct_class = Types::ManagedRuleException
 
@@ -1420,6 +1430,7 @@ module Aws::EventBridge
     UpdateEventBusRequest.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifier, location_name: "KmsKeyIdentifier"))
     UpdateEventBusRequest.add_member(:description, Shapes::ShapeRef.new(shape: EventBusDescription, location_name: "Description"))
     UpdateEventBusRequest.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
+    UpdateEventBusRequest.add_member(:log_config, Shapes::ShapeRef.new(shape: LogConfig, location_name: "LogConfig"))
     UpdateEventBusRequest.struct_class = Types::UpdateEventBusRequest
 
     UpdateEventBusResponse.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
@@ -1427,6 +1438,7 @@ module Aws::EventBridge
     UpdateEventBusResponse.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifier, location_name: "KmsKeyIdentifier"))
     UpdateEventBusResponse.add_member(:description, Shapes::ShapeRef.new(shape: EventBusDescription, location_name: "Description"))
     UpdateEventBusResponse.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
+    UpdateEventBusResponse.add_member(:log_config, Shapes::ShapeRef.new(shape: LogConfig, location_name: "LogConfig"))
     UpdateEventBusResponse.struct_class = Types::UpdateEventBusResponse
 
 

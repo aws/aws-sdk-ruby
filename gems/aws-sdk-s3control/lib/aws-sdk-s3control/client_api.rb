@@ -1485,7 +1485,7 @@ module Aws::S3Control
     ListStorageLensGroupsResult.struct_class = Types::ListStorageLensGroupsResult
 
     ListTagsForResourceRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam" => {"name" => "AccountId"}}))
-    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: S3ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: S3ResourceArn, required: true, location: "uri", location_name: "resourceArn", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
     ListTagsForResourceResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -2012,7 +2012,7 @@ module Aws::S3Control
     TagList.member = Shapes::ShapeRef.new(shape: Tag, location_name: "Tag")
 
     TagResourceRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam" => {"name" => "AccountId"}}))
-    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: S3ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: S3ResourceArn, required: true, location: "uri", location_name: "resourceArn", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
@@ -2035,7 +2035,7 @@ module Aws::S3Control
     TransitionList.member = Shapes::ShapeRef.new(shape: Transition, location_name: "Transition")
 
     UntagResourceRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam" => {"name" => "AccountId"}}))
-    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: S3ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: S3ResourceArn, required: true, location: "uri", location_name: "resourceArn", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 

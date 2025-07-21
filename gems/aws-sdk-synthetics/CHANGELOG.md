@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2025-07-17)
+------------------
+
+* Feature - This feature allows AWS Synthetics customers to provide code dependencies using lambda layer while creating a canary
+
 1.67.0 (2025-06-02)
 ------------------
 

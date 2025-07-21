@@ -1023,6 +1023,16 @@ module Aws::EventBridge
     #
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rule-event-delivery.html#eb-rule-dlq
     #
+    # @option params [Types::LogConfig] :log_config
+    #   The logging configuration settings for the event bus.
+    #
+    #   For more information, see [Configuring logs for event buses][1] in the
+    #   *EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+    #
     # @option params [Array<Types::Tag>] :tags
     #   Tags to associate with the event bus.
     #
@@ -1032,6 +1042,7 @@ module Aws::EventBridge
     #   * {Types::CreateEventBusResponse#description #description} => String
     #   * {Types::CreateEventBusResponse#kms_key_identifier #kms_key_identifier} => String
     #   * {Types::CreateEventBusResponse#dead_letter_config #dead_letter_config} => Types::DeadLetterConfig
+    #   * {Types::CreateEventBusResponse#log_config #log_config} => Types::LogConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -1042,6 +1053,10 @@ module Aws::EventBridge
     #     kms_key_identifier: "KmsKeyIdentifier",
     #     dead_letter_config: {
     #       arn: "ResourceArn",
+    #     },
+    #     log_config: {
+    #       include_detail: "NONE", # accepts NONE, FULL
+    #       level: "OFF", # accepts OFF, ERROR, INFO, TRACE
     #     },
     #     tags: [
     #       {
@@ -1057,6 +1072,8 @@ module Aws::EventBridge
     #   resp.description #=> String
     #   resp.kms_key_identifier #=> String
     #   resp.dead_letter_config.arn #=> String
+    #   resp.log_config.include_detail #=> String, one of "NONE", "FULL"
+    #   resp.log_config.level #=> String, one of "OFF", "ERROR", "INFO", "TRACE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreateEventBus AWS API Documentation
     #
@@ -1711,6 +1728,7 @@ module Aws::EventBridge
     #   * {Types::DescribeEventBusResponse#kms_key_identifier #kms_key_identifier} => String
     #   * {Types::DescribeEventBusResponse#dead_letter_config #dead_letter_config} => Types::DeadLetterConfig
     #   * {Types::DescribeEventBusResponse#policy #policy} => String
+    #   * {Types::DescribeEventBusResponse#log_config #log_config} => Types::LogConfig
     #   * {Types::DescribeEventBusResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeEventBusResponse#last_modified_time #last_modified_time} => Time
     #
@@ -1728,6 +1746,8 @@ module Aws::EventBridge
     #   resp.kms_key_identifier #=> String
     #   resp.dead_letter_config.arn #=> String
     #   resp.policy #=> String
+    #   resp.log_config.include_detail #=> String, one of "NONE", "FULL"
+    #   resp.log_config.level #=> String, one of "OFF", "ERROR", "INFO", "TRACE"
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
     #
@@ -4259,6 +4279,16 @@ module Aws::EventBridge
     #
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rule-event-delivery.html#eb-rule-dlq
     #
+    # @option params [Types::LogConfig] :log_config
+    #   The logging configuration settings for the event bus.
+    #
+    #   For more information, see [Configuring logs for event buses][1] in the
+    #   *EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+    #
     # @return [Types::UpdateEventBusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateEventBusResponse#arn #arn} => String
@@ -4266,6 +4296,7 @@ module Aws::EventBridge
     #   * {Types::UpdateEventBusResponse#kms_key_identifier #kms_key_identifier} => String
     #   * {Types::UpdateEventBusResponse#description #description} => String
     #   * {Types::UpdateEventBusResponse#dead_letter_config #dead_letter_config} => Types::DeadLetterConfig
+    #   * {Types::UpdateEventBusResponse#log_config #log_config} => Types::LogConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -4276,6 +4307,10 @@ module Aws::EventBridge
     #     dead_letter_config: {
     #       arn: "ResourceArn",
     #     },
+    #     log_config: {
+    #       include_detail: "NONE", # accepts NONE, FULL
+    #       level: "OFF", # accepts OFF, ERROR, INFO, TRACE
+    #     },
     #   })
     #
     # @example Response structure
@@ -4285,6 +4320,8 @@ module Aws::EventBridge
     #   resp.kms_key_identifier #=> String
     #   resp.description #=> String
     #   resp.dead_letter_config.arn #=> String
+    #   resp.log_config.include_detail #=> String, one of "NONE", "FULL"
+    #   resp.log_config.level #=> String, one of "OFF", "ERROR", "INFO", "TRACE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UpdateEventBus AWS API Documentation
     #
@@ -4313,7 +4350,7 @@ module Aws::EventBridge
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-eventbridge'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

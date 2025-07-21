@@ -1819,6 +1819,55 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain. Domain should be exists for the
+    #   upload job to be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The unique name of the upload job. Could be a file name to identify
+    #   the upload job.
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   The mapping between CSV Columns and Profile Object attributes. A map
+    #   of the name and ObjectType field.
+    #   @return [Hash<String,Types::ObjectTypeField>]
+    #
+    # @!attribute [rw] unique_key
+    #   The unique key columns for de-duping the profiles used to map data
+    #   to the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_expiry
+    #   The expiry duration for the profiles ingested with the job. If not
+    #   provided, the system default of 2 weeks is used.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateUploadJobRequest AWS API Documentation
+    #
+    class CreateUploadJobRequest < Struct.new(
+      :domain_name,
+      :display_name,
+      :fields,
+      :unique_key,
+      :data_expiry)
+      SENSITIVE = [:fields]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The unique identifier for the created upload job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateUploadJobResponse AWS API Documentation
+    #
+    class CreateUploadJobResponse < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Object that segments on various Customer Profile's date fields.
     #
     # @!attribute [rw] dimension_type
@@ -4062,6 +4111,159 @@ module Aws::CustomerProfiles
     end
 
     # @!attribute [rw] domain_name
+    #   The unique name of the domain containing the upload job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the upload job to retrieve the upload path
+    #   for. This is generated from the CreateUploadJob API.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetUploadJobPathRequest AWS API Documentation
+    #
+    class GetUploadJobPathRequest < Struct.new(
+      :domain_name,
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] url
+    #   The pre-signed S3 URL for uploading the CSV file associated with the
+    #   upload job.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The plaintext data key used to encrypt the upload file.
+    #
+    #   To persist to the pre-signed url, use the client token and MD5
+    #   client token as header. The required headers are as follows:
+    #
+    #   * x-amz-server-side-encryption-customer-key: Client Token
+    #
+    #   * x-amz-server-side-encryption-customer-key-MD5: MD5 Client Token
+    #
+    #   * x-amz-server-side-encryption-customer-algorithm: AES256
+    #   @return [String]
+    #
+    # @!attribute [rw] valid_until
+    #   The expiry timestamp for the pre-signed URL, after which the URL
+    #   will no longer be valid.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetUploadJobPathResponse AWS API Documentation
+    #
+    class GetUploadJobPathResponse < Struct.new(
+      :url,
+      :client_token,
+      :valid_until)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain containing the upload job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the upload job to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetUploadJobRequest AWS API Documentation
+    #
+    class GetUploadJobRequest < Struct.new(
+      :domain_name,
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The unique identifier of the upload job.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The unique name of the upload job. Could be a file name to identify
+    #   the upload job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status describing the status for the upload job. The following
+    #   are Valid Values:
+    #
+    #   * **CREATED**: The upload job has been created, but has not started
+    #     processing yet.
+    #
+    #   * **IN\_PROGRESS**: The upload job is currently in progress,
+    #     ingesting and processing the profile data.
+    #
+    #   * **PARTIALLY\_SUCCEEDED**: The upload job has successfully
+    #     completed the ingestion and processing of all profile data.
+    #
+    #   * **SUCCEEDED**: The upload job has successfully completed the
+    #     ingestion and processing of all profile data.
+    #
+    #   * **FAILED**: The upload job has failed to complete.
+    #
+    #   * **STOPPED**: The upload job has been manually stopped or
+    #     terminated before completion.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the current status of the upload job. Possible
+    #   reasons:
+    #
+    #   * **VALIDATION\_FAILURE**: The upload job has encountered an error
+    #     or issue and was unable to complete the profile data ingestion.
+    #
+    #   * **INTERNAL\_FAILURE**: Failure caused from service side
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the upload job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completed_at
+    #   The timestamp when the upload job was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] fields
+    #   The mapping between CSV Columns and Profile Object attributes for
+    #   the upload job.
+    #   @return [Hash<String,Types::ObjectTypeField>]
+    #
+    # @!attribute [rw] unique_key
+    #   The unique key columns used for de-duping the keys in the upload
+    #   job.
+    #   @return [String]
+    #
+    # @!attribute [rw] results_summary
+    #   The summary of results for the upload job, including the number of
+    #   updated, created, and failed records.
+    #   @return [Types::ResultsSummary]
+    #
+    # @!attribute [rw] data_expiry
+    #   The expiry duration for the profiles ingested with the upload job.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetUploadJobResponse AWS API Documentation
+    #
+    class GetUploadJobResponse < Struct.new(
+      :job_id,
+      :display_name,
+      :status,
+      :status_reason,
+      :created_at,
+      :completed_at,
+      :fields,
+      :unique_key,
+      :results_summary,
+      :data_expiry)
+      SENSITIVE = [:fields]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
     #
@@ -5387,6 +5589,46 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain to list upload jobs for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of upload jobs to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from the previous call to retrieve the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListUploadJobsRequest AWS API Documentation
+    #
+    class ListUploadJobsRequest < Struct.new(
+      :domain_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   The list of upload jobs for the specified domain.
+    #   @return [Array<Types::UploadJobItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListUploadJobsResponse AWS API Documentation
+    #
+    class ListUploadJobsResponse < Struct.new(
+      :next_token,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A workflow in list of workflows.
     #
     # @!attribute [rw] workflow_type
@@ -6673,6 +6915,32 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # The summary of results for an upload job, including the number of
+    # updated, created, and failed records.
+    #
+    # @!attribute [rw] updated_records
+    #   The number of records that were updated during the upload job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] created_records
+    #   The number of records that were newly created during the upload job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_records
+    #   The number of records that failed to be processed during the upload
+    #   job.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ResultsSummary AWS API Documentation
+    #
+    class ResultsSummary < Struct.new(
+      :updated_records,
+      :created_records,
+      :failed_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request to enable the rule-based matching.
     #
     # @!attribute [rw] enabled
@@ -7241,6 +7509,48 @@ module Aws::CustomerProfiles
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain containing the upload job to start.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the upload job to start.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/StartUploadJobRequest AWS API Documentation
+    #
+    class StartUploadJobRequest < Struct.new(
+      :domain_name,
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/StartUploadJobResponse AWS API Documentation
+    #
+    class StartUploadJobResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain containing the upload job to stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the upload job to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/StopUploadJobRequest AWS API Documentation
+    #
+    class StopUploadJobRequest < Struct.new(
+      :domain_name,
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/StopUploadJobResponse AWS API Documentation
+    #
+    class StopUploadJobResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] resource_arn
     #   The ARN of the resource that you're adding tags to.
@@ -8066,6 +8376,50 @@ module Aws::CustomerProfiles
     #
     class UpdateProfileResponse < Struct.new(
       :profile_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary information for an individual upload job.
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the upload job.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The name of the upload job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the upload job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the current status of the upload job.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the upload job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completed_at
+    #   The timestamp when the upload job was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] data_expiry
+    #   The expiry duration for the profiles ingested with the upload job.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/UploadJobItem AWS API Documentation
+    #
+    class UploadJobItem < Struct.new(
+      :job_id,
+      :display_name,
+      :status,
+      :status_reason,
+      :created_at,
+      :completed_at,
+      :data_expiry)
       SENSITIVE = []
       include Aws::Structure
     end

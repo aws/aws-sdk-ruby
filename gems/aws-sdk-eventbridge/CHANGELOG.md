@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2025-07-15)
+------------------
+
+* Feature - Add customer-facing logging for the EventBridge Event Bus, enabling customers to better observe their events and extract insights about their EventBridge usage.
+
 1.84.0 (2025-06-30)
 ------------------
 

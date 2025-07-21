@@ -1054,6 +1054,7 @@ module Aws::CleanRoomsML
     #               number: 1,
     #             },
     #           },
+    #           result_format: "CSV", # accepts CSV, PARQUET
     #         },
     #       },
     #       role_arn: "IamRoleArn", # required
@@ -2247,6 +2248,7 @@ module Aws::CleanRoomsML
     #   resp.input_channel.data_source.protected_query_input_parameters.sql_parameters.parameters["ParameterKey"] #=> String
     #   resp.input_channel.data_source.protected_query_input_parameters.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
     #   resp.input_channel.data_source.protected_query_input_parameters.compute_configuration.worker.number #=> Integer
+    #   resp.input_channel.data_source.protected_query_input_parameters.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.input_channel.role_arn #=> String
     #   resp.protected_query_identifier #=> String
     #   resp.ml_input_channel_arn #=> String
@@ -4010,7 +4012,7 @@ module Aws::CleanRoomsML
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanroomsml'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

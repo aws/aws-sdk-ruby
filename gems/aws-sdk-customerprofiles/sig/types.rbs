@@ -445,6 +445,20 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class CreateUploadJobRequest
+      attr_accessor domain_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor fields: ::Hash[::String, Types::ObjectTypeField]
+      attr_accessor unique_key: ::String
+      attr_accessor data_expiry: ::Integer
+      SENSITIVE: [:fields]
+    end
+
+    class CreateUploadJobResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
     class DateDimension
       attr_accessor dimension_type: ("BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON")
       attr_accessor values: ::Array[::String]
@@ -1065,6 +1079,39 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class GetUploadJobPathRequest
+      attr_accessor domain_name: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetUploadJobPathResponse
+      attr_accessor url: ::String
+      attr_accessor client_token: ::String
+      attr_accessor valid_until: ::Time
+      SENSITIVE: []
+    end
+
+    class GetUploadJobRequest
+      attr_accessor domain_name: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetUploadJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor status: ("CREATED" | "IN_PROGRESS" | "PARTIALLY_SUCCEEDED" | "SUCCEEDED" | "FAILED" | "STOPPED")
+      attr_accessor status_reason: ("VALIDATION_FAILURE" | "INTERNAL_FAILURE")
+      attr_accessor created_at: ::Time
+      attr_accessor completed_at: ::Time
+      attr_accessor fields: ::Hash[::String, Types::ObjectTypeField]
+      attr_accessor unique_key: ::String
+      attr_accessor results_summary: Types::ResultsSummary
+      attr_accessor data_expiry: ::Integer
+      SENSITIVE: [:fields]
+    end
+
     class GetWorkflowRequest
       attr_accessor domain_name: ::String
       attr_accessor workflow_id: ::String
@@ -1444,6 +1491,19 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class ListUploadJobsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUploadJobsResponse
+      attr_accessor next_token: ::String
+      attr_accessor items: ::Array[Types::UploadJobItem]
+      SENSITIVE: []
+    end
+
     class ListWorkflowsItem
       attr_accessor workflow_type: ("APPFLOW_INTEGRATION")
       attr_accessor workflow_id: ::String
@@ -1740,6 +1800,13 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class ResultsSummary
+      attr_accessor updated_records: ::Integer
+      attr_accessor created_records: ::Integer
+      attr_accessor failed_records: ::Integer
+      SENSITIVE: []
+    end
+
     class RuleBasedMatchingRequest
       attr_accessor enabled: bool
       attr_accessor matching_rules: ::Array[Types::MatchingRule]
@@ -1863,6 +1930,24 @@ module Aws::CustomerProfiles
     class SourceSegment
       attr_accessor segment_definition_name: ::String
       SENSITIVE: []
+    end
+
+    class StartUploadJobRequest
+      attr_accessor domain_name: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartUploadJobResponse < Aws::EmptyStructure
+    end
+
+    class StopUploadJobRequest
+      attr_accessor domain_name: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopUploadJobResponse < Aws::EmptyStructure
     end
 
     class TagResourceRequest
@@ -2057,6 +2142,17 @@ module Aws::CustomerProfiles
 
     class UpdateProfileResponse
       attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class UploadJobItem
+      attr_accessor job_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor status: ("CREATED" | "IN_PROGRESS" | "PARTIALLY_SUCCEEDED" | "SUCCEEDED" | "FAILED" | "STOPPED")
+      attr_accessor status_reason: ("VALIDATION_FAILURE" | "INTERNAL_FAILURE")
+      attr_accessor created_at: ::Time
+      attr_accessor completed_at: ::Time
+      attr_accessor data_expiry: ::Integer
       SENSITIVE: []
     end
 

@@ -9412,6 +9412,36 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # Contains the storage configuration of the knowledge base for S3
+    # vectors.
+    #
+    # @!attribute [rw] index_arn
+    #   The Amazon Resource Name (ARN) of the vector index used for the
+    #   knowledge base. This ARN identifies the specific vector index
+    #   resource within Amazon Bedrock.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the vector index used for the knowledge base. This name
+    #   identifies the vector index within the Amazon Bedrock service.
+    #   @return [String]
+    #
+    # @!attribute [rw] vector_bucket_arn
+    #   The Amazon Resource Name (ARN) of the S3 bucket where vector
+    #   embeddings are stored. This bucket contains the vector data used by
+    #   the knowledge base.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/S3VectorsConfiguration AWS API Documentation
+    #
+    class S3VectorsConfiguration < Struct.new(
+      :index_arn,
+      :index_name,
+      :vector_bucket_arn)
+      SENSITIVE = [:index_arn, :index_name, :vector_bucket_arn]
+      include Aws::Structure
+    end
+
     # The configuration of the Salesforce content. For example, configuring
     # specific types of Salesforce content.
     #
@@ -9859,6 +9889,12 @@ module Aws::BedrockAgent
     #   Enterprise Cloud.
     #   @return [Types::RedisEnterpriseCloudConfiguration]
     #
+    # @!attribute [rw] s3_vectors_configuration
+    #   The configuration settings for storing knowledge base data using S3
+    #   vectors. This includes vector index information and S3 bucket
+    #   details for vector storage.
+    #   @return [Types::S3VectorsConfiguration]
+    #
     # @!attribute [rw] type
     #   The vector store service in which the knowledge base is stored.
     #   @return [String]
@@ -9873,6 +9909,7 @@ module Aws::BedrockAgent
       :pinecone_configuration,
       :rds_configuration,
       :redis_enterprise_cloud_configuration,
+      :s3_vectors_configuration,
       :type)
       SENSITIVE = []
       include Aws::Structure

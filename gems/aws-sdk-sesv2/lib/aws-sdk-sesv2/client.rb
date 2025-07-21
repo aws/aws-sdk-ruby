@@ -2152,7 +2152,7 @@ module Aws::SESV2
     # @example Response structure
     #
     #   resp.dedicated_ip.ip #=> String
-    #   resp.dedicated_ip.warmup_status #=> String, one of "IN_PROGRESS", "DONE"
+    #   resp.dedicated_ip.warmup_status #=> String, one of "IN_PROGRESS", "DONE", "NOT_APPLICABLE"
     #   resp.dedicated_ip.warmup_percentage #=> Integer
     #   resp.dedicated_ip.pool_name #=> String
     #
@@ -2230,7 +2230,7 @@ module Aws::SESV2
     #
     #   resp.dedicated_ips #=> Array
     #   resp.dedicated_ips[0].ip #=> String
-    #   resp.dedicated_ips[0].warmup_status #=> String, one of "IN_PROGRESS", "DONE"
+    #   resp.dedicated_ips[0].warmup_status #=> String, one of "IN_PROGRESS", "DONE", "NOT_APPLICABLE"
     #   resp.dedicated_ips[0].warmup_percentage #=> Integer
     #   resp.dedicated_ips[0].pool_name #=> String
     #   resp.next_token #=> String
@@ -5528,7 +5528,7 @@ module Aws::SESV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

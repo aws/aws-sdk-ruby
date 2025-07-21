@@ -1043,6 +1043,7 @@ module Aws
         def progress_message: () -> ::String
         def definition: () -> Types::SessionActionDefinition
         def acquired_limits: () -> ::Array[Types::AcquiredLimit]
+        def manifests: () -> ::Array[Types::TaskRunManifestPropertiesResponse]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_session_action-instance_method
       def get_session_action: (
@@ -2265,7 +2266,13 @@ module Aws
                                         started_at: ::Time?,
                                         ended_at: ::Time?,
                                         updated_at: ::Time?,
-                                        progress_percent: ::Float?
+                                        progress_percent: ::Float?,
+                                        manifests: Array[
+                                          {
+                                            output_manifest_path: ::String?,
+                                            output_manifest_hash: ::String?
+                                          },
+                                        ]?
                                       }]
                                   ) -> _UpdateWorkerScheduleResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkerScheduleResponseSuccess

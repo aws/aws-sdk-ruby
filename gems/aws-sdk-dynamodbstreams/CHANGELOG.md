@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2025-07-15)
+------------------
+
+* Feature - Added support for optional shard filter parameter in DescribeStream api that allows customers to fetch child shards of a read_only parent shard.
+
 1.76.0 (2025-06-02)
 ------------------
 

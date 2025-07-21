@@ -441,7 +441,7 @@ module Aws::PaymentCryptographyData
     end
 
     class MacAttributes
-      attr_accessor algorithm: ("ISO9797_ALGORITHM1" | "ISO9797_ALGORITHM3" | "CMAC" | "HMAC_SHA224" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512")
+      attr_accessor algorithm: ("ISO9797_ALGORITHM1" | "ISO9797_ALGORITHM3" | "CMAC" | "HMAC" | "HMAC_SHA224" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512")
       attr_accessor emv_mac: Types::MacAlgorithmEmv
       attr_accessor dukpt_iso_9797_algorithm_1: Types::MacAlgorithmDukpt
       attr_accessor dukpt_iso_9797_algorithm_3: Types::MacAlgorithmDukpt
@@ -815,7 +815,7 @@ module Aws::PaymentCryptographyData
 
     class WrappedKey
       attr_accessor wrapped_key_material: Types::WrappedKeyMaterial
-      attr_accessor key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC")
+      attr_accessor key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")
       SENSITIVE: []
     end
 

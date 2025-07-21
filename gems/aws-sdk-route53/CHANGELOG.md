@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.117.0 (2025-07-03)
+------------------
+
+* Feature - Amazon Route 53 now supports the iso-e regions for private DNS Amazon VPCs and cloudwatch healthchecks.
+
 1.116.0 (2025-06-06)
 ------------------
 

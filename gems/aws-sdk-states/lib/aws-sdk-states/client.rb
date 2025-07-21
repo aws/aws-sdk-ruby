@@ -515,7 +515,11 @@ module Aws::States
     #
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
-    #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #   * control characters (`U+0000-001F`, `U+007F-009F`, `U+FFFE-FFFF`)
+    #
+    #   * surrogates (`U+D800-DFFF`)
+    #
+    #   * invalid characters (` U+10FFFF`)
     #
     #   To enable logging with CloudWatch Logs, the name should only contain
     #   0-9, A-Z, a-z, - and \_.
@@ -630,7 +634,11 @@ module Aws::States
     #
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
-    #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #   * control characters (`U+0000-001F`, `U+007F-009F`, `U+FFFE-FFFF`)
+    #
+    #   * surrogates (`U+D800-DFFF`)
+    #
+    #   * invalid characters (` U+10FFFF`)
     #
     #   To enable logging with CloudWatch Logs, the name should only contain
     #   0-9, A-Z, a-z, - and \_.
@@ -1833,6 +1841,17 @@ module Aws::States
     #   If specified, only list the executions whose current execution status
     #   matches the given filter.
     #
+    #   If you provide a `PENDING_REDRIVE` statusFilter, you must specify
+    #   `mapRunArn`. For more information, see [Child workflow execution
+    #   redrive behaviour][1] in the *Step Functions Developer Guide*.
+    #
+    #   If you provide a stateMachineArn and a `PENDING_REDRIVE` statusFilter,
+    #   the API returns a validation exception.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html#redrive-child-workflow-behavior
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results that are returned per call. You can use
     #   `nextToken` to obtain further pages of results. The default is 100 and
@@ -2660,7 +2679,11 @@ module Aws::States
     #
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
-    #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #   * control characters (`U+0000-001F`, `U+007F-009F`, `U+FFFE-FFFF`)
+    #
+    #   * surrogates (`U+D800-DFFF`)
+    #
+    #   * invalid characters (` U+10FFFF`)
     #
     #   To enable logging with CloudWatch Logs, the name should only contain
     #   0-9, A-Z, a-z, - and \_.
@@ -2673,10 +2696,10 @@ module Aws::States
     #   The string that contains the JSON input data for the execution, for
     #   example:
     #
-    #   `"input": "{"first_name" : "test"}"`
+    #   `"{"first_name" : "Alejandro"}"`
     #
     #   <note markdown="1"> If you don't include any JSON input data, you still must include the
-    #   two braces, for example: `"input": "{}"`
+    #   two braces, for example: `"{}"`
     #
     #    </note>
     #
@@ -2686,6 +2709,16 @@ module Aws::States
     # @option params [String] :trace_header
     #   Passes the X-Ray trace header. The trace header can also be passed in
     #   the request payload.
+    #
+    #   <note markdown="1"> For X-Ray traces, all Amazon Web Services services use the
+    #   `X-Amzn-Trace-Id` header from the HTTP request. Using the header is
+    #   the preferred mechanism to identify a trace. `StartExecution` and
+    #   `StartSyncExecution` API operations can also use `traceHeader` from
+    #   the body of the request payload. If **both** sources are provided,
+    #   Step Functions will use the **header value** (preferred) over the
+    #   value in the request body.
+    #
+    #    </note>
     #
     # @return [Types::StartExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2740,10 +2773,10 @@ module Aws::States
     #   The string that contains the JSON input data for the execution, for
     #   example:
     #
-    #   `"input": "{"first_name" : "test"}"`
+    #   `"{"first_name" : "Alejandro"}"`
     #
     #   <note markdown="1"> If you don't include any JSON input data, you still must include the
-    #   two braces, for example: `"input": "{}"`
+    #   two braces, for example: `"{}"`
     #
     #    </note>
     #
@@ -2753,6 +2786,16 @@ module Aws::States
     # @option params [String] :trace_header
     #   Passes the X-Ray trace header. The trace header can also be passed in
     #   the request payload.
+    #
+    #   <note markdown="1"> For X-Ray traces, all Amazon Web Services services use the
+    #   `X-Amzn-Trace-Id` header from the HTTP request. Using the header is
+    #   the preferred mechanism to identify a trace. `StartExecution` and
+    #   `StartSyncExecution` API operations can also use `traceHeader` from
+    #   the body of the request payload. If **both** sources are provided,
+    #   Step Functions will use the **header value** (preferred) over the
+    #   value in the request body.
+    #
+    #    </note>
     #
     # @option params [String] :included_data
     #   If your state machine definition is encrypted with a KMS key, callers
@@ -2949,7 +2992,7 @@ module Aws::States
     #
     # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-input-output-dataflow
     # [2]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-services.html
-    # [3]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-third-party-apis.html
+    # [3]: https://docs.aws.amazon.com/step-functions/latest/dg/call-https-apis.html
     # [4]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-task-state.html#task-types
     # [5]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-activities.html
     # [6]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-pass-state.html
@@ -3482,7 +3525,7 @@ module Aws::States
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -438,6 +438,7 @@ module Aws::OpenSearchService
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
     S3GlueDataCatalog = Shapes::StructureShape.new(name: 'S3GlueDataCatalog')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
+    S3VectorsEngine = Shapes::StructureShape.new(name: 'S3VectorsEngine')
     SAMLEntityId = Shapes::StringShape.new(name: 'SAMLEntityId')
     SAMLIdp = Shapes::StructureShape.new(name: 'SAMLIdp')
     SAMLMetadata = Shapes::StringShape.new(name: 'SAMLMetadata')
@@ -544,9 +545,11 @@ module Aws::OpenSearchService
     ZoneStatus = Shapes::StringShape.new(name: 'ZoneStatus')
 
     AIMLOptionsInput.add_member(:natural_language_query_generation_options, Shapes::ShapeRef.new(shape: NaturalLanguageQueryGenerationOptionsInput, location_name: "NaturalLanguageQueryGenerationOptions"))
+    AIMLOptionsInput.add_member(:s3_vectors_engine, Shapes::ShapeRef.new(shape: S3VectorsEngine, location_name: "S3VectorsEngine"))
     AIMLOptionsInput.struct_class = Types::AIMLOptionsInput
 
     AIMLOptionsOutput.add_member(:natural_language_query_generation_options, Shapes::ShapeRef.new(shape: NaturalLanguageQueryGenerationOptionsOutput, location_name: "NaturalLanguageQueryGenerationOptions"))
+    AIMLOptionsOutput.add_member(:s3_vectors_engine, Shapes::ShapeRef.new(shape: S3VectorsEngine, location_name: "S3VectorsEngine"))
     AIMLOptionsOutput.struct_class = Types::AIMLOptionsOutput
 
     AIMLOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: AIMLOptionsOutput, location_name: "Options"))
@@ -1845,6 +1848,9 @@ module Aws::OpenSearchService
 
     S3GlueDataCatalog.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     S3GlueDataCatalog.struct_class = Types::S3GlueDataCatalog
+
+    S3VectorsEngine.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    S3VectorsEngine.struct_class = Types::S3VectorsEngine
 
     SAMLIdp.add_member(:metadata_content, Shapes::ShapeRef.new(shape: SAMLMetadata, required: true, location_name: "MetadataContent"))
     SAMLIdp.add_member(:entity_id, Shapes::ShapeRef.new(shape: SAMLEntityId, required: true, location_name: "EntityId"))

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.315.0 (2025-07-15)
+------------------
+
+* Feature - This release adds support for a new Restricted instance group type to enable a specialized environment for running Nova customization jobs on SageMaker HyperPod clusters. This release also adds support for SageMaker pipeline versioning.
+
+1.314.0 (2025-07-03)
+------------------
+
+* Feature - Changes include new StartSession API for SageMaker Studio spaces and CreateHubContentPresignedUrls API for SageMaker JumpStart.
+
 1.313.0 (2025-07-01)
 ------------------
 

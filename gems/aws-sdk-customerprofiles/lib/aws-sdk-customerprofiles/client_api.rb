@@ -87,6 +87,8 @@ module Aws::CustomerProfiles
     CreateSegmentEstimateResponse = Shapes::StructureShape.new(name: 'CreateSegmentEstimateResponse')
     CreateSegmentSnapshotRequest = Shapes::StructureShape.new(name: 'CreateSegmentSnapshotRequest')
     CreateSegmentSnapshotResponse = Shapes::StructureShape.new(name: 'CreateSegmentSnapshotResponse')
+    CreateUploadJobRequest = Shapes::StructureShape.new(name: 'CreateUploadJobRequest')
+    CreateUploadJobResponse = Shapes::StructureShape.new(name: 'CreateUploadJobResponse')
     CustomAttributes = Shapes::MapShape.new(name: 'CustomAttributes')
     DataFormat = Shapes::StringShape.new(name: 'DataFormat')
     DataPullMode = Shapes::StringShape.new(name: 'DataPullMode')
@@ -205,6 +207,10 @@ module Aws::CustomerProfiles
     GetSegmentSnapshotResponse = Shapes::StructureShape.new(name: 'GetSegmentSnapshotResponse')
     GetSimilarProfilesRequest = Shapes::StructureShape.new(name: 'GetSimilarProfilesRequest')
     GetSimilarProfilesResponse = Shapes::StructureShape.new(name: 'GetSimilarProfilesResponse')
+    GetUploadJobPathRequest = Shapes::StructureShape.new(name: 'GetUploadJobPathRequest')
+    GetUploadJobPathResponse = Shapes::StructureShape.new(name: 'GetUploadJobPathResponse')
+    GetUploadJobRequest = Shapes::StructureShape.new(name: 'GetUploadJobRequest')
+    GetUploadJobResponse = Shapes::StructureShape.new(name: 'GetUploadJobResponse')
     GetWorkflowRequest = Shapes::StructureShape.new(name: 'GetWorkflowRequest')
     GetWorkflowResponse = Shapes::StructureShape.new(name: 'GetWorkflowResponse')
     GetWorkflowStepsRequest = Shapes::StructureShape.new(name: 'GetWorkflowStepsRequest')
@@ -270,6 +276,8 @@ module Aws::CustomerProfiles
     ListSegmentDefinitionsResponse = Shapes::StructureShape.new(name: 'ListSegmentDefinitionsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListUploadJobsRequest = Shapes::StructureShape.new(name: 'ListUploadJobsRequest')
+    ListUploadJobsResponse = Shapes::StructureShape.new(name: 'ListUploadJobsResponse')
     ListWorkflowsItem = Shapes::StructureShape.new(name: 'ListWorkflowsItem')
     ListWorkflowsRequest = Shapes::StructureShape.new(name: 'ListWorkflowsRequest')
     ListWorkflowsResponse = Shapes::StructureShape.new(name: 'ListWorkflowsResponse')
@@ -338,6 +346,7 @@ module Aws::CustomerProfiles
     Readiness = Shapes::StructureShape.new(name: 'Readiness')
     ReadinessStatus = Shapes::StringShape.new(name: 'ReadinessStatus')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResultsSummary = Shapes::StructureShape.new(name: 'ResultsSummary')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RuleBasedMatchingRequest = Shapes::StructureShape.new(name: 'RuleBasedMatchingRequest')
     RuleBasedMatchingResponse = Shapes::StructureShape.new(name: 'RuleBasedMatchingResponse')
@@ -372,9 +381,14 @@ module Aws::CustomerProfiles
     StandardIdentifier = Shapes::StringShape.new(name: 'StandardIdentifier')
     StandardIdentifierList = Shapes::ListShape.new(name: 'StandardIdentifierList')
     Start = Shapes::IntegerShape.new(name: 'Start')
+    StartUploadJobRequest = Shapes::StructureShape.new(name: 'StartUploadJobRequest')
+    StartUploadJobResponse = Shapes::StructureShape.new(name: 'StartUploadJobResponse')
     Statistic = Shapes::StringShape.new(name: 'Statistic')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusCode = Shapes::IntegerShape.new(name: 'StatusCode')
+    StatusReason = Shapes::StringShape.new(name: 'StatusReason')
+    StopUploadJobRequest = Shapes::StructureShape.new(name: 'StopUploadJobRequest')
+    StopUploadJobResponse = Shapes::StructureShape.new(name: 'StopUploadJobResponse')
     String = Shapes::StringShape.new(name: 'String')
     StringDimensionType = Shapes::StringShape.new(name: 'StringDimensionType')
     TagArn = Shapes::StringShape.new(name: 'TagArn')
@@ -410,6 +424,9 @@ module Aws::CustomerProfiles
     UpdateEventTriggerResponse = Shapes::StructureShape.new(name: 'UpdateEventTriggerResponse')
     UpdateProfileRequest = Shapes::StructureShape.new(name: 'UpdateProfileRequest')
     UpdateProfileResponse = Shapes::StructureShape.new(name: 'UpdateProfileResponse')
+    UploadJobItem = Shapes::StructureShape.new(name: 'UploadJobItem')
+    UploadJobStatus = Shapes::StringShape.new(name: 'UploadJobStatus')
+    UploadJobsList = Shapes::ListShape.new(name: 'UploadJobsList')
     Value = Shapes::IntegerShape.new(name: 'Value')
     ValueList = Shapes::ListShape.new(name: 'ValueList')
     ValueRange = Shapes::StructureShape.new(name: 'ValueRange')
@@ -836,6 +853,16 @@ module Aws::CustomerProfiles
     CreateSegmentSnapshotResponse.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: uuid, required: true, location_name: "SnapshotId"))
     CreateSegmentSnapshotResponse.struct_class = Types::CreateSegmentSnapshotResponse
 
+    CreateUploadJobRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    CreateUploadJobRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "DisplayName"))
+    CreateUploadJobRequest.add_member(:fields, Shapes::ShapeRef.new(shape: FieldMap, required: true, location_name: "Fields"))
+    CreateUploadJobRequest.add_member(:unique_key, Shapes::ShapeRef.new(shape: text, required: true, location_name: "UniqueKey"))
+    CreateUploadJobRequest.add_member(:data_expiry, Shapes::ShapeRef.new(shape: expirationDaysInteger, location_name: "DataExpiry"))
+    CreateUploadJobRequest.struct_class = Types::CreateUploadJobRequest
+
+    CreateUploadJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: uuid, required: true, location_name: "JobId"))
+    CreateUploadJobResponse.struct_class = Types::CreateUploadJobResponse
+
     CustomAttributes.key = Shapes::ShapeRef.new(shape: typeName)
     CustomAttributes.value = Shapes::ShapeRef.new(shape: AttributeDimension)
 
@@ -1028,7 +1055,7 @@ module Aws::CustomerProfiles
 
     Failures.member = Shapes::ShapeRef.new(shape: ProfileQueryFailures)
 
-    FieldMap.key = Shapes::ShapeRef.new(shape: name)
+    FieldMap.key = Shapes::ShapeRef.new(shape: fieldName)
     FieldMap.value = Shapes::ShapeRef.new(shape: ObjectTypeField)
 
     FieldNameList.member = Shapes::ShapeRef.new(shape: name)
@@ -1329,6 +1356,31 @@ module Aws::CustomerProfiles
     GetSimilarProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
     GetSimilarProfilesResponse.struct_class = Types::GetSimilarProfilesResponse
 
+    GetUploadJobPathRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    GetUploadJobPathRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "JobId"))
+    GetUploadJobPathRequest.struct_class = Types::GetUploadJobPathRequest
+
+    GetUploadJobPathResponse.add_member(:url, Shapes::ShapeRef.new(shape: stringTo2048, required: true, location_name: "Url"))
+    GetUploadJobPathResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: text, location_name: "ClientToken"))
+    GetUploadJobPathResponse.add_member(:valid_until, Shapes::ShapeRef.new(shape: timestamp, location_name: "ValidUntil"))
+    GetUploadJobPathResponse.struct_class = Types::GetUploadJobPathResponse
+
+    GetUploadJobRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    GetUploadJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: uuid, required: true, location: "uri", location_name: "JobId"))
+    GetUploadJobRequest.struct_class = Types::GetUploadJobRequest
+
+    GetUploadJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: uuid, location_name: "JobId"))
+    GetUploadJobResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: string1To255, location_name: "DisplayName"))
+    GetUploadJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: UploadJobStatus, location_name: "Status"))
+    GetUploadJobResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReason, location_name: "StatusReason"))
+    GetUploadJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedAt"))
+    GetUploadJobResponse.add_member(:completed_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CompletedAt"))
+    GetUploadJobResponse.add_member(:fields, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Fields"))
+    GetUploadJobResponse.add_member(:unique_key, Shapes::ShapeRef.new(shape: text, location_name: "UniqueKey"))
+    GetUploadJobResponse.add_member(:results_summary, Shapes::ShapeRef.new(shape: ResultsSummary, location_name: "ResultsSummary"))
+    GetUploadJobResponse.add_member(:data_expiry, Shapes::ShapeRef.new(shape: expirationDaysInteger, location_name: "DataExpiry"))
+    GetUploadJobResponse.struct_class = Types::GetUploadJobResponse
+
     GetWorkflowRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     GetWorkflowRequest.add_member(:workflow_id, Shapes::ShapeRef.new(shape: uuid, required: true, location: "uri", location_name: "WorkflowId"))
     GetWorkflowRequest.struct_class = Types::GetWorkflowRequest
@@ -1617,6 +1669,15 @@ module Aws::CustomerProfiles
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    ListUploadJobsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    ListUploadJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxSize500, location: "querystring", location_name: "max-results"))
+    ListUploadJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
+    ListUploadJobsRequest.struct_class = Types::ListUploadJobsRequest
+
+    ListUploadJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
+    ListUploadJobsResponse.add_member(:items, Shapes::ShapeRef.new(shape: UploadJobsList, location_name: "Items"))
+    ListUploadJobsResponse.struct_class = Types::ListUploadJobsResponse
+
     ListWorkflowsItem.add_member(:workflow_type, Shapes::ShapeRef.new(shape: WorkflowType, required: true, location_name: "WorkflowType"))
     ListWorkflowsItem.add_member(:workflow_id, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "WorkflowId"))
     ListWorkflowsItem.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "Status"))
@@ -1890,6 +1951,11 @@ module Aws::CustomerProfiles
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: message, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    ResultsSummary.add_member(:updated_records, Shapes::ShapeRef.new(shape: optionalLong, location_name: "UpdatedRecords"))
+    ResultsSummary.add_member(:created_records, Shapes::ShapeRef.new(shape: optionalLong, location_name: "CreatedRecords"))
+    ResultsSummary.add_member(:failed_records, Shapes::ShapeRef.new(shape: optionalLong, location_name: "FailedRecords"))
+    ResultsSummary.struct_class = Types::ResultsSummary
+
     RuleBasedMatchingRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: optionalBoolean, required: true, location_name: "Enabled"))
     RuleBasedMatchingRequest.add_member(:matching_rules, Shapes::ShapeRef.new(shape: MatchingRules, location_name: "MatchingRules"))
     RuleBasedMatchingRequest.add_member(:max_allowed_rule_level_for_merging, Shapes::ShapeRef.new(shape: MaxAllowedRuleLevelForMerging, location_name: "MaxAllowedRuleLevelForMerging"))
@@ -1992,6 +2058,18 @@ module Aws::CustomerProfiles
     SourceSegmentList.member = Shapes::ShapeRef.new(shape: SourceSegment)
 
     StandardIdentifierList.member = Shapes::ShapeRef.new(shape: StandardIdentifier)
+
+    StartUploadJobRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    StartUploadJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "JobId"))
+    StartUploadJobRequest.struct_class = Types::StartUploadJobRequest
+
+    StartUploadJobResponse.struct_class = Types::StartUploadJobResponse
+
+    StopUploadJobRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    StopUploadJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "JobId"))
+    StopUploadJobRequest.struct_class = Types::StopUploadJobRequest
+
+    StopUploadJobResponse.struct_class = Types::StopUploadJobResponse
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -2162,6 +2240,17 @@ module Aws::CustomerProfiles
 
     UpdateProfileResponse.add_member(:profile_id, Shapes::ShapeRef.new(shape: uuid, required: true, location_name: "ProfileId"))
     UpdateProfileResponse.struct_class = Types::UpdateProfileResponse
+
+    UploadJobItem.add_member(:job_id, Shapes::ShapeRef.new(shape: uuid, location_name: "JobId"))
+    UploadJobItem.add_member(:display_name, Shapes::ShapeRef.new(shape: string1To255, location_name: "DisplayName"))
+    UploadJobItem.add_member(:status, Shapes::ShapeRef.new(shape: UploadJobStatus, location_name: "Status"))
+    UploadJobItem.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReason, location_name: "StatusReason"))
+    UploadJobItem.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedAt"))
+    UploadJobItem.add_member(:completed_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CompletedAt"))
+    UploadJobItem.add_member(:data_expiry, Shapes::ShapeRef.new(shape: expirationDaysInteger, location_name: "DataExpiry"))
+    UploadJobItem.struct_class = Types::UploadJobItem
+
+    UploadJobsList.member = Shapes::ShapeRef.new(shape: UploadJobItem)
 
     ValueList.member = Shapes::ShapeRef.new(shape: string1To255)
 
@@ -2381,6 +2470,19 @@ module Aws::CustomerProfiles
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_upload_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateUploadJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/domains/{DomainName}/upload-jobs"
+        o.input = Shapes::ShapeRef.new(shape: CreateUploadJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateUploadJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:delete_calculated_attribute_definition, Seahorse::Model::Operation.new.tap do |o|
@@ -2779,6 +2881,32 @@ module Aws::CustomerProfiles
         )
       end)
 
+      api.add_operation(:get_upload_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetUploadJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/upload-jobs/{JobId}"
+        o.input = Shapes::ShapeRef.new(shape: GetUploadJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetUploadJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_upload_job_path, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetUploadJobPath"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/upload-jobs/{JobId}/path"
+        o.input = Shapes::ShapeRef.new(shape: GetUploadJobPathRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetUploadJobPathResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_workflow, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetWorkflow"
         o.http_method = "GET"
@@ -3060,6 +3188,25 @@ module Aws::CustomerProfiles
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:list_upload_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListUploadJobs"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/upload-jobs"
+        o.input = Shapes::ShapeRef.new(shape: ListUploadJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListUploadJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_workflows, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListWorkflows"
         o.http_method = "POST"
@@ -3135,6 +3282,32 @@ module Aws::CustomerProfiles
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:start_upload_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartUploadJob"
+        o.http_method = "PUT"
+        o.http_request_uri = "/domains/{DomainName}/upload-jobs/{JobId}"
+        o.input = Shapes::ShapeRef.new(shape: StartUploadJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartUploadJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:stop_upload_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopUploadJob"
+        o.http_method = "PUT"
+        o.http_request_uri = "/domains/{DomainName}/upload-jobs/{JobId}/stop"
+        o.input = Shapes::ShapeRef.new(shape: StopUploadJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopUploadJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

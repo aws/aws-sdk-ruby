@@ -975,6 +975,27 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
+    # @!attribute [rw] case_id
+    #   A unique identifier of the case.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   A unique identifier of the Cases domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteCaseRequest AWS API Documentation
+    #
+    class DeleteCaseRequest < Struct.new(
+      :case_id,
+      :domain_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteCaseResponse AWS API Documentation
+    #
+    class DeleteCaseResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] case_rule_id
     #   Unique identifier of a case rule.
     #   @return [String]
@@ -1053,6 +1074,32 @@ module Aws::ConnectCases
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteLayoutResponse AWS API Documentation
     #
     class DeleteLayoutResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] case_id
+    #   A unique identifier of the case.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   A unique identifier of the Cases domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] related_item_id
+    #   A unique identifier of a related item.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteRelatedItemRequest AWS API Documentation
+    #
+    class DeleteRelatedItemRequest < Struct.new(
+      :case_id,
+      :domain_id,
+      :related_item_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteRelatedItemResponse AWS API Documentation
+    #
+    class DeleteRelatedItemResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] domain_id
     #   The unique identifier of the Cases domain.

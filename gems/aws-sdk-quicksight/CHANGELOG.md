@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.151.0 (2025-07-15)
+------------------
+
+* Feature - Introduced custom instructions for topics.
+
 1.150.0 (2025-06-30)
 ------------------
 

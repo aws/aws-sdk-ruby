@@ -34,14 +34,14 @@ module Aws::KeyspacesStreams
     #   The unique identifier of the shard iterator. A shard iterator
     #   specifies the position in the shard from which you want to start
     #   reading data records sequentially. You obtain this value by calling
-    #   the `GetShardIterator` operation. Each shard iterator is valid for 5
-    #   minutes after creation.
+    #   the `GetShardIterator` operation. Each shard iterator is valid for
+    #   15 minutes after creation.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of records to return in a single `GetRecords`
     #   request. Default value is 1000. You can specify a limit between 1
-    #   and 10000, but the actual number returned might be less than the
+    #   and 1000, but the actual number returned might be less than the
     #   specified maximum if the size of the data for the returned records
     #   exceeds the internal size limit.
     #   @return [Integer]
@@ -128,7 +128,7 @@ module Aws::KeyspacesStreams
     # @!attribute [rw] shard_iterator
     #   The unique identifier for the shard iterator. This value is used in
     #   the `GetRecords` operation to retrieve data records from the
-    #   specified shard. Each shard iterator expires 5 minutes after it is
+    #   specified shard. Each shard iterator expires 15 minutes after it is
     #   returned to the requester.
     #   @return [String]
     #
@@ -149,7 +149,7 @@ module Aws::KeyspacesStreams
     # @!attribute [rw] max_results
     #   The maximum number of shard objects to return in a single
     #   `GetStream` request. Default value is 100. The minimum value is 1
-    #   and the maximum value is 1000.
+    #   and the maximum value is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] shard_filter
@@ -560,7 +560,7 @@ module Aws::KeyspacesStreams
     # @!attribute [rw] max_results
     #   The maximum number of streams to return in a single `ListStreams`
     #   request. Default value is 100. The minimum value is 1 and the
-    #   maximum value is 1000.
+    #   maximum value is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token

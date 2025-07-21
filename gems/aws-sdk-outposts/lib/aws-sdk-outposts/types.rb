@@ -893,6 +893,55 @@ module Aws::Outposts
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum page size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] outpost_identifier
+    #   The ID or ARN of the Outpost.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOutpostBillingInformationInput AWS API Documentation
+    #
+    class GetOutpostBillingInformationInput < Struct.new(
+      :next_token,
+      :max_results,
+      :outpost_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscriptions
+    #   The subscription details for the specified Outpost.
+    #   @return [Array<Types::Subscription>]
+    #
+    # @!attribute [rw] contract_end_date
+    #   The date the current contract term ends for the specified Outpost.
+    #   You must start the renewal or decommission process at least 5
+    #   business days before the current term for your Amazon Web Services
+    #   Outposts ends. Failing to complete these steps at least 5 business
+    #   days before the current term ends might result in unanticipated
+    #   charges.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOutpostBillingInformationOutput AWS API Documentation
+    #
+    class GetOutpostBillingInformationOutput < Struct.new(
+      :next_token,
+      :subscriptions,
+      :contract_end_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] outpost_id
     #   The ID or ARN of the Outpost.
     #   @return [String]
@@ -2220,6 +2269,73 @@ module Aws::Outposts
     class StartConnectionResponse < Struct.new(
       :connection_id,
       :underlay_ip_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about your Amazon Web Services Outposts
+    # subscriptions.
+    #
+    # @!attribute [rw] subscription_id
+    #   The ID of the subscription that appears on the Amazon Web Services
+    #   Billing Center console.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_type
+    #   The type of subscription which can be one of the following:
+    #
+    #   * **ORIGINAL** - The first order on the Amazon Web Services
+    #     Outposts.
+    #
+    #   * **RENEWAL** - Renewal requests, both month to month and longer
+    #     term.
+    #
+    #   * **CAPACITY\_INCREASE** - Capacity scaling orders.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_status
+    #   The status of subscription which can be one of the following:
+    #
+    #   * **INACTIVE** - Subscription requests that are inactive.
+    #
+    #   * **ACTIVE** - Subscription requests that are in progress and have
+    #     an end date in the future.
+    #
+    #   * **CANCELLED** - Subscription requests that are cancelled.
+    #   @return [String]
+    #
+    # @!attribute [rw] order_ids
+    #   The order ID for your subscription.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] begin_date
+    #   The date your subscription starts.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The date your subscription ends.
+    #   @return [Time]
+    #
+    # @!attribute [rw] monthly_recurring_price
+    #   The amount you are billed each month in the subscription period.
+    #   @return [Float]
+    #
+    # @!attribute [rw] upfront_price
+    #   The amount billed when the subscription is created. This is a
+    #   one-time charge.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/Subscription AWS API Documentation
+    #
+    class Subscription < Struct.new(
+      :subscription_id,
+      :subscription_type,
+      :subscription_status,
+      :order_ids,
+      :begin_date,
+      :end_date,
+      :monthly_recurring_price,
+      :upfront_price)
       SENSITIVE = []
       include Aws::Structure
     end

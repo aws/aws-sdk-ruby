@@ -262,6 +262,20 @@ module Aws
                        ) -> _GetOutpostResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOutpostResponseSuccess
 
+      interface _GetOutpostBillingInformationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOutpostBillingInformationOutput]
+        def next_token: () -> ::String
+        def subscriptions: () -> ::Array[Types::Subscription]
+        def contract_end_date: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#get_outpost_billing_information-instance_method
+      def get_outpost_billing_information: (
+                                             ?next_token: ::String,
+                                             ?max_results: ::Integer,
+                                             outpost_identifier: ::String
+                                           ) -> _GetOutpostBillingInformationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOutpostBillingInformationResponseSuccess
+
       interface _GetOutpostInstanceTypesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetOutpostInstanceTypesOutput]
         def instance_types: () -> ::Array[Types::InstanceTypeItem]

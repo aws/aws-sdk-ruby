@@ -1034,7 +1034,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_resource_event_configuration-instance_method
       def get_resource_event_configuration: (
                                               identifier: ::String,
-                                              identifier_type: ("PartnerAccountId" | "DevEui" | "FuotaTaskId" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId"),
+                                              identifier_type: ("PartnerAccountId" | "DevEui" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId"),
                                               ?partner_type: ("Sidewalk")
                                             ) -> _GetResourceEventConfigurationResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceEventConfigurationResponseSuccess
@@ -1264,7 +1264,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#list_event_configurations-instance_method
       def list_event_configurations: (
-                                       resource_type: ("FuotaTask" | "SidewalkAccount" | "WirelessDevice" | "WirelessGateway"),
+                                       resource_type: ("SidewalkAccount" | "WirelessDevice" | "WirelessGateway"),
                                        ?max_results: ::Integer,
                                        ?next_token: ::String
                                      ) -> _ListEventConfigurationsResponseSuccess
@@ -1860,7 +1860,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#update_resource_event_configuration-instance_method
       def update_resource_event_configuration: (
                                                  identifier: ::String,
-                                                 identifier_type: ("PartnerAccountId" | "DevEui" | "FuotaTaskId" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId"),
+                                                 identifier_type: ("PartnerAccountId" | "DevEui" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId"),
                                                  ?partner_type: ("Sidewalk"),
                                                  ?device_registration_state: {
                                                    sidewalk: {

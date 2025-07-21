@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2025-07-03)
+------------------
+
+* Feature - This release introduces capability of create Segments via importing a CSV file directly. This consumes the CSV file and creates/updates corresponding profiles for the particular domain.
+
 1.65.0 (2025-06-09)
 ------------------
 

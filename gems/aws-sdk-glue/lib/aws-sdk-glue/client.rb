@@ -5153,7 +5153,7 @@ module Aws::Glue
     #   The unique identifier for the table within the specified database that
     #   will be created in the Glue Data Catalog.
     #
-    # @option params [required, Types::TableInput] :table_input
+    # @option params [Types::TableInput] :table_input
     #   The `TableInput` object that defines the metadata table to create in
     #   the catalog.
     #
@@ -5176,7 +5176,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     database_name: "NameString", # required
     #     name: "NameString",
-    #     table_input: { # required
+    #     table_input: {
     #       name: "NameString", # required
     #       description: "DescriptionString",
     #       owner: "NameString",
@@ -20457,7 +20457,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.224.0'
+      context[:gem_version] = '1.225.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

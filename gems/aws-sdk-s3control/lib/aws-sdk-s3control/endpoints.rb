@@ -858,6 +858,7 @@ module Aws::S3Control
           use_dual_stack: context[:use_dualstack_endpoint],
           account_id: context.params[:account_id],
           requires_account_id: true,
+          resource_arn: context.params[:resource_arn],
         )
       end
     end
@@ -1053,6 +1054,7 @@ module Aws::S3Control
           use_dual_stack: context[:use_dualstack_endpoint],
           account_id: context.params[:account_id],
           requires_account_id: true,
+          resource_arn: context.params[:resource_arn],
         )
       end
     end
@@ -1064,6 +1066,7 @@ module Aws::S3Control
           use_dual_stack: context[:use_dualstack_endpoint],
           account_id: context.params[:account_id],
           requires_account_id: true,
+          resource_arn: context.params[:resource_arn],
         )
       end
     end

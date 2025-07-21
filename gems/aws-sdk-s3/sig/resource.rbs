@@ -107,7 +107,13 @@ module Aws
                              bucket: {
                                data_redundancy: ("SingleAvailabilityZone" | "SingleLocalZone")?,
                                type: ("Directory")?
-                             }?
+                             }?,
+                             tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ]?
                            },
                            ?grant_full_control: ::String,
                            ?grant_read: ::String,

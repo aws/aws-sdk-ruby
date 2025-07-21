@@ -737,7 +737,7 @@ module Aws::Pricing
     #     service_code: "String", # required
     #     filters: [
     #       {
-    #         type: "TERM_MATCH", # required, accepts TERM_MATCH
+    #         type: "TERM_MATCH", # required, accepts TERM_MATCH, EQUALS, CONTAINS, ANY_OF, NONE_OF
     #         field: "Field", # required
     #         value: "Value", # required
     #       },
@@ -879,7 +879,7 @@ module Aws::Pricing
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pricing'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

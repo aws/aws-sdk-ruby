@@ -164,7 +164,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_account_policy-instance_method
       def delete_account_policy: (
                                    policy_name: ::String,
-                                   policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY")
+                                   policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY")
                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -261,7 +261,9 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_resource_policy-instance_method
       def delete_resource_policy: (
-                                    ?policy_name: ::String
+                                    ?policy_name: ::String,
+                                    ?resource_arn: ::String,
+                                    ?expected_revision_id: ::String
                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -291,7 +293,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_account_policies-instance_method
       def describe_account_policies: (
-                                       policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY"),
+                                       policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY"),
                                        ?policy_name: ::String,
                                        ?account_identifiers: Array[::String],
                                        ?next_token: ::String
@@ -308,7 +310,7 @@ module Aws
                                               ?service: ::String,
                                               ?log_types: Array[::String],
                                               ?resource_types: Array[::String],
-                                              ?delivery_destination_types: Array[("S3" | "CWL" | "FH")],
+                                              ?delivery_destination_types: Array[("S3" | "CWL" | "FH" | "XRAY")],
                                               ?next_token: ::String,
                                               ?limit: ::Integer
                                             ) -> _DescribeConfigurationTemplatesResponseSuccess
@@ -489,7 +491,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_resource_policies-instance_method
       def describe_resource_policies: (
                                         ?next_token: ::String,
-                                        ?limit: ::Integer
+                                        ?limit: ::Integer,
+                                        ?resource_arn: ::String,
+                                        ?policy_scope: ("ACCOUNT" | "RESOURCE")
                                       ) -> _DescribeResourcePoliciesResponseSuccess
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResourcePoliciesResponseSuccess
 
@@ -651,6 +655,17 @@ module Aws
                                 ) -> _GetLogGroupFieldsResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLogGroupFieldsResponseSuccess
 
+      interface _GetLogObjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLogObjectResponse]
+        def field_stream: () -> Types::GetLogObjectResponseStream
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#get_log_object-instance_method
+      def get_log_object: (
+                            ?unmask: bool,
+                            log_object_pointer: ::String
+                          ) -> _GetLogObjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLogObjectResponseSuccess
+
       interface _GetLogRecordResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetLogRecordResponse]
         def log_record: () -> ::Hash[::String, ::String]
@@ -785,7 +800,7 @@ module Aws
       def put_account_policy: (
                                 policy_name: ::String,
                                 policy_document: ::String,
-                                policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY"),
+                                policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY"),
                                 ?scope: ("ALL"),
                                 ?selection_criteria: ::String
                               ) -> _PutAccountPolicyResponseSuccess
@@ -812,9 +827,10 @@ module Aws
       def put_delivery_destination: (
                                       name: ::String,
                                       ?output_format: ("json" | "plain" | "w3c" | "raw" | "parquet"),
-                                      delivery_destination_configuration: {
+                                      ?delivery_destination_configuration: {
                                         destination_resource_arn: ::String
                                       },
+                                      ?delivery_destination_type: ("S3" | "CWL" | "FH" | "XRAY"),
                                       ?tags: Hash[::String, ::String]
                                     ) -> _PutDeliveryDestinationResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDeliveryDestinationResponseSuccess
@@ -957,11 +973,14 @@ module Aws
       interface _PutResourcePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
         def resource_policy: () -> Types::ResourcePolicy
+        def revision_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#put_resource_policy-instance_method
       def put_resource_policy: (
                                  ?policy_name: ::String,
-                                 ?policy_document: ::String
+                                 ?policy_document: ::String,
+                                 ?resource_arn: ::String,
+                                 ?expected_revision_id: ::String
                                ) -> _PutResourcePolicyResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
 

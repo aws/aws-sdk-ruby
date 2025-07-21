@@ -346,7 +346,7 @@ module Aws::SESV2
 
     class DedicatedIp
       attr_accessor ip: ::String
-      attr_accessor warmup_status: ("IN_PROGRESS" | "DONE")
+      attr_accessor warmup_status: ("IN_PROGRESS" | "DONE" | "NOT_APPLICABLE")
       attr_accessor warmup_percentage: ::Integer
       attr_accessor pool_name: ::String
       SENSITIVE: []

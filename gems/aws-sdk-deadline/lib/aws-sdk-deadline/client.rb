@@ -3286,6 +3286,7 @@ module Aws::Deadline
     #   * {Types::GetSessionActionResponse#progress_message #progress_message} => String
     #   * {Types::GetSessionActionResponse#definition #definition} => Types::SessionActionDefinition
     #   * {Types::GetSessionActionResponse#acquired_limits #acquired_limits} => Array&lt;Types::AcquiredLimit&gt;
+    #   * {Types::GetSessionActionResponse#manifests #manifests} => Array&lt;Types::TaskRunManifestPropertiesResponse&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3316,10 +3317,14 @@ module Aws::Deadline
     #   resp.definition.task_run.parameters["String"].float #=> String
     #   resp.definition.task_run.parameters["String"].string #=> String
     #   resp.definition.task_run.parameters["String"].path #=> String
+    #   resp.definition.task_run.parameters["String"].chunk_int #=> String
     #   resp.definition.sync_input_job_attachments.step_id #=> String
     #   resp.acquired_limits #=> Array
     #   resp.acquired_limits[0].limit_id #=> String
     #   resp.acquired_limits[0].count #=> Integer
+    #   resp.manifests #=> Array
+    #   resp.manifests[0].output_manifest_path #=> String
+    #   resp.manifests[0].output_manifest_hash #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/GetSessionAction AWS API Documentation
     #
@@ -3484,7 +3489,7 @@ module Aws::Deadline
     #   resp.required_capabilities.amounts[0].value #=> Float
     #   resp.parameter_space.parameters #=> Array
     #   resp.parameter_space.parameters[0].name #=> String
-    #   resp.parameter_space.parameters[0].type #=> String, one of "INT", "FLOAT", "STRING", "PATH"
+    #   resp.parameter_space.parameters[0].type #=> String, one of "INT", "FLOAT", "STRING", "PATH", "CHUNK_INT"
     #   resp.parameter_space.combination #=> String
     #   resp.description #=> String
     #
@@ -3646,6 +3651,7 @@ module Aws::Deadline
     #   resp.parameters["String"].float #=> String
     #   resp.parameters["String"].string #=> String
     #   resp.parameters["String"].path #=> String
+    #   resp.parameters["String"].chunk_int #=> String
     #   resp.started_at #=> Time
     #   resp.ended_at #=> Time
     #   resp.updated_at #=> Time
@@ -4806,7 +4812,16 @@ module Aws::Deadline
     #   resp.session_actions[0].definition.env_exit.environment_id #=> String
     #   resp.session_actions[0].definition.task_run.task_id #=> String
     #   resp.session_actions[0].definition.task_run.step_id #=> String
+    #   resp.session_actions[0].definition.task_run.parameters #=> Hash
+    #   resp.session_actions[0].definition.task_run.parameters["String"].int #=> String
+    #   resp.session_actions[0].definition.task_run.parameters["String"].float #=> String
+    #   resp.session_actions[0].definition.task_run.parameters["String"].string #=> String
+    #   resp.session_actions[0].definition.task_run.parameters["String"].path #=> String
+    #   resp.session_actions[0].definition.task_run.parameters["String"].chunk_int #=> String
     #   resp.session_actions[0].definition.sync_input_job_attachments.step_id #=> String
+    #   resp.session_actions[0].manifests #=> Array
+    #   resp.session_actions[0].manifests[0].output_manifest_path #=> String
+    #   resp.session_actions[0].manifests[0].output_manifest_hash #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ListSessionActions AWS API Documentation
@@ -5292,6 +5307,7 @@ module Aws::Deadline
     #   resp.tasks[0].parameters["String"].float #=> String
     #   resp.tasks[0].parameters["String"].string #=> String
     #   resp.tasks[0].parameters["String"].path #=> String
+    #   resp.tasks[0].parameters["String"].chunk_int #=> String
     #   resp.tasks[0].started_at #=> Time
     #   resp.tasks[0].ended_at #=> Time
     #   resp.tasks[0].updated_at #=> Time
@@ -5627,7 +5643,7 @@ module Aws::Deadline
     #   resp.steps[0].ended_at #=> Time
     #   resp.steps[0].parameter_space.parameters #=> Array
     #   resp.steps[0].parameter_space.parameters[0].name #=> String
-    #   resp.steps[0].parameter_space.parameters[0].type #=> String, one of "INT", "FLOAT", "STRING", "PATH"
+    #   resp.steps[0].parameter_space.parameters[0].type #=> String, one of "INT", "FLOAT", "STRING", "PATH", "CHUNK_INT"
     #   resp.steps[0].parameter_space.combination #=> String
     #   resp.next_item_offset #=> Integer
     #   resp.total_results #=> Integer
@@ -5741,6 +5757,7 @@ module Aws::Deadline
     #   resp.tasks[0].parameters["String"].float #=> String
     #   resp.tasks[0].parameters["String"].string #=> String
     #   resp.tasks[0].parameters["String"].path #=> String
+    #   resp.tasks[0].parameters["String"].chunk_int #=> String
     #   resp.tasks[0].failure_retry_count #=> Integer
     #   resp.tasks[0].started_at #=> Time
     #   resp.tasks[0].ended_at #=> Time
@@ -7010,6 +7027,12 @@ module Aws::Deadline
     #         ended_at: Time.now,
     #         updated_at: Time.now,
     #         progress_percent: 1.0,
+    #         manifests: [
+    #           {
+    #             output_manifest_path: "TaskRunManifestPropertiesRequestOutputManifestPathString",
+    #             output_manifest_hash: "TaskRunManifestPropertiesRequestOutputManifestHashString",
+    #           },
+    #         ],
     #       },
     #     },
     #   })
@@ -7030,6 +7053,7 @@ module Aws::Deadline
     #   resp.assigned_sessions["SessionId"].session_actions[0].definition.task_run.parameters["String"].float #=> String
     #   resp.assigned_sessions["SessionId"].session_actions[0].definition.task_run.parameters["String"].string #=> String
     #   resp.assigned_sessions["SessionId"].session_actions[0].definition.task_run.parameters["String"].path #=> String
+    #   resp.assigned_sessions["SessionId"].session_actions[0].definition.task_run.parameters["String"].chunk_int #=> String
     #   resp.assigned_sessions["SessionId"].session_actions[0].definition.sync_input_job_attachments.step_id #=> String
     #   resp.assigned_sessions["SessionId"].log_configuration.log_driver #=> String
     #   resp.assigned_sessions["SessionId"].log_configuration.options #=> Hash
@@ -7070,7 +7094,7 @@ module Aws::Deadline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-deadline'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

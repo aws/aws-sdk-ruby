@@ -49,6 +49,23 @@ module Aws::S3
       data[:bucket_region]
     end
 
+    # The Amazon Resource Name (ARN) of the S3 bucket. ARNs uniquely
+    # identify Amazon Web Services resources across all of Amazon Web
+    # Services.
+    #
+    # <note markdown="1"> This parameter is only supported for S3 directory buckets. For more
+    # information, see [Using tags with directory buckets][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html
+    # @return [String]
+    def bucket_arn
+      data[:bucket_arn]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -246,6 +263,12 @@ module Aws::S3
     #         data_redundancy: "SingleAvailabilityZone", # accepts SingleAvailabilityZone, SingleLocalZone
     #         type: "Directory", # accepts Directory
     #       },
+    #       tags: [
+    #         {
+    #           key: "ObjectKey", # required
+    #           value: "Value", # required
+    #         },
+    #       ],
     #     },
     #     grant_full_control: "GrantFullControl",
     #     grant_read: "GrantRead",
@@ -1183,6 +1206,9 @@ module Aws::S3
     #   beginning of the key. The keys that are grouped under `CommonPrefixes`
     #   result element are not returned elsewhere in the response.
     #
+    #   `CommonPrefixes` is filtered out from results if it is not
+    #   lexicographically greater than the key-marker.
+    #
     #   <note markdown="1"> **Directory buckets** - For directory buckets, `/` is the only
     #   supported delimiter.
     #
@@ -1339,6 +1365,9 @@ module Aws::S3
     #   in `CommonPrefixes`. These groups are counted as one result against
     #   the `max-keys` limitation. These keys are not returned elsewhere in
     #   the response.
+    #
+    #   `CommonPrefixes` is filtered out from results if it is not
+    #   lexicographically greater than the key-marker.
     # @option options [String] :encoding_type
     #   Encoding type used by Amazon S3 to encode the [object keys][1] in the
     #   response. Responses are encoded only in UTF-8. An object key can
@@ -1433,6 +1462,9 @@ module Aws::S3
     # @param [Hash] options ({})
     # @option options [String] :delimiter
     #   A delimiter is a character that you use to group keys.
+    #
+    #   `CommonPrefixes` is filtered out from results if it is not
+    #   lexicographically greater than the `StartAfter` value.
     #
     #   <note markdown="1"> * **Directory buckets** - For directory buckets, `/` is the only
     #     supported delimiter.

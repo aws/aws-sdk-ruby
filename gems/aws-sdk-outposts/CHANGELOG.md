@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2025-07-18)
+------------------
+
+* Feature - Add AWS Outposts API to surface customer billing information
+
 1.83.0 (2025-06-30)
 ------------------
 

@@ -973,6 +973,24 @@ module Aws
                                    ) -> _CreateSegmentSnapshotResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSegmentSnapshotResponseSuccess
 
+      interface _CreateUploadJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUploadJobResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#create_upload_job-instance_method
+      def create_upload_job: (
+                               domain_name: ::String,
+                               display_name: ::String,
+                               fields: Hash[::String, {
+                                   source: ::String?,
+                                   target: ::String?,
+                                   content_type: ("STRING" | "NUMBER" | "PHONE_NUMBER" | "EMAIL_ADDRESS" | "NAME")?
+                                 }],
+                               unique_key: ::String,
+                               ?data_expiry: ::Integer
+                             ) -> _CreateUploadJobResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUploadJobResponseSuccess
+
       interface _DeleteCalculatedAttributeDefinitionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCalculatedAttributeDefinitionResponse]
       end
@@ -1435,6 +1453,39 @@ module Aws
                                 ) -> _GetSimilarProfilesResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSimilarProfilesResponseSuccess
 
+      interface _GetUploadJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUploadJobResponse]
+        def job_id: () -> ::String
+        def display_name: () -> ::String
+        def status: () -> ("CREATED" | "IN_PROGRESS" | "PARTIALLY_SUCCEEDED" | "SUCCEEDED" | "FAILED" | "STOPPED")
+        def status_reason: () -> ("VALIDATION_FAILURE" | "INTERNAL_FAILURE")
+        def created_at: () -> ::Time
+        def completed_at: () -> ::Time
+        def fields: () -> ::Hash[::String, Types::ObjectTypeField]
+        def unique_key: () -> ::String
+        def results_summary: () -> Types::ResultsSummary
+        def data_expiry: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_upload_job-instance_method
+      def get_upload_job: (
+                            domain_name: ::String,
+                            job_id: ::String
+                          ) -> _GetUploadJobResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUploadJobResponseSuccess
+
+      interface _GetUploadJobPathResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUploadJobPathResponse]
+        def url: () -> ::String
+        def client_token: () -> ::String
+        def valid_until: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_upload_job_path-instance_method
+      def get_upload_job_path: (
+                                 domain_name: ::String,
+                                 job_id: ::String
+                               ) -> _GetUploadJobPathResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUploadJobPathResponseSuccess
+
       interface _GetWorkflowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkflowResponse]
         def workflow_id: () -> ::String
@@ -1696,6 +1747,19 @@ module Aws
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
+      interface _ListUploadJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUploadJobsResponse]
+        def next_token: () -> ::String
+        def items: () -> ::Array[Types::UploadJobItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_upload_jobs-instance_method
+      def list_upload_jobs: (
+                              domain_name: ::String,
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListUploadJobsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUploadJobsResponseSuccess
+
       interface _ListWorkflowsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkflowsResponse]
         def items: () -> ::Array[Types::ListWorkflowsItem]
@@ -1911,6 +1975,26 @@ module Aws
                              ?logical_operator: ("AND" | "OR")
                            ) -> _SearchProfilesResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchProfilesResponseSuccess
+
+      interface _StartUploadJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartUploadJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#start_upload_job-instance_method
+      def start_upload_job: (
+                              domain_name: ::String,
+                              job_id: ::String
+                            ) -> _StartUploadJobResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartUploadJobResponseSuccess
+
+      interface _StopUploadJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopUploadJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#stop_upload_job-instance_method
+      def stop_upload_job: (
+                             domain_name: ::String,
+                             job_id: ::String
+                           ) -> _StopUploadJobResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopUploadJobResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]

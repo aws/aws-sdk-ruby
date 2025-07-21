@@ -4846,6 +4846,81 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Reserve powerful GPU instances on a future date to support your short
+    # duration machine learning (ML) workloads. Instances that run inside a
+    # Capacity Block are automatically placed close together inside [Amazon
+    # EC2 UltraClusters][1], for low-latency, petabit-scale, non-blocking
+    # networking.
+    #
+    # You can also reserve Amazon EC2 UltraServers. UltraServers connect
+    # multiple EC2 instances using a low-latency, high-bandwidth accelerator
+    # interconnect (NeuronLink). They are built to tackle very large-scale
+    # AI/ML workloads that require significant processing power. For more
+    # information, see Amazon EC2 UltraServers.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/ec2/ultraclusters/
+    #
+    # @!attribute [rw] capacity_block_id
+    #   The ID of the Capacity Block.
+    #   @return [String]
+    #
+    # @!attribute [rw] ultraserver_type
+    #   The EC2 UltraServer type of the Capacity Block.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone of the Capacity Block.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The Availability Zone ID of the Capacity Block.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_ids
+    #   The ID of the Capacity Reservation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] start_date
+    #   The date and time at which the Capacity Block was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The date and time at which the Capacity Block expires. When a
+    #   Capacity Block expires, all instances in the Capacity Block are
+    #   terminated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] create_date
+    #   The date and time at which the Capacity Block was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state of the Capacity Block.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the Capacity Block.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityBlock AWS API Documentation
+    #
+    class CapacityBlock < Struct.new(
+      :capacity_block_id,
+      :ultraserver_type,
+      :availability_zone,
+      :availability_zone_id,
+      :capacity_reservation_ids,
+      :start_date,
+      :end_date,
+      :create_date,
+      :state,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a Capacity Block extension. With an extension, you can
     # extend the duration of time for an existing Capacity Block.
     #
@@ -5066,6 +5141,14 @@ module Aws::EC2
     #   The tenancy of the Capacity Block.
     #   @return [String]
     #
+    # @!attribute [rw] ultraserver_type
+    #   The EC2 UltraServer type of the Capacity Block offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] ultraserver_count
+    #   The number of EC2 UltraServers in the offering.
+    #   @return [Integer]
+    #
     # @!attribute [rw] capacity_block_duration_minutes
     #   The number of minutes (in addition to `capacityBlockDurationHours`)
     #   for the duration of the Capacity Block reservation. For example, if
@@ -5086,7 +5169,59 @@ module Aws::EC2
       :upfront_fee,
       :currency_code,
       :tenancy,
+      :ultraserver_type,
+      :ultraserver_count,
       :capacity_block_duration_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the availability of capacity for a Capacity Block.
+    #
+    # @!attribute [rw] capacity_block_id
+    #   The ID of the Capacity Block.
+    #   @return [String]
+    #
+    # @!attribute [rw] interconnect_status
+    #   The status of the high-bandwidth accelerator interconnect. Possible
+    #   states include:
+    #
+    #   * `ok` the accelerator interconnect is healthy.
+    #
+    #   * `impaired` - accelerator interconnect communication is impaired.
+    #
+    #   * `insufficient-data` - insufficient data to determine accelerator
+    #     interconnect status.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_capacity
+    #   The combined amount of `Available` and `Unavailable` capacity in the
+    #   Capacity Block.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_available_capacity
+    #   The remaining capacity. Indicates the number of resources that can
+    #   be launched into the Capacity Block.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_unavailable_capacity
+    #   The unavailable capacity. Indicates the instance capacity that is
+    #   unavailable for use due to a system status check failure.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] capacity_reservation_statuses
+    #   The availability of capacity for the Capacity Block reservations.
+    #   @return [Array<Types::CapacityReservationStatus>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityBlockStatus AWS API Documentation
+    #
+    class CapacityBlockStatus < Struct.new(
+      :capacity_block_id,
+      :interconnect_status,
+      :total_capacity,
+      :total_available_capacity,
+      :total_unavailable_capacity,
+      :capacity_reservation_statuses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5301,6 +5436,10 @@ module Aws::EC2
     #   have in your account at the requested date and time.
     #   @return [String]
     #
+    # @!attribute [rw] capacity_block_id
+    #   The ID of the Capacity Block.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservation AWS API Documentation
     #
     class CapacityReservation < Struct.new(
@@ -5330,7 +5469,8 @@ module Aws::EC2
       :reservation_type,
       :unused_reservation_billing_owner_id,
       :commitment_info,
-      :delivery_preference)
+      :delivery_preference,
+      :capacity_block_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5788,6 +5928,38 @@ module Aws::EC2
     class CapacityReservationSpecificationResponse < Struct.new(
       :capacity_reservation_preference,
       :capacity_reservation_target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the availability of capacity for a Capacity Reservation.
+    #
+    # @!attribute [rw] capacity_reservation_id
+    #   The ID of the Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_capacity
+    #   The combined amount of `Available` and `Unavailable` capacity in the
+    #   Capacity Reservation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_available_capacity
+    #   The remaining capacity. Indicates the amount of resources that can
+    #   be launched into the Capacity Reservation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_unavailable_capacity
+    #   The used capacity. Indicates that the capacity is in use by
+    #   resources that are running in the Capacity Reservation.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationStatus AWS API Documentation
+    #
+    class CapacityReservationStatus < Struct.new(
+      :capacity_reservation_id,
+      :total_capacity,
+      :total_available_capacity,
+      :total_unavailable_capacity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8662,11 +8834,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_address
-    #   IPv4 address for the customer gateway device's outside interface.
+    #   The IP address for the customer gateway device's outside interface.
     #   The address must be static. If `OutsideIpAddressType` in your VPN
     #   connection options is set to `PrivateIpv4`, you can use an RFC6598
     #   or RFC1918 private IPv4 address. If `OutsideIpAddressType` is set to
-    #   `PublicIpv4`, you can use a public IPv4 address.
+    #   `Ipv6`, you can use an IPv6 address.
     #   @return [String]
     #
     # @!attribute [rw] bgp_asn_extended
@@ -9597,6 +9769,12 @@ module Aws::EC2
     #
     #   * `false` - Use the network interface IP address as the source.
     #
+    #   <note markdown="1"> `PreserveClientIp` is only supported on IPv4 EC2 Instance Connect
+    #   Endpoints. To use `PreserveClientIp`, the value for `IpAddressType`
+    #   must be `ipv4`.
+    #
+    #    </note>
+    #
     #   Default: `false`
     #   @return [Boolean]
     #
@@ -9613,6 +9791,25 @@ module Aws::EC2
     #   creation.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type of the endpoint.
+    #
+    #   If no value is specified, the default value is determined by the IP
+    #   address type of the subnet:
+    #
+    #   * `dualstack` - If the subnet has both IPv4 and IPv6 CIDRs
+    #
+    #   * `ipv4` - If the subnet has only IPv4 CIDRs
+    #
+    #   * `ipv6` - If the subnet has only IPv6 CIDRs
+    #
+    #   <note markdown="1"> `PreserveClientIp` is only supported on IPv4 EC2 Instance Connect
+    #   Endpoints. To use `PreserveClientIp`, the value for `IpAddressType`
+    #   must be `ipv4`.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInstanceConnectEndpointRequest AWS API Documentation
     #
     class CreateInstanceConnectEndpointRequest < Struct.new(
@@ -9621,7 +9818,8 @@ module Aws::EC2
       :security_group_ids,
       :preserve_client_ip,
       :client_token,
-      :tag_specifications)
+      :tag_specifications,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15483,11 +15681,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_address
-    #   IPv4 address for the customer gateway device's outside interface.
+    #   The IP address for the customer gateway device's outside interface.
     #   The address must be static. If `OutsideIpAddressType` in your VPN
     #   connection options is set to `PrivateIpv4`, you can use an RFC6598
     #   or RFC1918 private IPv4 address. If `OutsideIpAddressType` is set to
-    #   `PublicIpv4`, you can use a public IPv4 address.
+    #   `PublicIpv4`, you can use a public IPv4 address. If
+    #   `OutsideIpAddressType` is set to `Ipv6`, you can use a public IPv6
+    #   address.
     #   @return [String]
     #
     # @!attribute [rw] bgp_asn
@@ -19551,6 +19751,14 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
+    # @!attribute [rw] ultraserver_type
+    #   The EC2 UltraServer type of the Capacity Block offerings.
+    #   @return [String]
+    #
+    # @!attribute [rw] ultraserver_count
+    #   The number of EC2 UltraServers in the offerings.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityBlockOfferingsRequest AWS API Documentation
     #
     class DescribeCapacityBlockOfferingsRequest < Struct.new(
@@ -19561,7 +19769,9 @@ module Aws::EC2
       :end_date_range,
       :capacity_duration_hours,
       :next_token,
-      :max_results)
+      :max_results,
+      :ultraserver_type,
+      :ultraserver_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19579,6 +19789,152 @@ module Aws::EC2
     #
     class DescribeCapacityBlockOfferingsResult < Struct.new(
       :capacity_block_offerings,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_block_ids
+    #   The ID of the Capacity Block.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `interconnect-status` - The status of the interconnect for the
+    #     Capacity Block (`ok` \| `impaired` \| `insufficient-data`).
+    #
+    #   ^
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityBlockStatusRequest AWS API Documentation
+    #
+    class DescribeCapacityBlockStatusRequest < Struct.new(
+      :capacity_block_ids,
+      :next_token,
+      :max_results,
+      :filters,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_block_statuses
+    #   The availability of capacity for a Capacity Block.
+    #   @return [Array<Types::CapacityBlockStatus>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityBlockStatusResult AWS API Documentation
+    #
+    class DescribeCapacityBlockStatusResult < Struct.new(
+      :capacity_block_statuses,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_block_ids
+    #   The IDs of the Capacity Blocks.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `capacity-block-id` - The ID of the Capacity Block.
+    #
+    #   * `ultraserver-type` - The Capacity Block type. The type can be
+    #     `instances` or `ultraservers`.
+    #
+    #   * `availability-zone` - The Availability Zone of the Capacity Block.
+    #
+    #   * `start-date` - The date and time at which the Capacity Block was
+    #     started.
+    #
+    #   * `end-date` - The date and time at which the Capacity Block
+    #     expires. When a Capacity Block expires, all instances in the
+    #     Capacity Block are terminated.
+    #
+    #   * `create-date` - The date and time at which the Capacity Block was
+    #     created.
+    #
+    #   * `state` - The state of the Capacity Block (`active` \| `expired`
+    #     \| `unavailable` \| `cancelled` \| `failed` \| `scheduled` \|
+    #     `payment-pending` \| `payment-failed`).
+    #
+    #   * `tags` - The tags assigned to the Capacity Block.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityBlocksRequest AWS API Documentation
+    #
+    class DescribeCapacityBlocksRequest < Struct.new(
+      :capacity_block_ids,
+      :next_token,
+      :max_results,
+      :filters,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_blocks
+    #   The Capacity Blocks.
+    #   @return [Array<Types::CapacityBlock>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityBlocksResult AWS API Documentation
+    #
+    class DescribeCapacityBlocksResult < Struct.new(
+      :capacity_blocks,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -22183,6 +22539,10 @@ module Aws::EC2
     #
     #   * `ena-support` - A Boolean that indicates whether enhanced
     #     networking with ENA is enabled.
+    #
+    #   * `free-tier-eligible` - A Boolean that indicates whether this image
+    #     can be used under the Amazon Web Services Free Tier (`true` \|
+    #     `false`).
     #
     #   * `hypervisor` - The hypervisor type (`ovm` \| `xen`).
     #
@@ -27725,6 +28085,8 @@ module Aws::EC2
     #   Security group VPC association filters.
     #
     #   * `group-id`: The security group ID.
+    #
+    #   * `group-owner-id`: The group owner ID.
     #
     #   * `vpc-id`: The ID of the associated VPC.
     #
@@ -34187,11 +34549,14 @@ module Aws::EC2
     #   but not both. If neither is specified, Amazon EC2 automatically
     #   selects an Availability Zone within the Region.
     #
-    #   This parameter is not supported when using [CreateImage][1].
+    #   This parameter is not supported when using [CreateImage][1],
+    #   [DescribeImages][2], and [RunInstances][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   @return [String]
     #
     # @!attribute [rw] encrypted
@@ -34288,11 +34653,14 @@ module Aws::EC2
     #   but not both. If neither is specified, Amazon EC2 automatically
     #   selects an Availability Zone within the Region.
     #
-    #   This parameter is not supported when using [CreateImage][1].
+    #   This parameter is not supported when using [CreateImage][1],
+    #   [DescribeImages][2], and [RunInstances][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsBlockDevice AWS API Documentation
@@ -34428,15 +34796,15 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] associated_resource
-    #   The ARN of the Amazon ECS or Fargate task to which the volume is
-    #   attached.
+    #   The ARN of the Amazon Web Services-managed resource to which the
+    #   volume is attached.
     #   @return [String]
     #
     # @!attribute [rw] volume_owner_id
     #   The ID of the Amazon Web Services account that owns the volume.
     #
     #   This parameter is returned only for volumes that are attached to
-    #   Fargate tasks.
+    #   Amazon Web Services-managed resources.
     #   @return [String]
     #
     # @!attribute [rw] operator
@@ -34594,6 +34962,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] fips_dns_name
+    #   The Federal Information Processing Standards (FIPS) compliant DNS
+    #   name of the EC2 Instance Connect Endpoint.
     #   @return [String]
     #
     # @!attribute [rw] network_interface_ids
@@ -34644,6 +35014,10 @@ module Aws::EC2
     #   The tags assigned to the EC2 Instance Connect Endpoint.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type of the endpoint.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ec2InstanceConnectEndpoint AWS API Documentation
     #
     class Ec2InstanceConnectEndpoint < Struct.new(
@@ -34661,7 +35035,8 @@ module Aws::EC2
       :subnet_id,
       :preserve_client_ip,
       :security_group_ids,
-      :tags)
+      :tags,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42622,6 +42997,16 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/identify-source-ami-used-to-create-new-ami.html
     #   @return [String]
     #
+    # @!attribute [rw] free_tier_eligible
+    #   Indicates whether the image is eligible for Amazon Web Services Free
+    #   Tier.
+    #
+    #   * If `true`, the AMI is eligible for Free Tier and can be used to
+    #     launch instances under the Free Tier limits.
+    #
+    #   * If `false`, the AMI is not eligible for Free Tier.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] image_id
     #   The ID of the AMI.
     #   @return [String]
@@ -42703,6 +43088,7 @@ module Aws::EC2
       :image_allowed,
       :source_image_id,
       :source_image_region,
+      :free_tier_eligible,
       :image_id,
       :image_location,
       :state,
@@ -44065,6 +44451,46 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Information about the volume initialization. For more information, see
+    # [Initialize Amazon EBS volumes][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html
+    #
+    # @!attribute [rw] initialization_type
+    #   The method used for volume initialization. Possible values include:
+    #
+    #   * `default` - Volume initialized using the default volume
+    #     initialization rate or fast snapshot restore.
+    #
+    #   * `provisioned-rate` - Volume initialized using an Amazon EBS
+    #     Provisioned Rate for Volume Initialization.
+    #   @return [String]
+    #
+    # @!attribute [rw] progress
+    #   The current volume initialization progress as a percentage (0-100).
+    #   Returns `100` when volume initialization has completed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] estimated_time_to_complete_in_seconds
+    #   The estimated remaining time, in seconds, for volume initialization
+    #   to complete. Returns `0` when volume initialization has completed.
+    #
+    #   Only available for volumes created with Amazon EBS Provisioned Rate
+    #   for Volume Initialization.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InitializationStatusDetails AWS API Documentation
+    #
+    class InitializationStatusDetails < Struct.new(
+      :initialization_type,
+      :progress,
+      :estimated_time_to_complete_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an instance.
     #
     # @!attribute [rw] architecture
@@ -44172,6 +44598,16 @@ module Aws::EC2
     # @!attribute [rw] cpu_options
     #   The CPU options for the instance.
     #   @return [Types::CpuOptions]
+    #
+    # @!attribute [rw] capacity_block_id
+    #   The ID of the Capacity Block.
+    #
+    #   <note markdown="1"> For P5 instances, a Capacity Block ID refers to a group of
+    #   instances. For Trn2u instances, a capacity block ID refers to an EC2
+    #   UltraServer.
+    #
+    #    </note>
+    #   @return [String]
     #
     # @!attribute [rw] capacity_reservation_id
     #   The ID of the Capacity Reservation.
@@ -44414,6 +44850,7 @@ module Aws::EC2
       :tags,
       :virtualization_type,
       :cpu_options,
+      :capacity_block_id,
       :capacity_reservation_id,
       :capacity_reservation_specification,
       :hibernation_options,
@@ -47286,6 +47723,12 @@ module Aws::EC2
     #   in.
     #   @return [String]
     #
+    # @!attribute [rw] capacity_block_id
+    #   The ID of the Capacity Block. This parameter is only supported for
+    #   Ultraserver instances and identifies instances within the
+    #   Ultraserver domain.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceTopology AWS API Documentation
     #
     class InstanceTopology < Struct.new(
@@ -47294,7 +47737,8 @@ module Aws::EC2
       :group_name,
       :network_nodes,
       :availability_zone,
-      :zone_id)
+      :zone_id,
+      :capacity_block_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -53903,7 +54347,7 @@ module Aws::EC2
     #   value is specified for `DeleteOnTermination`, the default is `true`
     #   and the volume is deleted when the instance is terminated. You
     #   can't modify the `DeleteOnTermination` attribute for volumes that
-    #   are attached to Fargate tasks.
+    #   are attached to Amazon Web Services-managed resources.
     #
     #   To add instance store volumes to an Amazon EBS-backed instance, you
     #   must add them when you launch the instance. For more information,
@@ -62109,10 +62553,15 @@ module Aws::EC2
     #   The Capacity Reservation.
     #   @return [Types::CapacityReservation]
     #
+    # @!attribute [rw] capacity_blocks
+    #   The Capacity Block.
+    #   @return [Array<Types::CapacityBlock>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseCapacityBlockResult AWS API Documentation
     #
     class PurchaseCapacityBlockResult < Struct.new(
-      :capacity_reservation)
+      :capacity_reservation,
+      :capacity_blocks)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -68862,6 +69311,11 @@ module Aws::EC2
     #   The association's state reason.
     #   @return [String]
     #
+    # @!attribute [rw] group_owner_id
+    #   The Amazon Web Services account ID of the owner of the security
+    #   group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroupVpcAssociation AWS API Documentation
     #
     class SecurityGroupVpcAssociation < Struct.new(
@@ -68869,7 +69323,8 @@ module Aws::EC2
       :vpc_id,
       :vpc_owner_id,
       :state,
-      :state_reason)
+      :state_reason,
+      :group_owner_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -76381,16 +76836,16 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] associated_resource
-    #   The ARN of the Amazon ECS or Fargate task to which the volume is
-    #   attached.
+    #   The ARN of the Amazon Web Services-managed resource to which the
+    #   volume is attached.
     #   @return [String]
     #
     # @!attribute [rw] instance_owning_service
-    #   The service principal of Amazon Web Services service that owns the
-    #   underlying instance to which the volume is attached.
+    #   The service principal of the Amazon Web Services service that owns
+    #   the underlying resource to which the volume is attached.
     #
     #   This parameter is returned only for volumes that are attached to
-    #   Fargate tasks.
+    #   Amazon Web Services-managed resources.
     #   @return [String]
     #
     # @!attribute [rw] volume_id
@@ -76400,15 +76855,15 @@ module Aws::EC2
     # @!attribute [rw] instance_id
     #   The ID of the instance.
     #
-    #   If the volume is attached to a Fargate task, this parameter returns
-    #   `null`.
+    #   If the volume is attached to an Amazon Web Services-managed
+    #   resource, this parameter returns `null`.
     #   @return [String]
     #
     # @!attribute [rw] device
     #   The device name.
     #
-    #   If the volume is attached to a Fargate task, this parameter returns
-    #   `null`.
+    #   If the volume is attached to an Amazon Web Services-managed
+    #   resource, this parameter returns `null`.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -76589,6 +77044,21 @@ module Aws::EC2
     #
     # @!attribute [rw] name
     #   The name of the volume status.
+    #
+    #   * `io-enabled` - Indicates the volume I/O status. For more
+    #     information, see [Amazon EBS volume status checks][1].
+    #
+    #   * `io-performance` - Indicates the volume performance status. For
+    #     more information, see [Amazon EBS volume status checks][1].
+    #
+    #   * `initialization-state` - Indicates the status of the volume
+    #     initialization process. For more information, see [Initialize
+    #     Amazon EBS volumes][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/monitoring-volume-checks.html
+    #   [2]: https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -76692,6 +77162,20 @@ module Aws::EC2
     #   Information about the instances to which the volume is attached.
     #   @return [Array<Types::VolumeStatusAttachmentStatus>]
     #
+    # @!attribute [rw] initialization_status_details
+    #   Information about the volume initialization. It can take up to 5
+    #   minutes for the volume initialization information to be updated.
+    #
+    #   Only available for volumes created from snapshots. Not available for
+    #   empty volumes created without a snapshot.
+    #
+    #   For more information, see [ Initialize Amazon EBS volumes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html
+    #   @return [Types::InitializationStatusDetails]
+    #
     # @!attribute [rw] availability_zone_id
     #   The ID of the Availability Zone.
     #   @return [String]
@@ -76706,6 +77190,7 @@ module Aws::EC2
       :volume_id,
       :volume_status,
       :attachment_statuses,
+      :initialization_status_details,
       :availability_zone_id)
       SENSITIVE = []
       include Aws::Structure
@@ -77736,7 +78221,7 @@ module Aws::EC2
     #   The type of IPv4 address assigned to the outside interface of the
     #   customer gateway.
     #
-    #   Valid values: `PrivateIpv4` \| `PublicIpv4`
+    #   Valid values: `PrivateIpv4` \| `PublicIpv4` \| `Ipv6`
     #
     #   Default: `PublicIpv4`
     #   @return [String]
@@ -77815,10 +78300,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] outside_ip_address_type
-    #   The type of IPv4 address assigned to the outside interface of the
+    #   The type of IP address assigned to the outside interface of the
     #   customer gateway device.
     #
-    #   Valid values: `PrivateIpv4` \| `PublicIpv4`
+    #   Valid values: `PrivateIpv4` \| `PublicIpv4` \| `Ipv6`
     #
     #   Default: `PublicIpv4`
     #   @return [String]

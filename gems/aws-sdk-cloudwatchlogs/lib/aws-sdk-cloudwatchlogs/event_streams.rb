@@ -9,6 +9,45 @@
 
 module Aws::CloudWatchLogs
   module EventStreams
+    class GetLogObjectResponseStream
+
+      def initialize
+        @event_emitter = Aws::EventEmitter.new
+      end
+
+      def on_fields_event(&block)
+        @event_emitter.on(:fields, block) if block_given?
+      end
+
+      def on_internal_streaming_exception_event(&block)
+        @event_emitter.on(:internal_streaming_exception, block) if block_given?
+      end
+
+      def on_error_event(&block)
+        @event_emitter.on(:error, block) if block_given?
+      end
+
+      def on_initial_response_event(&block)
+        @event_emitter.on(:initial_response, block) if block_given?
+      end
+
+      def on_unknown_event(&block)
+        @event_emitter.on(:unknown_event, block) if block_given?
+      end
+
+      def on_event(&block)
+        on_fields_event(&block)
+        on_internal_streaming_exception_event(&block)
+        on_error_event(&block)
+        on_initial_response_event(&block)
+        on_unknown_event(&block)
+      end
+
+      # @api private
+      # @return Aws::EventEmitter
+      attr_reader :event_emitter
+
+    end
     class StartLiveTailResponseStream
 
       def initialize

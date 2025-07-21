@@ -484,7 +484,7 @@ module Aws::OpsWorksCM
     # Example (Chef): `aws opsworks-cm associate-node --server-name MyServer
     # --node-name MyManagedNode --engine-attributes
     # "Name=CHEF_ORGANIZATION,Value=default"
-    # "Name=CHEF_NODE_PUBLIC_KEY,Value=public-key-pem"`
+    # "Name=CHEF_AUTOMATE_NODE_PUBLIC_KEY,Value=public-key-pem"`
     #
     # On a Puppet server, this command is an alternative to the `puppet cert
     # sign` command that signs a Puppet node CSR.
@@ -498,8 +498,8 @@ module Aws::OpsWorksCM
     # `ResourceNotFoundException` is thrown when the server does not exist.
     # A `ValidationException` is raised when parameters of the request are
     # not valid. The AssociateNode API call can be integrated into Auto
-    # Scaling configurations, AWS Cloudformation templates, or the user data
-    # of a server's instance.
+    # Scaling configurations, CloudFormation templates, or the user data of
+    # a server's instance.
     #
     # @option params [required, String] :server_name
     #   The name of the server with which to associate the node.
@@ -516,8 +516,8 @@ module Aws::OpsWorksCM
     #     associated. By default only one organization named `default` can
     #     exist.
     #
-    #   * `CHEF_NODE_PUBLIC_KEY`: A PEM-formatted public key. This key is
-    #     required for the `chef-client` agent to access the Chef API.
+    #   * `CHEF_AUTOMATE_NODE_PUBLIC_KEY`: A PEM-formatted public key. This
+    #     key is required for the `chef-client` agent to access the Chef API.
     #
     #   **Attributes accepted in a AssociateNode request for Puppet**
     #
@@ -580,8 +580,8 @@ module Aws::OpsWorksCM
     #   A user-defined description of the backup.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A map that contains tag keys and tag values to attach to an AWS
-    #   OpsWorks-CM server backup.
+    #   A map that contains tag keys and tag values to attach to an OpsWorks
+    #   CM server backup.
     #
     #   * The key cannot be empty.
     #
@@ -596,8 +596,8 @@ module Aws::OpsWorksCM
     #   * Leading and trailing white spaces are trimmed from both the key and
     #     value.
     #
-    #   * A maximum of 50 user-applied tags is allowed for tag-supported AWS
-    #     OpsWorks-CM resources.
+    #   * A maximum of 50 user-applied tags is allowed for tag-supported
+    #     OpsWorks CM resources.
     #
     # @return [Types::CreateBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -669,15 +669,14 @@ module Aws::OpsWorksCM
     # valid.
     #
     # If you do not specify a security group by adding the
-    # `SecurityGroupIds` parameter, AWS OpsWorks creates a new security
-    # group.
+    # `SecurityGroupIds` parameter, OpsWorks creates a new security group.
     #
     # *Chef Automate:* The default security group opens the Chef server to
-    # the world on TCP port 443. If a KeyName is present, AWS OpsWorks
-    # enables SSH access. SSH is also open to the world on TCP port 22.
+    # the world on TCP port 443. If a KeyName is present, OpsWorks enables
+    # SSH access. SSH is also open to the world on TCP port 22.
     #
     # *Puppet Enterprise:* The default security group opens TCP ports 22,
-    # 443, 4433, 8140, 8142, 8143, and 8170. If a KeyName is present, AWS
+    # 443, 4433, 8140, 8142, 8143, and 8170. If a KeyName is present,
     # OpsWorks enables SSH access. SSH is also open to the world on TCP port
     # 22.
     #
@@ -786,23 +785,18 @@ module Aws::OpsWorksCM
     #
     # @option params [Integer] :backup_retention_count
     #   The number of automated backups that you want to keep. Whenever a new
-    #   backup is created, AWS OpsWorks CM deletes the oldest backups if this
+    #   backup is created, OpsWorks CM deletes the oldest backups if this
     #   number is exceeded. The default value is `1`.
     #
     # @option params [required, String] :server_name
-    #   The name of the server. The server name must be unique within your AWS
-    #   account, within each region. Server names must start with a letter;
-    #   then letters, numbers, or hyphens (-) are allowed, up to a maximum of
-    #   40 characters.
+    #   The name of the server. The server name must be unique within your
+    #   Amazon Web Services account, within each region. Server names must
+    #   start with a letter; then letters, numbers, or hyphens (-) are
+    #   allowed, up to a maximum of 40 characters.
     #
     # @option params [required, String] :instance_profile_arn
     #   The ARN of the instance profile that your Amazon EC2 instances use.
-    #   Although the AWS OpsWorks console typically creates the instance
-    #   profile for you, if you are using API commands instead, run the
-    #   service-role-creation.yaml AWS CloudFormation template, located at
-    #   https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml.
-    #   This template creates a CloudFormation stack that includes the
-    #   instance profile you need.
+    #   The OpsWorks console typically creates the instance profile for you
     #
     # @option params [required, String] :instance_type
     #   The Amazon EC2 instance type to use. For example, `m5.large`.
@@ -813,8 +807,8 @@ module Aws::OpsWorksCM
     #   your instances by using SSH.
     #
     # @option params [String] :preferred_maintenance_window
-    #   The start time for a one-hour period each week during which AWS
-    #   OpsWorks CM performs maintenance on the instance. Valid values must be
+    #   The start time for a one-hour period each week during which OpsWorks
+    #   CM performs maintenance on the instance. Valid values must be
     #   specified in the following format: `DDD:HH:MM`. `MM` must be specified
     #   as `00`. The specified time is in coordinated universal time (UTC).
     #   The default value is a random one-hour period on Tuesday, Wednesday,
@@ -824,9 +818,9 @@ module Aws::OpsWorksCM
     #   Monday at 08:00 UTC. (8:00 a.m.)
     #
     # @option params [String] :preferred_backup_window
-    #   The start time for a one-hour period during which AWS OpsWorks CM
-    #   backs up application-level data on your server if automated backups
-    #   are enabled. Valid values must be specified in one of the following
+    #   The start time for a one-hour period during which OpsWorks CM backs up
+    #   application-level data on your server if automated backups are
+    #   enabled. Valid values must be specified in one of the following
     #   formats:
     #
     #   * `HH:MM` for daily backups
@@ -847,19 +841,13 @@ module Aws::OpsWorksCM
     #   you add this parameter, the specified security groups must be within
     #   the VPC that is specified by `SubnetIds`.
     #
-    #   If you do not specify this parameter, AWS OpsWorks CM creates one new
+    #   If you do not specify this parameter, OpsWorks CM creates one new
     #   security group that uses TCP ports 22 and 443, open to 0.0.0.0/0
     #   (everyone).
     #
     # @option params [required, String] :service_role_arn
-    #   The service role that the AWS OpsWorks CM service backend uses to work
-    #   with your account. Although the AWS OpsWorks management console
-    #   typically creates the service role for you, if you are using the AWS
-    #   CLI or API commands, run the service-role-creation.yaml AWS
-    #   CloudFormation template, located at
-    #   https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml.
-    #   This template creates a CloudFormation stack that includes the service
-    #   role and instance profile that you need.
+    #   The service role that the OpsWorks CM service backend uses to work
+    #   with your account.
     #
     # @option params [Array<String>] :subnet_ids
     #   The IDs of subnets in which to launch the server EC2 instance.
@@ -880,9 +868,8 @@ module Aws::OpsWorksCM
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A map that contains tag keys and tag values to attach to an AWS
-    #   OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise
-    #   server.
+    #   A map that contains tag keys and tag values to attach to an OpsWorks
+    #   for Chef Automate or OpsWorks for Puppet Enterprise server.
     #
     #   * The key cannot be empty.
     #
@@ -894,15 +881,14 @@ module Aws::OpsWorksCM
     #     letters, numbers, or separators, or the following special
     #     characters: `+ - = . _ : / @`
     #
-    #   * Leading and trailing white spaces are trimmed from both the key and
-    #     value.
+    #   * Leading and trailing spaces are trimmed from both the key and value.
     #
-    #   * A maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM
+    #   * A maximum of 50 user-applied tags is allowed for any OpsWorks CM
     #     server.
     #
     # @option params [String] :backup_id
-    #   If you specify this field, AWS OpsWorks CM creates the server by using
-    #   the backup represented by BackupId.
+    #   If you specify this field, OpsWorks CM creates the server by using the
+    #   backup represented by BackupId.
     #
     # @return [Types::CreateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1014,11 +1000,11 @@ module Aws::OpsWorksCM
       req.send_request(options)
     end
 
-    # Deletes the server and the underlying AWS CloudFormation stacks
-    # (including the server's EC2 instance). When you run this command, the
-    # server state is updated to `DELETING`. After the server is deleted, it
-    # is no longer returned by `DescribeServer` requests. If the AWS
-    # CloudFormation stack cannot be deleted, the server cannot be deleted.
+    # Deletes the server and the underlying CloudFormation stacks (including
+    # the server's EC2 instance). When you run this command, the server
+    # state is updated to `DELETING`. After the server is deleted, it is no
+    # longer returned by `DescribeServer` requests. If the CloudFormation
+    # stack cannot be deleted, the server cannot be deleted.
     #
     # This operation is asynchronous.
     #
@@ -1047,7 +1033,7 @@ module Aws::OpsWorksCM
       req.send_request(options)
     end
 
-    # Describes your OpsWorks-CM account attributes.
+    # Describes your OpsWorks CM account attributes.
     #
     # This operation is synchronous.
     #
@@ -1261,7 +1247,7 @@ module Aws::OpsWorksCM
 
     # Lists all configuration management servers that are identified with
     # your account. Only the stored results from Amazon DynamoDB are
-    # returned. AWS OpsWorks CM does not query other services.
+    # returned. OpsWorks CM does not query other services.
     #
     # This operation is synchronous.
     #
@@ -1335,9 +1321,9 @@ module Aws::OpsWorksCM
       req.send_request(options)
     end
 
-    # Disassociates a node from an AWS OpsWorks CM server, and removes the
-    # node from the server's managed nodes. After a node is disassociated,
-    # the node key pair is no longer valid for accessing the configuration
+    # Disassociates a node from an OpsWorks CM server, and removes the node
+    # from the server's managed nodes. After a node is disassociated, the
+    # node key pair is no longer valid for accessing the configuration
     # manager's API. For more information about how to associate a node,
     # see AssociateNode.
     #
@@ -1424,7 +1410,7 @@ module Aws::OpsWorksCM
     #   * **RunList** In Chef, a list of roles or recipes that are run in the
     #     specified order. In Puppet, this parameter is ignored.
     #
-    #   * **OrganizationName** In Chef, an organization name. AWS OpsWorks for
+    #   * **OrganizationName** In Chef, an organization name. OpsWorks for
     #     Chef Automate always creates the organization `default`. In Puppet,
     #     this parameter is ignored.
     #
@@ -1470,14 +1456,13 @@ module Aws::OpsWorksCM
       req.send_request(options)
     end
 
-    # Returns a list of tags that are applied to the specified AWS OpsWorks
-    # for Chef Automate or AWS OpsWorks for Puppet Enterprise servers or
-    # backups.
+    # Returns a list of tags that are applied to the specified OpsWorks for
+    # Chef Automate or OpsWorks for Puppet Enterprise servers or backups.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Number (ARN) of an AWS OpsWorks for Chef Automate
-    #   or AWS OpsWorks for Puppet Enterprise server for which you want to
-    #   show applied tags. For example,
+    #   The Amazon Resource Number (ARN) of an OpsWorks for Chef Automate or
+    #   OpsWorks for Puppet Enterprise server for which you want to show
+    #   applied tags. For example,
     #   `arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE`.
     #
     # @option params [String] :next_token
@@ -1538,7 +1523,7 @@ module Aws::OpsWorksCM
     #
     # Restoring from a backup is performed by creating a new EC2 instance.
     # If restoration is successful, and the server is in a `HEALTHY` state,
-    # AWS OpsWorks CM switches traffic over to the new instance. After
+    # OpsWorks CM switches traffic over to the new instance. After
     # restoration is finished, the old EC2 instance is maintained in a
     # `Running` or `Stopped` state, but is eventually terminated.
     #
@@ -1643,7 +1628,7 @@ module Aws::OpsWorksCM
     #     upgrade to Chef Automate 2, add this engine attribute to a
     #     `StartMaintenance` request and set the value to `true` to upgrade
     #     the server to Chef Automate 2. For more information, see [Upgrade an
-    #     AWS OpsWorks for Chef Automate Server to Chef Automate 2][1].
+    #     OpsWorks for Chef Automate Server to Chef Automate 2][1].
     #
     #   ^
     #
@@ -1707,8 +1692,8 @@ module Aws::OpsWorksCM
       req.send_request(options)
     end
 
-    # Applies tags to an AWS OpsWorks for Chef Automate or AWS OpsWorks for
-    # Puppet Enterprise server, or to server backups.
+    # Applies tags to an OpsWorks for Chef Automate or OpsWorks for Puppet
+    # Enterprise server, or to server backups.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Number (ARN) of a resource to which you want to
@@ -1716,8 +1701,8 @@ module Aws::OpsWorksCM
     #   `arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE`.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   A map that contains tag keys and tag values to attach to AWS
-    #   OpsWorks-CM servers or backups.
+    #   A map that contains tag keys and tag values to attach to OpsWorks CM
+    #   servers or backups.
     #
     #   * The key cannot be empty.
     #
@@ -1732,7 +1717,7 @@ module Aws::OpsWorksCM
     #   * Leading and trailing white spaces are trimmed from both the key and
     #     value.
     #
-    #   * A maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM
+    #   * A maximum of 50 user-applied tags is allowed for any OpsWorks CM
     #     server or backup.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1758,7 +1743,7 @@ module Aws::OpsWorksCM
       req.send_request(options)
     end
 
-    # Removes specified tags from an AWS OpsWorks-CM server or backup.
+    # Removes specified tags from an OpsWorks CM server or backup.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Number (ARN) of a resource from which you want to
@@ -1961,7 +1946,7 @@ module Aws::OpsWorksCM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opsworkscm'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

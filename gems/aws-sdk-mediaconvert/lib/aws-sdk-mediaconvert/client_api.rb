@@ -17,6 +17,7 @@ module Aws::MediaConvert
     AacAudioDescriptionBroadcasterMix = Shapes::StringShape.new(name: 'AacAudioDescriptionBroadcasterMix')
     AacCodecProfile = Shapes::StringShape.new(name: 'AacCodecProfile')
     AacCodingMode = Shapes::StringShape.new(name: 'AacCodingMode')
+    AacLoudnessMeasurementMode = Shapes::StringShape.new(name: 'AacLoudnessMeasurementMode')
     AacRateControlMode = Shapes::StringShape.new(name: 'AacRateControlMode')
     AacRawFormat = Shapes::StringShape.new(name: 'AacRawFormat')
     AacSettings = Shapes::StructureShape.new(name: 'AacSettings')
@@ -414,6 +415,7 @@ module Aws::MediaConvert
     InputRotate = Shapes::StringShape.new(name: 'InputRotate')
     InputSampleRange = Shapes::StringShape.new(name: 'InputSampleRange')
     InputScanType = Shapes::StringShape.new(name: 'InputScanType')
+    InputTamsSettings = Shapes::StructureShape.new(name: 'InputTamsSettings')
     InputTemplate = Shapes::StructureShape.new(name: 'InputTemplate')
     InputTimecodeSource = Shapes::StringShape.new(name: 'InputTimecodeSource')
     InputVideoGenerator = Shapes::StructureShape.new(name: 'InputVideoGenerator')
@@ -617,6 +619,7 @@ module Aws::MediaConvert
     StatusUpdateInterval = Shapes::StringShape.new(name: 'StatusUpdateInterval')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TamsGapHandling = Shapes::StringShape.new(name: 'TamsGapHandling')
     TeletextDestinationSettings = Shapes::StructureShape.new(name: 'TeletextDestinationSettings')
     TeletextPageType = Shapes::StringShape.new(name: 'TeletextPageType')
     TeletextSourceSettings = Shapes::StructureShape.new(name: 'TeletextSourceSettings')
@@ -803,6 +806,8 @@ module Aws::MediaConvert
     __integerMin1Max60000 = Shapes::IntegerShape.new(name: '__integerMin1Max60000')
     __integerMin1Max64 = Shapes::IntegerShape.new(name: '__integerMin1Max64')
     __integerMin1Max8 = Shapes::IntegerShape.new(name: '__integerMin1Max8')
+    __integerMin2000Max30000 = Shapes::IntegerShape.new(name: '__integerMin2000Max30000')
+    __integerMin22050Max192000 = Shapes::IntegerShape.new(name: '__integerMin22050Max192000')
     __integerMin22050Max48000 = Shapes::IntegerShape.new(name: '__integerMin22050Max48000')
     __integerMin24Max60000 = Shapes::IntegerShape.new(name: '__integerMin24Max60000')
     __integerMin25Max10000 = Shapes::IntegerShape.new(name: '__integerMin25Max10000')
@@ -822,6 +827,7 @@ module Aws::MediaConvert
     __integerMin50Max86400000 = Shapes::IntegerShape.new(name: '__integerMin50Max86400000')
     __integerMin6000Max1024000 = Shapes::IntegerShape.new(name: '__integerMin6000Max1024000')
     __integerMin64000Max640000 = Shapes::IntegerShape.new(name: '__integerMin64000Max640000')
+    __integerMin6Max16 = Shapes::IntegerShape.new(name: '__integerMin6Max16')
     __integerMin8000Max192000 = Shapes::IntegerShape.new(name: '__integerMin8000Max192000')
     __integerMin8000Max96000 = Shapes::IntegerShape.new(name: '__integerMin8000Max96000')
     __integerMin8Max12 = Shapes::IntegerShape.new(name: '__integerMin8Max12')
@@ -932,6 +938,7 @@ module Aws::MediaConvert
     __stringPattern = Shapes::StringShape.new(name: '__stringPattern')
     __stringPattern010920405090509092 = Shapes::StringShape.new(name: '__stringPattern010920405090509092')
     __stringPattern010920405090509092090909 = Shapes::StringShape.new(name: '__stringPattern010920405090509092090909')
+    __stringPattern019090190908019090190908 = Shapes::StringShape.new(name: '__stringPattern019090190908019090190908')
     __stringPattern01D20305D205D = Shapes::StringShape.new(name: '__stringPattern01D20305D205D')
     __stringPattern0940191020191209301 = Shapes::StringShape.new(name: '__stringPattern0940191020191209301')
     __stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12 = Shapes::StringShape.new(name: '__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12')
@@ -940,6 +947,7 @@ module Aws::MediaConvert
     __stringPatternAZaZ0932 = Shapes::StringShape.new(name: '__stringPatternAZaZ0932')
     __stringPatternAZaZ23AZaZ = Shapes::StringShape.new(name: '__stringPatternAZaZ23AZaZ')
     __stringPatternAZaZ23AZaZ09 = Shapes::StringShape.new(name: '__stringPatternAZaZ23AZaZ09')
+    __stringPatternArnAwsAZ09EventsAZ090912ConnectionAZAZ09AF0936 = Shapes::StringShape.new(name: '__stringPatternArnAwsAZ09EventsAZ090912ConnectionAZAZ09AF0936')
     __stringPatternArnAwsUsGovAcm = Shapes::StringShape.new(name: '__stringPatternArnAwsUsGovAcm')
     __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932 = Shapes::StringShape.new(name: '__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932')
     __stringPatternDD = Shapes::StringShape.new(name: '__stringPatternDD')
@@ -962,10 +970,13 @@ module Aws::MediaConvert
     AacSettings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin6000Max1024000, location_name: "bitrate"))
     AacSettings.add_member(:codec_profile, Shapes::ShapeRef.new(shape: AacCodecProfile, location_name: "codecProfile"))
     AacSettings.add_member(:coding_mode, Shapes::ShapeRef.new(shape: AacCodingMode, location_name: "codingMode"))
+    AacSettings.add_member(:loudness_measurement_mode, Shapes::ShapeRef.new(shape: AacLoudnessMeasurementMode, location_name: "loudnessMeasurementMode"))
+    AacSettings.add_member(:rap_interval, Shapes::ShapeRef.new(shape: __integerMin2000Max30000, location_name: "rapInterval"))
     AacSettings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: AacRateControlMode, location_name: "rateControlMode"))
     AacSettings.add_member(:raw_format, Shapes::ShapeRef.new(shape: AacRawFormat, location_name: "rawFormat"))
     AacSettings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin8000Max96000, location_name: "sampleRate"))
     AacSettings.add_member(:specification, Shapes::ShapeRef.new(shape: AacSpecification, location_name: "specification"))
+    AacSettings.add_member(:target_loudness_range, Shapes::ShapeRef.new(shape: __integerMin6Max16, location_name: "targetLoudnessRange"))
     AacSettings.add_member(:vbr_quality, Shapes::ShapeRef.new(shape: AacVbrQuality, location_name: "vbrQuality"))
     AacSettings.struct_class = Types::AacSettings
 
@@ -1631,7 +1642,7 @@ module Aws::MediaConvert
 
     FlacSettings.add_member(:bit_depth, Shapes::ShapeRef.new(shape: __integerMin16Max24, location_name: "bitDepth"))
     FlacSettings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin1Max8, location_name: "channels"))
-    FlacSettings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin22050Max48000, location_name: "sampleRate"))
+    FlacSettings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin22050Max192000, location_name: "sampleRate"))
     FlacSettings.struct_class = Types::FlacSettings
 
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -1922,6 +1933,7 @@ module Aws::MediaConvert
     Input.add_member(:program_number, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "programNumber"))
     Input.add_member(:psi_control, Shapes::ShapeRef.new(shape: InputPsiControl, location_name: "psiControl"))
     Input.add_member(:supplemental_imps, Shapes::ShapeRef.new(shape: __listOf__stringPatternS3ASSETMAPXml, location_name: "supplementalImps"))
+    Input.add_member(:tams_settings, Shapes::ShapeRef.new(shape: InputTamsSettings, location_name: "tamsSettings"))
     Input.add_member(:timecode_source, Shapes::ShapeRef.new(shape: InputTimecodeSource, location_name: "timecodeSource"))
     Input.add_member(:timecode_start, Shapes::ShapeRef.new(shape: __stringMin11Max11Pattern01D20305D205D, location_name: "timecodeStart"))
     Input.add_member(:video_generator, Shapes::ShapeRef.new(shape: InputVideoGenerator, location_name: "videoGenerator"))
@@ -1938,6 +1950,12 @@ module Aws::MediaConvert
     InputDecryptionSettings.add_member(:initialization_vector, Shapes::ShapeRef.new(shape: __stringMin16Max24PatternAZaZ0922AZaZ0916, location_name: "initializationVector"))
     InputDecryptionSettings.add_member(:kms_key_region, Shapes::ShapeRef.new(shape: __stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912, location_name: "kmsKeyRegion"))
     InputDecryptionSettings.struct_class = Types::InputDecryptionSettings
+
+    InputTamsSettings.add_member(:auth_connection_arn, Shapes::ShapeRef.new(shape: __stringPatternArnAwsAZ09EventsAZ090912ConnectionAZAZ09AF0936, location_name: "authConnectionArn"))
+    InputTamsSettings.add_member(:gap_handling, Shapes::ShapeRef.new(shape: TamsGapHandling, location_name: "gapHandling"))
+    InputTamsSettings.add_member(:source_id, Shapes::ShapeRef.new(shape: __string, location_name: "sourceId"))
+    InputTamsSettings.add_member(:timerange, Shapes::ShapeRef.new(shape: __stringPattern019090190908019090190908, location_name: "timerange"))
+    InputTamsSettings.struct_class = Types::InputTamsSettings
 
     InputTemplate.add_member(:advanced_input_filter, Shapes::ShapeRef.new(shape: AdvancedInputFilter, location_name: "advancedInputFilter"))
     InputTemplate.add_member(:advanced_input_filter_settings, Shapes::ShapeRef.new(shape: AdvancedInputFilterSettings, location_name: "advancedInputFilterSettings"))

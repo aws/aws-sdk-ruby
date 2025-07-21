@@ -637,19 +637,20 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # <note markdown="1"> If you provide a value for `PerformedBy.UserArn` you must also have
+    # <note markdown="1"> If you provide a value for `PerformedBy.UserArn`
+    # you must also have
     # [connect:DescribeUser][1] permission on the User ARN resource that you
     # provide
     #
     #  </note>
     #
-    # Creates a case in the specified Cases domain. Case system and custom
+    #  Creates a case in the specified Cases domain. Case system and custom
     # fields are taken as an array id/value pairs with a declared data
     # types.
     #
-    # The following fields are required when creating a case:
+    #  The following fields are required when creating a case:
     #
-    # * `customer_id` - You must provide the full customer profile ARN in
+    #  * `customer_id` - You must provide the full customer profile ARN in
     #   this format: `arn:aws:profile:your_AWS_Region:your_AWS_account
     #   ID:domains/your_profiles_domain_name/profiles/profile_ID`
     #
@@ -1175,6 +1176,43 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
+    # The DeleteCase API permanently deletes a case and all its associated
+    # resources from the cases data store. After a successful deletion, you
+    # cannot:
+    #
+    # * Retrieve related items
+    #
+    # * Access audit history
+    #
+    # * Perform any operations that require the CaseID
+    #
+    # This action is irreversible. Once you delete a case, you cannot
+    # recover its data.
+    #
+    # @option params [required, String] :case_id
+    #   A unique identifier of the case.
+    #
+    # @option params [required, String] :domain_id
+    #   A unique identifier of the Cases domain.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_case({
+    #     case_id: "CaseId", # required
+    #     domain_id: "DomainId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteCase AWS API Documentation
+    #
+    # @overload delete_case(params = {})
+    # @param [Hash] params ({})
+    def delete_case(params = {}, options = {})
+      req = build_request(:delete_case, params)
+      req.send_request(options)
+    end
+
     # Deletes a case rule. In the Amazon Connect admin website, case rules
     # are known as *case field conditions*. For more information about case
     # field conditions, see [Add case field conditions to a case
@@ -1339,6 +1377,45 @@ module Aws::ConnectCases
     # @param [Hash] params ({})
     def delete_layout(params = {}, options = {})
       req = build_request(:delete_layout, params)
+      req.send_request(options)
+    end
+
+    # Deletes the related item resource under a case.
+    #
+    # <note markdown="1"> This API cannot be used on a FILE type related attachment. To delete
+    # this type of file, use the [DeleteAttachedFile][1] API
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteAttachedFile.html
+    #
+    # @option params [required, String] :case_id
+    #   A unique identifier of the case.
+    #
+    # @option params [required, String] :domain_id
+    #   A unique identifier of the Cases domain.
+    #
+    # @option params [required, String] :related_item_id
+    #   A unique identifier of a related item.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_related_item({
+    #     case_id: "CaseId", # required
+    #     domain_id: "DomainId", # required
+    #     related_item_id: "RelatedItemId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteRelatedItem AWS API Documentation
+    #
+    # @overload delete_related_item(params = {})
+    # @param [Hash] params ({})
+    def delete_related_item(params = {}, options = {})
+      req = build_request(:delete_related_item, params)
       req.send_request(options)
     end
 
@@ -2456,17 +2533,18 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # <note markdown="1"> If you provide a value for `PerformedBy.UserArn` you must also have
+    # <note markdown="1"> If you provide a value for `PerformedBy.UserArn`
+    # you must also have
     # [connect:DescribeUser][1] permission on the User ARN resource that you
     # provide
     #
     #  </note>
     #
-    # Updates the values of fields on a case. Fields to be updated are
+    #  Updates the values of fields on a case. Fields to be updated are
     # received as an array of id/value pairs identical to the `CreateCase`
     # input .
     #
-    # If the action is successful, the service sends back an HTTP 200
+    #  If the action is successful, the service sends back an HTTP 200
     # response with an empty HTTP body.
     #
     #
@@ -2818,7 +2896,7 @@ module Aws::ConnectCases
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

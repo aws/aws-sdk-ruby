@@ -1,0 +1,1308 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module BedrockAgentCoreControl
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateAgentRuntimeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAgentRuntimeResponse]
+        def agent_runtime_arn: () -> ::String
+        def workload_identity_details: () -> Types::WorkloadIdentityDetails
+        def agent_runtime_id: () -> ::String
+        def agent_runtime_version: () -> ::String
+        def created_at: () -> ::Time
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_agent_runtime-instance_method
+      def create_agent_runtime: (
+                                  agent_runtime_name: ::String,
+                                  ?description: ::String,
+                                  agent_runtime_artifact: {
+                                    container_configuration: {
+                                      container_uri: ::String
+                                    }?
+                                  },
+                                  role_arn: ::String,
+                                  network_configuration: {
+                                    network_mode: ("PUBLIC")
+                                  },
+                                  ?protocol_configuration: {
+                                    server_protocol: ("MCP" | "HTTP")
+                                  },
+                                  ?client_token: ::String,
+                                  ?environment_variables: Hash[::String, ::String],
+                                  ?authorizer_configuration: {
+                                    custom_jwt_authorizer: {
+                                      discovery_url: ::String,
+                                      allowed_audience: Array[::String]?,
+                                      allowed_clients: Array[::String]?
+                                    }?
+                                  }
+                                ) -> _CreateAgentRuntimeResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentRuntimeResponseSuccess
+
+      interface _CreateAgentRuntimeEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAgentRuntimeEndpointResponse]
+        def target_version: () -> ::String
+        def agent_runtime_endpoint_arn: () -> ::String
+        def agent_runtime_arn: () -> ::String
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_agent_runtime_endpoint-instance_method
+      def create_agent_runtime_endpoint: (
+                                           agent_runtime_id: ::String,
+                                           name: ::String,
+                                           ?agent_runtime_version: ::String,
+                                           ?description: ::String,
+                                           ?client_token: ::String
+                                         ) -> _CreateAgentRuntimeEndpointResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentRuntimeEndpointResponseSuccess
+
+      interface _CreateApiKeyCredentialProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApiKeyCredentialProviderResponse]
+        def api_key_secret_arn: () -> Types::Secret
+        def name: () -> ::String
+        def credential_provider_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_api_key_credential_provider-instance_method
+      def create_api_key_credential_provider: (
+                                                name: ::String,
+                                                api_key: ::String
+                                              ) -> _CreateApiKeyCredentialProviderResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApiKeyCredentialProviderResponseSuccess
+
+      interface _CreateBrowserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBrowserResponse]
+        def browser_id: () -> ::String
+        def browser_arn: () -> ::String
+        def created_at: () -> ::Time
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_browser-instance_method
+      def create_browser: (
+                            name: ::String,
+                            ?description: ::String,
+                            ?execution_role_arn: ::String,
+                            network_configuration: {
+                              network_mode: ("PUBLIC")
+                            },
+                            ?recording: {
+                              enabled: bool?,
+                              s3_location: {
+                                bucket: ::String,
+                                prefix: ::String
+                              }?
+                            },
+                            ?client_token: ::String
+                          ) -> _CreateBrowserResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBrowserResponseSuccess
+
+      interface _CreateCodeInterpreterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCodeInterpreterResponse]
+        def code_interpreter_id: () -> ::String
+        def code_interpreter_arn: () -> ::String
+        def created_at: () -> ::Time
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_code_interpreter-instance_method
+      def create_code_interpreter: (
+                                     name: ::String,
+                                     ?description: ::String,
+                                     ?execution_role_arn: ::String,
+                                     network_configuration: {
+                                       network_mode: ("PUBLIC" | "SANDBOX")
+                                     },
+                                     ?client_token: ::String
+                                   ) -> _CreateCodeInterpreterResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCodeInterpreterResponseSuccess
+
+      interface _CreateGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGatewayResponse]
+        def gateway_arn: () -> ::String
+        def gateway_id: () -> ::String
+        def gateway_url: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+        def status_reasons: () -> ::Array[::String]
+        def name: () -> ::String
+        def description: () -> ::String
+        def role_arn: () -> ::String
+        def protocol_type: () -> ("MCP")
+        def protocol_configuration: () -> Types::GatewayProtocolConfiguration
+        def authorizer_type: () -> ("CUSTOM_JWT")
+        def authorizer_configuration: () -> Types::AuthorizerConfiguration
+        def kms_key_arn: () -> ::String
+        def workload_identity_details: () -> Types::WorkloadIdentityDetails
+        def exception_level: () -> ("DEBUG")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_gateway-instance_method
+      def create_gateway: (
+                            name: ::String,
+                            ?description: ::String,
+                            ?client_token: ::String,
+                            role_arn: ::String,
+                            protocol_type: ("MCP"),
+                            ?protocol_configuration: {
+                              mcp: {
+                                supported_versions: Array[::String]?,
+                                instructions: ::String?,
+                                search_type: ("SEMANTIC")?
+                              }?
+                            },
+                            authorizer_type: ("CUSTOM_JWT"),
+                            authorizer_configuration: {
+                              custom_jwt_authorizer: {
+                                discovery_url: ::String,
+                                allowed_audience: Array[::String]?,
+                                allowed_clients: Array[::String]?
+                              }?
+                            },
+                            ?kms_key_arn: ::String,
+                            ?exception_level: ("DEBUG")
+                          ) -> _CreateGatewayResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGatewayResponseSuccess
+
+      interface _CreateGatewayTargetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGatewayTargetResponse]
+        def gateway_arn: () -> ::String
+        def target_id: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+        def status_reasons: () -> ::Array[::String]
+        def name: () -> ::String
+        def description: () -> ::String
+        def target_configuration: () -> Types::TargetConfiguration
+        def credential_provider_configurations: () -> ::Array[Types::CredentialProviderConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_gateway_target-instance_method
+      def create_gateway_target: (
+                                   gateway_identifier: ::String,
+                                   name: ::String,
+                                   ?description: ::String,
+                                   ?client_token: ::String,
+                                   target_configuration: {
+                                     mcp: {
+                                       open_api_schema: {
+                                         s3: {
+                                           uri: ::String?,
+                                           bucket_owner_account_id: ::String?
+                                         }?,
+                                         inline_payload: ::String?
+                                       }?,
+                                       smithy_model: {
+                                         s3: {
+                                           uri: ::String?,
+                                           bucket_owner_account_id: ::String?
+                                         }?,
+                                         inline_payload: ::String?
+                                       }?,
+                                       lambda: {
+                                         lambda_arn: ::String,
+                                         tool_schema: {
+                                           s3: {
+                                             uri: ::String?,
+                                             bucket_owner_account_id: ::String?
+                                           }?,
+                                           inline_payload: Array[
+                                             {
+                                               name: ::String,
+                                               description: ::String,
+                                               input_schema: {
+                                                 type: ("string" | "number" | "object" | "array" | "boolean" | "integer"),
+                                                 properties: Hash[::String, untyped]?,
+                                                 required: Array[::String]?,
+                                                 items: untyped?,
+                                                 description: ::String?
+                                               },
+                                               output_schema: {
+                                                 type: ("string" | "number" | "object" | "array" | "boolean" | "integer"),
+                                                 properties: Hash[::String, untyped]?,
+                                                 required: Array[::String]?,
+                                                 items: untyped?,
+                                                 description: ::String?
+                                               }?
+                                             },
+                                           ]?
+                                         }
+                                       }?
+                                     }?
+                                   },
+                                   credential_provider_configurations: Array[
+                                     {
+                                       credential_provider_type: ("GATEWAY_IAM_ROLE" | "OAUTH" | "API_KEY"),
+                                       credential_provider: {
+                                         oauth_credential_provider: {
+                                           provider_arn: ::String,
+                                           scopes: Array[::String],
+                                           custom_parameters: Hash[::String, ::String]?
+                                         }?,
+                                         api_key_credential_provider: {
+                                           provider_arn: ::String,
+                                           credential_parameter_name: ::String?,
+                                           credential_prefix: ::String?,
+                                           credential_location: ("HEADER" | "QUERY_PARAMETER")?
+                                         }?
+                                       }?
+                                     },
+                                   ]
+                                 ) -> _CreateGatewayTargetResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGatewayTargetResponseSuccess
+
+      interface _CreateMemoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMemoryOutput]
+        def memory: () -> Types::Memory
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_memory-instance_method
+      def create_memory: (
+                           ?client_token: ::String,
+                           name: ::String,
+                           ?description: ::String,
+                           ?encryption_key_arn: ::String,
+                           ?memory_execution_role_arn: ::String,
+                           event_expiry_duration: ::Integer,
+                           ?memory_strategies: Array[
+                             {
+                               semantic_memory_strategy: {
+                                 name: ::String,
+                                 description: ::String?,
+                                 namespaces: Array[::String]?
+                               }?,
+                               summary_memory_strategy: {
+                                 name: ::String,
+                                 description: ::String?,
+                                 namespaces: Array[::String]?
+                               }?,
+                               user_preference_memory_strategy: {
+                                 name: ::String,
+                                 description: ::String?,
+                                 namespaces: Array[::String]?
+                               }?,
+                               custom_memory_strategy: {
+                                 name: ::String,
+                                 description: ::String?,
+                                 namespaces: Array[::String]?,
+                                 configuration: {
+                                   semantic_override: {
+                                     extraction: {
+                                       append_to_prompt: ::String,
+                                       model_id: ::String
+                                     }?,
+                                     consolidation: {
+                                       append_to_prompt: ::String,
+                                       model_id: ::String
+                                     }?
+                                   }?,
+                                   summary_override: {
+                                     consolidation: {
+                                       append_to_prompt: ::String,
+                                       model_id: ::String
+                                     }?
+                                   }?,
+                                   user_preference_override: {
+                                     extraction: {
+                                       append_to_prompt: ::String,
+                                       model_id: ::String
+                                     }?,
+                                     consolidation: {
+                                       append_to_prompt: ::String,
+                                       model_id: ::String
+                                     }?
+                                   }?
+                                 }?
+                               }?
+                             },
+                           ]
+                         ) -> _CreateMemoryResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMemoryResponseSuccess
+
+      interface _CreateOauth2CredentialProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOauth2CredentialProviderResponse]
+        def client_secret_arn: () -> Types::Secret
+        def name: () -> ::String
+        def credential_provider_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_oauth_2_credential_provider-instance_method
+      def create_oauth_2_credential_provider: (
+                                                name: ::String,
+                                                credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2"),
+                                                oauth2_provider_config_input: {
+                                                  custom_oauth_2_provider_config: {
+                                                    oauth_discovery: {
+                                                      discovery_url: ::String?,
+                                                      authorization_server_metadata: {
+                                                        issuer: ::String,
+                                                        authorization_endpoint: ::String,
+                                                        token_endpoint: ::String,
+                                                        response_types: Array[::String]?
+                                                      }?
+                                                    },
+                                                    client_id: ::String,
+                                                    client_secret: ::String
+                                                  }?,
+                                                  google_oauth_2_provider_config: {
+                                                    client_id: ::String,
+                                                    client_secret: ::String
+                                                  }?,
+                                                  github_oauth_2_provider_config: {
+                                                    client_id: ::String,
+                                                    client_secret: ::String
+                                                  }?,
+                                                  slack_oauth_2_provider_config: {
+                                                    client_id: ::String,
+                                                    client_secret: ::String
+                                                  }?,
+                                                  salesforce_oauth_2_provider_config: {
+                                                    client_id: ::String,
+                                                    client_secret: ::String
+                                                  }?,
+                                                  microsoft_oauth_2_provider_config: {
+                                                    client_id: ::String,
+                                                    client_secret: ::String
+                                                  }?
+                                                }
+                                              ) -> _CreateOauth2CredentialProviderResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOauth2CredentialProviderResponseSuccess
+
+      interface _CreateWorkloadIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkloadIdentityResponse]
+        def name: () -> ::String
+        def workload_identity_arn: () -> ::String
+        def allowed_resource_oauth_2_return_urls: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_workload_identity-instance_method
+      def create_workload_identity: (
+                                      name: ::String,
+                                      ?allowed_resource_oauth_2_return_urls: Array[::String]
+                                    ) -> _CreateWorkloadIdentityResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkloadIdentityResponseSuccess
+
+      interface _DeleteAgentRuntimeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentRuntimeResponse]
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_agent_runtime-instance_method
+      def delete_agent_runtime: (
+                                  agent_runtime_id: ::String
+                                ) -> _DeleteAgentRuntimeResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAgentRuntimeResponseSuccess
+
+      interface _DeleteAgentRuntimeEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentRuntimeEndpointResponse]
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_agent_runtime_endpoint-instance_method
+      def delete_agent_runtime_endpoint: (
+                                           agent_runtime_id: ::String,
+                                           endpoint_name: ::String,
+                                           ?client_token: ::String
+                                         ) -> _DeleteAgentRuntimeEndpointResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAgentRuntimeEndpointResponseSuccess
+
+      interface _DeleteApiKeyCredentialProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApiKeyCredentialProviderResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_api_key_credential_provider-instance_method
+      def delete_api_key_credential_provider: (
+                                                name: ::String
+                                              ) -> _DeleteApiKeyCredentialProviderResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApiKeyCredentialProviderResponseSuccess
+
+      interface _DeleteBrowserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBrowserResponse]
+        def browser_id: () -> ::String
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_browser-instance_method
+      def delete_browser: (
+                            browser_id: ::String,
+                            ?client_token: ::String
+                          ) -> _DeleteBrowserResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBrowserResponseSuccess
+
+      interface _DeleteCodeInterpreterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCodeInterpreterResponse]
+        def code_interpreter_id: () -> ::String
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_code_interpreter-instance_method
+      def delete_code_interpreter: (
+                                     code_interpreter_id: ::String,
+                                     ?client_token: ::String
+                                   ) -> _DeleteCodeInterpreterResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCodeInterpreterResponseSuccess
+
+      interface _DeleteGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGatewayResponse]
+        def gateway_id: () -> ::String
+        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+        def status_reasons: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_gateway-instance_method
+      def delete_gateway: (
+                            gateway_identifier: ::String
+                          ) -> _DeleteGatewayResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGatewayResponseSuccess
+
+      interface _DeleteGatewayTargetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGatewayTargetResponse]
+        def gateway_arn: () -> ::String
+        def target_id: () -> ::String
+        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+        def status_reasons: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_gateway_target-instance_method
+      def delete_gateway_target: (
+                                   gateway_identifier: ::String,
+                                   target_id: ::String
+                                 ) -> _DeleteGatewayTargetResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGatewayTargetResponseSuccess
+
+      interface _DeleteMemoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMemoryOutput]
+        def memory_id: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "FAILED" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_memory-instance_method
+      def delete_memory: (
+                           ?client_token: ::String,
+                           memory_id: ::String
+                         ) -> _DeleteMemoryResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMemoryResponseSuccess
+
+      interface _DeleteOauth2CredentialProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteOauth2CredentialProviderResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_oauth_2_credential_provider-instance_method
+      def delete_oauth_2_credential_provider: (
+                                                name: ::String
+                                              ) -> _DeleteOauth2CredentialProviderResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteOauth2CredentialProviderResponseSuccess
+
+      interface _DeleteWorkloadIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkloadIdentityResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_workload_identity-instance_method
+      def delete_workload_identity: (
+                                      name: ::String
+                                    ) -> _DeleteWorkloadIdentityResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkloadIdentityResponseSuccess
+
+      interface _GetAgentRuntimeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentRuntimeResponse]
+        def agent_runtime_arn: () -> ::String
+        def workload_identity_details: () -> Types::WorkloadIdentityDetails
+        def agent_runtime_name: () -> ::String
+        def description: () -> ::String
+        def agent_runtime_id: () -> ::String
+        def agent_runtime_version: () -> ::String
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def role_arn: () -> ::String
+        def agent_runtime_artifact: () -> Types::AgentArtifact
+        def network_configuration: () -> Types::NetworkConfiguration
+        def protocol_configuration: () -> Types::ProtocolConfiguration
+        def environment_variables: () -> ::Hash[::String, ::String]
+        def authorizer_configuration: () -> Types::AuthorizerConfiguration
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_agent_runtime-instance_method
+      def get_agent_runtime: (
+                               agent_runtime_id: ::String,
+                               ?agent_runtime_version: ::String
+                             ) -> _GetAgentRuntimeResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentRuntimeResponseSuccess
+
+      interface _GetAgentRuntimeEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentRuntimeEndpointResponse]
+        def live_version: () -> ::String
+        def target_version: () -> ::String
+        def agent_runtime_endpoint_arn: () -> ::String
+        def agent_runtime_arn: () -> ::String
+        def description: () -> ::String
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def failure_reason: () -> ::String
+        def name: () -> ::String
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_agent_runtime_endpoint-instance_method
+      def get_agent_runtime_endpoint: (
+                                        agent_runtime_id: ::String,
+                                        endpoint_name: ::String
+                                      ) -> _GetAgentRuntimeEndpointResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentRuntimeEndpointResponseSuccess
+
+      interface _GetApiKeyCredentialProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApiKeyCredentialProviderResponse]
+        def api_key_secret_arn: () -> Types::Secret
+        def name: () -> ::String
+        def credential_provider_arn: () -> ::String
+        def created_time: () -> ::Time
+        def last_updated_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_api_key_credential_provider-instance_method
+      def get_api_key_credential_provider: (
+                                             name: ::String
+                                           ) -> _GetApiKeyCredentialProviderResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApiKeyCredentialProviderResponseSuccess
+
+      interface _GetBrowserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBrowserResponse]
+        def browser_id: () -> ::String
+        def browser_arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def execution_role_arn: () -> ::String
+        def network_configuration: () -> Types::BrowserNetworkConfiguration
+        def recording: () -> Types::RecordingConfig
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_browser-instance_method
+      def get_browser: (
+                         browser_id: ::String
+                       ) -> _GetBrowserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBrowserResponseSuccess
+
+      interface _GetCodeInterpreterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCodeInterpreterResponse]
+        def code_interpreter_id: () -> ::String
+        def code_interpreter_arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def execution_role_arn: () -> ::String
+        def network_configuration: () -> Types::CodeInterpreterNetworkConfiguration
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_code_interpreter-instance_method
+      def get_code_interpreter: (
+                                  code_interpreter_id: ::String
+                                ) -> _GetCodeInterpreterResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCodeInterpreterResponseSuccess
+
+      interface _GetGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGatewayResponse]
+        def gateway_arn: () -> ::String
+        def gateway_id: () -> ::String
+        def gateway_url: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+        def status_reasons: () -> ::Array[::String]
+        def name: () -> ::String
+        def description: () -> ::String
+        def role_arn: () -> ::String
+        def protocol_type: () -> ("MCP")
+        def protocol_configuration: () -> Types::GatewayProtocolConfiguration
+        def authorizer_type: () -> ("CUSTOM_JWT")
+        def authorizer_configuration: () -> Types::AuthorizerConfiguration
+        def kms_key_arn: () -> ::String
+        def workload_identity_details: () -> Types::WorkloadIdentityDetails
+        def exception_level: () -> ("DEBUG")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_gateway-instance_method
+      def get_gateway: (
+                         gateway_identifier: ::String
+                       ) -> _GetGatewayResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGatewayResponseSuccess
+
+      interface _GetGatewayTargetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGatewayTargetResponse]
+        def gateway_arn: () -> ::String
+        def target_id: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+        def status_reasons: () -> ::Array[::String]
+        def name: () -> ::String
+        def description: () -> ::String
+        def target_configuration: () -> Types::TargetConfiguration
+        def credential_provider_configurations: () -> ::Array[Types::CredentialProviderConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_gateway_target-instance_method
+      def get_gateway_target: (
+                                gateway_identifier: ::String,
+                                target_id: ::String
+                              ) -> _GetGatewayTargetResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGatewayTargetResponseSuccess
+
+      interface _GetMemoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMemoryOutput]
+        def memory: () -> Types::Memory
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_memory-instance_method
+      def get_memory: (
+                        memory_id: ::String
+                      ) -> _GetMemoryResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMemoryResponseSuccess
+
+      interface _GetOauth2CredentialProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOauth2CredentialProviderResponse]
+        def client_secret_arn: () -> Types::Secret
+        def name: () -> ::String
+        def credential_provider_arn: () -> ::String
+        def credential_provider_vendor: () -> ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2")
+        def oauth2_provider_config_output: () -> Types::Oauth2ProviderConfigOutput
+        def created_time: () -> ::Time
+        def last_updated_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_oauth_2_credential_provider-instance_method
+      def get_oauth_2_credential_provider: (
+                                             name: ::String
+                                           ) -> _GetOauth2CredentialProviderResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOauth2CredentialProviderResponseSuccess
+
+      interface _GetTokenVaultResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTokenVaultResponse]
+        def token_vault_id: () -> ::String
+        def kms_configuration: () -> Types::KmsConfiguration
+        def last_modified_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_token_vault-instance_method
+      def get_token_vault: (
+                             ?token_vault_id: ::String
+                           ) -> _GetTokenVaultResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTokenVaultResponseSuccess
+
+      interface _GetWorkloadIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkloadIdentityResponse]
+        def name: () -> ::String
+        def workload_identity_arn: () -> ::String
+        def allowed_resource_oauth_2_return_urls: () -> ::Array[::String]
+        def created_time: () -> ::Time
+        def last_updated_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_workload_identity-instance_method
+      def get_workload_identity: (
+                                   name: ::String
+                                 ) -> _GetWorkloadIdentityResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkloadIdentityResponseSuccess
+
+      interface _ListAgentRuntimeEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentRuntimeEndpointsResponse]
+        def runtime_endpoints: () -> ::Array[Types::AgentEndpoint]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_agent_runtime_endpoints-instance_method
+      def list_agent_runtime_endpoints: (
+                                          agent_runtime_id: ::String,
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListAgentRuntimeEndpointsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentRuntimeEndpointsResponseSuccess
+
+      interface _ListAgentRuntimeVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentRuntimeVersionsResponse]
+        def agent_runtimes: () -> ::Array[Types::Agent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_agent_runtime_versions-instance_method
+      def list_agent_runtime_versions: (
+                                         agent_runtime_id: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListAgentRuntimeVersionsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentRuntimeVersionsResponseSuccess
+
+      interface _ListAgentRuntimesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentRuntimesResponse]
+        def agent_runtimes: () -> ::Array[Types::Agent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_agent_runtimes-instance_method
+      def list_agent_runtimes: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListAgentRuntimesResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentRuntimesResponseSuccess
+
+      interface _ListApiKeyCredentialProvidersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApiKeyCredentialProvidersResponse]
+        def credential_providers: () -> ::Array[Types::ApiKeyCredentialProviderItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_api_key_credential_providers-instance_method
+      def list_api_key_credential_providers: (
+                                               ?next_token: ::String,
+                                               ?max_results: ::Integer
+                                             ) -> _ListApiKeyCredentialProvidersResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApiKeyCredentialProvidersResponseSuccess
+
+      interface _ListBrowsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBrowsersResponse]
+        def browser_summaries: () -> ::Array[Types::BrowserSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_browsers-instance_method
+      def list_browsers: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           ?type: ("SYSTEM" | "CUSTOM")
+                         ) -> _ListBrowsersResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBrowsersResponseSuccess
+
+      interface _ListCodeInterpretersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCodeInterpretersResponse]
+        def code_interpreter_summaries: () -> ::Array[Types::CodeInterpreterSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_code_interpreters-instance_method
+      def list_code_interpreters: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String,
+                                    ?type: ("SYSTEM" | "CUSTOM")
+                                  ) -> _ListCodeInterpretersResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCodeInterpretersResponseSuccess
+
+      interface _ListGatewayTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGatewayTargetsResponse]
+        def items: () -> ::Array[Types::TargetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_gateway_targets-instance_method
+      def list_gateway_targets: (
+                                  gateway_identifier: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListGatewayTargetsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGatewayTargetsResponseSuccess
+
+      interface _ListGatewaysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGatewaysResponse]
+        def items: () -> ::Array[Types::GatewaySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_gateways-instance_method
+      def list_gateways: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListGatewaysResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGatewaysResponseSuccess
+
+      interface _ListMemoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMemoriesOutput]
+        def memories: () -> ::Array[Types::MemorySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_memories-instance_method
+      def list_memories: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListMemoriesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMemoriesResponseSuccess
+
+      interface _ListOauth2CredentialProvidersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOauth2CredentialProvidersResponse]
+        def credential_providers: () -> ::Array[Types::Oauth2CredentialProviderItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_oauth_2_credential_providers-instance_method
+      def list_oauth_2_credential_providers: (
+                                               ?next_token: ::String,
+                                               ?max_results: ::Integer
+                                             ) -> _ListOauth2CredentialProvidersResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOauth2CredentialProvidersResponseSuccess
+
+      interface _ListWorkloadIdentitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkloadIdentitiesResponse]
+        def workload_identities: () -> ::Array[Types::WorkloadIdentityType]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_workload_identities-instance_method
+      def list_workload_identities: (
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListWorkloadIdentitiesResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkloadIdentitiesResponseSuccess
+
+      interface _SetTokenVaultCMKResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetTokenVaultCMKResponse]
+        def token_vault_id: () -> ::String
+        def kms_configuration: () -> Types::KmsConfiguration
+        def last_modified_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#set_token_vault_cmk-instance_method
+      def set_token_vault_cmk: (
+                                 ?token_vault_id: ::String,
+                                 kms_configuration: {
+                                   key_type: ("CustomerManagedKey" | "ServiceManagedKey"),
+                                   kms_key_arn: ::String?
+                                 }
+                               ) -> _SetTokenVaultCMKResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetTokenVaultCMKResponseSuccess
+
+      interface _UpdateAgentRuntimeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAgentRuntimeResponse]
+        def agent_runtime_arn: () -> ::String
+        def agent_runtime_id: () -> ::String
+        def workload_identity_details: () -> Types::WorkloadIdentityDetails
+        def agent_runtime_version: () -> ::String
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_agent_runtime-instance_method
+      def update_agent_runtime: (
+                                  agent_runtime_id: ::String,
+                                  ?description: ::String,
+                                  agent_runtime_artifact: {
+                                    container_configuration: {
+                                      container_uri: ::String
+                                    }?
+                                  },
+                                  role_arn: ::String,
+                                  network_configuration: {
+                                    network_mode: ("PUBLIC")
+                                  },
+                                  ?protocol_configuration: {
+                                    server_protocol: ("MCP" | "HTTP")
+                                  },
+                                  ?client_token: ::String,
+                                  ?environment_variables: Hash[::String, ::String],
+                                  ?authorizer_configuration: {
+                                    custom_jwt_authorizer: {
+                                      discovery_url: ::String,
+                                      allowed_audience: Array[::String]?,
+                                      allowed_clients: Array[::String]?
+                                    }?
+                                  }
+                                ) -> _UpdateAgentRuntimeResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentRuntimeResponseSuccess
+
+      interface _UpdateAgentRuntimeEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAgentRuntimeEndpointResponse]
+        def live_version: () -> ::String
+        def target_version: () -> ::String
+        def agent_runtime_endpoint_arn: () -> ::String
+        def agent_runtime_arn: () -> ::String
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_agent_runtime_endpoint-instance_method
+      def update_agent_runtime_endpoint: (
+                                           agent_runtime_id: ::String,
+                                           endpoint_name: ::String,
+                                           ?agent_runtime_version: ::String,
+                                           ?description: ::String,
+                                           ?client_token: ::String
+                                         ) -> _UpdateAgentRuntimeEndpointResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentRuntimeEndpointResponseSuccess
+
+      interface _UpdateApiKeyCredentialProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApiKeyCredentialProviderResponse]
+        def api_key_secret_arn: () -> Types::Secret
+        def name: () -> ::String
+        def credential_provider_arn: () -> ::String
+        def created_time: () -> ::Time
+        def last_updated_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_api_key_credential_provider-instance_method
+      def update_api_key_credential_provider: (
+                                                name: ::String,
+                                                api_key: ::String
+                                              ) -> _UpdateApiKeyCredentialProviderResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApiKeyCredentialProviderResponseSuccess
+
+      interface _UpdateGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGatewayResponse]
+        def gateway_arn: () -> ::String
+        def gateway_id: () -> ::String
+        def gateway_url: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+        def status_reasons: () -> ::Array[::String]
+        def name: () -> ::String
+        def description: () -> ::String
+        def role_arn: () -> ::String
+        def protocol_type: () -> ("MCP")
+        def protocol_configuration: () -> Types::GatewayProtocolConfiguration
+        def authorizer_type: () -> ("CUSTOM_JWT")
+        def authorizer_configuration: () -> Types::AuthorizerConfiguration
+        def kms_key_arn: () -> ::String
+        def workload_identity_details: () -> Types::WorkloadIdentityDetails
+        def exception_level: () -> ("DEBUG")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_gateway-instance_method
+      def update_gateway: (
+                            gateway_identifier: ::String,
+                            name: ::String,
+                            ?description: ::String,
+                            role_arn: ::String,
+                            protocol_type: ("MCP"),
+                            ?protocol_configuration: {
+                              mcp: {
+                                supported_versions: Array[::String]?,
+                                instructions: ::String?,
+                                search_type: ("SEMANTIC")?
+                              }?
+                            },
+                            authorizer_type: ("CUSTOM_JWT"),
+                            authorizer_configuration: {
+                              custom_jwt_authorizer: {
+                                discovery_url: ::String,
+                                allowed_audience: Array[::String]?,
+                                allowed_clients: Array[::String]?
+                              }?
+                            },
+                            ?kms_key_arn: ::String,
+                            ?exception_level: ("DEBUG")
+                          ) -> _UpdateGatewayResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGatewayResponseSuccess
+
+      interface _UpdateGatewayTargetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGatewayTargetResponse]
+        def gateway_arn: () -> ::String
+        def target_id: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+        def status_reasons: () -> ::Array[::String]
+        def name: () -> ::String
+        def description: () -> ::String
+        def target_configuration: () -> Types::TargetConfiguration
+        def credential_provider_configurations: () -> ::Array[Types::CredentialProviderConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_gateway_target-instance_method
+      def update_gateway_target: (
+                                   gateway_identifier: ::String,
+                                   target_id: ::String,
+                                   name: ::String,
+                                   ?description: ::String,
+                                   target_configuration: {
+                                     mcp: {
+                                       open_api_schema: {
+                                         s3: {
+                                           uri: ::String?,
+                                           bucket_owner_account_id: ::String?
+                                         }?,
+                                         inline_payload: ::String?
+                                       }?,
+                                       smithy_model: {
+                                         s3: {
+                                           uri: ::String?,
+                                           bucket_owner_account_id: ::String?
+                                         }?,
+                                         inline_payload: ::String?
+                                       }?,
+                                       lambda: {
+                                         lambda_arn: ::String,
+                                         tool_schema: {
+                                           s3: {
+                                             uri: ::String?,
+                                             bucket_owner_account_id: ::String?
+                                           }?,
+                                           inline_payload: Array[
+                                             {
+                                               name: ::String,
+                                               description: ::String,
+                                               input_schema: {
+                                                 type: ("string" | "number" | "object" | "array" | "boolean" | "integer"),
+                                                 properties: Hash[::String, untyped]?,
+                                                 required: Array[::String]?,
+                                                 items: untyped?,
+                                                 description: ::String?
+                                               },
+                                               output_schema: {
+                                                 type: ("string" | "number" | "object" | "array" | "boolean" | "integer"),
+                                                 properties: Hash[::String, untyped]?,
+                                                 required: Array[::String]?,
+                                                 items: untyped?,
+                                                 description: ::String?
+                                               }?
+                                             },
+                                           ]?
+                                         }
+                                       }?
+                                     }?
+                                   },
+                                   credential_provider_configurations: Array[
+                                     {
+                                       credential_provider_type: ("GATEWAY_IAM_ROLE" | "OAUTH" | "API_KEY"),
+                                       credential_provider: {
+                                         oauth_credential_provider: {
+                                           provider_arn: ::String,
+                                           scopes: Array[::String],
+                                           custom_parameters: Hash[::String, ::String]?
+                                         }?,
+                                         api_key_credential_provider: {
+                                           provider_arn: ::String,
+                                           credential_parameter_name: ::String?,
+                                           credential_prefix: ::String?,
+                                           credential_location: ("HEADER" | "QUERY_PARAMETER")?
+                                         }?
+                                       }?
+                                     },
+                                   ]
+                                 ) -> _UpdateGatewayTargetResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGatewayTargetResponseSuccess
+
+      interface _UpdateMemoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMemoryOutput]
+        def memory: () -> Types::Memory
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_memory-instance_method
+      def update_memory: (
+                           ?client_token: ::String,
+                           memory_id: ::String,
+                           ?description: ::String,
+                           ?event_expiry_duration: ::Integer,
+                           ?memory_execution_role_arn: ::String,
+                           ?memory_strategies: {
+                             add_memory_strategies: Array[
+                               {
+                                 semantic_memory_strategy: {
+                                   name: ::String,
+                                   description: ::String?,
+                                   namespaces: Array[::String]?
+                                 }?,
+                                 summary_memory_strategy: {
+                                   name: ::String,
+                                   description: ::String?,
+                                   namespaces: Array[::String]?
+                                 }?,
+                                 user_preference_memory_strategy: {
+                                   name: ::String,
+                                   description: ::String?,
+                                   namespaces: Array[::String]?
+                                 }?,
+                                 custom_memory_strategy: {
+                                   name: ::String,
+                                   description: ::String?,
+                                   namespaces: Array[::String]?,
+                                   configuration: {
+                                     semantic_override: {
+                                       extraction: {
+                                         append_to_prompt: ::String,
+                                         model_id: ::String
+                                       }?,
+                                       consolidation: {
+                                         append_to_prompt: ::String,
+                                         model_id: ::String
+                                       }?
+                                     }?,
+                                     summary_override: {
+                                       consolidation: {
+                                         append_to_prompt: ::String,
+                                         model_id: ::String
+                                       }?
+                                     }?,
+                                     user_preference_override: {
+                                       extraction: {
+                                         append_to_prompt: ::String,
+                                         model_id: ::String
+                                       }?,
+                                       consolidation: {
+                                         append_to_prompt: ::String,
+                                         model_id: ::String
+                                       }?
+                                     }?
+                                   }?
+                                 }?
+                               },
+                             ]?,
+                             modify_memory_strategies: Array[
+                               {
+                                 memory_strategy_id: ::String,
+                                 description: ::String?,
+                                 namespaces: Array[::String]?,
+                                 configuration: {
+                                   extraction: {
+                                     custom_extraction_configuration: {
+                                       semantic_extraction_override: {
+                                         append_to_prompt: ::String,
+                                         model_id: ::String
+                                       }?,
+                                       user_preference_extraction_override: {
+                                         append_to_prompt: ::String,
+                                         model_id: ::String
+                                       }?
+                                     }?
+                                   }?,
+                                   consolidation: {
+                                     custom_consolidation_configuration: {
+                                       semantic_consolidation_override: {
+                                         append_to_prompt: ::String,
+                                         model_id: ::String
+                                       }?,
+                                       summary_consolidation_override: {
+                                         append_to_prompt: ::String,
+                                         model_id: ::String
+                                       }?,
+                                       user_preference_consolidation_override: {
+                                         append_to_prompt: ::String,
+                                         model_id: ::String
+                                       }?
+                                     }?
+                                   }?
+                                 }?
+                               },
+                             ]?,
+                             delete_memory_strategies: Array[
+                               {
+                                 memory_strategy_id: ::String
+                               },
+                             ]?
+                           }
+                         ) -> _UpdateMemoryResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMemoryResponseSuccess
+
+      interface _UpdateOauth2CredentialProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOauth2CredentialProviderResponse]
+        def client_secret_arn: () -> Types::Secret
+        def name: () -> ::String
+        def credential_provider_vendor: () -> ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2")
+        def credential_provider_arn: () -> ::String
+        def oauth2_provider_config_output: () -> Types::Oauth2ProviderConfigOutput
+        def created_time: () -> ::Time
+        def last_updated_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_oauth_2_credential_provider-instance_method
+      def update_oauth_2_credential_provider: (
+                                                name: ::String,
+                                                credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2"),
+                                                oauth2_provider_config_input: {
+                                                  custom_oauth_2_provider_config: {
+                                                    oauth_discovery: {
+                                                      discovery_url: ::String?,
+                                                      authorization_server_metadata: {
+                                                        issuer: ::String,
+                                                        authorization_endpoint: ::String,
+                                                        token_endpoint: ::String,
+                                                        response_types: Array[::String]?
+                                                      }?
+                                                    },
+                                                    client_id: ::String,
+                                                    client_secret: ::String
+                                                  }?,
+                                                  google_oauth_2_provider_config: {
+                                                    client_id: ::String,
+                                                    client_secret: ::String
+                                                  }?,
+                                                  github_oauth_2_provider_config: {
+                                                    client_id: ::String,
+                                                    client_secret: ::String
+                                                  }?,
+                                                  slack_oauth_2_provider_config: {
+                                                    client_id: ::String,
+                                                    client_secret: ::String
+                                                  }?,
+                                                  salesforce_oauth_2_provider_config: {
+                                                    client_id: ::String,
+                                                    client_secret: ::String
+                                                  }?,
+                                                  microsoft_oauth_2_provider_config: {
+                                                    client_id: ::String,
+                                                    client_secret: ::String
+                                                  }?
+                                                }
+                                              ) -> _UpdateOauth2CredentialProviderResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOauth2CredentialProviderResponseSuccess
+
+      interface _UpdateWorkloadIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkloadIdentityResponse]
+        def name: () -> ::String
+        def workload_identity_arn: () -> ::String
+        def allowed_resource_oauth_2_return_urls: () -> ::Array[::String]
+        def created_time: () -> ::Time
+        def last_updated_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_workload_identity-instance_method
+      def update_workload_identity: (
+                                      name: ::String,
+                                      ?allowed_resource_oauth_2_return_urls: Array[::String]
+                                    ) -> _UpdateWorkloadIdentityResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkloadIdentityResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#wait_until-instance_method
+      def wait_until: (:memory_created waiter_name, 
+                    memory_id: ::String
+                  ) -> Client::_GetMemoryResponseSuccess
+                    | (:memory_created waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetMemoryResponseSuccess
+    end
+  end
+end
+

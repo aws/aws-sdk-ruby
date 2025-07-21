@@ -194,7 +194,8 @@ module Aws
                            location: ::String,
                            activate: bool,
                            ?client_token: ::String,
-                           ?tags: Hash[::String, ::String]
+                           ?tags: Hash[::String, ::String],
+                           ?expected_bucket_owner: ::String
                          ) -> _CreateIPSetResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIPSetResponseSuccess
 
@@ -275,7 +276,8 @@ module Aws
                                      location: ::String,
                                      activate: bool,
                                      ?client_token: ::String,
-                                     ?tags: Hash[::String, ::String]
+                                     ?tags: Hash[::String, ::String],
+                                     ?expected_bucket_owner: ::String
                                    ) -> _CreateThreatIntelSetResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateThreatIntelSetResponseSuccess
 
@@ -591,6 +593,7 @@ module Aws
         def location: () -> ::String
         def status: () -> ("INACTIVE" | "ACTIVATING" | "ACTIVE" | "DEACTIVATING" | "ERROR" | "DELETE_PENDING" | "DELETED")
         def tags: () -> ::Hash[::String, ::String]
+        def expected_bucket_owner: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_ip_set-instance_method
       def get_ip_set: (
@@ -697,6 +700,7 @@ module Aws
         def location: () -> ::String
         def status: () -> ("INACTIVE" | "ACTIVATING" | "ACTIVE" | "DEACTIVATING" | "ERROR" | "DELETE_PENDING" | "DELETED")
         def tags: () -> ::Hash[::String, ::String]
+        def expected_bucket_owner: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_threat_intel_set-instance_method
       def get_threat_intel_set: (
@@ -1074,7 +1078,8 @@ module Aws
                            ip_set_id: ::String,
                            ?name: ::String,
                            ?location: ::String,
-                           ?activate: bool
+                           ?activate: bool,
+                           ?expected_bucket_owner: ::String
                          ) -> _UpdateIPSetResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIPSetResponseSuccess
 
@@ -1224,7 +1229,8 @@ module Aws
                                      threat_intel_set_id: ::String,
                                      ?name: ::String,
                                      ?location: ::String,
-                                     ?activate: bool
+                                     ?activate: bool,
+                                     ?expected_bucket_owner: ::String
                                    ) -> _UpdateThreatIntelSetResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateThreatIntelSetResponseSuccess
     end

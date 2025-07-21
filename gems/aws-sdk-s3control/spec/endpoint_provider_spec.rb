@@ -3034,6 +3034,516 @@ module Aws::S3Control
       end
     end
 
+    context "Tagging on express bucket routed to s3express-control" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true}]}, "url" => "https://s3express-control.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{resource_arn: "arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3", account_id: "871317572157", region: "us-east-1", requires_account_id: true, use_dual_stack: false, use_fips: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling tag_resource' do
+        client = Client.new(
+          region: 'us-east-1',
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true})
+        resp = client.tag_resource(
+          resource_arn: 'arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3',
+          account_id: '871317572157',
+          tags: [],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+
+      it 'produces the correct output from the client when calling untag_resource' do
+        client = Client.new(
+          region: 'us-east-1',
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true})
+        resp = client.untag_resource(
+          resource_arn: 'arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3',
+          account_id: '871317572157',
+          tag_keys: [],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+
+      it 'produces the correct output from the client when calling list_tags_for_resource' do
+        client = Client.new(
+          region: 'us-east-1',
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true})
+        resp = client.list_tags_for_resource(
+          resource_arn: 'arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3',
+          account_id: '871317572157',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "Tagging on express ap routed to s3express-control" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true}]}, "url" => "https://s3express-control.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{resource_arn: "arn:aws:s3express:us-east-1:871317572157:accesspoint/crachlintest--use1-az4--xa-s3", account_id: "871317572157", region: "us-east-1", requires_account_id: true, use_dual_stack: false, use_fips: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling tag_resource' do
+        client = Client.new(
+          region: 'us-east-1',
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true})
+        resp = client.tag_resource(
+          resource_arn: 'arn:aws:s3express:us-east-1:871317572157:accesspoint/crachlintest--use1-az4--xa-s3',
+          account_id: '871317572157',
+          tags: [],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+
+      it 'produces the correct output from the client when calling untag_resource' do
+        client = Client.new(
+          region: 'us-east-1',
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true})
+        resp = client.untag_resource(
+          resource_arn: 'arn:aws:s3express:us-east-1:871317572157:accesspoint/crachlintest--use1-az4--xa-s3',
+          account_id: '871317572157',
+          tag_keys: [],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+
+      it 'produces the correct output from the client when calling list_tags_for_resource' do
+        client = Client.new(
+          region: 'us-east-1',
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true})
+        resp = client.list_tags_for_resource(
+          resource_arn: 'arn:aws:s3express:us-east-1:871317572157:accesspoint/crachlintest--use1-az4--xa-s3',
+          account_id: '871317572157',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "Tagging on express bucket routed to s3express-control FIPS when FIPS enabled" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true}]}, "url" => "https://s3express-control-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{resource_arn: "arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3", account_id: "871317572157", region: "us-east-1", requires_account_id: true, use_dual_stack: false, use_fips: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling tag_resource' do
+        client = Client.new(
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true})
+        resp = client.tag_resource(
+          resource_arn: 'arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3',
+          account_id: '871317572157',
+          tags: [],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+
+      it 'produces the correct output from the client when calling untag_resource' do
+        client = Client.new(
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true})
+        resp = client.untag_resource(
+          resource_arn: 'arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3',
+          account_id: '871317572157',
+          tag_keys: [],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+
+      it 'produces the correct output from the client when calling list_tags_for_resource' do
+        client = Client.new(
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true})
+        resp = client.list_tags_for_resource(
+          resource_arn: 'arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3',
+          account_id: '871317572157',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "Tagging on express bucket cn routed to s3express-control china endpoint" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "cn-north-1", "disableDoubleEncoding" => true}]}, "url" => "https://s3express-control.cn-north-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{resource_arn: "arn:aws-cn:s3express:cn-north-1:871317572157:bucket/crachlintest--use1-az4--x-s3", account_id: "871317572157", region: "cn-north-1", requires_account_id: true, use_dual_stack: false, use_fips: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling tag_resource' do
+        client = Client.new(
+          region: 'cn-north-1',
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "cn-north-1", "disableDoubleEncoding" => true})
+        resp = client.tag_resource(
+          resource_arn: 'arn:aws-cn:s3express:cn-north-1:871317572157:bucket/crachlintest--use1-az4--x-s3',
+          account_id: '871317572157',
+          tags: [],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+
+      it 'produces the correct output from the client when calling untag_resource' do
+        client = Client.new(
+          region: 'cn-north-1',
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "cn-north-1", "disableDoubleEncoding" => true})
+        resp = client.untag_resource(
+          resource_arn: 'arn:aws-cn:s3express:cn-north-1:871317572157:bucket/crachlintest--use1-az4--x-s3',
+          account_id: '871317572157',
+          tag_keys: [],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+
+      it 'produces the correct output from the client when calling list_tags_for_resource' do
+        client = Client.new(
+          region: 'cn-north-1',
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "cn-north-1", "disableDoubleEncoding" => true})
+        resp = client.list_tags_for_resource(
+          resource_arn: 'arn:aws-cn:s3express:cn-north-1:871317572157:bucket/crachlintest--use1-az4--x-s3',
+          account_id: '871317572157',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "Tagging on express bucket cn routed to s3express-control china endpoint with FIPS" do
+      let(:expected) do
+        {"error" => "Partition does not support FIPS"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{resource_arn: "arn:aws-cn:s3express:cn-north-1:871317572157:bucket/crachlintest--use1-az4--x-s3", account_id: "871317572157", region: "cn-north-1", requires_account_id: true, use_dual_stack: false, use_fips: true})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling tag_resource' do
+        client = Client.new(
+          region: 'cn-north-1',
+          use_fips_endpoint: true,
+          stub_responses: true
+        )
+        expect do
+          client.tag_resource(
+            resource_arn: 'arn:aws-cn:s3express:cn-north-1:871317572157:bucket/crachlintest--use1-az4--x-s3',
+            account_id: '871317572157',
+            tags: [],
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling untag_resource' do
+        client = Client.new(
+          region: 'cn-north-1',
+          use_fips_endpoint: true,
+          stub_responses: true
+        )
+        expect do
+          client.untag_resource(
+            resource_arn: 'arn:aws-cn:s3express:cn-north-1:871317572157:bucket/crachlintest--use1-az4--x-s3',
+            account_id: '871317572157',
+            tag_keys: [],
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling list_tags_for_resource' do
+        client = Client.new(
+          region: 'cn-north-1',
+          use_fips_endpoint: true,
+          stub_responses: true
+        )
+        expect do
+          client.list_tags_for_resource(
+            resource_arn: 'arn:aws-cn:s3express:cn-north-1:871317572157:bucket/crachlintest--use1-az4--x-s3',
+            account_id: '871317572157',
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Tagging on express bucket with custom endpoint routed to custom endpoint" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true}]}, "url" => "https://my-endpoint.express-control.s3.aws.dev"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{resource_arn: "arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3", endpoint: "https://my-endpoint.express-control.s3.aws.dev", account_id: "871317572157", region: "us-east-1", requires_account_id: true, use_dual_stack: false, use_fips: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling tag_resource' do
+        client = Client.new(
+          region: 'us-east-1',
+          endpoint: 'https://my-endpoint.express-control.s3.aws.dev',
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true})
+        resp = client.tag_resource(
+          resource_arn: 'arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3',
+          account_id: '871317572157',
+          tags: [],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+
+      it 'produces the correct output from the client when calling untag_resource' do
+        client = Client.new(
+          region: 'us-east-1',
+          endpoint: 'https://my-endpoint.express-control.s3.aws.dev',
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true})
+        resp = client.untag_resource(
+          resource_arn: 'arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3',
+          account_id: '871317572157',
+          tag_keys: [],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+
+      it 'produces the correct output from the client when calling list_tags_for_resource' do
+        client = Client.new(
+          region: 'us-east-1',
+          endpoint: 'https://my-endpoint.express-control.s3.aws.dev',
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true})
+        resp = client.list_tags_for_resource(
+          resource_arn: 'arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3',
+          account_id: '871317572157',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "Tagging on express access point with custom endpoint routed to custom endpoint" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true}]}, "url" => "https://my-endpoint.express-control.s3.aws.dev"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{resource_arn: "arn:aws:s3express:us-east-1:871317572157:accesspoint/crachlintest--use1-az4--xa-s3", endpoint: "https://my-endpoint.express-control.s3.aws.dev", account_id: "871317572157", region: "us-east-1", requires_account_id: true, use_dual_stack: false, use_fips: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling tag_resource' do
+        client = Client.new(
+          region: 'us-east-1',
+          endpoint: 'https://my-endpoint.express-control.s3.aws.dev',
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true})
+        resp = client.tag_resource(
+          resource_arn: 'arn:aws:s3express:us-east-1:871317572157:accesspoint/crachlintest--use1-az4--xa-s3',
+          account_id: '871317572157',
+          tags: [],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+
+      it 'produces the correct output from the client when calling untag_resource' do
+        client = Client.new(
+          region: 'us-east-1',
+          endpoint: 'https://my-endpoint.express-control.s3.aws.dev',
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true})
+        resp = client.untag_resource(
+          resource_arn: 'arn:aws:s3express:us-east-1:871317572157:accesspoint/crachlintest--use1-az4--xa-s3',
+          account_id: '871317572157',
+          tag_keys: [],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+
+      it 'produces the correct output from the client when calling list_tags_for_resource' do
+        client = Client.new(
+          region: 'us-east-1',
+          endpoint: 'https://my-endpoint.express-control.s3.aws.dev',
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true})
+        resp = client.list_tags_for_resource(
+          resource_arn: 'arn:aws:s3express:us-east-1:871317572157:accesspoint/crachlintest--use1-az4--xa-s3',
+          account_id: '871317572157',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "Tagging on express bucket with dualstack and custom endpoint fails" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: DualStack and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{resource_arn: "arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3", endpoint: "https://my-endpoint.express-control.s3.aws.dev", account_id: "871317572157", region: "us-east-1", requires_account_id: true, use_dual_stack: true, use_fips: false})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling tag_resource' do
+        client = Client.new(
+          region: 'us-east-1',
+          endpoint: 'https://my-endpoint.express-control.s3.aws.dev',
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        expect do
+          client.tag_resource(
+            resource_arn: 'arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3',
+            account_id: '871317572157',
+            tags: [],
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling untag_resource' do
+        client = Client.new(
+          region: 'us-east-1',
+          endpoint: 'https://my-endpoint.express-control.s3.aws.dev',
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        expect do
+          client.untag_resource(
+            resource_arn: 'arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3',
+            account_id: '871317572157',
+            tag_keys: [],
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling list_tags_for_resource' do
+        client = Client.new(
+          region: 'us-east-1',
+          endpoint: 'https://my-endpoint.express-control.s3.aws.dev',
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        expect do
+          client.list_tags_for_resource(
+            resource_arn: 'arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3',
+            account_id: '871317572157',
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
     context "Access Point APIs on express bucket routed to s3express-control" do
       let(:expected) do
         {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true}]}, "url" => "https://s3express-control.us-east-1.amazonaws.com"}}

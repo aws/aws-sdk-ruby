@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2025-07-17)
+------------------
+
+* Feature - This release introduces Parquet result format support for ML Input Channel models in AWS Clean Rooms ML.
+
 1.27.0 (2025-07-01)
 ------------------
 

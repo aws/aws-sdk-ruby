@@ -3988,6 +3988,11 @@ module Aws::Deadline
     #   limits were acquired during the session, this field isn't returned.
     #   @return [Array<Types::AcquiredLimit>]
     #
+    # @!attribute [rw] manifests
+    #   The list of manifest properties that describe file attachments for
+    #   the task run.
+    #   @return [Array<Types::TaskRunManifestPropertiesResponse>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/GetSessionActionResponse AWS API Documentation
     #
     class GetSessionActionResponse < Struct.new(
@@ -4001,7 +4006,8 @@ module Aws::Deadline
       :process_exit_code,
       :progress_message,
       :definition,
-      :acquired_limits)
+      :acquired_limits,
+      :manifests)
       SENSITIVE = [:progress_message]
       include Aws::Structure
     end
@@ -8279,6 +8285,11 @@ module Aws::Deadline
     #   The session action definition.
     #   @return [Types::SessionActionDefinitionSummary]
     #
+    # @!attribute [rw] manifests
+    #   The list of manifest properties that describe file attachments for
+    #   the task run.
+    #   @return [Array<Types::TaskRunManifestPropertiesResponse>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/SessionActionSummary AWS API Documentation
     #
     class SessionActionSummary < Struct.new(
@@ -8288,7 +8299,8 @@ module Aws::Deadline
       :ended_at,
       :worker_updated_at,
       :progress_percent,
-      :definition)
+      :definition,
+      :manifests)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9085,6 +9097,11 @@ module Aws::Deadline
     #   A file system path represented as a string.
     #   @return [String]
     #
+    # @!attribute [rw] chunk_int
+    #   A range (for example 1-10) or selection of specific (for example
+    #   1,3,7,8,10) integers represented as a string.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/TaskParameterValue AWS API Documentation
     #
     class TaskParameterValue < Struct.new(
@@ -9092,6 +9109,7 @@ module Aws::Deadline
       :float,
       :string,
       :path,
+      :chunk_int,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -9101,7 +9119,48 @@ module Aws::Deadline
       class Float < TaskParameterValue; end
       class String < TaskParameterValue; end
       class Path < TaskParameterValue; end
+      class ChunkInt < TaskParameterValue; end
       class Unknown < TaskParameterValue; end
+    end
+
+    # The output manifest properties reported by the worker agent for a
+    # completed task run.
+    #
+    # @!attribute [rw] output_manifest_path
+    #   The manifest file path.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_manifest_hash
+    #   The hash value of the file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/TaskRunManifestPropertiesRequest AWS API Documentation
+    #
+    class TaskRunManifestPropertiesRequest < Struct.new(
+      :output_manifest_path,
+      :output_manifest_hash)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The manifest properties for a task run, corresponding to the manifest
+    # properties in the job.
+    #
+    # @!attribute [rw] output_manifest_path
+    #   The manifest file path.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_manifest_hash
+    #   The hash value of the file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/TaskRunManifestPropertiesResponse AWS API Documentation
+    #
+    class TaskRunManifestPropertiesResponse < Struct.new(
+      :output_manifest_path,
+      :output_manifest_hash)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # The task, step, and parameters for the task run in the session action.
@@ -9138,12 +9197,17 @@ module Aws::Deadline
     #   The step ID.
     #   @return [String]
     #
+    # @!attribute [rw] parameters
+    #   The parameters of a task run in a session action.
+    #   @return [Hash<String,Types::TaskParameterValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/TaskRunSessionActionDefinitionSummary AWS API Documentation
     #
     class TaskRunSessionActionDefinitionSummary < Struct.new(
       :task_id,
-      :step_id)
-      SENSITIVE = []
+      :step_id,
+      :parameters)
+      SENSITIVE = [:parameters]
       include Aws::Structure
     end
 
@@ -10236,6 +10300,11 @@ module Aws::Deadline
     #   The percentage completed.
     #   @return [Float]
     #
+    # @!attribute [rw] manifests
+    #   A list of output manifest properties reported by the worker agent,
+    #   with each entry corresponding to a manifest property in the job.
+    #   @return [Array<Types::TaskRunManifestPropertiesRequest>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdatedSessionActionInfo AWS API Documentation
     #
     class UpdatedSessionActionInfo < Struct.new(
@@ -10245,7 +10314,8 @@ module Aws::Deadline
       :started_at,
       :ended_at,
       :updated_at,
-      :progress_percent)
+      :progress_percent,
+      :manifests)
       SENSITIVE = [:progress_message]
       include Aws::Structure
     end

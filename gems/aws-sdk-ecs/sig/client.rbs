@@ -171,7 +171,13 @@ module Aws
                                 target_group_arn: ::String?,
                                 load_balancer_name: ::String?,
                                 container_name: ::String?,
-                                container_port: ::Integer?
+                                container_port: ::Integer?,
+                                advanced_configuration: {
+                                  alternate_target_group_arn: ::String?,
+                                  production_listener_rule: ::String?,
+                                  test_listener_rule: ::String?,
+                                  role_arn: ::String?
+                                }?
                               },
                             ],
                             ?service_registries: Array[
@@ -205,7 +211,16 @@ module Aws
                                 alarm_names: Array[::String],
                                 rollback: bool,
                                 enable: bool
-                              }?
+                              }?,
+                              strategy: ("ROLLING" | "BLUE_GREEN")?,
+                              bake_time_in_minutes: ::Integer?,
+                              lifecycle_hooks: Array[
+                                {
+                                  hook_target_arn: ::String?,
+                                  role_arn: ::String?,
+                                  lifecycle_stages: Array[("RECONCILE_SERVICE" | "PRE_SCALE_UP" | "POST_SCALE_UP" | "TEST_TRAFFIC_SHIFT" | "POST_TEST_TRAFFIC_SHIFT" | "PRODUCTION_TRAFFIC_SHIFT" | "POST_PRODUCTION_TRAFFIC_SHIFT")]?
+                                },
+                              ]?
                             },
                             ?placement_constraints: Array[
                               {
@@ -250,7 +265,15 @@ module Aws
                                   client_aliases: Array[
                                     {
                                       port: ::Integer,
-                                      dns_name: ::String?
+                                      dns_name: ::String?,
+                                      test_traffic_rules: {
+                                        header: {
+                                          name: ::String,
+                                          value: {
+                                            exact: ::String
+                                          }?
+                                        }
+                                      }?
                                     },
                                   ]?,
                                   ingress_port_override: ::Integer?,
@@ -339,7 +362,13 @@ module Aws
                                  target_group_arn: ::String?,
                                  load_balancer_name: ::String?,
                                  container_name: ::String?,
-                                 container_port: ::Integer?
+                                 container_port: ::Integer?,
+                                 advanced_configuration: {
+                                   alternate_target_group_arn: ::String?,
+                                   production_listener_rule: ::String?,
+                                   test_listener_rule: ::String?,
+                                   role_arn: ::String?
+                                 }?
                                },
                              ],
                              ?service_registries: Array[
@@ -1651,7 +1680,16 @@ module Aws
                                 alarm_names: Array[::String],
                                 rollback: bool,
                                 enable: bool
-                              }?
+                              }?,
+                              strategy: ("ROLLING" | "BLUE_GREEN")?,
+                              bake_time_in_minutes: ::Integer?,
+                              lifecycle_hooks: Array[
+                                {
+                                  hook_target_arn: ::String?,
+                                  role_arn: ::String?,
+                                  lifecycle_stages: Array[("RECONCILE_SERVICE" | "PRE_SCALE_UP" | "POST_SCALE_UP" | "TEST_TRAFFIC_SHIFT" | "POST_TEST_TRAFFIC_SHIFT" | "PRODUCTION_TRAFFIC_SHIFT" | "POST_PRODUCTION_TRAFFIC_SHIFT")]?
+                                },
+                              ]?
                             },
                             ?availability_zone_rebalancing: ("ENABLED" | "DISABLED"),
                             ?network_configuration: {
@@ -1676,6 +1714,9 @@ module Aws
                             ?platform_version: ::String,
                             ?force_new_deployment: bool,
                             ?health_check_grace_period_seconds: ::Integer,
+                            ?deployment_controller: {
+                              type: ("ECS" | "CODE_DEPLOY" | "EXTERNAL")
+                            },
                             ?enable_execute_command: bool,
                             ?enable_ecs_managed_tags: bool,
                             ?load_balancers: Array[
@@ -1683,7 +1724,13 @@ module Aws
                                 target_group_arn: ::String?,
                                 load_balancer_name: ::String?,
                                 container_name: ::String?,
-                                container_port: ::Integer?
+                                container_port: ::Integer?,
+                                advanced_configuration: {
+                                  alternate_target_group_arn: ::String?,
+                                  production_listener_rule: ::String?,
+                                  test_listener_rule: ::String?,
+                                  role_arn: ::String?
+                                }?
                               },
                             ],
                             ?propagate_tags: ("TASK_DEFINITION" | "SERVICE" | "NONE"),
@@ -1705,7 +1752,15 @@ module Aws
                                   client_aliases: Array[
                                     {
                                       port: ::Integer,
-                                      dns_name: ::String?
+                                      dns_name: ::String?,
+                                      test_traffic_rules: {
+                                        header: {
+                                          name: ::String,
+                                          value: {
+                                            exact: ::String
+                                          }?
+                                        }
+                                      }?
                                     },
                                   ]?,
                                   ingress_port_override: ::Integer?,

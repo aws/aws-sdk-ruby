@@ -11,6 +11,14 @@ module Aws::ECS
     class AccessDeniedException < Aws::EmptyStructure
     end
 
+    class AdvancedConfiguration
+      attr_accessor alternate_target_group_arn: ::String
+      attr_accessor production_listener_rule: ::String
+      attr_accessor test_listener_rule: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
     class Attachment
       attr_accessor id: ::String
       attr_accessor type: ::String
@@ -493,6 +501,9 @@ module Aws::ECS
       attr_accessor maximum_percent: ::Integer
       attr_accessor minimum_healthy_percent: ::Integer
       attr_accessor alarms: Types::DeploymentAlarms
+      attr_accessor strategy: ("ROLLING" | "BLUE_GREEN")
+      attr_accessor bake_time_in_minutes: ::Integer
+      attr_accessor lifecycle_hooks: ::Array[Types::DeploymentLifecycleHook]
       SENSITIVE: []
     end
 
@@ -503,6 +514,13 @@ module Aws::ECS
 
     class DeploymentEphemeralStorage
       attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeploymentLifecycleHook
+      attr_accessor hook_target_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor lifecycle_stages: ::Array[("RECONCILE_SERVICE" | "PRE_SCALE_UP" | "POST_SCALE_UP" | "TEST_TRAFFIC_SHIFT" | "POST_TEST_TRAFFIC_SHIFT" | "PRODUCTION_TRAFFIC_SHIFT" | "POST_PRODUCTION_TRAFFIC_SHIFT")]
       SENSITIVE: []
     end
 
@@ -1012,6 +1030,7 @@ module Aws::ECS
       attr_accessor load_balancer_name: ::String
       attr_accessor container_name: ::String
       attr_accessor container_port: ::Integer
+      attr_accessor advanced_configuration: Types::AdvancedConfiguration
       SENSITIVE: []
     end
 
@@ -1236,6 +1255,11 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class ResolvedConfiguration
+      attr_accessor load_balancers: ::Array[Types::ServiceRevisionLoadBalancer]
+      SENSITIVE: []
+    end
+
     class Resource
       attr_accessor name: ::String
       attr_accessor type: ::String
@@ -1356,6 +1380,7 @@ module Aws::ECS
     class ServiceConnectClientAlias
       attr_accessor port: ::Integer
       attr_accessor dns_name: ::String
+      attr_accessor test_traffic_rules: Types::ServiceConnectTestTrafficRules
       SENSITIVE: []
     end
 
@@ -1380,6 +1405,22 @@ module Aws::ECS
     class ServiceConnectServiceResource
       attr_accessor discovery_name: ::String
       attr_accessor discovery_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceConnectTestTrafficHeaderMatchRules
+      attr_accessor exact: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceConnectTestTrafficHeaderRules
+      attr_accessor name: ::String
+      attr_accessor value: Types::ServiceConnectTestTrafficHeaderMatchRules
+      SENSITIVE: []
+    end
+
+    class ServiceConnectTestTrafficRules
+      attr_accessor header: Types::ServiceConnectTestTrafficHeaderRules
       SENSITIVE: []
     end
 
@@ -1408,6 +1449,7 @@ module Aws::ECS
       attr_accessor target_service_revision: Types::ServiceRevisionSummary
       attr_accessor status: ("PENDING" | "SUCCESSFUL" | "STOPPED" | "STOP_REQUESTED" | "IN_PROGRESS" | "ROLLBACK_REQUESTED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_SUCCESSFUL" | "ROLLBACK_FAILED")
       attr_accessor status_reason: ::String
+      attr_accessor lifecycle_stage: ("RECONCILE_SERVICE" | "PRE_SCALE_UP" | "SCALE_UP" | "POST_SCALE_UP" | "TEST_TRAFFIC_SHIFT" | "POST_TEST_TRAFFIC_SHIFT" | "PRODUCTION_TRAFFIC_SHIFT" | "POST_PRODUCTION_TRAFFIC_SHIFT" | "BAKE_TIME" | "CLEAN_UP")
       attr_accessor deployment_configuration: Types::DeploymentConfiguration
       attr_accessor rollback: Types::Rollback
       attr_accessor deployment_circuit_breaker: Types::ServiceDeploymentCircuitBreaker
@@ -1500,6 +1542,13 @@ module Aws::ECS
       attr_accessor fargate_ephemeral_storage: Types::DeploymentEphemeralStorage
       attr_accessor created_at: ::Time
       attr_accessor vpc_lattice_configurations: ::Array[Types::VpcLatticeConfiguration]
+      attr_accessor resolved_configuration: Types::ResolvedConfiguration
+      SENSITIVE: []
+    end
+
+    class ServiceRevisionLoadBalancer
+      attr_accessor target_group_arn: ::String
+      attr_accessor production_listener_rule: ::String
       SENSITIVE: []
     end
 
@@ -1924,6 +1973,7 @@ module Aws::ECS
       attr_accessor platform_version: ::String
       attr_accessor force_new_deployment: bool
       attr_accessor health_check_grace_period_seconds: ::Integer
+      attr_accessor deployment_controller: Types::DeploymentController
       attr_accessor enable_execute_command: bool
       attr_accessor enable_ecs_managed_tags: bool
       attr_accessor load_balancers: ::Array[Types::LoadBalancer]

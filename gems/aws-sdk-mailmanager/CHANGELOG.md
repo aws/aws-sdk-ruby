@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2025-07-17)
+------------------
+
+* Feature - Allow underscores in the local part of the input of the "Email recipients rewrite" action in rule sets.
+
 1.27.0 (2025-06-02)
 ------------------
 

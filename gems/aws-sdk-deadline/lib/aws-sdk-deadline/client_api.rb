@@ -567,6 +567,12 @@ module Aws::Deadline
     TaskParameterValue = Shapes::UnionShape.new(name: 'TaskParameterValue')
     TaskParameters = Shapes::MapShape.new(name: 'TaskParameters')
     TaskRetryCount = Shapes::IntegerShape.new(name: 'TaskRetryCount')
+    TaskRunManifestPropertiesListRequest = Shapes::ListShape.new(name: 'TaskRunManifestPropertiesListRequest')
+    TaskRunManifestPropertiesListResponse = Shapes::ListShape.new(name: 'TaskRunManifestPropertiesListResponse')
+    TaskRunManifestPropertiesRequest = Shapes::StructureShape.new(name: 'TaskRunManifestPropertiesRequest')
+    TaskRunManifestPropertiesRequestOutputManifestHashString = Shapes::StringShape.new(name: 'TaskRunManifestPropertiesRequestOutputManifestHashString')
+    TaskRunManifestPropertiesRequestOutputManifestPathString = Shapes::StringShape.new(name: 'TaskRunManifestPropertiesRequestOutputManifestPathString')
+    TaskRunManifestPropertiesResponse = Shapes::StructureShape.new(name: 'TaskRunManifestPropertiesResponse')
     TaskRunSessionActionDefinition = Shapes::StructureShape.new(name: 'TaskRunSessionActionDefinition')
     TaskRunSessionActionDefinitionSummary = Shapes::StructureShape.new(name: 'TaskRunSessionActionDefinitionSummary')
     TaskRunStatus = Shapes::StringShape.new(name: 'TaskRunStatus')
@@ -1539,6 +1545,7 @@ module Aws::Deadline
     GetSessionActionResponse.add_member(:progress_message, Shapes::ShapeRef.new(shape: SessionActionProgressMessage, location_name: "progressMessage"))
     GetSessionActionResponse.add_member(:definition, Shapes::ShapeRef.new(shape: SessionActionDefinition, required: true, location_name: "definition"))
     GetSessionActionResponse.add_member(:acquired_limits, Shapes::ShapeRef.new(shape: AcquiredLimits, location_name: "acquiredLimits"))
+    GetSessionActionResponse.add_member(:manifests, Shapes::ShapeRef.new(shape: TaskRunManifestPropertiesListResponse, location_name: "manifests"))
     GetSessionActionResponse.struct_class = Types::GetSessionActionResponse
 
     GetSessionRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
@@ -2465,6 +2472,7 @@ module Aws::Deadline
     SessionActionSummary.add_member(:worker_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "workerUpdatedAt"))
     SessionActionSummary.add_member(:progress_percent, Shapes::ShapeRef.new(shape: SessionActionProgressPercent, location_name: "progressPercent"))
     SessionActionSummary.add_member(:definition, Shapes::ShapeRef.new(shape: SessionActionDefinitionSummary, required: true, location_name: "definition"))
+    SessionActionSummary.add_member(:manifests, Shapes::ShapeRef.new(shape: TaskRunManifestPropertiesListResponse, location_name: "manifests"))
     SessionActionSummary.struct_class = Types::SessionActionSummary
 
     SessionSummaries.member = Shapes::ShapeRef.new(shape: SessionSummary)
@@ -2652,16 +2660,30 @@ module Aws::Deadline
     TaskParameterValue.add_member(:float, Shapes::ShapeRef.new(shape: FloatString, location_name: "float"))
     TaskParameterValue.add_member(:string, Shapes::ShapeRef.new(shape: ParameterString, location_name: "string"))
     TaskParameterValue.add_member(:path, Shapes::ShapeRef.new(shape: PathString, location_name: "path"))
+    TaskParameterValue.add_member(:chunk_int, Shapes::ShapeRef.new(shape: String, location_name: "chunkInt"))
     TaskParameterValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     TaskParameterValue.add_member_subclass(:int, Types::TaskParameterValue::Int)
     TaskParameterValue.add_member_subclass(:float, Types::TaskParameterValue::Float)
     TaskParameterValue.add_member_subclass(:string, Types::TaskParameterValue::String)
     TaskParameterValue.add_member_subclass(:path, Types::TaskParameterValue::Path)
+    TaskParameterValue.add_member_subclass(:chunk_int, Types::TaskParameterValue::ChunkInt)
     TaskParameterValue.add_member_subclass(:unknown, Types::TaskParameterValue::Unknown)
     TaskParameterValue.struct_class = Types::TaskParameterValue
 
     TaskParameters.key = Shapes::ShapeRef.new(shape: String)
     TaskParameters.value = Shapes::ShapeRef.new(shape: TaskParameterValue)
+
+    TaskRunManifestPropertiesListRequest.member = Shapes::ShapeRef.new(shape: TaskRunManifestPropertiesRequest)
+
+    TaskRunManifestPropertiesListResponse.member = Shapes::ShapeRef.new(shape: TaskRunManifestPropertiesResponse)
+
+    TaskRunManifestPropertiesRequest.add_member(:output_manifest_path, Shapes::ShapeRef.new(shape: TaskRunManifestPropertiesRequestOutputManifestPathString, location_name: "outputManifestPath"))
+    TaskRunManifestPropertiesRequest.add_member(:output_manifest_hash, Shapes::ShapeRef.new(shape: TaskRunManifestPropertiesRequestOutputManifestHashString, location_name: "outputManifestHash"))
+    TaskRunManifestPropertiesRequest.struct_class = Types::TaskRunManifestPropertiesRequest
+
+    TaskRunManifestPropertiesResponse.add_member(:output_manifest_path, Shapes::ShapeRef.new(shape: String, location_name: "outputManifestPath"))
+    TaskRunManifestPropertiesResponse.add_member(:output_manifest_hash, Shapes::ShapeRef.new(shape: String, location_name: "outputManifestHash"))
+    TaskRunManifestPropertiesResponse.struct_class = Types::TaskRunManifestPropertiesResponse
 
     TaskRunSessionActionDefinition.add_member(:task_id, Shapes::ShapeRef.new(shape: TaskId, location_name: "taskId"))
     TaskRunSessionActionDefinition.add_member(:step_id, Shapes::ShapeRef.new(shape: StepId, required: true, location_name: "stepId"))
@@ -2670,6 +2692,7 @@ module Aws::Deadline
 
     TaskRunSessionActionDefinitionSummary.add_member(:task_id, Shapes::ShapeRef.new(shape: TaskId, location_name: "taskId"))
     TaskRunSessionActionDefinitionSummary.add_member(:step_id, Shapes::ShapeRef.new(shape: StepId, required: true, location_name: "stepId"))
+    TaskRunSessionActionDefinitionSummary.add_member(:parameters, Shapes::ShapeRef.new(shape: TaskParameters, location_name: "parameters"))
     TaskRunSessionActionDefinitionSummary.struct_class = Types::TaskRunSessionActionDefinitionSummary
 
     TaskRunStatusCounts.key = Shapes::ShapeRef.new(shape: TaskRunStatus)
@@ -2901,6 +2924,7 @@ module Aws::Deadline
     UpdatedSessionActionInfo.add_member(:ended_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "endedAt"))
     UpdatedSessionActionInfo.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     UpdatedSessionActionInfo.add_member(:progress_percent, Shapes::ShapeRef.new(shape: SessionActionProgressPercent, location_name: "progressPercent"))
+    UpdatedSessionActionInfo.add_member(:manifests, Shapes::ShapeRef.new(shape: TaskRunManifestPropertiesListRequest, location_name: "manifests"))
     UpdatedSessionActionInfo.struct_class = Types::UpdatedSessionActionInfo
 
     UpdatedSessionActions.key = Shapes::ShapeRef.new(shape: SessionActionId)

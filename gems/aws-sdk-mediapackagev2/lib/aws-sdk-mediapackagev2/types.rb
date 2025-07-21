@@ -10,10 +10,14 @@
 module Aws::MediaPackageV2
   module Types
 
-    # You don't have permissions to perform the requested operation. The
-    # user or role that is making the request must have at least one IAM
-    # permissions policy attached that grants the required permissions. For
-    # more information, see Access Management in the IAM User Guide.
+    # Access is denied because either you don't have permissions to perform
+    # the requested operation or MediaPackage is getting throttling errors
+    # with CDN authorization. The user or role that is making the request
+    # must have at least one IAM permissions policy attached that grants the
+    # required permissions. For more information, see Access Management in
+    # the IAM User Guide. Or, if you're using CDN authorization, you will
+    # receive this exception if MediaPackage receives a throttling error
+    # from Secrets Manager.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -66,6 +70,27 @@ module Aws::MediaPackageV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/CancelHarvestJobResponse AWS API Documentation
     #
     class CancelHarvestJobResponse < Aws::EmptyStructure; end
+
+    # The settings to enable CDN authorization headers in MediaPackage.
+    #
+    # @!attribute [rw] cdn_identifier_secret_arns
+    #   The ARN for the secret in Secrets Manager that your CDN uses for
+    #   authorization to access the endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] secrets_role_arn
+    #   The ARN for the IAM role that gives MediaPackage read access to
+    #   Secrets Manager and KMS for CDN authorization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/CdnAuthConfiguration AWS API Documentation
+    #
+    class CdnAuthConfiguration < Struct.new(
+      :cdn_identifier_secret_arns,
+      :secrets_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The configuration of the channel group.
     #
@@ -891,6 +916,50 @@ module Aws::MediaPackageV2
       include Aws::Structure
     end
 
+    # Configuration parameters for creating a Microsoft Smooth Streaming
+    # (MSS) manifest. MSS is a streaming media format developed by Microsoft
+    # that delivers adaptive bitrate streaming content to compatible players
+    # and devices.
+    #
+    # @!attribute [rw] manifest_name
+    #   A short string that's appended to the endpoint URL to create a
+    #   unique path to this MSS manifest. The manifest name must be unique
+    #   within the origin endpoint and can contain letters, numbers,
+    #   hyphens, and underscores.
+    #   @return [String]
+    #
+    # @!attribute [rw] manifest_window_seconds
+    #   The total duration (in seconds) of the manifest window. This
+    #   determines how much content is available in the manifest at any
+    #   given time. The manifest window slides forward as new segments
+    #   become available, maintaining a consistent duration of content. The
+    #   minimum value is 30 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter_configuration
+    #   Filter configuration includes settings for manifest filtering, start
+    #   and end times, and time delay that apply to all of your egress
+    #   requests for this manifest.
+    #   @return [Types::FilterConfiguration]
+    #
+    # @!attribute [rw] manifest_layout
+    #   Determines the layout format of the MSS manifest. This controls how
+    #   the manifest is structured and presented to client players,
+    #   affecting compatibility with different MSS-compatible devices and
+    #   applications.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/CreateMssManifestConfiguration AWS API Documentation
+    #
+    class CreateMssManifestConfiguration < Struct.new(
+      :manifest_name,
+      :manifest_window_seconds,
+      :filter_configuration,
+      :manifest_layout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] channel_group_name
     #   The name that describes the channel group. The name is the primary
     #   identifier for the channel group, and must be unique for your
@@ -954,6 +1023,13 @@ module Aws::MediaPackageV2
     #   A DASH manifest configuration.
     #   @return [Array<Types::CreateDashManifestConfiguration>]
     #
+    # @!attribute [rw] mss_manifests
+    #   A list of Microsoft Smooth Streaming (MSS) manifest configurations
+    #   for the origin endpoint. You can configure multiple MSS manifests to
+    #   provide different streaming experiences or to support different
+    #   client requirements.
+    #   @return [Array<Types::CreateMssManifestConfiguration>]
+    #
     # @!attribute [rw] force_endpoint_error_configuration
     #   The failover settings for the endpoint.
     #   @return [Types::ForceEndpointErrorConfiguration]
@@ -981,6 +1057,7 @@ module Aws::MediaPackageV2
       :hls_manifests,
       :low_latency_hls_manifests,
       :dash_manifests,
+      :mss_manifests,
       :force_endpoint_error_configuration,
       :tags)
       SENSITIVE = []
@@ -1048,6 +1125,11 @@ module Aws::MediaPackageV2
     #   A DASH manifest configuration.
     #   @return [Array<Types::GetDashManifestConfiguration>]
     #
+    # @!attribute [rw] mss_manifests
+    #   The Microsoft Smooth Streaming (MSS) manifest configurations that
+    #   were created for this origin endpoint.
+    #   @return [Array<Types::GetMssManifestConfiguration>]
+    #
     # @!attribute [rw] force_endpoint_error_configuration
     #   The failover settings for the endpoint.
     #   @return [Types::ForceEndpointErrorConfiguration]
@@ -1079,6 +1161,7 @@ module Aws::MediaPackageV2
       :hls_manifests,
       :low_latency_hls_manifests,
       :dash_manifests,
+      :mss_manifests,
       :force_endpoint_error_configuration,
       :etag,
       :tags)
@@ -1470,6 +1553,29 @@ module Aws::MediaPackageV2
     #   every thirty minutes: `1800`
     #   @return [Integer]
     #
+    # @!attribute [rw] cmaf_exclude_segment_drm_metadata
+    #   Excludes SEIG and SGPD boxes from segment metadata in CMAF
+    #   containers.
+    #
+    #   When set to `true`, MediaPackage omits these DRM metadata boxes from
+    #   CMAF segments, which can improve compatibility with certain devices
+    #   and players that don't support these boxes.
+    #
+    #   Important considerations:
+    #
+    #   * This setting only affects CMAF container formats
+    #
+    #   * Key rotation can still be handled through media playlist signaling
+    #
+    #   * PSSH and TENC boxes remain unaffected
+    #
+    #   * Default behavior is preserved when this setting is disabled
+    #
+    #   Valid values: `true` \| `false`
+    #
+    #   Default: `false`
+    #   @return [Boolean]
+    #
     # @!attribute [rw] speke_key_provider
     #   The parameters for the SPEKE key provider.
     #   @return [Types::SpekeKeyProvider]
@@ -1480,6 +1586,7 @@ module Aws::MediaPackageV2
       :constant_initialization_vector,
       :encryption_method,
       :key_rotation_interval_seconds,
+      :cmaf_exclude_segment_drm_metadata,
       :speke_key_provider)
       SENSITIVE = []
       include Aws::Structure
@@ -1581,11 +1688,18 @@ module Aws::MediaPackageV2
     #   The encryption method to use.
     #   @return [String]
     #
+    # @!attribute [rw] ism_encryption_method
+    #   The encryption method used for Microsoft Smooth Streaming (MSS)
+    #   content. This specifies how the MSS segments are encrypted to
+    #   protect the content during delivery to client players.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/EncryptionMethod AWS API Documentation
     #
     class EncryptionMethod < Struct.new(
       :ts_encryption_method,
-      :cmaf_encryption_method)
+      :cmaf_encryption_method,
+      :ism_encryption_method)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2315,6 +2429,51 @@ module Aws::MediaPackageV2
       include Aws::Structure
     end
 
+    # Configuration details for a Microsoft Smooth Streaming (MSS) manifest
+    # associated with an origin endpoint. This includes all the settings and
+    # properties that define how the MSS content is packaged and delivered.
+    #
+    # @!attribute [rw] manifest_name
+    #   The name of the MSS manifest. This name is appended to the origin
+    #   endpoint URL to create the unique path for accessing this specific
+    #   MSS manifest.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The complete URL for accessing the MSS manifest. Client players use
+    #   this URL to retrieve the manifest and begin streaming the Microsoft
+    #   Smooth Streaming content.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_configuration
+    #   Filter configuration includes settings for manifest filtering, start
+    #   and end times, and time delay that apply to all of your egress
+    #   requests for this manifest.
+    #   @return [Types::FilterConfiguration]
+    #
+    # @!attribute [rw] manifest_window_seconds
+    #   The duration (in seconds) of the manifest window. This represents
+    #   the total amount of content available in the manifest at any given
+    #   time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] manifest_layout
+    #   The layout format of the MSS manifest, which determines how the
+    #   manifest is structured for client compatibility.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetMssManifestConfiguration AWS API Documentation
+    #
+    class GetMssManifestConfiguration < Struct.new(
+      :manifest_name,
+      :url,
+      :filter_configuration,
+      :manifest_window_seconds,
+      :manifest_layout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] channel_group_name
     #   The name that describes the channel group. The name is the primary
     #   identifier for the channel group, and must be unique for your
@@ -2365,13 +2524,26 @@ module Aws::MediaPackageV2
     #   The policy assigned to the origin endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] cdn_auth_configuration
+    #   The settings for using authorization headers between the
+    #   MediaPackage endpoint and your CDN.
+    #
+    #   For information about CDN authorization, see [CDN authorization in
+    #   Elemental MediaPackage][1] in the MediaPackage user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediapackage/latest/userguide/cdn-auth.html
+    #   @return [Types::CdnAuthConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetOriginEndpointPolicyResponse AWS API Documentation
     #
     class GetOriginEndpointPolicyResponse < Struct.new(
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
-      :policy)
+      :policy,
+      :cdn_auth_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2469,6 +2641,11 @@ module Aws::MediaPackageV2
     #   A DASH manifest configuration.
     #   @return [Array<Types::GetDashManifestConfiguration>]
     #
+    # @!attribute [rw] mss_manifests
+    #   The Microsoft Smooth Streaming (MSS) manifest configurations
+    #   associated with this origin endpoint.
+    #   @return [Array<Types::GetMssManifestConfiguration>]
+    #
     # @!attribute [rw] force_endpoint_error_configuration
     #   The failover settings for the endpoint.
     #   @return [Types::ForceEndpointErrorConfiguration]
@@ -2501,6 +2678,7 @@ module Aws::MediaPackageV2
       :hls_manifests,
       :low_latency_hls_manifests,
       :dash_manifests,
+      :mss_manifests,
       :force_endpoint_error_configuration,
       :etag,
       :tags)
@@ -2964,6 +3142,27 @@ module Aws::MediaPackageV2
       include Aws::Structure
     end
 
+    # Summary information about a Microsoft Smooth Streaming (MSS) manifest
+    # configuration. This provides key details about the MSS manifest
+    # without including all configuration parameters.
+    #
+    # @!attribute [rw] manifest_name
+    #   The name of the MSS manifest configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL for accessing the MSS manifest.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/ListMssManifestConfiguration AWS API Documentation
+    #
+    class ListMssManifestConfiguration < Struct.new(
+      :manifest_name,
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] channel_group_name
     #   The name that describes the channel group. The name is the primary
     #   identifier for the channel group, and must be unique for your
@@ -3094,6 +3293,12 @@ module Aws::MediaPackageV2
     #   A DASH manifest configuration.
     #   @return [Array<Types::ListDashManifestConfiguration>]
     #
+    # @!attribute [rw] mss_manifests
+    #   A list of Microsoft Smooth Streaming (MSS) manifest configurations
+    #   associated with the origin endpoint. Each configuration represents a
+    #   different MSS streaming option available from this endpoint.
+    #   @return [Array<Types::ListMssManifestConfiguration>]
+    #
     # @!attribute [rw] force_endpoint_error_configuration
     #   The failover settings for the endpoint.
     #   @return [Types::ForceEndpointErrorConfiguration]
@@ -3112,6 +3317,7 @@ module Aws::MediaPackageV2
       :hls_manifests,
       :low_latency_hls_manifests,
       :dash_manifests,
+      :mss_manifests,
       :force_endpoint_error_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -3185,13 +3391,26 @@ module Aws::MediaPackageV2
     #   The policy to attach to the specified origin endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] cdn_auth_configuration
+    #   The settings for using authorization headers between the
+    #   MediaPackage endpoint and your CDN.
+    #
+    #   For information about CDN authorization, see [CDN authorization in
+    #   Elemental MediaPackage][1] in the MediaPackage user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediapackage/latest/userguide/cdn-auth.html
+    #   @return [Types::CdnAuthConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/PutOriginEndpointPolicyRequest AWS API Documentation
     #
     class PutOriginEndpointPolicyRequest < Struct.new(
       :channel_group_name,
       :channel_name,
       :origin_endpoint_name,
-      :policy)
+      :policy,
+      :cdn_auth_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3900,6 +4119,12 @@ module Aws::MediaPackageV2
     #   A DASH manifest configuration.
     #   @return [Array<Types::CreateDashManifestConfiguration>]
     #
+    # @!attribute [rw] mss_manifests
+    #   A list of Microsoft Smooth Streaming (MSS) manifest configurations
+    #   to update for the origin endpoint. This replaces the existing MSS
+    #   manifest configurations.
+    #   @return [Array<Types::CreateMssManifestConfiguration>]
+    #
     # @!attribute [rw] force_endpoint_error_configuration
     #   The failover settings for the endpoint.
     #   @return [Types::ForceEndpointErrorConfiguration]
@@ -3923,6 +4148,7 @@ module Aws::MediaPackageV2
       :hls_manifests,
       :low_latency_hls_manifests,
       :dash_manifests,
+      :mss_manifests,
       :force_endpoint_error_configuration,
       :etag)
       SENSITIVE = []
@@ -3986,6 +4212,11 @@ module Aws::MediaPackageV2
     #   A low-latency HLS manifest configuration.
     #   @return [Array<Types::GetLowLatencyHlsManifestConfiguration>]
     #
+    # @!attribute [rw] mss_manifests
+    #   The updated Microsoft Smooth Streaming (MSS) manifest configurations
+    #   for this origin endpoint.
+    #   @return [Array<Types::GetMssManifestConfiguration>]
+    #
     # @!attribute [rw] force_endpoint_error_configuration
     #   The failover settings for the endpoint.
     #   @return [Types::ForceEndpointErrorConfiguration]
@@ -4020,6 +4251,7 @@ module Aws::MediaPackageV2
       :startover_window_seconds,
       :hls_manifests,
       :low_latency_hls_manifests,
+      :mss_manifests,
       :force_endpoint_error_configuration,
       :etag,
       :tags,

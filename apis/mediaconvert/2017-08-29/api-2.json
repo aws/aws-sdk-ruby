@@ -1085,7 +1085,8 @@
       "enum": [
         "LC",
         "HEV1",
-        "HEV2"
+        "HEV2",
+        "XHE"
       ]
     },
     "AacCodingMode": {
@@ -1096,6 +1097,13 @@
         "CODING_MODE_1_1",
         "CODING_MODE_2_0",
         "CODING_MODE_5_1"
+      ]
+    },
+    "AacLoudnessMeasurementMode": {
+      "type": "string",
+      "enum": [
+        "PROGRAM",
+        "ANCHOR"
       ]
     },
     "AacRateControlMode": {
@@ -1131,6 +1139,14 @@
           "shape": "AacCodingMode",
           "locationName": "codingMode"
         },
+        "LoudnessMeasurementMode": {
+          "shape": "AacLoudnessMeasurementMode",
+          "locationName": "loudnessMeasurementMode"
+        },
+        "RapInterval": {
+          "shape": "__integerMin2000Max30000",
+          "locationName": "rapInterval"
+        },
         "RateControlMode": {
           "shape": "AacRateControlMode",
           "locationName": "rateControlMode"
@@ -1146,6 +1162,10 @@
         "Specification": {
           "shape": "AacSpecification",
           "locationName": "specification"
+        },
+        "TargetLoudnessRange": {
+          "shape": "__integerMin6Max16",
+          "locationName": "targetLoudnessRange"
         },
         "VbrQuality": {
           "shape": "AacVbrQuality",
@@ -3122,6 +3142,7 @@
         "AV1",
         "AVC",
         "HEVC",
+        "JPEG2000",
         "MJPEG",
         "MP4V",
         "MPEG2",
@@ -4984,7 +5005,7 @@
           "locationName": "channels"
         },
         "SampleRate": {
-          "shape": "__integerMin22050Max48000",
+          "shape": "__integerMin22050Max192000",
           "locationName": "sampleRate"
         }
       }
@@ -5029,7 +5050,8 @@
         "mp4",
         "quicktime",
         "matroska",
-        "webm"
+        "webm",
+        "mxf"
       ]
     },
     "FrameCaptureSettings": {
@@ -6773,6 +6795,10 @@
           "shape": "__listOf__stringPatternS3ASSETMAPXml",
           "locationName": "supplementalImps"
         },
+        "TamsSettings": {
+          "shape": "InputTamsSettings",
+          "locationName": "tamsSettings"
+        },
         "TimecodeSource": {
           "shape": "InputTimecodeSource",
           "locationName": "timecodeSource"
@@ -6889,6 +6915,27 @@
         "AUTO",
         "PSF"
       ]
+    },
+    "InputTamsSettings": {
+      "type": "structure",
+      "members": {
+        "AuthConnectionArn": {
+          "shape": "__stringPatternArnAwsAZ09EventsAZ090912ConnectionAZAZ09AF0936",
+          "locationName": "authConnectionArn"
+        },
+        "GapHandling": {
+          "shape": "TamsGapHandling",
+          "locationName": "gapHandling"
+        },
+        "SourceId": {
+          "shape": "__string",
+          "locationName": "sourceId"
+        },
+        "Timerange": {
+          "shape": "__stringPattern019090190908019090190908",
+          "locationName": "timerange"
+        }
+      }
     },
     "InputTemplate": {
       "type": "structure",
@@ -10494,6 +10541,14 @@
       "type": "structure",
       "members": {}
     },
+    "TamsGapHandling": {
+      "type": "string",
+      "enum": [
+        "SKIP_GAPS",
+        "FILL_WITH_BLACK",
+        "HOLD_LAST_FRAME"
+      ]
+    },
     "TeletextDestinationSettings": {
       "type": "structure",
       "members": {
@@ -12548,6 +12603,16 @@
       "min": 1,
       "max": 8
     },
+    "__integerMin2000Max30000": {
+      "type": "integer",
+      "min": 2000,
+      "max": 30000
+    },
+    "__integerMin22050Max192000": {
+      "type": "integer",
+      "min": 22050,
+      "max": 192000
+    },
     "__integerMin22050Max48000": {
       "type": "integer",
       "min": 22050,
@@ -12642,6 +12707,11 @@
       "type": "integer",
       "min": 64000,
       "max": 640000
+    },
+    "__integerMin6Max16": {
+      "type": "integer",
+      "min": 6,
+      "max": 16
     },
     "__integerMin8000Max192000": {
       "type": "integer",
@@ -13265,6 +13335,10 @@
       "type": "string",
       "pattern": "^([01][0-9]|2[0-4]):[0-5][0-9]:[0-5][0-9][:;][0-9]{2}(@[0-9]+(\\.[0-9]+)?(:[0-9]+)?)?$"
     },
+    "__stringPattern019090190908019090190908": {
+      "type": "string",
+      "pattern": "^(\\[|\\()?(-?(0|[1-9][0-9]*):(0|[1-9][0-9]{0,8}))?(_(-?(0|[1-9][0-9]*):(0|[1-9][0-9]{0,8}))?)?(\\]|\\))?$"
+    },
     "__stringPattern01D20305D205D": {
       "type": "string",
       "pattern": "^((([0-1]\\d)|(2[0-3]))(:[0-5]\\d){2}([:;][0-5]\\d))$"
@@ -13296,6 +13370,10 @@
     "__stringPatternAZaZ23AZaZ09": {
       "type": "string",
       "pattern": "^[A-Za-z]{2,3}(-[A-Za-z0-9-]+)?$"
+    },
+    "__stringPatternArnAwsAZ09EventsAZ090912ConnectionAZAZ09AF0936": {
+      "type": "string",
+      "pattern": "^arn:aws[a-z0-9-]*:events:[a-z0-9-]+:[0-9]{12}:connection/[a-zA-Z0-9-]+/[a-f0-9-]{36}$"
     },
     "__stringPatternArnAwsUsGovAcm": {
       "type": "string",

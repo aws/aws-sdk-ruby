@@ -59,8 +59,9 @@ module Aws::OpsWorksCM
     #     associated. By default only one organization named `default` can
     #     exist.
     #
-    #   * `CHEF_NODE_PUBLIC_KEY`: A PEM-formatted public key. This key is
-    #     required for the `chef-client` agent to access the Chef API.
+    #   * `CHEF_AUTOMATE_NODE_PUBLIC_KEY`: A PEM-formatted public key. This
+    #     key is required for the `chef-client` agent to access the Chef
+    #     API.
     #
     #   **Attributes accepted in a AssociateNode request for Puppet**
     #
@@ -201,12 +202,12 @@ module Aws::OpsWorksCM
     #   @return [Array<String>]
     #
     # @!attribute [rw] tools_version
-    #   The version of AWS OpsWorks CM-specific tools that is obtained from
-    #   the server when the backup is created.
+    #   The version of OpsWorks CM-specific tools that is obtained from the
+    #   server when the backup is created.
     #   @return [String]
     #
     # @!attribute [rw] user_arn
-    #   The IAM user ARN of the requester for manual backups. This field is
+    #   The user ARN of the requester for manual backups. This field is
     #   empty for automated backups.
     #   @return [String]
     #
@@ -250,8 +251,8 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A map that contains tag keys and tag values to attach to an AWS
-    #   OpsWorks-CM server backup.
+    #   A map that contains tag keys and tag values to attach to an OpsWorks
+    #   CM server backup.
     #
     #   * The key cannot be empty.
     #
@@ -266,8 +267,8 @@ module Aws::OpsWorksCM
     #   * Leading and trailing white spaces are trimmed from both the key
     #     and value.
     #
-    #   * A maximum of 50 user-applied tags is allowed for tag-supported AWS
-    #     OpsWorks-CM resources.
+    #   * A maximum of 50 user-applied tags is allowed for tag-supported
+    #     OpsWorks CM resources.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateBackupRequest AWS API Documentation
@@ -398,25 +399,20 @@ module Aws::OpsWorksCM
     #
     # @!attribute [rw] backup_retention_count
     #   The number of automated backups that you want to keep. Whenever a
-    #   new backup is created, AWS OpsWorks CM deletes the oldest backups if
+    #   new backup is created, OpsWorks CM deletes the oldest backups if
     #   this number is exceeded. The default value is `1`.
     #   @return [Integer]
     #
     # @!attribute [rw] server_name
     #   The name of the server. The server name must be unique within your
-    #   AWS account, within each region. Server names must start with a
-    #   letter; then letters, numbers, or hyphens (-) are allowed, up to a
-    #   maximum of 40 characters.
+    #   Amazon Web Services account, within each region. Server names must
+    #   start with a letter; then letters, numbers, or hyphens (-) are
+    #   allowed, up to a maximum of 40 characters.
     #   @return [String]
     #
     # @!attribute [rw] instance_profile_arn
     #   The ARN of the instance profile that your Amazon EC2 instances use.
-    #   Although the AWS OpsWorks console typically creates the instance
-    #   profile for you, if you are using API commands instead, run the
-    #   service-role-creation.yaml AWS CloudFormation template, located at
-    #   https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml.
-    #   This template creates a CloudFormation stack that includes the
-    #   instance profile you need.
+    #   The OpsWorks console typically creates the instance profile for you
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -430,9 +426,9 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] preferred_maintenance_window
-    #   The start time for a one-hour period each week during which AWS
-    #   OpsWorks CM performs maintenance on the instance. Valid values must
-    #   be specified in the following format: `DDD:HH:MM`. `MM` must be
+    #   The start time for a one-hour period each week during which OpsWorks
+    #   CM performs maintenance on the instance. Valid values must be
+    #   specified in the following format: `DDD:HH:MM`. `MM` must be
     #   specified as `00`. The specified time is in coordinated universal
     #   time (UTC). The default value is a random one-hour period on
     #   Tuesday, Wednesday, or Friday. See `TimeWindowDefinition` for more
@@ -443,9 +439,9 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] preferred_backup_window
-    #   The start time for a one-hour period during which AWS OpsWorks CM
-    #   backs up application-level data on your server if automated backups
-    #   are enabled. Valid values must be specified in one of the following
+    #   The start time for a one-hour period during which OpsWorks CM backs
+    #   up application-level data on your server if automated backups are
+    #   enabled. Valid values must be specified in one of the following
     #   formats:
     #
     #   * `HH:MM` for daily backups
@@ -468,20 +464,14 @@ module Aws::OpsWorksCM
     #   If you add this parameter, the specified security groups must be
     #   within the VPC that is specified by `SubnetIds`.
     #
-    #   If you do not specify this parameter, AWS OpsWorks CM creates one
-    #   new security group that uses TCP ports 22 and 443, open to 0.0.0.0/0
+    #   If you do not specify this parameter, OpsWorks CM creates one new
+    #   security group that uses TCP ports 22 and 443, open to 0.0.0.0/0
     #   (everyone).
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_role_arn
-    #   The service role that the AWS OpsWorks CM service backend uses to
-    #   work with your account. Although the AWS OpsWorks management console
-    #   typically creates the service role for you, if you are using the AWS
-    #   CLI or API commands, run the service-role-creation.yaml AWS
-    #   CloudFormation template, located at
-    #   https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml.
-    #   This template creates a CloudFormation stack that includes the
-    #   service role and instance profile that you need.
+    #   The service role that the OpsWorks CM service backend uses to work
+    #   with your account.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
@@ -505,9 +495,8 @@ module Aws::OpsWorksCM
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   A map that contains tag keys and tag values to attach to an AWS
-    #   OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise
-    #   server.
+    #   A map that contains tag keys and tag values to attach to an OpsWorks
+    #   for Chef Automate or OpsWorks for Puppet Enterprise server.
     #
     #   * The key cannot be empty.
     #
@@ -519,16 +508,16 @@ module Aws::OpsWorksCM
     #     Unicode letters, numbers, or separators, or the following special
     #     characters: `+ - = . _ : / @`
     #
-    #   * Leading and trailing white spaces are trimmed from both the key
-    #     and value.
+    #   * Leading and trailing spaces are trimmed from both the key and
+    #     value.
     #
-    #   * A maximum of 50 user-applied tags is allowed for any AWS
-    #     OpsWorks-CM server.
+    #   * A maximum of 50 user-applied tags is allowed for any OpsWorks CM
+    #     server.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] backup_id
-    #   If you specify this field, AWS OpsWorks CM creates the server by
-    #   using the backup represented by BackupId.
+    #   If you specify this field, OpsWorks CM creates the server by using
+    #   the backup represented by BackupId.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateServerRequest AWS API Documentation
@@ -758,9 +747,9 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] engine_attributes
-    #   Attributes specific to the node association. In Puppet, the attibute
-    #   PUPPET\_NODE\_CERT contains the signed certificate (the result of
-    #   the CSR).
+    #   Attributes specific to the node association. In Puppet, the
+    #   attribute PUPPET\_NODE\_CERT contains the signed certificate (the
+    #   result of the CSR).
     #   @return [Array<Types::EngineAttribute>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeNodeAssociationStatusResponse AWS API Documentation
@@ -920,8 +909,8 @@ module Aws::OpsWorksCM
     #   * **RunList** In Chef, a list of roles or recipes that are run in
     #     the specified order. In Puppet, this parameter is ignored.
     #
-    #   * **OrganizationName** In Chef, an organization name. AWS OpsWorks
-    #     for Chef Automate always creates the organization `default`. In
+    #   * **OrganizationName** In Chef, an organization name. OpsWorks for
+    #     Chef Automate always creates the organization `default`. In
     #     Puppet, this parameter is ignored.
     #
     #   * **NodeEnvironment** In Chef, a node environment (for example,
@@ -1009,9 +998,9 @@ module Aws::OpsWorksCM
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Number (ARN) of an AWS OpsWorks for Chef
-    #   Automate or AWS OpsWorks for Puppet Enterprise server for which you
-    #   want to show applied tags. For example,
+    #   The Amazon Resource Number (ARN) of an OpsWorks for Chef Automate or
+    #   OpsWorks for Puppet Enterprise server for which you want to show
+    #   applied tags. For example,
     #   `arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE`.
     #   @return [String]
     #
@@ -1191,14 +1180,14 @@ module Aws::OpsWorksCM
     # @!attribute [rw] engine_attributes
     #   The response of a createServer() request returns the master
     #   credential to access the server in EngineAttributes. These
-    #   credentials are not stored by AWS OpsWorks CM; they are returned
-    #   only as part of the result of createServer().
+    #   credentials are not stored by OpsWorks CM; they are returned only as
+    #   part of the result of createServer().
     #
     #   **Attributes returned in a createServer response for Chef**
     #
     #   * `CHEF_AUTOMATE_PIVOTAL_KEY`: A base64-encoded RSA private key that
-    #     is generated by AWS OpsWorks for Chef Automate. This private key
-    #     is required to access the Chef API.
+    #     is generated by OpsWorks for Chef Automate. This private key is
+    #     required to access the Chef API.
     #
     #   * `CHEF_STARTER_KIT`: A base64-encoded ZIP file. The ZIP file
     #     contains a Chef starter kit, which includes a README, a
@@ -1357,7 +1346,7 @@ module Aws::OpsWorksCM
     #     upgrade to Chef Automate 2, add this engine attribute to a
     #     `StartMaintenance` request and set the value to `true` to upgrade
     #     the server to Chef Automate 2. For more information, see [Upgrade
-    #     an AWS OpsWorks for Chef Automate Server to Chef Automate 2][1].
+    #     an OpsWorks for Chef Automate Server to Chef Automate 2][1].
     #
     #   ^
     #
@@ -1387,11 +1376,11 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
-    # A map that contains tag keys and tag values to attach to an AWS
-    # OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise
-    # server. Leading and trailing white spaces are trimmed from both the
-    # key and value. A maximum of 50 user-applied tags is allowed for
-    # tag-supported AWS OpsWorks-CM resources.
+    # A map that contains tag keys and tag values to attach to an OpsWorks
+    # for Chef Automate or OpsWorks for Puppet Enterprise server. Leading
+    # and trailing spaces are trimmed from both the key and value. A maximum
+    # of 50 user-applied tags is allowed for tag-supported OpsWorks CM
+    # resources.
     #
     # @!attribute [rw] key
     #   A tag key, such as `Stage` or `Name`. A tag key cannot be empty. The
@@ -1423,8 +1412,8 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A map that contains tag keys and tag values to attach to AWS
-    #   OpsWorks-CM servers or backups.
+    #   A map that contains tag keys and tag values to attach to OpsWorks CM
+    #   servers or backups.
     #
     #   * The key cannot be empty.
     #
@@ -1439,8 +1428,8 @@ module Aws::OpsWorksCM
     #   * Leading and trailing white spaces are trimmed from both the key
     #     and value.
     #
-    #   * A maximum of 50 user-applied tags is allowed for any AWS
-    #     OpsWorks-CM server or backup.
+    #   * A maximum of 50 user-applied tags is allowed for any OpsWorks CM
+    #     server or backup.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/TagResourceRequest AWS API Documentation

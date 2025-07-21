@@ -2177,6 +2177,62 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Creates an Upload job to ingest data for segment imports. The metadata
+    # is created for the job with the provided field mapping and unique key.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain. Domain should be exists for the upload
+    #   job to be created.
+    #
+    # @option params [required, String] :display_name
+    #   The unique name of the upload job. Could be a file name to identify
+    #   the upload job.
+    #
+    # @option params [required, Hash<String,Types::ObjectTypeField>] :fields
+    #   The mapping between CSV Columns and Profile Object attributes. A map
+    #   of the name and ObjectType field.
+    #
+    # @option params [required, String] :unique_key
+    #   The unique key columns for de-duping the profiles used to map data to
+    #   the profile.
+    #
+    # @option params [Integer] :data_expiry
+    #   The expiry duration for the profiles ingested with the job. If not
+    #   provided, the system default of 2 weeks is used.
+    #
+    # @return [Types::CreateUploadJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUploadJobResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_upload_job({
+    #     domain_name: "name", # required
+    #     display_name: "string1To255", # required
+    #     fields: { # required
+    #       "fieldName" => {
+    #         source: "text",
+    #         target: "text",
+    #         content_type: "STRING", # accepts STRING, NUMBER, PHONE_NUMBER, EMAIL_ADDRESS, NAME
+    #       },
+    #     },
+    #     unique_key: "text", # required
+    #     data_expiry: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateUploadJob AWS API Documentation
+    #
+    # @overload create_upload_job(params = {})
+    # @param [Hash] params ({})
+    def create_upload_job(params = {}, options = {})
+      req = build_request(:create_upload_job, params)
+      req.send_request(options)
+    end
+
     # Deletes an existing calculated attribute definition. Note that
     # deleting a default calculated attribute is possible, however once
     # deleted, you will be unable to undo that action and will need to
@@ -2598,9 +2654,9 @@ module Aws::CustomerProfiles
     #   resp.detected_profile_object_types #=> Array
     #   resp.detected_profile_object_types[0].source_last_updated_timestamp_format #=> String
     #   resp.detected_profile_object_types[0].fields #=> Hash
-    #   resp.detected_profile_object_types[0].fields["name"].source #=> String
-    #   resp.detected_profile_object_types[0].fields["name"].target #=> String
-    #   resp.detected_profile_object_types[0].fields["name"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
+    #   resp.detected_profile_object_types[0].fields["fieldName"].source #=> String
+    #   resp.detected_profile_object_types[0].fields["fieldName"].target #=> String
+    #   resp.detected_profile_object_types[0].fields["fieldName"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
     #   resp.detected_profile_object_types[0].keys #=> Hash
     #   resp.detected_profile_object_types[0].keys["name"] #=> Array
     #   resp.detected_profile_object_types[0].keys["name"][0].standard_identifiers #=> Array
@@ -3312,9 +3368,9 @@ module Aws::CustomerProfiles
     #   resp.max_available_profile_object_count #=> Integer
     #   resp.max_profile_object_count #=> Integer
     #   resp.fields #=> Hash
-    #   resp.fields["name"].source #=> String
-    #   resp.fields["name"].target #=> String
-    #   resp.fields["name"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
+    #   resp.fields["fieldName"].source #=> String
+    #   resp.fields["fieldName"].target #=> String
+    #   resp.fields["fieldName"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
@@ -3370,9 +3426,9 @@ module Aws::CustomerProfiles
     #   resp.allow_profile_creation #=> Boolean
     #   resp.source_last_updated_timestamp_format #=> String
     #   resp.fields #=> Hash
-    #   resp.fields["name"].source #=> String
-    #   resp.fields["name"].target #=> String
-    #   resp.fields["name"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
+    #   resp.fields["fieldName"].source #=> String
+    #   resp.fields["fieldName"].target #=> String
+    #   resp.fields["fieldName"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
@@ -3833,6 +3889,99 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def get_similar_profiles(params = {}, options = {})
       req = build_request(:get_similar_profiles, params)
+      req.send_request(options)
+    end
+
+    # This API retrieves the details of a specific upload job.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain containing the upload job.
+    #
+    # @option params [required, String] :job_id
+    #   The unique identifier of the upload job to retrieve.
+    #
+    # @return [Types::GetUploadJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUploadJobResponse#job_id #job_id} => String
+    #   * {Types::GetUploadJobResponse#display_name #display_name} => String
+    #   * {Types::GetUploadJobResponse#status #status} => String
+    #   * {Types::GetUploadJobResponse#status_reason #status_reason} => String
+    #   * {Types::GetUploadJobResponse#created_at #created_at} => Time
+    #   * {Types::GetUploadJobResponse#completed_at #completed_at} => Time
+    #   * {Types::GetUploadJobResponse#fields #fields} => Hash&lt;String,Types::ObjectTypeField&gt;
+    #   * {Types::GetUploadJobResponse#unique_key #unique_key} => String
+    #   * {Types::GetUploadJobResponse#results_summary #results_summary} => Types::ResultsSummary
+    #   * {Types::GetUploadJobResponse#data_expiry #data_expiry} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_upload_job({
+    #     domain_name: "name", # required
+    #     job_id: "uuid", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.display_name #=> String
+    #   resp.status #=> String, one of "CREATED", "IN_PROGRESS", "PARTIALLY_SUCCEEDED", "SUCCEEDED", "FAILED", "STOPPED"
+    #   resp.status_reason #=> String, one of "VALIDATION_FAILURE", "INTERNAL_FAILURE"
+    #   resp.created_at #=> Time
+    #   resp.completed_at #=> Time
+    #   resp.fields #=> Hash
+    #   resp.fields["fieldName"].source #=> String
+    #   resp.fields["fieldName"].target #=> String
+    #   resp.fields["fieldName"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
+    #   resp.unique_key #=> String
+    #   resp.results_summary.updated_records #=> Integer
+    #   resp.results_summary.created_records #=> Integer
+    #   resp.results_summary.failed_records #=> Integer
+    #   resp.data_expiry #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetUploadJob AWS API Documentation
+    #
+    # @overload get_upload_job(params = {})
+    # @param [Hash] params ({})
+    def get_upload_job(params = {}, options = {})
+      req = build_request(:get_upload_job, params)
+      req.send_request(options)
+    end
+
+    # This API retrieves the pre-signed URL and client token for uploading
+    # the file associated with the upload job.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain containing the upload job.
+    #
+    # @option params [required, String] :job_id
+    #   The unique identifier of the upload job to retrieve the upload path
+    #   for. This is generated from the CreateUploadJob API.
+    #
+    # @return [Types::GetUploadJobPathResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUploadJobPathResponse#url #url} => String
+    #   * {Types::GetUploadJobPathResponse#client_token #client_token} => String
+    #   * {Types::GetUploadJobPathResponse#valid_until #valid_until} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_upload_job_path({
+    #     domain_name: "name", # required
+    #     job_id: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.url #=> String
+    #   resp.client_token #=> String
+    #   resp.valid_until #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetUploadJobPath AWS API Documentation
+    #
+    # @overload get_upload_job_path(params = {})
+    # @param [Hash] params ({})
+    def get_upload_job_path(params = {}, options = {})
+      req = build_request(:get_upload_job_path, params)
       req.send_request(options)
     end
 
@@ -4742,6 +4891,54 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # This API retrieves a list of upload jobs for the specified domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain to list upload jobs for.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of upload jobs to return per page.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from the previous call to retrieve the next page
+    #   of results.
+    #
+    # @return [Types::ListUploadJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListUploadJobsResponse#next_token #next_token} => String
+    #   * {Types::ListUploadJobsResponse#items #items} => Array&lt;Types::UploadJobItem&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_upload_jobs({
+    #     domain_name: "name", # required
+    #     max_results: 1,
+    #     next_token: "token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.items #=> Array
+    #   resp.items[0].job_id #=> String
+    #   resp.items[0].display_name #=> String
+    #   resp.items[0].status #=> String, one of "CREATED", "IN_PROGRESS", "PARTIALLY_SUCCEEDED", "SUCCEEDED", "FAILED", "STOPPED"
+    #   resp.items[0].status_reason #=> String, one of "VALIDATION_FAILURE", "INTERNAL_FAILURE"
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].completed_at #=> Time
+    #   resp.items[0].data_expiry #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListUploadJobs AWS API Documentation
+    #
+    # @overload list_upload_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_upload_jobs(params = {}, options = {})
+      req = build_request(:list_upload_jobs, params)
+      req.send_request(options)
+    end
+
     # Query to list all workflows.
     #
     # @option params [required, String] :domain_name
@@ -5209,7 +5406,7 @@ module Aws::CustomerProfiles
     #     source_last_updated_timestamp_format: "string1To255",
     #     max_profile_object_count: 1,
     #     fields: {
-    #       "name" => {
+    #       "fieldName" => {
     #         source: "text",
     #         target: "text",
     #         content_type: "STRING", # accepts STRING, NUMBER, PHONE_NUMBER, EMAIL_ADDRESS, NAME
@@ -5240,9 +5437,9 @@ module Aws::CustomerProfiles
     #   resp.max_profile_object_count #=> Integer
     #   resp.max_available_profile_object_count #=> Integer
     #   resp.fields #=> Hash
-    #   resp.fields["name"].source #=> String
-    #   resp.fields["name"].target #=> String
-    #   resp.fields["name"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
+    #   resp.fields["fieldName"].source #=> String
+    #   resp.fields["fieldName"].target #=> String
+    #   resp.fields["fieldName"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
@@ -5420,6 +5617,59 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def search_profiles(params = {}, options = {})
       req = build_request(:search_profiles, params)
+      req.send_request(options)
+    end
+
+    # This API starts the processing of an upload job to ingest profile
+    # data.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain containing the upload job to start.
+    #
+    # @option params [required, String] :job_id
+    #   The unique identifier of the upload job to start.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_upload_job({
+    #     domain_name: "name", # required
+    #     job_id: "name", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/StartUploadJob AWS API Documentation
+    #
+    # @overload start_upload_job(params = {})
+    # @param [Hash] params ({})
+    def start_upload_job(params = {}, options = {})
+      req = build_request(:start_upload_job, params)
+      req.send_request(options)
+    end
+
+    # This API stops the processing of an upload job.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain containing the upload job to stop.
+    #
+    # @option params [required, String] :job_id
+    #   The unique identifier of the upload job to stop.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_upload_job({
+    #     domain_name: "name", # required
+    #     job_id: "name", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/StopUploadJob AWS API Documentation
+    #
+    # @overload stop_upload_job(params = {})
+    # @param [Hash] params ({})
+    def stop_upload_job(params = {}, options = {})
+      req = build_request(:stop_upload_job, params)
       req.send_request(options)
     end
 
@@ -6175,7 +6425,7 @@ module Aws::CustomerProfiles
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

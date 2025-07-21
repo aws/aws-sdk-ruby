@@ -621,7 +621,7 @@ module Aws::NetworkFlowMonitor
     # @example Response structure
     #
     #   resp.scope_id #=> String
-    #   resp.status #=> String, one of "SUCCEEDED", "IN_PROGRESS", "FAILED"
+    #   resp.status #=> String, one of "SUCCEEDED", "IN_PROGRESS", "FAILED", "DEACTIVATING", "DEACTIVATED"
     #   resp.scope_arn #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -1156,7 +1156,7 @@ module Aws::NetworkFlowMonitor
     # @example Response structure
     #
     #   resp.scope_id #=> String
-    #   resp.status #=> String, one of "SUCCEEDED", "IN_PROGRESS", "FAILED"
+    #   resp.status #=> String, one of "SUCCEEDED", "IN_PROGRESS", "FAILED", "DEACTIVATING", "DEACTIVATED"
     #   resp.scope_arn #=> String
     #   resp.targets #=> Array
     #   resp.targets[0].target_identifier.target_id.account_id #=> String
@@ -1256,7 +1256,7 @@ module Aws::NetworkFlowMonitor
     #
     #   resp.scopes #=> Array
     #   resp.scopes[0].scope_id #=> String
-    #   resp.scopes[0].status #=> String, one of "SUCCEEDED", "IN_PROGRESS", "FAILED"
+    #   resp.scopes[0].status #=> String, one of "SUCCEEDED", "IN_PROGRESS", "FAILED", "DEACTIVATING", "DEACTIVATED"
     #   resp.scopes[0].scope_arn #=> String
     #   resp.next_token #=> String
     #
@@ -1865,7 +1865,7 @@ module Aws::NetworkFlowMonitor
     # @example Response structure
     #
     #   resp.scope_id #=> String
-    #   resp.status #=> String, one of "SUCCEEDED", "IN_PROGRESS", "FAILED"
+    #   resp.status #=> String, one of "SUCCEEDED", "IN_PROGRESS", "FAILED", "DEACTIVATING", "DEACTIVATED"
     #   resp.scope_arn #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -1897,7 +1897,7 @@ module Aws::NetworkFlowMonitor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkflowmonitor'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

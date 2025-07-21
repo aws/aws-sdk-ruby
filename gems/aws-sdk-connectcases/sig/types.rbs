@@ -317,6 +317,15 @@ module Aws::ConnectCases
       SENSITIVE: []
     end
 
+    class DeleteCaseRequest
+      attr_accessor case_id: ::String
+      attr_accessor domain_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCaseResponse < Aws::EmptyStructure
+    end
+
     class DeleteCaseRuleRequest
       attr_accessor case_rule_id: ::String
       attr_accessor domain_id: ::String
@@ -350,6 +359,16 @@ module Aws::ConnectCases
     end
 
     class DeleteLayoutResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRelatedItemRequest
+      attr_accessor case_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor related_item_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRelatedItemResponse < Aws::EmptyStructure
     end
 
     class DeleteTemplateRequest

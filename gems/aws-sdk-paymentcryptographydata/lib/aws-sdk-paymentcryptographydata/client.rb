@@ -597,7 +597,7 @@ module Aws::PaymentCryptographyData
     #           shared_information: "SharedInformation", # required
     #         },
     #       },
-    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC, SHA_1
     #     },
     #   })
     #
@@ -765,7 +765,7 @@ module Aws::PaymentCryptographyData
     #           shared_information: "SharedInformation", # required
     #         },
     #       },
-    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC, SHA_1
     #     },
     #   })
     #
@@ -962,7 +962,7 @@ module Aws::PaymentCryptographyData
     #     key_identifier: "KeyArnOrKeyAliasType", # required
     #     message_data: "MessageDataType", # required
     #     generation_attributes: { # required
-    #       algorithm: "ISO9797_ALGORITHM1", # accepts ISO9797_ALGORITHM1, ISO9797_ALGORITHM3, CMAC, HMAC_SHA224, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512
+    #       algorithm: "ISO9797_ALGORITHM1", # accepts ISO9797_ALGORITHM1, ISO9797_ALGORITHM3, CMAC, HMAC, HMAC_SHA224, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512
     #       emv_mac: {
     #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
     #         primary_account_number: "PrimaryAccountNumberType", # required
@@ -1315,7 +1315,7 @@ module Aws::PaymentCryptographyData
     #           shared_information: "SharedInformation", # required
     #         },
     #       },
-    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC, SHA_1
     #     },
     #   })
     #
@@ -1473,7 +1473,7 @@ module Aws::PaymentCryptographyData
     #           shared_information: "SharedInformation", # required
     #         },
     #       },
-    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC, SHA_1
     #     },
     #     outgoing_wrapped_key: {
     #       wrapped_key_material: { # required
@@ -1487,7 +1487,7 @@ module Aws::PaymentCryptographyData
     #           shared_information: "SharedInformation", # required
     #         },
     #       },
-    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC, SHA_1
     #     },
     #   })
     #
@@ -1677,7 +1677,7 @@ module Aws::PaymentCryptographyData
     #           shared_information: "SharedInformation", # required
     #         },
     #       },
-    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC, SHA_1
     #     },
     #     outgoing_wrapped_key: {
     #       wrapped_key_material: { # required
@@ -1691,7 +1691,7 @@ module Aws::PaymentCryptographyData
     #           shared_information: "SharedInformation", # required
     #         },
     #       },
-    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC, SHA_1
     #     },
     #   })
     #
@@ -2023,7 +2023,7 @@ module Aws::PaymentCryptographyData
     #     message_data: "MessageDataType", # required
     #     mac: "MacType", # required
     #     verification_attributes: { # required
-    #       algorithm: "ISO9797_ALGORITHM1", # accepts ISO9797_ALGORITHM1, ISO9797_ALGORITHM3, CMAC, HMAC_SHA224, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512
+    #       algorithm: "ISO9797_ALGORITHM1", # accepts ISO9797_ALGORITHM1, ISO9797_ALGORITHM3, CMAC, HMAC, HMAC_SHA224, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512
     #       emv_mac: {
     #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
     #         primary_account_number: "PrimaryAccountNumberType", # required
@@ -2183,7 +2183,7 @@ module Aws::PaymentCryptographyData
     #           shared_information: "SharedInformation", # required
     #         },
     #       },
-    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC, SHA_1
     #     },
     #   })
     #
@@ -2221,7 +2221,7 @@ module Aws::PaymentCryptographyData
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-paymentcryptographydata'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

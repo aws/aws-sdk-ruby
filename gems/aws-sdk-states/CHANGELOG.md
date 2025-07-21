@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2025-07-17)
+------------------
+
+* Feature - Align input with style guidelines.
+
+1.91.0 (2025-07-16)
+------------------
+
+* Feature - Doc-only update to introduction, and edits to clarify input parameter and the set of control characters.
+
 1.90.0 (2025-06-02)
 ------------------
 

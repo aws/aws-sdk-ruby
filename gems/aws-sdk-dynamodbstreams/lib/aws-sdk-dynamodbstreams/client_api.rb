@@ -53,6 +53,8 @@ module Aws::DynamoDBStreams
     SequenceNumberRange = Shapes::StructureShape.new(name: 'SequenceNumberRange')
     Shard = Shapes::StructureShape.new(name: 'Shard')
     ShardDescriptionList = Shapes::ListShape.new(name: 'ShardDescriptionList')
+    ShardFilter = Shapes::StructureShape.new(name: 'ShardFilter')
+    ShardFilterType = Shapes::StringShape.new(name: 'ShardFilterType')
     ShardId = Shapes::StringShape.new(name: 'ShardId')
     ShardIterator = Shapes::StringShape.new(name: 'ShardIterator')
     ShardIteratorType = Shapes::StringShape.new(name: 'ShardIteratorType')
@@ -89,6 +91,7 @@ module Aws::DynamoDBStreams
     DescribeStreamInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamArn, required: true, location_name: "StreamArn"))
     DescribeStreamInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "Limit"))
     DescribeStreamInput.add_member(:exclusive_start_shard_id, Shapes::ShapeRef.new(shape: ShardId, location_name: "ExclusiveStartShardId"))
+    DescribeStreamInput.add_member(:shard_filter, Shapes::ShapeRef.new(shape: ShardFilter, location_name: "ShardFilter"))
     DescribeStreamInput.struct_class = Types::DescribeStreamInput
 
     DescribeStreamOutput.add_member(:stream_description, Shapes::ShapeRef.new(shape: StreamDescription, location_name: "StreamDescription"))
@@ -170,6 +173,10 @@ module Aws::DynamoDBStreams
     Shard.struct_class = Types::Shard
 
     ShardDescriptionList.member = Shapes::ShapeRef.new(shape: Shard)
+
+    ShardFilter.add_member(:type, Shapes::ShapeRef.new(shape: ShardFilterType, location_name: "Type"))
+    ShardFilter.add_member(:shard_id, Shapes::ShapeRef.new(shape: ShardId, location_name: "ShardId"))
+    ShardFilter.struct_class = Types::ShardFilter
 
     Stream.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamArn, location_name: "StreamArn"))
     Stream.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))

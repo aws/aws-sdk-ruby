@@ -72,12 +72,14 @@ module Aws::Synthetics
       attr_accessor s3_version: ::String
       attr_accessor zip_file: ::String
       attr_accessor handler: ::String
+      attr_accessor dependencies: ::Array[Types::Dependency]
       SENSITIVE: []
     end
 
     class CanaryCodeOutput
       attr_accessor source_location_arn: ::String
       attr_accessor handler: ::String
+      attr_accessor dependencies: ::Array[Types::Dependency]
       SENSITIVE: []
     end
 
@@ -219,6 +221,12 @@ module Aws::Synthetics
     end
 
     class DeleteGroupResponse < Aws::EmptyStructure
+    end
+
+    class Dependency
+      attr_accessor type: ("LambdaLayer")
+      attr_accessor reference: ::String
+      SENSITIVE: []
     end
 
     class DescribeCanariesLastRunRequest

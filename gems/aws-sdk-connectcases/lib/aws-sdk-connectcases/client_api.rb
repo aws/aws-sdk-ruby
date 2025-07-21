@@ -92,6 +92,8 @@ module Aws::ConnectCases
     CreateTemplateResponse = Shapes::StructureShape.new(name: 'CreateTemplateResponse')
     CreatedTime = Shapes::TimestampShape.new(name: 'CreatedTime', timestampFormat: "iso8601")
     CustomEntity = Shapes::StringShape.new(name: 'CustomEntity')
+    DeleteCaseRequest = Shapes::StructureShape.new(name: 'DeleteCaseRequest')
+    DeleteCaseResponse = Shapes::StructureShape.new(name: 'DeleteCaseResponse')
     DeleteCaseRuleRequest = Shapes::StructureShape.new(name: 'DeleteCaseRuleRequest')
     DeleteCaseRuleResponse = Shapes::StructureShape.new(name: 'DeleteCaseRuleResponse')
     DeleteDomainRequest = Shapes::StructureShape.new(name: 'DeleteDomainRequest')
@@ -100,6 +102,8 @@ module Aws::ConnectCases
     DeleteFieldResponse = Shapes::StructureShape.new(name: 'DeleteFieldResponse')
     DeleteLayoutRequest = Shapes::StructureShape.new(name: 'DeleteLayoutRequest')
     DeleteLayoutResponse = Shapes::StructureShape.new(name: 'DeleteLayoutResponse')
+    DeleteRelatedItemRequest = Shapes::StructureShape.new(name: 'DeleteRelatedItemRequest')
+    DeleteRelatedItemResponse = Shapes::StructureShape.new(name: 'DeleteRelatedItemResponse')
     DeleteTemplateRequest = Shapes::StructureShape.new(name: 'DeleteTemplateRequest')
     DeleteTemplateResponse = Shapes::StructureShape.new(name: 'DeleteTemplateResponse')
     Deleted = Shapes::BooleanShape.new(name: 'Deleted')
@@ -513,6 +517,12 @@ module Aws::ConnectCases
     CreateTemplateResponse.add_member(:template_id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location_name: "templateId"))
     CreateTemplateResponse.struct_class = Types::CreateTemplateResponse
 
+    DeleteCaseRequest.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, required: true, location: "uri", location_name: "caseId"))
+    DeleteCaseRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    DeleteCaseRequest.struct_class = Types::DeleteCaseRequest
+
+    DeleteCaseResponse.struct_class = Types::DeleteCaseResponse
+
     DeleteCaseRuleRequest.add_member(:case_rule_id, Shapes::ShapeRef.new(shape: CaseRuleId, required: true, location: "uri", location_name: "caseRuleId"))
     DeleteCaseRuleRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
     DeleteCaseRuleRequest.struct_class = Types::DeleteCaseRuleRequest
@@ -535,6 +545,13 @@ module Aws::ConnectCases
     DeleteLayoutRequest.struct_class = Types::DeleteLayoutRequest
 
     DeleteLayoutResponse.struct_class = Types::DeleteLayoutResponse
+
+    DeleteRelatedItemRequest.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, required: true, location: "uri", location_name: "caseId"))
+    DeleteRelatedItemRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    DeleteRelatedItemRequest.add_member(:related_item_id, Shapes::ShapeRef.new(shape: RelatedItemId, required: true, location: "uri", location_name: "relatedItemId"))
+    DeleteRelatedItemRequest.struct_class = Types::DeleteRelatedItemRequest
+
+    DeleteRelatedItemResponse.struct_class = Types::DeleteRelatedItemResponse
 
     DeleteTemplateRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
     DeleteTemplateRequest.add_member(:template_id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location: "uri", location_name: "templateId"))
@@ -1266,6 +1283,19 @@ module Aws::ConnectCases
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:delete_case, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCase"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/domains/{domainId}/cases/{caseId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCaseRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCaseResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:delete_case_rule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteCaseRule"
         o.http_method = "DELETE"
@@ -1320,6 +1350,19 @@ module Aws::ConnectCases
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_related_item, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRelatedItem"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/domains/{domainId}/cases/{caseId}/related-items/{relatedItemId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRelatedItemRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRelatedItemResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:delete_template, Seahorse::Model::Operation.new.tap do |o|

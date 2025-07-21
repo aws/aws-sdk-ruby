@@ -26,6 +26,7 @@ module Aws::DynamoDBStreams
       attr_accessor stream_arn: ::String
       attr_accessor limit: ::Integer
       attr_accessor exclusive_start_shard_id: ::String
+      attr_accessor shard_filter: Types::ShardFilter
       SENSITIVE: []
     end
 
@@ -125,6 +126,12 @@ module Aws::DynamoDBStreams
       attr_accessor shard_id: ::String
       attr_accessor sequence_number_range: Types::SequenceNumberRange
       attr_accessor parent_shard_id: ::String
+      SENSITIVE: []
+    end
+
+    class ShardFilter
+      attr_accessor type: ("CHILD_SHARDS")
+      attr_accessor shard_id: ::String
       SENSITIVE: []
     end
 

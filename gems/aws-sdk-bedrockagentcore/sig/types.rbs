@@ -1,0 +1,701 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::BedrockAgentCore
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ActorSummary
+      attr_accessor actor_id: ::String
+      SENSITIVE: []
+    end
+
+    class AutomationStream
+      attr_accessor stream_endpoint: ::String
+      attr_accessor stream_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class AutomationStreamUpdate
+      attr_accessor stream_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class Branch
+      attr_accessor root_event_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class BranchFilter
+      attr_accessor name: ::String
+      attr_accessor include_parent_branches: bool
+      SENSITIVE: []
+    end
+
+    class BrowserSessionStream
+      attr_accessor automation_stream: Types::AutomationStream
+      attr_accessor live_view_stream: Types::LiveViewStream
+      SENSITIVE: []
+    end
+
+    class BrowserSessionSummary
+      attr_accessor browser_identifier: ::String
+      attr_accessor session_id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("READY" | "TERMINATED")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CodeInterpreterResult
+      attr_accessor content: ::Array[Types::ContentBlock]
+      attr_accessor structured_content: Types::ToolResultStructuredContent
+      attr_accessor is_error: bool
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class CodeInterpreterSessionSummary
+      attr_accessor code_interpreter_identifier: ::String
+      attr_accessor session_id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("READY" | "TERMINATED")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class Content
+      attr_accessor text: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: [:text]
+
+      class Text < Content
+      end
+      class Unknown < Content
+      end
+    end
+
+    class ContentBlock
+      attr_accessor type: ("text" | "image" | "resource" | "resource_link")
+      attr_accessor text: ::String
+      attr_accessor data: ::String
+      attr_accessor mime_type: ::String
+      attr_accessor uri: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor size: ::Integer
+      attr_accessor resource: Types::ResourceContent
+      SENSITIVE: []
+    end
+
+    class Conversational
+      attr_accessor content: Types::Content
+      attr_accessor role: ("ASSISTANT" | "USER" | "TOOL" | "OTHER")
+      SENSITIVE: []
+    end
+
+    class CreateEventInput
+      attr_accessor memory_id: ::String
+      attr_accessor actor_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor event_timestamp: ::Time
+      attr_accessor payload: ::Array[Types::PayloadType]
+      attr_accessor branch: Types::Branch
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEventOutput
+      attr_accessor event: Types::Event
+      SENSITIVE: []
+    end
+
+    class DeleteEventInput
+      attr_accessor memory_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor event_id: ::String
+      attr_accessor actor_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEventOutput
+      attr_accessor event_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMemoryRecordInput
+      attr_accessor memory_id: ::String
+      attr_accessor memory_record_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMemoryRecordOutput
+      attr_accessor memory_record_id: ::String
+      SENSITIVE: []
+    end
+
+    class Event
+      attr_accessor memory_id: ::String
+      attr_accessor actor_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor event_id: ::String
+      attr_accessor event_timestamp: ::Time
+      attr_accessor payload: ::Array[Types::PayloadType]
+      attr_accessor branch: Types::Branch
+      SENSITIVE: []
+    end
+
+    class FilterInput
+      attr_accessor branch: Types::BranchFilter
+      SENSITIVE: []
+    end
+
+    class GetBrowserSessionRequest
+      attr_accessor browser_identifier: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBrowserSessionResponse
+      attr_accessor browser_identifier: ::String
+      attr_accessor session_id: ::String
+      attr_accessor name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor view_port: Types::ViewPort
+      attr_accessor session_timeout_seconds: ::Integer
+      attr_accessor status: ("READY" | "TERMINATED")
+      attr_accessor streams: Types::BrowserSessionStream
+      attr_accessor session_replay_artifact: ::String
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetCodeInterpreterSessionRequest
+      attr_accessor code_interpreter_identifier: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCodeInterpreterSessionResponse
+      attr_accessor code_interpreter_identifier: ::String
+      attr_accessor session_id: ::String
+      attr_accessor name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor session_timeout_seconds: ::Integer
+      attr_accessor status: ("READY" | "TERMINATED")
+      SENSITIVE: []
+    end
+
+    class GetEventInput
+      attr_accessor memory_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor actor_id: ::String
+      attr_accessor event_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEventOutput
+      attr_accessor event: Types::Event
+      SENSITIVE: []
+    end
+
+    class GetMemoryRecordInput
+      attr_accessor memory_id: ::String
+      attr_accessor memory_record_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMemoryRecordOutput
+      attr_accessor memory_record: Types::MemoryRecord
+      SENSITIVE: []
+    end
+
+    class GetResourceApiKeyRequest
+      attr_accessor workload_identity_token: ::String
+      attr_accessor resource_credential_provider_name: ::String
+      SENSITIVE: [:workload_identity_token]
+    end
+
+    class GetResourceApiKeyResponse
+      attr_accessor api_key: ::String
+      SENSITIVE: [:api_key]
+    end
+
+    class GetResourceOauth2TokenRequest
+      attr_accessor workload_identity_token: ::String
+      attr_accessor user_id: ::String
+      attr_accessor resource_credential_provider_name: ::String
+      attr_accessor scopes: ::Array[::String]
+      attr_accessor oauth2_flow: ("USER_FEDERATION" | "M2M")
+      attr_accessor resource_oauth_2_return_url: ::String
+      attr_accessor force_authentication: bool
+      attr_accessor custom_parameters: ::Hash[::String, ::String]
+      SENSITIVE: [:workload_identity_token]
+    end
+
+    class GetResourceOauth2TokenResponse
+      attr_accessor authorization_url: ::String
+      attr_accessor access_token: ::String
+      SENSITIVE: [:access_token]
+    end
+
+    class GetWorkloadAccessTokenForJWTRequest
+      attr_accessor workload_name: ::String
+      attr_accessor user_token: ::String
+      SENSITIVE: [:user_token]
+    end
+
+    class GetWorkloadAccessTokenForJWTResponse
+      attr_accessor workload_access_token: ::String
+      SENSITIVE: [:workload_access_token]
+    end
+
+    class GetWorkloadAccessTokenForUserIdRequest
+      attr_accessor workload_name: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkloadAccessTokenForUserIdResponse
+      attr_accessor workload_access_token: ::String
+      SENSITIVE: [:workload_access_token]
+    end
+
+    class GetWorkloadAccessTokenRequest
+      attr_accessor workload_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkloadAccessTokenResponse
+      attr_accessor workload_access_token: ::String
+      SENSITIVE: [:workload_access_token]
+    end
+
+    class InputContentBlock
+      attr_accessor path: ::String
+      attr_accessor text: ::String
+      attr_accessor blob: ::String
+      SENSITIVE: [:blob]
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class InvalidInputException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvokeAgentRuntimeRequest
+      attr_accessor content_type: ::String
+      attr_accessor accept: ::String
+      attr_accessor mcp_session_id: ::String
+      attr_accessor runtime_session_id: ::String
+      attr_accessor mcp_protocol_version: ::String
+      attr_accessor runtime_user_id: ::String
+      attr_accessor trace_id: ::String
+      attr_accessor trace_parent: ::String
+      attr_accessor trace_state: ::String
+      attr_accessor baggage: ::String
+      attr_accessor agent_runtime_arn: ::String
+      attr_accessor qualifier: ::String
+      attr_accessor payload: ::String
+      SENSITIVE: [:payload]
+    end
+
+    class InvokeAgentRuntimeResponse
+      attr_accessor runtime_session_id: ::String
+      attr_accessor mcp_session_id: ::String
+      attr_accessor mcp_protocol_version: ::String
+      attr_accessor trace_id: ::String
+      attr_accessor trace_parent: ::String
+      attr_accessor trace_state: ::String
+      attr_accessor baggage: ::String
+      attr_accessor content_type: ::String
+      attr_accessor response: ::IO
+      attr_accessor status_code: ::Integer
+      SENSITIVE: [:response]
+    end
+
+    class InvokeCodeInterpreterRequest
+      attr_accessor code_interpreter_identifier: ::String
+      attr_accessor session_id: ::String
+      attr_accessor name: ("executeCode" | "executeCommand" | "readFiles" | "listFiles" | "removeFiles" | "writeFiles" | "startCommandExecution" | "getTask" | "stopTask")
+      attr_accessor arguments: Types::ToolArguments
+      SENSITIVE: []
+    end
+
+    class InvokeCodeInterpreterResponse
+      attr_accessor session_id: ::String
+      attr_accessor stream: Types::CodeInterpreterStreamOutput
+      SENSITIVE: []
+    end
+
+    class ListActorsInput
+      attr_accessor memory_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListActorsOutput
+      attr_accessor actor_summaries: ::Array[Types::ActorSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBrowserSessionsRequest
+      attr_accessor browser_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status: ("READY" | "TERMINATED")
+      SENSITIVE: []
+    end
+
+    class ListBrowserSessionsResponse
+      attr_accessor items: ::Array[Types::BrowserSessionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCodeInterpreterSessionsRequest
+      attr_accessor code_interpreter_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status: ("READY" | "TERMINATED")
+      SENSITIVE: []
+    end
+
+    class ListCodeInterpreterSessionsResponse
+      attr_accessor items: ::Array[Types::CodeInterpreterSessionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventsInput
+      attr_accessor memory_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor actor_id: ::String
+      attr_accessor include_payloads: bool
+      attr_accessor filter: Types::FilterInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventsOutput
+      attr_accessor events: ::Array[Types::Event]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMemoryRecordsInput
+      attr_accessor memory_id: ::String
+      attr_accessor namespace: ::String
+      attr_accessor memory_strategy_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMemoryRecordsOutput
+      attr_accessor memory_record_summaries: ::Array[Types::MemoryRecordSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSessionsInput
+      attr_accessor memory_id: ::String
+      attr_accessor actor_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSessionsOutput
+      attr_accessor session_summaries: ::Array[Types::SessionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LiveViewStream
+      attr_accessor stream_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class MemoryContent
+      attr_accessor text: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: [:text]
+
+      class Text < MemoryContent
+      end
+      class Unknown < MemoryContent
+      end
+    end
+
+    class MemoryRecord
+      attr_accessor memory_record_id: ::String
+      attr_accessor content: Types::MemoryContent
+      attr_accessor memory_strategy_id: ::String
+      attr_accessor namespaces: ::Array[::String]
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class MemoryRecordSummary
+      attr_accessor memory_record_id: ::String
+      attr_accessor content: Types::MemoryContent
+      attr_accessor memory_strategy_id: ::String
+      attr_accessor namespaces: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class PayloadType
+      attr_accessor conversational: Types::Conversational
+      attr_accessor blob: untyped
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Conversational < PayloadType
+      end
+      class Blob < PayloadType
+      end
+      class Unknown < PayloadType
+      end
+    end
+
+    class ResourceContent
+      attr_accessor type: ("text" | "blob")
+      attr_accessor uri: ::String
+      attr_accessor mime_type: ::String
+      attr_accessor text: ::String
+      attr_accessor blob: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class RetrieveMemoryRecordsInput
+      attr_accessor memory_id: ::String
+      attr_accessor namespace: ::String
+      attr_accessor search_criteria: Types::SearchCriteria
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class RetrieveMemoryRecordsOutput
+      attr_accessor memory_record_summaries: ::Array[Types::MemoryRecordSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class RuntimeClientError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SearchCriteria
+      attr_accessor search_query: ::String
+      attr_accessor memory_strategy_id: ::String
+      attr_accessor top_k: ::Integer
+      SENSITIVE: [:search_query]
+    end
+
+    class ServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class SessionSummary
+      attr_accessor session_id: ::String
+      attr_accessor actor_id: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class StartBrowserSessionRequest
+      attr_accessor browser_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor session_timeout_seconds: ::Integer
+      attr_accessor view_port: Types::ViewPort
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartBrowserSessionResponse
+      attr_accessor browser_identifier: ::String
+      attr_accessor session_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor streams: Types::BrowserSessionStream
+      SENSITIVE: []
+    end
+
+    class StartCodeInterpreterSessionRequest
+      attr_accessor code_interpreter_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor session_timeout_seconds: ::Integer
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartCodeInterpreterSessionResponse
+      attr_accessor code_interpreter_identifier: ::String
+      attr_accessor session_id: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class StopBrowserSessionRequest
+      attr_accessor browser_identifier: ::String
+      attr_accessor session_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StopBrowserSessionResponse
+      attr_accessor browser_identifier: ::String
+      attr_accessor session_id: ::String
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class StopCodeInterpreterSessionRequest
+      attr_accessor code_interpreter_identifier: ::String
+      attr_accessor session_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StopCodeInterpreterSessionResponse
+      attr_accessor code_interpreter_identifier: ::String
+      attr_accessor session_id: ::String
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class StreamUpdate
+      attr_accessor automation_stream_update: Types::AutomationStreamUpdate
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AutomationStreamUpdate < StreamUpdate
+      end
+      class Unknown < StreamUpdate
+      end
+    end
+
+    class ThrottledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ToolArguments
+      attr_accessor code: ::String
+      attr_accessor language: ("python" | "javascript" | "typescript")
+      attr_accessor clear_context: bool
+      attr_accessor command: ::String
+      attr_accessor path: ::String
+      attr_accessor paths: ::Array[::String]
+      attr_accessor content: ::Array[Types::InputContentBlock]
+      attr_accessor directory_path: ::String
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class ToolResultStructuredContent
+      attr_accessor task_id: ::String
+      attr_accessor task_status: ("submitted" | "working" | "completed" | "canceled" | "failed")
+      attr_accessor stdout: ::String
+      attr_accessor stderr: ::String
+      attr_accessor exit_code: ::Integer
+      attr_accessor execution_time: ::Float
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBrowserStreamRequest
+      attr_accessor browser_identifier: ::String
+      attr_accessor session_id: ::String
+      attr_accessor stream_update: Types::StreamUpdate
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBrowserStreamResponse
+      attr_accessor browser_identifier: ::String
+      attr_accessor session_id: ::String
+      attr_accessor streams: Types::BrowserSessionStream
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("CannotParse" | "FieldValidationFailed" | "IdempotentParameterMismatchException" | "EventInOtherSession" | "ResourceConflict")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ViewPort
+      attr_accessor width: ::Integer
+      attr_accessor height: ::Integer
+      SENSITIVE: []
+    end
+
+    class CodeInterpreterStreamOutput < Enumerator[untyped, untyped]
+      def event_types: () -> [:result, :access_denied_exception, :conflict_exception, :internal_server_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :validation_exception]
+    end
+  end
+end

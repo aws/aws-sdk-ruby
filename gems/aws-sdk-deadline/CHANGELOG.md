@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2025-07-03)
+------------------
+
+* Feature - Added fields for output manifest reporting and task chunking parameters
+
 1.28.0 (2025-06-26)
 ------------------
 

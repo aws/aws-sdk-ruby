@@ -1130,6 +1130,7 @@ module Aws::Deadline
       attr_accessor progress_message: ::String
       attr_accessor definition: Types::SessionActionDefinition
       attr_accessor acquired_limits: ::Array[Types::AcquiredLimit]
+      attr_accessor manifests: ::Array[Types::TaskRunManifestPropertiesResponse]
       SENSITIVE: [:progress_message]
     end
 
@@ -2288,6 +2289,7 @@ module Aws::Deadline
       attr_accessor worker_updated_at: ::Time
       attr_accessor progress_percent: ::Float
       attr_accessor definition: Types::SessionActionDefinitionSummary
+      attr_accessor manifests: ::Array[Types::TaskRunManifestPropertiesResponse]
       SENSITIVE: []
     end
 
@@ -2412,7 +2414,7 @@ module Aws::Deadline
 
     class StepParameter
       attr_accessor name: ::String
-      attr_accessor type: ("INT" | "FLOAT" | "STRING" | "PATH")
+      attr_accessor type: ("INT" | "FLOAT" | "STRING" | "PATH" | "CHUNK_INT")
       SENSITIVE: []
     end
 
@@ -2497,6 +2499,7 @@ module Aws::Deadline
       attr_accessor float: ::String
       attr_accessor string: ::String
       attr_accessor path: ::String
+      attr_accessor chunk_int: ::String
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -2508,8 +2511,22 @@ module Aws::Deadline
       end
       class Path < TaskParameterValue
       end
+      class ChunkInt < TaskParameterValue
+      end
       class Unknown < TaskParameterValue
       end
+    end
+
+    class TaskRunManifestPropertiesRequest
+      attr_accessor output_manifest_path: ::String
+      attr_accessor output_manifest_hash: ::String
+      SENSITIVE: []
+    end
+
+    class TaskRunManifestPropertiesResponse
+      attr_accessor output_manifest_path: ::String
+      attr_accessor output_manifest_hash: ::String
+      SENSITIVE: []
     end
 
     class TaskRunSessionActionDefinition
@@ -2522,7 +2539,8 @@ module Aws::Deadline
     class TaskRunSessionActionDefinitionSummary
       attr_accessor task_id: ::String
       attr_accessor step_id: ::String
-      SENSITIVE: []
+      attr_accessor parameters: ::Hash[::String, Types::TaskParameterValue]
+      SENSITIVE: [:parameters]
     end
 
     class TaskSearchSummary
@@ -2807,6 +2825,7 @@ module Aws::Deadline
       attr_accessor ended_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor progress_percent: ::Float
+      attr_accessor manifests: ::Array[Types::TaskRunManifestPropertiesRequest]
       SENSITIVE: [:progress_message]
     end
 

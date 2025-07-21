@@ -23,6 +23,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Bucket.html#bucket_region-instance_method
       def bucket_region: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Bucket.html#bucket_arn-instance_method
+      def bucket_arn: () -> ::String
+
       def client: () -> Client
 
 
@@ -56,7 +59,13 @@ module Aws
                       bucket: {
                         data_redundancy: ("SingleAvailabilityZone" | "SingleLocalZone")?,
                         type: ("Directory")?
-                      }?
+                      }?,
+                      tags: Array[
+                        {
+                          key: ::String,
+                          value: ::String
+                        },
+                      ]?
                     },
                     ?grant_full_control: ::String,
                     ?grant_read: ::String,

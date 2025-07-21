@@ -921,6 +921,7 @@ module Aws::GuardDuty
     CreateIPSetRequest.add_member(:activate, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "activate"))
     CreateIPSetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateIPSetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateIPSetRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "expectedBucketOwner"))
     CreateIPSetRequest.struct_class = Types::CreateIPSetRequest
 
     CreateIPSetResponse.add_member(:ip_set_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ipSetId"))
@@ -972,6 +973,7 @@ module Aws::GuardDuty
     CreateThreatIntelSetRequest.add_member(:activate, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "activate"))
     CreateThreatIntelSetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateThreatIntelSetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateThreatIntelSetRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "expectedBucketOwner"))
     CreateThreatIntelSetRequest.struct_class = Types::CreateThreatIntelSetRequest
 
     CreateThreatIntelSetResponse.add_member(:threat_intel_set_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "threatIntelSetId"))
@@ -1420,6 +1422,7 @@ module Aws::GuardDuty
     GetIPSetResponse.add_member(:location, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "location"))
     GetIPSetResponse.add_member(:status, Shapes::ShapeRef.new(shape: IpSetStatus, required: true, location_name: "status"))
     GetIPSetResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetIPSetResponse.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "expectedBucketOwner"))
     GetIPSetResponse.struct_class = Types::GetIPSetResponse
 
     GetInvitationsCountRequest.struct_class = Types::GetInvitationsCountRequest
@@ -1489,6 +1492,7 @@ module Aws::GuardDuty
     GetThreatIntelSetResponse.add_member(:location, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "location"))
     GetThreatIntelSetResponse.add_member(:status, Shapes::ShapeRef.new(shape: ThreatIntelSetStatus, required: true, location_name: "status"))
     GetThreatIntelSetResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetThreatIntelSetResponse.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "expectedBucketOwner"))
     GetThreatIntelSetResponse.struct_class = Types::GetThreatIntelSetResponse
 
     GetUsageStatisticsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
@@ -2560,6 +2564,7 @@ module Aws::GuardDuty
     UpdateIPSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     UpdateIPSetRequest.add_member(:location, Shapes::ShapeRef.new(shape: Location, location_name: "location"))
     UpdateIPSetRequest.add_member(:activate, Shapes::ShapeRef.new(shape: Boolean, location_name: "activate"))
+    UpdateIPSetRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "expectedBucketOwner"))
     UpdateIPSetRequest.struct_class = Types::UpdateIPSetRequest
 
     UpdateIPSetResponse.struct_class = Types::UpdateIPSetResponse
@@ -2613,6 +2618,7 @@ module Aws::GuardDuty
     UpdateThreatIntelSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     UpdateThreatIntelSetRequest.add_member(:location, Shapes::ShapeRef.new(shape: Location, location_name: "location"))
     UpdateThreatIntelSetRequest.add_member(:activate, Shapes::ShapeRef.new(shape: Boolean, location_name: "activate"))
+    UpdateThreatIntelSetRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "expectedBucketOwner"))
     UpdateThreatIntelSetRequest.struct_class = Types::UpdateThreatIntelSetRequest
 
     UpdateThreatIntelSetResponse.struct_class = Types::UpdateThreatIntelSetResponse
@@ -2783,6 +2789,7 @@ module Aws::GuardDuty
         o.output = Shapes::ShapeRef.new(shape: CreateIPSetResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:create_malware_protection_plan, Seahorse::Model::Operation.new.tap do |o|
@@ -2835,6 +2842,7 @@ module Aws::GuardDuty
         o.output = Shapes::ShapeRef.new(shape: CreateThreatIntelSetResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:decline_invitations, Seahorse::Model::Operation.new.tap do |o|
@@ -3494,6 +3502,7 @@ module Aws::GuardDuty
         o.output = Shapes::ShapeRef.new(shape: UpdateIPSetResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:update_malware_protection_plan, Seahorse::Model::Operation.new.tap do |o|
@@ -3556,6 +3565,7 @@ module Aws::GuardDuty
         o.output = Shapes::ShapeRef.new(shape: UpdateThreatIntelSetResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
     end
 

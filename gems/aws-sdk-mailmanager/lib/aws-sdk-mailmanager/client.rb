@@ -480,17 +480,17 @@ module Aws::MailManager
     # request. The resulting Amazon Resource Name (ARN) can be used in a
     # conditional statement for a rule set or traffic policy.
     #
-    # @option params [required, String] :addon_subscription_id
-    #   The unique ID of a previously created subscription that an Add On
-    #   instance is created for. You can only have one instance per
-    #   subscription.
-    #
     # @option params [String] :client_token
     #   A unique token that Amazon SES uses to recognize subsequent retries of
     #   the same request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [required, String] :addon_subscription_id
+    #   The unique ID of a previously created subscription that an Add On
+    #   instance is created for. You can only have one instance per
+    #   subscription.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags used to organize, track, or control access for the resource.
@@ -504,8 +504,8 @@ module Aws::MailManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_addon_instance({
-    #     addon_subscription_id: "AddonSubscriptionId", # required
     #     client_token: "IdempotencyToken",
+    #     addon_subscription_id: "AddonSubscriptionId", # required
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -531,16 +531,16 @@ module Aws::MailManager
     # its terms of use and additional pricing. The subscription can then be
     # used to create an instance for use in rule sets or traffic policies.
     #
-    # @option params [required, String] :addon_name
-    #   The name of the Add On to subscribe to. You can only have one
-    #   subscription for each Add On name.
-    #
     # @option params [String] :client_token
     #   A unique token that Amazon SES uses to recognize subsequent retries of
     #   the same request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [required, String] :addon_name
+    #   The name of the Add On to subscribe to. You can only have one
+    #   subscription for each Add On name.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags used to organize, track, or control access for the resource.
@@ -554,8 +554,8 @@ module Aws::MailManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_addon_subscription({
-    #     addon_name: "AddonName", # required
     #     client_token: "IdempotencyToken",
+    #     addon_name: "AddonName", # required
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -579,15 +579,15 @@ module Aws::MailManager
 
     # Creates a new address list.
     #
-    # @option params [required, String] :address_list_name
-    #   A user-friendly name for the address list.
-    #
     # @option params [String] :client_token
     #   A unique token that Amazon SES uses to recognize subsequent retries of
     #   the same request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [required, String] :address_list_name
+    #   A user-friendly name for the address list.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags used to organize, track, or control access for the resource.
@@ -601,8 +601,8 @@ module Aws::MailManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_address_list({
-    #     address_list_name: "AddressListName", # required
     #     client_token: "IdempotencyToken",
+    #     address_list_name: "AddressListName", # required
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -626,9 +626,6 @@ module Aws::MailManager
 
     # Creates an import job for an address list.
     #
-    # @option params [required, String] :address_list_id
-    #   The unique identifier of the address list for importing addresses to.
-    #
     # @option params [String] :client_token
     #   A unique token that Amazon SES uses to recognize subsequent retries of
     #   the same request.
@@ -636,11 +633,14 @@ module Aws::MailManager
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, Types::ImportDataFormat] :import_data_format
-    #   The format of the input for an import job.
+    # @option params [required, String] :address_list_id
+    #   The unique identifier of the address list for importing addresses to.
     #
     # @option params [required, String] :name
     #   A user-friendly name for the import job.
+    #
+    # @option params [required, Types::ImportDataFormat] :import_data_format
+    #   The format of the input for an import job.
     #
     # @return [Types::CreateAddressListImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -650,12 +650,12 @@ module Aws::MailManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_address_list_import_job({
-    #     address_list_id: "AddressListId", # required
     #     client_token: "IdempotencyToken",
+    #     address_list_id: "AddressListId", # required
+    #     name: "JobName", # required
     #     import_data_format: { # required
     #       import_data_type: "CSV", # required, accepts CSV, JSON
     #     },
-    #     name: "JobName", # required
     #   })
     #
     # @example Response structure
@@ -674,22 +674,22 @@ module Aws::MailManager
 
     # Creates a new email archive resource for storing and retaining emails.
     #
-    # @option params [required, String] :archive_name
-    #   A unique name for the new archive.
-    #
     # @option params [String] :client_token
     #   A unique token Amazon SES uses to recognize retries of this request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [String] :kms_key_arn
-    #   The Amazon Resource Name (ARN) of the KMS key for encrypting emails in
-    #   the archive.
+    # @option params [required, String] :archive_name
+    #   A unique name for the new archive.
     #
     # @option params [Types::ArchiveRetention] :retention
     #   The period for retaining emails in the archive before automatic
     #   deletion.
+    #
+    # @option params [String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key for encrypting emails in
+    #   the archive.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags used to organize, track, or control access for the resource.
@@ -703,12 +703,12 @@ module Aws::MailManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_archive({
-    #     archive_name: "ArchiveNameString", # required
     #     client_token: "IdempotencyToken",
-    #     kms_key_arn: "KmsKeyArn",
+    #     archive_name: "ArchiveNameString", # required
     #     retention: {
     #       retention_period: "THREE_MONTHS", # accepts THREE_MONTHS, SIX_MONTHS, NINE_MONTHS, ONE_YEAR, EIGHTEEN_MONTHS, TWO_YEARS, THIRTY_MONTHS, THREE_YEARS, FOUR_YEARS, FIVE_YEARS, SIX_YEARS, SEVEN_YEARS, EIGHT_YEARS, NINE_YEARS, TEN_YEARS, PERMANENT
     #     },
+    #     kms_key_arn: "KmsKeyArn",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -739,64 +739,131 @@ module Aws::MailManager
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [required, String] :ingress_point_name
+    #   A user friendly name for an ingress endpoint resource.
+    #
+    # @option params [required, String] :type
+    #   The type of the ingress endpoint to create.
+    #
+    # @option params [required, String] :rule_set_id
+    #   The identifier of an existing rule set that you attach to an ingress
+    #   endpoint resource.
+    #
+    # @option params [required, String] :traffic_policy_id
+    #   The identifier of an existing traffic policy that you attach to an
+    #   ingress endpoint resource.
+    #
     # @option params [Types::IngressPointConfiguration] :ingress_point_configuration
     #   If you choose an Authenticated ingress endpoint, you must configure
     #   either an SMTP password or a secret ARN.
-    #
-    # @option params [required, String] :ingress_point_name
-    #   A user friendly name for an ingress endpoint resource.
     #
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   Specifies the network configuration for the ingress point. This allows
     #   you to create an IPv4-only, Dual-Stack, or PrivateLink type of ingress
     #   point. If not specified, the default network type is IPv4-only.
     #
-    # @option params [required, String] :rule_set_id
-    #   The identifier of an existing rule set that you attach to an ingress
-    #   endpoint resource.
-    #
     # @option params [Array<Types::Tag>] :tags
     #   The tags used to organize, track, or control access for the resource.
     #   For example, \{ "tags": \{"key1":"value1", "key2":"value2"}
     #   }.
     #
-    # @option params [required, String] :traffic_policy_id
-    #   The identifier of an existing traffic policy that you attach to an
-    #   ingress endpoint resource.
-    #
-    # @option params [required, String] :type
-    #   The type of the ingress endpoint to create.
-    #
     # @return [Types::CreateIngressPointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIngressPointResponse#ingress_point_id #ingress_point_id} => String
+    #
+    #
+    # @example Example: Create Open IngressPoint
+    #
+    #   resp = client.create_ingress_point({
+    #     ingress_point_name: "ingressPointName", 
+    #     rule_set_id: "rs-12345", 
+    #     tags: [
+    #       {
+    #         key: "key", 
+    #         value: "value", 
+    #       }, 
+    #     ], 
+    #     traffic_policy_id: "tp-12345", 
+    #     type: "OPEN", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     ingress_point_id: "inp-12345", 
+    #   }
+    #
+    # @example Example: Create Auth IngressPoint with Password
+    #
+    #   resp = client.create_ingress_point({
+    #     ingress_point_configuration: {
+    #       smtp_password: "smtpPassword", 
+    #     }, 
+    #     ingress_point_name: "ingressPointName", 
+    #     rule_set_id: "rs-12345", 
+    #     tags: [
+    #       {
+    #         key: "key", 
+    #         value: "value", 
+    #       }, 
+    #     ], 
+    #     traffic_policy_id: "tp-12345", 
+    #     type: "AUTH", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     ingress_point_id: "inp-12345", 
+    #   }
+    #
+    # @example Example: Create Auth IngressPoint with SecretsManager Secret
+    #
+    #   resp = client.create_ingress_point({
+    #     ingress_point_configuration: {
+    #       secret_arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:abcde", 
+    #     }, 
+    #     ingress_point_name: "ingressPointName", 
+    #     rule_set_id: "rs-12345", 
+    #     tags: [
+    #       {
+    #         key: "key", 
+    #         value: "value", 
+    #       }, 
+    #     ], 
+    #     traffic_policy_id: "tp-12345", 
+    #     type: "AUTH", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     ingress_point_id: "inp-12345", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_ingress_point({
     #     client_token: "IdempotencyToken",
-    #     ingress_point_configuration: {
-    #       secret_arn: "SecretArn",
-    #       smtp_password: "SmtpPassword",
-    #     },
     #     ingress_point_name: "IngressPointName", # required
+    #     type: "OPEN", # required, accepts OPEN, AUTH
+    #     rule_set_id: "RuleSetId", # required
+    #     traffic_policy_id: "TrafficPolicyId", # required
+    #     ingress_point_configuration: {
+    #       smtp_password: "SmtpPassword",
+    #       secret_arn: "SecretArn",
+    #     },
     #     network_configuration: {
-    #       private_network_configuration: {
-    #         vpc_endpoint_id: "VpcEndpointId", # required
-    #       },
     #       public_network_configuration: {
     #         ip_type: "IPV4", # required, accepts IPV4, DUAL_STACK
     #       },
+    #       private_network_configuration: {
+    #         vpc_endpoint_id: "VpcEndpointId", # required
+    #       },
     #     },
-    #     rule_set_id: "RuleSetId", # required
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     traffic_policy_id: "TrafficPolicyId", # required
-    #     type: "OPEN", # required, accepts OPEN, AUTH
     #   })
     #
     # @example Response structure
@@ -815,10 +882,6 @@ module Aws::MailManager
     # Creates a relay resource which can be used in rules to relay incoming
     # emails to defined relay destinations.
     #
-    # @option params [required, Types::RelayAuthentication] :authentication
-    #   Authentication for the relay destination server—specify the secretARN
-    #   where the SMTP credentials are stored.
-    #
     # @option params [String] :client_token
     #   A unique token that Amazon SES uses to recognize subsequent retries of
     #   the same request.
@@ -835,6 +898,10 @@ module Aws::MailManager
     # @option params [required, Integer] :server_port
     #   The destination relay server port.
     #
+    # @option params [required, Types::RelayAuthentication] :authentication
+    #   Authentication for the relay destination server—specify the secretARN
+    #   where the SMTP credentials are stored.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   The tags used to organize, track, or control access for the resource.
     #   For example, \{ "tags": \{"key1":"value1", "key2":"value2"}
@@ -847,15 +914,15 @@ module Aws::MailManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_relay({
-    #     authentication: { # required
-    #       no_authentication: {
-    #       },
-    #       secret_arn: "SecretArn",
-    #     },
     #     client_token: "IdempotencyToken",
     #     relay_name: "RelayName", # required
     #     server_name: "RelayServerName", # required
     #     server_port: 1, # required
+    #     authentication: { # required
+    #       secret_arn: "SecretArn",
+    #       no_authentication: {
+    #       },
+    #     },
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -908,15 +975,155 @@ module Aws::MailManager
     #     rule_set_name: "RuleSetName", # required
     #     rules: [ # required
     #       {
+    #         name: "RuleName",
+    #         conditions: [
+    #           {
+    #             boolean_expression: {
+    #               evaluate: { # required
+    #                 attribute: "READ_RECEIPT_REQUESTED", # accepts READ_RECEIPT_REQUESTED, TLS, TLS_WRAPPED
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
+    #                 is_in_address_list: {
+    #                   attribute: "RECIPIENT", # required, accepts RECIPIENT, MAIL_FROM, SENDER, FROM, TO, CC
+    #                   address_lists: ["AddressListArn"], # required
+    #                 },
+    #               },
+    #               operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
+    #             },
+    #             string_expression: {
+    #               evaluate: { # required
+    #                 attribute: "MAIL_FROM", # accepts MAIL_FROM, HELO, RECIPIENT, SENDER, FROM, SUBJECT, TO, CC
+    #                 mime_header_attribute: "MimeHeaderAttribute",
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
+    #               },
+    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
+    #               values: ["RuleStringValue"], # required
+    #             },
+    #             number_expression: {
+    #               evaluate: { # required
+    #                 attribute: "MESSAGE_SIZE", # accepts MESSAGE_SIZE
+    #               },
+    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUAL, GREATER_THAN_OR_EQUAL
+    #               value: 1.0, # required
+    #             },
+    #             ip_expression: {
+    #               evaluate: { # required
+    #                 attribute: "SOURCE_IP", # accepts SOURCE_IP
+    #               },
+    #               operator: "CIDR_MATCHES", # required, accepts CIDR_MATCHES, NOT_CIDR_MATCHES
+    #               values: ["RuleIpStringValue"], # required
+    #             },
+    #             verdict_expression: {
+    #               evaluate: { # required
+    #                 attribute: "SPF", # accepts SPF, DKIM
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
+    #               },
+    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #               values: ["PASS"], # required, accepts PASS, FAIL, GRAY, PROCESSING_FAILED
+    #             },
+    #             dmarc_expression: {
+    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #               values: ["NONE"], # required, accepts NONE, QUARANTINE, REJECT
+    #             },
+    #           },
+    #         ],
+    #         unless: [
+    #           {
+    #             boolean_expression: {
+    #               evaluate: { # required
+    #                 attribute: "READ_RECEIPT_REQUESTED", # accepts READ_RECEIPT_REQUESTED, TLS, TLS_WRAPPED
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
+    #                 is_in_address_list: {
+    #                   attribute: "RECIPIENT", # required, accepts RECIPIENT, MAIL_FROM, SENDER, FROM, TO, CC
+    #                   address_lists: ["AddressListArn"], # required
+    #                 },
+    #               },
+    #               operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
+    #             },
+    #             string_expression: {
+    #               evaluate: { # required
+    #                 attribute: "MAIL_FROM", # accepts MAIL_FROM, HELO, RECIPIENT, SENDER, FROM, SUBJECT, TO, CC
+    #                 mime_header_attribute: "MimeHeaderAttribute",
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
+    #               },
+    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
+    #               values: ["RuleStringValue"], # required
+    #             },
+    #             number_expression: {
+    #               evaluate: { # required
+    #                 attribute: "MESSAGE_SIZE", # accepts MESSAGE_SIZE
+    #               },
+    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUAL, GREATER_THAN_OR_EQUAL
+    #               value: 1.0, # required
+    #             },
+    #             ip_expression: {
+    #               evaluate: { # required
+    #                 attribute: "SOURCE_IP", # accepts SOURCE_IP
+    #               },
+    #               operator: "CIDR_MATCHES", # required, accepts CIDR_MATCHES, NOT_CIDR_MATCHES
+    #               values: ["RuleIpStringValue"], # required
+    #             },
+    #             verdict_expression: {
+    #               evaluate: { # required
+    #                 attribute: "SPF", # accepts SPF, DKIM
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
+    #               },
+    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #               values: ["PASS"], # required, accepts PASS, FAIL, GRAY, PROCESSING_FAILED
+    #             },
+    #             dmarc_expression: {
+    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #               values: ["NONE"], # required, accepts NONE, QUARANTINE, REJECT
+    #             },
+    #           },
+    #         ],
     #         actions: [ # required
     #           {
-    #             add_header: {
-    #               header_name: "HeaderName", # required
-    #               header_value: "HeaderValue", # required
+    #             drop: {
+    #             },
+    #             relay: {
+    #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
+    #               relay: "IdOrArn", # required
+    #               mail_from: "REPLACE", # accepts REPLACE, PRESERVE
     #             },
     #             archive: {
     #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
     #               target_archive: "NameOrArn", # required
+    #             },
+    #             write_to_s3: {
+    #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
+    #               role_arn: "IamRoleArn", # required
+    #               s3_bucket: "S3Bucket", # required
+    #               s3_prefix: "S3Prefix",
+    #               s3_sse_kms_key_id: "KmsKeyId",
+    #             },
+    #             send: {
+    #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
+    #               role_arn: "IamRoleArn", # required
+    #             },
+    #             add_header: {
+    #               header_name: "HeaderName", # required
+    #               header_value: "HeaderValue", # required
+    #             },
+    #             replace_recipient: {
+    #               replace_with: ["EmailAddress"],
     #             },
     #             deliver_to_mailbox: {
     #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
@@ -929,152 +1136,12 @@ module Aws::MailManager
     #               index_id: "QBusinessIndexId", # required
     #               role_arn: "IamRoleArn", # required
     #             },
-    #             drop: {
-    #             },
     #             publish_to_sns: {
     #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
+    #               topic_arn: "SnsTopicArn", # required
+    #               role_arn: "IamRoleArn", # required
     #               encoding: "UTF-8", # accepts UTF-8, BASE64
     #               payload_type: "HEADERS", # accepts HEADERS, CONTENT
-    #               role_arn: "IamRoleArn", # required
-    #               topic_arn: "SnsTopicArn", # required
-    #             },
-    #             relay: {
-    #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
-    #               mail_from: "REPLACE", # accepts REPLACE, PRESERVE
-    #               relay: "IdOrArn", # required
-    #             },
-    #             replace_recipient: {
-    #               replace_with: ["EmailAddress"],
-    #             },
-    #             send: {
-    #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
-    #               role_arn: "IamRoleArn", # required
-    #             },
-    #             write_to_s3: {
-    #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
-    #               role_arn: "IamRoleArn", # required
-    #               s3_bucket: "S3Bucket", # required
-    #               s3_prefix: "S3Prefix",
-    #               s3_sse_kms_key_id: "KmsKeyId",
-    #             },
-    #           },
-    #         ],
-    #         conditions: [
-    #           {
-    #             boolean_expression: {
-    #               evaluate: { # required
-    #                 analysis: {
-    #                   analyzer: "AnalyzerArn", # required
-    #                   result_field: "ResultField", # required
-    #                 },
-    #                 attribute: "READ_RECEIPT_REQUESTED", # accepts READ_RECEIPT_REQUESTED, TLS, TLS_WRAPPED
-    #                 is_in_address_list: {
-    #                   address_lists: ["AddressListArn"], # required
-    #                   attribute: "RECIPIENT", # required, accepts RECIPIENT, MAIL_FROM, SENDER, FROM, TO, CC
-    #                 },
-    #               },
-    #               operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
-    #             },
-    #             dmarc_expression: {
-    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               values: ["NONE"], # required, accepts NONE, QUARANTINE, REJECT
-    #             },
-    #             ip_expression: {
-    #               evaluate: { # required
-    #                 attribute: "SOURCE_IP", # accepts SOURCE_IP
-    #               },
-    #               operator: "CIDR_MATCHES", # required, accepts CIDR_MATCHES, NOT_CIDR_MATCHES
-    #               values: ["RuleIpStringValue"], # required
-    #             },
-    #             number_expression: {
-    #               evaluate: { # required
-    #                 attribute: "MESSAGE_SIZE", # accepts MESSAGE_SIZE
-    #               },
-    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUAL, GREATER_THAN_OR_EQUAL
-    #               value: 1.0, # required
-    #             },
-    #             string_expression: {
-    #               evaluate: { # required
-    #                 analysis: {
-    #                   analyzer: "AnalyzerArn", # required
-    #                   result_field: "ResultField", # required
-    #                 },
-    #                 attribute: "MAIL_FROM", # accepts MAIL_FROM, HELO, RECIPIENT, SENDER, FROM, SUBJECT, TO, CC
-    #                 mime_header_attribute: "MimeHeaderAttribute",
-    #               },
-    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
-    #               values: ["RuleStringValue"], # required
-    #             },
-    #             verdict_expression: {
-    #               evaluate: { # required
-    #                 analysis: {
-    #                   analyzer: "AnalyzerArn", # required
-    #                   result_field: "ResultField", # required
-    #                 },
-    #                 attribute: "SPF", # accepts SPF, DKIM
-    #               },
-    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               values: ["PASS"], # required, accepts PASS, FAIL, GRAY, PROCESSING_FAILED
-    #             },
-    #           },
-    #         ],
-    #         name: "RuleName",
-    #         unless: [
-    #           {
-    #             boolean_expression: {
-    #               evaluate: { # required
-    #                 analysis: {
-    #                   analyzer: "AnalyzerArn", # required
-    #                   result_field: "ResultField", # required
-    #                 },
-    #                 attribute: "READ_RECEIPT_REQUESTED", # accepts READ_RECEIPT_REQUESTED, TLS, TLS_WRAPPED
-    #                 is_in_address_list: {
-    #                   address_lists: ["AddressListArn"], # required
-    #                   attribute: "RECIPIENT", # required, accepts RECIPIENT, MAIL_FROM, SENDER, FROM, TO, CC
-    #                 },
-    #               },
-    #               operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
-    #             },
-    #             dmarc_expression: {
-    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               values: ["NONE"], # required, accepts NONE, QUARANTINE, REJECT
-    #             },
-    #             ip_expression: {
-    #               evaluate: { # required
-    #                 attribute: "SOURCE_IP", # accepts SOURCE_IP
-    #               },
-    #               operator: "CIDR_MATCHES", # required, accepts CIDR_MATCHES, NOT_CIDR_MATCHES
-    #               values: ["RuleIpStringValue"], # required
-    #             },
-    #             number_expression: {
-    #               evaluate: { # required
-    #                 attribute: "MESSAGE_SIZE", # accepts MESSAGE_SIZE
-    #               },
-    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUAL, GREATER_THAN_OR_EQUAL
-    #               value: 1.0, # required
-    #             },
-    #             string_expression: {
-    #               evaluate: { # required
-    #                 analysis: {
-    #                   analyzer: "AnalyzerArn", # required
-    #                   result_field: "ResultField", # required
-    #                 },
-    #                 attribute: "MAIL_FROM", # accepts MAIL_FROM, HELO, RECIPIENT, SENDER, FROM, SUBJECT, TO, CC
-    #                 mime_header_attribute: "MimeHeaderAttribute",
-    #               },
-    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
-    #               values: ["RuleStringValue"], # required
-    #             },
-    #             verdict_expression: {
-    #               evaluate: { # required
-    #                 analysis: {
-    #                   analyzer: "AnalyzerArn", # required
-    #                   result_field: "ResultField", # required
-    #                 },
-    #                 attribute: "SPF", # accepts SPF, DKIM
-    #               },
-    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               values: ["PASS"], # required, accepts PASS, FAIL, GRAY, PROCESSING_FAILED
     #             },
     #           },
     #         ],
@@ -1110,6 +1177,12 @@ module Aws::MailManager
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [required, String] :traffic_policy_name
+    #   A user-friendly name for the traffic policy resource.
+    #
+    # @option params [required, Array<Types::PolicyStatement>] :policy_statements
+    #   Conditional statements for filtering email traffic.
+    #
     # @option params [required, String] :default_action
     #   Default action instructs the traﬃc policy to either Allow or Deny
     #   (block) messages that fall outside of (or not addressed by) the
@@ -1119,44 +1192,65 @@ module Aws::MailManager
     #   The maximum message size in bytes of email which is allowed in by this
     #   traffic policy—anything larger will be blocked.
     #
-    # @option params [required, Array<Types::PolicyStatement>] :policy_statements
-    #   Conditional statements for filtering email traffic.
-    #
     # @option params [Array<Types::Tag>] :tags
     #   The tags used to organize, track, or control access for the resource.
     #   For example, \{ "tags": \{"key1":"value1", "key2":"value2"}
     #   }.
     #
-    # @option params [required, String] :traffic_policy_name
-    #   A user-friendly name for the traffic policy resource.
-    #
     # @return [Types::CreateTrafficPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTrafficPolicyResponse#traffic_policy_id #traffic_policy_id} => String
+    #
+    #
+    # @example Example: Create TrafficPolicy
+    #
+    #   resp = client.create_traffic_policy({
+    #     default_action: "DENY", 
+    #     policy_statements: [
+    #       {
+    #         action: "ALLOW", 
+    #         conditions: [
+    #           {
+    #             ip_expression: {
+    #               evaluate: {
+    #                 attribute: "SENDER_IP", 
+    #               }, 
+    #               operator: "CIDR_MATCHES", 
+    #               values: [
+    #                 "0.0.0.0/12", 
+    #               ], 
+    #             }, 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     traffic_policy_name: "trafficPolicyName", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     traffic_policy_id: "tp-13245", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_traffic_policy({
     #     client_token: "IdempotencyToken",
-    #     default_action: "ALLOW", # required, accepts ALLOW, DENY
-    #     max_message_size_bytes: 1,
+    #     traffic_policy_name: "TrafficPolicyName", # required
     #     policy_statements: [ # required
     #       {
-    #         action: "ALLOW", # required, accepts ALLOW, DENY
     #         conditions: [ # required
     #           {
-    #             boolean_expression: {
+    #             string_expression: {
     #               evaluate: { # required
+    #                 attribute: "RECIPIENT", # accepts RECIPIENT
     #                 analysis: {
     #                   analyzer: "AnalyzerArn", # required
     #                   result_field: "ResultField", # required
     #                 },
-    #                 is_in_address_list: {
-    #                   address_lists: ["AddressListArn"], # required
-    #                   attribute: "RECIPIENT", # required, accepts RECIPIENT
-    #                 },
     #               },
-    #               operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
+    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
+    #               values: ["String"], # required
     #             },
     #             ip_expression: {
     #               evaluate: { # required
@@ -1172,17 +1266,6 @@ module Aws::MailManager
     #               operator: "CIDR_MATCHES", # required, accepts CIDR_MATCHES, NOT_CIDR_MATCHES
     #               values: ["Ipv6Cidr"], # required
     #             },
-    #             string_expression: {
-    #               evaluate: { # required
-    #                 analysis: {
-    #                   analyzer: "AnalyzerArn", # required
-    #                   result_field: "ResultField", # required
-    #                 },
-    #                 attribute: "RECIPIENT", # accepts RECIPIENT
-    #               },
-    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
-    #               values: ["String"], # required
-    #             },
     #             tls_expression: {
     #               evaluate: { # required
     #                 attribute: "TLS_PROTOCOL", # accepts TLS_PROTOCOL
@@ -1190,17 +1273,32 @@ module Aws::MailManager
     #               operator: "MINIMUM_TLS_VERSION", # required, accepts MINIMUM_TLS_VERSION, IS
     #               value: "TLS1_2", # required, accepts TLS1_2, TLS1_3
     #             },
+    #             boolean_expression: {
+    #               evaluate: { # required
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
+    #                 is_in_address_list: {
+    #                   attribute: "RECIPIENT", # required, accepts RECIPIENT
+    #                   address_lists: ["AddressListArn"], # required
+    #                 },
+    #               },
+    #               operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
+    #             },
     #           },
     #         ],
+    #         action: "ALLOW", # required, accepts ALLOW, DENY
     #       },
     #     ],
+    #     default_action: "ALLOW", # required, accepts ALLOW, DENY
+    #     max_message_size_bytes: 1,
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     traffic_policy_name: "TrafficPolicyName", # required
     #   })
     #
     # @example Response structure
@@ -1317,6 +1415,17 @@ module Aws::MailManager
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Delete IngressPoint
+    #
+    #   resp = client.delete_ingress_point({
+    #     ingress_point_id: "inp-12345", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_ingress_point({
@@ -1383,6 +1492,17 @@ module Aws::MailManager
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Delete TrafficPolicy
+    #
+    #   resp = client.delete_traffic_policy({
+    #     traffic_policy_id: "tp-12345", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_traffic_policy({
@@ -1400,19 +1520,19 @@ module Aws::MailManager
 
     # Removes a member from an address list.
     #
-    # @option params [required, String] :address
-    #   The address to be removed from the address list.
-    #
     # @option params [required, String] :address_list_id
     #   The unique identifier of the address list to remove the address from.
+    #
+    # @option params [required, String] :address
+    #   The address to be removed from the address list.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.deregister_member_from_address_list({
-    #     address: "Address", # required
     #     address_list_id: "AddressListId", # required
+    #     address: "Address", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/DeregisterMemberFromAddressList AWS API Documentation
@@ -1431,9 +1551,9 @@ module Aws::MailManager
     #
     # @return [Types::GetAddonInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetAddonInstanceResponse#addon_instance_arn #addon_instance_arn} => String
-    #   * {Types::GetAddonInstanceResponse#addon_name #addon_name} => String
     #   * {Types::GetAddonInstanceResponse#addon_subscription_id #addon_subscription_id} => String
+    #   * {Types::GetAddonInstanceResponse#addon_name #addon_name} => String
+    #   * {Types::GetAddonInstanceResponse#addon_instance_arn #addon_instance_arn} => String
     #   * {Types::GetAddonInstanceResponse#created_timestamp #created_timestamp} => Time
     #
     # @example Request syntax with placeholder values
@@ -1444,9 +1564,9 @@ module Aws::MailManager
     #
     # @example Response structure
     #
-    #   resp.addon_instance_arn #=> String
-    #   resp.addon_name #=> String
     #   resp.addon_subscription_id #=> String
+    #   resp.addon_name #=> String
+    #   resp.addon_instance_arn #=> String
     #   resp.created_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetAddonInstance AWS API Documentation
@@ -1497,8 +1617,8 @@ module Aws::MailManager
     #
     # @return [Types::GetAddressListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetAddressListResponse#address_list_arn #address_list_arn} => String
     #   * {Types::GetAddressListResponse#address_list_id #address_list_id} => String
+    #   * {Types::GetAddressListResponse#address_list_arn #address_list_arn} => String
     #   * {Types::GetAddressListResponse#address_list_name #address_list_name} => String
     #   * {Types::GetAddressListResponse#created_timestamp #created_timestamp} => Time
     #   * {Types::GetAddressListResponse#last_updated_timestamp #last_updated_timestamp} => Time
@@ -1511,8 +1631,8 @@ module Aws::MailManager
     #
     # @example Response structure
     #
-    #   resp.address_list_arn #=> String
     #   resp.address_list_id #=> String
+    #   resp.address_list_arn #=> String
     #   resp.address_list_name #=> String
     #   resp.created_timestamp #=> Time
     #   resp.last_updated_timestamp #=> Time
@@ -1533,18 +1653,18 @@ module Aws::MailManager
     #
     # @return [Types::GetAddressListImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetAddressListImportJobResponse#address_list_id #address_list_id} => String
-    #   * {Types::GetAddressListImportJobResponse#completed_timestamp #completed_timestamp} => Time
-    #   * {Types::GetAddressListImportJobResponse#created_timestamp #created_timestamp} => Time
-    #   * {Types::GetAddressListImportJobResponse#error #error} => String
-    #   * {Types::GetAddressListImportJobResponse#failed_items_count #failed_items_count} => Integer
-    #   * {Types::GetAddressListImportJobResponse#import_data_format #import_data_format} => Types::ImportDataFormat
-    #   * {Types::GetAddressListImportJobResponse#imported_items_count #imported_items_count} => Integer
     #   * {Types::GetAddressListImportJobResponse#job_id #job_id} => String
     #   * {Types::GetAddressListImportJobResponse#name #name} => String
-    #   * {Types::GetAddressListImportJobResponse#pre_signed_url #pre_signed_url} => String
-    #   * {Types::GetAddressListImportJobResponse#start_timestamp #start_timestamp} => Time
     #   * {Types::GetAddressListImportJobResponse#status #status} => String
+    #   * {Types::GetAddressListImportJobResponse#pre_signed_url #pre_signed_url} => String
+    #   * {Types::GetAddressListImportJobResponse#imported_items_count #imported_items_count} => Integer
+    #   * {Types::GetAddressListImportJobResponse#failed_items_count #failed_items_count} => Integer
+    #   * {Types::GetAddressListImportJobResponse#import_data_format #import_data_format} => Types::ImportDataFormat
+    #   * {Types::GetAddressListImportJobResponse#address_list_id #address_list_id} => String
+    #   * {Types::GetAddressListImportJobResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::GetAddressListImportJobResponse#start_timestamp #start_timestamp} => Time
+    #   * {Types::GetAddressListImportJobResponse#completed_timestamp #completed_timestamp} => Time
+    #   * {Types::GetAddressListImportJobResponse#error #error} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1554,18 +1674,18 @@ module Aws::MailManager
     #
     # @example Response structure
     #
-    #   resp.address_list_id #=> String
-    #   resp.completed_timestamp #=> Time
-    #   resp.created_timestamp #=> Time
-    #   resp.error #=> String
-    #   resp.failed_items_count #=> Integer
-    #   resp.import_data_format.import_data_type #=> String, one of "CSV", "JSON"
-    #   resp.imported_items_count #=> Integer
     #   resp.job_id #=> String
     #   resp.name #=> String
-    #   resp.pre_signed_url #=> String
-    #   resp.start_timestamp #=> Time
     #   resp.status #=> String, one of "CREATED", "PROCESSING", "COMPLETED", "FAILED", "STOPPED"
+    #   resp.pre_signed_url #=> String
+    #   resp.imported_items_count #=> Integer
+    #   resp.failed_items_count #=> Integer
+    #   resp.import_data_format.import_data_type #=> String, one of "CSV", "JSON"
+    #   resp.address_list_id #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.start_timestamp #=> Time
+    #   resp.completed_timestamp #=> Time
+    #   resp.error #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetAddressListImportJob AWS API Documentation
     #
@@ -1584,14 +1704,14 @@ module Aws::MailManager
     #
     # @return [Types::GetArchiveResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetArchiveResponse#archive_arn #archive_arn} => String
     #   * {Types::GetArchiveResponse#archive_id #archive_id} => String
     #   * {Types::GetArchiveResponse#archive_name #archive_name} => String
+    #   * {Types::GetArchiveResponse#archive_arn #archive_arn} => String
     #   * {Types::GetArchiveResponse#archive_state #archive_state} => String
-    #   * {Types::GetArchiveResponse#created_timestamp #created_timestamp} => Time
-    #   * {Types::GetArchiveResponse#kms_key_arn #kms_key_arn} => String
-    #   * {Types::GetArchiveResponse#last_updated_timestamp #last_updated_timestamp} => Time
     #   * {Types::GetArchiveResponse#retention #retention} => Types::ArchiveRetention
+    #   * {Types::GetArchiveResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::GetArchiveResponse#last_updated_timestamp #last_updated_timestamp} => Time
+    #   * {Types::GetArchiveResponse#kms_key_arn #kms_key_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1601,14 +1721,14 @@ module Aws::MailManager
     #
     # @example Response structure
     #
-    #   resp.archive_arn #=> String
     #   resp.archive_id #=> String
     #   resp.archive_name #=> String
+    #   resp.archive_arn #=> String
     #   resp.archive_state #=> String, one of "ACTIVE", "PENDING_DELETION"
-    #   resp.created_timestamp #=> Time
-    #   resp.kms_key_arn #=> String
-    #   resp.last_updated_timestamp #=> Time
     #   resp.retention.retention_period #=> String, one of "THREE_MONTHS", "SIX_MONTHS", "NINE_MONTHS", "ONE_YEAR", "EIGHTEEN_MONTHS", "TWO_YEARS", "THIRTY_MONTHS", "THREE_YEARS", "FOUR_YEARS", "FIVE_YEARS", "SIX_YEARS", "SEVEN_YEARS", "EIGHT_YEARS", "NINE_YEARS", "TEN_YEARS", "PERMANENT"
+    #   resp.created_timestamp #=> Time
+    #   resp.last_updated_timestamp #=> Time
+    #   resp.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetArchive AWS API Documentation
     #
@@ -1628,12 +1748,12 @@ module Aws::MailManager
     # @return [Types::GetArchiveExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetArchiveExportResponse#archive_id #archive_id} => String
-    #   * {Types::GetArchiveExportResponse#export_destination_configuration #export_destination_configuration} => Types::ExportDestinationConfiguration
     #   * {Types::GetArchiveExportResponse#filters #filters} => Types::ArchiveFilters
     #   * {Types::GetArchiveExportResponse#from_timestamp #from_timestamp} => Time
-    #   * {Types::GetArchiveExportResponse#max_results #max_results} => Integer
-    #   * {Types::GetArchiveExportResponse#status #status} => Types::ExportStatus
     #   * {Types::GetArchiveExportResponse#to_timestamp #to_timestamp} => Time
+    #   * {Types::GetArchiveExportResponse#max_results #max_results} => Integer
+    #   * {Types::GetArchiveExportResponse#export_destination_configuration #export_destination_configuration} => Types::ExportDestinationConfiguration
+    #   * {Types::GetArchiveExportResponse#status #status} => Types::ExportStatus
     #
     # @example Request syntax with placeholder values
     #
@@ -1644,28 +1764,28 @@ module Aws::MailManager
     # @example Response structure
     #
     #   resp.archive_id #=> String
-    #   resp.export_destination_configuration.s3.s3_location #=> String
     #   resp.filters.include #=> Array
-    #   resp.filters.include[0].boolean_expression.evaluate.attribute #=> String, one of "HAS_ATTACHMENTS"
-    #   resp.filters.include[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
     #   resp.filters.include[0].string_expression.evaluate.attribute #=> String, one of "TO", "FROM", "CC", "SUBJECT", "ENVELOPE_TO", "ENVELOPE_FROM"
     #   resp.filters.include[0].string_expression.operator #=> String, one of "CONTAINS"
     #   resp.filters.include[0].string_expression.values #=> Array
     #   resp.filters.include[0].string_expression.values[0] #=> String
+    #   resp.filters.include[0].boolean_expression.evaluate.attribute #=> String, one of "HAS_ATTACHMENTS"
+    #   resp.filters.include[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
     #   resp.filters.unless #=> Array
-    #   resp.filters.unless[0].boolean_expression.evaluate.attribute #=> String, one of "HAS_ATTACHMENTS"
-    #   resp.filters.unless[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
     #   resp.filters.unless[0].string_expression.evaluate.attribute #=> String, one of "TO", "FROM", "CC", "SUBJECT", "ENVELOPE_TO", "ENVELOPE_FROM"
     #   resp.filters.unless[0].string_expression.operator #=> String, one of "CONTAINS"
     #   resp.filters.unless[0].string_expression.values #=> Array
     #   resp.filters.unless[0].string_expression.values[0] #=> String
+    #   resp.filters.unless[0].boolean_expression.evaluate.attribute #=> String, one of "HAS_ATTACHMENTS"
+    #   resp.filters.unless[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
     #   resp.from_timestamp #=> Time
-    #   resp.max_results #=> Integer
-    #   resp.status.completion_timestamp #=> Time
-    #   resp.status.error_message #=> String
-    #   resp.status.state #=> String, one of "QUEUED", "PREPROCESSING", "PROCESSING", "COMPLETED", "FAILED", "CANCELLED"
-    #   resp.status.submission_timestamp #=> Time
     #   resp.to_timestamp #=> Time
+    #   resp.max_results #=> Integer
+    #   resp.export_destination_configuration.s3.s3_location #=> String
+    #   resp.status.submission_timestamp #=> Time
+    #   resp.status.completion_timestamp #=> Time
+    #   resp.status.state #=> String, one of "QUEUED", "PREPROCESSING", "PROCESSING", "COMPLETED", "FAILED", "CANCELLED"
+    #   resp.status.error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetArchiveExport AWS API Documentation
     #
@@ -1684,9 +1804,9 @@ module Aws::MailManager
     #
     # @return [Types::GetArchiveMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetArchiveMessageResponse#envelope #envelope} => Types::Envelope
     #   * {Types::GetArchiveMessageResponse#message_download_link #message_download_link} => String
     #   * {Types::GetArchiveMessageResponse#metadata #metadata} => Types::Metadata
+    #   * {Types::GetArchiveMessageResponse#envelope #envelope} => Types::Envelope
     #
     # @example Request syntax with placeholder values
     #
@@ -1696,24 +1816,24 @@ module Aws::MailManager
     #
     # @example Response structure
     #
-    #   resp.envelope.from #=> String
-    #   resp.envelope.helo #=> String
-    #   resp.envelope.to #=> Array
-    #   resp.envelope.to[0] #=> String
     #   resp.message_download_link #=> String
-    #   resp.metadata.configuration_set #=> String
+    #   resp.metadata.timestamp #=> Time
     #   resp.metadata.ingress_point_id #=> String
+    #   resp.metadata.traffic_policy_id #=> String
     #   resp.metadata.rule_set_id #=> String
     #   resp.metadata.sender_hostname #=> String
     #   resp.metadata.sender_ip_address #=> String
-    #   resp.metadata.sending_method #=> String
-    #   resp.metadata.sending_pool #=> String
-    #   resp.metadata.source_arn #=> String
-    #   resp.metadata.source_identity #=> String
-    #   resp.metadata.timestamp #=> Time
     #   resp.metadata.tls_cipher_suite #=> String
     #   resp.metadata.tls_protocol #=> String
-    #   resp.metadata.traffic_policy_id #=> String
+    #   resp.metadata.sending_method #=> String
+    #   resp.metadata.source_identity #=> String
+    #   resp.metadata.sending_pool #=> String
+    #   resp.metadata.configuration_set #=> String
+    #   resp.metadata.source_arn #=> String
+    #   resp.envelope.helo #=> String
+    #   resp.envelope.from #=> String
+    #   resp.envelope.to #=> Array
+    #   resp.envelope.to[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetArchiveMessage AWS API Documentation
     #
@@ -1742,9 +1862,9 @@ module Aws::MailManager
     #
     # @example Response structure
     #
+    #   resp.body.text #=> String
     #   resp.body.html #=> String
     #   resp.body.message_malformed #=> Boolean
-    #   resp.body.text #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetArchiveMessageContent AWS API Documentation
     #
@@ -1766,9 +1886,9 @@ module Aws::MailManager
     #   * {Types::GetArchiveSearchResponse#archive_id #archive_id} => String
     #   * {Types::GetArchiveSearchResponse#filters #filters} => Types::ArchiveFilters
     #   * {Types::GetArchiveSearchResponse#from_timestamp #from_timestamp} => Time
+    #   * {Types::GetArchiveSearchResponse#to_timestamp #to_timestamp} => Time
     #   * {Types::GetArchiveSearchResponse#max_results #max_results} => Integer
     #   * {Types::GetArchiveSearchResponse#status #status} => Types::SearchStatus
-    #   * {Types::GetArchiveSearchResponse#to_timestamp #to_timestamp} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1780,26 +1900,26 @@ module Aws::MailManager
     #
     #   resp.archive_id #=> String
     #   resp.filters.include #=> Array
-    #   resp.filters.include[0].boolean_expression.evaluate.attribute #=> String, one of "HAS_ATTACHMENTS"
-    #   resp.filters.include[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
     #   resp.filters.include[0].string_expression.evaluate.attribute #=> String, one of "TO", "FROM", "CC", "SUBJECT", "ENVELOPE_TO", "ENVELOPE_FROM"
     #   resp.filters.include[0].string_expression.operator #=> String, one of "CONTAINS"
     #   resp.filters.include[0].string_expression.values #=> Array
     #   resp.filters.include[0].string_expression.values[0] #=> String
+    #   resp.filters.include[0].boolean_expression.evaluate.attribute #=> String, one of "HAS_ATTACHMENTS"
+    #   resp.filters.include[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
     #   resp.filters.unless #=> Array
-    #   resp.filters.unless[0].boolean_expression.evaluate.attribute #=> String, one of "HAS_ATTACHMENTS"
-    #   resp.filters.unless[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
     #   resp.filters.unless[0].string_expression.evaluate.attribute #=> String, one of "TO", "FROM", "CC", "SUBJECT", "ENVELOPE_TO", "ENVELOPE_FROM"
     #   resp.filters.unless[0].string_expression.operator #=> String, one of "CONTAINS"
     #   resp.filters.unless[0].string_expression.values #=> Array
     #   resp.filters.unless[0].string_expression.values[0] #=> String
+    #   resp.filters.unless[0].boolean_expression.evaluate.attribute #=> String, one of "HAS_ATTACHMENTS"
+    #   resp.filters.unless[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
     #   resp.from_timestamp #=> Time
-    #   resp.max_results #=> Integer
-    #   resp.status.completion_timestamp #=> Time
-    #   resp.status.error_message #=> String
-    #   resp.status.state #=> String, one of "QUEUED", "RUNNING", "COMPLETED", "FAILED", "CANCELLED"
-    #   resp.status.submission_timestamp #=> Time
     #   resp.to_timestamp #=> Time
+    #   resp.max_results #=> Integer
+    #   resp.status.submission_timestamp #=> Time
+    #   resp.status.completion_timestamp #=> Time
+    #   resp.status.state #=> String, one of "QUEUED", "RUNNING", "COMPLETED", "FAILED", "CANCELLED"
+    #   resp.status.error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetArchiveSearch AWS API Documentation
     #
@@ -1829,28 +1949,28 @@ module Aws::MailManager
     #
     #   resp.rows #=> Array
     #   resp.rows[0].archived_message_id #=> String
-    #   resp.rows[0].cc #=> String
+    #   resp.rows[0].received_timestamp #=> Time
     #   resp.rows[0].date #=> String
-    #   resp.rows[0].envelope.from #=> String
-    #   resp.rows[0].envelope.helo #=> String
-    #   resp.rows[0].envelope.to #=> Array
-    #   resp.rows[0].envelope.to[0] #=> String
+    #   resp.rows[0].to #=> String
     #   resp.rows[0].from #=> String
-    #   resp.rows[0].has_attachments #=> Boolean
-    #   resp.rows[0].in_reply_to #=> String
-    #   resp.rows[0].ingress_point_id #=> String
+    #   resp.rows[0].cc #=> String
+    #   resp.rows[0].subject #=> String
     #   resp.rows[0].message_id #=> String
+    #   resp.rows[0].has_attachments #=> Boolean
     #   resp.rows[0].received_headers #=> Array
     #   resp.rows[0].received_headers[0] #=> String
-    #   resp.rows[0].received_timestamp #=> Time
-    #   resp.rows[0].sender_hostname #=> String
-    #   resp.rows[0].sender_ip_address #=> String
-    #   resp.rows[0].source_arn #=> String
-    #   resp.rows[0].subject #=> String
-    #   resp.rows[0].to #=> String
+    #   resp.rows[0].in_reply_to #=> String
     #   resp.rows[0].x_mailer #=> String
     #   resp.rows[0].x_original_mailer #=> String
     #   resp.rows[0].x_priority #=> String
+    #   resp.rows[0].ingress_point_id #=> String
+    #   resp.rows[0].sender_hostname #=> String
+    #   resp.rows[0].sender_ip_address #=> String
+    #   resp.rows[0].envelope.helo #=> String
+    #   resp.rows[0].envelope.from #=> String
+    #   resp.rows[0].envelope.to #=> Array
+    #   resp.rows[0].envelope.to[0] #=> String
+    #   resp.rows[0].source_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetArchiveSearchResults AWS API Documentation
     #
@@ -1868,18 +1988,54 @@ module Aws::MailManager
     #
     # @return [Types::GetIngressPointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetIngressPointResponse#a_record #a_record} => String
-    #   * {Types::GetIngressPointResponse#created_timestamp #created_timestamp} => Time
-    #   * {Types::GetIngressPointResponse#ingress_point_arn #ingress_point_arn} => String
-    #   * {Types::GetIngressPointResponse#ingress_point_auth_configuration #ingress_point_auth_configuration} => Types::IngressPointAuthConfiguration
     #   * {Types::GetIngressPointResponse#ingress_point_id #ingress_point_id} => String
     #   * {Types::GetIngressPointResponse#ingress_point_name #ingress_point_name} => String
-    #   * {Types::GetIngressPointResponse#last_updated_timestamp #last_updated_timestamp} => Time
-    #   * {Types::GetIngressPointResponse#network_configuration #network_configuration} => Types::NetworkConfiguration
-    #   * {Types::GetIngressPointResponse#rule_set_id #rule_set_id} => String
+    #   * {Types::GetIngressPointResponse#ingress_point_arn #ingress_point_arn} => String
     #   * {Types::GetIngressPointResponse#status #status} => String
-    #   * {Types::GetIngressPointResponse#traffic_policy_id #traffic_policy_id} => String
     #   * {Types::GetIngressPointResponse#type #type} => String
+    #   * {Types::GetIngressPointResponse#a_record #a_record} => String
+    #   * {Types::GetIngressPointResponse#rule_set_id #rule_set_id} => String
+    #   * {Types::GetIngressPointResponse#traffic_policy_id #traffic_policy_id} => String
+    #   * {Types::GetIngressPointResponse#ingress_point_auth_configuration #ingress_point_auth_configuration} => Types::IngressPointAuthConfiguration
+    #   * {Types::GetIngressPointResponse#network_configuration #network_configuration} => Types::NetworkConfiguration
+    #   * {Types::GetIngressPointResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::GetIngressPointResponse#last_updated_timestamp #last_updated_timestamp} => Time
+    #
+    #
+    # @example Example: Get Open IngressPoint
+    #
+    #   resp = client.get_ingress_point({
+    #     ingress_point_id: "inp-12345", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     a_record: "abcde123.prod.us-east-1.email-border.ses.aws.a2z.com", 
+    #     ingress_point_arn: "arn:aws:ses:us-east-1:123456789012:mailmanager-ingress-point/inp-12345", 
+    #     ingress_point_id: "inp-12345", 
+    #     ingress_point_name: "ingressPointName", 
+    #     status: "ACTIVE", 
+    #     type: "OPEN", 
+    #   }
+    #
+    # @example Example: Get Auth IngressPoint
+    #
+    #   resp = client.get_ingress_point({
+    #     ingress_point_id: "inp-12345", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     a_record: "abcde123.prod.us-east-1.email-border.ses.aws.a2z.com", 
+    #     ingress_point_arn: "arn:aws:ses:us-east-1:123456789012:mailmanager-ingress-point/inp-12345", 
+    #     ingress_point_auth_configuration: {
+    #       secret_arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:abcde", 
+    #     }, 
+    #     ingress_point_id: "inp-12345", 
+    #     ingress_point_name: "ingressPointName", 
+    #     status: "ACTIVE", 
+    #     type: "AUTH", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1889,22 +2045,22 @@ module Aws::MailManager
     #
     # @example Response structure
     #
-    #   resp.a_record #=> String
-    #   resp.created_timestamp #=> Time
-    #   resp.ingress_point_arn #=> String
-    #   resp.ingress_point_auth_configuration.ingress_point_password_configuration.previous_smtp_password_expiry_timestamp #=> Time
-    #   resp.ingress_point_auth_configuration.ingress_point_password_configuration.previous_smtp_password_version #=> String
-    #   resp.ingress_point_auth_configuration.ingress_point_password_configuration.smtp_password_version #=> String
-    #   resp.ingress_point_auth_configuration.secret_arn #=> String
     #   resp.ingress_point_id #=> String
     #   resp.ingress_point_name #=> String
-    #   resp.last_updated_timestamp #=> Time
-    #   resp.network_configuration.private_network_configuration.vpc_endpoint_id #=> String
-    #   resp.network_configuration.public_network_configuration.ip_type #=> String, one of "IPV4", "DUAL_STACK"
-    #   resp.rule_set_id #=> String
+    #   resp.ingress_point_arn #=> String
     #   resp.status #=> String, one of "PROVISIONING", "DEPROVISIONING", "UPDATING", "ACTIVE", "CLOSED", "FAILED"
-    #   resp.traffic_policy_id #=> String
     #   resp.type #=> String, one of "OPEN", "AUTH"
+    #   resp.a_record #=> String
+    #   resp.rule_set_id #=> String
+    #   resp.traffic_policy_id #=> String
+    #   resp.ingress_point_auth_configuration.ingress_point_password_configuration.smtp_password_version #=> String
+    #   resp.ingress_point_auth_configuration.ingress_point_password_configuration.previous_smtp_password_version #=> String
+    #   resp.ingress_point_auth_configuration.ingress_point_password_configuration.previous_smtp_password_expiry_timestamp #=> Time
+    #   resp.ingress_point_auth_configuration.secret_arn #=> String
+    #   resp.network_configuration.public_network_configuration.ip_type #=> String, one of "IPV4", "DUAL_STACK"
+    #   resp.network_configuration.private_network_configuration.vpc_endpoint_id #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.last_updated_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetIngressPoint AWS API Documentation
     #
@@ -1917,12 +2073,12 @@ module Aws::MailManager
 
     # Fetch attributes of a member in an address list.
     #
-    # @option params [required, String] :address
-    #   The address to be retrieved from the address list.
-    #
     # @option params [required, String] :address_list_id
     #   The unique identifier of the address list to retrieve the address
     #   from.
+    #
+    # @option params [required, String] :address
+    #   The address to be retrieved from the address list.
     #
     # @return [Types::GetMemberOfAddressListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1932,8 +2088,8 @@ module Aws::MailManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_member_of_address_list({
-    #     address: "Address", # required
     #     address_list_id: "AddressListId", # required
+    #     address: "Address", # required
     #   })
     #
     # @example Response structure
@@ -1957,14 +2113,14 @@ module Aws::MailManager
     #
     # @return [Types::GetRelayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetRelayResponse#authentication #authentication} => Types::RelayAuthentication
-    #   * {Types::GetRelayResponse#created_timestamp #created_timestamp} => Time
-    #   * {Types::GetRelayResponse#last_modified_timestamp #last_modified_timestamp} => Time
-    #   * {Types::GetRelayResponse#relay_arn #relay_arn} => String
     #   * {Types::GetRelayResponse#relay_id #relay_id} => String
+    #   * {Types::GetRelayResponse#relay_arn #relay_arn} => String
     #   * {Types::GetRelayResponse#relay_name #relay_name} => String
     #   * {Types::GetRelayResponse#server_name #server_name} => String
     #   * {Types::GetRelayResponse#server_port #server_port} => Integer
+    #   * {Types::GetRelayResponse#authentication #authentication} => Types::RelayAuthentication
+    #   * {Types::GetRelayResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::GetRelayResponse#last_modified_timestamp #last_modified_timestamp} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1974,14 +2130,14 @@ module Aws::MailManager
     #
     # @example Response structure
     #
-    #   resp.authentication.secret_arn #=> String
-    #   resp.created_timestamp #=> Time
-    #   resp.last_modified_timestamp #=> Time
-    #   resp.relay_arn #=> String
     #   resp.relay_id #=> String
+    #   resp.relay_arn #=> String
     #   resp.relay_name #=> String
     #   resp.server_name #=> String
     #   resp.server_port #=> Integer
+    #   resp.authentication.secret_arn #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.last_modified_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetRelay AWS API Documentation
     #
@@ -1999,11 +2155,11 @@ module Aws::MailManager
     #
     # @return [Types::GetRuleSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetRuleSetResponse#rule_set_id #rule_set_id} => String
+    #   * {Types::GetRuleSetResponse#rule_set_arn #rule_set_arn} => String
+    #   * {Types::GetRuleSetResponse#rule_set_name #rule_set_name} => String
     #   * {Types::GetRuleSetResponse#created_date #created_date} => Time
     #   * {Types::GetRuleSetResponse#last_modification_date #last_modification_date} => Time
-    #   * {Types::GetRuleSetResponse#rule_set_arn #rule_set_arn} => String
-    #   * {Types::GetRuleSetResponse#rule_set_id #rule_set_id} => String
-    #   * {Types::GetRuleSetResponse#rule_set_name #rule_set_name} => String
     #   * {Types::GetRuleSetResponse#rules #rules} => Array&lt;Types::Rule&gt;
     #
     # @example Request syntax with placeholder values
@@ -2014,17 +2170,92 @@ module Aws::MailManager
     #
     # @example Response structure
     #
+    #   resp.rule_set_id #=> String
+    #   resp.rule_set_arn #=> String
+    #   resp.rule_set_name #=> String
     #   resp.created_date #=> Time
     #   resp.last_modification_date #=> Time
-    #   resp.rule_set_arn #=> String
-    #   resp.rule_set_id #=> String
-    #   resp.rule_set_name #=> String
     #   resp.rules #=> Array
+    #   resp.rules[0].name #=> String
+    #   resp.rules[0].conditions #=> Array
+    #   resp.rules[0].conditions[0].boolean_expression.evaluate.attribute #=> String, one of "READ_RECEIPT_REQUESTED", "TLS", "TLS_WRAPPED"
+    #   resp.rules[0].conditions[0].boolean_expression.evaluate.analysis.analyzer #=> String
+    #   resp.rules[0].conditions[0].boolean_expression.evaluate.analysis.result_field #=> String
+    #   resp.rules[0].conditions[0].boolean_expression.evaluate.is_in_address_list.attribute #=> String, one of "RECIPIENT", "MAIL_FROM", "SENDER", "FROM", "TO", "CC"
+    #   resp.rules[0].conditions[0].boolean_expression.evaluate.is_in_address_list.address_lists #=> Array
+    #   resp.rules[0].conditions[0].boolean_expression.evaluate.is_in_address_list.address_lists[0] #=> String
+    #   resp.rules[0].conditions[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
+    #   resp.rules[0].conditions[0].string_expression.evaluate.attribute #=> String, one of "MAIL_FROM", "HELO", "RECIPIENT", "SENDER", "FROM", "SUBJECT", "TO", "CC"
+    #   resp.rules[0].conditions[0].string_expression.evaluate.mime_header_attribute #=> String
+    #   resp.rules[0].conditions[0].string_expression.evaluate.analysis.analyzer #=> String
+    #   resp.rules[0].conditions[0].string_expression.evaluate.analysis.result_field #=> String
+    #   resp.rules[0].conditions[0].string_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS"
+    #   resp.rules[0].conditions[0].string_expression.values #=> Array
+    #   resp.rules[0].conditions[0].string_expression.values[0] #=> String
+    #   resp.rules[0].conditions[0].number_expression.evaluate.attribute #=> String, one of "MESSAGE_SIZE"
+    #   resp.rules[0].conditions[0].number_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "LESS_THAN", "GREATER_THAN", "LESS_THAN_OR_EQUAL", "GREATER_THAN_OR_EQUAL"
+    #   resp.rules[0].conditions[0].number_expression.value #=> Float
+    #   resp.rules[0].conditions[0].ip_expression.evaluate.attribute #=> String, one of "SOURCE_IP"
+    #   resp.rules[0].conditions[0].ip_expression.operator #=> String, one of "CIDR_MATCHES", "NOT_CIDR_MATCHES"
+    #   resp.rules[0].conditions[0].ip_expression.values #=> Array
+    #   resp.rules[0].conditions[0].ip_expression.values[0] #=> String
+    #   resp.rules[0].conditions[0].verdict_expression.evaluate.attribute #=> String, one of "SPF", "DKIM"
+    #   resp.rules[0].conditions[0].verdict_expression.evaluate.analysis.analyzer #=> String
+    #   resp.rules[0].conditions[0].verdict_expression.evaluate.analysis.result_field #=> String
+    #   resp.rules[0].conditions[0].verdict_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.rules[0].conditions[0].verdict_expression.values #=> Array
+    #   resp.rules[0].conditions[0].verdict_expression.values[0] #=> String, one of "PASS", "FAIL", "GRAY", "PROCESSING_FAILED"
+    #   resp.rules[0].conditions[0].dmarc_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.rules[0].conditions[0].dmarc_expression.values #=> Array
+    #   resp.rules[0].conditions[0].dmarc_expression.values[0] #=> String, one of "NONE", "QUARANTINE", "REJECT"
+    #   resp.rules[0].unless #=> Array
+    #   resp.rules[0].unless[0].boolean_expression.evaluate.attribute #=> String, one of "READ_RECEIPT_REQUESTED", "TLS", "TLS_WRAPPED"
+    #   resp.rules[0].unless[0].boolean_expression.evaluate.analysis.analyzer #=> String
+    #   resp.rules[0].unless[0].boolean_expression.evaluate.analysis.result_field #=> String
+    #   resp.rules[0].unless[0].boolean_expression.evaluate.is_in_address_list.attribute #=> String, one of "RECIPIENT", "MAIL_FROM", "SENDER", "FROM", "TO", "CC"
+    #   resp.rules[0].unless[0].boolean_expression.evaluate.is_in_address_list.address_lists #=> Array
+    #   resp.rules[0].unless[0].boolean_expression.evaluate.is_in_address_list.address_lists[0] #=> String
+    #   resp.rules[0].unless[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
+    #   resp.rules[0].unless[0].string_expression.evaluate.attribute #=> String, one of "MAIL_FROM", "HELO", "RECIPIENT", "SENDER", "FROM", "SUBJECT", "TO", "CC"
+    #   resp.rules[0].unless[0].string_expression.evaluate.mime_header_attribute #=> String
+    #   resp.rules[0].unless[0].string_expression.evaluate.analysis.analyzer #=> String
+    #   resp.rules[0].unless[0].string_expression.evaluate.analysis.result_field #=> String
+    #   resp.rules[0].unless[0].string_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS"
+    #   resp.rules[0].unless[0].string_expression.values #=> Array
+    #   resp.rules[0].unless[0].string_expression.values[0] #=> String
+    #   resp.rules[0].unless[0].number_expression.evaluate.attribute #=> String, one of "MESSAGE_SIZE"
+    #   resp.rules[0].unless[0].number_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "LESS_THAN", "GREATER_THAN", "LESS_THAN_OR_EQUAL", "GREATER_THAN_OR_EQUAL"
+    #   resp.rules[0].unless[0].number_expression.value #=> Float
+    #   resp.rules[0].unless[0].ip_expression.evaluate.attribute #=> String, one of "SOURCE_IP"
+    #   resp.rules[0].unless[0].ip_expression.operator #=> String, one of "CIDR_MATCHES", "NOT_CIDR_MATCHES"
+    #   resp.rules[0].unless[0].ip_expression.values #=> Array
+    #   resp.rules[0].unless[0].ip_expression.values[0] #=> String
+    #   resp.rules[0].unless[0].verdict_expression.evaluate.attribute #=> String, one of "SPF", "DKIM"
+    #   resp.rules[0].unless[0].verdict_expression.evaluate.analysis.analyzer #=> String
+    #   resp.rules[0].unless[0].verdict_expression.evaluate.analysis.result_field #=> String
+    #   resp.rules[0].unless[0].verdict_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.rules[0].unless[0].verdict_expression.values #=> Array
+    #   resp.rules[0].unless[0].verdict_expression.values[0] #=> String, one of "PASS", "FAIL", "GRAY", "PROCESSING_FAILED"
+    #   resp.rules[0].unless[0].dmarc_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.rules[0].unless[0].dmarc_expression.values #=> Array
+    #   resp.rules[0].unless[0].dmarc_expression.values[0] #=> String, one of "NONE", "QUARANTINE", "REJECT"
     #   resp.rules[0].actions #=> Array
-    #   resp.rules[0].actions[0].add_header.header_name #=> String
-    #   resp.rules[0].actions[0].add_header.header_value #=> String
+    #   resp.rules[0].actions[0].relay.action_failure_policy #=> String, one of "CONTINUE", "DROP"
+    #   resp.rules[0].actions[0].relay.relay #=> String
+    #   resp.rules[0].actions[0].relay.mail_from #=> String, one of "REPLACE", "PRESERVE"
     #   resp.rules[0].actions[0].archive.action_failure_policy #=> String, one of "CONTINUE", "DROP"
     #   resp.rules[0].actions[0].archive.target_archive #=> String
+    #   resp.rules[0].actions[0].write_to_s3.action_failure_policy #=> String, one of "CONTINUE", "DROP"
+    #   resp.rules[0].actions[0].write_to_s3.role_arn #=> String
+    #   resp.rules[0].actions[0].write_to_s3.s3_bucket #=> String
+    #   resp.rules[0].actions[0].write_to_s3.s3_prefix #=> String
+    #   resp.rules[0].actions[0].write_to_s3.s3_sse_kms_key_id #=> String
+    #   resp.rules[0].actions[0].send.action_failure_policy #=> String, one of "CONTINUE", "DROP"
+    #   resp.rules[0].actions[0].send.role_arn #=> String
+    #   resp.rules[0].actions[0].add_header.header_name #=> String
+    #   resp.rules[0].actions[0].add_header.header_value #=> String
+    #   resp.rules[0].actions[0].replace_recipient.replace_with #=> Array
+    #   resp.rules[0].actions[0].replace_recipient.replace_with[0] #=> String
     #   resp.rules[0].actions[0].deliver_to_mailbox.action_failure_policy #=> String, one of "CONTINUE", "DROP"
     #   resp.rules[0].actions[0].deliver_to_mailbox.mailbox_arn #=> String
     #   resp.rules[0].actions[0].deliver_to_mailbox.role_arn #=> String
@@ -2033,85 +2264,10 @@ module Aws::MailManager
     #   resp.rules[0].actions[0].deliver_to_q_business.index_id #=> String
     #   resp.rules[0].actions[0].deliver_to_q_business.role_arn #=> String
     #   resp.rules[0].actions[0].publish_to_sns.action_failure_policy #=> String, one of "CONTINUE", "DROP"
+    #   resp.rules[0].actions[0].publish_to_sns.topic_arn #=> String
+    #   resp.rules[0].actions[0].publish_to_sns.role_arn #=> String
     #   resp.rules[0].actions[0].publish_to_sns.encoding #=> String, one of "UTF-8", "BASE64"
     #   resp.rules[0].actions[0].publish_to_sns.payload_type #=> String, one of "HEADERS", "CONTENT"
-    #   resp.rules[0].actions[0].publish_to_sns.role_arn #=> String
-    #   resp.rules[0].actions[0].publish_to_sns.topic_arn #=> String
-    #   resp.rules[0].actions[0].relay.action_failure_policy #=> String, one of "CONTINUE", "DROP"
-    #   resp.rules[0].actions[0].relay.mail_from #=> String, one of "REPLACE", "PRESERVE"
-    #   resp.rules[0].actions[0].relay.relay #=> String
-    #   resp.rules[0].actions[0].replace_recipient.replace_with #=> Array
-    #   resp.rules[0].actions[0].replace_recipient.replace_with[0] #=> String
-    #   resp.rules[0].actions[0].send.action_failure_policy #=> String, one of "CONTINUE", "DROP"
-    #   resp.rules[0].actions[0].send.role_arn #=> String
-    #   resp.rules[0].actions[0].write_to_s3.action_failure_policy #=> String, one of "CONTINUE", "DROP"
-    #   resp.rules[0].actions[0].write_to_s3.role_arn #=> String
-    #   resp.rules[0].actions[0].write_to_s3.s3_bucket #=> String
-    #   resp.rules[0].actions[0].write_to_s3.s3_prefix #=> String
-    #   resp.rules[0].actions[0].write_to_s3.s3_sse_kms_key_id #=> String
-    #   resp.rules[0].conditions #=> Array
-    #   resp.rules[0].conditions[0].boolean_expression.evaluate.analysis.analyzer #=> String
-    #   resp.rules[0].conditions[0].boolean_expression.evaluate.analysis.result_field #=> String
-    #   resp.rules[0].conditions[0].boolean_expression.evaluate.attribute #=> String, one of "READ_RECEIPT_REQUESTED", "TLS", "TLS_WRAPPED"
-    #   resp.rules[0].conditions[0].boolean_expression.evaluate.is_in_address_list.address_lists #=> Array
-    #   resp.rules[0].conditions[0].boolean_expression.evaluate.is_in_address_list.address_lists[0] #=> String
-    #   resp.rules[0].conditions[0].boolean_expression.evaluate.is_in_address_list.attribute #=> String, one of "RECIPIENT", "MAIL_FROM", "SENDER", "FROM", "TO", "CC"
-    #   resp.rules[0].conditions[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
-    #   resp.rules[0].conditions[0].dmarc_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS"
-    #   resp.rules[0].conditions[0].dmarc_expression.values #=> Array
-    #   resp.rules[0].conditions[0].dmarc_expression.values[0] #=> String, one of "NONE", "QUARANTINE", "REJECT"
-    #   resp.rules[0].conditions[0].ip_expression.evaluate.attribute #=> String, one of "SOURCE_IP"
-    #   resp.rules[0].conditions[0].ip_expression.operator #=> String, one of "CIDR_MATCHES", "NOT_CIDR_MATCHES"
-    #   resp.rules[0].conditions[0].ip_expression.values #=> Array
-    #   resp.rules[0].conditions[0].ip_expression.values[0] #=> String
-    #   resp.rules[0].conditions[0].number_expression.evaluate.attribute #=> String, one of "MESSAGE_SIZE"
-    #   resp.rules[0].conditions[0].number_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "LESS_THAN", "GREATER_THAN", "LESS_THAN_OR_EQUAL", "GREATER_THAN_OR_EQUAL"
-    #   resp.rules[0].conditions[0].number_expression.value #=> Float
-    #   resp.rules[0].conditions[0].string_expression.evaluate.analysis.analyzer #=> String
-    #   resp.rules[0].conditions[0].string_expression.evaluate.analysis.result_field #=> String
-    #   resp.rules[0].conditions[0].string_expression.evaluate.attribute #=> String, one of "MAIL_FROM", "HELO", "RECIPIENT", "SENDER", "FROM", "SUBJECT", "TO", "CC"
-    #   resp.rules[0].conditions[0].string_expression.evaluate.mime_header_attribute #=> String
-    #   resp.rules[0].conditions[0].string_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS"
-    #   resp.rules[0].conditions[0].string_expression.values #=> Array
-    #   resp.rules[0].conditions[0].string_expression.values[0] #=> String
-    #   resp.rules[0].conditions[0].verdict_expression.evaluate.analysis.analyzer #=> String
-    #   resp.rules[0].conditions[0].verdict_expression.evaluate.analysis.result_field #=> String
-    #   resp.rules[0].conditions[0].verdict_expression.evaluate.attribute #=> String, one of "SPF", "DKIM"
-    #   resp.rules[0].conditions[0].verdict_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS"
-    #   resp.rules[0].conditions[0].verdict_expression.values #=> Array
-    #   resp.rules[0].conditions[0].verdict_expression.values[0] #=> String, one of "PASS", "FAIL", "GRAY", "PROCESSING_FAILED"
-    #   resp.rules[0].name #=> String
-    #   resp.rules[0].unless #=> Array
-    #   resp.rules[0].unless[0].boolean_expression.evaluate.analysis.analyzer #=> String
-    #   resp.rules[0].unless[0].boolean_expression.evaluate.analysis.result_field #=> String
-    #   resp.rules[0].unless[0].boolean_expression.evaluate.attribute #=> String, one of "READ_RECEIPT_REQUESTED", "TLS", "TLS_WRAPPED"
-    #   resp.rules[0].unless[0].boolean_expression.evaluate.is_in_address_list.address_lists #=> Array
-    #   resp.rules[0].unless[0].boolean_expression.evaluate.is_in_address_list.address_lists[0] #=> String
-    #   resp.rules[0].unless[0].boolean_expression.evaluate.is_in_address_list.attribute #=> String, one of "RECIPIENT", "MAIL_FROM", "SENDER", "FROM", "TO", "CC"
-    #   resp.rules[0].unless[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
-    #   resp.rules[0].unless[0].dmarc_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS"
-    #   resp.rules[0].unless[0].dmarc_expression.values #=> Array
-    #   resp.rules[0].unless[0].dmarc_expression.values[0] #=> String, one of "NONE", "QUARANTINE", "REJECT"
-    #   resp.rules[0].unless[0].ip_expression.evaluate.attribute #=> String, one of "SOURCE_IP"
-    #   resp.rules[0].unless[0].ip_expression.operator #=> String, one of "CIDR_MATCHES", "NOT_CIDR_MATCHES"
-    #   resp.rules[0].unless[0].ip_expression.values #=> Array
-    #   resp.rules[0].unless[0].ip_expression.values[0] #=> String
-    #   resp.rules[0].unless[0].number_expression.evaluate.attribute #=> String, one of "MESSAGE_SIZE"
-    #   resp.rules[0].unless[0].number_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "LESS_THAN", "GREATER_THAN", "LESS_THAN_OR_EQUAL", "GREATER_THAN_OR_EQUAL"
-    #   resp.rules[0].unless[0].number_expression.value #=> Float
-    #   resp.rules[0].unless[0].string_expression.evaluate.analysis.analyzer #=> String
-    #   resp.rules[0].unless[0].string_expression.evaluate.analysis.result_field #=> String
-    #   resp.rules[0].unless[0].string_expression.evaluate.attribute #=> String, one of "MAIL_FROM", "HELO", "RECIPIENT", "SENDER", "FROM", "SUBJECT", "TO", "CC"
-    #   resp.rules[0].unless[0].string_expression.evaluate.mime_header_attribute #=> String
-    #   resp.rules[0].unless[0].string_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS"
-    #   resp.rules[0].unless[0].string_expression.values #=> Array
-    #   resp.rules[0].unless[0].string_expression.values[0] #=> String
-    #   resp.rules[0].unless[0].verdict_expression.evaluate.analysis.analyzer #=> String
-    #   resp.rules[0].unless[0].verdict_expression.evaluate.analysis.result_field #=> String
-    #   resp.rules[0].unless[0].verdict_expression.evaluate.attribute #=> String, one of "SPF", "DKIM"
-    #   resp.rules[0].unless[0].verdict_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS"
-    #   resp.rules[0].unless[0].verdict_expression.values #=> Array
-    #   resp.rules[0].unless[0].verdict_expression.values[0] #=> String, one of "PASS", "FAIL", "GRAY", "PROCESSING_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetRuleSet AWS API Documentation
     #
@@ -2129,14 +2285,49 @@ module Aws::MailManager
     #
     # @return [Types::GetTrafficPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetTrafficPolicyResponse#created_timestamp #created_timestamp} => Time
-    #   * {Types::GetTrafficPolicyResponse#default_action #default_action} => String
-    #   * {Types::GetTrafficPolicyResponse#last_updated_timestamp #last_updated_timestamp} => Time
-    #   * {Types::GetTrafficPolicyResponse#max_message_size_bytes #max_message_size_bytes} => Integer
-    #   * {Types::GetTrafficPolicyResponse#policy_statements #policy_statements} => Array&lt;Types::PolicyStatement&gt;
-    #   * {Types::GetTrafficPolicyResponse#traffic_policy_arn #traffic_policy_arn} => String
-    #   * {Types::GetTrafficPolicyResponse#traffic_policy_id #traffic_policy_id} => String
     #   * {Types::GetTrafficPolicyResponse#traffic_policy_name #traffic_policy_name} => String
+    #   * {Types::GetTrafficPolicyResponse#traffic_policy_id #traffic_policy_id} => String
+    #   * {Types::GetTrafficPolicyResponse#traffic_policy_arn #traffic_policy_arn} => String
+    #   * {Types::GetTrafficPolicyResponse#policy_statements #policy_statements} => Array&lt;Types::PolicyStatement&gt;
+    #   * {Types::GetTrafficPolicyResponse#max_message_size_bytes #max_message_size_bytes} => Integer
+    #   * {Types::GetTrafficPolicyResponse#default_action #default_action} => String
+    #   * {Types::GetTrafficPolicyResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::GetTrafficPolicyResponse#last_updated_timestamp #last_updated_timestamp} => Time
+    #
+    #
+    # @example Example: Get TrafficPolicy
+    #
+    #   resp = client.get_traffic_policy({
+    #     traffic_policy_id: "tp-12345", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     default_action: "DENY", 
+    #     max_message_size_bytes: 1000, 
+    #     policy_statements: [
+    #       {
+    #         action: "ALLOW", 
+    #         conditions: [
+    #           {
+    #             string_expression: {
+    #               evaluate: {
+    #                 attribute: "RECIPIENT", 
+    #               }, 
+    #               operator: "EQUALS", 
+    #               values: [
+    #                 "example@amazon.com", 
+    #                 "example@gmail.com", 
+    #               ], 
+    #             }, 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     traffic_policy_arn: "arn:aws:ses:us-east-1:123456789012:mailmanager-traffic-policy/tp-12345", 
+    #     traffic_policy_id: "tp-12345", 
+    #     traffic_policy_name: "trafficPolicyName", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2146,19 +2337,17 @@ module Aws::MailManager
     #
     # @example Response structure
     #
-    #   resp.created_timestamp #=> Time
-    #   resp.default_action #=> String, one of "ALLOW", "DENY"
-    #   resp.last_updated_timestamp #=> Time
-    #   resp.max_message_size_bytes #=> Integer
+    #   resp.traffic_policy_name #=> String
+    #   resp.traffic_policy_id #=> String
+    #   resp.traffic_policy_arn #=> String
     #   resp.policy_statements #=> Array
-    #   resp.policy_statements[0].action #=> String, one of "ALLOW", "DENY"
     #   resp.policy_statements[0].conditions #=> Array
-    #   resp.policy_statements[0].conditions[0].boolean_expression.evaluate.analysis.analyzer #=> String
-    #   resp.policy_statements[0].conditions[0].boolean_expression.evaluate.analysis.result_field #=> String
-    #   resp.policy_statements[0].conditions[0].boolean_expression.evaluate.is_in_address_list.address_lists #=> Array
-    #   resp.policy_statements[0].conditions[0].boolean_expression.evaluate.is_in_address_list.address_lists[0] #=> String
-    #   resp.policy_statements[0].conditions[0].boolean_expression.evaluate.is_in_address_list.attribute #=> String, one of "RECIPIENT"
-    #   resp.policy_statements[0].conditions[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
+    #   resp.policy_statements[0].conditions[0].string_expression.evaluate.attribute #=> String, one of "RECIPIENT"
+    #   resp.policy_statements[0].conditions[0].string_expression.evaluate.analysis.analyzer #=> String
+    #   resp.policy_statements[0].conditions[0].string_expression.evaluate.analysis.result_field #=> String
+    #   resp.policy_statements[0].conditions[0].string_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS"
+    #   resp.policy_statements[0].conditions[0].string_expression.values #=> Array
+    #   resp.policy_statements[0].conditions[0].string_expression.values[0] #=> String
     #   resp.policy_statements[0].conditions[0].ip_expression.evaluate.attribute #=> String, one of "SENDER_IP"
     #   resp.policy_statements[0].conditions[0].ip_expression.operator #=> String, one of "CIDR_MATCHES", "NOT_CIDR_MATCHES"
     #   resp.policy_statements[0].conditions[0].ip_expression.values #=> Array
@@ -2167,18 +2356,20 @@ module Aws::MailManager
     #   resp.policy_statements[0].conditions[0].ipv_6_expression.operator #=> String, one of "CIDR_MATCHES", "NOT_CIDR_MATCHES"
     #   resp.policy_statements[0].conditions[0].ipv_6_expression.values #=> Array
     #   resp.policy_statements[0].conditions[0].ipv_6_expression.values[0] #=> String
-    #   resp.policy_statements[0].conditions[0].string_expression.evaluate.analysis.analyzer #=> String
-    #   resp.policy_statements[0].conditions[0].string_expression.evaluate.analysis.result_field #=> String
-    #   resp.policy_statements[0].conditions[0].string_expression.evaluate.attribute #=> String, one of "RECIPIENT"
-    #   resp.policy_statements[0].conditions[0].string_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS"
-    #   resp.policy_statements[0].conditions[0].string_expression.values #=> Array
-    #   resp.policy_statements[0].conditions[0].string_expression.values[0] #=> String
     #   resp.policy_statements[0].conditions[0].tls_expression.evaluate.attribute #=> String, one of "TLS_PROTOCOL"
     #   resp.policy_statements[0].conditions[0].tls_expression.operator #=> String, one of "MINIMUM_TLS_VERSION", "IS"
     #   resp.policy_statements[0].conditions[0].tls_expression.value #=> String, one of "TLS1_2", "TLS1_3"
-    #   resp.traffic_policy_arn #=> String
-    #   resp.traffic_policy_id #=> String
-    #   resp.traffic_policy_name #=> String
+    #   resp.policy_statements[0].conditions[0].boolean_expression.evaluate.analysis.analyzer #=> String
+    #   resp.policy_statements[0].conditions[0].boolean_expression.evaluate.analysis.result_field #=> String
+    #   resp.policy_statements[0].conditions[0].boolean_expression.evaluate.is_in_address_list.attribute #=> String, one of "RECIPIENT"
+    #   resp.policy_statements[0].conditions[0].boolean_expression.evaluate.is_in_address_list.address_lists #=> Array
+    #   resp.policy_statements[0].conditions[0].boolean_expression.evaluate.is_in_address_list.address_lists[0] #=> String
+    #   resp.policy_statements[0].conditions[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
+    #   resp.policy_statements[0].action #=> String, one of "ALLOW", "DENY"
+    #   resp.max_message_size_bytes #=> Integer
+    #   resp.default_action #=> String, one of "ALLOW", "DENY"
+    #   resp.created_timestamp #=> Time
+    #   resp.last_updated_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetTrafficPolicy AWS API Documentation
     #
@@ -2217,10 +2408,10 @@ module Aws::MailManager
     # @example Response structure
     #
     #   resp.addon_instances #=> Array
-    #   resp.addon_instances[0].addon_instance_arn #=> String
     #   resp.addon_instances[0].addon_instance_id #=> String
-    #   resp.addon_instances[0].addon_name #=> String
     #   resp.addon_instances[0].addon_subscription_id #=> String
+    #   resp.addon_instances[0].addon_name #=> String
+    #   resp.addon_instances[0].addon_instance_arn #=> String
     #   resp.addon_instances[0].created_timestamp #=> Time
     #   resp.next_token #=> String
     #
@@ -2261,9 +2452,9 @@ module Aws::MailManager
     # @example Response structure
     #
     #   resp.addon_subscriptions #=> Array
+    #   resp.addon_subscriptions[0].addon_subscription_id #=> String
     #   resp.addon_subscriptions[0].addon_name #=> String
     #   resp.addon_subscriptions[0].addon_subscription_arn #=> String
-    #   resp.addon_subscriptions[0].addon_subscription_id #=> String
     #   resp.addon_subscriptions[0].created_timestamp #=> Time
     #   resp.next_token #=> String
     #
@@ -2308,18 +2499,18 @@ module Aws::MailManager
     # @example Response structure
     #
     #   resp.import_jobs #=> Array
-    #   resp.import_jobs[0].address_list_id #=> String
-    #   resp.import_jobs[0].completed_timestamp #=> Time
-    #   resp.import_jobs[0].created_timestamp #=> Time
-    #   resp.import_jobs[0].error #=> String
-    #   resp.import_jobs[0].failed_items_count #=> Integer
-    #   resp.import_jobs[0].import_data_format.import_data_type #=> String, one of "CSV", "JSON"
-    #   resp.import_jobs[0].imported_items_count #=> Integer
     #   resp.import_jobs[0].job_id #=> String
     #   resp.import_jobs[0].name #=> String
-    #   resp.import_jobs[0].pre_signed_url #=> String
-    #   resp.import_jobs[0].start_timestamp #=> Time
     #   resp.import_jobs[0].status #=> String, one of "CREATED", "PROCESSING", "COMPLETED", "FAILED", "STOPPED"
+    #   resp.import_jobs[0].pre_signed_url #=> String
+    #   resp.import_jobs[0].imported_items_count #=> Integer
+    #   resp.import_jobs[0].failed_items_count #=> Integer
+    #   resp.import_jobs[0].import_data_format.import_data_type #=> String, one of "CSV", "JSON"
+    #   resp.import_jobs[0].address_list_id #=> String
+    #   resp.import_jobs[0].created_timestamp #=> Time
+    #   resp.import_jobs[0].start_timestamp #=> Time
+    #   resp.import_jobs[0].completed_timestamp #=> Time
+    #   resp.import_jobs[0].error #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/ListAddressListImportJobs AWS API Documentation
@@ -2360,8 +2551,8 @@ module Aws::MailManager
     # @example Response structure
     #
     #   resp.address_lists #=> Array
-    #   resp.address_lists[0].address_list_arn #=> String
     #   resp.address_lists[0].address_list_id #=> String
+    #   resp.address_lists[0].address_list_arn #=> String
     #   resp.address_lists[0].address_list_name #=> String
     #   resp.address_lists[0].created_timestamp #=> Time
     #   resp.address_lists[0].last_updated_timestamp #=> Time
@@ -2409,10 +2600,10 @@ module Aws::MailManager
     #
     #   resp.exports #=> Array
     #   resp.exports[0].export_id #=> String
-    #   resp.exports[0].status.completion_timestamp #=> Time
-    #   resp.exports[0].status.error_message #=> String
-    #   resp.exports[0].status.state #=> String, one of "QUEUED", "PREPROCESSING", "PROCESSING", "COMPLETED", "FAILED", "CANCELLED"
     #   resp.exports[0].status.submission_timestamp #=> Time
+    #   resp.exports[0].status.completion_timestamp #=> Time
+    #   resp.exports[0].status.state #=> String, one of "QUEUED", "PREPROCESSING", "PROCESSING", "COMPLETED", "FAILED", "CANCELLED"
+    #   resp.exports[0].status.error_message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/ListArchiveExports AWS API Documentation
@@ -2440,8 +2631,8 @@ module Aws::MailManager
     #
     # @return [Types::ListArchiveSearchesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListArchiveSearchesResponse#next_token #next_token} => String
     #   * {Types::ListArchiveSearchesResponse#searches #searches} => Array&lt;Types::SearchSummary&gt;
+    #   * {Types::ListArchiveSearchesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -2455,13 +2646,13 @@ module Aws::MailManager
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.searches #=> Array
     #   resp.searches[0].search_id #=> String
-    #   resp.searches[0].status.completion_timestamp #=> Time
-    #   resp.searches[0].status.error_message #=> String
-    #   resp.searches[0].status.state #=> String, one of "QUEUED", "RUNNING", "COMPLETED", "FAILED", "CANCELLED"
     #   resp.searches[0].status.submission_timestamp #=> Time
+    #   resp.searches[0].status.completion_timestamp #=> Time
+    #   resp.searches[0].status.state #=> String, one of "QUEUED", "RUNNING", "COMPLETED", "FAILED", "CANCELLED"
+    #   resp.searches[0].status.error_message #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/ListArchiveSearches AWS API Documentation
     #
@@ -2517,14 +2708,14 @@ module Aws::MailManager
 
     # List all ingress endpoint resources.
     #
+    # @option params [Integer] :page_size
+    #   The maximum number of ingress endpoint resources that are returned per
+    #   call. You can use NextToken to obtain further ingress endpoints.
+    #
     # @option params [String] :next_token
     #   If you received a pagination token from a previous call to this API,
     #   you can provide it here to continue paginating through the next page
     #   of results.
-    #
-    # @option params [Integer] :page_size
-    #   The maximum number of ingress endpoint resources that are returned per
-    #   call. You can use NextToken to obtain further ingress endpoints.
     #
     # @return [Types::ListIngressPointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2533,21 +2724,78 @@ module Aws::MailManager
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: List IngressPoints
+    #
+    #   resp = client.list_ingress_points({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     ingress_points: [
+    #       {
+    #         a_record: "abcde123.prod.us-east-1.email-border.ses.aws.a2z.com", 
+    #         ingress_point_id: "inp-12345", 
+    #         ingress_point_name: "ingressPointName", 
+    #         status: "ACTIVE", 
+    #         type: "OPEN", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: List IngressPoints with PageSize
+    #
+    #   resp = client.list_ingress_points({
+    #     page_size: 10, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     ingress_points: [
+    #       {
+    #         a_record: "abcde123.prod.us-east-1.email-border.ses.aws.a2z.com", 
+    #         ingress_point_id: "inp-12345", 
+    #         ingress_point_name: "ingressPointName", 
+    #         status: "ACTIVE", 
+    #         type: "OPEN", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: List IngressPoints with NextToken
+    #
+    #   resp = client.list_ingress_points({
+    #     next_token: "nextToken", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     ingress_points: [
+    #       {
+    #         a_record: "abcde123.prod.us-east-1.email-border.ses.aws.a2z.com", 
+    #         ingress_point_id: "inp-12345", 
+    #         ingress_point_name: "ingressPointName", 
+    #         status: "ACTIVE", 
+    #         type: "OPEN", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_ingress_points({
-    #     next_token: "PaginationToken",
     #     page_size: 1,
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
     #
     #   resp.ingress_points #=> Array
-    #   resp.ingress_points[0].a_record #=> String
-    #   resp.ingress_points[0].ingress_point_id #=> String
     #   resp.ingress_points[0].ingress_point_name #=> String
+    #   resp.ingress_points[0].ingress_point_id #=> String
     #   resp.ingress_points[0].status #=> String, one of "PROVISIONING", "DEPROVISIONING", "UPDATING", "ACTIVE", "CLOSED", "FAILED"
     #   resp.ingress_points[0].type #=> String, one of "OPEN", "AUTH"
+    #   resp.ingress_points[0].a_record #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/ListIngressPoints AWS API Documentation
@@ -2612,35 +2860,35 @@ module Aws::MailManager
 
     # Lists all the existing relay resources.
     #
+    # @option params [Integer] :page_size
+    #   The number of relays to be returned in one request.
+    #
     # @option params [String] :next_token
     #   If you received a pagination token from a previous call to this API,
     #   you can provide it here to continue paginating through the next page
     #   of results.
     #
-    # @option params [Integer] :page_size
-    #   The number of relays to be returned in one request.
-    #
     # @return [Types::ListRelaysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListRelaysResponse#next_token #next_token} => String
     #   * {Types::ListRelaysResponse#relays #relays} => Array&lt;Types::Relay&gt;
+    #   * {Types::ListRelaysResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_relays({
-    #     next_token: "PaginationToken",
     #     page_size: 1,
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.relays #=> Array
-    #   resp.relays[0].last_modified_timestamp #=> Time
     #   resp.relays[0].relay_id #=> String
     #   resp.relays[0].relay_name #=> String
+    #   resp.relays[0].last_modified_timestamp #=> Time
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/ListRelays AWS API Documentation
     #
@@ -2664,8 +2912,8 @@ module Aws::MailManager
     #
     # @return [Types::ListRuleSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListRuleSetsResponse#next_token #next_token} => String
     #   * {Types::ListRuleSetsResponse#rule_sets #rule_sets} => Array&lt;Types::RuleSet&gt;
+    #   * {Types::ListRuleSetsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -2678,11 +2926,11 @@ module Aws::MailManager
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.rule_sets #=> Array
-    #   resp.rule_sets[0].last_modification_date #=> Time
     #   resp.rule_sets[0].rule_set_id #=> String
     #   resp.rule_sets[0].rule_set_name #=> String
+    #   resp.rule_sets[0].last_modification_date #=> Time
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/ListRuleSets AWS API Documentation
     #
@@ -2725,36 +2973,87 @@ module Aws::MailManager
 
     # List traffic policy resources.
     #
+    # @option params [Integer] :page_size
+    #   The maximum number of traffic policy resources that are returned per
+    #   call. You can use NextToken to obtain further traffic policies.
+    #
     # @option params [String] :next_token
     #   If you received a pagination token from a previous call to this API,
     #   you can provide it here to continue paginating through the next page
     #   of results.
     #
-    # @option params [Integer] :page_size
-    #   The maximum number of traffic policy resources that are returned per
-    #   call. You can use NextToken to obtain further traffic policies.
-    #
     # @return [Types::ListTrafficPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListTrafficPoliciesResponse#next_token #next_token} => String
     #   * {Types::ListTrafficPoliciesResponse#traffic_policies #traffic_policies} => Array&lt;Types::TrafficPolicy&gt;
+    #   * {Types::ListTrafficPoliciesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List TrafficPolicies
+    #
+    #   resp = client.list_traffic_policies({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     traffic_policies: [
+    #       {
+    #         default_action: "DENY", 
+    #         traffic_policy_id: "tp-12345", 
+    #         traffic_policy_name: "trafficPolicyName", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: List TrafficPolicies with PageSize
+    #
+    #   resp = client.list_traffic_policies({
+    #     page_size: 10, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     traffic_policies: [
+    #       {
+    #         default_action: "DENY", 
+    #         traffic_policy_id: "tp-12345", 
+    #         traffic_policy_name: "trafficPolicyName", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: List TrafficPolicies with NextToken
+    #
+    #   resp = client.list_traffic_policies({
+    #     next_token: "nextToken", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     traffic_policies: [
+    #       {
+    #         default_action: "DENY", 
+    #         traffic_policy_id: "tp-12345", 
+    #         traffic_policy_name: "trafficPolicyName", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_traffic_policies({
-    #     next_token: "PaginationToken",
     #     page_size: 1,
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.traffic_policies #=> Array
-    #   resp.traffic_policies[0].default_action #=> String, one of "ALLOW", "DENY"
-    #   resp.traffic_policies[0].traffic_policy_id #=> String
     #   resp.traffic_policies[0].traffic_policy_name #=> String
+    #   resp.traffic_policies[0].traffic_policy_id #=> String
+    #   resp.traffic_policies[0].default_action #=> String, one of "ALLOW", "DENY"
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/ListTrafficPolicies AWS API Documentation
     #
@@ -2767,20 +3066,20 @@ module Aws::MailManager
 
     # Adds a member to an address list.
     #
-    # @option params [required, String] :address
-    #   The address to be added to the address list.
-    #
     # @option params [required, String] :address_list_id
     #   The unique identifier of the address list where the address should be
     #   added.
+    #
+    # @option params [required, String] :address
+    #   The address to be added to the address list.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_member_to_address_list({
-    #     address: "Address", # required
     #     address_list_id: "AddressListId", # required
+    #     address: "Address", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/RegisterMemberToAddressList AWS API Documentation
@@ -2819,23 +3118,23 @@ module Aws::MailManager
     # @option params [required, String] :archive_id
     #   The identifier of the archive to export emails from.
     #
-    # @option params [required, Types::ExportDestinationConfiguration] :export_destination_configuration
-    #   Details on where to deliver the exported email data.
-    #
     # @option params [Types::ArchiveFilters] :filters
     #   Criteria to filter which emails are included in the export.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :from_timestamp
     #   The start of the timestamp range to include emails from.
     #
-    # @option params [Boolean] :include_metadata
-    #   Whether to include message metadata as JSON files in the export.
+    # @option params [required, Time,DateTime,Date,Integer,String] :to_timestamp
+    #   The end of the timestamp range to include emails from.
     #
     # @option params [Integer] :max_results
     #   The maximum number of email items to include in the export.
     #
-    # @option params [required, Time,DateTime,Date,Integer,String] :to_timestamp
-    #   The end of the timestamp range to include emails from.
+    # @option params [required, Types::ExportDestinationConfiguration] :export_destination_configuration
+    #   Details on where to deliver the exported email data.
+    #
+    # @option params [Boolean] :include_metadata
+    #   Whether to include message metadata as JSON files in the export.
     #
     # @return [Types::StartArchiveExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2845,37 +3144,26 @@ module Aws::MailManager
     #
     #   resp = client.start_archive_export({
     #     archive_id: "ArchiveId", # required
-    #     export_destination_configuration: { # required
-    #       s3: {
-    #         s3_location: "S3Location",
-    #       },
-    #     },
     #     filters: {
     #       include: [
     #         {
-    #           boolean_expression: {
-    #             evaluate: { # required
-    #               attribute: "HAS_ATTACHMENTS", # accepts HAS_ATTACHMENTS
-    #             },
-    #             operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
-    #           },
     #           string_expression: {
     #             evaluate: { # required
     #               attribute: "TO", # accepts TO, FROM, CC, SUBJECT, ENVELOPE_TO, ENVELOPE_FROM
     #             },
     #             operator: "CONTAINS", # required, accepts CONTAINS
     #             values: ["StringValue"], # required
+    #           },
+    #           boolean_expression: {
+    #             evaluate: { # required
+    #               attribute: "HAS_ATTACHMENTS", # accepts HAS_ATTACHMENTS
+    #             },
+    #             operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
     #           },
     #         },
     #       ],
     #       unless: [
     #         {
-    #           boolean_expression: {
-    #             evaluate: { # required
-    #               attribute: "HAS_ATTACHMENTS", # accepts HAS_ATTACHMENTS
-    #             },
-    #             operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
-    #           },
     #           string_expression: {
     #             evaluate: { # required
     #               attribute: "TO", # accepts TO, FROM, CC, SUBJECT, ENVELOPE_TO, ENVELOPE_FROM
@@ -2883,13 +3171,24 @@ module Aws::MailManager
     #             operator: "CONTAINS", # required, accepts CONTAINS
     #             values: ["StringValue"], # required
     #           },
+    #           boolean_expression: {
+    #             evaluate: { # required
+    #               attribute: "HAS_ATTACHMENTS", # accepts HAS_ATTACHMENTS
+    #             },
+    #             operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
+    #           },
     #         },
     #       ],
     #     },
     #     from_timestamp: Time.now, # required
-    #     include_metadata: false,
-    #     max_results: 1,
     #     to_timestamp: Time.now, # required
+    #     max_results: 1,
+    #     export_destination_configuration: { # required
+    #       s3: {
+    #         s3_location: "S3Location",
+    #       },
+    #     },
+    #     include_metadata: false,
     #   })
     #
     # @example Response structure
@@ -2916,11 +3215,11 @@ module Aws::MailManager
     # @option params [required, Time,DateTime,Date,Integer,String] :from_timestamp
     #   The start timestamp of the range to search emails from.
     #
-    # @option params [required, Integer] :max_results
-    #   The maximum number of search results to return.
-    #
     # @option params [required, Time,DateTime,Date,Integer,String] :to_timestamp
     #   The end timestamp of the range to search emails from.
+    #
+    # @option params [required, Integer] :max_results
+    #   The maximum number of search results to return.
     #
     # @return [Types::StartArchiveSearchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2933,29 +3232,23 @@ module Aws::MailManager
     #     filters: {
     #       include: [
     #         {
-    #           boolean_expression: {
-    #             evaluate: { # required
-    #               attribute: "HAS_ATTACHMENTS", # accepts HAS_ATTACHMENTS
-    #             },
-    #             operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
-    #           },
     #           string_expression: {
     #             evaluate: { # required
     #               attribute: "TO", # accepts TO, FROM, CC, SUBJECT, ENVELOPE_TO, ENVELOPE_FROM
     #             },
     #             operator: "CONTAINS", # required, accepts CONTAINS
     #             values: ["StringValue"], # required
+    #           },
+    #           boolean_expression: {
+    #             evaluate: { # required
+    #               attribute: "HAS_ATTACHMENTS", # accepts HAS_ATTACHMENTS
+    #             },
+    #             operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
     #           },
     #         },
     #       ],
     #       unless: [
     #         {
-    #           boolean_expression: {
-    #             evaluate: { # required
-    #               attribute: "HAS_ATTACHMENTS", # accepts HAS_ATTACHMENTS
-    #             },
-    #             operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
-    #           },
     #           string_expression: {
     #             evaluate: { # required
     #               attribute: "TO", # accepts TO, FROM, CC, SUBJECT, ENVELOPE_TO, ENVELOPE_FROM
@@ -2963,12 +3256,18 @@ module Aws::MailManager
     #             operator: "CONTAINS", # required, accepts CONTAINS
     #             values: ["StringValue"], # required
     #           },
+    #           boolean_expression: {
+    #             evaluate: { # required
+    #               attribute: "HAS_ATTACHMENTS", # accepts HAS_ATTACHMENTS
+    #             },
+    #             operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
+    #           },
     #         },
     #       ],
     #     },
     #     from_timestamp: Time.now, # required
-    #     max_results: 1, # required
     #     to_timestamp: Time.now, # required
+    #     max_results: 1, # required
     #   })
     #
     # @example Response structure
@@ -3144,41 +3443,91 @@ module Aws::MailManager
 
     # Update attributes of a provisioned ingress endpoint resource.
     #
-    # @option params [Types::IngressPointConfiguration] :ingress_point_configuration
-    #   If you choose an Authenticated ingress endpoint, you must configure
-    #   either an SMTP password or a secret ARN.
-    #
     # @option params [required, String] :ingress_point_id
     #   The identifier for the ingress endpoint you want to update.
     #
     # @option params [String] :ingress_point_name
     #   A user friendly name for the ingress endpoint resource.
     #
+    # @option params [String] :status_to_update
+    #   The update status of an ingress endpoint.
+    #
     # @option params [String] :rule_set_id
     #   The identifier of an existing rule set that you attach to an ingress
     #   endpoint resource.
-    #
-    # @option params [String] :status_to_update
-    #   The update status of an ingress endpoint.
     #
     # @option params [String] :traffic_policy_id
     #   The identifier of an existing traffic policy that you attach to an
     #   ingress endpoint resource.
     #
+    # @option params [Types::IngressPointConfiguration] :ingress_point_configuration
+    #   If you choose an Authenticated ingress endpoint, you must configure
+    #   either an SMTP password or a secret ARN.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Update Open/Auth IngressPoint with new Name
+    #
+    #   resp = client.update_ingress_point({
+    #     ingress_point_id: "inp-12345", 
+    #     ingress_point_name: "ingressPointNewName", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Example: Update Open/Auth IngressPoint with new RuleSetId / TrafficPolicyId
+    #
+    #   resp = client.update_ingress_point({
+    #     ingress_point_id: "inp-12345", 
+    #     rule_set_id: "rs-12345", 
+    #     traffic_policy_id: "tp-12345", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Example: Update Auth IngressPoint with new SmtpPassword
+    #
+    #   resp = client.update_ingress_point({
+    #     ingress_point_configuration: {
+    #       smtp_password: "newSmtpPassword", 
+    #     }, 
+    #     ingress_point_id: "inp-12345", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Example: Update Auth IngressPoint with new SecretArn
+    #
+    #   resp = client.update_ingress_point({
+    #     ingress_point_configuration: {
+    #       secret_arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:abcde", 
+    #     }, 
+    #     ingress_point_id: "inp-12345", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_ingress_point({
-    #     ingress_point_configuration: {
-    #       secret_arn: "SecretArn",
-    #       smtp_password: "SmtpPassword",
-    #     },
     #     ingress_point_id: "IngressPointId", # required
     #     ingress_point_name: "IngressPointName",
-    #     rule_set_id: "RuleSetId",
     #     status_to_update: "ACTIVE", # accepts ACTIVE, CLOSED
+    #     rule_set_id: "RuleSetId",
     #     traffic_policy_id: "TrafficPolicyId",
+    #     ingress_point_configuration: {
+    #       smtp_password: "SmtpPassword",
+    #       secret_arn: "SecretArn",
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/UpdateIngressPoint AWS API Documentation
@@ -3192,10 +3541,6 @@ module Aws::MailManager
 
     # Updates the attributes of an existing relay resource.
     #
-    # @option params [Types::RelayAuthentication] :authentication
-    #   Authentication for the relay destination server—specify the secretARN
-    #   where the SMTP credentials are stored.
-    #
     # @option params [required, String] :relay_id
     #   The unique relay identifier.
     #
@@ -3208,20 +3553,24 @@ module Aws::MailManager
     # @option params [Integer] :server_port
     #   The destination relay server port.
     #
+    # @option params [Types::RelayAuthentication] :authentication
+    #   Authentication for the relay destination server—specify the secretARN
+    #   where the SMTP credentials are stored.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_relay({
-    #     authentication: {
-    #       no_authentication: {
-    #       },
-    #       secret_arn: "SecretArn",
-    #     },
     #     relay_id: "RelayId", # required
     #     relay_name: "RelayName",
     #     server_name: "RelayServerName",
     #     server_port: 1,
+    #     authentication: {
+    #       secret_arn: "SecretArn",
+    #       no_authentication: {
+    #       },
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/UpdateRelay AWS API Documentation
@@ -3254,15 +3603,155 @@ module Aws::MailManager
     #     rule_set_name: "RuleSetName",
     #     rules: [
     #       {
+    #         name: "RuleName",
+    #         conditions: [
+    #           {
+    #             boolean_expression: {
+    #               evaluate: { # required
+    #                 attribute: "READ_RECEIPT_REQUESTED", # accepts READ_RECEIPT_REQUESTED, TLS, TLS_WRAPPED
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
+    #                 is_in_address_list: {
+    #                   attribute: "RECIPIENT", # required, accepts RECIPIENT, MAIL_FROM, SENDER, FROM, TO, CC
+    #                   address_lists: ["AddressListArn"], # required
+    #                 },
+    #               },
+    #               operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
+    #             },
+    #             string_expression: {
+    #               evaluate: { # required
+    #                 attribute: "MAIL_FROM", # accepts MAIL_FROM, HELO, RECIPIENT, SENDER, FROM, SUBJECT, TO, CC
+    #                 mime_header_attribute: "MimeHeaderAttribute",
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
+    #               },
+    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
+    #               values: ["RuleStringValue"], # required
+    #             },
+    #             number_expression: {
+    #               evaluate: { # required
+    #                 attribute: "MESSAGE_SIZE", # accepts MESSAGE_SIZE
+    #               },
+    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUAL, GREATER_THAN_OR_EQUAL
+    #               value: 1.0, # required
+    #             },
+    #             ip_expression: {
+    #               evaluate: { # required
+    #                 attribute: "SOURCE_IP", # accepts SOURCE_IP
+    #               },
+    #               operator: "CIDR_MATCHES", # required, accepts CIDR_MATCHES, NOT_CIDR_MATCHES
+    #               values: ["RuleIpStringValue"], # required
+    #             },
+    #             verdict_expression: {
+    #               evaluate: { # required
+    #                 attribute: "SPF", # accepts SPF, DKIM
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
+    #               },
+    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #               values: ["PASS"], # required, accepts PASS, FAIL, GRAY, PROCESSING_FAILED
+    #             },
+    #             dmarc_expression: {
+    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #               values: ["NONE"], # required, accepts NONE, QUARANTINE, REJECT
+    #             },
+    #           },
+    #         ],
+    #         unless: [
+    #           {
+    #             boolean_expression: {
+    #               evaluate: { # required
+    #                 attribute: "READ_RECEIPT_REQUESTED", # accepts READ_RECEIPT_REQUESTED, TLS, TLS_WRAPPED
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
+    #                 is_in_address_list: {
+    #                   attribute: "RECIPIENT", # required, accepts RECIPIENT, MAIL_FROM, SENDER, FROM, TO, CC
+    #                   address_lists: ["AddressListArn"], # required
+    #                 },
+    #               },
+    #               operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
+    #             },
+    #             string_expression: {
+    #               evaluate: { # required
+    #                 attribute: "MAIL_FROM", # accepts MAIL_FROM, HELO, RECIPIENT, SENDER, FROM, SUBJECT, TO, CC
+    #                 mime_header_attribute: "MimeHeaderAttribute",
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
+    #               },
+    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
+    #               values: ["RuleStringValue"], # required
+    #             },
+    #             number_expression: {
+    #               evaluate: { # required
+    #                 attribute: "MESSAGE_SIZE", # accepts MESSAGE_SIZE
+    #               },
+    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUAL, GREATER_THAN_OR_EQUAL
+    #               value: 1.0, # required
+    #             },
+    #             ip_expression: {
+    #               evaluate: { # required
+    #                 attribute: "SOURCE_IP", # accepts SOURCE_IP
+    #               },
+    #               operator: "CIDR_MATCHES", # required, accepts CIDR_MATCHES, NOT_CIDR_MATCHES
+    #               values: ["RuleIpStringValue"], # required
+    #             },
+    #             verdict_expression: {
+    #               evaluate: { # required
+    #                 attribute: "SPF", # accepts SPF, DKIM
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
+    #               },
+    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #               values: ["PASS"], # required, accepts PASS, FAIL, GRAY, PROCESSING_FAILED
+    #             },
+    #             dmarc_expression: {
+    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #               values: ["NONE"], # required, accepts NONE, QUARANTINE, REJECT
+    #             },
+    #           },
+    #         ],
     #         actions: [ # required
     #           {
-    #             add_header: {
-    #               header_name: "HeaderName", # required
-    #               header_value: "HeaderValue", # required
+    #             drop: {
+    #             },
+    #             relay: {
+    #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
+    #               relay: "IdOrArn", # required
+    #               mail_from: "REPLACE", # accepts REPLACE, PRESERVE
     #             },
     #             archive: {
     #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
     #               target_archive: "NameOrArn", # required
+    #             },
+    #             write_to_s3: {
+    #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
+    #               role_arn: "IamRoleArn", # required
+    #               s3_bucket: "S3Bucket", # required
+    #               s3_prefix: "S3Prefix",
+    #               s3_sse_kms_key_id: "KmsKeyId",
+    #             },
+    #             send: {
+    #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
+    #               role_arn: "IamRoleArn", # required
+    #             },
+    #             add_header: {
+    #               header_name: "HeaderName", # required
+    #               header_value: "HeaderValue", # required
+    #             },
+    #             replace_recipient: {
+    #               replace_with: ["EmailAddress"],
     #             },
     #             deliver_to_mailbox: {
     #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
@@ -3275,152 +3764,12 @@ module Aws::MailManager
     #               index_id: "QBusinessIndexId", # required
     #               role_arn: "IamRoleArn", # required
     #             },
-    #             drop: {
-    #             },
     #             publish_to_sns: {
     #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
+    #               topic_arn: "SnsTopicArn", # required
+    #               role_arn: "IamRoleArn", # required
     #               encoding: "UTF-8", # accepts UTF-8, BASE64
     #               payload_type: "HEADERS", # accepts HEADERS, CONTENT
-    #               role_arn: "IamRoleArn", # required
-    #               topic_arn: "SnsTopicArn", # required
-    #             },
-    #             relay: {
-    #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
-    #               mail_from: "REPLACE", # accepts REPLACE, PRESERVE
-    #               relay: "IdOrArn", # required
-    #             },
-    #             replace_recipient: {
-    #               replace_with: ["EmailAddress"],
-    #             },
-    #             send: {
-    #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
-    #               role_arn: "IamRoleArn", # required
-    #             },
-    #             write_to_s3: {
-    #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
-    #               role_arn: "IamRoleArn", # required
-    #               s3_bucket: "S3Bucket", # required
-    #               s3_prefix: "S3Prefix",
-    #               s3_sse_kms_key_id: "KmsKeyId",
-    #             },
-    #           },
-    #         ],
-    #         conditions: [
-    #           {
-    #             boolean_expression: {
-    #               evaluate: { # required
-    #                 analysis: {
-    #                   analyzer: "AnalyzerArn", # required
-    #                   result_field: "ResultField", # required
-    #                 },
-    #                 attribute: "READ_RECEIPT_REQUESTED", # accepts READ_RECEIPT_REQUESTED, TLS, TLS_WRAPPED
-    #                 is_in_address_list: {
-    #                   address_lists: ["AddressListArn"], # required
-    #                   attribute: "RECIPIENT", # required, accepts RECIPIENT, MAIL_FROM, SENDER, FROM, TO, CC
-    #                 },
-    #               },
-    #               operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
-    #             },
-    #             dmarc_expression: {
-    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               values: ["NONE"], # required, accepts NONE, QUARANTINE, REJECT
-    #             },
-    #             ip_expression: {
-    #               evaluate: { # required
-    #                 attribute: "SOURCE_IP", # accepts SOURCE_IP
-    #               },
-    #               operator: "CIDR_MATCHES", # required, accepts CIDR_MATCHES, NOT_CIDR_MATCHES
-    #               values: ["RuleIpStringValue"], # required
-    #             },
-    #             number_expression: {
-    #               evaluate: { # required
-    #                 attribute: "MESSAGE_SIZE", # accepts MESSAGE_SIZE
-    #               },
-    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUAL, GREATER_THAN_OR_EQUAL
-    #               value: 1.0, # required
-    #             },
-    #             string_expression: {
-    #               evaluate: { # required
-    #                 analysis: {
-    #                   analyzer: "AnalyzerArn", # required
-    #                   result_field: "ResultField", # required
-    #                 },
-    #                 attribute: "MAIL_FROM", # accepts MAIL_FROM, HELO, RECIPIENT, SENDER, FROM, SUBJECT, TO, CC
-    #                 mime_header_attribute: "MimeHeaderAttribute",
-    #               },
-    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
-    #               values: ["RuleStringValue"], # required
-    #             },
-    #             verdict_expression: {
-    #               evaluate: { # required
-    #                 analysis: {
-    #                   analyzer: "AnalyzerArn", # required
-    #                   result_field: "ResultField", # required
-    #                 },
-    #                 attribute: "SPF", # accepts SPF, DKIM
-    #               },
-    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               values: ["PASS"], # required, accepts PASS, FAIL, GRAY, PROCESSING_FAILED
-    #             },
-    #           },
-    #         ],
-    #         name: "RuleName",
-    #         unless: [
-    #           {
-    #             boolean_expression: {
-    #               evaluate: { # required
-    #                 analysis: {
-    #                   analyzer: "AnalyzerArn", # required
-    #                   result_field: "ResultField", # required
-    #                 },
-    #                 attribute: "READ_RECEIPT_REQUESTED", # accepts READ_RECEIPT_REQUESTED, TLS, TLS_WRAPPED
-    #                 is_in_address_list: {
-    #                   address_lists: ["AddressListArn"], # required
-    #                   attribute: "RECIPIENT", # required, accepts RECIPIENT, MAIL_FROM, SENDER, FROM, TO, CC
-    #                 },
-    #               },
-    #               operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
-    #             },
-    #             dmarc_expression: {
-    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               values: ["NONE"], # required, accepts NONE, QUARANTINE, REJECT
-    #             },
-    #             ip_expression: {
-    #               evaluate: { # required
-    #                 attribute: "SOURCE_IP", # accepts SOURCE_IP
-    #               },
-    #               operator: "CIDR_MATCHES", # required, accepts CIDR_MATCHES, NOT_CIDR_MATCHES
-    #               values: ["RuleIpStringValue"], # required
-    #             },
-    #             number_expression: {
-    #               evaluate: { # required
-    #                 attribute: "MESSAGE_SIZE", # accepts MESSAGE_SIZE
-    #               },
-    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUAL, GREATER_THAN_OR_EQUAL
-    #               value: 1.0, # required
-    #             },
-    #             string_expression: {
-    #               evaluate: { # required
-    #                 analysis: {
-    #                   analyzer: "AnalyzerArn", # required
-    #                   result_field: "ResultField", # required
-    #                 },
-    #                 attribute: "MAIL_FROM", # accepts MAIL_FROM, HELO, RECIPIENT, SENDER, FROM, SUBJECT, TO, CC
-    #                 mime_header_attribute: "MimeHeaderAttribute",
-    #               },
-    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
-    #               values: ["RuleStringValue"], # required
-    #             },
-    #             verdict_expression: {
-    #               evaluate: { # required
-    #                 analysis: {
-    #                   analyzer: "AnalyzerArn", # required
-    #                   result_field: "ResultField", # required
-    #                 },
-    #                 attribute: "SPF", # accepts SPF, DKIM
-    #               },
-    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
-    #               values: ["PASS"], # required, accepts PASS, FAIL, GRAY, PROCESSING_FAILED
     #             },
     #           },
     #         ],
@@ -3439,6 +3788,15 @@ module Aws::MailManager
 
     # Update attributes of an already provisioned traffic policy resource.
     #
+    # @option params [required, String] :traffic_policy_id
+    #   The identifier of the traffic policy that you want to update.
+    #
+    # @option params [String] :traffic_policy_name
+    #   A user-friendly name for the traffic policy resource.
+    #
+    # @option params [Array<Types::PolicyStatement>] :policy_statements
+    #   The list of conditions to be updated for filtering email traffic.
+    #
     # @option params [String] :default_action
     #   Default action instructs the traﬃc policy to either Allow or Deny
     #   (block) messages that fall outside of (or not addressed by) the
@@ -3448,39 +3806,79 @@ module Aws::MailManager
     #   The maximum message size in bytes of email which is allowed in by this
     #   traffic policy—anything larger will be blocked.
     #
-    # @option params [Array<Types::PolicyStatement>] :policy_statements
-    #   The list of conditions to be updated for filtering email traffic.
-    #
-    # @option params [required, String] :traffic_policy_id
-    #   The identifier of the traffic policy that you want to update.
-    #
-    # @option params [String] :traffic_policy_name
-    #   A user-friendly name for the traffic policy resource.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Update TrafficPolicy with new Name
+    #
+    #   resp = client.update_traffic_policy({
+    #     traffic_policy_id: "tp-12345", 
+    #     traffic_policy_name: "trafficPolicyNewName", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Example: Update TrafficPolicy with new PolicyStatements
+    #
+    #   resp = client.update_traffic_policy({
+    #     policy_statements: [
+    #       {
+    #         action: "ALLOW", 
+    #         conditions: [
+    #           {
+    #             string_expression: {
+    #               evaluate: {
+    #                 attribute: "RECIPIENT", 
+    #               }, 
+    #               operator: "EQUALS", 
+    #               values: [
+    #                 "example@amazon.com", 
+    #                 "example@gmail.com", 
+    #               ], 
+    #             }, 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     traffic_policy_id: "tp-12345", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Example: Update TrafficPolicy with new DefaultAction
+    #
+    #   resp = client.update_traffic_policy({
+    #     default_action: "ALLOW", 
+    #     traffic_policy_id: "tp-12345", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_traffic_policy({
-    #     default_action: "ALLOW", # accepts ALLOW, DENY
-    #     max_message_size_bytes: 1,
+    #     traffic_policy_id: "TrafficPolicyId", # required
+    #     traffic_policy_name: "TrafficPolicyName",
     #     policy_statements: [
     #       {
-    #         action: "ALLOW", # required, accepts ALLOW, DENY
     #         conditions: [ # required
     #           {
-    #             boolean_expression: {
+    #             string_expression: {
     #               evaluate: { # required
+    #                 attribute: "RECIPIENT", # accepts RECIPIENT
     #                 analysis: {
     #                   analyzer: "AnalyzerArn", # required
     #                   result_field: "ResultField", # required
     #                 },
-    #                 is_in_address_list: {
-    #                   address_lists: ["AddressListArn"], # required
-    #                   attribute: "RECIPIENT", # required, accepts RECIPIENT
-    #                 },
     #               },
-    #               operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
+    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
+    #               values: ["String"], # required
     #             },
     #             ip_expression: {
     #               evaluate: { # required
@@ -3496,17 +3894,6 @@ module Aws::MailManager
     #               operator: "CIDR_MATCHES", # required, accepts CIDR_MATCHES, NOT_CIDR_MATCHES
     #               values: ["Ipv6Cidr"], # required
     #             },
-    #             string_expression: {
-    #               evaluate: { # required
-    #                 analysis: {
-    #                   analyzer: "AnalyzerArn", # required
-    #                   result_field: "ResultField", # required
-    #                 },
-    #                 attribute: "RECIPIENT", # accepts RECIPIENT
-    #               },
-    #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
-    #               values: ["String"], # required
-    #             },
     #             tls_expression: {
     #               evaluate: { # required
     #                 attribute: "TLS_PROTOCOL", # accepts TLS_PROTOCOL
@@ -3514,12 +3901,26 @@ module Aws::MailManager
     #               operator: "MINIMUM_TLS_VERSION", # required, accepts MINIMUM_TLS_VERSION, IS
     #               value: "TLS1_2", # required, accepts TLS1_2, TLS1_3
     #             },
+    #             boolean_expression: {
+    #               evaluate: { # required
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
+    #                 is_in_address_list: {
+    #                   attribute: "RECIPIENT", # required, accepts RECIPIENT
+    #                   address_lists: ["AddressListArn"], # required
+    #                 },
+    #               },
+    #               operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
+    #             },
     #           },
     #         ],
+    #         action: "ALLOW", # required, accepts ALLOW, DENY
     #       },
     #     ],
-    #     traffic_policy_id: "TrafficPolicyId", # required
-    #     traffic_policy_name: "TrafficPolicyName",
+    #     default_action: "ALLOW", # accepts ALLOW, DENY
+    #     max_message_size_bytes: 1,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/UpdateTrafficPolicy AWS API Documentation
@@ -3549,7 +3950,7 @@ module Aws::MailManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mailmanager'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

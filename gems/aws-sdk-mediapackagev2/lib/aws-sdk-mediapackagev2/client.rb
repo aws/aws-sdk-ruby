@@ -1065,6 +1065,12 @@ module Aws::MediaPackageV2
     # @option params [Array<Types::CreateDashManifestConfiguration>] :dash_manifests
     #   A DASH manifest configuration.
     #
+    # @option params [Array<Types::CreateMssManifestConfiguration>] :mss_manifests
+    #   A list of Microsoft Smooth Streaming (MSS) manifest configurations for
+    #   the origin endpoint. You can configure multiple MSS manifests to
+    #   provide different streaming experiences or to support different client
+    #   requirements.
+    #
     # @option params [Types::ForceEndpointErrorConfiguration] :force_endpoint_error_configuration
     #   The failover settings for the endpoint.
     #
@@ -1091,6 +1097,7 @@ module Aws::MediaPackageV2
     #   * {Types::CreateOriginEndpointResponse#hls_manifests #hls_manifests} => Array&lt;Types::GetHlsManifestConfiguration&gt;
     #   * {Types::CreateOriginEndpointResponse#low_latency_hls_manifests #low_latency_hls_manifests} => Array&lt;Types::GetLowLatencyHlsManifestConfiguration&gt;
     #   * {Types::CreateOriginEndpointResponse#dash_manifests #dash_manifests} => Array&lt;Types::GetDashManifestConfiguration&gt;
+    #   * {Types::CreateOriginEndpointResponse#mss_manifests #mss_manifests} => Array&lt;Types::GetMssManifestConfiguration&gt;
     #   * {Types::CreateOriginEndpointResponse#force_endpoint_error_configuration #force_endpoint_error_configuration} => Types::ForceEndpointErrorConfiguration
     #   * {Types::CreateOriginEndpointResponse#etag #etag} => String
     #   * {Types::CreateOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -1702,13 +1709,119 @@ module Aws::MediaPackageV2
     #     }, 
     #   }
     #
+    # @example Example: Creating an OriginEndpoint with container type ISM, and encryption enabled
+    #
+    #   resp = client.create_origin_endpoint({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     container_type: "ISM", 
+    #     description: "Description for exampleOriginEndpointISM", 
+    #     force_endpoint_error_configuration: {
+    #       endpoint_error_conditions: [
+    #         "STALE_MANIFEST", 
+    #         "INCOMPLETE_MANIFEST", 
+    #         "MISSING_DRM_KEY", 
+    #         "SLATE_INPUT", 
+    #       ], 
+    #     }, 
+    #     mss_manifests: [
+    #       {
+    #         manifest_layout: "FULL", 
+    #         manifest_name: "exampleMssManifest1", 
+    #         manifest_window_seconds: 60, 
+    #       }, 
+    #     ], 
+    #     origin_endpoint_name: "exampleOriginEndpointISM", 
+    #     segment: {
+    #       encryption: {
+    #         encryption_method: {
+    #           ism_encryption_method: "CENC", 
+    #         }, 
+    #         speke_key_provider: {
+    #           drm_systems: [
+    #             "PLAYREADY", 
+    #           ], 
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "SHARED", 
+    #             preset_speke_20_video: "SHARED", 
+    #           }, 
+    #           resource_id: "ResourceId", 
+    #           role_arn: "arn:aws:iam::123456789012:role/empRole", 
+    #           url: "https://speke-key-provider.example.com", 
+    #         }, 
+    #       }, 
+    #       segment_duration_seconds: 2, 
+    #       segment_name: "segmentName", 
+    #     }, 
+    #     startover_window_seconds: 300, 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel/originEndpoint/exampleOriginEndpointISM", 
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     container_type: "ISM", 
+    #     created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     description: "Description for exampleOriginEndpointISM", 
+    #     etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #     force_endpoint_error_configuration: {
+    #       endpoint_error_conditions: [
+    #         "STALE_MANIFEST", 
+    #         "INCOMPLETE_MANIFEST", 
+    #         "MISSING_DRM_KEY", 
+    #         "SLATE_INPUT", 
+    #       ], 
+    #     }, 
+    #     modified_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     mss_manifests: [
+    #       {
+    #         manifest_layout: "FULL", 
+    #         manifest_name: "exampleMssManifest1", 
+    #         manifest_window_seconds: 60, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointISM/exampleMssManifest1.ism/Manifest", 
+    #       }, 
+    #     ], 
+    #     origin_endpoint_name: "exampleOriginEndpointISM", 
+    #     segment: {
+    #       encryption: {
+    #         encryption_method: {
+    #           ism_encryption_method: "CENC", 
+    #         }, 
+    #         speke_key_provider: {
+    #           drm_systems: [
+    #             "PLAYREADY", 
+    #           ], 
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "SHARED", 
+    #             preset_speke_20_video: "SHARED", 
+    #           }, 
+    #           resource_id: "ResourceId", 
+    #           role_arn: "arn:aws:iam::123456789012:role/empRole", 
+    #           url: "https://speke-key-provider.example.com", 
+    #         }, 
+    #       }, 
+    #       segment_duration_seconds: 2, 
+    #       segment_name: "segmentName", 
+    #     }, 
+    #     startover_window_seconds: 300, 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_origin_endpoint({
     #     channel_group_name: "ResourceName", # required
     #     channel_name: "ResourceName", # required
     #     origin_endpoint_name: "ResourceName", # required
-    #     container_type: "TS", # required, accepts TS, CMAF
+    #     container_type: "TS", # required, accepts TS, CMAF, ISM
     #     segment: {
     #       segment_duration_seconds: 1,
     #       segment_name: "SegmentSegmentNameString",
@@ -1723,8 +1836,10 @@ module Aws::MediaPackageV2
     #         encryption_method: { # required
     #           ts_encryption_method: "AES_128", # accepts AES_128, SAMPLE_AES
     #           cmaf_encryption_method: "CENC", # accepts CENC, CBCS
+    #           ism_encryption_method: "CENC", # accepts CENC
     #         },
     #         key_rotation_interval_seconds: 1,
+    #         cmaf_exclude_segment_drm_metadata: false,
     #         speke_key_provider: { # required
     #           encryption_contract_configuration: { # required
     #             preset_speke_20_audio: "PRESET_AUDIO_1", # required, accepts PRESET_AUDIO_1, PRESET_AUDIO_2, PRESET_AUDIO_3, SHARED, UNENCRYPTED
@@ -1847,6 +1962,20 @@ module Aws::MediaPackageV2
     #         },
     #       },
     #     ],
+    #     mss_manifests: [
+    #       {
+    #         manifest_name: "ManifestName", # required
+    #         manifest_window_seconds: 1,
+    #         filter_configuration: {
+    #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           start: Time.now,
+    #           end: Time.now,
+    #           time_delay_seconds: 1,
+    #           clip_start_time: Time.now,
+    #         },
+    #         manifest_layout: "FULL", # accepts FULL, COMPACT
+    #       },
+    #     ],
     #     force_endpoint_error_configuration: {
     #       endpoint_error_conditions: ["STALE_MANIFEST"], # accepts STALE_MANIFEST, INCOMPLETE_MANIFEST, MISSING_DRM_KEY, SLATE_INPUT
     #     },
@@ -1861,7 +1990,7 @@ module Aws::MediaPackageV2
     #   resp.channel_group_name #=> String
     #   resp.channel_name #=> String
     #   resp.origin_endpoint_name #=> String
-    #   resp.container_type #=> String, one of "TS", "CMAF"
+    #   resp.container_type #=> String, one of "TS", "CMAF", "ISM"
     #   resp.segment.segment_duration_seconds #=> Integer
     #   resp.segment.segment_name #=> String
     #   resp.segment.ts_use_audio_rendition_group #=> Boolean
@@ -1872,7 +2001,9 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.constant_initialization_vector #=> String
     #   resp.segment.encryption.encryption_method.ts_encryption_method #=> String, one of "AES_128", "SAMPLE_AES"
     #   resp.segment.encryption.encryption_method.cmaf_encryption_method #=> String, one of "CENC", "CBCS"
+    #   resp.segment.encryption.encryption_method.ism_encryption_method #=> String, one of "CENC"
     #   resp.segment.encryption.key_rotation_interval_seconds #=> Integer
+    #   resp.segment.encryption.cmaf_exclude_segment_drm_metadata #=> Boolean
     #   resp.segment.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET_AUDIO_1", "PRESET_AUDIO_2", "PRESET_AUDIO_3", "SHARED", "UNENCRYPTED"
     #   resp.segment.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET_VIDEO_1", "PRESET_VIDEO_2", "PRESET_VIDEO_3", "PRESET_VIDEO_4", "PRESET_VIDEO_5", "PRESET_VIDEO_6", "PRESET_VIDEO_7", "PRESET_VIDEO_8", "SHARED", "UNENCRYPTED"
     #   resp.segment.encryption.speke_key_provider.resource_id #=> String
@@ -1953,6 +2084,16 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].dvb_settings.error_metrics[0].probability #=> Integer
     #   resp.dash_manifests[0].compactness #=> String, one of "STANDARD", "NONE"
     #   resp.dash_manifests[0].subtitle_configuration.ttml_configuration.ttml_profile #=> String, one of "IMSC_1", "EBU_TT_D_101"
+    #   resp.mss_manifests #=> Array
+    #   resp.mss_manifests[0].manifest_name #=> String
+    #   resp.mss_manifests[0].url #=> String
+    #   resp.mss_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.mss_manifests[0].filter_configuration.start #=> Time
+    #   resp.mss_manifests[0].filter_configuration.end #=> Time
+    #   resp.mss_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.mss_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.mss_manifests[0].manifest_window_seconds #=> Integer
+    #   resp.mss_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions #=> Array
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions[0] #=> String, one of "STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"
     #   resp.etag #=> String
@@ -2589,6 +2730,7 @@ module Aws::MediaPackageV2
     #   * {Types::GetOriginEndpointResponse#hls_manifests #hls_manifests} => Array&lt;Types::GetHlsManifestConfiguration&gt;
     #   * {Types::GetOriginEndpointResponse#low_latency_hls_manifests #low_latency_hls_manifests} => Array&lt;Types::GetLowLatencyHlsManifestConfiguration&gt;
     #   * {Types::GetOriginEndpointResponse#dash_manifests #dash_manifests} => Array&lt;Types::GetDashManifestConfiguration&gt;
+    #   * {Types::GetOriginEndpointResponse#mss_manifests #mss_manifests} => Array&lt;Types::GetMssManifestConfiguration&gt;
     #   * {Types::GetOriginEndpointResponse#force_endpoint_error_configuration #force_endpoint_error_configuration} => Types::ForceEndpointErrorConfiguration
     #   * {Types::GetOriginEndpointResponse#etag #etag} => String
     #   * {Types::GetOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -2704,6 +2846,75 @@ module Aws::MediaPackageV2
     #     }, 
     #   }
     #
+    # @example Example: Getting an OriginEndpoint with ISM container
+    #
+    #   resp = client.get_origin_endpoint({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     origin_endpoint_name: "exampleOriginEndpointISM", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel/originEndpoint/exampleOriginEndpointISM", 
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     container_type: "ISM", 
+    #     created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     description: "Description for exampleOriginEndpointISM", 
+    #     etag: "HmgU+ewBzHJS5xvz9nLXm2SEQxTsjRfk0rVvuMayoyl=", 
+    #     force_endpoint_error_configuration: {
+    #       endpoint_error_conditions: [
+    #         "STALE_MANIFEST", 
+    #         "INCOMPLETE_MANIFEST", 
+    #         "MISSING_DRM_KEY", 
+    #         "SLATE_INPUT", 
+    #       ], 
+    #     }, 
+    #     modified_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     mss_manifests: [
+    #       {
+    #         manifest_layout: "FULL", 
+    #         manifest_name: "exampleMssManifest1", 
+    #         manifest_window_seconds: 60, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointISM/exampleMssManifest1.ism/Manifest", 
+    #       }, 
+    #       {
+    #         manifest_layout: "COMPACT", 
+    #         manifest_name: "exampleMssManifest2", 
+    #         manifest_window_seconds: 30, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointISM/exampleMssManifest2.ism/Manifest", 
+    #       }, 
+    #     ], 
+    #     origin_endpoint_name: "exampleOriginEndpointISM", 
+    #     segment: {
+    #       encryption: {
+    #         encryption_method: {
+    #           ism_encryption_method: "CENC", 
+    #         }, 
+    #         speke_key_provider: {
+    #           drm_systems: [
+    #             "PLAYREADY", 
+    #           ], 
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "SHARED", 
+    #             preset_speke_20_video: "SHARED", 
+    #           }, 
+    #           resource_id: "ResourceId", 
+    #           role_arn: "arn:aws:iam::123456789012:role/empRole", 
+    #           url: "https://speke-key-provider.example.com", 
+    #         }, 
+    #       }, 
+    #       segment_duration_seconds: 2, 
+    #       segment_name: "segmentName", 
+    #     }, 
+    #     startover_window_seconds: 300, 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_origin_endpoint({
@@ -2718,7 +2929,7 @@ module Aws::MediaPackageV2
     #   resp.channel_group_name #=> String
     #   resp.channel_name #=> String
     #   resp.origin_endpoint_name #=> String
-    #   resp.container_type #=> String, one of "TS", "CMAF"
+    #   resp.container_type #=> String, one of "TS", "CMAF", "ISM"
     #   resp.segment.segment_duration_seconds #=> Integer
     #   resp.segment.segment_name #=> String
     #   resp.segment.ts_use_audio_rendition_group #=> Boolean
@@ -2729,7 +2940,9 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.constant_initialization_vector #=> String
     #   resp.segment.encryption.encryption_method.ts_encryption_method #=> String, one of "AES_128", "SAMPLE_AES"
     #   resp.segment.encryption.encryption_method.cmaf_encryption_method #=> String, one of "CENC", "CBCS"
+    #   resp.segment.encryption.encryption_method.ism_encryption_method #=> String, one of "CENC"
     #   resp.segment.encryption.key_rotation_interval_seconds #=> Integer
+    #   resp.segment.encryption.cmaf_exclude_segment_drm_metadata #=> Boolean
     #   resp.segment.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET_AUDIO_1", "PRESET_AUDIO_2", "PRESET_AUDIO_3", "SHARED", "UNENCRYPTED"
     #   resp.segment.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET_VIDEO_1", "PRESET_VIDEO_2", "PRESET_VIDEO_3", "PRESET_VIDEO_4", "PRESET_VIDEO_5", "PRESET_VIDEO_6", "PRESET_VIDEO_7", "PRESET_VIDEO_8", "SHARED", "UNENCRYPTED"
     #   resp.segment.encryption.speke_key_provider.resource_id #=> String
@@ -2811,6 +3024,16 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].dvb_settings.error_metrics[0].probability #=> Integer
     #   resp.dash_manifests[0].compactness #=> String, one of "STANDARD", "NONE"
     #   resp.dash_manifests[0].subtitle_configuration.ttml_configuration.ttml_profile #=> String, one of "IMSC_1", "EBU_TT_D_101"
+    #   resp.mss_manifests #=> Array
+    #   resp.mss_manifests[0].manifest_name #=> String
+    #   resp.mss_manifests[0].url #=> String
+    #   resp.mss_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.mss_manifests[0].filter_configuration.start #=> Time
+    #   resp.mss_manifests[0].filter_configuration.end #=> Time
+    #   resp.mss_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.mss_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.mss_manifests[0].manifest_window_seconds #=> Integer
+    #   resp.mss_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions #=> Array
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions[0] #=> String, one of "STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"
     #   resp.etag #=> String
@@ -2850,6 +3073,7 @@ module Aws::MediaPackageV2
     #   * {Types::GetOriginEndpointPolicyResponse#channel_name #channel_name} => String
     #   * {Types::GetOriginEndpointPolicyResponse#origin_endpoint_name #origin_endpoint_name} => String
     #   * {Types::GetOriginEndpointPolicyResponse#policy #policy} => String
+    #   * {Types::GetOriginEndpointPolicyResponse#cdn_auth_configuration #cdn_auth_configuration} => Types::CdnAuthConfiguration
     #
     #
     # @example Example: Getting an Origin Endpoint Policy
@@ -2882,6 +3106,9 @@ module Aws::MediaPackageV2
     #   resp.channel_name #=> String
     #   resp.origin_endpoint_name #=> String
     #   resp.policy #=> String
+    #   resp.cdn_auth_configuration.cdn_identifier_secret_arns #=> Array
+    #   resp.cdn_auth_configuration.cdn_identifier_secret_arns[0] #=> String
+    #   resp.cdn_auth_configuration.secrets_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetOriginEndpointPolicy AWS API Documentation
     #
@@ -3075,6 +3302,310 @@ module Aws::MediaPackageV2
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: ListHarvestJobs: Specify ChannelGroup only
+    #
+    #   resp = client.list_harvest_jobs({
+    #     channel_group_name: "exampleChannelGroup", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannelName/originEndpoint/exampleOriginEndpointName/harvestJob/HarvestJobName", 
+    #         channel_group_name: "exampleChannelGroup", 
+    #         channel_name: "exampleChannelName", 
+    #         created_at: Time.parse("2024-05-28T09:36:00.00Z"), 
+    #         description: "Example HarvestJob description", 
+    #         destination: {
+    #           s3_destination: {
+    #             bucket_name: "harvestJobS3DestinationBucket", 
+    #             destination_path: "manifests", 
+    #           }, 
+    #         }, 
+    #         etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #         harvest_job_name: "HarvestJobName", 
+    #         harvested_manifests: {
+    #           dash_manifests: [
+    #             {
+    #               manifest_name: "DashManifest", 
+    #             }, 
+    #           ], 
+    #           hls_manifests: [
+    #             {
+    #               manifest_name: "HlsManifest", 
+    #             }, 
+    #           ], 
+    #           low_latency_hls_manifests: [
+    #             {
+    #               manifest_name: "LowLatencyHlsManifest", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         modified_at: Time.parse("2024-05-28T09:36:00.00Z"), 
+    #         origin_endpoint_name: "exampleOriginEndpointName", 
+    #         schedule_configuration: {
+    #           end_time: Time.parse("2024-05-28T12:00:00.00Z"), 
+    #           start_time: Time.parse("2024-05-28T06:00:00.00Z"), 
+    #         }, 
+    #         status: "QUEUED", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannelName2/originEndpoint/exampleOriginEndpointName2/harvestJob/HarvestJobName2", 
+    #         channel_group_name: "exampleChannelGroup", 
+    #         channel_name: "exampleChannelName2", 
+    #         created_at: Time.parse("2024-05-28T15:30:00.00Z"), 
+    #         description: "Example HarvestJob2 description", 
+    #         destination: {
+    #           s3_destination: {
+    #             bucket_name: "harvestJobS3DestinationBucket", 
+    #             destination_path: "manifests", 
+    #           }, 
+    #         }, 
+    #         etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #         harvest_job_name: "HarvestJobName2", 
+    #         harvested_manifests: {
+    #           dash_manifests: [
+    #             {
+    #               manifest_name: "DashManifest", 
+    #             }, 
+    #           ], 
+    #           hls_manifests: [
+    #             {
+    #               manifest_name: "HlsManifest", 
+    #             }, 
+    #           ], 
+    #           low_latency_hls_manifests: [
+    #             {
+    #               manifest_name: "LowLatencyHlsManifest", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         modified_at: Time.parse("2024-05-28T15:30:00.00Z"), 
+    #         origin_endpoint_name: "exampleOriginEndpointName2", 
+    #         schedule_configuration: {
+    #           end_time: Time.parse("2024-05-28T12:00:00.00Z"), 
+    #           start_time: Time.parse("2024-05-28T02:00:00.00Z"), 
+    #         }, 
+    #         status: "IN_PROGRESS", 
+    #       }, 
+    #     ], 
+    #     next_token: "someTokenValue", 
+    #   }
+    #
+    # @example Example: ListHarvestJobs: Specify ChannelGroup, Channel only
+    #
+    #   resp = client.list_harvest_jobs({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannelName", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannelName/originEndpoint/exampleOriginEndpointName/harvestJob/HarvestJobName", 
+    #         channel_group_name: "exampleChannelGroup", 
+    #         channel_name: "exampleChannelName", 
+    #         created_at: Time.parse("2024-05-28T09:36:00.00Z"), 
+    #         description: "Example HarvestJob description", 
+    #         destination: {
+    #           s3_destination: {
+    #             bucket_name: "harvestJobS3DestinationBucket", 
+    #             destination_path: "manifests", 
+    #           }, 
+    #         }, 
+    #         etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #         harvest_job_name: "HarvestJobName", 
+    #         harvested_manifests: {
+    #           dash_manifests: [
+    #             {
+    #               manifest_name: "DashManifest", 
+    #             }, 
+    #           ], 
+    #           hls_manifests: [
+    #             {
+    #               manifest_name: "HlsManifest", 
+    #             }, 
+    #           ], 
+    #           low_latency_hls_manifests: [
+    #             {
+    #               manifest_name: "LowLatencyHlsManifest", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         modified_at: Time.parse("2024-05-28T09:36:00.00Z"), 
+    #         origin_endpoint_name: "exampleOriginEndpointName", 
+    #         schedule_configuration: {
+    #           end_time: Time.parse("2024-05-28T12:00:00.00Z"), 
+    #           start_time: Time.parse("2024-05-28T06:00:00.00Z"), 
+    #         }, 
+    #         status: "QUEUED", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannelName/originEndpoint/exampleOriginEndpointName2/harvestJob/HarvestJobName2", 
+    #         channel_group_name: "exampleChannelGroup", 
+    #         channel_name: "exampleChannelName", 
+    #         created_at: Time.parse("2024-05-28T15:30:00.00Z"), 
+    #         description: "Example HarvestJob2 description", 
+    #         destination: {
+    #           s3_destination: {
+    #             bucket_name: "harvestJobS3DestinationBucket", 
+    #             destination_path: "manifests", 
+    #           }, 
+    #         }, 
+    #         harvest_job_name: "HarvestJobName2", 
+    #         harvested_manifests: {
+    #           dash_manifests: [
+    #             {
+    #               manifest_name: "DashManifest", 
+    #             }, 
+    #           ], 
+    #           hls_manifests: [
+    #             {
+    #               manifest_name: "HlsManifest", 
+    #             }, 
+    #           ], 
+    #           low_latency_hls_manifests: [
+    #             {
+    #               manifest_name: "LowLatencyHlsManifest", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         modified_at: Time.parse("2024-05-28T15:30:00.00Z"), 
+    #         origin_endpoint_name: "exampleOriginEndpointName2", 
+    #         schedule_configuration: {
+    #           end_time: Time.parse("2024-05-28T12:00:00.00Z"), 
+    #           start_time: Time.parse("2024-05-28T02:00:00.00Z"), 
+    #         }, 
+    #         status: "IN_PROGRESS", 
+    #       }, 
+    #     ], 
+    #     next_token: "someTokenValue", 
+    #   }
+    #
+    # @example Example: ListHarvestJobs: Specify ChannelGroup, Channel, OriginEndpoint
+    #
+    #   resp = client.list_harvest_jobs({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannelName", 
+    #     origin_endpoint_name: "exampleOriginEndpointName", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannelName/originEndpoint/exampleOriginEndpointName/harvestJob/HarvestJobName", 
+    #         channel_group_name: "exampleChannelGroup", 
+    #         channel_name: "exampleChannelName", 
+    #         created_at: Time.parse("2024-05-28T09:36:00.00Z"), 
+    #         description: "Example HarvestJob description", 
+    #         destination: {
+    #           s3_destination: {
+    #             bucket_name: "harvestJobS3DestinationBucket", 
+    #             destination_path: "manifests", 
+    #           }, 
+    #         }, 
+    #         etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #         harvest_job_name: "HarvestJobName", 
+    #         harvested_manifests: {
+    #           dash_manifests: [
+    #             {
+    #               manifest_name: "DashManifest", 
+    #             }, 
+    #           ], 
+    #           hls_manifests: [
+    #             {
+    #               manifest_name: "HlsManifest", 
+    #             }, 
+    #           ], 
+    #           low_latency_hls_manifests: [
+    #             {
+    #               manifest_name: "LowLatencyHlsManifest", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         modified_at: Time.parse("2024-05-28T09:36:00.00Z"), 
+    #         origin_endpoint_name: "exampleOriginEndpointName", 
+    #         schedule_configuration: {
+    #           end_time: Time.parse("2024-05-28T12:00:00.00Z"), 
+    #           start_time: Time.parse("2024-05-28T06:00:00.00Z"), 
+    #         }, 
+    #         status: "QUEUED", 
+    #       }, 
+    #     ], 
+    #     next_token: "someTokenValue", 
+    #   }
+    #
+    # @example Example: ListHarvestJobs: Specify ChannelGroup, Channel, OriginEndpoint + Status filter
+    #
+    #   resp = client.list_harvest_jobs({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannelName", 
+    #     origin_endpoint_name: "exampleOriginEndpointName", 
+    #     status: "QUEUED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannelName/originEndpoint/exampleOriginEndpointName/harvestJob/HarvestJobName", 
+    #         channel_group_name: "exampleChannelGroup", 
+    #         channel_name: "exampleChannelName", 
+    #         created_at: Time.parse("2024-05-28T09:36:00.00Z"), 
+    #         description: "Example HarvestJob description", 
+    #         destination: {
+    #           s3_destination: {
+    #             bucket_name: "harvestJobS3DestinationBucket", 
+    #             destination_path: "manifests", 
+    #           }, 
+    #         }, 
+    #         etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #         harvest_job_name: "HarvestJobName", 
+    #         harvested_manifests: {
+    #           dash_manifests: [
+    #             {
+    #               manifest_name: "DashManifest", 
+    #             }, 
+    #           ], 
+    #           hls_manifests: [
+    #             {
+    #               manifest_name: "HlsManifest", 
+    #             }, 
+    #           ], 
+    #           low_latency_hls_manifests: [
+    #             {
+    #               manifest_name: "LowLatencyHlsManifest", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         modified_at: Time.parse("2024-05-28T09:36:00.00Z"), 
+    #         origin_endpoint_name: "exampleOriginEndpointName", 
+    #         schedule_configuration: {
+    #           end_time: Time.parse("2024-05-28T12:00:00.00Z"), 
+    #           start_time: Time.parse("2024-05-28T06:00:00.00Z"), 
+    #         }, 
+    #         status: "QUEUED", 
+    #       }, 
+    #     ], 
+    #     next_token: "someTokenValue", 
+    #   }
+    #
+    # @example Example: ListHarvestJobs: Empty response
+    #
+    #   resp = client.list_harvest_jobs({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannelName", 
+    #     origin_endpoint_name: "exampleOriginEndpointName", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_harvest_jobs({
@@ -3252,6 +3783,34 @@ module Aws::MediaPackageV2
     #         modified_at: Time.parse("2022-10-18T09:36:00.00Z"), 
     #         origin_endpoint_name: "exampleOriginEndpointCMAF", 
     #       }, 
+    #       {
+    #         arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel/originEndpoint/exampleOriginEndpointISM", 
+    #         channel_group_name: "exampleChannelGroup", 
+    #         channel_name: "exampleChannel", 
+    #         container_type: "ISM", 
+    #         created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #         description: "Description for exampleOriginEndpointISM", 
+    #         force_endpoint_error_configuration: {
+    #           endpoint_error_conditions: [
+    #             "STALE_MANIFEST", 
+    #             "INCOMPLETE_MANIFEST", 
+    #             "MISSING_DRM_KEY", 
+    #             "SLATE_INPUT", 
+    #           ], 
+    #         }, 
+    #         modified_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #         mss_manifests: [
+    #           {
+    #             manifest_name: "exampleMssManifest1", 
+    #             url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointISM/exampleMssManifest1.ism/Manifest", 
+    #           }, 
+    #           {
+    #             manifest_name: "exampleMssManifest2", 
+    #             url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointISM/exampleMssManifest2.ism/Manifest", 
+    #           }, 
+    #         ], 
+    #         origin_endpoint_name: "exampleOriginEndpointISM", 
+    #       }, 
     #     ], 
     #   }
     #
@@ -3271,7 +3830,7 @@ module Aws::MediaPackageV2
     #   resp.items[0].channel_group_name #=> String
     #   resp.items[0].channel_name #=> String
     #   resp.items[0].origin_endpoint_name #=> String
-    #   resp.items[0].container_type #=> String, one of "TS", "CMAF"
+    #   resp.items[0].container_type #=> String, one of "TS", "CMAF", "ISM"
     #   resp.items[0].description #=> String
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].modified_at #=> Time
@@ -3286,6 +3845,9 @@ module Aws::MediaPackageV2
     #   resp.items[0].dash_manifests #=> Array
     #   resp.items[0].dash_manifests[0].manifest_name #=> String
     #   resp.items[0].dash_manifests[0].url #=> String
+    #   resp.items[0].mss_manifests #=> Array
+    #   resp.items[0].mss_manifests[0].manifest_name #=> String
+    #   resp.items[0].mss_manifests[0].url #=> String
     #   resp.items[0].force_endpoint_error_configuration.endpoint_error_conditions #=> Array
     #   resp.items[0].force_endpoint_error_configuration.endpoint_error_conditions[0] #=> String, one of "STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"
     #   resp.next_token #=> String
@@ -3414,6 +3976,17 @@ module Aws::MediaPackageV2
     # @option params [required, String] :policy
     #   The policy to attach to the specified origin endpoint.
     #
+    # @option params [Types::CdnAuthConfiguration] :cdn_auth_configuration
+    #   The settings for using authorization headers between the MediaPackage
+    #   endpoint and your CDN.
+    #
+    #   For information about CDN authorization, see [CDN authorization in
+    #   Elemental MediaPackage][1] in the MediaPackage user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediapackage/latest/userguide/cdn-auth.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -3437,6 +4010,10 @@ module Aws::MediaPackageV2
     #     channel_name: "ResourceName", # required
     #     origin_endpoint_name: "ResourceName", # required
     #     policy: "PolicyText", # required
+    #     cdn_auth_configuration: {
+    #       cdn_identifier_secret_arns: ["CdnIdentifierSecretArn"], # required
+    #       secrets_role_arn: "CdnAuthConfigurationSecretsRoleArnString", # required
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/PutOriginEndpointPolicy AWS API Documentation
@@ -3940,6 +4517,11 @@ module Aws::MediaPackageV2
     # @option params [Array<Types::CreateDashManifestConfiguration>] :dash_manifests
     #   A DASH manifest configuration.
     #
+    # @option params [Array<Types::CreateMssManifestConfiguration>] :mss_manifests
+    #   A list of Microsoft Smooth Streaming (MSS) manifest configurations to
+    #   update for the origin endpoint. This replaces the existing MSS
+    #   manifest configurations.
+    #
     # @option params [Types::ForceEndpointErrorConfiguration] :force_endpoint_error_configuration
     #   The failover settings for the endpoint.
     #
@@ -3962,6 +4544,7 @@ module Aws::MediaPackageV2
     #   * {Types::UpdateOriginEndpointResponse#startover_window_seconds #startover_window_seconds} => Integer
     #   * {Types::UpdateOriginEndpointResponse#hls_manifests #hls_manifests} => Array&lt;Types::GetHlsManifestConfiguration&gt;
     #   * {Types::UpdateOriginEndpointResponse#low_latency_hls_manifests #low_latency_hls_manifests} => Array&lt;Types::GetLowLatencyHlsManifestConfiguration&gt;
+    #   * {Types::UpdateOriginEndpointResponse#mss_manifests #mss_manifests} => Array&lt;Types::GetMssManifestConfiguration&gt;
     #   * {Types::UpdateOriginEndpointResponse#force_endpoint_error_configuration #force_endpoint_error_configuration} => Types::ForceEndpointErrorConfiguration
     #   * {Types::UpdateOriginEndpointResponse#etag #etag} => String
     #   * {Types::UpdateOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -4159,13 +4742,126 @@ module Aws::MediaPackageV2
     #     }, 
     #   }
     #
+    # @example Example: Updating an OriginEndpoint with ISM container
+    #
+    #   resp = client.update_origin_endpoint({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     container_type: "ISM", 
+    #     description: "Updated description for exampleOriginEndpointISM", 
+    #     force_endpoint_error_configuration: {
+    #       endpoint_error_conditions: [
+    #         "STALE_MANIFEST", 
+    #         "INCOMPLETE_MANIFEST", 
+    #         "MISSING_DRM_KEY", 
+    #         "SLATE_INPUT", 
+    #       ], 
+    #     }, 
+    #     mss_manifests: [
+    #       {
+    #         manifest_layout: "FULL", 
+    #         manifest_name: "exampleMssManifest1", 
+    #         manifest_window_seconds: 60, 
+    #       }, 
+    #       {
+    #         manifest_layout: "COMPACT", 
+    #         manifest_name: "exampleMssManifest2", 
+    #         manifest_window_seconds: 30, 
+    #       }, 
+    #     ], 
+    #     origin_endpoint_name: "exampleOriginEndpointISM", 
+    #     segment: {
+    #       encryption: {
+    #         encryption_method: {
+    #           ism_encryption_method: "CENC", 
+    #         }, 
+    #         speke_key_provider: {
+    #           drm_systems: [
+    #             "PLAYREADY", 
+    #           ], 
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "SHARED", 
+    #             preset_speke_20_video: "SHARED", 
+    #           }, 
+    #           resource_id: "ResourceId", 
+    #           role_arn: "arn:aws:iam::123456789012:role/empRole", 
+    #           url: "https://speke-key-provider.example.com", 
+    #         }, 
+    #       }, 
+    #       segment_duration_seconds: 2, 
+    #       segment_name: "segmentName2", 
+    #     }, 
+    #     startover_window_seconds: 600, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel/originEndpoint/exampleOriginEndpointISM", 
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     container_type: "ISM", 
+    #     created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     description: "Updated description for exampleOriginEndpointISM", 
+    #     etag: "HmgU+ewBzHJS5xvz9nLXm2SEQxTsjRfk0rVvuMayoyl=", 
+    #     force_endpoint_error_configuration: {
+    #       endpoint_error_conditions: [
+    #         "STALE_MANIFEST", 
+    #         "INCOMPLETE_MANIFEST", 
+    #         "MISSING_DRM_KEY", 
+    #         "SLATE_INPUT", 
+    #       ], 
+    #     }, 
+    #     modified_at: Time.parse("2022-10-18T09:37:00.00Z"), 
+    #     mss_manifests: [
+    #       {
+    #         manifest_layout: "FULL", 
+    #         manifest_name: "exampleMssManifest1", 
+    #         manifest_window_seconds: 60, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointISM/exampleMssManifest1.ism/Manifest", 
+    #       }, 
+    #       {
+    #         manifest_layout: "COMPACT", 
+    #         manifest_name: "exampleMssManifest2", 
+    #         manifest_window_seconds: 30, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointISM/exampleMssManifest2.ism/Manifest", 
+    #       }, 
+    #     ], 
+    #     origin_endpoint_name: "exampleOriginEndpointISM", 
+    #     segment: {
+    #       encryption: {
+    #         encryption_method: {
+    #           ism_encryption_method: "CENC", 
+    #         }, 
+    #         speke_key_provider: {
+    #           drm_systems: [
+    #             "PLAYREADY", 
+    #           ], 
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "SHARED", 
+    #             preset_speke_20_video: "SHARED", 
+    #           }, 
+    #           resource_id: "ResourceId", 
+    #           role_arn: "arn:aws:iam::123456789012:role/empRole", 
+    #           url: "https://speke-key-provider.example.com", 
+    #         }, 
+    #       }, 
+    #       segment_duration_seconds: 2, 
+    #       segment_name: "segmentName2", 
+    #     }, 
+    #     startover_window_seconds: 600, 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_origin_endpoint({
     #     channel_group_name: "ResourceName", # required
     #     channel_name: "ResourceName", # required
     #     origin_endpoint_name: "ResourceName", # required
-    #     container_type: "TS", # required, accepts TS, CMAF
+    #     container_type: "TS", # required, accepts TS, CMAF, ISM
     #     segment: {
     #       segment_duration_seconds: 1,
     #       segment_name: "SegmentSegmentNameString",
@@ -4180,8 +4876,10 @@ module Aws::MediaPackageV2
     #         encryption_method: { # required
     #           ts_encryption_method: "AES_128", # accepts AES_128, SAMPLE_AES
     #           cmaf_encryption_method: "CENC", # accepts CENC, CBCS
+    #           ism_encryption_method: "CENC", # accepts CENC
     #         },
     #         key_rotation_interval_seconds: 1,
+    #         cmaf_exclude_segment_drm_metadata: false,
     #         speke_key_provider: { # required
     #           encryption_contract_configuration: { # required
     #             preset_speke_20_audio: "PRESET_AUDIO_1", # required, accepts PRESET_AUDIO_1, PRESET_AUDIO_2, PRESET_AUDIO_3, SHARED, UNENCRYPTED
@@ -4303,6 +5001,20 @@ module Aws::MediaPackageV2
     #         },
     #       },
     #     ],
+    #     mss_manifests: [
+    #       {
+    #         manifest_name: "ManifestName", # required
+    #         manifest_window_seconds: 1,
+    #         filter_configuration: {
+    #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           start: Time.now,
+    #           end: Time.now,
+    #           time_delay_seconds: 1,
+    #           clip_start_time: Time.now,
+    #         },
+    #         manifest_layout: "FULL", # accepts FULL, COMPACT
+    #       },
+    #     ],
     #     force_endpoint_error_configuration: {
     #       endpoint_error_conditions: ["STALE_MANIFEST"], # accepts STALE_MANIFEST, INCOMPLETE_MANIFEST, MISSING_DRM_KEY, SLATE_INPUT
     #     },
@@ -4315,7 +5027,7 @@ module Aws::MediaPackageV2
     #   resp.channel_group_name #=> String
     #   resp.channel_name #=> String
     #   resp.origin_endpoint_name #=> String
-    #   resp.container_type #=> String, one of "TS", "CMAF"
+    #   resp.container_type #=> String, one of "TS", "CMAF", "ISM"
     #   resp.segment.segment_duration_seconds #=> Integer
     #   resp.segment.segment_name #=> String
     #   resp.segment.ts_use_audio_rendition_group #=> Boolean
@@ -4326,7 +5038,9 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.constant_initialization_vector #=> String
     #   resp.segment.encryption.encryption_method.ts_encryption_method #=> String, one of "AES_128", "SAMPLE_AES"
     #   resp.segment.encryption.encryption_method.cmaf_encryption_method #=> String, one of "CENC", "CBCS"
+    #   resp.segment.encryption.encryption_method.ism_encryption_method #=> String, one of "CENC"
     #   resp.segment.encryption.key_rotation_interval_seconds #=> Integer
+    #   resp.segment.encryption.cmaf_exclude_segment_drm_metadata #=> Boolean
     #   resp.segment.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET_AUDIO_1", "PRESET_AUDIO_2", "PRESET_AUDIO_3", "SHARED", "UNENCRYPTED"
     #   resp.segment.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET_VIDEO_1", "PRESET_VIDEO_2", "PRESET_VIDEO_3", "PRESET_VIDEO_4", "PRESET_VIDEO_5", "PRESET_VIDEO_6", "PRESET_VIDEO_7", "PRESET_VIDEO_8", "SHARED", "UNENCRYPTED"
     #   resp.segment.encryption.speke_key_provider.resource_id #=> String
@@ -4368,6 +5082,16 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].start_tag.time_offset #=> Float
     #   resp.low_latency_hls_manifests[0].start_tag.precise #=> Boolean
     #   resp.low_latency_hls_manifests[0].url_encode_child_manifest #=> Boolean
+    #   resp.mss_manifests #=> Array
+    #   resp.mss_manifests[0].manifest_name #=> String
+    #   resp.mss_manifests[0].url #=> String
+    #   resp.mss_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.mss_manifests[0].filter_configuration.start #=> Time
+    #   resp.mss_manifests[0].filter_configuration.end #=> Time
+    #   resp.mss_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.mss_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.mss_manifests[0].manifest_window_seconds #=> Integer
+    #   resp.mss_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions #=> Array
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions[0] #=> String, one of "STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"
     #   resp.etag #=> String
@@ -4440,7 +5164,7 @@ module Aws::MediaPackageV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

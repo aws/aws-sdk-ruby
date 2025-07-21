@@ -52,6 +52,8 @@ module Aws::Bedrock
     CommitmentDuration = Shapes::StringShape.new(name: 'CommitmentDuration')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
+    CreateCustomModelDeploymentRequest = Shapes::StructureShape.new(name: 'CreateCustomModelDeploymentRequest')
+    CreateCustomModelDeploymentResponse = Shapes::StructureShape.new(name: 'CreateCustomModelDeploymentResponse')
     CreateCustomModelRequest = Shapes::StructureShape.new(name: 'CreateCustomModelRequest')
     CreateCustomModelResponse = Shapes::StructureShape.new(name: 'CreateCustomModelResponse')
     CreateEvaluationJobRequest = Shapes::StructureShape.new(name: 'CreateEvaluationJobRequest')
@@ -84,6 +86,12 @@ module Aws::Bedrock
     CustomMetricEvaluatorModelConfig = Shapes::StructureShape.new(name: 'CustomMetricEvaluatorModelConfig')
     CustomMetricInstructions = Shapes::StringShape.new(name: 'CustomMetricInstructions')
     CustomModelArn = Shapes::StringShape.new(name: 'CustomModelArn')
+    CustomModelDeploymentArn = Shapes::StringShape.new(name: 'CustomModelDeploymentArn')
+    CustomModelDeploymentDescription = Shapes::StringShape.new(name: 'CustomModelDeploymentDescription')
+    CustomModelDeploymentIdentifier = Shapes::StringShape.new(name: 'CustomModelDeploymentIdentifier')
+    CustomModelDeploymentStatus = Shapes::StringShape.new(name: 'CustomModelDeploymentStatus')
+    CustomModelDeploymentSummary = Shapes::StructureShape.new(name: 'CustomModelDeploymentSummary')
+    CustomModelDeploymentSummaryList = Shapes::ListShape.new(name: 'CustomModelDeploymentSummaryList')
     CustomModelName = Shapes::StringShape.new(name: 'CustomModelName')
     CustomModelSummary = Shapes::StructureShape.new(name: 'CustomModelSummary')
     CustomModelSummaryList = Shapes::ListShape.new(name: 'CustomModelSummaryList')
@@ -92,6 +100,8 @@ module Aws::Bedrock
     CustomizationConfig = Shapes::UnionShape.new(name: 'CustomizationConfig')
     CustomizationType = Shapes::StringShape.new(name: 'CustomizationType')
     DataProcessingDetails = Shapes::StructureShape.new(name: 'DataProcessingDetails')
+    DeleteCustomModelDeploymentRequest = Shapes::StructureShape.new(name: 'DeleteCustomModelDeploymentRequest')
+    DeleteCustomModelDeploymentResponse = Shapes::StructureShape.new(name: 'DeleteCustomModelDeploymentResponse')
     DeleteCustomModelRequest = Shapes::StructureShape.new(name: 'DeleteCustomModelRequest')
     DeleteCustomModelResponse = Shapes::StructureShape.new(name: 'DeleteCustomModelResponse')
     DeleteFoundationModelAgreementRequest = Shapes::StructureShape.new(name: 'DeleteFoundationModelAgreementRequest')
@@ -183,6 +193,8 @@ module Aws::Bedrock
     FoundationModelSummary = Shapes::StructureShape.new(name: 'FoundationModelSummary')
     FoundationModelSummaryList = Shapes::ListShape.new(name: 'FoundationModelSummaryList')
     GenerationConfiguration = Shapes::StructureShape.new(name: 'GenerationConfiguration')
+    GetCustomModelDeploymentRequest = Shapes::StructureShape.new(name: 'GetCustomModelDeploymentRequest')
+    GetCustomModelDeploymentResponse = Shapes::StructureShape.new(name: 'GetCustomModelDeploymentResponse')
     GetCustomModelRequest = Shapes::StructureShape.new(name: 'GetCustomModelRequest')
     GetCustomModelResponse = Shapes::StructureShape.new(name: 'GetCustomModelResponse')
     GetEvaluationJobRequest = Shapes::StructureShape.new(name: 'GetEvaluationJobRequest')
@@ -358,6 +370,8 @@ module Aws::Bedrock
     KnowledgeBaseVectorSearchConfiguration = Shapes::StructureShape.new(name: 'KnowledgeBaseVectorSearchConfiguration')
     KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger = Shapes::IntegerShape.new(name: 'KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger')
     LegalTerm = Shapes::StructureShape.new(name: 'LegalTerm')
+    ListCustomModelDeploymentsRequest = Shapes::StructureShape.new(name: 'ListCustomModelDeploymentsRequest')
+    ListCustomModelDeploymentsResponse = Shapes::StructureShape.new(name: 'ListCustomModelDeploymentsResponse')
     ListCustomModelsRequest = Shapes::StructureShape.new(name: 'ListCustomModelsRequest')
     ListCustomModelsResponse = Shapes::StructureShape.new(name: 'ListCustomModelsResponse')
     ListEvaluationJobsRequest = Shapes::StructureShape.new(name: 'ListEvaluationJobsRequest')
@@ -418,6 +432,7 @@ module Aws::Bedrock
     ModelCustomizationJobSummary = Shapes::StructureShape.new(name: 'ModelCustomizationJobSummary')
     ModelCustomizationList = Shapes::ListShape.new(name: 'ModelCustomizationList')
     ModelDataSource = Shapes::UnionShape.new(name: 'ModelDataSource')
+    ModelDeploymentName = Shapes::StringShape.new(name: 'ModelDeploymentName')
     ModelId = Shapes::StringShape.new(name: 'ModelId')
     ModelIdentifier = Shapes::StringShape.new(name: 'ModelIdentifier')
     ModelImportJobArn = Shapes::StringShape.new(name: 'ModelImportJobArn')
@@ -648,6 +663,16 @@ module Aws::Bedrock
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
+    CreateCustomModelDeploymentRequest.add_member(:model_deployment_name, Shapes::ShapeRef.new(shape: ModelDeploymentName, required: true, location_name: "modelDeploymentName"))
+    CreateCustomModelDeploymentRequest.add_member(:model_arn, Shapes::ShapeRef.new(shape: CustomModelArn, required: true, location_name: "modelArn"))
+    CreateCustomModelDeploymentRequest.add_member(:description, Shapes::ShapeRef.new(shape: CustomModelDeploymentDescription, location_name: "description"))
+    CreateCustomModelDeploymentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateCustomModelDeploymentRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
+    CreateCustomModelDeploymentRequest.struct_class = Types::CreateCustomModelDeploymentRequest
+
+    CreateCustomModelDeploymentResponse.add_member(:custom_model_deployment_arn, Shapes::ShapeRef.new(shape: CustomModelDeploymentArn, required: true, location_name: "customModelDeploymentArn"))
+    CreateCustomModelDeploymentResponse.struct_class = Types::CreateCustomModelDeploymentResponse
+
     CreateCustomModelRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: CustomModelName, required: true, location_name: "modelName"))
     CreateCustomModelRequest.add_member(:model_source_config, Shapes::ShapeRef.new(shape: ModelDataSource, required: true, location_name: "modelSourceConfig"))
     CreateCustomModelRequest.add_member(:model_kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "modelKmsKeyArn"))
@@ -827,6 +852,17 @@ module Aws::Bedrock
     CustomMetricEvaluatorModelConfig.add_member(:bedrock_evaluator_models, Shapes::ShapeRef.new(shape: CustomMetricBedrockEvaluatorModels, required: true, location_name: "bedrockEvaluatorModels"))
     CustomMetricEvaluatorModelConfig.struct_class = Types::CustomMetricEvaluatorModelConfig
 
+    CustomModelDeploymentSummary.add_member(:custom_model_deployment_arn, Shapes::ShapeRef.new(shape: CustomModelDeploymentArn, required: true, location_name: "customModelDeploymentArn"))
+    CustomModelDeploymentSummary.add_member(:custom_model_deployment_name, Shapes::ShapeRef.new(shape: ModelDeploymentName, required: true, location_name: "customModelDeploymentName"))
+    CustomModelDeploymentSummary.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "modelArn"))
+    CustomModelDeploymentSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    CustomModelDeploymentSummary.add_member(:status, Shapes::ShapeRef.new(shape: CustomModelDeploymentStatus, required: true, location_name: "status"))
+    CustomModelDeploymentSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
+    CustomModelDeploymentSummary.add_member(:failure_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "failureMessage"))
+    CustomModelDeploymentSummary.struct_class = Types::CustomModelDeploymentSummary
+
+    CustomModelDeploymentSummaryList.member = Shapes::ShapeRef.new(shape: CustomModelDeploymentSummary)
+
     CustomModelSummary.add_member(:model_arn, Shapes::ShapeRef.new(shape: CustomModelArn, required: true, location_name: "modelArn"))
     CustomModelSummary.add_member(:model_name, Shapes::ShapeRef.new(shape: CustomModelName, required: true, location_name: "modelName"))
     CustomModelSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTime"))
@@ -853,6 +889,11 @@ module Aws::Bedrock
     DataProcessingDetails.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     DataProcessingDetails.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
     DataProcessingDetails.struct_class = Types::DataProcessingDetails
+
+    DeleteCustomModelDeploymentRequest.add_member(:custom_model_deployment_identifier, Shapes::ShapeRef.new(shape: CustomModelDeploymentIdentifier, required: true, location: "uri", location_name: "customModelDeploymentIdentifier"))
+    DeleteCustomModelDeploymentRequest.struct_class = Types::DeleteCustomModelDeploymentRequest
+
+    DeleteCustomModelDeploymentResponse.struct_class = Types::DeleteCustomModelDeploymentResponse
 
     DeleteCustomModelRequest.add_member(:model_identifier, Shapes::ShapeRef.new(shape: ModelIdentifier, required: true, location: "uri", location_name: "modelIdentifier"))
     DeleteCustomModelRequest.struct_class = Types::DeleteCustomModelRequest
@@ -1100,6 +1141,19 @@ module Aws::Bedrock
     GenerationConfiguration.add_member(:kb_inference_config, Shapes::ShapeRef.new(shape: KbInferenceConfig, location_name: "kbInferenceConfig"))
     GenerationConfiguration.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: AdditionalModelRequestFields, location_name: "additionalModelRequestFields"))
     GenerationConfiguration.struct_class = Types::GenerationConfiguration
+
+    GetCustomModelDeploymentRequest.add_member(:custom_model_deployment_identifier, Shapes::ShapeRef.new(shape: CustomModelDeploymentIdentifier, required: true, location: "uri", location_name: "customModelDeploymentIdentifier"))
+    GetCustomModelDeploymentRequest.struct_class = Types::GetCustomModelDeploymentRequest
+
+    GetCustomModelDeploymentResponse.add_member(:custom_model_deployment_arn, Shapes::ShapeRef.new(shape: CustomModelDeploymentArn, required: true, location_name: "customModelDeploymentArn"))
+    GetCustomModelDeploymentResponse.add_member(:model_deployment_name, Shapes::ShapeRef.new(shape: ModelDeploymentName, required: true, location_name: "modelDeploymentName"))
+    GetCustomModelDeploymentResponse.add_member(:model_arn, Shapes::ShapeRef.new(shape: CustomModelArn, required: true, location_name: "modelArn"))
+    GetCustomModelDeploymentResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    GetCustomModelDeploymentResponse.add_member(:status, Shapes::ShapeRef.new(shape: CustomModelDeploymentStatus, required: true, location_name: "status"))
+    GetCustomModelDeploymentResponse.add_member(:description, Shapes::ShapeRef.new(shape: CustomModelDeploymentDescription, location_name: "description"))
+    GetCustomModelDeploymentResponse.add_member(:failure_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "failureMessage"))
+    GetCustomModelDeploymentResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
+    GetCustomModelDeploymentResponse.struct_class = Types::GetCustomModelDeploymentResponse
 
     GetCustomModelRequest.add_member(:model_identifier, Shapes::ShapeRef.new(shape: ModelIdentifier, required: true, location: "uri", location_name: "modelIdentifier"))
     GetCustomModelRequest.struct_class = Types::GetCustomModelRequest
@@ -1670,6 +1724,21 @@ module Aws::Bedrock
 
     LegalTerm.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "url"))
     LegalTerm.struct_class = Types::LegalTerm
+
+    ListCustomModelDeploymentsRequest.add_member(:created_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "createdBefore"))
+    ListCustomModelDeploymentsRequest.add_member(:created_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "createdAfter"))
+    ListCustomModelDeploymentsRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: ModelDeploymentName, location: "querystring", location_name: "nameContains"))
+    ListCustomModelDeploymentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListCustomModelDeploymentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListCustomModelDeploymentsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortModelsBy, location: "querystring", location_name: "sortBy"))
+    ListCustomModelDeploymentsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "sortOrder"))
+    ListCustomModelDeploymentsRequest.add_member(:status_equals, Shapes::ShapeRef.new(shape: CustomModelDeploymentStatus, location: "querystring", location_name: "statusEquals"))
+    ListCustomModelDeploymentsRequest.add_member(:model_arn_equals, Shapes::ShapeRef.new(shape: CustomModelArn, location: "querystring", location_name: "modelArnEquals"))
+    ListCustomModelDeploymentsRequest.struct_class = Types::ListCustomModelDeploymentsRequest
+
+    ListCustomModelDeploymentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListCustomModelDeploymentsResponse.add_member(:model_deployment_summaries, Shapes::ShapeRef.new(shape: CustomModelDeploymentSummaryList, location_name: "modelDeploymentSummaries"))
+    ListCustomModelDeploymentsResponse.struct_class = Types::ListCustomModelDeploymentsResponse
 
     ListCustomModelsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "creationTimeBefore"))
     ListCustomModelsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "creationTimeAfter"))
@@ -2395,6 +2464,21 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:create_custom_model_deployment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCustomModelDeployment"
+        o.http_method = "POST"
+        o.http_request_uri = "/model-customization/custom-model-deployments"
+        o.input = Shapes::ShapeRef.new(shape: CreateCustomModelDeploymentRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCustomModelDeploymentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_evaluation_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateEvaluationJob"
         o.http_method = "POST"
@@ -2590,6 +2674,20 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:delete_custom_model_deployment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCustomModelDeployment"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/model-customization/custom-model-deployments/{customModelDeploymentIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCustomModelDeploymentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCustomModelDeploymentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:delete_foundation_model_agreement, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteFoundationModelAgreement"
         o.http_method = "POST"
@@ -2717,6 +2815,19 @@ module Aws::Bedrock
         o.http_request_uri = "/custom-models/{modelIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: GetCustomModelRequest)
         o.output = Shapes::ShapeRef.new(shape: GetCustomModelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_custom_model_deployment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCustomModelDeployment"
+        o.http_method = "GET"
+        o.http_request_uri = "/model-customization/custom-model-deployments/{customModelDeploymentIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetCustomModelDeploymentRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCustomModelDeploymentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2914,6 +3025,24 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:list_custom_model_deployments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCustomModelDeployments"
+        o.http_method = "GET"
+        o.http_request_uri = "/model-customization/custom-model-deployments"
+        o.input = Shapes::ShapeRef.new(shape: ListCustomModelDeploymentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCustomModelDeploymentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_custom_models, Seahorse::Model::Operation.new.tap do |o|

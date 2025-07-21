@@ -77,6 +77,20 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _BatchAddChannelRoleToAccessorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchAddChannelRoleToAccessorsOutput]
+        def added_accessor_ids: () -> ::Array[::String]
+        def errors: () -> ::Array[Types::BatchError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Repostspace/Client.html#batch_add_channel_role_to_accessors-instance_method
+      def batch_add_channel_role_to_accessors: (
+                                                 space_id: ::String,
+                                                 channel_id: ::String,
+                                                 accessor_ids: Array[::String],
+                                                 channel_role: ("ASKER" | "EXPERT" | "MODERATOR" | "SUPPORTREQUESTOR")
+                                               ) -> _BatchAddChannelRoleToAccessorsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchAddChannelRoleToAccessorsResponseSuccess
+
       interface _BatchAddRoleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchAddRoleOutput]
         def added_accessor_ids: () -> ::Array[::String]
@@ -84,24 +98,50 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Repostspace/Client.html#batch_add_role-instance_method
       def batch_add_role: (
+                            space_id: ::String,
                             accessor_ids: Array[::String],
-                            role: ("EXPERT" | "MODERATOR" | "ADMINISTRATOR" | "SUPPORTREQUESTOR"),
-                            space_id: ::String
+                            role: ("EXPERT" | "MODERATOR" | "ADMINISTRATOR" | "SUPPORTREQUESTOR")
                           ) -> _BatchAddRoleResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchAddRoleResponseSuccess
 
+      interface _BatchRemoveChannelRoleFromAccessorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchRemoveChannelRoleFromAccessorsOutput]
+        def removed_accessor_ids: () -> ::Array[::String]
+        def errors: () -> ::Array[Types::BatchError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Repostspace/Client.html#batch_remove_channel_role_from_accessors-instance_method
+      def batch_remove_channel_role_from_accessors: (
+                                                      space_id: ::String,
+                                                      channel_id: ::String,
+                                                      accessor_ids: Array[::String],
+                                                      channel_role: ("ASKER" | "EXPERT" | "MODERATOR" | "SUPPORTREQUESTOR")
+                                                    ) -> _BatchRemoveChannelRoleFromAccessorsResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchRemoveChannelRoleFromAccessorsResponseSuccess
+
       interface _BatchRemoveRoleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchRemoveRoleOutput]
-        def errors: () -> ::Array[Types::BatchError]
         def removed_accessor_ids: () -> ::Array[::String]
+        def errors: () -> ::Array[Types::BatchError]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Repostspace/Client.html#batch_remove_role-instance_method
       def batch_remove_role: (
+                               space_id: ::String,
                                accessor_ids: Array[::String],
-                               role: ("EXPERT" | "MODERATOR" | "ADMINISTRATOR" | "SUPPORTREQUESTOR"),
-                               space_id: ::String
+                               role: ("EXPERT" | "MODERATOR" | "ADMINISTRATOR" | "SUPPORTREQUESTOR")
                              ) -> _BatchRemoveRoleResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchRemoveRoleResponseSuccess
+
+      interface _CreateChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelOutput]
+        def channel_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Repostspace/Client.html#create_channel-instance_method
+      def create_channel: (
+                            space_id: ::String,
+                            channel_name: ::String,
+                            ?channel_description: ::String
+                          ) -> _CreateChannelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelResponseSuccess
 
       interface _CreateSpaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateSpaceOutput]
@@ -109,13 +149,17 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Repostspace/Client.html#create_space-instance_method
       def create_space: (
-                          ?description: ::String,
                           name: ::String,
-                          ?role_arn: ::String,
                           subdomain: ::String,
-                          ?tags: Hash[::String, ::String],
                           tier: ("BASIC" | "STANDARD"),
-                          ?user_kms_key: ::String
+                          ?description: ::String,
+                          ?user_kms_key: ::String,
+                          ?tags: Hash[::String, ::String],
+                          ?role_arn: ::String,
+                          ?supported_email_domains: {
+                            enabled: ("ENABLED" | "DISABLED")?,
+                            allowed_domains: Array[::String]?
+                          }
                         ) -> _CreateSpaceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSpaceResponseSuccess
 
@@ -127,34 +171,55 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Repostspace/Client.html#deregister_admin-instance_method
       def deregister_admin: (
-                              admin_id: ::String,
-                              space_id: ::String
+                              space_id: ::String,
+                              admin_id: ::String
                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _GetChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetChannelOutput]
+        def space_id: () -> ::String
+        def channel_id: () -> ::String
+        def channel_name: () -> ::String
+        def channel_description: () -> ::String
+        def create_date_time: () -> ::Time
+        def delete_date_time: () -> ::Time
+        def channel_roles: () -> ::Hash[::String, ::Array[("ASKER" | "EXPERT" | "MODERATOR" | "SUPPORTREQUESTOR")]]
+        def channel_status: () -> ("CREATED" | "CREATING" | "CREATE_FAILED" | "DELETED" | "DELETING" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Repostspace/Client.html#get_channel-instance_method
+      def get_channel: (
+                         space_id: ::String,
+                         channel_id: ::String
+                       ) -> _GetChannelResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChannelResponseSuccess
+
       interface _GetSpaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSpaceOutput]
-        def arn: () -> ::String
-        def client_id: () -> ::String
-        def configuration_status: () -> ("CONFIGURED" | "UNCONFIGURED")
-        def content_size: () -> ::Integer
-        def create_date_time: () -> ::Time
-        def customer_role_arn: () -> ::String
-        def delete_date_time: () -> ::Time
-        def description: () -> ::String
-        def group_admins: () -> ::Array[::String]
-        def name: () -> ::String
-        def random_domain: () -> ::String
-        def roles: () -> ::Hash[::String, ::Array[("EXPERT" | "MODERATOR" | "ADMINISTRATOR" | "SUPPORTREQUESTOR")]]
         def space_id: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
         def status: () -> ::String
-        def storage_limit: () -> ::Integer
-        def tier: () -> ("BASIC" | "STANDARD")
-        def user_admins: () -> ::Array[::String]
-        def user_count: () -> ::Integer
-        def user_kms_key: () -> ::String
-        def vanity_domain: () -> ::String
+        def configuration_status: () -> ("CONFIGURED" | "UNCONFIGURED")
+        def client_id: () -> ::String
+        def identity_store_id: () -> ::String
+        def application_arn: () -> ::String
+        def description: () -> ::String
         def vanity_domain_status: () -> ("PENDING" | "APPROVED" | "UNAPPROVED")
+        def vanity_domain: () -> ::String
+        def random_domain: () -> ::String
+        def customer_role_arn: () -> ::String
+        def create_date_time: () -> ::Time
+        def delete_date_time: () -> ::Time
+        def tier: () -> ("BASIC" | "STANDARD")
+        def storage_limit: () -> ::Integer
+        def user_admins: () -> ::Array[::String]
+        def group_admins: () -> ::Array[::String]
+        def roles: () -> ::Hash[::String, ::Array[("EXPERT" | "MODERATOR" | "ADMINISTRATOR" | "SUPPORTREQUESTOR")]]
+        def user_kms_key: () -> ::String
+        def user_count: () -> ::Integer
+        def content_size: () -> ::Integer
+        def supported_email_domains: () -> Types::SupportedEmailDomainsStatus
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Repostspace/Client.html#get_space-instance_method
       def get_space: (
@@ -162,15 +227,28 @@ module Aws
                      ) -> _GetSpaceResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSpaceResponseSuccess
 
+      interface _ListChannelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelsOutput]
+        def channels: () -> ::Array[Types::ChannelData]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Repostspace/Client.html#list_channels-instance_method
+      def list_channels: (
+                           space_id: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListChannelsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelsResponseSuccess
+
       interface _ListSpacesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSpacesOutput]
-        def next_token: () -> ::String
         def spaces: () -> ::Array[Types::SpaceData]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Repostspace/Client.html#list_spaces-instance_method
       def list_spaces: (
-                         ?max_results: ::Integer,
-                         ?next_token: ::String
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
                        ) -> _ListSpacesResponseSuccess
                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSpacesResponseSuccess
 
@@ -186,17 +264,17 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Repostspace/Client.html#register_admin-instance_method
       def register_admin: (
-                            admin_id: ::String,
-                            space_id: ::String
+                            space_id: ::String,
+                            admin_id: ::String
                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Repostspace/Client.html#send_invites-instance_method
       def send_invites: (
-                          accessor_ids: Array[::String],
-                          body: ::String,
                           space_id: ::String,
-                          title: ::String
+                          accessor_ids: Array[::String],
+                          title: ::String,
+                          body: ::String
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -220,14 +298,50 @@ module Aws
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
 
+      interface _UpdateChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChannelOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Repostspace/Client.html#update_channel-instance_method
+      def update_channel: (
+                            space_id: ::String,
+                            channel_id: ::String,
+                            channel_name: ::String,
+                            ?channel_description: ::String
+                          ) -> _UpdateChannelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Repostspace/Client.html#update_space-instance_method
       def update_space: (
-                          ?description: ::String,
-                          ?role_arn: ::String,
                           space_id: ::String,
-                          ?tier: ("BASIC" | "STANDARD")
+                          ?description: ::String,
+                          ?tier: ("BASIC" | "STANDARD"),
+                          ?role_arn: ::String,
+                          ?supported_email_domains: {
+                            enabled: ("ENABLED" | "DISABLED")?,
+                            allowed_domains: Array[::String]?
+                          }
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Repostspace/Client.html#wait_until-instance_method
+      def wait_until: (:channel_created waiter_name, 
+                    space_id: ::String,
+                    channel_id: ::String
+                  ) -> Client::_GetChannelResponseSuccess
+                    | (:channel_created waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetChannelResponseSuccess
+                    | (:channel_deleted waiter_name, 
+                    space_id: ::String,
+                    channel_id: ::String
+                  ) -> Client::_GetChannelResponseSuccess
+                    | (:channel_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetChannelResponseSuccess
+                    | (:space_created waiter_name, 
+                    space_id: ::String
+                  ) -> Client::_GetSpaceResponseSuccess
+                    | (:space_created waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetSpaceResponseSuccess
+                    | (:space_deleted waiter_name, 
+                    space_id: ::String
+                  ) -> Client::_GetSpaceResponseSuccess
+                    | (:space_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetSpaceResponseSuccess
     end
   end
 end

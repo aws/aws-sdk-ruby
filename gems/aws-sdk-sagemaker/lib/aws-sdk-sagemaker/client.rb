@@ -685,7 +685,7 @@ module Aws::SageMaker
     #   The name of the SageMaker HyperPod cluster from which to delete the
     #   specified nodes.
     #
-    # @option params [required, Array<String>] :node_ids
+    # @option params [Array<String>] :node_ids
     #   A list of node IDs to be deleted from the specified cluster.
     #
     #   <note markdown="1"> * For SageMaker HyperPod clusters using the Slurm workload manager,
@@ -710,7 +710,7 @@ module Aws::SageMaker
     #
     #   resp = client.batch_delete_cluster_nodes({
     #     cluster_name: "ClusterNameOrArn", # required
-    #     node_ids: ["ClusterNodeId"], # required
+    #     node_ids: ["ClusterNodeId"],
     #   })
     #
     # @example Response structure
@@ -1977,6 +1977,10 @@ module Aws::SageMaker
     # @option params [Array<Types::ClusterInstanceGroupSpecification>] :instance_groups
     #   The instance groups to be created in the SageMaker HyperPod cluster.
     #
+    # @option params [Array<Types::ClusterRestrictedInstanceGroupSpecification>] :restricted_instance_groups
+    #   The specialized instance groups for training models like Amazon Nova
+    #   to be created in the SageMaker HyperPod cluster.
+    #
     # @option params [Types::VpcConfig] :vpc_config
     #   Specifies the Amazon Virtual Private Cloud (VPC) that is associated
     #   with the Amazon SageMaker HyperPod cluster. You can control access to
@@ -2090,6 +2094,55 @@ module Aws::SageMaker
     #                 alarm_name: "AlarmName", # required
     #               },
     #             ],
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     restricted_instance_groups: [
+    #       {
+    #         instance_count: 1, # required
+    #         instance_group_name: "ClusterInstanceGroupName", # required
+    #         instance_type: "ml.p4d.24xlarge", # required, accepts ml.p4d.24xlarge, ml.p4de.24xlarge, ml.p5.48xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.c5n.large, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.g6.xlarge, ml.g6.2xlarge, ml.g6.4xlarge, ml.g6.8xlarge, ml.g6.16xlarge, ml.g6.12xlarge, ml.g6.24xlarge, ml.g6.48xlarge, ml.gr6.4xlarge, ml.gr6.8xlarge, ml.g6e.xlarge, ml.g6e.2xlarge, ml.g6e.4xlarge, ml.g6e.8xlarge, ml.g6e.16xlarge, ml.g6e.12xlarge, ml.g6e.24xlarge, ml.g6e.48xlarge, ml.p5e.48xlarge, ml.p5en.48xlarge, ml.p6-b200.48xlarge, ml.trn2.48xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.m6i.large, ml.m6i.xlarge, ml.m6i.2xlarge, ml.m6i.4xlarge, ml.m6i.8xlarge, ml.m6i.12xlarge, ml.m6i.16xlarge, ml.m6i.24xlarge, ml.m6i.32xlarge, ml.r6i.large, ml.r6i.xlarge, ml.r6i.2xlarge, ml.r6i.4xlarge, ml.r6i.8xlarge, ml.r6i.12xlarge, ml.r6i.16xlarge, ml.r6i.24xlarge, ml.r6i.32xlarge, ml.i3en.large, ml.i3en.xlarge, ml.i3en.2xlarge, ml.i3en.3xlarge, ml.i3en.6xlarge, ml.i3en.12xlarge, ml.i3en.24xlarge, ml.m7i.large, ml.m7i.xlarge, ml.m7i.2xlarge, ml.m7i.4xlarge, ml.m7i.8xlarge, ml.m7i.12xlarge, ml.m7i.16xlarge, ml.m7i.24xlarge, ml.m7i.48xlarge, ml.r7i.large, ml.r7i.xlarge, ml.r7i.2xlarge, ml.r7i.4xlarge, ml.r7i.8xlarge, ml.r7i.12xlarge, ml.r7i.16xlarge, ml.r7i.24xlarge, ml.r7i.48xlarge
+    #         execution_role: "RoleArn", # required
+    #         threads_per_core: 1,
+    #         instance_storage_configs: [
+    #           {
+    #             ebs_volume_config: {
+    #               volume_size_in_gb: 1, # required
+    #             },
+    #           },
+    #         ],
+    #         on_start_deep_health_checks: ["InstanceStress"], # accepts InstanceStress, InstanceConnectivity
+    #         training_plan_arn: "TrainingPlanArn",
+    #         override_vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
+    #         scheduled_update_config: {
+    #           schedule_expression: "CronScheduleExpression", # required
+    #           deployment_config: {
+    #             rolling_update_policy: {
+    #               maximum_batch_size: { # required
+    #                 type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENTAGE
+    #                 value: 1, # required
+    #               },
+    #               rollback_maximum_batch_size: {
+    #                 type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENTAGE
+    #                 value: 1, # required
+    #               },
+    #             },
+    #             wait_interval_in_seconds: 1,
+    #             auto_rollback_configuration: [
+    #               {
+    #                 alarm_name: "AlarmName", # required
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         environment_config: { # required
+    #           f_sx_lustre_config: {
+    #             size_in_gi_b: 1, # required
+    #             per_unit_storage_throughput: 1, # required
     #           },
     #         },
     #       },
@@ -2862,10 +2915,10 @@ module Aws::SageMaker
     # @option params [Types::DomainSettings] :domain_settings
     #   A collection of `Domain` settings.
     #
-    # @option params [required, Array<String>] :subnet_ids
+    # @option params [Array<String>] :subnet_ids
     #   The VPC subnets that the domain uses for communication.
     #
-    # @option params [required, String] :vpc_id
+    # @option params [String] :vpc_id
     #   The ID of the Amazon Virtual Private Cloud (VPC) that the domain uses
     #   for communication.
     #
@@ -3156,8 +3209,8 @@ module Aws::SageMaker
     #         single_sign_on_application_arn: "SingleSignOnApplicationArn",
     #       },
     #     },
-    #     subnet_ids: ["SubnetId"], # required
-    #     vpc_id: "VpcId", # required
+    #     subnet_ids: ["SubnetId"],
+    #     vpc_id: "VpcId",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -4440,6 +4493,80 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def create_hub(params = {}, options = {})
       req = build_request(:create_hub, params)
+      req.send_request(options)
+    end
+
+    # Creates presigned URLs for accessing hub content artifacts. This
+    # operation generates time-limited, secure URLs that allow direct
+    # download of model artifacts and associated files from Amazon SageMaker
+    # hub content, including gated models that require end-user license
+    # agreement acceptance.
+    #
+    # @option params [required, String] :hub_name
+    #   The name or Amazon Resource Name (ARN) of the hub that contains the
+    #   content. For public content, use `SageMakerPublicHub`.
+    #
+    # @option params [required, String] :hub_content_type
+    #   The type of hub content to access. Valid values include `Model`,
+    #   `Notebook`, and `ModelReference`.
+    #
+    # @option params [required, String] :hub_content_name
+    #   The name of the hub content for which to generate presigned URLs. This
+    #   identifies the specific model or content within the hub.
+    #
+    # @option params [String] :hub_content_version
+    #   The version of the hub content. If not specified, the latest version
+    #   is used.
+    #
+    # @option params [Types::PresignedUrlAccessConfig] :access_config
+    #   Configuration settings for accessing the hub content, including
+    #   end-user license agreement acceptance for gated models and expected S3
+    #   URL validation.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of presigned URLs to return in the response.
+    #   Default value is 100. Large models may contain hundreds of files,
+    #   requiring pagination to retrieve all URLs.
+    #
+    # @option params [String] :next_token
+    #   A token for pagination. Use this token to retrieve the next set of
+    #   presigned URLs when the response is truncated.
+    #
+    # @return [Types::CreateHubContentPresignedUrlsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateHubContentPresignedUrlsResponse#authorized_url_configs #authorized_url_configs} => Array&lt;Types::AuthorizedUrl&gt;
+    #   * {Types::CreateHubContentPresignedUrlsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_hub_content_presigned_urls({
+    #     hub_name: "HubNameOrArn", # required
+    #     hub_content_type: "Model", # required, accepts Model, Notebook, ModelReference
+    #     hub_content_name: "HubContentName", # required
+    #     hub_content_version: "HubContentVersion",
+    #     access_config: {
+    #       accept_eula: false,
+    #       expected_s3_url: "S3ModelUri",
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authorized_url_configs #=> Array
+    #   resp.authorized_url_configs[0].url #=> String
+    #   resp.authorized_url_configs[0].local_path #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateHubContentPresignedUrls AWS API Documentation
+    #
+    # @overload create_hub_content_presigned_urls(params = {})
+    # @param [Hash] params ({})
+    def create_hub_content_presigned_urls(params = {}, options = {})
+      req = build_request(:create_hub_content_presigned_urls, params)
       req.send_request(options)
     end
 
@@ -8934,6 +9061,7 @@ module Aws::SageMaker
     #           },
     #         },
     #       ],
+    #       remote_access: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     ownership_settings: {
     #       owner_user_profile_name: "UserProfileName", # required
@@ -12924,6 +13052,7 @@ module Aws::SageMaker
     #   * {Types::DescribeClusterResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeClusterResponse#failure_message #failure_message} => String
     #   * {Types::DescribeClusterResponse#instance_groups #instance_groups} => Array&lt;Types::ClusterInstanceGroupDetails&gt;
+    #   * {Types::DescribeClusterResponse#restricted_instance_groups #restricted_instance_groups} => Array&lt;Types::ClusterRestrictedInstanceGroupDetails&gt;
     #   * {Types::DescribeClusterResponse#vpc_config #vpc_config} => Types::VpcConfig
     #   * {Types::DescribeClusterResponse#orchestrator #orchestrator} => Types::ClusterOrchestrator
     #   * {Types::DescribeClusterResponse#node_recovery #node_recovery} => String
@@ -12969,6 +13098,35 @@ module Aws::SageMaker
     #   resp.instance_groups[0].scheduled_update_config.deployment_config.wait_interval_in_seconds #=> Integer
     #   resp.instance_groups[0].scheduled_update_config.deployment_config.auto_rollback_configuration #=> Array
     #   resp.instance_groups[0].scheduled_update_config.deployment_config.auto_rollback_configuration[0].alarm_name #=> String
+    #   resp.restricted_instance_groups #=> Array
+    #   resp.restricted_instance_groups[0].current_count #=> Integer
+    #   resp.restricted_instance_groups[0].target_count #=> Integer
+    #   resp.restricted_instance_groups[0].instance_group_name #=> String
+    #   resp.restricted_instance_groups[0].instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.12xlarge", "ml.g5.16xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.c5n.large", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.g6.xlarge", "ml.g6.2xlarge", "ml.g6.4xlarge", "ml.g6.8xlarge", "ml.g6.16xlarge", "ml.g6.12xlarge", "ml.g6.24xlarge", "ml.g6.48xlarge", "ml.gr6.4xlarge", "ml.gr6.8xlarge", "ml.g6e.xlarge", "ml.g6e.2xlarge", "ml.g6e.4xlarge", "ml.g6e.8xlarge", "ml.g6e.16xlarge", "ml.g6e.12xlarge", "ml.g6e.24xlarge", "ml.g6e.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.p6-b200.48xlarge", "ml.trn2.48xlarge", "ml.c6i.large", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.4xlarge", "ml.c6i.8xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.m6i.large", "ml.m6i.xlarge", "ml.m6i.2xlarge", "ml.m6i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.12xlarge", "ml.m6i.16xlarge", "ml.m6i.24xlarge", "ml.m6i.32xlarge", "ml.r6i.large", "ml.r6i.xlarge", "ml.r6i.2xlarge", "ml.r6i.4xlarge", "ml.r6i.8xlarge", "ml.r6i.12xlarge", "ml.r6i.16xlarge", "ml.r6i.24xlarge", "ml.r6i.32xlarge", "ml.i3en.large", "ml.i3en.xlarge", "ml.i3en.2xlarge", "ml.i3en.3xlarge", "ml.i3en.6xlarge", "ml.i3en.12xlarge", "ml.i3en.24xlarge", "ml.m7i.large", "ml.m7i.xlarge", "ml.m7i.2xlarge", "ml.m7i.4xlarge", "ml.m7i.8xlarge", "ml.m7i.12xlarge", "ml.m7i.16xlarge", "ml.m7i.24xlarge", "ml.m7i.48xlarge", "ml.r7i.large", "ml.r7i.xlarge", "ml.r7i.2xlarge", "ml.r7i.4xlarge", "ml.r7i.8xlarge", "ml.r7i.12xlarge", "ml.r7i.16xlarge", "ml.r7i.24xlarge", "ml.r7i.48xlarge"
+    #   resp.restricted_instance_groups[0].execution_role #=> String
+    #   resp.restricted_instance_groups[0].threads_per_core #=> Integer
+    #   resp.restricted_instance_groups[0].instance_storage_configs #=> Array
+    #   resp.restricted_instance_groups[0].instance_storage_configs[0].ebs_volume_config.volume_size_in_gb #=> Integer
+    #   resp.restricted_instance_groups[0].on_start_deep_health_checks #=> Array
+    #   resp.restricted_instance_groups[0].on_start_deep_health_checks[0] #=> String, one of "InstanceStress", "InstanceConnectivity"
+    #   resp.restricted_instance_groups[0].status #=> String, one of "InService", "Creating", "Updating", "Failed", "Degraded", "SystemUpdating", "Deleting"
+    #   resp.restricted_instance_groups[0].training_plan_arn #=> String
+    #   resp.restricted_instance_groups[0].training_plan_status #=> String
+    #   resp.restricted_instance_groups[0].override_vpc_config.security_group_ids #=> Array
+    #   resp.restricted_instance_groups[0].override_vpc_config.security_group_ids[0] #=> String
+    #   resp.restricted_instance_groups[0].override_vpc_config.subnets #=> Array
+    #   resp.restricted_instance_groups[0].override_vpc_config.subnets[0] #=> String
+    #   resp.restricted_instance_groups[0].scheduled_update_config.schedule_expression #=> String
+    #   resp.restricted_instance_groups[0].scheduled_update_config.deployment_config.rolling_update_policy.maximum_batch_size.type #=> String, one of "INSTANCE_COUNT", "CAPACITY_PERCENTAGE"
+    #   resp.restricted_instance_groups[0].scheduled_update_config.deployment_config.rolling_update_policy.maximum_batch_size.value #=> Integer
+    #   resp.restricted_instance_groups[0].scheduled_update_config.deployment_config.rolling_update_policy.rollback_maximum_batch_size.type #=> String, one of "INSTANCE_COUNT", "CAPACITY_PERCENTAGE"
+    #   resp.restricted_instance_groups[0].scheduled_update_config.deployment_config.rolling_update_policy.rollback_maximum_batch_size.value #=> Integer
+    #   resp.restricted_instance_groups[0].scheduled_update_config.deployment_config.wait_interval_in_seconds #=> Integer
+    #   resp.restricted_instance_groups[0].scheduled_update_config.deployment_config.auto_rollback_configuration #=> Array
+    #   resp.restricted_instance_groups[0].scheduled_update_config.deployment_config.auto_rollback_configuration[0].alarm_name #=> String
+    #   resp.restricted_instance_groups[0].environment_config.f_sx_lustre_config.size_in_gi_b #=> Integer
+    #   resp.restricted_instance_groups[0].environment_config.f_sx_lustre_config.per_unit_storage_throughput #=> Integer
+    #   resp.restricted_instance_groups[0].environment_config.s3_output_path #=> String
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.vpc_config.subnets #=> Array
@@ -12992,7 +13150,7 @@ module Aws::SageMaker
     #   The string name or the Amazon Resource Name (ARN) of the SageMaker
     #   HyperPod cluster in which the node is.
     #
-    # @option params [required, String] :node_id
+    # @option params [String] :node_id
     #   The ID of the SageMaker HyperPod cluster node.
     #
     # @return [Types::DescribeClusterNodeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -13003,7 +13161,7 @@ module Aws::SageMaker
     #
     #   resp = client.describe_cluster_node({
     #     cluster_name: "ClusterNameOrArn", # required
-    #     node_id: "ClusterNodeId", # required
+    #     node_id: "ClusterNodeId",
     #   })
     #
     # @example Response structure
@@ -16868,6 +17026,9 @@ module Aws::SageMaker
     # @option params [required, String] :pipeline_name
     #   The name or Amazon Resource Name (ARN) of the pipeline to describe.
     #
+    # @option params [Integer] :pipeline_version_id
+    #   The ID of the pipeline version to describe.
+    #
     # @return [Types::DescribePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribePipelineResponse#pipeline_arn #pipeline_arn} => String
@@ -16883,11 +17044,14 @@ module Aws::SageMaker
     #   * {Types::DescribePipelineResponse#created_by #created_by} => Types::UserContext
     #   * {Types::DescribePipelineResponse#last_modified_by #last_modified_by} => Types::UserContext
     #   * {Types::DescribePipelineResponse#parallelism_configuration #parallelism_configuration} => Types::ParallelismConfiguration
+    #   * {Types::DescribePipelineResponse#pipeline_version_display_name #pipeline_version_display_name} => String
+    #   * {Types::DescribePipelineResponse#pipeline_version_description #pipeline_version_description} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_pipeline({
     #     pipeline_name: "PipelineNameOrArn", # required
+    #     pipeline_version_id: 1,
     #   })
     #
     # @example Response structure
@@ -16915,6 +17079,8 @@ module Aws::SageMaker
     #   resp.last_modified_by.iam_identity.principal_id #=> String
     #   resp.last_modified_by.iam_identity.source_identity #=> String
     #   resp.parallelism_configuration.max_parallel_execution_steps #=> Integer
+    #   resp.pipeline_version_display_name #=> String
+    #   resp.pipeline_version_description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipeline AWS API Documentation
     #
@@ -16975,6 +17141,7 @@ module Aws::SageMaker
     #   * {Types::DescribePipelineExecutionResponse#last_modified_by #last_modified_by} => Types::UserContext
     #   * {Types::DescribePipelineExecutionResponse#parallelism_configuration #parallelism_configuration} => Types::ParallelismConfiguration
     #   * {Types::DescribePipelineExecutionResponse#selective_execution_config #selective_execution_config} => Types::SelectiveExecutionConfig
+    #   * {Types::DescribePipelineExecutionResponse#pipeline_version_id #pipeline_version_id} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -17010,6 +17177,7 @@ module Aws::SageMaker
     #   resp.selective_execution_config.source_pipeline_execution_arn #=> String
     #   resp.selective_execution_config.selected_steps #=> Array
     #   resp.selective_execution_config.selected_steps[0].step_name #=> String
+    #   resp.pipeline_version_id #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineExecution AWS API Documentation
     #
@@ -17301,6 +17469,7 @@ module Aws::SageMaker
     #   resp.space_settings.custom_file_systems #=> Array
     #   resp.space_settings.custom_file_systems[0].efs_file_system.file_system_id #=> String
     #   resp.space_settings.custom_file_systems[0].f_sx_lustre_file_system.file_system_id #=> String
+    #   resp.space_settings.remote_access #=> String, one of "ENABLED", "DISABLED"
     #   resp.ownership_settings.owner_user_profile_name #=> String
     #   resp.space_sharing_settings.sharing_type #=> String, one of "Private", "Shared"
     #   resp.space_display_name #=> String
@@ -18522,7 +18691,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_search_suggestions({
-    #     resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, Model, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, FeatureMetadata, Image, ImageVersion, Project, HyperParameterTuningJob, ModelCard
+    #     resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, Model, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, FeatureMetadata, Image, ImageVersion, Project, HyperParameterTuningJob, ModelCard, PipelineVersion
     #     suggestion_query: {
     #       property_name_query: {
     #         property_name_hint: "PropertyNameHint", # required
@@ -23617,6 +23786,68 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Gets a list of all versions of the pipeline.
+    #
+    # @option params [required, String] :pipeline_name
+    #   The Amazon Resource Name (ARN) of the pipeline.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :created_after
+    #   A filter that returns the pipeline versions that were created after a
+    #   specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :created_before
+    #   A filter that returns the pipeline versions that were created before a
+    #   specified time.
+    #
+    # @option params [String] :sort_order
+    #   The sort order for the results.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous `ListPipelineVersions` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of pipeline versions, use this token in your next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of pipeline versions to return in the response.
+    #
+    # @return [Types::ListPipelineVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPipelineVersionsResponse#pipeline_version_summaries #pipeline_version_summaries} => Array&lt;Types::PipelineVersionSummary&gt;
+    #   * {Types::ListPipelineVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_pipeline_versions({
+    #     pipeline_name: "PipelineNameOrArn", # required
+    #     created_after: Time.now,
+    #     created_before: Time.now,
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pipeline_version_summaries #=> Array
+    #   resp.pipeline_version_summaries[0].pipeline_arn #=> String
+    #   resp.pipeline_version_summaries[0].pipeline_version_id #=> Integer
+    #   resp.pipeline_version_summaries[0].creation_time #=> Time
+    #   resp.pipeline_version_summaries[0].pipeline_version_description #=> String
+    #   resp.pipeline_version_summaries[0].pipeline_version_display_name #=> String
+    #   resp.pipeline_version_summaries[0].last_execution_pipeline_execution_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelineVersions AWS API Documentation
+    #
+    # @overload list_pipeline_versions(params = {})
+    # @param [Hash] params ({})
+    def list_pipeline_versions(params = {}, options = {})
+      req = build_request(:list_pipeline_versions, params)
+      req.send_request(options)
+    end
+
     # Gets a list of pipelines.
     #
     # @option params [String] :pipeline_name_prefix
@@ -23954,6 +24185,7 @@ module Aws::SageMaker
     #   resp.spaces[0].creation_time #=> Time
     #   resp.spaces[0].last_modified_time #=> Time
     #   resp.spaces[0].space_settings_summary.app_type #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSessionGateway", "Canvas"
+    #   resp.spaces[0].space_settings_summary.remote_access #=> String, one of "ENABLED", "DISABLED"
     #   resp.spaces[0].space_settings_summary.space_storage_settings.ebs_storage_settings.ebs_volume_size_in_gb #=> Integer
     #   resp.spaces[0].space_sharing_settings_summary.sharing_type #=> String, one of "Private", "Shared"
     #   resp.spaces[0].ownership_settings_summary.owner_user_profile_name #=> String
@@ -25347,7 +25579,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.search({
-    #     resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, Model, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, FeatureMetadata, Image, ImageVersion, Project, HyperParameterTuningJob, ModelCard
+    #     resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, Model, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, FeatureMetadata, Image, ImageVersion, Project, HyperParameterTuningJob, ModelCard, PipelineVersion
     #     search_expression: {
     #       filters: [
     #         {
@@ -25750,6 +25982,9 @@ module Aws::SageMaker
     # @option params [Types::SelectiveExecutionConfig] :selective_execution_config
     #   The selective execution configuration applied to the pipeline run.
     #
+    # @option params [Integer] :pipeline_version_id
+    #   The ID of the pipeline version to start execution from.
+    #
     # @return [Types::StartPipelineExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartPipelineExecutionResponse#pipeline_execution_arn #pipeline_execution_arn} => String
@@ -25778,6 +26013,7 @@ module Aws::SageMaker
     #         },
     #       ],
     #     },
+    #     pipeline_version_id: 1,
     #   })
     #
     # @example Response structure
@@ -25790,6 +26026,42 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def start_pipeline_execution(params = {}, options = {})
       req = build_request(:start_pipeline_execution, params)
+      req.send_request(options)
+    end
+
+    # Initiates a remote connection session between a local integrated
+    # development environments (IDEs) and a remote SageMaker space.
+    #
+    # @option params [required, String] :resource_identifier
+    #   The Amazon Resource Name (ARN) of the resource to which the remote
+    #   connection will be established. For example, this identifies the
+    #   specific ARN space application you want to connect to from your local
+    #   IDE.
+    #
+    # @return [Types::StartSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartSessionResponse#session_id #session_id} => String
+    #   * {Types::StartSessionResponse#stream_url #stream_url} => String
+    #   * {Types::StartSessionResponse#token_value #token_value} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_session({
+    #     resource_identifier: "ResourceIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_id #=> String
+    #   resp.stream_url #=> String
+    #   resp.token_value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartSession AWS API Documentation
+    #
+    # @overload start_session(params = {})
+    # @param [Hash] params ({})
+    def start_session(params = {}, options = {})
+      req = build_request(:start_session, params)
       req.send_request(options)
     end
 
@@ -26462,6 +26734,10 @@ module Aws::SageMaker
     # @option params [Array<Types::ClusterInstanceGroupSpecification>] :instance_groups
     #   Specify the instance groups to update.
     #
+    # @option params [Array<Types::ClusterRestrictedInstanceGroupSpecification>] :restricted_instance_groups
+    #   The specialized instance groups for training models like Amazon Nova
+    #   to be created in the SageMaker HyperPod cluster.
+    #
     # @option params [String] :node_recovery
     #   The node recovery mode to be applied to the SageMaker HyperPod
     #   cluster.
@@ -26521,6 +26797,55 @@ module Aws::SageMaker
     #                 alarm_name: "AlarmName", # required
     #               },
     #             ],
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     restricted_instance_groups: [
+    #       {
+    #         instance_count: 1, # required
+    #         instance_group_name: "ClusterInstanceGroupName", # required
+    #         instance_type: "ml.p4d.24xlarge", # required, accepts ml.p4d.24xlarge, ml.p4de.24xlarge, ml.p5.48xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.c5n.large, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.g6.xlarge, ml.g6.2xlarge, ml.g6.4xlarge, ml.g6.8xlarge, ml.g6.16xlarge, ml.g6.12xlarge, ml.g6.24xlarge, ml.g6.48xlarge, ml.gr6.4xlarge, ml.gr6.8xlarge, ml.g6e.xlarge, ml.g6e.2xlarge, ml.g6e.4xlarge, ml.g6e.8xlarge, ml.g6e.16xlarge, ml.g6e.12xlarge, ml.g6e.24xlarge, ml.g6e.48xlarge, ml.p5e.48xlarge, ml.p5en.48xlarge, ml.p6-b200.48xlarge, ml.trn2.48xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.m6i.large, ml.m6i.xlarge, ml.m6i.2xlarge, ml.m6i.4xlarge, ml.m6i.8xlarge, ml.m6i.12xlarge, ml.m6i.16xlarge, ml.m6i.24xlarge, ml.m6i.32xlarge, ml.r6i.large, ml.r6i.xlarge, ml.r6i.2xlarge, ml.r6i.4xlarge, ml.r6i.8xlarge, ml.r6i.12xlarge, ml.r6i.16xlarge, ml.r6i.24xlarge, ml.r6i.32xlarge, ml.i3en.large, ml.i3en.xlarge, ml.i3en.2xlarge, ml.i3en.3xlarge, ml.i3en.6xlarge, ml.i3en.12xlarge, ml.i3en.24xlarge, ml.m7i.large, ml.m7i.xlarge, ml.m7i.2xlarge, ml.m7i.4xlarge, ml.m7i.8xlarge, ml.m7i.12xlarge, ml.m7i.16xlarge, ml.m7i.24xlarge, ml.m7i.48xlarge, ml.r7i.large, ml.r7i.xlarge, ml.r7i.2xlarge, ml.r7i.4xlarge, ml.r7i.8xlarge, ml.r7i.12xlarge, ml.r7i.16xlarge, ml.r7i.24xlarge, ml.r7i.48xlarge
+    #         execution_role: "RoleArn", # required
+    #         threads_per_core: 1,
+    #         instance_storage_configs: [
+    #           {
+    #             ebs_volume_config: {
+    #               volume_size_in_gb: 1, # required
+    #             },
+    #           },
+    #         ],
+    #         on_start_deep_health_checks: ["InstanceStress"], # accepts InstanceStress, InstanceConnectivity
+    #         training_plan_arn: "TrainingPlanArn",
+    #         override_vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
+    #         scheduled_update_config: {
+    #           schedule_expression: "CronScheduleExpression", # required
+    #           deployment_config: {
+    #             rolling_update_policy: {
+    #               maximum_batch_size: { # required
+    #                 type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENTAGE
+    #                 value: 1, # required
+    #               },
+    #               rollback_maximum_batch_size: {
+    #                 type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENTAGE
+    #                 value: 1, # required
+    #               },
+    #             },
+    #             wait_interval_in_seconds: 1,
+    #             auto_rollback_configuration: [
+    #               {
+    #                 alarm_name: "AlarmName", # required
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         environment_config: { # required
+    #           f_sx_lustre_config: {
+    #             size_in_gi_b: 1, # required
+    #             per_unit_storage_throughput: 1, # required
     #           },
     #         },
     #       },
@@ -29012,6 +29337,7 @@ module Aws::SageMaker
     # @return [Types::UpdatePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePipelineResponse#pipeline_arn #pipeline_arn} => String
+    #   * {Types::UpdatePipelineResponse#pipeline_version_id #pipeline_version_id} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -29034,6 +29360,7 @@ module Aws::SageMaker
     # @example Response structure
     #
     #   resp.pipeline_arn #=> String
+    #   resp.pipeline_version_id #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdatePipeline AWS API Documentation
     #
@@ -29084,6 +29411,48 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def update_pipeline_execution(params = {}, options = {})
       req = build_request(:update_pipeline_execution, params)
+      req.send_request(options)
+    end
+
+    # Updates a pipeline version.
+    #
+    # @option params [required, String] :pipeline_arn
+    #   The Amazon Resource Name (ARN) of the pipeline.
+    #
+    # @option params [required, Integer] :pipeline_version_id
+    #   The pipeline version ID to update.
+    #
+    # @option params [String] :pipeline_version_display_name
+    #   The display name of the pipeline version.
+    #
+    # @option params [String] :pipeline_version_description
+    #   The description of the pipeline version.
+    #
+    # @return [Types::UpdatePipelineVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePipelineVersionResponse#pipeline_arn #pipeline_arn} => String
+    #   * {Types::UpdatePipelineVersionResponse#pipeline_version_id #pipeline_version_id} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_pipeline_version({
+    #     pipeline_arn: "PipelineArn", # required
+    #     pipeline_version_id: 1, # required
+    #     pipeline_version_display_name: "PipelineVersionName",
+    #     pipeline_version_description: "PipelineVersionDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pipeline_arn #=> String
+    #   resp.pipeline_version_id #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdatePipelineVersion AWS API Documentation
+    #
+    # @overload update_pipeline_version(params = {})
+    # @param [Hash] params ({})
+    def update_pipeline_version(params = {}, options = {})
+      req = build_request(:update_pipeline_version, params)
       req.send_request(options)
     end
 
@@ -29295,6 +29664,7 @@ module Aws::SageMaker
     #           },
     #         },
     #       ],
+    #       remote_access: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     space_display_name: "NonEmptyString64",
     #   })
@@ -30027,7 +30397,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.313.0'
+      context[:gem_version] = '1.315.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2025-07-15)
+------------------
+
+* Feature - Removing restriction of environment profile identifier as required field, S3 feature release
+
 1.41.0 (2025-07-01)
 ------------------
 

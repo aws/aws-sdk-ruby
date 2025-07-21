@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2025-07-02)
+------------------
+
+* Feature - Added TagResource, UntagResource, and ListTagsForResource support for directory bucket
+
 1.111.0 (2025-06-25)
 ------------------
 

@@ -697,6 +697,92 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Deploys a custom model for on-demand inference in Amazon Bedrock.
+    # After you deploy your custom model, you use the deployment's Amazon
+    # Resource Name (ARN) as the `modelId` parameter when you submit prompts
+    # and generate responses with model inference.
+    #
+    # For more information about setting up on-demand inference for custom
+    # models, see [Set up inference for a custom model][1].
+    #
+    # The following actions are related to the `CreateCustomModelDeployment`
+    # operation:
+    #
+    # * [GetCustomModelDeployment][2]
+    #
+    # * [ListCustomModelDeployments][3]
+    #
+    # * [DeleteCustomModelDeployment][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetCustomModelDeployment.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListCustomModelDeployments.html
+    # [4]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_DeleteCustomModelDeployment.html
+    #
+    # @option params [required, String] :model_deployment_name
+    #   The name for the custom model deployment. The name must be unique
+    #   within your Amazon Web Services account and Region.
+    #
+    # @option params [required, String] :model_arn
+    #   The Amazon Resource Name (ARN) of the custom model to deploy for
+    #   on-demand inference. The custom model must be in the `Active` state.
+    #
+    # @option params [String] :description
+    #   A description for the custom model deployment to help you identify its
+    #   purpose.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to assign to the custom model deployment. You can use tags to
+    #   organize and track your Amazon Web Services resources for cost
+    #   allocation and management purposes.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-idempotency.html
+    #
+    # @return [Types::CreateCustomModelDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCustomModelDeploymentResponse#custom_model_deployment_arn #custom_model_deployment_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_custom_model_deployment({
+    #     model_deployment_name: "ModelDeploymentName", # required
+    #     model_arn: "CustomModelArn", # required
+    #     description: "CustomModelDeploymentDescription",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_request_token: "IdempotencyToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_model_deployment_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateCustomModelDeployment AWS API Documentation
+    #
+    # @overload create_custom_model_deployment(params = {})
+    # @param [Hash] params ({})
+    def create_custom_model_deployment(params = {}, options = {})
+      req = build_request(:create_custom_model_deployment, params)
+      req.send_request(options)
+    end
+
     # Creates an evaluation job.
     #
     # @option params [required, String] :job_name
@@ -2377,6 +2463,46 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Deletes a custom model deployment. This operation stops the deployment
+    # and removes it from your account. After deletion, the deployment ARN
+    # can no longer be used for inference requests.
+    #
+    # The following actions are related to the `DeleteCustomModelDeployment`
+    # operation:
+    #
+    # * [CreateCustomModelDeployment][1]
+    #
+    # * [GetCustomModelDeployment][2]
+    #
+    # * [ListCustomModelDeployments][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateCustomModelDeployment.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetCustomModelDeployment.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListCustomModelDeployments.html
+    #
+    # @option params [required, String] :custom_model_deployment_identifier
+    #   The Amazon Resource Name (ARN) or name of the custom model deployment
+    #   to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_custom_model_deployment({
+    #     custom_model_deployment_identifier: "CustomModelDeploymentIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteCustomModelDeployment AWS API Documentation
+    #
+    # @overload delete_custom_model_deployment(params = {})
+    # @param [Hash] params ({})
+    def delete_custom_model_deployment(params = {}, options = {})
+      req = build_request(:delete_custom_model_deployment, params)
+      req.send_request(options)
+    end
+
     # Delete the model access agreement for the specified model.
     #
     # @option params [required, String] :model_id
@@ -2685,6 +2811,66 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def get_custom_model(params = {}, options = {})
       req = build_request(:get_custom_model, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a custom model deployment, including its
+    # status, configuration, and metadata. Use this operation to monitor the
+    # deployment status and retrieve details needed for inference requests.
+    #
+    # The following actions are related to the `GetCustomModelDeployment`
+    # operation:
+    #
+    # * [CreateCustomModelDeployment][1]
+    #
+    # * [ListCustomModelDeployments][2]
+    #
+    # * [DeleteCustomModelDeployment][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateCustomModelDeployment.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListCustomModelDeployments.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_DeleteCustomModelDeployment.html
+    #
+    # @option params [required, String] :custom_model_deployment_identifier
+    #   The Amazon Resource Name (ARN) or name of the custom model deployment
+    #   to retrieve information about.
+    #
+    # @return [Types::GetCustomModelDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCustomModelDeploymentResponse#custom_model_deployment_arn #custom_model_deployment_arn} => String
+    #   * {Types::GetCustomModelDeploymentResponse#model_deployment_name #model_deployment_name} => String
+    #   * {Types::GetCustomModelDeploymentResponse#model_arn #model_arn} => String
+    #   * {Types::GetCustomModelDeploymentResponse#created_at #created_at} => Time
+    #   * {Types::GetCustomModelDeploymentResponse#status #status} => String
+    #   * {Types::GetCustomModelDeploymentResponse#description #description} => String
+    #   * {Types::GetCustomModelDeploymentResponse#failure_message #failure_message} => String
+    #   * {Types::GetCustomModelDeploymentResponse#last_updated_at #last_updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_custom_model_deployment({
+    #     custom_model_deployment_identifier: "CustomModelDeploymentIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_model_deployment_arn #=> String
+    #   resp.model_deployment_name #=> String
+    #   resp.model_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.status #=> String, one of "Creating", "Active", "Failed"
+    #   resp.description #=> String
+    #   resp.failure_message #=> String
+    #   resp.last_updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetCustomModelDeployment AWS API Documentation
+    #
+    # @overload get_custom_model_deployment(params = {})
+    # @param [Hash] params ({})
+    def get_custom_model_deployment(params = {}, options = {})
+      req = build_request(:get_custom_model_deployment, params)
       req.send_request(options)
     end
 
@@ -3666,6 +3852,102 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def get_use_case_for_model_access(params = {}, options = {})
       req = build_request(:get_use_case_for_model_access, params)
+      req.send_request(options)
+    end
+
+    # Lists custom model deployments in your account. You can filter the
+    # results by creation time, name, status, and associated model. Use this
+    # operation to manage and monitor your custom model deployments.
+    #
+    # We recommend using pagination to ensure that the operation returns
+    # quickly and successfully.
+    #
+    # The following actions are related to the `ListCustomModelDeployments`
+    # operation:
+    #
+    # * [CreateCustomModelDeployment][1]
+    #
+    # * [GetCustomModelDeployment][2]
+    #
+    # * [DeleteCustomModelDeployment][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateCustomModelDeployment.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetCustomModelDeployment.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_DeleteCustomModelDeployment.html
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :created_before
+    #   Filters deployments created before the specified date and time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :created_after
+    #   Filters deployments created after the specified date and time.
+    #
+    # @option params [String] :name_contains
+    #   Filters deployments whose names contain the specified string.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use this token to retrieve
+    #   additional results when the response is truncated.
+    #
+    # @option params [String] :sort_by
+    #   The field to sort the results by. The only supported value is
+    #   `CreationTime`.
+    #
+    # @option params [String] :sort_order
+    #   The sort order for the results. Valid values are `Ascending` and
+    #   `Descending`. Default is `Descending`.
+    #
+    # @option params [String] :status_equals
+    #   Filters deployments by status. Valid values are `CREATING`, `ACTIVE`,
+    #   and `FAILED`.
+    #
+    # @option params [String] :model_arn_equals
+    #   Filters deployments by the Amazon Resource Name (ARN) of the
+    #   associated custom model.
+    #
+    # @return [Types::ListCustomModelDeploymentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCustomModelDeploymentsResponse#next_token #next_token} => String
+    #   * {Types::ListCustomModelDeploymentsResponse#model_deployment_summaries #model_deployment_summaries} => Array&lt;Types::CustomModelDeploymentSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_custom_model_deployments({
+    #     created_before: Time.now,
+    #     created_after: Time.now,
+    #     name_contains: "ModelDeploymentName",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     sort_by: "CreationTime", # accepts CreationTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     status_equals: "Creating", # accepts Creating, Active, Failed
+    #     model_arn_equals: "CustomModelArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.model_deployment_summaries #=> Array
+    #   resp.model_deployment_summaries[0].custom_model_deployment_arn #=> String
+    #   resp.model_deployment_summaries[0].custom_model_deployment_name #=> String
+    #   resp.model_deployment_summaries[0].model_arn #=> String
+    #   resp.model_deployment_summaries[0].created_at #=> Time
+    #   resp.model_deployment_summaries[0].status #=> String, one of "Creating", "Active", "Failed"
+    #   resp.model_deployment_summaries[0].last_updated_at #=> Time
+    #   resp.model_deployment_summaries[0].failure_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListCustomModelDeployments AWS API Documentation
+    #
+    # @overload list_custom_model_deployments(params = {})
+    # @param [Hash] params ({})
+    def list_custom_model_deployments(params = {}, options = {})
+      req = build_request(:list_custom_model_deployments, params)
       req.send_request(options)
     end
 
@@ -5459,7 +5741,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

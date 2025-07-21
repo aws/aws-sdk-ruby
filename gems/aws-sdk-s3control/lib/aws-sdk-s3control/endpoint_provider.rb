@@ -46,6 +46,31 @@ module Aws::S3Control
             raise ArgumentError, "Invalid region: region was not a valid DNS name."
           end
         end
+        if Aws::Endpoints::Matchers.set?(parameters.resource_arn) && (resource_arn = Aws::Endpoints::Matchers.aws_parse_arn(parameters.resource_arn)) && Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(resource_arn, "service"), "s3express")
+          if (partition_result = Aws::Endpoints::Matchers.aws_partition(parameters.region))
+            if (arn_partition = Aws::Endpoints::Matchers.aws_partition(Aws::Endpoints::Matchers.attr(resource_arn, "region")))
+              if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(arn_partition, "name"), Aws::Endpoints::Matchers.attr(partition_result, "name"))
+                if Aws::Endpoints::Matchers.set?(parameters.use_arn_region) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_arn_region, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(resource_arn, "region"), "#{parameters.region}"))
+                  raise ArgumentError, "Invalid configuration: region from ARN `#{resource_arn['region']}` does not match client region `#{parameters.region}` and UseArnRegion is `false`"
+                end
+                if Aws::Endpoints::Matchers.set?(parameters.endpoint) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
+                  raise ArgumentError, "Invalid Configuration: DualStack and custom endpoint are not supported"
+                end
+                if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
+                  raise ArgumentError, "S3Express does not support Dual-stack."
+                end
+                if Aws::Endpoints::Matchers.set?(parameters.endpoint) && (url = Aws::Endpoints::Matchers.parse_url(parameters.endpoint))
+                  return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}", headers: {}, properties: {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3express", "signingRegion" => "#{parameters.region}"}]})
+                end
+                if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
+                  return Aws::Endpoints::Endpoint.new(url: "https://s3express-control-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3express", "signingRegion" => "#{parameters.region}"}]})
+                end
+                return Aws::Endpoints::Endpoint.new(url: "https://s3express-control.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3express", "signingRegion" => "#{parameters.region}"}]})
+              end
+              raise ArgumentError, "Client was configured for partition `#{partition_result['name']}` but ARN has `#{arn_partition['name']}`"
+            end
+          end
+        end
         if Aws::Endpoints::Matchers.set?(parameters.access_point_name) && (access_point_suffix = Aws::Endpoints::Matchers.substring(parameters.access_point_name, 0, 7, true)) && Aws::Endpoints::Matchers.string_equals?(access_point_suffix, "--xa-s3")
           if (partition_result = Aws::Endpoints::Matchers.aws_partition(parameters.region))
             if Aws::Endpoints::Matchers.set?(parameters.endpoint) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)

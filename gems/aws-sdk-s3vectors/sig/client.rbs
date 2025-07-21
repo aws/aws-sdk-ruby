@@ -1,0 +1,303 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module S3Vectors
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIndexOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#create_index-instance_method
+      def create_index: (
+                          ?vector_bucket_name: ::String,
+                          ?vector_bucket_arn: ::String,
+                          index_name: ::String,
+                          data_type: ("float32"),
+                          dimension: ::Integer,
+                          distance_metric: ("euclidean" | "cosine"),
+                          ?metadata_configuration: {
+                            non_filterable_metadata_keys: Array[::String]
+                          }
+                        ) -> _CreateIndexResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIndexResponseSuccess
+
+      interface _CreateVectorBucketResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVectorBucketOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#create_vector_bucket-instance_method
+      def create_vector_bucket: (
+                                  vector_bucket_name: ::String,
+                                  ?encryption_configuration: {
+                                    sse_type: ("AES256" | "aws:kms")?,
+                                    kms_key_arn: ::String?
+                                  }
+                                ) -> _CreateVectorBucketResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVectorBucketResponseSuccess
+
+      interface _DeleteIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIndexOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#delete_index-instance_method
+      def delete_index: (
+                          ?vector_bucket_name: ::String,
+                          ?index_name: ::String,
+                          ?index_arn: ::String
+                        ) -> _DeleteIndexResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIndexResponseSuccess
+
+      interface _DeleteVectorBucketResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVectorBucketOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#delete_vector_bucket-instance_method
+      def delete_vector_bucket: (
+                                  ?vector_bucket_name: ::String,
+                                  ?vector_bucket_arn: ::String
+                                ) -> _DeleteVectorBucketResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVectorBucketResponseSuccess
+
+      interface _DeleteVectorBucketPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVectorBucketPolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#delete_vector_bucket_policy-instance_method
+      def delete_vector_bucket_policy: (
+                                         ?vector_bucket_name: ::String,
+                                         ?vector_bucket_arn: ::String
+                                       ) -> _DeleteVectorBucketPolicyResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVectorBucketPolicyResponseSuccess
+
+      interface _DeleteVectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVectorsOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#delete_vectors-instance_method
+      def delete_vectors: (
+                            ?vector_bucket_name: ::String,
+                            ?index_name: ::String,
+                            ?index_arn: ::String,
+                            keys: Array[::String]
+                          ) -> _DeleteVectorsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVectorsResponseSuccess
+
+      interface _GetIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIndexOutput]
+        def index: () -> Types::Index
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#get_index-instance_method
+      def get_index: (
+                       ?vector_bucket_name: ::String,
+                       ?index_name: ::String,
+                       ?index_arn: ::String
+                     ) -> _GetIndexResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIndexResponseSuccess
+
+      interface _GetVectorBucketResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVectorBucketOutput]
+        def vector_bucket: () -> Types::VectorBucket
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#get_vector_bucket-instance_method
+      def get_vector_bucket: (
+                               ?vector_bucket_name: ::String,
+                               ?vector_bucket_arn: ::String
+                             ) -> _GetVectorBucketResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVectorBucketResponseSuccess
+
+      interface _GetVectorBucketPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVectorBucketPolicyOutput]
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#get_vector_bucket_policy-instance_method
+      def get_vector_bucket_policy: (
+                                      ?vector_bucket_name: ::String,
+                                      ?vector_bucket_arn: ::String
+                                    ) -> _GetVectorBucketPolicyResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVectorBucketPolicyResponseSuccess
+
+      interface _GetVectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVectorsOutput]
+        def vectors: () -> ::Array[Types::GetOutputVector]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#get_vectors-instance_method
+      def get_vectors: (
+                         ?vector_bucket_name: ::String,
+                         ?index_name: ::String,
+                         ?index_arn: ::String,
+                         keys: Array[::String],
+                         ?return_data: bool,
+                         ?return_metadata: bool
+                       ) -> _GetVectorsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVectorsResponseSuccess
+
+      interface _ListIndexesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIndexesOutput]
+        def next_token: () -> ::String
+        def indexes: () -> ::Array[Types::IndexSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#list_indexes-instance_method
+      def list_indexes: (
+                          ?vector_bucket_name: ::String,
+                          ?vector_bucket_arn: ::String,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          ?prefix: ::String
+                        ) -> _ListIndexesResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIndexesResponseSuccess
+
+      interface _ListVectorBucketsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVectorBucketsOutput]
+        def next_token: () -> ::String
+        def vector_buckets: () -> ::Array[Types::VectorBucketSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#list_vector_buckets-instance_method
+      def list_vector_buckets: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String,
+                                 ?prefix: ::String
+                               ) -> _ListVectorBucketsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVectorBucketsResponseSuccess
+
+      interface _ListVectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVectorsOutput]
+        def next_token: () -> ::String
+        def vectors: () -> ::Array[Types::ListOutputVector]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#list_vectors-instance_method
+      def list_vectors: (
+                          ?vector_bucket_name: ::String,
+                          ?index_name: ::String,
+                          ?index_arn: ::String,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          ?segment_count: ::Integer,
+                          ?segment_index: ::Integer,
+                          ?return_data: bool,
+                          ?return_metadata: bool
+                        ) -> _ListVectorsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVectorsResponseSuccess
+
+      interface _PutVectorBucketPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutVectorBucketPolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#put_vector_bucket_policy-instance_method
+      def put_vector_bucket_policy: (
+                                      ?vector_bucket_name: ::String,
+                                      ?vector_bucket_arn: ::String,
+                                      policy: ::String
+                                    ) -> _PutVectorBucketPolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutVectorBucketPolicyResponseSuccess
+
+      interface _PutVectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutVectorsOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#put_vectors-instance_method
+      def put_vectors: (
+                         ?vector_bucket_name: ::String,
+                         ?index_name: ::String,
+                         ?index_arn: ::String,
+                         vectors: Array[
+                           {
+                             key: ::String,
+                             data: {
+                               float32: Array[::Float]?
+                             },
+                             metadata: {
+                             }?
+                           },
+                         ]
+                       ) -> _PutVectorsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutVectorsResponseSuccess
+
+      interface _QueryVectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::QueryVectorsOutput]
+        def vectors: () -> ::Array[Types::QueryOutputVector]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#query_vectors-instance_method
+      def query_vectors: (
+                           ?vector_bucket_name: ::String,
+                           ?index_name: ::String,
+                           ?index_arn: ::String,
+                           top_k: ::Integer,
+                           query_vector: {
+                             float32: Array[::Float]?
+                           },
+                           ?filter: {
+                           },
+                           ?return_metadata: bool,
+                           ?return_distance: bool
+                         ) -> _QueryVectorsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _QueryVectorsResponseSuccess
+    end
+  end
+end
+

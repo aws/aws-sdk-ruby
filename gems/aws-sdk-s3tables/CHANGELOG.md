@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2025-07-15)
+------------------
+
+* Feature - Adds table bucket type to ListTableBucket and GetTableBucket API operations
+
 1.10.0 (2025-06-23)
 ------------------
 

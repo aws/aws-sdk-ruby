@@ -1510,6 +1510,10 @@ module Aws::DataZone
     #   The Amazon Redshift properties of a connection.
     #   @return [Types::RedshiftPropertiesInput]
     #
+    # @!attribute [rw] s3_properties
+    #   The Amazon S3 properties of a connection.
+    #   @return [Types::S3PropertiesInput]
+    #
     # @!attribute [rw] spark_emr_properties
     #   The Spark EMR properties of a connection.
     #   @return [Types::SparkEmrPropertiesInput]
@@ -1526,6 +1530,7 @@ module Aws::DataZone
       :hyper_pod_properties,
       :iam_properties,
       :redshift_properties,
+      :s3_properties,
       :spark_emr_properties,
       :spark_glue_properties,
       :unknown)
@@ -1538,6 +1543,7 @@ module Aws::DataZone
       class HyperPodProperties < ConnectionPropertiesInput; end
       class IamProperties < ConnectionPropertiesInput; end
       class RedshiftProperties < ConnectionPropertiesInput; end
+      class S3Properties < ConnectionPropertiesInput; end
       class SparkEmrProperties < ConnectionPropertiesInput; end
       class SparkGlueProperties < ConnectionPropertiesInput; end
       class Unknown < ConnectionPropertiesInput; end
@@ -1567,6 +1573,10 @@ module Aws::DataZone
     #   The Amazon Redshift properties of a connection.
     #   @return [Types::RedshiftPropertiesOutput]
     #
+    # @!attribute [rw] s3_properties
+    #   The Amazon S3 properties of a connection.
+    #   @return [Types::S3PropertiesOutput]
+    #
     # @!attribute [rw] spark_emr_properties
     #   The Spark EMR properties of a connection.
     #   @return [Types::SparkEmrPropertiesOutput]
@@ -1583,6 +1593,7 @@ module Aws::DataZone
       :hyper_pod_properties,
       :iam_properties,
       :redshift_properties,
+      :s3_properties,
       :spark_emr_properties,
       :spark_glue_properties,
       :unknown)
@@ -1595,6 +1606,7 @@ module Aws::DataZone
       class HyperPodProperties < ConnectionPropertiesOutput; end
       class IamProperties < ConnectionPropertiesOutput; end
       class RedshiftProperties < ConnectionPropertiesOutput; end
+      class S3Properties < ConnectionPropertiesOutput; end
       class SparkEmrProperties < ConnectionPropertiesOutput; end
       class SparkGlueProperties < ConnectionPropertiesOutput; end
       class Unknown < ConnectionPropertiesOutput; end
@@ -1621,6 +1633,10 @@ module Aws::DataZone
     #   The Amazon Redshift properties of a connection properties patch.
     #   @return [Types::RedshiftPropertiesPatch]
     #
+    # @!attribute [rw] s3_properties
+    #   The Amazon S3 properties of a connection properties patch.
+    #   @return [Types::S3PropertiesPatch]
+    #
     # @!attribute [rw] spark_emr_properties
     #   The Spark EMR properties of a connection properties patch.
     #   @return [Types::SparkEmrPropertiesPatch]
@@ -1632,6 +1648,7 @@ module Aws::DataZone
       :glue_properties,
       :iam_properties,
       :redshift_properties,
+      :s3_properties,
       :spark_emr_properties,
       :unknown)
       SENSITIVE = []
@@ -1642,6 +1659,7 @@ module Aws::DataZone
       class GlueProperties < ConnectionPropertiesPatch; end
       class IamProperties < ConnectionPropertiesPatch; end
       class RedshiftProperties < ConnectionPropertiesPatch; end
+      class S3Properties < ConnectionPropertiesPatch; end
       class SparkEmrProperties < ConnectionPropertiesPatch; end
       class Unknown < ConnectionPropertiesPatch; end
     end
@@ -16299,6 +16317,79 @@ module Aws::DataZone
       :skipped,
       :unchanged,
       :updated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 properties of a connection.
+    #
+    # @!attribute [rw] s3_access_grant_location_id
+    #   The Amazon S3 Access Grant location ID that's part of the Amazon S3
+    #   properties of a connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 URI that's part of the Amazon S3 properties of a
+    #   connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/S3PropertiesInput AWS API Documentation
+    #
+    class S3PropertiesInput < Struct.new(
+      :s3_access_grant_location_id,
+      :s3_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 properties of a connection.
+    #
+    # @!attribute [rw] error_message
+    #   The error message that gets displayed.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_access_grant_location_id
+    #   The Amazon S3 Access Grant location ID that's part of the Amazon S3
+    #   properties of a connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 URI that's part of the Amazon S3 properties of a
+    #   connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Amazon S3 connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/S3PropertiesOutput AWS API Documentation
+    #
+    class S3PropertiesOutput < Struct.new(
+      :error_message,
+      :s3_access_grant_location_id,
+      :s3_uri,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 properties patch of a connection.
+    #
+    # @!attribute [rw] s3_access_grant_location_id
+    #   The Amazon S3 Access Grant location ID that's part of the Amazon S3
+    #   properties patch of a connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 URI that's part of the Amazon S3 properties patch of
+    #   a connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/S3PropertiesPatch AWS API Documentation
+    #
+    class S3PropertiesPatch < Struct.new(
+      :s3_access_grant_location_id,
+      :s3_uri)
       SENSITIVE = []
       include Aws::Structure
     end

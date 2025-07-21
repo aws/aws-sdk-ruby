@@ -129,7 +129,7 @@ module Aws
                           service_code: ::String,
                           ?filters: Array[
                             {
-                              type: ("TERM_MATCH"),
+                              type: ("TERM_MATCH" | "EQUALS" | "CONTAINS" | "ANY_OF" | "NONE_OF"),
                               field: ::String,
                               value: ::String
                             },

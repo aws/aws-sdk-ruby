@@ -6054,44 +6054,63 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # This operation allows you to list all the Amazon Web Services resource
-    # tags for a specified resource. Each tag is a label consisting of a
-    # user-defined key and value. Tags can help you manage, identify,
-    # organize, search for, and filter resources.
+    # This operation allows you to list all of the tags for a specified
+    # resource. Each tag is a label consisting of a key and value. Tags can
+    # help you organize, track costs for, and control access to resources.
     #
-    # Permissions
+    # <note markdown="1"> This operation is only supported for the following Amazon S3
+    # resources:
     #
-    # : You must have the `s3:ListTagsForResource` permission to use this
-    #   operation.
+    #  * [Directory buckets][1]
     #
-    # <note markdown="1"> This operation is only supported for [S3 Storage Lens groups][1] and
-    # for [S3 Access Grants][2]. The tagged resource can be an S3 Storage
-    # Lens group or S3 Access Grants instance, registered location, or
-    # grant.
+    # * [Storage Lens groups][2]
+    #
+    # * [S3 Access Grants instances, registered locations, and grants][3].
     #
     #  </note>
     #
-    # For more information about the required Storage Lens Groups
-    # permissions, see [Setting account permissions to use S3 Storage Lens
-    # groups][3].
+    # Permissions
+    #
+    # : For Storage Lens groups and S3 Access Grants, you must have the
+    #   `s3:ListTagsForResource` permission to use this operation.
+    #
+    #   For more information about the required Storage Lens Groups
+    #   permissions, see [Setting account permissions to use S3 Storage Lens
+    #   groups][4].
+    #
+    # Directory bucket permissions
+    #
+    # : For directory buckets, you must have the
+    #   `s3express:ListTagsForResource` permission to use this operation.
+    #   For more information about directory buckets policies and
+    #   permissions, see [Identity and Access Management (IAM) for S3
+    #   Express One Zone][5] in the *Amazon S3 User Guide*.
+    #
+    # HTTP Host header syntax
+    #
+    # : <b>Directory buckets </b> - The HTTP Host header syntax is
+    #   `s3express-control.region.amazonaws.com`.
     #
     # For information about S3 Tagging errors, see [List of Amazon S3
-    # Tagging error codes][4].
+    # Tagging error codes][6].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-permissions.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
     #
     # @option params [String] :account_id
     #   The Amazon Web Services account ID of the resource owner.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the S3 resource that you want to
-    #   list the tags for. The tagged resource can be an S3 Storage Lens group
-    #   or S3 Access Grants instance, registered location, or grant.
+    #   list tags for. The tagged resource can be a directory bucket, S3
+    #   Storage Lens group or S3 Access Grants instance, registered location,
+    #   or grant.
     #
     # @return [Types::ListTagsForResourceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7558,45 +7577,65 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Creates a new Amazon Web Services resource tag or updates an existing
-    # resource tag. Each tag is a label consisting of a user-defined key and
-    # value. Tags can help you manage, identify, organize, search for, and
-    # filter resources. You can add up to 50 Amazon Web Services resource
-    # tags for each S3 resource.
+    # Creates a new user-defined tag or updates an existing tag. Each tag is
+    # a label consisting of a key and value that is applied to your
+    # resource. Tags can help you organize, track costs for, and control
+    # access to your resources. You can add up to 50 Amazon Web Services
+    # resource tags for each S3 resource.
     #
-    # <note markdown="1"> This operation is only supported for [S3 Storage Lens groups][1] and
-    # for [S3 Access Grants][2]. The tagged resource can be an S3 Storage
-    # Lens group or S3 Access Grants instance, registered location, or
-    # grant.
+    # <note markdown="1"> This operation is only supported for the following Amazon S3 resource:
+    #
+    #  * [Directory buckets][1]
+    #
+    # * [S3 Storage Lens groups][2]
+    #
+    # * [S3 Access Grants instances, registered locations, or grants][3].
     #
     #  </note>
     #
     # Permissions
     #
-    # : You must have the `s3:TagResource` permission to use this operation.
+    # : For Storage Lens groups and S3 Access Grants, you must have the
+    #   `s3:TagResource` permission to use this operation.
     #
-    # For more information about the required Storage Lens Groups
-    # permissions, see [Setting account permissions to use S3 Storage Lens
-    # groups][3].
+    #   For more information about the required Storage Lens Groups
+    #   permissions, see [Setting account permissions to use S3 Storage Lens
+    #   groups][4].
+    #
+    # Directory bucket permissions
+    #
+    # : For directory buckets, you must have the `s3express:TagResource`
+    #   permission to use this operation. For more information about
+    #   directory buckets policies and permissions, see [Identity and Access
+    #   Management (IAM) for S3 Express One Zone][5] in the *Amazon S3 User
+    #   Guide*.
+    #
+    # HTTP Host header syntax
+    #
+    # : <b>Directory buckets </b> - The HTTP Host header syntax is
+    #   `s3express-control.region.amazonaws.com`.
     #
     # For information about S3 Tagging errors, see [List of Amazon S3
-    # Tagging error codes][4].
+    # Tagging error codes][6].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-permissions.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
     #
     # @option params [String] :account_id
     #   The Amazon Web Services account ID that created the S3 resource that
     #   you're trying to add tags to or the requester's account ID.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the S3 resource that you're trying
-    #   to add tags to. The tagged resource can be an S3 Storage Lens group or
-    #   S3 Access Grants instance, registered location, or grant.
+    #   The Amazon Resource Name (ARN) of the S3 resource that you're
+    #   applying tags to. The tagged resource can be a directory bucket, S3
+    #   Storage Lens group or S3 Access Grants instance, registered location,
+    #   or grant.
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The Amazon Web Services resource tags that you want to add to the
@@ -7626,44 +7665,63 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # This operation removes the specified Amazon Web Services resource tags
-    # from an S3 resource. Each tag is a label consisting of a user-defined
-    # key and value. Tags can help you manage, identify, organize, search
-    # for, and filter resources.
+    # This operation removes the specified user-defined tags from an S3
+    # resource. You can pass one or more tag keys.
     #
-    # <note markdown="1"> This operation is only supported for [S3 Storage Lens groups][1] and
-    # for [S3 Access Grants][2]. The tagged resource can be an S3 Storage
-    # Lens group or S3 Access Grants instance, registered location, or
-    # grant.
+    # <note markdown="1"> This operation is only supported for the following Amazon S3
+    # resources:
+    #
+    #  * [Directory buckets][1]
+    #
+    # * [Storage Lens groups][2]
+    #
+    # * [S3 Access Grants instances, registered locations, and grants][3].
     #
     #  </note>
     #
     # Permissions
     #
-    # : You must have the `s3:UntagResource` permission to use this
-    #   operation.
+    # : For Storage Lens groups and S3 Access Grants, you must have the
+    #   `s3:UntagResource` permission to use this operation.
     #
-    # For more information about the required Storage Lens Groups
-    # permissions, see [Setting account permissions to use S3 Storage Lens
-    # groups][3].
+    #   For more information about the required Storage Lens Groups
+    #   permissions, see [Setting account permissions to use S3 Storage Lens
+    #   groups][4].
+    #
+    # Directory bucket permissions
+    #
+    # : For directory buckets, you must have the `s3express:UntagResource`
+    #   permission to use this operation. For more information about
+    #   directory buckets policies and permissions, see [Identity and Access
+    #   Management (IAM) for S3 Express One Zone][5] in the *Amazon S3 User
+    #   Guide*.
+    #
+    # HTTP Host header syntax
+    #
+    # : <b>Directory buckets </b> - The HTTP Host header syntax is
+    #   `s3express-control.region.amazonaws.com`.
     #
     # For information about S3 Tagging errors, see [List of Amazon S3
-    # Tagging error codes][4].
+    # Tagging error codes][6].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-permissions.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
     #
     # @option params [String] :account_id
     #   The Amazon Web Services account ID that owns the resource that you're
     #   trying to remove the tags from.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the S3 resource that you're trying
-    #   to remove the tags from.
+    #   The Amazon Resource Name (ARN) of the S3 resource that you're
+    #   removing tags from. The tagged resource can be a directory bucket, S3
+    #   Storage Lens group or S3 Access Grants instance, registered location,
+    #   or grant.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The array of tag key-value pairs that you're trying to remove from of
@@ -8010,7 +8068,7 @@ module Aws::S3Control
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.111.0'
+      context[:gem_version] = '1.112.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

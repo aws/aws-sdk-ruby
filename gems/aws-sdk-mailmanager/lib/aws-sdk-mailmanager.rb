@@ -49,12 +49,13 @@ module Aws::MailManager
   end
   autoload :Client, 'aws-sdk-mailmanager/client'
   autoload :Errors, 'aws-sdk-mailmanager/errors'
+  autoload :Waiters, 'aws-sdk-mailmanager/waiters'
   autoload :Resource, 'aws-sdk-mailmanager/resource'
   autoload :EndpointParameters, 'aws-sdk-mailmanager/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-mailmanager/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mailmanager/endpoints'
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.28.0'
 
 end
 

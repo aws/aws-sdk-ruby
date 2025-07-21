@@ -15,7 +15,7 @@ module Aws::CloudWatchLogs
       attr_accessor policy_name: ::String
       attr_accessor policy_document: ::String
       attr_accessor last_updated_time: ::Integer
-      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY")
+      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY")
       attr_accessor scope: ("ALL")
       attr_accessor selection_criteria: ::String
       attr_accessor account_id: ::String
@@ -95,7 +95,7 @@ module Aws::CloudWatchLogs
       attr_accessor service: ::String
       attr_accessor log_type: ::String
       attr_accessor resource_type: ::String
-      attr_accessor delivery_destination_type: ("S3" | "CWL" | "FH")
+      attr_accessor delivery_destination_type: ("S3" | "CWL" | "FH" | "XRAY")
       attr_accessor default_delivery_config_values: Types::ConfigurationTemplateDeliveryConfigValues
       attr_accessor allowed_fields: ::Array[Types::RecordField]
       attr_accessor allowed_output_formats: ::Array[("json" | "plain" | "w3c" | "raw" | "parquet")]
@@ -206,7 +206,7 @@ module Aws::CloudWatchLogs
 
     class DeleteAccountPolicyRequest
       attr_accessor policy_name: ::String
-      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY")
+      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY")
       SENSITIVE: []
     end
 
@@ -296,6 +296,8 @@ module Aws::CloudWatchLogs
 
     class DeleteResourcePolicyRequest
       attr_accessor policy_name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor expected_revision_id: ::String
       SENSITIVE: []
     end
 
@@ -320,7 +322,7 @@ module Aws::CloudWatchLogs
       attr_accessor arn: ::String
       attr_accessor delivery_source_name: ::String
       attr_accessor delivery_destination_arn: ::String
-      attr_accessor delivery_destination_type: ("S3" | "CWL" | "FH")
+      attr_accessor delivery_destination_type: ("S3" | "CWL" | "FH" | "XRAY")
       attr_accessor record_fields: ::Array[::String]
       attr_accessor field_delimiter: ::String
       attr_accessor s3_delivery_configuration: Types::S3DeliveryConfiguration
@@ -331,7 +333,7 @@ module Aws::CloudWatchLogs
     class DeliveryDestination
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor delivery_destination_type: ("S3" | "CWL" | "FH")
+      attr_accessor delivery_destination_type: ("S3" | "CWL" | "FH" | "XRAY")
       attr_accessor output_format: ("json" | "plain" | "w3c" | "raw" | "parquet")
       attr_accessor delivery_destination_configuration: Types::DeliveryDestinationConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
@@ -354,7 +356,7 @@ module Aws::CloudWatchLogs
     end
 
     class DescribeAccountPoliciesRequest
-      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY")
+      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY")
       attr_accessor policy_name: ::String
       attr_accessor account_identifiers: ::Array[::String]
       attr_accessor next_token: ::String
@@ -371,7 +373,7 @@ module Aws::CloudWatchLogs
       attr_accessor service: ::String
       attr_accessor log_types: ::Array[::String]
       attr_accessor resource_types: ::Array[::String]
-      attr_accessor delivery_destination_types: ::Array[("S3" | "CWL" | "FH")]
+      attr_accessor delivery_destination_types: ::Array[("S3" | "CWL" | "FH" | "XRAY")]
       attr_accessor next_token: ::String
       attr_accessor limit: ::Integer
       SENSITIVE: []
@@ -553,6 +555,8 @@ module Aws::CloudWatchLogs
     class DescribeResourcePoliciesRequest
       attr_accessor next_token: ::String
       attr_accessor limit: ::Integer
+      attr_accessor resource_arn: ::String
+      attr_accessor policy_scope: ("ACCOUNT" | "RESOURCE")
       SENSITIVE: []
     end
 
@@ -629,6 +633,12 @@ module Aws::CloudWatchLogs
       attr_accessor last_scan_time: ::Integer
       attr_accessor first_event_time: ::Integer
       attr_accessor last_event_time: ::Integer
+      SENSITIVE: []
+    end
+
+    class FieldsData
+      attr_accessor data: ::String
+      attr_accessor event_type: untyped
       SENSITIVE: []
     end
 
@@ -778,6 +788,17 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class GetLogObjectRequest
+      attr_accessor unmask: bool
+      attr_accessor log_object_pointer: ::String
+      SENSITIVE: []
+    end
+
+    class GetLogObjectResponse
+      attr_accessor field_stream: Types::GetLogObjectResponseStream
+      SENSITIVE: []
+    end
+
     class GetLogRecordRequest
       attr_accessor log_record_pointer: ::String
       attr_accessor unmask: bool
@@ -852,6 +873,12 @@ module Aws::CloudWatchLogs
       attr_accessor integration_name: ::String
       attr_accessor integration_type: ("OPENSEARCH")
       attr_accessor integration_status: ("PROVISIONING" | "ACTIVE" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class InternalStreamingException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
       SENSITIVE: []
     end
 
@@ -1275,7 +1302,7 @@ module Aws::CloudWatchLogs
     class PutAccountPolicyRequest
       attr_accessor policy_name: ::String
       attr_accessor policy_document: ::String
-      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY")
+      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY")
       attr_accessor scope: ("ALL")
       attr_accessor selection_criteria: ::String
       SENSITIVE: []
@@ -1314,6 +1341,7 @@ module Aws::CloudWatchLogs
       attr_accessor name: ::String
       attr_accessor output_format: ("json" | "plain" | "w3c" | "raw" | "parquet")
       attr_accessor delivery_destination_configuration: Types::DeliveryDestinationConfiguration
+      attr_accessor delivery_destination_type: ("S3" | "CWL" | "FH" | "XRAY")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -1423,11 +1451,14 @@ module Aws::CloudWatchLogs
     class PutResourcePolicyRequest
       attr_accessor policy_name: ::String
       attr_accessor policy_document: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor expected_revision_id: ::String
       SENSITIVE: []
     end
 
     class PutResourcePolicyResponse
       attr_accessor resource_policy: Types::ResourcePolicy
+      attr_accessor revision_id: ::String
       SENSITIVE: []
     end
 
@@ -1547,6 +1578,9 @@ module Aws::CloudWatchLogs
       attr_accessor policy_name: ::String
       attr_accessor policy_document: ::String
       attr_accessor last_updated_time: ::Integer
+      attr_accessor policy_scope: ("ACCOUNT" | "RESOURCE")
+      attr_accessor resource_arn: ::String
+      attr_accessor revision_id: ::String
       SENSITIVE: []
     end
 
@@ -1784,6 +1818,10 @@ module Aws::CloudWatchLogs
     end
 
     class ValidationException < Aws::EmptyStructure
+    end
+
+    class GetLogObjectResponseStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:fields, :internal_streaming_exception]
     end
 
     class StartLiveTailResponseStream < Enumerator[untyped, untyped]

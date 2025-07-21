@@ -812,8 +812,13 @@ module Aws::DataZone
     RuleType = Shapes::StringShape.new(name: 'RuleType')
     RunIdentifier = Shapes::StringShape.new(name: 'RunIdentifier')
     RunStatisticsForAssets = Shapes::StructureShape.new(name: 'RunStatisticsForAssets')
+    S3AccessGrantLocationId = Shapes::StringShape.new(name: 'S3AccessGrantLocationId')
     S3Location = Shapes::StringShape.new(name: 'S3Location')
     S3LocationList = Shapes::ListShape.new(name: 'S3LocationList')
+    S3PropertiesInput = Shapes::StructureShape.new(name: 'S3PropertiesInput')
+    S3PropertiesOutput = Shapes::StructureShape.new(name: 'S3PropertiesOutput')
+    S3PropertiesPatch = Shapes::StructureShape.new(name: 'S3PropertiesPatch')
+    S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SageMakerAssetType = Shapes::StringShape.new(name: 'SageMakerAssetType')
     SageMakerResourceArn = Shapes::StringShape.new(name: 'SageMakerResourceArn')
     SageMakerRunConfigurationInput = Shapes::StructureShape.new(name: 'SageMakerRunConfigurationInput')
@@ -1373,6 +1378,7 @@ module Aws::DataZone
     ConnectionPropertiesInput.add_member(:hyper_pod_properties, Shapes::ShapeRef.new(shape: HyperPodPropertiesInput, location_name: "hyperPodProperties"))
     ConnectionPropertiesInput.add_member(:iam_properties, Shapes::ShapeRef.new(shape: IamPropertiesInput, location_name: "iamProperties"))
     ConnectionPropertiesInput.add_member(:redshift_properties, Shapes::ShapeRef.new(shape: RedshiftPropertiesInput, location_name: "redshiftProperties"))
+    ConnectionPropertiesInput.add_member(:s3_properties, Shapes::ShapeRef.new(shape: S3PropertiesInput, location_name: "s3Properties"))
     ConnectionPropertiesInput.add_member(:spark_emr_properties, Shapes::ShapeRef.new(shape: SparkEmrPropertiesInput, location_name: "sparkEmrProperties"))
     ConnectionPropertiesInput.add_member(:spark_glue_properties, Shapes::ShapeRef.new(shape: SparkGluePropertiesInput, location_name: "sparkGlueProperties"))
     ConnectionPropertiesInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -1381,6 +1387,7 @@ module Aws::DataZone
     ConnectionPropertiesInput.add_member_subclass(:hyper_pod_properties, Types::ConnectionPropertiesInput::HyperPodProperties)
     ConnectionPropertiesInput.add_member_subclass(:iam_properties, Types::ConnectionPropertiesInput::IamProperties)
     ConnectionPropertiesInput.add_member_subclass(:redshift_properties, Types::ConnectionPropertiesInput::RedshiftProperties)
+    ConnectionPropertiesInput.add_member_subclass(:s3_properties, Types::ConnectionPropertiesInput::S3Properties)
     ConnectionPropertiesInput.add_member_subclass(:spark_emr_properties, Types::ConnectionPropertiesInput::SparkEmrProperties)
     ConnectionPropertiesInput.add_member_subclass(:spark_glue_properties, Types::ConnectionPropertiesInput::SparkGlueProperties)
     ConnectionPropertiesInput.add_member_subclass(:unknown, Types::ConnectionPropertiesInput::Unknown)
@@ -1391,6 +1398,7 @@ module Aws::DataZone
     ConnectionPropertiesOutput.add_member(:hyper_pod_properties, Shapes::ShapeRef.new(shape: HyperPodPropertiesOutput, location_name: "hyperPodProperties"))
     ConnectionPropertiesOutput.add_member(:iam_properties, Shapes::ShapeRef.new(shape: IamPropertiesOutput, location_name: "iamProperties"))
     ConnectionPropertiesOutput.add_member(:redshift_properties, Shapes::ShapeRef.new(shape: RedshiftPropertiesOutput, location_name: "redshiftProperties"))
+    ConnectionPropertiesOutput.add_member(:s3_properties, Shapes::ShapeRef.new(shape: S3PropertiesOutput, location_name: "s3Properties"))
     ConnectionPropertiesOutput.add_member(:spark_emr_properties, Shapes::ShapeRef.new(shape: SparkEmrPropertiesOutput, location_name: "sparkEmrProperties"))
     ConnectionPropertiesOutput.add_member(:spark_glue_properties, Shapes::ShapeRef.new(shape: SparkGluePropertiesOutput, location_name: "sparkGlueProperties"))
     ConnectionPropertiesOutput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -1399,6 +1407,7 @@ module Aws::DataZone
     ConnectionPropertiesOutput.add_member_subclass(:hyper_pod_properties, Types::ConnectionPropertiesOutput::HyperPodProperties)
     ConnectionPropertiesOutput.add_member_subclass(:iam_properties, Types::ConnectionPropertiesOutput::IamProperties)
     ConnectionPropertiesOutput.add_member_subclass(:redshift_properties, Types::ConnectionPropertiesOutput::RedshiftProperties)
+    ConnectionPropertiesOutput.add_member_subclass(:s3_properties, Types::ConnectionPropertiesOutput::S3Properties)
     ConnectionPropertiesOutput.add_member_subclass(:spark_emr_properties, Types::ConnectionPropertiesOutput::SparkEmrProperties)
     ConnectionPropertiesOutput.add_member_subclass(:spark_glue_properties, Types::ConnectionPropertiesOutput::SparkGlueProperties)
     ConnectionPropertiesOutput.add_member_subclass(:unknown, Types::ConnectionPropertiesOutput::Unknown)
@@ -1408,12 +1417,14 @@ module Aws::DataZone
     ConnectionPropertiesPatch.add_member(:glue_properties, Shapes::ShapeRef.new(shape: GluePropertiesPatch, location_name: "glueProperties"))
     ConnectionPropertiesPatch.add_member(:iam_properties, Shapes::ShapeRef.new(shape: IamPropertiesPatch, location_name: "iamProperties"))
     ConnectionPropertiesPatch.add_member(:redshift_properties, Shapes::ShapeRef.new(shape: RedshiftPropertiesPatch, location_name: "redshiftProperties"))
+    ConnectionPropertiesPatch.add_member(:s3_properties, Shapes::ShapeRef.new(shape: S3PropertiesPatch, location_name: "s3Properties"))
     ConnectionPropertiesPatch.add_member(:spark_emr_properties, Shapes::ShapeRef.new(shape: SparkEmrPropertiesPatch, location_name: "sparkEmrProperties"))
     ConnectionPropertiesPatch.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ConnectionPropertiesPatch.add_member_subclass(:athena_properties, Types::ConnectionPropertiesPatch::AthenaProperties)
     ConnectionPropertiesPatch.add_member_subclass(:glue_properties, Types::ConnectionPropertiesPatch::GlueProperties)
     ConnectionPropertiesPatch.add_member_subclass(:iam_properties, Types::ConnectionPropertiesPatch::IamProperties)
     ConnectionPropertiesPatch.add_member_subclass(:redshift_properties, Types::ConnectionPropertiesPatch::RedshiftProperties)
+    ConnectionPropertiesPatch.add_member_subclass(:s3_properties, Types::ConnectionPropertiesPatch::S3Properties)
     ConnectionPropertiesPatch.add_member_subclass(:spark_emr_properties, Types::ConnectionPropertiesPatch::SparkEmrProperties)
     ConnectionPropertiesPatch.add_member_subclass(:unknown, Types::ConnectionPropertiesPatch::Unknown)
     ConnectionPropertiesPatch.struct_class = Types::ConnectionPropertiesPatch
@@ -1723,7 +1734,7 @@ module Aws::DataZone
     CreateEnvironmentInput.add_member(:environment_account_region, Shapes::ShapeRef.new(shape: String, location_name: "environmentAccountRegion"))
     CreateEnvironmentInput.add_member(:environment_blueprint_identifier, Shapes::ShapeRef.new(shape: String, location_name: "environmentBlueprintIdentifier"))
     CreateEnvironmentInput.add_member(:environment_configuration_id, Shapes::ShapeRef.new(shape: String, location_name: "environmentConfigurationId"))
-    CreateEnvironmentInput.add_member(:environment_profile_identifier, Shapes::ShapeRef.new(shape: EnvironmentProfileId, required: true, location_name: "environmentProfileIdentifier"))
+    CreateEnvironmentInput.add_member(:environment_profile_identifier, Shapes::ShapeRef.new(shape: EnvironmentProfileId, location_name: "environmentProfileIdentifier"))
     CreateEnvironmentInput.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
     CreateEnvironmentInput.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     CreateEnvironmentInput.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "projectIdentifier"))
@@ -4603,6 +4614,20 @@ module Aws::DataZone
     RunStatisticsForAssets.struct_class = Types::RunStatisticsForAssets
 
     S3LocationList.member = Shapes::ShapeRef.new(shape: S3Location)
+
+    S3PropertiesInput.add_member(:s3_access_grant_location_id, Shapes::ShapeRef.new(shape: S3AccessGrantLocationId, location_name: "s3AccessGrantLocationId"))
+    S3PropertiesInput.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "s3Uri"))
+    S3PropertiesInput.struct_class = Types::S3PropertiesInput
+
+    S3PropertiesOutput.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    S3PropertiesOutput.add_member(:s3_access_grant_location_id, Shapes::ShapeRef.new(shape: S3AccessGrantLocationId, location_name: "s3AccessGrantLocationId"))
+    S3PropertiesOutput.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "s3Uri"))
+    S3PropertiesOutput.add_member(:status, Shapes::ShapeRef.new(shape: ConnectionStatus, location_name: "status"))
+    S3PropertiesOutput.struct_class = Types::S3PropertiesOutput
+
+    S3PropertiesPatch.add_member(:s3_access_grant_location_id, Shapes::ShapeRef.new(shape: S3AccessGrantLocationId, location_name: "s3AccessGrantLocationId"))
+    S3PropertiesPatch.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "s3Uri"))
+    S3PropertiesPatch.struct_class = Types::S3PropertiesPatch
 
     SageMakerRunConfigurationInput.add_member(:tracking_assets, Shapes::ShapeRef.new(shape: TrackingAssets, required: true, location_name: "trackingAssets"))
     SageMakerRunConfigurationInput.struct_class = Types::SageMakerRunConfigurationInput

@@ -2524,7 +2524,7 @@ module Aws
                           ?catalog_id: ::String,
                           database_name: ::String,
                           ?name: ::String,
-                          table_input: {
+                          ?table_input: {
                             name: ::String,
                             description: ::String?,
                             owner: ::String?,

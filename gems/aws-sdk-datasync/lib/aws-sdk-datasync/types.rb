@@ -887,7 +887,7 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] server_hostname
-    #   Specifies the DNS name or IP version 4 address of the NFS file
+    #   Specifies the DNS name or IP address (IPv4 or IPv6) of the NFS file
     #   server that your DataSync agent connects to.
     #   @return [String]
     #
@@ -944,8 +944,8 @@ module Aws::DataSync
     # CreateLocationObjectStorageRequest
     #
     # @!attribute [rw] server_hostname
-    #   Specifies the domain name or IP version 4 (IPv4) address of the
-    #   object storage server that your DataSync agent connects to.
+    #   Specifies the domain name or IP address (IPv4 or IPv6) of the object
+    #   storage server that your DataSync agent connects to.
     #   @return [String]
     #
     # @!attribute [rw] server_port
@@ -955,7 +955,7 @@ module Aws::DataSync
     #
     # @!attribute [rw] server_protocol
     #   Specifies the protocol that your object storage server uses to
-    #   communicate.
+    #   communicate. If not specified, the default value is `HTTPS`.
     #   @return [String]
     #
     # @!attribute [rw] subdirectory
@@ -978,6 +978,13 @@ module Aws::DataSync
     # @!attribute [rw] secret_key
     #   Specifies the secret key (for example, a password) if credentials
     #   are required to authenticate with the object storage server.
+    #
+    #   <note markdown="1"> If you provide a secret using `SecretKey`, but do not provide secret
+    #   configuration details using `CmkSecretConfig` or
+    #   `CustomSecretConfig`, then DataSync stores the token using your
+    #   Amazon Web Services account's Secrets Manager secret.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] agent_arns
@@ -1226,15 +1233,13 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] server_hostname
-    #   Specifies the domain name or IP address of the SMB file server that
-    #   your DataSync agent connects to.
+    #   Specifies the domain name or IP address (IPv4 or IPv6) of the SMB
+    #   file server that your DataSync agent connects to.
     #
-    #   Remember the following when configuring this parameter:
+    #   <note markdown="1"> If you're using Kerberos authentication, you must specify a domain
+    #   name.
     #
-    #   * You can't specify an IP version 6 (IPv6) address.
-    #
-    #   * If you're using Kerberos authentication, you must specify a
-    #     domain name.
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] user
@@ -1299,8 +1304,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] dns_ip_addresses
-    #   Specifies the IPv4 addresses for the DNS servers that your SMB file
-    #   server belongs to. This parameter applies only if
+    #   Specifies the IPv4 or IPv6 addresses for the DNS servers that your
+    #   SMB file server belongs to. This parameter applies only if
     #   `AuthenticationType` is set to `KERBEROS`.
     #
     #   If you have multiple domains in your environment, configuring this
@@ -1309,7 +1314,7 @@ module Aws::DataSync
     #   @return [Array<String>]
     #
     # @!attribute [rw] kerberos_principal
-    #   Specifies a Kerberos prinicpal, which is an identity in your
+    #   Specifies a Kerberos principal, which is an identity in your
     #   Kerberos realm that has permission to access the files, folders, and
     #   file metadata in your SMB file server.
     #
@@ -2464,9 +2469,9 @@ module Aws::DataSync
     #   @return [Time]
     #
     # @!attribute [rw] dns_ip_addresses
-    #   The IPv4 addresses for the DNS servers that your SMB file server
-    #   belongs to. This element applies only if `AuthenticationType` is set
-    #   to `KERBEROS`.
+    #   The IPv4 or IPv6 addresses for the DNS servers that your SMB file
+    #   server belongs to. This element applies only if `AuthenticationType`
+    #   is set to `KERBEROS`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] kerberos_principal
@@ -3626,8 +3631,8 @@ module Aws::DataSync
     #   GLOBAL\_ID is the globally unique identifier of the resource that
     #   backs the location. An example for EFS is `us-east-2.fs-abcd1234`.
     #   An example for Amazon S3 is the bucket name, such as `myBucket`. An
-    #   example for NFS is a valid IPv4 address or a hostname that is
-    #   compliant with Domain Name Service (DNS).
+    #   example for NFS is a valid IPv4 or IPv6 address or a hostname that
+    #   is compliant with DNS.
     #
     #   SUBDIR is a valid file system path, delimited by forward slashes as
     #   is the *nix convention. For NFS and Amazon EFS, it's the export
@@ -5662,8 +5667,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] server_hostname
-    #   Specifies the DNS name or IP version 4 (IPv4) address of the NFS
-    #   file server that your DataSync agent connects to.
+    #   Specifies the DNS name or IP address (IPv4 or IPv6) of the NFS file
+    #   server that your DataSync agent connects to.
     #   @return [String]
     #
     # @!attribute [rw] on_prem_config
@@ -5714,8 +5719,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] server_hostname
-    #   Specifies the domain name or IP version 4 (IPv4) address of the
-    #   object storage server that your DataSync agent connects to.
+    #   Specifies the domain name or IP address (IPv4 or IPv6) of the object
+    #   storage server that your DataSync agent connects to.
     #   @return [String]
     #
     # @!attribute [rw] access_key
@@ -5726,6 +5731,13 @@ module Aws::DataSync
     # @!attribute [rw] secret_key
     #   Specifies the secret key (for example, a password) if credentials
     #   are required to authenticate with the object storage server.
+    #
+    #   <note markdown="1"> If you provide a secret using `SecretKey`, but do not provide secret
+    #   configuration details using `CmkSecretConfig` or
+    #   `CustomSecretConfig`, then DataSync stores the token using your
+    #   Amazon Web Services account's Secrets Manager secret.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] agent_arns
@@ -5894,15 +5906,13 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] server_hostname
-    #   Specifies the domain name or IP address of the SMB file server that
-    #   your DataSync agent connects to.
+    #   Specifies the domain name or IP address (IPv4 or IPv6) of the SMB
+    #   file server that your DataSync agent connects to.
     #
-    #   Remember the following when configuring this parameter:
+    #   <note markdown="1"> If you're using Kerberos authentication, you must specify a domain
+    #   name.
     #
-    #   * You can't specify an IP version 6 (IPv6) address.
-    #
-    #   * If you're using Kerberos authentication, you must specify a
-    #     domain name.
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] user
@@ -5962,8 +5972,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] dns_ip_addresses
-    #   Specifies the IPv4 addresses for the DNS servers that your SMB file
-    #   server belongs to. This parameter applies only if
+    #   Specifies the IP addresses (IPv4 or IPv6) for the DNS servers that
+    #   your SMB file server belongs to. This parameter applies only if
     #   `AuthenticationType` is set to `KERBEROS`.
     #
     #   If you have multiple domains in your environment, configuring this

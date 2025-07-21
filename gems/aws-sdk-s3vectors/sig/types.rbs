@@ -1,0 +1,360 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::S3Vectors
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIndexInput
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor vector_bucket_arn: ::String
+      attr_accessor index_name: ::String
+      attr_accessor data_type: ("float32")
+      attr_accessor dimension: ::Integer
+      attr_accessor distance_metric: ("euclidean" | "cosine")
+      attr_accessor metadata_configuration: Types::MetadataConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateIndexOutput < Aws::EmptyStructure
+    end
+
+    class CreateVectorBucketInput
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateVectorBucketOutput < Aws::EmptyStructure
+    end
+
+    class DeleteIndexInput
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor index_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIndexOutput < Aws::EmptyStructure
+    end
+
+    class DeleteVectorBucketInput
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor vector_bucket_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVectorBucketOutput < Aws::EmptyStructure
+    end
+
+    class DeleteVectorBucketPolicyInput
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor vector_bucket_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVectorBucketPolicyOutput < Aws::EmptyStructure
+    end
+
+    class DeleteVectorsInput
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor index_arn: ::String
+      attr_accessor keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteVectorsOutput < Aws::EmptyStructure
+    end
+
+    class EncryptionConfiguration
+      attr_accessor sse_type: ("AES256" | "aws:kms")
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetIndexInput
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor index_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetIndexOutput
+      attr_accessor index: Types::Index
+      SENSITIVE: []
+    end
+
+    class GetOutputVector
+      attr_accessor key: ::String
+      attr_accessor data: Types::VectorData
+      attr_accessor metadata: untyped
+      SENSITIVE: []
+    end
+
+    class GetVectorBucketInput
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor vector_bucket_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetVectorBucketOutput
+      attr_accessor vector_bucket: Types::VectorBucket
+      SENSITIVE: []
+    end
+
+    class GetVectorBucketPolicyInput
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor vector_bucket_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetVectorBucketPolicyOutput
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetVectorsInput
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor index_arn: ::String
+      attr_accessor keys: ::Array[::String]
+      attr_accessor return_data: bool
+      attr_accessor return_metadata: bool
+      SENSITIVE: []
+    end
+
+    class GetVectorsOutput
+      attr_accessor vectors: ::Array[Types::GetOutputVector]
+      SENSITIVE: []
+    end
+
+    class Index
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor index_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor data_type: ("float32")
+      attr_accessor dimension: ::Integer
+      attr_accessor distance_metric: ("euclidean" | "cosine")
+      attr_accessor metadata_configuration: Types::MetadataConfiguration
+      SENSITIVE: []
+    end
+
+    class IndexSummary
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor index_arn: ::String
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KmsDisabledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KmsInvalidKeyUsageException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KmsInvalidStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KmsNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListIndexesInput
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor vector_bucket_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ListIndexesOutput
+      attr_accessor next_token: ::String
+      attr_accessor indexes: ::Array[Types::IndexSummary]
+      SENSITIVE: []
+    end
+
+    class ListOutputVector
+      attr_accessor key: ::String
+      attr_accessor data: Types::VectorData
+      attr_accessor metadata: untyped
+      SENSITIVE: []
+    end
+
+    class ListVectorBucketsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ListVectorBucketsOutput
+      attr_accessor next_token: ::String
+      attr_accessor vector_buckets: ::Array[Types::VectorBucketSummary]
+      SENSITIVE: []
+    end
+
+    class ListVectorsInput
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor index_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor segment_count: ::Integer
+      attr_accessor segment_index: ::Integer
+      attr_accessor return_data: bool
+      attr_accessor return_metadata: bool
+      SENSITIVE: []
+    end
+
+    class ListVectorsOutput
+      attr_accessor next_token: ::String
+      attr_accessor vectors: ::Array[Types::ListOutputVector]
+      SENSITIVE: []
+    end
+
+    class MetadataConfiguration
+      attr_accessor non_filterable_metadata_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PutInputVector
+      attr_accessor key: ::String
+      attr_accessor data: Types::VectorData
+      attr_accessor metadata: untyped
+      SENSITIVE: []
+    end
+
+    class PutVectorBucketPolicyInput
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor vector_bucket_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutVectorBucketPolicyOutput < Aws::EmptyStructure
+    end
+
+    class PutVectorsInput
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor index_arn: ::String
+      attr_accessor vectors: ::Array[Types::PutInputVector]
+      SENSITIVE: []
+    end
+
+    class PutVectorsOutput < Aws::EmptyStructure
+    end
+
+    class QueryOutputVector
+      attr_accessor key: ::String
+      attr_accessor data: Types::VectorData
+      attr_accessor metadata: untyped
+      attr_accessor distance: ::Float
+      SENSITIVE: []
+    end
+
+    class QueryVectorsInput
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor index_arn: ::String
+      attr_accessor top_k: ::Integer
+      attr_accessor query_vector: Types::VectorData
+      attr_accessor filter: untyped
+      attr_accessor return_metadata: bool
+      attr_accessor return_distance: bool
+      SENSITIVE: []
+    end
+
+    class QueryVectorsOutput
+      attr_accessor vectors: ::Array[Types::QueryOutputVector]
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor path: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VectorBucket
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor vector_bucket_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class VectorBucketSummary
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor vector_bucket_arn: ::String
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class VectorData
+      attr_accessor float32: ::Array[::Float]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Float32 < VectorData
+      end
+      class Unknown < VectorData
+      end
+    end
+  end
+end

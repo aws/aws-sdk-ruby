@@ -20,6 +20,10 @@ module Aws::MediaPackageV2
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelHarvestJobRequest = Shapes::StructureShape.new(name: 'CancelHarvestJobRequest')
     CancelHarvestJobResponse = Shapes::StructureShape.new(name: 'CancelHarvestJobResponse')
+    CdnAuthConfiguration = Shapes::StructureShape.new(name: 'CdnAuthConfiguration')
+    CdnAuthConfigurationCdnIdentifierSecretArnsList = Shapes::ListShape.new(name: 'CdnAuthConfigurationCdnIdentifierSecretArnsList')
+    CdnAuthConfigurationSecretsRoleArnString = Shapes::StringShape.new(name: 'CdnAuthConfigurationSecretsRoleArnString')
+    CdnIdentifierSecretArn = Shapes::StringShape.new(name: 'CdnIdentifierSecretArn')
     ChannelGroupListConfiguration = Shapes::StructureShape.new(name: 'ChannelGroupListConfiguration')
     ChannelGroupsList = Shapes::ListShape.new(name: 'ChannelGroupsList')
     ChannelList = Shapes::ListShape.new(name: 'ChannelList')
@@ -48,6 +52,9 @@ module Aws::MediaPackageV2
     CreateLowLatencyHlsManifestConfigurationManifestWindowSecondsInteger = Shapes::IntegerShape.new(name: 'CreateLowLatencyHlsManifestConfigurationManifestWindowSecondsInteger')
     CreateLowLatencyHlsManifestConfigurationProgramDateTimeIntervalSecondsInteger = Shapes::IntegerShape.new(name: 'CreateLowLatencyHlsManifestConfigurationProgramDateTimeIntervalSecondsInteger')
     CreateLowLatencyHlsManifests = Shapes::ListShape.new(name: 'CreateLowLatencyHlsManifests')
+    CreateMssManifestConfiguration = Shapes::StructureShape.new(name: 'CreateMssManifestConfiguration')
+    CreateMssManifestConfigurationManifestWindowSecondsInteger = Shapes::IntegerShape.new(name: 'CreateMssManifestConfigurationManifestWindowSecondsInteger')
+    CreateMssManifests = Shapes::ListShape.new(name: 'CreateMssManifests')
     CreateOriginEndpointRequest = Shapes::StructureShape.new(name: 'CreateOriginEndpointRequest')
     CreateOriginEndpointRequestStartoverWindowSecondsInteger = Shapes::IntegerShape.new(name: 'CreateOriginEndpointRequestStartoverWindowSecondsInteger')
     CreateOriginEndpointResponse = Shapes::StructureShape.new(name: 'CreateOriginEndpointResponse')
@@ -124,6 +131,8 @@ module Aws::MediaPackageV2
     GetHlsManifests = Shapes::ListShape.new(name: 'GetHlsManifests')
     GetLowLatencyHlsManifestConfiguration = Shapes::StructureShape.new(name: 'GetLowLatencyHlsManifestConfiguration')
     GetLowLatencyHlsManifests = Shapes::ListShape.new(name: 'GetLowLatencyHlsManifests')
+    GetMssManifestConfiguration = Shapes::StructureShape.new(name: 'GetMssManifestConfiguration')
+    GetMssManifests = Shapes::ListShape.new(name: 'GetMssManifests')
     GetOriginEndpointPolicyRequest = Shapes::StructureShape.new(name: 'GetOriginEndpointPolicyRequest')
     GetOriginEndpointPolicyResponse = Shapes::StructureShape.new(name: 'GetOriginEndpointPolicyResponse')
     GetOriginEndpointRequest = Shapes::StructureShape.new(name: 'GetOriginEndpointRequest')
@@ -146,6 +155,7 @@ module Aws::MediaPackageV2
     InputType = Shapes::StringShape.new(name: 'InputType')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    IsmEncryptionMethod = Shapes::StringShape.new(name: 'IsmEncryptionMethod')
     ListChannelGroupsRequest = Shapes::StructureShape.new(name: 'ListChannelGroupsRequest')
     ListChannelGroupsResponse = Shapes::StructureShape.new(name: 'ListChannelGroupsResponse')
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
@@ -161,12 +171,15 @@ module Aws::MediaPackageV2
     ListHlsManifests = Shapes::ListShape.new(name: 'ListHlsManifests')
     ListLowLatencyHlsManifestConfiguration = Shapes::StructureShape.new(name: 'ListLowLatencyHlsManifestConfiguration')
     ListLowLatencyHlsManifests = Shapes::ListShape.new(name: 'ListLowLatencyHlsManifests')
+    ListMssManifestConfiguration = Shapes::StructureShape.new(name: 'ListMssManifestConfiguration')
+    ListMssManifests = Shapes::ListShape.new(name: 'ListMssManifests')
     ListOriginEndpointsRequest = Shapes::StructureShape.new(name: 'ListOriginEndpointsRequest')
     ListOriginEndpointsResponse = Shapes::StructureShape.new(name: 'ListOriginEndpointsResponse')
     ListResourceMaxResults = Shapes::IntegerShape.new(name: 'ListResourceMaxResults')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ManifestName = Shapes::StringShape.new(name: 'ManifestName')
+    MssManifestLayout = Shapes::StringShape.new(name: 'MssManifestLayout')
     OriginEndpointListConfiguration = Shapes::StructureShape.new(name: 'OriginEndpointListConfiguration')
     OriginEndpointsList = Shapes::ListShape.new(name: 'OriginEndpointsList')
     OutputHeaderConfiguration = Shapes::StructureShape.new(name: 'OutputHeaderConfiguration')
@@ -235,6 +248,12 @@ module Aws::MediaPackageV2
     CancelHarvestJobRequest.struct_class = Types::CancelHarvestJobRequest
 
     CancelHarvestJobResponse.struct_class = Types::CancelHarvestJobResponse
+
+    CdnAuthConfiguration.add_member(:cdn_identifier_secret_arns, Shapes::ShapeRef.new(shape: CdnAuthConfigurationCdnIdentifierSecretArnsList, required: true, location_name: "CdnIdentifierSecretArns"))
+    CdnAuthConfiguration.add_member(:secrets_role_arn, Shapes::ShapeRef.new(shape: CdnAuthConfigurationSecretsRoleArnString, required: true, location_name: "SecretsRoleArn"))
+    CdnAuthConfiguration.struct_class = Types::CdnAuthConfiguration
+
+    CdnAuthConfigurationCdnIdentifierSecretArnsList.member = Shapes::ShapeRef.new(shape: CdnIdentifierSecretArn)
 
     ChannelGroupListConfiguration.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ChannelGroupName"))
     ChannelGroupListConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
@@ -374,6 +393,14 @@ module Aws::MediaPackageV2
 
     CreateLowLatencyHlsManifests.member = Shapes::ShapeRef.new(shape: CreateLowLatencyHlsManifestConfiguration)
 
+    CreateMssManifestConfiguration.add_member(:manifest_name, Shapes::ShapeRef.new(shape: ManifestName, required: true, location_name: "ManifestName"))
+    CreateMssManifestConfiguration.add_member(:manifest_window_seconds, Shapes::ShapeRef.new(shape: CreateMssManifestConfigurationManifestWindowSecondsInteger, location_name: "ManifestWindowSeconds"))
+    CreateMssManifestConfiguration.add_member(:filter_configuration, Shapes::ShapeRef.new(shape: FilterConfiguration, location_name: "FilterConfiguration"))
+    CreateMssManifestConfiguration.add_member(:manifest_layout, Shapes::ShapeRef.new(shape: MssManifestLayout, location_name: "ManifestLayout"))
+    CreateMssManifestConfiguration.struct_class = Types::CreateMssManifestConfiguration
+
+    CreateMssManifests.member = Shapes::ShapeRef.new(shape: CreateMssManifestConfiguration)
+
     CreateOriginEndpointRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelGroupName"))
     CreateOriginEndpointRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelName"))
     CreateOriginEndpointRequest.add_member(:origin_endpoint_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "OriginEndpointName"))
@@ -385,6 +412,7 @@ module Aws::MediaPackageV2
     CreateOriginEndpointRequest.add_member(:hls_manifests, Shapes::ShapeRef.new(shape: CreateHlsManifests, location_name: "HlsManifests"))
     CreateOriginEndpointRequest.add_member(:low_latency_hls_manifests, Shapes::ShapeRef.new(shape: CreateLowLatencyHlsManifests, location_name: "LowLatencyHlsManifests"))
     CreateOriginEndpointRequest.add_member(:dash_manifests, Shapes::ShapeRef.new(shape: CreateDashManifests, location_name: "DashManifests"))
+    CreateOriginEndpointRequest.add_member(:mss_manifests, Shapes::ShapeRef.new(shape: CreateMssManifests, location_name: "MssManifests"))
     CreateOriginEndpointRequest.add_member(:force_endpoint_error_configuration, Shapes::ShapeRef.new(shape: ForceEndpointErrorConfiguration, location_name: "ForceEndpointErrorConfiguration"))
     CreateOriginEndpointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateOriginEndpointRequest.struct_class = Types::CreateOriginEndpointRequest
@@ -402,6 +430,7 @@ module Aws::MediaPackageV2
     CreateOriginEndpointResponse.add_member(:hls_manifests, Shapes::ShapeRef.new(shape: GetHlsManifests, location_name: "HlsManifests"))
     CreateOriginEndpointResponse.add_member(:low_latency_hls_manifests, Shapes::ShapeRef.new(shape: GetLowLatencyHlsManifests, location_name: "LowLatencyHlsManifests"))
     CreateOriginEndpointResponse.add_member(:dash_manifests, Shapes::ShapeRef.new(shape: GetDashManifests, location_name: "DashManifests"))
+    CreateOriginEndpointResponse.add_member(:mss_manifests, Shapes::ShapeRef.new(shape: GetMssManifests, location_name: "MssManifests"))
     CreateOriginEndpointResponse.add_member(:force_endpoint_error_configuration, Shapes::ShapeRef.new(shape: ForceEndpointErrorConfiguration, location_name: "ForceEndpointErrorConfiguration"))
     CreateOriginEndpointResponse.add_member(:etag, Shapes::ShapeRef.new(shape: EntityTag, location_name: "ETag"))
     CreateOriginEndpointResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -488,6 +517,7 @@ module Aws::MediaPackageV2
     Encryption.add_member(:constant_initialization_vector, Shapes::ShapeRef.new(shape: EncryptionConstantInitializationVectorString, location_name: "ConstantInitializationVector"))
     Encryption.add_member(:encryption_method, Shapes::ShapeRef.new(shape: EncryptionMethod, required: true, location_name: "EncryptionMethod"))
     Encryption.add_member(:key_rotation_interval_seconds, Shapes::ShapeRef.new(shape: EncryptionKeyRotationIntervalSecondsInteger, location_name: "KeyRotationIntervalSeconds"))
+    Encryption.add_member(:cmaf_exclude_segment_drm_metadata, Shapes::ShapeRef.new(shape: Boolean, location_name: "CmafExcludeSegmentDrmMetadata"))
     Encryption.add_member(:speke_key_provider, Shapes::ShapeRef.new(shape: SpekeKeyProvider, required: true, location_name: "SpekeKeyProvider"))
     Encryption.struct_class = Types::Encryption
 
@@ -497,6 +527,7 @@ module Aws::MediaPackageV2
 
     EncryptionMethod.add_member(:ts_encryption_method, Shapes::ShapeRef.new(shape: TsEncryptionMethod, location_name: "TsEncryptionMethod"))
     EncryptionMethod.add_member(:cmaf_encryption_method, Shapes::ShapeRef.new(shape: CmafEncryptionMethod, location_name: "CmafEncryptionMethod"))
+    EncryptionMethod.add_member(:ism_encryption_method, Shapes::ShapeRef.new(shape: IsmEncryptionMethod, location_name: "IsmEncryptionMethod"))
     EncryptionMethod.struct_class = Types::EncryptionMethod
 
     EndpointErrorConditions.member = Shapes::ShapeRef.new(shape: EndpointErrorCondition)
@@ -623,6 +654,15 @@ module Aws::MediaPackageV2
 
     GetLowLatencyHlsManifests.member = Shapes::ShapeRef.new(shape: GetLowLatencyHlsManifestConfiguration)
 
+    GetMssManifestConfiguration.add_member(:manifest_name, Shapes::ShapeRef.new(shape: ManifestName, required: true, location_name: "ManifestName"))
+    GetMssManifestConfiguration.add_member(:url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Url"))
+    GetMssManifestConfiguration.add_member(:filter_configuration, Shapes::ShapeRef.new(shape: FilterConfiguration, location_name: "FilterConfiguration"))
+    GetMssManifestConfiguration.add_member(:manifest_window_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "ManifestWindowSeconds"))
+    GetMssManifestConfiguration.add_member(:manifest_layout, Shapes::ShapeRef.new(shape: MssManifestLayout, location_name: "ManifestLayout"))
+    GetMssManifestConfiguration.struct_class = Types::GetMssManifestConfiguration
+
+    GetMssManifests.member = Shapes::ShapeRef.new(shape: GetMssManifestConfiguration)
+
     GetOriginEndpointPolicyRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelGroupName"))
     GetOriginEndpointPolicyRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelName"))
     GetOriginEndpointPolicyRequest.add_member(:origin_endpoint_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "OriginEndpointName"))
@@ -632,6 +672,7 @@ module Aws::MediaPackageV2
     GetOriginEndpointPolicyResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ChannelName"))
     GetOriginEndpointPolicyResponse.add_member(:origin_endpoint_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "OriginEndpointName"))
     GetOriginEndpointPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyText, required: true, location_name: "Policy"))
+    GetOriginEndpointPolicyResponse.add_member(:cdn_auth_configuration, Shapes::ShapeRef.new(shape: CdnAuthConfiguration, location_name: "CdnAuthConfiguration"))
     GetOriginEndpointPolicyResponse.struct_class = Types::GetOriginEndpointPolicyResponse
 
     GetOriginEndpointRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelGroupName"))
@@ -653,6 +694,7 @@ module Aws::MediaPackageV2
     GetOriginEndpointResponse.add_member(:hls_manifests, Shapes::ShapeRef.new(shape: GetHlsManifests, location_name: "HlsManifests"))
     GetOriginEndpointResponse.add_member(:low_latency_hls_manifests, Shapes::ShapeRef.new(shape: GetLowLatencyHlsManifests, location_name: "LowLatencyHlsManifests"))
     GetOriginEndpointResponse.add_member(:dash_manifests, Shapes::ShapeRef.new(shape: GetDashManifests, location_name: "DashManifests"))
+    GetOriginEndpointResponse.add_member(:mss_manifests, Shapes::ShapeRef.new(shape: GetMssManifests, location_name: "MssManifests"))
     GetOriginEndpointResponse.add_member(:force_endpoint_error_configuration, Shapes::ShapeRef.new(shape: ForceEndpointErrorConfiguration, location_name: "ForceEndpointErrorConfiguration"))
     GetOriginEndpointResponse.add_member(:etag, Shapes::ShapeRef.new(shape: EntityTag, location_name: "ETag"))
     GetOriginEndpointResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -761,6 +803,12 @@ module Aws::MediaPackageV2
 
     ListLowLatencyHlsManifests.member = Shapes::ShapeRef.new(shape: ListLowLatencyHlsManifestConfiguration)
 
+    ListMssManifestConfiguration.add_member(:manifest_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ManifestName"))
+    ListMssManifestConfiguration.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "Url"))
+    ListMssManifestConfiguration.struct_class = Types::ListMssManifestConfiguration
+
+    ListMssManifests.member = Shapes::ShapeRef.new(shape: ListMssManifestConfiguration)
+
     ListOriginEndpointsRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelGroupName"))
     ListOriginEndpointsRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelName"))
     ListOriginEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListResourceMaxResults, location: "querystring", location_name: "maxResults"))
@@ -788,6 +836,7 @@ module Aws::MediaPackageV2
     OriginEndpointListConfiguration.add_member(:hls_manifests, Shapes::ShapeRef.new(shape: ListHlsManifests, location_name: "HlsManifests"))
     OriginEndpointListConfiguration.add_member(:low_latency_hls_manifests, Shapes::ShapeRef.new(shape: ListLowLatencyHlsManifests, location_name: "LowLatencyHlsManifests"))
     OriginEndpointListConfiguration.add_member(:dash_manifests, Shapes::ShapeRef.new(shape: ListDashManifests, location_name: "DashManifests"))
+    OriginEndpointListConfiguration.add_member(:mss_manifests, Shapes::ShapeRef.new(shape: ListMssManifests, location_name: "MssManifests"))
     OriginEndpointListConfiguration.add_member(:force_endpoint_error_configuration, Shapes::ShapeRef.new(shape: ForceEndpointErrorConfiguration, location_name: "ForceEndpointErrorConfiguration"))
     OriginEndpointListConfiguration.struct_class = Types::OriginEndpointListConfiguration
 
@@ -807,6 +856,7 @@ module Aws::MediaPackageV2
     PutOriginEndpointPolicyRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelName"))
     PutOriginEndpointPolicyRequest.add_member(:origin_endpoint_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "OriginEndpointName"))
     PutOriginEndpointPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyText, required: true, location_name: "Policy"))
+    PutOriginEndpointPolicyRequest.add_member(:cdn_auth_configuration, Shapes::ShapeRef.new(shape: CdnAuthConfiguration, location_name: "CdnAuthConfiguration"))
     PutOriginEndpointPolicyRequest.struct_class = Types::PutOriginEndpointPolicyRequest
 
     PutOriginEndpointPolicyResponse.struct_class = Types::PutOriginEndpointPolicyResponse
@@ -940,6 +990,7 @@ module Aws::MediaPackageV2
     UpdateOriginEndpointRequest.add_member(:hls_manifests, Shapes::ShapeRef.new(shape: CreateHlsManifests, location_name: "HlsManifests"))
     UpdateOriginEndpointRequest.add_member(:low_latency_hls_manifests, Shapes::ShapeRef.new(shape: CreateLowLatencyHlsManifests, location_name: "LowLatencyHlsManifests"))
     UpdateOriginEndpointRequest.add_member(:dash_manifests, Shapes::ShapeRef.new(shape: CreateDashManifests, location_name: "DashManifests"))
+    UpdateOriginEndpointRequest.add_member(:mss_manifests, Shapes::ShapeRef.new(shape: CreateMssManifests, location_name: "MssManifests"))
     UpdateOriginEndpointRequest.add_member(:force_endpoint_error_configuration, Shapes::ShapeRef.new(shape: ForceEndpointErrorConfiguration, location_name: "ForceEndpointErrorConfiguration"))
     UpdateOriginEndpointRequest.add_member(:etag, Shapes::ShapeRef.new(shape: EntityTag, location: "header", location_name: "x-amzn-update-if-match"))
     UpdateOriginEndpointRequest.struct_class = Types::UpdateOriginEndpointRequest
@@ -956,6 +1007,7 @@ module Aws::MediaPackageV2
     UpdateOriginEndpointResponse.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "StartoverWindowSeconds"))
     UpdateOriginEndpointResponse.add_member(:hls_manifests, Shapes::ShapeRef.new(shape: GetHlsManifests, location_name: "HlsManifests"))
     UpdateOriginEndpointResponse.add_member(:low_latency_hls_manifests, Shapes::ShapeRef.new(shape: GetLowLatencyHlsManifests, location_name: "LowLatencyHlsManifests"))
+    UpdateOriginEndpointResponse.add_member(:mss_manifests, Shapes::ShapeRef.new(shape: GetMssManifests, location_name: "MssManifests"))
     UpdateOriginEndpointResponse.add_member(:force_endpoint_error_configuration, Shapes::ShapeRef.new(shape: ForceEndpointErrorConfiguration, location_name: "ForceEndpointErrorConfiguration"))
     UpdateOriginEndpointResponse.add_member(:etag, Shapes::ShapeRef.new(shape: EntityTag, location_name: "ETag"))
     UpdateOriginEndpointResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))

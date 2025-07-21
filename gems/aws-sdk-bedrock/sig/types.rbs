@@ -91,6 +91,20 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class CreateCustomModelDeploymentRequest
+      attr_accessor model_deployment_name: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCustomModelDeploymentResponse
+      attr_accessor custom_model_deployment_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateCustomModelRequest
       attr_accessor model_name: ::String
       attr_accessor model_source_config: Types::ModelDataSource
@@ -326,6 +340,17 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class CustomModelDeploymentSummary
+      attr_accessor custom_model_deployment_arn: ::String
+      attr_accessor custom_model_deployment_name: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("Creating" | "Active" | "Failed")
+      attr_accessor last_updated_at: ::Time
+      attr_accessor failure_message: ::String
+      SENSITIVE: []
+    end
+
     class CustomModelSummary
       attr_accessor model_arn: ::String
       attr_accessor model_name: ::String
@@ -360,6 +385,14 @@ module Aws::Bedrock
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
       SENSITIVE: []
+    end
+
+    class DeleteCustomModelDeploymentRequest
+      attr_accessor custom_model_deployment_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCustomModelDeploymentResponse < Aws::EmptyStructure
     end
 
     class DeleteCustomModelRequest
@@ -688,6 +721,23 @@ module Aws::Bedrock
       attr_accessor guardrail_configuration: Types::GuardrailConfiguration
       attr_accessor kb_inference_config: Types::KbInferenceConfig
       attr_accessor additional_model_request_fields: ::Hash[::String, untyped]
+      SENSITIVE: []
+    end
+
+    class GetCustomModelDeploymentRequest
+      attr_accessor custom_model_deployment_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetCustomModelDeploymentResponse
+      attr_accessor custom_model_deployment_arn: ::String
+      attr_accessor model_deployment_name: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("Creating" | "Active" | "Failed")
+      attr_accessor description: ::String
+      attr_accessor failure_message: ::String
+      attr_accessor last_updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -1380,6 +1430,25 @@ module Aws::Bedrock
 
     class LegalTerm
       attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomModelDeploymentsRequest
+      attr_accessor created_before: ::Time
+      attr_accessor created_after: ::Time
+      attr_accessor name_contains: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ("CreationTime")
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      attr_accessor status_equals: ("Creating" | "Active" | "Failed")
+      attr_accessor model_arn_equals: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomModelDeploymentsResponse
+      attr_accessor next_token: ::String
+      attr_accessor model_deployment_summaries: ::Array[Types::CustomModelDeploymentSummary]
       SENSITIVE: []
     end
 

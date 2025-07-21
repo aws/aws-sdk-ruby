@@ -1,23 +1,6 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "ListNamespaces_AccessDeniedException",
-    "operationName" : "ListNamespaces",
-    "input" : {
-      "tableBucketARN" : "arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "AccessDeniedException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
     "id" : "GetTableBucket_AccessDeniedException",
     "operationName" : "GetTableBucket",
     "input" : {
@@ -40,6 +23,23 @@
     "input" : { },
     "expectation" : {
       "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListNamespaces_AccessDeniedException",
+    "operationName" : "ListNamespaces",
+    "input" : {
+      "tableBucketARN" : "arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "AccessDeniedException"
+      }
     },
     "config" : {
       "region" : "us-east-1",
@@ -84,10 +84,11 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListTables_AccessDeniedException",
-    "operationName" : "ListTables",
+    "id" : "GetNamespace_AccessDeniedException",
+    "operationName" : "GetNamespace",
     "input" : {
-      "tableBucketARN" : "arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist"
+      "tableBucketARN" : "arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist",
+      "namespace" : "doesnotexist"
     },
     "expectation" : {
       "failure" : {
@@ -101,11 +102,10 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetNamespace_AccessDeniedException",
-    "operationName" : "GetNamespace",
+    "id" : "ListTables_AccessDeniedException",
+    "operationName" : "ListTables",
     "input" : {
-      "tableBucketARN" : "arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist",
-      "namespace" : "doesnotexist"
+      "tableBucketARN" : "arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist"
     },
     "expectation" : {
       "failure" : {

@@ -1620,8 +1620,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AssociationSummary AWS API Documentation
@@ -1794,6 +1794,29 @@ module Aws::SageMaker
       :kms_key_id,
       :output_format,
       :output_compression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a presigned URL and its associated local file path for
+    # downloading hub content artifacts.
+    #
+    # @!attribute [rw] url
+    #   The presigned S3 URL that provides temporary, secure access to
+    #   download the file. URLs expire within 15 minutes for security
+    #   purposes.
+    #   @return [String]
+    #
+    # @!attribute [rw] local_path
+    #   The recommended local file path where the downloaded file should be
+    #   stored to maintain proper directory structure and file organization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AuthorizedUrl AWS API Documentation
+    #
+    class AuthorizedUrl < Struct.new(
+      :url,
+      :local_path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4922,6 +4945,222 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The instance group details of the restricted instance group (RIG).
+    #
+    # @!attribute [rw] current_count
+    #   The number of instances that are currently in the restricted
+    #   instance group of a SageMaker HyperPod cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_count
+    #   The number of instances you specified to add to the restricted
+    #   instance group of a SageMaker HyperPod cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_group_name
+    #   The name of the restricted instance group of a SageMaker HyperPod
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type of the restricted instance group of a SageMaker
+    #   HyperPod cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role
+    #   The execution role for the restricted instance group to assume.
+    #   @return [String]
+    #
+    # @!attribute [rw] threads_per_core
+    #   The number you specified to `TreadsPerCore` in `CreateCluster` for
+    #   enabling or disabling multithreading. For instance types that
+    #   support multithreading, you can specify 1 for disabling
+    #   multithreading and 2 for enabling multithreading. For more
+    #   information, see the reference table of [CPU cores and threads per
+    #   CPU core per instance type][1] in the *Amazon Elastic Compute Cloud
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_storage_configs
+    #   The additional storage configurations for the instances in the
+    #   SageMaker HyperPod cluster restricted instance group.
+    #   @return [Array<Types::ClusterInstanceStorageConfig>]
+    #
+    # @!attribute [rw] on_start_deep_health_checks
+    #   A flag indicating whether deep health checks should be performed
+    #   when the cluster's restricted instance group is created or updated.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The current status of the cluster's restricted instance group.
+    #
+    #   * `InService`: The restricted instance group is active and healthy.
+    #
+    #   * `Creating`: The restricted instance group is being provisioned.
+    #
+    #   * `Updating`: The restricted instance group is being updated.
+    #
+    #   * `Failed`: The restricted instance group has failed to provision or
+    #     is no longer healthy.
+    #
+    #   * `Degraded`: The restricted instance group is degraded, meaning
+    #     that some instances have failed to provision or are no longer
+    #     healthy.
+    #
+    #   * `Deleting`: The restricted instance group is being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_plan_arn
+    #   The Amazon Resource Name (ARN) of the training plan to filter
+    #   clusters by. For more information about reserving GPU capacity for
+    #   your SageMaker HyperPod clusters using Amazon SageMaker Training
+    #   Plan, see ` CreateTrainingPlan `.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_plan_status
+    #   The current status of the training plan associated with this cluster
+    #   restricted instance group.
+    #   @return [String]
+    #
+    # @!attribute [rw] override_vpc_config
+    #   Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker
+    #   jobs, hosted models, and compute resources have access to. You can
+    #   control access to and from your resources by configuring a VPC. For
+    #   more information, see [Give SageMaker Access to Resources in your
+    #   Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] scheduled_update_config
+    #   The configuration object of the schedule that SageMaker follows when
+    #   updating the AMI.
+    #   @return [Types::ScheduledUpdateConfig]
+    #
+    # @!attribute [rw] environment_config
+    #   The configuration for the restricted instance groups (RIG)
+    #   environment.
+    #   @return [Types::EnvironmentConfigDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterRestrictedInstanceGroupDetails AWS API Documentation
+    #
+    class ClusterRestrictedInstanceGroupDetails < Struct.new(
+      :current_count,
+      :target_count,
+      :instance_group_name,
+      :instance_type,
+      :execution_role,
+      :threads_per_core,
+      :instance_storage_configs,
+      :on_start_deep_health_checks,
+      :status,
+      :training_plan_arn,
+      :training_plan_status,
+      :override_vpc_config,
+      :scheduled_update_config,
+      :environment_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specifications of a restricted instance group that you need to
+    # define.
+    #
+    # @!attribute [rw] instance_count
+    #   Specifies the number of instances to add to the restricted instance
+    #   group of a SageMaker HyperPod cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_group_name
+    #   Specifies the name of the restricted instance group.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   Specifies the instance type of the restricted instance group.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role
+    #   Specifies an IAM execution role to be assumed by the restricted
+    #   instance group.
+    #   @return [String]
+    #
+    # @!attribute [rw] threads_per_core
+    #   The number you specified to `TreadsPerCore` in `CreateCluster` for
+    #   enabling or disabling multithreading. For instance types that
+    #   support multithreading, you can specify 1 for disabling
+    #   multithreading and 2 for enabling multithreading. For more
+    #   information, see the reference table of [CPU cores and threads per
+    #   CPU core per instance type][1] in the *Amazon Elastic Compute Cloud
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_storage_configs
+    #   Specifies the additional storage configurations for the instances in
+    #   the SageMaker HyperPod cluster restricted instance group.
+    #   @return [Array<Types::ClusterInstanceStorageConfig>]
+    #
+    # @!attribute [rw] on_start_deep_health_checks
+    #   A flag indicating whether deep health checks should be performed
+    #   when the cluster restricted instance group is created or updated.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] training_plan_arn
+    #   The Amazon Resource Name (ARN) of the training plan to filter
+    #   clusters by. For more information about reserving GPU capacity for
+    #   your SageMaker HyperPod clusters using Amazon SageMaker Training
+    #   Plan, see ` CreateTrainingPlan `.
+    #   @return [String]
+    #
+    # @!attribute [rw] override_vpc_config
+    #   Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker
+    #   jobs, hosted models, and compute resources have access to. You can
+    #   control access to and from your resources by configuring a VPC. For
+    #   more information, see [Give SageMaker Access to Resources in your
+    #   Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] scheduled_update_config
+    #   The configuration object of the schedule that SageMaker follows when
+    #   updating the AMI.
+    #   @return [Types::ScheduledUpdateConfig]
+    #
+    # @!attribute [rw] environment_config
+    #   The configuration for the restricted instance groups (RIG)
+    #   environment.
+    #   @return [Types::EnvironmentConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterRestrictedInstanceGroupSpecification AWS API Documentation
+    #
+    class ClusterRestrictedInstanceGroupSpecification < Struct.new(
+      :instance_count,
+      :instance_group_name,
+      :instance_type,
+      :execution_role,
+      :threads_per_core,
+      :instance_storage_configs,
+      :on_start_deep_health_checks,
+      :training_plan_arn,
+      :override_vpc_config,
+      :scheduled_update_config,
+      :environment_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Summary of the cluster policy.
     #
     # @!attribute [rw] cluster_scheduler_config_arn
@@ -6425,6 +6664,11 @@ module Aws::SageMaker
     #   The instance groups to be created in the SageMaker HyperPod cluster.
     #   @return [Array<Types::ClusterInstanceGroupSpecification>]
     #
+    # @!attribute [rw] restricted_instance_groups
+    #   The specialized instance groups for training models like Amazon Nova
+    #   to be created in the SageMaker HyperPod cluster.
+    #   @return [Array<Types::ClusterRestrictedInstanceGroupSpecification>]
+    #
     # @!attribute [rw] vpc_config
     #   Specifies the Amazon Virtual Private Cloud (VPC) that is associated
     #   with the Amazon SageMaker HyperPod cluster. You can control access
@@ -6499,6 +6743,7 @@ module Aws::SageMaker
     class CreateClusterRequest < Struct.new(
       :cluster_name,
       :instance_groups,
+      :restricted_instance_groups,
       :vpc_config,
       :tags,
       :orchestrator,
@@ -7693,6 +7938,78 @@ module Aws::SageMaker
     #
     class CreateFlowDefinitionResponse < Struct.new(
       :flow_definition_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_name
+    #   The name or Amazon Resource Name (ARN) of the hub that contains the
+    #   content. For public content, use `SageMakerPublicHub`.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_type
+    #   The type of hub content to access. Valid values include `Model`,
+    #   `Notebook`, and `ModelReference`.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_name
+    #   The name of the hub content for which to generate presigned URLs.
+    #   This identifies the specific model or content within the hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_version
+    #   The version of the hub content. If not specified, the latest version
+    #   is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_config
+    #   Configuration settings for accessing the hub content, including
+    #   end-user license agreement acceptance for gated models and expected
+    #   S3 URL validation.
+    #   @return [Types::PresignedUrlAccessConfig]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of presigned URLs to return in the response.
+    #   Default value is 100. Large models may contain hundreds of files,
+    #   requiring pagination to retrieve all URLs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token for pagination. Use this token to retrieve the next set of
+    #   presigned URLs when the response is truncated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateHubContentPresignedUrlsRequest AWS API Documentation
+    #
+    class CreateHubContentPresignedUrlsRequest < Struct.new(
+      :hub_name,
+      :hub_content_type,
+      :hub_content_name,
+      :hub_content_version,
+      :access_config,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authorized_url_configs
+    #   An array of authorized URL configurations, each containing a
+    #   presigned URL and its corresponding local file path for proper file
+    #   organization during download.
+    #   @return [Array<Types::AuthorizedUrl>]
+    #
+    # @!attribute [rw] next_token
+    #   A token for pagination. If present, indicates that more presigned
+    #   URLs are available. Use this token in a subsequent request to
+    #   retrieve additional URLs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateHubContentPresignedUrlsResponse AWS API Documentation
+    #
+    class CreateHubContentPresignedUrlsResponse < Struct.new(
+      :authorized_url_configs,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13296,8 +13613,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -13305,8 +13622,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -13630,8 +13947,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -13639,8 +13956,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -14019,6 +14336,11 @@ module Aws::SageMaker
     #   The instance groups of the SageMaker HyperPod cluster.
     #   @return [Array<Types::ClusterInstanceGroupDetails>]
     #
+    # @!attribute [rw] restricted_instance_groups
+    #   The specialized instance groups for training models like Amazon Nova
+    #   to be created in the SageMaker HyperPod cluster.
+    #   @return [Array<Types::ClusterRestrictedInstanceGroupDetails>]
+    #
     # @!attribute [rw] vpc_config
     #   Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker
     #   jobs, hosted models, and compute resources have access to. You can
@@ -14049,6 +14371,7 @@ module Aws::SageMaker
       :creation_time,
       :failure_message,
       :instance_groups,
+      :restricted_instance_groups,
       :vpc_config,
       :orchestrator,
       :node_recovery)
@@ -14116,8 +14439,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -14125,8 +14448,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterSchedulerConfigResponse AWS API Documentation
@@ -14407,8 +14730,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -14416,8 +14739,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeComputeQuotaResponse AWS API Documentation
@@ -14483,8 +14806,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -14492,8 +14815,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] lineage_group_arn
@@ -16856,8 +17179,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -16865,8 +17188,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeLineageGroupResponse AWS API Documentation
@@ -16957,8 +17280,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -16967,8 +17290,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeMlflowTrackingServerResponse AWS API Documentation
@@ -17213,8 +17536,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -17222,8 +17545,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] model_card_processing_status
@@ -17455,8 +17778,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] model_package_group_status
@@ -17550,8 +17873,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -17568,8 +17891,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] approval_description
@@ -18410,13 +18733,13 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] parallelism_configuration
@@ -18426,6 +18749,10 @@ module Aws::SageMaker
     # @!attribute [rw] selective_execution_config
     #   The selective execution configuration applied to the pipeline run.
     #   @return [Types::SelectiveExecutionConfig]
+    #
+    # @!attribute [rw] pipeline_version_id
+    #   The ID of the pipeline version.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineExecutionResponse AWS API Documentation
     #
@@ -18442,7 +18769,8 @@ module Aws::SageMaker
       :created_by,
       :last_modified_by,
       :parallelism_configuration,
-      :selective_execution_config)
+      :selective_execution_config,
+      :pipeline_version_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18451,10 +18779,15 @@ module Aws::SageMaker
     #   The name or Amazon Resource Name (ARN) of the pipeline to describe.
     #   @return [String]
     #
+    # @!attribute [rw] pipeline_version_id
+    #   The ID of the pipeline version to describe.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineRequest AWS API Documentation
     #
     class DescribePipelineRequest < Struct.new(
-      :pipeline_name)
+      :pipeline_name,
+      :pipeline_version_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18500,18 +18833,26 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] parallelism_configuration
     #   Lists the parallelism configuration applied to the pipeline.
     #   @return [Types::ParallelismConfiguration]
+    #
+    # @!attribute [rw] pipeline_version_display_name
+    #   The display name of the pipeline version.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_version_description
+    #   The description of the pipeline version.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineResponse AWS API Documentation
     #
@@ -18528,7 +18869,9 @@ module Aws::SageMaker
       :last_run_time,
       :created_by,
       :last_modified_by,
-      :parallelism_configuration)
+      :parallelism_configuration,
+      :pipeline_version_display_name,
+      :pipeline_version_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18715,8 +19058,8 @@ module Aws::SageMaker
     #   @return [Array<Types::TemplateProviderDetail>]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] creation_time
@@ -18728,8 +19071,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeProjectOutput AWS API Documentation
@@ -21662,6 +22005,44 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The configuration for the restricted instance groups (RIG)
+    # environment.
+    #
+    # @!attribute [rw] f_sx_lustre_config
+    #   Configuration settings for an Amazon FSx for Lustre file system to
+    #   be used with the cluster.
+    #   @return [Types::FSxLustreConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EnvironmentConfig AWS API Documentation
+    #
+    class EnvironmentConfig < Struct.new(
+      :f_sx_lustre_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration details for the restricted instance groups (RIG)
+    # environment.
+    #
+    # @!attribute [rw] f_sx_lustre_config
+    #   Configuration settings for an Amazon FSx for Lustre file system to
+    #   be used with the cluster.
+    #   @return [Types::FSxLustreConfig]
+    #
+    # @!attribute [rw] s3_output_path
+    #   The Amazon S3 path where output data from the restricted instance
+    #   group (RIG) environment will be stored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EnvironmentConfigDetails AWS API Documentation
+    #
+    class EnvironmentConfigDetails < Struct.new(
+      :f_sx_lustre_config,
+      :s3_output_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of environment parameters suggested by the Amazon SageMaker
     # Inference Recommender.
     #
@@ -21765,8 +22146,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] tags
@@ -21931,6 +22312,28 @@ module Aws::SageMaker
     #
     class ExplainerConfig < Struct.new(
       :clarify_explainer_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings for an Amazon FSx for Lustre file system to be
+    # used with the cluster.
+    #
+    # @!attribute [rw] size_in_gi_b
+    #   The storage capacity of the Amazon FSx for Lustre file system,
+    #   specified in gibibytes (GiB).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] per_unit_storage_throughput
+    #   The throughput capacity of the Amazon FSx for Lustre file system,
+    #   measured in MB/s per TiB of storage.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/FSxLustreConfig AWS API Documentation
+    #
+    class FSxLustreConfig < Struct.new(
+      :size_in_gi_b,
+      :per_unit_storage_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32565,6 +32968,69 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] pipeline_name
+    #   The Amazon Resource Name (ARN) of the pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_after
+    #   A filter that returns the pipeline versions that were created after
+    #   a specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_before
+    #   A filter that returns the pipeline versions that were created before
+    #   a specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous `ListPipelineVersions` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of pipeline versions, use this token in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of pipeline versions to return in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelineVersionsRequest AWS API Documentation
+    #
+    class ListPipelineVersionsRequest < Struct.new(
+      :pipeline_name,
+      :created_after,
+      :created_before,
+      :sort_order,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pipeline_version_summaries
+    #   Contains a sorted list of pipeline version summary objects matching
+    #   the specified filters. Each version summary includes the pipeline
+    #   version ID, the creation date, and the last pipeline execution
+    #   created from that version. This list can be empty.
+    #   @return [Array<Types::PipelineVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous `ListPipelineVersions` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of pipeline versions, use this token in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelineVersionsResponse AWS API Documentation
+    #
+    class ListPipelineVersionsResponse < Struct.new(
+      :pipeline_version_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] pipeline_name_prefix
     #   The prefix of the pipeline name.
     #   @return [String]
@@ -34237,8 +34703,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -34246,8 +34712,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] tags
@@ -34672,8 +35138,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -34681,8 +35147,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] tags
@@ -35509,8 +35975,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] model_package_group_status
@@ -38543,13 +39009,13 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] parallelism_configuration
@@ -38646,13 +39112,13 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] parallelism_configuration
@@ -38666,6 +39132,15 @@ module Aws::SageMaker
     # @!attribute [rw] pipeline_parameters
     #   Contains a list of pipeline parameters. This list can be empty.
     #   @return [Array<Types::Parameter>]
+    #
+    # @!attribute [rw] pipeline_version_id
+    #   The ID of the pipeline version that started this execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pipeline_version_display_name
+    #   The display name of the pipeline version that started this
+    #   execution.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecution AWS API Documentation
     #
@@ -38683,7 +39158,9 @@ module Aws::SageMaker
       :last_modified_by,
       :parallelism_configuration,
       :selective_execution_config,
-      :pipeline_parameters)
+      :pipeline_parameters,
+      :pipeline_version_id,
+      :pipeline_version_display_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39011,6 +39488,115 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The version of the pipeline.
+    #
+    # @!attribute [rw] pipeline_arn
+    #   The Amazon Resource Name (ARN) of the pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_version_id
+    #   The ID of the pipeline version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pipeline_version_display_name
+    #   The display name of the pipeline version.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_version_description
+    #   The description of the pipeline version.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time of the pipeline version.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time when the pipeline version was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] last_executed_pipeline_execution_arn
+    #   The Amazon Resource Name (ARN) of the most recent pipeline execution
+    #   created from this pipeline version.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_executed_pipeline_execution_display_name
+    #   The display name of the most recent pipeline execution created from
+    #   this pipeline version.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_executed_pipeline_execution_status
+    #   The status of the most recent pipeline execution created from this
+    #   pipeline version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineVersion AWS API Documentation
+    #
+    class PipelineVersion < Struct.new(
+      :pipeline_arn,
+      :pipeline_version_id,
+      :pipeline_version_display_name,
+      :pipeline_version_description,
+      :creation_time,
+      :last_modified_time,
+      :created_by,
+      :last_modified_by,
+      :last_executed_pipeline_execution_arn,
+      :last_executed_pipeline_execution_display_name,
+      :last_executed_pipeline_execution_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of the pipeline version.
+    #
+    # @!attribute [rw] pipeline_arn
+    #   The Amazon Resource Name (ARN) of the pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_version_id
+    #   The ID of the pipeline version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time of the pipeline version.
+    #   @return [Time]
+    #
+    # @!attribute [rw] pipeline_version_description
+    #   The description of the pipeline version.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_version_display_name
+    #   The display name of the pipeline version.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_execution_pipeline_execution_arn
+    #   The Amazon Resource Name (ARN) of the most recent pipeline execution
+    #   created from this pipeline version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineVersionSummary AWS API Documentation
+    #
+    class PipelineVersionSummary < Struct.new(
+      :pipeline_arn,
+      :pipeline_version_id,
+      :creation_time,
+      :pipeline_version_description,
+      :pipeline_version_display_name,
+      :last_execution_pipeline_execution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A specification for a predefined metric.
     #
     # @!attribute [rw] predefined_metric_type
@@ -39022,6 +39608,30 @@ module Aws::SageMaker
     #
     class PredefinedMetricSpecification < Struct.new(
       :predefined_metric_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for accessing hub content through presigned URLs,
+    # including license agreement acceptance and URL validation settings.
+    #
+    # @!attribute [rw] accept_eula
+    #   Indicates acceptance of the End User License Agreement (EULA) for
+    #   gated models. Set to true to acknowledge acceptance of the license
+    #   terms required for accessing gated content.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] expected_s3_url
+    #   The expected S3 URL prefix for validation purposes. This parameter
+    #   helps ensure consistency between the resolved S3 URIs and the
+    #   deployment configuration, reducing potential compatibility issues.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PresignedUrlAccessConfig AWS API Documentation
+    #
+    class PresignedUrlAccessConfig < Struct.new(
+      :accept_eula,
+      :expected_s3_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40361,8 +40971,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Project AWS API Documentation
@@ -43111,6 +43721,10 @@ module Aws::SageMaker
     #   An execution of a pipeline.
     #   @return [Types::PipelineExecution]
     #
+    # @!attribute [rw] pipeline_version
+    #   The version of the pipeline.
+    #   @return [Types::PipelineVersion]
+    #
     # @!attribute [rw] feature_group
     #   Amazon SageMaker Feature Store stores features in a collection
     #   called Feature Group. A Feature Group can be visualized as a table
@@ -43152,6 +43766,7 @@ module Aws::SageMaker
       :model_package_group,
       :pipeline,
       :pipeline_execution,
+      :pipeline_version,
       :feature_group,
       :feature_metadata,
       :project,
@@ -44123,6 +44738,12 @@ module Aws::SageMaker
     #   system in Amazon SageMaker AI Studio.
     #   @return [Array<Types::CustomFileSystem>]
     #
+    # @!attribute [rw] remote_access
+    #   A setting that enables or disables remote access for a SageMaker
+    #   space. When enabled, this allows you to connect to the remote space
+    #   from your local IDE.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SpaceSettings AWS API Documentation
     #
     class SpaceSettings < Struct.new(
@@ -44133,7 +44754,8 @@ module Aws::SageMaker
       :app_type,
       :space_storage_settings,
       :space_managed_resources,
-      :custom_file_systems)
+      :custom_file_systems,
+      :remote_access)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44144,6 +44766,12 @@ module Aws::SageMaker
     #   The type of app created within the space.
     #   @return [String]
     #
+    # @!attribute [rw] remote_access
+    #   A setting that enables or disables remote access for a SageMaker
+    #   space. When enabled, this allows you to connect to the remote space
+    #   from your local IDE.
+    #   @return [String]
+    #
     # @!attribute [rw] space_storage_settings
     #   The storage settings for a space.
     #   @return [Types::SpaceStorageSettings]
@@ -44152,6 +44780,7 @@ module Aws::SageMaker
     #
     class SpaceSettingsSummary < Struct.new(
       :app_type,
+      :remote_access,
       :space_storage_settings)
       SENSITIVE = []
       include Aws::Structure
@@ -44350,6 +44979,10 @@ module Aws::SageMaker
     #   The selective execution configuration applied to the pipeline run.
     #   @return [Types::SelectiveExecutionConfig]
     #
+    # @!attribute [rw] pipeline_version_id
+    #   The ID of the pipeline version to start execution from.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartPipelineExecutionRequest AWS API Documentation
     #
     class StartPipelineExecutionRequest < Struct.new(
@@ -44359,7 +44992,8 @@ module Aws::SageMaker
       :pipeline_execution_description,
       :client_request_token,
       :parallelism_configuration,
-      :selective_execution_config)
+      :selective_execution_config,
+      :pipeline_version_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44372,6 +45006,44 @@ module Aws::SageMaker
     #
     class StartPipelineExecutionResponse < Struct.new(
       :pipeline_execution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_identifier
+    #   The Amazon Resource Name (ARN) of the resource to which the remote
+    #   connection will be established. For example, this identifies the
+    #   specific ARN space application you want to connect to from your
+    #   local IDE.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartSessionRequest AWS API Documentation
+    #
+    class StartSessionRequest < Struct.new(
+      :resource_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   A unique identifier for the established remote connection session.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_url
+    #   A WebSocket URL used to establish a SSH connection between the local
+    #   IDE and remote SageMaker space.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_value
+    #   An encrypted token value containing session and caller information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartSessionResponse AWS API Documentation
+    #
+    class StartSessionResponse < Struct.new(
+      :session_id,
+      :stream_url,
+      :token_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47391,8 +48063,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -47483,8 +48155,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] parameters
@@ -47700,8 +48372,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, trial component, lineage group, project, or model card.
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrialComponentSimpleSummary AWS API Documentation
@@ -48355,6 +49027,11 @@ module Aws::SageMaker
     #   Specify the instance groups to update.
     #   @return [Array<Types::ClusterInstanceGroupSpecification>]
     #
+    # @!attribute [rw] restricted_instance_groups
+    #   The specialized instance groups for training models like Amazon Nova
+    #   to be created in the SageMaker HyperPod cluster.
+    #   @return [Array<Types::ClusterRestrictedInstanceGroupSpecification>]
+    #
     # @!attribute [rw] node_recovery
     #   The node recovery mode to be applied to the SageMaker HyperPod
     #   cluster.
@@ -48370,6 +49047,7 @@ module Aws::SageMaker
     class UpdateClusterRequest < Struct.new(
       :cluster_name,
       :instance_groups,
+      :restricted_instance_groups,
       :node_recovery,
       :instance_groups_to_delete)
       SENSITIVE = []
@@ -50043,10 +50721,59 @@ module Aws::SageMaker
     #   The Amazon Resource Name (ARN) of the updated pipeline.
     #   @return [String]
     #
+    # @!attribute [rw] pipeline_version_id
+    #   The ID of the pipeline version.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdatePipelineResponse AWS API Documentation
     #
     class UpdatePipelineResponse < Struct.new(
-      :pipeline_arn)
+      :pipeline_arn,
+      :pipeline_version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pipeline_arn
+    #   The Amazon Resource Name (ARN) of the pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_version_id
+    #   The pipeline version ID to update.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pipeline_version_display_name
+    #   The display name of the pipeline version.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_version_description
+    #   The description of the pipeline version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdatePipelineVersionRequest AWS API Documentation
+    #
+    class UpdatePipelineVersionRequest < Struct.new(
+      :pipeline_arn,
+      :pipeline_version_id,
+      :pipeline_version_display_name,
+      :pipeline_version_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pipeline_arn
+    #   The Amazon Resource Name (ARN) of the pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_version_id
+    #   The ID of the pipeline version.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdatePipelineVersionResponse AWS API Documentation
+    #
+    class UpdatePipelineVersionResponse < Struct.new(
+      :pipeline_arn,
+      :pipeline_version_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -50511,8 +51238,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Information about the user who created or modified an experiment,
-    # trial, trial component, lineage group, project, or model card.
+    # Information about the user who created or modified a SageMaker
+    # resource.
     #
     # @!attribute [rw] user_profile_arn
     #   The Amazon Resource Name (ARN) of the user's profile.

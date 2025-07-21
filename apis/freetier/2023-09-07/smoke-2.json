@@ -1,0 +1,35 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "ListAccountActivitiesSuccess",
+    "operationName" : "ListAccountActivities",
+    "input" : {
+      "languageCode" : "en-US"
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetAccountActivitySuccess",
+    "operationName" : "GetAccountActivity",
+    "input" : {
+      "activityId" : "d622f48bf4014286a2686ab10cacfb2e",
+      "languageCode" : "en-US"
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}
