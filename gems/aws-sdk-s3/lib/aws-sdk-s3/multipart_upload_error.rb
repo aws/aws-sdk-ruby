@@ -4,7 +4,7 @@ module Aws
   module S3
     class MultipartUploadError < StandardError
 
-      def initialize(message, errors)
+      def initialize(message, errors = [])
         @errors = errors
         super(message)
       end
