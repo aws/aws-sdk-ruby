@@ -10,23 +10,15 @@ module Aws
 
       MIN_PART_SIZE = 5 * 1024 * 1024 # 5MB
 
-      FILE_TOO_SMALL = "unable to multipart upload files smaller than 5MB"
-
       MAX_PARTS = 10_000
 
       THREAD_COUNT = 10
 
-      CREATE_OPTIONS = Set.new(
-        Client.api.operation(:create_multipart_upload).input.shape.member_names
-      )
+      CREATE_OPTIONS = Set.new(Client.api.operation(:create_multipart_upload).input.shape.member_names)
 
-      COMPLETE_OPTIONS = Set.new(
-        Client.api.operation(:complete_multipart_upload).input.shape.member_names
-      )
+      COMPLETE_OPTIONS = Set.new(Client.api.operation(:complete_multipart_upload).input.shape.member_names)
 
-      UPLOAD_PART_OPTIONS = Set.new(
-        Client.api.operation(:upload_part).input.shape.member_names
-      )
+      UPLOAD_PART_OPTIONS = Set.new(Client.api.operation(:upload_part).input.shape.member_names)
 
       CHECKSUM_KEYS = Set.new(
         Client.api.operation(:upload_part).input.shape.members.map do |n, s|
@@ -52,13 +44,11 @@ module Aws
       #   It will be invoked with [bytes_read], [total_sizes]
       # @return [Seahorse::Client::Response] - the CompleteMultipartUploadResponse
       def upload(source, options = {})
-        if File.size(source) < MIN_PART_SIZE
-          raise ArgumentError, FILE_TOO_SMALL
-        else
-          upload_id = initiate_upload(options)
-          parts = upload_parts(upload_id, source, options)
-          complete_upload(upload_id, parts, options)
-        end
+        raise ArgumentError, 'unable to multipart upload files smaller than 5MB' if File.size(source) < MIN_PART_SIZE
+
+        upload_id = initiate_upload(options)
+        parts = upload_parts(upload_id, source, options)
+        complete_upload(upload_id, parts, options)
       end
 
       private
@@ -88,19 +78,15 @@ module Aws
       end
 
       def abort_upload(upload_id, options, errors)
-        @client.abort_multipart_upload(
-          bucket: options[:bucket],
-          key: options[:key],
-          upload_id: upload_id
-        )
+        @client.abort_multipart_upload(bucket: options[:bucket], key: options[:key], upload_id: upload_id)
         msg = "multipart upload failed: #{errors.map(&:message).join('; ')}"
         raise MultipartUploadError.new(msg, errors)
-      rescue MultipartUploadError => error
-        raise error
-      rescue => error
-        msg = "failed to abort multipart upload: #{error.message}. "\
+      rescue MultipartUploadError => e
+        raise e
+      rescue => e
+        msg = "failed to abort multipart upload: #{e.message}. "\
           "Multipart upload failed: #{errors.map(&:message).join('; ')}"
-        raise MultipartUploadError.new(msg, errors + [error])
+        raise MultipartUploadError.new(msg, errors + [e])
       end
 
       def compute_parts(upload_id, source, options)
@@ -113,11 +99,7 @@ module Aws
           parts << upload_part_opts(options).merge(
             upload_id: upload_id,
             part_number: part_number,
-            body: FilePart.new(
-              source: source,
-              offset: offset,
-              size: part_size(size, default_part_size, offset)
-            )
+            body: FilePart.new(source: source, offset: offset, size: part_size(size, default_part_size, offset))
           )
           part_number += 1
           offset += default_part_size
@@ -136,28 +118,23 @@ module Aws
       def create_opts(options)
         opts = { checksum_algorithm: Aws::Plugins::ChecksumAlgorithm::DEFAULT_CHECKSUM }
         opts[:checksum_type] = 'FULL_OBJECT' if has_checksum_key?(options.keys)
-        CREATE_OPTIONS.inject(opts) do |hash, key|
+        CREATE_OPTIONS.each_with_object(opts) do |key, hash|
           hash[key] = options[key] if options.key?(key)
-          hash
         end
       end
 
       def complete_opts(options)
         opts = {}
         opts[:checksum_type] = 'FULL_OBJECT' if has_checksum_key?(options.keys)
-        COMPLETE_OPTIONS.inject(opts) do |hash, key|
+        COMPLETE_OPTIONS.each_with_object(opts) do |key, hash|
           hash[key] = options[key] if options.key?(key)
-          hash
         end
       end
 
       def upload_part_opts(options)
-        UPLOAD_PART_OPTIONS.inject({}) do |hash, key|
-          if options.key?(key)
-            # don't pass through checksum calculations
-            hash[key] = options[key] unless checksum_key?(key)
-          end
-          hash
+        UPLOAD_PART_OPTIONS.each_with_object({}) do |key, hash|
+          # don't pass through checksum calculations
+          hash[key] = options[key] if options.key?(key) && !checksum_key?(key)
         end
       end
 
@@ -169,29 +146,28 @@ module Aws
         options.fetch(:thread_count, @thread_count).times do
           thread = Thread.new do
             begin
-              while part = pending.shift
+              while (part = pending.shift)
                 if progress
                   part[:on_chunk_sent] =
                     proc do |_chunk, bytes, _total|
                       progress.call(part[:part_number], bytes)
                     end
                 end
+                # TODO: Validating content-length of a request against min part size
+                #  needs to happen in ContentLength plugin - maybe a custom plugin?
                 resp = @client.upload_part(part)
                 part[:body].close
-                completed_part = {
-                  etag: resp.etag,
-                  part_number: part[:part_number]
-                }
+                completed_part = { etag: resp.etag, part_number: part[:part_number] }
                 algorithm = resp.context.params[:checksum_algorithm]
                 k = "checksum_#{algorithm.downcase}".to_sym
                 completed_part[k] = resp.send(k)
                 completed.push(completed_part)
               end
               nil
-            rescue => error
+            rescue => e
               # keep other threads from uploading other parts
               pending.clear!
-              error
+              e
             end
           end
           threads << thread
@@ -213,10 +189,13 @@ module Aws
 
       # @api private
       class PartList
-
         def initialize(parts = [])
           @parts = parts
           @mutex = Mutex.new
+        end
+
+        def count
+          @mutex.synchronize { @parts.count }
         end
 
         def push(part)
@@ -242,7 +221,6 @@ module Aws
         def to_a
           @mutex.synchronize { @parts.dup }
         end
-
       end
 
       # @api private
