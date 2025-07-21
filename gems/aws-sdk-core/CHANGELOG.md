@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add `bigdecimal` as a dependency. For systems that are not able to build native extension gems, prefer the locally installed `bigdecimal` with `bundle install --prefer-local`.
+
 * Feature - Support an auth scheme signing preference list using `ENV['AWS_AUTH_SCHEME_PREFERENCE']` or `auth_scheme_preference` in shared configuration.
 
 * Feature - Support metric tracking for Bedrock Bearer tokens.

@@ -16,6 +16,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sigv4', '~> 1.9') # necessary for s3 express auth/native sigv4a support
 
   spec.add_dependency('base64')
+  spec.add_dependency('bigdecimal')
   spec.add_dependency('jmespath', '~> 1', '>= 1.6.1') # necessary for secure jmespath JSON parsing
   spec.add_dependency('logger')
 
