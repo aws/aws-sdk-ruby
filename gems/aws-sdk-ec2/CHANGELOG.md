@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.540.0 (2025-07-21)
+------------------
+
+* Feature - This release adds support for C8gn, F2 and P6e-GB200 Instance types
+
 1.539.0 (2025-07-17)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2025-07-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Feature - Support `ENV['AWS_BEARER_TOKEN_BEDROCK']` for authentication with Amazon Bedrock APIs.
 
 1.51.0 (2025-07-16)

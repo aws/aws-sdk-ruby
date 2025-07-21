@@ -95,7 +95,7 @@ module Aws::Deadline
     #     class name or an instance of a plugin class.
     #
     #   @option options [required, Aws::CredentialProvider] :credentials
-    #     Your AWS credentials. This can be an instance of any one of the
+    #     Your AWS credentials used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
@@ -128,18 +128,23 @@ module Aws::Deadline
     #     locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
+    #
     #     * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
     #       `:account_id` options.
-    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
-    #       ENV['AWS_SESSION_TOKEN'], and ENV['AWS_ACCOUNT_ID']
+    #
+    #     * `ENV['AWS_ACCESS_KEY_ID']`, `ENV['AWS_SECRET_ACCESS_KEY']`,
+    #       `ENV['AWS_SESSION_TOKEN']`, and `ENV['AWS_ACCOUNT_ID']`.
+    #
     #     * `~/.aws/credentials`
+    #
     #     * `~/.aws/config`
+    #
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
     #       enable retries and extended timeouts. Instance profile credential
-    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
-    #       to true.
+    #       fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
+    #       to `true`.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -166,6 +171,11 @@ module Aws::Deadline
     #     until there is sufficent client side capacity to retry the request.
     #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
     #     not retry instead of sleeping.
+    #
+    #   @option options [Array<String>] :auth_scheme_preference
+    #     A list of preferred authentication schemes to use when making a request. Supported values are:
+    #     `sigv4`, `sigv4a`, `httpBearerAuth`, and `noAuth`. When set using `ENV['AWS_AUTH_SCHEME_PREFERENCE']` or in
+    #     shared config as `auth_scheme_preference`, the value should be a comma-separated list.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -253,8 +263,8 @@ module Aws::Deadline
     #     4 times. Used in `standard` and `adaptive` retry modes.
     #
     #   @option options [String] :profile ("default")
-    #     Used when loading credentials from the shared credentials file
-    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
+    #     When not specified, 'default' is used.
     #
     #   @option options [String] :request_checksum_calculation ("when_supported")
     #     Determines when a checksum will be calculated for request payloads. Values are:
@@ -367,7 +377,7 @@ module Aws::Deadline
     #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
-    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     Your Bearer token used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
@@ -1291,6 +1301,9 @@ module Aws::Deadline
     #         },
     #         instance_market_options: { # required
     #           type: "on-demand", # required, accepts on-demand, spot
+    #         },
+    #         vpc_configuration: {
+    #           resource_configuration_arns: ["VpcResourceConfigurationArn"],
     #         },
     #         storage_profile_id: "StorageProfileId",
     #       },
@@ -2668,6 +2681,8 @@ module Aws::Deadline
     #   resp.configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].values #=> Array
     #   resp.configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].values[0] #=> String
     #   resp.configuration.service_managed_ec2.instance_market_options.type #=> String, one of "on-demand", "spot"
+    #   resp.configuration.service_managed_ec2.vpc_configuration.resource_configuration_arns #=> Array
+    #   resp.configuration.service_managed_ec2.vpc_configuration.resource_configuration_arns[0] #=> String
     #   resp.configuration.service_managed_ec2.storage_profile_id #=> String
     #   resp.host_configuration.script_body #=> String
     #   resp.host_configuration.script_timeout_seconds #=> Integer
@@ -4085,6 +4100,8 @@ module Aws::Deadline
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].values #=> Array
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].values[0] #=> String
     #   resp.fleets[0].configuration.service_managed_ec2.instance_market_options.type #=> String, one of "on-demand", "spot"
+    #   resp.fleets[0].configuration.service_managed_ec2.vpc_configuration.resource_configuration_arns #=> Array
+    #   resp.fleets[0].configuration.service_managed_ec2.vpc_configuration.resource_configuration_arns[0] #=> String
     #   resp.fleets[0].configuration.service_managed_ec2.storage_profile_id #=> String
     #   resp.fleets[0].created_at #=> Time
     #   resp.fleets[0].created_by #=> String
@@ -5519,6 +5536,8 @@ module Aws::Deadline
     #   resp.jobs[0].created_at #=> Time
     #   resp.jobs[0].ended_at #=> Time
     #   resp.jobs[0].started_at #=> Time
+    #   resp.jobs[0].updated_at #=> Time
+    #   resp.jobs[0].updated_by #=> String
     #   resp.jobs[0].job_parameters #=> Hash
     #   resp.jobs[0].job_parameters["JobParametersKeyString"].int #=> String
     #   resp.jobs[0].job_parameters["JobParametersKeyString"].float #=> String
@@ -5639,8 +5658,11 @@ module Aws::Deadline
     #   resp.steps[0].task_run_status_counts["TaskRunStatus"] #=> Integer
     #   resp.steps[0].task_failure_retry_count #=> Integer
     #   resp.steps[0].created_at #=> Time
+    #   resp.steps[0].created_by #=> String
     #   resp.steps[0].started_at #=> Time
     #   resp.steps[0].ended_at #=> Time
+    #   resp.steps[0].updated_at #=> Time
+    #   resp.steps[0].updated_by #=> String
     #   resp.steps[0].parameter_space.parameters #=> Array
     #   resp.steps[0].parameter_space.parameters[0].name #=> String
     #   resp.steps[0].parameter_space.parameters[0].type #=> String, one of "INT", "FLOAT", "STRING", "PATH", "CHUNK_INT"
@@ -5761,6 +5783,8 @@ module Aws::Deadline
     #   resp.tasks[0].failure_retry_count #=> Integer
     #   resp.tasks[0].started_at #=> Time
     #   resp.tasks[0].ended_at #=> Time
+    #   resp.tasks[0].updated_at #=> Time
+    #   resp.tasks[0].updated_by #=> String
     #   resp.next_item_offset #=> Integer
     #   resp.total_results #=> Integer
     #
@@ -6292,6 +6316,9 @@ module Aws::Deadline
     #         },
     #         instance_market_options: { # required
     #           type: "on-demand", # required, accepts on-demand, spot
+    #         },
+    #         vpc_configuration: {
+    #           resource_configuration_arns: ["VpcResourceConfigurationArn"],
     #         },
     #         storage_profile_id: "StorageProfileId",
     #       },
@@ -7094,7 +7121,7 @@ module Aws::Deadline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-deadline'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

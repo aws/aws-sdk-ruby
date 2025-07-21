@@ -95,7 +95,7 @@ module Aws::SageMaker
     #     class name or an instance of a plugin class.
     #
     #   @option options [required, Aws::CredentialProvider] :credentials
-    #     Your AWS credentials. This can be an instance of any one of the
+    #     Your AWS credentials used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
@@ -128,18 +128,23 @@ module Aws::SageMaker
     #     locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
+    #
     #     * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
     #       `:account_id` options.
-    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
-    #       ENV['AWS_SESSION_TOKEN'], and ENV['AWS_ACCOUNT_ID']
+    #
+    #     * `ENV['AWS_ACCESS_KEY_ID']`, `ENV['AWS_SECRET_ACCESS_KEY']`,
+    #       `ENV['AWS_SESSION_TOKEN']`, and `ENV['AWS_ACCOUNT_ID']`.
+    #
     #     * `~/.aws/credentials`
+    #
     #     * `~/.aws/config`
+    #
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
     #       enable retries and extended timeouts. Instance profile credential
-    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
-    #       to true.
+    #       fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
+    #       to `true`.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -166,6 +171,11 @@ module Aws::SageMaker
     #     until there is sufficent client side capacity to retry the request.
     #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
     #     not retry instead of sleeping.
+    #
+    #   @option options [Array<String>] :auth_scheme_preference
+    #     A list of preferred authentication schemes to use when making a request. Supported values are:
+    #     `sigv4`, `sigv4a`, `httpBearerAuth`, and `noAuth`. When set using `ENV['AWS_AUTH_SCHEME_PREFERENCE']` or in
+    #     shared config as `auth_scheme_preference`, the value should be a comma-separated list.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -253,8 +263,8 @@ module Aws::SageMaker
     #     4 times. Used in `standard` and `adaptive` retry modes.
     #
     #   @option options [String] :profile ("default")
-    #     Used when loading credentials from the shared credentials file
-    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
+    #     When not specified, 'default' is used.
     #
     #   @option options [String] :request_checksum_calculation ("when_supported")
     #     Determines when a checksum will be calculated for request payloads. Values are:
@@ -374,7 +384,7 @@ module Aws::SageMaker
     #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
-    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     Your Bearer token used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
@@ -2065,7 +2075,7 @@ module Aws::SageMaker
     #         instance_storage_configs: [
     #           {
     #             ebs_volume_config: {
-    #               volume_size_in_gb: 1, # required
+    #               volume_size_in_gb: 1,
     #             },
     #           },
     #         ],
@@ -2108,7 +2118,7 @@ module Aws::SageMaker
     #         instance_storage_configs: [
     #           {
     #             ebs_volume_config: {
-    #               volume_size_in_gb: 1, # required
+    #               volume_size_in_gb: 1,
     #             },
     #           },
     #         ],
@@ -2517,7 +2527,7 @@ module Aws::SageMaker
     #       compute_quota_resources: [
     #         {
     #           instance_type: "ml.p4d.24xlarge", # required, accepts ml.p4d.24xlarge, ml.p4de.24xlarge, ml.p5.48xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.c5n.large, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.g6.xlarge, ml.g6.2xlarge, ml.g6.4xlarge, ml.g6.8xlarge, ml.g6.16xlarge, ml.g6.12xlarge, ml.g6.24xlarge, ml.g6.48xlarge, ml.gr6.4xlarge, ml.gr6.8xlarge, ml.g6e.xlarge, ml.g6e.2xlarge, ml.g6e.4xlarge, ml.g6e.8xlarge, ml.g6e.16xlarge, ml.g6e.12xlarge, ml.g6e.24xlarge, ml.g6e.48xlarge, ml.p5e.48xlarge, ml.p5en.48xlarge, ml.p6-b200.48xlarge, ml.trn2.48xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.m6i.large, ml.m6i.xlarge, ml.m6i.2xlarge, ml.m6i.4xlarge, ml.m6i.8xlarge, ml.m6i.12xlarge, ml.m6i.16xlarge, ml.m6i.24xlarge, ml.m6i.32xlarge, ml.r6i.large, ml.r6i.xlarge, ml.r6i.2xlarge, ml.r6i.4xlarge, ml.r6i.8xlarge, ml.r6i.12xlarge, ml.r6i.16xlarge, ml.r6i.24xlarge, ml.r6i.32xlarge, ml.i3en.large, ml.i3en.xlarge, ml.i3en.2xlarge, ml.i3en.3xlarge, ml.i3en.6xlarge, ml.i3en.12xlarge, ml.i3en.24xlarge, ml.m7i.large, ml.m7i.xlarge, ml.m7i.2xlarge, ml.m7i.4xlarge, ml.m7i.8xlarge, ml.m7i.12xlarge, ml.m7i.16xlarge, ml.m7i.24xlarge, ml.m7i.48xlarge, ml.r7i.large, ml.r7i.xlarge, ml.r7i.2xlarge, ml.r7i.4xlarge, ml.r7i.8xlarge, ml.r7i.12xlarge, ml.r7i.16xlarge, ml.r7i.24xlarge, ml.r7i.48xlarge
-    #           count: 1, # required
+    #           count: 1,
     #         },
     #       ],
     #       resource_sharing_config: {
@@ -2918,9 +2928,17 @@ module Aws::SageMaker
     # @option params [Array<String>] :subnet_ids
     #   The VPC subnets that the domain uses for communication.
     #
+    #   The field is optional when the `AppNetworkAccessType` parameter is set
+    #   to `PublicInternetOnly` for domains created from Amazon SageMaker
+    #   Unified Studio.
+    #
     # @option params [String] :vpc_id
     #   The ID of the Amazon Virtual Private Cloud (VPC) that the domain uses
     #   for communication.
+    #
+    #   The field is optional when the `AppNetworkAccessType` parameter is set
+    #   to `PublicInternetOnly` for domains created from Amazon SageMaker
+    #   Unified Studio.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Tags to associated with the Domain. Each tag consists of a key and an
@@ -3160,6 +3178,10 @@ module Aws::SageMaker
     #             file_system_id: "FileSystemId", # required
     #             file_system_path: "FileSystemPath",
     #           },
+    #           s3_file_system_config: {
+    #             mount_path: "String1024",
+    #             s3_uri: "S3SchemaUri",
+    #           },
     #         },
     #       ],
     #       studio_web_portal_settings: {
@@ -3311,6 +3333,10 @@ module Aws::SageMaker
     #           f_sx_lustre_file_system_config: {
     #             file_system_id: "FileSystemId", # required
     #             file_system_path: "FileSystemPath",
+    #           },
+    #           s3_file_system_config: {
+    #             mount_path: "String1024",
+    #             s3_uri: "S3SchemaUri",
     #           },
     #         },
     #       ],
@@ -9059,6 +9085,9 @@ module Aws::SageMaker
     #           f_sx_lustre_file_system: {
     #             file_system_id: "FileSystemId", # required
     #           },
+    #           s3_file_system: {
+    #             s3_uri: "S3SchemaUri",
+    #           },
     #         },
     #       ],
     #       remote_access: "ENABLED", # accepts ENABLED, DISABLED
@@ -10419,6 +10448,10 @@ module Aws::SageMaker
     #             file_system_id: "FileSystemId", # required
     #             file_system_path: "FileSystemPath",
     #           },
+    #           s3_file_system_config: {
+    #             mount_path: "String1024",
+    #             s3_uri: "S3SchemaUri",
+    #           },
     #         },
     #       ],
     #       studio_web_portal_settings: {
@@ -10514,6 +10547,10 @@ module Aws::SageMaker
     # @option params [Types::WorkforceVpcConfigRequest] :workforce_vpc_config
     #   Use this parameter to configure a workforce using VPC.
     #
+    # @option params [String] :ip_address_type
+    #   Use this parameter to specify whether you want `IPv4` only or
+    #   `dualstack` (`IPv4` and `IPv6`) to support your labeling workforce.
+    #
     # @return [Types::CreateWorkforceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkforceResponse#workforce_arn #workforce_arn} => String
@@ -10554,6 +10591,7 @@ module Aws::SageMaker
     #       security_group_ids: ["WorkforceSecurityGroupId"],
     #       subnets: ["WorkforceSubnetId"],
     #     },
+    #     ip_address_type: "ipv4", # accepts ipv4, dualstack
     #   })
     #
     # @example Response structure
@@ -13883,6 +13921,8 @@ module Aws::SageMaker
     #   resp.default_user_settings.custom_file_system_configs[0].efs_file_system_config.file_system_path #=> String
     #   resp.default_user_settings.custom_file_system_configs[0].f_sx_lustre_file_system_config.file_system_id #=> String
     #   resp.default_user_settings.custom_file_system_configs[0].f_sx_lustre_file_system_config.file_system_path #=> String
+    #   resp.default_user_settings.custom_file_system_configs[0].s3_file_system_config.mount_path #=> String
+    #   resp.default_user_settings.custom_file_system_configs[0].s3_file_system_config.s3_uri #=> String
     #   resp.default_user_settings.studio_web_portal_settings.hidden_ml_tools #=> Array
     #   resp.default_user_settings.studio_web_portal_settings.hidden_ml_tools[0] #=> String, one of "DataWrangler", "FeatureStore", "EmrClusters", "AutoMl", "Experiments", "Training", "ModelEvaluation", "Pipelines", "Models", "JumpStart", "InferenceRecommender", "Endpoints", "Projects", "InferenceOptimization", "PerformanceEvaluation", "LakeraGuard", "Comet", "DeepchecksLLMEvaluation", "Fiddler", "HyperPodClusters"
     #   resp.default_user_settings.studio_web_portal_settings.hidden_app_types #=> Array
@@ -13981,6 +14021,8 @@ module Aws::SageMaker
     #   resp.default_space_settings.custom_file_system_configs[0].efs_file_system_config.file_system_path #=> String
     #   resp.default_space_settings.custom_file_system_configs[0].f_sx_lustre_file_system_config.file_system_id #=> String
     #   resp.default_space_settings.custom_file_system_configs[0].f_sx_lustre_file_system_config.file_system_path #=> String
+    #   resp.default_space_settings.custom_file_system_configs[0].s3_file_system_config.mount_path #=> String
+    #   resp.default_space_settings.custom_file_system_configs[0].s3_file_system_config.s3_uri #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeDomain AWS API Documentation
     #
@@ -17469,6 +17511,7 @@ module Aws::SageMaker
     #   resp.space_settings.custom_file_systems #=> Array
     #   resp.space_settings.custom_file_systems[0].efs_file_system.file_system_id #=> String
     #   resp.space_settings.custom_file_systems[0].f_sx_lustre_file_system.file_system_id #=> String
+    #   resp.space_settings.custom_file_systems[0].s3_file_system.s3_uri #=> String
     #   resp.space_settings.remote_access #=> String, one of "ENABLED", "DISABLED"
     #   resp.ownership_settings.owner_user_profile_name #=> String
     #   resp.space_sharing_settings.sharing_type #=> String, one of "Private", "Shared"
@@ -17829,7 +17872,7 @@ module Aws::SageMaker
     #   resp.target_resources[0] #=> String, one of "training-job", "hyperpod-cluster"
     #   resp.reserved_capacity_summaries #=> Array
     #   resp.reserved_capacity_summaries[0].reserved_capacity_arn #=> String
-    #   resp.reserved_capacity_summaries[0].instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p5.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.trn1.32xlarge", "ml.trn2.48xlarge", "ml.p6-b200.48xlarge"
+    #   resp.reserved_capacity_summaries[0].instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p5.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.trn1.32xlarge", "ml.trn2.48xlarge", "ml.p6-b200.48xlarge", "ml.p4de.24xlarge"
     #   resp.reserved_capacity_summaries[0].total_instance_count #=> Integer
     #   resp.reserved_capacity_summaries[0].status #=> String, one of "Pending", "Active", "Scheduled", "Expired", "Failed"
     #   resp.reserved_capacity_summaries[0].availability_zone #=> String
@@ -18241,6 +18284,8 @@ module Aws::SageMaker
     #   resp.user_settings.custom_file_system_configs[0].efs_file_system_config.file_system_path #=> String
     #   resp.user_settings.custom_file_system_configs[0].f_sx_lustre_file_system_config.file_system_id #=> String
     #   resp.user_settings.custom_file_system_configs[0].f_sx_lustre_file_system_config.file_system_path #=> String
+    #   resp.user_settings.custom_file_system_configs[0].s3_file_system_config.mount_path #=> String
+    #   resp.user_settings.custom_file_system_configs[0].s3_file_system_config.s3_uri #=> String
     #   resp.user_settings.studio_web_portal_settings.hidden_ml_tools #=> Array
     #   resp.user_settings.studio_web_portal_settings.hidden_ml_tools[0] #=> String, one of "DataWrangler", "FeatureStore", "EmrClusters", "AutoMl", "Experiments", "Training", "ModelEvaluation", "Pipelines", "Models", "JumpStart", "InferenceRecommender", "Endpoints", "Projects", "InferenceOptimization", "PerformanceEvaluation", "LakeraGuard", "Comet", "DeepchecksLLMEvaluation", "Fiddler", "HyperPodClusters"
     #   resp.user_settings.studio_web_portal_settings.hidden_app_types #=> Array
@@ -18317,6 +18362,7 @@ module Aws::SageMaker
     #   resp.workforce.workforce_vpc_config.vpc_endpoint_id #=> String
     #   resp.workforce.status #=> String, one of "Initializing", "Updating", "Deleting", "Failed", "Active"
     #   resp.workforce.failure_reason #=> String
+    #   resp.workforce.ip_address_type #=> String, one of "ipv4", "dualstack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeWorkforce AWS API Documentation
     #
@@ -24715,7 +24761,7 @@ module Aws::SageMaker
     #   resp.training_plan_summaries[0].target_resources[0] #=> String, one of "training-job", "hyperpod-cluster"
     #   resp.training_plan_summaries[0].reserved_capacity_summaries #=> Array
     #   resp.training_plan_summaries[0].reserved_capacity_summaries[0].reserved_capacity_arn #=> String
-    #   resp.training_plan_summaries[0].reserved_capacity_summaries[0].instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p5.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.trn1.32xlarge", "ml.trn2.48xlarge", "ml.p6-b200.48xlarge"
+    #   resp.training_plan_summaries[0].reserved_capacity_summaries[0].instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p5.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.trn1.32xlarge", "ml.trn2.48xlarge", "ml.p6-b200.48xlarge", "ml.p4de.24xlarge"
     #   resp.training_plan_summaries[0].reserved_capacity_summaries[0].total_instance_count #=> Integer
     #   resp.training_plan_summaries[0].reserved_capacity_summaries[0].status #=> String, one of "Pending", "Active", "Scheduled", "Expired", "Failed"
     #   resp.training_plan_summaries[0].reserved_capacity_summaries[0].availability_zone #=> String
@@ -25133,6 +25179,7 @@ module Aws::SageMaker
     #   resp.workforces[0].workforce_vpc_config.vpc_endpoint_id #=> String
     #   resp.workforces[0].status #=> String, one of "Initializing", "Updating", "Deleting", "Failed", "Active"
     #   resp.workforces[0].failure_reason #=> String
+    #   resp.workforces[0].ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListWorkforces AWS API Documentation
@@ -25687,7 +25734,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_training_plan_offerings({
-    #     instance_type: "ml.p4d.24xlarge", # accepts ml.p4d.24xlarge, ml.p5.48xlarge, ml.p5e.48xlarge, ml.p5en.48xlarge, ml.trn1.32xlarge, ml.trn2.48xlarge, ml.p6-b200.48xlarge
+    #     instance_type: "ml.p4d.24xlarge", # accepts ml.p4d.24xlarge, ml.p5.48xlarge, ml.p5e.48xlarge, ml.p5en.48xlarge, ml.trn1.32xlarge, ml.trn2.48xlarge, ml.p6-b200.48xlarge, ml.p4de.24xlarge
     #     instance_count: 1,
     #     start_time_after: Time.now,
     #     end_time_before: Time.now,
@@ -25708,7 +25755,7 @@ module Aws::SageMaker
     #   resp.training_plan_offerings[0].upfront_fee #=> String
     #   resp.training_plan_offerings[0].currency_code #=> String
     #   resp.training_plan_offerings[0].reserved_capacity_offerings #=> Array
-    #   resp.training_plan_offerings[0].reserved_capacity_offerings[0].instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p5.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.trn1.32xlarge", "ml.trn2.48xlarge", "ml.p6-b200.48xlarge"
+    #   resp.training_plan_offerings[0].reserved_capacity_offerings[0].instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p5.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.trn1.32xlarge", "ml.trn2.48xlarge", "ml.p6-b200.48xlarge", "ml.p4de.24xlarge"
     #   resp.training_plan_offerings[0].reserved_capacity_offerings[0].instance_count #=> Integer
     #   resp.training_plan_offerings[0].reserved_capacity_offerings[0].availability_zone #=> String
     #   resp.training_plan_offerings[0].reserved_capacity_offerings[0].duration_hours #=> Integer
@@ -26768,7 +26815,7 @@ module Aws::SageMaker
     #         instance_storage_configs: [
     #           {
     #             ebs_volume_config: {
-    #               volume_size_in_gb: 1, # required
+    #               volume_size_in_gb: 1,
     #             },
     #           },
     #         ],
@@ -26811,7 +26858,7 @@ module Aws::SageMaker
     #         instance_storage_configs: [
     #           {
     #             ebs_volume_config: {
-    #               volume_size_in_gb: 1, # required
+    #               volume_size_in_gb: 1,
     #             },
     #           },
     #         ],
@@ -27064,7 +27111,7 @@ module Aws::SageMaker
     #       compute_quota_resources: [
     #         {
     #           instance_type: "ml.p4d.24xlarge", # required, accepts ml.p4d.24xlarge, ml.p4de.24xlarge, ml.p5.48xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.c5n.large, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.g6.xlarge, ml.g6.2xlarge, ml.g6.4xlarge, ml.g6.8xlarge, ml.g6.16xlarge, ml.g6.12xlarge, ml.g6.24xlarge, ml.g6.48xlarge, ml.gr6.4xlarge, ml.gr6.8xlarge, ml.g6e.xlarge, ml.g6e.2xlarge, ml.g6e.4xlarge, ml.g6e.8xlarge, ml.g6e.16xlarge, ml.g6e.12xlarge, ml.g6e.24xlarge, ml.g6e.48xlarge, ml.p5e.48xlarge, ml.p5en.48xlarge, ml.p6-b200.48xlarge, ml.trn2.48xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.m6i.large, ml.m6i.xlarge, ml.m6i.2xlarge, ml.m6i.4xlarge, ml.m6i.8xlarge, ml.m6i.12xlarge, ml.m6i.16xlarge, ml.m6i.24xlarge, ml.m6i.32xlarge, ml.r6i.large, ml.r6i.xlarge, ml.r6i.2xlarge, ml.r6i.4xlarge, ml.r6i.8xlarge, ml.r6i.12xlarge, ml.r6i.16xlarge, ml.r6i.24xlarge, ml.r6i.32xlarge, ml.i3en.large, ml.i3en.xlarge, ml.i3en.2xlarge, ml.i3en.3xlarge, ml.i3en.6xlarge, ml.i3en.12xlarge, ml.i3en.24xlarge, ml.m7i.large, ml.m7i.xlarge, ml.m7i.2xlarge, ml.m7i.4xlarge, ml.m7i.8xlarge, ml.m7i.12xlarge, ml.m7i.16xlarge, ml.m7i.24xlarge, ml.m7i.48xlarge, ml.r7i.large, ml.r7i.xlarge, ml.r7i.2xlarge, ml.r7i.4xlarge, ml.r7i.8xlarge, ml.r7i.12xlarge, ml.r7i.16xlarge, ml.r7i.24xlarge, ml.r7i.48xlarge
-    #           count: 1, # required
+    #           count: 1,
     #         },
     #       ],
     #       resource_sharing_config: {
@@ -27461,6 +27508,10 @@ module Aws::SageMaker
     #             file_system_id: "FileSystemId", # required
     #             file_system_path: "FileSystemPath",
     #           },
+    #           s3_file_system_config: {
+    #             mount_path: "String1024",
+    #             s3_uri: "S3SchemaUri",
+    #           },
     #         },
     #       ],
     #       studio_web_portal_settings: {
@@ -27600,6 +27651,10 @@ module Aws::SageMaker
     #           f_sx_lustre_file_system_config: {
     #             file_system_id: "FileSystemId", # required
     #             file_system_path: "FileSystemPath",
+    #           },
+    #           s3_file_system_config: {
+    #             mount_path: "String1024",
+    #             s3_uri: "S3SchemaUri",
     #           },
     #         },
     #       ],
@@ -29662,6 +29717,9 @@ module Aws::SageMaker
     #           f_sx_lustre_file_system: {
     #             file_system_id: "FileSystemId", # required
     #           },
+    #           s3_file_system: {
+    #             s3_uri: "S3SchemaUri",
+    #           },
     #         },
     #       ],
     #       remote_access: "ENABLED", # accepts ENABLED, DISABLED
@@ -30099,6 +30157,10 @@ module Aws::SageMaker
     #             file_system_id: "FileSystemId", # required
     #             file_system_path: "FileSystemPath",
     #           },
+    #           s3_file_system_config: {
+    #             mount_path: "String1024",
+    #             s3_uri: "S3SchemaUri",
+    #           },
     #         },
     #       ],
     #       studio_web_portal_settings: {
@@ -30194,6 +30256,10 @@ module Aws::SageMaker
     # @option params [Types::WorkforceVpcConfigRequest] :workforce_vpc_config
     #   Use this parameter to update your VPC configuration for a workforce.
     #
+    # @option params [String] :ip_address_type
+    #   Use this parameter to specify whether you want `IPv4` only or
+    #   `dualstack` (`IPv4` and `IPv6`) to support your labeling workforce.
+    #
     # @return [Types::UpdateWorkforceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateWorkforceResponse#workforce #workforce} => Types::Workforce
@@ -30224,6 +30290,7 @@ module Aws::SageMaker
     #       security_group_ids: ["WorkforceSecurityGroupId"],
     #       subnets: ["WorkforceSubnetId"],
     #     },
+    #     ip_address_type: "ipv4", # accepts ipv4, dualstack
     #   })
     #
     # @example Response structure
@@ -30255,6 +30322,7 @@ module Aws::SageMaker
     #   resp.workforce.workforce_vpc_config.vpc_endpoint_id #=> String
     #   resp.workforce.status #=> String, one of "Initializing", "Updating", "Deleting", "Failed", "Active"
     #   resp.workforce.failure_reason #=> String
+    #   resp.workforce.ip_address_type #=> String, one of "ipv4", "dualstack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateWorkforce AWS API Documentation
     #
@@ -30397,7 +30465,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.315.0'
+      context[:gem_version] = '1.316.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -55,7 +55,7 @@ module Aws::PcaConnectorScep
   autoload :EndpointProvider, 'aws-sdk-pcaconnectorscep/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-pcaconnectorscep/endpoints'
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.18.0'
 
 end
 

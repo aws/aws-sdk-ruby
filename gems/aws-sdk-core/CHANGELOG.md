@@ -3,6 +3,15 @@ Unreleased Changes
 
 * Feature - Add `bigdecimal` as a dependency. For systems that are not able to build native extension gems, prefer the locally installed `bigdecimal` with `bundle install --prefer-local`.
 
+3.227.0 (2025-07-21)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 * Feature - Support an auth scheme signing preference list using `ENV['AWS_AUTH_SCHEME_PREFERENCE']` or `auth_scheme_preference` in shared configuration.
 
 * Feature - Support metric tracking for Bedrock Bearer tokens.

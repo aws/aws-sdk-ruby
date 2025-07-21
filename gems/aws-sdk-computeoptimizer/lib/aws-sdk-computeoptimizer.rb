@@ -54,7 +54,7 @@ module Aws::ComputeOptimizer
   autoload :EndpointProvider, 'aws-sdk-computeoptimizer/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-computeoptimizer/endpoints'
 
-  GEM_VERSION = '1.78.0'
+  GEM_VERSION = '1.79.0'
 
 end
 

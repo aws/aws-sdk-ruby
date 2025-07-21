@@ -55,7 +55,7 @@ module Aws::Keyspaces
   autoload :EndpointProvider, 'aws-sdk-keyspaces/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-keyspaces/endpoints'
 
-  GEM_VERSION = '1.42.0'
+  GEM_VERSION = '1.43.0'
 
 end
 

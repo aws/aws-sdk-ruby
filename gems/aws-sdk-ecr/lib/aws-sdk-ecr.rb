@@ -55,7 +55,7 @@ module Aws::ECR
   autoload :EndpointProvider, 'aws-sdk-ecr/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ecr/endpoints'
 
-  GEM_VERSION = '1.104.0'
+  GEM_VERSION = '1.105.0'
 
 end
 

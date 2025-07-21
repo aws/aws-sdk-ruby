@@ -55,7 +55,7 @@ module Aws::AppTest
   autoload :EndpointProvider, 'aws-sdk-apptest/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-apptest/endpoints'
 
-  GEM_VERSION = '1.16.0'
+  GEM_VERSION = '1.17.0'
 
 end
 

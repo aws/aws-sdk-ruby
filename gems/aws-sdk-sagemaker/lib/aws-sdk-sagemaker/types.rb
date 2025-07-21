@@ -1307,6 +1307,33 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudSemanticSegmentation`
     #
+    #   **Generative AI/Custom** - Direct passthrough of output data without
+    #   any transformation.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-PassThrough`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:ACS-PassThrough`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:ACS-PassThrough`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:ACS-PassThrough`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-PassThrough`
+    #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-PassThrough`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:ACS-PassThrough`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:ACS-PassThrough`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-PassThrough`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:ACS-PassThrough`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-PassThrough`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:ACS-PassThrough`
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html
@@ -7230,11 +7257,19 @@ module Aws::SageMaker
     #
     # @!attribute [rw] subnet_ids
     #   The VPC subnets that the domain uses for communication.
+    #
+    #   The field is optional when the `AppNetworkAccessType` parameter is
+    #   set to `PublicInternetOnly` for domains created from Amazon
+    #   SageMaker Unified Studio.
     #   @return [Array<String>]
     #
     # @!attribute [rw] vpc_id
     #   The ID of the Amazon Virtual Private Cloud (VPC) that the domain
     #   uses for communication.
+    #
+    #   The field is optional when the `AppNetworkAccessType` parameter is
+    #   set to `PublicInternetOnly` for domains created from Amazon
+    #   SageMaker Unified Studio.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -11537,6 +11572,11 @@ module Aws::SageMaker
     #   Use this parameter to configure a workforce using VPC.
     #   @return [Types::WorkforceVpcConfigRequest]
     #
+    # @!attribute [rw] ip_address_type
+    #   Use this parameter to specify whether you want `IPv4` only or
+    #   `dualstack` (`IPv4` and `IPv6`) to support your labeling workforce.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateWorkforceRequest AWS API Documentation
     #
     class CreateWorkforceRequest < Struct.new(
@@ -11545,7 +11585,8 @@ module Aws::SageMaker
       :source_ip_config,
       :workforce_name,
       :tags,
-      :workforce_vpc_config)
+      :workforce_vpc_config,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11669,11 +11710,17 @@ module Aws::SageMaker
     #   A custom file system in Amazon FSx for Lustre.
     #   @return [Types::FSxLustreFileSystem]
     #
+    # @!attribute [rw] s3_file_system
+    #   A custom file system in Amazon S3. This is only supported in Amazon
+    #   SageMaker Unified Studio.
+    #   @return [Types::S3FileSystem]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CustomFileSystem AWS API Documentation
     #
     class CustomFileSystem < Struct.new(
       :efs_file_system,
       :f_sx_lustre_file_system,
+      :s3_file_system,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -11681,6 +11728,7 @@ module Aws::SageMaker
 
       class EfsFileSystem < CustomFileSystem; end
       class FSxLustreFileSystem < CustomFileSystem; end
+      class S3FileSystem < CustomFileSystem; end
       class Unknown < CustomFileSystem; end
     end
 
@@ -11700,11 +11748,16 @@ module Aws::SageMaker
     #   The settings for a custom Amazon FSx for Lustre file system.
     #   @return [Types::FSxLustreFileSystemConfig]
     #
+    # @!attribute [rw] s3_file_system_config
+    #   Configuration settings for a custom Amazon S3 file system.
+    #   @return [Types::S3FileSystemConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CustomFileSystemConfig AWS API Documentation
     #
     class CustomFileSystemConfig < Struct.new(
       :efs_file_system_config,
       :f_sx_lustre_file_system_config,
+      :s3_file_system_config,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -11712,6 +11765,7 @@ module Aws::SageMaker
 
       class EfsFileSystemConfig < CustomFileSystemConfig; end
       class FSxLustreFileSystemConfig < CustomFileSystemConfig; end
+      class S3FileSystemConfig < CustomFileSystemConfig; end
       class Unknown < CustomFileSystemConfig; end
     end
 
@@ -24638,6 +24692,33 @@ module Aws::SageMaker
     #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-Adjustment3DPointCloudSemanticSegmentation`
     #
     #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #   **Generative AI/Custom** - Direct passthrough of input data without
+    #   any transformation.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-PassThrough`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-PassThrough`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-PassThrough`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-PassThrough`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-PassThrough`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-PassThrough`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-PassThrough`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-PassThrough`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-PassThrough`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-PassThrough`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-PassThrough`
+    #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-PassThrough`
     #
     #
     #
@@ -43213,6 +43294,43 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A custom file system in Amazon S3. This is only supported in Amazon
+    # SageMaker Unified Studio.
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 URI that specifies the location in S3 where files are
+    #   stored, which is mounted within the Studio environment. For example:
+    #   `s3://<bucket-name>/<prefix>/`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/S3FileSystem AWS API Documentation
+    #
+    class S3FileSystem < Struct.new(
+      :s3_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for the custom Amazon S3 file system.
+    #
+    # @!attribute [rw] mount_path
+    #   The file system path where the Amazon S3 storage location will be
+    #   mounted within the Amazon SageMaker Studio environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 URI of the S3 file system configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/S3FileSystemConfig AWS API Documentation
+    #
+    class S3FileSystemConfig < Struct.new(
+      :mount_path,
+      :s3_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the S3 location of ML model data to deploy.
     #
     # @!attribute [rw] s3_uri
@@ -51131,13 +51249,19 @@ module Aws::SageMaker
     #   Use this parameter to update your VPC configuration for a workforce.
     #   @return [Types::WorkforceVpcConfigRequest]
     #
+    # @!attribute [rw] ip_address_type
+    #   Use this parameter to specify whether you want `IPv4` only or
+    #   `dualstack` (`IPv4` and `IPv6`) to support your labeling workforce.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateWorkforceRequest AWS API Documentation
     #
     class UpdateWorkforceRequest < Struct.new(
       :workforce_name,
       :source_ip_config,
       :oidc_config,
-      :workforce_vpc_config)
+      :workforce_vpc_config,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -51751,6 +51875,11 @@ module Aws::SageMaker
     #   The reason your workforce failed.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type you specify - either `IPv4` only or `dualstack`
+    #   (`IPv4` and `IPv6`) - to support your labeling workforce.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Workforce AWS API Documentation
     #
     class Workforce < Struct.new(
@@ -51764,7 +51893,8 @@ module Aws::SageMaker
       :create_date,
       :workforce_vpc_config,
       :status,
-      :failure_reason)
+      :failure_reason,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end

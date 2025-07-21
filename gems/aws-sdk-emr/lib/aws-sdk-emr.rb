@@ -55,7 +55,7 @@ module Aws::EMR
   autoload :EndpointProvider, 'aws-sdk-emr/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-emr/endpoints'
 
-  GEM_VERSION = '1.111.0'
+  GEM_VERSION = '1.112.0'
 
 end
 

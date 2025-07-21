@@ -618,6 +618,7 @@ module Aws::CloudFront
     S3OriginConfig = Shapes::StructureShape.new(name: 'S3OriginConfig')
     SSLSupportMethod = Shapes::StringShape.new(name: 'SSLSupportMethod')
     SamplingRate = Shapes::FloatShape.new(name: 'SamplingRate')
+    ServerCertificateId = Shapes::StringShape.new(name: 'ServerCertificateId')
     SessionStickinessConfig = Shapes::StructureShape.new(name: 'SessionStickinessConfig')
     Signer = Shapes::StructureShape.new(name: 'Signer')
     SignerList = Shapes::ListShape.new(name: 'SignerList')
@@ -1485,7 +1486,7 @@ module Aws::CloudFront
     DeleteFieldLevelEncryptionProfileRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
     DeleteFieldLevelEncryptionProfileRequest.struct_class = Types::DeleteFieldLevelEncryptionProfileRequest
 
-    DeleteFunctionRequest.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Name"))
+    DeleteFunctionRequest.add_member(:name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "Name"))
     DeleteFunctionRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, required: true, location: "header", location_name: "If-Match"))
     DeleteFunctionRequest.struct_class = Types::DeleteFunctionRequest
 
@@ -1536,7 +1537,7 @@ module Aws::CloudFront
     DeleteVpcOriginResult[:payload] = :vpc_origin
     DeleteVpcOriginResult[:payload_member] = DeleteVpcOriginResult.member(:vpc_origin)
 
-    DescribeFunctionRequest.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Name"))
+    DescribeFunctionRequest.add_member(:name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "Name"))
     DescribeFunctionRequest.add_member(:stage, Shapes::ShapeRef.new(shape: FunctionStage, location: "querystring", location_name: "Stage"))
     DescribeFunctionRequest.struct_class = Types::DescribeFunctionRequest
 
@@ -1651,7 +1652,7 @@ module Aws::CloudFront
     DistributionSummary.add_member(:default_cache_behavior, Shapes::ShapeRef.new(shape: DefaultCacheBehavior, required: true, location_name: "DefaultCacheBehavior"))
     DistributionSummary.add_member(:cache_behaviors, Shapes::ShapeRef.new(shape: CacheBehaviors, required: true, location_name: "CacheBehaviors"))
     DistributionSummary.add_member(:custom_error_responses, Shapes::ShapeRef.new(shape: CustomErrorResponses, required: true, location_name: "CustomErrorResponses"))
-    DistributionSummary.add_member(:comment, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Comment"))
+    DistributionSummary.add_member(:comment, Shapes::ShapeRef.new(shape: sensitiveStringType, required: true, location_name: "Comment"))
     DistributionSummary.add_member(:price_class, Shapes::ShapeRef.new(shape: PriceClass, required: true, location_name: "PriceClass"))
     DistributionSummary.add_member(:enabled, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Enabled"))
     DistributionSummary.add_member(:viewer_certificate, Shapes::ShapeRef.new(shape: ViewerCertificate, required: true, location_name: "ViewerCertificate"))
@@ -2046,7 +2047,7 @@ module Aws::CloudFront
     GetFieldLevelEncryptionResult[:payload] = :field_level_encryption
     GetFieldLevelEncryptionResult[:payload_member] = GetFieldLevelEncryptionResult.member(:field_level_encryption)
 
-    GetFunctionRequest.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Name"))
+    GetFunctionRequest.add_member(:name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "Name"))
     GetFunctionRequest.add_member(:stage, Shapes::ShapeRef.new(shape: FunctionStage, location: "querystring", location_name: "Stage"))
     GetFunctionRequest.struct_class = Types::GetFunctionRequest
 
@@ -3031,7 +3032,7 @@ module Aws::CloudFront
 
     PublicKeySummaryList.member = Shapes::ShapeRef.new(shape: PublicKeySummary, location_name: "PublicKeySummary")
 
-    PublishFunctionRequest.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Name"))
+    PublishFunctionRequest.add_member(:name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "Name"))
     PublishFunctionRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, required: true, location: "header", location_name: "If-Match"))
     PublishFunctionRequest.struct_class = Types::PublishFunctionRequest
 
@@ -3313,7 +3314,7 @@ module Aws::CloudFront
     StreamingLoggingConfig.add_member(:prefix, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Prefix"))
     StreamingLoggingConfig.struct_class = Types::StreamingLoggingConfig
 
-    StringSchemaConfig.add_member(:comment, Shapes::ShapeRef.new(shape: string, location_name: "Comment"))
+    StringSchemaConfig.add_member(:comment, Shapes::ShapeRef.new(shape: sensitiveStringType, location_name: "Comment"))
     StringSchemaConfig.add_member(:default_value, Shapes::ShapeRef.new(shape: ParameterValue, location_name: "DefaultValue"))
     StringSchemaConfig.add_member(:required, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Required"))
     StringSchemaConfig.struct_class = Types::StringSchemaConfig
@@ -3344,7 +3345,7 @@ module Aws::CloudFront
     TestFunctionFailed.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TestFunctionFailed.struct_class = Types::TestFunctionFailed
 
-    TestFunctionRequest.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Name"))
+    TestFunctionRequest.add_member(:name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "Name"))
     TestFunctionRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, required: true, location: "header", location_name: "If-Match"))
     TestFunctionRequest.add_member(:stage, Shapes::ShapeRef.new(shape: FunctionStage, location_name: "Stage"))
     TestFunctionRequest.add_member(:event_object, Shapes::ShapeRef.new(shape: FunctionEventObject, required: true, location_name: "EventObject"))
@@ -3679,7 +3680,7 @@ module Aws::CloudFront
     UpdateFieldLevelEncryptionProfileResult[:payload] = :field_level_encryption_profile
     UpdateFieldLevelEncryptionProfileResult[:payload_member] = UpdateFieldLevelEncryptionProfileResult.member(:field_level_encryption_profile)
 
-    UpdateFunctionRequest.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Name"))
+    UpdateFunctionRequest.add_member(:name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "Name"))
     UpdateFunctionRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, required: true, location: "header", location_name: "If-Match"))
     UpdateFunctionRequest.add_member(:function_config, Shapes::ShapeRef.new(shape: FunctionConfig, required: true, location_name: "FunctionConfig"))
     UpdateFunctionRequest.add_member(:function_code, Shapes::ShapeRef.new(shape: FunctionBlob, required: true, location_name: "FunctionCode"))
@@ -3818,7 +3819,7 @@ module Aws::CloudFront
     VerifyDnsConfigurationResult.struct_class = Types::VerifyDnsConfigurationResult
 
     ViewerCertificate.add_member(:cloud_front_default_certificate, Shapes::ShapeRef.new(shape: boolean, location_name: "CloudFrontDefaultCertificate"))
-    ViewerCertificate.add_member(:iam_certificate_id, Shapes::ShapeRef.new(shape: string, location_name: "IAMCertificateId"))
+    ViewerCertificate.add_member(:iam_certificate_id, Shapes::ShapeRef.new(shape: ServerCertificateId, location_name: "IAMCertificateId"))
     ViewerCertificate.add_member(:acm_certificate_arn, Shapes::ShapeRef.new(shape: string, location_name: "ACMCertificateArn"))
     ViewerCertificate.add_member(:ssl_support_method, Shapes::ShapeRef.new(shape: SSLSupportMethod, location_name: "SSLSupportMethod"))
     ViewerCertificate.add_member(:minimum_protocol_version, Shapes::ShapeRef.new(shape: MinimumProtocolVersion, location_name: "MinimumProtocolVersion"))
@@ -5585,6 +5586,12 @@ module Aws::CloudFront
         o.input = Shapes::ShapeRef.new(shape: ListOriginAccessControlsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListOriginAccessControlsResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_items",
+          tokens: {
+            "origin_access_control_list.next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_origin_request_policies, Seahorse::Model::Operation.new.tap do |o|

@@ -55,7 +55,7 @@ module Aws::CloudControlApi
   autoload :EndpointProvider, 'aws-sdk-cloudcontrolapi/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudcontrolapi/endpoints'
 
-  GEM_VERSION = '1.40.0'
+  GEM_VERSION = '1.41.0'
 
 end
 

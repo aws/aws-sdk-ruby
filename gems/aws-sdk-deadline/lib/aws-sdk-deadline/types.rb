@@ -5188,6 +5188,14 @@ module Aws::Deadline
     #   The date and time the resource started running.
     #   @return [Time]
     #
+    # @!attribute [rw] updated_at
+    #   The date and time the resource was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_by
+    #   The user or system that updated this resource.
+    #   @return [String]
+    #
     # @!attribute [rw] job_parameters
     #   The job parameters.
     #   @return [Hash<String,Types::JobParameter>]
@@ -5227,6 +5235,8 @@ module Aws::Deadline
       :created_at,
       :ended_at,
       :started_at,
+      :updated_at,
+      :updated_by,
       :job_parameters,
       :max_worker_count,
       :source_job_id)
@@ -8039,6 +8049,11 @@ module Aws::Deadline
     #   The Amazon EC2 market type.
     #   @return [Types::ServiceManagedEc2InstanceMarketOptions]
     #
+    # @!attribute [rw] vpc_configuration
+    #   The VPC configuration details for a service managed Amazon EC2
+    #   fleet.
+    #   @return [Types::VpcConfiguration]
+    #
     # @!attribute [rw] storage_profile_id
     #   The storage profile ID.
     #   @return [String]
@@ -8048,6 +8063,7 @@ module Aws::Deadline
     class ServiceManagedEc2FleetConfiguration < Struct.new(
       :instance_capabilities,
       :instance_market_options,
+      :vpc_configuration,
       :storage_profile_id)
       SENSITIVE = []
       include Aws::Structure
@@ -8836,6 +8852,10 @@ module Aws::Deadline
     #   The date and time the resource was created.
     #   @return [Time]
     #
+    # @!attribute [rw] created_by
+    #   The user or system that created this resource.
+    #   @return [String]
+    #
     # @!attribute [rw] started_at
     #   The date and time the resource started running.
     #   @return [Time]
@@ -8843,6 +8863,14 @@ module Aws::Deadline
     # @!attribute [rw] ended_at
     #   The date and time the resource ended running.
     #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the resource was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_by
+    #   The user or system that updated this resource.
+    #   @return [String]
     #
     # @!attribute [rw] parameter_space
     #   The parameters and combination expressions for the search.
@@ -8862,8 +8890,11 @@ module Aws::Deadline
       :task_run_status_counts,
       :task_failure_retry_count,
       :created_at,
+      :created_by,
       :started_at,
       :ended_at,
+      :updated_at,
+      :updated_by,
       :parameter_space)
       SENSITIVE = []
       include Aws::Structure
@@ -9253,6 +9284,14 @@ module Aws::Deadline
     #   The date and time the resource ended running.
     #   @return [Time]
     #
+    # @!attribute [rw] updated_at
+    #   The date and time the resource was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_by
+    #   The user or system that updated this resource.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/TaskSearchSummary AWS API Documentation
     #
     class TaskSearchSummary < Struct.new(
@@ -9265,7 +9304,9 @@ module Aws::Deadline
       :parameters,
       :failure_retry_count,
       :started_at,
-      :ended_at)
+      :ended_at,
+      :updated_at,
+      :updated_by)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -10421,6 +10462,21 @@ module Aws::Deadline
     class ValidationExceptionField < Struct.new(
       :name,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration options for a service managed fleet's VPC.
+    #
+    # @!attribute [rw] resource_configuration_arns
+    #   The ARNs of the VPC Lattice resource configurations attached to the
+    #   fleet.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/VpcConfiguration AWS API Documentation
+    #
+    class VpcConfiguration < Struct.new(
+      :resource_configuration_arns)
       SENSITIVE = []
       include Aws::Structure
     end

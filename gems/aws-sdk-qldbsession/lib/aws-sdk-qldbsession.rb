@@ -54,7 +54,7 @@ module Aws::QLDBSession
   autoload :EndpointProvider, 'aws-sdk-qldbsession/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-qldbsession/endpoints'
 
-  GEM_VERSION = '1.54.0'
+  GEM_VERSION = '1.55.0'
 
 end
 
