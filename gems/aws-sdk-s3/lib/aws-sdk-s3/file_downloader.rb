@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'pathname'
-require 'thread'
 require 'set'
 require 'tmpdir'
 
@@ -26,10 +25,7 @@ module Aws
         @mode = options[:mode] || 'auto'
         @thread_count = options[:thread_count] || THREAD_COUNT
         @chunk_size = options[:chunk_size]
-        @params = {
-          bucket: options[:bucket],
-          key: options[:key]
-        }
+        @params = { bucket: options[:bucket], key: options[:key] }
         @params[:version_id] = options[:version_id] if options[:version_id]
         @on_checksum_validated = options[:on_checksum_validated]
         @progress_callback = options[:progress_callback]
@@ -41,17 +37,12 @@ module Aws
           when 'auto' then multipart_download
           when 'single_request' then single_request
           when 'get_range'
-            if @chunk_size
-              resp = @client.head_object(@params)
-              multithreaded_get_by_ranges(resp.content_length, resp.etag)
-            else
-              msg = 'In :get_range mode, :chunk_size must be provided'
-              raise ArgumentError, msg
-            end
+            raise ArgumentError, 'In :get_range mode, :chunk_size must be provided' unless @chunk_size
+
+            resp = @client.head_object(@params)
+            multithreaded_get_by_ranges(resp.content_length, resp.etag)
           else
-            msg = "Invalid mode #{@mode} provided, "\
-                  'mode should be :single_request, :get_range or :auto'
-            raise ArgumentError, msg
+            raise ArgumentError, "Invalid mode #{@mode} provided, mode should be :single_request, :get_range or :auto"
           end
         end
       end
@@ -59,9 +50,9 @@ module Aws
       private
 
       def validate!
-        if @on_checksum_validated && !@on_checksum_validated.respond_to?(:call)
-          raise ArgumentError, 'on_checksum_validated must be callable'
-        end
+        return unless @on_checksum_validated && !@on_checksum_validated.respond_to?(:call)
+
+        raise ArgumentError, 'on_checksum_validated must be callable'
       end
 
       def multipart_download
@@ -108,13 +99,9 @@ module Aws
       end
 
       def compute_chunk(file_size)
-        if @chunk_size && @chunk_size > file_size
-          raise ArgumentError, ":chunk_size shouldn't exceed total file size."
-        else
-          @chunk_size || [
-            (file_size.to_f / MAX_PARTS).ceil, MIN_CHUNK_SIZE
-          ].max.to_i
-        end
+        raise ArgumentError, ":chunk_size shouldn't exceed total file size." if @chunk_size && @chunk_size > file_size
+
+        @chunk_size || [(file_size.to_f / MAX_PARTS).ceil, MIN_CHUNK_SIZE].max.to_i
       end
 
       def batches(chunks, mode)
@@ -130,12 +117,8 @@ module Aws
         while offset < file_size
           progress = offset + default_chunk_size
           progress = file_size if progress > file_size
-          range = "bytes=#{offset}-#{progress - 1}"
-          chunks << Part.new(
-            part_number: part_number,
-            size: (progress-offset),
-            params: @params.merge(range: range, if_match: etag)
-          )
+          params = @params.merge(range: "bytes=#{offset}-#{progress - 1}", if_match: etag)
+          chunks << Part.new(part_number: part_number, size: (progress - offset), params: params)
           part_number += 1
           offset = progress
         end
@@ -155,7 +138,7 @@ module Aws
         @thread_count.times do
           thread = Thread.new do
             begin
-              while part = pending.shift
+              while (part = pending.shift)
                 if progress
                   part.params[:on_chunk_received] =
                     proc do |_chunk, bytes, total|
@@ -169,10 +152,10 @@ module Aws
                 end
               end
               nil
-            rescue => error
+            rescue => e
               # keep other threads from downloading other parts
               pending.clear!
-              raise error
+              raise e
             end
           end
           threads << thread
@@ -181,8 +164,8 @@ module Aws
       end
 
       def write(resp)
-        range, _ = resp.content_range.split(' ').last.split('/')
-        head, _ = range.split('-').map {|s| s.to_i}
+        range = resp.content_range.split(' ').last.split('/').first
+        head = range.split('-').map(&:to_i).first
         File.write(@path, resp.body.read, head)
       end
 
@@ -190,11 +173,9 @@ module Aws
         params = @params.merge(response_target: @path)
         params[:on_chunk_received] = single_part_progress if @progress_callback
         resp = @client.get_object(params)
-
         return resp unless @on_checksum_validated
 
         @on_checksum_validated.call(resp.checksum_validated, resp) if resp.checksum_validated
-
         resp
       end
 
