@@ -207,7 +207,7 @@ module Aws
           end
 
           it 'defaults to THREAD_COUNT without the thread_count option' do
-            expect(Thread).to receive(:new).exactly(S3::MultipartFileUploader::THREAD_COUNT).times.and_return(double(value: nil))
+            expect(Thread).to receive(:new).exactly(S3::MultipartFileUploader::THREAD_COUNT).times.and_yield.and_return(double(value: nil))
             client.stub_responses(:create_multipart_upload, upload_id: 'id')
             client.stub_responses(:complete_multipart_upload)
             object.upload_file(one_hundred_seventeen_meg_file)
@@ -215,7 +215,7 @@ module Aws
 
           it 'respects the thread_count option' do
             custom_thread_count = 20
-            expect(Thread).to receive(:new).exactly(custom_thread_count).times.and_return(double(value: nil))
+            expect(Thread).to receive(:new).exactly(custom_thread_count).times.and_yield.and_return(double(value: nil))
             client.stub_responses(:create_multipart_upload, upload_id: 'id')
             client.stub_responses(:complete_multipart_upload)
             object.upload_file(one_hundred_seventeen_meg_file, thread_count: custom_thread_count)
@@ -249,7 +249,7 @@ module Aws
 
             expect do
               object.upload_file(one_hundred_seventeen_meg_file)
-            end.to raise_error('multipart upload failed: part 3 failed')
+            end.to raise_error(/multipart upload failed: part 3 failed/)
           end
 
           it 'reports when it is unable to abort a failed multipart upload' do
