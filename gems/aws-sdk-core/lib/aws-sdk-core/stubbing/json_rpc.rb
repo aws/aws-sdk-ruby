@@ -6,7 +6,7 @@ module Aws
       # @api private
       class JsonRpc
         def stub_data(config, operation, data)
-          http_resp = Smithy::Client::HTTP::Response.new
+          http_resp = Smithy::Client::Http::Response.new
           http_resp.status_code = 200
           http_resp.headers['Content-Type'] = content_type(config.service.traits)
           http_resp.headers['X-Amzn-RequestId'] = 'stubbed-request-id'
@@ -15,7 +15,7 @@ module Aws
         end
 
         def stub_error(config, error_code)
-          http_resp = Smithy::Client::HTTP::Response.new
+          http_resp = Smithy::Client::Http::Response.new
           http_resp.status_code = 400
           http_resp.headers['Content-Type'] = content_type(config.service.traits)
           http_resp.body = <<~JSON.strip

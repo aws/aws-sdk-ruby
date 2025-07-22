@@ -6,7 +6,7 @@ module Aws
       # @api private
       class RestJson
         def stub_data(config, operation, data)
-          http_resp = Smithy::Client::HTTP::Response.new
+          http_resp = Smithy::Client::Http::Response.new
           http_resp.status_code = 200
           http_resp.headers['X-Amzn-RequestId'] = 'stubbed-request-id'
           apply_status_code(http_resp, operation, data)
@@ -16,7 +16,7 @@ module Aws
         end
 
         def stub_error(_config, error_code)
-          http_resp = Smithy::Client::HTTP::Response.new
+          http_resp = Smithy::Client::Http::Response.new
           http_resp.status_code = 400
           http_resp.headers['Content-Type'] = 'application/json'
           http_resp.body = <<~JSON.strip

@@ -24,14 +24,14 @@ module Aws
           code = error_code(context, body)
           data = parse_error_data(context, body, code)
           [code, data]
-        rescue Smithy::JSON::ParseError
+        rescue Smithy::Json::ParseError
           [http_status_error_code(context), Smithy::Schema::EmptyStructure.new]
         end
 
         def error_code(context, body)
           code = context.http_response.headers['x-amzn-errortype']
           unless code
-            json = Smithy::JSON.load(body)
+            json = Smithy::Json.load(body)
             code = json['__type'] || json['code']
           end
           code ||= http_status_error_code(context)
