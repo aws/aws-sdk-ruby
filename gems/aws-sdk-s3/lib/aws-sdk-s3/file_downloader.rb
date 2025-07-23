@@ -7,6 +7,10 @@ require 'fileutils'
 
 module Aws
   module S3
+    # TODO - move to another location
+    # Error raised when file download operations fail
+    class FileDownloadError < StandardError; end
+
     # @api private
     class FileDownloader
 
@@ -121,6 +125,8 @@ module Aws
 
       def download_in_threads(pending, total_size)
         threads = []
+        max_requests = pending.count
+        total_requests = 0
         progress = MultipartProgress.new(pending, total_size, @progress_callback) if @progress_callback
         @thread_count.times do
           thread = Thread.new do
@@ -137,6 +143,7 @@ module Aws
                 if @on_checksum_validated && resp.checksum_validated
                   @on_checksum_validated.call(resp.checksum_validated, resp)
                 end
+                total_requests += 1
               end
               nil
             rescue => e
@@ -148,6 +155,8 @@ module Aws
           threads << thread
         end
         threads.map(&:value).compact
+
+        raise FileDownloadError, 'file download integrity checked failed' unless max_requests == total_requests
       end
 
       def write(resp)
@@ -183,6 +192,10 @@ module Aws
         def initialize(parts = [])
           @parts = parts
           @mutex = Mutex.new
+        end
+
+        def count
+          @mutex.synchronize { @parts.count }
         end
 
         def shift
