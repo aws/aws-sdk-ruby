@@ -156,8 +156,6 @@ module Aws
                       progress.call(part[:part_number], bytes)
                     end
                 end
-                # TODO: Validating content-length of a request against min part size
-                #  needs to happen in ContentLength plugin - maybe a custom plugin?
                 resp = @client.upload_part(part)
                 part[:body].close
                 completed_part = { etag: resp.etag, part_number: part[:part_number] }
