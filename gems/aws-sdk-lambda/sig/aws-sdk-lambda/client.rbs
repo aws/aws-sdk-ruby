@@ -30,6 +30,7 @@ module Aws::Lambda
       ?log_formatter: Smithy::Client::LogFormatter,
       ?log_level: Symbol,
       ?logger: Logger,
+      ?profile: String,
       ?raise_response_errors: bool,
       ?region: String,
       ?request_min_compression_size_bytes: Integer,
