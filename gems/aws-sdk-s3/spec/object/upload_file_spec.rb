@@ -163,7 +163,8 @@ module Aws
                   { checksum_crc32: 'checksum', etag: 'etag', part_number: 23 },
                   { checksum_crc32: 'checksum', etag: 'etag', part_number: 24 }
                 ]
-              }
+              },
+              mpu_object_size: one_hundred_seventeen_meg_file.size
             )
             object.upload_file(one_hundred_seventeen_meg_file, content_type: 'text/plain')
           end
