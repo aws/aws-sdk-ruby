@@ -34,7 +34,6 @@ module Aws
         @params = set_params(options)
         @on_checksum_validated = options[:on_checksum_validated]
         @progress_callback = options[:progress_callback]
-        @temp_file = @mutex.synchronize { Tempfile.new }
         validate!
 
         Aws::Plugins::UserAgent.metric('S3_TRANSFER') do
@@ -50,8 +49,6 @@ module Aws
             raise ArgumentError, "Invalid mode #{@mode} provided, mode should be :single_request, :get_range or :auto"
           end
         end
-        @temp_file.close
-        FileUtils.move(@temp_file.path, @path)
       end
 
       private
@@ -143,25 +140,23 @@ module Aws
                     end
                 end
                 resp = @client.get_object(part.params)
-                range = resp.content_range.split(' ').last.split('/').first
 
                 if part.params[:range]
+                  range = resp.content_range.split(' ').last.split('/').first
                   expected_range = part.params[:range].split('=').last
                   raise FileDownloadError, 'file download integrity checked failed' unless expected_range == range
                 end
 
-                write(resp.body, range)
+                write(resp)
                 if @on_checksum_validated && resp.checksum_validated
                   @on_checksum_validated.call(resp.checksum_validated, resp)
                 end
-                total_requests += 1
+                @mutex.synchronize { total_requests += 1 }
               end
               nil
             rescue => e
               # keep other threads from downloading other parts
               pending.clear!
-              @temp_file.close
-              @temp_file.unlink
               raise e
             end
           end
@@ -172,12 +167,10 @@ module Aws
         raise FileDownloadError, 'file download integrity checked failed' unless max_requests == total_requests
       end
 
-      def write(body, range)
+      def write(resp)
+        range = resp.content_range.split(' ').last.split('/').first
         head = range.split('-').map(&:to_i).first
-        @mutex.synchronize do
-          @temp_file.seek(head)
-          @temp_file.write(body.read)
-        end
+        File.write(@path, resp.body.read, head)
       end
 
       def single_request
