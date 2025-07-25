@@ -370,6 +370,12 @@ module Aws::Omics
       attr_accessor request_id: ::String
       attr_accessor accelerators: ("GPU")
       attr_accessor storage_type: ("STATIC" | "DYNAMIC")
+      attr_accessor readme_markdown: ::String
+      attr_accessor parameter_template_path: ::String
+      attr_accessor readme_path: ::String
+      attr_accessor definition_repository: Types::DefinitionRepository
+      attr_accessor workflow_bucket_owner_id: ::String
+      attr_accessor readme_uri: ::String
       SENSITIVE: []
     end
 
@@ -397,6 +403,11 @@ module Aws::Omics
       attr_accessor storage_capacity: ::Integer
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor workflow_bucket_owner_id: ::String
+      attr_accessor readme_markdown: ::String
+      attr_accessor parameter_template_path: ::String
+      attr_accessor readme_path: ::String
+      attr_accessor definition_repository: Types::DefinitionRepository
+      attr_accessor readme_uri: ::String
       SENSITIVE: []
     end
 
@@ -407,6 +418,23 @@ module Aws::Omics
       attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETED" | "FAILED" | "INACTIVE")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor uuid: ::String
+      SENSITIVE: []
+    end
+
+    class DefinitionRepository
+      attr_accessor connection_arn: ::String
+      attr_accessor full_repository_id: ::String
+      attr_accessor source_reference: Types::SourceReference
+      attr_accessor exclude_file_patterns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DefinitionRepositoryDetails
+      attr_accessor connection_arn: ::String
+      attr_accessor full_repository_id: ::String
+      attr_accessor source_reference: Types::SourceReference
+      attr_accessor provider_type: ::String
+      attr_accessor provider_endpoint: ::String
       SENSITIVE: []
     end
 
@@ -1007,7 +1035,7 @@ module Aws::Omics
     class GetWorkflowRequest
       attr_accessor id: ::String
       attr_accessor type: ("PRIVATE" | "READY2RUN")
-      attr_accessor export: ::Array[("DEFINITION")]
+      attr_accessor export: ::Array[("DEFINITION" | "README")]
       attr_accessor workflow_owner_id: ::String
       SENSITIVE: []
     end
@@ -1032,6 +1060,9 @@ module Aws::Omics
       attr_accessor accelerators: ("GPU")
       attr_accessor storage_type: ("STATIC" | "DYNAMIC")
       attr_accessor uuid: ::String
+      attr_accessor readme: ::String
+      attr_accessor definition_repository_details: Types::DefinitionRepositoryDetails
+      attr_accessor readme_path: ::String
       SENSITIVE: []
     end
 
@@ -1039,7 +1070,7 @@ module Aws::Omics
       attr_accessor workflow_id: ::String
       attr_accessor version_name: ::String
       attr_accessor type: ("PRIVATE" | "READY2RUN")
-      attr_accessor export: ::Array[("DEFINITION")]
+      attr_accessor export: ::Array[("DEFINITION" | "README")]
       attr_accessor workflow_owner_id: ::String
       SENSITIVE: []
     end
@@ -1065,6 +1096,9 @@ module Aws::Omics
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor uuid: ::String
       attr_accessor workflow_bucket_owner_id: ::String
+      attr_accessor readme: ::String
+      attr_accessor definition_repository_details: Types::DefinitionRepositoryDetails
+      attr_accessor readme_path: ::String
       SENSITIVE: []
     end
 
@@ -1775,6 +1809,12 @@ module Aws::Omics
       SENSITIVE: []
     end
 
+    class SourceReference
+      attr_accessor type: ("BRANCH" | "TAG" | "COMMIT")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class SseConfig
       attr_accessor type: ("KMS")
       attr_accessor key_arn: ::String
@@ -2113,6 +2153,7 @@ module Aws::Omics
       attr_accessor description: ::String
       attr_accessor storage_type: ("STATIC" | "DYNAMIC")
       attr_accessor storage_capacity: ::Integer
+      attr_accessor readme_markdown: ::String
       SENSITIVE: []
     end
 
@@ -2122,6 +2163,7 @@ module Aws::Omics
       attr_accessor description: ::String
       attr_accessor storage_type: ("STATIC" | "DYNAMIC")
       attr_accessor storage_capacity: ::Integer
+      attr_accessor readme_markdown: ::String
       SENSITIVE: []
     end
 

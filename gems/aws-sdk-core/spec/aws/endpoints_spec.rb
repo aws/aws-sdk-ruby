@@ -47,9 +47,8 @@ module Aws
       )
     end
 
-    let(:client) do
-      endpoints_service.const_get(:Client).new(stub_responses: true)
-    end
+    let(:client_options) { { stub_responses: true } }
+    let(:client) { endpoints_service.const_get(:Client).new(client_options) }
 
     let(:endpoint) do
       Aws::Endpoints::Endpoint.new(
@@ -114,13 +113,6 @@ module Aws
           end
 
           context 'sigv4a defaults' do
-            before do
-              stub_const(
-                'Aws::Endpoints::SUPPORTED_AUTH_TRAITS',
-                Aws::Endpoints::SUPPORTED_AUTH_TRAITS + ['aws.auth#sigv4a']
-              )
-            end
-
             let(:auth) { ['aws.auth#sigv4a'] }
 
             it 'signs with sigv4' do
@@ -180,8 +172,8 @@ module Aws
           context 'unsupported' do
             before do
               stub_const(
-                'Aws::Endpoints::SUPPORTED_AUTH_TRAITS',
-                Aws::Endpoints::SUPPORTED_AUTH_TRAITS - ['aws.auth#sigv4a']
+                'Aws::Endpoints::SUPPORTED_MODELED_AUTH',
+                Aws::Endpoints::SUPPORTED_MODELED_AUTH - ['aws.auth#sigv4a']
               )
             end
 
@@ -206,14 +198,60 @@ module Aws
           context 'resolution order' do
             before do
               stub_const(
-                'Aws::Endpoints::SUPPORTED_AUTH_TRAITS',
-                Aws::Endpoints::SUPPORTED_AUTH_TRAITS - ['aws.auth#sigv4a']
+                'Aws::Endpoints::SUPPORTED_MODELED_AUTH',
+                Aws::Endpoints::SUPPORTED_MODELED_AUTH - ['aws.auth#sigv4a']
               )
             end
 
-            let(:auth) { ['aws.auth#sigv4a', 'aws.auth#sigv4'] }
+            let(:auth) { %w[aws.auth#sigv4a aws.auth#sigv4] }
 
             it 'prefers the first supported auth trait' do
+              expect_auth({ 'name' => 'sigv4' })
+              client.operation
+            end
+          end
+
+          context 'auth scheme preference config' do
+            let(:auth) { %w[aws.auth#sigv4 aws.auth#sigv4a smithy.api#httpBearerAuth smithy.api#noAuth] }
+
+            it 'selects the first supported auth scheme' do
+              client.config.auth_scheme_preference = ['sigv4a', 'httpBearerAuth', 'noAuth']
+              expect_auth({ 'name' => 'sigv4a' })
+              client.operation
+            end
+
+            it 'can prefer sigv4' do
+              client.config.auth_scheme_preference = ['sigv4']
+              expect_auth({ 'name' => 'sigv4' })
+              client.operation
+            end
+
+            it 'can prefer sigv4a' do
+              client.config.auth_scheme_preference = ['sigv4a']
+              expect_auth({ 'name' => 'sigv4a' })
+              client.operation
+            end
+
+            it 'can prefer httpBearerAuth' do
+              client.config.auth_scheme_preference = ['httpBearerAuth']
+              expect_auth({ 'name' => 'bearer' })
+              client.operation
+            end
+
+            it 'can prefer noAuth' do
+              client.config.auth_scheme_preference = ['noAuth']
+              expect_auth({ 'name' => 'none' })
+              client.operation
+            end
+
+            it 'ignores unsupported auth schemes' do
+              client.config.auth_scheme_preference = ['unknown', 'sigv4']
+              expect_auth({ 'name' => 'sigv4' })
+              client.operation
+            end
+
+            it 'falls back to model when auth scheme preference has unknowns' do
+              client.config.auth_scheme_preference = ['unknown']
               expect_auth({ 'name' => 'sigv4' })
               client.operation
             end
@@ -357,6 +395,59 @@ module Aws
           it 'allows config to override auth scheme' do
             client.config.sigv4a_signing_region_set = ['config-override']
             expect_auth({ 'name' => 'sigv4a', 'signingName' => 'override', 'signingRegionSet' => ['config-override'] })
+            client.operation
+          end
+        end
+
+        context 'auth scheme preference config' do
+          let(:auth_schemes) do
+            [
+              { 'name' => 'sigv4' },
+              { 'name' => 'sigv4a' },
+              { 'name' => 'bearer' },
+              { 'name' => 'none' }
+            ]
+          end
+
+          it 'selects the first supported auth scheme' do
+            client.config.auth_scheme_preference = ['sigv4a', 'httpBearerAuth', 'noAuth']
+            expect_auth({ 'name' => 'sigv4a' })
+            client.operation
+          end
+
+          it 'can prefer sigv4' do
+            client.config.auth_scheme_preference = ['sigv4']
+            expect_auth({ 'name' => 'sigv4' })
+            client.operation
+          end
+
+          it 'can prefer sigv4a' do
+            client.config.auth_scheme_preference = ['sigv4a']
+            expect_auth({ 'name' => 'sigv4a' })
+            client.operation
+          end
+
+          it 'can prefer httpBearerAuth' do
+            client.config.auth_scheme_preference = ['httpBearerAuth']
+            expect_auth({ 'name' => 'bearer' })
+            client.operation
+          end
+
+          it 'can prefer noAuth' do
+            client.config.auth_scheme_preference = ['noAuth']
+            expect_auth({ 'name' => 'none' })
+            client.operation
+          end
+
+          it 'ignores unsupported auth schemes' do
+            client.config.auth_scheme_preference = ['unknown', 'sigv4']
+            expect_auth({ 'name' => 'sigv4' })
+            client.operation
+          end
+
+          it 'falls back to model when auth scheme preference has unknowns' do
+            client.config.auth_scheme_preference = ['unknown']
+            expect_auth({ 'name' => 'sigv4' })
             client.operation
           end
         end

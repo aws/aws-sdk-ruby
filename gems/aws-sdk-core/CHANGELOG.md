@@ -3,6 +3,22 @@ Unreleased Changes
 
 * Feature - Set the default `retry_mode` to `standard` for all clients.
 
+3.227.0 (2025-07-21)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Support an auth scheme signing preference list using `ENV['AWS_AUTH_SCHEME_PREFERENCE']` or `auth_scheme_preference` in shared configuration.
+
+* Feature - Support metric tracking for Bedrock Bearer tokens.
+
+3.226.3 (2025-07-17)
+------------------
+
 * Issue - Skip `Aws::InstanceProfileCredentials` instantiation when `ENV['AWS_EC2_METADATA_DISABLED']` is set to `true` in the credential resolution chain.
 
 * Issue - Refactor `InstanceProfileCredentials` to improve code clarity and documentation. 

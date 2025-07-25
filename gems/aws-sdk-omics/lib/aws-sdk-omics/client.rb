@@ -95,7 +95,7 @@ module Aws::Omics
     #     class name or an instance of a plugin class.
     #
     #   @option options [required, Aws::CredentialProvider] :credentials
-    #     Your AWS credentials. This can be an instance of any one of the
+    #     Your AWS credentials used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
@@ -128,18 +128,23 @@ module Aws::Omics
     #     locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
+    #
     #     * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
     #       `:account_id` options.
-    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
-    #       ENV['AWS_SESSION_TOKEN'], and ENV['AWS_ACCOUNT_ID']
+    #
+    #     * `ENV['AWS_ACCESS_KEY_ID']`, `ENV['AWS_SECRET_ACCESS_KEY']`,
+    #       `ENV['AWS_SESSION_TOKEN']`, and `ENV['AWS_ACCOUNT_ID']`.
+    #
     #     * `~/.aws/credentials`
+    #
     #     * `~/.aws/config`
+    #
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
     #       enable retries and extended timeouts. Instance profile credential
-    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
-    #       to true.
+    #       fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
+    #       to `true`.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -166,6 +171,11 @@ module Aws::Omics
     #     until there is sufficent client side capacity to retry the request.
     #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
     #     not retry instead of sleeping.
+    #
+    #   @option options [Array<String>] :auth_scheme_preference
+    #     A list of preferred authentication schemes to use when making a request. Supported values are:
+    #     `sigv4`, `sigv4a`, `httpBearerAuth`, and `noAuth`. When set using `ENV['AWS_AUTH_SCHEME_PREFERENCE']` or in
+    #     shared config as `auth_scheme_preference`, the value should be a comma-separated list.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -253,8 +263,8 @@ module Aws::Omics
     #     4 times. Used in `standard` and `adaptive` retry modes.
     #
     #   @option options [String] :profile ("default")
-    #     Used when loading credentials from the shared credentials file
-    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
+    #     When not specified, 'default' is used.
     #
     #   @option options [String] :request_checksum_calculation ("when_supported")
     #     Determines when a checksum will be calculated for request payloads. Values are:
@@ -367,7 +377,7 @@ module Aws::Omics
     #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
-    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     Your Bearer token used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
@@ -580,7 +590,9 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Cancels a run.
+    # Cancels a run using its ID and returns a response with no body if the
+    # operation is successful. To confirm that the run has been cancelled,
+    # use the `ListRuns` API operation to check that it is no longer listed.
     #
     # @option params [required, String] :id
     #   The run's ID.
@@ -989,19 +1001,20 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # You can create a run cache to save the task outputs from completed
-    # tasks in a run for a private workflow. Subsequent runs use the task
-    # outputs from the cache, rather than computing the task outputs again.
-    # You specify an Amazon S3 location where Amazon Web Services
+    # Creates a run cache to store and reference task outputs from completed
+    # private runs. Specify an Amazon S3 location where Amazon Web Services
     # HealthOmics saves the cached data. This data must be immediately
-    # accessible (not in an archived state).
+    # accessible and not in an archived state. You can save intermediate
+    # task files to a run cache if they are declared as task outputs in the
+    # workflow definition file.
     #
-    # For more information, see [Creating a run cache][1] in the Amazon Web
-    # Services HealthOmics User Guide.
+    # For more information, see [Call caching][1] and [Creating a run
+    # cache][2] in the *Amazon Web Services HealthOmics User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/omics/latest/dev/workflow-cache-create.html
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/workflows-call-caching.html
+    # [2]: https://docs.aws.amazon.com/omics/latest/dev/workflow-cache-create.html
     #
     # @option params [String] :cache_behavior
     #   Default cache behavior for runs that use this cache. Supported values
@@ -1022,8 +1035,8 @@ module Aws::Omics
     #   CACHE\_ON\_FAILURE. When you start a run that uses this cache, you can
     #   override the default cache behavior.
     #
-    #   For more information, see [Run cache behavior][1] in the Amazon Web
-    #   Services HealthOmics User Guide.
+    #   For more information, see [Run cache behavior][1] in the *Amazon Web
+    #   Services HealthOmics User Guide*.
     #
     #
     #
@@ -1093,8 +1106,9 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # You can optionally create a run group to limit the compute resources
-    # for the runs that you add to the group.
+    # Creates a run group to limit the compute resources for the runs that
+    # are added to the group. Returns an ARN, ID, and tags for the run
+    # group.
     #
     # @option params [String] :name
     #   A name for the group.
@@ -1369,67 +1383,99 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Creates a private workflow.Private workflows depend on a variety of
-    # resources that you create and configure before creating the workflow:
-    #
-    # * *Input data*: Input data for the workflow, stored in an S3 bucket or
-    #   a Amazon Web Services HealthOmics sequence store.
+    # Creates a private workflow. Before you create a private workflow, you
+    # must create and configure these required resources:
     #
     # * *Workflow definition files*: Define your workflow in one or more
     #   workflow definition files, written in WDL, Nextflow, or CWL. The
     #   workflow definition specifies the inputs and outputs for runs that
     #   use the workflow. It also includes specifications for the runs and
     #   run tasks for your workflow, including compute and memory
-    #   requirements.
+    #   requirements. The workflow definition file must be in .zip format.
     #
-    # * *Parameter template files*: Define run parameters using a parameter
-    #   template file (written in JSON).
+    # * (Optional) *Parameter template*: You can create a parameter template
+    #   file that defines the run parameters, or Amazon Web Services
+    #   HealthOmics can generate the parameter template for you.
     #
     # * *ECR container images*: Create one or more container images for the
     #   workflow. Store the images in a private ECR repository.
     #
-    # * (Optional) *Sentieon licenses*: Request a Sentieon license if you
-    #   plan to use Sentieon software in a private workflow.
+    # * (Optional) *Sentieon licenses*: Request a Sentieon license if using
+    #   the Sentieon software in a private workflow.
     #
     # For more information, see [Creating or updating a private workflow in
-    # Amazon Web Services HealthOmics][1] in the Amazon Web Services
-    # HealthOmics User Guide.
+    # Amazon Web Services HealthOmics][1] in the *Amazon Web Services
+    # HealthOmics User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/omics/latest/dev/creating-private-workflows.html
     #
     # @option params [String] :name
-    #   A name for the workflow.
+    #   Name (optional but highly recommended) for the workflow to locate
+    #   relevant information in the CloudWatch logs and Amazon Web Services
+    #   HealthOmics console.
     #
     # @option params [String] :description
     #   A description for the workflow.
     #
     # @option params [String] :engine
-    #   The workflow engine for the workflow.
+    #   The workflow engine for the workflow. This is only required if you
+    #   have workflow definition files from more than one engine in your zip
+    #   file. Otherwise, the service can detect the engine automatically from
+    #   your workflow definition.
     #
     # @option params [String, StringIO, File] :definition_zip
-    #   A ZIP archive for the workflow.
+    #   A ZIP archive containing the main workflow definition file and
+    #   dependencies that it imports for the workflow. You can use a file with
+    #   a ://fileb prefix instead of the Base64 string. For more information,
+    #   see [Workflow definition requirements][1] in the *Amazon Web Services
+    #   HealthOmics User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/workflow-defn-requirements.html
     #
     # @option params [String] :definition_uri
-    #   The URI of a definition for the workflow.
+    #   The S3 URI of a definition for the workflow. The S3 bucket must be in
+    #   the same region as the workflow.
     #
     # @option params [String] :main
-    #   The path of the main definition file for the workflow.
+    #   The path of the main definition file for the workflow. This parameter
+    #   is not required if the ZIP archive contains only one workflow
+    #   definition file, or if the main definition file is named “main”. An
+    #   example path is: `workflow-definition/main-file.wdl`.
     #
     # @option params [Hash<String,Types::WorkflowParameter>] :parameter_template
-    #   A parameter template for the workflow.
+    #   A parameter template for the workflow. If this field is blank, Amazon
+    #   Web Services HealthOmics will automatically parse the parameter
+    #   template values from your workflow definition file. To override these
+    #   service generated default values, provide a parameter template. To
+    #   view an example of a parameter template, see [Parameter template
+    #   files][1] in the *Amazon Web Services HealthOmics User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/parameter-templates.html
     #
     # @option params [Integer] :storage_capacity
     #   The default static storage capacity (in gibibytes) for runs that use
-    #   this workflow or workflow version.
+    #   this workflow or workflow version. The `storageCapacity` can be
+    #   overwritten at run time. The storage capacity is not required for runs
+    #   with a `DYNAMIC` storage type.
     #
     # @option params [Hash<String,String>] :tags
-    #   Tags for the workflow.
+    #   Tags for the workflow. You can define up to 50 tags for the workflow.
+    #   For more information, see [Adding a tag][1] in the *Amazon Web
+    #   Services HealthOmics User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/add-a-tag.html
     #
     # @option params [required, String] :request_id
-    #   To ensure that requests don't run multiple times, specify a unique ID
-    #   for each request.
+    #   An idempotency token to ensure that duplicate workflows are not
+    #   created when Amazon Web Services HealthOmics submits retry requests.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1438,16 +1484,53 @@ module Aws::Omics
     #   The computational accelerator specified to run the workflow.
     #
     # @option params [String] :storage_type
-    #   The default storage type for runs that use this workflow. STATIC
-    #   storage allocates a fixed amount of storage. DYNAMIC storage
+    #   The default storage type for runs that use this workflow. The
+    #   `storageType` can be overridden at run time. `DYNAMIC` storage
     #   dynamically scales the storage up or down, based on file system
-    #   utilization. For more information about static and dynamic storage,
-    #   see [Running workflows][1] in the *Amazon Web Services HealthOmics
-    #   User Guide*.
+    #   utilization. `STATIC` storage allocates a fixed amount of storage. For
+    #   more information about dynamic and static storage types, see [Run
+    #   storage types][1] in the *Amazon Web Services HealthOmics User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html
+    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/workflows-run-types.html
+    #
+    # @option params [String] :readme_markdown
+    #   The markdown content for the workflow's README file. This provides
+    #   documentation and usage information for users of the workflow.
+    #
+    # @option params [String] :parameter_template_path
+    #   The path to the workflow parameter template JSON file within the
+    #   repository. This file defines the input parameters for runs that use
+    #   this workflow. If not specified, the workflow will be created without
+    #   a parameter template.
+    #
+    # @option params [String] :readme_path
+    #   The path to the workflow README markdown file within the repository.
+    #   This file provides documentation and usage information for the
+    #   workflow. If not specified, the `README.md` file from the root
+    #   directory of the repository will be used.
+    #
+    # @option params [Types::DefinitionRepository] :definition_repository
+    #   The repository information for the workflow definition. This allows
+    #   you to source your workflow definition directly from a code
+    #   repository.
+    #
+    # @option params [String] :workflow_bucket_owner_id
+    #   The Amazon Web Services account ID of the expected owner of the S3
+    #   bucket that contains the workflow definition. If not specified, the
+    #   service skips the validation.
+    #
+    # @option params [String] :readme_uri
+    #   The S3 URI of the README file for the workflow. This file provides
+    #   documentation and usage information for the workflow. Requirements
+    #   include:
+    #
+    #   * The S3 URI must begin with `s3://USER-OWNED-BUCKET/`
+    #
+    #   * The requester must have access to the S3 bucket and object.
+    #
+    #   * The max README content length is 500 KiB.
     #
     # @return [Types::CreateWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1479,6 +1562,20 @@ module Aws::Omics
     #     request_id: "WorkflowRequestId", # required
     #     accelerators: "GPU", # accepts GPU
     #     storage_type: "STATIC", # accepts STATIC, DYNAMIC
+    #     readme_markdown: "ReadmeMarkdown",
+    #     parameter_template_path: "ParameterTemplatePath",
+    #     readme_path: "ReadmePath",
+    #     definition_repository: {
+    #       connection_arn: "ConnectionArn", # required
+    #       full_repository_id: "FullRepositoryId", # required
+    #       source_reference: {
+    #         type: "BRANCH", # required, accepts BRANCH, TAG, COMMIT
+    #         value: "SourceReferenceValue", # required
+    #       },
+    #       exclude_file_patterns: ["String"],
+    #     },
+    #     workflow_bucket_owner_id: "WorkflowBucketOwnerId",
+    #     readme_uri: "S3UriForObject",
     #   })
     #
     # @example Response structure
@@ -1515,7 +1612,7 @@ module Aws::Omics
     #  </note>
     #
     # For more information, see [Workflow versioning in Amazon Web Services
-    # HealthOmics][1] in the Amazon Web Services HealthOmics User Guide.
+    # HealthOmics][1] in the *Amazon Web Services HealthOmics User Guide*.
     #
     #
     #
@@ -1591,6 +1688,39 @@ module Aws::Omics
     #   workflow definition. You need to specify this parameter if your
     #   account is not the bucket owner.
     #
+    # @option params [String] :readme_markdown
+    #   The markdown content for the workflow version's README file. This
+    #   provides documentation and usage information for users of this
+    #   specific workflow version.
+    #
+    # @option params [String] :parameter_template_path
+    #   The path to the workflow version parameter template JSON file within
+    #   the repository. This file defines the input parameters for runs that
+    #   use this workflow version. If not specified, the workflow version will
+    #   be created without a parameter template.
+    #
+    # @option params [String] :readme_path
+    #   The path to the workflow version README markdown file within the
+    #   repository. This file provides documentation and usage information for
+    #   the workflow. If not specified, the `README.md` file from the root
+    #   directory of the repository will be used.
+    #
+    # @option params [Types::DefinitionRepository] :definition_repository
+    #   The repository information for the workflow version definition. This
+    #   allows you to source your workflow version definition directly from a
+    #   code repository.
+    #
+    # @option params [String] :readme_uri
+    #   The S3 URI of the README file for the workflow version. This file
+    #   provides documentation and usage information for the workflow version.
+    #   Requirements include:
+    #
+    #   * The S3 URI must begin with `s3://USER-OWNED-BUCKET/`
+    #
+    #   * The requester must have access to the S3 bucket and object.
+    #
+    #   * The max README content length is 500 KiB.
+    #
     # @return [Types::CreateWorkflowVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkflowVersionResponse#arn #arn} => String
@@ -1624,6 +1754,19 @@ module Aws::Omics
     #       "TagKey" => "TagValue",
     #     },
     #     workflow_bucket_owner_id: "WorkflowBucketOwnerId",
+    #     readme_markdown: "ReadmeMarkdown",
+    #     parameter_template_path: "ParameterTemplatePath",
+    #     readme_path: "ReadmePath",
+    #     definition_repository: {
+    #       connection_arn: "ConnectionArn", # required
+    #       full_repository_id: "FullRepositoryId", # required
+    #       source_reference: {
+    #         type: "BRANCH", # required, accepts BRANCH, TAG, COMMIT
+    #         value: "SourceReferenceValue", # required
+    #       },
+    #       exclude_file_patterns: ["String"],
+    #     },
+    #     readme_uri: "S3UriForObject",
     #   })
     #
     # @example Response structure
@@ -1765,7 +1908,19 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Deletes a workflow run.
+    # Deletes a run and returns a response with no body if the operation is
+    # successful. You can only delete a run that has reached a `COMPLETED`,
+    # `FAILED`, or `CANCELLED` stage. A completed run has delivered an
+    # output, or was cancelled and resulted in no output. When you delete a
+    # run, only the metadata associated with the run is deleted. The run
+    # outputs remain in Amazon S3 and logs remain in CloudWatch.
+    #
+    # To verify that the workflow is deleted:
+    #
+    # * Use `ListRuns` to confirm the workflow no longer appears in the
+    #   list.
+    #
+    # * Use `GetRun` to verify the workflow cannot be found.
     #
     # @option params [required, String] :id
     #   The run's ID.
@@ -1787,14 +1942,15 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Delete a run cache. This action removes the cache metadata stored in
-    # the service account, but doesn't delete the data in Amazon S3. You
+    # Deletes a run cache and returns a response with no body if the
+    # operation is successful. This action removes the cache metadata stored
+    # in the service account, but does not delete the data in Amazon S3. You
     # can access the cache data in Amazon S3, for inspection or to
     # troubleshoot issues. You can remove old cache data using standard S3
     # `Delete` operations.
     #
-    # For more information, see [Deleting a run cache][1] in the Amazon Web
-    # Services HealthOmics User Guide.
+    # For more information, see [Deleting a run cache][1] in the *Amazon Web
+    # Services HealthOmics User Guide*.
     #
     #
     #
@@ -1820,7 +1976,15 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Deletes a workflow run group.
+    # Deletes a run group and returns a response with no body if the
+    # operation is successful.
+    #
+    # To verify that the run group is deleted:
+    #
+    # * Use `ListRunGroups` to confirm the workflow no longer appears in the
+    #   list.
+    #
+    # * Use `GetRunGroup` to verify the workflow cannot be found.
     #
     # @option params [required, String] :id
     #   The run group's ID.
@@ -1948,7 +2112,15 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Deletes a workflow.
+    # Deletes a workflow by specifying its ID. No response is returned if
+    # the deletion is successful.
+    #
+    # To verify that the workflow is deleted:
+    #
+    # * Use `ListWorkflows` to confirm the workflow no longer appears in the
+    #   list.
+    #
+    # * Use `GetWorkflow` to verify the workflow cannot be found.
     #
     # @option params [required, String] :id
     #   The workflow's ID.
@@ -1974,7 +2146,7 @@ module Aws::Omics
     # affect any ongoing runs that are using the workflow version.
     #
     # For more information, see [Workflow versioning in Amazon Web Services
-    # HealthOmics][1] in the Amazon Web Services HealthOmics User Guide.
+    # HealthOmics][1] in the *Amazon Web Services HealthOmics User Guide*.
     #
     #
     #
@@ -2707,20 +2879,18 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Gets information about a workflow run.
+    # Gets detailed information about a specific run using its ID.
     #
-    # If a workflow is shared with you, you cannot export information about
-    # the run.
-    #
-    # Amazon Web Services HealthOmics stores a fixed number of runs that are
-    # available to the console and API. If GetRun doesn't return the
-    # requested run, you can find run logs for all runs in the CloudWatch
-    # logs. For more information about viewing the run logs, see [CloudWatch
-    # logs][1] in the *in the Amazon Web Services HealthOmics User Guide*.
+    # Amazon Web Services HealthOmics stores a configurable number of runs,
+    # as determined by service limits, that are available to the console and
+    # API. If `GetRun` does not return the requested run, you can find all
+    # run logs in the CloudWatch logs. For more information about viewing
+    # the run logs, see [CloudWatch logs][1] in the *Amazon Web Services
+    # HealthOmics User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/omics/latest/dev/cloudwatch-logs.html
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/monitoring-cloudwatch-logs.html
     #
     # @option params [required, String] :id
     #   The run's ID.
@@ -2830,15 +3000,16 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Retrieve the details for the specified run cache.
+    # Retrieves detailed information about the specified run cache using its
+    # ID.
     #
     # For more information, see [Call caching for Amazon Web Services
-    # HealthOmics runs][1] in the Amazon Web Services HealthOmics User
-    # Guide.
+    # HealthOmics runs][1] in the *Amazon Web Services HealthOmics User
+    # Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/omics/latest/dev/workflow-call-caching.html
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/workflows-call-caching.html
     #
     # @option params [required, String] :id
     #   The identifier of the run cache to retrieve.
@@ -2885,7 +3056,7 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Gets information about a workflow run group.
+    # Gets information about a run group and returns its metadata.
     #
     # @option params [required, String] :id
     #   The group's ID.
@@ -2930,7 +3101,7 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Gets information about a workflow run task.
+    # Gets detailed information about a run task using its ID.
     #
     # @option params [required, String] :id
     #   The workflow run ID.
@@ -3240,9 +3411,17 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Gets information about a workflow.
+    # Gets all information about a workflow using its ID.
     #
     # If a workflow is shared with you, you cannot export the workflow.
+    #
+    # For more information about your workflow status, see [Verify the
+    # workflow status][1] in the *Amazon Web Services HealthOmics User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/using-get-workflow.html
     #
     # @option params [required, String] :id
     #   The workflow's ID.
@@ -3277,13 +3456,16 @@ module Aws::Omics
     #   * {Types::GetWorkflowResponse#accelerators #accelerators} => String
     #   * {Types::GetWorkflowResponse#storage_type #storage_type} => String
     #   * {Types::GetWorkflowResponse#uuid #uuid} => String
+    #   * {Types::GetWorkflowResponse#readme #readme} => String
+    #   * {Types::GetWorkflowResponse#definition_repository_details #definition_repository_details} => Types::DefinitionRepositoryDetails
+    #   * {Types::GetWorkflowResponse#readme_path #readme_path} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_workflow({
     #     id: "WorkflowId", # required
     #     type: "PRIVATE", # accepts PRIVATE, READY2RUN
-    #     export: ["DEFINITION"], # accepts DEFINITION
+    #     export: ["DEFINITION"], # accepts DEFINITION, README
     #     workflow_owner_id: "WorkflowOwnerId",
     #   })
     #
@@ -3312,6 +3494,14 @@ module Aws::Omics
     #   resp.accelerators #=> String, one of "GPU"
     #   resp.storage_type #=> String, one of "STATIC", "DYNAMIC"
     #   resp.uuid #=> String
+    #   resp.readme #=> String
+    #   resp.definition_repository_details.connection_arn #=> String
+    #   resp.definition_repository_details.full_repository_id #=> String
+    #   resp.definition_repository_details.source_reference.type #=> String, one of "BRANCH", "TAG", "COMMIT"
+    #   resp.definition_repository_details.source_reference.value #=> String
+    #   resp.definition_repository_details.provider_type #=> String
+    #   resp.definition_repository_details.provider_endpoint #=> String
+    #   resp.readme_path #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3329,7 +3519,7 @@ module Aws::Omics
 
     # Gets information about a workflow version. For more information, see
     # [Workflow versioning in Amazon Web Services HealthOmics][1] in the
-    # Amazon Web Services HealthOmics User Guide.
+    # *Amazon Web Services HealthOmics User Guide*.
     #
     #
     #
@@ -3372,6 +3562,9 @@ module Aws::Omics
     #   * {Types::GetWorkflowVersionResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetWorkflowVersionResponse#uuid #uuid} => String
     #   * {Types::GetWorkflowVersionResponse#workflow_bucket_owner_id #workflow_bucket_owner_id} => String
+    #   * {Types::GetWorkflowVersionResponse#readme #readme} => String
+    #   * {Types::GetWorkflowVersionResponse#definition_repository_details #definition_repository_details} => Types::DefinitionRepositoryDetails
+    #   * {Types::GetWorkflowVersionResponse#readme_path #readme_path} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3379,7 +3572,7 @@ module Aws::Omics
     #     workflow_id: "WorkflowId", # required
     #     version_name: "WorkflowVersionName", # required
     #     type: "PRIVATE", # accepts PRIVATE, READY2RUN
-    #     export: ["DEFINITION"], # accepts DEFINITION
+    #     export: ["DEFINITION"], # accepts DEFINITION, README
     #     workflow_owner_id: "WorkflowOwnerId",
     #   })
     #
@@ -3409,6 +3602,14 @@ module Aws::Omics
     #   resp.tags["TagKey"] #=> String
     #   resp.uuid #=> String
     #   resp.workflow_bucket_owner_id #=> String
+    #   resp.readme #=> String
+    #   resp.definition_repository_details.connection_arn #=> String
+    #   resp.definition_repository_details.full_repository_id #=> String
+    #   resp.definition_repository_details.source_reference.type #=> String, one of "BRANCH", "TAG", "COMMIT"
+    #   resp.definition_repository_details.source_reference.value #=> String
+    #   resp.definition_repository_details.provider_type #=> String
+    #   resp.definition_repository_details.provider_endpoint #=> String
+    #   resp.readme_path #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4129,7 +4330,7 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Retrieves a list of your run caches.
+    # Retrieves a list of your run caches and the metadata for each cache.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
@@ -4173,7 +4374,8 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Retrieves a list of run groups.
+    # Retrieves a list of all run groups and returns the metadata for each
+    # run group.
     #
     # @option params [String] :name
     #   The run groups' name.
@@ -4222,7 +4424,9 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Retrieves a list of tasks for a run.
+    # Returns a list of tasks and status information within their specified
+    # run. Use this operation to monitor runs and to identify which specific
+    # tasks have failed.
     #
     # @option params [required, String] :id
     #   The run's ID.
@@ -4279,18 +4483,18 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Retrieves a list of runs.
+    # Retrieves a list of runs and returns each run's metadata and status.
     #
-    # Amazon Web Services HealthOmics stores a fixed number of runs that are
-    # available to the console and API. If the ListRuns response doesn't
-    # include specific runs that you expected, you can find run logs for all
-    # runs in the CloudWatch logs. For more information about viewing the
-    # run logs, see [CloudWatch logs][1] in the *Amazon Web Services
-    # HealthOmics User Guide*.
+    # Amazon Web Services HealthOmics stores a configurable number of runs,
+    # as determined by service limits, that are available to the console and
+    # API. If the `ListRuns` response doesn't include specific runs that
+    # you expected, you can find all run logs in the CloudWatch logs. For
+    # more information about viewing the run logs, see [CloudWatch logs][1]
+    # in the *Amazon Web Services HealthOmics User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/omics/latest/dev/cloudwatch-logs.html
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/monitoring-cloudwatch-logs.html
     #
     # @option params [String] :name
     #   Filter the list by run name.
@@ -4621,7 +4825,7 @@ module Aws::Omics
 
     # Lists the workflow versions for the specified workflow. For more
     # information, see [Workflow versioning in Amazon Web Services
-    # HealthOmics][1] in the Amazon Web Services HealthOmics User Guide.
+    # HealthOmics][1] in the *Amazon Web Services HealthOmics User Guide*.
     #
     #
     #
@@ -4684,7 +4888,12 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Retrieves a list of workflows.
+    # Retrieves a list of existing workflows. You can filter for specific
+    # workflows by their name and type. Using the type parameter, specify
+    # `PRIVATE` to retrieve a list of private workflows or specify
+    # `READY2RUN` for a list of all Ready2Run workflows. If you do not
+    # specify the type of workflow, this operation returns a list of
+    # existing workflows.
     #
     # @option params [String] :type
     #   Filter the list by workflow type.
@@ -5083,37 +5292,89 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Starts a new run or duplicates an existing run.
+    # Starts a new run and returns details about the run, or duplicates an
+    # existing run. A run is a single invocation of a workflow. If you
+    # provide request IDs, Amazon Web Services HealthOmics identifies
+    # duplicate requests and starts the run only once. Monitor the progress
+    # of the run by calling the `GetRun` API operation.
     #
-    # For a new run, specify a unique `requestId`, the `workflowId`, and a
-    # role ARN. If you're using static run storage (the default), specify
-    # the required `storageCapacity`.
+    # To start a new run, the following inputs are required:
     #
-    # You duplicate a run by specifing a unique `requestId`, the `runID` of
-    # the run to duplicate, and a role ARN.
+    # * A service role ARN (`roleArn`).
     #
-    # For more information about the optional parameters in the StartRun
-    # request, see [Starting a run][1] in the *Amazon Web Services
-    # HealthOmics User Guide*.
+    # * The run's workflow ID (`workflowId`, not the `uuid` or `runId`).
+    #
+    # * An Amazon S3 location (`outputUri`) where the run outputs will be
+    #   saved.
+    #
+    # * All required workflow parameters (`parameter`), which can include
+    #   optional parameters from the parameter template. The run cannot
+    #   include any parameters that are not defined in the parameter
+    #   template. To see all possible parameters, use the `GetRun` API
+    #   operation.
+    #
+    # * For runs with a `STATIC` (default) storage type, specify the
+    #   required storage capacity (in gibibytes). A storage capacity value
+    #   is not required for runs that use `DYNAMIC` storage.
+    #
+    # `StartRun` can also duplicate an existing run using the run's default
+    # values. You can modify these default values and/or add other optional
+    # inputs. To duplicate a run, the following inputs are required:
+    #
+    # * A service role ARN (`roleArn`).
+    #
+    # * The ID of the run to duplicate (`runId`).
+    #
+    # * An Amazon S3 location where the run outputs will be saved
+    #   (`outputUri`).
+    #
+    # To learn more about the optional parameters for `StartRun`, see
+    # [Starting a run][1] in the *Amazon Web Services HealthOmics User
+    # Guide*.
+    #
+    # Use the `retentionMode` input to control how long the metadata for
+    # each run is stored in CloudWatch. There are two retention modes:
+    #
+    # * Specify `REMOVE` to automatically remove the oldest runs when you
+    #   reach the maximum service retention limit for runs. It is
+    #   recommended that you use the `REMOVE` mode to initiate major run
+    #   requests so that your runs do not fail when you reach the limit.
+    #
+    # * The `retentionMode` is set to the `RETAIN` mode by default, which
+    #   allows you to manually remove runs after reaching the maximum
+    #   service retention limit. Under this setting, you cannot create
+    #   additional runs until you remove the excess runs.
+    #
+    # To learn more about the retention modes, see [Run retention mode][2]
+    # in the *Amazon Web Services HealthOmics User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/omics/latest/dev/starting-a-run.html
+    # [2]: https://docs.aws.amazon.com/omics/latest/dev/run-retention.html
     #
     # @option params [String] :workflow_id
-    #   The run's workflow ID.
+    #   The run's workflow ID. The `workflowId` is not the UUID.
     #
     # @option params [String] :workflow_type
-    #   The run's workflow type.
+    #   The run's workflow type. The `workflowType` must be specified if you
+    #   are running a `READY2RUN` workflow. If you are running a `PRIVATE`
+    #   workflow (default), you do not need to include the workflow type.
     #
     # @option params [String] :run_id
     #   The ID of a run to duplicate.
     #
     # @option params [required, String] :role_arn
-    #   A service role for the run.
+    #   A service role for the run. The `roleArn` requires access to Amazon
+    #   Web Services HealthOmics, S3, Cloudwatch logs, and EC2. An example
+    #   `roleArn` is
+    #   `arn:aws:iam::123456789012:role/omics-service-role-serviceRole-W8O1XMPL7QZ`.
+    #   In this example, the AWS account ID is `123456789012` and the role
+    #   name is `omics-service-role-serviceRole-W8O1XMPL7QZ`.
     #
     # @option params [String] :name
-    #   A name for the run.
+    #   A name for the run. This is recommended to view and organize runs in
+    #   the Amazon Web Services HealthOmics console and CloudWatch logs.
     #
     # @option params [String] :cache_id
     #   Identifier of the cache associated with this run. If you don't
@@ -5123,20 +5384,34 @@ module Aws::Omics
     #   The cache behavior for the run. You specify this value if you want to
     #   override the default behavior for the cache. You had set the default
     #   value when you created the cache. For more information, see [Run cache
-    #   behavior][1] in the Amazon Web Services HealthOmics User Guide.
+    #   behavior][1] in the *Amazon Web Services HealthOmics User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/omics/latest/dev/how-run-cache.html#run-cache-behavior
     #
     # @option params [String] :run_group_id
-    #   The run's group ID.
+    #   The run's group ID. Use a run group to cap the compute resources (and
+    #   number of concurrent runs) for the runs that you add to the run group.
     #
     # @option params [Integer] :priority
-    #   A priority for the run.
+    #   Use the run priority (highest: 1) to establish the order of runs in a
+    #   run group when you start a run. If multiple runs share the same
+    #   priority, the run that was initiated first will have the higher
+    #   priority. Runs that do not belong to a run group can be assigned a
+    #   priority. The priorities of these runs are ranked among other runs
+    #   that are not in a run group. For more information, see [Run
+    #   priority][1] in the *Amazon Web Services HealthOmics User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/creating-run-groups.html#run-priority
     #
     # @option params [Hash,Array,String,Numeric,Boolean] :parameters
-    #   Parameters for the run.
+    #   Parameters for the run. The run needs all required parameters and can
+    #   include optional parameters. The run cannot include any parameters
+    #   that are not defined in the parameter template. To retrieve parameters
+    #   from the run, use the GetRun API operation.
     #
     #   Document type used to carry open content
     #   (Hash,Array,String,Numeric,Boolean). A document type value is
@@ -5144,35 +5419,47 @@ module Aws::Omics
     #   additional encoding or escaping.
     #
     # @option params [Integer] :storage_capacity
-    #   The static storage capacity (in gibibytes) for this run. This field is
-    #   not required if the storage type is dynamic (the system ignores any
-    #   value that you enter).
+    #   The `STATIC` storage capacity (in gibibytes, GiB) for this run. The
+    #   default run storage capacity is 1200 GiB. If your requested storage
+    #   capacity is unavailable, the system rounds up the value to the nearest
+    #   1200 GiB multiple. If the requested storage capacity is still
+    #   unavailable, the system rounds up the value to the nearest 2400 GiB
+    #   multiple. This field is not required if the storage type is `DYNAMIC`
+    #   (the system ignores any value that you enter).
     #
     # @option params [String] :output_uri
-    #   An output URI for the run.
+    #   An output S3 URI for the run. The S3 bucket must be in the same region
+    #   as the workflow. The role ARN must have permission to write to this S3
+    #   bucket.
     #
     # @option params [String] :log_level
     #   A log level for the run.
     #
     # @option params [Hash<String,String>] :tags
-    #   Tags for the run.
+    #   Tags for the run. You can add up to 50 tags per run. For more
+    #   information, see [Adding a tag][1] in the *Amazon Web Services
+    #   HealthOmics User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/add-a-tag.html
     #
     # @option params [required, String] :request_id
-    #   To ensure that requests don't run multiple times, specify a unique ID
-    #   for each request.
+    #   An idempotency token used to dedupe retry requests so that duplicate
+    #   runs are not created.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [String] :retention_mode
-    #   The retention mode for the run. The default value is RETAIN.
+    #   The retention mode for the run. The default value is `RETAIN`.
     #
     #   Amazon Web Services HealthOmics stores a fixed number of runs that are
-    #   available to the console and API. In the default mode (RETAIN), you
+    #   available to the console and API. In the default mode (`RETAIN`), you
     #   need to remove runs manually when the number of run exceeds the
     #   maximum. If you set the retention mode to `REMOVE`, Amazon Web
     #   Services HealthOmics automatically removes runs (that have mode set to
-    #   REMOVE) when the number of run exceeds the maximum. All run logs are
+    #   `REMOVE`) when the number of run exceeds the maximum. All run logs are
     #   available in CloudWatch logs, if you need information about a run that
     #   is no longer available to the API.
     #
@@ -5185,22 +5472,34 @@ module Aws::Omics
     #   [1]: https://docs.aws.amazon.com/omics/latest/dev/starting-a-run.html
     #
     # @option params [String] :storage_type
-    #   The storage type for the run. By default, the run uses STATIC storage
-    #   type, which allocates a fixed amount of storage. If you set the
-    #   storage type to DYNAMIC, Amazon Web Services HealthOmics dynamically
-    #   scales the storage up or down, based on file system utilization. For
-    #   more information about static and dynamic storage, see [Running
-    #   workflows][1] in the *Amazon Web Services HealthOmics User Guide*.
+    #   The storage type for the run. If you set the storage type to
+    #   `DYNAMIC`, Amazon Web Services HealthOmics dynamically scales the
+    #   storage up or down, based on file system utilization. By default, the
+    #   run uses `STATIC` storage type, which allocates a fixed amount of
+    #   storage. For more information about `DYNAMIC` and `STATIC` storage,
+    #   see [Run storage types][1] in the *Amazon Web Services HealthOmics
+    #   User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html
+    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/workflows-run-types.html
     #
     # @option params [String] :workflow_owner_id
-    #   The ID of the workflow owner.
+    #   The 12-digit account ID of the workflow owner that is used for running
+    #   a shared workflow. The workflow owner ID can be retrieved using the
+    #   `GetShare` API operation. If you are the workflow owner, you do not
+    #   need to include this ID.
     #
     # @option params [String] :workflow_version_name
-    #   The name of the workflow version.
+    #   The name of the workflow version. Use workflow versions to track and
+    #   organize changes to the workflow. If your workflow has multiple
+    #   versions, the run uses the default version unless you specify a
+    #   version name. To learn more, see [Workflow versioning][1] in the
+    #   *Amazon Web Services HealthOmics User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/workflow-versions.html
     #
     # @return [Types::StartRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5464,7 +5763,19 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Update a run cache.
+    # Updates a run cache using its ID and returns a response with no body
+    # if the operation is successful. You can update the run cache
+    # description, name, or the default run cache behavior with
+    # `CACHE_ON_FAILURE` or `CACHE_ALWAYS`. To confirm that your run cache
+    # settings have been properly updated, use the `GetRunCache` API
+    # operation.
+    #
+    # For more information, see [How call caching works][1] in the *Amazon
+    # Web Services HealthOmics User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/how-run-cache.html
     #
     # @option params [String] :cache_behavior
     #   Update the default run cache behavior.
@@ -5498,7 +5809,24 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Updates a run group.
+    # Updates the settings of a run group and returns a response with no
+    # body if the operation is successful.
+    #
+    # You can update the following settings with `UpdateRunGroup`:
+    #
+    # * Maximum number of CPUs
+    #
+    # * Run time (measured in minutes)
+    #
+    # * Number of GPUs
+    #
+    # * Number of concurrent runs
+    #
+    # * Group name
+    #
+    # To confirm that the settings have been successfully updated, use the
+    # `ListRunGroups` or `GetRunGroup` API operations to verify that the
+    # desired changes have been made.
     #
     # @option params [required, String] :id
     #   The group's ID.
@@ -5672,9 +6000,24 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Updates information about a workflow. For more information, see
-    # [Update a private workflow][1] in the Amazon Web Services HealthOmics
-    # User Guide.
+    # Updates information about a workflow.
+    #
+    # You can update the following workflow information:
+    #
+    # * Name
+    #
+    # * Description
+    #
+    # * Default storage type
+    #
+    # * Default storage capacity (with workflow ID)
+    #
+    # This operation returns a response with no body if the operation is
+    # successful. You can check the workflow updates by calling the
+    # `GetWorkflow` API operation.
+    #
+    # For more information, see [Update a private workflow][1] in the
+    # *Amazon Web Services HealthOmics User Guide*.
     #
     #
     #
@@ -5705,6 +6048,10 @@ module Aws::Omics
     #   The default static storage capacity (in gibibytes) for runs that use
     #   this workflow or workflow version.
     #
+    # @option params [String] :readme_markdown
+    #   The markdown content for the workflow's README file. This provides
+    #   documentation and usage information for users of the workflow.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -5715,6 +6062,7 @@ module Aws::Omics
     #     description: "WorkflowDescription",
     #     storage_type: "STATIC", # accepts STATIC, DYNAMIC
     #     storage_capacity: 1,
+    #     readme_markdown: "ReadmeMarkdown",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/UpdateWorkflow AWS API Documentation
@@ -5728,7 +6076,7 @@ module Aws::Omics
 
     # Updates information about the workflow version. For more information,
     # see [Workflow versioning in Amazon Web Services HealthOmics][1] in the
-    # Amazon Web Services HealthOmics User Guide.
+    # *Amazon Web Services HealthOmics User Guide*.
     #
     #
     #
@@ -5759,6 +6107,11 @@ module Aws::Omics
     #   The default static storage capacity (in gibibytes) for runs that use
     #   this workflow or workflow version.
     #
+    # @option params [String] :readme_markdown
+    #   The markdown content for the workflow version's README file. This
+    #   provides documentation and usage information for users of this
+    #   specific workflow version.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -5769,6 +6122,7 @@ module Aws::Omics
     #     description: "WorkflowVersionDescription",
     #     storage_type: "STATIC", # accepts STATIC, DYNAMIC
     #     storage_capacity: 1,
+    #     readme_markdown: "ReadmeMarkdown",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/UpdateWorkflowVersion AWS API Documentation
@@ -5844,7 +6198,7 @@ module Aws::Omics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

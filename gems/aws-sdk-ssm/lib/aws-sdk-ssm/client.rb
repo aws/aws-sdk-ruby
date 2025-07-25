@@ -95,7 +95,7 @@ module Aws::SSM
     #     class name or an instance of a plugin class.
     #
     #   @option options [required, Aws::CredentialProvider] :credentials
-    #     Your AWS credentials. This can be an instance of any one of the
+    #     Your AWS credentials used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
@@ -128,18 +128,23 @@ module Aws::SSM
     #     locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
+    #
     #     * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
     #       `:account_id` options.
-    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
-    #       ENV['AWS_SESSION_TOKEN'], and ENV['AWS_ACCOUNT_ID']
+    #
+    #     * `ENV['AWS_ACCESS_KEY_ID']`, `ENV['AWS_SECRET_ACCESS_KEY']`,
+    #       `ENV['AWS_SESSION_TOKEN']`, and `ENV['AWS_ACCOUNT_ID']`.
+    #
     #     * `~/.aws/credentials`
+    #
     #     * `~/.aws/config`
+    #
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
     #       enable retries and extended timeouts. Instance profile credential
-    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
-    #       to true.
+    #       fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
+    #       to `true`.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -166,6 +171,11 @@ module Aws::SSM
     #     until there is sufficent client side capacity to retry the request.
     #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
     #     not retry instead of sleeping.
+    #
+    #   @option options [Array<String>] :auth_scheme_preference
+    #     A list of preferred authentication schemes to use when making a request. Supported values are:
+    #     `sigv4`, `sigv4a`, `httpBearerAuth`, and `noAuth`. When set using `ENV['AWS_AUTH_SCHEME_PREFERENCE']` or in
+    #     shared config as `auth_scheme_preference`, the value should be a comma-separated list.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -253,8 +263,8 @@ module Aws::SSM
     #     4 times. Used in `standard` and `adaptive` retry modes.
     #
     #   @option options [String] :profile ("default")
-    #     Used when loading credentials from the shared credentials file
-    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
+    #     When not specified, 'default' is used.
     #
     #   @option options [String] :request_checksum_calculation ("when_supported")
     #     Determines when a checksum will be calculated for request payloads. Values are:
@@ -374,7 +384,7 @@ module Aws::SSM
     #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
-    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     Your Bearer token used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
@@ -5253,6 +5263,11 @@ module Aws::SSM
     # You can specify the `NextToken` in a subsequent call to get the next
     # set of results.
     #
+    # Parameter names can't contain spaces. The service removes any spaces
+    # specified for the beginning or end of a parameter name. If the
+    # specified name for a parameter contains spaces between characters, the
+    # request fails with a `ValidationException` error.
+    #
     # If you change the KMS key alias for the KMS key used to encrypt a
     # parameter, then you must also update the key alias the parameter uses
     # to reference KMS. Otherwise, `DescribeParameters` retrieves whatever
@@ -7163,6 +7178,11 @@ module Aws::SSM
     # Get information about a single parameter by specifying the parameter
     # name.
     #
+    # Parameter names can't contain spaces. The service removes any spaces
+    # specified for the beginning or end of a parameter name. If the
+    # specified name for a parameter contains spaces between characters, the
+    # request fails with a `ValidationException` error.
+    #
     # <note markdown="1"> To get information about more than one parameter at a time, use the
     # GetParameters operation.
     #
@@ -7221,6 +7241,11 @@ module Aws::SSM
     end
 
     # Retrieves the history of all changes to a parameter.
+    #
+    # Parameter names can't contain spaces. The service removes any spaces
+    # specified for the beginning or end of a parameter name. If the
+    # specified name for a parameter contains spaces between characters, the
+    # request fails with a `ValidationException` error.
     #
     # If you change the KMS key alias for the KMS key used to encrypt a
     # parameter, then you must also update the key alias the parameter uses
@@ -7300,6 +7325,11 @@ module Aws::SSM
     #
     #  </note>
     #
+    # Parameter names can't contain spaces. The service removes any spaces
+    # specified for the beginning or end of a parameter name. If the
+    # specified name for a parameter contains spaces between characters, the
+    # request fails with a `ValidationException` error.
+    #
     # @option params [required, Array<String>] :names
     #   The names or Amazon Resource Names (ARNs) of the parameters that you
     #   want to query. For parameters shared with you from another account,
@@ -7373,6 +7403,11 @@ module Aws::SSM
     # and returns the matching values up to that point and a `NextToken`.
     # You can specify the `NextToken` in a subsequent call to get the next
     # set of results.
+    #
+    # Parameter names can't contain spaces. The service removes any spaces
+    # specified for the beginning or end of a parameter name. If the
+    # specified name for a parameter contains spaces between characters, the
+    # request fails with a `ValidationException` error.
     #
     # @option params [required, String] :path
     #   The hierarchy for the parameter. Hierarchies start with a forward
@@ -7735,6 +7770,11 @@ module Aws::SSM
     #   sensitive). If a label fails to meet these requirements, then the
     #   label isn't associated with a parameter and the system displays it
     #   in the list of InvalidLabels.
+    #
+    # * Parameter names can't contain spaces. The service removes any
+    #   spaces specified for the beginning or end of a parameter name. If
+    #   the specified name for a parameter contains spaces between
+    #   characters, the request fails with a `ValidationException` error.
     #
     # @option params [required, String] :name
     #   The parameter name on which you want to attach one or more labels.
@@ -9273,6 +9313,14 @@ module Aws::SSM
     # * ExecutionTime. The time the patch, association, or custom compliance
     #   item was applied to the managed node.
     #
+    #   For State Manager associations, this represents the time when
+    #   compliance status was captured by the Systems Manager service during
+    #   its internal compliance aggregation workflow, not necessarily when
+    #   the association was executed on the managed node. State Manager
+    #   updates compliance information for all associations on an instance
+    #   whenever any association executes, which may result in multiple
+    #   associations showing the same execution time.
+    #
     # * Id: The patch, association, or custom compliance ID.
     #
     # * Title: A title.
@@ -9464,7 +9512,10 @@ module Aws::SSM
     #     hierarchies in parameter names. For example:
     #     `/Dev/Production/East/Project-ABC/MyParameter`
     #
-    #   * A parameter name can't include spaces.
+    #   * Parameter names can't contain spaces. The service removes any
+    #     spaces specified for the beginning or end of a parameter name. If
+    #     the specified name for a parameter contains spaces between
+    #     characters, the request fails with a `ValidationException` error.
     #
     #   * Parameter hierarchies are limited to a maximum depth of fifteen
     #     levels.
@@ -11450,6 +11501,11 @@ module Aws::SSM
     end
 
     # Remove a label or labels from a parameter.
+    #
+    # Parameter names can't contain spaces. The service removes any spaces
+    # specified for the beginning or end of a parameter name. If the
+    # specified name for a parameter contains spaces between characters, the
+    # request fails with a `ValidationException` error.
     #
     # @option params [required, String] :name
     #   The name of the parameter from which you want to delete one or more
@@ -13457,7 +13513,7 @@ module Aws::SSM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.197.0'
+      context[:gem_version] = '1.199.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -258,6 +258,20 @@ module Aws::Outposts
       SENSITIVE: []
     end
 
+    class GetOutpostBillingInformationInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor outpost_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetOutpostBillingInformationOutput
+      attr_accessor next_token: ::String
+      attr_accessor subscriptions: ::Array[Types::Subscription]
+      attr_accessor contract_end_date: ::String
+      SENSITIVE: []
+    end
+
     class GetOutpostInput
       attr_accessor outpost_id: ::String
       SENSITIVE: []
@@ -620,6 +634,18 @@ module Aws::Outposts
     class StartConnectionResponse
       attr_accessor connection_id: ::String
       attr_accessor underlay_ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class Subscription
+      attr_accessor subscription_id: ::String
+      attr_accessor subscription_type: ("ORIGINAL" | "RENEWAL" | "CAPACITY_INCREASE")
+      attr_accessor subscription_status: ("ACTIVE" | "INACTIVE" | "CANCELLED")
+      attr_accessor order_ids: ::Array[::String]
+      attr_accessor begin_date: ::Time
+      attr_accessor end_date: ::Time
+      attr_accessor monthly_recurring_price: ::Float
+      attr_accessor upfront_price: ::Float
       SENSITIVE: []
     end
 

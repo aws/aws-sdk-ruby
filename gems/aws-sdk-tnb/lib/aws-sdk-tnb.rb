@@ -54,7 +54,7 @@ module Aws::Tnb
   autoload :EndpointProvider, 'aws-sdk-tnb/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-tnb/endpoints'
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.32.0'
 
 end
 

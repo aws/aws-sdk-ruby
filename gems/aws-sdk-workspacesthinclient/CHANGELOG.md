@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2025-07-23)
+------------------
+
+* Feature - Added the lastUserId parameter to the ListDevices and GetDevice API.
+
+1.30.0 (2025-07-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.29.0 (2025-06-25)
 ------------------
 

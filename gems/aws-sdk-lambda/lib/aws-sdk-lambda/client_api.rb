@@ -1232,7 +1232,7 @@ module Aws::Lambda
     ListProvisionedConcurrencyConfigsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: String, location_name: "NextMarker"))
     ListProvisionedConcurrencyConfigsResponse.struct_class = Types::ListProvisionedConcurrencyConfigsResponse
 
-    ListTagsRequest.add_member(:resource, Shapes::ShapeRef.new(shape: TaggableResource, required: true, location: "uri", location_name: "ARN"))
+    ListTagsRequest.add_member(:resource, Shapes::ShapeRef.new(shape: TaggableResource, required: true, location: "uri", location_name: "Resource"))
     ListTagsRequest.struct_class = Types::ListTagsRequest
 
     ListTagsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
@@ -1460,7 +1460,7 @@ module Aws::Lambda
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
-    TagResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: TaggableResource, required: true, location: "uri", location_name: "ARN"))
+    TagResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: TaggableResource, required: true, location: "uri", location_name: "Resource"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
@@ -1489,7 +1489,7 @@ module Aws::Lambda
     UnsupportedMediaTypeException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     UnsupportedMediaTypeException.struct_class = Types::UnsupportedMediaTypeException
 
-    UntagResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: TaggableResource, required: true, location: "uri", location_name: "ARN"))
+    UntagResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: TaggableResource, required: true, location: "uri", location_name: "Resource"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
@@ -1616,6 +1616,7 @@ module Aws::Lambda
         "serviceFullName" => "AWS Lambda",
         "serviceId" => "Lambda",
         "signatureVersion" => "v4",
+        "signingName" => "lambda",
         "uid" => "lambda-2015-03-31",
       }
 
@@ -1625,12 +1626,12 @@ module Aws::Lambda
         o.http_request_uri = "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy"
         o.input = Shapes::ShapeRef.new(shape: AddLayerVersionPermissionRequest)
         o.output = Shapes::ShapeRef.new(shape: AddLayerVersionPermissionResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: PolicyLengthExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
       end)
 
@@ -1640,12 +1641,12 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/functions/{FunctionName}/policy"
         o.input = Shapes::ShapeRef.new(shape: AddPermissionRequest)
         o.output = Shapes::ShapeRef.new(shape: AddPermissionResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: PolicyLengthExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyLengthExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
       end)
 
@@ -1655,32 +1656,32 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/functions/{FunctionName}/aliases"
         o.input = Shapes::ShapeRef.new(shape: CreateAliasRequest)
         o.output = Shapes::ShapeRef.new(shape: AliasConfiguration)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:create_code_signing_config, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateCodeSigningConfig"
         o.http_method = "POST"
-        o.http_request_uri = "/2020-04-22/code-signing-configs/"
+        o.http_request_uri = "/2020-04-22/code-signing-configs"
         o.input = Shapes::ShapeRef.new(shape: CreateCodeSigningConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateCodeSigningConfigResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
       api.add_operation(:create_event_source_mapping, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateEventSourceMapping"
         o.http_method = "POST"
-        o.http_request_uri = "/2015-03-31/event-source-mappings/"
+        o.http_request_uri = "/2015-03-31/event-source-mappings"
         o.input = Shapes::ShapeRef.new(shape: CreateEventSourceMappingRequest)
         o.output = Shapes::ShapeRef.new(shape: EventSourceMappingConfiguration)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1691,15 +1692,15 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/functions"
         o.input = Shapes::ShapeRef.new(shape: CreateFunctionRequest)
         o.output = Shapes::ShapeRef.new(shape: FunctionConfiguration)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: CodeStorageExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: CodeVerificationFailedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCodeSignatureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CodeVerificationFailedException)
         o.errors << Shapes::ShapeRef.new(shape: CodeSigningConfigNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CodeStorageExceededException)
       end)
 
       api.add_operation(:create_function_url_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1708,11 +1709,11 @@ module Aws::Lambda
         o.http_request_uri = "/2021-10-31/functions/{FunctionName}/url"
         o.input = Shapes::ShapeRef.new(shape: CreateFunctionUrlConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateFunctionUrlConfigResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:delete_alias, Seahorse::Model::Operation.new.tap do |o|
@@ -1721,9 +1722,9 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/functions/{FunctionName}/aliases/{Name}"
         o.input = Shapes::ShapeRef.new(shape: DeleteAliasRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1733,10 +1734,10 @@ module Aws::Lambda
         o.http_request_uri = "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}"
         o.input = Shapes::ShapeRef.new(shape: DeleteCodeSigningConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteCodeSigningConfigResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:delete_event_source_mapping, Seahorse::Model::Operation.new.tap do |o|
@@ -1745,12 +1746,12 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/event-source-mappings/{UUID}"
         o.input = Shapes::ShapeRef.new(shape: DeleteEventSourceMappingRequest)
         o.output = Shapes::ShapeRef.new(shape: EventSourceMappingConfiguration)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:delete_function, Seahorse::Model::Operation.new.tap do |o|
@@ -1759,11 +1760,11 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/functions/{FunctionName}"
         o.input = Shapes::ShapeRef.new(shape: DeleteFunctionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:delete_function_code_signing_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1773,11 +1774,11 @@ module Aws::Lambda
         o.input = Shapes::ShapeRef.new(shape: DeleteFunctionCodeSigningConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: CodeSigningConfigNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CodeSigningConfigNotFoundException)
       end)
 
       api.add_operation(:delete_function_concurrency, Seahorse::Model::Operation.new.tap do |o|
@@ -1786,11 +1787,11 @@ module Aws::Lambda
         o.http_request_uri = "/2017-10-31/functions/{FunctionName}/concurrency"
         o.input = Shapes::ShapeRef.new(shape: DeleteFunctionConcurrencyRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:delete_function_event_invoke_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1799,11 +1800,11 @@ module Aws::Lambda
         o.http_request_uri = "/2019-09-25/functions/{FunctionName}/event-invoke-config"
         o.input = Shapes::ShapeRef.new(shape: DeleteFunctionEventInvokeConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:delete_function_url_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1813,9 +1814,9 @@ module Aws::Lambda
         o.input = Shapes::ShapeRef.new(shape: DeleteFunctionUrlConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:delete_layer_version, Seahorse::Model::Operation.new.tap do |o|
@@ -1836,19 +1837,19 @@ module Aws::Lambda
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_account_settings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAccountSettings"
         o.http_method = "GET"
-        o.http_request_uri = "/2016-08-19/account-settings/"
+        o.http_request_uri = "/2016-08-19/account-settings"
         o.input = Shapes::ShapeRef.new(shape: GetAccountSettingsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAccountSettingsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:get_alias, Seahorse::Model::Operation.new.tap do |o|
@@ -1857,10 +1858,10 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/functions/{FunctionName}/aliases/{Name}"
         o.input = Shapes::ShapeRef.new(shape: GetAliasRequest)
         o.output = Shapes::ShapeRef.new(shape: AliasConfiguration)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_code_signing_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1869,8 +1870,8 @@ module Aws::Lambda
         o.http_request_uri = "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}"
         o.input = Shapes::ShapeRef.new(shape: GetCodeSigningConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: GetCodeSigningConfigResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -1880,10 +1881,10 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/event-source-mappings/{UUID}"
         o.input = Shapes::ShapeRef.new(shape: GetEventSourceMappingRequest)
         o.output = Shapes::ShapeRef.new(shape: EventSourceMappingConfiguration)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_function, Seahorse::Model::Operation.new.tap do |o|
@@ -1892,10 +1893,10 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/functions/{FunctionName}"
         o.input = Shapes::ShapeRef.new(shape: GetFunctionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetFunctionResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_function_code_signing_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1905,9 +1906,9 @@ module Aws::Lambda
         o.input = Shapes::ShapeRef.new(shape: GetFunctionCodeSigningConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: GetFunctionCodeSigningConfigResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_function_concurrency, Seahorse::Model::Operation.new.tap do |o|
@@ -1917,9 +1918,9 @@ module Aws::Lambda
         o.input = Shapes::ShapeRef.new(shape: GetFunctionConcurrencyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetFunctionConcurrencyResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_function_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1928,10 +1929,10 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/functions/{FunctionName}/configuration"
         o.input = Shapes::ShapeRef.new(shape: GetFunctionConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: FunctionConfiguration)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_function_event_invoke_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1940,10 +1941,10 @@ module Aws::Lambda
         o.http_request_uri = "/2019-09-25/functions/{FunctionName}/event-invoke-config"
         o.input = Shapes::ShapeRef.new(shape: GetFunctionEventInvokeConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: FunctionEventInvokeConfig)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_function_recursion_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1953,9 +1954,9 @@ module Aws::Lambda
         o.input = Shapes::ShapeRef.new(shape: GetFunctionRecursionConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: GetFunctionRecursionConfigResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_function_url_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1966,8 +1967,8 @@ module Aws::Lambda
         o.output = Shapes::ShapeRef.new(shape: GetFunctionUrlConfigResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_layer_version, Seahorse::Model::Operation.new.tap do |o|
@@ -1976,8 +1977,8 @@ module Aws::Lambda
         o.http_request_uri = "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}"
         o.input = Shapes::ShapeRef.new(shape: GetLayerVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetLayerVersionResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1988,8 +1989,8 @@ module Aws::Lambda
         o.http_request_uri = "/2018-10-31/layers?find=LayerVersion"
         o.input = Shapes::ShapeRef.new(shape: GetLayerVersionByArnRequest)
         o.output = Shapes::ShapeRef.new(shape: GetLayerVersionResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -2000,10 +2001,10 @@ module Aws::Lambda
         o.http_request_uri = "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy"
         o.input = Shapes::ShapeRef.new(shape: GetLayerVersionPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetLayerVersionPolicyResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -2012,10 +2013,10 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/functions/{FunctionName}/policy"
         o.input = Shapes::ShapeRef.new(shape: GetPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPolicyResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_provisioned_concurrency_config, Seahorse::Model::Operation.new.tap do |o|
@@ -2025,10 +2026,10 @@ module Aws::Lambda
         o.input = Shapes::ShapeRef.new(shape: GetProvisionedConcurrencyConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: GetProvisionedConcurrencyConfigResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedConcurrencyConfigNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_runtime_management_config, Seahorse::Model::Operation.new.tap do |o|
@@ -2037,10 +2038,10 @@ module Aws::Lambda
         o.http_request_uri = "/2021-07-20/functions/{FunctionName}/runtime-management-config"
         o.input = Shapes::ShapeRef.new(shape: GetRuntimeManagementConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: GetRuntimeManagementConfigResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:invoke, Seahorse::Model::Operation.new.tap do |o|
@@ -2049,50 +2050,50 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/functions/{FunctionName}/invocations"
         o.input = Shapes::ShapeRef.new(shape: InvocationRequest)
         o.output = Shapes::ShapeRef.new(shape: InvocationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityGroupIDException)
+        o.errors << Shapes::ShapeRef.new(shape: SnapStartTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: EC2ThrottledException)
+        o.errors << Shapes::ShapeRef.new(shape: EFSMountConnectivityException)
+        o.errors << Shapes::ShapeRef.new(shape: SubnetIPAddressLimitReachedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedMediaTypeException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRuntimeException)
+        o.errors << Shapes::ShapeRef.new(shape: EC2UnexpectedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnetIDException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: EC2AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EFSIOException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ENILimitReachedException)
+        o.errors << Shapes::ShapeRef.new(shape: SnapStartNotReadyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: SnapStartException)
+        o.errors << Shapes::ShapeRef.new(shape: RecursiveInvocationException)
+        o.errors << Shapes::ShapeRef.new(shape: EFSMountTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestContentException)
-        o.errors << Shapes::ShapeRef.new(shape: RequestTooLargeException)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedMediaTypeException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: EC2UnexpectedException)
-        o.errors << Shapes::ShapeRef.new(shape: SubnetIPAddressLimitReachedException)
-        o.errors << Shapes::ShapeRef.new(shape: ENILimitReachedException)
-        o.errors << Shapes::ShapeRef.new(shape: EFSMountConnectivityException)
-        o.errors << Shapes::ShapeRef.new(shape: EFSMountFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: EFSMountTimeoutException)
-        o.errors << Shapes::ShapeRef.new(shape: EFSIOException)
-        o.errors << Shapes::ShapeRef.new(shape: SnapStartException)
-        o.errors << Shapes::ShapeRef.new(shape: SnapStartTimeoutException)
-        o.errors << Shapes::ShapeRef.new(shape: SnapStartNotReadyException)
-        o.errors << Shapes::ShapeRef.new(shape: EC2ThrottledException)
-        o.errors << Shapes::ShapeRef.new(shape: EC2AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnetIDException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityGroupIDException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidZipFileException)
-        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
-        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
-        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRuntimeException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
-        o.errors << Shapes::ShapeRef.new(shape: RecursiveInvocationException)
+        o.errors << Shapes::ShapeRef.new(shape: EFSMountFailureException)
       end)
 
       api.add_operation(:invoke_async, Seahorse::Model::Operation.new.tap do |o|
         o.name = "InvokeAsync"
         o.http_method = "POST"
-        o.http_request_uri = "/2014-11-13/functions/{FunctionName}/invoke-async/"
+        o.http_request_uri = "/2014-11-13/functions/{FunctionName}/invoke-async"
         o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: InvokeAsyncRequest)
         o.output = Shapes::ShapeRef.new(shape: InvokeAsyncResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRuntimeException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestContentException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRuntimeException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
       end)
 
       api.add_operation(:invoke_with_response_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -2101,36 +2102,36 @@ module Aws::Lambda
         o.http_request_uri = "/2021-11-15/functions/{FunctionName}/response-streaming-invocations"
         o.input = Shapes::ShapeRef.new(shape: InvokeWithResponseStreamRequest)
         o.output = Shapes::ShapeRef.new(shape: InvokeWithResponseStreamResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityGroupIDException)
+        o.errors << Shapes::ShapeRef.new(shape: SnapStartTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: EC2ThrottledException)
+        o.errors << Shapes::ShapeRef.new(shape: EFSMountConnectivityException)
+        o.errors << Shapes::ShapeRef.new(shape: SubnetIPAddressLimitReachedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedMediaTypeException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRuntimeException)
+        o.errors << Shapes::ShapeRef.new(shape: EC2UnexpectedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnetIDException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: EC2AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EFSIOException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ENILimitReachedException)
+        o.errors << Shapes::ShapeRef.new(shape: SnapStartNotReadyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: SnapStartException)
+        o.errors << Shapes::ShapeRef.new(shape: RecursiveInvocationException)
+        o.errors << Shapes::ShapeRef.new(shape: EFSMountTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestContentException)
-        o.errors << Shapes::ShapeRef.new(shape: RequestTooLargeException)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedMediaTypeException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: EC2UnexpectedException)
-        o.errors << Shapes::ShapeRef.new(shape: SubnetIPAddressLimitReachedException)
-        o.errors << Shapes::ShapeRef.new(shape: ENILimitReachedException)
-        o.errors << Shapes::ShapeRef.new(shape: EFSMountConnectivityException)
-        o.errors << Shapes::ShapeRef.new(shape: EFSMountFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: EFSMountTimeoutException)
-        o.errors << Shapes::ShapeRef.new(shape: EFSIOException)
-        o.errors << Shapes::ShapeRef.new(shape: SnapStartException)
-        o.errors << Shapes::ShapeRef.new(shape: SnapStartTimeoutException)
-        o.errors << Shapes::ShapeRef.new(shape: SnapStartNotReadyException)
-        o.errors << Shapes::ShapeRef.new(shape: EC2ThrottledException)
-        o.errors << Shapes::ShapeRef.new(shape: EC2AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnetIDException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityGroupIDException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidZipFileException)
-        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
-        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
-        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRuntimeException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
-        o.errors << Shapes::ShapeRef.new(shape: RecursiveInvocationException)
+        o.errors << Shapes::ShapeRef.new(shape: EFSMountFailureException)
       end)
 
       api.add_operation(:list_aliases, Seahorse::Model::Operation.new.tap do |o|
@@ -2139,10 +2140,10 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/functions/{FunctionName}/aliases"
         o.input = Shapes::ShapeRef.new(shape: ListAliasesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAliasesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
           tokens: {
@@ -2154,11 +2155,11 @@ module Aws::Lambda
       api.add_operation(:list_code_signing_configs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListCodeSigningConfigs"
         o.http_method = "GET"
-        o.http_request_uri = "/2020-04-22/code-signing-configs/"
+        o.http_request_uri = "/2020-04-22/code-signing-configs"
         o.input = Shapes::ShapeRef.new(shape: ListCodeSigningConfigsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListCodeSigningConfigsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
           tokens: {
@@ -2170,13 +2171,13 @@ module Aws::Lambda
       api.add_operation(:list_event_source_mappings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListEventSourceMappings"
         o.http_method = "GET"
-        o.http_request_uri = "/2015-03-31/event-source-mappings/"
+        o.http_request_uri = "/2015-03-31/event-source-mappings"
         o.input = Shapes::ShapeRef.new(shape: ListEventSourceMappingsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListEventSourceMappingsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
           tokens: {
@@ -2192,9 +2193,9 @@ module Aws::Lambda
         o.input = Shapes::ShapeRef.new(shape: ListFunctionEventInvokeConfigsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListFunctionEventInvokeConfigsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
           tokens: {
@@ -2211,8 +2212,8 @@ module Aws::Lambda
         o.output = Shapes::ShapeRef.new(shape: ListFunctionUrlConfigsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
           tokens: {
@@ -2224,12 +2225,12 @@ module Aws::Lambda
       api.add_operation(:list_functions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListFunctions"
         o.http_method = "GET"
-        o.http_request_uri = "/2015-03-31/functions/"
+        o.http_request_uri = "/2015-03-31/functions"
         o.input = Shapes::ShapeRef.new(shape: ListFunctionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListFunctionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
           tokens: {
@@ -2244,8 +2245,8 @@ module Aws::Lambda
         o.http_request_uri = "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}/functions"
         o.input = Shapes::ShapeRef.new(shape: ListFunctionsByCodeSigningConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: ListFunctionsByCodeSigningConfigResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
@@ -2261,10 +2262,10 @@ module Aws::Lambda
         o.http_request_uri = "/2018-10-31/layers/{LayerName}/versions"
         o.input = Shapes::ShapeRef.new(shape: ListLayerVersionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListLayerVersionsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
           tokens: {
@@ -2279,8 +2280,8 @@ module Aws::Lambda
         o.http_request_uri = "/2018-10-31/layers"
         o.input = Shapes::ShapeRef.new(shape: ListLayersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListLayersResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
@@ -2297,9 +2298,9 @@ module Aws::Lambda
         o.input = Shapes::ShapeRef.new(shape: ListProvisionedConcurrencyConfigsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListProvisionedConcurrencyConfigsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
           tokens: {
@@ -2311,13 +2312,13 @@ module Aws::Lambda
       api.add_operation(:list_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTags"
         o.http_method = "GET"
-        o.http_request_uri = "/2017-03-31/tags/{ARN}"
+        o.http_request_uri = "/2017-03-31/tags/{Resource}"
         o.input = Shapes::ShapeRef.new(shape: ListTagsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:list_versions_by_function, Seahorse::Model::Operation.new.tap do |o|
@@ -2326,10 +2327,10 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/functions/{FunctionName}/versions"
         o.input = Shapes::ShapeRef.new(shape: ListVersionsByFunctionRequest)
         o.output = Shapes::ShapeRef.new(shape: ListVersionsByFunctionResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
           tokens: {
@@ -2344,10 +2345,10 @@ module Aws::Lambda
         o.http_request_uri = "/2018-10-31/layers/{LayerName}/versions"
         o.input = Shapes::ShapeRef.new(shape: PublishLayerVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: PublishLayerVersionResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: CodeStorageExceededException)
       end)
 
@@ -2357,13 +2358,13 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/functions/{FunctionName}/versions"
         o.input = Shapes::ShapeRef.new(shape: PublishVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: FunctionConfiguration)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: CodeStorageExceededException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
       end)
 
       api.add_operation(:put_function_code_signing_config, Seahorse::Model::Operation.new.tap do |o|
@@ -2372,11 +2373,11 @@ module Aws::Lambda
         o.http_request_uri = "/2020-06-30/functions/{FunctionName}/code-signing-config"
         o.input = Shapes::ShapeRef.new(shape: PutFunctionCodeSigningConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: PutFunctionCodeSigningConfigResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: CodeSigningConfigNotFoundException)
       end)
 
@@ -2386,11 +2387,11 @@ module Aws::Lambda
         o.http_request_uri = "/2017-10-31/functions/{FunctionName}/concurrency"
         o.input = Shapes::ShapeRef.new(shape: PutFunctionConcurrencyRequest)
         o.output = Shapes::ShapeRef.new(shape: Concurrency)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:put_function_event_invoke_config, Seahorse::Model::Operation.new.tap do |o|
@@ -2399,11 +2400,11 @@ module Aws::Lambda
         o.http_request_uri = "/2019-09-25/functions/{FunctionName}/event-invoke-config"
         o.input = Shapes::ShapeRef.new(shape: PutFunctionEventInvokeConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: FunctionEventInvokeConfig)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:put_function_recursion_config, Seahorse::Model::Operation.new.tap do |o|
@@ -2414,9 +2415,9 @@ module Aws::Lambda
         o.output = Shapes::ShapeRef.new(shape: PutFunctionRecursionConfigResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:put_provisioned_concurrency_config, Seahorse::Model::Operation.new.tap do |o|
@@ -2426,10 +2427,10 @@ module Aws::Lambda
         o.input = Shapes::ShapeRef.new(shape: PutProvisionedConcurrencyConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: PutProvisionedConcurrencyConfigResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:put_runtime_management_config, Seahorse::Model::Operation.new.tap do |o|
@@ -2438,11 +2439,11 @@ module Aws::Lambda
         o.http_request_uri = "/2021-07-20/functions/{FunctionName}/runtime-management-config"
         o.input = Shapes::ShapeRef.new(shape: PutRuntimeManagementConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: PutRuntimeManagementConfigResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:remove_layer_version_permission, Seahorse::Model::Operation.new.tap do |o|
@@ -2451,10 +2452,10 @@ module Aws::Lambda
         o.http_request_uri = "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy/{StatementId}"
         o.input = Shapes::ShapeRef.new(shape: RemoveLayerVersionPermissionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
       end)
 
@@ -2464,37 +2465,37 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/functions/{FunctionName}/policy/{StatementId}"
         o.input = Shapes::ShapeRef.new(shape: RemovePermissionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
-        o.http_request_uri = "/2017-03-31/tags/{ARN}"
+        o.http_request_uri = "/2017-03-31/tags/{Resource}"
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UntagResource"
         o.http_method = "DELETE"
-        o.http_request_uri = "/2017-03-31/tags/{ARN}"
+        o.http_request_uri = "/2017-03-31/tags/{Resource}"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_alias, Seahorse::Model::Operation.new.tap do |o|
@@ -2503,12 +2504,12 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/functions/{FunctionName}/aliases/{Name}"
         o.input = Shapes::ShapeRef.new(shape: UpdateAliasRequest)
         o.output = Shapes::ShapeRef.new(shape: AliasConfiguration)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
       end)
 
       api.add_operation(:update_code_signing_config, Seahorse::Model::Operation.new.tap do |o|
@@ -2517,8 +2518,8 @@ module Aws::Lambda
         o.http_request_uri = "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}"
         o.input = Shapes::ShapeRef.new(shape: UpdateCodeSigningConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateCodeSigningConfigResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -2528,12 +2529,12 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/event-source-mappings/{UUID}"
         o.input = Shapes::ShapeRef.new(shape: UpdateEventSourceMappingRequest)
         o.output = Shapes::ShapeRef.new(shape: EventSourceMappingConfiguration)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_function_code, Seahorse::Model::Operation.new.tap do |o|
@@ -2542,16 +2543,16 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/functions/{FunctionName}/code"
         o.input = Shapes::ShapeRef.new(shape: UpdateFunctionCodeRequest)
         o.output = Shapes::ShapeRef.new(shape: FunctionConfiguration)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCodeSignatureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CodeVerificationFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: CodeSigningConfigNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: CodeStorageExceededException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: CodeVerificationFailedException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidCodeSignatureException)
-        o.errors << Shapes::ShapeRef.new(shape: CodeSigningConfigNotFoundException)
       end)
 
       api.add_operation(:update_function_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -2560,15 +2561,15 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/functions/{FunctionName}/configuration"
         o.input = Shapes::ShapeRef.new(shape: UpdateFunctionConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: FunctionConfiguration)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
-        o.errors << Shapes::ShapeRef.new(shape: CodeVerificationFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCodeSignatureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CodeVerificationFailedException)
         o.errors << Shapes::ShapeRef.new(shape: CodeSigningConfigNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
       end)
 
       api.add_operation(:update_function_event_invoke_config, Seahorse::Model::Operation.new.tap do |o|
@@ -2577,11 +2578,11 @@ module Aws::Lambda
         o.http_request_uri = "/2019-09-25/functions/{FunctionName}/event-invoke-config"
         o.input = Shapes::ShapeRef.new(shape: UpdateFunctionEventInvokeConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: FunctionEventInvokeConfig)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_function_url_config, Seahorse::Model::Operation.new.tap do |o|
@@ -2590,11 +2591,11 @@ module Aws::Lambda
         o.http_request_uri = "/2021-10-31/functions/{FunctionName}/url"
         o.input = Shapes::ShapeRef.new(shape: UpdateFunctionUrlConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateFunctionUrlConfigResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
     end
 

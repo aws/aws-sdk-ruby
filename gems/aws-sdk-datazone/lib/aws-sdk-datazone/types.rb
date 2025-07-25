@@ -399,6 +399,76 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # An aggregation list item.
+    #
+    # @!attribute [rw] attribute
+    #   An attribute on which to compute aggregations.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_value
+    #   The display value of the aggregation list item. Supported values
+    #   include `value` and `glossaryTerm.name`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AggregationListItem AWS API Documentation
+    #
+    class AggregationListItem < Struct.new(
+      :attribute,
+      :display_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The aggregation for an attribute.
+    #
+    # @!attribute [rw] attribute
+    #   The attribute for this aggregation.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_value
+    #   The display value of the aggregation output item.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   A list of aggregation output items.
+    #   @return [Array<Types::AggregationOutputItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AggregationOutput AWS API Documentation
+    #
+    class AggregationOutput < Struct.new(
+      :attribute,
+      :display_value,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An aggregation output item.
+    #
+    # @!attribute [rw] count
+    #   The count of the aggregation output item.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] display_value
+    #   The display value of the aggregation. If the attribute being
+    #   aggregated corresponds to the id of a public resource, the service
+    #   automatically resolves the id to the provided display value.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The attribute value of the aggregation output item.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AggregationOutputItem AWS API Documentation
+    #
+    class AggregationOutputItem < Struct.new(
+      :count,
+      :display_value,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The grant filter for all domain units.
     #
     # @api private
@@ -624,6 +694,10 @@ module Aws::DataZone
     #   attributes of an asset.
     #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
     #
+    # @!attribute [rw] match_rationale
+    #   List of rationales indicating why this item was matched by search.
+    #   @return [Array<Types::MatchRationaleItem>]
+    #
     # @!attribute [rw] read_only_forms_output
     #   The read-only forms included in the additional attributes of an
     #   inventory asset.
@@ -634,6 +708,7 @@ module Aws::DataZone
     class AssetItemAdditionalAttributes < Struct.new(
       :forms_output,
       :latest_time_series_data_point_forms_output,
+      :match_rationale,
       :read_only_forms_output)
       SENSITIVE = []
       include Aws::Structure
@@ -802,11 +877,16 @@ module Aws::DataZone
     #   attributes of an asset.
     #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
     #
+    # @!attribute [rw] match_rationale
+    #   List of rationales indicating why this item was matched by search.
+    #   @return [Array<Types::MatchRationaleItem>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AssetListingItemAdditionalAttributes AWS API Documentation
     #
     class AssetListingItemAdditionalAttributes < Struct.new(
       :forms,
-      :latest_time_series_data_point_forms)
+      :latest_time_series_data_point_forms,
+      :match_rationale)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1840,6 +1920,9 @@ module Aws::DataZone
     #
     # @!attribute [rw] external_identifier
     #   The external identifier of the asset.
+    #
+    #   If the value for the `externalIdentifier` parameter is specified, it
+    #   must be a unique value.
     #   @return [String]
     #
     # @!attribute [rw] forms_input
@@ -4820,6 +4903,20 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The additional attributes of an Amazon DataZone data product.
+    #
+    # @!attribute [rw] match_rationale
+    #   List of rationales indicating why this item was matched by search.
+    #   @return [Array<Types::MatchRationaleItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DataProductItemAdditionalAttributes AWS API Documentation
+    #
+    class DataProductItemAdditionalAttributes < Struct.new(
+      :match_rationale)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The data product listing.
     #
     # @!attribute [rw] created_at
@@ -4945,15 +5042,24 @@ module Aws::DataZone
     #   The metadata forms of the asset of the data product.
     #   @return [String]
     #
+    # @!attribute [rw] match_rationale
+    #   List of rationales indicating why this item was matched by search.
+    #   @return [Array<Types::MatchRationaleItem>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DataProductListingItemAdditionalAttributes AWS API Documentation
     #
     class DataProductListingItemAdditionalAttributes < Struct.new(
-      :forms)
+      :forms,
+      :match_rationale)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The data product.
+    #
+    # @!attribute [rw] additional_attributes
+    #   The additional attributes of an Amazon DataZone data product.
+    #   @return [Types::DataProductItemAdditionalAttributes]
     #
     # @!attribute [rw] created_at
     #   The timestamp at which the data product was created.
@@ -4999,6 +5105,7 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DataProductResultItem AWS API Documentation
     #
     class DataProductResultItem < Struct.new(
+      :additional_attributes,
       :created_at,
       :created_by,
       :description,
@@ -7354,6 +7461,11 @@ module Aws::DataZone
     #
     # @!attribute [rw] identifier
     #   The ID of the Amazon DataZone asset.
+    #
+    #   This parameter supports either the value of `assetId` or
+    #   `externalIdentifier` as input. If you are passing the value of
+    #   `externalIdentifier`, you must prefix this value with
+    #   `externalIdentifer%2F`.
     #   @return [String]
     #
     # @!attribute [rw] revision
@@ -10145,6 +10257,10 @@ module Aws::DataZone
 
     # The details of a business glossary.
     #
+    # @!attribute [rw] additional_attributes
+    #   The additional attributes of an Amazon DataZone glossary.
+    #   @return [Types::GlossaryItemAdditionalAttributes]
+    #
     # @!attribute [rw] created_at
     #   The timestamp of when the glossary was created.
     #   @return [Time]
@@ -10189,6 +10305,7 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GlossaryItem AWS API Documentation
     #
     class GlossaryItem < Struct.new(
+      :additional_attributes,
       :created_at,
       :created_by,
       :description,
@@ -10203,7 +10320,25 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The additional attributes of an Amazon DataZone glossary.
+    #
+    # @!attribute [rw] match_rationale
+    #   List of rationales indicating why this item was matched by search.
+    #   @return [Array<Types::MatchRationaleItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GlossaryItemAdditionalAttributes AWS API Documentation
+    #
+    class GlossaryItemAdditionalAttributes < Struct.new(
+      :match_rationale)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of a business glossary term.
+    #
+    # @!attribute [rw] additional_attributes
+    #   The additional attributes of an Amazon DataZone glossary term.
+    #   @return [Types::GlossaryTermItemAdditionalAttributes]
     #
     # @!attribute [rw] created_at
     #   The timestamp of when a business glossary term was created.
@@ -10257,6 +10392,7 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GlossaryTermItem AWS API Documentation
     #
     class GlossaryTermItem < Struct.new(
+      :additional_attributes,
       :created_at,
       :created_by,
       :domain_id,
@@ -10270,6 +10406,20 @@ module Aws::DataZone
       :updated_at,
       :updated_by)
       SENSITIVE = [:long_description, :name, :short_description]
+      include Aws::Structure
+    end
+
+    # The additional attributes of an Amazon DataZone glossary term.
+    #
+    # @!attribute [rw] match_rationale
+    #   List of rationales indicating why this item was matched by search.
+    #   @return [Array<Types::MatchRationaleItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GlossaryTermItemAdditionalAttributes AWS API Documentation
+    #
+    class GlossaryTermItemAdditionalAttributes < Struct.new(
+      :match_rationale)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13756,6 +13906,48 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The offset of a matched term.
+    #
+    # @!attribute [rw] end_offset
+    #   The 0-indexed number indicating the end position (exclusive) of a
+    #   matched term.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_offset
+    #   The 0-indexed number indicating the start position (inclusive) of a
+    #   matched term.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/MatchOffset AWS API Documentation
+    #
+    class MatchOffset < Struct.new(
+      :end_offset,
+      :start_offset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A rationale indicating why this item was matched by search.
+    #
+    # @note MatchRationaleItem is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MatchRationaleItem corresponding to the set member.
+    #
+    # @!attribute [rw] text_matches
+    #   A list of TextMatchItems.
+    #   @return [Array<Types::TextMatchItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/MatchRationaleItem AWS API Documentation
+    #
+    class MatchRationaleItem < Struct.new(
+      :text_matches,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class TextMatches < MatchRationaleItem; end
+      class Unknown < MatchRationaleItem; end
+    end
+
     # The details about a project member.
     #
     # @note Member is a union - when making an API calls you must set exactly one of the members.
@@ -16638,6 +16830,11 @@ module Aws::DataZone
     #   Specifies additional attributes for the search.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] aggregations
+    #   Enables you to specify one or more attributes to compute and return
+    #   counts grouped by field values.
+    #   @return [Array<Types::AggregationListItem>]
+    #
     # @!attribute [rw] domain_identifier
     #   The identifier of the domain in which to search listings.
     #   @return [String]
@@ -16679,6 +16876,7 @@ module Aws::DataZone
     #
     class SearchListingsInput < Struct.new(
       :additional_attributes,
+      :aggregations,
       :domain_identifier,
       :filters,
       :max_results,
@@ -16690,6 +16888,11 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] aggregates
+    #   Contains computed counts grouped by field values based on the
+    #   requested aggregation attributes for the matching listings.
+    #   @return [Array<Types::AggregationOutput>]
+    #
     # @!attribute [rw] items
     #   The results of the `SearchListings` action.
     #   @return [Array<Types::SearchResultItem>]
@@ -16710,6 +16913,7 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SearchListingsOutput AWS API Documentation
     #
     class SearchListingsOutput < Struct.new(
+      :aggregates,
       :items,
       :next_token,
       :total_match_count)
@@ -18216,6 +18420,30 @@ module Aws::DataZone
     class TermRelations < Struct.new(
       :classifies,
       :is_a)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure indicating matched terms for an attribute.
+    #
+    # @!attribute [rw] attribute
+    #   The name of the attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_offsets
+    #   List of offsets indicating matching terms in the TextMatchItem text.
+    #   @return [Array<Types::MatchOffset>]
+    #
+    # @!attribute [rw] text
+    #   Snippet of attribute text containing highlighted content.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/TextMatchItem AWS API Documentation
+    #
+    class TextMatchItem < Struct.new(
+      :attribute,
+      :match_offsets,
+      :text)
       SENSITIVE = []
       include Aws::Structure
     end

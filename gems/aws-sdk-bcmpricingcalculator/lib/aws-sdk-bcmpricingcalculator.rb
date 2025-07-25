@@ -55,7 +55,7 @@ module Aws::BCMPricingCalculator
   autoload :EndpointProvider, 'aws-sdk-bcmpricingcalculator/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-bcmpricingcalculator/endpoints'
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.13.0'
 
 end
 

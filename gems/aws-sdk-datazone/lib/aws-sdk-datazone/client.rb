@@ -95,7 +95,7 @@ module Aws::DataZone
     #     class name or an instance of a plugin class.
     #
     #   @option options [required, Aws::CredentialProvider] :credentials
-    #     Your AWS credentials. This can be an instance of any one of the
+    #     Your AWS credentials used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
@@ -128,18 +128,23 @@ module Aws::DataZone
     #     locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
+    #
     #     * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
     #       `:account_id` options.
-    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
-    #       ENV['AWS_SESSION_TOKEN'], and ENV['AWS_ACCOUNT_ID']
+    #
+    #     * `ENV['AWS_ACCESS_KEY_ID']`, `ENV['AWS_SECRET_ACCESS_KEY']`,
+    #       `ENV['AWS_SESSION_TOKEN']`, and `ENV['AWS_ACCOUNT_ID']`.
+    #
     #     * `~/.aws/credentials`
+    #
     #     * `~/.aws/config`
+    #
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
     #       enable retries and extended timeouts. Instance profile credential
-    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
-    #       to true.
+    #       fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
+    #       to `true`.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -166,6 +171,11 @@ module Aws::DataZone
     #     until there is sufficent client side capacity to retry the request.
     #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
     #     not retry instead of sleeping.
+    #
+    #   @option options [Array<String>] :auth_scheme_preference
+    #     A list of preferred authentication schemes to use when making a request. Supported values are:
+    #     `sigv4`, `sigv4a`, `httpBearerAuth`, and `noAuth`. When set using `ENV['AWS_AUTH_SCHEME_PREFERENCE']` or in
+    #     shared config as `auth_scheme_preference`, the value should be a comma-separated list.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -253,8 +263,8 @@ module Aws::DataZone
     #     4 times. Used in `standard` and `adaptive` retry modes.
     #
     #   @option options [String] :profile ("default")
-    #     Used when loading credentials from the shared credentials file
-    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
+    #     When not specified, 'default' is used.
     #
     #   @option options [String] :request_checksum_calculation ("when_supported")
     #     Determines when a checksum will be calculated for request payloads. Values are:
@@ -367,7 +377,7 @@ module Aws::DataZone
     #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
-    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     Your Bearer token used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
@@ -974,6 +984,9 @@ module Aws::DataZone
     #
     # @option params [String] :external_identifier
     #   The external identifier of the asset.
+    #
+    #   If the value for the `externalIdentifier` parameter is specified, it
+    #   must be a unique value.
     #
     # @option params [Array<Types::FormInput>] :forms_input
     #   Metadata forms attached to the asset.
@@ -4663,6 +4676,11 @@ module Aws::DataZone
     #
     # @option params [required, String] :identifier
     #   The ID of the Amazon DataZone asset.
+    #
+    #   This parameter supports either the value of `assetId` or
+    #   `externalIdentifier` as input. If you are passing the value of
+    #   `externalIdentifier`, you must prefix this value with
+    #   `externalIdentifer%2F`.
     #
     # @option params [String] :revision
     #   The revision of the Amazon DataZone asset.
@@ -10086,7 +10104,7 @@ module Aws::DataZone
     # @example Request syntax with placeholder values
     #
     #   resp = client.search({
-    #     additional_attributes: ["FORMS"], # accepts FORMS, TIME_SERIES_DATA_POINT_FORMS
+    #     additional_attributes: ["FORMS"], # accepts FORMS, TIME_SERIES_DATA_POINT_FORMS, TEXT_MATCH_RATIONALE
     #     domain_identifier: "DomainId", # required
     #     filters: {
     #       and: [
@@ -10135,6 +10153,13 @@ module Aws::DataZone
     #   resp.items[0].asset_item.additional_attributes.latest_time_series_data_point_forms_output[0].timestamp #=> Time
     #   resp.items[0].asset_item.additional_attributes.latest_time_series_data_point_forms_output[0].type_identifier #=> String
     #   resp.items[0].asset_item.additional_attributes.latest_time_series_data_point_forms_output[0].type_revision #=> String
+    #   resp.items[0].asset_item.additional_attributes.match_rationale #=> Array
+    #   resp.items[0].asset_item.additional_attributes.match_rationale[0].text_matches #=> Array
+    #   resp.items[0].asset_item.additional_attributes.match_rationale[0].text_matches[0].attribute #=> String
+    #   resp.items[0].asset_item.additional_attributes.match_rationale[0].text_matches[0].match_offsets #=> Array
+    #   resp.items[0].asset_item.additional_attributes.match_rationale[0].text_matches[0].match_offsets[0].end_offset #=> Integer
+    #   resp.items[0].asset_item.additional_attributes.match_rationale[0].text_matches[0].match_offsets[0].start_offset #=> Integer
+    #   resp.items[0].asset_item.additional_attributes.match_rationale[0].text_matches[0].text #=> String
     #   resp.items[0].asset_item.additional_attributes.read_only_forms_output #=> Array
     #   resp.items[0].asset_item.additional_attributes.read_only_forms_output[0].content #=> String
     #   resp.items[0].asset_item.additional_attributes.read_only_forms_output[0].form_name #=> String
@@ -10154,6 +10179,13 @@ module Aws::DataZone
     #   resp.items[0].asset_item.owning_project_id #=> String
     #   resp.items[0].asset_item.type_identifier #=> String
     #   resp.items[0].asset_item.type_revision #=> String
+    #   resp.items[0].data_product_item.additional_attributes.match_rationale #=> Array
+    #   resp.items[0].data_product_item.additional_attributes.match_rationale[0].text_matches #=> Array
+    #   resp.items[0].data_product_item.additional_attributes.match_rationale[0].text_matches[0].attribute #=> String
+    #   resp.items[0].data_product_item.additional_attributes.match_rationale[0].text_matches[0].match_offsets #=> Array
+    #   resp.items[0].data_product_item.additional_attributes.match_rationale[0].text_matches[0].match_offsets[0].end_offset #=> Integer
+    #   resp.items[0].data_product_item.additional_attributes.match_rationale[0].text_matches[0].match_offsets[0].start_offset #=> Integer
+    #   resp.items[0].data_product_item.additional_attributes.match_rationale[0].text_matches[0].text #=> String
     #   resp.items[0].data_product_item.created_at #=> Time
     #   resp.items[0].data_product_item.created_by #=> String
     #   resp.items[0].data_product_item.description #=> String
@@ -10165,6 +10197,13 @@ module Aws::DataZone
     #   resp.items[0].data_product_item.id #=> String
     #   resp.items[0].data_product_item.name #=> String
     #   resp.items[0].data_product_item.owning_project_id #=> String
+    #   resp.items[0].glossary_item.additional_attributes.match_rationale #=> Array
+    #   resp.items[0].glossary_item.additional_attributes.match_rationale[0].text_matches #=> Array
+    #   resp.items[0].glossary_item.additional_attributes.match_rationale[0].text_matches[0].attribute #=> String
+    #   resp.items[0].glossary_item.additional_attributes.match_rationale[0].text_matches[0].match_offsets #=> Array
+    #   resp.items[0].glossary_item.additional_attributes.match_rationale[0].text_matches[0].match_offsets[0].end_offset #=> Integer
+    #   resp.items[0].glossary_item.additional_attributes.match_rationale[0].text_matches[0].match_offsets[0].start_offset #=> Integer
+    #   resp.items[0].glossary_item.additional_attributes.match_rationale[0].text_matches[0].text #=> String
     #   resp.items[0].glossary_item.created_at #=> Time
     #   resp.items[0].glossary_item.created_by #=> String
     #   resp.items[0].glossary_item.description #=> String
@@ -10175,6 +10214,13 @@ module Aws::DataZone
     #   resp.items[0].glossary_item.status #=> String, one of "DISABLED", "ENABLED"
     #   resp.items[0].glossary_item.updated_at #=> Time
     #   resp.items[0].glossary_item.updated_by #=> String
+    #   resp.items[0].glossary_term_item.additional_attributes.match_rationale #=> Array
+    #   resp.items[0].glossary_term_item.additional_attributes.match_rationale[0].text_matches #=> Array
+    #   resp.items[0].glossary_term_item.additional_attributes.match_rationale[0].text_matches[0].attribute #=> String
+    #   resp.items[0].glossary_term_item.additional_attributes.match_rationale[0].text_matches[0].match_offsets #=> Array
+    #   resp.items[0].glossary_term_item.additional_attributes.match_rationale[0].text_matches[0].match_offsets[0].end_offset #=> Integer
+    #   resp.items[0].glossary_term_item.additional_attributes.match_rationale[0].text_matches[0].match_offsets[0].start_offset #=> Integer
+    #   resp.items[0].glossary_term_item.additional_attributes.match_rationale[0].text_matches[0].text #=> String
     #   resp.items[0].glossary_term_item.created_at #=> Time
     #   resp.items[0].glossary_term_item.created_by #=> String
     #   resp.items[0].glossary_term_item.domain_id #=> String
@@ -10270,6 +10316,10 @@ module Aws::DataZone
     # @option params [Array<String>] :additional_attributes
     #   Specifies additional attributes for the search.
     #
+    # @option params [Array<Types::AggregationListItem>] :aggregations
+    #   Enables you to specify one or more attributes to compute and return
+    #   counts grouped by field values.
+    #
     # @option params [required, String] :domain_identifier
     #   The identifier of the domain in which to search listings.
     #
@@ -10302,6 +10352,7 @@ module Aws::DataZone
     #
     # @return [Types::SearchListingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::SearchListingsOutput#aggregates #aggregates} => Array&lt;Types::AggregationOutput&gt;
     #   * {Types::SearchListingsOutput#items #items} => Array&lt;Types::SearchResultItem&gt;
     #   * {Types::SearchListingsOutput#next_token #next_token} => String
     #   * {Types::SearchListingsOutput#total_match_count #total_match_count} => Integer
@@ -10311,7 +10362,13 @@ module Aws::DataZone
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_listings({
-    #     additional_attributes: ["FORMS"], # accepts FORMS, TIME_SERIES_DATA_POINT_FORMS
+    #     additional_attributes: ["FORMS"], # accepts FORMS, TIME_SERIES_DATA_POINT_FORMS, TEXT_MATCH_RATIONALE
+    #     aggregations: [
+    #       {
+    #         attribute: "Attribute", # required
+    #         display_value: "AggregationDisplayValue",
+    #       },
+    #     ],
     #     domain_identifier: "DomainId", # required
     #     filters: {
     #       and: [
@@ -10336,7 +10393,7 @@ module Aws::DataZone
     #         attribute: "Attribute", # required
     #       },
     #     ],
-    #     search_text: "String",
+    #     search_text: "SearchListingsInputSearchTextString",
     #     sort: {
     #       attribute: "Attribute", # required
     #       order: "ASCENDING", # accepts ASCENDING, DESCENDING
@@ -10345,6 +10402,13 @@ module Aws::DataZone
     #
     # @example Response structure
     #
+    #   resp.aggregates #=> Array
+    #   resp.aggregates[0].attribute #=> String
+    #   resp.aggregates[0].display_value #=> String
+    #   resp.aggregates[0].items #=> Array
+    #   resp.aggregates[0].items[0].count #=> Integer
+    #   resp.aggregates[0].items[0].display_value #=> String
+    #   resp.aggregates[0].items[0].value #=> String
     #   resp.items #=> Array
     #   resp.items[0].asset_listing.additional_attributes.forms #=> String
     #   resp.items[0].asset_listing.additional_attributes.latest_time_series_data_point_forms #=> Array
@@ -10354,6 +10418,13 @@ module Aws::DataZone
     #   resp.items[0].asset_listing.additional_attributes.latest_time_series_data_point_forms[0].timestamp #=> Time
     #   resp.items[0].asset_listing.additional_attributes.latest_time_series_data_point_forms[0].type_identifier #=> String
     #   resp.items[0].asset_listing.additional_attributes.latest_time_series_data_point_forms[0].type_revision #=> String
+    #   resp.items[0].asset_listing.additional_attributes.match_rationale #=> Array
+    #   resp.items[0].asset_listing.additional_attributes.match_rationale[0].text_matches #=> Array
+    #   resp.items[0].asset_listing.additional_attributes.match_rationale[0].text_matches[0].attribute #=> String
+    #   resp.items[0].asset_listing.additional_attributes.match_rationale[0].text_matches[0].match_offsets #=> Array
+    #   resp.items[0].asset_listing.additional_attributes.match_rationale[0].text_matches[0].match_offsets[0].end_offset #=> Integer
+    #   resp.items[0].asset_listing.additional_attributes.match_rationale[0].text_matches[0].match_offsets[0].start_offset #=> Integer
+    #   resp.items[0].asset_listing.additional_attributes.match_rationale[0].text_matches[0].text #=> String
     #   resp.items[0].asset_listing.created_at #=> Time
     #   resp.items[0].asset_listing.description #=> String
     #   resp.items[0].asset_listing.entity_id #=> String
@@ -10369,6 +10440,13 @@ module Aws::DataZone
     #   resp.items[0].asset_listing.name #=> String
     #   resp.items[0].asset_listing.owning_project_id #=> String
     #   resp.items[0].data_product_listing.additional_attributes.forms #=> String
+    #   resp.items[0].data_product_listing.additional_attributes.match_rationale #=> Array
+    #   resp.items[0].data_product_listing.additional_attributes.match_rationale[0].text_matches #=> Array
+    #   resp.items[0].data_product_listing.additional_attributes.match_rationale[0].text_matches[0].attribute #=> String
+    #   resp.items[0].data_product_listing.additional_attributes.match_rationale[0].text_matches[0].match_offsets #=> Array
+    #   resp.items[0].data_product_listing.additional_attributes.match_rationale[0].text_matches[0].match_offsets[0].end_offset #=> Integer
+    #   resp.items[0].data_product_listing.additional_attributes.match_rationale[0].text_matches[0].match_offsets[0].start_offset #=> Integer
+    #   resp.items[0].data_product_listing.additional_attributes.match_rationale[0].text_matches[0].text #=> String
     #   resp.items[0].data_product_listing.created_at #=> Time
     #   resp.items[0].data_product_listing.description #=> String
     #   resp.items[0].data_product_listing.entity_id #=> String
@@ -12731,7 +12809,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

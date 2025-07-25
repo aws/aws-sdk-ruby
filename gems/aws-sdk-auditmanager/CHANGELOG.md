@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2025-07-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.67.0 (2025-07-18)
+------------------
+
+* Feature - Updated error handling for RegisterOrganizationAdminAccount API to properly translate TooManyExceptions to HTTP 429 status code. This enhancement improves error handling consistency and provides clearer feedback when request limits are exceeded.
+
 1.66.0 (2025-06-02)
 ------------------
 

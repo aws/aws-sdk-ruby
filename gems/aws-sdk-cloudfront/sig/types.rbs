@@ -1069,7 +1069,7 @@ module Aws::CloudFront
       attr_accessor staging: bool
       attr_accessor connection_mode: ("direct" | "tenant-only")
       attr_accessor anycast_ip_list_id: ::String
-      SENSITIVE: []
+      SENSITIVE: [:comment]
     end
 
     class DistributionTenant
@@ -3192,7 +3192,7 @@ module Aws::CloudFront
       attr_accessor comment: ::String
       attr_accessor default_value: ::String
       attr_accessor required: bool
-      SENSITIVE: []
+      SENSITIVE: [:comment]
     end
 
     class Tag

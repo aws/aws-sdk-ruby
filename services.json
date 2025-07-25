@@ -127,7 +127,10 @@
     "models": "batch/2016-08-10"
   },
   "Bedrock": {
-    "models": "bedrock/2023-04-20"
+    "models": "bedrock/2023-04-20",
+    "addPlugins": [
+      "Aws::Bedrock::Plugins::BearerAuthorization"
+    ]
   },
   "BedrockAgent": {
     "models": "bedrock-agent/2023-06-05"
@@ -148,7 +151,10 @@
     "models": "bedrock-data-automation-runtime/2024-06-13"
   },
   "BedrockRuntime": {
-    "models": "bedrock-runtime/2023-09-30"
+    "models": "bedrock-runtime/2023-09-30",
+    "addPlugins": [
+      "Aws::BedrockRuntime::Plugins::BearerAuthorization"
+    ]
   },
   "Billing": {
     "models": "billing/2023-09-07"

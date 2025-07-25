@@ -15,7 +15,7 @@ module Aws::CloudWatchLogs
       attr_accessor policy_name: ::String
       attr_accessor policy_document: ::String
       attr_accessor last_updated_time: ::Integer
-      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY")
+      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY")
       attr_accessor scope: ("ALL")
       attr_accessor selection_criteria: ::String
       attr_accessor account_id: ::String
@@ -206,7 +206,7 @@ module Aws::CloudWatchLogs
 
     class DeleteAccountPolicyRequest
       attr_accessor policy_name: ::String
-      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY")
+      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY")
       SENSITIVE: []
     end
 
@@ -356,7 +356,7 @@ module Aws::CloudWatchLogs
     end
 
     class DescribeAccountPoliciesRequest
-      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY")
+      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY")
       attr_accessor policy_name: ::String
       attr_accessor account_identifiers: ::Array[::String]
       attr_accessor next_token: ::String
@@ -636,6 +636,12 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class FieldsData
+      attr_accessor data: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
     class FilterLogEventsRequest
       attr_accessor log_group_name: ::String
       attr_accessor log_group_identifier: ::String
@@ -782,6 +788,17 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class GetLogObjectRequest
+      attr_accessor unmask: bool
+      attr_accessor log_object_pointer: ::String
+      SENSITIVE: []
+    end
+
+    class GetLogObjectResponse
+      attr_accessor field_stream: Types::GetLogObjectResponseStream
+      SENSITIVE: []
+    end
+
     class GetLogRecordRequest
       attr_accessor log_record_pointer: ::String
       attr_accessor unmask: bool
@@ -856,6 +873,12 @@ module Aws::CloudWatchLogs
       attr_accessor integration_name: ::String
       attr_accessor integration_type: ("OPENSEARCH")
       attr_accessor integration_status: ("PROVISIONING" | "ACTIVE" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class InternalStreamingException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
       SENSITIVE: []
     end
 
@@ -1279,7 +1302,7 @@ module Aws::CloudWatchLogs
     class PutAccountPolicyRequest
       attr_accessor policy_name: ::String
       attr_accessor policy_document: ::String
-      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY")
+      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY")
       attr_accessor scope: ("ALL")
       attr_accessor selection_criteria: ::String
       SENSITIVE: []
@@ -1795,6 +1818,10 @@ module Aws::CloudWatchLogs
     end
 
     class ValidationException < Aws::EmptyStructure
+    end
+
+    class GetLogObjectResponseStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:fields, :internal_streaming_exception]
     end
 
     class StartLiveTailResponseStream < Enumerator[untyped, untyped]

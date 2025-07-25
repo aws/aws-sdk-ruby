@@ -95,7 +95,7 @@ module Aws::Outposts
     #     class name or an instance of a plugin class.
     #
     #   @option options [required, Aws::CredentialProvider] :credentials
-    #     Your AWS credentials. This can be an instance of any one of the
+    #     Your AWS credentials used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
@@ -128,18 +128,23 @@ module Aws::Outposts
     #     locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
+    #
     #     * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
     #       `:account_id` options.
-    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
-    #       ENV['AWS_SESSION_TOKEN'], and ENV['AWS_ACCOUNT_ID']
+    #
+    #     * `ENV['AWS_ACCESS_KEY_ID']`, `ENV['AWS_SECRET_ACCESS_KEY']`,
+    #       `ENV['AWS_SESSION_TOKEN']`, and `ENV['AWS_ACCOUNT_ID']`.
+    #
     #     * `~/.aws/credentials`
+    #
     #     * `~/.aws/config`
+    #
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
     #       enable retries and extended timeouts. Instance profile credential
-    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
-    #       to true.
+    #       fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
+    #       to `true`.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -166,6 +171,11 @@ module Aws::Outposts
     #     until there is sufficent client side capacity to retry the request.
     #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
     #     not retry instead of sleeping.
+    #
+    #   @option options [Array<String>] :auth_scheme_preference
+    #     A list of preferred authentication schemes to use when making a request. Supported values are:
+    #     `sigv4`, `sigv4a`, `httpBearerAuth`, and `noAuth`. When set using `ENV['AWS_AUTH_SCHEME_PREFERENCE']` or in
+    #     shared config as `auth_scheme_preference`, the value should be a comma-separated list.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -253,8 +263,8 @@ module Aws::Outposts
     #     4 times. Used in `standard` and `adaptive` retry modes.
     #
     #   @option options [String] :profile ("default")
-    #     Used when loading credentials from the shared credentials file
-    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
+    #     When not specified, 'default' is used.
     #
     #   @option options [String] :request_checksum_calculation ("when_supported")
     #     Determines when a checksum will be calculated for request payloads. Values are:
@@ -367,7 +377,7 @@ module Aws::Outposts
     #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
-    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     Your Bearer token used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
@@ -1054,6 +1064,58 @@ module Aws::Outposts
     # @param [Hash] params ({})
     def get_outpost(params = {}, options = {})
       req = build_request(:get_outpost, params)
+      req.send_request(options)
+    end
+
+    # Gets current and historical billing information about the specified
+    # Outpost.
+    #
+    # @option params [String] :next_token
+    #   The pagination token.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum page size.
+    #
+    # @option params [required, String] :outpost_identifier
+    #   The ID or ARN of the Outpost.
+    #
+    # @return [Types::GetOutpostBillingInformationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOutpostBillingInformationOutput#next_token #next_token} => String
+    #   * {Types::GetOutpostBillingInformationOutput#subscriptions #subscriptions} => Array&lt;Types::Subscription&gt;
+    #   * {Types::GetOutpostBillingInformationOutput#contract_end_date #contract_end_date} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_outpost_billing_information({
+    #     next_token: "Token",
+    #     max_results: 1,
+    #     outpost_identifier: "OutpostIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.subscriptions #=> Array
+    #   resp.subscriptions[0].subscription_id #=> String
+    #   resp.subscriptions[0].subscription_type #=> String, one of "ORIGINAL", "RENEWAL", "CAPACITY_INCREASE"
+    #   resp.subscriptions[0].subscription_status #=> String, one of "ACTIVE", "INACTIVE", "CANCELLED"
+    #   resp.subscriptions[0].order_ids #=> Array
+    #   resp.subscriptions[0].order_ids[0] #=> String
+    #   resp.subscriptions[0].begin_date #=> Time
+    #   resp.subscriptions[0].end_date #=> Time
+    #   resp.subscriptions[0].monthly_recurring_price #=> Float
+    #   resp.subscriptions[0].upfront_price #=> Float
+    #   resp.contract_end_date #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOutpostBillingInformation AWS API Documentation
+    #
+    # @overload get_outpost_billing_information(params = {})
+    # @param [Hash] params ({})
+    def get_outpost_billing_information(params = {}, options = {})
+      req = build_request(:get_outpost_billing_information, params)
       req.send_request(options)
     end
 
@@ -2350,7 +2412,7 @@ module Aws::Outposts
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

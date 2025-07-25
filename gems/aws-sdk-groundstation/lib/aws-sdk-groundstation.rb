@@ -55,7 +55,7 @@ module Aws::GroundStation
   autoload :EndpointProvider, 'aws-sdk-groundstation/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-groundstation/endpoints'
 
-  GEM_VERSION = '1.67.0'
+  GEM_VERSION = '1.68.0'
 
 end
 

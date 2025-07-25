@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2025-07-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2025-07-17)
+------------------
+
+* Feature - This release introduces Parquet result format support for ML Input Channel models in AWS Clean Rooms ML.
+
 1.27.0 (2025-07-01)
 ------------------
 

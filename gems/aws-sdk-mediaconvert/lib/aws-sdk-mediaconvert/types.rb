@@ -64,6 +64,26 @@ module Aws::MediaConvert
     #   5.1 Surround: Six channels, C, L, R, Ls, Rs, LFE.
     #   @return [String]
     #
+    # @!attribute [rw] loudness_measurement_mode
+    #   Choose the loudness measurement mode for your audio content. For
+    #   music or advertisements: We recommend that you keep the default
+    #   value, Program. For speech or other content: We recommend that you
+    #   choose Anchor. When you do, MediaConvert optimizes the loudness of
+    #   your output for clarify by applying speech gates.
+    #   @return [String]
+    #
+    # @!attribute [rw] rap_interval
+    #   Specify the RAP (Random Access Point) interval for your xHE-AAC
+    #   audio output. A RAP allows a decoder to decode audio data
+    #   mid-stream, without the need to reference previous audio frames, and
+    #   perform adaptive audio bitrate switching. To specify the RAP
+    #   interval: Enter an integer from 2000 to 30000, in milliseconds.
+    #   Smaller values allow for better seeking and more frequent stream
+    #   switching, while large values improve compression efficiency. To
+    #   have MediaConvert automatically determine the RAP interval: Leave
+    #   blank.
+    #   @return [Integer]
+    #
     # @!attribute [rw] rate_control_mode
     #   Specify the AAC rate control mode. For a constant bitrate: Choose
     #   CBR. Your AAC output bitrate will be equal to the value that you
@@ -90,6 +110,13 @@ module Aws::MediaConvert
     #   Transport Stream containers.
     #   @return [String]
     #
+    # @!attribute [rw] target_loudness_range
+    #   Specify the xHE-AAC loudness target. Enter an integer from 6 to 16,
+    #   representing "loudness units". For more information, see the
+    #   following specification: Supplementary information for R 128 EBU
+    #   Tech 3342-2023.
+    #   @return [Integer]
+    #
     # @!attribute [rw] vbr_quality
     #   Specify the quality of your variable bitrate (VBR) AAC audio. For a
     #   list of approximate VBR bitrates, see:
@@ -103,10 +130,13 @@ module Aws::MediaConvert
       :bitrate,
       :codec_profile,
       :coding_mode,
+      :loudness_measurement_mode,
+      :rap_interval,
       :rate_control_mode,
       :raw_format,
       :sample_rate,
       :specification,
+      :target_loudness_range,
       :vbr_quality)
       SENSITIVE = []
       include Aws::Structure
@@ -3016,9 +3046,9 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] format
     #   The format of your media file. For example: MP4, QuickTime (MOV),
-    #   Matroska (MKV), or WebM. Note that this will be blank if your media
-    #   file has a format that the MediaConvert Probe operation does not
-    #   recognize.
+    #   Matroska (MKV), WebM or MXF. Note that this will be blank if your
+    #   media file has a format that the MediaConvert Probe operation does
+    #   not recognize.
     #   @return [String]
     #
     # @!attribute [rw] tracks
@@ -7801,11 +7831,18 @@ module Aws::MediaConvert
     #   Specify the source file for your transcoding job. You can use
     #   multiple inputs in a single job. The service concatenates these
     #   inputs, in the order that you specify them in the job, to create the
-    #   outputs. If your input format is IMF, specify your input by
-    #   providing the path to your CPL. For example,
-    #   "s3://bucket/vf/cpl.xml". If the CPL is in an incomplete IMP, make
-    #   sure to use *Supplemental IMPs* to specify any supplemental IMPs
-    #   that contain assets referenced by the CPL.
+    #   outputs. For standard inputs, provide the path to your S3, HTTP, or
+    #   HTTPS source file. For example, s3://amzn-s3-demo-bucket/input.mp4
+    #   for an Amazon S3 input or https://example.com/input.mp4 for an HTTPS
+    #   input. For TAMS inputs, specify the HTTPS endpoint of your TAMS
+    #   server. For example, https://tams-server.example.com . When you do,
+    #   also specify Source ID, Timerange, GAP handling, and the
+    #   Authorization connection ARN under TAMS settings. (Don't include
+    #   these parameters in the Input file URL.) For IMF inputs, specify
+    #   your input by providing the path to your CPL. For example,
+    #   s3://amzn-s3-demo-bucket/vf/cpl.xml . If the CPL is in an incomplete
+    #   IMP, make sure to use Supplemental IMPsto specify any supplemental
+    #   IMPs that contain assets referenced by the CPL.
     #   @return [String]
     #
     # @!attribute [rw] filter_enable
@@ -7890,6 +7927,21 @@ module Aws::MediaConvert
     #   the service automatically detects it.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tams_settings
+    #   Specify a Time Addressable Media Store (TAMS) server as an input
+    #   source. TAMS is an open-source API specification that provides
+    #   access to time-segmented media content. Use TAMS to retrieve
+    #   specific time ranges from live or archived media streams. When you
+    #   specify TAMS settings, MediaConvert connects to your TAMS server,
+    #   retrieves the media segments for your specified time range, and
+    #   processes them as a single input. This enables workflows like
+    #   extracting clips from live streams or processing specific portions
+    #   of archived content. To use TAMS, you must: 1. Have access to a
+    #   TAMS-compliant server 2. Specify the server URL in the Input file
+    #   URL field 3. Provide the required SourceId and Timerange parameters
+    #   4. Configure authentication, if your TAMS server requires it
+    #   @return [Types::InputTamsSettings]
+    #
     # @!attribute [rw] timecode_source
     #   Use this Timecode source setting, located under the input settings,
     #   to specify how the service counts input video frames. This input
@@ -7954,6 +8006,7 @@ module Aws::MediaConvert
       :program_number,
       :psi_control,
       :supplemental_imps,
+      :tams_settings,
       :timecode_source,
       :timecode_start,
       :video_generator,
@@ -8041,6 +8094,77 @@ module Aws::MediaConvert
       :encrypted_decryption_key,
       :initialization_vector,
       :kms_key_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specify a Time Addressable Media Store (TAMS) server as an input
+    # source. TAMS is an open-source API specification that provides access
+    # to time-segmented media content. Use TAMS to retrieve specific time
+    # ranges from live or archived media streams. When you specify TAMS
+    # settings, MediaConvert connects to your TAMS server, retrieves the
+    # media segments for your specified time range, and processes them as a
+    # single input. This enables workflows like extracting clips from live
+    # streams or processing specific portions of archived content. To use
+    # TAMS, you must: 1. Have access to a TAMS-compliant server 2. Specify
+    # the server URL in the Input file URL field 3. Provide the required
+    # SourceId and Timerange parameters 4. Configure authentication, if your
+    # TAMS server requires it
+    #
+    # @!attribute [rw] auth_connection_arn
+    #   Specify the ARN (Amazon Resource Name) of an EventBridge Connection
+    #   to authenticate with your TAMS server. The EventBridge Connection
+    #   stores your authentication credentials securely. MediaConvert
+    #   assumes your job's IAM role to access this connection, so ensure
+    #   the role has the events:RetrieveConnectionCredentials,
+    #   secretsmanager:DescribeSecret, and secretsmanager:GetSecretValue
+    #   permissions. Format:
+    #   arn:aws:events:region:account-id:connection/connection-name/unique-id
+    #   @return [String]
+    #
+    # @!attribute [rw] gap_handling
+    #   Specify how MediaConvert handles gaps between media segments in your
+    #   TAMS source. Gaps can occur in live streams due to network issues or
+    #   other interruptions. Choose from the following options: * Skip gaps
+    #   - Default. Skip over gaps and join segments together. This creates a
+    #   continuous output with no blank frames, but may cause timeline
+    #   discontinuities. * Fill with black - Insert black frames to fill
+    #   gaps between segments. This maintains timeline continuity but adds
+    #   black frames where content is missing. * Hold last frame - Repeat
+    #   the last frame before a gap until the next segment begins. This
+    #   maintains visual continuity during gaps.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_id
+    #   Specify the unique identifier for the media source in your TAMS
+    #   server. MediaConvert uses this source ID to locate the appropriate
+    #   flows containing the media segments you want to process. The source
+    #   ID corresponds to a specific media source registered in your TAMS
+    #   server. This source must be of type urn:x-nmos:format:multi, and can
+    #   can reference multiple flows for audio, video, or combined
+    #   audio/video content. MediaConvert automatically selects the highest
+    #   quality flows available for your job. This setting is required when
+    #   include TAMS settings in your job.
+    #   @return [String]
+    #
+    # @!attribute [rw] timerange
+    #   Specify the time range of media segments to retrieve from your TAMS
+    #   server. MediaConvert fetches only the segments that fall within this
+    #   range. Use the format specified by your TAMS server implementation.
+    #   This must be two timestamp values with the format
+    #   \{sign?}\{seconds}:\{nanoseconds}, separated by an underscore,
+    #   surrounded by either parentheses or square brackets. Example:
+    #   \[15:0\_35:0) This setting is required when include TAMS settings in
+    #   your job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InputTamsSettings AWS API Documentation
+    #
+    class InputTamsSettings < Struct.new(
+      :auth_connection_arn,
+      :gap_handling,
+      :source_id,
+      :timerange)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13735,11 +13859,10 @@ module Aws::MediaConvert
     # @!attribute [rw] codec
     #   Specifies the video codec. This must be equal to one of the enum
     #   values defined by the object VideoCodec. To passthrough the video
-    #   stream of your input JPEG2000, VC-3, AVC-INTRA or Apple ProRes video
-    #   without any video encoding: Choose Passthrough. If you have multiple
-    #   input videos, note that they must have identical encoding
-    #   attributes. When you choose Passthrough, your output container must
-    #   be MXF or QuickTime MOV.
+    #   stream of your input without any video encoding: Choose Passthrough.
+    #   More information about passthrough codec support and job settings
+    #   requirements, see:
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/video-passthrough-feature-restrictions.html
     #   @return [String]
     #
     # @!attribute [rw] frame_capture_settings
@@ -14089,9 +14212,9 @@ module Aws::MediaConvert
     #   To specify a different height for the cropping rectangle: Enter an
     #   integer representing the Unit type that you choose, either Pixels or
     #   Percentage. For example, when you enter 100 and choose Pixels, the
-    #   cropping rectangle will 100 pixels high. When you enter 10, choose
-    #   Percentage, and your overlay input video is 1920x1080, the cropping
-    #   rectangle will be 108 pixels high.
+    #   cropping rectangle will be 100 pixels high. When you enter 10,
+    #   choose Percentage, and your overlay input video is 1920x1080, the
+    #   cropping rectangle will be 108 pixels high.
     #   @return [Integer]
     #
     # @!attribute [rw] unit
@@ -14106,9 +14229,9 @@ module Aws::MediaConvert
     #   To specify a different width for the cropping rectangle: Enter an
     #   integer representing the Unit type that you choose, either Pixels or
     #   Percentage. For example, when you enter 100 and choose Pixels, the
-    #   cropping rectangle will 100 pixels wide. When you enter 10, choose
-    #   Percentage, and your overlay input video is 1920x1080, the cropping
-    #   rectangle will be 192 pixels wide.
+    #   cropping rectangle will be 100 pixels wide. When you enter 10,
+    #   choose Percentage, and your overlay input video is 1920x1080, the
+    #   cropping rectangle will be 192 pixels wide.
     #   @return [Integer]
     #
     # @!attribute [rw] x

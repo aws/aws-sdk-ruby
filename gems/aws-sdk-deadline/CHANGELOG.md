@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2025-07-21)
+------------------
+
+* Feature - Add support for VPC resource endpoints in Service Managed Fleets
+
 1.29.0 (2025-07-03)
 ------------------
 

@@ -4645,11 +4645,17 @@ module Aws::CleanRoomsML
     #   the protected query.
     #   @return [Types::ComputeConfiguration]
     #
+    # @!attribute [rw] result_format
+    #   The format in which the query results should be returned. If not
+    #   specified, defaults to `CSV`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ProtectedQueryInputParameters AWS API Documentation
     #
     class ProtectedQueryInputParameters < Struct.new(
       :sql_parameters,
-      :compute_configuration)
+      :compute_configuration,
+      :result_format)
       SENSITIVE = [:sql_parameters]
       include Aws::Structure
     end

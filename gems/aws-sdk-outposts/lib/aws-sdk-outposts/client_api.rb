@@ -102,6 +102,8 @@ module Aws::Outposts
     GetConnectionResponse = Shapes::StructureShape.new(name: 'GetConnectionResponse')
     GetOrderInput = Shapes::StructureShape.new(name: 'GetOrderInput')
     GetOrderOutput = Shapes::StructureShape.new(name: 'GetOrderOutput')
+    GetOutpostBillingInformationInput = Shapes::StructureShape.new(name: 'GetOutpostBillingInformationInput')
+    GetOutpostBillingInformationOutput = Shapes::StructureShape.new(name: 'GetOutpostBillingInformationOutput')
     GetOutpostInput = Shapes::StructureShape.new(name: 'GetOutpostInput')
     GetOutpostInstanceTypesInput = Shapes::StructureShape.new(name: 'GetOutpostInstanceTypesInput')
     GetOutpostInstanceTypesOutput = Shapes::StructureShape.new(name: 'GetOutpostInstanceTypesOutput')
@@ -165,9 +167,11 @@ module Aws::Outposts
     Municipality = Shapes::StringShape.new(name: 'Municipality')
     NetworkInterfaceDeviceIndex = Shapes::IntegerShape.new(name: 'NetworkInterfaceDeviceIndex')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    NullableDouble = Shapes::FloatShape.new(name: 'NullableDouble')
     OpticalStandard = Shapes::StringShape.new(name: 'OpticalStandard')
     Order = Shapes::StructureShape.new(name: 'Order')
     OrderId = Shapes::StringShape.new(name: 'OrderId')
+    OrderIdList = Shapes::ListShape.new(name: 'OrderIdList')
     OrderStatus = Shapes::StringShape.new(name: 'OrderStatus')
     OrderSummary = Shapes::StructureShape.new(name: 'OrderSummary')
     OrderSummaryListDefinition = Shapes::ListShape.new(name: 'OrderSummaryListDefinition')
@@ -214,6 +218,10 @@ module Aws::Outposts
     StateOrRegionList = Shapes::ListShape.new(name: 'StateOrRegionList')
     StatusList = Shapes::ListShape.new(name: 'StatusList')
     String = Shapes::StringShape.new(name: 'String')
+    Subscription = Shapes::StructureShape.new(name: 'Subscription')
+    SubscriptionList = Shapes::ListShape.new(name: 'SubscriptionList')
+    SubscriptionStatus = Shapes::StringShape.new(name: 'SubscriptionStatus')
+    SubscriptionType = Shapes::StringShape.new(name: 'SubscriptionType')
     SupportedHardwareType = Shapes::StringShape.new(name: 'SupportedHardwareType')
     SupportedStorageEnum = Shapes::StringShape.new(name: 'SupportedStorageEnum')
     SupportedStorageList = Shapes::ListShape.new(name: 'SupportedStorageList')
@@ -465,6 +473,16 @@ module Aws::Outposts
     GetOrderOutput.add_member(:order, Shapes::ShapeRef.new(shape: Order, location_name: "Order"))
     GetOrderOutput.struct_class = Types::GetOrderOutput
 
+    GetOutpostBillingInformationInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "NextToken"))
+    GetOutpostBillingInformationInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults1000, location: "querystring", location_name: "MaxResults"))
+    GetOutpostBillingInformationInput.add_member(:outpost_identifier, Shapes::ShapeRef.new(shape: OutpostIdentifier, required: true, location: "uri", location_name: "OutpostIdentifier"))
+    GetOutpostBillingInformationInput.struct_class = Types::GetOutpostBillingInformationInput
+
+    GetOutpostBillingInformationOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    GetOutpostBillingInformationOutput.add_member(:subscriptions, Shapes::ShapeRef.new(shape: SubscriptionList, location_name: "Subscriptions"))
+    GetOutpostBillingInformationOutput.add_member(:contract_end_date, Shapes::ShapeRef.new(shape: String, location_name: "ContractEndDate"))
+    GetOutpostBillingInformationOutput.struct_class = Types::GetOutpostBillingInformationOutput
+
     GetOutpostInput.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostId, required: true, location: "uri", location_name: "OutpostId"))
     GetOutpostInput.struct_class = Types::GetOutpostInput
 
@@ -669,6 +687,8 @@ module Aws::Outposts
     Order.add_member(:order_type, Shapes::ShapeRef.new(shape: OrderType, location_name: "OrderType"))
     Order.struct_class = Types::Order
 
+    OrderIdList.member = Shapes::ShapeRef.new(shape: String)
+
     OrderSummary.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostIdOnly, location_name: "OutpostId"))
     OrderSummary.add_member(:order_id, Shapes::ShapeRef.new(shape: OrderId, location_name: "OrderId"))
     OrderSummary.add_member(:order_type, Shapes::ShapeRef.new(shape: OrderType, location_name: "OrderType"))
@@ -766,6 +786,18 @@ module Aws::Outposts
     StateOrRegionList.member = Shapes::ShapeRef.new(shape: StateOrRegion)
 
     StatusList.member = Shapes::ShapeRef.new(shape: AssetState)
+
+    Subscription.add_member(:subscription_id, Shapes::ShapeRef.new(shape: String, location_name: "SubscriptionId"))
+    Subscription.add_member(:subscription_type, Shapes::ShapeRef.new(shape: SubscriptionType, location_name: "SubscriptionType"))
+    Subscription.add_member(:subscription_status, Shapes::ShapeRef.new(shape: SubscriptionStatus, location_name: "SubscriptionStatus"))
+    Subscription.add_member(:order_ids, Shapes::ShapeRef.new(shape: OrderIdList, location_name: "OrderIds"))
+    Subscription.add_member(:begin_date, Shapes::ShapeRef.new(shape: ISO8601Timestamp, location_name: "BeginDate"))
+    Subscription.add_member(:end_date, Shapes::ShapeRef.new(shape: ISO8601Timestamp, location_name: "EndDate"))
+    Subscription.add_member(:monthly_recurring_price, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "MonthlyRecurringPrice"))
+    Subscription.add_member(:upfront_price, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "UpfrontPrice"))
+    Subscription.struct_class = Types::Subscription
+
+    SubscriptionList.member = Shapes::ShapeRef.new(shape: Subscription)
 
     SupportedStorageList.member = Shapes::ShapeRef.new(shape: SupportedStorageEnum)
 
@@ -971,6 +1003,7 @@ module Aws::Outposts
         o.output = Shapes::ShapeRef.new(shape: GetCatalogItemOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -1007,6 +1040,23 @@ module Aws::Outposts
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_outpost_billing_information, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetOutpostBillingInformation"
+        o.http_method = "GET"
+        o.http_request_uri = "/outpost/{OutpostIdentifier}/billing-information"
+        o.input = Shapes::ShapeRef.new(shape: GetOutpostBillingInformationInput)
+        o.output = Shapes::ShapeRef.new(shape: GetOutpostBillingInformationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_outpost_instance_types, Seahorse::Model::Operation.new.tap do |o|
@@ -1149,6 +1199,7 @@ module Aws::Outposts
         o.output = Shapes::ShapeRef.new(shape: ListCatalogItemsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

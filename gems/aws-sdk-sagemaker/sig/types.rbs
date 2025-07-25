@@ -2185,6 +2185,7 @@ module Aws::SageMaker
       attr_accessor workforce_name: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor workforce_vpc_config: Types::WorkforceVpcConfigRequest
+      attr_accessor ip_address_type: ("ipv4" | "dualstack")
       SENSITIVE: []
     end
 
@@ -2212,12 +2213,15 @@ module Aws::SageMaker
     class CustomFileSystem
       attr_accessor efs_file_system: Types::EFSFileSystem
       attr_accessor f_sx_lustre_file_system: Types::FSxLustreFileSystem
+      attr_accessor s3_file_system: Types::S3FileSystem
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class EfsFileSystem < CustomFileSystem
       end
       class FSxLustreFileSystem < CustomFileSystem
+      end
+      class S3FileSystem < CustomFileSystem
       end
       class Unknown < CustomFileSystem
       end
@@ -2226,12 +2230,15 @@ module Aws::SageMaker
     class CustomFileSystemConfig
       attr_accessor efs_file_system_config: Types::EFSFileSystemConfig
       attr_accessor f_sx_lustre_file_system_config: Types::FSxLustreFileSystemConfig
+      attr_accessor s3_file_system_config: Types::S3FileSystemConfig
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class EfsFileSystemConfig < CustomFileSystemConfig
       end
       class FSxLustreFileSystemConfig < CustomFileSystemConfig
+      end
+      class S3FileSystemConfig < CustomFileSystemConfig
       end
       class Unknown < CustomFileSystemConfig
       end
@@ -8923,7 +8930,7 @@ module Aws::SageMaker
     end
 
     class ReservedCapacityOffering
-      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.trn1.32xlarge" | "ml.trn2.48xlarge" | "ml.p6-b200.48xlarge")
+      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.trn1.32xlarge" | "ml.trn2.48xlarge" | "ml.p6-b200.48xlarge" | "ml.p4de.24xlarge")
       attr_accessor instance_count: ::Integer
       attr_accessor availability_zone: ::String
       attr_accessor duration_hours: ::Integer
@@ -8935,7 +8942,7 @@ module Aws::SageMaker
 
     class ReservedCapacitySummary
       attr_accessor reserved_capacity_arn: ::String
-      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.trn1.32xlarge" | "ml.trn2.48xlarge" | "ml.p6-b200.48xlarge")
+      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.trn1.32xlarge" | "ml.trn2.48xlarge" | "ml.p6-b200.48xlarge" | "ml.p4de.24xlarge")
       attr_accessor total_instance_count: ::Integer
       attr_accessor status: ("Pending" | "Active" | "Scheduled" | "Expired" | "Failed")
       attr_accessor availability_zone: ::String
@@ -9061,6 +9068,17 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class S3FileSystem
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class S3FileSystemConfig
+      attr_accessor mount_path: ::String
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
     class S3ModelDataSource
       attr_accessor s3_uri: ::String
       attr_accessor s3_data_type: ("S3Prefix" | "S3Object")
@@ -9175,7 +9193,7 @@ module Aws::SageMaker
     end
 
     class SearchTrainingPlanOfferingsRequest
-      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.trn1.32xlarge" | "ml.trn2.48xlarge" | "ml.p6-b200.48xlarge")
+      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.trn1.32xlarge" | "ml.trn2.48xlarge" | "ml.p6-b200.48xlarge" | "ml.p4de.24xlarge")
       attr_accessor instance_count: ::Integer
       attr_accessor start_time_after: ::Time
       attr_accessor end_time_before: ::Time
@@ -10746,6 +10764,7 @@ module Aws::SageMaker
       attr_accessor source_ip_config: Types::SourceIpConfig
       attr_accessor oidc_config: Types::OidcConfig
       attr_accessor workforce_vpc_config: Types::WorkforceVpcConfigRequest
+      attr_accessor ip_address_type: ("ipv4" | "dualstack")
       SENSITIVE: []
     end
 
@@ -10860,6 +10879,7 @@ module Aws::SageMaker
       attr_accessor workforce_vpc_config: Types::WorkforceVpcConfigResponse
       attr_accessor status: ("Initializing" | "Updating" | "Deleting" | "Failed" | "Active")
       attr_accessor failure_reason: ::String
+      attr_accessor ip_address_type: ("ipv4" | "dualstack")
       SENSITIVE: []
     end
 

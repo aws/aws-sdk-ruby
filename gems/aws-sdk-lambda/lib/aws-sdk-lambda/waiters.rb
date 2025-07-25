@@ -96,21 +96,21 @@ module Aws::Lambda
             operation_name: :get_function_configuration,
             acceptors: [
               {
-                "state" => "success",
                 "matcher" => "path",
                 "argument" => "state",
+                "state" => "success",
                 "expected" => "Active"
               },
               {
-                "state" => "failure",
                 "matcher" => "path",
                 "argument" => "state",
+                "state" => "failure",
                 "expected" => "Failed"
               },
               {
-                "state" => "retry",
                 "matcher" => "path",
                 "argument" => "state",
+                "state" => "retry",
                 "expected" => "Pending"
               }
             ]
@@ -147,21 +147,21 @@ module Aws::Lambda
             operation_name: :get_function,
             acceptors: [
               {
-                "state" => "success",
                 "matcher" => "path",
                 "argument" => "configuration.state",
+                "state" => "success",
                 "expected" => "Active"
               },
               {
-                "state" => "failure",
                 "matcher" => "path",
                 "argument" => "configuration.state",
+                "state" => "failure",
                 "expected" => "Failed"
               },
               {
-                "state" => "retry",
                 "matcher" => "path",
                 "argument" => "configuration.state",
+                "state" => "retry",
                 "expected" => "Pending"
               }
             ]
@@ -197,13 +197,13 @@ module Aws::Lambda
             operation_name: :get_function,
             acceptors: [
               {
+                "matcher" => "error",
                 "state" => "success",
-                "matcher" => "status",
-                "expected" => 200
+                "expected" => false
               },
               {
-                "state" => "retry",
                 "matcher" => "error",
+                "state" => "retry",
                 "expected" => "ResourceNotFoundException"
               }
             ]
@@ -240,21 +240,21 @@ module Aws::Lambda
             operation_name: :get_function_configuration,
             acceptors: [
               {
-                "state" => "success",
                 "matcher" => "path",
                 "argument" => "last_update_status",
+                "state" => "success",
                 "expected" => "Successful"
               },
               {
-                "state" => "failure",
                 "matcher" => "path",
                 "argument" => "last_update_status",
+                "state" => "failure",
                 "expected" => "Failed"
               },
               {
-                "state" => "retry",
                 "matcher" => "path",
                 "argument" => "last_update_status",
+                "state" => "retry",
                 "expected" => "InProgress"
               }
             ]
@@ -291,21 +291,21 @@ module Aws::Lambda
             operation_name: :get_function,
             acceptors: [
               {
-                "state" => "success",
                 "matcher" => "path",
                 "argument" => "configuration.last_update_status",
+                "state" => "success",
                 "expected" => "Successful"
               },
               {
-                "state" => "failure",
                 "matcher" => "path",
                 "argument" => "configuration.last_update_status",
+                "state" => "failure",
                 "expected" => "Failed"
               },
               {
-                "state" => "retry",
                 "matcher" => "path",
                 "argument" => "configuration.last_update_status",
+                "state" => "retry",
                 "expected" => "InProgress"
               }
             ]
@@ -342,21 +342,21 @@ module Aws::Lambda
             operation_name: :get_function_configuration,
             acceptors: [
               {
-                "state" => "success",
                 "matcher" => "path",
                 "argument" => "state",
+                "state" => "success",
                 "expected" => "Active"
               },
               {
-                "state" => "failure",
                 "matcher" => "path",
                 "argument" => "state",
+                "state" => "failure",
                 "expected" => "Failed"
               },
               {
-                "state" => "retry",
                 "matcher" => "path",
                 "argument" => "state",
+                "state" => "retry",
                 "expected" => "Pending"
               }
             ]

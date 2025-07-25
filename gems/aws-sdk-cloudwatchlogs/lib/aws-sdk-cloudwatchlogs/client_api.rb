@@ -65,6 +65,7 @@ module Aws::CloudWatchLogs
     CreateLogGroupRequest = Shapes::StructureShape.new(name: 'CreateLogGroupRequest')
     CreateLogStreamRequest = Shapes::StructureShape.new(name: 'CreateLogStreamRequest')
     DashboardViewerPrincipals = Shapes::ListShape.new(name: 'DashboardViewerPrincipals')
+    Data = Shapes::BlobShape.new(name: 'Data')
     DataAlreadyAcceptedException = Shapes::StructureShape.new(name: 'DataAlreadyAcceptedException')
     DataProtectionPolicyDocument = Shapes::StringShape.new(name: 'DataProtectionPolicyDocument')
     DataProtectionStatus = Shapes::StringShape.new(name: 'DataProtectionStatus')
@@ -196,6 +197,7 @@ module Aws::CloudWatchLogs
     FieldIndex = Shapes::StructureShape.new(name: 'FieldIndex')
     FieldIndexName = Shapes::StringShape.new(name: 'FieldIndexName')
     FieldIndexes = Shapes::ListShape.new(name: 'FieldIndexes')
+    FieldsData = Shapes::StructureShape.new(name: 'FieldsData')
     FilterCount = Shapes::IntegerShape.new(name: 'FilterCount')
     FilterLogEventsRequest = Shapes::StructureShape.new(name: 'FilterLogEventsRequest')
     FilterLogEventsResponse = Shapes::StructureShape.new(name: 'FilterLogEventsResponse')
@@ -226,6 +228,9 @@ module Aws::CloudWatchLogs
     GetLogEventsResponse = Shapes::StructureShape.new(name: 'GetLogEventsResponse')
     GetLogGroupFieldsRequest = Shapes::StructureShape.new(name: 'GetLogGroupFieldsRequest')
     GetLogGroupFieldsResponse = Shapes::StructureShape.new(name: 'GetLogGroupFieldsResponse')
+    GetLogObjectRequest = Shapes::StructureShape.new(name: 'GetLogObjectRequest')
+    GetLogObjectResponse = Shapes::StructureShape.new(name: 'GetLogObjectResponse')
+    GetLogObjectResponseStream = Shapes::StructureShape.new(name: 'GetLogObjectResponseStream')
     GetLogRecordRequest = Shapes::StructureShape.new(name: 'GetLogRecordRequest')
     GetLogRecordResponse = Shapes::StructureShape.new(name: 'GetLogRecordResponse')
     GetQueryResultsRequest = Shapes::StructureShape.new(name: 'GetQueryResultsRequest')
@@ -255,6 +260,7 @@ module Aws::CloudWatchLogs
     IntegrationSummary = Shapes::StructureShape.new(name: 'IntegrationSummary')
     IntegrationType = Shapes::StringShape.new(name: 'IntegrationType')
     Interleaved = Shapes::BooleanShape.new(name: 'Interleaved')
+    InternalStreamingException = Shapes::StructureShape.new(name: 'InternalStreamingException')
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidSequenceTokenException = Shapes::StructureShape.new(name: 'InvalidSequenceTokenException')
@@ -306,6 +312,7 @@ module Aws::CloudWatchLogs
     LogGroupSummaries = Shapes::ListShape.new(name: 'LogGroupSummaries')
     LogGroupSummary = Shapes::StructureShape.new(name: 'LogGroupSummary')
     LogGroups = Shapes::ListShape.new(name: 'LogGroups')
+    LogObjectPointer = Shapes::StringShape.new(name: 'LogObjectPointer')
     LogRecord = Shapes::MapShape.new(name: 'LogRecord')
     LogRecordPointer = Shapes::StringShape.new(name: 'LogRecordPointer')
     LogSamples = Shapes::ListShape.new(name: 'LogSamples')
@@ -1051,6 +1058,9 @@ module Aws::CloudWatchLogs
 
     FieldIndexes.member = Shapes::ShapeRef.new(shape: FieldIndex)
 
+    FieldsData.add_member(:data, Shapes::ShapeRef.new(shape: Data, location_name: "data"))
+    FieldsData.struct_class = Types::FieldsData
+
     FilterLogEventsRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName"))
     FilterLogEventsRequest.add_member(:log_group_identifier, Shapes::ShapeRef.new(shape: LogGroupIdentifier, location_name: "logGroupIdentifier"))
     FilterLogEventsRequest.add_member(:log_stream_names, Shapes::ShapeRef.new(shape: InputLogStreamNames, location_name: "logStreamNames"))
@@ -1157,6 +1167,17 @@ module Aws::CloudWatchLogs
     GetLogGroupFieldsResponse.add_member(:log_group_fields, Shapes::ShapeRef.new(shape: LogGroupFieldList, location_name: "logGroupFields"))
     GetLogGroupFieldsResponse.struct_class = Types::GetLogGroupFieldsResponse
 
+    GetLogObjectRequest.add_member(:unmask, Shapes::ShapeRef.new(shape: Unmask, location_name: "unmask"))
+    GetLogObjectRequest.add_member(:log_object_pointer, Shapes::ShapeRef.new(shape: LogObjectPointer, required: true, location_name: "logObjectPointer"))
+    GetLogObjectRequest.struct_class = Types::GetLogObjectRequest
+
+    GetLogObjectResponse.add_member(:field_stream, Shapes::ShapeRef.new(shape: GetLogObjectResponseStream, eventstream: true, location_name: "fieldStream"))
+    GetLogObjectResponse.struct_class = Types::GetLogObjectResponse
+
+    GetLogObjectResponseStream.add_member(:fields, Shapes::ShapeRef.new(shape: FieldsData, event: true, location_name: "fields"))
+    GetLogObjectResponseStream.add_member(:internal_streaming_exception, Shapes::ShapeRef.new(shape: InternalStreamingException, location_name: "InternalStreamingException"))
+    GetLogObjectResponseStream.struct_class = Types::GetLogObjectResponseStream
+
     GetLogRecordRequest.add_member(:log_record_pointer, Shapes::ShapeRef.new(shape: LogRecordPointer, required: true, location_name: "logRecordPointer"))
     GetLogRecordRequest.add_member(:unmask, Shapes::ShapeRef.new(shape: Unmask, location_name: "unmask"))
     GetLogRecordRequest.struct_class = Types::GetLogRecordRequest
@@ -1221,6 +1242,9 @@ module Aws::CloudWatchLogs
     IntegrationSummary.add_member(:integration_type, Shapes::ShapeRef.new(shape: IntegrationType, location_name: "integrationType"))
     IntegrationSummary.add_member(:integration_status, Shapes::ShapeRef.new(shape: IntegrationStatus, location_name: "integrationStatus"))
     IntegrationSummary.struct_class = Types::IntegrationSummary
+
+    InternalStreamingException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    InternalStreamingException.struct_class = Types::InternalStreamingException
 
     InvalidOperationException.struct_class = Types::InvalidOperationException
 
@@ -2688,6 +2712,22 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:get_log_object, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLogObject"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.endpoint_pattern = {
+          "hostPrefix" => "streaming-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetLogObjectRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLogObjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
       end)
 
       api.add_operation(:get_log_record, Seahorse::Model::Operation.new.tap do |o|

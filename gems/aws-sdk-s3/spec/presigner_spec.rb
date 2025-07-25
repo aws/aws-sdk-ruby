@@ -418,47 +418,19 @@ module Aws
       end
 
       context 'MRAP ARNs' do
-        let(:signer) { double('sigv4a_signer') }
         let(:arn) { 'arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap' }
 
         it 'creates a presigned url with sigv4a' do
-          stub_const(
-            'Aws::Plugins::Sign::SUPPORTED_AUTH_TYPES',
-            Aws::Plugins::Sign::SUPPORTED_AUTH_TYPES + ['sigv4a']
-          )
-
-          expect(Aws::Sigv4::Signer)
-            .to receive(:new)
-                  .with(hash_including(
-                          service: 's3',
-                          region: '*',
-                          signing_algorithm: :sigv4a
-                        ))
-                  .and_return(signer)
-
-          expect(signer)
-            .to receive(:presign_url)
-                  .with(hash_including(
-                          url: URI.parse('https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com/obj')
-                        ))
-
-          subject.presigned_url(:get_object, bucket: arn, key: 'obj')
+          url = subject.presigned_url(:get_object, bucket: arn, key: 'obj')
+          expect(url).to include('https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com/obj')
+          expect(url).to include('X-Amz-Region-Set=%2A')
         end
 
-        context 's3_disable_multiregion_access_points is true' do
-          let(:client) do
-            Aws::S3::Client.new(
-              stub_responses: true,
-              s3_disable_multiregion_access_points: true
-            )
-          end
-
-          it 'raises an ArgumentError' do
-            arn = 'arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap'
-            expect do
-              subject.presigned_url(:get_object, bucket: arn, key: 'obj')
-            end.to raise_error(ArgumentError)
-          end
+        it 'raises an ArgumentError when MRAP is disabled' do
+          client.config.s3_disable_multiregion_access_points = true
+          expect do
+            subject.presigned_url(:get_object, bucket: arn, key: 'obj')
+          end.to raise_error(ArgumentError)
         end
       end
 

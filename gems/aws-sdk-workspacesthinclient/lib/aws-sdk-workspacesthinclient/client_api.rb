@@ -107,6 +107,7 @@ module Aws::WorkSpacesThinClient
     UpdateEnvironmentResponse = Shapes::StructureShape.new(name: 'UpdateEnvironmentResponse')
     UpdateSoftwareSetRequest = Shapes::StructureShape.new(name: 'UpdateSoftwareSetRequest')
     UpdateSoftwareSetResponse = Shapes::StructureShape.new(name: 'UpdateSoftwareSetResponse')
+    UserId = Shapes::StringShape.new(name: 'UserId')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -177,6 +178,7 @@ module Aws::WorkSpacesThinClient
     Device.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     Device.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     Device.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    Device.add_member(:last_user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "lastUserId"))
     Device.struct_class = Types::Device
 
     DeviceCreationTagsMap.key = Shapes::ShapeRef.new(shape: DeviceCreationTagKey)
@@ -199,6 +201,7 @@ module Aws::WorkSpacesThinClient
     DeviceSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     DeviceSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     DeviceSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    DeviceSummary.add_member(:last_user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "lastUserId"))
     DeviceSummary.struct_class = Types::DeviceSummary
 
     Environment.add_member(:id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "id"))

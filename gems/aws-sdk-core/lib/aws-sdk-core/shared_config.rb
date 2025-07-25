@@ -203,6 +203,7 @@ module Aws
     config_reader(
       :region,
       :account_id_endpoint_mode,
+      :auth_scheme_preference,
       :sigv4a_signing_region_set,
       :ca_bundle,
       :credential_process,

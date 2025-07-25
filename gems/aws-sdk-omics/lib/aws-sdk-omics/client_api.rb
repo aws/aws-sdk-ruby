@@ -64,6 +64,7 @@ module Aws::Omics
     CompleteReadSetUploadPartListItemPartNumberInteger = Shapes::IntegerShape.new(name: 'CompleteReadSetUploadPartListItemPartNumberInteger')
     CompletionTime = Shapes::TimestampShape.new(name: 'CompletionTime', timestampFormat: "iso8601")
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConnectionArn = Shapes::StringShape.new(name: 'ConnectionArn')
     CreateAnnotationStoreRequest = Shapes::StructureShape.new(name: 'CreateAnnotationStoreRequest')
     CreateAnnotationStoreResponse = Shapes::StructureShape.new(name: 'CreateAnnotationStoreResponse')
     CreateAnnotationStoreVersionRequest = Shapes::StructureShape.new(name: 'CreateAnnotationStoreVersionRequest')
@@ -95,6 +96,8 @@ module Aws::Omics
     CreationJobId = Shapes::StringShape.new(name: 'CreationJobId')
     CreationTime = Shapes::TimestampShape.new(name: 'CreationTime', timestampFormat: "iso8601")
     CreationType = Shapes::StringShape.new(name: 'CreationType')
+    DefinitionRepository = Shapes::StructureShape.new(name: 'DefinitionRepository')
+    DefinitionRepositoryDetails = Shapes::StructureShape.new(name: 'DefinitionRepositoryDetails')
     DeleteAnnotationStoreRequest = Shapes::StructureShape.new(name: 'DeleteAnnotationStoreRequest')
     DeleteAnnotationStoreResponse = Shapes::StructureShape.new(name: 'DeleteAnnotationStoreResponse')
     DeleteAnnotationStoreVersionsRequest = Shapes::StructureShape.new(name: 'DeleteAnnotationStoreVersionsRequest')
@@ -126,6 +129,7 @@ module Aws::Omics
     EngineVersion = Shapes::StringShape.new(name: 'EngineVersion')
     EscapeChar = Shapes::StringShape.new(name: 'EscapeChar')
     EscapeQuotes = Shapes::BooleanShape.new(name: 'EscapeQuotes')
+    ExcludeFilePatternList = Shapes::ListShape.new(name: 'ExcludeFilePatternList')
     ExportJobId = Shapes::StringShape.new(name: 'ExportJobId')
     ExportReadSet = Shapes::StructureShape.new(name: 'ExportReadSet')
     ExportReadSetDetail = Shapes::StructureShape.new(name: 'ExportReadSetDetail')
@@ -144,6 +148,7 @@ module Aws::Omics
     FormatToHeader = Shapes::MapShape.new(name: 'FormatToHeader')
     FormatToHeaderKey = Shapes::StringShape.new(name: 'FormatToHeaderKey')
     FormatToHeaderValueString = Shapes::StringShape.new(name: 'FormatToHeaderValueString')
+    FullRepositoryId = Shapes::StringShape.new(name: 'FullRepositoryId')
     GeneratedFrom = Shapes::StringShape.new(name: 'GeneratedFrom')
     GetAnnotationImportRequest = Shapes::StructureShape.new(name: 'GetAnnotationImportRequest')
     GetAnnotationImportResponse = Shapes::StructureShape.new(name: 'GetAnnotationImportResponse')
@@ -311,6 +316,7 @@ module Aws::Omics
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotSupportedOperationException = Shapes::StructureShape.new(name: 'NotSupportedOperationException')
     NumericIdInArn = Shapes::StringShape.new(name: 'NumericIdInArn')
+    ParameterTemplatePath = Shapes::StringShape.new(name: 'ParameterTemplatePath')
     PrimitiveBoolean = Shapes::BooleanShape.new(name: 'PrimitiveBoolean')
     PropagatedSetLevelTags = Shapes::ListShape.new(name: 'PropagatedSetLevelTags')
     PutS3AccessPolicyRequest = Shapes::StructureShape.new(name: 'PutS3AccessPolicyRequest')
@@ -349,6 +355,9 @@ module Aws::Omics
     ReadSetUploadPartListItem = Shapes::StructureShape.new(name: 'ReadSetUploadPartListItem')
     ReadSetUploadPartListItemPartNumberInteger = Shapes::IntegerShape.new(name: 'ReadSetUploadPartListItemPartNumberInteger')
     ReadSetUploadPartListItemPartSizeLong = Shapes::IntegerShape.new(name: 'ReadSetUploadPartListItemPartSizeLong')
+    ReadmeMarkdown = Shapes::StringShape.new(name: 'ReadmeMarkdown')
+    ReadmePath = Shapes::StringShape.new(name: 'ReadmePath')
+    ReadmeS3PresignedUrl = Shapes::StringShape.new(name: 'ReadmeS3PresignedUrl')
     ReferenceArn = Shapes::StringShape.new(name: 'ReferenceArn')
     ReferenceArnFilter = Shapes::StringShape.new(name: 'ReferenceArnFilter')
     ReferenceCreationType = Shapes::StringShape.new(name: 'ReferenceCreationType')
@@ -431,6 +440,7 @@ module Aws::Omics
     S3Destination = Shapes::StringShape.new(name: 'S3Destination')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     S3UriForBucketOrObject = Shapes::StringShape.new(name: 'S3UriForBucketOrObject')
+    S3UriForObject = Shapes::StringShape.new(name: 'S3UriForObject')
     SampleId = Shapes::StringShape.new(name: 'SampleId')
     SchemaItem = Shapes::MapShape.new(name: 'SchemaItem')
     SchemaItemKeyString = Shapes::StringShape.new(name: 'SchemaItemKeyString')
@@ -454,6 +464,9 @@ module Aws::Omics
     ShareResourceType = Shapes::StringShape.new(name: 'ShareResourceType')
     ShareStatus = Shapes::StringShape.new(name: 'ShareStatus')
     SourceFiles = Shapes::StructureShape.new(name: 'SourceFiles')
+    SourceReference = Shapes::StructureShape.new(name: 'SourceReference')
+    SourceReferenceType = Shapes::StringShape.new(name: 'SourceReferenceType')
+    SourceReferenceValue = Shapes::StringShape.new(name: 'SourceReferenceValue')
     SseConfig = Shapes::StructureShape.new(name: 'SseConfig')
     SseConfigKeyArnString = Shapes::StringShape.new(name: 'SseConfigKeyArnString')
     StartAnnotationImportRequest = Shapes::StructureShape.new(name: 'StartAnnotationImportRequest')
@@ -899,6 +912,12 @@ module Aws::Omics
     CreateWorkflowRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: WorkflowRequestId, required: true, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateWorkflowRequest.add_member(:accelerators, Shapes::ShapeRef.new(shape: Accelerators, location_name: "accelerators"))
     CreateWorkflowRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
+    CreateWorkflowRequest.add_member(:readme_markdown, Shapes::ShapeRef.new(shape: ReadmeMarkdown, location_name: "readmeMarkdown"))
+    CreateWorkflowRequest.add_member(:parameter_template_path, Shapes::ShapeRef.new(shape: ParameterTemplatePath, location_name: "parameterTemplatePath"))
+    CreateWorkflowRequest.add_member(:readme_path, Shapes::ShapeRef.new(shape: ReadmePath, location_name: "readmePath"))
+    CreateWorkflowRequest.add_member(:definition_repository, Shapes::ShapeRef.new(shape: DefinitionRepository, location_name: "definitionRepository"))
+    CreateWorkflowRequest.add_member(:workflow_bucket_owner_id, Shapes::ShapeRef.new(shape: WorkflowBucketOwnerId, location_name: "workflowBucketOwnerId"))
+    CreateWorkflowRequest.add_member(:readme_uri, Shapes::ShapeRef.new(shape: S3UriForObject, location_name: "readmeUri"))
     CreateWorkflowRequest.struct_class = Types::CreateWorkflowRequest
 
     CreateWorkflowResponse.add_member(:arn, Shapes::ShapeRef.new(shape: WorkflowArn, location_name: "arn"))
@@ -922,6 +941,11 @@ module Aws::Omics
     CreateWorkflowVersionRequest.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: CreateWorkflowVersionRequestStorageCapacityInteger, location_name: "storageCapacity"))
     CreateWorkflowVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateWorkflowVersionRequest.add_member(:workflow_bucket_owner_id, Shapes::ShapeRef.new(shape: WorkflowBucketOwnerId, location_name: "workflowBucketOwnerId"))
+    CreateWorkflowVersionRequest.add_member(:readme_markdown, Shapes::ShapeRef.new(shape: ReadmeMarkdown, location_name: "readmeMarkdown"))
+    CreateWorkflowVersionRequest.add_member(:parameter_template_path, Shapes::ShapeRef.new(shape: ParameterTemplatePath, location_name: "parameterTemplatePath"))
+    CreateWorkflowVersionRequest.add_member(:readme_path, Shapes::ShapeRef.new(shape: ReadmePath, location_name: "readmePath"))
+    CreateWorkflowVersionRequest.add_member(:definition_repository, Shapes::ShapeRef.new(shape: DefinitionRepository, location_name: "definitionRepository"))
+    CreateWorkflowVersionRequest.add_member(:readme_uri, Shapes::ShapeRef.new(shape: S3UriForObject, location_name: "readmeUri"))
     CreateWorkflowVersionRequest.struct_class = Types::CreateWorkflowVersionRequest
 
     CreateWorkflowVersionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: WorkflowVersionArn, location_name: "arn"))
@@ -931,6 +955,19 @@ module Aws::Omics
     CreateWorkflowVersionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateWorkflowVersionResponse.add_member(:uuid, Shapes::ShapeRef.new(shape: WorkflowUuid, location_name: "uuid"))
     CreateWorkflowVersionResponse.struct_class = Types::CreateWorkflowVersionResponse
+
+    DefinitionRepository.add_member(:connection_arn, Shapes::ShapeRef.new(shape: ConnectionArn, required: true, location_name: "connectionArn"))
+    DefinitionRepository.add_member(:full_repository_id, Shapes::ShapeRef.new(shape: FullRepositoryId, required: true, location_name: "fullRepositoryId"))
+    DefinitionRepository.add_member(:source_reference, Shapes::ShapeRef.new(shape: SourceReference, location_name: "sourceReference"))
+    DefinitionRepository.add_member(:exclude_file_patterns, Shapes::ShapeRef.new(shape: ExcludeFilePatternList, location_name: "excludeFilePatterns"))
+    DefinitionRepository.struct_class = Types::DefinitionRepository
+
+    DefinitionRepositoryDetails.add_member(:connection_arn, Shapes::ShapeRef.new(shape: ConnectionArn, location_name: "connectionArn"))
+    DefinitionRepositoryDetails.add_member(:full_repository_id, Shapes::ShapeRef.new(shape: FullRepositoryId, location_name: "fullRepositoryId"))
+    DefinitionRepositoryDetails.add_member(:source_reference, Shapes::ShapeRef.new(shape: SourceReference, location_name: "sourceReference"))
+    DefinitionRepositoryDetails.add_member(:provider_type, Shapes::ShapeRef.new(shape: String, location_name: "providerType"))
+    DefinitionRepositoryDetails.add_member(:provider_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "providerEndpoint"))
+    DefinitionRepositoryDetails.struct_class = Types::DefinitionRepositoryDetails
 
     DeleteAnnotationStoreRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     DeleteAnnotationStoreRequest.add_member(:force, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location: "querystring", location_name: "force"))
@@ -1001,6 +1038,8 @@ module Aws::Omics
     ETag.add_member(:source1, Shapes::ShapeRef.new(shape: String, location_name: "source1"))
     ETag.add_member(:source2, Shapes::ShapeRef.new(shape: String, location_name: "source2"))
     ETag.struct_class = Types::ETag
+
+    ExcludeFilePatternList.member = Shapes::ShapeRef.new(shape: String)
 
     ExportReadSet.add_member(:read_set_id, Shapes::ShapeRef.new(shape: ReadSetId, required: true, location_name: "readSetId"))
     ExportReadSet.struct_class = Types::ExportReadSet
@@ -1420,6 +1459,9 @@ module Aws::Omics
     GetWorkflowResponse.add_member(:accelerators, Shapes::ShapeRef.new(shape: Accelerators, location_name: "accelerators"))
     GetWorkflowResponse.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
     GetWorkflowResponse.add_member(:uuid, Shapes::ShapeRef.new(shape: WorkflowUuid, location_name: "uuid"))
+    GetWorkflowResponse.add_member(:readme, Shapes::ShapeRef.new(shape: ReadmeS3PresignedUrl, location_name: "readme"))
+    GetWorkflowResponse.add_member(:definition_repository_details, Shapes::ShapeRef.new(shape: DefinitionRepositoryDetails, location_name: "definitionRepositoryDetails"))
+    GetWorkflowResponse.add_member(:readme_path, Shapes::ShapeRef.new(shape: ReadmePath, location_name: "readmePath"))
     GetWorkflowResponse.struct_class = Types::GetWorkflowResponse
 
     GetWorkflowVersionRequest.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location: "uri", location_name: "workflowId"))
@@ -1449,6 +1491,9 @@ module Aws::Omics
     GetWorkflowVersionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetWorkflowVersionResponse.add_member(:uuid, Shapes::ShapeRef.new(shape: WorkflowUuid, location_name: "uuid"))
     GetWorkflowVersionResponse.add_member(:workflow_bucket_owner_id, Shapes::ShapeRef.new(shape: WorkflowBucketOwnerId, location_name: "workflowBucketOwnerId"))
+    GetWorkflowVersionResponse.add_member(:readme, Shapes::ShapeRef.new(shape: ReadmeS3PresignedUrl, location_name: "readme"))
+    GetWorkflowVersionResponse.add_member(:definition_repository_details, Shapes::ShapeRef.new(shape: DefinitionRepositoryDetails, location_name: "definitionRepositoryDetails"))
+    GetWorkflowVersionResponse.add_member(:readme_path, Shapes::ShapeRef.new(shape: ReadmePath, location_name: "readmePath"))
     GetWorkflowVersionResponse.struct_class = Types::GetWorkflowVersionResponse
 
     ImportReadSetFilter.add_member(:status, Shapes::ShapeRef.new(shape: ReadSetImportJobStatus, location_name: "status"))
@@ -2023,6 +2068,10 @@ module Aws::Omics
     SourceFiles.add_member(:source2, Shapes::ShapeRef.new(shape: S3Uri, location_name: "source2"))
     SourceFiles.struct_class = Types::SourceFiles
 
+    SourceReference.add_member(:type, Shapes::ShapeRef.new(shape: SourceReferenceType, required: true, location_name: "type"))
+    SourceReference.add_member(:value, Shapes::ShapeRef.new(shape: SourceReferenceValue, required: true, location_name: "value"))
+    SourceReference.struct_class = Types::SourceReference
+
     SseConfig.add_member(:type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "type"))
     SseConfig.add_member(:key_arn, Shapes::ShapeRef.new(shape: SseConfigKeyArnString, location_name: "keyArn"))
     SseConfig.struct_class = Types::SseConfig
@@ -2309,6 +2358,7 @@ module Aws::Omics
     UpdateWorkflowRequest.add_member(:description, Shapes::ShapeRef.new(shape: WorkflowDescription, location_name: "description"))
     UpdateWorkflowRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
     UpdateWorkflowRequest.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: UpdateWorkflowRequestStorageCapacityInteger, location_name: "storageCapacity"))
+    UpdateWorkflowRequest.add_member(:readme_markdown, Shapes::ShapeRef.new(shape: ReadmeMarkdown, location_name: "readmeMarkdown"))
     UpdateWorkflowRequest.struct_class = Types::UpdateWorkflowRequest
 
     UpdateWorkflowVersionRequest.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location: "uri", location_name: "workflowId"))
@@ -2316,6 +2366,7 @@ module Aws::Omics
     UpdateWorkflowVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: WorkflowVersionDescription, location_name: "description"))
     UpdateWorkflowVersionRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
     UpdateWorkflowVersionRequest.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: UpdateWorkflowVersionRequestStorageCapacityInteger, location_name: "storageCapacity"))
+    UpdateWorkflowVersionRequest.add_member(:readme_markdown, Shapes::ShapeRef.new(shape: ReadmeMarkdown, location_name: "readmeMarkdown"))
     UpdateWorkflowVersionRequest.struct_class = Types::UpdateWorkflowVersionRequest
 
     UploadReadSetPartRequest.add_member(:sequence_store_id, Shapes::ShapeRef.new(shape: SequenceStoreId, required: true, location: "uri", location_name: "sequenceStoreId"))

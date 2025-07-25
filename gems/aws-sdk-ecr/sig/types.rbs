@@ -130,7 +130,8 @@ module Aws::ECR
       attr_accessor description: ::String
       attr_accessor encryption_configuration: Types::EncryptionConfigurationForRepositoryCreationTemplate
       attr_accessor resource_tags: ::Array[Types::Tag]
-      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE")
+      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE" | "IMMUTABLE_WITH_EXCLUSION" | "MUTABLE_WITH_EXCLUSION")
+      attr_accessor image_tag_mutability_exclusion_filters: ::Array[Types::ImageTagMutabilityExclusionFilter]
       attr_accessor repository_policy: ::String
       attr_accessor lifecycle_policy: ::String
       attr_accessor applied_for: ::Array[("REPLICATION" | "PULL_THROUGH_CACHE")]
@@ -148,7 +149,8 @@ module Aws::ECR
       attr_accessor registry_id: ::String
       attr_accessor repository_name: ::String
       attr_accessor tags: ::Array[Types::Tag]
-      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE")
+      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE" | "IMMUTABLE_WITH_EXCLUSION" | "MUTABLE_WITH_EXCLUSION")
+      attr_accessor image_tag_mutability_exclusion_filters: ::Array[Types::ImageTagMutabilityExclusionFilter]
       attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
       SENSITIVE: []
@@ -602,6 +604,12 @@ module Aws::ECR
       SENSITIVE: []
     end
 
+    class ImageTagMutabilityExclusionFilter
+      attr_accessor filter_type: ("WILDCARD")
+      attr_accessor filter: ::String
+      SENSITIVE: []
+    end
+
     class InitiateLayerUploadRequest
       attr_accessor registry_id: ::String
       attr_accessor repository_name: ::String
@@ -834,14 +842,16 @@ module Aws::ECR
     class PutImageTagMutabilityRequest
       attr_accessor registry_id: ::String
       attr_accessor repository_name: ::String
-      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE")
+      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE" | "IMMUTABLE_WITH_EXCLUSION" | "MUTABLE_WITH_EXCLUSION")
+      attr_accessor image_tag_mutability_exclusion_filters: ::Array[Types::ImageTagMutabilityExclusionFilter]
       SENSITIVE: []
     end
 
     class PutImageTagMutabilityResponse
       attr_accessor registry_id: ::String
       attr_accessor repository_name: ::String
-      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE")
+      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE" | "IMMUTABLE_WITH_EXCLUSION" | "MUTABLE_WITH_EXCLUSION")
+      attr_accessor image_tag_mutability_exclusion_filters: ::Array[Types::ImageTagMutabilityExclusionFilter]
       SENSITIVE: []
     end
 
@@ -947,7 +957,8 @@ module Aws::ECR
       attr_accessor repository_name: ::String
       attr_accessor repository_uri: ::String
       attr_accessor created_at: ::Time
-      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE")
+      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE" | "IMMUTABLE_WITH_EXCLUSION" | "MUTABLE_WITH_EXCLUSION")
+      attr_accessor image_tag_mutability_exclusion_filters: ::Array[Types::ImageTagMutabilityExclusionFilter]
       attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
       SENSITIVE: []
@@ -963,7 +974,8 @@ module Aws::ECR
       attr_accessor description: ::String
       attr_accessor encryption_configuration: Types::EncryptionConfigurationForRepositoryCreationTemplate
       attr_accessor resource_tags: ::Array[Types::Tag]
-      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE")
+      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE" | "IMMUTABLE_WITH_EXCLUSION" | "MUTABLE_WITH_EXCLUSION")
+      attr_accessor image_tag_mutability_exclusion_filters: ::Array[Types::ImageTagMutabilityExclusionFilter]
       attr_accessor repository_policy: ::String
       attr_accessor lifecycle_policy: ::String
       attr_accessor applied_for: ::Array[("REPLICATION" | "PULL_THROUGH_CACHE")]
@@ -1186,7 +1198,8 @@ module Aws::ECR
       attr_accessor description: ::String
       attr_accessor encryption_configuration: Types::EncryptionConfigurationForRepositoryCreationTemplate
       attr_accessor resource_tags: ::Array[Types::Tag]
-      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE")
+      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE" | "IMMUTABLE_WITH_EXCLUSION" | "MUTABLE_WITH_EXCLUSION")
+      attr_accessor image_tag_mutability_exclusion_filters: ::Array[Types::ImageTagMutabilityExclusionFilter]
       attr_accessor repository_policy: ::String
       attr_accessor lifecycle_policy: ::String
       attr_accessor applied_for: ::Array[("REPLICATION" | "PULL_THROUGH_CACHE")]

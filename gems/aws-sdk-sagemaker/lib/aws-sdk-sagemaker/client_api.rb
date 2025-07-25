@@ -2094,11 +2094,14 @@ module Aws::SageMaker
     S3DataDistribution = Shapes::StringShape.new(name: 'S3DataDistribution')
     S3DataSource = Shapes::StructureShape.new(name: 'S3DataSource')
     S3DataType = Shapes::StringShape.new(name: 'S3DataType')
+    S3FileSystem = Shapes::StructureShape.new(name: 'S3FileSystem')
+    S3FileSystemConfig = Shapes::StructureShape.new(name: 'S3FileSystemConfig')
     S3ModelDataSource = Shapes::StructureShape.new(name: 'S3ModelDataSource')
     S3ModelDataType = Shapes::StringShape.new(name: 'S3ModelDataType')
     S3ModelUri = Shapes::StringShape.new(name: 'S3ModelUri')
     S3OutputPath = Shapes::StringShape.new(name: 'S3OutputPath')
     S3Presign = Shapes::StructureShape.new(name: 'S3Presign')
+    S3SchemaUri = Shapes::StringShape.new(name: 'S3SchemaUri')
     S3StorageConfig = Shapes::StructureShape.new(name: 'S3StorageConfig')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SageMakerImageName = Shapes::StringShape.new(name: 'SageMakerImageName')
@@ -2589,6 +2592,7 @@ module Aws::SageMaker
     Workforce = Shapes::StructureShape.new(name: 'Workforce')
     WorkforceArn = Shapes::StringShape.new(name: 'WorkforceArn')
     WorkforceFailureReason = Shapes::StringShape.new(name: 'WorkforceFailureReason')
+    WorkforceIpAddressType = Shapes::StringShape.new(name: 'WorkforceIpAddressType')
     WorkforceName = Shapes::StringShape.new(name: 'WorkforceName')
     WorkforceSecurityGroupId = Shapes::StringShape.new(name: 'WorkforceSecurityGroupId')
     WorkforceSecurityGroupIds = Shapes::ListShape.new(name: 'WorkforceSecurityGroupIds')
@@ -3262,7 +3266,7 @@ module Aws::SageMaker
     ClarifyTextConfig.add_member(:granularity, Shapes::ShapeRef.new(shape: ClarifyTextGranularity, required: true, location_name: "Granularity"))
     ClarifyTextConfig.struct_class = Types::ClarifyTextConfig
 
-    ClusterEbsVolumeConfig.add_member(:volume_size_in_gb, Shapes::ShapeRef.new(shape: ClusterEbsVolumeSizeInGB, required: true, location_name: "VolumeSizeInGB"))
+    ClusterEbsVolumeConfig.add_member(:volume_size_in_gb, Shapes::ShapeRef.new(shape: ClusterEbsVolumeSizeInGB, location_name: "VolumeSizeInGB"))
     ClusterEbsVolumeConfig.struct_class = Types::ClusterEbsVolumeConfig
 
     ClusterInstanceGroupDetails.add_member(:current_count, Shapes::ShapeRef.new(shape: ClusterNonNegativeInstanceCount, location_name: "CurrentCount"))
@@ -3480,7 +3484,7 @@ module Aws::SageMaker
     ComputeQuotaConfig.struct_class = Types::ComputeQuotaConfig
 
     ComputeQuotaResourceConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: ClusterInstanceType, required: true, location_name: "InstanceType"))
-    ComputeQuotaResourceConfig.add_member(:count, Shapes::ShapeRef.new(shape: InstanceCount, required: true, location_name: "Count"))
+    ComputeQuotaResourceConfig.add_member(:count, Shapes::ShapeRef.new(shape: InstanceCount, location_name: "Count"))
     ComputeQuotaResourceConfig.struct_class = Types::ComputeQuotaResourceConfig
 
     ComputeQuotaResourceConfigList.member = Shapes::ShapeRef.new(shape: ComputeQuotaResourceConfig)
@@ -4385,6 +4389,7 @@ module Aws::SageMaker
     CreateWorkforceRequest.add_member(:workforce_name, Shapes::ShapeRef.new(shape: WorkforceName, required: true, location_name: "WorkforceName"))
     CreateWorkforceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateWorkforceRequest.add_member(:workforce_vpc_config, Shapes::ShapeRef.new(shape: WorkforceVpcConfigRequest, location_name: "WorkforceVpcConfig"))
+    CreateWorkforceRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: WorkforceIpAddressType, location_name: "IpAddressType"))
     CreateWorkforceRequest.struct_class = Types::CreateWorkforceRequest
 
     CreateWorkforceResponse.add_member(:workforce_arn, Shapes::ShapeRef.new(shape: WorkforceArn, required: true, location_name: "WorkforceArn"))
@@ -4406,17 +4411,21 @@ module Aws::SageMaker
 
     CustomFileSystem.add_member(:efs_file_system, Shapes::ShapeRef.new(shape: EFSFileSystem, location_name: "EFSFileSystem"))
     CustomFileSystem.add_member(:f_sx_lustre_file_system, Shapes::ShapeRef.new(shape: FSxLustreFileSystem, location_name: "FSxLustreFileSystem"))
+    CustomFileSystem.add_member(:s3_file_system, Shapes::ShapeRef.new(shape: S3FileSystem, location_name: "S3FileSystem"))
     CustomFileSystem.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CustomFileSystem.add_member_subclass(:efs_file_system, Types::CustomFileSystem::EfsFileSystem)
     CustomFileSystem.add_member_subclass(:f_sx_lustre_file_system, Types::CustomFileSystem::FSxLustreFileSystem)
+    CustomFileSystem.add_member_subclass(:s3_file_system, Types::CustomFileSystem::S3FileSystem)
     CustomFileSystem.add_member_subclass(:unknown, Types::CustomFileSystem::Unknown)
     CustomFileSystem.struct_class = Types::CustomFileSystem
 
     CustomFileSystemConfig.add_member(:efs_file_system_config, Shapes::ShapeRef.new(shape: EFSFileSystemConfig, location_name: "EFSFileSystemConfig"))
     CustomFileSystemConfig.add_member(:f_sx_lustre_file_system_config, Shapes::ShapeRef.new(shape: FSxLustreFileSystemConfig, location_name: "FSxLustreFileSystemConfig"))
+    CustomFileSystemConfig.add_member(:s3_file_system_config, Shapes::ShapeRef.new(shape: S3FileSystemConfig, location_name: "S3FileSystemConfig"))
     CustomFileSystemConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CustomFileSystemConfig.add_member_subclass(:efs_file_system_config, Types::CustomFileSystemConfig::EfsFileSystemConfig)
     CustomFileSystemConfig.add_member_subclass(:f_sx_lustre_file_system_config, Types::CustomFileSystemConfig::FSxLustreFileSystemConfig)
+    CustomFileSystemConfig.add_member_subclass(:s3_file_system_config, Types::CustomFileSystemConfig::S3FileSystemConfig)
     CustomFileSystemConfig.add_member_subclass(:unknown, Types::CustomFileSystemConfig::Unknown)
     CustomFileSystemConfig.struct_class = Types::CustomFileSystemConfig
 
@@ -10011,6 +10020,13 @@ module Aws::SageMaker
     S3DataSource.add_member(:hub_access_config, Shapes::ShapeRef.new(shape: HubAccessConfig, location_name: "HubAccessConfig"))
     S3DataSource.struct_class = Types::S3DataSource
 
+    S3FileSystem.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3SchemaUri, location_name: "S3Uri"))
+    S3FileSystem.struct_class = Types::S3FileSystem
+
+    S3FileSystemConfig.add_member(:mount_path, Shapes::ShapeRef.new(shape: String1024, location_name: "MountPath"))
+    S3FileSystemConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3SchemaUri, location_name: "S3Uri"))
+    S3FileSystemConfig.struct_class = Types::S3FileSystemConfig
+
     S3ModelDataSource.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3ModelUri, required: true, location_name: "S3Uri"))
     S3ModelDataSource.add_member(:s3_data_type, Shapes::ShapeRef.new(shape: S3ModelDataType, required: true, location_name: "S3DataType"))
     S3ModelDataSource.add_member(:compression_type, Shapes::ShapeRef.new(shape: ModelCompressionType, required: true, location_name: "CompressionType"))
@@ -11331,6 +11347,7 @@ module Aws::SageMaker
     UpdateWorkforceRequest.add_member(:source_ip_config, Shapes::ShapeRef.new(shape: SourceIpConfig, location_name: "SourceIpConfig"))
     UpdateWorkforceRequest.add_member(:oidc_config, Shapes::ShapeRef.new(shape: OidcConfig, location_name: "OidcConfig"))
     UpdateWorkforceRequest.add_member(:workforce_vpc_config, Shapes::ShapeRef.new(shape: WorkforceVpcConfigRequest, location_name: "WorkforceVpcConfig"))
+    UpdateWorkforceRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: WorkforceIpAddressType, location_name: "IpAddressType"))
     UpdateWorkforceRequest.struct_class = Types::UpdateWorkforceRequest
 
     UpdateWorkforceResponse.add_member(:workforce, Shapes::ShapeRef.new(shape: Workforce, required: true, location_name: "Workforce"))
@@ -11431,6 +11448,7 @@ module Aws::SageMaker
     Workforce.add_member(:workforce_vpc_config, Shapes::ShapeRef.new(shape: WorkforceVpcConfigResponse, location_name: "WorkforceVpcConfig"))
     Workforce.add_member(:status, Shapes::ShapeRef.new(shape: WorkforceStatus, location_name: "Status"))
     Workforce.add_member(:failure_reason, Shapes::ShapeRef.new(shape: WorkforceFailureReason, location_name: "FailureReason"))
+    Workforce.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: WorkforceIpAddressType, location_name: "IpAddressType"))
     Workforce.struct_class = Types::Workforce
 
     WorkforceSecurityGroupIds.member = Shapes::ShapeRef.new(shape: WorkforceSecurityGroupId)

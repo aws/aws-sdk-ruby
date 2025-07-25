@@ -54,7 +54,7 @@ module Aws::IoTAnalytics
   autoload :EndpointProvider, 'aws-sdk-iotanalytics/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iotanalytics/endpoints'
 
-  GEM_VERSION = '1.82.0'
+  GEM_VERSION = '1.83.0'
 
 end
 

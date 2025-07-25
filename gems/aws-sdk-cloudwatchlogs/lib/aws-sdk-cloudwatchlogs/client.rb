@@ -97,7 +97,7 @@ module Aws::CloudWatchLogs
     #     class name or an instance of a plugin class.
     #
     #   @option options [required, Aws::CredentialProvider] :credentials
-    #     Your AWS credentials. This can be an instance of any one of the
+    #     Your AWS credentials used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
@@ -130,18 +130,23 @@ module Aws::CloudWatchLogs
     #     locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
+    #
     #     * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
     #       `:account_id` options.
-    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
-    #       ENV['AWS_SESSION_TOKEN'], and ENV['AWS_ACCOUNT_ID']
+    #
+    #     * `ENV['AWS_ACCESS_KEY_ID']`, `ENV['AWS_SECRET_ACCESS_KEY']`,
+    #       `ENV['AWS_SESSION_TOKEN']`, and `ENV['AWS_ACCOUNT_ID']`.
+    #
     #     * `~/.aws/credentials`
+    #
     #     * `~/.aws/config`
+    #
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
     #       enable retries and extended timeouts. Instance profile credential
-    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
-    #       to true.
+    #       fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
+    #       to `true`.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -168,6 +173,11 @@ module Aws::CloudWatchLogs
     #     until there is sufficent client side capacity to retry the request.
     #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
     #     not retry instead of sleeping.
+    #
+    #   @option options [Array<String>] :auth_scheme_preference
+    #     A list of preferred authentication schemes to use when making a request. Supported values are:
+    #     `sigv4`, `sigv4a`, `httpBearerAuth`, and `noAuth`. When set using `ENV['AWS_AUTH_SCHEME_PREFERENCE']` or in
+    #     shared config as `auth_scheme_preference`, the value should be a comma-separated list.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -264,8 +274,8 @@ module Aws::CloudWatchLogs
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
     #   @option options [String] :profile ("default")
-    #     Used when loading credentials from the shared credentials file
-    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
+    #     When not specified, 'default' is used.
     #
     #   @option options [String] :request_checksum_calculation ("when_supported")
     #     Determines when a checksum will be calculated for request payloads. Values are:
@@ -385,7 +395,7 @@ module Aws::CloudWatchLogs
     #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
-    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     Your Bearer token used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
@@ -1186,7 +1196,7 @@ module Aws::CloudWatchLogs
     #
     #   resp = client.delete_account_policy({
     #     policy_name: "PolicyName", # required
-    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY, TRANSFORMER_POLICY
+    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY, TRANSFORMER_POLICY, METRIC_EXTRACTION_POLICY
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteAccountPolicy AWS API Documentation
@@ -1772,7 +1782,7 @@ module Aws::CloudWatchLogs
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_account_policies({
-    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY, TRANSFORMER_POLICY
+    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY, TRANSFORMER_POLICY, METRIC_EXTRACTION_POLICY
     #     policy_name: "PolicyName",
     #     account_identifiers: ["AccountId"],
     #     next_token: "NextToken",
@@ -1784,7 +1794,7 @@ module Aws::CloudWatchLogs
     #   resp.account_policies[0].policy_name #=> String
     #   resp.account_policies[0].policy_document #=> String
     #   resp.account_policies[0].last_updated_time #=> Integer
-    #   resp.account_policies[0].policy_type #=> String, one of "DATA_PROTECTION_POLICY", "SUBSCRIPTION_FILTER_POLICY", "FIELD_INDEX_POLICY", "TRANSFORMER_POLICY"
+    #   resp.account_policies[0].policy_type #=> String, one of "DATA_PROTECTION_POLICY", "SUBSCRIPTION_FILTER_POLICY", "FIELD_INDEX_POLICY", "TRANSFORMER_POLICY", "METRIC_EXTRACTION_POLICY"
     #   resp.account_policies[0].scope #=> String, one of "ALL"
     #   resp.account_policies[0].selection_criteria #=> String
     #   resp.account_policies[0].account_id #=> String
@@ -3634,6 +3644,180 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Retrieves a large logging object (LLO) and streams it back. This API
+    # is used to fetch the content of large portions of log events that have
+    # been ingested through the PutOpenTelemetryLogs API. When log events
+    # contain fields that would cause the total event size to exceed 1MB,
+    # CloudWatch Logs automatically processes up to 10 fields, starting with
+    # the largest fields. Each field is truncated as needed to keep the
+    # total event size as close to 1MB as possible. The excess portions are
+    # stored as Large Log Objects (LLOs) and these fields are processed
+    # separately and LLO reference system fields (in the format
+    # `@ptr.$[path.to.field]`) are added. The path in the reference field
+    # reflects the original JSON structure where the large field was
+    # located. For example, this could be `@ptr.$['input']['message']`,
+    # `@ptr.$['AAA']['BBB']['CCC']['DDD']`, `@ptr.$['AAA']`, or any other
+    # path matching your log structure.
+    #
+    # @option params [Boolean] :unmask
+    #   A boolean flag that indicates whether to unmask sensitive log data.
+    #   When set to true, any masked or redacted data in the log object will
+    #   be displayed in its original form. Default is false.
+    #
+    # @option params [required, String] :log_object_pointer
+    #   A pointer to the specific log object to retrieve. This is a required
+    #   parameter that uniquely identifies the log object within CloudWatch
+    #   Logs. The pointer is typically obtained from a previous query or
+    #   filter operation.
+    #
+    # @return [Types::GetLogObjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLogObjectResponse#field_stream #field_stream} => Types::GetLogObjectResponseStream
+    #
+    # @example EventStream Operation Example
+    #
+    #   # You can process the event once it arrives immediately, or wait until the
+    #   # full response is complete and iterate through the eventstream enumerator.
+    #
+    #   # To interact with event immediately, you need to register get_log_object
+    #   # with callbacks. Callbacks can be registered for specific events or for all
+    #   # events, including error events.
+    #
+    #   # Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   # block statement attached to the #get_log_object call directly. Hybrid
+    #   # pattern of both is also supported.
+    #
+    #   # `:event_stream_handler` option takes in either a Proc object or
+    #   # Aws::CloudWatchLogs::EventStreams::GetLogObjectResponseStream object.
+    #
+    #   # Usage pattern a): Callbacks with a block attached to #get_log_object
+    #   # Example for registering callbacks for all event types and an error event
+    #   client.get_log_object(
+    #     # params input
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
+    #     end
+    #
+    #     stream.on_event do |event|
+    #       # process all events arrive
+    #       puts event.event_type
+    #       # ...
+    #     end
+    #   end
+    #
+    #   # Usage pattern b): Pass in `:event_stream_handler` for #get_log_object
+    #   #  1) Create a Aws::CloudWatchLogs::EventStreams::GetLogObjectResponseStream object
+    #   #  Example for registering callbacks with specific events
+    #
+    #   handler = Aws::CloudWatchLogs::EventStreams::GetLogObjectResponseStream.new
+    #   handler.on_fields_event do |event|
+    #     event # => Aws::CloudWatchLogs::Types::fields
+    #   end
+    #   handler.on_internal_streaming_exception_event do |event|
+    #     event # => Aws::CloudWatchLogs::Types::InternalStreamingException
+    #   end
+    #
+    #   client.get_log_object(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
+    #
+    #   #  2) Use a Ruby Proc object
+    #   #  Example for registering callbacks with specific events
+    #   handler = Proc.new do |stream|
+    #     stream.on_fields_event do |event|
+    #       event # => Aws::CloudWatchLogs::Types::fields
+    #     end
+    #     stream.on_internal_streaming_exception_event do |event|
+    #       event # => Aws::CloudWatchLogs::Types::InternalStreamingException
+    #     end
+    #   end
+    #
+    #   client.get_log_object(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
+    #
+    #   #  Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::CloudWatchLogs::EventStreams::GetLogObjectResponseStream.new
+    #   handler.on_fields_event do |event|
+    #     event # => Aws::CloudWatchLogs::Types::fields
+    #   end
+    #   handler.on_internal_streaming_exception_event do |event|
+    #     event # => Aws::CloudWatchLogs::Types::InternalStreamingException
+    #   end
+    #
+    #   client.get_log_object(
+    #     # params input
+    #     event_stream_handler: handler
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
+    #     end
+    #   end
+    #
+    #   # You can also iterate through events after the response complete.
+    #   # Events are available at
+    #   resp.field_stream # => Enumerator
+    #   # For parameter input example, please refer to following request syntax.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_log_object({
+    #     unmask: false,
+    #     log_object_pointer: "LogObjectPointer", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   # All events are available at resp.field_stream:
+    #   resp.field_stream #=> Enumerator
+    #   resp.field_stream.event_types #=> [:fields, :internal_streaming_exception]
+    #
+    #   # For :fields event available at #on_fields_event callback and response eventstream enumerator:
+    #   event.data #=> String
+    #
+    #   # For :internal_streaming_exception event available at #on_internal_streaming_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogObject AWS API Documentation
+    #
+    # @overload get_log_object(params = {})
+    # @param [Hash] params ({})
+    def get_log_object(params = {}, options = {})
+      params = params.dup
+      event_stream_handler = case handler = params.delete(:event_stream_handler)
+        when EventStreams::GetLogObjectResponseStream then handler
+        when Proc then EventStreams::GetLogObjectResponseStream.new.tap(&handler)
+        when nil then EventStreams::GetLogObjectResponseStream.new
+        else
+          msg = "expected :event_stream_handler to be a block or "\
+                "instance of Aws::CloudWatchLogs::EventStreams::GetLogObjectResponseStream"\
+                ", got `#{handler.inspect}` instead"
+          raise ArgumentError, msg
+        end
+
+      yield(event_stream_handler) if block_given?
+
+      req = build_request(:get_log_object, params)
+
+      req.context[:event_stream_handler] = event_stream_handler
+      req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)
+
+      req.send_request(options)
+    end
+
     # Retrieves all of the fields and values of a single log event. All
     # fields are retrieved, even if the original query that produced the
     # `logRecordPointer` retrieved only a subset of fields. Fields are
@@ -4284,8 +4468,9 @@ module Aws::CloudWatchLogs
     end
 
     # Creates an account-level data protection policy, subscription filter
-    # policy, or field index policy that applies to all log groups or a
-    # subset of log groups in the account.
+    # policy, field index policy, transformer policy, or metric extraction
+    # policy that applies to all log groups or a subset of log groups in the
+    # account.
     #
     # To use this operation, you must be signed on with the correct
     # permissions depending on the type of policy that you are creating.
@@ -4303,6 +4488,10 @@ module Aws::CloudWatchLogs
     #
     # * To create a field index policy, you must have the
     #   `logs:PutIndexPolicy` and `logs:PutAccountPolicy` permissions.
+    #
+    # * To create a metric extraction policy, you must have the
+    #   `logs:PutMetricExtractionPolicy` and `logs:PutAccountPolicy`
+    #   permissions.
     #
     # **Data protection policy**
     #
@@ -4471,6 +4660,68 @@ module Aws::CloudWatchLogs
     # ignore the account-level policy that you create with
     # [PutAccountPolicy][11].
     #
+    # **Metric extraction policy**
+    #
+    # A metric extraction policy controls whether CloudWatch Metrics can be
+    # created through the Embedded Metrics Format (EMF) for log groups in
+    # your account. By default, EMF metric creation is enabled for all log
+    # groups. You can use metric extraction policies to disable EMF metric
+    # creation for your entire account or specific log groups.
+    #
+    # When a policy disables EMF metric creation for a log group, log events
+    # in the EMF format are still ingested, but no CloudWatch Metrics are
+    # created from them.
+    #
+    # Creating a policy disables metrics for AWS features that use EMF to
+    # create metrics, such as CloudWatch Container Insights and CloudWatch
+    # Application Signals. To prevent turning off those features by
+    # accident, we recommend that you exclude the underlying log-groups
+    # through a selection-criteria such as `LogGroupNamePrefix NOT IN
+    # ["/aws/containerinsights", "/aws/ecs/containerinsights",
+    # "/aws/application-signals/data"]`.
+    #
+    # Each account can have either one account-level metric extraction
+    # policy that applies to all log groups, or up to 5 policies that are
+    # each scoped to a subset of log groups with the `selectionCriteria`
+    # parameter. The selection criteria supports filtering by `LogGroupName`
+    # and `LogGroupNamePrefix` using the operators `IN` and `NOT IN`. You
+    # can specify up to 50 values in each `IN` or `NOT IN` list.
+    #
+    # The selection criteria can be specified in these formats:
+    #
+    # `LogGroupName IN ["log-group-1", "log-group-2"]`
+    #
+    # `LogGroupNamePrefix NOT IN ["/aws/prefix1", "/aws/prefix2"]`
+    #
+    # If you have multiple account-level metric extraction policies with
+    # selection criteria, no two of them can have overlapping criteria. For
+    # example, if you have one policy with selection criteria
+    # `LogGroupNamePrefix IN ["my-log"]`, you can't have another metric
+    # extraction policy with selection criteria `LogGroupNamePrefix IN
+    # ["/my-log-prod"]` or `LogGroupNamePrefix IN ["/my-logging"]`, as the
+    # set of log groups matching these prefixes would be a subset of the log
+    # groups matching the first policy's prefix, creating an overlap.
+    #
+    # When using `NOT IN`, only one policy with this operator is allowed per
+    # account.
+    #
+    # When combining policies with `IN` and `NOT IN` operators, the overlap
+    # check ensures that policies don't have conflicting effects. Two
+    # policies with `IN` and `NOT IN` operators do not overlap if and only
+    # if every value in the `IN `policy is completely contained within some
+    # value in the `NOT IN` policy. For example:
+    #
+    # * If you have a `NOT IN` policy for prefix `"/aws/lambda"`, you can
+    #   create an `IN` policy for the exact log group name
+    #   `"/aws/lambda/function1"` because the set of log groups matching
+    #   `"/aws/lambda/function1"` is a subset of the log groups matching
+    #   `"/aws/lambda"`.
+    #
+    # * If you have a `NOT IN` policy for prefix `"/aws/lambda"`, you cannot
+    #   create an `IN` policy for prefix `"/aws"` because the set of log
+    #   groups matching `"/aws"` is not a subset of the log groups matching
+    #   `"/aws/lambda"`.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogEvents.html
@@ -4606,7 +4857,7 @@ module Aws::CloudWatchLogs
     #   Use this parameter to apply the new policy to a subset of log groups
     #   in the account.
     #
-    #   Specifing `selectionCriteria` is valid only when you specify
+    #   Specifying `selectionCriteria` is valid only when you specify
     #   `SUBSCRIPTION_FILTER_POLICY`, `FIELD_INDEX_POLICY` or
     #   `TRANSFORMER_POLICY`for `policyType`.
     #
@@ -4636,7 +4887,7 @@ module Aws::CloudWatchLogs
     #   resp = client.put_account_policy({
     #     policy_name: "PolicyName", # required
     #     policy_document: "AccountPolicyDocument", # required
-    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY, TRANSFORMER_POLICY
+    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY, TRANSFORMER_POLICY, METRIC_EXTRACTION_POLICY
     #     scope: "ALL", # accepts ALL
     #     selection_criteria: "SelectionCriteria",
     #   })
@@ -4646,7 +4897,7 @@ module Aws::CloudWatchLogs
     #   resp.account_policy.policy_name #=> String
     #   resp.account_policy.policy_document #=> String
     #   resp.account_policy.last_updated_time #=> Integer
-    #   resp.account_policy.policy_type #=> String, one of "DATA_PROTECTION_POLICY", "SUBSCRIPTION_FILTER_POLICY", "FIELD_INDEX_POLICY", "TRANSFORMER_POLICY"
+    #   resp.account_policy.policy_type #=> String, one of "DATA_PROTECTION_POLICY", "SUBSCRIPTION_FILTER_POLICY", "FIELD_INDEX_POLICY", "TRANSFORMER_POLICY", "METRIC_EXTRACTION_POLICY"
     #   resp.account_policy.scope #=> String, one of "ALL"
     #   resp.account_policy.selection_criteria #=> String
     #   resp.account_policy.account_id #=> String
@@ -7021,9 +7272,9 @@ module Aws::CloudWatchLogs
     # To list the tags for a log group, use [ListTagsForResource][2]. To add
     # tags, use [TagResource][3].
     #
-    # CloudWatch Logs doesn't support IAM policies that prevent users from
-    # assigning specified tags to log groups using the
-    # `aws:Resource/key-name ` or `aws:TagKeys` condition keys.
+    # When using IAM policies to control tag management for CloudWatch Logs
+    # log groups, the condition keys `aws:Resource/key-name` and
+    # `aws:TagKeys` cannot be used to restrict which tags users can assign.
     #
     #
     #
@@ -7291,7 +7542,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.120.0'
+      context[:gem_version] = '1.122.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.165.0 (2025-07-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.164.0 (2025-07-18)
+------------------
+
+* Feature - This release adds support for TAMS server integration with MediaConvert inputs.
+
+1.163.0 (2025-07-17)
+------------------
+
+* Feature - This release expands the range of supported audio outputs to include xHE, 192khz FLAC and the deprecation of dual mono for AC3.
+
 1.162.0 (2025-06-20)
 ------------------
 

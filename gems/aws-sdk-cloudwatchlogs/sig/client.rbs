@@ -18,6 +18,7 @@ module Aws
                       ?account_id: String,
                       ?active_endpoint_cache: bool,
                       ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
                       ?client_side_monitoring: bool,
                       ?client_side_monitoring_client_id: String,
                       ?client_side_monitoring_host: String,
@@ -164,7 +165,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_account_policy-instance_method
       def delete_account_policy: (
                                    policy_name: ::String,
-                                   policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY")
+                                   policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY")
                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -293,7 +294,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_account_policies-instance_method
       def describe_account_policies: (
-                                       policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY"),
+                                       policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY"),
                                        ?policy_name: ::String,
                                        ?account_identifiers: Array[::String],
                                        ?next_token: ::String
@@ -655,6 +656,17 @@ module Aws
                                 ) -> _GetLogGroupFieldsResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLogGroupFieldsResponseSuccess
 
+      interface _GetLogObjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLogObjectResponse]
+        def field_stream: () -> Types::GetLogObjectResponseStream
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#get_log_object-instance_method
+      def get_log_object: (
+                            ?unmask: bool,
+                            log_object_pointer: ::String
+                          ) -> _GetLogObjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLogObjectResponseSuccess
+
       interface _GetLogRecordResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetLogRecordResponse]
         def log_record: () -> ::Hash[::String, ::String]
@@ -789,7 +801,7 @@ module Aws
       def put_account_policy: (
                                 policy_name: ::String,
                                 policy_document: ::String,
-                                policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY"),
+                                policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY"),
                                 ?scope: ("ALL"),
                                 ?selection_criteria: ::String
                               ) -> _PutAccountPolicyResponseSuccess

@@ -95,7 +95,7 @@ module Aws::MediaConvert
     #     class name or an instance of a plugin class.
     #
     #   @option options [required, Aws::CredentialProvider] :credentials
-    #     Your AWS credentials. This can be an instance of any one of the
+    #     Your AWS credentials used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
@@ -128,18 +128,23 @@ module Aws::MediaConvert
     #     locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
+    #
     #     * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
     #       `:account_id` options.
-    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
-    #       ENV['AWS_SESSION_TOKEN'], and ENV['AWS_ACCOUNT_ID']
+    #
+    #     * `ENV['AWS_ACCESS_KEY_ID']`, `ENV['AWS_SECRET_ACCESS_KEY']`,
+    #       `ENV['AWS_SESSION_TOKEN']`, and `ENV['AWS_ACCOUNT_ID']`.
+    #
     #     * `~/.aws/credentials`
+    #
     #     * `~/.aws/config`
+    #
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
     #       enable retries and extended timeouts. Instance profile credential
-    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
-    #       to true.
+    #       fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
+    #       to `true`.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -166,6 +171,11 @@ module Aws::MediaConvert
     #     until there is sufficent client side capacity to retry the request.
     #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
     #     not retry instead of sleeping.
+    #
+    #   @option options [Array<String>] :auth_scheme_preference
+    #     A list of preferred authentication schemes to use when making a request. Supported values are:
+    #     `sigv4`, `sigv4a`, `httpBearerAuth`, and `noAuth`. When set using `ENV['AWS_AUTH_SCHEME_PREFERENCE']` or in
+    #     shared config as `auth_scheme_preference`, the value should be a comma-separated list.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -253,8 +263,8 @@ module Aws::MediaConvert
     #     4 times. Used in `standard` and `adaptive` retry modes.
     #
     #   @option options [String] :profile ("default")
-    #     Used when loading credentials from the shared credentials file
-    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
+    #     When not specified, 'default' is used.
     #
     #   @option options [String] :request_checksum_calculation ("when_supported")
     #     Determines when a checksum will be calculated for request payloads. Values are:
@@ -367,7 +377,7 @@ module Aws::MediaConvert
     #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
-    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     Your Bearer token used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
@@ -732,12 +742,15 @@ module Aws::MediaConvert
     #             aac_settings: {
     #               audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
     #               bitrate: 1,
-    #               codec_profile: "LC", # accepts LC, HEV1, HEV2
+    #               codec_profile: "LC", # accepts LC, HEV1, HEV2, XHE
     #               coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
+    #               loudness_measurement_mode: "PROGRAM", # accepts PROGRAM, ANCHOR
+    #               rap_interval: 1,
     #               rate_control_mode: "CBR", # accepts CBR, VBR
     #               raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
     #               sample_rate: 1,
     #               specification: "MPEG2", # accepts MPEG2, MPEG4
+    #               target_loudness_range: 1,
     #               vbr_quality: "LOW", # accepts LOW, MEDIUM_LOW, MEDIUM_HIGH, HIGH
     #             },
     #             ac_3_settings: {
@@ -1557,12 +1570,15 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].audio_type_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.audio_description_broadcaster_mix #=> String, one of "BROADCASTER_MIXED_AD", "NORMAL"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.bitrate #=> Integer
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.codec_profile #=> String, one of "LC", "HEV1", "HEV2"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.codec_profile #=> String, one of "LC", "HEV1", "HEV2", "XHE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.loudness_measurement_mode #=> String, one of "PROGRAM", "ANCHOR"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.rap_interval #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.rate_control_mode #=> String, one of "CBR", "VBR"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.raw_format #=> String, one of "LATM_LOAS", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.sample_rate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.specification #=> String, one of "MPEG2", "MPEG4"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.target_loudness_range #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.vbr_quality #=> String, one of "LOW", "MEDIUM_LOW", "MEDIUM_HIGH", "HIGH"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"
@@ -2559,12 +2575,15 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].audio_type_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.audio_description_broadcaster_mix #=> String, one of "BROADCASTER_MIXED_AD", "NORMAL"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.bitrate #=> Integer
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.codec_profile #=> String, one of "LC", "HEV1", "HEV2"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.codec_profile #=> String, one of "LC", "HEV1", "HEV2", "XHE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.loudness_measurement_mode #=> String, one of "PROGRAM", "ANCHOR"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.rap_interval #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.rate_control_mode #=> String, one of "CBR", "VBR"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.raw_format #=> String, one of "LATM_LOAS", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.sample_rate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.specification #=> String, one of "MPEG2", "MPEG4"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.target_loudness_range #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.vbr_quality #=> String, one of "LOW", "MEDIUM_LOW", "MEDIUM_HIGH", "HIGH"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"
@@ -3429,12 +3448,15 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.audio_descriptions[0].audio_type_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.audio_description_broadcaster_mix #=> String, one of "BROADCASTER_MIXED_AD", "NORMAL"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.bitrate #=> Integer
-    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.codec_profile #=> String, one of "LC", "HEV1", "HEV2"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.codec_profile #=> String, one of "LC", "HEV1", "HEV2", "XHE"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.loudness_measurement_mode #=> String, one of "PROGRAM", "ANCHOR"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.rap_interval #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.rate_control_mode #=> String, one of "CBR", "VBR"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.raw_format #=> String, one of "LATM_LOAS", "NONE"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.sample_rate #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.specification #=> String, one of "MPEG2", "MPEG4"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.target_loudness_range #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.vbr_quality #=> String, one of "LOW", "MEDIUM_LOW", "MEDIUM_HIGH", "HIGH"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.ac_3_settings.bitrate #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.ac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"
@@ -4252,7 +4274,7 @@ module Aws::MediaConvert
     #
     #   resp.probe_results #=> Array
     #   resp.probe_results[0].container.duration #=> Float
-    #   resp.probe_results[0].container.format #=> String, one of "mp4", "quicktime", "matroska", "webm"
+    #   resp.probe_results[0].container.format #=> String, one of "mp4", "quicktime", "matroska", "webm", "mxf"
     #   resp.probe_results[0].container.tracks #=> Array
     #   resp.probe_results[0].container.tracks[0].audio_properties.bit_depth #=> Integer
     #   resp.probe_results[0].container.tracks[0].audio_properties.bit_rate #=> Integer
@@ -4261,7 +4283,7 @@ module Aws::MediaConvert
     #   resp.probe_results[0].container.tracks[0].audio_properties.frame_rate.numerator #=> Integer
     #   resp.probe_results[0].container.tracks[0].audio_properties.language_code #=> String
     #   resp.probe_results[0].container.tracks[0].audio_properties.sample_rate #=> Integer
-    #   resp.probe_results[0].container.tracks[0].codec #=> String, one of "UNKNOWN", "AAC", "AC3", "EAC3", "FLAC", "MP3", "OPUS", "PCM", "VORBIS", "AV1", "AVC", "HEVC", "MJPEG", "MP4V", "MPEG2", "PRORES", "THEORA", "VP8", "VP9", "C608", "C708", "WEBVTT"
+    #   resp.probe_results[0].container.tracks[0].codec #=> String, one of "UNKNOWN", "AAC", "AC3", "EAC3", "FLAC", "MP3", "OPUS", "PCM", "VORBIS", "AV1", "AVC", "HEVC", "JPEG2000", "MJPEG", "MP4V", "MPEG2", "PRORES", "THEORA", "VP8", "VP9", "C608", "C708", "WEBVTT"
     #   resp.probe_results[0].container.tracks[0].data_properties.language_code #=> String
     #   resp.probe_results[0].container.tracks[0].duration #=> Float
     #   resp.probe_results[0].container.tracks[0].index #=> Integer
@@ -4554,12 +4576,15 @@ module Aws::MediaConvert
     #             aac_settings: {
     #               audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
     #               bitrate: 1,
-    #               codec_profile: "LC", # accepts LC, HEV1, HEV2
+    #               codec_profile: "LC", # accepts LC, HEV1, HEV2, XHE
     #               coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
+    #               loudness_measurement_mode: "PROGRAM", # accepts PROGRAM, ANCHOR
+    #               rap_interval: 1,
     #               rate_control_mode: "CBR", # accepts CBR, VBR
     #               raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
     #               sample_rate: 1,
     #               specification: "MPEG2", # accepts MPEG2, MPEG4
+    #               target_loudness_range: 1,
     #               vbr_quality: "LOW", # accepts LOW, MEDIUM_LOW, MEDIUM_HIGH, HIGH
     #             },
     #             ac_3_settings: {
@@ -5376,12 +5401,15 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].audio_type_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.audio_description_broadcaster_mix #=> String, one of "BROADCASTER_MIXED_AD", "NORMAL"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.bitrate #=> Integer
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.codec_profile #=> String, one of "LC", "HEV1", "HEV2"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.codec_profile #=> String, one of "LC", "HEV1", "HEV2", "XHE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.loudness_measurement_mode #=> String, one of "PROGRAM", "ANCHOR"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.rap_interval #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.rate_control_mode #=> String, one of "CBR", "VBR"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.raw_format #=> String, one of "LATM_LOAS", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.sample_rate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.specification #=> String, one of "MPEG2", "MPEG4"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.target_loudness_range #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.vbr_quality #=> String, one of "LOW", "MEDIUM_LOW", "MEDIUM_HIGH", "HIGH"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"
@@ -6122,7 +6150,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.162.0'
+      context[:gem_version] = '1.165.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

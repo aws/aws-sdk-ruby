@@ -360,6 +360,10 @@ module Aws::WorkSpacesThinClient
     #   used to encrypt the device.
     #   @return [String]
     #
+    # @!attribute [rw] last_user_id
+    #   The user ID of the most recent session on the device.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/Device AWS API Documentation
     #
     class Device < Struct.new(
@@ -382,8 +386,9 @@ module Aws::WorkSpacesThinClient
       :created_at,
       :updated_at,
       :arn,
-      :kms_key_arn)
-      SENSITIVE = [:name]
+      :kms_key_arn,
+      :last_user_id)
+      SENSITIVE = [:name, :last_user_id]
       include Aws::Structure
     end
 
@@ -451,6 +456,10 @@ module Aws::WorkSpacesThinClient
     #   The Amazon Resource Name (ARN) of the device.
     #   @return [String]
     #
+    # @!attribute [rw] last_user_id
+    #   The user ID of the most recent session on the device.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/DeviceSummary AWS API Documentation
     #
     class DeviceSummary < Struct.new(
@@ -468,8 +477,9 @@ module Aws::WorkSpacesThinClient
       :last_posture_at,
       :created_at,
       :updated_at,
-      :arn)
-      SENSITIVE = [:name]
+      :arn,
+      :last_user_id)
+      SENSITIVE = [:name, :last_user_id]
       include Aws::Structure
     end
 

@@ -27,17 +27,13 @@ module Aws
 
     def static_profile_sso_token(options)
       if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
-        Aws.shared_config.sso_token_from_config(
-          profile: options[:config].profile
-        )
+        Aws.shared_config.sso_token_from_config(profile: options[:config].profile)
       end
     end
 
-
     def sso_token(options)
-      profile_name = determine_profile_name(options)
       if Aws.shared_config.config_enabled?
-        Aws.shared_config.sso_token_from_config(profile: profile_name)
+        Aws.shared_config.sso_token_from_config(profile: determine_profile_name(options))
       end
     rescue Errors::NoSuchProfileError
       nil

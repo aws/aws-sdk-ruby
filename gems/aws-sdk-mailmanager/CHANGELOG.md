@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2025-07-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2025-07-17)
+------------------
+
+* Feature - Allow underscores in the local part of the input of the "Email recipients rewrite" action in rule sets.
+
 1.27.0 (2025-06-02)
 ------------------
 

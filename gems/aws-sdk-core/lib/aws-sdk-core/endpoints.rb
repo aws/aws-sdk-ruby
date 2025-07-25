@@ -19,19 +19,28 @@ require 'aws-sigv4'
 module Aws
   # @api private
   module Endpoints
-    SUPPORTED_AUTH_TRAITS = %w[
-      aws.auth#sigv4
-      aws.auth#sigv4a
-      smithy.api#httpBearerAuth
-      smithy.api#noAuth
-    ].freeze
+    # Maps config auth scheme preferences to endpoint auth scheme names.
+    ENDPOINT_AUTH_PREFERENCE_MAP = {
+      'sigv4' => %w[sigv4 sigv4-s3express],
+      'sigv4a' => ['sigv4a'],
+      'httpBearerAuth' => ['bearer'],
+      'noAuth' => ['none']
+    }.freeze
+    SUPPORTED_ENDPOINT_AUTH = ENDPOINT_AUTH_PREFERENCE_MAP.values.flatten.freeze
+
+    # Maps configured auth scheme preferences to modeled auth traits.
+    MODELED_AUTH_PREFERENCE_MAP = {
+      'sigv4' => 'aws.auth#sigv4',
+      'sigv4a' => 'aws.auth#sigv4a',
+      'httpBearerAuth' => 'smithy.api#httpBearerAuth',
+      'noAuth' => 'smithy.api#noAuth'
+    }.freeze
+    SUPPORTED_MODELED_AUTH = MODELED_AUTH_PREFERENCE_MAP.values.freeze
 
     class << self
       def resolve_auth_scheme(context, endpoint)
         if endpoint && (auth_schemes = endpoint.properties['authSchemes'])
-          auth_scheme = auth_schemes.find do |scheme|
-            Aws::Plugins::Sign::SUPPORTED_AUTH_TYPES.include?(scheme['name'])
-          end
+          auth_scheme = endpoint_auth_scheme_preference(auth_schemes, context.config.auth_scheme_preference)
           raise 'No supported auth scheme for this endpoint.' unless auth_scheme
 
           merge_signing_defaults(auth_scheme, context.config)
@@ -41,6 +50,16 @@ module Aws
       end
 
       private
+
+      def endpoint_auth_scheme_preference(auth_schemes, preferred_auth)
+        ordered_auth = preferred_auth.each_with_object([]) do |pref, list|
+          next unless ENDPOINT_AUTH_PREFERENCE_MAP.key?(pref)
+
+          ENDPOINT_AUTH_PREFERENCE_MAP[pref].each { |name| list << { 'name' => name } }
+        end
+        ordered_auth += auth_schemes
+        ordered_auth.find { |auth| SUPPORTED_ENDPOINT_AUTH.include?(auth['name']) }
+      end
 
       def merge_signing_defaults(auth_scheme, config)
         if %w[sigv4 sigv4a sigv4-s3express].include?(auth_scheme['name'])
@@ -64,13 +83,12 @@ module Aws
       end
 
       def sigv4_name(config)
-        config.api.metadata['signingName'] ||
-          config.api.metadata['endpointPrefix']
+        config.api.metadata['signingName'] || config.api.metadata['endpointPrefix']
       end
 
       def default_auth_scheme(context)
-        if (auth_list = default_api_auth(context))
-          auth = auth_list.find { |a| SUPPORTED_AUTH_TRAITS.include?(a) }
+        if (modeled_auth = default_api_auth(context))
+          auth = modeled_auth_scheme_preference(modeled_auth, context.config.auth_scheme_preference)
           case auth
           when 'aws.auth#sigv4', 'aws.auth#sigv4a'
             auth_scheme = { 'name' => auth.split('#').last }
@@ -91,6 +109,12 @@ module Aws
         else
           legacy_default_auth_scheme(context)
         end
+      end
+
+      def modeled_auth_scheme_preference(modeled_auth, preferred_auth)
+        ordered_auth = preferred_auth.map { |pref| MODELED_AUTH_PREFERENCE_MAP[pref] }.compact
+        ordered_auth += modeled_auth
+        ordered_auth.find { |auth| SUPPORTED_MODELED_AUTH.include?(auth) }
       end
 
       def default_api_auth(context)

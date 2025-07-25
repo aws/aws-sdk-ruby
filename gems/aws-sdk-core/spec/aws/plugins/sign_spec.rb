@@ -53,10 +53,10 @@ module Aws
           class Handler < Seahorse::Client::Handler
             def call(context)
               context[:sigv4_region] = 'override-region'
-              context[:sigv4_credentials] = Aws::Sigv4::StaticCredentialsProvider.new(
-                access_key_id: 'override-akid',
-                secret_access_key: 'override-secret',
-                session_token: 'override-token'
+              context[:sigv4_credentials] = Aws::Credentials.new(
+                'override-akid',
+                'override-secret',
+                'override-token'
               )
               @handler.call(context)
             end

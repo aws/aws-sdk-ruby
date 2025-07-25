@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2025-07-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.121.0 (2025-07-18)
+------------------
+
+* Feature - CloudWatchLogs launches GetLogObject API with streaming support for efficient log data retrieval. Logs added support for new AccountPolicy type METRIC_EXTRACTION_POLICY. For more information, see CloudWatch Logs API documentation
+
 1.120.0 (2025-07-16)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2025-07-21)
+------------------
+
+* Feature - Add dualstack endpoint support
+
+1.120.0 (2025-07-17)
+------------------
+
+* Feature - Doc only update for CloudFront that fixes some customer-reported issues
+
 1.119.0 (2025-06-02)
 ------------------
 

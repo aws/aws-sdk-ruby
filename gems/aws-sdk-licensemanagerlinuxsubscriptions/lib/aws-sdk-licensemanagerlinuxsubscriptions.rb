@@ -54,7 +54,7 @@ module Aws::LicenseManagerLinuxSubscriptions
   autoload :EndpointProvider, 'aws-sdk-licensemanagerlinuxsubscriptions/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-licensemanagerlinuxsubscriptions/endpoints'
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.32.0'
 
 end
 

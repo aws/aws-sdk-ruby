@@ -644,7 +644,10 @@ module Aws::Deadline
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    VpcConfiguration = Shapes::StructureShape.new(name: 'VpcConfiguration')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
+    VpcResourceConfigurationArn = Shapes::StringShape.new(name: 'VpcResourceConfigurationArn')
+    VpcResourceConfigurationArns = Shapes::ListShape.new(name: 'VpcResourceConfigurationArns')
     WindowsUser = Shapes::StructureShape.new(name: 'WindowsUser')
     WindowsUserPasswordArnString = Shapes::StringShape.new(name: 'WindowsUserPasswordArnString')
     WindowsUserUserString = Shapes::StringShape.new(name: 'WindowsUserUserString')
@@ -1808,6 +1811,8 @@ module Aws::Deadline
     JobSearchSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     JobSearchSummary.add_member(:ended_at, Shapes::ShapeRef.new(shape: EndedAt, location_name: "endedAt"))
     JobSearchSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: StartedAt, location_name: "startedAt"))
+    JobSearchSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
+    JobSearchSummary.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
     JobSearchSummary.add_member(:job_parameters, Shapes::ShapeRef.new(shape: JobParameters, location_name: "jobParameters"))
     JobSearchSummary.add_member(:max_worker_count, Shapes::ShapeRef.new(shape: MaxWorkerCount, location_name: "maxWorkerCount"))
     JobSearchSummary.add_member(:source_job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "sourceJobId"))
@@ -2410,6 +2415,7 @@ module Aws::Deadline
 
     ServiceManagedEc2FleetConfiguration.add_member(:instance_capabilities, Shapes::ShapeRef.new(shape: ServiceManagedEc2InstanceCapabilities, required: true, location_name: "instanceCapabilities"))
     ServiceManagedEc2FleetConfiguration.add_member(:instance_market_options, Shapes::ShapeRef.new(shape: ServiceManagedEc2InstanceMarketOptions, required: true, location_name: "instanceMarketOptions"))
+    ServiceManagedEc2FleetConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "vpcConfiguration"))
     ServiceManagedEc2FleetConfiguration.add_member(:storage_profile_id, Shapes::ShapeRef.new(shape: StorageProfileId, location_name: "storageProfileId"))
     ServiceManagedEc2FleetConfiguration.struct_class = Types::ServiceManagedEc2FleetConfiguration
 
@@ -2603,8 +2609,11 @@ module Aws::Deadline
     StepSearchSummary.add_member(:task_run_status_counts, Shapes::ShapeRef.new(shape: TaskRunStatusCounts, location_name: "taskRunStatusCounts"))
     StepSearchSummary.add_member(:task_failure_retry_count, Shapes::ShapeRef.new(shape: TaskFailureRetryCount, location_name: "taskFailureRetryCount"))
     StepSearchSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    StepSearchSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
     StepSearchSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: StartedAt, location_name: "startedAt"))
     StepSearchSummary.add_member(:ended_at, Shapes::ShapeRef.new(shape: EndedAt, location_name: "endedAt"))
+    StepSearchSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
+    StepSearchSummary.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
     StepSearchSummary.add_member(:parameter_space, Shapes::ShapeRef.new(shape: ParameterSpace, location_name: "parameterSpace"))
     StepSearchSummary.struct_class = Types::StepSearchSummary
 
@@ -2710,6 +2719,8 @@ module Aws::Deadline
     TaskSearchSummary.add_member(:failure_retry_count, Shapes::ShapeRef.new(shape: TaskRetryCount, location_name: "failureRetryCount"))
     TaskSearchSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: StartedAt, location_name: "startedAt"))
     TaskSearchSummary.add_member(:ended_at, Shapes::ShapeRef.new(shape: EndedAt, location_name: "endedAt"))
+    TaskSearchSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
+    TaskSearchSummary.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
     TaskSearchSummary.struct_class = Types::TaskSearchSummary
 
     TaskSummaries.member = Shapes::ShapeRef.new(shape: TaskSummary)
@@ -2958,6 +2969,11 @@ module Aws::Deadline
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
+
+    VpcConfiguration.add_member(:resource_configuration_arns, Shapes::ShapeRef.new(shape: VpcResourceConfigurationArns, location_name: "resourceConfigurationArns"))
+    VpcConfiguration.struct_class = Types::VpcConfiguration
+
+    VpcResourceConfigurationArns.member = Shapes::ShapeRef.new(shape: VpcResourceConfigurationArn)
 
     WindowsUser.add_member(:user, Shapes::ShapeRef.new(shape: WindowsUserUserString, required: true, location_name: "user"))
     WindowsUser.add_member(:password_arn, Shapes::ShapeRef.new(shape: WindowsUserPasswordArnString, required: true, location_name: "passwordArn"))

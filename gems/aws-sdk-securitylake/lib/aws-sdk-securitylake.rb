@@ -54,7 +54,7 @@ module Aws::SecurityLake
   autoload :EndpointProvider, 'aws-sdk-securitylake/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-securitylake/endpoints'
 
-  GEM_VERSION = '1.40.0'
+  GEM_VERSION = '1.41.0'
 
 end
 

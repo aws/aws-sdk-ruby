@@ -28,6 +28,7 @@
         "cases": [
             {
                 "id": "AwsJson10EmptyInputAndEmptyOutputSendJsonObject",
+                "description": "A service will always return a JSON object for operations with modeled output.",
                 "given": {
                     "name": "EmptyInputAndEmptyOutput",
                     "http": {
@@ -39,7 +40,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there's no request or response payload because the operation has an empty input and empty output structure that reuses the same shape. While this should be rare, code generators must support this.</p>"
                 },
-                "description": "A service will always return a JSON object for operations with modeled output.",
                 "result": {},
                 "response": {
                     "status_code": 200,
@@ -89,6 +89,7 @@
         "cases": [
             {
                 "id": "AwsJson10InvalidGreetingError",
+                "description": "Parses simple JSON errors",
                 "given": {
                     "name": "GreetingWithErrors",
                     "http": {
@@ -103,7 +104,6 @@
                         }
                     ]
                 },
-                "description": "Parses simple JSON errors",
                 "errorCode": "InvalidGreeting",
                 "errorMessage": "Hi",
                 "error": {
@@ -168,6 +168,7 @@
         "cases": [
             {
                 "id": "AwsJson10ComplexError",
+                "description": "Parses a complex error with no message member",
                 "given": {
                     "name": "GreetingWithErrors",
                     "http": {
@@ -182,7 +183,6 @@
                         }
                     ]
                 },
-                "description": "Parses a complex error with no message member",
                 "errorCode": "ComplexError",
                 "error": {
                     "TopLevel": "Top level",
@@ -200,6 +200,7 @@
             },
             {
                 "id": "AwsJson10EmptyComplexError",
+                "description": "Parses a complex error with an empty body",
                 "given": {
                     "name": "GreetingWithErrors",
                     "http": {
@@ -214,7 +215,6 @@
                         }
                     ]
                 },
-                "description": "Parses a complex error with an empty body",
                 "errorCode": "ComplexError",
                 "error": {},
                 "response": {
@@ -259,6 +259,7 @@
         "cases": [
             {
                 "id": "AwsJson10FooErrorUsingXAmznErrorType",
+                "description": "Serializes the X-Amzn-ErrorType header. For an example service, see Amazon EKS.",
                 "given": {
                     "name": "GreetingWithErrors",
                     "http": {
@@ -273,7 +274,6 @@
                         }
                     ]
                 },
-                "description": "Serializes the X-Amzn-ErrorType header. For an example service, see Amazon EKS.",
                 "errorCode": "FooError",
                 "error": {},
                 "response": {
@@ -285,6 +285,7 @@
             },
             {
                 "id": "AwsJson10FooErrorUsingXAmznErrorTypeWithUri",
+                "description": "Some X-Amzn-Errortype headers contain URLs. Clients need to split the URL on ':' and take only the first half of the string. For example, 'ValidationException:http://internal.amazon.com/coral/com.amazon.coral.validate/'\nis to be interpreted as 'ValidationException'.\n\nFor an example service see Amazon Polly.",
                 "given": {
                     "name": "GreetingWithErrors",
                     "http": {
@@ -299,7 +300,6 @@
                         }
                     ]
                 },
-                "description": "Some X-Amzn-Errortype headers contain URLs. Clients need to split the URL on ':' and take only the first half of the string. For example, 'ValidationException:http://internal.amazon.com/coral/com.amazon.coral.validate/'\nis to be interpreted as 'ValidationException'.\n\nFor an example service see Amazon Polly.",
                 "errorCode": "FooError",
                 "error": {},
                 "response": {
@@ -311,6 +311,7 @@
             },
             {
                 "id": "AwsJson10FooErrorUsingXAmznErrorTypeWithUriAndNamespace",
+                "description": "X-Amzn-Errortype might contain a URL and a namespace. Client should extract only the shape name. This is a pathalogical case that might not actually happen in any deployed AWS service.",
                 "given": {
                     "name": "GreetingWithErrors",
                     "http": {
@@ -325,7 +326,6 @@
                         }
                     ]
                 },
-                "description": "X-Amzn-Errortype might contain a URL and a namespace. Client should extract only the shape name. This is a pathalogical case that might not actually happen in any deployed AWS service.",
                 "errorCode": "FooError",
                 "error": {},
                 "response": {
@@ -337,6 +337,7 @@
             },
             {
                 "id": "AwsJson10FooErrorUsingCode",
+                "description": "This example uses the 'code' property in the output rather than X-Amzn-Errortype. Some services do this though it's preferable to send the X-Amzn-Errortype. Client implementations must first check for the X-Amzn-Errortype and then check for a top-level 'code' property.\n\nFor example service see Amazon S3 Glacier.",
                 "given": {
                     "name": "GreetingWithErrors",
                     "http": {
@@ -351,7 +352,6 @@
                         }
                     ]
                 },
-                "description": "This example uses the 'code' property in the output rather than X-Amzn-Errortype. Some services do this though it's preferable to send the X-Amzn-Errortype. Client implementations must first check for the X-Amzn-Errortype and then check for a top-level 'code' property.\n\nFor example service see Amazon S3 Glacier.",
                 "errorCode": "FooError",
                 "error": {},
                 "response": {
@@ -364,6 +364,7 @@
             },
             {
                 "id": "AwsJson10FooErrorUsingCodeAndNamespace",
+                "description": "Some services serialize errors using code, and it might contain a namespace. Clients should just take the last part of the string after '#'.",
                 "given": {
                     "name": "GreetingWithErrors",
                     "http": {
@@ -378,7 +379,6 @@
                         }
                     ]
                 },
-                "description": "Some services serialize errors using code, and it might contain a namespace. Clients should just take the last part of the string after '#'.",
                 "errorCode": "FooError",
                 "error": {},
                 "response": {
@@ -391,6 +391,7 @@
             },
             {
                 "id": "AwsJson10FooErrorUsingCodeUriAndNamespace",
+                "description": "Some services serialize errors using code, and it might contain a namespace. It also might contain a URI. Clients should just take the last part of the string after '#' and before \":\". This is a pathalogical case that might not occur in any deployed AWS service.",
                 "given": {
                     "name": "GreetingWithErrors",
                     "http": {
@@ -405,7 +406,6 @@
                         }
                     ]
                 },
-                "description": "Some services serialize errors using code, and it might contain a namespace. It also might contain a URI. Clients should just take the last part of the string after '#' and before \":\". This is a pathalogical case that might not occur in any deployed AWS service.",
                 "errorCode": "FooError",
                 "error": {},
                 "response": {
@@ -418,6 +418,7 @@
             },
             {
                 "id": "AwsJson10FooErrorWithDunderType",
+                "description": "Some services serialize errors using __type.",
                 "given": {
                     "name": "GreetingWithErrors",
                     "http": {
@@ -432,7 +433,6 @@
                         }
                     ]
                 },
-                "description": "Some services serialize errors using __type.",
                 "errorCode": "FooError",
                 "error": {},
                 "response": {
@@ -445,6 +445,7 @@
             },
             {
                 "id": "AwsJson10FooErrorWithDunderTypeAndNamespace",
+                "description": "Some services serialize errors using __type, and it might contain a namespace. Clients should just take the last part of the string after '#'.",
                 "given": {
                     "name": "GreetingWithErrors",
                     "http": {
@@ -459,7 +460,6 @@
                         }
                     ]
                 },
-                "description": "Some services serialize errors using __type, and it might contain a namespace. Clients should just take the last part of the string after '#'.",
                 "errorCode": "FooError",
                 "error": {},
                 "response": {
@@ -472,6 +472,7 @@
             },
             {
                 "id": "AwsJson10FooErrorWithDunderTypeUriAndNamespace",
+                "description": "Some services serialize errors using __type, and it might contain a namespace. It also might contain a URI. Clients should just take the last part of the string after '#' and before \":\". This is a pathalogical case that might not occur in any deployed AWS service.",
                 "given": {
                     "name": "GreetingWithErrors",
                     "http": {
@@ -486,7 +487,6 @@
                         }
                     ]
                 },
-                "description": "Some services serialize errors using __type, and it might contain a namespace. It also might contain a URI. Clients should just take the last part of the string after '#' and before \":\". This is a pathalogical case that might not occur in any deployed AWS service.",
                 "errorCode": "FooError",
                 "error": {},
                 "response": {
@@ -623,6 +623,7 @@
         "cases": [
             {
                 "id": "AwsJson10DeserializeStringUnionValue",
+                "description": "Deserializes a string union value",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -635,7 +636,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Deserializes a string union value",
                 "result": {
                     "contents": {
                         "stringValue": "foo"
@@ -651,6 +651,7 @@
             },
             {
                 "id": "AwsJson10DeserializeBooleanUnionValue",
+                "description": "Deserializes a boolean union value",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -663,7 +664,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Deserializes a boolean union value",
                 "result": {
                     "contents": {
                         "booleanValue": true
@@ -679,6 +679,7 @@
             },
             {
                 "id": "AwsJson10DeserializeNumberUnionValue",
+                "description": "Deserializes a number union value",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -691,7 +692,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Deserializes a number union value",
                 "result": {
                     "contents": {
                         "numberValue": 1
@@ -707,6 +707,7 @@
             },
             {
                 "id": "AwsJson10DeserializeBlobUnionValue",
+                "description": "Deserializes a blob union value",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -719,7 +720,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Deserializes a blob union value",
                 "result": {
                     "contents": {
                         "blobValue": "foo"
@@ -735,6 +735,7 @@
             },
             {
                 "id": "AwsJson10DeserializeTimestampUnionValue",
+                "description": "Deserializes a timestamp union value",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -747,7 +748,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Deserializes a timestamp union value",
                 "result": {
                     "contents": {
                         "timestampValue": 1398796238
@@ -763,6 +763,7 @@
             },
             {
                 "id": "AwsJson10DeserializeEnumUnionValue",
+                "description": "Deserializes an enum union value",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -775,7 +776,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Deserializes an enum union value",
                 "result": {
                     "contents": {
                         "enumValue": "Foo"
@@ -791,6 +791,7 @@
             },
             {
                 "id": "AwsJson10DeserializeIntEnumUnionValue",
+                "description": "Deserializes an intEnum union value",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -803,7 +804,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Deserializes an intEnum union value",
                 "result": {
                     "contents": {
                         "intEnumValue": 1
@@ -819,6 +819,7 @@
             },
             {
                 "id": "AwsJson10DeserializeListUnionValue",
+                "description": "Deserializes a list union value",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -831,7 +832,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Deserializes a list union value",
                 "result": {
                     "contents": {
                         "listValue": [
@@ -850,6 +850,7 @@
             },
             {
                 "id": "AwsJson10DeserializeMapUnionValue",
+                "description": "Deserializes a map union value",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -862,7 +863,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Deserializes a map union value",
                 "result": {
                     "contents": {
                         "mapValue": {
@@ -881,6 +881,7 @@
             },
             {
                 "id": "AwsJson10DeserializeStructureUnionValue",
+                "description": "Deserializes a structure union value",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -893,7 +894,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Deserializes a structure union value",
                 "result": {
                     "contents": {
                         "structureValue": {
@@ -911,6 +911,7 @@
             },
             {
                 "id": "AwsJson10DeserializeIgnoreType",
+                "description": "Ignores an unrecognized __type property",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -923,7 +924,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Ignores an unrecognized __type property",
                 "result": {
                     "contents": {
                         "structureValue": {
@@ -941,6 +941,7 @@
             },
             {
                 "id": "AwsJson10DeserializeAllowNulls",
+                "description": "Allows for `: null` to be set for all unset fields",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -953,7 +954,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Allows for `: null` to be set for all unset fields",
                 "result": {
                     "contents": {
                         "structureValue": {
@@ -995,6 +995,7 @@
         "cases": [
             {
                 "id": "AwsJson10HandlesEmptyOutputShape",
+                "description": "When no output is defined, the service is expected to return\nan empty payload, however, client must ignore a JSON payload\nif one is returned. This ensures that if output is added later,\nthen it will not break the client.",
                 "given": {
                     "name": "NoInputAndNoOutput",
                     "http": {
@@ -1003,7 +1004,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there's no request or response payload because the operation has no input or output. While this should be rare, code generators must support this.</p>"
                 },
-                "description": "When no output is defined, the service is expected to return\nan empty payload, however, client must ignore a JSON payload\nif one is returned. This ensures that if output is added later,\nthen it will not break the client.",
                 "result": {},
                 "response": {
                     "status_code": 200,
@@ -1015,6 +1015,7 @@
             },
             {
                 "id": "AwsJson10HandlesUnexpectedJsonOutput",
+                "description": "This client-only test builds on handles_empty_output_shape,\nby including unexpected fields in the JSON. A client\nneeds to ignore JSON output that is empty or that contains\nJSON object data.",
                 "given": {
                     "name": "NoInputAndNoOutput",
                     "http": {
@@ -1023,7 +1024,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there's no request or response payload because the operation has no input or output. While this should be rare, code generators must support this.</p>"
                 },
-                "description": "This client-only test builds on handles_empty_output_shape,\nby including unexpected fields in the JSON. A client\nneeds to ignore JSON output that is empty or that contains\nJSON object data.",
                 "result": {},
                 "response": {
                     "status_code": 200,
@@ -1035,6 +1035,7 @@
             },
             {
                 "id": "AwsJson10ServiceRespondsWithNoPayload",
+                "description": "When no output is defined, the service is expected to return\nan empty payload. Despite the lack of a payload, the service\nis expected to always send a Content-Type header. Clients must\nhandle cases where a service returns a JSON object and where\na service returns no JSON at all.",
                 "given": {
                     "name": "NoInputAndNoOutput",
                     "http": {
@@ -1043,7 +1044,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there's no request or response payload because the operation has no input or output. While this should be rare, code generators must support this.</p>"
                 },
-                "description": "When no output is defined, the service is expected to return\nan empty payload. Despite the lack of a payload, the service\nis expected to always send a Content-Type header. Clients must\nhandle cases where a service returns a JSON object and where\na service returns no JSON at all.",
                 "result": {},
                 "response": {
                     "status_code": 200,
@@ -1084,6 +1084,7 @@
         "cases": [
             {
                 "id": "AwsJson10NoInputAndOutput",
+                "description": "Empty output always serializes an empty object payload.",
                 "given": {
                     "name": "NoInputAndOutput",
                     "http": {
@@ -1095,7 +1096,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there's no request or response payload because the operation has no input and the output is empty. While this should be rare, code generators must support this.</p>"
                 },
-                "description": "Empty output always serializes an empty object payload.",
                 "result": {},
                 "response": {
                     "status_code": 200,
@@ -1151,6 +1151,7 @@
         "cases": [
             {
                 "id": "AwsJson10SupportsNaNFloatInputs",
+                "description": "Supports handling NaN float values.",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -1161,7 +1162,6 @@
                         "shape": "SimpleScalarPropertiesOutput"
                     }
                 },
-                "description": "Supports handling NaN float values.",
                 "result": {
                     "floatValue": "NaN",
                     "doubleValue": "NaN"
@@ -1176,6 +1176,7 @@
             },
             {
                 "id": "AwsJson10SupportsInfinityFloatInputs",
+                "description": "Supports handling Infinity float values.",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -1186,7 +1187,6 @@
                         "shape": "SimpleScalarPropertiesOutput"
                     }
                 },
-                "description": "Supports handling Infinity float values.",
                 "result": {
                     "floatValue": "Infinity",
                     "doubleValue": "Infinity"
@@ -1201,6 +1201,7 @@
             },
             {
                 "id": "AwsJson10SupportsNegativeInfinityFloatInputs",
+                "description": "Supports handling -Infinity float values.",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -1211,7 +1212,6 @@
                         "shape": "SimpleScalarPropertiesOutput"
                     }
                 },
-                "description": "Supports handling -Infinity float values.",
                 "result": {
                     "floatValue": "-Infinity",
                     "doubleValue": "-Infinity"

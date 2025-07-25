@@ -55,7 +55,7 @@ module Aws::IoTTwinMaker
   autoload :EndpointProvider, 'aws-sdk-iottwinmaker/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iottwinmaker/endpoints'
 
-  GEM_VERSION = '1.42.0'
+  GEM_VERSION = '1.43.0'
 
 end
 

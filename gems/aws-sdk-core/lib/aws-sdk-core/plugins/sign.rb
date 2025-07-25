@@ -13,9 +13,6 @@ module Aws
       option(:sigv4_region)
       option(:unsigned_operations, default: [])
 
-      supported_auth_types = %w[sigv4 bearer sigv4-s3express sigv4a none]
-      SUPPORTED_AUTH_TYPES = supported_auth_types.freeze
-
       def add_handlers(handlers, cfg)
         operations = cfg.api.operation_names - cfg.unsigned_operations
         handlers.add(Handler, step: :sign, operations: operations)
@@ -32,7 +29,7 @@ module Aws
           }
           SignatureV4.new(auth_scheme, config, sigv4_overrides)
         when 'bearer'
-          Bearer.new
+          Bearer.new(config)
         else
           NullSigner.new
         end
@@ -41,7 +38,6 @@ module Aws
       class Handler < Seahorse::Client::Handler
         def call(context)
           # Skip signing if using sigv2 signing from s3_signer in S3
-          credentials = nil
           unless v2_signing?(context.config)
             signer = Sign.signer_for(
               context[:auth_scheme],
@@ -49,18 +45,22 @@ module Aws
               context[:sigv4_region],
               context[:sigv4_credentials]
             )
-            credentials = signer.credentials if signer.is_a?(SignatureV4)
             signer.sign(context)
           end
-          with_metrics(credentials) { @handler.call(context) }
+          with_metrics(signer) { @handler.call(context) }
         end
 
         private
 
-        def with_metrics(credentials, &block)
-          return block.call unless credentials&.respond_to?(:metrics)
-
-          Aws::Plugins::UserAgent.metric(*credentials.metrics, &block)
+        def with_metrics(signer, &block)
+          case signer
+          when SignatureV4
+            Aws::Plugins::UserAgent.metric(*signer.credentials.metrics, &block)
+          when Bearer
+            Aws::Plugins::UserAgent.metric(*signer.token_provider.metrics, &block)
+          else
+            block.call
+          end
         end
 
         def v2_signing?(config)
@@ -72,21 +72,19 @@ module Aws
 
       # @api private
       class Bearer
-        def initialize
+        def initialize(config)
+          @token_provider = config.token_provider
         end
+
+        attr_reader :token_provider
 
         def sign(context)
           if context.http_request.endpoint.scheme != 'https'
-            raise ArgumentError,
-                  'Unable to use bearer authorization on non https endpoint.'
+            raise ArgumentError, 'Unable to use bearer authorization on non https endpoint.'
           end
+          raise Errors::MissingBearerTokenError unless @token_provider && @token_provider.set?
 
-          token_provider = context.config.token_provider
-
-          raise Errors::MissingBearerTokenError unless token_provider&.set?
-
-          context.http_request.headers['Authorization'] =
-            "Bearer #{token_provider.token.token}"
+          context.http_request.headers['Authorization'] = "Bearer #{@token_provider.token.token}"
         end
 
         def presign_url(*args)
@@ -100,16 +98,11 @@ module Aws
 
       # @api private
       class SignatureV4
-        attr_reader :signer
-
         def initialize(auth_scheme, config, sigv4_overrides = {})
           scheme_name = auth_scheme['name']
-
           unless %w[sigv4 sigv4a sigv4-s3express].include?(scheme_name)
-            raise ArgumentError,
-                  "Expected sigv4, sigv4a, or sigv4-s3express auth scheme, got #{scheme_name}"
+            raise ArgumentError, "Expected sigv4, sigv4a, or sigv4-s3express auth scheme, got #{scheme_name}"
           end
-
           region = if scheme_name == 'sigv4a'
                      auth_scheme['signingRegionSet'].join(',')
                    else
@@ -121,14 +114,16 @@ module Aws
               region: sigv4_overrides[:region] || config.sigv4_region || region,
               credentials_provider: sigv4_overrides[:credentials] || config.credentials,
               signing_algorithm: scheme_name.to_sym,
-              uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],
-              normalize_path: !!!auth_scheme['disableNormalizePath'],
+              uri_escape_path: !auth_scheme['disableDoubleEncoding'],
+              normalize_path: !auth_scheme['disableNormalizePath'],
               unsigned_headers: %w[content-length user-agent x-amzn-trace-id expect transfer-encoding connection]
             )
           rescue Aws::Sigv4::Errors::MissingCredentialsError
             raise Aws::Errors::MissingCredentialsError
           end
         end
+
+        attr_reader :signer
 
         def sign(context)
           req = context.http_request

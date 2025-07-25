@@ -1458,6 +1458,8 @@ module Aws::Deadline
       attr_accessor created_at: ::Time
       attr_accessor ended_at: ::Time
       attr_accessor started_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
       attr_accessor job_parameters: ::Hash[::String, Types::JobParameter]
       attr_accessor max_worker_count: ::Integer
       attr_accessor source_job_id: ::String
@@ -2207,6 +2209,7 @@ module Aws::Deadline
     class ServiceManagedEc2FleetConfiguration
       attr_accessor instance_capabilities: Types::ServiceManagedEc2InstanceCapabilities
       attr_accessor instance_market_options: Types::ServiceManagedEc2InstanceMarketOptions
+      attr_accessor vpc_configuration: Types::VpcConfiguration
       attr_accessor storage_profile_id: ::String
       SENSITIVE: []
     end
@@ -2436,8 +2439,11 @@ module Aws::Deadline
       attr_accessor task_run_status_counts: ::Hash[("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE"), ::Integer]
       attr_accessor task_failure_retry_count: ::Integer
       attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
       attr_accessor started_at: ::Time
       attr_accessor ended_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
       attr_accessor parameter_space: Types::ParameterSpace
       SENSITIVE: []
     end
@@ -2554,6 +2560,8 @@ module Aws::Deadline
       attr_accessor failure_retry_count: ::Integer
       attr_accessor started_at: ::Time
       attr_accessor ended_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
       SENSITIVE: [:parameters]
     end
 
@@ -2862,6 +2870,11 @@ module Aws::Deadline
     class ValidationExceptionField
       attr_accessor name: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VpcConfiguration
+      attr_accessor resource_configuration_arns: ::Array[::String]
       SENSITIVE: []
     end
 

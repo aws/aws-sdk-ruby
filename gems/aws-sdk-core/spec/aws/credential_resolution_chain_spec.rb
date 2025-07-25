@@ -1172,7 +1172,6 @@ module Aws
 
     def metrics_from_user_agent_header(resp)
       header = resp.context.http_request.headers['User-Agent']
-      # Parse list of metrics from User-Agent header
       header.match(%r{ m/([A-Za-z0-9+-,]+)})[1].split(',')
     end
 

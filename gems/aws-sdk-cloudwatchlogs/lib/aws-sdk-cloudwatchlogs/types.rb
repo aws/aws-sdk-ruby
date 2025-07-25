@@ -2776,6 +2776,25 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # A structure containing the extracted fields from a log event. These
+    # fields are extracted based on the log format and can be used for
+    # structured querying and analysis.
+    #
+    # @!attribute [rw] data
+    #   The actual log data content returned in the streaming response. This
+    #   contains the fields and values of the log event in a structured
+    #   format that can be parsed and processed by the client.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/FieldsData AWS API Documentation
+    #
+    class FieldsData < Struct.new(
+      :data,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] log_group_name
     #   The name of the log group to search.
     #
@@ -3380,6 +3399,46 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # The parameters for the GetLogObject operation.
+    #
+    # @!attribute [rw] unmask
+    #   A boolean flag that indicates whether to unmask sensitive log data.
+    #   When set to true, any masked or redacted data in the log object will
+    #   be displayed in its original form. Default is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] log_object_pointer
+    #   A pointer to the specific log object to retrieve. This is a required
+    #   parameter that uniquely identifies the log object within CloudWatch
+    #   Logs. The pointer is typically obtained from a previous query or
+    #   filter operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogObjectRequest AWS API Documentation
+    #
+    class GetLogObjectRequest < Struct.new(
+      :unmask,
+      :log_object_pointer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response from the GetLogObject operation.
+    #
+    # @!attribute [rw] field_stream
+    #   A stream of structured log data returned by the GetLogObject
+    #   operation. This stream contains log events with their associated
+    #   metadata and extracted fields.
+    #   @return [Types::GetLogObjectResponseStream]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogObjectResponse AWS API Documentation
+    #
+    class GetLogObjectResponse < Struct.new(
+      :field_stream)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] log_record_pointer
     #   The pointer corresponding to the log event record you want to
     #   retrieve. You get this from the response of a `GetQueryResults`
@@ -3685,6 +3744,22 @@ module Aws::CloudWatchLogs
       :integration_name,
       :integration_type,
       :integration_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An internal error occurred during the streaming of log data. This
+    # exception is thrown when there's an issue with the internal streaming
+    # mechanism used by the GetLogObject operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/InternalStreamingException AWS API Documentation
+    #
+    class InternalStreamingException < Struct.new(
+      :message,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5991,7 +6066,7 @@ module Aws::CloudWatchLogs
     #   Use this parameter to apply the new policy to a subset of log groups
     #   in the account.
     #
-    #   Specifing `selectionCriteria` is valid only when you specify
+    #   Specifying `selectionCriteria` is valid only when you specify
     #   `SUBSCRIPTION_FILTER_POLICY`, `FIELD_INDEX_POLICY` or
     #   `TRANSFORMER_POLICY`for `policyType`.
     #
@@ -8296,6 +8371,26 @@ module Aws::CloudWatchLogs
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ValidationException AWS API Documentation
     #
     class ValidationException < Aws::EmptyStructure; end
+
+    # A stream of structured log data returned by the GetLogObject
+    # operation. This stream contains log events with their associated
+    # metadata and extracted fields.
+    #
+    # EventStream is an Enumerator of Events.
+    #  #event_types #=> Array, returns all modeled event types in the stream
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogObjectResponseStream AWS API Documentation
+    #
+    class GetLogObjectResponseStream < Enumerator
+
+      def event_types
+        [
+          :fields,
+          :internal_streaming_exception
+        ]
+      end
+
+    end
 
     # This object includes the stream returned by your [StartLiveTail][1]
     # request.

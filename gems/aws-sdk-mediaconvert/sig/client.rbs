@@ -18,6 +18,7 @@ module Aws
                       ?account_id: String,
                       ?active_endpoint_cache: bool,
                       ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
                       ?client_side_monitoring: bool,
                       ?client_side_monitoring_client_id: String,
                       ?client_side_monitoring_host: String,
@@ -291,6 +292,12 @@ module Aws
                               program_number: ::Integer?,
                               psi_control: ("IGNORE_PSI" | "USE_PSI")?,
                               supplemental_imps: Array[::String]?,
+                              tams_settings: {
+                                auth_connection_arn: ::String?,
+                                gap_handling: ("SKIP_GAPS" | "FILL_WITH_BLACK" | "HOLD_LAST_FRAME")?,
+                                source_id: ::String?,
+                                timerange: ::String?
+                              }?,
                               timecode_source: ("EMBEDDED" | "ZEROBASED" | "SPECIFIEDSTART")?,
                               timecode_start: ::String?,
                               video_generator: {
@@ -762,12 +769,15 @@ module Aws
                                         aac_settings: {
                                           audio_description_broadcaster_mix: ("BROADCASTER_MIXED_AD" | "NORMAL")?,
                                           bitrate: ::Integer?,
-                                          codec_profile: ("LC" | "HEV1" | "HEV2")?,
+                                          codec_profile: ("LC" | "HEV1" | "HEV2" | "XHE")?,
                                           coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1")?,
+                                          loudness_measurement_mode: ("PROGRAM" | "ANCHOR")?,
+                                          rap_interval: ::Integer?,
                                           rate_control_mode: ("CBR" | "VBR")?,
                                           raw_format: ("LATM_LOAS" | "NONE")?,
                                           sample_rate: ::Integer?,
                                           specification: ("MPEG2" | "MPEG4")?,
+                                          target_loudness_range: ::Integer?,
                                           vbr_quality: ("LOW" | "MEDIUM_LOW" | "MEDIUM_HIGH" | "HIGH")?
                                         }?,
                                         ac_3_settings: {
@@ -2248,12 +2258,15 @@ module Aws
                                                  aac_settings: {
                                                    audio_description_broadcaster_mix: ("BROADCASTER_MIXED_AD" | "NORMAL")?,
                                                    bitrate: ::Integer?,
-                                                   codec_profile: ("LC" | "HEV1" | "HEV2")?,
+                                                   codec_profile: ("LC" | "HEV1" | "HEV2" | "XHE")?,
                                                    coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1")?,
+                                                   loudness_measurement_mode: ("PROGRAM" | "ANCHOR")?,
+                                                   rap_interval: ::Integer?,
                                                    rate_control_mode: ("CBR" | "VBR")?,
                                                    raw_format: ("LATM_LOAS" | "NONE")?,
                                                    sample_rate: ::Integer?,
                                                    specification: ("MPEG2" | "MPEG4")?,
+                                                   target_loudness_range: ::Integer?,
                                                    vbr_quality: ("LOW" | "MEDIUM_LOW" | "MEDIUM_HIGH" | "HIGH")?
                                                  }?,
                                                  ac_3_settings: {
@@ -3114,12 +3127,15 @@ module Aws
                                    aac_settings: {
                                      audio_description_broadcaster_mix: ("BROADCASTER_MIXED_AD" | "NORMAL")?,
                                      bitrate: ::Integer?,
-                                     codec_profile: ("LC" | "HEV1" | "HEV2")?,
+                                     codec_profile: ("LC" | "HEV1" | "HEV2" | "XHE")?,
                                      coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1")?,
+                                     loudness_measurement_mode: ("PROGRAM" | "ANCHOR")?,
+                                     rap_interval: ::Integer?,
                                      rate_control_mode: ("CBR" | "VBR")?,
                                      raw_format: ("LATM_LOAS" | "NONE")?,
                                      sample_rate: ::Integer?,
                                      specification: ("MPEG2" | "MPEG4")?,
+                                     target_loudness_range: ::Integer?,
                                      vbr_quality: ("LOW" | "MEDIUM_LOW" | "MEDIUM_HIGH" | "HIGH")?
                                    }?,
                                    ac_3_settings: {
@@ -4837,12 +4853,15 @@ module Aws
                                                  aac_settings: {
                                                    audio_description_broadcaster_mix: ("BROADCASTER_MIXED_AD" | "NORMAL")?,
                                                    bitrate: ::Integer?,
-                                                   codec_profile: ("LC" | "HEV1" | "HEV2")?,
+                                                   codec_profile: ("LC" | "HEV1" | "HEV2" | "XHE")?,
                                                    coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1")?,
+                                                   loudness_measurement_mode: ("PROGRAM" | "ANCHOR")?,
+                                                   rap_interval: ::Integer?,
                                                    rate_control_mode: ("CBR" | "VBR")?,
                                                    raw_format: ("LATM_LOAS" | "NONE")?,
                                                    sample_rate: ::Integer?,
                                                    specification: ("MPEG2" | "MPEG4")?,
+                                                   target_loudness_range: ::Integer?,
                                                    vbr_quality: ("LOW" | "MEDIUM_LOW" | "MEDIUM_HIGH" | "HIGH")?
                                                  }?,
                                                  ac_3_settings: {
@@ -5702,12 +5721,15 @@ module Aws
                                    aac_settings: {
                                      audio_description_broadcaster_mix: ("BROADCASTER_MIXED_AD" | "NORMAL")?,
                                      bitrate: ::Integer?,
-                                     codec_profile: ("LC" | "HEV1" | "HEV2")?,
+                                     codec_profile: ("LC" | "HEV1" | "HEV2" | "XHE")?,
                                      coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1")?,
+                                     loudness_measurement_mode: ("PROGRAM" | "ANCHOR")?,
+                                     rap_interval: ::Integer?,
                                      rate_control_mode: ("CBR" | "VBR")?,
                                      raw_format: ("LATM_LOAS" | "NONE")?,
                                      sample_rate: ::Integer?,
                                      specification: ("MPEG2" | "MPEG4")?,
+                                     target_loudness_range: ::Integer?,
                                      vbr_quality: ("LOW" | "MEDIUM_LOW" | "MEDIUM_HIGH" | "HIGH")?
                                    }?,
                                    ac_3_settings: {

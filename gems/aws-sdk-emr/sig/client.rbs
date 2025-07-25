@@ -18,6 +18,7 @@ module Aws
                       ?account_id: String,
                       ?active_endpoint_cache: bool,
                       ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
                       ?client_side_monitoring: bool,
                       ?client_side_monitoring_client_id: String,
                       ?client_side_monitoring_host: String,
@@ -735,11 +736,13 @@ module Aws
       interface _ModifyClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ModifyClusterOutput]
         def step_concurrency_level: () -> ::Integer
+        def extended_support: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#modify_cluster-instance_method
       def modify_cluster: (
                             cluster_id: ::String,
-                            ?step_concurrency_level: ::Integer
+                            ?step_concurrency_level: ::Integer,
+                            ?extended_support: bool
                           ) -> _ModifyClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyClusterResponseSuccess
 
@@ -1237,7 +1240,8 @@ module Aws
                           },
                           ?os_release_label: ::String,
                           ?ebs_root_volume_iops: ::Integer,
-                          ?ebs_root_volume_throughput: ::Integer
+                          ?ebs_root_volume_throughput: ::Integer,
+                          ?extended_support: bool
                         ) -> _RunJobFlowResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RunJobFlowResponseSuccess
 
