@@ -184,12 +184,14 @@ module Aws
             part_number: 1
           }).exactly(1).times
 
-          client.stub_responses(
-            :get_object,
-            { body: 'body', content_range: 'bytes 0-5242879/15728640' },
-            { body: 'body', content_range: 'bytes 5242880-10485759/15728640' },
-            { body: 'body', content_range: 'bytes 10485760-15728639/15728640' }
-          )
+          client.stub_responses(:get_object, -> (context) {
+            responses = {
+              'bytes=0-5242879' => { body: 'body', content_range: 'bytes 0-5242879/15728640' },
+              'bytes=10485760-15728639' => { body: 'body', content_range: 'bytes 10485760-15728639/15728640' },
+              'bytes=5242880-10485759' => { body: 'body', content_range: 'bytes 5242880-10485759/15728640' }
+            }
+            responses[context.params[:range]]
+          })
 
           single_obj.download_file(path)
         end
