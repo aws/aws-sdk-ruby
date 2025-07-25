@@ -20,6 +20,7 @@ require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
+require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
 require 'aws-sdk-core/plugins/rest_json'
 
@@ -49,6 +50,7 @@ module Aws::Lambda
     add_plugin(Smithy::Client::Plugins::RetryErrors)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
+    add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
     add_plugin(Aws::Core::Plugins::RestJson)
 
@@ -136,6 +138,9 @@ module Aws::Lambda
     #  The log level to send messages to the logger at.
     # @option options [Logger] :logger
     #  The Logger instance to send log messages to. If this option is not set, logging is disabled.
+    # @option options [String] :profile (default)
+    #  Used when loading credentials from the shared config file and credentials file
+    #  at ~/.aws/config and ~/.aws/credentials, respectively.  When not specified, 'default' is used.
     # @option options [Boolean] :raise_response_errors (true)
     #  When `true`, response errors are raised. When `false`, the error is placed on the
     #  output in the {Smithy::Client::Response#error error accessor}.
