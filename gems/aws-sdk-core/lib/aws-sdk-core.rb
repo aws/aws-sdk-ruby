@@ -3,9 +3,8 @@
 require 'smithy-client'
 
 require_relative 'aws-sdk-core/endpoint_rules'
-require_relative 'aws-sdk-core/json'
-require_relative 'aws-sdk-core/rest'
-require_relative 'aws-sdk-core/stubbing'
+# require_relative 'aws-sdk-core/json'
+# require_relative 'aws-sdk-core/rest'
 
 module Aws
   # The root namespace for the AWS SDK for Ruby core modules and classes.

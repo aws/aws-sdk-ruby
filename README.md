@@ -6,6 +6,7 @@ bundle config local.smithy-client /path/to/smithy-ruby
 bundle config local.smithy-cbor /path/to/smithy-ruby
 bundle config local.smithy-json /path/to/smithy-ruby
 bundle config local.smithy-schema /path/to/smithy-ruby
+bundle config local.smithy-xml /path/to/smithy-ruby
 bundle config local.smithy /path/to/smithy-ruby
 ```
 
@@ -15,6 +16,7 @@ bundle config local.smithy-client ~/workplace/smithy-ruby
 bundle config local.smithy-cbor ~/workplace/smithy-ruby
 bundle config local.smithy-json ~/workplace/smithy-ruby
 bundle config local.smithy-schema ~/workplace/smithy-ruby
+bundle config local.smithy-xml ~/workplace/smithy-ruby
 bundle config local.smithy ~/workplace/smithy-ruby
 ```
 

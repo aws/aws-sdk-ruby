@@ -17,7 +17,7 @@ module Aws
               member_traits = member.traits
               if member_traits.key?('smithy.api#httpHeader')
                 header = member_traits['smithy.api#httpHeader']
-                extract_header(http_resp.headers, header, member.shape, name, target)
+                extract_header(http_resp.headers, header, member, name, target)
               elsif member_traits.key?('smithy.api#httpPrefixHeaders')
                 header_prefix = member_traits['smithy.api#httpPrefixHeaders']
                 extract_prefix_header(http_resp.headers, header_prefix, name, target)
@@ -27,10 +27,10 @@ module Aws
 
           private
 
-          def extract_header(headers, header, shape, name, target)
+          def extract_header(headers, header, ref, name, target)
             return unless headers.key?(header)
 
-            target[name] = value(shape, headers[header])
+            target[name] = value(ref, headers[header])
           end
 
           def extract_prefix_header(headers, header_prefix, name, target)
@@ -43,15 +43,16 @@ module Aws
             end
           end
 
-          def value(shape, value)
+          def value(ref, value)
+            shape = ref.shape
             case shape
-            when StringShape, EnumShape then string(shape, value)
-            when IntegerShape, IntEnumShape then value.to_i
-            when FloatShape then float(value)
             when BooleanShape then value == 'true'
-            when ListShape then list(shape, value)
+            when FloatShape then float(value)
+            when IntegerShape, IntEnumShape then value.to_i
+            when ListShape then list(shape.member, value)
+            when StringShape, EnumShape then string(shape, value)
             when TimestampShape then timestamp(value)
-            else raise "unsupported shape #{shape.class}"
+            else value
             end
           end
 
@@ -65,11 +66,12 @@ module Aws
             end
           end
 
-          def list(shape, value)
-            case shape.member.shape
+          def list(ref, value)
+            shape = ref.shape
+            case shape
             when StringShape then HeaderListParser.parse_string_list(value)
-            when TimestampShape then HeaderListParser.parse_timestamp_list(value, shape.member.shape)
-            else value.split(', ').map { |v| value(shape.member.shape, v) }
+            when TimestampShape then HeaderListParser.parse_timestamp_list(ref, shape, value)
+            else value.split(', ').map { |v| value(ref, v) }
             end
           end
 

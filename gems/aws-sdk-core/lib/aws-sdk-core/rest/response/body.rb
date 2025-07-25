@@ -18,7 +18,7 @@ module Aws
             if string_or_blob_payload?
               # Empty blob payloads are omitted
               target[@ref.shape[:http_payload]] = body unless empty_blob_payload?(body)
-            # Otherwise, deserialize the payload member
+            # Otherwise, parse the payload member
             elsif @ref.shape[:http_payload_member]
               target[@ref.shape[:http_payload]] = parse(@ref.shape[:http_payload_member].shape, body.read)
             elsif !@ref.shape.members.empty?
@@ -53,7 +53,7 @@ module Aws
           end
 
           def parse(shape, body, target = nil)
-            @codec.deserialize(shape, body, target) if body.size > 0
+            @codec.parse(shape, body, target) if body.size > 0
           end
         end
       end

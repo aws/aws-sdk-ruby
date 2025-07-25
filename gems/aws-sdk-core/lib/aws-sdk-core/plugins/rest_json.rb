@@ -2,6 +2,7 @@
 
 require_relative '../json'
 require_relative '../rest'
+require_relative '../stubbing/rest_json'
 
 module Aws
   module Core
@@ -13,8 +14,8 @@ module Aws
         # @api private
         option(:stubber) { Stubbing::RestJson.new }
 
-        handler(Rest::Handler)
-        handler(Json::ErrorHandler, step: :sign)
+        handler(Core::Rest::Handler)
+        handler(Core::Json::ErrorHandler, step: :sign)
       end
     end
   end

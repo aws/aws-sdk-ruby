@@ -21,16 +21,16 @@ module Aws
               parsed
             end
 
-            def parse_timestamp_list(value, shape)
+            def parse_timestamp_list(member_ref, shape, value)
               # timestamp lists use an http-date by default and are unescaped
               # eg: Mon, 16 Dec 2019 23:48:18 GMT, Mon, 16 Dec 2019 23:48:18 GMT
-              case shape.traits['smithy.api#timestampFormat']
-              when 'epoch-seconds'
-                value.split(', ').map { |v| Time.at(v.to_f) }
+              trait = 'smithy.api#timestampFormat'
+              case member_ref.traits[trait] || shape.traits[trait]
+              when 'epoch-seconds' then value.split(', ').map { |v| Time.at(v.to_f) }
               when 'date-time' then value.split(', ').map { |v| Time.parse(v) }
               else
                 # header default to rfc822/http-date, which has a comma after day
-                value.split(',').each_slice(2).map { |v| Time.parse(v[0] + v[1])}
+                value.split(',').each_slice(2).map { |v| Time.parse(v[0] + v[1]) }
               end
             end
 
