@@ -49,7 +49,7 @@ module Aws
           end
         end
       rescue StandardError => e
-        File.delete(@path)
+        File.delete(@path) if File.exist?(@path)
         raise e
       end
 
