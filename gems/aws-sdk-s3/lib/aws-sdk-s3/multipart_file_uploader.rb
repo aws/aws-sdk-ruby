@@ -48,7 +48,7 @@ module Aws
 
         upload_id = initiate_upload(options)
         parts = upload_parts(upload_id, source, options)
-        complete_upload(upload_id, parts, options)
+        complete_upload(upload_id, parts, source, options)
       end
 
       private
@@ -57,11 +57,13 @@ module Aws
         @client.create_multipart_upload(create_opts(options)).upload_id
       end
 
-      def complete_upload(upload_id, parts, options)
+      def complete_upload(upload_id, parts, source, options)
+
         @client.complete_multipart_upload(
           **complete_opts(options).merge(
             upload_id: upload_id,
-            multipart_upload: { parts: parts }
+            multipart_upload: { parts: parts },
+            mpu_object_size: File.size(source)
           )
         )
       end
@@ -84,9 +86,7 @@ module Aws
         @client.abort_multipart_upload(bucket: options[:bucket], key: options[:key], upload_id: upload_id)
         msg = "multipart upload failed: #{errors.map(&:message).join('; ')}"
         raise MultipartUploadError.new(msg, errors)
-      rescue MultipartUploadError => e
-        raise e
-      rescue => e
+      rescue StandardError => e
         msg = "failed to abort multipart upload: #{e.message}. "\
           "Multipart upload failed: #{errors.map(&:message).join('; ')}"
         raise MultipartUploadError.new(msg, errors + [e])
