@@ -77,6 +77,7 @@ module Aws
             multithreaded_get_by_ranges(resp.content_length, resp.etag)
           end
         else
+          # covers cases when given object is not uploaded via UploadPart API
           resp = @client.head_object(@params) # partNumber is an option
           if resp.content_length <= MIN_CHUNK_SIZE
             single_request
