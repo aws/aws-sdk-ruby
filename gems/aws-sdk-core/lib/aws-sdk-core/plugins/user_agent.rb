@@ -17,8 +17,7 @@ module Aws
             `AWS_SDK_UA_APP_ID` or the shared config profile attribute `sdk_ua_app_id`.
           DOCS
           app_id = ENV.fetch('AWS_SDK_UA_APP_ID', nil)
-          # TODO: add shared config
-          # app_id ||= Aws.shared_config.sdk_ua_app_id(profile: cfg.profile)
+          app_id ||= Aws::Core.shared_config.profiles.dig(config.profile, 'sdk_ua_app_id')
           app_id
         end
 

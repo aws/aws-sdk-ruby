@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative '../../../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/shared_config'
 require_relative '../../../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/user_agent'
 
 module AwsSdkCodeGenerator
@@ -22,6 +23,7 @@ module AwsSdkCodeGenerator
       def add_plugins
         base_path = 'aws-sdk-core/plugins'
         {
+          Aws::Core::Plugins::SharedConfig => { require_path: "#{base_path}/shared_config" },
           Aws::Core::Plugins::UserAgent => { require_path: "#{base_path}/user_agent" }
         }
       end

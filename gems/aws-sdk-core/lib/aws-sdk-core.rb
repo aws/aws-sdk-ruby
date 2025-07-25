@@ -7,6 +7,14 @@ require_relative 'aws-sdk-core/json'
 require_relative 'aws-sdk-core/rest'
 require_relative 'aws-sdk-core/stubbing'
 
+# Shared Config
+require_relative 'aws-sdk-core/config_file'
+require_relative 'aws-sdk-core/config_file_parser'
+require_relative 'aws-sdk-core/config_file_section'
+require_relative 'aws-sdk-core/config_file_standardizer'
+require_relative 'aws-sdk-core/config_file_utils'
+require_relative 'aws-sdk-core/shared_config'
+
 module Aws
   # The root namespace for the AWS SDK for Ruby core modules and classes.
   module Core
@@ -24,6 +32,10 @@ module Aws
         raise ArgumentError, 'configuration object must be a hash' unless config.is_a?(Hash)
 
         @config = config
+      end
+
+      def shared_config
+        @shared_config ||= SharedConfig.load
       end
     end
   end
