@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 require 'pathname'
+require 'thread'
 require 'set'
-require 'tempfile'
-require 'fileutils'
 
 module Aws
   module S3
@@ -49,6 +48,9 @@ module Aws
             raise ArgumentError, "Invalid mode #{@mode} provided, mode should be :single_request, :get_range or :auto"
           end
         end
+      rescue StandardError => e
+        File.delete(@path)
+        raise e
       end
 
       private
@@ -154,7 +156,7 @@ module Aws
                 @mutex.synchronize { total_requests += 1 }
               end
               nil
-            rescue => e
+            rescue StandardError => e
               # keep other threads from downloading other parts
               pending.clear!
               raise e
