@@ -11,7 +11,7 @@ module Aws
         option(
           :sdk_ua_app_id,
           doc_type: 'String',
-          docstring: <<~DOCS) do |_config|
+          docstring: <<~DOCS) do |config|
             A unique and opaque application ID that is appended to the User-Agent header as app/sdk_ua_app_id.
             It should have a maximum length of 50. This variable is sourced from environment variable
             `AWS_SDK_UA_APP_ID` or the shared config profile attribute `sdk_ua_app_id`.

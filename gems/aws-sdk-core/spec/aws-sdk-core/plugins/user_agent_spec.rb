@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../spec_helper'
+require_relative '../../../lib/aws-sdk-core/plugins/shared_config'
 require_relative '../../../lib/aws-sdk-core/plugins/user_agent'
 
 module Aws
@@ -16,6 +17,7 @@ module Aws
         let(:sample_client) { ClientHelper.sample_client(shapes: shapes) }
         let(:client_class) do
           client_class = sample_client.const_get(:Client)
+          client_class.add_plugin(Plugins::SharedConfig)
           client_class.add_plugin(Plugins::UserAgent)
           client_class
         end
@@ -46,12 +48,11 @@ module Aws
             when 'environmentVariables'
               given['environmentVariables'].each { |k, v| ENV[k] = v }
             when 'sharedConfigFile'
-              # TODO: add this back in once shared config has been implemented
-              next
-              # given['sharedConfigFile'].each do |k, v|
-              #   allow_any_instance_of(Aws::SharedConfig)
-              #     .to receive(k.to_sym).and_return(v)
-              # end
+              shared_config = "[profile default]\n"
+              given['sharedConfigFile'].each do |k, v|
+                shared_config += "#{k} = #{v}\n"
+              end
+              mock_shared_config(shared_config)
             when 'metric'
               stub_const(
                 'Aws::Core::Plugins::UserAgent::METRICS',
@@ -108,9 +109,6 @@ module Aws
           tests = JSON.load_file(File.join(File.dirname(__FILE__), 'user_agent_tests.json'))
           tests.each_with_index do |test, index|
             it "passes test #{index + 1}: #{test['description']}" do
-              # TODO: skipped tests because shared config has not been implemented yet
-              next if index == 2
-
               given = test['given']
               expected_header = test['expectedRequestHeaders']['user-agent']
               metric_callable, caller, config_frameworks = setup(given)
