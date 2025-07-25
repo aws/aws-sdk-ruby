@@ -19,7 +19,6 @@ module Aws
 
       def initialize(options = {})
         @client = options[:client] || Client.new
-        @mutex = Mutex.new
       end
 
       # @return [Client]
@@ -128,6 +127,7 @@ module Aws
 
       def download_in_threads(pending, total_size)
         threads = []
+        mutex = Mutex.new
         max_requests = pending.count
         total_requests = 0
         progress = MultipartProgress.new(pending, total_size, @progress_callback) if @progress_callback
@@ -153,7 +153,7 @@ module Aws
                 if @on_checksum_validated && resp.checksum_validated
                   @on_checksum_validated.call(resp.checksum_validated, resp)
                 end
-                @mutex.synchronize { total_requests += 1 }
+                mutex.synchronize { total_requests += 1 }
               end
               nil
             rescue StandardError => e
