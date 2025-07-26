@@ -34,7 +34,7 @@ module Aws
           builder.node("#{operation.name}Response", xmlns: xmlns(config.service)) do
             ref = operation.output
             ref.member_name = "#{operation.name}Result"
-            Smithy::Xml::Builder.new(ref, target: xml, pad: '  ').to_xml(data)
+            config.xml_codec.build(ref, data, xml)
             builder.node('ResponseMetadata') do
               builder.node('RequestId', 'stubbed-request-id')
             end
@@ -43,9 +43,7 @@ module Aws
         end
 
         def xmlns(service)
-          return unless service.traits.key?('smithy.api#xmlNamespace')
-
-          service.traits['smithy.api#xmlNamespace']['uri']
+          service.traits.dig('smithy.api#xmlNamespace', 'uri')
         end
       end
     end
