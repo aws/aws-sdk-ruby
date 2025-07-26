@@ -53,7 +53,7 @@ module Aws
             query_code = query_error_code(ref)
             next unless code == query_code || code == ref.shape.name
 
-            data = error_data(ref, body)
+            data = error_data(context.config.xml_codec, ref, body)
             # TODO: this does not really belong here - possibly need a rest error handler instead.
             Rest::Response::Headers.new(ref).apply(context.http_response, data)
             return [ref.shape.name, query_code || code, data]
@@ -68,12 +68,12 @@ module Aws
           traits['aws.protocols#awsQueryError']['code']
         end
 
-        def error_data(ref, body)
+        def error_data(codec, ref, body)
           # errors may nested under <Errors><Error>structure_data</Error></Errors>
           # Or may be flat and under <Error>structure_data</Error>
           body = body.tr("\n", '')
           if (matches = body.match(/<Error>(.+?)<\/Error>/))
-            Smithy::Xml::Parser.new(ref).parse("<#{ref.shape.name}>#{matches[1]}</#{ref.shape.name}>")
+            codec.parse(ref, "<#{ref.shape.name}>#{matches[1]}</#{ref.shape.name}>")
           else
             Smithy::Schema::EmptyStructure.new
           end

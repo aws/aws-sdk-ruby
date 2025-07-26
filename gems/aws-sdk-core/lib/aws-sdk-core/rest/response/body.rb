@@ -20,7 +20,8 @@ module Aws
               target[@ref.shape[:http_payload]] = body unless empty_blob_payload?(body)
             # Otherwise, parse the payload member
             elsif @ref.shape[:http_payload_member]
-              target[@ref.shape[:http_payload]] = parse(@ref.shape[:http_payload_member].shape, body.read)
+              parsed = parse(@ref.shape[:http_payload_member].shape, body.read)
+              target[@ref.shape[:http_payload]] = parsed unless parsed&.empty?
             elsif !@ref.shape.members.empty?
               parse(@ref, body.read, target)
             end

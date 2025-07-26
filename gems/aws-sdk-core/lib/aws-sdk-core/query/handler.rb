@@ -68,7 +68,7 @@ module Aws
 
         def parse_xml(context)
           body = context.http_response.body.read
-          data = Smithy::Xml::Parser.new(rules(context)).parse(body)
+          data = Smithy::Xml::Parser.new.parse(rules(context), body)
           remove_wrapper(data, context)
         end
 

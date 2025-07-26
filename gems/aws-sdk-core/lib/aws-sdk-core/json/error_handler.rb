@@ -62,11 +62,11 @@ module Aws
 
         def query_compatible_header?(context)
           context.config.service.traits.key?('aws.protocols#awsQueryCompatible') &&
-            context.http_response.headers['X-Amzn-Query-Error']
+            context.http_response.headers['x-amzn-query-error']
         end
 
         def query_compatible_error(context)
-          error, _type = context.http_response.headers['X-Amzn-Query-Error'].split(';')
+          error, _type = context.http_response.headers['x-amzn-query-error'].split(';')
           error
         end
 

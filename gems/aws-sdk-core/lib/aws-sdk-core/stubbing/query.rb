@@ -29,14 +29,12 @@ module Aws
         private
 
         def build_body(config, operation, data)
-          api = config.service
           xml = []
           builder = Smithy::Xml::DocBuilder.new(target: xml, indent: '  ')
-          builder.node("#{operation.name}Response", xmlns: xmlns(api)) do
-            if (rules = operation.output)
-              rules.member_name = "#{operation.name}Result"
-              Smithy::Xml::Builder.new(rules, target: xml, pad:'  ').to_xml(data)
-            end
+          builder.node("#{operation.name}Response", xmlns: xmlns(config.service)) do
+            ref = operation.output
+            ref.member_name = "#{operation.name}Result"
+            Smithy::Xml::Builder.new(ref, target: xml, pad: '  ').to_xml(data)
             builder.node('ResponseMetadata') do
               builder.node('RequestId', 'stubbed-request-id')
             end
@@ -44,8 +42,10 @@ module Aws
           xml.join
         end
 
-        def xmlns(api)
-          api.traits['smithy.api#xmlNamespace']['uri']
+        def xmlns(service)
+          return unless service.traits.key?('smithy.api#xmlNamespace')
+
+          service.traits['smithy.api#xmlNamespace']['uri']
         end
       end
     end
