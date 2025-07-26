@@ -69,9 +69,9 @@ module Aws
             end
           end
 
-          def timestamp(member_ref, shape, value)
+          def timestamp(ref, value)
             trait = 'smithy.api#timestampFormat'
-            case member_ref.traits[trait] || shape.traits[trait]
+            case ref.traits[trait] || ref.shape.traits[trait]
             when 'epoch-seconds' then value.to_i
             when 'http-date' then value.utc.httpdate
             else
@@ -84,7 +84,7 @@ module Aws
             shape = member_ref.shape
             case shape
             when TimestampShape
-              escape(timestamp(member_ref, shape, value))
+              escape(timestamp(member_ref, value))
             when *SUPPORTED_TYPES
               escape(value.to_s)
             else

@@ -7,8 +7,8 @@ require 'stringio'
 module Aws
   module Core
     module Query
+      # @api private
       class ParamList
-
         include Enumerable
 
         # @api private
@@ -38,8 +38,8 @@ module Aws
         end
 
         # @return [Enumerable]
-        def each(&block)
-          to_a.each(&block)
+        def each(&)
+          to_a.each(&)
         end
 
         # @return [Boolean]
@@ -64,7 +64,6 @@ module Aws
 
         # @api private
         class IoWrapper
-
           # @param [ParamList] param_list
           def initialize(param_list)
             @param_list = param_list
@@ -88,7 +87,6 @@ module Aws
           def read(bytes = nil, output_buffer = nil)
             @io.read(bytes, output_buffer)
           end
-
         end
       end
     end

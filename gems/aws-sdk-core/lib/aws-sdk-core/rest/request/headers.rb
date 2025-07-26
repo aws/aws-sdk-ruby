@@ -31,11 +31,10 @@ module Aws
           private
 
           def apply_header(headers, header_name, member_ref, value)
-            shape = member_ref.shape
-            case shape
+            case member_ref.shape
             when ListShape then list(headers, header_name, member_ref, value)
             when StringShape then string(headers, header_name, member_ref.shape, value)
-            when TimestampShape then headers[header_name] = timestamp(member_ref, shape, value)
+            when TimestampShape then headers[header_name] = timestamp(member_ref, value)
             else default(headers, header_name, value)
             end
           end
@@ -46,15 +45,14 @@ module Aws
             end
           end
 
-          def list(headers, header_name, member_ref, values)
+          def list(headers, header_name, ref, values)
             return if values.nil?
 
-            member = member_ref.shape.member
-            shape = member.shape
+            member_ref = ref.shape.member
             values = values.collect do |value|
-              case shape
+              case member_ref.shape
               when TimestampShape
-                timestamp(member, shape, value).to_s
+                timestamp(member_ref, value).to_s
               else
                 escape_header_list_string(value.to_s)
               end
@@ -70,9 +68,9 @@ module Aws
             end
           end
 
-          def timestamp(member_ref, shape, value)
+          def timestamp(ref, value)
             trait = 'smithy.api#timestampFormat'
-            case member_ref.traits[trait] || shape.traits[trait]
+            case ref.traits[trait] || ref.shape.traits[trait]
             when 'date-time' then value.utc.iso8601
             when 'epoch-seconds' then value.to_i
             else

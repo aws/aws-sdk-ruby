@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-require "cgi/escape"
-require "cgi/util" if RUBY_VERSION < "3.5"
+require 'cgi/escape'
 
 module Aws
   module Core
     module Query
+      # @api private
       class Param
-
         # @param [String] name
         # @param [String, nil] value (nil)
         def initialize(name, value = nil)
@@ -23,19 +22,17 @@ module Aws
 
         # @return [String]
         def to_s
-          value ? "#{escape(name)}=#{escape(value)}" : "#{escape(name)}="
+          value ? "#{escape(@name)}=#{escape(@value)}" : "#{escape(@name)}="
         end
 
         # @api private
         def ==(other)
-          other.kind_of?(Param) &&
-          other.name == name &&
-          other.value == value
+          other.is_a?(Param) && other.name == @name && other.value == @value
         end
 
         # @api private
-        def <=> other
-          name <=> other.name
+        def <=>(other)
+          @name <=> other.name
         end
 
         private
