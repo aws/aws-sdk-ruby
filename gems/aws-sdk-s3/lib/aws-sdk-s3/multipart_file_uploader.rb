@@ -65,6 +65,8 @@ module Aws
             mpu_object_size: File.size(source)
           )
         )
+      rescue StandardError => e
+        abort_upload(upload_id, options, [e])
       end
 
       def upload_parts(upload_id, source, options)

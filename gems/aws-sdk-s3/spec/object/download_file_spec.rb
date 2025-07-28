@@ -264,7 +264,7 @@ module Aws
               .to raise_error(ArgumentError, 'on_checksum_validated must be callable')
           end
 
-          it 'raises MultipartDownloadError when expected parts count differs from completed requests' do
+          it 'raises an error when expected parts count differs from completed requests' do
             # Mock PartList to simulate missing parts
             part_list = double('PartList')
             allow(part_list).to receive(:count).and_return(4)
