@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add integrity validation to multipart upload/download to ensure all parts are successfully processed.
+
+* Issue - Remove partially downloaded files when multipart `download_file` fail.
+
 1.193.0 (2025-07-15)
 ------------------
 
