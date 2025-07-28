@@ -13,7 +13,6 @@ module Aws
 
       MIN_CHUNK_SIZE = 5 * 1024 * 1024
       MAX_PARTS = 10_000
-      THREAD_COUNT = 10
 
       def initialize(options = {})
         @client = options[:client] || Client.new
@@ -25,7 +24,7 @@ module Aws
       def download(destination, options = {})
         @path = destination
         @mode = options[:mode] || 'auto'
-        @thread_count = options[:thread_count] || THREAD_COUNT
+        @thread_count = options[:thread_count] || 10
         @chunk_size = options[:chunk_size]
         @params = param_opts(options)
         @on_checksum_validated = options[:on_checksum_validated]
@@ -47,7 +46,9 @@ module Aws
         end
       rescue StandardError => e
         File.delete(@path) if File.exist?(@path)
-        raise e
+        raise e if e.is_a?(MultipartDownloadError)
+
+        raise MultipartDownloadError, "multipart download failed: #{e} - #{e.message}"
       end
 
       private
@@ -148,9 +149,8 @@ module Aws
               end
               nil
             rescue StandardError => e
-              # keep other threads from downloading other parts
-              pending.clear!
-              raise e
+              pending.clear! # keep other threads from downloading other parts
+              raise MultipartDownloadError, "multipart download failed: #{e} - #{e.message}"
             end
           end
           threads << thread
