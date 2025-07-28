@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'pathname'
-require 'thread'
 require 'set'
 
 module Aws
@@ -28,7 +27,7 @@ module Aws
         @mode = options[:mode] || 'auto'
         @thread_count = options[:thread_count] || THREAD_COUNT
         @chunk_size = options[:chunk_size]
-        @params = set_params(options)
+        @params = param_opts(options)
         @on_checksum_validated = options[:on_checksum_validated]
         @progress_callback = options[:progress_callback]
         validate!
@@ -53,10 +52,9 @@ module Aws
 
       private
 
-      def set_params(options)
-        params = { bucket: options[:bucket], key: options[:key] }
-        params[:version_id] = options[:version_id] if options[:version_id]
-        params
+      def param_opts(options)
+        download_opts = %i[mode chunk_size thread_count on_checksum_validated progress_callback]
+        options.reject { |k, _v| download_opts.include?(k) }
       end
 
       def validate!
