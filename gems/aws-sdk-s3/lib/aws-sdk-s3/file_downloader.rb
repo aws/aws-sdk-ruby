@@ -143,7 +143,7 @@ module Aws
                 if part.params[:range]
                   range = resp.content_range.split(' ').last.split('/').first
                   expected_range = part.params[:range].split('=').last
-                  raise FileDownloadError, 'file download integrity checked failed' unless expected_range == range
+                  raise MultipartDownloadError, 'file download integrity checked failed' unless expected_range == range
                 end
 
                 write(resp)
@@ -163,7 +163,7 @@ module Aws
         end
         threads.map(&:value).compact
 
-        raise FileDownloadError, 'file download integrity checked failed' unless max_requests == total_requests
+        raise MultipartDownloadError, 'file download integrity checked failed' unless max_requests == total_requests
       end
 
       def write(resp)
