@@ -156,7 +156,8 @@ module Aws
         threads.map(&:value).compact
         return if max_requests == total_requests
 
-        raise MultipartDownloadError, 'multipart download failed: file integrity checked failed'
+        msg = "multipart download failed: expected #{max_requests} parts but received #{total_requests}"
+        raise MultipartDownloadError, msg
       end
 
       def validate_range(resp, part)
