@@ -139,13 +139,7 @@ module Aws
                     end
                 end
                 resp = @client.get_object(part.params)
-
-                if part.params[:range]
-                  range = resp.content_range.split(' ').last.split('/').first
-                  expected_range = part.params[:range].split('=').last
-                  raise MultipartDownloadError, 'file download integrity checked failed' unless expected_range == range
-                end
-
+                validate_range(resp, part) if part.params[:range]
                 write(resp)
                 if @on_checksum_validated && resp.checksum_validated
                   @on_checksum_validated.call(resp.checksum_validated, resp)
@@ -162,8 +156,17 @@ module Aws
           threads << thread
         end
         threads.map(&:value).compact
+        return if max_requests == total_requests
 
-        raise MultipartDownloadError, 'file download integrity checked failed' unless max_requests == total_requests
+        raise MultipartDownloadError, 'multipart download failed: file integrity checked failed'
+      end
+
+      def validate_range(resp, part)
+        range = resp.content_range.split(' ').last.split('/').first
+        expected_range = part.params[:range].split('=').last
+        return if expected_range == range
+
+        raise MultipartDownloadError, 'multipart download failed: file integrity checked failed'
       end
 
       def write(resp)
