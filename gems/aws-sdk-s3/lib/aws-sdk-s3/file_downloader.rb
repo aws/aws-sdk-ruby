@@ -46,9 +46,7 @@ module Aws
         end
       rescue StandardError => e
         File.delete(@path) if File.exist?(@path)
-        raise e if e.is_a?(MultipartDownloadError)
-
-        raise MultipartDownloadError, "multipart download failed: #{e} - #{e.message}"
+        raise e
       end
 
       private
@@ -150,7 +148,7 @@ module Aws
               nil
             rescue StandardError => e
               pending.clear! # keep other threads from downloading other parts
-              raise MultipartDownloadError, "multipart download failed: #{e} - #{e.message}"
+              raise e
             end
           end
           threads << thread
