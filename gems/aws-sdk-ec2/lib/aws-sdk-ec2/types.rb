@@ -8140,7 +8140,7 @@ module Aws::EC2
     #   The instance type for which to reserve capacity.
     #
     #   <note markdown="1"> You can request future-dated Capacity Reservations for instance
-    #   types in the C, M, R, I, and T instance families only.
+    #   types in the C, M, R, I, T, and G instance families only.
     #
     #    </note>
     #
@@ -8181,9 +8181,9 @@ module Aws::EC2
     #   The number of instances for which to reserve capacity.
     #
     #   <note markdown="1"> You can request future-dated Capacity Reservations for an instance
-    #   count with a minimum of 100 vCPUs. For example, if you request a
+    #   count with a minimum of 64 vCPUs. For example, if you request a
     #   future-dated Capacity Reservation for `m5.xlarge` instances, you
-    #   must request at least 25 instances (*25 * m5.xlarge = 100 vCPUs*).
+    #   must request at least 25 instances (*16 * m5.xlarge = 64 vCPUs*).
     #
     #    </note>
     #
@@ -23560,8 +23560,9 @@ module Aws::EC2
     #     express (NVMe) is supported for EBS volumes (`required` \|
     #     `supported` \| `unsupported`).
     #
-    #   * `free-tier-eligible` - Indicates whether the instance type is
-    #     eligible to use in the free tier (`true` \| `false`).
+    #   * `free-tier-eligible` - A Boolean that indicates whether this
+    #     instance type can be used under the Amazon Web Services Free Tier
+    #     (`true` \| `false`).
     #
     #   * `hibernation-supported` - Indicates whether On-Demand hibernation
     #     is supported (`true` \| `false`).
@@ -34549,14 +34550,18 @@ module Aws::EC2
     #   but not both. If neither is specified, Amazon EC2 automatically
     #   selects an Availability Zone within the Region.
     #
-    #   This parameter is not supported when using [CreateImage][1],
-    #   [DescribeImages][2], and [RunInstances][3].
+    #   This parameter is not supported when using [CreateFleet][1],
+    #   [CreateImage][2], [DescribeImages][3], [RequestSpotFleet][4],
+    #   [RequestSpotInstances][5], and [RunInstances][6].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html
-    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html
+    #   [4]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html
+    #   [5]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html
+    #   [6]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   @return [String]
     #
     # @!attribute [rw] encrypted
@@ -34653,14 +34658,18 @@ module Aws::EC2
     #   but not both. If neither is specified, Amazon EC2 automatically
     #   selects an Availability Zone within the Region.
     #
-    #   This parameter is not supported when using [CreateImage][1],
-    #   [DescribeImages][2], and [RunInstances][3].
+    #   This parameter is not supported when using [CreateFleet][1],
+    #   [CreateImage][2], [DescribeImages][3], [RequestSpotFleet][4],
+    #   [RequestSpotInstances][5], and [RunInstances][6].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html
-    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html
+    #   [4]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html
+    #   [5]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html
+    #   [6]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsBlockDevice AWS API Documentation
@@ -67489,12 +67498,12 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type. For more information, see [Amazon EC2 instance
-    #   types][1] in the *Amazon EC2 User Guide*.
+    #   The instance type. For more information, see [Amazon EC2 Instance
+    #   Types Guide][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-types.html
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_address_count
@@ -67532,8 +67541,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] key_name
-    #   The name of the key pair. You can create a key pair using
-    #   [CreateKeyPair][1] or [ImportKeyPair][2].
+    #   The name of the key pair. For more information, see [Create a key
+    #   pair for your EC2 instance][1].
     #
     #   If you do not specify a key pair, you can't connect to the instance
     #   unless you choose an AMI that is configured to allow users another
@@ -67541,8 +67550,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html
     #   @return [String]
     #
     # @!attribute [rw] max_count
@@ -67599,16 +67607,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_ids
-    #   The IDs of the security groups. You can create a security group
-    #   using [CreateSecurityGroup][1].
+    #   The IDs of the security groups.
     #
     #   If you specify a network interface, you must specify any security
     #   groups as part of the network interface instead of using this
     #   parameter.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_groups
@@ -67632,11 +67635,11 @@ module Aws::EC2
     #   The user data to make available to the instance. User data must be
     #   base64-encoded. Depending on the tool or SDK that you're using, the
     #   base64-encoding might be performed for you. For more information,
-    #   see [Work with instance user data][1].
+    #   see [Run commands at launch using instance user data][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-add-user-data.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
     #   @return [String]
     #
     # @!attribute [rw] elastic_gpu_specification
@@ -67746,25 +67749,24 @@ module Aws::EC2
     #
     # @!attribute [rw] metadata_options
     #   The metadata options for the instance. For more information, see
-    #   [Instance metadata and user data][1].
+    #   [Configure the Instance Metadata Service options][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html
     #   @return [Types::InstanceMetadataOptionsRequest]
     #
     # @!attribute [rw] enclave_options
     #   Indicates whether the instance is enabled for Amazon Web Services
-    #   Nitro Enclaves. For more information, see [What is Amazon Web
-    #   Services Nitro Enclaves?][1] in the *Amazon Web Services Nitro
-    #   Enclaves User Guide*.
+    #   Nitro Enclaves. For more information, see [Amazon Web Services Nitro
+    #   Enclaves User Guide][1].
     #
     #   You can't enable Amazon Web Services Nitro Enclaves and hibernation
     #   on the same instance.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html
+    #   [1]: https://docs.aws.amazon.com/enclaves/latest/user/
     #   @return [Types::EnclaveOptionsRequest]
     #
     # @!attribute [rw] private_dns_name_options
@@ -67779,11 +67781,12 @@ module Aws::EC2
     #
     # @!attribute [rw] disable_api_stop
     #   Indicates whether an instance is enabled for stop protection. For
-    #   more information, see [Stop protection][1].
+    #   more information, see [Enable stop protection for your EC2
+    #   instances][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-stop-protection.html
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_primary_ipv_6
@@ -67857,7 +67860,8 @@ module Aws::EC2
     #   randomly generated token is used for the request to ensure
     #   idempotency.
     #
-    #   For more information, see [Ensuring Idempotency][1].
+    #   For more information, see [Ensuring idempotency in Amazon EC2 API
+    #   requests][1].
     #
     #   Constraints: Maximum 64 ASCII characters
     #
@@ -67866,7 +67870,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] additional_info
@@ -72016,14 +72020,25 @@ module Aws::EC2
     # @!attribute [rw] hibernate
     #   Hibernates the instance if the instance was enabled for hibernation
     #   at launch. If the instance cannot hibernate successfully, a normal
-    #   shutdown occurs. For more information, see [Hibernate your
-    #   instance][1] in the *Amazon EC2 User Guide*.
+    #   shutdown occurs. For more information, see [Hibernate your Amazon
+    #   EC2 instance][1] in the *Amazon EC2 User Guide*.
     #
     #   Default: `false`
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] skip_os_shutdown
+    #   Specifies whether to bypass the graceful OS shutdown process when
+    #   the instance is stopped.
+    #
+    #   Bypassing the graceful OS shutdown might result in data loss or
+    #   corruption (for example, memory contents not flushed to disk or loss
+    #   of in-flight IOs) or skipped shutdown scripts.
+    #
+    #   Default: `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] dry_run
@@ -72057,6 +72072,7 @@ module Aws::EC2
     class StopInstancesRequest < Struct.new(
       :instance_ids,
       :hibernate,
+      :skip_os_shutdown,
       :dry_run,
       :force)
       SENSITIVE = []
@@ -72999,6 +73015,13 @@ module Aws::EC2
     #   request into smaller batches.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] skip_os_shutdown
+    #   Specifies whether to bypass the graceful OS shutdown process when
+    #   the instance is terminated.
+    #
+    #   Default: `false`
+    #   @return [Boolean]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
@@ -73010,6 +73033,7 @@ module Aws::EC2
     #
     class TerminateInstancesRequest < Struct.new(
       :instance_ids,
+      :skip_os_shutdown,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure

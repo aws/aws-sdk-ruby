@@ -1073,6 +1073,7 @@ module Aws::Glue
     OrchestrationNameString = Shapes::StringShape.new(name: 'OrchestrationNameString')
     OrchestrationPageSize200 = Shapes::IntegerShape.new(name: 'OrchestrationPageSize200')
     OrchestrationPageSize25 = Shapes::IntegerShape.new(name: 'OrchestrationPageSize25')
+    OrchestrationPolicyJsonString = Shapes::StringShape.new(name: 'OrchestrationPolicyJsonString')
     OrchestrationRoleArn = Shapes::StringShape.new(name: 'OrchestrationRoleArn')
     OrchestrationS3Location = Shapes::StringShape.new(name: 'OrchestrationS3Location')
     OrchestrationStatementCodeString = Shapes::StringShape.new(name: 'OrchestrationStatementCodeString')
@@ -5044,6 +5045,7 @@ module Aws::Glue
     JobRun.add_member(:maintenance_window, Shapes::ShapeRef.new(shape: MaintenanceWindow, location_name: "MaintenanceWindow"))
     JobRun.add_member(:profile_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ProfileName"))
     JobRun.add_member(:state_detail, Shapes::ShapeRef.new(shape: OrchestrationMessageString, location_name: "StateDetail"))
+    JobRun.add_member(:execution_role_session_policy, Shapes::ShapeRef.new(shape: OrchestrationPolicyJsonString, location_name: "ExecutionRoleSessionPolicy"))
     JobRun.struct_class = Types::JobRun
 
     JobRunList.member = Shapes::ShapeRef.new(shape: JobRun)
@@ -6568,6 +6570,7 @@ module Aws::Glue
     StartJobRunRequest.add_member(:worker_type, Shapes::ShapeRef.new(shape: WorkerType, location_name: "WorkerType"))
     StartJobRunRequest.add_member(:number_of_workers, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "NumberOfWorkers"))
     StartJobRunRequest.add_member(:execution_class, Shapes::ShapeRef.new(shape: ExecutionClass, location_name: "ExecutionClass"))
+    StartJobRunRequest.add_member(:execution_role_session_policy, Shapes::ShapeRef.new(shape: OrchestrationPolicyJsonString, location_name: "ExecutionRoleSessionPolicy"))
     StartJobRunRequest.struct_class = Types::StartJobRunRequest
 
     StartJobRunResponse.add_member(:job_run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "JobRunId"))

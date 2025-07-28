@@ -21,34 +21,37 @@ module Aws::CloudFront
       end
       if Aws::Endpoints::Matchers.set?(parameters.region)
         if (partition_result = Aws::Endpoints::Matchers.aws_partition(parameters.region))
-          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws") && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, false)
-            return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.amazonaws.com", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "cloudfront", "signingRegion" => "us-east-1"}]})
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws") && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
+            return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.global.api.aws", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-east-1"}]})
           end
-          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws") && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, false)
-            return Aws::Endpoints::Endpoint.new(url: "https://cloudfront-fips.amazonaws.com", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "cloudfront", "signingRegion" => "us-east-1"}]})
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws") && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
+            return Aws::Endpoints::Endpoint.new(url: "https://cloudfront-fips.global.api.aws", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-east-1"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-cn") && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, false)
-            return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.cn-northwest-1.amazonaws.com.cn", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "cloudfront", "signingRegion" => "cn-northwest-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.cn-northwest-1.amazonaws.com.cn", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "cn-northwest-1"}]})
+          end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-cn") && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, false)
+            return Aws::Endpoints::Endpoint.new(url: "https://cloudfront-fips.cn-northwest-1.amazonaws.com.cn", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "cn-northwest-1"}]})
           end
           if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-              return Aws::Endpoints::Endpoint.new(url: "https://cloudfront-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+              return Aws::Endpoints::Endpoint.new(url: "https://cloudfront-fips.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "#{partition_result['implicitGlobalRegion']}"}]})
             end
             raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
           end
-          if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
+          if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, false)
             if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
-              return Aws::Endpoints::Endpoint.new(url: "https://cloudfront-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+              return Aws::Endpoints::Endpoint.new(url: "https://cloudfront-fips.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "#{partition_result['implicitGlobalRegion']}"}]})
             end
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
           end
-          if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
+          if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-              return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+              return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "#{partition_result['implicitGlobalRegion']}"}]})
             end
             raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
           end
-          return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "#{partition_result['implicitGlobalRegion']}"}]})
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"

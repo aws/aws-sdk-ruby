@@ -165,6 +165,17 @@ module Aws::OSIS
     #   List of tags to add to the pipeline upon creation.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] pipeline_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that provides the
+    #   required permissions for a pipeline to read from the source and
+    #   write to the sink. For more information, see [Setting up roles and
+    #   users in Amazon OpenSearch Ingestion][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline-security-overview.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/CreatePipelineRequest AWS API Documentation
     #
     class CreatePipelineRequest < Struct.new(
@@ -176,7 +187,8 @@ module Aws::OSIS
       :vpc_options,
       :buffer_options,
       :encryption_at_rest_options,
-      :tags)
+      :tags,
+      :pipeline_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -519,6 +531,12 @@ module Aws::OSIS
     #   A list of tags associated with the given pipeline.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] pipeline_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that provides the
+    #   required permissions for a pipeline to read from the source and
+    #   write to the sink.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/Pipeline AWS API Documentation
     #
     class Pipeline < Struct.new(
@@ -539,7 +557,8 @@ module Aws::OSIS
       :vpc_endpoint_service,
       :service_vpc_endpoints,
       :destinations,
-      :tags)
+      :tags,
+      :pipeline_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -886,6 +905,17 @@ module Aws::OSIS
     #   a persistent buffer.
     #   @return [Types::EncryptionAtRestOptions]
     #
+    # @!attribute [rw] pipeline_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that provides the
+    #   required permissions for a pipeline to read from the source and
+    #   write to the sink. For more information, see [Setting up roles and
+    #   users in Amazon OpenSearch Ingestion][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline-security-overview.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/UpdatePipelineRequest AWS API Documentation
     #
     class UpdatePipelineRequest < Struct.new(
@@ -895,7 +925,8 @@ module Aws::OSIS
       :pipeline_configuration_body,
       :log_publishing_options,
       :buffer_options,
-      :encryption_at_rest_options)
+      :encryption_at_rest_options,
+      :pipeline_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end

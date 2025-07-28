@@ -5184,7 +5184,7 @@ module Aws::CloudFront
       :staging,
       :connection_mode,
       :anycast_ip_list_id)
-      SENSITIVE = []
+      SENSITIVE = [:comment]
       include Aws::Structure
     end
 
@@ -13537,7 +13537,7 @@ module Aws::CloudFront
       :comment,
       :default_value,
       :required)
-      SENSITIVE = []
+      SENSITIVE = [:comment]
       include Aws::Structure
     end
 

@@ -26,6 +26,9 @@ module Aws
       class InvalidParametersException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ResourceNotFoundException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

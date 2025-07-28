@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2025-07-28)
+------------------
+
+* Feature - Enable MACSec support and features on Interconnects.
+
+1.93.0 (2025-07-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.92.0 (2025-06-02)
 ------------------
 

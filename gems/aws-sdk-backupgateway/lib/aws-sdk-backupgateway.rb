@@ -54,7 +54,7 @@ module Aws::BackupGateway
   autoload :EndpointProvider, 'aws-sdk-backupgateway/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-backupgateway/endpoints'
 
-  GEM_VERSION = '1.37.0'
+  GEM_VERSION = '1.38.0'
 
 end
 

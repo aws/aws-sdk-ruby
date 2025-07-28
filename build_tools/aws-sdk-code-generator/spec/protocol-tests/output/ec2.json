@@ -34,6 +34,7 @@
         "cases": [
             {
                 "id": "Ec2QueryDateTimeWithNegativeOffset",
+                "description": "Ensures that clients can correctly parse datetime (timestamps) with offsets",
                 "given": {
                     "name": "DatetimeOffsets",
                     "http": {
@@ -44,7 +45,6 @@
                         "shape": "DatetimeOffsetsOutput"
                     }
                 },
-                "description": "Ensures that clients can correctly parse datetime (timestamps) with offsets",
                 "result": {
                     "datetime": 1576540098
                 },
@@ -58,6 +58,7 @@
             },
             {
                 "id": "Ec2QueryDateTimeWithPositiveOffset",
+                "description": "Ensures that clients can correctly parse datetime (timestamps) with offsets",
                 "given": {
                     "name": "DatetimeOffsets",
                     "http": {
@@ -68,7 +69,6 @@
                         "shape": "DatetimeOffsetsOutput"
                     }
                 },
-                "description": "Ensures that clients can correctly parse datetime (timestamps) with offsets",
                 "result": {
                     "datetime": 1576540098
                 },
@@ -109,6 +109,7 @@
         "cases": [
             {
                 "id": "Ec2QueryEmptyInputAndEmptyOutput",
+                "description": "Empty output",
                 "given": {
                     "name": "EmptyInputAndEmptyOutput",
                     "http": {
@@ -120,7 +121,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there's no request or response members.</p> <p>While this should be rare, code generators must support this.</p>"
                 },
-                "description": "Empty output",
                 "result": {},
                 "response": {
                     "status_code": 200,
@@ -167,6 +167,7 @@
         "cases": [
             {
                 "id": "Ec2QueryDateTimeWithFractionalSeconds",
+                "description": "Ensures that clients can correctly parse datetime timestamps with fractional seconds",
                 "given": {
                     "name": "FractionalSeconds",
                     "http": {
@@ -177,7 +178,6 @@
                         "shape": "FractionalSecondsOutput"
                     }
                 },
-                "description": "Ensures that clients can correctly parse datetime timestamps with fractional seconds",
                 "result": {
                     "datetime": 9.46845296123E8
                 },
@@ -225,6 +225,7 @@
         "cases": [
             {
                 "id": "Ec2GreetingWithErrors",
+                "description": "Ensures that operations with errors successfully know how to deserialize the successful response",
                 "given": {
                     "name": "GreetingWithErrors",
                     "http": {
@@ -236,7 +237,6 @@
                     },
                     "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> </ol>"
                 },
-                "description": "Ensures that operations with errors successfully know how to deserialize the successful response",
                 "result": {
                     "greeting": "Hello"
                 },
@@ -286,6 +286,7 @@
         "cases": [
             {
                 "id": "Ec2InvalidGreetingError",
+                "description": "Parses simple XML errors",
                 "given": {
                     "name": "GreetingWithErrors",
                     "http": {
@@ -299,7 +300,6 @@
                         }
                     ]
                 },
-                "description": "Parses simple XML errors",
                 "errorCode": "InvalidGreeting",
                 "errorMessage": "Hi",
                 "error": {
@@ -427,6 +427,7 @@
         "cases": [
             {
                 "id": "Ec2IgnoresWrappingXmlName",
+                "description": "The xmlName trait on the output structure is ignored in the ec2 protocol",
                 "given": {
                     "name": "IgnoresWrappingXmlName",
                     "http": {
@@ -438,7 +439,6 @@
                     },
                     "documentation": "<p>The xmlName trait on the output structure is ignored in AWS Query.</p> <p>The wrapping element is always operation name + &quot;Response&quot;.</p>"
                 },
-                "description": "The xmlName trait on the output structure is ignored in the ec2 protocol",
                 "result": {
                     "foo": "bar"
                 },
@@ -479,6 +479,7 @@
         "cases": [
             {
                 "id": "Ec2QueryNoInputAndOutput",
+                "description": "Empty output",
                 "given": {
                     "name": "NoInputAndOutput",
                     "http": {
@@ -490,7 +491,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there's no request payload or response members.</p> <p>While this should be rare, code generators must support this.</p>"
                 },
-                "description": "Empty output",
                 "result": {},
                 "response": {
                     "status_code": 200,
@@ -558,6 +558,7 @@
         "cases": [
             {
                 "id": "Ec2RecursiveShapes",
+                "description": "Serializes recursive structures",
                 "given": {
                     "name": "RecursiveXmlShapes",
                     "http": {
@@ -569,7 +570,6 @@
                     },
                     "documentation": "<p>Recursive shapes</p>"
                 },
-                "description": "Serializes recursive structures",
                 "result": {
                     "nested": {
                         "foo": "Foo1",
@@ -676,6 +676,7 @@
         "cases": [
             {
                 "id": "Ec2SimpleScalarProperties",
+                "description": "Serializes simple scalar properties",
                 "given": {
                     "name": "SimpleScalarXmlProperties",
                     "http": {
@@ -686,7 +687,6 @@
                         "shape": "SimpleScalarXmlPropertiesOutput"
                     }
                 },
-                "description": "Serializes simple scalar properties",
                 "result": {
                     "stringValue": "string",
                     "emptyStringValue": "",
@@ -709,6 +709,7 @@
             },
             {
                 "id": "Ec2QuerySupportsNaNFloatOutputs",
+                "description": "Supports handling NaN float values.",
                 "given": {
                     "name": "SimpleScalarXmlProperties",
                     "http": {
@@ -719,7 +720,6 @@
                         "shape": "SimpleScalarXmlPropertiesOutput"
                     }
                 },
-                "description": "Supports handling NaN float values.",
                 "result": {
                     "floatValue": "NaN",
                     "doubleValue": "NaN"
@@ -734,6 +734,7 @@
             },
             {
                 "id": "Ec2QuerySupportsInfinityFloatOutputs",
+                "description": "Supports handling Infinity float values.",
                 "given": {
                     "name": "SimpleScalarXmlProperties",
                     "http": {
@@ -744,7 +745,6 @@
                         "shape": "SimpleScalarXmlPropertiesOutput"
                     }
                 },
-                "description": "Supports handling Infinity float values.",
                 "result": {
                     "floatValue": "Infinity",
                     "doubleValue": "Infinity"
@@ -759,6 +759,7 @@
             },
             {
                 "id": "Ec2QuerySupportsNegativeInfinityFloatOutputs",
+                "description": "Supports handling -Infinity float values.",
                 "given": {
                     "name": "SimpleScalarXmlProperties",
                     "http": {
@@ -769,7 +770,6 @@
                         "shape": "SimpleScalarXmlPropertiesOutput"
                     }
                 },
-                "description": "Supports handling -Infinity float values.",
                 "result": {
                     "floatValue": "-Infinity",
                     "doubleValue": "-Infinity"
@@ -818,6 +818,7 @@
         "cases": [
             {
                 "id": "Ec2XmlBlobs",
+                "description": "Blobs are base64 encoded",
                 "given": {
                     "name": "XmlBlobs",
                     "http": {
@@ -829,7 +830,6 @@
                     },
                     "documentation": "<p>Blobs are base64 encoded</p>"
                 },
-                "description": "Blobs are base64 encoded",
                 "result": {
                     "data": "value"
                 },
@@ -877,6 +877,7 @@
         "cases": [
             {
                 "id": "Ec2XmlEmptyBlobs",
+                "description": "Empty blobs are deserialized as empty string",
                 "given": {
                     "name": "XmlEmptyBlobs",
                     "http": {
@@ -887,7 +888,6 @@
                         "shape": "XmlBlobsOutput"
                     }
                 },
-                "description": "Empty blobs are deserialized as empty string",
                 "result": {
                     "data": ""
                 },
@@ -901,6 +901,7 @@
             },
             {
                 "id": "Ec2XmlEmptySelfClosedBlobs",
+                "description": "Empty self closed blobs are deserialized as empty string",
                 "given": {
                     "name": "XmlEmptyBlobs",
                     "http": {
@@ -911,7 +912,6 @@
                         "shape": "XmlBlobsOutput"
                     }
                 },
-                "description": "Empty self closed blobs are deserialized as empty string",
                 "result": {
                     "data": ""
                 },
@@ -1121,6 +1121,7 @@
         "cases": [
             {
                 "id": "Ec2XmlEmptyLists",
+                "description": "Deserializes empty XML lists",
                 "given": {
                     "name": "XmlEmptyLists",
                     "http": {
@@ -1131,7 +1132,6 @@
                         "shape": "XmlListsOutput"
                     }
                 },
-                "description": "Deserializes empty XML lists",
                 "result": {
                     "stringList": [],
                     "stringSet": []
@@ -1226,6 +1226,7 @@
         "cases": [
             {
                 "id": "Ec2XmlEnums",
+                "description": "Serializes simple scalar properties",
                 "given": {
                     "name": "XmlEnums",
                     "http": {
@@ -1237,7 +1238,6 @@
                     },
                     "documentation": "<p>This example serializes enums as top level properties, in lists, sets, and maps.</p>"
                 },
-                "description": "Serializes simple scalar properties",
                 "result": {
                     "fooEnum1": "Foo",
                     "fooEnum2": "0",
@@ -1339,6 +1339,7 @@
         "cases": [
             {
                 "id": "Ec2XmlIntEnums",
+                "description": "Serializes simple scalar properties",
                 "given": {
                     "name": "XmlIntEnums",
                     "http": {
@@ -1350,7 +1351,6 @@
                     },
                     "documentation": "<p>This example serializes intEnums as top level properties, in lists, sets, and maps.</p>"
                 },
-                "description": "Serializes simple scalar properties",
                 "result": {
                     "intEnum1": 1,
                     "intEnum2": 2,
@@ -1574,6 +1574,7 @@
         "cases": [
             {
                 "id": "Ec2XmlLists",
+                "description": "Tests for XML list serialization",
                 "given": {
                     "name": "XmlLists",
                     "http": {
@@ -1585,7 +1586,6 @@
                     },
                     "documentation": "<p>This test case serializes XML lists for the following cases for both input and output:</p> <ol> <li>Normal XML lists.</li> <li>Normal XML sets.</li> <li>XML lists of lists.</li> <li>XML lists with @xmlName on its members</li> <li>Flattened XML lists.</li> <li>Flattened XML lists with @xmlName.</li> <li>Flattened XML lists with @xmlNamespace.</li> <li>Lists of structures.</li> </ol>"
                 },
-                "description": "Tests for XML list serialization",
                 "result": {
                     "stringList": [
                         "foo",
@@ -1725,6 +1725,7 @@
         "cases": [
             {
                 "id": "Ec2XmlNamespaces",
+                "description": "Serializes XML namespaces",
                 "given": {
                     "name": "XmlNamespaces",
                     "http": {
@@ -1735,7 +1736,6 @@
                         "shape": "XmlNamespacesOutput"
                     }
                 },
-                "description": "Serializes XML namespaces",
                 "result": {
                     "nested": {
                         "foo": "Foo",
@@ -1831,6 +1831,7 @@
         "cases": [
             {
                 "id": "Ec2XmlTimestamps",
+                "description": "Tests how normal timestamps are serialized",
                 "given": {
                     "name": "XmlTimestamps",
                     "http": {
@@ -1842,7 +1843,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Tests how normal timestamps are serialized",
                 "result": {
                     "normal": 1398796238
                 },
@@ -1856,6 +1856,7 @@
             },
             {
                 "id": "Ec2XmlTimestampsWithDateTimeFormat",
+                "description": "Ensures that the timestampFormat of date-time works like normal timestamps",
                 "given": {
                     "name": "XmlTimestamps",
                     "http": {
@@ -1867,7 +1868,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Ensures that the timestampFormat of date-time works like normal timestamps",
                 "result": {
                     "dateTime": 1398796238
                 },
@@ -1881,6 +1881,7 @@
             },
             {
                 "id": "Ec2XmlTimestampsWithDateTimeOnTargetFormat",
+                "description": "Ensures that the timestampFormat of date-time on the target shape works like normal timestamps",
                 "given": {
                     "name": "XmlTimestamps",
                     "http": {
@@ -1892,7 +1893,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Ensures that the timestampFormat of date-time on the target shape works like normal timestamps",
                 "result": {
                     "dateTimeOnTarget": 1398796238
                 },
@@ -1906,6 +1906,7 @@
             },
             {
                 "id": "Ec2XmlTimestampsWithEpochSecondsFormat",
+                "description": "Ensures that the timestampFormat of epoch-seconds works",
                 "given": {
                     "name": "XmlTimestamps",
                     "http": {
@@ -1917,7 +1918,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Ensures that the timestampFormat of epoch-seconds works",
                 "result": {
                     "epochSeconds": 1398796238
                 },
@@ -1931,6 +1931,7 @@
             },
             {
                 "id": "Ec2XmlTimestampsWithEpochSecondsOnTargetFormat",
+                "description": "Ensures that the timestampFormat of epoch-seconds on the target shape works",
                 "given": {
                     "name": "XmlTimestamps",
                     "http": {
@@ -1942,7 +1943,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Ensures that the timestampFormat of epoch-seconds on the target shape works",
                 "result": {
                     "epochSecondsOnTarget": 1398796238
                 },
@@ -1956,6 +1956,7 @@
             },
             {
                 "id": "Ec2XmlTimestampsWithHttpDateFormat",
+                "description": "Ensures that the timestampFormat of http-date works",
                 "given": {
                     "name": "XmlTimestamps",
                     "http": {
@@ -1967,7 +1968,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Ensures that the timestampFormat of http-date works",
                 "result": {
                     "httpDate": 1398796238
                 },
@@ -1981,6 +1981,7 @@
             },
             {
                 "id": "Ec2XmlTimestampsWithHttpDateOnTargetFormat",
+                "description": "Ensures that the timestampFormat of http-date on the target shape works",
                 "given": {
                     "name": "XmlTimestamps",
                     "http": {
@@ -1992,7 +1993,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Ensures that the timestampFormat of http-date on the target shape works",
                 "result": {
                     "httpDateOnTarget": 1398796238
                 },

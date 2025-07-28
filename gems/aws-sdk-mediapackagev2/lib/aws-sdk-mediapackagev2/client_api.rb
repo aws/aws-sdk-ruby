@@ -152,6 +152,7 @@ module Aws::MediaPackageV2
     IngestEndpoint = Shapes::StructureShape.new(name: 'IngestEndpoint')
     IngestEndpointList = Shapes::ListShape.new(name: 'IngestEndpointList')
     InputSwitchConfiguration = Shapes::StructureShape.new(name: 'InputSwitchConfiguration')
+    InputSwitchConfigurationPreferredInputInteger = Shapes::IntegerShape.new(name: 'InputSwitchConfigurationPreferredInputInteger')
     InputType = Shapes::StringShape.new(name: 'InputType')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -749,6 +750,7 @@ module Aws::MediaPackageV2
     IngestEndpointList.member = Shapes::ShapeRef.new(shape: IngestEndpoint)
 
     InputSwitchConfiguration.add_member(:mqcs_input_switching, Shapes::ShapeRef.new(shape: Boolean, location_name: "MQCSInputSwitching"))
+    InputSwitchConfiguration.add_member(:preferred_input, Shapes::ShapeRef.new(shape: InputSwitchConfigurationPreferredInputInteger, location_name: "PreferredInput"))
     InputSwitchConfiguration.struct_class = Types::InputSwitchConfiguration
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))

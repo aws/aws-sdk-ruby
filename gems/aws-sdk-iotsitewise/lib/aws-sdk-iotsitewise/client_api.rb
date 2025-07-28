@@ -33,6 +33,7 @@ module Aws::IoTSiteWise
     Aggregates = Shapes::StructureShape.new(name: 'Aggregates')
     Alarms = Shapes::StructureShape.new(name: 'Alarms')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
+    AssetBindingValueFilter = Shapes::StructureShape.new(name: 'AssetBindingValueFilter')
     AssetCompositeModel = Shapes::StructureShape.new(name: 'AssetCompositeModel')
     AssetCompositeModelPath = Shapes::ListShape.new(name: 'AssetCompositeModelPath')
     AssetCompositeModelPathSegment = Shapes::StructureShape.new(name: 'AssetCompositeModelPathSegment')
@@ -46,6 +47,7 @@ module Aws::IoTSiteWise
     AssetHierarchy = Shapes::StructureShape.new(name: 'AssetHierarchy')
     AssetHierarchyInfo = Shapes::StructureShape.new(name: 'AssetHierarchyInfo')
     AssetIDs = Shapes::ListShape.new(name: 'AssetIDs')
+    AssetModelBindingValueFilter = Shapes::StructureShape.new(name: 'AssetModelBindingValueFilter')
     AssetModelCompositeModel = Shapes::StructureShape.new(name: 'AssetModelCompositeModel')
     AssetModelCompositeModelDefinition = Shapes::StructureShape.new(name: 'AssetModelCompositeModelDefinition')
     AssetModelCompositeModelDefinitions = Shapes::ListShape.new(name: 'AssetModelCompositeModelDefinitions')
@@ -60,6 +62,8 @@ module Aws::IoTSiteWise
     AssetModelHierarchyDefinitions = Shapes::ListShape.new(name: 'AssetModelHierarchyDefinitions')
     AssetModelProperties = Shapes::ListShape.new(name: 'AssetModelProperties')
     AssetModelProperty = Shapes::StructureShape.new(name: 'AssetModelProperty')
+    AssetModelPropertyBindingValue = Shapes::StructureShape.new(name: 'AssetModelPropertyBindingValue')
+    AssetModelPropertyBindingValueFilter = Shapes::StructureShape.new(name: 'AssetModelPropertyBindingValueFilter')
     AssetModelPropertyDefinition = Shapes::StructureShape.new(name: 'AssetModelPropertyDefinition')
     AssetModelPropertyDefinitions = Shapes::ListShape.new(name: 'AssetModelPropertyDefinitions')
     AssetModelPropertyPath = Shapes::ListShape.new(name: 'AssetModelPropertyPath')
@@ -76,6 +80,8 @@ module Aws::IoTSiteWise
     AssetProperties = Shapes::ListShape.new(name: 'AssetProperties')
     AssetProperty = Shapes::StructureShape.new(name: 'AssetProperty')
     AssetPropertyAlias = Shapes::StringShape.new(name: 'AssetPropertyAlias')
+    AssetPropertyBindingValue = Shapes::StructureShape.new(name: 'AssetPropertyBindingValue')
+    AssetPropertyBindingValueFilter = Shapes::StructureShape.new(name: 'AssetPropertyBindingValueFilter')
     AssetPropertyPath = Shapes::ListShape.new(name: 'AssetPropertyPath')
     AssetPropertyPathSegment = Shapes::StructureShape.new(name: 'AssetPropertyPathSegment')
     AssetPropertySummaries = Shapes::ListShape.new(name: 'AssetPropertySummaries')
@@ -148,6 +154,7 @@ module Aws::IoTSiteWise
     BatchPutAssetPropertyValueErrorCode = Shapes::StringShape.new(name: 'BatchPutAssetPropertyValueErrorCode')
     BatchPutAssetPropertyValueRequest = Shapes::StructureShape.new(name: 'BatchPutAssetPropertyValueRequest')
     BatchPutAssetPropertyValueResponse = Shapes::StructureShape.new(name: 'BatchPutAssetPropertyValueResponse')
+    BindingValueList = Shapes::ListShape.new(name: 'BindingValueList')
     BooleanValue = Shapes::BooleanShape.new(name: 'BooleanValue')
     Bucket = Shapes::StringShape.new(name: 'Bucket')
     CapabilityConfiguration = Shapes::StringShape.new(name: 'CapabilityConfiguration')
@@ -167,6 +174,24 @@ module Aws::IoTSiteWise
     CompositionRelationshipItem = Shapes::StructureShape.new(name: 'CompositionRelationshipItem')
     CompositionRelationshipSummaries = Shapes::ListShape.new(name: 'CompositionRelationshipSummaries')
     CompositionRelationshipSummary = Shapes::StructureShape.new(name: 'CompositionRelationshipSummary')
+    ComputationModelAnomalyDetectionConfiguration = Shapes::StructureShape.new(name: 'ComputationModelAnomalyDetectionConfiguration')
+    ComputationModelConfiguration = Shapes::StructureShape.new(name: 'ComputationModelConfiguration')
+    ComputationModelDataBinding = Shapes::MapShape.new(name: 'ComputationModelDataBinding')
+    ComputationModelDataBindingUsageSummaries = Shapes::ListShape.new(name: 'ComputationModelDataBindingUsageSummaries')
+    ComputationModelDataBindingUsageSummary = Shapes::StructureShape.new(name: 'ComputationModelDataBindingUsageSummary')
+    ComputationModelDataBindingValue = Shapes::StructureShape.new(name: 'ComputationModelDataBindingValue')
+    ComputationModelDataBindingVariable = Shapes::StringShape.new(name: 'ComputationModelDataBindingVariable')
+    ComputationModelExecutionSummary = Shapes::MapShape.new(name: 'ComputationModelExecutionSummary')
+    ComputationModelExecutionSummaryKey = Shapes::StringShape.new(name: 'ComputationModelExecutionSummaryKey')
+    ComputationModelExecutionSummaryValue = Shapes::StringShape.new(name: 'ComputationModelExecutionSummaryValue')
+    ComputationModelIdList = Shapes::ListShape.new(name: 'ComputationModelIdList')
+    ComputationModelResolveToResourceSummaries = Shapes::ListShape.new(name: 'ComputationModelResolveToResourceSummaries')
+    ComputationModelResolveToResourceSummary = Shapes::StructureShape.new(name: 'ComputationModelResolveToResourceSummary')
+    ComputationModelState = Shapes::StringShape.new(name: 'ComputationModelState')
+    ComputationModelStatus = Shapes::StructureShape.new(name: 'ComputationModelStatus')
+    ComputationModelSummaries = Shapes::ListShape.new(name: 'ComputationModelSummaries')
+    ComputationModelSummary = Shapes::StructureShape.new(name: 'ComputationModelSummary')
+    ComputationModelType = Shapes::StringShape.new(name: 'ComputationModelType')
     ComputeLocation = Shapes::StringShape.new(name: 'ComputeLocation')
     ConfigurationErrorDetails = Shapes::StructureShape.new(name: 'ConfigurationErrorDetails')
     ConfigurationState = Shapes::StringShape.new(name: 'ConfigurationState')
@@ -186,6 +211,8 @@ module Aws::IoTSiteWise
     CreateAssetResponse = Shapes::StructureShape.new(name: 'CreateAssetResponse')
     CreateBulkImportJobRequest = Shapes::StructureShape.new(name: 'CreateBulkImportJobRequest')
     CreateBulkImportJobResponse = Shapes::StructureShape.new(name: 'CreateBulkImportJobResponse')
+    CreateComputationModelRequest = Shapes::StructureShape.new(name: 'CreateComputationModelRequest')
+    CreateComputationModelResponse = Shapes::StructureShape.new(name: 'CreateComputationModelResponse')
     CreateDashboardRequest = Shapes::StructureShape.new(name: 'CreateDashboardRequest')
     CreateDashboardResponse = Shapes::StructureShape.new(name: 'CreateDashboardResponse')
     CreateDatasetRequest = Shapes::StructureShape.new(name: 'CreateDatasetRequest')
@@ -202,6 +229,8 @@ module Aws::IoTSiteWise
     DashboardDefinition = Shapes::StringShape.new(name: 'DashboardDefinition')
     DashboardSummaries = Shapes::ListShape.new(name: 'DashboardSummaries')
     DashboardSummary = Shapes::StructureShape.new(name: 'DashboardSummary')
+    DataBindingValue = Shapes::StructureShape.new(name: 'DataBindingValue')
+    DataBindingValueFilter = Shapes::StructureShape.new(name: 'DataBindingValueFilter')
     DataSetReference = Shapes::StructureShape.new(name: 'DataSetReference')
     DatasetSource = Shapes::StructureShape.new(name: 'DatasetSource')
     DatasetSourceFormat = Shapes::StringShape.new(name: 'DatasetSourceFormat')
@@ -221,6 +250,8 @@ module Aws::IoTSiteWise
     DeleteAssetModelResponse = Shapes::StructureShape.new(name: 'DeleteAssetModelResponse')
     DeleteAssetRequest = Shapes::StructureShape.new(name: 'DeleteAssetRequest')
     DeleteAssetResponse = Shapes::StructureShape.new(name: 'DeleteAssetResponse')
+    DeleteComputationModelRequest = Shapes::StructureShape.new(name: 'DeleteComputationModelRequest')
+    DeleteComputationModelResponse = Shapes::StructureShape.new(name: 'DeleteComputationModelResponse')
     DeleteDashboardRequest = Shapes::StructureShape.new(name: 'DeleteDashboardRequest')
     DeleteDashboardResponse = Shapes::StructureShape.new(name: 'DeleteDashboardResponse')
     DeleteDatasetRequest = Shapes::StructureShape.new(name: 'DeleteDatasetRequest')
@@ -248,12 +279,18 @@ module Aws::IoTSiteWise
     DescribeAssetResponse = Shapes::StructureShape.new(name: 'DescribeAssetResponse')
     DescribeBulkImportJobRequest = Shapes::StructureShape.new(name: 'DescribeBulkImportJobRequest')
     DescribeBulkImportJobResponse = Shapes::StructureShape.new(name: 'DescribeBulkImportJobResponse')
+    DescribeComputationModelExecutionSummaryRequest = Shapes::StructureShape.new(name: 'DescribeComputationModelExecutionSummaryRequest')
+    DescribeComputationModelExecutionSummaryResponse = Shapes::StructureShape.new(name: 'DescribeComputationModelExecutionSummaryResponse')
+    DescribeComputationModelRequest = Shapes::StructureShape.new(name: 'DescribeComputationModelRequest')
+    DescribeComputationModelResponse = Shapes::StructureShape.new(name: 'DescribeComputationModelResponse')
     DescribeDashboardRequest = Shapes::StructureShape.new(name: 'DescribeDashboardRequest')
     DescribeDashboardResponse = Shapes::StructureShape.new(name: 'DescribeDashboardResponse')
     DescribeDatasetRequest = Shapes::StructureShape.new(name: 'DescribeDatasetRequest')
     DescribeDatasetResponse = Shapes::StructureShape.new(name: 'DescribeDatasetResponse')
     DescribeDefaultEncryptionConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeDefaultEncryptionConfigurationRequest')
     DescribeDefaultEncryptionConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeDefaultEncryptionConfigurationResponse')
+    DescribeExecutionRequest = Shapes::StructureShape.new(name: 'DescribeExecutionRequest')
+    DescribeExecutionResponse = Shapes::StructureShape.new(name: 'DescribeExecutionResponse')
     DescribeGatewayCapabilityConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeGatewayCapabilityConfigurationRequest')
     DescribeGatewayCapabilityConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeGatewayCapabilityConfigurationResponse')
     DescribeGatewayRequest = Shapes::StructureShape.new(name: 'DescribeGatewayRequest')
@@ -293,6 +330,16 @@ module Aws::IoTSiteWise
     ExecuteQueryNextToken = Shapes::StringShape.new(name: 'ExecuteQueryNextToken')
     ExecuteQueryRequest = Shapes::StructureShape.new(name: 'ExecuteQueryRequest')
     ExecuteQueryResponse = Shapes::StructureShape.new(name: 'ExecuteQueryResponse')
+    ExecutionDetails = Shapes::MapShape.new(name: 'ExecutionDetails')
+    ExecutionDetailsKey = Shapes::StringShape.new(name: 'ExecutionDetailsKey')
+    ExecutionDetailsValue = Shapes::StringShape.new(name: 'ExecutionDetailsValue')
+    ExecutionResult = Shapes::MapShape.new(name: 'ExecutionResult')
+    ExecutionResultKey = Shapes::StringShape.new(name: 'ExecutionResultKey')
+    ExecutionResultValue = Shapes::StringShape.new(name: 'ExecutionResultValue')
+    ExecutionState = Shapes::StringShape.new(name: 'ExecutionState')
+    ExecutionStatus = Shapes::StructureShape.new(name: 'ExecutionStatus')
+    ExecutionSummaries = Shapes::ListShape.new(name: 'ExecutionSummaries')
+    ExecutionSummary = Shapes::StructureShape.new(name: 'ExecutionSummary')
     Expression = Shapes::StringShape.new(name: 'Expression')
     ExpressionVariable = Shapes::StructureShape.new(name: 'ExpressionVariable')
     ExpressionVariables = Shapes::ListShape.new(name: 'ExpressionVariables')
@@ -335,6 +382,7 @@ module Aws::IoTSiteWise
     ImageFileData = Shapes::BlobShape.new(name: 'ImageFileData')
     ImageFileType = Shapes::StringShape.new(name: 'ImageFileType')
     ImageLocation = Shapes::StructureShape.new(name: 'ImageLocation')
+    InputProperties = Shapes::StringShape.new(name: 'InputProperties')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     InterpolatedAssetPropertyValue = Shapes::StructureShape.new(name: 'InterpolatedAssetPropertyValue')
     InterpolatedAssetPropertyValues = Shapes::ListShape.new(name: 'InterpolatedAssetPropertyValues')
@@ -381,10 +429,18 @@ module Aws::IoTSiteWise
     ListBulkImportJobsResponse = Shapes::StructureShape.new(name: 'ListBulkImportJobsResponse')
     ListCompositionRelationshipsRequest = Shapes::StructureShape.new(name: 'ListCompositionRelationshipsRequest')
     ListCompositionRelationshipsResponse = Shapes::StructureShape.new(name: 'ListCompositionRelationshipsResponse')
+    ListComputationModelDataBindingUsagesRequest = Shapes::StructureShape.new(name: 'ListComputationModelDataBindingUsagesRequest')
+    ListComputationModelDataBindingUsagesResponse = Shapes::StructureShape.new(name: 'ListComputationModelDataBindingUsagesResponse')
+    ListComputationModelResolveToResourcesRequest = Shapes::StructureShape.new(name: 'ListComputationModelResolveToResourcesRequest')
+    ListComputationModelResolveToResourcesResponse = Shapes::StructureShape.new(name: 'ListComputationModelResolveToResourcesResponse')
+    ListComputationModelsRequest = Shapes::StructureShape.new(name: 'ListComputationModelsRequest')
+    ListComputationModelsResponse = Shapes::StructureShape.new(name: 'ListComputationModelsResponse')
     ListDashboardsRequest = Shapes::StructureShape.new(name: 'ListDashboardsRequest')
     ListDashboardsResponse = Shapes::StructureShape.new(name: 'ListDashboardsResponse')
     ListDatasetsRequest = Shapes::StructureShape.new(name: 'ListDatasetsRequest')
     ListDatasetsResponse = Shapes::StructureShape.new(name: 'ListDatasetsResponse')
+    ListExecutionsRequest = Shapes::StructureShape.new(name: 'ListExecutionsRequest')
+    ListExecutionsResponse = Shapes::StructureShape.new(name: 'ListExecutionsResponse')
     ListGatewaysRequest = Shapes::StructureShape.new(name: 'ListGatewaysRequest')
     ListGatewaysResponse = Shapes::StructureShape.new(name: 'ListGatewaysResponse')
     ListPortalsRequest = Shapes::StructureShape.new(name: 'ListPortalsRequest')
@@ -402,6 +458,7 @@ module Aws::IoTSiteWise
     LoggingLevel = Shapes::StringShape.new(name: 'LoggingLevel')
     LoggingOptions = Shapes::StructureShape.new(name: 'LoggingOptions')
     Macro = Shapes::StringShape.new(name: 'Macro')
+    MatchedDataBinding = Shapes::StructureShape.new(name: 'MatchedDataBinding')
     MaxInterpolatedResults = Shapes::IntegerShape.new(name: 'MaxInterpolatedResults')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Measurement = Shapes::StructureShape.new(name: 'Measurement')
@@ -466,6 +523,8 @@ module Aws::IoTSiteWise
     RawValueType = Shapes::StringShape.new(name: 'RawValueType')
     Reference = Shapes::StructureShape.new(name: 'Reference')
     Resolution = Shapes::StringShape.new(name: 'Resolution')
+    ResolveTo = Shapes::StructureShape.new(name: 'ResolveTo')
+    ResolveToResourceType = Shapes::StringShape.new(name: 'ResolveToResourceType')
     Resource = Shapes::StructureShape.new(name: 'Resource')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
@@ -475,6 +534,7 @@ module Aws::IoTSiteWise
     ResponseStream = Shapes::StructureShape.new(name: 'ResponseStream')
     RestrictedDescription = Shapes::StringShape.new(name: 'RestrictedDescription')
     RestrictedName = Shapes::StringShape.new(name: 'RestrictedName')
+    ResultProperty = Shapes::StringShape.new(name: 'ResultProperty')
     RetentionPeriod = Shapes::StructureShape.new(name: 'RetentionPeriod')
     Row = Shapes::StructureShape.new(name: 'Row')
     Rows = Shapes::ListShape.new(name: 'Rows')
@@ -525,6 +585,8 @@ module Aws::IoTSiteWise
     UpdateAssetPropertyRequest = Shapes::StructureShape.new(name: 'UpdateAssetPropertyRequest')
     UpdateAssetRequest = Shapes::StructureShape.new(name: 'UpdateAssetRequest')
     UpdateAssetResponse = Shapes::StructureShape.new(name: 'UpdateAssetResponse')
+    UpdateComputationModelRequest = Shapes::StructureShape.new(name: 'UpdateComputationModelRequest')
+    UpdateComputationModelResponse = Shapes::StructureShape.new(name: 'UpdateComputationModelResponse')
     UpdateDashboardRequest = Shapes::StructureShape.new(name: 'UpdateDashboardRequest')
     UpdateDashboardResponse = Shapes::StructureShape.new(name: 'UpdateDashboardResponse')
     UpdateDatasetRequest = Shapes::StructureShape.new(name: 'UpdateDatasetRequest')
@@ -574,6 +636,7 @@ module Aws::IoTSiteWise
     ActionSummary.add_member(:action_id, Shapes::ShapeRef.new(shape: ID, location_name: "actionId"))
     ActionSummary.add_member(:action_definition_id, Shapes::ShapeRef.new(shape: ID, location_name: "actionDefinitionId"))
     ActionSummary.add_member(:target_resource, Shapes::ShapeRef.new(shape: TargetResource, location_name: "targetResource"))
+    ActionSummary.add_member(:resolve_to, Shapes::ShapeRef.new(shape: ResolveTo, location_name: "resolveTo"))
     ActionSummary.struct_class = Types::ActionSummary
 
     AggregateTypes.member = Shapes::ShapeRef.new(shape: AggregateType)
@@ -596,6 +659,9 @@ module Aws::IoTSiteWise
     Alarms.add_member(:alarm_role_arn, Shapes::ShapeRef.new(shape: IamArn, required: true, location_name: "alarmRoleArn"))
     Alarms.add_member(:notification_lambda_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "notificationLambdaArn"))
     Alarms.struct_class = Types::Alarms
+
+    AssetBindingValueFilter.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetId"))
+    AssetBindingValueFilter.struct_class = Types::AssetBindingValueFilter
 
     AssetCompositeModel.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     AssetCompositeModel.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -631,8 +697,8 @@ module Aws::IoTSiteWise
     AssetHierarchies.member = Shapes::ShapeRef.new(shape: AssetHierarchy)
 
     AssetHierarchy.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "id"))
-    AssetHierarchy.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     AssetHierarchy.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
+    AssetHierarchy.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     AssetHierarchy.struct_class = Types::AssetHierarchy
 
     AssetHierarchyInfo.add_member(:parent_asset_id, Shapes::ShapeRef.new(shape: ID, location_name: "parentAssetId"))
@@ -640,6 +706,9 @@ module Aws::IoTSiteWise
     AssetHierarchyInfo.struct_class = Types::AssetHierarchyInfo
 
     AssetIDs.member = Shapes::ShapeRef.new(shape: ID)
+
+    AssetModelBindingValueFilter.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetModelId"))
+    AssetModelBindingValueFilter.struct_class = Types::AssetModelBindingValueFilter
 
     AssetModelCompositeModel.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     AssetModelCompositeModel.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -705,6 +774,14 @@ module Aws::IoTSiteWise
     AssetModelProperty.add_member(:path, Shapes::ShapeRef.new(shape: AssetModelPropertyPath, location_name: "path"))
     AssetModelProperty.struct_class = Types::AssetModelProperty
 
+    AssetModelPropertyBindingValue.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetModelId"))
+    AssetModelPropertyBindingValue.add_member(:property_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "propertyId"))
+    AssetModelPropertyBindingValue.struct_class = Types::AssetModelPropertyBindingValue
+
+    AssetModelPropertyBindingValueFilter.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetModelId"))
+    AssetModelPropertyBindingValueFilter.add_member(:property_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "propertyId"))
+    AssetModelPropertyBindingValueFilter.struct_class = Types::AssetModelPropertyBindingValueFilter
+
     AssetModelPropertyDefinition.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "id"))
     AssetModelPropertyDefinition.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssetModelPropertyDefinition.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
@@ -756,6 +833,7 @@ module Aws::IoTSiteWise
     AssetProperties.member = Shapes::ShapeRef.new(shape: AssetProperty)
 
     AssetProperty.add_member(:id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "id"))
+    AssetProperty.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssetProperty.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     AssetProperty.add_member(:alias, Shapes::ShapeRef.new(shape: PropertyAlias, location_name: "alias"))
     AssetProperty.add_member(:notification, Shapes::ShapeRef.new(shape: PropertyNotification, location_name: "notification"))
@@ -763,8 +841,15 @@ module Aws::IoTSiteWise
     AssetProperty.add_member(:data_type_spec, Shapes::ShapeRef.new(shape: Name, location_name: "dataTypeSpec"))
     AssetProperty.add_member(:unit, Shapes::ShapeRef.new(shape: PropertyUnit, location_name: "unit"))
     AssetProperty.add_member(:path, Shapes::ShapeRef.new(shape: AssetPropertyPath, location_name: "path"))
-    AssetProperty.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssetProperty.struct_class = Types::AssetProperty
+
+    AssetPropertyBindingValue.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetId"))
+    AssetPropertyBindingValue.add_member(:property_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "propertyId"))
+    AssetPropertyBindingValue.struct_class = Types::AssetPropertyBindingValue
+
+    AssetPropertyBindingValueFilter.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetId"))
+    AssetPropertyBindingValueFilter.add_member(:property_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "propertyId"))
+    AssetPropertyBindingValueFilter.struct_class = Types::AssetPropertyBindingValueFilter
 
     AssetPropertyPath.member = Shapes::ShapeRef.new(shape: AssetPropertyPathSegment)
 
@@ -775,12 +860,12 @@ module Aws::IoTSiteWise
     AssetPropertySummaries.member = Shapes::ShapeRef.new(shape: AssetPropertySummary)
 
     AssetPropertySummary.add_member(:id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "id"))
+    AssetPropertySummary.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssetPropertySummary.add_member(:alias, Shapes::ShapeRef.new(shape: PropertyAlias, location_name: "alias"))
     AssetPropertySummary.add_member(:unit, Shapes::ShapeRef.new(shape: PropertyUnit, location_name: "unit"))
     AssetPropertySummary.add_member(:notification, Shapes::ShapeRef.new(shape: PropertyNotification, location_name: "notification"))
     AssetPropertySummary.add_member(:asset_composite_model_id, Shapes::ShapeRef.new(shape: ID, location_name: "assetCompositeModelId"))
     AssetPropertySummary.add_member(:path, Shapes::ShapeRef.new(shape: AssetPropertyPath, location_name: "path"))
-    AssetPropertySummary.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssetPropertySummary.struct_class = Types::AssetPropertySummary
 
     AssetPropertyValue.add_member(:value, Shapes::ShapeRef.new(shape: Variant, required: true, location_name: "value"))
@@ -805,6 +890,7 @@ module Aws::IoTSiteWise
     AssetSummaries.member = Shapes::ShapeRef.new(shape: AssetSummary)
 
     AssetSummary.add_member(:id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "id"))
+    AssetSummary.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssetSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "arn"))
     AssetSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     AssetSummary.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetModelId"))
@@ -813,7 +899,6 @@ module Aws::IoTSiteWise
     AssetSummary.add_member(:status, Shapes::ShapeRef.new(shape: AssetStatus, required: true, location_name: "status"))
     AssetSummary.add_member(:hierarchies, Shapes::ShapeRef.new(shape: AssetHierarchies, required: true, location_name: "hierarchies"))
     AssetSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    AssetSummary.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssetSummary.struct_class = Types::AssetSummary
 
     AssociateAssetsRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetId"))
@@ -831,6 +916,7 @@ module Aws::IoTSiteWise
     AssociatedAssetsSummaries.member = Shapes::ShapeRef.new(shape: AssociatedAssetsSummary)
 
     AssociatedAssetsSummary.add_member(:id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "id"))
+    AssociatedAssetsSummary.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssociatedAssetsSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "arn"))
     AssociatedAssetsSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     AssociatedAssetsSummary.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetModelId"))
@@ -839,7 +925,6 @@ module Aws::IoTSiteWise
     AssociatedAssetsSummary.add_member(:status, Shapes::ShapeRef.new(shape: AssetStatus, required: true, location_name: "status"))
     AssociatedAssetsSummary.add_member(:hierarchies, Shapes::ShapeRef.new(shape: AssetHierarchies, required: true, location_name: "hierarchies"))
     AssociatedAssetsSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    AssociatedAssetsSummary.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssociatedAssetsSummary.struct_class = Types::AssociatedAssetsSummary
 
     Attribute.add_member(:default_value, Shapes::ShapeRef.new(shape: DefaultValue, location_name: "defaultValue"))
@@ -1023,6 +1108,8 @@ module Aws::IoTSiteWise
     BatchPutAssetPropertyValueResponse.add_member(:error_entries, Shapes::ShapeRef.new(shape: BatchPutAssetPropertyErrorEntries, required: true, location_name: "errorEntries"))
     BatchPutAssetPropertyValueResponse.struct_class = Types::BatchPutAssetPropertyValueResponse
 
+    BindingValueList.member = Shapes::ShapeRef.new(shape: ComputationModelDataBindingValue)
+
     Citation.add_member(:reference, Shapes::ShapeRef.new(shape: Reference, location_name: "reference"))
     Citation.add_member(:content, Shapes::ShapeRef.new(shape: Content, location_name: "content"))
     Citation.struct_class = Types::Citation
@@ -1061,6 +1148,54 @@ module Aws::IoTSiteWise
     CompositionRelationshipSummary.add_member(:asset_model_composite_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetModelCompositeModelId"))
     CompositionRelationshipSummary.add_member(:asset_model_composite_model_type, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "assetModelCompositeModelType"))
     CompositionRelationshipSummary.struct_class = Types::CompositionRelationshipSummary
+
+    ComputationModelAnomalyDetectionConfiguration.add_member(:input_properties, Shapes::ShapeRef.new(shape: InputProperties, required: true, location_name: "inputProperties"))
+    ComputationModelAnomalyDetectionConfiguration.add_member(:result_property, Shapes::ShapeRef.new(shape: ResultProperty, required: true, location_name: "resultProperty"))
+    ComputationModelAnomalyDetectionConfiguration.struct_class = Types::ComputationModelAnomalyDetectionConfiguration
+
+    ComputationModelConfiguration.add_member(:anomaly_detection, Shapes::ShapeRef.new(shape: ComputationModelAnomalyDetectionConfiguration, location_name: "anomalyDetection"))
+    ComputationModelConfiguration.struct_class = Types::ComputationModelConfiguration
+
+    ComputationModelDataBinding.key = Shapes::ShapeRef.new(shape: ComputationModelDataBindingVariable)
+    ComputationModelDataBinding.value = Shapes::ShapeRef.new(shape: ComputationModelDataBindingValue)
+
+    ComputationModelDataBindingUsageSummaries.member = Shapes::ShapeRef.new(shape: ComputationModelDataBindingUsageSummary)
+
+    ComputationModelDataBindingUsageSummary.add_member(:computation_model_ids, Shapes::ShapeRef.new(shape: ComputationModelIdList, required: true, location_name: "computationModelIds"))
+    ComputationModelDataBindingUsageSummary.add_member(:matched_data_binding, Shapes::ShapeRef.new(shape: MatchedDataBinding, required: true, location_name: "matchedDataBinding"))
+    ComputationModelDataBindingUsageSummary.struct_class = Types::ComputationModelDataBindingUsageSummary
+
+    ComputationModelDataBindingValue.add_member(:asset_model_property, Shapes::ShapeRef.new(shape: AssetModelPropertyBindingValue, location_name: "assetModelProperty"))
+    ComputationModelDataBindingValue.add_member(:asset_property, Shapes::ShapeRef.new(shape: AssetPropertyBindingValue, location_name: "assetProperty"))
+    ComputationModelDataBindingValue.add_member(:list, Shapes::ShapeRef.new(shape: BindingValueList, location_name: "list"))
+    ComputationModelDataBindingValue.struct_class = Types::ComputationModelDataBindingValue
+
+    ComputationModelExecutionSummary.key = Shapes::ShapeRef.new(shape: ComputationModelExecutionSummaryKey)
+    ComputationModelExecutionSummary.value = Shapes::ShapeRef.new(shape: ComputationModelExecutionSummaryValue)
+
+    ComputationModelIdList.member = Shapes::ShapeRef.new(shape: ID)
+
+    ComputationModelResolveToResourceSummaries.member = Shapes::ShapeRef.new(shape: ComputationModelResolveToResourceSummary)
+
+    ComputationModelResolveToResourceSummary.add_member(:resolve_to, Shapes::ShapeRef.new(shape: ResolveTo, location_name: "resolveTo"))
+    ComputationModelResolveToResourceSummary.struct_class = Types::ComputationModelResolveToResourceSummary
+
+    ComputationModelStatus.add_member(:state, Shapes::ShapeRef.new(shape: ComputationModelState, required: true, location_name: "state"))
+    ComputationModelStatus.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "error"))
+    ComputationModelStatus.struct_class = Types::ComputationModelStatus
+
+    ComputationModelSummaries.member = Shapes::ShapeRef.new(shape: ComputationModelSummary)
+
+    ComputationModelSummary.add_member(:id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "id"))
+    ComputationModelSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "arn"))
+    ComputationModelSummary.add_member(:name, Shapes::ShapeRef.new(shape: RestrictedName, required: true, location_name: "name"))
+    ComputationModelSummary.add_member(:description, Shapes::ShapeRef.new(shape: RestrictedDescription, location_name: "description"))
+    ComputationModelSummary.add_member(:type, Shapes::ShapeRef.new(shape: ComputationModelType, required: true, location_name: "type"))
+    ComputationModelSummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDate"))
+    ComputationModelSummary.add_member(:last_update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdateDate"))
+    ComputationModelSummary.add_member(:status, Shapes::ShapeRef.new(shape: ComputationModelStatus, required: true, location_name: "status"))
+    ComputationModelSummary.add_member(:version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "version"))
+    ComputationModelSummary.struct_class = Types::ComputationModelSummary
 
     ConfigurationErrorDetails.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "code"))
     ConfigurationErrorDetails.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
@@ -1128,11 +1263,11 @@ module Aws::IoTSiteWise
 
     CreateAssetRequest.add_member(:asset_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "assetName"))
     CreateAssetRequest.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location_name: "assetModelId"))
+    CreateAssetRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, location_name: "assetId"))
+    CreateAssetRequest.add_member(:asset_external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "assetExternalId"))
     CreateAssetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAssetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateAssetRequest.add_member(:asset_description, Shapes::ShapeRef.new(shape: Description, location_name: "assetDescription"))
-    CreateAssetRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, location_name: "assetId"))
-    CreateAssetRequest.add_member(:asset_external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "assetExternalId"))
     CreateAssetRequest.struct_class = Types::CreateAssetRequest
 
     CreateAssetResponse.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetId"))
@@ -1153,6 +1288,19 @@ module Aws::IoTSiteWise
     CreateBulkImportJobResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "jobName"))
     CreateBulkImportJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, required: true, location_name: "jobStatus"))
     CreateBulkImportJobResponse.struct_class = Types::CreateBulkImportJobResponse
+
+    CreateComputationModelRequest.add_member(:computation_model_name, Shapes::ShapeRef.new(shape: RestrictedName, required: true, location_name: "computationModelName"))
+    CreateComputationModelRequest.add_member(:computation_model_description, Shapes::ShapeRef.new(shape: RestrictedDescription, location_name: "computationModelDescription"))
+    CreateComputationModelRequest.add_member(:computation_model_configuration, Shapes::ShapeRef.new(shape: ComputationModelConfiguration, required: true, location_name: "computationModelConfiguration"))
+    CreateComputationModelRequest.add_member(:computation_model_data_binding, Shapes::ShapeRef.new(shape: ComputationModelDataBinding, required: true, location_name: "computationModelDataBinding"))
+    CreateComputationModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateComputationModelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateComputationModelRequest.struct_class = Types::CreateComputationModelRequest
+
+    CreateComputationModelResponse.add_member(:computation_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "computationModelId"))
+    CreateComputationModelResponse.add_member(:computation_model_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "computationModelArn"))
+    CreateComputationModelResponse.add_member(:computation_model_status, Shapes::ShapeRef.new(shape: ComputationModelStatus, required: true, location_name: "computationModelStatus"))
+    CreateComputationModelResponse.struct_class = Types::CreateComputationModelResponse
 
     CreateDashboardRequest.add_member(:project_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "projectId"))
     CreateDashboardRequest.add_member(:dashboard_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "dashboardName"))
@@ -1237,6 +1385,16 @@ module Aws::IoTSiteWise
     DashboardSummary.add_member(:last_update_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateDate"))
     DashboardSummary.struct_class = Types::DashboardSummary
 
+    DataBindingValue.add_member(:asset_model_property, Shapes::ShapeRef.new(shape: AssetModelPropertyBindingValue, location_name: "assetModelProperty"))
+    DataBindingValue.add_member(:asset_property, Shapes::ShapeRef.new(shape: AssetPropertyBindingValue, location_name: "assetProperty"))
+    DataBindingValue.struct_class = Types::DataBindingValue
+
+    DataBindingValueFilter.add_member(:asset, Shapes::ShapeRef.new(shape: AssetBindingValueFilter, location_name: "asset"))
+    DataBindingValueFilter.add_member(:asset_model, Shapes::ShapeRef.new(shape: AssetModelBindingValueFilter, location_name: "assetModel"))
+    DataBindingValueFilter.add_member(:asset_property, Shapes::ShapeRef.new(shape: AssetPropertyBindingValueFilter, location_name: "assetProperty"))
+    DataBindingValueFilter.add_member(:asset_model_property, Shapes::ShapeRef.new(shape: AssetModelPropertyBindingValueFilter, location_name: "assetModelProperty"))
+    DataBindingValueFilter.struct_class = Types::DataBindingValueFilter
+
     DataSetReference.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: String, location_name: "datasetArn"))
     DataSetReference.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     DataSetReference.struct_class = Types::DataSetReference
@@ -1303,13 +1461,20 @@ module Aws::IoTSiteWise
     DeleteAssetResponse.add_member(:asset_status, Shapes::ShapeRef.new(shape: AssetStatus, required: true, location_name: "assetStatus"))
     DeleteAssetResponse.struct_class = Types::DeleteAssetResponse
 
+    DeleteComputationModelRequest.add_member(:computation_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "computationModelId"))
+    DeleteComputationModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    DeleteComputationModelRequest.struct_class = Types::DeleteComputationModelRequest
+
+    DeleteComputationModelResponse.add_member(:computation_model_status, Shapes::ShapeRef.new(shape: ComputationModelStatus, required: true, location_name: "computationModelStatus"))
+    DeleteComputationModelResponse.struct_class = Types::DeleteComputationModelResponse
+
     DeleteDashboardRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "dashboardId"))
     DeleteDashboardRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteDashboardRequest.struct_class = Types::DeleteDashboardRequest
 
     DeleteDashboardResponse.struct_class = Types::DeleteDashboardResponse
 
-    DeleteDatasetRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "datasetId"))
+    DeleteDatasetRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "datasetId"))
     DeleteDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteDatasetRequest.struct_class = Types::DeleteDatasetRequest
 
@@ -1358,6 +1523,7 @@ module Aws::IoTSiteWise
     DescribeActionResponse.add_member(:action_definition_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "actionDefinitionId"))
     DescribeActionResponse.add_member(:action_payload, Shapes::ShapeRef.new(shape: ActionPayload, required: true, location_name: "actionPayload"))
     DescribeActionResponse.add_member(:execution_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "executionTime"))
+    DescribeActionResponse.add_member(:resolve_to, Shapes::ShapeRef.new(shape: ResolveTo, location_name: "resolveTo"))
     DescribeActionResponse.struct_class = Types::DescribeActionResponse
 
     DescribeAssetCompositeModelRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetId"))
@@ -1421,11 +1587,11 @@ module Aws::IoTSiteWise
     DescribeAssetPropertyRequest.struct_class = Types::DescribeAssetPropertyRequest
 
     DescribeAssetPropertyResponse.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetId"))
+    DescribeAssetPropertyResponse.add_member(:asset_external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "assetExternalId"))
     DescribeAssetPropertyResponse.add_member(:asset_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "assetName"))
     DescribeAssetPropertyResponse.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetModelId"))
     DescribeAssetPropertyResponse.add_member(:asset_property, Shapes::ShapeRef.new(shape: Property, location_name: "assetProperty"))
     DescribeAssetPropertyResponse.add_member(:composite_model, Shapes::ShapeRef.new(shape: CompositeModelProperty, location_name: "compositeModel"))
-    DescribeAssetPropertyResponse.add_member(:asset_external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "assetExternalId"))
     DescribeAssetPropertyResponse.struct_class = Types::DescribeAssetPropertyResponse
 
     DescribeAssetRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetId"))
@@ -1433,6 +1599,7 @@ module Aws::IoTSiteWise
     DescribeAssetRequest.struct_class = Types::DescribeAssetRequest
 
     DescribeAssetResponse.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetId"))
+    DescribeAssetResponse.add_member(:asset_external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "assetExternalId"))
     DescribeAssetResponse.add_member(:asset_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "assetArn"))
     DescribeAssetResponse.add_member(:asset_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "assetName"))
     DescribeAssetResponse.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetModelId"))
@@ -1444,7 +1611,6 @@ module Aws::IoTSiteWise
     DescribeAssetResponse.add_member(:asset_status, Shapes::ShapeRef.new(shape: AssetStatus, required: true, location_name: "assetStatus"))
     DescribeAssetResponse.add_member(:asset_description, Shapes::ShapeRef.new(shape: Description, location_name: "assetDescription"))
     DescribeAssetResponse.add_member(:asset_composite_model_summaries, Shapes::ShapeRef.new(shape: AssetCompositeModelSummaries, location_name: "assetCompositeModelSummaries"))
-    DescribeAssetResponse.add_member(:asset_external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "assetExternalId"))
     DescribeAssetResponse.struct_class = Types::DescribeAssetResponse
 
     DescribeBulkImportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "jobId"))
@@ -1463,6 +1629,32 @@ module Aws::IoTSiteWise
     DescribeBulkImportJobResponse.add_member(:delete_files_after_import, Shapes::ShapeRef.new(shape: DeleteFilesAfterImport, location_name: "deleteFilesAfterImport"))
     DescribeBulkImportJobResponse.struct_class = Types::DescribeBulkImportJobResponse
 
+    DescribeComputationModelExecutionSummaryRequest.add_member(:computation_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "computationModelId"))
+    DescribeComputationModelExecutionSummaryRequest.add_member(:resolve_to_resource_type, Shapes::ShapeRef.new(shape: ResolveToResourceType, location: "querystring", location_name: "resolveToResourceType"))
+    DescribeComputationModelExecutionSummaryRequest.add_member(:resolve_to_resource_id, Shapes::ShapeRef.new(shape: ID, location: "querystring", location_name: "resolveToResourceId"))
+    DescribeComputationModelExecutionSummaryRequest.struct_class = Types::DescribeComputationModelExecutionSummaryRequest
+
+    DescribeComputationModelExecutionSummaryResponse.add_member(:computation_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "computationModelId"))
+    DescribeComputationModelExecutionSummaryResponse.add_member(:resolve_to, Shapes::ShapeRef.new(shape: ResolveTo, location_name: "resolveTo"))
+    DescribeComputationModelExecutionSummaryResponse.add_member(:computation_model_execution_summary, Shapes::ShapeRef.new(shape: ComputationModelExecutionSummary, required: true, location_name: "computationModelExecutionSummary"))
+    DescribeComputationModelExecutionSummaryResponse.struct_class = Types::DescribeComputationModelExecutionSummaryResponse
+
+    DescribeComputationModelRequest.add_member(:computation_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "computationModelId"))
+    DescribeComputationModelRequest.struct_class = Types::DescribeComputationModelRequest
+
+    DescribeComputationModelResponse.add_member(:computation_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "computationModelId"))
+    DescribeComputationModelResponse.add_member(:computation_model_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "computationModelArn"))
+    DescribeComputationModelResponse.add_member(:computation_model_name, Shapes::ShapeRef.new(shape: RestrictedName, required: true, location_name: "computationModelName"))
+    DescribeComputationModelResponse.add_member(:computation_model_description, Shapes::ShapeRef.new(shape: RestrictedDescription, location_name: "computationModelDescription"))
+    DescribeComputationModelResponse.add_member(:computation_model_configuration, Shapes::ShapeRef.new(shape: ComputationModelConfiguration, required: true, location_name: "computationModelConfiguration"))
+    DescribeComputationModelResponse.add_member(:computation_model_data_binding, Shapes::ShapeRef.new(shape: ComputationModelDataBinding, required: true, location_name: "computationModelDataBinding"))
+    DescribeComputationModelResponse.add_member(:computation_model_creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "computationModelCreationDate"))
+    DescribeComputationModelResponse.add_member(:computation_model_last_update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "computationModelLastUpdateDate"))
+    DescribeComputationModelResponse.add_member(:computation_model_status, Shapes::ShapeRef.new(shape: ComputationModelStatus, required: true, location_name: "computationModelStatus"))
+    DescribeComputationModelResponse.add_member(:computation_model_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "computationModelVersion"))
+    DescribeComputationModelResponse.add_member(:action_definitions, Shapes::ShapeRef.new(shape: ActionDefinitions, required: true, location_name: "actionDefinitions"))
+    DescribeComputationModelResponse.struct_class = Types::DescribeComputationModelResponse
+
     DescribeDashboardRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "dashboardId"))
     DescribeDashboardRequest.struct_class = Types::DescribeDashboardRequest
 
@@ -1476,7 +1668,7 @@ module Aws::IoTSiteWise
     DescribeDashboardResponse.add_member(:dashboard_last_update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "dashboardLastUpdateDate"))
     DescribeDashboardResponse.struct_class = Types::DescribeDashboardResponse
 
-    DescribeDatasetRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "datasetId"))
+    DescribeDatasetRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "datasetId"))
     DescribeDatasetRequest.struct_class = Types::DescribeDatasetRequest
 
     DescribeDatasetResponse.add_member(:dataset_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "datasetId"))
@@ -1496,6 +1688,22 @@ module Aws::IoTSiteWise
     DescribeDefaultEncryptionConfigurationResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "kmsKeyArn"))
     DescribeDefaultEncryptionConfigurationResponse.add_member(:configuration_status, Shapes::ShapeRef.new(shape: ConfigurationStatus, required: true, location_name: "configurationStatus"))
     DescribeDefaultEncryptionConfigurationResponse.struct_class = Types::DescribeDefaultEncryptionConfigurationResponse
+
+    DescribeExecutionRequest.add_member(:execution_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "executionId"))
+    DescribeExecutionRequest.struct_class = Types::DescribeExecutionRequest
+
+    DescribeExecutionResponse.add_member(:execution_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "executionId"))
+    DescribeExecutionResponse.add_member(:action_type, Shapes::ShapeRef.new(shape: Name, location_name: "actionType"))
+    DescribeExecutionResponse.add_member(:target_resource, Shapes::ShapeRef.new(shape: TargetResource, required: true, location_name: "targetResource"))
+    DescribeExecutionResponse.add_member(:target_resource_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "targetResourceVersion"))
+    DescribeExecutionResponse.add_member(:resolve_to, Shapes::ShapeRef.new(shape: ResolveTo, location_name: "resolveTo"))
+    DescribeExecutionResponse.add_member(:execution_start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "executionStartTime"))
+    DescribeExecutionResponse.add_member(:execution_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "executionEndTime"))
+    DescribeExecutionResponse.add_member(:execution_status, Shapes::ShapeRef.new(shape: ExecutionStatus, required: true, location_name: "executionStatus"))
+    DescribeExecutionResponse.add_member(:execution_result, Shapes::ShapeRef.new(shape: ExecutionResult, location_name: "executionResult"))
+    DescribeExecutionResponse.add_member(:execution_details, Shapes::ShapeRef.new(shape: ExecutionDetails, location_name: "executionDetails"))
+    DescribeExecutionResponse.add_member(:execution_entity_version, Shapes::ShapeRef.new(shape: Version, location_name: "executionEntityVersion"))
+    DescribeExecutionResponse.struct_class = Types::DescribeExecutionResponse
 
     DescribeGatewayCapabilityConfigurationRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "gatewayId"))
     DescribeGatewayCapabilityConfigurationRequest.add_member(:capability_namespace, Shapes::ShapeRef.new(shape: CapabilityNamespace, required: true, location: "uri", location_name: "capabilityNamespace"))
@@ -1619,6 +1827,7 @@ module Aws::IoTSiteWise
     ExecuteActionRequest.add_member(:action_definition_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "actionDefinitionId"))
     ExecuteActionRequest.add_member(:action_payload, Shapes::ShapeRef.new(shape: ActionPayload, required: true, location_name: "actionPayload"))
     ExecuteActionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
+    ExecuteActionRequest.add_member(:resolve_to, Shapes::ShapeRef.new(shape: ResolveTo, location_name: "resolveTo"))
     ExecuteActionRequest.struct_class = Types::ExecuteActionRequest
 
     ExecuteActionResponse.add_member(:action_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "actionId"))
@@ -1634,6 +1843,28 @@ module Aws::IoTSiteWise
     ExecuteQueryResponse.add_member(:rows, Shapes::ShapeRef.new(shape: Rows, location_name: "rows"))
     ExecuteQueryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ExecuteQueryNextToken, location_name: "nextToken"))
     ExecuteQueryResponse.struct_class = Types::ExecuteQueryResponse
+
+    ExecutionDetails.key = Shapes::ShapeRef.new(shape: ExecutionDetailsKey)
+    ExecutionDetails.value = Shapes::ShapeRef.new(shape: ExecutionDetailsValue)
+
+    ExecutionResult.key = Shapes::ShapeRef.new(shape: ExecutionResultKey)
+    ExecutionResult.value = Shapes::ShapeRef.new(shape: ExecutionResultValue)
+
+    ExecutionStatus.add_member(:state, Shapes::ShapeRef.new(shape: ExecutionState, required: true, location_name: "state"))
+    ExecutionStatus.struct_class = Types::ExecutionStatus
+
+    ExecutionSummaries.member = Shapes::ShapeRef.new(shape: ExecutionSummary)
+
+    ExecutionSummary.add_member(:execution_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "executionId"))
+    ExecutionSummary.add_member(:action_type, Shapes::ShapeRef.new(shape: Name, location_name: "actionType"))
+    ExecutionSummary.add_member(:target_resource, Shapes::ShapeRef.new(shape: TargetResource, required: true, location_name: "targetResource"))
+    ExecutionSummary.add_member(:target_resource_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "targetResourceVersion"))
+    ExecutionSummary.add_member(:resolve_to, Shapes::ShapeRef.new(shape: ResolveTo, location_name: "resolveTo"))
+    ExecutionSummary.add_member(:execution_start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "executionStartTime"))
+    ExecutionSummary.add_member(:execution_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "executionEndTime"))
+    ExecutionSummary.add_member(:execution_status, Shapes::ShapeRef.new(shape: ExecutionStatus, required: true, location_name: "executionStatus"))
+    ExecutionSummary.add_member(:execution_entity_version, Shapes::ShapeRef.new(shape: Version, location_name: "executionEntityVersion"))
+    ExecutionSummary.struct_class = Types::ExecutionSummary
 
     ExpressionVariable.add_member(:name, Shapes::ShapeRef.new(shape: VariableName, required: true, location_name: "name"))
     ExpressionVariable.add_member(:value, Shapes::ShapeRef.new(shape: VariableValue, required: true, location_name: "value"))
@@ -1830,9 +2061,11 @@ module Aws::IoTSiteWise
     ListAccessPoliciesResponse.struct_class = Types::ListAccessPoliciesResponse
 
     ListActionsRequest.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: TargetResourceType, required: true, location: "querystring", location_name: "targetResourceType"))
-    ListActionsRequest.add_member(:target_resource_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "querystring", location_name: "targetResourceId"))
+    ListActionsRequest.add_member(:target_resource_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "querystring", location_name: "targetResourceId"))
     ListActionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListActionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListActionsRequest.add_member(:resolve_to_resource_type, Shapes::ShapeRef.new(shape: ResolveToResourceType, location: "querystring", location_name: "resolveToResourceType"))
+    ListActionsRequest.add_member(:resolve_to_resource_id, Shapes::ShapeRef.new(shape: ID, location: "querystring", location_name: "resolveToResourceId"))
     ListActionsRequest.struct_class = Types::ListActionsRequest
 
     ListActionsResponse.add_member(:action_summaries, Shapes::ShapeRef.new(shape: ActionSummaries, required: true, location_name: "actionSummaries"))
@@ -1931,6 +2164,33 @@ module Aws::IoTSiteWise
     ListCompositionRelationshipsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListCompositionRelationshipsResponse.struct_class = Types::ListCompositionRelationshipsResponse
 
+    ListComputationModelDataBindingUsagesRequest.add_member(:data_binding_value_filter, Shapes::ShapeRef.new(shape: DataBindingValueFilter, required: true, location_name: "dataBindingValueFilter"))
+    ListComputationModelDataBindingUsagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListComputationModelDataBindingUsagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListComputationModelDataBindingUsagesRequest.struct_class = Types::ListComputationModelDataBindingUsagesRequest
+
+    ListComputationModelDataBindingUsagesResponse.add_member(:data_binding_usage_summaries, Shapes::ShapeRef.new(shape: ComputationModelDataBindingUsageSummaries, required: true, location_name: "dataBindingUsageSummaries"))
+    ListComputationModelDataBindingUsagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListComputationModelDataBindingUsagesResponse.struct_class = Types::ListComputationModelDataBindingUsagesResponse
+
+    ListComputationModelResolveToResourcesRequest.add_member(:computation_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "computationModelId"))
+    ListComputationModelResolveToResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListComputationModelResolveToResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListComputationModelResolveToResourcesRequest.struct_class = Types::ListComputationModelResolveToResourcesRequest
+
+    ListComputationModelResolveToResourcesResponse.add_member(:computation_model_resolve_to_resource_summaries, Shapes::ShapeRef.new(shape: ComputationModelResolveToResourceSummaries, required: true, location_name: "computationModelResolveToResourceSummaries"))
+    ListComputationModelResolveToResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListComputationModelResolveToResourcesResponse.struct_class = Types::ListComputationModelResolveToResourcesResponse
+
+    ListComputationModelsRequest.add_member(:computation_model_type, Shapes::ShapeRef.new(shape: ComputationModelType, location: "querystring", location_name: "computationModelType"))
+    ListComputationModelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListComputationModelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListComputationModelsRequest.struct_class = Types::ListComputationModelsRequest
+
+    ListComputationModelsResponse.add_member(:computation_model_summaries, Shapes::ShapeRef.new(shape: ComputationModelSummaries, required: true, location_name: "computationModelSummaries"))
+    ListComputationModelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListComputationModelsResponse.struct_class = Types::ListComputationModelsResponse
+
     ListDashboardsRequest.add_member(:project_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "querystring", location_name: "projectId"))
     ListDashboardsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListDashboardsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -1948,6 +2208,19 @@ module Aws::IoTSiteWise
     ListDatasetsResponse.add_member(:dataset_summaries, Shapes::ShapeRef.new(shape: DatasetSummaries, required: true, location_name: "datasetSummaries"))
     ListDatasetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListDatasetsResponse.struct_class = Types::ListDatasetsResponse
+
+    ListExecutionsRequest.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: TargetResourceType, required: true, location: "querystring", location_name: "targetResourceType"))
+    ListExecutionsRequest.add_member(:target_resource_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "querystring", location_name: "targetResourceId"))
+    ListExecutionsRequest.add_member(:resolve_to_resource_type, Shapes::ShapeRef.new(shape: ResolveToResourceType, location: "querystring", location_name: "resolveToResourceType"))
+    ListExecutionsRequest.add_member(:resolve_to_resource_id, Shapes::ShapeRef.new(shape: ID, location: "querystring", location_name: "resolveToResourceId"))
+    ListExecutionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListExecutionsRequest.add_member(:action_type, Shapes::ShapeRef.new(shape: Name, location: "querystring", location_name: "actionType"))
+    ListExecutionsRequest.struct_class = Types::ListExecutionsRequest
+
+    ListExecutionsResponse.add_member(:execution_summaries, Shapes::ShapeRef.new(shape: ExecutionSummaries, required: true, location_name: "executionSummaries"))
+    ListExecutionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListExecutionsResponse.struct_class = Types::ListExecutionsResponse
 
     ListGatewaysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListGatewaysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -2005,6 +2278,9 @@ module Aws::IoTSiteWise
 
     LoggingOptions.add_member(:level, Shapes::ShapeRef.new(shape: LoggingLevel, required: true, location_name: "level"))
     LoggingOptions.struct_class = Types::LoggingOptions
+
+    MatchedDataBinding.add_member(:value, Shapes::ShapeRef.new(shape: DataBindingValue, required: true, location_name: "value"))
+    MatchedDataBinding.struct_class = Types::MatchedDataBinding
 
     Measurement.add_member(:processing_config, Shapes::ShapeRef.new(shape: MeasurementProcessingConfig, location_name: "processingConfig"))
     Measurement.struct_class = Types::Measurement
@@ -2079,6 +2355,7 @@ module Aws::IoTSiteWise
     ProjectSummary.struct_class = Types::ProjectSummary
 
     Property.add_member(:id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "id"))
+    Property.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     Property.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     Property.add_member(:alias, Shapes::ShapeRef.new(shape: PropertyAlias, location_name: "alias"))
     Property.add_member(:notification, Shapes::ShapeRef.new(shape: PropertyNotification, location_name: "notification"))
@@ -2086,7 +2363,6 @@ module Aws::IoTSiteWise
     Property.add_member(:unit, Shapes::ShapeRef.new(shape: PropertyUnit, location_name: "unit"))
     Property.add_member(:type, Shapes::ShapeRef.new(shape: PropertyType, location_name: "type"))
     Property.add_member(:path, Shapes::ShapeRef.new(shape: AssetPropertyPath, location_name: "path"))
-    Property.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     Property.struct_class = Types::Property
 
     PropertyNotification.add_member(:topic, Shapes::ShapeRef.new(shape: PropertyNotificationTopic, required: true, location_name: "topic"))
@@ -2152,6 +2428,9 @@ module Aws::IoTSiteWise
     Reference.add_member(:dataset, Shapes::ShapeRef.new(shape: DataSetReference, location_name: "dataset"))
     Reference.struct_class = Types::Reference
 
+    ResolveTo.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetId"))
+    ResolveTo.struct_class = Types::ResolveTo
+
     Resource.add_member(:portal, Shapes::ShapeRef.new(shape: PortalResource, location_name: "portal"))
     Resource.add_member(:project, Shapes::ShapeRef.new(shape: ProjectResource, location_name: "project"))
     Resource.struct_class = Types::Resource
@@ -2208,7 +2487,8 @@ module Aws::IoTSiteWise
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
-    TargetResource.add_member(:asset_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location_name: "assetId"))
+    TargetResource.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, location_name: "assetId"))
+    TargetResource.add_member(:computation_model_id, Shapes::ShapeRef.new(shape: ID, location_name: "computationModelId"))
     TargetResource.struct_class = Types::TargetResource
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
@@ -2312,14 +2592,25 @@ module Aws::IoTSiteWise
     UpdateAssetPropertyRequest.struct_class = Types::UpdateAssetPropertyRequest
 
     UpdateAssetRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetId"))
+    UpdateAssetRequest.add_member(:asset_external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "assetExternalId"))
     UpdateAssetRequest.add_member(:asset_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "assetName"))
     UpdateAssetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateAssetRequest.add_member(:asset_description, Shapes::ShapeRef.new(shape: Description, location_name: "assetDescription"))
-    UpdateAssetRequest.add_member(:asset_external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "assetExternalId"))
     UpdateAssetRequest.struct_class = Types::UpdateAssetRequest
 
     UpdateAssetResponse.add_member(:asset_status, Shapes::ShapeRef.new(shape: AssetStatus, required: true, location_name: "assetStatus"))
     UpdateAssetResponse.struct_class = Types::UpdateAssetResponse
+
+    UpdateComputationModelRequest.add_member(:computation_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "computationModelId"))
+    UpdateComputationModelRequest.add_member(:computation_model_name, Shapes::ShapeRef.new(shape: RestrictedName, required: true, location_name: "computationModelName"))
+    UpdateComputationModelRequest.add_member(:computation_model_description, Shapes::ShapeRef.new(shape: RestrictedDescription, location_name: "computationModelDescription"))
+    UpdateComputationModelRequest.add_member(:computation_model_configuration, Shapes::ShapeRef.new(shape: ComputationModelConfiguration, required: true, location_name: "computationModelConfiguration"))
+    UpdateComputationModelRequest.add_member(:computation_model_data_binding, Shapes::ShapeRef.new(shape: ComputationModelDataBinding, required: true, location_name: "computationModelDataBinding"))
+    UpdateComputationModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    UpdateComputationModelRequest.struct_class = Types::UpdateComputationModelRequest
+
+    UpdateComputationModelResponse.add_member(:computation_model_status, Shapes::ShapeRef.new(shape: ComputationModelStatus, required: true, location_name: "computationModelStatus"))
+    UpdateComputationModelResponse.struct_class = Types::UpdateComputationModelResponse
 
     UpdateDashboardRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "dashboardId"))
     UpdateDashboardRequest.add_member(:dashboard_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "dashboardName"))
@@ -2330,14 +2621,14 @@ module Aws::IoTSiteWise
 
     UpdateDashboardResponse.struct_class = Types::UpdateDashboardResponse
 
-    UpdateDatasetRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "datasetId"))
+    UpdateDatasetRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "datasetId"))
     UpdateDatasetRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: RestrictedName, required: true, location_name: "datasetName"))
     UpdateDatasetRequest.add_member(:dataset_description, Shapes::ShapeRef.new(shape: RestrictedDescription, location_name: "datasetDescription"))
     UpdateDatasetRequest.add_member(:dataset_source, Shapes::ShapeRef.new(shape: DatasetSource, required: true, location_name: "datasetSource"))
     UpdateDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateDatasetRequest.struct_class = Types::UpdateDatasetRequest
 
-    UpdateDatasetResponse.add_member(:dataset_id, Shapes::ShapeRef.new(shape: CustomID, location_name: "datasetId"))
+    UpdateDatasetResponse.add_member(:dataset_id, Shapes::ShapeRef.new(shape: ID, location_name: "datasetId"))
     UpdateDatasetResponse.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "datasetArn"))
     UpdateDatasetResponse.add_member(:dataset_status, Shapes::ShapeRef.new(shape: DatasetStatus, location_name: "datasetStatus"))
     UpdateDatasetResponse.struct_class = Types::UpdateDatasetResponse
@@ -2655,6 +2946,24 @@ module Aws::IoTSiteWise
         o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
       end)
 
+      api.add_operation(:create_computation_model, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateComputationModel"
+        o.http_method = "POST"
+        o.http_request_uri = "/computation-models"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateComputationModelRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateComputationModelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
+      end)
+
       api.add_operation(:create_dashboard, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDashboard"
         o.http_method = "POST"
@@ -2800,6 +3109,22 @@ module Aws::IoTSiteWise
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+      end)
+
+      api.add_operation(:delete_computation_model, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteComputationModel"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/computation-models/{computationModelId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteComputationModelRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteComputationModelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
       end)
 
       api.add_operation(:delete_dashboard, Seahorse::Model::Operation.new.tap do |o|
@@ -3016,6 +3341,36 @@ module Aws::IoTSiteWise
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:describe_computation_model, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeComputationModel"
+        o.http_method = "GET"
+        o.http_request_uri = "/computation-models/{computationModelId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DescribeComputationModelRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeComputationModelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:describe_computation_model_execution_summary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeComputationModelExecutionSummary"
+        o.http_method = "GET"
+        o.http_request_uri = "/computation-models/{computationModelId}/execution-summary"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DescribeComputationModelExecutionSummaryRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeComputationModelExecutionSummaryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:describe_dashboard, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeDashboard"
         o.http_method = "GET"
@@ -3056,6 +3411,21 @@ module Aws::IoTSiteWise
         o.input = Shapes::ShapeRef.new(shape: DescribeDefaultEncryptionConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeDefaultEncryptionConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:describe_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeExecution"
+        o.http_method = "GET"
+        o.http_request_uri = "/executions/{executionId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DescribeExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
@@ -3333,10 +3703,10 @@ module Aws::IoTSiteWise
         o.output = Shapes::ShapeRef.new(shape: InvokeAssistantResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
       end)
 
@@ -3569,6 +3939,67 @@ module Aws::IoTSiteWise
         )
       end)
 
+      api.add_operation(:list_computation_model_data_binding_usages, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListComputationModelDataBindingUsages"
+        o.http_method = "POST"
+        o.http_request_uri = "/computation-models/data-binding-usages"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListComputationModelDataBindingUsagesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListComputationModelDataBindingUsagesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_computation_model_resolve_to_resources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListComputationModelResolveToResources"
+        o.http_method = "GET"
+        o.http_request_uri = "/computation-models/{computationModelId}/resolve-to-resources"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListComputationModelResolveToResourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListComputationModelResolveToResourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_computation_models, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListComputationModels"
+        o.http_method = "GET"
+        o.http_request_uri = "/computation-models"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListComputationModelsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListComputationModelsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_dashboards, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDashboards"
         o.http_method = "GET"
@@ -3600,6 +4031,27 @@ module Aws::IoTSiteWise
         o.output = Shapes::ShapeRef.new(shape: ListDatasetsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_executions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListExecutions"
+        o.http_method = "GET"
+        o.http_request_uri = "/executions"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListExecutionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListExecutionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -3898,6 +4350,24 @@ module Aws::IoTSiteWise
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
+      end)
+
+      api.add_operation(:update_computation_model, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateComputationModel"
+        o.http_method = "POST"
+        o.http_request_uri = "/computation-models/{computationModelId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateComputationModelRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateComputationModelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
       end)
 

@@ -501,6 +501,7 @@ module Aws::EMR
     Cluster.add_member(:os_release_label, Shapes::ShapeRef.new(shape: String, location_name: "OSReleaseLabel"))
     Cluster.add_member(:ebs_root_volume_iops, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeIops"))
     Cluster.add_member(:ebs_root_volume_throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeThroughput"))
+    Cluster.add_member(:extended_support, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "ExtendedSupport"))
     Cluster.struct_class = Types::Cluster
 
     ClusterStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: ClusterStateChangeReasonCode, location_name: "Code"))
@@ -1225,9 +1226,11 @@ module Aws::EMR
 
     ModifyClusterInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterId"))
     ModifyClusterInput.add_member(:step_concurrency_level, Shapes::ShapeRef.new(shape: Integer, location_name: "StepConcurrencyLevel"))
+    ModifyClusterInput.add_member(:extended_support, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "ExtendedSupport"))
     ModifyClusterInput.struct_class = Types::ModifyClusterInput
 
     ModifyClusterOutput.add_member(:step_concurrency_level, Shapes::ShapeRef.new(shape: Integer, location_name: "StepConcurrencyLevel"))
+    ModifyClusterOutput.add_member(:extended_support, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "ExtendedSupport"))
     ModifyClusterOutput.struct_class = Types::ModifyClusterOutput
 
     ModifyInstanceFleetInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
@@ -1419,6 +1422,7 @@ module Aws::EMR
     RunJobFlowInput.add_member(:os_release_label, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "OSReleaseLabel"))
     RunJobFlowInput.add_member(:ebs_root_volume_iops, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeIops"))
     RunJobFlowInput.add_member(:ebs_root_volume_throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeThroughput"))
+    RunJobFlowInput.add_member(:extended_support, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "ExtendedSupport"))
     RunJobFlowInput.struct_class = Types::RunJobFlowInput
 
     RunJobFlowOutput.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "JobFlowId"))

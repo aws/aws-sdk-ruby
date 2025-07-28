@@ -155,7 +155,7 @@ module Aws::DirectConnect
     end
 
     class ConfirmPrivateVirtualInterfaceResponse
-      attr_accessor virtual_interface_state: ("confirming" | "verifying" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+      attr_accessor virtual_interface_state: ("confirming" | "verifying" | "pending" | "available" | "down" | "testing" | "deleting" | "deleted" | "rejected" | "unknown")
       SENSITIVE: []
     end
 
@@ -165,7 +165,7 @@ module Aws::DirectConnect
     end
 
     class ConfirmPublicVirtualInterfaceResponse
-      attr_accessor virtual_interface_state: ("confirming" | "verifying" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+      attr_accessor virtual_interface_state: ("confirming" | "verifying" | "pending" | "available" | "down" | "testing" | "deleting" | "deleted" | "rejected" | "unknown")
       SENSITIVE: []
     end
 
@@ -176,7 +176,7 @@ module Aws::DirectConnect
     end
 
     class ConfirmTransitVirtualInterfaceResponse
-      attr_accessor virtual_interface_state: ("confirming" | "verifying" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+      attr_accessor virtual_interface_state: ("confirming" | "verifying" | "pending" | "available" | "down" | "testing" | "deleting" | "deleted" | "rejected" | "unknown")
       SENSITIVE: []
     end
 
@@ -203,6 +203,7 @@ module Aws::DirectConnect
       attr_accessor port_encryption_status: ::String
       attr_accessor encryption_mode: ::String
       attr_accessor mac_sec_keys: ::Array[Types::MacSecKey]
+      attr_accessor partner_interconnect_mac_sec_capable: bool
       SENSITIVE: []
     end
 
@@ -279,6 +280,7 @@ module Aws::DirectConnect
       attr_accessor lag_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor provider_name: ::String
+      attr_accessor request_mac_sec: bool
       SENSITIVE: []
     end
 
@@ -395,7 +397,7 @@ module Aws::DirectConnect
     end
 
     class DeleteVirtualInterfaceResponse
-      attr_accessor virtual_interface_state: ("confirming" | "verifying" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+      attr_accessor virtual_interface_state: ("confirming" | "verifying" | "pending" | "available" | "down" | "testing" | "deleting" | "deleted" | "rejected" | "unknown")
       SENSITIVE: []
     end
 
@@ -644,6 +646,10 @@ module Aws::DirectConnect
       attr_accessor has_logical_redundancy: ("unknown" | "yes" | "no")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor provider_name: ::String
+      attr_accessor mac_sec_capable: bool
+      attr_accessor port_encryption_status: ::String
+      attr_accessor encryption_mode: ::String
+      attr_accessor mac_sec_keys: ::Array[Types::MacSecKey]
       SENSITIVE: []
     end
 
@@ -960,7 +966,7 @@ module Aws::DirectConnect
       attr_accessor amazon_address: ::String
       attr_accessor customer_address: ::String
       attr_accessor address_family: ("ipv4" | "ipv6")
-      attr_accessor virtual_interface_state: ("confirming" | "verifying" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+      attr_accessor virtual_interface_state: ("confirming" | "verifying" | "pending" | "available" | "down" | "testing" | "deleting" | "deleted" | "rejected" | "unknown")
       attr_accessor customer_router_config: ::String
       attr_accessor mtu: ::Integer
       attr_accessor jumbo_frame_capable: bool

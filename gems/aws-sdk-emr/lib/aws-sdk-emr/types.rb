@@ -794,6 +794,10 @@ module Aws::EMR
     #   in Amazon EMR releases 6.15.0 and later.
     #   @return [Integer]
     #
+    # @!attribute [rw] extended_support
+    #   Reserved.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -830,7 +834,8 @@ module Aws::EMR
       :placement_groups,
       :os_release_label,
       :ebs_root_volume_iops,
-      :ebs_root_volume_throughput)
+      :ebs_root_volume_throughput,
+      :extended_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1090,7 +1095,6 @@ module Aws::EMR
     #
     # @!attribute [rw] profiler_type
     #   The profiler type for the persistent application user interface.
-    #   Valid values are SHS, TEZUI, or YTS.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CreatePersistentAppUIInput AWS API Documentation
@@ -4729,11 +4733,16 @@ module Aws::EMR
     #   information see Step$ActionOnFailure.
     #   @return [Integer]
     #
+    # @!attribute [rw] extended_support
+    #   Reserved.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyClusterInput AWS API Documentation
     #
     class ModifyClusterInput < Struct.new(
       :cluster_id,
-      :step_concurrency_level)
+      :step_concurrency_level,
+      :extended_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4742,10 +4751,15 @@ module Aws::EMR
     #   The number of steps that can be executed concurrently.
     #   @return [Integer]
     #
+    # @!attribute [rw] extended_support
+    #   Reserved.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyClusterOutput AWS API Documentation
     #
     class ModifyClusterOutput < Struct.new(
-      :step_concurrency_level)
+      :step_concurrency_level,
+      :extended_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5888,6 +5902,10 @@ module Aws::EMR
     #   in Amazon EMR releases 6.15.0 and later.
     #   @return [Integer]
     #
+    # @!attribute [rw] extended_support
+    #   Reserved.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowInput AWS API Documentation
     #
     class RunJobFlowInput < Struct.new(
@@ -5921,7 +5939,8 @@ module Aws::EMR
       :auto_termination_policy,
       :os_release_label,
       :ebs_root_volume_iops,
-      :ebs_root_volume_throughput)
+      :ebs_root_volume_throughput,
+      :extended_support)
       SENSITIVE = []
       include Aws::Structure
     end

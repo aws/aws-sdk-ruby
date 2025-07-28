@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2025-07-25)
+------------------
+
+* Feature - This release adds support for specifying a preferred input for channels using CMAF ingest.
+
+1.44.0 (2025-07-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.43.0 (2025-07-16)
 ------------------
 

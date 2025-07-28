@@ -110,10 +110,15 @@ module Aws::IoTSiteWise
     #   The resource the action will be taken on.
     #   @return [Types::TargetResource]
     #
+    # @!attribute [rw] resolve_to
+    #   The detailed resource this action resolves to.
+    #   @return [Types::ResolveTo]
+    #
     class ActionSummary < Struct.new(
       :action_id,
       :action_definition_id,
-      :target_resource)
+      :target_resource,
+      :resolve_to)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -215,6 +220,21 @@ module Aws::IoTSiteWise
     class Alarms < Struct.new(
       :alarm_role_arn,
       :notification_lambda_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter used to match data bindings based on a specific asset. This
+    # filter identifies all computation models referencing a particular
+    # asset in their data bindings.
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset to filter data bindings by. Only data bindings
+    #   referencing this specific asset are matched.
+    #   @return [String]
+    #
+    class AssetBindingValueFilter < Struct.new(
+      :asset_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -362,16 +382,6 @@ module Aws::IoTSiteWise
     #   The ID of the hierarchy. This ID is a `hierarchyId`.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The hierarchy name provided in the [CreateAssetModel][1] or
-    #   [UpdateAssetModel][2] API operation.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html
-    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html
-    #   @return [String]
-    #
     # @!attribute [rw] external_id
     #   The external ID of the hierarchy, if it has one. When you update an
     #   asset hierarchy, you may assign an external ID if it doesn't
@@ -384,10 +394,20 @@ module Aws::IoTSiteWise
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The hierarchy name provided in the [CreateAssetModel][1] or
+    #   [UpdateAssetModel][2] API operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html
+    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html
+    #   @return [String]
+    #
     class AssetHierarchy < Struct.new(
       :id,
-      :name,
-      :external_id)
+      :external_id,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -406,6 +426,21 @@ module Aws::IoTSiteWise
     class AssetHierarchyInfo < Struct.new(
       :parent_asset_id,
       :child_asset_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter used to match data bindings based on a specific asset model.
+    # This filter identifies all computation models referencing a particular
+    # asset model in their data bindings.
+    #
+    # @!attribute [rw] asset_model_id
+    #   The ID of the asset model to filter data bindings by. Only data
+    #   bindings referemncing this specific asset model are matched.
+    #   @return [String]
+    #
+    class AssetModelBindingValueFilter < Struct.new(
+      :asset_model_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -780,6 +815,46 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # Contains information about an `assetModelProperty` binding value.
+    #
+    # @!attribute [rw] asset_model_id
+    #   The ID of the asset model, in UUID format.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_id
+    #   The ID of the asset model property used in data binding value.
+    #   @return [String]
+    #
+    class AssetModelPropertyBindingValue < Struct.new(
+      :asset_model_id,
+      :property_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter used to match data bindings based on a specific asset model
+    # property. This filter identifies all computation models that reference
+    # a particular property of an asset model in their data bindings.
+    #
+    # @!attribute [rw] asset_model_id
+    #   The ID of the asset model containing the filter property. This
+    #   identifies the specific asset model that contains the property of
+    #   interest.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_id
+    #   The ID of the property within the asset model to filter by. Only
+    #   data bindings referencing this specific property of the specified
+    #   asset model are matched.
+    #   @return [String]
+    #
+    class AssetModelPropertyBindingValueFilter < Struct.new(
+      :asset_model_id,
+      :property_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains an asset model property definition. This property definition
     # is applied to all assets created from the asset model.
     #
@@ -1027,6 +1102,15 @@ module Aws::IoTSiteWise
     #   The ID of the asset property.
     #   @return [String]
     #
+    # @!attribute [rw] external_id
+    #   The external ID of the asset property. For more information, see
+    #   [Using external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the property.
     #   @return [String]
@@ -1069,25 +1153,61 @@ module Aws::IoTSiteWise
     #   The structured path to the property from the root of the asset.
     #   @return [Array<Types::AssetPropertyPathSegment>]
     #
-    # @!attribute [rw] external_id
-    #   The external ID of the asset property. For more information, see
-    #   [Using external IDs][1] in the *IoT SiteWise User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
-    #   @return [String]
-    #
     class AssetProperty < Struct.new(
       :id,
+      :external_id,
       :name,
       :alias,
       :notification,
       :data_type,
       :data_type_spec,
       :unit,
-      :path,
-      :external_id)
+      :path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a data binding value referencing a specific asset property.
+    # It's used to bind computation model variables to actual asset
+    # property values for processing.
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset containing the property. This identifies the
+    #   specific asset instance's property value used in the computation
+    #   model.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_id
+    #   The ID of the property within the asset. This identifies the
+    #   specific property's value used in the computation model.
+    #   @return [String]
+    #
+    class AssetPropertyBindingValue < Struct.new(
+      :asset_id,
+      :property_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter used to match data bindings based on a specific asset
+    # property. This filter helps identify all computation models
+    # referencing a particular property of an asset in their data bindings.
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset containing the property to filter by. This
+    #   identifies the specific asset instance containing the property of
+    #   interest.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_id
+    #   The ID of the property within the asset to filter by. Only data
+    #   bindings referencing this specific property of the specified asset
+    #   are matched.
+    #   @return [String]
+    #
+    class AssetPropertyBindingValueFilter < Struct.new(
+      :asset_id,
+      :property_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1113,6 +1233,15 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] id
     #   The ID of the property.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   The external ID of the property. For more information, see [Using
+    #   external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
     #   @return [String]
     #
     # @!attribute [rw] alias
@@ -1151,23 +1280,14 @@ module Aws::IoTSiteWise
     #   The structured path to the property from the root of the asset.
     #   @return [Array<Types::AssetPropertyPathSegment>]
     #
-    # @!attribute [rw] external_id
-    #   The external ID of the property. For more information, see [Using
-    #   external IDs][1] in the *IoT SiteWise User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
-    #   @return [String]
-    #
     class AssetPropertySummary < Struct.new(
       :id,
+      :external_id,
       :alias,
       :unit,
       :notification,
       :asset_composite_model_id,
-      :path,
-      :external_id)
+      :path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1249,6 +1369,15 @@ module Aws::IoTSiteWise
     #   The ID of the asset, in UUID format.
     #   @return [String]
     #
+    # @!attribute [rw] external_id
+    #   The external ID of the asset. For more information, see [Using
+    #   external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
+    #   @return [String]
+    #
     # @!attribute [rw] arn
     #   The [ARN][1] of the asset, which has the following format.
     #
@@ -1288,17 +1417,9 @@ module Aws::IoTSiteWise
     #   A description for the asset.
     #   @return [String]
     #
-    # @!attribute [rw] external_id
-    #   The external ID of the asset. For more information, see [Using
-    #   external IDs][1] in the *IoT SiteWise User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
-    #   @return [String]
-    #
     class AssetSummary < Struct.new(
       :id,
+      :external_id,
       :arn,
       :name,
       :asset_model_id,
@@ -1306,8 +1427,7 @@ module Aws::IoTSiteWise
       :last_update_date,
       :status,
       :hierarchies,
-      :description,
-      :external_id)
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1419,6 +1539,15 @@ module Aws::IoTSiteWise
     #   The ID of the asset, in UUID format.
     #   @return [String]
     #
+    # @!attribute [rw] external_id
+    #   The external ID of the asset. For more information, see [Using
+    #   external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
+    #   @return [String]
+    #
     # @!attribute [rw] arn
     #   The [ARN][1] of the asset, which has the following format.
     #
@@ -1458,17 +1587,9 @@ module Aws::IoTSiteWise
     #   A description for the asset.
     #   @return [String]
     #
-    # @!attribute [rw] external_id
-    #   The external ID of the asset. For more information, see [Using
-    #   external IDs][1] in the *IoT SiteWise User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
-    #   @return [String]
-    #
     class AssociatedAssetsSummary < Struct.new(
       :id,
+      :external_id,
       :arn,
       :name,
       :asset_model_id,
@@ -1476,8 +1597,7 @@ module Aws::IoTSiteWise
       :last_update_date,
       :status,
       :hierarchies,
-      :description,
-      :external_id)
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2460,6 +2580,173 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # Contains the configuration of the type of anomaly detection
+    # computation model.
+    #
+    # @!attribute [rw] input_properties
+    #   Define the variable name associated with input properties, with the
+    #   following format `${VariableName}`.
+    #   @return [String]
+    #
+    # @!attribute [rw] result_property
+    #   Define the variable name associated with the result property, and
+    #   the following format `${VariableName}`.
+    #   @return [String]
+    #
+    class ComputationModelAnomalyDetectionConfiguration < Struct.new(
+      :input_properties,
+      :result_property)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the computation model.
+    #
+    # @!attribute [rw] anomaly_detection
+    #   The configuration for the anomaly detection type of computation
+    #   model.
+    #   @return [Types::ComputationModelAnomalyDetectionConfiguration]
+    #
+    class ComputationModelConfiguration < Struct.new(
+      :anomaly_detection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of how a specific data binding is used across computation
+    # models. This tracks dependencies between data sources and computation
+    # models, allowing you to understand the impact of changes to data
+    # sources.
+    #
+    # @!attribute [rw] computation_model_ids
+    #   The list of computation model IDs that use this data binding. This
+    #   allows identification of all computation models affected by changes
+    #   to the referenced data source.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] matched_data_binding
+    #   The data binding matched by the filter criteria. Contains details
+    #   about specific data binding values used by the computation models.
+    #   @return [Types::MatchedDataBinding]
+    #
+    class ComputationModelDataBindingUsageSummary < Struct.new(
+      :computation_model_ids,
+      :matched_data_binding)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains computation model data binding value information, which can
+    # be one of `assetModelProperty`, `list`.
+    #
+    # @!attribute [rw] asset_model_property
+    #   Specifies an asset model property data binding value.
+    #   @return [Types::AssetModelPropertyBindingValue]
+    #
+    # @!attribute [rw] asset_property
+    #   The asset property value used for computation model data binding.
+    #   @return [Types::AssetPropertyBindingValue]
+    #
+    # @!attribute [rw] list
+    #   Specifies a list of data binding value.
+    #   @return [Array<Types::ComputationModelDataBindingValue>]
+    #
+    class ComputationModelDataBindingValue < Struct.new(
+      :asset_model_property,
+      :asset_property,
+      :list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the resource that a computation model resolves to.
+    #
+    # @!attribute [rw] resolve_to
+    #   The detailed resource this execution summary resolves to.
+    #   @return [Types::ResolveTo]
+    #
+    class ComputationModelResolveToResourceSummary < Struct.new(
+      :resolve_to)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains current status information for a computation model.
+    #
+    # @!attribute [rw] state
+    #   The current state of the computation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   Contains the details of an IoT SiteWise error.
+    #   @return [Types::ErrorDetails]
+    #
+    class ComputationModelStatus < Struct.new(
+      :state,
+      :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a summary of a computation model.
+    #
+    # @!attribute [rw] id
+    #   The ID of the computation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The [ARN][1] of the computation model, which has the following
+    #   format.
+    #
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:computation-model/${ComputationModelId}`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the computation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the computation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the computation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The model creation date, in Unix epoch time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_date
+    #   The time the model was last updated, in Unix epoch time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the computation model.
+    #   @return [Types::ComputationModelStatus]
+    #
+    # @!attribute [rw] version
+    #   The version of the computation model.
+    #   @return [String]
+    #
+    class ComputationModelSummary < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :description,
+      :type,
+      :creation_date,
+      :last_update_date,
+      :status,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the details of an IoT SiteWise configuration error.
     #
     # @!attribute [rw] code
@@ -2897,6 +3184,25 @@ module Aws::IoTSiteWise
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #   @return [String]
     #
+    # @!attribute [rw] asset_id
+    #   The ID to assign to the asset, if desired. IoT SiteWise
+    #   automatically generates a unique ID for you, so this parameter is
+    #   never required. However, if you prefer to supply your own ID
+    #   instead, you can specify it here in UUID format. If you specify your
+    #   own ID, it must be globally unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_external_id
+    #   An external ID to assign to the asset. The external ID must be
+    #   unique within your Amazon Web Services account. For more
+    #   information, see [Using external IDs][1] in the *IoT SiteWise User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   A unique case-sensitive identifier that you can provide to ensure
     #   the idempotency of the request. Don't reuse this client token if a
@@ -2920,33 +3226,14 @@ module Aws::IoTSiteWise
     #   A description for the asset.
     #   @return [String]
     #
-    # @!attribute [rw] asset_id
-    #   The ID to assign to the asset, if desired. IoT SiteWise
-    #   automatically generates a unique ID for you, so this parameter is
-    #   never required. However, if you prefer to supply your own ID
-    #   instead, you can specify it here in UUID format. If you specify your
-    #   own ID, it must be globally unique.
-    #   @return [String]
-    #
-    # @!attribute [rw] asset_external_id
-    #   An external ID to assign to the asset. The external ID must be
-    #   unique within your Amazon Web Services account. For more
-    #   information, see [Using external IDs][1] in the *IoT SiteWise User
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
-    #   @return [String]
-    #
     class CreateAssetRequest < Struct.new(
       :asset_name,
       :asset_model_id,
+      :asset_id,
+      :asset_external_id,
       :client_token,
       :tags,
-      :asset_description,
-      :asset_id,
-      :asset_external_id)
+      :asset_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3067,6 +3354,82 @@ module Aws::IoTSiteWise
       :job_id,
       :job_name,
       :job_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] computation_model_name
+    #   The name of the computation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] computation_model_description
+    #   The description of the computation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] computation_model_configuration
+    #   The configuration for the computation model.
+    #   @return [Types::ComputationModelConfiguration]
+    #
+    # @!attribute [rw] computation_model_data_binding
+    #   The data binding for the computation model. Key is a variable name
+    #   defined in configuration. Value is a
+    #   `ComputationModelDataBindingValue` referenced by the variable.
+    #   @return [Hash<String,Types::ComputationModelDataBindingValue>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs that contain metadata for the asset. For
+    #   more information, see [Tagging your IoT SiteWise resources][1] in
+    #   the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html
+    #   @return [Hash<String,String>]
+    #
+    class CreateComputationModelRequest < Struct.new(
+      :computation_model_name,
+      :computation_model_description,
+      :computation_model_configuration,
+      :computation_model_data_binding,
+      :client_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] computation_model_id
+    #   The ID of the computation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] computation_model_arn
+    #   The [ARN][1] of the computation model, which has the following
+    #   format.
+    #
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:computation-model/${ComputationModelId}`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] computation_model_status
+    #   The status of the computation model, containing a state (CREATING
+    #   after successfully calling this operation) and any error messages.
+    #   @return [Types::ComputationModelStatus]
+    #
+    class CreateComputationModelResponse < Struct.new(
+      :computation_model_id,
+      :computation_model_arn,
+      :computation_model_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3234,18 +3597,24 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] gateway_version
     #   The version of the gateway to create. Specify `3` to create an
-    #   MQTT-enabled, V3 gateway and `2` To create a Classic streams, V2
-    #   gateway. If the version isn't specified, a Classic streams, V2
-    #   gateway is created by default.
+    #   MQTT-enabled, V3 gateway and `2` to create a Classic streams, V2
+    #   gateway. If not specified, the default is `2` (Classic streams, V2
+    #   gateway).
     #
-    #   We recommend creating an MQTT-enabled, V3 gateway for self-hosted
-    #   gateways. SiteWise Edge gateways on Siemens Industrial Edge should
-    #   use gateway version `2`. For more information on gateway versions,
-    #   see [ Self-host a SiteWise Edge gateway with IoT Greengrass V2][1].
+    #   <note markdown="1"> When creating a V3 gateway (`gatewayVersion=3`) with the
+    #   `GreengrassV2` platform, you must also specify the
+    #   `coreDeviceOperatingSystem` parameter.
+    #
+    #    </note>
+    #
+    #   We recommend creating an MQTT-enabled gateway for self-hosted
+    #   gateways and Siemens Industrial Edge gateways. For more information
+    #   on gateway versions, see [Use Amazon Web Services IoT SiteWise Edge
+    #   Edge gateways][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gw-self-host-gg2.html
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gateways.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3591,6 +3960,61 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # Represents a value used in a data binding. It can be an asset property
+    # or an asset model property.
+    #
+    # @!attribute [rw] asset_model_property
+    #   Contains information about an `assetModelProperty` binding value.
+    #   @return [Types::AssetModelPropertyBindingValue]
+    #
+    # @!attribute [rw] asset_property
+    #   The asset property value used in the data binding.
+    #   @return [Types::AssetPropertyBindingValue]
+    #
+    class DataBindingValue < Struct.new(
+      :asset_model_property,
+      :asset_property)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter used to match specific data binding values based on criteria.
+    # This filter allows searching for data bindings by asset, asset model,
+    # asset property, or asset model property.
+    #
+    # @!attribute [rw] asset
+    #   Filter criteria for matching data bindings based on a specific
+    #   asset. Used to list all data bindings referencing a particular asset
+    #   or its properties.
+    #   @return [Types::AssetBindingValueFilter]
+    #
+    # @!attribute [rw] asset_model
+    #   Filter criteria for matching data bindings based on a specific asset
+    #   model. Used to list all data bindings referencing a particular asset
+    #   model or its properties.
+    #   @return [Types::AssetModelBindingValueFilter]
+    #
+    # @!attribute [rw] asset_property
+    #   Filter criteria for matching data bindings based on a specific asset
+    #   property. Used to list all data bindings referencing a particular
+    #   property of an asset.
+    #   @return [Types::AssetPropertyBindingValueFilter]
+    #
+    # @!attribute [rw] asset_model_property
+    #   Filter criteria for matching data bindings based on a specific asset
+    #   model property. Used to list all data bindings referencing a
+    #   particular property of an asset model.
+    #   @return [Types::AssetModelPropertyBindingValueFilter]
+    #
+    class DataBindingValueFilter < Struct.new(
+      :asset,
+      :asset_model,
+      :asset_property,
+      :asset_model_property)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the dataset use and it's source.
     #
     # @!attribute [rw] dataset_arn
@@ -3922,6 +4346,37 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # @!attribute [rw] computation_model_id
+    #   The ID of the computation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class DeleteComputationModelRequest < Struct.new(
+      :computation_model_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] computation_model_status
+    #   The status of the computation model. It contains a state (DELETING
+    #   after successfully calling this operation) and any error messages.
+    #   @return [Types::ComputationModelStatus]
+    #
+    class DeleteComputationModelResponse < Struct.new(
+      :computation_model_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dashboard_id
     #   The ID of the dashboard to delete.
     #   @return [String]
@@ -4173,12 +4628,17 @@ module Aws::IoTSiteWise
     #   The time the action was executed.
     #   @return [Time]
     #
+    # @!attribute [rw] resolve_to
+    #   The detailed resource this action resolves to.
+    #   @return [Types::ResolveTo]
+    #
     class DescribeActionResponse < Struct.new(
       :action_id,
       :target_resource,
       :action_definition_id,
       :action_payload,
-      :execution_time)
+      :execution_time,
+      :resolve_to)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4571,6 +5031,15 @@ module Aws::IoTSiteWise
     #   The ID of the asset, in UUID format.
     #   @return [String]
     #
+    # @!attribute [rw] asset_external_id
+    #   The external ID of the asset. For more information, see [Using
+    #   external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
+    #   @return [String]
+    #
     # @!attribute [rw] asset_name
     #   The name of the asset.
     #   @return [String]
@@ -4592,22 +5061,13 @@ module Aws::IoTSiteWise
     #   property exists in a composite model.
     #   @return [Types::CompositeModelProperty]
     #
-    # @!attribute [rw] asset_external_id
-    #   The external ID of the asset. For more information, see [Using
-    #   external IDs][1] in the *IoT SiteWise User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
-    #   @return [String]
-    #
     class DescribeAssetPropertyResponse < Struct.new(
       :asset_id,
+      :asset_external_id,
       :asset_name,
       :asset_model_id,
       :asset_property,
-      :composite_model,
-      :asset_external_id)
+      :composite_model)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4636,6 +5096,10 @@ module Aws::IoTSiteWise
 
     # @!attribute [rw] asset_id
     #   The ID of the asset, in UUID format.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_external_id
+    #   The external ID of the asset, if any.
     #   @return [String]
     #
     # @!attribute [rw] asset_arn
@@ -4695,12 +5159,9 @@ module Aws::IoTSiteWise
     #   the asset.
     #   @return [Array<Types::AssetCompositeModelSummary>]
     #
-    # @!attribute [rw] asset_external_id
-    #   The external ID of the asset, if any.
-    #   @return [String]
-    #
     class DescribeAssetResponse < Struct.new(
       :asset_id,
+      :asset_external_id,
       :asset_arn,
       :asset_name,
       :asset_model_id,
@@ -4711,8 +5172,7 @@ module Aws::IoTSiteWise
       :asset_last_update_date,
       :asset_status,
       :asset_description,
-      :asset_composite_model_summaries,
-      :asset_external_id)
+      :asset_composite_model_summaries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4814,6 +5274,126 @@ module Aws::IoTSiteWise
       :job_last_update_date,
       :adaptive_ingestion,
       :delete_files_after_import)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] computation_model_id
+    #   The ID of the computation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolve_to_resource_type
+    #   The type of the resolved resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolve_to_resource_id
+    #   The ID of the resolved resource.
+    #   @return [String]
+    #
+    class DescribeComputationModelExecutionSummaryRequest < Struct.new(
+      :computation_model_id,
+      :resolve_to_resource_type,
+      :resolve_to_resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] computation_model_id
+    #   The ID of the computation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolve_to
+    #   The detailed resource this execution summary resolves to.
+    #   @return [Types::ResolveTo]
+    #
+    # @!attribute [rw] computation_model_execution_summary
+    #   Contains the execution summary of the computation model.
+    #   @return [Hash<String,String>]
+    #
+    class DescribeComputationModelExecutionSummaryResponse < Struct.new(
+      :computation_model_id,
+      :resolve_to,
+      :computation_model_execution_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] computation_model_id
+    #   The ID of the computation model.
+    #   @return [String]
+    #
+    class DescribeComputationModelRequest < Struct.new(
+      :computation_model_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] computation_model_id
+    #   The ID of the computation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] computation_model_arn
+    #   The [ARN][1] of the computation model, which has the following
+    #   format.
+    #
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:computation-model/${ComputationModelId}`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] computation_model_name
+    #   The name of the computation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] computation_model_description
+    #   The description of the computation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] computation_model_configuration
+    #   The configuration for the computation model.
+    #   @return [Types::ComputationModelConfiguration]
+    #
+    # @!attribute [rw] computation_model_data_binding
+    #   The data binding for the computation model. Key is a variable name
+    #   defined in configuration. Value is a
+    #   `ComputationModelDataBindingValue` referenced by the variable.
+    #   @return [Hash<String,Types::ComputationModelDataBindingValue>]
+    #
+    # @!attribute [rw] computation_model_creation_date
+    #   The model creation date, in Unix epoch time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] computation_model_last_update_date
+    #   The date the model was last updated, in Unix epoch time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] computation_model_status
+    #   The current status of the asset model, which contains a state and an
+    #   error message if any.
+    #   @return [Types::ComputationModelStatus]
+    #
+    # @!attribute [rw] computation_model_version
+    #   The version of the computation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_definitions
+    #   The available actions for this computation model.
+    #   @return [Array<Types::ActionDefinition>]
+    #
+    class DescribeComputationModelResponse < Struct.new(
+      :computation_model_id,
+      :computation_model_arn,
+      :computation_model_name,
+      :computation_model_description,
+      :computation_model_configuration,
+      :computation_model_data_binding,
+      :computation_model_creation_date,
+      :computation_model_last_update_date,
+      :computation_model_status,
+      :computation_model_version,
+      :action_definitions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4979,16 +5559,99 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # @!attribute [rw] execution_id
+    #   The ID of the execution.
+    #   @return [String]
+    #
+    class DescribeExecutionRequest < Struct.new(
+      :execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] execution_id
+    #   The ID of the execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_type
+    #   The type of action exectued.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_resource
+    #   The resource the action will be taken on.
+    #   @return [Types::TargetResource]
+    #
+    # @!attribute [rw] target_resource_version
+    #   The version of the target resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolve_to
+    #   The detailed resource this execution resolves to.
+    #   @return [Types::ResolveTo]
+    #
+    # @!attribute [rw] execution_start_time
+    #   The time the process started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] execution_end_time
+    #   The time the process ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] execution_status
+    #   The status of the execution process.
+    #   @return [Types::ExecutionStatus]
+    #
+    # @!attribute [rw] execution_result
+    #   The result of the execution.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] execution_details
+    #   Provides detailed information about the execution of your anomaly
+    #   detection models. This includes model metrics and training
+    #   timestamps for both training and inference actions.
+    #
+    #   * The training action (Amazon Web
+    #     Services/ANOMALY\_DETECTION\_TRAINING), includes performance
+    #     metrics that help you compare different versions of your anomaly
+    #     detection models. These metrics provide insights into the model's
+    #     performance during the training process.
+    #
+    #   * The inference action (Amazon Web
+    #     Services/ANOMALY\_DETECTION\_INFERENCE), includes information
+    #     about the results of executing your anomaly detection models. This
+    #     helps you understand the output of your models and assess their
+    #     performance.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] execution_entity_version
+    #   Entity version used for the execution.
+    #   @return [String]
+    #
+    class DescribeExecutionResponse < Struct.new(
+      :execution_id,
+      :action_type,
+      :target_resource,
+      :target_resource_version,
+      :resolve_to,
+      :execution_start_time,
+      :execution_end_time,
+      :execution_status,
+      :execution_result,
+      :execution_details,
+      :execution_entity_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] gateway_id
     #   The ID of the gateway that defines the capability configuration.
     #   @return [String]
     #
     # @!attribute [rw] capability_namespace
     #   The namespace of the capability configuration. For example, if you
-    #   configure OPC-UA sources from the IoT SiteWise console, your OPC-UA
+    #   configure OPC UA sources for an MQTT-enabled gateway, your OPC-UA
     #   capability configuration has the namespace
-    #   `iotsitewise:opcuacollector:version`, where `version` is a number
-    #   such as `1`.
+    #   `iotsitewise:opcuacollector:3`.
     #   @return [String]
     #
     class DescribeGatewayCapabilityConfigurationRequest < Struct.new(
@@ -5017,23 +5680,21 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] capability_sync_status
-    #   The synchronization status of the capability configuration. The sync
-    #   status can be one of the following:
+    #   The synchronization status of the gateway capability configuration.
+    #   The sync status can be one of the following:
     #
-    #   * `IN_SYNC` – The gateway is running the capability configuration.
+    #   * `IN_SYNC` - The gateway is running with the latest configuration.
     #
-    #   * `NOT_APPLICABLE` – Synchronization is not required for this
-    #     capability configuration. This is most common when integrating
-    #     partner data sources, because the data integration is handled
-    #     externally by the partner.
-    #
-    #   * `OUT_OF_SYNC` – The gateway hasn't received the capability
+    #   * `OUT_OF_SYNC` - The gateway hasn't received the latest
     #     configuration.
     #
-    #   * `SYNC_FAILED` – The gateway rejected the capability configuration.
+    #   * `SYNC_FAILED` - The gateway rejected the latest configuration.
     #
-    #   * `UNKNOWN` – The synchronization status is currently unknown due to
-    #     an undetermined or temporary error.
+    #   * `UNKNOWN` - The gateway hasn't reported its sync status.
+    #
+    #   * `NOT_APPLICABLE` - The gateway doesn't support this capability.
+    #     This is most common when integrating partner data sources, because
+    #     the data integration is handled externally by the partner.
     #   @return [String]
     #
     class DescribeGatewayCapabilityConfigurationResponse < Struct.new(
@@ -5688,11 +6349,16 @@ module Aws::IoTSiteWise
     #   new idempotent request is required.
     #   @return [String]
     #
+    # @!attribute [rw] resolve_to
+    #   The detailed resource this action resolves to.
+    #   @return [Types::ResolveTo]
+    #
     class ExecuteActionRequest < Struct.new(
       :target_resource,
       :action_definition_id,
       :action_payload,
-      :client_token)
+      :client_token,
+      :resolve_to)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5716,8 +6382,13 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return at one time. The default is
-    #   25.
+    #   The maximum number of results to return at one time.
+    #
+    #   * Minimum is 1
+    #
+    #   * Maximum is 20000
+    #
+    #   * Default is 250
     #   @return [Integer]
     #
     # @!attribute [rw] client_token
@@ -5754,6 +6425,70 @@ module Aws::IoTSiteWise
       :columns,
       :rows,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of the execution.
+    #
+    # @!attribute [rw] state
+    #   The current state of the computation model.
+    #   @return [String]
+    #
+    class ExecutionStatus < Struct.new(
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the execution summary of the computation model.
+    #
+    # @!attribute [rw] execution_id
+    #   The ID of the execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_type
+    #   The type of action exectued.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_resource
+    #   The resource the action will be taken on.
+    #   @return [Types::TargetResource]
+    #
+    # @!attribute [rw] target_resource_version
+    #   The version of the target resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolve_to
+    #   The detailed resource this execution resolves to.
+    #   @return [Types::ResolveTo]
+    #
+    # @!attribute [rw] execution_start_time
+    #   The time the process started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] execution_end_time
+    #   The time the process ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] execution_status
+    #   The status of the execution process.
+    #   @return [Types::ExecutionStatus]
+    #
+    # @!attribute [rw] execution_entity_version
+    #   The execution entity version associated with the summary.
+    #   @return [String]
+    #
+    class ExecutionSummary < Struct.new(
+      :execution_id,
+      :action_type,
+      :target_resource,
+      :target_resource_version,
+      :resolve_to,
+      :execution_start_time,
+      :execution_end_time,
+      :execution_status,
+      :execution_entity_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5834,30 +6569,27 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] capability_namespace
     #   The namespace of the capability configuration. For example, if you
-    #   configure OPC-UA sources from the IoT SiteWise console, your OPC-UA
+    #   configure OPC UA sources for an MQTT-enabled gateway, your OPC-UA
     #   capability configuration has the namespace
-    #   `iotsitewise:opcuacollector:version`, where `version` is a number
-    #   such as `1`.
+    #   `iotsitewise:opcuacollector:3`.
     #   @return [String]
     #
     # @!attribute [rw] capability_sync_status
-    #   The synchronization status of the capability configuration. The sync
-    #   status can be one of the following:
+    #   The synchronization status of the gateway capability configuration.
+    #   The sync status can be one of the following:
     #
-    #   * `IN_SYNC` – The gateway is running the capability configuration.
+    #   * `IN_SYNC` - The gateway is running with the latest configuration.
     #
-    #   * `NOT_APPLICABLE` – Synchronization is not required for this
-    #     capability configuration. This is most common when integrating
-    #     partner data sources, because the data integration is handled
-    #     externally by the partner.
-    #
-    #   * `OUT_OF_SYNC` – The gateway hasn't received the capability
+    #   * `OUT_OF_SYNC` - The gateway hasn't received the latest
     #     configuration.
     #
-    #   * `SYNC_FAILED` – The gateway rejected the capability configuration.
+    #   * `SYNC_FAILED` - The gateway rejected the latest configuration.
     #
-    #   * `UNKNOWN` – The synchronization status is currently unknown due to
-    #     an undetermined or temporary error.
+    #   * `UNKNOWN` - The gateway hasn't reported its sync status.
+    #
+    #   * `NOT_APPLICABLE` - The gateway doesn't support this capability.
+    #     This is most common when integrating partner data sources, because
+    #     the data integration is handled externally by the partner.
     #   @return [String]
     #
     class GatewayCapabilitySummary < Struct.new(
@@ -5867,7 +6599,19 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # Contains a gateway's platform information.
+    # The gateway's platform configuration. You can only specify one
+    # platform type in a gateway.
+    #
+    # (Legacy only) For Greengrass V1 gateways, specify the `greengrass`
+    # parameter with a valid Greengrass group ARN.
+    #
+    # For Greengrass V2 gateways, specify the `greengrassV2` parameter with
+    # a valid core device thing name. If creating a V3 gateway
+    # (`gatewayVersion=3`), you must also specify the
+    # `coreDeviceOperatingSystem`.
+    #
+    # For Siemens Industrial Edge gateways, specify the `siemensIE`
+    # parameter with a valid IoT Core thing name.
     #
     # @!attribute [rw] greengrass
     #   A gateway that runs on IoT Greengrass.
@@ -5901,7 +6645,19 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] gateway_platform
-    #   Contains a gateway's platform information.
+    #   The gateway's platform configuration. You can only specify one
+    #   platform type in a gateway.
+    #
+    #   (Legacy only) For Greengrass V1 gateways, specify the `greengrass`
+    #   parameter with a valid Greengrass group ARN.
+    #
+    #   For Greengrass V2 gateways, specify the `greengrassV2` parameter
+    #   with a valid core device thing name. If creating a V3 gateway
+    #   (`gatewayVersion=3`), you must also specify the
+    #   `coreDeviceOperatingSystem`.
+    #
+    #   For Siemens Industrial Edge gateways, specify the `siemensIE`
+    #   parameter with a valid IoT Core thing name.
     #   @return [Types::GatewayPlatform]
     #
     # @!attribute [rw] gateway_version
@@ -6358,6 +7114,9 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] core_device_operating_system
     #   The operating system of the core device in IoT Greengrass V2.
+    #   Specifying the operating system is required for MQTT-enabled, V3
+    #   gateways (`gatewayVersion` `3`) and not applicable for Classic
+    #   stream, V2 gateways (`gatewayVersion` `2`).
     #   @return [String]
     #
     class GreengrassV2 < Struct.new(
@@ -6699,7 +7458,7 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # You've reached the limit for a resource. For example, this can occur
+    # You've reached the quota for a resource. For example, this can occur
     # if you're trying to associate more than the allowed number of child
     # assets or attempting to create more than the allowed number of
     # properties for an asset model.
@@ -6806,11 +7565,21 @@ module Aws::IoTSiteWise
     #   The maximum number of results to return for each paginated request.
     #   @return [Integer]
     #
+    # @!attribute [rw] resolve_to_resource_type
+    #   The type of the resolved resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolve_to_resource_id
+    #   The ID of the resolved resource.
+    #   @return [String]
+    #
     class ListActionsRequest < Struct.new(
       :target_resource_type,
       :target_resource_id,
       :next_token,
-      :max_results)
+      :max_results,
+      :resolve_to_resource_type,
+      :resolve_to_resource_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7354,6 +8123,122 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # @!attribute [rw] data_binding_value_filter
+    #   A filter used to limit the returned data binding usages based on
+    #   specific data binding values. You can filter by asset, asset model,
+    #   asset property, or asset model property to find all computation
+    #   models using these specific data sources.
+    #   @return [Types::DataBindingValueFilter]
+    #
+    # @!attribute [rw] next_token
+    #   The token used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results returned for each paginated request.
+    #   @return [Integer]
+    #
+    class ListComputationModelDataBindingUsagesRequest < Struct.new(
+      :data_binding_value_filter,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_binding_usage_summaries
+    #   A list of summaries describing the data binding usages across
+    #   computation models. Each summary includes the computation model IDs
+    #   and the matched data binding details.
+    #   @return [Array<Types::ComputationModelDataBindingUsageSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of paginated results, or null if there
+    #   are no additional results.
+    #   @return [String]
+    #
+    class ListComputationModelDataBindingUsagesResponse < Struct.new(
+      :data_binding_usage_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] computation_model_id
+    #   The ID of the computation model for which to list resolved
+    #   resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results returned for each paginated request.
+    #   @return [Integer]
+    #
+    class ListComputationModelResolveToResourcesRequest < Struct.new(
+      :computation_model_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] computation_model_resolve_to_resource_summaries
+    #   A list of summaries describing the distinct resources that this
+    #   computation model resolves to when actions were executed.
+    #   @return [Array<Types::ComputationModelResolveToResourceSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of paginated results, or null if there
+    #   are no additional results.
+    #   @return [String]
+    #
+    class ListComputationModelResolveToResourcesResponse < Struct.new(
+      :computation_model_resolve_to_resource_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] computation_model_type
+    #   The type of computation model. If a `computationModelType` is not
+    #   provided, all types of computation models are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for each paginated request.
+    #   @return [Integer]
+    #
+    class ListComputationModelsRequest < Struct.new(
+      :computation_model_type,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] computation_model_summaries
+    #   A list summarizing each computation model.
+    #   @return [Array<Types::ComputationModelSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    class ListComputationModelsResponse < Struct.new(
+      :computation_model_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] project_id
     #   The ID of the project.
     #   @return [String]
@@ -7424,6 +8309,62 @@ module Aws::IoTSiteWise
     #
     class ListDatasetsResponse < Struct.new(
       :dataset_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target_resource_type
+    #   The type of the target resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_resource_id
+    #   The ID of the target resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolve_to_resource_type
+    #   The type of the resolved resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolve_to_resource_id
+    #   The ID of the resolved resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results returned for each paginated request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] action_type
+    #   The type of action exectued.
+    #   @return [String]
+    #
+    class ListExecutionsRequest < Struct.new(
+      :target_resource_type,
+      :target_resource_id,
+      :resolve_to_resource_type,
+      :resolve_to_resource_id,
+      :next_token,
+      :max_results,
+      :action_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] execution_summaries
+    #   Contains the list of execution summaries of the computation models.
+    #   @return [Array<Types::ExecutionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    class ListExecutionsResponse < Struct.new(
+      :execution_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -7684,6 +8625,18 @@ module Aws::IoTSiteWise
     #
     class LoggingOptions < Struct.new(
       :level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a data binding that matches the specified filter criteria.
+    #
+    # @!attribute [rw] value
+    #   The value of the matched data binding.
+    #   @return [Types::DataBindingValue]
+    #
+    class MatchedDataBinding < Struct.new(
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8024,6 +8977,15 @@ module Aws::IoTSiteWise
     #   The ID of the asset property.
     #   @return [String]
     #
+    # @!attribute [rw] external_id
+    #   The external ID of the asset property. For more information, see
+    #   [Using external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the property.
     #   @return [String]
@@ -8066,25 +9028,16 @@ module Aws::IoTSiteWise
     #   The structured path to the property from the root of the asset.
     #   @return [Array<Types::AssetPropertyPathSegment>]
     #
-    # @!attribute [rw] external_id
-    #   The external ID of the asset property. For more information, see
-    #   [Using external IDs][1] in the *IoT SiteWise User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
-    #   @return [String]
-    #
     class Property < Struct.new(
       :id,
+      :external_id,
       :name,
       :alias,
       :notification,
       :data_type,
       :unit,
       :type,
-      :path,
-      :external_id)
+      :path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8444,6 +9397,18 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # The detailed resource this execution summary resolves to.
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset that the resource resolves to.
+    #   @return [String]
+    #
+    class ResolveTo < Struct.new(
+      :asset_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains an IoT SiteWise Monitor resource ID for a portal or project.
     #
     # @!attribute [rw] portal
@@ -8624,8 +9589,13 @@ module Aws::IoTSiteWise
     #   The ID of the asset, in UUID format.
     #   @return [String]
     #
+    # @!attribute [rw] computation_model_id
+    #   The ID of the computation model.
+    #   @return [String]
+    #
     class TargetResource < Struct.new(
-      :asset_id)
+      :asset_id,
+      :computation_model_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8736,7 +9706,7 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # You've reached the limit for the number of tags allowed for a
+    # You've reached the quota for the number of tags allowed for a
     # resource. For more information, see [Tag naming limits and
     # requirements][1] in the *Amazon Web Services General Reference*.
     #
@@ -9333,6 +10303,17 @@ module Aws::IoTSiteWise
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #   @return [String]
     #
+    # @!attribute [rw] asset_external_id
+    #   An external ID to assign to the asset. The asset must not already
+    #   have an external ID. The external ID must be unique within your
+    #   Amazon Web Services account. For more information, see [Using
+    #   external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
+    #   @return [String]
+    #
     # @!attribute [rw] asset_name
     #   A friendly name for the asset.
     #   @return [String]
@@ -9350,23 +10331,12 @@ module Aws::IoTSiteWise
     #   A description for the asset.
     #   @return [String]
     #
-    # @!attribute [rw] asset_external_id
-    #   An external ID to assign to the asset. The asset must not already
-    #   have an external ID. The external ID must be unique within your
-    #   Amazon Web Services account. For more information, see [Using
-    #   external IDs][1] in the *IoT SiteWise User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
-    #   @return [String]
-    #
     class UpdateAssetRequest < Struct.new(
       :asset_id,
+      :asset_external_id,
       :asset_name,
       :client_token,
-      :asset_description,
-      :asset_external_id)
+      :asset_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9378,6 +10348,60 @@ module Aws::IoTSiteWise
     #
     class UpdateAssetResponse < Struct.new(
       :asset_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] computation_model_id
+    #   The ID of the computation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] computation_model_name
+    #   The name of the computation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] computation_model_description
+    #   The description of the computation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] computation_model_configuration
+    #   The configuration for the computation model.
+    #   @return [Types::ComputationModelConfiguration]
+    #
+    # @!attribute [rw] computation_model_data_binding
+    #   The data binding for the computation model. Key is a variable name
+    #   defined in configuration. Value is a
+    #   `ComputationModelDataBindingValue` referenced by the variable.
+    #   @return [Hash<String,Types::ComputationModelDataBindingValue>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class UpdateComputationModelRequest < Struct.new(
+      :computation_model_id,
+      :computation_model_name,
+      :computation_model_description,
+      :computation_model_configuration,
+      :computation_model_data_binding,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] computation_model_status
+    #   The status of the computation model. It contains a state (UPDATING
+    #   after successfully calling this operation) and an error message if
+    #   any.
+    #   @return [Types::ComputationModelStatus]
+    #
+    class UpdateComputationModelResponse < Struct.new(
+      :computation_model_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9499,10 +10523,9 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] capability_namespace
     #   The namespace of the gateway capability configuration to be updated.
-    #   For example, if you configure OPC-UA sources from the IoT SiteWise
-    #   console, your OPC-UA capability configuration has the namespace
-    #   `iotsitewise:opcuacollector:version`, where `version` is a number
-    #   such as `1`.
+    #   For example, if you configure OPC UA sources for an MQTT-enabled
+    #   gateway, your OPC-UA capability configuration has the namespace
+    #   `iotsitewise:opcuacollector:3`.
     #   @return [String]
     #
     # @!attribute [rw] capability_configuration
@@ -9528,23 +10551,21 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] capability_sync_status
-    #   The synchronization status of the capability configuration. The sync
-    #   status can be one of the following:
+    #   The synchronization status of the gateway capability configuration.
+    #   The sync status can be one of the following:
     #
-    #   * `IN_SYNC` – The gateway is running the capability configuration.
+    #   * `IN_SYNC` - The gateway is running with the latest configuration.
     #
-    #   * `NOT_APPLICABLE` – Synchronization is not required for this
-    #     capability configuration. This is most common when integrating
-    #     partner data sources, because the data integration is handled
-    #     externally by the partner.
-    #
-    #   * `OUT_OF_SYNC` – The gateway hasn't received the capability
+    #   * `OUT_OF_SYNC` - The gateway hasn't received the latest
     #     configuration.
     #
-    #   * `SYNC_FAILED` – The gateway rejected the capability configuration.
+    #   * `SYNC_FAILED` - The gateway rejected the latest configuration.
     #
-    #   * `UNKNOWN` – The synchronization status is currently unknown due to
-    #     an undetermined or temporary error.
+    #   * `UNKNOWN` - The gateway hasn't reported its sync status.
+    #
+    #   * `NOT_APPLICABLE` - The gateway doesn't support this capability.
+    #     This is most common when integrating partner data sources, because
+    #     the data integration is handled externally by the partner.
     #
     #   After you update a capability configuration, its sync status is
     #   `OUT_OF_SYNC` until the gateway receives and applies or rejects the

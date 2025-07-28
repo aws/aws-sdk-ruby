@@ -43,6 +43,7 @@
         "cases": [
             {
                 "id": "BodyWithXmlName",
+                "description": "Serializes a payload using a wrapper name based on the xmlName",
                 "given": {
                     "name": "BodyWithXmlName",
                     "http": {
@@ -56,7 +57,6 @@
                     "documentation": "<p>The following example serializes a body that uses an XML name, changing the wrapper name.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a payload using a wrapper name based on the xmlName",
                 "result": {
                     "nested": {
                         "name": "Phreddy"
@@ -107,6 +107,7 @@
         "cases": [
             {
                 "id": "RestXmlDateTimeWithNegativeOffset",
+                "description": "Ensures that clients can correctly parse datetime (timestamps) with offsets",
                 "given": {
                     "name": "DatetimeOffsets",
                     "http": {
@@ -118,7 +119,6 @@
                         "shape": "DatetimeOffsetsOutput"
                     }
                 },
-                "description": "Ensures that clients can correctly parse datetime (timestamps) with offsets",
                 "result": {
                     "datetime": 1576540098
                 },
@@ -132,6 +132,7 @@
             },
             {
                 "id": "RestXmlDateTimeWithPositiveOffset",
+                "description": "Ensures that clients can correctly parse datetime (timestamps) with offsets",
                 "given": {
                     "name": "DatetimeOffsets",
                     "http": {
@@ -143,7 +144,6 @@
                         "shape": "DatetimeOffsetsOutput"
                     }
                 },
-                "description": "Ensures that clients can correctly parse datetime (timestamps) with offsets",
                 "result": {
                     "datetime": 1576540098
                 },
@@ -184,6 +184,7 @@
         "cases": [
             {
                 "id": "EmptyInputAndEmptyOutput",
+                "description": "Empty output serializes no payload",
                 "given": {
                     "name": "EmptyInputAndEmptyOutput",
                     "http": {
@@ -196,7 +197,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there's no request or response payload because the operation has an empty input and empty output structure that reuses the same shape. While this should be rare, code generators must support this.</p>"
                 },
-                "description": "Empty output serializes no payload",
                 "result": {},
                 "response": {
                     "status_code": 200,
@@ -259,6 +259,7 @@
         "cases": [
             {
                 "id": "FlattenedXmlMap",
+                "description": "Serializes flattened XML maps in responses",
                 "given": {
                     "name": "FlattenedXmlMap",
                     "http": {
@@ -271,7 +272,6 @@
                     },
                     "documentation": "<p>Flattened maps</p>"
                 },
-                "description": "Serializes flattened XML maps in responses",
                 "result": {
                     "myMap": {
                         "foo": "Foo",
@@ -335,6 +335,7 @@
         "cases": [
             {
                 "id": "FlattenedXmlMapWithXmlName",
+                "description": "Serializes flattened XML maps in responses that have xmlName on members",
                 "given": {
                     "name": "FlattenedXmlMapWithXmlName",
                     "http": {
@@ -347,7 +348,6 @@
                     },
                     "documentation": "<p>Flattened maps with @xmlName</p>"
                 },
-                "description": "Serializes flattened XML maps in responses that have xmlName on members",
                 "result": {
                     "myMap": {
                         "a": "A",
@@ -414,6 +414,7 @@
         "cases": [
             {
                 "id": "RestXmlFlattenedXmlMapWithXmlNamespace",
+                "description": "Serializes flattened XML maps in responses that have xmlNamespace and xmlName on members",
                 "given": {
                     "name": "FlattenedXmlMapWithXmlNamespace",
                     "http": {
@@ -426,7 +427,6 @@
                     },
                     "documentation": "<p>Flattened maps with @xmlNamespace and @xmlName</p>"
                 },
-                "description": "Serializes flattened XML maps in responses that have xmlNamespace and xmlName on members",
                 "result": {
                     "myMap": {
                         "a": "A",
@@ -478,6 +478,7 @@
         "cases": [
             {
                 "id": "RestXmlDateTimeWithFractionalSeconds",
+                "description": "Ensures that clients can correctly parse datetime timestamps with fractional seconds",
                 "given": {
                     "name": "FractionalSeconds",
                     "http": {
@@ -489,7 +490,6 @@
                         "shape": "FractionalSecondsOutput"
                     }
                 },
-                "description": "Ensures that clients can correctly parse datetime timestamps with fractional seconds",
                 "result": {
                     "datetime": 9.46845296123E8
                 },
@@ -539,6 +539,7 @@
         "cases": [
             {
                 "id": "GreetingWithErrors",
+                "description": "Ensures that operations with errors successfully know how to deserialize the successful response",
                 "given": {
                     "name": "GreetingWithErrors",
                     "http": {
@@ -552,7 +553,6 @@
                     "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
                     "idempotent": true
                 },
-                "description": "Ensures that operations with errors successfully know how to deserialize the successful response",
                 "result": {
                     "greeting": "Hello"
                 },
@@ -606,6 +606,7 @@
         "cases": [
             {
                 "id": "InvalidGreetingError",
+                "description": "Parses simple XML errors",
                 "given": {
                     "name": "GreetingWithErrors",
                     "http": {
@@ -621,7 +622,6 @@
                         }
                     ]
                 },
-                "description": "Parses simple XML errors",
                 "errorCode": "InvalidGreeting",
                 "errorMessage": "Hi",
                 "error": {
@@ -777,6 +777,7 @@
         "cases": [
             {
                 "id": "HttpEmptyPrefixHeadersResponseClient",
+                "description": "Deserializes all response headers with the same for prefix and specific",
                 "given": {
                     "name": "HttpEmptyPrefixHeaders",
                     "http": {
@@ -789,7 +790,6 @@
                     },
                     "documentation": "<p>Clients that perform this test extract all headers from the response.</p>"
                 },
-                "description": "Deserializes all response headers with the same for prefix and specific",
                 "result": {
                     "prefixHeaders": {
                         "x-foo": "Foo",
@@ -800,8 +800,8 @@
                 "response": {
                     "status_code": 200,
                     "headers": {
-                        "hello": "There",
-                        "x-foo": "Foo"
+                        "x-foo": "Foo",
+                        "hello": "There"
                     }
                 }
             }
@@ -912,6 +912,7 @@
         "cases": [
             {
                 "id": "HttpPayloadTraitsWithBlob",
+                "description": "Serializes a blob in the HTTP payload",
                 "given": {
                     "name": "HttpPayloadTraits",
                     "http": {
@@ -924,7 +925,6 @@
                     },
                     "documentation": "<p>This example serializes a blob shape in the payload.</p> <p>In this example, no XML document is synthesized because the payload is not a structure or a union type.</p>"
                 },
-                "description": "Serializes a blob in the HTTP payload",
                 "result": {
                     "foo": "Foo",
                     "blob": "blobby blob blob"
@@ -939,6 +939,7 @@
             },
             {
                 "id": "HttpPayloadTraitsWithNoBlobBody",
+                "description": "Serializes an empty blob in the HTTP payload",
                 "given": {
                     "name": "HttpPayloadTraits",
                     "http": {
@@ -951,7 +952,6 @@
                     },
                     "documentation": "<p>This example serializes a blob shape in the payload.</p> <p>In this example, no XML document is synthesized because the payload is not a structure or a union type.</p>"
                 },
-                "description": "Serializes an empty blob in the HTTP payload",
                 "result": {
                     "foo": "Foo"
                 },
@@ -1010,6 +1010,7 @@
         "cases": [
             {
                 "id": "HttpPayloadWithMemberXmlName",
+                "description": "Serializes a structure in the payload using a wrapper name based on member xmlName",
                 "given": {
                     "name": "HttpPayloadWithMemberXmlName",
                     "http": {
@@ -1023,7 +1024,6 @@
                     "documentation": "<p>The following example serializes a payload that uses an XML name on the member, changing the wrapper name.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a structure in the payload using a wrapper name based on member xmlName",
                 "result": {
                     "nested": {
                         "name": "Phreddy"
@@ -1086,6 +1086,7 @@
         "cases": [
             {
                 "id": "HttpPayloadWithStructure",
+                "description": "Serializes a structure in the payload",
                 "given": {
                     "name": "HttpPayloadWithStructure",
                     "http": {
@@ -1099,7 +1100,6 @@
                     "documentation": "<p>This example serializes a structure in the payload.</p> <p>Note that serializing a structure changes the wrapper element name to match the targeted structure.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a structure in the payload",
                 "result": {
                     "nested": {
                         "greeting": "hello",
@@ -1161,6 +1161,7 @@
         "cases": [
             {
                 "id": "RestXmlHttpPayloadWithUnion",
+                "description": "Serializes a union in the payload.",
                 "given": {
                     "name": "HttpPayloadWithUnion",
                     "http": {
@@ -1174,7 +1175,6 @@
                     "documentation": "<p>This example serializes a union in the payload.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a union in the payload.",
                 "result": {
                     "nested": {
                         "greeting": "hello"
@@ -1190,6 +1190,7 @@
             },
             {
                 "id": "RestXmlHttpPayloadWithUnsetUnion",
+                "description": "No payload is sent if the union has no value.",
                 "given": {
                     "name": "HttpPayloadWithUnion",
                     "http": {
@@ -1203,7 +1204,6 @@
                     "documentation": "<p>This example serializes a union in the payload.</p>",
                     "idempotent": true
                 },
-                "description": "No payload is sent if the union has no value.",
                 "result": {},
                 "response": {
                     "status_code": 200,
@@ -1260,6 +1260,7 @@
         "cases": [
             {
                 "id": "HttpPayloadWithXmlName",
+                "description": "Serializes a structure in the payload using a wrapper name based on xmlName",
                 "given": {
                     "name": "HttpPayloadWithXmlName",
                     "http": {
@@ -1273,7 +1274,6 @@
                     "documentation": "<p>The following example serializes a payload that uses an XML name, changing the wrapper name.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a structure in the payload using a wrapper name based on xmlName",
                 "result": {
                     "nested": {
                         "name": "Phreddy"
@@ -1334,6 +1334,7 @@
         "cases": [
             {
                 "id": "HttpPayloadWithXmlNamespace",
+                "description": "Serializes a structure in the payload using a wrapper with an XML namespace",
                 "given": {
                     "name": "HttpPayloadWithXmlNamespace",
                     "http": {
@@ -1347,7 +1348,6 @@
                     "documentation": "<p>The following example serializes a payload that uses an XML namespace.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a structure in the payload using a wrapper with an XML namespace",
                 "result": {
                     "nested": {
                         "name": "Phreddy"
@@ -1411,6 +1411,7 @@
         "cases": [
             {
                 "id": "HttpPayloadWithXmlNamespaceAndPrefix",
+                "description": "Serializes a structure in the payload using a wrapper with an XML namespace",
                 "given": {
                     "name": "HttpPayloadWithXmlNamespaceAndPrefix",
                     "http": {
@@ -1424,7 +1425,6 @@
                     "documentation": "<p>The following example serializes a payload that uses an XML namespace.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a structure in the payload using a wrapper with an XML namespace",
                 "result": {
                     "nested": {
                         "name": "Phreddy"
@@ -1490,6 +1490,7 @@
         "cases": [
             {
                 "id": "HttpPrefixHeadersArePresent",
+                "description": "Adds headers by prefix",
                 "given": {
                     "name": "HttpPrefixHeaders",
                     "http": {
@@ -1502,7 +1503,6 @@
                     },
                     "documentation": "<p>This examples adds headers to the input of a request and response by prefix.</p>"
                 },
-                "description": "Adds headers by prefix",
                 "result": {
                     "foo": "Foo",
                     "fooMap": {
@@ -1514,14 +1514,15 @@
                     "status_code": 200,
                     "headers": {
                         "x-foo": "Foo",
-                        "x-foo-abc": "Abc value",
-                        "x-foo-def": "Def value"
+                        "x-foo-def": "Def value",
+                        "x-foo-abc": "Abc value"
                     },
                     "body": ""
                 }
             },
             {
                 "id": "HttpPrefixHeadersAreNotPresent",
+                "description": "No prefix headers are serialized because the value is empty",
                 "given": {
                     "name": "HttpPrefixHeaders",
                     "http": {
@@ -1534,7 +1535,6 @@
                     },
                     "documentation": "<p>This examples adds headers to the input of a request and response by prefix.</p>"
                 },
-                "description": "No prefix headers are serialized because the value is empty",
                 "result": {
                     "foo": "Foo",
                     "fooMap": {}
@@ -1585,6 +1585,7 @@
         "cases": [
             {
                 "id": "RestXmlHttpResponseCode",
+                "description": "Binds the http response code to an output structure.",
                 "given": {
                     "name": "HttpResponseCode",
                     "http": {
@@ -1597,7 +1598,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Binds the http response code to an output structure.",
                 "result": {
                     "Status": 201
                 },
@@ -1706,6 +1706,7 @@
         "cases": [
             {
                 "id": "IgnoreQueryParamsInResponse",
+                "description": "Query parameters must be ignored when serializing the output of an operation",
                 "given": {
                     "name": "IgnoreQueryParamsInResponse",
                     "http": {
@@ -1718,7 +1719,6 @@
                     },
                     "documentation": "<p>This example ensures that query string bound request parameters are serialized in the body of responses if the structure is used in both the request and response.</p>"
                 },
-                "description": "Query parameters must be ignored when serializing the output of an operation",
                 "result": {
                     "baz": "bam"
                 },
@@ -1912,6 +1912,7 @@
         "cases": [
             {
                 "id": "InputAndOutputWithStringHeaders",
+                "description": "Tests responses with string header bindings",
                 "given": {
                     "name": "InputAndOutputWithHeaders",
                     "http": {
@@ -1924,7 +1925,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there is no input or output payload but there are HTTP header bindings.</p>"
                 },
-                "description": "Tests responses with string header bindings",
                 "result": {
                     "headerString": "Hello",
                     "headerStringList": [
@@ -1941,8 +1941,8 @@
                 "response": {
                     "status_code": 200,
                     "headers": {
-                        "X-String": "Hello",
                         "X-StringList": "a, b, c",
+                        "X-String": "Hello",
                         "X-StringSet": "a, b, c"
                     },
                     "body": ""
@@ -1950,6 +1950,7 @@
             },
             {
                 "id": "InputAndOutputWithNumericHeaders",
+                "description": "Tests responses with numeric header bindings",
                 "given": {
                     "name": "InputAndOutputWithHeaders",
                     "http": {
@@ -1962,7 +1963,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there is no input or output payload but there are HTTP header bindings.</p>"
                 },
-                "description": "Tests responses with numeric header bindings",
                 "result": {
                     "headerByte": 1,
                     "headerShort": 123,
@@ -1979,19 +1979,20 @@
                 "response": {
                     "status_code": 200,
                     "headers": {
+                        "X-Integer": "123",
+                        "X-Short": "123",
                         "X-Byte": "1",
+                        "X-Long": "123",
                         "X-Double": "1.1",
                         "X-Float": "1.1",
-                        "X-Integer": "123",
-                        "X-IntegerList": "1, 2, 3",
-                        "X-Long": "123",
-                        "X-Short": "123"
+                        "X-IntegerList": "1, 2, 3"
                     },
                     "body": ""
                 }
             },
             {
                 "id": "InputAndOutputWithBooleanHeaders",
+                "description": "Tests responses with boolean header bindings",
                 "given": {
                     "name": "InputAndOutputWithHeaders",
                     "http": {
@@ -2004,7 +2005,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there is no input or output payload but there are HTTP header bindings.</p>"
                 },
-                "description": "Tests responses with boolean header bindings",
                 "result": {
                     "headerTrueBool": true,
                     "headerFalseBool": false,
@@ -2017,15 +2017,16 @@
                 "response": {
                     "status_code": 200,
                     "headers": {
+                        "X-BooleanList": "true, false, true",
                         "X-Boolean1": "true",
-                        "X-Boolean2": "false",
-                        "X-BooleanList": "true, false, true"
+                        "X-Boolean2": "false"
                     },
                     "body": ""
                 }
             },
             {
                 "id": "InputAndOutputWithTimestampHeaders",
+                "description": "Tests responses with timestamp header bindings",
                 "given": {
                     "name": "InputAndOutputWithHeaders",
                     "http": {
@@ -2038,7 +2039,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there is no input or output payload but there are HTTP header bindings.</p>"
                 },
-                "description": "Tests responses with timestamp header bindings",
                 "result": {
                     "headerTimestampList": [
                         1576540098,
@@ -2055,6 +2055,7 @@
             },
             {
                 "id": "InputAndOutputWithEnumHeaders",
+                "description": "Tests responses with enum header bindings",
                 "given": {
                     "name": "InputAndOutputWithHeaders",
                     "http": {
@@ -2067,7 +2068,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there is no input or output payload but there are HTTP header bindings.</p>"
                 },
-                "description": "Tests responses with enum header bindings",
                 "result": {
                     "headerEnum": "Foo",
                     "headerEnumList": [
@@ -2079,14 +2079,15 @@
                 "response": {
                     "status_code": 200,
                     "headers": {
-                        "X-Enum": "Foo",
-                        "X-EnumList": "Foo, Bar, Baz"
+                        "X-EnumList": "Foo, Bar, Baz",
+                        "X-Enum": "Foo"
                     },
                     "body": ""
                 }
             },
             {
                 "id": "RestXmlSupportsNaNFloatHeaderOutputs",
+                "description": "Supports handling NaN float header values.",
                 "given": {
                     "name": "InputAndOutputWithHeaders",
                     "http": {
@@ -2099,7 +2100,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there is no input or output payload but there are HTTP header bindings.</p>"
                 },
-                "description": "Supports handling NaN float header values.",
                 "result": {
                     "headerFloat": "NaN",
                     "headerDouble": "NaN"
@@ -2107,14 +2107,15 @@
                 "response": {
                     "status_code": 200,
                     "headers": {
-                        "X-Double": "NaN",
-                        "X-Float": "NaN"
+                        "X-Float": "NaN",
+                        "X-Double": "NaN"
                     },
                     "body": ""
                 }
             },
             {
                 "id": "RestXmlSupportsInfinityFloatHeaderOutputs",
+                "description": "Supports handling Infinity float header values.",
                 "given": {
                     "name": "InputAndOutputWithHeaders",
                     "http": {
@@ -2127,7 +2128,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there is no input or output payload but there are HTTP header bindings.</p>"
                 },
-                "description": "Supports handling Infinity float header values.",
                 "result": {
                     "headerFloat": "Infinity",
                     "headerDouble": "Infinity"
@@ -2135,14 +2135,15 @@
                 "response": {
                     "status_code": 200,
                     "headers": {
-                        "X-Double": "Infinity",
-                        "X-Float": "Infinity"
+                        "X-Float": "Infinity",
+                        "X-Double": "Infinity"
                     },
                     "body": ""
                 }
             },
             {
                 "id": "RestXmlSupportsNegativeInfinityFloatHeaderOutputs",
+                "description": "Supports handling -Infinity float header values.",
                 "given": {
                     "name": "InputAndOutputWithHeaders",
                     "http": {
@@ -2155,7 +2156,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there is no input or output payload but there are HTTP header bindings.</p>"
                 },
-                "description": "Supports handling -Infinity float header values.",
                 "result": {
                     "headerFloat": "-Infinity",
                     "headerDouble": "-Infinity"
@@ -2163,8 +2163,8 @@
                 "response": {
                     "status_code": 200,
                     "headers": {
-                        "X-Double": "-Infinity",
-                        "X-Float": "-Infinity"
+                        "X-Float": "-Infinity",
+                        "X-Double": "-Infinity"
                     },
                     "body": ""
                 }
@@ -2237,6 +2237,7 @@
         "cases": [
             {
                 "id": "NestedXmlMapResponse",
+                "description": "Tests responses with nested maps.",
                 "given": {
                     "name": "NestedXmlMaps",
                     "http": {
@@ -2248,7 +2249,6 @@
                         "shape": "NestedXmlMapsResponse"
                     }
                 },
-                "description": "Tests responses with nested maps.",
                 "result": {
                     "nestedMap": {
                         "foo": {
@@ -2266,6 +2266,7 @@
             },
             {
                 "id": "FlatNestedXmlMapResponse",
+                "description": "Tests responses with nested flat maps. Since maps can only be\nflattened when they're structure members, only the outer map is flat.",
                 "given": {
                     "name": "NestedXmlMaps",
                     "http": {
@@ -2277,7 +2278,6 @@
                         "shape": "NestedXmlMapsResponse"
                     }
                 },
-                "description": "Tests responses with nested flat maps. Since maps can only be\nflattened when they're structure members, only the outer map is flat.",
                 "result": {
                     "flatNestedMap": {
                         "foo": {
@@ -2350,6 +2350,7 @@
         "cases": [
             {
                 "id": "NestedXmlMapWithXmlNameDeserializes",
+                "description": "Serializes nested XML maps in responses that have xmlName on members",
                 "given": {
                     "name": "NestedXmlMapWithXmlName",
                     "http": {
@@ -2362,7 +2363,6 @@
                     },
                     "documentation": "<p>Nested Xml Maps with key/values with @xmlName</p>"
                 },
-                "description": "Serializes nested XML maps in responses that have xmlName on members",
                 "result": {
                     "nestedXmlMapWithXmlNameMap": {
                         "foo": {
@@ -2407,6 +2407,7 @@
         "cases": [
             {
                 "id": "NoInputAndNoOutput",
+                "description": "No output serializes no payload",
                 "given": {
                     "name": "NoInputAndNoOutput",
                     "http": {
@@ -2416,7 +2417,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there's no request or response payload because the operation has no input or output. While this should be rare, code generators must support this.</p>"
                 },
-                "description": "No output serializes no payload",
                 "result": {},
                 "response": {
                     "status_code": 200,
@@ -2452,6 +2452,7 @@
         "cases": [
             {
                 "id": "NoInputAndOutput",
+                "description": "Empty output serializes no payload",
                 "given": {
                     "name": "NoInputAndOutput",
                     "http": {
@@ -2464,7 +2465,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there's no request or response payload because the operation has no input and the output is empty. While this should be rare, code generators must support this.</p>"
                 },
-                "description": "Empty output serializes no payload",
                 "result": {},
                 "response": {
                     "status_code": 200,
@@ -2529,6 +2529,7 @@
         "cases": [
             {
                 "id": "RecursiveShapes",
+                "description": "Serializes recursive structures",
                 "given": {
                     "name": "RecursiveShapes",
                     "http": {
@@ -2542,7 +2543,6 @@
                     "documentation": "<p>Recursive shapes</p>",
                     "idempotent": true
                 },
-                "description": "Serializes recursive structures",
                 "result": {
                     "nested": {
                         "foo": "Foo1",
@@ -2651,6 +2651,7 @@
         "cases": [
             {
                 "id": "SimpleScalarProperties",
+                "description": "Serializes simple scalar properties",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -2663,7 +2664,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Serializes simple scalar properties",
                 "result": {
                     "foo": "Foo",
                     "stringValue": "string",
@@ -2679,14 +2679,15 @@
                 "response": {
                     "status_code": 200,
                     "headers": {
-                        "Content-Type": "application/xml",
-                        "X-Foo": "Foo"
+                        "X-Foo": "Foo",
+                        "Content-Type": "application/xml"
                     },
                     "body": "<SimpleScalarPropertiesResponse>\n    <stringValue>string</stringValue>\n    <trueBooleanValue>true</trueBooleanValue>\n    <falseBooleanValue>false</falseBooleanValue>\n    <byteValue>1</byteValue>\n    <shortValue>2</shortValue>\n    <integerValue>3</integerValue>\n    <longValue>4</longValue>\n    <floatValue>5.5</floatValue>\n    <DoubleDribble>6.5</DoubleDribble>\n</SimpleScalarPropertiesResponse>\n"
                 }
             },
             {
                 "id": "SimpleScalarPropertiesComplexEscapes",
+                "description": "Serializes string with escaping.\n\nThis validates the three escape types: literal, decimal and hexadecimal. It also validates that unescaping properly\nhandles the case where unescaping an & produces a newly formed escape sequence (this should not be re-unescaped).\n\nServers may produce different output, this test is designed different unescapes clients must handle\n",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -2699,7 +2700,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Serializes string with escaping.\n\nThis validates the three escape types: literal, decimal and hexadecimal. It also validates that unescaping properly\nhandles the case where unescaping an & produces a newly formed escape sequence (this should not be re-unescaped).\n\nServers may produce different output, this test is designed different unescapes clients must handle\n",
                 "result": {
                     "foo": "Foo",
                     "stringValue": "escaped data: &lt;\r\n"
@@ -2707,14 +2707,15 @@
                 "response": {
                     "status_code": 200,
                     "headers": {
-                        "Content-Type": "application/xml",
-                        "X-Foo": "Foo"
+                        "X-Foo": "Foo",
+                        "Content-Type": "application/xml"
                     },
                     "body": "<SimpleScalarPropertiesResponse>\n    <stringValue>escaped data: &amp;lt;&#xD;&#10;</stringValue>\n</SimpleScalarPropertiesResponse>\n"
                 }
             },
             {
                 "id": "SimpleScalarPropertiesWithEscapedCharacter",
+                "description": "Serializes string with escaping",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -2727,7 +2728,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Serializes string with escaping",
                 "result": {
                     "foo": "Foo",
                     "stringValue": "<string>"
@@ -2735,14 +2735,15 @@
                 "response": {
                     "status_code": 200,
                     "headers": {
-                        "Content-Type": "application/xml",
-                        "X-Foo": "Foo"
+                        "X-Foo": "Foo",
+                        "Content-Type": "application/xml"
                     },
                     "body": "<SimpleScalarPropertiesResponse>\n    <stringValue>&lt;string&gt;</stringValue>\n</SimpleScalarPropertiesResponse>\n"
                 }
             },
             {
                 "id": "SimpleScalarPropertiesWithXMLPreamble",
+                "description": "Serializes simple scalar properties with xml preamble, comments and CDATA",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -2755,7 +2756,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Serializes simple scalar properties with xml preamble, comments and CDATA",
                 "result": {
                     "foo": "Foo",
                     "stringValue": "string"
@@ -2763,14 +2763,15 @@
                 "response": {
                     "status_code": 200,
                     "headers": {
-                        "Content-Type": "application/xml",
-                        "X-Foo": "Foo"
+                        "X-Foo": "Foo",
+                        "Content-Type": "application/xml"
                     },
                     "body": "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<SimpleScalarPropertiesResponse>\n    <![CDATA[characters representing CDATA]]>\n    <stringValue>string</stringValue>\n    <!--xml comment-->\n</SimpleScalarPropertiesResponse>\n"
                 }
             },
             {
                 "id": "SimpleScalarPropertiesWithWhiteSpace",
+                "description": "Serializes string containing white space",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -2783,7 +2784,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Serializes string containing white space",
                 "result": {
                     "foo": "Foo",
                     "stringValue": " string with white    space "
@@ -2791,14 +2791,15 @@
                 "response": {
                     "status_code": 200,
                     "headers": {
-                        "Content-Type": "application/xml",
-                        "X-Foo": "Foo"
+                        "X-Foo": "Foo",
+                        "Content-Type": "application/xml"
                     },
                     "body": "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<SimpleScalarPropertiesResponse>\n    <stringValue> string with white    space </stringValue>\n</SimpleScalarPropertiesResponse>\n"
                 }
             },
             {
                 "id": "SimpleScalarPropertiesPureWhiteSpace",
+                "description": "Serializes string containing white space",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -2811,7 +2812,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Serializes string containing white space",
                 "result": {
                     "foo": "Foo",
                     "stringValue": "  "
@@ -2819,14 +2819,15 @@
                 "response": {
                     "status_code": 200,
                     "headers": {
-                        "Content-Type": "application/xml",
-                        "X-Foo": "Foo"
+                        "X-Foo": "Foo",
+                        "Content-Type": "application/xml"
                     },
                     "body": "<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n<SimpleScalarPropertiesResponse>\n    <stringValue>  </stringValue>\n</SimpleScalarPropertiesResponse>\n"
                 }
             },
             {
                 "id": "RestXmlSupportsNaNFloatOutputs",
+                "description": "Supports handling NaN float values.",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -2839,7 +2840,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Supports handling NaN float values.",
                 "result": {
                     "floatValue": "NaN",
                     "doubleValue": "NaN"
@@ -2854,6 +2854,7 @@
             },
             {
                 "id": "RestXmlSupportsInfinityFloatOutputs",
+                "description": "Supports handling Infinity float values.",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -2866,7 +2867,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Supports handling Infinity float values.",
                 "result": {
                     "floatValue": "Infinity",
                     "doubleValue": "Infinity"
@@ -2881,6 +2881,7 @@
             },
             {
                 "id": "RestXmlSupportsNegativeInfinityFloatOutputs",
+                "description": "Supports handling -Infinity float values.",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -2893,7 +2894,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Supports handling -Infinity float values.",
                 "result": {
                     "floatValue": "-Infinity",
                     "doubleValue": "-Infinity"
@@ -2998,6 +2998,7 @@
         "cases": [
             {
                 "id": "TimestampFormatHeaders",
+                "description": "Tests how timestamp response headers are serialized",
                 "given": {
                     "name": "TimestampFormatHeaders",
                     "http": {
@@ -3010,7 +3011,6 @@
                     },
                     "documentation": "<p>The example tests how timestamp request and response headers are serialized.</p>"
                 },
-                "description": "Tests how timestamp response headers are serialized",
                 "result": {
                     "memberEpochSeconds": 1576540098,
                     "memberHttpDate": 1576540098,
@@ -3023,13 +3023,13 @@
                 "response": {
                     "status_code": 200,
                     "headers": {
-                        "X-defaultFormat": "Mon, 16 Dec 2019 23:48:18 GMT",
                         "X-memberDateTime": "2019-12-16T23:48:18Z",
-                        "X-memberEpochSeconds": "1576540098",
+                        "X-targetHttpDate": "Mon, 16 Dec 2019 23:48:18 GMT",
                         "X-memberHttpDate": "Mon, 16 Dec 2019 23:48:18 GMT",
                         "X-targetDateTime": "2019-12-16T23:48:18Z",
                         "X-targetEpochSeconds": "1576540098",
-                        "X-targetHttpDate": "Mon, 16 Dec 2019 23:48:18 GMT"
+                        "X-memberEpochSeconds": "1576540098",
+                        "X-defaultFormat": "Mon, 16 Dec 2019 23:48:18 GMT"
                     },
                     "body": ""
                 }
@@ -3075,6 +3075,7 @@
         "cases": [
             {
                 "id": "XmlAttributes",
+                "description": "Serializes simple scalar properties",
                 "given": {
                     "name": "XmlAttributes",
                     "http": {
@@ -3088,7 +3089,6 @@
                     "documentation": "<p>This example serializes an XML attributes on synthesized document.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes simple scalar properties",
                 "result": {
                     "foo": "hi",
                     "attr": "test"
@@ -3151,6 +3151,7 @@
         "cases": [
             {
                 "id": "XmlAttributesOnPayload",
+                "description": "Serializes simple scalar properties",
                 "given": {
                     "name": "XmlAttributesOnPayload",
                     "http": {
@@ -3164,7 +3165,6 @@
                     "documentation": "<p>This example serializes an XML attributes on a document targeted by httpPayload.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes simple scalar properties",
                 "result": {
                     "payload": {
                         "foo": "hi",
@@ -3215,6 +3215,7 @@
         "cases": [
             {
                 "id": "XmlBlobs",
+                "description": "Blobs are base64 encoded",
                 "given": {
                     "name": "XmlBlobs",
                     "http": {
@@ -3227,7 +3228,6 @@
                     },
                     "documentation": "<p>Blobs are base64 encoded</p>"
                 },
-                "description": "Blobs are base64 encoded",
                 "result": {
                     "data": "value"
                 },
@@ -3275,6 +3275,7 @@
         "cases": [
             {
                 "id": "XmlEmptyBlobs",
+                "description": "Empty blobs are deserialized as empty string",
                 "given": {
                     "name": "XmlEmptyBlobs",
                     "http": {
@@ -3287,7 +3288,6 @@
                     },
                     "documentation": "<p>Blobs are base64 encoded</p>"
                 },
-                "description": "Empty blobs are deserialized as empty string",
                 "result": {
                     "data": ""
                 },
@@ -3301,6 +3301,7 @@
             },
             {
                 "id": "XmlEmptySelfClosedBlobs",
+                "description": "Empty self closed blobs are deserialized as empty string",
                 "given": {
                     "name": "XmlEmptyBlobs",
                     "http": {
@@ -3313,7 +3314,6 @@
                     },
                     "documentation": "<p>Blobs are base64 encoded</p>"
                 },
-                "description": "Empty self closed blobs are deserialized as empty string",
                 "result": {
                     "data": ""
                 },
@@ -3527,6 +3527,7 @@
         "cases": [
             {
                 "id": "XmlEmptyLists",
+                "description": "Deserializes Empty XML lists",
                 "given": {
                     "name": "XmlEmptyLists",
                     "http": {
@@ -3539,7 +3540,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Deserializes Empty XML lists",
                 "result": {
                     "stringList": [],
                     "stringSet": []
@@ -3605,6 +3605,7 @@
         "cases": [
             {
                 "id": "XmlEmptyMaps",
+                "description": "Deserializes Empty XML maps",
                 "given": {
                     "name": "XmlEmptyMaps",
                     "http": {
@@ -3616,7 +3617,6 @@
                         "shape": "XmlEmptyMapsResponse"
                     }
                 },
-                "description": "Deserializes Empty XML maps",
                 "result": {
                     "myMap": {}
                 },
@@ -3630,6 +3630,7 @@
             },
             {
                 "id": "XmlEmptySelfClosedMaps",
+                "description": "Deserializes Empty Self-closed XML maps",
                 "given": {
                     "name": "XmlEmptyMaps",
                     "http": {
@@ -3641,7 +3642,6 @@
                         "shape": "XmlEmptyMapsResponse"
                     }
                 },
-                "description": "Deserializes Empty Self-closed XML maps",
                 "result": {
                     "myMap": {}
                 },
@@ -3689,6 +3689,7 @@
         "cases": [
             {
                 "id": "XmlEmptyStrings",
+                "description": "Deserializes xml empty strings",
                 "given": {
                     "name": "XmlEmptyStrings",
                     "http": {
@@ -3701,7 +3702,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Deserializes xml empty strings",
                 "result": {
                     "emptyString": ""
                 },
@@ -3715,6 +3715,7 @@
             },
             {
                 "id": "XmlEmptySelfClosedStrings",
+                "description": "Empty self closed string are deserialized as empty string",
                 "given": {
                     "name": "XmlEmptyStrings",
                     "http": {
@@ -3727,7 +3728,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Empty self closed string are deserialized as empty string",
                 "result": {
                     "emptyString": ""
                 },
@@ -3821,6 +3821,7 @@
         "cases": [
             {
                 "id": "XmlEnums",
+                "description": "Serializes simple scalar properties",
                 "given": {
                     "name": "XmlEnums",
                     "http": {
@@ -3834,7 +3835,6 @@
                     "documentation": "<p>This example serializes enums as top level properties, in lists, sets, and maps.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes simple scalar properties",
                 "result": {
                     "fooEnum1": "Foo",
                     "fooEnum2": "0",
@@ -3936,6 +3936,7 @@
         "cases": [
             {
                 "id": "XmlIntEnums",
+                "description": "Serializes simple scalar properties",
                 "given": {
                     "name": "XmlIntEnums",
                     "http": {
@@ -3949,7 +3950,6 @@
                     "documentation": "<p>This example serializes enums as top level properties, in lists, sets, and maps.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes simple scalar properties",
                 "result": {
                     "intEnum1": 1,
                     "intEnum2": 2,
@@ -4177,6 +4177,7 @@
         "cases": [
             {
                 "id": "XmlLists",
+                "description": "Tests for XML list serialization",
                 "given": {
                     "name": "XmlLists",
                     "http": {
@@ -4190,7 +4191,6 @@
                     "documentation": "<p>This test case serializes XML lists for the following cases for both input and output:</p> <ol> <li>Normal XML lists.</li> <li>Normal XML sets.</li> <li>XML lists of lists.</li> <li>XML lists with @xmlName on its members</li> <li>Flattened XML lists.</li> <li>Flattened XML lists with @xmlName.</li> <li>Flattened XML lists with @xmlNamespace.</li> <li>Lists of structures.</li> <li>Flattened XML list of structures</li> </ol>",
                     "idempotent": true
                 },
-                "description": "Tests for XML list serialization",
                 "result": {
                     "stringList": [
                         "foo",
@@ -4332,6 +4332,7 @@
         "cases": [
             {
                 "id": "XmlMaps",
+                "description": "Tests for XML map serialization",
                 "given": {
                     "name": "XmlMaps",
                     "http": {
@@ -4344,7 +4345,6 @@
                     },
                     "documentation": "<p>The example tests basic map serialization.</p>"
                 },
-                "description": "Tests for XML map serialization",
                 "result": {
                     "myMap": {
                         "foo": {
@@ -4418,6 +4418,7 @@
         "cases": [
             {
                 "id": "XmlMapsXmlName",
+                "description": "Serializes XML lists",
                 "given": {
                     "name": "XmlMapsXmlName",
                     "http": {
@@ -4429,7 +4430,6 @@
                         "shape": "XmlMapsXmlNameResponse"
                     }
                 },
-                "description": "Serializes XML lists",
                 "result": {
                     "myMap": {
                         "foo": {
@@ -4499,6 +4499,7 @@
         "cases": [
             {
                 "id": "RestXmlXmlMapWithXmlNamespace",
+                "description": "Serializes XML maps in responses that have xmlNamespace and xmlName on members",
                 "given": {
                     "name": "XmlMapWithXmlNamespace",
                     "http": {
@@ -4511,7 +4512,6 @@
                     },
                     "documentation": "<p>Maps with @xmlNamespace and @xmlName</p>"
                 },
-                "description": "Serializes XML maps in responses that have xmlNamespace and xmlName on members",
                 "result": {
                     "myMap": {
                         "a": "A",
@@ -4587,6 +4587,7 @@
         "cases": [
             {
                 "id": "XmlNamespaces",
+                "description": "Serializes XML namespaces",
                 "given": {
                     "name": "XmlNamespaces",
                     "http": {
@@ -4598,7 +4599,6 @@
                         "shape": "XmlNamespacesResponse"
                     }
                 },
-                "description": "Serializes XML namespaces",
                 "result": {
                     "nested": {
                         "foo": "Foo",
@@ -4694,6 +4694,7 @@
         "cases": [
             {
                 "id": "XmlTimestamps",
+                "description": "Tests how normal timestamps are serialized",
                 "given": {
                     "name": "XmlTimestamps",
                     "http": {
@@ -4706,7 +4707,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Tests how normal timestamps are serialized",
                 "result": {
                     "normal": 1398796238
                 },
@@ -4720,6 +4720,7 @@
             },
             {
                 "id": "XmlTimestampsWithDateTimeFormat",
+                "description": "Ensures that the timestampFormat of date-time works like normal timestamps",
                 "given": {
                     "name": "XmlTimestamps",
                     "http": {
@@ -4732,7 +4733,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Ensures that the timestampFormat of date-time works like normal timestamps",
                 "result": {
                     "dateTime": 1398796238
                 },
@@ -4746,6 +4746,7 @@
             },
             {
                 "id": "XmlTimestampsWithDateTimeOnTargetFormat",
+                "description": "Ensures that the timestampFormat of date-time on the target shape works like normal timestamps",
                 "given": {
                     "name": "XmlTimestamps",
                     "http": {
@@ -4758,7 +4759,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Ensures that the timestampFormat of date-time on the target shape works like normal timestamps",
                 "result": {
                     "dateTimeOnTarget": 1398796238
                 },
@@ -4772,6 +4772,7 @@
             },
             {
                 "id": "XmlTimestampsWithEpochSecondsFormat",
+                "description": "Ensures that the timestampFormat of epoch-seconds works",
                 "given": {
                     "name": "XmlTimestamps",
                     "http": {
@@ -4784,7 +4785,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Ensures that the timestampFormat of epoch-seconds works",
                 "result": {
                     "epochSeconds": 1398796238
                 },
@@ -4798,6 +4798,7 @@
             },
             {
                 "id": "XmlTimestampsWithEpochSecondsOnTargetFormat",
+                "description": "Ensures that the timestampFormat of epoch-seconds on the target shape works",
                 "given": {
                     "name": "XmlTimestamps",
                     "http": {
@@ -4810,7 +4811,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Ensures that the timestampFormat of epoch-seconds on the target shape works",
                 "result": {
                     "epochSecondsOnTarget": 1398796238
                 },
@@ -4824,6 +4824,7 @@
             },
             {
                 "id": "XmlTimestampsWithHttpDateFormat",
+                "description": "Ensures that the timestampFormat of http-date works",
                 "given": {
                     "name": "XmlTimestamps",
                     "http": {
@@ -4836,7 +4837,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Ensures that the timestampFormat of http-date works",
                 "result": {
                     "httpDate": 1398796238
                 },
@@ -4850,6 +4850,7 @@
             },
             {
                 "id": "XmlTimestampsWithHttpDateOnTargetFormat",
+                "description": "Ensures that the timestampFormat of http-date on the target shape works",
                 "given": {
                     "name": "XmlTimestamps",
                     "http": {
@@ -4862,7 +4863,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Ensures that the timestampFormat of http-date on the target shape works",
                 "result": {
                     "httpDateOnTarget": 1398796238
                 },
@@ -4995,6 +4995,7 @@
         "cases": [
             {
                 "id": "XmlUnionsWithStructMember",
+                "description": "Serializes union struct member",
                 "given": {
                     "name": "XmlUnions",
                     "http": {
@@ -5007,7 +5008,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Serializes union struct member",
                 "result": {
                     "unionValue": {
                         "structValue": {
@@ -5032,6 +5032,7 @@
             },
             {
                 "id": "XmlUnionsWithStringMember",
+                "description": "Serializes union string member",
                 "given": {
                     "name": "XmlUnions",
                     "http": {
@@ -5044,7 +5045,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Serializes union string member",
                 "result": {
                     "unionValue": {
                         "stringValue": "some string"
@@ -5060,6 +5060,7 @@
             },
             {
                 "id": "XmlUnionsWithBooleanMember",
+                "description": "Serializes union boolean member",
                 "given": {
                     "name": "XmlUnions",
                     "http": {
@@ -5072,7 +5073,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Serializes union boolean member",
                 "result": {
                     "unionValue": {
                         "booleanValue": true
@@ -5088,6 +5088,7 @@
             },
             {
                 "id": "XmlUnionsWithUnionMember",
+                "description": "Serializes union member",
                 "given": {
                     "name": "XmlUnions",
                     "http": {
@@ -5100,7 +5101,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Serializes union member",
                 "result": {
                     "unionValue": {
                         "unionValue": {

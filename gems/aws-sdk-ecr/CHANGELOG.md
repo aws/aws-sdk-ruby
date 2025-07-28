@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2025-07-22)
+------------------
+
+* Feature - Add support for Image Tag Mutability Exception feature, allowing repositories to define wildcard-based patterns that override the default image tag mutability settings.
+
+1.105.0 (2025-07-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.104.0 (2025-06-16)
 ------------------
 

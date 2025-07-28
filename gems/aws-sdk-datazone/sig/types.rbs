@@ -117,6 +117,26 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class AggregationListItem
+      attr_accessor attribute: ::String
+      attr_accessor display_value: ::String
+      SENSITIVE: []
+    end
+
+    class AggregationOutput
+      attr_accessor attribute: ::String
+      attr_accessor display_value: ::String
+      attr_accessor items: ::Array[Types::AggregationOutputItem]
+      SENSITIVE: []
+    end
+
+    class AggregationOutputItem
+      attr_accessor count: ::Integer
+      attr_accessor display_value: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class AllDomainUnitsGrantFilter < Aws::EmptyStructure
     end
 
@@ -179,6 +199,7 @@ module Aws::DataZone
     class AssetItemAdditionalAttributes
       attr_accessor forms_output: ::Array[Types::FormOutput]
       attr_accessor latest_time_series_data_point_forms_output: ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
+      attr_accessor match_rationale: ::Array[Types::MatchRationaleItem]
       attr_accessor read_only_forms_output: ::Array[Types::FormOutput]
       SENSITIVE: []
     end
@@ -221,6 +242,7 @@ module Aws::DataZone
     class AssetListingItemAdditionalAttributes
       attr_accessor forms: ::String
       attr_accessor latest_time_series_data_point_forms: ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
+      attr_accessor match_rationale: ::Array[Types::MatchRationaleItem]
       SENSITIVE: []
     end
 
@@ -1268,6 +1290,11 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class DataProductItemAdditionalAttributes
+      attr_accessor match_rationale: ::Array[Types::MatchRationaleItem]
+      SENSITIVE: []
+    end
+
     class DataProductListing
       attr_accessor created_at: ::Time
       attr_accessor data_product_id: ::String
@@ -1298,10 +1325,12 @@ module Aws::DataZone
 
     class DataProductListingItemAdditionalAttributes
       attr_accessor forms: ::String
+      attr_accessor match_rationale: ::Array[Types::MatchRationaleItem]
       SENSITIVE: []
     end
 
     class DataProductResultItem
+      attr_accessor additional_attributes: Types::DataProductItemAdditionalAttributes
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
       attr_accessor description: ::String
@@ -2730,6 +2759,7 @@ module Aws::DataZone
     end
 
     class GlossaryItem
+      attr_accessor additional_attributes: Types::GlossaryItemAdditionalAttributes
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
       attr_accessor description: ::String
@@ -2743,7 +2773,13 @@ module Aws::DataZone
       SENSITIVE: [:description, :name]
     end
 
+    class GlossaryItemAdditionalAttributes
+      attr_accessor match_rationale: ::Array[Types::MatchRationaleItem]
+      SENSITIVE: []
+    end
+
     class GlossaryTermItem
+      attr_accessor additional_attributes: Types::GlossaryTermItemAdditionalAttributes
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
       attr_accessor domain_id: ::String
@@ -2757,6 +2793,11 @@ module Aws::DataZone
       attr_accessor updated_at: ::Time
       attr_accessor updated_by: ::String
       SENSITIVE: [:long_description, :name, :short_description]
+    end
+
+    class GlossaryTermItemAdditionalAttributes
+      attr_accessor match_rationale: ::Array[Types::MatchRationaleItem]
+      SENSITIVE: []
     end
 
     class GlueConnection
@@ -3640,6 +3681,23 @@ module Aws::DataZone
       attr_accessor listing_id: ::String
       attr_accessor listing_revision: ::String
       SENSITIVE: []
+    end
+
+    class MatchOffset
+      attr_accessor end_offset: ::Integer
+      attr_accessor start_offset: ::Integer
+      SENSITIVE: []
+    end
+
+    class MatchRationaleItem
+      attr_accessor text_matches: ::Array[Types::TextMatchItem]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class TextMatches < MatchRationaleItem
+      end
+      class Unknown < MatchRationaleItem
+      end
     end
 
     class Member
@@ -4534,7 +4592,7 @@ module Aws::DataZone
     end
 
     class SearchInput
-      attr_accessor additional_attributes: ::Array[("FORMS" | "TIME_SERIES_DATA_POINT_FORMS")]
+      attr_accessor additional_attributes: ::Array[("FORMS" | "TIME_SERIES_DATA_POINT_FORMS" | "TEXT_MATCH_RATIONALE")]
       attr_accessor domain_identifier: ::String
       attr_accessor filters: Types::FilterClause
       attr_accessor max_results: ::Integer
@@ -4568,7 +4626,8 @@ module Aws::DataZone
     end
 
     class SearchListingsInput
-      attr_accessor additional_attributes: ::Array[("FORMS" | "TIME_SERIES_DATA_POINT_FORMS")]
+      attr_accessor additional_attributes: ::Array[("FORMS" | "TIME_SERIES_DATA_POINT_FORMS" | "TEXT_MATCH_RATIONALE")]
+      attr_accessor aggregations: ::Array[Types::AggregationListItem]
       attr_accessor domain_identifier: ::String
       attr_accessor filters: Types::FilterClause
       attr_accessor max_results: ::Integer
@@ -4580,6 +4639,7 @@ module Aws::DataZone
     end
 
     class SearchListingsOutput
+      attr_accessor aggregates: ::Array[Types::AggregationOutput]
       attr_accessor items: ::Array[Types::SearchResultItem]
       attr_accessor next_token: ::String
       attr_accessor total_match_count: ::Integer
@@ -4996,6 +5056,13 @@ module Aws::DataZone
     class TermRelations
       attr_accessor classifies: ::Array[::String]
       attr_accessor is_a: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TextMatchItem
+      attr_accessor attribute: ::String
+      attr_accessor match_offsets: ::Array[Types::MatchOffset]
+      attr_accessor text: ::String
       SENSITIVE: []
     end
 

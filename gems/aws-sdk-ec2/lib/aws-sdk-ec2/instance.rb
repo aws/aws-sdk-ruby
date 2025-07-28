@@ -1502,6 +1502,7 @@ module Aws::EC2
     #
     #   instance.stop({
     #     hibernate: false,
+    #     skip_os_shutdown: false,
     #     dry_run: false,
     #     force: false,
     #   })
@@ -1509,7 +1510,7 @@ module Aws::EC2
     # @option options [Boolean] :hibernate
     #   Hibernates the instance if the instance was enabled for hibernation at
     #   launch. If the instance cannot hibernate successfully, a normal
-    #   shutdown occurs. For more information, see [Hibernate your
+    #   shutdown occurs. For more information, see [Hibernate your Amazon EC2
     #   instance][1] in the *Amazon EC2 User Guide*.
     #
     #   Default: `false`
@@ -1517,6 +1518,15 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
+    # @option options [Boolean] :skip_os_shutdown
+    #   Specifies whether to bypass the graceful OS shutdown process when the
+    #   instance is stopped.
+    #
+    #   Bypassing the graceful OS shutdown might result in data loss or
+    #   corruption (for example, memory contents not flushed to disk or loss
+    #   of in-flight IOs) or skipped shutdown scripts.
+    #
+    #   Default: `false`
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
@@ -1551,9 +1561,15 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   instance.terminate({
+    #     skip_os_shutdown: false,
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [Boolean] :skip_os_shutdown
+    #   Specifies whether to bypass the graceful OS shutdown process when the
+    #   instance is terminated.
+    #
+    #   Default: `false`
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
@@ -2079,6 +2095,7 @@ module Aws::EC2
       #
       #   instance.batch_stop({
       #     hibernate: false,
+      #     skip_os_shutdown: false,
       #     dry_run: false,
       #     force: false,
       #   })
@@ -2086,7 +2103,7 @@ module Aws::EC2
       # @option options [Boolean] :hibernate
       #   Hibernates the instance if the instance was enabled for hibernation at
       #   launch. If the instance cannot hibernate successfully, a normal
-      #   shutdown occurs. For more information, see [Hibernate your
+      #   shutdown occurs. For more information, see [Hibernate your Amazon EC2
       #   instance][1] in the *Amazon EC2 User Guide*.
       #
       #   Default: `false`
@@ -2094,6 +2111,15 @@ module Aws::EC2
       #
       #
       #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
+      # @option options [Boolean] :skip_os_shutdown
+      #   Specifies whether to bypass the graceful OS shutdown process when the
+      #   instance is stopped.
+      #
+      #   Bypassing the graceful OS shutdown might result in data loss or
+      #   corruption (for example, memory contents not flushed to disk or loss
+      #   of in-flight IOs) or skipped shutdown scripts.
+      #
+      #   Default: `false`
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the operation,
       #   without actually making the request, and provides an error response.
@@ -2134,9 +2160,15 @@ module Aws::EC2
       # @example Request syntax with placeholder values
       #
       #   instance.batch_terminate!({
+      #     skip_os_shutdown: false,
       #     dry_run: false,
       #   })
       # @param options ({})
+      # @option options [Boolean] :skip_os_shutdown
+      #   Specifies whether to bypass the graceful OS shutdown process when the
+      #   instance is terminated.
+      #
+      #   Default: `false`
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the operation,
       #   without actually making the request, and provides an error response.

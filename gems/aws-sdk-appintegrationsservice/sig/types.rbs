@@ -20,6 +20,11 @@ module Aws::AppIntegrationsService
       SENSITIVE: []
     end
 
+    class ApplicationConfig
+      attr_accessor contact_handling: Types::ContactHandling
+      SENSITIVE: []
+    end
+
     class ApplicationSourceConfig
       attr_accessor external_url_config: Types::ExternalUrlConfig
       SENSITIVE: []
@@ -32,6 +37,12 @@ module Aws::AppIntegrationsService
       attr_accessor namespace: ::String
       attr_accessor created_time: ::Time
       attr_accessor last_modified_time: ::Time
+      attr_accessor is_service: bool
+      SENSITIVE: []
+    end
+
+    class ContactHandling
+      attr_accessor scope: ("CROSS_CONTACTS" | "PER_CONTACT")
       SENSITIVE: []
     end
 
@@ -45,6 +56,10 @@ module Aws::AppIntegrationsService
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor permissions: ::Array[::String]
+      attr_accessor is_service: bool
+      attr_accessor initialization_timeout: ::Integer
+      attr_accessor application_config: Types::ApplicationConfig
+      attr_accessor iframe_config: Types::IframeConfig
       SENSITIVE: []
     end
 
@@ -222,6 +237,10 @@ module Aws::AppIntegrationsService
       attr_accessor last_modified_time: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor permissions: ::Array[::String]
+      attr_accessor is_service: bool
+      attr_accessor initialization_timeout: ::Integer
+      attr_accessor application_config: Types::ApplicationConfig
+      attr_accessor iframe_config: Types::IframeConfig
       SENSITIVE: []
     end
 
@@ -256,6 +275,12 @@ module Aws::AppIntegrationsService
       attr_accessor event_bridge_bus: ::String
       attr_accessor event_filter: Types::EventFilter
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class IframeConfig
+      attr_accessor allow: ::Array[::String]
+      attr_accessor sandbox: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -432,6 +457,10 @@ module Aws::AppIntegrationsService
       attr_accessor subscriptions: ::Array[Types::Subscription]
       attr_accessor publications: ::Array[Types::Publication]
       attr_accessor permissions: ::Array[::String]
+      attr_accessor is_service: bool
+      attr_accessor initialization_timeout: ::Integer
+      attr_accessor application_config: Types::ApplicationConfig
+      attr_accessor iframe_config: Types::IframeConfig
       SENSITIVE: []
     end
 

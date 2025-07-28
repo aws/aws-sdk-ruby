@@ -32,6 +32,7 @@ module Aws::SocialMessaging
   # * {DependencyException}
   # * {InternalServiceException}
   # * {InvalidParametersException}
+  # * {LimitExceededException}
   # * {ResourceNotFoundException}
   # * {ThrottledRequestException}
   # * {ValidationException}
@@ -115,6 +116,21 @@ module Aws::SocialMessaging
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SocialMessaging::Types::InvalidParametersException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class LimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SocialMessaging::Types::LimitExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

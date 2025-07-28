@@ -291,7 +291,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-key
     #   @return [String]
     #
     # @!attribute [rw] target_key_id
@@ -319,7 +319,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-mgn-key
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/find-cmk-id-arn.html
     #   @return [String]
     #
@@ -2118,7 +2118,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html##aws-managed-cmk
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-key
     #   @return [String]
     #
     # @!attribute [rw] grant_tokens
@@ -6453,8 +6453,8 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-mgn-key
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-key
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateAliasRequest AWS API Documentation

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2025-07-25)
+------------------
+
+* Feature - Documentation updates for Amazon SQS fair queues feature.
+
+1.97.0 (2025-07-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.96.0 (2025-06-02)
 ------------------
 

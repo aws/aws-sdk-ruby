@@ -18,6 +18,7 @@ module Aws::AppIntegrationsService
     ApplicationApprovedOrigins = Shapes::ListShape.new(name: 'ApplicationApprovedOrigins')
     ApplicationAssociationSummary = Shapes::StructureShape.new(name: 'ApplicationAssociationSummary')
     ApplicationAssociationsList = Shapes::ListShape.new(name: 'ApplicationAssociationsList')
+    ApplicationConfig = Shapes::StructureShape.new(name: 'ApplicationConfig')
     ApplicationName = Shapes::StringShape.new(name: 'ApplicationName')
     ApplicationNamespace = Shapes::StringShape.new(name: 'ApplicationNamespace')
     ApplicationSourceConfig = Shapes::StructureShape.new(name: 'ApplicationSourceConfig')
@@ -26,8 +27,11 @@ module Aws::AppIntegrationsService
     ApplicationsList = Shapes::ListShape.new(name: 'ApplicationsList')
     Arn = Shapes::StringShape.new(name: 'Arn')
     ArnOrUUID = Shapes::StringShape.new(name: 'ArnOrUUID')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientAssociationMetadata = Shapes::MapShape.new(name: 'ClientAssociationMetadata')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
+    ContactHandling = Shapes::StructureShape.new(name: 'ContactHandling')
+    ContactHandlingScope = Shapes::StringShape.new(name: 'ContactHandlingScope')
     CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
     CreateApplicationResponse = Shapes::StructureShape.new(name: 'CreateApplicationResponse')
     CreateDataIntegrationAssociationRequest = Shapes::StructureShape.new(name: 'CreateDataIntegrationAssociationRequest')
@@ -75,6 +79,10 @@ module Aws::AppIntegrationsService
     GetEventIntegrationResponse = Shapes::StructureShape.new(name: 'GetEventIntegrationResponse')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
+    IframeConfig = Shapes::StructureShape.new(name: 'IframeConfig')
+    IframePermission = Shapes::StringShape.new(name: 'IframePermission')
+    IframePermissionList = Shapes::ListShape.new(name: 'IframePermissionList')
+    InitializationTimeout = Shapes::IntegerShape.new(name: 'InitializationTimeout')
     InternalServiceError = Shapes::StructureShape.new(name: 'InternalServiceError')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     LastExecutionStatus = Shapes::StructureShape.new(name: 'LastExecutionStatus')
@@ -146,6 +154,9 @@ module Aws::AppIntegrationsService
 
     ApplicationAssociationsList.member = Shapes::ShapeRef.new(shape: ApplicationAssociationSummary)
 
+    ApplicationConfig.add_member(:contact_handling, Shapes::ShapeRef.new(shape: ContactHandling, location_name: "ContactHandling"))
+    ApplicationConfig.struct_class = Types::ApplicationConfig
+
     ApplicationSourceConfig.add_member(:external_url_config, Shapes::ShapeRef.new(shape: ExternalUrlConfig, location_name: "ExternalUrlConfig"))
     ApplicationSourceConfig.struct_class = Types::ApplicationSourceConfig
 
@@ -155,12 +166,16 @@ module Aws::AppIntegrationsService
     ApplicationSummary.add_member(:namespace, Shapes::ShapeRef.new(shape: ApplicationNamespace, location_name: "Namespace"))
     ApplicationSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     ApplicationSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    ApplicationSummary.add_member(:is_service, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsService"))
     ApplicationSummary.struct_class = Types::ApplicationSummary
 
     ApplicationsList.member = Shapes::ShapeRef.new(shape: ApplicationSummary)
 
     ClientAssociationMetadata.key = Shapes::ShapeRef.new(shape: NonBlankString)
     ClientAssociationMetadata.value = Shapes::ShapeRef.new(shape: NonBlankString)
+
+    ContactHandling.add_member(:scope, Shapes::ShapeRef.new(shape: ContactHandlingScope, location_name: "Scope"))
+    ContactHandling.struct_class = Types::ContactHandling
 
     CreateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "Name"))
     CreateApplicationRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: ApplicationNamespace, required: true, location_name: "Namespace"))
@@ -171,6 +186,10 @@ module Aws::AppIntegrationsService
     CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateApplicationRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionList, location_name: "Permissions"))
+    CreateApplicationRequest.add_member(:is_service, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsService"))
+    CreateApplicationRequest.add_member(:initialization_timeout, Shapes::ShapeRef.new(shape: InitializationTimeout, location_name: "InitializationTimeout"))
+    CreateApplicationRequest.add_member(:application_config, Shapes::ShapeRef.new(shape: ApplicationConfig, location_name: "ApplicationConfig"))
+    CreateApplicationRequest.add_member(:iframe_config, Shapes::ShapeRef.new(shape: IframeConfig, location_name: "IframeConfig"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -318,6 +337,10 @@ module Aws::AppIntegrationsService
     GetApplicationResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     GetApplicationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     GetApplicationResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionList, location_name: "Permissions"))
+    GetApplicationResponse.add_member(:is_service, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsService"))
+    GetApplicationResponse.add_member(:initialization_timeout, Shapes::ShapeRef.new(shape: InitializationTimeout, location_name: "InitializationTimeout"))
+    GetApplicationResponse.add_member(:application_config, Shapes::ShapeRef.new(shape: ApplicationConfig, location_name: "ApplicationConfig"))
+    GetApplicationResponse.add_member(:iframe_config, Shapes::ShapeRef.new(shape: IframeConfig, location_name: "IframeConfig"))
     GetApplicationResponse.struct_class = Types::GetApplicationResponse
 
     GetDataIntegrationRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
@@ -345,6 +368,12 @@ module Aws::AppIntegrationsService
     GetEventIntegrationResponse.add_member(:event_filter, Shapes::ShapeRef.new(shape: EventFilter, location_name: "EventFilter"))
     GetEventIntegrationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     GetEventIntegrationResponse.struct_class = Types::GetEventIntegrationResponse
+
+    IframeConfig.add_member(:allow, Shapes::ShapeRef.new(shape: IframePermissionList, location_name: "Allow"))
+    IframeConfig.add_member(:sandbox, Shapes::ShapeRef.new(shape: IframePermissionList, location_name: "Sandbox"))
+    IframeConfig.struct_class = Types::IframeConfig
+
+    IframePermissionList.member = Shapes::ShapeRef.new(shape: IframePermission)
 
     InternalServiceError.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     InternalServiceError.struct_class = Types::InternalServiceError
@@ -476,6 +505,10 @@ module Aws::AppIntegrationsService
     UpdateApplicationRequest.add_member(:subscriptions, Shapes::ShapeRef.new(shape: SubscriptionList, deprecated: true, location_name: "Subscriptions", metadata: {"deprecatedMessage" => "Subscriptions has been replaced with Permissions"}))
     UpdateApplicationRequest.add_member(:publications, Shapes::ShapeRef.new(shape: PublicationList, deprecated: true, location_name: "Publications", metadata: {"deprecatedMessage" => "Publications has been replaced with Permissions"}))
     UpdateApplicationRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionList, location_name: "Permissions"))
+    UpdateApplicationRequest.add_member(:is_service, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsService", metadata: {"box" => true}))
+    UpdateApplicationRequest.add_member(:initialization_timeout, Shapes::ShapeRef.new(shape: InitializationTimeout, location_name: "InitializationTimeout"))
+    UpdateApplicationRequest.add_member(:application_config, Shapes::ShapeRef.new(shape: ApplicationConfig, location_name: "ApplicationConfig"))
+    UpdateApplicationRequest.add_member(:iframe_config, Shapes::ShapeRef.new(shape: IframeConfig, location_name: "IframeConfig"))
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
     UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse

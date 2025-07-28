@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2025-07-25)
+------------------
+
+* Feature - Amazon AppIntegrations introduces new configuration capabilities to enable customers to manage iframe permissions, control application refresh behavior (per contact or per browser/cross-contact), and run background applications (service).
+
+1.52.0 (2025-07-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.51.0 (2025-06-02)
 ------------------
 

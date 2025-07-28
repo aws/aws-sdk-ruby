@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.542.0 (2025-07-25)
+------------------
+
+* Feature - Transit Gateway native integration with AWS Network Firewall. Adding new enum value for the new Transit Gateway Attachment type.
+
+1.541.0 (2025-07-23)
+------------------
+
+* Feature - Added support for skip-os-shutdown option for the EC2 instance stop and terminate operations. This feature enables customers to bypass the graceful OS shutdown, supporting faster state transitions when instance data preservation isn't critical.
+
+1.540.0 (2025-07-21)
+------------------
+
+* Feature - This release adds support for C8gn, F2 and P6e-GB200 Instance types
+
 1.539.0 (2025-07-17)
 ------------------
 

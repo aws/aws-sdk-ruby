@@ -95,7 +95,7 @@ module Aws::OSIS
     #     class name or an instance of a plugin class.
     #
     #   @option options [required, Aws::CredentialProvider] :credentials
-    #     Your AWS credentials. This can be an instance of any one of the
+    #     Your AWS credentials used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
@@ -128,18 +128,23 @@ module Aws::OSIS
     #     locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
+    #
     #     * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
     #       `:account_id` options.
-    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
-    #       ENV['AWS_SESSION_TOKEN'], and ENV['AWS_ACCOUNT_ID']
+    #
+    #     * `ENV['AWS_ACCESS_KEY_ID']`, `ENV['AWS_SECRET_ACCESS_KEY']`,
+    #       `ENV['AWS_SESSION_TOKEN']`, and `ENV['AWS_ACCOUNT_ID']`.
+    #
     #     * `~/.aws/credentials`
+    #
     #     * `~/.aws/config`
+    #
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
     #       enable retries and extended timeouts. Instance profile credential
-    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
-    #       to true.
+    #       fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
+    #       to `true`.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -166,6 +171,11 @@ module Aws::OSIS
     #     until there is sufficent client side capacity to retry the request.
     #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
     #     not retry instead of sleeping.
+    #
+    #   @option options [Array<String>] :auth_scheme_preference
+    #     A list of preferred authentication schemes to use when making a request. Supported values are:
+    #     `sigv4`, `sigv4a`, `httpBearerAuth`, and `noAuth`. When set using `ENV['AWS_AUTH_SCHEME_PREFERENCE']` or in
+    #     shared config as `auth_scheme_preference`, the value should be a comma-separated list.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -253,8 +263,8 @@ module Aws::OSIS
     #     4 times. Used in `standard` and `adaptive` retry modes.
     #
     #   @option options [String] :profile ("default")
-    #     Used when loading credentials from the shared credentials file
-    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
+    #     When not specified, 'default' is used.
     #
     #   @option options [String] :request_checksum_calculation ("when_supported")
     #     Determines when a checksum will be calculated for request payloads. Values are:
@@ -367,7 +377,7 @@ module Aws::OSIS
     #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
-    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     Your Bearer token used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
@@ -511,6 +521,16 @@ module Aws::OSIS
     # @option params [Array<Types::Tag>] :tags
     #   List of tags to add to the pipeline upon creation.
     #
+    # @option params [String] :pipeline_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that provides the
+    #   required permissions for a pipeline to read from the source and write
+    #   to the sink. For more information, see [Setting up roles and users in
+    #   Amazon OpenSearch Ingestion][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline-security-overview.html
+    #
     # @return [Types::CreatePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePipelineResponse#pipeline #pipeline} => Types::Pipeline
@@ -549,6 +569,7 @@ module Aws::OSIS
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     pipeline_role_arn: "PipelineRoleArn",
     #   })
     #
     # @example Response structure
@@ -588,6 +609,7 @@ module Aws::OSIS
     #   resp.pipeline.tags #=> Array
     #   resp.pipeline.tags[0].key #=> String
     #   resp.pipeline.tags[0].value #=> String
+    #   resp.pipeline.pipeline_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/CreatePipeline AWS API Documentation
     #
@@ -677,6 +699,7 @@ module Aws::OSIS
     #   resp.pipeline.tags #=> Array
     #   resp.pipeline.tags[0].key #=> String
     #   resp.pipeline.tags[0].value #=> String
+    #   resp.pipeline.pipeline_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/GetPipeline AWS API Documentation
     #
@@ -959,6 +982,7 @@ module Aws::OSIS
     #   resp.pipeline.tags #=> Array
     #   resp.pipeline.tags[0].key #=> String
     #   resp.pipeline.tags[0].value #=> String
+    #   resp.pipeline.pipeline_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/StartPipeline AWS API Documentation
     #
@@ -1026,6 +1050,7 @@ module Aws::OSIS
     #   resp.pipeline.tags #=> Array
     #   resp.pipeline.tags[0].key #=> String
     #   resp.pipeline.tags[0].value #=> String
+    #   resp.pipeline.pipeline_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/StopPipeline AWS API Documentation
     #
@@ -1136,6 +1161,16 @@ module Aws::OSIS
     #   Key-value pairs to configure encryption for data that is written to a
     #   persistent buffer.
     #
+    # @option params [String] :pipeline_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that provides the
+    #   required permissions for a pipeline to read from the source and write
+    #   to the sink. For more information, see [Setting up roles and users in
+    #   Amazon OpenSearch Ingestion][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline-security-overview.html
+    #
     # @return [Types::UpdatePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePipelineResponse#pipeline #pipeline} => Types::Pipeline
@@ -1159,6 +1194,7 @@ module Aws::OSIS
     #     encryption_at_rest_options: {
     #       kms_key_arn: "KmsKeyArn", # required
     #     },
+    #     pipeline_role_arn: "PipelineRoleArn",
     #   })
     #
     # @example Response structure
@@ -1198,6 +1234,7 @@ module Aws::OSIS
     #   resp.pipeline.tags #=> Array
     #   resp.pipeline.tags[0].key #=> String
     #   resp.pipeline.tags[0].value #=> String
+    #   resp.pipeline.pipeline_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/UpdatePipeline AWS API Documentation
     #
@@ -1266,7 +1303,7 @@ module Aws::OSIS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-osis'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

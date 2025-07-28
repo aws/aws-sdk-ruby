@@ -71,6 +71,119 @@ module Aws::SocialMessaging
       include Aws::Structure
     end
 
+    # @!attribute [rw] meta_library_template
+    #   The template configuration from Meta's library, including
+    #   customizations for buttons and body text.
+    #   @return [Types::MetaLibraryTemplate]
+    #
+    # @!attribute [rw] id
+    #   The ID of the WhatsApp Business Account to associate with this
+    #   template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/CreateWhatsAppMessageTemplateFromLibraryInput AWS API Documentation
+    #
+    class CreateWhatsAppMessageTemplateFromLibraryInput < Struct.new(
+      :meta_library_template,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] meta_template_id
+    #   The numeric ID assigned to the template by Meta.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_status
+    #   The status of the created template (for example, PENDING or
+    #   APPROVED).
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   The category of the template (for example, UTILITY or MARKETING).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/CreateWhatsAppMessageTemplateFromLibraryOutput AWS API Documentation
+    #
+    class CreateWhatsAppMessageTemplateFromLibraryOutput < Struct.new(
+      :meta_template_id,
+      :template_status,
+      :category)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_definition
+    #   The complete template definition as a JSON blob.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the WhatsApp Business Account to associate with this
+    #   template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/CreateWhatsAppMessageTemplateInput AWS API Documentation
+    #
+    class CreateWhatsAppMessageTemplateInput < Struct.new(
+      :template_definition,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the WhatsApp Business Account associated with this media
+    #   upload.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_s3_file
+    #   Contains information for the S3 bucket that contains media files.
+    #   @return [Types::S3File]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/CreateWhatsAppMessageTemplateMediaInput AWS API Documentation
+    #
+    class CreateWhatsAppMessageTemplateMediaInput < Struct.new(
+      :id,
+      :source_s3_file)
+      SENSITIVE = [:source_s3_file]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] meta_header_handle
+    #   The handle assigned to the uploaded media by Meta, used to reference
+    #   the media in templates.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/CreateWhatsAppMessageTemplateMediaOutput AWS API Documentation
+    #
+    class CreateWhatsAppMessageTemplateMediaOutput < Struct.new(
+      :meta_header_handle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] meta_template_id
+    #   The numeric ID assigned to the template by Meta.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_status
+    #   The status of the created template, such as PENDING or APPROVED..
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   The category of the template, such as UTILITY or MARKETING.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/CreateWhatsAppMessageTemplateOutput AWS API Documentation
+    #
+    class CreateWhatsAppMessageTemplateOutput < Struct.new(
+      :meta_template_id,
+      :template_status,
+      :category)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] media_id
     #   The unique identifier of the media file to delete. Use the `mediaId`
     #   returned from [PostWhatsAppMessageMedia][1].
@@ -111,6 +224,38 @@ module Aws::SocialMessaging
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] meta_template_id
+    #   The numeric ID of the template assigned by Meta.
+    #   @return [String]
+    #
+    # @!attribute [rw] delete_all_languages
+    #   If true, deletes all language versions of the template.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] id
+    #   The ID of the WhatsApp Business Account associated with this
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the template to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/DeleteWhatsAppMessageTemplateInput AWS API Documentation
+    #
+    class DeleteWhatsAppMessageTemplateInput < Struct.new(
+      :meta_template_id,
+      :delete_all_languages,
+      :id,
+      :template_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/DeleteWhatsAppMessageTemplateOutput AWS API Documentation
+    #
+    class DeleteWhatsAppMessageTemplateOutput < Aws::EmptyStructure; end
 
     # Thrown when performing an action because a dependency would be broken.
     #
@@ -274,6 +419,37 @@ module Aws::SocialMessaging
       include Aws::Structure
     end
 
+    # @!attribute [rw] meta_template_id
+    #   The numeric ID of the template assigned by Meta.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the WhatsApp Business Account associated with this
+    #   template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/GetWhatsAppMessageTemplateInput AWS API Documentation
+    #
+    class GetWhatsAppMessageTemplateInput < Struct.new(
+      :meta_template_id,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template
+    #   The complete template definition as a JSON string (maximum 6000
+    #   characters).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/GetWhatsAppMessageTemplateOutput AWS API Documentation
+    #
+    class GetWhatsAppMessageTemplateOutput < Struct.new(
+      :template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request processing has failed because of an unknown error,
     # exception, or failure.
     #
@@ -296,6 +472,139 @@ module Aws::SocialMessaging
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/InvalidParametersException AWS API Documentation
     #
     class InvalidParametersException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration options for customizing the body content of a template
+    # from Meta's library.
+    #
+    # @!attribute [rw] add_contact_number
+    #   When true, includes a contact number in the template body.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] add_learn_more_link
+    #   When true, includes a "learn more" link in the template body.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] add_security_recommendation
+    #   When true, includes security recommendations in the template body.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] add_track_package_link
+    #   When true, includes a package tracking link in the template body.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] code_expiration_minutes
+    #   The number of minutes until a verification code or OTP expires.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/LibraryTemplateBodyInputs AWS API Documentation
+    #
+    class LibraryTemplateBodyInputs < Struct.new(
+      :add_contact_number,
+      :add_learn_more_link,
+      :add_security_recommendation,
+      :add_track_package_link,
+      :code_expiration_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration options for customizing buttons in a template from
+    # Meta's library.
+    #
+    # @!attribute [rw] type
+    #   The type of button (for example, QUICK\_REPLY, CALL, or URL).
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number
+    #   The phone number in E.164 format for CALL-type buttons.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL with dynamic parameters for URL-type buttons.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] otp_type
+    #   The type of one-time password for OTP buttons.
+    #   @return [String]
+    #
+    # @!attribute [rw] zero_tap_terms_accepted
+    #   When true, indicates acceptance of zero-tap terms for the button.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] supported_apps
+    #   List of supported applications for this button type.
+    #   @return [Array<Hash<String,String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/LibraryTemplateButtonInput AWS API Documentation
+    #
+    class LibraryTemplateButtonInput < Struct.new(
+      :type,
+      :phone_number,
+      :url,
+      :otp_type,
+      :zero_tap_terms_accepted,
+      :supported_apps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a button in a template from Meta's library.
+    #
+    # @!attribute [rw] type
+    #   The type of button (for example, QUICK\_REPLY, CALL, or URL).
+    #   @return [String]
+    #
+    # @!attribute [rw] text
+    #   The text displayed on the button (maximum 40 characters).
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number
+    #   The phone number in E.164 format for CALL-type buttons.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL for URL-type buttons.
+    #   @return [String]
+    #
+    # @!attribute [rw] otp_type
+    #   The type of one-time password for OTP buttons.
+    #   @return [String]
+    #
+    # @!attribute [rw] zero_tap_terms_accepted
+    #   When true, indicates acceptance of zero-tap terms for the button.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] supported_apps
+    #   List of supported applications for this button type.
+    #   @return [Array<Hash<String,String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/LibraryTemplateButtonList AWS API Documentation
+    #
+    class LibraryTemplateButtonList < Struct.new(
+      :type,
+      :text,
+      :phone_number,
+      :url,
+      :otp_type,
+      :zero_tap_terms_accepted,
+      :supported_apps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was denied because it would exceed one or more service
+    # quotas or limits.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -488,6 +797,190 @@ module Aws::SocialMessaging
     class ListTagsForResourceOutput < Struct.new(
       :status_code,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the WhatsApp Business Account to list templates for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page (1-100).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/ListWhatsAppMessageTemplatesInput AWS API Documentation
+    #
+    class ListWhatsAppMessageTemplatesInput < Struct.new(
+      :id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] templates
+    #   A list of template summaries.
+    #   @return [Array<Types::TemplateSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results, if any.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/ListWhatsAppMessageTemplatesOutput AWS API Documentation
+    #
+    class ListWhatsAppMessageTemplatesOutput < Struct.new(
+      :templates,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page (1-100).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] id
+    #   The ID of the WhatsApp Business Account to list library templates
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Map of filters to apply (searchKey, topic, usecase, industry,
+    #   language).
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/ListWhatsAppTemplateLibraryInput AWS API Documentation
+    #
+    class ListWhatsAppTemplateLibraryInput < Struct.new(
+      :next_token,
+      :max_results,
+      :id,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] meta_library_templates
+    #   A list of templates from Meta's library.
+    #   @return [Array<Types::MetaLibraryTemplateDefinition>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results, if any.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/ListWhatsAppTemplateLibraryOutput AWS API Documentation
+    #
+    class ListWhatsAppTemplateLibraryOutput < Struct.new(
+      :meta_library_templates,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a template from Meta's library with customization options.
+    #
+    # @!attribute [rw] template_name
+    #   The name to assign to the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] library_template_name
+    #   The name of the template in Meta's library.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_category
+    #   The category of the template (for example, UTILITY or MARKETING).
+    #   @return [String]
+    #
+    # @!attribute [rw] template_language
+    #   The language code for the template (for example, en\_US).
+    #   @return [String]
+    #
+    # @!attribute [rw] library_template_button_inputs
+    #   Button customizations for the template.
+    #   @return [Array<Types::LibraryTemplateButtonInput>]
+    #
+    # @!attribute [rw] library_template_body_inputs
+    #   Body text customizations for the template.
+    #   @return [Types::LibraryTemplateBodyInputs]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/MetaLibraryTemplate AWS API Documentation
+    #
+    class MetaLibraryTemplate < Struct.new(
+      :template_name,
+      :library_template_name,
+      :template_category,
+      :template_language,
+      :library_template_button_inputs,
+      :library_template_body_inputs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the complete structure and content of a template in Meta's
+    # library.
+    #
+    # @!attribute [rw] template_name
+    #   The name of the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_language
+    #   The language code for the template (for example, en\_US).
+    #   @return [String]
+    #
+    # @!attribute [rw] template_category
+    #   The category of the template (for example, UTILITY or MARKETING).
+    #   @return [String]
+    #
+    # @!attribute [rw] template_topic
+    #   The topic or subject matter of the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_use_case
+    #   The intended use case for the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_industry
+    #   The industries the template is designed for.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] template_header
+    #   The header text of the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_body
+    #   The body text of the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_buttons
+    #   The buttons included in the template.
+    #   @return [Array<Types::LibraryTemplateButtonList>]
+    #
+    # @!attribute [rw] template_id
+    #   The ID of the template in Meta's library.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/MetaLibraryTemplateDefinition AWS API Documentation
+    #
+    class MetaLibraryTemplateDefinition < Struct.new(
+      :template_name,
+      :template_language,
+      :template_category,
+      :template_topic,
+      :template_use_case,
+      :template_industry,
+      :template_header,
+      :template_body,
+      :template_buttons,
+      :template_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -731,6 +1224,46 @@ module Aws::SocialMessaging
       include Aws::Structure
     end
 
+    # Provides a summary of a WhatsApp message template's key attributes.
+    #
+    # @!attribute [rw] template_name
+    #   The name of the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] meta_template_id
+    #   The numeric ID assigned to the template by Meta.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_status
+    #   The current status of the template (for example, APPROVED, PENDING,
+    #   or REJECTED).
+    #   @return [String]
+    #
+    # @!attribute [rw] template_quality_score
+    #   The quality score assigned to the template by Meta.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_language
+    #   The language code of the template (for example, en\_US).
+    #   @return [String]
+    #
+    # @!attribute [rw] template_category
+    #   The category of the template (for example, UTILITY or MARKETING).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/TemplateSummary AWS API Documentation
+    #
+    class TemplateSummary < Struct.new(
+      :template_name,
+      :meta_template_id,
+      :template_status,
+      :template_quality_score,
+      :template_language,
+      :template_category)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request was denied due to request throttling.
     #
     # @!attribute [rw] message
@@ -772,6 +1305,40 @@ module Aws::SocialMessaging
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] id
+    #   The ID of the WhatsApp Business Account associated with this
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] meta_template_id
+    #   The numeric ID of the template assigned by Meta.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_category
+    #   The new category for the template (for example, UTILITY or
+    #   MARKETING).
+    #   @return [String]
+    #
+    # @!attribute [rw] template_components
+    #   The updated components of the template as a JSON blob (maximum 3000
+    #   characters).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/UpdateWhatsAppMessageTemplateInput AWS API Documentation
+    #
+    class UpdateWhatsAppMessageTemplateInput < Struct.new(
+      :id,
+      :meta_template_id,
+      :template_category,
+      :template_components)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/UpdateWhatsAppMessageTemplateOutput AWS API Documentation
+    #
+    class UpdateWhatsAppMessageTemplateOutput < Aws::EmptyStructure; end
 
     # The request contains an invalid parameter value.
     #
@@ -947,6 +1514,11 @@ module Aws::SocialMessaging
     #   The quality rating of the phone number.
     #   @return [String]
     #
+    # @!attribute [rw] data_localization_region
+    #   The geographic region where the WhatsApp phone number's data is
+    #   stored and processed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/WhatsAppPhoneNumberDetail AWS API Documentation
     #
     class WhatsAppPhoneNumberDetail < Struct.new(
@@ -956,7 +1528,8 @@ module Aws::SocialMessaging
       :meta_phone_number_id,
       :display_phone_number_name,
       :display_phone_number,
-      :quality_rating)
+      :quality_rating,
+      :data_localization_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -993,6 +1566,11 @@ module Aws::SocialMessaging
     #   The quality rating of the phone number. This is from Meta.
     #   @return [String]
     #
+    # @!attribute [rw] data_localization_region
+    #   The geographic region where the WhatsApp phone number's data is
+    #   stored and processed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/WhatsAppPhoneNumberSummary AWS API Documentation
     #
     class WhatsAppPhoneNumberSummary < Struct.new(
@@ -1002,7 +1580,8 @@ module Aws::SocialMessaging
       :meta_phone_number_id,
       :display_phone_number_name,
       :display_phone_number,
-      :quality_rating)
+      :quality_rating,
+      :data_localization_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1050,10 +1629,16 @@ module Aws::SocialMessaging
     #   `accessToken` value is provided by Meta.
     #   @return [String]
     #
+    # @!attribute [rw] callback_url
+    #   The URL where WhatsApp will send callback notifications for this
+    #   account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/WhatsAppSignupCallback AWS API Documentation
     #
     class WhatsAppSignupCallback < Struct.new(
-      :access_token)
+      :access_token,
+      :callback_url)
       SENSITIVE = []
       include Aws::Structure
     end

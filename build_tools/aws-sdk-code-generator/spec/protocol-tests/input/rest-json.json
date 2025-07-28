@@ -234,6 +234,7 @@
         "cases": [
             {
                 "id": "RestJsonAllQueryStringTypes",
+                "description": "Serializes query string parameters with all supported types",
                 "given": {
                     "name": "AllQueryStringTypes",
                     "http": {
@@ -246,7 +247,6 @@
                     },
                     "documentation": "<p>This example uses all query string types.</p>"
                 },
-                "description": "Serializes query string parameters with all supported types",
                 "params": {
                     "queryString": "Hello there",
                     "queryStringList": [
@@ -393,6 +393,7 @@
             },
             {
                 "id": "RestJsonQueryStringMap",
+                "description": "Handles query string maps",
                 "given": {
                     "name": "AllQueryStringTypes",
                     "http": {
@@ -405,7 +406,6 @@
                     },
                     "documentation": "<p>This example uses all query string types.</p>"
                 },
-                "description": "Handles query string maps",
                 "params": {
                     "queryParamsMapOfStringList": {
                         "QueryParamsStringKeyA": [
@@ -424,6 +424,7 @@
             },
             {
                 "id": "RestJsonQueryStringEscaping",
+                "description": "Handles escaping all required characters in the query string.",
                 "given": {
                     "name": "AllQueryStringTypes",
                     "http": {
@@ -436,7 +437,6 @@
                     },
                     "documentation": "<p>This example uses all query string types.</p>"
                 },
-                "description": "Handles escaping all required characters in the query string.",
                 "params": {
                     "queryString": " %:/?#[]@!$&'()*+,;=😹",
                     "queryParamsMapOfStringList": {
@@ -453,6 +453,7 @@
             },
             {
                 "id": "RestJsonSupportsNaNFloatQueryValues",
+                "description": "Supports handling NaN float query values.",
                 "given": {
                     "name": "AllQueryStringTypes",
                     "http": {
@@ -465,7 +466,6 @@
                     },
                     "documentation": "<p>This example uses all query string types.</p>"
                 },
-                "description": "Supports handling NaN float query values.",
                 "params": {
                     "queryFloat": "NaN",
                     "queryDouble": "NaN",
@@ -486,6 +486,7 @@
             },
             {
                 "id": "RestJsonSupportsInfinityFloatQueryValues",
+                "description": "Supports handling Infinity float query values.",
                 "given": {
                     "name": "AllQueryStringTypes",
                     "http": {
@@ -498,7 +499,6 @@
                     },
                     "documentation": "<p>This example uses all query string types.</p>"
                 },
-                "description": "Supports handling Infinity float query values.",
                 "params": {
                     "queryFloat": "Infinity",
                     "queryDouble": "Infinity",
@@ -519,6 +519,7 @@
             },
             {
                 "id": "RestJsonSupportsNegativeInfinityFloatQueryValues",
+                "description": "Supports handling -Infinity float query values.",
                 "given": {
                     "name": "AllQueryStringTypes",
                     "http": {
@@ -531,7 +532,6 @@
                     },
                     "documentation": "<p>This example uses all query string types.</p>"
                 },
-                "description": "Supports handling -Infinity float query values.",
                 "params": {
                     "queryFloat": "-Infinity",
                     "queryDouble": "-Infinity",
@@ -552,6 +552,7 @@
             },
             {
                 "id": "RestJsonZeroAndFalseQueryValues",
+                "description": "Query values of 0 and false are serialized",
                 "given": {
                     "name": "AllQueryStringTypes",
                     "http": {
@@ -564,7 +565,6 @@
                     },
                     "documentation": "<p>This example uses all query string types.</p>"
                 },
-                "description": "Query values of 0 and false are serialized",
                 "params": {
                     "queryInteger": 0,
                     "queryBoolean": false,
@@ -626,6 +626,7 @@
         "cases": [
             {
                 "id": "RestJsonConstantAndVariableQueryStringMissingOneValue",
+                "description": "Mixes constant and variable query string parameters",
                 "given": {
                     "name": "ConstantAndVariableQueryString",
                     "http": {
@@ -638,7 +639,6 @@
                     },
                     "documentation": "<p>This example uses fixed query string params and variable query string params. The fixed query string parameters and variable parameters must both be serialized (implementations may need to merge them together).</p>"
                 },
-                "description": "Mixes constant and variable query string parameters",
                 "params": {
                     "baz": "bam"
                 },
@@ -650,6 +650,7 @@
             },
             {
                 "id": "RestJsonConstantAndVariableQueryStringAllValues",
+                "description": "Mixes constant and variable query string parameters",
                 "given": {
                     "name": "ConstantAndVariableQueryString",
                     "http": {
@@ -662,7 +663,6 @@
                     },
                     "documentation": "<p>This example uses fixed query string params and variable query string params. The fixed query string parameters and variable parameters must both be serialized (implementations may need to merge them together).</p>"
                 },
-                "description": "Mixes constant and variable query string parameters",
                 "params": {
                     "baz": "bam",
                     "maybeSet": "yes"
@@ -714,6 +714,7 @@
         "cases": [
             {
                 "id": "RestJsonConstantQueryString",
+                "description": "Includes constant query string parameters",
                 "given": {
                     "name": "ConstantQueryString",
                     "http": {
@@ -726,7 +727,6 @@
                     },
                     "documentation": "<p>This example uses a constant query string parameters and a label. This simply tests that labels and query string parameters are compatible. The fixed query string parameter named &quot;hello&quot; should in no way conflict with the label, <code>{hello}</code>.</p>"
                 },
-                "description": "Includes constant query string parameters",
                 "params": {
                     "hello": "hi"
                 },
@@ -780,6 +780,7 @@
         "cases": [
             {
                 "id": "DocumentTypeInputWithObject",
+                "description": "Serializes document types as part of the JSON request payload with no escaping.",
                 "given": {
                     "name": "DocumentType",
                     "http": {
@@ -793,7 +794,6 @@
                     "documentation": "<p>This example serializes a document as part of the payload.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes document types as part of the JSON request payload with no escaping.",
                 "params": {
                     "stringValue": "string",
                     "documentValue": {
@@ -811,6 +811,7 @@
             },
             {
                 "id": "DocumentInputWithString",
+                "description": "Serializes document types using a string.",
                 "given": {
                     "name": "DocumentType",
                     "http": {
@@ -824,7 +825,6 @@
                     "documentation": "<p>This example serializes a document as part of the payload.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes document types using a string.",
                 "params": {
                     "stringValue": "string",
                     "documentValue": "hello"
@@ -840,6 +840,7 @@
             },
             {
                 "id": "DocumentInputWithNumber",
+                "description": "Serializes document types using a number.",
                 "given": {
                     "name": "DocumentType",
                     "http": {
@@ -853,7 +854,6 @@
                     "documentation": "<p>This example serializes a document as part of the payload.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes document types using a number.",
                 "params": {
                     "stringValue": "string",
                     "documentValue": 10
@@ -869,6 +869,7 @@
             },
             {
                 "id": "DocumentInputWithBoolean",
+                "description": "Serializes document types using a boolean.",
                 "given": {
                     "name": "DocumentType",
                     "http": {
@@ -882,7 +883,6 @@
                     "documentation": "<p>This example serializes a document as part of the payload.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes document types using a boolean.",
                 "params": {
                     "stringValue": "string",
                     "documentValue": true
@@ -898,6 +898,7 @@
             },
             {
                 "id": "DocumentInputWithList",
+                "description": "Serializes document types using a list.",
                 "given": {
                     "name": "DocumentType",
                     "http": {
@@ -911,7 +912,6 @@
                     "documentation": "<p>This example serializes a document as part of the payload.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes document types using a list.",
                 "params": {
                     "stringValue": "string",
                     "documentValue": [
@@ -990,6 +990,7 @@
         "cases": [
             {
                 "id": "DocumentTypeAsMapValueInput",
+                "description": "Serializes a map that uses documents as the value.",
                 "given": {
                     "name": "DocumentTypeAsMapValue",
                     "http": {
@@ -1003,7 +1004,6 @@
                     "documentation": "<p>This example serializes documents as the value of maps.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a map that uses documents as the value.",
                 "params": {
                     "docValuedMap": {
                         "foo": {
@@ -1066,6 +1066,7 @@
         "cases": [
             {
                 "id": "DocumentTypeAsPayloadInput",
+                "description": "Serializes a document as the target of the httpPayload trait.",
                 "given": {
                     "name": "DocumentTypeAsPayload",
                     "http": {
@@ -1079,7 +1080,6 @@
                     "documentation": "<p>This example serializes a document as the entire HTTP payload.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a document as the target of the httpPayload trait.",
                 "params": {
                     "documentValue": {
                         "foo": "bar"
@@ -1096,6 +1096,7 @@
             },
             {
                 "id": "DocumentTypeAsPayloadInputString",
+                "description": "Serializes a document as the target of the httpPayload trait using a string.",
                 "given": {
                     "name": "DocumentTypeAsPayload",
                     "http": {
@@ -1109,7 +1110,6 @@
                     "documentation": "<p>This example serializes a document as the entire HTTP payload.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a document as the target of the httpPayload trait using a string.",
                 "params": {
                     "documentValue": "hello"
                 },
@@ -1151,6 +1151,7 @@
         "cases": [
             {
                 "id": "RestJsonEmptyInputAndEmptyOutput",
+                "description": "Clients should not serialize a JSON payload when no parameters\nare given that are sent in the body. A service will tolerate\nclients that omit a payload or that send a JSON object.",
                 "given": {
                     "name": "EmptyInputAndEmptyOutput",
                     "http": {
@@ -1163,7 +1164,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there's no request or response payload because the operation has an empty input and empty output structure that reuses the same shape. While this should be rare, code generators must support this.</p>"
                 },
-                "description": "Clients should not serialize a JSON payload when no parameters\nare given that are sent in the body. A service will tolerate\nclients that omit a payload or that send a JSON object.",
                 "params": {},
                 "serialized": {
                     "method": "POST",
@@ -1175,6 +1175,7 @@
     },
     {
         "description": "Test cases for EndpointOperation operation",
+        "clientEndpoint": "https://example.com",
         "metadata": {
             "apiVersion": "2019-12-16",
             "auth": [
@@ -1195,6 +1196,7 @@
         "cases": [
             {
                 "id": "RestJsonEndpointTrait",
+                "description": "Operations can prepend to the given host if they define the\nendpoint trait.",
                 "given": {
                     "name": "EndpointOperation",
                     "http": {
@@ -1206,7 +1208,6 @@
                         "hostPrefix": "foo."
                     }
                 },
-                "description": "Operations can prepend to the given host if they define the\nendpoint trait.",
                 "params": {},
                 "serialized": {
                     "method": "POST",
@@ -1215,11 +1216,11 @@
                     "host": "foo.example.com"
                 }
             }
-        ],
-        "clientEndpoint": "https://example.com"
+        ]
     },
     {
         "description": "Test cases for EndpointWithHostLabelOperation operation",
+        "clientEndpoint": "https://example.com",
         "metadata": {
             "apiVersion": "2019-12-16",
             "auth": [
@@ -1256,6 +1257,7 @@
         "cases": [
             {
                 "id": "RestJsonEndpointTraitWithHostLabel",
+                "description": "Operations can prepend to the given host if they define the\nendpoint trait, and can use the host label trait to define\nfurther customization based on user input.",
                 "given": {
                     "name": "EndpointWithHostLabelOperation",
                     "http": {
@@ -1270,7 +1272,6 @@
                         "hostPrefix": "foo.{label}."
                     }
                 },
-                "description": "Operations can prepend to the given host if they define the\nendpoint trait, and can use the host label trait to define\nfurther customization based on user input.",
                 "params": {
                     "label": "bar"
                 },
@@ -1281,11 +1282,11 @@
                     "host": "foo.bar.example.com"
                 }
             }
-        ],
-        "clientEndpoint": "https://example.com"
+        ]
     },
     {
         "description": "Test cases for HostWithPathOperation operation",
+        "clientEndpoint": "https://example.com/custom",
         "metadata": {
             "apiVersion": "2019-12-16",
             "auth": [
@@ -1306,6 +1307,7 @@
         "cases": [
             {
                 "id": "RestJsonHostWithPath",
+                "description": "Custom endpoints supplied by users can have paths",
                 "given": {
                     "name": "HostWithPathOperation",
                     "http": {
@@ -1314,7 +1316,6 @@
                         "responseCode": 200
                     }
                 },
-                "description": "Custom endpoints supplied by users can have paths",
                 "params": {},
                 "serialized": {
                     "method": "GET",
@@ -1323,8 +1324,7 @@
                     "host": "example.com/custom"
                 }
             }
-        ],
-        "clientEndpoint": "https://example.com/custom"
+        ]
     },
     {
         "description": "Test cases for HttpChecksumRequired operation",
@@ -1360,6 +1360,7 @@
         "cases": [
             {
                 "id": "RestJsonHttpChecksumRequired",
+                "description": "Adds Content-MD5 header",
                 "given": {
                     "name": "HttpChecksumRequired",
                     "http": {
@@ -1373,7 +1374,6 @@
                     "documentation": "<p>This example tests httpChecksumRequired trait</p>",
                     "httpChecksumRequired": true
                 },
-                "description": "Adds Content-MD5 header",
                 "params": {
                     "foo": "base64 encoded md5 checksum"
                 },
@@ -1439,6 +1439,7 @@
         "cases": [
             {
                 "id": "RestJsonHttpEmptyPrefixHeadersRequestClient",
+                "description": "Serializes all request headers, using specific when present",
                 "given": {
                     "name": "HttpEmptyPrefixHeaders",
                     "http": {
@@ -1451,7 +1452,6 @@
                     },
                     "documentation": "<p>Clients that perform this test extract all headers from the response.</p>"
                 },
-                "description": "Serializes all request headers, using specific when present",
                 "params": {
                     "prefixHeaders": {
                         "x-foo": "Foo",
@@ -1464,8 +1464,8 @@
                     "uri": "/HttpEmptyPrefixHeaders",
                     "body": "",
                     "headers": {
-                        "hello": "There",
-                        "x-foo": "Foo"
+                        "x-foo": "Foo",
+                        "hello": "There"
                     }
                 }
             }
@@ -1577,6 +1577,7 @@
         "cases": [
             {
                 "id": "RestJsonHttpPayloadTraitsWithBlob",
+                "description": "Serializes a blob in the HTTP payload",
                 "given": {
                     "name": "HttpPayloadTraits",
                     "http": {
@@ -1589,7 +1590,6 @@
                     },
                     "documentation": "<p>This example serializes a blob shape in the payload.</p> <p>In this example, no JSON document is synthesized because the payload is not a structure or a union type.</p>"
                 },
-                "description": "Serializes a blob in the HTTP payload",
                 "params": {
                     "foo": "Foo",
                     "blob": "blobby blob blob"
@@ -1599,8 +1599,8 @@
                     "uri": "/HttpPayloadTraits",
                     "body": "blobby blob blob",
                     "headers": {
-                        "Content-Type": "application/octet-stream",
-                        "X-Foo": "Foo"
+                        "X-Foo": "Foo",
+                        "Content-Type": "application/octet-stream"
                     },
                     "requireHeaders": [
                         "Content-Length"
@@ -1609,6 +1609,7 @@
             },
             {
                 "id": "RestJsonHttpPayloadTraitsWithNoBlobBody",
+                "description": "Serializes an empty blob in the HTTP payload",
                 "given": {
                     "name": "HttpPayloadTraits",
                     "http": {
@@ -1621,7 +1622,6 @@
                     },
                     "documentation": "<p>This example serializes a blob shape in the payload.</p> <p>In this example, no JSON document is synthesized because the payload is not a structure or a union type.</p>"
                 },
-                "description": "Serializes an empty blob in the HTTP payload",
                 "params": {
                     "foo": "Foo"
                 },
@@ -1682,6 +1682,7 @@
         "cases": [
             {
                 "id": "RestJsonHttpPayloadWithStructure",
+                "description": "Serializes a structure in the payload",
                 "given": {
                     "name": "HttpPayloadWithStructure",
                     "http": {
@@ -1695,7 +1696,6 @@
                     "documentation": "<p>This example serializes a structure in the payload.</p> <p>Note that serializing a structure changes the wrapper element name to match the targeted structure.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a structure in the payload",
                 "params": {
                     "nested": {
                         "greeting": "hello",
@@ -1760,6 +1760,7 @@
         "cases": [
             {
                 "id": "RestJsonHttpPayloadWithUnion",
+                "description": "Serializes a union in the payload.",
                 "given": {
                     "name": "HttpPayloadWithUnion",
                     "http": {
@@ -1773,7 +1774,6 @@
                     "documentation": "<p>This example serializes a union in the payload.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a union in the payload.",
                 "params": {
                     "nested": {
                         "greeting": "hello"
@@ -1793,6 +1793,7 @@
             },
             {
                 "id": "RestJsonHttpPayloadWithUnsetUnion",
+                "description": "No payload is sent if the union has no value.",
                 "given": {
                     "name": "HttpPayloadWithUnion",
                     "http": {
@@ -1806,7 +1807,6 @@
                     "documentation": "<p>This example serializes a union in the payload.</p>",
                     "idempotent": true
                 },
-                "description": "No payload is sent if the union has no value.",
                 "params": {},
                 "serialized": {
                     "method": "PUT",
@@ -1866,6 +1866,7 @@
         "cases": [
             {
                 "id": "RestJsonHttpPrefixHeadersArePresent",
+                "description": "Adds headers by prefix",
                 "given": {
                     "name": "HttpPrefixHeaders",
                     "http": {
@@ -1878,7 +1879,6 @@
                     },
                     "documentation": "<p>This examples adds headers to the input of a request and response by prefix.</p>"
                 },
-                "description": "Adds headers by prefix",
                 "params": {
                     "foo": "Foo",
                     "fooMap": {
@@ -1892,13 +1892,14 @@
                     "body": "",
                     "headers": {
                         "x-foo": "Foo",
-                        "x-foo-abc": "Abc value",
-                        "x-foo-def": "Def value"
+                        "x-foo-def": "Def value",
+                        "x-foo-abc": "Abc value"
                     }
                 }
             },
             {
                 "id": "RestJsonHttpPrefixHeadersAreNotPresent",
+                "description": "No prefix headers are serialized because the value is not present",
                 "given": {
                     "name": "HttpPrefixHeaders",
                     "http": {
@@ -1911,7 +1912,6 @@
                     },
                     "documentation": "<p>This examples adds headers to the input of a request and response by prefix.</p>"
                 },
-                "description": "No prefix headers are serialized because the value is not present",
                 "params": {
                     "foo": "Foo",
                     "fooMap": {}
@@ -1927,6 +1927,7 @@
             },
             {
                 "id": "RestJsonHttpPrefixEmptyHeaders",
+                "description": "Serialize prefix headers were the value is present but empty",
                 "given": {
                     "name": "HttpPrefixHeaders",
                     "http": {
@@ -1939,7 +1940,6 @@
                     },
                     "documentation": "<p>This examples adds headers to the input of a request and response by prefix.</p>"
                 },
-                "description": "Serialize prefix headers were the value is present but empty",
                 "params": {
                     "fooMap": {
                         "abc": ""
@@ -2006,6 +2006,7 @@
         "cases": [
             {
                 "id": "RestJsonSupportsNaNFloatLabels",
+                "description": "Supports handling NaN float label values.",
                 "given": {
                     "name": "HttpRequestWithFloatLabels",
                     "http": {
@@ -2017,7 +2018,6 @@
                         "shape": "HttpRequestWithFloatLabelsInput"
                     }
                 },
-                "description": "Supports handling NaN float label values.",
                 "params": {
                     "float": "NaN",
                     "double": "NaN"
@@ -2030,6 +2030,7 @@
             },
             {
                 "id": "RestJsonSupportsInfinityFloatLabels",
+                "description": "Supports handling Infinity float label values.",
                 "given": {
                     "name": "HttpRequestWithFloatLabels",
                     "http": {
@@ -2041,7 +2042,6 @@
                         "shape": "HttpRequestWithFloatLabelsInput"
                     }
                 },
-                "description": "Supports handling Infinity float label values.",
                 "params": {
                     "float": "Infinity",
                     "double": "Infinity"
@@ -2054,6 +2054,7 @@
             },
             {
                 "id": "RestJsonSupportsNegativeInfinityFloatLabels",
+                "description": "Supports handling -Infinity float label values.",
                 "given": {
                     "name": "HttpRequestWithFloatLabels",
                     "http": {
@@ -2065,7 +2066,6 @@
                         "shape": "HttpRequestWithFloatLabelsInput"
                     }
                 },
-                "description": "Supports handling -Infinity float label values.",
                 "params": {
                     "float": "-Infinity",
                     "double": "-Infinity"
@@ -2123,6 +2123,7 @@
         "cases": [
             {
                 "id": "RestJsonHttpRequestWithGreedyLabelInPath",
+                "description": "Serializes greedy labels and normal labels",
                 "given": {
                     "name": "HttpRequestWithGreedyLabelInPath",
                     "http": {
@@ -2134,7 +2135,6 @@
                         "shape": "HttpRequestWithGreedyLabelInPathInput"
                     }
                 },
-                "description": "Serializes greedy labels and normal labels",
                 "params": {
                     "foo": "hello/escape",
                     "baz": "there/guy"
@@ -2253,6 +2253,7 @@
         "cases": [
             {
                 "id": "RestJsonInputWithHeadersAndAllParams",
+                "description": "Sends a GET request that uses URI label bindings",
                 "given": {
                     "name": "HttpRequestWithLabels",
                     "http": {
@@ -2265,7 +2266,6 @@
                     },
                     "documentation": "<p>The example tests how requests are serialized when there's no input payload but there are HTTP labels.</p>"
                 },
-                "description": "Sends a GET request that uses URI label bindings",
                 "params": {
                     "string": "string",
                     "short": 1,
@@ -2284,6 +2284,7 @@
             },
             {
                 "id": "RestJsonHttpRequestLabelEscaping",
+                "description": "Sends a GET request that uses URI label bindings",
                 "given": {
                     "name": "HttpRequestWithLabels",
                     "http": {
@@ -2296,7 +2297,6 @@
                     },
                     "documentation": "<p>The example tests how requests are serialized when there's no input payload but there are HTTP labels.</p>"
                 },
-                "description": "Sends a GET request that uses URI label bindings",
                 "params": {
                     "string": " %:/?#[]@!$&'()*+,;=😹",
                     "short": 1,
@@ -2414,6 +2414,7 @@
         "cases": [
             {
                 "id": "RestJsonHttpRequestWithLabelsAndTimestampFormat",
+                "description": "Serializes different timestamp formats in URI labels",
                 "given": {
                     "name": "HttpRequestWithLabelsAndTimestampFormat",
                     "http": {
@@ -2426,7 +2427,6 @@
                     },
                     "documentation": "<p>The example tests how requests serialize different timestamp formats in the URI path.</p>"
                 },
-                "description": "Serializes different timestamp formats in URI labels",
                 "params": {
                     "memberEpochSeconds": 1576540098,
                     "memberHttpDate": 1576540098,
@@ -2483,6 +2483,7 @@
         "cases": [
             {
                 "id": "RestJsonToleratesRegexCharsInSegments",
+                "description": "Path matching is not broken by regex expressions in literal segments",
                 "given": {
                     "name": "HttpRequestWithRegexLiteral",
                     "http": {
@@ -2494,7 +2495,6 @@
                         "shape": "HttpRequestWithRegexLiteralInput"
                     }
                 },
-                "description": "Path matching is not broken by regex expressions in literal segments",
                 "params": {
                     "str": "abc"
                 },
@@ -2769,6 +2769,7 @@
         "cases": [
             {
                 "id": "RestJsonInputAndOutputWithStringHeaders",
+                "description": "Tests requests with string header bindings",
                 "given": {
                     "name": "InputAndOutputWithHeaders",
                     "http": {
@@ -2781,7 +2782,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there is no input or output payload but there are HTTP header bindings.</p>"
                 },
-                "description": "Tests requests with string header bindings",
                 "params": {
                     "headerString": "Hello",
                     "headerStringList": [
@@ -2800,14 +2800,15 @@
                     "uri": "/InputAndOutputWithHeaders",
                     "body": "",
                     "headers": {
-                        "X-String": "Hello",
                         "X-StringList": "a, b, c",
+                        "X-String": "Hello",
                         "X-StringSet": "a, b, c"
                     }
                 }
             },
             {
                 "id": "RestJsonInputAndOutputWithQuotedStringHeaders",
+                "description": "Tests requests with string list header bindings that require quoting",
                 "given": {
                     "name": "InputAndOutputWithHeaders",
                     "http": {
@@ -2820,7 +2821,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there is no input or output payload but there are HTTP header bindings.</p>"
                 },
-                "description": "Tests requests with string list header bindings that require quoting",
                 "params": {
                     "headerStringList": [
                         "b,c",
@@ -2839,6 +2839,7 @@
             },
             {
                 "id": "RestJsonInputAndOutputWithNumericHeaders",
+                "description": "Tests requests with numeric header bindings",
                 "given": {
                     "name": "InputAndOutputWithHeaders",
                     "http": {
@@ -2851,7 +2852,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there is no input or output payload but there are HTTP header bindings.</p>"
                 },
-                "description": "Tests requests with numeric header bindings",
                 "params": {
                     "headerByte": 1,
                     "headerShort": 123,
@@ -2870,18 +2870,19 @@
                     "uri": "/InputAndOutputWithHeaders",
                     "body": "",
                     "headers": {
+                        "X-Integer": "123",
+                        "X-Short": "123",
                         "X-Byte": "1",
+                        "X-Long": "123",
                         "X-Double": "1.1",
                         "X-Float": "1.1",
-                        "X-Integer": "123",
-                        "X-IntegerList": "1, 2, 3",
-                        "X-Long": "123",
-                        "X-Short": "123"
+                        "X-IntegerList": "1, 2, 3"
                     }
                 }
             },
             {
                 "id": "RestJsonInputAndOutputWithBooleanHeaders",
+                "description": "Tests requests with boolean header bindings",
                 "given": {
                     "name": "InputAndOutputWithHeaders",
                     "http": {
@@ -2894,7 +2895,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there is no input or output payload but there are HTTP header bindings.</p>"
                 },
-                "description": "Tests requests with boolean header bindings",
                 "params": {
                     "headerTrueBool": true,
                     "headerFalseBool": false,
@@ -2909,14 +2909,15 @@
                     "uri": "/InputAndOutputWithHeaders",
                     "body": "",
                     "headers": {
+                        "X-BooleanList": "true, false, true",
                         "X-Boolean1": "true",
-                        "X-Boolean2": "false",
-                        "X-BooleanList": "true, false, true"
+                        "X-Boolean2": "false"
                     }
                 }
             },
             {
                 "id": "RestJsonInputAndOutputWithTimestampHeaders",
+                "description": "Tests requests with timestamp header bindings",
                 "given": {
                     "name": "InputAndOutputWithHeaders",
                     "http": {
@@ -2929,7 +2930,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there is no input or output payload but there are HTTP header bindings.</p>"
                 },
-                "description": "Tests requests with timestamp header bindings",
                 "params": {
                     "headerTimestampList": [
                         1576540098,
@@ -2947,6 +2947,7 @@
             },
             {
                 "id": "RestJsonInputAndOutputWithEnumHeaders",
+                "description": "Tests requests with enum header bindings",
                 "given": {
                     "name": "InputAndOutputWithHeaders",
                     "http": {
@@ -2959,7 +2960,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there is no input or output payload but there are HTTP header bindings.</p>"
                 },
-                "description": "Tests requests with enum header bindings",
                 "params": {
                     "headerEnum": "Foo",
                     "headerEnumList": [
@@ -2973,13 +2973,14 @@
                     "uri": "/InputAndOutputWithHeaders",
                     "body": "",
                     "headers": {
-                        "X-Enum": "Foo",
-                        "X-EnumList": "Foo, Bar, Baz"
+                        "X-EnumList": "Foo, Bar, Baz",
+                        "X-Enum": "Foo"
                     }
                 }
             },
             {
                 "id": "RestJsonInputAndOutputWithIntEnumHeaders",
+                "description": "Tests requests with intEnum header bindings",
                 "given": {
                     "name": "InputAndOutputWithHeaders",
                     "http": {
@@ -2992,7 +2993,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there is no input or output payload but there are HTTP header bindings.</p>"
                 },
-                "description": "Tests requests with intEnum header bindings",
                 "params": {
                     "headerIntegerEnum": 1,
                     "headerIntegerEnumList": [
@@ -3006,13 +3006,14 @@
                     "uri": "/InputAndOutputWithHeaders",
                     "body": "",
                     "headers": {
-                        "X-IntegerEnum": "1",
-                        "X-IntegerEnumList": "1, 2, 3"
+                        "X-IntegerEnumList": "1, 2, 3",
+                        "X-IntegerEnum": "1"
                     }
                 }
             },
             {
                 "id": "RestJsonSupportsNaNFloatHeaderInputs",
+                "description": "Supports handling NaN float header values.",
                 "given": {
                     "name": "InputAndOutputWithHeaders",
                     "http": {
@@ -3025,7 +3026,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there is no input or output payload but there are HTTP header bindings.</p>"
                 },
-                "description": "Supports handling NaN float header values.",
                 "params": {
                     "headerFloat": "NaN",
                     "headerDouble": "NaN"
@@ -3035,13 +3035,14 @@
                     "uri": "/InputAndOutputWithHeaders",
                     "body": "",
                     "headers": {
-                        "X-Double": "NaN",
-                        "X-Float": "NaN"
+                        "X-Float": "NaN",
+                        "X-Double": "NaN"
                     }
                 }
             },
             {
                 "id": "RestJsonSupportsInfinityFloatHeaderInputs",
+                "description": "Supports handling Infinity float header values.",
                 "given": {
                     "name": "InputAndOutputWithHeaders",
                     "http": {
@@ -3054,7 +3055,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there is no input or output payload but there are HTTP header bindings.</p>"
                 },
-                "description": "Supports handling Infinity float header values.",
                 "params": {
                     "headerFloat": "Infinity",
                     "headerDouble": "Infinity"
@@ -3064,13 +3064,14 @@
                     "uri": "/InputAndOutputWithHeaders",
                     "body": "",
                     "headers": {
-                        "X-Double": "Infinity",
-                        "X-Float": "Infinity"
+                        "X-Float": "Infinity",
+                        "X-Double": "Infinity"
                     }
                 }
             },
             {
                 "id": "RestJsonSupportsNegativeInfinityFloatHeaderInputs",
+                "description": "Supports handling -Infinity float header values.",
                 "given": {
                     "name": "InputAndOutputWithHeaders",
                     "http": {
@@ -3083,7 +3084,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there is no input or output payload but there are HTTP header bindings.</p>"
                 },
-                "description": "Supports handling -Infinity float header values.",
                 "params": {
                     "headerFloat": "-Infinity",
                     "headerDouble": "-Infinity"
@@ -3093,8 +3093,8 @@
                     "uri": "/InputAndOutputWithHeaders",
                     "body": "",
                     "headers": {
-                        "X-Double": "-Infinity",
-                        "X-Float": "-Infinity"
+                        "X-Float": "-Infinity",
+                        "X-Double": "-Infinity"
                     }
                 }
             }
@@ -3134,6 +3134,7 @@
         "cases": [
             {
                 "id": "RestJsonJsonBlobs",
+                "description": "Blobs are base64 encoded",
                 "given": {
                     "name": "JsonBlobs",
                     "http": {
@@ -3146,7 +3147,6 @@
                     },
                     "documentation": "<p>Blobs are base64 encoded</p>"
                 },
-                "description": "Blobs are base64 encoded",
                 "params": {
                     "data": "value"
                 },
@@ -3241,6 +3241,7 @@
         "cases": [
             {
                 "id": "RestJsonJsonEnums",
+                "description": "Serializes simple scalar properties",
                 "given": {
                     "name": "JsonEnums",
                     "http": {
@@ -3254,7 +3255,6 @@
                     "documentation": "<p>This example serializes enums as top level properties, in lists, sets, and maps.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes simple scalar properties",
                 "params": {
                     "fooEnum1": "Foo",
                     "fooEnum2": "0",
@@ -3357,6 +3357,7 @@
         "cases": [
             {
                 "id": "RestJsonJsonIntEnums",
+                "description": "Serializes intEnums as integers",
                 "given": {
                     "name": "JsonIntEnums",
                     "http": {
@@ -3370,7 +3371,6 @@
                     "documentation": "<p>This example serializes intEnums as top level properties, in lists, sets, and maps.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes intEnums as integers",
                 "params": {
                     "integerEnum1": 1,
                     "integerEnum2": 2,
@@ -3552,6 +3552,7 @@
         "cases": [
             {
                 "id": "RestJsonLists",
+                "description": "Serializes JSON lists",
                 "given": {
                     "name": "JsonLists",
                     "http": {
@@ -3565,7 +3566,6 @@
                     "documentation": "<p>This test case serializes JSON lists for the following cases for both input and output:</p> <ol> <li>Normal JSON lists.</li> <li>Normal JSON sets.</li> <li>JSON lists of lists.</li> <li>Lists of structures.</li> </ol>",
                     "idempotent": true
                 },
-                "description": "Serializes JSON lists",
                 "params": {
                     "stringList": [
                         "foo",
@@ -3627,6 +3627,7 @@
             },
             {
                 "id": "RestJsonListsEmpty",
+                "description": "Serializes empty JSON lists",
                 "given": {
                     "name": "JsonLists",
                     "http": {
@@ -3640,7 +3641,6 @@
                     "documentation": "<p>This test case serializes JSON lists for the following cases for both input and output:</p> <ol> <li>Normal JSON lists.</li> <li>Normal JSON sets.</li> <li>JSON lists of lists.</li> <li>Lists of structures.</li> </ol>",
                     "idempotent": true
                 },
-                "description": "Serializes empty JSON lists",
                 "params": {
                     "stringList": []
                 },
@@ -3768,6 +3768,7 @@
         "cases": [
             {
                 "id": "RestJsonJsonMaps",
+                "description": "Serializes JSON maps",
                 "given": {
                     "name": "JsonMaps",
                     "http": {
@@ -3780,7 +3781,6 @@
                     },
                     "documentation": "<p>The example tests basic map serialization.</p>"
                 },
-                "description": "Serializes JSON maps",
                 "params": {
                     "denseStructMap": {
                         "foo": {
@@ -3802,6 +3802,7 @@
             },
             {
                 "id": "RestJsonSerializesZeroValuesInMaps",
+                "description": "Ensure that 0 and false are sent over the wire in all maps and lists",
                 "given": {
                     "name": "JsonMaps",
                     "http": {
@@ -3814,7 +3815,6 @@
                     },
                     "documentation": "<p>The example tests basic map serialization.</p>"
                 },
-                "description": "Ensure that 0 and false are sent over the wire in all maps and lists",
                 "params": {
                     "denseNumberMap": {
                         "x": 0
@@ -3834,6 +3834,7 @@
             },
             {
                 "id": "RestJsonSerializesDenseSetMap",
+                "description": "A request that contains a dense map of sets.",
                 "given": {
                     "name": "JsonMaps",
                     "http": {
@@ -3846,7 +3847,6 @@
                     },
                     "documentation": "<p>The example tests basic map serialization.</p>"
                 },
-                "description": "A request that contains a dense map of sets.",
                 "params": {
                     "denseSetMap": {
                         "x": [],
@@ -3943,6 +3943,7 @@
         "cases": [
             {
                 "id": "RestJsonJsonTimestamps",
+                "description": "Tests how normal timestamps are serialized",
                 "given": {
                     "name": "JsonTimestamps",
                     "http": {
@@ -3955,7 +3956,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Tests how normal timestamps are serialized",
                 "params": {
                     "normal": 1398796238
                 },
@@ -3970,6 +3970,7 @@
             },
             {
                 "id": "RestJsonJsonTimestampsWithDateTimeFormat",
+                "description": "Ensures that the timestampFormat of date-time works like normal timestamps",
                 "given": {
                     "name": "JsonTimestamps",
                     "http": {
@@ -3982,7 +3983,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Ensures that the timestampFormat of date-time works like normal timestamps",
                 "params": {
                     "dateTime": 1398796238
                 },
@@ -3997,6 +3997,7 @@
             },
             {
                 "id": "RestJsonJsonTimestampsWithDateTimeOnTargetFormat",
+                "description": "Ensures that the timestampFormat of date-time on the target shape works like normal timestamps",
                 "given": {
                     "name": "JsonTimestamps",
                     "http": {
@@ -4009,7 +4010,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Ensures that the timestampFormat of date-time on the target shape works like normal timestamps",
                 "params": {
                     "dateTimeOnTarget": 1398796238
                 },
@@ -4024,6 +4024,7 @@
             },
             {
                 "id": "RestJsonJsonTimestampsWithEpochSecondsFormat",
+                "description": "Ensures that the timestampFormat of epoch-seconds works",
                 "given": {
                     "name": "JsonTimestamps",
                     "http": {
@@ -4036,7 +4037,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Ensures that the timestampFormat of epoch-seconds works",
                 "params": {
                     "epochSeconds": 1398796238
                 },
@@ -4051,6 +4051,7 @@
             },
             {
                 "id": "RestJsonJsonTimestampsWithEpochSecondsOnTargetFormat",
+                "description": "Ensures that the timestampFormat of epoch-seconds on the target shape works",
                 "given": {
                     "name": "JsonTimestamps",
                     "http": {
@@ -4063,7 +4064,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Ensures that the timestampFormat of epoch-seconds on the target shape works",
                 "params": {
                     "epochSecondsOnTarget": 1398796238
                 },
@@ -4078,6 +4078,7 @@
             },
             {
                 "id": "RestJsonJsonTimestampsWithHttpDateFormat",
+                "description": "Ensures that the timestampFormat of http-date works",
                 "given": {
                     "name": "JsonTimestamps",
                     "http": {
@@ -4090,7 +4091,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Ensures that the timestampFormat of http-date works",
                 "params": {
                     "httpDate": 1398796238
                 },
@@ -4105,6 +4105,7 @@
             },
             {
                 "id": "RestJsonJsonTimestampsWithHttpDateOnTargetFormat",
+                "description": "Ensures that the timestampFormat of http-date on the target shape works",
                 "given": {
                     "name": "JsonTimestamps",
                     "http": {
@@ -4117,7 +4118,6 @@
                     },
                     "documentation": "<p>This tests how timestamps are serialized, including using the default format of date-time and various @timestampFormat trait values.</p>"
                 },
-                "description": "Ensures that the timestampFormat of http-date on the target shape works",
                 "params": {
                     "httpDateOnTarget": 1398796238
                 },
@@ -4259,6 +4259,7 @@
         "cases": [
             {
                 "id": "RestJsonSerializeStringUnionValue",
+                "description": "Serializes a string union value",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -4272,7 +4273,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a string union value",
                 "params": {
                     "contents": {
                         "stringValue": "foo"
@@ -4289,6 +4289,7 @@
             },
             {
                 "id": "RestJsonSerializeBooleanUnionValue",
+                "description": "Serializes a boolean union value",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -4302,7 +4303,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a boolean union value",
                 "params": {
                     "contents": {
                         "booleanValue": true
@@ -4319,6 +4319,7 @@
             },
             {
                 "id": "RestJsonSerializeNumberUnionValue",
+                "description": "Serializes a number union value",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -4332,7 +4333,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a number union value",
                 "params": {
                     "contents": {
                         "numberValue": 1
@@ -4349,6 +4349,7 @@
             },
             {
                 "id": "RestJsonSerializeBlobUnionValue",
+                "description": "Serializes a blob union value",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -4362,7 +4363,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a blob union value",
                 "params": {
                     "contents": {
                         "blobValue": "foo"
@@ -4379,6 +4379,7 @@
             },
             {
                 "id": "RestJsonSerializeTimestampUnionValue",
+                "description": "Serializes a timestamp union value",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -4392,7 +4393,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a timestamp union value",
                 "params": {
                     "contents": {
                         "timestampValue": 1398796238
@@ -4409,6 +4409,7 @@
             },
             {
                 "id": "RestJsonSerializeEnumUnionValue",
+                "description": "Serializes an enum union value",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -4422,7 +4423,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes an enum union value",
                 "params": {
                     "contents": {
                         "enumValue": "Foo"
@@ -4439,6 +4439,7 @@
             },
             {
                 "id": "RestJsonSerializeListUnionValue",
+                "description": "Serializes a list union value",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -4452,7 +4453,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a list union value",
                 "params": {
                     "contents": {
                         "listValue": [
@@ -4472,6 +4472,7 @@
             },
             {
                 "id": "RestJsonSerializeMapUnionValue",
+                "description": "Serializes a map union value",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -4485,7 +4486,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a map union value",
                 "params": {
                     "contents": {
                         "mapValue": {
@@ -4505,6 +4505,7 @@
             },
             {
                 "id": "RestJsonSerializeStructureUnionValue",
+                "description": "Serializes a structure union value",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -4518,7 +4519,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a structure union value",
                 "params": {
                     "contents": {
                         "structureValue": {
@@ -4537,6 +4537,7 @@
             },
             {
                 "id": "RestJsonSerializeRenamedStructureUnionValue",
+                "description": "Serializes a renamed structure union value",
                 "given": {
                     "name": "JsonUnions",
                     "http": {
@@ -4550,7 +4551,6 @@
                     "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a renamed structure union value",
                 "params": {
                     "contents": {
                         "renamedStructureValue": {
@@ -4606,6 +4606,7 @@
         "cases": [
             {
                 "id": "MediaTypeHeaderInputBase64",
+                "description": "Headers that target strings with a mediaType are base64 encoded",
                 "given": {
                     "name": "MediaTypeHeader",
                     "http": {
@@ -4618,7 +4619,6 @@
                     },
                     "documentation": "<p>This example ensures that mediaType strings are base64 encoded in headers.</p>"
                 },
-                "description": "Headers that target strings with a mediaType are base64 encoded",
                 "params": {
                     "json": "true"
                 },
@@ -4655,6 +4655,7 @@
         "cases": [
             {
                 "id": "RestJsonNoInputAndNoOutput",
+                "description": "No input serializes no payload. When clients do not need to\nserialize any data in the payload, they should omit a payload\naltogether.",
                 "given": {
                     "name": "NoInputAndNoOutput",
                     "http": {
@@ -4664,7 +4665,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there's no request or response payload because the operation has no input or output. While this should be rare, code generators must support this.</p>"
                 },
-                "description": "No input serializes no payload. When clients do not need to\nserialize any data in the payload, they should omit a payload\naltogether.",
                 "params": {},
                 "serialized": {
                     "method": "POST",
@@ -4696,6 +4696,7 @@
         "cases": [
             {
                 "id": "RestJsonNoInputAndOutput",
+                "description": "No input serializes no payload. When clients do not need to\nserialize any data in the payload, they should omit a payload\naltogether.",
                 "given": {
                     "name": "NoInputAndOutput",
                     "http": {
@@ -4705,7 +4706,6 @@
                     },
                     "documentation": "<p>The example tests how requests and responses are serialized when there's no request or response payload because the operation has no input and the output is empty. While this should be rare, code generators must support this.</p>"
                 },
-                "description": "No input serializes no payload. When clients do not need to\nserialize any data in the payload, they should omit a payload\naltogether.",
                 "params": {},
                 "serialized": {
                     "method": "POST",
@@ -4767,6 +4767,7 @@
         "cases": [
             {
                 "id": "RestJsonNullAndEmptyHeaders",
+                "description": "Do not send null values, but do send empty strings and empty lists over the wire in headers",
                 "given": {
                     "name": "NullAndEmptyHeadersClient",
                     "http": {
@@ -4779,7 +4780,6 @@
                     },
                     "documentation": "<p>Null headers are not sent over the wire, empty headers are serialized to &quot;&quot;</p>"
                 },
-                "description": "Do not send null values, but do send empty strings and empty lists over the wire in headers",
                 "params": {
                     "a": null,
                     "b": "",
@@ -4841,6 +4841,7 @@
         "cases": [
             {
                 "id": "RestJsonOmitsNullQuery",
+                "description": "Omits null query values",
                 "given": {
                     "name": "OmitsNullSerializesEmptyString",
                     "http": {
@@ -4853,7 +4854,6 @@
                     },
                     "documentation": "<p>Omits null, but serializes empty string value.</p>"
                 },
-                "description": "Omits null query values",
                 "params": {
                     "nullValue": null
                 },
@@ -4865,6 +4865,7 @@
             },
             {
                 "id": "RestJsonSerializesEmptyQueryValue",
+                "description": "Serializes empty query strings",
                 "given": {
                     "name": "OmitsNullSerializesEmptyString",
                     "http": {
@@ -4877,7 +4878,6 @@
                     },
                     "documentation": "<p>Omits null, but serializes empty string value.</p>"
                 },
-                "description": "Serializes empty query strings",
                 "params": {
                     "emptyString": ""
                 },
@@ -5026,6 +5026,7 @@
         "cases": [
             {
                 "id": "RestJsonOmitsEmptyListQueryValues",
+                "description": "Supports omitting empty lists.",
                 "given": {
                     "name": "OmitsSerializingEmptyLists",
                     "http": {
@@ -5038,7 +5039,6 @@
                     },
                     "documentation": "<p>Omits serializing empty lists. Because empty strings are serilized as <code>Foo=</code>, empty lists cannot also be serialized as <code>Foo=</code> and instead must be omitted.</p>"
                 },
-                "description": "Supports omitting empty lists.",
                 "params": {
                     "queryStringList": [],
                     "queryIntegerList": [],
@@ -5107,6 +5107,7 @@
         "cases": [
             {
                 "id": "PostUnionWithJsonNameRequest1",
+                "description": "Tests that jsonName works with union members.",
                 "given": {
                     "name": "PostUnionWithJsonName",
                     "http": {
@@ -5119,7 +5120,6 @@
                     },
                     "documentation": "<p>This operation defines a union that uses jsonName on some members.</p>"
                 },
-                "description": "Tests that jsonName works with union members.",
                 "params": {
                     "value": {
                         "foo": "hi"
@@ -5136,6 +5136,7 @@
             },
             {
                 "id": "PostUnionWithJsonNameRequest2",
+                "description": "Tests that jsonName works with union members.",
                 "given": {
                     "name": "PostUnionWithJsonName",
                     "http": {
@@ -5148,7 +5149,6 @@
                     },
                     "documentation": "<p>This operation defines a union that uses jsonName on some members.</p>"
                 },
-                "description": "Tests that jsonName works with union members.",
                 "params": {
                     "value": {
                         "baz": "hi"
@@ -5165,6 +5165,7 @@
             },
             {
                 "id": "PostUnionWithJsonNameRequest3",
+                "description": "Tests that jsonName works with union members.",
                 "given": {
                     "name": "PostUnionWithJsonName",
                     "http": {
@@ -5177,7 +5178,6 @@
                     },
                     "documentation": "<p>This operation defines a union that uses jsonName on some members.</p>"
                 },
-                "description": "Tests that jsonName works with union members.",
                 "params": {
                     "value": {
                         "bar": "hi"
@@ -5233,6 +5233,7 @@
         "cases": [
             {
                 "id": "SDKAppliedContentEncoding_restJson1",
+                "description": "Compression algorithm encoding is appended to the Content-Encoding header.",
                 "given": {
                     "name": "PutWithContentEncoding",
                     "http": {
@@ -5249,7 +5250,6 @@
                         ]
                     }
                 },
-                "description": "Compression algorithm encoding is appended to the Content-Encoding header.",
                 "params": {
                     "data": "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\n"
                 },
@@ -5263,6 +5263,7 @@
             },
             {
                 "id": "SDKAppendedGzipAfterProvidedEncoding_restJson1",
+                "description": "Compression algorithm encoding is appended to the Content-Encoding header, and the\nuser-provided content-encoding is in the Content-Encoding header before the\nrequest compression encoding from the HTTP binding.\n",
                 "given": {
                     "name": "PutWithContentEncoding",
                     "http": {
@@ -5279,7 +5280,6 @@
                         ]
                     }
                 },
-                "description": "Compression algorithm encoding is appended to the Content-Encoding header, and the\nuser-provided content-encoding is in the Content-Encoding header before the\nrequest compression encoding from the HTTP binding.\n",
                 "params": {
                     "encoding": "custom",
                     "data": "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\n"
@@ -5331,6 +5331,7 @@
         "cases": [
             {
                 "id": "RestJsonQueryIdempotencyTokenAutoFill",
+                "description": "Automatically adds idempotency token when not set",
                 "given": {
                     "name": "QueryIdempotencyTokenAutoFill",
                     "http": {
@@ -5343,7 +5344,6 @@
                     },
                     "documentation": "<p>Automatically adds idempotency tokens.</p>"
                 },
-                "description": "Automatically adds idempotency token when not set",
                 "params": {},
                 "serialized": {
                     "method": "POST",
@@ -5353,6 +5353,7 @@
             },
             {
                 "id": "RestJsonQueryIdempotencyTokenAutoFillIsSet",
+                "description": "Uses the given idempotency token as-is",
                 "given": {
                     "name": "QueryIdempotencyTokenAutoFill",
                     "http": {
@@ -5365,7 +5366,6 @@
                     },
                     "documentation": "<p>Automatically adds idempotency tokens.</p>"
                 },
-                "description": "Uses the given idempotency token as-is",
                 "params": {
                     "token": "00000000-0000-4000-8000-000000000000"
                 },
@@ -5432,6 +5432,7 @@
         "cases": [
             {
                 "id": "RestJsonQueryParamsStringListMap",
+                "description": "Serialize query params from map of list strings",
                 "given": {
                     "name": "QueryParamsAsStringListMap",
                     "http": {
@@ -5443,7 +5444,6 @@
                         "shape": "QueryParamsAsStringListMapInput"
                     }
                 },
-                "description": "Serialize query params from map of list strings",
                 "params": {
                     "qux": "named",
                     "foo": {
@@ -5510,6 +5510,7 @@
         "cases": [
             {
                 "id": "RestJsonQueryPrecedence",
+                "description": "Prefer named query parameters when serializing",
                 "given": {
                     "name": "QueryPrecedence",
                     "http": {
@@ -5521,7 +5522,6 @@
                         "shape": "QueryPrecedenceInput"
                     }
                 },
-                "description": "Prefer named query parameters when serializing",
                 "params": {
                     "foo": "named",
                     "baz": {
@@ -5593,6 +5593,7 @@
         "cases": [
             {
                 "id": "RestJsonRecursiveShapes",
+                "description": "Serializes recursive structures",
                 "given": {
                     "name": "RecursiveShapes",
                     "http": {
@@ -5606,7 +5607,6 @@
                     "documentation": "<p>Recursive shapes</p>",
                     "idempotent": true
                 },
-                "description": "Serializes recursive structures",
                 "params": {
                     "nested": {
                         "foo": "Foo1",
@@ -5716,6 +5716,7 @@
         "cases": [
             {
                 "id": "RestJsonSimpleScalarProperties",
+                "description": "Serializes simple scalar properties",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -5728,7 +5729,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Serializes simple scalar properties",
                 "params": {
                     "foo": "Foo",
                     "stringValue": "string",
@@ -5746,13 +5746,14 @@
                     "uri": "/SimpleScalarProperties",
                     "body": "{\n    \"stringValue\": \"string\",\n    \"trueBooleanValue\": true,\n    \"falseBooleanValue\": false,\n    \"byteValue\": 1,\n    \"shortValue\": 2,\n    \"integerValue\": 3,\n    \"longValue\": 4,\n    \"floatValue\": 5.5,\n    \"DoubleDribble\": 6.5\n}",
                     "headers": {
-                        "Content-Type": "application/json",
-                        "X-Foo": "Foo"
+                        "X-Foo": "Foo",
+                        "Content-Type": "application/json"
                     }
                 }
             },
             {
                 "id": "RestJsonDoesntSerializeNullStructureValues",
+                "description": "Rest Json should not serialize null structure values",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -5765,7 +5766,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Rest Json should not serialize null structure values",
                 "params": {
                     "stringValue": null
                 },
@@ -5780,6 +5780,7 @@
             },
             {
                 "id": "RestJsonSupportsNaNFloatInputs",
+                "description": "Supports handling NaN float values.",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -5792,7 +5793,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Supports handling NaN float values.",
                 "params": {
                     "floatValue": "NaN",
                     "doubleValue": "NaN"
@@ -5808,6 +5808,7 @@
             },
             {
                 "id": "RestJsonSupportsInfinityFloatInputs",
+                "description": "Supports handling Infinity float values.",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -5820,7 +5821,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Supports handling Infinity float values.",
                 "params": {
                     "floatValue": "Infinity",
                     "doubleValue": "Infinity"
@@ -5836,6 +5836,7 @@
             },
             {
                 "id": "RestJsonSupportsNegativeInfinityFloatInputs",
+                "description": "Supports handling -Infinity float values.",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -5848,7 +5849,6 @@
                     },
                     "idempotent": true
                 },
-                "description": "Supports handling -Infinity float values.",
                 "params": {
                     "floatValue": "-Infinity",
                     "doubleValue": "-Infinity"
@@ -5915,6 +5915,7 @@
         "cases": [
             {
                 "id": "RestJsonTestBodyStructure",
+                "description": "Serializes a structure",
                 "given": {
                     "name": "TestBodyStructure",
                     "http": {
@@ -5928,7 +5929,6 @@
                     "documentation": "<p>This example operation serializes a structure in the HTTP body.</p> <p>It should ensure Content-Type: application/json is used in all requests and that an &quot;empty&quot; body is an empty JSON document ({}).</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a structure",
                 "params": {
                     "testConfig": {
                         "timeout": 10
@@ -5948,6 +5948,7 @@
             },
             {
                 "id": "RestJsonHttpWithEmptyBody",
+                "description": "Serializes an empty structure in the body",
                 "given": {
                     "name": "TestBodyStructure",
                     "http": {
@@ -5961,7 +5962,6 @@
                     "documentation": "<p>This example operation serializes a structure in the HTTP body.</p> <p>It should ensure Content-Type: application/json is used in all requests and that an &quot;empty&quot; body is an empty JSON document ({}).</p>",
                     "idempotent": true
                 },
-                "description": "Serializes an empty structure in the body",
                 "params": {},
                 "serialized": {
                     "method": "POST",
@@ -5999,6 +5999,7 @@
         "cases": [
             {
                 "id": "RestJsonHttpGetWithNoInput",
+                "description": "Serializes a GET request for an operation with no input, and therefore no modeled body",
                 "given": {
                     "name": "TestGetNoInputNoPayload",
                     "http": {
@@ -6008,7 +6009,6 @@
                     },
                     "documentation": "<p>This example GET operation has no input and serializes a request without a HTTP body.</p> <p>These tests are to ensure we do not attach a body or related headers (Content-Length, Content-Type) to operations that semantically cannot produce an HTTP body.</p>"
                 },
-                "description": "Serializes a GET request for an operation with no input, and therefore no modeled body",
                 "params": {},
                 "serialized": {
                     "method": "GET",
@@ -6058,6 +6058,7 @@
         "cases": [
             {
                 "id": "RestJsonHttpGetWithNoModeledBody",
+                "description": "Serializes a GET request with no modeled body",
                 "given": {
                     "name": "TestGetNoPayload",
                     "http": {
@@ -6070,7 +6071,6 @@
                     },
                     "documentation": "<p>This example GET operation serializes a request without a modeled HTTP body.</p> <p>These tests are to ensure we do not attach a body or related headers (Content-Length, Content-Type) to operations that semantically cannot produce an HTTP body.</p>"
                 },
-                "description": "Serializes a GET request with no modeled body",
                 "params": {},
                 "serialized": {
                     "method": "GET",
@@ -6084,6 +6084,7 @@
             },
             {
                 "id": "RestJsonHttpGetWithHeaderMemberNoModeledBody",
+                "description": "Serializes a GET request with header member but no modeled body",
                 "given": {
                     "name": "TestGetNoPayload",
                     "http": {
@@ -6096,7 +6097,6 @@
                     },
                     "documentation": "<p>This example GET operation serializes a request without a modeled HTTP body.</p> <p>These tests are to ensure we do not attach a body or related headers (Content-Length, Content-Type) to operations that semantically cannot produce an HTTP body.</p>"
                 },
-                "description": "Serializes a GET request with header member but no modeled body",
                 "params": {
                     "testId": "t-12345"
                 },
@@ -6158,6 +6158,7 @@
         "cases": [
             {
                 "id": "RestJsonHttpWithEmptyBlobPayload",
+                "description": "Serializes a payload targeting an empty blob",
                 "given": {
                     "name": "TestPayloadBlob",
                     "http": {
@@ -6171,7 +6172,6 @@
                     "documentation": "<p>This example operation serializes a payload targeting a blob.</p> <p>The Blob shape is not structured content and we cannot make assumptions about what data will be sent. This test ensures only a generic &quot;Content-Type: application/octet-stream&quot; header is used, and that we are not treating an empty body as an empty JSON document.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a payload targeting an empty blob",
                 "params": {},
                 "serialized": {
                     "method": "POST",
@@ -6181,6 +6181,7 @@
             },
             {
                 "id": "RestJsonTestPayloadBlob",
+                "description": "Serializes a payload targeting a blob",
                 "given": {
                     "name": "TestPayloadBlob",
                     "http": {
@@ -6194,7 +6195,6 @@
                     "documentation": "<p>This example operation serializes a payload targeting a blob.</p> <p>The Blob shape is not structured content and we cannot make assumptions about what data will be sent. This test ensures only a generic &quot;Content-Type: application/octet-stream&quot; header is used, and that we are not treating an empty body as an empty JSON document.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a payload targeting a blob",
                 "params": {
                     "contentType": "image/jpg",
                     "data": "1234"
@@ -6265,6 +6265,7 @@
         "cases": [
             {
                 "id": "RestJsonHttpWithEmptyStructurePayload",
+                "description": "Serializes a payload targeting an empty structure",
                 "given": {
                     "name": "TestPayloadStructure",
                     "http": {
@@ -6278,7 +6279,6 @@
                     "documentation": "<p>This example operation serializes a payload targeting a structure.</p> <p>This enforces the same requirements as TestBodyStructure but with the body specified by the @httpPayload trait.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a payload targeting an empty structure",
                 "params": {},
                 "serialized": {
                     "method": "POST",
@@ -6294,6 +6294,7 @@
             },
             {
                 "id": "RestJsonTestPayloadStructure",
+                "description": "Serializes a payload targeting a structure",
                 "given": {
                     "name": "TestPayloadStructure",
                     "http": {
@@ -6307,7 +6308,6 @@
                     "documentation": "<p>This example operation serializes a payload targeting a structure.</p> <p>This enforces the same requirements as TestBodyStructure but with the body specified by the @httpPayload trait.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes a payload targeting a structure",
                 "params": {
                     "payloadConfig": {
                         "data": 25
@@ -6327,6 +6327,7 @@
             },
             {
                 "id": "RestJsonHttpWithHeadersButNoPayload",
+                "description": "Serializes an request with header members but no payload",
                 "given": {
                     "name": "TestPayloadStructure",
                     "http": {
@@ -6340,7 +6341,6 @@
                     "documentation": "<p>This example operation serializes a payload targeting a structure.</p> <p>This enforces the same requirements as TestBodyStructure but with the body specified by the @httpPayload trait.</p>",
                     "idempotent": true
                 },
-                "description": "Serializes an request with header members but no payload",
                 "params": {
                     "testId": "t-12345"
                 },
@@ -6349,8 +6349,8 @@
                     "uri": "/payload",
                     "body": "{}",
                     "headers": {
-                        "Content-Type": "application/json",
-                        "X-Amz-Test-Id": "t-12345"
+                        "X-Amz-Test-Id": "t-12345",
+                        "Content-Type": "application/json"
                     },
                     "requireHeaders": [
                         "Content-Length"
@@ -6381,6 +6381,7 @@
         "cases": [
             {
                 "id": "RestJsonHttpPostWithNoInput",
+                "description": "Serializes a POST request for an operation with no input, and therefore no modeled body",
                 "given": {
                     "name": "TestPostNoInputNoPayload",
                     "http": {
@@ -6390,7 +6391,6 @@
                     },
                     "documentation": "<p>This example POST operation has no input and serializes a request without a HTTP body.</p> <p>These tests are to ensure we do not attach a body or related headers (Content-Type) to a POST operation with no modeled input.</p>"
                 },
-                "description": "Serializes a POST request for an operation with no input, and therefore no modeled body",
                 "params": {},
                 "serialized": {
                     "method": "POST",
@@ -6439,6 +6439,7 @@
         "cases": [
             {
                 "id": "RestJsonHttpPostWithNoModeledBody",
+                "description": "Serializes a POST request with no modeled body",
                 "given": {
                     "name": "TestPostNoPayload",
                     "http": {
@@ -6451,7 +6452,6 @@
                     },
                     "documentation": "<p>This example POST operation serializes a request without a modeled HTTP body.</p> <p>These tests are to ensure we do not attach a body or related headers (Content-Type) to a POST operation with no modeled payload.</p>"
                 },
-                "description": "Serializes a POST request with no modeled body",
                 "params": {},
                 "serialized": {
                     "method": "POST",
@@ -6464,6 +6464,7 @@
             },
             {
                 "id": "RestJsonHttpWithPostHeaderMemberNoModeledBody",
+                "description": "Serializes a POST request with header member but no modeled body",
                 "given": {
                     "name": "TestPostNoPayload",
                     "http": {
@@ -6476,7 +6477,6 @@
                     },
                     "documentation": "<p>This example POST operation serializes a request without a modeled HTTP body.</p> <p>These tests are to ensure we do not attach a body or related headers (Content-Type) to a POST operation with no modeled payload.</p>"
                 },
-                "description": "Serializes a POST request with header member but no modeled body",
                 "params": {
                     "testId": "t-12345"
                 },
@@ -6584,6 +6584,7 @@
         "cases": [
             {
                 "id": "RestJsonTimestampFormatHeaders",
+                "description": "Tests how timestamp request headers are serialized",
                 "given": {
                     "name": "TimestampFormatHeaders",
                     "http": {
@@ -6596,7 +6597,6 @@
                     },
                     "documentation": "<p>This example tests how timestamp request and response headers are serialized.</p>"
                 },
-                "description": "Tests how timestamp request headers are serialized",
                 "params": {
                     "memberEpochSeconds": 1576540098,
                     "memberHttpDate": 1576540098,
@@ -6611,13 +6611,13 @@
                     "uri": "/TimestampFormatHeaders",
                     "body": "",
                     "headers": {
-                        "X-defaultFormat": "Mon, 16 Dec 2019 23:48:18 GMT",
                         "X-memberDateTime": "2019-12-16T23:48:18Z",
-                        "X-memberEpochSeconds": "1576540098",
+                        "X-targetHttpDate": "Mon, 16 Dec 2019 23:48:18 GMT",
                         "X-memberHttpDate": "Mon, 16 Dec 2019 23:48:18 GMT",
                         "X-targetDateTime": "2019-12-16T23:48:18Z",
                         "X-targetEpochSeconds": "1576540098",
-                        "X-targetHttpDate": "Mon, 16 Dec 2019 23:48:18 GMT"
+                        "X-memberEpochSeconds": "1576540098",
+                        "X-defaultFormat": "Mon, 16 Dec 2019 23:48:18 GMT"
                     }
                 }
             }
@@ -6645,6 +6645,7 @@
         "cases": [
             {
                 "id": "RestJsonUnitInputAndOutput",
+                "description": "A unit type input serializes no payload. When clients do not\nneed to serialize any data in the payload, they should omit\na payload altogether.",
                 "given": {
                     "name": "UnitInputAndOutput",
                     "http": {
@@ -6654,7 +6655,6 @@
                     },
                     "documentation": "<p>This test is similar to NoInputAndNoOutput, but uses explicit Unit types.</p>"
                 },
-                "description": "A unit type input serializes no payload. When clients do not\nneed to serialize any data in the payload, they should omit\na payload altogether.",
                 "params": {},
                 "serialized": {
                     "method": "POST",

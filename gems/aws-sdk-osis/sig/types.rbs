@@ -50,6 +50,7 @@ module Aws::OSIS
       attr_accessor buffer_options: Types::BufferOptions
       attr_accessor encryption_at_rest_options: Types::EncryptionAtRestOptions
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor pipeline_role_arn: ::String
       SENSITIVE: []
     end
 
@@ -170,6 +171,7 @@ module Aws::OSIS
       attr_accessor service_vpc_endpoints: ::Array[Types::ServiceVpcEndpoint]
       attr_accessor destinations: ::Array[Types::PipelineDestination]
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor pipeline_role_arn: ::String
       SENSITIVE: []
     end
 
@@ -281,6 +283,7 @@ module Aws::OSIS
       attr_accessor log_publishing_options: Types::LogPublishingOptions
       attr_accessor buffer_options: Types::BufferOptions
       attr_accessor encryption_at_rest_options: Types::EncryptionAtRestOptions
+      attr_accessor pipeline_role_arn: ::String
       SENSITIVE: []
     end
 

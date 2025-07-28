@@ -18,6 +18,7 @@ module Aws
                       ?account_id: String,
                       ?active_endpoint_cache: bool,
                       ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
                       ?client_side_monitoring: bool,
                       ?client_side_monitoring_client_id: String,
                       ?client_side_monitoring_host: String,
@@ -113,7 +114,8 @@ module Aws
                                  key: ::String,
                                  value: ::String
                                },
-                             ]
+                             ],
+                             ?pipeline_role_arn: ::String
                            ) -> _CreatePipelineResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePipelineResponseSuccess
 
@@ -255,7 +257,8 @@ module Aws
                              },
                              ?encryption_at_rest_options: {
                                kms_key_arn: ::String
-                             }
+                             },
+                             ?pipeline_role_arn: ::String
                            ) -> _UpdatePipelineResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePipelineResponseSuccess
 

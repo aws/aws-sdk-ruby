@@ -198,6 +198,7 @@ module Aws::DirectConnect
     NniPartnerType = Shapes::StringShape.new(name: 'NniPartnerType')
     OwnerAccount = Shapes::StringShape.new(name: 'OwnerAccount')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
+    PartnerInterconnectMacSecCapable = Shapes::BooleanShape.new(name: 'PartnerInterconnectMacSecCapable')
     PartnerName = Shapes::StringShape.new(name: 'PartnerName')
     Platform = Shapes::StringShape.new(name: 'Platform')
     PortEncryptionStatus = Shapes::StringShape.new(name: 'PortEncryptionStatus')
@@ -419,6 +420,7 @@ module Aws::DirectConnect
     Connection.add_member(:port_encryption_status, Shapes::ShapeRef.new(shape: PortEncryptionStatus, location_name: "portEncryptionStatus"))
     Connection.add_member(:encryption_mode, Shapes::ShapeRef.new(shape: EncryptionMode, location_name: "encryptionMode"))
     Connection.add_member(:mac_sec_keys, Shapes::ShapeRef.new(shape: MacSecKeyList, location_name: "macSecKeys"))
+    Connection.add_member(:partner_interconnect_mac_sec_capable, Shapes::ShapeRef.new(shape: PartnerInterconnectMacSecCapable, location_name: "partnerInterconnectMacSecCapable"))
     Connection.struct_class = Types::Connection
 
     ConnectionList.member = Shapes::ShapeRef.new(shape: Connection)
@@ -475,6 +477,7 @@ module Aws::DirectConnect
     CreateInterconnectRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, location_name: "lagId"))
     CreateInterconnectRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateInterconnectRequest.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderName, location_name: "providerName"))
+    CreateInterconnectRequest.add_member(:request_mac_sec, Shapes::ShapeRef.new(shape: RequestMACSec, location_name: "requestMACSec"))
     CreateInterconnectRequest.struct_class = Types::CreateInterconnectRequest
 
     CreateLagRequest.add_member(:number_of_connections, Shapes::ShapeRef.new(shape: Count, required: true, location_name: "numberOfConnections"))
@@ -739,6 +742,10 @@ module Aws::DirectConnect
     Interconnect.add_member(:has_logical_redundancy, Shapes::ShapeRef.new(shape: HasLogicalRedundancy, location_name: "hasLogicalRedundancy"))
     Interconnect.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     Interconnect.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderName, location_name: "providerName"))
+    Interconnect.add_member(:mac_sec_capable, Shapes::ShapeRef.new(shape: MacSecCapable, location_name: "macSecCapable"))
+    Interconnect.add_member(:port_encryption_status, Shapes::ShapeRef.new(shape: PortEncryptionStatus, location_name: "portEncryptionStatus"))
+    Interconnect.add_member(:encryption_mode, Shapes::ShapeRef.new(shape: EncryptionMode, location_name: "encryptionMode"))
+    Interconnect.add_member(:mac_sec_keys, Shapes::ShapeRef.new(shape: MacSecKeyList, location_name: "macSecKeys"))
     Interconnect.struct_class = Types::Interconnect
 
     InterconnectList.member = Shapes::ShapeRef.new(shape: Interconnect)

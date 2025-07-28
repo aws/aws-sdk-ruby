@@ -18,6 +18,7 @@ module Aws
                       ?account_id: String,
                       ?active_endpoint_cache: bool,
                       ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
                       ?client_side_monitoring: bool,
                       ?client_side_monitoring_client_id: String,
                       ?client_side_monitoring_host: String,
@@ -398,7 +399,21 @@ module Aws
                              ?tags: Hash[::String, ::String],
                              request_id: ::String,
                              ?accelerators: ("GPU"),
-                             ?storage_type: ("STATIC" | "DYNAMIC")
+                             ?storage_type: ("STATIC" | "DYNAMIC"),
+                             ?readme_markdown: ::String,
+                             ?parameter_template_path: ::String,
+                             ?readme_path: ::String,
+                             ?definition_repository: {
+                               connection_arn: ::String,
+                               full_repository_id: ::String,
+                               source_reference: {
+                                 type: ("BRANCH" | "TAG" | "COMMIT"),
+                                 value: ::String
+                               }?,
+                               exclude_file_patterns: Array[::String]?
+                             },
+                             ?workflow_bucket_owner_id: ::String,
+                             ?readme_uri: ::String
                            ) -> _CreateWorkflowResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkflowResponseSuccess
 
@@ -429,7 +444,20 @@ module Aws
                                      ?storage_type: ("STATIC" | "DYNAMIC"),
                                      ?storage_capacity: ::Integer,
                                      ?tags: Hash[::String, ::String],
-                                     ?workflow_bucket_owner_id: ::String
+                                     ?workflow_bucket_owner_id: ::String,
+                                     ?readme_markdown: ::String,
+                                     ?parameter_template_path: ::String,
+                                     ?readme_path: ::String,
+                                     ?definition_repository: {
+                                       connection_arn: ::String,
+                                       full_repository_id: ::String,
+                                       source_reference: {
+                                         type: ("BRANCH" | "TAG" | "COMMIT"),
+                                         value: ::String
+                                       }?,
+                                       exclude_file_patterns: Array[::String]?
+                                     },
+                                     ?readme_uri: ::String
                                    ) -> _CreateWorkflowVersionResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkflowVersionResponseSuccess
 
@@ -992,12 +1020,15 @@ module Aws
         def accelerators: () -> ("GPU")
         def storage_type: () -> ("STATIC" | "DYNAMIC")
         def uuid: () -> ::String
+        def readme: () -> ::String
+        def definition_repository_details: () -> Types::DefinitionRepositoryDetails
+        def readme_path: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_workflow-instance_method
       def get_workflow: (
                           id: ::String,
                           ?type: ("PRIVATE" | "READY2RUN"),
-                          ?export: Array[("DEFINITION")],
+                          ?export: Array[("DEFINITION" | "README")],
                           ?workflow_owner_id: ::String
                         ) -> _GetWorkflowResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkflowResponseSuccess
@@ -1024,13 +1055,16 @@ module Aws
         def tags: () -> ::Hash[::String, ::String]
         def uuid: () -> ::String
         def workflow_bucket_owner_id: () -> ::String
+        def readme: () -> ::String
+        def definition_repository_details: () -> Types::DefinitionRepositoryDetails
+        def readme_path: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_workflow_version-instance_method
       def get_workflow_version: (
                                   workflow_id: ::String,
                                   version_name: ::String,
                                   ?type: ("PRIVATE" | "READY2RUN"),
-                                  ?export: Array[("DEFINITION")],
+                                  ?export: Array[("DEFINITION" | "README")],
                                   ?workflow_owner_id: ::String
                                 ) -> _GetWorkflowVersionResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkflowVersionResponseSuccess
@@ -1743,7 +1777,8 @@ module Aws
                              ?name: ::String,
                              ?description: ::String,
                              ?storage_type: ("STATIC" | "DYNAMIC"),
-                             ?storage_capacity: ::Integer
+                             ?storage_capacity: ::Integer,
+                             ?readme_markdown: ::String
                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -1753,7 +1788,8 @@ module Aws
                                      version_name: ::String,
                                      ?description: ::String,
                                      ?storage_type: ("STATIC" | "DYNAMIC"),
-                                     ?storage_capacity: ::Integer
+                                     ?storage_capacity: ::Integer,
+                                     ?readme_markdown: ::String
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -1849,7 +1885,7 @@ module Aws
                     | (:workflow_active waiter_name, 
                     id: ::String,
                     ?type: ("PRIVATE" | "READY2RUN"),
-                    ?export: Array[("DEFINITION")],
+                    ?export: Array[("DEFINITION" | "README")],
                     ?workflow_owner_id: ::String
                   ) -> Client::_GetWorkflowResponseSuccess
                     | (:workflow_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetWorkflowResponseSuccess
@@ -1857,7 +1893,7 @@ module Aws
                     workflow_id: ::String,
                     version_name: ::String,
                     ?type: ("PRIVATE" | "READY2RUN"),
-                    ?export: Array[("DEFINITION")],
+                    ?export: Array[("DEFINITION" | "README")],
                     ?workflow_owner_id: ::String
                   ) -> Client::_GetWorkflowVersionResponseSuccess
                     | (:workflow_version_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetWorkflowVersionResponseSuccess

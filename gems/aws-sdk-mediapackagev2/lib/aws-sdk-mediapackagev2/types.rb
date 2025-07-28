@@ -2882,10 +2882,19 @@ module Aws::MediaPackageV2
     #   `InputType` is `CMAF`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] preferred_input
+    #   For CMAF inputs, indicates which input MediaPackage should prefer
+    #   when both inputs have equal MQCS scores. Select `1` to prefer the
+    #   first ingest endpoint, or `2` to prefer the second ingest endpoint.
+    #   If you don't specify a preferred input, MediaPackage uses its
+    #   default switching behavior when MQCS scores are equal.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/InputSwitchConfiguration AWS API Documentation
     #
     class InputSwitchConfiguration < Struct.new(
-      :mqcs_input_switching)
+      :mqcs_input_switching,
+      :preferred_input)
       SENSITIVE = []
       include Aws::Structure
     end

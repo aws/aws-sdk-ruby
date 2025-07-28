@@ -95,7 +95,7 @@ module Aws::AppIntegrationsService
     #     class name or an instance of a plugin class.
     #
     #   @option options [required, Aws::CredentialProvider] :credentials
-    #     Your AWS credentials. This can be an instance of any one of the
+    #     Your AWS credentials used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
@@ -128,18 +128,23 @@ module Aws::AppIntegrationsService
     #     locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
+    #
     #     * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
     #       `:account_id` options.
-    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
-    #       ENV['AWS_SESSION_TOKEN'], and ENV['AWS_ACCOUNT_ID']
+    #
+    #     * `ENV['AWS_ACCESS_KEY_ID']`, `ENV['AWS_SECRET_ACCESS_KEY']`,
+    #       `ENV['AWS_SESSION_TOKEN']`, and `ENV['AWS_ACCOUNT_ID']`.
+    #
     #     * `~/.aws/credentials`
+    #
     #     * `~/.aws/config`
+    #
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
     #       enable retries and extended timeouts. Instance profile credential
-    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
-    #       to true.
+    #       fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
+    #       to `true`.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -166,6 +171,11 @@ module Aws::AppIntegrationsService
     #     until there is sufficent client side capacity to retry the request.
     #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
     #     not retry instead of sleeping.
+    #
+    #   @option options [Array<String>] :auth_scheme_preference
+    #     A list of preferred authentication schemes to use when making a request. Supported values are:
+    #     `sigv4`, `sigv4a`, `httpBearerAuth`, and `noAuth`. When set using `ENV['AWS_AUTH_SCHEME_PREFERENCE']` or in
+    #     shared config as `auth_scheme_preference`, the value should be a comma-separated list.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -253,8 +263,8 @@ module Aws::AppIntegrationsService
     #     4 times. Used in `standard` and `adaptive` retry modes.
     #
     #   @option options [String] :profile ("default")
-    #     Used when loading credentials from the shared credentials file
-    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
+    #     When not specified, 'default' is used.
     #
     #   @option options [String] :request_checksum_calculation ("when_supported")
     #     Determines when a checksum will be calculated for request payloads. Values are:
@@ -367,7 +377,7 @@ module Aws::AppIntegrationsService
     #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
-    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     Your Bearer token used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
@@ -511,6 +521,19 @@ module Aws::AppIntegrationsService
     #   The configuration of events or requests that the application has
     #   access to.
     #
+    # @option params [Boolean] :is_service
+    #   Indicates whether the application is a service.
+    #
+    # @option params [Integer] :initialization_timeout
+    #   The maximum time in milliseconds allowed to establish a connection
+    #   with the workspace.
+    #
+    # @option params [Types::ApplicationConfig] :application_config
+    #   The configuration settings for the application.
+    #
+    # @option params [Types::IframeConfig] :iframe_config
+    #   The iframe configuration for the application.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#arn #arn} => String
@@ -568,6 +591,17 @@ module Aws::AppIntegrationsService
     #       "TagKey" => "TagValue",
     #     },
     #     permissions: ["Permission"],
+    #     is_service: false,
+    #     initialization_timeout: 1,
+    #     application_config: {
+    #       contact_handling: {
+    #         scope: "CROSS_CONTACTS", # accepts CROSS_CONTACTS, PER_CONTACT
+    #       },
+    #     },
+    #     iframe_config: {
+    #       allow: ["IframePermission"],
+    #       sandbox: ["IframePermission"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -972,6 +1006,10 @@ module Aws::AppIntegrationsService
     #   * {Types::GetApplicationResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::GetApplicationResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetApplicationResponse#permissions #permissions} => Array&lt;String&gt;
+    #   * {Types::GetApplicationResponse#is_service #is_service} => Boolean
+    #   * {Types::GetApplicationResponse#initialization_timeout #initialization_timeout} => Integer
+    #   * {Types::GetApplicationResponse#application_config #application_config} => Types::ApplicationConfig
+    #   * {Types::GetApplicationResponse#iframe_config #iframe_config} => Types::IframeConfig
     #
     #
     # @example Example: To get an application
@@ -1023,6 +1061,13 @@ module Aws::AppIntegrationsService
     #   resp.tags["TagKey"] #=> String
     #   resp.permissions #=> Array
     #   resp.permissions[0] #=> String
+    #   resp.is_service #=> Boolean
+    #   resp.initialization_timeout #=> Integer
+    #   resp.application_config.contact_handling.scope #=> String, one of "CROSS_CONTACTS", "PER_CONTACT"
+    #   resp.iframe_config.allow #=> Array
+    #   resp.iframe_config.allow[0] #=> String
+    #   resp.iframe_config.sandbox #=> Array
+    #   resp.iframe_config.sandbox[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/GetApplication AWS API Documentation
     #
@@ -1261,6 +1306,7 @@ module Aws::AppIntegrationsService
     #   resp.applications[0].namespace #=> String
     #   resp.applications[0].created_time #=> Time
     #   resp.applications[0].last_modified_time #=> Time
+    #   resp.applications[0].is_service #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ListApplications AWS API Documentation
@@ -1594,6 +1640,19 @@ module Aws::AppIntegrationsService
     #   The configuration of events or requests that the application has
     #   access to.
     #
+    # @option params [Boolean] :is_service
+    #   Indicates whether the application is a service.
+    #
+    # @option params [Integer] :initialization_timeout
+    #   The maximum time in milliseconds allowed to establish a connection
+    #   with the workspace.
+    #
+    # @option params [Types::ApplicationConfig] :application_config
+    #   The configuration settings for the application.
+    #
+    # @option params [Types::IframeConfig] :iframe_config
+    #   The iframe configuration for the application.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -1636,6 +1695,17 @@ module Aws::AppIntegrationsService
     #       },
     #     ],
     #     permissions: ["Permission"],
+    #     is_service: false,
+    #     initialization_timeout: 1,
+    #     application_config: {
+    #       contact_handling: {
+    #         scope: "CROSS_CONTACTS", # accepts CROSS_CONTACTS, PER_CONTACT
+    #       },
+    #     },
+    #     iframe_config: {
+    #       allow: ["IframePermission"],
+    #       sandbox: ["IframePermission"],
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/UpdateApplication AWS API Documentation
@@ -1778,7 +1848,7 @@ module Aws::AppIntegrationsService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appintegrationsservice'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

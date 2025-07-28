@@ -95,7 +95,7 @@ module Aws::ConfigService
     #     class name or an instance of a plugin class.
     #
     #   @option options [required, Aws::CredentialProvider] :credentials
-    #     Your AWS credentials. This can be an instance of any one of the
+    #     Your AWS credentials used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
@@ -128,18 +128,23 @@ module Aws::ConfigService
     #     locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
+    #
     #     * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
     #       `:account_id` options.
-    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
-    #       ENV['AWS_SESSION_TOKEN'], and ENV['AWS_ACCOUNT_ID']
+    #
+    #     * `ENV['AWS_ACCESS_KEY_ID']`, `ENV['AWS_SECRET_ACCESS_KEY']`,
+    #       `ENV['AWS_SESSION_TOKEN']`, and `ENV['AWS_ACCOUNT_ID']`.
+    #
     #     * `~/.aws/credentials`
+    #
     #     * `~/.aws/config`
+    #
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
     #       enable retries and extended timeouts. Instance profile credential
-    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
-    #       to true.
+    #       fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
+    #       to `true`.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -166,6 +171,11 @@ module Aws::ConfigService
     #     until there is sufficent client side capacity to retry the request.
     #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
     #     not retry instead of sleeping.
+    #
+    #   @option options [Array<String>] :auth_scheme_preference
+    #     A list of preferred authentication schemes to use when making a request. Supported values are:
+    #     `sigv4`, `sigv4a`, `httpBearerAuth`, and `noAuth`. When set using `ENV['AWS_AUTH_SCHEME_PREFERENCE']` or in
+    #     shared config as `auth_scheme_preference`, the value should be a comma-separated list.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -253,8 +263,8 @@ module Aws::ConfigService
     #     4 times. Used in `standard` and `adaptive` retry modes.
     #
     #   @option options [String] :profile ("default")
-    #     Used when loading credentials from the shared credentials file
-    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
+    #     When not specified, 'default' is used.
     #
     #   @option options [String] :request_checksum_calculation ("when_supported")
     #     Determines when a checksum will be calculated for request payloads. Values are:
@@ -374,7 +384,7 @@ module Aws::ConfigService
     #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
-    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     Your Bearer token used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
@@ -716,30 +726,26 @@ module Aws::ConfigService
     # You can check the state of a rule by using the `DescribeConfigRules`
     # request.
     #
-    # <note markdown="1"> **Recommendation: Stop recording resource compliance before deleting
-    # rules**
+    # <note markdown="1"> **Recommendation: Consider excluding the
+    # `AWS::Config::ResourceCompliance` resource type from recording before
+    # deleting rules**
     #
-    #  It is highly recommended that you stop recording for the
-    # `AWS::Config::ResourceCompliance` resource type before you delete
-    # rules in your account. Deleting rules creates CIs for
-    # `AWS::Config::ResourceCompliance` and can affect your Config
-    # [configuration recorder][1] costs. If you are deleting rules which
-    # evaluate a large number of resource types, this can lead to a spike in
-    # the number of CIs recorded.
+    #  Deleting rules creates configuration items (CIs) for
+    # `AWS::Config::ResourceCompliance` that can affect your costs for the
+    # configuration recorder. If you are deleting rules which evaluate a
+    # large number of resource types, this can lead to a spike in the number
+    # of CIs recorded.
     #
-    #  Best practice:
+    #  To avoid the associated costs, you can opt to disable recording for
+    # the `AWS::Config::ResourceCompliance` resource type before deleting
+    # rules, and re-enable recording after the rules have been deleted.
     #
-    #  1.  Stop recording `AWS::Config::ResourceCompliance`
-    #
-    # 2.  Delete rule(s)
-    #
-    # 3.  Turn on recording for `AWS::Config::ResourceCompliance`
+    #  However, since deleting rules is an asynchronous process, it might
+    # take an hour or more to complete. During the time when recording is
+    # disabled for `AWS::Config::ResourceCompliance`, rule evaluations will
+    # not be recorded in the associated resource’s history.
     #
     #  </note>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/config/latest/developerguide/stop-start-recorder.html
     #
     # @option params [required, String] :config_rule_name
     #   The name of the Config rule that you want to delete.
@@ -831,6 +837,27 @@ module Aws::ConfigService
     # deletion is complete. You cannot update a conformance pack while it is
     # in this state.
     #
+    # <note markdown="1"> **Recommendation: Consider excluding the
+    # `AWS::Config::ResourceCompliance` resource type from recording before
+    # deleting rules**
+    #
+    #  Deleting rules creates configuration items (CIs) for
+    # `AWS::Config::ResourceCompliance` that can affect your costs for the
+    # configuration recorder. If you are deleting rules which evaluate a
+    # large number of resource types, this can lead to a spike in the number
+    # of CIs recorded.
+    #
+    #  To avoid the associated costs, you can opt to disable recording for
+    # the `AWS::Config::ResourceCompliance` resource type before deleting
+    # rules, and re-enable recording after the rules have been deleted.
+    #
+    #  However, since deleting rules is an asynchronous process, it might
+    # take an hour or more to complete. During the time when recording is
+    # disabled for `AWS::Config::ResourceCompliance`, rule evaluations will
+    # not be recorded in the associated resource’s history.
+    #
+    #  </note>
+    #
     # @option params [required, String] :conformance_pack_name
     #   Name of the conformance pack you want to delete.
     #
@@ -916,6 +943,27 @@ module Aws::ConfigService
     # deletion is complete. You cannot update a rule while it is in this
     # state.
     #
+    # <note markdown="1"> **Recommendation: Consider excluding the
+    # `AWS::Config::ResourceCompliance` resource type from recording before
+    # deleting rules**
+    #
+    #  Deleting rules creates configuration items (CIs) for
+    # `AWS::Config::ResourceCompliance` that can affect your costs for the
+    # configuration recorder. If you are deleting rules which evaluate a
+    # large number of resource types, this can lead to a spike in the number
+    # of CIs recorded.
+    #
+    #  To avoid the associated costs, you can opt to disable recording for
+    # the `AWS::Config::ResourceCompliance` resource type before deleting
+    # rules, and re-enable recording after the rules have been deleted.
+    #
+    #  However, since deleting rules is an asynchronous process, it might
+    # take an hour or more to complete. During the time when recording is
+    # disabled for `AWS::Config::ResourceCompliance`, rule evaluations will
+    # not be recorded in the associated resource’s history.
+    #
+    #  </note>
+    #
     # @option params [required, String] :organization_config_rule_name
     #   The name of organization Config rule that you want to delete.
     #
@@ -948,6 +996,27 @@ module Aws::ConfigService
     # Config sets the state of a conformance pack to DELETE\_IN\_PROGRESS
     # until the deletion is complete. You cannot update a conformance pack
     # while it is in this state.
+    #
+    # <note markdown="1"> **Recommendation: Consider excluding the
+    # `AWS::Config::ResourceCompliance` resource type from recording before
+    # deleting rules**
+    #
+    #  Deleting rules creates configuration items (CIs) for
+    # `AWS::Config::ResourceCompliance` that can affect your costs for the
+    # configuration recorder. If you are deleting rules which evaluate a
+    # large number of resource types, this can lead to a spike in the number
+    # of CIs recorded.
+    #
+    #  To avoid the associated costs, you can opt to disable recording for
+    # the `AWS::Config::ResourceCompliance` resource type before deleting
+    # rules, and re-enable recording after the rules have been deleted.
+    #
+    #  However, since deleting rules is an asynchronous process, it might
+    # take an hour or more to complete. During the time when recording is
+    # disabled for `AWS::Config::ResourceCompliance`, rule evaluations will
+    # not be recorded in the associated resource’s history.
+    #
+    #  </note>
     #
     # @option params [required, String] :organization_conformance_pack_name
     #   The name of organization conformance pack that you want to delete.
@@ -1863,7 +1932,7 @@ module Aws::ConfigService
     #
     # @option params [Array<String>] :configuration_recorder_names
     #   The name of the configuration recorder. If the name is not specified,
-    #   the opertation returns the status for the customer managed
+    #   the operation returns the status for the customer managed
     #   configuration recorder configured for the account, if applicable.
     #
     #   <note markdown="1"> When making a request to this operation, you can only specify one
@@ -1929,6 +1998,11 @@ module Aws::ConfigService
     # @option params [Array<String>] :configuration_recorder_names
     #   A list of names of the configuration recorders that you want to
     #   specify.
+    #
+    #   <note markdown="1"> When making a request to this operation, you can only specify one
+    #   configuration recorder.
+    #
+    #    </note>
     #
     # @option params [String] :service_principal
     #   For service-linked configuration recorders, you can use the service
@@ -3842,15 +3916,23 @@ module Aws::ConfigService
     end
 
     # For accurate reporting on the compliance status, you must record the
-    # `AWS::Config::ResourceCompliance` resource type. For more information,
-    # see [Selecting Which Resources Config Records][1].
+    # `AWS::Config::ResourceCompliance` resource type.
     #
-    # Returns a list of `ConfigurationItems` for the specified resource. The
-    # list contains details about each state of the resource during the
+    #  For more information, see [Recording Amazon Web Services
+    # Resources][1]
+    # in the *Config Resources Developer Guide*.
+    #
+    # Returns a list of configurations items (CIs) for the specified
+    # resource.
+    #
+    # **Contents**
+    #
+    # The list contains details about each state of the resource during the
     # specified time interval. If you specified a retention period to retain
-    # your `ConfigurationItems` between a minimum of 30 days and a maximum
-    # of 7 years (2557 days), Config returns the `ConfigurationItems` for
-    # the specified retention period.
+    # your CIs between a minimum of 30 days and a maximum of 7 years (2557
+    # days), Config returns the CIs for the specified retention period.
+    #
+    # **Pagination**
     #
     # The response is paginated. By default, Config returns a limit of 10
     # configuration items per page. You can customize this number with the
@@ -4262,24 +4344,44 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
-    # Accepts a resource type and returns a list of resource identifiers for
-    # the resources of that type. A resource identifier includes the
-    # resource type, ID, and (if available) the custom resource name. The
-    # results consist of resources that Config has discovered, including
-    # those that Config is not currently recording. You can narrow the
-    # results to include only resources that have specific resource IDs or a
-    # resource name.
+    # Returns a list of resource resource identifiers for the specified
+    # resource types for the resources of that type. A *resource identifier*
+    # includes the resource type, ID, and (if available) the custom resource
+    # name.
+    #
+    # The results consist of resources that Config has *discovered*,
+    # including those that Config is not currently recording. You can narrow
+    # the results to include only resources that have specific resource IDs
+    # or a resource name.
     #
     # <note markdown="1"> You can specify either resource IDs or a resource name, but not both,
     # in the same request.
     #
     #  </note>
     #
-    # The response is paginated. By default, Config lists 100 resource
-    # identifiers on each page. You can customize this number with the
-    # `limit` parameter. The response includes a `nextToken` string. To get
-    # the next page of results, run the request again and specify the string
-    # for the `nextToken` parameter.
+    # *CloudFormation stack recording behavior in Config*
+    #
+    #  When a CloudFormation stack fails to create (for example, it enters
+    # the `ROLLBACK_FAILED` state), Config does not record a configuration
+    # item (CI) for that stack. Configuration items are only recorded for
+    # stacks that reach the following states:
+    #
+    #  * `CREATE_COMPLETE`
+    #
+    # * `UPDATE_COMPLETE`
+    #
+    # * `UPDATE_ROLLBACK_COMPLETE`
+    #
+    # * `UPDATE_ROLLBACK_FAILED`
+    #
+    # * `DELETE_FAILED`
+    #
+    # * `DELETE_COMPLETE`
+    #
+    #  Because no CI is created for a failed stack creation, you won't see
+    # configuration history for that stack in Config, even after the stack
+    # is deleted. This helps make sure that Config only tracks resources
+    # that were successfully provisioned.
     #
     # @option params [required, String] :resource_type
     #   The type of resources that you want Config to list in the response.
@@ -4943,6 +5045,18 @@ module Aws::ConfigService
     # conformance packs you can have per account, see [ **Service Limits**
     # ][1] in the *Config Developer Guide*.
     #
+    # When you use `PutConformancePack` to deploy conformance packs in your
+    # account, the operation can create Config rules and remediation actions
+    # without requiring `config:PutConfigRule` or
+    # `config:PutRemediationConfigurations` permissions in your account IAM
+    # policies.
+    #
+    #  This API uses the `AWSServiceRoleForConfigConforms` service-linked
+    # role in your account to create conformance pack resources. This
+    # service-linked role includes the permissions to create Config rules
+    # and remediation configurations, even if your account IAM policies
+    # explicitly deny these actions.
+    #
     # This API creates a service-linked role
     # `AWSServiceRoleForConfigConforms` in your account. The service-linked
     # role is created only when the role does not exist in your account.
@@ -4976,7 +5090,7 @@ module Aws::ConfigService
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html
     #
     # @option params [String] :template_body
-    #   A string containing the full conformance pack template body. The
+    #   A string that contains the full conformance pack template body. The
     #   structure containing the template body has a minimum length of 1 byte
     #   and a maximum length of 51,200 bytes.
     #
@@ -5362,6 +5476,18 @@ module Aws::ConfigService
     # ensure Organizations `ListDelegatedAdministrator` permissions are
     # added. An organization can have up to 3 delegated administrators.
     #
+    # When you use `PutOrganizationConformancePack` to deploy conformance
+    # packs across member accounts, the operation can create Config rules
+    # and remediation actions without requiring `config:PutConfigRule` or
+    # `config:PutRemediationConfigurations` permissions in member account
+    # IAM policies.
+    #
+    #  This API uses the `AWSServiceRoleForConfigConforms` service-linked
+    # role in each member account to create conformance pack resources. This
+    # service-linked role includes the permissions to create Config rules
+    # and remediation configurations, even if member account IAM policies
+    # explicitly deny these actions.
+    #
     # This API enables organization service access for
     # `config-multiaccountsetup.amazonaws.com` through the
     # `EnableAWSServiceAccess` action and creates a service-linked role
@@ -5409,9 +5535,9 @@ module Aws::ConfigService
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html
     #
     # @option params [String] :template_body
-    #   A string containing full conformance pack template body. Structure
-    #   containing the template body with a minimum length of 1 byte and a
-    #   maximum length of 51,200 bytes.
+    #   A string that contains the full conformance pack template body.
+    #   Structure containing the template body with a minimum length of 1 byte
+    #   and a maximum length of 51,200 bytes.
     #
     # @option params [String] :delivery_s3_bucket
     #   The name of the Amazon S3 bucket where Config stores conformance pack
@@ -5850,8 +5976,9 @@ module Aws::ConfigService
     # `recordingMode`, and `recordingScope` is set by the service that is
     # linked to the configuration recorder.
     #
-    # For more information, see [ **Working with the Configuration
-    # Recorder** ][1] in the *Config Developer Guide*.
+    # For more information and a list of supported services/service
+    # principals, see [ **Working with the Configuration Recorder** ][1] in
+    # the *Config Developer Guide*.
     #
     # This API creates a service-linked role `AWSServiceRoleForConfig` in
     # your account. The service-linked role is created only when the role
@@ -6289,8 +6416,11 @@ module Aws::ConfigService
     #   Returns an `EvaluationContext` object.
     #
     # @option params [required, String] :evaluation_mode
-    #   The mode of an evaluation. The valid values for this API are
-    #   `DETECTIVE` and `PROACTIVE`.
+    #   The mode of an evaluation.
+    #
+    #   <note markdown="1"> The only valid value for this API is `PROACTIVE`.
+    #
+    #    </note>
     #
     # @option params [Integer] :evaluation_timeout
     #   The timeout for an evaluation. The default is 900 seconds. You cannot
@@ -6485,7 +6615,7 @@ module Aws::ConfigService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.131.0'
+      context[:gem_version] = '1.133.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

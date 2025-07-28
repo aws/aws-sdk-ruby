@@ -54,7 +54,7 @@ module Aws::CloudHSM
   autoload :EndpointProvider, 'aws-sdk-cloudhsm/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudhsm/endpoints'
 
-  GEM_VERSION = '1.71.0'
+  GEM_VERSION = '1.72.0'
 
 end
 

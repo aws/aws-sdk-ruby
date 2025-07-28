@@ -89,7 +89,8 @@ module Aws::WorkSpacesThinClient
       attr_accessor updated_at: ::Time
       attr_accessor arn: ::String
       attr_accessor kms_key_arn: ::String
-      SENSITIVE: [:name]
+      attr_accessor last_user_id: ::String
+      SENSITIVE: [:name, :last_user_id]
     end
 
     class DeviceSummary
@@ -108,7 +109,8 @@ module Aws::WorkSpacesThinClient
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor arn: ::String
-      SENSITIVE: [:name]
+      attr_accessor last_user_id: ::String
+      SENSITIVE: [:name, :last_user_id]
     end
 
     class Environment

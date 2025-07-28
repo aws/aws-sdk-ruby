@@ -27,6 +27,7 @@
         "cases": [
             {
                 "id": "empty_input",
+                "description": "When Input structure is empty we write CBOR equivalent of {}",
                 "given": {
                     "name": "EmptyInputOutput",
                     "http": {
@@ -37,16 +38,15 @@
                         "shape": "EmptyStructure"
                     }
                 },
-                "description": "When Input structure is empty we write CBOR equivalent of {}",
                 "params": {},
                 "serialized": {
                     "method": "POST",
                     "uri": "/service/RpcV2Protocol/operation/EmptyInputOutput",
                     "body": "v/8=",
                     "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
                         "Accept": "application/cbor",
-                        "Content-Type": "application/cbor",
-                        "smithy-protocol": "rpc-v2-cbor"
+                        "Content-Type": "application/cbor"
                     },
                     "forbidHeaders": [
                         "X-Amz-Target"
@@ -81,6 +81,7 @@
         "cases": [
             {
                 "id": "no_input",
+                "description": "Body is empty and no Content-Type header if no input",
                 "given": {
                     "name": "NoInputOutput",
                     "http": {
@@ -88,7 +89,6 @@
                         "requestUri": "/"
                     }
                 },
-                "description": "Body is empty and no Content-Type header if no input",
                 "params": {},
                 "serialized": {
                     "method": "POST",
@@ -141,6 +141,7 @@
         "cases": [
             {
                 "id": "optional_input",
+                "description": "When input is empty we write CBOR equivalent of {}",
                 "given": {
                     "name": "OptionalInputOutput",
                     "http": {
@@ -151,16 +152,15 @@
                         "shape": "SimpleStructure"
                     }
                 },
-                "description": "When input is empty we write CBOR equivalent of {}",
                 "params": {},
                 "serialized": {
                     "method": "POST",
                     "uri": "/service/RpcV2Protocol/operation/OptionalInputOutput",
                     "body": "v/8=",
                     "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
                         "Accept": "application/cbor",
-                        "Content-Type": "application/cbor",
-                        "smithy-protocol": "rpc-v2-cbor"
+                        "Content-Type": "application/cbor"
                     },
                     "forbidHeaders": [
                         "X-Amz-Target"
@@ -226,6 +226,7 @@
         "cases": [
             {
                 "id": "RpcV2CborRecursiveShapes",
+                "description": "Serializes recursive structures",
                 "given": {
                     "name": "RecursiveShapes",
                     "http": {
@@ -236,7 +237,6 @@
                         "shape": "RecursiveShapesInputOutput"
                     }
                 },
-                "description": "Serializes recursive structures",
                 "params": {
                     "nested": {
                         "foo": "Foo1",
@@ -256,9 +256,9 @@
                     "uri": "/service/RpcV2Protocol/operation/RecursiveShapes",
                     "body": "v2ZuZXN0ZWS/Y2Zvb2RGb28xZm5lc3RlZL9jYmFyZEJhcjFvcmVjdXJzaXZlTWVtYmVyv2Nmb29kRm9vMmZuZXN0ZWS/Y2JhcmRCYXIy//////8=",
                     "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
                         "Accept": "application/cbor",
-                        "Content-Type": "application/cbor",
-                        "smithy-protocol": "rpc-v2-cbor"
+                        "Content-Type": "application/cbor"
                     },
                     "requireHeaders": [
                         "Content-Length"
@@ -381,6 +381,7 @@
         "cases": [
             {
                 "id": "RpcV2CborMaps",
+                "description": "Serializes maps",
                 "given": {
                     "name": "RpcV2CborDenseMaps",
                     "http": {
@@ -392,7 +393,6 @@
                     },
                     "documentation": "<p>The example tests basic map serialization.</p>"
                 },
-                "description": "Serializes maps",
                 "params": {
                     "denseStructMap": {
                         "foo": {
@@ -408,9 +408,9 @@
                     "uri": "/service/RpcV2Protocol/operation/RpcV2CborDenseMaps",
                     "body": "oW5kZW5zZVN0cnVjdE1hcKJjZm9voWJoaWV0aGVyZWNiYXqhYmhpY2J5ZQ==",
                     "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
                         "Accept": "application/cbor",
-                        "Content-Type": "application/cbor",
-                        "smithy-protocol": "rpc-v2-cbor"
+                        "Content-Type": "application/cbor"
                     },
                     "requireHeaders": [
                         "Content-Length"
@@ -419,6 +419,7 @@
             },
             {
                 "id": "RpcV2CborSerializesZeroValuesInMaps",
+                "description": "Ensure that 0 and false are sent over the wire in all maps and lists",
                 "given": {
                     "name": "RpcV2CborDenseMaps",
                     "http": {
@@ -430,7 +431,6 @@
                     },
                     "documentation": "<p>The example tests basic map serialization.</p>"
                 },
-                "description": "Ensure that 0 and false are sent over the wire in all maps and lists",
                 "params": {
                     "denseNumberMap": {
                         "x": 0
@@ -444,9 +444,9 @@
                     "uri": "/service/RpcV2Protocol/operation/RpcV2CborDenseMaps",
                     "body": "om5kZW5zZU51bWJlck1hcKFheABvZGVuc2VCb29sZWFuTWFwoWF49A==",
                     "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
                         "Accept": "application/cbor",
-                        "Content-Type": "application/cbor",
-                        "smithy-protocol": "rpc-v2-cbor"
+                        "Content-Type": "application/cbor"
                     },
                     "requireHeaders": [
                         "Content-Length"
@@ -455,6 +455,7 @@
             },
             {
                 "id": "RpcV2CborSerializesDenseSetMap",
+                "description": "A request that contains a dense map of sets.",
                 "given": {
                     "name": "RpcV2CborDenseMaps",
                     "http": {
@@ -466,7 +467,6 @@
                     },
                     "documentation": "<p>The example tests basic map serialization.</p>"
                 },
-                "description": "A request that contains a dense map of sets.",
                 "params": {
                     "denseSetMap": {
                         "x": [],
@@ -481,9 +481,9 @@
                     "uri": "/service/RpcV2Protocol/operation/RpcV2CborDenseMaps",
                     "body": "oWtkZW5zZVNldE1hcKJheIBheYJhYWFi",
                     "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
                         "Accept": "application/cbor",
-                        "Content-Type": "application/cbor",
-                        "smithy-protocol": "rpc-v2-cbor"
+                        "Content-Type": "application/cbor"
                     },
                     "requireHeaders": [
                         "Content-Length"
@@ -654,6 +654,7 @@
         "cases": [
             {
                 "id": "RpcV2CborLists",
+                "description": "Serializes RpcV2 Cbor lists",
                 "given": {
                     "name": "RpcV2CborLists",
                     "http": {
@@ -666,7 +667,6 @@
                     "documentation": "<p>This test case serializes JSON lists for the following cases for both input and output:</p> <ol> <li>Normal lists.</li> <li>Normal sets.</li> <li>Lists of lists.</li> <li>Lists of structures.</li> </ol>",
                     "idempotent": true
                 },
-                "description": "Serializes RpcV2 Cbor lists",
                 "params": {
                     "stringList": [
                         "foo",
@@ -726,9 +726,9 @@
                     "uri": "/service/RpcV2Protocol/operation/RpcV2CborLists",
                     "body": "v2pzdHJpbmdMaXN0gmNmb29jYmFyaXN0cmluZ1NldIJjZm9vY2JhcmtpbnRlZ2VyTGlzdIIBAmtib29sZWFuTGlzdIL19G10aW1lc3RhbXBMaXN0gsH7QdTX+/OAAADB+0HU1/vzgAAAaGVudW1MaXN0gmNGb29hMGtpbnRFbnVtTGlzdIIBAnBuZXN0ZWRTdHJpbmdMaXN0goJjZm9vY2JhcoJjYmF6Y3F1eG1zdHJ1Y3R1cmVMaXN0gqJhYWExYWJhMqJhYWEzYWJhNGhibG9iTGlzdIJDZm9vQ2Jhcv8=",
                     "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
                         "Accept": "application/cbor",
-                        "Content-Type": "application/cbor",
-                        "smithy-protocol": "rpc-v2-cbor"
+                        "Content-Type": "application/cbor"
                     },
                     "requireHeaders": [
                         "Content-Length"
@@ -737,6 +737,7 @@
             },
             {
                 "id": "RpcV2CborListsEmpty",
+                "description": "Serializes empty JSON lists",
                 "given": {
                     "name": "RpcV2CborLists",
                     "http": {
@@ -749,7 +750,6 @@
                     "documentation": "<p>This test case serializes JSON lists for the following cases for both input and output:</p> <ol> <li>Normal lists.</li> <li>Normal sets.</li> <li>Lists of lists.</li> <li>Lists of structures.</li> </ol>",
                     "idempotent": true
                 },
-                "description": "Serializes empty JSON lists",
                 "params": {
                     "stringList": []
                 },
@@ -758,9 +758,9 @@
                     "uri": "/service/RpcV2Protocol/operation/RpcV2CborLists",
                     "body": "v2pzdHJpbmdMaXN0n///",
                     "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
                         "Accept": "application/cbor",
-                        "Content-Type": "application/cbor",
-                        "smithy-protocol": "rpc-v2-cbor"
+                        "Content-Type": "application/cbor"
                     },
                     "requireHeaders": [
                         "Content-Length"
@@ -769,6 +769,7 @@
             },
             {
                 "id": "RpcV2CborListsEmptyUsingDefiniteLength",
+                "description": "Serializes empty JSON definite length lists",
                 "given": {
                     "name": "RpcV2CborLists",
                     "http": {
@@ -781,7 +782,6 @@
                     "documentation": "<p>This test case serializes JSON lists for the following cases for both input and output:</p> <ol> <li>Normal lists.</li> <li>Normal sets.</li> <li>Lists of lists.</li> <li>Lists of structures.</li> </ol>",
                     "idempotent": true
                 },
-                "description": "Serializes empty JSON definite length lists",
                 "params": {
                     "stringList": []
                 },
@@ -790,9 +790,9 @@
                     "uri": "/service/RpcV2Protocol/operation/RpcV2CborLists",
                     "body": "oWpzdHJpbmdMaXN0gA==",
                     "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
                         "Accept": "application/cbor",
-                        "Content-Type": "application/cbor",
-                        "smithy-protocol": "rpc-v2-cbor"
+                        "Content-Type": "application/cbor"
                     },
                     "requireHeaders": [
                         "Content-Length"
@@ -886,6 +886,7 @@
         "cases": [
             {
                 "id": "RpcV2CborSimpleScalarProperties",
+                "description": "Serializes simple scalar properties",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -896,7 +897,6 @@
                         "shape": "SimpleScalarStructure"
                     }
                 },
-                "description": "Serializes simple scalar properties",
                 "params": {
                     "byteValue": 5,
                     "doubleValue": 1.889,
@@ -914,9 +914,9 @@
                     "uri": "/service/RpcV2Protocol/operation/SimpleScalarProperties",
                     "body": "v2lieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kD0AABsaW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9WlibG9iVmFsdWVDZm9v/w==",
                     "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
                         "Accept": "application/cbor",
-                        "Content-Type": "application/cbor",
-                        "smithy-protocol": "rpc-v2-cbor"
+                        "Content-Type": "application/cbor"
                     },
                     "requireHeaders": [
                         "Content-Length"
@@ -925,6 +925,7 @@
             },
             {
                 "id": "RpcV2CborClientDoesntSerializeNullStructureValues",
+                "description": "RpcV2 Cbor should not serialize null structure values",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -935,7 +936,6 @@
                         "shape": "SimpleScalarStructure"
                     }
                 },
-                "description": "RpcV2 Cbor should not serialize null structure values",
                 "params": {
                     "stringValue": null
                 },
@@ -944,9 +944,9 @@
                     "uri": "/service/RpcV2Protocol/operation/SimpleScalarProperties",
                     "body": "v/8=",
                     "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
                         "Accept": "application/cbor",
-                        "Content-Type": "application/cbor",
-                        "smithy-protocol": "rpc-v2-cbor"
+                        "Content-Type": "application/cbor"
                     },
                     "requireHeaders": [
                         "Content-Length"
@@ -955,6 +955,7 @@
             },
             {
                 "id": "RpcV2CborSupportsNaNFloatInputs",
+                "description": "Supports handling NaN float values.",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -965,7 +966,6 @@
                         "shape": "SimpleScalarStructure"
                     }
                 },
-                "description": "Supports handling NaN float values.",
                 "params": {
                     "doubleValue": "NaN",
                     "floatValue": "NaN"
@@ -975,9 +975,9 @@
                     "uri": "/service/RpcV2Protocol/operation/SimpleScalarProperties",
                     "body": "v2tkb3VibGVWYWx1Zft/+AAAAAAAAGpmbG9hdFZhbHVl+n/AAAD/",
                     "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
                         "Accept": "application/cbor",
-                        "Content-Type": "application/cbor",
-                        "smithy-protocol": "rpc-v2-cbor"
+                        "Content-Type": "application/cbor"
                     },
                     "requireHeaders": [
                         "Content-Length"
@@ -986,6 +986,7 @@
             },
             {
                 "id": "RpcV2CborSupportsInfinityFloatInputs",
+                "description": "Supports handling Infinity float values.",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -996,7 +997,6 @@
                         "shape": "SimpleScalarStructure"
                     }
                 },
-                "description": "Supports handling Infinity float values.",
                 "params": {
                     "doubleValue": "Infinity",
                     "floatValue": "Infinity"
@@ -1006,9 +1006,9 @@
                     "uri": "/service/RpcV2Protocol/operation/SimpleScalarProperties",
                     "body": "v2tkb3VibGVWYWx1Zft/8AAAAAAAAGpmbG9hdFZhbHVl+n+AAAD/",
                     "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
                         "Accept": "application/cbor",
-                        "Content-Type": "application/cbor",
-                        "smithy-protocol": "rpc-v2-cbor"
+                        "Content-Type": "application/cbor"
                     },
                     "requireHeaders": [
                         "Content-Length"
@@ -1017,6 +1017,7 @@
             },
             {
                 "id": "RpcV2CborSupportsNegativeInfinityFloatInputs",
+                "description": "Supports handling Infinity float values.",
                 "given": {
                     "name": "SimpleScalarProperties",
                     "http": {
@@ -1027,7 +1028,6 @@
                         "shape": "SimpleScalarStructure"
                     }
                 },
-                "description": "Supports handling Infinity float values.",
                 "params": {
                     "doubleValue": "-Infinity",
                     "floatValue": "-Infinity"
@@ -1037,9 +1037,9 @@
                     "uri": "/service/RpcV2Protocol/operation/SimpleScalarProperties",
                     "body": "v2tkb3VibGVWYWx1Zfv/8AAAAAAAAGpmbG9hdFZhbHVl+v+AAAD/",
                     "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
                         "Accept": "application/cbor",
-                        "Content-Type": "application/cbor",
-                        "smithy-protocol": "rpc-v2-cbor"
+                        "Content-Type": "application/cbor"
                     },
                     "requireHeaders": [
                         "Content-Length"

@@ -183,6 +183,7 @@ module Aws::EMR
       attr_accessor os_release_label: ::String
       attr_accessor ebs_root_volume_iops: ::Integer
       attr_accessor ebs_root_volume_throughput: ::Integer
+      attr_accessor extended_support: bool
       SENSITIVE: []
     end
 
@@ -1086,11 +1087,13 @@ module Aws::EMR
     class ModifyClusterInput
       attr_accessor cluster_id: ::String
       attr_accessor step_concurrency_level: ::Integer
+      attr_accessor extended_support: bool
       SENSITIVE: []
     end
 
     class ModifyClusterOutput
       attr_accessor step_concurrency_level: ::Integer
+      attr_accessor extended_support: bool
       SENSITIVE: []
     end
 
@@ -1331,6 +1334,7 @@ module Aws::EMR
       attr_accessor os_release_label: ::String
       attr_accessor ebs_root_volume_iops: ::Integer
       attr_accessor ebs_root_volume_throughput: ::Integer
+      attr_accessor extended_support: bool
       SENSITIVE: []
     end
 

@@ -30,6 +30,43 @@ module Aws::SocialMessaging
       SENSITIVE: []
     end
 
+    class CreateWhatsAppMessageTemplateFromLibraryInput
+      attr_accessor meta_library_template: Types::MetaLibraryTemplate
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWhatsAppMessageTemplateFromLibraryOutput
+      attr_accessor meta_template_id: ::String
+      attr_accessor template_status: ::String
+      attr_accessor category: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWhatsAppMessageTemplateInput
+      attr_accessor template_definition: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWhatsAppMessageTemplateMediaInput
+      attr_accessor id: ::String
+      attr_accessor source_s3_file: Types::S3File
+      SENSITIVE: [:source_s3_file]
+    end
+
+    class CreateWhatsAppMessageTemplateMediaOutput
+      attr_accessor meta_header_handle: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWhatsAppMessageTemplateOutput
+      attr_accessor meta_template_id: ::String
+      attr_accessor template_status: ::String
+      attr_accessor category: ::String
+      SENSITIVE: []
+    end
+
     class DeleteWhatsAppMessageMediaInput
       attr_accessor media_id: ::String
       attr_accessor origination_phone_number_id: ::String
@@ -39,6 +76,17 @@ module Aws::SocialMessaging
     class DeleteWhatsAppMessageMediaOutput
       attr_accessor success: bool
       SENSITIVE: []
+    end
+
+    class DeleteWhatsAppMessageTemplateInput
+      attr_accessor meta_template_id: ::String
+      attr_accessor delete_all_languages: bool
+      attr_accessor id: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWhatsAppMessageTemplateOutput < Aws::EmptyStructure
     end
 
     class DependencyException
@@ -90,12 +138,58 @@ module Aws::SocialMessaging
       SENSITIVE: []
     end
 
+    class GetWhatsAppMessageTemplateInput
+      attr_accessor meta_template_id: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWhatsAppMessageTemplateOutput
+      attr_accessor template: ::String
+      SENSITIVE: []
+    end
+
     class InternalServiceException
       attr_accessor message: ::String
       SENSITIVE: []
     end
 
     class InvalidParametersException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LibraryTemplateBodyInputs
+      attr_accessor add_contact_number: bool
+      attr_accessor add_learn_more_link: bool
+      attr_accessor add_security_recommendation: bool
+      attr_accessor add_track_package_link: bool
+      attr_accessor code_expiration_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class LibraryTemplateButtonInput
+      attr_accessor type: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor url: ::Hash[::String, ::String]
+      attr_accessor otp_type: ::String
+      attr_accessor zero_tap_terms_accepted: bool
+      attr_accessor supported_apps: ::Array[::Hash[::String, ::String]]
+      SENSITIVE: []
+    end
+
+    class LibraryTemplateButtonList
+      attr_accessor type: ::String
+      attr_accessor text: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor url: ::String
+      attr_accessor otp_type: ::String
+      attr_accessor zero_tap_terms_accepted: bool
+      attr_accessor supported_apps: ::Array[::Hash[::String, ::String]]
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -151,6 +245,57 @@ module Aws::SocialMessaging
     class ListTagsForResourceOutput
       attr_accessor status_code: ::Integer
       attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListWhatsAppMessageTemplatesInput
+      attr_accessor id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListWhatsAppMessageTemplatesOutput
+      attr_accessor templates: ::Array[Types::TemplateSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWhatsAppTemplateLibraryInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor id: ::String
+      attr_accessor filters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListWhatsAppTemplateLibraryOutput
+      attr_accessor meta_library_templates: ::Array[Types::MetaLibraryTemplateDefinition]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MetaLibraryTemplate
+      attr_accessor template_name: ::String
+      attr_accessor library_template_name: ::String
+      attr_accessor template_category: ::String
+      attr_accessor template_language: ::String
+      attr_accessor library_template_button_inputs: ::Array[Types::LibraryTemplateButtonInput]
+      attr_accessor library_template_body_inputs: Types::LibraryTemplateBodyInputs
+      SENSITIVE: []
+    end
+
+    class MetaLibraryTemplateDefinition
+      attr_accessor template_name: ::String
+      attr_accessor template_language: ::String
+      attr_accessor template_category: ::String
+      attr_accessor template_topic: ::String
+      attr_accessor template_use_case: ::String
+      attr_accessor template_industry: ::Array[::String]
+      attr_accessor template_header: ::String
+      attr_accessor template_body: ::String
+      attr_accessor template_buttons: ::Array[Types::LibraryTemplateButtonList]
+      attr_accessor template_id: ::String
       SENSITIVE: []
     end
 
@@ -221,6 +366,16 @@ module Aws::SocialMessaging
       SENSITIVE: []
     end
 
+    class TemplateSummary
+      attr_accessor template_name: ::String
+      attr_accessor meta_template_id: ::String
+      attr_accessor template_status: ::String
+      attr_accessor template_quality_score: ::String
+      attr_accessor template_language: ::String
+      attr_accessor template_category: ::String
+      SENSITIVE: []
+    end
+
     class ThrottledRequestException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -235,6 +390,17 @@ module Aws::SocialMessaging
     class UntagResourceOutput
       attr_accessor status_code: ::Integer
       SENSITIVE: []
+    end
+
+    class UpdateWhatsAppMessageTemplateInput
+      attr_accessor id: ::String
+      attr_accessor meta_template_id: ::String
+      attr_accessor template_category: ::String
+      attr_accessor template_components: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateWhatsAppMessageTemplateOutput < Aws::EmptyStructure
     end
 
     class ValidationException
@@ -271,6 +437,7 @@ module Aws::SocialMessaging
       attr_accessor display_phone_number_name: ::String
       attr_accessor display_phone_number: ::String
       attr_accessor quality_rating: ::String
+      attr_accessor data_localization_region: ::String
       SENSITIVE: []
     end
 
@@ -282,6 +449,7 @@ module Aws::SocialMessaging
       attr_accessor display_phone_number_name: ::String
       attr_accessor display_phone_number: ::String
       attr_accessor quality_rating: ::String
+      attr_accessor data_localization_region: ::String
       SENSITIVE: []
     end
 
@@ -295,6 +463,7 @@ module Aws::SocialMessaging
 
     class WhatsAppSignupCallback
       attr_accessor access_token: ::String
+      attr_accessor callback_url: ::String
       SENSITIVE: []
     end
 

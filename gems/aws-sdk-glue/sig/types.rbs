@@ -4242,6 +4242,7 @@ module Aws::Glue
       attr_accessor maintenance_window: ::String
       attr_accessor profile_name: ::String
       attr_accessor state_detail: ::String
+      attr_accessor execution_role_session_policy: ::String
       SENSITIVE: []
     end
 
@@ -6086,6 +6087,7 @@ module Aws::Glue
       attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
       attr_accessor number_of_workers: ::Integer
       attr_accessor execution_class: ("FLEX" | "STANDARD")
+      attr_accessor execution_role_session_policy: ::String
       SENSITIVE: []
     end
 

@@ -18,6 +18,7 @@ module Aws
                       ?account_id: String,
                       ?active_endpoint_cache: bool,
                       ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
                       ?client_side_monitoring: bool,
                       ?client_side_monitoring_client_id: String,
                       ?client_side_monitoring_host: String,
@@ -92,7 +93,7 @@ module Aws
                                ?bucket: ::String,
                                ?port: ::Integer,
                                ?db_parameter_group_identifier: ::String,
-                               db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge"),
+                               db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge"),
                                ?db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3"),
                                allocated_storage: ::Integer,
                                ?network_type: ("IPV4" | "DUAL"),
@@ -120,7 +121,7 @@ module Aws
         def endpoint: () -> ::String
         def port: () -> ::Integer
         def network_type: () -> ("IPV4" | "DUAL")
-        def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge")
+        def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
         def db_storage_type: () -> ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
         def allocated_storage: () -> ::Integer
         def deployment_type: () -> ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY")
@@ -142,7 +143,7 @@ module Aws
                                 password: ::String,
                                 ?organization: ::String,
                                 ?bucket: ::String,
-                                db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge"),
+                                db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge"),
                                 vpc_subnet_ids: Array[::String],
                                 vpc_security_group_ids: Array[::String],
                                 ?publicly_accessible: bool,
@@ -259,7 +260,7 @@ module Aws
         def endpoint: () -> ::String
         def port: () -> ::Integer
         def network_type: () -> ("IPV4" | "DUAL")
-        def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge")
+        def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
         def db_storage_type: () -> ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
         def allocated_storage: () -> ::Integer
         def deployment_type: () -> ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY")
@@ -290,7 +291,7 @@ module Aws
         def reader_endpoint: () -> ::String
         def port: () -> ::Integer
         def deployment_type: () -> ("MULTI_NODE_READ_REPLICAS")
-        def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge")
+        def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
         def network_type: () -> ("IPV4" | "DUAL")
         def db_storage_type: () -> ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
         def allocated_storage: () -> ::Integer
@@ -317,7 +318,7 @@ module Aws
         def endpoint: () -> ::String
         def port: () -> ::Integer
         def network_type: () -> ("IPV4" | "DUAL")
-        def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge")
+        def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
         def db_storage_type: () -> ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
         def allocated_storage: () -> ::Integer
         def deployment_type: () -> ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY")
@@ -440,7 +441,7 @@ module Aws
                                },
                                ?db_parameter_group_identifier: ::String,
                                ?port: ::Integer,
-                               ?db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge"),
+                               ?db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge"),
                                ?failover_mode: ("AUTOMATIC" | "NO_FAILOVER")
                              ) -> _UpdateDbClusterResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDbClusterResponseSuccess
@@ -454,7 +455,7 @@ module Aws
         def endpoint: () -> ::String
         def port: () -> ::Integer
         def network_type: () -> ("IPV4" | "DUAL")
-        def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge")
+        def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
         def db_storage_type: () -> ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
         def allocated_storage: () -> ::Integer
         def deployment_type: () -> ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY")
@@ -480,7 +481,7 @@ module Aws
                                 },
                                 ?db_parameter_group_identifier: ::String,
                                 ?port: ::Integer,
-                                ?db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge"),
+                                ?db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge"),
                                 ?deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY"),
                                 ?db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3"),
                                 ?allocated_storage: ::Integer

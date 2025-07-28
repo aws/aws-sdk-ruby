@@ -17,6 +17,7 @@ module Aws
                       ?access_key_id: String,
                       ?account_id: String,
                       ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,

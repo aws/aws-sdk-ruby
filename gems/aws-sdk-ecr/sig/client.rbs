@@ -18,6 +18,7 @@ module Aws
                       ?account_id: String,
                       ?active_endpoint_cache: bool,
                       ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
                       ?client_side_monitoring: bool,
                       ?client_side_monitoring_client_id: String,
                       ?client_side_monitoring_host: String,
@@ -192,7 +193,13 @@ module Aws
                                    value: ::String
                                  },
                                ],
-                               ?image_tag_mutability: ("MUTABLE" | "IMMUTABLE"),
+                               ?image_tag_mutability: ("MUTABLE" | "IMMUTABLE" | "IMMUTABLE_WITH_EXCLUSION" | "MUTABLE_WITH_EXCLUSION"),
+                               ?image_tag_mutability_exclusion_filters: Array[
+                                 {
+                                   filter_type: ("WILDCARD"),
+                                   filter: ::String
+                                 },
+                               ],
                                ?image_scanning_configuration: {
                                  scan_on_push: bool?
                                },
@@ -222,7 +229,13 @@ module Aws
                                                      value: ::String
                                                    },
                                                  ],
-                                                 ?image_tag_mutability: ("MUTABLE" | "IMMUTABLE"),
+                                                 ?image_tag_mutability: ("MUTABLE" | "IMMUTABLE" | "IMMUTABLE_WITH_EXCLUSION" | "MUTABLE_WITH_EXCLUSION"),
+                                                 ?image_tag_mutability_exclusion_filters: Array[
+                                                   {
+                                                     filter_type: ("WILDCARD"),
+                                                     filter: ::String
+                                                   },
+                                                 ],
                                                  ?repository_policy: ::String,
                                                  ?lifecycle_policy: ::String,
                                                  applied_for: Array[("REPLICATION" | "PULL_THROUGH_CACHE")],
@@ -616,13 +629,20 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::PutImageTagMutabilityResponse]
         def registry_id: () -> ::String
         def repository_name: () -> ::String
-        def image_tag_mutability: () -> ("MUTABLE" | "IMMUTABLE")
+        def image_tag_mutability: () -> ("MUTABLE" | "IMMUTABLE" | "IMMUTABLE_WITH_EXCLUSION" | "MUTABLE_WITH_EXCLUSION")
+        def image_tag_mutability_exclusion_filters: () -> ::Array[Types::ImageTagMutabilityExclusionFilter]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#put_image_tag_mutability-instance_method
       def put_image_tag_mutability: (
                                       ?registry_id: ::String,
                                       repository_name: ::String,
-                                      image_tag_mutability: ("MUTABLE" | "IMMUTABLE")
+                                      image_tag_mutability: ("MUTABLE" | "IMMUTABLE" | "IMMUTABLE_WITH_EXCLUSION" | "MUTABLE_WITH_EXCLUSION"),
+                                      ?image_tag_mutability_exclusion_filters: Array[
+                                        {
+                                          filter_type: ("WILDCARD"),
+                                          filter: ::String
+                                        },
+                                      ]
                                     ) -> _PutImageTagMutabilityResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutImageTagMutabilityResponseSuccess
 
@@ -809,7 +829,13 @@ module Aws
                                                      value: ::String
                                                    },
                                                  ],
-                                                 ?image_tag_mutability: ("MUTABLE" | "IMMUTABLE"),
+                                                 ?image_tag_mutability: ("MUTABLE" | "IMMUTABLE" | "IMMUTABLE_WITH_EXCLUSION" | "MUTABLE_WITH_EXCLUSION"),
+                                                 ?image_tag_mutability_exclusion_filters: Array[
+                                                   {
+                                                     filter_type: ("WILDCARD"),
+                                                     filter: ::String
+                                                   },
+                                                 ],
                                                  ?repository_policy: ::String,
                                                  ?lifecycle_policy: ::String,
                                                  ?applied_for: Array[("REPLICATION" | "PULL_THROUGH_CACHE")],

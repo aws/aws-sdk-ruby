@@ -95,7 +95,7 @@ module Aws::Glue
     #     class name or an instance of a plugin class.
     #
     #   @option options [required, Aws::CredentialProvider] :credentials
-    #     Your AWS credentials. This can be an instance of any one of the
+    #     Your AWS credentials used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
@@ -128,18 +128,23 @@ module Aws::Glue
     #     locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
+    #
     #     * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
     #       `:account_id` options.
-    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
-    #       ENV['AWS_SESSION_TOKEN'], and ENV['AWS_ACCOUNT_ID']
+    #
+    #     * `ENV['AWS_ACCESS_KEY_ID']`, `ENV['AWS_SECRET_ACCESS_KEY']`,
+    #       `ENV['AWS_SESSION_TOKEN']`, and `ENV['AWS_ACCOUNT_ID']`.
+    #
     #     * `~/.aws/credentials`
+    #
     #     * `~/.aws/config`
+    #
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
     #       enable retries and extended timeouts. Instance profile credential
-    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
-    #       to true.
+    #       fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
+    #       to `true`.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -166,6 +171,11 @@ module Aws::Glue
     #     until there is sufficent client side capacity to retry the request.
     #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
     #     not retry instead of sleeping.
+    #
+    #   @option options [Array<String>] :auth_scheme_preference
+    #     A list of preferred authentication schemes to use when making a request. Supported values are:
+    #     `sigv4`, `sigv4a`, `httpBearerAuth`, and `noAuth`. When set using `ENV['AWS_AUTH_SCHEME_PREFERENCE']` or in
+    #     shared config as `auth_scheme_preference`, the value should be a comma-separated list.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -253,8 +263,8 @@ module Aws::Glue
     #     4 times. Used in `standard` and `adaptive` retry modes.
     #
     #   @option options [String] :profile ("default")
-    #     Used when loading credentials from the shared credentials file
-    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
+    #     When not specified, 'default' is used.
     #
     #   @option options [String] :request_checksum_calculation ("when_supported")
     #     Determines when a checksum will be calculated for request payloads. Values are:
@@ -374,7 +384,7 @@ module Aws::Glue
     #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
-    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     Your Bearer token used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
@@ -2463,6 +2473,7 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].profile_name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].state_detail #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].execution_role_session_policy #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -2536,6 +2547,7 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].profile_name #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].state_detail #=> String
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].execution_role_session_policy #=> String
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -10305,6 +10317,7 @@ module Aws::Glue
     #   resp.job_run.maintenance_window #=> String
     #   resp.job_run.profile_name #=> String
     #   resp.job_run.state_detail #=> String
+    #   resp.job_run.execution_role_session_policy #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRun AWS API Documentation
     #
@@ -10379,6 +10392,7 @@ module Aws::Glue
     #   resp.job_runs[0].maintenance_window #=> String
     #   resp.job_runs[0].profile_name #=> String
     #   resp.job_runs[0].state_detail #=> String
+    #   resp.job_runs[0].execution_role_session_policy #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRuns AWS API Documentation
@@ -14527,6 +14541,7 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].profile_name #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].state_detail #=> String
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].execution_role_session_policy #=> String
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -14600,6 +14615,7 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].profile_name #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].state_detail #=> String
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].execution_role_session_policy #=> String
     #   resp.workflow.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -14727,6 +14743,7 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].profile_name #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].state_detail #=> String
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].execution_role_session_policy #=> String
     #   resp.run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -14893,6 +14910,7 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].profile_name #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].state_detail #=> String
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].execution_role_session_policy #=> String
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -17823,6 +17841,12 @@ module Aws::Glue
     #   will be allowed to set `ExecutionClass` to `FLEX`. The flexible
     #   execution class is available for Spark jobs.
     #
+    # @option params [String] :execution_role_session_policy
+    #   This inline session policy to the StartJobRun API allows you to
+    #   dynamically restrict the permissions of the specified execution role
+    #   for the scope of the job, without requiring the creation of additional
+    #   IAM roles.
+    #
     # @return [Types::StartJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartJobRunResponse#job_run_id #job_run_id} => String
@@ -17846,6 +17870,7 @@ module Aws::Glue
     #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X, G.4X, G.8X, Z.2X
     #     number_of_workers: 1,
     #     execution_class: "FLEX", # accepts FLEX, STANDARD
+    #     execution_role_session_policy: "OrchestrationPolicyJsonString",
     #   })
     #
     # @example Response structure
@@ -20457,7 +20482,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.225.0'
+      context[:gem_version] = '1.227.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

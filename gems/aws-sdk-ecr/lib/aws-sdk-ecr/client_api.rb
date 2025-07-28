@@ -149,6 +149,10 @@ module Aws::ECR
     ImageTagAlreadyExistsException = Shapes::StructureShape.new(name: 'ImageTagAlreadyExistsException')
     ImageTagList = Shapes::ListShape.new(name: 'ImageTagList')
     ImageTagMutability = Shapes::StringShape.new(name: 'ImageTagMutability')
+    ImageTagMutabilityExclusionFilter = Shapes::StructureShape.new(name: 'ImageTagMutabilityExclusionFilter')
+    ImageTagMutabilityExclusionFilterType = Shapes::StringShape.new(name: 'ImageTagMutabilityExclusionFilterType')
+    ImageTagMutabilityExclusionFilterValue = Shapes::StringShape.new(name: 'ImageTagMutabilityExclusionFilterValue')
+    ImageTagMutabilityExclusionFilters = Shapes::ListShape.new(name: 'ImageTagMutabilityExclusionFilters')
     ImageTagsList = Shapes::ListShape.new(name: 'ImageTagsList')
     InUseCount = Shapes::IntegerShape.new(name: 'InUseCount')
     InitiateLayerUploadRequest = Shapes::StructureShape.new(name: 'InitiateLayerUploadRequest')
@@ -453,6 +457,7 @@ module Aws::ECR
     CreateRepositoryCreationTemplateRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfigurationForRepositoryCreationTemplate, location_name: "encryptionConfiguration"))
     CreateRepositoryCreationTemplateRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "resourceTags"))
     CreateRepositoryCreationTemplateRequest.add_member(:image_tag_mutability, Shapes::ShapeRef.new(shape: ImageTagMutability, location_name: "imageTagMutability"))
+    CreateRepositoryCreationTemplateRequest.add_member(:image_tag_mutability_exclusion_filters, Shapes::ShapeRef.new(shape: ImageTagMutabilityExclusionFilters, location_name: "imageTagMutabilityExclusionFilters"))
     CreateRepositoryCreationTemplateRequest.add_member(:repository_policy, Shapes::ShapeRef.new(shape: RepositoryPolicyText, location_name: "repositoryPolicy"))
     CreateRepositoryCreationTemplateRequest.add_member(:lifecycle_policy, Shapes::ShapeRef.new(shape: LifecyclePolicyTextForRepositoryCreationTemplate, location_name: "lifecyclePolicy"))
     CreateRepositoryCreationTemplateRequest.add_member(:applied_for, Shapes::ShapeRef.new(shape: RCTAppliedForList, required: true, location_name: "appliedFor"))
@@ -467,6 +472,7 @@ module Aws::ECR
     CreateRepositoryRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     CreateRepositoryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateRepositoryRequest.add_member(:image_tag_mutability, Shapes::ShapeRef.new(shape: ImageTagMutability, location_name: "imageTagMutability"))
+    CreateRepositoryRequest.add_member(:image_tag_mutability_exclusion_filters, Shapes::ShapeRef.new(shape: ImageTagMutabilityExclusionFilters, location_name: "imageTagMutabilityExclusionFilters"))
     CreateRepositoryRequest.add_member(:image_scanning_configuration, Shapes::ShapeRef.new(shape: ImageScanningConfiguration, location_name: "imageScanningConfiguration"))
     CreateRepositoryRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     CreateRepositoryRequest.struct_class = Types::CreateRepositoryRequest
@@ -818,6 +824,12 @@ module Aws::ECR
 
     ImageTagList.member = Shapes::ShapeRef.new(shape: ImageTag)
 
+    ImageTagMutabilityExclusionFilter.add_member(:filter_type, Shapes::ShapeRef.new(shape: ImageTagMutabilityExclusionFilterType, required: true, location_name: "filterType"))
+    ImageTagMutabilityExclusionFilter.add_member(:filter, Shapes::ShapeRef.new(shape: ImageTagMutabilityExclusionFilterValue, required: true, location_name: "filter"))
+    ImageTagMutabilityExclusionFilter.struct_class = Types::ImageTagMutabilityExclusionFilter
+
+    ImageTagMutabilityExclusionFilters.member = Shapes::ShapeRef.new(shape: ImageTagMutabilityExclusionFilter)
+
     ImageTagsList.member = Shapes::ShapeRef.new(shape: ImageTag)
 
     InitiateLayerUploadRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
@@ -996,11 +1008,13 @@ module Aws::ECR
     PutImageTagMutabilityRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     PutImageTagMutabilityRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     PutImageTagMutabilityRequest.add_member(:image_tag_mutability, Shapes::ShapeRef.new(shape: ImageTagMutability, required: true, location_name: "imageTagMutability"))
+    PutImageTagMutabilityRequest.add_member(:image_tag_mutability_exclusion_filters, Shapes::ShapeRef.new(shape: ImageTagMutabilityExclusionFilters, location_name: "imageTagMutabilityExclusionFilters"))
     PutImageTagMutabilityRequest.struct_class = Types::PutImageTagMutabilityRequest
 
     PutImageTagMutabilityResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     PutImageTagMutabilityResponse.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
     PutImageTagMutabilityResponse.add_member(:image_tag_mutability, Shapes::ShapeRef.new(shape: ImageTagMutability, location_name: "imageTagMutability"))
+    PutImageTagMutabilityResponse.add_member(:image_tag_mutability_exclusion_filters, Shapes::ShapeRef.new(shape: ImageTagMutabilityExclusionFilters, location_name: "imageTagMutabilityExclusionFilters"))
     PutImageTagMutabilityResponse.struct_class = Types::PutImageTagMutabilityResponse
 
     PutLifecyclePolicyRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
@@ -1083,6 +1097,7 @@ module Aws::ECR
     Repository.add_member(:repository_uri, Shapes::ShapeRef.new(shape: Url, location_name: "repositoryUri"))
     Repository.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "createdAt"))
     Repository.add_member(:image_tag_mutability, Shapes::ShapeRef.new(shape: ImageTagMutability, location_name: "imageTagMutability"))
+    Repository.add_member(:image_tag_mutability_exclusion_filters, Shapes::ShapeRef.new(shape: ImageTagMutabilityExclusionFilters, location_name: "imageTagMutabilityExclusionFilters"))
     Repository.add_member(:image_scanning_configuration, Shapes::ShapeRef.new(shape: ImageScanningConfiguration, location_name: "imageScanningConfiguration"))
     Repository.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     Repository.struct_class = Types::Repository
@@ -1095,6 +1110,7 @@ module Aws::ECR
     RepositoryCreationTemplate.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfigurationForRepositoryCreationTemplate, location_name: "encryptionConfiguration"))
     RepositoryCreationTemplate.add_member(:resource_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "resourceTags"))
     RepositoryCreationTemplate.add_member(:image_tag_mutability, Shapes::ShapeRef.new(shape: ImageTagMutability, location_name: "imageTagMutability"))
+    RepositoryCreationTemplate.add_member(:image_tag_mutability_exclusion_filters, Shapes::ShapeRef.new(shape: ImageTagMutabilityExclusionFilters, location_name: "imageTagMutabilityExclusionFilters"))
     RepositoryCreationTemplate.add_member(:repository_policy, Shapes::ShapeRef.new(shape: RepositoryPolicyText, location_name: "repositoryPolicy"))
     RepositoryCreationTemplate.add_member(:lifecycle_policy, Shapes::ShapeRef.new(shape: LifecyclePolicyTextForRepositoryCreationTemplate, location_name: "lifecyclePolicy"))
     RepositoryCreationTemplate.add_member(:applied_for, Shapes::ShapeRef.new(shape: RCTAppliedForList, location_name: "appliedFor"))
@@ -1273,6 +1289,7 @@ module Aws::ECR
     UpdateRepositoryCreationTemplateRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfigurationForRepositoryCreationTemplate, location_name: "encryptionConfiguration"))
     UpdateRepositoryCreationTemplateRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "resourceTags"))
     UpdateRepositoryCreationTemplateRequest.add_member(:image_tag_mutability, Shapes::ShapeRef.new(shape: ImageTagMutability, location_name: "imageTagMutability"))
+    UpdateRepositoryCreationTemplateRequest.add_member(:image_tag_mutability_exclusion_filters, Shapes::ShapeRef.new(shape: ImageTagMutabilityExclusionFilters, location_name: "imageTagMutabilityExclusionFilters"))
     UpdateRepositoryCreationTemplateRequest.add_member(:repository_policy, Shapes::ShapeRef.new(shape: RepositoryPolicyText, location_name: "repositoryPolicy"))
     UpdateRepositoryCreationTemplateRequest.add_member(:lifecycle_policy, Shapes::ShapeRef.new(shape: LifecyclePolicyTextForRepositoryCreationTemplate, location_name: "lifecyclePolicy"))
     UpdateRepositoryCreationTemplateRequest.add_member(:applied_for, Shapes::ShapeRef.new(shape: RCTAppliedForList, location_name: "appliedFor"))

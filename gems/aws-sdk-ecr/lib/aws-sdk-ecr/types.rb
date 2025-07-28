@@ -522,6 +522,12 @@ module Aws::ECR
     #   prevent them from being overwritten.
     #   @return [String]
     #
+    # @!attribute [rw] image_tag_mutability_exclusion_filters
+    #   Creates a repository creation template with a list of filters that
+    #   define which image tags can override the default image tag
+    #   mutability setting.
+    #   @return [Array<Types::ImageTagMutabilityExclusionFilter>]
+    #
     # @!attribute [rw] repository_policy
     #   The repository policy to apply to repositories created using the
     #   template. A repository policy is a permissions policy associated
@@ -555,6 +561,7 @@ module Aws::ECR
       :encryption_configuration,
       :resource_tags,
       :image_tag_mutability,
+      :image_tag_mutability_exclusion_filters,
       :repository_policy,
       :lifecycle_policy,
       :applied_for,
@@ -614,6 +621,11 @@ module Aws::ECR
     #   prevent them from being overwritten.
     #   @return [String]
     #
+    # @!attribute [rw] image_tag_mutability_exclusion_filters
+    #   Creates a repository with a list of filters that define which image
+    #   tags can override the default image tag mutability setting.
+    #   @return [Array<Types::ImageTagMutabilityExclusionFilter>]
+    #
     # @!attribute [rw] image_scanning_configuration
     #   The image scanning configuration for the repository. This determines
     #   whether images are scanned for known vulnerabilities after being
@@ -632,6 +644,7 @@ module Aws::ECR
       :repository_name,
       :tags,
       :image_tag_mutability,
+      :image_tag_mutability_exclusion_filters,
       :image_scanning_configuration,
       :encryption_configuration)
       SENSITIVE = []
@@ -2401,6 +2414,29 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # Overrides the default image tag mutability setting of the repository
+    # for image tags that match the specified filters.
+    #
+    # @!attribute [rw] filter_type
+    #   Specifies the type of filter to use for excluding image tags from
+    #   the repository's mutability setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   The value to use when filtering image tags. Must be either a regular
+    #   expression pattern or a tag prefix value based on the specified
+    #   filter type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageTagMutabilityExclusionFilter AWS API Documentation
+    #
+    class ImageTagMutabilityExclusionFilter < Struct.new(
+      :filter_type,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry to
     #   which you intend to upload layers. If you do not specify a registry,
@@ -3215,12 +3251,18 @@ module Aws::ECR
     #   which will prevent them from being overwritten.
     #   @return [String]
     #
+    # @!attribute [rw] image_tag_mutability_exclusion_filters
+    #   Creates or updates a repository with filters that define which image
+    #   tags can override the default image tag mutability setting.
+    #   @return [Array<Types::ImageTagMutabilityExclusionFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageTagMutabilityRequest AWS API Documentation
     #
     class PutImageTagMutabilityRequest < Struct.new(
       :registry_id,
       :repository_name,
-      :image_tag_mutability)
+      :image_tag_mutability,
+      :image_tag_mutability_exclusion_filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3237,12 +3279,19 @@ module Aws::ECR
     #   The image tag mutability setting for the repository.
     #   @return [String]
     #
+    # @!attribute [rw] image_tag_mutability_exclusion_filters
+    #   Returns a list of filters that were defined for a repository. These
+    #   filters determine which image tags can override the default image
+    #   tag mutability setting of the repository.
+    #   @return [Array<Types::ImageTagMutabilityExclusionFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageTagMutabilityResponse AWS API Documentation
     #
     class PutImageTagMutabilityResponse < Struct.new(
       :registry_id,
       :repository_name,
-      :image_tag_mutability)
+      :image_tag_mutability,
+      :image_tag_mutability_exclusion_filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3595,6 +3644,12 @@ module Aws::ECR
     #   The tag mutability setting for the repository.
     #   @return [String]
     #
+    # @!attribute [rw] image_tag_mutability_exclusion_filters
+    #   The image tag mutability exclusion filters associated with the
+    #   repository. These filters specify which image tags can override the
+    #   repository's default image tag mutability setting.
+    #   @return [Array<Types::ImageTagMutabilityExclusionFilter>]
+    #
     # @!attribute [rw] image_scanning_configuration
     #   The image scanning configuration for a repository.
     #   @return [Types::ImageScanningConfiguration]
@@ -3613,6 +3668,7 @@ module Aws::ECR
       :repository_uri,
       :created_at,
       :image_tag_mutability,
+      :image_tag_mutability_exclusion_filters,
       :image_scanning_configuration,
       :encryption_configuration)
       SENSITIVE = []
@@ -3666,6 +3722,13 @@ module Aws::ECR
     #   prevent them from being overwritten.
     #   @return [String]
     #
+    # @!attribute [rw] image_tag_mutability_exclusion_filters
+    #   Defines the image tag mutability exclusion filters to apply when
+    #   creating repositories from this template. These filters specify
+    #   which image tags can override the repository's default image tag
+    #   mutability setting.
+    #   @return [Array<Types::ImageTagMutabilityExclusionFilter>]
+    #
     # @!attribute [rw] repository_policy
     #   The repository policy to apply to repositories created using the
     #   template. A repository policy is a permissions policy associated
@@ -3708,6 +3771,7 @@ module Aws::ECR
       :encryption_configuration,
       :resource_tags,
       :image_tag_mutability,
+      :image_tag_mutability_exclusion_filters,
       :repository_policy,
       :lifecycle_policy,
       :applied_for,
@@ -4457,6 +4521,11 @@ module Aws::ECR
     #   which will prevent them from being overwritten.
     #   @return [String]
     #
+    # @!attribute [rw] image_tag_mutability_exclusion_filters
+    #   Updates a repository with filters that define which image tags can
+    #   override the default image tag mutability setting.
+    #   @return [Array<Types::ImageTagMutabilityExclusionFilter>]
+    #
     # @!attribute [rw] repository_policy
     #   Updates the repository policy created using the template. A
     #   repository policy is a permissions policy associated with a
@@ -4491,6 +4560,7 @@ module Aws::ECR
       :encryption_configuration,
       :resource_tags,
       :image_tag_mutability,
+      :image_tag_mutability_exclusion_filters,
       :repository_policy,
       :lifecycle_policy,
       :applied_for,

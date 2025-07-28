@@ -10007,7 +10007,7 @@ module Aws::EC2
     FleetLaunchTemplateOverrides.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
     FleetLaunchTemplateOverrides.add_member(:max_price, Shapes::ShapeRef.new(shape: String, location_name: "maxPrice"))
     FleetLaunchTemplateOverrides.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
-    FleetLaunchTemplateOverrides.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    FleetLaunchTemplateOverrides.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "availabilityZone"))
     FleetLaunchTemplateOverrides.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "weightedCapacity"))
     FleetLaunchTemplateOverrides.add_member(:priority, Shapes::ShapeRef.new(shape: Double, location_name: "priority"))
     FleetLaunchTemplateOverrides.add_member(:placement, Shapes::ShapeRef.new(shape: PlacementResponse, location_name: "placement"))
@@ -10023,7 +10023,7 @@ module Aws::EC2
     FleetLaunchTemplateOverridesRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "InstanceType"))
     FleetLaunchTemplateOverridesRequest.add_member(:max_price, Shapes::ShapeRef.new(shape: String, location_name: "MaxPrice"))
     FleetLaunchTemplateOverridesRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
-    FleetLaunchTemplateOverridesRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
+    FleetLaunchTemplateOverridesRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "AvailabilityZone"))
     FleetLaunchTemplateOverridesRequest.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "WeightedCapacity"))
     FleetLaunchTemplateOverridesRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Double, location_name: "Priority"))
     FleetLaunchTemplateOverridesRequest.add_member(:placement, Shapes::ShapeRef.new(shape: Placement, location_name: "Placement"))
@@ -16116,6 +16116,7 @@ module Aws::EC2
 
     StopInstancesRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, required: true, location_name: "InstanceId"))
     StopInstancesRequest.add_member(:hibernate, Shapes::ShapeRef.new(shape: Boolean, location_name: "Hibernate"))
+    StopInstancesRequest.add_member(:skip_os_shutdown, Shapes::ShapeRef.new(shape: Boolean, location_name: "SkipOsShutdown"))
     StopInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     StopInstancesRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "force"))
     StopInstancesRequest.struct_class = Types::StopInstancesRequest
@@ -16333,6 +16334,7 @@ module Aws::EC2
     TerminateConnectionStatusSet.member = Shapes::ShapeRef.new(shape: TerminateConnectionStatus, location_name: "item")
 
     TerminateInstancesRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, required: true, location_name: "InstanceId"))
+    TerminateInstancesRequest.add_member(:skip_os_shutdown, Shapes::ShapeRef.new(shape: Boolean, location_name: "SkipOsShutdown"))
     TerminateInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     TerminateInstancesRequest.struct_class = Types::TerminateInstancesRequest
 

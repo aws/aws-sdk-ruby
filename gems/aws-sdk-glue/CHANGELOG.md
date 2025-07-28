@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.227.0 (2025-07-23)
+------------------
+
+* Feature - AWS Glue now supports dynamic session policies for job executions. This feature allows you to specify custom, fine-grained permissions for each job run without creating multiple IAM roles.
+
+1.226.0 (2025-07-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.225.0 (2025-07-16)
 ------------------
 

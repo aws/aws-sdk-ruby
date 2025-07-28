@@ -34,6 +34,15 @@ module Aws::DataZone
     AddPolicyGrantInput = Shapes::StructureShape.new(name: 'AddPolicyGrantInput')
     AddPolicyGrantOutput = Shapes::StructureShape.new(name: 'AddPolicyGrantOutput')
     AddToProjectMemberPoolPolicyGrantDetail = Shapes::StructureShape.new(name: 'AddToProjectMemberPoolPolicyGrantDetail')
+    AggregationAttributeDisplayValue = Shapes::StringShape.new(name: 'AggregationAttributeDisplayValue')
+    AggregationAttributeValue = Shapes::StringShape.new(name: 'AggregationAttributeValue')
+    AggregationDisplayValue = Shapes::StringShape.new(name: 'AggregationDisplayValue')
+    AggregationList = Shapes::ListShape.new(name: 'AggregationList')
+    AggregationListItem = Shapes::StructureShape.new(name: 'AggregationListItem')
+    AggregationOutput = Shapes::StructureShape.new(name: 'AggregationOutput')
+    AggregationOutputItem = Shapes::StructureShape.new(name: 'AggregationOutputItem')
+    AggregationOutputItems = Shapes::ListShape.new(name: 'AggregationOutputItems')
+    AggregationOutputList = Shapes::ListShape.new(name: 'AggregationOutputList')
     AllDomainUnitsGrantFilter = Shapes::StructureShape.new(name: 'AllDomainUnitsGrantFilter')
     AllUsersGrantFilter = Shapes::StructureShape.new(name: 'AllUsersGrantFilter')
     ApplicableAssetTypes = Shapes::ListShape.new(name: 'ApplicableAssetTypes')
@@ -201,6 +210,7 @@ module Aws::DataZone
     DataProductDescription = Shapes::StringShape.new(name: 'DataProductDescription')
     DataProductId = Shapes::StringShape.new(name: 'DataProductId')
     DataProductItem = Shapes::StructureShape.new(name: 'DataProductItem')
+    DataProductItemAdditionalAttributes = Shapes::StructureShape.new(name: 'DataProductItemAdditionalAttributes')
     DataProductItemType = Shapes::StringShape.new(name: 'DataProductItemType')
     DataProductItems = Shapes::ListShape.new(name: 'DataProductItems')
     DataProductListing = Shapes::StructureShape.new(name: 'DataProductListing')
@@ -461,10 +471,12 @@ module Aws::DataZone
     GlossaryDescription = Shapes::StringShape.new(name: 'GlossaryDescription')
     GlossaryId = Shapes::StringShape.new(name: 'GlossaryId')
     GlossaryItem = Shapes::StructureShape.new(name: 'GlossaryItem')
+    GlossaryItemAdditionalAttributes = Shapes::StructureShape.new(name: 'GlossaryItemAdditionalAttributes')
     GlossaryName = Shapes::StringShape.new(name: 'GlossaryName')
     GlossaryStatus = Shapes::StringShape.new(name: 'GlossaryStatus')
     GlossaryTermId = Shapes::StringShape.new(name: 'GlossaryTermId')
     GlossaryTermItem = Shapes::StructureShape.new(name: 'GlossaryTermItem')
+    GlossaryTermItemAdditionalAttributes = Shapes::StructureShape.new(name: 'GlossaryTermItemAdditionalAttributes')
     GlossaryTermName = Shapes::StringShape.new(name: 'GlossaryTermName')
     GlossaryTermStatus = Shapes::StringShape.new(name: 'GlossaryTermStatus')
     GlossaryTerms = Shapes::ListShape.new(name: 'GlossaryTerms')
@@ -637,6 +649,10 @@ module Aws::DataZone
     LongDescription = Shapes::StringShape.new(name: 'LongDescription')
     ManagedPolicyType = Shapes::StringShape.new(name: 'ManagedPolicyType')
     MatchCriteria = Shapes::ListShape.new(name: 'MatchCriteria')
+    MatchOffset = Shapes::StructureShape.new(name: 'MatchOffset')
+    MatchOffsets = Shapes::ListShape.new(name: 'MatchOffsets')
+    MatchRationale = Shapes::ListShape.new(name: 'MatchRationale')
+    MatchRationaleItem = Shapes::UnionShape.new(name: 'MatchRationaleItem')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxResultsForListDomains = Shapes::IntegerShape.new(name: 'MaxResultsForListDomains')
     Member = Shapes::UnionShape.new(name: 'Member')
@@ -834,6 +850,7 @@ module Aws::DataZone
     SearchInventoryResultItem = Shapes::UnionShape.new(name: 'SearchInventoryResultItem')
     SearchInventoryResultItems = Shapes::ListShape.new(name: 'SearchInventoryResultItems')
     SearchListingsInput = Shapes::StructureShape.new(name: 'SearchListingsInput')
+    SearchListingsInputSearchTextString = Shapes::StringShape.new(name: 'SearchListingsInputSearchTextString')
     SearchListingsOutput = Shapes::StructureShape.new(name: 'SearchListingsOutput')
     SearchOutput = Shapes::StructureShape.new(name: 'SearchOutput')
     SearchOutputAdditionalAttribute = Shapes::StringShape.new(name: 'SearchOutputAdditionalAttribute')
@@ -947,6 +964,8 @@ module Aws::DataZone
     TermRelations = Shapes::StructureShape.new(name: 'TermRelations')
     TermRelationsClassifiesList = Shapes::ListShape.new(name: 'TermRelationsClassifiesList')
     TermRelationsIsAList = Shapes::ListShape.new(name: 'TermRelationsIsAList')
+    TextMatchItem = Shapes::StructureShape.new(name: 'TextMatchItem')
+    TextMatches = Shapes::ListShape.new(name: 'TextMatches')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeSeriesDataPointFormInput = Shapes::StructureShape.new(name: 'TimeSeriesDataPointFormInput')
     TimeSeriesDataPointFormInputContentString = Shapes::StringShape.new(name: 'TimeSeriesDataPointFormInputContentString')
@@ -1124,6 +1143,26 @@ module Aws::DataZone
     AddToProjectMemberPoolPolicyGrantDetail.add_member(:include_child_domain_units, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeChildDomainUnits"))
     AddToProjectMemberPoolPolicyGrantDetail.struct_class = Types::AddToProjectMemberPoolPolicyGrantDetail
 
+    AggregationList.member = Shapes::ShapeRef.new(shape: AggregationListItem)
+
+    AggregationListItem.add_member(:attribute, Shapes::ShapeRef.new(shape: Attribute, required: true, location_name: "attribute"))
+    AggregationListItem.add_member(:display_value, Shapes::ShapeRef.new(shape: AggregationDisplayValue, location_name: "displayValue"))
+    AggregationListItem.struct_class = Types::AggregationListItem
+
+    AggregationOutput.add_member(:attribute, Shapes::ShapeRef.new(shape: Attribute, location_name: "attribute"))
+    AggregationOutput.add_member(:display_value, Shapes::ShapeRef.new(shape: AggregationDisplayValue, location_name: "displayValue"))
+    AggregationOutput.add_member(:items, Shapes::ShapeRef.new(shape: AggregationOutputItems, location_name: "items"))
+    AggregationOutput.struct_class = Types::AggregationOutput
+
+    AggregationOutputItem.add_member(:count, Shapes::ShapeRef.new(shape: Integer, location_name: "count"))
+    AggregationOutputItem.add_member(:display_value, Shapes::ShapeRef.new(shape: AggregationAttributeDisplayValue, location_name: "displayValue"))
+    AggregationOutputItem.add_member(:value, Shapes::ShapeRef.new(shape: AggregationAttributeValue, location_name: "value"))
+    AggregationOutputItem.struct_class = Types::AggregationOutputItem
+
+    AggregationOutputItems.member = Shapes::ShapeRef.new(shape: AggregationOutputItem)
+
+    AggregationOutputList.member = Shapes::ShapeRef.new(shape: AggregationOutput)
+
     AllDomainUnitsGrantFilter.struct_class = Types::AllDomainUnitsGrantFilter
 
     AllUsersGrantFilter.struct_class = Types::AllUsersGrantFilter
@@ -1177,6 +1216,7 @@ module Aws::DataZone
 
     AssetItemAdditionalAttributes.add_member(:forms_output, Shapes::ShapeRef.new(shape: FormOutputList, location_name: "formsOutput"))
     AssetItemAdditionalAttributes.add_member(:latest_time_series_data_point_forms_output, Shapes::ShapeRef.new(shape: TimeSeriesDataPointSummaryFormOutputList, location_name: "latestTimeSeriesDataPointFormsOutput"))
+    AssetItemAdditionalAttributes.add_member(:match_rationale, Shapes::ShapeRef.new(shape: MatchRationale, location_name: "matchRationale"))
     AssetItemAdditionalAttributes.add_member(:read_only_forms_output, Shapes::ShapeRef.new(shape: FormOutputList, location_name: "readOnlyFormsOutput"))
     AssetItemAdditionalAttributes.struct_class = Types::AssetItemAdditionalAttributes
 
@@ -1211,6 +1251,7 @@ module Aws::DataZone
 
     AssetListingItemAdditionalAttributes.add_member(:forms, Shapes::ShapeRef.new(shape: Forms, location_name: "forms"))
     AssetListingItemAdditionalAttributes.add_member(:latest_time_series_data_point_forms, Shapes::ShapeRef.new(shape: TimeSeriesDataPointSummaryFormOutputList, location_name: "latestTimeSeriesDataPointForms"))
+    AssetListingItemAdditionalAttributes.add_member(:match_rationale, Shapes::ShapeRef.new(shape: MatchRationale, location_name: "matchRationale"))
     AssetListingItemAdditionalAttributes.struct_class = Types::AssetListingItemAdditionalAttributes
 
     AssetRevision.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
@@ -2068,6 +2109,9 @@ module Aws::DataZone
     DataProductItem.add_member(:revision, Shapes::ShapeRef.new(shape: Revision, location_name: "revision"))
     DataProductItem.struct_class = Types::DataProductItem
 
+    DataProductItemAdditionalAttributes.add_member(:match_rationale, Shapes::ShapeRef.new(shape: MatchRationale, location_name: "matchRationale"))
+    DataProductItemAdditionalAttributes.struct_class = Types::DataProductItemAdditionalAttributes
+
     DataProductItems.member = Shapes::ShapeRef.new(shape: DataProductItem)
 
     DataProductListing.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
@@ -2095,8 +2139,10 @@ module Aws::DataZone
     DataProductListingItem.struct_class = Types::DataProductListingItem
 
     DataProductListingItemAdditionalAttributes.add_member(:forms, Shapes::ShapeRef.new(shape: Forms, location_name: "forms"))
+    DataProductListingItemAdditionalAttributes.add_member(:match_rationale, Shapes::ShapeRef.new(shape: MatchRationale, location_name: "matchRationale"))
     DataProductListingItemAdditionalAttributes.struct_class = Types::DataProductListingItemAdditionalAttributes
 
+    DataProductResultItem.add_member(:additional_attributes, Shapes::ShapeRef.new(shape: DataProductItemAdditionalAttributes, location_name: "additionalAttributes"))
     DataProductResultItem.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     DataProductResultItem.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
     DataProductResultItem.add_member(:description, Shapes::ShapeRef.new(shape: DataProductDescription, location_name: "description"))
@@ -3276,6 +3322,7 @@ module Aws::DataZone
     GetUserProfileOutput.add_member(:type, Shapes::ShapeRef.new(shape: UserProfileType, location_name: "type"))
     GetUserProfileOutput.struct_class = Types::GetUserProfileOutput
 
+    GlossaryItem.add_member(:additional_attributes, Shapes::ShapeRef.new(shape: GlossaryItemAdditionalAttributes, location_name: "additionalAttributes"))
     GlossaryItem.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     GlossaryItem.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
     GlossaryItem.add_member(:description, Shapes::ShapeRef.new(shape: GlossaryDescription, location_name: "description"))
@@ -3288,6 +3335,10 @@ module Aws::DataZone
     GlossaryItem.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
     GlossaryItem.struct_class = Types::GlossaryItem
 
+    GlossaryItemAdditionalAttributes.add_member(:match_rationale, Shapes::ShapeRef.new(shape: MatchRationale, location_name: "matchRationale"))
+    GlossaryItemAdditionalAttributes.struct_class = Types::GlossaryItemAdditionalAttributes
+
+    GlossaryTermItem.add_member(:additional_attributes, Shapes::ShapeRef.new(shape: GlossaryTermItemAdditionalAttributes, location_name: "additionalAttributes"))
     GlossaryTermItem.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     GlossaryTermItem.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
     GlossaryTermItem.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
@@ -3301,6 +3352,9 @@ module Aws::DataZone
     GlossaryTermItem.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
     GlossaryTermItem.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
     GlossaryTermItem.struct_class = Types::GlossaryTermItem
+
+    GlossaryTermItemAdditionalAttributes.add_member(:match_rationale, Shapes::ShapeRef.new(shape: MatchRationale, location_name: "matchRationale"))
+    GlossaryTermItemAdditionalAttributes.struct_class = Types::GlossaryTermItemAdditionalAttributes
 
     GlossaryTerms.member = Shapes::ShapeRef.new(shape: GlossaryTermId)
 
@@ -3972,6 +4026,20 @@ module Aws::DataZone
     ListingSummaryItems.member = Shapes::ShapeRef.new(shape: ListingSummaryItem)
 
     MatchCriteria.member = Shapes::ShapeRef.new(shape: String)
+
+    MatchOffset.add_member(:end_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "endOffset"))
+    MatchOffset.add_member(:start_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "startOffset"))
+    MatchOffset.struct_class = Types::MatchOffset
+
+    MatchOffsets.member = Shapes::ShapeRef.new(shape: MatchOffset)
+
+    MatchRationale.member = Shapes::ShapeRef.new(shape: MatchRationaleItem)
+
+    MatchRationaleItem.add_member(:text_matches, Shapes::ShapeRef.new(shape: TextMatches, location_name: "textMatches"))
+    MatchRationaleItem.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    MatchRationaleItem.add_member_subclass(:text_matches, Types::MatchRationaleItem::TextMatches)
+    MatchRationaleItem.add_member_subclass(:unknown, Types::MatchRationaleItem::Unknown)
+    MatchRationaleItem.struct_class = Types::MatchRationaleItem
 
     Member.add_member(:group_identifier, Shapes::ShapeRef.new(shape: String, location_name: "groupIdentifier"))
     Member.add_member(:user_identifier, Shapes::ShapeRef.new(shape: String, location_name: "userIdentifier"))
@@ -4684,15 +4752,17 @@ module Aws::DataZone
     SearchInventoryResultItems.member = Shapes::ShapeRef.new(shape: SearchInventoryResultItem)
 
     SearchListingsInput.add_member(:additional_attributes, Shapes::ShapeRef.new(shape: SearchOutputAdditionalAttributes, location_name: "additionalAttributes"))
+    SearchListingsInput.add_member(:aggregations, Shapes::ShapeRef.new(shape: AggregationList, location_name: "aggregations"))
     SearchListingsInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     SearchListingsInput.add_member(:filters, Shapes::ShapeRef.new(shape: FilterClause, location_name: "filters"))
     SearchListingsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     SearchListingsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     SearchListingsInput.add_member(:search_in, Shapes::ShapeRef.new(shape: SearchInList, location_name: "searchIn"))
-    SearchListingsInput.add_member(:search_text, Shapes::ShapeRef.new(shape: String, location_name: "searchText"))
+    SearchListingsInput.add_member(:search_text, Shapes::ShapeRef.new(shape: SearchListingsInputSearchTextString, location_name: "searchText"))
     SearchListingsInput.add_member(:sort, Shapes::ShapeRef.new(shape: SearchSort, location_name: "sort"))
     SearchListingsInput.struct_class = Types::SearchListingsInput
 
+    SearchListingsOutput.add_member(:aggregates, Shapes::ShapeRef.new(shape: AggregationOutputList, location_name: "aggregates"))
     SearchListingsOutput.add_member(:items, Shapes::ShapeRef.new(shape: SearchResultItems, location_name: "items"))
     SearchListingsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     SearchListingsOutput.add_member(:total_match_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalMatchCount"))
@@ -5049,6 +5119,13 @@ module Aws::DataZone
     TermRelationsClassifiesList.member = Shapes::ShapeRef.new(shape: GlossaryTermId)
 
     TermRelationsIsAList.member = Shapes::ShapeRef.new(shape: GlossaryTermId)
+
+    TextMatchItem.add_member(:attribute, Shapes::ShapeRef.new(shape: Attribute, location_name: "attribute"))
+    TextMatchItem.add_member(:match_offsets, Shapes::ShapeRef.new(shape: MatchOffsets, location_name: "matchOffsets"))
+    TextMatchItem.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
+    TextMatchItem.struct_class = Types::TextMatchItem
+
+    TextMatches.member = Shapes::ShapeRef.new(shape: TextMatchItem)
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException

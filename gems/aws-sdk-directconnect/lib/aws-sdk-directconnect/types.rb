@@ -258,16 +258,16 @@ module Aws::DirectConnect
     end
 
     # @!attribute [rw] connection_id
-    #   The ID of the dedicated connection (dxcon-xxxx), or the ID of the
-    #   LAG (dxlag-xxxx).
+    #   The ID of the dedicated connection (dxcon-xxxx), interconnect
+    #   (dxcon-xxxx), or LAG (dxlag-xxxx).
     #
-    #   You can use DescribeConnections or DescribeLags to retrieve
-    #   connection ID.
+    #   You can use DescribeConnections, DescribeInterconnects, or
+    #   DescribeLags to retrieve connection ID.
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
     #   The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret
-    #   key to associate with the dedicated connection.
+    #   key to associate with the connection.
     #
     #   You can use DescribeConnections or DescribeLags to retrieve the MAC
     #   Security (MACsec) secret key.
@@ -277,8 +277,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] ckn
-    #   The MAC Security (MACsec) CKN to associate with the dedicated
-    #   connection.
+    #   The MAC Security (MACsec) CKN to associate with the connection.
     #
     #   You can create the CKN/CAK pair using an industry standard tool.
     #
@@ -289,8 +288,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] cak
-    #   The MAC Security (MACsec) CAK to associate with the dedicated
-    #   connection.
+    #   The MAC Security (MACsec) CAK to associate with the connection.
     #
     #   You can create the CKN/CAK pair using an industry standard tool.
     #
@@ -312,13 +310,13 @@ module Aws::DirectConnect
     end
 
     # @!attribute [rw] connection_id
-    #   The ID of the dedicated connection (dxcon-xxxx), or the ID of the
-    #   LAG (dxlag-xxxx).
+    #   The ID of the dedicated connection (dxcon-xxxx), interconnect
+    #   (dxcon-xxxx), or LAG (dxlag-xxxx).
     #   @return [String]
     #
     # @!attribute [rw] mac_sec_keys
     #   The MAC Security (MACsec) security keys associated with the
-    #   dedicated connection.
+    #   connection.
     #   @return [Array<Types::MacSecKey>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateMacSecKeyResponse AWS API Documentation
@@ -887,6 +885,11 @@ module Aws::DirectConnect
     #   connection.
     #   @return [Array<Types::MacSecKey>]
     #
+    # @!attribute [rw] partner_interconnect_mac_sec_capable
+    #   Indicates whether the interconnect hosting this connection supports
+    #   MAC Security (MACsec).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Connection AWS API Documentation
     #
     class Connection < Struct.new(
@@ -911,7 +914,8 @@ module Aws::DirectConnect
       :mac_sec_capable,
       :port_encryption_status,
       :encryption_mode,
-      :mac_sec_keys)
+      :mac_sec_keys,
+      :partner_interconnect_mac_sec_capable)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -986,13 +990,13 @@ module Aws::DirectConnect
     #   Indicates whether you want the connection to support MAC Security
     #   (MACsec).
     #
-    #   MAC Security (MACsec) is only available on dedicated connections.
-    #   For information about MAC Security (MACsec) prerequisties, see
-    #   [MACsec prerequisties][1] in the *Direct Connect User Guide*.
+    #   MAC Security (MACsec) is unavailable on hosted connections. For
+    #   information about MAC Security (MACsec) prerequisites, see [MAC
+    #   Security in Direct Connect][1] in the *Direct Connect User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites
+    #   [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/MACSec.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnectionRequest AWS API Documentation
@@ -1165,6 +1169,11 @@ module Aws::DirectConnect
     #   The name of the service provider associated with the interconnect.
     #   @return [String]
     #
+    # @!attribute [rw] request_mac_sec
+    #   Indicates whether you want the interconnect to support MAC Security
+    #   (MACsec).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateInterconnectRequest AWS API Documentation
     #
     class CreateInterconnectRequest < Struct.new(
@@ -1173,7 +1182,8 @@ module Aws::DirectConnect
       :location,
       :lag_id,
       :tags,
-      :provider_name)
+      :provider_name,
+      :request_mac_sec)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2373,11 +2383,11 @@ module Aws::DirectConnect
     end
 
     # @!attribute [rw] connection_id
-    #   The ID of the dedicated connection (dxcon-xxxx), or the ID of the
-    #   LAG (dxlag-xxxx).
+    #   The ID of the dedicated connection (dxcon-xxxx), interconnect
+    #   (dxcon-xxxx), or LAG (dxlag-xxxx).
     #
-    #   You can use DescribeConnections or DescribeLags to retrieve
-    #   connection ID.
+    #   You can use DescribeConnections, DescribeInterconnects, or
+    #   DescribeLags to retrieve connection ID.
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
@@ -2398,13 +2408,13 @@ module Aws::DirectConnect
     end
 
     # @!attribute [rw] connection_id
-    #   The ID of the dedicated connection (dxcon-xxxx), or the ID of the
-    #   LAG (dxlag-xxxx).
+    #   The ID of the dedicated connection (dxcon-xxxx), interconnect
+    #   (dxcon-xxxx), or LAG (dxlag-xxxx).
     #   @return [String]
     #
     # @!attribute [rw] mac_sec_keys
     #   The MAC Security (MACsec) security keys no longer associated with
-    #   the dedicated connection.
+    #   the connection.
     #   @return [Array<Types::MacSecKey>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateMacSecKeyResponse AWS API Documentation
@@ -2506,6 +2516,28 @@ module Aws::DirectConnect
     #   The name of the service provider associated with the interconnect.
     #   @return [String]
     #
+    # @!attribute [rw] mac_sec_capable
+    #   Indicates whether the interconnect supports MAC Security (MACsec).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] port_encryption_status
+    #   The MAC Security (MACsec) port link status.
+    #
+    #   The valid values are `Encryption Up`, which means that there is an
+    #   active Connection Key Name, or `Encryption Down`.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_mode
+    #   The MAC Security (MACsec) encryption mode.
+    #
+    #   The valid values are `no_encrypt`, `should_encrypt`, and
+    #   `must_encrypt`.
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_sec_keys
+    #   The MAC Security (MACsec) security keys.
+    #   @return [Array<Types::MacSecKey>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Interconnect AWS API Documentation
     #
     class Interconnect < Struct.new(
@@ -2523,7 +2555,11 @@ module Aws::DirectConnect
       :aws_logical_device_id,
       :has_logical_redundancy,
       :tags,
-      :provider_name)
+      :provider_name,
+      :mac_sec_capable,
+      :port_encryption_status,
+      :encryption_mode,
+      :mac_sec_keys)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3518,7 +3554,7 @@ module Aws::DirectConnect
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] connection_id
-    #   The ID of the dedicated connection.
+    #   The ID of the connection.
     #
     #   You can use DescribeConnections to retrieve the connection ID.
     #   @return [String]

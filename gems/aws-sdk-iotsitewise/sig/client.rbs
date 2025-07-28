@@ -18,6 +18,7 @@ module Aws
                       ?account_id: String,
                       ?active_endpoint_cache: bool,
                       ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
                       ?client_side_monitoring: bool,
                       ?client_side_monitoring_client_id: String,
                       ?client_side_monitoring_host: String,
@@ -278,11 +279,11 @@ module Aws
       def create_asset: (
                           asset_name: ::String,
                           asset_model_id: ::String,
+                          ?asset_id: ::String,
+                          ?asset_external_id: ::String,
                           ?client_token: ::String,
                           ?tags: Hash[::String, ::String],
-                          ?asset_description: ::String,
-                          ?asset_id: ::String,
-                          ?asset_external_id: ::String
+                          ?asset_description: ::String
                         ) -> _CreateAssetResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssetResponseSuccess
 
@@ -598,6 +599,40 @@ module Aws
                                   ) -> _CreateBulkImportJobResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBulkImportJobResponseSuccess
 
+      interface _CreateComputationModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateComputationModelResponse]
+        def computation_model_id: () -> ::String
+        def computation_model_arn: () -> ::String
+        def computation_model_status: () -> Types::ComputationModelStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_computation_model-instance_method
+      def create_computation_model: (
+                                      computation_model_name: ::String,
+                                      ?computation_model_description: ::String,
+                                      computation_model_configuration: {
+                                        anomaly_detection: {
+                                          input_properties: ::String,
+                                          result_property: ::String
+                                        }?
+                                      },
+                                      computation_model_data_binding: Hash[::String, {
+                                          asset_model_property: {
+                                            asset_model_id: ::String,
+                                            property_id: ::String
+                                          }?,
+                                          asset_property: {
+                                            asset_id: ::String,
+                                            property_id: ::String
+                                          }?,
+                                          list: Array[
+                                            untyped,
+                                          ]?
+                                        }],
+                                      ?client_token: ::String,
+                                      ?tags: Hash[::String, ::String]
+                                    ) -> _CreateComputationModelResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateComputationModelResponseSuccess
+
       interface _CreateDashboardResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDashboardResponse]
         def dashboard_id: () -> ::String
@@ -763,6 +798,17 @@ module Aws
                                               ) -> _DeleteAssetModelCompositeModelResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssetModelCompositeModelResponseSuccess
 
+      interface _DeleteComputationModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteComputationModelResponse]
+        def computation_model_status: () -> Types::ComputationModelStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_computation_model-instance_method
+      def delete_computation_model: (
+                                      computation_model_id: ::String,
+                                      ?client_token: ::String
+                                    ) -> _DeleteComputationModelResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteComputationModelResponseSuccess
+
       interface _DeleteDashboardResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDashboardResponse]
       end
@@ -843,6 +889,7 @@ module Aws
         def action_definition_id: () -> ::String
         def action_payload: () -> Types::ActionPayload
         def execution_time: () -> ::Time
+        def resolve_to: () -> Types::ResolveTo
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_action-instance_method
       def describe_action: (
@@ -853,6 +900,7 @@ module Aws
       interface _DescribeAssetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssetResponse]
         def asset_id: () -> ::String
+        def asset_external_id: () -> ::String
         def asset_arn: () -> ::String
         def asset_name: () -> ::String
         def asset_model_id: () -> ::String
@@ -864,7 +912,6 @@ module Aws
         def asset_status: () -> Types::AssetStatus
         def asset_description: () -> ::String
         def asset_composite_model_summaries: () -> ::Array[Types::AssetCompositeModelSummary]
-        def asset_external_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_asset-instance_method
       def describe_asset: (
@@ -944,11 +991,11 @@ module Aws
       interface _DescribeAssetPropertyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssetPropertyResponse]
         def asset_id: () -> ::String
+        def asset_external_id: () -> ::String
         def asset_name: () -> ::String
         def asset_model_id: () -> ::String
         def asset_property: () -> Types::Property
         def composite_model: () -> Types::CompositeModelProperty
-        def asset_external_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_asset_property-instance_method
       def describe_asset_property: (
@@ -976,6 +1023,40 @@ module Aws
                                       job_id: ::String
                                     ) -> _DescribeBulkImportJobResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBulkImportJobResponseSuccess
+
+      interface _DescribeComputationModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeComputationModelResponse]
+        def computation_model_id: () -> ::String
+        def computation_model_arn: () -> ::String
+        def computation_model_name: () -> ::String
+        def computation_model_description: () -> ::String
+        def computation_model_configuration: () -> Types::ComputationModelConfiguration
+        def computation_model_data_binding: () -> ::Hash[::String, Types::ComputationModelDataBindingValue]
+        def computation_model_creation_date: () -> ::Time
+        def computation_model_last_update_date: () -> ::Time
+        def computation_model_status: () -> Types::ComputationModelStatus
+        def computation_model_version: () -> ::String
+        def action_definitions: () -> ::Array[Types::ActionDefinition]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_computation_model-instance_method
+      def describe_computation_model: (
+                                        computation_model_id: ::String
+                                      ) -> _DescribeComputationModelResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeComputationModelResponseSuccess
+
+      interface _DescribeComputationModelExecutionSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeComputationModelExecutionSummaryResponse]
+        def computation_model_id: () -> ::String
+        def resolve_to: () -> Types::ResolveTo
+        def computation_model_execution_summary: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_computation_model_execution_summary-instance_method
+      def describe_computation_model_execution_summary: (
+                                                          computation_model_id: ::String,
+                                                          ?resolve_to_resource_type: ("ASSET"),
+                                                          ?resolve_to_resource_id: ::String
+                                                        ) -> _DescribeComputationModelExecutionSummaryResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeComputationModelExecutionSummaryResponseSuccess
 
       interface _DescribeDashboardResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDashboardResponse]
@@ -1022,6 +1103,26 @@ module Aws
       def describe_default_encryption_configuration: (
                                                      ) -> _DescribeDefaultEncryptionConfigurationResponseSuccess
                                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDefaultEncryptionConfigurationResponseSuccess
+
+      interface _DescribeExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeExecutionResponse]
+        def execution_id: () -> ::String
+        def action_type: () -> ::String
+        def target_resource: () -> Types::TargetResource
+        def target_resource_version: () -> ::String
+        def resolve_to: () -> Types::ResolveTo
+        def execution_start_time: () -> ::Time
+        def execution_end_time: () -> ::Time
+        def execution_status: () -> Types::ExecutionStatus
+        def execution_result: () -> ::Hash[::String, ::String]
+        def execution_details: () -> ::Hash[::String, ::String]
+        def execution_entity_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_execution-instance_method
+      def describe_execution: (
+                                execution_id: ::String
+                              ) -> _DescribeExecutionResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeExecutionResponseSuccess
 
       interface _DescribeGatewayResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGatewayResponse]
@@ -1167,13 +1268,17 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#execute_action-instance_method
       def execute_action: (
                             target_resource: {
-                              asset_id: ::String
+                              asset_id: ::String?,
+                              computation_model_id: ::String?
                             },
                             action_definition_id: ::String,
                             action_payload: {
                               string_value: ::String
                             },
-                            ?client_token: ::String
+                            ?client_token: ::String,
+                            ?resolve_to: {
+                              asset_id: ::String
+                            }
                           ) -> _ExecuteActionResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteActionResponseSuccess
 
@@ -1304,10 +1409,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_actions-instance_method
       def list_actions: (
-                          target_resource_type: ("ASSET"),
+                          target_resource_type: ("ASSET" | "COMPUTATION_MODEL"),
                           target_resource_id: ::String,
                           ?next_token: ::String,
-                          ?max_results: ::Integer
+                          ?max_results: ::Integer,
+                          ?resolve_to_resource_type: ("ASSET"),
+                          ?resolve_to_resource_id: ::String
                         ) -> _ListActionsResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListActionsResponseSuccess
 
@@ -1437,6 +1544,60 @@ module Aws
                                           ) -> _ListCompositionRelationshipsResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCompositionRelationshipsResponseSuccess
 
+      interface _ListComputationModelDataBindingUsagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComputationModelDataBindingUsagesResponse]
+        def data_binding_usage_summaries: () -> ::Array[Types::ComputationModelDataBindingUsageSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_computation_model_data_binding_usages-instance_method
+      def list_computation_model_data_binding_usages: (
+                                                        data_binding_value_filter: {
+                                                          asset: {
+                                                            asset_id: ::String
+                                                          }?,
+                                                          asset_model: {
+                                                            asset_model_id: ::String
+                                                          }?,
+                                                          asset_property: {
+                                                            asset_id: ::String,
+                                                            property_id: ::String
+                                                          }?,
+                                                          asset_model_property: {
+                                                            asset_model_id: ::String,
+                                                            property_id: ::String
+                                                          }?
+                                                        },
+                                                        ?next_token: ::String,
+                                                        ?max_results: ::Integer
+                                                      ) -> _ListComputationModelDataBindingUsagesResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComputationModelDataBindingUsagesResponseSuccess
+
+      interface _ListComputationModelResolveToResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComputationModelResolveToResourcesResponse]
+        def computation_model_resolve_to_resource_summaries: () -> ::Array[Types::ComputationModelResolveToResourceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_computation_model_resolve_to_resources-instance_method
+      def list_computation_model_resolve_to_resources: (
+                                                         computation_model_id: ::String,
+                                                         ?next_token: ::String,
+                                                         ?max_results: ::Integer
+                                                       ) -> _ListComputationModelResolveToResourcesResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComputationModelResolveToResourcesResponseSuccess
+
+      interface _ListComputationModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComputationModelsResponse]
+        def computation_model_summaries: () -> ::Array[Types::ComputationModelSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_computation_models-instance_method
+      def list_computation_models: (
+                                     ?computation_model_type: ("ANOMALY_DETECTION"),
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListComputationModelsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComputationModelsResponseSuccess
+
       interface _ListDashboardsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDashboardsResponse]
         def dashboard_summaries: () -> ::Array[Types::DashboardSummary]
@@ -1462,6 +1623,23 @@ module Aws
                            ?max_results: ::Integer
                          ) -> _ListDatasetsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetsResponseSuccess
+
+      interface _ListExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExecutionsResponse]
+        def execution_summaries: () -> ::Array[Types::ExecutionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_executions-instance_method
+      def list_executions: (
+                             target_resource_type: ("ASSET" | "COMPUTATION_MODEL"),
+                             target_resource_id: ::String,
+                             ?resolve_to_resource_type: ("ASSET"),
+                             ?resolve_to_resource_id: ::String,
+                             ?next_token: ::String,
+                             ?max_results: ::Integer,
+                             ?action_type: ::String
+                           ) -> _ListExecutionsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExecutionsResponseSuccess
 
       interface _ListGatewaysResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListGatewaysResponse]
@@ -1656,10 +1834,10 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_asset-instance_method
       def update_asset: (
                           asset_id: ::String,
+                          ?asset_external_id: ::String,
                           asset_name: ::String,
                           ?client_token: ::String,
-                          ?asset_description: ::String,
-                          ?asset_external_id: ::String
+                          ?asset_description: ::String
                         ) -> _UpdateAssetResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssetResponseSuccess
 
@@ -1963,6 +2141,38 @@ module Aws
                                    ?property_unit: ::String
                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateComputationModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateComputationModelResponse]
+        def computation_model_status: () -> Types::ComputationModelStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_computation_model-instance_method
+      def update_computation_model: (
+                                      computation_model_id: ::String,
+                                      computation_model_name: ::String,
+                                      ?computation_model_description: ::String,
+                                      computation_model_configuration: {
+                                        anomaly_detection: {
+                                          input_properties: ::String,
+                                          result_property: ::String
+                                        }?
+                                      },
+                                      computation_model_data_binding: Hash[::String, {
+                                          asset_model_property: {
+                                            asset_model_id: ::String,
+                                            property_id: ::String
+                                          }?,
+                                          asset_property: {
+                                            asset_id: ::String,
+                                            property_id: ::String
+                                          }?,
+                                          list: Array[
+                                            untyped,
+                                          ]?
+                                        }],
+                                      ?client_token: ::String
+                                    ) -> _UpdateComputationModelResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateComputationModelResponseSuccess
 
       interface _UpdateDashboardResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDashboardResponse]

@@ -54,7 +54,7 @@ module Aws::CloudTrail
   autoload :EndpointProvider, 'aws-sdk-cloudtrail/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudtrail/endpoints'
 
-  GEM_VERSION = '1.106.0'
+  GEM_VERSION = '1.107.0'
 
 end
 

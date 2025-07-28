@@ -97,7 +97,7 @@ module Aws::IoTSiteWise
     #     class name or an instance of a plugin class.
     #
     #   @option options [required, Aws::CredentialProvider] :credentials
-    #     Your AWS credentials. This can be an instance of any one of the
+    #     Your AWS credentials used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
@@ -130,18 +130,23 @@ module Aws::IoTSiteWise
     #     locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
+    #
     #     * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
     #       `:account_id` options.
-    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
-    #       ENV['AWS_SESSION_TOKEN'], and ENV['AWS_ACCOUNT_ID']
+    #
+    #     * `ENV['AWS_ACCESS_KEY_ID']`, `ENV['AWS_SECRET_ACCESS_KEY']`,
+    #       `ENV['AWS_SESSION_TOKEN']`, and `ENV['AWS_ACCOUNT_ID']`.
+    #
     #     * `~/.aws/credentials`
+    #
     #     * `~/.aws/config`
+    #
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
     #       enable retries and extended timeouts. Instance profile credential
-    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
-    #       to true.
+    #       fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
+    #       to `true`.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -168,6 +173,11 @@ module Aws::IoTSiteWise
     #     until there is sufficent client side capacity to retry the request.
     #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
     #     not retry instead of sleeping.
+    #
+    #   @option options [Array<String>] :auth_scheme_preference
+    #     A list of preferred authentication schemes to use when making a request. Supported values are:
+    #     `sigv4`, `sigv4a`, `httpBearerAuth`, and `noAuth`. When set using `ENV['AWS_AUTH_SCHEME_PREFERENCE']` or in
+    #     shared config as `auth_scheme_preference`, the value should be a comma-separated list.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -264,8 +274,8 @@ module Aws::IoTSiteWise
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
     #   @option options [String] :profile ("default")
-    #     Used when loading credentials from the shared credentials file
-    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
+    #     When not specified, 'default' is used.
     #
     #   @option options [String] :request_checksum_calculation ("when_supported")
     #     Determines when a checksum will be calculated for request payloads. Values are:
@@ -378,7 +388,7 @@ module Aws::IoTSiteWise
     #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
-    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     Your Bearer token used for authentication. This can be an instance of any one of the
     #     following classes:
     #
     #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
@@ -1122,6 +1132,22 @@ module Aws::IoTSiteWise
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
+    # @option params [String] :asset_id
+    #   The ID to assign to the asset, if desired. IoT SiteWise automatically
+    #   generates a unique ID for you, so this parameter is never required.
+    #   However, if you prefer to supply your own ID instead, you can specify
+    #   it here in UUID format. If you specify your own ID, it must be
+    #   globally unique.
+    #
+    # @option params [String] :asset_external_id
+    #   An external ID to assign to the asset. The external ID must be unique
+    #   within your Amazon Web Services account. For more information, see
+    #   [Using external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
+    #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
     #   idempotency of the request. Don't reuse this client token if a new
@@ -1142,22 +1168,6 @@ module Aws::IoTSiteWise
     # @option params [String] :asset_description
     #   A description for the asset.
     #
-    # @option params [String] :asset_id
-    #   The ID to assign to the asset, if desired. IoT SiteWise automatically
-    #   generates a unique ID for you, so this parameter is never required.
-    #   However, if you prefer to supply your own ID instead, you can specify
-    #   it here in UUID format. If you specify your own ID, it must be
-    #   globally unique.
-    #
-    # @option params [String] :asset_external_id
-    #   An external ID to assign to the asset. The external ID must be unique
-    #   within your Amazon Web Services account. For more information, see
-    #   [Using external IDs][1] in the *IoT SiteWise User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
-    #
     # @return [Types::CreateAssetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssetResponse#asset_id #asset_id} => String
@@ -1169,13 +1179,13 @@ module Aws::IoTSiteWise
     #   resp = client.create_asset({
     #     asset_name: "Name", # required
     #     asset_model_id: "CustomID", # required
+    #     asset_id: "ID",
+    #     asset_external_id: "ExternalId",
     #     client_token: "ClientToken",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
     #     asset_description: "Description",
-    #     asset_id: "ID",
-    #     asset_external_id: "ExternalId",
     #   })
     #
     # @example Response structure
@@ -1745,9 +1755,17 @@ module Aws::IoTSiteWise
     # tier or IoT SiteWise cold tier. For more information about how to
     # configure storage settings, see [PutStorageConfiguration][2].
     #
-    #  Bulk import is designed to store historical data to IoT SiteWise. It
-    # does not trigger computations or notifications on IoT SiteWise warm or
-    # cold tier storage.
+    #  Bulk import is designed to store historical data to IoT SiteWise.
+    #
+    #  * Newly ingested data in the hot tier triggers notifications and
+    #   computations.
+    #
+    # * After data moves from the hot tier to the warm or cold tier based on
+    #   retention settings, it does not trigger computations or
+    #   notifications.
+    #
+    # * Data older than 7 days does not trigger computations or
+    #   notifications.
     #
     #
     #
@@ -1830,6 +1848,97 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def create_bulk_import_job(params = {}, options = {})
       req = build_request(:create_bulk_import_job, params)
+      req.send_request(options)
+    end
+
+    # Create a computation model with a configuration and data binding.
+    #
+    # @option params [required, String] :computation_model_name
+    #   The name of the computation model.
+    #
+    # @option params [String] :computation_model_description
+    #   The description of the computation model.
+    #
+    # @option params [required, Types::ComputationModelConfiguration] :computation_model_configuration
+    #   The configuration for the computation model.
+    #
+    # @option params [required, Hash<String,Types::ComputationModelDataBindingValue>] :computation_model_data_binding
+    #   The data binding for the computation model. Key is a variable name
+    #   defined in configuration. Value is a
+    #   `ComputationModelDataBindingValue` referenced by the variable.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of key-value pairs that contain metadata for the asset. For
+    #   more information, see [Tagging your IoT SiteWise resources][1] in the
+    #   *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html
+    #
+    # @return [Types::CreateComputationModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateComputationModelResponse#computation_model_id #computation_model_id} => String
+    #   * {Types::CreateComputationModelResponse#computation_model_arn #computation_model_arn} => String
+    #   * {Types::CreateComputationModelResponse#computation_model_status #computation_model_status} => Types::ComputationModelStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_computation_model({
+    #     computation_model_name: "RestrictedName", # required
+    #     computation_model_description: "RestrictedDescription",
+    #     computation_model_configuration: { # required
+    #       anomaly_detection: {
+    #         input_properties: "InputProperties", # required
+    #         result_property: "ResultProperty", # required
+    #       },
+    #     },
+    #     computation_model_data_binding: { # required
+    #       "ComputationModelDataBindingVariable" => {
+    #         asset_model_property: {
+    #           asset_model_id: "ID", # required
+    #           property_id: "ID", # required
+    #         },
+    #         asset_property: {
+    #           asset_id: "ID", # required
+    #           property_id: "ID", # required
+    #         },
+    #         list: [
+    #           {
+    #             # recursive ComputationModelDataBindingValue
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.computation_model_id #=> String
+    #   resp.computation_model_arn #=> String
+    #   resp.computation_model_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.computation_model_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.computation_model_status.error.message #=> String
+    #   resp.computation_model_status.error.details #=> Array
+    #   resp.computation_model_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.computation_model_status.error.details[0].message #=> String
+    #
+    # @overload create_computation_model(params = {})
+    # @param [Hash] params ({})
+    def create_computation_model(params = {}, options = {})
+      req = build_request(:create_computation_model, params)
       req.send_request(options)
     end
 
@@ -2000,18 +2109,24 @@ module Aws::IoTSiteWise
     #
     # @option params [String] :gateway_version
     #   The version of the gateway to create. Specify `3` to create an
-    #   MQTT-enabled, V3 gateway and `2` To create a Classic streams, V2
-    #   gateway. If the version isn't specified, a Classic streams, V2
-    #   gateway is created by default.
+    #   MQTT-enabled, V3 gateway and `2` to create a Classic streams, V2
+    #   gateway. If not specified, the default is `2` (Classic streams, V2
+    #   gateway).
     #
-    #   We recommend creating an MQTT-enabled, V3 gateway for self-hosted
-    #   gateways. SiteWise Edge gateways on Siemens Industrial Edge should use
-    #   gateway version `2`. For more information on gateway versions, see [
-    #   Self-host a SiteWise Edge gateway with IoT Greengrass V2][1].
+    #   <note markdown="1"> When creating a V3 gateway (`gatewayVersion=3`) with the
+    #   `GreengrassV2` platform, you must also specify the
+    #   `coreDeviceOperatingSystem` parameter.
+    #
+    #    </note>
+    #
+    #   We recommend creating an MQTT-enabled gateway for self-hosted gateways
+    #   and Siemens Industrial Edge gateways. For more information on gateway
+    #   versions, see [Use Amazon Web Services IoT SiteWise Edge Edge
+    #   gateways][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gw-self-host-gg2.html
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gateways.html
     #
     # @option params [Hash<String,String>] :tags
     #   A list of key-value pairs that contain metadata for the gateway. For
@@ -2532,6 +2647,46 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Deletes a computation model. This action can't be undone.
+    #
+    # @option params [required, String] :computation_model_id
+    #   The ID of the computation model.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::DeleteComputationModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteComputationModelResponse#computation_model_status #computation_model_status} => Types::ComputationModelStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_computation_model({
+    #     computation_model_id: "ID", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.computation_model_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.computation_model_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.computation_model_status.error.message #=> String
+    #   resp.computation_model_status.error.details #=> Array
+    #   resp.computation_model_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.computation_model_status.error.details[0].message #=> String
+    #
+    # @overload delete_computation_model(params = {})
+    # @param [Hash] params ({})
+    def delete_computation_model(params = {}, options = {})
+      req = build_request(:delete_computation_model, params)
+      req.send_request(options)
+    end
+
     # Deletes a dashboard from IoT SiteWise Monitor.
     #
     # @option params [required, String] :dashboard_id
@@ -2581,7 +2736,7 @@ module Aws::IoTSiteWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_dataset({
-    #     dataset_id: "CustomID", # required
+    #     dataset_id: "ID", # required
     #     client_token: "ClientToken",
     #   })
     #
@@ -2810,6 +2965,7 @@ module Aws::IoTSiteWise
     #   * {Types::DescribeActionResponse#action_definition_id #action_definition_id} => String
     #   * {Types::DescribeActionResponse#action_payload #action_payload} => Types::ActionPayload
     #   * {Types::DescribeActionResponse#execution_time #execution_time} => Time
+    #   * {Types::DescribeActionResponse#resolve_to #resolve_to} => Types::ResolveTo
     #
     # @example Request syntax with placeholder values
     #
@@ -2821,9 +2977,11 @@ module Aws::IoTSiteWise
     #
     #   resp.action_id #=> String
     #   resp.target_resource.asset_id #=> String
+    #   resp.target_resource.computation_model_id #=> String
     #   resp.action_definition_id #=> String
     #   resp.action_payload.string_value #=> String
     #   resp.execution_time #=> Time
+    #   resp.resolve_to.asset_id #=> String
     #
     # @overload describe_action(params = {})
     # @param [Hash] params ({})
@@ -2850,6 +3008,7 @@ module Aws::IoTSiteWise
     # @return [Types::DescribeAssetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeAssetResponse#asset_id #asset_id} => String
+    #   * {Types::DescribeAssetResponse#asset_external_id #asset_external_id} => String
     #   * {Types::DescribeAssetResponse#asset_arn #asset_arn} => String
     #   * {Types::DescribeAssetResponse#asset_name #asset_name} => String
     #   * {Types::DescribeAssetResponse#asset_model_id #asset_model_id} => String
@@ -2861,7 +3020,6 @@ module Aws::IoTSiteWise
     #   * {Types::DescribeAssetResponse#asset_status #asset_status} => Types::AssetStatus
     #   * {Types::DescribeAssetResponse#asset_description #asset_description} => String
     #   * {Types::DescribeAssetResponse#asset_composite_model_summaries #asset_composite_model_summaries} => Array&lt;Types::AssetCompositeModelSummary&gt;
-    #   * {Types::DescribeAssetResponse#asset_external_id #asset_external_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2873,11 +3031,13 @@ module Aws::IoTSiteWise
     # @example Response structure
     #
     #   resp.asset_id #=> String
+    #   resp.asset_external_id #=> String
     #   resp.asset_arn #=> String
     #   resp.asset_name #=> String
     #   resp.asset_model_id #=> String
     #   resp.asset_properties #=> Array
     #   resp.asset_properties[0].id #=> String
+    #   resp.asset_properties[0].external_id #=> String
     #   resp.asset_properties[0].name #=> String
     #   resp.asset_properties[0].alias #=> String
     #   resp.asset_properties[0].notification.topic #=> String
@@ -2888,17 +3048,17 @@ module Aws::IoTSiteWise
     #   resp.asset_properties[0].path #=> Array
     #   resp.asset_properties[0].path[0].id #=> String
     #   resp.asset_properties[0].path[0].name #=> String
-    #   resp.asset_properties[0].external_id #=> String
     #   resp.asset_hierarchies #=> Array
     #   resp.asset_hierarchies[0].id #=> String
-    #   resp.asset_hierarchies[0].name #=> String
     #   resp.asset_hierarchies[0].external_id #=> String
+    #   resp.asset_hierarchies[0].name #=> String
     #   resp.asset_composite_models #=> Array
     #   resp.asset_composite_models[0].name #=> String
     #   resp.asset_composite_models[0].description #=> String
     #   resp.asset_composite_models[0].type #=> String
     #   resp.asset_composite_models[0].properties #=> Array
     #   resp.asset_composite_models[0].properties[0].id #=> String
+    #   resp.asset_composite_models[0].properties[0].external_id #=> String
     #   resp.asset_composite_models[0].properties[0].name #=> String
     #   resp.asset_composite_models[0].properties[0].alias #=> String
     #   resp.asset_composite_models[0].properties[0].notification.topic #=> String
@@ -2909,7 +3069,6 @@ module Aws::IoTSiteWise
     #   resp.asset_composite_models[0].properties[0].path #=> Array
     #   resp.asset_composite_models[0].properties[0].path[0].id #=> String
     #   resp.asset_composite_models[0].properties[0].path[0].name #=> String
-    #   resp.asset_composite_models[0].properties[0].external_id #=> String
     #   resp.asset_composite_models[0].id #=> String
     #   resp.asset_composite_models[0].external_id #=> String
     #   resp.asset_creation_date #=> Time
@@ -2930,7 +3089,6 @@ module Aws::IoTSiteWise
     #   resp.asset_composite_model_summaries[0].path #=> Array
     #   resp.asset_composite_model_summaries[0].path[0].id #=> String
     #   resp.asset_composite_model_summaries[0].path[0].name #=> String
-    #   resp.asset_external_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3007,6 +3165,7 @@ module Aws::IoTSiteWise
     #   resp.asset_composite_model_type #=> String
     #   resp.asset_composite_model_properties #=> Array
     #   resp.asset_composite_model_properties[0].id #=> String
+    #   resp.asset_composite_model_properties[0].external_id #=> String
     #   resp.asset_composite_model_properties[0].name #=> String
     #   resp.asset_composite_model_properties[0].alias #=> String
     #   resp.asset_composite_model_properties[0].notification.topic #=> String
@@ -3017,7 +3176,6 @@ module Aws::IoTSiteWise
     #   resp.asset_composite_model_properties[0].path #=> Array
     #   resp.asset_composite_model_properties[0].path[0].id #=> String
     #   resp.asset_composite_model_properties[0].path[0].name #=> String
-    #   resp.asset_composite_model_properties[0].external_id #=> String
     #   resp.asset_composite_model_summaries #=> Array
     #   resp.asset_composite_model_summaries[0].id #=> String
     #   resp.asset_composite_model_summaries[0].external_id #=> String
@@ -3374,11 +3532,11 @@ module Aws::IoTSiteWise
     # @return [Types::DescribeAssetPropertyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeAssetPropertyResponse#asset_id #asset_id} => String
+    #   * {Types::DescribeAssetPropertyResponse#asset_external_id #asset_external_id} => String
     #   * {Types::DescribeAssetPropertyResponse#asset_name #asset_name} => String
     #   * {Types::DescribeAssetPropertyResponse#asset_model_id #asset_model_id} => String
     #   * {Types::DescribeAssetPropertyResponse#asset_property #asset_property} => Types::Property
     #   * {Types::DescribeAssetPropertyResponse#composite_model #composite_model} => Types::CompositeModelProperty
-    #   * {Types::DescribeAssetPropertyResponse#asset_external_id #asset_external_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3390,9 +3548,11 @@ module Aws::IoTSiteWise
     # @example Response structure
     #
     #   resp.asset_id #=> String
+    #   resp.asset_external_id #=> String
     #   resp.asset_name #=> String
     #   resp.asset_model_id #=> String
     #   resp.asset_property.id #=> String
+    #   resp.asset_property.external_id #=> String
     #   resp.asset_property.name #=> String
     #   resp.asset_property.alias #=> String
     #   resp.asset_property.notification.topic #=> String
@@ -3425,10 +3585,10 @@ module Aws::IoTSiteWise
     #   resp.asset_property.path #=> Array
     #   resp.asset_property.path[0].id #=> String
     #   resp.asset_property.path[0].name #=> String
-    #   resp.asset_property.external_id #=> String
     #   resp.composite_model.name #=> String
     #   resp.composite_model.type #=> String
     #   resp.composite_model.asset_property.id #=> String
+    #   resp.composite_model.asset_property.external_id #=> String
     #   resp.composite_model.asset_property.name #=> String
     #   resp.composite_model.asset_property.alias #=> String
     #   resp.composite_model.asset_property.notification.topic #=> String
@@ -3461,10 +3621,8 @@ module Aws::IoTSiteWise
     #   resp.composite_model.asset_property.path #=> Array
     #   resp.composite_model.asset_property.path[0].id #=> String
     #   resp.composite_model.asset_property.path[0].name #=> String
-    #   resp.composite_model.asset_property.external_id #=> String
     #   resp.composite_model.id #=> String
     #   resp.composite_model.external_id #=> String
-    #   resp.asset_external_id #=> String
     #
     # @overload describe_asset_property(params = {})
     # @param [Hash] params ({})
@@ -3530,6 +3688,107 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Retrieves information about a computation model.
+    #
+    # @option params [required, String] :computation_model_id
+    #   The ID of the computation model.
+    #
+    # @return [Types::DescribeComputationModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeComputationModelResponse#computation_model_id #computation_model_id} => String
+    #   * {Types::DescribeComputationModelResponse#computation_model_arn #computation_model_arn} => String
+    #   * {Types::DescribeComputationModelResponse#computation_model_name #computation_model_name} => String
+    #   * {Types::DescribeComputationModelResponse#computation_model_description #computation_model_description} => String
+    #   * {Types::DescribeComputationModelResponse#computation_model_configuration #computation_model_configuration} => Types::ComputationModelConfiguration
+    #   * {Types::DescribeComputationModelResponse#computation_model_data_binding #computation_model_data_binding} => Hash&lt;String,Types::ComputationModelDataBindingValue&gt;
+    #   * {Types::DescribeComputationModelResponse#computation_model_creation_date #computation_model_creation_date} => Time
+    #   * {Types::DescribeComputationModelResponse#computation_model_last_update_date #computation_model_last_update_date} => Time
+    #   * {Types::DescribeComputationModelResponse#computation_model_status #computation_model_status} => Types::ComputationModelStatus
+    #   * {Types::DescribeComputationModelResponse#computation_model_version #computation_model_version} => String
+    #   * {Types::DescribeComputationModelResponse#action_definitions #action_definitions} => Array&lt;Types::ActionDefinition&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_computation_model({
+    #     computation_model_id: "ID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.computation_model_id #=> String
+    #   resp.computation_model_arn #=> String
+    #   resp.computation_model_name #=> String
+    #   resp.computation_model_description #=> String
+    #   resp.computation_model_configuration.anomaly_detection.input_properties #=> String
+    #   resp.computation_model_configuration.anomaly_detection.result_property #=> String
+    #   resp.computation_model_data_binding #=> Hash
+    #   resp.computation_model_data_binding["ComputationModelDataBindingVariable"].asset_model_property.asset_model_id #=> String
+    #   resp.computation_model_data_binding["ComputationModelDataBindingVariable"].asset_model_property.property_id #=> String
+    #   resp.computation_model_data_binding["ComputationModelDataBindingVariable"].asset_property.asset_id #=> String
+    #   resp.computation_model_data_binding["ComputationModelDataBindingVariable"].asset_property.property_id #=> String
+    #   resp.computation_model_data_binding["ComputationModelDataBindingVariable"].list #=> Array
+    #   resp.computation_model_data_binding["ComputationModelDataBindingVariable"].list[0] #=> Types::ComputationModelDataBindingValue
+    #   resp.computation_model_creation_date #=> Time
+    #   resp.computation_model_last_update_date #=> Time
+    #   resp.computation_model_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.computation_model_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.computation_model_status.error.message #=> String
+    #   resp.computation_model_status.error.details #=> Array
+    #   resp.computation_model_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.computation_model_status.error.details[0].message #=> String
+    #   resp.computation_model_version #=> String
+    #   resp.action_definitions #=> Array
+    #   resp.action_definitions[0].action_definition_id #=> String
+    #   resp.action_definitions[0].action_name #=> String
+    #   resp.action_definitions[0].action_type #=> String
+    #
+    # @overload describe_computation_model(params = {})
+    # @param [Hash] params ({})
+    def describe_computation_model(params = {}, options = {})
+      req = build_request(:describe_computation_model, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about the execution summary of a computation
+    # model.
+    #
+    # @option params [required, String] :computation_model_id
+    #   The ID of the computation model.
+    #
+    # @option params [String] :resolve_to_resource_type
+    #   The type of the resolved resource.
+    #
+    # @option params [String] :resolve_to_resource_id
+    #   The ID of the resolved resource.
+    #
+    # @return [Types::DescribeComputationModelExecutionSummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeComputationModelExecutionSummaryResponse#computation_model_id #computation_model_id} => String
+    #   * {Types::DescribeComputationModelExecutionSummaryResponse#resolve_to #resolve_to} => Types::ResolveTo
+    #   * {Types::DescribeComputationModelExecutionSummaryResponse#computation_model_execution_summary #computation_model_execution_summary} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_computation_model_execution_summary({
+    #     computation_model_id: "ID", # required
+    #     resolve_to_resource_type: "ASSET", # accepts ASSET
+    #     resolve_to_resource_id: "ID",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.computation_model_id #=> String
+    #   resp.resolve_to.asset_id #=> String
+    #   resp.computation_model_execution_summary #=> Hash
+    #   resp.computation_model_execution_summary["ComputationModelExecutionSummaryKey"] #=> String
+    #
+    # @overload describe_computation_model_execution_summary(params = {})
+    # @param [Hash] params ({})
+    def describe_computation_model_execution_summary(params = {}, options = {})
+      req = build_request(:describe_computation_model_execution_summary, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about a dashboard.
     #
     # @option params [required, String] :dashboard_id
@@ -3590,7 +3849,7 @@ module Aws::IoTSiteWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_dataset({
-    #     dataset_id: "CustomID", # required
+    #     dataset_id: "ID", # required
     #   })
     #
     # @example Response structure
@@ -3650,6 +3909,55 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Retrieves information about the execution.
+    #
+    # @option params [required, String] :execution_id
+    #   The ID of the execution.
+    #
+    # @return [Types::DescribeExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeExecutionResponse#execution_id #execution_id} => String
+    #   * {Types::DescribeExecutionResponse#action_type #action_type} => String
+    #   * {Types::DescribeExecutionResponse#target_resource #target_resource} => Types::TargetResource
+    #   * {Types::DescribeExecutionResponse#target_resource_version #target_resource_version} => String
+    #   * {Types::DescribeExecutionResponse#resolve_to #resolve_to} => Types::ResolveTo
+    #   * {Types::DescribeExecutionResponse#execution_start_time #execution_start_time} => Time
+    #   * {Types::DescribeExecutionResponse#execution_end_time #execution_end_time} => Time
+    #   * {Types::DescribeExecutionResponse#execution_status #execution_status} => Types::ExecutionStatus
+    #   * {Types::DescribeExecutionResponse#execution_result #execution_result} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeExecutionResponse#execution_details #execution_details} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeExecutionResponse#execution_entity_version #execution_entity_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_execution({
+    #     execution_id: "ID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.execution_id #=> String
+    #   resp.action_type #=> String
+    #   resp.target_resource.asset_id #=> String
+    #   resp.target_resource.computation_model_id #=> String
+    #   resp.target_resource_version #=> String
+    #   resp.resolve_to.asset_id #=> String
+    #   resp.execution_start_time #=> Time
+    #   resp.execution_end_time #=> Time
+    #   resp.execution_status.state #=> String, one of "RUNNING", "COMPLETED", "FAILED"
+    #   resp.execution_result #=> Hash
+    #   resp.execution_result["ExecutionResultKey"] #=> String
+    #   resp.execution_details #=> Hash
+    #   resp.execution_details["ExecutionDetailsKey"] #=> String
+    #   resp.execution_entity_version #=> String
+    #
+    # @overload describe_execution(params = {})
+    # @param [Hash] params ({})
+    def describe_execution(params = {}, options = {})
+      req = build_request(:describe_execution, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about a gateway.
     #
     # @option params [required, String] :gateway_id
@@ -3695,27 +4003,38 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
-    # Retrieves information about a gateway capability configuration. Each
-    # gateway capability defines data sources for a gateway. A capability
-    # configuration can contain multiple data source configurations. If you
-    # define OPC-UA sources for a gateway in the IoT SiteWise console, all
-    # of your OPC-UA sources are stored in one capability configuration. To
-    # list all capability configurations for a gateway, use
-    # [DescribeGateway][1].
+    # Each gateway capability defines data sources for a gateway. This is
+    # the namespace of the gateway capability.
     #
+    # . The namespace follows the format `service:capability:version`,
+    # where:
     #
+    # * `service` - The service providing the capability, or `iotsitewise`.
     #
-    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGateway.html
+    # * `capability` - The specific capability type. Options include:
+    #   `opcuacollector` for the OPC UA data source collector, or
+    #   `publisher` for data publisher capability.
+    #
+    # * `version` - The version number of the capability. Option include `2`
+    #   for Classic streams, V2 gateways, and `3` for MQTT-enabled, V3
+    #   gateways.
+    #
+    # After updating a capability configuration, the sync status becomes
+    # `OUT_OF_SYNC` until the gateway processes the configuration.Use
+    # `DescribeGatewayCapabilityConfiguration` to check the sync status and
+    # verify the configuration was applied.
+    #
+    # A gateway can have multiple capability configurations with different
+    # namespaces.
     #
     # @option params [required, String] :gateway_id
     #   The ID of the gateway that defines the capability configuration.
     #
     # @option params [required, String] :capability_namespace
     #   The namespace of the capability configuration. For example, if you
-    #   configure OPC-UA sources from the IoT SiteWise console, your OPC-UA
+    #   configure OPC UA sources for an MQTT-enabled gateway, your OPC-UA
     #   capability configuration has the namespace
-    #   `iotsitewise:opcuacollector:version`, where `version` is a number such
-    #   as `1`.
+    #   `iotsitewise:opcuacollector:3`.
     #
     # @return [Types::DescribeGatewayCapabilityConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4119,6 +4438,9 @@ module Aws::IoTSiteWise
     #   idempotency of the request. Don't reuse this client token if a new
     #   idempotent request is required.
     #
+    # @option params [Types::ResolveTo] :resolve_to
+    #   The detailed resource this action resolves to.
+    #
     # @return [Types::ExecuteActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ExecuteActionResponse#action_id #action_id} => String
@@ -4127,13 +4449,17 @@ module Aws::IoTSiteWise
     #
     #   resp = client.execute_action({
     #     target_resource: { # required
-    #       asset_id: "CustomID", # required
+    #       asset_id: "ID",
+    #       computation_model_id: "ID",
     #     },
     #     action_definition_id: "ID", # required
     #     action_payload: { # required
     #       string_value: "ActionPayloadString", # required
     #     },
     #     client_token: "ClientToken",
+    #     resolve_to: {
+    #       asset_id: "ID", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -4157,8 +4483,13 @@ module Aws::IoTSiteWise
     #   The string that specifies the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return at one time. The default is
-    #   25.
+    #   The maximum number of results to return at one time.
+    #
+    #   * Minimum is 1
+    #
+    #   * Maximum is 20000
+    #
+    #   * Default is 250
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -5001,6 +5332,12 @@ module Aws::IoTSiteWise
     # @option params [Integer] :max_results
     #   The maximum number of results to return for each paginated request.
     #
+    # @option params [String] :resolve_to_resource_type
+    #   The type of the resolved resource.
+    #
+    # @option params [String] :resolve_to_resource_id
+    #   The ID of the resolved resource.
+    #
     # @return [Types::ListActionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListActionsResponse#action_summaries #action_summaries} => Array&lt;Types::ActionSummary&gt;
@@ -5011,10 +5348,12 @@ module Aws::IoTSiteWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_actions({
-    #     target_resource_type: "ASSET", # required, accepts ASSET
-    #     target_resource_id: "CustomID", # required
+    #     target_resource_type: "ASSET", # required, accepts ASSET, COMPUTATION_MODEL
+    #     target_resource_id: "ID", # required
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     resolve_to_resource_type: "ASSET", # accepts ASSET
+    #     resolve_to_resource_id: "ID",
     #   })
     #
     # @example Response structure
@@ -5023,6 +5362,8 @@ module Aws::IoTSiteWise
     #   resp.action_summaries[0].action_id #=> String
     #   resp.action_summaries[0].action_definition_id #=> String
     #   resp.action_summaries[0].target_resource.asset_id #=> String
+    #   resp.action_summaries[0].target_resource.computation_model_id #=> String
+    #   resp.action_summaries[0].resolve_to.asset_id #=> String
     #   resp.next_token #=> String
     #
     # @overload list_actions(params = {})
@@ -5331,6 +5672,7 @@ module Aws::IoTSiteWise
     #
     #   resp.asset_property_summaries #=> Array
     #   resp.asset_property_summaries[0].id #=> String
+    #   resp.asset_property_summaries[0].external_id #=> String
     #   resp.asset_property_summaries[0].alias #=> String
     #   resp.asset_property_summaries[0].unit #=> String
     #   resp.asset_property_summaries[0].notification.topic #=> String
@@ -5339,7 +5681,6 @@ module Aws::IoTSiteWise
     #   resp.asset_property_summaries[0].path #=> Array
     #   resp.asset_property_summaries[0].path[0].id #=> String
     #   resp.asset_property_summaries[0].path[0].name #=> String
-    #   resp.asset_property_summaries[0].external_id #=> String
     #   resp.next_token #=> String
     #
     # @overload list_asset_properties(params = {})
@@ -5479,6 +5820,7 @@ module Aws::IoTSiteWise
     #
     #   resp.asset_summaries #=> Array
     #   resp.asset_summaries[0].id #=> String
+    #   resp.asset_summaries[0].external_id #=> String
     #   resp.asset_summaries[0].arn #=> String
     #   resp.asset_summaries[0].name #=> String
     #   resp.asset_summaries[0].asset_model_id #=> String
@@ -5492,10 +5834,9 @@ module Aws::IoTSiteWise
     #   resp.asset_summaries[0].status.error.details[0].message #=> String
     #   resp.asset_summaries[0].hierarchies #=> Array
     #   resp.asset_summaries[0].hierarchies[0].id #=> String
-    #   resp.asset_summaries[0].hierarchies[0].name #=> String
     #   resp.asset_summaries[0].hierarchies[0].external_id #=> String
+    #   resp.asset_summaries[0].hierarchies[0].name #=> String
     #   resp.asset_summaries[0].description #=> String
-    #   resp.asset_summaries[0].external_id #=> String
     #   resp.next_token #=> String
     #
     # @overload list_assets(params = {})
@@ -5581,6 +5922,7 @@ module Aws::IoTSiteWise
     #
     #   resp.asset_summaries #=> Array
     #   resp.asset_summaries[0].id #=> String
+    #   resp.asset_summaries[0].external_id #=> String
     #   resp.asset_summaries[0].arn #=> String
     #   resp.asset_summaries[0].name #=> String
     #   resp.asset_summaries[0].asset_model_id #=> String
@@ -5594,10 +5936,9 @@ module Aws::IoTSiteWise
     #   resp.asset_summaries[0].status.error.details[0].message #=> String
     #   resp.asset_summaries[0].hierarchies #=> Array
     #   resp.asset_summaries[0].hierarchies[0].id #=> String
-    #   resp.asset_summaries[0].hierarchies[0].name #=> String
     #   resp.asset_summaries[0].hierarchies[0].external_id #=> String
+    #   resp.asset_summaries[0].hierarchies[0].name #=> String
     #   resp.asset_summaries[0].description #=> String
-    #   resp.asset_summaries[0].external_id #=> String
     #   resp.next_token #=> String
     #
     # @overload list_associated_assets(params = {})
@@ -5706,6 +6047,164 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Lists all data binding usages for computation models. This allows to
+    # identify where specific data bindings are being utilized across the
+    # computation models. This track dependencies between data sources and
+    # computation models.
+    #
+    # @option params [required, Types::DataBindingValueFilter] :data_binding_value_filter
+    #   A filter used to limit the returned data binding usages based on
+    #   specific data binding values. You can filter by asset, asset model,
+    #   asset property, or asset model property to find all computation models
+    #   using these specific data sources.
+    #
+    # @option params [String] :next_token
+    #   The token used for the next set of paginated results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results returned for each paginated request.
+    #
+    # @return [Types::ListComputationModelDataBindingUsagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListComputationModelDataBindingUsagesResponse#data_binding_usage_summaries #data_binding_usage_summaries} => Array&lt;Types::ComputationModelDataBindingUsageSummary&gt;
+    #   * {Types::ListComputationModelDataBindingUsagesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_computation_model_data_binding_usages({
+    #     data_binding_value_filter: { # required
+    #       asset: {
+    #         asset_id: "ID", # required
+    #       },
+    #       asset_model: {
+    #         asset_model_id: "ID", # required
+    #       },
+    #       asset_property: {
+    #         asset_id: "ID", # required
+    #         property_id: "ID", # required
+    #       },
+    #       asset_model_property: {
+    #         asset_model_id: "ID", # required
+    #         property_id: "ID", # required
+    #       },
+    #     },
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_binding_usage_summaries #=> Array
+    #   resp.data_binding_usage_summaries[0].computation_model_ids #=> Array
+    #   resp.data_binding_usage_summaries[0].computation_model_ids[0] #=> String
+    #   resp.data_binding_usage_summaries[0].matched_data_binding.value.asset_model_property.asset_model_id #=> String
+    #   resp.data_binding_usage_summaries[0].matched_data_binding.value.asset_model_property.property_id #=> String
+    #   resp.data_binding_usage_summaries[0].matched_data_binding.value.asset_property.asset_id #=> String
+    #   resp.data_binding_usage_summaries[0].matched_data_binding.value.asset_property.property_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_computation_model_data_binding_usages(params = {})
+    # @param [Hash] params ({})
+    def list_computation_model_data_binding_usages(params = {}, options = {})
+      req = build_request(:list_computation_model_data_binding_usages, params)
+      req.send_request(options)
+    end
+
+    # Lists all distinct resources that are resolved from the executed
+    # actions of the computation model.
+    #
+    # @option params [required, String] :computation_model_id
+    #   The ID of the computation model for which to list resolved resources.
+    #
+    # @option params [String] :next_token
+    #   The token used for the next set of paginated results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results returned for each paginated request.
+    #
+    # @return [Types::ListComputationModelResolveToResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListComputationModelResolveToResourcesResponse#computation_model_resolve_to_resource_summaries #computation_model_resolve_to_resource_summaries} => Array&lt;Types::ComputationModelResolveToResourceSummary&gt;
+    #   * {Types::ListComputationModelResolveToResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_computation_model_resolve_to_resources({
+    #     computation_model_id: "ID", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.computation_model_resolve_to_resource_summaries #=> Array
+    #   resp.computation_model_resolve_to_resource_summaries[0].resolve_to.asset_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_computation_model_resolve_to_resources(params = {})
+    # @param [Hash] params ({})
+    def list_computation_model_resolve_to_resources(params = {}, options = {})
+      req = build_request(:list_computation_model_resolve_to_resources, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a paginated list of summaries of all computation models.
+    #
+    # @option params [String] :computation_model_type
+    #   The type of computation model. If a `computationModelType` is not
+    #   provided, all types of computation models are returned.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for each paginated request.
+    #
+    # @return [Types::ListComputationModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListComputationModelsResponse#computation_model_summaries #computation_model_summaries} => Array&lt;Types::ComputationModelSummary&gt;
+    #   * {Types::ListComputationModelsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_computation_models({
+    #     computation_model_type: "ANOMALY_DETECTION", # accepts ANOMALY_DETECTION
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.computation_model_summaries #=> Array
+    #   resp.computation_model_summaries[0].id #=> String
+    #   resp.computation_model_summaries[0].arn #=> String
+    #   resp.computation_model_summaries[0].name #=> String
+    #   resp.computation_model_summaries[0].description #=> String
+    #   resp.computation_model_summaries[0].type #=> String, one of "ANOMALY_DETECTION"
+    #   resp.computation_model_summaries[0].creation_date #=> Time
+    #   resp.computation_model_summaries[0].last_update_date #=> Time
+    #   resp.computation_model_summaries[0].status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.computation_model_summaries[0].status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.computation_model_summaries[0].status.error.message #=> String
+    #   resp.computation_model_summaries[0].status.error.details #=> Array
+    #   resp.computation_model_summaries[0].status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.computation_model_summaries[0].status.error.details[0].message #=> String
+    #   resp.computation_model_summaries[0].version #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_computation_models(params = {})
+    # @param [Hash] params ({})
+    def list_computation_models(params = {}, options = {})
+      req = build_request(:list_computation_models, params)
+      req.send_request(options)
+    end
+
     # Retrieves a paginated list of dashboards for an IoT SiteWise Monitor
     # project.
     #
@@ -5800,6 +6299,70 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def list_datasets(params = {}, options = {})
       req = build_request(:list_datasets, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a paginated list of summaries of all executions.
+    #
+    # @option params [required, String] :target_resource_type
+    #   The type of the target resource.
+    #
+    # @option params [required, String] :target_resource_id
+    #   The ID of the target resource.
+    #
+    # @option params [String] :resolve_to_resource_type
+    #   The type of the resolved resource.
+    #
+    # @option params [String] :resolve_to_resource_id
+    #   The ID of the resolved resource.
+    #
+    # @option params [String] :next_token
+    #   The token used for the next set of paginated results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results returned for each paginated request.
+    #
+    # @option params [String] :action_type
+    #   The type of action exectued.
+    #
+    # @return [Types::ListExecutionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExecutionsResponse#execution_summaries #execution_summaries} => Array&lt;Types::ExecutionSummary&gt;
+    #   * {Types::ListExecutionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_executions({
+    #     target_resource_type: "ASSET", # required, accepts ASSET, COMPUTATION_MODEL
+    #     target_resource_id: "ID", # required
+    #     resolve_to_resource_type: "ASSET", # accepts ASSET
+    #     resolve_to_resource_id: "ID",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     action_type: "Name",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.execution_summaries #=> Array
+    #   resp.execution_summaries[0].execution_id #=> String
+    #   resp.execution_summaries[0].action_type #=> String
+    #   resp.execution_summaries[0].target_resource.asset_id #=> String
+    #   resp.execution_summaries[0].target_resource.computation_model_id #=> String
+    #   resp.execution_summaries[0].target_resource_version #=> String
+    #   resp.execution_summaries[0].resolve_to.asset_id #=> String
+    #   resp.execution_summaries[0].execution_start_time #=> Time
+    #   resp.execution_summaries[0].execution_end_time #=> Time
+    #   resp.execution_summaries[0].execution_status.state #=> String, one of "RUNNING", "COMPLETED", "FAILED"
+    #   resp.execution_summaries[0].execution_entity_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_executions(params = {})
+    # @param [Hash] params ({})
+    def list_executions(params = {}, options = {})
+      req = build_request(:list_executions, params)
       req.send_request(options)
     end
 
@@ -6413,6 +6976,16 @@ module Aws::IoTSiteWise
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
+    # @option params [String] :asset_external_id
+    #   An external ID to assign to the asset. The asset must not already have
+    #   an external ID. The external ID must be unique within your Amazon Web
+    #   Services account. For more information, see [Using external IDs][1] in
+    #   the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
+    #
     # @option params [required, String] :asset_name
     #   A friendly name for the asset.
     #
@@ -6427,16 +7000,6 @@ module Aws::IoTSiteWise
     # @option params [String] :asset_description
     #   A description for the asset.
     #
-    # @option params [String] :asset_external_id
-    #   An external ID to assign to the asset. The asset must not already have
-    #   an external ID. The external ID must be unique within your Amazon Web
-    #   Services account. For more information, see [Using external IDs][1] in
-    #   the *IoT SiteWise User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
-    #
     # @return [Types::UpdateAssetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAssetResponse#asset_status #asset_status} => Types::AssetStatus
@@ -6445,10 +7008,10 @@ module Aws::IoTSiteWise
     #
     #   resp = client.update_asset({
     #     asset_id: "CustomID", # required
+    #     asset_external_id: "ExternalId",
     #     asset_name: "Name", # required
     #     client_token: "ClientToken",
     #     asset_description: "Description",
-    #     asset_external_id: "ExternalId",
     #   })
     #
     # @example Response structure
@@ -7095,6 +7658,85 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Updates the computation model.
+    #
+    # @option params [required, String] :computation_model_id
+    #   The ID of the computation model.
+    #
+    # @option params [required, String] :computation_model_name
+    #   The name of the computation model.
+    #
+    # @option params [String] :computation_model_description
+    #   The description of the computation model.
+    #
+    # @option params [required, Types::ComputationModelConfiguration] :computation_model_configuration
+    #   The configuration for the computation model.
+    #
+    # @option params [required, Hash<String,Types::ComputationModelDataBindingValue>] :computation_model_data_binding
+    #   The data binding for the computation model. Key is a variable name
+    #   defined in configuration. Value is a
+    #   `ComputationModelDataBindingValue` referenced by the variable.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateComputationModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateComputationModelResponse#computation_model_status #computation_model_status} => Types::ComputationModelStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_computation_model({
+    #     computation_model_id: "ID", # required
+    #     computation_model_name: "RestrictedName", # required
+    #     computation_model_description: "RestrictedDescription",
+    #     computation_model_configuration: { # required
+    #       anomaly_detection: {
+    #         input_properties: "InputProperties", # required
+    #         result_property: "ResultProperty", # required
+    #       },
+    #     },
+    #     computation_model_data_binding: { # required
+    #       "ComputationModelDataBindingVariable" => {
+    #         asset_model_property: {
+    #           asset_model_id: "ID", # required
+    #           property_id: "ID", # required
+    #         },
+    #         asset_property: {
+    #           asset_id: "ID", # required
+    #           property_id: "ID", # required
+    #         },
+    #         list: [
+    #           {
+    #             # recursive ComputationModelDataBindingValue
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.computation_model_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.computation_model_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.computation_model_status.error.message #=> String
+    #   resp.computation_model_status.error.details #=> Array
+    #   resp.computation_model_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.computation_model_status.error.details[0].message #=> String
+    #
+    # @overload update_computation_model(params = {})
+    # @param [Hash] params ({})
+    def update_computation_model(params = {}, options = {})
+      req = build_request(:update_computation_model, params)
+      req.send_request(options)
+    end
+
     # Updates an IoT SiteWise Monitor dashboard.
     #
     # @option params [required, String] :dashboard_id
@@ -7178,7 +7820,7 @@ module Aws::IoTSiteWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_dataset({
-    #     dataset_id: "CustomID", # required
+    #     dataset_id: "ID", # required
     #     dataset_name: "RestrictedName", # required
     #     dataset_description: "RestrictedDescription",
     #     dataset_source: { # required
@@ -7238,25 +7880,42 @@ module Aws::IoTSiteWise
 
     # Updates a gateway capability configuration or defines a new capability
     # configuration. Each gateway capability defines data sources for a
-    # gateway. A capability configuration can contain multiple data source
-    # configurations. If you define OPC-UA sources for a gateway in the IoT
-    # SiteWise console, all of your OPC-UA sources are stored in one
-    # capability configuration. To list all capability configurations for a
-    # gateway, use [DescribeGateway][1].
+    # gateway.
     #
+    # Important workflow notes:
     #
+    # Each gateway capability defines data sources for a gateway. This is
+    # the namespace of the gateway capability.
     #
-    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGateway.html
+    # . The namespace follows the format `service:capability:version`,
+    # where:
+    #
+    # * `service` - The service providing the capability, or `iotsitewise`.
+    #
+    # * `capability` - The specific capability type. Options include:
+    #   `opcuacollector` for the OPC UA data source collector, or
+    #   `publisher` for data publisher capability.
+    #
+    # * `version` - The version number of the capability. Option include `2`
+    #   for Classic streams, V2 gateways, and `3` for MQTT-enabled, V3
+    #   gateways.
+    #
+    # After updating a capability configuration, the sync status becomes
+    # `OUT_OF_SYNC` until the gateway processes the configuration.Use
+    # `DescribeGatewayCapabilityConfiguration` to check the sync status and
+    # verify the configuration was applied.
+    #
+    # A gateway can have multiple capability configurations with different
+    # namespaces.
     #
     # @option params [required, String] :gateway_id
     #   The ID of the gateway to be updated.
     #
     # @option params [required, String] :capability_namespace
     #   The namespace of the gateway capability configuration to be updated.
-    #   For example, if you configure OPC-UA sources from the IoT SiteWise
-    #   console, your OPC-UA capability configuration has the namespace
-    #   `iotsitewise:opcuacollector:version`, where `version` is a number such
-    #   as `1`.
+    #   For example, if you configure OPC UA sources for an MQTT-enabled
+    #   gateway, your OPC-UA capability configuration has the namespace
+    #   `iotsitewise:opcuacollector:3`.
     #
     # @option params [required, String] :capability_configuration
     #   The JSON document that defines the configuration for the gateway
@@ -7458,7 +8117,7 @@ module Aws::IoTSiteWise
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -18,6 +18,7 @@ module Aws
                       ?account_id: String,
                       ?active_endpoint_cache: bool,
                       ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
                       ?client_side_monitoring: bool,
                       ?client_side_monitoring_client_id: String,
                       ?client_side_monitoring_host: String,
@@ -113,7 +114,8 @@ module Aws
                             ?input_type: ("HLS" | "CMAF"),
                             ?description: ::String,
                             ?input_switch_configuration: {
-                              mqcs_input_switching: bool?
+                              mqcs_input_switching: bool?,
+                              preferred_input: ::Integer?
                             },
                             ?output_header_configuration: {
                               publish_mqcs: bool?
@@ -720,7 +722,8 @@ module Aws
                             ?etag: ::String,
                             ?description: ::String,
                             ?input_switch_configuration: {
-                              mqcs_input_switching: bool?
+                              mqcs_input_switching: bool?,
+                              preferred_input: ::Integer?
                             },
                             ?output_header_configuration: {
                               publish_mqcs: bool?

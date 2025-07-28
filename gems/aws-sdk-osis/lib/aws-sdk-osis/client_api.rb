@@ -64,6 +64,7 @@ module Aws::OSIS
     PipelineDestination = Shapes::StructureShape.new(name: 'PipelineDestination')
     PipelineDestinationList = Shapes::ListShape.new(name: 'PipelineDestinationList')
     PipelineName = Shapes::StringShape.new(name: 'PipelineName')
+    PipelineRoleArn = Shapes::StringShape.new(name: 'PipelineRoleArn')
     PipelineStatus = Shapes::StringShape.new(name: 'PipelineStatus')
     PipelineStatusReason = Shapes::StructureShape.new(name: 'PipelineStatusReason')
     PipelineSummary = Shapes::StructureShape.new(name: 'PipelineSummary')
@@ -141,6 +142,7 @@ module Aws::OSIS
     CreatePipelineRequest.add_member(:buffer_options, Shapes::ShapeRef.new(shape: BufferOptions, location_name: "BufferOptions"))
     CreatePipelineRequest.add_member(:encryption_at_rest_options, Shapes::ShapeRef.new(shape: EncryptionAtRestOptions, location_name: "EncryptionAtRestOptions"))
     CreatePipelineRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreatePipelineRequest.add_member(:pipeline_role_arn, Shapes::ShapeRef.new(shape: PipelineRoleArn, location_name: "PipelineRoleArn"))
     CreatePipelineRequest.struct_class = Types::CreatePipelineRequest
 
     CreatePipelineResponse.add_member(:pipeline, Shapes::ShapeRef.new(shape: Pipeline, location_name: "Pipeline"))
@@ -225,6 +227,7 @@ module Aws::OSIS
     Pipeline.add_member(:service_vpc_endpoints, Shapes::ShapeRef.new(shape: ServiceVpcEndpointsList, location_name: "ServiceVpcEndpoints"))
     Pipeline.add_member(:destinations, Shapes::ShapeRef.new(shape: PipelineDestinationList, location_name: "Destinations"))
     Pipeline.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    Pipeline.add_member(:pipeline_role_arn, Shapes::ShapeRef.new(shape: PipelineRoleArn, location_name: "PipelineRoleArn"))
     Pipeline.struct_class = Types::Pipeline
 
     PipelineBlueprint.add_member(:blueprint_name, Shapes::ShapeRef.new(shape: String, location_name: "BlueprintName"))
@@ -320,6 +323,7 @@ module Aws::OSIS
     UpdatePipelineRequest.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptions, location_name: "LogPublishingOptions"))
     UpdatePipelineRequest.add_member(:buffer_options, Shapes::ShapeRef.new(shape: BufferOptions, location_name: "BufferOptions"))
     UpdatePipelineRequest.add_member(:encryption_at_rest_options, Shapes::ShapeRef.new(shape: EncryptionAtRestOptions, location_name: "EncryptionAtRestOptions"))
+    UpdatePipelineRequest.add_member(:pipeline_role_arn, Shapes::ShapeRef.new(shape: PipelineRoleArn, location_name: "PipelineRoleArn"))
     UpdatePipelineRequest.struct_class = Types::UpdatePipelineRequest
 
     UpdatePipelineResponse.add_member(:pipeline, Shapes::ShapeRef.new(shape: Pipeline, location_name: "Pipeline"))
