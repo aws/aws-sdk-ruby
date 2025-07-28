@@ -282,7 +282,7 @@ module Aws
 
           it 'deletes partially downloaded file when download fails' do
             client.stub_responses(:get_object, [{ body: 'body', content_range: 'bytes 0-5242879/15728640' }, Timeout::Error])
-            expect { single_obj.download_file(path) }.to raise_error(Timeout::Error)
+            expect { single_obj.download_file(path) }.to raise_error(Aws::S3::MultipartDownloadError)
             expect(File.exist?(path)).to be(false)
           end
         end
