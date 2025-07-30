@@ -20,12 +20,12 @@ module Aws
 
       def download(destination, options = {})
         @path = destination
-        @mode = options[:mode] || 'auto'
-        @thread_count = options[:thread_count] || 10
-        @chunk_size = options[:chunk_size]
-        @params = param_opts(options)
-        @on_checksum_validated = options[:on_checksum_validated]
-        @progress_callback = options[:progress_callback]
+        @mode = options.delete(:mode) || 'auto'
+        @thread_count = options.delete(:thread_count) || 10
+        @chunk_size = options.delete(:chunk_size)
+        @on_checksum_validated = options.delete(:on_checksum_validated)
+        @progress_callback = options.delete(:progress_callback)
+        @params = options
         validate!
 
         Aws::Plugins::UserAgent.metric('S3_TRANSFER') do
@@ -47,11 +47,6 @@ module Aws
       end
 
       private
-
-      def param_opts(options)
-        download_opts = %i[mode chunk_size thread_count on_checksum_validated progress_callback]
-        options.reject { |k, _v| download_opts.include?(k) }
-      end
 
       def validate!
         return unless @on_checksum_validated && !@on_checksum_validated.respond_to?(:call)
@@ -135,8 +130,9 @@ module Aws
                     end
                 end
                 resp = @client.get_object(part.params)
-                validate_range(resp, part) if part.params[:range]
-                write(resp)
+                range = extract_range(resp.content_range)
+                validate_range(range, part.params[:range]) if part.params[:range]
+                write(resp.body, range)
                 if @on_checksum_validated && resp.checksum_validated
                   @on_checksum_validated.call(resp.checksum_validated, resp)
                 end
@@ -153,22 +149,22 @@ module Aws
         threads.map(&:value).compact
         return if max_requests == total_requests
 
-        msg = "multipart download failed: expected #{max_requests} parts but received #{total_requests}"
+        msg = "multipart download failed: expected #{max_requests} parts but made #{total_requests} requests"
         raise MultipartDownloadError, msg
       end
 
-      def validate_range(resp, part)
-        range = resp.content_range.split(' ').last.split('/').first
-        expected_range = part.params[:range].split('=').last
-        return if expected_range == range
-
-        raise MultipartDownloadError, 'multipart download failed: file integrity checked failed'
+      def extract_range(value)
+        value.match(%r{bytes (?<range>\d+-\d+)/\d+})[:range]
       end
 
-      def write(resp)
-        range = resp.content_range.split(' ').last.split('/').first
-        head = range.split('-').map(&:to_i).first
-        File.write(@path, resp.body.read, head)
+      def validate_range(actual, expected)
+        return if actual == expected.match(/bytes=(?<range>\d+-\d+)/)[:range]
+
+        raise MultipartDownloadError, "multipart download failed: expected range of #{expected} but got #{actual}"
+      end
+
+      def write(body, range)
+        File.write(@path, body.read, range.split('-').first.to_i)
       end
 
       def single_request
