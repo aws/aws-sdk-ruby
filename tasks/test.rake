@@ -33,6 +33,7 @@ namespace :test do
   task 'protocols' => %w[
     protocols:awsJson1_0
     protocols:awsJson1_1
+    protocols:awsQuery
     protocols:restJson1
   ]
 
@@ -43,6 +44,10 @@ namespace :test do
 
   task 'protocols:awsJson1_1' do
     run_protocol_test('JsonProtocol')
+  end
+
+  task 'protocols:awsQuery' do
+    run_protocol_test('AwsQuery')
   end
 
   task 'protocols:restJson1' do

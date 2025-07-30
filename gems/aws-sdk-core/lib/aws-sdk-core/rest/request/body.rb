@@ -36,13 +36,13 @@ module Aws
             # When string, blob, or enum as a payload, use value directly
             if string_or_blob_payload?
               input[@ref.shape[:http_payload]]
-            # Otherwise, serialize the payload member
+            # Otherwise, build the payload member
             elsif @ref.shape[:http_payload_member]
               input = input[@ref.shape[:http_payload]]
-              @codec.serialize(@ref.shape[:http_payload_member].shape, input) if input
+              @codec.build(@ref.shape[:http_payload_member].shape, input) if input
             else
               input = body_members(input)
-              @codec.serialize(@ref, input) unless input.empty?
+              @codec.build(@ref, input) unless input.empty?
             end
           end
 

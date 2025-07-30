@@ -53,11 +53,11 @@ module Aws
         end
 
         def build_body(context)
-          context.config.json_codec.serialize(context.operation.input, context.params)
+          context.config.json_codec.build(context.operation.input, context.params)
         end
 
         def parse_body(context)
-          context.config.json_codec.deserialize(context.operation.output, context.http_response.body.read)
+          context.config.json_codec.parse(context.operation.output, context.http_response.body.read)
         end
 
         def apply_request_id(context)

@@ -3,9 +3,6 @@
 require 'smithy-client'
 
 require_relative 'aws-sdk-core/endpoint_rules'
-require_relative 'aws-sdk-core/json'
-require_relative 'aws-sdk-core/rest'
-require_relative 'aws-sdk-core/stubbing'
 
 # Shared Config
 require_relative 'aws-sdk-core/config_file'

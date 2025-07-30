@@ -14,15 +14,15 @@ module Aws
           codec = context.config.json_codec
           Request::Builder.new(codec).apply(context)
           response = @handler.call(context)
-          response.on_done(200..299) { |resp| Response::Parser.new(codec).apply(resp) }
           response.on_done(200..599) { |_resp| apply_request_id(context) }
+          response.on_done(200..299) { |resp| Response::Parser.new(codec).apply(resp) }
         end
 
         private
 
         def apply_request_id(context)
-          h = context.http_response.headers
-          context[:request_id] ||= h['x-amz-request-id'] || h['x-amzn-requestid']
+          headers = context.http_response.headers
+          context[:request_id] = headers.delete('x-amz-request-id') || headers.delete('x-amzn-requestid')
         end
       end
     end

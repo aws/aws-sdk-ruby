@@ -2,11 +2,13 @@
 
 $LOAD_PATH.unshift(File.expand_path('../lib', __dir__))
 
-require_relative 'client_helper'
-require 'smithy-client'
-require 'aws-sdk-core'
+require 'byebug'
 require 'rspec'
 require 'webmock/rspec'
+
+require 'aws-sdk-core'
+
+require_relative 'client_helper'
 
 def mock_shared_config(config_contents = '', credentials_contents = '')
   parsed_config = Aws::Core::ConfigFileParser.new(

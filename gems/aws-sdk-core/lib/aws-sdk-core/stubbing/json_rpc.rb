@@ -10,7 +10,7 @@ module Aws
           http_resp.status_code = 200
           http_resp.headers['Content-Type'] = content_type(config.service.traits)
           http_resp.headers['X-Amzn-RequestId'] = 'stubbed-request-id'
-          http_resp.body = config.json_codec.serialize(operation.output, data)
+          http_resp.body = config.json_codec.build(operation.output, data)
           http_resp
         end
 

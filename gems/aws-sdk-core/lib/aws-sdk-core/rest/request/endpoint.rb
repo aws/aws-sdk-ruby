@@ -32,11 +32,10 @@ module Aws
           def param_value_for_placeholder(placeholder, params)
             name = param_name(placeholder)
             member_ref = @ref.shape.member(name)
-            param_shape = member_ref.shape
             value =
-              case param_shape
+              case member_ref.shape
               when TimestampShape
-                timestamp(member_ref, param_shape, params[name]).to_s
+                timestamp(member_ref, params[name]).to_s
               else
                 params[name].to_s
               end
@@ -57,11 +56,11 @@ module Aws
             param_name
           end
 
-          def timestamp(member_ref, shape, value)
+          def timestamp(ref, value)
             trait = 'smithy.api#timestampFormat'
-            case member_ref.traits[trait] || shape.traits[trait]
-            when 'http-date' then value.utc.httpdate
+            case ref.traits[trait] || ref.shape.traits[trait]
             when 'epoch-seconds' then value.to_i
+            when 'http-date' then value.utc.httpdate
             else
               # default to date-time
               value.utc.iso8601

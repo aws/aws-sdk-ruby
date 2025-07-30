@@ -2,6 +2,7 @@
 
 require 'aws-sdk-core/plugins/json_rpc'
 require 'aws-sdk-core/plugins/rest_json'
+require 'aws-sdk-core/plugins/query'
 
 module AwsSdkCodeGenerator
   module Welds
@@ -11,6 +12,9 @@ module AwsSdkCodeGenerator
         aws.protocols#awsJson1_1
         aws.protocols#awsJson1_0
         aws.protocols#restJson1
+        # rest xml
+        aws.protocols#awsQuery
+        # ec2
       ].freeze
 
       def for?(service)
@@ -27,10 +31,13 @@ module AwsSdkCodeGenerator
 
       def add_plugins
         case @protocol
-        when 'aws.protocols#restJson1'
-          { Aws::Core::Plugins::RestJson => { require_path: 'aws-sdk-core/plugins/rest_json' } }
         when 'aws.protocols#awsJson1_1', 'aws.protocols#awsJson1_0'
           { Aws::Core::Plugins::JsonRpc => { require_path: 'aws-sdk-core/plugins/json_rpc' } }
+        when 'aws.protocols#awsQuery'
+          { Aws::Core::Plugins::Query => { require_path: 'aws-sdk-core/plugins/query' } }
+        when 'aws.protocols#restJson1'
+          { Aws::Core::Plugins::RestJson => { require_path: 'aws-sdk-core/plugins/rest_json' } }
+        else {}
         end
       end
 
@@ -38,6 +45,9 @@ module AwsSdkCodeGenerator
         case @protocol
         when 'aws.protocols#restJson1', 'aws.protocols#awsJson1_1', 'aws.protocols#awsJson1_0'
           { 'smithy-json' => '1.0.0.pre1' }
+        when 'aws.protocols#awsQuery'
+          { 'smithy-xml' => '1.0.0.pre1' }
+        else {}
         end
       end
 

@@ -7,6 +7,26 @@
     ]
   },
   "projections": {
+    "AwsQuery": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": { "services": ["aws.protocoltests.query#AwsQuery"] }
+        },
+        { "name": "removeUnusedShapes" },
+        { "name": "removeTraitDefinitions" }
+      ]
+    },
+    "JsonProtocol": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": { "services": ["aws.protocoltests.json#JsonProtocol"] }
+        },
+        { "name": "removeUnusedShapes" },
+        { "name": "removeTraitDefinitions" }
+      ]
+    },
     "JsonRpc10": {
       "transforms": [
         {
@@ -22,16 +42,6 @@
         {
           "name": "includeServices",
           "args": { "services": ["aws.protocoltests.json10#QueryCompatibleJsonRpc10"] }
-        },
-        { "name": "removeUnusedShapes" },
-        { "name": "removeTraitDefinitions" }
-      ]
-    },
-    "JsonProtocol": {
-      "transforms": [
-        {
-          "name": "includeServices",
-          "args": { "services": ["aws.protocoltests.json#JsonProtocol"] }
         },
         { "name": "removeUnusedShapes" },
         { "name": "removeTraitDefinitions" }

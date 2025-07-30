@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../rest/response/headers'
+
 module Aws
   module Core
     module Json
@@ -43,9 +45,10 @@ module Aws
           context.operation.errors.each do |ref|
             next unless ref.shape.name == code
 
-            data = context.config.json_codec.deserialize(ref.shape, body, ref.shape.type.new)
+            data = context.config.json_codec.parse(ref.shape, body, ref.shape.type.new)
             # TODO: this does not really belong here - possibly need a rest error handler instead.
             Rest::Response::Headers.new(ref).apply(context.http_response, data)
+            return data
           end
           data
         end
@@ -59,11 +62,11 @@ module Aws
 
         def query_compatible_header?(context)
           context.config.service.traits.key?('aws.protocols#awsQueryCompatible') &&
-            context.http_response.headers['X-Amzn-Query-Error']
+            context.http_response.headers['x-amzn-query-error']
         end
 
         def query_compatible_error(context)
-          error, _type = context.http_response.headers['X-Amzn-Query-Error'].split(';')
+          error, _type = context.http_response.headers['x-amzn-query-error'].split(';')
           error
         end
 

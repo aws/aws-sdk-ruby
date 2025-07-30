@@ -12,15 +12,11 @@ module Aws
           end
 
           def apply(response)
-            # TODO: fix
-            if (output = response.context.operation.output)
-              response.data = output.shape.type.new
-              apply_status_code(output, response)
-              apply_headers(output, response)
-              apply_body(output, response)
-            else
-              response.data = Smithy::Schema::EmptyStructure.new
-            end
+            output = response.context.operation.output
+            response.data = output.shape.type.new
+            apply_status_code(output, response)
+            apply_headers(output, response)
+            apply_body(output, response)
           end
 
           private

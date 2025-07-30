@@ -92,3 +92,19 @@ jobs:
 
       - name: Test
         run: bundle exec rake test:spec:aws-sdk-lambda
+
+  rubocop:
+    needs: [core-test, protocol-test, gem-test]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.latest_ruby_version }}
+          bundler-cache: true
+
+      - name: Rubocop
+        run: bundle exec rake rubocop

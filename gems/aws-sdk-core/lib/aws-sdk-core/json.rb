@@ -2,5 +2,3 @@
 
 require_relative 'json/error_handler'
 require_relative 'json/handler'
-
-# TODO: add JSON adapter?
