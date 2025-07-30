@@ -65,7 +65,7 @@ module Aws
             .with({ bucket: 'bucket', key: 'large', part_number: 1 })
             .exactly(1).times
 
-          client.stub_responses(:get_object, ->(_ctx) { { body: 'body', content_range: 'bytes 0-4/4' } })
+          client.stub_responses(:get_object, ->(_ctx) { { body: 'body', content_range: 'bytes 0-3/4' } })
 
           large_obj.download_file(path)
         end
@@ -79,8 +79,8 @@ module Aws
           client.stub_responses(:get_object, lambda { |context|
             responses = {
               'bytes=0-5242879' => { body: 'body', content_range: 'bytes 0-5242879/15728640' },
-              'bytes=10485760-15728639' => { body: 'body', content_range: 'bytes 10485760-15728639/15728640' },
-              'bytes=5242880-10485759' => { body: 'body', content_range: 'bytes 5242880-10485759/15728640' }
+              'bytes=5242880-10485759' => { body: 'body', content_range: 'bytes 5242880-10485759/15728640' },
+              'bytes=10485760-15728639' => { body: 'body', content_range: 'bytes 10485760-15728639/15728640' }
             }
             responses[context.params[:range]]
           })
@@ -115,7 +115,7 @@ module Aws
           callback_data = { called: 0 }
           client.stub_responses(
             :get_object,
-            { body: 'body', content_range: 'bytes 0-4/4', checksum_sha1: 'Agg/RXngimEkJcDBoX7ket14O5Q=' }
+            { body: 'body', content_range: 'bytes 0-3/4', checksum_sha1: 'Agg/RXngimEkJcDBoX7ket14O5Q=' }
           )
           mutex = Mutex.new
           callback = proc do |_alg, _resp|
@@ -172,10 +172,11 @@ module Aws
             small_obj.download_file(path, progress_callback: callback)
             expect(n_calls).to eq(1)
           end
+
           it 'reports progress for files downloaded in parts' do
             expect(client).to receive(:get_object).exactly(4).times do |args|
               args[:on_chunk_received].call(large_file, 4, 4)
-              client.stub_data(:get_object, body: StringIO.new('chunk'), content_range: 'bytes 0-4/4')
+              client.stub_data(:get_object, body: StringIO.new('chunk'), content_range: 'bytes 0-3/4')
             end
 
             n_calls = 0
@@ -275,7 +276,7 @@ module Aws
           end
 
           it 'raises error when range validation fails' do
-            client.stub_responses(:get_object, { body: 'body', content_range: 'bytes 0-4/4' })
+            client.stub_responses(:get_object, { body: 'body', content_range: 'bytes 0-3/4' })
             expect { large_obj.download_file(path, mode: 'get_range', chunk_size: one_meg) }
               .to raise_error(Aws::S3::MultipartDownloadError)
           end
