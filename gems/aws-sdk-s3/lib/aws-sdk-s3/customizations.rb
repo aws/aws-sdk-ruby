@@ -10,7 +10,7 @@ module Aws
     autoload :FileUploader, 'aws-sdk-s3/file_uploader'
     autoload :FileDownloader, 'aws-sdk-s3/file_downloader'
     autoload :LegacySigner, 'aws-sdk-s3/legacy_signer'
-    autoload :MultipartDownloadError, 'aws-sdk-s3/file_downloader'
+    autoload :MultipartDownloadError, 'aws-sdk-s3/multipart_download_error'
     autoload :MultipartFileUploader, 'aws-sdk-s3/multipart_file_uploader'
     autoload :MultipartStreamUploader, 'aws-sdk-s3/multipart_stream_uploader'
     autoload :MultipartUploadError, 'aws-sdk-s3/multipart_upload_error'
