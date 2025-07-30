@@ -5,9 +5,6 @@ require 'set'
 
 module Aws
   module S3
-    # Raised when an error is encountered during multipart download
-    class MultipartDownloadError < StandardError; end
-
     # @api private
     class FileDownloader
 
