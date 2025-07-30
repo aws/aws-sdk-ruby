@@ -67,7 +67,7 @@ module Aws
             shape: context.operation.output.shape,
             member_name: "#{context.operation.name}Result"
           )
-          shape = Smithy::Schema::Shapes::StructureShape.new
+          shape = StructureShape.new
           shape.add_member(:result, ref)
           shape.type = WRAPPER_STRUCT
           shape.add_member(:response_metadata, METADATA_REF)

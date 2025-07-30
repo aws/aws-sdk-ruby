@@ -11,8 +11,10 @@ module AwsSdkCodeGenerator
       PROTOCOL_PRIORITY = %w[
         aws.protocols#awsJson1_1
         aws.protocols#awsJson1_0
-        aws.protocols#awsQuery
         aws.protocols#restJson1
+        # rest xml
+        aws.protocols#awsQuery
+        # ec2
       ].freeze
 
       def for?(service)

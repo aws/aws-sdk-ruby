@@ -25,12 +25,12 @@ module Aws
           value ? "#{escape(@name)}=#{escape(@value)}" : "#{escape(@name)}="
         end
 
-        # @api private
+        # @return [Boolean]
         def ==(other)
           other.is_a?(Param) && other.name == @name && other.value == @value
         end
 
-        # @api private
+        # @return [Integer]
         def <=>(other)
           @name <=> other.name
         end

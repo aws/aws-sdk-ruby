@@ -83,7 +83,7 @@ module Aws
           when 'epoch-seconds' then value.to_i
           when 'http-date' then value.utc.httpdate
           else
-            # query defaults to iso8601
+            # query defaults to date-time
             value.utc.iso8601
           end
         end
