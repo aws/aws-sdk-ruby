@@ -33,12 +33,12 @@ module Aws
           when 'auto' then multipart_download
           when 'single_request' then single_request
           when 'get_range'
-            raise ArgumentError, 'In :get_range mode, :chunk_size must be provided' unless @chunk_size
+            raise ArgumentError, 'In get_range mode, :chunk_size must be provided' unless @chunk_size
 
             resp = @client.head_object(@params)
             multithreaded_get_by_ranges(resp.content_length, resp.etag)
           else
-            raise ArgumentError, "Invalid mode #{@mode} provided, mode should be :single_request, :get_range or :auto"
+            raise ArgumentError, "Invalid mode #{@mode} provided, :mode should be single_request, get_range or auto"
           end
         end
       rescue StandardError => e
@@ -56,7 +56,7 @@ module Aws
       def validate!
         return unless @on_checksum_validated && !@on_checksum_validated.respond_to?(:call)
 
-        raise ArgumentError, 'on_checksum_validated must be callable'
+        raise ArgumentError, ':on_checksum_validated must be callable'
       end
 
       def multipart_download
