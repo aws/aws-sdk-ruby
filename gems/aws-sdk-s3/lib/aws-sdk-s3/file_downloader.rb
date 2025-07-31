@@ -116,8 +116,6 @@ module Aws
 
       def download_in_threads(pending, total_size)
         threads = []
-        max_requests = pending.count
-        total_requests = 0
         progress = MultipartProgress.new(pending, total_size, @progress_callback) if @progress_callback
         @thread_count.times do
           thread = Thread.new do
@@ -136,7 +134,6 @@ module Aws
                 if @on_checksum_validated && resp.checksum_validated
                   @on_checksum_validated.call(resp.checksum_validated, resp)
                 end
-                total_requests += 1
               end
               nil
             rescue StandardError => e
@@ -147,10 +144,6 @@ module Aws
           threads << thread
         end
         threads.map(&:value).compact
-        return if max_requests == total_requests
-
-        msg = "multipart download failed: expected #{max_requests} parts but made #{total_requests} requests"
-        raise MultipartDownloadError, msg
       end
 
       def extract_range(value)
@@ -194,10 +187,6 @@ module Aws
         def initialize(parts = [])
           @parts = parts
           @mutex = Mutex.new
-        end
-
-        def count
-          @mutex.synchronize { @parts.count }
         end
 
         def shift

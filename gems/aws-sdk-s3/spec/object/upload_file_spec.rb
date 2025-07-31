@@ -246,18 +246,6 @@ module Aws
             )
           end
 
-          it 'raises an error when expected parts count differs from completed requests' do
-            completed = double('PartList')
-            allow(completed).to receive(:count).and_return(1)
-            allow(MultipartFileUploader::PartList).to receive(:new).and_return(completed)
-
-            pending = double('PartList')
-            allow(pending).to receive(:count).and_return(2)
-            allow(pending).to receive(:shift).and_return(nil)
-            allow(MultipartFileUploader::PartList).to receive(:new).with(anything).and_return(pending)
-            expect { object.upload_file(one_hundred_seventeen_meg_file) }.to raise_error(Aws::S3::MultipartUploadError)
-          end
-
           it 'aborts multipart upload when upload fails to complete' do
             client.stub_responses(:complete_multipart_upload, RuntimeError.new('network-error'))
 

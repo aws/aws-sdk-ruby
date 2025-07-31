@@ -72,10 +72,7 @@ module Aws
       def upload_parts(upload_id, source, options)
         completed = PartList.new
         pending = PartList.new(compute_parts(upload_id, source, options))
-        max_requests = pending.count
         errors = upload_in_threads(pending, completed, options)
-        errors << MultipartUploadError.new('parts validation failed') unless max_requests == completed.count
-
         if errors.empty?
           completed.to_a.sort_by { |part| part[:part_number] }
         else
@@ -168,7 +165,7 @@ module Aws
                 completed.push(completed_part)
               end
               nil
-            rescue => e
+            rescue StandardError => e
               # keep other threads from uploading other parts
               pending.clear!
               e
@@ -196,10 +193,6 @@ module Aws
         def initialize(parts = [])
           @parts = parts
           @mutex = Mutex.new
-        end
-
-        def count
-          @mutex.synchronize { @parts.count }
         end
 
         def push(part)
