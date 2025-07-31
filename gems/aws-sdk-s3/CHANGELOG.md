@@ -1,7 +1,9 @@
 Unreleased Changes
 ------------------
 
-* Issue - Add integrity validation to multipart upload/download to ensure all parts are successfully processed.
+* Issue - Add range validation to multipart download to ensure all parts are successfully processed.
+
+* Issue - When multipart uploader fails to complete multipart upload, it calls multipart abort.
 
 * Issue - Remove partially downloaded files when multipart `download_file` fail.
 
