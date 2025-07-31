@@ -2157,7 +2157,7 @@ module Aws::Panorama
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-panorama'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

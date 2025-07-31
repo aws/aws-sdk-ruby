@@ -12198,7 +12198,7 @@ module Aws::SecurityHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.138.0'
+      context[:gem_version] = '1.139.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

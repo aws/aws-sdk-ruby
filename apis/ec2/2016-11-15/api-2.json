@@ -44269,6 +44269,10 @@
         "OdbNetworkArn":{
           "shape":"OdbNetworkArn",
           "locationName":"odbNetworkArn"
+        },
+        "IpAddress":{
+          "shape":"String",
+          "locationName":"ipAddress"
         }
       }
     },
@@ -48300,6 +48304,7 @@
           "shape":"InstanceIdStringList",
           "locationName":"InstanceId"
         },
+        "Force":{"shape":"Boolean"},
         "SkipOsShutdown":{"shape":"Boolean"},
         "DryRun":{
           "shape":"Boolean",

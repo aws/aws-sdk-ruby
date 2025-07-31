@@ -367,6 +367,11 @@ module Aws::OpenSearchService
     #   OpenSearch Service.
     #   @return [Types::JWTOptionsOutput]
     #
+    # @!attribute [rw] iam_federation_options
+    #   Container for information about the IAM federation configuration for
+    #   an OpenSearch UI application.
+    #   @return [Types::IAMFederationOptionsOutput]
+    #
     # @!attribute [rw] anonymous_auth_disable_date
     #   Date and time when the migration period will be disabled. Only
     #   necessary when [enabling fine-grained access control on an existing
@@ -394,6 +399,7 @@ module Aws::OpenSearchService
       :internal_user_database_enabled,
       :saml_options,
       :jwt_options,
+      :iam_federation_options,
       :anonymous_auth_disable_date,
       :anonymous_auth_enabled)
       SENSITIVE = []
@@ -430,6 +436,11 @@ module Aws::OpenSearchService
     #   OpenSearch Service.
     #   @return [Types::JWTOptionsInput]
     #
+    # @!attribute [rw] iam_federation_options
+    #   Container for information about the IAM federation configuration for
+    #   an OpenSearch UI application.
+    #   @return [Types::IAMFederationOptionsInput]
+    #
     # @!attribute [rw] anonymous_auth_enabled
     #   True to enable a 30-day migration period during which administrators
     #   can create role mappings. Only necessary when [enabling fine-grained
@@ -448,6 +459,7 @@ module Aws::OpenSearchService
       :master_user_options,
       :saml_options,
       :jwt_options,
+      :iam_federation_options,
       :anonymous_auth_enabled)
       SENSITIVE = []
       include Aws::Structure
@@ -4465,6 +4477,57 @@ module Aws::OpenSearchService
       :upgrade_step,
       :step_status,
       :upgrade_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The IAM federation authentication configuration for an Amazon
+    # OpenSearch Service domain.
+    #
+    # @!attribute [rw] enabled
+    #   True to enable IAM federation authentication for a domain.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] subject_key
+    #   Element of the IAM federation assertion to use for the user name.
+    #   Default is `sub`.
+    #   @return [String]
+    #
+    # @!attribute [rw] roles_key
+    #   Element of the IAM federation assertion to use for backend roles.
+    #   Default is `roles`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/IAMFederationOptionsInput AWS API Documentation
+    #
+    class IAMFederationOptionsInput < Struct.new(
+      :enabled,
+      :subject_key,
+      :roles_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the IAM federation options configured for the domain.
+    #
+    # @!attribute [rw] enabled
+    #   True if IAM federation is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] subject_key
+    #   The key used for matching the IAM federation subject attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] roles_key
+    #   The key used for matching the IAM federation roles attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/IAMFederationOptionsOutput AWS API Documentation
+    #
+    class IAMFederationOptionsOutput < Struct.new(
+      :enabled,
+      :subject_key,
+      :roles_key)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -293,7 +293,8 @@ module Aws
                                            ]?
                                          }?,
                                          s3_origin_config: {
-                                           origin_access_identity: ::String
+                                           origin_access_identity: ::String,
+                                           origin_read_timeout: ::Integer?
                                          }?,
                                          custom_origin_config: {
                                            http_port: ::Integer,
@@ -313,6 +314,7 @@ module Aws
                                          }?,
                                          connection_attempts: ::Integer?,
                                          connection_timeout: ::Integer?,
+                                         response_completion_timeout: ::Integer?,
                                          origin_shield: {
                                            enabled: bool,
                                            origin_shield_region: ::String?
@@ -639,7 +641,8 @@ module Aws
                                                        ]?
                                                      }?,
                                                      s3_origin_config: {
-                                                       origin_access_identity: ::String
+                                                       origin_access_identity: ::String,
+                                                       origin_read_timeout: ::Integer?
                                                      }?,
                                                      custom_origin_config: {
                                                        http_port: ::Integer,
@@ -659,6 +662,7 @@ module Aws
                                                      }?,
                                                      connection_attempts: ::Integer?,
                                                      connection_timeout: ::Integer?,
+                                                     response_completion_timeout: ::Integer?,
                                                      origin_shield: {
                                                        enabled: bool,
                                                        origin_shield_region: ::String?
@@ -2563,7 +2567,8 @@ module Aws
                                            ]?
                                          }?,
                                          s3_origin_config: {
-                                           origin_access_identity: ::String
+                                           origin_access_identity: ::String,
+                                           origin_read_timeout: ::Integer?
                                          }?,
                                          custom_origin_config: {
                                            http_port: ::Integer,
@@ -2583,6 +2588,7 @@ module Aws
                                          }?,
                                          connection_attempts: ::Integer?,
                                          connection_timeout: ::Integer?,
+                                         response_completion_timeout: ::Integer?,
                                          origin_shield: {
                                            enabled: bool,
                                            origin_shield_region: ::String?

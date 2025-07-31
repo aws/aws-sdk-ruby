@@ -72,7 +72,7 @@ module Aws::LocationService
       attr_accessor device_id: ::String
       attr_accessor sample_time: ::Time
       attr_accessor error: Types::BatchItemError
-      SENSITIVE: []
+      SENSITIVE: [:sample_time]
     end
 
     class BatchEvaluateGeofencesRequest
@@ -139,14 +139,14 @@ module Aws::LocationService
       attr_accessor geofence_id: ::String
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:create_time, :update_time]
     end
 
     class BatchUpdateDevicePositionError
       attr_accessor device_id: ::String
       attr_accessor sample_time: ::Time
       attr_accessor error: Types::BatchItemError
-      SENSITIVE: []
+      SENSITIVE: [:sample_time]
     end
 
     class BatchUpdateDevicePositionRequest
@@ -177,7 +177,7 @@ module Aws::LocationService
       attr_accessor car_mode_options: Types::CalculateRouteCarModeOptions
       attr_accessor truck_mode_options: Types::CalculateRouteTruckModeOptions
       attr_accessor key: ::String
-      SENSITIVE: [:key]
+      SENSITIVE: [:departure_time, :key]
     end
 
     class CalculateRouteMatrixResponse
@@ -211,7 +211,7 @@ module Aws::LocationService
       attr_accessor arrival_time: ::Time
       attr_accessor optimize_for: ("FastestRoute" | "ShortestRoute")
       attr_accessor key: ::String
-      SENSITIVE: [:departure_position, :destination_position, :key]
+      SENSITIVE: [:departure_position, :destination_position, :departure_time, :arrival_time, :key]
     end
 
     class CalculateRouteResponse
@@ -245,7 +245,7 @@ module Aws::LocationService
     class Circle
       attr_accessor center: ::Array[::Float]
       attr_accessor radius: ::Float
-      SENSITIVE: [:center]
+      SENSITIVE: [:center, :radius]
     end
 
     class ConflictException
@@ -267,7 +267,7 @@ module Aws::LocationService
       attr_accessor collection_name: ::String
       attr_accessor collection_arn: ::String
       attr_accessor create_time: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:create_time]
     end
 
     class CreateKeyRequest
@@ -277,7 +277,7 @@ module Aws::LocationService
       attr_accessor expire_time: ::Time
       attr_accessor no_expiry: bool
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:expire_time]
     end
 
     class CreateKeyResponse
@@ -285,7 +285,7 @@ module Aws::LocationService
       attr_accessor key_arn: ::String
       attr_accessor key_name: ::String
       attr_accessor create_time: ::Time
-      SENSITIVE: [:key]
+      SENSITIVE: [:key, :create_time]
     end
 
     class CreateMapRequest
@@ -301,7 +301,7 @@ module Aws::LocationService
       attr_accessor map_name: ::String
       attr_accessor map_arn: ::String
       attr_accessor create_time: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:create_time]
     end
 
     class CreatePlaceIndexRequest
@@ -318,7 +318,7 @@ module Aws::LocationService
       attr_accessor index_name: ::String
       attr_accessor index_arn: ::String
       attr_accessor create_time: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:create_time]
     end
 
     class CreateRouteCalculatorRequest
@@ -334,7 +334,7 @@ module Aws::LocationService
       attr_accessor calculator_name: ::String
       attr_accessor calculator_arn: ::String
       attr_accessor create_time: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:create_time]
     end
 
     class CreateTrackerRequest
@@ -354,7 +354,7 @@ module Aws::LocationService
       attr_accessor tracker_name: ::String
       attr_accessor tracker_arn: ::String
       attr_accessor create_time: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:create_time]
     end
 
     class DataSourceConfiguration
@@ -427,7 +427,7 @@ module Aws::LocationService
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor geofence_count: ::Integer
-      SENSITIVE: []
+      SENSITIVE: [:create_time, :update_time]
     end
 
     class DescribeKeyRequest
@@ -445,7 +445,7 @@ module Aws::LocationService
       attr_accessor update_time: ::Time
       attr_accessor description: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: [:key]
+      SENSITIVE: [:key, :create_time, :expire_time, :update_time]
     end
 
     class DescribeMapRequest
@@ -463,7 +463,7 @@ module Aws::LocationService
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:create_time, :update_time]
     end
 
     class DescribePlaceIndexRequest
@@ -481,7 +481,7 @@ module Aws::LocationService
       attr_accessor data_source: ::String
       attr_accessor data_source_configuration: Types::DataSourceConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:create_time, :update_time]
     end
 
     class DescribeRouteCalculatorRequest
@@ -498,7 +498,7 @@ module Aws::LocationService
       attr_accessor update_time: ::Time
       attr_accessor data_source: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:create_time, :update_time]
     end
 
     class DescribeTrackerRequest
@@ -519,7 +519,7 @@ module Aws::LocationService
       attr_accessor position_filtering: ("TimeBased" | "DistanceBased" | "AccuracyBased")
       attr_accessor event_bridge_enabled: bool
       attr_accessor kms_key_enable_geospatial_queries: bool
-      SENSITIVE: []
+      SENSITIVE: [:create_time, :update_time]
     end
 
     class DevicePosition
@@ -529,7 +529,7 @@ module Aws::LocationService
       attr_accessor position: ::Array[::Float]
       attr_accessor accuracy: Types::PositionalAccuracy
       attr_accessor position_properties: ::Hash[::String, ::String]
-      SENSITIVE: [:position, :position_properties]
+      SENSITIVE: [:sample_time, :received_time, :position, :position_properties]
     end
 
     class DevicePositionUpdate
@@ -538,7 +538,7 @@ module Aws::LocationService
       attr_accessor position: ::Array[::Float]
       attr_accessor accuracy: Types::PositionalAccuracy
       attr_accessor position_properties: ::Hash[::String, ::String]
-      SENSITIVE: [:position, :position_properties]
+      SENSITIVE: [:sample_time, :position, :position_properties]
     end
 
     class DeviceState
@@ -549,7 +549,7 @@ module Aws::LocationService
       attr_accessor ipv_4_address: ::String
       attr_accessor wi_fi_access_points: ::Array[Types::WiFiAccessPoint]
       attr_accessor cell_signals: Types::CellSignals
-      SENSITIVE: [:position]
+      SENSITIVE: [:sample_time, :position]
     end
 
     class DisassociateTrackerConsumerRequest
@@ -594,13 +594,14 @@ module Aws::LocationService
       attr_accessor event_type: ("ENTER" | "EXIT" | "IDLE")
       attr_accessor forecasted_breach_time: ::Time
       attr_accessor geofence_properties: ::Hash[::String, ::String]
-      SENSITIVE: [:geofence_properties]
+      SENSITIVE: [:forecasted_breach_time, :geofence_properties]
     end
 
     class GeofenceGeometry
       attr_accessor polygon: ::Array[::Array[::Array[::Float]]]
       attr_accessor circle: Types::Circle
       attr_accessor geobuf: ::String
+      attr_accessor multi_polygon: ::Array[::Array[::Array[::Array[::Float]]]]
       SENSITIVE: [:circle, :geobuf]
     end
 
@@ -611,7 +612,7 @@ module Aws::LocationService
       attr_accessor start_time_inclusive: ::Time
       attr_accessor end_time_exclusive: ::Time
       attr_accessor max_results: ::Integer
-      SENSITIVE: []
+      SENSITIVE: [:start_time_inclusive, :end_time_exclusive]
     end
 
     class GetDevicePositionHistoryResponse
@@ -633,7 +634,7 @@ module Aws::LocationService
       attr_accessor position: ::Array[::Float]
       attr_accessor accuracy: Types::PositionalAccuracy
       attr_accessor position_properties: ::Hash[::String, ::String]
-      SENSITIVE: [:position, :position_properties]
+      SENSITIVE: [:sample_time, :received_time, :position, :position_properties]
     end
 
     class GetGeofenceRequest
@@ -649,7 +650,7 @@ module Aws::LocationService
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor geofence_properties: ::Hash[::String, ::String]
-      SENSITIVE: [:geofence_properties]
+      SENSITIVE: [:create_time, :update_time, :geofence_properties]
     end
 
     class GetMapGlyphsRequest
@@ -771,7 +772,7 @@ module Aws::LocationService
       attr_accessor position: ::Array[::Float]
       attr_accessor accuracy: Types::PositionalAccuracy
       attr_accessor position_properties: ::Hash[::String, ::String]
-      SENSITIVE: [:position, :position_properties]
+      SENSITIVE: [:sample_time, :position, :position_properties]
     end
 
     class ListGeofenceCollectionsRequest
@@ -793,7 +794,7 @@ module Aws::LocationService
       attr_accessor pricing_plan_data_source: ::String
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:create_time, :update_time]
     end
 
     class ListGeofenceResponseEntry
@@ -803,7 +804,7 @@ module Aws::LocationService
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor geofence_properties: ::Hash[::String, ::String]
-      SENSITIVE: [:geofence_properties]
+      SENSITIVE: [:create_time, :update_time, :geofence_properties]
     end
 
     class ListGeofencesRequest
@@ -839,7 +840,7 @@ module Aws::LocationService
       attr_accessor restrictions: Types::ApiKeyRestrictions
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:expire_time, :create_time, :update_time]
     end
 
     class ListMapsRequest
@@ -861,7 +862,7 @@ module Aws::LocationService
       attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:create_time, :update_time]
     end
 
     class ListPlaceIndexesRequest
@@ -883,7 +884,7 @@ module Aws::LocationService
       attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:create_time, :update_time]
     end
 
     class ListRouteCalculatorsRequest
@@ -905,7 +906,7 @@ module Aws::LocationService
       attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:create_time, :update_time]
     end
 
     class ListTagsForResourceRequest
@@ -950,7 +951,7 @@ module Aws::LocationService
       attr_accessor pricing_plan_data_source: ::String
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:create_time, :update_time]
     end
 
     class LteCellDetails
@@ -986,13 +987,13 @@ module Aws::LocationService
       attr_accessor style: ::String
       attr_accessor political_view: ::String
       attr_accessor custom_layers: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:political_view]
     end
 
     class MapConfigurationUpdate
       attr_accessor political_view: ::String
       attr_accessor custom_layers: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:political_view]
     end
 
     class Place
@@ -1023,7 +1024,7 @@ module Aws::LocationService
 
     class PositionalAccuracy
       attr_accessor horizontal: ::Float
-      SENSITIVE: []
+      SENSITIVE: [:horizontal]
     end
 
     class PutGeofenceRequest
@@ -1038,7 +1039,7 @@ module Aws::LocationService
       attr_accessor geofence_id: ::String
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:create_time, :update_time]
     end
 
     class ResourceNotFoundException
@@ -1242,7 +1243,7 @@ module Aws::LocationService
       attr_accessor collection_name: ::String
       attr_accessor collection_arn: ::String
       attr_accessor update_time: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:update_time]
     end
 
     class UpdateKeyRequest
@@ -1252,14 +1253,14 @@ module Aws::LocationService
       attr_accessor no_expiry: bool
       attr_accessor force_update: bool
       attr_accessor restrictions: Types::ApiKeyRestrictions
-      SENSITIVE: []
+      SENSITIVE: [:expire_time]
     end
 
     class UpdateKeyResponse
       attr_accessor key_arn: ::String
       attr_accessor key_name: ::String
       attr_accessor update_time: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:update_time]
     end
 
     class UpdateMapRequest
@@ -1274,7 +1275,7 @@ module Aws::LocationService
       attr_accessor map_name: ::String
       attr_accessor map_arn: ::String
       attr_accessor update_time: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:update_time]
     end
 
     class UpdatePlaceIndexRequest
@@ -1289,7 +1290,7 @@ module Aws::LocationService
       attr_accessor index_name: ::String
       attr_accessor index_arn: ::String
       attr_accessor update_time: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:update_time]
     end
 
     class UpdateRouteCalculatorRequest
@@ -1303,7 +1304,7 @@ module Aws::LocationService
       attr_accessor calculator_name: ::String
       attr_accessor calculator_arn: ::String
       attr_accessor update_time: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:update_time]
     end
 
     class UpdateTrackerRequest
@@ -1321,7 +1322,7 @@ module Aws::LocationService
       attr_accessor tracker_name: ::String
       attr_accessor tracker_arn: ::String
       attr_accessor update_time: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:update_time]
     end
 
     class ValidationException
@@ -1350,7 +1351,7 @@ module Aws::LocationService
       attr_accessor sample_time: ::Time
       attr_accessor received_time: ::Time
       attr_accessor distance_unit: ("Kilometers" | "Miles")
-      SENSITIVE: []
+      SENSITIVE: [:sample_time, :received_time]
     end
 
     class WiFiAccessPoint

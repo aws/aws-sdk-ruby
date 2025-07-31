@@ -55,7 +55,7 @@ module Aws::ObservabilityAdmin
   autoload :EndpointProvider, 'aws-sdk-observabilityadmin/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-observabilityadmin/endpoints'
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.8.0'
 
 end
 

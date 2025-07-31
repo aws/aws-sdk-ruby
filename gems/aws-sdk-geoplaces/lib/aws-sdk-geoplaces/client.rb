@@ -2440,7 +2440,7 @@ module Aws::GeoPlaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-geoplaces'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

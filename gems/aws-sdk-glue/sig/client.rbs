@@ -989,7 +989,8 @@ module Aws
                                   columns: Array[
                                     {
                                       name: ::String,
-                                      type: ::String?
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
                                     },
                                   ]?
                                 },
@@ -1017,7 +1018,8 @@ module Aws
                                   columns: Array[
                                     {
                                       name: ::String,
-                                      type: ::String?
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
                                     },
                                   ]?
                                 },
@@ -1034,7 +1036,8 @@ module Aws
                                   columns: Array[
                                     {
                                       name: ::String,
-                                      type: ::String?
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
                                     },
                                   ]?
                                 },
@@ -1043,7 +1046,19 @@ module Aws
                             catalog_source: {
                               name: ::String,
                               database: ::String,
-                              table: ::String
+                              table: ::String,
+                              partition_predicate: ::String?,
+                              output_schemas: Array[
+                                {
+                                  columns: Array[
+                                    {
+                                      name: ::String,
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
+                                    },
+                                  ]?
+                                },
+                              ]?
                             }?,
                             redshift_source: {
                               name: ::String,
@@ -1091,36 +1106,8 @@ module Aws
                                   columns: Array[
                                     {
                                       name: ::String,
-                                      type: ::String?
-                                    },
-                                  ]?
-                                },
-                              ]?
-                            }?,
-                            s3_excel_source: {
-                              name: ::String,
-                              paths: Array[::String],
-                              compression_type: ("snappy" | "lzo" | "gzip" | "brotli" | "lz4" | "uncompressed" | "none")?,
-                              exclusions: Array[::String]?,
-                              group_size: ::String?,
-                              group_files: ::String?,
-                              recurse: bool?,
-                              max_band: ::Integer?,
-                              max_files_in_band: ::Integer?,
-                              additional_options: {
-                                bounded_size: ::Integer?,
-                                bounded_files: ::Integer?,
-                                enable_sample_path: bool?,
-                                sample_path: ::String?
-                              }?,
-                              number_rows: ::Integer?,
-                              skip_footer: ::Integer?,
-                              output_schemas: Array[
-                                {
-                                  columns: Array[
-                                    {
-                                      name: ::String,
-                                      type: ::String?
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
                                     },
                                   ]?
                                 },
@@ -1149,7 +1136,8 @@ module Aws
                                   columns: Array[
                                     {
                                       name: ::String,
-                                      type: ::String?
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
                                     },
                                   ]?
                                 },
@@ -1176,7 +1164,8 @@ module Aws
                                   columns: Array[
                                     {
                                       name: ::String,
-                                      type: ::String?
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
                                     },
                                   ]?
                                 },
@@ -1190,7 +1179,12 @@ module Aws
                             dynamo_db_catalog_source: {
                               name: ::String,
                               database: ::String,
-                              table: ::String
+                              table: ::String,
+                              pitr_enabled: bool?,
+                              additional_options: {
+                                dynamodb_export: ::String?,
+                                dynamodb_unnest_ddb_json: bool?
+                              }?
                             }?,
                             jdbc_connector_target: {
                               name: ::String,
@@ -1205,7 +1199,8 @@ module Aws
                                   columns: Array[
                                     {
                                       name: ::String,
-                                      type: ::String?
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
                                     },
                                   ]?
                                 },
@@ -1223,7 +1218,8 @@ module Aws
                                   columns: Array[
                                     {
                                       name: ::String,
-                                      type: ::String?
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
                                     },
                                   ]?
                                 },
@@ -1262,6 +1258,10 @@ module Aws
                               schema_change_policy: {
                                 enable_update_catalog: bool?,
                                 update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?
+                              }?,
+                              auto_data_quality: {
+                                is_enabled: bool?,
+                                evaluation_context: ::String?
                               }?
                             }?,
                             s3_glue_parquet_target: {
@@ -1278,21 +1278,10 @@ module Aws
                                 update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
                                 table: ::String?,
                                 database: ::String?
-                              }?
-                            }?,
-                            s3_hyper_direct_target: {
-                              name: ::String,
-                              inputs: Array[::String],
-                              partition_keys: Array[
-                                Array[::String],
-                              ]?,
-                              path: ::String,
-                              compression: ("uncompressed")?,
-                              schema_change_policy: {
-                                enable_update_catalog: bool?,
-                                update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
-                                table: ::String?,
-                                database: ::String?
+                              }?,
+                              auto_data_quality: {
+                                is_enabled: bool?,
+                                evaluation_context: ::String?
                               }?
                             }?,
                             s3_direct_target: {
@@ -1310,25 +1299,22 @@ module Aws
                                 update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
                                 table: ::String?,
                                 database: ::String?
-                              }?
-                            }?,
-                            s3_iceberg_direct_target: {
-                              name: ::String,
-                              inputs: Array[::String],
-                              partition_keys: Array[
-                                Array[::String],
-                              ]?,
-                              path: ::String,
-                              format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml"),
-                              additional_options: Hash[::String, ::String]?,
-                              schema_change_policy: {
-                                enable_update_catalog: bool?,
-                                update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
-                                table: ::String?,
-                                database: ::String?
                               }?,
-                              compression: ("gzip" | "lzo" | "uncompressed" | "snappy"),
-                              number_target_partitions: ::String?
+                              auto_data_quality: {
+                                is_enabled: bool?,
+                                evaluation_context: ::String?
+                              }?,
+                              output_schemas: Array[
+                                {
+                                  columns: Array[
+                                    {
+                                      name: ::String,
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
+                                    },
+                                  ]?
+                                },
+                              ]?
                             }?,
                             apply_mapping: {
                               name: ::String,
@@ -1429,7 +1415,8 @@ module Aws
                                   columns: Array[
                                     {
                                       name: ::String,
-                                      type: ::String?
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
                                     },
                                   ]?
                                 },
@@ -1450,7 +1437,8 @@ module Aws
                                   columns: Array[
                                     {
                                       name: ::String,
-                                      type: ::String?
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
                                     },
                                   ]?
                                 },
@@ -1481,7 +1469,8 @@ module Aws
                                 role_session_name: ::String?,
                                 add_record_timestamp: ::String?,
                                 emit_consumer_lag_metrics: ::String?,
-                                starting_timestamp: ::Time?
+                                starting_timestamp: ::Time?,
+                                fanout_consumer_arn: ::String?
                               }?,
                               data_preview_options: {
                                 polling_time: ::Integer?,
@@ -1545,7 +1534,8 @@ module Aws
                                 role_session_name: ::String?,
                                 add_record_timestamp: ::String?,
                                 emit_consumer_lag_metrics: ::String?,
-                                starting_timestamp: ::Time?
+                                starting_timestamp: ::Time?,
+                                fanout_consumer_arn: ::String?
                               }?,
                               data_preview_options: {
                                 polling_time: ::Integer?,
@@ -1618,12 +1608,19 @@ module Aws
                             pii_detection: {
                               name: ::String,
                               inputs: Array[::String],
-                              pii_type: ("RowAudit" | "RowMasking" | "ColumnAudit" | "ColumnMasking"),
+                              pii_type: ("RowAudit" | "RowHashing" | "RowMasking" | "RowPartialMasking" | "ColumnAudit" | "ColumnHashing" | "ColumnMasking"),
                               entity_types_to_detect: Array[::String],
                               output_column_name: ::String?,
                               sample_fraction: ::Float?,
                               threshold_fraction: ::Float?,
-                              mask_value: ::String?
+                              mask_value: ::String?,
+                              redact_text: ::String?,
+                              redact_char: ::String?,
+                              match_pattern: ::String?,
+                              num_left_chars_to_exclude: ::Integer?,
+                              num_right_chars_to_exclude: ::Integer?,
+                              detection_parameters: ::String?,
+                              detection_sensitivity: ::String?
                             }?,
                             aggregate: {
                               name: ::String,
@@ -1712,6 +1709,28 @@ module Aws
                               database: ::String,
                               table: ::String
                             }?,
+                            route: {
+                              name: ::String,
+                              inputs: Array[::String],
+                              group_filters_list: Array[
+                                {
+                                  group_name: ::String,
+                                  filters: Array[
+                                    {
+                                      operation: ("EQ" | "LT" | "GT" | "LTE" | "GTE" | "REGEX" | "ISNULL"),
+                                      negated: bool?,
+                                      values: Array[
+                                        {
+                                          type: ("COLUMNEXTRACTED" | "CONSTANT"),
+                                          value: Array[::String]
+                                        },
+                                      ]
+                                    },
+                                  ],
+                                  logical_operator: ("AND" | "OR")
+                                },
+                              ]
+                            }?,
                             dynamic_transform: {
                               name: ::String,
                               transform_name: ::String,
@@ -1735,7 +1754,8 @@ module Aws
                                   columns: Array[
                                     {
                                       name: ::String,
-                                      type: ::String?
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
                                     },
                                   ]?
                                 },
@@ -1766,7 +1786,8 @@ module Aws
                                   columns: Array[
                                     {
                                       name: ::String,
-                                      type: ::String?
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
                                     },
                                   ]?
                                 },
@@ -1782,7 +1803,8 @@ module Aws
                                   columns: Array[
                                     {
                                       name: ::String,
-                                      type: ::String?
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
                                     },
                                   ]?
                                 },
@@ -1803,7 +1825,8 @@ module Aws
                                   columns: Array[
                                     {
                                       name: ::String,
-                                      type: ::String?
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
                                     },
                                   ]?
                                 },
@@ -1821,7 +1844,22 @@ module Aws
                               schema_change_policy: {
                                 enable_update_catalog: bool?,
                                 update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?
-                              }?
+                              }?,
+                              auto_data_quality: {
+                                is_enabled: bool?,
+                                evaluation_context: ::String?
+                              }?,
+                              output_schemas: Array[
+                                {
+                                  columns: Array[
+                                    {
+                                      name: ::String,
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
+                                    },
+                                  ]?
+                                },
+                              ]?
                             }?,
                             s3_hudi_direct_target: {
                               name: ::String,
@@ -1839,6 +1877,10 @@ module Aws
                                 update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
                                 table: ::String?,
                                 database: ::String?
+                              }?,
+                              auto_data_quality: {
+                                is_enabled: bool?,
+                                evaluation_context: ::String?
                               }?
                             }?,
                             direct_jdbc_source: {
@@ -1847,7 +1889,18 @@ module Aws
                               table: ::String,
                               connection_name: ::String,
                               connection_type: ("sqlserver" | "mysql" | "oracle" | "postgresql" | "redshift"),
-                              redshift_tmp_dir: ::String?
+                              redshift_tmp_dir: ::String?,
+                              output_schemas: Array[
+                                {
+                                  columns: Array[
+                                    {
+                                      name: ::String,
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
+                                    },
+                                  ]?
+                                },
+                              ]?
                             }?,
                             s3_catalog_delta_source: {
                               name: ::String,
@@ -1859,7 +1912,8 @@ module Aws
                                   columns: Array[
                                     {
                                       name: ::String,
-                                      type: ::String?
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
                                     },
                                   ]?
                                 },
@@ -1875,7 +1929,8 @@ module Aws
                                   columns: Array[
                                     {
                                       name: ::String,
-                                      type: ::String?
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
                                     },
                                   ]?
                                 },
@@ -1896,7 +1951,8 @@ module Aws
                                   columns: Array[
                                     {
                                       name: ::String,
-                                      type: ::String?
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
                                     },
                                   ]?
                                 },
@@ -1914,7 +1970,22 @@ module Aws
                               schema_change_policy: {
                                 enable_update_catalog: bool?,
                                 update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?
-                              }?
+                              }?,
+                              auto_data_quality: {
+                                is_enabled: bool?,
+                                evaluation_context: ::String?
+                              }?,
+                              output_schemas: Array[
+                                {
+                                  columns: Array[
+                                    {
+                                      name: ::String,
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
+                                    },
+                                  ]?
+                                },
+                              ]?
                             }?,
                             s3_delta_direct_target: {
                               name: ::String,
@@ -1932,6 +2003,10 @@ module Aws
                                 update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
                                 table: ::String?,
                                 database: ::String?
+                              }?,
+                              auto_data_quality: {
+                                is_enabled: bool?,
+                                evaluation_context: ::String?
                               }?
                             }?,
                             amazon_redshift_source: {
@@ -2090,7 +2165,7 @@ module Aws
                                 cloud_watch_metrics_enabled: bool?,
                                 results_publishing_enabled: bool?
                               }?,
-                              additional_options: Hash[("performanceTuning.caching" | "observations.scope"), ::String]?,
+                              additional_options: Hash[("performanceTuning.caching" | "observations.scope" | "compositeRuleEvaluation.method"), ::String]?,
                               stop_job_on_failure_options: {
                                 stop_job_on_failure_timing: ("Immediate" | "AfterDataLoad")?
                               }?
@@ -2168,7 +2243,8 @@ module Aws
                                   columns: Array[
                                     {
                                       name: ::String,
-                                      type: ::String?
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
                                     },
                                   ]?
                                 },
@@ -2230,7 +2306,8 @@ module Aws
                                   columns: Array[
                                     {
                                       name: ::String,
-                                      type: ::String?
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
                                     },
                                   ]?
                                 },
@@ -2241,6 +2318,175 @@ module Aws
                               connection_type: ::String,
                               data: Hash[::String, ::String],
                               inputs: Array[::String]?
+                            }?,
+                            s3_catalog_iceberg_source: {
+                              name: ::String,
+                              database: ::String,
+                              table: ::String,
+                              additional_iceberg_options: Hash[::String, ::String]?,
+                              output_schemas: Array[
+                                {
+                                  columns: Array[
+                                    {
+                                      name: ::String,
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
+                                    },
+                                  ]?
+                                },
+                              ]?
+                            }?,
+                            catalog_iceberg_source: {
+                              name: ::String,
+                              database: ::String,
+                              table: ::String,
+                              additional_iceberg_options: Hash[::String, ::String]?,
+                              output_schemas: Array[
+                                {
+                                  columns: Array[
+                                    {
+                                      name: ::String,
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
+                                    },
+                                  ]?
+                                },
+                              ]?
+                            }?,
+                            s3_iceberg_catalog_target: {
+                              name: ::String,
+                              inputs: Array[::String],
+                              partition_keys: Array[
+                                Array[::String],
+                              ]?,
+                              table: ::String,
+                              database: ::String,
+                              additional_options: Hash[::String, ::String]?,
+                              schema_change_policy: {
+                                enable_update_catalog: bool?,
+                                update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?
+                              }?,
+                              auto_data_quality: {
+                                is_enabled: bool?,
+                                evaluation_context: ::String?
+                              }?
+                            }?,
+                            s3_iceberg_direct_target: {
+                              name: ::String,
+                              inputs: Array[::String],
+                              partition_keys: Array[
+                                Array[::String],
+                              ]?,
+                              path: ::String,
+                              format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml"),
+                              additional_options: Hash[::String, ::String]?,
+                              schema_change_policy: {
+                                enable_update_catalog: bool?,
+                                update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
+                                table: ::String?,
+                                database: ::String?
+                              }?,
+                              auto_data_quality: {
+                                is_enabled: bool?,
+                                evaluation_context: ::String?
+                              }?,
+                              compression: ("gzip" | "lzo" | "uncompressed" | "snappy"),
+                              number_target_partitions: ::String?,
+                              output_schemas: Array[
+                                {
+                                  columns: Array[
+                                    {
+                                      name: ::String,
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
+                                    },
+                                  ]?
+                                },
+                              ]?
+                            }?,
+                            s3_excel_source: {
+                              name: ::String,
+                              paths: Array[::String],
+                              compression_type: ("snappy" | "lzo" | "gzip" | "brotli" | "lz4" | "uncompressed" | "none")?,
+                              exclusions: Array[::String]?,
+                              group_size: ::String?,
+                              group_files: ::String?,
+                              recurse: bool?,
+                              max_band: ::Integer?,
+                              max_files_in_band: ::Integer?,
+                              additional_options: {
+                                bounded_size: ::Integer?,
+                                bounded_files: ::Integer?,
+                                enable_sample_path: bool?,
+                                sample_path: ::String?
+                              }?,
+                              number_rows: ::Integer?,
+                              skip_footer: ::Integer?,
+                              output_schemas: Array[
+                                {
+                                  columns: Array[
+                                    {
+                                      name: ::String,
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
+                                    },
+                                  ]?
+                                },
+                              ]?
+                            }?,
+                            s3_hyper_direct_target: {
+                              name: ::String,
+                              inputs: Array[::String],
+                              format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml")?,
+                              partition_keys: Array[
+                                Array[::String],
+                              ]?,
+                              path: ::String,
+                              compression: ("uncompressed")?,
+                              schema_change_policy: {
+                                enable_update_catalog: bool?,
+                                update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
+                                table: ::String?,
+                                database: ::String?
+                              }?,
+                              auto_data_quality: {
+                                is_enabled: bool?,
+                                evaluation_context: ::String?
+                              }?,
+                              output_schemas: Array[
+                                {
+                                  columns: Array[
+                                    {
+                                      name: ::String,
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
+                                    },
+                                  ]?
+                                },
+                              ]?
+                            }?,
+                            dynamo_dbelt_connector_source: {
+                              name: ::String,
+                              connection_options: {
+                                dynamodb_export: ("ddb" | "s3")?,
+                                dynamodb_unnest_ddb_json: bool?,
+                                dynamodb_table_arn: ::String,
+                                dynamodb_s3_bucket: ::String?,
+                                dynamodb_s3_prefix: ::String?,
+                                dynamodb_s3_bucket_owner: ::String?,
+                                dynamodb_sts_role_arn: ::String?
+                              }?,
+                              output_schemas: Array[
+                                {
+                                  columns: Array[
+                                    {
+                                      name: ::String,
+                                      type: ::String?,
+                                      glue_studio_type: ::String?
+                                    },
+                                  ]?
+                                },
+                              ]?
                             }?
                           }],
                         ?execution_class: ("FLEX" | "STANDARD"),
@@ -6083,7 +6329,8 @@ module Aws
                                     columns: Array[
                                       {
                                         name: ::String,
-                                        type: ::String?
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
                                       },
                                     ]?
                                   },
@@ -6111,7 +6358,8 @@ module Aws
                                     columns: Array[
                                       {
                                         name: ::String,
-                                        type: ::String?
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
                                       },
                                     ]?
                                   },
@@ -6128,7 +6376,8 @@ module Aws
                                     columns: Array[
                                       {
                                         name: ::String,
-                                        type: ::String?
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
                                       },
                                     ]?
                                   },
@@ -6137,7 +6386,19 @@ module Aws
                               catalog_source: {
                                 name: ::String,
                                 database: ::String,
-                                table: ::String
+                                table: ::String,
+                                partition_predicate: ::String?,
+                                output_schemas: Array[
+                                  {
+                                    columns: Array[
+                                      {
+                                        name: ::String,
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
+                                      },
+                                    ]?
+                                  },
+                                ]?
                               }?,
                               redshift_source: {
                                 name: ::String,
@@ -6185,36 +6446,8 @@ module Aws
                                     columns: Array[
                                       {
                                         name: ::String,
-                                        type: ::String?
-                                      },
-                                    ]?
-                                  },
-                                ]?
-                              }?,
-                              s3_excel_source: {
-                                name: ::String,
-                                paths: Array[::String],
-                                compression_type: ("snappy" | "lzo" | "gzip" | "brotli" | "lz4" | "uncompressed" | "none")?,
-                                exclusions: Array[::String]?,
-                                group_size: ::String?,
-                                group_files: ::String?,
-                                recurse: bool?,
-                                max_band: ::Integer?,
-                                max_files_in_band: ::Integer?,
-                                additional_options: {
-                                  bounded_size: ::Integer?,
-                                  bounded_files: ::Integer?,
-                                  enable_sample_path: bool?,
-                                  sample_path: ::String?
-                                }?,
-                                number_rows: ::Integer?,
-                                skip_footer: ::Integer?,
-                                output_schemas: Array[
-                                  {
-                                    columns: Array[
-                                      {
-                                        name: ::String,
-                                        type: ::String?
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
                                       },
                                     ]?
                                   },
@@ -6243,7 +6476,8 @@ module Aws
                                     columns: Array[
                                       {
                                         name: ::String,
-                                        type: ::String?
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
                                       },
                                     ]?
                                   },
@@ -6270,7 +6504,8 @@ module Aws
                                     columns: Array[
                                       {
                                         name: ::String,
-                                        type: ::String?
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
                                       },
                                     ]?
                                   },
@@ -6284,7 +6519,12 @@ module Aws
                               dynamo_db_catalog_source: {
                                 name: ::String,
                                 database: ::String,
-                                table: ::String
+                                table: ::String,
+                                pitr_enabled: bool?,
+                                additional_options: {
+                                  dynamodb_export: ::String?,
+                                  dynamodb_unnest_ddb_json: bool?
+                                }?
                               }?,
                               jdbc_connector_target: {
                                 name: ::String,
@@ -6299,7 +6539,8 @@ module Aws
                                     columns: Array[
                                       {
                                         name: ::String,
-                                        type: ::String?
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
                                       },
                                     ]?
                                   },
@@ -6317,7 +6558,8 @@ module Aws
                                     columns: Array[
                                       {
                                         name: ::String,
-                                        type: ::String?
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
                                       },
                                     ]?
                                   },
@@ -6356,6 +6598,10 @@ module Aws
                                 schema_change_policy: {
                                   enable_update_catalog: bool?,
                                   update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?
+                                }?,
+                                auto_data_quality: {
+                                  is_enabled: bool?,
+                                  evaluation_context: ::String?
                                 }?
                               }?,
                               s3_glue_parquet_target: {
@@ -6372,21 +6618,10 @@ module Aws
                                   update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
                                   table: ::String?,
                                   database: ::String?
-                                }?
-                              }?,
-                              s3_hyper_direct_target: {
-                                name: ::String,
-                                inputs: Array[::String],
-                                partition_keys: Array[
-                                  Array[::String],
-                                ]?,
-                                path: ::String,
-                                compression: ("uncompressed")?,
-                                schema_change_policy: {
-                                  enable_update_catalog: bool?,
-                                  update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
-                                  table: ::String?,
-                                  database: ::String?
+                                }?,
+                                auto_data_quality: {
+                                  is_enabled: bool?,
+                                  evaluation_context: ::String?
                                 }?
                               }?,
                               s3_direct_target: {
@@ -6404,25 +6639,22 @@ module Aws
                                   update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
                                   table: ::String?,
                                   database: ::String?
-                                }?
-                              }?,
-                              s3_iceberg_direct_target: {
-                                name: ::String,
-                                inputs: Array[::String],
-                                partition_keys: Array[
-                                  Array[::String],
-                                ]?,
-                                path: ::String,
-                                format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml"),
-                                additional_options: Hash[::String, ::String]?,
-                                schema_change_policy: {
-                                  enable_update_catalog: bool?,
-                                  update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
-                                  table: ::String?,
-                                  database: ::String?
                                 }?,
-                                compression: ("gzip" | "lzo" | "uncompressed" | "snappy"),
-                                number_target_partitions: ::String?
+                                auto_data_quality: {
+                                  is_enabled: bool?,
+                                  evaluation_context: ::String?
+                                }?,
+                                output_schemas: Array[
+                                  {
+                                    columns: Array[
+                                      {
+                                        name: ::String,
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
+                                      },
+                                    ]?
+                                  },
+                                ]?
                               }?,
                               apply_mapping: {
                                 name: ::String,
@@ -6523,7 +6755,8 @@ module Aws
                                     columns: Array[
                                       {
                                         name: ::String,
-                                        type: ::String?
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
                                       },
                                     ]?
                                   },
@@ -6544,7 +6777,8 @@ module Aws
                                     columns: Array[
                                       {
                                         name: ::String,
-                                        type: ::String?
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
                                       },
                                     ]?
                                   },
@@ -6575,7 +6809,8 @@ module Aws
                                   role_session_name: ::String?,
                                   add_record_timestamp: ::String?,
                                   emit_consumer_lag_metrics: ::String?,
-                                  starting_timestamp: ::Time?
+                                  starting_timestamp: ::Time?,
+                                  fanout_consumer_arn: ::String?
                                 }?,
                                 data_preview_options: {
                                   polling_time: ::Integer?,
@@ -6639,7 +6874,8 @@ module Aws
                                   role_session_name: ::String?,
                                   add_record_timestamp: ::String?,
                                   emit_consumer_lag_metrics: ::String?,
-                                  starting_timestamp: ::Time?
+                                  starting_timestamp: ::Time?,
+                                  fanout_consumer_arn: ::String?
                                 }?,
                                 data_preview_options: {
                                   polling_time: ::Integer?,
@@ -6712,12 +6948,19 @@ module Aws
                               pii_detection: {
                                 name: ::String,
                                 inputs: Array[::String],
-                                pii_type: ("RowAudit" | "RowMasking" | "ColumnAudit" | "ColumnMasking"),
+                                pii_type: ("RowAudit" | "RowHashing" | "RowMasking" | "RowPartialMasking" | "ColumnAudit" | "ColumnHashing" | "ColumnMasking"),
                                 entity_types_to_detect: Array[::String],
                                 output_column_name: ::String?,
                                 sample_fraction: ::Float?,
                                 threshold_fraction: ::Float?,
-                                mask_value: ::String?
+                                mask_value: ::String?,
+                                redact_text: ::String?,
+                                redact_char: ::String?,
+                                match_pattern: ::String?,
+                                num_left_chars_to_exclude: ::Integer?,
+                                num_right_chars_to_exclude: ::Integer?,
+                                detection_parameters: ::String?,
+                                detection_sensitivity: ::String?
                               }?,
                               aggregate: {
                                 name: ::String,
@@ -6806,6 +7049,28 @@ module Aws
                                 database: ::String,
                                 table: ::String
                               }?,
+                              route: {
+                                name: ::String,
+                                inputs: Array[::String],
+                                group_filters_list: Array[
+                                  {
+                                    group_name: ::String,
+                                    filters: Array[
+                                      {
+                                        operation: ("EQ" | "LT" | "GT" | "LTE" | "GTE" | "REGEX" | "ISNULL"),
+                                        negated: bool?,
+                                        values: Array[
+                                          {
+                                            type: ("COLUMNEXTRACTED" | "CONSTANT"),
+                                            value: Array[::String]
+                                          },
+                                        ]
+                                      },
+                                    ],
+                                    logical_operator: ("AND" | "OR")
+                                  },
+                                ]
+                              }?,
                               dynamic_transform: {
                                 name: ::String,
                                 transform_name: ::String,
@@ -6829,7 +7094,8 @@ module Aws
                                     columns: Array[
                                       {
                                         name: ::String,
-                                        type: ::String?
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
                                       },
                                     ]?
                                   },
@@ -6860,7 +7126,8 @@ module Aws
                                     columns: Array[
                                       {
                                         name: ::String,
-                                        type: ::String?
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
                                       },
                                     ]?
                                   },
@@ -6876,7 +7143,8 @@ module Aws
                                     columns: Array[
                                       {
                                         name: ::String,
-                                        type: ::String?
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
                                       },
                                     ]?
                                   },
@@ -6897,7 +7165,8 @@ module Aws
                                     columns: Array[
                                       {
                                         name: ::String,
-                                        type: ::String?
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
                                       },
                                     ]?
                                   },
@@ -6915,7 +7184,22 @@ module Aws
                                 schema_change_policy: {
                                   enable_update_catalog: bool?,
                                   update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?
-                                }?
+                                }?,
+                                auto_data_quality: {
+                                  is_enabled: bool?,
+                                  evaluation_context: ::String?
+                                }?,
+                                output_schemas: Array[
+                                  {
+                                    columns: Array[
+                                      {
+                                        name: ::String,
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
+                                      },
+                                    ]?
+                                  },
+                                ]?
                               }?,
                               s3_hudi_direct_target: {
                                 name: ::String,
@@ -6933,6 +7217,10 @@ module Aws
                                   update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
                                   table: ::String?,
                                   database: ::String?
+                                }?,
+                                auto_data_quality: {
+                                  is_enabled: bool?,
+                                  evaluation_context: ::String?
                                 }?
                               }?,
                               direct_jdbc_source: {
@@ -6941,7 +7229,18 @@ module Aws
                                 table: ::String,
                                 connection_name: ::String,
                                 connection_type: ("sqlserver" | "mysql" | "oracle" | "postgresql" | "redshift"),
-                                redshift_tmp_dir: ::String?
+                                redshift_tmp_dir: ::String?,
+                                output_schemas: Array[
+                                  {
+                                    columns: Array[
+                                      {
+                                        name: ::String,
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
+                                      },
+                                    ]?
+                                  },
+                                ]?
                               }?,
                               s3_catalog_delta_source: {
                                 name: ::String,
@@ -6953,7 +7252,8 @@ module Aws
                                     columns: Array[
                                       {
                                         name: ::String,
-                                        type: ::String?
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
                                       },
                                     ]?
                                   },
@@ -6969,7 +7269,8 @@ module Aws
                                     columns: Array[
                                       {
                                         name: ::String,
-                                        type: ::String?
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
                                       },
                                     ]?
                                   },
@@ -6990,7 +7291,8 @@ module Aws
                                     columns: Array[
                                       {
                                         name: ::String,
-                                        type: ::String?
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
                                       },
                                     ]?
                                   },
@@ -7008,7 +7310,22 @@ module Aws
                                 schema_change_policy: {
                                   enable_update_catalog: bool?,
                                   update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?
-                                }?
+                                }?,
+                                auto_data_quality: {
+                                  is_enabled: bool?,
+                                  evaluation_context: ::String?
+                                }?,
+                                output_schemas: Array[
+                                  {
+                                    columns: Array[
+                                      {
+                                        name: ::String,
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
+                                      },
+                                    ]?
+                                  },
+                                ]?
                               }?,
                               s3_delta_direct_target: {
                                 name: ::String,
@@ -7026,6 +7343,10 @@ module Aws
                                   update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
                                   table: ::String?,
                                   database: ::String?
+                                }?,
+                                auto_data_quality: {
+                                  is_enabled: bool?,
+                                  evaluation_context: ::String?
                                 }?
                               }?,
                               amazon_redshift_source: {
@@ -7184,7 +7505,7 @@ module Aws
                                   cloud_watch_metrics_enabled: bool?,
                                   results_publishing_enabled: bool?
                                 }?,
-                                additional_options: Hash[("performanceTuning.caching" | "observations.scope"), ::String]?,
+                                additional_options: Hash[("performanceTuning.caching" | "observations.scope" | "compositeRuleEvaluation.method"), ::String]?,
                                 stop_job_on_failure_options: {
                                   stop_job_on_failure_timing: ("Immediate" | "AfterDataLoad")?
                                 }?
@@ -7262,7 +7583,8 @@ module Aws
                                     columns: Array[
                                       {
                                         name: ::String,
-                                        type: ::String?
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
                                       },
                                     ]?
                                   },
@@ -7324,7 +7646,8 @@ module Aws
                                     columns: Array[
                                       {
                                         name: ::String,
-                                        type: ::String?
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
                                       },
                                     ]?
                                   },
@@ -7335,6 +7658,175 @@ module Aws
                                 connection_type: ::String,
                                 data: Hash[::String, ::String],
                                 inputs: Array[::String]?
+                              }?,
+                              s3_catalog_iceberg_source: {
+                                name: ::String,
+                                database: ::String,
+                                table: ::String,
+                                additional_iceberg_options: Hash[::String, ::String]?,
+                                output_schemas: Array[
+                                  {
+                                    columns: Array[
+                                      {
+                                        name: ::String,
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
+                                      },
+                                    ]?
+                                  },
+                                ]?
+                              }?,
+                              catalog_iceberg_source: {
+                                name: ::String,
+                                database: ::String,
+                                table: ::String,
+                                additional_iceberg_options: Hash[::String, ::String]?,
+                                output_schemas: Array[
+                                  {
+                                    columns: Array[
+                                      {
+                                        name: ::String,
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
+                                      },
+                                    ]?
+                                  },
+                                ]?
+                              }?,
+                              s3_iceberg_catalog_target: {
+                                name: ::String,
+                                inputs: Array[::String],
+                                partition_keys: Array[
+                                  Array[::String],
+                                ]?,
+                                table: ::String,
+                                database: ::String,
+                                additional_options: Hash[::String, ::String]?,
+                                schema_change_policy: {
+                                  enable_update_catalog: bool?,
+                                  update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?
+                                }?,
+                                auto_data_quality: {
+                                  is_enabled: bool?,
+                                  evaluation_context: ::String?
+                                }?
+                              }?,
+                              s3_iceberg_direct_target: {
+                                name: ::String,
+                                inputs: Array[::String],
+                                partition_keys: Array[
+                                  Array[::String],
+                                ]?,
+                                path: ::String,
+                                format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml"),
+                                additional_options: Hash[::String, ::String]?,
+                                schema_change_policy: {
+                                  enable_update_catalog: bool?,
+                                  update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
+                                  table: ::String?,
+                                  database: ::String?
+                                }?,
+                                auto_data_quality: {
+                                  is_enabled: bool?,
+                                  evaluation_context: ::String?
+                                }?,
+                                compression: ("gzip" | "lzo" | "uncompressed" | "snappy"),
+                                number_target_partitions: ::String?,
+                                output_schemas: Array[
+                                  {
+                                    columns: Array[
+                                      {
+                                        name: ::String,
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
+                                      },
+                                    ]?
+                                  },
+                                ]?
+                              }?,
+                              s3_excel_source: {
+                                name: ::String,
+                                paths: Array[::String],
+                                compression_type: ("snappy" | "lzo" | "gzip" | "brotli" | "lz4" | "uncompressed" | "none")?,
+                                exclusions: Array[::String]?,
+                                group_size: ::String?,
+                                group_files: ::String?,
+                                recurse: bool?,
+                                max_band: ::Integer?,
+                                max_files_in_band: ::Integer?,
+                                additional_options: {
+                                  bounded_size: ::Integer?,
+                                  bounded_files: ::Integer?,
+                                  enable_sample_path: bool?,
+                                  sample_path: ::String?
+                                }?,
+                                number_rows: ::Integer?,
+                                skip_footer: ::Integer?,
+                                output_schemas: Array[
+                                  {
+                                    columns: Array[
+                                      {
+                                        name: ::String,
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
+                                      },
+                                    ]?
+                                  },
+                                ]?
+                              }?,
+                              s3_hyper_direct_target: {
+                                name: ::String,
+                                inputs: Array[::String],
+                                format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml")?,
+                                partition_keys: Array[
+                                  Array[::String],
+                                ]?,
+                                path: ::String,
+                                compression: ("uncompressed")?,
+                                schema_change_policy: {
+                                  enable_update_catalog: bool?,
+                                  update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
+                                  table: ::String?,
+                                  database: ::String?
+                                }?,
+                                auto_data_quality: {
+                                  is_enabled: bool?,
+                                  evaluation_context: ::String?
+                                }?,
+                                output_schemas: Array[
+                                  {
+                                    columns: Array[
+                                      {
+                                        name: ::String,
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
+                                      },
+                                    ]?
+                                  },
+                                ]?
+                              }?,
+                              dynamo_dbelt_connector_source: {
+                                name: ::String,
+                                connection_options: {
+                                  dynamodb_export: ("ddb" | "s3")?,
+                                  dynamodb_unnest_ddb_json: bool?,
+                                  dynamodb_table_arn: ::String,
+                                  dynamodb_s3_bucket: ::String?,
+                                  dynamodb_s3_prefix: ::String?,
+                                  dynamodb_s3_bucket_owner: ::String?,
+                                  dynamodb_sts_role_arn: ::String?
+                                }?,
+                                output_schemas: Array[
+                                  {
+                                    columns: Array[
+                                      {
+                                        name: ::String,
+                                        type: ::String?,
+                                        glue_studio_type: ::String?
+                                      },
+                                    ]?
+                                  },
+                                ]?
                               }?
                             }]?,
                           execution_class: ("FLEX" | "STANDARD")?,

@@ -14,6 +14,7 @@ module Aws::DirectoryService
 
     include Seahorse::Model
 
+    ADAssessmentLimitExceededException = Shapes::StructureShape.new(name: 'ADAssessmentLimitExceededException')
     AcceptSharedDirectoryRequest = Shapes::StructureShape.new(name: 'AcceptSharedDirectoryRequest')
     AcceptSharedDirectoryResult = Shapes::StructureShape.new(name: 'AcceptSharedDirectoryResult')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
@@ -27,6 +28,30 @@ module Aws::DirectoryService
     AddedDateTime = Shapes::TimestampShape.new(name: 'AddedDateTime')
     AdditionalRegions = Shapes::ListShape.new(name: 'AdditionalRegions')
     AliasName = Shapes::StringShape.new(name: 'AliasName')
+    Assessment = Shapes::StructureShape.new(name: 'Assessment')
+    AssessmentConfiguration = Shapes::StructureShape.new(name: 'AssessmentConfiguration')
+    AssessmentId = Shapes::StringShape.new(name: 'AssessmentId')
+    AssessmentInstanceId = Shapes::StringShape.new(name: 'AssessmentInstanceId')
+    AssessmentInstanceIds = Shapes::ListShape.new(name: 'AssessmentInstanceIds')
+    AssessmentLimit = Shapes::IntegerShape.new(name: 'AssessmentLimit')
+    AssessmentReport = Shapes::StructureShape.new(name: 'AssessmentReport')
+    AssessmentReportType = Shapes::StringShape.new(name: 'AssessmentReportType')
+    AssessmentReports = Shapes::ListShape.new(name: 'AssessmentReports')
+    AssessmentStartTime = Shapes::TimestampShape.new(name: 'AssessmentStartTime')
+    AssessmentStatus = Shapes::StringShape.new(name: 'AssessmentStatus')
+    AssessmentStatusCode = Shapes::StringShape.new(name: 'AssessmentStatusCode')
+    AssessmentStatusReason = Shapes::StringShape.new(name: 'AssessmentStatusReason')
+    AssessmentSummary = Shapes::StructureShape.new(name: 'AssessmentSummary')
+    AssessmentValidation = Shapes::StructureShape.new(name: 'AssessmentValidation')
+    AssessmentValidationCategory = Shapes::StringShape.new(name: 'AssessmentValidationCategory')
+    AssessmentValidationName = Shapes::StringShape.new(name: 'AssessmentValidationName')
+    AssessmentValidationStatus = Shapes::StringShape.new(name: 'AssessmentValidationStatus')
+    AssessmentValidationStatusCode = Shapes::StringShape.new(name: 'AssessmentValidationStatusCode')
+    AssessmentValidationStatusReason = Shapes::StringShape.new(name: 'AssessmentValidationStatusReason')
+    AssessmentValidationTimeStamp = Shapes::TimestampShape.new(name: 'AssessmentValidationTimeStamp')
+    AssessmentValidations = Shapes::ListShape.new(name: 'AssessmentValidations')
+    AssessmentVersion = Shapes::StringShape.new(name: 'AssessmentVersion')
+    Assessments = Shapes::ListShape.new(name: 'Assessments')
     Attribute = Shapes::StructureShape.new(name: 'Attribute')
     AttributeName = Shapes::StringShape.new(name: 'AttributeName')
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
@@ -77,6 +102,8 @@ module Aws::DirectoryService
     CreateConditionalForwarderResult = Shapes::StructureShape.new(name: 'CreateConditionalForwarderResult')
     CreateDirectoryRequest = Shapes::StructureShape.new(name: 'CreateDirectoryRequest')
     CreateDirectoryResult = Shapes::StructureShape.new(name: 'CreateDirectoryResult')
+    CreateHybridADRequest = Shapes::StructureShape.new(name: 'CreateHybridADRequest')
+    CreateHybridADResult = Shapes::StructureShape.new(name: 'CreateHybridADResult')
     CreateLogSubscriptionRequest = Shapes::StructureShape.new(name: 'CreateLogSubscriptionRequest')
     CreateLogSubscriptionResult = Shapes::StructureShape.new(name: 'CreateLogSubscriptionResult')
     CreateMicrosoftADRequest = Shapes::StructureShape.new(name: 'CreateMicrosoftADRequest')
@@ -88,9 +115,12 @@ module Aws::DirectoryService
     CreateTrustRequest = Shapes::StructureShape.new(name: 'CreateTrustRequest')
     CreateTrustResult = Shapes::StructureShape.new(name: 'CreateTrustResult')
     CreatedDateTime = Shapes::TimestampShape.new(name: 'CreatedDateTime')
+    CustomerDnsIps = Shapes::ListShape.new(name: 'CustomerDnsIps')
     CustomerId = Shapes::StringShape.new(name: 'CustomerId')
     CustomerUserName = Shapes::StringShape.new(name: 'CustomerUserName')
     DataAccessStatus = Shapes::StringShape.new(name: 'DataAccessStatus')
+    DeleteADAssessmentRequest = Shapes::StructureShape.new(name: 'DeleteADAssessmentRequest')
+    DeleteADAssessmentResult = Shapes::StructureShape.new(name: 'DeleteADAssessmentResult')
     DeleteAssociatedConditionalForwarder = Shapes::BooleanShape.new(name: 'DeleteAssociatedConditionalForwarder')
     DeleteConditionalForwarderRequest = Shapes::StructureShape.new(name: 'DeleteConditionalForwarderRequest')
     DeleteConditionalForwarderResult = Shapes::StructureShape.new(name: 'DeleteConditionalForwarderResult')
@@ -106,6 +136,8 @@ module Aws::DirectoryService
     DeregisterCertificateResult = Shapes::StructureShape.new(name: 'DeregisterCertificateResult')
     DeregisterEventTopicRequest = Shapes::StructureShape.new(name: 'DeregisterEventTopicRequest')
     DeregisterEventTopicResult = Shapes::StructureShape.new(name: 'DeregisterEventTopicResult')
+    DescribeADAssessmentRequest = Shapes::StructureShape.new(name: 'DescribeADAssessmentRequest')
+    DescribeADAssessmentResult = Shapes::StructureShape.new(name: 'DescribeADAssessmentResult')
     DescribeCertificateRequest = Shapes::StructureShape.new(name: 'DescribeCertificateRequest')
     DescribeCertificateResult = Shapes::StructureShape.new(name: 'DescribeCertificateResult')
     DescribeClientAuthenticationSettingsRequest = Shapes::StructureShape.new(name: 'DescribeClientAuthenticationSettingsRequest')
@@ -120,6 +152,8 @@ module Aws::DirectoryService
     DescribeDomainControllersResult = Shapes::StructureShape.new(name: 'DescribeDomainControllersResult')
     DescribeEventTopicsRequest = Shapes::StructureShape.new(name: 'DescribeEventTopicsRequest')
     DescribeEventTopicsResult = Shapes::StructureShape.new(name: 'DescribeEventTopicsResult')
+    DescribeHybridADUpdateRequest = Shapes::StructureShape.new(name: 'DescribeHybridADUpdateRequest')
+    DescribeHybridADUpdateResult = Shapes::StructureShape.new(name: 'DescribeHybridADUpdateResult')
     DescribeLDAPSSettingsRequest = Shapes::StructureShape.new(name: 'DescribeLDAPSSettingsRequest')
     DescribeLDAPSSettingsResult = Shapes::StructureShape.new(name: 'DescribeLDAPSSettingsResult')
     DescribeRegionsRequest = Shapes::StructureShape.new(name: 'DescribeRegionsRequest')
@@ -206,6 +240,14 @@ module Aws::DirectoryService
     GetDirectoryLimitsResult = Shapes::StructureShape.new(name: 'GetDirectoryLimitsResult')
     GetSnapshotLimitsRequest = Shapes::StructureShape.new(name: 'GetSnapshotLimitsRequest')
     GetSnapshotLimitsResult = Shapes::StructureShape.new(name: 'GetSnapshotLimitsResult')
+    HybridAdministratorAccountUpdate = Shapes::StructureShape.new(name: 'HybridAdministratorAccountUpdate')
+    HybridCustomerInstancesSettings = Shapes::StructureShape.new(name: 'HybridCustomerInstancesSettings')
+    HybridSettingsDescription = Shapes::StructureShape.new(name: 'HybridSettingsDescription')
+    HybridUpdateActivities = Shapes::StructureShape.new(name: 'HybridUpdateActivities')
+    HybridUpdateInfoEntries = Shapes::ListShape.new(name: 'HybridUpdateInfoEntries')
+    HybridUpdateInfoEntry = Shapes::StructureShape.new(name: 'HybridUpdateInfoEntry')
+    HybridUpdateType = Shapes::StringShape.new(name: 'HybridUpdateType')
+    HybridUpdateValue = Shapes::StructureShape.new(name: 'HybridUpdateValue')
     IncompatibleSettingsException = Shapes::StructureShape.new(name: 'IncompatibleSettingsException')
     InitiatedBy = Shapes::StringShape.new(name: 'InitiatedBy')
     InsufficientPermissionsException = Shapes::StructureShape.new(name: 'InsufficientPermissionsException')
@@ -230,10 +272,13 @@ module Aws::DirectoryService
     LDAPSStatus = Shapes::StringShape.new(name: 'LDAPSStatus')
     LDAPSStatusReason = Shapes::StringShape.new(name: 'LDAPSStatusReason')
     LDAPSType = Shapes::StringShape.new(name: 'LDAPSType')
+    LastUpdateDateTime = Shapes::TimestampShape.new(name: 'LastUpdateDateTime')
     LastUpdatedDateTime = Shapes::TimestampShape.new(name: 'LastUpdatedDateTime')
     LaunchTime = Shapes::TimestampShape.new(name: 'LaunchTime')
     LdifContent = Shapes::StringShape.new(name: 'LdifContent')
     Limit = Shapes::IntegerShape.new(name: 'Limit')
+    ListADAssessmentsRequest = Shapes::StructureShape.new(name: 'ListADAssessmentsRequest')
+    ListADAssessmentsResult = Shapes::StructureShape.new(name: 'ListADAssessmentsResult')
     ListCertificatesRequest = Shapes::StructureShape.new(name: 'ListCertificatesRequest')
     ListCertificatesResult = Shapes::StructureShape.new(name: 'ListCertificatesResult')
     ListIpRoutesRequest = Shapes::StructureShape.new(name: 'ListIpRoutesRequest')
@@ -300,7 +345,9 @@ module Aws::DirectoryService
     SchemaExtensionStatus = Shapes::StringShape.new(name: 'SchemaExtensionStatus')
     SchemaExtensionStatusReason = Shapes::StringShape.new(name: 'SchemaExtensionStatusReason')
     SchemaExtensionsInfo = Shapes::ListShape.new(name: 'SchemaExtensionsInfo')
+    SecretArn = Shapes::StringShape.new(name: 'SecretArn')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
+    SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SelectiveAuth = Shapes::StringShape.new(name: 'SelectiveAuth')
     Server = Shapes::StringShape.new(name: 'Server')
     Servers = Shapes::ListShape.new(name: 'Servers')
@@ -328,6 +375,8 @@ module Aws::DirectoryService
     Snapshots = Shapes::ListShape.new(name: 'Snapshots')
     SsoEnabled = Shapes::BooleanShape.new(name: 'SsoEnabled')
     StageReason = Shapes::StringShape.new(name: 'StageReason')
+    StartADAssessmentRequest = Shapes::StructureShape.new(name: 'StartADAssessmentRequest')
+    StartADAssessmentResult = Shapes::StructureShape.new(name: 'StartADAssessmentResult')
     StartDateTime = Shapes::TimestampShape.new(name: 'StartDateTime')
     StartSchemaExtensionRequest = Shapes::StructureShape.new(name: 'StartSchemaExtensionRequest')
     StartSchemaExtensionResult = Shapes::StructureShape.new(name: 'StartSchemaExtensionResult')
@@ -367,6 +416,8 @@ module Aws::DirectoryService
     UpdateConditionalForwarderResult = Shapes::StructureShape.new(name: 'UpdateConditionalForwarderResult')
     UpdateDirectorySetupRequest = Shapes::StructureShape.new(name: 'UpdateDirectorySetupRequest')
     UpdateDirectorySetupResult = Shapes::StructureShape.new(name: 'UpdateDirectorySetupResult')
+    UpdateHybridADRequest = Shapes::StructureShape.new(name: 'UpdateHybridADRequest')
+    UpdateHybridADResult = Shapes::StructureShape.new(name: 'UpdateHybridADResult')
     UpdateInfoEntry = Shapes::StructureShape.new(name: 'UpdateInfoEntry')
     UpdateNumberOfDomainControllersRequest = Shapes::StructureShape.new(name: 'UpdateNumberOfDomainControllersRequest')
     UpdateNumberOfDomainControllersResult = Shapes::StructureShape.new(name: 'UpdateNumberOfDomainControllersResult')
@@ -388,6 +439,10 @@ module Aws::DirectoryService
     VerifyTrustRequest = Shapes::StructureShape.new(name: 'VerifyTrustRequest')
     VerifyTrustResult = Shapes::StructureShape.new(name: 'VerifyTrustResult')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
+
+    ADAssessmentLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ADAssessmentLimitExceededException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    ADAssessmentLimitExceededException.struct_class = Types::ADAssessmentLimitExceededException
 
     AcceptSharedDirectoryRequest.add_member(:shared_directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "SharedDirectoryId"))
     AcceptSharedDirectoryRequest.struct_class = Types::AcceptSharedDirectoryRequest
@@ -420,6 +475,61 @@ module Aws::DirectoryService
     AddTagsToResourceResult.struct_class = Types::AddTagsToResourceResult
 
     AdditionalRegions.member = Shapes::ShapeRef.new(shape: RegionName)
+
+    Assessment.add_member(:assessment_id, Shapes::ShapeRef.new(shape: AssessmentId, location_name: "AssessmentId"))
+    Assessment.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    Assessment.add_member(:dns_name, Shapes::ShapeRef.new(shape: DirectoryName, location_name: "DnsName"))
+    Assessment.add_member(:start_time, Shapes::ShapeRef.new(shape: AssessmentStartTime, location_name: "StartTime"))
+    Assessment.add_member(:last_update_date_time, Shapes::ShapeRef.new(shape: LastUpdateDateTime, location_name: "LastUpdateDateTime"))
+    Assessment.add_member(:status, Shapes::ShapeRef.new(shape: AssessmentStatus, location_name: "Status"))
+    Assessment.add_member(:status_code, Shapes::ShapeRef.new(shape: AssessmentStatusCode, location_name: "StatusCode"))
+    Assessment.add_member(:status_reason, Shapes::ShapeRef.new(shape: AssessmentStatusReason, location_name: "StatusReason"))
+    Assessment.add_member(:customer_dns_ips, Shapes::ShapeRef.new(shape: CustomerDnsIps, location_name: "CustomerDnsIps"))
+    Assessment.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
+    Assessment.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
+    Assessment.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
+    Assessment.add_member(:self_managed_instance_ids, Shapes::ShapeRef.new(shape: AssessmentInstanceIds, location_name: "SelfManagedInstanceIds"))
+    Assessment.add_member(:report_type, Shapes::ShapeRef.new(shape: AssessmentReportType, location_name: "ReportType"))
+    Assessment.add_member(:version, Shapes::ShapeRef.new(shape: AssessmentVersion, location_name: "Version"))
+    Assessment.struct_class = Types::Assessment
+
+    AssessmentConfiguration.add_member(:customer_dns_ips, Shapes::ShapeRef.new(shape: CustomerDnsIps, required: true, location_name: "CustomerDnsIps"))
+    AssessmentConfiguration.add_member(:dns_name, Shapes::ShapeRef.new(shape: DirectoryName, required: true, location_name: "DnsName"))
+    AssessmentConfiguration.add_member(:vpc_settings, Shapes::ShapeRef.new(shape: DirectoryVpcSettings, required: true, location_name: "VpcSettings"))
+    AssessmentConfiguration.add_member(:instance_ids, Shapes::ShapeRef.new(shape: AssessmentInstanceIds, required: true, location_name: "InstanceIds"))
+    AssessmentConfiguration.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
+    AssessmentConfiguration.struct_class = Types::AssessmentConfiguration
+
+    AssessmentInstanceIds.member = Shapes::ShapeRef.new(shape: AssessmentInstanceId)
+
+    AssessmentReport.add_member(:domain_controller_ip, Shapes::ShapeRef.new(shape: IpAddr, location_name: "DomainControllerIp"))
+    AssessmentReport.add_member(:validations, Shapes::ShapeRef.new(shape: AssessmentValidations, location_name: "Validations"))
+    AssessmentReport.struct_class = Types::AssessmentReport
+
+    AssessmentReports.member = Shapes::ShapeRef.new(shape: AssessmentReport)
+
+    AssessmentSummary.add_member(:assessment_id, Shapes::ShapeRef.new(shape: AssessmentId, location_name: "AssessmentId"))
+    AssessmentSummary.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    AssessmentSummary.add_member(:dns_name, Shapes::ShapeRef.new(shape: DirectoryName, location_name: "DnsName"))
+    AssessmentSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: AssessmentStartTime, location_name: "StartTime"))
+    AssessmentSummary.add_member(:last_update_date_time, Shapes::ShapeRef.new(shape: LastUpdateDateTime, location_name: "LastUpdateDateTime"))
+    AssessmentSummary.add_member(:status, Shapes::ShapeRef.new(shape: AssessmentStatus, location_name: "Status"))
+    AssessmentSummary.add_member(:customer_dns_ips, Shapes::ShapeRef.new(shape: CustomerDnsIps, location_name: "CustomerDnsIps"))
+    AssessmentSummary.add_member(:report_type, Shapes::ShapeRef.new(shape: AssessmentReportType, location_name: "ReportType"))
+    AssessmentSummary.struct_class = Types::AssessmentSummary
+
+    AssessmentValidation.add_member(:category, Shapes::ShapeRef.new(shape: AssessmentValidationCategory, location_name: "Category"))
+    AssessmentValidation.add_member(:name, Shapes::ShapeRef.new(shape: AssessmentValidationName, location_name: "Name"))
+    AssessmentValidation.add_member(:status, Shapes::ShapeRef.new(shape: AssessmentValidationStatus, location_name: "Status"))
+    AssessmentValidation.add_member(:status_code, Shapes::ShapeRef.new(shape: AssessmentValidationStatusCode, location_name: "StatusCode"))
+    AssessmentValidation.add_member(:status_reason, Shapes::ShapeRef.new(shape: AssessmentValidationStatusReason, location_name: "StatusReason"))
+    AssessmentValidation.add_member(:start_time, Shapes::ShapeRef.new(shape: AssessmentValidationTimeStamp, location_name: "StartTime"))
+    AssessmentValidation.add_member(:last_update_date_time, Shapes::ShapeRef.new(shape: AssessmentValidationTimeStamp, location_name: "LastUpdateDateTime"))
+    AssessmentValidation.struct_class = Types::AssessmentValidation
+
+    AssessmentValidations.member = Shapes::ShapeRef.new(shape: AssessmentValidation)
+
+    Assessments.member = Shapes::ShapeRef.new(shape: AssessmentSummary)
 
     Attribute.add_member(:name, Shapes::ShapeRef.new(shape: AttributeName, location_name: "Name"))
     Attribute.add_member(:value, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "Value"))
@@ -551,6 +661,14 @@ module Aws::DirectoryService
     CreateDirectoryResult.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     CreateDirectoryResult.struct_class = Types::CreateDirectoryResult
 
+    CreateHybridADRequest.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
+    CreateHybridADRequest.add_member(:assessment_id, Shapes::ShapeRef.new(shape: AssessmentId, required: true, location_name: "AssessmentId"))
+    CreateHybridADRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateHybridADRequest.struct_class = Types::CreateHybridADRequest
+
+    CreateHybridADResult.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    CreateHybridADResult.struct_class = Types::CreateHybridADResult
+
     CreateLogSubscriptionRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     CreateLogSubscriptionRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "LogGroupName"))
     CreateLogSubscriptionRequest.struct_class = Types::CreateLogSubscriptionRequest
@@ -587,6 +705,14 @@ module Aws::DirectoryService
 
     CreateTrustResult.add_member(:trust_id, Shapes::ShapeRef.new(shape: TrustId, location_name: "TrustId"))
     CreateTrustResult.struct_class = Types::CreateTrustResult
+
+    CustomerDnsIps.member = Shapes::ShapeRef.new(shape: IpAddr)
+
+    DeleteADAssessmentRequest.add_member(:assessment_id, Shapes::ShapeRef.new(shape: AssessmentId, required: true, location_name: "AssessmentId"))
+    DeleteADAssessmentRequest.struct_class = Types::DeleteADAssessmentRequest
+
+    DeleteADAssessmentResult.add_member(:assessment_id, Shapes::ShapeRef.new(shape: AssessmentId, location_name: "AssessmentId"))
+    DeleteADAssessmentResult.struct_class = Types::DeleteADAssessmentResult
 
     DeleteConditionalForwarderRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     DeleteConditionalForwarderRequest.add_member(:remote_domain_name, Shapes::ShapeRef.new(shape: RemoteDomainName, required: true, location_name: "RemoteDomainName"))
@@ -629,6 +755,13 @@ module Aws::DirectoryService
     DeregisterEventTopicRequest.struct_class = Types::DeregisterEventTopicRequest
 
     DeregisterEventTopicResult.struct_class = Types::DeregisterEventTopicResult
+
+    DescribeADAssessmentRequest.add_member(:assessment_id, Shapes::ShapeRef.new(shape: AssessmentId, required: true, location_name: "AssessmentId"))
+    DescribeADAssessmentRequest.struct_class = Types::DescribeADAssessmentRequest
+
+    DescribeADAssessmentResult.add_member(:assessment, Shapes::ShapeRef.new(shape: Assessment, location_name: "Assessment"))
+    DescribeADAssessmentResult.add_member(:assessment_reports, Shapes::ShapeRef.new(shape: AssessmentReports, location_name: "AssessmentReports"))
+    DescribeADAssessmentResult.struct_class = Types::DescribeADAssessmentResult
 
     DescribeCertificateRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     DescribeCertificateRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location_name: "CertificateId"))
@@ -685,6 +818,15 @@ module Aws::DirectoryService
 
     DescribeEventTopicsResult.add_member(:event_topics, Shapes::ShapeRef.new(shape: EventTopics, location_name: "EventTopics"))
     DescribeEventTopicsResult.struct_class = Types::DescribeEventTopicsResult
+
+    DescribeHybridADUpdateRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    DescribeHybridADUpdateRequest.add_member(:update_type, Shapes::ShapeRef.new(shape: HybridUpdateType, location_name: "UpdateType"))
+    DescribeHybridADUpdateRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeHybridADUpdateRequest.struct_class = Types::DescribeHybridADUpdateRequest
+
+    DescribeHybridADUpdateResult.add_member(:update_activities, Shapes::ShapeRef.new(shape: HybridUpdateActivities, location_name: "UpdateActivities"))
+    DescribeHybridADUpdateResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeHybridADUpdateResult.struct_class = Types::DescribeHybridADUpdateResult
 
     DescribeLDAPSSettingsRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     DescribeLDAPSSettingsRequest.add_member(:type, Shapes::ShapeRef.new(shape: LDAPSType, location_name: "Type"))
@@ -806,6 +948,7 @@ module Aws::DirectoryService
     DirectoryDescription.add_member(:owner_directory_description, Shapes::ShapeRef.new(shape: OwnerDirectoryDescription, location_name: "OwnerDirectoryDescription"))
     DirectoryDescription.add_member(:regions_info, Shapes::ShapeRef.new(shape: RegionsInfo, location_name: "RegionsInfo"))
     DirectoryDescription.add_member(:os_version, Shapes::ShapeRef.new(shape: OSVersion, location_name: "OsVersion"))
+    DirectoryDescription.add_member(:hybrid_settings, Shapes::ShapeRef.new(shape: HybridSettingsDescription, location_name: "HybridSettings"))
     DirectoryDescription.struct_class = Types::DirectoryDescription
 
     DirectoryDescriptions.member = Shapes::ShapeRef.new(shape: DirectoryDescription)
@@ -962,6 +1105,37 @@ module Aws::DirectoryService
     GetSnapshotLimitsResult.add_member(:snapshot_limits, Shapes::ShapeRef.new(shape: SnapshotLimits, location_name: "SnapshotLimits"))
     GetSnapshotLimitsResult.struct_class = Types::GetSnapshotLimitsResult
 
+    HybridAdministratorAccountUpdate.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
+    HybridAdministratorAccountUpdate.struct_class = Types::HybridAdministratorAccountUpdate
+
+    HybridCustomerInstancesSettings.add_member(:customer_dns_ips, Shapes::ShapeRef.new(shape: CustomerDnsIps, required: true, location_name: "CustomerDnsIps"))
+    HybridCustomerInstancesSettings.add_member(:instance_ids, Shapes::ShapeRef.new(shape: AssessmentInstanceIds, required: true, location_name: "InstanceIds"))
+    HybridCustomerInstancesSettings.struct_class = Types::HybridCustomerInstancesSettings
+
+    HybridSettingsDescription.add_member(:self_managed_dns_ip_addrs, Shapes::ShapeRef.new(shape: IpAddrs, location_name: "SelfManagedDnsIpAddrs"))
+    HybridSettingsDescription.add_member(:self_managed_instance_ids, Shapes::ShapeRef.new(shape: AssessmentInstanceIds, location_name: "SelfManagedInstanceIds"))
+    HybridSettingsDescription.struct_class = Types::HybridSettingsDescription
+
+    HybridUpdateActivities.add_member(:self_managed_instances, Shapes::ShapeRef.new(shape: HybridUpdateInfoEntries, location_name: "SelfManagedInstances"))
+    HybridUpdateActivities.add_member(:hybrid_administrator_account, Shapes::ShapeRef.new(shape: HybridUpdateInfoEntries, location_name: "HybridAdministratorAccount"))
+    HybridUpdateActivities.struct_class = Types::HybridUpdateActivities
+
+    HybridUpdateInfoEntries.member = Shapes::ShapeRef.new(shape: HybridUpdateInfoEntry)
+
+    HybridUpdateInfoEntry.add_member(:status, Shapes::ShapeRef.new(shape: UpdateStatus, location_name: "Status"))
+    HybridUpdateInfoEntry.add_member(:status_reason, Shapes::ShapeRef.new(shape: UpdateStatusReason, location_name: "StatusReason"))
+    HybridUpdateInfoEntry.add_member(:initiated_by, Shapes::ShapeRef.new(shape: InitiatedBy, location_name: "InitiatedBy"))
+    HybridUpdateInfoEntry.add_member(:new_value, Shapes::ShapeRef.new(shape: HybridUpdateValue, location_name: "NewValue"))
+    HybridUpdateInfoEntry.add_member(:previous_value, Shapes::ShapeRef.new(shape: HybridUpdateValue, location_name: "PreviousValue"))
+    HybridUpdateInfoEntry.add_member(:start_time, Shapes::ShapeRef.new(shape: StartDateTime, location_name: "StartTime"))
+    HybridUpdateInfoEntry.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
+    HybridUpdateInfoEntry.add_member(:assessment_id, Shapes::ShapeRef.new(shape: AssessmentId, location_name: "AssessmentId"))
+    HybridUpdateInfoEntry.struct_class = Types::HybridUpdateInfoEntry
+
+    HybridUpdateValue.add_member(:instance_ids, Shapes::ShapeRef.new(shape: AssessmentInstanceIds, location_name: "InstanceIds"))
+    HybridUpdateValue.add_member(:dns_ips, Shapes::ShapeRef.new(shape: CustomerDnsIps, location_name: "DnsIps"))
+    HybridUpdateValue.struct_class = Types::HybridUpdateValue
+
     IncompatibleSettingsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     IncompatibleSettingsException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
     IncompatibleSettingsException.struct_class = Types::IncompatibleSettingsException
@@ -1026,6 +1200,15 @@ module Aws::DirectoryService
     LDAPSSettingInfo.struct_class = Types::LDAPSSettingInfo
 
     LDAPSSettingsInfo.member = Shapes::ShapeRef.new(shape: LDAPSSettingInfo)
+
+    ListADAssessmentsRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    ListADAssessmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListADAssessmentsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: AssessmentLimit, location_name: "Limit"))
+    ListADAssessmentsRequest.struct_class = Types::ListADAssessmentsRequest
+
+    ListADAssessmentsResult.add_member(:assessments, Shapes::ShapeRef.new(shape: Assessments, location_name: "Assessments"))
+    ListADAssessmentsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListADAssessmentsResult.struct_class = Types::ListADAssessmentsResult
 
     ListCertificatesRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     ListCertificatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -1192,6 +1375,8 @@ module Aws::DirectoryService
 
     SchemaExtensionsInfo.member = Shapes::ShapeRef.new(shape: SchemaExtensionInfo)
 
+    SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
+
     Servers.member = Shapes::ShapeRef.new(shape: Server)
 
     ServiceException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
@@ -1270,6 +1455,13 @@ module Aws::DirectoryService
 
     Snapshots.member = Shapes::ShapeRef.new(shape: Snapshot)
 
+    StartADAssessmentRequest.add_member(:assessment_configuration, Shapes::ShapeRef.new(shape: AssessmentConfiguration, location_name: "AssessmentConfiguration"))
+    StartADAssessmentRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    StartADAssessmentRequest.struct_class = Types::StartADAssessmentRequest
+
+    StartADAssessmentResult.add_member(:assessment_id, Shapes::ShapeRef.new(shape: AssessmentId, location_name: "AssessmentId"))
+    StartADAssessmentResult.struct_class = Types::StartADAssessmentResult
+
     StartSchemaExtensionRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     StartSchemaExtensionRequest.add_member(:create_snapshot_before_schema_extension, Shapes::ShapeRef.new(shape: CreateSnapshotBeforeSchemaExtension, required: true, location_name: "CreateSnapshotBeforeSchemaExtension"))
     StartSchemaExtensionRequest.add_member(:ldif_content, Shapes::ShapeRef.new(shape: LdifContent, required: true, location_name: "LdifContent"))
@@ -1347,6 +1539,15 @@ module Aws::DirectoryService
     UpdateDirectorySetupRequest.struct_class = Types::UpdateDirectorySetupRequest
 
     UpdateDirectorySetupResult.struct_class = Types::UpdateDirectorySetupResult
+
+    UpdateHybridADRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    UpdateHybridADRequest.add_member(:hybrid_administrator_account_update, Shapes::ShapeRef.new(shape: HybridAdministratorAccountUpdate, location_name: "HybridAdministratorAccountUpdate"))
+    UpdateHybridADRequest.add_member(:self_managed_instances_settings, Shapes::ShapeRef.new(shape: HybridCustomerInstancesSettings, location_name: "SelfManagedInstancesSettings"))
+    UpdateHybridADRequest.struct_class = Types::UpdateHybridADRequest
+
+    UpdateHybridADResult.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    UpdateHybridADResult.add_member(:assessment_id, Shapes::ShapeRef.new(shape: AssessmentId, location_name: "AssessmentId"))
+    UpdateHybridADResult.struct_class = Types::UpdateHybridADResult
 
     UpdateInfoEntry.add_member(:region, Shapes::ShapeRef.new(shape: RegionName, location_name: "Region"))
     UpdateInfoEntry.add_member(:status, Shapes::ShapeRef.new(shape: UpdateStatus, location_name: "Status"))
@@ -1557,6 +1758,21 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
+      api.add_operation(:create_hybrid_ad, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateHybridAD"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateHybridADRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateHybridADResult)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ADAssessmentLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+      end)
+
       api.add_operation(:create_log_subscription, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateLogSubscription"
         o.http_method = "POST"
@@ -1609,6 +1825,19 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
+      api.add_operation(:delete_ad_assessment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteADAssessment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteADAssessmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteADAssessmentResult)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
       end)
 
       api.add_operation(:delete_conditional_forwarder, Seahorse::Model::Operation.new.tap do |o|
@@ -1699,6 +1928,19 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:describe_ad_assessment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeADAssessment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeADAssessmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeADAssessmentResult)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
       end)
 
       api.add_operation(:describe_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -1811,6 +2053,20 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:describe_hybrid_ad_update, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeHybridADUpdate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeHybridADUpdateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeHybridADUpdateResult)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
       api.add_operation(:describe_ldaps_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -2107,6 +2363,25 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
+      api.add_operation(:list_ad_assessments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListADAssessments"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListADAssessmentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListADAssessmentsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_certificates, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListCertificates"
         o.http_method = "POST"
@@ -2327,6 +2602,20 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
+      api.add_operation(:start_ad_assessment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartADAssessment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartADAssessmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartADAssessmentResult)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: ADAssessmentLimitExceededException)
+      end)
+
       api.add_operation(:start_schema_extension, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartSchemaExtension"
         o.http_method = "POST"
@@ -2383,6 +2672,20 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:update_hybrid_ad, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateHybridAD"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateHybridADRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateHybridADResult)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: ADAssessmentLimitExceededException)
       end)
 
       api.add_operation(:update_number_of_domain_controllers, Seahorse::Model::Operation.new.tap do |o|

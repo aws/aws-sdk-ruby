@@ -9675,6 +9675,10 @@ module Aws::QuickSight
     #   data source.
     #   @return [Types::BigQueryParameters]
     #
+    # @!attribute [rw] impala_parameters
+    #   The parameters for Impala.
+    #   @return [Types::ImpalaParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSourceParameters AWS API Documentation
     #
     class DataSourceParameters < Struct.new(
@@ -9703,7 +9707,8 @@ module Aws::QuickSight
       :databricks_parameters,
       :starburst_parameters,
       :trino_parameters,
-      :big_query_parameters)
+      :big_query_parameters,
+      :impala_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20064,6 +20069,35 @@ module Aws::QuickSight
     class ImageStaticFile < Struct.new(
       :static_file_id,
       :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The parameters that are required to connect to a Impala data source.
+    #
+    # @!attribute [rw] host
+    #   The host name of the Impala data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port of the Impala data source.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] database
+    #   The database of the Impala data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] sql_endpoint_path
+    #   The HTTP path of the Impala data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ImpalaParameters AWS API Documentation
+    #
+    class ImpalaParameters < Struct.new(
+      :host,
+      :port,
+      :database,
+      :sql_endpoint_path)
       SENSITIVE = []
       include Aws::Structure
     end

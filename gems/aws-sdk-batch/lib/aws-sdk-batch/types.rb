@@ -253,6 +253,37 @@ module Aws::Batch
     #
     class CancelJobResponse < Aws::EmptyStructure; end
 
+    # Defines the capacity limit for a service environment. This structure
+    # specifies the maximum amount of resources that can be used by service
+    # jobs in the environment.
+    #
+    # @!attribute [rw] max_capacity
+    #   The maximum capacity available for the service environment. This
+    #   value represents the maximum amount of resources that can be
+    #   allocated to service jobs.
+    #
+    #   For example, `maxCapacity=50`, `capacityUnit=NUM_INSTANCES`. This
+    #   indicates that the maximum number of instances that can be run on
+    #   this service environment is 50. You could then run 5 SageMaker
+    #   Training jobs that each use 10 instances. However, if you submit
+    #   another job that requires 10 instances, it will wait in the queue.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] capacity_unit
+    #   The unit of measure for the capacity limit. This defines how the
+    #   maxCapacity value should be interpreted. For `SAGEMAKER_TRAINING`
+    #   jobs, use `NUM_INSTANCES`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CapacityLimit AWS API Documentation
+    #
+    class CapacityLimit < Struct.new(
+      :max_capacity,
+      :capacity_unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # These errors are usually caused by a client action. One example cause
     # is using an action or resource on behalf of a user that doesn't have
     # permissions to use the action or resource. Another cause is specifying
@@ -2466,6 +2497,20 @@ module Aws::Batch
     #    </note>
     #   @return [Array<Types::ComputeEnvironmentOrder>]
     #
+    # @!attribute [rw] service_environment_order
+    #   A list of service environments that this job queue can use to
+    #   allocate jobs. All serviceEnvironments must have the same type. A
+    #   job queue can't have both a serviceEnvironmentOrder and a
+    #   computeEnvironmentOrder field.
+    #   @return [Array<Types::ServiceEnvironmentOrder>]
+    #
+    # @!attribute [rw] job_queue_type
+    #   The type of job queue. For service jobs that run on SageMaker
+    #   Training, this value is `SAGEMAKER_TRAINING`. For regular container
+    #   jobs, this value is `EKS`, `ECS`, or `ECS_FARGATE` depending on the
+    #   compute environment.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags that you apply to the job queue to help you categorize and
     #   organize your resources. Each tag consists of a key and an optional
@@ -2493,6 +2538,8 @@ module Aws::Batch
       :scheduling_policy_arn,
       :priority,
       :compute_environment_order,
+      :service_environment_order,
+      :job_queue_type,
       :tags,
       :job_state_time_limit_actions)
       SENSITIVE = []
@@ -2574,6 +2621,68 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # @!attribute [rw] service_environment_name
+    #   The name for the service environment. It can be up to 128 characters
+    #   long and can contain letters, numbers, hyphens (-), and underscores
+    #   (\_).
+    #   @return [String]
+    #
+    # @!attribute [rw] service_environment_type
+    #   The type of service environment. For SageMaker Training jobs,
+    #   specify `SAGEMAKER_TRAINING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the service environment. Valid values are `ENABLED` and
+    #   `DISABLED`. The default value is `ENABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_limits
+    #   The capacity limits for the service environment. The number of
+    #   instances a job consumes is the total number of instances requested
+    #   in the submit training job request resource configuration.
+    #   @return [Array<Types::CapacityLimit>]
+    #
+    # @!attribute [rw] tags
+    #   The tags that you apply to the service environment to help you
+    #   categorize and organize your resources. Each tag consists of a key
+    #   and an optional value. For more information, see [Tagging your Batch
+    #   resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateServiceEnvironmentRequest AWS API Documentation
+    #
+    class CreateServiceEnvironmentRequest < Struct.new(
+      :service_environment_name,
+      :service_environment_type,
+      :state,
+      :capacity_limits,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_environment_name
+    #   The name of the service environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_environment_arn
+    #   The Amazon Resource Name (ARN) of the service environment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateServiceEnvironmentResponse AWS API Documentation
+    #
+    class CreateServiceEnvironmentResponse < Struct.new(
+      :service_environment_name,
+      :service_environment_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the parameters for `DeleteComputeEnvironment`.
     #
     # @!attribute [rw] compute_environment
@@ -2645,6 +2754,22 @@ module Aws::Batch
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteSchedulingPolicyResponse AWS API Documentation
     #
     class DeleteSchedulingPolicyResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] service_environment
+    #   The name or ARN of the service environment to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteServiceEnvironmentRequest AWS API Documentation
+    #
+    class DeleteServiceEnvironmentRequest < Struct.new(
+      :service_environment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteServiceEnvironmentResponse AWS API Documentation
+    #
+    class DeleteServiceEnvironmentResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] job_definition
     #   The name and revision (`name:revision`) or full Amazon Resource Name
@@ -2995,6 +3120,196 @@ module Aws::Batch
     #
     class DescribeSchedulingPoliciesResponse < Struct.new(
       :scheduling_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_environments
+    #   An array of service environment names or ARN entries.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results returned by
+    #   `DescribeServiceEnvironments` in paginated output. When this
+    #   parameter is used, `DescribeServiceEnvironments` only returns
+    #   `maxResults` results in a single page and a `nextToken` response
+    #   element. The remaining results of the initial request can be seen by
+    #   sending another `DescribeServiceEnvironments` request with the
+    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   this parameter isn't used, then `DescribeServiceEnvironments`
+    #   returns up to 100 results and a `nextToken` value if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `DescribeServiceEnvironments` request where `maxResults` was used
+    #   and the results exceeded the value of that parameter. Pagination
+    #   continues from the end of the previous results that returned the
+    #   `nextToken` value. This value is `null` when there are no more
+    #   results to return.
+    #
+    #   <note markdown="1"> Treat this token as an opaque identifier that's only used to
+    #   retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeServiceEnvironmentsRequest AWS API Documentation
+    #
+    class DescribeServiceEnvironmentsRequest < Struct.new(
+      :service_environments,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_environments
+    #   The list of service environments that match the request.
+    #   @return [Array<Types::ServiceEnvironmentDetail>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future
+    #   `DescribeServiceEnvironments` request. When the results of a
+    #   `DescribeServiceEnvironments` request exceed `maxResults`, this
+    #   value can be used to retrieve the next page of results. This value
+    #   is `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeServiceEnvironmentsResponse AWS API Documentation
+    #
+    class DescribeServiceEnvironmentsResponse < Struct.new(
+      :service_environments,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The job ID for the service job to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeServiceJobRequest AWS API Documentation
+    #
+    class DescribeServiceJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attempts
+    #   A list of job attempts associated with the service job.
+    #   @return [Array<Types::ServiceJobAttemptDetail>]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix timestamp (in milliseconds) for when the service job was
+    #   created.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] is_terminated
+    #   Indicates whether the service job has been terminated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the service job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The job ID for the service job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the service job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_queue
+    #   The ARN of the job queue that the service job is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_attempt
+    #   The latest attempt associated with the service job.
+    #   @return [Types::LatestServiceJobAttempt]
+    #
+    # @!attribute [rw] retry_strategy
+    #   The retry strategy to use for failed service jobs that are submitted
+    #   with this service job.
+    #   @return [Types::ServiceJobRetryStrategy]
+    #
+    # @!attribute [rw] scheduling_priority
+    #   The scheduling priority of the service job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] service_request_payload
+    #   The request, in JSON, for the service that the `SubmitServiceJob`
+    #   operation is queueing.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_job_type
+    #   The type of service job. For SageMaker Training jobs, this value is
+    #   `SAGEMAKER_TRAINING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_identifier
+    #   The share identifier for the service job. This is used for
+    #   fair-share scheduling.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The Unix timestamp (in milliseconds) for when the service job was
+    #   started.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The current status of the service job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   A short, human-readable string to provide more details for the
+    #   current status of the service job.
+    #   @return [String]
+    #
+    # @!attribute [rw] stopped_at
+    #   The Unix timestamp (in milliseconds) for when the service job
+    #   stopped running.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   The tags that are associated with the service job. Each tag consists
+    #   of a key and an optional value. For more information, see [Tagging
+    #   your Batch resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] timeout_config
+    #   The timeout configuration for the service job.
+    #   @return [Types::ServiceJobTimeout]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeServiceJobResponse AWS API Documentation
+    #
+    class DescribeServiceJobResponse < Struct.new(
+      :attempts,
+      :created_at,
+      :is_terminated,
+      :job_arn,
+      :job_id,
+      :job_name,
+      :job_queue,
+      :latest_attempt,
+      :retry_strategy,
+      :scheduling_priority,
+      :service_request_payload,
+      :service_job_type,
+      :share_identifier,
+      :started_at,
+      :status,
+      :status_reason,
+      :stopped_at,
+      :tags,
+      :timeout_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5642,6 +5957,19 @@ module Aws::Batch
     #   selected for job placement in ascending order.
     #   @return [Array<Types::ComputeEnvironmentOrder>]
     #
+    # @!attribute [rw] service_environment_order
+    #   The order of the service environment associated with the job queue.
+    #   Job queues with a higher priority are evaluated first when
+    #   associated with the same service environment.
+    #   @return [Array<Types::ServiceEnvironmentOrder>]
+    #
+    # @!attribute [rw] job_queue_type
+    #   The type of job queue. For service jobs that run on SageMaker
+    #   Training, this value is `SAGEMAKER_TRAINING`. For regular container
+    #   jobs, this value is `EKS`, `ECS`, or `ECS_FARGATE` depending on the
+    #   compute environment.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags that are applied to the job queue. For more information,
     #   see [Tagging your Batch resources][1] in *Batch User Guide*.
@@ -5669,6 +5997,8 @@ module Aws::Batch
       :status_reason,
       :priority,
       :compute_environment_order,
+      :service_environment_order,
+      :job_queue_type,
       :tags,
       :job_state_time_limit_actions)
       SENSITIVE = []
@@ -5861,6 +6191,23 @@ module Aws::Batch
     class KeyValuesPair < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the latest attempt of a service job. A Service job
+    # can transition from `SCHEDULED` back to `RUNNABLE` state when they
+    # encounter capacity constraints.
+    #
+    # @!attribute [rw] service_resource_id
+    #   The service resource identifier associated with the service job
+    #   attempt.
+    #   @return [Types::ServiceResourceId]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/LatestServiceJobAttempt AWS API Documentation
+    #
+    class LatestServiceJobAttempt < Struct.new(
+      :service_resource_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6659,6 +7006,89 @@ module Aws::Batch
     #
     class ListSchedulingPoliciesResponse < Struct.new(
       :scheduling_policies,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_queue
+    #   The name or ARN of the job queue with which to list service jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The job status with which to filter service jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results returned by `ListServiceJobs` in
+    #   paginated output. When this parameter is used, `ListServiceJobs`
+    #   only returns `maxResults` results in a single page and a `nextToken`
+    #   response element. The remaining results of the initial request can
+    #   be seen by sending another `ListServiceJobs` request with the
+    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   this parameter isn't used, then `ListServiceJobs` returns up to 100
+    #   results and a `nextToken` value if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListServiceJobs` request where `maxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value. This value is `null` when there are no more results to
+    #   return.
+    #
+    #   <note markdown="1"> Treat this token as an opaque identifier that's only used to
+    #   retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   The filters to apply to the service job list query. The filter names
+    #   and values can be:
+    #
+    #   * name: `JOB_STATUS`
+    #
+    #     values: `SUBMITTED | PENDING | RUNNABLE | STARTING | RUNNING |
+    #     SUCCEEDED | FAILED | SCHEDULED`
+    #
+    #   * name: `JOB_NAME`
+    #
+    #     values: case-insensitive matches for the job name. If a filter
+    #     value ends with an asterisk (*), it matches any job name that
+    #     begins with the string before the '*'.
+    #   @return [Array<Types::KeyValuesPair>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListServiceJobsRequest AWS API Documentation
+    #
+    class ListServiceJobsRequest < Struct.new(
+      :job_queue,
+      :job_status,
+      :max_results,
+      :next_token,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_summary_list
+    #   A list of service job summaries.
+    #   @return [Array<Types::ServiceJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future `ListServiceJobs`
+    #   request. When the results of a `ListServiceJobs` request exceed
+    #   `maxResults`, this value can be used to retrieve the next page of
+    #   results. This value is `null` when there are no more results to
+    #   return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListServiceJobsResponse AWS API Documentation
+    #
+    class ListServiceJobsResponse < Struct.new(
+      :job_summary_list,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -7729,6 +8159,274 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # Detailed information about a service environment, including its
+    # configuration, state, and capacity limits.
+    #
+    # @!attribute [rw] service_environment_name
+    #   The name of the service environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_environment_arn
+    #   The Amazon Resource Name (ARN) of the service environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_environment_type
+    #   The type of service environment. For SageMaker Training jobs, this
+    #   value is `SAGEMAKER_TRAINING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the service environment. Valid values are `ENABLED` and
+    #   `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the service environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_limits
+    #   The capacity limits for the service environment. This defines the
+    #   maximum resources that can be used by service jobs in this
+    #   environment.
+    #   @return [Array<Types::CapacityLimit>]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the service environment. Each tag consists
+    #   of a key and an optional value. For more information, see [Tagging
+    #   your Batch resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ServiceEnvironmentDetail AWS API Documentation
+    #
+    class ServiceEnvironmentDetail < Struct.new(
+      :service_environment_name,
+      :service_environment_arn,
+      :service_environment_type,
+      :state,
+      :status,
+      :capacity_limits,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the order of a service environment for a job queue. This
+    # determines the priority order when multiple service environments are
+    # associated with the same job queue.
+    #
+    # @!attribute [rw] order
+    #   The order of the service environment. Job queues with a higher
+    #   priority are evaluated first when associated with the same service
+    #   environment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] service_environment
+    #   The name or ARN of the service environment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ServiceEnvironmentOrder AWS API Documentation
+    #
+    class ServiceEnvironmentOrder < Struct.new(
+      :order,
+      :service_environment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detailed information about an attempt to run a service job.
+    #
+    # @!attribute [rw] service_resource_id
+    #   The service resource identifier associated with the service job
+    #   attempt.
+    #   @return [Types::ServiceResourceId]
+    #
+    # @!attribute [rw] started_at
+    #   The Unix timestamp (in milliseconds) for when the service job
+    #   attempt was started.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stopped_at
+    #   The Unix timestamp (in milliseconds) for when the service job
+    #   attempt stopped running.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status_reason
+    #   A string that provides additional details for the current status of
+    #   the service job attempt.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ServiceJobAttemptDetail AWS API Documentation
+    #
+    class ServiceJobAttemptDetail < Struct.new(
+      :service_resource_id,
+      :started_at,
+      :stopped_at,
+      :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies conditions for when to exit or retry a service job based on
+    # the exit status or status reason.
+    #
+    # @!attribute [rw] action
+    #   The action to take if the service job exits with the specified
+    #   condition. Valid values are `RETRY` and `EXIT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] on_status_reason
+    #   Contains a glob pattern to match against the StatusReason returned
+    #   for a job. The pattern can contain up to 512 characters and can
+    #   contain all printable characters. It can optionally end with an
+    #   asterisk (*) so that only the start of the string needs to be an
+    #   exact match.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ServiceJobEvaluateOnExit AWS API Documentation
+    #
+    class ServiceJobEvaluateOnExit < Struct.new(
+      :action,
+      :on_status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The retry strategy for service jobs. This defines how many times to
+    # retry a failed service job and under what conditions. For more
+    # information, see [Service job retry strategies][1] in the *Batch User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/batch/latest/userguide/service-job-retries.html
+    #
+    # @!attribute [rw] attempts
+    #   The number of times to move a service job to `RUNNABLE` status. You
+    #   can specify between 1 and 10 attempts.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] evaluate_on_exit
+    #   Array of `ServiceJobEvaluateOnExit` objects that specify conditions
+    #   under which the service job should be retried or failed.
+    #   @return [Array<Types::ServiceJobEvaluateOnExit>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ServiceJobRetryStrategy AWS API Documentation
+    #
+    class ServiceJobRetryStrategy < Struct.new(
+      :attempts,
+      :evaluate_on_exit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a service job.
+    #
+    # @!attribute [rw] latest_attempt
+    #   Information about the latest attempt for the service job.
+    #   @return [Types::LatestServiceJobAttempt]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix timestamp (in milliseconds) for when the service job was
+    #   created.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the service job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The job ID for the service job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the service job.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_job_type
+    #   The type of service job. For SageMaker Training jobs, this value is
+    #   `SAGEMAKER_TRAINING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_identifier
+    #   The share identifier for the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the service job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   A short string to provide more details on the current status of the
+    #   service job.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The Unix timestamp (in milliseconds) for when the service job was
+    #   started.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stopped_at
+    #   The Unix timestamp (in milliseconds) for when the service job
+    #   stopped running.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ServiceJobSummary AWS API Documentation
+    #
+    class ServiceJobSummary < Struct.new(
+      :latest_attempt,
+      :created_at,
+      :job_arn,
+      :job_id,
+      :job_name,
+      :service_job_type,
+      :share_identifier,
+      :status,
+      :status_reason,
+      :started_at,
+      :stopped_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The timeout configuration for service jobs.
+    #
+    # @!attribute [rw] attempt_duration_seconds
+    #   The maximum duration in seconds that a service job attempt can run.
+    #   After this time is reached, Batch terminates the service job
+    #   attempt.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ServiceJobTimeout AWS API Documentation
+    #
+    class ServiceJobTimeout < Struct.new(
+      :attempt_duration_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Batch unique identifier.
+    #
+    # @!attribute [rw] name
+    #   The name of the resource identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the resource identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ServiceResourceId AWS API Documentation
+    #
+    class ServiceResourceId < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the weights for the share identifiers for the fair-share
     # policy. Share identifiers that aren't included have a default weight
     # of `1.0`.
@@ -7964,6 +8662,111 @@ module Aws::Batch
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SubmitJobResponse AWS API Documentation
     #
     class SubmitJobResponse < Struct.new(
+      :job_arn,
+      :job_name,
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_name
+    #   The name of the service job. It can be up to 128 characters long. It
+    #   can contain uppercase and lowercase letters, numbers, hyphens (-),
+    #   and underscores (\_).
+    #   @return [String]
+    #
+    # @!attribute [rw] job_queue
+    #   The job queue into which the service job is submitted. You can
+    #   specify either the name or the ARN of the queue. The job queue must
+    #   have the type `SAGEMAKER_TRAINING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_strategy
+    #   The retry strategy to use for failed service jobs that are submitted
+    #   with this service job request.
+    #   @return [Types::ServiceJobRetryStrategy]
+    #
+    # @!attribute [rw] scheduling_priority
+    #   The scheduling priority of the service job. Valid values are
+    #   integers between 0 and 9999.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] service_request_payload
+    #   The request, in JSON, for the service that the SubmitServiceJob
+    #   operation is queueing.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_job_type
+    #   The type of service job. For SageMaker Training jobs, specify
+    #   `SAGEMAKER_TRAINING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_identifier
+    #   The share identifier for the service job. Don't specify this
+    #   parameter if the job queue doesn't have a fair- share scheduling
+    #   policy. If the job queue has a fair-share scheduling policy, then
+    #   this parameter must be specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout_config
+    #   The timeout configuration for the service job. If none is specified,
+    #   Batch defers to the default timeout of the underlying service
+    #   handling the job.
+    #   @return [Types::ServiceJobTimeout]
+    #
+    # @!attribute [rw] tags
+    #   The tags that you apply to the service job request. Each tag
+    #   consists of a key and an optional value. For more information, see
+    #   [Tagging your Batch resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique identifier for the request. This token is used to ensure
+    #   idempotency of requests. If this parameter is specified and two
+    #   submit requests with identical payloads and `clientToken`s are
+    #   received, these requests are considered the same request and the
+    #   second request is rejected.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SubmitServiceJobRequest AWS API Documentation
+    #
+    class SubmitServiceJobRequest < Struct.new(
+      :job_name,
+      :job_queue,
+      :retry_strategy,
+      :scheduling_priority,
+      :service_request_payload,
+      :service_job_type,
+      :share_identifier,
+      :timeout_config,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) for the service job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the service job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier for the service job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SubmitServiceJobResponse AWS API Documentation
+    #
+    class SubmitServiceJobResponse < Struct.new(
       :job_arn,
       :job_name,
       :job_id)
@@ -8785,6 +9588,29 @@ module Aws::Batch
     #
     class TerminateJobResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] job_id
+    #   The service job ID of the service job to terminate.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   A message to attach to the service job that explains the reason for
+    #   canceling it. This message is returned by `DescribeServiceJob`
+    #   operations on the service job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateServiceJobRequest AWS API Documentation
+    #
+    class TerminateServiceJobRequest < Struct.new(
+      :job_id,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateServiceJobResponse AWS API Documentation
+    #
+    class TerminateServiceJobResponse < Aws::EmptyStructure; end
+
     # The container path, mount options, and size of the `tmpfs` mount.
     #
     # <note markdown="1"> This object isn't applicable to jobs that are running on Fargate
@@ -9157,6 +9983,12 @@ module Aws::Batch
     #    </note>
     #   @return [Array<Types::ComputeEnvironmentOrder>]
     #
+    # @!attribute [rw] service_environment_order
+    #   The order of the service environment associated with the job queue.
+    #   Job queues with a higher priority are evaluated first when
+    #   associated with the same service environment.
+    #   @return [Array<Types::ServiceEnvironmentOrder>]
+    #
     # @!attribute [rw] job_state_time_limit_actions
     #   The set of actions that Batch perform on jobs that remain at the
     #   head of the job queue in the specified state longer than specified
@@ -9173,6 +10005,7 @@ module Aws::Batch
       :scheduling_policy_arn,
       :priority,
       :compute_environment_order,
+      :service_environment_order,
       :job_state_time_limit_actions)
       SENSITIVE = []
       include Aws::Structure
@@ -9244,6 +10077,48 @@ module Aws::Batch
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateSchedulingPolicyResponse AWS API Documentation
     #
     class UpdateSchedulingPolicyResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] service_environment
+    #   The name or ARN of the service environment to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the service environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_limits
+    #   The capacity limits for the service environment. This defines the
+    #   maximum resources that can be used by service jobs in this
+    #   environment.
+    #   @return [Array<Types::CapacityLimit>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateServiceEnvironmentRequest AWS API Documentation
+    #
+    class UpdateServiceEnvironmentRequest < Struct.new(
+      :service_environment,
+      :state,
+      :capacity_limits)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_environment_name
+    #   The name of the service environment that was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_environment_arn
+    #   The Amazon Resource Name (ARN) of the service environment that was
+    #   updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateServiceEnvironmentResponse AWS API Documentation
+    #
+    class UpdateServiceEnvironmentResponse < Struct.new(
+      :service_environment_name,
+      :service_environment_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A data volume that's used in a job's container properties.
     #

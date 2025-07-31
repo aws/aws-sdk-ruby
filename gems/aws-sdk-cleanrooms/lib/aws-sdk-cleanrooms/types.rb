@@ -1040,6 +1040,11 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] analytics_engine
     #   The analytics engine for the collaboration.
+    #
+    #   <note markdown="1"> After July 16, 2025, the `CLEAN_ROOMS_SQL` parameter will no longer
+    #   be available.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/Collaboration AWS API Documentation
@@ -1726,6 +1731,11 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] analytics_engine
     #   The analytics engine.
+    #
+    #   <note markdown="1"> After July 16, 2025, the `CLEAN_ROOMS_SQL` parameter will no longer
+    #   be available.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationSummary AWS API Documentation
@@ -2766,8 +2776,7 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] source
-    #   The information in the analysis template. Currently supports `text`,
-    #   the query text for the analysis template.
+    #   The information in the analysis template.
     #   @return [Types::AnalysisSource]
     #
     # @!attribute [rw] tags
@@ -2878,6 +2887,11 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] analytics_engine
     #   The analytics engine.
+    #
+    #   <note markdown="1"> After July 16, 2025, the `CLEAN_ROOMS_SQL` parameter will no longer
+    #   be available.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateCollaborationInput AWS API Documentation
@@ -8610,6 +8624,11 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] analytics_engine
     #   The analytics engine.
+    #
+    #   <note markdown="1"> After July 16, 2025, the `CLEAN_ROOMS_SQL` parameter will no longer
+    #   be available.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateCollaborationInput AWS API Documentation
@@ -8812,6 +8831,15 @@ module Aws::CleanRooms
     #   A new description for the configured table.
     #   @return [String]
     #
+    # @!attribute [rw] table_reference
+    #   A pointer to the dataset that underlies this table.
+    #   @return [Types::TableReference]
+    #
+    # @!attribute [rw] allowed_columns
+    #   The columns of the underlying table that can be used by
+    #   collaborations or analysis rules.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] analysis_method
     #   The analysis method for the configured table.
     #
@@ -8833,6 +8861,8 @@ module Aws::CleanRooms
       :configured_table_identifier,
       :name,
       :description,
+      :table_reference,
+      :allowed_columns,
       :analysis_method,
       :selected_analysis_methods)
       SENSITIVE = []

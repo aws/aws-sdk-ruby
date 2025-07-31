@@ -1063,7 +1063,7 @@ module Aws::Batch
     #   either EC2 (`EC2` or `SPOT`) or Fargate (`FARGATE` or `FARGATE_SPOT`);
     #   EC2 and Fargate compute environments can't be mixed.
     #
-    # @option params [required, Array<Types::ComputeEnvironmentOrder>] :compute_environment_order
+    # @option params [Array<Types::ComputeEnvironmentOrder>] :compute_environment_order
     #   The set of compute environments mapped to a job queue and their order
     #   relative to each other. The job scheduler uses this parameter to
     #   determine which compute environment runs a specific job. Compute
@@ -1078,6 +1078,18 @@ module Aws::Batch
     #   environment architecture types in a single job queue.
     #
     #    </note>
+    #
+    # @option params [Array<Types::ServiceEnvironmentOrder>] :service_environment_order
+    #   A list of service environments that this job queue can use to allocate
+    #   jobs. All serviceEnvironments must have the same type. A job queue
+    #   can't have both a serviceEnvironmentOrder and a
+    #   computeEnvironmentOrder field.
+    #
+    # @option params [String] :job_queue_type
+    #   The type of job queue. For service jobs that run on SageMaker
+    #   Training, this value is `SAGEMAKER_TRAINING`. For regular container
+    #   jobs, this value is `EKS`, `ECS`, or `ECS_FARGATE` depending on the
+    #   compute environment.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags that you apply to the job queue to help you categorize and
@@ -1158,12 +1170,19 @@ module Aws::Batch
     #     state: "ENABLED", # accepts ENABLED, DISABLED
     #     scheduling_policy_arn: "String",
     #     priority: 1, # required
-    #     compute_environment_order: [ # required
+    #     compute_environment_order: [
     #       {
     #         order: 1, # required
     #         compute_environment: "String", # required
     #       },
     #     ],
+    #     service_environment_order: [
+    #       {
+    #         order: 1, # required
+    #         service_environment: "String", # required
+    #       },
+    #     ],
+    #     job_queue_type: "EKS", # accepts EKS, ECS, ECS_FARGATE, SAGEMAKER_TRAINING
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1172,7 +1191,7 @@ module Aws::Batch
     #         reason: "String", # required
     #         state: "RUNNABLE", # required, accepts RUNNABLE
     #         max_time_seconds: 1, # required
-    #         action: "CANCEL", # required, accepts CANCEL
+    #         action: "CANCEL", # required, accepts CANCEL, TERMINATE
     #       },
     #     ],
     #   })
@@ -1251,6 +1270,74 @@ module Aws::Batch
     # @param [Hash] params ({})
     def create_scheduling_policy(params = {}, options = {})
       req = build_request(:create_scheduling_policy, params)
+      req.send_request(options)
+    end
+
+    # Creates a service environment for running service jobs. Service
+    # environments define capacity limits for specific service types such as
+    # SageMaker Training jobs.
+    #
+    # @option params [required, String] :service_environment_name
+    #   The name for the service environment. It can be up to 128 characters
+    #   long and can contain letters, numbers, hyphens (-), and underscores
+    #   (\_).
+    #
+    # @option params [required, String] :service_environment_type
+    #   The type of service environment. For SageMaker Training jobs, specify
+    #   `SAGEMAKER_TRAINING`.
+    #
+    # @option params [String] :state
+    #   The state of the service environment. Valid values are `ENABLED` and
+    #   `DISABLED`. The default value is `ENABLED`.
+    #
+    # @option params [required, Array<Types::CapacityLimit>] :capacity_limits
+    #   The capacity limits for the service environment. The number of
+    #   instances a job consumes is the total number of instances requested in
+    #   the submit training job request resource configuration.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags that you apply to the service environment to help you
+    #   categorize and organize your resources. Each tag consists of a key and
+    #   an optional value. For more information, see [Tagging your Batch
+    #   resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html
+    #
+    # @return [Types::CreateServiceEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateServiceEnvironmentResponse#service_environment_name #service_environment_name} => String
+    #   * {Types::CreateServiceEnvironmentResponse#service_environment_arn #service_environment_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_service_environment({
+    #     service_environment_name: "String", # required
+    #     service_environment_type: "SAGEMAKER_TRAINING", # required, accepts SAGEMAKER_TRAINING
+    #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #     capacity_limits: [ # required
+    #       {
+    #         max_capacity: 1,
+    #         capacity_unit: "String",
+    #       },
+    #     ],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_environment_name #=> String
+    #   resp.service_environment_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateServiceEnvironment AWS API Documentation
+    #
+    # @overload create_service_environment(params = {})
+    # @param [Hash] params ({})
+    def create_service_environment(params = {}, options = {})
+      req = build_request(:create_service_environment, params)
       req.send_request(options)
     end
 
@@ -1396,6 +1483,31 @@ module Aws::Batch
     # @param [Hash] params ({})
     def delete_scheduling_policy(params = {}, options = {})
       req = build_request(:delete_scheduling_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes a Service environment. Before you can delete a service
+    # environment, you must first set its state to `DISABLED` with the
+    # `UpdateServiceEnvironment` API operation and disassociate it from any
+    # job queues with the `UpdateJobQueue` API operation.
+    #
+    # @option params [required, String] :service_environment
+    #   The name or ARN of the service environment to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_service_environment({
+    #     service_environment: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteServiceEnvironment AWS API Documentation
+    #
+    # @overload delete_service_environment(params = {})
+    # @param [Hash] params ({})
+    def delete_service_environment(params = {}, options = {})
+      req = build_request(:delete_service_environment, params)
       req.send_request(options)
     end
 
@@ -2323,13 +2435,17 @@ module Aws::Batch
     #   resp.job_queues[0].compute_environment_order #=> Array
     #   resp.job_queues[0].compute_environment_order[0].order #=> Integer
     #   resp.job_queues[0].compute_environment_order[0].compute_environment #=> String
+    #   resp.job_queues[0].service_environment_order #=> Array
+    #   resp.job_queues[0].service_environment_order[0].order #=> Integer
+    #   resp.job_queues[0].service_environment_order[0].service_environment #=> String
+    #   resp.job_queues[0].job_queue_type #=> String, one of "EKS", "ECS", "ECS_FARGATE", "SAGEMAKER_TRAINING"
     #   resp.job_queues[0].tags #=> Hash
     #   resp.job_queues[0].tags["TagKey"] #=> String
     #   resp.job_queues[0].job_state_time_limit_actions #=> Array
     #   resp.job_queues[0].job_state_time_limit_actions[0].reason #=> String
     #   resp.job_queues[0].job_state_time_limit_actions[0].state #=> String, one of "RUNNABLE"
     #   resp.job_queues[0].job_state_time_limit_actions[0].max_time_seconds #=> Integer
-    #   resp.job_queues[0].job_state_time_limit_actions[0].action #=> String, one of "CANCEL"
+    #   resp.job_queues[0].job_state_time_limit_actions[0].action #=> String, one of "CANCEL", "TERMINATE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobQueues AWS API Documentation
@@ -2991,6 +3107,147 @@ module Aws::Batch
       req.send_request(options)
     end
 
+    # Describes one or more of your service environments.
+    #
+    # @option params [Array<String>] :service_environments
+    #   An array of service environment names or ARN entries.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results returned by
+    #   `DescribeServiceEnvironments` in paginated output. When this parameter
+    #   is used, `DescribeServiceEnvironments` only returns `maxResults`
+    #   results in a single page and a `nextToken` response element. The
+    #   remaining results of the initial request can be seen by sending
+    #   another `DescribeServiceEnvironments` request with the returned
+    #   `nextToken` value. This value can be between 1 and 100. If this
+    #   parameter isn't used, then `DescribeServiceEnvironments` returns up
+    #   to 100 results and a `nextToken` value if applicable.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `DescribeServiceEnvironments` request where `maxResults` was used and
+    #   the results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value. This value is `null` when there are no more results to return.
+    #
+    #   <note markdown="1"> Treat this token as an opaque identifier that's only used to retrieve
+    #   the next items in a list and not for other programmatic purposes.
+    #
+    #    </note>
+    #
+    # @return [Types::DescribeServiceEnvironmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeServiceEnvironmentsResponse#service_environments #service_environments} => Array&lt;Types::ServiceEnvironmentDetail&gt;
+    #   * {Types::DescribeServiceEnvironmentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_service_environments({
+    #     service_environments: ["String"],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_environments #=> Array
+    #   resp.service_environments[0].service_environment_name #=> String
+    #   resp.service_environments[0].service_environment_arn #=> String
+    #   resp.service_environments[0].service_environment_type #=> String, one of "SAGEMAKER_TRAINING"
+    #   resp.service_environments[0].state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service_environments[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "DELETED", "VALID", "INVALID"
+    #   resp.service_environments[0].capacity_limits #=> Array
+    #   resp.service_environments[0].capacity_limits[0].max_capacity #=> Integer
+    #   resp.service_environments[0].capacity_limits[0].capacity_unit #=> String
+    #   resp.service_environments[0].tags #=> Hash
+    #   resp.service_environments[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeServiceEnvironments AWS API Documentation
+    #
+    # @overload describe_service_environments(params = {})
+    # @param [Hash] params ({})
+    def describe_service_environments(params = {}, options = {})
+      req = build_request(:describe_service_environments, params)
+      req.send_request(options)
+    end
+
+    # The details of a service job.
+    #
+    # @option params [required, String] :job_id
+    #   The job ID for the service job to describe.
+    #
+    # @return [Types::DescribeServiceJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeServiceJobResponse#attempts #attempts} => Array&lt;Types::ServiceJobAttemptDetail&gt;
+    #   * {Types::DescribeServiceJobResponse#created_at #created_at} => Integer
+    #   * {Types::DescribeServiceJobResponse#is_terminated #is_terminated} => Boolean
+    #   * {Types::DescribeServiceJobResponse#job_arn #job_arn} => String
+    #   * {Types::DescribeServiceJobResponse#job_id #job_id} => String
+    #   * {Types::DescribeServiceJobResponse#job_name #job_name} => String
+    #   * {Types::DescribeServiceJobResponse#job_queue #job_queue} => String
+    #   * {Types::DescribeServiceJobResponse#latest_attempt #latest_attempt} => Types::LatestServiceJobAttempt
+    #   * {Types::DescribeServiceJobResponse#retry_strategy #retry_strategy} => Types::ServiceJobRetryStrategy
+    #   * {Types::DescribeServiceJobResponse#scheduling_priority #scheduling_priority} => Integer
+    #   * {Types::DescribeServiceJobResponse#service_request_payload #service_request_payload} => String
+    #   * {Types::DescribeServiceJobResponse#service_job_type #service_job_type} => String
+    #   * {Types::DescribeServiceJobResponse#share_identifier #share_identifier} => String
+    #   * {Types::DescribeServiceJobResponse#started_at #started_at} => Integer
+    #   * {Types::DescribeServiceJobResponse#status #status} => String
+    #   * {Types::DescribeServiceJobResponse#status_reason #status_reason} => String
+    #   * {Types::DescribeServiceJobResponse#stopped_at #stopped_at} => Integer
+    #   * {Types::DescribeServiceJobResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeServiceJobResponse#timeout_config #timeout_config} => Types::ServiceJobTimeout
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_service_job({
+    #     job_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attempts #=> Array
+    #   resp.attempts[0].service_resource_id.name #=> String, one of "TrainingJobArn"
+    #   resp.attempts[0].service_resource_id.value #=> String
+    #   resp.attempts[0].started_at #=> Integer
+    #   resp.attempts[0].stopped_at #=> Integer
+    #   resp.attempts[0].status_reason #=> String
+    #   resp.created_at #=> Integer
+    #   resp.is_terminated #=> Boolean
+    #   resp.job_arn #=> String
+    #   resp.job_id #=> String
+    #   resp.job_name #=> String
+    #   resp.job_queue #=> String
+    #   resp.latest_attempt.service_resource_id.name #=> String, one of "TrainingJobArn"
+    #   resp.latest_attempt.service_resource_id.value #=> String
+    #   resp.retry_strategy.attempts #=> Integer
+    #   resp.retry_strategy.evaluate_on_exit #=> Array
+    #   resp.retry_strategy.evaluate_on_exit[0].action #=> String, one of "RETRY", "EXIT"
+    #   resp.retry_strategy.evaluate_on_exit[0].on_status_reason #=> String
+    #   resp.scheduling_priority #=> Integer
+    #   resp.service_request_payload #=> String
+    #   resp.service_job_type #=> String, one of "SAGEMAKER_TRAINING"
+    #   resp.share_identifier #=> String
+    #   resp.started_at #=> Integer
+    #   resp.status #=> String, one of "SUBMITTED", "PENDING", "RUNNABLE", "SCHEDULED", "STARTING", "RUNNING", "SUCCEEDED", "FAILED"
+    #   resp.status_reason #=> String
+    #   resp.stopped_at #=> Integer
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.timeout_config.attempt_duration_seconds #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeServiceJob AWS API Documentation
+    #
+    # @overload describe_service_job(params = {})
+    # @param [Hash] params ({})
+    def describe_service_job(params = {}, options = {})
+      req = build_request(:describe_service_job, params)
+      req.send_request(options)
+    end
+
     # Provides a list of the first 100 `RUNNABLE` jobs associated to a
     # single job queue.
     #
@@ -3520,6 +3777,99 @@ module Aws::Batch
     # @param [Hash] params ({})
     def list_scheduling_policies(params = {}, options = {})
       req = build_request(:list_scheduling_policies, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of service jobs for a specified job queue.
+    #
+    # @option params [String] :job_queue
+    #   The name or ARN of the job queue with which to list service jobs.
+    #
+    # @option params [String] :job_status
+    #   The job status with which to filter service jobs.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results returned by `ListServiceJobs` in
+    #   paginated output. When this parameter is used, `ListServiceJobs` only
+    #   returns `maxResults` results in a single page and a `nextToken`
+    #   response element. The remaining results of the initial request can be
+    #   seen by sending another `ListServiceJobs` request with the returned
+    #   `nextToken` value. This value can be between 1 and 100. If this
+    #   parameter isn't used, then `ListServiceJobs` returns up to 100
+    #   results and a `nextToken` value if applicable.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListServiceJobs` request where `maxResults` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value. This
+    #   value is `null` when there are no more results to return.
+    #
+    #   <note markdown="1"> Treat this token as an opaque identifier that's only used to retrieve
+    #   the next items in a list and not for other programmatic purposes.
+    #
+    #    </note>
+    #
+    # @option params [Array<Types::KeyValuesPair>] :filters
+    #   The filters to apply to the service job list query. The filter names
+    #   and values can be:
+    #
+    #   * name: `JOB_STATUS`
+    #
+    #     values: `SUBMITTED | PENDING | RUNNABLE | STARTING | RUNNING |
+    #     SUCCEEDED | FAILED | SCHEDULED`
+    #
+    #   * name: `JOB_NAME`
+    #
+    #     values: case-insensitive matches for the job name. If a filter value
+    #     ends with an asterisk (*), it matches any job name that begins with
+    #     the string before the '*'.
+    #
+    # @return [Types::ListServiceJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListServiceJobsResponse#job_summary_list #job_summary_list} => Array&lt;Types::ServiceJobSummary&gt;
+    #   * {Types::ListServiceJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_service_jobs({
+    #     job_queue: "String",
+    #     job_status: "SUBMITTED", # accepts SUBMITTED, PENDING, RUNNABLE, SCHEDULED, STARTING, RUNNING, SUCCEEDED, FAILED
+    #     max_results: 1,
+    #     next_token: "String",
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_summary_list #=> Array
+    #   resp.job_summary_list[0].latest_attempt.service_resource_id.name #=> String, one of "TrainingJobArn"
+    #   resp.job_summary_list[0].latest_attempt.service_resource_id.value #=> String
+    #   resp.job_summary_list[0].created_at #=> Integer
+    #   resp.job_summary_list[0].job_arn #=> String
+    #   resp.job_summary_list[0].job_id #=> String
+    #   resp.job_summary_list[0].job_name #=> String
+    #   resp.job_summary_list[0].service_job_type #=> String, one of "SAGEMAKER_TRAINING"
+    #   resp.job_summary_list[0].share_identifier #=> String
+    #   resp.job_summary_list[0].status #=> String, one of "SUBMITTED", "PENDING", "RUNNABLE", "SCHEDULED", "STARTING", "RUNNING", "SUCCEEDED", "FAILED"
+    #   resp.job_summary_list[0].status_reason #=> String
+    #   resp.job_summary_list[0].started_at #=> Integer
+    #   resp.job_summary_list[0].stopped_at #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListServiceJobs AWS API Documentation
+    #
+    # @overload list_service_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_service_jobs(params = {}, options = {})
+      req = build_request(:list_service_jobs, params)
       req.send_request(options)
     end
 
@@ -5039,6 +5389,114 @@ module Aws::Batch
       req.send_request(options)
     end
 
+    # Submits a service job to a specified job queue to run on SageMaker AI.
+    # A service job is a unit of work that you submit to Batch for execution
+    # on SageMaker AI.
+    #
+    # @option params [required, String] :job_name
+    #   The name of the service job. It can be up to 128 characters long. It
+    #   can contain uppercase and lowercase letters, numbers, hyphens (-), and
+    #   underscores (\_).
+    #
+    # @option params [required, String] :job_queue
+    #   The job queue into which the service job is submitted. You can specify
+    #   either the name or the ARN of the queue. The job queue must have the
+    #   type `SAGEMAKER_TRAINING`.
+    #
+    # @option params [Types::ServiceJobRetryStrategy] :retry_strategy
+    #   The retry strategy to use for failed service jobs that are submitted
+    #   with this service job request.
+    #
+    # @option params [Integer] :scheduling_priority
+    #   The scheduling priority of the service job. Valid values are integers
+    #   between 0 and 9999.
+    #
+    # @option params [required, String] :service_request_payload
+    #   The request, in JSON, for the service that the SubmitServiceJob
+    #   operation is queueing.
+    #
+    # @option params [required, String] :service_job_type
+    #   The type of service job. For SageMaker Training jobs, specify
+    #   `SAGEMAKER_TRAINING`.
+    #
+    # @option params [String] :share_identifier
+    #   The share identifier for the service job. Don't specify this
+    #   parameter if the job queue doesn't have a fair- share scheduling
+    #   policy. If the job queue has a fair-share scheduling policy, then this
+    #   parameter must be specified.
+    #
+    # @option params [Types::ServiceJobTimeout] :timeout_config
+    #   The timeout configuration for the service job. If none is specified,
+    #   Batch defers to the default timeout of the underlying service handling
+    #   the job.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags that you apply to the service job request. Each tag consists
+    #   of a key and an optional value. For more information, see [Tagging
+    #   your Batch resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html
+    #
+    # @option params [String] :client_token
+    #   A unique identifier for the request. This token is used to ensure
+    #   idempotency of requests. If this parameter is specified and two submit
+    #   requests with identical payloads and `clientToken`s are received,
+    #   these requests are considered the same request and the second request
+    #   is rejected.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::SubmitServiceJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SubmitServiceJobResponse#job_arn #job_arn} => String
+    #   * {Types::SubmitServiceJobResponse#job_name #job_name} => String
+    #   * {Types::SubmitServiceJobResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.submit_service_job({
+    #     job_name: "String", # required
+    #     job_queue: "String", # required
+    #     retry_strategy: {
+    #       attempts: 1, # required
+    #       evaluate_on_exit: [
+    #         {
+    #           action: "RETRY", # accepts RETRY, EXIT
+    #           on_status_reason: "String",
+    #         },
+    #       ],
+    #     },
+    #     scheduling_priority: 1,
+    #     service_request_payload: "String", # required
+    #     service_job_type: "SAGEMAKER_TRAINING", # required, accepts SAGEMAKER_TRAINING
+    #     share_identifier: "String",
+    #     timeout_config: {
+    #       attempt_duration_seconds: 1,
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_arn #=> String
+    #   resp.job_name #=> String
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SubmitServiceJob AWS API Documentation
+    #
+    # @overload submit_service_job(params = {})
+    # @param [Hash] params ({})
+    def submit_service_job(params = {}, options = {})
+      req = build_request(:submit_service_job, params)
+      req.send_request(options)
+    end
+
     # Associates the specified tags to a resource with the specified
     # `resourceArn`. If existing tags on a resource aren't specified in the
     # request parameters, they aren't changed. When a resource is deleted,
@@ -5143,6 +5601,34 @@ module Aws::Batch
     # @param [Hash] params ({})
     def terminate_job(params = {}, options = {})
       req = build_request(:terminate_job, params)
+      req.send_request(options)
+    end
+
+    # Terminates a service job in a job queue.
+    #
+    # @option params [required, String] :job_id
+    #   The service job ID of the service job to terminate.
+    #
+    # @option params [required, String] :reason
+    #   A message to attach to the service job that explains the reason for
+    #   canceling it. This message is returned by `DescribeServiceJob`
+    #   operations on the service job.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.terminate_service_job({
+    #     job_id: "String", # required
+    #     reason: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateServiceJob AWS API Documentation
+    #
+    # @overload terminate_service_job(params = {})
+    # @param [Hash] params ({})
+    def terminate_service_job(params = {}, options = {})
+      req = build_request(:terminate_service_job, params)
       req.send_request(options)
     end
 
@@ -5516,6 +6002,11 @@ module Aws::Batch
     #
     #    </note>
     #
+    # @option params [Array<Types::ServiceEnvironmentOrder>] :service_environment_order
+    #   The order of the service environment associated with the job queue.
+    #   Job queues with a higher priority are evaluated first when associated
+    #   with the same service environment.
+    #
     # @option params [Array<Types::JobStateTimeLimitAction>] :job_state_time_limit_actions
     #   The set of actions that Batch perform on jobs that remain at the head
     #   of the job queue in the specified state longer than specified times.
@@ -5557,12 +6048,18 @@ module Aws::Batch
     #         compute_environment: "String", # required
     #       },
     #     ],
+    #     service_environment_order: [
+    #       {
+    #         order: 1, # required
+    #         service_environment: "String", # required
+    #       },
+    #     ],
     #     job_state_time_limit_actions: [
     #       {
     #         reason: "String", # required
     #         state: "RUNNABLE", # required, accepts RUNNABLE
     #         max_time_seconds: 1, # required
-    #         action: "CANCEL", # required, accepts CANCEL
+    #         action: "CANCEL", # required, accepts CANCEL, TERMINATE
     #       },
     #     ],
     #   })
@@ -5616,6 +6113,53 @@ module Aws::Batch
       req.send_request(options)
     end
 
+    # Updates a service environment. You can update the state of a service
+    # environment from `ENABLED` to `DISABLED` to prevent new service jobs
+    # from being placed in the service environment.
+    #
+    # @option params [required, String] :service_environment
+    #   The name or ARN of the service environment to update.
+    #
+    # @option params [String] :state
+    #   The state of the service environment.
+    #
+    # @option params [Array<Types::CapacityLimit>] :capacity_limits
+    #   The capacity limits for the service environment. This defines the
+    #   maximum resources that can be used by service jobs in this
+    #   environment.
+    #
+    # @return [Types::UpdateServiceEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateServiceEnvironmentResponse#service_environment_name #service_environment_name} => String
+    #   * {Types::UpdateServiceEnvironmentResponse#service_environment_arn #service_environment_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_service_environment({
+    #     service_environment: "String", # required
+    #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #     capacity_limits: [
+    #       {
+    #         max_capacity: 1,
+    #         capacity_unit: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_environment_name #=> String
+    #   resp.service_environment_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateServiceEnvironment AWS API Documentation
+    #
+    # @overload update_service_environment(params = {})
+    # @param [Hash] params ({})
+    def update_service_environment(params = {}, options = {})
+      req = build_request(:update_service_environment, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -5634,7 +6178,7 @@ module Aws::Batch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.117.0'
+      context[:gem_version] = '1.119.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

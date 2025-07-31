@@ -188,7 +188,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#create_security_config-instance_method
       def create_security_config: (
-                                    type: ("saml" | "iamidentitycenter"),
+                                    type: ("saml" | "iamidentitycenter" | "iamfederation"),
                                     name: ::String,
                                     ?description: ::String,
                                     ?saml_options: {
@@ -202,6 +202,10 @@ module Aws
                                       instance_arn: ::String,
                                       user_attribute: ("UserId" | "UserName" | "Email")?,
                                       group_attribute: ("GroupId" | "GroupName")?
+                                    },
+                                    ?iam_federation_options: {
+                                      group_attribute: ::String?,
+                                      user_attribute: ::String?
                                     },
                                     ?client_token: ::String
                                   ) -> _CreateSecurityConfigResponseSuccess
@@ -405,7 +409,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#list_security_configs-instance_method
       def list_security_configs: (
-                                   type: ("saml" | "iamidentitycenter"),
+                                   type: ("saml" | "iamidentitycenter" | "iamfederation"),
                                    ?next_token: ::String,
                                    ?max_results: ::Integer
                                  ) -> _ListSecurityConfigsResponseSuccess
@@ -549,6 +553,10 @@ module Aws
                                     ?iam_identity_center_options_updates: {
                                       user_attribute: ("UserId" | "UserName" | "Email")?,
                                       group_attribute: ("GroupId" | "GroupName")?
+                                    },
+                                    ?iam_federation_options: {
+                                      group_attribute: ::String?,
+                                      user_attribute: ::String?
                                     },
                                     ?client_token: ::String
                                   ) -> _UpdateSecurityConfigResponseSuccess

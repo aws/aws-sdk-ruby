@@ -58,7 +58,7 @@ module Aws::OpsWorks
   autoload :Stack, 'aws-sdk-opsworks/stack'
   autoload :StackSummary, 'aws-sdk-opsworks/stack_summary'
 
-  GEM_VERSION = '1.76.0'
+  GEM_VERSION = '1.77.0'
 
 end
 

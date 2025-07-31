@@ -451,6 +451,7 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#terminate-instance_method
       def terminate: (
+                       ?force: bool,
                        ?skip_os_shutdown: bool,
                        ?dry_run: bool
                      ) -> Types::TerminateInstancesResult
@@ -559,6 +560,7 @@ module Aws
                     | (?Hash[Symbol, untyped]) -> void
 
         def batch_terminate!: (
+                                ?force: bool,
                                 ?skip_os_shutdown: bool,
                                 ?dry_run: bool
                               ) -> void

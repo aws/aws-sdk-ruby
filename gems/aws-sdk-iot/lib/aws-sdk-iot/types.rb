@@ -2456,6 +2456,35 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The encryption configuration details that include the status
+    # information of the Amazon Web Services Key Management Service (KMS)
+    # key and the KMS access role.
+    #
+    # @!attribute [rw] configuration_status
+    #   The health status of KMS key and KMS access role. If either KMS key
+    #   or KMS access role is `UNHEALTHY`, the return value will be
+    #   `UNHEALTHY`. To use a customer-managed KMS key, the value of
+    #   `configurationStatus` must be `HEALTHY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code that indicates either the KMS key or the KMS access
+    #   role is `UNHEALTHY`. Valid values: `KMS_KEY_VALIDATION_ERROR` and
+    #   `ROLE_VALIDATION_ERROR`.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The detailed error message that corresponds to the `errorCode`.
+    #   @return [String]
+    #
+    class ConfigurationDetails < Struct.new(
+      :configuration_status,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] confirmation_token
     #   The token used to confirm ownership or access to the topic rule
     #   confirmation URL.
@@ -6085,6 +6114,43 @@ module Aws::IoT
       :authentication_type,
       :application_protocol,
       :client_certificate_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    class DescribeEncryptionConfigurationRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] encryption_type
+    #   The type of the Amazon Web Services Key Management Service (KMS)
+    #   key.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the IAM role assumed by Amazon Web
+    #   Services IoT Core to call KMS on behalf of the customer.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_access_role_arn
+    #   The ARN of the customer-managed KMS key.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_details
+    #   The encryption configuration details that include the status
+    #   information of the KMS key and the KMS access role.
+    #   @return [Types::ConfigurationDetails]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date when encryption configuration is last updated.
+    #   @return [Time]
+    #
+    class DescribeEncryptionConfigurationResponse < Struct.new(
+      :encryption_type,
+      :kms_key_arn,
+      :kms_access_role_arn,
+      :configuration_details,
+      :last_modified_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17715,6 +17781,30 @@ module Aws::IoT
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] encryption_type
+    #   The type of the Amazon Web Services Key Management Service (KMS)
+    #   key.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the customer-managed KMS key.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_access_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role assumed by Amazon Web
+    #   Services IoT Core to call KMS on behalf of the customer.
+    #   @return [String]
+    #
+    class UpdateEncryptionConfigurationRequest < Struct.new(
+      :encryption_type,
+      :kms_key_arn,
+      :kms_access_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class UpdateEncryptionConfigurationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] event_configurations
     #   The new event configuration values.

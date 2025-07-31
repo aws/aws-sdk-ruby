@@ -2515,6 +2515,8 @@ module Aws::CleanRooms
     UpdateConfiguredTableInput.add_member(:configured_table_identifier, Shapes::ShapeRef.new(shape: ConfiguredTableIdentifier, required: true, location: "uri", location_name: "configuredTableIdentifier"))
     UpdateConfiguredTableInput.add_member(:name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "name"))
     UpdateConfiguredTableInput.add_member(:description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "description"))
+    UpdateConfiguredTableInput.add_member(:table_reference, Shapes::ShapeRef.new(shape: TableReference, location_name: "tableReference"))
+    UpdateConfiguredTableInput.add_member(:allowed_columns, Shapes::ShapeRef.new(shape: AllowedColumnList, location_name: "allowedColumns"))
     UpdateConfiguredTableInput.add_member(:analysis_method, Shapes::ShapeRef.new(shape: AnalysisMethod, location_name: "analysisMethod"))
     UpdateConfiguredTableInput.add_member(:selected_analysis_methods, Shapes::ShapeRef.new(shape: SelectedAnalysisMethods, location_name: "selectedAnalysisMethods"))
     UpdateConfiguredTableInput.struct_class = Types::UpdateConfiguredTableInput
@@ -3706,6 +3708,7 @@ module Aws::CleanRooms
         o.input = Shapes::ShapeRef.new(shape: UpdateConfiguredTableInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateConfiguredTableOutput)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

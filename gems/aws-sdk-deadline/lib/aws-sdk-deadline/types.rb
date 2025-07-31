@@ -1466,6 +1466,12 @@ module Aws::Deadline
     #   Cloud resources.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to add to your monitor. Each tag consists of a tag key and
+    #   a tag value. Tag keys and values are both required, but tag values
+    #   can be empty strings.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CreateMonitorRequest AWS API Documentation
     #
     class CreateMonitorRequest < Struct.new(
@@ -1473,7 +1479,8 @@ module Aws::Deadline
       :display_name,
       :identity_center_instance_arn,
       :subdomain,
-      :role_arn)
+      :role_arn,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -59,6 +59,7 @@ module Aws::Glue
     AuthenticationTypes = Shapes::ListShape.new(name: 'AuthenticationTypes')
     AuthorizationCode = Shapes::StringShape.new(name: 'AuthorizationCode')
     AuthorizationCodeProperties = Shapes::StructureShape.new(name: 'AuthorizationCodeProperties')
+    AutoDataQuality = Shapes::StructureShape.new(name: 'AutoDataQuality')
     BackfillError = Shapes::StructureShape.new(name: 'BackfillError')
     BackfillErrorCode = Shapes::StringShape.new(name: 'BackfillErrorCode')
     BackfillErroredPartitionsList = Shapes::ListShape.new(name: 'BackfillErroredPartitionsList')
@@ -163,6 +164,7 @@ module Aws::Glue
     CatalogEntry = Shapes::StructureShape.new(name: 'CatalogEntry')
     CatalogGetterPageSize = Shapes::IntegerShape.new(name: 'CatalogGetterPageSize')
     CatalogHudiSource = Shapes::StructureShape.new(name: 'CatalogHudiSource')
+    CatalogIcebergSource = Shapes::StructureShape.new(name: 'CatalogIcebergSource')
     CatalogIdString = Shapes::StringShape.new(name: 'CatalogIdString')
     CatalogImportStatus = Shapes::StructureShape.new(name: 'CatalogImportStatus')
     CatalogInput = Shapes::StructureShape.new(name: 'CatalogInput')
@@ -377,6 +379,8 @@ module Aws::Glue
     CustomEntityTypes = Shapes::ListShape.new(name: 'CustomEntityTypes')
     CustomPatterns = Shapes::StringShape.new(name: 'CustomPatterns')
     CustomProperties = Shapes::MapShape.new(name: 'CustomProperties')
+    DDBELTCatalogAdditionalOptions = Shapes::StructureShape.new(name: 'DDBELTCatalogAdditionalOptions')
+    DDBELTConnectionOptions = Shapes::StructureShape.new(name: 'DDBELTConnectionOptions')
     DQAdditionalOptions = Shapes::MapShape.new(name: 'DQAdditionalOptions')
     DQCompositeRuleEvaluationMethod = Shapes::StringShape.new(name: 'DQCompositeRuleEvaluationMethod')
     DQDLAliases = Shapes::MapShape.new(name: 'DQDLAliases')
@@ -442,6 +446,7 @@ module Aws::Glue
     DatapointInclusionAnnotation = Shapes::StructureShape.new(name: 'DatapointInclusionAnnotation')
     Datatype = Shapes::StructureShape.new(name: 'Datatype')
     DateColumnStatisticsData = Shapes::StructureShape.new(name: 'DateColumnStatisticsData')
+    DdbExportType = Shapes::StringShape.new(name: 'DdbExportType')
     DecimalColumnStatisticsData = Shapes::StructureShape.new(name: 'DecimalColumnStatisticsData')
     DecimalNumber = Shapes::StructureShape.new(name: 'DecimalNumber')
     DeleteBehavior = Shapes::StringShape.new(name: 'DeleteBehavior')
@@ -540,6 +545,7 @@ module Aws::Glue
     DropNullFields = Shapes::StructureShape.new(name: 'DropNullFields')
     DynamicTransform = Shapes::StructureShape.new(name: 'DynamicTransform')
     DynamoDBCatalogSource = Shapes::StructureShape.new(name: 'DynamoDBCatalogSource')
+    DynamoDBELTConnectorSource = Shapes::StructureShape.new(name: 'DynamoDBELTConnectorSource')
     DynamoDBTarget = Shapes::StructureShape.new(name: 'DynamoDBTarget')
     DynamoDBTargetList = Shapes::ListShape.new(name: 'DynamoDBTargetList')
     Edge = Shapes::StructureShape.new(name: 'Edge')
@@ -793,6 +799,8 @@ module Aws::Glue
     GovernedCatalogTarget = Shapes::StructureShape.new(name: 'GovernedCatalogTarget')
     GrokClassifier = Shapes::StructureShape.new(name: 'GrokClassifier')
     GrokPattern = Shapes::StringShape.new(name: 'GrokPattern')
+    GroupFilters = Shapes::StructureShape.new(name: 'GroupFilters')
+    GroupFiltersList = Shapes::ListShape.new(name: 'GroupFiltersList')
     HashString = Shapes::StringShape.new(name: 'HashString')
     HudiTarget = Shapes::StructureShape.new(name: 'HudiTarget')
     HudiTargetCompressionType = Shapes::StringShape.new(name: 'HudiTargetCompressionType')
@@ -1208,6 +1216,7 @@ module Aws::Glue
     Role = Shapes::StringShape.new(name: 'Role')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RoleString = Shapes::StringShape.new(name: 'RoleString')
+    Route = Shapes::StructureShape.new(name: 'Route')
     RowTag = Shapes::StringShape.new(name: 'RowTag')
     RuleMetricsMap = Shapes::MapShape.new(name: 'RuleMetricsMap')
     RulesetNames = Shapes::ListShape.new(name: 'RulesetNames')
@@ -1219,6 +1228,7 @@ module Aws::Glue
     RuntimeNameString = Shapes::StringShape.new(name: 'RuntimeNameString')
     S3CatalogDeltaSource = Shapes::StructureShape.new(name: 'S3CatalogDeltaSource')
     S3CatalogHudiSource = Shapes::StructureShape.new(name: 'S3CatalogHudiSource')
+    S3CatalogIcebergSource = Shapes::StructureShape.new(name: 'S3CatalogIcebergSource')
     S3CatalogSource = Shapes::StructureShape.new(name: 'S3CatalogSource')
     S3CatalogTarget = Shapes::StructureShape.new(name: 'S3CatalogTarget')
     S3CsvSource = Shapes::StructureShape.new(name: 'S3CsvSource')
@@ -1236,6 +1246,7 @@ module Aws::Glue
     S3HudiDirectTarget = Shapes::StructureShape.new(name: 'S3HudiDirectTarget')
     S3HudiSource = Shapes::StructureShape.new(name: 'S3HudiSource')
     S3HyperDirectTarget = Shapes::StructureShape.new(name: 'S3HyperDirectTarget')
+    S3IcebergCatalogTarget = Shapes::StructureShape.new(name: 'S3IcebergCatalogTarget')
     S3IcebergDirectTarget = Shapes::StructureShape.new(name: 'S3IcebergDirectTarget')
     S3JsonSource = Shapes::StructureShape.new(name: 'S3JsonSource')
     S3ParquetSource = Shapes::StructureShape.new(name: 'S3ParquetSource')
@@ -1734,6 +1745,10 @@ module Aws::Glue
     AuthorizationCodeProperties.add_member(:redirect_uri, Shapes::ShapeRef.new(shape: RedirectUri, location_name: "RedirectUri"))
     AuthorizationCodeProperties.struct_class = Types::AuthorizationCodeProperties
 
+    AutoDataQuality.add_member(:is_enabled, Shapes::ShapeRef.new(shape: BooleanValue, location_name: "IsEnabled"))
+    AutoDataQuality.add_member(:evaluation_context, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "EvaluationContext"))
+    AutoDataQuality.struct_class = Types::AutoDataQuality
+
     BackfillError.add_member(:code, Shapes::ShapeRef.new(shape: BackfillErrorCode, location_name: "Code"))
     BackfillError.add_member(:partitions, Shapes::ShapeRef.new(shape: BackfillErroredPartitionsList, location_name: "Partitions"))
     BackfillError.struct_class = Types::BackfillError
@@ -2071,6 +2086,13 @@ module Aws::Glue
     CatalogHudiSource.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
     CatalogHudiSource.struct_class = Types::CatalogHudiSource
 
+    CatalogIcebergSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    CatalogIcebergSource.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
+    CatalogIcebergSource.add_member(:table, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Table"))
+    CatalogIcebergSource.add_member(:additional_iceberg_options, Shapes::ShapeRef.new(shape: AdditionalOptions, location_name: "AdditionalIcebergOptions"))
+    CatalogIcebergSource.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
+    CatalogIcebergSource.struct_class = Types::CatalogIcebergSource
+
     CatalogImportStatus.add_member(:import_completed, Shapes::ShapeRef.new(shape: Boolean, location_name: "ImportCompleted"))
     CatalogImportStatus.add_member(:import_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ImportTime"))
     CatalogImportStatus.add_member(:imported_by, Shapes::ShapeRef.new(shape: NameString, location_name: "ImportedBy"))
@@ -2121,6 +2143,8 @@ module Aws::Glue
     CatalogSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     CatalogSource.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
     CatalogSource.add_member(:table, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Table"))
+    CatalogSource.add_member(:partition_predicate, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "PartitionPredicate"))
+    CatalogSource.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
     CatalogSource.struct_class = Types::CatalogSource
 
     CatalogTablesList.member = Shapes::ShapeRef.new(shape: NameString)
@@ -2163,7 +2187,6 @@ module Aws::Glue
     CodeGenConfigurationNode.add_member(:redshift_source, Shapes::ShapeRef.new(shape: RedshiftSource, location_name: "RedshiftSource"))
     CodeGenConfigurationNode.add_member(:s3_catalog_source, Shapes::ShapeRef.new(shape: S3CatalogSource, location_name: "S3CatalogSource"))
     CodeGenConfigurationNode.add_member(:s3_csv_source, Shapes::ShapeRef.new(shape: S3CsvSource, location_name: "S3CsvSource"))
-    CodeGenConfigurationNode.add_member(:s3_excel_source, Shapes::ShapeRef.new(shape: S3ExcelSource, location_name: "S3ExcelSource"))
     CodeGenConfigurationNode.add_member(:s3_json_source, Shapes::ShapeRef.new(shape: S3JsonSource, location_name: "S3JsonSource"))
     CodeGenConfigurationNode.add_member(:s3_parquet_source, Shapes::ShapeRef.new(shape: S3ParquetSource, location_name: "S3ParquetSource"))
     CodeGenConfigurationNode.add_member(:relational_catalog_source, Shapes::ShapeRef.new(shape: RelationalCatalogSource, location_name: "RelationalCatalogSource"))
@@ -2174,9 +2197,7 @@ module Aws::Glue
     CodeGenConfigurationNode.add_member(:redshift_target, Shapes::ShapeRef.new(shape: RedshiftTarget, location_name: "RedshiftTarget"))
     CodeGenConfigurationNode.add_member(:s3_catalog_target, Shapes::ShapeRef.new(shape: S3CatalogTarget, location_name: "S3CatalogTarget"))
     CodeGenConfigurationNode.add_member(:s3_glue_parquet_target, Shapes::ShapeRef.new(shape: S3GlueParquetTarget, location_name: "S3GlueParquetTarget"))
-    CodeGenConfigurationNode.add_member(:s3_hyper_direct_target, Shapes::ShapeRef.new(shape: S3HyperDirectTarget, location_name: "S3HyperDirectTarget"))
     CodeGenConfigurationNode.add_member(:s3_direct_target, Shapes::ShapeRef.new(shape: S3DirectTarget, location_name: "S3DirectTarget"))
-    CodeGenConfigurationNode.add_member(:s3_iceberg_direct_target, Shapes::ShapeRef.new(shape: S3IcebergDirectTarget, location_name: "S3IcebergDirectTarget"))
     CodeGenConfigurationNode.add_member(:apply_mapping, Shapes::ShapeRef.new(shape: ApplyMapping, location_name: "ApplyMapping"))
     CodeGenConfigurationNode.add_member(:select_fields, Shapes::ShapeRef.new(shape: SelectFields, location_name: "SelectFields"))
     CodeGenConfigurationNode.add_member(:drop_fields, Shapes::ShapeRef.new(shape: DropFields, location_name: "DropFields"))
@@ -2209,6 +2230,7 @@ module Aws::Glue
     CodeGenConfigurationNode.add_member(:my_sql_catalog_target, Shapes::ShapeRef.new(shape: MySQLCatalogTarget, location_name: "MySQLCatalogTarget"))
     CodeGenConfigurationNode.add_member(:oracle_sql_catalog_target, Shapes::ShapeRef.new(shape: OracleSQLCatalogTarget, location_name: "OracleSQLCatalogTarget"))
     CodeGenConfigurationNode.add_member(:postgre_sql_catalog_target, Shapes::ShapeRef.new(shape: PostgreSQLCatalogTarget, location_name: "PostgreSQLCatalogTarget"))
+    CodeGenConfigurationNode.add_member(:route, Shapes::ShapeRef.new(shape: Route, location_name: "Route"))
     CodeGenConfigurationNode.add_member(:dynamic_transform, Shapes::ShapeRef.new(shape: DynamicTransform, location_name: "DynamicTransform"))
     CodeGenConfigurationNode.add_member(:evaluate_data_quality, Shapes::ShapeRef.new(shape: EvaluateDataQuality, location_name: "EvaluateDataQuality"))
     CodeGenConfigurationNode.add_member(:s3_catalog_hudi_source, Shapes::ShapeRef.new(shape: S3CatalogHudiSource, location_name: "S3CatalogHudiSource"))
@@ -2230,6 +2252,13 @@ module Aws::Glue
     CodeGenConfigurationNode.add_member(:snowflake_target, Shapes::ShapeRef.new(shape: SnowflakeTarget, location_name: "SnowflakeTarget"))
     CodeGenConfigurationNode.add_member(:connector_data_source, Shapes::ShapeRef.new(shape: ConnectorDataSource, location_name: "ConnectorDataSource"))
     CodeGenConfigurationNode.add_member(:connector_data_target, Shapes::ShapeRef.new(shape: ConnectorDataTarget, location_name: "ConnectorDataTarget"))
+    CodeGenConfigurationNode.add_member(:s3_catalog_iceberg_source, Shapes::ShapeRef.new(shape: S3CatalogIcebergSource, location_name: "S3CatalogIcebergSource"))
+    CodeGenConfigurationNode.add_member(:catalog_iceberg_source, Shapes::ShapeRef.new(shape: CatalogIcebergSource, location_name: "CatalogIcebergSource"))
+    CodeGenConfigurationNode.add_member(:s3_iceberg_catalog_target, Shapes::ShapeRef.new(shape: S3IcebergCatalogTarget, location_name: "S3IcebergCatalogTarget"))
+    CodeGenConfigurationNode.add_member(:s3_iceberg_direct_target, Shapes::ShapeRef.new(shape: S3IcebergDirectTarget, location_name: "S3IcebergDirectTarget"))
+    CodeGenConfigurationNode.add_member(:s3_excel_source, Shapes::ShapeRef.new(shape: S3ExcelSource, location_name: "S3ExcelSource"))
+    CodeGenConfigurationNode.add_member(:s3_hyper_direct_target, Shapes::ShapeRef.new(shape: S3HyperDirectTarget, location_name: "S3HyperDirectTarget"))
+    CodeGenConfigurationNode.add_member(:dynamo_dbelt_connector_source, Shapes::ShapeRef.new(shape: DynamoDBELTConnectorSource, location_name: "DynamoDBELTConnectorSource"))
     CodeGenConfigurationNode.struct_class = Types::CodeGenConfigurationNode
 
     CodeGenConfigurationNodes.key = Shapes::ShapeRef.new(shape: NodeId)
@@ -3047,6 +3076,19 @@ module Aws::Glue
     CustomProperties.key = Shapes::ShapeRef.new(shape: String)
     CustomProperties.value = Shapes::ShapeRef.new(shape: String)
 
+    DDBELTCatalogAdditionalOptions.add_member(:dynamodb_export, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "DynamodbExport"))
+    DDBELTCatalogAdditionalOptions.add_member(:dynamodb_unnest_ddb_json, Shapes::ShapeRef.new(shape: BooleanValue, location_name: "DynamodbUnnestDDBJson"))
+    DDBELTCatalogAdditionalOptions.struct_class = Types::DDBELTCatalogAdditionalOptions
+
+    DDBELTConnectionOptions.add_member(:dynamodb_export, Shapes::ShapeRef.new(shape: DdbExportType, location_name: "DynamodbExport"))
+    DDBELTConnectionOptions.add_member(:dynamodb_unnest_ddb_json, Shapes::ShapeRef.new(shape: BooleanValue, location_name: "DynamodbUnnestDDBJson"))
+    DDBELTConnectionOptions.add_member(:dynamodb_table_arn, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "DynamodbTableArn"))
+    DDBELTConnectionOptions.add_member(:dynamodb_s3_bucket, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "DynamodbS3Bucket"))
+    DDBELTConnectionOptions.add_member(:dynamodb_s3_prefix, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "DynamodbS3Prefix"))
+    DDBELTConnectionOptions.add_member(:dynamodb_s3_bucket_owner, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "DynamodbS3BucketOwner"))
+    DDBELTConnectionOptions.add_member(:dynamodb_sts_role_arn, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "DynamodbStsRoleArn"))
+    DDBELTConnectionOptions.struct_class = Types::DDBELTConnectionOptions
+
     DQAdditionalOptions.key = Shapes::ShapeRef.new(shape: AdditionalOptionKeys)
     DQAdditionalOptions.value = Shapes::ShapeRef.new(shape: GenericString)
 
@@ -3601,6 +3643,7 @@ module Aws::Glue
     DirectJDBCSource.add_member(:connection_name, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "ConnectionName"))
     DirectJDBCSource.add_member(:connection_type, Shapes::ShapeRef.new(shape: JDBCConnectionType, required: true, location_name: "ConnectionType"))
     DirectJDBCSource.add_member(:redshift_tmp_dir, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "RedshiftTmpDir"))
+    DirectJDBCSource.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
     DirectJDBCSource.struct_class = Types::DirectJDBCSource
 
     DirectKafkaSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
@@ -3658,7 +3701,14 @@ module Aws::Glue
     DynamoDBCatalogSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     DynamoDBCatalogSource.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
     DynamoDBCatalogSource.add_member(:table, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Table"))
+    DynamoDBCatalogSource.add_member(:pitr_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "PitrEnabled"))
+    DynamoDBCatalogSource.add_member(:additional_options, Shapes::ShapeRef.new(shape: DDBELTCatalogAdditionalOptions, location_name: "AdditionalOptions"))
     DynamoDBCatalogSource.struct_class = Types::DynamoDBCatalogSource
+
+    DynamoDBELTConnectorSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    DynamoDBELTConnectorSource.add_member(:connection_options, Shapes::ShapeRef.new(shape: DDBELTConnectionOptions, location_name: "ConnectionOptions"))
+    DynamoDBELTConnectorSource.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
+    DynamoDBELTConnectorSource.struct_class = Types::DynamoDBELTConnectorSource
 
     DynamoDBTarget.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
     DynamoDBTarget.add_member(:scan_all, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "scanAll"))
@@ -4667,6 +4717,7 @@ module Aws::Glue
 
     GlueStudioSchemaColumn.add_member(:name, Shapes::ShapeRef.new(shape: GlueStudioColumnNameString, required: true, location_name: "Name"))
     GlueStudioSchemaColumn.add_member(:type, Shapes::ShapeRef.new(shape: ColumnTypeString, location_name: "Type"))
+    GlueStudioSchemaColumn.add_member(:glue_studio_type, Shapes::ShapeRef.new(shape: ColumnTypeString, location_name: "GlueStudioType"))
     GlueStudioSchemaColumn.struct_class = Types::GlueStudioSchemaColumn
 
     GlueStudioSchemaColumnList.member = Shapes::ShapeRef.new(shape: GlueStudioSchemaColumn)
@@ -4706,6 +4757,13 @@ module Aws::Glue
     GrokClassifier.add_member(:grok_pattern, Shapes::ShapeRef.new(shape: GrokPattern, required: true, location_name: "GrokPattern"))
     GrokClassifier.add_member(:custom_patterns, Shapes::ShapeRef.new(shape: CustomPatterns, location_name: "CustomPatterns"))
     GrokClassifier.struct_class = Types::GrokClassifier
+
+    GroupFilters.add_member(:group_name, Shapes::ShapeRef.new(shape: GenericLimitedString, required: true, location_name: "GroupName"))
+    GroupFilters.add_member(:filters, Shapes::ShapeRef.new(shape: FilterExpressions, required: true, location_name: "Filters"))
+    GroupFilters.add_member(:logical_operator, Shapes::ShapeRef.new(shape: FilterLogicalOperator, required: true, location_name: "LogicalOperator"))
+    GroupFilters.struct_class = Types::GroupFilters
+
+    GroupFiltersList.member = Shapes::ShapeRef.new(shape: GroupFilters)
 
     HudiTarget.add_member(:paths, Shapes::ShapeRef.new(shape: PathList, location_name: "Paths"))
     HudiTarget.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))
@@ -5147,6 +5205,7 @@ module Aws::Glue
     KinesisStreamingSourceOptions.add_member(:add_record_timestamp, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "AddRecordTimestamp"))
     KinesisStreamingSourceOptions.add_member(:emit_consumer_lag_metrics, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "EmitConsumerLagMetrics"))
     KinesisStreamingSourceOptions.add_member(:starting_timestamp, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "StartingTimestamp"))
+    KinesisStreamingSourceOptions.add_member(:fanout_consumer_arn, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "FanoutConsumerARN"))
     KinesisStreamingSourceOptions.struct_class = Types::KinesisStreamingSourceOptions
 
     LabelingSetGenerationTaskRunProperties.add_member(:output_s3_path, Shapes::ShapeRef.new(shape: UriString, location_name: "OutputS3Path"))
@@ -5682,6 +5741,13 @@ module Aws::Glue
     PIIDetection.add_member(:sample_fraction, Shapes::ShapeRef.new(shape: BoxedDoubleFraction, location_name: "SampleFraction"))
     PIIDetection.add_member(:threshold_fraction, Shapes::ShapeRef.new(shape: BoxedDoubleFraction, location_name: "ThresholdFraction"))
     PIIDetection.add_member(:mask_value, Shapes::ShapeRef.new(shape: MaskValue, location_name: "MaskValue"))
+    PIIDetection.add_member(:redact_text, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "RedactText"))
+    PIIDetection.add_member(:redact_char, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "RedactChar"))
+    PIIDetection.add_member(:match_pattern, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "MatchPattern"))
+    PIIDetection.add_member(:num_left_chars_to_exclude, Shapes::ShapeRef.new(shape: BoxedPositiveInt, location_name: "NumLeftCharsToExclude"))
+    PIIDetection.add_member(:num_right_chars_to_exclude, Shapes::ShapeRef.new(shape: BoxedPositiveInt, location_name: "NumRightCharsToExclude"))
+    PIIDetection.add_member(:detection_parameters, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "DetectionParameters"))
+    PIIDetection.add_member(:detection_sensitivity, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "DetectionSensitivity"))
     PIIDetection.struct_class = Types::PIIDetection
 
     ParameterMap.key = Shapes::ShapeRef.new(shape: ParameterName)
@@ -6004,6 +6070,11 @@ module Aws::Glue
     RetentionMetrics.add_member(:iceberg_metrics, Shapes::ShapeRef.new(shape: IcebergRetentionMetrics, location_name: "IcebergMetrics"))
     RetentionMetrics.struct_class = Types::RetentionMetrics
 
+    Route.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    Route.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, required: true, location_name: "Inputs"))
+    Route.add_member(:group_filters_list, Shapes::ShapeRef.new(shape: GroupFiltersList, required: true, location_name: "GroupFiltersList"))
+    Route.struct_class = Types::Route
+
     RuleMetricsMap.key = Shapes::ShapeRef.new(shape: NameString)
     RuleMetricsMap.value = Shapes::ShapeRef.new(shape: NullableDouble)
 
@@ -6041,6 +6112,13 @@ module Aws::Glue
     S3CatalogHudiSource.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
     S3CatalogHudiSource.struct_class = Types::S3CatalogHudiSource
 
+    S3CatalogIcebergSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    S3CatalogIcebergSource.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
+    S3CatalogIcebergSource.add_member(:table, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Table"))
+    S3CatalogIcebergSource.add_member(:additional_iceberg_options, Shapes::ShapeRef.new(shape: AdditionalOptions, location_name: "AdditionalIcebergOptions"))
+    S3CatalogIcebergSource.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
+    S3CatalogIcebergSource.struct_class = Types::S3CatalogIcebergSource
+
     S3CatalogSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     S3CatalogSource.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
     S3CatalogSource.add_member(:table, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Table"))
@@ -6054,6 +6132,7 @@ module Aws::Glue
     S3CatalogTarget.add_member(:table, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Table"))
     S3CatalogTarget.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
     S3CatalogTarget.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: CatalogSchemaChangePolicy, location_name: "SchemaChangePolicy"))
+    S3CatalogTarget.add_member(:auto_data_quality, Shapes::ShapeRef.new(shape: AutoDataQuality, location_name: "AutoDataQuality"))
     S3CatalogTarget.struct_class = Types::S3CatalogTarget
 
     S3CsvSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
@@ -6084,6 +6163,8 @@ module Aws::Glue
     S3DeltaCatalogTarget.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
     S3DeltaCatalogTarget.add_member(:additional_options, Shapes::ShapeRef.new(shape: AdditionalOptions, location_name: "AdditionalOptions"))
     S3DeltaCatalogTarget.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: CatalogSchemaChangePolicy, location_name: "SchemaChangePolicy"))
+    S3DeltaCatalogTarget.add_member(:auto_data_quality, Shapes::ShapeRef.new(shape: AutoDataQuality, location_name: "AutoDataQuality"))
+    S3DeltaCatalogTarget.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
     S3DeltaCatalogTarget.struct_class = Types::S3DeltaCatalogTarget
 
     S3DeltaDirectTarget.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
@@ -6095,6 +6176,7 @@ module Aws::Glue
     S3DeltaDirectTarget.add_member(:format, Shapes::ShapeRef.new(shape: TargetFormat, required: true, location_name: "Format"))
     S3DeltaDirectTarget.add_member(:additional_options, Shapes::ShapeRef.new(shape: AdditionalOptions, location_name: "AdditionalOptions"))
     S3DeltaDirectTarget.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: DirectSchemaChangePolicy, location_name: "SchemaChangePolicy"))
+    S3DeltaDirectTarget.add_member(:auto_data_quality, Shapes::ShapeRef.new(shape: AutoDataQuality, location_name: "AutoDataQuality"))
     S3DeltaDirectTarget.struct_class = Types::S3DeltaDirectTarget
 
     S3DeltaSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
@@ -6118,6 +6200,8 @@ module Aws::Glue
     S3DirectTarget.add_member(:number_target_partitions, Shapes::ShapeRef.new(shape: NumberTargetPartitionsString, location_name: "NumberTargetPartitions"))
     S3DirectTarget.add_member(:format, Shapes::ShapeRef.new(shape: TargetFormat, required: true, location_name: "Format"))
     S3DirectTarget.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: DirectSchemaChangePolicy, location_name: "SchemaChangePolicy"))
+    S3DirectTarget.add_member(:auto_data_quality, Shapes::ShapeRef.new(shape: AutoDataQuality, location_name: "AutoDataQuality"))
+    S3DirectTarget.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
     S3DirectTarget.struct_class = Types::S3DirectTarget
 
     S3Encryption.add_member(:s3_encryption_mode, Shapes::ShapeRef.new(shape: S3EncryptionMode, location_name: "S3EncryptionMode"))
@@ -6148,6 +6232,7 @@ module Aws::Glue
     S3GlueParquetTarget.add_member(:compression, Shapes::ShapeRef.new(shape: ParquetCompressionType, location_name: "Compression"))
     S3GlueParquetTarget.add_member(:number_target_partitions, Shapes::ShapeRef.new(shape: NumberTargetPartitionsString, location_name: "NumberTargetPartitions"))
     S3GlueParquetTarget.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: DirectSchemaChangePolicy, location_name: "SchemaChangePolicy"))
+    S3GlueParquetTarget.add_member(:auto_data_quality, Shapes::ShapeRef.new(shape: AutoDataQuality, location_name: "AutoDataQuality"))
     S3GlueParquetTarget.struct_class = Types::S3GlueParquetTarget
 
     S3HudiCatalogTarget.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
@@ -6157,6 +6242,8 @@ module Aws::Glue
     S3HudiCatalogTarget.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
     S3HudiCatalogTarget.add_member(:additional_options, Shapes::ShapeRef.new(shape: AdditionalOptions, required: true, location_name: "AdditionalOptions"))
     S3HudiCatalogTarget.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: CatalogSchemaChangePolicy, location_name: "SchemaChangePolicy"))
+    S3HudiCatalogTarget.add_member(:auto_data_quality, Shapes::ShapeRef.new(shape: AutoDataQuality, location_name: "AutoDataQuality"))
+    S3HudiCatalogTarget.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
     S3HudiCatalogTarget.struct_class = Types::S3HudiCatalogTarget
 
     S3HudiDirectTarget.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
@@ -6168,6 +6255,7 @@ module Aws::Glue
     S3HudiDirectTarget.add_member(:format, Shapes::ShapeRef.new(shape: TargetFormat, required: true, location_name: "Format"))
     S3HudiDirectTarget.add_member(:additional_options, Shapes::ShapeRef.new(shape: AdditionalOptions, required: true, location_name: "AdditionalOptions"))
     S3HudiDirectTarget.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: DirectSchemaChangePolicy, location_name: "SchemaChangePolicy"))
+    S3HudiDirectTarget.add_member(:auto_data_quality, Shapes::ShapeRef.new(shape: AutoDataQuality, location_name: "AutoDataQuality"))
     S3HudiDirectTarget.struct_class = Types::S3HudiDirectTarget
 
     S3HudiSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
@@ -6179,11 +6267,24 @@ module Aws::Glue
 
     S3HyperDirectTarget.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     S3HyperDirectTarget.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, required: true, location_name: "Inputs"))
+    S3HyperDirectTarget.add_member(:format, Shapes::ShapeRef.new(shape: TargetFormat, location_name: "Format"))
     S3HyperDirectTarget.add_member(:partition_keys, Shapes::ShapeRef.new(shape: GlueStudioPathList, location_name: "PartitionKeys"))
     S3HyperDirectTarget.add_member(:path, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Path"))
     S3HyperDirectTarget.add_member(:compression, Shapes::ShapeRef.new(shape: HyperTargetCompressionType, location_name: "Compression"))
     S3HyperDirectTarget.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: DirectSchemaChangePolicy, location_name: "SchemaChangePolicy"))
+    S3HyperDirectTarget.add_member(:auto_data_quality, Shapes::ShapeRef.new(shape: AutoDataQuality, location_name: "AutoDataQuality"))
+    S3HyperDirectTarget.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
     S3HyperDirectTarget.struct_class = Types::S3HyperDirectTarget
+
+    S3IcebergCatalogTarget.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    S3IcebergCatalogTarget.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, required: true, location_name: "Inputs"))
+    S3IcebergCatalogTarget.add_member(:partition_keys, Shapes::ShapeRef.new(shape: GlueStudioPathList, location_name: "PartitionKeys"))
+    S3IcebergCatalogTarget.add_member(:table, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Table"))
+    S3IcebergCatalogTarget.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
+    S3IcebergCatalogTarget.add_member(:additional_options, Shapes::ShapeRef.new(shape: AdditionalOptions, location_name: "AdditionalOptions"))
+    S3IcebergCatalogTarget.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: CatalogSchemaChangePolicy, location_name: "SchemaChangePolicy"))
+    S3IcebergCatalogTarget.add_member(:auto_data_quality, Shapes::ShapeRef.new(shape: AutoDataQuality, location_name: "AutoDataQuality"))
+    S3IcebergCatalogTarget.struct_class = Types::S3IcebergCatalogTarget
 
     S3IcebergDirectTarget.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     S3IcebergDirectTarget.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, required: true, location_name: "Inputs"))
@@ -6192,8 +6293,10 @@ module Aws::Glue
     S3IcebergDirectTarget.add_member(:format, Shapes::ShapeRef.new(shape: TargetFormat, required: true, location_name: "Format"))
     S3IcebergDirectTarget.add_member(:additional_options, Shapes::ShapeRef.new(shape: AdditionalOptions, location_name: "AdditionalOptions"))
     S3IcebergDirectTarget.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: DirectSchemaChangePolicy, location_name: "SchemaChangePolicy"))
+    S3IcebergDirectTarget.add_member(:auto_data_quality, Shapes::ShapeRef.new(shape: AutoDataQuality, location_name: "AutoDataQuality"))
     S3IcebergDirectTarget.add_member(:compression, Shapes::ShapeRef.new(shape: IcebergTargetCompressionType, required: true, location_name: "Compression"))
     S3IcebergDirectTarget.add_member(:number_target_partitions, Shapes::ShapeRef.new(shape: NumberTargetPartitionsString, location_name: "NumberTargetPartitions"))
+    S3IcebergDirectTarget.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
     S3IcebergDirectTarget.struct_class = Types::S3IcebergDirectTarget
 
     S3JsonSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.123.0 (2025-07-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.122.0 (2025-07-30)
+------------------
+
+* Feature - This release adds new origin timeout options: 1) ResponseCompletionTimeout and 2) OriginReadTimeout (for S3 origins)
+
 1.121.0 (2025-07-21)
 ------------------
 

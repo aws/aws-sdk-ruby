@@ -54,7 +54,7 @@ module Aws::ForecastQueryService
   autoload :EndpointProvider, 'aws-sdk-forecastqueryservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-forecastqueryservice/endpoints'
 
-  GEM_VERSION = '1.56.0'
+  GEM_VERSION = '1.57.0'
 
 end
 

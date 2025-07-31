@@ -2200,6 +2200,19 @@ module Aws
                                          ) -> _DescribeDomainConfigurationResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDomainConfigurationResponseSuccess
 
+      interface _DescribeEncryptionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEncryptionConfigurationResponse]
+        def encryption_type: () -> ("CUSTOMER_MANAGED_KMS_KEY" | "AWS_OWNED_KMS_KEY")
+        def kms_key_arn: () -> ::String
+        def kms_access_role_arn: () -> ::String
+        def configuration_details: () -> Types::ConfigurationDetails
+        def last_modified_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#describe_encryption_configuration-instance_method
+      def describe_encryption_configuration: (
+                                             ) -> _DescribeEncryptionConfigurationResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEncryptionConfigurationResponseSuccess
+
       interface _DescribeEndpointResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEndpointResponse]
         def endpoint_address: () -> ::String
@@ -4762,6 +4775,17 @@ module Aws
                                         ?query_version: ::String
                                       ) -> _UpdateDynamicThingGroupResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDynamicThingGroupResponseSuccess
+
+      interface _UpdateEncryptionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEncryptionConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#update_encryption_configuration-instance_method
+      def update_encryption_configuration: (
+                                             encryption_type: ("CUSTOMER_MANAGED_KMS_KEY" | "AWS_OWNED_KMS_KEY"),
+                                             ?kms_key_arn: ::String,
+                                             ?kms_access_role_arn: ::String
+                                           ) -> _UpdateEncryptionConfigurationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEncryptionConfigurationResponseSuccess
 
       interface _UpdateEventConfigurationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEventConfigurationsResponse]

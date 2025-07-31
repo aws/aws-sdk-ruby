@@ -55,7 +55,7 @@ module Aws::PCS
   autoload :EndpointProvider, 'aws-sdk-pcs/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-pcs/endpoints'
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.24.0'
 
 end
 

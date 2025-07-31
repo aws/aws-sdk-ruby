@@ -1052,6 +1052,10 @@ module Aws::DocDB
     #
     #    </note>
     #
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Amazon DocumentDB Serverless
+    #   cluster.
+    #
     # @option params [Boolean] :manage_master_user_password
     #   Specifies whether to manage the master user password with Amazon Web
     #   Services Secrets Manager.
@@ -1118,6 +1122,10 @@ module Aws::DocDB
     #     deletion_protection: false,
     #     global_cluster_identifier: "GlobalClusterIdentifier",
     #     storage_type: "String",
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #     },
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     source_region: "String",
@@ -1169,6 +1177,8 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.storage_type #=> String
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
@@ -1924,6 +1934,8 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.storage_type #=> String
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
@@ -2775,6 +2787,8 @@ module Aws::DocDB
     #   resp.db_clusters[0].enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_clusters[0].deletion_protection #=> Boolean
     #   resp.db_clusters[0].storage_type #=> String
+    #   resp.db_clusters[0].serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_clusters[0].serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_clusters[0].master_user_secret.secret_arn #=> String
     #   resp.db_clusters[0].master_user_secret.secret_status #=> String
     #   resp.db_clusters[0].master_user_secret.kms_key_id #=> String
@@ -2886,6 +2900,8 @@ module Aws::DocDB
     #   resp.db_engine_versions[0].supported_ca_certificate_identifiers #=> Array
     #   resp.db_engine_versions[0].supported_ca_certificate_identifiers[0] #=> String
     #   resp.db_engine_versions[0].supports_certificate_rotation_without_restart #=> Boolean
+    #   resp.db_engine_versions[0].serverless_v2_features_support.min_capacity #=> Float
+    #   resp.db_engine_versions[0].serverless_v2_features_support.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -3748,6 +3764,8 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.storage_type #=> String
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
@@ -4054,6 +4072,10 @@ module Aws::DocDB
     #
     #   Default value is `standard `
     #
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Amazon DocumentDB Serverless
+    #   cluster.
+    #
     # @option params [Boolean] :manage_master_user_password
     #   Specifies whether to manage the master user password with Amazon Web
     #   Services Secrets Manager. If the cluster doesn't manage the master
@@ -4133,6 +4155,10 @@ module Aws::DocDB
     #     allow_major_version_upgrade: false,
     #     deletion_protection: false,
     #     storage_type: "String",
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #     },
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     rotate_master_user_password: false,
@@ -4184,6 +4210,8 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.storage_type #=> String
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
@@ -5177,6 +5205,10 @@ module Aws::DocDB
     #   letters, numbers or hyphens. Its first character must be a letter, and
     #   it cannot end with a hyphen or contain two consecutive hyphens.
     #
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Amazon DocumentDB Serverless
+    #   cluster.
+    #
     # @option params [String] :storage_type
     #   The storage type to associate with the DB cluster.
     #
@@ -5213,6 +5245,10 @@ module Aws::DocDB
     #     enable_cloudwatch_logs_exports: ["String"],
     #     deletion_protection: false,
     #     db_cluster_parameter_group_name: "String",
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #     },
     #     storage_type: "String",
     #   })
     #
@@ -5262,6 +5298,8 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.storage_type #=> String
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
@@ -5405,6 +5443,10 @@ module Aws::DocDB
     #   `DeletionProtection` is disabled. `DeletionProtection` protects
     #   clusters from being accidentally deleted.
     #
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Amazon DocumentDB Serverless
+    #   cluster.
+    #
     # @option params [String] :storage_type
     #   The storage type to associate with the DB cluster.
     #
@@ -5440,6 +5482,10 @@ module Aws::DocDB
     #     kms_key_id: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
     #     deletion_protection: false,
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #     },
     #     storage_type: "String",
     #   })
     #
@@ -5489,6 +5535,8 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.storage_type #=> String
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
@@ -5570,6 +5618,8 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.storage_type #=> String
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
@@ -5651,6 +5701,8 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.storage_type #=> String
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
@@ -5752,7 +5804,7 @@ module Aws::DocDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -919,11 +919,16 @@ module Aws::OpenSearchServerless
     #
     # @option params [Types::SamlConfigOptions] :saml_options
     #   Describes SAML options in in the form of a key-value map. This field
-    #   is required if you specify `saml` for the `type` parameter.
+    #   is required if you specify `SAML` for the `type` parameter.
     #
     # @option params [Types::CreateIamIdentityCenterConfigOptions] :iam_identity_center_options
     #   Describes IAM Identity Center options in the form of a key-value map.
     #   This field is required if you specify iamidentitycenter for the type
+    #   parameter.
+    #
+    # @option params [Types::IamFederationConfigOptions] :iam_federation_options
+    #   Describes IAM federation options in the form of a key-value map. This
+    #   field is required if you specify `iamFederation` for the `type`
     #   parameter.
     #
     # @option params [String] :client_token
@@ -940,7 +945,7 @@ module Aws::OpenSearchServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_security_config({
-    #     type: "saml", # required, accepts saml, iamidentitycenter
+    #     type: "saml", # required, accepts saml, iamidentitycenter, iamfederation
     #     name: "ConfigName", # required
     #     description: "ConfigDescription",
     #     saml_options: {
@@ -955,13 +960,17 @@ module Aws::OpenSearchServerless
     #       user_attribute: "UserId", # accepts UserId, UserName, Email
     #       group_attribute: "GroupId", # accepts GroupId, GroupName
     #     },
+    #     iam_federation_options: {
+    #       group_attribute: "iamFederationGroupAttribute",
+    #       user_attribute: "iamFederationUserAttribute",
+    #     },
     #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
     #   resp.security_config_detail.id #=> String
-    #   resp.security_config_detail.type #=> String, one of "saml", "iamidentitycenter"
+    #   resp.security_config_detail.type #=> String, one of "saml", "iamidentitycenter", "iamfederation"
     #   resp.security_config_detail.config_version #=> String
     #   resp.security_config_detail.description #=> String
     #   resp.security_config_detail.saml_options.metadata #=> String
@@ -975,6 +984,8 @@ module Aws::OpenSearchServerless
     #   resp.security_config_detail.iam_identity_center_options.application_description #=> String
     #   resp.security_config_detail.iam_identity_center_options.user_attribute #=> String, one of "UserId", "UserName", "Email"
     #   resp.security_config_detail.iam_identity_center_options.group_attribute #=> String, one of "GroupId", "GroupName"
+    #   resp.security_config_detail.iam_federation_options.group_attribute #=> String
+    #   resp.security_config_detail.iam_federation_options.user_attribute #=> String
     #   resp.security_config_detail.created_date #=> Integer
     #   resp.security_config_detail.last_modified_date #=> Integer
     #
@@ -1469,7 +1480,7 @@ module Aws::OpenSearchServerless
     # @example Response structure
     #
     #   resp.security_config_detail.id #=> String
-    #   resp.security_config_detail.type #=> String, one of "saml", "iamidentitycenter"
+    #   resp.security_config_detail.type #=> String, one of "saml", "iamidentitycenter", "iamfederation"
     #   resp.security_config_detail.config_version #=> String
     #   resp.security_config_detail.description #=> String
     #   resp.security_config_detail.saml_options.metadata #=> String
@@ -1483,6 +1494,8 @@ module Aws::OpenSearchServerless
     #   resp.security_config_detail.iam_identity_center_options.application_description #=> String
     #   resp.security_config_detail.iam_identity_center_options.user_attribute #=> String, one of "UserId", "UserName", "Email"
     #   resp.security_config_detail.iam_identity_center_options.group_attribute #=> String, one of "GroupId", "GroupName"
+    #   resp.security_config_detail.iam_federation_options.group_attribute #=> String
+    #   resp.security_config_detail.iam_federation_options.user_attribute #=> String
     #   resp.security_config_detail.created_date #=> Integer
     #   resp.security_config_detail.last_modified_date #=> Integer
     #
@@ -1750,7 +1763,7 @@ module Aws::OpenSearchServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_security_configs({
-    #     type: "saml", # required, accepts saml, iamidentitycenter
+    #     type: "saml", # required, accepts saml, iamidentitycenter, iamfederation
     #     next_token: "String",
     #     max_results: 1,
     #   })
@@ -1759,7 +1772,7 @@ module Aws::OpenSearchServerless
     #
     #   resp.security_config_summaries #=> Array
     #   resp.security_config_summaries[0].id #=> String
-    #   resp.security_config_summaries[0].type #=> String, one of "saml", "iamidentitycenter"
+    #   resp.security_config_summaries[0].type #=> String, one of "saml", "iamidentitycenter", "iamfederation"
     #   resp.security_config_summaries[0].config_version #=> String
     #   resp.security_config_summaries[0].description #=> String
     #   resp.security_config_summaries[0].created_date #=> Integer
@@ -2247,6 +2260,11 @@ module Aws::OpenSearchServerless
     # @option params [Types::UpdateIamIdentityCenterConfigOptions] :iam_identity_center_options_updates
     #   Describes IAM Identity Center options in the form of a key-value map.
     #
+    # @option params [Types::IamFederationConfigOptions] :iam_federation_options
+    #   Describes IAM federation options in the form of a key-value map for
+    #   updating an existing security configuration. Use this field to modify
+    #   IAM federation settings for the security configuration.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -2275,13 +2293,17 @@ module Aws::OpenSearchServerless
     #       user_attribute: "UserId", # accepts UserId, UserName, Email
     #       group_attribute: "GroupId", # accepts GroupId, GroupName
     #     },
+    #     iam_federation_options: {
+    #       group_attribute: "iamFederationGroupAttribute",
+    #       user_attribute: "iamFederationUserAttribute",
+    #     },
     #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
     #   resp.security_config_detail.id #=> String
-    #   resp.security_config_detail.type #=> String, one of "saml", "iamidentitycenter"
+    #   resp.security_config_detail.type #=> String, one of "saml", "iamidentitycenter", "iamfederation"
     #   resp.security_config_detail.config_version #=> String
     #   resp.security_config_detail.description #=> String
     #   resp.security_config_detail.saml_options.metadata #=> String
@@ -2295,6 +2317,8 @@ module Aws::OpenSearchServerless
     #   resp.security_config_detail.iam_identity_center_options.application_description #=> String
     #   resp.security_config_detail.iam_identity_center_options.user_attribute #=> String, one of "UserId", "UserName", "Email"
     #   resp.security_config_detail.iam_identity_center_options.group_attribute #=> String, one of "GroupId", "GroupName"
+    #   resp.security_config_detail.iam_federation_options.group_attribute #=> String
+    #   resp.security_config_detail.iam_federation_options.user_attribute #=> String
     #   resp.security_config_detail.created_date #=> Integer
     #   resp.security_config_detail.last_modified_date #=> Integer
     #
@@ -2458,7 +2482,7 @@ module Aws::OpenSearchServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchserverless'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

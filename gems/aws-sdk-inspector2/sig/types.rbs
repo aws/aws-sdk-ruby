@@ -15,31 +15,31 @@ module Aws::Inspector2
 
     class Account
       attr_accessor account_id: ::String
-      attr_accessor resource_status: Types::ResourceStatus
       attr_accessor status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "SUSPENDING" | "SUSPENDED")
+      attr_accessor resource_status: Types::ResourceStatus
       SENSITIVE: []
     end
 
     class AccountAggregation
       attr_accessor finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION")
-      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
       attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
       SENSITIVE: []
     end
 
     class AccountAggregationResponse
       attr_accessor account_id: ::String
+      attr_accessor severity_counts: Types::SeverityCounts
       attr_accessor exploit_available_count: ::Integer
       attr_accessor fix_available_count: ::Integer
-      attr_accessor severity_counts: Types::SeverityCounts
       SENSITIVE: []
     end
 
     class AccountState
       attr_accessor account_id: ::String
-      attr_accessor resource_state: Types::ResourceState
       attr_accessor state: Types::State
+      attr_accessor resource_state: Types::ResourceState
       SENSITIVE: []
     end
 
@@ -47,15 +47,15 @@ module Aws::Inspector2
       attr_accessor account_aggregation: Types::AccountAggregation
       attr_accessor ami_aggregation: Types::AmiAggregation
       attr_accessor aws_ecr_container_aggregation: Types::AwsEcrContainerAggregation
-      attr_accessor code_repository_aggregation: Types::CodeRepositoryAggregation
       attr_accessor ec2_instance_aggregation: Types::Ec2InstanceAggregation
       attr_accessor finding_type_aggregation: Types::FindingTypeAggregation
       attr_accessor image_layer_aggregation: Types::ImageLayerAggregation
-      attr_accessor lambda_function_aggregation: Types::LambdaFunctionAggregation
-      attr_accessor lambda_layer_aggregation: Types::LambdaLayerAggregation
       attr_accessor package_aggregation: Types::PackageAggregation
       attr_accessor repository_aggregation: Types::RepositoryAggregation
       attr_accessor title_aggregation: Types::TitleAggregation
+      attr_accessor lambda_layer_aggregation: Types::LambdaLayerAggregation
+      attr_accessor lambda_function_aggregation: Types::LambdaFunctionAggregation
+      attr_accessor code_repository_aggregation: Types::CodeRepositoryAggregation
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -65,23 +65,23 @@ module Aws::Inspector2
       end
       class AwsEcrContainerAggregation < AggregationRequest
       end
-      class CodeRepositoryAggregation < AggregationRequest
-      end
       class Ec2InstanceAggregation < AggregationRequest
       end
       class FindingTypeAggregation < AggregationRequest
       end
       class ImageLayerAggregation < AggregationRequest
       end
-      class LambdaFunctionAggregation < AggregationRequest
-      end
-      class LambdaLayerAggregation < AggregationRequest
-      end
       class PackageAggregation < AggregationRequest
       end
       class RepositoryAggregation < AggregationRequest
       end
       class TitleAggregation < AggregationRequest
+      end
+      class LambdaLayerAggregation < AggregationRequest
+      end
+      class LambdaFunctionAggregation < AggregationRequest
+      end
+      class CodeRepositoryAggregation < AggregationRequest
       end
       class Unknown < AggregationRequest
       end
@@ -91,15 +91,15 @@ module Aws::Inspector2
       attr_accessor account_aggregation: Types::AccountAggregationResponse
       attr_accessor ami_aggregation: Types::AmiAggregationResponse
       attr_accessor aws_ecr_container_aggregation: Types::AwsEcrContainerAggregationResponse
-      attr_accessor code_repository_aggregation: Types::CodeRepositoryAggregationResponse
       attr_accessor ec2_instance_aggregation: Types::Ec2InstanceAggregationResponse
       attr_accessor finding_type_aggregation: Types::FindingTypeAggregationResponse
       attr_accessor image_layer_aggregation: Types::ImageLayerAggregationResponse
-      attr_accessor lambda_function_aggregation: Types::LambdaFunctionAggregationResponse
-      attr_accessor lambda_layer_aggregation: Types::LambdaLayerAggregationResponse
       attr_accessor package_aggregation: Types::PackageAggregationResponse
       attr_accessor repository_aggregation: Types::RepositoryAggregationResponse
       attr_accessor title_aggregation: Types::TitleAggregationResponse
+      attr_accessor lambda_layer_aggregation: Types::LambdaLayerAggregationResponse
+      attr_accessor lambda_function_aggregation: Types::LambdaFunctionAggregationResponse
+      attr_accessor code_repository_aggregation: Types::CodeRepositoryAggregationResponse
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -109,17 +109,11 @@ module Aws::Inspector2
       end
       class AwsEcrContainerAggregation < AggregationResponse
       end
-      class CodeRepositoryAggregation < AggregationResponse
-      end
       class Ec2InstanceAggregation < AggregationResponse
       end
       class FindingTypeAggregation < AggregationResponse
       end
       class ImageLayerAggregation < AggregationResponse
-      end
-      class LambdaFunctionAggregation < AggregationResponse
-      end
-      class LambdaLayerAggregation < AggregationResponse
       end
       class PackageAggregation < AggregationResponse
       end
@@ -127,28 +121,34 @@ module Aws::Inspector2
       end
       class TitleAggregation < AggregationResponse
       end
+      class LambdaLayerAggregation < AggregationResponse
+      end
+      class LambdaFunctionAggregation < AggregationResponse
+      end
+      class CodeRepositoryAggregation < AggregationResponse
+      end
       class Unknown < AggregationResponse
       end
     end
 
     class AmiAggregation
       attr_accessor amis: ::Array[Types::StringFilter]
-      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL" | "AFFECTED_INSTANCES")
       attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL" | "AFFECTED_INSTANCES")
       SENSITIVE: []
     end
 
     class AmiAggregationResponse
-      attr_accessor account_id: ::String
-      attr_accessor affected_instances: ::Integer
       attr_accessor ami: ::String
+      attr_accessor account_id: ::String
       attr_accessor severity_counts: Types::SeverityCounts
+      attr_accessor affected_instances: ::Integer
       SENSITIVE: []
     end
 
     class AssociateConfigurationRequest
-      attr_accessor resource: Types::CodeSecurityResource
       attr_accessor scan_configuration_arn: ::String
+      attr_accessor resource: Types::CodeSecurityResource
       SENSITIVE: []
     end
 
@@ -171,65 +171,65 @@ module Aws::Inspector2
     end
 
     class AutoEnable
-      attr_accessor code_repository: bool
       attr_accessor ec2: bool
       attr_accessor ecr: bool
       attr_accessor lambda: bool
       attr_accessor lambda_code: bool
+      attr_accessor code_repository: bool
       SENSITIVE: []
     end
 
     class AwsEc2InstanceDetails
-      attr_accessor iam_instance_profile_arn: ::String
+      attr_accessor type: ::String
       attr_accessor image_id: ::String
       attr_accessor ip_v4_addresses: ::Array[::String]
       attr_accessor ip_v6_addresses: ::Array[::String]
       attr_accessor key_name: ::String
+      attr_accessor iam_instance_profile_arn: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_id: ::String
       attr_accessor launched_at: ::Time
       attr_accessor platform: ::String
-      attr_accessor subnet_id: ::String
-      attr_accessor type: ::String
-      attr_accessor vpc_id: ::String
       SENSITIVE: []
     end
 
     class AwsEcrContainerAggregation
-      attr_accessor architectures: ::Array[Types::StringFilter]
-      attr_accessor image_shas: ::Array[Types::StringFilter]
-      attr_accessor image_tags: ::Array[Types::StringFilter]
-      attr_accessor in_use_count: ::Array[Types::NumberFilter]
-      attr_accessor last_in_use_at: ::Array[Types::DateFilter]
-      attr_accessor repositories: ::Array[Types::StringFilter]
       attr_accessor resource_ids: ::Array[Types::StringFilter]
-      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
+      attr_accessor image_shas: ::Array[Types::StringFilter]
+      attr_accessor repositories: ::Array[Types::StringFilter]
+      attr_accessor architectures: ::Array[Types::StringFilter]
+      attr_accessor image_tags: ::Array[Types::StringFilter]
       attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
+      attr_accessor last_in_use_at: ::Array[Types::DateFilter]
+      attr_accessor in_use_count: ::Array[Types::NumberFilter]
       SENSITIVE: []
     end
 
     class AwsEcrContainerAggregationResponse
-      attr_accessor account_id: ::String
-      attr_accessor architecture: ::String
-      attr_accessor image_sha: ::String
-      attr_accessor image_tags: ::Array[::String]
-      attr_accessor in_use_count: ::Integer
-      attr_accessor last_in_use_at: ::Time
-      attr_accessor repository: ::String
       attr_accessor resource_id: ::String
+      attr_accessor image_sha: ::String
+      attr_accessor repository: ::String
+      attr_accessor architecture: ::String
+      attr_accessor image_tags: ::Array[::String]
+      attr_accessor account_id: ::String
       attr_accessor severity_counts: Types::SeverityCounts
+      attr_accessor last_in_use_at: ::Time
+      attr_accessor in_use_count: ::Integer
       SENSITIVE: []
     end
 
     class AwsEcrContainerImageDetails
-      attr_accessor architecture: ::String
-      attr_accessor author: ::String
-      attr_accessor image_hash: ::String
-      attr_accessor image_tags: ::Array[::String]
-      attr_accessor in_use_count: ::Integer
-      attr_accessor last_in_use_at: ::Time
-      attr_accessor platform: ::String
-      attr_accessor pushed_at: ::Time
-      attr_accessor registry: ::String
       attr_accessor repository_name: ::String
+      attr_accessor image_tags: ::Array[::String]
+      attr_accessor pushed_at: ::Time
+      attr_accessor author: ::String
+      attr_accessor architecture: ::String
+      attr_accessor image_hash: ::String
+      attr_accessor registry: ::String
+      attr_accessor platform: ::String
+      attr_accessor last_in_use_at: ::Time
+      attr_accessor in_use_count: ::Integer
       SENSITIVE: []
     end
 
@@ -252,16 +252,16 @@ module Aws::Inspector2
     end
 
     class AwsLambdaFunctionDetails
-      attr_accessor architectures: ::Array[("X86_64" | "ARM64")]
-      attr_accessor code_sha_256: ::String
-      attr_accessor execution_role_arn: ::String
       attr_accessor function_name: ::String
-      attr_accessor last_modified_at: ::Time
-      attr_accessor layers: ::Array[::String]
-      attr_accessor package_type: ("IMAGE" | "ZIP")
       attr_accessor runtime: ("NODEJS" | "NODEJS_12_X" | "NODEJS_14_X" | "NODEJS_16_X" | "JAVA_8" | "JAVA_8_AL2" | "JAVA_11" | "PYTHON_3_7" | "PYTHON_3_8" | "PYTHON_3_9" | "UNSUPPORTED" | "NODEJS_18_X" | "GO_1_X" | "JAVA_17" | "PYTHON_3_10" | "PYTHON_3_11" | "DOTNETCORE_3_1" | "DOTNET_6" | "DOTNET_7" | "RUBY_2_7" | "RUBY_3_2")
+      attr_accessor code_sha_256: ::String
       attr_accessor version: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor layers: ::Array[::String]
       attr_accessor vpc_config: Types::LambdaVpcConfig
+      attr_accessor package_type: ("IMAGE" | "ZIP")
+      attr_accessor architectures: ::Array[("X86_64" | "ARM64")]
+      attr_accessor last_modified_at: ::Time
       SENSITIVE: []
     end
 
@@ -320,8 +320,8 @@ module Aws::Inspector2
     end
 
     class BatchGetFindingDetailsResponse
-      attr_accessor errors: ::Array[Types::FindingDetailsError]
       attr_accessor finding_details: ::Array[Types::FindingDetail]
+      attr_accessor errors: ::Array[Types::FindingDetailsError]
       SENSITIVE: []
     end
 
@@ -379,14 +379,14 @@ module Aws::Inspector2
     end
 
     class CisCheckAggregation
-      attr_accessor account_id: ::String
-      attr_accessor check_description: ::String
-      attr_accessor check_id: ::String
-      attr_accessor level: ("LEVEL_1" | "LEVEL_2")
-      attr_accessor platform: ::String
       attr_accessor scan_arn: ::String
-      attr_accessor status_counts: Types::StatusCounts
+      attr_accessor check_id: ::String
       attr_accessor title: ::String
+      attr_accessor check_description: ::String
+      attr_accessor level: ("LEVEL_1" | "LEVEL_2")
+      attr_accessor account_id: ::String
+      attr_accessor status_counts: Types::StatusCounts
+      attr_accessor platform: ::String
       SENSITIVE: []
     end
 
@@ -403,8 +403,8 @@ module Aws::Inspector2
     end
 
     class CisNumberFilter
-      attr_accessor lower_inclusive: ::Integer
       attr_accessor upper_inclusive: ::Integer
+      attr_accessor lower_inclusive: ::Integer
       SENSITIVE: []
     end
 
@@ -415,75 +415,75 @@ module Aws::Inspector2
     end
 
     class CisScan
-      attr_accessor failed_checks: ::Integer
       attr_accessor scan_arn: ::String
       attr_accessor scan_configuration_arn: ::String
-      attr_accessor scan_date: ::Time
+      attr_accessor status: ("FAILED" | "COMPLETED" | "CANCELLED" | "IN_PROGRESS")
       attr_accessor scan_name: ::String
+      attr_accessor scan_date: ::Time
+      attr_accessor failed_checks: ::Integer
+      attr_accessor total_checks: ::Integer
+      attr_accessor targets: Types::CisTargets
       attr_accessor scheduled_by: ::String
       attr_accessor security_level: ("LEVEL_1" | "LEVEL_2")
-      attr_accessor status: ("FAILED" | "COMPLETED" | "CANCELLED" | "IN_PROGRESS")
-      attr_accessor targets: Types::CisTargets
-      attr_accessor total_checks: ::Integer
       SENSITIVE: []
     end
 
     class CisScanConfiguration
-      attr_accessor owner_id: ::String
       attr_accessor scan_configuration_arn: ::String
+      attr_accessor owner_id: ::String
       attr_accessor scan_name: ::String
-      attr_accessor schedule: Types::Schedule
       attr_accessor security_level: ("LEVEL_1" | "LEVEL_2")
-      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor schedule: Types::Schedule
       attr_accessor targets: Types::CisTargets
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class CisScanResultDetails
-      attr_accessor account_id: ::String
-      attr_accessor check_description: ::String
-      attr_accessor check_id: ::String
-      attr_accessor finding_arn: ::String
-      attr_accessor level: ("LEVEL_1" | "LEVEL_2")
-      attr_accessor platform: ::String
-      attr_accessor remediation: ::String
       attr_accessor scan_arn: ::String
+      attr_accessor account_id: ::String
+      attr_accessor target_resource_id: ::String
+      attr_accessor platform: ::String
       attr_accessor status: ("PASSED" | "FAILED" | "SKIPPED")
       attr_accessor status_reason: ::String
-      attr_accessor target_resource_id: ::String
+      attr_accessor check_id: ::String
       attr_accessor title: ::String
+      attr_accessor check_description: ::String
+      attr_accessor remediation: ::String
+      attr_accessor level: ("LEVEL_1" | "LEVEL_2")
+      attr_accessor finding_arn: ::String
       SENSITIVE: []
     end
 
     class CisScanResultDetailsFilterCriteria
-      attr_accessor check_id_filters: ::Array[Types::CisStringFilter]
-      attr_accessor finding_arn_filters: ::Array[Types::CisStringFilter]
       attr_accessor finding_status_filters: ::Array[Types::CisFindingStatusFilter]
-      attr_accessor security_level_filters: ::Array[Types::CisSecurityLevelFilter]
+      attr_accessor check_id_filters: ::Array[Types::CisStringFilter]
       attr_accessor title_filters: ::Array[Types::CisStringFilter]
+      attr_accessor security_level_filters: ::Array[Types::CisSecurityLevelFilter]
+      attr_accessor finding_arn_filters: ::Array[Types::CisStringFilter]
       SENSITIVE: []
     end
 
     class CisScanResultsAggregatedByChecksFilterCriteria
       attr_accessor account_id_filters: ::Array[Types::CisStringFilter]
       attr_accessor check_id_filters: ::Array[Types::CisStringFilter]
-      attr_accessor failed_resources_filters: ::Array[Types::CisNumberFilter]
-      attr_accessor platform_filters: ::Array[Types::CisStringFilter]
-      attr_accessor security_level_filters: ::Array[Types::CisSecurityLevelFilter]
       attr_accessor title_filters: ::Array[Types::CisStringFilter]
+      attr_accessor platform_filters: ::Array[Types::CisStringFilter]
+      attr_accessor failed_resources_filters: ::Array[Types::CisNumberFilter]
+      attr_accessor security_level_filters: ::Array[Types::CisSecurityLevelFilter]
       SENSITIVE: []
     end
 
     class CisScanResultsAggregatedByTargetResourceFilterCriteria
       attr_accessor account_id_filters: ::Array[Types::CisStringFilter]
-      attr_accessor check_id_filters: ::Array[Types::CisStringFilter]
-      attr_accessor failed_checks_filters: ::Array[Types::CisNumberFilter]
-      attr_accessor platform_filters: ::Array[Types::CisStringFilter]
       attr_accessor status_filters: ::Array[Types::CisResultStatusFilter]
+      attr_accessor check_id_filters: ::Array[Types::CisStringFilter]
       attr_accessor target_resource_id_filters: ::Array[Types::CisStringFilter]
       attr_accessor target_resource_tag_filters: ::Array[Types::TagFilter]
+      attr_accessor platform_filters: ::Array[Types::CisStringFilter]
       attr_accessor target_status_filters: ::Array[Types::CisTargetStatusFilter]
       attr_accessor target_status_reason_filters: ::Array[Types::CisTargetStatusReasonFilter]
+      attr_accessor failed_checks_filters: ::Array[Types::CisNumberFilter]
       SENSITIVE: []
     end
 
@@ -500,9 +500,9 @@ module Aws::Inspector2
     end
 
     class CisSessionMessage
-      attr_accessor cis_rule_details: ::String
       attr_accessor rule_id: ::String
       attr_accessor status: ("FAILED" | "PASSED" | "NOT_EVALUATED" | "INFORMATIONAL" | "UNKNOWN" | "NOT_APPLICABLE" | "ERROR")
+      attr_accessor cis_rule_details: ::String
       SENSITIVE: []
     end
 
@@ -513,12 +513,12 @@ module Aws::Inspector2
     end
 
     class CisTargetResourceAggregation
-      attr_accessor account_id: ::String
-      attr_accessor platform: ::String
       attr_accessor scan_arn: ::String
-      attr_accessor status_counts: Types::StatusCounts
       attr_accessor target_resource_id: ::String
+      attr_accessor account_id: ::String
       attr_accessor target_resource_tags: ::Hash[::String, ::Array[::String]]
+      attr_accessor status_counts: Types::StatusCounts
+      attr_accessor platform: ::String
       attr_accessor target_status: ("TIMED_OUT" | "CANCELLED" | "COMPLETED")
       attr_accessor target_status_reason: ("SCAN_IN_PROGRESS" | "UNSUPPORTED_OS" | "SSM_UNMANAGED")
       SENSITIVE: []
@@ -543,17 +543,17 @@ module Aws::Inspector2
     end
 
     class CisaData
-      attr_accessor action: ::String
       attr_accessor date_added: ::Time
       attr_accessor date_due: ::Time
+      attr_accessor action: ::String
       SENSITIVE: []
     end
 
     class ClusterDetails
-      attr_accessor cluster_metadata: Types::ClusterMetadata
       attr_accessor last_in_use: ::Time
       attr_accessor running_unit_count: ::Integer
       attr_accessor stopped_unit_count: ::Integer
+      attr_accessor cluster_metadata: Types::ClusterMetadata
       SENSITIVE: []
     end
 
@@ -583,10 +583,10 @@ module Aws::Inspector2
     end
 
     class CodeFilePath
-      attr_accessor end_line: ::Integer
       attr_accessor file_name: ::String
       attr_accessor file_path: ::String
       attr_accessor start_line: ::Integer
+      attr_accessor end_line: ::Integer
       SENSITIVE: []
     end
 
@@ -599,57 +599,57 @@ module Aws::Inspector2
     class CodeRepositoryAggregation
       attr_accessor project_names: ::Array[Types::StringFilter]
       attr_accessor provider_types: ::Array[Types::StringFilter]
-      attr_accessor resource_ids: ::Array[Types::StringFilter]
-      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
       attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
+      attr_accessor resource_ids: ::Array[Types::StringFilter]
       SENSITIVE: []
     end
 
     class CodeRepositoryAggregationResponse
-      attr_accessor account_id: ::String
-      attr_accessor exploit_available_active_findings_count: ::Integer
-      attr_accessor fix_available_active_findings_count: ::Integer
       attr_accessor project_names: ::String
       attr_accessor provider_type: ::String
-      attr_accessor resource_id: ::String
       attr_accessor severity_counts: Types::SeverityCounts
+      attr_accessor exploit_available_active_findings_count: ::Integer
+      attr_accessor fix_available_active_findings_count: ::Integer
+      attr_accessor account_id: ::String
+      attr_accessor resource_id: ::String
       SENSITIVE: []
     end
 
     class CodeRepositoryDetails
-      attr_accessor integration_arn: ::String
       attr_accessor project_name: ::String
+      attr_accessor integration_arn: ::String
       attr_accessor provider_type: ("GITHUB" | "GITLAB_SELF_MANAGED")
       SENSITIVE: []
     end
 
     class CodeRepositoryMetadata
-      attr_accessor integration_arn: ::String
-      attr_accessor last_scanned_commit_id: ::String
-      attr_accessor on_demand_scan: Types::CodeRepositoryOnDemandScan
       attr_accessor project_name: ::String
+      attr_accessor integration_arn: ::String
       attr_accessor provider_type: ::String
       attr_accessor provider_type_visibility: ::String
+      attr_accessor last_scanned_commit_id: ::String
       attr_accessor scan_configuration: Types::ProjectCodeSecurityScanConfiguration
+      attr_accessor on_demand_scan: Types::CodeRepositoryOnDemandScan
       SENSITIVE: []
     end
 
     class CodeRepositoryOnDemandScan
-      attr_accessor last_scan_at: ::Time
       attr_accessor last_scanned_commit_id: ::String
+      attr_accessor last_scan_at: ::Time
       attr_accessor scan_status: Types::ScanStatus
       SENSITIVE: []
     end
 
     class CodeSecurityIntegrationSummary
-      attr_accessor created_on: ::Time
       attr_accessor integration_arn: ::String
-      attr_accessor last_update_on: ::Time
       attr_accessor name: ::String
+      attr_accessor type: ("GITLAB_SELF_MANAGED" | "GITHUB")
       attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING")
       attr_accessor status_reason: ::String
+      attr_accessor created_on: ::Time
+      attr_accessor last_update_on: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("GITLAB_SELF_MANAGED" | "GITHUB")
       SENSITIVE: []
     end
 
@@ -665,8 +665,8 @@ module Aws::Inspector2
     end
 
     class CodeSecurityScanConfiguration
-      attr_accessor continuous_integration_scan_configuration: Types::ContinuousIntegrationScanConfiguration
       attr_accessor periodic_scan_configuration: Types::PeriodicScanConfiguration
+      attr_accessor continuous_integration_scan_configuration: Types::ContinuousIntegrationScanConfiguration
       attr_accessor rule_set_categories: ::Array[("SAST" | "IAC" | "SCA")]
       SENSITIVE: []
     end
@@ -677,49 +677,49 @@ module Aws::Inspector2
     end
 
     class CodeSecurityScanConfigurationSummary
-      attr_accessor continuous_integration_scan_supported_events: ::Array[("PULL_REQUEST" | "PUSH")]
-      attr_accessor frequency_expression: ::String
+      attr_accessor scan_configuration_arn: ::String
       attr_accessor name: ::String
       attr_accessor owner_account_id: ::String
       attr_accessor periodic_scan_frequency: ("WEEKLY" | "MONTHLY" | "NEVER")
+      attr_accessor frequency_expression: ::String
+      attr_accessor continuous_integration_scan_supported_events: ::Array[("PULL_REQUEST" | "PUSH")]
       attr_accessor rule_set_categories: ::Array[("SAST" | "IAC" | "SCA")]
-      attr_accessor scan_configuration_arn: ::String
       attr_accessor scope_settings: Types::ScopeSettings
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class CodeSnippetError
+      attr_accessor finding_arn: ::String
       attr_accessor error_code: ("INTERNAL_ERROR" | "ACCESS_DENIED" | "CODE_SNIPPET_NOT_FOUND" | "INVALID_INPUT")
       attr_accessor error_message: ::String
-      attr_accessor finding_arn: ::String
       SENSITIVE: []
     end
 
     class CodeSnippetResult
-      attr_accessor code_snippet: ::Array[Types::CodeLine]
-      attr_accessor end_line: ::Integer
       attr_accessor finding_arn: ::String
       attr_accessor start_line: ::Integer
+      attr_accessor end_line: ::Integer
+      attr_accessor code_snippet: ::Array[Types::CodeLine]
       attr_accessor suggested_fixes: ::Array[Types::SuggestedFix]
       SENSITIVE: []
     end
 
     class CodeVulnerabilityDetails
-      attr_accessor cwes: ::Array[::String]
-      attr_accessor detector_id: ::String
-      attr_accessor detector_name: ::String
-      attr_accessor detector_tags: ::Array[::String]
       attr_accessor file_path: Types::CodeFilePath
+      attr_accessor detector_tags: ::Array[::String]
       attr_accessor reference_urls: ::Array[::String]
       attr_accessor rule_id: ::String
       attr_accessor source_lambda_layer_arn: ::String
+      attr_accessor detector_id: ::String
+      attr_accessor detector_name: ::String
+      attr_accessor cwes: ::Array[::String]
       SENSITIVE: []
     end
 
     class ComputePlatform
-      attr_accessor product: ::String
       attr_accessor vendor: ::String
+      attr_accessor product: ::String
       attr_accessor version: ::String
       SENSITIVE: []
     end
@@ -743,33 +743,33 @@ module Aws::Inspector2
     end
 
     class CoverageDateFilter
-      attr_accessor end_inclusive: ::Time
       attr_accessor start_inclusive: ::Time
+      attr_accessor end_inclusive: ::Time
       SENSITIVE: []
     end
 
     class CoverageFilterCriteria
+      attr_accessor scan_status_code: ::Array[Types::CoverageStringFilter]
+      attr_accessor scan_status_reason: ::Array[Types::CoverageStringFilter]
       attr_accessor account_id: ::Array[Types::CoverageStringFilter]
+      attr_accessor resource_id: ::Array[Types::CoverageStringFilter]
+      attr_accessor resource_type: ::Array[Types::CoverageStringFilter]
+      attr_accessor scan_type: ::Array[Types::CoverageStringFilter]
+      attr_accessor ecr_repository_name: ::Array[Types::CoverageStringFilter]
+      attr_accessor ecr_image_tags: ::Array[Types::CoverageStringFilter]
+      attr_accessor ec2_instance_tags: ::Array[Types::CoverageMapFilter]
+      attr_accessor lambda_function_name: ::Array[Types::CoverageStringFilter]
+      attr_accessor lambda_function_tags: ::Array[Types::CoverageMapFilter]
+      attr_accessor lambda_function_runtime: ::Array[Types::CoverageStringFilter]
+      attr_accessor last_scanned_at: ::Array[Types::CoverageDateFilter]
+      attr_accessor scan_mode: ::Array[Types::CoverageStringFilter]
+      attr_accessor image_pulled_at: ::Array[Types::CoverageDateFilter]
+      attr_accessor ecr_image_last_in_use_at: ::Array[Types::CoverageDateFilter]
+      attr_accessor ecr_image_in_use_count: ::Array[Types::CoverageNumberFilter]
       attr_accessor code_repository_project_name: ::Array[Types::CoverageStringFilter]
       attr_accessor code_repository_provider_type: ::Array[Types::CoverageStringFilter]
       attr_accessor code_repository_provider_type_visibility: ::Array[Types::CoverageStringFilter]
-      attr_accessor ec2_instance_tags: ::Array[Types::CoverageMapFilter]
-      attr_accessor ecr_image_in_use_count: ::Array[Types::CoverageNumberFilter]
-      attr_accessor ecr_image_last_in_use_at: ::Array[Types::CoverageDateFilter]
-      attr_accessor ecr_image_tags: ::Array[Types::CoverageStringFilter]
-      attr_accessor ecr_repository_name: ::Array[Types::CoverageStringFilter]
-      attr_accessor image_pulled_at: ::Array[Types::CoverageDateFilter]
-      attr_accessor lambda_function_name: ::Array[Types::CoverageStringFilter]
-      attr_accessor lambda_function_runtime: ::Array[Types::CoverageStringFilter]
-      attr_accessor lambda_function_tags: ::Array[Types::CoverageMapFilter]
-      attr_accessor last_scanned_at: ::Array[Types::CoverageDateFilter]
       attr_accessor last_scanned_commit_id: ::Array[Types::CoverageStringFilter]
-      attr_accessor resource_id: ::Array[Types::CoverageStringFilter]
-      attr_accessor resource_type: ::Array[Types::CoverageStringFilter]
-      attr_accessor scan_mode: ::Array[Types::CoverageStringFilter]
-      attr_accessor scan_status_code: ::Array[Types::CoverageStringFilter]
-      attr_accessor scan_status_reason: ::Array[Types::CoverageStringFilter]
-      attr_accessor scan_type: ::Array[Types::CoverageStringFilter]
       SENSITIVE: []
     end
 
@@ -781,8 +781,8 @@ module Aws::Inspector2
     end
 
     class CoverageNumberFilter
-      attr_accessor lower_inclusive: ::Integer
       attr_accessor upper_inclusive: ::Integer
+      attr_accessor lower_inclusive: ::Integer
       SENSITIVE: []
     end
 
@@ -793,23 +793,23 @@ module Aws::Inspector2
     end
 
     class CoveredResource
-      attr_accessor account_id: ::String
-      attr_accessor last_scanned_at: ::Time
-      attr_accessor resource_id: ::String
-      attr_accessor resource_metadata: Types::ResourceScanMetadata
       attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
-      attr_accessor scan_mode: ("EC2_SSM_AGENT_BASED" | "EC2_AGENTLESS")
-      attr_accessor scan_status: Types::ScanStatus
+      attr_accessor resource_id: ::String
+      attr_accessor account_id: ::String
       attr_accessor scan_type: ("NETWORK" | "PACKAGE" | "CODE")
+      attr_accessor scan_status: Types::ScanStatus
+      attr_accessor resource_metadata: Types::ResourceScanMetadata
+      attr_accessor last_scanned_at: ::Time
+      attr_accessor scan_mode: ("EC2_SSM_AGENT_BASED" | "EC2_AGENTLESS")
       SENSITIVE: []
     end
 
     class CreateCisScanConfigurationRequest
       attr_accessor scan_name: ::String
-      attr_accessor schedule: Types::Schedule
       attr_accessor security_level: ("LEVEL_1" | "LEVEL_2")
-      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor schedule: Types::Schedule
       attr_accessor targets: Types::CreateCisTargets
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -825,24 +825,24 @@ module Aws::Inspector2
     end
 
     class CreateCodeSecurityIntegrationRequest
-      attr_accessor details: Types::CreateIntegrationDetail
       attr_accessor name: ::String
-      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor type: ("GITLAB_SELF_MANAGED" | "GITHUB")
+      attr_accessor details: Types::CreateIntegrationDetail
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class CreateCodeSecurityIntegrationResponse
-      attr_accessor authorization_url: ::String
       attr_accessor integration_arn: ::String
       attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING")
+      attr_accessor authorization_url: ::String
       SENSITIVE: [:authorization_url]
     end
 
     class CreateCodeSecurityScanConfigurationRequest
-      attr_accessor configuration: Types::CodeSecurityScanConfiguration
-      attr_accessor level: ("ORGANIZATION" | "ACCOUNT")
       attr_accessor name: ::String
+      attr_accessor level: ("ORGANIZATION" | "ACCOUNT")
+      attr_accessor configuration: Types::CodeSecurityScanConfiguration
       attr_accessor scope_settings: Types::ScopeSettings
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -858,8 +858,8 @@ module Aws::Inspector2
       attr_accessor description: ::String
       attr_accessor filter_criteria: Types::FilterCriteria
       attr_accessor name: ::String
-      attr_accessor reason: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor reason: ::String
       SENSITIVE: []
     end
 
@@ -881,9 +881,9 @@ module Aws::Inspector2
     end
 
     class CreateGitLabSelfManagedIntegrationDetail
-      attr_accessor access_token: ::String
       attr_accessor instance_url: ::String
-      SENSITIVE: [:access_token, :instance_url]
+      attr_accessor access_token: ::String
+      SENSITIVE: [:instance_url, :access_token]
     end
 
     class CreateIntegrationDetail
@@ -898,8 +898,8 @@ module Aws::Inspector2
     end
 
     class CreateSbomExportRequest
-      attr_accessor report_format: ("CYCLONEDX_1_4" | "SPDX_2_3")
       attr_accessor resource_filter_criteria: Types::ResourceFilterCriteria
+      attr_accessor report_format: ("CYCLONEDX_1_4" | "SPDX_2_3")
       attr_accessor s3_destination: Types::Destination
       SENSITIVE: []
     end
@@ -924,8 +924,8 @@ module Aws::Inspector2
     class CvssScore
       attr_accessor base_score: ::Float
       attr_accessor scoring_vector: ::String
-      attr_accessor source: ::String
       attr_accessor version: ::String
+      attr_accessor source: ::String
       SENSITIVE: []
     end
 
@@ -936,12 +936,12 @@ module Aws::Inspector2
     end
 
     class CvssScoreDetails
-      attr_accessor adjustments: ::Array[Types::CvssScoreAdjustment]
-      attr_accessor cvss_source: ::String
-      attr_accessor score: ::Float
       attr_accessor score_source: ::String
-      attr_accessor scoring_vector: ::String
+      attr_accessor cvss_source: ::String
       attr_accessor version: ::String
+      attr_accessor score: ::Float
+      attr_accessor scoring_vector: ::String
+      attr_accessor adjustments: ::Array[Types::CvssScoreAdjustment]
       SENSITIVE: []
     end
 
@@ -951,8 +951,8 @@ module Aws::Inspector2
     end
 
     class DateFilter
-      attr_accessor end_inclusive: ::Time
       attr_accessor start_inclusive: ::Time
+      attr_accessor end_inclusive: ::Time
       SENSITIVE: []
     end
 
@@ -1047,8 +1047,8 @@ module Aws::Inspector2
     end
 
     class DisassociateConfigurationRequest
-      attr_accessor resource: Types::CodeSecurityResource
       attr_accessor scan_configuration_arn: ::String
+      attr_accessor resource: Types::CodeSecurityResource
       SENSITIVE: []
     end
 
@@ -1074,29 +1074,29 @@ module Aws::Inspector2
 
     class Ec2InstanceAggregation
       attr_accessor amis: ::Array[Types::StringFilter]
+      attr_accessor operating_systems: ::Array[Types::StringFilter]
       attr_accessor instance_ids: ::Array[Types::StringFilter]
       attr_accessor instance_tags: ::Array[Types::MapFilter]
-      attr_accessor operating_systems: ::Array[Types::StringFilter]
-      attr_accessor sort_by: ("NETWORK_FINDINGS" | "CRITICAL" | "HIGH" | "ALL")
       attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor sort_by: ("NETWORK_FINDINGS" | "CRITICAL" | "HIGH" | "ALL")
       SENSITIVE: []
     end
 
     class Ec2InstanceAggregationResponse
-      attr_accessor account_id: ::String
-      attr_accessor ami: ::String
       attr_accessor instance_id: ::String
-      attr_accessor instance_tags: ::Hash[::String, ::String]
-      attr_accessor network_findings: ::Integer
+      attr_accessor ami: ::String
       attr_accessor operating_system: ::String
+      attr_accessor instance_tags: ::Hash[::String, ::String]
+      attr_accessor account_id: ::String
       attr_accessor severity_counts: Types::SeverityCounts
+      attr_accessor network_findings: ::Integer
       SENSITIVE: []
     end
 
     class Ec2Metadata
+      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor ami_id: ::String
       attr_accessor platform: ("WINDOWS" | "LINUX" | "UNKNOWN" | "MACOS")
-      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -1107,9 +1107,9 @@ module Aws::Inspector2
     end
 
     class EcrConfiguration
+      attr_accessor rescan_duration: ("LIFETIME" | "DAYS_30" | "DAYS_180" | "DAYS_14" | "DAYS_60" | "DAYS_90")
       attr_accessor pull_date_rescan_duration: ("DAYS_14" | "DAYS_30" | "DAYS_60" | "DAYS_90" | "DAYS_180")
       attr_accessor pull_date_rescan_mode: ("LAST_PULL_DATE" | "LAST_IN_USE_AT")
-      attr_accessor rescan_duration: ("LIFETIME" | "DAYS_30" | "DAYS_180" | "DAYS_14" | "DAYS_60" | "DAYS_90")
       SENSITIVE: []
     end
 
@@ -1119,10 +1119,10 @@ module Aws::Inspector2
     end
 
     class EcrContainerImageMetadata
-      attr_accessor image_pulled_at: ::Time
-      attr_accessor in_use_count: ::Integer
-      attr_accessor last_in_use_at: ::Time
       attr_accessor tags: ::Array[::String]
+      attr_accessor image_pulled_at: ::Time
+      attr_accessor last_in_use_at: ::Time
+      attr_accessor in_use_count: ::Integer
       SENSITIVE: []
     end
 
@@ -1133,17 +1133,17 @@ module Aws::Inspector2
     end
 
     class EcrRescanDurationState
-      attr_accessor pull_date_rescan_duration: ("DAYS_14" | "DAYS_30" | "DAYS_60" | "DAYS_90" | "DAYS_180")
-      attr_accessor pull_date_rescan_mode: ("LAST_PULL_DATE" | "LAST_IN_USE_AT")
       attr_accessor rescan_duration: ("LIFETIME" | "DAYS_30" | "DAYS_180" | "DAYS_14" | "DAYS_60" | "DAYS_90")
       attr_accessor status: ("SUCCESS" | "PENDING" | "FAILED")
       attr_accessor updated_at: ::Time
+      attr_accessor pull_date_rescan_duration: ("DAYS_14" | "DAYS_30" | "DAYS_60" | "DAYS_90" | "DAYS_180")
+      attr_accessor pull_date_rescan_mode: ("LAST_PULL_DATE" | "LAST_IN_USE_AT")
       SENSITIVE: []
     end
 
     class EnableDelegatedAdminAccountRequest
-      attr_accessor client_token: ::String
       attr_accessor delegated_admin_account_id: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -1154,8 +1154,8 @@ module Aws::Inspector2
 
     class EnableRequest
       attr_accessor account_ids: ::Array[::String]
-      attr_accessor client_token: ::String
       attr_accessor resource_types: ::Array[("EC2" | "ECR" | "LAMBDA" | "LAMBDA_CODE" | "CODE_REPOSITORY")]
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -1176,15 +1176,15 @@ module Aws::Inspector2
     end
 
     class Evidence
-      attr_accessor evidence_detail: ::String
       attr_accessor evidence_rule: ::String
+      attr_accessor evidence_detail: ::String
       attr_accessor severity: ::String
       SENSITIVE: []
     end
 
     class ExploitObserved
-      attr_accessor first_seen: ::Time
       attr_accessor last_seen: ::Time
+      attr_accessor first_seen: ::Time
       SENSITIVE: []
     end
 
@@ -1195,16 +1195,16 @@ module Aws::Inspector2
 
     class FailedAccount
       attr_accessor account_id: ::String
+      attr_accessor status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "SUSPENDING" | "SUSPENDED")
+      attr_accessor resource_status: Types::ResourceStatus
       attr_accessor error_code: ("ALREADY_ENABLED" | "ENABLE_IN_PROGRESS" | "DISABLE_IN_PROGRESS" | "SUSPEND_IN_PROGRESS" | "RESOURCE_NOT_FOUND" | "ACCESS_DENIED" | "INTERNAL_ERROR" | "SSM_UNAVAILABLE" | "SSM_THROTTLED" | "EVENTBRIDGE_UNAVAILABLE" | "EVENTBRIDGE_THROTTLED" | "RESOURCE_SCAN_NOT_DISABLED" | "DISASSOCIATE_ALL_MEMBERS" | "ACCOUNT_IS_ISOLATED" | "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED" | "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED")
       attr_accessor error_message: ::String
-      attr_accessor resource_status: Types::ResourceStatus
-      attr_accessor status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "SUSPENDING" | "SUSPENDED")
       SENSITIVE: []
     end
 
     class FailedAssociationResult
-      attr_accessor resource: Types::CodeSecurityResource
       attr_accessor scan_configuration_arn: ::String
+      attr_accessor resource: Types::CodeSecurityResource
       attr_accessor status_code: ("INTERNAL_ERROR" | "ACCESS_DENIED" | "SCAN_CONFIGURATION_NOT_FOUND" | "INVALID_INPUT" | "RESOURCE_NOT_FOUND" | "QUOTA_EXCEEDED")
       attr_accessor status_message: ::String
       SENSITIVE: []
@@ -1218,128 +1218,128 @@ module Aws::Inspector2
     end
 
     class Filter
-      attr_accessor action: ("NONE" | "SUPPRESS")
       attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
-      attr_accessor criteria: Types::FilterCriteria
-      attr_accessor description: ::String
-      attr_accessor name: ::String
       attr_accessor owner_id: ::String
+      attr_accessor name: ::String
+      attr_accessor criteria: Types::FilterCriteria
+      attr_accessor action: ("NONE" | "SUPPRESS")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor description: ::String
       attr_accessor reason: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
     class FilterCriteria
+      attr_accessor finding_arn: ::Array[Types::StringFilter]
       attr_accessor aws_account_id: ::Array[Types::StringFilter]
-      attr_accessor code_repository_project_name: ::Array[Types::StringFilter]
-      attr_accessor code_repository_provider_type: ::Array[Types::StringFilter]
-      attr_accessor code_vulnerability_detector_name: ::Array[Types::StringFilter]
-      attr_accessor code_vulnerability_detector_tags: ::Array[Types::StringFilter]
-      attr_accessor code_vulnerability_file_path: ::Array[Types::StringFilter]
-      attr_accessor component_id: ::Array[Types::StringFilter]
-      attr_accessor component_type: ::Array[Types::StringFilter]
+      attr_accessor finding_type: ::Array[Types::StringFilter]
+      attr_accessor severity: ::Array[Types::StringFilter]
+      attr_accessor first_observed_at: ::Array[Types::DateFilter]
+      attr_accessor last_observed_at: ::Array[Types::DateFilter]
+      attr_accessor updated_at: ::Array[Types::DateFilter]
+      attr_accessor finding_status: ::Array[Types::StringFilter]
+      attr_accessor title: ::Array[Types::StringFilter]
+      attr_accessor inspector_score: ::Array[Types::NumberFilter]
+      attr_accessor resource_type: ::Array[Types::StringFilter]
+      attr_accessor resource_id: ::Array[Types::StringFilter]
+      attr_accessor resource_tags: ::Array[Types::MapFilter]
       attr_accessor ec2_instance_image_id: ::Array[Types::StringFilter]
-      attr_accessor ec2_instance_subnet_id: ::Array[Types::StringFilter]
       attr_accessor ec2_instance_vpc_id: ::Array[Types::StringFilter]
-      attr_accessor ecr_image_architecture: ::Array[Types::StringFilter]
-      attr_accessor ecr_image_hash: ::Array[Types::StringFilter]
-      attr_accessor ecr_image_in_use_count: ::Array[Types::NumberFilter]
-      attr_accessor ecr_image_last_in_use_at: ::Array[Types::DateFilter]
+      attr_accessor ec2_instance_subnet_id: ::Array[Types::StringFilter]
       attr_accessor ecr_image_pushed_at: ::Array[Types::DateFilter]
+      attr_accessor ecr_image_architecture: ::Array[Types::StringFilter]
       attr_accessor ecr_image_registry: ::Array[Types::StringFilter]
       attr_accessor ecr_image_repository_name: ::Array[Types::StringFilter]
       attr_accessor ecr_image_tags: ::Array[Types::StringFilter]
-      attr_accessor epss_score: ::Array[Types::NumberFilter]
-      attr_accessor exploit_available: ::Array[Types::StringFilter]
-      attr_accessor finding_arn: ::Array[Types::StringFilter]
-      attr_accessor finding_status: ::Array[Types::StringFilter]
-      attr_accessor finding_type: ::Array[Types::StringFilter]
-      attr_accessor first_observed_at: ::Array[Types::DateFilter]
-      attr_accessor fix_available: ::Array[Types::StringFilter]
-      attr_accessor inspector_score: ::Array[Types::NumberFilter]
-      attr_accessor lambda_function_execution_role_arn: ::Array[Types::StringFilter]
-      attr_accessor lambda_function_last_modified_at: ::Array[Types::DateFilter]
-      attr_accessor lambda_function_layers: ::Array[Types::StringFilter]
-      attr_accessor lambda_function_name: ::Array[Types::StringFilter]
-      attr_accessor lambda_function_runtime: ::Array[Types::StringFilter]
-      attr_accessor last_observed_at: ::Array[Types::DateFilter]
-      attr_accessor network_protocol: ::Array[Types::StringFilter]
+      attr_accessor ecr_image_hash: ::Array[Types::StringFilter]
+      attr_accessor ecr_image_last_in_use_at: ::Array[Types::DateFilter]
+      attr_accessor ecr_image_in_use_count: ::Array[Types::NumberFilter]
       attr_accessor port_range: ::Array[Types::PortRangeFilter]
-      attr_accessor related_vulnerabilities: ::Array[Types::StringFilter]
-      attr_accessor resource_id: ::Array[Types::StringFilter]
-      attr_accessor resource_tags: ::Array[Types::MapFilter]
-      attr_accessor resource_type: ::Array[Types::StringFilter]
-      attr_accessor severity: ::Array[Types::StringFilter]
-      attr_accessor title: ::Array[Types::StringFilter]
-      attr_accessor updated_at: ::Array[Types::DateFilter]
-      attr_accessor vendor_severity: ::Array[Types::StringFilter]
+      attr_accessor network_protocol: ::Array[Types::StringFilter]
+      attr_accessor component_id: ::Array[Types::StringFilter]
+      attr_accessor component_type: ::Array[Types::StringFilter]
       attr_accessor vulnerability_id: ::Array[Types::StringFilter]
       attr_accessor vulnerability_source: ::Array[Types::StringFilter]
+      attr_accessor vendor_severity: ::Array[Types::StringFilter]
       attr_accessor vulnerable_packages: ::Array[Types::PackageFilter]
+      attr_accessor related_vulnerabilities: ::Array[Types::StringFilter]
+      attr_accessor fix_available: ::Array[Types::StringFilter]
+      attr_accessor lambda_function_name: ::Array[Types::StringFilter]
+      attr_accessor lambda_function_layers: ::Array[Types::StringFilter]
+      attr_accessor lambda_function_runtime: ::Array[Types::StringFilter]
+      attr_accessor lambda_function_last_modified_at: ::Array[Types::DateFilter]
+      attr_accessor lambda_function_execution_role_arn: ::Array[Types::StringFilter]
+      attr_accessor exploit_available: ::Array[Types::StringFilter]
+      attr_accessor code_vulnerability_detector_name: ::Array[Types::StringFilter]
+      attr_accessor code_vulnerability_detector_tags: ::Array[Types::StringFilter]
+      attr_accessor code_vulnerability_file_path: ::Array[Types::StringFilter]
+      attr_accessor epss_score: ::Array[Types::NumberFilter]
+      attr_accessor code_repository_project_name: ::Array[Types::StringFilter]
+      attr_accessor code_repository_provider_type: ::Array[Types::StringFilter]
       SENSITIVE: []
     end
 
     class Finding
-      attr_accessor aws_account_id: ::String
-      attr_accessor code_vulnerability_details: Types::CodeVulnerabilityDetails
-      attr_accessor description: ::String
-      attr_accessor epss: Types::EpssDetails
-      attr_accessor exploit_available: ("YES" | "NO")
-      attr_accessor exploitability_details: Types::ExploitabilityDetails
       attr_accessor finding_arn: ::String
+      attr_accessor aws_account_id: ::String
+      attr_accessor type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")
+      attr_accessor description: ::String
+      attr_accessor title: ::String
+      attr_accessor remediation: Types::Remediation
+      attr_accessor severity: ("INFORMATIONAL" | "LOW" | "MEDIUM" | "HIGH" | "CRITICAL" | "UNTRIAGED")
       attr_accessor first_observed_at: ::Time
-      attr_accessor fix_available: ("YES" | "NO" | "PARTIAL")
+      attr_accessor last_observed_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("ACTIVE" | "SUPPRESSED" | "CLOSED")
+      attr_accessor resources: ::Array[Types::Resource]
       attr_accessor inspector_score: ::Float
       attr_accessor inspector_score_details: Types::InspectorScoreDetails
-      attr_accessor last_observed_at: ::Time
       attr_accessor network_reachability_details: Types::NetworkReachabilityDetails
       attr_accessor package_vulnerability_details: Types::PackageVulnerabilityDetails
-      attr_accessor remediation: Types::Remediation
-      attr_accessor resources: ::Array[Types::Resource]
-      attr_accessor severity: ("INFORMATIONAL" | "LOW" | "MEDIUM" | "HIGH" | "CRITICAL" | "UNTRIAGED")
-      attr_accessor status: ("ACTIVE" | "SUPPRESSED" | "CLOSED")
-      attr_accessor title: ::String
-      attr_accessor type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")
-      attr_accessor updated_at: ::Time
+      attr_accessor fix_available: ("YES" | "NO" | "PARTIAL")
+      attr_accessor exploit_available: ("YES" | "NO")
+      attr_accessor exploitability_details: Types::ExploitabilityDetails
+      attr_accessor code_vulnerability_details: Types::CodeVulnerabilityDetails
+      attr_accessor epss: Types::EpssDetails
       SENSITIVE: []
     end
 
     class FindingDetail
+      attr_accessor finding_arn: ::String
       attr_accessor cisa_data: Types::CisaData
+      attr_accessor risk_score: ::Integer
+      attr_accessor evidences: ::Array[Types::Evidence]
+      attr_accessor ttps: ::Array[::String]
+      attr_accessor tools: ::Array[::String]
+      attr_accessor exploit_observed: Types::ExploitObserved
+      attr_accessor reference_urls: ::Array[::String]
       attr_accessor cwes: ::Array[::String]
       attr_accessor epss_score: ::Float
-      attr_accessor evidences: ::Array[Types::Evidence]
-      attr_accessor exploit_observed: Types::ExploitObserved
-      attr_accessor finding_arn: ::String
-      attr_accessor reference_urls: ::Array[::String]
-      attr_accessor risk_score: ::Integer
-      attr_accessor tools: ::Array[::String]
-      attr_accessor ttps: ::Array[::String]
       SENSITIVE: []
     end
 
     class FindingDetailsError
+      attr_accessor finding_arn: ::String
       attr_accessor error_code: ("INTERNAL_ERROR" | "ACCESS_DENIED" | "FINDING_DETAILS_NOT_FOUND" | "INVALID_INPUT")
       attr_accessor error_message: ::String
-      attr_accessor finding_arn: ::String
       SENSITIVE: []
     end
 
     class FindingTypeAggregation
       attr_accessor finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION")
-      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
       attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
       SENSITIVE: []
     end
 
     class FindingTypeAggregationResponse
       attr_accessor account_id: ::String
+      attr_accessor severity_counts: Types::SeverityCounts
       attr_accessor exploit_available_count: ::Integer
       attr_accessor fix_available_count: ::Integer
-      attr_accessor severity_counts: Types::SeverityCounts
       SENSITIVE: []
     end
 
@@ -1350,10 +1350,10 @@ module Aws::Inspector2
     end
 
     class FreeTrialInfo
-      attr_accessor end: ::Time
-      attr_accessor start: ::Time
-      attr_accessor status: ("ACTIVE" | "INACTIVE")
       attr_accessor type: ("EC2" | "ECR" | "LAMBDA" | "LAMBDA_CODE" | "CODE_REPOSITORY")
+      attr_accessor start: ::Time
+      attr_accessor end: ::Time
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
       SENSITIVE: []
     end
 
@@ -1365,33 +1365,33 @@ module Aws::Inspector2
     end
 
     class GetCisScanReportRequest
-      attr_accessor report_format: ("PDF" | "CSV")
       attr_accessor scan_arn: ::String
       attr_accessor target_accounts: ::Array[::String]
+      attr_accessor report_format: ("PDF" | "CSV")
       SENSITIVE: []
     end
 
     class GetCisScanReportResponse
-      attr_accessor status: ("SUCCEEDED" | "FAILED" | "IN_PROGRESS")
       attr_accessor url: ::String
+      attr_accessor status: ("SUCCEEDED" | "FAILED" | "IN_PROGRESS")
       SENSITIVE: []
     end
 
     class GetCisScanResultDetailsRequest
+      attr_accessor scan_arn: ::String
+      attr_accessor target_resource_id: ::String
       attr_accessor account_id: ::String
       attr_accessor filter_criteria: Types::CisScanResultDetailsFilterCriteria
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
-      attr_accessor scan_arn: ::String
       attr_accessor sort_by: ("CHECK_ID" | "STATUS")
       attr_accessor sort_order: ("ASC" | "DESC")
-      attr_accessor target_resource_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class GetCisScanResultDetailsResponse
-      attr_accessor next_token: ::String
       attr_accessor scan_result_details: ::Array[Types::CisScanResultDetails]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1415,15 +1415,15 @@ module Aws::Inspector2
     end
 
     class GetCodeSecurityIntegrationResponse
-      attr_accessor authorization_url: ::String
-      attr_accessor created_on: ::Time
       attr_accessor integration_arn: ::String
-      attr_accessor last_update_on: ::Time
       attr_accessor name: ::String
+      attr_accessor type: ("GITLAB_SELF_MANAGED" | "GITHUB")
       attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING")
       attr_accessor status_reason: ::String
+      attr_accessor created_on: ::Time
+      attr_accessor last_update_on: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("GITLAB_SELF_MANAGED" | "GITHUB")
+      attr_accessor authorization_url: ::String
       SENSITIVE: [:authorization_url]
     end
 
@@ -1433,13 +1433,13 @@ module Aws::Inspector2
     end
 
     class GetCodeSecurityScanConfigurationResponse
+      attr_accessor scan_configuration_arn: ::String
+      attr_accessor name: ::String
       attr_accessor configuration: Types::CodeSecurityScanConfiguration
+      attr_accessor level: ("ORGANIZATION" | "ACCOUNT")
+      attr_accessor scope_settings: Types::ScopeSettings
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
-      attr_accessor level: ("ORGANIZATION" | "ACCOUNT")
-      attr_accessor name: ::String
-      attr_accessor scan_configuration_arn: ::String
-      attr_accessor scope_settings: Types::ScopeSettings
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -1451,14 +1451,14 @@ module Aws::Inspector2
     end
 
     class GetCodeSecurityScanResponse
-      attr_accessor account_id: ::String
-      attr_accessor created_at: ::Time
-      attr_accessor last_commit_id: ::String
-      attr_accessor resource: Types::CodeSecurityResource
       attr_accessor scan_id: ::String
+      attr_accessor resource: Types::CodeSecurityResource
+      attr_accessor account_id: ::String
       attr_accessor status: ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "SKIPPED")
       attr_accessor status_reason: ::String
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor last_commit_id: ::String
       SENSITIVE: []
     end
 
@@ -1466,8 +1466,8 @@ module Aws::Inspector2
     end
 
     class GetConfigurationResponse
-      attr_accessor ec2_configuration: Types::Ec2ConfigurationState
       attr_accessor ecr_configuration: Types::EcrConfigurationState
+      attr_accessor ec2_configuration: Types::Ec2ConfigurationState
       SENSITIVE: []
     end
 
@@ -1483,16 +1483,16 @@ module Aws::Inspector2
     end
 
     class GetEc2DeepInspectionConfigurationResponse
-      attr_accessor error_message: ::String
-      attr_accessor org_package_paths: ::Array[::String]
       attr_accessor package_paths: ::Array[::String]
+      attr_accessor org_package_paths: ::Array[::String]
       attr_accessor status: ("ACTIVATED" | "DEACTIVATED" | "PENDING" | "FAILED")
+      attr_accessor error_message: ::String
       SENSITIVE: []
     end
 
     class GetEncryptionKeyRequest
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
       attr_accessor scan_type: ("NETWORK" | "PACKAGE" | "CODE")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
       SENSITIVE: []
     end
 
@@ -1507,12 +1507,12 @@ module Aws::Inspector2
     end
 
     class GetFindingsReportStatusResponse
-      attr_accessor destination: Types::Destination
-      attr_accessor error_code: ("INTERNAL_ERROR" | "INVALID_PERMISSIONS" | "NO_FINDINGS_FOUND" | "BUCKET_NOT_FOUND" | "INCOMPATIBLE_BUCKET_REGION" | "MALFORMED_KMS_KEY")
-      attr_accessor error_message: ::String
-      attr_accessor filter_criteria: Types::FilterCriteria
       attr_accessor report_id: ::String
       attr_accessor status: ("SUCCEEDED" | "IN_PROGRESS" | "CANCELLED" | "FAILED")
+      attr_accessor error_code: ("INTERNAL_ERROR" | "INVALID_PERMISSIONS" | "NO_FINDINGS_FOUND" | "BUCKET_NOT_FOUND" | "INCOMPATIBLE_BUCKET_REGION" | "MALFORMED_KMS_KEY")
+      attr_accessor error_message: ::String
+      attr_accessor destination: Types::Destination
+      attr_accessor filter_criteria: Types::FilterCriteria
       SENSITIVE: []
     end
 
@@ -1532,30 +1532,30 @@ module Aws::Inspector2
     end
 
     class GetSbomExportResponse
+      attr_accessor report_id: ::String
+      attr_accessor format: ("CYCLONEDX_1_4" | "SPDX_2_3")
+      attr_accessor status: ("SUCCEEDED" | "IN_PROGRESS" | "CANCELLED" | "FAILED")
       attr_accessor error_code: ("INTERNAL_ERROR" | "INVALID_PERMISSIONS" | "NO_FINDINGS_FOUND" | "BUCKET_NOT_FOUND" | "INCOMPATIBLE_BUCKET_REGION" | "MALFORMED_KMS_KEY")
       attr_accessor error_message: ::String
-      attr_accessor filter_criteria: Types::ResourceFilterCriteria
-      attr_accessor format: ("CYCLONEDX_1_4" | "SPDX_2_3")
-      attr_accessor report_id: ::String
       attr_accessor s3_destination: Types::Destination
-      attr_accessor status: ("SUCCEEDED" | "IN_PROGRESS" | "CANCELLED" | "FAILED")
+      attr_accessor filter_criteria: Types::ResourceFilterCriteria
       SENSITIVE: []
     end
 
     class ImageLayerAggregation
-      attr_accessor layer_hashes: ::Array[Types::StringFilter]
       attr_accessor repositories: ::Array[Types::StringFilter]
       attr_accessor resource_ids: ::Array[Types::StringFilter]
-      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
+      attr_accessor layer_hashes: ::Array[Types::StringFilter]
       attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
       SENSITIVE: []
     end
 
     class ImageLayerAggregationResponse
-      attr_accessor account_id: ::String
-      attr_accessor layer_hash: ::String
       attr_accessor repository: ::String
       attr_accessor resource_id: ::String
+      attr_accessor layer_hash: ::String
+      attr_accessor account_id: ::String
       attr_accessor severity_counts: Types::SeverityCounts
       SENSITIVE: []
     end
@@ -1572,101 +1572,101 @@ module Aws::Inspector2
     end
 
     class LambdaFunctionAggregation
-      attr_accessor function_names: ::Array[Types::StringFilter]
-      attr_accessor function_tags: ::Array[Types::MapFilter]
       attr_accessor resource_ids: ::Array[Types::StringFilter]
+      attr_accessor function_names: ::Array[Types::StringFilter]
       attr_accessor runtimes: ::Array[Types::StringFilter]
-      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
+      attr_accessor function_tags: ::Array[Types::MapFilter]
       attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
       SENSITIVE: []
     end
 
     class LambdaFunctionAggregationResponse
-      attr_accessor account_id: ::String
-      attr_accessor function_name: ::String
-      attr_accessor lambda_tags: ::Hash[::String, ::String]
-      attr_accessor last_modified_at: ::Time
       attr_accessor resource_id: ::String
+      attr_accessor function_name: ::String
       attr_accessor runtime: ::String
+      attr_accessor lambda_tags: ::Hash[::String, ::String]
+      attr_accessor account_id: ::String
       attr_accessor severity_counts: Types::SeverityCounts
+      attr_accessor last_modified_at: ::Time
       SENSITIVE: []
     end
 
     class LambdaFunctionMetadata
-      attr_accessor function_name: ::String
       attr_accessor function_tags: ::Hash[::String, ::String]
       attr_accessor layers: ::Array[::String]
+      attr_accessor function_name: ::String
       attr_accessor runtime: ("NODEJS" | "NODEJS_12_X" | "NODEJS_14_X" | "NODEJS_16_X" | "JAVA_8" | "JAVA_8_AL2" | "JAVA_11" | "PYTHON_3_7" | "PYTHON_3_8" | "PYTHON_3_9" | "UNSUPPORTED" | "NODEJS_18_X" | "GO_1_X" | "JAVA_17" | "PYTHON_3_10" | "PYTHON_3_11" | "DOTNETCORE_3_1" | "DOTNET_6" | "DOTNET_7" | "RUBY_2_7" | "RUBY_3_2")
       SENSITIVE: []
     end
 
     class LambdaLayerAggregation
       attr_accessor function_names: ::Array[Types::StringFilter]
-      attr_accessor layer_arns: ::Array[Types::StringFilter]
       attr_accessor resource_ids: ::Array[Types::StringFilter]
-      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
+      attr_accessor layer_arns: ::Array[Types::StringFilter]
       attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
       SENSITIVE: []
     end
 
     class LambdaLayerAggregationResponse
-      attr_accessor account_id: ::String
       attr_accessor function_name: ::String
-      attr_accessor layer_arn: ::String
       attr_accessor resource_id: ::String
+      attr_accessor layer_arn: ::String
+      attr_accessor account_id: ::String
       attr_accessor severity_counts: Types::SeverityCounts
       SENSITIVE: []
     end
 
     class LambdaVpcConfig
-      attr_accessor security_group_ids: ::Array[::String]
       attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
       attr_accessor vpc_id: ::String
       SENSITIVE: []
     end
 
     class ListAccountPermissionsRequest
+      attr_accessor service: ("EC2" | "ECR" | "LAMBDA")
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor service: ("EC2" | "ECR" | "LAMBDA")
       SENSITIVE: []
     end
 
     class ListAccountPermissionsResponse
-      attr_accessor next_token: ::String
       attr_accessor permissions: ::Array[Types::Permission]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListCisScanConfigurationsFilterCriteria
-      attr_accessor scan_configuration_arn_filters: ::Array[Types::CisStringFilter]
       attr_accessor scan_name_filters: ::Array[Types::CisStringFilter]
       attr_accessor target_resource_tag_filters: ::Array[Types::TagFilter]
+      attr_accessor scan_configuration_arn_filters: ::Array[Types::CisStringFilter]
       SENSITIVE: []
     end
 
     class ListCisScanConfigurationsRequest
       attr_accessor filter_criteria: Types::ListCisScanConfigurationsFilterCriteria
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       attr_accessor sort_by: ("SCAN_NAME" | "SCAN_CONFIGURATION_ARN")
       attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListCisScanConfigurationsResponse
-      attr_accessor next_token: ::String
       attr_accessor scan_configurations: ::Array[Types::CisScanConfiguration]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListCisScanResultsAggregatedByChecksRequest
-      attr_accessor filter_criteria: Types::CisScanResultsAggregatedByChecksFilterCriteria
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       attr_accessor scan_arn: ::String
+      attr_accessor filter_criteria: Types::CisScanResultsAggregatedByChecksFilterCriteria
       attr_accessor sort_by: ("CHECK_ID" | "TITLE" | "PLATFORM" | "FAILED_COUNTS" | "SECURITY_LEVEL")
       attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -1677,54 +1677,54 @@ module Aws::Inspector2
     end
 
     class ListCisScanResultsAggregatedByTargetResourceRequest
-      attr_accessor filter_criteria: Types::CisScanResultsAggregatedByTargetResourceFilterCriteria
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       attr_accessor scan_arn: ::String
+      attr_accessor filter_criteria: Types::CisScanResultsAggregatedByTargetResourceFilterCriteria
       attr_accessor sort_by: ("RESOURCE_ID" | "FAILED_COUNTS" | "ACCOUNT_ID" | "PLATFORM" | "TARGET_STATUS" | "TARGET_STATUS_REASON")
       attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListCisScanResultsAggregatedByTargetResourceResponse
-      attr_accessor next_token: ::String
       attr_accessor target_resource_aggregations: ::Array[Types::CisTargetResourceAggregation]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListCisScansFilterCriteria
-      attr_accessor failed_checks_filters: ::Array[Types::CisNumberFilter]
-      attr_accessor scan_arn_filters: ::Array[Types::CisStringFilter]
+      attr_accessor scan_name_filters: ::Array[Types::CisStringFilter]
+      attr_accessor target_resource_tag_filters: ::Array[Types::TagFilter]
+      attr_accessor target_resource_id_filters: ::Array[Types::CisStringFilter]
+      attr_accessor scan_status_filters: ::Array[Types::CisScanStatusFilter]
       attr_accessor scan_at_filters: ::Array[Types::CisDateFilter]
       attr_accessor scan_configuration_arn_filters: ::Array[Types::CisStringFilter]
-      attr_accessor scan_name_filters: ::Array[Types::CisStringFilter]
-      attr_accessor scan_status_filters: ::Array[Types::CisScanStatusFilter]
+      attr_accessor scan_arn_filters: ::Array[Types::CisStringFilter]
       attr_accessor scheduled_by_filters: ::Array[Types::CisStringFilter]
+      attr_accessor failed_checks_filters: ::Array[Types::CisNumberFilter]
       attr_accessor target_account_id_filters: ::Array[Types::CisStringFilter]
-      attr_accessor target_resource_id_filters: ::Array[Types::CisStringFilter]
-      attr_accessor target_resource_tag_filters: ::Array[Types::TagFilter]
       SENSITIVE: []
     end
 
     class ListCisScansRequest
-      attr_accessor detail_level: ("ORGANIZATION" | "MEMBER")
       attr_accessor filter_criteria: Types::ListCisScansFilterCriteria
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
+      attr_accessor detail_level: ("ORGANIZATION" | "MEMBER")
       attr_accessor sort_by: ("STATUS" | "SCHEDULED_BY" | "SCAN_START_DATE" | "FAILED_CHECKS")
       attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListCisScansResponse
-      attr_accessor next_token: ::String
       attr_accessor scans: ::Array[Types::CisScan]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListCodeSecurityIntegrationsRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -1735,9 +1735,9 @@ module Aws::Inspector2
     end
 
     class ListCodeSecurityScanConfigurationAssociationsRequest
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       attr_accessor scan_configuration_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -1748,8 +1748,8 @@ module Aws::Inspector2
     end
 
     class ListCodeSecurityScanConfigurationsRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -1760,15 +1760,15 @@ module Aws::Inspector2
     end
 
     class ListCoverageRequest
-      attr_accessor filter_criteria: Types::CoverageFilterCriteria
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor filter_criteria: Types::CoverageFilterCriteria
       SENSITIVE: []
     end
 
     class ListCoverageResponse
-      attr_accessor covered_resources: ::Array[Types::CoveredResource]
       attr_accessor next_token: ::String
+      attr_accessor covered_resources: ::Array[Types::CoveredResource]
       SENSITIVE: []
     end
 
@@ -1781,8 +1781,8 @@ module Aws::Inspector2
 
     class ListCoverageStatisticsResponse
       attr_accessor counts_by_group: ::Array[Types::Counts]
-      attr_accessor next_token: ::String
       attr_accessor total_counts: ::Integer
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1799,10 +1799,10 @@ module Aws::Inspector2
     end
 
     class ListFiltersRequest
-      attr_accessor action: ("NONE" | "SUPPRESS")
       attr_accessor arns: ::Array[::String]
-      attr_accessor max_results: ::Integer
+      attr_accessor action: ("NONE" | "SUPPRESS")
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -1813,39 +1813,39 @@ module Aws::Inspector2
     end
 
     class ListFindingAggregationsRequest
+      attr_accessor aggregation_type: ("FINDING_TYPE" | "PACKAGE" | "TITLE" | "REPOSITORY" | "AMI" | "AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER" | "IMAGE_LAYER" | "ACCOUNT" | "AWS_LAMBDA_FUNCTION" | "LAMBDA_LAYER" | "CODE_REPOSITORY")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       attr_accessor account_ids: ::Array[Types::StringFilter]
       attr_accessor aggregation_request: Types::AggregationRequest
-      attr_accessor aggregation_type: ("FINDING_TYPE" | "PACKAGE" | "TITLE" | "REPOSITORY" | "AMI" | "AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER" | "IMAGE_LAYER" | "ACCOUNT" | "AWS_LAMBDA_FUNCTION" | "LAMBDA_LAYER" | "CODE_REPOSITORY")
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListFindingAggregationsResponse
       attr_accessor aggregation_type: ("FINDING_TYPE" | "PACKAGE" | "TITLE" | "REPOSITORY" | "AMI" | "AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER" | "IMAGE_LAYER" | "ACCOUNT" | "AWS_LAMBDA_FUNCTION" | "LAMBDA_LAYER" | "CODE_REPOSITORY")
-      attr_accessor next_token: ::String
       attr_accessor responses: ::Array[Types::AggregationResponse]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListFindingsRequest
-      attr_accessor filter_criteria: Types::FilterCriteria
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor filter_criteria: Types::FilterCriteria
       attr_accessor sort_criteria: Types::SortCriteria
       SENSITIVE: []
     end
 
     class ListFindingsResponse
-      attr_accessor findings: ::Array[Types::Finding]
       attr_accessor next_token: ::String
+      attr_accessor findings: ::Array[Types::Finding]
       SENSITIVE: []
     end
 
     class ListMembersRequest
+      attr_accessor only_associated: bool
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor only_associated: bool
       SENSITIVE: []
     end
 
@@ -1866,9 +1866,9 @@ module Aws::Inspector2
     end
 
     class ListUsageTotalsRequest
-      attr_accessor account_ids: ::Array[::String]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor account_ids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1887,8 +1887,8 @@ module Aws::Inspector2
 
     class Member
       attr_accessor account_id: ::String
-      attr_accessor delegated_admin_account_id: ::String
       attr_accessor relationship_status: ("CREATED" | "INVITED" | "DISABLED" | "ENABLED" | "REMOVED" | "RESIGNED" | "DELETED" | "EMAIL_VERIFICATION_IN_PROGRESS" | "EMAIL_VERIFICATION_FAILED" | "REGION_DISABLED" | "ACCOUNT_SUSPENDED" | "CANNOT_CREATE_DETECTOR_IN_ORG_MASTER")
+      attr_accessor delegated_admin_account_id: ::String
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -1901,14 +1901,14 @@ module Aws::Inspector2
 
     class MemberAccountEc2DeepInspectionStatusState
       attr_accessor account_id: ::String
-      attr_accessor error_message: ::String
       attr_accessor status: ("ACTIVATED" | "DEACTIVATED" | "PENDING" | "FAILED")
+      attr_accessor error_message: ::String
       SENSITIVE: []
     end
 
     class MonthlySchedule
-      attr_accessor day: ("SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT")
       attr_accessor start_time: Types::Time
+      attr_accessor day: ("SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT")
       SENSITIVE: []
     end
 
@@ -1918,15 +1918,15 @@ module Aws::Inspector2
     end
 
     class NetworkReachabilityDetails
-      attr_accessor network_path: Types::NetworkPath
       attr_accessor open_port_range: Types::PortRange
       attr_accessor protocol: ("TCP" | "UDP")
+      attr_accessor network_path: Types::NetworkPath
       SENSITIVE: []
     end
 
     class NumberFilter
-      attr_accessor lower_inclusive: ::Float
       attr_accessor upper_inclusive: ::Float
+      attr_accessor lower_inclusive: ::Float
       SENSITIVE: []
     end
 
@@ -1935,41 +1935,41 @@ module Aws::Inspector2
 
     class PackageAggregation
       attr_accessor package_names: ::Array[Types::StringFilter]
-      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
       attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
       SENSITIVE: []
     end
 
     class PackageAggregationResponse
-      attr_accessor account_id: ::String
       attr_accessor package_name: ::String
+      attr_accessor account_id: ::String
       attr_accessor severity_counts: Types::SeverityCounts
       SENSITIVE: []
     end
 
     class PackageFilter
-      attr_accessor architecture: Types::StringFilter
-      attr_accessor epoch: Types::NumberFilter
-      attr_accessor file_path: Types::StringFilter
       attr_accessor name: Types::StringFilter
-      attr_accessor release: Types::StringFilter
-      attr_accessor source_lambda_layer_arn: Types::StringFilter
-      attr_accessor source_layer_hash: Types::StringFilter
       attr_accessor version: Types::StringFilter
+      attr_accessor epoch: Types::NumberFilter
+      attr_accessor release: Types::StringFilter
+      attr_accessor architecture: Types::StringFilter
+      attr_accessor source_layer_hash: Types::StringFilter
+      attr_accessor source_lambda_layer_arn: Types::StringFilter
+      attr_accessor file_path: Types::StringFilter
       SENSITIVE: []
     end
 
     class PackageVulnerabilityDetails
-      attr_accessor cvss: ::Array[Types::CvssScore]
-      attr_accessor reference_urls: ::Array[::String]
-      attr_accessor related_vulnerabilities: ::Array[::String]
-      attr_accessor source: ::String
-      attr_accessor source_url: ::String
-      attr_accessor vendor_created_at: ::Time
-      attr_accessor vendor_severity: ::String
-      attr_accessor vendor_updated_at: ::Time
       attr_accessor vulnerability_id: ::String
       attr_accessor vulnerable_packages: ::Array[Types::VulnerablePackage]
+      attr_accessor source: ::String
+      attr_accessor cvss: ::Array[Types::CvssScore]
+      attr_accessor related_vulnerabilities: ::Array[::String]
+      attr_accessor source_url: ::String
+      attr_accessor vendor_severity: ::String
+      attr_accessor vendor_created_at: ::Time
+      attr_accessor vendor_updated_at: ::Time
+      attr_accessor reference_urls: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1980,8 +1980,8 @@ module Aws::Inspector2
     end
 
     class Permission
-      attr_accessor operation: ("ENABLE_SCANNING" | "DISABLE_SCANNING" | "ENABLE_REPOSITORY" | "DISABLE_REPOSITORY")
       attr_accessor service: ("EC2" | "ECR" | "LAMBDA")
+      attr_accessor operation: ("ENABLE_SCANNING" | "DISABLE_SCANNING" | "ENABLE_REPOSITORY" | "DISABLE_REPOSITORY")
       SENSITIVE: []
     end
 
@@ -1998,14 +1998,14 @@ module Aws::Inspector2
     end
 
     class ProjectCodeSecurityScanConfiguration
-      attr_accessor continuous_integration_scan_configurations: ::Array[Types::ProjectContinuousIntegrationScanConfiguration]
       attr_accessor periodic_scan_configurations: ::Array[Types::ProjectPeriodicScanConfiguration]
+      attr_accessor continuous_integration_scan_configurations: ::Array[Types::ProjectContinuousIntegrationScanConfiguration]
       SENSITIVE: []
     end
 
     class ProjectContinuousIntegrationScanConfiguration
-      attr_accessor rule_set_categories: ::Array[("SAST" | "IAC" | "SCA")]
       attr_accessor supported_event: ("PULL_REQUEST" | "PUSH")
+      attr_accessor rule_set_categories: ::Array[("SAST" | "IAC" | "SCA")]
       SENSITIVE: []
     end
 
@@ -2016,8 +2016,8 @@ module Aws::Inspector2
     end
 
     class Recommendation
-      attr_accessor url: ::String
       attr_accessor text: ::String
+      attr_accessor url: ::String
       SENSITIVE: []
     end
 
@@ -2028,22 +2028,22 @@ module Aws::Inspector2
 
     class RepositoryAggregation
       attr_accessor repositories: ::Array[Types::StringFilter]
-      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL" | "AFFECTED_IMAGES")
       attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL" | "AFFECTED_IMAGES")
       SENSITIVE: []
     end
 
     class RepositoryAggregationResponse
-      attr_accessor account_id: ::String
-      attr_accessor affected_images: ::Integer
       attr_accessor repository: ::String
+      attr_accessor account_id: ::String
       attr_accessor severity_counts: Types::SeverityCounts
+      attr_accessor affected_images: ::Integer
       SENSITIVE: []
     end
 
     class ResetEncryptionKeyRequest
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
       attr_accessor scan_type: ("NETWORK" | "PACKAGE" | "CODE")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
       SENSITIVE: []
     end
 
@@ -2051,12 +2051,12 @@ module Aws::Inspector2
     end
 
     class Resource
-      attr_accessor details: Types::ResourceDetails
+      attr_accessor type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
       attr_accessor id: ::String
       attr_accessor partition: ::String
       attr_accessor region: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
+      attr_accessor details: Types::ResourceDetails
       SENSITIVE: []
     end
 
@@ -2070,13 +2070,13 @@ module Aws::Inspector2
 
     class ResourceFilterCriteria
       attr_accessor account_id: ::Array[Types::ResourceStringFilter]
-      attr_accessor ec2_instance_tags: ::Array[Types::ResourceMapFilter]
-      attr_accessor ecr_image_tags: ::Array[Types::ResourceStringFilter]
-      attr_accessor ecr_repository_name: ::Array[Types::ResourceStringFilter]
-      attr_accessor lambda_function_name: ::Array[Types::ResourceStringFilter]
-      attr_accessor lambda_function_tags: ::Array[Types::ResourceMapFilter]
       attr_accessor resource_id: ::Array[Types::ResourceStringFilter]
       attr_accessor resource_type: ::Array[Types::ResourceStringFilter]
+      attr_accessor ecr_repository_name: ::Array[Types::ResourceStringFilter]
+      attr_accessor lambda_function_name: ::Array[Types::ResourceStringFilter]
+      attr_accessor ecr_image_tags: ::Array[Types::ResourceStringFilter]
+      attr_accessor ec2_instance_tags: ::Array[Types::ResourceMapFilter]
+      attr_accessor lambda_function_tags: ::Array[Types::ResourceMapFilter]
       SENSITIVE: []
     end
 
@@ -2093,29 +2093,29 @@ module Aws::Inspector2
     end
 
     class ResourceScanMetadata
-      attr_accessor code_repository: Types::CodeRepositoryMetadata
-      attr_accessor ec2: Types::Ec2Metadata
-      attr_accessor ecr_image: Types::EcrContainerImageMetadata
       attr_accessor ecr_repository: Types::EcrRepositoryMetadata
+      attr_accessor ecr_image: Types::EcrContainerImageMetadata
+      attr_accessor ec2: Types::Ec2Metadata
       attr_accessor lambda_function: Types::LambdaFunctionMetadata
+      attr_accessor code_repository: Types::CodeRepositoryMetadata
       SENSITIVE: []
     end
 
     class ResourceState
-      attr_accessor code_repository: Types::State
       attr_accessor ec2: Types::State
       attr_accessor ecr: Types::State
       attr_accessor lambda: Types::State
       attr_accessor lambda_code: Types::State
+      attr_accessor code_repository: Types::State
       SENSITIVE: []
     end
 
     class ResourceStatus
-      attr_accessor code_repository: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "SUSPENDING" | "SUSPENDED")
       attr_accessor ec2: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "SUSPENDING" | "SUSPENDED")
       attr_accessor ecr: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "SUSPENDING" | "SUSPENDED")
       attr_accessor lambda: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "SUSPENDING" | "SUSPENDED")
       attr_accessor lambda_code: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "SUSPENDING" | "SUSPENDED")
+      attr_accessor code_repository: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "SUSPENDING" | "SUSPENDED")
       SENSITIVE: []
     end
 
@@ -2126,26 +2126,26 @@ module Aws::Inspector2
     end
 
     class ScanStatus
-      attr_accessor reason: ("PENDING_INITIAL_SCAN" | "ACCESS_DENIED" | "INTERNAL_ERROR" | "UNMANAGED_EC2_INSTANCE" | "UNSUPPORTED_OS" | "SCAN_ELIGIBILITY_EXPIRED" | "RESOURCE_TERMINATED" | "SUCCESSFUL" | "NO_RESOURCES_FOUND" | "IMAGE_SIZE_EXCEEDED" | "SCAN_FREQUENCY_MANUAL" | "SCAN_FREQUENCY_SCAN_ON_PUSH" | "EC2_INSTANCE_STOPPED" | "PENDING_DISABLE" | "NO_INVENTORY" | "STALE_INVENTORY" | "EXCLUDED_BY_TAG" | "UNSUPPORTED_RUNTIME" | "UNSUPPORTED_MEDIA_TYPE" | "UNSUPPORTED_CONFIG_FILE" | "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED" | "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED" | "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED" | "DEEP_INSPECTION_NO_INVENTORY" | "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED" | "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED" | "PENDING_REVIVAL_SCAN" | "INTEGRATION_CONNECTION_LOST" | "ACCESS_DENIED_TO_ENCRYPTION_KEY" | "UNSUPPORTED_LANGUAGE" | "NO_SCAN_CONFIGURATION_ASSOCIATED" | "SCAN_IN_PROGRESS")
       attr_accessor status_code: ("ACTIVE" | "INACTIVE")
+      attr_accessor reason: ("PENDING_INITIAL_SCAN" | "ACCESS_DENIED" | "INTERNAL_ERROR" | "UNMANAGED_EC2_INSTANCE" | "UNSUPPORTED_OS" | "SCAN_ELIGIBILITY_EXPIRED" | "RESOURCE_TERMINATED" | "SUCCESSFUL" | "NO_RESOURCES_FOUND" | "IMAGE_SIZE_EXCEEDED" | "SCAN_FREQUENCY_MANUAL" | "SCAN_FREQUENCY_SCAN_ON_PUSH" | "EC2_INSTANCE_STOPPED" | "PENDING_DISABLE" | "NO_INVENTORY" | "STALE_INVENTORY" | "EXCLUDED_BY_TAG" | "UNSUPPORTED_RUNTIME" | "UNSUPPORTED_MEDIA_TYPE" | "UNSUPPORTED_CONFIG_FILE" | "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED" | "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED" | "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED" | "DEEP_INSPECTION_NO_INVENTORY" | "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED" | "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED" | "PENDING_REVIVAL_SCAN" | "INTEGRATION_CONNECTION_LOST" | "ACCESS_DENIED_TO_ENCRYPTION_KEY" | "UNSUPPORTED_LANGUAGE" | "NO_SCAN_CONFIGURATION_ASSOCIATED" | "SCAN_IN_PROGRESS")
       SENSITIVE: []
     end
 
     class Schedule
-      attr_accessor daily: Types::DailySchedule
-      attr_accessor monthly: Types::MonthlySchedule
       attr_accessor one_time: Types::OneTimeSchedule
+      attr_accessor daily: Types::DailySchedule
       attr_accessor weekly: Types::WeeklySchedule
+      attr_accessor monthly: Types::MonthlySchedule
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class Daily < Schedule
-      end
-      class Monthly < Schedule
-      end
       class OneTime < Schedule
       end
+      class Daily < Schedule
+      end
       class Weekly < Schedule
+      end
+      class Monthly < Schedule
       end
       class Unknown < Schedule
       end
@@ -2168,8 +2168,8 @@ module Aws::Inspector2
     end
 
     class SearchVulnerabilitiesResponse
-      attr_accessor next_token: ::String
       attr_accessor vulnerabilities: ::Array[Types::Vulnerability]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -2183,9 +2183,9 @@ module Aws::Inspector2
     end
 
     class SendCisSessionTelemetryRequest
-      attr_accessor messages: ::Array[Types::CisSessionMessage]
       attr_accessor scan_job_id: ::String
       attr_accessor session_token: ::String
+      attr_accessor messages: ::Array[Types::CisSessionMessage]
       SENSITIVE: []
     end
 
@@ -2200,9 +2200,9 @@ module Aws::Inspector2
 
     class SeverityCounts
       attr_accessor all: ::Integer
-      attr_accessor critical: ::Integer
-      attr_accessor high: ::Integer
       attr_accessor medium: ::Integer
+      attr_accessor high: ::Integer
+      attr_accessor critical: ::Integer
       SENSITIVE: []
     end
 
@@ -2218,8 +2218,8 @@ module Aws::Inspector2
     end
 
     class StartCisSessionRequest
-      attr_accessor message: Types::StartCisSessionMessage
       attr_accessor scan_job_id: ::String
+      attr_accessor message: Types::StartCisSessionMessage
       SENSITIVE: []
     end
 
@@ -2239,52 +2239,52 @@ module Aws::Inspector2
     end
 
     class State
+      attr_accessor status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "SUSPENDING" | "SUSPENDED")
       attr_accessor error_code: ("ALREADY_ENABLED" | "ENABLE_IN_PROGRESS" | "DISABLE_IN_PROGRESS" | "SUSPEND_IN_PROGRESS" | "RESOURCE_NOT_FOUND" | "ACCESS_DENIED" | "INTERNAL_ERROR" | "SSM_UNAVAILABLE" | "SSM_THROTTLED" | "EVENTBRIDGE_UNAVAILABLE" | "EVENTBRIDGE_THROTTLED" | "RESOURCE_SCAN_NOT_DISABLED" | "DISASSOCIATE_ALL_MEMBERS" | "ACCOUNT_IS_ISOLATED" | "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED" | "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED")
       attr_accessor error_message: ::String
-      attr_accessor status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "SUSPENDING" | "SUSPENDED")
       SENSITIVE: []
     end
 
     class StatusCounts
       attr_accessor failed: ::Integer
-      attr_accessor passed: ::Integer
       attr_accessor skipped: ::Integer
+      attr_accessor passed: ::Integer
       SENSITIVE: []
     end
 
     class Step
-      attr_accessor component_arn: ::String
       attr_accessor component_id: ::String
       attr_accessor component_type: ::String
+      attr_accessor component_arn: ::String
       SENSITIVE: []
     end
 
     class StopCisMessageProgress
-      attr_accessor error_checks: ::Integer
-      attr_accessor failed_checks: ::Integer
-      attr_accessor informational_checks: ::Integer
-      attr_accessor not_applicable_checks: ::Integer
-      attr_accessor not_evaluated_checks: ::Integer
-      attr_accessor successful_checks: ::Integer
       attr_accessor total_checks: ::Integer
+      attr_accessor successful_checks: ::Integer
+      attr_accessor failed_checks: ::Integer
+      attr_accessor not_evaluated_checks: ::Integer
       attr_accessor unknown_checks: ::Integer
+      attr_accessor not_applicable_checks: ::Integer
+      attr_accessor informational_checks: ::Integer
+      attr_accessor error_checks: ::Integer
       SENSITIVE: []
     end
 
     class StopCisSessionMessage
-      attr_accessor benchmark_profile: ::String
-      attr_accessor benchmark_version: ::String
-      attr_accessor compute_platform: Types::ComputePlatform
-      attr_accessor progress: Types::StopCisMessageProgress
-      attr_accessor reason: ::String
       attr_accessor status: ("SUCCESS" | "FAILED" | "INTERRUPTED" | "UNSUPPORTED_OS")
+      attr_accessor reason: ::String
+      attr_accessor progress: Types::StopCisMessageProgress
+      attr_accessor compute_platform: Types::ComputePlatform
+      attr_accessor benchmark_version: ::String
+      attr_accessor benchmark_profile: ::String
       SENSITIVE: []
     end
 
     class StopCisSessionRequest
-      attr_accessor message: Types::StopCisSessionMessage
       attr_accessor scan_job_id: ::String
       attr_accessor session_token: ::String
+      attr_accessor message: Types::StopCisSessionMessage
       SENSITIVE: []
     end
 
@@ -2298,14 +2298,14 @@ module Aws::Inspector2
     end
 
     class SuccessfulAssociationResult
-      attr_accessor resource: Types::CodeSecurityResource
       attr_accessor scan_configuration_arn: ::String
+      attr_accessor resource: Types::CodeSecurityResource
       SENSITIVE: []
     end
 
     class SuggestedFix
-      attr_accessor code: ::String
       attr_accessor description: ::String
+      attr_accessor code: ::String
       SENSITIVE: []
     end
 
@@ -2338,20 +2338,20 @@ module Aws::Inspector2
     end
 
     class TitleAggregation
-      attr_accessor finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION")
-      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
-      attr_accessor sort_order: ("ASC" | "DESC")
       attr_accessor titles: ::Array[Types::StringFilter]
       attr_accessor vulnerability_ids: ::Array[Types::StringFilter]
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
+      attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
+      attr_accessor finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")
       SENSITIVE: []
     end
 
     class TitleAggregationResponse
-      attr_accessor account_id: ::String
-      attr_accessor severity_counts: Types::SeverityCounts
       attr_accessor title: ::String
       attr_accessor vulnerability_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor severity_counts: Types::SeverityCounts
       SENSITIVE: []
     end
 
@@ -2367,8 +2367,8 @@ module Aws::Inspector2
     class UpdateCisScanConfigurationRequest
       attr_accessor scan_configuration_arn: ::String
       attr_accessor scan_name: ::String
-      attr_accessor schedule: Types::Schedule
       attr_accessor security_level: ("LEVEL_1" | "LEVEL_2")
+      attr_accessor schedule: Types::Schedule
       attr_accessor targets: Types::UpdateCisTargets
       SENSITIVE: []
     end
@@ -2385,8 +2385,8 @@ module Aws::Inspector2
     end
 
     class UpdateCodeSecurityIntegrationRequest
-      attr_accessor details: Types::UpdateIntegrationDetails
       attr_accessor integration_arn: ::String
+      attr_accessor details: Types::UpdateIntegrationDetails
       SENSITIVE: []
     end
 
@@ -2397,8 +2397,8 @@ module Aws::Inspector2
     end
 
     class UpdateCodeSecurityScanConfigurationRequest
-      attr_accessor configuration: Types::CodeSecurityScanConfiguration
       attr_accessor scan_configuration_arn: ::String
+      attr_accessor configuration: Types::CodeSecurityScanConfiguration
       SENSITIVE: []
     end
 
@@ -2408,8 +2408,8 @@ module Aws::Inspector2
     end
 
     class UpdateConfigurationRequest
-      attr_accessor ec2_configuration: Types::Ec2Configuration
       attr_accessor ecr_configuration: Types::EcrConfiguration
+      attr_accessor ec2_configuration: Types::Ec2Configuration
       SENSITIVE: []
     end
 
@@ -2423,17 +2423,17 @@ module Aws::Inspector2
     end
 
     class UpdateEc2DeepInspectionConfigurationResponse
-      attr_accessor error_message: ::String
-      attr_accessor org_package_paths: ::Array[::String]
       attr_accessor package_paths: ::Array[::String]
+      attr_accessor org_package_paths: ::Array[::String]
       attr_accessor status: ("ACTIVATED" | "DEACTIVATED" | "PENDING" | "FAILED")
+      attr_accessor error_message: ::String
       SENSITIVE: []
     end
 
     class UpdateEncryptionKeyRequest
       attr_accessor kms_key_id: ::String
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
       attr_accessor scan_type: ("NETWORK" | "PACKAGE" | "CODE")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
       SENSITIVE: []
     end
 
@@ -2443,9 +2443,9 @@ module Aws::Inspector2
     class UpdateFilterRequest
       attr_accessor action: ("NONE" | "SUPPRESS")
       attr_accessor description: ::String
-      attr_accessor filter_arn: ::String
       attr_accessor filter_criteria: Types::FilterCriteria
       attr_accessor name: ::String
+      attr_accessor filter_arn: ::String
       attr_accessor reason: ::String
       SENSITIVE: []
     end
@@ -2467,14 +2467,14 @@ module Aws::Inspector2
     end
 
     class UpdateIntegrationDetails
-      attr_accessor github: Types::UpdateGitHubIntegrationDetail
       attr_accessor gitlab_self_managed: Types::UpdateGitLabSelfManagedIntegrationDetail
+      attr_accessor github: Types::UpdateGitHubIntegrationDetail
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class Github < UpdateIntegrationDetails
-      end
       class GitlabSelfManaged < UpdateIntegrationDetails
+      end
+      class Github < UpdateIntegrationDetails
       end
       class Unknown < UpdateIntegrationDetails
       end
@@ -2499,10 +2499,10 @@ module Aws::Inspector2
     end
 
     class Usage
-      attr_accessor currency: ("USD")
-      attr_accessor estimated_monthly_cost: ::Float
+      attr_accessor type: ("EC2_INSTANCE_HOURS" | "ECR_INITIAL_SCAN" | "ECR_RESCAN" | "LAMBDA_FUNCTION_HOURS" | "LAMBDA_FUNCTION_CODE_HOURS" | "CODE_REPOSITORY_SAST" | "CODE_REPOSITORY_IAC" | "CODE_REPOSITORY_SCA" | "EC2_AGENTLESS_INSTANCE_HOURS")
       attr_accessor total: ::Float
-      attr_accessor type: ("EC2_INSTANCE_HOURS" | "ECR_INITIAL_SCAN" | "ECR_RESCAN" | "LAMBDA_FUNCTION_HOURS" | "LAMBDA_FUNCTION_CODE_HOURS" | "CODE_REPOSITORY_SAST" | "CODE_REPOSITORY_IAC" | "CODE_REPOSITORY_SCA")
+      attr_accessor estimated_monthly_cost: ::Float
+      attr_accessor currency: ("USD")
       SENSITIVE: []
     end
 
@@ -2513,57 +2513,57 @@ module Aws::Inspector2
     end
 
     class ValidationException
-      attr_accessor fields: ::Array[Types::ValidationExceptionField]
       attr_accessor message: ::String
       attr_accessor reason: ("CANNOT_PARSE" | "FIELD_VALIDATION_FAILED" | "OTHER")
+      attr_accessor fields: ::Array[Types::ValidationExceptionField]
       SENSITIVE: []
     end
 
     class ValidationExceptionField
-      attr_accessor message: ::String
       attr_accessor name: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
     class Vulnerability
-      attr_accessor atig_data: Types::AtigData
-      attr_accessor cisa_data: Types::CisaData
-      attr_accessor cvss2: Types::Cvss2
-      attr_accessor cvss3: Types::Cvss3
+      attr_accessor id: ::String
       attr_accessor cwes: ::Array[::String]
+      attr_accessor cisa_data: Types::CisaData
+      attr_accessor source: ("NVD")
       attr_accessor description: ::String
+      attr_accessor atig_data: Types::AtigData
+      attr_accessor vendor_severity: ::String
+      attr_accessor cvss3: Types::Cvss3
+      attr_accessor related_vulnerabilities: ::Array[::String]
+      attr_accessor cvss2: Types::Cvss2
+      attr_accessor vendor_created_at: ::Time
+      attr_accessor vendor_updated_at: ::Time
+      attr_accessor source_url: ::String
+      attr_accessor reference_urls: ::Array[::String]
+      attr_accessor exploit_observed: Types::ExploitObserved
       attr_accessor detection_platforms: ::Array[::String]
       attr_accessor epss: Types::Epss
-      attr_accessor exploit_observed: Types::ExploitObserved
-      attr_accessor id: ::String
-      attr_accessor reference_urls: ::Array[::String]
-      attr_accessor related_vulnerabilities: ::Array[::String]
-      attr_accessor source: ("NVD")
-      attr_accessor source_url: ::String
-      attr_accessor vendor_created_at: ::Time
-      attr_accessor vendor_severity: ::String
-      attr_accessor vendor_updated_at: ::Time
       SENSITIVE: []
     end
 
     class VulnerablePackage
-      attr_accessor arch: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor source_layer_hash: ::String
       attr_accessor epoch: ::Integer
+      attr_accessor release: ::String
+      attr_accessor arch: ::String
+      attr_accessor package_manager: ("BUNDLER" | "CARGO" | "COMPOSER" | "NPM" | "NUGET" | "PIPENV" | "POETRY" | "YARN" | "GOBINARY" | "GOMOD" | "JAR" | "OS" | "PIP" | "PYTHONPKG" | "NODEPKG" | "POM" | "GEMSPEC" | "DOTNET_CORE")
       attr_accessor file_path: ::String
       attr_accessor fixed_in_version: ::String
-      attr_accessor name: ::String
-      attr_accessor package_manager: ("BUNDLER" | "CARGO" | "COMPOSER" | "NPM" | "NUGET" | "PIPENV" | "POETRY" | "YARN" | "GOBINARY" | "GOMOD" | "JAR" | "OS" | "PIP" | "PYTHONPKG" | "NODEPKG" | "POM" | "GEMSPEC" | "DOTNET_CORE")
-      attr_accessor release: ::String
       attr_accessor remediation: ::String
       attr_accessor source_lambda_layer_arn: ::String
-      attr_accessor source_layer_hash: ::String
-      attr_accessor version: ::String
       SENSITIVE: []
     end
 
     class WeeklySchedule
-      attr_accessor days: ::Array[("SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT")]
       attr_accessor start_time: Types::Time
+      attr_accessor days: ::Array[("SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT")]
       SENSITIVE: []
     end
   end

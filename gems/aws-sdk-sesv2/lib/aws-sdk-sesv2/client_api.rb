@@ -103,6 +103,10 @@ module Aws::SESV2
     CreateImportJobResponse = Shapes::StructureShape.new(name: 'CreateImportJobResponse')
     CreateMultiRegionEndpointRequest = Shapes::StructureShape.new(name: 'CreateMultiRegionEndpointRequest')
     CreateMultiRegionEndpointResponse = Shapes::StructureShape.new(name: 'CreateMultiRegionEndpointResponse')
+    CreateTenantRequest = Shapes::StructureShape.new(name: 'CreateTenantRequest')
+    CreateTenantResourceAssociationRequest = Shapes::StructureShape.new(name: 'CreateTenantResourceAssociationRequest')
+    CreateTenantResourceAssociationResponse = Shapes::StructureShape.new(name: 'CreateTenantResourceAssociationResponse')
+    CreateTenantResponse = Shapes::StructureShape.new(name: 'CreateTenantResponse')
     CustomRedirectDomain = Shapes::StringShape.new(name: 'CustomRedirectDomain')
     CustomVerificationEmailTemplateMetadata = Shapes::StructureShape.new(name: 'CustomVerificationEmailTemplateMetadata')
     CustomVerificationEmailTemplatesList = Shapes::ListShape.new(name: 'CustomVerificationEmailTemplatesList')
@@ -137,6 +141,10 @@ module Aws::SESV2
     DeleteMultiRegionEndpointResponse = Shapes::StructureShape.new(name: 'DeleteMultiRegionEndpointResponse')
     DeleteSuppressedDestinationRequest = Shapes::StructureShape.new(name: 'DeleteSuppressedDestinationRequest')
     DeleteSuppressedDestinationResponse = Shapes::StructureShape.new(name: 'DeleteSuppressedDestinationResponse')
+    DeleteTenantRequest = Shapes::StructureShape.new(name: 'DeleteTenantRequest')
+    DeleteTenantResourceAssociationRequest = Shapes::StructureShape.new(name: 'DeleteTenantResourceAssociationRequest')
+    DeleteTenantResourceAssociationResponse = Shapes::StructureShape.new(name: 'DeleteTenantResourceAssociationResponse')
+    DeleteTenantResponse = Shapes::StructureShape.new(name: 'DeleteTenantResponse')
     DeliverabilityDashboardAccountStatus = Shapes::StringShape.new(name: 'DeliverabilityDashboardAccountStatus')
     DeliverabilityTestReport = Shapes::StructureShape.new(name: 'DeliverabilityTestReport')
     DeliverabilityTestReports = Shapes::ListShape.new(name: 'DeliverabilityTestReports')
@@ -258,8 +266,12 @@ module Aws::SESV2
     GetMessageInsightsResponse = Shapes::StructureShape.new(name: 'GetMessageInsightsResponse')
     GetMultiRegionEndpointRequest = Shapes::StructureShape.new(name: 'GetMultiRegionEndpointRequest')
     GetMultiRegionEndpointResponse = Shapes::StructureShape.new(name: 'GetMultiRegionEndpointResponse')
+    GetReputationEntityRequest = Shapes::StructureShape.new(name: 'GetReputationEntityRequest')
+    GetReputationEntityResponse = Shapes::StructureShape.new(name: 'GetReputationEntityResponse')
     GetSuppressedDestinationRequest = Shapes::StructureShape.new(name: 'GetSuppressedDestinationRequest')
     GetSuppressedDestinationResponse = Shapes::StructureShape.new(name: 'GetSuppressedDestinationResponse')
+    GetTenantRequest = Shapes::StructureShape.new(name: 'GetTenantRequest')
+    GetTenantResponse = Shapes::StructureShape.new(name: 'GetTenantResponse')
     GuardianAttributes = Shapes::StructureShape.new(name: 'GuardianAttributes')
     GuardianOptions = Shapes::StructureShape.new(name: 'GuardianOptions')
     HttpsPolicy = Shapes::StringShape.new(name: 'HttpsPolicy')
@@ -328,10 +340,21 @@ module Aws::SESV2
     ListRecommendationsFilterKey = Shapes::StringShape.new(name: 'ListRecommendationsFilterKey')
     ListRecommendationsRequest = Shapes::StructureShape.new(name: 'ListRecommendationsRequest')
     ListRecommendationsResponse = Shapes::StructureShape.new(name: 'ListRecommendationsResponse')
+    ListReputationEntitiesRequest = Shapes::StructureShape.new(name: 'ListReputationEntitiesRequest')
+    ListReputationEntitiesResponse = Shapes::StructureShape.new(name: 'ListReputationEntitiesResponse')
+    ListResourceTenantsRequest = Shapes::StructureShape.new(name: 'ListResourceTenantsRequest')
+    ListResourceTenantsResponse = Shapes::StructureShape.new(name: 'ListResourceTenantsResponse')
     ListSuppressedDestinationsRequest = Shapes::StructureShape.new(name: 'ListSuppressedDestinationsRequest')
     ListSuppressedDestinationsResponse = Shapes::StructureShape.new(name: 'ListSuppressedDestinationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListTenantResourcesFilter = Shapes::MapShape.new(name: 'ListTenantResourcesFilter')
+    ListTenantResourcesFilterKey = Shapes::StringShape.new(name: 'ListTenantResourcesFilterKey')
+    ListTenantResourcesFilterValue = Shapes::StringShape.new(name: 'ListTenantResourcesFilterValue')
+    ListTenantResourcesRequest = Shapes::StructureShape.new(name: 'ListTenantResourcesRequest')
+    ListTenantResourcesResponse = Shapes::StructureShape.new(name: 'ListTenantResourcesResponse')
+    ListTenantsRequest = Shapes::StructureShape.new(name: 'ListTenantsRequest')
+    ListTenantsResponse = Shapes::StructureShape.new(name: 'ListTenantsResponse')
     MailFromAttributes = Shapes::StructureShape.new(name: 'MailFromAttributes')
     MailFromDomainName = Shapes::StringShape.new(name: 'MailFromDomainName')
     MailFromDomainNotVerifiedException = Shapes::StructureShape.new(name: 'MailFromDomainNotVerifiedException')
@@ -450,7 +473,17 @@ module Aws::SESV2
     ReplacementTemplate = Shapes::StructureShape.new(name: 'ReplacementTemplate')
     ReportId = Shapes::StringShape.new(name: 'ReportId')
     ReportName = Shapes::StringShape.new(name: 'ReportName')
+    ReputationEntitiesList = Shapes::ListShape.new(name: 'ReputationEntitiesList')
+    ReputationEntity = Shapes::StructureShape.new(name: 'ReputationEntity')
+    ReputationEntityFilter = Shapes::MapShape.new(name: 'ReputationEntityFilter')
+    ReputationEntityFilterKey = Shapes::StringShape.new(name: 'ReputationEntityFilterKey')
+    ReputationEntityFilterValue = Shapes::StringShape.new(name: 'ReputationEntityFilterValue')
+    ReputationEntityReference = Shapes::StringShape.new(name: 'ReputationEntityReference')
+    ReputationEntityType = Shapes::StringShape.new(name: 'ReputationEntityType')
     ReputationOptions = Shapes::StructureShape.new(name: 'ReputationOptions')
+    ResourceTenantMetadata = Shapes::StructureShape.new(name: 'ResourceTenantMetadata')
+    ResourceTenantMetadataList = Shapes::ListShape.new(name: 'ResourceTenantMetadataList')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ReviewDetails = Shapes::StructureShape.new(name: 'ReviewDetails')
     ReviewStatus = Shapes::StringShape.new(name: 'ReviewStatus')
     Route = Shapes::StructureShape.new(name: 'Route')
@@ -471,10 +504,13 @@ module Aws::SESV2
     SendingOptions = Shapes::StructureShape.new(name: 'SendingOptions')
     SendingPausedException = Shapes::StructureShape.new(name: 'SendingPausedException')
     SendingPoolName = Shapes::StringShape.new(name: 'SendingPoolName')
+    SendingStatus = Shapes::StringShape.new(name: 'SendingStatus')
     SentLast24Hours = Shapes::FloatShape.new(name: 'SentLast24Hours')
     SerialNumber = Shapes::IntegerShape.new(name: 'SerialNumber')
     SnsDestination = Shapes::StructureShape.new(name: 'SnsDestination')
     Status = Shapes::StringShape.new(name: 'Status')
+    StatusCause = Shapes::StringShape.new(name: 'StatusCause')
+    StatusRecord = Shapes::StructureShape.new(name: 'StatusRecord')
     Subject = Shapes::StringShape.new(name: 'Subject')
     SubscriptionStatus = Shapes::StringShape.new(name: 'SubscriptionStatus')
     SuccessRedirectionURL = Shapes::StringShape.new(name: 'SuccessRedirectionURL')
@@ -497,6 +533,13 @@ module Aws::SESV2
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Template = Shapes::StructureShape.new(name: 'Template')
     TemplateContent = Shapes::StringShape.new(name: 'TemplateContent')
+    Tenant = Shapes::StructureShape.new(name: 'Tenant')
+    TenantId = Shapes::StringShape.new(name: 'TenantId')
+    TenantInfo = Shapes::StructureShape.new(name: 'TenantInfo')
+    TenantInfoList = Shapes::ListShape.new(name: 'TenantInfoList')
+    TenantName = Shapes::StringShape.new(name: 'TenantName')
+    TenantResource = Shapes::StructureShape.new(name: 'TenantResource')
+    TenantResourceList = Shapes::ListShape.new(name: 'TenantResourceList')
     TestRenderEmailTemplateRequest = Shapes::StructureShape.new(name: 'TestRenderEmailTemplateRequest')
     TestRenderEmailTemplateResponse = Shapes::StructureShape.new(name: 'TestRenderEmailTemplateResponse')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -525,6 +568,10 @@ module Aws::SESV2
     UpdateEmailIdentityPolicyResponse = Shapes::StructureShape.new(name: 'UpdateEmailIdentityPolicyResponse')
     UpdateEmailTemplateRequest = Shapes::StructureShape.new(name: 'UpdateEmailTemplateRequest')
     UpdateEmailTemplateResponse = Shapes::StructureShape.new(name: 'UpdateEmailTemplateResponse')
+    UpdateReputationEntityCustomerManagedStatusRequest = Shapes::StructureShape.new(name: 'UpdateReputationEntityCustomerManagedStatusRequest')
+    UpdateReputationEntityCustomerManagedStatusResponse = Shapes::StructureShape.new(name: 'UpdateReputationEntityCustomerManagedStatusResponse')
+    UpdateReputationEntityPolicyRequest = Shapes::StructureShape.new(name: 'UpdateReputationEntityPolicyRequest')
+    UpdateReputationEntityPolicyResponse = Shapes::StructureShape.new(name: 'UpdateReputationEntityPolicyResponse')
     UseCaseDescription = Shapes::StringShape.new(name: 'UseCaseDescription')
     UseDefaultIfPreferenceUnavailable = Shapes::BooleanShape.new(name: 'UseDefaultIfPreferenceUnavailable')
     VdmAttributes = Shapes::StructureShape.new(name: 'VdmAttributes')
@@ -778,6 +825,24 @@ module Aws::SESV2
     CreateMultiRegionEndpointResponse.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId"))
     CreateMultiRegionEndpointResponse.struct_class = Types::CreateMultiRegionEndpointResponse
 
+    CreateTenantRequest.add_member(:tenant_name, Shapes::ShapeRef.new(shape: TenantName, required: true, location_name: "TenantName"))
+    CreateTenantRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateTenantRequest.struct_class = Types::CreateTenantRequest
+
+    CreateTenantResourceAssociationRequest.add_member(:tenant_name, Shapes::ShapeRef.new(shape: TenantName, required: true, location_name: "TenantName"))
+    CreateTenantResourceAssociationRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceArn"))
+    CreateTenantResourceAssociationRequest.struct_class = Types::CreateTenantResourceAssociationRequest
+
+    CreateTenantResourceAssociationResponse.struct_class = Types::CreateTenantResourceAssociationResponse
+
+    CreateTenantResponse.add_member(:tenant_name, Shapes::ShapeRef.new(shape: TenantName, location_name: "TenantName"))
+    CreateTenantResponse.add_member(:tenant_id, Shapes::ShapeRef.new(shape: TenantId, location_name: "TenantId"))
+    CreateTenantResponse.add_member(:tenant_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "TenantArn"))
+    CreateTenantResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    CreateTenantResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateTenantResponse.add_member(:sending_status, Shapes::ShapeRef.new(shape: SendingStatus, location_name: "SendingStatus"))
+    CreateTenantResponse.struct_class = Types::CreateTenantResponse
+
     CustomVerificationEmailTemplateMetadata.add_member(:template_name, Shapes::ShapeRef.new(shape: EmailTemplateName, location_name: "TemplateName"))
     CustomVerificationEmailTemplateMetadata.add_member(:from_email_address, Shapes::ShapeRef.new(shape: EmailAddress, location_name: "FromEmailAddress"))
     CustomVerificationEmailTemplateMetadata.add_member(:template_subject, Shapes::ShapeRef.new(shape: EmailTemplateSubject, location_name: "TemplateSubject"))
@@ -870,6 +935,17 @@ module Aws::SESV2
     DeleteSuppressedDestinationRequest.struct_class = Types::DeleteSuppressedDestinationRequest
 
     DeleteSuppressedDestinationResponse.struct_class = Types::DeleteSuppressedDestinationResponse
+
+    DeleteTenantRequest.add_member(:tenant_name, Shapes::ShapeRef.new(shape: TenantName, required: true, location_name: "TenantName"))
+    DeleteTenantRequest.struct_class = Types::DeleteTenantRequest
+
+    DeleteTenantResourceAssociationRequest.add_member(:tenant_name, Shapes::ShapeRef.new(shape: TenantName, required: true, location_name: "TenantName"))
+    DeleteTenantResourceAssociationRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceArn"))
+    DeleteTenantResourceAssociationRequest.struct_class = Types::DeleteTenantResourceAssociationRequest
+
+    DeleteTenantResourceAssociationResponse.struct_class = Types::DeleteTenantResourceAssociationResponse
+
+    DeleteTenantResponse.struct_class = Types::DeleteTenantResponse
 
     DeliverabilityTestReport.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, location_name: "ReportId"))
     DeliverabilityTestReport.add_member(:report_name, Shapes::ShapeRef.new(shape: ReportName, location_name: "ReportName"))
@@ -1251,11 +1327,24 @@ module Aws::SESV2
     GetMultiRegionEndpointResponse.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTimestamp"))
     GetMultiRegionEndpointResponse.struct_class = Types::GetMultiRegionEndpointResponse
 
+    GetReputationEntityRequest.add_member(:reputation_entity_reference, Shapes::ShapeRef.new(shape: ReputationEntityReference, required: true, location: "uri", location_name: "ReputationEntityReference"))
+    GetReputationEntityRequest.add_member(:reputation_entity_type, Shapes::ShapeRef.new(shape: ReputationEntityType, required: true, location: "uri", location_name: "ReputationEntityType"))
+    GetReputationEntityRequest.struct_class = Types::GetReputationEntityRequest
+
+    GetReputationEntityResponse.add_member(:reputation_entity, Shapes::ShapeRef.new(shape: ReputationEntity, location_name: "ReputationEntity"))
+    GetReputationEntityResponse.struct_class = Types::GetReputationEntityResponse
+
     GetSuppressedDestinationRequest.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location: "uri", location_name: "EmailAddress"))
     GetSuppressedDestinationRequest.struct_class = Types::GetSuppressedDestinationRequest
 
     GetSuppressedDestinationResponse.add_member(:suppressed_destination, Shapes::ShapeRef.new(shape: SuppressedDestination, required: true, location_name: "SuppressedDestination"))
     GetSuppressedDestinationResponse.struct_class = Types::GetSuppressedDestinationResponse
+
+    GetTenantRequest.add_member(:tenant_name, Shapes::ShapeRef.new(shape: TenantName, required: true, location_name: "TenantName"))
+    GetTenantRequest.struct_class = Types::GetTenantRequest
+
+    GetTenantResponse.add_member(:tenant, Shapes::ShapeRef.new(shape: Tenant, location_name: "Tenant"))
+    GetTenantResponse.struct_class = Types::GetTenantResponse
 
     GuardianAttributes.add_member(:optimized_shared_delivery, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "OptimizedSharedDelivery"))
     GuardianAttributes.struct_class = Types::GuardianAttributes
@@ -1456,6 +1545,24 @@ module Aws::SESV2
     ListRecommendationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListRecommendationsResponse.struct_class = Types::ListRecommendationsResponse
 
+    ListReputationEntitiesRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ReputationEntityFilter, location_name: "Filter"))
+    ListReputationEntitiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListReputationEntitiesRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: MaxItems, location_name: "PageSize"))
+    ListReputationEntitiesRequest.struct_class = Types::ListReputationEntitiesRequest
+
+    ListReputationEntitiesResponse.add_member(:reputation_entities, Shapes::ShapeRef.new(shape: ReputationEntitiesList, location_name: "ReputationEntities"))
+    ListReputationEntitiesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListReputationEntitiesResponse.struct_class = Types::ListReputationEntitiesResponse
+
+    ListResourceTenantsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceArn"))
+    ListResourceTenantsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: MaxItems, location_name: "PageSize"))
+    ListResourceTenantsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListResourceTenantsRequest.struct_class = Types::ListResourceTenantsRequest
+
+    ListResourceTenantsResponse.add_member(:resource_tenants, Shapes::ShapeRef.new(shape: ResourceTenantMetadataList, location_name: "ResourceTenants"))
+    ListResourceTenantsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListResourceTenantsResponse.struct_class = Types::ListResourceTenantsResponse
+
     ListSuppressedDestinationsRequest.add_member(:reasons, Shapes::ShapeRef.new(shape: SuppressionListReasons, location: "querystring", location_name: "Reason"))
     ListSuppressedDestinationsRequest.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "StartDate"))
     ListSuppressedDestinationsRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "EndDate"))
@@ -1472,6 +1579,27 @@ module Aws::SESV2
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ListTenantResourcesFilter.key = Shapes::ShapeRef.new(shape: ListTenantResourcesFilterKey)
+    ListTenantResourcesFilter.value = Shapes::ShapeRef.new(shape: ListTenantResourcesFilterValue)
+
+    ListTenantResourcesRequest.add_member(:tenant_name, Shapes::ShapeRef.new(shape: TenantName, required: true, location_name: "TenantName"))
+    ListTenantResourcesRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ListTenantResourcesFilter, location_name: "Filter"))
+    ListTenantResourcesRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: MaxItems, location_name: "PageSize"))
+    ListTenantResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTenantResourcesRequest.struct_class = Types::ListTenantResourcesRequest
+
+    ListTenantResourcesResponse.add_member(:tenant_resources, Shapes::ShapeRef.new(shape: TenantResourceList, location_name: "TenantResources"))
+    ListTenantResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTenantResourcesResponse.struct_class = Types::ListTenantResourcesResponse
+
+    ListTenantsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTenantsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: MaxItems, location_name: "PageSize"))
+    ListTenantsRequest.struct_class = Types::ListTenantsRequest
+
+    ListTenantsResponse.add_member(:tenants, Shapes::ShapeRef.new(shape: TenantInfoList, location_name: "Tenants"))
+    ListTenantsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTenantsResponse.struct_class = Types::ListTenantsResponse
 
     MailFromAttributes.add_member(:mail_from_domain, Shapes::ShapeRef.new(shape: MailFromDomainName, required: true, location_name: "MailFromDomain"))
     MailFromAttributes.add_member(:mail_from_domain_status, Shapes::ShapeRef.new(shape: MailFromDomainStatus, required: true, location_name: "MailFromDomainStatus"))
@@ -1729,9 +1857,31 @@ module Aws::SESV2
     ReplacementTemplate.add_member(:replacement_template_data, Shapes::ShapeRef.new(shape: EmailTemplateData, location_name: "ReplacementTemplateData"))
     ReplacementTemplate.struct_class = Types::ReplacementTemplate
 
+    ReputationEntitiesList.member = Shapes::ShapeRef.new(shape: ReputationEntity)
+
+    ReputationEntity.add_member(:reputation_entity_reference, Shapes::ShapeRef.new(shape: ReputationEntityReference, location_name: "ReputationEntityReference"))
+    ReputationEntity.add_member(:reputation_entity_type, Shapes::ShapeRef.new(shape: ReputationEntityType, location_name: "ReputationEntityType"))
+    ReputationEntity.add_member(:reputation_management_policy, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ReputationManagementPolicy"))
+    ReputationEntity.add_member(:customer_managed_status, Shapes::ShapeRef.new(shape: StatusRecord, location_name: "CustomerManagedStatus"))
+    ReputationEntity.add_member(:aws_ses_managed_status, Shapes::ShapeRef.new(shape: StatusRecord, location_name: "AwsSesManagedStatus"))
+    ReputationEntity.add_member(:sending_status_aggregate, Shapes::ShapeRef.new(shape: SendingStatus, location_name: "SendingStatusAggregate"))
+    ReputationEntity.add_member(:reputation_impact, Shapes::ShapeRef.new(shape: RecommendationImpact, location_name: "ReputationImpact"))
+    ReputationEntity.struct_class = Types::ReputationEntity
+
+    ReputationEntityFilter.key = Shapes::ShapeRef.new(shape: ReputationEntityFilterKey)
+    ReputationEntityFilter.value = Shapes::ShapeRef.new(shape: ReputationEntityFilterValue)
+
     ReputationOptions.add_member(:reputation_metrics_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "ReputationMetricsEnabled"))
     ReputationOptions.add_member(:last_fresh_start, Shapes::ShapeRef.new(shape: LastFreshStart, location_name: "LastFreshStart"))
     ReputationOptions.struct_class = Types::ReputationOptions
+
+    ResourceTenantMetadata.add_member(:tenant_name, Shapes::ShapeRef.new(shape: TenantName, location_name: "TenantName"))
+    ResourceTenantMetadata.add_member(:tenant_id, Shapes::ShapeRef.new(shape: TenantId, location_name: "TenantId"))
+    ResourceTenantMetadata.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn"))
+    ResourceTenantMetadata.add_member(:associated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "AssociatedTimestamp"))
+    ResourceTenantMetadata.struct_class = Types::ResourceTenantMetadata
+
+    ResourceTenantMetadataList.member = Shapes::ShapeRef.new(shape: ResourceTenantMetadata)
 
     ReviewDetails.add_member(:status, Shapes::ShapeRef.new(shape: ReviewStatus, location_name: "Status"))
     ReviewDetails.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, location_name: "CaseId"))
@@ -1762,6 +1912,7 @@ module Aws::SESV2
     SendBulkEmailRequest.add_member(:bulk_email_entries, Shapes::ShapeRef.new(shape: BulkEmailEntryList, required: true, location_name: "BulkEmailEntries"))
     SendBulkEmailRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
     SendBulkEmailRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId", metadata: {"contextParam" => {"name" => "EndpointId"}}))
+    SendBulkEmailRequest.add_member(:tenant_name, Shapes::ShapeRef.new(shape: TenantName, location_name: "TenantName"))
     SendBulkEmailRequest.struct_class = Types::SendBulkEmailRequest
 
     SendBulkEmailResponse.add_member(:bulk_email_entry_results, Shapes::ShapeRef.new(shape: BulkEmailEntryResultList, required: true, location_name: "BulkEmailEntryResults"))
@@ -1785,6 +1936,7 @@ module Aws::SESV2
     SendEmailRequest.add_member(:email_tags, Shapes::ShapeRef.new(shape: MessageTagList, location_name: "EmailTags"))
     SendEmailRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
     SendEmailRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId", metadata: {"contextParam" => {"name" => "EndpointId"}}))
+    SendEmailRequest.add_member(:tenant_name, Shapes::ShapeRef.new(shape: TenantName, location_name: "TenantName"))
     SendEmailRequest.add_member(:list_management_options, Shapes::ShapeRef.new(shape: ListManagementOptions, location_name: "ListManagementOptions"))
     SendEmailRequest.struct_class = Types::SendEmailRequest
 
@@ -1803,6 +1955,11 @@ module Aws::SESV2
 
     SnsDestination.add_member(:topic_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "TopicArn"))
     SnsDestination.struct_class = Types::SnsDestination
+
+    StatusRecord.add_member(:status, Shapes::ShapeRef.new(shape: SendingStatus, location_name: "Status"))
+    StatusRecord.add_member(:cause, Shapes::ShapeRef.new(shape: StatusCause, location_name: "Cause"))
+    StatusRecord.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTimestamp"))
+    StatusRecord.struct_class = Types::StatusRecord
 
     SuppressedDestination.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location_name: "EmailAddress"))
     SuppressedDestination.add_member(:reason, Shapes::ShapeRef.new(shape: SuppressionListReason, required: true, location_name: "Reason"))
@@ -1853,6 +2010,28 @@ module Aws::SESV2
     Template.add_member(:headers, Shapes::ShapeRef.new(shape: MessageHeaderList, location_name: "Headers"))
     Template.add_member(:attachments, Shapes::ShapeRef.new(shape: AttachmentList, location_name: "Attachments"))
     Template.struct_class = Types::Template
+
+    Tenant.add_member(:tenant_name, Shapes::ShapeRef.new(shape: TenantName, location_name: "TenantName"))
+    Tenant.add_member(:tenant_id, Shapes::ShapeRef.new(shape: TenantId, location_name: "TenantId"))
+    Tenant.add_member(:tenant_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "TenantArn"))
+    Tenant.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    Tenant.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    Tenant.add_member(:sending_status, Shapes::ShapeRef.new(shape: SendingStatus, location_name: "SendingStatus"))
+    Tenant.struct_class = Types::Tenant
+
+    TenantInfo.add_member(:tenant_name, Shapes::ShapeRef.new(shape: TenantName, location_name: "TenantName"))
+    TenantInfo.add_member(:tenant_id, Shapes::ShapeRef.new(shape: TenantId, location_name: "TenantId"))
+    TenantInfo.add_member(:tenant_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "TenantArn"))
+    TenantInfo.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    TenantInfo.struct_class = Types::TenantInfo
+
+    TenantInfoList.member = Shapes::ShapeRef.new(shape: TenantInfo)
+
+    TenantResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    TenantResource.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn"))
+    TenantResource.struct_class = Types::TenantResource
+
+    TenantResourceList.member = Shapes::ShapeRef.new(shape: TenantResource)
 
     TestRenderEmailTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: EmailTemplateName, required: true, location: "uri", location_name: "TemplateName"))
     TestRenderEmailTemplateRequest.add_member(:template_data, Shapes::ShapeRef.new(shape: EmailTemplateData, required: true, location_name: "TemplateData"))
@@ -1938,6 +2117,20 @@ module Aws::SESV2
     UpdateEmailTemplateRequest.struct_class = Types::UpdateEmailTemplateRequest
 
     UpdateEmailTemplateResponse.struct_class = Types::UpdateEmailTemplateResponse
+
+    UpdateReputationEntityCustomerManagedStatusRequest.add_member(:reputation_entity_type, Shapes::ShapeRef.new(shape: ReputationEntityType, required: true, location: "uri", location_name: "ReputationEntityType"))
+    UpdateReputationEntityCustomerManagedStatusRequest.add_member(:reputation_entity_reference, Shapes::ShapeRef.new(shape: ReputationEntityReference, required: true, location: "uri", location_name: "ReputationEntityReference"))
+    UpdateReputationEntityCustomerManagedStatusRequest.add_member(:sending_status, Shapes::ShapeRef.new(shape: SendingStatus, required: true, location_name: "SendingStatus"))
+    UpdateReputationEntityCustomerManagedStatusRequest.struct_class = Types::UpdateReputationEntityCustomerManagedStatusRequest
+
+    UpdateReputationEntityCustomerManagedStatusResponse.struct_class = Types::UpdateReputationEntityCustomerManagedStatusResponse
+
+    UpdateReputationEntityPolicyRequest.add_member(:reputation_entity_type, Shapes::ShapeRef.new(shape: ReputationEntityType, required: true, location: "uri", location_name: "ReputationEntityType"))
+    UpdateReputationEntityPolicyRequest.add_member(:reputation_entity_reference, Shapes::ShapeRef.new(shape: ReputationEntityReference, required: true, location: "uri", location_name: "ReputationEntityReference"))
+    UpdateReputationEntityPolicyRequest.add_member(:reputation_entity_policy, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ReputationEntityPolicy"))
+    UpdateReputationEntityPolicyRequest.struct_class = Types::UpdateReputationEntityPolicyRequest
+
+    UpdateReputationEntityPolicyResponse.struct_class = Types::UpdateReputationEntityPolicyResponse
 
     VdmAttributes.add_member(:vdm_enabled, Shapes::ShapeRef.new(shape: FeatureStatus, required: true, location_name: "VdmEnabled"))
     VdmAttributes.add_member(:dashboard_attributes, Shapes::ShapeRef.new(shape: DashboardAttributes, location_name: "DashboardAttributes"))
@@ -2172,6 +2365,30 @@ module Aws::SESV2
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
+      api.add_operation(:create_tenant, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTenant"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/email/tenants"
+        o.input = Shapes::ShapeRef.new(shape: CreateTenantRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTenantResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:create_tenant_resource_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTenantResourceAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/email/tenants/resources"
+        o.input = Shapes::ShapeRef.new(shape: CreateTenantResourceAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTenantResourceAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
       api.add_operation(:delete_configuration_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteConfigurationSet"
         o.http_method = "DELETE"
@@ -2296,6 +2513,28 @@ module Aws::SESV2
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:delete_tenant, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTenant"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/email/tenants/delete"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTenantRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTenantResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:delete_tenant_resource_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTenantResourceAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/email/tenants/resources/delete"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTenantResourceAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTenantResourceAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:get_account, Seahorse::Model::Operation.new.tap do |o|
@@ -2534,6 +2773,17 @@ module Aws::SESV2
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
+      api.add_operation(:get_reputation_entity, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetReputationEntity"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/email/reputation/entities/{ReputationEntityType}/{ReputationEntityReference}"
+        o.input = Shapes::ShapeRef.new(shape: GetReputationEntityRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetReputationEntityResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
       api.add_operation(:get_suppressed_destination, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetSuppressedDestination"
         o.http_method = "GET"
@@ -2543,6 +2793,17 @@ module Aws::SESV2
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:get_tenant, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTenant"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/email/tenants/get"
+        o.input = Shapes::ShapeRef.new(shape: GetTenantRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTenantResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:list_configuration_sets, Seahorse::Model::Operation.new.tap do |o|
@@ -2757,6 +3018,39 @@ module Aws::SESV2
         )
       end)
 
+      api.add_operation(:list_reputation_entities, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListReputationEntities"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/email/reputation/entities"
+        o.input = Shapes::ShapeRef.new(shape: ListReputationEntitiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListReputationEntitiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_resource_tenants, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResourceTenants"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/email/resources/tenants/list"
+        o.input = Shapes::ShapeRef.new(shape: ListResourceTenantsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResourceTenantsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_suppressed_destinations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListSuppressedDestinations"
         o.http_method = "GET"
@@ -2783,6 +3077,39 @@ module Aws::SESV2
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:list_tenant_resources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTenantResources"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/email/tenants/resources/list"
+        o.input = Shapes::ShapeRef.new(shape: ListTenantResourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTenantResourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_tenants, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTenants"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/email/tenants/list"
+        o.input = Shapes::ShapeRef.new(shape: ListTenantsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTenantsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:put_account_dedicated_ip_warmup_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -3173,6 +3500,28 @@ module Aws::SESV2
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:update_reputation_entity_customer_managed_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateReputationEntityCustomerManagedStatus"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v2/email/reputation/entities/{ReputationEntityType}/{ReputationEntityReference}/customer-managed-status"
+        o.input = Shapes::ShapeRef.new(shape: UpdateReputationEntityCustomerManagedStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateReputationEntityCustomerManagedStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_reputation_entity_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateReputationEntityPolicy"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v2/email/reputation/entities/{ReputationEntityType}/{ReputationEntityReference}/policy"
+        o.input = Shapes::ShapeRef.new(shape: UpdateReputationEntityPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateReputationEntityPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
     end
 

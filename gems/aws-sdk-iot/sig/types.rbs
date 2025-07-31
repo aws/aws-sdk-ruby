@@ -664,6 +664,13 @@ module Aws::IoT
       SENSITIVE: []
     end
 
+    class ConfigurationDetails
+      attr_accessor configuration_status: ("HEALTHY" | "UNHEALTHY")
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
     class ConfirmTopicRuleDestinationRequest
       attr_accessor confirmation_token: ::String
       SENSITIVE: []
@@ -1717,6 +1724,18 @@ module Aws::IoT
       attr_accessor authentication_type: ("CUSTOM_AUTH_X509" | "CUSTOM_AUTH" | "AWS_X509" | "AWS_SIGV4" | "DEFAULT")
       attr_accessor application_protocol: ("SECURE_MQTT" | "MQTT_WSS" | "HTTPS" | "DEFAULT")
       attr_accessor client_certificate_config: Types::ClientCertificateConfig
+      SENSITIVE: []
+    end
+
+    class DescribeEncryptionConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class DescribeEncryptionConfigurationResponse
+      attr_accessor encryption_type: ("CUSTOMER_MANAGED_KMS_KEY" | "AWS_OWNED_KMS_KEY")
+      attr_accessor kms_key_arn: ::String
+      attr_accessor kms_access_role_arn: ::String
+      attr_accessor configuration_details: Types::ConfigurationDetails
+      attr_accessor last_modified_date: ::Time
       SENSITIVE: []
     end
 
@@ -5019,6 +5038,16 @@ module Aws::IoT
     class UpdateDynamicThingGroupResponse
       attr_accessor version: ::Integer
       SENSITIVE: []
+    end
+
+    class UpdateEncryptionConfigurationRequest
+      attr_accessor encryption_type: ("CUSTOMER_MANAGED_KMS_KEY" | "AWS_OWNED_KMS_KEY")
+      attr_accessor kms_key_arn: ::String
+      attr_accessor kms_access_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEncryptionConfigurationResponse < Aws::EmptyStructure
     end
 
     class UpdateEventConfigurationsRequest

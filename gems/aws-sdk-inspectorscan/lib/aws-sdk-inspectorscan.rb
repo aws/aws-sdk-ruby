@@ -54,7 +54,7 @@ module Aws::InspectorScan
   autoload :EndpointProvider, 'aws-sdk-inspectorscan/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-inspectorscan/endpoints'
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.24.0'
 
 end
 

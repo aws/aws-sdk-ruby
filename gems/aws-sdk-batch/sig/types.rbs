@@ -70,6 +70,12 @@ module Aws::Batch
     class CancelJobResponse < Aws::EmptyStructure
     end
 
+    class CapacityLimit
+      attr_accessor max_capacity: ::Integer
+      attr_accessor capacity_unit: ::String
+      SENSITIVE: []
+    end
+
     class ClientException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -280,6 +286,8 @@ module Aws::Batch
       attr_accessor scheduling_policy_arn: ::String
       attr_accessor priority: ::Integer
       attr_accessor compute_environment_order: ::Array[Types::ComputeEnvironmentOrder]
+      attr_accessor service_environment_order: ::Array[Types::ServiceEnvironmentOrder]
+      attr_accessor job_queue_type: ("EKS" | "ECS" | "ECS_FARGATE" | "SAGEMAKER_TRAINING")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor job_state_time_limit_actions: ::Array[Types::JobStateTimeLimitAction]
       SENSITIVE: []
@@ -301,6 +309,21 @@ module Aws::Batch
     class CreateSchedulingPolicyResponse
       attr_accessor name: ::String
       attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateServiceEnvironmentRequest
+      attr_accessor service_environment_name: ::String
+      attr_accessor service_environment_type: ("SAGEMAKER_TRAINING")
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor capacity_limits: ::Array[Types::CapacityLimit]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateServiceEnvironmentResponse
+      attr_accessor service_environment_name: ::String
+      attr_accessor service_environment_arn: ::String
       SENSITIVE: []
     end
 
@@ -334,6 +357,14 @@ module Aws::Batch
     end
 
     class DeleteSchedulingPolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteServiceEnvironmentRequest
+      attr_accessor service_environment: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceEnvironmentResponse < Aws::EmptyStructure
     end
 
     class DeregisterJobDefinitionRequest
@@ -419,6 +450,47 @@ module Aws::Batch
 
     class DescribeSchedulingPoliciesResponse
       attr_accessor scheduling_policies: ::Array[Types::SchedulingPolicyDetail]
+      SENSITIVE: []
+    end
+
+    class DescribeServiceEnvironmentsRequest
+      attr_accessor service_environments: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeServiceEnvironmentsResponse
+      attr_accessor service_environments: ::Array[Types::ServiceEnvironmentDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeServiceJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeServiceJobResponse
+      attr_accessor attempts: ::Array[Types::ServiceJobAttemptDetail]
+      attr_accessor created_at: ::Integer
+      attr_accessor is_terminated: bool
+      attr_accessor job_arn: ::String
+      attr_accessor job_id: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_queue: ::String
+      attr_accessor latest_attempt: Types::LatestServiceJobAttempt
+      attr_accessor retry_strategy: Types::ServiceJobRetryStrategy
+      attr_accessor scheduling_priority: ::Integer
+      attr_accessor service_request_payload: ::String
+      attr_accessor service_job_type: ("SAGEMAKER_TRAINING")
+      attr_accessor share_identifier: ::String
+      attr_accessor started_at: ::Integer
+      attr_accessor status: ("SUBMITTED" | "PENDING" | "RUNNABLE" | "SCHEDULED" | "STARTING" | "RUNNING" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor stopped_at: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor timeout_config: Types::ServiceJobTimeout
       SENSITIVE: []
     end
 
@@ -816,6 +888,8 @@ module Aws::Batch
       attr_accessor status_reason: ::String
       attr_accessor priority: ::Integer
       attr_accessor compute_environment_order: ::Array[Types::ComputeEnvironmentOrder]
+      attr_accessor service_environment_order: ::Array[Types::ServiceEnvironmentOrder]
+      attr_accessor job_queue_type: ("EKS" | "ECS" | "ECS_FARGATE" | "SAGEMAKER_TRAINING")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor job_state_time_limit_actions: ::Array[Types::JobStateTimeLimitAction]
       SENSITIVE: []
@@ -825,7 +899,7 @@ module Aws::Batch
       attr_accessor reason: ::String
       attr_accessor state: ("RUNNABLE")
       attr_accessor max_time_seconds: ::Integer
-      attr_accessor action: ("CANCEL")
+      attr_accessor action: ("CANCEL" | "TERMINATE")
       SENSITIVE: []
     end
 
@@ -859,6 +933,11 @@ module Aws::Batch
     class KeyValuesPair
       attr_accessor name: ::String
       attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LatestServiceJobAttempt
+      attr_accessor service_resource_id: Types::ServiceResourceId
       SENSITIVE: []
     end
 
@@ -957,6 +1036,21 @@ module Aws::Batch
 
     class ListSchedulingPoliciesResponse
       attr_accessor scheduling_policies: ::Array[Types::SchedulingPolicyListingDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceJobsRequest
+      attr_accessor job_queue: ::String
+      attr_accessor job_status: ("SUBMITTED" | "PENDING" | "RUNNABLE" | "SCHEDULED" | "STARTING" | "RUNNING" | "SUCCEEDED" | "FAILED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::KeyValuesPair]
+      SENSITIVE: []
+    end
+
+    class ListServiceJobsResponse
+      attr_accessor job_summary_list: ::Array[Types::ServiceJobSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1115,6 +1209,69 @@ module Aws::Batch
       SENSITIVE: []
     end
 
+    class ServiceEnvironmentDetail
+      attr_accessor service_environment_name: ::String
+      attr_accessor service_environment_arn: ::String
+      attr_accessor service_environment_type: ("SAGEMAKER_TRAINING")
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "DELETED" | "VALID" | "INVALID")
+      attr_accessor capacity_limits: ::Array[Types::CapacityLimit]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ServiceEnvironmentOrder
+      attr_accessor order: ::Integer
+      attr_accessor service_environment: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceJobAttemptDetail
+      attr_accessor service_resource_id: Types::ServiceResourceId
+      attr_accessor started_at: ::Integer
+      attr_accessor stopped_at: ::Integer
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceJobEvaluateOnExit
+      attr_accessor action: ("RETRY" | "EXIT")
+      attr_accessor on_status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceJobRetryStrategy
+      attr_accessor attempts: ::Integer
+      attr_accessor evaluate_on_exit: ::Array[Types::ServiceJobEvaluateOnExit]
+      SENSITIVE: []
+    end
+
+    class ServiceJobSummary
+      attr_accessor latest_attempt: Types::LatestServiceJobAttempt
+      attr_accessor created_at: ::Integer
+      attr_accessor job_arn: ::String
+      attr_accessor job_id: ::String
+      attr_accessor job_name: ::String
+      attr_accessor service_job_type: ("SAGEMAKER_TRAINING")
+      attr_accessor share_identifier: ::String
+      attr_accessor status: ("SUBMITTED" | "PENDING" | "RUNNABLE" | "SCHEDULED" | "STARTING" | "RUNNING" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor started_at: ::Integer
+      attr_accessor stopped_at: ::Integer
+      SENSITIVE: []
+    end
+
+    class ServiceJobTimeout
+      attr_accessor attempt_duration_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ServiceResourceId
+      attr_accessor name: ("TrainingJobArn")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class ShareAttributes
       attr_accessor share_identifier: ::String
       attr_accessor weight_factor: ::Float
@@ -1143,6 +1300,27 @@ module Aws::Batch
     end
 
     class SubmitJobResponse
+      attr_accessor job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class SubmitServiceJobRequest
+      attr_accessor job_name: ::String
+      attr_accessor job_queue: ::String
+      attr_accessor retry_strategy: Types::ServiceJobRetryStrategy
+      attr_accessor scheduling_priority: ::Integer
+      attr_accessor service_request_payload: ::String
+      attr_accessor service_job_type: ("SAGEMAKER_TRAINING")
+      attr_accessor share_identifier: ::String
+      attr_accessor timeout_config: Types::ServiceJobTimeout
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class SubmitServiceJobResponse
       attr_accessor job_arn: ::String
       attr_accessor job_name: ::String
       attr_accessor job_id: ::String
@@ -1232,6 +1410,15 @@ module Aws::Batch
     class TerminateJobResponse < Aws::EmptyStructure
     end
 
+    class TerminateServiceJobRequest
+      attr_accessor job_id: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class TerminateServiceJobResponse < Aws::EmptyStructure
+    end
+
     class Tmpfs
       attr_accessor container_path: ::String
       attr_accessor size: ::Integer
@@ -1293,6 +1480,7 @@ module Aws::Batch
       attr_accessor scheduling_policy_arn: ::String
       attr_accessor priority: ::Integer
       attr_accessor compute_environment_order: ::Array[Types::ComputeEnvironmentOrder]
+      attr_accessor service_environment_order: ::Array[Types::ServiceEnvironmentOrder]
       attr_accessor job_state_time_limit_actions: ::Array[Types::JobStateTimeLimitAction]
       SENSITIVE: []
     end
@@ -1316,6 +1504,19 @@ module Aws::Batch
     end
 
     class UpdateSchedulingPolicyResponse < Aws::EmptyStructure
+    end
+
+    class UpdateServiceEnvironmentRequest
+      attr_accessor service_environment: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor capacity_limits: ::Array[Types::CapacityLimit]
+      SENSITIVE: []
+    end
+
+    class UpdateServiceEnvironmentResponse
+      attr_accessor service_environment_name: ::String
+      attr_accessor service_environment_arn: ::String
+      SENSITIVE: []
     end
 
     class Volume

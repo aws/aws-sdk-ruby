@@ -194,11 +194,6 @@ module Aws::Inspector2
       end
 
       # @return [String]
-      def fields
-        @data[:fields]
-      end
-
-      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -206,6 +201,11 @@ module Aws::Inspector2
       # @return [String]
       def reason
         @data[:reason]
+      end
+
+      # @return [String]
+      def fields
+        @data[:fields]
       end
     end
 

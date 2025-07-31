@@ -188,7 +188,13 @@ module Aws
                                  ?scope: {
                                    prefixes: Array[::String]?,
                                    permissions: Array[("GetObject" | "GetObjectAttributes" | "ListMultipartUploadParts" | "ListBucket" | "ListBucketMultipartUploads" | "PutObject" | "DeleteObject" | "AbortMultipartUpload")]?
-                                 }
+                                 },
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ]
                                ) -> _CreateAccessPointResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessPointResponseSuccess
 

@@ -804,7 +804,7 @@ module Aws::NotificationsContacts
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-notificationscontacts'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

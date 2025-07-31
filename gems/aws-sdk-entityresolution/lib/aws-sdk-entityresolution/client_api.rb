@@ -204,6 +204,11 @@ module Aws::EntityResolution
     Rule = Shapes::StructureShape.new(name: 'Rule')
     RuleBasedProperties = Shapes::StructureShape.new(name: 'RuleBasedProperties')
     RuleBasedPropertiesRulesList = Shapes::ListShape.new(name: 'RuleBasedPropertiesRulesList')
+    RuleCondition = Shapes::StructureShape.new(name: 'RuleCondition')
+    RuleConditionConditionString = Shapes::StringShape.new(name: 'RuleConditionConditionString')
+    RuleConditionProperties = Shapes::StructureShape.new(name: 'RuleConditionProperties')
+    RuleConditionPropertiesRulesList = Shapes::ListShape.new(name: 'RuleConditionPropertiesRulesList')
+    RuleConditionRuleNameString = Shapes::StringShape.new(name: 'RuleConditionRuleNameString')
     RuleMatchingKeysList = Shapes::ListShape.new(name: 'RuleMatchingKeysList')
     RuleRuleNameString = Shapes::StringShape.new(name: 'RuleRuleNameString')
     S3Path = Shapes::StringShape.new(name: 'S3Path')
@@ -852,6 +857,7 @@ module Aws::EntityResolution
 
     ResolutionTechniques.add_member(:resolution_type, Shapes::ShapeRef.new(shape: ResolutionType, required: true, location_name: "resolutionType"))
     ResolutionTechniques.add_member(:rule_based_properties, Shapes::ShapeRef.new(shape: RuleBasedProperties, location_name: "ruleBasedProperties"))
+    ResolutionTechniques.add_member(:rule_condition_properties, Shapes::ShapeRef.new(shape: RuleConditionProperties, location_name: "ruleConditionProperties"))
     ResolutionTechniques.add_member(:provider_properties, Shapes::ShapeRef.new(shape: ProviderProperties, location_name: "providerProperties"))
     ResolutionTechniques.struct_class = Types::ResolutionTechniques
 
@@ -868,6 +874,15 @@ module Aws::EntityResolution
     RuleBasedProperties.struct_class = Types::RuleBasedProperties
 
     RuleBasedPropertiesRulesList.member = Shapes::ShapeRef.new(shape: Rule)
+
+    RuleCondition.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleConditionRuleNameString, required: true, location_name: "ruleName"))
+    RuleCondition.add_member(:condition, Shapes::ShapeRef.new(shape: RuleConditionConditionString, required: true, location_name: "condition"))
+    RuleCondition.struct_class = Types::RuleCondition
+
+    RuleConditionProperties.add_member(:rules, Shapes::ShapeRef.new(shape: RuleConditionPropertiesRulesList, required: true, location_name: "rules"))
+    RuleConditionProperties.struct_class = Types::RuleConditionProperties
+
+    RuleConditionPropertiesRulesList.member = Shapes::ShapeRef.new(shape: RuleCondition)
 
     RuleMatchingKeysList.member = Shapes::ShapeRef.new(shape: AttributeName)
 

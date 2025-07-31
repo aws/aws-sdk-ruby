@@ -1011,6 +1011,19 @@ module Aws::S3Control
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html
     #   @return [Types::Scope]
     #
+    # @!attribute [rw] tags
+    #   An array of tags that you can apply to an access point. Tags are
+    #   key-value pairs of metadata used to control access to your access
+    #   points. For more information about tags, see [Using tags with Amazon
+    #   S3][1]. For information about tagging access points, see [Using tags
+    #   for attribute-based access control (ABAC)][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#using-tags-for-abac
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPointRequest AWS API Documentation
     #
     class CreateAccessPointRequest < Struct.new(
@@ -1020,7 +1033,8 @@ module Aws::S3Control
       :vpc_configuration,
       :public_access_block_configuration,
       :bucket_account_id,
-      :scope)
+      :scope,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

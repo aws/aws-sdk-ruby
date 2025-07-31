@@ -1495,6 +1495,100 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Create a tenant.
+    #
+    # *Tenants* are logical containers that group related SES resources
+    # together. Each tenant can have its own set of resources like email
+    # identities, configuration sets, and templates, along with reputation
+    # metrics and sending status. This helps isolate and manage email
+    # sending for different customers or business units within your Amazon
+    # SES API v2 account.
+    #
+    # @option params [required, String] :tenant_name
+    #   The name of the tenant to create. The name can contain up to 64
+    #   alphanumeric characters, including letters, numbers, hyphens (-) and
+    #   underscores (\_) only.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of objects that define the tags (keys and values) to
+    #   associate with the tenant
+    #
+    # @return [Types::CreateTenantResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTenantResponse#tenant_name #tenant_name} => String
+    #   * {Types::CreateTenantResponse#tenant_id #tenant_id} => String
+    #   * {Types::CreateTenantResponse#tenant_arn #tenant_arn} => String
+    #   * {Types::CreateTenantResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::CreateTenantResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::CreateTenantResponse#sending_status #sending_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_tenant({
+    #     tenant_name: "TenantName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tenant_name #=> String
+    #   resp.tenant_id #=> String
+    #   resp.tenant_arn #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.sending_status #=> String, one of "ENABLED", "REINSTATED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateTenant AWS API Documentation
+    #
+    # @overload create_tenant(params = {})
+    # @param [Hash] params ({})
+    def create_tenant(params = {}, options = {})
+      req = build_request(:create_tenant, params)
+      req.send_request(options)
+    end
+
+    # Associate a resource with a tenant.
+    #
+    # *Resources* can be email identities, configuration sets, or email
+    # templates. When you associate a resource with a tenant, you can use
+    # that resource when sending emails on behalf of that tenant.
+    #
+    # A single resource can be associated with multiple tenants, allowing
+    # for resource sharing across different tenants while maintaining
+    # isolation in email sending operations.
+    #
+    # @option params [required, String] :tenant_name
+    #   The name of the tenant to associate the resource with.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to associate with the
+    #   tenant.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_tenant_resource_association({
+    #     tenant_name: "TenantName", # required
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateTenantResourceAssociation AWS API Documentation
+    #
+    # @overload create_tenant_resource_association(params = {})
+    # @param [Hash] params ({})
+    def create_tenant_resource_association(params = {}, options = {})
+      req = build_request(:create_tenant_resource_association, params)
+      req.send_request(options)
+    end
+
     # Delete an existing configuration set.
     #
     # *Configuration sets* are groups of rules that you can apply to the
@@ -1803,6 +1897,63 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def delete_suppressed_destination(params = {}, options = {})
       req = build_request(:delete_suppressed_destination, params)
+      req.send_request(options)
+    end
+
+    # Delete an existing tenant.
+    #
+    # When you delete a tenant, its associations with resources are removed,
+    # but the resources themselves are not deleted.
+    #
+    # @option params [required, String] :tenant_name
+    #   The name of the tenant to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_tenant({
+    #     tenant_name: "TenantName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteTenant AWS API Documentation
+    #
+    # @overload delete_tenant(params = {})
+    # @param [Hash] params ({})
+    def delete_tenant(params = {}, options = {})
+      req = build_request(:delete_tenant, params)
+      req.send_request(options)
+    end
+
+    # Delete an association between a tenant and a resource.
+    #
+    # When you delete a tenant-resource association, the resource itself is
+    # not deleted, only its association with the specific tenant is removed.
+    # After removal, the resource will no longer be available for use with
+    # that tenant's email sending operations.
+    #
+    # @option params [required, String] :tenant_name
+    #   The name of the tenant to remove the resource association from.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to remove from the
+    #   tenant association.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_tenant_resource_association({
+    #     tenant_name: "TenantName", # required
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteTenantResourceAssociation AWS API Documentation
+    #
+    # @overload delete_tenant_resource_association(params = {})
+    # @param [Hash] params ({})
+    def delete_tenant_resource_association(params = {}, options = {})
+      req = build_request(:delete_tenant_resource_association, params)
       req.send_request(options)
     end
 
@@ -2947,6 +3098,58 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Retrieve information about a specific reputation entity, including its
+    # reputation management policy, customer-managed status, Amazon Web
+    # Services Amazon SES-managed status, and aggregate sending status.
+    #
+    # *Reputation entities* represent resources in your Amazon SES account
+    # that have reputation tracking and management capabilities. The
+    # reputation impact reflects the highest impact reputation finding for
+    # the entity. Reputation findings can be retrieved using the
+    # `ListRecommendations` operation.
+    #
+    # @option params [required, String] :reputation_entity_reference
+    #   The unique identifier for the reputation entity. For resource-type
+    #   entities, this is the Amazon Resource Name (ARN) of the resource.
+    #
+    # @option params [required, String] :reputation_entity_type
+    #   The type of reputation entity. Currently, only `RESOURCE` type
+    #   entities are supported.
+    #
+    # @return [Types::GetReputationEntityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetReputationEntityResponse#reputation_entity #reputation_entity} => Types::ReputationEntity
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_reputation_entity({
+    #     reputation_entity_reference: "ReputationEntityReference", # required
+    #     reputation_entity_type: "RESOURCE", # required, accepts RESOURCE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.reputation_entity.reputation_entity_reference #=> String
+    #   resp.reputation_entity.reputation_entity_type #=> String, one of "RESOURCE"
+    #   resp.reputation_entity.reputation_management_policy #=> String
+    #   resp.reputation_entity.customer_managed_status.status #=> String, one of "ENABLED", "REINSTATED", "DISABLED"
+    #   resp.reputation_entity.customer_managed_status.cause #=> String
+    #   resp.reputation_entity.customer_managed_status.last_updated_timestamp #=> Time
+    #   resp.reputation_entity.aws_ses_managed_status.status #=> String, one of "ENABLED", "REINSTATED", "DISABLED"
+    #   resp.reputation_entity.aws_ses_managed_status.cause #=> String
+    #   resp.reputation_entity.aws_ses_managed_status.last_updated_timestamp #=> Time
+    #   resp.reputation_entity.sending_status_aggregate #=> String, one of "ENABLED", "REINSTATED", "DISABLED"
+    #   resp.reputation_entity.reputation_impact #=> String, one of "LOW", "HIGH"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetReputationEntity AWS API Documentation
+    #
+    # @overload get_reputation_entity(params = {})
+    # @param [Hash] params ({})
+    def get_reputation_entity(params = {}, options = {})
+      req = build_request(:get_reputation_entity, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about a specific email address that's on the
     # suppression list for your account.
     #
@@ -2977,6 +3180,42 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def get_suppressed_destination(params = {}, options = {})
       req = build_request(:get_suppressed_destination, params)
+      req.send_request(options)
+    end
+
+    # Get information about a specific tenant, including the tenant's name,
+    # ID, ARN, creation timestamp, tags, and sending status.
+    #
+    # @option params [required, String] :tenant_name
+    #   The name of the tenant to retrieve information about.
+    #
+    # @return [Types::GetTenantResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTenantResponse#tenant #tenant} => Types::Tenant
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_tenant({
+    #     tenant_name: "TenantName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tenant.tenant_name #=> String
+    #   resp.tenant.tenant_id #=> String
+    #   resp.tenant.tenant_arn #=> String
+    #   resp.tenant.created_timestamp #=> Time
+    #   resp.tenant.tags #=> Array
+    #   resp.tenant.tags[0].key #=> String
+    #   resp.tenant.tags[0].value #=> String
+    #   resp.tenant.sending_status #=> String, one of "ENABLED", "REINSTATED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetTenant AWS API Documentation
+    #
+    # @overload get_tenant(params = {})
+    # @param [Hash] params ({})
+    def get_tenant(params = {}, options = {})
+      req = build_request(:get_tenant, params)
       req.send_request(options)
     end
 
@@ -3705,7 +3944,7 @@ module Aws::SESV2
     #
     #   resp.recommendations #=> Array
     #   resp.recommendations[0].resource_arn #=> String
-    #   resp.recommendations[0].type #=> String, one of "DKIM", "DMARC", "SPF", "BIMI", "COMPLAINT"
+    #   resp.recommendations[0].type #=> String, one of "DKIM", "DMARC", "SPF", "BIMI", "COMPLAINT", "BOUNCE", "FEEDBACK_3P", "IP_LISTING"
     #   resp.recommendations[0].description #=> String
     #   resp.recommendations[0].status #=> String, one of "OPEN", "FIXED"
     #   resp.recommendations[0].created_timestamp #=> Time
@@ -3719,6 +3958,125 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def list_recommendations(params = {}, options = {})
       req = build_request(:list_recommendations, params)
+      req.send_request(options)
+    end
+
+    # List reputation entities in your Amazon SES account in the current
+    # Amazon Web Services Region. You can filter the results by entity type,
+    # reputation impact, sending status, or entity reference prefix.
+    #
+    # *Reputation entities* represent resources in your account that have
+    # reputation tracking and management capabilities. Use this operation to
+    # get an overview of all entities and their current reputation status.
+    #
+    # @option params [Hash<String,String>] :filter
+    #   An object that contains filters to apply when listing reputation
+    #   entities. You can filter by entity type, reputation impact, sending
+    #   status, or entity reference prefix.
+    #
+    # @option params [String] :next_token
+    #   A token returned from a previous call to `ListReputationEntities` to
+    #   indicate the position in the list of reputation entities.
+    #
+    # @option params [Integer] :page_size
+    #   The number of results to show in a single call to
+    #   `ListReputationEntities`. If the number of results is larger than the
+    #   number you specified in this parameter, then the response includes a
+    #   `NextToken` element, which you can use to obtain additional results.
+    #
+    # @return [Types::ListReputationEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReputationEntitiesResponse#reputation_entities #reputation_entities} => Array&lt;Types::ReputationEntity&gt;
+    #   * {Types::ListReputationEntitiesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_reputation_entities({
+    #     filter: {
+    #       "ENTITY_TYPE" => "ReputationEntityFilterValue",
+    #     },
+    #     next_token: "NextToken",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.reputation_entities #=> Array
+    #   resp.reputation_entities[0].reputation_entity_reference #=> String
+    #   resp.reputation_entities[0].reputation_entity_type #=> String, one of "RESOURCE"
+    #   resp.reputation_entities[0].reputation_management_policy #=> String
+    #   resp.reputation_entities[0].customer_managed_status.status #=> String, one of "ENABLED", "REINSTATED", "DISABLED"
+    #   resp.reputation_entities[0].customer_managed_status.cause #=> String
+    #   resp.reputation_entities[0].customer_managed_status.last_updated_timestamp #=> Time
+    #   resp.reputation_entities[0].aws_ses_managed_status.status #=> String, one of "ENABLED", "REINSTATED", "DISABLED"
+    #   resp.reputation_entities[0].aws_ses_managed_status.cause #=> String
+    #   resp.reputation_entities[0].aws_ses_managed_status.last_updated_timestamp #=> Time
+    #   resp.reputation_entities[0].sending_status_aggregate #=> String, one of "ENABLED", "REINSTATED", "DISABLED"
+    #   resp.reputation_entities[0].reputation_impact #=> String, one of "LOW", "HIGH"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListReputationEntities AWS API Documentation
+    #
+    # @overload list_reputation_entities(params = {})
+    # @param [Hash] params ({})
+    def list_reputation_entities(params = {}, options = {})
+      req = build_request(:list_reputation_entities, params)
+      req.send_request(options)
+    end
+
+    # List all tenants associated with a specific resource.
+    #
+    # This operation returns a list of tenants that are associated with the
+    # specified resource. This is useful for understanding which tenants are
+    # currently using a particular resource such as an email identity,
+    # configuration set, or email template.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to list associated
+    #   tenants for.
+    #
+    # @option params [Integer] :page_size
+    #   The number of results to show in a single call to
+    #   `ListResourceTenants`. If the number of results is larger than the
+    #   number you specified in this parameter, then the response includes a
+    #   `NextToken` element, which you can use to obtain additional results.
+    #
+    # @option params [String] :next_token
+    #   A token returned from a previous call to `ListResourceTenants` to
+    #   indicate the position in the list of resource tenants.
+    #
+    # @return [Types::ListResourceTenantsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourceTenantsResponse#resource_tenants #resource_tenants} => Array&lt;Types::ResourceTenantMetadata&gt;
+    #   * {Types::ListResourceTenantsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_tenants({
+    #     resource_arn: "AmazonResourceName", # required
+    #     page_size: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_tenants #=> Array
+    #   resp.resource_tenants[0].tenant_name #=> String
+    #   resp.resource_tenants[0].tenant_id #=> String
+    #   resp.resource_tenants[0].resource_arn #=> String
+    #   resp.resource_tenants[0].associated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListResourceTenants AWS API Documentation
+    #
+    # @overload list_resource_tenants(params = {})
+    # @param [Hash] params ({})
+    def list_resource_tenants(params = {}, options = {})
+      req = build_request(:list_resource_tenants, params)
       req.send_request(options)
     end
 
@@ -3815,6 +4173,113 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # List all resources associated with a specific tenant.
+    #
+    # This operation returns a list of resources (email identities,
+    # configuration sets, or email templates) that are associated with the
+    # specified tenant. You can optionally filter the results by resource
+    # type.
+    #
+    # @option params [required, String] :tenant_name
+    #   The name of the tenant to list resources for.
+    #
+    # @option params [Hash<String,String>] :filter
+    #   A map of filter keys and values for filtering the list of tenant
+    #   resources. Currently, the only supported filter key is
+    #   `RESOURCE_TYPE`.
+    #
+    # @option params [Integer] :page_size
+    #   The number of results to show in a single call to
+    #   `ListTenantResources`. If the number of results is larger than the
+    #   number you specified in this parameter, then the response includes a
+    #   `NextToken` element, which you can use to obtain additional results.
+    #
+    # @option params [String] :next_token
+    #   A token returned from a previous call to `ListTenantResources` to
+    #   indicate the position in the list of tenant resources.
+    #
+    # @return [Types::ListTenantResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTenantResourcesResponse#tenant_resources #tenant_resources} => Array&lt;Types::TenantResource&gt;
+    #   * {Types::ListTenantResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tenant_resources({
+    #     tenant_name: "TenantName", # required
+    #     filter: {
+    #       "RESOURCE_TYPE" => "ListTenantResourcesFilterValue",
+    #     },
+    #     page_size: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tenant_resources #=> Array
+    #   resp.tenant_resources[0].resource_type #=> String, one of "EMAIL_IDENTITY", "CONFIGURATION_SET", "EMAIL_TEMPLATE"
+    #   resp.tenant_resources[0].resource_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListTenantResources AWS API Documentation
+    #
+    # @overload list_tenant_resources(params = {})
+    # @param [Hash] params ({})
+    def list_tenant_resources(params = {}, options = {})
+      req = build_request(:list_tenant_resources, params)
+      req.send_request(options)
+    end
+
+    # List all tenants associated with your account in the current Amazon
+    # Web Services Region.
+    #
+    # This operation returns basic information about each tenant, such as
+    # tenant name, ID, ARN, and creation timestamp.
+    #
+    # @option params [String] :next_token
+    #   A token returned from a previous call to `ListTenants` to indicate the
+    #   position in the list of tenants.
+    #
+    # @option params [Integer] :page_size
+    #   The number of results to show in a single call to `ListTenants`. If
+    #   the number of results is larger than the number you specified in this
+    #   parameter, then the response includes a `NextToken` element, which you
+    #   can use to obtain additional results.
+    #
+    # @return [Types::ListTenantsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTenantsResponse#tenants #tenants} => Array&lt;Types::TenantInfo&gt;
+    #   * {Types::ListTenantsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tenants({
+    #     next_token: "NextToken",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tenants #=> Array
+    #   resp.tenants[0].tenant_name #=> String
+    #   resp.tenants[0].tenant_id #=> String
+    #   resp.tenants[0].tenant_arn #=> String
+    #   resp.tenants[0].created_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListTenants AWS API Documentation
+    #
+    # @overload list_tenants(params = {})
+    # @param [Hash] params ({})
+    def list_tenants(params = {}, options = {})
+      req = build_request(:list_tenants, params)
       req.send_request(options)
     end
 
@@ -4743,6 +5208,15 @@ module Aws::SESV2
     # @option params [String] :endpoint_id
     #   The ID of the multi-region endpoint (global-endpoint).
     #
+    # @option params [String] :tenant_name
+    #   The name of the tenant through which this bulk email will be sent.
+    #
+    #   <note markdown="1"> The email sending operation will only succeed if all referenced
+    #   resources (identities, configuration sets, and templates) are
+    #   associated with this tenant.
+    #
+    #    </note>
+    #
     # @return [Types::SendBulkEmailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SendBulkEmailResponse#bulk_email_entry_results #bulk_email_entry_results} => Array&lt;Types::BulkEmailEntryResult&gt;
@@ -4818,6 +5292,7 @@ module Aws::SESV2
     #     ],
     #     configuration_set_name: "ConfigurationSetName",
     #     endpoint_id: "EndpointId",
+    #     tenant_name: "TenantName",
     #   })
     #
     # @example Response structure
@@ -4980,6 +5455,15 @@ module Aws::SESV2
     # @option params [String] :endpoint_id
     #   The ID of the multi-region endpoint (global-endpoint).
     #
+    # @option params [String] :tenant_name
+    #   The name of the tenant through which this email will be sent.
+    #
+    #   <note markdown="1"> The email sending operation will only succeed if all referenced
+    #   resources (identities, configuration sets, and templates) are
+    #   associated with this tenant.
+    #
+    #    </note>
+    #
     # @option params [Types::ListManagementOptions] :list_management_options
     #   An object used to specify a list or topic to which an email belongs,
     #   which will be used when a contact chooses to unsubscribe.
@@ -5074,6 +5558,7 @@ module Aws::SESV2
     #     ],
     #     configuration_set_name: "ConfigurationSetName",
     #     endpoint_id: "EndpointId",
+    #     tenant_name: "TenantName",
     #     list_management_options: {
     #       contact_list_name: "ContactListName", # required
     #       topic_name: "TopicName",
@@ -5520,6 +6005,100 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Update the customer-managed sending status for a reputation entity.
+    # This allows you to enable, disable, or reinstate sending for the
+    # entity.
+    #
+    # The customer-managed status works in conjunction with the Amazon Web
+    # Services Amazon SES-managed status to determine the overall sending
+    # capability. When you update the customer-managed status, the Amazon
+    # Web Services Amazon SES-managed status remains unchanged. If Amazon
+    # Web Services Amazon SES has disabled the entity, it will not be
+    # allowed to send regardless of the customer-managed status setting.
+    # When you reinstate an entity through the customer-managed status, it
+    # can continue sending only if the Amazon Web Services Amazon
+    # SES-managed status also permits sending, even if there are active
+    # reputation findings, until the findings are resolved or new violations
+    # occur.
+    #
+    # @option params [required, String] :reputation_entity_type
+    #   The type of reputation entity. Currently, only `RESOURCE` type
+    #   entities are supported.
+    #
+    # @option params [required, String] :reputation_entity_reference
+    #   The unique identifier for the reputation entity. For resource-type
+    #   entities, this is the Amazon Resource Name (ARN) of the resource.
+    #
+    # @option params [required, String] :sending_status
+    #   The new customer-managed sending status for the reputation entity.
+    #   This can be one of the following:
+    #
+    #   * `ENABLED` – Allow sending for this entity.
+    #
+    #   * `DISABLED` – Prevent sending for this entity.
+    #
+    #   * `REINSTATED` – Allow sending even if there are active reputation
+    #     findings.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_reputation_entity_customer_managed_status({
+    #     reputation_entity_type: "RESOURCE", # required, accepts RESOURCE
+    #     reputation_entity_reference: "ReputationEntityReference", # required
+    #     sending_status: "ENABLED", # required, accepts ENABLED, REINSTATED, DISABLED
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateReputationEntityCustomerManagedStatus AWS API Documentation
+    #
+    # @overload update_reputation_entity_customer_managed_status(params = {})
+    # @param [Hash] params ({})
+    def update_reputation_entity_customer_managed_status(params = {}, options = {})
+      req = build_request(:update_reputation_entity_customer_managed_status, params)
+      req.send_request(options)
+    end
+
+    # Update the reputation management policy for a reputation entity. The
+    # policy determines how the entity responds to reputation findings, such
+    # as automatically pausing sending when certain thresholds are exceeded.
+    #
+    # Reputation management policies are Amazon Web Services Amazon
+    # SES-managed (predefined policies). You can select from none, standard,
+    # and strict policies.
+    #
+    # @option params [required, String] :reputation_entity_type
+    #   The type of reputation entity. Currently, only `RESOURCE` type
+    #   entities are supported.
+    #
+    # @option params [required, String] :reputation_entity_reference
+    #   The unique identifier for the reputation entity. For resource-type
+    #   entities, this is the Amazon Resource Name (ARN) of the resource.
+    #
+    # @option params [required, String] :reputation_entity_policy
+    #   The Amazon Resource Name (ARN) of the reputation management policy to
+    #   apply to this entity. This is an Amazon Web Services Amazon
+    #   SES-managed policy.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_reputation_entity_policy({
+    #     reputation_entity_type: "RESOURCE", # required, accepts RESOURCE
+    #     reputation_entity_reference: "ReputationEntityReference", # required
+    #     reputation_entity_policy: "AmazonResourceName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateReputationEntityPolicy AWS API Documentation
+    #
+    # @overload update_reputation_entity_policy(params = {})
+    # @param [Hash] params ({})
+    def update_reputation_entity_policy(params = {}, options = {})
+      req = build_request(:update_reputation_entity_policy, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -5538,7 +6117,7 @@ module Aws::SESV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

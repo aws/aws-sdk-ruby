@@ -2384,6 +2384,7 @@ module Aws::QuickSight
       attr_accessor starburst_parameters: Types::StarburstParameters
       attr_accessor trino_parameters: Types::TrinoParameters
       attr_accessor big_query_parameters: Types::BigQueryParameters
+      attr_accessor impala_parameters: Types::ImpalaParameters
       SENSITIVE: []
     end
 
@@ -5162,6 +5163,14 @@ module Aws::QuickSight
     class ImageStaticFile
       attr_accessor static_file_id: ::String
       attr_accessor source: Types::StaticFileSource
+      SENSITIVE: []
+    end
+
+    class ImpalaParameters
+      attr_accessor host: ::String
+      attr_accessor port: ::Integer
+      attr_accessor database: ::String
+      attr_accessor sql_endpoint_path: ::String
       SENSITIVE: []
     end
 

@@ -439,6 +439,8 @@ module Aws::IoTWireless
     MulticastGroupStatus = Shapes::StringShape.new(name: 'MulticastGroupStatus')
     MulticastWirelessMetadata = Shapes::StructureShape.new(name: 'MulticastWirelessMetadata')
     NRCapable = Shapes::BooleanShape.new(name: 'NRCapable')
+    NbTransMax = Shapes::IntegerShape.new(name: 'NbTransMax')
+    NbTransMin = Shapes::IntegerShape.new(name: 'NbTransMin')
     NetId = Shapes::StringShape.new(name: 'NetId')
     NetIdFilters = Shapes::ListShape.new(name: 'NetIdFilters')
     NetworkAnalyzerConfigurationArn = Shapes::StringShape.new(name: 'NetworkAnalyzerConfigurationArn')
@@ -621,6 +623,8 @@ module Aws::IoTWireless
     TransmissionInterval = Shapes::IntegerShape.new(name: 'TransmissionInterval')
     TransmissionIntervalMulticast = Shapes::IntegerShape.new(name: 'TransmissionIntervalMulticast')
     TransmitMode = Shapes::IntegerShape.new(name: 'TransmitMode')
+    TxPowerIndexMax = Shapes::IntegerShape.new(name: 'TxPowerIndexMax')
+    TxPowerIndexMin = Shapes::IntegerShape.new(name: 'TxPowerIndexMin')
     UARFCN = Shapes::IntegerShape.new(name: 'UARFCN')
     UARFCNDL = Shapes::IntegerShape.new(name: 'UARFCNDL')
     UlBucketSize = Shapes::IntegerShape.new(name: 'UlBucketSize')
@@ -1762,6 +1766,10 @@ module Aws::IoTWireless
     LoRaWANGetServiceProfileInfo.add_member(:nwk_geo_loc, Shapes::ShapeRef.new(shape: NwkGeoLoc, location_name: "NwkGeoLoc"))
     LoRaWANGetServiceProfileInfo.add_member(:target_per, Shapes::ShapeRef.new(shape: TargetPer, location_name: "TargetPer"))
     LoRaWANGetServiceProfileInfo.add_member(:min_gw_diversity, Shapes::ShapeRef.new(shape: MinGwDiversity, location_name: "MinGwDiversity"))
+    LoRaWANGetServiceProfileInfo.add_member(:tx_power_index_min, Shapes::ShapeRef.new(shape: TxPowerIndexMin, location_name: "TxPowerIndexMin"))
+    LoRaWANGetServiceProfileInfo.add_member(:tx_power_index_max, Shapes::ShapeRef.new(shape: TxPowerIndexMax, location_name: "TxPowerIndexMax"))
+    LoRaWANGetServiceProfileInfo.add_member(:nb_trans_min, Shapes::ShapeRef.new(shape: NbTransMin, location_name: "NbTransMin"))
+    LoRaWANGetServiceProfileInfo.add_member(:nb_trans_max, Shapes::ShapeRef.new(shape: NbTransMax, location_name: "NbTransMax"))
     LoRaWANGetServiceProfileInfo.struct_class = Types::LoRaWANGetServiceProfileInfo
 
     LoRaWANJoinEventNotificationConfigurations.add_member(:dev_eui_event_topic, Shapes::ShapeRef.new(shape: EventNotificationTopicStatus, location_name: "DevEuiEventTopic"))
@@ -1814,6 +1822,10 @@ module Aws::IoTWireless
     LoRaWANServiceProfile.add_member(:dr_max, Shapes::ShapeRef.new(shape: DrMaxBox, location_name: "DrMax"))
     LoRaWANServiceProfile.add_member(:pr_allowed, Shapes::ShapeRef.new(shape: PrAllowed, location_name: "PrAllowed"))
     LoRaWANServiceProfile.add_member(:ra_allowed, Shapes::ShapeRef.new(shape: RaAllowed, location_name: "RaAllowed"))
+    LoRaWANServiceProfile.add_member(:tx_power_index_min, Shapes::ShapeRef.new(shape: TxPowerIndexMin, location_name: "TxPowerIndexMin"))
+    LoRaWANServiceProfile.add_member(:tx_power_index_max, Shapes::ShapeRef.new(shape: TxPowerIndexMax, location_name: "TxPowerIndexMax"))
+    LoRaWANServiceProfile.add_member(:nb_trans_min, Shapes::ShapeRef.new(shape: NbTransMin, location_name: "NbTransMin"))
+    LoRaWANServiceProfile.add_member(:nb_trans_max, Shapes::ShapeRef.new(shape: NbTransMax, location_name: "NbTransMax"))
     LoRaWANServiceProfile.struct_class = Types::LoRaWANServiceProfile
 
     LoRaWANStartFuotaTask.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, location_name: "StartTime"))

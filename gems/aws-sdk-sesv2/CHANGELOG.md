@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2025-07-31)
+------------------
+
+* Feature - This release introduces support for Multi-tenant management
+
 1.80.0 (2025-07-21)
 ------------------
 

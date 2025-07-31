@@ -10,6 +10,36 @@
 module Aws::DirectoryService
   module Types
 
+    # A directory assessment is automatically created when you create a
+    # hybrid directory. There are two types of assessments: `CUSTOMER` and
+    # `SYSTEM`. Your Amazon Web Services account has a limit of 100
+    # `CUSTOMER` directory assessments.
+    #
+    # If you attempt to create a hybrid directory; and you already have 100
+    # `CUSTOMER` directory assessments;, you will encounter an error. Delete
+    # assessments to free up capacity before trying again.
+    #
+    # You can request an increase to your `CUSTOMER` directory assessment
+    # quota by contacting customer support or delete existing CUSTOMER
+    # directory assessments; to free up capacity.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ADAssessmentLimitExceededException AWS API Documentation
+    #
+    class ADAssessmentLimitExceededException < Struct.new(
+      :message,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] shared_directory_id
     #   Identifier of the shared directory in the directory consumer
     #   account. This identifier is different for each directory owner
@@ -162,8 +192,8 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] vpc_settings
-    #   Contains VPC information for the CreateDirectory or
-    #   CreateMicrosoftAD operation.
+    #   Contains VPC information for the CreateDirectory, CreateMicrosoftAD,
+    #   or CreateHybridAD operation.
     #   @return [Types::DirectoryVpcSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddRegionRequest AWS API Documentation
@@ -200,6 +230,270 @@ module Aws::DirectoryService
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddTagsToResourceResult AWS API Documentation
     #
     class AddTagsToResourceResult < Aws::EmptyStructure; end
+
+    # Contains detailed information about a directory assessment, including
+    # configuration parameters, status, and validation results.
+    #
+    # @!attribute [rw] assessment_id
+    #   The unique identifier of the directory assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory associated with this assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_name
+    #   The fully qualified domain name (FQDN) of the Active Directory
+    #   domain being assessed.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The date and time when the assessment was initiated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_date_time
+    #   The date and time when the assessment status was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the assessment. Valid values include
+    #   `SUCCESS`, `FAILED`, `PENDING`, and `IN_PROGRESS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   A detailed status code providing additional information about the
+    #   assessment state.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   A human-readable description of the current assessment status,
+    #   including any error details or progress information.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_dns_ips
+    #   The IP addresses of the DNS servers or domain controllers in your
+    #   self-managed AD environment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   Contains Amazon VPC information for the `StartADAssessment`
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of subnet identifiers in the Amazon VPC in which the hybrid
+    #   directory is created.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The security groups identifiers attached to the network interfaces.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] self_managed_instance_ids
+    #   The identifiers of the self-managed AD instances used to perform the
+    #   assessment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] report_type
+    #   The type of assessment report generated. Valid values are `CUSTOMER`
+    #   and `SYSTEM`.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the assessment framework used to evaluate your
+    #   self-managed AD environment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/Assessment AWS API Documentation
+    #
+    class Assessment < Struct.new(
+      :assessment_id,
+      :directory_id,
+      :dns_name,
+      :start_time,
+      :last_update_date_time,
+      :status,
+      :status_code,
+      :status_reason,
+      :customer_dns_ips,
+      :vpc_id,
+      :subnet_ids,
+      :security_group_ids,
+      :self_managed_instance_ids,
+      :report_type,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configuration parameters required to perform a directory
+    # assessment.
+    #
+    # @!attribute [rw] customer_dns_ips
+    #   A list of IP addresses for the DNS servers or domain controllers in
+    #   your self-managed AD that are tested during the assessment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dns_name
+    #   The fully qualified domain name (FQDN) of the self-managed AD domain
+    #   to assess.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_settings
+    #   Contains VPC information for the CreateDirectory, CreateMicrosoftAD,
+    #   or CreateHybridAD operation.
+    #   @return [Types::DirectoryVpcSettings]
+    #
+    # @!attribute [rw] instance_ids
+    #   The identifiers of the self-managed instances with SSM that are used
+    #   to perform connectivity and validation tests.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   By default, the service attaches a security group to allow network
+    #   access to the self-managed nodes in your Amazon VPC. You can
+    #   optionally supply your own security group that allows network
+    #   traffic to and from your self-managed domain controllers outside of
+    #   your Amazon VPC.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AssessmentConfiguration AWS API Documentation
+    #
+    class AssessmentConfiguration < Struct.new(
+      :customer_dns_ips,
+      :dns_name,
+      :vpc_settings,
+      :instance_ids,
+      :security_group_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the results of validation tests performed against a specific
+    # domain controller during a directory assessment.
+    #
+    # @!attribute [rw] domain_controller_ip
+    #   The IP address of the domain controller that was tested during the
+    #   assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] validations
+    #   A list of validation results for different test categories performed
+    #   against this domain controller.
+    #   @return [Array<Types::AssessmentValidation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AssessmentReport AWS API Documentation
+    #
+    class AssessmentReport < Struct.new(
+      :domain_controller_ip,
+      :validations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a directory assessment, providing a
+    # high-level overview without detailed validation results.
+    #
+    # @!attribute [rw] assessment_id
+    #   The unique identifier of the directory assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory associated with this assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_name
+    #   The fully qualified domain name (FQDN) of the Active Directory
+    #   domain being assessed.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The date and time when the assessment was initiated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_date_time
+    #   The date and time when the assessment status was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the assessment. Valid values include
+    #   `SUCCESS`, `FAILED`, `PENDING`, and `IN_PROGRESS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_dns_ips
+    #   The IP addresses of the DNS servers or domain controllers in your
+    #   self-managed AD environment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] report_type
+    #   The type of assessment report generated. Valid values include
+    #   `CUSTOMER` and `SYSTEM`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AssessmentSummary AWS API Documentation
+    #
+    class AssessmentSummary < Struct.new(
+      :assessment_id,
+      :directory_id,
+      :dns_name,
+      :start_time,
+      :last_update_date_time,
+      :status,
+      :customer_dns_ips,
+      :report_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a specific validation test performed during
+    # a directory assessment.
+    #
+    # @!attribute [rw] category
+    #   The category of the validation test.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the specific validation test performed within the
+    #   category.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The result status of the validation test. Valid values include
+    #   `SUCCESS`, `FAILED`, `PENDING`, and `IN_PROGRESS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   A detailed status code providing additional information about the
+    #   validation result.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   A human-readable description of the validation result, including any
+    #   error details or recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The date and time when the validation test was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_date_time
+    #   The date and time when the validation test was completed or last
+    #   updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AssessmentValidation AWS API Documentation
+    #
+    class AssessmentValidation < Struct.new(
+      :category,
+      :name,
+      :status,
+      :status_code,
+      :status_reason,
+      :start_time,
+      :last_update_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Represents a named directory attribute.
     #
@@ -836,6 +1130,52 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that contains the credentials for the service account
+    #   used to join hybrid domain controllers to your self-managed AD
+    #   domain. This secret is used once and not stored.
+    #
+    #   The secret must contain key-value pairs with keys matching
+    #   `customerAdAdminDomainUsername` and `customerAdAdminDomainPassword`.
+    #   For example:
+    #   `{"customerAdAdminDomainUsername":"carlos_salazar","customerAdAdminDomainPassword":"ExamplePassword123!"}`.
+    #   @return [String]
+    #
+    # @!attribute [rw] assessment_id
+    #   The unique identifier of the successful directory assessment that
+    #   validates your self-managed AD environment. You must have a
+    #   successful directory assessment before you create a hybrid
+    #   directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to be assigned to the directory. Each tag consists of a key
+    #   and value pair. You can specify multiple tags as a list.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateHybridADRequest AWS API Documentation
+    #
+    class CreateHybridADRequest < Struct.new(
+      :secret_arn,
+      :assessment_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] directory_id
+    #   The unique identifier of the newly created hybrid directory.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateHybridADResult AWS API Documentation
+    #
+    class CreateHybridADResult < Struct.new(
+      :directory_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] directory_id
     #   Identifier of the directory to which you want to subscribe and
     #   receive real-time logs to your specified CloudWatch log group.
@@ -1034,6 +1374,30 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # @!attribute [rw] assessment_id
+    #   The unique identifier of the directory assessment to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteADAssessmentRequest AWS API Documentation
+    #
+    class DeleteADAssessmentRequest < Struct.new(
+      :assessment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assessment_id
+    #   The unique identifier of the deleted directory assessment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteADAssessmentResult AWS API Documentation
+    #
+    class DeleteADAssessmentResult < Struct.new(
+      :assessment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Deletes a conditional forwarder.
     #
     # @!attribute [rw] directory_id
@@ -1216,6 +1580,38 @@ module Aws::DirectoryService
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeregisterEventTopicResult AWS API Documentation
     #
     class DeregisterEventTopicResult < Aws::EmptyStructure; end
+
+    # @!attribute [rw] assessment_id
+    #   The identifier of the directory assessment to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeADAssessmentRequest AWS API Documentation
+    #
+    class DescribeADAssessmentRequest < Struct.new(
+      :assessment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assessment
+    #   Detailed information about the self-managed instance settings (IDs
+    #   and DNS IPs).
+    #   @return [Types::Assessment]
+    #
+    # @!attribute [rw] assessment_reports
+    #   A list of assessment reports containing validation results for each
+    #   domain controller and test category. Each report includes specific
+    #   validation details and outcomes.
+    #   @return [Array<Types::AssessmentReport>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeADAssessmentResult AWS API Documentation
+    #
+    class DescribeADAssessmentResult < Struct.new(
+      :assessment,
+      :assessment_reports)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] directory_id
     #   The identifier of the directory.
@@ -1510,6 +1906,51 @@ module Aws::DirectoryService
     #
     class DescribeEventTopicsResult < Struct.new(
       :event_topics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] directory_id
+    #   The identifier of the hybrid directory for which to retrieve update
+    #   information.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_type
+    #   The type of update activities to retrieve. Valid values include
+    #   `SelfManagedInstances` and `HybridAdministratorAccount`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous request to
+    #   DescribeHybridADUpdate. Pass null if this is the first request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeHybridADUpdateRequest AWS API Documentation
+    #
+    class DescribeHybridADUpdateRequest < Struct.new(
+      :directory_id,
+      :update_type,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update_activities
+    #   Information about update activities for the hybrid directory,
+    #   organized by update type.
+    #   @return [Types::HybridUpdateActivities]
+    #
+    # @!attribute [rw] next_token
+    #   If not null, more results are available. Pass this value for the
+    #   `NextToken` parameter in a subsequent request to retrieve the next
+    #   set of items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeHybridADUpdateResult AWS API Documentation
+    #
+    class DescribeHybridADUpdateResult < Struct.new(
+      :update_activities,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2128,6 +2569,12 @@ module Aws::DirectoryService
     #   The operating system (OS) version of the directory.
     #   @return [String]
     #
+    # @!attribute [rw] hybrid_settings
+    #   Contains information about the hybrid directory configuration for
+    #   the directory, including Amazon Web Services System Manager managed
+    #   node identifiers and DNS IPs.
+    #   @return [Types::HybridSettingsDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryDescription AWS API Documentation
     #
     class DirectoryDescription < Struct.new(
@@ -2156,7 +2603,8 @@ module Aws::DirectoryService
       :desired_number_of_domain_controllers,
       :owner_directory_description,
       :regions_info,
-      :os_version)
+      :os_version,
+      :hybrid_settings)
       SENSITIVE = [:share_notes]
       include Aws::Structure
     end
@@ -2316,8 +2764,8 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # Contains VPC information for the CreateDirectory or CreateMicrosoftAD
-    # operation.
+    # Contains VPC information for the CreateDirectory, CreateMicrosoftAD,
+    # or CreateHybridAD operation.
     #
     # @!attribute [rw] vpc_id
     #   The identifier of the VPC in which to create the directory.
@@ -2826,6 +3274,172 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # Use to recover to the hybrid directory administrator account
+    # credentials.
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that contains the credentials for the AD
+    #   administrator user, and enables hybrid domain controllers to join
+    #   the managed AD domain. For example:
+    #
+    #   `
+    #   {"customerAdAdminDomainUsername":"carlos_salazar","customerAdAdminDomainPassword":"ExamplePassword123!"}.
+    #   `
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/HybridAdministratorAccountUpdate AWS API Documentation
+    #
+    class HybridAdministratorAccountUpdate < Struct.new(
+      :secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configuration settings for self-managed instances with SSM
+    # used in hybrid directory operations.
+    #
+    # @!attribute [rw] customer_dns_ips
+    #   The IP addresses of the DNS servers or domain controllers in your
+    #   self-managed AD environment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_ids
+    #   The identifiers of the self-managed instances with SSM used in
+    #   hybrid directory.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/HybridCustomerInstancesSettings AWS API Documentation
+    #
+    class HybridCustomerInstancesSettings < Struct.new(
+      :customer_dns_ips,
+      :instance_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the current hybrid directory configuration settings for a
+    # directory.
+    #
+    # @!attribute [rw] self_managed_dns_ip_addrs
+    #   The IP addresses of the DNS servers in your self-managed AD
+    #   environment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] self_managed_instance_ids
+    #   The identifiers of the self-managed instances with SSM used for
+    #   hybrid directory operations.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/HybridSettingsDescription AWS API Documentation
+    #
+    class HybridSettingsDescription < Struct.new(
+      :self_managed_dns_ip_addrs,
+      :self_managed_instance_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about update activities for different components
+    # of a hybrid directory.
+    #
+    # @!attribute [rw] self_managed_instances
+    #   A list of update activities related to the self-managed instances
+    #   with SSM in the self-managed instances with SSM hybrid directory
+    #   configuration.
+    #   @return [Array<Types::HybridUpdateInfoEntry>]
+    #
+    # @!attribute [rw] hybrid_administrator_account
+    #   A list of update activities related to hybrid directory
+    #   administrator account changes.
+    #   @return [Array<Types::HybridUpdateInfoEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/HybridUpdateActivities AWS API Documentation
+    #
+    class HybridUpdateActivities < Struct.new(
+      :self_managed_instances,
+      :hybrid_administrator_account)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains detailed information about a specific update activity for a
+    # hybrid directory component.
+    #
+    # @!attribute [rw] status
+    #   The current status of the update activity. Valid values include
+    #   `UPDATED`, `UPDATING`, and `UPDATE_FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   A human-readable description of the update status, including any
+    #   error details or progress information.
+    #   @return [String]
+    #
+    # @!attribute [rw] initiated_by
+    #   Specifies if the update was initiated by the customer or Amazon Web
+    #   Services.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_value
+    #   The new configuration values being applied in this update.
+    #   @return [Types::HybridUpdateValue]
+    #
+    # @!attribute [rw] previous_value
+    #   The previous configuration values before this update was applied.
+    #   @return [Types::HybridUpdateValue]
+    #
+    # @!attribute [rw] start_time
+    #   The date and time when the update activity was initiated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time when the update activity status was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] assessment_id
+    #   The identifier of the assessment performed to validate this update
+    #   configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/HybridUpdateInfoEntry AWS API Documentation
+    #
+    class HybridUpdateInfoEntry < Struct.new(
+      :status,
+      :status_reason,
+      :initiated_by,
+      :new_value,
+      :previous_value,
+      :start_time,
+      :last_updated_date_time,
+      :assessment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the configuration values for a hybrid directory update,
+    # including Amazon Web Services System Manager managed node and DNS
+    # information.
+    #
+    # @!attribute [rw] instance_ids
+    #   The identifiers of the self-managed instances with SSM in the hybrid
+    #   directory configuration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dns_ips
+    #   The IP addresses of the DNS servers or domain controllers in the
+    #   hybrid directory configuration.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/HybridUpdateValue AWS API Documentation
+    #
+    class HybridUpdateValue < Struct.new(
+      :instance_ids,
+      :dns_ips)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified directory setting is not compatible with other settings.
     #
     # @!attribute [rw] message
@@ -3102,6 +3716,50 @@ module Aws::DirectoryService
       :ldaps_status,
       :ldaps_status_reason,
       :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory for which to list assessments. If
+    #   not specified, all assessments in your account are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous request to ListADAssessments.
+    #   Pass null if this is the first request.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of assessment summaries to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListADAssessmentsRequest AWS API Documentation
+    #
+    class ListADAssessmentsRequest < Struct.new(
+      :directory_id,
+      :next_token,
+      :limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assessments
+    #   A list of assessment summaries containing basic information about
+    #   each directory assessment.
+    #   @return [Array<Types::AssessmentSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If not null, more results are available. Pass this value for the
+    #   `NextToken` parameter in a subsequent request to retrieve the next
+    #   set of items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListADAssessmentsResult AWS API Documentation
+    #
+    class ListADAssessmentsResult < Struct.new(
+      :assessments,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3521,8 +4179,8 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] vpc_settings
-    #   Contains VPC information for the CreateDirectory or
-    #   CreateMicrosoftAD operation.
+    #   Contains VPC information for the CreateDirectory, CreateMicrosoftAD,
+    #   or CreateHybridAD operation.
     #   @return [Types::DirectoryVpcSettings]
     #
     # @!attribute [rw] desired_number_of_domain_controllers
@@ -4211,6 +4869,40 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # @!attribute [rw] assessment_configuration
+    #   Configuration parameters for the directory assessment, including DNS
+    #   server information, domain name, Amazon VPC subnet, and Amazon Web
+    #   Services System Manager managed node details.
+    #   @return [Types::AssessmentConfiguration]
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory for which to perform the assessment.
+    #   This should be an existing directory. If the assessment is not for
+    #   an existing directory, this parameter should be omitted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/StartADAssessmentRequest AWS API Documentation
+    #
+    class StartADAssessmentRequest < Struct.new(
+      :assessment_configuration,
+      :directory_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assessment_id
+    #   The unique identifier of the newly started directory assessment. Use
+    #   this identifier to monitor assessment progress and retrieve results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/StartADAssessmentResult AWS API Documentation
+    #
+    class StartADAssessmentResult < Struct.new(
+      :assessment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] directory_id
     #   The identifier of the directory for which the schema extension will
     #   be applied to.
@@ -4525,6 +5217,61 @@ module Aws::DirectoryService
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateDirectorySetupResult AWS API Documentation
     #
     class UpdateDirectorySetupResult < Aws::EmptyStructure; end
+
+    # @!attribute [rw] directory_id
+    #   The identifier of the hybrid directory to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] hybrid_administrator_account_update
+    #   We create a hybrid directory administrator account when we create a
+    #   hybrid directory. Use `HybridAdministratorAccountUpdate` to recover
+    #   the hybrid directory administrator account if you have deleted it.
+    #
+    #   To recover your hybrid directory administrator account, we need
+    #   temporary access to a user in your self-managed AD with
+    #   administrator permissions in the form of a secret from Amazon Web
+    #   Services Secrets Manager. We use these credentials once during
+    #   recovery and don't store them.
+    #
+    #   If your hybrid directory administrator account exists, then you
+    #   don’t need to use `HybridAdministratorAccountUpdate`, even if you
+    #   have updated your self-managed AD administrator user.
+    #   @return [Types::HybridAdministratorAccountUpdate]
+    #
+    # @!attribute [rw] self_managed_instances_settings
+    #   Updates to the self-managed AD configuration, including DNS server
+    #   IP addresses and Amazon Web Services System Manager managed node
+    #   identifiers.
+    #   @return [Types::HybridCustomerInstancesSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateHybridADRequest AWS API Documentation
+    #
+    class UpdateHybridADRequest < Struct.new(
+      :directory_id,
+      :hybrid_administrator_account_update,
+      :self_managed_instances_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] directory_id
+    #   The identifier of the updated hybrid directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] assessment_id
+    #   The identifier of the assessment performed to validate the update
+    #   configuration. This assessment ensures the updated settings are
+    #   compatible with your environment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateHybridADResult AWS API Documentation
+    #
+    class UpdateHybridADResult < Struct.new(
+      :directory_id,
+      :assessment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # An entry of update information related to a requested update type.
     #

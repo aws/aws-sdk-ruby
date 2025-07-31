@@ -2581,6 +2581,7 @@ module Aws::CloudFront
       attr_accessor vpc_origin_config: Types::VpcOriginConfig
       attr_accessor connection_attempts: ::Integer
       attr_accessor connection_timeout: ::Integer
+      attr_accessor response_completion_timeout: ::Integer
       attr_accessor origin_shield: Types::OriginShield
       attr_accessor origin_access_control_id: ::String
       SENSITIVE: []
@@ -3085,6 +3086,7 @@ module Aws::CloudFront
 
     class S3OriginConfig
       attr_accessor origin_access_identity: ::String
+      attr_accessor origin_read_timeout: ::Integer
       SENSITIVE: []
     end
 

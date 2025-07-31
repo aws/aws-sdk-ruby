@@ -228,6 +228,14 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class ContactPreference
+      attr_accessor key_name: ::String
+      attr_accessor key_value: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor contact_type: ("PhoneNumber" | "MobilePhoneNumber" | "HomePhoneNumber" | "BusinessPhoneNumber" | "EmailAddress" | "PersonalEmailAddress" | "BusinessEmailAddress")
+      SENSITIVE: []
+    end
+
     class CreateCalculatedAttributeDefinitionRequest
       attr_accessor domain_name: ::String
       attr_accessor calculated_attribute_name: ::String
@@ -389,7 +397,9 @@ module Aws::CustomerProfiles
       attr_accessor attributes: ::Hash[::String, ::String]
       attr_accessor party_type_string: ::String
       attr_accessor gender_string: ::String
-      SENSITIVE: [:account_number, :additional_information, :party_type, :business_name, :first_name, :middle_name, :last_name, :birth_date, :gender, :phone_number, :mobile_phone_number, :home_phone_number, :business_phone_number, :email_address, :personal_email_address, :business_email_address, :address, :shipping_address, :mailing_address, :billing_address, :attributes, :party_type_string, :gender_string]
+      attr_accessor profile_type: ("ACCOUNT_PROFILE" | "PROFILE")
+      attr_accessor engagement_preferences: Types::EngagementPreferences
+      SENSITIVE: [:account_number, :additional_information, :party_type, :business_name, :first_name, :middle_name, :last_name, :birth_date, :gender, :phone_number, :mobile_phone_number, :home_phone_number, :business_phone_number, :email_address, :personal_email_address, :business_email_address, :address, :shipping_address, :mailing_address, :billing_address, :attributes, :party_type_string, :gender_string, :profile_type, :engagement_preferences]
     end
 
     class CreateProfileResponse
@@ -641,6 +651,12 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class EngagementPreferences
+      attr_accessor phone: ::Array[Types::ContactPreference]
+      attr_accessor email: ::Array[Types::ContactPreference]
+      SENSITIVE: []
+    end
+
     class EventStreamDestinationDetails
       attr_accessor uri: ::String
       attr_accessor status: ("HEALTHY" | "UNHEALTHY")
@@ -725,6 +741,8 @@ module Aws::CustomerProfiles
       attr_accessor mailing_address: ::String
       attr_accessor billing_address: ::String
       attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor profile_type: ::String
+      attr_accessor engagement_preferences: ::String
       SENSITIVE: []
     end
 
@@ -1638,7 +1656,9 @@ module Aws::CustomerProfiles
       attr_accessor found_by_items: ::Array[Types::FoundByKeyValue]
       attr_accessor party_type_string: ::String
       attr_accessor gender_string: ::String
-      SENSITIVE: [:account_number, :additional_information, :party_type, :business_name, :first_name, :middle_name, :last_name, :birth_date, :gender, :phone_number, :mobile_phone_number, :home_phone_number, :business_phone_number, :email_address, :personal_email_address, :business_email_address, :address, :shipping_address, :mailing_address, :billing_address, :attributes, :party_type_string, :gender_string]
+      attr_accessor profile_type: ("ACCOUNT_PROFILE" | "PROFILE")
+      attr_accessor engagement_preferences: Types::EngagementPreferences
+      SENSITIVE: [:account_number, :additional_information, :party_type, :business_name, :first_name, :middle_name, :last_name, :birth_date, :gender, :phone_number, :mobile_phone_number, :home_phone_number, :business_phone_number, :email_address, :personal_email_address, :business_email_address, :address, :shipping_address, :mailing_address, :billing_address, :attributes, :party_type_string, :gender_string, :profile_type, :engagement_preferences]
     end
 
     class ProfileAttributeValuesRequest
@@ -1677,6 +1697,7 @@ module Aws::CustomerProfiles
       attr_accessor mailing_address: Types::AddressDimension
       attr_accessor billing_address: Types::AddressDimension
       attr_accessor attributes: ::Hash[::String, Types::AttributeDimension]
+      attr_accessor profile_type: Types::ProfileTypeDimension
       SENSITIVE: []
     end
 
@@ -1697,6 +1718,12 @@ module Aws::CustomerProfiles
       attr_accessor profile_id: ::String
       attr_accessor query_result: ("PRESENT" | "ABSENT")
       attr_accessor profile: Types::Profile
+      SENSITIVE: []
+    end
+
+    class ProfileTypeDimension
+      attr_accessor dimension_type: ("INCLUSIVE" | "EXCLUSIVE")
+      attr_accessor values: ::Array[("ACCOUNT_PROFILE" | "PROFILE")]
       SENSITIVE: []
     end
 
@@ -2137,7 +2164,9 @@ module Aws::CustomerProfiles
       attr_accessor attributes: ::Hash[::String, ::String]
       attr_accessor party_type_string: ::String
       attr_accessor gender_string: ::String
-      SENSITIVE: [:additional_information, :account_number, :party_type, :business_name, :first_name, :middle_name, :last_name, :birth_date, :gender, :phone_number, :mobile_phone_number, :home_phone_number, :business_phone_number, :email_address, :personal_email_address, :business_email_address, :address, :shipping_address, :mailing_address, :billing_address, :attributes, :party_type_string, :gender_string]
+      attr_accessor profile_type: ("ACCOUNT_PROFILE" | "PROFILE")
+      attr_accessor engagement_preferences: Types::EngagementPreferences
+      SENSITIVE: [:additional_information, :account_number, :party_type, :business_name, :first_name, :middle_name, :last_name, :birth_date, :gender, :phone_number, :mobile_phone_number, :home_phone_number, :business_phone_number, :email_address, :personal_email_address, :business_email_address, :address, :shipping_address, :mailing_address, :billing_address, :attributes, :party_type_string, :gender_string, :profile_type, :engagement_preferences]
     end
 
     class UpdateProfileResponse

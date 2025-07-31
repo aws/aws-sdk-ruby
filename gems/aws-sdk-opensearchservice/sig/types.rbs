@@ -102,6 +102,7 @@ module Aws::OpenSearchService
       attr_accessor internal_user_database_enabled: bool
       attr_accessor saml_options: Types::SAMLOptionsOutput
       attr_accessor jwt_options: Types::JWTOptionsOutput
+      attr_accessor iam_federation_options: Types::IAMFederationOptionsOutput
       attr_accessor anonymous_auth_disable_date: ::Time
       attr_accessor anonymous_auth_enabled: bool
       SENSITIVE: []
@@ -113,6 +114,7 @@ module Aws::OpenSearchService
       attr_accessor master_user_options: Types::MasterUserOptions
       attr_accessor saml_options: Types::SAMLOptionsInput
       attr_accessor jwt_options: Types::JWTOptionsInput
+      attr_accessor iam_federation_options: Types::IAMFederationOptionsInput
       attr_accessor anonymous_auth_enabled: bool
       SENSITIVE: []
     end
@@ -1130,6 +1132,20 @@ module Aws::OpenSearchService
       attr_accessor upgrade_step: ("PRE_UPGRADE_CHECK" | "SNAPSHOT" | "UPGRADE")
       attr_accessor step_status: ("IN_PROGRESS" | "SUCCEEDED" | "SUCCEEDED_WITH_ISSUES" | "FAILED")
       attr_accessor upgrade_name: ::String
+      SENSITIVE: []
+    end
+
+    class IAMFederationOptionsInput
+      attr_accessor enabled: bool
+      attr_accessor subject_key: ::String
+      attr_accessor roles_key: ::String
+      SENSITIVE: []
+    end
+
+    class IAMFederationOptionsOutput
+      attr_accessor enabled: bool
+      attr_accessor subject_key: ::String
+      attr_accessor roles_key: ::String
       SENSITIVE: []
     end
 

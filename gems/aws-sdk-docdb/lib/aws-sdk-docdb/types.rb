@@ -731,6 +731,11 @@ module Aws::DocDB
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Amazon DocumentDB
+    #   Serverless cluster.
+    #   @return [Types::ServerlessV2ScalingConfiguration]
+    #
     # @!attribute [rw] manage_master_user_password
     #   Specifies whether to manage the master user password with Amazon Web
     #   Services Secrets Manager.
@@ -791,6 +796,7 @@ module Aws::DocDB
       :deletion_protection,
       :global_cluster_identifier,
       :storage_type,
+      :serverless_v2_scaling_configuration,
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
       :source_region)
@@ -1440,8 +1446,6 @@ module Aws::DocDB
     # @!attribute [rw] storage_type
     #   Storage type associated with your cluster
     #
-    #   Storage type associated with your cluster
-    #
     #   For information on storage types for Amazon DocumentDB clusters, see
     #   Cluster storage configurations in the *Amazon DocumentDB Developer
     #   Guide*.
@@ -1450,6 +1454,11 @@ module Aws::DocDB
     #
     #   Default value is `standard `
     #   @return [String]
+    #
+    # @!attribute [rw] serverless_v2_scaling_configuration
+    #   The scaling configuration of an Amazon DocumentDB Serverless
+    #   cluster.
+    #   @return [Types::ServerlessV2ScalingConfigurationInfo]
     #
     # @!attribute [rw] master_user_secret
     #   The secret managed by Amazon DocumentDB in Amazon Web Services
@@ -1492,6 +1501,7 @@ module Aws::DocDB
       :enabled_cloudwatch_logs_exports,
       :deletion_protection,
       :storage_type,
+      :serverless_v2_scaling_configuration,
       :master_user_secret)
       SENSITIVE = []
       include Aws::Structure
@@ -1966,6 +1976,16 @@ module Aws::DocDB
     #   certificate without rebooting the DB instance.
     #   @return [Boolean]
     #
+    # @!attribute [rw] serverless_v2_features_support
+    #   Specifies any Amazon DocumentDB Serverless properties or limits that
+    #   differ between Amazon DocumentDB engine versions. You can test the
+    #   values of this attribute when deciding which Amazon DocumentDB
+    #   version to use in a new or upgraded cluster. You can also retrieve
+    #   the version of an existing cluster and check whether that version
+    #   supports certain Amazon DocumentDB Serverless features before you
+    #   attempt to use those features.
+    #   @return [Types::ServerlessV2FeaturesSupport]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBEngineVersion AWS API Documentation
     #
     class DBEngineVersion < Struct.new(
@@ -1978,7 +1998,8 @@ module Aws::DocDB
       :exportable_log_types,
       :supports_log_exports_to_cloudwatch_logs,
       :supported_ca_certificate_identifiers,
-      :supports_certificate_rotation_without_restart)
+      :supports_certificate_rotation_without_restart,
+      :serverless_v2_features_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3888,10 +3909,10 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] global_cluster_resource_id
-    #   The Amazon Web Services Region-unique, immutable identifier for the
-    #   global database cluster. This identifier is found in CloudTrail log
-    #   entries whenever the KMS customer master key (CMK) for the cluster
-    #   is accessed.
+    #   The Amazon Web Services RegionRegion-unique, immutable identifier
+    #   for the global database cluster. This identifier is found in
+    #   CloudTrail log entries whenever the KMS customer master key (CMK)
+    #   for the cluster is accessed.
     #   @return [String]
     #
     # @!attribute [rw] global_cluster_arn
@@ -3960,7 +3981,7 @@ module Aws::DocDB
     #
     # @!attribute [rw] readers
     #   The Amazon Resource Name (ARN) for each read-only secondary cluster
-    #   associated with the Aurora global cluster.
+    #   associated with the Amazon DocumentDB global cluster.
     #   @return [Array<String>]
     #
     # @!attribute [rw] is_writer
@@ -4312,6 +4333,11 @@ module Aws::DocDB
     #   Default value is `standard `
     #   @return [String]
     #
+    # @!attribute [rw] serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Amazon DocumentDB
+    #   Serverless cluster.
+    #   @return [Types::ServerlessV2ScalingConfiguration]
+    #
     # @!attribute [rw] manage_master_user_password
     #   Specifies whether to manage the master user password with Amazon Web
     #   Services Secrets Manager. If the cluster doesn't manage the master
@@ -4388,6 +4414,7 @@ module Aws::DocDB
       :allow_major_version_upgrade,
       :deletion_protection,
       :storage_type,
+      :serverless_v2_scaling_configuration,
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
       :rotate_master_user_password)
@@ -5437,6 +5464,11 @@ module Aws::DocDB
     #   and it cannot end with a hyphen or contain two consecutive hyphens.
     #   @return [String]
     #
+    # @!attribute [rw] serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Amazon DocumentDB
+    #   Serverless cluster.
+    #   @return [Types::ServerlessV2ScalingConfiguration]
+    #
     # @!attribute [rw] storage_type
     #   The storage type to associate with the DB cluster.
     #
@@ -5465,6 +5497,7 @@ module Aws::DocDB
       :enable_cloudwatch_logs_exports,
       :deletion_protection,
       :db_cluster_parameter_group_name,
+      :serverless_v2_scaling_configuration,
       :storage_type)
       SENSITIVE = []
       include Aws::Structure
@@ -5621,6 +5654,11 @@ module Aws::DocDB
     #   deleted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Amazon DocumentDB
+    #   Serverless cluster.
+    #   @return [Types::ServerlessV2ScalingConfiguration]
+    #
     # @!attribute [rw] storage_type
     #   The storage type to associate with the DB cluster.
     #
@@ -5648,6 +5686,7 @@ module Aws::DocDB
       :kms_key_id,
       :enable_cloudwatch_logs_exports,
       :deletion_protection,
+      :serverless_v2_scaling_configuration,
       :storage_type)
       SENSITIVE = []
       include Aws::Structure
@@ -5684,6 +5723,83 @@ module Aws::DocDB
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/SNSTopicArnNotFoundFault AWS API Documentation
     #
     class SNSTopicArnNotFoundFault < Aws::EmptyStructure; end
+
+    # Specifies any Amazon DocumentDB Serverless properties or limits that
+    # differ between Amazon DocumentDB engine versions. You can test the
+    # values of this attribute when deciding which Amazon DocumentDB version
+    # to use in a new or upgraded cluster. You can also retrieve the version
+    # of an existing cluster and check whether that version supports certain
+    # Amazon DocumentDB Serverless features before you attempt to use those
+    # features.
+    #
+    # @!attribute [rw] min_capacity
+    #   The minimum number of Amazon DocumentDB capacity units (DCUs) for an
+    #   instance in an Amazon DocumentDB Serverless cluster. You can specify
+    #   DCU values in half-step increments, such as 8, 8.5, 9, and so on.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_capacity
+    #   The maximum number of Amazon DocumentDB capacity units (DCUs) for an
+    #   instance in an Amazon DocumentDB Serverless cluster. You can specify
+    #   DCU values in half-step increments, such as 32, 32.5, 33, and so on.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ServerlessV2FeaturesSupport AWS API Documentation
+    #
+    class ServerlessV2FeaturesSupport < Struct.new(
+      :min_capacity,
+      :max_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Sets the scaling configuration of an Amazon DocumentDB Serverless
+    # cluster.
+    #
+    # @!attribute [rw] min_capacity
+    #   The minimum number of Amazon DocumentDB capacity units (DCUs) for an
+    #   instance in an Amazon DocumentDB Serverless cluster. You can specify
+    #   DCU values in half-step increments, such as 8, 8.5, 9, and so on.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_capacity
+    #   The maximum number of Amazon DocumentDB capacity units (DCUs) for an
+    #   instance in an Amazon DocumentDB Serverless cluster. You can specify
+    #   DCU values in half-step increments, such as 32, 32.5, 33, and so on.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ServerlessV2ScalingConfiguration AWS API Documentation
+    #
+    class ServerlessV2ScalingConfiguration < Struct.new(
+      :min_capacity,
+      :max_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Retrieves the scaling configuration for an Amazon DocumentDB
+    # Serverless cluster.
+    #
+    # @!attribute [rw] min_capacity
+    #   The minimum number of Amazon DocumentDB capacity units (DCUs) for an
+    #   instance in an Amazon DocumentDB Serverless cluster. You can specify
+    #   DCU values in half-step increments, such as 8, 8.5, 9, and so on.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_capacity
+    #   The maximum number of Amazon DocumentDB capacity units (DCUs) for an
+    #   instance in an Amazon DocumentDB Serverless cluster. You can specify
+    #   DCU values in half-step increments, such as 32, 32.5, 33, and so on.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ServerlessV2ScalingConfigurationInfo AWS API Documentation
+    #
+    class ServerlessV2ScalingConfigurationInfo < Struct.new(
+      :min_capacity,
+      :max_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # You have exceeded the maximum number of accounts that you can share a
     # manual DB snapshot with.

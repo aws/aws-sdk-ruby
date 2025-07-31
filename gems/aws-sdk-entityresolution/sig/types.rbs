@@ -751,6 +751,7 @@ module Aws::EntityResolution
     class ResolutionTechniques
       attr_accessor resolution_type: ("RULE_MATCHING" | "ML_MATCHING" | "PROVIDER")
       attr_accessor rule_based_properties: Types::RuleBasedProperties
+      attr_accessor rule_condition_properties: Types::RuleConditionProperties
       attr_accessor provider_properties: Types::ProviderProperties
       SENSITIVE: []
     end
@@ -770,6 +771,17 @@ module Aws::EntityResolution
       attr_accessor rules: ::Array[Types::Rule]
       attr_accessor attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY")
       attr_accessor match_purpose: ("IDENTIFIER_GENERATION" | "INDEXING")
+      SENSITIVE: []
+    end
+
+    class RuleCondition
+      attr_accessor rule_name: ::String
+      attr_accessor condition: ::String
+      SENSITIVE: []
+    end
+
+    class RuleConditionProperties
+      attr_accessor rules: ::Array[Types::RuleCondition]
       SENSITIVE: []
     end
 

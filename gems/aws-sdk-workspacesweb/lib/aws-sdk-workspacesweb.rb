@@ -49,12 +49,13 @@ module Aws::WorkSpacesWeb
   end
   autoload :Client, 'aws-sdk-workspacesweb/client'
   autoload :Errors, 'aws-sdk-workspacesweb/errors'
+  autoload :Waiters, 'aws-sdk-workspacesweb/waiters'
   autoload :Resource, 'aws-sdk-workspacesweb/resource'
   autoload :EndpointParameters, 'aws-sdk-workspacesweb/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-workspacesweb/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-workspacesweb/endpoints'
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.45.0'
 
 end
 

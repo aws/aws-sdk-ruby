@@ -270,6 +270,8 @@ module Aws::IoT
     ConfigName = Shapes::StringShape.new(name: 'ConfigName')
     ConfigValue = Shapes::StringShape.new(name: 'ConfigValue')
     Configuration = Shapes::StructureShape.new(name: 'Configuration')
+    ConfigurationDetails = Shapes::StructureShape.new(name: 'ConfigurationDetails')
+    ConfigurationStatus = Shapes::StringShape.new(name: 'ConfigurationStatus')
     ConfirmTopicRuleDestinationRequest = Shapes::StructureShape.new(name: 'ConfirmTopicRuleDestinationRequest')
     ConfirmTopicRuleDestinationResponse = Shapes::StructureShape.new(name: 'ConfirmTopicRuleDestinationResponse')
     ConfirmationToken = Shapes::StringShape.new(name: 'ConfirmationToken')
@@ -465,6 +467,8 @@ module Aws::IoT
     DescribeDimensionResponse = Shapes::StructureShape.new(name: 'DescribeDimensionResponse')
     DescribeDomainConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeDomainConfigurationRequest')
     DescribeDomainConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeDomainConfigurationResponse')
+    DescribeEncryptionConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeEncryptionConfigurationRequest')
+    DescribeEncryptionConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeEncryptionConfigurationResponse')
     DescribeEndpointRequest = Shapes::StructureShape.new(name: 'DescribeEndpointRequest')
     DescribeEndpointResponse = Shapes::StructureShape.new(name: 'DescribeEndpointResponse')
     DescribeEventConfigurationsRequest = Shapes::StructureShape.new(name: 'DescribeEventConfigurationsRequest')
@@ -572,6 +576,7 @@ module Aws::IoT
     EnableTopicRuleRequest = Shapes::StructureShape.new(name: 'EnableTopicRuleRequest')
     Enabled = Shapes::BooleanShape.new(name: 'Enabled')
     EnabledBoolean = Shapes::BooleanShape.new(name: 'EnabledBoolean')
+    EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     EndpointAddress = Shapes::StringShape.new(name: 'EndpointAddress')
     EndpointType = Shapes::StringShape.new(name: 'EndpointType')
     Environment = Shapes::StringShape.new(name: 'Environment')
@@ -756,6 +761,8 @@ module Aws::IoT
     KeyPair = Shapes::StructureShape.new(name: 'KeyPair')
     KeyValue = Shapes::StringShape.new(name: 'KeyValue')
     KinesisAction = Shapes::StructureShape.new(name: 'KinesisAction')
+    KmsAccessRoleArn = Shapes::StringShape.new(name: 'KmsAccessRoleArn')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LambdaAction = Shapes::StructureShape.new(name: 'LambdaAction')
     LaserMaxResults = Shapes::IntegerShape.new(name: 'LaserMaxResults')
     LastModifiedDate = Shapes::TimestampShape.new(name: 'LastModifiedDate')
@@ -1406,6 +1413,8 @@ module Aws::IoT
     UpdateDomainConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateDomainConfigurationResponse')
     UpdateDynamicThingGroupRequest = Shapes::StructureShape.new(name: 'UpdateDynamicThingGroupRequest')
     UpdateDynamicThingGroupResponse = Shapes::StructureShape.new(name: 'UpdateDynamicThingGroupResponse')
+    UpdateEncryptionConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateEncryptionConfigurationRequest')
+    UpdateEncryptionConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateEncryptionConfigurationResponse')
     UpdateEventConfigurationsRequest = Shapes::StructureShape.new(name: 'UpdateEventConfigurationsRequest')
     UpdateEventConfigurationsResponse = Shapes::StructureShape.new(name: 'UpdateEventConfigurationsResponse')
     UpdateFleetMetricRequest = Shapes::StructureShape.new(name: 'UpdateFleetMetricRequest')
@@ -2062,6 +2071,11 @@ module Aws::IoT
 
     Configuration.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "Enabled"))
     Configuration.struct_class = Types::Configuration
+
+    ConfigurationDetails.add_member(:configuration_status, Shapes::ShapeRef.new(shape: ConfigurationStatus, location_name: "configurationStatus"))
+    ConfigurationDetails.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
+    ConfigurationDetails.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
+    ConfigurationDetails.struct_class = Types::ConfigurationDetails
 
     ConfirmTopicRuleDestinationRequest.add_member(:confirmation_token, Shapes::ShapeRef.new(shape: ConfirmationToken, required: true, location: "uri", location_name: "confirmationToken"))
     ConfirmTopicRuleDestinationRequest.struct_class = Types::ConfirmTopicRuleDestinationRequest
@@ -2822,6 +2836,15 @@ module Aws::IoT
     DescribeDomainConfigurationResponse.add_member(:application_protocol, Shapes::ShapeRef.new(shape: ApplicationProtocol, location_name: "applicationProtocol"))
     DescribeDomainConfigurationResponse.add_member(:client_certificate_config, Shapes::ShapeRef.new(shape: ClientCertificateConfig, location_name: "clientCertificateConfig"))
     DescribeDomainConfigurationResponse.struct_class = Types::DescribeDomainConfigurationResponse
+
+    DescribeEncryptionConfigurationRequest.struct_class = Types::DescribeEncryptionConfigurationRequest
+
+    DescribeEncryptionConfigurationResponse.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, location_name: "encryptionType"))
+    DescribeEncryptionConfigurationResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    DescribeEncryptionConfigurationResponse.add_member(:kms_access_role_arn, Shapes::ShapeRef.new(shape: KmsAccessRoleArn, location_name: "kmsAccessRoleArn"))
+    DescribeEncryptionConfigurationResponse.add_member(:configuration_details, Shapes::ShapeRef.new(shape: ConfigurationDetails, location_name: "configurationDetails"))
+    DescribeEncryptionConfigurationResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "lastModifiedDate"))
+    DescribeEncryptionConfigurationResponse.struct_class = Types::DescribeEncryptionConfigurationResponse
 
     DescribeEndpointRequest.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location: "querystring", location_name: "endpointType"))
     DescribeEndpointRequest.struct_class = Types::DescribeEndpointRequest
@@ -5421,6 +5444,13 @@ module Aws::IoT
     UpdateDynamicThingGroupResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     UpdateDynamicThingGroupResponse.struct_class = Types::UpdateDynamicThingGroupResponse
 
+    UpdateEncryptionConfigurationRequest.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "encryptionType"))
+    UpdateEncryptionConfigurationRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    UpdateEncryptionConfigurationRequest.add_member(:kms_access_role_arn, Shapes::ShapeRef.new(shape: KmsAccessRoleArn, location_name: "kmsAccessRoleArn"))
+    UpdateEncryptionConfigurationRequest.struct_class = Types::UpdateEncryptionConfigurationRequest
+
+    UpdateEncryptionConfigurationResponse.struct_class = Types::UpdateEncryptionConfigurationResponse
+
     UpdateEventConfigurationsRequest.add_member(:event_configurations, Shapes::ShapeRef.new(shape: EventConfigurations, location_name: "eventConfigurations"))
     UpdateEventConfigurationsRequest.struct_class = Types::UpdateEventConfigurationsRequest
 
@@ -6351,6 +6381,7 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictingResourceUpdateException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
 
       api.add_operation(:create_topic_rule_destination, Seahorse::Model::Operation.new.tap do |o|
@@ -6364,6 +6395,7 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictingResourceUpdateException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
 
       api.add_operation(:delete_account_audit_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -7039,6 +7071,19 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:describe_encryption_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEncryptionConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/encryption-configuration"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEncryptionConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEncryptionConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
@@ -8814,6 +8859,7 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -9359,6 +9405,19 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidQueryException)
+      end)
+
+      api.add_operation(:update_encryption_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateEncryptionConfiguration"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/encryption-configuration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateEncryptionConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateEncryptionConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:update_event_configurations, Seahorse::Model::Operation.new.tap do |o|

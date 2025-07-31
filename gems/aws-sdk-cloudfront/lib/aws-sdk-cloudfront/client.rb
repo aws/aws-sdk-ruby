@@ -723,6 +723,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_headers.items[0].header_name #=> String
     #   resp.distribution.distribution_config.origins.items[0].custom_headers.items[0].header_value #=> String
     #   resp.distribution.distribution_config.origins.items[0].s3_origin_config.origin_access_identity #=> String
+    #   resp.distribution.distribution_config.origins.items[0].s3_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.http_port #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.https_port #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_protocol_policy #=> String, one of "http-only", "match-viewer", "https-only"
@@ -736,6 +737,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].response_completion_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
     #   resp.distribution.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution.distribution_config.origins.items[0].origin_access_control_id #=> String
@@ -963,6 +965,11 @@ module Aws::CloudFront
     #
     # * The default, minimum, and maximum time to live (TTL) values that you
     #   want objects to stay in the CloudFront cache.
+    #
+    #   If your minimum TTL is greater than 0, CloudFront will cache content
+    #   for at least the duration specified in the cache policy's minimum
+    #   TTL, even if the `Cache-Control: no-cache`, `no-store`, or `private`
+    #   directives are present in the origin headers.
     #
     # The headers, cookies, and query strings that are included in the cache
     # key are also included in requests that CloudFront sends to the origin.
@@ -1293,6 +1300,7 @@ module Aws::CloudFront
     #             },
     #             s3_origin_config: {
     #               origin_access_identity: "string", # required
+    #               origin_read_timeout: 1,
     #             },
     #             custom_origin_config: {
     #               http_port: 1, # required
@@ -1312,6 +1320,7 @@ module Aws::CloudFront
     #             },
     #             connection_attempts: 1,
     #             connection_timeout: 1,
+    #             response_completion_timeout: 1,
     #             origin_shield: {
     #               enabled: false, # required
     #               origin_shield_region: "OriginShieldRegion",
@@ -1590,6 +1599,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_headers.items[0].header_name #=> String
     #   resp.distribution.distribution_config.origins.items[0].custom_headers.items[0].header_value #=> String
     #   resp.distribution.distribution_config.origins.items[0].s3_origin_config.origin_access_identity #=> String
+    #   resp.distribution.distribution_config.origins.items[0].s3_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.http_port #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.https_port #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_protocol_policy #=> String, one of "http-only", "match-viewer", "https-only"
@@ -1603,6 +1613,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].response_completion_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
     #   resp.distribution.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution.distribution_config.origins.items[0].origin_access_control_id #=> String
@@ -1946,6 +1957,7 @@ module Aws::CloudFront
     #               },
     #               s3_origin_config: {
     #                 origin_access_identity: "string", # required
+    #                 origin_read_timeout: 1,
     #               },
     #               custom_origin_config: {
     #                 http_port: 1, # required
@@ -1965,6 +1977,7 @@ module Aws::CloudFront
     #               },
     #               connection_attempts: 1,
     #               connection_timeout: 1,
+    #               response_completion_timeout: 1,
     #               origin_shield: {
     #                 enabled: false, # required
     #                 origin_shield_region: "OriginShieldRegion",
@@ -2252,6 +2265,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_headers.items[0].header_name #=> String
     #   resp.distribution.distribution_config.origins.items[0].custom_headers.items[0].header_value #=> String
     #   resp.distribution.distribution_config.origins.items[0].s3_origin_config.origin_access_identity #=> String
+    #   resp.distribution.distribution_config.origins.items[0].s3_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.http_port #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.https_port #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_protocol_policy #=> String, one of "http-only", "match-viewer", "https-only"
@@ -2265,6 +2279,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].response_completion_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
     #   resp.distribution.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution.distribution_config.origins.items[0].origin_access_control_id #=> String
@@ -5089,6 +5104,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_headers.items[0].header_name #=> String
     #   resp.distribution.distribution_config.origins.items[0].custom_headers.items[0].header_value #=> String
     #   resp.distribution.distribution_config.origins.items[0].s3_origin_config.origin_access_identity #=> String
+    #   resp.distribution.distribution_config.origins.items[0].s3_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.http_port #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.https_port #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_protocol_policy #=> String, one of "http-only", "match-viewer", "https-only"
@@ -5102,6 +5118,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].response_completion_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
     #   resp.distribution.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution.distribution_config.origins.items[0].origin_access_control_id #=> String
@@ -5301,6 +5318,7 @@ module Aws::CloudFront
     #   resp.distribution_config.origins.items[0].custom_headers.items[0].header_name #=> String
     #   resp.distribution_config.origins.items[0].custom_headers.items[0].header_value #=> String
     #   resp.distribution_config.origins.items[0].s3_origin_config.origin_access_identity #=> String
+    #   resp.distribution_config.origins.items[0].s3_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution_config.origins.items[0].custom_origin_config.http_port #=> Integer
     #   resp.distribution_config.origins.items[0].custom_origin_config.https_port #=> Integer
     #   resp.distribution_config.origins.items[0].custom_origin_config.origin_protocol_policy #=> String, one of "http-only", "match-viewer", "https-only"
@@ -5314,6 +5332,7 @@ module Aws::CloudFront
     #   resp.distribution_config.origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_config.origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution_config.origins.items[0].response_completion_timeout #=> Integer
     #   resp.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
     #   resp.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution_config.origins.items[0].origin_access_control_id #=> String
@@ -7247,6 +7266,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_headers.items[0].header_name #=> String
     #   resp.distribution_list.items[0].origins.items[0].custom_headers.items[0].header_value #=> String
     #   resp.distribution_list.items[0].origins.items[0].s3_origin_config.origin_access_identity #=> String
+    #   resp.distribution_list.items[0].origins.items[0].s3_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.http_port #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.https_port #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_protocol_policy #=> String, one of "http-only", "match-viewer", "https-only"
@@ -7260,6 +7280,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].response_completion_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].origin_shield.enabled #=> Boolean
     #   resp.distribution_list.items[0].origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution_list.items[0].origins.items[0].origin_access_control_id #=> String
@@ -7464,6 +7485,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_headers.items[0].header_name #=> String
     #   resp.distribution_list.items[0].origins.items[0].custom_headers.items[0].header_value #=> String
     #   resp.distribution_list.items[0].origins.items[0].s3_origin_config.origin_access_identity #=> String
+    #   resp.distribution_list.items[0].origins.items[0].s3_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.http_port #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.https_port #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_protocol_policy #=> String, one of "http-only", "match-viewer", "https-only"
@@ -7477,6 +7499,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].response_completion_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].origin_shield.enabled #=> Boolean
     #   resp.distribution_list.items[0].origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution_list.items[0].origins.items[0].origin_access_control_id #=> String
@@ -7692,7 +7715,7 @@ module Aws::CloudFront
     # @option params [required, String] :connection_mode
     #   This field specifies whether the connection mode is through a standard
     #   distribution (direct) or a multi-tenant distribution with distribution
-    #   tenants(tenant-only).
+    #   tenants (tenant-only).
     #
     # @return [Types::ListDistributionsByConnectionModeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7735,6 +7758,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_headers.items[0].header_name #=> String
     #   resp.distribution_list.items[0].origins.items[0].custom_headers.items[0].header_value #=> String
     #   resp.distribution_list.items[0].origins.items[0].s3_origin_config.origin_access_identity #=> String
+    #   resp.distribution_list.items[0].origins.items[0].s3_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.http_port #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.https_port #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_protocol_policy #=> String, one of "http-only", "match-viewer", "https-only"
@@ -7748,6 +7772,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].response_completion_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].origin_shield.enabled #=> Boolean
     #   resp.distribution_list.items[0].origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution_list.items[0].origins.items[0].origin_access_control_id #=> String
@@ -8080,6 +8105,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_headers.items[0].header_name #=> String
     #   resp.distribution_list.items[0].origins.items[0].custom_headers.items[0].header_value #=> String
     #   resp.distribution_list.items[0].origins.items[0].s3_origin_config.origin_access_identity #=> String
+    #   resp.distribution_list.items[0].origins.items[0].s3_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.http_port #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.https_port #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_protocol_policy #=> String, one of "http-only", "match-viewer", "https-only"
@@ -8093,6 +8119,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].response_completion_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].origin_shield.enabled #=> Boolean
     #   resp.distribution_list.items[0].origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution_list.items[0].origins.items[0].origin_access_control_id #=> String
@@ -8427,6 +8454,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_headers.items[0].header_name #=> String
     #   resp.distribution_list.items[0].origins.items[0].custom_headers.items[0].header_value #=> String
     #   resp.distribution_list.items[0].origins.items[0].s3_origin_config.origin_access_identity #=> String
+    #   resp.distribution_list.items[0].origins.items[0].s3_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.http_port #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.https_port #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_protocol_policy #=> String, one of "http-only", "match-viewer", "https-only"
@@ -8440,6 +8468,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].response_completion_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].origin_shield.enabled #=> Boolean
     #   resp.distribution_list.items[0].origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution_list.items[0].origins.items[0].origin_access_control_id #=> String
@@ -9832,6 +9861,11 @@ module Aws::CloudFront
     #     configuration, including the fields that you modified and those
     #     that you didn't.
     #
+    # If your minimum TTL is greater than 0, CloudFront will cache content
+    # for at least the duration specified in the cache policy's minimum
+    # TTL, even if the `Cache-Control: no-cache`, `no-store`, or `private`
+    # directives are present in the origin headers.
+    #
     # @option params [required, Types::CachePolicyConfig] :cache_policy_config
     #   A cache policy configuration.
     #
@@ -10192,6 +10226,7 @@ module Aws::CloudFront
     #             },
     #             s3_origin_config: {
     #               origin_access_identity: "string", # required
+    #               origin_read_timeout: 1,
     #             },
     #             custom_origin_config: {
     #               http_port: 1, # required
@@ -10211,6 +10246,7 @@ module Aws::CloudFront
     #             },
     #             connection_attempts: 1,
     #             connection_timeout: 1,
+    #             response_completion_timeout: 1,
     #             origin_shield: {
     #               enabled: false, # required
     #               origin_shield_region: "OriginShieldRegion",
@@ -10491,6 +10527,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_headers.items[0].header_name #=> String
     #   resp.distribution.distribution_config.origins.items[0].custom_headers.items[0].header_value #=> String
     #   resp.distribution.distribution_config.origins.items[0].s3_origin_config.origin_access_identity #=> String
+    #   resp.distribution.distribution_config.origins.items[0].s3_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.http_port #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.https_port #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_protocol_policy #=> String, one of "http-only", "match-viewer", "https-only"
@@ -10504,6 +10541,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].response_completion_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
     #   resp.distribution.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution.distribution_config.origins.items[0].origin_access_control_id #=> String
@@ -10879,6 +10917,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_headers.items[0].header_name #=> String
     #   resp.distribution.distribution_config.origins.items[0].custom_headers.items[0].header_value #=> String
     #   resp.distribution.distribution_config.origins.items[0].s3_origin_config.origin_access_identity #=> String
+    #   resp.distribution.distribution_config.origins.items[0].s3_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.http_port #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.https_port #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_protocol_policy #=> String, one of "http-only", "match-viewer", "https-only"
@@ -10892,6 +10931,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].response_completion_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
     #   resp.distribution.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution.distribution_config.origins.items[0].origin_access_control_id #=> String
@@ -12244,7 +12284,7 @@ module Aws::CloudFront
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.121.0'
+      context[:gem_version] = '1.123.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

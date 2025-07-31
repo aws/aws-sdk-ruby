@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.228.0 (2025-07-31)
+------------------
+
+* Feature - Added support for Route node, S3 Iceberg sources/targets, catalog Iceberg sources, DynamoDB ELT connector, AutoDataQuality evaluation, enhanced PII detection with redaction, Kinesis fan-out support, and new R-series worker types.
+
 1.227.0 (2025-07-23)
 ------------------
 

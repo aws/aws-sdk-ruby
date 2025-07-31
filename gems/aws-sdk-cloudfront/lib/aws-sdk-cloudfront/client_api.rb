@@ -2842,6 +2842,7 @@ module Aws::CloudFront
     Origin.add_member(:vpc_origin_config, Shapes::ShapeRef.new(shape: VpcOriginConfig, location_name: "VpcOriginConfig"))
     Origin.add_member(:connection_attempts, Shapes::ShapeRef.new(shape: integer, location_name: "ConnectionAttempts"))
     Origin.add_member(:connection_timeout, Shapes::ShapeRef.new(shape: integer, location_name: "ConnectionTimeout"))
+    Origin.add_member(:response_completion_timeout, Shapes::ShapeRef.new(shape: integer, location_name: "ResponseCompletionTimeout"))
     Origin.add_member(:origin_shield, Shapes::ShapeRef.new(shape: OriginShield, location_name: "OriginShield"))
     Origin.add_member(:origin_access_control_id, Shapes::ShapeRef.new(shape: string, location_name: "OriginAccessControlId"))
     Origin.struct_class = Types::Origin
@@ -3228,6 +3229,7 @@ module Aws::CloudFront
     S3Origin.struct_class = Types::S3Origin
 
     S3OriginConfig.add_member(:origin_access_identity, Shapes::ShapeRef.new(shape: string, required: true, location_name: "OriginAccessIdentity"))
+    S3OriginConfig.add_member(:origin_read_timeout, Shapes::ShapeRef.new(shape: integer, location_name: "OriginReadTimeout"))
     S3OriginConfig.struct_class = Types::S3OriginConfig
 
     SessionStickinessConfig.add_member(:idle_ttl, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "IdleTTL"))

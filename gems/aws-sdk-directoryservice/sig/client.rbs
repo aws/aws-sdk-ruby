@@ -236,6 +236,23 @@ module Aws
                             ) -> _CreateDirectoryResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDirectoryResponseSuccess
 
+      interface _CreateHybridADResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateHybridADResult]
+        def directory_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#create_hybrid_ad-instance_method
+      def create_hybrid_ad: (
+                              secret_arn: ::String,
+                              assessment_id: ::String,
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ]
+                            ) -> _CreateHybridADResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHybridADResponseSuccess
+
       interface _CreateLogSubscriptionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateLogSubscriptionResult]
       end
@@ -296,6 +313,16 @@ module Aws
                           ?selective_auth: ("Enabled" | "Disabled")
                         ) -> _CreateTrustResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrustResponseSuccess
+
+      interface _DeleteADAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteADAssessmentResult]
+        def assessment_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#delete_ad_assessment-instance_method
+      def delete_ad_assessment: (
+                                  assessment_id: ::String
+                                ) -> _DeleteADAssessmentResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteADAssessmentResponseSuccess
 
       interface _DeleteConditionalForwarderResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConditionalForwarderResult]
@@ -366,6 +393,17 @@ module Aws
                                     topic_name: ::String
                                   ) -> _DeregisterEventTopicResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterEventTopicResponseSuccess
+
+      interface _DescribeADAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeADAssessmentResult]
+        def assessment: () -> Types::Assessment
+        def assessment_reports: () -> ::Array[Types::AssessmentReport]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#describe_ad_assessment-instance_method
+      def describe_ad_assessment: (
+                                    assessment_id: ::String
+                                  ) -> _DescribeADAssessmentResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeADAssessmentResponseSuccess
 
       interface _DescribeCertificateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCertificateResult]
@@ -450,6 +488,19 @@ module Aws
                                    ?topic_names: Array[::String]
                                  ) -> _DescribeEventTopicsResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventTopicsResponseSuccess
+
+      interface _DescribeHybridADUpdateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeHybridADUpdateResult]
+        def update_activities: () -> Types::HybridUpdateActivities
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#describe_hybrid_ad_update-instance_method
+      def describe_hybrid_ad_update: (
+                                       directory_id: ::String,
+                                       ?update_type: ("SelfManagedInstances" | "HybridAdministratorAccount"),
+                                       ?next_token: ::String
+                                     ) -> _DescribeHybridADUpdateResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeHybridADUpdateResponseSuccess
 
       interface _DescribeLDAPSSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLDAPSSettingsResult]
@@ -675,6 +726,19 @@ module Aws
                                ) -> _GetSnapshotLimitsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSnapshotLimitsResponseSuccess
 
+      interface _ListADAssessmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListADAssessmentsResult]
+        def assessments: () -> ::Array[Types::AssessmentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#list_ad_assessments-instance_method
+      def list_ad_assessments: (
+                                 ?directory_id: ::String,
+                                 ?next_token: ::String,
+                                 ?limit: ::Integer
+                               ) -> _ListADAssessmentsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListADAssessmentsResponseSuccess
+
       interface _ListCertificatesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCertificatesResult]
         def next_token: () -> ::String
@@ -840,6 +904,26 @@ module Aws
                            ) -> _ShareDirectoryResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ShareDirectoryResponseSuccess
 
+      interface _StartADAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartADAssessmentResult]
+        def assessment_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#start_ad_assessment-instance_method
+      def start_ad_assessment: (
+                                 ?assessment_configuration: {
+                                   customer_dns_ips: Array[::String],
+                                   dns_name: ::String,
+                                   vpc_settings: {
+                                     vpc_id: ::String,
+                                     subnet_ids: Array[::String]
+                                   },
+                                   instance_ids: Array[::String],
+                                   security_group_ids: Array[::String]?
+                                 },
+                                 ?directory_id: ::String
+                               ) -> _StartADAssessmentResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartADAssessmentResponseSuccess
+
       interface _StartSchemaExtensionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartSchemaExtensionResult]
         def schema_extension_id: () -> ::String
@@ -891,6 +975,24 @@ module Aws
                                     ?create_snapshot_before_update: bool
                                   ) -> _UpdateDirectorySetupResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDirectorySetupResponseSuccess
+
+      interface _UpdateHybridADResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateHybridADResult]
+        def directory_id: () -> ::String
+        def assessment_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#update_hybrid_ad-instance_method
+      def update_hybrid_ad: (
+                              directory_id: ::String,
+                              ?hybrid_administrator_account_update: {
+                                secret_arn: ::String
+                              },
+                              ?self_managed_instances_settings: {
+                                customer_dns_ips: Array[::String],
+                                instance_ids: Array[::String]
+                              }
+                            ) -> _UpdateHybridADResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHybridADResponseSuccess
 
       interface _UpdateNumberOfDomainControllersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNumberOfDomainControllersResult]
@@ -958,6 +1060,14 @@ module Aws
                           trust_id: ::String
                         ) -> _VerifyTrustResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VerifyTrustResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#wait_until-instance_method
+      def wait_until: (:hybrid_ad_updated waiter_name, 
+                    directory_id: ::String,
+                    ?update_type: ("SelfManagedInstances" | "HybridAdministratorAccount"),
+                    ?next_token: ::String
+                  ) -> Client::_DescribeHybridADUpdateResponseSuccess
+                    | (:hybrid_ad_updated waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeHybridADUpdateResponseSuccess
     end
   end
 end

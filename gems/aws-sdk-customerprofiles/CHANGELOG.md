@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2025-07-31)
+------------------
+
+* Feature - The release updates standard profile with 2 new fields that supports account-level engagement. Updated APIs include CreateProfile, UpdateProfile, MergeProfiles, SearchProfiles, BatchGetProfile, GetSegmentMembership, CreateSegmentDefinition, CreateSegmentEstimate.
+
 1.67.0 (2025-07-21)
 ------------------
 

@@ -4373,6 +4373,30 @@ module Aws::IoTWireless
     #   The MinGwDiversity value.
     #   @return [Integer]
     #
+    # @!attribute [rw] tx_power_index_min
+    #   The Transmit Power Index minimum value.
+    #
+    #   Default: `0`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tx_power_index_max
+    #   The Transmit Power Index maximum value.
+    #
+    #   Default: `15`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] nb_trans_min
+    #   The minimum number of transmissions.
+    #
+    #   Default: `0`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] nb_trans_max
+    #   The maximum number of transmissions.
+    #
+    #   Default: `3`
+    #   @return [Integer]
+    #
     class LoRaWANGetServiceProfileInfo < Struct.new(
       :ul_rate,
       :ul_bucket_size,
@@ -4392,7 +4416,11 @@ module Aws::IoTWireless
       :ra_allowed,
       :nwk_geo_loc,
       :target_per,
-      :min_gw_diversity)
+      :min_gw_diversity,
+      :tx_power_index_min,
+      :tx_power_index_max,
+      :nb_trans_min,
+      :nb_trans_max)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4628,12 +4656,40 @@ module Aws::IoTWireless
     #   allowed.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tx_power_index_min
+    #   The Transmit Power Index minimum.
+    #
+    #   Default: `0`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tx_power_index_max
+    #   The Transmit Power Index maximum.
+    #
+    #   Default: `15`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] nb_trans_min
+    #   The minimum number of transmissions.
+    #
+    #   Default: `0`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] nb_trans_max
+    #   The maximum number of transmissions.
+    #
+    #   Default: `3`
+    #   @return [Integer]
+    #
     class LoRaWANServiceProfile < Struct.new(
       :add_gw_metadata,
       :dr_min,
       :dr_max,
       :pr_allowed,
-      :ra_allowed)
+      :ra_allowed,
+      :tx_power_index_min,
+      :tx_power_index_max,
+      :nb_trans_min,
+      :nb_trans_max)
       SENSITIVE = []
       include Aws::Structure
     end

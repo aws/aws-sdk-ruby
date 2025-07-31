@@ -155,6 +155,8 @@ module Aws::LocationService
     GeoArn = Shapes::StringShape.new(name: 'GeoArn')
     GeoArnV2 = Shapes::StringShape.new(name: 'GeoArnV2')
     GeofenceGeometry = Shapes::StructureShape.new(name: 'GeofenceGeometry')
+    GeofenceGeometryMultiPolygonList = Shapes::ListShape.new(name: 'GeofenceGeometryMultiPolygonList')
+    GeofenceGeometryPolygonList = Shapes::ListShape.new(name: 'GeofenceGeometryPolygonList')
     GetDevicePositionHistoryRequest = Shapes::StructureShape.new(name: 'GetDevicePositionHistoryRequest')
     GetDevicePositionHistoryRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'GetDevicePositionHistoryRequestMaxResultsInteger')
     GetDevicePositionHistoryResponse = Shapes::StructureShape.new(name: 'GetDevicePositionHistoryResponse')
@@ -307,6 +309,7 @@ module Aws::LocationService
     SearchPlaceIndexForTextRequestTextString = Shapes::StringShape.new(name: 'SearchPlaceIndexForTextRequestTextString')
     SearchPlaceIndexForTextResponse = Shapes::StructureShape.new(name: 'SearchPlaceIndexForTextResponse')
     SearchPlaceIndexForTextSummary = Shapes::StructureShape.new(name: 'SearchPlaceIndexForTextSummary')
+    SensitiveDouble = Shapes::FloatShape.new(name: 'SensitiveDouble')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SpeedUnit = Shapes::StringShape.new(name: 'SpeedUnit')
@@ -576,7 +579,7 @@ module Aws::LocationService
     CellSignalsLteCellDetailsList.member = Shapes::ShapeRef.new(shape: LteCellDetails)
 
     Circle.add_member(:center, Shapes::ShapeRef.new(shape: Position, required: true, location_name: "Center"))
-    Circle.add_member(:radius, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "Radius"))
+    Circle.add_member(:radius, Shapes::ShapeRef.new(shape: SensitiveDouble, required: true, location_name: "Radius"))
     Circle.struct_class = Types::Circle
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -851,10 +854,15 @@ module Aws::LocationService
 
     ForecastedEventsList.member = Shapes::ShapeRef.new(shape: ForecastedEvent)
 
-    GeofenceGeometry.add_member(:polygon, Shapes::ShapeRef.new(shape: LinearRings, location_name: "Polygon"))
+    GeofenceGeometry.add_member(:polygon, Shapes::ShapeRef.new(shape: GeofenceGeometryPolygonList, location_name: "Polygon"))
     GeofenceGeometry.add_member(:circle, Shapes::ShapeRef.new(shape: Circle, location_name: "Circle"))
     GeofenceGeometry.add_member(:geobuf, Shapes::ShapeRef.new(shape: Base64EncodedGeobuf, location_name: "Geobuf"))
+    GeofenceGeometry.add_member(:multi_polygon, Shapes::ShapeRef.new(shape: GeofenceGeometryMultiPolygonList, location_name: "MultiPolygon"))
     GeofenceGeometry.struct_class = Types::GeofenceGeometry
+
+    GeofenceGeometryMultiPolygonList.member = Shapes::ShapeRef.new(shape: LinearRings)
+
+    GeofenceGeometryPolygonList.member = Shapes::ShapeRef.new(shape: LinearRing)
 
     GetDevicePositionHistoryRequest.add_member(:tracker_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "TrackerName"))
     GetDevicePositionHistoryRequest.add_member(:device_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "DeviceId"))

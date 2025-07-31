@@ -1070,6 +1070,7 @@ module Aws::QuickSight
     ImageSetConfiguration = Shapes::StructureShape.new(name: 'ImageSetConfiguration')
     ImageSource = Shapes::UnionShape.new(name: 'ImageSource')
     ImageStaticFile = Shapes::StructureShape.new(name: 'ImageStaticFile')
+    ImpalaParameters = Shapes::StructureShape.new(name: 'ImpalaParameters')
     IncludeFolderMembers = Shapes::StringShape.new(name: 'IncludeFolderMembers')
     IncludeGeneratedAnswer = Shapes::StringShape.new(name: 'IncludeGeneratedAnswer')
     IncludeQuickSightQIndex = Shapes::StringShape.new(name: 'IncludeQuickSightQIndex')
@@ -4156,6 +4157,7 @@ module Aws::QuickSight
     DataSourceParameters.add_member(:starburst_parameters, Shapes::ShapeRef.new(shape: StarburstParameters, location_name: "StarburstParameters"))
     DataSourceParameters.add_member(:trino_parameters, Shapes::ShapeRef.new(shape: TrinoParameters, location_name: "TrinoParameters"))
     DataSourceParameters.add_member(:big_query_parameters, Shapes::ShapeRef.new(shape: BigQueryParameters, location_name: "BigQueryParameters"))
+    DataSourceParameters.add_member(:impala_parameters, Shapes::ShapeRef.new(shape: ImpalaParameters, location_name: "ImpalaParameters"))
     DataSourceParameters.struct_class = Types::DataSourceParameters
 
     DataSourceParametersList.member = Shapes::ShapeRef.new(shape: DataSourceParameters)
@@ -6295,6 +6297,12 @@ module Aws::QuickSight
     ImageStaticFile.add_member(:static_file_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "StaticFileId"))
     ImageStaticFile.add_member(:source, Shapes::ShapeRef.new(shape: StaticFileSource, location_name: "Source"))
     ImageStaticFile.struct_class = Types::ImageStaticFile
+
+    ImpalaParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
+    ImpalaParameters.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
+    ImpalaParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, location_name: "Database"))
+    ImpalaParameters.add_member(:sql_endpoint_path, Shapes::ShapeRef.new(shape: SqlEndpointPath, required: true, location_name: "SqlEndpointPath"))
+    ImpalaParameters.struct_class = Types::ImpalaParameters
 
     IncrementalRefresh.add_member(:lookback_window, Shapes::ShapeRef.new(shape: LookbackWindow, required: true, location_name: "LookbackWindow"))
     IncrementalRefresh.struct_class = Types::IncrementalRefresh

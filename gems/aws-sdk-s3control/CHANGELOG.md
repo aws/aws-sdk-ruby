@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2025-07-31)
+------------------
+
+* Feature - Add Tags field to CreateAccessPoint
+
 1.113.0 (2025-07-21)
 ------------------
 

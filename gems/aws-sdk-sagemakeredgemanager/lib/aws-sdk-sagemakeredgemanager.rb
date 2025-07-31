@@ -54,7 +54,7 @@ module Aws::SagemakerEdgeManager
   autoload :EndpointProvider, 'aws-sdk-sagemakeredgemanager/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-sagemakeredgemanager/endpoints'
 
-  GEM_VERSION = '1.45.0'
+  GEM_VERSION = '1.46.0'
 
 end
 

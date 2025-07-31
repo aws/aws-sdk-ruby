@@ -14,50 +14,62 @@ module Aws::WorkSpacesWeb
     end
 
     class AssociateBrowserSettingsRequest
-      attr_accessor browser_settings_arn: ::String
       attr_accessor portal_arn: ::String
+      attr_accessor browser_settings_arn: ::String
       SENSITIVE: []
     end
 
     class AssociateBrowserSettingsResponse
-      attr_accessor browser_settings_arn: ::String
       attr_accessor portal_arn: ::String
+      attr_accessor browser_settings_arn: ::String
       SENSITIVE: []
     end
 
     class AssociateDataProtectionSettingsRequest
-      attr_accessor data_protection_settings_arn: ::String
       attr_accessor portal_arn: ::String
+      attr_accessor data_protection_settings_arn: ::String
       SENSITIVE: []
     end
 
     class AssociateDataProtectionSettingsResponse
-      attr_accessor data_protection_settings_arn: ::String
       attr_accessor portal_arn: ::String
+      attr_accessor data_protection_settings_arn: ::String
       SENSITIVE: []
     end
 
     class AssociateIpAccessSettingsRequest
-      attr_accessor ip_access_settings_arn: ::String
       attr_accessor portal_arn: ::String
+      attr_accessor ip_access_settings_arn: ::String
       SENSITIVE: []
     end
 
     class AssociateIpAccessSettingsResponse
-      attr_accessor ip_access_settings_arn: ::String
       attr_accessor portal_arn: ::String
+      attr_accessor ip_access_settings_arn: ::String
       SENSITIVE: []
     end
 
     class AssociateNetworkSettingsRequest
-      attr_accessor network_settings_arn: ::String
       attr_accessor portal_arn: ::String
+      attr_accessor network_settings_arn: ::String
       SENSITIVE: []
     end
 
     class AssociateNetworkSettingsResponse
-      attr_accessor network_settings_arn: ::String
       attr_accessor portal_arn: ::String
+      attr_accessor network_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateSessionLoggerRequest
+      attr_accessor portal_arn: ::String
+      attr_accessor session_logger_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateSessionLoggerResponse
+      attr_accessor portal_arn: ::String
+      attr_accessor session_logger_arn: ::String
       SENSITIVE: []
     end
 
@@ -98,11 +110,11 @@ module Aws::WorkSpacesWeb
     end
 
     class BrowserSettings
-      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
+      attr_accessor browser_settings_arn: ::String
       attr_accessor associated_portal_arns: ::Array[::String]
       attr_accessor browser_policy: ::String
-      attr_accessor browser_settings_arn: ::String
       attr_accessor customer_managed_key: ::String
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
       SENSITIVE: [:browser_policy]
     end
 
@@ -112,21 +124,21 @@ module Aws::WorkSpacesWeb
     end
 
     class Certificate
-      attr_accessor body: ::String
-      attr_accessor issuer: ::String
-      attr_accessor not_valid_after: ::Time
-      attr_accessor not_valid_before: ::Time
-      attr_accessor subject: ::String
       attr_accessor thumbprint: ::String
+      attr_accessor subject: ::String
+      attr_accessor issuer: ::String
+      attr_accessor not_valid_before: ::Time
+      attr_accessor not_valid_after: ::Time
+      attr_accessor body: ::String
       SENSITIVE: []
     end
 
     class CertificateSummary
-      attr_accessor issuer: ::String
-      attr_accessor not_valid_after: ::Time
-      attr_accessor not_valid_before: ::Time
-      attr_accessor subject: ::String
       attr_accessor thumbprint: ::String
+      attr_accessor subject: ::String
+      attr_accessor issuer: ::String
+      attr_accessor not_valid_before: ::Time
+      attr_accessor not_valid_after: ::Time
       SENSITIVE: []
     end
 
@@ -151,11 +163,11 @@ module Aws::WorkSpacesWeb
     end
 
     class CreateBrowserSettingsRequest
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor customer_managed_key: ::String
       attr_accessor additional_encryption_context: ::Hash[::String, ::String]
       attr_accessor browser_policy: ::String
       attr_accessor client_token: ::String
-      attr_accessor customer_managed_key: ::String
-      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: [:browser_policy]
     end
 
@@ -165,14 +177,14 @@ module Aws::WorkSpacesWeb
     end
 
     class CreateDataProtectionSettingsRequest
-      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
-      attr_accessor client_token: ::String
-      attr_accessor customer_managed_key: ::String
-      attr_accessor description: ::String
       attr_accessor display_name: ::String
-      attr_accessor inline_redaction_configuration: Types::InlineRedactionConfiguration
+      attr_accessor description: ::String
       attr_accessor tags: ::Array[Types::Tag]
-      SENSITIVE: [:description, :display_name]
+      attr_accessor customer_managed_key: ::String
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
+      attr_accessor inline_redaction_configuration: Types::InlineRedactionConfiguration
+      attr_accessor client_token: ::String
+      SENSITIVE: [:display_name, :description]
     end
 
     class CreateDataProtectionSettingsResponse
@@ -181,13 +193,13 @@ module Aws::WorkSpacesWeb
     end
 
     class CreateIdentityProviderRequest
-      attr_accessor client_token: ::String
-      attr_accessor identity_provider_details: ::Hash[::String, ::String]
+      attr_accessor portal_arn: ::String
       attr_accessor identity_provider_name: ::String
       attr_accessor identity_provider_type: ("SAML" | "Facebook" | "Google" | "LoginWithAmazon" | "SignInWithApple" | "OIDC")
-      attr_accessor portal_arn: ::String
+      attr_accessor identity_provider_details: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
       attr_accessor tags: ::Array[Types::Tag]
-      SENSITIVE: [:identity_provider_details, :identity_provider_name]
+      SENSITIVE: [:identity_provider_name, :identity_provider_details]
     end
 
     class CreateIdentityProviderResponse
@@ -196,14 +208,14 @@ module Aws::WorkSpacesWeb
     end
 
     class CreateIpAccessSettingsRequest
-      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
-      attr_accessor client_token: ::String
-      attr_accessor customer_managed_key: ::String
-      attr_accessor description: ::String
       attr_accessor display_name: ::String
-      attr_accessor ip_rules: ::Array[Types::IpRule]
+      attr_accessor description: ::String
       attr_accessor tags: ::Array[Types::Tag]
-      SENSITIVE: [:description, :display_name, :ip_rules]
+      attr_accessor customer_managed_key: ::String
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
+      attr_accessor ip_rules: ::Array[Types::IpRule]
+      attr_accessor client_token: ::String
+      SENSITIVE: [:display_name, :description, :ip_rules]
     end
 
     class CreateIpAccessSettingsResponse
@@ -212,11 +224,11 @@ module Aws::WorkSpacesWeb
     end
 
     class CreateNetworkSettingsRequest
-      attr_accessor client_token: ::String
-      attr_accessor security_group_ids: ::Array[::String]
-      attr_accessor subnet_ids: ::Array[::String]
-      attr_accessor tags: ::Array[Types::Tag]
       attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -226,14 +238,14 @@ module Aws::WorkSpacesWeb
     end
 
     class CreatePortalRequest
-      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
-      attr_accessor authentication_type: ("Standard" | "IAM_Identity_Center")
-      attr_accessor client_token: ::String
-      attr_accessor customer_managed_key: ::String
       attr_accessor display_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor customer_managed_key: ::String
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      attr_accessor authentication_type: ("Standard" | "IAM_Identity_Center")
       attr_accessor instance_type: ("standard.regular" | "standard.large" | "standard.xlarge")
       attr_accessor max_concurrent_sessions: ::Integer
-      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: [:display_name]
     end
 
@@ -243,10 +255,26 @@ module Aws::WorkSpacesWeb
       SENSITIVE: []
     end
 
+    class CreateSessionLoggerRequest
+      attr_accessor event_filter: Types::EventFilter
+      attr_accessor log_configuration: Types::LogConfiguration
+      attr_accessor display_name: ::String
+      attr_accessor customer_managed_key: ::String
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: [:display_name]
+    end
+
+    class CreateSessionLoggerResponse
+      attr_accessor session_logger_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateTrustStoreRequest
       attr_accessor certificate_list: ::Array[::String]
-      attr_accessor client_token: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -256,9 +284,9 @@ module Aws::WorkSpacesWeb
     end
 
     class CreateUserAccessLoggingSettingsRequest
-      attr_accessor client_token: ::String
       attr_accessor kinesis_stream_arn: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -268,20 +296,20 @@ module Aws::WorkSpacesWeb
     end
 
     class CreateUserSettingsRequest
-      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
-      attr_accessor client_token: ::String
-      attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration
       attr_accessor copy_allowed: ("Disabled" | "Enabled")
-      attr_accessor customer_managed_key: ::String
-      attr_accessor deep_link_allowed: ("Disabled" | "Enabled")
-      attr_accessor disconnect_timeout_in_minutes: ::Integer
-      attr_accessor download_allowed: ("Disabled" | "Enabled")
-      attr_accessor idle_disconnect_timeout_in_minutes: ::Integer
       attr_accessor paste_allowed: ("Disabled" | "Enabled")
+      attr_accessor download_allowed: ("Disabled" | "Enabled")
+      attr_accessor upload_allowed: ("Disabled" | "Enabled")
       attr_accessor print_allowed: ("Disabled" | "Enabled")
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor disconnect_timeout_in_minutes: ::Integer
+      attr_accessor idle_disconnect_timeout_in_minutes: ::Integer
+      attr_accessor client_token: ::String
+      attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration
+      attr_accessor customer_managed_key: ::String
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
+      attr_accessor deep_link_allowed: ("Disabled" | "Enabled")
       attr_accessor toolbar_configuration: Types::ToolbarConfiguration
-      attr_accessor upload_allowed: ("Disabled" | "Enabled")
       SENSITIVE: [:cookie_synchronization_configuration]
     end
 
@@ -291,31 +319,31 @@ module Aws::WorkSpacesWeb
     end
 
     class CustomPattern
-      attr_accessor keyword_regex: ::String
-      attr_accessor pattern_description: ::String
       attr_accessor pattern_name: ::String
       attr_accessor pattern_regex: ::String
-      SENSITIVE: [:keyword_regex, :pattern_description, :pattern_name, :pattern_regex]
+      attr_accessor pattern_description: ::String
+      attr_accessor keyword_regex: ::String
+      SENSITIVE: [:pattern_name, :pattern_regex, :pattern_description, :keyword_regex]
     end
 
     class DataProtectionSettings
-      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
+      attr_accessor data_protection_settings_arn: ::String
+      attr_accessor inline_redaction_configuration: Types::InlineRedactionConfiguration
       attr_accessor associated_portal_arns: ::Array[::String]
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
       attr_accessor creation_date: ::Time
       attr_accessor customer_managed_key: ::String
-      attr_accessor data_protection_settings_arn: ::String
-      attr_accessor description: ::String
-      attr_accessor display_name: ::String
-      attr_accessor inline_redaction_configuration: Types::InlineRedactionConfiguration
-      SENSITIVE: [:description, :display_name]
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
+      SENSITIVE: [:display_name, :description]
     end
 
     class DataProtectionSettingsSummary
-      attr_accessor creation_date: ::Time
       attr_accessor data_protection_settings_arn: ::String
-      attr_accessor description: ::String
       attr_accessor display_name: ::String
-      SENSITIVE: [:description, :display_name]
+      attr_accessor description: ::String
+      attr_accessor creation_date: ::Time
+      SENSITIVE: [:display_name, :description]
     end
 
     class DeleteBrowserSettingsRequest
@@ -364,6 +392,14 @@ module Aws::WorkSpacesWeb
     end
 
     class DeletePortalResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSessionLoggerRequest
+      attr_accessor session_logger_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSessionLoggerResponse < Aws::EmptyStructure
     end
 
     class DeleteTrustStoreRequest
@@ -422,6 +458,14 @@ module Aws::WorkSpacesWeb
     class DisassociateNetworkSettingsResponse < Aws::EmptyStructure
     end
 
+    class DisassociateSessionLoggerRequest
+      attr_accessor portal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateSessionLoggerResponse < Aws::EmptyStructure
+    end
+
     class DisassociateTrustStoreRequest
       attr_accessor portal_arn: ::String
       SENSITIVE: []
@@ -444,6 +488,20 @@ module Aws::WorkSpacesWeb
     end
 
     class DisassociateUserSettingsResponse < Aws::EmptyStructure
+    end
+
+    class EventFilter
+      attr_accessor all: Types::Unit
+      attr_accessor include: ::Array[("WebsiteInteract" | "FileDownloadFromSecureBrowserToRemoteDisk" | "FileTransferFromRemoteToLocalDisk" | "FileTransferFromLocalToRemoteDisk" | "FileUploadFromRemoteDiskToSecureBrowser" | "ContentPasteToWebsite" | "ContentTransferFromLocalToRemoteClipboard" | "ContentCopyFromWebsite" | "UrlLoad" | "TabOpen" | "TabClose" | "PrintJobSubmit" | "SessionConnect" | "SessionStart" | "SessionDisconnect" | "SessionEnd")]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class All < EventFilter
+      end
+      class Include < EventFilter
+      end
+      class Unknown < EventFilter
+      end
     end
 
     class ExpireSessionRequest
@@ -526,6 +584,16 @@ module Aws::WorkSpacesWeb
       SENSITIVE: []
     end
 
+    class GetSessionLoggerRequest
+      attr_accessor session_logger_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetSessionLoggerResponse
+      attr_accessor session_logger: Types::SessionLogger
+      SENSITIVE: []
+    end
+
     class GetSessionRequest
       attr_accessor portal_id: ::String
       attr_accessor session_id: ::String
@@ -538,14 +606,14 @@ module Aws::WorkSpacesWeb
     end
 
     class GetTrustStoreCertificateRequest
-      attr_accessor thumbprint: ::String
       attr_accessor trust_store_arn: ::String
+      attr_accessor thumbprint: ::String
       SENSITIVE: []
     end
 
     class GetTrustStoreCertificateResponse
-      attr_accessor certificate: Types::Certificate
       attr_accessor trust_store_arn: ::String
+      attr_accessor certificate: Types::Certificate
       SENSITIVE: []
     end
 
@@ -581,10 +649,10 @@ module Aws::WorkSpacesWeb
 
     class IdentityProvider
       attr_accessor identity_provider_arn: ::String
-      attr_accessor identity_provider_details: ::Hash[::String, ::String]
       attr_accessor identity_provider_name: ::String
       attr_accessor identity_provider_type: ("SAML" | "Facebook" | "Google" | "LoginWithAmazon" | "SignInWithApple" | "OIDC")
-      SENSITIVE: [:identity_provider_details, :identity_provider_name]
+      attr_accessor identity_provider_details: ::Hash[::String, ::String]
+      SENSITIVE: [:identity_provider_name, :identity_provider_details]
     end
 
     class IdentityProviderSummary
@@ -595,20 +663,20 @@ module Aws::WorkSpacesWeb
     end
 
     class InlineRedactionConfiguration
-      attr_accessor global_confidence_level: ::Integer
+      attr_accessor inline_redaction_patterns: ::Array[Types::InlineRedactionPattern]
       attr_accessor global_enforced_urls: ::Array[::String]
       attr_accessor global_exempt_urls: ::Array[::String]
-      attr_accessor inline_redaction_patterns: ::Array[Types::InlineRedactionPattern]
+      attr_accessor global_confidence_level: ::Integer
       SENSITIVE: []
     end
 
     class InlineRedactionPattern
       attr_accessor built_in_pattern_id: ::String
-      attr_accessor confidence_level: ::Integer
       attr_accessor custom_pattern: Types::CustomPattern
+      attr_accessor redaction_place_holder: Types::RedactionPlaceHolder
       attr_accessor enforced_urls: ::Array[::String]
       attr_accessor exempt_urls: ::Array[::String]
-      attr_accessor redaction_place_holder: Types::RedactionPlaceHolder
+      attr_accessor confidence_level: ::Integer
       SENSITIVE: [:built_in_pattern_id]
     end
 
@@ -619,34 +687,34 @@ module Aws::WorkSpacesWeb
     end
 
     class IpAccessSettings
-      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
+      attr_accessor ip_access_settings_arn: ::String
       attr_accessor associated_portal_arns: ::Array[::String]
+      attr_accessor ip_rules: ::Array[Types::IpRule]
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
       attr_accessor creation_date: ::Time
       attr_accessor customer_managed_key: ::String
-      attr_accessor description: ::String
-      attr_accessor display_name: ::String
-      attr_accessor ip_access_settings_arn: ::String
-      attr_accessor ip_rules: ::Array[Types::IpRule]
-      SENSITIVE: [:description, :display_name, :ip_rules]
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
+      SENSITIVE: [:ip_rules, :display_name, :description]
     end
 
     class IpAccessSettingsSummary
-      attr_accessor creation_date: ::Time
-      attr_accessor description: ::String
-      attr_accessor display_name: ::String
       attr_accessor ip_access_settings_arn: ::String
-      SENSITIVE: [:description, :display_name]
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor creation_date: ::Time
+      SENSITIVE: [:display_name, :description]
     end
 
     class IpRule
-      attr_accessor description: ::String
       attr_accessor ip_range: ::String
-      SENSITIVE: [:description, :ip_range]
+      attr_accessor description: ::String
+      SENSITIVE: [:ip_range, :description]
     end
 
     class ListBrowserSettingsRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -657,8 +725,8 @@ module Aws::WorkSpacesWeb
     end
 
     class ListDataProtectionSettingsRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -669,21 +737,21 @@ module Aws::WorkSpacesWeb
     end
 
     class ListIdentityProvidersRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       attr_accessor portal_arn: ::String
       SENSITIVE: []
     end
 
     class ListIdentityProvidersResponse
-      attr_accessor identity_providers: ::Array[Types::IdentityProviderSummary]
       attr_accessor next_token: ::String
+      attr_accessor identity_providers: ::Array[Types::IdentityProviderSummary]
       SENSITIVE: []
     end
 
     class ListIpAccessSettingsRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -694,8 +762,8 @@ module Aws::WorkSpacesWeb
     end
 
     class ListNetworkSettingsRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -706,31 +774,43 @@ module Aws::WorkSpacesWeb
     end
 
     class ListPortalsRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListPortalsResponse
-      attr_accessor next_token: ::String
       attr_accessor portals: ::Array[Types::PortalSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSessionLoggersRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSessionLoggersResponse
+      attr_accessor session_loggers: ::Array[Types::SessionLoggerSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListSessionsRequest
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       attr_accessor portal_id: ::String
+      attr_accessor username: ::String
       attr_accessor session_id: ::String
       attr_accessor sort_by: ("StartTimeAscending" | "StartTimeDescending")
       attr_accessor status: ("Active" | "Terminated")
-      attr_accessor username: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
       SENSITIVE: [:username]
     end
 
     class ListSessionsResponse
-      attr_accessor next_token: ::String
       attr_accessor sessions: ::Array[Types::SessionSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -745,61 +825,66 @@ module Aws::WorkSpacesWeb
     end
 
     class ListTrustStoreCertificatesRequest
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       attr_accessor trust_store_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListTrustStoreCertificatesResponse
       attr_accessor certificate_list: ::Array[Types::CertificateSummary]
-      attr_accessor next_token: ::String
       attr_accessor trust_store_arn: ::String
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListTrustStoresRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListTrustStoresResponse
-      attr_accessor next_token: ::String
       attr_accessor trust_stores: ::Array[Types::TrustStoreSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListUserAccessLoggingSettingsRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListUserAccessLoggingSettingsResponse
-      attr_accessor next_token: ::String
       attr_accessor user_access_logging_settings: ::Array[Types::UserAccessLoggingSettingsSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListUserSettingsRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListUserSettingsResponse
-      attr_accessor next_token: ::String
       attr_accessor user_settings: ::Array[Types::UserSettingsSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LogConfiguration
+      attr_accessor s3: Types::S3LogConfiguration
       SENSITIVE: []
     end
 
     class NetworkSettings
-      attr_accessor associated_portal_arns: ::Array[::String]
       attr_accessor network_settings_arn: ::String
-      attr_accessor security_group_ids: ::Array[::String]
-      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor associated_portal_arns: ::Array[::String]
       attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -810,53 +895,55 @@ module Aws::WorkSpacesWeb
     end
 
     class Portal
-      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
-      attr_accessor authentication_type: ("Standard" | "IAM_Identity_Center")
-      attr_accessor browser_settings_arn: ::String
-      attr_accessor browser_type: ("Chrome")
-      attr_accessor creation_date: ::Time
-      attr_accessor customer_managed_key: ::String
-      attr_accessor data_protection_settings_arn: ::String
-      attr_accessor display_name: ::String
-      attr_accessor instance_type: ("standard.regular" | "standard.large" | "standard.xlarge")
-      attr_accessor ip_access_settings_arn: ::String
-      attr_accessor max_concurrent_sessions: ::Integer
-      attr_accessor network_settings_arn: ::String
       attr_accessor portal_arn: ::String
-      attr_accessor portal_endpoint: ::String
-      attr_accessor portal_status: ("Incomplete" | "Pending" | "Active")
       attr_accessor renderer_type: ("AppStream")
-      attr_accessor status_reason: ::String
-      attr_accessor trust_store_arn: ::String
-      attr_accessor user_access_logging_settings_arn: ::String
+      attr_accessor browser_type: ("Chrome")
+      attr_accessor portal_status: ("Incomplete" | "Pending" | "Active")
+      attr_accessor portal_endpoint: ::String
+      attr_accessor display_name: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor browser_settings_arn: ::String
+      attr_accessor data_protection_settings_arn: ::String
       attr_accessor user_settings_arn: ::String
+      attr_accessor network_settings_arn: ::String
+      attr_accessor session_logger_arn: ::String
+      attr_accessor trust_store_arn: ::String
+      attr_accessor status_reason: ::String
+      attr_accessor user_access_logging_settings_arn: ::String
+      attr_accessor authentication_type: ("Standard" | "IAM_Identity_Center")
+      attr_accessor ip_access_settings_arn: ::String
+      attr_accessor customer_managed_key: ::String
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
+      attr_accessor instance_type: ("standard.regular" | "standard.large" | "standard.xlarge")
+      attr_accessor max_concurrent_sessions: ::Integer
       SENSITIVE: [:display_name]
     end
 
     class PortalSummary
-      attr_accessor authentication_type: ("Standard" | "IAM_Identity_Center")
-      attr_accessor browser_settings_arn: ::String
-      attr_accessor browser_type: ("Chrome")
-      attr_accessor creation_date: ::Time
-      attr_accessor data_protection_settings_arn: ::String
-      attr_accessor display_name: ::String
-      attr_accessor instance_type: ("standard.regular" | "standard.large" | "standard.xlarge")
-      attr_accessor ip_access_settings_arn: ::String
-      attr_accessor max_concurrent_sessions: ::Integer
-      attr_accessor network_settings_arn: ::String
       attr_accessor portal_arn: ::String
-      attr_accessor portal_endpoint: ::String
-      attr_accessor portal_status: ("Incomplete" | "Pending" | "Active")
       attr_accessor renderer_type: ("AppStream")
+      attr_accessor browser_type: ("Chrome")
+      attr_accessor portal_status: ("Incomplete" | "Pending" | "Active")
+      attr_accessor portal_endpoint: ::String
+      attr_accessor display_name: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor browser_settings_arn: ::String
+      attr_accessor data_protection_settings_arn: ::String
+      attr_accessor user_settings_arn: ::String
+      attr_accessor network_settings_arn: ::String
+      attr_accessor session_logger_arn: ::String
       attr_accessor trust_store_arn: ::String
       attr_accessor user_access_logging_settings_arn: ::String
-      attr_accessor user_settings_arn: ::String
+      attr_accessor authentication_type: ("Standard" | "IAM_Identity_Center")
+      attr_accessor ip_access_settings_arn: ::String
+      attr_accessor instance_type: ("standard.regular" | "standard.large" | "standard.xlarge")
+      attr_accessor max_concurrent_sessions: ::Integer
       SENSITIVE: [:display_name]
     end
 
     class RedactionPlaceHolder
-      attr_accessor redaction_place_holder_text: ::String
       attr_accessor redaction_place_holder_type: ("CustomText")
+      attr_accessor redaction_place_holder_text: ::String
       SENSITIVE: [:redaction_place_holder_text]
     end
 
@@ -867,33 +954,62 @@ module Aws::WorkSpacesWeb
       SENSITIVE: []
     end
 
+    class S3LogConfiguration
+      attr_accessor bucket: ::String
+      attr_accessor key_prefix: ::String
+      attr_accessor bucket_owner: ::String
+      attr_accessor log_file_format: ("JSONLines" | "Json")
+      attr_accessor folder_structure: ("Flat" | "NestedByDate")
+      SENSITIVE: [:bucket, :key_prefix]
+    end
+
     class ServiceQuotaExceededException
       attr_accessor message: ::String
-      attr_accessor quota_code: ::String
       attr_accessor resource_id: ::String
       attr_accessor resource_type: ::String
       attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
       SENSITIVE: []
     end
 
     class Session
-      attr_accessor client_ip_addresses: ::Array[::String]
-      attr_accessor end_time: ::Time
       attr_accessor portal_arn: ::String
       attr_accessor session_id: ::String
-      attr_accessor start_time: ::Time
-      attr_accessor status: ("Active" | "Terminated")
       attr_accessor username: ::String
+      attr_accessor client_ip_addresses: ::Array[::String]
+      attr_accessor status: ("Active" | "Terminated")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
       SENSITIVE: [:username]
     end
 
+    class SessionLogger
+      attr_accessor session_logger_arn: ::String
+      attr_accessor event_filter: Types::EventFilter
+      attr_accessor log_configuration: Types::LogConfiguration
+      attr_accessor customer_managed_key: ::String
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
+      attr_accessor associated_portal_arns: ::Array[::String]
+      attr_accessor display_name: ::String
+      attr_accessor creation_date: ::Time
+      SENSITIVE: [:display_name]
+    end
+
+    class SessionLoggerSummary
+      attr_accessor session_logger_arn: ::String
+      attr_accessor log_configuration: Types::LogConfiguration
+      attr_accessor display_name: ::String
+      attr_accessor creation_date: ::Time
+      SENSITIVE: [:display_name]
+    end
+
     class SessionSummary
-      attr_accessor end_time: ::Time
       attr_accessor portal_arn: ::String
       attr_accessor session_id: ::String
-      attr_accessor start_time: ::Time
-      attr_accessor status: ("Active" | "Terminated")
       attr_accessor username: ::String
+      attr_accessor status: ("Active" | "Terminated")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
       SENSITIVE: [:username]
     end
 
@@ -904,9 +1020,9 @@ module Aws::WorkSpacesWeb
     end
 
     class TagResourceRequest
-      attr_accessor client_token: ::String
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -915,9 +1031,9 @@ module Aws::WorkSpacesWeb
 
     class ThrottlingException
       attr_accessor message: ::String
+      attr_accessor service_code: ::String
       attr_accessor quota_code: ::String
       attr_accessor retry_after_seconds: ::Integer
-      attr_accessor service_code: ::String
       SENSITIVE: []
     end
 
@@ -928,10 +1044,10 @@ module Aws::WorkSpacesWeb
     end
 
     class ToolbarConfiguration
-      attr_accessor hidden_toolbar_items: ::Array[("Windows" | "DualMonitor" | "FullScreen" | "Webcam" | "Microphone")]
-      attr_accessor max_display_resolution: ("size4096X2160" | "size3840X2160" | "size3440X1440" | "size2560X1440" | "size1920X1080" | "size1280X720" | "size1024X768" | "size800X600")
       attr_accessor toolbar_type: ("Floating" | "Docked")
       attr_accessor visual_mode: ("Dark" | "Light")
+      attr_accessor hidden_toolbar_items: ::Array[("Windows" | "DualMonitor" | "FullScreen" | "Webcam" | "Microphone")]
+      attr_accessor max_display_resolution: ("size4096X2160" | "size3840X2160" | "size3440X1440" | "size2560X1440" | "size1920X1080" | "size1280X720" | "size1024X768" | "size800X600")
       SENSITIVE: []
     end
 
@@ -946,6 +1062,9 @@ module Aws::WorkSpacesWeb
       SENSITIVE: []
     end
 
+    class Unit < Aws::EmptyStructure
+    end
+
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
@@ -956,8 +1075,8 @@ module Aws::WorkSpacesWeb
     end
 
     class UpdateBrowserSettingsRequest
-      attr_accessor browser_policy: ::String
       attr_accessor browser_settings_arn: ::String
+      attr_accessor browser_policy: ::String
       attr_accessor client_token: ::String
       SENSITIVE: [:browser_policy]
     end
@@ -968,12 +1087,12 @@ module Aws::WorkSpacesWeb
     end
 
     class UpdateDataProtectionSettingsRequest
-      attr_accessor client_token: ::String
       attr_accessor data_protection_settings_arn: ::String
-      attr_accessor description: ::String
-      attr_accessor display_name: ::String
       attr_accessor inline_redaction_configuration: Types::InlineRedactionConfiguration
-      SENSITIVE: [:description, :display_name]
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: [:display_name, :description]
     end
 
     class UpdateDataProtectionSettingsResponse
@@ -982,12 +1101,12 @@ module Aws::WorkSpacesWeb
     end
 
     class UpdateIdentityProviderRequest
-      attr_accessor client_token: ::String
       attr_accessor identity_provider_arn: ::String
-      attr_accessor identity_provider_details: ::Hash[::String, ::String]
       attr_accessor identity_provider_name: ::String
       attr_accessor identity_provider_type: ("SAML" | "Facebook" | "Google" | "LoginWithAmazon" | "SignInWithApple" | "OIDC")
-      SENSITIVE: [:identity_provider_details, :identity_provider_name]
+      attr_accessor identity_provider_details: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: [:identity_provider_name, :identity_provider_details]
     end
 
     class UpdateIdentityProviderResponse
@@ -996,12 +1115,12 @@ module Aws::WorkSpacesWeb
     end
 
     class UpdateIpAccessSettingsRequest
-      attr_accessor client_token: ::String
-      attr_accessor description: ::String
-      attr_accessor display_name: ::String
       attr_accessor ip_access_settings_arn: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
       attr_accessor ip_rules: ::Array[Types::IpRule]
-      SENSITIVE: [:description, :display_name, :ip_rules]
+      attr_accessor client_token: ::String
+      SENSITIVE: [:display_name, :description, :ip_rules]
     end
 
     class UpdateIpAccessSettingsResponse
@@ -1010,11 +1129,11 @@ module Aws::WorkSpacesWeb
     end
 
     class UpdateNetworkSettingsRequest
-      attr_accessor client_token: ::String
       attr_accessor network_settings_arn: ::String
-      attr_accessor security_group_ids: ::Array[::String]
-      attr_accessor subnet_ids: ::Array[::String]
       attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -1024,11 +1143,11 @@ module Aws::WorkSpacesWeb
     end
 
     class UpdatePortalRequest
-      attr_accessor authentication_type: ("Standard" | "IAM_Identity_Center")
+      attr_accessor portal_arn: ::String
       attr_accessor display_name: ::String
+      attr_accessor authentication_type: ("Standard" | "IAM_Identity_Center")
       attr_accessor instance_type: ("standard.regular" | "standard.large" | "standard.xlarge")
       attr_accessor max_concurrent_sessions: ::Integer
-      attr_accessor portal_arn: ::String
       SENSITIVE: [:display_name]
     end
 
@@ -1037,11 +1156,24 @@ module Aws::WorkSpacesWeb
       SENSITIVE: []
     end
 
+    class UpdateSessionLoggerRequest
+      attr_accessor session_logger_arn: ::String
+      attr_accessor event_filter: Types::EventFilter
+      attr_accessor log_configuration: Types::LogConfiguration
+      attr_accessor display_name: ::String
+      SENSITIVE: [:display_name]
+    end
+
+    class UpdateSessionLoggerResponse
+      attr_accessor session_logger: Types::SessionLogger
+      SENSITIVE: []
+    end
+
     class UpdateTrustStoreRequest
+      attr_accessor trust_store_arn: ::String
       attr_accessor certificates_to_add: ::Array[::String]
       attr_accessor certificates_to_delete: ::Array[::String]
       attr_accessor client_token: ::String
-      attr_accessor trust_store_arn: ::String
       SENSITIVE: []
     end
 
@@ -1051,9 +1183,9 @@ module Aws::WorkSpacesWeb
     end
 
     class UpdateUserAccessLoggingSettingsRequest
-      attr_accessor client_token: ::String
-      attr_accessor kinesis_stream_arn: ::String
       attr_accessor user_access_logging_settings_arn: ::String
+      attr_accessor kinesis_stream_arn: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -1063,18 +1195,18 @@ module Aws::WorkSpacesWeb
     end
 
     class UpdateUserSettingsRequest
+      attr_accessor user_settings_arn: ::String
+      attr_accessor copy_allowed: ("Disabled" | "Enabled")
+      attr_accessor paste_allowed: ("Disabled" | "Enabled")
+      attr_accessor download_allowed: ("Disabled" | "Enabled")
+      attr_accessor upload_allowed: ("Disabled" | "Enabled")
+      attr_accessor print_allowed: ("Disabled" | "Enabled")
+      attr_accessor disconnect_timeout_in_minutes: ::Integer
+      attr_accessor idle_disconnect_timeout_in_minutes: ::Integer
       attr_accessor client_token: ::String
       attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration
-      attr_accessor copy_allowed: ("Disabled" | "Enabled")
       attr_accessor deep_link_allowed: ("Disabled" | "Enabled")
-      attr_accessor disconnect_timeout_in_minutes: ::Integer
-      attr_accessor download_allowed: ("Disabled" | "Enabled")
-      attr_accessor idle_disconnect_timeout_in_minutes: ::Integer
-      attr_accessor paste_allowed: ("Disabled" | "Enabled")
-      attr_accessor print_allowed: ("Disabled" | "Enabled")
       attr_accessor toolbar_configuration: Types::ToolbarConfiguration
-      attr_accessor upload_allowed: ("Disabled" | "Enabled")
-      attr_accessor user_settings_arn: ::String
       SENSITIVE: [:cookie_synchronization_configuration]
     end
 
@@ -1084,61 +1216,61 @@ module Aws::WorkSpacesWeb
     end
 
     class UserAccessLoggingSettings
+      attr_accessor user_access_logging_settings_arn: ::String
       attr_accessor associated_portal_arns: ::Array[::String]
       attr_accessor kinesis_stream_arn: ::String
-      attr_accessor user_access_logging_settings_arn: ::String
       SENSITIVE: []
     end
 
     class UserAccessLoggingSettingsSummary
-      attr_accessor kinesis_stream_arn: ::String
       attr_accessor user_access_logging_settings_arn: ::String
+      attr_accessor kinesis_stream_arn: ::String
       SENSITIVE: []
     end
 
     class UserSettings
-      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
-      attr_accessor associated_portal_arns: ::Array[::String]
-      attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration
-      attr_accessor copy_allowed: ("Disabled" | "Enabled")
-      attr_accessor customer_managed_key: ::String
-      attr_accessor deep_link_allowed: ("Disabled" | "Enabled")
-      attr_accessor disconnect_timeout_in_minutes: ::Integer
-      attr_accessor download_allowed: ("Disabled" | "Enabled")
-      attr_accessor idle_disconnect_timeout_in_minutes: ::Integer
-      attr_accessor paste_allowed: ("Disabled" | "Enabled")
-      attr_accessor print_allowed: ("Disabled" | "Enabled")
-      attr_accessor toolbar_configuration: Types::ToolbarConfiguration
-      attr_accessor upload_allowed: ("Disabled" | "Enabled")
       attr_accessor user_settings_arn: ::String
+      attr_accessor associated_portal_arns: ::Array[::String]
+      attr_accessor copy_allowed: ("Disabled" | "Enabled")
+      attr_accessor paste_allowed: ("Disabled" | "Enabled")
+      attr_accessor download_allowed: ("Disabled" | "Enabled")
+      attr_accessor upload_allowed: ("Disabled" | "Enabled")
+      attr_accessor print_allowed: ("Disabled" | "Enabled")
+      attr_accessor disconnect_timeout_in_minutes: ::Integer
+      attr_accessor idle_disconnect_timeout_in_minutes: ::Integer
+      attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration
+      attr_accessor customer_managed_key: ::String
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
+      attr_accessor deep_link_allowed: ("Disabled" | "Enabled")
+      attr_accessor toolbar_configuration: Types::ToolbarConfiguration
       SENSITIVE: [:cookie_synchronization_configuration]
     end
 
     class UserSettingsSummary
-      attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration
-      attr_accessor copy_allowed: ("Disabled" | "Enabled")
-      attr_accessor deep_link_allowed: ("Disabled" | "Enabled")
-      attr_accessor disconnect_timeout_in_minutes: ::Integer
-      attr_accessor download_allowed: ("Disabled" | "Enabled")
-      attr_accessor idle_disconnect_timeout_in_minutes: ::Integer
-      attr_accessor paste_allowed: ("Disabled" | "Enabled")
-      attr_accessor print_allowed: ("Disabled" | "Enabled")
-      attr_accessor toolbar_configuration: Types::ToolbarConfiguration
-      attr_accessor upload_allowed: ("Disabled" | "Enabled")
       attr_accessor user_settings_arn: ::String
+      attr_accessor copy_allowed: ("Disabled" | "Enabled")
+      attr_accessor paste_allowed: ("Disabled" | "Enabled")
+      attr_accessor download_allowed: ("Disabled" | "Enabled")
+      attr_accessor upload_allowed: ("Disabled" | "Enabled")
+      attr_accessor print_allowed: ("Disabled" | "Enabled")
+      attr_accessor disconnect_timeout_in_minutes: ::Integer
+      attr_accessor idle_disconnect_timeout_in_minutes: ::Integer
+      attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration
+      attr_accessor deep_link_allowed: ("Disabled" | "Enabled")
+      attr_accessor toolbar_configuration: Types::ToolbarConfiguration
       SENSITIVE: [:cookie_synchronization_configuration]
     end
 
     class ValidationException
-      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       attr_accessor message: ::String
       attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       SENSITIVE: []
     end
 
     class ValidationExceptionField
-      attr_accessor message: ::String
       attr_accessor name: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
   end

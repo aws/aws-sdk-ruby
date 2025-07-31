@@ -687,6 +687,17 @@ module Aws::CustomerProfiles
     #   resp.profiles[0].found_by_items[0].values[0] #=> String
     #   resp.profiles[0].party_type_string #=> String
     #   resp.profiles[0].gender_string #=> String
+    #   resp.profiles[0].profile_type #=> String, one of "ACCOUNT_PROFILE", "PROFILE"
+    #   resp.profiles[0].engagement_preferences.phone #=> Array
+    #   resp.profiles[0].engagement_preferences.phone[0].key_name #=> String
+    #   resp.profiles[0].engagement_preferences.phone[0].key_value #=> String
+    #   resp.profiles[0].engagement_preferences.phone[0].profile_id #=> String
+    #   resp.profiles[0].engagement_preferences.phone[0].contact_type #=> String, one of "PhoneNumber", "MobilePhoneNumber", "HomePhoneNumber", "BusinessPhoneNumber", "EmailAddress", "PersonalEmailAddress", "BusinessEmailAddress"
+    #   resp.profiles[0].engagement_preferences.email #=> Array
+    #   resp.profiles[0].engagement_preferences.email[0].key_name #=> String
+    #   resp.profiles[0].engagement_preferences.email[0].key_value #=> String
+    #   resp.profiles[0].engagement_preferences.email[0].profile_id #=> String
+    #   resp.profiles[0].engagement_preferences.email[0].contact_type #=> String, one of "PhoneNumber", "MobilePhoneNumber", "HomePhoneNumber", "BusinessPhoneNumber", "EmailAddress", "PersonalEmailAddress", "BusinessEmailAddress"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/BatchGetProfile AWS API Documentation
     #
@@ -1532,6 +1543,12 @@ module Aws::CustomerProfiles
     # @option params [String] :gender_string
     #   An alternative to `Gender` which accepts any string as input.
     #
+    # @option params [String] :profile_type
+    #   The type of the profile.
+    #
+    # @option params [Types::EngagementPreferences] :engagement_preferences
+    #   Object that defines the preferred methods of engagement, per channel.
+    #
     # @return [Types::CreateProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProfileResponse#profile_id #profile_id} => String
@@ -1609,6 +1626,25 @@ module Aws::CustomerProfiles
     #     },
     #     party_type_string: "sensitiveString1To255",
     #     gender_string: "sensitiveString1To255",
+    #     profile_type: "ACCOUNT_PROFILE", # accepts ACCOUNT_PROFILE, PROFILE
+    #     engagement_preferences: {
+    #       phone: [
+    #         {
+    #           key_name: "name",
+    #           key_value: "string1To255",
+    #           profile_id: "uuid",
+    #           contact_type: "PhoneNumber", # accepts PhoneNumber, MobilePhoneNumber, HomePhoneNumber, BusinessPhoneNumber, EmailAddress, PersonalEmailAddress, BusinessEmailAddress
+    #         },
+    #       ],
+    #       email: [
+    #         {
+    #           key_name: "name",
+    #           key_value: "string1To255",
+    #           profile_id: "uuid",
+    #           contact_type: "PhoneNumber", # accepts PhoneNumber, MobilePhoneNumber, HomePhoneNumber, BusinessPhoneNumber, EmailAddress, PersonalEmailAddress, BusinessEmailAddress
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -1840,6 +1876,10 @@ module Aws::CustomerProfiles
     #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH, BEFORE, AFTER, BETWEEN, NOT_BETWEEN, ON, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, EQUAL
     #                     values: ["string1To255"], # required
     #                   },
+    #                 },
+    #                 profile_type: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["ACCOUNT_PROFILE"], # required, accepts ACCOUNT_PROFILE, PROFILE
     #                 },
     #               },
     #               calculated_attributes: {
@@ -2089,6 +2129,10 @@ module Aws::CustomerProfiles
     #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH, BEFORE, AFTER, BETWEEN, NOT_BETWEEN, ON, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, EQUAL
     #                     values: ["string1To255"], # required
     #                   },
+    #                 },
+    #                 profile_type: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["ACCOUNT_PROFILE"], # required, accepts ACCOUNT_PROFILE, PROFILE
     #                 },
     #               },
     #               calculated_attributes: {
@@ -3611,6 +3655,9 @@ module Aws::CustomerProfiles
     #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.attributes["typeName"].dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL"
     #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.attributes["typeName"].values #=> Array
     #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.attributes["typeName"].values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.profile_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.profile_type.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.profile_type.values[0] #=> String, one of "ACCOUNT_PROFILE", "PROFILE"
     #   resp.segment_groups.groups[0].dimensions[0].calculated_attributes #=> Hash
     #   resp.segment_groups.groups[0].dimensions[0].calculated_attributes["typeName"].dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL"
     #   resp.segment_groups.groups[0].dimensions[0].calculated_attributes["typeName"].values #=> Array
@@ -3776,6 +3823,17 @@ module Aws::CustomerProfiles
     #   resp.profiles[0].profile.found_by_items[0].values[0] #=> String
     #   resp.profiles[0].profile.party_type_string #=> String
     #   resp.profiles[0].profile.gender_string #=> String
+    #   resp.profiles[0].profile.profile_type #=> String, one of "ACCOUNT_PROFILE", "PROFILE"
+    #   resp.profiles[0].profile.engagement_preferences.phone #=> Array
+    #   resp.profiles[0].profile.engagement_preferences.phone[0].key_name #=> String
+    #   resp.profiles[0].profile.engagement_preferences.phone[0].key_value #=> String
+    #   resp.profiles[0].profile.engagement_preferences.phone[0].profile_id #=> String
+    #   resp.profiles[0].profile.engagement_preferences.phone[0].contact_type #=> String, one of "PhoneNumber", "MobilePhoneNumber", "HomePhoneNumber", "BusinessPhoneNumber", "EmailAddress", "PersonalEmailAddress", "BusinessEmailAddress"
+    #   resp.profiles[0].profile.engagement_preferences.email #=> Array
+    #   resp.profiles[0].profile.engagement_preferences.email[0].key_name #=> String
+    #   resp.profiles[0].profile.engagement_preferences.email[0].key_value #=> String
+    #   resp.profiles[0].profile.engagement_preferences.email[0].profile_id #=> String
+    #   resp.profiles[0].profile.engagement_preferences.email[0].contact_type #=> String, one of "PhoneNumber", "MobilePhoneNumber", "HomePhoneNumber", "BusinessPhoneNumber", "EmailAddress", "PersonalEmailAddress", "BusinessEmailAddress"
     #   resp.failures #=> Array
     #   resp.failures[0].profile_id #=> String
     #   resp.failures[0].message #=> String
@@ -5096,6 +5154,8 @@ module Aws::CustomerProfiles
     #       attributes: {
     #         "string1To255" => "uuid",
     #       },
+    #       profile_type: "uuid",
+    #       engagement_preferences: "uuid",
     #     },
     #   })
     #
@@ -5619,6 +5679,17 @@ module Aws::CustomerProfiles
     #   resp.items[0].found_by_items[0].values[0] #=> String
     #   resp.items[0].party_type_string #=> String
     #   resp.items[0].gender_string #=> String
+    #   resp.items[0].profile_type #=> String, one of "ACCOUNT_PROFILE", "PROFILE"
+    #   resp.items[0].engagement_preferences.phone #=> Array
+    #   resp.items[0].engagement_preferences.phone[0].key_name #=> String
+    #   resp.items[0].engagement_preferences.phone[0].key_value #=> String
+    #   resp.items[0].engagement_preferences.phone[0].profile_id #=> String
+    #   resp.items[0].engagement_preferences.phone[0].contact_type #=> String, one of "PhoneNumber", "MobilePhoneNumber", "HomePhoneNumber", "BusinessPhoneNumber", "EmailAddress", "PersonalEmailAddress", "BusinessEmailAddress"
+    #   resp.items[0].engagement_preferences.email #=> Array
+    #   resp.items[0].engagement_preferences.email[0].key_name #=> String
+    #   resp.items[0].engagement_preferences.email[0].key_value #=> String
+    #   resp.items[0].engagement_preferences.email[0].profile_id #=> String
+    #   resp.items[0].engagement_preferences.email[0].contact_type #=> String, one of "PhoneNumber", "MobilePhoneNumber", "HomePhoneNumber", "BusinessPhoneNumber", "EmailAddress", "PersonalEmailAddress", "BusinessEmailAddress"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SearchProfiles AWS API Documentation
@@ -6324,6 +6395,12 @@ module Aws::CustomerProfiles
     # @option params [String] :gender_string
     #   An alternative to `Gender` which accepts any string as input.
     #
+    # @option params [String] :profile_type
+    #   Determines the type of the profile.
+    #
+    # @option params [Types::EngagementPreferences] :engagement_preferences
+    #   Object that defines users preferred methods of engagement.
+    #
     # @return [Types::UpdateProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateProfileResponse#profile_id #profile_id} => String
@@ -6402,6 +6479,25 @@ module Aws::CustomerProfiles
     #     },
     #     party_type_string: "sensitiveString0To255",
     #     gender_string: "sensitiveString0To255",
+    #     profile_type: "ACCOUNT_PROFILE", # accepts ACCOUNT_PROFILE, PROFILE
+    #     engagement_preferences: {
+    #       phone: [
+    #         {
+    #           key_name: "name",
+    #           key_value: "string1To255",
+    #           profile_id: "uuid",
+    #           contact_type: "PhoneNumber", # accepts PhoneNumber, MobilePhoneNumber, HomePhoneNumber, BusinessPhoneNumber, EmailAddress, PersonalEmailAddress, BusinessEmailAddress
+    #         },
+    #       ],
+    #       email: [
+    #         {
+    #           key_name: "name",
+    #           key_value: "string1To255",
+    #           profile_id: "uuid",
+    #           contact_type: "PhoneNumber", # accepts PhoneNumber, MobilePhoneNumber, HomePhoneNumber, BusinessPhoneNumber, EmailAddress, PersonalEmailAddress, BusinessEmailAddress
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -6435,7 +6531,7 @@ module Aws::CustomerProfiles
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

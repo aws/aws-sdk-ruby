@@ -2772,6 +2772,12 @@ module Aws::QuickSight
     #         project_id: "ProjectId", # required
     #         data_set_region: "DataSetRegion",
     #       },
+    #       impala_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         database: "Database",
+    #         sql_endpoint_path: "SqlEndpointPath", # required
+    #       },
     #     },
     #     credentials: {
     #       credential_pair: {
@@ -2929,6 +2935,12 @@ module Aws::QuickSight
     #             big_query_parameters: {
     #               project_id: "ProjectId", # required
     #               data_set_region: "DataSetRegion",
+    #             },
+    #             impala_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database",
+    #               sql_endpoint_path: "SqlEndpointPath", # required
     #             },
     #           },
     #         ],
@@ -6230,6 +6242,10 @@ module Aws::QuickSight
     #   resp.override_parameters.data_sources[0].data_source_parameters.trino_parameters.catalog #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.big_query_parameters.project_id #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.big_query_parameters.data_set_region #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.impala_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.impala_parameters.port #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.impala_parameters.database #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.impala_parameters.sql_endpoint_path #=> String
     #   resp.override_parameters.data_sources[0].vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.override_parameters.data_sources[0].ssl_properties.disable_ssl #=> Boolean
     #   resp.override_parameters.data_sources[0].credentials.credential_pair.username #=> String
@@ -7421,6 +7437,10 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.trino_parameters.catalog #=> String
     #   resp.data_source.data_source_parameters.big_query_parameters.project_id #=> String
     #   resp.data_source.data_source_parameters.big_query_parameters.data_set_region #=> String
+    #   resp.data_source.data_source_parameters.impala_parameters.host #=> String
+    #   resp.data_source.data_source_parameters.impala_parameters.port #=> Integer
+    #   resp.data_source.data_source_parameters.impala_parameters.database #=> String
+    #   resp.data_source.data_source_parameters.impala_parameters.sql_endpoint_path #=> String
     #   resp.data_source.alternate_data_source_parameters #=> Array
     #   resp.data_source.alternate_data_source_parameters[0].amazon_elasticsearch_parameters.domain #=> String
     #   resp.data_source.alternate_data_source_parameters[0].athena_parameters.work_group #=> String
@@ -7506,6 +7526,10 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].trino_parameters.catalog #=> String
     #   resp.data_source.alternate_data_source_parameters[0].big_query_parameters.project_id #=> String
     #   resp.data_source.alternate_data_source_parameters[0].big_query_parameters.data_set_region #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].impala_parameters.host #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].impala_parameters.port #=> Integer
+    #   resp.data_source.alternate_data_source_parameters[0].impala_parameters.database #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].impala_parameters.sql_endpoint_path #=> String
     #   resp.data_source.vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.data_source.ssl_properties.disable_ssl #=> Boolean
     #   resp.data_source.error_info.type #=> String, one of "ACCESS_DENIED", "COPY_SOURCE_NOT_FOUND", "TIMEOUT", "ENGINE_VERSION_NOT_SUPPORTED", "UNKNOWN_HOST", "GENERIC_SQL_FAILURE", "CONFLICT", "UNKNOWN"
@@ -10428,6 +10452,10 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.trino_parameters.catalog #=> String
     #   resp.data_sources[0].data_source_parameters.big_query_parameters.project_id #=> String
     #   resp.data_sources[0].data_source_parameters.big_query_parameters.data_set_region #=> String
+    #   resp.data_sources[0].data_source_parameters.impala_parameters.host #=> String
+    #   resp.data_sources[0].data_source_parameters.impala_parameters.port #=> Integer
+    #   resp.data_sources[0].data_source_parameters.impala_parameters.database #=> String
+    #   resp.data_sources[0].data_source_parameters.impala_parameters.sql_endpoint_path #=> String
     #   resp.data_sources[0].alternate_data_source_parameters #=> Array
     #   resp.data_sources[0].alternate_data_source_parameters[0].amazon_elasticsearch_parameters.domain #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].athena_parameters.work_group #=> String
@@ -10513,6 +10541,10 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].trino_parameters.catalog #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].big_query_parameters.project_id #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].big_query_parameters.data_set_region #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].impala_parameters.host #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].impala_parameters.port #=> Integer
+    #   resp.data_sources[0].alternate_data_source_parameters[0].impala_parameters.database #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].impala_parameters.sql_endpoint_path #=> String
     #   resp.data_sources[0].vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.data_sources[0].ssl_properties.disable_ssl #=> Boolean
     #   resp.data_sources[0].error_info.type #=> String, one of "ACCESS_DENIED", "COPY_SOURCE_NOT_FOUND", "TIMEOUT", "ENGINE_VERSION_NOT_SUPPORTED", "UNKNOWN_HOST", "GENERIC_SQL_FAILURE", "CONFLICT", "UNKNOWN"
@@ -13614,6 +13646,12 @@ module Aws::QuickSight
     #               project_id: "ProjectId", # required
     #               data_set_region: "DataSetRegion",
     #             },
+    #             impala_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database",
+    #               sql_endpoint_path: "SqlEndpointPath", # required
+    #             },
     #           },
     #           vpc_connection_properties: {
     #             vpc_connection_arn: "Arn", # required
@@ -15672,6 +15710,12 @@ module Aws::QuickSight
     #         project_id: "ProjectId", # required
     #         data_set_region: "DataSetRegion",
     #       },
+    #       impala_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         database: "Database",
+    #         sql_endpoint_path: "SqlEndpointPath", # required
+    #       },
     #     },
     #     credentials: {
     #       credential_pair: {
@@ -15829,6 +15873,12 @@ module Aws::QuickSight
     #             big_query_parameters: {
     #               project_id: "ProjectId", # required
     #               data_set_region: "DataSetRegion",
+    #             },
+    #             impala_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database",
+    #               sql_endpoint_path: "SqlEndpointPath", # required
     #             },
     #           },
     #         ],
@@ -17745,7 +17795,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.152.0'
+      context[:gem_version] = '1.153.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

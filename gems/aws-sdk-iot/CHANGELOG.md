@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.151.0 (2025-07-31)
+------------------
+
+* Feature - This release allows AWS IoT Core users to use their own AWS KMS keys for data protection
+
 1.150.0 (2025-07-21)
 ------------------
 

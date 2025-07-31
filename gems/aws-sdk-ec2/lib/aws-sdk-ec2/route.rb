@@ -149,6 +149,13 @@ module Aws::EC2
       data[:odb_network_arn]
     end
 
+    # The next hop IP address for routes propagated by VPC Route Server into
+    # VPC route tables.
+    # @return [String]
+    def ip_address
+      data[:ip_address]
+    end
+
     # @!endgroup
 
     # @return [Client]

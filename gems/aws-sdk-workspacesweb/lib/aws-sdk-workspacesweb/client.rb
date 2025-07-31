@@ -481,28 +481,28 @@ module Aws::WorkSpacesWeb
 
     # Associates a browser settings resource with a web portal.
     #
-    # @option params [required, String] :browser_settings_arn
-    #   The ARN of the browser settings.
-    #
     # @option params [required, String] :portal_arn
     #   The ARN of the web portal.
     #
+    # @option params [required, String] :browser_settings_arn
+    #   The ARN of the browser settings.
+    #
     # @return [Types::AssociateBrowserSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::AssociateBrowserSettingsResponse#browser_settings_arn #browser_settings_arn} => String
     #   * {Types::AssociateBrowserSettingsResponse#portal_arn #portal_arn} => String
+    #   * {Types::AssociateBrowserSettingsResponse#browser_settings_arn #browser_settings_arn} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_browser_settings({
-    #     browser_settings_arn: "ARN", # required
     #     portal_arn: "ARN", # required
+    #     browser_settings_arn: "ARN", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.browser_settings_arn #=> String
     #   resp.portal_arn #=> String
+    #   resp.browser_settings_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/AssociateBrowserSettings AWS API Documentation
     #
@@ -515,28 +515,28 @@ module Aws::WorkSpacesWeb
 
     # Associates a data protection settings resource with a web portal.
     #
-    # @option params [required, String] :data_protection_settings_arn
-    #   The ARN of the data protection settings.
-    #
     # @option params [required, String] :portal_arn
     #   The ARN of the web portal.
     #
+    # @option params [required, String] :data_protection_settings_arn
+    #   The ARN of the data protection settings.
+    #
     # @return [Types::AssociateDataProtectionSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::AssociateDataProtectionSettingsResponse#data_protection_settings_arn #data_protection_settings_arn} => String
     #   * {Types::AssociateDataProtectionSettingsResponse#portal_arn #portal_arn} => String
+    #   * {Types::AssociateDataProtectionSettingsResponse#data_protection_settings_arn #data_protection_settings_arn} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_data_protection_settings({
-    #     data_protection_settings_arn: "ARN", # required
     #     portal_arn: "ARN", # required
+    #     data_protection_settings_arn: "ARN", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.data_protection_settings_arn #=> String
     #   resp.portal_arn #=> String
+    #   resp.data_protection_settings_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/AssociateDataProtectionSettings AWS API Documentation
     #
@@ -549,28 +549,28 @@ module Aws::WorkSpacesWeb
 
     # Associates an IP access settings resource with a web portal.
     #
-    # @option params [required, String] :ip_access_settings_arn
-    #   The ARN of the IP access settings.
-    #
     # @option params [required, String] :portal_arn
     #   The ARN of the web portal.
     #
+    # @option params [required, String] :ip_access_settings_arn
+    #   The ARN of the IP access settings.
+    #
     # @return [Types::AssociateIpAccessSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::AssociateIpAccessSettingsResponse#ip_access_settings_arn #ip_access_settings_arn} => String
     #   * {Types::AssociateIpAccessSettingsResponse#portal_arn #portal_arn} => String
+    #   * {Types::AssociateIpAccessSettingsResponse#ip_access_settings_arn #ip_access_settings_arn} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_ip_access_settings({
-    #     ip_access_settings_arn: "ARN", # required
     #     portal_arn: "ARN", # required
+    #     ip_access_settings_arn: "ARN", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.ip_access_settings_arn #=> String
     #   resp.portal_arn #=> String
+    #   resp.ip_access_settings_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/AssociateIpAccessSettings AWS API Documentation
     #
@@ -583,28 +583,28 @@ module Aws::WorkSpacesWeb
 
     # Associates a network settings resource with a web portal.
     #
-    # @option params [required, String] :network_settings_arn
-    #   The ARN of the network settings.
-    #
     # @option params [required, String] :portal_arn
     #   The ARN of the web portal.
     #
+    # @option params [required, String] :network_settings_arn
+    #   The ARN of the network settings.
+    #
     # @return [Types::AssociateNetworkSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::AssociateNetworkSettingsResponse#network_settings_arn #network_settings_arn} => String
     #   * {Types::AssociateNetworkSettingsResponse#portal_arn #portal_arn} => String
+    #   * {Types::AssociateNetworkSettingsResponse#network_settings_arn #network_settings_arn} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_network_settings({
-    #     network_settings_arn: "ARN", # required
     #     portal_arn: "ARN", # required
+    #     network_settings_arn: "ARN", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.network_settings_arn #=> String
     #   resp.portal_arn #=> String
+    #   resp.network_settings_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/AssociateNetworkSettings AWS API Documentation
     #
@@ -612,6 +612,56 @@ module Aws::WorkSpacesWeb
     # @param [Hash] params ({})
     def associate_network_settings(params = {}, options = {})
       req = build_request(:associate_network_settings, params)
+      req.send_request(options)
+    end
+
+    # Associates a session logger with a portal.
+    #
+    # @option params [required, String] :portal_arn
+    #   The ARN of the portal to associate to the session logger ARN.
+    #
+    # @option params [required, String] :session_logger_arn
+    #   The ARN of the session logger to associate to the portal ARN.
+    #
+    # @return [Types::AssociateSessionLoggerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateSessionLoggerResponse#portal_arn #portal_arn} => String
+    #   * {Types::AssociateSessionLoggerResponse#session_logger_arn #session_logger_arn} => String
+    #
+    #
+    # @example Example: Associate Session Logger with Portal
+    #
+    #   # Associates a session logger with a portal
+    #
+    #   resp = client.associate_session_logger({
+    #     portal_arn: "arn:aws:workspaces-web:us-west-2:123456789012:portal/12345678-1234-1234-1234-123456789012", 
+    #     session_logger_arn: "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/11111111-1111-1111-1111-111111111111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     portal_arn: "arn:aws:workspaces-web:us-west-2:123456789012:portal/12345678-1234-1234-1234-123456789012", 
+    #     session_logger_arn: "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/11111111-1111-1111-1111-111111111111", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_session_logger({
+    #     portal_arn: "ARN", # required
+    #     session_logger_arn: "ARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.portal_arn #=> String
+    #   resp.session_logger_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/AssociateSessionLogger AWS API Documentation
+    #
+    # @overload associate_session_logger(params = {})
+    # @param [Hash] params ({})
+    def associate_session_logger(params = {}, options = {})
+      req = build_request(:associate_session_logger, params)
       req.send_request(options)
     end
 
@@ -722,6 +772,13 @@ module Aws::WorkSpacesWeb
     # how the browser will behave once a user starts a streaming session for
     # the web portal.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to add to the browser settings resource. A tag is a key-value
+    #   pair.
+    #
+    # @option params [String] :customer_managed_key
+    #   The custom managed key of the browser settings.
+    #
     # @option params [Hash<String,String>] :additional_encryption_context
     #   Additional encryption context of the browser settings.
     #
@@ -742,13 +799,6 @@ module Aws::WorkSpacesWeb
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [String] :customer_managed_key
-    #   The custom managed key of the browser settings.
-    #
-    # @option params [Array<Types::Tag>] :tags
-    #   The tags to add to the browser settings resource. A tag is a key-value
-    #   pair.
-    #
     # @return [Types::CreateBrowserSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBrowserSettingsResponse#browser_settings_arn #browser_settings_arn} => String
@@ -756,18 +806,18 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_browser_settings({
-    #     additional_encryption_context: {
-    #       "StringType" => "StringType",
-    #     },
-    #     browser_policy: "BrowserPolicy", # required
-    #     client_token: "ClientToken",
-    #     customer_managed_key: "keyArn",
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     customer_managed_key: "keyArn",
+    #     additional_encryption_context: {
+    #       "StringType" => "StringType",
+    #     },
+    #     browser_policy: "BrowserPolicy", # required
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -786,8 +836,25 @@ module Aws::WorkSpacesWeb
     # Creates a data protection settings resource that can be associated
     # with a web portal.
     #
+    # @option params [String] :display_name
+    #   The display name of the data protection settings.
+    #
+    # @option params [String] :description
+    #   The description of the data protection settings.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to add to the data protection settings resource. A tag is a
+    #   key-value pair.
+    #
+    # @option params [String] :customer_managed_key
+    #   The custom managed key of the data protection settings.
+    #
     # @option params [Hash<String,String>] :additional_encryption_context
     #   Additional encryption context of the data protection settings.
+    #
+    # @option params [Types::InlineRedactionConfiguration] :inline_redaction_configuration
+    #   The inline redaction configuration of the data protection settings
+    #   that will be applied to all sessions.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -802,23 +869,6 @@ module Aws::WorkSpacesWeb
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [String] :customer_managed_key
-    #   The custom managed key of the data protection settings.
-    #
-    # @option params [String] :description
-    #   The description of the data protection settings.
-    #
-    # @option params [String] :display_name
-    #   The display name of the data protection settings.
-    #
-    # @option params [Types::InlineRedactionConfiguration] :inline_redaction_configuration
-    #   The inline redaction configuration of the data protection settings
-    #   that will be applied to all sessions.
-    #
-    # @option params [Array<Types::Tag>] :tags
-    #   The tags to add to the data protection settings resource. A tag is a
-    #   key-value pair.
-    #
     # @return [Types::CreateDataProtectionSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDataProtectionSettingsResponse#data_protection_settings_arn #data_protection_settings_arn} => String
@@ -826,42 +876,42 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_data_protection_settings({
-    #     additional_encryption_context: {
-    #       "StringType" => "StringType",
-    #     },
-    #     client_token: "ClientToken",
-    #     customer_managed_key: "keyArn",
-    #     description: "DescriptionSafe",
     #     display_name: "DisplayNameSafe",
-    #     inline_redaction_configuration: {
-    #       global_confidence_level: 1,
-    #       global_enforced_urls: ["InlineRedactionUrl"],
-    #       global_exempt_urls: ["InlineRedactionUrl"],
-    #       inline_redaction_patterns: [ # required
-    #         {
-    #           built_in_pattern_id: "BuiltInPatternId",
-    #           confidence_level: 1,
-    #           custom_pattern: {
-    #             keyword_regex: "Regex",
-    #             pattern_description: "DescriptionSafe",
-    #             pattern_name: "PatternName", # required
-    #             pattern_regex: "Regex", # required
-    #           },
-    #           enforced_urls: ["InlineRedactionUrl"],
-    #           exempt_urls: ["InlineRedactionUrl"],
-    #           redaction_place_holder: { # required
-    #             redaction_place_holder_text: "RedactionPlaceHolderText",
-    #             redaction_place_holder_type: "CustomText", # required, accepts CustomText
-    #           },
-    #         },
-    #       ],
-    #     },
+    #     description: "DescriptionSafe",
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     customer_managed_key: "keyArn",
+    #     additional_encryption_context: {
+    #       "StringType" => "StringType",
+    #     },
+    #     inline_redaction_configuration: {
+    #       inline_redaction_patterns: [ # required
+    #         {
+    #           built_in_pattern_id: "BuiltInPatternId",
+    #           custom_pattern: {
+    #             pattern_name: "PatternName", # required
+    #             pattern_regex: "Regex", # required
+    #             pattern_description: "DescriptionSafe",
+    #             keyword_regex: "Regex",
+    #           },
+    #           redaction_place_holder: { # required
+    #             redaction_place_holder_type: "CustomText", # required, accepts CustomText
+    #             redaction_place_holder_text: "RedactionPlaceHolderText",
+    #           },
+    #           enforced_urls: ["InlineRedactionUrl"],
+    #           exempt_urls: ["InlineRedactionUrl"],
+    #           confidence_level: 1,
+    #         },
+    #       ],
+    #       global_enforced_urls: ["InlineRedactionUrl"],
+    #       global_exempt_urls: ["InlineRedactionUrl"],
+    #       global_confidence_level: 1,
+    #     },
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -880,18 +930,14 @@ module Aws::WorkSpacesWeb
     # Creates an identity provider resource that is then associated with a
     # web portal.
     #
-    # @option params [String] :client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. Idempotency ensures that an API request
-    #   completes only once. With an idempotent request, if the original
-    #   request completes successfully, subsequent retries with the same
-    #   client token returns the result from the original successful request.
+    # @option params [required, String] :portal_arn
+    #   The ARN of the web portal.
     #
-    #   If you do not specify a client token, one is automatically generated
-    #   by the Amazon Web Services SDK.
+    # @option params [required, String] :identity_provider_name
+    #   The identity provider name.
     #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
+    # @option params [required, String] :identity_provider_type
+    #   The identity provider type.
     #
     # @option params [required, Hash<String,String>] :identity_provider_details
     #   The identity provider details. The following list describes the
@@ -960,14 +1006,18 @@ module Aws::WorkSpacesWeb
     #
     #     * `EncryptedResponses` (boolean) *optional*
     #
-    # @option params [required, String] :identity_provider_name
-    #   The identity provider name.
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes only once. With an idempotent request, if the original
+    #   request completes successfully, subsequent retries with the same
+    #   client token returns the result from the original successful request.
     #
-    # @option params [required, String] :identity_provider_type
-    #   The identity provider type.
+    #   If you do not specify a client token, one is automatically generated
+    #   by the Amazon Web Services SDK.
     #
-    # @option params [required, String] :portal_arn
-    #   The ARN of the web portal.
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to add to the identity provider resource. A tag is a
@@ -980,13 +1030,13 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_identity_provider({
-    #     client_token: "ClientToken",
+    #     portal_arn: "ARN", # required
+    #     identity_provider_name: "IdentityProviderName", # required
+    #     identity_provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon, SignInWithApple, OIDC
     #     identity_provider_details: { # required
     #       "StringType" => "StringType",
     #     },
-    #     identity_provider_name: "IdentityProviderName", # required
-    #     identity_provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon, SignInWithApple, OIDC
-    #     portal_arn: "ARN", # required
+    #     client_token: "ClientToken",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1011,8 +1061,24 @@ module Aws::WorkSpacesWeb
     # Creates an IP access settings resource that can be associated with a
     # web portal.
     #
+    # @option params [String] :display_name
+    #   The display name of the IP access settings.
+    #
+    # @option params [String] :description
+    #   The description of the IP access settings.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to add to the IP access settings resource. A tag is a
+    #   key-value pair.
+    #
+    # @option params [String] :customer_managed_key
+    #   The custom managed key of the IP access settings.
+    #
     # @option params [Hash<String,String>] :additional_encryption_context
     #   Additional encryption context of the IP access settings.
+    #
+    # @option params [required, Array<Types::IpRule>] :ip_rules
+    #   The IP rules of the IP access settings.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -1027,22 +1093,6 @@ module Aws::WorkSpacesWeb
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [String] :customer_managed_key
-    #   The custom managed key of the IP access settings.
-    #
-    # @option params [String] :description
-    #   The description of the IP access settings.
-    #
-    # @option params [String] :display_name
-    #   The display name of the IP access settings.
-    #
-    # @option params [required, Array<Types::IpRule>] :ip_rules
-    #   The IP rules of the IP access settings.
-    #
-    # @option params [Array<Types::Tag>] :tags
-    #   The tags to add to the IP access settings resource. A tag is a
-    #   key-value pair.
-    #
     # @return [Types::CreateIpAccessSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIpAccessSettingsResponse#ip_access_settings_arn #ip_access_settings_arn} => String
@@ -1050,25 +1100,25 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_ip_access_settings({
-    #     additional_encryption_context: {
-    #       "StringType" => "StringType",
-    #     },
-    #     client_token: "ClientToken",
-    #     customer_managed_key: "keyArn",
-    #     description: "Description",
     #     display_name: "DisplayName",
-    #     ip_rules: [ # required
-    #       {
-    #         description: "Description",
-    #         ip_range: "IpRange", # required
-    #       },
-    #     ],
+    #     description: "Description",
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     customer_managed_key: "keyArn",
+    #     additional_encryption_context: {
+    #       "StringType" => "StringType",
+    #     },
+    #     ip_rules: [ # required
+    #       {
+    #         ip_range: "IpRange", # required
+    #         description: "Description",
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -1088,6 +1138,22 @@ module Aws::WorkSpacesWeb
     # portal. Once associated with a web portal, network settings define how
     # streaming instances will connect with your specified VPC.
     #
+    # @option params [required, String] :vpc_id
+    #   The VPC that streaming instances will connect to.
+    #
+    # @option params [required, Array<String>] :subnet_ids
+    #   The subnets in which network interfaces are created to connect
+    #   streaming instances to your VPC. At least two of these subnets must be
+    #   in different availability zones.
+    #
+    # @option params [required, Array<String>] :security_group_ids
+    #   One or more security groups used to control access from streaming
+    #   instances to your VPC.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to add to the network settings resource. A tag is a key-value
+    #   pair.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -1101,22 +1167,6 @@ module Aws::WorkSpacesWeb
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, Array<String>] :security_group_ids
-    #   One or more security groups used to control access from streaming
-    #   instances to your VPC.
-    #
-    # @option params [required, Array<String>] :subnet_ids
-    #   The subnets in which network interfaces are created to connect
-    #   streaming instances to your VPC. At least two of these subnets must be
-    #   in different availability zones.
-    #
-    # @option params [Array<Types::Tag>] :tags
-    #   The tags to add to the network settings resource. A tag is a key-value
-    #   pair.
-    #
-    # @option params [required, String] :vpc_id
-    #   The VPC that streaming instances will connect to.
-    #
     # @return [Types::CreateNetworkSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNetworkSettingsResponse#network_settings_arn #network_settings_arn} => String
@@ -1124,16 +1174,16 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_network_settings({
-    #     client_token: "ClientToken",
-    #     security_group_ids: ["SecurityGroupId"], # required
+    #     vpc_id: "VpcId", # required
     #     subnet_ids: ["SubnetId"], # required
+    #     security_group_ids: ["SecurityGroupId"], # required
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     vpc_id: "VpcId", # required
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -1151,8 +1201,31 @@ module Aws::WorkSpacesWeb
 
     # Creates a web portal.
     #
+    # @option params [String] :display_name
+    #   The name of the web portal. This is not visible to users who log into
+    #   the web portal.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to add to the web portal. A tag is a key-value pair.
+    #
+    # @option params [String] :customer_managed_key
+    #   The customer managed key of the web portal.
+    #
     # @option params [Hash<String,String>] :additional_encryption_context
     #   The additional encryption context of the portal.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes only once. With an idempotent request, if the original
+    #   request completes successfully, subsequent retries with the same
+    #   client token returns the result from the original successful request.
+    #
+    #   If you do not specify a client token, one is automatically generated
+    #   by the Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @option params [String] :authentication_type
     #   The type of authentication integration points used when signing into
@@ -1169,34 +1242,11 @@ module Aws::WorkSpacesWeb
     #   provider integration), plus user and group access to your web portal,
     #   can be configured in the IAM Identity Center.
     #
-    # @option params [String] :client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. Idempotency ensures that an API request
-    #   completes only once. With an idempotent request, if the original
-    #   request completes successfully, subsequent retries with the same
-    #   client token returns the result from the original successful request.
-    #
-    #   If you do not specify a client token, one is automatically generated
-    #   by the Amazon Web Services SDK.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
-    # @option params [String] :customer_managed_key
-    #   The customer managed key of the web portal.
-    #
-    # @option params [String] :display_name
-    #   The name of the web portal. This is not visible to users who log into
-    #   the web portal.
-    #
     # @option params [String] :instance_type
     #   The type and resources of the underlying instance.
     #
     # @option params [Integer] :max_concurrent_sessions
     #   The maximum number of concurrent sessions for the portal.
-    #
-    # @option params [Array<Types::Tag>] :tags
-    #   The tags to add to the web portal. A tag is a key-value pair.
     #
     # @return [Types::CreatePortalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1206,21 +1256,21 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_portal({
-    #     additional_encryption_context: {
-    #       "StringType" => "StringType",
-    #     },
-    #     authentication_type: "Standard", # accepts Standard, IAM_Identity_Center
-    #     client_token: "ClientToken",
-    #     customer_managed_key: "keyArn",
     #     display_name: "DisplayName",
-    #     instance_type: "standard.regular", # accepts standard.regular, standard.large, standard.xlarge
-    #     max_concurrent_sessions: 1,
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     customer_managed_key: "keyArn",
+    #     additional_encryption_context: {
+    #       "StringType" => "StringType",
+    #     },
+    #     client_token: "ClientToken",
+    #     authentication_type: "Standard", # accepts Standard, IAM_Identity_Center
+    #     instance_type: "standard.regular", # accepts standard.regular, standard.large, standard.xlarge
+    #     max_concurrent_sessions: 1,
     #   })
     #
     # @example Response structure
@@ -1237,6 +1287,157 @@ module Aws::WorkSpacesWeb
       req.send_request(options)
     end
 
+    # Creates a session logger.
+    #
+    # @option params [required, Types::EventFilter] :event_filter
+    #   The filter that specifies the events to monitor.
+    #
+    # @option params [required, Types::LogConfiguration] :log_configuration
+    #   The configuration that specifies where logs are delivered.
+    #
+    # @option params [String] :display_name
+    #   The human-readable display name for the session logger resource.
+    #
+    # @option params [String] :customer_managed_key
+    #   The custom managed key of the session logger.
+    #
+    # @option params [Hash<String,String>] :additional_encryption_context
+    #   The additional encryption context of the session logger.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to add to the session logger.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes only once. With an idempotent request, if the original
+    #   request completes successfully, subsequent retries with the same
+    #   client token returns the result from the original successful request.
+    #   If you do not specify a client token, one is automatically generated
+    #   by the AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateSessionLoggerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSessionLoggerResponse#session_logger_arn #session_logger_arn} => String
+    #
+    #
+    # @example Example: Create Session Logger with All Events
+    #
+    #   # Creates a session logger that captures all events and stores them in S3 with JSON format and flat folder structure
+    #
+    #   resp = client.create_session_logger({
+    #     display_name: "Session Logger with All Events", 
+    #     event_filter: {
+    #       all: {
+    #       }, 
+    #     }, 
+    #     log_configuration: {
+    #       s3: {
+    #         bucket: "my-session-logs-bucket", 
+    #         bucket_owner: "123456789012", 
+    #         folder_structure: "Flat", 
+    #         key_prefix: "session-logs/all/events", 
+    #         log_file_format: "Json", 
+    #       }, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     session_logger_arn: "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/12345678-1234-1234-1234-123456789012", 
+    #   }
+    #
+    # @example Example: Create Session Logger with Specific Events
+    #
+    #   # Creates a session logger that captures only specific events with JSONLines format and nested folder structure
+    #
+    #   resp = client.create_session_logger({
+    #     additional_encryption_context: {
+    #       "EncryptionContextKey" => "EncryptionContextValue", 
+    #     }, 
+    #     customer_managed_key: "arn:aws:kms:us-west-2:123456789012:key/12345678-1234-1234-1234-123456789012", 
+    #     display_name: "Session Logger with Each Events", 
+    #     event_filter: {
+    #       include: [
+    #         "SessionStart", 
+    #         "SessionEnd", 
+    #         "UrlLoad", 
+    #         "WebsiteInteract", 
+    #       ], 
+    #     }, 
+    #     log_configuration: {
+    #       s3: {
+    #         bucket: "my-session-logs-bucket", 
+    #         bucket_owner: "123456789012", 
+    #         folder_structure: "NestedByDate", 
+    #         key_prefix: "session-logs/each/event", 
+    #         log_file_format: "JSONLines", 
+    #       }, 
+    #     }, 
+    #     tags: [
+    #       {
+    #         key: "KEY-1", 
+    #         value: "VALUE-1", 
+    #       }, 
+    #       {
+    #         key: "KEY-2", 
+    #         value: "VALUE-2", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     session_logger_arn: "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/87654321-4321-4321-4321-210987654321", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_session_logger({
+    #     event_filter: { # required
+    #       all: {
+    #       },
+    #       include: ["WebsiteInteract"], # accepts WebsiteInteract, FileDownloadFromSecureBrowserToRemoteDisk, FileTransferFromRemoteToLocalDisk, FileTransferFromLocalToRemoteDisk, FileUploadFromRemoteDiskToSecureBrowser, ContentPasteToWebsite, ContentTransferFromLocalToRemoteClipboard, ContentCopyFromWebsite, UrlLoad, TabOpen, TabClose, PrintJobSubmit, SessionConnect, SessionStart, SessionDisconnect, SessionEnd
+    #     },
+    #     log_configuration: { # required
+    #       s3: {
+    #         bucket: "S3Bucket", # required
+    #         key_prefix: "S3KeyPrefix",
+    #         bucket_owner: "S3BucketOwner",
+    #         log_file_format: "JSONLines", # required, accepts JSONLines, Json
+    #         folder_structure: "Flat", # required, accepts Flat, NestedByDate
+    #       },
+    #     },
+    #     display_name: "DisplayNameSafe",
+    #     customer_managed_key: "keyArn",
+    #     additional_encryption_context: {
+    #       "StringType" => "StringType",
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_logger_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/CreateSessionLogger AWS API Documentation
+    #
+    # @overload create_session_logger(params = {})
+    # @param [Hash] params ({})
+    def create_session_logger(params = {}, options = {})
+      req = build_request(:create_session_logger, params)
+      req.send_request(options)
+    end
+
     # Creates a trust store that can be associated with a web portal. A
     # trust store contains certificate authority (CA) certificates. Once
     # associated with a web portal, the browser in a streaming session will
@@ -1247,6 +1448,9 @@ module Aws::WorkSpacesWeb
     #
     # @option params [required, Array<String, StringIO, File>] :certificate_list
     #   A list of CA certificates to be added to the trust store.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to add to the trust store. A tag is a key-value pair.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -1261,9 +1465,6 @@ module Aws::WorkSpacesWeb
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [Array<Types::Tag>] :tags
-    #   The tags to add to the trust store. A tag is a key-value pair.
-    #
     # @return [Types::CreateTrustStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTrustStoreResponse#trust_store_arn #trust_store_arn} => String
@@ -1272,13 +1473,13 @@ module Aws::WorkSpacesWeb
     #
     #   resp = client.create_trust_store({
     #     certificate_list: ["data"], # required
-    #     client_token: "ClientToken",
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -1297,6 +1498,13 @@ module Aws::WorkSpacesWeb
     # Creates a user access logging settings resource that can be associated
     # with a web portal.
     #
+    # @option params [required, String] :kinesis_stream_arn
+    #   The ARN of the Kinesis stream.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to add to the user settings resource. A tag is a key-value
+    #   pair.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -1310,13 +1518,6 @@ module Aws::WorkSpacesWeb
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :kinesis_stream_arn
-    #   The ARN of the Kinesis stream.
-    #
-    # @option params [Array<Types::Tag>] :tags
-    #   The tags to add to the user settings resource. A tag is a key-value
-    #   pair.
-    #
     # @return [Types::CreateUserAccessLoggingSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserAccessLoggingSettingsResponse#user_access_logging_settings_arn #user_access_logging_settings_arn} => String
@@ -1324,7 +1525,6 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_user_access_logging_settings({
-    #     client_token: "ClientToken",
     #     kinesis_stream_arn: "KinesisStreamArn", # required
     #     tags: [
     #       {
@@ -1332,6 +1532,7 @@ module Aws::WorkSpacesWeb
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -1352,8 +1553,37 @@ module Aws::WorkSpacesWeb
     # users can transfer data between a streaming session and the their
     # local devices.
     #
-    # @option params [Hash<String,String>] :additional_encryption_context
-    #   The additional encryption context of the user settings.
+    # @option params [required, String] :copy_allowed
+    #   Specifies whether the user can copy text from the streaming session to
+    #   the local device.
+    #
+    # @option params [required, String] :paste_allowed
+    #   Specifies whether the user can paste text from the local device to the
+    #   streaming session.
+    #
+    # @option params [required, String] :download_allowed
+    #   Specifies whether the user can download files from the streaming
+    #   session to the local device.
+    #
+    # @option params [required, String] :upload_allowed
+    #   Specifies whether the user can upload files from the local device to
+    #   the streaming session.
+    #
+    # @option params [required, String] :print_allowed
+    #   Specifies whether the user can print to the local device.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to add to the user settings resource. A tag is a key-value
+    #   pair.
+    #
+    # @option params [Integer] :disconnect_timeout_in_minutes
+    #   The amount of time that a streaming session remains active after users
+    #   disconnect.
+    #
+    # @option params [Integer] :idle_disconnect_timeout_in_minutes
+    #   The amount of time that users can be idle (inactive) before they are
+    #   disconnected from their streaming session and the disconnect timeout
+    #   interval begins.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -1372,41 +1602,16 @@ module Aws::WorkSpacesWeb
     #   The configuration that specifies which cookies should be synchronized
     #   from the end user's local browser to the remote browser.
     #
-    # @option params [required, String] :copy_allowed
-    #   Specifies whether the user can copy text from the streaming session to
-    #   the local device.
-    #
     # @option params [String] :customer_managed_key
     #   The customer managed key used to encrypt sensitive information in the
     #   user settings.
     #
+    # @option params [Hash<String,String>] :additional_encryption_context
+    #   The additional encryption context of the user settings.
+    #
     # @option params [String] :deep_link_allowed
     #   Specifies whether the user can use deep links that open automatically
     #   when connecting to a session.
-    #
-    # @option params [Integer] :disconnect_timeout_in_minutes
-    #   The amount of time that a streaming session remains active after users
-    #   disconnect.
-    #
-    # @option params [required, String] :download_allowed
-    #   Specifies whether the user can download files from the streaming
-    #   session to the local device.
-    #
-    # @option params [Integer] :idle_disconnect_timeout_in_minutes
-    #   The amount of time that users can be idle (inactive) before they are
-    #   disconnected from their streaming session and the disconnect timeout
-    #   interval begins.
-    #
-    # @option params [required, String] :paste_allowed
-    #   Specifies whether the user can paste text from the local device to the
-    #   streaming session.
-    #
-    # @option params [required, String] :print_allowed
-    #   Specifies whether the user can print to the local device.
-    #
-    # @option params [Array<Types::Tag>] :tags
-    #   The tags to add to the user settings resource. A tag is a key-value
-    #   pair.
     #
     # @option params [Types::ToolbarConfiguration] :toolbar_configuration
     #   The configuration of the toolbar. This allows administrators to select
@@ -1415,10 +1620,6 @@ module Aws::WorkSpacesWeb
     #   sessions. If administrators do not modify these settings, end users
     #   retain control over their toolbar preferences.
     #
-    # @option params [required, String] :upload_allowed
-    #   Specifies whether the user can upload files from the local device to
-    #   the streaming session.
-    #
     # @return [Types::CreateUserSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserSettingsResponse#user_settings_arn #user_settings_arn} => String
@@ -1426,9 +1627,19 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_user_settings({
-    #     additional_encryption_context: {
-    #       "StringType" => "StringType",
-    #     },
+    #     copy_allowed: "Disabled", # required, accepts Disabled, Enabled
+    #     paste_allowed: "Disabled", # required, accepts Disabled, Enabled
+    #     download_allowed: "Disabled", # required, accepts Disabled, Enabled
+    #     upload_allowed: "Disabled", # required, accepts Disabled, Enabled
+    #     print_allowed: "Disabled", # required, accepts Disabled, Enabled
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     disconnect_timeout_in_minutes: 1,
+    #     idle_disconnect_timeout_in_minutes: 1,
     #     client_token: "ClientToken",
     #     cookie_synchronization_configuration: {
     #       allowlist: [ # required
@@ -1446,27 +1657,17 @@ module Aws::WorkSpacesWeb
     #         },
     #       ],
     #     },
-    #     copy_allowed: "Disabled", # required, accepts Disabled, Enabled
     #     customer_managed_key: "keyArn",
+    #     additional_encryption_context: {
+    #       "StringType" => "StringType",
+    #     },
     #     deep_link_allowed: "Disabled", # accepts Disabled, Enabled
-    #     disconnect_timeout_in_minutes: 1,
-    #     download_allowed: "Disabled", # required, accepts Disabled, Enabled
-    #     idle_disconnect_timeout_in_minutes: 1,
-    #     paste_allowed: "Disabled", # required, accepts Disabled, Enabled
-    #     print_allowed: "Disabled", # required, accepts Disabled, Enabled
-    #     tags: [
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       },
-    #     ],
     #     toolbar_configuration: {
-    #       hidden_toolbar_items: ["Windows"], # accepts Windows, DualMonitor, FullScreen, Webcam, Microphone
-    #       max_display_resolution: "size4096X2160", # accepts size4096X2160, size3840X2160, size3440X1440, size2560X1440, size1920X1080, size1280X720, size1024X768, size800X600
     #       toolbar_type: "Floating", # accepts Floating, Docked
     #       visual_mode: "Dark", # accepts Dark, Light
+    #       hidden_toolbar_items: ["Windows"], # accepts Windows, DualMonitor, FullScreen, Webcam, Microphone
+    #       max_display_resolution: "size4096X2160", # accepts size4096X2160, size3840X2160, size3440X1440, size2560X1440, size1920X1080, size1280X720, size1024X768, size800X600
     #     },
-    #     upload_allowed: "Disabled", # required, accepts Disabled, Enabled
     #   })
     #
     # @example Response structure
@@ -1611,6 +1812,41 @@ module Aws::WorkSpacesWeb
     # @param [Hash] params ({})
     def delete_portal(params = {}, options = {})
       req = build_request(:delete_portal, params)
+      req.send_request(options)
+    end
+
+    # Deletes a session logger resource.
+    #
+    # @option params [required, String] :session_logger_arn
+    #   The ARN of the session logger.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Delete Session Logger
+    #
+    #   # Deletes a session logger resource
+    #
+    #   resp = client.delete_session_logger({
+    #     session_logger_arn: "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/12345678-1234-1234-1234-123456789012", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_session_logger({
+    #     session_logger_arn: "ARN", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/DeleteSessionLogger AWS API Documentation
+    #
+    # @overload delete_session_logger(params = {})
+    # @param [Hash] params ({})
+    def delete_session_logger(params = {}, options = {})
+      req = build_request(:delete_session_logger, params)
       req.send_request(options)
     end
 
@@ -1768,6 +2004,41 @@ module Aws::WorkSpacesWeb
       req.send_request(options)
     end
 
+    # Disassociates a session logger from a portal.
+    #
+    # @option params [required, String] :portal_arn
+    #   The ARN of the portal to disassociate from the a session logger.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Disassociate Session Logger from Portal
+    #
+    #   # Removes the association between a session logger and a portal
+    #
+    #   resp = client.disassociate_session_logger({
+    #     portal_arn: "arn:aws:workspaces-web:us-west-2:123456789012:portal/12345678-1234-1234-1234-123456789012", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_session_logger({
+    #     portal_arn: "ARN", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/DisassociateSessionLogger AWS API Documentation
+    #
+    # @overload disassociate_session_logger(params = {})
+    # @param [Hash] params ({})
+    def disassociate_session_logger(params = {}, options = {})
+      req = build_request(:disassociate_session_logger, params)
+      req.send_request(options)
+    end
+
     # Disassociates a trust store from a web portal.
     #
     # @option params [required, String] :portal_arn
@@ -1877,13 +2148,13 @@ module Aws::WorkSpacesWeb
     #
     # @example Response structure
     #
-    #   resp.browser_settings.additional_encryption_context #=> Hash
-    #   resp.browser_settings.additional_encryption_context["StringType"] #=> String
+    #   resp.browser_settings.browser_settings_arn #=> String
     #   resp.browser_settings.associated_portal_arns #=> Array
     #   resp.browser_settings.associated_portal_arns[0] #=> String
     #   resp.browser_settings.browser_policy #=> String
-    #   resp.browser_settings.browser_settings_arn #=> String
     #   resp.browser_settings.customer_managed_key #=> String
+    #   resp.browser_settings.additional_encryption_context #=> Hash
+    #   resp.browser_settings.additional_encryption_context["StringType"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetBrowserSettings AWS API Documentation
     #
@@ -1911,33 +2182,33 @@ module Aws::WorkSpacesWeb
     #
     # @example Response structure
     #
-    #   resp.data_protection_settings.additional_encryption_context #=> Hash
-    #   resp.data_protection_settings.additional_encryption_context["StringType"] #=> String
-    #   resp.data_protection_settings.associated_portal_arns #=> Array
-    #   resp.data_protection_settings.associated_portal_arns[0] #=> String
-    #   resp.data_protection_settings.creation_date #=> Time
-    #   resp.data_protection_settings.customer_managed_key #=> String
     #   resp.data_protection_settings.data_protection_settings_arn #=> String
-    #   resp.data_protection_settings.description #=> String
-    #   resp.data_protection_settings.display_name #=> String
-    #   resp.data_protection_settings.inline_redaction_configuration.global_confidence_level #=> Integer
-    #   resp.data_protection_settings.inline_redaction_configuration.global_enforced_urls #=> Array
-    #   resp.data_protection_settings.inline_redaction_configuration.global_enforced_urls[0] #=> String
-    #   resp.data_protection_settings.inline_redaction_configuration.global_exempt_urls #=> Array
-    #   resp.data_protection_settings.inline_redaction_configuration.global_exempt_urls[0] #=> String
     #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns #=> Array
     #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].built_in_pattern_id #=> String
-    #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].confidence_level #=> Integer
-    #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].custom_pattern.keyword_regex #=> String
-    #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].custom_pattern.pattern_description #=> String
     #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].custom_pattern.pattern_name #=> String
     #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].custom_pattern.pattern_regex #=> String
+    #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].custom_pattern.pattern_description #=> String
+    #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].custom_pattern.keyword_regex #=> String
+    #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].redaction_place_holder.redaction_place_holder_type #=> String, one of "CustomText"
+    #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].redaction_place_holder.redaction_place_holder_text #=> String
     #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].enforced_urls #=> Array
     #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].enforced_urls[0] #=> String
     #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].exempt_urls #=> Array
     #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].exempt_urls[0] #=> String
-    #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].redaction_place_holder.redaction_place_holder_text #=> String
-    #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].redaction_place_holder.redaction_place_holder_type #=> String, one of "CustomText"
+    #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].confidence_level #=> Integer
+    #   resp.data_protection_settings.inline_redaction_configuration.global_enforced_urls #=> Array
+    #   resp.data_protection_settings.inline_redaction_configuration.global_enforced_urls[0] #=> String
+    #   resp.data_protection_settings.inline_redaction_configuration.global_exempt_urls #=> Array
+    #   resp.data_protection_settings.inline_redaction_configuration.global_exempt_urls[0] #=> String
+    #   resp.data_protection_settings.inline_redaction_configuration.global_confidence_level #=> Integer
+    #   resp.data_protection_settings.associated_portal_arns #=> Array
+    #   resp.data_protection_settings.associated_portal_arns[0] #=> String
+    #   resp.data_protection_settings.display_name #=> String
+    #   resp.data_protection_settings.description #=> String
+    #   resp.data_protection_settings.creation_date #=> Time
+    #   resp.data_protection_settings.customer_managed_key #=> String
+    #   resp.data_protection_settings.additional_encryption_context #=> Hash
+    #   resp.data_protection_settings.additional_encryption_context["StringType"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetDataProtectionSettings AWS API Documentation
     #
@@ -1966,10 +2237,10 @@ module Aws::WorkSpacesWeb
     # @example Response structure
     #
     #   resp.identity_provider.identity_provider_arn #=> String
-    #   resp.identity_provider.identity_provider_details #=> Hash
-    #   resp.identity_provider.identity_provider_details["StringType"] #=> String
     #   resp.identity_provider.identity_provider_name #=> String
     #   resp.identity_provider.identity_provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "SignInWithApple", "OIDC"
+    #   resp.identity_provider.identity_provider_details #=> Hash
+    #   resp.identity_provider.identity_provider_details["StringType"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetIdentityProvider AWS API Documentation
     #
@@ -1997,18 +2268,18 @@ module Aws::WorkSpacesWeb
     #
     # @example Response structure
     #
-    #   resp.ip_access_settings.additional_encryption_context #=> Hash
-    #   resp.ip_access_settings.additional_encryption_context["StringType"] #=> String
+    #   resp.ip_access_settings.ip_access_settings_arn #=> String
     #   resp.ip_access_settings.associated_portal_arns #=> Array
     #   resp.ip_access_settings.associated_portal_arns[0] #=> String
+    #   resp.ip_access_settings.ip_rules #=> Array
+    #   resp.ip_access_settings.ip_rules[0].ip_range #=> String
+    #   resp.ip_access_settings.ip_rules[0].description #=> String
+    #   resp.ip_access_settings.display_name #=> String
+    #   resp.ip_access_settings.description #=> String
     #   resp.ip_access_settings.creation_date #=> Time
     #   resp.ip_access_settings.customer_managed_key #=> String
-    #   resp.ip_access_settings.description #=> String
-    #   resp.ip_access_settings.display_name #=> String
-    #   resp.ip_access_settings.ip_access_settings_arn #=> String
-    #   resp.ip_access_settings.ip_rules #=> Array
-    #   resp.ip_access_settings.ip_rules[0].description #=> String
-    #   resp.ip_access_settings.ip_rules[0].ip_range #=> String
+    #   resp.ip_access_settings.additional_encryption_context #=> Hash
+    #   resp.ip_access_settings.additional_encryption_context["StringType"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetIpAccessSettings AWS API Documentation
     #
@@ -2036,14 +2307,14 @@ module Aws::WorkSpacesWeb
     #
     # @example Response structure
     #
+    #   resp.network_settings.network_settings_arn #=> String
     #   resp.network_settings.associated_portal_arns #=> Array
     #   resp.network_settings.associated_portal_arns[0] #=> String
-    #   resp.network_settings.network_settings_arn #=> String
-    #   resp.network_settings.security_group_ids #=> Array
-    #   resp.network_settings.security_group_ids[0] #=> String
+    #   resp.network_settings.vpc_id #=> String
     #   resp.network_settings.subnet_ids #=> Array
     #   resp.network_settings.subnet_ids[0] #=> String
-    #   resp.network_settings.vpc_id #=> String
+    #   resp.network_settings.security_group_ids #=> Array
+    #   resp.network_settings.security_group_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetNetworkSettings AWS API Documentation
     #
@@ -2071,27 +2342,28 @@ module Aws::WorkSpacesWeb
     #
     # @example Response structure
     #
+    #   resp.portal.portal_arn #=> String
+    #   resp.portal.renderer_type #=> String, one of "AppStream"
+    #   resp.portal.browser_type #=> String, one of "Chrome"
+    #   resp.portal.portal_status #=> String, one of "Incomplete", "Pending", "Active"
+    #   resp.portal.portal_endpoint #=> String
+    #   resp.portal.display_name #=> String
+    #   resp.portal.creation_date #=> Time
+    #   resp.portal.browser_settings_arn #=> String
+    #   resp.portal.data_protection_settings_arn #=> String
+    #   resp.portal.user_settings_arn #=> String
+    #   resp.portal.network_settings_arn #=> String
+    #   resp.portal.session_logger_arn #=> String
+    #   resp.portal.trust_store_arn #=> String
+    #   resp.portal.status_reason #=> String
+    #   resp.portal.user_access_logging_settings_arn #=> String
+    #   resp.portal.authentication_type #=> String, one of "Standard", "IAM_Identity_Center"
+    #   resp.portal.ip_access_settings_arn #=> String
+    #   resp.portal.customer_managed_key #=> String
     #   resp.portal.additional_encryption_context #=> Hash
     #   resp.portal.additional_encryption_context["StringType"] #=> String
-    #   resp.portal.authentication_type #=> String, one of "Standard", "IAM_Identity_Center"
-    #   resp.portal.browser_settings_arn #=> String
-    #   resp.portal.browser_type #=> String, one of "Chrome"
-    #   resp.portal.creation_date #=> Time
-    #   resp.portal.customer_managed_key #=> String
-    #   resp.portal.data_protection_settings_arn #=> String
-    #   resp.portal.display_name #=> String
     #   resp.portal.instance_type #=> String, one of "standard.regular", "standard.large", "standard.xlarge"
-    #   resp.portal.ip_access_settings_arn #=> String
     #   resp.portal.max_concurrent_sessions #=> Integer
-    #   resp.portal.network_settings_arn #=> String
-    #   resp.portal.portal_arn #=> String
-    #   resp.portal.portal_endpoint #=> String
-    #   resp.portal.portal_status #=> String, one of "Incomplete", "Pending", "Active"
-    #   resp.portal.renderer_type #=> String, one of "AppStream"
-    #   resp.portal.status_reason #=> String
-    #   resp.portal.trust_store_arn #=> String
-    #   resp.portal.user_access_logging_settings_arn #=> String
-    #   resp.portal.user_settings_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetPortal AWS API Documentation
     #
@@ -2153,14 +2425,14 @@ module Aws::WorkSpacesWeb
     #
     # @example Response structure
     #
-    #   resp.session.client_ip_addresses #=> Array
-    #   resp.session.client_ip_addresses[0] #=> String
-    #   resp.session.end_time #=> Time
     #   resp.session.portal_arn #=> String
     #   resp.session.session_id #=> String
-    #   resp.session.start_time #=> Time
-    #   resp.session.status #=> String, one of "Active", "Terminated"
     #   resp.session.username #=> String
+    #   resp.session.client_ip_addresses #=> Array
+    #   resp.session.client_ip_addresses[0] #=> String
+    #   resp.session.status #=> String, one of "Active", "Terminated"
+    #   resp.session.start_time #=> Time
+    #   resp.session.end_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetSession AWS API Documentation
     #
@@ -2168,6 +2440,120 @@ module Aws::WorkSpacesWeb
     # @param [Hash] params ({})
     def get_session(params = {}, options = {})
       req = build_request(:get_session, params)
+      req.send_request(options)
+    end
+
+    # Gets details about a specific session logger resource.
+    #
+    # @option params [required, String] :session_logger_arn
+    #   The ARN of the session logger.
+    #
+    # @return [Types::GetSessionLoggerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSessionLoggerResponse#session_logger #session_logger} => Types::SessionLogger
+    #
+    #
+    # @example Example: Get Session Logger with All Events
+    #
+    #   # Retrieves a session logger configured for all events
+    #
+    #   resp = client.get_session_logger({
+    #     session_logger_arn: "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/12345678-1234-1234-1234-123456789012", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     session_logger: {
+    #       associated_portal_arns: [
+    #         "arn:aws:workspaces-web:us-west-2:123456789012:portal/87654321-4321-4321-4321-210987654321", 
+    #       ], 
+    #       creation_date: Time.parse("2024-01-15T10:30:00Z"), 
+    #       display_name: "Session Logger with All Events", 
+    #       event_filter: {
+    #         all: {
+    #         }, 
+    #       }, 
+    #       log_configuration: {
+    #         s3: {
+    #           bucket: "my-session-logs-bucket-1", 
+    #           bucket_owner: "123456789012", 
+    #           folder_structure: "Flat", 
+    #           key_prefix: "session-logs/all/events", 
+    #           log_file_format: "Json", 
+    #         }, 
+    #       }, 
+    #       session_logger_arn: "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/12345678-1234-1234-1234-123456789012", 
+    #     }, 
+    #   }
+    #
+    # @example Example: Get Session Logger with Specific Events
+    #
+    #   # Retrieves a session logger configured for specific events
+    #
+    #   resp = client.get_session_logger({
+    #     session_logger_arn: "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/87654321-4321-4321-4321-210987654321", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     session_logger: {
+    #       additional_encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue", 
+    #       }, 
+    #       creation_date: Time.parse("2024-01-15T14:45:00Z"), 
+    #       customer_managed_key: "arn:aws:kms:us-west-2:123456789012:key/12345678-1234-1234-1234-123456789012", 
+    #       display_name: "Session Logger with Each Events", 
+    #       event_filter: {
+    #         include: [
+    #           "SessionStart", 
+    #           "SessionEnd", 
+    #           "UrlLoad", 
+    #           "WebsiteInteract", 
+    #         ], 
+    #       }, 
+    #       log_configuration: {
+    #         s3: {
+    #           bucket: "my-session-logs-bucket-2", 
+    #           bucket_owner: "123456789012", 
+    #           folder_structure: "NestedByDate", 
+    #           key_prefix: "session-logs/each/event", 
+    #           log_file_format: "JSONLines", 
+    #         }, 
+    #       }, 
+    #       session_logger_arn: "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/87654321-4321-4321-4321-210987654321", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_session_logger({
+    #     session_logger_arn: "ARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_logger.session_logger_arn #=> String
+    #   resp.session_logger.event_filter.include #=> Array
+    #   resp.session_logger.event_filter.include[0] #=> String, one of "WebsiteInteract", "FileDownloadFromSecureBrowserToRemoteDisk", "FileTransferFromRemoteToLocalDisk", "FileTransferFromLocalToRemoteDisk", "FileUploadFromRemoteDiskToSecureBrowser", "ContentPasteToWebsite", "ContentTransferFromLocalToRemoteClipboard", "ContentCopyFromWebsite", "UrlLoad", "TabOpen", "TabClose", "PrintJobSubmit", "SessionConnect", "SessionStart", "SessionDisconnect", "SessionEnd"
+    #   resp.session_logger.log_configuration.s3.bucket #=> String
+    #   resp.session_logger.log_configuration.s3.key_prefix #=> String
+    #   resp.session_logger.log_configuration.s3.bucket_owner #=> String
+    #   resp.session_logger.log_configuration.s3.log_file_format #=> String, one of "JSONLines", "Json"
+    #   resp.session_logger.log_configuration.s3.folder_structure #=> String, one of "Flat", "NestedByDate"
+    #   resp.session_logger.customer_managed_key #=> String
+    #   resp.session_logger.additional_encryption_context #=> Hash
+    #   resp.session_logger.additional_encryption_context["StringType"] #=> String
+    #   resp.session_logger.associated_portal_arns #=> Array
+    #   resp.session_logger.associated_portal_arns[0] #=> String
+    #   resp.session_logger.display_name #=> String
+    #   resp.session_logger.creation_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetSessionLogger AWS API Documentation
+    #
+    # @overload get_session_logger(params = {})
+    # @param [Hash] params ({})
+    def get_session_logger(params = {}, options = {})
+      req = build_request(:get_session_logger, params)
       req.send_request(options)
     end
 
@@ -2203,33 +2589,33 @@ module Aws::WorkSpacesWeb
 
     # Gets the trust store certificate.
     #
-    # @option params [required, String] :thumbprint
-    #   The thumbprint of the trust store certificate.
-    #
     # @option params [required, String] :trust_store_arn
     #   The ARN of the trust store certificate.
     #
+    # @option params [required, String] :thumbprint
+    #   The thumbprint of the trust store certificate.
+    #
     # @return [Types::GetTrustStoreCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetTrustStoreCertificateResponse#certificate #certificate} => Types::Certificate
     #   * {Types::GetTrustStoreCertificateResponse#trust_store_arn #trust_store_arn} => String
+    #   * {Types::GetTrustStoreCertificateResponse#certificate #certificate} => Types::Certificate
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_trust_store_certificate({
-    #     thumbprint: "CertificateThumbprint", # required
     #     trust_store_arn: "ARN", # required
+    #     thumbprint: "CertificateThumbprint", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.certificate.body #=> String
-    #   resp.certificate.issuer #=> String
-    #   resp.certificate.not_valid_after #=> Time
-    #   resp.certificate.not_valid_before #=> Time
-    #   resp.certificate.subject #=> String
-    #   resp.certificate.thumbprint #=> String
     #   resp.trust_store_arn #=> String
+    #   resp.certificate.thumbprint #=> String
+    #   resp.certificate.subject #=> String
+    #   resp.certificate.issuer #=> String
+    #   resp.certificate.not_valid_before #=> Time
+    #   resp.certificate.not_valid_after #=> Time
+    #   resp.certificate.body #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetTrustStoreCertificate AWS API Documentation
     #
@@ -2257,10 +2643,10 @@ module Aws::WorkSpacesWeb
     #
     # @example Response structure
     #
+    #   resp.user_access_logging_settings.user_access_logging_settings_arn #=> String
     #   resp.user_access_logging_settings.associated_portal_arns #=> Array
     #   resp.user_access_logging_settings.associated_portal_arns[0] #=> String
     #   resp.user_access_logging_settings.kinesis_stream_arn #=> String
-    #   resp.user_access_logging_settings.user_access_logging_settings_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetUserAccessLoggingSettings AWS API Documentation
     #
@@ -2288,10 +2674,16 @@ module Aws::WorkSpacesWeb
     #
     # @example Response structure
     #
-    #   resp.user_settings.additional_encryption_context #=> Hash
-    #   resp.user_settings.additional_encryption_context["StringType"] #=> String
+    #   resp.user_settings.user_settings_arn #=> String
     #   resp.user_settings.associated_portal_arns #=> Array
     #   resp.user_settings.associated_portal_arns[0] #=> String
+    #   resp.user_settings.copy_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings.paste_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings.download_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings.upload_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings.print_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings.disconnect_timeout_in_minutes #=> Integer
+    #   resp.user_settings.idle_disconnect_timeout_in_minutes #=> Integer
     #   resp.user_settings.cookie_synchronization_configuration.allowlist #=> Array
     #   resp.user_settings.cookie_synchronization_configuration.allowlist[0].domain #=> String
     #   resp.user_settings.cookie_synchronization_configuration.allowlist[0].name #=> String
@@ -2300,21 +2692,15 @@ module Aws::WorkSpacesWeb
     #   resp.user_settings.cookie_synchronization_configuration.blocklist[0].domain #=> String
     #   resp.user_settings.cookie_synchronization_configuration.blocklist[0].name #=> String
     #   resp.user_settings.cookie_synchronization_configuration.blocklist[0].path #=> String
-    #   resp.user_settings.copy_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings.customer_managed_key #=> String
+    #   resp.user_settings.additional_encryption_context #=> Hash
+    #   resp.user_settings.additional_encryption_context["StringType"] #=> String
     #   resp.user_settings.deep_link_allowed #=> String, one of "Disabled", "Enabled"
-    #   resp.user_settings.disconnect_timeout_in_minutes #=> Integer
-    #   resp.user_settings.download_allowed #=> String, one of "Disabled", "Enabled"
-    #   resp.user_settings.idle_disconnect_timeout_in_minutes #=> Integer
-    #   resp.user_settings.paste_allowed #=> String, one of "Disabled", "Enabled"
-    #   resp.user_settings.print_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings.toolbar_configuration.toolbar_type #=> String, one of "Floating", "Docked"
+    #   resp.user_settings.toolbar_configuration.visual_mode #=> String, one of "Dark", "Light"
     #   resp.user_settings.toolbar_configuration.hidden_toolbar_items #=> Array
     #   resp.user_settings.toolbar_configuration.hidden_toolbar_items[0] #=> String, one of "Windows", "DualMonitor", "FullScreen", "Webcam", "Microphone"
     #   resp.user_settings.toolbar_configuration.max_display_resolution #=> String, one of "size4096X2160", "size3840X2160", "size3440X1440", "size2560X1440", "size1920X1080", "size1280X720", "size1024X768", "size800X600"
-    #   resp.user_settings.toolbar_configuration.toolbar_type #=> String, one of "Floating", "Docked"
-    #   resp.user_settings.toolbar_configuration.visual_mode #=> String, one of "Dark", "Light"
-    #   resp.user_settings.upload_allowed #=> String, one of "Disabled", "Enabled"
-    #   resp.user_settings.user_settings_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetUserSettings AWS API Documentation
     #
@@ -2327,12 +2713,12 @@ module Aws::WorkSpacesWeb
 
     # Retrieves a list of browser settings.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to be included in the next page.
-    #
     # @option params [String] :next_token
     #   The pagination token used to retrieve the next page of results for
     #   this operation.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be included in the next page.
     #
     # @return [Types::ListBrowserSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2344,8 +2730,8 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_browser_settings({
-    #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -2365,12 +2751,12 @@ module Aws::WorkSpacesWeb
 
     # Retrieves a list of data protection settings.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to be included in the next page.
-    #
     # @option params [String] :next_token
     #   The pagination token used to retrieve the next page of results for
     #   this operation.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be included in the next page.
     #
     # @return [Types::ListDataProtectionSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2382,17 +2768,17 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_data_protection_settings({
-    #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.data_protection_settings #=> Array
-    #   resp.data_protection_settings[0].creation_date #=> Time
     #   resp.data_protection_settings[0].data_protection_settings_arn #=> String
-    #   resp.data_protection_settings[0].description #=> String
     #   resp.data_protection_settings[0].display_name #=> String
+    #   resp.data_protection_settings[0].description #=> String
+    #   resp.data_protection_settings[0].creation_date #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListDataProtectionSettings AWS API Documentation
@@ -2406,38 +2792,38 @@ module Aws::WorkSpacesWeb
 
     # Retrieves a list of identity providers for a specific web portal.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to be included in the next page.
-    #
     # @option params [String] :next_token
     #   The pagination token used to retrieve the next page of results for
     #   this operation.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be included in the next page.
     #
     # @option params [required, String] :portal_arn
     #   The ARN of the web portal.
     #
     # @return [Types::ListIdentityProvidersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListIdentityProvidersResponse#identity_providers #identity_providers} => Array&lt;Types::IdentityProviderSummary&gt;
     #   * {Types::ListIdentityProvidersResponse#next_token #next_token} => String
+    #   * {Types::ListIdentityProvidersResponse#identity_providers #identity_providers} => Array&lt;Types::IdentityProviderSummary&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_identity_providers({
-    #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #     portal_arn: "ARN", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.identity_providers #=> Array
     #   resp.identity_providers[0].identity_provider_arn #=> String
     #   resp.identity_providers[0].identity_provider_name #=> String
     #   resp.identity_providers[0].identity_provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "SignInWithApple", "OIDC"
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListIdentityProviders AWS API Documentation
     #
@@ -2450,12 +2836,12 @@ module Aws::WorkSpacesWeb
 
     # Retrieves a list of IP access settings.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to be included in the next page.
-    #
     # @option params [String] :next_token
     #   The pagination token used to retrieve the next page of results for
     #   this operation.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be included in the next page.
     #
     # @return [Types::ListIpAccessSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2467,17 +2853,17 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_ip_access_settings({
-    #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.ip_access_settings #=> Array
-    #   resp.ip_access_settings[0].creation_date #=> Time
-    #   resp.ip_access_settings[0].description #=> String
-    #   resp.ip_access_settings[0].display_name #=> String
     #   resp.ip_access_settings[0].ip_access_settings_arn #=> String
+    #   resp.ip_access_settings[0].display_name #=> String
+    #   resp.ip_access_settings[0].description #=> String
+    #   resp.ip_access_settings[0].creation_date #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListIpAccessSettings AWS API Documentation
@@ -2491,12 +2877,12 @@ module Aws::WorkSpacesWeb
 
     # Retrieves a list of network settings.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to be included in the next page.
-    #
     # @option params [String] :next_token
     #   The pagination token used to retrieve the next page of results for
     #   this operation.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be included in the next page.
     #
     # @return [Types::ListNetworkSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2508,8 +2894,8 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_network_settings({
-    #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -2530,48 +2916,49 @@ module Aws::WorkSpacesWeb
 
     # Retrieves a list or web portals.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to be included in the next page.
-    #
     # @option params [String] :next_token
     #   The pagination token used to retrieve the next page of results for
     #   this operation.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be included in the next page.
+    #
     # @return [Types::ListPortalsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListPortalsResponse#next_token #next_token} => String
     #   * {Types::ListPortalsResponse#portals #portals} => Array&lt;Types::PortalSummary&gt;
+    #   * {Types::ListPortalsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_portals({
-    #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.portals #=> Array
-    #   resp.portals[0].authentication_type #=> String, one of "Standard", "IAM_Identity_Center"
-    #   resp.portals[0].browser_settings_arn #=> String
-    #   resp.portals[0].browser_type #=> String, one of "Chrome"
-    #   resp.portals[0].creation_date #=> Time
-    #   resp.portals[0].data_protection_settings_arn #=> String
-    #   resp.portals[0].display_name #=> String
-    #   resp.portals[0].instance_type #=> String, one of "standard.regular", "standard.large", "standard.xlarge"
-    #   resp.portals[0].ip_access_settings_arn #=> String
-    #   resp.portals[0].max_concurrent_sessions #=> Integer
-    #   resp.portals[0].network_settings_arn #=> String
     #   resp.portals[0].portal_arn #=> String
-    #   resp.portals[0].portal_endpoint #=> String
-    #   resp.portals[0].portal_status #=> String, one of "Incomplete", "Pending", "Active"
     #   resp.portals[0].renderer_type #=> String, one of "AppStream"
+    #   resp.portals[0].browser_type #=> String, one of "Chrome"
+    #   resp.portals[0].portal_status #=> String, one of "Incomplete", "Pending", "Active"
+    #   resp.portals[0].portal_endpoint #=> String
+    #   resp.portals[0].display_name #=> String
+    #   resp.portals[0].creation_date #=> Time
+    #   resp.portals[0].browser_settings_arn #=> String
+    #   resp.portals[0].data_protection_settings_arn #=> String
+    #   resp.portals[0].user_settings_arn #=> String
+    #   resp.portals[0].network_settings_arn #=> String
+    #   resp.portals[0].session_logger_arn #=> String
     #   resp.portals[0].trust_store_arn #=> String
     #   resp.portals[0].user_access_logging_settings_arn #=> String
-    #   resp.portals[0].user_settings_arn #=> String
+    #   resp.portals[0].authentication_type #=> String, one of "Standard", "IAM_Identity_Center"
+    #   resp.portals[0].ip_access_settings_arn #=> String
+    #   resp.portals[0].instance_type #=> String, one of "standard.regular", "standard.large", "standard.xlarge"
+    #   resp.portals[0].max_concurrent_sessions #=> Integer
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListPortals AWS API Documentation
     #
@@ -2582,18 +2969,131 @@ module Aws::WorkSpacesWeb
       req.send_request(options)
     end
 
-    # Lists information for multiple secure browser sessions from a specific
-    # portal.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to be included in the next page.
+    # Lists all available session logger resources.
     #
     # @option params [String] :next_token
     #   The pagination token used to retrieve the next page of results for
     #   this operation.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be included in the next page.
+    #
+    # @return [Types::ListSessionLoggersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSessionLoggersResponse#session_loggers #session_loggers} => Array&lt;Types::SessionLoggerSummary&gt;
+    #   * {Types::ListSessionLoggersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List All Session Loggers
+    #
+    #   # Lists all session loggers in the account without pagination
+    #
+    #   resp = client.list_session_loggers({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     session_loggers: [
+    #       {
+    #         creation_date: Time.parse("2024-01-15T10:30:00Z"), 
+    #         display_name: "Session Logger with All Events", 
+    #         log_configuration: {
+    #           s3: {
+    #             bucket: "my-session-logs-bucket-1", 
+    #             bucket_owner: "123456789012", 
+    #             folder_structure: "Flat", 
+    #             key_prefix: "session-logs/all/events", 
+    #             log_file_format: "Json", 
+    #           }, 
+    #         }, 
+    #         session_logger_arn: "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/12345678-1234-1234-1234-123456789012", 
+    #       }, 
+    #       {
+    #         creation_date: Time.parse("2024-01-15T14:45:00Z"), 
+    #         display_name: "Session Logger with Each Events", 
+    #         log_configuration: {
+    #           s3: {
+    #             bucket: "my-session-logs-bucket-2", 
+    #             bucket_owner: "123456789012", 
+    #             folder_structure: "NestedByDate", 
+    #             key_prefix: "session-logs/each/event", 
+    #             log_file_format: "JSONLines", 
+    #           }, 
+    #         }, 
+    #         session_logger_arn: "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/87654321-4321-4321-4321-210987654321", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: List Session Loggers with Pagination
+    #
+    #   # Lists session loggers with pagination parameters
+    #
+    #   resp = client.list_session_loggers({
+    #     max_results: 1, 
+    #     next_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9", 
+    #     session_loggers: [
+    #       {
+    #         creation_date: Time.parse("2024-03-15T12:45:00Z"), 
+    #         display_name: "Session Logger Example with Pagination", 
+    #         log_configuration: {
+    #           s3: {
+    #             bucket: "my-session-logs-bucket-3", 
+    #             bucket_owner: "123456789012", 
+    #             folder_structure: "Flat", 
+    #             key_prefix: "session-logs/pagination/example", 
+    #             log_file_format: "JSONLines", 
+    #           }, 
+    #         }, 
+    #         session_logger_arn: "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/11111111-1111-1111-1111-111111111111", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_session_loggers({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_loggers #=> Array
+    #   resp.session_loggers[0].session_logger_arn #=> String
+    #   resp.session_loggers[0].log_configuration.s3.bucket #=> String
+    #   resp.session_loggers[0].log_configuration.s3.key_prefix #=> String
+    #   resp.session_loggers[0].log_configuration.s3.bucket_owner #=> String
+    #   resp.session_loggers[0].log_configuration.s3.log_file_format #=> String, one of "JSONLines", "Json"
+    #   resp.session_loggers[0].log_configuration.s3.folder_structure #=> String, one of "Flat", "NestedByDate"
+    #   resp.session_loggers[0].display_name #=> String
+    #   resp.session_loggers[0].creation_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListSessionLoggers AWS API Documentation
+    #
+    # @overload list_session_loggers(params = {})
+    # @param [Hash] params ({})
+    def list_session_loggers(params = {}, options = {})
+      req = build_request(:list_session_loggers, params)
+      req.send_request(options)
+    end
+
+    # Lists information for multiple secure browser sessions from a specific
+    # portal.
+    #
     # @option params [required, String] :portal_id
     #   The ID of the web portal for the sessions.
+    #
+    # @option params [String] :username
+    #   The username of the session.
     #
     # @option params [String] :session_id
     #   The ID of the session.
@@ -2604,38 +3104,42 @@ module Aws::WorkSpacesWeb
     # @option params [String] :status
     #   The status of the session.
     #
-    # @option params [String] :username
-    #   The username of the session.
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be included in the next page.
+    #
+    # @option params [String] :next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
     #
     # @return [Types::ListSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListSessionsResponse#next_token #next_token} => String
     #   * {Types::ListSessionsResponse#sessions #sessions} => Array&lt;Types::SessionSummary&gt;
+    #   * {Types::ListSessionsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_sessions({
-    #     max_results: 1,
-    #     next_token: "PaginationToken",
     #     portal_id: "PortalId", # required
+    #     username: "Username",
     #     session_id: "SessionId",
     #     sort_by: "StartTimeAscending", # accepts StartTimeAscending, StartTimeDescending
     #     status: "Active", # accepts Active, Terminated
-    #     username: "Username",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.sessions #=> Array
-    #   resp.sessions[0].end_time #=> Time
     #   resp.sessions[0].portal_arn #=> String
     #   resp.sessions[0].session_id #=> String
-    #   resp.sessions[0].start_time #=> Time
-    #   resp.sessions[0].status #=> String, one of "Active", "Terminated"
     #   resp.sessions[0].username #=> String
+    #   resp.sessions[0].status #=> String, one of "Active", "Terminated"
+    #   resp.sessions[0].start_time #=> Time
+    #   resp.sessions[0].end_time #=> Time
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListSessions AWS API Documentation
     #
@@ -2678,42 +3182,42 @@ module Aws::WorkSpacesWeb
 
     # Retrieves a list of trust store certificates.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to be included in the next page.
+    # @option params [required, String] :trust_store_arn
+    #   The ARN of the trust store
     #
     # @option params [String] :next_token
     #   The pagination token used to retrieve the next page of results for
     #   this operation.
     #
-    # @option params [required, String] :trust_store_arn
-    #   The ARN of the trust store
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be included in the next page.
     #
     # @return [Types::ListTrustStoreCertificatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTrustStoreCertificatesResponse#certificate_list #certificate_list} => Array&lt;Types::CertificateSummary&gt;
-    #   * {Types::ListTrustStoreCertificatesResponse#next_token #next_token} => String
     #   * {Types::ListTrustStoreCertificatesResponse#trust_store_arn #trust_store_arn} => String
+    #   * {Types::ListTrustStoreCertificatesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_trust_store_certificates({
-    #     max_results: 1,
-    #     next_token: "PaginationToken",
     #     trust_store_arn: "ARN", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.certificate_list #=> Array
-    #   resp.certificate_list[0].issuer #=> String
-    #   resp.certificate_list[0].not_valid_after #=> Time
-    #   resp.certificate_list[0].not_valid_before #=> Time
-    #   resp.certificate_list[0].subject #=> String
     #   resp.certificate_list[0].thumbprint #=> String
-    #   resp.next_token #=> String
+    #   resp.certificate_list[0].subject #=> String
+    #   resp.certificate_list[0].issuer #=> String
+    #   resp.certificate_list[0].not_valid_before #=> Time
+    #   resp.certificate_list[0].not_valid_after #=> Time
     #   resp.trust_store_arn #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListTrustStoreCertificates AWS API Documentation
     #
@@ -2726,32 +3230,32 @@ module Aws::WorkSpacesWeb
 
     # Retrieves a list of trust stores.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to be included in the next page.
-    #
     # @option params [String] :next_token
     #   The pagination token used to retrieve the next page of results for
     #   this operation.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be included in the next page.
+    #
     # @return [Types::ListTrustStoresResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListTrustStoresResponse#next_token #next_token} => String
     #   * {Types::ListTrustStoresResponse#trust_stores #trust_stores} => Array&lt;Types::TrustStoreSummary&gt;
+    #   * {Types::ListTrustStoresResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_trust_stores({
-    #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.trust_stores #=> Array
     #   resp.trust_stores[0].trust_store_arn #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListTrustStores AWS API Documentation
     #
@@ -2764,33 +3268,33 @@ module Aws::WorkSpacesWeb
 
     # Retrieves a list of user access logging settings.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to be included in the next page.
-    #
     # @option params [String] :next_token
     #   The pagination token used to retrieve the next page of results for
     #   this operation.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be included in the next page.
+    #
     # @return [Types::ListUserAccessLoggingSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListUserAccessLoggingSettingsResponse#next_token #next_token} => String
     #   * {Types::ListUserAccessLoggingSettingsResponse#user_access_logging_settings #user_access_logging_settings} => Array&lt;Types::UserAccessLoggingSettingsSummary&gt;
+    #   * {Types::ListUserAccessLoggingSettingsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_user_access_logging_settings({
-    #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.user_access_logging_settings #=> Array
-    #   resp.user_access_logging_settings[0].kinesis_stream_arn #=> String
     #   resp.user_access_logging_settings[0].user_access_logging_settings_arn #=> String
+    #   resp.user_access_logging_settings[0].kinesis_stream_arn #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListUserAccessLoggingSettings AWS API Documentation
     #
@@ -2803,31 +3307,38 @@ module Aws::WorkSpacesWeb
 
     # Retrieves a list of user settings.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to be included in the next page.
-    #
     # @option params [String] :next_token
     #   The pagination token used to retrieve the next page of results for
     #   this operation.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be included in the next page.
+    #
     # @return [Types::ListUserSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListUserSettingsResponse#next_token #next_token} => String
     #   * {Types::ListUserSettingsResponse#user_settings #user_settings} => Array&lt;Types::UserSettingsSummary&gt;
+    #   * {Types::ListUserSettingsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_user_settings({
-    #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.user_settings #=> Array
+    #   resp.user_settings[0].user_settings_arn #=> String
+    #   resp.user_settings[0].copy_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings[0].paste_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings[0].download_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings[0].upload_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings[0].print_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings[0].disconnect_timeout_in_minutes #=> Integer
+    #   resp.user_settings[0].idle_disconnect_timeout_in_minutes #=> Integer
     #   resp.user_settings[0].cookie_synchronization_configuration.allowlist #=> Array
     #   resp.user_settings[0].cookie_synchronization_configuration.allowlist[0].domain #=> String
     #   resp.user_settings[0].cookie_synchronization_configuration.allowlist[0].name #=> String
@@ -2836,20 +3347,13 @@ module Aws::WorkSpacesWeb
     #   resp.user_settings[0].cookie_synchronization_configuration.blocklist[0].domain #=> String
     #   resp.user_settings[0].cookie_synchronization_configuration.blocklist[0].name #=> String
     #   resp.user_settings[0].cookie_synchronization_configuration.blocklist[0].path #=> String
-    #   resp.user_settings[0].copy_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings[0].deep_link_allowed #=> String, one of "Disabled", "Enabled"
-    #   resp.user_settings[0].disconnect_timeout_in_minutes #=> Integer
-    #   resp.user_settings[0].download_allowed #=> String, one of "Disabled", "Enabled"
-    #   resp.user_settings[0].idle_disconnect_timeout_in_minutes #=> Integer
-    #   resp.user_settings[0].paste_allowed #=> String, one of "Disabled", "Enabled"
-    #   resp.user_settings[0].print_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings[0].toolbar_configuration.toolbar_type #=> String, one of "Floating", "Docked"
+    #   resp.user_settings[0].toolbar_configuration.visual_mode #=> String, one of "Dark", "Light"
     #   resp.user_settings[0].toolbar_configuration.hidden_toolbar_items #=> Array
     #   resp.user_settings[0].toolbar_configuration.hidden_toolbar_items[0] #=> String, one of "Windows", "DualMonitor", "FullScreen", "Webcam", "Microphone"
     #   resp.user_settings[0].toolbar_configuration.max_display_resolution #=> String, one of "size4096X2160", "size3840X2160", "size3440X1440", "size2560X1440", "size1920X1080", "size1280X720", "size1024X768", "size800X600"
-    #   resp.user_settings[0].toolbar_configuration.toolbar_type #=> String, one of "Floating", "Docked"
-    #   resp.user_settings[0].toolbar_configuration.visual_mode #=> String, one of "Dark", "Light"
-    #   resp.user_settings[0].upload_allowed #=> String, one of "Disabled", "Enabled"
-    #   resp.user_settings[0].user_settings_arn #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListUserSettings AWS API Documentation
     #
@@ -2861,6 +3365,12 @@ module Aws::WorkSpacesWeb
     end
 
     # Adds or overwrites one or more tags for the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags of the resource.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -2875,18 +3385,11 @@ module Aws::WorkSpacesWeb
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :resource_arn
-    #   The ARN of the resource.
-    #
-    # @option params [required, Array<Types::Tag>] :tags
-    #   The tags of the resource.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.tag_resource({
-    #     client_token: "ClientToken",
     #     resource_arn: "ARN", # required
     #     tags: [ # required
     #       {
@@ -2894,6 +3397,7 @@ module Aws::WorkSpacesWeb
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     client_token: "ClientToken",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/TagResource AWS API Documentation
@@ -2933,12 +3437,12 @@ module Aws::WorkSpacesWeb
 
     # Updates browser settings.
     #
+    # @option params [required, String] :browser_settings_arn
+    #   The ARN of the browser settings.
+    #
     # @option params [String] :browser_policy
     #   A JSON string containing Chrome Enterprise policies that will be
     #   applied to all streaming sessions.
-    #
-    # @option params [required, String] :browser_settings_arn
-    #   The ARN of the browser settings.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -2960,20 +3464,20 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_browser_settings({
-    #     browser_policy: "BrowserPolicy",
     #     browser_settings_arn: "ARN", # required
+    #     browser_policy: "BrowserPolicy",
     #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.browser_settings.additional_encryption_context #=> Hash
-    #   resp.browser_settings.additional_encryption_context["StringType"] #=> String
+    #   resp.browser_settings.browser_settings_arn #=> String
     #   resp.browser_settings.associated_portal_arns #=> Array
     #   resp.browser_settings.associated_portal_arns[0] #=> String
     #   resp.browser_settings.browser_policy #=> String
-    #   resp.browser_settings.browser_settings_arn #=> String
     #   resp.browser_settings.customer_managed_key #=> String
+    #   resp.browser_settings.additional_encryption_context #=> Hash
+    #   resp.browser_settings.additional_encryption_context["StringType"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateBrowserSettings AWS API Documentation
     #
@@ -2986,6 +3490,19 @@ module Aws::WorkSpacesWeb
 
     # Updates data protection settings.
     #
+    # @option params [required, String] :data_protection_settings_arn
+    #   The ARN of the data protection settings.
+    #
+    # @option params [Types::InlineRedactionConfiguration] :inline_redaction_configuration
+    #   The inline redaction configuration of the data protection settings
+    #   that will be applied to all sessions.
+    #
+    # @option params [String] :display_name
+    #   The display name of the data protection settings.
+    #
+    # @option params [String] :description
+    #   The description of the data protection settings.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -2999,19 +3516,6 @@ module Aws::WorkSpacesWeb
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :data_protection_settings_arn
-    #   The ARN of the data protection settings.
-    #
-    # @option params [String] :description
-    #   The description of the data protection settings.
-    #
-    # @option params [String] :display_name
-    #   The display name of the data protection settings.
-    #
-    # @option params [Types::InlineRedactionConfiguration] :inline_redaction_configuration
-    #   The inline redaction configuration of the data protection settings
-    #   that will be applied to all sessions.
-    #
     # @return [Types::UpdateDataProtectionSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDataProtectionSettingsResponse#data_protection_settings #data_protection_settings} => Types::DataProtectionSettings
@@ -3019,64 +3523,64 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_data_protection_settings({
-    #     client_token: "ClientToken",
     #     data_protection_settings_arn: "ARN", # required
-    #     description: "DescriptionSafe",
-    #     display_name: "DisplayNameSafe",
     #     inline_redaction_configuration: {
-    #       global_confidence_level: 1,
-    #       global_enforced_urls: ["InlineRedactionUrl"],
-    #       global_exempt_urls: ["InlineRedactionUrl"],
     #       inline_redaction_patterns: [ # required
     #         {
     #           built_in_pattern_id: "BuiltInPatternId",
-    #           confidence_level: 1,
     #           custom_pattern: {
-    #             keyword_regex: "Regex",
-    #             pattern_description: "DescriptionSafe",
     #             pattern_name: "PatternName", # required
     #             pattern_regex: "Regex", # required
+    #             pattern_description: "DescriptionSafe",
+    #             keyword_regex: "Regex",
+    #           },
+    #           redaction_place_holder: { # required
+    #             redaction_place_holder_type: "CustomText", # required, accepts CustomText
+    #             redaction_place_holder_text: "RedactionPlaceHolderText",
     #           },
     #           enforced_urls: ["InlineRedactionUrl"],
     #           exempt_urls: ["InlineRedactionUrl"],
-    #           redaction_place_holder: { # required
-    #             redaction_place_holder_text: "RedactionPlaceHolderText",
-    #             redaction_place_holder_type: "CustomText", # required, accepts CustomText
-    #           },
+    #           confidence_level: 1,
     #         },
     #       ],
+    #       global_enforced_urls: ["InlineRedactionUrl"],
+    #       global_exempt_urls: ["InlineRedactionUrl"],
+    #       global_confidence_level: 1,
     #     },
+    #     display_name: "DisplayNameSafe",
+    #     description: "DescriptionSafe",
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.data_protection_settings.additional_encryption_context #=> Hash
-    #   resp.data_protection_settings.additional_encryption_context["StringType"] #=> String
-    #   resp.data_protection_settings.associated_portal_arns #=> Array
-    #   resp.data_protection_settings.associated_portal_arns[0] #=> String
-    #   resp.data_protection_settings.creation_date #=> Time
-    #   resp.data_protection_settings.customer_managed_key #=> String
     #   resp.data_protection_settings.data_protection_settings_arn #=> String
-    #   resp.data_protection_settings.description #=> String
-    #   resp.data_protection_settings.display_name #=> String
-    #   resp.data_protection_settings.inline_redaction_configuration.global_confidence_level #=> Integer
-    #   resp.data_protection_settings.inline_redaction_configuration.global_enforced_urls #=> Array
-    #   resp.data_protection_settings.inline_redaction_configuration.global_enforced_urls[0] #=> String
-    #   resp.data_protection_settings.inline_redaction_configuration.global_exempt_urls #=> Array
-    #   resp.data_protection_settings.inline_redaction_configuration.global_exempt_urls[0] #=> String
     #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns #=> Array
     #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].built_in_pattern_id #=> String
-    #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].confidence_level #=> Integer
-    #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].custom_pattern.keyword_regex #=> String
-    #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].custom_pattern.pattern_description #=> String
     #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].custom_pattern.pattern_name #=> String
     #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].custom_pattern.pattern_regex #=> String
+    #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].custom_pattern.pattern_description #=> String
+    #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].custom_pattern.keyword_regex #=> String
+    #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].redaction_place_holder.redaction_place_holder_type #=> String, one of "CustomText"
+    #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].redaction_place_holder.redaction_place_holder_text #=> String
     #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].enforced_urls #=> Array
     #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].enforced_urls[0] #=> String
     #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].exempt_urls #=> Array
     #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].exempt_urls[0] #=> String
-    #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].redaction_place_holder.redaction_place_holder_text #=> String
-    #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].redaction_place_holder.redaction_place_holder_type #=> String, one of "CustomText"
+    #   resp.data_protection_settings.inline_redaction_configuration.inline_redaction_patterns[0].confidence_level #=> Integer
+    #   resp.data_protection_settings.inline_redaction_configuration.global_enforced_urls #=> Array
+    #   resp.data_protection_settings.inline_redaction_configuration.global_enforced_urls[0] #=> String
+    #   resp.data_protection_settings.inline_redaction_configuration.global_exempt_urls #=> Array
+    #   resp.data_protection_settings.inline_redaction_configuration.global_exempt_urls[0] #=> String
+    #   resp.data_protection_settings.inline_redaction_configuration.global_confidence_level #=> Integer
+    #   resp.data_protection_settings.associated_portal_arns #=> Array
+    #   resp.data_protection_settings.associated_portal_arns[0] #=> String
+    #   resp.data_protection_settings.display_name #=> String
+    #   resp.data_protection_settings.description #=> String
+    #   resp.data_protection_settings.creation_date #=> Time
+    #   resp.data_protection_settings.customer_managed_key #=> String
+    #   resp.data_protection_settings.additional_encryption_context #=> Hash
+    #   resp.data_protection_settings.additional_encryption_context["StringType"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateDataProtectionSettings AWS API Documentation
     #
@@ -3089,21 +3593,14 @@ module Aws::WorkSpacesWeb
 
     # Updates the identity provider.
     #
-    # @option params [String] :client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. Idempotency ensures that an API request
-    #   completes only once. With an idempotent request, if the original
-    #   request completes successfully, subsequent retries with the same
-    #   client token return the result from the original successful request.
-    #
-    #   If you do not specify a client token, one is automatically generated
-    #   by the Amazon Web Services SDK.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
     # @option params [required, String] :identity_provider_arn
     #   The ARN of the identity provider.
+    #
+    # @option params [String] :identity_provider_name
+    #   The name of the identity provider.
+    #
+    # @option params [String] :identity_provider_type
+    #   The type of the identity provider.
     #
     # @option params [Hash<String,String>] :identity_provider_details
     #   The details of the identity provider. The following list describes the
@@ -3172,11 +3669,18 @@ module Aws::WorkSpacesWeb
     #
     #     * `EncryptedResponses` (boolean) *optional*
     #
-    # @option params [String] :identity_provider_name
-    #   The name of the identity provider.
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes only once. With an idempotent request, if the original
+    #   request completes successfully, subsequent retries with the same
+    #   client token return the result from the original successful request.
     #
-    # @option params [String] :identity_provider_type
-    #   The type of the identity provider.
+    #   If you do not specify a client token, one is automatically generated
+    #   by the Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::UpdateIdentityProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3185,22 +3689,22 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_identity_provider({
-    #     client_token: "ClientToken",
     #     identity_provider_arn: "SubresourceARN", # required
+    #     identity_provider_name: "IdentityProviderName",
+    #     identity_provider_type: "SAML", # accepts SAML, Facebook, Google, LoginWithAmazon, SignInWithApple, OIDC
     #     identity_provider_details: {
     #       "StringType" => "StringType",
     #     },
-    #     identity_provider_name: "IdentityProviderName",
-    #     identity_provider_type: "SAML", # accepts SAML, Facebook, Google, LoginWithAmazon, SignInWithApple, OIDC
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
     #   resp.identity_provider.identity_provider_arn #=> String
-    #   resp.identity_provider.identity_provider_details #=> Hash
-    #   resp.identity_provider.identity_provider_details["StringType"] #=> String
     #   resp.identity_provider.identity_provider_name #=> String
     #   resp.identity_provider.identity_provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "SignInWithApple", "OIDC"
+    #   resp.identity_provider.identity_provider_details #=> Hash
+    #   resp.identity_provider.identity_provider_details["StringType"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateIdentityProvider AWS API Documentation
     #
@@ -3213,6 +3717,18 @@ module Aws::WorkSpacesWeb
 
     # Updates IP access settings.
     #
+    # @option params [required, String] :ip_access_settings_arn
+    #   The ARN of the IP access settings.
+    #
+    # @option params [String] :display_name
+    #   The display name of the IP access settings.
+    #
+    # @option params [String] :description
+    #   The description of the IP access settings.
+    #
+    # @option params [Array<Types::IpRule>] :ip_rules
+    #   The updated IP rules of the IP access settings.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -3226,18 +3742,6 @@ module Aws::WorkSpacesWeb
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [String] :description
-    #   The description of the IP access settings.
-    #
-    # @option params [String] :display_name
-    #   The display name of the IP access settings.
-    #
-    # @option params [required, String] :ip_access_settings_arn
-    #   The ARN of the IP access settings.
-    #
-    # @option params [Array<Types::IpRule>] :ip_rules
-    #   The updated IP rules of the IP access settings.
-    #
     # @return [Types::UpdateIpAccessSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateIpAccessSettingsResponse#ip_access_settings #ip_access_settings} => Types::IpAccessSettings
@@ -3245,32 +3749,32 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_ip_access_settings({
-    #     client_token: "ClientToken",
-    #     description: "Description",
-    #     display_name: "DisplayName",
     #     ip_access_settings_arn: "ARN", # required
+    #     display_name: "DisplayName",
+    #     description: "Description",
     #     ip_rules: [
     #       {
-    #         description: "Description",
     #         ip_range: "IpRange", # required
+    #         description: "Description",
     #       },
     #     ],
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.ip_access_settings.additional_encryption_context #=> Hash
-    #   resp.ip_access_settings.additional_encryption_context["StringType"] #=> String
+    #   resp.ip_access_settings.ip_access_settings_arn #=> String
     #   resp.ip_access_settings.associated_portal_arns #=> Array
     #   resp.ip_access_settings.associated_portal_arns[0] #=> String
+    #   resp.ip_access_settings.ip_rules #=> Array
+    #   resp.ip_access_settings.ip_rules[0].ip_range #=> String
+    #   resp.ip_access_settings.ip_rules[0].description #=> String
+    #   resp.ip_access_settings.display_name #=> String
+    #   resp.ip_access_settings.description #=> String
     #   resp.ip_access_settings.creation_date #=> Time
     #   resp.ip_access_settings.customer_managed_key #=> String
-    #   resp.ip_access_settings.description #=> String
-    #   resp.ip_access_settings.display_name #=> String
-    #   resp.ip_access_settings.ip_access_settings_arn #=> String
-    #   resp.ip_access_settings.ip_rules #=> Array
-    #   resp.ip_access_settings.ip_rules[0].description #=> String
-    #   resp.ip_access_settings.ip_rules[0].ip_range #=> String
+    #   resp.ip_access_settings.additional_encryption_context #=> Hash
+    #   resp.ip_access_settings.additional_encryption_context["StringType"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateIpAccessSettings AWS API Documentation
     #
@@ -3283,6 +3787,21 @@ module Aws::WorkSpacesWeb
 
     # Updates network settings.
     #
+    # @option params [required, String] :network_settings_arn
+    #   The ARN of the network settings.
+    #
+    # @option params [String] :vpc_id
+    #   The VPC that streaming instances will connect to.
+    #
+    # @option params [Array<String>] :subnet_ids
+    #   The subnets in which network interfaces are created to connect
+    #   streaming instances to your VPC. At least two of these subnets must be
+    #   in different availability zones.
+    #
+    # @option params [Array<String>] :security_group_ids
+    #   One or more security groups used to control access from streaming
+    #   instances to your VPC.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -3296,21 +3815,6 @@ module Aws::WorkSpacesWeb
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :network_settings_arn
-    #   The ARN of the network settings.
-    #
-    # @option params [Array<String>] :security_group_ids
-    #   One or more security groups used to control access from streaming
-    #   instances to your VPC.
-    #
-    # @option params [Array<String>] :subnet_ids
-    #   The subnets in which network interfaces are created to connect
-    #   streaming instances to your VPC. At least two of these subnets must be
-    #   in different availability zones.
-    #
-    # @option params [String] :vpc_id
-    #   The VPC that streaming instances will connect to.
-    #
     # @return [Types::UpdateNetworkSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateNetworkSettingsResponse#network_settings #network_settings} => Types::NetworkSettings
@@ -3318,23 +3822,23 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_network_settings({
-    #     client_token: "ClientToken",
     #     network_settings_arn: "ARN", # required
-    #     security_group_ids: ["SecurityGroupId"],
-    #     subnet_ids: ["SubnetId"],
     #     vpc_id: "VpcId",
+    #     subnet_ids: ["SubnetId"],
+    #     security_group_ids: ["SecurityGroupId"],
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
+    #   resp.network_settings.network_settings_arn #=> String
     #   resp.network_settings.associated_portal_arns #=> Array
     #   resp.network_settings.associated_portal_arns[0] #=> String
-    #   resp.network_settings.network_settings_arn #=> String
-    #   resp.network_settings.security_group_ids #=> Array
-    #   resp.network_settings.security_group_ids[0] #=> String
+    #   resp.network_settings.vpc_id #=> String
     #   resp.network_settings.subnet_ids #=> Array
     #   resp.network_settings.subnet_ids[0] #=> String
-    #   resp.network_settings.vpc_id #=> String
+    #   resp.network_settings.security_group_ids #=> Array
+    #   resp.network_settings.security_group_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateNetworkSettings AWS API Documentation
     #
@@ -3346,6 +3850,13 @@ module Aws::WorkSpacesWeb
     end
 
     # Updates a web portal.
+    #
+    # @option params [required, String] :portal_arn
+    #   The ARN of the web portal.
+    #
+    # @option params [String] :display_name
+    #   The name of the web portal. This is not visible to users who log into
+    #   the web portal.
     #
     # @option params [String] :authentication_type
     #   The type of authentication integration points used when signing into
@@ -3362,18 +3873,11 @@ module Aws::WorkSpacesWeb
     #   provider integration), plus user and group access to your web portal,
     #   can be configured in the IAM Identity Center.
     #
-    # @option params [String] :display_name
-    #   The name of the web portal. This is not visible to users who log into
-    #   the web portal.
-    #
     # @option params [String] :instance_type
     #   The type and resources of the underlying instance.
     #
     # @option params [Integer] :max_concurrent_sessions
     #   The maximum number of concurrent sessions for the portal.
-    #
-    # @option params [required, String] :portal_arn
-    #   The ARN of the web portal.
     #
     # @return [Types::UpdatePortalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3382,36 +3886,37 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_portal({
-    #     authentication_type: "Standard", # accepts Standard, IAM_Identity_Center
+    #     portal_arn: "ARN", # required
     #     display_name: "DisplayName",
+    #     authentication_type: "Standard", # accepts Standard, IAM_Identity_Center
     #     instance_type: "standard.regular", # accepts standard.regular, standard.large, standard.xlarge
     #     max_concurrent_sessions: 1,
-    #     portal_arn: "ARN", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.portal.portal_arn #=> String
+    #   resp.portal.renderer_type #=> String, one of "AppStream"
+    #   resp.portal.browser_type #=> String, one of "Chrome"
+    #   resp.portal.portal_status #=> String, one of "Incomplete", "Pending", "Active"
+    #   resp.portal.portal_endpoint #=> String
+    #   resp.portal.display_name #=> String
+    #   resp.portal.creation_date #=> Time
+    #   resp.portal.browser_settings_arn #=> String
+    #   resp.portal.data_protection_settings_arn #=> String
+    #   resp.portal.user_settings_arn #=> String
+    #   resp.portal.network_settings_arn #=> String
+    #   resp.portal.session_logger_arn #=> String
+    #   resp.portal.trust_store_arn #=> String
+    #   resp.portal.status_reason #=> String
+    #   resp.portal.user_access_logging_settings_arn #=> String
+    #   resp.portal.authentication_type #=> String, one of "Standard", "IAM_Identity_Center"
+    #   resp.portal.ip_access_settings_arn #=> String
+    #   resp.portal.customer_managed_key #=> String
     #   resp.portal.additional_encryption_context #=> Hash
     #   resp.portal.additional_encryption_context["StringType"] #=> String
-    #   resp.portal.authentication_type #=> String, one of "Standard", "IAM_Identity_Center"
-    #   resp.portal.browser_settings_arn #=> String
-    #   resp.portal.browser_type #=> String, one of "Chrome"
-    #   resp.portal.creation_date #=> Time
-    #   resp.portal.customer_managed_key #=> String
-    #   resp.portal.data_protection_settings_arn #=> String
-    #   resp.portal.display_name #=> String
     #   resp.portal.instance_type #=> String, one of "standard.regular", "standard.large", "standard.xlarge"
-    #   resp.portal.ip_access_settings_arn #=> String
     #   resp.portal.max_concurrent_sessions #=> Integer
-    #   resp.portal.network_settings_arn #=> String
-    #   resp.portal.portal_arn #=> String
-    #   resp.portal.portal_endpoint #=> String
-    #   resp.portal.portal_status #=> String, one of "Incomplete", "Pending", "Active"
-    #   resp.portal.renderer_type #=> String, one of "AppStream"
-    #   resp.portal.status_reason #=> String
-    #   resp.portal.trust_store_arn #=> String
-    #   resp.portal.user_access_logging_settings_arn #=> String
-    #   resp.portal.user_settings_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdatePortal AWS API Documentation
     #
@@ -3422,7 +3927,162 @@ module Aws::WorkSpacesWeb
       req.send_request(options)
     end
 
+    # Updates the details of a session logger.
+    #
+    # @option params [required, String] :session_logger_arn
+    #   The ARN of the session logger to update.
+    #
+    # @option params [Types::EventFilter] :event_filter
+    #   The updated eventFilter.
+    #
+    # @option params [Types::LogConfiguration] :log_configuration
+    #   The updated logConfiguration.
+    #
+    # @option params [String] :display_name
+    #   The updated display name.
+    #
+    # @return [Types::UpdateSessionLoggerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSessionLoggerResponse#session_logger #session_logger} => Types::SessionLogger
+    #
+    #
+    # @example Example: Update Session Logger Event Filter
+    #
+    #   # Updates a session logger to capture specific events instead of all events
+    #
+    #   resp = client.update_session_logger({
+    #     event_filter: {
+    #       include: [
+    #         "SessionStart", 
+    #         "SessionEnd", 
+    #         "UrlLoad", 
+    #         "WebsiteInteract", 
+    #       ], 
+    #     }, 
+    #     session_logger_arn: "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/12345678-1234-1234-1234-123456789012", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     session_logger: {
+    #       creation_date: Time.parse("2024-01-15T10:30:00Z"), 
+    #       display_name: "Updated Session Logger with Specific Events", 
+    #       event_filter: {
+    #         include: [
+    #           "SessionStart", 
+    #           "SessionEnd", 
+    #           "UrlLoad", 
+    #           "WebsiteInteract", 
+    #         ], 
+    #       }, 
+    #       log_configuration: {
+    #         s3: {
+    #           bucket: "my-session-logs-bucket", 
+    #           bucket_owner: "123456789012", 
+    #           folder_structure: "Flat", 
+    #           key_prefix: "updated/session-logs/each/event", 
+    #           log_file_format: "Json", 
+    #         }, 
+    #       }, 
+    #       session_logger_arn: "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/12345678-1234-1234-1234-123456789012", 
+    #     }, 
+    #   }
+    #
+    # @example Example: Update Session Logger Configuration
+    #
+    #   # Updates the log configuration of a session logger
+    #
+    #   resp = client.update_session_logger({
+    #     log_configuration: {
+    #       s3: {
+    #         bucket: "updated-my-session-logs-bucket-2", 
+    #         bucket_owner: "123456789012", 
+    #         folder_structure: "Flat", 
+    #         key_prefix: "updated/key/prefix", 
+    #         log_file_format: "Json", 
+    #       }, 
+    #     }, 
+    #     session_logger_arn: "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/87654321-4321-4321-4321-210987654321", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     session_logger: {
+    #       additional_encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue", 
+    #       }, 
+    #       creation_date: Time.parse("2024-01-15T14:45:00Z"), 
+    #       customer_managed_key: "arn:aws:kms:us-west-2:123456789012:key/12345678-1234-1234-1234-123456789012", 
+    #       display_name: "Updated Session Logger with Log Config", 
+    #       event_filter: {
+    #         all: {
+    #         }, 
+    #       }, 
+    #       log_configuration: {
+    #         s3: {
+    #           bucket: "updated-my-session-logs-bucket-2", 
+    #           bucket_owner: "123456789012", 
+    #           folder_structure: "Flat", 
+    #           key_prefix: "updated/key/prefix", 
+    #           log_file_format: "Json", 
+    #         }, 
+    #       }, 
+    #       session_logger_arn: "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/87654321-4321-4321-4321-210987654321", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_session_logger({
+    #     session_logger_arn: "ARN", # required
+    #     event_filter: {
+    #       all: {
+    #       },
+    #       include: ["WebsiteInteract"], # accepts WebsiteInteract, FileDownloadFromSecureBrowserToRemoteDisk, FileTransferFromRemoteToLocalDisk, FileTransferFromLocalToRemoteDisk, FileUploadFromRemoteDiskToSecureBrowser, ContentPasteToWebsite, ContentTransferFromLocalToRemoteClipboard, ContentCopyFromWebsite, UrlLoad, TabOpen, TabClose, PrintJobSubmit, SessionConnect, SessionStart, SessionDisconnect, SessionEnd
+    #     },
+    #     log_configuration: {
+    #       s3: {
+    #         bucket: "S3Bucket", # required
+    #         key_prefix: "S3KeyPrefix",
+    #         bucket_owner: "S3BucketOwner",
+    #         log_file_format: "JSONLines", # required, accepts JSONLines, Json
+    #         folder_structure: "Flat", # required, accepts Flat, NestedByDate
+    #       },
+    #     },
+    #     display_name: "DisplayNameSafe",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_logger.session_logger_arn #=> String
+    #   resp.session_logger.event_filter.include #=> Array
+    #   resp.session_logger.event_filter.include[0] #=> String, one of "WebsiteInteract", "FileDownloadFromSecureBrowserToRemoteDisk", "FileTransferFromRemoteToLocalDisk", "FileTransferFromLocalToRemoteDisk", "FileUploadFromRemoteDiskToSecureBrowser", "ContentPasteToWebsite", "ContentTransferFromLocalToRemoteClipboard", "ContentCopyFromWebsite", "UrlLoad", "TabOpen", "TabClose", "PrintJobSubmit", "SessionConnect", "SessionStart", "SessionDisconnect", "SessionEnd"
+    #   resp.session_logger.log_configuration.s3.bucket #=> String
+    #   resp.session_logger.log_configuration.s3.key_prefix #=> String
+    #   resp.session_logger.log_configuration.s3.bucket_owner #=> String
+    #   resp.session_logger.log_configuration.s3.log_file_format #=> String, one of "JSONLines", "Json"
+    #   resp.session_logger.log_configuration.s3.folder_structure #=> String, one of "Flat", "NestedByDate"
+    #   resp.session_logger.customer_managed_key #=> String
+    #   resp.session_logger.additional_encryption_context #=> Hash
+    #   resp.session_logger.additional_encryption_context["StringType"] #=> String
+    #   resp.session_logger.associated_portal_arns #=> Array
+    #   resp.session_logger.associated_portal_arns[0] #=> String
+    #   resp.session_logger.display_name #=> String
+    #   resp.session_logger.creation_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateSessionLogger AWS API Documentation
+    #
+    # @overload update_session_logger(params = {})
+    # @param [Hash] params ({})
+    def update_session_logger(params = {}, options = {})
+      req = build_request(:update_session_logger, params)
+      req.send_request(options)
+    end
+
     # Updates the trust store.
+    #
+    # @option params [required, String] :trust_store_arn
+    #   The ARN of the trust store.
     #
     # @option params [Array<String, StringIO, File>] :certificates_to_add
     #   A list of CA certificates to add to the trust store.
@@ -3443,9 +4103,6 @@ module Aws::WorkSpacesWeb
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :trust_store_arn
-    #   The ARN of the trust store.
-    #
     # @return [Types::UpdateTrustStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTrustStoreResponse#trust_store_arn #trust_store_arn} => String
@@ -3453,10 +4110,10 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_trust_store({
+    #     trust_store_arn: "ARN", # required
     #     certificates_to_add: ["data"],
     #     certificates_to_delete: ["CertificateThumbprint"],
     #     client_token: "ClientToken",
-    #     trust_store_arn: "ARN", # required
     #   })
     #
     # @example Response structure
@@ -3474,6 +4131,12 @@ module Aws::WorkSpacesWeb
 
     # Updates the user access logging settings.
     #
+    # @option params [required, String] :user_access_logging_settings_arn
+    #   The ARN of the user access logging settings.
+    #
+    # @option params [String] :kinesis_stream_arn
+    #   The ARN of the Kinesis stream.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -3487,12 +4150,6 @@ module Aws::WorkSpacesWeb
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [String] :kinesis_stream_arn
-    #   The ARN of the Kinesis stream.
-    #
-    # @option params [required, String] :user_access_logging_settings_arn
-    #   The ARN of the user access logging settings.
-    #
     # @return [Types::UpdateUserAccessLoggingSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateUserAccessLoggingSettingsResponse#user_access_logging_settings #user_access_logging_settings} => Types::UserAccessLoggingSettings
@@ -3500,17 +4157,17 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_user_access_logging_settings({
-    #     client_token: "ClientToken",
-    #     kinesis_stream_arn: "KinesisStreamArn",
     #     user_access_logging_settings_arn: "ARN", # required
+    #     kinesis_stream_arn: "KinesisStreamArn",
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
+    #   resp.user_access_logging_settings.user_access_logging_settings_arn #=> String
     #   resp.user_access_logging_settings.associated_portal_arns #=> Array
     #   resp.user_access_logging_settings.associated_portal_arns[0] #=> String
     #   resp.user_access_logging_settings.kinesis_stream_arn #=> String
-    #   resp.user_access_logging_settings.user_access_logging_settings_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateUserAccessLoggingSettings AWS API Documentation
     #
@@ -3522,6 +4179,37 @@ module Aws::WorkSpacesWeb
     end
 
     # Updates the user settings.
+    #
+    # @option params [required, String] :user_settings_arn
+    #   The ARN of the user settings.
+    #
+    # @option params [String] :copy_allowed
+    #   Specifies whether the user can copy text from the streaming session to
+    #   the local device.
+    #
+    # @option params [String] :paste_allowed
+    #   Specifies whether the user can paste text from the local device to the
+    #   streaming session.
+    #
+    # @option params [String] :download_allowed
+    #   Specifies whether the user can download files from the streaming
+    #   session to the local device.
+    #
+    # @option params [String] :upload_allowed
+    #   Specifies whether the user can upload files from the local device to
+    #   the streaming session.
+    #
+    # @option params [String] :print_allowed
+    #   Specifies whether the user can print to the local device.
+    #
+    # @option params [Integer] :disconnect_timeout_in_minutes
+    #   The amount of time that a streaming session remains active after users
+    #   disconnect.
+    #
+    # @option params [Integer] :idle_disconnect_timeout_in_minutes
+    #   The amount of time that users can be idle (inactive) before they are
+    #   disconnected from their streaming session and the disconnect timeout
+    #   interval begins.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -3543,33 +4231,9 @@ module Aws::WorkSpacesWeb
     #   If the allowlist and blocklist are empty, the configuration becomes
     #   null.
     #
-    # @option params [String] :copy_allowed
-    #   Specifies whether the user can copy text from the streaming session to
-    #   the local device.
-    #
     # @option params [String] :deep_link_allowed
     #   Specifies whether the user can use deep links that open automatically
     #   when connecting to a session.
-    #
-    # @option params [Integer] :disconnect_timeout_in_minutes
-    #   The amount of time that a streaming session remains active after users
-    #   disconnect.
-    #
-    # @option params [String] :download_allowed
-    #   Specifies whether the user can download files from the streaming
-    #   session to the local device.
-    #
-    # @option params [Integer] :idle_disconnect_timeout_in_minutes
-    #   The amount of time that users can be idle (inactive) before they are
-    #   disconnected from their streaming session and the disconnect timeout
-    #   interval begins.
-    #
-    # @option params [String] :paste_allowed
-    #   Specifies whether the user can paste text from the local device to the
-    #   streaming session.
-    #
-    # @option params [String] :print_allowed
-    #   Specifies whether the user can print to the local device.
     #
     # @option params [Types::ToolbarConfiguration] :toolbar_configuration
     #   The configuration of the toolbar. This allows administrators to select
@@ -3578,13 +4242,6 @@ module Aws::WorkSpacesWeb
     #   sessions. If administrators do not modify these settings, end users
     #   retain control over their toolbar preferences.
     #
-    # @option params [String] :upload_allowed
-    #   Specifies whether the user can upload files from the local device to
-    #   the streaming session.
-    #
-    # @option params [required, String] :user_settings_arn
-    #   The ARN of the user settings.
-    #
     # @return [Types::UpdateUserSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateUserSettingsResponse#user_settings #user_settings} => Types::UserSettings
@@ -3592,6 +4249,14 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_user_settings({
+    #     user_settings_arn: "ARN", # required
+    #     copy_allowed: "Disabled", # accepts Disabled, Enabled
+    #     paste_allowed: "Disabled", # accepts Disabled, Enabled
+    #     download_allowed: "Disabled", # accepts Disabled, Enabled
+    #     upload_allowed: "Disabled", # accepts Disabled, Enabled
+    #     print_allowed: "Disabled", # accepts Disabled, Enabled
+    #     disconnect_timeout_in_minutes: 1,
+    #     idle_disconnect_timeout_in_minutes: 1,
     #     client_token: "ClientToken",
     #     cookie_synchronization_configuration: {
     #       allowlist: [ # required
@@ -3609,29 +4274,27 @@ module Aws::WorkSpacesWeb
     #         },
     #       ],
     #     },
-    #     copy_allowed: "Disabled", # accepts Disabled, Enabled
     #     deep_link_allowed: "Disabled", # accepts Disabled, Enabled
-    #     disconnect_timeout_in_minutes: 1,
-    #     download_allowed: "Disabled", # accepts Disabled, Enabled
-    #     idle_disconnect_timeout_in_minutes: 1,
-    #     paste_allowed: "Disabled", # accepts Disabled, Enabled
-    #     print_allowed: "Disabled", # accepts Disabled, Enabled
     #     toolbar_configuration: {
-    #       hidden_toolbar_items: ["Windows"], # accepts Windows, DualMonitor, FullScreen, Webcam, Microphone
-    #       max_display_resolution: "size4096X2160", # accepts size4096X2160, size3840X2160, size3440X1440, size2560X1440, size1920X1080, size1280X720, size1024X768, size800X600
     #       toolbar_type: "Floating", # accepts Floating, Docked
     #       visual_mode: "Dark", # accepts Dark, Light
+    #       hidden_toolbar_items: ["Windows"], # accepts Windows, DualMonitor, FullScreen, Webcam, Microphone
+    #       max_display_resolution: "size4096X2160", # accepts size4096X2160, size3840X2160, size3440X1440, size2560X1440, size1920X1080, size1280X720, size1024X768, size800X600
     #     },
-    #     upload_allowed: "Disabled", # accepts Disabled, Enabled
-    #     user_settings_arn: "ARN", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.user_settings.additional_encryption_context #=> Hash
-    #   resp.user_settings.additional_encryption_context["StringType"] #=> String
+    #   resp.user_settings.user_settings_arn #=> String
     #   resp.user_settings.associated_portal_arns #=> Array
     #   resp.user_settings.associated_portal_arns[0] #=> String
+    #   resp.user_settings.copy_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings.paste_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings.download_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings.upload_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings.print_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings.disconnect_timeout_in_minutes #=> Integer
+    #   resp.user_settings.idle_disconnect_timeout_in_minutes #=> Integer
     #   resp.user_settings.cookie_synchronization_configuration.allowlist #=> Array
     #   resp.user_settings.cookie_synchronization_configuration.allowlist[0].domain #=> String
     #   resp.user_settings.cookie_synchronization_configuration.allowlist[0].name #=> String
@@ -3640,21 +4303,15 @@ module Aws::WorkSpacesWeb
     #   resp.user_settings.cookie_synchronization_configuration.blocklist[0].domain #=> String
     #   resp.user_settings.cookie_synchronization_configuration.blocklist[0].name #=> String
     #   resp.user_settings.cookie_synchronization_configuration.blocklist[0].path #=> String
-    #   resp.user_settings.copy_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings.customer_managed_key #=> String
+    #   resp.user_settings.additional_encryption_context #=> Hash
+    #   resp.user_settings.additional_encryption_context["StringType"] #=> String
     #   resp.user_settings.deep_link_allowed #=> String, one of "Disabled", "Enabled"
-    #   resp.user_settings.disconnect_timeout_in_minutes #=> Integer
-    #   resp.user_settings.download_allowed #=> String, one of "Disabled", "Enabled"
-    #   resp.user_settings.idle_disconnect_timeout_in_minutes #=> Integer
-    #   resp.user_settings.paste_allowed #=> String, one of "Disabled", "Enabled"
-    #   resp.user_settings.print_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings.toolbar_configuration.toolbar_type #=> String, one of "Floating", "Docked"
+    #   resp.user_settings.toolbar_configuration.visual_mode #=> String, one of "Dark", "Light"
     #   resp.user_settings.toolbar_configuration.hidden_toolbar_items #=> Array
     #   resp.user_settings.toolbar_configuration.hidden_toolbar_items[0] #=> String, one of "Windows", "DualMonitor", "FullScreen", "Webcam", "Microphone"
     #   resp.user_settings.toolbar_configuration.max_display_resolution #=> String, one of "size4096X2160", "size3840X2160", "size3440X1440", "size2560X1440", "size1920X1080", "size1280X720", "size1024X768", "size800X600"
-    #   resp.user_settings.toolbar_configuration.toolbar_type #=> String, one of "Floating", "Docked"
-    #   resp.user_settings.toolbar_configuration.visual_mode #=> String, one of "Dark", "Light"
-    #   resp.user_settings.upload_allowed #=> String, one of "Disabled", "Enabled"
-    #   resp.user_settings.user_settings_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateUserSettings AWS API Documentation
     #
@@ -3683,7 +4340,7 @@ module Aws::WorkSpacesWeb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspacesweb'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

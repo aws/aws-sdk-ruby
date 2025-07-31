@@ -517,6 +517,11 @@ module Aws::CloudFront
     # distribution configuration and specify all of the cache behaviors that
     # you want to include in the updated distribution.
     #
+    # If your minimum TTL is greater than 0, CloudFront will cache content
+    # for at least the duration specified in the cache policy's minimum
+    # TTL, even if the `Cache-Control: no-cache`, `no-store`, or `private`
+    # directives are present in the origin headers.
+    #
     # For more information about cache behaviors, see [Cache Behavior
     # Settings][3] in the *Amazon CloudFront Developer Guide*.
     #
@@ -994,6 +999,11 @@ module Aws::CloudFront
     #
     # * The default, minimum, and maximum time to live (TTL) values that you
     #   want objects to stay in the CloudFront cache.
+    #
+    #   If your minimum TTL is greater than 0, CloudFront will cache content
+    #   for at least the duration specified in the cache policy's minimum
+    #   TTL, even if the `Cache-Control: no-cache`, `no-store`, or `private`
+    #   directives are present in the origin headers.
     #
     # The headers, cookies, and query strings that are included in the cache
     # key are also included in requests that CloudFront sends to the origin.
@@ -3397,8 +3407,8 @@ module Aws::CloudFront
     #   minimum timeout is 1 second, the maximum is 120 seconds, and the
     #   default (if you don't specify otherwise) is 30 seconds.
     #
-    #   For more information, see [Response timeout (custom origins
-    #   only)][1] in the *Amazon CloudFront Developer Guide*.
+    #   For more information, see [Response timeout][1] in the *Amazon
+    #   CloudFront Developer Guide*.
     #
     #
     #
@@ -3465,6 +3475,11 @@ module Aws::CloudFront
     # specify a `CacheBehavior` element or if request URLs don't match any
     # of the values of `PathPattern` in `CacheBehavior` elements. You must
     # create exactly one default cache behavior.
+    #
+    # If your minimum TTL is greater than 0, CloudFront will cache content
+    # for at least the duration specified in the cache policy's minimum
+    # TTL, even if the `Cache-Control: no-cache`, `no-store`, or `private`
+    # directives are present in the origin headers.
     #
     # @!attribute [rw] target_origin_id
     #   The value of `ID` for the origin that you want CloudFront to route
@@ -4834,7 +4849,7 @@ module Aws::CloudFront
     # @!attribute [rw] connection_mode
     #   This field specifies whether the connection mode is through a
     #   standard distribution (direct) or a multi-tenant distribution with
-    #   distribution tenants(tenant-only).
+    #   distribution tenants (tenant-only).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DistributionConfig AWS API Documentation
@@ -5149,7 +5164,7 @@ module Aws::CloudFront
     # @!attribute [rw] connection_mode
     #   This field specifies whether the connection mode is through a
     #   standard distribution (direct) or a multi-tenant distribution with
-    #   distribution tenants(tenant-only).
+    #   distribution tenants (tenant-only).
     #   @return [String]
     #
     # @!attribute [rw] anycast_ip_list_id
@@ -9011,7 +9026,7 @@ module Aws::CloudFront
     # @!attribute [rw] connection_mode
     #   This field specifies whether the connection mode is through a
     #   standard distribution (direct) or a multi-tenant distribution with
-    #   distribution tenants(tenant-only).
+    #   distribution tenants (tenant-only).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByConnectionModeRequest AWS API Documentation
@@ -10494,6 +10509,25 @@ module Aws::CloudFront
     #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#origin-connection-timeout
     #   @return [Integer]
     #
+    # @!attribute [rw] response_completion_timeout
+    #   The time (in seconds) that a request from CloudFront to the origin
+    #   can stay open and wait for a response. If the complete response
+    #   isn't received from the origin by this time, CloudFront ends the
+    #   connection.
+    #
+    #   The value for `ResponseCompletionTimeout` must be equal to or
+    #   greater than the value for `OriginReadTimeout`. If you don't set a
+    #   value for `ResponseCompletionTimeout`, CloudFront doesn't enforce a
+    #   maximum value.
+    #
+    #   For more information, see [Response completion timeout][1] in the
+    #   *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#response-completion-timeout
+    #   @return [Integer]
+    #
     # @!attribute [rw] origin_shield
     #   CloudFront Origin Shield. Using Origin Shield can help reduce the
     #   load on your origin.
@@ -10529,6 +10563,7 @@ module Aws::CloudFront
       :vpc_origin_config,
       :connection_attempts,
       :connection_timeout,
+      :response_completion_timeout,
       :origin_shield,
       :origin_access_control_id)
       SENSITIVE = []
@@ -13032,10 +13067,25 @@ module Aws::CloudFront
     #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
     #   @return [String]
     #
+    # @!attribute [rw] origin_read_timeout
+    #   Specifies how long, in seconds, CloudFront waits for a response from
+    #   the origin. This is also known as the *origin response timeout*. The
+    #   minimum timeout is 1 second, the maximum is 120 seconds, and the
+    #   default (if you don't specify otherwise) is 30 seconds.
+    #
+    #   For more information, see [Response timeout][1] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginResponseTimeout
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/S3OriginConfig AWS API Documentation
     #
     class S3OriginConfig < Struct.new(
-      :origin_access_identity)
+      :origin_access_identity,
+      :origin_read_timeout)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15997,8 +16047,8 @@ module Aws::CloudFront
     #   minimum timeout is 1 second, the maximum is 120 seconds, and the
     #   default (if you don't specify otherwise) is 30 seconds.
     #
-    #   For more information, see [Response timeout (custom origins
-    #   only)][1] in the *Amazon CloudFront Developer Guide*.
+    #   For more information, see [Response timeout][1] in the *Amazon
+    #   CloudFront Developer Guide*.
     #
     #
     #

@@ -487,6 +487,37 @@ module Aws
                                         ) -> _CreateMultiRegionEndpointResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMultiRegionEndpointResponseSuccess
 
+      interface _CreateTenantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTenantResponse]
+        def tenant_name: () -> ::String
+        def tenant_id: () -> ::String
+        def tenant_arn: () -> ::String
+        def created_timestamp: () -> ::Time
+        def tags: () -> ::Array[Types::Tag]
+        def sending_status: () -> ("ENABLED" | "REINSTATED" | "DISABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#create_tenant-instance_method
+      def create_tenant: (
+                           tenant_name: ::String,
+                           ?tags: Array[
+                             {
+                               key: ::String,
+                               value: ::String
+                             },
+                           ]
+                         ) -> _CreateTenantResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTenantResponseSuccess
+
+      interface _CreateTenantResourceAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTenantResourceAssociationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#create_tenant_resource_association-instance_method
+      def create_tenant_resource_association: (
+                                                tenant_name: ::String,
+                                                resource_arn: ::String
+                                              ) -> _CreateTenantResourceAssociationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTenantResourceAssociationResponseSuccess
+
       interface _DeleteConfigurationSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConfigurationSetResponse]
       end
@@ -589,6 +620,25 @@ module Aws
                                            email_address: ::String
                                          ) -> _DeleteSuppressedDestinationResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSuppressedDestinationResponseSuccess
+
+      interface _DeleteTenantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTenantResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#delete_tenant-instance_method
+      def delete_tenant: (
+                           tenant_name: ::String
+                         ) -> _DeleteTenantResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTenantResponseSuccess
+
+      interface _DeleteTenantResourceAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTenantResourceAssociationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#delete_tenant_resource_association-instance_method
+      def delete_tenant_resource_association: (
+                                                tenant_name: ::String,
+                                                resource_arn: ::String
+                                              ) -> _DeleteTenantResourceAssociationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTenantResourceAssociationResponseSuccess
 
       interface _GetAccountResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountResponse]
@@ -880,6 +930,17 @@ module Aws
                                      ) -> _GetMultiRegionEndpointResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMultiRegionEndpointResponseSuccess
 
+      interface _GetReputationEntityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReputationEntityResponse]
+        def reputation_entity: () -> Types::ReputationEntity
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_reputation_entity-instance_method
+      def get_reputation_entity: (
+                                   reputation_entity_reference: ::String,
+                                   reputation_entity_type: ("RESOURCE")
+                                 ) -> _GetReputationEntityResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReputationEntityResponseSuccess
+
       interface _GetSuppressedDestinationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSuppressedDestinationResponse]
         def suppressed_destination: () -> Types::SuppressedDestination
@@ -889,6 +950,16 @@ module Aws
                                         email_address: ::String
                                       ) -> _GetSuppressedDestinationResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSuppressedDestinationResponseSuccess
+
+      interface _GetTenantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTenantResponse]
+        def tenant: () -> Types::Tenant
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_tenant-instance_method
+      def get_tenant: (
+                        tenant_name: ::String
+                      ) -> _GetTenantResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTenantResponseSuccess
 
       interface _ListConfigurationSetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListConfigurationSetsResponse]
@@ -1061,6 +1132,32 @@ module Aws
                                 ) -> _ListRecommendationsResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommendationsResponseSuccess
 
+      interface _ListReputationEntitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReputationEntitiesResponse]
+        def reputation_entities: () -> ::Array[Types::ReputationEntity]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_reputation_entities-instance_method
+      def list_reputation_entities: (
+                                      ?filter: Hash[("ENTITY_TYPE" | "REPUTATION_IMPACT" | "SENDING_STATUS" | "ENTITY_REFERENCE_PREFIX"), ::String],
+                                      ?next_token: ::String,
+                                      ?page_size: ::Integer
+                                    ) -> _ListReputationEntitiesResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReputationEntitiesResponseSuccess
+
+      interface _ListResourceTenantsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceTenantsResponse]
+        def resource_tenants: () -> ::Array[Types::ResourceTenantMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_resource_tenants-instance_method
+      def list_resource_tenants: (
+                                   resource_arn: ::String,
+                                   ?page_size: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListResourceTenantsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceTenantsResponseSuccess
+
       interface _ListSuppressedDestinationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSuppressedDestinationsResponse]
         def suppressed_destination_summaries: () -> ::Array[Types::SuppressedDestinationSummary]
@@ -1085,6 +1182,32 @@ module Aws
                                     resource_arn: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTenantResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTenantResourcesResponse]
+        def tenant_resources: () -> ::Array[Types::TenantResource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_tenant_resources-instance_method
+      def list_tenant_resources: (
+                                   tenant_name: ::String,
+                                   ?filter: Hash[("RESOURCE_TYPE"), ::String],
+                                   ?page_size: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListTenantResourcesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTenantResourcesResponseSuccess
+
+      interface _ListTenantsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTenantsResponse]
+        def tenants: () -> ::Array[Types::TenantInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_tenants-instance_method
+      def list_tenants: (
+                          ?next_token: ::String,
+                          ?page_size: ::Integer
+                        ) -> _ListTenantsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTenantsResponseSuccess
 
       interface _PutAccountDedicatedIpWarmupAttributesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountDedicatedIpWarmupAttributesResponse]
@@ -1415,7 +1538,8 @@ module Aws
                                },
                              ],
                              ?configuration_set_name: ::String,
-                             ?endpoint_id: ::String
+                             ?endpoint_id: ::String,
+                             ?tenant_name: ::String
                            ) -> _SendBulkEmailResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendBulkEmailResponseSuccess
 
@@ -1520,6 +1644,7 @@ module Aws
                         ],
                         ?configuration_set_name: ::String,
                         ?endpoint_id: ::String,
+                        ?tenant_name: ::String,
                         ?list_management_options: {
                           contact_list_name: ::String,
                           topic_name: ::String?
@@ -1673,6 +1798,28 @@ module Aws
                                    }
                                  ) -> _UpdateEmailTemplateResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEmailTemplateResponseSuccess
+
+      interface _UpdateReputationEntityCustomerManagedStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateReputationEntityCustomerManagedStatusResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#update_reputation_entity_customer_managed_status-instance_method
+      def update_reputation_entity_customer_managed_status: (
+                                                              reputation_entity_type: ("RESOURCE"),
+                                                              reputation_entity_reference: ::String,
+                                                              sending_status: ("ENABLED" | "REINSTATED" | "DISABLED")
+                                                            ) -> _UpdateReputationEntityCustomerManagedStatusResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateReputationEntityCustomerManagedStatusResponseSuccess
+
+      interface _UpdateReputationEntityPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateReputationEntityPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#update_reputation_entity_policy-instance_method
+      def update_reputation_entity_policy: (
+                                             reputation_entity_type: ("RESOURCE"),
+                                             reputation_entity_reference: ::String,
+                                             reputation_entity_policy: ::String
+                                           ) -> _UpdateReputationEntityPolicyResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateReputationEntityPolicyResponseSuccess
     end
   end
 end

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2025-07-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2025-07-29)
+------------------
+
+* Feature - This feature provides the ability to update the table reference and allowed columns on an existing configured table.
+
 1.47.0 (2025-07-21)
 ------------------
 

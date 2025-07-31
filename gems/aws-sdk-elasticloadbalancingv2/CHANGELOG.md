@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.136.0 (2025-07-31)
+------------------
+
+* Feature - This release enables secondary IP addresses for Network Load Balancers.
+
 1.135.0 (2025-07-21)
 ------------------
 

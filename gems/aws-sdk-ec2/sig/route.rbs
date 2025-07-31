@@ -68,6 +68,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#odb_network_arn-instance_method
       def odb_network_arn: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#ip_address-instance_method
+      def ip_address: () -> ::String
+
       def client: () -> Client
 
 

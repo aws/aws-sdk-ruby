@@ -478,7 +478,8 @@ module Aws
                             display_name: ::String,
                             identity_center_instance_arn: ::String,
                             subdomain: ::String,
-                            role_arn: ::String
+                            role_arn: ::String,
+                            ?tags: Hash[::String, ::String]
                           ) -> _CreateMonitorResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMonitorResponseSuccess
 

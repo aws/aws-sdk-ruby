@@ -1244,6 +1244,34 @@ module Aws
                                      configured_table_identifier: ::String,
                                      ?name: ::String,
                                      ?description: ::String,
+                                     ?table_reference: {
+                                       glue: {
+                                         table_name: ::String,
+                                         database_name: ::String
+                                       }?,
+                                       snowflake: {
+                                         secret_arn: ::String,
+                                         account_identifier: ::String,
+                                         database_name: ::String,
+                                         table_name: ::String,
+                                         schema_name: ::String,
+                                         table_schema: {
+                                           v1: Array[
+                                             {
+                                               column_name: ::String,
+                                               column_type: ::String
+                                             },
+                                           ]?
+                                         }
+                                       }?,
+                                       athena: {
+                                         work_group: ::String,
+                                         output_location: ::String?,
+                                         database_name: ::String,
+                                         table_name: ::String
+                                       }?
+                                     },
+                                     ?allowed_columns: Array[::String],
                                      ?analysis_method: ("DIRECT_QUERY" | "DIRECT_JOB" | "MULTIPLE"),
                                      ?selected_analysis_methods: Array[("DIRECT_QUERY" | "DIRECT_JOB")]
                                    ) -> _UpdateConfiguredTableResponseSuccess

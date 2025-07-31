@@ -327,7 +327,11 @@ module Aws
                                       dr_min: ::Integer?,
                                       dr_max: ::Integer?,
                                       pr_allowed: bool?,
-                                      ra_allowed: bool?
+                                      ra_allowed: bool?,
+                                      tx_power_index_min: ::Integer?,
+                                      tx_power_index_max: ::Integer?,
+                                      nb_trans_min: ::Integer?,
+                                      nb_trans_max: ::Integer?
                                     },
                                     ?tags: Array[
                                       {

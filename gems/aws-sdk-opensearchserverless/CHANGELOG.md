@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2025-07-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2025-07-29)
+------------------
+
+* Feature - This is to support Granular access control support for SAML with IAMFedraton in AOSS
+
 1.39.0 (2025-07-21)
 ------------------
 

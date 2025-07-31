@@ -412,6 +412,7 @@ module Aws::Deadline
       attr_accessor identity_center_instance_arn: ::String
       attr_accessor subdomain: ::String
       attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 

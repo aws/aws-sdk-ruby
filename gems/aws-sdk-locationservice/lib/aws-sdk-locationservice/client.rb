@@ -764,6 +764,13 @@ module Aws::LocationService
     #             radius: 1.0, # required
     #           },
     #           geobuf: "data",
+    #           multi_polygon: [
+    #             [
+    #               [
+    #                 [1.0],
+    #               ],
+    #             ],
+    #           ],
     #         },
     #         geofence_properties: {
     #           "PropertyMapKeyString" => "PropertyMapValueString",
@@ -899,10 +906,10 @@ module Aws::LocationService
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html
+    # [1]: https://docs.aws.amazon.com/location/previous/developerguide/calculate-route.html
     # [2]: https://docs.aws.amazon.com/location-routes/latest/APIReference/API_CreateRouteCalculator.html
-    # [3]: https://docs.aws.amazon.com/location/latest/developerguide/departure-time.html
-    # [4]: https://docs.aws.amazon.com/location/latest/developerguide/travel-mode.html
+    # [3]: https://docs.aws.amazon.com/location/previous/developerguide/departure-time.html
+    # [4]: https://docs.aws.amazon.com/location/previous/developerguide/travel-mode.html
     #
     # @option params [required, String] :calculator_name
     #   The name of the route calculator resource that you want to use to
@@ -928,7 +935,7 @@ module Aws::LocationService
     #
     #
     #   [1]: https://earth-info.nga.mil/index.php?dir=wgs84&amp;action=wgs84
-    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+    #   [2]: https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html
     #
     # @option params [required, Array<Float>] :destination_position
     #   The finish position for the route. Defined in [World Geodetic System
@@ -948,7 +955,7 @@ module Aws::LocationService
     #
     #
     #   [1]: https://earth-info.nga.mil/index.php?dir=wgs84&amp;action=wgs84
-    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+    #   [2]: https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html
     #
     # @option params [Array<Array>] :waypoint_positions
     #   Specifies an ordered list of up to 23 intermediate positions to
@@ -977,7 +984,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html
     #
     # @option params [String] :travel_mode
     #   Specifies the mode of transport when calculating a route. Used in
@@ -1007,7 +1014,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html
     #
     # @option params [Time,DateTime,Date,Integer,String] :departure_time
     #   Specifies the desired time of departure. Uses the given time to
@@ -1075,7 +1082,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #
     # @return [Types::CalculateRouteResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1195,10 +1202,10 @@ module Aws::LocationService
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html
+    # [1]: https://docs.aws.amazon.com/location/previous/developerguide/calculate-route-matrix.html
     # [2]: https://docs.aws.amazon.com/location-routes/latest/APIReference/API_CreateRouteCalculator.html
-    # [3]: https://docs.aws.amazon.com/location/latest/developerguide/departure-time.html
-    # [4]: https://docs.aws.amazon.com/location/latest/developerguide/travel-mode.html
+    # [3]: https://docs.aws.amazon.com/location/previous/developerguide/departure-time.html
+    # [4]: https://docs.aws.amazon.com/location/previous/developerguide/travel-mode.html
     #
     # @option params [required, String] :calculator_name
     #   The name of the route calculator resource that you want to use to
@@ -1227,8 +1234,8 @@ module Aws::LocationService
     #
     #
     #   [1]: https://earth-info.nga.mil/GandG/wgs84/index.html
-    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html#matrix-routing-position-limits
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+    #   [2]: https://docs.aws.amazon.com/location/previous/developerguide/calculate-route-matrix.html#matrix-routing-position-limits
+    #   [3]: https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html
     #
     # @option params [required, Array<Array>] :destination_positions
     #   The list of destination positions for the route matrix. An array of
@@ -1252,8 +1259,8 @@ module Aws::LocationService
     #
     #
     #   [1]: https://earth-info.nga.mil/GandG/wgs84/index.html
-    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html#matrix-routing-position-limits
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+    #   [2]: https://docs.aws.amazon.com/location/previous/developerguide/calculate-route-matrix.html#matrix-routing-position-limits
+    #   [3]: https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html
     #
     # @option params [String] :travel_mode
     #   Specifies the mode of transport when calculating a route. Used in
@@ -1280,7 +1287,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html
     #
     # @option params [Time,DateTime,Date,Integer,String] :departure_time
     #   Specifies the desired time of departure. Uses the given time to
@@ -1335,7 +1342,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #
     # @return [Types::CalculateRouteMatrixResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1505,7 +1512,7 @@ module Aws::LocationService
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    # [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #
     # @option params [required, String] :key_name
     #   A custom name for the API key resource.
@@ -1752,23 +1759,23 @@ module Aws::LocationService
     #
     #     If you specify HERE Technologies (`Here`) as the data provider, you
     #     may not [store results][7] for locations in Japan. For more
-    #     information, see the [Amazon Web Services Service Terms][8] for
+    #     information, see the [Amazon Web Services service terms][8] for
     #     Amazon Location Service.
     #
     #   For additional information , see [Data providers][9] on the *Amazon
-    #   Location Service Developer Guide*.
+    #   Location Service developer guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/esri.html
     #   [2]: https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
-    #   [4]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area
-    #   [5]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
+    #   [3]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html
+    #   [4]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html#grab-coverage-area
+    #   [5]: https://docs.aws.amazon.com/location/previous/developerguide/HERE.html
     #   [6]: https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html
     #   [7]: https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html
     #   [8]: http://aws.amazon.com/service-terms/
-    #   [9]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   [9]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
     #
     # @option params [String] :pricing_plan
     #   No longer used. If included, the only allowed value is
@@ -1899,14 +1906,14 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/esri.html
     #   [2]: https://doc.arcgis.com/en/arcgis-online/reference/network-coverage.htm
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
-    #   [4]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area
-    #   [5]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
+    #   [3]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html
+    #   [4]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html#grab-coverage-area
+    #   [5]: https://docs.aws.amazon.com/location/previous/developerguide/HERE.html
     #   [6]: https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/car-routing.html
     #   [7]: https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/truck-routing.html
-    #   [8]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   [8]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
     #
     # @option params [String] :pricing_plan
     #   No longer used. If included, the only allowed value is
@@ -2629,29 +2636,46 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Evaluates device positions against geofence geometries from a given
-    # geofence collection. The event forecasts three states for which a
-    # device can be in relative to a geofence:
+    # This action forecasts future geofence events that are likely to occur
+    # within a specified time horizon if a device continues moving at its
+    # current speed. Each forecasted event is associated with a geofence
+    # from a provided geofence collection. A forecast event can have one of
+    # the following states:
     #
-    # `ENTER`: If a device is outside of a geofence, but would breach the
-    # fence if the device is moving at its current speed within time horizon
-    # window.
+    # `ENTER`: The device position is outside the referenced geofence, but
+    # the device may cross into the geofence during the forecasting time
+    # horizon if it maintains its current speed.
     #
-    # `EXIT`: If a device is inside of a geofence, but would breach the
-    # fence if the device is moving at its current speed within time horizon
-    # window.
+    # `EXIT`: The device position is inside the referenced geofence, but the
+    # device may leave the geofence during the forecasted time horizon if
+    # the device maintains it's current speed.
     #
-    # `IDLE`: If a device is inside of a geofence, and the device is not
-    # moving.
+    # `IDLE`:The device is inside the geofence, and it will remain inside
+    # the geofence through the end of the time horizon if the device
+    # maintains it's current speed.
+    #
+    # <note markdown="1"> Heading direction is not considered in the current version. The API
+    # takes a conservative approach and includes events that can occur for
+    # any heading.
+    #
+    #  </note>
     #
     # @option params [required, String] :collection_name
     #   The name of the geofence collection.
     #
     # @option params [required, Types::ForecastGeofenceEventsDeviceState] :device_state
-    #   The device's state, including current position and speed.
+    #   Represents the device's state, including its current position and
+    #   speed. When speed is omitted, this API performs a *containment check*.
+    #   The *containment check* operation returns `IDLE` events for geofences
+    #   where the device is currently inside of, but no other events.
     #
     # @option params [Float] :time_horizon_minutes
-    #   Specifies the time horizon in minutes for the forecasted events.
+    #   The forward-looking time window for forecasting, specified in minutes.
+    #   The API only returns events that are predicted to occur within this
+    #   time horizon. When no value is specified, this API performs a
+    #   *containment check*. The *containment check* operation returns `IDLE`
+    #   events for geofences where the device is currently inside of, but no
+    #   other events.
     #
     # @option params [String] :distance_unit
     #   The distance unit used for the `NearestDistance` property returned in
@@ -2916,6 +2940,11 @@ module Aws::LocationService
     #   resp.geometry.circle.center[0] #=> Float
     #   resp.geometry.circle.radius #=> Float
     #   resp.geometry.geobuf #=> String
+    #   resp.geometry.multi_polygon #=> Array
+    #   resp.geometry.multi_polygon[0] #=> Array
+    #   resp.geometry.multi_polygon[0][0] #=> Array
+    #   resp.geometry.multi_polygon[0][0][0] #=> Array
+    #   resp.geometry.multi_polygon[0][0][0][0] #=> Float
     #   resp.status #=> String
     #   resp.create_time #=> Time
     #   resp.update_time #=> Time
@@ -3001,10 +3030,10 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
-    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
-    #   [4]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/esri.html
+    #   [2]: https://docs.aws.amazon.com/location/previous/developerguide/HERE.html
+    #   [3]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html
+    #   [4]: https://docs.aws.amazon.com/location/previous/developerguide/open-data.html
     #
     # @option params [required, String] :font_unicode_range
     #   A Unicode range of characters to download glyphs for. Each response
@@ -3017,7 +3046,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #
     # @return [Types::GetMapGlyphsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3076,7 +3105,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #
     # @return [Types::GetMapSpritesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3122,7 +3151,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #
     # @return [Types::GetMapStyleDescriptorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3178,7 +3207,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #
     # @return [Types::GetMapTileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3225,6 +3254,17 @@ module Aws::LocationService
     #
     #  </note>
     #
+    # <note markdown="1"> If your Place index resource is configured with Grab as your
+    # geolocation provider and Storage as Intended use, the GetPlace
+    # operation is unavailable. For more information, see [AWS service
+    # terms][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/service-terms
+    #
     # @option params [required, String] :index_name
     #   The name of the place index resource that you want to use for the
     #   search.
@@ -3261,7 +3301,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #
     # @return [Types::GetPlaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3463,6 +3503,11 @@ module Aws::LocationService
     #   resp.data.entries[0].geometry.circle.center[0] #=> Float
     #   resp.data.entries[0].geometry.circle.radius #=> Float
     #   resp.data.entries[0].geometry.geobuf #=> String
+    #   resp.data.entries[0].geometry.multi_polygon #=> Array
+    #   resp.data.entries[0].geometry.multi_polygon[0] #=> Array
+    #   resp.data.entries[0].geometry.multi_polygon[0][0] #=> Array
+    #   resp.data.entries[0].geometry.multi_polygon[0][0][0] #=> Array
+    #   resp.data.entries[0].geometry.multi_polygon[0][0][0][0] #=> Float
     #   resp.data.entries[0].status #=> String
     #   resp.data.entries[0].create_time #=> Time
     #   resp.data.entries[0].update_time #=> Time
@@ -3826,18 +3871,17 @@ module Aws::LocationService
     #
     # @option params [required, Types::GeofenceGeometry] :geometry
     #   Contains the details to specify the position of the geofence. Can be a
-    #   polygon, a circle or a polygon encoded in Geobuf format. Including
-    #   multiple selections will return a validation error.
+    #   circle, a polygon, or a multipolygon. `Polygon` and `MultiPolygon`
+    #   geometries can be defined using their respective parameters, or
+    #   encoded in Geobuf format using the `Geobuf` parameter. Including
+    #   multiple geometry types in the same request will return a validation
+    #   error.
     #
-    #   <note markdown="1"> The [ geofence polygon][1] format supports a maximum of 1,000
-    #   vertices. The [Geofence Geobuf][1] format supports a maximum of
+    #   <note markdown="1"> The geofence `Polygon` and `MultiPolygon` formats support a maximum of
+    #   1,000 total vertices. The `Geobuf` format supports a maximum of
     #   100,000 vertices.
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html
     #
     # @option params [Hash<String,String>] :geofence_properties
     #   Associates one of more properties with the geofence. A property is a
@@ -3868,6 +3912,13 @@ module Aws::LocationService
     #         radius: 1.0, # required
     #       },
     #       geobuf: "data",
+    #       multi_polygon: [
+    #         [
+    #           [
+    #             [1.0],
+    #           ],
+    #         ],
+    #       ],
     #     },
     #     geofence_properties: {
     #       "PropertyMapKeyString" => "PropertyMapValueString",
@@ -3941,7 +3992,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #
     # @return [Types::SearchPlaceIndexForPositionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4106,18 +4157,18 @@ module Aws::LocationService
     #
     #   For more information about using categories, including a list of
     #   Amazon Location categories, see [Categories and filtering][1], in the
-    #   *Amazon Location Service Developer Guide*.
+    #   *Amazon Location Service developer guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/category-filtering.html
     #
     # @option params [String] :key
     #   The optional [API key][1] to authorize the request.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #
     # @return [Types::SearchPlaceIndexForSuggestionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4277,18 +4328,18 @@ module Aws::LocationService
     #
     #   For more information about using categories, including a list of
     #   Amazon Location categories, see [Categories and filtering][1], in the
-    #   *Amazon Location Service Developer Guide*.
+    #   *Amazon Location Service developer guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/category-filtering.html
     #
     # @option params [String] :key
     #   The optional [API key][1] to authorize the request.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #
     # @return [Types::SearchPlaceIndexForTextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4814,6 +4865,16 @@ module Aws::LocationService
     # was reported behind a proxy, and by comparing it to an inferred
     # position estimated based on the device's state.
     #
+    # <note markdown="1"> The Location Integrity SDK provides enhanced features related to
+    # device verification, and it is available for use by request. To get
+    # access to the SDK, contact [Sales Support][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/contact-us/sales-support/?pg=locationprice&amp;cta=herobtn
+    #
     # @option params [required, String] :tracker_name
     #   The name of the tracker resource to be associated with verification
     #   request.
@@ -4923,7 +4984,7 @@ module Aws::LocationService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -209,6 +209,7 @@ module Aws::S3Control
       attr_accessor public_access_block_configuration: Types::PublicAccessBlockConfiguration
       attr_accessor bucket_account_id: ::String
       attr_accessor scope: Types::Scope
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 

@@ -34,6 +34,8 @@ module Aws::Batch
     CRUpdateAllocationStrategy = Shapes::StringShape.new(name: 'CRUpdateAllocationStrategy')
     CancelJobRequest = Shapes::StructureShape.new(name: 'CancelJobRequest')
     CancelJobResponse = Shapes::StructureShape.new(name: 'CancelJobResponse')
+    CapacityLimit = Shapes::StructureShape.new(name: 'CapacityLimit')
+    CapacityLimits = Shapes::ListShape.new(name: 'CapacityLimits')
     ClientException = Shapes::StructureShape.new(name: 'ClientException')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ComputeEnvironmentDetail = Shapes::StructureShape.new(name: 'ComputeEnvironmentDetail')
@@ -59,6 +61,8 @@ module Aws::Batch
     CreateJobQueueResponse = Shapes::StructureShape.new(name: 'CreateJobQueueResponse')
     CreateSchedulingPolicyRequest = Shapes::StructureShape.new(name: 'CreateSchedulingPolicyRequest')
     CreateSchedulingPolicyResponse = Shapes::StructureShape.new(name: 'CreateSchedulingPolicyResponse')
+    CreateServiceEnvironmentRequest = Shapes::StructureShape.new(name: 'CreateServiceEnvironmentRequest')
+    CreateServiceEnvironmentResponse = Shapes::StructureShape.new(name: 'CreateServiceEnvironmentResponse')
     DeleteComputeEnvironmentRequest = Shapes::StructureShape.new(name: 'DeleteComputeEnvironmentRequest')
     DeleteComputeEnvironmentResponse = Shapes::StructureShape.new(name: 'DeleteComputeEnvironmentResponse')
     DeleteConsumableResourceRequest = Shapes::StructureShape.new(name: 'DeleteConsumableResourceRequest')
@@ -67,6 +71,8 @@ module Aws::Batch
     DeleteJobQueueResponse = Shapes::StructureShape.new(name: 'DeleteJobQueueResponse')
     DeleteSchedulingPolicyRequest = Shapes::StructureShape.new(name: 'DeleteSchedulingPolicyRequest')
     DeleteSchedulingPolicyResponse = Shapes::StructureShape.new(name: 'DeleteSchedulingPolicyResponse')
+    DeleteServiceEnvironmentRequest = Shapes::StructureShape.new(name: 'DeleteServiceEnvironmentRequest')
+    DeleteServiceEnvironmentResponse = Shapes::StructureShape.new(name: 'DeleteServiceEnvironmentResponse')
     DeregisterJobDefinitionRequest = Shapes::StructureShape.new(name: 'DeregisterJobDefinitionRequest')
     DeregisterJobDefinitionResponse = Shapes::StructureShape.new(name: 'DeregisterJobDefinitionResponse')
     DescribeComputeEnvironmentsRequest = Shapes::StructureShape.new(name: 'DescribeComputeEnvironmentsRequest')
@@ -81,6 +87,10 @@ module Aws::Batch
     DescribeJobsResponse = Shapes::StructureShape.new(name: 'DescribeJobsResponse')
     DescribeSchedulingPoliciesRequest = Shapes::StructureShape.new(name: 'DescribeSchedulingPoliciesRequest')
     DescribeSchedulingPoliciesResponse = Shapes::StructureShape.new(name: 'DescribeSchedulingPoliciesResponse')
+    DescribeServiceEnvironmentsRequest = Shapes::StructureShape.new(name: 'DescribeServiceEnvironmentsRequest')
+    DescribeServiceEnvironmentsResponse = Shapes::StructureShape.new(name: 'DescribeServiceEnvironmentsResponse')
+    DescribeServiceJobRequest = Shapes::StructureShape.new(name: 'DescribeServiceJobRequest')
+    DescribeServiceJobResponse = Shapes::StructureShape.new(name: 'DescribeServiceJobResponse')
     Device = Shapes::StructureShape.new(name: 'Device')
     DeviceCgroupPermission = Shapes::StringShape.new(name: 'DeviceCgroupPermission')
     DeviceCgroupPermissions = Shapes::ListShape.new(name: 'DeviceCgroupPermissions')
@@ -163,6 +173,7 @@ module Aws::Batch
     JobExecutionTimeoutMinutes = Shapes::IntegerShape.new(name: 'JobExecutionTimeoutMinutes')
     JobQueueDetail = Shapes::StructureShape.new(name: 'JobQueueDetail')
     JobQueueDetailList = Shapes::ListShape.new(name: 'JobQueueDetailList')
+    JobQueueType = Shapes::StringShape.new(name: 'JobQueueType')
     JobStateTimeLimitAction = Shapes::StructureShape.new(name: 'JobStateTimeLimitAction')
     JobStateTimeLimitActions = Shapes::ListShape.new(name: 'JobStateTimeLimitActions')
     JobStateTimeLimitActionsAction = Shapes::StringShape.new(name: 'JobStateTimeLimitActionsAction')
@@ -174,6 +185,7 @@ module Aws::Batch
     KeyValuePair = Shapes::StructureShape.new(name: 'KeyValuePair')
     KeyValuesPair = Shapes::StructureShape.new(name: 'KeyValuesPair')
     KubernetesVersion = Shapes::StringShape.new(name: 'KubernetesVersion')
+    LatestServiceJobAttempt = Shapes::StructureShape.new(name: 'LatestServiceJobAttempt')
     LaunchTemplateSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateSpecification')
     LaunchTemplateSpecificationOverride = Shapes::StructureShape.new(name: 'LaunchTemplateSpecificationOverride')
     LaunchTemplateSpecificationOverrideList = Shapes::ListShape.new(name: 'LaunchTemplateSpecificationOverrideList')
@@ -195,6 +207,8 @@ module Aws::Batch
     ListJobsResponse = Shapes::StructureShape.new(name: 'ListJobsResponse')
     ListSchedulingPoliciesRequest = Shapes::StructureShape.new(name: 'ListSchedulingPoliciesRequest')
     ListSchedulingPoliciesResponse = Shapes::StructureShape.new(name: 'ListSchedulingPoliciesResponse')
+    ListServiceJobsRequest = Shapes::StructureShape.new(name: 'ListServiceJobsRequest')
+    ListServiceJobsResponse = Shapes::StructureShape.new(name: 'ListServiceJobsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTaskContainerDetails = Shapes::ListShape.new(name: 'ListTaskContainerDetails')
@@ -239,12 +253,34 @@ module Aws::Batch
     Secret = Shapes::StructureShape.new(name: 'Secret')
     SecretList = Shapes::ListShape.new(name: 'SecretList')
     ServerException = Shapes::StructureShape.new(name: 'ServerException')
+    ServiceEnvironmentDetail = Shapes::StructureShape.new(name: 'ServiceEnvironmentDetail')
+    ServiceEnvironmentDetailList = Shapes::ListShape.new(name: 'ServiceEnvironmentDetailList')
+    ServiceEnvironmentOrder = Shapes::StructureShape.new(name: 'ServiceEnvironmentOrder')
+    ServiceEnvironmentOrders = Shapes::ListShape.new(name: 'ServiceEnvironmentOrders')
+    ServiceEnvironmentState = Shapes::StringShape.new(name: 'ServiceEnvironmentState')
+    ServiceEnvironmentStatus = Shapes::StringShape.new(name: 'ServiceEnvironmentStatus')
+    ServiceEnvironmentType = Shapes::StringShape.new(name: 'ServiceEnvironmentType')
+    ServiceJobAttemptDetail = Shapes::StructureShape.new(name: 'ServiceJobAttemptDetail')
+    ServiceJobAttemptDetails = Shapes::ListShape.new(name: 'ServiceJobAttemptDetails')
+    ServiceJobEvaluateOnExit = Shapes::StructureShape.new(name: 'ServiceJobEvaluateOnExit')
+    ServiceJobEvaluateOnExitList = Shapes::ListShape.new(name: 'ServiceJobEvaluateOnExitList')
+    ServiceJobRetryAction = Shapes::StringShape.new(name: 'ServiceJobRetryAction')
+    ServiceJobRetryStrategy = Shapes::StructureShape.new(name: 'ServiceJobRetryStrategy')
+    ServiceJobStatus = Shapes::StringShape.new(name: 'ServiceJobStatus')
+    ServiceJobSummary = Shapes::StructureShape.new(name: 'ServiceJobSummary')
+    ServiceJobSummaryList = Shapes::ListShape.new(name: 'ServiceJobSummaryList')
+    ServiceJobTimeout = Shapes::StructureShape.new(name: 'ServiceJobTimeout')
+    ServiceJobType = Shapes::StringShape.new(name: 'ServiceJobType')
+    ServiceResourceId = Shapes::StructureShape.new(name: 'ServiceResourceId')
+    ServiceResourceIdName = Shapes::StringShape.new(name: 'ServiceResourceIdName')
     ShareAttributes = Shapes::StructureShape.new(name: 'ShareAttributes')
     ShareAttributesList = Shapes::ListShape.new(name: 'ShareAttributesList')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     SubmitJobRequest = Shapes::StructureShape.new(name: 'SubmitJobRequest')
     SubmitJobResponse = Shapes::StructureShape.new(name: 'SubmitJobResponse')
+    SubmitServiceJobRequest = Shapes::StructureShape.new(name: 'SubmitServiceJobRequest')
+    SubmitServiceJobResponse = Shapes::StructureShape.new(name: 'SubmitServiceJobResponse')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeysList = Shapes::ListShape.new(name: 'TagKeysList')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
@@ -260,6 +296,8 @@ module Aws::Batch
     TaskPropertiesOverride = Shapes::StructureShape.new(name: 'TaskPropertiesOverride')
     TerminateJobRequest = Shapes::StructureShape.new(name: 'TerminateJobRequest')
     TerminateJobResponse = Shapes::StructureShape.new(name: 'TerminateJobResponse')
+    TerminateServiceJobRequest = Shapes::StructureShape.new(name: 'TerminateServiceJobRequest')
+    TerminateServiceJobResponse = Shapes::StructureShape.new(name: 'TerminateServiceJobResponse')
     Tmpfs = Shapes::StructureShape.new(name: 'Tmpfs')
     TmpfsList = Shapes::ListShape.new(name: 'TmpfsList')
     Ulimit = Shapes::StructureShape.new(name: 'Ulimit')
@@ -275,6 +313,8 @@ module Aws::Batch
     UpdatePolicy = Shapes::StructureShape.new(name: 'UpdatePolicy')
     UpdateSchedulingPolicyRequest = Shapes::StructureShape.new(name: 'UpdateSchedulingPolicyRequest')
     UpdateSchedulingPolicyResponse = Shapes::StructureShape.new(name: 'UpdateSchedulingPolicyResponse')
+    UpdateServiceEnvironmentRequest = Shapes::StructureShape.new(name: 'UpdateServiceEnvironmentRequest')
+    UpdateServiceEnvironmentResponse = Shapes::StructureShape.new(name: 'UpdateServiceEnvironmentResponse')
     UserdataType = Shapes::StringShape.new(name: 'UserdataType')
     Volume = Shapes::StructureShape.new(name: 'Volume')
     Volumes = Shapes::ListShape.new(name: 'Volumes')
@@ -328,6 +368,12 @@ module Aws::Batch
     CancelJobRequest.struct_class = Types::CancelJobRequest
 
     CancelJobResponse.struct_class = Types::CancelJobResponse
+
+    CapacityLimit.add_member(:max_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "maxCapacity"))
+    CapacityLimit.add_member(:capacity_unit, Shapes::ShapeRef.new(shape: String, location_name: "capacityUnit"))
+    CapacityLimit.struct_class = Types::CapacityLimit
+
+    CapacityLimits.member = Shapes::ShapeRef.new(shape: CapacityLimit)
 
     ClientException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ClientException.struct_class = Types::ClientException
@@ -513,7 +559,9 @@ module Aws::Batch
     CreateJobQueueRequest.add_member(:state, Shapes::ShapeRef.new(shape: JQState, location_name: "state"))
     CreateJobQueueRequest.add_member(:scheduling_policy_arn, Shapes::ShapeRef.new(shape: String, location_name: "schedulingPolicyArn"))
     CreateJobQueueRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "priority"))
-    CreateJobQueueRequest.add_member(:compute_environment_order, Shapes::ShapeRef.new(shape: ComputeEnvironmentOrders, required: true, location_name: "computeEnvironmentOrder"))
+    CreateJobQueueRequest.add_member(:compute_environment_order, Shapes::ShapeRef.new(shape: ComputeEnvironmentOrders, location_name: "computeEnvironmentOrder"))
+    CreateJobQueueRequest.add_member(:service_environment_order, Shapes::ShapeRef.new(shape: ServiceEnvironmentOrders, location_name: "serviceEnvironmentOrder"))
+    CreateJobQueueRequest.add_member(:job_queue_type, Shapes::ShapeRef.new(shape: JobQueueType, location_name: "jobQueueType"))
     CreateJobQueueRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
     CreateJobQueueRequest.add_member(:job_state_time_limit_actions, Shapes::ShapeRef.new(shape: JobStateTimeLimitActions, location_name: "jobStateTimeLimitActions"))
     CreateJobQueueRequest.struct_class = Types::CreateJobQueueRequest
@@ -530,6 +578,17 @@ module Aws::Batch
     CreateSchedulingPolicyResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     CreateSchedulingPolicyResponse.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "arn"))
     CreateSchedulingPolicyResponse.struct_class = Types::CreateSchedulingPolicyResponse
+
+    CreateServiceEnvironmentRequest.add_member(:service_environment_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceEnvironmentName"))
+    CreateServiceEnvironmentRequest.add_member(:service_environment_type, Shapes::ShapeRef.new(shape: ServiceEnvironmentType, required: true, location_name: "serviceEnvironmentType"))
+    CreateServiceEnvironmentRequest.add_member(:state, Shapes::ShapeRef.new(shape: ServiceEnvironmentState, location_name: "state"))
+    CreateServiceEnvironmentRequest.add_member(:capacity_limits, Shapes::ShapeRef.new(shape: CapacityLimits, required: true, location_name: "capacityLimits"))
+    CreateServiceEnvironmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
+    CreateServiceEnvironmentRequest.struct_class = Types::CreateServiceEnvironmentRequest
+
+    CreateServiceEnvironmentResponse.add_member(:service_environment_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceEnvironmentName"))
+    CreateServiceEnvironmentResponse.add_member(:service_environment_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceEnvironmentArn"))
+    CreateServiceEnvironmentResponse.struct_class = Types::CreateServiceEnvironmentResponse
 
     DeleteComputeEnvironmentRequest.add_member(:compute_environment, Shapes::ShapeRef.new(shape: String, required: true, location_name: "computeEnvironment"))
     DeleteComputeEnvironmentRequest.struct_class = Types::DeleteComputeEnvironmentRequest
@@ -550,6 +609,11 @@ module Aws::Batch
     DeleteSchedulingPolicyRequest.struct_class = Types::DeleteSchedulingPolicyRequest
 
     DeleteSchedulingPolicyResponse.struct_class = Types::DeleteSchedulingPolicyResponse
+
+    DeleteServiceEnvironmentRequest.add_member(:service_environment, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceEnvironment"))
+    DeleteServiceEnvironmentRequest.struct_class = Types::DeleteServiceEnvironmentRequest
+
+    DeleteServiceEnvironmentResponse.struct_class = Types::DeleteServiceEnvironmentResponse
 
     DeregisterJobDefinitionRequest.add_member(:job_definition, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinition"))
     DeregisterJobDefinitionRequest.struct_class = Types::DeregisterJobDefinitionRequest
@@ -609,6 +673,39 @@ module Aws::Batch
 
     DescribeSchedulingPoliciesResponse.add_member(:scheduling_policies, Shapes::ShapeRef.new(shape: SchedulingPolicyDetailList, location_name: "schedulingPolicies"))
     DescribeSchedulingPoliciesResponse.struct_class = Types::DescribeSchedulingPoliciesResponse
+
+    DescribeServiceEnvironmentsRequest.add_member(:service_environments, Shapes::ShapeRef.new(shape: StringList, location_name: "serviceEnvironments"))
+    DescribeServiceEnvironmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
+    DescribeServiceEnvironmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeServiceEnvironmentsRequest.struct_class = Types::DescribeServiceEnvironmentsRequest
+
+    DescribeServiceEnvironmentsResponse.add_member(:service_environments, Shapes::ShapeRef.new(shape: ServiceEnvironmentDetailList, location_name: "serviceEnvironments"))
+    DescribeServiceEnvironmentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeServiceEnvironmentsResponse.struct_class = Types::DescribeServiceEnvironmentsResponse
+
+    DescribeServiceJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
+    DescribeServiceJobRequest.struct_class = Types::DescribeServiceJobRequest
+
+    DescribeServiceJobResponse.add_member(:attempts, Shapes::ShapeRef.new(shape: ServiceJobAttemptDetails, location_name: "attempts"))
+    DescribeServiceJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Long, location_name: "createdAt"))
+    DescribeServiceJobResponse.add_member(:is_terminated, Shapes::ShapeRef.new(shape: Boolean, location_name: "isTerminated"))
+    DescribeServiceJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: String, location_name: "jobArn"))
+    DescribeServiceJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
+    DescribeServiceJobResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobName"))
+    DescribeServiceJobResponse.add_member(:job_queue, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobQueue"))
+    DescribeServiceJobResponse.add_member(:latest_attempt, Shapes::ShapeRef.new(shape: LatestServiceJobAttempt, location_name: "latestAttempt"))
+    DescribeServiceJobResponse.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: ServiceJobRetryStrategy, location_name: "retryStrategy"))
+    DescribeServiceJobResponse.add_member(:scheduling_priority, Shapes::ShapeRef.new(shape: Integer, location_name: "schedulingPriority"))
+    DescribeServiceJobResponse.add_member(:service_request_payload, Shapes::ShapeRef.new(shape: String, location_name: "serviceRequestPayload"))
+    DescribeServiceJobResponse.add_member(:service_job_type, Shapes::ShapeRef.new(shape: ServiceJobType, required: true, location_name: "serviceJobType"))
+    DescribeServiceJobResponse.add_member(:share_identifier, Shapes::ShapeRef.new(shape: String, location_name: "shareIdentifier"))
+    DescribeServiceJobResponse.add_member(:started_at, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "startedAt"))
+    DescribeServiceJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: ServiceJobStatus, required: true, location_name: "status"))
+    DescribeServiceJobResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    DescribeServiceJobResponse.add_member(:stopped_at, Shapes::ShapeRef.new(shape: Long, location_name: "stoppedAt"))
+    DescribeServiceJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
+    DescribeServiceJobResponse.add_member(:timeout_config, Shapes::ShapeRef.new(shape: ServiceJobTimeout, location_name: "timeoutConfig"))
+    DescribeServiceJobResponse.struct_class = Types::DescribeServiceJobResponse
 
     Device.add_member(:host_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "hostPath"))
     Device.add_member(:container_path, Shapes::ShapeRef.new(shape: String, location_name: "containerPath"))
@@ -964,6 +1061,8 @@ module Aws::Batch
     JobQueueDetail.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     JobQueueDetail.add_member(:priority, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "priority"))
     JobQueueDetail.add_member(:compute_environment_order, Shapes::ShapeRef.new(shape: ComputeEnvironmentOrders, required: true, location_name: "computeEnvironmentOrder"))
+    JobQueueDetail.add_member(:service_environment_order, Shapes::ShapeRef.new(shape: ServiceEnvironmentOrders, location_name: "serviceEnvironmentOrder"))
+    JobQueueDetail.add_member(:job_queue_type, Shapes::ShapeRef.new(shape: JobQueueType, location_name: "jobQueueType"))
     JobQueueDetail.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
     JobQueueDetail.add_member(:job_state_time_limit_actions, Shapes::ShapeRef.new(shape: JobStateTimeLimitActions, location_name: "jobStateTimeLimitActions"))
     JobQueueDetail.struct_class = Types::JobQueueDetail
@@ -1004,6 +1103,9 @@ module Aws::Batch
     KeyValuesPair.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     KeyValuesPair.add_member(:values, Shapes::ShapeRef.new(shape: StringList, location_name: "values"))
     KeyValuesPair.struct_class = Types::KeyValuesPair
+
+    LatestServiceJobAttempt.add_member(:service_resource_id, Shapes::ShapeRef.new(shape: ServiceResourceId, location_name: "serviceResourceId"))
+    LatestServiceJobAttempt.struct_class = Types::LatestServiceJobAttempt
 
     LaunchTemplateSpecification.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateId"))
     LaunchTemplateSpecification.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateName"))
@@ -1097,6 +1199,17 @@ module Aws::Batch
     ListSchedulingPoliciesResponse.add_member(:scheduling_policies, Shapes::ShapeRef.new(shape: SchedulingPolicyListingDetailList, location_name: "schedulingPolicies"))
     ListSchedulingPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListSchedulingPoliciesResponse.struct_class = Types::ListSchedulingPoliciesResponse
+
+    ListServiceJobsRequest.add_member(:job_queue, Shapes::ShapeRef.new(shape: String, location_name: "jobQueue"))
+    ListServiceJobsRequest.add_member(:job_status, Shapes::ShapeRef.new(shape: ServiceJobStatus, location_name: "jobStatus"))
+    ListServiceJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
+    ListServiceJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListServiceJobsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListJobsFilterList, location_name: "filters"))
+    ListServiceJobsRequest.struct_class = Types::ListServiceJobsRequest
+
+    ListServiceJobsResponse.add_member(:job_summary_list, Shapes::ShapeRef.new(shape: ServiceJobSummaryList, required: true, location_name: "jobSummaryList"))
+    ListServiceJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListServiceJobsResponse.struct_class = Types::ListServiceJobsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -1240,6 +1353,63 @@ module Aws::Batch
     ServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ServerException.struct_class = Types::ServerException
 
+    ServiceEnvironmentDetail.add_member(:service_environment_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceEnvironmentName"))
+    ServiceEnvironmentDetail.add_member(:service_environment_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceEnvironmentArn"))
+    ServiceEnvironmentDetail.add_member(:service_environment_type, Shapes::ShapeRef.new(shape: ServiceEnvironmentType, required: true, location_name: "serviceEnvironmentType"))
+    ServiceEnvironmentDetail.add_member(:state, Shapes::ShapeRef.new(shape: ServiceEnvironmentState, location_name: "state"))
+    ServiceEnvironmentDetail.add_member(:status, Shapes::ShapeRef.new(shape: ServiceEnvironmentStatus, location_name: "status"))
+    ServiceEnvironmentDetail.add_member(:capacity_limits, Shapes::ShapeRef.new(shape: CapacityLimits, required: true, location_name: "capacityLimits"))
+    ServiceEnvironmentDetail.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
+    ServiceEnvironmentDetail.struct_class = Types::ServiceEnvironmentDetail
+
+    ServiceEnvironmentDetailList.member = Shapes::ShapeRef.new(shape: ServiceEnvironmentDetail)
+
+    ServiceEnvironmentOrder.add_member(:order, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "order"))
+    ServiceEnvironmentOrder.add_member(:service_environment, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceEnvironment"))
+    ServiceEnvironmentOrder.struct_class = Types::ServiceEnvironmentOrder
+
+    ServiceEnvironmentOrders.member = Shapes::ShapeRef.new(shape: ServiceEnvironmentOrder)
+
+    ServiceJobAttemptDetail.add_member(:service_resource_id, Shapes::ShapeRef.new(shape: ServiceResourceId, location_name: "serviceResourceId"))
+    ServiceJobAttemptDetail.add_member(:started_at, Shapes::ShapeRef.new(shape: Long, location_name: "startedAt"))
+    ServiceJobAttemptDetail.add_member(:stopped_at, Shapes::ShapeRef.new(shape: Long, location_name: "stoppedAt"))
+    ServiceJobAttemptDetail.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    ServiceJobAttemptDetail.struct_class = Types::ServiceJobAttemptDetail
+
+    ServiceJobAttemptDetails.member = Shapes::ShapeRef.new(shape: ServiceJobAttemptDetail)
+
+    ServiceJobEvaluateOnExit.add_member(:action, Shapes::ShapeRef.new(shape: ServiceJobRetryAction, location_name: "action"))
+    ServiceJobEvaluateOnExit.add_member(:on_status_reason, Shapes::ShapeRef.new(shape: String, location_name: "onStatusReason"))
+    ServiceJobEvaluateOnExit.struct_class = Types::ServiceJobEvaluateOnExit
+
+    ServiceJobEvaluateOnExitList.member = Shapes::ShapeRef.new(shape: ServiceJobEvaluateOnExit)
+
+    ServiceJobRetryStrategy.add_member(:attempts, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "attempts"))
+    ServiceJobRetryStrategy.add_member(:evaluate_on_exit, Shapes::ShapeRef.new(shape: ServiceJobEvaluateOnExitList, location_name: "evaluateOnExit"))
+    ServiceJobRetryStrategy.struct_class = Types::ServiceJobRetryStrategy
+
+    ServiceJobSummary.add_member(:latest_attempt, Shapes::ShapeRef.new(shape: LatestServiceJobAttempt, location_name: "latestAttempt"))
+    ServiceJobSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Long, location_name: "createdAt"))
+    ServiceJobSummary.add_member(:job_arn, Shapes::ShapeRef.new(shape: String, location_name: "jobArn"))
+    ServiceJobSummary.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
+    ServiceJobSummary.add_member(:job_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobName"))
+    ServiceJobSummary.add_member(:service_job_type, Shapes::ShapeRef.new(shape: ServiceJobType, required: true, location_name: "serviceJobType"))
+    ServiceJobSummary.add_member(:share_identifier, Shapes::ShapeRef.new(shape: String, location_name: "shareIdentifier"))
+    ServiceJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: ServiceJobStatus, location_name: "status"))
+    ServiceJobSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    ServiceJobSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: Long, location_name: "startedAt"))
+    ServiceJobSummary.add_member(:stopped_at, Shapes::ShapeRef.new(shape: Long, location_name: "stoppedAt"))
+    ServiceJobSummary.struct_class = Types::ServiceJobSummary
+
+    ServiceJobSummaryList.member = Shapes::ShapeRef.new(shape: ServiceJobSummary)
+
+    ServiceJobTimeout.add_member(:attempt_duration_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "attemptDurationSeconds"))
+    ServiceJobTimeout.struct_class = Types::ServiceJobTimeout
+
+    ServiceResourceId.add_member(:name, Shapes::ShapeRef.new(shape: ServiceResourceIdName, required: true, location_name: "name"))
+    ServiceResourceId.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
+    ServiceResourceId.struct_class = Types::ServiceResourceId
+
     ShareAttributes.add_member(:share_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "shareIdentifier"))
     ShareAttributes.add_member(:weight_factor, Shapes::ShapeRef.new(shape: Float, location_name: "weightFactor"))
     ShareAttributes.struct_class = Types::ShareAttributes
@@ -1271,6 +1441,23 @@ module Aws::Batch
     SubmitJobResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobName"))
     SubmitJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
     SubmitJobResponse.struct_class = Types::SubmitJobResponse
+
+    SubmitServiceJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobName"))
+    SubmitServiceJobRequest.add_member(:job_queue, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobQueue"))
+    SubmitServiceJobRequest.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: ServiceJobRetryStrategy, location_name: "retryStrategy"))
+    SubmitServiceJobRequest.add_member(:scheduling_priority, Shapes::ShapeRef.new(shape: Integer, location_name: "schedulingPriority"))
+    SubmitServiceJobRequest.add_member(:service_request_payload, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceRequestPayload"))
+    SubmitServiceJobRequest.add_member(:service_job_type, Shapes::ShapeRef.new(shape: ServiceJobType, required: true, location_name: "serviceJobType"))
+    SubmitServiceJobRequest.add_member(:share_identifier, Shapes::ShapeRef.new(shape: String, location_name: "shareIdentifier"))
+    SubmitServiceJobRequest.add_member(:timeout_config, Shapes::ShapeRef.new(shape: ServiceJobTimeout, location_name: "timeoutConfig"))
+    SubmitServiceJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
+    SubmitServiceJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    SubmitServiceJobRequest.struct_class = Types::SubmitServiceJobRequest
+
+    SubmitServiceJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: String, location_name: "jobArn"))
+    SubmitServiceJobResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobName"))
+    SubmitServiceJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
+    SubmitServiceJobResponse.struct_class = Types::SubmitServiceJobResponse
 
     TagKeysList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -1349,6 +1536,12 @@ module Aws::Batch
 
     TerminateJobResponse.struct_class = Types::TerminateJobResponse
 
+    TerminateServiceJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
+    TerminateServiceJobRequest.add_member(:reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "reason"))
+    TerminateServiceJobRequest.struct_class = Types::TerminateServiceJobRequest
+
+    TerminateServiceJobResponse.struct_class = Types::TerminateServiceJobResponse
+
     Tmpfs.add_member(:container_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "containerPath"))
     Tmpfs.add_member(:size, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "size"))
     Tmpfs.add_member(:mount_options, Shapes::ShapeRef.new(shape: StringList, location_name: "mountOptions"))
@@ -1398,6 +1591,7 @@ module Aws::Batch
     UpdateJobQueueRequest.add_member(:scheduling_policy_arn, Shapes::ShapeRef.new(shape: String, location_name: "schedulingPolicyArn"))
     UpdateJobQueueRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Integer, location_name: "priority"))
     UpdateJobQueueRequest.add_member(:compute_environment_order, Shapes::ShapeRef.new(shape: ComputeEnvironmentOrders, location_name: "computeEnvironmentOrder"))
+    UpdateJobQueueRequest.add_member(:service_environment_order, Shapes::ShapeRef.new(shape: ServiceEnvironmentOrders, location_name: "serviceEnvironmentOrder"))
     UpdateJobQueueRequest.add_member(:job_state_time_limit_actions, Shapes::ShapeRef.new(shape: JobStateTimeLimitActions, location_name: "jobStateTimeLimitActions"))
     UpdateJobQueueRequest.struct_class = Types::UpdateJobQueueRequest
 
@@ -1414,6 +1608,15 @@ module Aws::Batch
     UpdateSchedulingPolicyRequest.struct_class = Types::UpdateSchedulingPolicyRequest
 
     UpdateSchedulingPolicyResponse.struct_class = Types::UpdateSchedulingPolicyResponse
+
+    UpdateServiceEnvironmentRequest.add_member(:service_environment, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceEnvironment"))
+    UpdateServiceEnvironmentRequest.add_member(:state, Shapes::ShapeRef.new(shape: ServiceEnvironmentState, location_name: "state"))
+    UpdateServiceEnvironmentRequest.add_member(:capacity_limits, Shapes::ShapeRef.new(shape: CapacityLimits, location_name: "capacityLimits"))
+    UpdateServiceEnvironmentRequest.struct_class = Types::UpdateServiceEnvironmentRequest
+
+    UpdateServiceEnvironmentResponse.add_member(:service_environment_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceEnvironmentName"))
+    UpdateServiceEnvironmentResponse.add_member(:service_environment_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceEnvironmentArn"))
+    UpdateServiceEnvironmentResponse.struct_class = Types::UpdateServiceEnvironmentResponse
 
     Volume.add_member(:host, Shapes::ShapeRef.new(shape: Host, location_name: "host"))
     Volume.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -1492,6 +1695,16 @@ module Aws::Batch
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)
 
+      api.add_operation(:create_service_environment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateServiceEnvironment"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/createserviceenvironment"
+        o.input = Shapes::ShapeRef.new(shape: CreateServiceEnvironmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateServiceEnvironmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+      end)
+
       api.add_operation(:delete_compute_environment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteComputeEnvironment"
         o.http_method = "POST"
@@ -1528,6 +1741,16 @@ module Aws::Batch
         o.http_request_uri = "/v1/deleteschedulingpolicy"
         o.input = Shapes::ShapeRef.new(shape: DeleteSchedulingPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteSchedulingPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+      end)
+
+      api.add_operation(:delete_service_environment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteServiceEnvironment"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/deleteserviceenvironment"
+        o.input = Shapes::ShapeRef.new(shape: DeleteServiceEnvironmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteServiceEnvironmentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)
@@ -1620,6 +1843,32 @@ module Aws::Batch
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)
 
+      api.add_operation(:describe_service_environments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeServiceEnvironments"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/describeserviceenvironments"
+        o.input = Shapes::ShapeRef.new(shape: DescribeServiceEnvironmentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeServiceEnvironmentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_service_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeServiceJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/describeservicejob"
+        o.input = Shapes::ShapeRef.new(shape: DescribeServiceJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeServiceJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+      end)
+
       api.add_operation(:get_job_queue_snapshot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetJobQueueSnapshot"
         o.http_method = "POST"
@@ -1694,6 +1943,22 @@ module Aws::Batch
         )
       end)
 
+      api.add_operation(:list_service_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListServiceJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/listservicejobs"
+        o.input = Shapes::ShapeRef.new(shape: ListServiceJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListServiceJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -1724,6 +1989,16 @@ module Aws::Batch
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)
 
+      api.add_operation(:submit_service_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SubmitServiceJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/submitservicejob"
+        o.input = Shapes::ShapeRef.new(shape: SubmitServiceJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: SubmitServiceJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -1740,6 +2015,16 @@ module Aws::Batch
         o.http_request_uri = "/v1/terminatejob"
         o.input = Shapes::ShapeRef.new(shape: TerminateJobRequest)
         o.output = Shapes::ShapeRef.new(shape: TerminateJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+      end)
+
+      api.add_operation(:terminate_service_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TerminateServiceJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/terminateservicejob"
+        o.input = Shapes::ShapeRef.new(shape: TerminateServiceJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: TerminateServiceJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)
@@ -1790,6 +2075,16 @@ module Aws::Batch
         o.http_request_uri = "/v1/updateschedulingpolicy"
         o.input = Shapes::ShapeRef.new(shape: UpdateSchedulingPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateSchedulingPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+      end)
+
+      api.add_operation(:update_service_environment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateServiceEnvironment"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/updateserviceenvironment"
+        o.input = Shapes::ShapeRef.new(shape: UpdateServiceEnvironmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateServiceEnvironmentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)

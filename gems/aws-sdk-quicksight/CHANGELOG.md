@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.153.0 (2025-07-31)
+------------------
+
+* Feature - Added Impala connector support
+
 1.152.0 (2025-07-21)
 ------------------
 

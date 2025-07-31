@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2025-07-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2025-07-29)
+------------------
+
+* Feature - This release 1) adds support for multi-polygon geofences with disconnected territories, and 2) enables polygon exclusion zones within geofences for more accurate representation of real-world boundaries.
+
 1.72.0 (2025-07-21)
 ------------------
 

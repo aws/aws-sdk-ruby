@@ -55,7 +55,7 @@ module Aws::InternetMonitor
   autoload :EndpointProvider, 'aws-sdk-internetmonitor/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-internetmonitor/endpoints'
 
-  GEM_VERSION = '1.39.0'
+  GEM_VERSION = '1.40.0'
 
 end
 

@@ -975,6 +975,18 @@ module Aws::S3Control
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of tags that you can apply to an access point. Tags are
+    #   key-value pairs of metadata used to control access to your access
+    #   points. For more information about tags, see [Using tags with Amazon
+    #   S3][1]. For information about tagging access points, see [Using tags
+    #   for attribute-based access control (ABAC)][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#using-tags-for-abac
+    #
     # @return [Types::CreateAccessPointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAccessPointResult#access_point_arn #access_point_arn} => String
@@ -1000,6 +1012,12 @@ module Aws::S3Control
     #       prefixes: ["Prefix"],
     #       permissions: ["GetObject"], # accepts GetObject, GetObjectAttributes, ListMultipartUploadParts, ListBucket, ListBucketMultipartUploads, PutObject, DeleteObject, AbortMultipartUpload
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -8078,7 +8096,7 @@ module Aws::S3Control
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.114.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

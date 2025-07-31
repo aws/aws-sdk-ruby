@@ -1671,7 +1671,7 @@ module Aws::Schemas
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-schemas'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

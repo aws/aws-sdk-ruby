@@ -11,6 +11,10 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
+      class ADAssessmentLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
       class AccessDeniedException < ::Aws::Errors::ServiceError
         def message: () -> ::String
         def request_id: () -> ::String

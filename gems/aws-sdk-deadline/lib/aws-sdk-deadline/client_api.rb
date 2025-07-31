@@ -984,6 +984,7 @@ module Aws::Deadline
     CreateMonitorRequest.add_member(:identity_center_instance_arn, Shapes::ShapeRef.new(shape: IdentityCenterInstanceArn, required: true, location_name: "identityCenterInstanceArn"))
     CreateMonitorRequest.add_member(:subdomain, Shapes::ShapeRef.new(shape: Subdomain, required: true, location_name: "subdomain"))
     CreateMonitorRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "roleArn"))
+    CreateMonitorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateMonitorRequest.struct_class = Types::CreateMonitorRequest
 
     CreateMonitorResponse.add_member(:monitor_id, Shapes::ShapeRef.new(shape: MonitorId, required: true, location_name: "monitorId"))

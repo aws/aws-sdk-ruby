@@ -53,7 +53,12 @@ module Aws::LocationService
     #
     #     * `geo:GetMap*` - Allows all actions needed for map rendering.
     #
-    #     ^
+    #     * `geo-maps:GetTile` - Allows retrieving map tiles.
+    #
+    #     * `geo-maps:GetStaticMap` - Allows retrieving static map images.
+    #
+    #     * `geo-maps:*` - Allows all actions related to map
+    #       functionalities.
     #   * **Place actions**
     #
     #     * `geo:SearchPlaceIndexForText` - Allows geocoding.
@@ -64,12 +69,51 @@ module Aws::LocationService
     #       suggestions from text.
     #
     #     * `GetPlace` - Allows finding a place by place ID.
+    #
+    #     * `geo-places:Geocode` - Allows geocoding using place information.
+    #
+    #     * `geo-places:ReverseGeocode` - Allows reverse geocoding from
+    #       location coordinates.
+    #
+    #     * `geo-places:SearchNearby` - Allows searching for places near a
+    #       location.
+    #
+    #     * `geo-places:SearchText` - Allows searching for places based on
+    #       text input.
+    #
+    #     * `geo-places:Autocomplete` - Allows auto-completion of place
+    #       names based on text input.
+    #
+    #     * `geo-places:Suggest` - Allows generating suggestions for places
+    #       based on partial input.
+    #
+    #     * `geo-places:GetPlace` - Allows finding a place by its ID.
+    #
+    #     * `geo-places:*` - Allows all actions related to place services.
     #   * **Route actions**
     #
     #     * `geo:CalculateRoute` - Allows point to point routing.
     #
     #     * `geo:CalculateRouteMatrix` - Allows calculating a matrix of
     #       routes.
+    #
+    #     * `geo-routes:CalculateRoutes` - Allows calculating multiple
+    #       routes between points.
+    #
+    #     * `geo-routes:CalculateRouteMatrix` - Allows calculating a matrix
+    #       of routes between points.
+    #
+    #     * `geo-routes:CalculateIsolines` - Allows calculating isolines for
+    #       a given area.
+    #
+    #     * `geo-routes:OptimizeWaypoints` - Allows optimizing the order of
+    #       waypoints in a route.
+    #
+    #     * `geo-routes:SnapToRoads` - Allows snapping a route to the
+    #       nearest roads.
+    #
+    #     * `geo-routes:*` - Allows all actions related to routing
+    #       functionalities.
     #
     #   <note markdown="1"> You must use these strings exactly. For example, to provide access
     #   to map rendering, the only valid action is `geo:GetMap*` as an input
@@ -137,7 +181,7 @@ module Aws::LocationService
       :allow_actions,
       :allow_resources,
       :allow_referers)
-      SENSITIVE = []
+      SENSITIVE = [:allow_referers]
       include Aws::Structure
     end
 
@@ -301,7 +345,7 @@ module Aws::LocationService
       :device_id,
       :sample_time,
       :error)
-      SENSITIVE = []
+      SENSITIVE = [:sample_time]
       include Aws::Structure
     end
 
@@ -462,18 +506,17 @@ module Aws::LocationService
     #
     # @!attribute [rw] geometry
     #   Contains the details to specify the position of the geofence. Can be
-    #   a polygon, a circle or a polygon encoded in Geobuf format. Including
-    #   multiple selections will return a validation error.
+    #   a circle, a polygon, or a multipolygon. `Polygon` and `MultiPolygon`
+    #   geometries can be defined using their respective parameters, or
+    #   encoded in Geobuf format using the `Geobuf` parameter. Including
+    #   multiple geometry types in the same request will return a validation
+    #   error.
     #
-    #   <note markdown="1"> The [ geofence polygon][1] format supports a maximum of 1,000
-    #   vertices. The [Geofence geobuf][1] format supports a maximum of
+    #   <note markdown="1"> The geofence `Polygon` and `MultiPolygon` formats support a maximum
+    #   of 1,000 total vertices. The `Geobuf` format supports a maximum of
     #   100,000 vertices.
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html
     #   @return [Types::GeofenceGeometry]
     #
     # @!attribute [rw] geofence_properties
@@ -544,7 +587,7 @@ module Aws::LocationService
       :geofence_id,
       :create_time,
       :update_time)
-      SENSITIVE = []
+      SENSITIVE = [:create_time, :update_time]
       include Aws::Structure
     end
 
@@ -575,7 +618,7 @@ module Aws::LocationService
       :device_id,
       :sample_time,
       :error)
-      SENSITIVE = []
+      SENSITIVE = [:sample_time]
       include Aws::Structure
     end
 
@@ -666,8 +709,8 @@ module Aws::LocationService
     #
     #
     #   [1]: https://earth-info.nga.mil/GandG/wgs84/index.html
-    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html#matrix-routing-position-limits
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+    #   [2]: https://docs.aws.amazon.com/location/previous/developerguide/calculate-route-matrix.html#matrix-routing-position-limits
+    #   [3]: https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html
     #   @return [Array<Array<Float>>]
     #
     # @!attribute [rw] destination_positions
@@ -693,8 +736,8 @@ module Aws::LocationService
     #
     #
     #   [1]: https://earth-info.nga.mil/GandG/wgs84/index.html
-    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html#matrix-routing-position-limits
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+    #   [2]: https://docs.aws.amazon.com/location/previous/developerguide/calculate-route-matrix.html#matrix-routing-position-limits
+    #   [3]: https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html
     #   @return [Array<Array<Float>>]
     #
     # @!attribute [rw] travel_mode
@@ -722,7 +765,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html
     #   @return [String]
     #
     # @!attribute [rw] departure_time
@@ -784,7 +827,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CalculateRouteMatrixRequest AWS API Documentation
@@ -800,7 +843,7 @@ module Aws::LocationService
       :car_mode_options,
       :truck_mode_options,
       :key)
-      SENSITIVE = [:departure_positions, :destination_positions, :key]
+      SENSITIVE = [:departure_positions, :destination_positions, :departure_time, :key]
       include Aws::Structure
     end
 
@@ -859,7 +902,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
     #   @return [String]
     #
     # @!attribute [rw] route_count
@@ -913,7 +956,7 @@ module Aws::LocationService
     #
     #
     #   [1]: https://earth-info.nga.mil/index.php?dir=wgs84&amp;action=wgs84
-    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+    #   [2]: https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html
     #   @return [Array<Float>]
     #
     # @!attribute [rw] destination_position
@@ -934,7 +977,7 @@ module Aws::LocationService
     #
     #
     #   [1]: https://earth-info.nga.mil/index.php?dir=wgs84&amp;action=wgs84
-    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+    #   [2]: https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html
     #   @return [Array<Float>]
     #
     # @!attribute [rw] waypoint_positions
@@ -964,7 +1007,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html
     #   @return [Array<Array<Float>>]
     #
     # @!attribute [rw] travel_mode
@@ -995,7 +1038,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html
     #   @return [String]
     #
     # @!attribute [rw] departure_time
@@ -1072,7 +1115,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CalculateRouteRequest AWS API Documentation
@@ -1092,7 +1135,7 @@ module Aws::LocationService
       :arrival_time,
       :optimize_for,
       :key)
-      SENSITIVE = [:departure_position, :destination_position, :waypoint_positions, :key]
+      SENSITIVE = [:departure_position, :destination_position, :waypoint_positions, :departure_time, :arrival_time, :key]
       include Aws::Structure
     end
 
@@ -1126,7 +1169,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html
     #   @return [Array<Types::Leg>]
     #
     # @!attribute [rw] summary
@@ -1182,7 +1225,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
     #   @return [String]
     #
     # @!attribute [rw] distance
@@ -1296,7 +1339,7 @@ module Aws::LocationService
     class Circle < Struct.new(
       :center,
       :radius)
-      SENSITIVE = [:center]
+      SENSITIVE = [:center, :radius]
       include Aws::Structure
     end
 
@@ -1414,7 +1457,7 @@ module Aws::LocationService
       :collection_name,
       :collection_arn,
       :create_time)
-      SENSITIVE = []
+      SENSITIVE = [:create_time]
       include Aws::Structure
     end
 
@@ -1486,7 +1529,7 @@ module Aws::LocationService
       :expire_time,
       :no_expiry,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:expire_time]
       include Aws::Structure
     end
 
@@ -1496,7 +1539,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/APIReference/API_GetMapGlyphs.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/APIReference/API_GetMapGlyphs.html
     #   @return [String]
     #
     # @!attribute [rw] key_arn
@@ -1528,7 +1571,7 @@ module Aws::LocationService
       :key_arn,
       :key_name,
       :create_time)
-      SENSITIVE = [:key]
+      SENSITIVE = [:key, :create_time]
       include Aws::Structure
     end
 
@@ -1623,7 +1666,7 @@ module Aws::LocationService
       :map_name,
       :map_arn,
       :create_time)
-      SENSITIVE = []
+      SENSITIVE = [:create_time]
       include Aws::Structure
     end
 
@@ -1664,23 +1707,23 @@ module Aws::LocationService
     #
     #     If you specify HERE Technologies (`Here`) as the data provider,
     #     you may not [store results][7] for locations in Japan. For more
-    #     information, see the [Amazon Web Services Service Terms][8] for
+    #     information, see the [Amazon Web Services service terms][8] for
     #     Amazon Location Service.
     #
     #   For additional information , see [Data providers][9] on the *Amazon
-    #   Location Service Developer Guide*.
+    #   Location Service developer guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/esri.html
     #   [2]: https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
-    #   [4]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area
-    #   [5]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
+    #   [3]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html
+    #   [4]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html#grab-coverage-area
+    #   [5]: https://docs.aws.amazon.com/location/previous/developerguide/HERE.html
     #   [6]: https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html
     #   [7]: https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html
     #   [8]: http://aws.amazon.com/service-terms/
-    #   [9]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   [9]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
@@ -1762,7 +1805,7 @@ module Aws::LocationService
       :index_name,
       :index_arn,
       :create_time)
-      SENSITIVE = []
+      SENSITIVE = [:create_time]
       include Aws::Structure
     end
 
@@ -1809,14 +1852,14 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/esri.html
     #   [2]: https://doc.arcgis.com/en/arcgis-online/reference/network-coverage.htm
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
-    #   [4]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area
-    #   [5]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
+    #   [3]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html
+    #   [4]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html#grab-coverage-area
+    #   [5]: https://docs.aws.amazon.com/location/previous/developerguide/HERE.html
     #   [6]: https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/car-routing.html
     #   [7]: https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/truck-routing.html
-    #   [8]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   [8]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
@@ -1905,7 +1948,7 @@ module Aws::LocationService
       :calculator_name,
       :calculator_arn,
       :create_time)
-      SENSITIVE = []
+      SENSITIVE = [:create_time]
       include Aws::Structure
     end
 
@@ -2080,7 +2123,7 @@ module Aws::LocationService
       :tracker_name,
       :tracker_arn,
       :create_time)
-      SENSITIVE = []
+      SENSITIVE = [:create_time]
       include Aws::Structure
     end
 
@@ -2325,7 +2368,7 @@ module Aws::LocationService
       :create_time,
       :update_time,
       :geofence_count)
-      SENSITIVE = []
+      SENSITIVE = [:create_time, :update_time]
       include Aws::Structure
     end
 
@@ -2410,7 +2453,7 @@ module Aws::LocationService
       :update_time,
       :description,
       :tags)
-      SENSITIVE = [:key]
+      SENSITIVE = [:key, :create_time, :expire_time, :update_time]
       include Aws::Structure
     end
 
@@ -2489,7 +2532,7 @@ module Aws::LocationService
       :tags,
       :create_time,
       :update_time)
-      SENSITIVE = []
+      SENSITIVE = [:create_time, :update_time]
       include Aws::Structure
     end
 
@@ -2560,7 +2603,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
     #   @return [String]
     #
     # @!attribute [rw] data_source_configuration
@@ -2583,7 +2626,7 @@ module Aws::LocationService
       :data_source,
       :data_source_configuration,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:create_time, :update_time]
       include Aws::Structure
     end
 
@@ -2662,7 +2705,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2680,7 +2723,7 @@ module Aws::LocationService
       :update_time,
       :data_source,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:create_time, :update_time]
       include Aws::Structure
     end
 
@@ -2802,7 +2845,7 @@ module Aws::LocationService
       :position_filtering,
       :event_bridge_enabled,
       :kms_key_enable_geospatial_queries)
-      SENSITIVE = []
+      SENSITIVE = [:create_time, :update_time]
       include Aws::Structure
     end
 
@@ -2851,7 +2894,7 @@ module Aws::LocationService
       :position,
       :accuracy,
       :position_properties)
-      SENSITIVE = [:position, :position_properties]
+      SENSITIVE = [:sample_time, :received_time, :position, :position_properties]
       include Aws::Structure
     end
 
@@ -2899,7 +2942,7 @@ module Aws::LocationService
       :position,
       :accuracy,
       :position_properties)
-      SENSITIVE = [:position, :position_properties]
+      SENSITIVE = [:sample_time, :position, :position_properties]
       include Aws::Structure
     end
 
@@ -2948,7 +2991,7 @@ module Aws::LocationService
       :ipv_4_address,
       :wi_fi_access_points,
       :cell_signals)
-      SENSITIVE = [:position]
+      SENSITIVE = [:sample_time, :position]
       include Aws::Structure
     end
 
@@ -2981,7 +3024,7 @@ module Aws::LocationService
     #
     class DisassociateTrackerConsumerResponse < Aws::EmptyStructure; end
 
-    # The device's position, IP address, and WiFi access points.
+    # The device's position and speed.
     #
     # @!attribute [rw] position
     #   The device's position.
@@ -3005,11 +3048,20 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] device_state
-    #   The device's state, including current position and speed.
+    #   Represents the device's state, including its current position and
+    #   speed. When speed is omitted, this API performs a *containment
+    #   check*. The *containment check* operation returns `IDLE` events for
+    #   geofences where the device is currently inside of, but no other
+    #   events.
     #   @return [Types::ForecastGeofenceEventsDeviceState]
     #
     # @!attribute [rw] time_horizon_minutes
-    #   Specifies the time horizon in minutes for the forecasted events.
+    #   The forward-looking time window for forecasting, specified in
+    #   minutes. The API only returns events that are predicted to occur
+    #   within this time horizon. When no value is specified, this API
+    #   performs a *containment check*. The *containment check* operation
+    #   returns `IDLE` events for geofences where the device is currently
+    #   inside of, but no other events.
     #   @return [Float]
     #
     # @!attribute [rw] distance_unit
@@ -3147,44 +3199,65 @@ module Aws::LocationService
       :event_type,
       :forecasted_breach_time,
       :geofence_properties)
-      SENSITIVE = [:geofence_properties]
+      SENSITIVE = [:forecasted_breach_time, :geofence_properties]
       include Aws::Structure
     end
 
     # Contains the geofence geometry details.
     #
-    # A geofence geometry is made up of either a polygon or a circle. Can be
-    # a polygon, a circle or a polygon encoded in Geobuf format. Including
-    # multiple selections will return a validation error.
+    # A geofence geometry can be a circle, a polygon, or a multipolygon.
+    # `Polygon` and `MultiPolygon` geometries can be defined using their
+    # respective parameters, or encoded in Geobuf format using the `Geobuf`
+    # parameter. Including multiple geometry types in the same request will
+    # return a validation error.
     #
-    # <note markdown="1"> Amazon Location doesn't currently support polygons with holes,
-    # multipolygons, polygons that are wound clockwise, or that cross the
+    # <note markdown="1"> Amazon Location doesn't currently support polygons that cross the
     # antimeridian.
     #
     #  </note>
     #
     # @!attribute [rw] polygon
-    #   A polygon is a list of linear rings which are each made up of a list
-    #   of vertices.
+    #   A `Polygon` is a list of up to 250 linear rings which represent the
+    #   shape of a geofence. This list *must* include 1 exterior ring
+    #   (representing the outer perimeter of the geofence), and can
+    #   optionally include up to 249 interior rings (representing polygonal
+    #   spaces within the perimeter, which are excluded from the geofence
+    #   area).
     #
-    #   Each vertex is a 2-dimensional point of the form: `[longitude,
-    #   latitude]`. This is represented as an array of doubles of length 2
-    #   (so `[double, double]`).
+    #   A linear ring is an array of 4 or more vertices, where the first and
+    #   last vertex are the same (to form a closed boundary). Each vertex is
+    #   a 2-dimensional point represented as an array of doubles of length
+    #   2: `[longitude, latitude]`.
     #
-    #   An array of 4 or more vertices, where the first and last vertex are
-    #   the same (to form a closed boundary), is called a linear ring. The
-    #   linear ring vertices must be listed in counter-clockwise order
-    #   around the ring’s interior. The linear ring is represented as an
-    #   array of vertices, or an array of arrays of doubles (`[[double,
-    #   double], ...]`).
+    #   Each linear ring is represented as an array of arrays of doubles
+    #   (`[[longitude, latitude], [longitude, latitude], ...]`). The
+    #   vertices for the exterior ring must be listed in *counter-clockwise*
+    #   sequence. Vertices for all interior rings must be listed in
+    #   *clockwise* sequence.
     #
-    #   A geofence consists of a single linear ring. To allow for future
-    #   expansion, the Polygon parameter takes an array of linear rings,
-    #   which is represented as an array of arrays of arrays of doubles
-    #   (`[[[double, double], ...], ...]`).
+    #   The list of linear rings that describe the entire `Polygon` is
+    #   represented as an array of arrays of arrays of doubles
+    #   (`[[[longitude, latitude], [longitude, latitude], ...], [[longitude,
+    #   latitude], [longitude, latitude], ...], ...]`). The exterior ring
+    #   must be listed first, before any interior rings.
     #
-    #   A linear ring for use in geofences can consist of between 4 and
-    #   1,000 vertices.
+    #   <note markdown="1"> The following additional requirements and limitations apply to
+    #   geometries defined using the `Polygon` parameter:
+    #
+    #    * The entire `Polygon` must consist of no more than 1,000 vertices,
+    #     including all vertices from the exterior ring and all interior
+    #     rings.
+    #
+    #   * Rings must not touch or cross each other.
+    #
+    #   * All interior rings must be fully contained within the exterior
+    #     ring.
+    #
+    #   * Interior rings must not contain other interior rings.
+    #
+    #   * No ring is permitted to intersect itself.
+    #
+    #    </note>
     #   @return [Array<Array<Array<Float>>>]
     #
     # @!attribute [rw] circle
@@ -3196,15 +3269,71 @@ module Aws::LocationService
     #   provides lossless compression of GeoJSON polygons. The Geobuf must
     #   be Base64-encoded.
     #
-    #   A polygon in Geobuf format can have up to 100,000 vertices.
+    #   This parameter can contain a Geobuf-encoded GeoJSON geometry object
+    #   of type `Polygon` *OR* `MultiPolygon`. For more information and
+    #   specific configuration requirements for these object types, see
+    #   [Polygon][1] and [MultiPolygon][2].
+    #
+    #   <note markdown="1"> The following limitations apply specifically to geometries defined
+    #   using the `Geobuf` parameter, and supercede the corresponding
+    #   limitations of the `Polygon` and `MultiPolygon` parameters:
+    #
+    #    * A `Polygon` in `Geobuf` format can have up to 25,000 rings and up
+    #     to 100,000 total vertices, including all vertices from all
+    #     component rings.
+    #
+    #   * A `MultiPolygon` in `Geobuf` format can contain up to 10,000
+    #     `Polygons` and up to 100,000 total vertices, including all
+    #     vertices from all component `Polygons`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/APIReference/API_WaypointGeofencing_GeofenceGeometry.html#location-Type-WaypointGeofencing_GeofenceGeometry-Polygon
+    #   [2]: https://docs.aws.amazon.com/location/latest/APIReference/API_WaypointGeofencing_GeofenceGeometry.html#location-Type-WaypointGeofencing_GeofenceGeometry-MultiPolygon
     #   @return [String]
+    #
+    # @!attribute [rw] multi_polygon
+    #   A `MultiPolygon` is a list of up to 250 `Polygon` elements which
+    #   represent the shape of a geofence. The `Polygon` components of a
+    #   `MultiPolygon` geometry can define separate geographical areas that
+    #   are considered part of the same geofence, perimeters of larger
+    #   exterior areas with smaller interior spaces that are excluded from
+    #   the geofence, or some combination of these use cases to form complex
+    #   geofence boundaries.
+    #
+    #   For more information and specific configuration requirements for the
+    #   `Polygon` components that form a `MultiPolygon`, see [Polygon][1].
+    #
+    #   <note markdown="1"> The following additional requirements and limitations apply to
+    #   geometries defined using the `MultiPolygon` parameter:
+    #
+    #    * The entire `MultiPolygon` must consist of no more than 1,000
+    #     vertices, including all vertices from all component `Polygons`.
+    #
+    #   * Each edge of a component `Polygon` must intersect no more than 5
+    #     edges from other `Polygons`. Parallel edges that are shared but do
+    #     not cross are not counted toward this limit.
+    #
+    #   * The total number of intersecting edges of component `Polygons`
+    #     must be no more than 100,000. Parallel edges that are shared but
+    #     do not cross are not counted toward this limit.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/APIReference/API_WaypointGeofencing_GeofenceGeometry.html#location-Type-WaypointGeofencing_GeofenceGeometry-Polygon
+    #   @return [Array<Array<Array<Array<Float>>>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GeofenceGeometry AWS API Documentation
     #
     class GeofenceGeometry < Struct.new(
       :polygon,
       :circle,
-      :geobuf)
+      :geobuf,
+      :multi_polygon)
       SENSITIVE = [:circle, :geobuf]
       include Aws::Structure
     end
@@ -3276,7 +3405,7 @@ module Aws::LocationService
       :start_time_inclusive,
       :end_time_exclusive,
       :max_results)
-      SENSITIVE = []
+      SENSITIVE = [:start_time_inclusive, :end_time_exclusive]
       include Aws::Structure
     end
 
@@ -3359,7 +3488,7 @@ module Aws::LocationService
       :position,
       :accuracy,
       :position_properties)
-      SENSITIVE = [:position, :position_properties]
+      SENSITIVE = [:sample_time, :received_time, :position, :position_properties]
       include Aws::Structure
     end
 
@@ -3385,8 +3514,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] geometry
-    #   Contains the geofence geometry details describing a polygon or a
-    #   circle.
+    #   Contains the geofence geometry details describing the position of
+    #   the geofence. Can be a circle, a polygon, or a multipolygon.
     #   @return [Types::GeofenceGeometry]
     #
     # @!attribute [rw] status
@@ -3439,7 +3568,7 @@ module Aws::LocationService
       :create_time,
       :update_time,
       :geofence_properties)
-      SENSITIVE = [:geofence_properties]
+      SENSITIVE = [:create_time, :update_time, :geofence_properties]
       include Aws::Structure
     end
 
@@ -3512,10 +3641,10 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
-    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
-    #   [4]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/esri.html
+    #   [2]: https://docs.aws.amazon.com/location/previous/developerguide/HERE.html
+    #   [3]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html
+    #   [4]: https://docs.aws.amazon.com/location/previous/developerguide/open-data.html
     #   @return [String]
     #
     # @!attribute [rw] font_unicode_range
@@ -3530,7 +3659,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetMapGlyphsRequest AWS API Documentation
@@ -3591,7 +3720,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetMapSpritesRequest AWS API Documentation
@@ -3637,7 +3766,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetMapStyleDescriptorRequest AWS API Documentation
@@ -3693,7 +3822,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetMapTileRequest AWS API Documentation
@@ -3770,7 +3899,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetPlaceRequest AWS API Documentation
@@ -3865,7 +3994,7 @@ module Aws::LocationService
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+    # [1]: https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html
     #
     # @!attribute [rw] start_position
     #   The starting position of the leg. Follows the format
@@ -3878,7 +4007,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html
     #   @return [Array<Float>]
     #
     # @!attribute [rw] end_position
@@ -3892,7 +4021,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/nap-to-nearby-road.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/nap-to-nearby-road.html
     #   @return [Array<Float>]
     #
     # @!attribute [rw] distance
@@ -4047,7 +4176,7 @@ module Aws::LocationService
       :position,
       :accuracy,
       :position_properties)
-      SENSITIVE = [:position, :position_properties]
+      SENSITIVE = [:sample_time, :position, :position_properties]
       include Aws::Structure
     end
 
@@ -4145,7 +4274,7 @@ module Aws::LocationService
       :pricing_plan_data_source,
       :create_time,
       :update_time)
-      SENSITIVE = []
+      SENSITIVE = [:create_time, :update_time]
       include Aws::Structure
     end
 
@@ -4161,8 +4290,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] geometry
-    #   Contains the geofence geometry details describing a polygon or a
-    #   circle.
+    #   Contains the geofence geometry details describing the position of
+    #   the geofence. Can be a circle, a polygon, or a multipolygon.
     #   @return [Types::GeofenceGeometry]
     #
     # @!attribute [rw] status
@@ -4215,7 +4344,7 @@ module Aws::LocationService
       :create_time,
       :update_time,
       :geofence_properties)
-      SENSITIVE = [:geofence_properties]
+      SENSITIVE = [:create_time, :update_time, :geofence_properties]
       include Aws::Structure
     end
 
@@ -4368,7 +4497,7 @@ module Aws::LocationService
       :restrictions,
       :create_time,
       :update_time)
-      SENSITIVE = []
+      SENSITIVE = [:expire_time, :create_time, :update_time]
       include Aws::Structure
     end
 
@@ -4461,7 +4590,7 @@ module Aws::LocationService
       :pricing_plan,
       :create_time,
       :update_time)
-      SENSITIVE = []
+      SENSITIVE = [:create_time, :update_time]
       include Aws::Structure
     end
 
@@ -4534,7 +4663,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
@@ -4568,7 +4697,7 @@ module Aws::LocationService
       :pricing_plan,
       :create_time,
       :update_time)
-      SENSITIVE = []
+      SENSITIVE = [:create_time, :update_time]
       include Aws::Structure
     end
 
@@ -4641,7 +4770,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
@@ -4683,7 +4812,7 @@ module Aws::LocationService
       :pricing_plan,
       :create_time,
       :update_time)
-      SENSITIVE = []
+      SENSITIVE = [:create_time, :update_time]
       include Aws::Structure
     end
 
@@ -4862,7 +4991,7 @@ module Aws::LocationService
       :pricing_plan_data_source,
       :create_time,
       :update_time)
-      SENSITIVE = []
+      SENSITIVE = [:create_time, :update_time]
       include Aws::Structure
     end
 
@@ -5098,11 +5227,11 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
-    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
-    #   [4]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area
-    #   [5]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/esri.html
+    #   [2]: https://docs.aws.amazon.com/location/previous/developerguide/HERE.html
+    #   [3]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html
+    #   [4]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html#grab-coverage-area
+    #   [5]: https://docs.aws.amazon.com/location/previous/developerguide/open-data.html
     #   @return [String]
     #
     # @!attribute [rw] political_view
@@ -5119,7 +5248,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/map-concepts.html#political-views
     #   @return [String]
     #
     # @!attribute [rw] custom_layers
@@ -5140,7 +5269,7 @@ module Aws::LocationService
       :style,
       :political_view,
       :custom_layers)
-      SENSITIVE = []
+      SENSITIVE = [:political_view]
       include Aws::Structure
     end
 
@@ -5159,7 +5288,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/map-concepts.html#political-views
     #   @return [String]
     #
     # @!attribute [rw] custom_layers
@@ -5179,7 +5308,7 @@ module Aws::LocationService
     class MapConfigurationUpdate < Struct.new(
       :political_view,
       :custom_layers)
-      SENSITIVE = []
+      SENSITIVE = [:political_view]
       include Aws::Structure
     end
 
@@ -5282,11 +5411,11 @@ module Aws::LocationService
     #
     #   For more information about using categories, including a list of
     #   Amazon Location categories, see [Categories and filtering][1], in
-    #   the *Amazon Location Service Developer Guide*.
+    #   the *Amazon Location Service developer guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/category-filtering.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] supplemental_categories
@@ -5362,7 +5491,7 @@ module Aws::LocationService
     #
     class PositionalAccuracy < Struct.new(
       :horizontal)
-      SENSITIVE = []
+      SENSITIVE = [:horizontal]
       include Aws::Structure
     end
 
@@ -5376,18 +5505,17 @@ module Aws::LocationService
     #
     # @!attribute [rw] geometry
     #   Contains the details to specify the position of the geofence. Can be
-    #   a polygon, a circle or a polygon encoded in Geobuf format. Including
-    #   multiple selections will return a validation error.
+    #   a circle, a polygon, or a multipolygon. `Polygon` and `MultiPolygon`
+    #   geometries can be defined using their respective parameters, or
+    #   encoded in Geobuf format using the `Geobuf` parameter. Including
+    #   multiple geometry types in the same request will return a validation
+    #   error.
     #
-    #   <note markdown="1"> The [ geofence polygon][1] format supports a maximum of 1,000
-    #   vertices. The [Geofence Geobuf][1] format supports a maximum of
+    #   <note markdown="1"> The geofence `Polygon` and `MultiPolygon` formats support a maximum
+    #   of 1,000 total vertices. The `Geobuf` format supports a maximum of
     #   100,000 vertices.
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html
     #   @return [Types::GeofenceGeometry]
     #
     # @!attribute [rw] geofence_properties
@@ -5437,7 +5565,7 @@ module Aws::LocationService
       :geofence_id,
       :create_time,
       :update_time)
-      SENSITIVE = []
+      SENSITIVE = [:create_time, :update_time]
       include Aws::Structure
     end
 
@@ -5603,11 +5731,11 @@ module Aws::LocationService
     #
     #   For more information about using categories, including a list of
     #   Amazon Location categories, see [Categories and filtering][1], in
-    #   the *Amazon Location Service Developer Guide*.
+    #   the *Amazon Location Service developer guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/category-filtering.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] supplemental_categories
@@ -5726,7 +5854,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForPositionRequest AWS API Documentation
@@ -5789,7 +5917,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
     #   @return [String]
     #
     # @!attribute [rw] language
@@ -5913,11 +6041,11 @@ module Aws::LocationService
     #
     #   For more information about using categories, including a list of
     #   Amazon Location categories, see [Categories and filtering][1], in
-    #   the *Amazon Location Service Developer Guide*.
+    #   the *Amazon Location Service developer guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/category-filtering.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] key
@@ -5925,7 +6053,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForSuggestionsRequest AWS API Documentation
@@ -5940,7 +6068,7 @@ module Aws::LocationService
       :language,
       :filter_categories,
       :key)
-      SENSITIVE = [:text, :bias_position, :filter_b_box, :key]
+      SENSITIVE = [:text, :bias_position, :filter_b_box, :filter_countries, :key]
       include Aws::Structure
     end
 
@@ -6011,7 +6139,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
     #   @return [String]
     #
     # @!attribute [rw] language
@@ -6039,7 +6167,7 @@ module Aws::LocationService
       :data_source,
       :language,
       :filter_categories)
-      SENSITIVE = [:text, :bias_position, :filter_b_box]
+      SENSITIVE = [:text, :bias_position, :filter_b_box, :filter_countries]
       include Aws::Structure
     end
 
@@ -6143,11 +6271,11 @@ module Aws::LocationService
     #
     #   For more information about using categories, including a list of
     #   Amazon Location categories, see [Categories and filtering][1], in
-    #   the *Amazon Location Service Developer Guide*.
+    #   the *Amazon Location Service developer guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/category-filtering.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] key
@@ -6155,7 +6283,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForTextRequest AWS API Documentation
@@ -6170,7 +6298,7 @@ module Aws::LocationService
       :language,
       :filter_categories,
       :key)
-      SENSITIVE = [:text, :bias_position, :filter_b_box, :key]
+      SENSITIVE = [:text, :bias_position, :filter_b_box, :filter_countries, :key]
       include Aws::Structure
     end
 
@@ -6254,7 +6382,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   [1]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
     #   @return [String]
     #
     # @!attribute [rw] language
@@ -6283,7 +6411,7 @@ module Aws::LocationService
       :data_source,
       :language,
       :filter_categories)
-      SENSITIVE = [:text, :bias_position, :filter_b_box, :result_b_box]
+      SENSITIVE = [:text, :bias_position, :filter_b_box, :filter_countries, :result_b_box]
       include Aws::Structure
     end
 
@@ -6292,7 +6420,7 @@ module Aws::LocationService
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/location-quotas.html
+    # [1]: https://docs.aws.amazon.com/location/previous/developerguide/location-quotas.html
     #
     # @!attribute [rw] message
     #   A message with the reason for the service quota exceeded exception
@@ -6626,7 +6754,7 @@ module Aws::LocationService
       :collection_name,
       :collection_arn,
       :update_time)
-      SENSITIVE = []
+      SENSITIVE = [:update_time]
       include Aws::Structure
     end
 
@@ -6677,7 +6805,7 @@ module Aws::LocationService
       :no_expiry,
       :force_update,
       :restrictions)
-      SENSITIVE = []
+      SENSITIVE = [:expire_time]
       include Aws::Structure
     end
 
@@ -6709,7 +6837,7 @@ module Aws::LocationService
       :key_arn,
       :key_name,
       :update_time)
-      SENSITIVE = []
+      SENSITIVE = [:update_time]
       include Aws::Structure
     end
 
@@ -6770,7 +6898,7 @@ module Aws::LocationService
       :map_name,
       :map_arn,
       :update_time)
-      SENSITIVE = []
+      SENSITIVE = [:update_time]
       include Aws::Structure
     end
 
@@ -6831,7 +6959,7 @@ module Aws::LocationService
       :index_name,
       :index_arn,
       :update_time)
-      SENSITIVE = []
+      SENSITIVE = [:update_time]
       include Aws::Structure
     end
 
@@ -6887,7 +7015,7 @@ module Aws::LocationService
       :calculator_name,
       :calculator_arn,
       :update_time)
-      SENSITIVE = []
+      SENSITIVE = [:update_time]
       include Aws::Structure
     end
 
@@ -7003,7 +7131,7 @@ module Aws::LocationService
       :tracker_name,
       :tracker_arn,
       :update_time)
-      SENSITIVE = []
+      SENSITIVE = [:update_time]
       include Aws::Structure
     end
 
@@ -7115,7 +7243,7 @@ module Aws::LocationService
       :sample_time,
       :received_time,
       :distance_unit)
-      SENSITIVE = []
+      SENSITIVE = [:sample_time, :received_time]
       include Aws::Structure
     end
 

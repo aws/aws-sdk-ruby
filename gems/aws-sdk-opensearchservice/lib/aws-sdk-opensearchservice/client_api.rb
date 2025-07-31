@@ -260,6 +260,10 @@ module Aws::OpenSearchService
     GetUpgradeStatusRequest = Shapes::StructureShape.new(name: 'GetUpgradeStatusRequest')
     GetUpgradeStatusResponse = Shapes::StructureShape.new(name: 'GetUpgradeStatusResponse')
     HostedZoneId = Shapes::StringShape.new(name: 'HostedZoneId')
+    IAMFederationOptionsInput = Shapes::StructureShape.new(name: 'IAMFederationOptionsInput')
+    IAMFederationOptionsOutput = Shapes::StructureShape.new(name: 'IAMFederationOptionsOutput')
+    IAMFederationRolesKey = Shapes::StringShape.new(name: 'IAMFederationRolesKey')
+    IAMFederationSubjectKey = Shapes::StringShape.new(name: 'IAMFederationSubjectKey')
     IPAddressType = Shapes::StringShape.new(name: 'IPAddressType')
     IPAddressTypeStatus = Shapes::StructureShape.new(name: 'IPAddressTypeStatus')
     IamIdentityCenterOptions = Shapes::StructureShape.new(name: 'IamIdentityCenterOptions')
@@ -613,6 +617,7 @@ module Aws::OpenSearchService
     AdvancedSecurityOptions.add_member(:internal_user_database_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "InternalUserDatabaseEnabled"))
     AdvancedSecurityOptions.add_member(:saml_options, Shapes::ShapeRef.new(shape: SAMLOptionsOutput, location_name: "SAMLOptions"))
     AdvancedSecurityOptions.add_member(:jwt_options, Shapes::ShapeRef.new(shape: JWTOptionsOutput, location_name: "JWTOptions"))
+    AdvancedSecurityOptions.add_member(:iam_federation_options, Shapes::ShapeRef.new(shape: IAMFederationOptionsOutput, location_name: "IAMFederationOptions"))
     AdvancedSecurityOptions.add_member(:anonymous_auth_disable_date, Shapes::ShapeRef.new(shape: DisableTimestamp, location_name: "AnonymousAuthDisableDate"))
     AdvancedSecurityOptions.add_member(:anonymous_auth_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "AnonymousAuthEnabled"))
     AdvancedSecurityOptions.struct_class = Types::AdvancedSecurityOptions
@@ -622,6 +627,7 @@ module Aws::OpenSearchService
     AdvancedSecurityOptionsInput.add_member(:master_user_options, Shapes::ShapeRef.new(shape: MasterUserOptions, location_name: "MasterUserOptions"))
     AdvancedSecurityOptionsInput.add_member(:saml_options, Shapes::ShapeRef.new(shape: SAMLOptionsInput, location_name: "SAMLOptions"))
     AdvancedSecurityOptionsInput.add_member(:jwt_options, Shapes::ShapeRef.new(shape: JWTOptionsInput, location_name: "JWTOptions"))
+    AdvancedSecurityOptionsInput.add_member(:iam_federation_options, Shapes::ShapeRef.new(shape: IAMFederationOptionsInput, location_name: "IAMFederationOptions"))
     AdvancedSecurityOptionsInput.add_member(:anonymous_auth_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "AnonymousAuthEnabled"))
     AdvancedSecurityOptionsInput.struct_class = Types::AdvancedSecurityOptionsInput
 
@@ -1412,6 +1418,16 @@ module Aws::OpenSearchService
     GetUpgradeStatusResponse.add_member(:step_status, Shapes::ShapeRef.new(shape: UpgradeStatus, location_name: "StepStatus"))
     GetUpgradeStatusResponse.add_member(:upgrade_name, Shapes::ShapeRef.new(shape: UpgradeName, location_name: "UpgradeName"))
     GetUpgradeStatusResponse.struct_class = Types::GetUpgradeStatusResponse
+
+    IAMFederationOptionsInput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    IAMFederationOptionsInput.add_member(:subject_key, Shapes::ShapeRef.new(shape: IAMFederationSubjectKey, location_name: "SubjectKey"))
+    IAMFederationOptionsInput.add_member(:roles_key, Shapes::ShapeRef.new(shape: IAMFederationRolesKey, location_name: "RolesKey"))
+    IAMFederationOptionsInput.struct_class = Types::IAMFederationOptionsInput
+
+    IAMFederationOptionsOutput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    IAMFederationOptionsOutput.add_member(:subject_key, Shapes::ShapeRef.new(shape: IAMFederationSubjectKey, location_name: "SubjectKey"))
+    IAMFederationOptionsOutput.add_member(:roles_key, Shapes::ShapeRef.new(shape: IAMFederationRolesKey, location_name: "RolesKey"))
+    IAMFederationOptionsOutput.struct_class = Types::IAMFederationOptionsOutput
 
     IPAddressTypeStatus.add_member(:options, Shapes::ShapeRef.new(shape: IPAddressType, required: true, location_name: "Options"))
     IPAddressTypeStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))

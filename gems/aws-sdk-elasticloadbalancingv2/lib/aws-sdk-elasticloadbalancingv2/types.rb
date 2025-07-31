@@ -2663,7 +2663,11 @@ module Aws::ElasticLoadBalancingV2
     #     percent zonal affinity, and `any_availability_zone` with 0 percent
     #     zonal affinity.
     #
-    #   ^
+    #   * `secondary_ips.auto_assigned.per_subnet` - The number of secondary
+    #     IP addresses to configure for your load balancer nodes. Use to
+    #     address port allocation errors if you can't add targets. The
+    #     valid range is 0 to 7. The default is 0. After you set this value,
+    #     you can't decrease it.
     #   @return [String]
     #
     # @!attribute [rw] value

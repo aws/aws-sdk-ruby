@@ -134,6 +134,7 @@ module Aws::DocDB
       attr_accessor deletion_protection: bool
       attr_accessor global_cluster_identifier: ::String
       attr_accessor storage_type: ::String
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
       attr_accessor source_region: ::String
@@ -271,6 +272,7 @@ module Aws::DocDB
       attr_accessor enabled_cloudwatch_logs_exports: ::Array[::String]
       attr_accessor deletion_protection: bool
       attr_accessor storage_type: ::String
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfigurationInfo
       attr_accessor master_user_secret: Types::ClusterMasterUserSecret
       SENSITIVE: []
     end
@@ -389,6 +391,7 @@ module Aws::DocDB
       attr_accessor supports_log_exports_to_cloudwatch_logs: bool
       attr_accessor supported_ca_certificate_identifiers: ::Array[::String]
       attr_accessor supports_certificate_rotation_without_restart: bool
+      attr_accessor serverless_v2_features_support: Types::ServerlessV2FeaturesSupport
       SENSITIVE: []
     end
 
@@ -924,6 +927,7 @@ module Aws::DocDB
       attr_accessor allow_major_version_upgrade: bool
       attr_accessor deletion_protection: bool
       attr_accessor storage_type: ::String
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
       attr_accessor rotate_master_user_password: bool
@@ -1153,6 +1157,7 @@ module Aws::DocDB
       attr_accessor enable_cloudwatch_logs_exports: ::Array[::String]
       attr_accessor deletion_protection: bool
       attr_accessor db_cluster_parameter_group_name: ::String
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
       attr_accessor storage_type: ::String
       SENSITIVE: []
     end
@@ -1175,6 +1180,7 @@ module Aws::DocDB
       attr_accessor kms_key_id: ::String
       attr_accessor enable_cloudwatch_logs_exports: ::Array[::String]
       attr_accessor deletion_protection: bool
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
       attr_accessor storage_type: ::String
       SENSITIVE: []
     end
@@ -1191,6 +1197,24 @@ module Aws::DocDB
     end
 
     class SNSTopicArnNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ServerlessV2FeaturesSupport
+      attr_accessor min_capacity: ::Float
+      attr_accessor max_capacity: ::Float
+      SENSITIVE: []
+    end
+
+    class ServerlessV2ScalingConfiguration
+      attr_accessor min_capacity: ::Float
+      attr_accessor max_capacity: ::Float
+      SENSITIVE: []
+    end
+
+    class ServerlessV2ScalingConfigurationInfo
+      attr_accessor min_capacity: ::Float
+      attr_accessor max_capacity: ::Float
+      SENSITIVE: []
     end
 
     class SharedSnapshotQuotaExceededFault < Aws::EmptyStructure

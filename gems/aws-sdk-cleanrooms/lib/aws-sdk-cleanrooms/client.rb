@@ -782,8 +782,7 @@ module Aws::CleanRooms
     #   The format of the analysis template.
     #
     # @option params [required, Types::AnalysisSource] :source
-    #   The information in the analysis template. Currently supports `text`,
-    #   the query text for the analysis template.
+    #   The information in the analysis template.
     #
     # @option params [Hash<String,String>] :tags
     #   An optional label that you can assign to a resource when you create
@@ -944,6 +943,11 @@ module Aws::CleanRooms
     #
     # @option params [String] :analytics_engine
     #   The analytics engine.
+    #
+    #   <note markdown="1"> After July 16, 2025, the `CLEAN_ROOMS_SQL` parameter will no longer be
+    #   available.
+    #
+    #    </note>
     #
     # @return [Types::CreateCollaborationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1794,11 +1798,10 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
-    # Creates a privacy budget template for a specified membership. Each
-    # membership can have only one privacy budget template, but it can be
-    # deleted and recreated. If you need to change the privacy budget
-    # template for a membership, use the UpdatePrivacyBudgetTemplate
-    # operation.
+    # Creates a privacy budget template for a specified collaboration. Each
+    # collaboration can have only one privacy budget template. If you need
+    # to change the privacy budget template, use the
+    # UpdatePrivacyBudgetTemplate operation.
     #
     # @option params [required, String] :membership_identifier
     #   A unique identifier for one of your memberships for a collaboration.
@@ -2168,7 +2171,7 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
-    # Deletes a privacy budget template for a specified membership.
+    # Deletes a privacy budget template for a specified collaboration.
     #
     # @option params [required, String] :membership_identifier
     #   A unique identifier for one of your memberships for a collaboration.
@@ -4786,6 +4789,11 @@ module Aws::CleanRooms
     # @option params [String] :analytics_engine
     #   The analytics engine.
     #
+    #   <note markdown="1"> After July 16, 2025, the `CLEAN_ROOMS_SQL` parameter will no longer be
+    #   available.
+    #
+    #    </note>
+    #
     # @return [Types::UpdateCollaborationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateCollaborationOutput#collaboration #collaboration} => Types::Collaboration
@@ -4895,6 +4903,13 @@ module Aws::CleanRooms
     # @option params [String] :description
     #   A new description for the configured table.
     #
+    # @option params [Types::TableReference] :table_reference
+    #   A pointer to the dataset that underlies this table.
+    #
+    # @option params [Array<String>] :allowed_columns
+    #   The columns of the underlying table that can be used by collaborations
+    #   or analysis rules.
+    #
     # @option params [String] :analysis_method
     #   The analysis method for the configured table.
     #
@@ -4918,6 +4933,34 @@ module Aws::CleanRooms
     #     configured_table_identifier: "ConfiguredTableIdentifier", # required
     #     name: "DisplayName",
     #     description: "TableDescription",
+    #     table_reference: {
+    #       glue: {
+    #         table_name: "GlueTableName", # required
+    #         database_name: "GlueDatabaseName", # required
+    #       },
+    #       snowflake: {
+    #         secret_arn: "SecretsManagerArn", # required
+    #         account_identifier: "SnowflakeAccountIdentifier", # required
+    #         database_name: "SnowflakeDatabaseName", # required
+    #         table_name: "SnowflakeTableName", # required
+    #         schema_name: "SnowflakeSchemaName", # required
+    #         table_schema: { # required
+    #           v1: [
+    #             {
+    #               column_name: "ColumnName", # required
+    #               column_type: "ColumnTypeString", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       athena: {
+    #         work_group: "AthenaWorkGroup", # required
+    #         output_location: "AthenaOutputLocation",
+    #         database_name: "AthenaDatabaseName", # required
+    #         table_name: "AthenaTableName", # required
+    #       },
+    #     },
+    #     allowed_columns: ["ColumnName"],
     #     analysis_method: "DIRECT_QUERY", # accepts DIRECT_QUERY, DIRECT_JOB, MULTIPLE
     #     selected_analysis_methods: ["DIRECT_QUERY"], # accepts DIRECT_QUERY, DIRECT_JOB
     #   })
@@ -5428,7 +5471,7 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
-    # Updates the privacy budget template for the specified membership.
+    # Updates the privacy budget template for the specified collaboration.
     #
     # @option params [required, String] :membership_identifier
     #   A unique identifier for one of your memberships for a collaboration.
@@ -5632,7 +5675,7 @@ module Aws::CleanRooms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

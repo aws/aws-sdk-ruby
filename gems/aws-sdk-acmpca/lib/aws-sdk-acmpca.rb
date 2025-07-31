@@ -55,7 +55,7 @@ module Aws::ACMPCA
   autoload :EndpointProvider, 'aws-sdk-acmpca/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-acmpca/endpoints'
 
-  GEM_VERSION = '1.95.0'
+  GEM_VERSION = '1.96.0'
 
 end
 

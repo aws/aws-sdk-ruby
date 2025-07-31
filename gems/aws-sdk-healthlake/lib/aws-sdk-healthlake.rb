@@ -54,7 +54,7 @@ module Aws::HealthLake
   autoload :EndpointProvider, 'aws-sdk-healthlake/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-healthlake/endpoints'
 
-  GEM_VERSION = '1.49.0'
+  GEM_VERSION = '1.50.0'
 
 end
 

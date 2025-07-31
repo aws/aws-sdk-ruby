@@ -1190,6 +1190,10 @@ module Aws::IoTWireless
     #       dr_max: 1,
     #       pr_allowed: false,
     #       ra_allowed: false,
+    #       tx_power_index_min: 1,
+    #       tx_power_index_max: 1,
+    #       nb_trans_min: 1,
+    #       nb_trans_max: 1,
     #     },
     #     tags: [
     #       {
@@ -2935,6 +2939,10 @@ module Aws::IoTWireless
     #   resp.lo_ra_wan.nwk_geo_loc #=> Boolean
     #   resp.lo_ra_wan.target_per #=> Integer
     #   resp.lo_ra_wan.min_gw_diversity #=> Integer
+    #   resp.lo_ra_wan.tx_power_index_min #=> Integer
+    #   resp.lo_ra_wan.tx_power_index_max #=> Integer
+    #   resp.lo_ra_wan.nb_trans_min #=> Integer
+    #   resp.lo_ra_wan.nb_trans_max #=> Integer
     #
     # @overload get_service_profile(params = {})
     # @param [Hash] params ({})
@@ -5418,7 +5426,7 @@ module Aws::IoTWireless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

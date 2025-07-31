@@ -593,7 +593,7 @@ module Aws::EntityResolution
     # Creates an `IdMappingWorkflow` object which stores the configuration
     # of the data processing job to be run. Each `IdMappingWorkflow` must
     # have a unique workflow name. To modify an existing workflow, use the
-    # `UpdateIdMappingWorkflow` API.
+    # UpdateIdMappingWorkflow API.
     #
     # @option params [required, String] :workflow_name
     #   The name of the workflow. There can't be multiple
@@ -608,7 +608,7 @@ module Aws::EntityResolution
     #
     # @option params [Array<Types::IdMappingWorkflowOutputSource>] :output_source_config
     #   A list of `IdMappingWorkflowOutputSource` objects, each of which
-    #   contains fields `OutputS3Path` and `Output`.
+    #   contains fields `outputS3Path` and `KMSArn`.
     #
     # @option params [required, Types::IdMappingTechniques] :id_mapping_techniques
     #   An object which defines the ID mapping technique and any additional
@@ -714,7 +714,7 @@ module Aws::EntityResolution
     # Creates an ID namespace object which will help customers provide
     # metadata explaining their dataset and how to use it. Each ID namespace
     # must have a unique name. To modify an existing ID namespace, use the
-    # `UpdateIdNamespace` API.
+    # UpdateIdNamespace API.
     #
     # @option params [required, String] :id_namespace_name
     #   The name of the ID namespace.
@@ -835,10 +835,12 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
-    # Creates a `MatchingWorkflow` object which stores the configuration of
-    # the data processing job to be run. It is important to note that there
-    # should not be a pre-existing `MatchingWorkflow` with the same name. To
-    # modify an existing workflow, utilize the `UpdateMatchingWorkflow` API.
+    # Creates a matching workflow that defines the configuration for a data
+    # processing job. The workflow name must be unique. To modify an
+    # existing workflow, use `UpdateMatchingWorkflow`.
+    #
+    # For workflows where `resolutionType` is ML\_MATCHING, incremental
+    # processing is not supported.
     #
     # @option params [required, String] :workflow_name
     #   The name of the workflow. There can't be multiple `MatchingWorkflows`
@@ -853,15 +855,19 @@ module Aws::EntityResolution
     #
     # @option params [required, Array<Types::OutputSource>] :output_source_config
     #   A list of `OutputSource` objects, each of which contains fields
-    #   `OutputS3Path`, `ApplyNormalization`, and `Output`.
+    #   `outputS3Path`, `applyNormalization`, `KMSArn`, and `output`.
     #
     # @option params [required, Types::ResolutionTechniques] :resolution_techniques
     #   An object which defines the `resolutionType` and the
     #   `ruleBasedProperties`.
     #
     # @option params [Types::IncrementalRunConfig] :incremental_run_config
-    #   An object which defines an incremental run type and has only
-    #   `incrementalRunType` as a field.
+    #   Optional. An object that defines the incremental run type. This object
+    #   contains only the `incrementalRunType` field, which appears as
+    #   "Automatic" in the console.
+    #
+    #   For workflows where `resolutionType` is `ML_MATCHING`, incremental
+    #   processing is not supported.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
@@ -919,6 +925,14 @@ module Aws::EntityResolution
     #         attribute_matching_model: "ONE_TO_ONE", # required, accepts ONE_TO_ONE, MANY_TO_MANY
     #         match_purpose: "IDENTIFIER_GENERATION", # accepts IDENTIFIER_GENERATION, INDEXING
     #       },
+    #       rule_condition_properties: {
+    #         rules: [ # required
+    #           {
+    #             rule_name: "RuleConditionRuleNameString", # required
+    #             condition: "RuleConditionConditionString", # required
+    #           },
+    #         ],
+    #       },
     #       provider_properties: {
     #         provider_service_arn: "ProviderServiceArn", # required
     #         provider_configuration: {
@@ -960,6 +974,9 @@ module Aws::EntityResolution
     #   resp.resolution_techniques.rule_based_properties.rules[0].matching_keys[0] #=> String
     #   resp.resolution_techniques.rule_based_properties.attribute_matching_model #=> String, one of "ONE_TO_ONE", "MANY_TO_MANY"
     #   resp.resolution_techniques.rule_based_properties.match_purpose #=> String, one of "IDENTIFIER_GENERATION", "INDEXING"
+    #   resp.resolution_techniques.rule_condition_properties.rules #=> Array
+    #   resp.resolution_techniques.rule_condition_properties.rules[0].rule_name #=> String
+    #   resp.resolution_techniques.rule_condition_properties.rules[0].condition #=> String
     #   resp.resolution_techniques.provider_properties.provider_service_arn #=> String
     #   resp.resolution_techniques.provider_properties.intermediate_source_configuration.intermediate_s3_path #=> String
     #   resp.incremental_run_config.incremental_run_type #=> String, one of "IMMEDIATE"
@@ -1602,6 +1619,9 @@ module Aws::EntityResolution
     #   resp.resolution_techniques.rule_based_properties.rules[0].matching_keys[0] #=> String
     #   resp.resolution_techniques.rule_based_properties.attribute_matching_model #=> String, one of "ONE_TO_ONE", "MANY_TO_MANY"
     #   resp.resolution_techniques.rule_based_properties.match_purpose #=> String, one of "IDENTIFIER_GENERATION", "INDEXING"
+    #   resp.resolution_techniques.rule_condition_properties.rules #=> Array
+    #   resp.resolution_techniques.rule_condition_properties.rules[0].rule_name #=> String
+    #   resp.resolution_techniques.rule_condition_properties.rules[0].condition #=> String
     #   resp.resolution_techniques.provider_properties.provider_service_arn #=> String
     #   resp.resolution_techniques.provider_properties.intermediate_source_configuration.intermediate_s3_path #=> String
     #   resp.created_at #=> Time
@@ -2290,9 +2310,9 @@ module Aws::EntityResolution
     end
 
     # Updates an existing `IdMappingWorkflow`. This method is identical to
-    # `CreateIdMappingWorkflow`, except it uses an HTTP `PUT` request
-    # instead of a `POST` request, and the `IdMappingWorkflow` must already
-    # exist for the method to succeed.
+    # CreateIdMappingWorkflow, except it uses an HTTP `PUT` request instead
+    # of a `POST` request, and the `IdMappingWorkflow` must already exist
+    # for the method to succeed.
     #
     # @option params [required, String] :workflow_name
     #   The name of the workflow.
@@ -2306,7 +2326,7 @@ module Aws::EntityResolution
     #
     # @option params [Array<Types::IdMappingWorkflowOutputSource>] :output_source_config
     #   A list of `OutputSource` objects, each of which contains fields
-    #   `OutputS3Path` and `KMSArn`.
+    #   `outputS3Path` and `KMSArn`.
     #
     # @option params [required, Types::IdMappingTechniques] :id_mapping_techniques
     #   An object which defines the ID mapping technique and any additional
@@ -2505,10 +2525,11 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
-    # Updates an existing `MatchingWorkflow`. This method is identical to
-    # `CreateMatchingWorkflow`, except it uses an HTTP `PUT` request instead
-    # of a `POST` request, and the `MatchingWorkflow` must already exist for
-    # the method to succeed.
+    # Updates an existing matching workflow. The workflow must already exist
+    # for this operation to succeed.
+    #
+    # For workflows where `resolutionType` is ML\_MATCHING, incremental
+    # processing is not supported.
     #
     # @option params [required, String] :workflow_name
     #   The name of the workflow to be retrieved.
@@ -2522,15 +2543,19 @@ module Aws::EntityResolution
     #
     # @option params [required, Array<Types::OutputSource>] :output_source_config
     #   A list of `OutputSource` objects, each of which contains fields
-    #   `OutputS3Path`, `ApplyNormalization`, and `Output`.
+    #   `outputS3Path`, `applyNormalization`, `KMSArn`, and `output`.
     #
     # @option params [required, Types::ResolutionTechniques] :resolution_techniques
     #   An object which defines the `resolutionType` and the
     #   `ruleBasedProperties`.
     #
     # @option params [Types::IncrementalRunConfig] :incremental_run_config
-    #   An object which defines an incremental run type and has only
-    #   `incrementalRunType` as a field.
+    #   Optional. An object that defines the incremental run type. This object
+    #   contains only the `incrementalRunType` field, which appears as
+    #   "Automatic" in the console.
+    #
+    #   For workflows where `resolutionType` is `ML_MATCHING`, incremental
+    #   processing is not supported.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
@@ -2584,6 +2609,14 @@ module Aws::EntityResolution
     #         attribute_matching_model: "ONE_TO_ONE", # required, accepts ONE_TO_ONE, MANY_TO_MANY
     #         match_purpose: "IDENTIFIER_GENERATION", # accepts IDENTIFIER_GENERATION, INDEXING
     #       },
+    #       rule_condition_properties: {
+    #         rules: [ # required
+    #           {
+    #             rule_name: "RuleConditionRuleNameString", # required
+    #             condition: "RuleConditionConditionString", # required
+    #           },
+    #         ],
+    #       },
     #       provider_properties: {
     #         provider_service_arn: "ProviderServiceArn", # required
     #         provider_configuration: {
@@ -2621,6 +2654,9 @@ module Aws::EntityResolution
     #   resp.resolution_techniques.rule_based_properties.rules[0].matching_keys[0] #=> String
     #   resp.resolution_techniques.rule_based_properties.attribute_matching_model #=> String, one of "ONE_TO_ONE", "MANY_TO_MANY"
     #   resp.resolution_techniques.rule_based_properties.match_purpose #=> String, one of "IDENTIFIER_GENERATION", "INDEXING"
+    #   resp.resolution_techniques.rule_condition_properties.rules #=> Array
+    #   resp.resolution_techniques.rule_condition_properties.rules[0].rule_name #=> String
+    #   resp.resolution_techniques.rule_condition_properties.rules[0].condition #=> String
     #   resp.resolution_techniques.provider_properties.provider_service_arn #=> String
     #   resp.resolution_techniques.provider_properties.intermediate_source_configuration.intermediate_s3_path #=> String
     #   resp.incremental_run_config.incremental_run_type #=> String, one of "IMMEDIATE"
@@ -2719,7 +2755,7 @@ module Aws::EntityResolution
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-entityresolution'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

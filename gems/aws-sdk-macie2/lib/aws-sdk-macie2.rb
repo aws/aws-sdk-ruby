@@ -55,7 +55,7 @@ module Aws::Macie2
   autoload :EndpointProvider, 'aws-sdk-macie2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-macie2/endpoints'
 
-  GEM_VERSION = '1.88.0'
+  GEM_VERSION = '1.89.0'
 
 end
 

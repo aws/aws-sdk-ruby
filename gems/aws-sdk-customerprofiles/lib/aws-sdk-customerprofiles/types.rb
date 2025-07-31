@@ -888,6 +888,36 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Object that defines users contact preference.
+    #
+    # @!attribute [rw] key_name
+    #   A searchable, unique identifier of a customer profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_value
+    #   The key value used to look up profile based off the keyName.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of a customer profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_type
+    #   The contact type used for engagement. For example: HomePhoneNumber,
+    #   PersonalEmailAddress.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ContactPreference AWS API Documentation
+    #
+    class ContactPreference < Struct.new(
+      :key_name,
+      :key_value,
+      :profile_id,
+      :contact_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
@@ -1604,6 +1634,15 @@ module Aws::CustomerProfiles
     #   An alternative to `Gender` which accepts any string as input.
     #   @return [String]
     #
+    # @!attribute [rw] profile_type
+    #   The type of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] engagement_preferences
+    #   Object that defines the preferred methods of engagement, per
+    #   channel.
+    #   @return [Types::EngagementPreferences]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateProfileRequest AWS API Documentation
     #
     class CreateProfileRequest < Struct.new(
@@ -1630,8 +1669,10 @@ module Aws::CustomerProfiles
       :billing_address,
       :attributes,
       :party_type_string,
-      :gender_string)
-      SENSITIVE = [:account_number, :additional_information, :party_type, :business_name, :first_name, :middle_name, :last_name, :birth_date, :gender, :phone_number, :mobile_phone_number, :home_phone_number, :business_phone_number, :email_address, :personal_email_address, :business_email_address, :address, :shipping_address, :mailing_address, :billing_address, :attributes, :party_type_string, :gender_string]
+      :gender_string,
+      :profile_type,
+      :engagement_preferences)
+      SENSITIVE = [:account_number, :additional_information, :party_type, :business_name, :first_name, :middle_name, :last_name, :birth_date, :gender, :phone_number, :mobile_phone_number, :home_phone_number, :business_phone_number, :email_address, :personal_email_address, :business_email_address, :address, :shipping_address, :mailing_address, :billing_address, :attributes, :party_type_string, :gender_string, :profile_type, :engagement_preferences]
       include Aws::Structure
     end
 
@@ -2370,6 +2411,25 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Object that defines users preferred methods of engagement.
+    #
+    # @!attribute [rw] phone
+    #   A list of phone-related contact preferences
+    #   @return [Array<Types::ContactPreference>]
+    #
+    # @!attribute [rw] email
+    #   A list of email-related contact preferences
+    #   @return [Array<Types::ContactPreference>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/EngagementPreferences AWS API Documentation
+    #
+    class EngagementPreferences < Struct.new(
+      :phone,
+      :email)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details of the destination being used for the EventStream.
     #
     # @!attribute [rw] uri
@@ -2692,6 +2752,15 @@ module Aws::CustomerProfiles
     #   A unique identifier for the attributes field to be merged.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] profile_type
+    #   A unique identifier for the profile type field to be merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] engagement_preferences
+    #   A unique identifier for the engagement preferences field to be
+    #   merged.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/FieldSourceProfileIds AWS API Documentation
     #
     class FieldSourceProfileIds < Struct.new(
@@ -2715,7 +2784,9 @@ module Aws::CustomerProfiles
       :shipping_address,
       :mailing_address,
       :billing_address,
-      :attributes)
+      :attributes,
+      :profile_type,
+      :engagement_preferences)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6205,6 +6276,14 @@ module Aws::CustomerProfiles
     #   An alternative to Gender which accepts any string as input.
     #   @return [String]
     #
+    # @!attribute [rw] profile_type
+    #   The type of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] engagement_preferences
+    #   The customer or account’s engagement preferences.
+    #   @return [Types::EngagementPreferences]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/Profile AWS API Documentation
     #
     class Profile < Struct.new(
@@ -6232,8 +6311,10 @@ module Aws::CustomerProfiles
       :attributes,
       :found_by_items,
       :party_type_string,
-      :gender_string)
-      SENSITIVE = [:account_number, :additional_information, :party_type, :business_name, :first_name, :middle_name, :last_name, :birth_date, :gender, :phone_number, :mobile_phone_number, :home_phone_number, :business_phone_number, :email_address, :personal_email_address, :business_email_address, :address, :shipping_address, :mailing_address, :billing_address, :attributes, :party_type_string, :gender_string]
+      :gender_string,
+      :profile_type,
+      :engagement_preferences)
+      SENSITIVE = [:account_number, :additional_information, :party_type, :business_name, :first_name, :middle_name, :last_name, :birth_date, :gender, :phone_number, :mobile_phone_number, :home_phone_number, :business_phone_number, :email_address, :personal_email_address, :business_email_address, :address, :shipping_address, :mailing_address, :billing_address, :attributes, :party_type_string, :gender_string, :profile_type, :engagement_preferences]
       include Aws::Structure
     end
 
@@ -6371,6 +6452,10 @@ module Aws::CustomerProfiles
     #   A field to describe values to segment on within attributes.
     #   @return [Hash<String,Types::AttributeDimension>]
     #
+    # @!attribute [rw] profile_type
+    #   A field to describe values to segment on within profile type.
+    #   @return [Types::ProfileTypeDimension]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ProfileAttributes AWS API Documentation
     #
     class ProfileAttributes < Struct.new(
@@ -6394,7 +6479,8 @@ module Aws::CustomerProfiles
       :shipping_address,
       :mailing_address,
       :billing_address,
-      :attributes)
+      :attributes,
+      :profile_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6463,6 +6549,25 @@ module Aws::CustomerProfiles
       :query_result,
       :profile)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object to hold the dimension of a profile type field to segment on.
+    #
+    # @!attribute [rw] dimension_type
+    #   The action to segment on.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values to apply the DimensionType on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ProfileTypeDimension AWS API Documentation
+    #
+    class ProfileTypeDimension < Struct.new(
+      :dimension_type,
+      :values)
+      SENSITIVE = [:values]
       include Aws::Structure
     end
 
@@ -8336,6 +8441,14 @@ module Aws::CustomerProfiles
     #   An alternative to `Gender` which accepts any string as input.
     #   @return [String]
     #
+    # @!attribute [rw] profile_type
+    #   Determines the type of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] engagement_preferences
+    #   Object that defines users preferred methods of engagement.
+    #   @return [Types::EngagementPreferences]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/UpdateProfileRequest AWS API Documentation
     #
     class UpdateProfileRequest < Struct.new(
@@ -8363,8 +8476,10 @@ module Aws::CustomerProfiles
       :billing_address,
       :attributes,
       :party_type_string,
-      :gender_string)
-      SENSITIVE = [:additional_information, :account_number, :party_type, :business_name, :first_name, :middle_name, :last_name, :birth_date, :gender, :phone_number, :mobile_phone_number, :home_phone_number, :business_phone_number, :email_address, :personal_email_address, :business_email_address, :address, :shipping_address, :mailing_address, :billing_address, :attributes, :party_type_string, :gender_string]
+      :gender_string,
+      :profile_type,
+      :engagement_preferences)
+      SENSITIVE = [:additional_information, :account_number, :party_type, :business_name, :first_name, :middle_name, :last_name, :birth_date, :gender, :phone_number, :mobile_phone_number, :home_phone_number, :business_phone_number, :email_address, :personal_email_address, :business_email_address, :address, :shipping_address, :mailing_address, :billing_address, :attributes, :party_type_string, :gender_string, :profile_type, :engagement_preferences]
       include Aws::Structure
     end
 

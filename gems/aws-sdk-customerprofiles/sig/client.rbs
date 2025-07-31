@@ -518,7 +518,26 @@ module Aws
                             },
                             ?attributes: Hash[::String, ::String],
                             ?party_type_string: ::String,
-                            ?gender_string: ::String
+                            ?gender_string: ::String,
+                            ?profile_type: ("ACCOUNT_PROFILE" | "PROFILE"),
+                            ?engagement_preferences: {
+                              phone: Array[
+                                {
+                                  key_name: ::String?,
+                                  key_value: ::String?,
+                                  profile_id: ::String?,
+                                  contact_type: ("PhoneNumber" | "MobilePhoneNumber" | "HomePhoneNumber" | "BusinessPhoneNumber" | "EmailAddress" | "PersonalEmailAddress" | "BusinessEmailAddress")?
+                                },
+                              ]?,
+                              email: Array[
+                                {
+                                  key_name: ::String?,
+                                  key_value: ::String?,
+                                  profile_id: ::String?,
+                                  contact_type: ("PhoneNumber" | "MobilePhoneNumber" | "HomePhoneNumber" | "BusinessPhoneNumber" | "EmailAddress" | "PersonalEmailAddress" | "BusinessEmailAddress")?
+                                },
+                              ]?
+                            }
                           ) -> _CreateProfileResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProfileResponseSuccess
 
@@ -714,7 +733,11 @@ module Aws
                                                    attributes: Hash[::String, {
                                                        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL"),
                                                        values: Array[::String]
-                                                     }]?
+                                                     }]?,
+                                                   profile_type: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE"),
+                                                     values: Array[("ACCOUNT_PROFILE" | "PROFILE")]
+                                                   }?
                                                  }?,
                                                  calculated_attributes: Hash[::String, {
                                                      dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL"),
@@ -930,7 +953,11 @@ module Aws
                                                  attributes: Hash[::String, {
                                                      dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL"),
                                                      values: Array[::String]
-                                                   }]?
+                                                   }]?,
+                                                 profile_type: {
+                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE"),
+                                                   values: Array[("ACCOUNT_PROFILE" | "PROFILE")]
+                                                 }?
                                                }?,
                                                calculated_attributes: Hash[::String, {
                                                    dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL"),
@@ -1808,7 +1835,9 @@ module Aws
                               shipping_address: ::String?,
                               mailing_address: ::String?,
                               billing_address: ::String?,
-                              attributes: Hash[::String, ::String]?
+                              attributes: Hash[::String, ::String]?,
+                              profile_type: ::String?,
+                              engagement_preferences: ::String?
                             }
                           ) -> _MergeProfilesResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MergeProfilesResponseSuccess
@@ -2281,7 +2310,26 @@ module Aws
                             },
                             ?attributes: Hash[::String, ::String],
                             ?party_type_string: ::String,
-                            ?gender_string: ::String
+                            ?gender_string: ::String,
+                            ?profile_type: ("ACCOUNT_PROFILE" | "PROFILE"),
+                            ?engagement_preferences: {
+                              phone: Array[
+                                {
+                                  key_name: ::String?,
+                                  key_value: ::String?,
+                                  profile_id: ::String?,
+                                  contact_type: ("PhoneNumber" | "MobilePhoneNumber" | "HomePhoneNumber" | "BusinessPhoneNumber" | "EmailAddress" | "PersonalEmailAddress" | "BusinessEmailAddress")?
+                                },
+                              ]?,
+                              email: Array[
+                                {
+                                  key_name: ::String?,
+                                  key_value: ::String?,
+                                  profile_id: ::String?,
+                                  contact_type: ("PhoneNumber" | "MobilePhoneNumber" | "HomePhoneNumber" | "BusinessPhoneNumber" | "EmailAddress" | "PersonalEmailAddress" | "BusinessEmailAddress")?
+                                },
+                              ]?
+                            }
                           ) -> _UpdateProfileResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProfileResponseSuccess
     end

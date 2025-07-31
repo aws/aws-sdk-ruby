@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2025-07-31)
+------------------
+
+* Feature - Add support for creating advanced rule-based matching workflows in AWS Entity Resolution.
+
 1.32.0 (2025-07-21)
 ------------------
 

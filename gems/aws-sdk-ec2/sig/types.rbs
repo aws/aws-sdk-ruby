@@ -14498,6 +14498,7 @@ module Aws::EC2
       attr_accessor vpc_peering_connection_id: ::String
       attr_accessor core_network_arn: ::String
       attr_accessor odb_network_arn: ::String
+      attr_accessor ip_address: ::String
       SENSITIVE: []
     end
 
@@ -15689,6 +15690,7 @@ module Aws::EC2
 
     class TerminateInstancesRequest
       attr_accessor instance_ids: ::Array[::String]
+      attr_accessor force: bool
       attr_accessor skip_os_shutdown: bool
       attr_accessor dry_run: bool
       SENSITIVE: []

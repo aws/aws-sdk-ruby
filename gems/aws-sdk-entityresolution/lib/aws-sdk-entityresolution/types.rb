@@ -175,7 +175,7 @@ module Aws::EntityResolution
     #
     # @!attribute [rw] output_source_config
     #   A list of `IdMappingWorkflowOutputSource` objects, each of which
-    #   contains fields `OutputS3Path` and `Output`.
+    #   contains fields `outputS3Path` and `KMSArn`.
     #   @return [Array<Types::IdMappingWorkflowOutputSource>]
     #
     # @!attribute [rw] id_mapping_techniques
@@ -228,7 +228,7 @@ module Aws::EntityResolution
     #
     # @!attribute [rw] output_source_config
     #   A list of `IdMappingWorkflowOutputSource` objects, each of which
-    #   contains fields `OutputS3Path` and `Output`.
+    #   contains fields `outputS3Path` and `KMSArn`.
     #   @return [Array<Types::IdMappingWorkflowOutputSource>]
     #
     # @!attribute [rw] id_mapping_techniques
@@ -395,7 +395,7 @@ module Aws::EntityResolution
     #
     # @!attribute [rw] output_source_config
     #   A list of `OutputSource` objects, each of which contains fields
-    #   `OutputS3Path`, `ApplyNormalization`, and `Output`.
+    #   `outputS3Path`, `applyNormalization`, `KMSArn`, and `output`.
     #   @return [Array<Types::OutputSource>]
     #
     # @!attribute [rw] resolution_techniques
@@ -404,8 +404,12 @@ module Aws::EntityResolution
     #   @return [Types::ResolutionTechniques]
     #
     # @!attribute [rw] incremental_run_config
-    #   An object which defines an incremental run type and has only
-    #   `incrementalRunType` as a field.
+    #   Optional. An object that defines the incremental run type. This
+    #   object contains only the `incrementalRunType` field, which appears
+    #   as "Automatic" in the console.
+    #
+    #   For workflows where `resolutionType` is `ML_MATCHING`, incremental
+    #   processing is not supported.
     #   @return [Types::IncrementalRunConfig]
     #
     # @!attribute [rw] role_arn
@@ -454,7 +458,7 @@ module Aws::EntityResolution
     #
     # @!attribute [rw] output_source_config
     #   A list of `OutputSource` objects, each of which contains fields
-    #   `OutputS3Path`, `ApplyNormalization`, and `Output`.
+    #   `outputS3Path`, `applyNormalization`, `KMSArn`, and `output`.
     #   @return [Array<Types::OutputSource>]
     #
     # @!attribute [rw] resolution_techniques
@@ -930,7 +934,7 @@ module Aws::EntityResolution
     #
     # @!attribute [rw] output_source_config
     #   A list of `OutputSource` objects, each of which contains fields
-    #   `OutputS3Path` and `KMSArn`.
+    #   `outputS3Path` and `KMSArn`.
     #   @return [Array<Types::IdMappingWorkflowOutputSource>]
     #
     # @!attribute [rw] id_mapping_techniques
@@ -1190,7 +1194,7 @@ module Aws::EntityResolution
     #
     # @!attribute [rw] output_source_config
     #   A list of `OutputSource` objects, each of which contains fields
-    #   `OutputS3Path`, `ApplyNormalization`, and `Output`.
+    #   `outputS3Path`, `applyNormalization`, `KMSArn`, and `output`.
     #   @return [Array<Types::OutputSource>]
     #
     # @!attribute [rw] resolution_techniques
@@ -1489,7 +1493,7 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # An object containing `KMSArn`, `OutputS3Path`, and `RoleARN`.
+    # An object containing `KMSArn`, `outputS3Path`, and `roleARN`.
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
@@ -1533,17 +1537,17 @@ module Aws::EntityResolution
     #   The comparison type. You can either choose `ONE_TO_ONE` or
     #   `MANY_TO_MANY` as the `attributeMatchingModel`.
     #
-    #   If you choose `MANY_TO_MANY`, the system can match attributes across
-    #   the sub-types of an attribute type. For example, if the value of the
-    #   `Email` field of Profile A matches the value of the `BusinessEmail`
-    #   field of Profile B, the two profiles are matched on the `Email`
-    #   attribute type.
-    #
     #   If you choose `ONE_TO_ONE`, the system can only match attributes if
     #   the sub-types are an exact match. For example, for the `Email`
     #   attribute type, the system will only consider it a match if the
     #   value of the `Email` field of Profile A matches the value of the
     #   `Email` field of Profile B.
+    #
+    #   If you choose `MANY_TO_MANY`, the system can match attributes across
+    #   the sub-types of an attribute type. For example, if the value of the
+    #   `Email` field of Profile A matches the value of the `BusinessEmail`
+    #   field of Profile B, the two profiles are matched on the `Email`
+    #   attribute type.
     #   @return [String]
     #
     # @!attribute [rw] record_matching_model
@@ -1595,7 +1599,7 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # An object containing `InputSourceARN`, `SchemaName`, and `Type`.
+    # An object containing `inputSourceARN`, `schemaName`, and `type`.
     #
     # @!attribute [rw] input_source_arn
     #   An Glue table Amazon Resource Name (ARN) or a matching workflow ARN
@@ -1693,8 +1697,8 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # An object containing `IdMappingType`, `ProviderProperties`, and
-    # `RuleBasedProperties`.
+    # An object containing `idMappingType`, `providerProperties`, and
+    # `ruleBasedProperties`.
     #
     # @!attribute [rw] id_mapping_type
     #   The type of ID mapping.
@@ -1720,7 +1724,7 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # An object containing `InputSourceARN` and `SchemaName`.
+    # An object containing `inputSourceARN` and `schemaName`.
     #
     # @!attribute [rw] input_source_arn
     #   An Glue table Amazon Resource Name (ARN) or a matching workflow ARN
@@ -1792,11 +1796,19 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # An object which defines an incremental run type and has only
-    # `incrementalRunType` as a field.
+    # Optional. An object that defines the incremental run type. This object
+    # contains only the `incrementalRunType` field, which appears as
+    # "Automatic" in the console.
+    #
+    # For workflows where `resolutionType` is `ML_MATCHING`, incremental
+    # processing is not supported.
     #
     # @!attribute [rw] incremental_run_type
-    #   The type of incremental run. It takes only one value: `IMMEDIATE`.
+    #   The type of incremental run. The only valid value is `IMMEDIATE`.
+    #   This appears as "Automatic" in the console.
+    #
+    #   For workflows where `resolutionType` is `ML_MATCHING`, incremental
+    #   processing is not supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/IncrementalRunConfig AWS API Documentation
@@ -1807,8 +1819,8 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # An object containing `InputSourceARN`, `SchemaName`, and
-    # `ApplyNormalization`.
+    # An object containing `inputSourceARN`, `schemaName`, and
+    # `applyNormalization`.
     #
     # @!attribute [rw] input_source_arn
     #   An Glue table Amazon Resource Name (ARN) for the input source table.
@@ -1866,8 +1878,8 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # An object containing `InputRecords`, `TotalRecordsProcessed`,
-    # `MatchIDs`, and `RecordsNotProcessed`.
+    # An object containing `inputRecords`, `totalRecordsProcessed`,
+    # `matchIDs`, and `recordsNotProcessed`.
     #
     # @!attribute [rw] input_records
     #   The total number of input records.
@@ -1896,7 +1908,7 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # An object containing `KMSArn`, `OutputS3Path`, and `RoleArn`.
+    # An object containing `KMSArn`, `outputS3Path`, and `roleArn`.
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
@@ -1923,7 +1935,7 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # An object containing the `JobId`, `Status`, `StartTime`, and `EndTime`
+    # An object containing the `jobId`, `status`, `startTime`, and `endTime`
     # of a job.
     #
     # @!attribute [rw] job_id
@@ -2119,8 +2131,8 @@ module Aws::EntityResolution
 
     # @!attribute [rw] workflow_summaries
     #   A list of `MatchingWorkflowSummary` objects, each of which contain
-    #   the fields `WorkflowName`, `WorkflowArn`, `CreatedAt`, and
-    #   `UpdatedAt`.
+    #   the fields `workflowName`, `workflowArn`, `resolutionType`,
+    #   `createdAt`, and `updatedAt`.
     #   @return [Array<Types::MatchingWorkflowSummary>]
     #
     # @!attribute [rw] next_token
@@ -2279,7 +2291,8 @@ module Aws::EntityResolution
     end
 
     # A list of `MatchingWorkflowSummary` objects, each of which contain the
-    # fields `WorkflowName`, `WorkflowArn`, `CreatedAt`, `UpdatedAt`.
+    # fields `workflowName`, `workflowArn`, `resolutionType`, `createdAt`,
+    # `updatedAt`.
     #
     # @!attribute [rw] workflow_name
     #   The name of the workflow.
@@ -2316,7 +2329,7 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # An object containing `ProviderConfiguration` and `ProviderServiceArn`.
+    # An object containing `providerConfiguration` and `providerServiceArn`.
     #
     # @!attribute [rw] provider_service_arn
     #   The Amazon Resource Name (ARN) of the provider service.
@@ -2352,17 +2365,17 @@ module Aws::EntityResolution
     #   The comparison type. You can either choose `ONE_TO_ONE` or
     #   `MANY_TO_MANY` as the `attributeMatchingModel`.
     #
-    #   If you choose `MANY_TO_MANY`, the system can match attributes across
-    #   the sub-types of an attribute type. For example, if the value of the
-    #   `Email` field of Profile A matches the value of `BusinessEmail`
-    #   field of Profile B, the two profiles are matched on the `Email`
-    #   attribute type.
-    #
     #   If you choose `ONE_TO_ONE`, the system can only match attributes if
     #   the sub-types are an exact match. For example, for the `Email`
     #   attribute type, the system will only consider it a match if the
     #   value of the `Email` field of Profile A matches the value of the
     #   `Email` field of Profile B.
+    #
+    #   If you choose `MANY_TO_MANY`, the system can match attributes across
+    #   the sub-types of an attribute type. For example, if the value of the
+    #   `Email` field of Profile A matches the value of `BusinessEmail`
+    #   field of Profile B, the two profiles are matched on the `Email`
+    #   attribute type.
     #   @return [String]
     #
     # @!attribute [rw] record_matching_models
@@ -2754,8 +2767,12 @@ module Aws::EntityResolution
     #
     # @!attribute [rw] rule_based_properties
     #   An object which defines the list of matching rules to run and has a
-    #   field `Rules`, which is a list of rule objects.
+    #   field `rules`, which is a list of rule objects.
     #   @return [Types::RuleBasedProperties]
+    #
+    # @!attribute [rw] rule_condition_properties
+    #   An object containing the `rules` for a matching workflow.
+    #   @return [Types::RuleConditionProperties]
     #
     # @!attribute [rw] provider_properties
     #   The properties of the provider service.
@@ -2766,6 +2783,7 @@ module Aws::EntityResolution
     class ResolutionTechniques < Struct.new(
       :resolution_type,
       :rule_based_properties,
+      :rule_condition_properties,
       :provider_properties)
       SENSITIVE = []
       include Aws::Structure
@@ -2784,7 +2802,7 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # An object containing `RuleName`, and `MatchingKeys`.
+    # An object containing the `ruleName` and `matchingKeys`.
     #
     # @!attribute [rw] rule_name
     #   A name for the matching rule.
@@ -2806,8 +2824,7 @@ module Aws::EntityResolution
     end
 
     # An object which defines the list of matching rules to run in a
-    # matching workflow. RuleBasedProperties contain a `Rules` field, which
-    # is a list of rule objects.
+    # matching workflow.
     #
     # @!attribute [rw] rules
     #   A list of `Rule` objects, each of which have fields `RuleName` and
@@ -2815,20 +2832,20 @@ module Aws::EntityResolution
     #   @return [Array<Types::Rule>]
     #
     # @!attribute [rw] attribute_matching_model
-    #   The comparison type. You can either choose `ONE_TO_ONE` or
-    #   `MANY_TO_MANY` as the `attributeMatchingModel`.
-    #
-    #   If you choose `MANY_TO_MANY`, the system can match attributes across
-    #   the sub-types of an attribute type. For example, if the value of the
-    #   `Email` field of Profile A and the value of `BusinessEmail` field of
-    #   Profile B matches, the two profiles are matched on the `Email`
-    #   attribute type.
+    #   The comparison type. You can choose `ONE_TO_ONE` or `MANY_TO_MANY`
+    #   as the `attributeMatchingModel`.
     #
     #   If you choose `ONE_TO_ONE`, the system can only match attributes if
     #   the sub-types are an exact match. For example, for the `Email`
     #   attribute type, the system will only consider it a match if the
     #   value of the `Email` field of Profile A matches the value of the
     #   `Email` field of Profile B.
+    #
+    #   If you choose `MANY_TO_MANY`, the system can match attributes across
+    #   the sub-types of an attribute type. For example, if the value of the
+    #   `Email` field of Profile A and the value of `BusinessEmail` field of
+    #   Profile B matches, the two profiles are matched on the `Email`
+    #   attribute type.
     #   @return [String]
     #
     # @!attribute [rw] match_purpose
@@ -2847,6 +2864,56 @@ module Aws::EntityResolution
       :rules,
       :attribute_matching_model,
       :match_purpose)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that defines the `ruleCondition` and the `ruleName` to use
+    # in a matching workflow.
+    #
+    # @!attribute [rw] rule_name
+    #   A name for the matching rule.
+    #
+    #   For example: `Rule1`
+    #   @return [String]
+    #
+    # @!attribute [rw] condition
+    #   A statement that specifies the conditions for a matching rule.
+    #
+    #   If your data is accurate, use an Exact matching function: `Exact` or
+    #   `ExactManyToMany`.
+    #
+    #   If your data has variations in spelling or pronunciation, use a
+    #   Fuzzy matching function: `Cosine`, `Levenshtein`, or `Soundex`.
+    #
+    #   Use operators if you want to combine (`AND`), separate (`OR`), or
+    #   group matching functions `(...)`.
+    #
+    #   For example: `(Cosine(a, 10) AND Exact(b, true)) OR
+    #   ExactManyToMany(c, d)`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/RuleCondition AWS API Documentation
+    #
+    class RuleCondition < Struct.new(
+      :rule_name,
+      :condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties of a rule condition that provides the ability to use
+    # more complex syntax.
+    #
+    # @!attribute [rw] rules
+    #   A list of rule objects, each of which have fields `ruleName` and
+    #   `condition`.
+    #   @return [Array<Types::RuleCondition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/RuleConditionProperties AWS API Documentation
+    #
+    class RuleConditionProperties < Struct.new(
+      :rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2944,8 +3011,8 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # An object containing `SchemaName`, `SchemaArn`, `CreatedAt`,
-    # and`UpdatedAt`.
+    # An object containing `schemaName`, `schemaArn`, `createdAt`,
+    # `updatedAt`, and `hasWorkflows`.
     #
     # @!attribute [rw] schema_name
     #   The name of the schema.
@@ -3109,7 +3176,7 @@ module Aws::EntityResolution
     #
     # @!attribute [rw] output_source_config
     #   A list of `OutputSource` objects, each of which contains fields
-    #   `OutputS3Path` and `KMSArn`.
+    #   `outputS3Path` and `KMSArn`.
     #   @return [Array<Types::IdMappingWorkflowOutputSource>]
     #
     # @!attribute [rw] id_mapping_techniques
@@ -3157,7 +3224,7 @@ module Aws::EntityResolution
     #
     # @!attribute [rw] output_source_config
     #   A list of `OutputSource` objects, each of which contains fields
-    #   `OutputS3Path` and `KMSArn`.
+    #   `outputS3Path` and `KMSArn`.
     #   @return [Array<Types::IdMappingWorkflowOutputSource>]
     #
     # @!attribute [rw] id_mapping_techniques
@@ -3299,7 +3366,7 @@ module Aws::EntityResolution
     #
     # @!attribute [rw] output_source_config
     #   A list of `OutputSource` objects, each of which contains fields
-    #   `OutputS3Path`, `ApplyNormalization`, and `Output`.
+    #   `outputS3Path`, `applyNormalization`, `KMSArn`, and `output`.
     #   @return [Array<Types::OutputSource>]
     #
     # @!attribute [rw] resolution_techniques
@@ -3308,8 +3375,12 @@ module Aws::EntityResolution
     #   @return [Types::ResolutionTechniques]
     #
     # @!attribute [rw] incremental_run_config
-    #   An object which defines an incremental run type and has only
-    #   `incrementalRunType` as a field.
+    #   Optional. An object that defines the incremental run type. This
+    #   object contains only the `incrementalRunType` field, which appears
+    #   as "Automatic" in the console.
+    #
+    #   For workflows where `resolutionType` is `ML_MATCHING`, incremental
+    #   processing is not supported.
     #   @return [Types::IncrementalRunConfig]
     #
     # @!attribute [rw] role_arn
@@ -3347,7 +3418,7 @@ module Aws::EntityResolution
     #
     # @!attribute [rw] output_source_config
     #   A list of `OutputSource` objects, each of which contains fields
-    #   `OutputS3Path`, `ApplyNormalization`, and `Output`.
+    #   `outputS3Path`, `applyNormalization`, `KMSArn`, and `output`.
     #   @return [Array<Types::OutputSource>]
     #
     # @!attribute [rw] resolution_techniques

@@ -161,6 +161,12 @@ module Aws::Glue
       SENSITIVE: [:authorization_code]
     end
 
+    class AutoDataQuality
+      attr_accessor is_enabled: bool
+      attr_accessor evaluation_context: ::String
+      SENSITIVE: []
+    end
+
     class BackfillError
       attr_accessor code: ("ENCRYPTED_PARTITION_ERROR" | "INTERNAL_ERROR" | "INVALID_PARTITION_TYPE_DATA_ERROR" | "MISSING_PARTITION_VALUE_ERROR" | "UNSUPPORTED_PARTITION_CHARACTER_ERROR")
       attr_accessor partitions: ::Array[Types::PartitionValueList]
@@ -583,6 +589,15 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class CatalogIcebergSource
+      attr_accessor name: ::String
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      attr_accessor additional_iceberg_options: ::Hash[::String, ::String]
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
     class CatalogImportStatus
       attr_accessor import_completed: bool
       attr_accessor import_time: ::Time
@@ -646,6 +661,8 @@ module Aws::Glue
       attr_accessor name: ::String
       attr_accessor database: ::String
       attr_accessor table: ::String
+      attr_accessor partition_predicate: ::String
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
       SENSITIVE: []
     end
 
@@ -692,7 +709,6 @@ module Aws::Glue
       attr_accessor redshift_source: Types::RedshiftSource
       attr_accessor s3_catalog_source: Types::S3CatalogSource
       attr_accessor s3_csv_source: Types::S3CsvSource
-      attr_accessor s3_excel_source: Types::S3ExcelSource
       attr_accessor s3_json_source: Types::S3JsonSource
       attr_accessor s3_parquet_source: Types::S3ParquetSource
       attr_accessor relational_catalog_source: Types::RelationalCatalogSource
@@ -703,9 +719,7 @@ module Aws::Glue
       attr_accessor redshift_target: Types::RedshiftTarget
       attr_accessor s3_catalog_target: Types::S3CatalogTarget
       attr_accessor s3_glue_parquet_target: Types::S3GlueParquetTarget
-      attr_accessor s3_hyper_direct_target: Types::S3HyperDirectTarget
       attr_accessor s3_direct_target: Types::S3DirectTarget
-      attr_accessor s3_iceberg_direct_target: Types::S3IcebergDirectTarget
       attr_accessor apply_mapping: Types::ApplyMapping
       attr_accessor select_fields: Types::SelectFields
       attr_accessor drop_fields: Types::DropFields
@@ -738,6 +752,7 @@ module Aws::Glue
       attr_accessor my_sql_catalog_target: Types::MySQLCatalogTarget
       attr_accessor oracle_sql_catalog_target: Types::OracleSQLCatalogTarget
       attr_accessor postgre_sql_catalog_target: Types::PostgreSQLCatalogTarget
+      attr_accessor route: Types::Route
       attr_accessor dynamic_transform: Types::DynamicTransform
       attr_accessor evaluate_data_quality: Types::EvaluateDataQuality
       attr_accessor s3_catalog_hudi_source: Types::S3CatalogHudiSource
@@ -759,6 +774,13 @@ module Aws::Glue
       attr_accessor snowflake_target: Types::SnowflakeTarget
       attr_accessor connector_data_source: Types::ConnectorDataSource
       attr_accessor connector_data_target: Types::ConnectorDataTarget
+      attr_accessor s3_catalog_iceberg_source: Types::S3CatalogIcebergSource
+      attr_accessor catalog_iceberg_source: Types::CatalogIcebergSource
+      attr_accessor s3_iceberg_catalog_target: Types::S3IcebergCatalogTarget
+      attr_accessor s3_iceberg_direct_target: Types::S3IcebergDirectTarget
+      attr_accessor s3_excel_source: Types::S3ExcelSource
+      attr_accessor s3_hyper_direct_target: Types::S3HyperDirectTarget
+      attr_accessor dynamo_dbelt_connector_source: Types::DynamoDBELTConnectorSource
       SENSITIVE: []
     end
 
@@ -1698,6 +1720,23 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class DDBELTCatalogAdditionalOptions
+      attr_accessor dynamodb_export: ::String
+      attr_accessor dynamodb_unnest_ddb_json: bool
+      SENSITIVE: []
+    end
+
+    class DDBELTConnectionOptions
+      attr_accessor dynamodb_export: ("ddb" | "s3")
+      attr_accessor dynamodb_unnest_ddb_json: bool
+      attr_accessor dynamodb_table_arn: ::String
+      attr_accessor dynamodb_s3_bucket: ::String
+      attr_accessor dynamodb_s3_prefix: ::String
+      attr_accessor dynamodb_s3_bucket_owner: ::String
+      attr_accessor dynamodb_sts_role_arn: ::String
+      SENSITIVE: []
+    end
+
     class DQResultsPublishingOptions
       attr_accessor evaluation_context: ::String
       attr_accessor results_s3_prefix: ::String
@@ -2394,6 +2433,7 @@ module Aws::Glue
       attr_accessor connection_name: ::String
       attr_accessor connection_type: ("sqlserver" | "mysql" | "oracle" | "postgresql" | "redshift")
       attr_accessor redshift_tmp_dir: ::String
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
       SENSITIVE: []
     end
 
@@ -2469,6 +2509,15 @@ module Aws::Glue
       attr_accessor name: ::String
       attr_accessor database: ::String
       attr_accessor table: ::String
+      attr_accessor pitr_enabled: bool
+      attr_accessor additional_options: Types::DDBELTCatalogAdditionalOptions
+      SENSITIVE: []
+    end
+
+    class DynamoDBELTConnectorSource
+      attr_accessor name: ::String
+      attr_accessor connection_options: Types::DDBELTConnectionOptions
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
       SENSITIVE: []
     end
 
@@ -2544,7 +2593,7 @@ module Aws::Glue
       attr_accessor additional_data_sources: ::Hash[::String, ::String]
       attr_accessor ruleset: ::String
       attr_accessor publishing_options: Types::DQResultsPublishingOptions
-      attr_accessor additional_options: ::Hash[("performanceTuning.caching" | "observations.scope"), ::String]
+      attr_accessor additional_options: ::Hash[("performanceTuning.caching" | "observations.scope" | "compositeRuleEvaluation.method"), ::String]
       attr_accessor stop_job_on_failure_options: Types::DQStopJobOnFailureOptions
       SENSITIVE: []
     end
@@ -3815,6 +3864,7 @@ module Aws::Glue
     class GlueStudioSchemaColumn
       attr_accessor name: ::String
       attr_accessor type: ::String
+      attr_accessor glue_studio_type: ::String
       SENSITIVE: []
     end
 
@@ -3854,6 +3904,13 @@ module Aws::Glue
       attr_accessor version: ::Integer
       attr_accessor grok_pattern: ::String
       attr_accessor custom_patterns: ::String
+      SENSITIVE: []
+    end
+
+    class GroupFilters
+      attr_accessor group_name: ::String
+      attr_accessor filters: ::Array[Types::FilterExpression]
+      attr_accessor logical_operator: ("AND" | "OR")
       SENSITIVE: []
     end
 
@@ -4352,6 +4409,7 @@ module Aws::Glue
       attr_accessor add_record_timestamp: ::String
       attr_accessor emit_consumer_lag_metrics: ::String
       attr_accessor starting_timestamp: ::Time
+      attr_accessor fanout_consumer_arn: ::String
       SENSITIVE: []
     end
 
@@ -5015,12 +5073,19 @@ module Aws::Glue
     class PIIDetection
       attr_accessor name: ::String
       attr_accessor inputs: ::Array[::String]
-      attr_accessor pii_type: ("RowAudit" | "RowMasking" | "ColumnAudit" | "ColumnMasking")
+      attr_accessor pii_type: ("RowAudit" | "RowHashing" | "RowMasking" | "RowPartialMasking" | "ColumnAudit" | "ColumnHashing" | "ColumnMasking")
       attr_accessor entity_types_to_detect: ::Array[::String]
       attr_accessor output_column_name: ::String
       attr_accessor sample_fraction: ::Float
       attr_accessor threshold_fraction: ::Float
       attr_accessor mask_value: ::String
+      attr_accessor redact_text: ::String
+      attr_accessor redact_char: ::String
+      attr_accessor match_pattern: ::String
+      attr_accessor num_left_chars_to_exclude: ::Integer
+      attr_accessor num_right_chars_to_exclude: ::Integer
+      attr_accessor detection_parameters: ::String
+      attr_accessor detection_sensitivity: ::String
       SENSITIVE: []
     end
 
@@ -5398,6 +5463,13 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class Route
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor group_filters_list: ::Array[Types::GroupFilters]
+      SENSITIVE: []
+    end
+
     class RunIdentifier
       attr_accessor run_id: ::String
       attr_accessor job_run_id: ::String
@@ -5442,6 +5514,15 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class S3CatalogIcebergSource
+      attr_accessor name: ::String
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      attr_accessor additional_iceberg_options: ::Hash[::String, ::String]
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
     class S3CatalogSource
       attr_accessor name: ::String
       attr_accessor database: ::String
@@ -5458,6 +5539,7 @@ module Aws::Glue
       attr_accessor table: ::String
       attr_accessor database: ::String
       attr_accessor schema_change_policy: Types::CatalogSchemaChangePolicy
+      attr_accessor auto_data_quality: Types::AutoDataQuality
       SENSITIVE: []
     end
 
@@ -5492,6 +5574,8 @@ module Aws::Glue
       attr_accessor database: ::String
       attr_accessor additional_options: ::Hash[::String, ::String]
       attr_accessor schema_change_policy: Types::CatalogSchemaChangePolicy
+      attr_accessor auto_data_quality: Types::AutoDataQuality
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
       SENSITIVE: []
     end
 
@@ -5505,6 +5589,7 @@ module Aws::Glue
       attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml")
       attr_accessor additional_options: ::Hash[::String, ::String]
       attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
+      attr_accessor auto_data_quality: Types::AutoDataQuality
       SENSITIVE: []
     end
 
@@ -5534,6 +5619,8 @@ module Aws::Glue
       attr_accessor number_target_partitions: ::String
       attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml")
       attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
+      attr_accessor auto_data_quality: Types::AutoDataQuality
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
       SENSITIVE: []
     end
 
@@ -5568,6 +5655,7 @@ module Aws::Glue
       attr_accessor compression: ("snappy" | "lzo" | "gzip" | "brotli" | "lz4" | "uncompressed" | "none")
       attr_accessor number_target_partitions: ::String
       attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
+      attr_accessor auto_data_quality: Types::AutoDataQuality
       SENSITIVE: []
     end
 
@@ -5579,6 +5667,8 @@ module Aws::Glue
       attr_accessor database: ::String
       attr_accessor additional_options: ::Hash[::String, ::String]
       attr_accessor schema_change_policy: Types::CatalogSchemaChangePolicy
+      attr_accessor auto_data_quality: Types::AutoDataQuality
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
       SENSITIVE: []
     end
 
@@ -5592,6 +5682,7 @@ module Aws::Glue
       attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml")
       attr_accessor additional_options: ::Hash[::String, ::String]
       attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
+      attr_accessor auto_data_quality: Types::AutoDataQuality
       SENSITIVE: []
     end
 
@@ -5607,10 +5698,25 @@ module Aws::Glue
     class S3HyperDirectTarget
       attr_accessor name: ::String
       attr_accessor inputs: ::Array[::String]
+      attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml")
       attr_accessor partition_keys: ::Array[::Array[::String]]
       attr_accessor path: ::String
       attr_accessor compression: ("uncompressed")
       attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
+      attr_accessor auto_data_quality: Types::AutoDataQuality
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class S3IcebergCatalogTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor partition_keys: ::Array[::Array[::String]]
+      attr_accessor table: ::String
+      attr_accessor database: ::String
+      attr_accessor additional_options: ::Hash[::String, ::String]
+      attr_accessor schema_change_policy: Types::CatalogSchemaChangePolicy
+      attr_accessor auto_data_quality: Types::AutoDataQuality
       SENSITIVE: []
     end
 
@@ -5622,8 +5728,10 @@ module Aws::Glue
       attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml")
       attr_accessor additional_options: ::Hash[::String, ::String]
       attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
+      attr_accessor auto_data_quality: Types::AutoDataQuality
       attr_accessor compression: ("gzip" | "lzo" | "uncompressed" | "snappy")
       attr_accessor number_target_partitions: ::String
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
       SENSITIVE: []
     end
 

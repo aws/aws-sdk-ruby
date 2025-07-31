@@ -3885,7 +3885,7 @@ module Aws::ApplicationAutoScaling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

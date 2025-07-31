@@ -67,6 +67,8 @@ module Aws::CustomerProfiles
     ConnectorOperator = Shapes::StructureShape.new(name: 'ConnectorOperator')
     ConnectorProfileName = Shapes::StringShape.new(name: 'ConnectorProfileName')
     Consolidation = Shapes::StructureShape.new(name: 'Consolidation')
+    ContactPreference = Shapes::StructureShape.new(name: 'ContactPreference')
+    ContactType = Shapes::StringShape.new(name: 'ContactType')
     CreateCalculatedAttributeDefinitionRequest = Shapes::StructureShape.new(name: 'CreateCalculatedAttributeDefinitionRequest')
     CreateCalculatedAttributeDefinitionResponse = Shapes::StructureShape.new(name: 'CreateCalculatedAttributeDefinitionResponse')
     CreateDomainLayoutRequest = Shapes::StructureShape.new(name: 'CreateDomainLayoutRequest')
@@ -134,7 +136,9 @@ module Aws::CustomerProfiles
     Double = Shapes::FloatShape.new(name: 'Double')
     Double0To1 = Shapes::FloatShape.new(name: 'Double0To1')
     EmailList = Shapes::ListShape.new(name: 'EmailList')
+    EmailPreferenceList = Shapes::ListShape.new(name: 'EmailPreferenceList')
     End = Shapes::IntegerShape.new(name: 'End')
+    EngagementPreferences = Shapes::StructureShape.new(name: 'EngagementPreferences')
     EstimateStatus = Shapes::StringShape.new(name: 'EstimateStatus')
     EventStreamDestinationDetails = Shapes::StructureShape.new(name: 'EventStreamDestinationDetails')
     EventStreamDestinationStatus = Shapes::StringShape.new(name: 'EventStreamDestinationStatus')
@@ -316,6 +320,7 @@ module Aws::CustomerProfiles
     PeriodUnit = Shapes::StringShape.new(name: 'PeriodUnit')
     Periods = Shapes::ListShape.new(name: 'Periods')
     PhoneNumberList = Shapes::ListShape.new(name: 'PhoneNumberList')
+    PhonePreferenceList = Shapes::ListShape.new(name: 'PhonePreferenceList')
     Profile = Shapes::StructureShape.new(name: 'Profile')
     ProfileAttributeValuesRequest = Shapes::StructureShape.new(name: 'ProfileAttributeValuesRequest')
     ProfileAttributeValuesResponse = Shapes::StructureShape.new(name: 'ProfileAttributeValuesResponse')
@@ -331,6 +336,10 @@ module Aws::CustomerProfiles
     ProfileObjectTypeTemplateList = Shapes::ListShape.new(name: 'ProfileObjectTypeTemplateList')
     ProfileQueryFailures = Shapes::StructureShape.new(name: 'ProfileQueryFailures')
     ProfileQueryResult = Shapes::StructureShape.new(name: 'ProfileQueryResult')
+    ProfileType = Shapes::StringShape.new(name: 'ProfileType')
+    ProfileTypeDimension = Shapes::StructureShape.new(name: 'ProfileTypeDimension')
+    ProfileTypeDimensionType = Shapes::StringShape.new(name: 'ProfileTypeDimensionType')
+    ProfileTypeValues = Shapes::ListShape.new(name: 'ProfileTypeValues')
     Profiles = Shapes::ListShape.new(name: 'Profiles')
     Property = Shapes::StringShape.new(name: 'Property')
     PutIntegrationRequest = Shapes::StructureShape.new(name: 'PutIntegrationRequest')
@@ -676,6 +685,12 @@ module Aws::CustomerProfiles
     Consolidation.add_member(:matching_attributes_list, Shapes::ShapeRef.new(shape: MatchingAttributesList, required: true, location_name: "MatchingAttributesList"))
     Consolidation.struct_class = Types::Consolidation
 
+    ContactPreference.add_member(:key_name, Shapes::ShapeRef.new(shape: name, location_name: "KeyName"))
+    ContactPreference.add_member(:key_value, Shapes::ShapeRef.new(shape: string1To255, location_name: "KeyValue"))
+    ContactPreference.add_member(:profile_id, Shapes::ShapeRef.new(shape: uuid, location_name: "ProfileId"))
+    ContactPreference.add_member(:contact_type, Shapes::ShapeRef.new(shape: ContactType, location_name: "ContactType"))
+    ContactPreference.struct_class = Types::ContactPreference
+
     CreateCalculatedAttributeDefinitionRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     CreateCalculatedAttributeDefinitionRequest.add_member(:calculated_attribute_name, Shapes::ShapeRef.new(shape: typeName, required: true, location: "uri", location_name: "CalculatedAttributeName"))
     CreateCalculatedAttributeDefinitionRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: displayName, location_name: "DisplayName"))
@@ -812,6 +827,8 @@ module Aws::CustomerProfiles
     CreateProfileRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
     CreateProfileRequest.add_member(:party_type_string, Shapes::ShapeRef.new(shape: sensitiveString1To255, location_name: "PartyTypeString"))
     CreateProfileRequest.add_member(:gender_string, Shapes::ShapeRef.new(shape: sensitiveString1To255, location_name: "GenderString"))
+    CreateProfileRequest.add_member(:profile_type, Shapes::ShapeRef.new(shape: ProfileType, location_name: "ProfileType"))
+    CreateProfileRequest.add_member(:engagement_preferences, Shapes::ShapeRef.new(shape: EngagementPreferences, location_name: "EngagementPreferences"))
     CreateProfileRequest.struct_class = Types::CreateProfileRequest
 
     CreateProfileResponse.add_member(:profile_id, Shapes::ShapeRef.new(shape: uuid, required: true, location_name: "ProfileId"))
@@ -995,6 +1012,12 @@ module Aws::CustomerProfiles
 
     EmailList.member = Shapes::ShapeRef.new(shape: string1To255)
 
+    EmailPreferenceList.member = Shapes::ShapeRef.new(shape: ContactPreference)
+
+    EngagementPreferences.add_member(:phone, Shapes::ShapeRef.new(shape: PhonePreferenceList, location_name: "Phone"))
+    EngagementPreferences.add_member(:email, Shapes::ShapeRef.new(shape: EmailPreferenceList, location_name: "Email"))
+    EngagementPreferences.struct_class = Types::EngagementPreferences
+
     EventStreamDestinationDetails.add_member(:uri, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "Uri"))
     EventStreamDestinationDetails.add_member(:status, Shapes::ShapeRef.new(shape: EventStreamDestinationStatus, required: true, location_name: "Status"))
     EventStreamDestinationDetails.add_member(:unhealthy_since, Shapes::ShapeRef.new(shape: timestamp, location_name: "UnhealthySince"))
@@ -1081,6 +1104,8 @@ module Aws::CustomerProfiles
     FieldSourceProfileIds.add_member(:mailing_address, Shapes::ShapeRef.new(shape: uuid, location_name: "MailingAddress"))
     FieldSourceProfileIds.add_member(:billing_address, Shapes::ShapeRef.new(shape: uuid, location_name: "BillingAddress"))
     FieldSourceProfileIds.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeSourceIdMap, location_name: "Attributes"))
+    FieldSourceProfileIds.add_member(:profile_type, Shapes::ShapeRef.new(shape: uuid, location_name: "ProfileType"))
+    FieldSourceProfileIds.add_member(:engagement_preferences, Shapes::ShapeRef.new(shape: uuid, location_name: "EngagementPreferences"))
     FieldSourceProfileIds.struct_class = Types::FieldSourceProfileIds
 
     Filter.add_member(:include, Shapes::ShapeRef.new(shape: Include, required: true, location_name: "Include"))
@@ -1781,6 +1806,8 @@ module Aws::CustomerProfiles
 
     PhoneNumberList.member = Shapes::ShapeRef.new(shape: string1To255)
 
+    PhonePreferenceList.member = Shapes::ShapeRef.new(shape: ContactPreference)
+
     Profile.add_member(:profile_id, Shapes::ShapeRef.new(shape: uuid, location_name: "ProfileId"))
     Profile.add_member(:account_number, Shapes::ShapeRef.new(shape: sensitiveString1To255, location_name: "AccountNumber"))
     Profile.add_member(:additional_information, Shapes::ShapeRef.new(shape: sensitiveString1To1000, location_name: "AdditionalInformation"))
@@ -1806,6 +1833,8 @@ module Aws::CustomerProfiles
     Profile.add_member(:found_by_items, Shapes::ShapeRef.new(shape: foundByList, location_name: "FoundByItems"))
     Profile.add_member(:party_type_string, Shapes::ShapeRef.new(shape: sensitiveString1To255, location_name: "PartyTypeString"))
     Profile.add_member(:gender_string, Shapes::ShapeRef.new(shape: sensitiveString1To255, location_name: "GenderString"))
+    Profile.add_member(:profile_type, Shapes::ShapeRef.new(shape: ProfileType, location_name: "ProfileType"))
+    Profile.add_member(:engagement_preferences, Shapes::ShapeRef.new(shape: EngagementPreferences, location_name: "EngagementPreferences"))
     Profile.struct_class = Types::Profile
 
     ProfileAttributeValuesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
@@ -1839,6 +1868,7 @@ module Aws::CustomerProfiles
     ProfileAttributes.add_member(:mailing_address, Shapes::ShapeRef.new(shape: AddressDimension, location_name: "MailingAddress"))
     ProfileAttributes.add_member(:billing_address, Shapes::ShapeRef.new(shape: AddressDimension, location_name: "BillingAddress"))
     ProfileAttributes.add_member(:attributes, Shapes::ShapeRef.new(shape: CustomAttributes, location_name: "Attributes"))
+    ProfileAttributes.add_member(:profile_type, Shapes::ShapeRef.new(shape: ProfileTypeDimension, location_name: "ProfileType"))
     ProfileAttributes.struct_class = Types::ProfileAttributes
 
     ProfileDimension.add_member(:dimension_type, Shapes::ShapeRef.new(shape: StringDimensionType, required: true, location_name: "DimensionType"))
@@ -1868,6 +1898,12 @@ module Aws::CustomerProfiles
     ProfileQueryResult.add_member(:query_result, Shapes::ShapeRef.new(shape: QueryResult, required: true, location_name: "QueryResult"))
     ProfileQueryResult.add_member(:profile, Shapes::ShapeRef.new(shape: Profile, location_name: "Profile"))
     ProfileQueryResult.struct_class = Types::ProfileQueryResult
+
+    ProfileTypeDimension.add_member(:dimension_type, Shapes::ShapeRef.new(shape: ProfileTypeDimensionType, required: true, location_name: "DimensionType"))
+    ProfileTypeDimension.add_member(:values, Shapes::ShapeRef.new(shape: ProfileTypeValues, required: true, location_name: "Values"))
+    ProfileTypeDimension.struct_class = Types::ProfileTypeDimension
+
+    ProfileTypeValues.member = Shapes::ShapeRef.new(shape: ProfileType)
 
     Profiles.member = Shapes::ShapeRef.new(shape: ProfileQueryResult)
 
@@ -2236,6 +2272,8 @@ module Aws::CustomerProfiles
     UpdateProfileRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: UpdateAttributes, location_name: "Attributes"))
     UpdateProfileRequest.add_member(:party_type_string, Shapes::ShapeRef.new(shape: sensitiveString0To255, location_name: "PartyTypeString"))
     UpdateProfileRequest.add_member(:gender_string, Shapes::ShapeRef.new(shape: sensitiveString0To255, location_name: "GenderString"))
+    UpdateProfileRequest.add_member(:profile_type, Shapes::ShapeRef.new(shape: ProfileType, location_name: "ProfileType"))
+    UpdateProfileRequest.add_member(:engagement_preferences, Shapes::ShapeRef.new(shape: EngagementPreferences, location_name: "EngagementPreferences"))
     UpdateProfileRequest.struct_class = Types::UpdateProfileRequest
 
     UpdateProfileResponse.add_member(:profile_id, Shapes::ShapeRef.new(shape: uuid, required: true, location_name: "ProfileId"))

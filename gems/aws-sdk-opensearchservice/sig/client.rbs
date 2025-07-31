@@ -362,6 +362,11 @@ module Aws
                                roles_key: ::String?,
                                public_key: ::String?
                              }?,
+                             iam_federation_options: {
+                               enabled: bool?,
+                               subject_key: ::String?,
+                               roles_key: ::String?
+                             }?,
                              anonymous_auth_enabled: bool?
                            },
                            ?identity_center_options: {
@@ -1314,6 +1319,11 @@ module Aws
                                       subject_key: ::String?,
                                       roles_key: ::String?,
                                       public_key: ::String?
+                                    }?,
+                                    iam_federation_options: {
+                                      enabled: bool?,
+                                      subject_key: ::String?,
+                                      roles_key: ::String?
                                     }?,
                                     anonymous_auth_enabled: bool?
                                   },

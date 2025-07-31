@@ -1274,6 +1274,11 @@ module Aws::OpenSearchService
     #         roles_key: "RolesKey",
     #         public_key: "String",
     #       },
+    #       iam_federation_options: {
+    #         enabled: false,
+    #         subject_key: "IAMFederationSubjectKey",
+    #         roles_key: "IAMFederationRolesKey",
+    #       },
     #       anonymous_auth_enabled: false,
     #     },
     #     identity_center_options: {
@@ -1408,6 +1413,9 @@ module Aws::OpenSearchService
     #   resp.domain_status.advanced_security_options.jwt_options.subject_key #=> String
     #   resp.domain_status.advanced_security_options.jwt_options.roles_key #=> String
     #   resp.domain_status.advanced_security_options.jwt_options.public_key #=> String
+    #   resp.domain_status.advanced_security_options.iam_federation_options.enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.iam_federation_options.subject_key #=> String
+    #   resp.domain_status.advanced_security_options.iam_federation_options.roles_key #=> String
     #   resp.domain_status.advanced_security_options.anonymous_auth_disable_date #=> Time
     #   resp.domain_status.advanced_security_options.anonymous_auth_enabled #=> Boolean
     #   resp.domain_status.identity_center_options.enabled_api_access #=> Boolean
@@ -1872,6 +1880,9 @@ module Aws::OpenSearchService
     #   resp.domain_status.advanced_security_options.jwt_options.subject_key #=> String
     #   resp.domain_status.advanced_security_options.jwt_options.roles_key #=> String
     #   resp.domain_status.advanced_security_options.jwt_options.public_key #=> String
+    #   resp.domain_status.advanced_security_options.iam_federation_options.enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.iam_federation_options.subject_key #=> String
+    #   resp.domain_status.advanced_security_options.iam_federation_options.roles_key #=> String
     #   resp.domain_status.advanced_security_options.anonymous_auth_disable_date #=> Time
     #   resp.domain_status.advanced_security_options.anonymous_auth_enabled #=> Boolean
     #   resp.domain_status.identity_center_options.enabled_api_access #=> Boolean
@@ -2194,6 +2205,9 @@ module Aws::OpenSearchService
     #   resp.domain_status.advanced_security_options.jwt_options.subject_key #=> String
     #   resp.domain_status.advanced_security_options.jwt_options.roles_key #=> String
     #   resp.domain_status.advanced_security_options.jwt_options.public_key #=> String
+    #   resp.domain_status.advanced_security_options.iam_federation_options.enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.iam_federation_options.subject_key #=> String
+    #   resp.domain_status.advanced_security_options.iam_federation_options.roles_key #=> String
     #   resp.domain_status.advanced_security_options.anonymous_auth_disable_date #=> Time
     #   resp.domain_status.advanced_security_options.anonymous_auth_enabled #=> Boolean
     #   resp.domain_status.identity_center_options.enabled_api_access #=> Boolean
@@ -2489,6 +2503,9 @@ module Aws::OpenSearchService
     #   resp.domain_config.advanced_security_options.options.jwt_options.subject_key #=> String
     #   resp.domain_config.advanced_security_options.options.jwt_options.roles_key #=> String
     #   resp.domain_config.advanced_security_options.options.jwt_options.public_key #=> String
+    #   resp.domain_config.advanced_security_options.options.iam_federation_options.enabled #=> Boolean
+    #   resp.domain_config.advanced_security_options.options.iam_federation_options.subject_key #=> String
+    #   resp.domain_config.advanced_security_options.options.iam_federation_options.roles_key #=> String
     #   resp.domain_config.advanced_security_options.options.anonymous_auth_disable_date #=> Time
     #   resp.domain_config.advanced_security_options.options.anonymous_auth_enabled #=> Boolean
     #   resp.domain_config.advanced_security_options.status.creation_date #=> Time
@@ -2765,6 +2782,9 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].advanced_security_options.jwt_options.subject_key #=> String
     #   resp.domain_status_list[0].advanced_security_options.jwt_options.roles_key #=> String
     #   resp.domain_status_list[0].advanced_security_options.jwt_options.public_key #=> String
+    #   resp.domain_status_list[0].advanced_security_options.iam_federation_options.enabled #=> Boolean
+    #   resp.domain_status_list[0].advanced_security_options.iam_federation_options.subject_key #=> String
+    #   resp.domain_status_list[0].advanced_security_options.iam_federation_options.roles_key #=> String
     #   resp.domain_status_list[0].advanced_security_options.anonymous_auth_disable_date #=> Time
     #   resp.domain_status_list[0].advanced_security_options.anonymous_auth_enabled #=> Boolean
     #   resp.domain_status_list[0].identity_center_options.enabled_api_access #=> Boolean
@@ -2929,6 +2949,9 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.advanced_security_options.jwt_options.subject_key #=> String
     #   resp.dry_run_config.advanced_security_options.jwt_options.roles_key #=> String
     #   resp.dry_run_config.advanced_security_options.jwt_options.public_key #=> String
+    #   resp.dry_run_config.advanced_security_options.iam_federation_options.enabled #=> Boolean
+    #   resp.dry_run_config.advanced_security_options.iam_federation_options.subject_key #=> String
+    #   resp.dry_run_config.advanced_security_options.iam_federation_options.roles_key #=> String
     #   resp.dry_run_config.advanced_security_options.anonymous_auth_disable_date #=> Time
     #   resp.dry_run_config.advanced_security_options.anonymous_auth_enabled #=> Boolean
     #   resp.dry_run_config.identity_center_options.enabled_api_access #=> Boolean
@@ -5207,6 +5230,11 @@ module Aws::OpenSearchService
     #         roles_key: "RolesKey",
     #         public_key: "String",
     #       },
+    #       iam_federation_options: {
+    #         enabled: false,
+    #         subject_key: "IAMFederationSubjectKey",
+    #         roles_key: "IAMFederationRolesKey",
+    #       },
     #       anonymous_auth_enabled: false,
     #     },
     #     identity_center_options: {
@@ -5383,6 +5411,9 @@ module Aws::OpenSearchService
     #   resp.domain_config.advanced_security_options.options.jwt_options.subject_key #=> String
     #   resp.domain_config.advanced_security_options.options.jwt_options.roles_key #=> String
     #   resp.domain_config.advanced_security_options.options.jwt_options.public_key #=> String
+    #   resp.domain_config.advanced_security_options.options.iam_federation_options.enabled #=> Boolean
+    #   resp.domain_config.advanced_security_options.options.iam_federation_options.subject_key #=> String
+    #   resp.domain_config.advanced_security_options.options.iam_federation_options.roles_key #=> String
     #   resp.domain_config.advanced_security_options.options.anonymous_auth_disable_date #=> Time
     #   resp.domain_config.advanced_security_options.options.anonymous_auth_enabled #=> Boolean
     #   resp.domain_config.advanced_security_options.status.creation_date #=> Time
@@ -5815,7 +5846,7 @@ module Aws::OpenSearchService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

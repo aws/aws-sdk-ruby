@@ -261,6 +261,14 @@ module Aws
                                           attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY"),
                                           match_purpose: ("IDENTIFIER_GENERATION" | "INDEXING")?
                                         }?,
+                                        rule_condition_properties: {
+                                          rules: Array[
+                                            {
+                                              rule_name: ::String,
+                                              condition: ::String
+                                            },
+                                          ]
+                                        }?,
                                         provider_properties: {
                                           provider_service_arn: ::String,
                                           provider_configuration: {
@@ -836,6 +844,14 @@ module Aws
                                           ],
                                           attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY"),
                                           match_purpose: ("IDENTIFIER_GENERATION" | "INDEXING")?
+                                        }?,
+                                        rule_condition_properties: {
+                                          rules: Array[
+                                            {
+                                              rule_name: ::String,
+                                              condition: ::String
+                                            },
+                                          ]
                                         }?,
                                         provider_properties: {
                                           provider_service_arn: ::String,

@@ -657,6 +657,30 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies configuration options for automatic data quality evaluation
+    # in Glue jobs. This structure enables automated data quality checks and
+    # monitoring during ETL operations, helping to ensure data integrity and
+    # reliability without manual intervention.
+    #
+    # @!attribute [rw] is_enabled
+    #   Specifies whether automatic data quality evaluation is enabled. When
+    #   set to `true`, data quality checks are performed automatically.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] evaluation_context
+    #   The evaluation context for the automatic data quality checks. This
+    #   defines the scope and parameters for the data quality evaluation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AutoDataQuality AWS API Documentation
+    #
+    class AutoDataQuality < Struct.new(
+      :is_enabled,
+      :evaluation_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of errors that can occur when registering partition indexes for
     # an existing table.
     #
@@ -2105,6 +2129,41 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies an Apache Iceberg data source that is registered in the Glue
+    # Data Catalog.
+    #
+    # @!attribute [rw] name
+    #   The name of the Iceberg data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_iceberg_options
+    #   Specifies additional connection options for the Iceberg data source.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the Iceberg source.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CatalogIcebergSource AWS API Documentation
+    #
+    class CatalogIcebergSource < Struct.new(
+      :name,
+      :database,
+      :table,
+      :additional_iceberg_options,
+      :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure containing migration status information.
     #
     # @!attribute [rw] import_completed
@@ -2362,12 +2421,23 @@ module Aws::Glue
     #   The name of the table in the database to read from.
     #   @return [String]
     #
+    # @!attribute [rw] partition_predicate
+    #   Partitions satisfying this predicate are deleted. Files within the
+    #   retention period in these partitions are not deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the catalog source.
+    #   @return [Array<Types::GlueSchema>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CatalogSource AWS API Documentation
     #
     class CatalogSource < Struct.new(
       :name,
       :database,
-      :table)
+      :table,
+      :partition_predicate,
+      :output_schemas)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2536,11 +2606,6 @@ module Aws::Glue
     #   Amazon S3.
     #   @return [Types::S3CsvSource]
     #
-    # @!attribute [rw] s3_excel_source
-    #   Defines configuration parameters for reading Excel files from Amazon
-    #   S3.
-    #   @return [Types::S3ExcelSource]
-    #
     # @!attribute [rw] s3_json_source
     #   Specifies a JSON data store stored in Amazon S3.
     #   @return [Types::S3JsonSource]
@@ -2584,19 +2649,9 @@ module Aws::Glue
     #   columnar storage.
     #   @return [Types::S3GlueParquetTarget]
     #
-    # @!attribute [rw] s3_hyper_direct_target
-    #   Defines configuration parameters for writing data to Amazon S3 using
-    #   HyperDirect optimization.
-    #   @return [Types::S3HyperDirectTarget]
-    #
     # @!attribute [rw] s3_direct_target
     #   Specifies a data target that writes to Amazon S3.
     #   @return [Types::S3DirectTarget]
-    #
-    # @!attribute [rw] s3_iceberg_direct_target
-    #   Defines configuration parameters for writing data to Amazon S3 as an
-    #   Apache Iceberg table.
-    #   @return [Types::S3IcebergDirectTarget]
     #
     # @!attribute [rw] apply_mapping
     #   Specifies a transform that maps data property keys in the data
@@ -2757,6 +2812,11 @@ module Aws::Glue
     #   Specifies a target that uses Postgres SQL.
     #   @return [Types::PostgreSQLCatalogTarget]
     #
+    # @!attribute [rw] route
+    #   Specifies a route node that directs data to different output paths
+    #   based on defined filtering conditions.
+    #   @return [Types::Route]
+    #
     # @!attribute [rw] dynamic_transform
     #   Specifies a custom visual transform created by a user.
     #   @return [Types::DynamicTransform]
@@ -2849,6 +2909,42 @@ module Aws::Glue
     #   Specifies a target generated with standard connection options.
     #   @return [Types::ConnectorDataTarget]
     #
+    # @!attribute [rw] s3_catalog_iceberg_source
+    #   Specifies an Apache Iceberg data source that is registered in the
+    #   Glue Data Catalog. The Iceberg data source must be stored in Amazon
+    #   S3.
+    #   @return [Types::S3CatalogIcebergSource]
+    #
+    # @!attribute [rw] catalog_iceberg_source
+    #   Specifies an Apache Iceberg data source that is registered in the
+    #   Glue Data Catalog.
+    #   @return [Types::CatalogIcebergSource]
+    #
+    # @!attribute [rw] s3_iceberg_catalog_target
+    #   Specifies an Apache Iceberg catalog target that writes data to
+    #   Amazon S3 and registers the table in the Glue Data Catalog.
+    #   @return [Types::S3IcebergCatalogTarget]
+    #
+    # @!attribute [rw] s3_iceberg_direct_target
+    #   Defines configuration parameters for writing data to Amazon S3 as an
+    #   Apache Iceberg table.
+    #   @return [Types::S3IcebergDirectTarget]
+    #
+    # @!attribute [rw] s3_excel_source
+    #   Defines configuration parameters for reading Excel files from Amazon
+    #   S3.
+    #   @return [Types::S3ExcelSource]
+    #
+    # @!attribute [rw] s3_hyper_direct_target
+    #   Defines configuration parameters for writing data to Amazon S3 using
+    #   HyperDirect optimization.
+    #   @return [Types::S3HyperDirectTarget]
+    #
+    # @!attribute [rw] dynamo_dbelt_connector_source
+    #   Specifies a DynamoDB ELT connector source for extracting data from
+    #   DynamoDB tables.
+    #   @return [Types::DynamoDBELTConnectorSource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CodeGenConfigurationNode AWS API Documentation
     #
     class CodeGenConfigurationNode < Struct.new(
@@ -2859,7 +2955,6 @@ module Aws::Glue
       :redshift_source,
       :s3_catalog_source,
       :s3_csv_source,
-      :s3_excel_source,
       :s3_json_source,
       :s3_parquet_source,
       :relational_catalog_source,
@@ -2870,9 +2965,7 @@ module Aws::Glue
       :redshift_target,
       :s3_catalog_target,
       :s3_glue_parquet_target,
-      :s3_hyper_direct_target,
       :s3_direct_target,
-      :s3_iceberg_direct_target,
       :apply_mapping,
       :select_fields,
       :drop_fields,
@@ -2905,6 +2998,7 @@ module Aws::Glue
       :my_sql_catalog_target,
       :oracle_sql_catalog_target,
       :postgre_sql_catalog_target,
+      :route,
       :dynamic_transform,
       :evaluate_data_quality,
       :s3_catalog_hudi_source,
@@ -2925,7 +3019,14 @@ module Aws::Glue
       :snowflake_source,
       :snowflake_target,
       :connector_data_source,
-      :connector_data_target)
+      :connector_data_target,
+      :s3_catalog_iceberg_source,
+      :catalog_iceberg_source,
+      :s3_iceberg_catalog_target,
+      :s3_iceberg_direct_target,
+      :s3_excel_source,
+      :s3_hyper_direct_target,
+      :dynamo_dbelt_connector_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6212,10 +6313,12 @@ module Aws::Glue
     #     contain your most demanding transforms, aggregations, joins, and
     #     queries. This worker type is available only for Glue version 3.0
     #     or later Spark ETL jobs in the following Amazon Web Services
-    #     Regions: US East (Ohio), US East (N. Virginia), US West (Oregon),
-    #     Asia Pacific (Singapore), Asia Pacific (Sydney), Asia Pacific
-    #     (Tokyo), Canada (Central), Europe (Frankfurt), Europe (Ireland),
-    #     and Europe (Stockholm).
+    #     Regions: US East (Ohio), US East (N. Virginia), US West (N.
+    #     California), US West (Oregon), Asia Pacific (Mumbai), Asia Pacific
+    #     (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney), Asia
+    #     Pacific (Tokyo), Canada (Central), Europe (Frankfurt), Europe
+    #     (Ireland), Europe (London), Europe (Spain), Europe (Stockholm),
+    #     and South America (São Paulo).
     #
     #   * For the `G.8X` worker type, each worker maps to 8 DPU (32 vCPUs,
     #     128 GB of memory) with 512GB disk, and provides 1 executor per
@@ -7509,6 +7612,92 @@ module Aws::Glue
       :name,
       :regex_string,
       :context_words)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies additional options for DynamoDB ELT catalog operations.
+    #
+    # @!attribute [rw] dynamodb_export
+    #   Specifies the DynamoDB export configuration for the ELT operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] dynamodb_unnest_ddb_json
+    #   Specifies whether to unnest DynamoDB JSON format. When set to
+    #   `true`, nested JSON structures in DynamoDB items are flattened.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DDBELTCatalogAdditionalOptions AWS API Documentation
+    #
+    class DDBELTCatalogAdditionalOptions < Struct.new(
+      :dynamodb_export,
+      :dynamodb_unnest_ddb_json)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies connection options for DynamoDB ELT (Extract, Load,
+    # Transform) operations. This structure contains configuration
+    # parameters for connecting to and extracting data from DynamoDB tables
+    # using the ELT connector.
+    #
+    # @!attribute [rw] dynamodb_export
+    #   Specifies the export type for DynamoDB data extraction. This
+    #   parameter determines how data is exported from the DynamoDB table
+    #   during the ELT process.
+    #   @return [String]
+    #
+    # @!attribute [rw] dynamodb_unnest_ddb_json
+    #   A boolean value that specifies whether to unnest DynamoDB JSON
+    #   format during data extraction. When set to `true`, the connector
+    #   will flatten nested JSON structures from DynamoDB items. When set to
+    #   `false`, the original DynamoDB JSON structure is preserved.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dynamodb_table_arn
+    #   The Amazon Resource Name (ARN) of the DynamoDB table to extract data
+    #   from. This parameter specifies the source table for the ELT
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] dynamodb_s3_bucket
+    #   The name of the Amazon S3 bucket used for intermediate storage
+    #   during the DynamoDB ELT process. This bucket is used to temporarily
+    #   store exported DynamoDB data before it is processed by the ELT job.
+    #   @return [String]
+    #
+    # @!attribute [rw] dynamodb_s3_prefix
+    #   The S3 object key prefix for files stored in the intermediate S3
+    #   bucket during the DynamoDB ELT process. This prefix helps organize
+    #   and identify the temporary files created during data extraction.
+    #   @return [String]
+    #
+    # @!attribute [rw] dynamodb_s3_bucket_owner
+    #   The Amazon Web Services account ID of the owner of the S3 bucket
+    #   specified in `DynamodbS3Bucket`. This parameter is required when the
+    #   S3 bucket is owned by a different Amazon Web Services account than
+    #   the one running the ELT job, enabling cross-account access to the
+    #   intermediate storage bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] dynamodb_sts_role_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Security
+    #   Token Service (STS) role to assume for accessing DynamoDB and S3
+    #   resources during the ELT operation. This role must have the
+    #   necessary permissions to read from the DynamoDB table and write to
+    #   the intermediate S3 bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DDBELTConnectionOptions AWS API Documentation
+    #
+    class DDBELTConnectionOptions < Struct.new(
+      :dynamodb_export,
+      :dynamodb_unnest_ddb_json,
+      :dynamodb_table_arn,
+      :dynamodb_s3_bucket,
+      :dynamodb_s3_prefix,
+      :dynamodb_s3_bucket_owner,
+      :dynamodb_sts_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9982,6 +10171,10 @@ module Aws::Glue
     #   The temp directory of the JDBC Redshift source.
     #   @return [String]
     #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the direct JDBC source.
+    #   @return [Array<Types::GlueSchema>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DirectJDBCSource AWS API Documentation
     #
     class DirectJDBCSource < Struct.new(
@@ -9990,7 +10183,8 @@ module Aws::Glue
       :table,
       :connection_name,
       :connection_type,
-      :redshift_tmp_dir)
+      :redshift_tmp_dir,
+      :output_schemas)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10282,12 +10476,50 @@ module Aws::Glue
     #   The name of the table in the database to read from.
     #   @return [String]
     #
+    # @!attribute [rw] pitr_enabled
+    #   Specifies whether Point-in-Time Recovery (PITR) is enabled for the
+    #   DynamoDB table. When set to `true`, allows reading from a specific
+    #   point in time. The default value is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] additional_options
+    #   Specifies additional connection options for the DynamoDB data
+    #   source.
+    #   @return [Types::DDBELTCatalogAdditionalOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DynamoDBCatalogSource AWS API Documentation
     #
     class DynamoDBCatalogSource < Struct.new(
       :name,
       :database,
-      :table)
+      :table,
+      :pitr_enabled,
+      :additional_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a DynamoDB ELT connector source for extracting data from
+    # DynamoDB tables.
+    #
+    # @!attribute [rw] name
+    #   The name of the DynamoDB ELT connector source.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_options
+    #   The connection options for the DynamoDB ELT connector source.
+    #   @return [Types::DDBELTConnectionOptions]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the DynamoDB ELT connector source.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DynamoDBELTConnectorSource AWS API Documentation
+    #
+    class DynamoDBELTConnectorSource < Struct.new(
+      :name,
+      :connection_options,
+      :output_schemas)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15306,11 +15538,16 @@ module Aws::Glue
     #   The hive type for this column in the Glue Studio schema.
     #   @return [String]
     #
+    # @!attribute [rw] glue_studio_type
+    #   The data type of the column as defined in Glue Studio.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GlueStudioSchemaColumn AWS API Documentation
     #
     class GlueStudioSchemaColumn < Struct.new(
       :name,
-      :type)
+      :type,
+      :glue_studio_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15485,6 +15722,34 @@ module Aws::Glue
       :version,
       :grok_pattern,
       :custom_patterns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a group of filters with a logical operator that determines
+    # how the filters are combined to evaluate routing conditions.
+    #
+    # @!attribute [rw] group_name
+    #   The name of the filter group.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A list of filter expressions that define the conditions for this
+    #   group.
+    #   @return [Array<Types::FilterExpression>]
+    #
+    # @!attribute [rw] logical_operator
+    #   The logical operator used to combine the filters in this group.
+    #   Determines whether all filters must match (AND) or any filter can
+    #   match (OR).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GroupFilters AWS API Documentation
+    #
+    class GroupFilters < Struct.new(
+      :group_name,
+      :filters,
+      :logical_operator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16904,49 +17169,33 @@ module Aws::Glue
     #
     # @!attribute [rw] worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of G.1X, G.2X, G.4X, G.8X or G.025X for Spark jobs.
-    #   Accepts the value Z.2X for Ray jobs.
     #
-    #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPUs, 16
-    #     GB of memory) with 94GB disk, and provides 1 executor per worker.
-    #     We recommend this worker type for workloads such as data
-    #     transforms, joins, and queries, to offers a scalable and cost
-    #     effective way to run most jobs.
+    #   Glue provides multiple worker types to accommodate different
+    #   workload requirements:
     #
-    #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPUs, 32
-    #     GB of memory) with 138GB disk, and provides 1 executor per worker.
-    #     We recommend this worker type for workloads such as data
-    #     transforms, joins, and queries, to offers a scalable and cost
-    #     effective way to run most jobs.
+    #   G Worker Types (General-purpose compute workers):
     #
-    #   * For the `G.4X` worker type, each worker maps to 4 DPU (16 vCPUs,
-    #     64 GB of memory) with 256GB disk, and provides 1 executor per
-    #     worker. We recommend this worker type for jobs whose workloads
-    #     contain your most demanding transforms, aggregations, joins, and
-    #     queries. This worker type is available only for Glue version 3.0
-    #     or later Spark ETL jobs in the following Amazon Web Services
-    #     Regions: US East (Ohio), US East (N. Virginia), US West (Oregon),
-    #     Asia Pacific (Singapore), Asia Pacific (Sydney), Asia Pacific
-    #     (Tokyo), Canada (Central), Europe (Frankfurt), Europe (Ireland),
-    #     and Europe (Stockholm).
+    #   * G.1X: 1 DPU (4 vCPUs, 16 GB memory, 94GB disk)
     #
-    #   * For the `G.8X` worker type, each worker maps to 8 DPU (32 vCPUs,
-    #     128 GB of memory) with 512GB disk, and provides 1 executor per
-    #     worker. We recommend this worker type for jobs whose workloads
-    #     contain your most demanding transforms, aggregations, joins, and
-    #     queries. This worker type is available only for Glue version 3.0
-    #     or later Spark ETL jobs, in the same Amazon Web Services Regions
-    #     as supported for the `G.4X` worker type.
+    #   * G.2X: 2 DPU (8 vCPUs, 32 GB memory, 138GB disk)
     #
-    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2
-    #     vCPUs, 4 GB of memory) with 84GB disk, and provides 1 executor per
-    #     worker. We recommend this worker type for low volume streaming
-    #     jobs. This worker type is only available for Glue version 3.0 or
-    #     later streaming jobs.
+    #   * G.4X: 4 DPU (16 vCPUs, 64 GB memory, 256GB disk)
     #
-    #   * For the `Z.2X` worker type, each worker maps to 2 M-DPU (8vCPUs,
-    #     64 GB of memory) with 128 GB disk, and provides up to 8 Ray
-    #     workers based on the autoscaler.
+    #   * G.8X: 8 DPU (32 vCPUs, 128 GB memory, 512GB disk)
+    #
+    #   * G.12X: 12 DPU (48 vCPUs, 192 GB memory, 768GB disk)
+    #
+    #   * G.16X: 16 DPU (64 vCPUs, 256 GB memory, 1024GB disk)
+    #
+    #   R Worker Types (Memory-optimized workers):
+    #
+    #   * R.1X: 1 M-DPU (4 vCPUs, 32 GB memory)
+    #
+    #   * R.2X: 2 M-DPU (8 vCPUs, 64 GB memory)
+    #
+    #   * R.4X: 4 M-DPU (16 vCPUs, 128 GB memory)
+    #
+    #   * R.8X: 8 M-DPU (32 vCPUs, 256 GB memory)
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
@@ -18228,6 +18477,12 @@ module Aws::Glue
     #   "2023-04-04T08:00:00+08:00").
     #   @return [Time]
     #
+    # @!attribute [rw] fanout_consumer_arn
+    #   The Amazon Resource Name (ARN) of the Kinesis Data Streams enhanced
+    #   fan-out consumer. When specified, enables enhanced fan-out for
+    #   dedicated throughput and lower latency data consumption.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/KinesisStreamingSourceOptions AWS API Documentation
     #
     class KinesisStreamingSourceOptions < Struct.new(
@@ -18251,7 +18506,8 @@ module Aws::Glue
       :role_session_name,
       :add_record_timestamp,
       :emit_consumer_lag_metrics,
-      :starting_timestamp)
+      :starting_timestamp,
+      :fanout_consumer_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20711,6 +20967,43 @@ module Aws::Glue
     #   Indicates the value that will replace the detected entity.
     #   @return [String]
     #
+    # @!attribute [rw] redact_text
+    #   Specifies whether to redact the detected PII text. When set to
+    #   `true`, PII content is replaced with redaction characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] redact_char
+    #   The character used to replace detected PII content when redaction is
+    #   enabled. The default redaction character is `*`.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_pattern
+    #   A regular expression pattern used to identify additional PII content
+    #   beyond the standard detection algorithms.
+    #   @return [String]
+    #
+    # @!attribute [rw] num_left_chars_to_exclude
+    #   The number of characters to exclude from redaction on the left side
+    #   of detected PII content. This allows preserving context around the
+    #   sensitive data.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] num_right_chars_to_exclude
+    #   The number of characters to exclude from redaction on the right side
+    #   of detected PII content. This allows preserving context around the
+    #   sensitive data.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] detection_parameters
+    #   Additional parameters for configuring PII detection behavior and
+    #   sensitivity settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] detection_sensitivity
+    #   The sensitivity level for PII detection. Higher sensitivity levels
+    #   detect more potential PII but may result in more false positives.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PIIDetection AWS API Documentation
     #
     class PIIDetection < Struct.new(
@@ -20721,7 +21014,14 @@ module Aws::Glue
       :output_column_name,
       :sample_fraction,
       :threshold_fraction,
-      :mask_value)
+      :mask_value,
+      :redact_text,
+      :redact_char,
+      :match_pattern,
+      :num_left_chars_to_exclude,
+      :num_right_chars_to_exclude,
+      :detection_parameters,
+      :detection_sensitivity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22070,6 +22370,32 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies a route node that directs data to different output paths
+    # based on defined filtering conditions.
+    #
+    # @!attribute [rw] name
+    #   The name of the route node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The input connection for the route node.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] group_filters_list
+    #   A list of group filters that define the routing conditions and
+    #   criteria for directing data to different output paths.
+    #   @return [Array<Types::GroupFilters>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Route AWS API Documentation
+    #
+    class Route < Struct.new(
+      :name,
+      :inputs,
+      :group_filters_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A run identifier.
     #
     # @!attribute [rw] run_id
@@ -22226,6 +22552,41 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies an Apache Iceberg data source that is registered in the Glue
+    # Data Catalog. The Iceberg data source must be stored in Amazon S3.
+    #
+    # @!attribute [rw] name
+    #   The name of the Iceberg data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_iceberg_options
+    #   Specifies additional connection options for the Iceberg data source.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the Iceberg source.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3CatalogIcebergSource AWS API Documentation
+    #
+    class S3CatalogIcebergSource < Struct.new(
+      :name,
+      :database,
+      :table,
+      :additional_iceberg_options,
+      :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies an Amazon S3 data store in the Glue Data Catalog.
     #
     # @!attribute [rw] name
@@ -22289,6 +22650,12 @@ module Aws::Glue
     #   A policy that specifies update behavior for the crawler.
     #   @return [Types::CatalogSchemaChangePolicy]
     #
+    # @!attribute [rw] auto_data_quality
+    #   Specifies whether to automatically enable data quality evaluation
+    #   for the S3 catalog target. When set to `true`, data quality checks
+    #   are performed automatically during the write operation.
+    #   @return [Types::AutoDataQuality]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3CatalogTarget AWS API Documentation
     #
     class S3CatalogTarget < Struct.new(
@@ -22297,7 +22664,8 @@ module Aws::Glue
       :partition_keys,
       :table,
       :database,
-      :schema_change_policy)
+      :schema_change_policy,
+      :auto_data_quality)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22470,6 +22838,16 @@ module Aws::Glue
     #   A policy that specifies update behavior for the crawler.
     #   @return [Types::CatalogSchemaChangePolicy]
     #
+    # @!attribute [rw] auto_data_quality
+    #   Specifies whether to automatically enable data quality evaluation
+    #   for the S3 Delta catalog target. When set to `true`, data quality
+    #   checks are performed automatically during the write operation.
+    #   @return [Types::AutoDataQuality]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the S3 Delta catalog target.
+    #   @return [Array<Types::GlueSchema>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3DeltaCatalogTarget AWS API Documentation
     #
     class S3DeltaCatalogTarget < Struct.new(
@@ -22479,7 +22857,9 @@ module Aws::Glue
       :table,
       :database,
       :additional_options,
-      :schema_change_policy)
+      :schema_change_policy,
+      :auto_data_quality,
+      :output_schemas)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22526,6 +22906,12 @@ module Aws::Glue
     #   A policy that specifies update behavior for the crawler.
     #   @return [Types::DirectSchemaChangePolicy]
     #
+    # @!attribute [rw] auto_data_quality
+    #   Specifies whether to automatically enable data quality evaluation
+    #   for the S3 Delta direct target. When set to `true`, data quality
+    #   checks are performed automatically during the write operation.
+    #   @return [Types::AutoDataQuality]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3DeltaDirectTarget AWS API Documentation
     #
     class S3DeltaDirectTarget < Struct.new(
@@ -22537,7 +22923,8 @@ module Aws::Glue
       :number_target_partitions,
       :format,
       :additional_options,
-      :schema_change_policy)
+      :schema_change_policy,
+      :auto_data_quality)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22644,6 +23031,16 @@ module Aws::Glue
     #   A policy that specifies update behavior for the crawler.
     #   @return [Types::DirectSchemaChangePolicy]
     #
+    # @!attribute [rw] auto_data_quality
+    #   Specifies whether to automatically enable data quality evaluation
+    #   for the S3 direct target. When set to `true`, data quality checks
+    #   are performed automatically during the write operation.
+    #   @return [Types::AutoDataQuality]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the S3 direct target.
+    #   @return [Array<Types::GlueSchema>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3DirectTarget AWS API Documentation
     #
     class S3DirectTarget < Struct.new(
@@ -22654,7 +23051,9 @@ module Aws::Glue
       :compression,
       :number_target_partitions,
       :format,
-      :schema_change_policy)
+      :schema_change_policy,
+      :auto_data_quality,
+      :output_schemas)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22731,7 +23130,7 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] output_schemas
-    #   The AWS Glue schemas to apply to the processed data.
+    #   The Glue schemas to apply to the processed data.
     #   @return [Array<Types::GlueSchema>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3ExcelSource AWS API Documentation
@@ -22781,12 +23180,18 @@ module Aws::Glue
     #
     # @!attribute [rw] number_target_partitions
     #   Specifies the number of target partitions for Parquet files when
-    #   writing to Amazon S3 using AWS Glue.
+    #   writing to Amazon S3 using Glue.
     #   @return [String]
     #
     # @!attribute [rw] schema_change_policy
     #   A policy that specifies update behavior for the crawler.
     #   @return [Types::DirectSchemaChangePolicy]
+    #
+    # @!attribute [rw] auto_data_quality
+    #   Specifies whether to automatically enable data quality evaluation
+    #   for the S3 Glue Parquet target. When set to `true`, data quality
+    #   checks are performed automatically during the write operation.
+    #   @return [Types::AutoDataQuality]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3GlueParquetTarget AWS API Documentation
     #
@@ -22797,7 +23202,8 @@ module Aws::Glue
       :path,
       :compression,
       :number_target_partitions,
-      :schema_change_policy)
+      :schema_change_policy,
+      :auto_data_quality)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22833,6 +23239,16 @@ module Aws::Glue
     #   A policy that specifies update behavior for the crawler.
     #   @return [Types::CatalogSchemaChangePolicy]
     #
+    # @!attribute [rw] auto_data_quality
+    #   Specifies whether to automatically enable data quality evaluation
+    #   for the S3 Hudi catalog target. When set to `true`, data quality
+    #   checks are performed automatically during the write operation.
+    #   @return [Types::AutoDataQuality]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the S3 Hudi catalog target.
+    #   @return [Array<Types::GlueSchema>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3HudiCatalogTarget AWS API Documentation
     #
     class S3HudiCatalogTarget < Struct.new(
@@ -22842,7 +23258,9 @@ module Aws::Glue
       :table,
       :database,
       :additional_options,
-      :schema_change_policy)
+      :schema_change_policy,
+      :auto_data_quality,
+      :output_schemas)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22888,6 +23306,12 @@ module Aws::Glue
     #   A policy that specifies update behavior for the crawler.
     #   @return [Types::DirectSchemaChangePolicy]
     #
+    # @!attribute [rw] auto_data_quality
+    #   Specifies whether to automatically enable data quality evaluation
+    #   for the S3 Hudi direct target. When set to `true`, data quality
+    #   checks are performed automatically during the write operation.
+    #   @return [Types::AutoDataQuality]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3HudiDirectTarget AWS API Documentation
     #
     class S3HudiDirectTarget < Struct.new(
@@ -22899,7 +23323,8 @@ module Aws::Glue
       :partition_keys,
       :format,
       :additional_options,
-      :schema_change_policy)
+      :schema_change_policy,
+      :auto_data_quality)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22948,6 +23373,10 @@ module Aws::Glue
     #   Specifies the input source for the HyperDirect target.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] format
+    #   Specifies the data output format for the HyperDirect target.
+    #   @return [String]
+    #
     # @!attribute [rw] partition_keys
     #   Defines the partitioning strategy for the output data.
     #   @return [Array<Array<String>>]
@@ -22964,15 +23393,81 @@ module Aws::Glue
     #   Defines how schema changes are handled during write operations.
     #   @return [Types::DirectSchemaChangePolicy]
     #
+    # @!attribute [rw] auto_data_quality
+    #   Specifies whether to automatically enable data quality evaluation
+    #   for the S3 Hyper direct target. When set to `true`, data quality
+    #   checks are performed automatically during the write operation.
+    #   @return [Types::AutoDataQuality]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the S3 Hyper direct target.
+    #   @return [Array<Types::GlueSchema>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3HyperDirectTarget AWS API Documentation
     #
     class S3HyperDirectTarget < Struct.new(
       :name,
       :inputs,
+      :format,
       :partition_keys,
       :path,
       :compression,
-      :schema_change_policy)
+      :schema_change_policy,
+      :auto_data_quality,
+      :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies an Apache Iceberg catalog target that writes data to Amazon
+    # S3 and registers the table in the Glue Data Catalog.
+    #
+    # @!attribute [rw] name
+    #   The name of the Iceberg catalog target.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The input connection for the Iceberg catalog target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] partition_keys
+    #   A list of partition keys for the Iceberg table.
+    #   @return [Array<Array<String>>]
+    #
+    # @!attribute [rw] table
+    #   The name of the table to write to in the catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_options
+    #   Specifies additional connection options for the Iceberg catalog
+    #   target.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] schema_change_policy
+    #   The policy for handling schema changes in the catalog target.
+    #   @return [Types::CatalogSchemaChangePolicy]
+    #
+    # @!attribute [rw] auto_data_quality
+    #   Specifies whether to automatically enable data quality evaluation
+    #   for the S3 Iceberg catalog target. When set to `true`, data quality
+    #   checks are performed automatically during the write operation.
+    #   @return [Types::AutoDataQuality]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3IcebergCatalogTarget AWS API Documentation
+    #
+    class S3IcebergCatalogTarget < Struct.new(
+      :name,
+      :inputs,
+      :partition_keys,
+      :table,
+      :database,
+      :additional_options,
+      :schema_change_policy,
+      :auto_data_quality)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23013,6 +23508,13 @@ module Aws::Glue
     #   Iceberg table.
     #   @return [Types::DirectSchemaChangePolicy]
     #
+    # @!attribute [rw] auto_data_quality
+    #   Specifies configuration options for automatic data quality
+    #   evaluation in Glue jobs. This structure enables automated data
+    #   quality checks and monitoring during ETL operations, helping to
+    #   ensure data integrity and reliability without manual intervention.
+    #   @return [Types::AutoDataQuality]
+    #
     # @!attribute [rw] compression
     #   Specifies the compression codec used for Iceberg table files in S3.
     #   @return [String]
@@ -23021,6 +23523,10 @@ module Aws::Glue
     #   Sets the number of target partitions for distributing Iceberg table
     #   files across S3.
     #   @return [String]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the S3 Iceberg direct target.
+    #   @return [Array<Types::GlueSchema>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3IcebergDirectTarget AWS API Documentation
     #
@@ -23032,8 +23538,10 @@ module Aws::Glue
       :format,
       :additional_options,
       :schema_change_policy,
+      :auto_data_quality,
       :compression,
-      :number_target_partitions)
+      :number_target_partitions,
+      :output_schemas)
       SENSITIVE = []
       include Aws::Structure
     end

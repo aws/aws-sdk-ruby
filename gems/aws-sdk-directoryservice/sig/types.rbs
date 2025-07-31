@@ -8,6 +8,12 @@
 module Aws::DirectoryService
   module Types
 
+    class ADAssessmentLimitExceededException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
     class AcceptSharedDirectoryRequest
       attr_accessor shared_directory_id: ::String
       SENSITIVE: []
@@ -51,6 +57,63 @@ module Aws::DirectoryService
     end
 
     class AddTagsToResourceResult < Aws::EmptyStructure
+    end
+
+    class Assessment
+      attr_accessor assessment_id: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor dns_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor last_update_date_time: ::Time
+      attr_accessor status: ::String
+      attr_accessor status_code: ::String
+      attr_accessor status_reason: ::String
+      attr_accessor customer_dns_ips: ::Array[::String]
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor self_managed_instance_ids: ::Array[::String]
+      attr_accessor report_type: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class AssessmentConfiguration
+      attr_accessor customer_dns_ips: ::Array[::String]
+      attr_accessor dns_name: ::String
+      attr_accessor vpc_settings: Types::DirectoryVpcSettings
+      attr_accessor instance_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssessmentReport
+      attr_accessor domain_controller_ip: ::String
+      attr_accessor validations: ::Array[Types::AssessmentValidation]
+      SENSITIVE: []
+    end
+
+    class AssessmentSummary
+      attr_accessor assessment_id: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor dns_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor last_update_date_time: ::Time
+      attr_accessor status: ::String
+      attr_accessor customer_dns_ips: ::Array[::String]
+      attr_accessor report_type: ::String
+      SENSITIVE: []
+    end
+
+    class AssessmentValidation
+      attr_accessor category: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ::String
+      attr_accessor status_code: ::String
+      attr_accessor status_reason: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor last_update_date_time: ::Time
+      SENSITIVE: []
     end
 
     class Attribute
@@ -219,6 +282,18 @@ module Aws::DirectoryService
       SENSITIVE: []
     end
 
+    class CreateHybridADRequest
+      attr_accessor secret_arn: ::String
+      attr_accessor assessment_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateHybridADResult
+      attr_accessor directory_id: ::String
+      SENSITIVE: []
+    end
+
     class CreateLogSubscriptionRequest
       attr_accessor directory_id: ::String
       attr_accessor log_group_name: ::String
@@ -268,6 +343,16 @@ module Aws::DirectoryService
 
     class CreateTrustResult
       attr_accessor trust_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteADAssessmentRequest
+      attr_accessor assessment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteADAssessmentResult
+      attr_accessor assessment_id: ::String
       SENSITIVE: []
     end
 
@@ -335,6 +420,17 @@ module Aws::DirectoryService
     end
 
     class DeregisterEventTopicResult < Aws::EmptyStructure
+    end
+
+    class DescribeADAssessmentRequest
+      attr_accessor assessment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeADAssessmentResult
+      attr_accessor assessment: Types::Assessment
+      attr_accessor assessment_reports: ::Array[Types::AssessmentReport]
+      SENSITIVE: []
     end
 
     class DescribeCertificateRequest
@@ -418,6 +514,19 @@ module Aws::DirectoryService
 
     class DescribeEventTopicsResult
       attr_accessor event_topics: ::Array[Types::EventTopic]
+      SENSITIVE: []
+    end
+
+    class DescribeHybridADUpdateRequest
+      attr_accessor directory_id: ::String
+      attr_accessor update_type: ("SelfManagedInstances" | "HybridAdministratorAccount")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeHybridADUpdateResult
+      attr_accessor update_activities: Types::HybridUpdateActivities
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -575,6 +684,7 @@ module Aws::DirectoryService
       attr_accessor owner_directory_description: Types::OwnerDirectoryDescription
       attr_accessor regions_info: Types::RegionsInfo
       attr_accessor os_version: ("SERVER_2012" | "SERVER_2019")
+      attr_accessor hybrid_settings: Types::HybridSettingsDescription
       SENSITIVE: [:share_notes]
     end
 
@@ -783,6 +893,47 @@ module Aws::DirectoryService
       SENSITIVE: []
     end
 
+    class HybridAdministratorAccountUpdate
+      attr_accessor secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class HybridCustomerInstancesSettings
+      attr_accessor customer_dns_ips: ::Array[::String]
+      attr_accessor instance_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class HybridSettingsDescription
+      attr_accessor self_managed_dns_ip_addrs: ::Array[::String]
+      attr_accessor self_managed_instance_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class HybridUpdateActivities
+      attr_accessor self_managed_instances: ::Array[Types::HybridUpdateInfoEntry]
+      attr_accessor hybrid_administrator_account: ::Array[Types::HybridUpdateInfoEntry]
+      SENSITIVE: []
+    end
+
+    class HybridUpdateInfoEntry
+      attr_accessor status: ("Updated" | "Updating" | "UpdateFailed")
+      attr_accessor status_reason: ::String
+      attr_accessor initiated_by: ::String
+      attr_accessor new_value: Types::HybridUpdateValue
+      attr_accessor previous_value: Types::HybridUpdateValue
+      attr_accessor start_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor assessment_id: ::String
+      SENSITIVE: []
+    end
+
+    class HybridUpdateValue
+      attr_accessor instance_ids: ::Array[::String]
+      attr_accessor dns_ips: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class IncompatibleSettingsException
       attr_accessor message: ::String
       attr_accessor request_id: ::String
@@ -863,6 +1014,19 @@ module Aws::DirectoryService
       attr_accessor ldaps_status: ("Enabling" | "Enabled" | "EnableFailed" | "Disabled")
       attr_accessor ldaps_status_reason: ::String
       attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ListADAssessmentsRequest
+      attr_accessor directory_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListADAssessmentsResult
+      attr_accessor assessments: ::Array[Types::AssessmentSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1177,6 +1341,17 @@ module Aws::DirectoryService
       SENSITIVE: []
     end
 
+    class StartADAssessmentRequest
+      attr_accessor assessment_configuration: Types::AssessmentConfiguration
+      attr_accessor directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartADAssessmentResult
+      attr_accessor assessment_id: ::String
+      SENSITIVE: []
+    end
+
     class StartSchemaExtensionRequest
       attr_accessor directory_id: ::String
       attr_accessor create_snapshot_before_schema_extension: bool
@@ -1265,6 +1440,19 @@ module Aws::DirectoryService
     end
 
     class UpdateDirectorySetupResult < Aws::EmptyStructure
+    end
+
+    class UpdateHybridADRequest
+      attr_accessor directory_id: ::String
+      attr_accessor hybrid_administrator_account_update: Types::HybridAdministratorAccountUpdate
+      attr_accessor self_managed_instances_settings: Types::HybridCustomerInstancesSettings
+      SENSITIVE: []
+    end
+
+    class UpdateHybridADResult
+      attr_accessor directory_id: ::String
+      attr_accessor assessment_id: ::String
+      SENSITIVE: []
     end
 
     class UpdateInfoEntry

@@ -700,6 +700,7 @@ module Aws::S3Control
     CreateAccessPointRequest.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, location_name: "PublicAccessBlockConfiguration"))
     CreateAccessPointRequest.add_member(:bucket_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "BucketAccountId"))
     CreateAccessPointRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "Scope"))
+    CreateAccessPointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateAccessPointRequest.struct_class = Types::CreateAccessPointRequest
 
     CreateAccessPointResult.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: S3AccessPointArn, location_name: "AccessPointArn"))

@@ -80,51 +80,63 @@ module Aws
 
       interface _AssociateBrowserSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateBrowserSettingsResponse]
-        def browser_settings_arn: () -> ::String
         def portal_arn: () -> ::String
+        def browser_settings_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#associate_browser_settings-instance_method
       def associate_browser_settings: (
-                                        browser_settings_arn: ::String,
-                                        portal_arn: ::String
+                                        portal_arn: ::String,
+                                        browser_settings_arn: ::String
                                       ) -> _AssociateBrowserSettingsResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateBrowserSettingsResponseSuccess
 
       interface _AssociateDataProtectionSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateDataProtectionSettingsResponse]
-        def data_protection_settings_arn: () -> ::String
         def portal_arn: () -> ::String
+        def data_protection_settings_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#associate_data_protection_settings-instance_method
       def associate_data_protection_settings: (
-                                                data_protection_settings_arn: ::String,
-                                                portal_arn: ::String
+                                                portal_arn: ::String,
+                                                data_protection_settings_arn: ::String
                                               ) -> _AssociateDataProtectionSettingsResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateDataProtectionSettingsResponseSuccess
 
       interface _AssociateIpAccessSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateIpAccessSettingsResponse]
-        def ip_access_settings_arn: () -> ::String
         def portal_arn: () -> ::String
+        def ip_access_settings_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#associate_ip_access_settings-instance_method
       def associate_ip_access_settings: (
-                                          ip_access_settings_arn: ::String,
-                                          portal_arn: ::String
+                                          portal_arn: ::String,
+                                          ip_access_settings_arn: ::String
                                         ) -> _AssociateIpAccessSettingsResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateIpAccessSettingsResponseSuccess
 
       interface _AssociateNetworkSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateNetworkSettingsResponse]
-        def network_settings_arn: () -> ::String
         def portal_arn: () -> ::String
+        def network_settings_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#associate_network_settings-instance_method
       def associate_network_settings: (
-                                        network_settings_arn: ::String,
-                                        portal_arn: ::String
+                                        portal_arn: ::String,
+                                        network_settings_arn: ::String
                                       ) -> _AssociateNetworkSettingsResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateNetworkSettingsResponseSuccess
+
+      interface _AssociateSessionLoggerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateSessionLoggerResponse]
+        def portal_arn: () -> ::String
+        def session_logger_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#associate_session_logger-instance_method
+      def associate_session_logger: (
+                                      portal_arn: ::String,
+                                      session_logger_arn: ::String
+                                    ) -> _AssociateSessionLoggerResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSessionLoggerResponseSuccess
 
       interface _AssociateTrustStoreResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateTrustStoreResponse]
@@ -168,16 +180,16 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#create_browser_settings-instance_method
       def create_browser_settings: (
-                                     ?additional_encryption_context: Hash[::String, ::String],
-                                     browser_policy: ::String,
-                                     ?client_token: ::String,
-                                     ?customer_managed_key: ::String,
                                      ?tags: Array[
                                        {
                                          key: ::String,
                                          value: ::String
                                        },
-                                     ]
+                                     ],
+                                     ?customer_managed_key: ::String,
+                                     ?additional_encryption_context: Hash[::String, ::String],
+                                     browser_policy: ::String,
+                                     ?client_token: ::String
                                    ) -> _CreateBrowserSettingsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBrowserSettingsResponseSuccess
 
@@ -187,40 +199,40 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#create_data_protection_settings-instance_method
       def create_data_protection_settings: (
-                                             ?additional_encryption_context: Hash[::String, ::String],
-                                             ?client_token: ::String,
-                                             ?customer_managed_key: ::String,
-                                             ?description: ::String,
                                              ?display_name: ::String,
-                                             ?inline_redaction_configuration: {
-                                               global_confidence_level: ::Integer?,
-                                               global_enforced_urls: Array[::String]?,
-                                               global_exempt_urls: Array[::String]?,
-                                               inline_redaction_patterns: Array[
-                                                 {
-                                                   built_in_pattern_id: ::String?,
-                                                   confidence_level: ::Integer?,
-                                                   custom_pattern: {
-                                                     keyword_regex: ::String?,
-                                                     pattern_description: ::String?,
-                                                     pattern_name: ::String,
-                                                     pattern_regex: ::String
-                                                   }?,
-                                                   enforced_urls: Array[::String]?,
-                                                   exempt_urls: Array[::String]?,
-                                                   redaction_place_holder: {
-                                                     redaction_place_holder_text: ::String?,
-                                                     redaction_place_holder_type: ("CustomText")
-                                                   }
-                                                 },
-                                               ]
-                                             },
+                                             ?description: ::String,
                                              ?tags: Array[
                                                {
                                                  key: ::String,
                                                  value: ::String
                                                },
-                                             ]
+                                             ],
+                                             ?customer_managed_key: ::String,
+                                             ?additional_encryption_context: Hash[::String, ::String],
+                                             ?inline_redaction_configuration: {
+                                               inline_redaction_patterns: Array[
+                                                 {
+                                                   built_in_pattern_id: ::String?,
+                                                   custom_pattern: {
+                                                     pattern_name: ::String,
+                                                     pattern_regex: ::String,
+                                                     pattern_description: ::String?,
+                                                     keyword_regex: ::String?
+                                                   }?,
+                                                   redaction_place_holder: {
+                                                     redaction_place_holder_type: ("CustomText"),
+                                                     redaction_place_holder_text: ::String?
+                                                   },
+                                                   enforced_urls: Array[::String]?,
+                                                   exempt_urls: Array[::String]?,
+                                                   confidence_level: ::Integer?
+                                                 },
+                                               ],
+                                               global_enforced_urls: Array[::String]?,
+                                               global_exempt_urls: Array[::String]?,
+                                               global_confidence_level: ::Integer?
+                                             },
+                                             ?client_token: ::String
                                            ) -> _CreateDataProtectionSettingsResponseSuccess
                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataProtectionSettingsResponseSuccess
 
@@ -230,11 +242,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#create_identity_provider-instance_method
       def create_identity_provider: (
-                                      ?client_token: ::String,
-                                      identity_provider_details: Hash[::String, ::String],
+                                      portal_arn: ::String,
                                       identity_provider_name: ::String,
                                       identity_provider_type: ("SAML" | "Facebook" | "Google" | "LoginWithAmazon" | "SignInWithApple" | "OIDC"),
-                                      portal_arn: ::String,
+                                      identity_provider_details: Hash[::String, ::String],
+                                      ?client_token: ::String,
                                       ?tags: Array[
                                         {
                                           key: ::String,
@@ -250,23 +262,23 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#create_ip_access_settings-instance_method
       def create_ip_access_settings: (
-                                       ?additional_encryption_context: Hash[::String, ::String],
-                                       ?client_token: ::String,
-                                       ?customer_managed_key: ::String,
-                                       ?description: ::String,
                                        ?display_name: ::String,
-                                       ip_rules: Array[
-                                         {
-                                           description: ::String?,
-                                           ip_range: ::String
-                                         },
-                                       ],
+                                       ?description: ::String,
                                        ?tags: Array[
                                          {
                                            key: ::String,
                                            value: ::String
                                          },
-                                       ]
+                                       ],
+                                       ?customer_managed_key: ::String,
+                                       ?additional_encryption_context: Hash[::String, ::String],
+                                       ip_rules: Array[
+                                         {
+                                           ip_range: ::String,
+                                           description: ::String?
+                                         },
+                                       ],
+                                       ?client_token: ::String
                                      ) -> _CreateIpAccessSettingsResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIpAccessSettingsResponseSuccess
 
@@ -276,16 +288,16 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#create_network_settings-instance_method
       def create_network_settings: (
-                                     ?client_token: ::String,
-                                     security_group_ids: Array[::String],
+                                     vpc_id: ::String,
                                      subnet_ids: Array[::String],
+                                     security_group_ids: Array[::String],
                                      ?tags: Array[
                                        {
                                          key: ::String,
                                          value: ::String
                                        },
                                      ],
-                                     vpc_id: ::String
+                                     ?client_token: ::String
                                    ) -> _CreateNetworkSettingsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNetworkSettingsResponseSuccess
 
@@ -296,21 +308,54 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#create_portal-instance_method
       def create_portal: (
-                           ?additional_encryption_context: Hash[::String, ::String],
-                           ?authentication_type: ("Standard" | "IAM_Identity_Center"),
-                           ?client_token: ::String,
-                           ?customer_managed_key: ::String,
                            ?display_name: ::String,
-                           ?instance_type: ("standard.regular" | "standard.large" | "standard.xlarge"),
-                           ?max_concurrent_sessions: ::Integer,
                            ?tags: Array[
                              {
                                key: ::String,
                                value: ::String
                              },
-                           ]
+                           ],
+                           ?customer_managed_key: ::String,
+                           ?additional_encryption_context: Hash[::String, ::String],
+                           ?client_token: ::String,
+                           ?authentication_type: ("Standard" | "IAM_Identity_Center"),
+                           ?instance_type: ("standard.regular" | "standard.large" | "standard.xlarge"),
+                           ?max_concurrent_sessions: ::Integer
                          ) -> _CreatePortalResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePortalResponseSuccess
+
+      interface _CreateSessionLoggerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSessionLoggerResponse]
+        def session_logger_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#create_session_logger-instance_method
+      def create_session_logger: (
+                                   event_filter: {
+                                     all: {
+                                     }?,
+                                     include: Array[("WebsiteInteract" | "FileDownloadFromSecureBrowserToRemoteDisk" | "FileTransferFromRemoteToLocalDisk" | "FileTransferFromLocalToRemoteDisk" | "FileUploadFromRemoteDiskToSecureBrowser" | "ContentPasteToWebsite" | "ContentTransferFromLocalToRemoteClipboard" | "ContentCopyFromWebsite" | "UrlLoad" | "TabOpen" | "TabClose" | "PrintJobSubmit" | "SessionConnect" | "SessionStart" | "SessionDisconnect" | "SessionEnd")]?
+                                   },
+                                   log_configuration: {
+                                     s3: {
+                                       bucket: ::String,
+                                       key_prefix: ::String?,
+                                       bucket_owner: ::String?,
+                                       log_file_format: ("JSONLines" | "Json"),
+                                       folder_structure: ("Flat" | "NestedByDate")
+                                     }?
+                                   },
+                                   ?display_name: ::String,
+                                   ?customer_managed_key: ::String,
+                                   ?additional_encryption_context: Hash[::String, ::String],
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ],
+                                   ?client_token: ::String
+                                 ) -> _CreateSessionLoggerResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSessionLoggerResponseSuccess
 
       interface _CreateTrustStoreResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateTrustStoreResponse]
@@ -319,13 +364,13 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#create_trust_store-instance_method
       def create_trust_store: (
                                 certificate_list: Array[::String],
-                                ?client_token: ::String,
                                 ?tags: Array[
                                   {
                                     key: ::String,
                                     value: ::String
                                   },
-                                ]
+                                ],
+                                ?client_token: ::String
                               ) -> _CreateTrustStoreResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrustStoreResponseSuccess
 
@@ -335,14 +380,14 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#create_user_access_logging_settings-instance_method
       def create_user_access_logging_settings: (
-                                                 ?client_token: ::String,
                                                  kinesis_stream_arn: ::String,
                                                  ?tags: Array[
                                                    {
                                                      key: ::String,
                                                      value: ::String
                                                    },
-                                                 ]
+                                                 ],
+                                                 ?client_token: ::String
                                                ) -> _CreateUserAccessLoggingSettingsResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserAccessLoggingSettingsResponseSuccess
 
@@ -352,7 +397,19 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#create_user_settings-instance_method
       def create_user_settings: (
-                                  ?additional_encryption_context: Hash[::String, ::String],
+                                  copy_allowed: ("Disabled" | "Enabled"),
+                                  paste_allowed: ("Disabled" | "Enabled"),
+                                  download_allowed: ("Disabled" | "Enabled"),
+                                  upload_allowed: ("Disabled" | "Enabled"),
+                                  print_allowed: ("Disabled" | "Enabled"),
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ],
+                                  ?disconnect_timeout_in_minutes: ::Integer,
+                                  ?idle_disconnect_timeout_in_minutes: ::Integer,
                                   ?client_token: ::String,
                                   ?cookie_synchronization_configuration: {
                                     allowlist: Array[
@@ -370,27 +427,15 @@ module Aws
                                       },
                                     ]?
                                   },
-                                  copy_allowed: ("Disabled" | "Enabled"),
                                   ?customer_managed_key: ::String,
+                                  ?additional_encryption_context: Hash[::String, ::String],
                                   ?deep_link_allowed: ("Disabled" | "Enabled"),
-                                  ?disconnect_timeout_in_minutes: ::Integer,
-                                  download_allowed: ("Disabled" | "Enabled"),
-                                  ?idle_disconnect_timeout_in_minutes: ::Integer,
-                                  paste_allowed: ("Disabled" | "Enabled"),
-                                  print_allowed: ("Disabled" | "Enabled"),
-                                  ?tags: Array[
-                                    {
-                                      key: ::String,
-                                      value: ::String
-                                    },
-                                  ],
                                   ?toolbar_configuration: {
-                                    hidden_toolbar_items: Array[("Windows" | "DualMonitor" | "FullScreen" | "Webcam" | "Microphone")]?,
-                                    max_display_resolution: ("size4096X2160" | "size3840X2160" | "size3440X1440" | "size2560X1440" | "size1920X1080" | "size1280X720" | "size1024X768" | "size800X600")?,
                                     toolbar_type: ("Floating" | "Docked")?,
-                                    visual_mode: ("Dark" | "Light")?
-                                  },
-                                  upload_allowed: ("Disabled" | "Enabled")
+                                    visual_mode: ("Dark" | "Light")?,
+                                    hidden_toolbar_items: Array[("Windows" | "DualMonitor" | "FullScreen" | "Webcam" | "Microphone")]?,
+                                    max_display_resolution: ("size4096X2160" | "size3840X2160" | "size3440X1440" | "size2560X1440" | "size1920X1080" | "size1280X720" | "size1024X768" | "size800X600")?
+                                  }
                                 ) -> _CreateUserSettingsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserSettingsResponseSuccess
 
@@ -447,6 +492,15 @@ module Aws
                            portal_arn: ::String
                          ) -> _DeletePortalResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePortalResponseSuccess
+
+      interface _DeleteSessionLoggerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSessionLoggerResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#delete_session_logger-instance_method
+      def delete_session_logger: (
+                                   session_logger_arn: ::String
+                                 ) -> _DeleteSessionLoggerResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSessionLoggerResponseSuccess
 
       interface _DeleteTrustStoreResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTrustStoreResponse]
@@ -510,6 +564,15 @@ module Aws
                                            portal_arn: ::String
                                          ) -> _DisassociateNetworkSettingsResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateNetworkSettingsResponseSuccess
+
+      interface _DisassociateSessionLoggerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateSessionLoggerResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#disassociate_session_logger-instance_method
+      def disassociate_session_logger: (
+                                         portal_arn: ::String
+                                       ) -> _DisassociateSessionLoggerResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateSessionLoggerResponseSuccess
 
       interface _DisassociateTrustStoreResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateTrustStoreResponse]
@@ -630,6 +693,16 @@ module Aws
                        ) -> _GetSessionResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSessionResponseSuccess
 
+      interface _GetSessionLoggerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSessionLoggerResponse]
+        def session_logger: () -> Types::SessionLogger
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#get_session_logger-instance_method
+      def get_session_logger: (
+                                session_logger_arn: ::String
+                              ) -> _GetSessionLoggerResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSessionLoggerResponseSuccess
+
       interface _GetTrustStoreResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTrustStoreResponse]
         def trust_store: () -> Types::TrustStore
@@ -642,13 +715,13 @@ module Aws
 
       interface _GetTrustStoreCertificateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTrustStoreCertificateResponse]
-        def certificate: () -> Types::Certificate
         def trust_store_arn: () -> ::String
+        def certificate: () -> Types::Certificate
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#get_trust_store_certificate-instance_method
       def get_trust_store_certificate: (
-                                         thumbprint: ::String,
-                                         trust_store_arn: ::String
+                                         trust_store_arn: ::String,
+                                         thumbprint: ::String
                                        ) -> _GetTrustStoreCertificateResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTrustStoreCertificateResponseSuccess
 
@@ -679,8 +752,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#list_browser_settings-instance_method
       def list_browser_settings: (
-                                   ?max_results: ::Integer,
-                                   ?next_token: ::String
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
                                  ) -> _ListBrowserSettingsResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBrowserSettingsResponseSuccess
 
@@ -691,20 +764,20 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#list_data_protection_settings-instance_method
       def list_data_protection_settings: (
-                                           ?max_results: ::Integer,
-                                           ?next_token: ::String
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
                                          ) -> _ListDataProtectionSettingsResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataProtectionSettingsResponseSuccess
 
       interface _ListIdentityProvidersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListIdentityProvidersResponse]
-        def identity_providers: () -> ::Array[Types::IdentityProviderSummary]
         def next_token: () -> ::String
+        def identity_providers: () -> ::Array[Types::IdentityProviderSummary]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#list_identity_providers-instance_method
       def list_identity_providers: (
-                                     ?max_results: ::Integer,
                                      ?next_token: ::String,
+                                     ?max_results: ::Integer,
                                      portal_arn: ::String
                                    ) -> _ListIdentityProvidersResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdentityProvidersResponseSuccess
@@ -716,8 +789,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#list_ip_access_settings-instance_method
       def list_ip_access_settings: (
-                                     ?max_results: ::Integer,
-                                     ?next_token: ::String
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
                                    ) -> _ListIpAccessSettingsResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIpAccessSettingsResponseSuccess
 
@@ -728,37 +801,49 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#list_network_settings-instance_method
       def list_network_settings: (
-                                   ?max_results: ::Integer,
-                                   ?next_token: ::String
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
                                  ) -> _ListNetworkSettingsResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkSettingsResponseSuccess
 
       interface _ListPortalsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPortalsResponse]
-        def next_token: () -> ::String
         def portals: () -> ::Array[Types::PortalSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#list_portals-instance_method
       def list_portals: (
-                          ?max_results: ::Integer,
-                          ?next_token: ::String
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
                         ) -> _ListPortalsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPortalsResponseSuccess
 
+      interface _ListSessionLoggersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSessionLoggersResponse]
+        def session_loggers: () -> ::Array[Types::SessionLoggerSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#list_session_loggers-instance_method
+      def list_session_loggers: (
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListSessionLoggersResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSessionLoggersResponseSuccess
+
       interface _ListSessionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSessionsResponse]
-        def next_token: () -> ::String
         def sessions: () -> ::Array[Types::SessionSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#list_sessions-instance_method
       def list_sessions: (
-                           ?max_results: ::Integer,
-                           ?next_token: ::String,
                            portal_id: ::String,
+                           ?username: ::String,
                            ?session_id: ::String,
                            ?sort_by: ("StartTimeAscending" | "StartTimeDescending"),
                            ?status: ("Active" | "Terminated"),
-                           ?username: ::String
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
                          ) -> _ListSessionsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSessionsResponseSuccess
 
@@ -775,50 +860,50 @@ module Aws
       interface _ListTrustStoreCertificatesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTrustStoreCertificatesResponse]
         def certificate_list: () -> ::Array[Types::CertificateSummary]
-        def next_token: () -> ::String
         def trust_store_arn: () -> ::String
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#list_trust_store_certificates-instance_method
       def list_trust_store_certificates: (
-                                           ?max_results: ::Integer,
+                                           trust_store_arn: ::String,
                                            ?next_token: ::String,
-                                           trust_store_arn: ::String
+                                           ?max_results: ::Integer
                                          ) -> _ListTrustStoreCertificatesResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrustStoreCertificatesResponseSuccess
 
       interface _ListTrustStoresResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTrustStoresResponse]
-        def next_token: () -> ::String
         def trust_stores: () -> ::Array[Types::TrustStoreSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#list_trust_stores-instance_method
       def list_trust_stores: (
-                               ?max_results: ::Integer,
-                               ?next_token: ::String
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
                              ) -> _ListTrustStoresResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrustStoresResponseSuccess
 
       interface _ListUserAccessLoggingSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListUserAccessLoggingSettingsResponse]
-        def next_token: () -> ::String
         def user_access_logging_settings: () -> ::Array[Types::UserAccessLoggingSettingsSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#list_user_access_logging_settings-instance_method
       def list_user_access_logging_settings: (
-                                               ?max_results: ::Integer,
-                                               ?next_token: ::String
+                                               ?next_token: ::String,
+                                               ?max_results: ::Integer
                                              ) -> _ListUserAccessLoggingSettingsResponseSuccess
                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUserAccessLoggingSettingsResponseSuccess
 
       interface _ListUserSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListUserSettingsResponse]
-        def next_token: () -> ::String
         def user_settings: () -> ::Array[Types::UserSettingsSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#list_user_settings-instance_method
       def list_user_settings: (
-                                ?max_results: ::Integer,
-                                ?next_token: ::String
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
                               ) -> _ListUserSettingsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUserSettingsResponseSuccess
 
@@ -827,14 +912,14 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#tag_resource-instance_method
       def tag_resource: (
-                          ?client_token: ::String,
                           resource_arn: ::String,
                           tags: Array[
                             {
                               key: ::String,
                               value: ::String
                             },
-                          ]
+                          ],
+                          ?client_token: ::String
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
 
@@ -854,8 +939,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#update_browser_settings-instance_method
       def update_browser_settings: (
-                                     ?browser_policy: ::String,
                                      browser_settings_arn: ::String,
+                                     ?browser_policy: ::String,
                                      ?client_token: ::String
                                    ) -> _UpdateBrowserSettingsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBrowserSettingsResponseSuccess
@@ -866,33 +951,33 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#update_data_protection_settings-instance_method
       def update_data_protection_settings: (
-                                             ?client_token: ::String,
                                              data_protection_settings_arn: ::String,
-                                             ?description: ::String,
-                                             ?display_name: ::String,
                                              ?inline_redaction_configuration: {
-                                               global_confidence_level: ::Integer?,
-                                               global_enforced_urls: Array[::String]?,
-                                               global_exempt_urls: Array[::String]?,
                                                inline_redaction_patterns: Array[
                                                  {
                                                    built_in_pattern_id: ::String?,
-                                                   confidence_level: ::Integer?,
                                                    custom_pattern: {
-                                                     keyword_regex: ::String?,
-                                                     pattern_description: ::String?,
                                                      pattern_name: ::String,
-                                                     pattern_regex: ::String
+                                                     pattern_regex: ::String,
+                                                     pattern_description: ::String?,
+                                                     keyword_regex: ::String?
                                                    }?,
+                                                   redaction_place_holder: {
+                                                     redaction_place_holder_type: ("CustomText"),
+                                                     redaction_place_holder_text: ::String?
+                                                   },
                                                    enforced_urls: Array[::String]?,
                                                    exempt_urls: Array[::String]?,
-                                                   redaction_place_holder: {
-                                                     redaction_place_holder_text: ::String?,
-                                                     redaction_place_holder_type: ("CustomText")
-                                                   }
+                                                   confidence_level: ::Integer?
                                                  },
-                                               ]
-                                             }
+                                               ],
+                                               global_enforced_urls: Array[::String]?,
+                                               global_exempt_urls: Array[::String]?,
+                                               global_confidence_level: ::Integer?
+                                             },
+                                             ?display_name: ::String,
+                                             ?description: ::String,
+                                             ?client_token: ::String
                                            ) -> _UpdateDataProtectionSettingsResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataProtectionSettingsResponseSuccess
 
@@ -902,11 +987,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#update_identity_provider-instance_method
       def update_identity_provider: (
-                                      ?client_token: ::String,
                                       identity_provider_arn: ::String,
-                                      ?identity_provider_details: Hash[::String, ::String],
                                       ?identity_provider_name: ::String,
-                                      ?identity_provider_type: ("SAML" | "Facebook" | "Google" | "LoginWithAmazon" | "SignInWithApple" | "OIDC")
+                                      ?identity_provider_type: ("SAML" | "Facebook" | "Google" | "LoginWithAmazon" | "SignInWithApple" | "OIDC"),
+                                      ?identity_provider_details: Hash[::String, ::String],
+                                      ?client_token: ::String
                                     ) -> _UpdateIdentityProviderResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIdentityProviderResponseSuccess
 
@@ -916,16 +1001,16 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#update_ip_access_settings-instance_method
       def update_ip_access_settings: (
-                                       ?client_token: ::String,
-                                       ?description: ::String,
-                                       ?display_name: ::String,
                                        ip_access_settings_arn: ::String,
+                                       ?display_name: ::String,
+                                       ?description: ::String,
                                        ?ip_rules: Array[
                                          {
-                                           description: ::String?,
-                                           ip_range: ::String
+                                           ip_range: ::String,
+                                           description: ::String?
                                          },
-                                       ]
+                                       ],
+                                       ?client_token: ::String
                                      ) -> _UpdateIpAccessSettingsResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIpAccessSettingsResponseSuccess
 
@@ -935,11 +1020,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#update_network_settings-instance_method
       def update_network_settings: (
-                                     ?client_token: ::String,
                                      network_settings_arn: ::String,
-                                     ?security_group_ids: Array[::String],
+                                     ?vpc_id: ::String,
                                      ?subnet_ids: Array[::String],
-                                     ?vpc_id: ::String
+                                     ?security_group_ids: Array[::String],
+                                     ?client_token: ::String
                                    ) -> _UpdateNetworkSettingsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNetworkSettingsResponseSuccess
 
@@ -949,13 +1034,38 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#update_portal-instance_method
       def update_portal: (
-                           ?authentication_type: ("Standard" | "IAM_Identity_Center"),
+                           portal_arn: ::String,
                            ?display_name: ::String,
+                           ?authentication_type: ("Standard" | "IAM_Identity_Center"),
                            ?instance_type: ("standard.regular" | "standard.large" | "standard.xlarge"),
-                           ?max_concurrent_sessions: ::Integer,
-                           portal_arn: ::String
+                           ?max_concurrent_sessions: ::Integer
                          ) -> _UpdatePortalResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePortalResponseSuccess
+
+      interface _UpdateSessionLoggerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSessionLoggerResponse]
+        def session_logger: () -> Types::SessionLogger
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#update_session_logger-instance_method
+      def update_session_logger: (
+                                   session_logger_arn: ::String,
+                                   ?event_filter: {
+                                     all: {
+                                     }?,
+                                     include: Array[("WebsiteInteract" | "FileDownloadFromSecureBrowserToRemoteDisk" | "FileTransferFromRemoteToLocalDisk" | "FileTransferFromLocalToRemoteDisk" | "FileUploadFromRemoteDiskToSecureBrowser" | "ContentPasteToWebsite" | "ContentTransferFromLocalToRemoteClipboard" | "ContentCopyFromWebsite" | "UrlLoad" | "TabOpen" | "TabClose" | "PrintJobSubmit" | "SessionConnect" | "SessionStart" | "SessionDisconnect" | "SessionEnd")]?
+                                   },
+                                   ?log_configuration: {
+                                     s3: {
+                                       bucket: ::String,
+                                       key_prefix: ::String?,
+                                       bucket_owner: ::String?,
+                                       log_file_format: ("JSONLines" | "Json"),
+                                       folder_structure: ("Flat" | "NestedByDate")
+                                     }?
+                                   },
+                                   ?display_name: ::String
+                                 ) -> _UpdateSessionLoggerResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSessionLoggerResponseSuccess
 
       interface _UpdateTrustStoreResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTrustStoreResponse]
@@ -963,10 +1073,10 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#update_trust_store-instance_method
       def update_trust_store: (
+                                trust_store_arn: ::String,
                                 ?certificates_to_add: Array[::String],
                                 ?certificates_to_delete: Array[::String],
-                                ?client_token: ::String,
-                                trust_store_arn: ::String
+                                ?client_token: ::String
                               ) -> _UpdateTrustStoreResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTrustStoreResponseSuccess
 
@@ -976,9 +1086,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#update_user_access_logging_settings-instance_method
       def update_user_access_logging_settings: (
-                                                 ?client_token: ::String,
+                                                 user_access_logging_settings_arn: ::String,
                                                  ?kinesis_stream_arn: ::String,
-                                                 user_access_logging_settings_arn: ::String
+                                                 ?client_token: ::String
                                                ) -> _UpdateUserAccessLoggingSettingsResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserAccessLoggingSettingsResponseSuccess
 
@@ -988,6 +1098,14 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#update_user_settings-instance_method
       def update_user_settings: (
+                                  user_settings_arn: ::String,
+                                  ?copy_allowed: ("Disabled" | "Enabled"),
+                                  ?paste_allowed: ("Disabled" | "Enabled"),
+                                  ?download_allowed: ("Disabled" | "Enabled"),
+                                  ?upload_allowed: ("Disabled" | "Enabled"),
+                                  ?print_allowed: ("Disabled" | "Enabled"),
+                                  ?disconnect_timeout_in_minutes: ::Integer,
+                                  ?idle_disconnect_timeout_in_minutes: ::Integer,
                                   ?client_token: ::String,
                                   ?cookie_synchronization_configuration: {
                                     allowlist: Array[
@@ -1005,21 +1123,13 @@ module Aws
                                       },
                                     ]?
                                   },
-                                  ?copy_allowed: ("Disabled" | "Enabled"),
                                   ?deep_link_allowed: ("Disabled" | "Enabled"),
-                                  ?disconnect_timeout_in_minutes: ::Integer,
-                                  ?download_allowed: ("Disabled" | "Enabled"),
-                                  ?idle_disconnect_timeout_in_minutes: ::Integer,
-                                  ?paste_allowed: ("Disabled" | "Enabled"),
-                                  ?print_allowed: ("Disabled" | "Enabled"),
                                   ?toolbar_configuration: {
-                                    hidden_toolbar_items: Array[("Windows" | "DualMonitor" | "FullScreen" | "Webcam" | "Microphone")]?,
-                                    max_display_resolution: ("size4096X2160" | "size3840X2160" | "size3440X1440" | "size2560X1440" | "size1920X1080" | "size1280X720" | "size1024X768" | "size800X600")?,
                                     toolbar_type: ("Floating" | "Docked")?,
-                                    visual_mode: ("Dark" | "Light")?
-                                  },
-                                  ?upload_allowed: ("Disabled" | "Enabled"),
-                                  user_settings_arn: ::String
+                                    visual_mode: ("Dark" | "Light")?,
+                                    hidden_toolbar_items: Array[("Windows" | "DualMonitor" | "FullScreen" | "Webcam" | "Microphone")]?,
+                                    max_display_resolution: ("size4096X2160" | "size3840X2160" | "size3440X1440" | "size2560X1440" | "size1920X1080" | "size1280X720" | "size1024X768" | "size800X600")?
+                                  }
                                 ) -> _UpdateUserSettingsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserSettingsResponseSuccess
     end

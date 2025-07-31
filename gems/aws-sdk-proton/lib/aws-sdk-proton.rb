@@ -55,7 +55,7 @@ module Aws::Proton
   autoload :EndpointProvider, 'aws-sdk-proton/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-proton/endpoints'
 
-  GEM_VERSION = '1.56.0'
+  GEM_VERSION = '1.57.0'
 
 end
 

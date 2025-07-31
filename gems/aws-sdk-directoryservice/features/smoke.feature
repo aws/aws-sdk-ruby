@@ -18,3 +18,15 @@ Feature: Smoke tests for DirectoryService
 {}
       """
     Then I expect an error was not raised
+
+  @directoryservice @smoke
+  Scenario: CreateDirectoryFailure
+    Given I create a 'Aws::DirectoryService' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'create_directory' with params:
+      """
+{"name":"","password":"","size":""}
+      """
+    Then I expect a 'Aws::DirectoryService::Errors::ValidationException' was raised

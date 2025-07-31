@@ -2546,6 +2546,8 @@ module Aws::CleanRooms
       attr_accessor configured_table_identifier: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
+      attr_accessor table_reference: Types::TableReference
+      attr_accessor allowed_columns: ::Array[::String]
       attr_accessor analysis_method: ("DIRECT_QUERY" | "DIRECT_JOB" | "MULTIPLE")
       attr_accessor selected_analysis_methods: ::Array[("DIRECT_QUERY" | "DIRECT_JOB")]
       SENSITIVE: []

@@ -54,7 +54,7 @@ module Aws::OSIS
   autoload :EndpointProvider, 'aws-sdk-osis/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-osis/endpoints'
 
-  GEM_VERSION = '1.35.0'
+  GEM_VERSION = '1.36.0'
 
 end
 

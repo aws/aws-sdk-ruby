@@ -164,7 +164,14 @@ module Aws
                                         center: Array[::Float],
                                         radius: ::Float
                                       }?,
-                                      geobuf: ::String?
+                                      geobuf: ::String?,
+                                      multi_polygon: Array[
+                                        Array[
+                                          Array[
+                                            Array[::Float],
+                                          ],
+                                        ],
+                                      ]?
                                     },
                                     geofence_properties: Hash[::String, ::String]?
                                   },
@@ -859,7 +866,14 @@ module Aws
                               center: Array[::Float],
                               radius: ::Float
                             }?,
-                            geobuf: ::String?
+                            geobuf: ::String?,
+                            multi_polygon: Array[
+                              Array[
+                                Array[
+                                  Array[::Float],
+                                ],
+                              ],
+                            ]?
                           },
                           ?geofence_properties: Hash[::String, ::String]
                         ) -> _PutGeofenceResponseSuccess

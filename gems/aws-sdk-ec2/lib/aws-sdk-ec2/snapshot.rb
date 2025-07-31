@@ -140,8 +140,8 @@ module Aws::EC2
     end
 
     # The ID of the volume that was used to create the snapshot. Snapshots
-    # created by the CopySnapshot action have an arbitrary volume ID that
-    # should not be used for any purpose.
+    # created by a copy snapshot operation have an arbitrary volume ID that
+    # you should not use for any purpose.
     # @return [String]
     def volume_id
       data[:volume_id]

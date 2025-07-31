@@ -200,11 +200,12 @@ module Aws::OpenSearchServerless
     end
 
     class CreateSecurityConfigRequest
-      attr_accessor type: ("saml" | "iamidentitycenter")
+      attr_accessor type: ("saml" | "iamidentitycenter" | "iamfederation")
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor saml_options: Types::SamlConfigOptions
       attr_accessor iam_identity_center_options: Types::CreateIamIdentityCenterConfigOptions
+      attr_accessor iam_federation_options: Types::IamFederationConfigOptions
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -394,6 +395,12 @@ module Aws::OpenSearchServerless
       SENSITIVE: []
     end
 
+    class IamFederationConfigOptions
+      attr_accessor group_attribute: ::String
+      attr_accessor user_attribute: ::String
+      SENSITIVE: []
+    end
+
     class IamIdentityCenterConfigOptions
       attr_accessor instance_arn: ::String
       attr_accessor application_arn: ::String
@@ -497,7 +504,7 @@ module Aws::OpenSearchServerless
     end
 
     class ListSecurityConfigsRequest
-      attr_accessor type: ("saml" | "iamidentitycenter")
+      attr_accessor type: ("saml" | "iamidentitycenter" | "iamfederation")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -567,11 +574,12 @@ module Aws::OpenSearchServerless
 
     class SecurityConfigDetail
       attr_accessor id: ::String
-      attr_accessor type: ("saml" | "iamidentitycenter")
+      attr_accessor type: ("saml" | "iamidentitycenter" | "iamfederation")
       attr_accessor config_version: ::String
       attr_accessor description: ::String
       attr_accessor saml_options: Types::SamlConfigOptions
       attr_accessor iam_identity_center_options: Types::IamIdentityCenterConfigOptions
+      attr_accessor iam_federation_options: Types::IamFederationConfigOptions
       attr_accessor created_date: ::Integer
       attr_accessor last_modified_date: ::Integer
       SENSITIVE: []
@@ -584,7 +592,7 @@ module Aws::OpenSearchServerless
 
     class SecurityConfigSummary
       attr_accessor id: ::String
-      attr_accessor type: ("saml" | "iamidentitycenter")
+      attr_accessor type: ("saml" | "iamidentitycenter" | "iamfederation")
       attr_accessor config_version: ::String
       attr_accessor description: ::String
       attr_accessor created_date: ::Integer
@@ -728,6 +736,7 @@ module Aws::OpenSearchServerless
       attr_accessor description: ::String
       attr_accessor saml_options: Types::SamlConfigOptions
       attr_accessor iam_identity_center_options_updates: Types::UpdateIamIdentityCenterConfigOptions
+      attr_accessor iam_federation_options: Types::IamFederationConfigOptions
       attr_accessor client_token: ::String
       SENSITIVE: []
     end

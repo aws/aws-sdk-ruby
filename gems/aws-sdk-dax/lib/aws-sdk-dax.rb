@@ -54,7 +54,7 @@ module Aws::DAX
   autoload :EndpointProvider, 'aws-sdk-dax/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-dax/endpoints'
 
-  GEM_VERSION = '1.72.0'
+  GEM_VERSION = '1.73.0'
 
 end
 

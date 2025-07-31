@@ -30,25 +30,25 @@ module Aws
       end
       class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
         def message: () -> ::String
-        def quota_code: () -> ::String
         def resource_id: () -> ::String
         def resource_type: () -> ::String
         def service_code: () -> ::String
+        def quota_code: () -> ::String
       end
       class ThrottlingException < ::Aws::Errors::ServiceError
         def message: () -> ::String
+        def service_code: () -> ::String
         def quota_code: () -> ::String
         def retry_after_seconds: () -> ::String
-        def service_code: () -> ::String
       end
       class TooManyTagsException < ::Aws::Errors::ServiceError
         def message: () -> ::String
         def resource_name: () -> ::String
       end
       class ValidationException < ::Aws::Errors::ServiceError
-        def field_list: () -> ::String
         def message: () -> ::String
         def reason: () -> ::String
+        def field_list: () -> ::String
       end
     end
   end

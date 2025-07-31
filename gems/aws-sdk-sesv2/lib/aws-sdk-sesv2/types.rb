@@ -1348,6 +1348,106 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # Represents a request to create a tenant.
+    #
+    # *Tenants* are logical containers that group related SES resources
+    # together. Each tenant can have its own set of resources like email
+    # identities, configuration sets, and templates, along with reputation
+    # metrics and sending status. This helps isolate and manage email
+    # sending for different customers or business units within your Amazon
+    # SES API v2 account.
+    #
+    # @!attribute [rw] tenant_name
+    #   The name of the tenant to create. The name can contain up to 64
+    #   alphanumeric characters, including letters, numbers, hyphens (-) and
+    #   underscores (\_) only.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An array of objects that define the tags (keys and values) to
+    #   associate with the tenant
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateTenantRequest AWS API Documentation
+    #
+    class CreateTenantRequest < Struct.new(
+      :tenant_name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a request to associate a resource with a tenant.
+    #
+    # Resources can be email identities, configuration sets, or email
+    # templates. When you associate a resource with a tenant, you can use
+    # that resource when sending emails on behalf of that tenant.
+    #
+    # @!attribute [rw] tenant_name
+    #   The name of the tenant to associate the resource with.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to associate with the
+    #   tenant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateTenantResourceAssociationRequest AWS API Documentation
+    #
+    class CreateTenantResourceAssociationRequest < Struct.new(
+      :tenant_name,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # If the action is successful, the service sends back an HTTP 200
+    # response with an empty HTTP body.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateTenantResourceAssociationResponse AWS API Documentation
+    #
+    class CreateTenantResourceAssociationResponse < Aws::EmptyStructure; end
+
+    # Information about a newly created tenant.
+    #
+    # @!attribute [rw] tenant_name
+    #   The name of the tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_id
+    #   A unique identifier for the tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_arn
+    #   The Amazon Resource Name (ARN) of the tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The date and time when the tenant was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   An array of objects that define the tags (keys and values)
+    #   associated with the tenant.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] sending_status
+    #   The status of email sending capability for the tenant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateTenantResponse AWS API Documentation
+    #
+    class CreateTenantResponse < Struct.new(
+      :tenant_name,
+      :tenant_id,
+      :tenant_arn,
+      :created_timestamp,
+      :tags,
+      :sending_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a custom verification email template.
     #
     # @!attribute [rw] template_name
@@ -1818,6 +1918,55 @@ module Aws::SESV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteSuppressedDestinationResponse AWS API Documentation
     #
     class DeleteSuppressedDestinationResponse < Aws::EmptyStructure; end
+
+    # Represents a request to delete a tenant.
+    #
+    # @!attribute [rw] tenant_name
+    #   The name of the tenant to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteTenantRequest AWS API Documentation
+    #
+    class DeleteTenantRequest < Struct.new(
+      :tenant_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a request to delete an association between a tenant and a
+    # resource.
+    #
+    # @!attribute [rw] tenant_name
+    #   The name of the tenant to remove the resource association from.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to remove from the
+    #   tenant association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteTenantResourceAssociationRequest AWS API Documentation
+    #
+    class DeleteTenantResourceAssociationRequest < Struct.new(
+      :tenant_name,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # If the action is successful, the service sends back an HTTP 200
+    # response with an empty HTTP body.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteTenantResourceAssociationResponse AWS API Documentation
+    #
+    class DeleteTenantResourceAssociationResponse < Aws::EmptyStructure; end
+
+    # If the action is successful, the service sends back an HTTP 200
+    # response with an empty HTTP body.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteTenantResponse AWS API Documentation
+    #
+    class DeleteTenantResponse < Aws::EmptyStructure; end
 
     # An object that contains metadata related to a predictive inbox
     # placement test.
@@ -4238,6 +4387,43 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # Represents a request to retrieve information about a specific
+    # reputation entity.
+    #
+    # @!attribute [rw] reputation_entity_reference
+    #   The unique identifier for the reputation entity. For resource-type
+    #   entities, this is the Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] reputation_entity_type
+    #   The type of reputation entity. Currently, only `RESOURCE` type
+    #   entities are supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetReputationEntityRequest AWS API Documentation
+    #
+    class GetReputationEntityRequest < Struct.new(
+      :reputation_entity_reference,
+      :reputation_entity_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the requested reputation entity.
+    #
+    # @!attribute [rw] reputation_entity
+    #   The reputation entity information, including status records, policy
+    #   configuration, and reputation impact.
+    #   @return [Types::ReputationEntity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetReputationEntityResponse AWS API Documentation
+    #
+    class GetReputationEntityResponse < Struct.new(
+      :reputation_entity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A request to retrieve information about an email address that's on
     # the suppression list for your account.
     #
@@ -4263,6 +4449,34 @@ module Aws::SESV2
     #
     class GetSuppressedDestinationResponse < Struct.new(
       :suppressed_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a request to get information about a specific tenant.
+    #
+    # @!attribute [rw] tenant_name
+    #   The name of the tenant to retrieve information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetTenantRequest AWS API Documentation
+    #
+    class GetTenantRequest < Struct.new(
+      :tenant_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a specific tenant.
+    #
+    # @!attribute [rw] tenant
+    #   A structure that contains details about the tenant.
+    #   @return [Types::Tenant]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetTenantResponse AWS API Documentation
+    #
+    class GetTenantResponse < Struct.new(
+      :tenant)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5332,6 +5546,114 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # Represents a request to list reputation entities with optional
+    # filtering.
+    #
+    # @!attribute [rw] filter
+    #   An object that contains filters to apply when listing reputation
+    #   entities. You can filter by entity type, reputation impact, sending
+    #   status, or entity reference prefix.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from a previous call to `ListReputationEntities` to
+    #   indicate the position in the list of reputation entities.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The number of results to show in a single call to
+    #   `ListReputationEntities`. If the number of results is larger than
+    #   the number you specified in this parameter, then the response
+    #   includes a `NextToken` element, which you can use to obtain
+    #   additional results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListReputationEntitiesRequest AWS API Documentation
+    #
+    class ListReputationEntitiesRequest < Struct.new(
+      :filter,
+      :next_token,
+      :page_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of reputation entities in your account.
+    #
+    # @!attribute [rw] reputation_entities
+    #   An array that contains information about the reputation entities in
+    #   your account.
+    #   @return [Array<Types::ReputationEntity>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates that there are additional reputation entities
+    #   to list. To view additional reputation entities, issue another
+    #   request to `ListReputationEntities`, and pass this token in the
+    #   `NextToken` parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListReputationEntitiesResponse AWS API Documentation
+    #
+    class ListReputationEntitiesResponse < Struct.new(
+      :reputation_entities,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a request to list tenants associated with a specific
+    # resource.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to list associated
+    #   tenants for.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The number of results to show in a single call to
+    #   `ListResourceTenants`. If the number of results is larger than the
+    #   number you specified in this parameter, then the response includes a
+    #   `NextToken` element, which you can use to obtain additional results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from a previous call to `ListResourceTenants` to
+    #   indicate the position in the list of resource tenants.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListResourceTenantsRequest AWS API Documentation
+    #
+    class ListResourceTenantsRequest < Struct.new(
+      :resource_arn,
+      :page_size,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about tenants associated with a specific resource.
+    #
+    # @!attribute [rw] resource_tenants
+    #   An array that contains information about each tenant associated with
+    #   the resource.
+    #   @return [Array<Types::ResourceTenantMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates that there are additional tenants to list. To
+    #   view additional tenants, issue another request to
+    #   `ListResourceTenants`, and pass this token in the `NextToken`
+    #   parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListResourceTenantsResponse AWS API Documentation
+    #
+    class ListResourceTenantsResponse < Struct.new(
+      :resource_tenants,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A request to obtain a list of email destinations that are on the
     # suppression list for your account.
     #
@@ -5423,6 +5745,110 @@ module Aws::SESV2
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a request to list resources associated with a specific
+    # tenant.
+    #
+    # @!attribute [rw] tenant_name
+    #   The name of the tenant to list resources for.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A map of filter keys and values for filtering the list of tenant
+    #   resources. Currently, the only supported filter key is
+    #   `RESOURCE_TYPE`.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] page_size
+    #   The number of results to show in a single call to
+    #   `ListTenantResources`. If the number of results is larger than the
+    #   number you specified in this parameter, then the response includes a
+    #   `NextToken` element, which you can use to obtain additional results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from a previous call to `ListTenantResources` to
+    #   indicate the position in the list of tenant resources.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListTenantResourcesRequest AWS API Documentation
+    #
+    class ListTenantResourcesRequest < Struct.new(
+      :tenant_name,
+      :filter,
+      :page_size,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about resources associated with a specific tenant.
+    #
+    # @!attribute [rw] tenant_resources
+    #   An array that contains information about each resource associated
+    #   with the tenant.
+    #   @return [Array<Types::TenantResource>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates that there are additional resources to list.
+    #   To view additional resources, issue another request to
+    #   `ListTenantResources`, and pass this token in the `NextToken`
+    #   parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListTenantResourcesResponse AWS API Documentation
+    #
+    class ListTenantResourcesResponse < Struct.new(
+      :tenant_resources,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a request to list all tenants associated with your account
+    # in the current Amazon Web Services Region.
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from a previous call to `ListTenants` to indicate
+    #   the position in the list of tenants.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The number of results to show in a single call to `ListTenants`. If
+    #   the number of results is larger than the number you specified in
+    #   this parameter, then the response includes a `NextToken` element,
+    #   which you can use to obtain additional results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListTenantsRequest AWS API Documentation
+    #
+    class ListTenantsRequest < Struct.new(
+      :next_token,
+      :page_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about tenants associated with your account.
+    #
+    # @!attribute [rw] tenants
+    #   An array that contains basic information about each tenant.
+    #   @return [Array<Types::TenantInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates that there are additional tenants to list. To
+    #   view additional tenants, issue another request to `ListTenants`, and
+    #   pass this token in the `NextToken` parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListTenantsResponse AWS API Documentation
+    #
+    class ListTenantsResponse < Struct.new(
+      :tenants,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6861,6 +7287,72 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # An object that contains information about a reputation entity,
+    # including its reference, type, policy, status records, and reputation
+    # impact.
+    #
+    # @!attribute [rw] reputation_entity_reference
+    #   The unique identifier for the reputation entity. For resource-type
+    #   entities, this is the Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] reputation_entity_type
+    #   The type of reputation entity. Currently, only `RESOURCE` type
+    #   entities are supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] reputation_management_policy
+    #   The Amazon Resource Name (ARN) of the reputation management policy
+    #   applied to this entity. This is an Amazon Web Services Amazon
+    #   SES-managed policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_managed_status
+    #   The customer-managed status record for this reputation entity,
+    #   including the current status, cause description, and last updated
+    #   timestamp.
+    #   @return [Types::StatusRecord]
+    #
+    # @!attribute [rw] aws_ses_managed_status
+    #   The Amazon Web Services Amazon SES-managed status record for this
+    #   reputation entity, including the current status, cause description,
+    #   and last updated timestamp.
+    #   @return [Types::StatusRecord]
+    #
+    # @!attribute [rw] sending_status_aggregate
+    #   The aggregate sending status that determines whether the entity is
+    #   allowed to send emails. This status is derived from both the
+    #   customer-managed and Amazon Web Services Amazon SES-managed
+    #   statuses. If either the customer-managed status or the Amazon Web
+    #   Services Amazon SES-managed status is `DISABLED`, the aggregate
+    #   status will be `DISABLED` and the entity will not be allowed to send
+    #   emails. When the customer-managed status is set to `REINSTATED`, the
+    #   entity can continue sending even if there are active reputation
+    #   findings, provided the Amazon Web Services Amazon SES-managed status
+    #   also permits sending. The entity can only send emails when both
+    #   statuses permit sending.
+    #   @return [String]
+    #
+    # @!attribute [rw] reputation_impact
+    #   The reputation impact level for this entity, representing the
+    #   highest impact reputation finding currently active. Reputation
+    #   findings can be retrieved using the `ListRecommendations` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ReputationEntity AWS API Documentation
+    #
+    class ReputationEntity < Struct.new(
+      :reputation_entity_reference,
+      :reputation_entity_type,
+      :reputation_management_policy,
+      :customer_managed_status,
+      :aws_ses_managed_status,
+      :sending_status_aggregate,
+      :reputation_impact)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Enable or disable collection of reputation metrics for emails that you
     # send using this configuration set in the current Amazon Web Services
     # Region.
@@ -6883,6 +7375,36 @@ module Aws::SESV2
     class ReputationOptions < Struct.new(
       :reputation_metrics_enabled,
       :last_fresh_start)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains information about a tenant associated with a
+    # resource.
+    #
+    # @!attribute [rw] tenant_name
+    #   The name of the tenant associated with the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_id
+    #   A unique identifier for the tenant associated with the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_timestamp
+    #   The date and time when the resource was associated with the tenant.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ResourceTenantMetadata AWS API Documentation
+    #
+    class ResourceTenantMetadata < Struct.new(
+      :tenant_name,
+      :tenant_id,
+      :resource_arn,
+      :associated_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7063,6 +7585,16 @@ module Aws::SESV2
     #   The ID of the multi-region endpoint (global-endpoint).
     #   @return [String]
     #
+    # @!attribute [rw] tenant_name
+    #   The name of the tenant through which this bulk email will be sent.
+    #
+    #   <note markdown="1"> The email sending operation will only succeed if all referenced
+    #   resources (identities, configuration sets, and templates) are
+    #   associated with this tenant.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SendBulkEmailRequest AWS API Documentation
     #
     class SendBulkEmailRequest < Struct.new(
@@ -7075,7 +7607,8 @@ module Aws::SESV2
       :default_content,
       :bulk_email_entries,
       :configuration_set_name,
-      :endpoint_id)
+      :endpoint_id,
+      :tenant_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7229,6 +7762,16 @@ module Aws::SESV2
     #   The ID of the multi-region endpoint (global-endpoint).
     #   @return [String]
     #
+    # @!attribute [rw] tenant_name
+    #   The name of the tenant through which this email will be sent.
+    #
+    #   <note markdown="1"> The email sending operation will only succeed if all referenced
+    #   resources (identities, configuration sets, and templates) are
+    #   associated with this tenant.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @!attribute [rw] list_management_options
     #   An object used to specify a list or topic to which an email belongs,
     #   which will be used when a contact chooses to unsubscribe.
@@ -7247,6 +7790,7 @@ module Aws::SESV2
       :email_tags,
       :configuration_set_name,
       :endpoint_id,
+      :tenant_name,
       :list_management_options)
       SENSITIVE = []
       include Aws::Structure
@@ -7350,6 +7894,39 @@ module Aws::SESV2
     #
     class SnsDestination < Struct.new(
       :topic_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains status information for a reputation entity,
+    # including the current status, cause description, and timestamp.
+    #
+    # @!attribute [rw] status
+    #   The current sending status. This can be one of the following:
+    #
+    #   * `ENABLED` – Sending is allowed.
+    #
+    #   * `DISABLED` – Sending is prevented.
+    #
+    #   * `REINSTATED` – Sending is allowed even with active reputation
+    #     findings.
+    #   @return [String]
+    #
+    # @!attribute [rw] cause
+    #   A description of the reason for the current status, or null if no
+    #   specific cause is available.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   The timestamp when this status was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/StatusRecord AWS API Documentation
+    #
+    class StatusRecord < Struct.new(
+      :status,
+      :cause,
+      :last_updated_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7638,6 +8215,97 @@ module Aws::SESV2
       :template_data,
       :headers,
       :attachments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains details about a tenant.
+    #
+    # @!attribute [rw] tenant_name
+    #   The name of the tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_id
+    #   A unique identifier for the tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_arn
+    #   The Amazon Resource Name (ARN) of the tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The date and time when the tenant was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   An array of objects that define the tags (keys and values)
+    #   associated with the tenant.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] sending_status
+    #   The status of sending capability for the tenant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/Tenant AWS API Documentation
+    #
+    class Tenant < Struct.new(
+      :tenant_name,
+      :tenant_id,
+      :tenant_arn,
+      :created_timestamp,
+      :tags,
+      :sending_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains basic information about a tenant.
+    #
+    # @!attribute [rw] tenant_name
+    #   The name of the tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_id
+    #   A unique identifier for the tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_arn
+    #   The Amazon Resource Name (ARN) of the tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The date and time when the tenant was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/TenantInfo AWS API Documentation
+    #
+    class TenantInfo < Struct.new(
+      :tenant_name,
+      :tenant_id,
+      :tenant_arn,
+      :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains information about a resource associated with
+    # a tenant.
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource associated with the tenant. Valid values are
+    #   `EMAIL_IDENTITY`, `CONFIGURATION_SET`, or `EMAIL_TEMPLATE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource associated with the
+    #   tenant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/TenantResource AWS API Documentation
+    #
+    class TenantResource < Struct.new(
+      :resource_type,
+      :resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8053,6 +8721,84 @@ module Aws::SESV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateEmailTemplateResponse AWS API Documentation
     #
     class UpdateEmailTemplateResponse < Aws::EmptyStructure; end
+
+    # Represents a request to update the customer-managed sending status for
+    # a reputation entity.
+    #
+    # @!attribute [rw] reputation_entity_type
+    #   The type of reputation entity. Currently, only `RESOURCE` type
+    #   entities are supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] reputation_entity_reference
+    #   The unique identifier for the reputation entity. For resource-type
+    #   entities, this is the Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] sending_status
+    #   The new customer-managed sending status for the reputation entity.
+    #   This can be one of the following:
+    #
+    #   * `ENABLED` – Allow sending for this entity.
+    #
+    #   * `DISABLED` – Prevent sending for this entity.
+    #
+    #   * `REINSTATED` – Allow sending even if there are active reputation
+    #     findings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateReputationEntityCustomerManagedStatusRequest AWS API Documentation
+    #
+    class UpdateReputationEntityCustomerManagedStatusRequest < Struct.new(
+      :reputation_entity_type,
+      :reputation_entity_reference,
+      :sending_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # If the action is successful, the service sends back an HTTP 200
+    # response with an empty HTTP body.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateReputationEntityCustomerManagedStatusResponse AWS API Documentation
+    #
+    class UpdateReputationEntityCustomerManagedStatusResponse < Aws::EmptyStructure; end
+
+    # Represents a request to update the reputation management policy for a
+    # reputation entity.
+    #
+    # @!attribute [rw] reputation_entity_type
+    #   The type of reputation entity. Currently, only `RESOURCE` type
+    #   entities are supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] reputation_entity_reference
+    #   The unique identifier for the reputation entity. For resource-type
+    #   entities, this is the Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] reputation_entity_policy
+    #   The Amazon Resource Name (ARN) of the reputation management policy
+    #   to apply to this entity. This is an Amazon Web Services Amazon
+    #   SES-managed policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateReputationEntityPolicyRequest AWS API Documentation
+    #
+    class UpdateReputationEntityPolicyRequest < Struct.new(
+      :reputation_entity_type,
+      :reputation_entity_reference,
+      :reputation_entity_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # If the action is successful, the service sends back an HTTP 200
+    # response with an empty HTTP body.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateReputationEntityPolicyResponse AWS API Documentation
+    #
+    class UpdateReputationEntityPolicyResponse < Aws::EmptyStructure; end
 
     # The VDM attributes that apply to your Amazon SES account.
     #

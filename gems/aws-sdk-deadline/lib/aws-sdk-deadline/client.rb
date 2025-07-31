@@ -1614,6 +1614,11 @@ module Aws::Deadline
     #   using IAM Identity Center uses this role to access Deadline Cloud
     #   resources.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to add to your monitor. Each tag consists of a tag key and a
+    #   tag value. Tag keys and values are both required, but tag values can
+    #   be empty strings.
+    #
     # @return [Types::CreateMonitorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMonitorResponse#monitor_id #monitor_id} => String
@@ -1627,6 +1632,9 @@ module Aws::Deadline
     #     identity_center_instance_arn: "IdentityCenterInstanceArn", # required
     #     subdomain: "Subdomain", # required
     #     role_arn: "IamRoleArn", # required
+    #     tags: {
+    #       "String" => "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -7121,7 +7129,7 @@ module Aws::Deadline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-deadline'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

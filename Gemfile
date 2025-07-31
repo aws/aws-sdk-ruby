@@ -3,25 +3,22 @@
 source 'https://rubygems.org'
 
 gem 'rake', require: false
-# SDK feature dependencies
+
 gem 'aws-crt' if ENV['CRT']
 gem 'base64'
 gem 'bigdecimal'
 gem 'csv'
 gem 'http-2'
+gem 'irb'
 gem 'jmespath'
-if defined?(JRUBY_VERSION)
-  # get the latest jruby-openssl to support sigv4a
-  # see: https://github.com/jruby/jruby-openssl/issues/30
-  gem 'jruby-openssl'
-end
+gem 'jruby-openssl' if defined?(JRUBY_VERSION)
+gem 'rdoc'
 
 # protocol parsers
 gem 'json', '>= 2.4.0' # due to load_file support, see: https://github.com/ruby/json/issues/696
 gem 'nokogiri'
 gem 'oga'
 gem 'rexml'
-# These protocol parsers do not have java gems
 unless defined?(JRUBY_VERSION)
   gem 'libxml-ruby'
   gem 'oj'

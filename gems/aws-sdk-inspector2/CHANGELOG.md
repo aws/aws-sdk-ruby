@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2025-07-31)
+------------------
+
+* Feature - Extend usage to include agentless hours and add CODE_REPOSITORY to aggregation resource type
+
 1.55.0 (2025-07-21)
 ------------------
 

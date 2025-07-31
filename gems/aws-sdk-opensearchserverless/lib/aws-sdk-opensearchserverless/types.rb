@@ -719,7 +719,7 @@ module Aws::OpenSearchServerless
     #
     # @!attribute [rw] saml_options
     #   Describes SAML options in in the form of a key-value map. This field
-    #   is required if you specify `saml` for the `type` parameter.
+    #   is required if you specify `SAML` for the `type` parameter.
     #   @return [Types::SamlConfigOptions]
     #
     # @!attribute [rw] iam_identity_center_options
@@ -727,6 +727,12 @@ module Aws::OpenSearchServerless
     #   map. This field is required if you specify iamidentitycenter for the
     #   type parameter.
     #   @return [Types::CreateIamIdentityCenterConfigOptions]
+    #
+    # @!attribute [rw] iam_federation_options
+    #   Describes IAM federation options in the form of a key-value map.
+    #   This field is required if you specify `iamFederation` for the `type`
+    #   parameter.
+    #   @return [Types::IamFederationConfigOptions]
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
@@ -744,6 +750,7 @@ module Aws::OpenSearchServerless
       :description,
       :saml_options,
       :iam_identity_center_options,
+      :iam_federation_options,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1337,6 +1344,32 @@ module Aws::OpenSearchServerless
     #
     class GetSecurityPolicyResponse < Struct.new(
       :security_policy_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes IAM federation options for an OpenSearch Serverless security
+    # configuration in the form of a key-value map. These options define how
+    # OpenSearch Serverless integrates with external identity providers
+    # using federation.
+    #
+    # @!attribute [rw] group_attribute
+    #   The group attribute for this IAM federation integration. This
+    #   attribute is used to map identity provider groups to OpenSearch
+    #   Serverless permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_attribute
+    #   The user attribute for this IAM federation integration. This
+    #   attribute is used to identify users in the federated authentication
+    #   process.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/IamFederationConfigOptions AWS API Documentation
+    #
+    class IamFederationConfigOptions < Struct.new(
+      :group_attribute,
+      :user_attribute)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1938,8 +1971,8 @@ module Aws::OpenSearchServerless
     #   @return [String]
     #
     # @!attribute [rw] open_search_serverless_entity_id
-    #   Custom entity id attribute to override default entity id for this
-    #   saml integration.
+    #   Custom entity ID attribute to override the default entity ID for
+    #   this SAML integration.
     #   @return [String]
     #
     # @!attribute [rw] session_timeout
@@ -1986,6 +2019,12 @@ module Aws::OpenSearchServerless
     #   map.
     #   @return [Types::IamIdentityCenterConfigOptions]
     #
+    # @!attribute [rw] iam_federation_options
+    #   Describes IAM federation options in the form of a key-value map.
+    #   Contains configuration details about how OpenSearch Serverless
+    #   integrates with external identity providers through federation.
+    #   @return [Types::IamFederationConfigOptions]
+    #
     # @!attribute [rw] created_date
     #   The date the configuration was created.
     #   @return [Integer]
@@ -2003,6 +2042,7 @@ module Aws::OpenSearchServerless
       :description,
       :saml_options,
       :iam_identity_center_options,
+      :iam_federation_options,
       :created_date,
       :last_modified_date)
       SENSITIVE = []
@@ -2542,6 +2582,12 @@ module Aws::OpenSearchServerless
     #   map.
     #   @return [Types::UpdateIamIdentityCenterConfigOptions]
     #
+    # @!attribute [rw] iam_federation_options
+    #   Describes IAM federation options in the form of a key-value map for
+    #   updating an existing security configuration. Use this field to
+    #   modify IAM federation settings for the security configuration.
+    #   @return [Types::IamFederationConfigOptions]
+    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -2558,6 +2604,7 @@ module Aws::OpenSearchServerless
       :description,
       :saml_options,
       :iam_identity_center_options_updates,
+      :iam_federation_options,
       :client_token)
       SENSITIVE = []
       include Aws::Structure

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2025-07-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2025-07-29)
+------------------
+
+* Feature - Adds support for tag management on monitors.
+
 1.30.0 (2025-07-21)
 ------------------
 

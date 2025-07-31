@@ -173,19 +173,26 @@ module Aws
                               ?state: ("ENABLED" | "DISABLED"),
                               ?scheduling_policy_arn: ::String,
                               priority: ::Integer,
-                              compute_environment_order: Array[
+                              ?compute_environment_order: Array[
                                 {
                                   order: ::Integer,
                                   compute_environment: ::String
                                 },
                               ],
+                              ?service_environment_order: Array[
+                                {
+                                  order: ::Integer,
+                                  service_environment: ::String
+                                },
+                              ],
+                              ?job_queue_type: ("EKS" | "ECS" | "ECS_FARGATE" | "SAGEMAKER_TRAINING"),
                               ?tags: Hash[::String, ::String],
                               ?job_state_time_limit_actions: Array[
                                 {
                                   reason: ::String,
                                   state: ("RUNNABLE"),
                                   max_time_seconds: ::Integer,
-                                  action: ("CANCEL")
+                                  action: ("CANCEL" | "TERMINATE")
                                 },
                               ]
                             ) -> _CreateJobQueueResponseSuccess
@@ -212,6 +219,26 @@ module Aws
                                       ?tags: Hash[::String, ::String]
                                     ) -> _CreateSchedulingPolicyResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSchedulingPolicyResponseSuccess
+
+      interface _CreateServiceEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServiceEnvironmentResponse]
+        def service_environment_name: () -> ::String
+        def service_environment_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#create_service_environment-instance_method
+      def create_service_environment: (
+                                        service_environment_name: ::String,
+                                        service_environment_type: ("SAGEMAKER_TRAINING"),
+                                        ?state: ("ENABLED" | "DISABLED"),
+                                        capacity_limits: Array[
+                                          {
+                                            max_capacity: ::Integer?,
+                                            capacity_unit: ::String?
+                                          },
+                                        ],
+                                        ?tags: Hash[::String, ::String]
+                                      ) -> _CreateServiceEnvironmentResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceEnvironmentResponseSuccess
 
       interface _DeleteComputeEnvironmentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteComputeEnvironmentResponse]
@@ -248,6 +275,15 @@ module Aws
                                       arn: ::String
                                     ) -> _DeleteSchedulingPolicyResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSchedulingPolicyResponseSuccess
+
+      interface _DeleteServiceEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServiceEnvironmentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#delete_service_environment-instance_method
+      def delete_service_environment: (
+                                        service_environment: ::String
+                                      ) -> _DeleteServiceEnvironmentResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServiceEnvironmentResponseSuccess
 
       interface _DeregisterJobDefinitionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterJobDefinitionResponse]
@@ -336,6 +372,47 @@ module Aws
                                         ) -> _DescribeSchedulingPoliciesResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSchedulingPoliciesResponseSuccess
 
+      interface _DescribeServiceEnvironmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeServiceEnvironmentsResponse]
+        def service_environments: () -> ::Array[Types::ServiceEnvironmentDetail]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#describe_service_environments-instance_method
+      def describe_service_environments: (
+                                           ?service_environments: Array[::String],
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _DescribeServiceEnvironmentsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeServiceEnvironmentsResponseSuccess
+
+      interface _DescribeServiceJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeServiceJobResponse]
+        def attempts: () -> ::Array[Types::ServiceJobAttemptDetail]
+        def created_at: () -> ::Integer
+        def is_terminated: () -> bool
+        def job_arn: () -> ::String
+        def job_id: () -> ::String
+        def job_name: () -> ::String
+        def job_queue: () -> ::String
+        def latest_attempt: () -> Types::LatestServiceJobAttempt
+        def retry_strategy: () -> Types::ServiceJobRetryStrategy
+        def scheduling_priority: () -> ::Integer
+        def service_request_payload: () -> ::String
+        def service_job_type: () -> ("SAGEMAKER_TRAINING")
+        def share_identifier: () -> ::String
+        def started_at: () -> ::Integer
+        def status: () -> ("SUBMITTED" | "PENDING" | "RUNNABLE" | "SCHEDULED" | "STARTING" | "RUNNING" | "SUCCEEDED" | "FAILED")
+        def status_reason: () -> ::String
+        def stopped_at: () -> ::Integer
+        def tags: () -> ::Hash[::String, ::String]
+        def timeout_config: () -> Types::ServiceJobTimeout
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#describe_service_job-instance_method
+      def describe_service_job: (
+                                  job_id: ::String
+                                ) -> _DescribeServiceJobResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeServiceJobResponseSuccess
+
       interface _GetJobQueueSnapshotResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetJobQueueSnapshotResponse]
         def front_of_queue: () -> Types::FrontOfQueueDetail
@@ -416,6 +493,26 @@ module Aws
                                       ?next_token: ::String
                                     ) -> _ListSchedulingPoliciesResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSchedulingPoliciesResponseSuccess
+
+      interface _ListServiceJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceJobsResponse]
+        def job_summary_list: () -> ::Array[Types::ServiceJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#list_service_jobs-instance_method
+      def list_service_jobs: (
+                               ?job_queue: ::String,
+                               ?job_status: ("SUBMITTED" | "PENDING" | "RUNNABLE" | "SCHEDULED" | "STARTING" | "RUNNING" | "SUCCEEDED" | "FAILED"),
+                               ?max_results: ::Integer,
+                               ?next_token: ::String,
+                               ?filters: Array[
+                                 {
+                                   name: ::String?,
+                                   values: Array[::String]?
+                                 },
+                               ]
+                             ) -> _ListServiceJobsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceJobsResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
@@ -1412,6 +1509,37 @@ module Aws
                       ) -> _SubmitJobResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SubmitJobResponseSuccess
 
+      interface _SubmitServiceJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SubmitServiceJobResponse]
+        def job_arn: () -> ::String
+        def job_name: () -> ::String
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#submit_service_job-instance_method
+      def submit_service_job: (
+                                job_name: ::String,
+                                job_queue: ::String,
+                                ?retry_strategy: {
+                                  attempts: ::Integer,
+                                  evaluate_on_exit: Array[
+                                    {
+                                      action: ("RETRY" | "EXIT")?,
+                                      on_status_reason: ::String?
+                                    },
+                                  ]?
+                                },
+                                ?scheduling_priority: ::Integer,
+                                service_request_payload: ::String,
+                                service_job_type: ("SAGEMAKER_TRAINING"),
+                                ?share_identifier: ::String,
+                                ?timeout_config: {
+                                  attempt_duration_seconds: ::Integer?
+                                },
+                                ?tags: Hash[::String, ::String],
+                                ?client_token: ::String
+                              ) -> _SubmitServiceJobResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SubmitServiceJobResponseSuccess
+
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
       end
@@ -1431,6 +1559,16 @@ module Aws
                            reason: ::String
                          ) -> _TerminateJobResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateJobResponseSuccess
+
+      interface _TerminateServiceJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TerminateServiceJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#terminate_service_job-instance_method
+      def terminate_service_job: (
+                                   job_id: ::String,
+                                   reason: ::String
+                                 ) -> _TerminateServiceJobResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateServiceJobResponseSuccess
 
       interface _UntagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
@@ -1532,12 +1670,18 @@ module Aws
                                   compute_environment: ::String
                                 },
                               ],
+                              ?service_environment_order: Array[
+                                {
+                                  order: ::Integer,
+                                  service_environment: ::String
+                                },
+                              ],
                               ?job_state_time_limit_actions: Array[
                                 {
                                   reason: ::String,
                                   state: ("RUNNABLE"),
                                   max_time_seconds: ::Integer,
-                                  action: ("CANCEL")
+                                  action: ("CANCEL" | "TERMINATE")
                                 },
                               ]
                             ) -> _UpdateJobQueueResponseSuccess
@@ -1561,6 +1705,24 @@ module Aws
                                       }
                                     ) -> _UpdateSchedulingPolicyResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSchedulingPolicyResponseSuccess
+
+      interface _UpdateServiceEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServiceEnvironmentResponse]
+        def service_environment_name: () -> ::String
+        def service_environment_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#update_service_environment-instance_method
+      def update_service_environment: (
+                                        service_environment: ::String,
+                                        ?state: ("ENABLED" | "DISABLED"),
+                                        ?capacity_limits: Array[
+                                          {
+                                            max_capacity: ::Integer?,
+                                            capacity_unit: ::String?
+                                          },
+                                        ]
+                                      ) -> _UpdateServiceEnvironmentResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceEnvironmentResponseSuccess
     end
   end
 end

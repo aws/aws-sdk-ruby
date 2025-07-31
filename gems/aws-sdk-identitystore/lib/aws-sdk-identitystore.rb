@@ -54,7 +54,7 @@ module Aws::IdentityStore
   autoload :EndpointProvider, 'aws-sdk-identitystore/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-identitystore/endpoints'
 
-  GEM_VERSION = '1.54.0'
+  GEM_VERSION = '1.55.0'
 
 end
 

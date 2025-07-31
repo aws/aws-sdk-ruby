@@ -75827,6 +75827,12 @@ module Aws
                                   big_query_parameters: {
                                     project_id: ::String,
                                     data_set_region: ::String?
+                                  }?,
+                                  impala_parameters: {
+                                    host: ::String,
+                                    port: ::Integer,
+                                    database: ::String?,
+                                    sql_endpoint_path: ::String
                                   }?
                                 },
                                 ?credentials: {
@@ -75985,6 +75991,12 @@ module Aws
                                         big_query_parameters: {
                                           project_id: ::String,
                                           data_set_region: ::String?
+                                        }?,
+                                        impala_parameters: {
+                                          host: ::String,
+                                          port: ::Integer,
+                                          database: ::String?,
+                                          sql_endpoint_path: ::String
                                         }?
                                       },
                                     ]?
@@ -116254,6 +116266,12 @@ module Aws
                                                    big_query_parameters: {
                                                      project_id: ::String,
                                                      data_set_region: ::String?
+                                                   }?,
+                                                   impala_parameters: {
+                                                     host: ::String,
+                                                     port: ::Integer,
+                                                     database: ::String?,
+                                                     sql_endpoint_path: ::String
                                                    }?
                                                  }?,
                                                  vpc_connection_properties: {
@@ -191638,6 +191656,12 @@ module Aws
                                   big_query_parameters: {
                                     project_id: ::String,
                                     data_set_region: ::String?
+                                  }?,
+                                  impala_parameters: {
+                                    host: ::String,
+                                    port: ::Integer,
+                                    database: ::String?,
+                                    sql_endpoint_path: ::String
                                   }?
                                 },
                                 ?credentials: {
@@ -191796,6 +191820,12 @@ module Aws
                                         big_query_parameters: {
                                           project_id: ::String,
                                           data_set_region: ::String?
+                                        }?,
+                                        impala_parameters: {
+                                          host: ::String,
+                                          port: ::Integer,
+                                          database: ::String?,
+                                          sql_endpoint_path: ::String
                                         }?
                                       },
                                     ]?

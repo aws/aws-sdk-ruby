@@ -55,7 +55,7 @@ module Aws::MedicalImaging
   autoload :EndpointProvider, 'aws-sdk-medicalimaging/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-medicalimaging/endpoints'
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.31.0'
 
 end
 

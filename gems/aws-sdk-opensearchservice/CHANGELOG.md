@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2025-07-31)
+------------------
+
+* Feature - Granular access control support for NEO-SAML with IAMFederation for AOS data source
+
 1.71.0 (2025-07-21)
 ------------------
 

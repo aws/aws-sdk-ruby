@@ -674,8 +674,8 @@ module Aws::DirectoryService
     #   replication. For example, `us-east-1`.
     #
     # @option params [required, Types::DirectoryVpcSettings] :vpc_settings
-    #   Contains VPC information for the CreateDirectory or CreateMicrosoftAD
-    #   operation.
+    #   Contains VPC information for the CreateDirectory, CreateMicrosoftAD,
+    #   or CreateHybridAD operation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1240,6 +1240,66 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Creates a hybrid directory that connects your self-managed Active
+    # Directory (AD) infrastructure and Amazon Web Services.
+    #
+    # You must have a successful directory assessment using
+    # StartADAssessment to validate your environment compatibility before
+    # you use this operation.
+    #
+    # Updates are applied asynchronously. Use DescribeDirectories to monitor
+    # the progress of directory creation.
+    #
+    # @option params [required, String] :secret_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that contains the credentials for the service account
+    #   used to join hybrid domain controllers to your self-managed AD domain.
+    #   This secret is used once and not stored.
+    #
+    #   The secret must contain key-value pairs with keys matching
+    #   `customerAdAdminDomainUsername` and `customerAdAdminDomainPassword`.
+    #   For example:
+    #   `{"customerAdAdminDomainUsername":"carlos_salazar","customerAdAdminDomainPassword":"ExamplePassword123!"}`.
+    #
+    # @option params [required, String] :assessment_id
+    #   The unique identifier of the successful directory assessment that
+    #   validates your self-managed AD environment. You must have a successful
+    #   directory assessment before you create a hybrid directory.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to be assigned to the directory. Each tag consists of a key
+    #   and value pair. You can specify multiple tags as a list.
+    #
+    # @return [Types::CreateHybridADResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateHybridADResult#directory_id #directory_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_hybrid_ad({
+    #     secret_arn: "SecretArn", # required
+    #     assessment_id: "AssessmentId", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.directory_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateHybridAD AWS API Documentation
+    #
+    # @overload create_hybrid_ad(params = {})
+    # @param [Hash] params ({})
+    def create_hybrid_ad(params = {}, options = {})
+      req = build_request(:create_hybrid_ad, params)
+      req.send_request(options)
+    end
+
     # Creates a subscription to forward real-time Directory Service domain
     # controller security logs to the specified Amazon CloudWatch log group
     # in your Amazon Web Services account.
@@ -1518,6 +1578,39 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Deletes a directory assessment and all associated data. This operation
+    # permanently removes the assessment results, validation reports, and
+    # configuration information.
+    #
+    # You cannot delete system-initiated assessments. You can delete
+    # customer-created assessments even if they are in progress.
+    #
+    # @option params [required, String] :assessment_id
+    #   The unique identifier of the directory assessment to delete.
+    #
+    # @return [Types::DeleteADAssessmentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteADAssessmentResult#assessment_id #assessment_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_ad_assessment({
+    #     assessment_id: "AssessmentId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.assessment_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteADAssessment AWS API Documentation
+    #
+    # @overload delete_ad_assessment(params = {})
+    # @param [Hash] params ({})
+    def delete_ad_assessment(params = {}, options = {})
+      req = build_request(:delete_ad_assessment, params)
+      req.send_request(options)
+    end
+
     # Deletes a conditional forwarder that has been set up for your Amazon
     # Web Services directory.
     #
@@ -1791,6 +1884,65 @@ module Aws::DirectoryService
     # @param [Hash] params ({})
     def deregister_event_topic(params = {}, options = {})
       req = build_request(:deregister_event_topic, params)
+      req.send_request(options)
+    end
+
+    # Retrieves detailed information about a directory assessment, including
+    # its current status, validation results, and configuration details. Use
+    # this operation to monitor assessment progress and review results.
+    #
+    # @option params [required, String] :assessment_id
+    #   The identifier of the directory assessment to describe.
+    #
+    # @return [Types::DescribeADAssessmentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeADAssessmentResult#assessment #assessment} => Types::Assessment
+    #   * {Types::DescribeADAssessmentResult#assessment_reports #assessment_reports} => Array&lt;Types::AssessmentReport&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_ad_assessment({
+    #     assessment_id: "AssessmentId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.assessment.assessment_id #=> String
+    #   resp.assessment.directory_id #=> String
+    #   resp.assessment.dns_name #=> String
+    #   resp.assessment.start_time #=> Time
+    #   resp.assessment.last_update_date_time #=> Time
+    #   resp.assessment.status #=> String
+    #   resp.assessment.status_code #=> String
+    #   resp.assessment.status_reason #=> String
+    #   resp.assessment.customer_dns_ips #=> Array
+    #   resp.assessment.customer_dns_ips[0] #=> String
+    #   resp.assessment.vpc_id #=> String
+    #   resp.assessment.subnet_ids #=> Array
+    #   resp.assessment.subnet_ids[0] #=> String
+    #   resp.assessment.security_group_ids #=> Array
+    #   resp.assessment.security_group_ids[0] #=> String
+    #   resp.assessment.self_managed_instance_ids #=> Array
+    #   resp.assessment.self_managed_instance_ids[0] #=> String
+    #   resp.assessment.report_type #=> String
+    #   resp.assessment.version #=> String
+    #   resp.assessment_reports #=> Array
+    #   resp.assessment_reports[0].domain_controller_ip #=> String
+    #   resp.assessment_reports[0].validations #=> Array
+    #   resp.assessment_reports[0].validations[0].category #=> String
+    #   resp.assessment_reports[0].validations[0].name #=> String
+    #   resp.assessment_reports[0].validations[0].status #=> String
+    #   resp.assessment_reports[0].validations[0].status_code #=> String
+    #   resp.assessment_reports[0].validations[0].status_reason #=> String
+    #   resp.assessment_reports[0].validations[0].start_time #=> Time
+    #   resp.assessment_reports[0].validations[0].last_update_date_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeADAssessment AWS API Documentation
+    #
+    # @overload describe_ad_assessment(params = {})
+    # @param [Hash] params ({})
+    def describe_ad_assessment(params = {}, options = {})
+      req = build_request(:describe_ad_assessment, params)
       req.send_request(options)
     end
 
@@ -2115,6 +2267,10 @@ module Aws::DirectoryService
     #   resp.directory_descriptions[0].regions_info.additional_regions #=> Array
     #   resp.directory_descriptions[0].regions_info.additional_regions[0] #=> String
     #   resp.directory_descriptions[0].os_version #=> String, one of "SERVER_2012", "SERVER_2019"
+    #   resp.directory_descriptions[0].hybrid_settings.self_managed_dns_ip_addrs #=> Array
+    #   resp.directory_descriptions[0].hybrid_settings.self_managed_dns_ip_addrs[0] #=> String
+    #   resp.directory_descriptions[0].hybrid_settings.self_managed_instance_ids #=> Array
+    #   resp.directory_descriptions[0].hybrid_settings.self_managed_instance_ids[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDirectories AWS API Documentation
@@ -2280,6 +2436,84 @@ module Aws::DirectoryService
     # @param [Hash] params ({})
     def describe_event_topics(params = {}, options = {})
       req = build_request(:describe_event_topics, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about update activities for a hybrid directory.
+    # This operation provides details about configuration changes,
+    # administrator account updates, and self-managed instance settings (IDs
+    # and DNS IPs).
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the hybrid directory for which to retrieve update
+    #   information.
+    #
+    # @option params [String] :update_type
+    #   The type of update activities to retrieve. Valid values include
+    #   `SelfManagedInstances` and `HybridAdministratorAccount`.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous request to
+    #   DescribeHybridADUpdate. Pass null if this is the first request.
+    #
+    # @return [Types::DescribeHybridADUpdateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeHybridADUpdateResult#update_activities #update_activities} => Types::HybridUpdateActivities
+    #   * {Types::DescribeHybridADUpdateResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_hybrid_ad_update({
+    #     directory_id: "DirectoryId", # required
+    #     update_type: "SelfManagedInstances", # accepts SelfManagedInstances, HybridAdministratorAccount
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update_activities.self_managed_instances #=> Array
+    #   resp.update_activities.self_managed_instances[0].status #=> String, one of "Updated", "Updating", "UpdateFailed"
+    #   resp.update_activities.self_managed_instances[0].status_reason #=> String
+    #   resp.update_activities.self_managed_instances[0].initiated_by #=> String
+    #   resp.update_activities.self_managed_instances[0].new_value.instance_ids #=> Array
+    #   resp.update_activities.self_managed_instances[0].new_value.instance_ids[0] #=> String
+    #   resp.update_activities.self_managed_instances[0].new_value.dns_ips #=> Array
+    #   resp.update_activities.self_managed_instances[0].new_value.dns_ips[0] #=> String
+    #   resp.update_activities.self_managed_instances[0].previous_value.instance_ids #=> Array
+    #   resp.update_activities.self_managed_instances[0].previous_value.instance_ids[0] #=> String
+    #   resp.update_activities.self_managed_instances[0].previous_value.dns_ips #=> Array
+    #   resp.update_activities.self_managed_instances[0].previous_value.dns_ips[0] #=> String
+    #   resp.update_activities.self_managed_instances[0].start_time #=> Time
+    #   resp.update_activities.self_managed_instances[0].last_updated_date_time #=> Time
+    #   resp.update_activities.self_managed_instances[0].assessment_id #=> String
+    #   resp.update_activities.hybrid_administrator_account #=> Array
+    #   resp.update_activities.hybrid_administrator_account[0].status #=> String, one of "Updated", "Updating", "UpdateFailed"
+    #   resp.update_activities.hybrid_administrator_account[0].status_reason #=> String
+    #   resp.update_activities.hybrid_administrator_account[0].initiated_by #=> String
+    #   resp.update_activities.hybrid_administrator_account[0].new_value.instance_ids #=> Array
+    #   resp.update_activities.hybrid_administrator_account[0].new_value.instance_ids[0] #=> String
+    #   resp.update_activities.hybrid_administrator_account[0].new_value.dns_ips #=> Array
+    #   resp.update_activities.hybrid_administrator_account[0].new_value.dns_ips[0] #=> String
+    #   resp.update_activities.hybrid_administrator_account[0].previous_value.instance_ids #=> Array
+    #   resp.update_activities.hybrid_administrator_account[0].previous_value.instance_ids[0] #=> String
+    #   resp.update_activities.hybrid_administrator_account[0].previous_value.dns_ips #=> Array
+    #   resp.update_activities.hybrid_administrator_account[0].previous_value.dns_ips[0] #=> String
+    #   resp.update_activities.hybrid_administrator_account[0].start_time #=> Time
+    #   resp.update_activities.hybrid_administrator_account[0].last_updated_date_time #=> Time
+    #   resp.update_activities.hybrid_administrator_account[0].assessment_id #=> String
+    #   resp.next_token #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * hybrid_ad_updated
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeHybridADUpdate AWS API Documentation
+    #
+    # @overload describe_hybrid_ad_update(params = {})
+    # @param [Hash] params ({})
+    def describe_hybrid_ad_update(params = {}, options = {})
+      req = build_request(:describe_hybrid_ad_update, params)
       req.send_request(options)
     end
 
@@ -3215,6 +3449,59 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Retrieves a list of directory assessments for the specified directory
+    # or all assessments in your account. Use this operation to monitor
+    # assessment status and manage multiple assessments.
+    #
+    # @option params [String] :directory_id
+    #   The identifier of the directory for which to list assessments. If not
+    #   specified, all assessments in your account are returned.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous request to ListADAssessments.
+    #   Pass null if this is the first request.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of assessment summaries to return.
+    #
+    # @return [Types::ListADAssessmentsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListADAssessmentsResult#assessments #assessments} => Array&lt;Types::AssessmentSummary&gt;
+    #   * {Types::ListADAssessmentsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_ad_assessments({
+    #     directory_id: "DirectoryId",
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.assessments #=> Array
+    #   resp.assessments[0].assessment_id #=> String
+    #   resp.assessments[0].directory_id #=> String
+    #   resp.assessments[0].dns_name #=> String
+    #   resp.assessments[0].start_time #=> Time
+    #   resp.assessments[0].last_update_date_time #=> Time
+    #   resp.assessments[0].status #=> String
+    #   resp.assessments[0].customer_dns_ips #=> Array
+    #   resp.assessments[0].customer_dns_ips[0] #=> String
+    #   resp.assessments[0].report_type #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListADAssessments AWS API Documentation
+    #
+    # @overload list_ad_assessments(params = {})
+    # @param [Hash] params ({})
+    def list_ad_assessments(params = {}, options = {})
+      req = build_request(:list_ad_assessments, params)
+      req.send_request(options)
+    end
+
     # For the specified directory, lists all the certificates registered for
     # a secure LDAP or client certificate authentication.
     #
@@ -3920,6 +4207,73 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Initiates a directory assessment to validate your self-managed AD
+    # environment for hybrid domain join. The assessment checks
+    # compatibility and connectivity of the self-managed AD environment.
+    #
+    # A directory assessment is automatically created when you create a
+    # hybrid directory. There are two types of assessments: `CUSTOMER` and
+    # `SYSTEM`. Your Amazon Web Services account has a limit of 100
+    # `CUSTOMER` directory assessments.
+    #
+    # The assessment process typically takes 30 minutes or more to complete.
+    # The assessment process is asynchronous and you can monitor it with
+    # `DescribeADAssessment`.
+    #
+    # The `InstanceIds` must have a one-to-one correspondence with
+    # `CustomerDnsIps`, meaning that if the IP address for instance
+    # i-10243410 is 10.24.34.100 and the IP address for instance i-10243420
+    # is 10.24.34.200, then the input arrays must maintain the same order
+    # relationship, either \[10.24.34.100, 10.24.34.200\] paired with
+    # \[i-10243410, i-10243420\] or \[10.24.34.200, 10.24.34.100\] paired
+    # with \[i-10243420, i-10243410\].
+    #
+    # Note: You must provide exactly one `DirectoryId` or
+    # `AssessmentConfiguration`.
+    #
+    # @option params [Types::AssessmentConfiguration] :assessment_configuration
+    #   Configuration parameters for the directory assessment, including DNS
+    #   server information, domain name, Amazon VPC subnet, and Amazon Web
+    #   Services System Manager managed node details.
+    #
+    # @option params [String] :directory_id
+    #   The identifier of the directory for which to perform the assessment.
+    #   This should be an existing directory. If the assessment is not for an
+    #   existing directory, this parameter should be omitted.
+    #
+    # @return [Types::StartADAssessmentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartADAssessmentResult#assessment_id #assessment_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_ad_assessment({
+    #     assessment_configuration: {
+    #       customer_dns_ips: ["IpAddr"], # required
+    #       dns_name: "DirectoryName", # required
+    #       vpc_settings: { # required
+    #         vpc_id: "VpcId", # required
+    #         subnet_ids: ["SubnetId"], # required
+    #       },
+    #       instance_ids: ["AssessmentInstanceId"], # required
+    #       security_group_ids: ["SecurityGroupId"],
+    #     },
+    #     directory_id: "DirectoryId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.assessment_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/StartADAssessment AWS API Documentation
+    #
+    # @overload start_ad_assessment(params = {})
+    # @param [Hash] params ({})
+    def start_ad_assessment(params = {}, options = {})
+      req = build_request(:start_ad_assessment, params)
+      req.send_request(options)
+    end
+
     # Applies a schema extension to a Microsoft AD directory.
     #
     # @option params [required, String] :directory_id
@@ -4108,6 +4462,82 @@ module Aws::DirectoryService
     # @param [Hash] params ({})
     def update_directory_setup(params = {}, options = {})
       req = build_request(:update_directory_setup, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration of an existing hybrid directory. You can
+    # recover hybrid directory administrator account or modify self-managed
+    # instance settings.
+    #
+    # Updates are applied asynchronously. Use DescribeHybridADUpdate to
+    # monitor the progress of configuration changes.
+    #
+    # The `InstanceIds` must have a one-to-one correspondence with
+    # `CustomerDnsIps`, meaning that if the IP address for instance
+    # i-10243410 is 10.24.34.100 and the IP address for instance i-10243420
+    # is 10.24.34.200, then the input arrays must maintain the same order
+    # relationship, either \[10.24.34.100, 10.24.34.200\] paired with
+    # \[i-10243410, i-10243420\] or \[10.24.34.200, 10.24.34.100\] paired
+    # with \[i-10243420, i-10243410\].
+    #
+    # <note markdown="1"> You must provide at least one update to
+    # UpdateHybridADRequest$HybridAdministratorAccountUpdate or
+    # UpdateHybridADRequest$SelfManagedInstancesSettings.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the hybrid directory to update.
+    #
+    # @option params [Types::HybridAdministratorAccountUpdate] :hybrid_administrator_account_update
+    #   We create a hybrid directory administrator account when we create a
+    #   hybrid directory. Use `HybridAdministratorAccountUpdate` to recover
+    #   the hybrid directory administrator account if you have deleted it.
+    #
+    #   To recover your hybrid directory administrator account, we need
+    #   temporary access to a user in your self-managed AD with administrator
+    #   permissions in the form of a secret from Amazon Web Services Secrets
+    #   Manager. We use these credentials once during recovery and don't
+    #   store them.
+    #
+    #   If your hybrid directory administrator account exists, then you don’t
+    #   need to use `HybridAdministratorAccountUpdate`, even if you have
+    #   updated your self-managed AD administrator user.
+    #
+    # @option params [Types::HybridCustomerInstancesSettings] :self_managed_instances_settings
+    #   Updates to the self-managed AD configuration, including DNS server IP
+    #   addresses and Amazon Web Services System Manager managed node
+    #   identifiers.
+    #
+    # @return [Types::UpdateHybridADResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateHybridADResult#directory_id #directory_id} => String
+    #   * {Types::UpdateHybridADResult#assessment_id #assessment_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_hybrid_ad({
+    #     directory_id: "DirectoryId", # required
+    #     hybrid_administrator_account_update: {
+    #       secret_arn: "SecretArn", # required
+    #     },
+    #     self_managed_instances_settings: {
+    #       customer_dns_ips: ["IpAddr"], # required
+    #       instance_ids: ["AssessmentInstanceId"], # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.directory_id #=> String
+    #   resp.assessment_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateHybridAD AWS API Documentation
+    #
+    # @overload update_hybrid_ad(params = {})
+    # @param [Hash] params ({})
+    def update_hybrid_ad(params = {}, options = {})
+      req = build_request(:update_hybrid_ad, params)
       req.send_request(options)
     end
 
@@ -4343,14 +4773,127 @@ module Aws::DirectoryService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # Polls an API operation until a resource enters a desired state.
+    #
+    # ## Basic Usage
+    #
+    # A waiter will call an API operation until:
+    #
+    # * It is successful
+    # * It enters a terminal state
+    # * It makes the maximum number of attempts
+    #
+    # In between attempts, the waiter will sleep.
+    #
+    #     # polls in a loop, sleeping between attempts
+    #     client.wait_until(waiter_name, params)
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. You can pass
+    # configuration as the final arguments hash.
+    #
+    #     # poll for ~25 seconds
+    #     client.wait_until(waiter_name, params, {
+    #       max_attempts: 5,
+    #       delay: 5,
+    #     })
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     client.wait_until(waiter_name, params, {
+    #
+    #       # disable max attempts
+    #       max_attempts: nil,
+    #
+    #       # poll for 1 hour, instead of a number of attempts
+    #       before_wait: -> (attempts, response) do
+    #         throw :failure if Time.now - started_at > 3600
+    #       end
+    #     })
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is unsuccessful, it will raise an error.
+    # All of the failure errors extend from
+    # {Aws::Waiters::Errors::WaiterFailed}.
+    #
+    #     begin
+    #       client.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    # ## Valid Waiters
+    #
+    # The following table lists the valid waiter names, the operations they call,
+    # and the default `:delay` and `:max_attempts` values.
+    #
+    # | waiter_name       | params                             | :delay   | :max_attempts |
+    # | ----------------- | ---------------------------------- | -------- | ------------- |
+    # | hybrid_ad_updated | {Client#describe_hybrid_ad_update} | 120      | 60            |
+    #
+    # @raise [Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    # @raise [Errors::TooManyAttemptsError] Raised when the configured
+    #   maximum number of attempts have been made, and the waiter is not
+    #   yet successful.
+    #
+    # @raise [Errors::UnexpectedError] Raised when an error is encounted
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [Errors::NoSuchWaiterError] Raised when you request to wait
+    #   for an unknown state.
+    #
+    # @return [Boolean] Returns `true` if the waiter was successful.
+    # @param [Symbol] waiter_name
+    # @param [Hash] params ({})
+    # @param [Hash] options ({})
+    # @option options [Integer] :max_attempts
+    # @option options [Integer] :delay
+    # @option options [Proc] :before_attempt
+    # @option options [Proc] :before_wait
+    def wait_until(waiter_name, params = {}, options = {})
+      w = waiter(waiter_name, options)
+      yield(w.waiter) if block_given? # deprecated
+      w.wait(params)
     end
 
     # @api private
     # @deprecated
     def waiter_names
-      []
+      waiters.keys
+    end
+
+    private
+
+    # @param [Symbol] waiter_name
+    # @param [Hash] options ({})
+    def waiter(waiter_name, options = {})
+      waiter_class = waiters[waiter_name]
+      if waiter_class
+        waiter_class.new(options.merge(client: self))
+      else
+        raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
+      end
+    end
+
+    def waiters
+      {
+        hybrid_ad_updated: Waiters::HybridADUpdated
+      }
     end
 
     class << self

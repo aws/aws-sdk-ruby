@@ -54,7 +54,7 @@ module Aws::Route53RecoveryCluster
   autoload :EndpointProvider, 'aws-sdk-route53recoverycluster/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-route53recoverycluster/endpoints'
 
-  GEM_VERSION = '1.45.0'
+  GEM_VERSION = '1.46.0'
 
 end
 

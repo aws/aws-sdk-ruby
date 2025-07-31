@@ -49,12 +49,13 @@ module Aws::DirectoryService
   end
   autoload :Client, 'aws-sdk-directoryservice/client'
   autoload :Errors, 'aws-sdk-directoryservice/errors'
+  autoload :Waiters, 'aws-sdk-directoryservice/waiters'
   autoload :Resource, 'aws-sdk-directoryservice/resource'
   autoload :EndpointParameters, 'aws-sdk-directoryservice/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-directoryservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-directoryservice/endpoints'
 
-  GEM_VERSION = '1.87.0'
+  GEM_VERSION = '1.89.0'
 
 end
 

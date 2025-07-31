@@ -1407,6 +1407,10 @@ module Aws::IoTWireless
       attr_accessor nwk_geo_loc: bool
       attr_accessor target_per: ::Integer
       attr_accessor min_gw_diversity: ::Integer
+      attr_accessor tx_power_index_min: ::Integer
+      attr_accessor tx_power_index_max: ::Integer
+      attr_accessor nb_trans_min: ::Integer
+      attr_accessor nb_trans_max: ::Integer
       SENSITIVE: []
     end
 
@@ -1477,6 +1481,10 @@ module Aws::IoTWireless
       attr_accessor dr_max: ::Integer
       attr_accessor pr_allowed: bool
       attr_accessor ra_allowed: bool
+      attr_accessor tx_power_index_min: ::Integer
+      attr_accessor tx_power_index_max: ::Integer
+      attr_accessor nb_trans_min: ::Integer
+      attr_accessor nb_trans_max: ::Integer
       SENSITIVE: []
     end
 

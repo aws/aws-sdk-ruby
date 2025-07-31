@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2025-07-31)
+------------------
+
+* Feature - Added ability to log session activity on a portal to an S3 bucket.
+
 1.44.0 (2025-07-21)
 ------------------
 

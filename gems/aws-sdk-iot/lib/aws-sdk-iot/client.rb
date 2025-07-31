@@ -6378,6 +6378,59 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Retrieves the encryption configuration for resources and data of your
+    # Amazon Web Services account in Amazon Web Services IoT Core. For more
+    # information, see [Key management in IoT][1] from the *Amazon Web
+    # Services IoT Core Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/key-management.html
+    #
+    # @return [Types::DescribeEncryptionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEncryptionConfigurationResponse#encryption_type #encryption_type} => String
+    #   * {Types::DescribeEncryptionConfigurationResponse#kms_key_arn #kms_key_arn} => String
+    #   * {Types::DescribeEncryptionConfigurationResponse#kms_access_role_arn #kms_access_role_arn} => String
+    #   * {Types::DescribeEncryptionConfigurationResponse#configuration_details #configuration_details} => Types::ConfigurationDetails
+    #   * {Types::DescribeEncryptionConfigurationResponse#last_modified_date #last_modified_date} => Time
+    #
+    #
+    # @example Example: DescribeEncryptionConfiguration
+    #
+    #   # DescribeEncryptionConfiguration API operation example
+    #
+    #   resp = client.describe_encryption_configuration({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     configuration_details: {
+    #       configuration_status: "HEALTHY", 
+    #     }, 
+    #     encryption_type: "CUSTOMER_MANAGED_KMS_KEY", 
+    #     kms_access_role_arn: "arn:aws:iam:us-west-2:111122223333:role/myrole", 
+    #     kms_key_arn: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #     last_modified_date: Time.parse("2024-09-26T22:01:02.365000-07:00"), 
+    #   }
+    #
+    # @example Response structure
+    #
+    #   resp.encryption_type #=> String, one of "CUSTOMER_MANAGED_KMS_KEY", "AWS_OWNED_KMS_KEY"
+    #   resp.kms_key_arn #=> String
+    #   resp.kms_access_role_arn #=> String
+    #   resp.configuration_details.configuration_status #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.configuration_details.error_code #=> String
+    #   resp.configuration_details.error_message #=> String
+    #   resp.last_modified_date #=> Time
+    #
+    # @overload describe_encryption_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_encryption_configuration(params = {}, options = {})
+      req = build_request(:describe_encryption_configuration, params)
+      req.send_request(options)
+    end
+
     # Returns or creates a unique endpoint specific to the Amazon Web
     # Services account making the call.
     #
@@ -14333,14 +14386,38 @@ module Aws::IoT
     #
     # You can cancel the transfer until it is acknowledged by the recipient.
     #
-    # No notification is sent to the transfer destination's account. It is
+    # No notification is sent to the transfer destination's account. It's
     # up to the caller to notify the transfer target.
     #
-    # The certificate being transferred must not be in the ACTIVE state. You
-    # can use the UpdateCertificate action to deactivate it.
+    # The certificate being transferred must not be in the `ACTIVE` state.
+    # You can use the UpdateCertificate action to deactivate it.
     #
     # The certificate must not have any policies attached to it. You can use
     # the DetachPolicy action to detach them.
+    #
+    # **Customer managed key behavior:** When you use a customer managed key
+    # to secure your data and then transfer the key to a customer in a
+    # different account using the TransferCertificate operation, the
+    # certificates will no longer be protected by their customer managed key
+    # configuration. During the transfer process, certificates are encrypted
+    # using IoT owned keys.
+    #
+    # While a certificate is in the **PENDING\_TRANSFER** state, it's
+    # always protected by IoT owned keys, regardless of the customer managed
+    # key configuration of either the source or destination account.
+    #
+    # Once the transfer is completed through AcceptCertificateTransfer,
+    # RejectCertificateTransfer, or CancelCertificateTransfer, the
+    # certificate will be protected by the customer managed key
+    # configuration of the account that owns the certificate after the
+    # transfer operation:
+    #
+    # * If the transfer is accepted: The certificate is protected by the
+    #   destination account's customer managed key configuration.
+    #
+    # * If the transfer is rejected or cancelled: The certificate is
+    #   protected by the source account's customer managed key
+    #   configuration.
     #
     #
     #
@@ -15131,6 +15208,57 @@ module Aws::IoT
     # @param [Hash] params ({})
     def update_dynamic_thing_group(params = {}, options = {})
       req = build_request(:update_dynamic_thing_group, params)
+      req.send_request(options)
+    end
+
+    # Updates the encryption configuration. By default, all Amazon Web
+    # Services IoT Core data at rest is encrypted using Amazon Web Services
+    # owned keys. Amazon Web Services IoT Core also supports symmetric
+    # customer managed keys from Amazon Web Services Key Management Service
+    # (KMS). With customer managed keys, you create, own, and manage the KMS
+    # keys in your Amazon Web Services account. For more information, see
+    # [Data encryption][1] in the *Amazon Web Services IoT Core Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/data-encryption.html
+    #
+    # @option params [required, String] :encryption_type
+    #   The type of the Amazon Web Services Key Management Service (KMS) key.
+    #
+    # @option params [String] :kms_key_arn
+    #   The ARN of the customer-managed KMS key.
+    #
+    # @option params [String] :kms_access_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role assumed by Amazon Web
+    #   Services IoT Core to call KMS on behalf of the customer.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: UpdateEncryptionConfiguration example
+    #
+    #   # This operation updates the encryption configuration. 
+    #
+    #   resp = client.update_encryption_configuration({
+    #     encryption_type: "CUSTOMER_MANAGED_KMS_KEY", 
+    #     kms_access_role_arn: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #     kms_key_arn: "arn:aws:iam:us-west-2:111122223333:role/myrole", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_encryption_configuration({
+    #     encryption_type: "CUSTOMER_MANAGED_KMS_KEY", # required, accepts CUSTOMER_MANAGED_KMS_KEY, AWS_OWNED_KMS_KEY
+    #     kms_key_arn: "KmsKeyArn",
+    #     kms_access_role_arn: "KmsAccessRoleArn",
+    #   })
+    #
+    # @overload update_encryption_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_encryption_configuration(params = {}, options = {})
+      req = build_request(:update_encryption_configuration, params)
       req.send_request(options)
     end
 
@@ -16421,7 +16549,7 @@ module Aws::IoT
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.150.0'
+      context[:gem_version] = '1.151.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

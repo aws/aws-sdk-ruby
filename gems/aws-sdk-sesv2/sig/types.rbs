@@ -318,6 +318,31 @@ module Aws::SESV2
       SENSITIVE: []
     end
 
+    class CreateTenantRequest
+      attr_accessor tenant_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateTenantResourceAssociationRequest
+      attr_accessor tenant_name: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTenantResourceAssociationResponse < Aws::EmptyStructure
+    end
+
+    class CreateTenantResponse
+      attr_accessor tenant_name: ::String
+      attr_accessor tenant_id: ::String
+      attr_accessor tenant_arn: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor sending_status: ("ENABLED" | "REINSTATED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class CustomVerificationEmailTemplateMetadata
       attr_accessor template_name: ::String
       attr_accessor from_email_address: ::String
@@ -449,6 +474,23 @@ module Aws::SESV2
     end
 
     class DeleteSuppressedDestinationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTenantRequest
+      attr_accessor tenant_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTenantResourceAssociationRequest
+      attr_accessor tenant_name: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTenantResourceAssociationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTenantResponse < Aws::EmptyStructure
     end
 
     class DeliverabilityTestReport
@@ -921,6 +963,17 @@ module Aws::SESV2
       SENSITIVE: []
     end
 
+    class GetReputationEntityRequest
+      attr_accessor reputation_entity_reference: ::String
+      attr_accessor reputation_entity_type: ("RESOURCE")
+      SENSITIVE: []
+    end
+
+    class GetReputationEntityResponse
+      attr_accessor reputation_entity: Types::ReputationEntity
+      SENSITIVE: []
+    end
+
     class GetSuppressedDestinationRequest
       attr_accessor email_address: ::String
       SENSITIVE: []
@@ -928,6 +981,16 @@ module Aws::SESV2
 
     class GetSuppressedDestinationResponse
       attr_accessor suppressed_destination: Types::SuppressedDestination
+      SENSITIVE: []
+    end
+
+    class GetTenantRequest
+      attr_accessor tenant_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetTenantResponse
+      attr_accessor tenant: Types::Tenant
       SENSITIVE: []
     end
 
@@ -1182,6 +1245,32 @@ module Aws::SESV2
       SENSITIVE: []
     end
 
+    class ListReputationEntitiesRequest
+      attr_accessor filter: ::Hash[("ENTITY_TYPE" | "REPUTATION_IMPACT" | "SENDING_STATUS" | "ENTITY_REFERENCE_PREFIX"), ::String]
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListReputationEntitiesResponse
+      attr_accessor reputation_entities: ::Array[Types::ReputationEntity]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceTenantsRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceTenantsResponse
+      attr_accessor resource_tenants: ::Array[Types::ResourceTenantMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListSuppressedDestinationsRequest
       attr_accessor reasons: ::Array[("BOUNCE" | "COMPLAINT")]
       attr_accessor start_date: ::Time
@@ -1204,6 +1293,32 @@ module Aws::SESV2
 
     class ListTagsForResourceResponse
       attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListTenantResourcesRequest
+      attr_accessor tenant_name: ::String
+      attr_accessor filter: ::Hash[("RESOURCE_TYPE"), ::String]
+      attr_accessor page_size: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTenantResourcesResponse
+      attr_accessor tenant_resources: ::Array[Types::TenantResource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTenantsRequest
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTenantsResponse
+      attr_accessor tenants: ::Array[Types::TenantInfo]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1529,7 +1644,7 @@ module Aws::SESV2
 
     class Recommendation
       attr_accessor resource_arn: ::String
-      attr_accessor type: ("DKIM" | "DMARC" | "SPF" | "BIMI" | "COMPLAINT")
+      attr_accessor type: ("DKIM" | "DMARC" | "SPF" | "BIMI" | "COMPLAINT" | "BOUNCE" | "FEEDBACK_3P" | "IP_LISTING")
       attr_accessor description: ::String
       attr_accessor status: ("OPEN" | "FIXED")
       attr_accessor created_timestamp: ::Time
@@ -1548,9 +1663,28 @@ module Aws::SESV2
       SENSITIVE: []
     end
 
+    class ReputationEntity
+      attr_accessor reputation_entity_reference: ::String
+      attr_accessor reputation_entity_type: ("RESOURCE")
+      attr_accessor reputation_management_policy: ::String
+      attr_accessor customer_managed_status: Types::StatusRecord
+      attr_accessor aws_ses_managed_status: Types::StatusRecord
+      attr_accessor sending_status_aggregate: ("ENABLED" | "REINSTATED" | "DISABLED")
+      attr_accessor reputation_impact: ("LOW" | "HIGH")
+      SENSITIVE: []
+    end
+
     class ReputationOptions
       attr_accessor reputation_metrics_enabled: bool
       attr_accessor last_fresh_start: ::Time
+      SENSITIVE: []
+    end
+
+    class ResourceTenantMetadata
+      attr_accessor tenant_name: ::String
+      attr_accessor tenant_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor associated_timestamp: ::Time
       SENSITIVE: []
     end
 
@@ -1588,6 +1722,7 @@ module Aws::SESV2
       attr_accessor bulk_email_entries: ::Array[Types::BulkEmailEntry]
       attr_accessor configuration_set_name: ::String
       attr_accessor endpoint_id: ::String
+      attr_accessor tenant_name: ::String
       SENSITIVE: []
     end
 
@@ -1619,6 +1754,7 @@ module Aws::SESV2
       attr_accessor email_tags: ::Array[Types::MessageTag]
       attr_accessor configuration_set_name: ::String
       attr_accessor endpoint_id: ::String
+      attr_accessor tenant_name: ::String
       attr_accessor list_management_options: Types::ListManagementOptions
       SENSITIVE: []
     end
@@ -1645,6 +1781,13 @@ module Aws::SESV2
 
     class SnsDestination
       attr_accessor topic_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StatusRecord
+      attr_accessor status: ("ENABLED" | "REINSTATED" | "DISABLED")
+      attr_accessor cause: ::String
+      attr_accessor last_updated_timestamp: ::Time
       SENSITIVE: []
     end
 
@@ -1706,6 +1849,30 @@ module Aws::SESV2
       attr_accessor template_data: ::String
       attr_accessor headers: ::Array[Types::MessageHeader]
       attr_accessor attachments: ::Array[Types::Attachment]
+      SENSITIVE: []
+    end
+
+    class Tenant
+      attr_accessor tenant_name: ::String
+      attr_accessor tenant_id: ::String
+      attr_accessor tenant_arn: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor sending_status: ("ENABLED" | "REINSTATED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class TenantInfo
+      attr_accessor tenant_name: ::String
+      attr_accessor tenant_id: ::String
+      attr_accessor tenant_arn: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class TenantResource
+      attr_accessor resource_type: ("EMAIL_IDENTITY" | "CONFIGURATION_SET" | "EMAIL_TEMPLATE")
+      attr_accessor resource_arn: ::String
       SENSITIVE: []
     end
 
@@ -1820,6 +1987,26 @@ module Aws::SESV2
     end
 
     class UpdateEmailTemplateResponse < Aws::EmptyStructure
+    end
+
+    class UpdateReputationEntityCustomerManagedStatusRequest
+      attr_accessor reputation_entity_type: ("RESOURCE")
+      attr_accessor reputation_entity_reference: ::String
+      attr_accessor sending_status: ("ENABLED" | "REINSTATED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateReputationEntityCustomerManagedStatusResponse < Aws::EmptyStructure
+    end
+
+    class UpdateReputationEntityPolicyRequest
+      attr_accessor reputation_entity_type: ("RESOURCE")
+      attr_accessor reputation_entity_reference: ::String
+      attr_accessor reputation_entity_policy: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateReputationEntityPolicyResponse < Aws::EmptyStructure
     end
 
     class VdmAttributes
