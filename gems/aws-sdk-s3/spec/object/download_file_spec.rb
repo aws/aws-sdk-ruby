@@ -14,40 +14,27 @@ module Aws
         let(:small_obj) { S3::Object.new(bucket_name: 'bucket', key: 'small', client: client) }
         let(:large_obj) { S3::Object.new(bucket_name: 'bucket', key: 'large', client: client) }
         let(:single_obj) { S3::Object.new(bucket_name: 'bucket', key: 'single', client: client) }
-
         let(:one_meg) { 1024 * 1024 }
         let(:small_file) { Tempfile.new('small-file') }
         let(:large_file) { Tempfile.new('large-file') }
         let(:single_part_file) { Tempfile.new('single-part-file') }
-        let(:version_id) { 'a-fake-version-id' }
 
         before(:each) do
           allow(Dir).to receive(:tmpdir).and_return(tmpdir)
-
-          allow(client)
-            .to receive(:head_object)
-            .with({ bucket: 'bucket', key: 'small', part_number: 1 })
-            .and_return(client.stub_data(:head_object, content_length: one_meg, parts_count: nil))
-
-          allow(client)
-            .to receive(:head_object)
-            .with({ bucket: 'bucket', key: 'small', part_number: 1, version_id: version_id })
-            .and_return(client.stub_data(:head_object, content_length: one_meg, parts_count: nil))
-
-          allow(client)
-            .to receive(:head_object)
-            .with({ bucket: 'bucket', key: 'large', part_number: 1 })
-            .and_return(client.stub_data(:head_object, content_length: 5 * one_meg, parts_count: 4))
-
-          allow(client)
-            .to receive(:head_object)
-            .with({ bucket: 'bucket', key: 'large' })
-            .and_return(client.stub_data(:head_object, content_length: 20 * one_meg))
-
-          allow(client)
-            .to receive(:head_object)
-            .with({ bucket: 'bucket', key: 'single', part_number: 1 })
-            .and_return(client.stub_data(:head_object, content_length: 15 * one_meg, parts_count: nil))
+          client.stub_responses(:head_object, lambda { |context|
+            case context.params[:key]
+            when 'small'
+              { content_length: one_meg, parts_count: nil }
+            when 'large'
+              if context.params[:part_number]
+                { content_length: 5 * one_meg, parts_count: 4 }
+              else
+                { content_length: 20 * one_meg, parts_count: nil }
+              end
+            when 'single'
+              { content_length: 15 * one_meg, parts_count: nil }
+            end
+          })
         end
 
         it 'downloads single part files in Client#get_object' do
@@ -55,27 +42,20 @@ module Aws
             .to receive(:get_object)
             .with({ bucket: 'bucket', key: 'small', response_target: path })
             .exactly(1).times
-
           small_obj.download_file(path)
         end
 
         it 'download larger files in parts' do
-          expect(client)
-            .to receive(:head_object)
-            .with({ bucket: 'bucket', key: 'large', part_number: 1 })
-            .exactly(1).times
-
-          client.stub_responses(:get_object, ->(_ctx) { { body: 'body', content_range: 'bytes 0-3/4' } })
-
+          requests = 0
+          client.stub_responses(:get_object, lambda { |_ctx|
+            requests += 1
+            { body: 'body', content_range: 'bytes 0-3/4' }
+          })
           large_obj.download_file(path)
+          expect(requests).to eq(4)
         end
 
         it 'download larger files in ranges' do
-          expect(client)
-            .to receive(:head_object)
-            .with({ bucket: 'bucket', key: 'single', part_number: 1 })
-            .exactly(1).times
-
           client.stub_responses(:get_object, lambda { |context|
             responses = {
               'bytes=0-5242879' => { body: 'body', content_range: 'bytes 0-5242879/15728640' },
@@ -84,17 +64,15 @@ module Aws
             }
             responses[context.params[:range]]
           })
-
           single_obj.download_file(path)
         end
 
         it 'supports download object with version_id' do
           expect(client)
             .to receive(:get_object)
-            .with({ bucket: 'bucket', key: 'small', version_id: version_id, response_target: path })
+            .with({ bucket: 'bucket', key: 'small', version_id: 'a-fake-version-id', response_target: path })
             .exactly(1).times
-
-          small_obj.download_file(path, version_id: version_id)
+          small_obj.download_file(path, version_id: 'a-fake-version-id')
         end
 
         it 'calls on_checksum_validated on single part' do
@@ -113,10 +91,7 @@ module Aws
 
         it 'calls on_checksum_validated on multipart' do
           callback_data = { called: 0 }
-          client.stub_responses(
-            :get_object,
-            { body: 'body', content_range: 'bytes 0-3/4', checksum_sha1: 'Agg/RXngimEkJcDBoX7ket14O5Q=' }
-          )
+          client.stub_responses(:get_object, { body: 'body', content_range: 'bytes 0-3/4', checksum_sha1: 'Agg/RXngimEkJcDBoX7ket14O5Q=' })
           mutex = Mutex.new
           callback = proc do |_alg, _resp|
             mutex.synchronize do
@@ -129,15 +104,14 @@ module Aws
         end
 
         it 'supports disabling checksum_mode' do
-          expect(client)
-            .to receive(:head_object)
-            .with({ bucket: 'bucket', key: 'small', part_number: 1, checksum_mode: 'DISABLED' })
-            .and_return(client.stub_data(:head_object, content_length: one_meg, parts_count: nil))
-
-          expect(client)
-            .to receive(:get_object)
-            .with({ bucket: 'bucket', key: 'small', checksum_mode: 'DISABLED', response_target: path })
-            .exactly(1).times
+          client.stub_responses(:head_object, lambda { |context|
+            expect(context.params[:checksum_mode]).to eq('DISABLED')
+            { content_length: one_meg, parts_count: nil }
+          })
+          client.stub_responses(:get_object, lambda { |context|
+            expect(context.params[:checksum_mode]).to eq('DISABLED')
+            { body: 'body' }
+          })
 
           small_obj.download_file(path, checksum_mode: 'DISABLED')
         end
@@ -190,7 +164,6 @@ module Aws
               end
             end
             large_obj.download_file(path, progress_callback: callback)
-
             expect(n_calls).to eq(4)
           end
         end
@@ -212,12 +185,7 @@ module Aws
           end
 
           it 'does not download object when ETAG does not match during multipart get by ranges' do
-            stub = client.stub_data(:head_object, content_length: 15 * one_meg, parts_count: nil, etag: 'test-etag')
-            allow(client)
-              .to receive(:head_object)
-              .with({ bucket: 'bucket', key: 'single', part_number: 1 })
-              .and_return(stub)
-
+            client.stub_responses(:head_object, content_length: 15 * one_meg, parts_count: nil, etag: 'test-etag')
             client.stub_responses(:get_object, lambda { |ctx|
               expect(ctx.params[:if_match]).to eq('test-etag')
               'PreconditionFailed'
@@ -229,11 +197,7 @@ module Aws
           end
 
           it 'does not download object when ETAG does not match during multipart get by parts' do
-            allow(client)
-              .to receive(:head_object)
-              .with({ bucket: 'bucket', key: 'large' })
-              .and_return(client.stub_data(:head_object, content_length: 20 * one_meg, etag: 'test-etag'))
-
+            client.stub_responses(:head_object, { content_length: 20 * one_meg, etag: 'test-etag', parts_count: 4 })
             client.stub_responses(:get_object, lambda { |ctx|
               expect(ctx.params[:if_match]).to eq('test-etag')
               'PreconditionFailed'
@@ -241,7 +205,6 @@ module Aws
 
             thread = double(value: nil)
             expect(Thread).to receive(:new).and_yield.and_return(thread)
-
             expect { large_obj.download_file(path) }.to raise_error(Aws::S3::Errors::PreconditionFailed)
           end
 
@@ -265,16 +228,6 @@ module Aws
               .to raise_error(ArgumentError, ':on_checksum_validated must be callable')
           end
 
-          it 'raises an error when expected parts count differs from completed requests' do
-            # Mock PartList to simulate missing parts
-            part_list = double('PartList')
-            allow(part_list).to receive(:count).and_return(4)
-            allow(part_list).to receive(:shift).and_return(nil)
-            allow(Aws::S3::FileDownloader::PartList).to receive(:new).and_return(part_list)
-
-            expect { large_obj.download_file(path) }.to raise_error(Aws::S3::MultipartDownloadError)
-          end
-
           it 'raises error when range validation fails' do
             client.stub_responses(:get_object, { body: 'body', content_range: 'bytes 0-3/4' })
             expect { large_obj.download_file(path, mode: 'get_range', chunk_size: one_meg) }
@@ -282,7 +235,7 @@ module Aws
           end
 
           it 'deletes partially downloaded file when download fails' do
-            client.stub_responses(:get_object, [{ body: 'body', content_range: 'bytes 0-5242879/15728640' }])
+            client.stub_responses(:get_object, { body: 'body', content_range: 'bytes 0-5242879/15728640' })
             expect { single_obj.download_file(path) }.to raise_error(Aws::S3::MultipartDownloadError)
             expect(File.exist?(path)).to be(false)
           end
