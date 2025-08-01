@@ -496,10 +496,9 @@ module Aws
       #
       # @option options [String] :mode ("auto") `"auto"`, `"single_request"` or `"get_range"`
       #
+      #  * `auto` mode is enabled by default,  which performs `multipart_download`
       #  * `"single_request`" mode forces only 1 GET request is made in download
       #  * `"get_range"` mode requires `:chunk_size` parameter to configured in customizing each range size
-      #
-      #  By default, `"auto"` mode is enabled, which performs `multipart_download`.
       #
       # @option options [Integer] :chunk_size required in `"get_range"` mode.
       #
