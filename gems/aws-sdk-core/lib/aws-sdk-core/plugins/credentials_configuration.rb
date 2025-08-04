@@ -14,7 +14,8 @@ module Aws
 
       option(:account_id, doc_type: String, docstring: '')
 
-      option(:profile,
+      option(
+        :profile,
         doc_default: 'default',
         doc_type: String,
         docstring: <<~DOCS)
@@ -22,13 +23,14 @@ module Aws
           When not specified, 'default' is used.
         DOCS
 
-      option(:credentials,
+      option(
+        :credentials,
         required: true,
         doc_type: 'Aws::CredentialProvider',
         rbs_type: 'untyped',
         docstring: <<~DOCS
-          Your AWS credentials used for authentication. This can be an instance of any one of the
-          following classes:
+          Your AWS credentials used for authentication. This can be any class that includes and implements
+          `Aws::CredentialProvider`, or instance of any one of the following classes:
 
           * `Aws::Credentials` - Used for configuring static, non-refreshing
             credentials.
@@ -56,27 +58,24 @@ module Aws
           * `Aws::CognitoIdentityCredentials` - Used for loading credentials
             from the Cognito Identity service.
 
-          When `:credentials` are not configured directly, the following
-          locations will be searched for credentials:
+          When `:credentials` are not configured directly, the following locations will be searched for credentials:
 
           * `Aws.config[:credentials]`
-          
+
           * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
             `:account_id` options.
-            
+
           * `ENV['AWS_ACCESS_KEY_ID']`, `ENV['AWS_SECRET_ACCESS_KEY']`,
             `ENV['AWS_SESSION_TOKEN']`, and `ENV['AWS_ACCOUNT_ID']`.
-            
+
           * `~/.aws/credentials`
-          
+
           * `~/.aws/config`
-          
-          * EC2/ECS IMDS instance profile - When used by default, the timeouts
-            are very aggressive. Construct and pass an instance of
-            `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
-            enable retries and extended timeouts. Instance profile credential
-            fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
-            to `true`.
+
+          * EC2/ECS IMDS instance profile - When used by default, the timeouts are very aggressive.
+            Construct and pass an instance of `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
+            enable retries and extended timeouts. Instance profile credential fetching can be disabled by
+            setting `ENV['AWS_EC2_METADATA_DISABLED']` to `true`.
         DOCS
       ) do |config|
         CredentialProviderChain.new(config).resolve
@@ -86,12 +85,13 @@ module Aws
 
       option(:instance_profile_credentials_timeout, 1)
 
-      option(:token_provider,
+      option(
+        :token_provider,
         doc_type: 'Aws::TokenProvider',
         rbs_type: 'untyped',
         docstring: <<~DOCS
-          Your Bearer token used for authentication. This can be an instance of any one of the
-          following classes:
+          Your Bearer token used for authentication. This can be any class that includes and implements
+          `Aws::TokenProvider`, or instance of any one of the following classes:
 
           * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
             tokens.
@@ -106,7 +106,8 @@ module Aws
         TokenProviderChain.new(config).resolve
       end
 
-      option(:auth_scheme_preference,
+      option(
+        :auth_scheme_preference,
         doc_type: 'Array<String>',
         rbs_type: 'Array[String]',
         docstring: <<~DOCS
