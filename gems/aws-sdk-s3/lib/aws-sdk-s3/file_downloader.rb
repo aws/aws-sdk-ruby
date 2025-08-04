@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'pathname'
+require 'securerandom'
 require 'set'
 
 module Aws
@@ -41,6 +42,8 @@ module Aws
             raise ArgumentError, "Invalid mode #{@mode} provided, :mode should be single_request, get_range or auto"
           end
         end
+      ensure
+        File.delete(@temp_path) if @temp_path && File.exist?(@temp_path)
       end
 
       private
@@ -114,6 +117,7 @@ module Aws
       def download_in_threads(pending, total_size)
         threads = []
         progress = MultipartProgress.new(pending, total_size, @progress_callback) if @progress_callback
+        @temp_path = "#{@path}.s3tmp.#{SecureRandom.alphanumeric(8)}"
         @thread_count.times do
           thread = Thread.new do
             begin
@@ -141,6 +145,7 @@ module Aws
           threads << thread
         end
         threads.map(&:value).compact
+        File.rename(@temp_path, @path)
       end
 
       def extract_range(value)
@@ -154,7 +159,7 @@ module Aws
       end
 
       def write(body, range)
-        File.write(@path, body.read, range.split('-').first.to_i)
+        File.write(@temp_path, body.read, range.split('-').first.to_i)
       end
 
       def single_request

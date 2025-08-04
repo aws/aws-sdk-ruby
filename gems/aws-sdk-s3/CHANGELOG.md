@@ -3,7 +3,9 @@ Unreleased Changes
 
 * Issue - Add range validation to multipart download to ensure all parts are successfully processed.
 
-* Issue - When multipart uploader fails to complete multipart upload, it calls multipart abort.
+* Issue - When multipart uploader fails to complete multipart upload, it calls abort multipart upload.
+
+* Issue - Cleans up partially downloaded files when multipart `download_file` fails.
 
 1.195.0 (2025-07-31)
 ------------------
