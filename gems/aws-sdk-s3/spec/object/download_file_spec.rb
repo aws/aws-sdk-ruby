@@ -57,7 +57,7 @@ module Aws
             }
             responses[context.params[:range]]
           })
-          single_obj.download_file(path)
+          single_obj.download_file(path, chunk_size: 5 * one_meg, mode: 'get_range')
         end
 
         it 'supports download object with version_id' do
@@ -178,7 +178,6 @@ module Aws
               'PreconditionFailed'
             })
             thread = double(value: nil)
-
             expect(Thread).to receive(:new).and_yield.and_return(thread)
             expect { single_obj.download_file(path) }.to raise_error(Aws::S3::Errors::PreconditionFailed)
           end
@@ -219,6 +218,24 @@ module Aws
             client.stub_responses(:get_object, { body: 'body', content_range: 'bytes 0-3/4' })
             expect { large_obj.download_file(path, mode: 'get_range', chunk_size: one_meg) }
               .to raise_error(Aws::S3::MultipartDownloadError)
+          end
+
+          it 'does not overwrite existing file when download fails' do
+            File.write(path, 'existing content')
+
+            client.stub_responses(:get_object, lambda { |context|
+              responses = {
+                'bytes=0-5242879' => { body: 'body', content_range: 'bytes 0-5242879/15728640' },
+                'bytes=5242880-10485759' => { body: 'body', content_range: 'bytes 5242880-10485759/15728640' },
+                'bytes=10485760-15728639' => { body: 'fake-range', content_range: 'bytes 10485800-15728639/15728640' }
+              }
+              responses[context.params[:range]]
+            })
+
+            expect { single_obj.download_file(path, chunk_size: 5 * one_meg, mode: 'get_range') }
+              .to raise_error(Aws::S3::MultipartDownloadError)
+            expect(File.exist?(path)).to be(true)
+            expect(File.read(path)).to eq('existing content')
           end
         end
       end
