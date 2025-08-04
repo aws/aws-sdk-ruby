@@ -108,16 +108,8 @@ module Aws::SNS
     #   * `DisplayName` – The display name to use for a topic with SMS
     #     subscriptions.
     #
-    #   * `FifoTopic` – Set to true to create a FIFO topic.
-    #
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the topic.
-    #
-    #   * `SignatureVersion` – The signature version corresponds to the
-    #     hashing algorithm used while creating the signature of the
-    #     notifications, subscription confirmations, or unsubscribe
-    #     confirmation messages sent by Amazon SNS. By default,
-    #     `SignatureVersion` is set to `1`.
     #
     #   * `TracingConfig` – Tracing mode of an Amazon SNS topic. By default
     #     `TracingConfig` is set to `PassThrough`, and the topic passes
@@ -126,16 +118,104 @@ module Aws::SNS
     #     segment data to topic owner account if the sampled flag in the
     #     tracing header is true. This is only supported on standard topics.
     #
-    #   The following attribute applies only to [server-side encryption][1]:
+    #   * HTTP
+    #
+    #     * `HTTPSuccessFeedbackRoleArn` – Indicates successful message
+    #       delivery status for an Amazon SNS topic that is subscribed to an
+    #       HTTP endpoint.
+    #
+    #     * `HTTPSuccessFeedbackSampleRate` – Indicates percentage of
+    #       successful messages to sample for an Amazon SNS topic that is
+    #       subscribed to an HTTP endpoint.
+    #
+    #     * `HTTPFailureFeedbackRoleArn` – Indicates failed message delivery
+    #       status for an Amazon SNS topic that is subscribed to an HTTP
+    #       endpoint.
+    #   * Amazon Data Firehose
+    #
+    #     * `FirehoseSuccessFeedbackRoleArn` – Indicates successful message
+    #       delivery status for an Amazon SNS topic that is subscribed to an
+    #       Amazon Data Firehose endpoint.
+    #
+    #     * `FirehoseSuccessFeedbackSampleRate` – Indicates percentage of
+    #       successful messages to sample for an Amazon SNS topic that is
+    #       subscribed to an Amazon Data Firehose endpoint.
+    #
+    #     * `FirehoseFailureFeedbackRoleArn` – Indicates failed message
+    #       delivery status for an Amazon SNS topic that is subscribed to an
+    #       Amazon Data Firehose endpoint.
+    #   * Lambda
+    #
+    #     * `LambdaSuccessFeedbackRoleArn` – Indicates successful message
+    #       delivery status for an Amazon SNS topic that is subscribed to an
+    #       Lambda endpoint.
+    #
+    #     * `LambdaSuccessFeedbackSampleRate` – Indicates percentage of
+    #       successful messages to sample for an Amazon SNS topic that is
+    #       subscribed to an Lambda endpoint.
+    #
+    #     * `LambdaFailureFeedbackRoleArn` – Indicates failed message delivery
+    #       status for an Amazon SNS topic that is subscribed to an Lambda
+    #       endpoint.
+    #   * Platform application endpoint
+    #
+    #     * `ApplicationSuccessFeedbackRoleArn` – Indicates successful message
+    #       delivery status for an Amazon SNS topic that is subscribed to a
+    #       platform application endpoint.
+    #
+    #     * `ApplicationSuccessFeedbackSampleRate` – Indicates percentage of
+    #       successful messages to sample for an Amazon SNS topic that is
+    #       subscribed to an platform application endpoint.
+    #
+    #     * `ApplicationFailureFeedbackRoleArn` – Indicates failed message
+    #       delivery status for an Amazon SNS topic that is subscribed to an
+    #       platform application endpoint.
+    #     <note markdown="1"> In addition to being able to configure topic attributes for message
+    #     delivery status of notification messages sent to Amazon SNS
+    #     application endpoints, you can also configure application attributes
+    #     for the delivery status of push notification messages sent to push
+    #     notification services.
+    #
+    #      For example, For more information, see [Using Amazon SNS Application
+    #     Attributes for Message Delivery Status][1].
+    #
+    #      </note>
+    #
+    #   * Amazon SQS
+    #
+    #     * `SQSSuccessFeedbackRoleArn` – Indicates successful message
+    #       delivery status for an Amazon SNS topic that is subscribed to an
+    #       Amazon SQS endpoint.
+    #
+    #     * `SQSSuccessFeedbackSampleRate` – Indicates percentage of
+    #       successful messages to sample for an Amazon SNS topic that is
+    #       subscribed to an Amazon SQS endpoint.
+    #
+    #     * `SQSFailureFeedbackRoleArn` – Indicates failed message delivery
+    #       status for an Amazon SNS topic that is subscribed to an Amazon SQS
+    #       endpoint.
+    #
+    #   <note markdown="1"> The &lt;ENDPOINT&gt;SuccessFeedbackRoleArn and
+    #   &lt;ENDPOINT&gt;FailureFeedbackRoleArn attributes are used to give
+    #   Amazon SNS write access to use CloudWatch Logs on your behalf. The
+    #   &lt;ENDPOINT&gt;SuccessFeedbackSampleRate attribute is for specifying
+    #   the sample rate percentage (0-100) of successfully delivered messages.
+    #   After you configure the &lt;ENDPOINT&gt;FailureFeedbackRoleArn
+    #   attribute, then all failed message deliveries generate CloudWatch
+    #   Logs.
+    #
+    #    </note>
+    #
+    #   The following attribute applies only to [server-side encryption][2]:
     #
     #   * `KmsMasterKeyId` – The ID of an Amazon Web Services managed customer
     #     master key (CMK) for Amazon SNS or a custom CMK. For more
-    #     information, see [Key Terms][2]. For more examples, see [KeyId][3]
+    #     information, see [Key Terms][3]. For more examples, see [KeyId][4]
     #     in the *Key Management Service API Reference*.
     #
     #   ^
     #
-    #   The following attributes apply only to [FIFO topics][4]:
+    #   The following attributes apply only to [FIFO topics][5]:
     #
     #   * `ArchivePolicy` – The policy that sets the retention period for
     #     messages stored in the message archive of an Amazon SNS FIFO topic.
@@ -146,7 +226,7 @@ module Aws::SNS
     #     * By default, `ContentBasedDeduplication` is set to `false`. If you
     #       create a FIFO topic and this attribute is `false`, you must
     #       specify a value for the `MessageDeduplicationId` parameter for the
-    #       [Publish][5] action.
+    #       [Publish][6] action.
     #
     #     * When you set `ContentBasedDeduplication` to `true`, Amazon SNS
     #       uses a SHA-256 hash to generate the `MessageDeduplicationId` using
@@ -169,17 +249,18 @@ module Aws::SNS
     #     * `MessageGroup` – The scope of deduplication is within each
     #       individual message group, which enables higher throughput per
     #       topic subject to regional quotas. For more information on quotas
-    #       or to request an increase, see [Amazon SNS service quotas][6] in
+    #       or to request an increase, see [Amazon SNS service quotas][7] in
     #       the Amazon Web Services General Reference.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
-    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
-    #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
-    #   [4]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
-    #   [5]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
-    #   [6]: https://docs.aws.amazon.com/general/latest/gr/sns.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
+    #   [3]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
+    #   [4]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
+    #   [5]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
+    #   [6]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
+    #   [7]: https://docs.aws.amazon.com/general/latest/gr/sns.html
     # @option options [Array<Types::Tag>] :tags
     #   The list of tags to add to a new topic.
     #

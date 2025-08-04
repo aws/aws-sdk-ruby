@@ -631,10 +631,11 @@ module Aws::SNS
     #
     # * For GCM (Firebase Cloud Messaging) using token credentials, there is
     #   no `PlatformPrincipal`. The `PlatformCredential` is a JSON formatted
-    #   private key file. When using the Amazon Web Services CLI, the file
-    #   must be in string format and special characters must be ignored. To
-    #   format the file correctly, Amazon SNS recommends using the following
-    #   command: `` SERVICE_JSON=`jq @json <<< cat service.json` ``.
+    #   private key file. When using the Amazon Web Services CLI or Amazon
+    #   Web Services SDKs, the file must be in string format and special
+    #   characters must be ignored. To format the file correctly, Amazon SNS
+    #   recommends using the following command: `SERVICE_JSON=$(jq @json <
+    #   service.json)`.
     #
     # * For MPNS, `PlatformPrincipal` is `TLS certificate` and
     #   `PlatformCredential` is `private key`.
@@ -840,16 +841,8 @@ module Aws::SNS
     #   * `DisplayName` – The display name to use for a topic with SMS
     #     subscriptions.
     #
-    #   * `FifoTopic` – Set to true to create a FIFO topic.
-    #
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the topic.
-    #
-    #   * `SignatureVersion` – The signature version corresponds to the
-    #     hashing algorithm used while creating the signature of the
-    #     notifications, subscription confirmations, or unsubscribe
-    #     confirmation messages sent by Amazon SNS. By default,
-    #     `SignatureVersion` is set to `1`.
     #
     #   * `TracingConfig` – Tracing mode of an Amazon SNS topic. By default
     #     `TracingConfig` is set to `PassThrough`, and the topic passes
@@ -858,16 +851,104 @@ module Aws::SNS
     #     segment data to topic owner account if the sampled flag in the
     #     tracing header is true. This is only supported on standard topics.
     #
-    #   The following attribute applies only to [server-side encryption][1]:
+    #   * HTTP
+    #
+    #     * `HTTPSuccessFeedbackRoleArn` – Indicates successful message
+    #       delivery status for an Amazon SNS topic that is subscribed to an
+    #       HTTP endpoint.
+    #
+    #     * `HTTPSuccessFeedbackSampleRate` – Indicates percentage of
+    #       successful messages to sample for an Amazon SNS topic that is
+    #       subscribed to an HTTP endpoint.
+    #
+    #     * `HTTPFailureFeedbackRoleArn` – Indicates failed message delivery
+    #       status for an Amazon SNS topic that is subscribed to an HTTP
+    #       endpoint.
+    #   * Amazon Data Firehose
+    #
+    #     * `FirehoseSuccessFeedbackRoleArn` – Indicates successful message
+    #       delivery status for an Amazon SNS topic that is subscribed to an
+    #       Amazon Data Firehose endpoint.
+    #
+    #     * `FirehoseSuccessFeedbackSampleRate` – Indicates percentage of
+    #       successful messages to sample for an Amazon SNS topic that is
+    #       subscribed to an Amazon Data Firehose endpoint.
+    #
+    #     * `FirehoseFailureFeedbackRoleArn` – Indicates failed message
+    #       delivery status for an Amazon SNS topic that is subscribed to an
+    #       Amazon Data Firehose endpoint.
+    #   * Lambda
+    #
+    #     * `LambdaSuccessFeedbackRoleArn` – Indicates successful message
+    #       delivery status for an Amazon SNS topic that is subscribed to an
+    #       Lambda endpoint.
+    #
+    #     * `LambdaSuccessFeedbackSampleRate` – Indicates percentage of
+    #       successful messages to sample for an Amazon SNS topic that is
+    #       subscribed to an Lambda endpoint.
+    #
+    #     * `LambdaFailureFeedbackRoleArn` – Indicates failed message delivery
+    #       status for an Amazon SNS topic that is subscribed to an Lambda
+    #       endpoint.
+    #   * Platform application endpoint
+    #
+    #     * `ApplicationSuccessFeedbackRoleArn` – Indicates successful message
+    #       delivery status for an Amazon SNS topic that is subscribed to a
+    #       platform application endpoint.
+    #
+    #     * `ApplicationSuccessFeedbackSampleRate` – Indicates percentage of
+    #       successful messages to sample for an Amazon SNS topic that is
+    #       subscribed to an platform application endpoint.
+    #
+    #     * `ApplicationFailureFeedbackRoleArn` – Indicates failed message
+    #       delivery status for an Amazon SNS topic that is subscribed to an
+    #       platform application endpoint.
+    #     <note markdown="1"> In addition to being able to configure topic attributes for message
+    #     delivery status of notification messages sent to Amazon SNS
+    #     application endpoints, you can also configure application attributes
+    #     for the delivery status of push notification messages sent to push
+    #     notification services.
+    #
+    #      For example, For more information, see [Using Amazon SNS Application
+    #     Attributes for Message Delivery Status][1].
+    #
+    #      </note>
+    #
+    #   * Amazon SQS
+    #
+    #     * `SQSSuccessFeedbackRoleArn` – Indicates successful message
+    #       delivery status for an Amazon SNS topic that is subscribed to an
+    #       Amazon SQS endpoint.
+    #
+    #     * `SQSSuccessFeedbackSampleRate` – Indicates percentage of
+    #       successful messages to sample for an Amazon SNS topic that is
+    #       subscribed to an Amazon SQS endpoint.
+    #
+    #     * `SQSFailureFeedbackRoleArn` – Indicates failed message delivery
+    #       status for an Amazon SNS topic that is subscribed to an Amazon SQS
+    #       endpoint.
+    #
+    #   <note markdown="1"> The &lt;ENDPOINT&gt;SuccessFeedbackRoleArn and
+    #   &lt;ENDPOINT&gt;FailureFeedbackRoleArn attributes are used to give
+    #   Amazon SNS write access to use CloudWatch Logs on your behalf. The
+    #   &lt;ENDPOINT&gt;SuccessFeedbackSampleRate attribute is for specifying
+    #   the sample rate percentage (0-100) of successfully delivered messages.
+    #   After you configure the &lt;ENDPOINT&gt;FailureFeedbackRoleArn
+    #   attribute, then all failed message deliveries generate CloudWatch
+    #   Logs.
+    #
+    #    </note>
+    #
+    #   The following attribute applies only to [server-side encryption][2]:
     #
     #   * `KmsMasterKeyId` – The ID of an Amazon Web Services managed customer
     #     master key (CMK) for Amazon SNS or a custom CMK. For more
-    #     information, see [Key Terms][2]. For more examples, see [KeyId][3]
+    #     information, see [Key Terms][3]. For more examples, see [KeyId][4]
     #     in the *Key Management Service API Reference*.
     #
     #   ^
     #
-    #   The following attributes apply only to [FIFO topics][4]:
+    #   The following attributes apply only to [FIFO topics][5]:
     #
     #   * `ArchivePolicy` – The policy that sets the retention period for
     #     messages stored in the message archive of an Amazon SNS FIFO topic.
@@ -878,7 +959,7 @@ module Aws::SNS
     #     * By default, `ContentBasedDeduplication` is set to `false`. If you
     #       create a FIFO topic and this attribute is `false`, you must
     #       specify a value for the `MessageDeduplicationId` parameter for the
-    #       [Publish][5] action.
+    #       [Publish][6] action.
     #
     #     * When you set `ContentBasedDeduplication` to `true`, Amazon SNS
     #       uses a SHA-256 hash to generate the `MessageDeduplicationId` using
@@ -901,17 +982,18 @@ module Aws::SNS
     #     * `MessageGroup` – The scope of deduplication is within each
     #       individual message group, which enables higher throughput per
     #       topic subject to regional quotas. For more information on quotas
-    #       or to request an increase, see [Amazon SNS service quotas][6] in
+    #       or to request an increase, see [Amazon SNS service quotas][7] in
     #       the Amazon Web Services General Reference.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
-    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
-    #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
-    #   [4]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
-    #   [5]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
-    #   [6]: https://docs.aws.amazon.com/general/latest/gr/sns.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
+    #   [3]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
+    #   [4]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
+    #   [5]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
+    #   [6]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
+    #   [7]: https://docs.aws.amazon.com/general/latest/gr/sns.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   The list of tags to add to a new topic.
@@ -1949,15 +2031,25 @@ module Aws::SNS
     #     scope and interval, and only one copy of the message is delivered.
     #
     # @option params [String] :message_group_id
-    #   This parameter applies only to FIFO (first-in-first-out) topics. The
-    #   `MessageGroupId` can contain up to 128 alphanumeric characters `(a-z,
-    #   A-Z, 0-9)` and punctuation `` (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) ``.
+    #   The `MessageGroupId` can contain up to 128 alphanumeric characters
+    #   `(a-z, A-Z, 0-9)` and punctuation ``
+    #   (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) ``.
     #
-    #   The `MessageGroupId` is a tag that specifies that a message belongs to
-    #   a specific message group. Messages that belong to the same message
-    #   group are processed in a FIFO manner (however, messages in different
-    #   message groups might be processed out of order). Every message must
-    #   include a `MessageGroupId`.
+    #   For FIFO topics: The `MessageGroupId` is a tag that specifies that a
+    #   message belongs to a specific message group. Messages that belong to
+    #   the same message group are processed in a FIFO manner (however,
+    #   messages in different message groups might be processed out of order).
+    #   Every message must include a `MessageGroupId`.
+    #
+    #   For standard topics: The `MessageGroupId` is optional and is forwarded
+    #   only to Amazon SQS standard subscriptions to activate [fair
+    #   queues][1]. The `MessageGroupId` is not used for, or sent to, any
+    #   other endpoint types. When provided, the same validation rules apply
+    #   as for FIFO topics.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-fair-queues.html
     #
     # @return [Types::PublishResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1998,34 +2090,45 @@ module Aws::SNS
       req.send_request(options)
     end
 
-    # Publishes up to ten messages to the specified topic. This is a batch
-    # version of `Publish`. For FIFO topics, multiple messages within a
-    # single batch are published in the order they are sent, and messages
-    # are deduplicated within the batch and across batches for 5 minutes.
+    # Publishes up to 10 messages to the specified topic in a single batch.
+    # This is a batch version of the `Publish` API. If you try to send more
+    # than 10 messages in a single batch request, you will receive a
+    # `TooManyEntriesInBatchRequest` exception.
+    #
+    # For FIFO topics, multiple messages within a single batch are published
+    # in the order they are sent, and messages are deduplicated within the
+    # batch and across batches for five minutes.
     #
     # The result of publishing each message is reported individually in the
     # response. Because the batch request can result in a combination of
     # successful and unsuccessful actions, you should check for batch errors
-    # even when the call returns an HTTP status code of `200`.
+    # even when the call returns an HTTP status code of 200.
     #
     # The maximum allowed individual message size and the maximum total
     # payload size (the sum of the individual lengths of all of the batched
     # messages) are both 256 KB (262,144 bytes).
     #
+    # The `PublishBatch` API can send up to 10 messages at a time. If you
+    # attempt to send more than 10 messages in one request, you will
+    # encounter a `TooManyEntriesInBatchRequest` exception. In such cases,
+    # split your messages into multiple requests, each containing no more
+    # than 10 messages.
+    #
     # Some actions take lists of parameters. These lists are specified using
-    # the `param.n` notation. Values of `n` are integers starting from 1.
-    # For example, a parameter list with two elements looks like this:
+    # the `param.n` notation. Values of `n` are integers starting from
+    # **1**. For example, a parameter list with two elements looks like
+    # this:
     #
-    # &amp;AttributeName.1=first
+    # `&AttributeName.1=first`
     #
-    # &amp;AttributeName.2=second
+    # `&AttributeName.2=second`
     #
     # If you send a batch message to a topic, Amazon SNS publishes the batch
     # message to each endpoint that is subscribed to the topic. The format
     # of the batch message depends on the notification protocol for each
     # subscribed endpoint.
     #
-    # When a `messageId` is returned, the batch message is saved and Amazon
+    # When a `messageId` is returned, the batch message is saved, and Amazon
     # SNS immediately delivers the message to subscribers.
     #
     # @option params [required, String] :topic_arn
@@ -2530,10 +2633,6 @@ module Aws::SNS
     #   The following lists the names, descriptions, and values of the special
     #   request parameters that the `SetTopicAttributes` action uses:
     #
-    #   * `ApplicationSuccessFeedbackRoleArn` – Indicates failed message
-    #     delivery status for an Amazon SNS topic that is subscribed to a
-    #     platform application endpoint.
-    #
     #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
     #     failed deliveries to HTTP/S endpoints.
     #
@@ -2563,19 +2662,19 @@ module Aws::SNS
     #     * `HTTPFailureFeedbackRoleArn` – Indicates failed message delivery
     #       status for an Amazon SNS topic that is subscribed to an HTTP
     #       endpoint.
-    #   * Amazon Kinesis Data Firehose
+    #   * Amazon Data Firehose
     #
     #     * `FirehoseSuccessFeedbackRoleArn` – Indicates successful message
     #       delivery status for an Amazon SNS topic that is subscribed to an
-    #       Amazon Kinesis Data Firehose endpoint.
+    #       Amazon Data Firehose endpoint.
     #
     #     * `FirehoseSuccessFeedbackSampleRate` – Indicates percentage of
     #       successful messages to sample for an Amazon SNS topic that is
-    #       subscribed to an Amazon Kinesis Data Firehose endpoint.
+    #       subscribed to an Amazon Data Firehose endpoint.
     #
     #     * `FirehoseFailureFeedbackRoleArn` – Indicates failed message
     #       delivery status for an Amazon SNS topic that is subscribed to an
-    #       Amazon Kinesis Data Firehose endpoint.
+    #       Amazon Data Firehose endpoint.
     #   * Lambda
     #
     #     * `LambdaSuccessFeedbackRoleArn` – Indicates successful message
@@ -2593,15 +2692,15 @@ module Aws::SNS
     #
     #     * `ApplicationSuccessFeedbackRoleArn` – Indicates successful message
     #       delivery status for an Amazon SNS topic that is subscribed to an
-    #       Amazon Web Services application endpoint.
+    #       platform application endpoint.
     #
     #     * `ApplicationSuccessFeedbackSampleRate` – Indicates percentage of
     #       successful messages to sample for an Amazon SNS topic that is
-    #       subscribed to an Amazon Web Services application endpoint.
+    #       subscribed to an platform application endpoint.
     #
     #     * `ApplicationFailureFeedbackRoleArn` – Indicates failed message
     #       delivery status for an Amazon SNS topic that is subscribed to an
-    #       Amazon Web Services application endpoint.
+    #       platform application endpoint.
     #     <note markdown="1"> In addition to being able to configure topic attributes for message
     #     delivery status of notification messages sent to Amazon SNS
     #     application endpoints, you can also configure application attributes
@@ -2753,8 +2852,8 @@ module Aws::SNS
     #
     #   * `lambda` – delivery of JSON-encoded message to an Lambda function
     #
-    #   * `firehose` – delivery of JSON-encoded message to an Amazon Kinesis
-    #     Data Firehose delivery stream.
+    #   * `firehose` – delivery of JSON-encoded message to an Amazon Data
+    #     Firehose delivery stream.
     #
     # @option params [String] :endpoint
     #   The endpoint that you want to receive notifications. Endpoints vary by
@@ -2783,7 +2882,7 @@ module Aws::SNS
     #     function.
     #
     #   * For the `firehose` protocol, the endpoint is the ARN of an Amazon
-    #     Kinesis Data Firehose delivery stream.
+    #     Data Firehose delivery stream.
     #
     # @option params [Hash<String,String>] :attributes
     #   A map of attributes with their corresponding values.
@@ -2962,12 +3061,6 @@ module Aws::SNS
     # is delivered to the endpoint, so that the endpoint owner can easily
     # resubscribe to the topic if the `Unsubscribe` request was unintended.
     #
-    # <note markdown="1"> Amazon SQS queue subscriptions require authentication for deletion.
-    # Only the owner of the subscription, or the owner of the topic can
-    # unsubscribe using the required Amazon Web Services signature.
-    #
-    #  </note>
-    #
     # This action is throttled at 100 transactions per second (TPS).
     #
     # @option params [required, String] :subscription_arn
@@ -3081,7 +3174,7 @@ module Aws::SNS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.103.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

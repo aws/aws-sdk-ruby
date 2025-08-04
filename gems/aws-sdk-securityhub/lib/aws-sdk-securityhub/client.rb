@@ -6261,10 +6261,10 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns the history of a Security Hub finding for the past 90 days.
-    # The history includes changes made to any fields in the Amazon Web
-    # Services Security Finding Format (ASFF) except top-level timestamp
-    # fields, such as the `CreatedAt` and `UpdatedAt` fields.
+    # Returns the history of a Security Hub finding. The history includes
+    # changes made to any fields in the Amazon Web Services Security Finding
+    # Format (ASFF) except top-level timestamp fields, such as the
+    # `CreatedAt` and `UpdatedAt` fields.
     #
     # This operation might return fewer results than the maximum number of
     # results (`MaxResults`) specified in a request, even when more results
@@ -6289,10 +6289,10 @@ module Aws::SecurityHub
     #   called. If you provide a value for `EndTime` but not for `StartTime`,
     #   Security Hub returns finding history from the [CreatedAt][1] timestamp
     #   of the finding to the `EndTime`. If you provide neither `StartTime`
-    #   nor `EndTime`, Security Hub returns finding history from the CreatedAt
-    #   timestamp of the finding to the time at which the API is called. In
-    #   all of these scenarios, the response is limited to 100 results, and
-    #   the maximum time period is limited to 90 days.
+    #   nor `EndTime`, Security Hub returns finding history from the
+    #   `CreatedAt` timestamp of the finding to the time at which the API is
+    #   called. In all of these scenarios, the response is limited to 100
+    #   results.
     #
     #   For more information about the validation and formatting of timestamp
     #   fields in Security Hub, see [Timestamps][2].
@@ -6313,10 +6313,10 @@ module Aws::SecurityHub
     #   called. If you provide a value for `EndTime` but not for `StartTime`,
     #   Security Hub returns finding history from the [CreatedAt][1] timestamp
     #   of the finding to the `EndTime`. If you provide neither `StartTime`
-    #   nor `EndTime`, Security Hub returns finding history from the CreatedAt
-    #   timestamp of the finding to the time at which the API is called. In
-    #   all of these scenarios, the response is limited to 100 results, and
-    #   the maximum time period is limited to 90 days.
+    #   nor `EndTime`, Security Hub returns finding history from the
+    #   `CreatedAt` timestamp of the finding to the time at which the API is
+    #   called. In all of these scenarios, the response is limited to 100
+    #   results.
     #
     #   For more information about the validation and formatting of timestamp
     #   fields in Security Hub, see [Timestamps][2].
@@ -12198,7 +12198,7 @@ module Aws::SecurityHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.139.0'
+      context[:gem_version] = '1.140.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

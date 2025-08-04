@@ -304,6 +304,7 @@ RubyGems.org page under "LINKS" section.
 
 | Service Name                                           | Service Module                           | gem_name                                    | API Version |
 | ------------------------------------------------------ | ---------------------------------------- | ------------------------------------------- | ----------- |
+| ARC - Region switch                                    | Aws::ARCRegionswitch                     | aws-sdk-arcregionswitch                     | 2022-07-26  |
 | AWS AI Ops                                             | Aws::AIOps                               | aws-sdk-aiops                               | 2018-05-10  |
 | AWS ARC - Zonal Shift                                  | Aws::ARCZonalShift                       | aws-sdk-arczonalshift                       | 2022-10-30  |
 | AWS Account                                            | Aws::Account                             | aws-sdk-account                             | 2021-02-01  |

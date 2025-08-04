@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.140.0 (2025-08-01)
+------------------
+
+* Feature - Release new resource detail type CodeRepository
+
 1.139.0 (2025-07-31)
 ------------------
 

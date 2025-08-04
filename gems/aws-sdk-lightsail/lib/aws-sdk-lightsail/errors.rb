@@ -32,6 +32,7 @@ module Aws::Lightsail
   # * {InvalidInputException}
   # * {NotFoundException}
   # * {OperationFailureException}
+  # * {RegionSetupInProgressException}
   # * {ServiceException}
   # * {UnauthenticatedException}
   #
@@ -166,6 +167,36 @@ module Aws::Lightsail
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Lightsail::Types::OperationFailureException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
+
+      # @return [String]
+      def docs
+        @data[:docs]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def tip
+        @data[:tip]
+      end
+    end
+
+    class RegionSetupInProgressException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Lightsail::Types::RegionSetupInProgressException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

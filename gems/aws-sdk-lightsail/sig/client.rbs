@@ -175,7 +175,7 @@ module Aws
                            ?restore_date: ::String,
                            ?use_latest_restorable_auto_snapshot: bool,
                            target_snapshot_name: ::String,
-                           source_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1")
+                           source_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1" | "ap-southeast-3")
                          ) -> _CopySnapshotResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopySnapshotResponseSuccess
 
@@ -430,7 +430,7 @@ module Aws
                                  distribution_name: ::String,
                                  origin: {
                                    name: ::String?,
-                                   region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1")?,
+                                   region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1" | "ap-southeast-3")?,
                                    protocol_policy: ("http-only" | "https-only")?,
                                    response_timeout: ::Integer?
                                  },
@@ -2183,7 +2183,7 @@ module Aws
                                  distribution_name: ::String,
                                  ?origin: {
                                    name: ::String?,
-                                   region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1")?,
+                                   region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1" | "ap-southeast-3")?,
                                    protocol_policy: ("http-only" | "https-only")?,
                                    response_timeout: ::Integer?
                                  },

@@ -296,17 +296,24 @@ module Aws::ACMPCA
     #   @return [Time]
     #
     # @!attribute [rw] key_storage_security_standard
-    #   Defines a cryptographic key management compliance standard used for
-    #   handling CA keys.
+    #   Defines a cryptographic key management compliance standard for
+    #   handling and protecting CA keys.
     #
     #   Default: FIPS\_140\_2\_LEVEL\_3\_OR\_HIGHER
     #
-    #   Note: Amazon Web Services Region ap-northeast-3 supports only
-    #   FIPS\_140\_2\_LEVEL\_2\_OR\_HIGHER. You must explicitly specify this
-    #   parameter and value when creating a CA in that Region. Specifying a
-    #   different value (or no value) results in an `InvalidArgsException`
-    #   with the message "A certificate authority cannot be created in this
-    #   region with the specified security standard."
+    #   <note markdown="1"> Starting January 26, 2023, Amazon Web Services Private CA protects
+    #   all CA private keys in non-China regions using hardware security
+    #   modules (HSMs) that comply with FIPS PUB 140-2 Level 3.
+    #
+    #    For information about security standard support in different Amazon
+    #   Web Services Regions, see [Storage and security compliance of Amazon
+    #   Web Services Private CA private keys][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/userguide/data-protection.html#private-keys
     #   @return [String]
     #
     # @!attribute [rw] usage_mode
@@ -516,22 +523,22 @@ module Aws::ACMPCA
     #   @return [String]
     #
     # @!attribute [rw] key_storage_security_standard
-    #   Specifies a cryptographic key management compliance standard used
-    #   for handling CA keys.
+    #   Specifies a cryptographic key management compliance standard for
+    #   handling and protecting CA keys.
     #
     #   Default: FIPS\_140\_2\_LEVEL\_3\_OR\_HIGHER
     #
-    #   <note markdown="1"> Some Amazon Web Services Regions do not support the default. When
-    #   creating a CA in these Regions, you must provide
-    #   `FIPS_140_2_LEVEL_2_OR_HIGHER` as the argument for
-    #   `KeyStorageSecurityStandard`. Failure to do this results in an
-    #   `InvalidArgsException` with the message, "A certificate authority
+    #   <note markdown="1"> Some Amazon Web Services Regions don't support the default value.
+    #   When you create a CA in these Regions, you must use
+    #   `CCPC_LEVEL_1_OR_HIGHER` for the `KeyStorageSecurityStandard`
+    #   parameter. If you don't, the operation returns an
+    #   `InvalidArgsException` with this message: "A certificate authority
     #   cannot be created in this region with the specified security
     #   standard."
     #
-    #    For information about security standard support in various Regions,
-    #   see [Storage and security compliance of Amazon Web Services Private
-    #   CA private keys][1].
+    #    For information about security standard support in different Amazon
+    #   Web Services Regions, see [Storage and security compliance of Amazon
+    #   Web Services Private CA private keys][1].
     #
     #    </note>
     #
@@ -1434,7 +1441,7 @@ module Aws::ACMPCA
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Number (ARN) of the private CA that will have
     #   its policy retrieved. You can find the CA's ARN by calling the
-    #   ListCertificateAuthorities action.      </p>
+    #   ListCertificateAuthorities action.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/GetPolicyRequest AWS API Documentation

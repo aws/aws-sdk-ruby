@@ -41,6 +41,12 @@ module Aws
         def message: () -> ::String
         def tip: () -> ::String
       end
+      class RegionSetupInProgressException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def docs: () -> ::String
+        def message: () -> ::String
+        def tip: () -> ::String
+      end
       class ServiceException < ::Aws::Errors::ServiceError
         def code: () -> ::String
         def docs: () -> ::String

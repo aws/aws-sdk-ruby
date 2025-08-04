@@ -12728,6 +12728,39 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Lightsail throws this exception when an operation is performed on
+    # resources in an opt-in Region that is currently being set up.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] docs
+    #   [Regions and Availability Zones for Lightsail][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-regions-and-availability-zones-in-amazon-lightsail.html
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] tip
+    #   Opt-in Regions typically take a few minutes to finish setting up
+    #   before you can work with them. Wait a few minutes and try again.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RegionSetupInProgressException AWS API Documentation
+    #
+    class RegionSetupInProgressException < Struct.new(
+      :code,
+      :docs,
+      :message,
+      :tip)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] service_name
     #   The name of the container service for which to register a container
     #   image.

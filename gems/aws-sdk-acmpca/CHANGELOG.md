@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2025-08-01)
+------------------
+
+* Feature - Doc-only update to add more information to GetCertificate action.
+
 1.96.0 (2025-07-31)
 ------------------
 

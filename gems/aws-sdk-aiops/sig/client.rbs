@@ -121,9 +121,9 @@ module Aws
       interface _GetInvestigationGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetInvestigationGroupResponse]
         def created_by: () -> ::String
-        def created_at: () -> ::Time
+        def created_at: () -> ::Integer
         def last_modified_by: () -> ::String
-        def last_modified_at: () -> ::Time
+        def last_modified_at: () -> ::Integer
         def name: () -> ::String
         def arn: () -> ::String
         def role_arn: () -> ::String

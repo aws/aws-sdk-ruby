@@ -557,6 +557,7 @@ module Aws::PCS
     #     networking: { # required
     #       subnet_ids: ["SubnetId"],
     #       security_group_ids: ["SecurityGroupId"],
+    #       network_type: "IPV4", # accepts IPV4, IPV6
     #     },
     #     slurm_configuration: {
     #       scale_down_idle_time_in_seconds: 1,
@@ -600,10 +601,12 @@ module Aws::PCS
     #   resp.cluster.networking.subnet_ids[0] #=> String
     #   resp.cluster.networking.security_group_ids #=> Array
     #   resp.cluster.networking.security_group_ids[0] #=> String
+    #   resp.cluster.networking.network_type #=> String, one of "IPV4", "IPV6"
     #   resp.cluster.endpoints #=> Array
     #   resp.cluster.endpoints[0].type #=> String, one of "SLURMCTLD", "SLURMDBD"
     #   resp.cluster.endpoints[0].private_ip_address #=> String
     #   resp.cluster.endpoints[0].public_ip_address #=> String
+    #   resp.cluster.endpoints[0].ipv6_address #=> String
     #   resp.cluster.endpoints[0].port #=> String
     #   resp.cluster.error_info #=> Array
     #   resp.cluster.error_info[0].code #=> String
@@ -1022,10 +1025,12 @@ module Aws::PCS
     #   resp.cluster.networking.subnet_ids[0] #=> String
     #   resp.cluster.networking.security_group_ids #=> Array
     #   resp.cluster.networking.security_group_ids[0] #=> String
+    #   resp.cluster.networking.network_type #=> String, one of "IPV4", "IPV6"
     #   resp.cluster.endpoints #=> Array
     #   resp.cluster.endpoints[0].type #=> String, one of "SLURMCTLD", "SLURMDBD"
     #   resp.cluster.endpoints[0].private_ip_address #=> String
     #   resp.cluster.endpoints[0].public_ip_address #=> String
+    #   resp.cluster.endpoints[0].ipv6_address #=> String
     #   resp.cluster.endpoints[0].port #=> String
     #   resp.cluster.error_info #=> Array
     #   resp.cluster.error_info[0].code #=> String
@@ -1364,6 +1369,7 @@ module Aws::PCS
     #   resp.endpoints[0].type #=> String, one of "SLURMCTLD", "SLURMDBD"
     #   resp.endpoints[0].private_ip_address #=> String
     #   resp.endpoints[0].public_ip_address #=> String
+    #   resp.endpoints[0].ipv6_address #=> String
     #   resp.endpoints[0].port #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/RegisterComputeNodeGroupInstance AWS API Documentation
@@ -1664,7 +1670,7 @@ module Aws::PCS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pcs'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

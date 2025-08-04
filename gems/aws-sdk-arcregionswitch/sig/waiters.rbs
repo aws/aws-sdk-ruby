@@ -1,0 +1,38 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ARCRegionswitch
+    module Waiters
+
+      class PlanEvaluationStatusPassed
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    plan_arn: ::String,
+                    ?max_results: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_GetPlanEvaluationStatusResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetPlanEvaluationStatusResponseSuccess
+      end
+
+      class PlanExecutionCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    plan_arn: ::String,
+                    execution_id: ::String,
+                    ?max_results: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_GetPlanExecutionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetPlanExecutionResponseSuccess
+      end
+    end
+  end
+end

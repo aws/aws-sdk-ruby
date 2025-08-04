@@ -978,15 +978,24 @@ module Aws::PCS
     #   @return [String]
     #
     # @!attribute [rw] private_ip_address
-    #   The endpoint's private IP address.
+    #   For clusters that use IPv4, this is the endpoint's private IP
+    #   address.
     #
-    #   Example: `2.2.2.2`
+    #   Example: `10.1.2.3`
+    #
+    #   For clusters configured to use IPv6, this is an empty string.
     #   @return [String]
     #
     # @!attribute [rw] public_ip_address
     #   The endpoint's public IP address.
     #
-    #   Example: `1.1.1.1`
+    #   Example: `192.0.2.1`
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv6_address
+    #   The endpoint's IPv6 address.
+    #
+    #   Example: `2001:db8::1`
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -1001,6 +1010,7 @@ module Aws::PCS
       :type,
       :private_ip_address,
       :public_ip_address,
+      :ipv6_address,
       :port)
       SENSITIVE = []
       include Aws::Structure
@@ -1347,7 +1357,7 @@ module Aws::PCS
     #
     #     * Ports: All
     #
-    #     * Destination: 0.0.0.0/0 (IPv4)
+    #     * Destination: 0.0.0.0/0 (IPv4) or ::/0 (IPv6)
     #   * Outbound rule 2
     #
     #     * Protocol: All
@@ -1357,11 +1367,16 @@ module Aws::PCS
     #     * Destination: Self
     #   @return [Array<String>]
     #
+    # @!attribute [rw] network_type
+    #   The IP address version the cluster uses. The default is `IPV4`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/Networking AWS API Documentation
     #
     class Networking < Struct.new(
       :subnet_ids,
-      :security_group_ids)
+      :security_group_ids,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1388,11 +1403,16 @@ module Aws::PCS
     #   Interface (ENI) created in subnets.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] network_type
+    #   The IP address version the cluster uses. The default is `IPV4`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/NetworkingRequest AWS API Documentation
     #
     class NetworkingRequest < Struct.new(
       :subnet_ids,
-      :security_group_ids)
+      :security_group_ids,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end

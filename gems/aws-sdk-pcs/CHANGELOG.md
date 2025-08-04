@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2025-08-01)
+------------------
+
+* Feature - Add support for IPv6 Networking for Clusters.
+
 1.24.0 (2025-07-31)
 ------------------
 

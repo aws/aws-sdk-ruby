@@ -1569,6 +1569,11 @@ module Aws::AuditManager
     #
     # @!attribute [rw] control_sets
     #   The control sets that are associated with the framework.
+    #
+    #   <note markdown="1"> The `Controls` object returns a partial response when called through
+    #   Framework APIs. For a complete `Controls` object, use `GetControl`.
+    #
+    #    </note>
     #   @return [Array<Types::CreateAssessmentFrameworkControlSet>]
     #
     # @!attribute [rw] tags
@@ -1588,8 +1593,8 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] framework
-    #   The name of the new framework that the `CreateAssessmentFramework`
-    #   API returned.
+    #   The new framework object that the `CreateAssessmentFramework` API
+    #   returned.
     #   @return [Types::Framework]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/CreateAssessmentFrameworkResponse AWS API Documentation
@@ -2498,10 +2503,17 @@ module Aws::AuditManager
     #
     # @!attribute [rw] control_sources
     #   The control data sources where Audit Manager collects evidence from.
+    #
+    #   This API parameter is no longer supported.
     #   @return [String]
     #
     # @!attribute [rw] control_sets
     #   The control sets that are associated with the framework.
+    #
+    #   <note markdown="1"> The `Controls` object returns a partial response when called through
+    #   Framework APIs. For a complete `Controls` object, use `GetControl`.
+    #
+    #    </note>
     #   @return [Array<Types::ControlSet>]
     #
     # @!attribute [rw] created_at
@@ -2607,6 +2619,11 @@ module Aws::AuditManager
 
     # @!attribute [rw] framework
     #   The framework that the `GetAssessmentFramework` API returned.
+    #
+    #   <note markdown="1"> The `Controls` object returns a partial response when called through
+    #   Framework APIs. For a complete `Controls` object, use `GetControl`.
+    #
+    #    </note>
     #   @return [Types::Framework]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetAssessmentFrameworkResponse AWS API Documentation
@@ -4629,6 +4646,11 @@ module Aws::AuditManager
     #
     # @!attribute [rw] control_sets
     #   The control sets that are associated with the framework.
+    #
+    #   <note markdown="1"> The `Controls` object returns a partial response when called through
+    #   Framework APIs. For a complete `Controls` object, use `GetControl`.
+    #
+    #    </note>
     #   @return [Array<Types::UpdateAssessmentFrameworkControlSet>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateAssessmentFrameworkRequest AWS API Documentation
@@ -4644,7 +4666,7 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] framework
-    #   The name of the framework.
+    #   The framework object.
     #   @return [Types::Framework]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateAssessmentFrameworkResponse AWS API Documentation

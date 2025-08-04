@@ -394,15 +394,25 @@ module Aws::SNS
     #     the two messages are treated as duplicates, within the deduplication
     #     scope and interval, and only one copy of the message is delivered.
     # @option options [String] :message_group_id
-    #   This parameter applies only to FIFO (first-in-first-out) topics. The
-    #   `MessageGroupId` can contain up to 128 alphanumeric characters `(a-z,
-    #   A-Z, 0-9)` and punctuation `` (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) ``.
+    #   The `MessageGroupId` can contain up to 128 alphanumeric characters
+    #   `(a-z, A-Z, 0-9)` and punctuation ``
+    #   (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) ``.
     #
-    #   The `MessageGroupId` is a tag that specifies that a message belongs to
-    #   a specific message group. Messages that belong to the same message
-    #   group are processed in a FIFO manner (however, messages in different
-    #   message groups might be processed out of order). Every message must
-    #   include a `MessageGroupId`.
+    #   For FIFO topics: The `MessageGroupId` is a tag that specifies that a
+    #   message belongs to a specific message group. Messages that belong to
+    #   the same message group are processed in a FIFO manner (however,
+    #   messages in different message groups might be processed out of order).
+    #   Every message must include a `MessageGroupId`.
+    #
+    #   For standard topics: The `MessageGroupId` is optional and is forwarded
+    #   only to Amazon SQS standard subscriptions to activate [fair
+    #   queues][1]. The `MessageGroupId` is not used for, or sent to, any
+    #   other endpoint types. When provided, the same validation rules apply
+    #   as for FIFO topics.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-fair-queues.html
     # @return [Types::PublishResponse]
     def publish(options = {})
       options = options.merge(topic_arn: @arn)
@@ -442,10 +452,6 @@ module Aws::SNS
     #   The following lists the names, descriptions, and values of the special
     #   request parameters that the `SetTopicAttributes` action uses:
     #
-    #   * `ApplicationSuccessFeedbackRoleArn` – Indicates failed message
-    #     delivery status for an Amazon SNS topic that is subscribed to a
-    #     platform application endpoint.
-    #
     #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
     #     failed deliveries to HTTP/S endpoints.
     #
@@ -475,19 +481,19 @@ module Aws::SNS
     #     * `HTTPFailureFeedbackRoleArn` – Indicates failed message delivery
     #       status for an Amazon SNS topic that is subscribed to an HTTP
     #       endpoint.
-    #   * Amazon Kinesis Data Firehose
+    #   * Amazon Data Firehose
     #
     #     * `FirehoseSuccessFeedbackRoleArn` – Indicates successful message
     #       delivery status for an Amazon SNS topic that is subscribed to an
-    #       Amazon Kinesis Data Firehose endpoint.
+    #       Amazon Data Firehose endpoint.
     #
     #     * `FirehoseSuccessFeedbackSampleRate` – Indicates percentage of
     #       successful messages to sample for an Amazon SNS topic that is
-    #       subscribed to an Amazon Kinesis Data Firehose endpoint.
+    #       subscribed to an Amazon Data Firehose endpoint.
     #
     #     * `FirehoseFailureFeedbackRoleArn` – Indicates failed message
     #       delivery status for an Amazon SNS topic that is subscribed to an
-    #       Amazon Kinesis Data Firehose endpoint.
+    #       Amazon Data Firehose endpoint.
     #   * Lambda
     #
     #     * `LambdaSuccessFeedbackRoleArn` – Indicates successful message
@@ -505,15 +511,15 @@ module Aws::SNS
     #
     #     * `ApplicationSuccessFeedbackRoleArn` – Indicates successful message
     #       delivery status for an Amazon SNS topic that is subscribed to an
-    #       Amazon Web Services application endpoint.
+    #       platform application endpoint.
     #
     #     * `ApplicationSuccessFeedbackSampleRate` – Indicates percentage of
     #       successful messages to sample for an Amazon SNS topic that is
-    #       subscribed to an Amazon Web Services application endpoint.
+    #       subscribed to an platform application endpoint.
     #
     #     * `ApplicationFailureFeedbackRoleArn` – Indicates failed message
     #       delivery status for an Amazon SNS topic that is subscribed to an
-    #       Amazon Web Services application endpoint.
+    #       platform application endpoint.
     #     <note markdown="1"> In addition to being able to configure topic attributes for message
     #     delivery status of notification messages sent to Amazon SNS
     #     application endpoints, you can also configure application attributes
@@ -651,8 +657,8 @@ module Aws::SNS
     #
     #   * `lambda` – delivery of JSON-encoded message to an Lambda function
     #
-    #   * `firehose` – delivery of JSON-encoded message to an Amazon Kinesis
-    #     Data Firehose delivery stream.
+    #   * `firehose` – delivery of JSON-encoded message to an Amazon Data
+    #     Firehose delivery stream.
     # @option options [String] :endpoint
     #   The endpoint that you want to receive notifications. Endpoints vary by
     #   protocol:
@@ -680,7 +686,7 @@ module Aws::SNS
     #     function.
     #
     #   * For the `firehose` protocol, the endpoint is the ARN of an Amazon
-    #     Kinesis Data Firehose delivery stream.
+    #     Data Firehose delivery stream.
     # @option options [Hash<String,String>] :attributes
     #   A map of attributes with their corresponding values.
     #

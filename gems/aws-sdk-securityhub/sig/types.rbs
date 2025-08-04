@@ -4900,6 +4900,13 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class CodeRepositoryDetails
+      attr_accessor provider_type: ::String
+      attr_accessor project_name: ::String
+      attr_accessor code_security_integration_arn: ::String
+      SENSITIVE: []
+    end
+
     class CodeVulnerabilitiesFilePath
       attr_accessor end_line: ::Integer
       attr_accessor file_name: ::String
@@ -6767,6 +6774,7 @@ module Aws::SecurityHub
       attr_accessor aws_msk_cluster: Types::AwsMskClusterDetails
       attr_accessor aws_s3_access_point: Types::AwsS3AccessPointDetails
       attr_accessor aws_ec2_client_vpn_endpoint: Types::AwsEc2ClientVpnEndpointDetails
+      attr_accessor code_repository: Types::CodeRepositoryDetails
       SENSITIVE: []
     end
 

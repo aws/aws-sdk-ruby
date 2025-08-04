@@ -4131,6 +4131,11 @@ module Aws
                                                  enabled: bool?,
                                                  banner_text: ::String?
                                                }?
+                                             }?,
+                                             code_repository: {
+                                               provider_type: ::String?,
+                                               project_name: ::String?,
+                                               code_security_integration_arn: ::String?
                                              }?
                                            }?,
                                            application_name: ::String?,

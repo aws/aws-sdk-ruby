@@ -266,15 +266,25 @@ module Aws::SNS
     #     the two messages are treated as duplicates, within the deduplication
     #     scope and interval, and only one copy of the message is delivered.
     # @option options [String] :message_group_id
-    #   This parameter applies only to FIFO (first-in-first-out) topics. The
-    #   `MessageGroupId` can contain up to 128 alphanumeric characters `(a-z,
-    #   A-Z, 0-9)` and punctuation `` (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) ``.
+    #   The `MessageGroupId` can contain up to 128 alphanumeric characters
+    #   `(a-z, A-Z, 0-9)` and punctuation ``
+    #   (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) ``.
     #
-    #   The `MessageGroupId` is a tag that specifies that a message belongs to
-    #   a specific message group. Messages that belong to the same message
-    #   group are processed in a FIFO manner (however, messages in different
-    #   message groups might be processed out of order). Every message must
-    #   include a `MessageGroupId`.
+    #   For FIFO topics: The `MessageGroupId` is a tag that specifies that a
+    #   message belongs to a specific message group. Messages that belong to
+    #   the same message group are processed in a FIFO manner (however,
+    #   messages in different message groups might be processed out of order).
+    #   Every message must include a `MessageGroupId`.
+    #
+    #   For standard topics: The `MessageGroupId` is optional and is forwarded
+    #   only to Amazon SQS standard subscriptions to activate [fair
+    #   queues][1]. The `MessageGroupId` is not used for, or sent to, any
+    #   other endpoint types. When provided, the same validation rules apply
+    #   as for FIFO topics.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-fair-queues.html
     # @return [Types::PublishResponse]
     def publish(options = {})
       options = options.merge(target_arn: @arn)

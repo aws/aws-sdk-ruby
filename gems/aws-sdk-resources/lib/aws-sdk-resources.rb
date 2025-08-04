@@ -9,6 +9,7 @@ module Aws
   autoload :ACMPCA, 'aws-sdk-acmpca'
   autoload :AIOps, 'aws-sdk-aiops'
   autoload :APIGateway, 'aws-sdk-apigateway'
+  autoload :ARCRegionswitch, 'aws-sdk-arcregionswitch'
   autoload :ARCZonalShift, 'aws-sdk-arczonalshift'
   autoload :AccessAnalyzer, 'aws-sdk-accessanalyzer'
   autoload :Account, 'aws-sdk-account'

@@ -858,7 +858,7 @@ module Aws::AuditManager
     Framework.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ComplianceType, location_name: "complianceType"))
     Framework.add_member(:description, Shapes::ShapeRef.new(shape: FrameworkDescription, location_name: "description"))
     Framework.add_member(:logo, Shapes::ShapeRef.new(shape: Filename, location_name: "logo"))
-    Framework.add_member(:control_sources, Shapes::ShapeRef.new(shape: ControlSources, location_name: "controlSources"))
+    Framework.add_member(:control_sources, Shapes::ShapeRef.new(shape: ControlSources, deprecated: true, location_name: "controlSources", metadata: {"deprecatedMessage" => "Use controlSources from the Control", "deprecatedSince" => "2025-07-24"}))
     Framework.add_member(:control_sets, Shapes::ShapeRef.new(shape: ControlSets, location_name: "controlSets"))
     Framework.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     Framework.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
@@ -2146,6 +2146,7 @@ module Aws::AuditManager
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:update_assessment_framework_share, Seahorse::Model::Operation.new.tap do |o|

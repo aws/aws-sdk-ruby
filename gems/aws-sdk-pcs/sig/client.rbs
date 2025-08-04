@@ -93,7 +93,8 @@ module Aws
                             size: ("SMALL" | "MEDIUM" | "LARGE"),
                             networking: {
                               subnet_ids: Array[::String]?,
-                              security_group_ids: Array[::String]?
+                              security_group_ids: Array[::String]?,
+                              network_type: ("IPV4" | "IPV6")?
                             },
                             ?slurm_configuration: {
                               scale_down_idle_time_in_seconds: ::Integer?,

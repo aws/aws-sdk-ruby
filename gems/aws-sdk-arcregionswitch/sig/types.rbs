@@ -1,0 +1,643 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ARCRegionswitch
+  module Types
+
+    class AbbreviatedExecution
+      attr_accessor plan_arn: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor version: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor comment: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor mode: ("graceful" | "ungraceful")
+      attr_accessor execution_state: ("inProgress" | "pausedByFailedStep" | "pausedByOperator" | "completed" | "completedWithExceptions" | "canceled" | "planExecutionTimedOut" | "pendingManualApproval" | "failed" | "pending" | "completedMonitoringApplicationHealth")
+      attr_accessor execution_action: ("activate" | "deactivate")
+      attr_accessor execution_region: ::String
+      attr_accessor actual_recovery_time: ::String
+      SENSITIVE: []
+    end
+
+    class AbbreviatedPlan
+      attr_accessor arn: ::String
+      attr_accessor owner: ::String
+      attr_accessor name: ::String
+      attr_accessor regions: ::Array[::String]
+      attr_accessor recovery_approach: ("activeActive" | "activePassive")
+      attr_accessor primary_region: ::String
+      attr_accessor version: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor execution_role: ::String
+      attr_accessor active_plan_execution: ::String
+      attr_accessor recovery_time_objective_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ApprovePlanExecutionStepRequest
+      attr_accessor plan_arn: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor step_name: ::String
+      attr_accessor approval: ("approve" | "decline")
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class ApprovePlanExecutionStepResponse < Aws::EmptyStructure
+    end
+
+    class ArcRoutingControlConfiguration
+      attr_accessor timeout_minutes: ::Integer
+      attr_accessor cross_account_role: ::String
+      attr_accessor external_id: ::String
+      attr_accessor region_and_routing_controls: ::Hash[::String, ::Array[Types::ArcRoutingControlState]]
+      SENSITIVE: []
+    end
+
+    class ArcRoutingControlState
+      attr_accessor routing_control_arn: ::String
+      attr_accessor state: ("On" | "Off")
+      SENSITIVE: []
+    end
+
+    class Asg
+      attr_accessor cross_account_role: ::String
+      attr_accessor external_id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociatedAlarm
+      attr_accessor cross_account_role: ::String
+      attr_accessor external_id: ::String
+      attr_accessor resource_identifier: ::String
+      attr_accessor alarm_type: ("applicationHealth" | "trigger")
+      SENSITIVE: []
+    end
+
+    class CancelPlanExecutionRequest
+      attr_accessor plan_arn: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class CancelPlanExecutionResponse < Aws::EmptyStructure
+    end
+
+    class CreatePlanRequest
+      attr_accessor description: ::String
+      attr_accessor workflows: ::Array[Types::Workflow]
+      attr_accessor execution_role: ::String
+      attr_accessor recovery_time_objective_minutes: ::Integer
+      attr_accessor associated_alarms: ::Hash[::String, Types::AssociatedAlarm]
+      attr_accessor triggers: ::Array[Types::Trigger]
+      attr_accessor name: ::String
+      attr_accessor regions: ::Array[::String]
+      attr_accessor recovery_approach: ("activeActive" | "activePassive")
+      attr_accessor primary_region: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePlanResponse
+      attr_accessor plan: Types::Plan
+      SENSITIVE: []
+    end
+
+    class CustomActionLambdaConfiguration
+      attr_accessor timeout_minutes: ::Integer
+      attr_accessor lambdas: ::Array[Types::Lambdas]
+      attr_accessor retry_interval_minutes: ::Float
+      attr_accessor region_to_run: ("activatingRegion" | "deactivatingRegion")
+      attr_accessor ungraceful: Types::LambdaUngraceful
+      SENSITIVE: []
+    end
+
+    class DeletePlanRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePlanResponse < Aws::EmptyStructure
+    end
+
+    class Ec2AsgCapacityIncreaseConfiguration
+      attr_accessor timeout_minutes: ::Integer
+      attr_accessor asgs: ::Array[Types::Asg]
+      attr_accessor ungraceful: Types::Ec2Ungraceful
+      attr_accessor target_percent: ::Integer
+      attr_accessor capacity_monitoring_approach: ("sampledMaxInLast24Hours" | "autoscalingMaxInLast24Hours")
+      SENSITIVE: []
+    end
+
+    class Ec2Ungraceful
+      attr_accessor minimum_success_percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class EcsCapacityIncreaseConfiguration
+      attr_accessor timeout_minutes: ::Integer
+      attr_accessor services: ::Array[Types::Service]
+      attr_accessor ungraceful: Types::EcsUngraceful
+      attr_accessor target_percent: ::Integer
+      attr_accessor capacity_monitoring_approach: ("sampledMaxInLast24Hours" | "containerInsightsMaxInLast24Hours")
+      SENSITIVE: []
+    end
+
+    class EcsUngraceful
+      attr_accessor minimum_success_percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class EksCluster
+      attr_accessor cross_account_role: ::String
+      attr_accessor external_id: ::String
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EksResourceScalingConfiguration
+      attr_accessor timeout_minutes: ::Integer
+      attr_accessor kubernetes_resource_type: Types::KubernetesResourceType
+      attr_accessor scaling_resources: ::Array[::Hash[::String, ::Hash[::String, Types::KubernetesScalingResource]]]
+      attr_accessor eks_clusters: ::Array[Types::EksCluster]
+      attr_accessor ungraceful: Types::EksResourceScalingUngraceful
+      attr_accessor target_percent: ::Integer
+      attr_accessor capacity_monitoring_approach: ("sampledMaxInLast24Hours")
+      SENSITIVE: []
+    end
+
+    class EksResourceScalingUngraceful
+      attr_accessor minimum_success_percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExecutionApprovalConfiguration
+      attr_accessor timeout_minutes: ::Integer
+      attr_accessor approval_role: ::String
+      SENSITIVE: []
+    end
+
+    class ExecutionBlockConfiguration
+      attr_accessor custom_action_lambda_config: Types::CustomActionLambdaConfiguration
+      attr_accessor ec2_asg_capacity_increase_config: Types::Ec2AsgCapacityIncreaseConfiguration
+      attr_accessor execution_approval_config: Types::ExecutionApprovalConfiguration
+      attr_accessor arc_routing_control_config: Types::ArcRoutingControlConfiguration
+      attr_accessor global_aurora_config: Types::GlobalAuroraConfiguration
+      attr_accessor parallel_config: Types::ParallelExecutionBlockConfiguration
+      attr_accessor region_switch_plan_config: Types::RegionSwitchPlanConfiguration
+      attr_accessor ecs_capacity_increase_config: Types::EcsCapacityIncreaseConfiguration
+      attr_accessor eks_resource_scaling_config: Types::EksResourceScalingConfiguration
+      attr_accessor route53_health_check_config: Types::Route53HealthCheckConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CustomActionLambdaConfig < ExecutionBlockConfiguration
+      end
+      class Ec2AsgCapacityIncreaseConfig < ExecutionBlockConfiguration
+      end
+      class ExecutionApprovalConfig < ExecutionBlockConfiguration
+      end
+      class ArcRoutingControlConfig < ExecutionBlockConfiguration
+      end
+      class GlobalAuroraConfig < ExecutionBlockConfiguration
+      end
+      class ParallelConfig < ExecutionBlockConfiguration
+      end
+      class RegionSwitchPlanConfig < ExecutionBlockConfiguration
+      end
+      class EcsCapacityIncreaseConfig < ExecutionBlockConfiguration
+      end
+      class EksResourceScalingConfig < ExecutionBlockConfiguration
+      end
+      class Route53HealthCheckConfig < ExecutionBlockConfiguration
+      end
+      class Unknown < ExecutionBlockConfiguration
+      end
+    end
+
+    class ExecutionEvent
+      attr_accessor timestamp: ::Time
+      attr_accessor type: ("unknown" | "executionPending" | "executionStarted" | "executionSucceeded" | "executionFailed" | "executionPausing" | "executionPaused" | "executionCanceling" | "executionCanceled" | "executionPendingApproval" | "executionBehaviorChangedToUngraceful" | "executionBehaviorChangedToGraceful" | "executionPendingChildPlanManualApproval" | "executionSuccessMonitoringApplicationHealth" | "stepStarted" | "stepUpdate" | "stepSucceeded" | "stepFailed" | "stepSkipped" | "stepPausedByError" | "stepPausedByOperator" | "stepCanceled" | "stepPendingApproval" | "stepExecutionBehaviorChangedToUngraceful" | "stepPendingApplicationHealthMonitor")
+      attr_accessor step_name: ::String
+      attr_accessor execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck")
+      attr_accessor resources: ::Array[::String]
+      attr_accessor error: ::String
+      attr_accessor description: ::String
+      attr_accessor event_id: ::String
+      attr_accessor previous_event_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPlanEvaluationStatusRequest
+      attr_accessor plan_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetPlanEvaluationStatusResponse
+      attr_accessor plan_arn: ::String
+      attr_accessor last_evaluation_time: ::Time
+      attr_accessor last_evaluated_version: ::String
+      attr_accessor region: ::String
+      attr_accessor evaluation_state: ("passed" | "actionRequired" | "pendingEvaluation" | "unknown")
+      attr_accessor warnings: ::Array[Types::ResourceWarning]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetPlanExecutionRequest
+      attr_accessor plan_arn: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetPlanExecutionResponse
+      attr_accessor plan_arn: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor version: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor comment: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor mode: ("graceful" | "ungraceful")
+      attr_accessor execution_state: ("inProgress" | "pausedByFailedStep" | "pausedByOperator" | "completed" | "completedWithExceptions" | "canceled" | "planExecutionTimedOut" | "pendingManualApproval" | "failed" | "pending" | "completedMonitoringApplicationHealth")
+      attr_accessor execution_action: ("activate" | "deactivate")
+      attr_accessor execution_region: ::String
+      attr_accessor step_states: ::Array[Types::StepState]
+      attr_accessor plan: Types::Plan
+      attr_accessor actual_recovery_time: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetPlanInRegionRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPlanInRegionResponse
+      attr_accessor plan: Types::Plan
+      SENSITIVE: []
+    end
+
+    class GetPlanRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPlanResponse
+      attr_accessor plan: Types::Plan
+      SENSITIVE: []
+    end
+
+    class GlobalAuroraConfiguration
+      attr_accessor timeout_minutes: ::Integer
+      attr_accessor cross_account_role: ::String
+      attr_accessor external_id: ::String
+      attr_accessor behavior: ("switchoverOnly" | "failover")
+      attr_accessor ungraceful: Types::GlobalAuroraUngraceful
+      attr_accessor global_cluster_identifier: ::String
+      attr_accessor database_cluster_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GlobalAuroraUngraceful
+      attr_accessor ungraceful: ("failover")
+      SENSITIVE: []
+    end
+
+    class IllegalArgumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IllegalStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KubernetesResourceType
+      attr_accessor api_version: ::String
+      attr_accessor kind: ::String
+      SENSITIVE: []
+    end
+
+    class KubernetesScalingResource
+      attr_accessor namespace: ::String
+      attr_accessor name: ::String
+      attr_accessor hpa_name: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaUngraceful
+      attr_accessor behavior: ("skip")
+      SENSITIVE: []
+    end
+
+    class Lambdas
+      attr_accessor cross_account_role: ::String
+      attr_accessor external_id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlanExecutionEventsRequest
+      attr_accessor plan_arn: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlanExecutionEventsResponse
+      attr_accessor items: ::Array[Types::ExecutionEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlanExecutionsRequest
+      attr_accessor plan_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor state: ("inProgress" | "pausedByFailedStep" | "pausedByOperator" | "completed" | "completedWithExceptions" | "canceled" | "planExecutionTimedOut" | "pendingManualApproval" | "failed" | "pending" | "completedMonitoringApplicationHealth")
+      SENSITIVE: []
+    end
+
+    class ListPlanExecutionsResponse
+      attr_accessor items: ::Array[Types::AbbreviatedExecution]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlansInRegionRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlansInRegionResponse
+      attr_accessor plans: ::Array[Types::AbbreviatedPlan]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlansRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlansResponse
+      attr_accessor plans: ::Array[Types::AbbreviatedPlan]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRoute53HealthChecksRequest
+      attr_accessor arn: ::String
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor record_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRoute53HealthChecksResponse
+      attr_accessor health_checks: ::Array[Types::Route53HealthCheck]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor resource_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MinimalWorkflow
+      attr_accessor action: ("activate" | "deactivate")
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ParallelExecutionBlockConfiguration
+      attr_accessor steps: ::Array[Types::Step]
+      SENSITIVE: []
+    end
+
+    class Plan
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor workflows: ::Array[Types::Workflow]
+      attr_accessor execution_role: ::String
+      attr_accessor recovery_time_objective_minutes: ::Integer
+      attr_accessor associated_alarms: ::Hash[::String, Types::AssociatedAlarm]
+      attr_accessor triggers: ::Array[Types::Trigger]
+      attr_accessor name: ::String
+      attr_accessor regions: ::Array[::String]
+      attr_accessor recovery_approach: ("activeActive" | "activePassive")
+      attr_accessor primary_region: ::String
+      attr_accessor owner: ::String
+      attr_accessor version: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class RegionSwitchPlanConfiguration
+      attr_accessor cross_account_role: ::String
+      attr_accessor external_id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceWarning
+      attr_accessor workflow: Types::MinimalWorkflow
+      attr_accessor version: ::String
+      attr_accessor step_name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor warning_status: ("active" | "resolved")
+      attr_accessor warning_updated_time: ::Time
+      attr_accessor warning_message: ::String
+      SENSITIVE: []
+    end
+
+    class Route53HealthCheck
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor record_name: ::String
+      attr_accessor health_check_id: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class Route53HealthCheckConfiguration
+      attr_accessor timeout_minutes: ::Integer
+      attr_accessor cross_account_role: ::String
+      attr_accessor external_id: ::String
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor record_name: ::String
+      attr_accessor record_sets: ::Array[Types::Route53ResourceRecordSet]
+      SENSITIVE: []
+    end
+
+    class Route53ResourceRecordSet
+      attr_accessor record_set_identifier: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class Service
+      attr_accessor cross_account_role: ::String
+      attr_accessor external_id: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor service_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartPlanExecutionRequest
+      attr_accessor plan_arn: ::String
+      attr_accessor target_region: ::String
+      attr_accessor action: ("activate" | "deactivate")
+      attr_accessor mode: ("graceful" | "ungraceful")
+      attr_accessor comment: ::String
+      attr_accessor latest_version: ::String
+      SENSITIVE: []
+    end
+
+    class StartPlanExecutionResponse
+      attr_accessor execution_id: ::String
+      attr_accessor plan: ::String
+      attr_accessor plan_version: ::String
+      attr_accessor activate_region: ::String
+      attr_accessor deactivate_region: ::String
+      SENSITIVE: []
+    end
+
+    class Step
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor execution_block_configuration: Types::ExecutionBlockConfiguration
+      attr_accessor execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck")
+      SENSITIVE: []
+    end
+
+    class StepState
+      attr_accessor name: ::String
+      attr_accessor status: ("notStarted" | "running" | "failed" | "completed" | "canceled" | "skipped" | "pendingApproval")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor step_mode: ("graceful" | "ungraceful")
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class Trigger
+      attr_accessor description: ::String
+      attr_accessor target_region: ::String
+      attr_accessor action: ("activate" | "deactivate")
+      attr_accessor conditions: ::Array[Types::TriggerCondition]
+      attr_accessor min_delay_minutes_between_executions: ::Integer
+      SENSITIVE: []
+    end
+
+    class TriggerCondition
+      attr_accessor associated_alarm_name: ::String
+      attr_accessor condition: ("red" | "green")
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor resource_tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdatePlanExecutionRequest
+      attr_accessor plan_arn: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor action: ("switchToGraceful" | "switchToUngraceful" | "pause" | "resume")
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePlanExecutionResponse < Aws::EmptyStructure
+    end
+
+    class UpdatePlanExecutionStepRequest
+      attr_accessor plan_arn: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor comment: ::String
+      attr_accessor step_name: ::String
+      attr_accessor action_to_take: ("switchToUngraceful" | "skip")
+      SENSITIVE: []
+    end
+
+    class UpdatePlanExecutionStepResponse < Aws::EmptyStructure
+    end
+
+    class UpdatePlanRequest
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor workflows: ::Array[Types::Workflow]
+      attr_accessor execution_role: ::String
+      attr_accessor recovery_time_objective_minutes: ::Integer
+      attr_accessor associated_alarms: ::Hash[::String, Types::AssociatedAlarm]
+      attr_accessor triggers: ::Array[Types::Trigger]
+      SENSITIVE: []
+    end
+
+    class UpdatePlanResponse
+      attr_accessor plan: Types::Plan
+      SENSITIVE: []
+    end
+
+    class Workflow
+      attr_accessor steps: ::Array[Types::Step]
+      attr_accessor workflow_target_action: ("activate" | "deactivate")
+      attr_accessor workflow_target_region: ::String
+      attr_accessor workflow_description: ::String
+      SENSITIVE: []
+    end
+  end
+end

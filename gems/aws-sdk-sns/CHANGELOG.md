@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.103.0 (2025-08-01)
+------------------
+
+* Feature - Amazon SNS support for Amazon SQS fair queues
+
 1.102.0 (2025-07-31)
 ------------------
 

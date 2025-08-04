@@ -354,17 +354,9 @@ module Aws::SNS
     #   * `DisplayName` – The display name to use for a topic with SMS
     #     subscriptions.
     #
-    #   * `FifoTopic` – Set to true to create a FIFO topic.
-    #
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the
     #     topic.
-    #
-    #   * `SignatureVersion` – The signature version corresponds to the
-    #     hashing algorithm used while creating the signature of the
-    #     notifications, subscription confirmations, or unsubscribe
-    #     confirmation messages sent by Amazon SNS. By default,
-    #     `SignatureVersion` is set to `1`.
     #
     #   * `TracingConfig` – Tracing mode of an Amazon SNS topic. By default
     #     `TracingConfig` is set to `PassThrough`, and the topic passes
@@ -374,16 +366,104 @@ module Aws::SNS
     #     flag in the tracing header is true. This is only supported on
     #     standard topics.
     #
-    #   The following attribute applies only to [server-side encryption][1]:
+    #   * HTTP
+    #
+    #     * `HTTPSuccessFeedbackRoleArn` – Indicates successful message
+    #       delivery status for an Amazon SNS topic that is subscribed to an
+    #       HTTP endpoint.
+    #
+    #     * `HTTPSuccessFeedbackSampleRate` – Indicates percentage of
+    #       successful messages to sample for an Amazon SNS topic that is
+    #       subscribed to an HTTP endpoint.
+    #
+    #     * `HTTPFailureFeedbackRoleArn` – Indicates failed message delivery
+    #       status for an Amazon SNS topic that is subscribed to an HTTP
+    #       endpoint.
+    #   * Amazon Data Firehose
+    #
+    #     * `FirehoseSuccessFeedbackRoleArn` – Indicates successful message
+    #       delivery status for an Amazon SNS topic that is subscribed to an
+    #       Amazon Data Firehose endpoint.
+    #
+    #     * `FirehoseSuccessFeedbackSampleRate` – Indicates percentage of
+    #       successful messages to sample for an Amazon SNS topic that is
+    #       subscribed to an Amazon Data Firehose endpoint.
+    #
+    #     * `FirehoseFailureFeedbackRoleArn` – Indicates failed message
+    #       delivery status for an Amazon SNS topic that is subscribed to an
+    #       Amazon Data Firehose endpoint.
+    #   * Lambda
+    #
+    #     * `LambdaSuccessFeedbackRoleArn` – Indicates successful message
+    #       delivery status for an Amazon SNS topic that is subscribed to an
+    #       Lambda endpoint.
+    #
+    #     * `LambdaSuccessFeedbackSampleRate` – Indicates percentage of
+    #       successful messages to sample for an Amazon SNS topic that is
+    #       subscribed to an Lambda endpoint.
+    #
+    #     * `LambdaFailureFeedbackRoleArn` – Indicates failed message
+    #       delivery status for an Amazon SNS topic that is subscribed to an
+    #       Lambda endpoint.
+    #   * Platform application endpoint
+    #
+    #     * `ApplicationSuccessFeedbackRoleArn` – Indicates successful
+    #       message delivery status for an Amazon SNS topic that is
+    #       subscribed to a platform application endpoint.
+    #
+    #     * `ApplicationSuccessFeedbackSampleRate` – Indicates percentage of
+    #       successful messages to sample for an Amazon SNS topic that is
+    #       subscribed to an platform application endpoint.
+    #
+    #     * `ApplicationFailureFeedbackRoleArn` – Indicates failed message
+    #       delivery status for an Amazon SNS topic that is subscribed to an
+    #       platform application endpoint.
+    #     <note markdown="1"> In addition to being able to configure topic attributes for
+    #     message delivery status of notification messages sent to Amazon
+    #     SNS application endpoints, you can also configure application
+    #     attributes for the delivery status of push notification messages
+    #     sent to push notification services.
+    #
+    #      For example, For more information, see [Using Amazon SNS
+    #     Application Attributes for Message Delivery Status][1].
+    #
+    #      </note>
+    #
+    #   * Amazon SQS
+    #
+    #     * `SQSSuccessFeedbackRoleArn` – Indicates successful message
+    #       delivery status for an Amazon SNS topic that is subscribed to an
+    #       Amazon SQS endpoint.
+    #
+    #     * `SQSSuccessFeedbackSampleRate` – Indicates percentage of
+    #       successful messages to sample for an Amazon SNS topic that is
+    #       subscribed to an Amazon SQS endpoint.
+    #
+    #     * `SQSFailureFeedbackRoleArn` – Indicates failed message delivery
+    #       status for an Amazon SNS topic that is subscribed to an Amazon
+    #       SQS endpoint.
+    #
+    #   <note markdown="1"> The &lt;ENDPOINT&gt;SuccessFeedbackRoleArn and
+    #   &lt;ENDPOINT&gt;FailureFeedbackRoleArn attributes are used to give
+    #   Amazon SNS write access to use CloudWatch Logs on your behalf. The
+    #   &lt;ENDPOINT&gt;SuccessFeedbackSampleRate attribute is for
+    #   specifying the sample rate percentage (0-100) of successfully
+    #   delivered messages. After you configure the
+    #   &lt;ENDPOINT&gt;FailureFeedbackRoleArn attribute, then all failed
+    #   message deliveries generate CloudWatch Logs.
+    #
+    #    </note>
+    #
+    #   The following attribute applies only to [server-side encryption][2]:
     #
     #   * `KmsMasterKeyId` – The ID of an Amazon Web Services managed
     #     customer master key (CMK) for Amazon SNS or a custom CMK. For more
-    #     information, see [Key Terms][2]. For more examples, see [KeyId][3]
+    #     information, see [Key Terms][3]. For more examples, see [KeyId][4]
     #     in the *Key Management Service API Reference*.
     #
     #   ^
     #
-    #   The following attributes apply only to [FIFO topics][4]:
+    #   The following attributes apply only to [FIFO topics][5]:
     #
     #   * `ArchivePolicy` – The policy that sets the retention period for
     #     messages stored in the message archive of an Amazon SNS FIFO
@@ -395,7 +475,7 @@ module Aws::SNS
     #     * By default, `ContentBasedDeduplication` is set to `false`. If
     #       you create a FIFO topic and this attribute is `false`, you must
     #       specify a value for the `MessageDeduplicationId` parameter for
-    #       the [Publish][5] action.
+    #       the [Publish][6] action.
     #
     #     * When you set `ContentBasedDeduplication` to `true`, Amazon SNS
     #       uses a SHA-256 hash to generate the `MessageDeduplicationId`
@@ -419,17 +499,18 @@ module Aws::SNS
     #     * `MessageGroup` – The scope of deduplication is within each
     #       individual message group, which enables higher throughput per
     #       topic subject to regional quotas. For more information on quotas
-    #       or to request an increase, see [Amazon SNS service quotas][6] in
+    #       or to request an increase, see [Amazon SNS service quotas][7] in
     #       the Amazon Web Services General Reference.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
-    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
-    #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
-    #   [4]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
-    #   [5]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
-    #   [6]: https://docs.aws.amazon.com/general/latest/gr/sns.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
+    #   [3]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
+    #   [4]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
+    #   [5]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
+    #   [6]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
+    #   [7]: https://docs.aws.amazon.com/general/latest/gr/sns.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags
@@ -580,7 +661,7 @@ module Aws::SNS
 
     # Indicates that the number of filter polices in your Amazon Web
     # Services account exceeds the limit. To add more filter polices, submit
-    # an Amazon SNS Limit Increase case in the Amazon Web Services Support
+    # an Amazon SNS Limit Increase case in the Amazon Web ServicesSupport
     # Center.
     #
     # @!attribute [rw] message
@@ -1734,7 +1815,7 @@ module Aws::SNS
     #     that is a string.
     #
     #   You can define other top-level keys that define the message you want
-    #   to send to a specific transport protocol (e.g. http).
+    #   to send to a specific transport protocol (for example, http).
     #   @return [String]
     #
     # @!attribute [rw] message_attributes
@@ -1812,27 +1893,30 @@ module Aws::SNS
     #   @return [String]
     #
     # @!attribute [rw] message_group_id
-    #   This parameter applies only to FIFO (first-in-first-out) topics.
+    #   FIFO topics: The tag that specifies that a message belongs to a
+    #   specific message group. Messages that belong to the same message
+    #   group are processed in a FIFO manner (however, messages in different
+    #   message groups might be processed out of order). To interleave
+    #   multiple ordered streams within a single topic, use `MessageGroupId`
+    #   values (for example, session data for multiple users). In this
+    #   scenario, multiple consumers can process the topic, but the session
+    #   data of each user is processed in a FIFO fashion. You must associate
+    #   a non-empty `MessageGroupId` with a message. If you do not provide a
+    #   `MessageGroupId`, the action fails.
     #
-    #   The tag that specifies that a message belongs to a specific message
-    #   group. Messages that belong to the same message group are processed
-    #   in a FIFO manner (however, messages in different message groups
-    #   might be processed out of order). To interleave multiple ordered
-    #   streams within a single topic, use `MessageGroupId` values (for
-    #   example, session data for multiple users). In this scenario,
-    #   multiple consumers can process the topic, but the session data of
-    #   each user is processed in a FIFO fashion.
-    #
-    #   You must associate a non-empty `MessageGroupId` with a message. If
-    #   you don't provide a `MessageGroupId`, the action fails.
+    #   Standard topics: The `MessageGroupId` is optional and is forwarded
+    #   only to Amazon SQS standard subscriptions to activate [fair
+    #   queues][1]. The `MessageGroupId` is not used for, or sent to, any
+    #   other endpoint types.
     #
     #   The length of `MessageGroupId` is 128 characters.
     #
     #   `MessageGroupId` can contain alphanumeric characters `(a-z, A-Z,
     #   0-9)` and punctuation `` (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) ``.
     #
-    #   `MessageGroupId` is required for FIFO topics. You can't use it for
-    #   standard topics.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-fair-queues.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PublishBatchRequestEntry AWS API Documentation
@@ -2060,16 +2144,25 @@ module Aws::SNS
     #   @return [String]
     #
     # @!attribute [rw] message_group_id
-    #   This parameter applies only to FIFO (first-in-first-out) topics. The
-    #   `MessageGroupId` can contain up to 128 alphanumeric characters
+    #   The `MessageGroupId` can contain up to 128 alphanumeric characters
     #   `(a-z, A-Z, 0-9)` and punctuation ``
     #   (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) ``.
     #
-    #   The `MessageGroupId` is a tag that specifies that a message belongs
-    #   to a specific message group. Messages that belong to the same
-    #   message group are processed in a FIFO manner (however, messages in
-    #   different message groups might be processed out of order). Every
-    #   message must include a `MessageGroupId`.
+    #   For FIFO topics: The `MessageGroupId` is a tag that specifies that a
+    #   message belongs to a specific message group. Messages that belong to
+    #   the same message group are processed in a FIFO manner (however,
+    #   messages in different message groups might be processed out of
+    #   order). Every message must include a `MessageGroupId`.
+    #
+    #   For standard topics: The `MessageGroupId` is optional and is
+    #   forwarded only to Amazon SQS standard subscriptions to activate
+    #   [fair queues][1]. The `MessageGroupId` is not used for, or sent to,
+    #   any other endpoint types. When provided, the same validation rules
+    #   apply as for FIFO topics.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-fair-queues.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PublishInput AWS API Documentation
@@ -2536,10 +2629,6 @@ module Aws::SNS
     #   special request parameters that the `SetTopicAttributes` action
     #   uses:
     #
-    #   * `ApplicationSuccessFeedbackRoleArn` – Indicates failed message
-    #     delivery status for an Amazon SNS topic that is subscribed to a
-    #     platform application endpoint.
-    #
     #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
     #     failed deliveries to HTTP/S endpoints.
     #
@@ -2571,19 +2660,19 @@ module Aws::SNS
     #     * `HTTPFailureFeedbackRoleArn` – Indicates failed message delivery
     #       status for an Amazon SNS topic that is subscribed to an HTTP
     #       endpoint.
-    #   * Amazon Kinesis Data Firehose
+    #   * Amazon Data Firehose
     #
     #     * `FirehoseSuccessFeedbackRoleArn` – Indicates successful message
     #       delivery status for an Amazon SNS topic that is subscribed to an
-    #       Amazon Kinesis Data Firehose endpoint.
+    #       Amazon Data Firehose endpoint.
     #
     #     * `FirehoseSuccessFeedbackSampleRate` – Indicates percentage of
     #       successful messages to sample for an Amazon SNS topic that is
-    #       subscribed to an Amazon Kinesis Data Firehose endpoint.
+    #       subscribed to an Amazon Data Firehose endpoint.
     #
     #     * `FirehoseFailureFeedbackRoleArn` – Indicates failed message
     #       delivery status for an Amazon SNS topic that is subscribed to an
-    #       Amazon Kinesis Data Firehose endpoint.
+    #       Amazon Data Firehose endpoint.
     #   * Lambda
     #
     #     * `LambdaSuccessFeedbackRoleArn` – Indicates successful message
@@ -2601,15 +2690,15 @@ module Aws::SNS
     #
     #     * `ApplicationSuccessFeedbackRoleArn` – Indicates successful
     #       message delivery status for an Amazon SNS topic that is
-    #       subscribed to an Amazon Web Services application endpoint.
+    #       subscribed to an platform application endpoint.
     #
     #     * `ApplicationSuccessFeedbackSampleRate` – Indicates percentage of
     #       successful messages to sample for an Amazon SNS topic that is
-    #       subscribed to an Amazon Web Services application endpoint.
+    #       subscribed to an platform application endpoint.
     #
     #     * `ApplicationFailureFeedbackRoleArn` – Indicates failed message
     #       delivery status for an Amazon SNS topic that is subscribed to an
-    #       Amazon Web Services application endpoint.
+    #       platform application endpoint.
     #     <note markdown="1"> In addition to being able to configure topic attributes for
     #     message delivery status of notification messages sent to Amazon
     #     SNS application endpoints, you can also configure application
@@ -2763,8 +2852,8 @@ module Aws::SNS
     #
     #   * `lambda` – delivery of JSON-encoded message to an Lambda function
     #
-    #   * `firehose` – delivery of JSON-encoded message to an Amazon Kinesis
-    #     Data Firehose delivery stream.
+    #   * `firehose` – delivery of JSON-encoded message to an Amazon Data
+    #     Firehose delivery stream.
     #   @return [String]
     #
     # @!attribute [rw] endpoint
@@ -2794,7 +2883,7 @@ module Aws::SNS
     #     function.
     #
     #   * For the `firehose` protocol, the endpoint is the ARN of an Amazon
-    #     Kinesis Data Firehose delivery stream.
+    #     Data Firehose delivery stream.
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -3049,7 +3138,8 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # The batch request contains more entries than permissible.
+    # The batch request contains more entries than permissible (more than
+    # 10).
     #
     # @!attribute [rw] message
     #   @return [String]

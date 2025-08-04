@@ -211,6 +211,7 @@ module Aws::PCS
       attr_accessor type: ("SLURMCTLD" | "SLURMDBD")
       attr_accessor private_ip_address: ::String
       attr_accessor public_ip_address: ::String
+      attr_accessor ipv6_address: ::String
       attr_accessor port: ::String
       SENSITIVE: []
     end
@@ -314,12 +315,14 @@ module Aws::PCS
     class Networking
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor network_type: ("IPV4" | "IPV6")
       SENSITIVE: []
     end
 
     class NetworkingRequest
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor network_type: ("IPV4" | "IPV6")
       SENSITIVE: []
     end
 

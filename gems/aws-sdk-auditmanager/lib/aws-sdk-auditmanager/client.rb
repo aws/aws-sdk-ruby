@@ -944,6 +944,11 @@ module Aws::AuditManager
     # @option params [required, Array<Types::CreateAssessmentFrameworkControlSet>] :control_sets
     #   The control sets that are associated with the framework.
     #
+    #   <note markdown="1"> The `Controls` object returns a partial response when called through
+    #   Framework APIs. For a complete `Controls` object, use `GetControl`.
+    #
+    #    </note>
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags that are associated with the framework.
     #
@@ -3587,6 +3592,11 @@ module Aws::AuditManager
     # @option params [required, Array<Types::UpdateAssessmentFrameworkControlSet>] :control_sets
     #   The control sets that are associated with the framework.
     #
+    #   <note markdown="1"> The `Controls` object returns a partial response when called through
+    #   Framework APIs. For a complete `Controls` object, use `GetControl`.
+    #
+    #    </note>
+    #
     # @return [Types::UpdateAssessmentFrameworkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAssessmentFrameworkResponse#framework #framework} => Types::Framework
@@ -4067,7 +4077,7 @@ module Aws::AuditManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-auditmanager'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

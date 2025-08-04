@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2025-08-01)
+------------------
+
+* Feature - This release adds support for the Asia Pacific (Jakarta) (ap-southeast-3) Region.
+
 1.113.0 (2025-07-31)
 ------------------
 

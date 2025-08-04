@@ -47,6 +47,7 @@ module Aws::AIOps
     ListInvestigationGroupsOutput = Shapes::StructureShape.new(name: 'ListInvestigationGroupsOutput')
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     PutInvestigationGroupPolicyRequest = Shapes::StructureShape.new(name: 'PutInvestigationGroupPolicyRequest')
     PutInvestigationGroupPolicyResponse = Shapes::StructureShape.new(name: 'PutInvestigationGroupPolicyResponse')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -65,7 +66,6 @@ module Aws::AIOps
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::MapShape.new(name: 'Tags')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
-    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateInvestigationGroupOutput = Shapes::StructureShape.new(name: 'UpdateInvestigationGroupOutput')
@@ -128,9 +128,9 @@ module Aws::AIOps
     GetInvestigationGroupRequest.struct_class = Types::GetInvestigationGroupRequest
 
     GetInvestigationGroupResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: IdentifierStringWithPatternAndLengthLimits, location_name: "createdBy"))
-    GetInvestigationGroupResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    GetInvestigationGroupResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Long, location_name: "createdAt"))
     GetInvestigationGroupResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: IdentifierStringWithPatternAndLengthLimits, location_name: "lastModifiedBy"))
-    GetInvestigationGroupResponse.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedAt"))
+    GetInvestigationGroupResponse.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: Long, location_name: "lastModifiedAt"))
     GetInvestigationGroupResponse.add_member(:name, Shapes::ShapeRef.new(shape: StringWithPatternAndLengthLimits, location_name: "name"))
     GetInvestigationGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: InvestigationGroupArn, location_name: "arn"))
     GetInvestigationGroupResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))

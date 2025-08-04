@@ -1,0 +1,679 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ARCRegionswitch
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _ApprovePlanExecutionStepResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApprovePlanExecutionStepResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#approve_plan_execution_step-instance_method
+      def approve_plan_execution_step: (
+                                         plan_arn: ::String,
+                                         execution_id: ::String,
+                                         step_name: ::String,
+                                         approval: ("approve" | "decline"),
+                                         ?comment: ::String
+                                       ) -> _ApprovePlanExecutionStepResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ApprovePlanExecutionStepResponseSuccess
+
+      interface _CancelPlanExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelPlanExecutionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#cancel_plan_execution-instance_method
+      def cancel_plan_execution: (
+                                   plan_arn: ::String,
+                                   execution_id: ::String,
+                                   ?comment: ::String
+                                 ) -> _CancelPlanExecutionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelPlanExecutionResponseSuccess
+
+      interface _CreatePlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePlanResponse]
+        def plan: () -> Types::Plan
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#create_plan-instance_method
+      def create_plan: (
+                         ?description: ::String,
+                         workflows: Array[
+                           {
+                             steps: Array[
+                               {
+                                 name: ::String,
+                                 description: ::String?,
+                                 execution_block_configuration: {
+                                   custom_action_lambda_config: {
+                                     timeout_minutes: ::Integer?,
+                                     lambdas: Array[
+                                       {
+                                         cross_account_role: ::String?,
+                                         external_id: ::String?,
+                                         arn: ::String?
+                                       },
+                                     ],
+                                     retry_interval_minutes: ::Float,
+                                     region_to_run: ("activatingRegion" | "deactivatingRegion"),
+                                     ungraceful: {
+                                       behavior: ("skip")?
+                                     }?
+                                   }?,
+                                   ec2_asg_capacity_increase_config: {
+                                     timeout_minutes: ::Integer?,
+                                     asgs: Array[
+                                       {
+                                         cross_account_role: ::String?,
+                                         external_id: ::String?,
+                                         arn: ::String?
+                                       },
+                                     ],
+                                     ungraceful: {
+                                       minimum_success_percentage: ::Integer
+                                     }?,
+                                     target_percent: ::Integer?,
+                                     capacity_monitoring_approach: ("sampledMaxInLast24Hours" | "autoscalingMaxInLast24Hours")?
+                                   }?,
+                                   execution_approval_config: {
+                                     timeout_minutes: ::Integer?,
+                                     approval_role: ::String
+                                   }?,
+                                   arc_routing_control_config: {
+                                     timeout_minutes: ::Integer?,
+                                     cross_account_role: ::String?,
+                                     external_id: ::String?,
+                                     region_and_routing_controls: Hash[::String, Array[
+                                         {
+                                           routing_control_arn: ::String,
+                                           state: ("On" | "Off")
+                                         },
+                                       ]]
+                                   }?,
+                                   global_aurora_config: {
+                                     timeout_minutes: ::Integer?,
+                                     cross_account_role: ::String?,
+                                     external_id: ::String?,
+                                     behavior: ("switchoverOnly" | "failover"),
+                                     ungraceful: {
+                                       ungraceful: ("failover")?
+                                     }?,
+                                     global_cluster_identifier: ::String,
+                                     database_cluster_arns: Array[::String]
+                                   }?,
+                                   parallel_config: {
+                                     steps: untyped
+                                   }?,
+                                   region_switch_plan_config: {
+                                     cross_account_role: ::String?,
+                                     external_id: ::String?,
+                                     arn: ::String
+                                   }?,
+                                   ecs_capacity_increase_config: {
+                                     timeout_minutes: ::Integer?,
+                                     services: Array[
+                                       {
+                                         cross_account_role: ::String?,
+                                         external_id: ::String?,
+                                         cluster_arn: ::String?,
+                                         service_arn: ::String?
+                                       },
+                                     ],
+                                     ungraceful: {
+                                       minimum_success_percentage: ::Integer
+                                     }?,
+                                     target_percent: ::Integer?,
+                                     capacity_monitoring_approach: ("sampledMaxInLast24Hours" | "containerInsightsMaxInLast24Hours")?
+                                   }?,
+                                   eks_resource_scaling_config: {
+                                     timeout_minutes: ::Integer?,
+                                     kubernetes_resource_type: {
+                                       api_version: ::String,
+                                       kind: ::String
+                                     },
+                                     scaling_resources: Array[
+                                       Hash[::String, Hash[::String, {
+                                             namespace: ::String,
+                                             name: ::String,
+                                             hpa_name: ::String?
+                                           }]],
+                                     ]?,
+                                     eks_clusters: Array[
+                                       {
+                                         cross_account_role: ::String?,
+                                         external_id: ::String?,
+                                         cluster_arn: ::String
+                                       },
+                                     ]?,
+                                     ungraceful: {
+                                       minimum_success_percentage: ::Integer
+                                     }?,
+                                     target_percent: ::Integer?,
+                                     capacity_monitoring_approach: ("sampledMaxInLast24Hours")?
+                                   }?,
+                                   route53_health_check_config: {
+                                     timeout_minutes: ::Integer?,
+                                     cross_account_role: ::String?,
+                                     external_id: ::String?,
+                                     hosted_zone_id: ::String,
+                                     record_name: ::String,
+                                     record_sets: Array[
+                                       {
+                                         record_set_identifier: ::String?,
+                                         region: ::String?
+                                       },
+                                     ]?
+                                   }?
+                                 },
+                                 execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck")
+                               },
+                             ]?,
+                             workflow_target_action: ("activate" | "deactivate"),
+                             workflow_target_region: ::String?,
+                             workflow_description: ::String?
+                           },
+                         ],
+                         execution_role: ::String,
+                         ?recovery_time_objective_minutes: ::Integer,
+                         ?associated_alarms: Hash[::String, {
+                             cross_account_role: ::String?,
+                             external_id: ::String?,
+                             resource_identifier: ::String,
+                             alarm_type: ("applicationHealth" | "trigger")
+                           }],
+                         ?triggers: Array[
+                           {
+                             description: ::String?,
+                             target_region: ::String,
+                             action: ("activate" | "deactivate"),
+                             conditions: Array[
+                               {
+                                 associated_alarm_name: ::String,
+                                 condition: ("red" | "green")
+                               },
+                             ],
+                             min_delay_minutes_between_executions: ::Integer
+                           },
+                         ],
+                         name: ::String,
+                         regions: Array[::String],
+                         recovery_approach: ("activeActive" | "activePassive"),
+                         ?primary_region: ::String,
+                         ?tags: Hash[::String, ::String]
+                       ) -> _CreatePlanResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePlanResponseSuccess
+
+      interface _DeletePlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePlanResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#delete_plan-instance_method
+      def delete_plan: (
+                         arn: ::String
+                       ) -> _DeletePlanResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePlanResponseSuccess
+
+      interface _GetPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPlanResponse]
+        def plan: () -> Types::Plan
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#get_plan-instance_method
+      def get_plan: (
+                      arn: ::String
+                    ) -> _GetPlanResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPlanResponseSuccess
+
+      interface _GetPlanEvaluationStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPlanEvaluationStatusResponse]
+        def plan_arn: () -> ::String
+        def last_evaluation_time: () -> ::Time
+        def last_evaluated_version: () -> ::String
+        def region: () -> ::String
+        def evaluation_state: () -> ("passed" | "actionRequired" | "pendingEvaluation" | "unknown")
+        def warnings: () -> ::Array[Types::ResourceWarning]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#get_plan_evaluation_status-instance_method
+      def get_plan_evaluation_status: (
+                                        plan_arn: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _GetPlanEvaluationStatusResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPlanEvaluationStatusResponseSuccess
+
+      interface _GetPlanExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPlanExecutionResponse]
+        def plan_arn: () -> ::String
+        def execution_id: () -> ::String
+        def version: () -> ::String
+        def updated_at: () -> ::Time
+        def comment: () -> ::String
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+        def mode: () -> ("graceful" | "ungraceful")
+        def execution_state: () -> ("inProgress" | "pausedByFailedStep" | "pausedByOperator" | "completed" | "completedWithExceptions" | "canceled" | "planExecutionTimedOut" | "pendingManualApproval" | "failed" | "pending" | "completedMonitoringApplicationHealth")
+        def execution_action: () -> ("activate" | "deactivate")
+        def execution_region: () -> ::String
+        def step_states: () -> ::Array[Types::StepState]
+        def plan: () -> Types::Plan
+        def actual_recovery_time: () -> ::String
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#get_plan_execution-instance_method
+      def get_plan_execution: (
+                                plan_arn: ::String,
+                                execution_id: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _GetPlanExecutionResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPlanExecutionResponseSuccess
+
+      interface _GetPlanInRegionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPlanInRegionResponse]
+        def plan: () -> Types::Plan
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#get_plan_in_region-instance_method
+      def get_plan_in_region: (
+                                arn: ::String
+                              ) -> _GetPlanInRegionResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPlanInRegionResponseSuccess
+
+      interface _ListPlanExecutionEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPlanExecutionEventsResponse]
+        def items: () -> ::Array[Types::ExecutionEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#list_plan_execution_events-instance_method
+      def list_plan_execution_events: (
+                                        plan_arn: ::String,
+                                        execution_id: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String,
+                                        ?name: ::String
+                                      ) -> _ListPlanExecutionEventsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPlanExecutionEventsResponseSuccess
+
+      interface _ListPlanExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPlanExecutionsResponse]
+        def items: () -> ::Array[Types::AbbreviatedExecution]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#list_plan_executions-instance_method
+      def list_plan_executions: (
+                                  plan_arn: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  ?state: ("inProgress" | "pausedByFailedStep" | "pausedByOperator" | "completed" | "completedWithExceptions" | "canceled" | "planExecutionTimedOut" | "pendingManualApproval" | "failed" | "pending" | "completedMonitoringApplicationHealth")
+                                ) -> _ListPlanExecutionsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPlanExecutionsResponseSuccess
+
+      interface _ListPlansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPlansResponse]
+        def plans: () -> ::Array[Types::AbbreviatedPlan]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#list_plans-instance_method
+      def list_plans: (
+                        ?max_results: ::Integer,
+                        ?next_token: ::String
+                      ) -> _ListPlansResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPlansResponseSuccess
+
+      interface _ListPlansInRegionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPlansInRegionResponse]
+        def plans: () -> ::Array[Types::AbbreviatedPlan]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#list_plans_in_region-instance_method
+      def list_plans_in_region: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListPlansInRegionResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPlansInRegionResponseSuccess
+
+      interface _ListRoute53HealthChecksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRoute53HealthChecksResponse]
+        def health_checks: () -> ::Array[Types::Route53HealthCheck]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#list_route_53_health_checks-instance_method
+      def list_route_53_health_checks: (
+                                         arn: ::String,
+                                         ?hosted_zone_id: ::String,
+                                         ?record_name: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListRoute53HealthChecksResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRoute53HealthChecksResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def resource_tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartPlanExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartPlanExecutionResponse]
+        def execution_id: () -> ::String
+        def plan: () -> ::String
+        def plan_version: () -> ::String
+        def activate_region: () -> ::String
+        def deactivate_region: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#start_plan_execution-instance_method
+      def start_plan_execution: (
+                                  plan_arn: ::String,
+                                  target_region: ::String,
+                                  action: ("activate" | "deactivate"),
+                                  ?mode: ("graceful" | "ungraceful"),
+                                  ?comment: ::String,
+                                  ?latest_version: ::String
+                                ) -> _StartPlanExecutionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPlanExecutionResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            arn: ::String,
+                            resource_tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdatePlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePlanResponse]
+        def plan: () -> Types::Plan
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#update_plan-instance_method
+      def update_plan: (
+                         arn: ::String,
+                         ?description: ::String,
+                         workflows: Array[
+                           {
+                             steps: Array[
+                               {
+                                 name: ::String,
+                                 description: ::String?,
+                                 execution_block_configuration: {
+                                   custom_action_lambda_config: {
+                                     timeout_minutes: ::Integer?,
+                                     lambdas: Array[
+                                       {
+                                         cross_account_role: ::String?,
+                                         external_id: ::String?,
+                                         arn: ::String?
+                                       },
+                                     ],
+                                     retry_interval_minutes: ::Float,
+                                     region_to_run: ("activatingRegion" | "deactivatingRegion"),
+                                     ungraceful: {
+                                       behavior: ("skip")?
+                                     }?
+                                   }?,
+                                   ec2_asg_capacity_increase_config: {
+                                     timeout_minutes: ::Integer?,
+                                     asgs: Array[
+                                       {
+                                         cross_account_role: ::String?,
+                                         external_id: ::String?,
+                                         arn: ::String?
+                                       },
+                                     ],
+                                     ungraceful: {
+                                       minimum_success_percentage: ::Integer
+                                     }?,
+                                     target_percent: ::Integer?,
+                                     capacity_monitoring_approach: ("sampledMaxInLast24Hours" | "autoscalingMaxInLast24Hours")?
+                                   }?,
+                                   execution_approval_config: {
+                                     timeout_minutes: ::Integer?,
+                                     approval_role: ::String
+                                   }?,
+                                   arc_routing_control_config: {
+                                     timeout_minutes: ::Integer?,
+                                     cross_account_role: ::String?,
+                                     external_id: ::String?,
+                                     region_and_routing_controls: Hash[::String, Array[
+                                         {
+                                           routing_control_arn: ::String,
+                                           state: ("On" | "Off")
+                                         },
+                                       ]]
+                                   }?,
+                                   global_aurora_config: {
+                                     timeout_minutes: ::Integer?,
+                                     cross_account_role: ::String?,
+                                     external_id: ::String?,
+                                     behavior: ("switchoverOnly" | "failover"),
+                                     ungraceful: {
+                                       ungraceful: ("failover")?
+                                     }?,
+                                     global_cluster_identifier: ::String,
+                                     database_cluster_arns: Array[::String]
+                                   }?,
+                                   parallel_config: {
+                                     steps: untyped
+                                   }?,
+                                   region_switch_plan_config: {
+                                     cross_account_role: ::String?,
+                                     external_id: ::String?,
+                                     arn: ::String
+                                   }?,
+                                   ecs_capacity_increase_config: {
+                                     timeout_minutes: ::Integer?,
+                                     services: Array[
+                                       {
+                                         cross_account_role: ::String?,
+                                         external_id: ::String?,
+                                         cluster_arn: ::String?,
+                                         service_arn: ::String?
+                                       },
+                                     ],
+                                     ungraceful: {
+                                       minimum_success_percentage: ::Integer
+                                     }?,
+                                     target_percent: ::Integer?,
+                                     capacity_monitoring_approach: ("sampledMaxInLast24Hours" | "containerInsightsMaxInLast24Hours")?
+                                   }?,
+                                   eks_resource_scaling_config: {
+                                     timeout_minutes: ::Integer?,
+                                     kubernetes_resource_type: {
+                                       api_version: ::String,
+                                       kind: ::String
+                                     },
+                                     scaling_resources: Array[
+                                       Hash[::String, Hash[::String, {
+                                             namespace: ::String,
+                                             name: ::String,
+                                             hpa_name: ::String?
+                                           }]],
+                                     ]?,
+                                     eks_clusters: Array[
+                                       {
+                                         cross_account_role: ::String?,
+                                         external_id: ::String?,
+                                         cluster_arn: ::String
+                                       },
+                                     ]?,
+                                     ungraceful: {
+                                       minimum_success_percentage: ::Integer
+                                     }?,
+                                     target_percent: ::Integer?,
+                                     capacity_monitoring_approach: ("sampledMaxInLast24Hours")?
+                                   }?,
+                                   route53_health_check_config: {
+                                     timeout_minutes: ::Integer?,
+                                     cross_account_role: ::String?,
+                                     external_id: ::String?,
+                                     hosted_zone_id: ::String,
+                                     record_name: ::String,
+                                     record_sets: Array[
+                                       {
+                                         record_set_identifier: ::String?,
+                                         region: ::String?
+                                       },
+                                     ]?
+                                   }?
+                                 },
+                                 execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck")
+                               },
+                             ]?,
+                             workflow_target_action: ("activate" | "deactivate"),
+                             workflow_target_region: ::String?,
+                             workflow_description: ::String?
+                           },
+                         ],
+                         execution_role: ::String,
+                         ?recovery_time_objective_minutes: ::Integer,
+                         ?associated_alarms: Hash[::String, {
+                             cross_account_role: ::String?,
+                             external_id: ::String?,
+                             resource_identifier: ::String,
+                             alarm_type: ("applicationHealth" | "trigger")
+                           }],
+                         ?triggers: Array[
+                           {
+                             description: ::String?,
+                             target_region: ::String,
+                             action: ("activate" | "deactivate"),
+                             conditions: Array[
+                               {
+                                 associated_alarm_name: ::String,
+                                 condition: ("red" | "green")
+                               },
+                             ],
+                             min_delay_minutes_between_executions: ::Integer
+                           },
+                         ]
+                       ) -> _UpdatePlanResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePlanResponseSuccess
+
+      interface _UpdatePlanExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePlanExecutionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#update_plan_execution-instance_method
+      def update_plan_execution: (
+                                   plan_arn: ::String,
+                                   execution_id: ::String,
+                                   action: ("switchToGraceful" | "switchToUngraceful" | "pause" | "resume"),
+                                   ?comment: ::String
+                                 ) -> _UpdatePlanExecutionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePlanExecutionResponseSuccess
+
+      interface _UpdatePlanExecutionStepResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePlanExecutionStepResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#update_plan_execution_step-instance_method
+      def update_plan_execution_step: (
+                                        plan_arn: ::String,
+                                        execution_id: ::String,
+                                        comment: ::String,
+                                        step_name: ::String,
+                                        action_to_take: ("switchToUngraceful" | "skip")
+                                      ) -> _UpdatePlanExecutionStepResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePlanExecutionStepResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#wait_until-instance_method
+      def wait_until: (:plan_evaluation_status_passed waiter_name, 
+                    plan_arn: ::String,
+                    ?max_results: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_GetPlanEvaluationStatusResponseSuccess
+                    | (:plan_evaluation_status_passed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetPlanEvaluationStatusResponseSuccess
+                    | (:plan_execution_completed waiter_name, 
+                    plan_arn: ::String,
+                    execution_id: ::String,
+                    ?max_results: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_GetPlanExecutionResponseSuccess
+                    | (:plan_execution_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetPlanExecutionResponseSuccess
+    end
+  end
+end
+

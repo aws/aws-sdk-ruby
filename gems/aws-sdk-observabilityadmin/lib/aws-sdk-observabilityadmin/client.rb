@@ -479,6 +479,174 @@ module Aws::ObservabilityAdmin
 
     # @!group API Operations
 
+    # Creates a telemetry rule that defines how telemetry should be
+    # configured for Amazon Web Services resources in your account. The rule
+    # specifies which resources should have telemetry enabled and how that
+    # telemetry data should be collected based on resource type, telemetry
+    # type, and selection criteria.
+    #
+    # @option params [required, String] :rule_name
+    #   A unique name for the telemetry rule being created.
+    #
+    # @option params [required, Types::TelemetryRule] :rule
+    #   The configuration details for the telemetry rule, including the
+    #   resource type, telemetry type, destination configuration, and
+    #   selection criteria for which resources the rule applies to.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The key-value pairs to associate with the telemetry rule resource for
+    #   categorization and management purposes.
+    #
+    # @return [Types::CreateTelemetryRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTelemetryRuleOutput#rule_arn #rule_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_telemetry_rule({
+    #     rule_name: "RuleName", # required
+    #     rule: { # required
+    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function
+    #       telemetry_type: "Logs", # required, accepts Logs, Metrics, Traces
+    #       destination_configuration: {
+    #         destination_type: "cloud-watch-logs", # accepts cloud-watch-logs
+    #         destination_pattern: "String",
+    #         retention_in_days: 1,
+    #         vpc_flow_log_parameters: {
+    #           log_format: "String",
+    #           traffic_type: "String",
+    #           max_aggregation_interval: 1,
+    #         },
+    #       },
+    #       scope: "String",
+    #       selection_criteria: "String",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/CreateTelemetryRule AWS API Documentation
+    #
+    # @overload create_telemetry_rule(params = {})
+    # @param [Hash] params ({})
+    def create_telemetry_rule(params = {}, options = {})
+      req = build_request(:create_telemetry_rule, params)
+      req.send_request(options)
+    end
+
+    # Creates a telemetry rule that applies across an Amazon Web Services
+    # Organization. This operation can only be called by the organization's
+    # management account or a delegated administrator account.
+    #
+    # @option params [required, String] :rule_name
+    #   A unique name for the organization-wide telemetry rule being created.
+    #
+    # @option params [required, Types::TelemetryRule] :rule
+    #   The configuration details for the organization-wide telemetry rule,
+    #   including the resource type, telemetry type, destination
+    #   configuration, and selection criteria for which resources the rule
+    #   applies to across the organization.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The key-value pairs to associate with the organization telemetry rule
+    #   resource for categorization and management purposes.
+    #
+    # @return [Types::CreateTelemetryRuleForOrganizationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTelemetryRuleForOrganizationOutput#rule_arn #rule_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_telemetry_rule_for_organization({
+    #     rule_name: "RuleName", # required
+    #     rule: { # required
+    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function
+    #       telemetry_type: "Logs", # required, accepts Logs, Metrics, Traces
+    #       destination_configuration: {
+    #         destination_type: "cloud-watch-logs", # accepts cloud-watch-logs
+    #         destination_pattern: "String",
+    #         retention_in_days: 1,
+    #         vpc_flow_log_parameters: {
+    #           log_format: "String",
+    #           traffic_type: "String",
+    #           max_aggregation_interval: 1,
+    #         },
+    #       },
+    #       scope: "String",
+    #       selection_criteria: "String",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/CreateTelemetryRuleForOrganization AWS API Documentation
+    #
+    # @overload create_telemetry_rule_for_organization(params = {})
+    # @param [Hash] params ({})
+    def create_telemetry_rule_for_organization(params = {}, options = {})
+      req = build_request(:create_telemetry_rule_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Deletes a telemetry rule from your account. Any telemetry
+    # configurations previously created by the rule will remain but no new
+    # resources will be configured by this rule.
+    #
+    # @option params [required, String] :rule_identifier
+    #   The identifier (name or ARN) of the telemetry rule to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_telemetry_rule({
+    #     rule_identifier: "RuleIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/DeleteTelemetryRule AWS API Documentation
+    #
+    # @overload delete_telemetry_rule(params = {})
+    # @param [Hash] params ({})
+    def delete_telemetry_rule(params = {}, options = {})
+      req = build_request(:delete_telemetry_rule, params)
+      req.send_request(options)
+    end
+
+    # Deletes an organization-wide telemetry rule. This operation can only
+    # be called by the organization's management account or a delegated
+    # administrator account.
+    #
+    # @option params [required, String] :rule_identifier
+    #   The identifier (name or ARN) of the organization telemetry rule to
+    #   delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_telemetry_rule_for_organization({
+    #     rule_identifier: "RuleIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/DeleteTelemetryRuleForOrganization AWS API Documentation
+    #
+    # @overload delete_telemetry_rule_for_organization(params = {})
+    # @param [Hash] params ({})
+    def delete_telemetry_rule_for_organization(params = {}, options = {})
+      req = build_request(:delete_telemetry_rule_for_organization, params)
+      req.send_request(options)
+    end
+
     # Returns the current onboarding status of the telemetry config feature,
     # including the status of the feature and reason the feature failed to
     # start or stop.
@@ -504,8 +672,8 @@ module Aws::ObservabilityAdmin
 
     # This returns the onboarding status of the telemetry configuration
     # feature for the organization. It can only be called by a Management
-    # Account of an AWS Organization or an assigned Delegated Admin Account
-    # of AWS CloudWatch telemetry config.
+    # Account of an Amazon Web Services Organization or an assigned
+    # Delegated Admin Account of Amazon CloudWatch telemetry config.
     #
     # @return [Types::GetTelemetryEvaluationStatusForOrganizationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -526,9 +694,102 @@ module Aws::ObservabilityAdmin
       req.send_request(options)
     end
 
-    # Returns a list of telemetry configurations for AWS resources supported
-    # by telemetry config. For more information, see [Auditing CloudWatch
-    # telemetry configurations][1].
+    # Retrieves the details of a specific telemetry rule in your account.
+    #
+    # @option params [required, String] :rule_identifier
+    #   The identifier (name or ARN) of the telemetry rule to retrieve.
+    #
+    # @return [Types::GetTelemetryRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTelemetryRuleOutput#rule_name #rule_name} => String
+    #   * {Types::GetTelemetryRuleOutput#rule_arn #rule_arn} => String
+    #   * {Types::GetTelemetryRuleOutput#created_time_stamp #created_time_stamp} => Integer
+    #   * {Types::GetTelemetryRuleOutput#last_update_time_stamp #last_update_time_stamp} => Integer
+    #   * {Types::GetTelemetryRuleOutput#telemetry_rule #telemetry_rule} => Types::TelemetryRule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_telemetry_rule({
+    #     rule_identifier: "RuleIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_name #=> String
+    #   resp.rule_arn #=> String
+    #   resp.created_time_stamp #=> Integer
+    #   resp.last_update_time_stamp #=> Integer
+    #   resp.telemetry_rule.resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function"
+    #   resp.telemetry_rule.telemetry_type #=> String, one of "Logs", "Metrics", "Traces"
+    #   resp.telemetry_rule.destination_configuration.destination_type #=> String, one of "cloud-watch-logs"
+    #   resp.telemetry_rule.destination_configuration.destination_pattern #=> String
+    #   resp.telemetry_rule.destination_configuration.retention_in_days #=> Integer
+    #   resp.telemetry_rule.destination_configuration.vpc_flow_log_parameters.log_format #=> String
+    #   resp.telemetry_rule.destination_configuration.vpc_flow_log_parameters.traffic_type #=> String
+    #   resp.telemetry_rule.destination_configuration.vpc_flow_log_parameters.max_aggregation_interval #=> Integer
+    #   resp.telemetry_rule.scope #=> String
+    #   resp.telemetry_rule.selection_criteria #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetTelemetryRule AWS API Documentation
+    #
+    # @overload get_telemetry_rule(params = {})
+    # @param [Hash] params ({})
+    def get_telemetry_rule(params = {}, options = {})
+      req = build_request(:get_telemetry_rule, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of a specific organization telemetry rule. This
+    # operation can only be called by the organization's management account
+    # or a delegated administrator account.
+    #
+    # @option params [required, String] :rule_identifier
+    #   The identifier (name or ARN) of the organization telemetry rule to
+    #   retrieve.
+    #
+    # @return [Types::GetTelemetryRuleForOrganizationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTelemetryRuleForOrganizationOutput#rule_name #rule_name} => String
+    #   * {Types::GetTelemetryRuleForOrganizationOutput#rule_arn #rule_arn} => String
+    #   * {Types::GetTelemetryRuleForOrganizationOutput#created_time_stamp #created_time_stamp} => Integer
+    #   * {Types::GetTelemetryRuleForOrganizationOutput#last_update_time_stamp #last_update_time_stamp} => Integer
+    #   * {Types::GetTelemetryRuleForOrganizationOutput#telemetry_rule #telemetry_rule} => Types::TelemetryRule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_telemetry_rule_for_organization({
+    #     rule_identifier: "RuleIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_name #=> String
+    #   resp.rule_arn #=> String
+    #   resp.created_time_stamp #=> Integer
+    #   resp.last_update_time_stamp #=> Integer
+    #   resp.telemetry_rule.resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function"
+    #   resp.telemetry_rule.telemetry_type #=> String, one of "Logs", "Metrics", "Traces"
+    #   resp.telemetry_rule.destination_configuration.destination_type #=> String, one of "cloud-watch-logs"
+    #   resp.telemetry_rule.destination_configuration.destination_pattern #=> String
+    #   resp.telemetry_rule.destination_configuration.retention_in_days #=> Integer
+    #   resp.telemetry_rule.destination_configuration.vpc_flow_log_parameters.log_format #=> String
+    #   resp.telemetry_rule.destination_configuration.vpc_flow_log_parameters.traffic_type #=> String
+    #   resp.telemetry_rule.destination_configuration.vpc_flow_log_parameters.max_aggregation_interval #=> Integer
+    #   resp.telemetry_rule.scope #=> String
+    #   resp.telemetry_rule.selection_criteria #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetTelemetryRuleForOrganization AWS API Documentation
+    #
+    # @overload get_telemetry_rule_for_organization(params = {})
+    # @param [Hash] params ({})
+    def get_telemetry_rule_for_organization(params = {}, options = {})
+      req = build_request(:get_telemetry_rule_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of telemetry configurations for Amazon Web Services
+    # resources supported by telemetry config. For more information, see
+    # [Auditing CloudWatch telemetry configurations][1].
     #
     #
     #
@@ -608,12 +869,12 @@ module Aws::ObservabilityAdmin
       req.send_request(options)
     end
 
-    # Returns a list of telemetry configurations for AWS resources supported
-    # by telemetry config in the organization.
+    # Returns a list of telemetry configurations for Amazon Web Services
+    # resources supported by telemetry config in the organization.
     #
     # @option params [Array<String>] :account_identifiers
-    #   A list of AWS account IDs used to filter the resources to those
-    #   associated with the specified accounts.
+    #   A list of Amazon Web Services accounts used to filter the resources to
+    #   those associated with the specified accounts.
     #
     # @option params [String] :resource_identifier_prefix
     #   A string used to filter resources in the organization which have a
@@ -691,8 +952,148 @@ module Aws::ObservabilityAdmin
       req.send_request(options)
     end
 
-    # This action begins onboarding onboarding the caller AWS account to the
-    # telemetry config feature.
+    # Lists all tags attached to the specified telemetry rule resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the telemetry rule resource whose
+    #   tags you want to list.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Lists all telemetry rules in your account. You can filter the results
+    # by specifying a rule name prefix.
+    #
+    # @option params [String] :rule_name_prefix
+    #   A string to filter telemetry rules whose names begin with the
+    #   specified prefix.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of telemetry rules to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. A previous call generates this
+    #   token.
+    #
+    # @return [Types::ListTelemetryRulesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTelemetryRulesOutput#telemetry_rule_summaries #telemetry_rule_summaries} => Array&lt;Types::TelemetryRuleSummary&gt;
+    #   * {Types::ListTelemetryRulesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_telemetry_rules({
+    #     rule_name_prefix: "String",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.telemetry_rule_summaries #=> Array
+    #   resp.telemetry_rule_summaries[0].rule_name #=> String
+    #   resp.telemetry_rule_summaries[0].rule_arn #=> String
+    #   resp.telemetry_rule_summaries[0].created_time_stamp #=> Integer
+    #   resp.telemetry_rule_summaries[0].last_update_time_stamp #=> Integer
+    #   resp.telemetry_rule_summaries[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function"
+    #   resp.telemetry_rule_summaries[0].telemetry_type #=> String, one of "Logs", "Metrics", "Traces"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListTelemetryRules AWS API Documentation
+    #
+    # @overload list_telemetry_rules(params = {})
+    # @param [Hash] params ({})
+    def list_telemetry_rules(params = {}, options = {})
+      req = build_request(:list_telemetry_rules, params)
+      req.send_request(options)
+    end
+
+    # Lists all telemetry rules in your organization. This operation can
+    # only be called by the organization's management account or a
+    # delegated administrator account.
+    #
+    # @option params [String] :rule_name_prefix
+    #   A string to filter organization telemetry rules whose names begin with
+    #   the specified prefix.
+    #
+    # @option params [Array<String>] :source_account_ids
+    #   The list of account IDs to filter organization telemetry rules by
+    #   their source accounts.
+    #
+    # @option params [Array<String>] :source_organization_unit_ids
+    #   The list of organizational unit IDs to filter organization telemetry
+    #   rules by their source organizational units.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of organization telemetry rules to return in a
+    #   single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. A previous call generates this
+    #   token.
+    #
+    # @return [Types::ListTelemetryRulesForOrganizationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTelemetryRulesForOrganizationOutput#telemetry_rule_summaries #telemetry_rule_summaries} => Array&lt;Types::TelemetryRuleSummary&gt;
+    #   * {Types::ListTelemetryRulesForOrganizationOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_telemetry_rules_for_organization({
+    #     rule_name_prefix: "String",
+    #     source_account_ids: ["AccountIdentifier"],
+    #     source_organization_unit_ids: ["OrganizationUnitIdentifier"],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.telemetry_rule_summaries #=> Array
+    #   resp.telemetry_rule_summaries[0].rule_name #=> String
+    #   resp.telemetry_rule_summaries[0].rule_arn #=> String
+    #   resp.telemetry_rule_summaries[0].created_time_stamp #=> Integer
+    #   resp.telemetry_rule_summaries[0].last_update_time_stamp #=> Integer
+    #   resp.telemetry_rule_summaries[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function"
+    #   resp.telemetry_rule_summaries[0].telemetry_type #=> String, one of "Logs", "Metrics", "Traces"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListTelemetryRulesForOrganization AWS API Documentation
+    #
+    # @overload list_telemetry_rules_for_organization(params = {})
+    # @param [Hash] params ({})
+    def list_telemetry_rules_for_organization(params = {}, options = {})
+      req = build_request(:list_telemetry_rules_for_organization, params)
+      req.send_request(options)
+    end
+
+    # This action begins onboarding the caller Amazon Web Services account
+    # to the telemetry config feature.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -719,8 +1120,8 @@ module Aws::ObservabilityAdmin
       req.send_request(options)
     end
 
-    # This action begins offboarding the caller AWS account from the
-    # telemetry config feature.
+    # This action begins offboarding the caller Amazon Web Services account
+    # from the telemetry config feature.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -733,8 +1134,8 @@ module Aws::ObservabilityAdmin
       req.send_request(options)
     end
 
-    # This action offboards the Organization of the caller AWS account from
-    # thef telemetry config feature.
+    # This action offboards the Organization of the caller Amazon Web
+    # Services account from the telemetry config feature.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -744,6 +1145,161 @@ module Aws::ObservabilityAdmin
     # @param [Hash] params ({})
     def stop_telemetry_evaluation_for_organization(params = {}, options = {})
       req = build_request(:stop_telemetry_evaluation_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Adds or updates tags for a telemetry rule resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the telemetry rule resource to tag.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The key-value pairs to add or update for the telemetry rule resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from a telemetry rule resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the telemetry rule resource to
+    #   remove tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The list of tag keys to remove from the telemetry rule resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing telemetry rule in your account.
+    #
+    # @option params [required, String] :rule_identifier
+    #   The identifier (name or ARN) of the telemetry rule to update.
+    #
+    # @option params [required, Types::TelemetryRule] :rule
+    #   The new configuration details for the telemetry rule.
+    #
+    # @return [Types::UpdateTelemetryRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTelemetryRuleOutput#rule_arn #rule_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_telemetry_rule({
+    #     rule_identifier: "RuleIdentifier", # required
+    #     rule: { # required
+    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function
+    #       telemetry_type: "Logs", # required, accepts Logs, Metrics, Traces
+    #       destination_configuration: {
+    #         destination_type: "cloud-watch-logs", # accepts cloud-watch-logs
+    #         destination_pattern: "String",
+    #         retention_in_days: 1,
+    #         vpc_flow_log_parameters: {
+    #           log_format: "String",
+    #           traffic_type: "String",
+    #           max_aggregation_interval: 1,
+    #         },
+    #       },
+    #       scope: "String",
+    #       selection_criteria: "String",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/UpdateTelemetryRule AWS API Documentation
+    #
+    # @overload update_telemetry_rule(params = {})
+    # @param [Hash] params ({})
+    def update_telemetry_rule(params = {}, options = {})
+      req = build_request(:update_telemetry_rule, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing telemetry rule that applies across an Amazon Web
+    # Services Organization. This operation can only be called by the
+    # organization's management account or a delegated administrator
+    # account.
+    #
+    # @option params [required, String] :rule_identifier
+    #   The identifier (name or ARN) of the organization telemetry rule to
+    #   update.
+    #
+    # @option params [required, Types::TelemetryRule] :rule
+    #   The new configuration details for the organization telemetry rule,
+    #   including resource type, telemetry type, and destination
+    #   configuration.
+    #
+    # @return [Types::UpdateTelemetryRuleForOrganizationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTelemetryRuleForOrganizationOutput#rule_arn #rule_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_telemetry_rule_for_organization({
+    #     rule_identifier: "RuleIdentifier", # required
+    #     rule: { # required
+    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function
+    #       telemetry_type: "Logs", # required, accepts Logs, Metrics, Traces
+    #       destination_configuration: {
+    #         destination_type: "cloud-watch-logs", # accepts cloud-watch-logs
+    #         destination_pattern: "String",
+    #         retention_in_days: 1,
+    #         vpc_flow_log_parameters: {
+    #           log_format: "String",
+    #           traffic_type: "String",
+    #           max_aggregation_interval: 1,
+    #         },
+    #       },
+    #       scope: "String",
+    #       selection_criteria: "String",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/UpdateTelemetryRuleForOrganization AWS API Documentation
+    #
+    # @overload update_telemetry_rule_for_organization(params = {})
+    # @param [Hash] params ({})
+    def update_telemetry_rule_for_organization(params = {}, options = {})
+      req = build_request(:update_telemetry_rule_for_organization, params)
       req.send_request(options)
     end
 
@@ -765,7 +1321,7 @@ module Aws::ObservabilityAdmin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-observabilityadmin'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

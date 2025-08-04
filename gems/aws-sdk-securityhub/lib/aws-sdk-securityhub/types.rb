@@ -22427,6 +22427,33 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Details about an external code repository with which you can connect
+    # your Amazon Web Services resources. The connection is established
+    # through Amazon Inspector.
+    #
+    # @!attribute [rw] provider_type
+    #   The type of repository provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the code repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_security_integration_arn
+    #   The Amazon Resource Name (ARN) of the code security integration
+    #   associated with the repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CodeRepositoryDetails AWS API Documentation
+    #
+    class CodeRepositoryDetails < Struct.new(
+      :provider_type,
+      :project_name,
+      :code_security_integration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides details about where a code vulnerability is located in your
     # Lambda function.
     #
@@ -25554,10 +25581,9 @@ module Aws::SecurityHub
     #   `StartTime`, Security Hub returns finding history from the
     #   [CreatedAt][1] timestamp of the finding to the `EndTime`. If you
     #   provide neither `StartTime` nor `EndTime`, Security Hub returns
-    #   finding history from the CreatedAt timestamp of the finding to the
+    #   finding history from the `CreatedAt` timestamp of the finding to the
     #   time at which the API is called. In all of these scenarios, the
-    #   response is limited to 100 results, and the maximum time period is
-    #   limited to 90 days.
+    #   response is limited to 100 results.
     #
     #   For more information about the validation and formatting of
     #   timestamp fields in Security Hub, see [Timestamps][2].
@@ -25580,10 +25606,9 @@ module Aws::SecurityHub
     #   `StartTime`, Security Hub returns finding history from the
     #   [CreatedAt][1] timestamp of the finding to the `EndTime`. If you
     #   provide neither `StartTime` nor `EndTime`, Security Hub returns
-    #   finding history from the CreatedAt timestamp of the finding to the
+    #   finding history from the `CreatedAt` timestamp of the finding to the
     #   time at which the API is called. In all of these scenarios, the
-    #   response is limited to 100 results, and the maximum time period is
-    #   limited to 90 days.
+    #   response is limited to 100 results.
     #
     #   For more information about the validation and formatting of
     #   timestamp fields in Security Hub, see [Timestamps][2].
@@ -29529,6 +29554,12 @@ module Aws::SecurityHub
     #   sessions.
     #   @return [Types::AwsEc2ClientVpnEndpointDetails]
     #
+    # @!attribute [rw] code_repository
+    #   Details about an external code repository with which you can connect
+    #   your Amazon Web Services resources. The connection is established
+    #   through Amazon Inspector.
+    #   @return [Types::CodeRepositoryDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
@@ -29630,7 +29661,8 @@ module Aws::SecurityHub
       :aws_route_53_hosted_zone,
       :aws_msk_cluster,
       :aws_s3_access_point,
-      :aws_ec2_client_vpn_endpoint)
+      :aws_ec2_client_vpn_endpoint,
+      :code_repository)
       SENSITIVE = []
       include Aws::Structure
     end

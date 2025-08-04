@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.237.0 (2025-08-01)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-arcregionswitch` gem.
+
 3.236.0 (2025-07-16)
 ------------------
 

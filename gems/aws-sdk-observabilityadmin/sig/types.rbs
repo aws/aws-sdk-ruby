@@ -14,6 +14,45 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTelemetryRuleForOrganizationInput
+      attr_accessor rule_name: ::String
+      attr_accessor rule: Types::TelemetryRule
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateTelemetryRuleForOrganizationOutput
+      attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTelemetryRuleInput
+      attr_accessor rule_name: ::String
+      attr_accessor rule: Types::TelemetryRule
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateTelemetryRuleOutput
+      attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTelemetryRuleForOrganizationInput
+      attr_accessor rule_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTelemetryRuleInput
+      attr_accessor rule_identifier: ::String
+      SENSITIVE: []
+    end
+
     class GetTelemetryEvaluationStatusForOrganizationOutput
       attr_accessor status: ("NOT_STARTED" | "STARTING" | "FAILED_START" | "RUNNING" | "STOPPING" | "FAILED_STOP" | "STOPPED")
       attr_accessor failure_reason: ::String
@@ -23,6 +62,34 @@ module Aws::ObservabilityAdmin
     class GetTelemetryEvaluationStatusOutput
       attr_accessor status: ("NOT_STARTED" | "STARTING" | "FAILED_START" | "RUNNING" | "STOPPING" | "FAILED_STOP" | "STOPPED")
       attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class GetTelemetryRuleForOrganizationInput
+      attr_accessor rule_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetTelemetryRuleForOrganizationOutput
+      attr_accessor rule_name: ::String
+      attr_accessor rule_arn: ::String
+      attr_accessor created_time_stamp: ::Integer
+      attr_accessor last_update_time_stamp: ::Integer
+      attr_accessor telemetry_rule: Types::TelemetryRule
+      SENSITIVE: []
+    end
+
+    class GetTelemetryRuleInput
+      attr_accessor rule_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetTelemetryRuleOutput
+      attr_accessor rule_name: ::String
+      attr_accessor rule_arn: ::String
+      attr_accessor created_time_stamp: ::Integer
+      attr_accessor last_update_time_stamp: ::Integer
+      attr_accessor telemetry_rule: Types::TelemetryRule
       SENSITIVE: []
     end
 
@@ -65,6 +132,61 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTelemetryRulesForOrganizationInput
+      attr_accessor rule_name_prefix: ::String
+      attr_accessor source_account_ids: ::Array[::String]
+      attr_accessor source_organization_unit_ids: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTelemetryRulesForOrganizationOutput
+      attr_accessor telemetry_rule_summaries: ::Array[Types::TelemetryRuleSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTelemetryRulesInput
+      attr_accessor rule_name_prefix: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTelemetryRulesOutput
+      attr_accessor telemetry_rule_summaries: ::Array[Types::TelemetryRuleSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor amzn_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class TelemetryConfiguration
       attr_accessor account_identifier: ::String
       attr_accessor telemetry_configuration_state: ::Hash[("Logs" | "Metrics" | "Traces"), ("Enabled" | "Disabled" | "NotApplicable")]
@@ -72,6 +194,73 @@ module Aws::ObservabilityAdmin
       attr_accessor resource_identifier: ::String
       attr_accessor resource_tags: ::Hash[::String, ::String]
       attr_accessor last_update_time_stamp: ::Integer
+      SENSITIVE: []
+    end
+
+    class TelemetryDestinationConfiguration
+      attr_accessor destination_type: ("cloud-watch-logs")
+      attr_accessor destination_pattern: ::String
+      attr_accessor retention_in_days: ::Integer
+      attr_accessor vpc_flow_log_parameters: Types::VPCFlowLogParameters
+      SENSITIVE: []
+    end
+
+    class TelemetryRule
+      attr_accessor resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function")
+      attr_accessor telemetry_type: ("Logs" | "Metrics" | "Traces")
+      attr_accessor destination_configuration: Types::TelemetryDestinationConfiguration
+      attr_accessor scope: ::String
+      attr_accessor selection_criteria: ::String
+      SENSITIVE: []
+    end
+
+    class TelemetryRuleSummary
+      attr_accessor rule_name: ::String
+      attr_accessor rule_arn: ::String
+      attr_accessor created_time_stamp: ::Integer
+      attr_accessor last_update_time_stamp: ::Integer
+      attr_accessor resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function")
+      attr_accessor telemetry_type: ("Logs" | "Metrics" | "Traces")
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateTelemetryRuleForOrganizationInput
+      attr_accessor rule_identifier: ::String
+      attr_accessor rule: Types::TelemetryRule
+      SENSITIVE: []
+    end
+
+    class UpdateTelemetryRuleForOrganizationOutput
+      attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTelemetryRuleInput
+      attr_accessor rule_identifier: ::String
+      attr_accessor rule: Types::TelemetryRule
+      SENSITIVE: []
+    end
+
+    class UpdateTelemetryRuleOutput
+      attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class VPCFlowLogParameters
+      attr_accessor log_format: ::String
+      attr_accessor traffic_type: ::String
+      attr_accessor max_aggregation_interval: ::Integer
       SENSITIVE: []
     end
 

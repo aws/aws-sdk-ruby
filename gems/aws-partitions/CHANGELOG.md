@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1140.0 (2025-08-01)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::ARCRegionswitch`.
+
 1.1139.0 (2025-07-31)
 ------------------
 

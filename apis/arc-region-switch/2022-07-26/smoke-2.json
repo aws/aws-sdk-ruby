@@ -1,0 +1,17 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "ListPlansSuccess",
+    "operationName" : "ListPlans",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

@@ -569,22 +569,22 @@ module Aws::ACMPCA
     #   requesting multiple certificate authorities.
     #
     # @option params [String] :key_storage_security_standard
-    #   Specifies a cryptographic key management compliance standard used for
-    #   handling CA keys.
+    #   Specifies a cryptographic key management compliance standard for
+    #   handling and protecting CA keys.
     #
     #   Default: FIPS\_140\_2\_LEVEL\_3\_OR\_HIGHER
     #
-    #   <note markdown="1"> Some Amazon Web Services Regions do not support the default. When
-    #   creating a CA in these Regions, you must provide
-    #   `FIPS_140_2_LEVEL_2_OR_HIGHER` as the argument for
-    #   `KeyStorageSecurityStandard`. Failure to do this results in an
-    #   `InvalidArgsException` with the message, "A certificate authority
+    #   <note markdown="1"> Some Amazon Web Services Regions don't support the default value.
+    #   When you create a CA in these Regions, you must use
+    #   `CCPC_LEVEL_1_OR_HIGHER` for the `KeyStorageSecurityStandard`
+    #   parameter. If you don't, the operation returns an
+    #   `InvalidArgsException` with this message: "A certificate authority
     #   cannot be created in this region with the specified security
     #   standard."
     #
-    #    For information about security standard support in various Regions,
-    #   see [Storage and security compliance of Amazon Web Services Private CA
-    #   private keys][1].
+    #    For information about security standard support in different Amazon
+    #   Web Services Regions, see [Storage and security compliance of Amazon
+    #   Web Services Private CA private keys][1].
     #
     #    </note>
     #
@@ -915,6 +915,16 @@ module Aws::ACMPCA
     # remaining in the restoration window of a private CA in the `DELETED`
     # state. To restore an eligible CA, call the
     # [RestoreCertificateAuthority][5] action.
+    #
+    # A private CA can be deleted if it is in the `PENDING_CERTIFICATE`,
+    # `CREATING`, `EXPIRED`, `DISABLED`, or `FAILED` state. To delete a CA
+    # in the `ACTIVE` state, you must first disable it, or else the delete
+    # request results in an exception. If you are deleting a private CA in
+    # the `PENDING_CERTIFICATE` or `DISABLED` state, you can set the length
+    # of its restoration period to 7-30 days. The default is 30. During this
+    # time, the status is set to `DELETED` and the CA can be restored. A
+    # private CA deleted in the `CREATING` or `FAILED` state has no assigned
+    # restoration period and cannot be restored.
     #
     #
     #
@@ -1310,7 +1320,7 @@ module Aws::ACMPCA
     # the [IssueCertificate][1] action. You must specify both the ARN of
     # your private CA and the ARN of the issued certificate when calling the
     # **GetCertificate** action. You can retrieve the certificate if it is
-    # in the **ISSUED** state. You can call the
+    # in the **ISSUED**, **EXPIRED**, or **REVOKED** state. You can call the
     # [CreateCertificateAuthorityAuditReport][2] action to create a report
     # that contains information about all of the certificates issued and
     # revoked by your private CA.
@@ -1498,7 +1508,7 @@ module Aws::ACMPCA
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Number (ARN) of the private CA that will have its
     #   policy retrieved. You can find the CA's ARN by calling the
-    #   ListCertificateAuthorities action.      </p>
+    #   ListCertificateAuthorities action.
     #
     # @return [Types::GetPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2706,7 +2716,7 @@ module Aws::ACMPCA
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-acmpca'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

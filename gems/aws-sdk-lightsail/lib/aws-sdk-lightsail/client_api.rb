@@ -553,6 +553,7 @@ module Aws::Lightsail
     Region = Shapes::StructureShape.new(name: 'Region')
     RegionList = Shapes::ListShape.new(name: 'RegionList')
     RegionName = Shapes::StringShape.new(name: 'RegionName')
+    RegionSetupInProgressException = Shapes::StructureShape.new(name: 'RegionSetupInProgressException')
     RegisterContainerImageRequest = Shapes::StructureShape.new(name: 'RegisterContainerImageRequest')
     RegisterContainerImageResult = Shapes::StructureShape.new(name: 'RegisterContainerImageResult')
     RegisteredDomainDelegationInfo = Shapes::StructureShape.new(name: 'RegisteredDomainDelegationInfo')
@@ -2688,6 +2689,12 @@ module Aws::Lightsail
 
     RegionList.member = Shapes::ShapeRef.new(shape: Region)
 
+    RegionSetupInProgressException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    RegionSetupInProgressException.add_member(:docs, Shapes::ShapeRef.new(shape: string, location_name: "docs"))
+    RegionSetupInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    RegionSetupInProgressException.add_member(:tip, Shapes::ShapeRef.new(shape: string, location_name: "tip"))
+    RegionSetupInProgressException.struct_class = Types::RegionSetupInProgressException
+
     RegisterContainerImageRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ContainerServiceName, required: true, location_name: "serviceName"))
     RegisterContainerImageRequest.add_member(:label, Shapes::ShapeRef.new(shape: ContainerLabel, required: true, location_name: "label"))
     RegisterContainerImageRequest.add_member(:digest, Shapes::ShapeRef.new(shape: string, required: true, location_name: "digest"))
@@ -3159,6 +3166,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3188,6 +3196,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3203,6 +3212,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3218,6 +3228,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3233,6 +3244,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3248,6 +3260,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3263,6 +3276,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3276,6 +3290,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:create_bucket_access_key, Seahorse::Model::Operation.new.tap do |o|
@@ -3289,6 +3304,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:create_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -3302,6 +3318,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:create_cloud_formation_stack, Seahorse::Model::Operation.new.tap do |o|
@@ -3316,6 +3333,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3331,6 +3349,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:create_container_service, Seahorse::Model::Operation.new.tap do |o|
@@ -3344,6 +3363,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:create_container_service_deployment, Seahorse::Model::Operation.new.tap do |o|
@@ -3357,6 +3377,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:create_container_service_registry_login, Seahorse::Model::Operation.new.tap do |o|
@@ -3370,6 +3391,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:create_disk, Seahorse::Model::Operation.new.tap do |o|
@@ -3384,6 +3406,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3399,6 +3422,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3414,6 +3438,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3443,6 +3468,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3458,6 +3484,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3472,6 +3499,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:create_instance_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -3486,6 +3514,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3501,6 +3530,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3516,6 +3546,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3531,6 +3562,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3546,6 +3578,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3561,6 +3594,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3576,6 +3610,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3591,6 +3626,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3606,6 +3642,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3621,6 +3658,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:delete_auto_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -3635,6 +3673,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:delete_bucket, Seahorse::Model::Operation.new.tap do |o|
@@ -3648,6 +3687,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:delete_bucket_access_key, Seahorse::Model::Operation.new.tap do |o|
@@ -3661,6 +3701,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:delete_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -3674,6 +3715,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:delete_contact_method, Seahorse::Model::Operation.new.tap do |o|
@@ -3688,6 +3730,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:delete_container_image, Seahorse::Model::Operation.new.tap do |o|
@@ -3701,6 +3744,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:delete_container_service, Seahorse::Model::Operation.new.tap do |o|
@@ -3714,6 +3758,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:delete_disk, Seahorse::Model::Operation.new.tap do |o|
@@ -3728,6 +3773,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3743,6 +3789,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3772,6 +3819,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3787,6 +3835,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3802,6 +3851,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3817,6 +3867,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3832,6 +3883,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3847,6 +3899,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3862,6 +3915,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3877,6 +3931,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3892,6 +3947,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3907,6 +3963,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3936,6 +3993,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3951,6 +4009,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3966,6 +4025,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3981,6 +4041,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:download_default_key_pair, Seahorse::Model::Operation.new.tap do |o|
@@ -3995,6 +4056,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4010,6 +4072,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:export_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -4024,6 +4087,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4039,6 +4103,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4054,6 +4119,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:get_auto_snapshots, Seahorse::Model::Operation.new.tap do |o|
@@ -4068,6 +4134,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:get_blueprints, Seahorse::Model::Operation.new.tap do |o|
@@ -4082,6 +4149,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4096,6 +4164,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:get_bucket_bundles, Seahorse::Model::Operation.new.tap do |o|
@@ -4108,6 +4177,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:get_bucket_metric_data, Seahorse::Model::Operation.new.tap do |o|
@@ -4121,6 +4191,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:get_buckets, Seahorse::Model::Operation.new.tap do |o|
@@ -4134,6 +4205,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:get_bundles, Seahorse::Model::Operation.new.tap do |o|
@@ -4148,6 +4220,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4162,6 +4235,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:get_cloud_formation_stack_records, Seahorse::Model::Operation.new.tap do |o|
@@ -4176,6 +4250,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4191,6 +4266,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:get_container_api_metadata, Seahorse::Model::Operation.new.tap do |o|
@@ -4202,6 +4278,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:get_container_images, Seahorse::Model::Operation.new.tap do |o|
@@ -4215,6 +4292,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:get_container_log, Seahorse::Model::Operation.new.tap do |o|
@@ -4228,6 +4306,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:get_container_service_deployments, Seahorse::Model::Operation.new.tap do |o|
@@ -4241,6 +4320,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:get_container_service_metric_data, Seahorse::Model::Operation.new.tap do |o|
@@ -4254,6 +4334,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:get_container_service_powers, Seahorse::Model::Operation.new.tap do |o|
@@ -4267,6 +4348,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:get_container_services, Seahorse::Model::Operation.new.tap do |o|
@@ -4280,6 +4362,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:get_cost_estimate, Seahorse::Model::Operation.new.tap do |o|
@@ -4293,6 +4376,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:get_disk, Seahorse::Model::Operation.new.tap do |o|
@@ -4307,6 +4391,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4322,6 +4407,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4337,6 +4423,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4352,6 +4439,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4423,6 +4511,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4438,6 +4527,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4453,6 +4543,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4468,6 +4559,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4483,6 +4575,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4498,6 +4591,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4513,6 +4607,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4528,6 +4623,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4543,6 +4639,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4558,6 +4655,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4573,6 +4671,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4588,6 +4687,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4603,6 +4703,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4618,6 +4719,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4633,6 +4735,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4648,6 +4751,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4660,6 +4764,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
@@ -4676,6 +4781,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4691,6 +4797,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4706,6 +4813,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4721,6 +4829,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4736,6 +4845,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4751,6 +4861,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4766,6 +4877,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4781,6 +4893,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4796,6 +4909,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4811,6 +4925,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4826,6 +4941,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4841,6 +4957,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4856,6 +4973,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4871,6 +4989,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4886,6 +5005,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4901,6 +5021,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4916,6 +5037,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4930,6 +5052,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:get_static_ip, Seahorse::Model::Operation.new.tap do |o|
@@ -4944,6 +5067,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4959,6 +5083,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4974,6 +5099,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4989,6 +5115,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -5004,6 +5131,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -5019,6 +5147,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -5034,6 +5163,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:put_instance_public_ports, Seahorse::Model::Operation.new.tap do |o|
@@ -5048,6 +5178,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -5063,6 +5194,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -5078,6 +5210,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -5092,6 +5225,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:release_static_ip, Seahorse::Model::Operation.new.tap do |o|
@@ -5106,6 +5240,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -5135,6 +5270,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:set_ip_address_type, Seahorse::Model::Operation.new.tap do |o|
@@ -5149,6 +5285,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -5163,6 +5300,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:setup_instance_https, Seahorse::Model::Operation.new.tap do |o|
@@ -5176,6 +5314,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:start_gui_session, Seahorse::Model::Operation.new.tap do |o|
@@ -5189,6 +5328,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:start_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -5203,6 +5343,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -5218,6 +5359,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -5232,6 +5374,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:stop_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -5246,6 +5389,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -5261,6 +5405,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -5276,6 +5421,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -5291,6 +5437,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:unpeer_vpc, Seahorse::Model::Operation.new.tap do |o|
@@ -5305,6 +5452,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -5320,6 +5468,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -5334,6 +5483,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:update_bucket_bundle, Seahorse::Model::Operation.new.tap do |o|
@@ -5347,6 +5497,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:update_container_service, Seahorse::Model::Operation.new.tap do |o|
@@ -5360,6 +5511,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
       end)
 
       api.add_operation(:update_distribution, Seahorse::Model::Operation.new.tap do |o|
@@ -5402,6 +5554,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -5417,6 +5570,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -5432,6 +5586,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -5447,6 +5602,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -5462,6 +5618,7 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
     end

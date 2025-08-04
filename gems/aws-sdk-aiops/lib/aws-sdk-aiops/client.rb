@@ -498,22 +498,22 @@ module Aws::AIOps
     # group in that Region
     #
     # To create an investigation group and set up CloudWatch investigations,
-    # you must be signed in to an IAM principal that has the either the
+    # you must be signed in to an IAM principal that has either the
     # `AIOpsConsoleAdminPolicy` or the `AdministratorAccess` IAM policy
     # attached, or to an account that has similar permissions.
     #
     # You can configure CloudWatch alarms to start investigations and add
     # events to investigations. If you create your investigation group with
     # `CreateInvestigationGroup` and you want to enable alarms to do this,
-    # you must use [PutInvestigationGroupPolicy][1] to create a resource
-    # policy that grants this permission to CloudWatch alarms.
+    # you must use `PutInvestigationGroupPolicy` to create a resource policy
+    # that grants this permission to CloudWatch alarms.
     #
-    #  For more information about configuring CloudWatch alarms to work with
-    # CloudWatch investigations, see
+    #  For more information about configuring CloudWatch alarms, see [Using
+    # Amazon CloudWatch alarms][1]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/operationalinvestigations/latest/AmazonQDeveloperOperationalInvestigationsAPIReference/API_PutInvestigationGroupPolicy.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html
     #
     # @option params [required, String] :name
     #   Provides a name for the investigation group.
@@ -524,8 +524,8 @@ module Aws::AIOps
     #   determine which of your resources that CloudWatch investigations will
     #   have access to during investigations.
     #
-    #   For more information, see [How to control what data Amazon Q has
-    #   access to during investigations][1].
+    #   For more information, see [How to control what data CloudWatch
+    #   investigations has access to during investigations][1].
     #
     #
     #
@@ -564,27 +564,29 @@ module Aws::AIOps
     #
     # @option params [Array<String>] :tag_key_boundaries
     #   Enter the existing custom tag keys for custom applications in your
-    #   system. Resource tags help Amazon Q narrow the search space when it is
-    #   unable to discover definite relationships between resources. For
-    #   example, to discover that an Amazon ECS service depends on an Amazon
-    #   RDS database, Amazon Q can discover this relationship using data
-    #   sources such as X-Ray and CloudWatch Application Signals. However, if
-    #   you haven't deployed these features, Amazon Q will attempt to
-    #   identify possible relationships. Tag boundaries can be used to narrow
-    #   the resources that will be discovered by Amazon Q in these cases.
+    #   system. Resource tags help CloudWatch investigations narrow the search
+    #   space when it is unable to discover definite relationships between
+    #   resources. For example, to discover that an Amazon ECS service depends
+    #   on an Amazon RDS database, CloudWatch investigations can discover this
+    #   relationship using data sources such as X-Ray and CloudWatch
+    #   Application Signals. However, if you haven't deployed these features,
+    #   CloudWatch investigations will attempt to identify possible
+    #   relationships. Tag boundaries can be used to narrow the resources that
+    #   will be discovered by CloudWatch investigations in these cases.
     #
     #   You don't need to enter tags created by myApplications or
-    #   CloudFormation, because Amazon Q can automatically detect those tags.
+    #   CloudFormation, because CloudWatch investigations can automatically
+    #   detect those tags.
     #
     # @option params [Hash<String,Array>] :chatbot_notification_channel
-    #   Use this structure to integrate CloudWatch investigations with Amazon
-    #   Q in chat applications. This structure is a string array. For the
-    #   first string, specify the ARN of an Amazon SNS topic. For the array of
-    #   strings, specify the ARNs of one or more Amazon Q in chat applications
-    #   configurations that you want to associate with that topic. For more
-    #   information about these configuration ARNs, see [Getting started with
-    #   Amazon Q in chat applications][1] and [Resource type defined by Amazon
-    #   Web Services Chatbot][2].
+    #   Use this structure to integrate CloudWatch investigations with chat
+    #   applications. This structure is a string array. For the first string,
+    #   specify the ARN of an Amazon SNS topic. For the array of strings,
+    #   specify the ARNs of one or more chat applications configurations that
+    #   you want to associate with that topic. For more information about
+    #   these configuration ARNs, see [Getting started with Amazon Q in chat
+    #   applications][1] and [Resource type defined by Amazon Web Services
+    #   Chatbot][2].
     #
     #
     #
@@ -596,7 +598,7 @@ module Aws::AIOps
     #   change events that are recorded by CloudTrail. The default is `true`.
     #
     # @option params [Array<Types::CrossAccountConfiguration>] :cross_account_configurations
-    #   Number of `sourceAccountId` values that have been configured for
+    #   List of `sourceRoleArn` values that have been configured for
     #   cross-account access.
     #
     # @return [Types::CreateInvestigationGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -696,14 +698,14 @@ module Aws::AIOps
     #
     # @option params [required, String] :identifier
     #   Specify either the name or the ARN of the investigation group that you
-    #   want to view.
+    #   want to view. This is used to set the name of the investigation group.
     #
     # @return [Types::GetInvestigationGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetInvestigationGroupResponse#created_by #created_by} => String
-    #   * {Types::GetInvestigationGroupResponse#created_at #created_at} => Time
+    #   * {Types::GetInvestigationGroupResponse#created_at #created_at} => Integer
     #   * {Types::GetInvestigationGroupResponse#last_modified_by #last_modified_by} => String
-    #   * {Types::GetInvestigationGroupResponse#last_modified_at #last_modified_at} => Time
+    #   * {Types::GetInvestigationGroupResponse#last_modified_at #last_modified_at} => Integer
     #   * {Types::GetInvestigationGroupResponse#name #name} => String
     #   * {Types::GetInvestigationGroupResponse#arn #arn} => String
     #   * {Types::GetInvestigationGroupResponse#role_arn #role_arn} => String
@@ -723,9 +725,9 @@ module Aws::AIOps
     # @example Response structure
     #
     #   resp.created_by #=> String
-    #   resp.created_at #=> Time
+    #   resp.created_at #=> Integer
     #   resp.last_modified_by #=> String
-    #   resp.last_modified_at #=> Time
+    #   resp.last_modified_at #=> Integer
     #   resp.name #=> String
     #   resp.arn #=> String
     #   resp.role_arn #=> String
@@ -750,8 +752,9 @@ module Aws::AIOps
       req.send_request(options)
     end
 
-    # Returns the IAM resource policy that is associated with the specified
-    # investigation group.
+    # Returns the JSON of the IAM resource policy associated with the
+    # specified investigation group in a string. For example,
+    # `{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":"aiops.alarms.cloudwatch.amazonaws.com"},"Action":["aiops:CreateInvestigation","aiops:CreateInvestigationEvent"],"Resource":"*","Condition":{"StringEquals":{"aws:SourceAccount":"111122223333"},"ArnLike":{"aws:SourceArn":"arn:aws:cloudwatch:us-east-1:111122223333:alarm:*"}}}]}`.
     #
     # @option params [required, String] :identifier
     #   Specify either the name or the ARN of the investigation group that you
@@ -827,16 +830,12 @@ module Aws::AIOps
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the CloudWatch investigations resource that you want to
-    #   view tags for. You can use the [ListInvestigationGroups][1] operation
-    #   to find the ARNs of investigation groups.
+    #   view tags for. You can use the `ListInvestigationGroups` operation to
+    #   find the ARNs of investigation groups.
     #
     #   The ARN format for an investigation group is
     #   `arn:aws:aiops:Region:account-id:investigation-group:investigation-group-id
     #   `.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/operationalinvestigations/latest/AmazonQDeveloperOperationalInvestigationsAPIReference/API_ListInvestigationGroups.html
     #
     # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -870,13 +869,13 @@ module Aws::AIOps
     # add events to investigations, you must use this operation to create a
     # policy similar to this example.
     #
-    # `{ "Version": "2008-10-17", "Statement": [{ "Effect": "Allow",
+    # ` { "Version": "2008-10-17", "Statement": [ { "Effect": "Allow",
     # "Principal": { "Service": "aiops.alarms.cloudwatch.amazonaws.com" },
-    # "Action": ["aiops:CreateInvestigation",
-    # "aiops:CreateInvestigationEvent"], "Resource": "*", "Condition": {
+    # "Action": [ "aiops:CreateInvestigation",
+    # "aiops:CreateInvestigationEvent" ], "Resource": "*", "Condition": {
     # "StringEquals": { "aws:SourceAccount": "account-id" }, "ArnLike": {
-    # "aws:SourceArn": "arn:aws:cloudwatch:region:account-id:alarm:*" } } }]
-    # }`
+    # "aws:SourceArn": "arn:aws:cloudwatch:region:account-id:alarm:*" } } }
+    # ] } `
     #
     # @option params [required, String] :identifier
     #   Specify either the name or the ARN of the investigation group that you
@@ -922,12 +921,8 @@ module Aws::AIOps
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to apply
-    #   the tags to. You can use the [ListInvestigationGroups][1] operation to
+    #   the tags to. You can use the `ListInvestigationGroups` operation to
     #   find the ARNs of investigation groups.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/operationalinvestigations/latest/AmazonQDeveloperOperationalInvestigationsAPIReference/API_ListInvestigationGroups.html
     #
     # @option params [required, Hash<String,String>] :tags
     #   The list of key-value pairs to associate with the resource.
@@ -956,12 +951,8 @@ module Aws::AIOps
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to remove
-    #   the tags from. You can use the [ListInvestigationGroups][1] operation
-    #   to find the ARNs of investigation groups.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/operationalinvestigations/latest/AmazonQDeveloperOperationalInvestigationsAPIReference/API_ListInvestigationGroups.html
+    #   the tags from. You can use the`ListInvestigationGroups` operation to
+    #   find the ARNs of investigation groups.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The list of tag keys to remove from the resource.
@@ -998,8 +989,8 @@ module Aws::AIOps
     #   The permissions in this role determine which of your resources that
     #   CloudWatch investigations will have access to during investigations.
     #
-    #   For more information, see [EHow to control what data Amazon Q has
-    #   access to during investigations][1].
+    #   For more information, see [How to control what data CloudWatch
+    #   investigations has access to during investigations][1].
     #
     #
     #
@@ -1018,27 +1009,29 @@ module Aws::AIOps
     #
     # @option params [Array<String>] :tag_key_boundaries
     #   Enter the existing custom tag keys for custom applications in your
-    #   system. Resource tags help Amazon Q narrow the search space when it is
-    #   unable to discover definite relationships between resources. For
-    #   example, to discover that an Amazon ECS service depends on an Amazon
-    #   RDS database, Amazon Q can discover this relationship using data
-    #   sources such as X-Ray and CloudWatch Application Signals. However, if
-    #   you haven't deployed these features, Amazon Q will attempt to
-    #   identify possible relationships. Tag boundaries can be used to narrow
-    #   the resources that will be discovered by Amazon Q in these cases.
+    #   system. Resource tags help CloudWatch investigations narrow the search
+    #   space when it is unable to discover definite relationships between
+    #   resources. For example, to discover that an Amazon ECS service depends
+    #   on an Amazon RDS database, CloudWatch investigations can discover this
+    #   relationship using data sources such as X-Ray and CloudWatch
+    #   Application Signals. However, if you haven't deployed these features,
+    #   CloudWatch investigations will attempt to identify possible
+    #   relationships. Tag boundaries can be used to narrow the resources that
+    #   will be discovered by CloudWatch investigations in these cases.
     #
     #   You don't need to enter tags created by myApplications or
-    #   CloudFormation, because Amazon Q can automatically detect those tags.
+    #   CloudFormation, because CloudWatch investigations can automatically
+    #   detect those tags.
     #
     # @option params [Hash<String,Array>] :chatbot_notification_channel
-    #   Use this structure to integrate CloudWatch investigations with Amazon
-    #   Q in chat applications. This structure is a string array. For the
-    #   first string, specify the ARN of an Amazon SNS topic. For the array of
-    #   strings, specify the ARNs of one or more Amazon Q in chat applications
-    #   configurations that you want to associate with that topic. For more
-    #   information about these configuration ARNs, see [Getting started with
-    #   Amazon Q in chat applications][1] and [Resource type defined by Amazon
-    #   Web Services Chatbot][2].
+    #   Use this structure to integrate CloudWatch investigations with chat
+    #   applications. This structure is a string array. For the first string,
+    #   specify the ARN of an Amazon SNS topic. For the array of strings,
+    #   specify the ARNs of one or more chat applications configurations that
+    #   you want to associate with that topic. For more information about
+    #   these configuration ARNs, see [Getting started with Amazon Q in chat
+    #   applications][1] and [Resource type defined by Amazon Web Services
+    #   Chatbot][2].
     #
     #
     #
@@ -1103,7 +1096,7 @@ module Aws::AIOps
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-aiops'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

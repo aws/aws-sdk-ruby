@@ -82,6 +82,7 @@ module Aws::PCS
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    NetworkType = Shapes::StringShape.new(name: 'NetworkType')
     Networking = Shapes::StructureShape.new(name: 'Networking')
     NetworkingRequest = Shapes::StructureShape.new(name: 'NetworkingRequest')
     PurchaseOption = Shapes::StringShape.new(name: 'PurchaseOption')
@@ -296,6 +297,7 @@ module Aws::PCS
     Endpoint.add_member(:type, Shapes::ShapeRef.new(shape: EndpointType, required: true, location_name: "type"))
     Endpoint.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "privateIpAddress"))
     Endpoint.add_member(:public_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "publicIpAddress"))
+    Endpoint.add_member(:ipv6_address, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Address"))
     Endpoint.add_member(:port, Shapes::ShapeRef.new(shape: String, required: true, location_name: "port"))
     Endpoint.struct_class = Types::Endpoint
 
@@ -369,10 +371,12 @@ module Aws::PCS
 
     Networking.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "subnetIds"))
     Networking.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
+    Networking.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "networkType"))
     Networking.struct_class = Types::Networking
 
     NetworkingRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "subnetIds"))
     NetworkingRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
+    NetworkingRequest.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "networkType"))
     NetworkingRequest.struct_class = Types::NetworkingRequest
 
     Queue.add_member(:name, Shapes::ShapeRef.new(shape: QueueName, required: true, location_name: "name"))

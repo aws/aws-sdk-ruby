@@ -78,6 +78,72 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _CreateTelemetryRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTelemetryRuleOutput]
+        def rule_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#create_telemetry_rule-instance_method
+      def create_telemetry_rule: (
+                                   rule_name: ::String,
+                                   rule: {
+                                     resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function")?,
+                                     telemetry_type: ("Logs" | "Metrics" | "Traces"),
+                                     destination_configuration: {
+                                       destination_type: ("cloud-watch-logs")?,
+                                       destination_pattern: ::String?,
+                                       retention_in_days: ::Integer?,
+                                       vpc_flow_log_parameters: {
+                                         log_format: ::String?,
+                                         traffic_type: ::String?,
+                                         max_aggregation_interval: ::Integer?
+                                       }?
+                                     }?,
+                                     scope: ::String?,
+                                     selection_criteria: ::String?
+                                   },
+                                   ?tags: Hash[::String, ::String]
+                                 ) -> _CreateTelemetryRuleResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTelemetryRuleResponseSuccess
+
+      interface _CreateTelemetryRuleForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTelemetryRuleForOrganizationOutput]
+        def rule_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#create_telemetry_rule_for_organization-instance_method
+      def create_telemetry_rule_for_organization: (
+                                                    rule_name: ::String,
+                                                    rule: {
+                                                      resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function")?,
+                                                      telemetry_type: ("Logs" | "Metrics" | "Traces"),
+                                                      destination_configuration: {
+                                                        destination_type: ("cloud-watch-logs")?,
+                                                        destination_pattern: ::String?,
+                                                        retention_in_days: ::Integer?,
+                                                        vpc_flow_log_parameters: {
+                                                          log_format: ::String?,
+                                                          traffic_type: ::String?,
+                                                          max_aggregation_interval: ::Integer?
+                                                        }?
+                                                      }?,
+                                                      scope: ::String?,
+                                                      selection_criteria: ::String?
+                                                    },
+                                                    ?tags: Hash[::String, ::String]
+                                                  ) -> _CreateTelemetryRuleForOrganizationResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTelemetryRuleForOrganizationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#delete_telemetry_rule-instance_method
+      def delete_telemetry_rule: (
+                                   rule_identifier: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#delete_telemetry_rule_for_organization-instance_method
+      def delete_telemetry_rule_for_organization: (
+                                                    rule_identifier: ::String
+                                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _GetTelemetryEvaluationStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTelemetryEvaluationStatusOutput]
         def status: () -> ("NOT_STARTED" | "STARTING" | "FAILED_START" | "RUNNING" | "STOPPING" | "FAILED_STOP" | "STOPPED")
@@ -95,6 +161,34 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#get_telemetry_evaluation_status_for_organization-instance_method
       def get_telemetry_evaluation_status_for_organization: () -> _GetTelemetryEvaluationStatusForOrganizationResponseSuccess
                                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTelemetryEvaluationStatusForOrganizationResponseSuccess
+
+      interface _GetTelemetryRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTelemetryRuleOutput]
+        def rule_name: () -> ::String
+        def rule_arn: () -> ::String
+        def created_time_stamp: () -> ::Integer
+        def last_update_time_stamp: () -> ::Integer
+        def telemetry_rule: () -> Types::TelemetryRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#get_telemetry_rule-instance_method
+      def get_telemetry_rule: (
+                                rule_identifier: ::String
+                              ) -> _GetTelemetryRuleResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTelemetryRuleResponseSuccess
+
+      interface _GetTelemetryRuleForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTelemetryRuleForOrganizationOutput]
+        def rule_name: () -> ::String
+        def rule_arn: () -> ::String
+        def created_time_stamp: () -> ::Integer
+        def last_update_time_stamp: () -> ::Integer
+        def telemetry_rule: () -> Types::TelemetryRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#get_telemetry_rule_for_organization-instance_method
+      def get_telemetry_rule_for_organization: (
+                                                 rule_identifier: ::String
+                                               ) -> _GetTelemetryRuleForOrganizationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTelemetryRuleForOrganizationResponseSuccess
 
       interface _ListResourceTelemetryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceTelemetryOutput]
@@ -129,6 +223,44 @@ module Aws
                                                     ) -> _ListResourceTelemetryForOrganizationResponseSuccess
                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceTelemetryForOrganizationResponseSuccess
 
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTelemetryRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTelemetryRulesOutput]
+        def telemetry_rule_summaries: () -> ::Array[Types::TelemetryRuleSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#list_telemetry_rules-instance_method
+      def list_telemetry_rules: (
+                                  ?rule_name_prefix: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListTelemetryRulesResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTelemetryRulesResponseSuccess
+
+      interface _ListTelemetryRulesForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTelemetryRulesForOrganizationOutput]
+        def telemetry_rule_summaries: () -> ::Array[Types::TelemetryRuleSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#list_telemetry_rules_for_organization-instance_method
+      def list_telemetry_rules_for_organization: (
+                                                   ?rule_name_prefix: ::String,
+                                                   ?source_account_ids: Array[::String],
+                                                   ?source_organization_unit_ids: Array[::String],
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String
+                                                 ) -> _ListTelemetryRulesForOrganizationResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTelemetryRulesForOrganizationResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#start_telemetry_evaluation-instance_method
       def start_telemetry_evaluation: () -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -144,6 +276,72 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#stop_telemetry_evaluation_for_organization-instance_method
       def stop_telemetry_evaluation_for_organization: () -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateTelemetryRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTelemetryRuleOutput]
+        def rule_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#update_telemetry_rule-instance_method
+      def update_telemetry_rule: (
+                                   rule_identifier: ::String,
+                                   rule: {
+                                     resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function")?,
+                                     telemetry_type: ("Logs" | "Metrics" | "Traces"),
+                                     destination_configuration: {
+                                       destination_type: ("cloud-watch-logs")?,
+                                       destination_pattern: ::String?,
+                                       retention_in_days: ::Integer?,
+                                       vpc_flow_log_parameters: {
+                                         log_format: ::String?,
+                                         traffic_type: ::String?,
+                                         max_aggregation_interval: ::Integer?
+                                       }?
+                                     }?,
+                                     scope: ::String?,
+                                     selection_criteria: ::String?
+                                   }
+                                 ) -> _UpdateTelemetryRuleResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTelemetryRuleResponseSuccess
+
+      interface _UpdateTelemetryRuleForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTelemetryRuleForOrganizationOutput]
+        def rule_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#update_telemetry_rule_for_organization-instance_method
+      def update_telemetry_rule_for_organization: (
+                                                    rule_identifier: ::String,
+                                                    rule: {
+                                                      resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function")?,
+                                                      telemetry_type: ("Logs" | "Metrics" | "Traces"),
+                                                      destination_configuration: {
+                                                        destination_type: ("cloud-watch-logs")?,
+                                                        destination_pattern: ::String?,
+                                                        retention_in_days: ::Integer?,
+                                                        vpc_flow_log_parameters: {
+                                                          log_format: ::String?,
+                                                          traffic_type: ::String?,
+                                                          max_aggregation_interval: ::Integer?
+                                                        }?
+                                                      }?,
+                                                      scope: ::String?,
+                                                      selection_criteria: ::String?
+                                                    }
+                                                  ) -> _UpdateTelemetryRuleForOrganizationResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTelemetryRuleForOrganizationResponseSuccess
     end
   end
 end

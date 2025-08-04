@@ -492,7 +492,7 @@ module Aws::Lightsail
       attr_accessor restore_date: ::String
       attr_accessor use_latest_restorable_auto_snapshot: bool
       attr_accessor target_snapshot_name: ::String
-      attr_accessor source_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1")
+      attr_accessor source_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1" | "ap-southeast-3")
       SENSITIVE: []
     end
 
@@ -2086,7 +2086,7 @@ module Aws::Lightsail
 
     class InputOrigin
       attr_accessor name: ::String
-      attr_accessor region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1")
+      attr_accessor region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1" | "ap-southeast-3")
       attr_accessor protocol_policy: ("http-only" | "https-only")
       attr_accessor response_timeout: ::Integer
       SENSITIVE: []
@@ -2458,7 +2458,7 @@ module Aws::Lightsail
     class Origin
       attr_accessor name: ::String
       attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
-      attr_accessor region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1")
+      attr_accessor region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1" | "ap-southeast-3")
       attr_accessor protocol_policy: ("http-only" | "https-only")
       attr_accessor response_timeout: ::Integer
       SENSITIVE: []
@@ -2579,9 +2579,17 @@ module Aws::Lightsail
       attr_accessor continent_code: ::String
       attr_accessor description: ::String
       attr_accessor display_name: ::String
-      attr_accessor name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1")
+      attr_accessor name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1" | "ap-southeast-3")
       attr_accessor availability_zones: ::Array[Types::AvailabilityZone]
       attr_accessor relational_database_availability_zones: ::Array[Types::AvailabilityZone]
+      SENSITIVE: []
+    end
+
+    class RegionSetupInProgressException
+      attr_accessor code: ::String
+      attr_accessor docs: ::String
+      attr_accessor message: ::String
+      attr_accessor tip: ::String
       SENSITIVE: []
     end
 
@@ -2749,7 +2757,7 @@ module Aws::Lightsail
 
     class ResourceLocation
       attr_accessor availability_zone: ::String
-      attr_accessor region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1")
+      attr_accessor region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1" | "ap-southeast-3")
       SENSITIVE: []
     end
 

@@ -47,8 +47,8 @@ module Aws::AIOps
     #   determine which of your resources that CloudWatch investigations
     #   will have access to during investigations.
     #
-    #   For more information, see [How to control what data Amazon Q has
-    #   access to during investigations][1].
+    #   For more information, see [How to control what data CloudWatch
+    #   investigations has access to during investigations][1].
     #
     #
     #
@@ -92,30 +92,31 @@ module Aws::AIOps
     #
     # @!attribute [rw] tag_key_boundaries
     #   Enter the existing custom tag keys for custom applications in your
-    #   system. Resource tags help Amazon Q narrow the search space when it
-    #   is unable to discover definite relationships between resources. For
-    #   example, to discover that an Amazon ECS service depends on an Amazon
-    #   RDS database, Amazon Q can discover this relationship using data
-    #   sources such as X-Ray and CloudWatch Application Signals. However,
-    #   if you haven't deployed these features, Amazon Q will attempt to
-    #   identify possible relationships. Tag boundaries can be used to
-    #   narrow the resources that will be discovered by Amazon Q in these
-    #   cases.
+    #   system. Resource tags help CloudWatch investigations narrow the
+    #   search space when it is unable to discover definite relationships
+    #   between resources. For example, to discover that an Amazon ECS
+    #   service depends on an Amazon RDS database, CloudWatch investigations
+    #   can discover this relationship using data sources such as X-Ray and
+    #   CloudWatch Application Signals. However, if you haven't deployed
+    #   these features, CloudWatch investigations will attempt to identify
+    #   possible relationships. Tag boundaries can be used to narrow the
+    #   resources that will be discovered by CloudWatch investigations in
+    #   these cases.
     #
     #   You don't need to enter tags created by myApplications or
-    #   CloudFormation, because Amazon Q can automatically detect those
-    #   tags.
+    #   CloudFormation, because CloudWatch investigations can automatically
+    #   detect those tags.
     #   @return [Array<String>]
     #
     # @!attribute [rw] chatbot_notification_channel
-    #   Use this structure to integrate CloudWatch investigations with
-    #   Amazon Q in chat applications. This structure is a string array. For
-    #   the first string, specify the ARN of an Amazon SNS topic. For the
-    #   array of strings, specify the ARNs of one or more Amazon Q in chat
-    #   applications configurations that you want to associate with that
-    #   topic. For more information about these configuration ARNs, see
-    #   [Getting started with Amazon Q in chat applications][1] and
-    #   [Resource type defined by Amazon Web Services Chatbot][2].
+    #   Use this structure to integrate CloudWatch investigations with chat
+    #   applications. This structure is a string array. For the first
+    #   string, specify the ARN of an Amazon SNS topic. For the array of
+    #   strings, specify the ARNs of one or more chat applications
+    #   configurations that you want to associate with that topic. For more
+    #   information about these configuration ARNs, see [Getting started
+    #   with Amazon Q in chat applications][1] and [Resource type defined by
+    #   Amazon Web Services Chatbot][2].
     #
     #
     #
@@ -130,7 +131,7 @@ module Aws::AIOps
     #   @return [Boolean]
     #
     # @!attribute [rw] cross_account_configurations
-    #   Number of `sourceAccountId` values that have been configured for
+    #   List of `sourceRoleArn` values that have been configured for
     #   cross-account access.
     #   @return [Array<Types::CrossAccountConfiguration>]
     #
@@ -213,7 +214,7 @@ module Aws::AIOps
     #
     # @!attribute [rw] type
     #   Displays whether investigation data is encrypted by a customer
-    #   managed key or an Amazon Web Services owned kay.
+    #   managed key or an Amazon Web Services owned key.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -277,7 +278,8 @@ module Aws::AIOps
 
     # @!attribute [rw] identifier
     #   Specify either the name or the ARN of the investigation group that
-    #   you want to view.
+    #   you want to view. This is used to set the name of the investigation
+    #   group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/aiops-2018-05-10/GetInvestigationGroupRequest AWS API Documentation
@@ -294,7 +296,7 @@ module Aws::AIOps
     #
     # @!attribute [rw] created_at
     #   The date and time that the investigation group was created.
-    #   @return [Time]
+    #   @return [Integer]
     #
     # @!attribute [rw] last_modified_by
     #   The name of the user who created the investigation group.
@@ -303,7 +305,7 @@ module Aws::AIOps
     # @!attribute [rw] last_modified_at
     #   The date and time that the investigation group was most recently
     #   modified.
-    #   @return [Time]
+    #   @return [Integer]
     #
     # @!attribute [rw] name
     #   The name of the investigation group.
@@ -330,11 +332,11 @@ module Aws::AIOps
     #
     # @!attribute [rw] chatbot_notification_channel
     #   This structure is a string array. The first string is the ARN of a
-    #   Amazon SNS topic. The array of strings display the ARNs of Amazon Q
-    #   in chat applications configurations that are associated with that
-    #   topic. For more information about these configuration ARNs, see
-    #   [Getting started with Amazon Q in chat applications][1] and
-    #   [Resource type defined by Amazon Web Services Chatbot][2].
+    #   Amazon SNS topic. The array of strings display the ARNs of chat
+    #   applications configurations that are associated with that topic. For
+    #   more information about these configuration ARNs, see [Getting
+    #   started with Amazon Q in chat applications][1] and [Resource type
+    #   defined by Amazon Web Services Chatbot][2].
     #
     #
     #
@@ -345,8 +347,8 @@ module Aws::AIOps
     # @!attribute [rw] tag_key_boundaries
     #   Displays the custom tag keys for custom applications in your system
     #   that you have specified in the investigation group. Resource tags
-    #   help Amazon Q narrow the search space when it is unable to discover
-    #   definite relationships between resources.
+    #   help CloudWatch investigations narrow the search space when it is
+    #   unable to discover definite relationships between resources.
     #   @return [Array<String>]
     #
     # @!attribute [rw] is_cloud_trail_event_history_enabled
@@ -466,16 +468,12 @@ module Aws::AIOps
 
     # @!attribute [rw] resource_arn
     #   The ARN of the CloudWatch investigations resource that you want to
-    #   view tags for. You can use the [ListInvestigationGroups][1]
-    #   operation to find the ARNs of investigation groups.
+    #   view tags for. You can use the `ListInvestigationGroups` operation
+    #   to find the ARNs of investigation groups.
     #
     #   The ARN format for an investigation group is
     #   `arn:aws:aiops:Region:account-id:investigation-group:investigation-group-id
     #   `.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/operationalinvestigations/latest/AmazonQDeveloperOperationalInvestigationsAPIReference/API_ListInvestigationGroups.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/aiops-2018-05-10/ListTagsForResourceRequest AWS API Documentation
@@ -564,12 +562,8 @@ module Aws::AIOps
 
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to
-    #   apply the tags to. You can use the [ListInvestigationGroups][1]
+    #   apply the tags to. You can use the `ListInvestigationGroups`
     #   operation to find the ARNs of investigation groups.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/operationalinvestigations/latest/AmazonQDeveloperOperationalInvestigationsAPIReference/API_ListInvestigationGroups.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -605,12 +599,8 @@ module Aws::AIOps
 
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to
-    #   remove the tags from. You can use the [ListInvestigationGroups][1]
+    #   remove the tags from. You can use the`ListInvestigationGroups`
     #   operation to find the ARNs of investigation groups.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/operationalinvestigations/latest/AmazonQDeveloperOperationalInvestigationsAPIReference/API_ListInvestigationGroups.html
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -647,8 +637,8 @@ module Aws::AIOps
     #   The permissions in this role determine which of your resources that
     #   CloudWatch investigations will have access to during investigations.
     #
-    #   For more information, see [EHow to control what data Amazon Q has
-    #   access to during investigations][1].
+    #   For more information, see [How to control what data CloudWatch
+    #   investigations has access to during investigations][1].
     #
     #
     #
@@ -669,30 +659,31 @@ module Aws::AIOps
     #
     # @!attribute [rw] tag_key_boundaries
     #   Enter the existing custom tag keys for custom applications in your
-    #   system. Resource tags help Amazon Q narrow the search space when it
-    #   is unable to discover definite relationships between resources. For
-    #   example, to discover that an Amazon ECS service depends on an Amazon
-    #   RDS database, Amazon Q can discover this relationship using data
-    #   sources such as X-Ray and CloudWatch Application Signals. However,
-    #   if you haven't deployed these features, Amazon Q will attempt to
-    #   identify possible relationships. Tag boundaries can be used to
-    #   narrow the resources that will be discovered by Amazon Q in these
-    #   cases.
+    #   system. Resource tags help CloudWatch investigations narrow the
+    #   search space when it is unable to discover definite relationships
+    #   between resources. For example, to discover that an Amazon ECS
+    #   service depends on an Amazon RDS database, CloudWatch investigations
+    #   can discover this relationship using data sources such as X-Ray and
+    #   CloudWatch Application Signals. However, if you haven't deployed
+    #   these features, CloudWatch investigations will attempt to identify
+    #   possible relationships. Tag boundaries can be used to narrow the
+    #   resources that will be discovered by CloudWatch investigations in
+    #   these cases.
     #
     #   You don't need to enter tags created by myApplications or
-    #   CloudFormation, because Amazon Q can automatically detect those
-    #   tags.
+    #   CloudFormation, because CloudWatch investigations can automatically
+    #   detect those tags.
     #   @return [Array<String>]
     #
     # @!attribute [rw] chatbot_notification_channel
-    #   Use this structure to integrate CloudWatch investigations with
-    #   Amazon Q in chat applications. This structure is a string array. For
-    #   the first string, specify the ARN of an Amazon SNS topic. For the
-    #   array of strings, specify the ARNs of one or more Amazon Q in chat
-    #   applications configurations that you want to associate with that
-    #   topic. For more information about these configuration ARNs, see
-    #   [Getting started with Amazon Q in chat applications][1] and
-    #   [Resource type defined by Amazon Web Services Chatbot][2].
+    #   Use this structure to integrate CloudWatch investigations with chat
+    #   applications. This structure is a string array. For the first
+    #   string, specify the ARN of an Amazon SNS topic. For the array of
+    #   strings, specify the ARNs of one or more chat applications
+    #   configurations that you want to associate with that topic. For more
+    #   information about these configuration ARNs, see [Getting started
+    #   with Amazon Q in chat applications][1] and [Resource type defined by
+    #   Amazon Web Services Chatbot][2].
     #
     #
     #

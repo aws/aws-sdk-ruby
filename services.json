@@ -14,6 +14,9 @@
       "Aws::APIGateway::Plugins::ApplyContentTypeHeader"
     ]
   },
+  "ARCRegionswitch": {
+    "models": "arc-region-switch/2022-07-26"
+  },
   "ARCZonalShift": {
     "models": "arc-zonal-shift/2022-10-30"
   },

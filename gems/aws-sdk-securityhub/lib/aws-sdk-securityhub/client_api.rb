@@ -770,6 +770,7 @@ module Aws::SecurityHub
     ClassificationStatus = Shapes::StructureShape.new(name: 'ClassificationStatus')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudWatchLogsLogGroupArnConfigDetails = Shapes::StructureShape.new(name: 'CloudWatchLogsLogGroupArnConfigDetails')
+    CodeRepositoryDetails = Shapes::StructureShape.new(name: 'CodeRepositoryDetails')
     CodeVulnerabilitiesFilePath = Shapes::StructureShape.new(name: 'CodeVulnerabilitiesFilePath')
     Compliance = Shapes::StructureShape.new(name: 'Compliance')
     ComplianceStatus = Shapes::StringShape.new(name: 'ComplianceStatus')
@@ -5477,6 +5478,11 @@ module Aws::SecurityHub
     CloudWatchLogsLogGroupArnConfigDetails.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Id"))
     CloudWatchLogsLogGroupArnConfigDetails.struct_class = Types::CloudWatchLogsLogGroupArnConfigDetails
 
+    CodeRepositoryDetails.add_member(:provider_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ProviderType"))
+    CodeRepositoryDetails.add_member(:project_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ProjectName"))
+    CodeRepositoryDetails.add_member(:code_security_integration_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CodeSecurityIntegrationArn"))
+    CodeRepositoryDetails.struct_class = Types::CodeRepositoryDetails
+
     CodeVulnerabilitiesFilePath.add_member(:end_line, Shapes::ShapeRef.new(shape: Integer, location_name: "EndLine"))
     CodeVulnerabilitiesFilePath.add_member(:file_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FileName"))
     CodeVulnerabilitiesFilePath.add_member(:file_path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FilePath"))
@@ -6933,6 +6939,7 @@ module Aws::SecurityHub
     ResourceDetails.add_member(:aws_msk_cluster, Shapes::ShapeRef.new(shape: AwsMskClusterDetails, location_name: "AwsMskCluster"))
     ResourceDetails.add_member(:aws_s3_access_point, Shapes::ShapeRef.new(shape: AwsS3AccessPointDetails, location_name: "AwsS3AccessPoint"))
     ResourceDetails.add_member(:aws_ec2_client_vpn_endpoint, Shapes::ShapeRef.new(shape: AwsEc2ClientVpnEndpointDetails, location_name: "AwsEc2ClientVpnEndpoint"))
+    ResourceDetails.add_member(:code_repository, Shapes::ShapeRef.new(shape: CodeRepositoryDetails, location_name: "CodeRepository"))
     ResourceDetails.struct_class = Types::ResourceDetails
 
     ResourceFindingsSummary.add_member(:finding_type, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "FindingType"))

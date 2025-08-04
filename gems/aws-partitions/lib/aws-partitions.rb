@@ -249,6 +249,7 @@ module Aws
             'ACMPCA' => 'acm-pca',
             'AIOps' => 'aiops',
             'APIGateway' => 'apigateway',
+            'ARCRegionswitch' => 'arc-region-switch',
             'ARCZonalShift' => 'arc-zonal-shift',
             'AccessAnalyzer' => 'access-analyzer',
             'Account' => 'account',
