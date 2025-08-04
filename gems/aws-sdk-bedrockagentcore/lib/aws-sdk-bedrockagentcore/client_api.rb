@@ -374,7 +374,6 @@ module Aws::BedrockAgentCore
     GetResourceApiKeyResponse.struct_class = Types::GetResourceApiKeyResponse
 
     GetResourceOauth2TokenRequest.add_member(:workload_identity_token, Shapes::ShapeRef.new(shape: WorkloadIdentityTokenType, required: true, location_name: "workloadIdentityToken"))
-    GetResourceOauth2TokenRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserIdType, location_name: "userId"))
     GetResourceOauth2TokenRequest.add_member(:resource_credential_provider_name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "resourceCredentialProviderName"))
     GetResourceOauth2TokenRequest.add_member(:scopes, Shapes::ShapeRef.new(shape: ScopesListType, required: true, location_name: "scopes"))
     GetResourceOauth2TokenRequest.add_member(:oauth2_flow, Shapes::ShapeRef.new(shape: Oauth2FlowType, required: true, location_name: "oauth2Flow"))

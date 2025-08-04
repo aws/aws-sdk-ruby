@@ -97,8 +97,8 @@ module Aws::IoTSiteWise
     #     class name or an instance of a plugin class.
     #
     #   @option options [required, Aws::CredentialProvider] :credentials
-    #     Your AWS credentials used for authentication. This can be an instance of any one of the
-    #     following classes:
+    #     Your AWS credentials used for authentication. This can be any class that includes and implements
+    #     `Aws::CredentialProvider`, or instance of any one of the following classes:
     #
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
@@ -126,8 +126,7 @@ module Aws::IoTSiteWise
     #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
     #       from the Cognito Identity service.
     #
-    #     When `:credentials` are not configured directly, the following
-    #     locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
     #
@@ -141,12 +140,10 @@ module Aws::IoTSiteWise
     #
     #     * `~/.aws/config`
     #
-    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
-    #       are very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts. Instance profile credential
-    #       fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
-    #       to `true`.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts are very aggressive.
+    #       Construct and pass an instance of `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts. Instance profile credential fetching can be disabled by
+    #       setting `ENV['AWS_EC2_METADATA_DISABLED']` to `true`.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -388,8 +385,8 @@ module Aws::IoTSiteWise
     #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
-    #     Your Bearer token used for authentication. This can be an instance of any one of the
-    #     following classes:
+    #     Your Bearer token used for authentication. This can be any class that includes and implements
+    #     `Aws::TokenProvider`, or instance of any one of the following classes:
     #
     #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
     #       tokens.
@@ -1213,8 +1210,8 @@ module Aws::IoTSiteWise
     # model's property and hierarchy definitions. For more information, see
     # [Defining asset models][1] in the *IoT SiteWise User Guide*.
     #
-    # You can create two types of asset models, `ASSET_MODEL` or
-    # `COMPONENT_MODEL`.
+    # You can create three types of asset models, `ASSET_MODEL`,
+    # `COMPONENT_MODEL`, or an `INTERFACE`.
     #
     # * **ASSET\_MODEL** – (default) An asset model that you can use to
     #   create assets. Can't be included as a component in another asset
@@ -1223,6 +1220,9 @@ module Aws::IoTSiteWise
     # * **COMPONENT\_MODEL** – A reusable component that you can include in
     #   the composite models of other asset models. You can't create assets
     #   directly from this type of asset model.
+    #
+    # * **INTERFACE** – An interface is a type of model that defines a
+    #   standard structure that can be applied to different asset models.
     #
     #
     #
@@ -1334,7 +1334,7 @@ module Aws::IoTSiteWise
     #
     #   resp = client.create_asset_model({
     #     asset_model_name: "Name", # required
-    #     asset_model_type: "ASSET_MODEL", # accepts ASSET_MODEL, COMPONENT_MODEL
+    #     asset_model_type: "ASSET_MODEL", # accepts ASSET_MODEL, COMPONENT_MODEL, INTERFACE
     #     asset_model_id: "ID",
     #     asset_model_external_id: "ExternalId",
     #     asset_model_description: "Description",
@@ -1382,8 +1382,8 @@ module Aws::IoTSiteWise
     #             },
     #           },
     #           metric: {
-    #             expression: "Expression", # required
-    #             variables: [ # required
+    #             expression: "Expression",
+    #             variables: [
     #               {
     #                 name: "VariableName", # required
     #                 value: { # required
@@ -1470,8 +1470,8 @@ module Aws::IoTSiteWise
     #                 },
     #               },
     #               metric: {
-    #                 expression: "Expression", # required
-    #                 variables: [ # required
+    #                 expression: "Expression",
+    #                 variables: [
     #                   {
     #                     name: "VariableName", # required
     #                     value: { # required
@@ -1693,8 +1693,8 @@ module Aws::IoTSiteWise
     #             },
     #           },
     #           metric: {
-    #             expression: "Expression", # required
-    #             variables: [ # required
+    #             expression: "Expression",
+    #             variables: [
     #               {
     #                 name: "VariableName", # required
     #                 value: { # required
@@ -2647,6 +2647,59 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Deletes an interface relationship between an asset model and an
+    # interface asset model.
+    #
+    # @option params [required, String] :asset_model_id
+    #   The ID of the asset model. This can be either the actual ID in UUID
+    #   format, or else externalId: followed by the external ID.
+    #
+    # @option params [required, String] :interface_asset_model_id
+    #   The ID of the interface asset model. This can be either the actual ID
+    #   in UUID format, or else externalId: followed by the external ID.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::DeleteAssetModelInterfaceRelationshipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAssetModelInterfaceRelationshipResponse#asset_model_id #asset_model_id} => String
+    #   * {Types::DeleteAssetModelInterfaceRelationshipResponse#interface_asset_model_id #interface_asset_model_id} => String
+    #   * {Types::DeleteAssetModelInterfaceRelationshipResponse#asset_model_arn #asset_model_arn} => String
+    #   * {Types::DeleteAssetModelInterfaceRelationshipResponse#asset_model_status #asset_model_status} => Types::AssetModelStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_asset_model_interface_relationship({
+    #     asset_model_id: "CustomID", # required
+    #     interface_asset_model_id: "CustomID", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.asset_model_id #=> String
+    #   resp.interface_asset_model_id #=> String
+    #   resp.asset_model_arn #=> String
+    #   resp.asset_model_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "PROPAGATING", "DELETING", "FAILED"
+    #   resp.asset_model_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.asset_model_status.error.message #=> String
+    #   resp.asset_model_status.error.details #=> Array
+    #   resp.asset_model_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.asset_model_status.error.details[0].message #=> String
+    #
+    # @overload delete_asset_model_interface_relationship(params = {})
+    # @param [Hash] params ({})
+    def delete_asset_model_interface_relationship(params = {}, options = {})
+      req = build_request(:delete_asset_model_interface_relationship, params)
+      req.send_request(options)
+    end
+
     # Deletes a computation model. This action can't be undone.
     #
     # @option params [required, String] :computation_model_id
@@ -3197,7 +3250,10 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
-    # Retrieves information about an asset model.
+    # Retrieves information about an asset model. This includes details
+    # about the asset model's properties, hierarchies, composite models,
+    # and any interface relationships if the asset model implements
+    # interfaces.
     #
     # @option params [required, String] :asset_model_id
     #   The ID of the asset model. This can be either the actual ID in UUID
@@ -3238,6 +3294,7 @@ module Aws::IoTSiteWise
     #   * {Types::DescribeAssetModelResponse#asset_model_last_update_date #asset_model_last_update_date} => Time
     #   * {Types::DescribeAssetModelResponse#asset_model_status #asset_model_status} => Types::AssetModelStatus
     #   * {Types::DescribeAssetModelResponse#asset_model_version #asset_model_version} => String
+    #   * {Types::DescribeAssetModelResponse#interface_details #interface_details} => Array&lt;Types::InterfaceRelationship&gt;
     #   * {Types::DescribeAssetModelResponse#e_tag #e_tag} => String
     #
     # @example Request syntax with placeholder values
@@ -3254,7 +3311,7 @@ module Aws::IoTSiteWise
     #   resp.asset_model_external_id #=> String
     #   resp.asset_model_arn #=> String
     #   resp.asset_model_name #=> String
-    #   resp.asset_model_type #=> String, one of "ASSET_MODEL", "COMPONENT_MODEL"
+    #   resp.asset_model_type #=> String, one of "ASSET_MODEL", "COMPONENT_MODEL", "INTERFACE"
     #   resp.asset_model_description #=> String
     #   resp.asset_model_properties #=> Array
     #   resp.asset_model_properties[0].id #=> String
@@ -3351,6 +3408,8 @@ module Aws::IoTSiteWise
     #   resp.asset_model_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
     #   resp.asset_model_status.error.details[0].message #=> String
     #   resp.asset_model_version #=> String
+    #   resp.interface_details #=> Array
+    #   resp.interface_details[0].id #=> String
     #   resp.e_tag #=> String
     #
     #
@@ -3490,6 +3549,49 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def describe_asset_model_composite_model(params = {}, options = {})
       req = build_request(:describe_asset_model_composite_model, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about an interface relationship between an asset
+    # model and an interface asset model.
+    #
+    # @option params [required, String] :asset_model_id
+    #   The ID of the asset model. This can be either the actual ID in UUID
+    #   format, or else externalId: followed by the external ID.
+    #
+    # @option params [required, String] :interface_asset_model_id
+    #   The ID of the interface asset model. This can be either the actual ID
+    #   in UUID format, or else externalId: followed by the external ID.
+    #
+    # @return [Types::DescribeAssetModelInterfaceRelationshipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAssetModelInterfaceRelationshipResponse#asset_model_id #asset_model_id} => String
+    #   * {Types::DescribeAssetModelInterfaceRelationshipResponse#interface_asset_model_id #interface_asset_model_id} => String
+    #   * {Types::DescribeAssetModelInterfaceRelationshipResponse#property_mappings #property_mappings} => Array&lt;Types::PropertyMapping&gt;
+    #   * {Types::DescribeAssetModelInterfaceRelationshipResponse#hierarchy_mappings #hierarchy_mappings} => Array&lt;Types::HierarchyMapping&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_asset_model_interface_relationship({
+    #     asset_model_id: "CustomID", # required
+    #     interface_asset_model_id: "CustomID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.asset_model_id #=> String
+    #   resp.interface_asset_model_id #=> String
+    #   resp.property_mappings #=> Array
+    #   resp.property_mappings[0].asset_model_property_id #=> String
+    #   resp.property_mappings[0].interface_asset_model_property_id #=> String
+    #   resp.hierarchy_mappings #=> Array
+    #   resp.hierarchy_mappings[0].asset_model_hierarchy_id #=> String
+    #   resp.hierarchy_mappings[0].interface_asset_model_hierarchy_id #=> String
+    #
+    # @overload describe_asset_model_interface_relationship(params = {})
+    # @param [Hash] params ({})
+    def describe_asset_model_interface_relationship(params = {}, options = {})
+      req = build_request(:describe_asset_model_interface_relationship, params)
       req.send_request(options)
     end
 
@@ -5536,6 +5638,9 @@ module Aws::IoTSiteWise
     #   resp.asset_model_property_summaries[0].path #=> Array
     #   resp.asset_model_property_summaries[0].path[0].id #=> String
     #   resp.asset_model_property_summaries[0].path[0].name #=> String
+    #   resp.asset_model_property_summaries[0].interface_summaries #=> Array
+    #   resp.asset_model_property_summaries[0].interface_summaries[0].interface_asset_model_id #=> String
+    #   resp.asset_model_property_summaries[0].interface_summaries[0].interface_asset_model_property_id #=> String
     #   resp.next_token #=> String
     #
     # @overload list_asset_model_properties(params = {})
@@ -5557,6 +5662,9 @@ module Aws::IoTSiteWise
     #   * **COMPONENT\_MODEL** – A reusable component that you can include in
     #     the composite models of other asset models. You can't create assets
     #     directly from this type of asset model.
+    #
+    #   * **INTERFACE** – An interface is a type of model that defines a
+    #     standard structure that can be applied to different asset models.
     #
     # @option params [String] :next_token
     #   The token to be used for the next set of paginated results.
@@ -5586,7 +5694,7 @@ module Aws::IoTSiteWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_asset_models({
-    #     asset_model_types: ["ASSET_MODEL"], # accepts ASSET_MODEL, COMPONENT_MODEL
+    #     asset_model_types: ["ASSET_MODEL"], # accepts ASSET_MODEL, COMPONENT_MODEL, INTERFACE
     #     next_token: "NextToken",
     #     max_results: 1,
     #     asset_model_version: "AssetModelVersionFilter",
@@ -5599,7 +5707,7 @@ module Aws::IoTSiteWise
     #   resp.asset_model_summaries[0].external_id #=> String
     #   resp.asset_model_summaries[0].arn #=> String
     #   resp.asset_model_summaries[0].name #=> String
-    #   resp.asset_model_summaries[0].asset_model_type #=> String, one of "ASSET_MODEL", "COMPONENT_MODEL"
+    #   resp.asset_model_summaries[0].asset_model_type #=> String, one of "ASSET_MODEL", "COMPONENT_MODEL", "INTERFACE"
     #   resp.asset_model_summaries[0].description #=> String
     #   resp.asset_model_summaries[0].creation_date #=> Time
     #   resp.asset_model_summaries[0].last_update_date #=> Time
@@ -6414,6 +6522,48 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Retrieves a paginated list of asset models that have a specific
+    # interface asset model applied to them.
+    #
+    # @option params [required, String] :interface_asset_model_id
+    #   The ID of the interface asset model. This can be either the actual ID
+    #   in UUID format, or else externalId: followed by the external ID.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for each paginated request.
+    #   Default: 50
+    #
+    # @return [Types::ListInterfaceRelationshipsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInterfaceRelationshipsResponse#interface_relationship_summaries #interface_relationship_summaries} => Array&lt;Types::InterfaceRelationshipSummary&gt;
+    #   * {Types::ListInterfaceRelationshipsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_interface_relationships({
+    #     interface_asset_model_id: "CustomID", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.interface_relationship_summaries #=> Array
+    #   resp.interface_relationship_summaries[0].id #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_interface_relationships(params = {})
+    # @param [Hash] params ({})
+    def list_interface_relationships(params = {}, options = {})
+      req = build_request(:list_interface_relationships, params)
+      req.send_request(options)
+    end
+
     # Retrieves a paginated list of IoT SiteWise Monitor portals.
     #
     # @option params [String] :next_token
@@ -6646,6 +6796,76 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def list_time_series(params = {}, options = {})
       req = build_request(:list_time_series, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates an interface relationship between an asset model
+    # and an interface asset model. This operation applies an interface to
+    # an asset model.
+    #
+    # @option params [required, String] :asset_model_id
+    #   The ID of the asset model. This can be either the actual ID in UUID
+    #   format, or else externalId: followed by the external ID.
+    #
+    # @option params [required, String] :interface_asset_model_id
+    #   The ID of the interface asset model. This can be either the actual ID
+    #   in UUID format, or else externalId: followed by the external ID.
+    #
+    # @option params [required, Types::PropertyMappingConfiguration] :property_mapping_configuration
+    #   The configuration for mapping properties from the interface asset
+    #   model to the asset model where the interface is applied. This
+    #   configuration controls how properties are matched and created during
+    #   the interface application process.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::PutAssetModelInterfaceRelationshipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAssetModelInterfaceRelationshipResponse#asset_model_id #asset_model_id} => String
+    #   * {Types::PutAssetModelInterfaceRelationshipResponse#interface_asset_model_id #interface_asset_model_id} => String
+    #   * {Types::PutAssetModelInterfaceRelationshipResponse#asset_model_arn #asset_model_arn} => String
+    #   * {Types::PutAssetModelInterfaceRelationshipResponse#asset_model_status #asset_model_status} => Types::AssetModelStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_asset_model_interface_relationship({
+    #     asset_model_id: "CustomID", # required
+    #     interface_asset_model_id: "CustomID", # required
+    #     property_mapping_configuration: { # required
+    #       match_by_property_name: false,
+    #       create_missing_property: false,
+    #       overrides: [
+    #         {
+    #           asset_model_property_id: "CustomID", # required
+    #           interface_asset_model_property_id: "CustomID", # required
+    #         },
+    #       ],
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.asset_model_id #=> String
+    #   resp.interface_asset_model_id #=> String
+    #   resp.asset_model_arn #=> String
+    #   resp.asset_model_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "PROPAGATING", "DELETING", "FAILED"
+    #   resp.asset_model_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.asset_model_status.error.message #=> String
+    #   resp.asset_model_status.error.details #=> Array
+    #   resp.asset_model_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.asset_model_status.error.details[0].message #=> String
+    #
+    # @overload put_asset_model_interface_relationship(params = {})
+    # @param [Hash] params ({})
+    def put_asset_model_interface_relationship(params = {}, options = {})
+      req = build_request(:put_asset_model_interface_relationship, params)
       req.send_request(options)
     end
 
@@ -7211,8 +7431,8 @@ module Aws::IoTSiteWise
     #             },
     #           },
     #           metric: {
-    #             expression: "Expression", # required
-    #             variables: [ # required
+    #             expression: "Expression",
+    #             variables: [
     #               {
     #                 name: "VariableName", # required
     #                 value: { # required
@@ -7303,8 +7523,8 @@ module Aws::IoTSiteWise
     #                 },
     #               },
     #               metric: {
-    #                 expression: "Expression", # required
-    #                 variables: [ # required
+    #                 expression: "Expression",
+    #                 variables: [
     #                   {
     #                     name: "VariableName", # required
     #                     value: { # required
@@ -7507,8 +7727,8 @@ module Aws::IoTSiteWise
     #             },
     #           },
     #           metric: {
-    #             expression: "Expression", # required
-    #             variables: [ # required
+    #             expression: "Expression",
+    #             variables: [
     #               {
     #                 name: "VariableName", # required
     #                 value: { # required
@@ -8117,7 +8337,7 @@ module Aws::IoTSiteWise
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

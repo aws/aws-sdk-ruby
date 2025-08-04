@@ -55,7 +55,7 @@ module Aws::S3Tables
   autoload :EndpointProvider, 'aws-sdk-s3tables/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-s3tables/endpoints'
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.14.0'
 
 end
 

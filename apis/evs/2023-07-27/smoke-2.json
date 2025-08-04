@@ -1,8 +1,8 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "ListEnvironmentHosts_ResourceNotFoundException",
-    "operationName" : "ListEnvironmentHosts",
+    "id" : "GetEnvironment_ResourceNotFoundException",
+    "operationName" : "GetEnvironment",
     "input" : {
       "environmentId" : "env-a1B2c3D4e5"
     },
@@ -18,8 +18,8 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetEnvironment_ResourceNotFoundException",
-    "operationName" : "GetEnvironment",
+    "id" : "ListEnvironmentHosts_ResourceNotFoundException",
+    "operationName" : "ListEnvironmentHosts",
     "input" : {
       "environmentId" : "env-a1B2c3D4e5"
     },

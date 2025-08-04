@@ -54,7 +54,7 @@ module Aws::IoT
   autoload :EndpointProvider, 'aws-sdk-iot/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iot/endpoints'
 
-  GEM_VERSION = '1.151.0'
+  GEM_VERSION = '1.152.0'
 
 end
 

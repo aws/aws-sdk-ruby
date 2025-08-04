@@ -54,7 +54,7 @@ module Aws::RoboMaker
   autoload :EndpointProvider, 'aws-sdk-robomaker/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-robomaker/endpoints'
 
-  GEM_VERSION = '1.86.0'
+  GEM_VERSION = '1.87.0'
 
 end
 

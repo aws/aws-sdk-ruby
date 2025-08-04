@@ -94,8 +94,8 @@ module Aws::SimpleDB
     #     class name or an instance of a plugin class.
     #
     #   @option options [required, Aws::CredentialProvider] :credentials
-    #     Your AWS credentials used for authentication. This can be an instance of any one of the
-    #     following classes:
+    #     Your AWS credentials used for authentication. This can be any class that includes and implements
+    #     `Aws::CredentialProvider`, or instance of any one of the following classes:
     #
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
@@ -123,8 +123,7 @@ module Aws::SimpleDB
     #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
     #       from the Cognito Identity service.
     #
-    #     When `:credentials` are not configured directly, the following
-    #     locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
     #
@@ -138,12 +137,10 @@ module Aws::SimpleDB
     #
     #     * `~/.aws/config`
     #
-    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
-    #       are very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts. Instance profile credential
-    #       fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
-    #       to `true`.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts are very aggressive.
+    #       Construct and pass an instance of `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts. Instance profile credential fetching can be disabled by
+    #       setting `ENV['AWS_EC2_METADATA_DISABLED']` to `true`.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -376,8 +373,8 @@ module Aws::SimpleDB
     #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
-    #     Your Bearer token used for authentication. This can be an instance of any one of the
-    #     following classes:
+    #     Your Bearer token used for authentication. This can be any class that includes and implements
+    #     `Aws::TokenProvider`, or instance of any one of the following classes:
     #
     #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
     #       tokens.
@@ -996,7 +993,7 @@ module Aws::SimpleDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-simpledb'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2025-08-04)
+------------------
+
+* Feature - TagResource API now throws ServiceQuotaExceededException when the number of tags on the Amazon EVS resource exceeds the maximum allowed. TooManyTagsException is deprecated.
+
 1.2.0 (2025-07-31)
 ------------------
 

@@ -26,7 +26,8 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Contains summary information about an actor in a memory store.
+    # Contains summary information about an actor in an AgentCore Memory
+    # resource.
     #
     # @!attribute [rw] actor_id
     #   The unique identifier of the actor.
@@ -81,8 +82,9 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Contains information about a branch in a memory store. Branches allow
-    # for organizing events into different conversation threads or paths.
+    # Contains information about a branch in an AgentCore Memory resource.
+    # Branches allow for organizing events into different conversation
+    # threads or paths.
     #
     # @!attribute [rw] root_event_id
     #   The identifier of the root event for this branch.
@@ -397,7 +399,8 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] memory_id
-    #   The identifier of the memory store in which to create the event.
+    #   The identifier of the AgentCore Memory resource in which to create
+    #   the event.
     #   @return [String]
     #
     # @!attribute [rw] actor_id
@@ -463,7 +466,8 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] memory_id
-    #   The identifier of the memory store from which to delete the event.
+    #   The identifier of the AgentCore Memory resource from which to delete
+    #   the event.
     #   @return [String]
     #
     # @!attribute [rw] session_id
@@ -502,8 +506,8 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] memory_id
-    #   The identifier of the memory store from which to delete the memory
-    #   record.
+    #   The identifier of the AgentCore Memory resource from which to delete
+    #   the memory record.
     #   @return [String]
     #
     # @!attribute [rw] memory_record_id
@@ -531,10 +535,11 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Contains information about an event in a memory store.
+    # Contains information about an event in an AgentCore Memory resource.
     #
     # @!attribute [rw] memory_id
-    #   The identifier of the memory store containing the event.
+    #   The identifier of the AgentCore Memory resource containing the
+    #   event.
     #   @return [String]
     #
     # @!attribute [rw] actor_id
@@ -726,7 +731,8 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] memory_id
-    #   The identifier of the memory store containing the event.
+    #   The identifier of the AgentCore Memory resource containing the
+    #   event.
     #   @return [String]
     #
     # @!attribute [rw] session_id
@@ -765,7 +771,8 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] memory_id
-    #   The identifier of the memory store containing the memory record.
+    #   The identifier of the AgentCore Memory resource containing the
+    #   memory record.
     #   @return [String]
     #
     # @!attribute [rw] memory_record_id
@@ -828,10 +835,6 @@ module Aws::BedrockAgentCore
     #   Token of.
     #   @return [String]
     #
-    # @!attribute [rw] user_id
-    #   The user ID of the user you're retrieving the token on behalf of.
-    #   @return [String]
-    #
     # @!attribute [rw] resource_credential_provider_name
     #   Reference to the credential provider
     #   @return [String]
@@ -863,7 +866,6 @@ module Aws::BedrockAgentCore
     #
     class GetResourceOauth2TokenRequest < Struct.new(
       :workload_identity_token,
-      :user_id,
       :resource_credential_provider_name,
       :scopes,
       :oauth2_flow,
@@ -1084,7 +1086,7 @@ module Aws::BedrockAgentCore
     #
     # @!attribute [rw] qualifier
     #   The qualifier to use for the agent runtime. This can be a version
-    #   number or an alias name that points to a specific version. If not
+    #   number or an endpoint name that points to a specific version. If not
     #   specified, Amazon Bedrock uses the default version of the agent
     #   runtime.
     #   @return [String]
@@ -1235,7 +1237,8 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] memory_id
-    #   The identifier of the memory store for which to list actors.
+    #   The identifier of the AgentCore Memory resource for which to list
+    #   actors.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1390,7 +1393,8 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] memory_id
-    #   The identifier of the memory store for which to list events.
+    #   The identifier of the AgentCore Memory resource for which to list
+    #   events.
     #   @return [String]
     #
     # @!attribute [rw] session_id
@@ -1457,7 +1461,8 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] memory_id
-    #   The identifier of the memory store for which to list memory records.
+    #   The identifier of the AgentCore Memory resource for which to list
+    #   memory records.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1514,7 +1519,8 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] memory_id
-    #   The identifier of the memory store for which to list sessions.
+    #   The identifier of the AgentCore Memory resource for which to list
+    #   sessions.
     #   @return [String]
     #
     # @!attribute [rw] actor_id
@@ -1603,7 +1609,8 @@ module Aws::BedrockAgentCore
       class Unknown < MemoryContent; end
     end
 
-    # Contains information about a memory record in a memory store.
+    # Contains information about a memory record in an AgentCore Memory
+    # resource.
     #
     # @!attribute [rw] memory_record_id
     #   The unique identifier of the memory record.
@@ -1759,8 +1766,8 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] memory_id
-    #   The identifier of the memory store from which to retrieve memory
-    #   records.
+    #   The identifier of the AgentCore Memory resource from which to
+    #   retrieve memory records.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1888,7 +1895,8 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Contains summary information about a session in a memory store.
+    # Contains summary information about a session in an AgentCore Memory
+    # resource.
     #
     # @!attribute [rw] session_id
     #   The unique identifier of the session.

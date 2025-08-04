@@ -55,7 +55,7 @@ module Aws::SES
   autoload :EndpointProvider, 'aws-sdk-ses/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ses/endpoints'
 
-  GEM_VERSION = '1.87.0'
+  GEM_VERSION = '1.88.0'
 
 end
 

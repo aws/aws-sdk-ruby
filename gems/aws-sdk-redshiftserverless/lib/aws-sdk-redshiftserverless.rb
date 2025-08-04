@@ -54,7 +54,7 @@ module Aws::RedshiftServerless
   autoload :EndpointProvider, 'aws-sdk-redshiftserverless/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-redshiftserverless/endpoints'
 
-  GEM_VERSION = '1.53.0'
+  GEM_VERSION = '1.54.0'
 
 end
 

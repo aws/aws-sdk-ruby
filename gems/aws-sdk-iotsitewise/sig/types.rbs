@@ -226,6 +226,7 @@ module Aws::IoTSiteWise
       attr_accessor type: Types::PropertyType
       attr_accessor asset_model_composite_model_id: ::String
       attr_accessor path: ::Array[Types::AssetModelPropertyPathSegment]
+      attr_accessor interface_summaries: ::Array[Types::InterfaceSummary]
       SENSITIVE: []
     end
 
@@ -240,7 +241,7 @@ module Aws::IoTSiteWise
       attr_accessor external_id: ::String
       attr_accessor arn: ::String
       attr_accessor name: ::String
-      attr_accessor asset_model_type: ("ASSET_MODEL" | "COMPONENT_MODEL")
+      attr_accessor asset_model_type: ("ASSET_MODEL" | "COMPONENT_MODEL" | "INTERFACE")
       attr_accessor description: ::String
       attr_accessor creation_date: ::Time
       attr_accessor last_update_date: ::Time
@@ -720,7 +721,7 @@ module Aws::IoTSiteWise
 
     class CreateAssetModelRequest
       attr_accessor asset_model_name: ::String
-      attr_accessor asset_model_type: ("ASSET_MODEL" | "COMPONENT_MODEL")
+      attr_accessor asset_model_type: ("ASSET_MODEL" | "COMPONENT_MODEL" | "INTERFACE")
       attr_accessor asset_model_id: ::String
       attr_accessor asset_model_external_id: ::String
       attr_accessor asset_model_description: ::String
@@ -975,6 +976,21 @@ module Aws::IoTSiteWise
       SENSITIVE: []
     end
 
+    class DeleteAssetModelInterfaceRelationshipRequest
+      attr_accessor asset_model_id: ::String
+      attr_accessor interface_asset_model_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAssetModelInterfaceRelationshipResponse
+      attr_accessor asset_model_id: ::String
+      attr_accessor interface_asset_model_id: ::String
+      attr_accessor asset_model_arn: ::String
+      attr_accessor asset_model_status: Types::AssetModelStatus
+      SENSITIVE: []
+    end
+
     class DeleteAssetModelRequest
       attr_accessor asset_model_id: ::String
       attr_accessor client_token: ::String
@@ -1137,6 +1153,20 @@ module Aws::IoTSiteWise
       SENSITIVE: []
     end
 
+    class DescribeAssetModelInterfaceRelationshipRequest
+      attr_accessor asset_model_id: ::String
+      attr_accessor interface_asset_model_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAssetModelInterfaceRelationshipResponse
+      attr_accessor asset_model_id: ::String
+      attr_accessor interface_asset_model_id: ::String
+      attr_accessor property_mappings: ::Array[Types::PropertyMapping]
+      attr_accessor hierarchy_mappings: ::Array[Types::HierarchyMapping]
+      SENSITIVE: []
+    end
+
     class DescribeAssetModelRequest
       attr_accessor asset_model_id: ::String
       attr_accessor exclude_properties: bool
@@ -1149,7 +1179,7 @@ module Aws::IoTSiteWise
       attr_accessor asset_model_external_id: ::String
       attr_accessor asset_model_arn: ::String
       attr_accessor asset_model_name: ::String
-      attr_accessor asset_model_type: ("ASSET_MODEL" | "COMPONENT_MODEL")
+      attr_accessor asset_model_type: ("ASSET_MODEL" | "COMPONENT_MODEL" | "INTERFACE")
       attr_accessor asset_model_description: ::String
       attr_accessor asset_model_properties: ::Array[Types::AssetModelProperty]
       attr_accessor asset_model_hierarchies: ::Array[Types::AssetModelHierarchy]
@@ -1159,6 +1189,7 @@ module Aws::IoTSiteWise
       attr_accessor asset_model_last_update_date: ::Time
       attr_accessor asset_model_status: Types::AssetModelStatus
       attr_accessor asset_model_version: ::String
+      attr_accessor interface_details: ::Array[Types::InterfaceRelationship]
       attr_accessor e_tag: ::String
       SENSITIVE: []
     end
@@ -1659,6 +1690,12 @@ module Aws::IoTSiteWise
       SENSITIVE: []
     end
 
+    class HierarchyMapping
+      attr_accessor asset_model_hierarchy_id: ::String
+      attr_accessor interface_asset_model_hierarchy_id: ::String
+      SENSITIVE: []
+    end
+
     class IAMRoleIdentity
       attr_accessor arn: ::String
       SENSITIVE: []
@@ -1692,6 +1729,22 @@ module Aws::IoTSiteWise
     class ImageLocation
       attr_accessor id: ::String
       attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class InterfaceRelationship
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class InterfaceRelationshipSummary
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class InterfaceSummary
+      attr_accessor interface_asset_model_id: ::String
+      attr_accessor interface_asset_model_property_id: ::String
       SENSITIVE: []
     end
 
@@ -1820,7 +1873,7 @@ module Aws::IoTSiteWise
     end
 
     class ListAssetModelsRequest
-      attr_accessor asset_model_types: ::Array[("ASSET_MODEL" | "COMPONENT_MODEL")]
+      attr_accessor asset_model_types: ::Array[("ASSET_MODEL" | "COMPONENT_MODEL" | "INTERFACE")]
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor asset_model_version: ::String
@@ -2010,6 +2063,19 @@ module Aws::IoTSiteWise
       SENSITIVE: []
     end
 
+    class ListInterfaceRelationshipsRequest
+      attr_accessor interface_asset_model_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListInterfaceRelationshipsResponse
+      attr_accessor interface_relationship_summaries: ::Array[Types::InterfaceRelationshipSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListPortalsRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -2193,6 +2259,19 @@ module Aws::IoTSiteWise
       SENSITIVE: []
     end
 
+    class PropertyMapping
+      attr_accessor asset_model_property_id: ::String
+      attr_accessor interface_asset_model_property_id: ::String
+      SENSITIVE: []
+    end
+
+    class PropertyMappingConfiguration
+      attr_accessor match_by_property_name: bool
+      attr_accessor create_missing_property: bool
+      attr_accessor overrides: ::Array[Types::PropertyMapping]
+      SENSITIVE: []
+    end
+
     class PropertyNotification
       attr_accessor topic: ::String
       attr_accessor state: ("ENABLED" | "DISABLED")
@@ -2209,6 +2288,22 @@ module Aws::IoTSiteWise
 
     class PropertyValueNullValue
       attr_accessor value_type: ("D" | "B" | "S" | "I" | "U")
+      SENSITIVE: []
+    end
+
+    class PutAssetModelInterfaceRelationshipRequest
+      attr_accessor asset_model_id: ::String
+      attr_accessor interface_asset_model_id: ::String
+      attr_accessor property_mapping_configuration: Types::PropertyMappingConfiguration
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class PutAssetModelInterfaceRelationshipResponse
+      attr_accessor asset_model_id: ::String
+      attr_accessor interface_asset_model_id: ::String
+      attr_accessor asset_model_arn: ::String
+      attr_accessor asset_model_status: Types::AssetModelStatus
       SENSITIVE: []
     end
 

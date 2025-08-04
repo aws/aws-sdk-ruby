@@ -120,6 +120,23 @@ module Aws
                                      ) -> _AssociateTrialComponentResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateTrialComponentResponseSuccess
 
+      interface _AttachClusterNodeVolumeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AttachClusterNodeVolumeResponse]
+        def cluster_arn: () -> ::String
+        def node_id: () -> ::String
+        def volume_id: () -> ::String
+        def attach_time: () -> ::Time
+        def status: () -> ("attaching" | "attached" | "detaching" | "detached" | "busy")
+        def device_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#attach_cluster_node_volume-instance_method
+      def attach_cluster_node_volume: (
+                                        cluster_arn: ::String,
+                                        node_id: ::String,
+                                        volume_id: ::String
+                                      ) -> _AttachClusterNodeVolumeResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachClusterNodeVolumeResponseSuccess
+
       interface _BatchDeleteClusterNodesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteClusterNodesResponse]
         def failed: () -> ::Array[Types::BatchDeleteClusterNodesError]
@@ -6630,6 +6647,23 @@ module Aws
                                workteam_name: ::String
                              ) -> _DescribeWorkteamResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkteamResponseSuccess
+
+      interface _DetachClusterNodeVolumeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetachClusterNodeVolumeResponse]
+        def cluster_arn: () -> ::String
+        def node_id: () -> ::String
+        def volume_id: () -> ::String
+        def attach_time: () -> ::Time
+        def status: () -> ("attaching" | "attached" | "detaching" | "detached" | "busy")
+        def device_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#detach_cluster_node_volume-instance_method
+      def detach_cluster_node_volume: (
+                                        cluster_arn: ::String,
+                                        node_id: ::String,
+                                        volume_id: ::String
+                                      ) -> _DetachClusterNodeVolumeResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetachClusterNodeVolumeResponseSuccess
 
       interface _DisableSagemakerServicecatalogPortfolioResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisableSagemakerServicecatalogPortfolioOutput]

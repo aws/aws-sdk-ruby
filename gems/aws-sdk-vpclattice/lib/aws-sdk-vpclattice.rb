@@ -54,7 +54,7 @@ module Aws::VPCLattice
   autoload :EndpointProvider, 'aws-sdk-vpclattice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-vpclattice/endpoints'
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end
 

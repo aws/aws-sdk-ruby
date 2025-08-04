@@ -54,7 +54,7 @@ module Aws::SsmSap
   autoload :EndpointProvider, 'aws-sdk-ssmsap/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ssmsap/endpoints'
 
-  GEM_VERSION = '1.40.0'
+  GEM_VERSION = '1.41.0'
 
 end
 

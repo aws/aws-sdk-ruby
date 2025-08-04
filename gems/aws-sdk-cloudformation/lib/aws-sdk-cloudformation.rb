@@ -59,7 +59,7 @@ module Aws::CloudFormation
   autoload :StackResource, 'aws-sdk-cloudformation/stack_resource'
   autoload :StackResourceSummary, 'aws-sdk-cloudformation/stack_resource_summary'
 
-  GEM_VERSION = '1.136.0'
+  GEM_VERSION = '1.137.0'
 
 end
 

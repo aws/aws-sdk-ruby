@@ -96,7 +96,8 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # Contains the summary of the actions.
+    # Contains the summary of the actions, including information about where
+    # the action resolves to.
     #
     # @!attribute [rw] action_id
     #   The ID of the action.
@@ -936,7 +937,9 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # Contains a summary of a property associated with a model.
+    # Contains a summary of a property associated with a model. This
+    # includes information about which interfaces the property belongs to,
+    # if any.
     #
     # @!attribute [rw] id
     #   The ID of the property.
@@ -983,6 +986,12 @@ module Aws::IoTSiteWise
     #   model.
     #   @return [Array<Types::AssetModelPropertyPathSegment>]
     #
+    # @!attribute [rw] interface_summaries
+    #   A list of interface summaries that describe which interfaces this
+    #   property belongs to, including the interface asset model ID and the
+    #   corresponding property ID in the interface.
+    #   @return [Array<Types::InterfaceSummary>]
+    #
     class AssetModelPropertySummary < Struct.new(
       :id,
       :external_id,
@@ -992,7 +1001,8 @@ module Aws::IoTSiteWise
       :unit,
       :type,
       :asset_model_composite_model_id,
-      :path)
+      :path,
+      :interface_summaries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4244,6 +4254,65 @@ module Aws::IoTSiteWise
     end
 
     # @!attribute [rw] asset_model_id
+    #   The ID of the asset model. This can be either the actual ID in UUID
+    #   format, or else externalId: followed by the external ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] interface_asset_model_id
+    #   The ID of the interface asset model. This can be either the actual
+    #   ID in UUID format, or else externalId: followed by the external ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class DeleteAssetModelInterfaceRelationshipRequest < Struct.new(
+      :asset_model_id,
+      :interface_asset_model_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asset_model_id
+    #   The ID of the asset model.
+    #   @return [String]
+    #
+    # @!attribute [rw] interface_asset_model_id
+    #   The ID of the interface asset model.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_model_arn
+    #   The ARN of the asset model, which has the following format.
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:asset-model/${AssetModelId}`
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_model_status
+    #   Contains current status information for an asset model. For more
+    #   information, see [Asset and model states][1] in the *IoT SiteWise
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html
+    #   @return [Types::AssetModelStatus]
+    #
+    class DeleteAssetModelInterfaceRelationshipResponse < Struct.new(
+      :asset_model_id,
+      :interface_asset_model_id,
+      :asset_model_arn,
+      :asset_model_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asset_model_id
     #   The ID of the asset model to delete. This can be either the actual
     #   ID in UUID format, or else `externalId:` followed by the external
     #   ID, if it has one. For more information, see [Referencing objects
@@ -4847,6 +4916,50 @@ module Aws::IoTSiteWise
 
     # @!attribute [rw] asset_model_id
     #   The ID of the asset model. This can be either the actual ID in UUID
+    #   format, or else externalId: followed by the external ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] interface_asset_model_id
+    #   The ID of the interface asset model. This can be either the actual
+    #   ID in UUID format, or else externalId: followed by the external ID.
+    #   @return [String]
+    #
+    class DescribeAssetModelInterfaceRelationshipRequest < Struct.new(
+      :asset_model_id,
+      :interface_asset_model_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asset_model_id
+    #   The ID of the asset model.
+    #   @return [String]
+    #
+    # @!attribute [rw] interface_asset_model_id
+    #   The ID of the interface asset model.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_mappings
+    #   A list of property mappings between the interface asset model and
+    #   the asset model where the interface is applied.
+    #   @return [Array<Types::PropertyMapping>]
+    #
+    # @!attribute [rw] hierarchy_mappings
+    #   A list of hierarchy mappings between the interface asset model and
+    #   the asset model where the interface is applied.
+    #   @return [Array<Types::HierarchyMapping>]
+    #
+    class DescribeAssetModelInterfaceRelationshipResponse < Struct.new(
+      :asset_model_id,
+      :interface_asset_model_id,
+      :property_mappings,
+      :hierarchy_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asset_model_id
+    #   The ID of the asset model. This can be either the actual ID in UUID
     #   format, or else `externalId:` followed by the external ID, if it has
     #   one. For more information, see [Referencing objects with external
     #   IDs][1] in the *IoT SiteWise User Guide*.
@@ -4964,6 +5077,12 @@ module Aws::IoTSiteWise
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html
     #   @return [String]
     #
+    # @!attribute [rw] interface_details
+    #   A list of interface details that describe the interfaces implemented
+    #   by this asset model, including interface asset model IDs and
+    #   property mappings.
+    #   @return [Array<Types::InterfaceRelationship>]
+    #
     # @!attribute [rw] e_tag
     #   The entity tag (ETag) is a hash of the retrieved version of the
     #   asset model. It's used to make concurrent updates safely to the
@@ -4993,6 +5112,7 @@ module Aws::IoTSiteWise
       :asset_model_last_update_date,
       :asset_model_status,
       :asset_model_version,
+      :interface_details,
       :e_tag)
       SENSITIVE = []
       include Aws::Structure
@@ -5578,7 +5698,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] target_resource
-    #   The resource the action will be taken on.
+    #   The resource the action will be taken on. This can include
+    #   asset-based resources and computation model resources.
     #   @return [Types::TargetResource]
     #
     # @!attribute [rw] target_resource_version
@@ -6452,7 +6573,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] target_resource
-    #   The resource the action will be taken on.
+    #   The resource the action will be taken on. This can include
+    #   asset-based resources and computation model resources.
     #   @return [Types::TargetResource]
     #
     # @!attribute [rw] target_resource_version
@@ -7138,6 +7260,25 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # Maps a hierarchy from an interface asset model to a hierarchy in the
+    # asset model where the interface is applied.
+    #
+    # @!attribute [rw] asset_model_hierarchy_id
+    #   The ID of the hierarchy in the asset model where the interface is
+    #   applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] interface_asset_model_hierarchy_id
+    #   The ID of the hierarchy in the interface asset model.
+    #   @return [String]
+    #
+    class HierarchyMapping < Struct.new(
+      :asset_model_hierarchy_id,
+      :interface_asset_model_hierarchy_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about an Identity and Access Management role. For
     # more information, see [IAM roles][1] in the *IAM User Guide*.
     #
@@ -7277,6 +7418,53 @@ module Aws::IoTSiteWise
     class ImageLocation < Struct.new(
       :id,
       :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the relationship between an asset model and
+    # an interface asset model that is applied to it.
+    #
+    # @!attribute [rw] id
+    #   The ID of the asset model that has the interface applied to it.
+    #   @return [String]
+    #
+    class InterfaceRelationship < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about an interface relationship, which
+    # defines how an interface is applied to an asset model. This summary
+    # provides the essential identifiers needed to retrieve detailed
+    # information about the relationship.
+    #
+    # @!attribute [rw] id
+    #   The ID of the asset model that has the interface applied to it.
+    #   @return [String]
+    #
+    class InterfaceRelationshipSummary < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about an interface that a property
+    # belongs to.
+    #
+    # @!attribute [rw] interface_asset_model_id
+    #   The ID of the interface asset model that contains this property.
+    #   @return [String]
+    #
+    # @!attribute [rw] interface_asset_model_property_id
+    #   The ID of the property in the interface asset model that corresponds
+    #   to this property.
+    #   @return [String]
+    #
+    class InterfaceSummary < Struct.new(
+      :interface_asset_model_id,
+      :interface_asset_model_property_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7739,6 +7927,9 @@ module Aws::IoTSiteWise
     #   * **COMPONENT\_MODEL** – A reusable component that you can include
     #     in the composite models of other asset models. You can't create
     #     assets directly from this type of asset model.
+    #
+    #   * **INTERFACE** – An interface is a type of model that defines a
+    #     standard structure that can be applied to different asset models.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -8403,6 +8594,44 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # @!attribute [rw] interface_asset_model_id
+    #   The ID of the interface asset model. This can be either the actual
+    #   ID in UUID format, or else externalId: followed by the external ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for each paginated request.
+    #   Default: 50
+    #   @return [Integer]
+    #
+    class ListInterfaceRelationshipsRequest < Struct.new(
+      :interface_asset_model_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] interface_relationship_summaries
+    #   A list that summarizes each interface relationship.
+    #   @return [Array<Types::InterfaceRelationshipSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    class ListInterfaceRelationshipsResponse < Struct.new(
+      :interface_relationship_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   The token to be used for the next set of paginated results.
     #   @return [String]
@@ -9042,6 +9271,53 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # Maps a property from an interface asset model to a property in the
+    # asset model where the interface is applied.
+    #
+    # @!attribute [rw] asset_model_property_id
+    #   The ID of the property in the asset model where the interface is
+    #   applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] interface_asset_model_property_id
+    #   The ID of the property in the interface asset model.
+    #   @return [String]
+    #
+    class PropertyMapping < Struct.new(
+      :asset_model_property_id,
+      :interface_asset_model_property_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configuration options for mapping properties from an
+    # interface asset model to an asset model where the interface is
+    # applied.
+    #
+    # @!attribute [rw] match_by_property_name
+    #   If true, properties are matched by name between the interface asset
+    #   model and the asset model where the interface is applied.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] create_missing_property
+    #   If true, missing properties from the interface asset model are
+    #   automatically created in the asset model where the interface is
+    #   applied.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] overrides
+    #   A list of specific property mappings that override the automatic
+    #   mapping by name when an interface is applied to an asset model.
+    #   @return [Array<Types::PropertyMapping>]
+    #
+    class PropertyMappingConfiguration < Struct.new(
+      :match_by_property_name,
+      :create_missing_property,
+      :overrides)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains asset property value notification information. When the
     # notification state is enabled, IoT SiteWise publishes property value
     # updates to a unique MQTT topic. For more information, see [Interacting
@@ -9118,6 +9394,73 @@ module Aws::IoTSiteWise
     #
     class PropertyValueNullValue < Struct.new(
       :value_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asset_model_id
+    #   The ID of the asset model. This can be either the actual ID in UUID
+    #   format, or else externalId: followed by the external ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] interface_asset_model_id
+    #   The ID of the interface asset model. This can be either the actual
+    #   ID in UUID format, or else externalId: followed by the external ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_mapping_configuration
+    #   The configuration for mapping properties from the interface asset
+    #   model to the asset model where the interface is applied. This
+    #   configuration controls how properties are matched and created during
+    #   the interface application process.
+    #   @return [Types::PropertyMappingConfiguration]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class PutAssetModelInterfaceRelationshipRequest < Struct.new(
+      :asset_model_id,
+      :interface_asset_model_id,
+      :property_mapping_configuration,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asset_model_id
+    #   The ID of the asset model.
+    #   @return [String]
+    #
+    # @!attribute [rw] interface_asset_model_id
+    #   The ID of the interface asset model.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_model_arn
+    #   The ARN of the asset model, which has the following format.
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:asset-model/${AssetModelId}`
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_model_status
+    #   Contains current status information for an asset model. For more
+    #   information, see [Asset and model states][1] in the *IoT SiteWise
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html
+    #   @return [Types::AssetModelStatus]
+    #
+    class PutAssetModelInterfaceRelationshipResponse < Struct.new(
+      :asset_model_id,
+      :interface_asset_model_id,
+      :asset_model_arn,
+      :asset_model_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9583,7 +9926,8 @@ module Aws::IoTSiteWise
 
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # The resource the action will be taken on.
+    # The resource the action will be taken on. This can include asset-based
+    # resources and computation model resources.
     #
     # @!attribute [rw] asset_id
     #   The ID of the asset, in UUID format.

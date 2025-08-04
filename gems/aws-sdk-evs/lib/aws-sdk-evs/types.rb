@@ -10,7 +10,13 @@
 module Aws::Evs
   module Types
 
-    # A check on the environment to identify environment health and validate
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  A check on the environment to identify environment health and
+    # validate
     # VMware VCF licensing compliance.
     #
     # @!attribute [rw] type
@@ -56,7 +62,12 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # The connectivity configuration for the environment. Amazon EVS
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  The connectivity configuration for the environment. Amazon EVS
     # requires that you specify two route server peer IDs. During
     # environment creation, the route server endpoints peer with the NSX
     # uplink VLAN for connectivity to the NSX overlay network.
@@ -183,24 +194,27 @@ module Aws::Evs
     #   @return [Types::ServiceAccessSecurityGroups]
     #
     # @!attribute [rw] vpc_id
-    #   A unique ID for the VPC that connects to the environment control
-    #   plane for service access.
+    #   A unique ID for the VPC that the environment is deployed inside.
     #
     #   Amazon EVS requires that all VPC subnets exist in a single
     #   Availability Zone in a Region where the service is available.
     #
-    #   The VPC that you select must have a valid DHCP option set with
+    #   The VPC that you specify must have a valid DHCP option set with
     #   domain name, at least two DNS servers, and an NTP server. These
-    #   settings are used to configure your VCF appliances and hosts.
-    #
-    #   If you plan to use HCX over the internet, choose a VPC that has a
-    #   primary CIDR block and a /28 secondary CIDR block from an IPAM pool.
-    #   Make sure that your VPC also has an attached internet gateway.
+    #   settings are used to configure your VCF appliances and hosts. The
+    #   VPC cannot be used with any other deployed Amazon EVS environment.
+    #   Amazon EVS does not provide multi-VPC support for environments at
+    #   this time.
     #
     #   Amazon EVS does not support the following Amazon Web Services
     #   networking options for NSX overlay connectivity: cross-Region VPC
     #   peering, Amazon S3 gateway endpoints, or Amazon Web Services Direct
     #   Connect virtual private gateway associations.
+    #
+    #   <note markdown="1"> Ensure that you specify a VPC that is adequately sized to
+    #   accommodate the \{evws} subnets.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] service_access_subnet_id
@@ -216,17 +230,21 @@ module Aws::Evs
     #   @return [String]
     #
     # @!attribute [rw] terms_accepted
-    #   Customer confirmation that the customer has purchased and maintains
-    #   sufficient VCF software licenses to cover all physical processor
-    #   cores in the environment, in compliance with VMware's licensing
-    #   requirements and terms of use.
+    #   Customer confirmation that the customer has purchased and will
+    #   continue to maintain the required number of VCF software licenses to
+    #   cover all physical processor cores in the Amazon EVS environment.
+    #   Information about your VCF software in Amazon EVS will be shared
+    #   with Broadcom to verify license compliance. Amazon EVS does not
+    #   validate license keys. To validate license keys, visit the Broadcom
+    #   support portal.
     #   @return [Boolean]
     #
     # @!attribute [rw] license_info
     #   The license information that Amazon EVS requires to create an
     #   environment. Amazon EVS requires two license keys: a VCF solution
-    #   key and a vSAN license key. VCF licenses must have sufficient core
-    #   entitlements to cover vCPU core and vSAN storage capacity needs.
+    #   key and a vSAN license key. The VCF solution key must cover a
+    #   minimum of 256 cores. The vSAN license key must provide at least 110
+    #   TiB of vSAN capacity.
     #
     #   VCF licenses can be used for only one Amazon EVS environment. Amazon
     #   EVS does not support reuse of VCF licenses for multiple
@@ -236,8 +254,13 @@ module Aws::Evs
     #   @return [Array<Types::LicenseInfo>]
     #
     # @!attribute [rw] initial_vlans
-    #   The initial VLAN subnets for the environment. You must specify a
-    #   non-overlapping CIDR block for each VLAN subnet.
+    #   The initial VLAN subnets for the Amazon EVS environment.
+    #
+    #   <note markdown="1"> For each Amazon EVS VLAN subnet, you must specify a non-overlapping
+    #   CIDR block. Amazon EVS VLAN subnets have a minimum CIDR block size
+    #   of /28 and a maximum size of /24.
+    #
+    #    </note>
     #   @return [Types::InitialVlans]
     #
     # @!attribute [rw] hosts
@@ -245,18 +268,18 @@ module Aws::Evs
     #   you provide details for a minimum of 4 hosts during environment
     #   creation.
     #
-    #   For each host, you must provide the desired hostname, EC2 SSH key,
-    #   and EC2 instance type. Optionally, you can also provide a partition
-    #   or cluster placement group to use, or use Amazon EC2 Dedicated
-    #   Hosts.
+    #   For each host, you must provide the desired hostname, EC2 SSH
+    #   keypair name, and EC2 instance type. Optionally, you can also
+    #   provide a partition or cluster placement group to use, or use Amazon
+    #   EC2 Dedicated Hosts.
     #   @return [Array<Types::HostInfoForCreate>]
     #
     # @!attribute [rw] connectivity_info
     #   The connectivity configuration for the environment. Amazon EVS
     #   requires that you specify two route server peer IDs. During
     #   environment creation, the route server endpoints peer with the NSX
-    #   edges over the NSX, providing BGP dynamic routing for overlay
-    #   networks.
+    #   edges over the NSX uplink subnet, providing BGP-based dynamic
+    #   routing for overlay networks.
     #   @return [Types::ConnectivityInfo]
     #
     # @!attribute [rw] vcf_hostnames
@@ -401,7 +424,12 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # An object that represents an Amazon EVS environment.
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  An object that represents an Amazon EVS environment.
     #
     # @!attribute [rw] environment_id
     #   The unique ID for the environment.
@@ -447,16 +475,21 @@ module Aws::Evs
     #   @return [String]
     #
     # @!attribute [rw] terms_accepted
-    #   Customer confirmation that the customer has purchased and maintains
-    #   sufficient VCF software licenses to cover all physical processor
-    #   cores in the environment, in compliance with VMware's licensing
-    #   requirements and terms of use.
+    #   Customer confirmation that the customer has purchased and will
+    #   continue to maintain the required number of VCF software licenses to
+    #   cover all physical processor cores in the Amazon EVS environment.
+    #   Information about your VCF software in Amazon EVS will be shared
+    #   with Broadcom to verify license compliance. Amazon EVS does not
+    #   validate license keys. To validate license keys, visit the Broadcom
+    #   support portal.
     #   @return [Boolean]
     #
     # @!attribute [rw] license_info
     #   The license information that Amazon EVS requires to create an
     #   environment. Amazon EVS requires two license keys: a VCF solution
-    #   key and a vSAN license key.
+    #   key and a vSAN license key. The VCF solution key must cover a
+    #   minimum of 256 cores. The vSAN license key must provide at least 110
+    #   TiB of vSAN capacity.
     #   @return [Array<Types::LicenseInfo>]
     #
     # @!attribute [rw] site_id
@@ -546,7 +579,12 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # A list of environments with summarized environment details.
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  A list of environments with summarized environment details.
     #
     # @!attribute [rw] environment_id
     #   A unique ID for the environment.
@@ -621,7 +659,12 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # An ESXi host that runs on an Amazon EC2 bare metal instance. Four
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  An ESXi host that runs on an Amazon EC2 bare metal instance. Four
     # hosts are created in an Amazon EVS environment during environment
     # creation. You can add hosts to an environment using the
     # `CreateEnvironmentHost` operation. Amazon EVS supports 4-16 hosts per
@@ -700,9 +743,15 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # An object that represents a host.
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
     #
-    # <note markdown="1"> You cannot use `dedicatedHostId` and `placementGroupId` together in
+    #  </note>
+    #
+    #  An object that represents a host.
+    #
+    #  <note markdown="1"> You cannot use `dedicatedHostId` and
+    # `placementGroupId` together in
     # the same `HostInfoForCreate`object. This results in a
     # `ValidationException` response.
     #
@@ -741,17 +790,30 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # An object that represents an initial VLAN subnet for the environment.
-    # Amazon EVS creates initial VLAN subnets when you first create the
-    # environment. You must specify a non-overlapping CIDR block for each
-    # VLAN subnet. Amazon EVS creates the following 10 VLAN subnets: host
-    # management VLAN, vMotion VLAN, vSAN VLAN, VTEP VLAN, Edge VTEP VLAN,
-    # Management VM VLAN, HCX uplink VLAN, NSX uplink VLAN, expansion VLAN
-    # 1, expansion VLAN 2.
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  An object that represents an initial VLAN subnet for the Amazon EVS
+    # environment. Amazon EVS creates initial VLAN subnets when you first
+    # create the environment. Amazon EVS creates the following 10 VLAN
+    # subnets: host management VLAN, vMotion VLAN, vSAN VLAN, VTEP VLAN,
+    # Edge VTEP VLAN, Management VM VLAN, HCX uplink VLAN, NSX uplink VLAN,
+    # expansion VLAN 1, expansion VLAN 2.
+    #
+    #  <note markdown="1"> For each Amazon EVS VLAN subnet, you must specify
+    # a non-overlapping
+    # CIDR block. Amazon EVS VLAN subnets have a minimum CIDR block size of
+    # /28 and a maximum size of /24.
+    #
+    #  </note>
     #
     # @!attribute [rw] cidr
-    #   The CIDR block that you provide to create a VLAN subnet. VLAN CIDR
-    #   blocks must not overlap with other subnets in the VPC.
+    #   The CIDR block that you provide to create an Amazon EVS VLAN subnet.
+    #   Amazon EVS VLAN subnets have a minimum CIDR block size of /28 and a
+    #   maximum size of /24. Amazon EVS VLAN subnet CIDR blocks must not
+    #   overlap with other subnets in the VPC.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/InitialVlanInfo AWS API Documentation
@@ -762,11 +824,18 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # The initial VLAN subnets for the environment. You must specify a
-    # non-overlapping CIDR block for each VLAN subnet.
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  The initial VLAN subnets for the environment. Amazon EVS VLAN subnets
+    # have a minimum CIDR block size of /28 and a maximum size of /24.
+    # Amazon EVS VLAN subnet CIDR blocks must not overlap with other subnets
+    # in the VPC.
     #
     # @!attribute [rw] vmk_management
-    #   The VMkernel management VLAN subnet. This VLAN subnet carries
+    #   The host VMkernel management VLAN subnet. This VLAN subnet carries
     #   traffic for managing ESXi hosts and communicating with VMware
     #   vCenter Server.
     #   @return [Types::InitialVlanInfo]
@@ -841,17 +910,24 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # The license information that Amazon EVS requires to create an
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  The license information that Amazon EVS requires to create an
     # environment. Amazon EVS requires two license keys: a VCF solution key
     # and a vSAN license key.
     #
     # @!attribute [rw] solution_key
     #   The VCF solution key. This license unlocks VMware VCF product
     #   features, including vSphere, NSX, SDDC Manager, and vCenter Server.
+    #   The VCF solution key must cover a minimum of 256 cores.
     #   @return [String]
     #
     # @!attribute [rw] vsan_key
-    #   The VSAN license key. This license unlocks vSAN features.
+    #   The VSAN license key. This license unlocks vSAN features. The vSAN
+    #   license key must provide at least 110 TiB of vSAN capacity.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/LicenseInfo AWS API Documentation
@@ -1030,7 +1106,12 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # An elastic network interface (ENI) that connects hosts to the VLAN
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  An elastic network interface (ENI) that connects hosts to the VLAN
     # subnets. Amazon EVS provisions two identically configured ENIs in the
     # VMkernel management subnet during host creation. One ENI is active,
     # and the other is in standby mode for automatic switchover during a
@@ -1074,7 +1155,12 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # A managed secret that contains the credentials for installing vCenter
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  A managed secret that contains the credentials for installing vCenter
     # Server, NSX, and SDDC Manager. During environment creation, the Amazon
     # EVS control plane uses Amazon Web Services Secrets Manager to create,
     # encrypt, validate, and store secrets. If you choose to delete your
@@ -1095,7 +1181,12 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # The security groups that allow traffic between the Amazon EVS control
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  The security groups that allow traffic between the Amazon EVS control
     # plane and your VPC for Amazon EVS service access. If a security group
     # is not specified, Amazon EVS uses the default security group in your
     # account for service access.
@@ -1112,8 +1203,42 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # The request doesn't comply with IAM tag policy. Correct your request
+    # The number of one or more Amazon EVS resources exceeds the maximum
+    # allowed. For a list of Amazon EVS quotas, see [Amazon EVS endpoints
+    # and quotas][1] in the *Amazon EVS User Guide*. Delete some resources
+    # or request an increase in your service quota. To request an increase,
+    # see [Amazon Web Services Service Quotas][2] in the *Amazon Web
+    # Services General Reference Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/evs/latest/userguide/service-quotas-evs.html
+    # [2]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
+    #
+    # @!attribute [rw] message
+    #   Describes the error encountered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # <note markdown="1"> `TagPolicyException` is deprecated. See [
+    # `ValidationException` ][1]
+    # instead.
+    #
+    #  </note>
+    #
+    #  The request doesn't comply with IAM tag policy. Correct your request
     # and then retry it.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/evs/latest/APIReference/API_ValidationException.html
     #
     # @!attribute [rw] message
     #   Describes the error encountered
@@ -1173,7 +1298,17 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # A service resource associated with the request has more than 200 tags.
+    # <note markdown="1"> `TooManyTagsException` is deprecated. See [
+    # `ServiceQuotaExceededException` ][1] instead.
+    #
+    #  </note>
+    #
+    #  A service resource associated with the request has more than 200
+    # tags.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/evs/latest/APIReference/API_ServiceQuotaExceededException.html
     #
     # @!attribute [rw] message
     #   Describes the error encountered.
@@ -1235,7 +1370,13 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # Stores information about a field passed inside a request that resulted
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  Stores information about a field passed inside a request that
+    # resulted
     # in an exception.
     #
     # @!attribute [rw] name
@@ -1255,12 +1396,17 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # The DNS hostnames that Amazon EVS uses to install VMware vCenter
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  The DNS hostnames that Amazon EVS uses to install VMware vCenter
     # Server, NSX, SDDC Manager, and Cloud Builder. Each hostname must be
     # unique, and resolve to a domain name that you've registered in your
     # DNS service of choice. Hostnames cannot be changed.
     #
-    # VMware VCF requires the deployment of two NSX Edge nodes, and three
+    #  VMware VCF requires the deployment of two NSX Edge nodes, and three
     # NSX Manager virtual machines.
     #
     # @!attribute [rw] v_center
@@ -1315,14 +1461,20 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # The VLANs that Amazon EVS creates during environment creation.
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  The VLANs that Amazon EVS creates during environment creation.
     #
     # @!attribute [rw] vlan_id
     #   The unique ID of the VLAN.
     #   @return [Integer]
     #
     # @!attribute [rw] cidr
-    #   The CIDR block of the VLAN.
+    #   The CIDR block of the VLAN. Amazon EVS VLAN subnets have a minimum
+    #   CIDR block size of /28 and a maximum size of /24.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone

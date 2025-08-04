@@ -54,7 +54,7 @@ module Aws::LaunchWizard
   autoload :EndpointProvider, 'aws-sdk-launchwizard/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-launchwizard/endpoints'
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.26.0'
 
 end
 

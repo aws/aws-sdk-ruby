@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2025-08-04)
+------------------
+
+* Feature - Support Interface for IoT SiteWise Asset Modeling
+
 1.90.0 (2025-07-31)
 ------------------
 

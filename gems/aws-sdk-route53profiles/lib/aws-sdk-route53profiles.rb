@@ -54,7 +54,7 @@ module Aws::Route53Profiles
   autoload :EndpointProvider, 'aws-sdk-route53profiles/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-route53profiles/endpoints'
 
-  GEM_VERSION = '1.22.0'
+  GEM_VERSION = '1.23.0'
 
 end
 

@@ -79,6 +79,7 @@ module Aws::Evs
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
     ServiceAccessSecurityGroups = Shapes::StructureShape.new(name: 'ServiceAccessSecurityGroups')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SolutionKey = Shapes::StringShape.new(name: 'SolutionKey')
     StateDetails = Shapes::StringShape.new(name: 'StateDetails')
     String = Shapes::StringShape.new(name: 'String')
@@ -311,6 +312,9 @@ module Aws::Evs
     ServiceAccessSecurityGroups.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "securityGroups"))
     ServiceAccessSecurityGroups.struct_class = Types::ServiceAccessSecurityGroups
 
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
     TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
 
     TagPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -503,6 +507,7 @@ module Aws::Evs
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)

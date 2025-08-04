@@ -56,7 +56,7 @@ module Aws::SQS
   autoload :Message, 'aws-sdk-sqs/message'
   autoload :Queue, 'aws-sdk-sqs/queue'
 
-  GEM_VERSION = '1.99.0'
+  GEM_VERSION = '1.100.0'
 
 end
 

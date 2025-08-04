@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2025-08-04)
+------------------
+
+* Feature - New integration with Azure DevOps provider type.
+
 1.23.0 (2025-07-31)
 ------------------
 

@@ -86,7 +86,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeConnections/Client.html#create_connection-instance_method
       def create_connection: (
-                               ?provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged"),
+                               ?provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged" | "AzureDevOps"),
                                connection_name: ::String,
                                ?tags: Array[
                                  {
@@ -106,7 +106,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeConnections/Client.html#create_host-instance_method
       def create_host: (
                          name: ::String,
-                         provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged"),
+                         provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged" | "AzureDevOps"),
                          provider_endpoint: ::String,
                          ?vpc_configuration: {
                            vpc_id: ::String,
@@ -211,7 +211,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetHostOutput]
         def name: () -> ::String
         def status: () -> ::String
-        def provider_type: () -> ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged")
+        def provider_type: () -> ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged" | "AzureDevOps")
         def provider_endpoint: () -> ::String
         def vpc_configuration: () -> Types::VpcConfiguration
       end
@@ -285,7 +285,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeConnections/Client.html#list_connections-instance_method
       def list_connections: (
-                              ?provider_type_filter: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged"),
+                              ?provider_type_filter: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged" | "AzureDevOps"),
                               ?host_arn_filter: ::String,
                               ?max_results: ::Integer,
                               ?next_token: ::String

@@ -241,7 +241,6 @@ module Aws::BedrockAgentCore
 
     class GetResourceOauth2TokenRequest
       attr_accessor workload_identity_token: ::String
-      attr_accessor user_id: ::String
       attr_accessor resource_credential_provider_name: ::String
       attr_accessor scopes: ::Array[::String]
       attr_accessor oauth2_flow: ("USER_FEDERATION" | "M2M")

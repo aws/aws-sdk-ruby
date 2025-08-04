@@ -54,7 +54,7 @@ module Aws::RolesAnywhere
   autoload :EndpointProvider, 'aws-sdk-rolesanywhere/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-rolesanywhere/endpoints'
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.39.0'
 
 end
 
