@@ -5,8 +5,6 @@ Unreleased Changes
 
 * Issue - When multipart uploader fails to complete multipart upload, it calls multipart abort.
 
-* Issue - Remove partially downloaded files when multipart `download_file` fail.
-
 1.195.0 (2025-07-31)
 ------------------
 

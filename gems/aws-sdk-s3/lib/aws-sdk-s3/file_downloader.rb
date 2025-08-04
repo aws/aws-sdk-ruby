@@ -41,9 +41,6 @@ module Aws
             raise ArgumentError, "Invalid mode #{@mode} provided, :mode should be single_request, get_range or auto"
           end
         end
-      rescue StandardError => e
-        File.delete(@path) if File.exist?(@path)
-        raise e
       end
 
       private
