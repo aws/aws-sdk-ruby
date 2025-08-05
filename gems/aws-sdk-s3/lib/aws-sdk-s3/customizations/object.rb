@@ -404,8 +404,7 @@ module Aws
       #     # small files are uploaded in a single API call
       #     obj.upload_file('/path/to/file')
       #
-      # Files larger than or equal to `:multipart_threshold` are uploaded
-      # using the Amazon S3 multipart upload APIs.
+      # Files larger than or equal to `:multipart_threshold` are uploaded using the Amazon S3 multipart upload APIs.
       #
       #     # large files are automatically split into parts
       #     # and the parts are uploaded in parallel
@@ -426,16 +425,14 @@ module Aws
       #     end
       #     obj.upload_file('/path/to/file', progress_callback: progress)
       #
-      # @param [String, Pathname, File, Tempfile] source A file on the local
-      #   file system that will be uploaded as this object. This can either be
-      #   a String or Pathname to the file, an open File object, or an open
-      #   Tempfile object. If you pass an open File or Tempfile object, then
-      #   you are responsible for closing it after the upload completes. When
-      #   using an open Tempfile, rewind it before uploading or else the object
+      # @param [String, Pathname, File, Tempfile] source A file on the local file system that will be uploaded as
+      #   this object. This can either be a String or Pathname to the file, an open File object, or an open
+      #   Tempfile object. If you pass an open File or Tempfile object, then you are responsible for closing it
+      #   after the upload completes. When using an open Tempfile, rewind it before uploading or else the object
       #   will be empty.
       #
       # @param [Hash] options
-      #   Additional options for {Client#put_object}  when file sizes below the multipart threshold.
+      #   Additional options for {Client#put_object} when file sizes below the multipart threshold.
       #   For files larger than the multipart threshold, options for {Client#create_multipart_upload},
       #   {Client#complete_multipart_upload}, and {Client#upload_part} can be provided.
       #

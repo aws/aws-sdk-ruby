@@ -42,6 +42,7 @@ module Aws
             raise ArgumentError, "Invalid mode #{@mode} provided, :mode should be single_request, get_range or auto"
           end
         end
+        File.rename(@temp_path, @path) if @temp_path
       ensure
         File.delete(@temp_path) if @temp_path && File.exist?(@temp_path)
       end
@@ -145,7 +146,6 @@ module Aws
           threads << thread
         end
         threads.map(&:value).compact
-        File.rename(@temp_path, @path)
       end
 
       def extract_range(value)
