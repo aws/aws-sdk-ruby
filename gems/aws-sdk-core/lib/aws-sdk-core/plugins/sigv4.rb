@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../static_credentials_provider'
-require_relative '../identities/credentials'
+require_relative '../credentials_provider'
 require 'aws-sigv4'
 
 module Aws
@@ -27,31 +26,28 @@ module Aws
         end
 
         option(
-          :credentials_provider,
-          doc_type: 'identity',
+          :credentials,
+          doc_type: '#identity',
           docstring: <<~DOCS) do |config|
             The credentials provider used to resolve credentials. Any object that responds to `#identity`
             and returns a {Aws::Core::Credentials}.
           DOCS
-          if config.access_key_id && config.secret_access_key
-            Aws::Core::StaticCredentialsProvider.new(
-              access_key_id: config.access_key_id,
-              secret_access_key: config.secret_access_key,
-              session_token: config.session_token,
-              account_id: config.account_id
-            )
-          end
+          DefaultCredentials.new(config)
         end
 
         def after_initialize(client)
-          client.config.auth_schemes['aws.auth#sigv4'] = client.config.credentials_provider
+          client.config.auth_schemes['aws.auth#sigv4'] = client.config.credentials
         end
 
         # @api private
         class Handler < Smithy::Client::Handler
           def call(context)
-            sign(context) if context.auth[:scheme_id] == 'aws.auth#sigv4'
-            @handler.call(context)
+            if context.auth[:scheme_id] == 'aws.auth#sigv4'
+              sign(context)
+              track_features(context.config.credentials) { @handler.call(context) }
+            else
+              @handler.call(context)
+            end
           end
 
           def sign(context) # rubocop:disable Metrics/AbcSize
@@ -76,6 +72,12 @@ module Aws
             context.http_request.headers.delete('X-Amz-Security-Token')
             context.http_request.headers.delete('X-Amz-Date')
             context.http_request.headers.delete('x-Amz-Region-Set')
+          end
+
+          def track_features(provider, &block)
+            return block.call unless provider
+
+            Smithy::Client::Features.track(*provider.features, &block)
           end
         end
 

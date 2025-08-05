@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'smithy'
+require_relative '../../../build_tools/aws-sdk-code-generator/lib/aws-sdk-code-generator/welds'
 
 module ClientHelper
   class << self
