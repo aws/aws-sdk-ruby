@@ -50,7 +50,7 @@ module Aws
           end
 
           def empty_body?(body)
-            body.respond_to?(:size) && body.empty?
+            body.respond_to?(:size) && body.size.empty?
           end
 
           def parse(ref, body, target = nil)
