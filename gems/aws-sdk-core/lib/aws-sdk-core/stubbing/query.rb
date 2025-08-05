@@ -29,16 +29,15 @@ module Aws
         private
 
         def build_body(config, operation, data)
-          xml = []
-          config.xml_codec.build(operation.output, data, xml)
-          xml.shift
-          xml.pop
-          xml.unshift("    <ResponseMetadata><RequestId>stubbed-request-id</RequestId></ResponseMetadata>\n")
-          xml.unshift("  <#{operation.name}Result>\n")
-          xml.unshift("<#{operation.name}Response xmlns=\"#{xmlns(config.service)}\">\n")
-          xml.push("  </#{operation.name}Result>\n")
-          xml.push("</#{operation.name}Response>\n")
-          xml.join
+          operation.output.member_name = "#{operation.name}Result"
+          <<~XML.strip
+            <#{operation.name}Response xmlns="#{xmlns(config.service)}">
+              #{config.xml_codec.build(operation.output, data)}
+              <ResponseMetadata>
+                <RequestId>stubbed-request-id</RequestId>
+              </ResponseMetadata>
+            </#{operation.name}Response>
+          XML
         end
 
         def xmlns(service)

@@ -34,11 +34,12 @@ module Aws
           config.xml_codec.build(operation.output, data, xml)
           xml.shift
           xml.pop
-          xmlns = "http://ec2.amazonaws.com/doc/#{config.service.version}/".inspect
-          xml.unshift('  <requestId>stubbed-request-id</requestId>')
-          xml.unshift("<#{operation.name}Response xmlns=#{xmlns}>\n")
-          xml.push("</#{operation.name}Response>\n")
-          xml.join
+          <<~XML.strip
+            <#{operation.name}Response xmlns="http://ec2.amazonaws.com/doc/#{config.service.version}/">
+              #{xml.join}
+              <requestId>stubbed-request-id</requestId>
+            </#{operation.name}Response>
+          XML
         end
       end
     end
