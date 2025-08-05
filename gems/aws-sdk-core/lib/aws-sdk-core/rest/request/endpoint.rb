@@ -6,8 +6,8 @@ require 'cgi'
 module Aws
   module Core
     module Rest
-      # @api private
       module Request
+        # @api private
         class Endpoint
           include Smithy::Schema::Shapes
 
@@ -52,7 +52,7 @@ module Aws
           def param_name(placeholder)
             member_name = placeholder.gsub(/[{}+]/, '')
             # TODO: optimize
-            param_name, _ = @ref.shape.members.find { |_, shape| shape.member_name == member_name }
+            param_name, = @ref.shape.members.find { |_, shape| shape.member_name == member_name }
             param_name
           end
 
@@ -67,7 +67,7 @@ module Aws
             end
           end
 
-          def apply_querystring_params(uri, params)
+          def apply_querystring_params(uri, params) # rubocop:disable Metrics/AbcSize
             # collect params that are supposed to be part of the query string
             parts = @ref.shape.members.each_with_object([]) do |(member_name, member_ref), parts|
               next unless member_ref.traits.key?('smithy.api#httpQuery') ||

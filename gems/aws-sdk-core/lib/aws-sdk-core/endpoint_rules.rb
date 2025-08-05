@@ -7,7 +7,7 @@ module Aws
     # @api private
     module EndpointRules
       # aws.partition(region: string) Option<Partition>
-      def self.aws_partition(region)
+      def self.aws_partition(region) # rubocop:disable Metrics/CyclomaticComplexity
         # TODO: aws-partitions gem or aws-sdk-core gem
         path = File.expand_path('partitions.json', __dir__)
         partitions = ::JSON.load_file(path)['partitions']

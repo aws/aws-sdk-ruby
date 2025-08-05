@@ -45,7 +45,7 @@ module Aws
           param_list.to_io
         end
 
-        def parse_body(context)
+        def parse_body(context) # rubocop:disable Metrics/AbcSize
           if context.config.protocol == 'aws.protocols#ec2Query'
             ref = context.operation.output
             context.config.xml_codec.parse(ref, context.http_response.body.read)

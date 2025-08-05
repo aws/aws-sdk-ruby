@@ -2,6 +2,7 @@
 
 module Aws
   module Core
+    # @api private
     class ConfigFileParser
       def initialize(config_file_contents)
         @config_file_contents = config_file_contents
@@ -21,7 +22,7 @@ module Aws
         @config_file_contents.split(/[\r\n]+/).each do |line|
           @current_line_number += 1
           next if ConfigFileUtils.empty_line?(line) ||
-            ConfigFileUtils.comment_line?(line)
+                  ConfigFileUtils.comment_line?(line)
 
           if ConfigFileUtils.section_line?(line)
             read_section_line(line)
@@ -41,7 +42,7 @@ module Aws
         unless line_without_whitespace[-1] == ']'
           raise InvalidSharedConfigError,
                 "Section definition must end with ']' " \
-                  "on line #{@current_line_number}"
+                "on line #{@current_line_number}"
         end
 
         line_without_brackets = line_without_whitespace[1..-2]
@@ -57,7 +58,7 @@ module Aws
         unless @current_section
           raise InvalidSharedConfigError,
                 'Expected a section definition, found property ' \
-                  "on line #{@current_line_number}"
+                "on line #{@current_line_number}"
         end
 
         line_without_comments = remove_trailing_comments(
@@ -79,12 +80,12 @@ module Aws
         unless @current_section
           raise InvalidSharedConfigError,
                 'Expected a section definition, found continuation ' \
-                  "on line #{@current_line_number}"
+                "on line #{@current_line_number}"
         end
         unless @current_property
           raise InvalidSharedConfigError,
                 'Expected a property definition, found continuation ' \
-                  "on line #{@current_line_number}"
+                "on line #{@current_line_number}"
         end
 
         line = ConfigFileUtils.trim_whitespace(line)

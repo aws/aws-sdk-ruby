@@ -2,6 +2,7 @@
 
 module Aws
   module Core
+    # @api private
     class ConfigFileUtils
       class << self
         def parse_property_definition_line(line, location)
@@ -17,7 +18,7 @@ module Aws
                   "Property did not have a name #{location}"
           end
 
-          value = trim_whitespace(line[first_equals_location + 1..])
+          value = trim_whitespace(line[(first_equals_location + 1)..])
           [key, value]
         end
 

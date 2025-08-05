@@ -91,7 +91,7 @@ module Aws
             else
               begin
                 Time.parse(value)
-              rescue
+              rescue StandardError
                 nil
               end
             end

@@ -36,8 +36,8 @@ module Aws
             Endpoint.new(context.operation).apply(context.http_request, context.params)
           end
 
-          # Refactor
-          def apply_content_type_header(context)
+          # TODO: refactor
+          def apply_content_type_header(context) # rubocop:disable Metrics
             if (payload_member = context.operation.input.shape[:http_payload_member])
               payload = payload_member.shape
               if (media_type = payload.traits['smithy.api#mediaType'])

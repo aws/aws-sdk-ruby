@@ -24,9 +24,7 @@ module Aws
           def apply(request_or_response, params)
             body = build_body(params)
             # TODO: this is terrible
-            if body.nil? && modeled_body_member? && !string_or_blob_payload? && !union_payload?
-              body = '{}'
-            end
+            body = '{}' if body.nil? && modeled_body_member? && !string_or_blob_payload? && !union_payload?
             request_or_response.body = body
           end
 

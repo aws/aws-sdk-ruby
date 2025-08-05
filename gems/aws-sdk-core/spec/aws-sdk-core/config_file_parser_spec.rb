@@ -45,12 +45,8 @@ module Aws
                 .to raise_error(InvalidSharedConfigError, include(error))
             else
               parsed = parse(test_case['input'])
-              if expected.key?('profiles')
-                expect(parsed.profiles).to eq(expected['profiles'])
-              end
-              if expected.key?('ssoSessions')
-                expect(parsed.sso_sessions).to eq(expected['ssoSessions'])
-              end
+              expect(parsed.profiles).to eq(expected['profiles']) if expected.key?('profiles')
+              expect(parsed.sso_sessions).to eq(expected['ssoSessions']) if expected.key?('ssoSessions')
             end
           end
         end

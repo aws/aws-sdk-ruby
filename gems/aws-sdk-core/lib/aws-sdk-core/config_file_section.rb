@@ -4,6 +4,7 @@ module Aws
   module Core
     class InvalidSharedConfigError < RuntimeError; end
 
+    # @api private
     class ConfigFileSection
       def initialize(name, properties = {})
         @name = name
@@ -18,7 +19,7 @@ module Aws
           if @properties.key?(key)
             Kernel.warn(
               "Warning: Duplicate property '#{key}' detected in " \
-                "section #{@name}. One value will be ignored."
+              "section #{@name}. One value will be ignored."
             )
           end
           @properties[key] = value
@@ -48,7 +49,7 @@ module Aws
 
         private
 
-        def parse_sub_properties(value)
+        def parse_sub_properties(value) # rubocop:disable Metrics
           sub_properties = {}
           value.split(/[\r\n]+/).each do |raw_sub_property_line|
             next if ConfigFileUtils.empty_line?(raw_sub_property_line)
@@ -60,7 +61,7 @@ module Aws
             unless ConfigFileUtils.valid_identifier?(left)
               Kernel.warn(
                 "Ignoring property '#{left}' in property '#{@name}' because " \
-                  'its name was not alphanumeric with dashes or underscores.'
+                'its name was not alphanumeric with dashes or underscores.'
               )
               next
             end
@@ -68,7 +69,7 @@ module Aws
             if sub_properties.key?(left)
               Kernel.warn(
                 "Warning: Duplicate sub-property '#{left}' detected in " \
-                  "property '#{@name}'. The later one in the file will be used."
+                "property '#{@name}'. The later one in the file will be used."
               )
             end
 

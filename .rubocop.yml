@@ -2,6 +2,9 @@ AllCops:
   NewCops: enable
   TargetRubyVersion: 3.3
   SuggestExtensions: false
+  Exclude:
+    # exclude all files  under gems/ except for the aws-sdk-core gem
+    - !ruby/regexp /\/gems\/(?!aws-sdk-core\/).*/
 
 Gemspec/RequireMFA:
   Enabled: false
@@ -33,11 +36,16 @@ Metrics/ModuleLength:
   Exclude:
     - '**/spec/**/*.rb'
 
+Metrics/PerceivedComplexity:
+  Exclude:
+    - '**/spec/**/*.rb'
+
 Naming/FileName:
   Exclude:
     - 'tasks/**/*.rake'
     - '**/spec/**/*.rb'
     - 'gems/aws-sdk-core/lib/aws-sdk-core.rb'
+    - 'build_tools/aws-sdk-code-generator/lib/aws-sdk-code-generator.rb'
 
 Style/BlockComments:
   Exclude:

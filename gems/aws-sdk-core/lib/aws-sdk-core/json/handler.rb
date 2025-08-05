@@ -67,4 +67,3 @@ module Aws
     end
   end
 end
-

@@ -21,7 +21,7 @@ module Aws
               parsed
             end
 
-            def parse_timestamp_list(member_ref, shape, value)
+            def parse_timestamp_list(member_ref, shape, value) # rubocop:disable Metrics/AbcSize
               # timestamp lists use an http-date by default and are unescaped
               # eg: Mon, 16 Dec 2019 23:48:18 GMT, Mon, 16 Dec 2019 23:48:18 GMT
               trait = 'smithy.api#timestampFormat'

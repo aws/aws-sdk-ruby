@@ -25,7 +25,7 @@ namespace :test do
 
   desc 'Executes specs for a single gem, e.g. spec:aws-sdk-s3'
   task 'spec:*'
-  rule /spec:.+$/ do |task|
+  rule(/spec:.+$/) do |task|
     spec_dir = "gems/#{task.name.split(':').last}/spec"
     sh("bundle exec rspec #{spec_dir}")
   end

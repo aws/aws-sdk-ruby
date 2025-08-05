@@ -8,9 +8,7 @@ module Aws
         @identity = Identities::Credentials.new(**options)
       end
 
-      def identity
-        @identity
-      end
+      attr_reader :identity
     end
   end
 end

@@ -38,9 +38,10 @@ module Aws
           def build(params)
             # keys in query maps must NOT override other keys
             query_keys = query_keys(params)
-            params.map do |(member_ref, param_value)|
+            parts = params.map do |(member_ref, param_value)|
               build_part(member_ref, param_value, query_keys)
-            end.reject { |p| p.nil? || p.empty? }.join('&')
+            end
+            parts.reject { |p| p.nil? || p.empty? }.join('&')
           end
 
           private

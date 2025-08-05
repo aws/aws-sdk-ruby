@@ -31,7 +31,7 @@ module Aws
           given.each_key do |key|
             case key
             when 'internal-traffic' then nil
-            when 'os' then
+            when 'os'
               os_family = given['os']['family'].downcase
               version = given['os']['version']
               allow(RbConfig::CONFIG).to receive(:[])

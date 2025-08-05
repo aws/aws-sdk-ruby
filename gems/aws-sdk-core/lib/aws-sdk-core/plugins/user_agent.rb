@@ -24,12 +24,14 @@ module Aws
         # @api private
         option(:user_agent_frameworks) { [] }
 
+        # @api private
         class Handler < Smithy::Client::Handler
           def call(context)
-            context.http_request.headers['User-Agent'] = UserAgent.new(context)
+            context.http_request.headers['User-Agent'] = UserAgent.new(context).to_s
             @handler.call(context)
           end
 
+          # @api private
           class UserAgent
             def initialize(context)
               @context = context
@@ -110,7 +112,7 @@ module Aws
               end
 
               # Frameworks may be aws-record, aws-sdk-rails, etc.
-              regex = /gems\/(?<name>#{frameworks_cfg.join('|')})-(?<version>\d+\.\d+\.\d+)/.freeze
+              regex = %r{gems/(?<name>#{frameworks_cfg.join('|')})-(?<version>\d+\.\d+\.\d+)}
               frameworks = {}
               Kernel.caller.each do |line|
                 match = line.match(regex)

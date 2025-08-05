@@ -39,14 +39,14 @@ module Aws
         end
 
         def error_code(context, body)
-          if (matches = body.match(/<Code>(.+?)<\/Code>/))
+          if (matches = body.match(%r{<Code>(.+?)</Code>}))
             matches[1]
           else
             http_status_error_code(context)
           end
         end
 
-        def parse_error_data(context, body, code)
+        def parse_error_data(context, body, code) # rubocop:disable Metrics/AbcSize
           data = Smithy::Schema::EmptyStructure.new
           context.operation.errors.each do |ref|
             # query protocol may have custom error code defined by the trait
@@ -73,7 +73,7 @@ module Aws
           # errors may nested under <Errors><Error>structure_data</Error></Errors>
           # Or may be flat and under <Error>structure_data</Error>
           body = body.tr("\n", '')
-          if (matches = body.match(/<Error>(.+?)<\/Error>/))
+          if (matches = body.match(%r{<Error>(.+?)</Error>}))
             codec.parse(ref, "<#{ref.shape.name}>#{matches[1]}</#{ref.shape.name}>")
           else
             Smithy::Schema::EmptyStructure.new
@@ -85,7 +85,7 @@ module Aws
         end
 
         def apply_request_id(context, body)
-          if (matches = body.match(/<RequestId>(.+?)<\/RequestId>/m))
+          if (matches = body.match(%r{<RequestId>(.+?)</RequestId>}m))
             context[:request_id] = matches[1]
           end
         end

@@ -47,13 +47,14 @@ module Aws
           client.config.auth_schemes['aws.auth#sigv4'] = client.config.credentials_provider
         end
 
+        # @api private
         class Handler < Smithy::Client::Handler
           def call(context)
             sign(context) if context.auth[:scheme_id] == 'aws.auth#sigv4'
             @handler.call(context)
           end
 
-          def sign(context)
+          def sign(context) # rubocop:disable Metrics/AbcSize
             reset(context)
             signer = Aws::Sigv4::Signer.new(
               service: context.config.service.traits['aws.auth#sigv4']['name'],

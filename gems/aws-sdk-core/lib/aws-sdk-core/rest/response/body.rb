@@ -13,7 +13,7 @@ module Aws
             @ref = ref
           end
 
-          def apply(body, target)
+          def apply(body, target) # rubocop:disable Metrics/AbcSize
             # When string, blob, or enum as a payload, use value directly
             if string_or_blob_payload?
               # Empty blob payloads are omitted
@@ -50,7 +50,7 @@ module Aws
           end
 
           def empty_body?(body)
-            body.respond_to?(:size) && body.size.zero?
+            body.respond_to?(:size) && body.empty?
           end
 
           def parse(ref, body, target = nil)

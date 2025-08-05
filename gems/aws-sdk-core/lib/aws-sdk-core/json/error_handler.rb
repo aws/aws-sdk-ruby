@@ -40,7 +40,7 @@ module Aws
           code.split('#').last.split(':').first
         end
 
-        def parse_error_data(context, body, code)
+        def parse_error_data(context, body, code) # rubocop:disable Metrics/AbcSize
           data = Smithy::Schema::EmptyStructure.new
           context.operation.errors.each do |ref|
             next unless ref.shape.name == code
@@ -78,4 +78,3 @@ module Aws
     end
   end
 end
-

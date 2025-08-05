@@ -2,6 +2,7 @@
 
 module Aws
   module Core
+    # @api private
     class ConfigFileStandardizer
       def initialize(raw_file, file_type)
         @raw_file = raw_file
@@ -19,17 +20,17 @@ module Aws
 
       private
 
-      def standardize_config_file
+      def standardize_config_file # rubocop:disable Metrics
         @standardized_profiles = {}
         @standardized_sso_sessions = {}
 
-        @raw_file.each do |raw_section_name, section_properties|
+        @raw_file.each do |raw_section_name, section_properties| # rubocop:disable Metrics/BlockLength
           raw_section_name_has_profile_prefix =
             raw_section_name.start_with?('profile ') ||
-              raw_section_name.start_with?("profile\t")
+            raw_section_name.start_with?("profile\t")
           raw_section_name_has_sso_session_prefix =
             raw_section_name.start_with?('sso-session ') ||
-              raw_section_name.start_with?("sso-session\t")
+            raw_section_name.start_with?("sso-session\t")
 
           if @file_type == :config
             if raw_section_name_has_profile_prefix
@@ -43,7 +44,7 @@ module Aws
             else
               Kernel.warn(
                 "Ignoring profile '#{raw_section_name}' because it did not " \
-                  "start with 'profile ' and it was not 'default'."
+                "start with 'profile ' and it was not 'default'."
               )
               next
             end
@@ -59,21 +60,21 @@ module Aws
           end
 
           if standardized_profile_name &&
-            !ConfigFileUtils.valid_identifier?(standardized_profile_name)
+             !ConfigFileUtils.valid_identifier?(standardized_profile_name)
             Kernel.warn(
               "Ignoring profile '#{standardized_profile_name}' because it " \
-                'was not alphanumeric with dashes or underscores.'
+              'was not alphanumeric with dashes or underscores.'
             )
             next
           end
 
           if standardized_sso_session_name &&
-            !ConfigFileUtils.valid_identifier?(
-              standardized_sso_session_name
-            )
+             !ConfigFileUtils.valid_identifier?(
+               standardized_sso_session_name
+             )
             Kernel.warn(
               "Ignoring sso-session '#{standardized_sso_session_name}' because " \
-                'it was not alphanumeric with dashes or underscores.'
+              'it was not alphanumeric with dashes or underscores.'
             )
             next
           end
@@ -84,17 +85,17 @@ module Aws
 
           if @file_type == :config && is_default_profile && seen_profile_before
             if !raw_section_name_has_profile_prefix &&
-              @default_profile_has_profile_prefix
+               @default_profile_has_profile_prefix
               Kernel.warn(
                 "Ignoring profile '[default]', because '[profile default]' " \
-                  'was found in the same file.'
+                'was found in the same file.'
               )
               next
             elsif raw_section_name_has_profile_prefix &&
-              !@default_profile_has_profile_prefix
+                  !@default_profile_has_profile_prefix
               Kernel.warn(
                 "Dropping earlier-seen '[default]', because " \
-                  "'[profile default]' was found in the same file."
+                "'[profile default]' was found in the same file."
               )
               @standardized_profiles.delete(standardized_profile_name)
             end
@@ -102,9 +103,7 @@ module Aws
 
           if standardized_profile_name
             unless @standardized_profiles.key?(standardized_profile_name)
-              if is_default_profile && raw_section_name_has_profile_prefix
-                @default_profile_has_profile_prefix = true
-              end
+              @default_profile_has_profile_prefix = true if is_default_profile && raw_section_name_has_profile_prefix
 
               @standardized_profiles[standardized_profile_name] =
                 ConfigFileSection.new(standardized_profile_name)
@@ -139,8 +138,8 @@ module Aws
           unless ConfigFileUtils.valid_identifier?(property_name)
             Kernel.warn(
               "Ignoring property '#{property_name}' in section " \
-                "'#{section_name}' because its name was not alphanumeric with " \
-                'dashes or underscores.'
+              "'#{section_name}' because its name was not alphanumeric with " \
+              'dashes or underscores.'
             )
             next
           end
