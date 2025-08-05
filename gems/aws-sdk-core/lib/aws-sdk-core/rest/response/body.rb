@@ -50,7 +50,7 @@ module Aws
           end
 
           def empty_body?(body)
-            body.respond_to?(:size) && body.size.empty?
+            body.respond_to?(:size) && body.size.zero? # rubocop:disable Style/ZeroLengthPredicate
           end
 
           def parse(ref, body, target = nil)
