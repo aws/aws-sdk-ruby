@@ -9,6 +9,7 @@ module Aws
       # @api private
       class Codec
         # @param [Hash] options
+        # @option options [Boolean] :ec2 whether to use EC2 specific query encoding
         def initialize(options = {})
           @options = options
         end

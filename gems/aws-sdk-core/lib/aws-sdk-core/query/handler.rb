@@ -46,10 +46,14 @@ module Aws
         end
 
         def parse_body(context)
-          ref = wrap(context.operation)
-          data = context.config.xml_codec.parse(ref, context.http_response.body.read)
-          context[:request_id] = data.response_metadata&.request_id
-          data.result
+          if context.config.protocol == 'aws.protocols#ec2Query'
+            ref = context.operation.output
+            context.config.xml_codec.parse(ref, context.http_response.body.read)
+          else
+            ref = wrap(context.operation)
+            data = context.config.xml_codec.parse(ref, context.http_response.body.read)
+            unwrap(context, data)
+          end
         end
 
         def wrap(operation) # rubocop:disable Metrics/AbcSize
@@ -65,6 +69,11 @@ module Aws
 
           result.add_member(:response_metadata, response_metadata_ref)
           ShapeRef.new(shape: result)
+        end
+
+        def unwrap(context, data)
+          context[:request_id] = data.response_metadata&.request_id
+          data.result
         end
       end
     end

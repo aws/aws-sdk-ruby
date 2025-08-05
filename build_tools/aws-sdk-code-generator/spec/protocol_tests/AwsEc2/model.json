@@ -1,0 +1,2323 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "aws.protocoltests.config#ErrorCodeParams": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The error code exposed to the customer.\n\nIf the SDK exposes the error code to customers, this value MUST be\nasserted to match the exposed error code.\n\nThis is modifiable by the awsQueryError trait. For services with\nawsQueryCompatible, it will be exposed in the `x-amzn-query-error`\nheader which takes the form `Code;Fault`. This value represents\nthe `Code` portion.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The query error type exposed to the customer.\n\nIf the SDK exposes the query error type to customers, this value MUST be\nasserted to match the exposed query error type.\n\nThis is modifiable by the awsQueryError trait. For services with\nawsQueryCompatible, it will be exposed in the `x-amzn-query-error`\nheader which takes the form `Code;Fault`. This value represents\nthe `Fault` portion."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Vendor params to use when making assertions about error code or query\nerror type."
+            }
+        },
+        "aws.protocoltests.ec2#AwsEc2": {
+            "type": "service",
+            "version": "2020-01-08",
+            "operations": [
+                {
+                    "target": "aws.protocoltests.ec2#DatetimeOffsets"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#EmptyInputAndEmptyOutput"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#EndpointOperation"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#EndpointWithHostLabelOperation"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#FractionalSeconds"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#GreetingWithErrors"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#HostWithPathOperation"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#IgnoresWrappingXmlName"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#NestedStructures"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#NoInputAndOutput"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#PutWithContentEncoding"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#QueryIdempotencyTokenAutoFill"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#QueryLists"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#QueryTimestamps"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#RecursiveXmlShapes"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#SimpleInputParams"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#SimpleScalarXmlProperties"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#XmlBlobs"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#XmlEmptyBlobs"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#XmlEmptyLists"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#XmlEnums"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#XmlIntEnums"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#XmlLists"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#XmlNamespaces"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#XmlTimestamps"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "EC2 Protocol"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ec2query"
+                },
+                "aws.protocols#ec2Query": {},
+                "smithy.api#documentation": "An EC2 query service that sends query requests and XML responses.",
+                "smithy.api#suppress": [
+                    "SigV4Traits"
+                ],
+                "smithy.api#title": "Sample Ec2 Protocol Service",
+                "smithy.api#xmlNamespace": {
+                    "uri": "https://example.com/"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#ComplexError": {
+            "type": "structure",
+            "members": {
+                "TopLevel": {
+                    "target": "smithy.api#String"
+                },
+                "Nested": {
+                    "target": "aws.protocoltests.ec2#ComplexNestedErrorData"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This error is thrown when a request is invalid.",
+                "smithy.api#error": "client",
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "Ec2ComplexError",
+                        "protocol": "aws.protocols#ec2Query",
+                        "params": {
+                            "TopLevel": "Top level",
+                            "Nested": {
+                                "Foo": "bar"
+                            }
+                        },
+                        "code": 400,
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "body": "<Response>\n    <Errors>\n        <Error>\n            <Code>ComplexError</Code>\n            <Message>Hi</Message>\n            <TopLevel>Top level</TopLevel>\n            <Nested>\n                <Foo>bar</Foo>\n            </Nested>\n        </Error>\n    </Errors>\n    <RequestID>foo-id</RequestID>\n</Response>\n",
+                        "bodyMediaType": "application/xml",
+                        "vendorParamsShape": "aws.protocoltests.config#ErrorCodeParams",
+                        "vendorParams": {
+                            "code": "ComplexError"
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#ComplexNestedErrorData": {
+            "type": "structure",
+            "members": {
+                "Foo": {
+                    "target": "smithy.api#String"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#DatetimeOffsets": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "aws.protocoltests.ec2#DatetimeOffsetsOutput"
+            },
+            "traits": {
+                "smithy.api#tags": [
+                    "client-only"
+                ],
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "Ec2QueryDateTimeWithNegativeOffset",
+                        "documentation": "Ensures that clients can correctly parse datetime (timestamps) with offsets",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<DatetimeOffsetsResponse xmlns=\"https://example.com/\">\n    <datetime>2019-12-16T22:48:18-01:00</datetime>\n    <requestId>requestid</requestId>\n</DatetimeOffsetsResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "datetime": 1576540098
+                        }
+                    },
+                    {
+                        "id": "Ec2QueryDateTimeWithPositiveOffset",
+                        "documentation": "Ensures that clients can correctly parse datetime (timestamps) with offsets",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<DatetimeOffsetsResponse xmlns=\"https://example.com/\">\n    <datetime>2019-12-17T00:48:18+01:00</datetime>\n    <requestId>requestid</requestId>\n</DatetimeOffsetsResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "datetime": 1576540098
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#DatetimeOffsetsOutput": {
+            "type": "structure",
+            "members": {
+                "datetime": {
+                    "target": "aws.protocoltests.shared#DateTime"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#EmptyInputAndEmptyOutput": {
+            "type": "operation",
+            "input": {
+                "target": "aws.protocoltests.ec2#EmptyInputAndEmptyOutputInput"
+            },
+            "output": {
+                "target": "aws.protocoltests.ec2#EmptyInputAndEmptyOutputOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "The example tests how requests and responses are serialized when there's\nno request or response members.\n\nWhile this should be rare, code generators must support this.",
+                "smithy.test#httpRequestTests": [
+                    {
+                        "id": "Ec2QueryEmptyInputAndEmptyOutput",
+                        "documentation": "Empty input serializes no extra query params",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "body": "Action=EmptyInputAndEmptyOutput&Version=2020-01-08",
+                        "bodyMediaType": "application/x-www-form-urlencoded"
+                    }
+                ],
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "Ec2QueryEmptyInputAndEmptyOutput",
+                        "documentation": "Empty output",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "body": "<EmptyInputAndEmptyOutputResponse xmlns=\"https://example.com/\">\n    <requestId>requestid</requestId>\n</EmptyInputAndEmptyOutputResponse>\n",
+                        "bodyMediaType": "application/xml"
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#EmptyInputAndEmptyOutputInput": {
+            "type": "structure",
+            "members": {}
+        },
+        "aws.protocoltests.ec2#EmptyInputAndEmptyOutputOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "aws.protocoltests.ec2#EndpointOperation": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#endpoint": {
+                    "hostPrefix": "foo."
+                },
+                "smithy.test#httpRequestTests": [
+                    {
+                        "id": "Ec2QueryEndpointTrait",
+                        "documentation": "Operations can prepend to the given host if they define the\nendpoint trait.",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "body": "Action=EndpointOperation&Version=2020-01-08",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "host": "example.com",
+                        "resolvedHost": "foo.example.com"
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#EndpointWithHostLabelOperation": {
+            "type": "operation",
+            "input": {
+                "target": "aws.protocoltests.ec2#HostLabelInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#endpoint": {
+                    "hostPrefix": "foo.{label}."
+                },
+                "smithy.test#httpRequestTests": [
+                    {
+                        "id": "Ec2QueryEndpointTraitWithHostLabel",
+                        "documentation": "Operations can prepend to the given host if they define the\nendpoint trait, and can use the host label trait to define\nfurther customization based on user input.",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "body": "Action=EndpointWithHostLabelOperation&Version=2020-01-08&Label=bar",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "host": "example.com",
+                        "resolvedHost": "foo.bar.example.com",
+                        "params": {
+                            "label": "bar"
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#FractionalSeconds": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "aws.protocoltests.ec2#FractionalSecondsOutput"
+            },
+            "traits": {
+                "smithy.api#tags": [
+                    "client-only"
+                ],
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "Ec2QueryDateTimeWithFractionalSeconds",
+                        "documentation": "Ensures that clients can correctly parse datetime timestamps with fractional seconds",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<FractionalSecondsResponse xmlns=\"https://example.com/\">\n    <datetime>2000-01-02T20:34:56.123Z</datetime>\n    <requestId>requestid</requestId>\n</FractionalSecondsResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "datetime": 9.46845296123E8
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#FractionalSecondsOutput": {
+            "type": "structure",
+            "members": {
+                "datetime": {
+                    "target": "aws.protocoltests.shared#DateTime"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#GreetingWithErrors": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "aws.protocoltests.ec2#GreetingWithErrorsOutput"
+            },
+            "errors": [
+                {
+                    "target": "aws.protocoltests.ec2#ComplexError"
+                },
+                {
+                    "target": "aws.protocoltests.ec2#InvalidGreeting"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "This operation has three possible return values:\n\n1. A successful response in the form of GreetingWithErrorsOutput\n2. An InvalidGreeting error.\n3. A BadRequest error.",
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "Ec2GreetingWithErrors",
+                        "documentation": "Ensures that operations with errors successfully know how to deserialize the successful response",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "body": "<GreetingWithErrorsResponse xmlns=\"https://example.com/\">\n    <greeting>Hello</greeting>\n    <requestId>requestid</requestId>\n</GreetingWithErrorsResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "params": {
+                            "greeting": "Hello"
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#GreetingWithErrorsOutput": {
+            "type": "structure",
+            "members": {
+                "greeting": {
+                    "target": "smithy.api#String"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#HostLabelInput": {
+            "type": "structure",
+            "members": {
+                "label": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "aws.protocoltests.ec2#HostWithPathOperation": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.test#httpRequestTests": [
+                    {
+                        "id": "Ec2QueryHostWithPath",
+                        "documentation": "Custom endpoints supplied by users can have paths",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/custom/",
+                        "body": "Action=HostWithPathOperation&Version=2020-01-08",
+                        "host": "example.com/custom",
+                        "appliesTo": "client"
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#IgnoresWrappingXmlName": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "aws.protocoltests.ec2#IgnoresWrappingXmlNameOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "The xmlName trait on the output structure is ignored in AWS Query.\n\nThe wrapping element is always operation name + \"Response\".",
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "Ec2IgnoresWrappingXmlName",
+                        "documentation": "The xmlName trait on the output structure is ignored in the ec2 protocol",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<IgnoresWrappingXmlNameResponse xmlns=\"https://example.com/\">\n    <foo>bar</foo>\n    <requestId>requestid</requestId>\n</IgnoresWrappingXmlNameResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "foo": "bar"
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#IgnoresWrappingXmlNameOutput": {
+            "type": "structure",
+            "members": {
+                "foo": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#xmlName": "IgnoreMe"
+            }
+        },
+        "aws.protocoltests.ec2#InvalidGreeting": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This error is thrown when an invalid greeting value is provided.",
+                "smithy.api#error": "client",
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "Ec2InvalidGreetingError",
+                        "documentation": "Parses simple XML errors",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 400,
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "body": "<Response>\n    <Errors>\n        <Error>\n            <Code>InvalidGreeting</Code>\n            <Message>Hi</Message>\n        </Error>\n    </Errors>\n    <RequestID>foo-id</RequestID>\n</Response>\n",
+                        "bodyMediaType": "application/xml",
+                        "params": {
+                            "Message": "Hi"
+                        },
+                        "vendorParamsShape": "aws.protocoltests.config#ErrorCodeParams",
+                        "vendorParams": {
+                            "code": "InvalidGreeting"
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#ListWithMemberNamespace": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#xmlNamespace": {
+                        "uri": "https://xml-member.example.com"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#xmlNamespace": {
+                    "uri": "https://xml-list.example.com"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#ListWithNamespace": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#xmlNamespace": {
+                    "uri": "https://xml-list.example.com"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#ListWithXmlName": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#NestedStructWithList": {
+            "type": "structure",
+            "members": {
+                "ListArg": {
+                    "target": "aws.protocoltests.shared#StringList"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#NestedStructures": {
+            "type": "operation",
+            "input": {
+                "target": "aws.protocoltests.ec2#NestedStructuresInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "This test serializes nested and recursive structure members.",
+                "smithy.test#httpRequestTests": [
+                    {
+                        "id": "Ec2NestedStructures",
+                        "documentation": "Serializes nested structures using dots",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "requireHeaders": [
+                            "Content-Length"
+                        ],
+                        "body": "Action=NestedStructures&Version=2020-01-08&Nested.StringArg=foo&Nested.OtherArg=true&Nested.RecursiveArg.StringArg=baz",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "params": {
+                            "Nested": {
+                                "StringArg": "foo",
+                                "OtherArg": true,
+                                "RecursiveArg": {
+                                    "StringArg": "baz"
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#NestedStructuresInput": {
+            "type": "structure",
+            "members": {
+                "Nested": {
+                    "target": "aws.protocoltests.ec2#StructArg"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#NoInputAndOutput": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "aws.protocoltests.ec2#NoInputAndOutputOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "The example tests how requests and responses are serialized when there's\nno request payload or response members.\n\nWhile this should be rare, code generators must support this.",
+                "smithy.test#httpRequestTests": [
+                    {
+                        "id": "Ec2QueryNoInputAndOutput",
+                        "documentation": "No input serializes no payload",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "body": "Action=NoInputAndOutput&Version=2020-01-08",
+                        "bodyMediaType": "application/x-www-form-urlencoded"
+                    }
+                ],
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "Ec2QueryNoInputAndOutput",
+                        "documentation": "Empty output",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "body": "<NoInputAndOutputResponse xmlns=\"https://example.com/\">\n    <requestId>requestid</requestId>\n</NoInputAndOutputResponse>\n",
+                        "bodyMediaType": "application/xml"
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#NoInputAndOutputOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "aws.protocoltests.ec2#PutWithContentEncoding": {
+            "type": "operation",
+            "input": {
+                "target": "aws.protocoltests.ec2#PutWithContentEncodingInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#requestCompression": {
+                    "encodings": [
+                        "gzip"
+                    ]
+                },
+                "smithy.test#httpRequestTests": [
+                    {
+                        "id": "SDKAppliedContentEncoding_ec2Query",
+                        "documentation": "Compression algorithm encoding is appended to the Content-Encoding header.",
+                        "protocol": "aws.protocols#ec2Query",
+                        "params": {
+                            "data": "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\n"
+                        },
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Encoding": "gzip"
+                        }
+                    },
+                    {
+                        "id": "SDKAppendsGzipAndIgnoresHttpProvidedEncoding_ec2Query",
+                        "documentation": "Compression algorithm encoding is appended to the Content-Encoding header, and the\nuser-provided content-encoding is NOT in the Content-Encoding header since HTTP binding\ntraits are ignored in the ec2Query protocol.\n",
+                        "protocol": "aws.protocols#ec2Query",
+                        "params": {
+                            "encoding": "custom",
+                            "data": "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\n"
+                        },
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Encoding": "gzip"
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#PutWithContentEncodingInput": {
+            "type": "structure",
+            "members": {
+                "encoding": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#httpHeader": "Content-Encoding"
+                    }
+                },
+                "data": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "aws.protocoltests.ec2#QueryIdempotencyTokenAutoFill": {
+            "type": "operation",
+            "input": {
+                "target": "aws.protocoltests.ec2#QueryIdempotencyTokenAutoFillInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "Automatically adds idempotency tokens.",
+                "smithy.api#tags": [
+                    "client-only"
+                ],
+                "smithy.test#httpRequestTests": [
+                    {
+                        "id": "Ec2ProtocolIdempotencyTokenAutoFill",
+                        "documentation": "Automatically adds idempotency token when not set",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "requireHeaders": [
+                            "Content-Length"
+                        ],
+                        "body": "Action=QueryIdempotencyTokenAutoFill&Version=2020-01-08&Token=00000000-0000-4000-8000-000000000000",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "Ec2ProtocolIdempotencyTokenAutoFillIsSet",
+                        "documentation": "Uses the given idempotency token as-is",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "requireHeaders": [
+                            "Content-Length"
+                        ],
+                        "body": "Action=QueryIdempotencyTokenAutoFill&Version=2020-01-08&Token=00000000-0000-4000-8000-000000000123",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "params": {
+                            "token": "00000000-0000-4000-8000-000000000123"
+                        },
+                        "appliesTo": "client"
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#QueryIdempotencyTokenAutoFillInput": {
+            "type": "structure",
+            "members": {
+                "token": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "aws.protocoltests.ec2#QueryLists": {
+            "type": "operation",
+            "input": {
+                "target": "aws.protocoltests.ec2#QueryListsInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "This test serializes simple and complex lists.",
+                "smithy.test#httpRequestTests": [
+                    {
+                        "id": "Ec2Lists",
+                        "documentation": "Serializes query lists. All EC2 lists are flattened.",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "body": "Action=QueryLists&Version=2020-01-08&ListArg.1=foo&ListArg.2=bar&ListArg.3=baz&ComplexListArg.1.Hi=hello&ComplexListArg.2.Hi=hola",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "params": {
+                            "ListArg": [
+                                "foo",
+                                "bar",
+                                "baz"
+                            ],
+                            "ComplexListArg": [
+                                {
+                                    "hi": "hello"
+                                },
+                                {
+                                    "hi": "hola"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "id": "Ec2EmptyQueryLists",
+                        "documentation": "Does not serialize empty query lists.",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "body": "Action=QueryLists&Version=2020-01-08",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "params": {
+                            "ListArg": []
+                        }
+                    },
+                    {
+                        "id": "Ec2ListArgWithXmlNameMember",
+                        "documentation": "An xmlName trait in the member of a list has no effect on the list serialization.",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "body": "Action=QueryLists&Version=2020-01-08&ListArgWithXmlNameMember.1=A&ListArgWithXmlNameMember.2=B",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "params": {
+                            "ListArgWithXmlNameMember": [
+                                "A",
+                                "B"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "Ec2ListMemberWithXmlName",
+                        "documentation": "Changes the name of the list using the xmlName trait",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "body": "Action=QueryLists&Version=2020-01-08&Hi.1=A&Hi.2=B",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "params": {
+                            "ListArgWithXmlName": [
+                                "A",
+                                "B"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "Ec2ListNestedStructWithList",
+                        "documentation": "Nested structure with a list member",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "body": "Action=QueryLists&Version=2020-01-08&NestedWithList.ListArg.1=A&NestedWithList.ListArg.2=B",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "params": {
+                            "NestedWithList": {
+                                "ListArg": [
+                                    "A",
+                                    "B"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#QueryListsInput": {
+            "type": "structure",
+            "members": {
+                "ListArg": {
+                    "target": "aws.protocoltests.shared#StringList"
+                },
+                "ComplexListArg": {
+                    "target": "aws.protocoltests.shared#GreetingList"
+                },
+                "ListArgWithXmlNameMember": {
+                    "target": "aws.protocoltests.ec2#ListWithXmlName"
+                },
+                "ListArgWithXmlName": {
+                    "target": "aws.protocoltests.ec2#ListWithXmlName",
+                    "traits": {
+                        "smithy.api#xmlName": "Hi"
+                    }
+                },
+                "NestedWithList": {
+                    "target": "aws.protocoltests.ec2#NestedStructWithList"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#QueryTimestamps": {
+            "type": "operation",
+            "input": {
+                "target": "aws.protocoltests.ec2#QueryTimestampsInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "This test serializes timestamps.\n\n1. Timestamps are serialized as RFC 3339 date-time values by default.\n2. A timestampFormat trait on a member changes the format.\n3. A timestampFormat trait on the shape targeted by the member changes the format.",
+                "smithy.test#httpRequestTests": [
+                    {
+                        "id": "Ec2TimestampsInput",
+                        "documentation": "Serializes timestamps",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "requireHeaders": [
+                            "Content-Length"
+                        ],
+                        "body": "Action=QueryTimestamps&Version=2020-01-08&NormalFormat=2015-01-25T08%3A00%3A00Z&EpochMember=1422172800&EpochTarget=1422172800",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "params": {
+                            "normalFormat": 1422172800,
+                            "epochMember": 1422172800,
+                            "epochTarget": 1422172800
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#QueryTimestampsInput": {
+            "type": "structure",
+            "members": {
+                "normalFormat": {
+                    "target": "smithy.api#Timestamp"
+                },
+                "epochMember": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#timestampFormat": "epoch-seconds"
+                    }
+                },
+                "epochTarget": {
+                    "target": "aws.protocoltests.shared#EpochSeconds"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#RecursiveXmlShapes": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "aws.protocoltests.ec2#RecursiveXmlShapesOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "Recursive shapes",
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "Ec2RecursiveShapes",
+                        "documentation": "Serializes recursive structures",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<RecursiveXmlShapesResponse xmlns=\"https://example.com/\">\n    <nested>\n        <foo>Foo1</foo>\n        <nested>\n            <bar>Bar1</bar>\n            <recursiveMember>\n                <foo>Foo2</foo>\n                <nested>\n                    <bar>Bar2</bar>\n                </nested>\n            </recursiveMember>\n        </nested>\n    </nested>\n    <requestId>requestid</requestId>\n</RecursiveXmlShapesResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "nested": {
+                                "foo": "Foo1",
+                                "nested": {
+                                    "bar": "Bar1",
+                                    "recursiveMember": {
+                                        "foo": "Foo2",
+                                        "nested": {
+                                            "bar": "Bar2"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#RecursiveXmlShapesOutput": {
+            "type": "structure",
+            "members": {
+                "nested": {
+                    "target": "aws.protocoltests.ec2#RecursiveXmlShapesOutputNested1"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#RecursiveXmlShapesOutputNested1": {
+            "type": "structure",
+            "members": {
+                "foo": {
+                    "target": "smithy.api#String"
+                },
+                "nested": {
+                    "target": "aws.protocoltests.ec2#RecursiveXmlShapesOutputNested2"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#RecursiveXmlShapesOutputNested2": {
+            "type": "structure",
+            "members": {
+                "bar": {
+                    "target": "smithy.api#String"
+                },
+                "recursiveMember": {
+                    "target": "aws.protocoltests.ec2#RecursiveXmlShapesOutputNested1"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#RenamedListMembers": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#SimpleInputParams": {
+            "type": "operation",
+            "input": {
+                "target": "aws.protocoltests.ec2#SimpleInputParamsInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "This test serializes strings, numbers, and boolean values.",
+                "smithy.test#httpRequestTests": [
+                    {
+                        "id": "Ec2SimpleInputParamsStrings",
+                        "documentation": "Serializes strings",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "requireHeaders": [
+                            "Content-Length"
+                        ],
+                        "body": "Action=SimpleInputParams&Version=2020-01-08&Foo=val1&Bar=val2",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "params": {
+                            "Foo": "val1",
+                            "Bar": "val2"
+                        }
+                    },
+                    {
+                        "id": "Ec2SimpleInputParamsStringAndBooleanTrue",
+                        "documentation": "Serializes booleans that are true",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "requireHeaders": [
+                            "Content-Length"
+                        ],
+                        "body": "Action=SimpleInputParams&Version=2020-01-08&Foo=val1&Baz=true",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "params": {
+                            "Foo": "val1",
+                            "Baz": true
+                        }
+                    },
+                    {
+                        "id": "Ec2SimpleInputParamsStringsAndBooleanFalse",
+                        "documentation": "Serializes booleans that are false",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "requireHeaders": [
+                            "Content-Length"
+                        ],
+                        "body": "Action=SimpleInputParams&Version=2020-01-08&Baz=false",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "params": {
+                            "Baz": false
+                        }
+                    },
+                    {
+                        "id": "Ec2SimpleInputParamsInteger",
+                        "documentation": "Serializes integers",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "requireHeaders": [
+                            "Content-Length"
+                        ],
+                        "body": "Action=SimpleInputParams&Version=2020-01-08&Bam=10",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "params": {
+                            "Bam": 10
+                        }
+                    },
+                    {
+                        "id": "Ec2SimpleInputParamsFloat",
+                        "documentation": "Serializes floats",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "requireHeaders": [
+                            "Content-Length"
+                        ],
+                        "body": "Action=SimpleInputParams&Version=2020-01-08&Boo=10.8",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "params": {
+                            "Boo": 10.8
+                        }
+                    },
+                    {
+                        "id": "Ec2SimpleInputParamsBlob",
+                        "documentation": "Blobs are base64 encoded in the query string",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "requireHeaders": [
+                            "Content-Length"
+                        ],
+                        "body": "Action=SimpleInputParams&Version=2020-01-08&Qux=dmFsdWU%3D",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "params": {
+                            "Qux": "value"
+                        }
+                    },
+                    {
+                        "id": "Ec2Enums",
+                        "documentation": "Serializes enums in the query string",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "requireHeaders": [
+                            "Content-Length"
+                        ],
+                        "body": "Action=SimpleInputParams&Version=2020-01-08&FooEnum=Foo",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "params": {
+                            "FooEnum": "Foo"
+                        }
+                    },
+                    {
+                        "id": "Ec2Query",
+                        "documentation": "Serializes query using ec2QueryName trait.",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "requireHeaders": [
+                            "Content-Length"
+                        ],
+                        "body": "Action=SimpleInputParams&Version=2020-01-08&HasQueryName=Hi",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "params": {
+                            "HasQueryName": "Hi"
+                        }
+                    },
+                    {
+                        "id": "Ec2QueryIsPreferred",
+                        "documentation": "ec2QueryName trait is preferred over xmlName.",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "requireHeaders": [
+                            "Content-Length"
+                        ],
+                        "body": "Action=SimpleInputParams&Version=2020-01-08&HasQueryAndXmlName=Hi",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "params": {
+                            "HasQueryAndXmlName": "Hi"
+                        }
+                    },
+                    {
+                        "id": "Ec2XmlNameIsUppercased",
+                        "documentation": "xmlName is used with the ec2 protocol, but the first character is uppercased",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "requireHeaders": [
+                            "Content-Length"
+                        ],
+                        "body": "Action=SimpleInputParams&Version=2020-01-08&UsesXmlName=Hi",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "params": {
+                            "UsesXmlName": "Hi"
+                        }
+                    },
+                    {
+                        "id": "Ec2QuerySupportsNaNFloatInputs",
+                        "documentation": "Supports handling NaN float values.",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "body": "Action=SimpleInputParams&Version=2020-01-08&FloatValue=NaN&Boo=NaN",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "requireHeaders": [
+                            "Content-Length"
+                        ],
+                        "params": {
+                            "FloatValue": "NaN",
+                            "Boo": "NaN"
+                        }
+                    },
+                    {
+                        "id": "Ec2QuerySupportsInfinityFloatInputs",
+                        "documentation": "Supports handling Infinity float values.",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "body": "Action=SimpleInputParams&Version=2020-01-08&FloatValue=Infinity&Boo=Infinity",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "requireHeaders": [
+                            "Content-Length"
+                        ],
+                        "params": {
+                            "FloatValue": "Infinity",
+                            "Boo": "Infinity"
+                        }
+                    },
+                    {
+                        "id": "Ec2QuerySupportsNegativeInfinityFloatInputs",
+                        "documentation": "Supports handling -Infinity float values.",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "body": "Action=SimpleInputParams&Version=2020-01-08&FloatValue=-Infinity&Boo=-Infinity",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "requireHeaders": [
+                            "Content-Length"
+                        ],
+                        "params": {
+                            "FloatValue": "-Infinity",
+                            "Boo": "-Infinity"
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#SimpleInputParamsInput": {
+            "type": "structure",
+            "members": {
+                "Foo": {
+                    "target": "smithy.api#String"
+                },
+                "Bar": {
+                    "target": "smithy.api#String"
+                },
+                "Baz": {
+                    "target": "smithy.api#Boolean"
+                },
+                "Bam": {
+                    "target": "smithy.api#Integer"
+                },
+                "FloatValue": {
+                    "target": "smithy.api#Float"
+                },
+                "Boo": {
+                    "target": "smithy.api#Double"
+                },
+                "Qux": {
+                    "target": "smithy.api#Blob"
+                },
+                "FooEnum": {
+                    "target": "aws.protocoltests.shared#FooEnum"
+                },
+                "HasQueryName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "HasQueryName"
+                    }
+                },
+                "HasQueryAndXmlName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "HasQueryAndXmlName",
+                        "smithy.api#xmlName": "hasQueryAndXmlName"
+                    }
+                },
+                "UsesXmlName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#xmlName": "usesXmlName"
+                    }
+                }
+            }
+        },
+        "aws.protocoltests.ec2#SimpleScalarXmlProperties": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "aws.protocoltests.ec2#SimpleScalarXmlPropertiesOutput"
+            },
+            "traits": {
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "Ec2SimpleScalarProperties",
+                        "documentation": "Serializes simple scalar properties",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<SimpleScalarXmlPropertiesResponse xmlns=\"https://example.com/\">\n    <stringValue>string</stringValue>\n    <emptyStringValue/>\n    <trueBooleanValue>true</trueBooleanValue>\n    <falseBooleanValue>false</falseBooleanValue>\n    <byteValue>1</byteValue>\n    <shortValue>2</shortValue>\n    <integerValue>3</integerValue>\n    <longValue>4</longValue>\n    <floatValue>5.5</floatValue>\n    <DoubleDribble>6.5</DoubleDribble>\n    <requestId>requestid</requestId>\n</SimpleScalarXmlPropertiesResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "stringValue": "string",
+                            "emptyStringValue": "",
+                            "trueBooleanValue": true,
+                            "falseBooleanValue": false,
+                            "byteValue": 1,
+                            "shortValue": 2,
+                            "integerValue": 3,
+                            "longValue": 4,
+                            "floatValue": 5.5,
+                            "doubleValue": 6.5
+                        }
+                    },
+                    {
+                        "id": "Ec2QuerySupportsNaNFloatOutputs",
+                        "documentation": "Supports handling NaN float values.",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<SimpleScalarXmlPropertiesResponse xmlns=\"https://example.com/\">\n    <floatValue>NaN</floatValue>\n    <DoubleDribble>NaN</DoubleDribble>\n</SimpleScalarXmlPropertiesResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "floatValue": "NaN",
+                            "doubleValue": "NaN"
+                        }
+                    },
+                    {
+                        "id": "Ec2QuerySupportsInfinityFloatOutputs",
+                        "documentation": "Supports handling Infinity float values.",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<SimpleScalarXmlPropertiesResponse xmlns=\"https://example.com/\">\n    <floatValue>Infinity</floatValue>\n    <DoubleDribble>Infinity</DoubleDribble>\n</SimpleScalarXmlPropertiesResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "floatValue": "Infinity",
+                            "doubleValue": "Infinity"
+                        }
+                    },
+                    {
+                        "id": "Ec2QuerySupportsNegativeInfinityFloatOutputs",
+                        "documentation": "Supports handling -Infinity float values.",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<SimpleScalarXmlPropertiesResponse xmlns=\"https://example.com/\">\n    <floatValue>-Infinity</floatValue>\n    <DoubleDribble>-Infinity</DoubleDribble>\n</SimpleScalarXmlPropertiesResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "floatValue": "-Infinity",
+                            "doubleValue": "-Infinity"
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#SimpleScalarXmlPropertiesOutput": {
+            "type": "structure",
+            "members": {
+                "stringValue": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IgnoreMe"
+                    }
+                },
+                "emptyStringValue": {
+                    "target": "smithy.api#String"
+                },
+                "trueBooleanValue": {
+                    "target": "smithy.api#Boolean"
+                },
+                "falseBooleanValue": {
+                    "target": "smithy.api#Boolean"
+                },
+                "byteValue": {
+                    "target": "smithy.api#Byte"
+                },
+                "shortValue": {
+                    "target": "smithy.api#Short"
+                },
+                "integerValue": {
+                    "target": "smithy.api#Integer"
+                },
+                "longValue": {
+                    "target": "smithy.api#Long"
+                },
+                "floatValue": {
+                    "target": "smithy.api#Float"
+                },
+                "doubleValue": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#xmlName": "DoubleDribble"
+                    }
+                }
+            }
+        },
+        "aws.protocoltests.ec2#StructArg": {
+            "type": "structure",
+            "members": {
+                "StringArg": {
+                    "target": "smithy.api#String"
+                },
+                "OtherArg": {
+                    "target": "smithy.api#Boolean"
+                },
+                "RecursiveArg": {
+                    "target": "aws.protocoltests.ec2#StructArg"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#StructureList": {
+            "type": "list",
+            "member": {
+                "target": "aws.protocoltests.ec2#StructureListMember",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#StructureListMember": {
+            "type": "structure",
+            "members": {
+                "a": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#xmlName": "value"
+                    }
+                },
+                "b": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#xmlName": "other"
+                    }
+                }
+            }
+        },
+        "aws.protocoltests.ec2#XmlBlobs": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "aws.protocoltests.ec2#XmlBlobsOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "Blobs are base64 encoded",
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "Ec2XmlBlobs",
+                        "documentation": "Blobs are base64 encoded",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<XmlBlobsResponse xmlns=\"https://example.com/\">\n    <data>dmFsdWU=</data>\n    <requestId>requestid</requestId>\n</XmlBlobsResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "data": "value"
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#XmlBlobsOutput": {
+            "type": "structure",
+            "members": {
+                "data": {
+                    "target": "smithy.api#Blob"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#XmlEmptyBlobs": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "aws.protocoltests.ec2#XmlBlobsOutput"
+            },
+            "traits": {
+                "smithy.api#tags": [
+                    "client-only"
+                ],
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "Ec2XmlEmptyBlobs",
+                        "documentation": "Empty blobs are deserialized as empty string",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<XmlEmptyBlobsResponse xmlns=\"https://example.com/\">\n    <data></data>\n    <requestId>requestid</requestId>\n</XmlEmptyBlobsResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "data": ""
+                        },
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "Ec2XmlEmptySelfClosedBlobs",
+                        "documentation": "Empty self closed blobs are deserialized as empty string",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<XmlEmptyBlobsResponse xmlns=\"https://example.com/\">\n    <data/>\n    <requestId>requestid</requestId>\n</XmlEmptyBlobsResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "data": ""
+                        },
+                        "appliesTo": "client"
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#XmlEmptyLists": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "aws.protocoltests.ec2#XmlListsOutput"
+            },
+            "traits": {
+                "smithy.api#tags": [
+                    "client-only"
+                ],
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "Ec2XmlEmptyLists",
+                        "documentation": "Deserializes empty XML lists",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<XmlEmptyListsResponse xmlns=\"https://example.com/\">\n  <stringList/>\n  <stringSet></stringSet>\n</XmlEmptyListsResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml"
+                        },
+                        "params": {
+                            "stringList": [],
+                            "stringSet": []
+                        },
+                        "appliesTo": "client"
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#XmlEnums": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "aws.protocoltests.ec2#XmlEnumsOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "This example serializes enums as top level properties, in lists, sets, and maps.",
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "Ec2XmlEnums",
+                        "documentation": "Serializes simple scalar properties",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<XmlEnumsResponse xmlns=\"https://example.com/\">\n    <fooEnum1>Foo</fooEnum1>\n    <fooEnum2>0</fooEnum2>\n    <fooEnum3>1</fooEnum3>\n    <fooEnumList>\n        <member>Foo</member>\n        <member>0</member>\n    </fooEnumList>\n    <fooEnumSet>\n        <member>Foo</member>\n        <member>0</member>\n    </fooEnumSet>\n    <fooEnumMap>\n        <entry>\n            <key>hi</key>\n            <value>Foo</value>\n        </entry>\n        <entry>\n            <key>zero</key>\n            <value>0</value>\n        </entry>\n    </fooEnumMap>\n    <requestId>requestid</requestId>\n</XmlEnumsResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "fooEnum1": "Foo",
+                            "fooEnum2": "0",
+                            "fooEnum3": "1",
+                            "fooEnumList": [
+                                "Foo",
+                                "0"
+                            ],
+                            "fooEnumSet": [
+                                "Foo",
+                                "0"
+                            ],
+                            "fooEnumMap": {
+                                "hi": "Foo",
+                                "zero": "0"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#XmlEnumsOutput": {
+            "type": "structure",
+            "members": {
+                "fooEnum1": {
+                    "target": "aws.protocoltests.shared#FooEnum"
+                },
+                "fooEnum2": {
+                    "target": "aws.protocoltests.shared#FooEnum"
+                },
+                "fooEnum3": {
+                    "target": "aws.protocoltests.shared#FooEnum"
+                },
+                "fooEnumList": {
+                    "target": "aws.protocoltests.shared#FooEnumList"
+                },
+                "fooEnumSet": {
+                    "target": "aws.protocoltests.shared#FooEnumSet"
+                },
+                "fooEnumMap": {
+                    "target": "aws.protocoltests.shared#FooEnumMap"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#XmlIntEnums": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "aws.protocoltests.ec2#XmlIntEnumsOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "This example serializes intEnums as top level properties, in lists, sets, and maps.",
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "Ec2XmlIntEnums",
+                        "documentation": "Serializes simple scalar properties",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<XmlIntEnumsResponse xmlns=\"https://example.com/\">\n    <intEnum1>1</intEnum1>\n    <intEnum2>2</intEnum2>\n    <intEnum3>3</intEnum3>\n    <intEnumList>\n        <member>1</member>\n        <member>2</member>\n    </intEnumList>\n    <intEnumSet>\n        <member>1</member>\n        <member>2</member>\n    </intEnumSet>\n    <intEnumMap>\n        <entry>\n            <key>a</key>\n            <value>1</value>\n        </entry>\n        <entry>\n            <key>b</key>\n            <value>2</value>\n        </entry>\n    </intEnumMap>\n    <requestId>requestid</requestId>\n</XmlIntEnumsResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "intEnum1": 1,
+                            "intEnum2": 2,
+                            "intEnum3": 3,
+                            "intEnumList": [
+                                1,
+                                2
+                            ],
+                            "intEnumSet": [
+                                1,
+                                2
+                            ],
+                            "intEnumMap": {
+                                "a": 1,
+                                "b": 2
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#XmlIntEnumsOutput": {
+            "type": "structure",
+            "members": {
+                "intEnum1": {
+                    "target": "aws.protocoltests.shared#IntegerEnum"
+                },
+                "intEnum2": {
+                    "target": "aws.protocoltests.shared#IntegerEnum"
+                },
+                "intEnum3": {
+                    "target": "aws.protocoltests.shared#IntegerEnum"
+                },
+                "intEnumList": {
+                    "target": "aws.protocoltests.shared#IntegerEnumList"
+                },
+                "intEnumSet": {
+                    "target": "aws.protocoltests.shared#IntegerEnumSet"
+                },
+                "intEnumMap": {
+                    "target": "aws.protocoltests.shared#IntegerEnumMap"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#XmlLists": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "aws.protocoltests.ec2#XmlListsOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "This test case serializes XML lists for the following cases for both\ninput and output:\n\n1. Normal XML lists.\n2. Normal XML sets.\n3. XML lists of lists.\n4. XML lists with @xmlName on its members\n5. Flattened XML lists.\n6. Flattened XML lists with @xmlName.\n7. Flattened XML lists with @xmlNamespace.\n8. Lists of structures.",
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "Ec2XmlLists",
+                        "documentation": "Tests for XML list serialization",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<XmlListsResponse xmlns=\"https://example.com/\">\n    <stringList>\n        <member>foo</member>\n        <member>bar</member>\n    </stringList>\n    <stringSet>\n        <member>foo</member>\n        <member>bar</member>\n    </stringSet>\n    <integerList>\n        <member>1</member>\n        <member>2</member>\n    </integerList>\n    <booleanList>\n        <member>true</member>\n        <member>false</member>\n    </booleanList>\n    <timestampList>\n        <member>2014-04-29T18:30:38Z</member>\n        <member>2014-04-29T18:30:38Z</member>\n    </timestampList>\n    <enumList>\n        <member>Foo</member>\n        <member>0</member>\n    </enumList>\n    <intEnumList>\n        <member>1</member>\n        <member>2</member>\n    </intEnumList>\n    <nestedStringList>\n        <member>\n            <member>foo</member>\n            <member>bar</member>\n        </member>\n        <member>\n            <member>baz</member>\n            <member>qux</member>\n        </member>\n    </nestedStringList>\n    <renamed>\n        <item>foo</item>\n        <item>bar</item>\n    </renamed>\n    <flattenedList>hi</flattenedList>\n    <flattenedList>bye</flattenedList>\n    <customName>yep</customName>\n    <customName>nope</customName>\n    <flattenedListWithMemberNamespace xmlns=\"https://xml-member.example.com\">a</flattenedListWithMemberNamespace>\n    <flattenedListWithMemberNamespace xmlns=\"https://xml-member.example.com\">b</flattenedListWithMemberNamespace>\n    <flattenedListWithNamespace>a</flattenedListWithNamespace>\n    <flattenedListWithNamespace>b</flattenedListWithNamespace>\n    <myStructureList>\n        <item>\n            <value>1</value>\n            <other>2</other>\n        </item>\n        <item>\n            <value>3</value>\n            <other>4</other>\n        </item>\n    </myStructureList>\n    <requestId>requestid</requestId>\n</XmlListsResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "stringList": [
+                                "foo",
+                                "bar"
+                            ],
+                            "stringSet": [
+                                "foo",
+                                "bar"
+                            ],
+                            "integerList": [
+                                1,
+                                2
+                            ],
+                            "booleanList": [
+                                true,
+                                false
+                            ],
+                            "timestampList": [
+                                1398796238,
+                                1398796238
+                            ],
+                            "enumList": [
+                                "Foo",
+                                "0"
+                            ],
+                            "intEnumList": [
+                                1,
+                                2
+                            ],
+                            "nestedStringList": [
+                                [
+                                    "foo",
+                                    "bar"
+                                ],
+                                [
+                                    "baz",
+                                    "qux"
+                                ]
+                            ],
+                            "renamedListMembers": [
+                                "foo",
+                                "bar"
+                            ],
+                            "flattenedList": [
+                                "hi",
+                                "bye"
+                            ],
+                            "flattenedList2": [
+                                "yep",
+                                "nope"
+                            ],
+                            "flattenedListWithMemberNamespace": [
+                                "a",
+                                "b"
+                            ],
+                            "flattenedListWithNamespace": [
+                                "a",
+                                "b"
+                            ],
+                            "structureList": [
+                                {
+                                    "a": "1",
+                                    "b": "2"
+                                },
+                                {
+                                    "a": "3",
+                                    "b": "4"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#XmlListsOutput": {
+            "type": "structure",
+            "members": {
+                "stringList": {
+                    "target": "aws.protocoltests.shared#StringList"
+                },
+                "stringSet": {
+                    "target": "aws.protocoltests.shared#StringSet"
+                },
+                "integerList": {
+                    "target": "aws.protocoltests.shared#IntegerList"
+                },
+                "booleanList": {
+                    "target": "aws.protocoltests.shared#BooleanList"
+                },
+                "timestampList": {
+                    "target": "aws.protocoltests.shared#TimestampList"
+                },
+                "enumList": {
+                    "target": "aws.protocoltests.shared#FooEnumList"
+                },
+                "intEnumList": {
+                    "target": "aws.protocoltests.shared#IntegerEnumList"
+                },
+                "nestedStringList": {
+                    "target": "aws.protocoltests.shared#NestedStringList"
+                },
+                "renamedListMembers": {
+                    "target": "aws.protocoltests.ec2#RenamedListMembers",
+                    "traits": {
+                        "smithy.api#xmlName": "renamed"
+                    }
+                },
+                "flattenedList": {
+                    "target": "aws.protocoltests.ec2#RenamedListMembers",
+                    "traits": {
+                        "smithy.api#suppress": [
+                            "XmlFlattenedTrait"
+                        ],
+                        "smithy.api#xmlFlattened": {}
+                    }
+                },
+                "flattenedList2": {
+                    "target": "aws.protocoltests.ec2#RenamedListMembers",
+                    "traits": {
+                        "smithy.api#xmlFlattened": {},
+                        "smithy.api#xmlName": "customName"
+                    }
+                },
+                "flattenedListWithMemberNamespace": {
+                    "target": "aws.protocoltests.ec2#ListWithMemberNamespace",
+                    "traits": {
+                        "smithy.api#xmlFlattened": {}
+                    }
+                },
+                "flattenedListWithNamespace": {
+                    "target": "aws.protocoltests.ec2#ListWithNamespace",
+                    "traits": {
+                        "smithy.api#xmlFlattened": {}
+                    }
+                },
+                "structureList": {
+                    "target": "aws.protocoltests.ec2#StructureList",
+                    "traits": {
+                        "smithy.api#xmlName": "myStructureList"
+                    }
+                }
+            }
+        },
+        "aws.protocoltests.ec2#XmlNamespaceNested": {
+            "type": "structure",
+            "members": {
+                "foo": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#xmlNamespace": {
+                            "uri": "http://baz.com",
+                            "prefix": "baz"
+                        }
+                    }
+                },
+                "values": {
+                    "target": "aws.protocoltests.ec2#XmlNamespacedList",
+                    "traits": {
+                        "smithy.api#xmlNamespace": {
+                            "uri": "http://qux.com"
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://foo.com"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#XmlNamespacedList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#xmlNamespace": {
+                        "uri": "http://bux.com"
+                    }
+                }
+            }
+        },
+        "aws.protocoltests.ec2#XmlNamespaces": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "aws.protocoltests.ec2#XmlNamespacesOutput"
+            },
+            "traits": {
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "Ec2XmlNamespaces",
+                        "documentation": "Serializes XML namespaces",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<XmlNamespacesResponse xmlns=\"https://example.com/\">\n    <nested>\n        <foo xmlns:baz=\"http://baz.com\">Foo</foo>\n        <values xmlns=\"http://qux.com\">\n            <member xmlns=\"http://bux.com\">Bar</member>\n            <member xmlns=\"http://bux.com\">Baz</member>\n        </values>\n    </nested>\n    <requestId>requestid</requestId>\n</XmlNamespacesResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "nested": {
+                                "foo": "Foo",
+                                "values": [
+                                    "Bar",
+                                    "Baz"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#XmlNamespacesOutput": {
+            "type": "structure",
+            "members": {
+                "nested": {
+                    "target": "aws.protocoltests.ec2#XmlNamespaceNested"
+                }
+            },
+            "traits": {
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://foo.com"
+                }
+            }
+        },
+        "aws.protocoltests.ec2#XmlTimestamps": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "aws.protocoltests.ec2#XmlTimestampsOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "This tests how timestamps are serialized, including using the\ndefault format of date-time and various @timestampFormat trait\nvalues.",
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "Ec2XmlTimestamps",
+                        "documentation": "Tests how normal timestamps are serialized",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <normal>2014-04-29T18:30:38Z</normal>\n    <requestId>requestid</requestId>\n</XmlTimestampsResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "normal": 1398796238
+                        }
+                    },
+                    {
+                        "id": "Ec2XmlTimestampsWithDateTimeFormat",
+                        "documentation": "Ensures that the timestampFormat of date-time works like normal timestamps",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <dateTime>2014-04-29T18:30:38Z</dateTime>\n    <requestId>requestid</requestId>\n</XmlTimestampsResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "dateTime": 1398796238
+                        }
+                    },
+                    {
+                        "id": "Ec2XmlTimestampsWithDateTimeOnTargetFormat",
+                        "documentation": "Ensures that the timestampFormat of date-time on the target shape works like normal timestamps",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <dateTimeOnTarget>2014-04-29T18:30:38Z</dateTimeOnTarget>\n    <requestId>requestid</requestId>\n</XmlTimestampsResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "dateTimeOnTarget": 1398796238
+                        }
+                    },
+                    {
+                        "id": "Ec2XmlTimestampsWithEpochSecondsFormat",
+                        "documentation": "Ensures that the timestampFormat of epoch-seconds works",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <epochSeconds>1398796238</epochSeconds>\n    <requestId>requestid</requestId>\n</XmlTimestampsResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "epochSeconds": 1398796238
+                        }
+                    },
+                    {
+                        "id": "Ec2XmlTimestampsWithEpochSecondsOnTargetFormat",
+                        "documentation": "Ensures that the timestampFormat of epoch-seconds on the target shape works",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <epochSecondsOnTarget>1398796238</epochSecondsOnTarget>\n    <requestId>requestid</requestId>\n</XmlTimestampsResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "epochSecondsOnTarget": 1398796238
+                        }
+                    },
+                    {
+                        "id": "Ec2XmlTimestampsWithHttpDateFormat",
+                        "documentation": "Ensures that the timestampFormat of http-date works",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <httpDate>Tue, 29 Apr 2014 18:30:38 GMT</httpDate>\n    <requestId>requestid</requestId>\n</XmlTimestampsResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "httpDate": 1398796238
+                        }
+                    },
+                    {
+                        "id": "Ec2XmlTimestampsWithHttpDateOnTargetFormat",
+                        "documentation": "Ensures that the timestampFormat of http-date on the target shape works",
+                        "protocol": "aws.protocols#ec2Query",
+                        "code": 200,
+                        "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <httpDateOnTarget>Tue, 29 Apr 2014 18:30:38 GMT</httpDateOnTarget>\n    <requestId>requestid</requestId>\n</XmlTimestampsResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "text/xml;charset=UTF-8"
+                        },
+                        "params": {
+                            "httpDateOnTarget": 1398796238
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.ec2#XmlTimestampsOutput": {
+            "type": "structure",
+            "members": {
+                "normal": {
+                    "target": "smithy.api#Timestamp"
+                },
+                "dateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "dateTimeOnTarget": {
+                    "target": "aws.protocoltests.shared#DateTime"
+                },
+                "epochSeconds": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#timestampFormat": "epoch-seconds"
+                    }
+                },
+                "epochSecondsOnTarget": {
+                    "target": "aws.protocoltests.shared#EpochSeconds"
+                },
+                "httpDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#timestampFormat": "http-date"
+                    }
+                },
+                "httpDateOnTarget": {
+                    "target": "aws.protocoltests.shared#HttpDate"
+                }
+            }
+        },
+        "aws.protocoltests.shared#BooleanList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#Boolean"
+            }
+        },
+        "aws.protocoltests.shared#DateTime": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "aws.protocoltests.shared#EpochSeconds": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "epoch-seconds"
+            }
+        },
+        "aws.protocoltests.shared#FooEnum": {
+            "type": "enum",
+            "members": {
+                "FOO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Foo"
+                    }
+                },
+                "BAZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Baz"
+                    }
+                },
+                "BAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Bar"
+                    }
+                },
+                "ONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "1"
+                    }
+                },
+                "ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "0"
+                    }
+                }
+            }
+        },
+        "aws.protocoltests.shared#FooEnumList": {
+            "type": "list",
+            "member": {
+                "target": "aws.protocoltests.shared#FooEnum"
+            }
+        },
+        "aws.protocoltests.shared#FooEnumMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "aws.protocoltests.shared#FooEnum"
+            }
+        },
+        "aws.protocoltests.shared#FooEnumSet": {
+            "type": "list",
+            "member": {
+                "target": "aws.protocoltests.shared#FooEnum"
+            },
+            "traits": {
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "aws.protocoltests.shared#GreetingList": {
+            "type": "list",
+            "member": {
+                "target": "aws.protocoltests.shared#GreetingStruct"
+            }
+        },
+        "aws.protocoltests.shared#GreetingStruct": {
+            "type": "structure",
+            "members": {
+                "hi": {
+                    "target": "smithy.api#String"
+                }
+            }
+        },
+        "aws.protocoltests.shared#HttpDate": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "http-date"
+            }
+        },
+        "aws.protocoltests.shared#IntegerEnum": {
+            "type": "intEnum",
+            "members": {
+                "A": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": 1
+                    }
+                },
+                "B": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": 2
+                    }
+                },
+                "C": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": 3
+                    }
+                }
+            }
+        },
+        "aws.protocoltests.shared#IntegerEnumList": {
+            "type": "list",
+            "member": {
+                "target": "aws.protocoltests.shared#IntegerEnum"
+            }
+        },
+        "aws.protocoltests.shared#IntegerEnumMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "aws.protocoltests.shared#IntegerEnum"
+            }
+        },
+        "aws.protocoltests.shared#IntegerEnumSet": {
+            "type": "list",
+            "member": {
+                "target": "aws.protocoltests.shared#IntegerEnum"
+            },
+            "traits": {
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "aws.protocoltests.shared#IntegerList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#Integer"
+            }
+        },
+        "aws.protocoltests.shared#NestedStringList": {
+            "type": "list",
+            "member": {
+                "target": "aws.protocoltests.shared#StringList"
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of lists of strings."
+            }
+        },
+        "aws.protocoltests.shared#StringList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "aws.protocoltests.shared#StringSet": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "aws.protocoltests.shared#TimestampList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#Timestamp"
+            }
+        }
+    }
+}

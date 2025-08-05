@@ -30,10 +30,9 @@ module Aws
 
         def build_body(config, operation, data)
           operation.output.member_name = "#{operation.name}Result"
-          xml = config.xml_codec.build(operation.output, data)
           <<~XML.strip
             <#{operation.name}Response xmlns="#{xmlns(config.service)}">
-              #{xml}
+              #{config.xml_codec.build(operation.output, data)}
               <ResponseMetadata>
                 <RequestId>stubbed-request-id</RequestId>
               </ResponseMetadata>
