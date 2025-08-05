@@ -1,20 +1,18 @@
 # frozen_string_literal: true
 
+require_relative '../query/codec'
 require_relative '../query/handler'
-require_relative '../query/param_builder'
-require_relative '../xml/error_handler'
 require_relative '../stubbing/query'
+require_relative '../xml/error_handler'
 
 module Aws
   module Core
     module Plugins
       # @api private
       class Query < Smithy::Client::Plugin
-        # @api private
-        # option(:query_codec) { Core::Query::ParamBuilder }
+        option(:protocol, default: 'aws.protocols#awsQuery')
+        option(:query_codec) { Core::Query::Codec.new }
         option(:xml_codec) { Smithy::Xml::Codec.new }
-
-        # @api private
         option(:stubber) { Stubbing::Query.new }
 
         handler(Core::Query::Handler)

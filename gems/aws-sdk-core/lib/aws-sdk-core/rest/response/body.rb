@@ -53,8 +53,8 @@ module Aws
             body.respond_to?(:size) && body.size.zero?
           end
 
-          def parse(shape, body, target = nil)
-            @codec.parse(shape, body, target) if body.size > 0
+          def parse(ref, body, target = nil)
+            @codec.parse(ref, body, target) if body.size.positive?
           end
         end
       end

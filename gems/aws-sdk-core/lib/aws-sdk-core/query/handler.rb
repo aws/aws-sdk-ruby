@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'param_builder'
 require_relative 'param_list'
 
 module Aws
@@ -9,17 +8,6 @@ module Aws
       # @api private
       class Handler < Smithy::Client::Handler
         include Smithy::Schema::Shapes
-
-        WRAPPER_STRUCT = ::Struct.new(:result, :response_metadata)
-        METADATA_STRUCT = ::Struct.new(:request_id)
-        METADATA_REF =
-          begin
-            request_id = ShapeRef.new(shape: StringShape.new, member_name: 'RequestId')
-            response_metadata = StructureShape.new
-            response_metadata.type = METADATA_STRUCT
-            response_metadata.add_member(:request_id, request_id)
-            ShapeRef.new(shape: response_metadata, member_name: 'ResponseMetadata')
-          end
 
         def call(context)
           build_request(context)
@@ -53,30 +41,30 @@ module Aws
           param_list = ParamList.new
           param_list.set('Action', context.operation.name)
           param_list.set('Version', context.config.service.version)
-          ParamBuilder.new(param_list).apply(context.operation.input, params)
+          context.config.query_codec.build(context.operation.input, params, param_list)
           param_list.to_io
         end
 
         def parse_body(context)
-          data = context.config.xml_codec.parse(wrap(context), context.http_response.body.read)
-          unwrap(context, data)
-        end
-
-        def wrap(context)
-          ref = ShapeRef.new(
-            shape: context.operation.output.shape,
-            member_name: "#{context.operation.name}Result"
-          )
-          shape = StructureShape.new
-          shape.add_member(:result, ref)
-          shape.type = WRAPPER_STRUCT
-          shape.add_member(:response_metadata, METADATA_REF)
-          ShapeRef.new(shape: shape)
-        end
-
-        def unwrap(context, data)
-          context[:request_id] = data.response_metadata.request_id if data.response_metadata
+          ref = wrap(context.operation)
+          data = context.config.xml_codec.parse(ref, context.http_response.body.read)
+          context[:request_id] = data.response_metadata&.request_id
           data.result
+        end
+
+        def wrap(operation) # rubocop:disable Metrics/AbcSize
+          result_ref = ShapeRef.new(shape: operation.output.shape, member_name: "#{operation.name}Result")
+          result = StructureShape.new
+          result.add_member(:result, result_ref)
+          result.type = ::Struct.new(:result, :response_metadata)
+
+          response_metadata = StructureShape.new
+          response_metadata.type = ::Struct.new(:request_id)
+          response_metadata.add_member(:request_id, ShapeRef.new(shape: StringShape.new, member_name: 'RequestId'))
+          response_metadata_ref = ShapeRef.new(shape: response_metadata, member_name: 'ResponseMetadata')
+
+          result.add_member(:response_metadata, response_metadata_ref)
+          ShapeRef.new(shape: result)
         end
       end
     end

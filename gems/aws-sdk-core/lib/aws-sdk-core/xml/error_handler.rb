@@ -54,7 +54,8 @@ module Aws
             next unless code == query_code || code == ref.shape.name
 
             data = error_data(context.config.xml_codec, ref, body)
-            # TODO: this does not really belong here - possibly need a rest error handler instead.
+            return [ref.shape.name, query_code || code, data] if context.config.protocol != 'aws.protocols#restXml'
+
             Rest::Response::Headers.new(ref).apply(context.http_response, data)
             return [ref.shape.name, query_code || code, data]
           end

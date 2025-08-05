@@ -21,8 +21,8 @@ module Aws
             @ref = ref
           end
 
-          def apply(request_or_response, input)
-            body = build_body(input)
+          def apply(request_or_response, params)
+            body = build_body(params)
             # TODO: this is terrible
             if body.nil? && modeled_body_member? && !string_or_blob_payload? && !union_payload?
               body = '{}'
@@ -32,17 +32,17 @@ module Aws
 
           private
 
-          def build_body(input)
+          def build_body(params)
             # When string, blob, or enum as a payload, use value directly
             if string_or_blob_payload?
-              input[@ref.shape[:http_payload]]
+              params[@ref.shape[:http_payload]]
             # Otherwise, build the payload member
             elsif @ref.shape[:http_payload_member]
-              input = input[@ref.shape[:http_payload]]
-              @codec.build(@ref.shape[:http_payload_member].shape, input) if input
+              params = params[@ref.shape[:http_payload]]
+              build(@ref.shape[:http_payload_member].shape, params) if params
             else
-              input = body_members(input)
-              @codec.build(@ref, input) unless input.empty?
+              params = body_members(params)
+              build(@ref, params) unless params.empty?
             end
           end
 
@@ -53,11 +53,11 @@ module Aws
             payload.is_a?(StringShape) || payload.is_a?(BlobShape) || payload.is_a?(EnumShape)
           end
 
-          def body_members(input)
+          def body_members(params)
             @ref.shape.members.each_with_object({}) do |(member_name, member_ref), hash|
               next if NON_BODY_TRAITS.any? { |trait| member_ref.traits.key?(trait) }
 
-              hash[member_name] = input[member_name]
+              hash[member_name] = params[member_name]
             end
           end
 
@@ -72,6 +72,10 @@ module Aws
 
           def union_payload?
             @ref.shape[:http_payload_member] && @ref.shape[:http_payload_member].shape.is_a?(UnionShape)
+          end
+
+          def build(ref, params)
+            @codec.build(ref, params)
           end
         end
       end

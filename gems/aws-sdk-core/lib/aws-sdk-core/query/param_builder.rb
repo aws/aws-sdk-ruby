@@ -9,26 +9,24 @@ module Aws
       class ParamBuilder
         include Smithy::Schema::Shapes
 
-        def initialize(param_list)
-          @params = param_list
+        def initialize(options = {})
+          @options = options
         end
 
-        attr_reader :params
-
-        def apply(ref, params)
-          structure(ref, params, '')
+        def build(ref, params, target = nil)
+          structure(ref, params, target, '')
         end
 
         private
 
-        def shape(ref, value, prefix)
+        def shape(ref, value, target, prefix)
           case ref.shape
-          when BlobShape then set(prefix, blob(value))
-          when ListShape then list(ref, value, prefix)
-          when MapShape then map(ref, value, prefix)
-          when StructureShape then structure(ref, value, "#{prefix}.")
-          when TimestampShape then set(prefix, timestamp(ref, value))
-          else set(prefix, value.to_s)
+          when BlobShape then set(prefix, blob(value), target)
+          when ListShape then list(ref, value, target, prefix)
+          when MapShape then map(ref, value, target, prefix)
+          when StructureShape then structure(ref, value, target, "#{prefix}.")
+          when TimestampShape then set(prefix, timestamp(ref, value), target)
+          else set(prefix, value.to_s, target)
           end
         end
 
@@ -36,9 +34,9 @@ module Aws
           Base64.strict_encode64(value.respond_to?(:read) ? value.read : value)
         end
 
-        def list(ref, values, prefix)
+        def list(ref, values, target, prefix) # rubocop:disable Metrics/AbcSize
           member_ref = ref.shape.member
-          return set(prefix, '') if values.empty?
+          return set(prefix, '', target) if values.empty?
 
           if flat?(ref)
             if (name = query_name(ref))
@@ -51,29 +49,29 @@ module Aws
             prefix += ".#{query_name(member_ref, 'member')}"
           end
           values.each.with_index do |value, n|
-            shape(member_ref, value, "#{prefix}.#{n + 1}")
+            shape(member_ref, value, target, "#{prefix}.#{n + 1}")
           end
         end
 
-        def map(ref, values, prefix)
+        def map(ref, values, target, prefix) # rubocop:disable Metrics/AbcSize
           key_ref = ref.shape.key
           value_ref = ref.shape.value
           prefix += '.entry' unless flat?(ref)
           key_name = "%s.%d.#{query_name(key_ref, 'key')}"
           value_name = "%s.%d.#{query_name(value_ref, 'value')}"
           values.each.with_index do |(key, value), n|
-            shape(key_ref, key, key_name % [prefix, n + 1])
-            shape(value_ref, value, value_name % [prefix, n + 1])
+            shape(key_ref, key, target, format(key_name, prefix, n + 1))
+            shape(value_ref, value, target, format(value_name, prefix, n + 1))
           end
         end
 
-        def structure(ref, values, prefix)
+        def structure(ref, values, target, prefix)
           shape = ref.shape
           values.each_pair do |name, value|
             next if value.nil?
 
             member_ref = shape.member(name)
-            shape(member_ref, value, prefix + query_name(member_ref, member_ref.member_name))
+            shape(member_ref, value, target, prefix + query_name(member_ref, member_ref.member_name))
           end
         end
 
@@ -88,8 +86,8 @@ module Aws
           end
         end
 
-        def set(name, value)
-          params.set(name, value)
+        def set(name, value, target)
+          target.set(name, value)
         end
 
         def query_name(ref, default = nil)
