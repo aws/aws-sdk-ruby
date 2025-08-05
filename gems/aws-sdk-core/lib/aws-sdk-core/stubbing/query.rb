@@ -29,17 +29,16 @@ module Aws
         private
 
         def build_body(config, operation, data)
-          xml = []
-          builder = Smithy::Xml::DocBuilder.new(target: xml, indent: '  ')
-          builder.node("#{operation.name}Response", xmlns: xmlns(config.service)) do
-            ref = operation.output
-            ref.member_name = "#{operation.name}Result"
-            config.xml_codec.build(ref, data, xml)
-            builder.node('ResponseMetadata') do
-              builder.node('RequestId', 'stubbed-request-id')
-            end
-          end
-          xml.join
+          operation.output.member_name = "#{operation.name}Result"
+          xml = config.xml_codec.build(operation.output, data)
+          <<~XML.strip
+            <#{operation.name}Response xmlns="#{xmlns(config.service)}">
+              #{xml}
+              <ResponseMetadata>
+                <RequestId>stubbed-request-id</RequestId>
+              </ResponseMetadata>
+            </#{operation.name}Response>
+          XML
         end
 
         def xmlns(service)
