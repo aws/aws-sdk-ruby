@@ -7,6 +7,16 @@
     ]
   },
   "projections": {
+    "AwsEc2": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": { "services": ["aws.protocoltests.ec2#AwsEc2"] }
+        },
+        { "name": "removeUnusedShapes" },
+        { "name": "removeTraitDefinitions" }
+      ]
+    },
     "AwsQuery": {
       "transforms": [
         {

@@ -34,6 +34,7 @@ namespace :test do
     protocols:awsJson1_0
     protocols:awsJson1_1
     protocols:awsQuery
+    protocols:ec2Query
     protocols:restJson1
   ]
 
@@ -48,6 +49,10 @@ namespace :test do
 
   task 'protocols:awsQuery' do
     run_protocol_test('AwsQuery')
+  end
+
+  task 'protocols:ec2Query' do
+    run_protocol_test('AwsEc2')
   end
 
   task 'protocols:restJson1' do

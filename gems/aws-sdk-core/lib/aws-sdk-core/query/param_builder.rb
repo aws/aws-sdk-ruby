@@ -10,7 +10,7 @@ module Aws
         include Smithy::Schema::Shapes
 
         def initialize(options = {})
-          @options = options
+          @ec2 = options[:ec2] || false
         end
 
         def build(ref, params, target = nil)
@@ -35,18 +35,22 @@ module Aws
         end
 
         def list(ref, values, target, prefix) # rubocop:disable Metrics/AbcSize
-          member_ref = ref.shape.member
-          return set(prefix, '', target) if values.empty?
+          if values.empty?
+            return @ec2 ? nil : set(prefix, '', target)
+          end
 
-          if flat?(ref)
-            if (name = query_name(ref))
-              parts = prefix.split('.')
-              parts.pop
-              parts.push(name)
-              prefix = parts.join('.')
+          member_ref = ref.shape.member
+          unless @ec2
+            if flat?(ref)
+              if (name = query_name(ref))
+                parts = prefix.split('.')
+                parts.pop
+                parts.push(name)
+                prefix = parts.join('.')
+              end
+            else
+              prefix += ".#{query_name(member_ref, 'member')}"
             end
-          else
-            prefix += ".#{query_name(member_ref, 'member')}"
           end
           values.each.with_index do |value, n|
             shape(member_ref, value, target, "#{prefix}.#{n + 1}")
@@ -54,6 +58,8 @@ module Aws
         end
 
         def map(ref, values, target, prefix) # rubocop:disable Metrics/AbcSize
+          raise NotImplementedError if @ec2
+
           key_ref = ref.shape.key
           value_ref = ref.shape.value
           prefix += '.entry' unless flat?(ref)
@@ -91,7 +97,14 @@ module Aws
         end
 
         def query_name(ref, default = nil)
-          ref.traits['smithy.api#xmlName'] || default
+          xml_name = ref.traits['smithy.api#xmlName'] || default
+          return xml_name unless @ec2
+
+          ref.traits['aws.protocols#ec2QueryName'] || ucfirst(xml_name)
+        end
+
+        def ucfirst(str)
+          str[0].upcase + str[1..]
         end
 
         def flat?(ref)

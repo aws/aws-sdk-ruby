@@ -9,12 +9,12 @@ gem 'aws-sigv4'
 gem 'base64'
 gem 'logger'
 
-gem 'smithy', git: 'https://github.com/smithy-lang/smithy-ruby/', branch: 'xml-cleanup', glob: 'gems/smithy/smithy.gemspec'
-gem 'smithy-cbor', git: 'https://github.com/smithy-lang/smithy-ruby/', branch: 'xml-cleanup', glob: 'gems/smithy-cbor/smithy-cbor.gemspec'
-gem 'smithy-client', git: 'https://github.com/smithy-lang/smithy-ruby/', branch: 'xml-cleanup', glob: 'gems/smithy-client/smithy-client.gemspec'
-gem 'smithy-json',  git: 'https://github.com/smithy-lang/smithy-ruby/', branch: 'xml-cleanup', glob: 'gems/smithy-json/smithy-json.gemspec'
-gem 'smithy-schema', git: 'https://github.com/smithy-lang/smithy-ruby/', branch: 'xml-cleanup', glob: 'gems/smithy-schema/smithy-schema.gemspec'
-gem 'smithy-xml', git: 'https://github.com/smithy-lang/smithy-ruby/', branch: 'xml-cleanup', glob: 'gems/smithy-xml/smithy-xml.gemspec'
+gem 'smithy', git: 'https://github.com/smithy-lang/smithy-ruby/', branch: 'decaf', glob: 'gems/smithy/smithy.gemspec'
+gem 'smithy-cbor', git: 'https://github.com/smithy-lang/smithy-ruby/', branch: 'decaf', glob: 'gems/smithy-cbor/smithy-cbor.gemspec'
+gem 'smithy-client', git: 'https://github.com/smithy-lang/smithy-ruby/', branch: 'decaf', glob: 'gems/smithy-client/smithy-client.gemspec'
+gem 'smithy-json',  git: 'https://github.com/smithy-lang/smithy-ruby/', branch: 'decaf', glob: 'gems/smithy-json/smithy-json.gemspec'
+gem 'smithy-schema', git: 'https://github.com/smithy-lang/smithy-ruby/', branch: 'decaf', glob: 'gems/smithy-schema/smithy-schema.gemspec'
+gem 'smithy-xml', git: 'https://github.com/smithy-lang/smithy-ruby/', branch: 'decaf', glob: 'gems/smithy-xml/smithy-xml.gemspec'
 
 group :development do
   gem 'byebug', platforms: :ruby
