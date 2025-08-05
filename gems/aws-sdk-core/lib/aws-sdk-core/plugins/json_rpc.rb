@@ -8,9 +8,9 @@ module Aws
     module Plugins
       # @api private
       class JsonRpc < Smithy::Client::Plugin
-        # @api private
+        # TODO: not correct, make awsJson1_0
+        option(:protocol, default: 'aws.protocols#awsJson1_1')
         option(:json_codec) { Smithy::Json::Codec.new }
-        # @api private
         option(:stubber) { Stubbing::JsonRpc.new }
 
         handler(Core::Json::Handler)

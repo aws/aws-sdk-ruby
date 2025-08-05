@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'param_builder'
 require_relative 'param_list'
 
 module Aws
@@ -53,7 +52,7 @@ module Aws
           param_list = ParamList.new
           param_list.set('Action', context.operation.name)
           param_list.set('Version', context.config.service.version)
-          ParamBuilder.new(param_list).apply(context.operation.input, params)
+          context.config.query_codec.build(context.operation.input, params, param_list)
           param_list.to_io
         end
 

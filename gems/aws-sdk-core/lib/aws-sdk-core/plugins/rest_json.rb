@@ -9,9 +9,8 @@ module Aws
     module Plugins
       # @api private
       class RestJson < Smithy::Client::Plugin
-        # @api private
+        option(:protocol, default: 'aws.protocols#restJson1')
         option(:json_codec) { Smithy::Json::Codec.new(json_name: true) }
-        # @api private
         option(:stubber) { Stubbing::RestJson.new }
 
         handler(Core::Rest::Handler)

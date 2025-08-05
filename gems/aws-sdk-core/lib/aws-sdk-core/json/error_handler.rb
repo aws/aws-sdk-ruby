@@ -46,7 +46,8 @@ module Aws
             next unless ref.shape.name == code
 
             data = context.config.json_codec.parse(ref.shape, body, ref.shape.type.new)
-            # TODO: this does not really belong here - possibly need a rest error handler instead.
+            return data if context.config.protocol != 'aws.protocols#restJson1'
+
             Rest::Response::Headers.new(ref).apply(context.http_response, data)
             return data
           end
