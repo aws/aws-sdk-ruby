@@ -214,7 +214,6 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_resource_oauth_2_token-instance_method
       def get_resource_oauth_2_token: (
                                         workload_identity_token: ::String,
-                                        ?user_id: ::String,
                                         resource_credential_provider_name: ::String,
                                         scopes: Array[::String],
                                         oauth2_flow: ("USER_FEDERATION" | "M2M"),

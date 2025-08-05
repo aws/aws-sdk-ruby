@@ -219,6 +219,7 @@ module Aws::IoTSiteWise
     CreateDatasetResponse = Shapes::StructureShape.new(name: 'CreateDatasetResponse')
     CreateGatewayRequest = Shapes::StructureShape.new(name: 'CreateGatewayRequest')
     CreateGatewayResponse = Shapes::StructureShape.new(name: 'CreateGatewayResponse')
+    CreateMissingProperty = Shapes::BooleanShape.new(name: 'CreateMissingProperty')
     CreatePortalRequest = Shapes::StructureShape.new(name: 'CreatePortalRequest')
     CreatePortalResponse = Shapes::StructureShape.new(name: 'CreatePortalResponse')
     CreateProjectRequest = Shapes::StructureShape.new(name: 'CreateProjectRequest')
@@ -246,6 +247,8 @@ module Aws::IoTSiteWise
     DeleteAccessPolicyResponse = Shapes::StructureShape.new(name: 'DeleteAccessPolicyResponse')
     DeleteAssetModelCompositeModelRequest = Shapes::StructureShape.new(name: 'DeleteAssetModelCompositeModelRequest')
     DeleteAssetModelCompositeModelResponse = Shapes::StructureShape.new(name: 'DeleteAssetModelCompositeModelResponse')
+    DeleteAssetModelInterfaceRelationshipRequest = Shapes::StructureShape.new(name: 'DeleteAssetModelInterfaceRelationshipRequest')
+    DeleteAssetModelInterfaceRelationshipResponse = Shapes::StructureShape.new(name: 'DeleteAssetModelInterfaceRelationshipResponse')
     DeleteAssetModelRequest = Shapes::StructureShape.new(name: 'DeleteAssetModelRequest')
     DeleteAssetModelResponse = Shapes::StructureShape.new(name: 'DeleteAssetModelResponse')
     DeleteAssetRequest = Shapes::StructureShape.new(name: 'DeleteAssetRequest')
@@ -271,6 +274,8 @@ module Aws::IoTSiteWise
     DescribeAssetCompositeModelResponse = Shapes::StructureShape.new(name: 'DescribeAssetCompositeModelResponse')
     DescribeAssetModelCompositeModelRequest = Shapes::StructureShape.new(name: 'DescribeAssetModelCompositeModelRequest')
     DescribeAssetModelCompositeModelResponse = Shapes::StructureShape.new(name: 'DescribeAssetModelCompositeModelResponse')
+    DescribeAssetModelInterfaceRelationshipRequest = Shapes::StructureShape.new(name: 'DescribeAssetModelInterfaceRelationshipRequest')
+    DescribeAssetModelInterfaceRelationshipResponse = Shapes::StructureShape.new(name: 'DescribeAssetModelInterfaceRelationshipResponse')
     DescribeAssetModelRequest = Shapes::StructureShape.new(name: 'DescribeAssetModelRequest')
     DescribeAssetModelResponse = Shapes::StructureShape.new(name: 'DescribeAssetModelResponse')
     DescribeAssetPropertyRequest = Shapes::StructureShape.new(name: 'DescribeAssetPropertyRequest')
@@ -369,6 +374,8 @@ module Aws::IoTSiteWise
     Greengrass = Shapes::StructureShape.new(name: 'Greengrass')
     GreengrassV2 = Shapes::StructureShape.new(name: 'GreengrassV2')
     GroupIdentity = Shapes::StructureShape.new(name: 'GroupIdentity')
+    HierarchyMapping = Shapes::StructureShape.new(name: 'HierarchyMapping')
+    HierarchyMappings = Shapes::ListShape.new(name: 'HierarchyMappings')
     IAMRoleIdentity = Shapes::StructureShape.new(name: 'IAMRoleIdentity')
     IAMUserIdentity = Shapes::StructureShape.new(name: 'IAMUserIdentity')
     ID = Shapes::StringShape.new(name: 'ID')
@@ -383,6 +390,12 @@ module Aws::IoTSiteWise
     ImageFileType = Shapes::StringShape.new(name: 'ImageFileType')
     ImageLocation = Shapes::StructureShape.new(name: 'ImageLocation')
     InputProperties = Shapes::StringShape.new(name: 'InputProperties')
+    InterfaceDetails = Shapes::ListShape.new(name: 'InterfaceDetails')
+    InterfaceRelationship = Shapes::StructureShape.new(name: 'InterfaceRelationship')
+    InterfaceRelationshipSummaries = Shapes::ListShape.new(name: 'InterfaceRelationshipSummaries')
+    InterfaceRelationshipSummary = Shapes::StructureShape.new(name: 'InterfaceRelationshipSummary')
+    InterfaceSummaries = Shapes::ListShape.new(name: 'InterfaceSummaries')
+    InterfaceSummary = Shapes::StructureShape.new(name: 'InterfaceSummary')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     InterpolatedAssetPropertyValue = Shapes::StructureShape.new(name: 'InterpolatedAssetPropertyValue')
     InterpolatedAssetPropertyValues = Shapes::ListShape.new(name: 'InterpolatedAssetPropertyValues')
@@ -443,6 +456,8 @@ module Aws::IoTSiteWise
     ListExecutionsResponse = Shapes::StructureShape.new(name: 'ListExecutionsResponse')
     ListGatewaysRequest = Shapes::StructureShape.new(name: 'ListGatewaysRequest')
     ListGatewaysResponse = Shapes::StructureShape.new(name: 'ListGatewaysResponse')
+    ListInterfaceRelationshipsRequest = Shapes::StructureShape.new(name: 'ListInterfaceRelationshipsRequest')
+    ListInterfaceRelationshipsResponse = Shapes::StructureShape.new(name: 'ListInterfaceRelationshipsResponse')
     ListPortalsRequest = Shapes::StructureShape.new(name: 'ListPortalsRequest')
     ListPortalsResponse = Shapes::StructureShape.new(name: 'ListPortalsResponse')
     ListProjectAssetsRequest = Shapes::StructureShape.new(name: 'ListProjectAssetsRequest')
@@ -458,6 +473,7 @@ module Aws::IoTSiteWise
     LoggingLevel = Shapes::StringShape.new(name: 'LoggingLevel')
     LoggingOptions = Shapes::StructureShape.new(name: 'LoggingOptions')
     Macro = Shapes::StringShape.new(name: 'Macro')
+    MatchByPropertyName = Shapes::BooleanShape.new(name: 'MatchByPropertyName')
     MatchedDataBinding = Shapes::StructureShape.new(name: 'MatchedDataBinding')
     MaxInterpolatedResults = Shapes::IntegerShape.new(name: 'MaxInterpolatedResults')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -498,6 +514,9 @@ module Aws::IoTSiteWise
     Property = Shapes::StructureShape.new(name: 'Property')
     PropertyAlias = Shapes::StringShape.new(name: 'PropertyAlias')
     PropertyDataType = Shapes::StringShape.new(name: 'PropertyDataType')
+    PropertyMapping = Shapes::StructureShape.new(name: 'PropertyMapping')
+    PropertyMappingConfiguration = Shapes::StructureShape.new(name: 'PropertyMappingConfiguration')
+    PropertyMappings = Shapes::ListShape.new(name: 'PropertyMappings')
     PropertyNotification = Shapes::StructureShape.new(name: 'PropertyNotification')
     PropertyNotificationState = Shapes::StringShape.new(name: 'PropertyNotificationState')
     PropertyNotificationTopic = Shapes::StringShape.new(name: 'PropertyNotificationTopic')
@@ -508,6 +527,8 @@ module Aws::IoTSiteWise
     PropertyValueIntegerValue = Shapes::IntegerShape.new(name: 'PropertyValueIntegerValue')
     PropertyValueNullValue = Shapes::StructureShape.new(name: 'PropertyValueNullValue')
     PropertyValueStringValue = Shapes::StringShape.new(name: 'PropertyValueStringValue')
+    PutAssetModelInterfaceRelationshipRequest = Shapes::StructureShape.new(name: 'PutAssetModelInterfaceRelationshipRequest')
+    PutAssetModelInterfaceRelationshipResponse = Shapes::StructureShape.new(name: 'PutAssetModelInterfaceRelationshipResponse')
     PutAssetPropertyValueEntries = Shapes::ListShape.new(name: 'PutAssetPropertyValueEntries')
     PutAssetPropertyValueEntry = Shapes::StructureShape.new(name: 'PutAssetPropertyValueEntry')
     PutDefaultEncryptionConfigurationRequest = Shapes::StructureShape.new(name: 'PutDefaultEncryptionConfigurationRequest')
@@ -810,6 +831,7 @@ module Aws::IoTSiteWise
     AssetModelPropertySummary.add_member(:type, Shapes::ShapeRef.new(shape: PropertyType, required: true, location_name: "type"))
     AssetModelPropertySummary.add_member(:asset_model_composite_model_id, Shapes::ShapeRef.new(shape: ID, location_name: "assetModelCompositeModelId"))
     AssetModelPropertySummary.add_member(:path, Shapes::ShapeRef.new(shape: AssetModelPropertyPath, location_name: "path"))
+    AssetModelPropertySummary.add_member(:interface_summaries, Shapes::ShapeRef.new(shape: InterfaceSummaries, location_name: "interfaceSummaries"))
     AssetModelPropertySummary.struct_class = Types::AssetModelPropertySummary
 
     AssetModelStatus.add_member(:state, Shapes::ShapeRef.new(shape: AssetModelState, required: true, location_name: "state"))
@@ -1444,6 +1466,17 @@ module Aws::IoTSiteWise
     DeleteAssetModelCompositeModelResponse.add_member(:asset_model_status, Shapes::ShapeRef.new(shape: AssetModelStatus, required: true, location_name: "assetModelStatus"))
     DeleteAssetModelCompositeModelResponse.struct_class = Types::DeleteAssetModelCompositeModelResponse
 
+    DeleteAssetModelInterfaceRelationshipRequest.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetModelId"))
+    DeleteAssetModelInterfaceRelationshipRequest.add_member(:interface_asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "interfaceAssetModelId"))
+    DeleteAssetModelInterfaceRelationshipRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    DeleteAssetModelInterfaceRelationshipRequest.struct_class = Types::DeleteAssetModelInterfaceRelationshipRequest
+
+    DeleteAssetModelInterfaceRelationshipResponse.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetModelId"))
+    DeleteAssetModelInterfaceRelationshipResponse.add_member(:interface_asset_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "interfaceAssetModelId"))
+    DeleteAssetModelInterfaceRelationshipResponse.add_member(:asset_model_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "assetModelArn"))
+    DeleteAssetModelInterfaceRelationshipResponse.add_member(:asset_model_status, Shapes::ShapeRef.new(shape: AssetModelStatus, required: true, location_name: "assetModelStatus"))
+    DeleteAssetModelInterfaceRelationshipResponse.struct_class = Types::DeleteAssetModelInterfaceRelationshipResponse
+
     DeleteAssetModelRequest.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetModelId"))
     DeleteAssetModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteAssetModelRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "If-Match"))
@@ -1560,6 +1593,16 @@ module Aws::IoTSiteWise
     DescribeAssetModelCompositeModelResponse.add_member(:action_definitions, Shapes::ShapeRef.new(shape: ActionDefinitions, location_name: "actionDefinitions"))
     DescribeAssetModelCompositeModelResponse.struct_class = Types::DescribeAssetModelCompositeModelResponse
 
+    DescribeAssetModelInterfaceRelationshipRequest.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetModelId"))
+    DescribeAssetModelInterfaceRelationshipRequest.add_member(:interface_asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "interfaceAssetModelId"))
+    DescribeAssetModelInterfaceRelationshipRequest.struct_class = Types::DescribeAssetModelInterfaceRelationshipRequest
+
+    DescribeAssetModelInterfaceRelationshipResponse.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetModelId"))
+    DescribeAssetModelInterfaceRelationshipResponse.add_member(:interface_asset_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "interfaceAssetModelId"))
+    DescribeAssetModelInterfaceRelationshipResponse.add_member(:property_mappings, Shapes::ShapeRef.new(shape: PropertyMappings, required: true, location_name: "propertyMappings"))
+    DescribeAssetModelInterfaceRelationshipResponse.add_member(:hierarchy_mappings, Shapes::ShapeRef.new(shape: HierarchyMappings, required: true, location_name: "hierarchyMappings"))
+    DescribeAssetModelInterfaceRelationshipResponse.struct_class = Types::DescribeAssetModelInterfaceRelationshipResponse
+
     DescribeAssetModelRequest.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetModelId"))
     DescribeAssetModelRequest.add_member(:exclude_properties, Shapes::ShapeRef.new(shape: ExcludeProperties, location: "querystring", location_name: "excludeProperties"))
     DescribeAssetModelRequest.add_member(:asset_model_version, Shapes::ShapeRef.new(shape: AssetModelVersionFilter, location: "querystring", location_name: "assetModelVersion"))
@@ -1579,6 +1622,7 @@ module Aws::IoTSiteWise
     DescribeAssetModelResponse.add_member(:asset_model_last_update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "assetModelLastUpdateDate"))
     DescribeAssetModelResponse.add_member(:asset_model_status, Shapes::ShapeRef.new(shape: AssetModelStatus, required: true, location_name: "assetModelStatus"))
     DescribeAssetModelResponse.add_member(:asset_model_version, Shapes::ShapeRef.new(shape: Version, location_name: "assetModelVersion"))
+    DescribeAssetModelResponse.add_member(:interface_details, Shapes::ShapeRef.new(shape: InterfaceDetails, location_name: "interfaceDetails"))
     DescribeAssetModelResponse.add_member(:e_tag, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "ETag"))
     DescribeAssetModelResponse.struct_class = Types::DescribeAssetModelResponse
 
@@ -1977,6 +2021,12 @@ module Aws::IoTSiteWise
     GroupIdentity.add_member(:id, Shapes::ShapeRef.new(shape: IdentityId, required: true, location_name: "id"))
     GroupIdentity.struct_class = Types::GroupIdentity
 
+    HierarchyMapping.add_member(:asset_model_hierarchy_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetModelHierarchyId"))
+    HierarchyMapping.add_member(:interface_asset_model_hierarchy_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "interfaceAssetModelHierarchyId"))
+    HierarchyMapping.struct_class = Types::HierarchyMapping
+
+    HierarchyMappings.member = Shapes::ShapeRef.new(shape: HierarchyMapping)
+
     IAMRoleIdentity.add_member(:arn, Shapes::ShapeRef.new(shape: IamArn, required: true, location_name: "arn"))
     IAMRoleIdentity.struct_class = Types::IAMRoleIdentity
 
@@ -2002,6 +2052,22 @@ module Aws::IoTSiteWise
     ImageLocation.add_member(:id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "id"))
     ImageLocation.add_member(:url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "url"))
     ImageLocation.struct_class = Types::ImageLocation
+
+    InterfaceDetails.member = Shapes::ShapeRef.new(shape: InterfaceRelationship)
+
+    InterfaceRelationship.add_member(:id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "id"))
+    InterfaceRelationship.struct_class = Types::InterfaceRelationship
+
+    InterfaceRelationshipSummaries.member = Shapes::ShapeRef.new(shape: InterfaceRelationshipSummary)
+
+    InterfaceRelationshipSummary.add_member(:id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "id"))
+    InterfaceRelationshipSummary.struct_class = Types::InterfaceRelationshipSummary
+
+    InterfaceSummaries.member = Shapes::ShapeRef.new(shape: InterfaceSummary)
+
+    InterfaceSummary.add_member(:interface_asset_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "interfaceAssetModelId"))
+    InterfaceSummary.add_member(:interface_asset_model_property_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "interfaceAssetModelPropertyId"))
+    InterfaceSummary.struct_class = Types::InterfaceSummary
 
     InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     InternalFailureException.struct_class = Types::InternalFailureException
@@ -2230,6 +2296,15 @@ module Aws::IoTSiteWise
     ListGatewaysResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListGatewaysResponse.struct_class = Types::ListGatewaysResponse
 
+    ListInterfaceRelationshipsRequest.add_member(:interface_asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "interfaceAssetModelId"))
+    ListInterfaceRelationshipsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListInterfaceRelationshipsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListInterfaceRelationshipsRequest.struct_class = Types::ListInterfaceRelationshipsRequest
+
+    ListInterfaceRelationshipsResponse.add_member(:interface_relationship_summaries, Shapes::ShapeRef.new(shape: InterfaceRelationshipSummaries, required: true, location_name: "interfaceRelationshipSummaries"))
+    ListInterfaceRelationshipsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListInterfaceRelationshipsResponse.struct_class = Types::ListInterfaceRelationshipsResponse
+
     ListPortalsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListPortalsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListPortalsRequest.struct_class = Types::ListPortalsRequest
@@ -2288,8 +2363,8 @@ module Aws::IoTSiteWise
     MeasurementProcessingConfig.add_member(:forwarding_config, Shapes::ShapeRef.new(shape: ForwardingConfig, required: true, location_name: "forwardingConfig"))
     MeasurementProcessingConfig.struct_class = Types::MeasurementProcessingConfig
 
-    Metric.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "expression"))
-    Metric.add_member(:variables, Shapes::ShapeRef.new(shape: ExpressionVariables, required: true, location_name: "variables"))
+    Metric.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, location_name: "expression"))
+    Metric.add_member(:variables, Shapes::ShapeRef.new(shape: ExpressionVariables, location_name: "variables"))
     Metric.add_member(:window, Shapes::ShapeRef.new(shape: MetricWindow, required: true, location_name: "window"))
     Metric.add_member(:processing_config, Shapes::ShapeRef.new(shape: MetricProcessingConfig, location_name: "processingConfig"))
     Metric.struct_class = Types::Metric
@@ -2365,6 +2440,17 @@ module Aws::IoTSiteWise
     Property.add_member(:path, Shapes::ShapeRef.new(shape: AssetPropertyPath, location_name: "path"))
     Property.struct_class = Types::Property
 
+    PropertyMapping.add_member(:asset_model_property_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location_name: "assetModelPropertyId"))
+    PropertyMapping.add_member(:interface_asset_model_property_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location_name: "interfaceAssetModelPropertyId"))
+    PropertyMapping.struct_class = Types::PropertyMapping
+
+    PropertyMappingConfiguration.add_member(:match_by_property_name, Shapes::ShapeRef.new(shape: MatchByPropertyName, location_name: "matchByPropertyName"))
+    PropertyMappingConfiguration.add_member(:create_missing_property, Shapes::ShapeRef.new(shape: CreateMissingProperty, location_name: "createMissingProperty"))
+    PropertyMappingConfiguration.add_member(:overrides, Shapes::ShapeRef.new(shape: PropertyMappings, location_name: "overrides"))
+    PropertyMappingConfiguration.struct_class = Types::PropertyMappingConfiguration
+
+    PropertyMappings.member = Shapes::ShapeRef.new(shape: PropertyMapping)
+
     PropertyNotification.add_member(:topic, Shapes::ShapeRef.new(shape: PropertyNotificationTopic, required: true, location_name: "topic"))
     PropertyNotification.add_member(:state, Shapes::ShapeRef.new(shape: PropertyNotificationState, required: true, location_name: "state"))
     PropertyNotification.struct_class = Types::PropertyNotification
@@ -2377,6 +2463,18 @@ module Aws::IoTSiteWise
 
     PropertyValueNullValue.add_member(:value_type, Shapes::ShapeRef.new(shape: RawValueType, required: true, location_name: "valueType"))
     PropertyValueNullValue.struct_class = Types::PropertyValueNullValue
+
+    PutAssetModelInterfaceRelationshipRequest.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetModelId"))
+    PutAssetModelInterfaceRelationshipRequest.add_member(:interface_asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "interfaceAssetModelId"))
+    PutAssetModelInterfaceRelationshipRequest.add_member(:property_mapping_configuration, Shapes::ShapeRef.new(shape: PropertyMappingConfiguration, required: true, location_name: "propertyMappingConfiguration"))
+    PutAssetModelInterfaceRelationshipRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    PutAssetModelInterfaceRelationshipRequest.struct_class = Types::PutAssetModelInterfaceRelationshipRequest
+
+    PutAssetModelInterfaceRelationshipResponse.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetModelId"))
+    PutAssetModelInterfaceRelationshipResponse.add_member(:interface_asset_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "interfaceAssetModelId"))
+    PutAssetModelInterfaceRelationshipResponse.add_member(:asset_model_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "assetModelArn"))
+    PutAssetModelInterfaceRelationshipResponse.add_member(:asset_model_status, Shapes::ShapeRef.new(shape: AssetModelStatus, required: true, location_name: "assetModelStatus"))
+    PutAssetModelInterfaceRelationshipResponse.struct_class = Types::PutAssetModelInterfaceRelationshipResponse
 
     PutAssetPropertyValueEntries.member = Shapes::ShapeRef.new(shape: PutAssetPropertyValueEntry)
 
@@ -3111,6 +3209,22 @@ module Aws::IoTSiteWise
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
       end)
 
+      api.add_operation(:delete_asset_model_interface_relationship, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAssetModelInterfaceRelationship"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/asset-models/{assetModelId}/interface/{interfaceAssetModelId}/asset-model-interface-relationship"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteAssetModelInterfaceRelationshipRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAssetModelInterfaceRelationshipResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
+      end)
+
       api.add_operation(:delete_computation_model, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteComputationModel"
         o.http_method = "DELETE"
@@ -3305,6 +3419,21 @@ module Aws::IoTSiteWise
         }
         o.input = Shapes::ShapeRef.new(shape: DescribeAssetModelCompositeModelRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeAssetModelCompositeModelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:describe_asset_model_interface_relationship, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAssetModelInterfaceRelationship"
+        o.http_method = "GET"
+        o.http_request_uri = "/asset-models/{assetModelId}/interface/{interfaceAssetModelId}/asset-model-interface-relationship"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DescribeAssetModelInterfaceRelationshipRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAssetModelInterfaceRelationshipResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
@@ -4081,6 +4210,27 @@ module Aws::IoTSiteWise
         )
       end)
 
+      api.add_operation(:list_interface_relationships, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListInterfaceRelationships"
+        o.http_method = "GET"
+        o.http_request_uri = "/interface/{interfaceAssetModelId}/asset-models"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListInterfaceRelationshipsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListInterfaceRelationshipsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_portals, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListPortals"
         o.http_method = "GET"
@@ -4178,6 +4328,23 @@ module Aws::IoTSiteWise
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:put_asset_model_interface_relationship, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAssetModelInterfaceRelationship"
+        o.http_method = "PUT"
+        o.http_request_uri = "/asset-models/{assetModelId}/interface/{interfaceAssetModelId}/asset-model-interface-relationship"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: PutAssetModelInterfaceRelationshipRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAssetModelInterfaceRelationshipResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
       end)
 
       api.add_operation(:put_default_encryption_configuration, Seahorse::Model::Operation.new.tap do |o|

@@ -95,8 +95,8 @@ module Aws::SageMaker
     #     class name or an instance of a plugin class.
     #
     #   @option options [required, Aws::CredentialProvider] :credentials
-    #     Your AWS credentials used for authentication. This can be an instance of any one of the
-    #     following classes:
+    #     Your AWS credentials used for authentication. This can be any class that includes and implements
+    #     `Aws::CredentialProvider`, or instance of any one of the following classes:
     #
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
@@ -124,8 +124,7 @@ module Aws::SageMaker
     #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
     #       from the Cognito Identity service.
     #
-    #     When `:credentials` are not configured directly, the following
-    #     locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
     #
@@ -139,12 +138,10 @@ module Aws::SageMaker
     #
     #     * `~/.aws/config`
     #
-    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
-    #       are very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts. Instance profile credential
-    #       fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
-    #       to `true`.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts are very aggressive.
+    #       Construct and pass an instance of `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts. Instance profile credential fetching can be disabled by
+    #       setting `ENV['AWS_EC2_METADATA_DISABLED']` to `true`.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -384,8 +381,8 @@ module Aws::SageMaker
     #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
-    #     Your Bearer token used for authentication. This can be an instance of any one of the
-    #     following classes:
+    #     Your Bearer token used for authentication. This can be any class that includes and implements
+    #     `Aws::TokenProvider`, or instance of any one of the following classes:
     #
     #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
     #       tokens.
@@ -667,6 +664,62 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def associate_trial_component(params = {}, options = {})
       req = build_request(:associate_trial_component, params)
+      req.send_request(options)
+    end
+
+    # Attaches your Amazon Elastic Block Store (Amazon EBS) volume to a node
+    # in your EKS-orchestrated HyperPod cluster.
+    #
+    # This API works with the Amazon Elastic Block Store (Amazon EBS)
+    # Container Storage Interface (CSI) driver to manage the lifecycle of
+    # persistent storage in your HyperPod EKS clusters.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of your SageMaker HyperPod cluster
+    #   containing the target node. Your cluster must use EKS as the
+    #   orchestration and be in the `InService` state.
+    #
+    # @option params [required, String] :node_id
+    #   The unique identifier of the cluster node to which you want to attach
+    #   the volume. The node must belong to your specified HyperPod cluster
+    #   and cannot be part of a Restricted Instance Group (RIG).
+    #
+    # @option params [required, String] :volume_id
+    #   The unique identifier of your EBS volume to attach. The volume must be
+    #   in the `available` state.
+    #
+    # @return [Types::AttachClusterNodeVolumeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AttachClusterNodeVolumeResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::AttachClusterNodeVolumeResponse#node_id #node_id} => String
+    #   * {Types::AttachClusterNodeVolumeResponse#volume_id #volume_id} => String
+    #   * {Types::AttachClusterNodeVolumeResponse#attach_time #attach_time} => Time
+    #   * {Types::AttachClusterNodeVolumeResponse#status #status} => String
+    #   * {Types::AttachClusterNodeVolumeResponse#device_name #device_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.attach_cluster_node_volume({
+    #     cluster_arn: "ClusterArn", # required
+    #     node_id: "ClusterNodeId", # required
+    #     volume_id: "VolumeId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #   resp.node_id #=> String
+    #   resp.volume_id #=> String
+    #   resp.attach_time #=> Time
+    #   resp.status #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
+    #   resp.device_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AttachClusterNodeVolume AWS API Documentation
+    #
+    # @overload attach_cluster_node_volume(params = {})
+    # @param [Hash] params ({})
+    def attach_cluster_node_volume(params = {}, options = {})
+      req = build_request(:attach_cluster_node_volume, params)
       req.send_request(options)
     end
 
@@ -18420,6 +18473,61 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Detaches your Amazon Elastic Block Store (Amazon EBS) volume from a
+    # node in your EKS-orchestrated SageMaker HyperPod cluster.
+    #
+    # This API works with the Amazon Elastic Block Store (Amazon EBS)
+    # Container Storage Interface (CSI) driver to manage the lifecycle of
+    # persistent storage in your HyperPod EKS clusters.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of your SageMaker HyperPod cluster
+    #   containing the target node. Your cluster must use EKS as the
+    #   orchestration and be in the `InService` state.
+    #
+    # @option params [required, String] :node_id
+    #   The unique identifier of the cluster node from which you want to
+    #   detach the volume.
+    #
+    # @option params [required, String] :volume_id
+    #   The unique identifier of your EBS volume that you want to detach. Your
+    #   volume must be currently attached to the specified node.
+    #
+    # @return [Types::DetachClusterNodeVolumeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DetachClusterNodeVolumeResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::DetachClusterNodeVolumeResponse#node_id #node_id} => String
+    #   * {Types::DetachClusterNodeVolumeResponse#volume_id #volume_id} => String
+    #   * {Types::DetachClusterNodeVolumeResponse#attach_time #attach_time} => Time
+    #   * {Types::DetachClusterNodeVolumeResponse#status #status} => String
+    #   * {Types::DetachClusterNodeVolumeResponse#device_name #device_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detach_cluster_node_volume({
+    #     cluster_arn: "ClusterArn", # required
+    #     node_id: "ClusterNodeId", # required
+    #     volume_id: "VolumeId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #   resp.node_id #=> String
+    #   resp.volume_id #=> String
+    #   resp.attach_time #=> Time
+    #   resp.status #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
+    #   resp.device_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DetachClusterNodeVolume AWS API Documentation
+    #
+    # @overload detach_cluster_node_volume(params = {})
+    # @param [Hash] params ({})
+    def detach_cluster_node_volume(params = {}, options = {})
+      req = build_request(:detach_cluster_node_volume, params)
+      req.send_request(options)
+    end
+
     # Disables using Service Catalog in SageMaker. Service Catalog is used
     # to create SageMaker projects.
     #
@@ -30206,8 +30314,14 @@ module Aws::SageMaker
     # outside the specified range are denied and get a `Not Found` error
     # message on the worker portal.
     #
-    # To restrict access to all the workers in public internet, add the
-    # `SourceIpConfig` CIDR value as "10.0.0.0/16".
+    # To restrict public internet access for all workers, configure the
+    # `SourceIpConfig` CIDR value. For example, when using `SourceIpConfig`
+    # with an `IpAddressType` of `IPv4`, you can restrict access to the IPv4
+    # CIDR block "10.0.0.0/16". When using an `IpAddressType` of
+    # `dualstack`, you can specify both the IPv4 and IPv6 CIDR blocks, such
+    # as "10.0.0.0/16" for IPv4 only, "2001:db8:1234:1a00::/56" for IPv6
+    # only, or "10.0.0.0/16" and "2001:db8:1234:1a00::/56" for dual
+    # stack.
     #
     # Amazon SageMaker does not support Source Ip restriction for worker
     # portals in VPC.
@@ -30465,7 +30579,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.317.0'
+      context[:gem_version] = '1.318.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

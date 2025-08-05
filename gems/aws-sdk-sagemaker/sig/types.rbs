@@ -269,6 +269,23 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class AttachClusterNodeVolumeRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor node_id: ::String
+      attr_accessor volume_id: ::String
+      SENSITIVE: []
+    end
+
+    class AttachClusterNodeVolumeResponse
+      attr_accessor cluster_arn: ::String
+      attr_accessor node_id: ::String
+      attr_accessor volume_id: ::String
+      attr_accessor attach_time: ::Time
+      attr_accessor status: ("attaching" | "attached" | "detaching" | "detached" | "busy")
+      attr_accessor device_name: ::String
+      SENSITIVE: []
+    end
+
     class AuthorizedUrl
       attr_accessor url: ::String
       attr_accessor local_path: ::String
@@ -4308,6 +4325,23 @@ module Aws::SageMaker
       attr_accessor desired_weight: ::Float
       attr_accessor desired_instance_count: ::Integer
       attr_accessor serverless_update_config: Types::ProductionVariantServerlessUpdateConfig
+      SENSITIVE: []
+    end
+
+    class DetachClusterNodeVolumeRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor node_id: ::String
+      attr_accessor volume_id: ::String
+      SENSITIVE: []
+    end
+
+    class DetachClusterNodeVolumeResponse
+      attr_accessor cluster_arn: ::String
+      attr_accessor node_id: ::String
+      attr_accessor volume_id: ::String
+      attr_accessor attach_time: ::Time
+      attr_accessor status: ("attaching" | "attached" | "detaching" | "detached" | "busy")
+      attr_accessor device_name: ::String
       SENSITIVE: []
     end
 

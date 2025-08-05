@@ -109,6 +109,8 @@ module Aws::SageMaker
     AthenaResultCompressionType = Shapes::StringShape.new(name: 'AthenaResultCompressionType')
     AthenaResultFormat = Shapes::StringShape.new(name: 'AthenaResultFormat')
     AthenaWorkGroup = Shapes::StringShape.new(name: 'AthenaWorkGroup')
+    AttachClusterNodeVolumeRequest = Shapes::StructureShape.new(name: 'AttachClusterNodeVolumeRequest')
+    AttachClusterNodeVolumeResponse = Shapes::StructureShape.new(name: 'AttachClusterNodeVolumeResponse')
     AttributeName = Shapes::StringShape.new(name: 'AttributeName')
     AttributeNames = Shapes::ListShape.new(name: 'AttributeNames')
     AuthMode = Shapes::StringShape.new(name: 'AuthMode')
@@ -815,6 +817,8 @@ module Aws::SageMaker
     DesiredWeightAndCapacity = Shapes::StructureShape.new(name: 'DesiredWeightAndCapacity')
     DesiredWeightAndCapacityList = Shapes::ListShape.new(name: 'DesiredWeightAndCapacityList')
     DestinationS3Uri = Shapes::StringShape.new(name: 'DestinationS3Uri')
+    DetachClusterNodeVolumeRequest = Shapes::StructureShape.new(name: 'DetachClusterNodeVolumeRequest')
+    DetachClusterNodeVolumeResponse = Shapes::StructureShape.new(name: 'DetachClusterNodeVolumeResponse')
     DetailedAlgorithmStatus = Shapes::StringShape.new(name: 'DetailedAlgorithmStatus')
     DetailedModelPackageStatus = Shapes::StringShape.new(name: 'DetailedModelPackageStatus')
     Device = Shapes::StructureShape.new(name: 'Device')
@@ -2577,6 +2581,9 @@ module Aws::SageMaker
     VisibilityConditionsKey = Shapes::StringShape.new(name: 'VisibilityConditionsKey')
     VisibilityConditionsList = Shapes::ListShape.new(name: 'VisibilityConditionsList')
     VisibilityConditionsValue = Shapes::StringShape.new(name: 'VisibilityConditionsValue')
+    VolumeAttachmentStatus = Shapes::StringShape.new(name: 'VolumeAttachmentStatus')
+    VolumeDeviceName = Shapes::StringShape.new(name: 'VolumeDeviceName')
+    VolumeId = Shapes::StringShape.new(name: 'VolumeId')
     VolumeSizeInGB = Shapes::IntegerShape.new(name: 'VolumeSizeInGB')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
@@ -2838,6 +2845,19 @@ module Aws::SageMaker
     AthenaDatasetDefinition.add_member(:output_format, Shapes::ShapeRef.new(shape: AthenaResultFormat, required: true, location_name: "OutputFormat"))
     AthenaDatasetDefinition.add_member(:output_compression, Shapes::ShapeRef.new(shape: AthenaResultCompressionType, location_name: "OutputCompression"))
     AthenaDatasetDefinition.struct_class = Types::AthenaDatasetDefinition
+
+    AttachClusterNodeVolumeRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
+    AttachClusterNodeVolumeRequest.add_member(:node_id, Shapes::ShapeRef.new(shape: ClusterNodeId, required: true, location_name: "NodeId"))
+    AttachClusterNodeVolumeRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
+    AttachClusterNodeVolumeRequest.struct_class = Types::AttachClusterNodeVolumeRequest
+
+    AttachClusterNodeVolumeResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
+    AttachClusterNodeVolumeResponse.add_member(:node_id, Shapes::ShapeRef.new(shape: ClusterNodeId, required: true, location_name: "NodeId"))
+    AttachClusterNodeVolumeResponse.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
+    AttachClusterNodeVolumeResponse.add_member(:attach_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "AttachTime"))
+    AttachClusterNodeVolumeResponse.add_member(:status, Shapes::ShapeRef.new(shape: VolumeAttachmentStatus, required: true, location_name: "Status"))
+    AttachClusterNodeVolumeResponse.add_member(:device_name, Shapes::ShapeRef.new(shape: VolumeDeviceName, required: true, location_name: "DeviceName"))
+    AttachClusterNodeVolumeResponse.struct_class = Types::AttachClusterNodeVolumeResponse
 
     AttributeNames.member = Shapes::ShapeRef.new(shape: AttributeName)
 
@@ -6061,6 +6081,19 @@ module Aws::SageMaker
     DesiredWeightAndCapacity.struct_class = Types::DesiredWeightAndCapacity
 
     DesiredWeightAndCapacityList.member = Shapes::ShapeRef.new(shape: DesiredWeightAndCapacity)
+
+    DetachClusterNodeVolumeRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
+    DetachClusterNodeVolumeRequest.add_member(:node_id, Shapes::ShapeRef.new(shape: ClusterNodeId, required: true, location_name: "NodeId"))
+    DetachClusterNodeVolumeRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
+    DetachClusterNodeVolumeRequest.struct_class = Types::DetachClusterNodeVolumeRequest
+
+    DetachClusterNodeVolumeResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
+    DetachClusterNodeVolumeResponse.add_member(:node_id, Shapes::ShapeRef.new(shape: ClusterNodeId, required: true, location_name: "NodeId"))
+    DetachClusterNodeVolumeResponse.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
+    DetachClusterNodeVolumeResponse.add_member(:attach_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "AttachTime"))
+    DetachClusterNodeVolumeResponse.add_member(:status, Shapes::ShapeRef.new(shape: VolumeAttachmentStatus, required: true, location_name: "Status"))
+    DetachClusterNodeVolumeResponse.add_member(:device_name, Shapes::ShapeRef.new(shape: VolumeDeviceName, required: true, location_name: "DeviceName"))
+    DetachClusterNodeVolumeResponse.struct_class = Types::DetachClusterNodeVolumeResponse
 
     Device.add_member(:device_name, Shapes::ShapeRef.new(shape: DeviceName, required: true, location_name: "DeviceName"))
     Device.add_member(:description, Shapes::ShapeRef.new(shape: DeviceDescription, location_name: "Description"))
@@ -11537,6 +11570,15 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
       end)
 
+      api.add_operation(:attach_cluster_node_volume, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AttachClusterNodeVolume"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AttachClusterNodeVolumeRequest)
+        o.output = Shapes::ShapeRef.new(shape: AttachClusterNodeVolumeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
       api.add_operation(:batch_delete_cluster_nodes, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchDeleteClusterNodes"
         o.http_method = "POST"
@@ -13291,6 +13333,15 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeWorkteamRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeWorkteamResponse)
+      end)
+
+      api.add_operation(:detach_cluster_node_volume, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DetachClusterNodeVolume"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DetachClusterNodeVolumeRequest)
+        o.output = Shapes::ShapeRef.new(shape: DetachClusterNodeVolumeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
       api.add_operation(:disable_sagemaker_servicecatalog_portfolio, Seahorse::Model::Operation.new.tap do |o|

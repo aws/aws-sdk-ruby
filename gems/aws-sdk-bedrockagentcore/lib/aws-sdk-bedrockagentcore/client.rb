@@ -97,8 +97,8 @@ module Aws::BedrockAgentCore
     #     class name or an instance of a plugin class.
     #
     #   @option options [required, Aws::CredentialProvider] :credentials
-    #     Your AWS credentials used for authentication. This can be an instance of any one of the
-    #     following classes:
+    #     Your AWS credentials used for authentication. This can be any class that includes and implements
+    #     `Aws::CredentialProvider`, or instance of any one of the following classes:
     #
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
@@ -126,8 +126,7 @@ module Aws::BedrockAgentCore
     #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
     #       from the Cognito Identity service.
     #
-    #     When `:credentials` are not configured directly, the following
-    #     locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
     #
@@ -141,12 +140,10 @@ module Aws::BedrockAgentCore
     #
     #     * `~/.aws/config`
     #
-    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
-    #       are very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts. Instance profile credential
-    #       fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
-    #       to `true`.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts are very aggressive.
+    #       Construct and pass an instance of `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts. Instance profile credential fetching can be disabled by
+    #       setting `ENV['AWS_EC2_METADATA_DISABLED']` to `true`.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -388,8 +385,8 @@ module Aws::BedrockAgentCore
     #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
-    #     Your Bearer token used for authentication. This can be an instance of any one of the
-    #     following classes:
+    #     Your Bearer token used for authentication. This can be any class that includes and implements
+    #     `Aws::TokenProvider`, or instance of any one of the following classes:
     #
     #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
     #       tokens.
@@ -490,17 +487,18 @@ module Aws::BedrockAgentCore
 
     # @!group API Operations
 
-    # Creates an event in a memory store. Events represent interactions or
-    # activities that occur within a session and are associated with
-    # specific actors.
+    # Creates an event in an AgentCore Memory resource. Events represent
+    # interactions or activities that occur within a session and are
+    # associated with specific actors.
     #
-    # To use this operation, you must have the `genesismemory:CreateEvent`
-    # permission.
+    # To use this operation, you must have the
+    # `bedrock-agentcore:CreateEvent` permission.
     #
     # This operation is subject to request rate limiting.
     #
     # @option params [required, String] :memory_id
-    #   The identifier of the memory store in which to create the event.
+    #   The identifier of the AgentCore Memory resource in which to create the
+    #   event.
     #
     # @option params [required, String] :actor_id
     #   The identifier of the actor associated with this event. An actor
@@ -583,14 +581,15 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Deletes an event from a memory store. When you delete an event, it is
-    # permanently removed.
+    # Deletes an event from an AgentCore Memory resource. When you delete an
+    # event, it is permanently removed.
     #
-    # To use this operation, you must have the `genesismemory:DeleteEvent`
-    # permission.
+    # To use this operation, you must have the
+    # `bedrock-agentcore:DeleteEvent` permission.
     #
     # @option params [required, String] :memory_id
-    #   The identifier of the memory store from which to delete the event.
+    #   The identifier of the AgentCore Memory resource from which to delete
+    #   the event.
     #
     # @option params [required, String] :session_id
     #   The identifier of the session containing the event to delete.
@@ -627,15 +626,15 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Deletes a memory record from a memory store. When you delete a memory
-    # record, it is permanently removed.
+    # Deletes a memory record from an AgentCore Memory resource. When you
+    # delete a memory record, it is permanently removed.
     #
     # To use this operation, you must have the
-    # `genesismemory:DeleteMemoryRecord` permission.
+    # `bedrock-agentcore:DeleteMemoryRecord` permission.
     #
     # @option params [required, String] :memory_id
-    #   The identifier of the memory store from which to delete the memory
-    #   record.
+    #   The identifier of the AgentCore Memory resource from which to delete
+    #   the memory record.
     #
     # @option params [required, String] :memory_record_id
     #   The identifier of the memory record to delete.
@@ -801,13 +800,14 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Retrieves information about a specific event in a memory store.
+    # Retrieves information about a specific event in an AgentCore Memory
+    # resource.
     #
-    # To use this operation, you must have the `genesismemory:GetEvent`
+    # To use this operation, you must have the `bedrock-agentcore:GetEvent`
     # permission.
     #
     # @option params [required, String] :memory_id
-    #   The identifier of the memory store containing the event.
+    #   The identifier of the AgentCore Memory resource containing the event.
     #
     # @option params [required, String] :session_id
     #   The identifier of the session containing the event.
@@ -853,13 +853,14 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Retrieves a specific memory record from a memory store.
+    # Retrieves a specific memory record from an AgentCore Memory resource.
     #
     # To use this operation, you must have the
-    # `genesismemory:GetMemoryRecord` permission.
+    # `bedrock-agentcore:GetMemoryRecord` permission.
     #
     # @option params [required, String] :memory_id
-    #   The identifier of the memory store containing the memory record.
+    #   The identifier of the AgentCore Memory resource containing the memory
+    #   record.
     #
     # @option params [required, String] :memory_record_id
     #   The identifier of the memory record to retrieve.
@@ -926,14 +927,11 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Reaturns the Oauth2Token of the provided resource
+    # Returns the OAuth 2.0 token of the provided resource
     #
     # @option params [required, String] :workload_identity_token
     #   The identity token of the workload you want to retrive the Oauth2
     #   Token of.
-    #
-    # @option params [String] :user_id
-    #   The user ID of the user you're retrieving the token on behalf of.
     #
     # @option params [required, String] :resource_credential_provider_name
     #   Reference to the credential provider
@@ -965,7 +963,6 @@ module Aws::BedrockAgentCore
     #
     #   resp = client.get_resource_oauth_2_token({
     #     workload_identity_token: "WorkloadIdentityTokenType", # required
-    #     user_id: "UserIdType",
     #     resource_credential_provider_name: "CredentialProviderName", # required
     #     scopes: ["ScopeType"], # required
     #     oauth2_flow: "USER_FEDERATION", # required, accepts USER_FEDERATION, M2M
@@ -1085,19 +1082,32 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Sends a request to an agent runtime in Amazon Bedrock and receives
-    # responses in real-time. The agent processes the request using the
-    # configured foundation model and any associated knowledge bases or
-    # action groups.
+    # Sends a request to an agent or tool hosted in an Amazon Bedrock
+    # AgentCore Runtime and receives responses in real-time.
     #
-    # To invoke an agent runtime, you must specify the agent runtime ARN and
+    # To invoke an agent you must specify the AgentCore Runtime ARN and
     # provide a payload containing your request. You can optionally specify
-    # a qualifier to target a specific version or alias of the agent.
+    # a qualifier to target a specific version or endpoint of the agent.
     #
     # This operation supports streaming responses, allowing you to receive
     # partial responses as they become available. We recommend using
     # pagination to ensure that the operation returns quickly and
     # successfully when processing large responses.
+    #
+    # For example code, see [Invoke an AgentCore Runtime agent][1].
+    #
+    # If you're integrating your agent with OAuth, you can't use the
+    # Amazon Web Services SDK to call `InvokeAgentRuntime`. Instead, make a
+    # HTTPS request to `InvokeAgentRuntime`. For an example, see
+    # [Authenticate and authorize with Inbound Auth and Outbound Auth][2].
+    #
+    # To use this operation, you must have the
+    # `bedrock-agentcore:InvokeAgentRuntime` permission.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-invoke-agent.html
+    # [2]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-oauth.html
     #
     # @option params [String] :content_type
     #   The MIME type of the input data in the payload. This tells the agent
@@ -1143,7 +1153,7 @@ module Aws::BedrockAgentCore
     #
     # @option params [String] :qualifier
     #   The qualifier to use for the agent runtime. This can be a version
-    #   number or an alias name that points to a specific version. If not
+    #   number or an endpoint name that points to a specific version. If not
     #   specified, Amazon Bedrock uses the default version of the agent
     #   runtime.
     #
@@ -1514,14 +1524,16 @@ module Aws::BedrockAgentCore
       req.send_request(options, &block)
     end
 
-    # Lists all actors in a memory store. We recommend using pagination to
-    # ensure that the operation returns quickly and successfully.
+    # Lists all actors in an AgentCore Memory resource. We recommend using
+    # pagination to ensure that the operation returns quickly and
+    # successfully.
     #
-    # To use this operation, you must have the `genesismemory:ListActors`
-    # permission.
+    # To use this operation, you must have the
+    # `bedrock-agentcore:ListActors` permission.
     #
     # @option params [required, String] :memory_id
-    #   The identifier of the memory store for which to list actors.
+    #   The identifier of the AgentCore Memory resource for which to list
+    #   actors.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call. Minimum
@@ -1719,15 +1731,16 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Lists events in a memory store based on specified criteria. We
-    # recommend using pagination to ensure that the operation returns
-    # quickly and successfully.
+    # Lists events in an AgentCore Memory resource based on specified
+    # criteria. We recommend using pagination to ensure that the operation
+    # returns quickly and successfully.
     #
-    # To use this operation, you must have the `genesismemory:ListEvents`
-    # permission.
+    # To use this operation, you must have the
+    # `bedrock-agentcore:ListEvents` permission.
     #
     # @option params [required, String] :memory_id
-    #   The identifier of the memory store for which to list events.
+    #   The identifier of the AgentCore Memory resource for which to list
+    #   events.
     #
     # @option params [required, String] :session_id
     #   The identifier of the session for which to list events. If specified,
@@ -1801,15 +1814,16 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Lists memory records in a memory store based on specified criteria. We
-    # recommend using pagination to ensure that the operation returns
-    # quickly and successfully.
+    # Lists memory records in an AgentCore Memory resource based on
+    # specified criteria. We recommend using pagination to ensure that the
+    # operation returns quickly and successfully.
     #
     # To use this operation, you must have the
-    # `genesismemory:ListMemoryRecords` permission.
+    # `bedrock-agentcore:ListMemoryRecords` permission.
     #
     # @option params [required, String] :memory_id
-    #   The identifier of the memory store for which to list memory records.
+    #   The identifier of the AgentCore Memory resource for which to list
+    #   memory records.
     #
     # @option params [required, String] :namespace
     #   The namespace to filter memory records by. If specified, only memory
@@ -1866,15 +1880,16 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Lists sessions in a memory store based on specified criteria. We
-    # recommend using pagination to ensure that the operation returns
-    # quickly and successfully.
+    # Lists sessions in an AgentCore Memory resource based on specified
+    # criteria. We recommend using pagination to ensure that the operation
+    # returns quickly and successfully.
     #
-    # To use this operation, you must have the `genesismemory:ListSessions`
-    # permission.
+    # To use this operation, you must have the
+    # `bedrock-agentcore:ListSessions` permission.
     #
     # @option params [required, String] :memory_id
-    #   The identifier of the memory store for which to list sessions.
+    #   The identifier of the AgentCore Memory resource for which to list
+    #   sessions.
     #
     # @option params [required, String] :actor_id
     #   The identifier of the actor for which to list sessions. If specified,
@@ -1922,16 +1937,17 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Searches for and retrieves memory records from a memory store based on
-    # specified search criteria. We recommend using pagination to ensure
-    # that the operation returns quickly and successfully.
+    # Searches for and retrieves memory records from an AgentCore Memory
+    # resource based on specified search criteria. We recommend using
+    # pagination to ensure that the operation returns quickly and
+    # successfully.
     #
     # To use this operation, you must have the
-    # `genesismemory:RetrieveMemoryRecords` permission.
+    # `bedrock-agentcore:RetrieveMemoryRecords` permission.
     #
     # @option params [required, String] :memory_id
-    #   The identifier of the memory store from which to retrieve memory
-    #   records.
+    #   The identifier of the AgentCore Memory resource from which to retrieve
+    #   memory records.
     #
     # @option params [required, String] :namespace
     #   The namespace to filter memory records by. If specified, only memory
@@ -2369,7 +2385,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

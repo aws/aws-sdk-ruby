@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.318.0 (2025-08-04)
+------------------
+
+* Feature - This release adds the ability for customers to attach and detach their EBS volumes to EKS-orchestrated HyperPod cluster nodes.
+
 1.317.0 (2025-07-31)
 ------------------
 

@@ -31,7 +31,7 @@ module Aws::CodeConnections
     class Connection
       attr_accessor connection_name: ::String
       attr_accessor connection_arn: ::String
-      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged")
+      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged" | "AzureDevOps")
       attr_accessor owner_account_id: ::String
       attr_accessor connection_status: ("PENDING" | "AVAILABLE" | "ERROR")
       attr_accessor host_arn: ::String
@@ -39,7 +39,7 @@ module Aws::CodeConnections
     end
 
     class CreateConnectionInput
-      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged")
+      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged" | "AzureDevOps")
       attr_accessor connection_name: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor host_arn: ::String
@@ -54,7 +54,7 @@ module Aws::CodeConnections
 
     class CreateHostInput
       attr_accessor name: ::String
-      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged")
+      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged" | "AzureDevOps")
       attr_accessor provider_endpoint: ::String
       attr_accessor vpc_configuration: Types::VpcConfiguration
       attr_accessor tags: ::Array[Types::Tag]
@@ -150,7 +150,7 @@ module Aws::CodeConnections
     class GetHostOutput
       attr_accessor name: ::String
       attr_accessor status: ::String
-      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged")
+      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged" | "AzureDevOps")
       attr_accessor provider_endpoint: ::String
       attr_accessor vpc_configuration: Types::VpcConfiguration
       SENSITIVE: []
@@ -216,7 +216,7 @@ module Aws::CodeConnections
     class Host
       attr_accessor name: ::String
       attr_accessor host_arn: ::String
-      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged")
+      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged" | "AzureDevOps")
       attr_accessor provider_endpoint: ::String
       attr_accessor vpc_configuration: Types::VpcConfiguration
       attr_accessor status: ::String
@@ -240,7 +240,7 @@ module Aws::CodeConnections
     end
 
     class ListConnectionsInput
-      attr_accessor provider_type_filter: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged")
+      attr_accessor provider_type_filter: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged" | "AzureDevOps")
       attr_accessor host_arn_filter: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -317,7 +317,7 @@ module Aws::CodeConnections
       attr_accessor connection_arn: ::String
       attr_accessor encryption_key_arn: ::String
       attr_accessor owner_id: ::String
-      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged")
+      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged" | "AzureDevOps")
       attr_accessor repository_link_arn: ::String
       attr_accessor repository_link_id: ::String
       attr_accessor repository_name: ::String
@@ -390,7 +390,7 @@ module Aws::CodeConnections
       attr_accessor directory: ::String
       attr_accessor owner_id: ::String
       attr_accessor repository_name: ::String
-      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged")
+      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged" | "AzureDevOps")
       attr_accessor sha: ::String
       SENSITIVE: []
     end
@@ -429,7 +429,7 @@ module Aws::CodeConnections
       attr_accessor branch: ::String
       attr_accessor config_file: ::String
       attr_accessor owner_id: ::String
-      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged")
+      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged" | "AzureDevOps")
       attr_accessor repository_link_id: ::String
       attr_accessor repository_name: ::String
       attr_accessor resource_name: ::String

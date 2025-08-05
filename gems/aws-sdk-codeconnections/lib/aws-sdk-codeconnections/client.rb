@@ -95,8 +95,8 @@ module Aws::CodeConnections
     #     class name or an instance of a plugin class.
     #
     #   @option options [required, Aws::CredentialProvider] :credentials
-    #     Your AWS credentials used for authentication. This can be an instance of any one of the
-    #     following classes:
+    #     Your AWS credentials used for authentication. This can be any class that includes and implements
+    #     `Aws::CredentialProvider`, or instance of any one of the following classes:
     #
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
@@ -124,8 +124,7 @@ module Aws::CodeConnections
     #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
     #       from the Cognito Identity service.
     #
-    #     When `:credentials` are not configured directly, the following
-    #     locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
     #
@@ -139,12 +138,10 @@ module Aws::CodeConnections
     #
     #     * `~/.aws/config`
     #
-    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
-    #       are very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts. Instance profile credential
-    #       fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
-    #       to `true`.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts are very aggressive.
+    #       Construct and pass an instance of `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts. Instance profile credential fetching can be disabled by
+    #       setting `ENV['AWS_EC2_METADATA_DISABLED']` to `true`.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -384,8 +381,8 @@ module Aws::CodeConnections
     #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
-    #     Your Bearer token used for authentication. This can be an instance of any one of the
-    #     following classes:
+    #     Your Bearer token used for authentication. This can be any class that includes and implements
+    #     `Aws::TokenProvider`, or instance of any one of the following classes:
     #
     #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
     #       tokens.
@@ -513,7 +510,7 @@ module Aws::CodeConnections
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_connection({
-    #     provider_type: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab, GitLabSelfManaged
+    #     provider_type: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab, GitLabSelfManaged, AzureDevOps
     #     connection_name: "ConnectionName", # required
     #     tags: [
     #       {
@@ -582,7 +579,7 @@ module Aws::CodeConnections
     #
     #   resp = client.create_host({
     #     name: "HostName", # required
-    #     provider_type: "Bitbucket", # required, accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab, GitLabSelfManaged
+    #     provider_type: "Bitbucket", # required, accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab, GitLabSelfManaged, AzureDevOps
     #     provider_endpoint: "Url", # required
     #     vpc_configuration: {
     #       vpc_id: "VpcId", # required
@@ -660,7 +657,7 @@ module Aws::CodeConnections
     #   resp.repository_link_info.connection_arn #=> String
     #   resp.repository_link_info.encryption_key_arn #=> String
     #   resp.repository_link_info.owner_id #=> String
-    #   resp.repository_link_info.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.repository_link_info.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged", "AzureDevOps"
     #   resp.repository_link_info.repository_link_arn #=> String
     #   resp.repository_link_info.repository_link_id #=> String
     #   resp.repository_link_info.repository_name #=> String
@@ -739,7 +736,7 @@ module Aws::CodeConnections
     #   resp.sync_configuration.branch #=> String
     #   resp.sync_configuration.config_file #=> String
     #   resp.sync_configuration.owner_id #=> String
-    #   resp.sync_configuration.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.sync_configuration.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged", "AzureDevOps"
     #   resp.sync_configuration.repository_link_id #=> String
     #   resp.sync_configuration.repository_name #=> String
     #   resp.sync_configuration.resource_name #=> String
@@ -883,7 +880,7 @@ module Aws::CodeConnections
     #
     #   resp.connection.connection_name #=> String
     #   resp.connection.connection_arn #=> String
-    #   resp.connection.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.connection.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged", "AzureDevOps"
     #   resp.connection.owner_account_id #=> String
     #   resp.connection.connection_status #=> String, one of "PENDING", "AVAILABLE", "ERROR"
     #   resp.connection.host_arn #=> String
@@ -921,7 +918,7 @@ module Aws::CodeConnections
     #
     #   resp.name #=> String
     #   resp.status #=> String
-    #   resp.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged", "AzureDevOps"
     #   resp.provider_endpoint #=> String
     #   resp.vpc_configuration.vpc_id #=> String
     #   resp.vpc_configuration.subnet_ids #=> Array
@@ -961,7 +958,7 @@ module Aws::CodeConnections
     #   resp.repository_link_info.connection_arn #=> String
     #   resp.repository_link_info.encryption_key_arn #=> String
     #   resp.repository_link_info.owner_id #=> String
-    #   resp.repository_link_info.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.repository_link_info.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged", "AzureDevOps"
     #   resp.repository_link_info.repository_link_arn #=> String
     #   resp.repository_link_info.repository_link_id #=> String
     #   resp.repository_link_info.repository_name #=> String
@@ -1049,7 +1046,7 @@ module Aws::CodeConnections
     #   resp.desired_state.directory #=> String
     #   resp.desired_state.owner_id #=> String
     #   resp.desired_state.repository_name #=> String
-    #   resp.desired_state.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.desired_state.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged", "AzureDevOps"
     #   resp.desired_state.sha #=> String
     #   resp.latest_successful_sync.events #=> Array
     #   resp.latest_successful_sync.events[0].event #=> String
@@ -1060,7 +1057,7 @@ module Aws::CodeConnections
     #   resp.latest_successful_sync.initial_revision.directory #=> String
     #   resp.latest_successful_sync.initial_revision.owner_id #=> String
     #   resp.latest_successful_sync.initial_revision.repository_name #=> String
-    #   resp.latest_successful_sync.initial_revision.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.latest_successful_sync.initial_revision.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged", "AzureDevOps"
     #   resp.latest_successful_sync.initial_revision.sha #=> String
     #   resp.latest_successful_sync.started_at #=> Time
     #   resp.latest_successful_sync.status #=> String, one of "FAILED", "INITIATED", "IN_PROGRESS", "SUCCEEDED"
@@ -1068,7 +1065,7 @@ module Aws::CodeConnections
     #   resp.latest_successful_sync.target_revision.directory #=> String
     #   resp.latest_successful_sync.target_revision.owner_id #=> String
     #   resp.latest_successful_sync.target_revision.repository_name #=> String
-    #   resp.latest_successful_sync.target_revision.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.latest_successful_sync.target_revision.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged", "AzureDevOps"
     #   resp.latest_successful_sync.target_revision.sha #=> String
     #   resp.latest_successful_sync.target #=> String
     #   resp.latest_sync.events #=> Array
@@ -1080,7 +1077,7 @@ module Aws::CodeConnections
     #   resp.latest_sync.initial_revision.directory #=> String
     #   resp.latest_sync.initial_revision.owner_id #=> String
     #   resp.latest_sync.initial_revision.repository_name #=> String
-    #   resp.latest_sync.initial_revision.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.latest_sync.initial_revision.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged", "AzureDevOps"
     #   resp.latest_sync.initial_revision.sha #=> String
     #   resp.latest_sync.started_at #=> Time
     #   resp.latest_sync.status #=> String, one of "FAILED", "INITIATED", "IN_PROGRESS", "SUCCEEDED"
@@ -1088,7 +1085,7 @@ module Aws::CodeConnections
     #   resp.latest_sync.target_revision.directory #=> String
     #   resp.latest_sync.target_revision.owner_id #=> String
     #   resp.latest_sync.target_revision.repository_name #=> String
-    #   resp.latest_sync.target_revision.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.latest_sync.target_revision.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged", "AzureDevOps"
     #   resp.latest_sync.target_revision.sha #=> String
     #   resp.latest_sync.target #=> String
     #
@@ -1175,7 +1172,7 @@ module Aws::CodeConnections
     #   resp.sync_configuration.branch #=> String
     #   resp.sync_configuration.config_file #=> String
     #   resp.sync_configuration.owner_id #=> String
-    #   resp.sync_configuration.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.sync_configuration.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged", "AzureDevOps"
     #   resp.sync_configuration.repository_link_id #=> String
     #   resp.sync_configuration.repository_name #=> String
     #   resp.sync_configuration.resource_name #=> String
@@ -1223,7 +1220,7 @@ module Aws::CodeConnections
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_connections({
-    #     provider_type_filter: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab, GitLabSelfManaged
+    #     provider_type_filter: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab, GitLabSelfManaged, AzureDevOps
     #     host_arn_filter: "HostArn",
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -1234,7 +1231,7 @@ module Aws::CodeConnections
     #   resp.connections #=> Array
     #   resp.connections[0].connection_name #=> String
     #   resp.connections[0].connection_arn #=> String
-    #   resp.connections[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.connections[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged", "AzureDevOps"
     #   resp.connections[0].owner_account_id #=> String
     #   resp.connections[0].connection_status #=> String, one of "PENDING", "AVAILABLE", "ERROR"
     #   resp.connections[0].host_arn #=> String
@@ -1279,7 +1276,7 @@ module Aws::CodeConnections
     #   resp.hosts #=> Array
     #   resp.hosts[0].name #=> String
     #   resp.hosts[0].host_arn #=> String
-    #   resp.hosts[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.hosts[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged", "AzureDevOps"
     #   resp.hosts[0].provider_endpoint #=> String
     #   resp.hosts[0].vpc_configuration.vpc_id #=> String
     #   resp.hosts[0].vpc_configuration.subnet_ids #=> Array
@@ -1330,7 +1327,7 @@ module Aws::CodeConnections
     #   resp.repository_links[0].connection_arn #=> String
     #   resp.repository_links[0].encryption_key_arn #=> String
     #   resp.repository_links[0].owner_id #=> String
-    #   resp.repository_links[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.repository_links[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged", "AzureDevOps"
     #   resp.repository_links[0].repository_link_arn #=> String
     #   resp.repository_links[0].repository_link_id #=> String
     #   resp.repository_links[0].repository_name #=> String
@@ -1425,7 +1422,7 @@ module Aws::CodeConnections
     #   resp.sync_configurations[0].branch #=> String
     #   resp.sync_configurations[0].config_file #=> String
     #   resp.sync_configurations[0].owner_id #=> String
-    #   resp.sync_configurations[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.sync_configurations[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged", "AzureDevOps"
     #   resp.sync_configurations[0].repository_link_id #=> String
     #   resp.sync_configurations[0].repository_name #=> String
     #   resp.sync_configurations[0].resource_name #=> String
@@ -1607,7 +1604,7 @@ module Aws::CodeConnections
     #   resp.repository_link_info.connection_arn #=> String
     #   resp.repository_link_info.encryption_key_arn #=> String
     #   resp.repository_link_info.owner_id #=> String
-    #   resp.repository_link_info.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.repository_link_info.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged", "AzureDevOps"
     #   resp.repository_link_info.repository_link_arn #=> String
     #   resp.repository_link_info.repository_link_id #=> String
     #   resp.repository_link_info.repository_name #=> String
@@ -1732,7 +1729,7 @@ module Aws::CodeConnections
     #   resp.sync_configuration.branch #=> String
     #   resp.sync_configuration.config_file #=> String
     #   resp.sync_configuration.owner_id #=> String
-    #   resp.sync_configuration.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.sync_configuration.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged", "AzureDevOps"
     #   resp.sync_configuration.repository_link_id #=> String
     #   resp.sync_configuration.repository_name #=> String
     #   resp.sync_configuration.resource_name #=> String
@@ -1769,7 +1766,7 @@ module Aws::CodeConnections
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codeconnections'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

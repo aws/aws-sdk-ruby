@@ -16,6 +16,9 @@ module Aws
         def resource_id: () -> ::String
         def resource_type: () -> ::String
       end
+      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class TagPolicyException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

@@ -296,7 +296,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_asset_model-instance_method
       def create_asset_model: (
                                 asset_model_name: ::String,
-                                ?asset_model_type: ("ASSET_MODEL" | "COMPONENT_MODEL"),
+                                ?asset_model_type: ("ASSET_MODEL" | "COMPONENT_MODEL" | "INTERFACE"),
                                 ?asset_model_id: ::String,
                                 ?asset_model_external_id: ::String,
                                 ?asset_model_description: ::String,
@@ -344,7 +344,7 @@ module Aws
                                         }?
                                       }?,
                                       metric: {
-                                        expression: ::String,
+                                        expression: ::String?,
                                         variables: Array[
                                           {
                                             name: ::String,
@@ -359,7 +359,7 @@ module Aws
                                               ]?
                                             }
                                           },
-                                        ],
+                                        ]?,
                                         window: {
                                           tumbling: {
                                             interval: ::String,
@@ -432,7 +432,7 @@ module Aws
                                             }?
                                           }?,
                                           metric: {
-                                            expression: ::String,
+                                            expression: ::String?,
                                             variables: Array[
                                               {
                                                 name: ::String,
@@ -447,7 +447,7 @@ module Aws
                                                   ]?
                                                 }
                                               },
-                                            ],
+                                            ]?,
                                             window: {
                                               tumbling: {
                                                 interval: ::String,
@@ -529,7 +529,7 @@ module Aws
                                                         }?
                                                       }?,
                                                       metric: {
-                                                        expression: ::String,
+                                                        expression: ::String?,
                                                         variables: Array[
                                                           {
                                                             name: ::String,
@@ -544,7 +544,7 @@ module Aws
                                                               ]?
                                                             }
                                                           },
-                                                        ],
+                                                        ]?,
                                                         window: {
                                                           tumbling: {
                                                             interval: ::String,
@@ -798,6 +798,21 @@ module Aws
                                               ) -> _DeleteAssetModelCompositeModelResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssetModelCompositeModelResponseSuccess
 
+      interface _DeleteAssetModelInterfaceRelationshipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssetModelInterfaceRelationshipResponse]
+        def asset_model_id: () -> ::String
+        def interface_asset_model_id: () -> ::String
+        def asset_model_arn: () -> ::String
+        def asset_model_status: () -> Types::AssetModelStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_asset_model_interface_relationship-instance_method
+      def delete_asset_model_interface_relationship: (
+                                                       asset_model_id: ::String,
+                                                       interface_asset_model_id: ::String,
+                                                       ?client_token: ::String
+                                                     ) -> _DeleteAssetModelInterfaceRelationshipResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssetModelInterfaceRelationshipResponseSuccess
+
       interface _DeleteComputationModelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteComputationModelResponse]
         def computation_model_status: () -> Types::ComputationModelStatus
@@ -946,7 +961,7 @@ module Aws
         def asset_model_external_id: () -> ::String
         def asset_model_arn: () -> ::String
         def asset_model_name: () -> ::String
-        def asset_model_type: () -> ("ASSET_MODEL" | "COMPONENT_MODEL")
+        def asset_model_type: () -> ("ASSET_MODEL" | "COMPONENT_MODEL" | "INTERFACE")
         def asset_model_description: () -> ::String
         def asset_model_properties: () -> ::Array[Types::AssetModelProperty]
         def asset_model_hierarchies: () -> ::Array[Types::AssetModelHierarchy]
@@ -956,6 +971,7 @@ module Aws
         def asset_model_last_update_date: () -> ::Time
         def asset_model_status: () -> Types::AssetModelStatus
         def asset_model_version: () -> ::String
+        def interface_details: () -> ::Array[Types::InterfaceRelationship]
         def e_tag: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_asset_model-instance_method
@@ -987,6 +1003,20 @@ module Aws
                                                   ?asset_model_version: ::String
                                                 ) -> _DescribeAssetModelCompositeModelResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAssetModelCompositeModelResponseSuccess
+
+      interface _DescribeAssetModelInterfaceRelationshipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssetModelInterfaceRelationshipResponse]
+        def asset_model_id: () -> ::String
+        def interface_asset_model_id: () -> ::String
+        def property_mappings: () -> ::Array[Types::PropertyMapping]
+        def hierarchy_mappings: () -> ::Array[Types::HierarchyMapping]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_asset_model_interface_relationship-instance_method
+      def describe_asset_model_interface_relationship: (
+                                                         asset_model_id: ::String,
+                                                         interface_asset_model_id: ::String
+                                                       ) -> _DescribeAssetModelInterfaceRelationshipResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAssetModelInterfaceRelationshipResponseSuccess
 
       interface _DescribeAssetPropertyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssetPropertyResponse]
@@ -1454,7 +1484,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_asset_models-instance_method
       def list_asset_models: (
-                               ?asset_model_types: Array[("ASSET_MODEL" | "COMPONENT_MODEL")],
+                               ?asset_model_types: Array[("ASSET_MODEL" | "COMPONENT_MODEL" | "INTERFACE")],
                                ?next_token: ::String,
                                ?max_results: ::Integer,
                                ?asset_model_version: ::String
@@ -1653,6 +1683,19 @@ module Aws
                          ) -> _ListGatewaysResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGatewaysResponseSuccess
 
+      interface _ListInterfaceRelationshipsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInterfaceRelationshipsResponse]
+        def interface_relationship_summaries: () -> ::Array[Types::InterfaceRelationshipSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_interface_relationships-instance_method
+      def list_interface_relationships: (
+                                          interface_asset_model_id: ::String,
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListInterfaceRelationshipsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInterfaceRelationshipsResponseSuccess
+
       interface _ListPortalsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPortalsResponse]
         def portal_summaries: () -> ::Array[Types::PortalSummary]
@@ -1715,6 +1758,31 @@ module Aws
                               ?time_series_type: ("ASSOCIATED" | "DISASSOCIATED")
                             ) -> _ListTimeSeriesResponseSuccess
                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTimeSeriesResponseSuccess
+
+      interface _PutAssetModelInterfaceRelationshipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAssetModelInterfaceRelationshipResponse]
+        def asset_model_id: () -> ::String
+        def interface_asset_model_id: () -> ::String
+        def asset_model_arn: () -> ::String
+        def asset_model_status: () -> Types::AssetModelStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#put_asset_model_interface_relationship-instance_method
+      def put_asset_model_interface_relationship: (
+                                                    asset_model_id: ::String,
+                                                    interface_asset_model_id: ::String,
+                                                    property_mapping_configuration: {
+                                                      match_by_property_name: bool?,
+                                                      create_missing_property: bool?,
+                                                      overrides: Array[
+                                                        {
+                                                          asset_model_property_id: ::String,
+                                                          interface_asset_model_property_id: ::String
+                                                        },
+                                                      ]?
+                                                    },
+                                                    ?client_token: ::String
+                                                  ) -> _PutAssetModelInterfaceRelationshipResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAssetModelInterfaceRelationshipResponseSuccess
 
       interface _PutDefaultEncryptionConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutDefaultEncryptionConfigurationResponse]
@@ -1895,7 +1963,7 @@ module Aws
                                         }?
                                       }?,
                                       metric: {
-                                        expression: ::String,
+                                        expression: ::String?,
                                         variables: Array[
                                           {
                                             name: ::String,
@@ -1910,7 +1978,7 @@ module Aws
                                               ]?
                                             }
                                           },
-                                        ],
+                                        ]?,
                                         window: {
                                           tumbling: {
                                             interval: ::String,
@@ -1987,7 +2055,7 @@ module Aws
                                             }?
                                           }?,
                                           metric: {
-                                            expression: ::String,
+                                            expression: ::String?,
                                             variables: Array[
                                               {
                                                 name: ::String,
@@ -2002,7 +2070,7 @@ module Aws
                                                   ]?
                                                 }
                                               },
-                                            ],
+                                            ]?,
                                             window: {
                                               tumbling: {
                                                 interval: ::String,
@@ -2090,7 +2158,7 @@ module Aws
                                                         }?
                                                       }?,
                                                       metric: {
-                                                        expression: ::String,
+                                                        expression: ::String?,
                                                         variables: Array[
                                                           {
                                                             name: ::String,
@@ -2105,7 +2173,7 @@ module Aws
                                                               ]?
                                                             }
                                                           },
-                                                        ],
+                                                        ]?,
                                                         window: {
                                                           tumbling: {
                                                             interval: ::String,

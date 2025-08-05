@@ -54,7 +54,7 @@ module Aws::SSMGuiConnect
   autoload :EndpointProvider, 'aws-sdk-ssmguiconnect/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ssmguiconnect/endpoints'
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.6.0'
 
 end
 

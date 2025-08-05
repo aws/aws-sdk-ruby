@@ -54,7 +54,7 @@ module Aws::WorkMailMessageFlow
   autoload :EndpointProvider, 'aws-sdk-workmailmessageflow/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-workmailmessageflow/endpoints'
 
-  GEM_VERSION = '1.55.0'
+  GEM_VERSION = '1.56.0'
 
 end
 

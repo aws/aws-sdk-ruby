@@ -54,7 +54,7 @@ module Aws::CodeStarconnections
   autoload :EndpointProvider, 'aws-sdk-codestarconnections/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codestarconnections/endpoints'
 
-  GEM_VERSION = '1.63.0'
+  GEM_VERSION = '1.64.0'
 
 end
 

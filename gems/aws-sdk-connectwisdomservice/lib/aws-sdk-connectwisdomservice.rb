@@ -54,7 +54,7 @@ module Aws::ConnectWisdomService
   autoload :EndpointProvider, 'aws-sdk-connectwisdomservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-connectwisdomservice/endpoints'
 
-  GEM_VERSION = '1.50.0'
+  GEM_VERSION = '1.51.0'
 
 end
 

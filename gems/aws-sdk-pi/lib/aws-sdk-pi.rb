@@ -54,7 +54,7 @@ module Aws::PI
   autoload :EndpointProvider, 'aws-sdk-pi/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-pi/endpoints'
 
-  GEM_VERSION = '1.82.0'
+  GEM_VERSION = '1.83.0'
 
 end
 

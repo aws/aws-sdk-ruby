@@ -1825,6 +1825,74 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of your SageMaker HyperPod cluster
+    #   containing the target node. Your cluster must use EKS as the
+    #   orchestration and be in the `InService` state.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   The unique identifier of the cluster node to which you want to
+    #   attach the volume. The node must belong to your specified HyperPod
+    #   cluster and cannot be part of a Restricted Instance Group (RIG).
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_id
+    #   The unique identifier of your EBS volume to attach. The volume must
+    #   be in the `available` state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AttachClusterNodeVolumeRequest AWS API Documentation
+    #
+    class AttachClusterNodeVolumeRequest < Struct.new(
+      :cluster_arn,
+      :node_id,
+      :volume_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of your SageMaker HyperPod cluster
+    #   where the volume attachment operation was performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   The unique identifier of the cluster node where your volume was
+    #   attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_id
+    #   The unique identifier of your EBS volume that was attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] attach_time
+    #   The timestamp when the volume attachment operation was initiated by
+    #   the SageMaker HyperPod service.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of your volume attachment operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_name
+    #   The device name assigned to your attached volume on the target
+    #   instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AttachClusterNodeVolumeResponse AWS API Documentation
+    #
+    class AttachClusterNodeVolumeResponse < Struct.new(
+      :cluster_arn,
+      :node_id,
+      :volume_id,
+      :attach_time,
+      :status,
+      :device_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains a presigned URL and its associated local file path for
     # downloading hub content artifacts.
     #
@@ -20385,6 +20453,73 @@ module Aws::SageMaker
       :desired_weight,
       :desired_instance_count,
       :serverless_update_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of your SageMaker HyperPod cluster
+    #   containing the target node. Your cluster must use EKS as the
+    #   orchestration and be in the `InService` state.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   The unique identifier of the cluster node from which you want to
+    #   detach the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_id
+    #   The unique identifier of your EBS volume that you want to detach.
+    #   Your volume must be currently attached to the specified node.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DetachClusterNodeVolumeRequest AWS API Documentation
+    #
+    class DetachClusterNodeVolumeRequest < Struct.new(
+      :cluster_arn,
+      :node_id,
+      :volume_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of your SageMaker HyperPod cluster
+    #   where the volume detachment operation was performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   The unique identifier of the cluster node from which your volume was
+    #   detached.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_id
+    #   The unique identifier of your EBS volume that was detached.
+    #   @return [String]
+    #
+    # @!attribute [rw] attach_time
+    #   The original timestamp when your volume was initially attached to
+    #   the node.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of your volume detachment operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_name
+    #   The device name assigned to your attached volume on the target
+    #   instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DetachClusterNodeVolumeResponse AWS API Documentation
+    #
+    class DetachClusterNodeVolumeResponse < Struct.new(
+      :cluster_arn,
+      :node_id,
+      :volume_id,
+      :attach_time,
+      :status,
+      :device_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48995,8 +49130,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] single_sign_on_application_arn
-    #   The ARN of the application managed by SageMaker AI and SageMaker
-    #   Unified Studio in the Amazon Web Services IAM Identity Center.
+    #   The ARN of the Amazon DataZone application managed by Amazon
+    #   SageMaker Unified Studio in the Amazon Web Services IAM Identity
+    #   Center.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UnifiedStudioSettings AWS API Documentation

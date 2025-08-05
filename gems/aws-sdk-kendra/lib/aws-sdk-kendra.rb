@@ -54,7 +54,7 @@ module Aws::Kendra
   autoload :EndpointProvider, 'aws-sdk-kendra/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-kendra/endpoints'
 
-  GEM_VERSION = '1.102.0'
+  GEM_VERSION = '1.103.0'
 
 end
 

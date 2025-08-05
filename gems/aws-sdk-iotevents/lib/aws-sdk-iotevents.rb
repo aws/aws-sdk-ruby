@@ -54,7 +54,7 @@ module Aws::IoTEvents
   autoload :EndpointProvider, 'aws-sdk-iotevents/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iotevents/endpoints'
 
-  GEM_VERSION = '1.69.0'
+  GEM_VERSION = '1.70.0'
 
 end
 

@@ -55,7 +55,7 @@ module Aws::GameLiftStreams
   autoload :EndpointProvider, 'aws-sdk-gameliftstreams/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-gameliftstreams/endpoints'
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.8.0'
 
 end
 

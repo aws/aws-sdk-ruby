@@ -28,6 +28,7 @@ module Aws::Evs
   #
   # ## Error Classes
   # * {ResourceNotFoundException}
+  # * {ServiceQuotaExceededException}
   # * {TagPolicyException}
   # * {ThrottlingException}
   # * {TooManyTagsException}
@@ -61,6 +62,21 @@ module Aws::Evs
       # @return [String]
       def resource_type
         @data[:resource_type]
+      end
+    end
+
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Evs::Types::ServiceQuotaExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

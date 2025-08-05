@@ -79,7 +79,7 @@ module Aws::CodeConnections
     # @!attribute [rw] connection_arn
     #   The Amazon Resource Name (ARN) of the connection. The ARN is used as
     #   the connection reference when the connection is shared between
-    #   Amazon Web Servicesservices.
+    #   Amazon Web Services services.
     #
     #   <note markdown="1"> The ARN is never reused if the connection is deleted.
     #

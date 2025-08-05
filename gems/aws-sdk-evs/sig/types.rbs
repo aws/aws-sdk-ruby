@@ -248,6 +248,11 @@ module Aws::Evs
       SENSITIVE: []
     end
 
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class TagPolicyException
       attr_accessor message: ::String
       SENSITIVE: []

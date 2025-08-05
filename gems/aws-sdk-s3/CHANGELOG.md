@@ -7,6 +7,11 @@ Unreleased Changes
 
 * Issue - Clean up partially downloaded file on multipart `download_file` failure while preserving existing file.
 
+1.196.0 (2025-08-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.195.0 (2025-07-31)
 ------------------
 

@@ -95,8 +95,8 @@ module Aws::Evs
     #     class name or an instance of a plugin class.
     #
     #   @option options [required, Aws::CredentialProvider] :credentials
-    #     Your AWS credentials used for authentication. This can be an instance of any one of the
-    #     following classes:
+    #     Your AWS credentials used for authentication. This can be any class that includes and implements
+    #     `Aws::CredentialProvider`, or instance of any one of the following classes:
     #
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
@@ -124,8 +124,7 @@ module Aws::Evs
     #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
     #       from the Cognito Identity service.
     #
-    #     When `:credentials` are not configured directly, the following
-    #     locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
     #
@@ -139,12 +138,10 @@ module Aws::Evs
     #
     #     * `~/.aws/config`
     #
-    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
-    #       are very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts. Instance profile credential
-    #       fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
-    #       to `true`.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts are very aggressive.
+    #       Construct and pass an instance of `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts. Instance profile credential fetching can be disabled by
+    #       setting `ENV['AWS_EC2_METADATA_DISABLED']` to `true`.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -384,8 +381,8 @@ module Aws::Evs
     #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
-    #     Your Bearer token used for authentication. This can be an instance of any one of the
-    #     following classes:
+    #     Your Bearer token used for authentication. This can be any class that includes and implements
+    #     `Aws::TokenProvider`, or instance of any one of the following classes:
     #
     #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
     #       tokens.
@@ -486,25 +483,27 @@ module Aws::Evs
 
     # @!group API Operations
 
-    # Creates an Amazon EVS environment that runs VCF software, such as SDDC
-    # Manager, NSX Manager, and vCenter Server.
-    #
-    # During environment creation, Amazon EVS performs validations on DNS
-    # settings, provisions VLAN subnets and hosts, and deploys the supplied
-    # version of VCF.
-    #
-    # It can take several hours to create an environment. After the
-    # deployment completes, you can configure VCF according to your unique
-    # requirements.
-    #
-    # <note markdown="1"> You cannot use the `dedicatedHostId` and `placementGroupId` parameters
-    # together in the same `CreateEnvironment` action. This results in a
-    # `ValidationException` response.
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
     #
     #  </note>
     #
-    # <note markdown="1"> EC2 instances created through Amazon EVS do not support associating an
-    # IAM instance profile.
+    #  Creates an Amazon EVS environment that runs VCF software, such as
+    # SDDC
+    # Manager, NSX Manager, and vCenter Server.
+    #
+    #  During environment creation, Amazon EVS performs validations on DNS
+    # settings, provisions VLAN subnets and hosts, and deploys the supplied
+    # version of VCF.
+    #
+    #  It can take several hours to create an environment. After the
+    # deployment completes, you can configure VCF in the vSphere user
+    # interface according to your needs.
+    #
+    #  <note markdown="1"> You cannot use the `dedicatedHostId` and
+    # `placementGroupId` parameters
+    # together in the same `CreateEnvironment` action. This results in a
+    # `ValidationException` response.
     #
     #  </note>
     #
@@ -561,24 +560,26 @@ module Aws::Evs
     #   adding or removing hosts to fail.
     #
     # @option params [required, String] :vpc_id
-    #   A unique ID for the VPC that connects to the environment control plane
-    #   for service access.
+    #   A unique ID for the VPC that the environment is deployed inside.
     #
     #   Amazon EVS requires that all VPC subnets exist in a single
     #   Availability Zone in a Region where the service is available.
     #
-    #   The VPC that you select must have a valid DHCP option set with domain
+    #   The VPC that you specify must have a valid DHCP option set with domain
     #   name, at least two DNS servers, and an NTP server. These settings are
-    #   used to configure your VCF appliances and hosts.
-    #
-    #   If you plan to use HCX over the internet, choose a VPC that has a
-    #   primary CIDR block and a /28 secondary CIDR block from an IPAM pool.
-    #   Make sure that your VPC also has an attached internet gateway.
+    #   used to configure your VCF appliances and hosts. The VPC cannot be
+    #   used with any other deployed Amazon EVS environment. Amazon EVS does
+    #   not provide multi-VPC support for environments at this time.
     #
     #   Amazon EVS does not support the following Amazon Web Services
     #   networking options for NSX overlay connectivity: cross-Region VPC
     #   peering, Amazon S3 gateway endpoints, or Amazon Web Services Direct
     #   Connect virtual private gateway associations.
+    #
+    #   <note markdown="1"> Ensure that you specify a VPC that is adequately sized to accommodate
+    #   the \{evws} subnets.
+    #
+    #    </note>
     #
     # @option params [required, String] :service_access_subnet_id
     #   The subnet that is used to establish connectivity between the Amazon
@@ -591,16 +592,20 @@ module Aws::Evs
     #   VCF version 5.2.1 at this time.
     #
     # @option params [required, Boolean] :terms_accepted
-    #   Customer confirmation that the customer has purchased and maintains
-    #   sufficient VCF software licenses to cover all physical processor cores
-    #   in the environment, in compliance with VMware's licensing
-    #   requirements and terms of use.
+    #   Customer confirmation that the customer has purchased and will
+    #   continue to maintain the required number of VCF software licenses to
+    #   cover all physical processor cores in the Amazon EVS environment.
+    #   Information about your VCF software in Amazon EVS will be shared with
+    #   Broadcom to verify license compliance. Amazon EVS does not validate
+    #   license keys. To validate license keys, visit the Broadcom support
+    #   portal.
     #
     # @option params [required, Array<Types::LicenseInfo>] :license_info
     #   The license information that Amazon EVS requires to create an
     #   environment. Amazon EVS requires two license keys: a VCF solution key
-    #   and a vSAN license key. VCF licenses must have sufficient core
-    #   entitlements to cover vCPU core and vSAN storage capacity needs.
+    #   and a vSAN license key. The VCF solution key must cover a minimum of
+    #   256 cores. The vSAN license key must provide at least 110 TiB of vSAN
+    #   capacity.
     #
     #   VCF licenses can be used for only one Amazon EVS environment. Amazon
     #   EVS does not support reuse of VCF licenses for multiple environments.
@@ -608,23 +613,29 @@ module Aws::Evs
     #   VCF license information can be retrieved from the Broadcom portal.
     #
     # @option params [required, Types::InitialVlans] :initial_vlans
-    #   The initial VLAN subnets for the environment. You must specify a
-    #   non-overlapping CIDR block for each VLAN subnet.
+    #   The initial VLAN subnets for the Amazon EVS environment.
+    #
+    #   <note markdown="1"> For each Amazon EVS VLAN subnet, you must specify a non-overlapping
+    #   CIDR block. Amazon EVS VLAN subnets have a minimum CIDR block size of
+    #   /28 and a maximum size of /24.
+    #
+    #    </note>
     #
     # @option params [required, Array<Types::HostInfoForCreate>] :hosts
     #   The ESXi hosts to add to the environment. Amazon EVS requires that you
     #   provide details for a minimum of 4 hosts during environment creation.
     #
-    #   For each host, you must provide the desired hostname, EC2 SSH key, and
-    #   EC2 instance type. Optionally, you can also provide a partition or
-    #   cluster placement group to use, or use Amazon EC2 Dedicated Hosts.
+    #   For each host, you must provide the desired hostname, EC2 SSH keypair
+    #   name, and EC2 instance type. Optionally, you can also provide a
+    #   partition or cluster placement group to use, or use Amazon EC2
+    #   Dedicated Hosts.
     #
     # @option params [required, Types::ConnectivityInfo] :connectivity_info
     #   The connectivity configuration for the environment. Amazon EVS
     #   requires that you specify two route server peer IDs. During
     #   environment creation, the route server endpoints peer with the NSX
-    #   edges over the NSX, providing BGP dynamic routing for overlay
-    #   networks.
+    #   edges over the NSX uplink subnet, providing BGP-based dynamic routing
+    #   for overlay networks.
     #
     # @option params [required, Types::VcfHostnames] :vcf_hostnames
     #   The DNS hostnames for the virtual machines that host the VCF
@@ -772,27 +783,30 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # Creates an ESXi host and adds it to an Amazon EVS environment. Amazon
-    # EVS supports 4-16 hosts per environment.
-    #
-    # This action can only be used after the Amazon EVS environment is
-    # deployed. All Amazon EVS hosts are created with the latest AMI release
-    # version for the respective VCF version of the environment.
-    #
-    # You can use the `dedicatedHostId` parameter to specify an Amazon EC2
-    # Dedicated Host for ESXi host creation.
-    #
-    # You can use the `placementGroupId` parameter to specify a cluster or
-    # partition placement group to launch EC2 instances into.
-    #
-    # <note markdown="1"> You cannot use the `dedicatedHostId` and `placementGroupId` parameters
-    # together in the same `CreateEnvironmentHost` action. This results in a
-    # `ValidationException` response.
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
     #
     #  </note>
     #
-    # <note markdown="1"> EC2 instances created through Amazon EVS do not support associating an
-    # IAM instance profile.
+    #  Creates an ESXi host and adds it to an Amazon EVS environment. Amazon
+    # EVS supports 4-16 hosts per environment.
+    #
+    #  This action can only be used after the Amazon EVS environment is
+    # deployed. All Amazon EVS hosts are created with the latest AMI release
+    # version for the respective VCF version of the environment. Amazon EVS
+    # hosts are commissioned in the SDDC Manager inventory as unassigned
+    # hosts.
+    #
+    #  You can use the `dedicatedHostId` parameter to specify an Amazon EC2
+    # Dedicated Host for ESXi host creation.
+    #
+    #  You can use the `placementGroupId` parameter to specify a cluster or
+    # partition placement group to launch EC2 instances into.
+    #
+    #  <note markdown="1"> You cannot use the `dedicatedHostId` and
+    # `placementGroupId` parameters
+    # together in the same `CreateEnvironmentHost` action. This results in a
+    # `ValidationException` response.
     #
     #  </note>
     #
@@ -869,13 +883,18 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # Deletes an Amazon EVS environment.
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
     #
-    # Amazon EVS environments will only be enabled for deletion once the
+    #  </note>
+    #
+    #  Deletes an Amazon EVS environment.
+    #
+    #  Amazon EVS environments will only be enabled for deletion once the
     # hosts are deleted. You can delete hosts using the
     # `DeleteEnvironmentHost` action.
     #
-    # Environment deletion also deletes the associated Amazon EVS VLAN
+    #  Environment deletion also deletes the associated Amazon EVS VLAN
     # subnets. Other associated Amazon Web Services resources are not
     # deleted. These resources may continue to incur costs.
     #
@@ -956,9 +975,15 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # Deletes a host from an Amazon EVS environment.
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
     #
-    # <note markdown="1"> Before deleting a host, you must unassign and decommission the host
+    #  </note>
+    #
+    #  Deletes a host from an Amazon EVS environment.
+    #
+    #  <note markdown="1"> Before deleting a host, you must unassign and
+    # decommission the host
     # from within the SDDC Manager user interface. Not doing so could impact
     # the availability of your virtual machines or result in data loss.
     #
@@ -1031,7 +1056,12 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # Returns a description of the specified environment.
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  Returns a description of the specified environment.
     #
     # @option params [required, String] :environment_id
     #   A unique ID for the environment.
@@ -1094,7 +1124,12 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # List the hosts within an environment.
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  List the hosts within an environment.
     #
     # @option params [String] :next_token
     #   A unique pagination token for each page. If `nextToken` is returned,
@@ -1153,7 +1188,12 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # Lists environment VLANs that are associated with the specified
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  Lists environment VLANs that are associated with the specified
     # environment.
     #
     # @option params [String] :next_token
@@ -1209,7 +1249,12 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # Lists the Amazon EVS environments in your Amazon Web Services account
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  Lists the Amazon EVS environments in your Amazon Web Services account
     # in the specified Amazon Web Services Region.
     #
     # @option params [String] :next_token
@@ -1265,7 +1310,12 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # Lists the tags for an Amazon EVS resource.
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  Lists the tags for an Amazon EVS resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource to list
@@ -1295,7 +1345,12 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # Associates the specified tags to an Amazon EVS resource with the
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  Associates the specified tags to an Amazon EVS resource with the
     # specified `resourceArn`. If existing tags on a resource are not
     # specified in the request parameters, they aren't changed. When a
     # resource is deleted, the tags associated with that resource are also
@@ -1333,7 +1388,12 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # Deletes specified tags from an Amazon EVS resource.
+    # <note markdown="1"> Amazon EVS is in public preview release and is
+    # subject to change.
+    #
+    #  </note>
+    #
+    #  Deletes specified tags from an Amazon EVS resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource to delete tags from.
@@ -1377,7 +1437,7 @@ module Aws::Evs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-evs'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

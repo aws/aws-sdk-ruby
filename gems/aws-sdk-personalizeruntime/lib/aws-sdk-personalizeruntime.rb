@@ -54,7 +54,7 @@ module Aws::PersonalizeRuntime
   autoload :EndpointProvider, 'aws-sdk-personalizeruntime/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-personalizeruntime/endpoints'
 
-  GEM_VERSION = '1.71.0'
+  GEM_VERSION = '1.72.0'
 
 end
 
