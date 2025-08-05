@@ -16,7 +16,7 @@ module Aws::Lambda
         @waiter = Smithy::Client::Waiters::Waiter.new(
           max_wait_time: options[:max_wait_time],
           min_delay: options[:min_delay] || 5,
-          max_delay: options[:max_delay] || 120,
+          max_delay: options[:max_delay] || 300,
           poller: Smithy::Client::Waiters::Poller.new(
             operation_name: :get_function_configuration,
             acceptors: [
@@ -70,7 +70,7 @@ module Aws::Lambda
         @waiter = Smithy::Client::Waiters::Waiter.new(
           max_wait_time: options[:max_wait_time],
           min_delay: options[:min_delay] || 1,
-          max_delay: options[:max_delay] || 120,
+          max_delay: options[:max_delay] || 300,
           poller: Smithy::Client::Waiters::Poller.new(
             operation_name: :get_function,
             acceptors: [
@@ -123,7 +123,7 @@ module Aws::Lambda
         @waiter = Smithy::Client::Waiters::Waiter.new(
           max_wait_time: options[:max_wait_time],
           min_delay: options[:min_delay] || 1,
-          max_delay: options[:max_delay] || 120,
+          max_delay: options[:max_delay] || 20,
           poller: Smithy::Client::Waiters::Poller.new(
             operation_name: :get_function,
             acceptors: [
@@ -159,7 +159,7 @@ module Aws::Lambda
         @waiter = Smithy::Client::Waiters::Waiter.new(
           max_wait_time: options[:max_wait_time],
           min_delay: options[:min_delay] || 5,
-          max_delay: options[:max_delay] || 120,
+          max_delay: options[:max_delay] || 300,
           poller: Smithy::Client::Waiters::Poller.new(
             operation_name: :get_function_configuration,
             acceptors: [
@@ -213,7 +213,7 @@ module Aws::Lambda
         @waiter = Smithy::Client::Waiters::Waiter.new(
           max_wait_time: options[:max_wait_time],
           min_delay: options[:min_delay] || 1,
-          max_delay: options[:max_delay] || 120,
+          max_delay: options[:max_delay] || 300,
           poller: Smithy::Client::Waiters::Poller.new(
             operation_name: :get_function,
             acceptors: [
@@ -267,7 +267,7 @@ module Aws::Lambda
         @waiter = Smithy::Client::Waiters::Waiter.new(
           max_wait_time: options[:max_wait_time],
           min_delay: options[:min_delay] || 5,
-          max_delay: options[:max_delay] || 120,
+          max_delay: options[:max_delay] || 1560,
           poller: Smithy::Client::Waiters::Poller.new(
             operation_name: :get_function_configuration,
             acceptors: [

@@ -2,7 +2,6 @@
 
 require_relative '../spec_helper'
 
-
 module Aws::Lambda
   describe Client do
     let(:client_options) { { stub_responses: true } }

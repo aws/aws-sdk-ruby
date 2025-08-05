@@ -193,6 +193,13 @@ module Aws::Lambda
     KMSInvalidStateException: StructureShape
     KMSKeyArn: StringShape
     KMSNotFoundException: StructureShape
+    KafkaSchemaRegistryAccessConfig: StructureShape
+    KafkaSchemaRegistryAccessConfigList: ListShape
+    KafkaSchemaRegistryAuthType: EnumShape
+    KafkaSchemaRegistryConfig: StructureShape
+    KafkaSchemaValidationAttribute: EnumShape
+    KafkaSchemaValidationConfig: StructureShape
+    KafkaSchemaValidationConfigList: ListShape
     LastUpdateStatus: EnumShape
     LastUpdateStatusReason: StringShape
     LastUpdateStatusReasonCode: EnumShape
@@ -321,6 +328,8 @@ module Aws::Lambda
     S3Key: StringShape
     S3ObjectVersion: StringShape
     ScalingConfig: StructureShape
+    SchemaRegistryEventRecordFormat: EnumShape
+    SchemaRegistryUri: StringShape
     SecurityGroupId: StringShape
     SecurityGroupIds: ListShape
     SelfManagedEventSource: StructureShape

@@ -192,10 +192,40 @@ module Aws::Lambda
       },
       ?function_response_types: Array[String],
       ?amazon_managed_kafka_event_source_config: {
-        consumer_group_id: String
+        consumer_group_id: String,
+        schema_registry_config: {
+          schema_registry_uri: String,
+          event_record_format: String,
+          access_configs: Array[
+            {
+              type: String,
+              uri: String
+            }
+          ],
+          schema_validation_configs: Array[
+            {
+              attribute: String
+            }
+          ]
+        }
       },
       ?self_managed_kafka_event_source_config: {
-        consumer_group_id: String
+        consumer_group_id: String,
+        schema_registry_config: {
+          schema_registry_uri: String,
+          event_record_format: String,
+          access_configs: Array[
+            {
+              type: String,
+              uri: String
+            }
+          ],
+          schema_validation_configs: Array[
+            {
+              attribute: String
+            }
+          ]
+        }
       },
       ?scaling_config: {
         maximum_concurrency: Integer
@@ -1172,6 +1202,42 @@ module Aws::Lambda
       ?function_response_types: Array[String],
       ?scaling_config: {
         maximum_concurrency: Integer
+      },
+      ?amazon_managed_kafka_event_source_config: {
+        consumer_group_id: String,
+        schema_registry_config: {
+          schema_registry_uri: String,
+          event_record_format: String,
+          access_configs: Array[
+            {
+              type: String,
+              uri: String
+            }
+          ],
+          schema_validation_configs: Array[
+            {
+              attribute: String
+            }
+          ]
+        }
+      },
+      ?self_managed_kafka_event_source_config: {
+        consumer_group_id: String,
+        schema_registry_config: {
+          schema_registry_uri: String,
+          event_record_format: String,
+          access_configs: Array[
+            {
+              type: String,
+              uri: String
+            }
+          ],
+          schema_validation_configs: Array[
+            {
+              attribute: String
+            }
+          ]
+        }
       },
       ?document_db_event_source_config: {
         database_name: String,

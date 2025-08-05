@@ -159,10 +159,12 @@ module Aws::Lambda
 
       def initialize: (
         ?consumer_group_id: String,
+        ?schema_registry_config: Types::KafkaSchemaRegistryConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor consumer_group_id: String?
+      attr_accessor schema_registry_config: Types::KafkaSchemaRegistryConfig?
     end
 
     module ApplicationLogLevel
@@ -2352,6 +2354,58 @@ module Aws::Lambda
       attr_accessor message: String?
     end
 
+    class KafkaSchemaRegistryAccessConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor uri: String?
+    end
+
+    module KafkaSchemaRegistryAuthType
+      BASIC_AUTH: String
+      CLIENT_CERTIFICATE_TLS_AUTH: String
+      SERVER_ROOT_CA_CERTIFICATE: String
+    end
+
+    class KafkaSchemaRegistryConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_registry_uri: String,
+        ?event_record_format: String,
+        ?access_configs: Array[Types::KafkaSchemaRegistryAccessConfig],
+        ?schema_validation_configs: Array[Types::KafkaSchemaValidationConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_registry_uri: String?
+      attr_accessor event_record_format: String?
+      attr_accessor access_configs: Array[Types::KafkaSchemaRegistryAccessConfig]?
+      attr_accessor schema_validation_configs: Array[Types::KafkaSchemaValidationConfig]?
+    end
+
+    module KafkaSchemaValidationAttribute
+      KEY: String
+      VALUE: String
+    end
+
+    class KafkaSchemaValidationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+    end
+
     module LastUpdateStatus
       Successful: String
       Failed: String
@@ -3477,6 +3531,11 @@ module Aws::Lambda
       attr_accessor maximum_concurrency: Integer?
     end
 
+    module SchemaRegistryEventRecordFormat
+      JSON: String
+      SOURCE: String
+    end
+
     class SelfManagedEventSource
       include Smithy::Schema::Structure
 
@@ -3493,10 +3552,12 @@ module Aws::Lambda
 
       def initialize: (
         ?consumer_group_id: String,
+        ?schema_registry_config: Types::KafkaSchemaRegistryConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor consumer_group_id: String?
+      attr_accessor schema_registry_config: Types::KafkaSchemaRegistryConfig?
     end
 
     class ServiceException
@@ -3929,6 +3990,8 @@ module Aws::Lambda
         ?tumbling_window_in_seconds: Integer,
         ?function_response_types: Array[String],
         ?scaling_config: Types::ScalingConfig,
+        ?amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig,
+        ?self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig,
         ?document_db_event_source_config: Types::DocumentDBEventSourceConfig,
         ?kms_key_arn: String,
         ?metrics_config: Types::EventSourceMappingMetricsConfig,
@@ -3951,6 +4014,8 @@ module Aws::Lambda
       attr_accessor tumbling_window_in_seconds: Integer?
       attr_accessor function_response_types: Array[String]?
       attr_accessor scaling_config: Types::ScalingConfig?
+      attr_accessor amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig?
+      attr_accessor self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig?
       attr_accessor document_db_event_source_config: Types::DocumentDBEventSourceConfig?
       attr_accessor kms_key_arn: String?
       attr_accessor metrics_config: Types::EventSourceMappingMetricsConfig?

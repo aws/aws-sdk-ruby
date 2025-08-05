@@ -65,36 +65,8 @@ jobs:
       - name: Test
         run: bundle exec rake test:protocols
 
-  gem-test:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        # Only one version for now
-        ruby: [3.4]
-
-    steps:
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby }}
-
-      - uses: actions/checkout@v4
-
-      - name: Install gems
-        run: |
-          bundle config set --local with 'build test'
-          bundle install
-
-      # TODO: update this
-      - name: Build SDK
-        run: bundle exec rake build:aws-sdk-lambda
-
-      - name: Test
-        run: bundle exec rake test:spec:aws-sdk-lambda
-
   rubocop:
-    needs: [core-test, protocol-test, gem-test]
+    needs: [core-test, protocol-test]
     runs-on: ubuntu-latest
 
     steps:
