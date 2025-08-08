@@ -24,8 +24,11 @@ module Aws
     autoload :ExpressCredentialsProvider, 'aws-sdk-s3/express_credentials_provider'
 
     # s3 access grants auth
-
     autoload :AccessGrantsCredentials, 'aws-sdk-s3/access_grants_credentials'
     autoload :AccessGrantsCredentialsProvider, 'aws-sdk-s3/access_grants_credentials_provider'
+
+    # testing transfer manager
+    autoload :DirectoryUploader, 'aws-sdk-s3/directory_uploader'
+    autoload :TransferManager, 'aws-sdk-s3/transfer_manager'
   end
 end
