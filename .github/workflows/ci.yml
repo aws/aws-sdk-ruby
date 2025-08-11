@@ -12,6 +12,10 @@ on:
 permissions:
   contents: read
 
+env:
+  CI: true
+  latest_ruby_version: 3.4
+
 jobs:
   core-test:
     runs-on: ubuntu-latest
