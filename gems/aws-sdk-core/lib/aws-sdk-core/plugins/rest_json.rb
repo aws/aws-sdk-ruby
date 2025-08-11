@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../json'
+require_relative '../json/error_handler'
 require_relative '../rest'
 require_relative '../stubbing/rest_json'
 

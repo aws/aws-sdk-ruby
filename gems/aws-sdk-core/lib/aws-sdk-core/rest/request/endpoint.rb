@@ -72,7 +72,7 @@ module Aws
             parts = @ref.shape.members.each_with_object([]) do |(member_name, member_ref), parts|
               next unless member_ref.traits.key?('smithy.api#httpQuery') ||
                           member_ref.traits.key?('smithy.api#httpQueryParams')
-              next unless params[member_name]
+              next if params[member_name].nil?
 
               parts << [member_ref, params[member_name]]
             end

@@ -66,6 +66,16 @@
         { "name": "removeUnusedShapes" },
         { "name": "removeTraitDefinitions" }
       ]
+    },
+    "RestXml": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": { "services": ["aws.protocoltests.restxml#RestXml"] }
+        },
+        { "name": "removeUnusedShapes" },
+        { "name": "removeTraitDefinitions" }
+      ]
     }
   }
 }

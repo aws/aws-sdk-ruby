@@ -59,6 +59,10 @@ namespace :test do
     run_protocol_test('RestJson')
   end
 
+  task 'protocols:restXml' do
+    run_protocol_test('RestXml')
+  end
+
   # TODO: move this to a Spec Helper inside build_tools/
   def run_protocol_test(service_name)
     model = JSON.load_file("build_tools/aws-sdk-code-generator/spec/protocol_tests/#{service_name}/model.json")
