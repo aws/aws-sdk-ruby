@@ -54,6 +54,8 @@ module Aws
         @client.complete_multipart_upload(
           **complete_opts(options).merge(upload_id: upload_id, multipart_upload: { parts: parts })
         )
+      rescue StandardError => e
+        abort_upload(upload_id, options, [e])
       end
 
       def upload_parts(upload_id, options, &block)
@@ -62,7 +64,8 @@ module Aws
         errors = begin
           IO.pipe do |read_pipe, write_pipe|
             threads = upload_in_threads(
-              read_pipe, completed,
+              read_pipe,
+              completed,
               upload_part_opts(options).merge(upload_id: upload_id),
               thread_errors
             )
@@ -77,12 +80,9 @@ module Aws
         rescue StandardError => e
           thread_errors + [e]
         end
+        return ordered_parts(completed) if errors.empty?
 
-        if errors.empty?
-          Array.new(completed.size) { completed.pop }.sort_by { |part| part[:part_number] }
-        else
-          abort_upload(upload_id, options, errors)
-        end
+        abort_upload(upload_id, options, errors)
       end
 
       def abort_upload(upload_id, options, errors)
@@ -174,6 +174,10 @@ module Aws
         k = "checksum_#{part[:checksum_algorithm].downcase}".to_sym
         completed_part[k] = resp[k]
         completed_part
+      end
+
+      def ordered_parts(parts)
+        parts.size.times.map { parts.pop }.sort_by { |part| part[:part_number] }
       end
 
       def clear_body(body)
