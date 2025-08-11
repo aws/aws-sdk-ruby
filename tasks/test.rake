@@ -36,6 +36,7 @@ namespace :test do
     protocols:awsQuery
     protocols:ec2Query
     protocols:restJson1
+    protocols:restXml
   ]
 
   task 'protocols:awsJson1_0' do
