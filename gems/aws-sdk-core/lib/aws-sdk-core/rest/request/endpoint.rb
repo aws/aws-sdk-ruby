@@ -52,7 +52,7 @@ module Aws
           def param_name(placeholder)
             member_name = placeholder.gsub(/[{}+]/, '')
             # TODO: optimize
-            param_name, = @ref.shape.members.find { |_, shape| shape.member_name == member_name }
+            param_name, = @ref.shape.members.find { |_, shape| shape.location_name == member_name }
             param_name
           end
 
