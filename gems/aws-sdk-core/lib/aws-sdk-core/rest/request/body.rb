@@ -35,14 +35,26 @@ module Aws
             defined?(Smithy::Json::Codec) && @codec.is_a?(Smithy::Json::Codec)
           end
 
-          def build_body(params)
+          def xml?
+            defined?(Smithy::Xml::Codec) && @codec.is_a?(Smithy::Xml::Codec)
+          end
+
+          def build_body(params) # rubocop:disable Metrics/AbcSize
             # When string, blob, or enum as a payload, use value directly
             if string_or_blob_payload?
               params[@ref.shape[:http_payload]]
             # Otherwise, build the payload member
             elsif @ref.shape[:http_payload_member]
               params = params[@ref.shape[:http_payload]]
-              build(@ref.shape[:http_payload_member], params) if params
+              return unless params
+
+              if xml?
+                location_name = payload_location_name(@ref.shape[:http_payload_member])
+                ref = ShapeRef.new(shape: @ref.shape[:http_payload_member].shape, location_name: location_name)
+                build(ref, params)
+              else
+                build(@ref.shape[:http_payload_member], params)
+              end
             else
               params = body_members(params)
               build(@ref, params) unless params.empty?
@@ -61,6 +73,10 @@ module Aws
 
             payload = @ref.shape[:http_payload_member].shape
             payload.is_a?(UnionShape)
+          end
+
+          def payload_location_name(ref)
+            ref.traits['smithy.api#xmlName'] || ref.shape.traits['smithy.api#xmlName']
           end
 
           def body_members(params)

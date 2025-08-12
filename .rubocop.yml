@@ -4,7 +4,6 @@ AllCops:
   SuggestExtensions: false
   Exclude:
     - 'build/**/*'
-    - 'projections/**/*'
     - 'tasks/release/**/*'
     - 'vendor/**/*'
     # exclude all files under gems/ except for the aws-sdk-core gem
