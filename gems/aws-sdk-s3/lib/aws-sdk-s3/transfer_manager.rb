@@ -220,10 +220,10 @@ module Aws
       #   Define how big each part size but the last should be. Default `:part_size` is `5 * 1024 * 1024`.
       #
       # @raise [MultipartUploadError] If an object is being uploaded in parts, and the upload can not be completed,
-      #   then the upload is aborted and this error is raised.  The raised error has a `#errors` method that returns
+      #   then the upload is aborted and this error is raised. The raised error has a `#errors` method that returns
       #   the failures that caused the upload to be aborted.
       #
-      # @return [Boolean] Returns `true` when the object is uploaded  without any errors.
+      # @return [Boolean] Returns `true` when the object is uploaded without any errors.
       #
       # @see Client#create_multipart_upload
       # @see Client#complete_multipart_upload
