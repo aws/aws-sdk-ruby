@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - When multipart stream uploader fails to complete multipart upload, it calls abort multipart upload.
+
+* Feature - Add Transfer Manager (more notes to do)
+
 1.196.1 (2025-08-05)
 ------------------
 
