@@ -3,7 +3,9 @@ Unreleased Changes
 
 * Issue - When multipart stream uploader fails to complete multipart upload, it calls abort multipart upload.
 
-* Feature - Add Transfer Manager (more notes to do)
+* Issue - For `Aws::S3::Object` class, the following methods have been deprecated: `upload_file`, `download_file`, and `upload_stream`. Use Transfer Manager instead.
+
+* Feature - Add Transfer Manager, a S3 transfer utility that provides upload/download capabilities with automatic multipart handling, progress tracking, and handling of large files. 
 
 1.196.1 (2025-08-05)
 ------------------
