@@ -12,7 +12,7 @@ module Aws
 
       MAX_PARTS = 10_000
 
-      THREAD_COUNT = 10
+      DEFAULT_THREAD_COUNT = 10
 
       CREATE_OPTIONS = Set.new(Client.api.operation(:create_multipart_upload).input.shape.member_names)
 
@@ -30,7 +30,7 @@ module Aws
       # @option options [Integer] :thread_count (THREAD_COUNT)
       def initialize(options = {})
         @client = options[:client] || Client.new
-        @thread_count = options[:thread_count] || THREAD_COUNT
+        @thread_count = options[:thread_count] || DEFAULT_THREAD_COUNT
       end
 
       # @return [Client]

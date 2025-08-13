@@ -10,7 +10,9 @@ module Aws
     # @api private
     class MultipartStreamUploader
       # api private
-      PART_SIZE = 5 * 1024 * 1024 # 5MB
+      DEFAULT_PART_SIZE = 5 * 1024 * 1024 # 5MB
+
+      DEFAULT_THREAD_COUNT = 10
 
       # @api private
       CREATE_OPTIONS = Set.new(Client.api.operation(:create_multipart_upload).input.shape.member_names)
@@ -25,8 +27,8 @@ module Aws
       def initialize(options = {})
         @client = options[:client] || Client.new
         @tempfile = options[:tempfile]
-        @part_size = options[:part_size] || PART_SIZE
-        @thread_count = options[:thread_count] || 10
+        @part_size = options[:part_size] || DEFAULT_PART_SIZE
+        @thread_count = options[:thread_count] || DEFAULT_THREAD_COUNT
       end
 
       # @return [Client]
