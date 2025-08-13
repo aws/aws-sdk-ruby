@@ -17,8 +17,13 @@ v4_branch =
   else
     `git rev-parse --abbrev-ref HEAD`.strip
   end
+puts "Using smithy-ruby branch: #{v4_branch}"
+puts "ENV['GITHUB_BRANCH']: #{ENV['GITHUB_BRANCH']}"
+puts "ENV['CI']: #{ENV['CI']}"
+puts "ls-remote output: #{`git ls-remote --heads #{smithy_ruby_git} refs/heads/#{v4_branch}`.strip}"
 branch_exists = `git ls-remote --heads #{smithy_ruby_git} refs/heads/#{v4_branch} | wc -l`.strip == '1'
 smithy_ruby_branch = branch_exists ? v4_branch : 'decaf'
+puts "using smithy-ruby branch: #{smithy_ruby_branch}"
 %w[smithy smithy-cbor smithy-client smithy-json smithy-schema smithy-xml].each do |gem_name|
   gem gem_name, git: smithy_ruby_git, branch: smithy_ruby_branch, glob: "gems/#{gem_name}/#{gem_name}.gemspec"
 end
