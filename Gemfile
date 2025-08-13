@@ -12,6 +12,7 @@ gem 'logger'
 # Fetches smithy-ruby gems from GitHub assuming the same branch name as the current branch, defaulting to decaf.
 smithy_ruby_git = 'https://github.com/smithy-lang/smithy-ruby/'
 v4_branch = `git rev-parse --abbrev-ref HEAD`.strip
+puts "LS-REMOTE OUTPUT: #{`git ls-remote --heads #{smithy_ruby_git} refs/heads/#{v4_branch} | wc -l`}"
 branch_exists = `git ls-remote --heads #{smithy_ruby_git} refs/heads/#{v4_branch} | wc -l`.strip == '1'
 branch = branch_exists ? v4_branch : 'decaf'
 puts "BRANCH: #{branch}"
