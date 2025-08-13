@@ -14,7 +14,7 @@ permissions:
 
 env:
   CI: true
-  GITHUB_BRANCH: ${{ github.ref_name }}
+  GITHUB_BRANCH: ${{ github.head_ref || github.ref_name }}
 
 jobs:
   core-test:
