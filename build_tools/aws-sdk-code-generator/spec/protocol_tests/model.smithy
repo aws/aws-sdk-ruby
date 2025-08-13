@@ -5,7 +5,11 @@ namespace smithy.ruby.aws
 use smithy.ruby#skipTests
 
 apply aws.protocoltests.json10#OperationWithRequiredMembers @skipTests([
-    {id: "AwsJson10ClientErrorCorrectsWhenServerFailsToSerializeRequiredValues", reason: "not implemented"}
+    {
+        id: "AwsJson10ClientErrorCorrectsWhenServerFailsToSerializeRequiredValues",
+        type: "response",
+        reason: "Not implemented"
+    }
 ])
 
 apply aws.protocoltests.restjson#IgnoreQueryParamsInResponse @skipTests([

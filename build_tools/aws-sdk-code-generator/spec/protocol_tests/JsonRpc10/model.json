@@ -1978,7 +1978,8 @@
                 "smithy.ruby#skipTests": [
                     {
                         "id": "AwsJson10ClientErrorCorrectsWhenServerFailsToSerializeRequiredValues",
-                        "reason": "not implemented"
+                        "type": "response",
+                        "reason": "Not implemented"
                     }
                 ],
                 "smithy.test#httpResponseTests": [
