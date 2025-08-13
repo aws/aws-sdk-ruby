@@ -76,7 +76,7 @@ module Aws
           end
 
           def payload_location_name(ref)
-            ref.traits['smithy.api#xmlName'] || ref.shape.traits['smithy.api#xmlName']
+            ref.traits['smithy.api#xmlName'] || ref.shape.traits['smithy.api#xmlName'] || ref.shape.name
           end
 
           def body_members(params)

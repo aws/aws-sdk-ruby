@@ -2580,6 +2580,13 @@
                     "method": "GET"
                 },
                 "smithy.api#readonly": {},
+                "smithy.ruby#skipTests": [
+                    {
+                        "id": "IgnoreQueryParamsInResponse",
+                        "type": "stub",
+                        "reason": "Stubbing will attempt to build an http response with query parameters and fail parsing"
+                    }
+                ],
                 "smithy.test#httpResponseTests": [
                     {
                         "id": "IgnoreQueryParamsInResponse",
@@ -6373,6 +6380,13 @@
                     "uri": "/XmlNamespaces",
                     "method": "POST"
                 },
+                "smithy.ruby#skipTests": [
+                    {
+                        "id": "XmlNamespaces",
+                        "type": "request",
+                        "reason": "This test seems incorrect and differs from the c2j equivalent.\n                In particular, <nested> should likely have the xml namespace."
+                    }
+                ],
                 "smithy.test#httpRequestTests": [
                     {
                         "id": "XmlNamespaces",
