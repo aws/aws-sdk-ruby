@@ -13,7 +13,8 @@ permissions:
   contents: read
 
 env:
-  latest_ruby_version: 3.4
+  CI: true
+  GITHUB_BRANCH: ${{ github.ref_name }}
 
 jobs:
   core-test:
@@ -78,7 +79,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ env.latest_ruby_version }}
+          ruby-version: 3.4
           bundler-cache: true
 
       - name: Rubocop
