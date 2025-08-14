@@ -77,7 +77,7 @@ module Aws
             next if value.nil?
 
             member_ref = shape.member(name)
-            shape(member_ref, value, target, prefix + query_name(member_ref, member_ref.member_name))
+            shape(member_ref, value, target, prefix + query_name(member_ref, member_ref.location_name))
           end
         end
 

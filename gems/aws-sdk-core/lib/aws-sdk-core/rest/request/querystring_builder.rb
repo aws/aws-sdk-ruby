@@ -49,14 +49,14 @@ module Aws
           def query_keys(params)
             keys = Set.new
             params.each do |(member_ref, _)|
-              name = member_ref.traits['smithy.api#httpQuery'] || member_ref.member_name
+              name = member_ref.traits['smithy.api#httpQuery'] || member_ref.location_name
               keys << name unless member_ref.shape.is_a?(MapShape)
             end
             keys
           end
 
           def build_part(member_ref, param_value, query_keys)
-            name = member_ref.traits['smithy.api#httpQuery'] || member_ref.member_name
+            name = member_ref.traits['smithy.api#httpQuery'] || member_ref.location_name
             case member_ref.shape
             # supported scalar types
             when *SUPPORTED_TYPES

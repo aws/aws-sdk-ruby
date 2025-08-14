@@ -29,7 +29,7 @@ module Aws
         private
 
         def build_body(config, operation, data)
-          operation.output.member_name = "#{operation.name}Result"
+          operation.output.location_name = "#{operation.name}Result"
           <<~XML.strip
             <#{operation.name}Response xmlns="#{xmlns(config.service)}">
               #{config.xml_codec.build(operation.output, data)}

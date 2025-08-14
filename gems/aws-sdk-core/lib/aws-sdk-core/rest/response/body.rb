@@ -20,8 +20,8 @@ module Aws
               target[@ref.shape[:http_payload]] = body unless empty_blob_payload?(body)
             # Otherwise, parse the payload member
             elsif @ref.shape[:http_payload_member]
-              parsed = parse(@ref.shape[:http_payload_member].shape, body.read)
-              target[@ref.shape[:http_payload]] = parsed unless parsed&.empty?
+              parsed = parse(@ref.shape[:http_payload_member], body.read)
+              target[@ref.shape[:http_payload]] = parsed if parsed && !parsed.empty?
             elsif !@ref.shape.members.empty?
               parse(@ref, body.read, target)
             end
@@ -32,10 +32,8 @@ module Aws
           def string_or_blob_payload?
             return false unless @ref.shape[:http_payload_member]
 
-            payload_member = @ref.shape[:http_payload_member].shape
-            payload_member.is_a?(StringShape) ||
-              payload_member.is_a?(BlobShape) ||
-              payload_member.is_a?(EnumShape)
+            payload = @ref.shape[:http_payload_member].shape
+            payload.is_a?(StringShape) || payload.is_a?(BlobShape) || payload.is_a?(EnumShape)
           end
 
           def empty_blob_payload?(body)

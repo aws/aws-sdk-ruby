@@ -3,7 +3,10 @@ AllCops:
   TargetRubyVersion: 3.3
   SuggestExtensions: false
   Exclude:
-    # exclude all files  under gems/ except for the aws-sdk-core gem
+    - 'build/**/*'
+    - 'tasks/release/**/*'
+    - 'vendor/**/*'
+    # exclude all files under gems/ except for the aws-sdk-core gem
     - !ruby/regexp /\/gems\/(?!aws-sdk-core\/).*/
 
 Gemspec/RequireMFA:

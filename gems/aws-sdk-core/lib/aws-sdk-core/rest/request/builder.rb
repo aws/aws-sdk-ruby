@@ -36,22 +36,33 @@ module Aws
             Endpoint.new(context.operation).apply(context.http_request, context.params)
           end
 
-          # TODO: refactor
-          def apply_content_type_header(context) # rubocop:disable Metrics
+          def apply_content_type_header(context)
             if (payload_member = context.operation.input.shape[:http_payload_member])
-              payload = payload_member.shape
-              if (media_type = payload.traits['smithy.api#mediaType'])
-                context.http_request.headers['Content-Type'] ||= media_type
-              elsif payload.is_a?(Smithy::Schema::Shapes::BlobShape)
-                context.http_request.headers['Content-Type'] ||= 'application/octet-stream'
-              elsif payload.is_a?(Smithy::Schema::Shapes::StringShape) ||
-                    payload.is_a?(Smithy::Schema::Shapes::EnumShape)
-                context.http_request.headers['Content-Type'] ||= 'text/plain'
-              else
-                context.http_request.headers['Content-Type'] ||= 'application/json'
-              end
+              context.http_request.headers['Content-Type'] ||= payload_content_type(context, payload_member.shape)
             elsif known_body?(context)
-              context.http_request.headers['Content-Type'] ||= 'application/json'
+              context.http_request.headers['Content-Type'] ||= default_content_type(context)
+            end
+          end
+
+          def payload_content_type(context, payload)
+            if (media_type = payload.traits['smithy.api#mediaType'])
+              media_type
+            elsif payload.is_a?(Smithy::Schema::Shapes::BlobShape)
+              'application/octet-stream'
+            elsif payload.is_a?(Smithy::Schema::Shapes::StringShape) ||
+                  payload.is_a?(Smithy::Schema::Shapes::EnumShape)
+              'text/plain'
+            else
+              default_content_type(context)
+            end
+          end
+
+          def default_content_type(context)
+            protocol = context.config.protocol
+            case protocol
+            when 'aws.protocols#restJson1' then 'application/json'
+            when 'aws.protocols#restXml' then 'application/xml'
+            else raise "Unsupported protocol: #{protocol}"
             end
           end
 

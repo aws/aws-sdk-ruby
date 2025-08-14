@@ -57,15 +57,15 @@ module Aws
         end
 
         def wrap(operation) # rubocop:disable Metrics/AbcSize
-          result_ref = ShapeRef.new(shape: operation.output.shape, member_name: "#{operation.name}Result")
+          result_ref = ShapeRef.new(shape: operation.output.shape, location_name: "#{operation.name}Result")
           result = StructureShape.new
           result.add_member(:result, result_ref)
           result.type = ::Struct.new(:result, :response_metadata)
 
           response_metadata = StructureShape.new
           response_metadata.type = ::Struct.new(:request_id)
-          response_metadata.add_member(:request_id, ShapeRef.new(shape: StringShape.new, member_name: 'RequestId'))
-          response_metadata_ref = ShapeRef.new(shape: response_metadata, member_name: 'ResponseMetadata')
+          response_metadata.add_member(:request_id, ShapeRef.new(shape: StringShape.new, location_name: 'RequestId'))
+          response_metadata_ref = ShapeRef.new(shape: response_metadata, location_name: 'ResponseMetadata')
 
           result.add_member(:response_metadata, response_metadata_ref)
           ShapeRef.new(shape: result)

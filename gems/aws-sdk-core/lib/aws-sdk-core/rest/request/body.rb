@@ -23,21 +23,41 @@ module Aws
 
           def apply(request_or_response, params)
             body = build_body(params)
-            # TODO: this is terrible
-            body = '{}' if body.nil? && modeled_body_member? && !string_or_blob_payload? && !union_payload?
+            # For JSON requests, default the body to an empty json if it's not a streaming payload
+            # and there's at least one modeled body member.
+            body = '{}' if json? && body.nil? && modeled_body_member? && !string_or_blob_payload? && !union_payload?
             request_or_response.body = body
           end
 
           private
 
-          def build_body(params)
+          def json?
+            defined?(Smithy::Json::Codec) && @codec.is_a?(Smithy::Json::Codec)
+          end
+
+          def xml?
+            defined?(Smithy::Xml::Codec) && @codec.is_a?(Smithy::Xml::Codec)
+          end
+
+          def build_body(params) # rubocop:disable Metrics/AbcSize
             # When string, blob, or enum as a payload, use value directly
             if string_or_blob_payload?
               params[@ref.shape[:http_payload]]
             # Otherwise, build the payload member
-            elsif @ref.shape[:http_payload_member]
+            elsif (payload_member = @ref.shape[:http_payload_member])
               params = params[@ref.shape[:http_payload]]
-              build(@ref.shape[:http_payload_member].shape, params) if params
+              return unless params
+
+              if xml?
+                # Serializing the payload member name for rest-xml is as follows:
+                # 1. Use the value of the xmlName trait on the member if present
+                # 2. Use the value of the xmlName trait on the member's target if present
+                # 3. Use the shape name of the member's target
+                location_name = payload_location_name(payload_member)
+                build(ShapeRef.new(shape: payload_member.shape, location_name: location_name), params)
+              else
+                build(payload_member, params)
+              end
             else
               params = body_members(params)
               build(@ref, params) unless params.empty?
@@ -49,6 +69,17 @@ module Aws
 
             payload = @ref.shape[:http_payload_member].shape
             payload.is_a?(StringShape) || payload.is_a?(BlobShape) || payload.is_a?(EnumShape)
+          end
+
+          def union_payload?
+            return false unless @ref.shape[:http_payload_member]
+
+            payload = @ref.shape[:http_payload_member].shape
+            payload.is_a?(UnionShape)
+          end
+
+          def payload_location_name(ref)
+            ref.traits['smithy.api#xmlName'] || ref.shape.traits['smithy.api#xmlName'] || ref.shape.name
           end
 
           def body_members(params)
@@ -66,10 +97,6 @@ module Aws
               return true unless NON_BODY_TRAITS.any? { |trait| member_ref.traits.key?(trait) }
             end
             false
-          end
-
-          def union_payload?
-            @ref.shape[:http_payload_member] && @ref.shape[:http_payload_member].shape.is_a?(UnionShape)
           end
 
           def build(ref, params)

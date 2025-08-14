@@ -9,17 +9,14 @@ gem 'aws-sigv4'
 gem 'base64'
 gem 'logger'
 
-gem 'smithy', git: 'https://github.com/smithy-lang/smithy-ruby/', branch: 'decaf', glob: 'gems/smithy/smithy.gemspec'
-gem 'smithy-cbor', git: 'https://github.com/smithy-lang/smithy-ruby/', branch: 'decaf',
-                   glob: 'gems/smithy-cbor/smithy-cbor.gemspec'
-gem 'smithy-client', git: 'https://github.com/smithy-lang/smithy-ruby/', branch: 'decaf',
-                     glob: 'gems/smithy-client/smithy-client.gemspec'
-gem 'smithy-json', git: 'https://github.com/smithy-lang/smithy-ruby/', branch: 'decaf',
-                   glob: 'gems/smithy-json/smithy-json.gemspec'
-gem 'smithy-schema', git: 'https://github.com/smithy-lang/smithy-ruby/', branch: 'decaf',
-                     glob: 'gems/smithy-schema/smithy-schema.gemspec'
-gem 'smithy-xml', git: 'https://github.com/smithy-lang/smithy-ruby/', branch: 'decaf',
-                  glob: 'gems/smithy-xml/smithy-xml.gemspec'
+# Fetches smithy-ruby gems from GitHub assuming the same branch name as the current branch, defaulting to decaf.
+smithy_ruby_git = 'https://github.com/smithy-lang/smithy-ruby/'
+v4_branch = ENV.fetch('GITHUB_BRANCH', `git rev-parse --abbrev-ref HEAD`.strip)
+branch_exists = `git ls-remote --heads #{smithy_ruby_git} refs/heads/#{v4_branch} | wc -l`.strip == '1'
+smithy_ruby_branch = branch_exists ? v4_branch : 'decaf'
+%w[smithy smithy-cbor smithy-client smithy-json smithy-schema smithy-xml].each do |gem_name|
+  gem gem_name, git: smithy_ruby_git, branch: smithy_ruby_branch, glob: "gems/#{gem_name}/#{gem_name}.gemspec"
+end
 
 group :development do
   gem 'byebug', platforms: :ruby

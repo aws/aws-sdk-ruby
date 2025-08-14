@@ -3257,6 +3257,13 @@
                     "method": "GET"
                 },
                 "smithy.api#readonly": {},
+                "smithy.ruby#skipTests": [
+                    {
+                        "id": "RestJsonIgnoreQueryParamsInResponse",
+                        "type": "stub",
+                        "reason": "Stubbing will attempt to build an http response with query parameters and fail parsing"
+                    }
+                ],
                 "smithy.test#httpResponseTests": [
                     {
                         "id": "RestJsonIgnoreQueryParamsInResponse",

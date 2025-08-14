@@ -26,6 +26,7 @@ module Aws
         def codec(config)
           case config.protocol
           when 'aws.protocols#restJson1' then config.json_codec
+          when 'aws.protocols#restXml' then config.xml_codec
           else raise "Unsupported protocol: #{config.protocol}"
           end
         end

@@ -36,6 +36,7 @@ namespace :test do
     protocols:awsQuery
     protocols:ec2Query
     protocols:restJson1
+    protocols:restXml
   ]
 
   task 'protocols:awsJson1_0' do
@@ -57,6 +58,10 @@ namespace :test do
 
   task 'protocols:restJson1' do
     run_protocol_test('RestJson')
+  end
+
+  task 'protocols:restXml' do
+    run_protocol_test('RestXml')
   end
 
   # TODO: move this to a Spec Helper inside build_tools/
