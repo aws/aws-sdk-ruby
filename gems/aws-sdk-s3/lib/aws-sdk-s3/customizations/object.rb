@@ -400,10 +400,7 @@ module Aws
           part_size: uploading_options.delete(:part_size)
         )
         Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
-          uploader.upload(
-            uploading_options.merge(bucket: bucket_name, key: key),
-            &block
-          )
+          uploader.upload(uploading_options.merge(bucket: bucket_name, key: key), &block)
         end
         true
       end

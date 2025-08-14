@@ -36,14 +36,12 @@ module Aws
       #   objects smaller than the multipart threshold.
       # @return [void]
       def upload(source, options = {})
-        Aws::Plugins::UserAgent.metric('S3_TRANSFER') do
-          if File.size(source) >= multipart_threshold
-            MultipartFileUploader.new(@options).upload(source, options)
-          else
-            # remove multipart parameters not supported by put_object
-            options.delete(:thread_count)
-            put_object(source, options)
-          end
+        if File.size(source) >= @multipart_threshold
+          MultipartFileUploader.new(@options).upload(source, options)
+        else
+          # remove multipart parameters not supported by put_object
+          options.delete(:thread_count)
+          put_object(source, options)
         end
       end
 

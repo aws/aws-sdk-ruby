@@ -40,11 +40,9 @@ module Aws
       # @option options [Integer] :thread_count (DEFAULT_THREAD_COUNT)
       # @return [Seahorse::Client::Response] - the CompleteMultipartUploadResponse
       def upload(options = {}, &block)
-        Aws::Plugins::UserAgent.metric('S3_TRANSFER') do
-          upload_id = initiate_upload(options)
-          parts = upload_parts(upload_id, options, &block)
-          complete_upload(upload_id, parts, options)
-        end
+        upload_id = initiate_upload(options)
+        parts = upload_parts(upload_id, options, &block)
+        complete_upload(upload_id, parts, options)
       end
 
       private
