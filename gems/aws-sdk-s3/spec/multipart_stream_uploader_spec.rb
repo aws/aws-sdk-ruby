@@ -9,6 +9,8 @@ module Aws
       let(:client) { S3::Client.new(stub_responses: true) }
       let(:subject) { MultipartStreamUploader.new(client: client) }
       let(:params) { { bucket: 'bucket', key: 'key' } }
+      let(:one_mb) { '.' * 1024 * 1024 }
+      let(:seventeen_mb) { one_mb * 17 }
 
       describe '#initialize' do
         it 'constructs a default s3 client when none provided' do
@@ -26,7 +28,7 @@ module Aws
         end
 
         it 'sets provided configurations' do
-          ten_mb = 10 * 1024 * 1024
+          ten_mb = one_mb * 10
           subject = MultipartStreamUploader.new(client: client, tempfile: true, part_size: ten_mb, thread_count: 1)
 
           expect(subject.client).to be(client)
@@ -37,11 +39,6 @@ module Aws
       end
 
       describe '#upload_stream', :jruby_flaky do
-        let(:params) { { bucket: 'bucket', key: 'key' } }
-        let(:one_mb) { '.' * 1024 * 1024 }
-        let(:ten_mb) { one_mb * 10 }
-        let(:seventeen_mb) { one_mb * 17 }
-
         it 'can upload empty stream' do
           client.stub_responses(:create_multipart_upload, upload_id: 'id')
           client.stub_responses(:upload_part, etag: 'etag')
@@ -75,7 +72,6 @@ module Aws
 
         it 'uploads the correct parts' do
           client.stub_responses(:create_multipart_upload, upload_id: 'id')
-          client.stub_responses(:upload_part, etag: 'etag')
           4.times.each do |p|
             expect(client)
               .to receive(:upload_part)
@@ -89,7 +85,6 @@ module Aws
 
         it 'uploads the correct parts when input is chunked' do
           client.stub_responses(:create_multipart_upload, upload_id: 'id')
-          client.stub_responses(:upload_part, etag: 'etag')
           client.stub_responses(:complete_multipart_upload)
           4.times.each do |p|
             expect(client)
@@ -106,7 +101,6 @@ module Aws
 
         it 'passes stringios with correct contents to upload_part' do
           client.stub_responses(:create_multipart_upload, upload_id: 'id')
-          client.stub_responses(:upload_part, etag: 'etag')
           client.stub_responses(:complete_multipart_upload)
           result = []
           mutex = Mutex.new
@@ -169,10 +163,8 @@ module Aws
               RuntimeError.new('part failed')
             ]
           )
-          client.stub_responses(
-            :abort_multipart_upload,
-            [RuntimeError.new('network-error')]
-          )
+          client.stub_responses(:abort_multipart_upload, RuntimeError.new('network-error'))
+
           expect do
             subject.upload(params) { |write_stream| write_stream << seventeen_mb }
           end.to raise_error(S3::MultipartUploadError, /failed to abort multipart upload: network-error/)
@@ -201,7 +193,6 @@ module Aws
 
           it 'uploads the correct parts' do
             client.stub_responses(:create_multipart_upload, upload_id: 'id')
-            client.stub_responses(:upload_part, etag: 'etag')
             4.times.each do |p|
               expect(client)
                 .to receive(:upload_part)
@@ -270,10 +261,8 @@ module Aws
                 RuntimeError.new('part failed')
               ]
             )
-            client.stub_responses(
-              :abort_multipart_upload,
-              [RuntimeError.new('network-error')]
-            )
+            client.stub_responses(:abort_multipart_upload, RuntimeError.new('network-error'))
+
             expect do
               subject.upload(params) { |write_stream| write_stream << seventeen_mb }
             end.to raise_error(S3::MultipartUploadError, /failed to abort multipart upload: network-error/)

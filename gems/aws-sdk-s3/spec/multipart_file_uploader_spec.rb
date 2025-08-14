@@ -31,21 +31,7 @@ module Aws
 
       describe '#upload' do
         let(:one_mb) { '.' * 1024 * 1024 }
-        let(:one_meg_file) do
-          Tempfile.new('one-meg-file').tap do |f|
-            f.write(one_mb)
-            f.rewind
-          end
-        end
-
-        let(:ten_meg_file) do
-          Tempfile.new('ten-meg-file').tap do |f|
-            10.times { f.write(one_mb) }
-            f.rewind
-          end
-        end
-
-        let(:one_hundred_seventeen_meg_file) do
+        let(:large_file) do
           Tempfile.new('one-hundred-seventeen-meg-file').tap do |f|
             117.times { f.write(one_mb) }
             f.rewind
@@ -56,40 +42,40 @@ module Aws
           client.stub_responses(:create_multipart_upload, upload_id: 'id')
           client.stub_responses(:upload_part, etag: 'etag', checksum_crc32: 'checksum')
           expect(client).to receive(:complete_multipart_upload).with(
-            bucket: 'bucket',
-            key: 'key',
-            upload_id: 'id',
-            multipart_upload: {
-              parts: [
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 1 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 2 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 3 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 4 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 5 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 6 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 7 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 8 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 9 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 10 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 11 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 12 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 13 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 14 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 15 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 16 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 17 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 18 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 19 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 20 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 21 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 22 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 23 },
-                { checksum_crc32: 'checksum', etag: 'etag', part_number: 24 }
-              ]
-            },
-            mpu_object_size: one_hundred_seventeen_meg_file.size
+            params.merge(
+              upload_id: 'id',
+              multipart_upload: {
+                parts: [
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 1 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 2 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 3 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 4 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 5 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 6 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 7 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 8 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 9 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 10 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 11 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 12 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 13 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 14 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 15 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 16 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 17 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 18 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 19 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 20 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 21 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 22 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 23 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 24 }
+                ]
+              },
+              mpu_object_size: large_file.size
+            )
           )
-          subject.upload(one_hundred_seventeen_meg_file, params.merge(content_type: 'text/plain'))
+          subject.upload(large_file, params.merge(content_type: 'text/plain'))
         end
 
         it 'allows for full object checksums' do
@@ -103,13 +89,8 @@ module Aws
           expect(client).to receive(:complete_multipart_upload)
             .with(hash_including(checksum_type: 'FULL_OBJECT', checksum_crc32: 'checksum'))
             .and_call_original
-          client.stub_responses(:create_multipart_upload, upload_id: 'id')
-          client.stub_responses(:upload_part, etag: 'etag', checksum_crc32: 'part')
 
-          subject.upload(
-            one_hundred_seventeen_meg_file,
-            params.merge(content_type: 'text/plain', checksum_crc32: 'checksum')
-          )
+          subject.upload(large_file, params.merge(content_type: 'text/plain', checksum_crc32: 'checksum'))
         end
 
         it 'reports progress for multipart uploads' do
@@ -125,14 +106,16 @@ module Aws
             expect(totals.size).to eq(24)
           end
 
-          subject.upload(
-            one_hundred_seventeen_meg_file,
-            params.merge(content_type: 'text/plain', progress_callback: callback)
-          )
+          subject.upload(large_file, params.merge(content_type: 'text/plain', progress_callback: callback))
         end
 
         it 'raises when given a file smaller than 5MB' do
-          expect { subject.upload(one_meg_file, params) }
+          file = Tempfile.new('one-meg-file').tap do |f|
+            f.write(one_mb)
+            f.rewind
+          end
+
+          expect { subject.upload(file, params) }
             .to raise_error(ArgumentError, /unable to multipart upload files smaller than 5MB/)
         end
 
@@ -149,9 +132,7 @@ module Aws
           )
 
           expect(client).to receive(:abort_multipart_upload).with(params.merge(upload_id: 'MultipartUploadId'))
-          expect do
-            subject.upload(one_hundred_seventeen_meg_file, params)
-          end.to raise_error(/multipart upload failed: part 3 failed/)
+          expect { subject.upload(large_file, params) }.to raise_error(/multipart upload failed: part 3 failed/)
         end
 
         it 'reports when it is unable to abort a failed multipart upload' do
@@ -170,17 +151,16 @@ module Aws
           )
           client.stub_responses(:abort_multipart_upload, [RuntimeError.new('network-error')])
           expect do
-            subject.upload(one_hundred_seventeen_meg_file, params)
+            subject.upload(large_file, params)
           end.to raise_error(/failed to abort multipart upload: network-error. Multipart upload failed: part failed/)
 
         end
 
         it 'aborts multipart upload when upload fails to complete' do
           client.stub_responses(:complete_multipart_upload, RuntimeError.new('network-error'))
+
           expect(client).to receive(:abort_multipart_upload).with(params.merge(upload_id: 'MultipartUploadId'))
-          expect do
-            subject.upload(one_hundred_seventeen_meg_file, params)
-          end.to raise_error(Aws::S3::MultipartUploadError)
+          expect { subject.upload(large_file, params) }.to raise_error(Aws::S3::MultipartUploadError)
         end
       end
     end

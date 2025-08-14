@@ -7,73 +7,54 @@ module Aws
   module S3
     describe Object do
       let(:client) { S3::Client.new(stub_responses: true) }
+      let(:subject) { S3::Object.new(bucket_name: 'bucket', key: 'key', client: client) }
 
       describe '#upload_file' do
-        let(:expected_params) { { bucket: 'bucket', key: 'key' } }
-        let(:one_meg) { 1024 * 1024 }
-        let(:object) { S3::Object.new(bucket_name: 'bucket', key: 'key', client: client) }
-        let(:one_mb) { '.' * 1024 * 1024 }
+        let(:mb_size) { 1024 * 1024 }
+        let(:mb_content) { '.' * mb_size }
 
-        let(:one_meg_file) do
-          Tempfile.new('one-meg-file').tap do |f|
-            f.write(one_mb)
-            f.rewind
-          end
-        end
-
-        let(:ten_meg_file) do
+        let(:file) do
           Tempfile.new('ten-meg-file').tap do |f|
-            10.times { f.write(one_mb) }
+            10.times { f.write(mb_content) }
             f.rewind
           end
         end
 
-        let(:one_hundred_seventeen_meg_file) do
+        let(:large_file) do
           Tempfile.new('one-hundred-seventeen-meg-file').tap do |f|
-            117.times { f.write(one_mb) }
+            117.times { f.write(mb_content) }
             f.rewind
           end
         end
 
-        it 'uploads objects with custom options without mutating them' do
-          options = {}.freeze
-          expect(client).to receive(:put_object).with(expected_params.merge(body: one_meg_file))
-          object.upload_file(one_meg_file, options)
+        it 'returns true when upload succeeds' do
+          expect(subject.upload_file(file)).to be(true)
+        end
+
+        it 'raises when upload errors' do
+          client.stub_responses(:put_object, 'AccessDenied')
+          expect { subject.upload_file(file) }.to raise_error(Aws::S3::Errors::AccessDenied)
         end
 
         it 'yields the response to the given block' do
-          object.upload_file(ten_meg_file) do |response|
+          subject.upload_file(file) do |response|
             expect(response).to be_kind_of(Seahorse::Client::Response)
             expect(response.etag).to eq('ETag')
           end
         end
 
-        it 'uploads a small object' do
-          expect(client).to receive(:put_object).with(expected_params.merge(body: ten_meg_file))
-          object.upload_file(ten_meg_file)
-        end
+        it 'calls progress callback when given' do
+          n_calls = 0
+          callback = proc { |_b, _t| n_calls += 1 }
+          expect(client).to receive(:put_object) { |args| args[:on_chunk_sent]&.call('chunk', 1024, 1024) }
 
-        it 'uploads a large object' do
-          expect(client).to receive(:complete_multipart_upload).with(
-            expected_params.merge(
-              upload_id: 'id',
-              multipart_upload: {
-                parts: [
-                  { checksum_crc32: 'part', etag: 'etag', part_number: 1 },
-                  { checksum_crc32: 'part', etag: 'etag', part_number: 2 }
-                ]
-              },
-              mpu_object_size: ten_meg_file.size
-            )
-          )
-          client.stub_responses(:create_multipart_upload, upload_id: 'id')
-          client.stub_responses(:upload_part, etag: 'etag', checksum_crc32: 'part')
-          object.upload_file(ten_meg_file, multipart_threshold: 5 * one_meg)
+          subject.upload_file(file, progress_callback: callback)
+          expect(n_calls).to eq(1)
         end
 
         it 'accepts an alternative multipart file threshold' do
-          expect(client).to receive(:put_object).with(expected_params.merge(body: one_hundred_seventeen_meg_file))
-          object.upload_file(one_hundred_seventeen_meg_file, multipart_threshold: 200 * one_meg)
+          expect(client).to receive(:put_object).with({ bucket: 'bucket', key: 'key', body: large_file })
+          subject.upload_file(large_file, multipart_threshold: 200 * mb_size)
         end
       end
     end
