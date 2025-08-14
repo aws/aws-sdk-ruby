@@ -44,16 +44,18 @@ module Aws
             if string_or_blob_payload?
               params[@ref.shape[:http_payload]]
             # Otherwise, build the payload member
-            elsif @ref.shape[:http_payload_member]
+            elsif (payload_member = @ref.shape[:http_payload_member])
               params = params[@ref.shape[:http_payload]]
               return unless params
 
               if xml?
-                location_name = payload_location_name(@ref.shape[:http_payload_member])
-                ref = ShapeRef.new(shape: @ref.shape[:http_payload_member].shape, location_name: location_name)
-                build(ref, params)
+                # Serializing the payload member name for rest-xml is as follows:
+                # 1. Use the value of the xmlName trait on the member if present
+                # 2. Use the value of the xmlName trait on the member's target if present
+                # 3. Use the shape name of the member's target
+                build(ShapeRef.new(shape: payload_member.shape, traits: payload_member.traits), params)
               else
-                build(@ref.shape[:http_payload_member], params)
+                build(payload_member, params)
               end
             else
               params = body_members(params)
@@ -76,7 +78,7 @@ module Aws
           end
 
           def payload_location_name(ref)
-            ref.traits['smithy.api#xmlName'] || ref.shape.traits['smithy.api#xmlName'] || ref.shape.name
+            ref.shape.traits['smithy.api#xmlName'] || ref.shape.name
           end
 
           def body_members(params)
