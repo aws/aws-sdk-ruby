@@ -53,7 +53,8 @@ module Aws
                 # 1. Use the value of the xmlName trait on the member if present
                 # 2. Use the value of the xmlName trait on the member's target if present
                 # 3. Use the shape name of the member's target
-                build(ShapeRef.new(shape: payload_member.shape, traits: payload_member.traits), params)
+                location_name = payload_location_name(payload_member)
+                build(ShapeRef.new(shape: payload_member.shape, location_name: location_name), params)
               else
                 build(payload_member, params)
               end
@@ -78,7 +79,7 @@ module Aws
           end
 
           def payload_location_name(ref)
-            ref.shape.traits['smithy.api#xmlName'] || ref.shape.name
+            ref.traits['smithy.api#xmlName'] || ref.shape.traits['smithy.api#xmlName'] || ref.shape.name
           end
 
           def body_members(params)
