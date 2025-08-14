@@ -22,7 +22,7 @@ module Aws
         end
 
         it 'sets a default multipart threshold when not given' do
-          expect(subject.multipart_threshold).to be(FileUploader::ONE_HUNDRED_MEGABYTES)
+          expect(subject.multipart_threshold).to be(FileUploader::DEFAULT_MULTIPART_THRESHOLD)
         end
 
         it 'sets a custom multipart threshold' do

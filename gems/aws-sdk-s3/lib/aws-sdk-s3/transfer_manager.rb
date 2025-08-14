@@ -6,9 +6,11 @@ module Aws
     # capabilities with automatic multipart handling, progress tracking, and
     # handling of large files. The following features are supported:
     #
-    # * upload a S3 object with multipart upload
+    # * upload a file with multipart upload
+    # * upload a stream with multipart upload
     # * download a S3 object with multipart download
     # * track transfer progress by using progress listener
+    #
     class TransferManager
       # @param [Hash] options
       # @option options [S3::Client] :client (S3::Client.new)
@@ -25,12 +27,12 @@ module Aws
       #
       #     # small files (< 5MB) are downloaded in a single API call
       #     tm = TransferManager.new
-      #     tm.download_file('/path/to/file', bucket: 'bucket-name', key: 'key-name')
+      #     tm.download_file('/path/to/file', bucket: 'bucket', key: 'key')
       #
       # Files larger than 5MB are downloaded using multipart method:
       #
       #     # large files are split into parts and the parts are downloaded in parallel
-      #     tm.download_file('/path/to/large_file', bucket: 'bucket-name', key: 'key-name')
+      #     tm.download_file('/path/to/large_file', bucket: 'bucket', key: 'key')
       #
       # You can provide a callback to monitor progress of the download:
       #
@@ -41,7 +43,7 @@ module Aws
       #         puts "Part #{i + 1}: #{b} / #{part_sizes[i]}".join(' ') + "Total: #{100.0 * bytes.sum / file_size}%"
       #       end
       #     end
-      #     tm.download_file('/path/to/file', bucket: 'bucket-name', key: 'key-name', progress_callback: progress)
+      #     tm.download_file('/path/to/file', bucket: 'bucket', key: 'key', progress_callback: progress)
       #
       # @param [String] destination
       #   Where to download the file to.
@@ -102,17 +104,17 @@ module Aws
       #
       #     # a small file are uploaded with PutObject API
       #     tm = TransferManager.new
-      #     tm.upload_file('/path/to/small_file', bucket: 'bucket-name', key: 'key-name')
+      #     tm.upload_file('/path/to/small_file', bucket: 'bucket', key: 'key')
       #
       # Files larger than or equal to `:multipart_threshold` are uploaded using multipart upload APIs.
       #
       #     # large files are automatically split into parts and the parts are uploaded in parallel
-      #     tm.upload_file('/path/to/large_file', bucket: 'bucket-name', key: 'key-name')
+      #     tm.upload_file('/path/to/large_file', bucket: 'bucket', key: 'key')
       #
       # The response of the S3 upload API is yielded if a block given.
       #
       #     # API response will have etag value of the file
-      #     tm.upload_file('/path/to/file', bucket: 'bucket-name', key: 'key-name') do |response|
+      #     tm.upload_file('/path/to/file', bucket: 'bucket', key: 'key') do |response|
       #       etag = response.etag
       #     end
       #
@@ -124,7 +126,7 @@ module Aws
       #           puts "Part #{i + 1}: #{b} / #{totals[i]} " + "Total: #{100.0 * bytes.sum / totals.sum}%"
       #       end
       #     end
-      #     tm.upload_file('/path/to/file', bucket: 'bucket-name', key: 'key-name', progress_callback: progress)
+      #     tm.upload_file('/path/to/file', bucket: 'bucket', key: 'key', progress_callback: progress)
       #
       # @param [String, Pathname, File, Tempfile] source
       #   A file on the local file system that will be uploaded. This can either be a `String` or `Pathname` to the
@@ -186,15 +188,15 @@ module Aws
       #
       # @example Streaming chunks of data
       #     tm = TransferManager.new
-      #     tm.upload_stream(bucket: 'example-bucket', key: 'example-key') do |write_stream|
+      #     tm.upload_stream(bucket: 'bucket', key: 'key') do |write_stream|
       #       10.times { write_stream << 'foo' }
       #     end
       # @example Streaming chunks of data
-      #     tm.upload_stream(bucket: 'example-bucket', key: 'example-key') do |write_stream|
+      #     tm.upload_stream(bucket: 'bucket', key: 'key') do |write_stream|
       #       IO.copy_stream(IO.popen('ls'), write_stream)
       #     end
       # @example Streaming chunks of data
-      #     tm.upload_stream(bucket: 'example-bucket', key: 'example-key') do |write_stream|
+      #     tm.upload_stream(bucket: 'bucket', key: 'key') do |write_stream|
       #       IO.copy_stream(STDIN, write_stream)
       #     end
       #

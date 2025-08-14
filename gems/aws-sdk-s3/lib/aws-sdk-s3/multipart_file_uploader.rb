@@ -8,18 +8,25 @@ module Aws
     # @api private
     class MultipartFileUploader
 
+      # @api private
       MIN_PART_SIZE = 5 * 1024 * 1024 # 5MB
 
+      # @api private
       MAX_PARTS = 10_000
 
+      # @api private
       DEFAULT_THREAD_COUNT = 10
 
+      # @api private
       CREATE_OPTIONS = Set.new(Client.api.operation(:create_multipart_upload).input.shape.member_names)
 
+      # @api private
       COMPLETE_OPTIONS = Set.new(Client.api.operation(:complete_multipart_upload).input.shape.member_names)
 
+      # @api private
       UPLOAD_PART_OPTIONS = Set.new(Client.api.operation(:upload_part).input.shape.member_names)
 
+      # @api private
       CHECKSUM_KEYS = Set.new(
         Client.api.operation(:upload_part).input.shape.members.map do |n, s|
           n if s.location == 'header' && s.location_name.start_with?('x-amz-checksum-')
@@ -27,7 +34,7 @@ module Aws
       )
 
       # @option options [Client] :client
-      # @option options [Integer] :thread_count (THREAD_COUNT)
+      # @option options [Integer] :thread_count (DEFAULT_THREAD_COUNT)
       def initialize(options = {})
         @client = options[:client] || Client.new
         @thread_count = options[:thread_count] || DEFAULT_THREAD_COUNT

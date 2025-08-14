@@ -9,9 +9,10 @@ module Aws
   module S3
     # @api private
     class MultipartStreamUploader
-      # api private
+      # @api private
       DEFAULT_PART_SIZE = 5 * 1024 * 1024 # 5MB
 
+      # @api private
       DEFAULT_THREAD_COUNT = 10
 
       # @api private
@@ -36,7 +37,7 @@ module Aws
 
       # @option options [required,String] :bucket
       # @option options [required,String] :key
-      # @option options [Integer] :thread_count (10)
+      # @option options [Integer] :thread_count (DEFAULT_THREAD_COUNT)
       # @return [Seahorse::Client::Response] - the CompleteMultipartUploadResponse
       def upload(options = {}, &block)
         Aws::Plugins::UserAgent.metric('S3_TRANSFER') do
