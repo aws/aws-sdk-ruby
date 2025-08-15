@@ -476,7 +476,15 @@ module Aws::SecurityIR
 
     # @!group API Operations
 
-    # Grants permission to view an existing membership.
+    # Provides information on whether the supplied account IDs are
+    # associated with a membership.
+    #
+    # <note markdown="1"> AWS account ID's may appear less than 12 characters and need to be
+    # zero-prepended. An example would be `123123123` which is nine digits,
+    # and with zero-prepend would be `000123123123`. Not zero-prepending to
+    # 12 digits could result in errors.
+    #
+    #  </note>
     #
     # @option params [required, String] :membership_id
     #   Required element used in combination with BatchGetMemberAccountDetails
@@ -485,6 +493,13 @@ module Aws::SecurityIR
     # @option params [required, Array<String>] :account_ids
     #   Optional element to query the membership relationship status to a
     #   provided list of account IDs.
+    #
+    #   <note markdown="1"> AWS account ID's may appear less than 12 characters and need to be
+    #   zero-prepended. An example would be `123123123` which is nine digits,
+    #   and with zero-prepend would be `000123123123`. Not zero-prepending to
+    #   12 digits could result in errors.
+    #
+    #    </note>
     #
     # @return [Types::BatchGetMemberAccountDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -523,8 +538,8 @@ module Aws::SecurityIR
     #
     #   resp.items #=> Array
     #   resp.items[0].account_id #=> String
-    #   resp.items[0].relationship_status #=> String, one of "Associated", "Disassociated"
-    #   resp.items[0].relationship_type #=> String, one of "Organization"
+    #   resp.items[0].relationship_status #=> String, one of "Associated", "Disassociated", "Unassociated"
+    #   resp.items[0].relationship_type #=> String, one of "Organization", "Unrelated"
     #   resp.errors #=> Array
     #   resp.errors[0].account_id #=> String
     #   resp.errors[0].error #=> String
@@ -539,7 +554,7 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grants permissions to cancel an existing membership.
+    # Cancels an existing membership.
     #
     # @option params [required, String] :membership_id
     #   Required element used in combination with CancelMembershipRequest to
@@ -580,7 +595,7 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grants permission to close an existing case.
+    # Closes an existing case.
     #
     # @option params [required, String] :case_id
     #   Required element used in combination with CloseCase to identify the
@@ -624,26 +639,32 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grants permission to create a new case.
+    # Creates a new case.
     #
     # @option params [String] :client_token
-    #   Required element used in combination with CreateCase.
+    #   <note markdown="1"> The `clientToken` field is an idempotency key used
+    #   to ensure that
+    #   repeated attempts for a single action will be ignored by the server
+    #   during retries. A caller supplied unique ID (typically a UUID) should
+    #   be provided.
+    #
+    #    </note>
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [required, String] :resolver_type
     #   Required element used in combination with CreateCase to identify the
-    #   resolver type. Available resolvers include self-supported \|
-    #   aws-supported.
+    #   resolver type.
     #
     # @option params [required, String] :title
     #   Required element used in combination with CreateCase to provide a
     #   title for the new case.
     #
     # @option params [required, String] :description
-    #   Required element used in combination with CreateCase to provide a
-    #   description for the new case.
+    #   Required element used in combination with CreateCase
+    #
+    #   to provide a description for the new case.
     #
     # @option params [required, String] :engagement_type
     #   Required element used in combination with CreateCase to provide an
@@ -657,6 +678,13 @@ module Aws::SecurityIR
     # @option params [required, Array<String>] :impacted_accounts
     #   Required element used in combination with CreateCase to provide a list
     #   of impacted accounts.
+    #
+    #   <note markdown="1"> AWS account ID's may appear less than 12 characters and need to be
+    #   zero-prepended. An example would be `123123123` which is nine digits,
+    #   and with zero-prepend would be `000123123123`. Not zero-prepending to
+    #   12 digits could result in errors.
+    #
+    #    </note>
     #
     # @option params [required, Array<Types::Watcher>] :watchers
     #   Required element used in combination with CreateCase to provide a list
@@ -751,7 +779,7 @@ module Aws::SecurityIR
     #     impacted_services: ["AwsService"],
     #     impacted_aws_regions: [
     #       {
-    #         region: "af-south-1", # required, accepts af-south-1, ap-east-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-southeast-4, ap-southeast-5, ap-southeast-7, ca-central-1, ca-west-1, cn-north-1, cn-northwest-1, eu-central-1, eu-central-2, eu-north-1, eu-south-1, eu-south-2, eu-west-1, eu-west-2, eu-west-3, il-central-1, me-central-1, me-south-1, mx-central-1, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2
+    #         region: "af-south-1", # required, accepts af-south-1, ap-east-1, ap-east-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-southeast-4, ap-southeast-5, ap-southeast-7, ca-central-1, ca-west-1, cn-north-1, cn-northwest-1, eu-central-1, eu-central-2, eu-north-1, eu-south-1, eu-south-2, eu-west-1, eu-west-2, eu-west-3, il-central-1, me-central-1, me-south-1, mx-central-1, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2
     #       },
     #     ],
     #     tags: {
@@ -772,14 +800,20 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grants permission to add a comment to an existing case.
+    # Adds a comment to an existing case.
     #
     # @option params [required, String] :case_id
     #   Required element used in combination with CreateCaseComment to specify
     #   a case ID.
     #
     # @option params [String] :client_token
-    #   An optional element used in combination with CreateCaseComment.
+    #   <note markdown="1"> The `clientToken` field is an idempotency key used
+    #   to ensure that
+    #   repeated attempts for a single action will be ignored by the server
+    #   during retries. A caller supplied unique ID (typically a UUID) should
+    #   be provided.
+    #
+    #    </note>
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -826,20 +860,26 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grants permissions to create a new membership.
+    # Creates a new membership.
     #
     # @option params [String] :client_token
-    #   An optional element used in combination with CreateMembership.
+    #   <note markdown="1"> The `clientToken` field is an idempotency key used
+    #   to ensure that
+    #   repeated attempts for a single action will be ignored by the server
+    #   during retries. A caller supplied unique ID (typically a UUID) should
+    #   be provided.
+    #
+    #    </note>
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [required, String] :membership_name
-    #   Required element use in combination with CreateMembership to create a
+    #   Required element used in combination with CreateMembership to create a
     #   name for the membership.
     #
     # @option params [required, Array<Types::IncidentResponder>] :incident_response_team
-    #   Required element use in combination with CreateMembership to add
+    #   Required element used in combination with CreateMembership to add
     #   customer incident response team members and trusted partners to the
     #   membership.
     #
@@ -849,6 +889,23 @@ module Aws::SecurityIR
     #
     # @option params [Hash<String,String>] :tags
     #   Optional element for customer configured tags.
+    #
+    # @option params [Boolean] :cover_entire_organization
+    #   The `coverEntireOrganization` parameter is a boolean flag that
+    #   determines whether the membership should be applied to the entire
+    #   Amazon Web Services Organization. When set to true, the membership
+    #   will be created for all accounts within the organization. When set to
+    #   false, the membership will only be created for specified accounts.
+    #
+    #   This parameter is optional. If not specified, the default value is
+    #   false.
+    #
+    #   * If set to *true*: The membership will automatically include all
+    #     existing and future accounts in the Amazon Web Services
+    #     Organization.
+    #
+    #   * If set to *false*: The membership will only apply to explicitly
+    #     specified accounts.
     #
     # @return [Types::CreateMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -905,6 +962,7 @@ module Aws::SecurityIR
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     cover_entire_organization: false,
     #   })
     #
     # @example Response structure
@@ -920,7 +978,7 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grant permission to view a designated case.
+    # Returns the attributes of a case.
     #
     # @option params [required, String] :case_id
     #   Required element for GetCase to identify the requested case ID.
@@ -1016,7 +1074,7 @@ module Aws::SecurityIR
     #   resp.reported_incident_start_date #=> Time
     #   resp.actual_incident_start_date #=> Time
     #   resp.impacted_aws_regions #=> Array
-    #   resp.impacted_aws_regions[0].region #=> String, one of "af-south-1", "ap-east-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-4", "ap-southeast-5", "ap-southeast-7", "ca-central-1", "ca-west-1", "cn-north-1", "cn-northwest-1", "eu-central-1", "eu-central-2", "eu-north-1", "eu-south-1", "eu-south-2", "eu-west-1", "eu-west-2", "eu-west-3", "il-central-1", "me-central-1", "me-south-1", "mx-central-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2"
+    #   resp.impacted_aws_regions[0].region #=> String, one of "af-south-1", "ap-east-1", "ap-east-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-4", "ap-southeast-5", "ap-southeast-7", "ca-central-1", "ca-west-1", "cn-north-1", "cn-northwest-1", "eu-central-1", "eu-central-2", "eu-north-1", "eu-south-1", "eu-south-2", "eu-west-1", "eu-west-2", "eu-west-3", "il-central-1", "me-central-1", "me-south-1", "mx-central-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2"
     #   resp.threat_actor_ip_addresses #=> Array
     #   resp.threat_actor_ip_addresses[0].ip_address #=> String
     #   resp.threat_actor_ip_addresses[0].user_agent #=> String
@@ -1050,8 +1108,7 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grants permission to obtain an Amazon S3 presigned URL to download an
-    # attachment.
+    # Returns a Pre-Signed URL for uploading attachments into a case.
     #
     # @option params [required, String] :case_id
     #   Required element for GetCaseAttachmentDownloadUrl to identify the case
@@ -1098,11 +1155,11 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grants permission to upload an attachment to a case.
+    # Uploads an attachment to a case.
     #
     # @option params [required, String] :case_id
     #   Required element for GetCaseAttachmentUploadUrl to identify the case
-    #   ID for uploading an attachment to.
+    #   ID for uploading an attachment.
     #
     # @option params [required, String] :file_name
     #   Required element for GetCaseAttachmentUploadUrl to identify the file
@@ -1110,10 +1167,16 @@ module Aws::SecurityIR
     #
     # @option params [required, Integer] :content_length
     #   Required element for GetCaseAttachmentUploadUrl to identify the size
-    #   od the file attachment.
+    #   of the file attachment.
     #
     # @option params [String] :client_token
-    #   Optional element for customer provided token.
+    #   <note markdown="1"> The `clientToken` field is an idempotency key used
+    #   to ensure that
+    #   repeated attempts for a single action will be ignored by the server
+    #   during retries. A caller supplied unique ID (typically a UUID) should
+    #   be provided.
+    #
+    #    </note>
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1158,7 +1221,7 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grants permission to get details of a designated service membership.
+    # Returns the attributes of a membership.
     #
     # @option params [required, String] :membership_id
     #   Required element for GetMembership to identify the membership ID to
@@ -1178,6 +1241,7 @@ module Aws::SecurityIR
     #   * {Types::GetMembershipResponse#number_of_accounts_covered #number_of_accounts_covered} => Integer
     #   * {Types::GetMembershipResponse#incident_response_team #incident_response_team} => Array&lt;Types::IncidentResponder&gt;
     #   * {Types::GetMembershipResponse#opt_in_features #opt_in_features} => Array&lt;Types::OptInFeature&gt;
+    #   * {Types::GetMembershipResponse#membership_accounts_configurations #membership_accounts_configurations} => Types::MembershipAccountsConfigurations
     #
     #
     # @example Example: Invoke GetMembership
@@ -1228,7 +1292,7 @@ module Aws::SecurityIR
     #
     #   resp.membership_id #=> String
     #   resp.account_id #=> String
-    #   resp.region #=> String, one of "af-south-1", "ap-east-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-4", "ap-southeast-5", "ap-southeast-7", "ca-central-1", "ca-west-1", "cn-north-1", "cn-northwest-1", "eu-central-1", "eu-central-2", "eu-north-1", "eu-south-1", "eu-south-2", "eu-west-1", "eu-west-2", "eu-west-3", "il-central-1", "me-central-1", "me-south-1", "mx-central-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2"
+    #   resp.region #=> String, one of "af-south-1", "ap-east-1", "ap-east-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-4", "ap-southeast-5", "ap-southeast-7", "ca-central-1", "ca-west-1", "cn-north-1", "cn-northwest-1", "eu-central-1", "eu-central-2", "eu-north-1", "eu-south-1", "eu-south-2", "eu-west-1", "eu-west-2", "eu-west-3", "il-central-1", "me-central-1", "me-south-1", "mx-central-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2"
     #   resp.membership_name #=> String
     #   resp.membership_arn #=> String
     #   resp.membership_status #=> String, one of "Active", "Cancelled", "Terminated"
@@ -1243,6 +1307,9 @@ module Aws::SecurityIR
     #   resp.opt_in_features #=> Array
     #   resp.opt_in_features[0].feature_name #=> String, one of "Triage"
     #   resp.opt_in_features[0].is_enabled #=> Boolean
+    #   resp.membership_accounts_configurations.cover_entire_organization #=> Boolean
+    #   resp.membership_accounts_configurations.organizational_units #=> Array
+    #   resp.membership_accounts_configurations.organizational_units[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/security-ir-2018-05-10/GetMembership AWS API Documentation
     #
@@ -1253,11 +1320,12 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grants permissions to view the aidt log for edits made to a designated
-    # case.
+    # Views the case history for edits made to a designated case.
     #
     # @option params [String] :next_token
-    #   Optional element for a customer provided token.
+    #   An optional string that, if supplied, must be copied from the output
+    #   of a previous call to ListCaseEdits. When provided in this manner, the
+    #   API fetches the next page of results.
     #
     # @option params [Integer] :max_results
     #   Optional element to identify how many results to obtain. There is a
@@ -1322,10 +1390,12 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grants permission to list all cases the requester has access to.
+    # Lists all cases the requester has access to.
     #
     # @option params [String] :next_token
-    #   Optional element.
+    #   An optional string that, if supplied, must be copied from the output
+    #   of a previous call to ListCases. When provided in this manner, the API
+    #   fetches the next page of results.
     #
     # @option params [Integer] :max_results
     #   Optional element for ListCases to limit the number of responses.
@@ -1395,10 +1465,12 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grants permissions to list and view comments for a designated case.
+    # Returns comments for a designated case.
     #
     # @option params [String] :next_token
-    #   Optional element.
+    #   An optional string that, if supplied, must be copied from the output
+    #   of a previous call to ListComments. When provided in this manner, the
+    #   API fetches the next page of results.
     #
     # @option params [Integer] :max_results
     #   Optional element for ListComments to limit the number of responses.
@@ -1461,10 +1533,12 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grants permission to query the memberships a principal has access to.
+    # Returns the memberships that the calling principal can access.
     #
     # @option params [String] :next_token
-    #   Optional element.
+    #   An optional string that, if supplied, must be copied from the output
+    #   of a previous call to ListMemberships. When provided in this manner,
+    #   the API fetches the next page of results.
     #
     # @option params [Integer] :max_results
     #   Request element for ListMemberships to limit the number of responses.
@@ -1509,7 +1583,7 @@ module Aws::SecurityIR
     #   resp.items #=> Array
     #   resp.items[0].membership_id #=> String
     #   resp.items[0].account_id #=> String
-    #   resp.items[0].region #=> String, one of "af-south-1", "ap-east-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-4", "ap-southeast-5", "ap-southeast-7", "ca-central-1", "ca-west-1", "cn-north-1", "cn-northwest-1", "eu-central-1", "eu-central-2", "eu-north-1", "eu-south-1", "eu-south-2", "eu-west-1", "eu-west-2", "eu-west-3", "il-central-1", "me-central-1", "me-south-1", "mx-central-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2"
+    #   resp.items[0].region #=> String, one of "af-south-1", "ap-east-1", "ap-east-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-4", "ap-southeast-5", "ap-southeast-7", "ca-central-1", "ca-west-1", "cn-north-1", "cn-northwest-1", "eu-central-1", "eu-central-2", "eu-north-1", "eu-south-1", "eu-south-2", "eu-west-1", "eu-west-2", "eu-west-3", "il-central-1", "me-central-1", "me-south-1", "mx-central-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2"
     #   resp.items[0].membership_arn #=> String
     #   resp.items[0].membership_status #=> String, one of "Active", "Cancelled", "Terminated"
     #
@@ -1522,7 +1596,7 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grants permission to view currently configured tags on a resource.
+    # Returns currently configured tags on a resource.
     #
     # @option params [required, String] :resource_arn
     #   Required element for ListTagsForResource to provide the ARN to
@@ -1567,7 +1641,7 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grants permission to add a tag(s) to a designated resource.
+    # Adds a tag(s) to a designated resource.
     #
     # @option params [required, String] :resource_arn
     #   Required element for TagResource to identify the ARN for the resource
@@ -1612,7 +1686,7 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grants permission to remove a tag(s) from a designate resource.
+    # Removes a tag(s) from a designate resource.
     #
     # @option params [required, String] :resource_arn
     #   Required element for UnTagResource to identify the ARN for the
@@ -1649,7 +1723,7 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grants permission to update an existing case.
+    # Updates an existing case.
     #
     # @option params [required, String] :case_id
     #   Required element for UpdateCase to identify the case ID for updates.
@@ -1711,9 +1785,23 @@ module Aws::SecurityIR
     #   Optional element for UpdateCase to provide content to add accounts
     #   impacted.
     #
+    #   <note markdown="1"> AWS account ID's may appear less than 12 characters and need to be
+    #   zero-prepended. An example would be `123123123` which is nine digits,
+    #   and with zero-prepend would be `000123123123`. Not zero-prepending to
+    #   12 digits could result in errors.
+    #
+    #    </note>
+    #
     # @option params [Array<String>] :impacted_accounts_to_delete
     #   Optional element for UpdateCase to provide content to add accounts
     #   impacted.
+    #
+    #   <note markdown="1"> AWS account ID's may appear less than 12 characters and need to be
+    #   zero-prepended. An example would be `123123123` which is nine digits,
+    #   and with zero-prepend would be `000123123123`. Not zero-prepending to
+    #   12 digits could result in errors.
+    #
+    #    </note>
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1820,12 +1908,12 @@ module Aws::SecurityIR
     #     impacted_services_to_delete: ["AwsService"],
     #     impacted_aws_regions_to_add: [
     #       {
-    #         region: "af-south-1", # required, accepts af-south-1, ap-east-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-southeast-4, ap-southeast-5, ap-southeast-7, ca-central-1, ca-west-1, cn-north-1, cn-northwest-1, eu-central-1, eu-central-2, eu-north-1, eu-south-1, eu-south-2, eu-west-1, eu-west-2, eu-west-3, il-central-1, me-central-1, me-south-1, mx-central-1, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2
+    #         region: "af-south-1", # required, accepts af-south-1, ap-east-1, ap-east-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-southeast-4, ap-southeast-5, ap-southeast-7, ca-central-1, ca-west-1, cn-north-1, cn-northwest-1, eu-central-1, eu-central-2, eu-north-1, eu-south-1, eu-south-2, eu-west-1, eu-west-2, eu-west-3, il-central-1, me-central-1, me-south-1, mx-central-1, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2
     #       },
     #     ],
     #     impacted_aws_regions_to_delete: [
     #       {
-    #         region: "af-south-1", # required, accepts af-south-1, ap-east-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-southeast-4, ap-southeast-5, ap-southeast-7, ca-central-1, ca-west-1, cn-north-1, cn-northwest-1, eu-central-1, eu-central-2, eu-north-1, eu-south-1, eu-south-2, eu-west-1, eu-west-2, eu-west-3, il-central-1, me-central-1, me-south-1, mx-central-1, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2
+    #         region: "af-south-1", # required, accepts af-south-1, ap-east-1, ap-east-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-southeast-4, ap-southeast-5, ap-southeast-7, ca-central-1, ca-west-1, cn-north-1, cn-northwest-1, eu-central-1, eu-central-2, eu-north-1, eu-south-1, eu-south-2, eu-west-1, eu-west-2, eu-west-3, il-central-1, me-central-1, me-south-1, mx-central-1, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2
     #       },
     #     ],
     #     impacted_accounts_to_add: ["AWSAccountId"],
@@ -1841,7 +1929,7 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grants permission to update an existing case comment.
+    # Updates an existing case comment.
     #
     # @option params [required, String] :case_id
     #   Required element for UpdateCaseComment to identify the case ID
@@ -1897,9 +1985,28 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grants permission to update the status for a designated cases. Options
-    # include `Submitted | Detection and Analysis | Eradication, Containment
-    # and Recovery | Post-Incident Activities | Closed`.
+    # Updates the state transitions for a designated cases.
+    #
+    # **Self-managed**: the following states are available for self-managed
+    # cases.
+    #
+    # * Submitted → Detection and Analysis
+    #
+    # * Detection and Analysis → Containment, Eradication, and Recovery
+    #
+    # * Detection and Analysis → Post-incident Activities
+    #
+    # * Containment, Eradication, and Recovery → Detection and Analysis
+    #
+    # * Containment, Eradication, and Recovery → Post-incident Activities
+    #
+    # * Post-incident Activities → Containment, Eradication, and Recovery
+    #
+    # * Post-incident Activities → Detection and Analysis
+    #
+    # * Any → Closed
+    #
+    # **AWS supported**: You must use the `CloseCase` API to close.
     #
     # @option params [required, String] :case_id
     #   Required element for UpdateCaseStatus to identify the case to update.
@@ -1946,7 +2053,7 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grants access to UpdateMembership to change membership configuration.
+    # Updates membership configuration.
     #
     # @option params [required, String] :membership_id
     #   Required element for UpdateMembership to identify the membership to
@@ -1961,6 +2068,29 @@ module Aws::SecurityIR
     # @option params [Array<Types::OptInFeature>] :opt_in_features
     #   Optional element for UpdateMembership to enable or disable opt-in
     #   features for the service.
+    #
+    # @option params [Types::MembershipAccountsConfigurationsUpdate] :membership_accounts_configurations_update
+    #   The `membershipAccountsConfigurationsUpdate` field in the
+    #   `UpdateMembershipRequest` structure allows you to update the
+    #   configuration settings for accounts within a membership.
+    #
+    #   This field is optional and contains a structure of type
+    #   `MembershipAccountsConfigurationsUpdate ` that specifies the updated
+    #   account configurations for the membership.
+    #
+    # @option params [Boolean] :undo_membership_cancellation
+    #   The `undoMembershipCancellation` parameter is a boolean flag that
+    #   indicates whether to reverse a previously requested membership
+    #   cancellation. When set to true, this will revoke the cancellation
+    #   request and maintain the membership status.
+    #
+    #   This parameter is optional and can be used in scenarios where you need
+    #   to restore a membership that was marked for cancellation but hasn't
+    #   been fully terminated yet.
+    #
+    #   * If set to `true`, the cancellation request will be revoked
+    #
+    #   * If set to `false` the service will throw a ValidationException.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2012,6 +2142,12 @@ module Aws::SecurityIR
     #         is_enabled: false, # required
     #       },
     #     ],
+    #     membership_accounts_configurations_update: {
+    #       cover_entire_organization: false,
+    #       organizational_units_to_add: ["OrganizationalUnitId"],
+    #       organizational_units_to_remove: ["OrganizationalUnitId"],
+    #     },
+    #     undo_membership_cancellation: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/security-ir-2018-05-10/UpdateMembership AWS API Documentation
@@ -2023,11 +2159,9 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
-    # Grants permission to update the resolver type for a case.
+    # Updates the resolver type for a case.
     #
     # This is a one-way action and cannot be reversed.
-    #
-    # Options include self-supported &gt; AWS-supported.
     #
     # @option params [required, String] :case_id
     #   Required element for UpdateResolverType to identify the case to
@@ -2097,7 +2231,7 @@ module Aws::SecurityIR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityir'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

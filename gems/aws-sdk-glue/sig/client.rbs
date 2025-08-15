@@ -858,6 +858,17 @@ module Aws
                                ) -> _CreateDevEndpointResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDevEndpointResponseSuccess
 
+      interface _CreateGlueIdentityCenterConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGlueIdentityCenterConfigurationResponse]
+        def application_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#create_glue_identity_center_configuration-instance_method
+      def create_glue_identity_center_configuration: (
+                                                       instance_arn: ::String,
+                                                       ?scopes: Array[::String]
+                                                     ) -> _CreateGlueIdentityCenterConfigurationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGlueIdentityCenterConfigurationResponseSuccess
+
       interface _CreateIntegrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateIntegrationResponse]
         def source_arn: () -> ::String
@@ -3185,6 +3196,14 @@ module Aws
                                ) -> _DeleteDevEndpointResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDevEndpointResponseSuccess
 
+      interface _DeleteGlueIdentityCenterConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGlueIdentityCenterConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#delete_glue_identity_center_configuration-instance_method
+      def delete_glue_identity_center_configuration: (
+                                                     ) -> _DeleteGlueIdentityCenterConfigurationResponseSuccess
+                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGlueIdentityCenterConfigurationResponseSuccess
+
       interface _DeleteIntegrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIntegrationResponse]
         def source_arn: () -> ::String
@@ -3918,6 +3937,17 @@ module Aws
                                 ?selected_fields: Array[::String]
                               ) -> _GetEntityRecordsResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEntityRecordsResponseSuccess
+
+      interface _GetGlueIdentityCenterConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGlueIdentityCenterConfigurationResponse]
+        def application_arn: () -> ::String
+        def instance_arn: () -> ::String
+        def scopes: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_glue_identity_center_configuration-instance_method
+      def get_glue_identity_center_configuration: (
+                                                  ) -> _GetGlueIdentityCenterConfigurationResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGlueIdentityCenterConfigurationResponseSuccess
 
       interface _GetIntegrationResourcePropertyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetIntegrationResourcePropertyResponse]
@@ -6245,6 +6275,15 @@ module Aws
                                  ?add_arguments: Hash[::String, ::String]
                                ) -> _UpdateDevEndpointResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDevEndpointResponseSuccess
+
+      interface _UpdateGlueIdentityCenterConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGlueIdentityCenterConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#update_glue_identity_center_configuration-instance_method
+      def update_glue_identity_center_configuration: (
+                                                       ?scopes: Array[::String]
+                                                     ) -> _UpdateGlueIdentityCenterConfigurationResponseSuccess
+                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGlueIdentityCenterConfigurationResponseSuccess
 
       interface _UpdateIntegrationResourcePropertyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIntegrationResourcePropertyResponse]

@@ -1601,6 +1601,7 @@ module Aws::CodeBuild
     Webhook.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: ScopeConfiguration, location_name: "scopeConfiguration"))
     Webhook.add_member(:status, Shapes::ShapeRef.new(shape: WebhookStatus, location_name: "status"))
     Webhook.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    Webhook.add_member(:pull_request_build_policy, Shapes::ShapeRef.new(shape: PullRequestBuildPolicy, location_name: "pullRequestBuildPolicy"))
     Webhook.struct_class = Types::Webhook
 
     WebhookFilter.add_member(:type, Shapes::ShapeRef.new(shape: WebhookFilterType, required: true, location_name: "type"))

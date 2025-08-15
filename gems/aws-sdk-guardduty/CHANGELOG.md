@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2025-08-14)
+------------------
+
+* Feature - Added support for entity lists.
+
 1.124.0 (2025-08-07)
 ------------------
 

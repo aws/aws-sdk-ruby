@@ -46,6 +46,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/RouteTable.html#associate_with_subnet-instance_method
       def associate_with_subnet: (
                                    ?gateway_id: ::String,
+                                   ?public_ipv_4_pool: ::String,
                                    ?dry_run: bool,
                                    ?subnet_id: ::String
                                  ) -> RouteTableAssociation

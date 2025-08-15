@@ -532,6 +532,7 @@ module Aws::TranscribeStreamingService
     #   resp.medical_scribe_stream_details.post_stream_analytics_result.clinical_note_generation_result.transcript_output_location #=> String
     #   resp.medical_scribe_stream_details.post_stream_analytics_result.clinical_note_generation_result.status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.medical_scribe_stream_details.post_stream_analytics_result.clinical_note_generation_result.failure_reason #=> String
+    #   resp.medical_scribe_stream_details.medical_scribe_context_provided #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/GetMedicalScribeStream AWS API Documentation
     #
@@ -560,7 +561,7 @@ module Aws::TranscribeStreamingService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

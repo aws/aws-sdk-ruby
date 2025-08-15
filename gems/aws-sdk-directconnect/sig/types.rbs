@@ -116,6 +116,7 @@ module Aws::DirectConnect
     class BGPPeer
       attr_accessor bgp_peer_id: ::String
       attr_accessor asn: ::Integer
+      attr_accessor asn_long: ::Integer
       attr_accessor auth_key: ::String
       attr_accessor address_family: ("ipv4" | "ipv6")
       attr_accessor amazon_address: ::String
@@ -209,6 +210,7 @@ module Aws::DirectConnect
 
     class Connections
       attr_accessor connections: ::Array[Types::Connection]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -329,6 +331,7 @@ module Aws::DirectConnect
     class DeleteBGPPeerRequest
       attr_accessor virtual_interface_id: ::String
       attr_accessor asn: ::Integer
+      attr_accessor asn_long: ::Integer
       attr_accessor customer_address: ::String
       attr_accessor bgp_peer_id: ::String
       SENSITIVE: []
@@ -420,6 +423,8 @@ module Aws::DirectConnect
 
     class DescribeConnectionsRequest
       attr_accessor connection_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -489,6 +494,8 @@ module Aws::DirectConnect
 
     class DescribeHostedConnectionsRequest
       attr_accessor connection_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -506,11 +513,15 @@ module Aws::DirectConnect
 
     class DescribeInterconnectsRequest
       attr_accessor interconnect_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class DescribeLagsRequest
       attr_accessor lag_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -548,6 +559,8 @@ module Aws::DirectConnect
     class DescribeVirtualInterfacesRequest
       attr_accessor connection_id: ::String
       attr_accessor virtual_interface_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -655,6 +668,7 @@ module Aws::DirectConnect
 
     class Interconnects
       attr_accessor interconnects: ::Array[Types::Interconnect]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -685,6 +699,7 @@ module Aws::DirectConnect
 
     class Lags
       attr_accessor lags: ::Array[Types::Lag]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -735,6 +750,7 @@ module Aws::DirectConnect
 
     class NewBGPPeer
       attr_accessor asn: ::Integer
+      attr_accessor asn_long: ::Integer
       attr_accessor auth_key: ::String
       attr_accessor address_family: ("ipv4" | "ipv6")
       attr_accessor amazon_address: ::String
@@ -746,6 +762,7 @@ module Aws::DirectConnect
       attr_accessor virtual_interface_name: ::String
       attr_accessor vlan: ::Integer
       attr_accessor asn: ::Integer
+      attr_accessor asn_long: ::Integer
       attr_accessor mtu: ::Integer
       attr_accessor auth_key: ::String
       attr_accessor amazon_address: ::String
@@ -762,6 +779,7 @@ module Aws::DirectConnect
       attr_accessor virtual_interface_name: ::String
       attr_accessor vlan: ::Integer
       attr_accessor asn: ::Integer
+      attr_accessor asn_long: ::Integer
       attr_accessor mtu: ::Integer
       attr_accessor auth_key: ::String
       attr_accessor amazon_address: ::String
@@ -775,6 +793,7 @@ module Aws::DirectConnect
       attr_accessor virtual_interface_name: ::String
       attr_accessor vlan: ::Integer
       attr_accessor asn: ::Integer
+      attr_accessor asn_long: ::Integer
       attr_accessor auth_key: ::String
       attr_accessor amazon_address: ::String
       attr_accessor customer_address: ::String
@@ -788,6 +807,7 @@ module Aws::DirectConnect
       attr_accessor virtual_interface_name: ::String
       attr_accessor vlan: ::Integer
       attr_accessor asn: ::Integer
+      attr_accessor asn_long: ::Integer
       attr_accessor auth_key: ::String
       attr_accessor amazon_address: ::String
       attr_accessor customer_address: ::String
@@ -801,6 +821,7 @@ module Aws::DirectConnect
       attr_accessor virtual_interface_name: ::String
       attr_accessor vlan: ::Integer
       attr_accessor asn: ::Integer
+      attr_accessor asn_long: ::Integer
       attr_accessor mtu: ::Integer
       attr_accessor auth_key: ::String
       attr_accessor amazon_address: ::String
@@ -816,6 +837,7 @@ module Aws::DirectConnect
       attr_accessor virtual_interface_name: ::String
       attr_accessor vlan: ::Integer
       attr_accessor asn: ::Integer
+      attr_accessor asn_long: ::Integer
       attr_accessor mtu: ::Integer
       attr_accessor auth_key: ::String
       attr_accessor amazon_address: ::String
@@ -961,6 +983,7 @@ module Aws::DirectConnect
       attr_accessor virtual_interface_name: ::String
       attr_accessor vlan: ::Integer
       attr_accessor asn: ::Integer
+      attr_accessor asn_long: ::Integer
       attr_accessor amazon_side_asn: ::Integer
       attr_accessor auth_key: ::String
       attr_accessor amazon_address: ::String
@@ -996,6 +1019,7 @@ module Aws::DirectConnect
 
     class VirtualInterfaces
       attr_accessor virtual_interfaces: ::Array[Types::VirtualInterface]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
   end

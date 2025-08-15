@@ -2875,6 +2875,42 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Creates a new Glue Identity Center configuration to enable integration
+    # between Glue and Amazon Web Services IAM Identity Center for
+    # authentication and authorization.
+    #
+    # @option params [required, String] :instance_arn
+    #   The Amazon Resource Name (ARN) of the Identity Center instance to be
+    #   associated with the Glue configuration.
+    #
+    # @option params [Array<String>] :scopes
+    #   A list of Identity Center scopes that define the permissions and
+    #   access levels for the Glue configuration.
+    #
+    # @return [Types::CreateGlueIdentityCenterConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateGlueIdentityCenterConfigurationResponse#application_arn #application_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_glue_identity_center_configuration({
+    #     instance_arn: "IdentityCenterInstanceArn", # required
+    #     scopes: ["IdentityCenterScope"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateGlueIdentityCenterConfiguration AWS API Documentation
+    #
+    # @overload create_glue_identity_center_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_glue_identity_center_configuration(params = {}, options = {})
+      req = build_request(:create_glue_identity_center_configuration, params)
+      req.send_request(options)
+    end
+
     # Creates a Zero-ETL integration in the caller's account between two
     # resources with Amazon Resource Names (ARNs): the `SourceArn` and
     # `TargetArn`.
@@ -5111,6 +5147,20 @@ module Aws::Glue
     # @param [Hash] params ({})
     def delete_dev_endpoint(params = {}, options = {})
       req = build_request(:delete_dev_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Deletes the existing Glue Identity Center configuration, removing the
+    # integration between Glue and Amazon Web Services IAM Identity Center.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteGlueIdentityCenterConfiguration AWS API Documentation
+    #
+    # @overload delete_glue_identity_center_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_glue_identity_center_configuration(params = {}, options = {})
+      req = build_request(:delete_glue_identity_center_configuration, params)
       req.send_request(options)
     end
 
@@ -8216,6 +8266,32 @@ module Aws::Glue
     # @param [Hash] params ({})
     def get_entity_records(params = {}, options = {})
       req = build_request(:get_entity_records, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the current Glue Identity Center configuration details,
+    # including the associated Identity Center instance and application
+    # information.
+    #
+    # @return [Types::GetGlueIdentityCenterConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGlueIdentityCenterConfigurationResponse#application_arn #application_arn} => String
+    #   * {Types::GetGlueIdentityCenterConfigurationResponse#instance_arn #instance_arn} => String
+    #   * {Types::GetGlueIdentityCenterConfigurationResponse#scopes #scopes} => Array&lt;String&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.application_arn #=> String
+    #   resp.instance_arn #=> String
+    #   resp.scopes #=> Array
+    #   resp.scopes[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetGlueIdentityCenterConfiguration AWS API Documentation
+    #
+    # @overload get_glue_identity_center_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_glue_identity_center_configuration(params = {}, options = {})
+      req = build_request(:get_glue_identity_center_configuration, params)
       req.send_request(options)
     end
 
@@ -16514,6 +16590,30 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Updates the existing Glue Identity Center configuration, allowing
+    # modification of scopes and permissions for the integration.
+    #
+    # @option params [Array<String>] :scopes
+    #   A list of Identity Center scopes that define the updated permissions
+    #   and access levels for the Glue configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_glue_identity_center_configuration({
+    #     scopes: ["IdentityCenterScope"],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateGlueIdentityCenterConfiguration AWS API Documentation
+    #
+    # @overload update_glue_identity_center_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_glue_identity_center_configuration(params = {}, options = {})
+      req = build_request(:update_glue_identity_center_configuration, params)
+      req.send_request(options)
+    end
+
     # This API can be used for updating the `ResourceProperty` of the Glue
     # connection (for the source) or Glue database ARN (for the target).
     # These properties can include the role to access the connection or
@@ -17677,7 +17777,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.230.0'
+      context[:gem_version] = '1.231.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

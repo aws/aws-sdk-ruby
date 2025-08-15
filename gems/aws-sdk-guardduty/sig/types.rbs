@@ -455,6 +455,23 @@ module Aws::GuardDuty
     class CreateSampleFindingsResponse < Aws::EmptyStructure
     end
 
+    class CreateThreatEntitySetRequest
+      attr_accessor detector_id: ::String
+      attr_accessor name: ::String
+      attr_accessor format: ("TXT" | "STIX" | "OTX_CSV" | "ALIEN_VAULT" | "PROOF_POINT" | "FIRE_EYE")
+      attr_accessor location: ::String
+      attr_accessor expected_bucket_owner: ::String
+      attr_accessor activate: bool
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateThreatEntitySetResponse
+      attr_accessor threat_entity_set_id: ::String
+      SENSITIVE: []
+    end
+
     class CreateThreatIntelSetRequest
       attr_accessor detector_id: ::String
       attr_accessor name: ::String
@@ -469,6 +486,23 @@ module Aws::GuardDuty
 
     class CreateThreatIntelSetResponse
       attr_accessor threat_intel_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTrustedEntitySetRequest
+      attr_accessor detector_id: ::String
+      attr_accessor name: ::String
+      attr_accessor format: ("TXT" | "STIX" | "OTX_CSV" | "ALIEN_VAULT" | "PROOF_POINT" | "FIRE_EYE")
+      attr_accessor location: ::String
+      attr_accessor expected_bucket_owner: ::String
+      attr_accessor activate: bool
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateTrustedEntitySetResponse
+      attr_accessor trusted_entity_set_id: ::String
       SENSITIVE: []
     end
 
@@ -594,6 +628,15 @@ module Aws::GuardDuty
     class DeletePublishingDestinationResponse < Aws::EmptyStructure
     end
 
+    class DeleteThreatEntitySetRequest
+      attr_accessor detector_id: ::String
+      attr_accessor threat_entity_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteThreatEntitySetResponse < Aws::EmptyStructure
+    end
+
     class DeleteThreatIntelSetRequest
       attr_accessor detector_id: ::String
       attr_accessor threat_intel_set_id: ::String
@@ -601,6 +644,15 @@ module Aws::GuardDuty
     end
 
     class DeleteThreatIntelSetResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTrustedEntitySetRequest
+      attr_accessor detector_id: ::String
+      attr_accessor trusted_entity_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTrustedEntitySetResponse < Aws::EmptyStructure
     end
 
     class DescribeMalwareScansRequest
@@ -1120,6 +1172,25 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class GetThreatEntitySetRequest
+      attr_accessor detector_id: ::String
+      attr_accessor threat_entity_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetThreatEntitySetResponse
+      attr_accessor name: ::String
+      attr_accessor format: ("TXT" | "STIX" | "OTX_CSV" | "ALIEN_VAULT" | "PROOF_POINT" | "FIRE_EYE")
+      attr_accessor location: ::String
+      attr_accessor expected_bucket_owner: ::String
+      attr_accessor status: ("INACTIVE" | "ACTIVATING" | "ACTIVE" | "DEACTIVATING" | "ERROR" | "DELETE_PENDING" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor error_details: ::String
+      SENSITIVE: []
+    end
+
     class GetThreatIntelSetRequest
       attr_accessor detector_id: ::String
       attr_accessor threat_intel_set_id: ::String
@@ -1133,6 +1204,25 @@ module Aws::GuardDuty
       attr_accessor status: ("INACTIVE" | "ACTIVATING" | "ACTIVE" | "DEACTIVATING" | "ERROR" | "DELETE_PENDING" | "DELETED")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor expected_bucket_owner: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrustedEntitySetRequest
+      attr_accessor detector_id: ::String
+      attr_accessor trusted_entity_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrustedEntitySetResponse
+      attr_accessor name: ::String
+      attr_accessor format: ("TXT" | "STIX" | "OTX_CSV" | "ALIEN_VAULT" | "PROOF_POINT" | "FIRE_EYE")
+      attr_accessor location: ::String
+      attr_accessor expected_bucket_owner: ::String
+      attr_accessor status: ("INACTIVE" | "ACTIVATING" | "ACTIVE" | "DEACTIVATING" | "ERROR" | "DELETE_PENDING" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor error_details: ::String
       SENSITIVE: []
     end
 
@@ -1499,6 +1589,19 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class ListThreatEntitySetsRequest
+      attr_accessor detector_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListThreatEntitySetsResponse
+      attr_accessor threat_entity_set_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListThreatIntelSetsRequest
       attr_accessor detector_id: ::String
       attr_accessor max_results: ::Integer
@@ -1508,6 +1611,19 @@ module Aws::GuardDuty
 
     class ListThreatIntelSetsResponse
       attr_accessor threat_intel_set_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTrustedEntitySetsRequest
+      attr_accessor detector_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTrustedEntitySetsResponse
+      attr_accessor trusted_entity_set_ids: ::Array[::String]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -2495,6 +2611,19 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class UpdateThreatEntitySetRequest
+      attr_accessor detector_id: ::String
+      attr_accessor threat_entity_set_id: ::String
+      attr_accessor name: ::String
+      attr_accessor location: ::String
+      attr_accessor expected_bucket_owner: ::String
+      attr_accessor activate: bool
+      SENSITIVE: []
+    end
+
+    class UpdateThreatEntitySetResponse < Aws::EmptyStructure
+    end
+
     class UpdateThreatIntelSetRequest
       attr_accessor detector_id: ::String
       attr_accessor threat_intel_set_id: ::String
@@ -2506,6 +2635,19 @@ module Aws::GuardDuty
     end
 
     class UpdateThreatIntelSetResponse < Aws::EmptyStructure
+    end
+
+    class UpdateTrustedEntitySetRequest
+      attr_accessor detector_id: ::String
+      attr_accessor trusted_entity_set_id: ::String
+      attr_accessor name: ::String
+      attr_accessor location: ::String
+      attr_accessor expected_bucket_owner: ::String
+      attr_accessor activate: bool
+      SENSITIVE: []
+    end
+
+    class UpdateTrustedEntitySetResponse < Aws::EmptyStructure
     end
 
     class UsageAccountResult

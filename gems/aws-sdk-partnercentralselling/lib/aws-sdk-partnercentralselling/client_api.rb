@@ -32,6 +32,7 @@ module Aws::PartnerCentralSelling
     AddressSummaryCityString = Shapes::StringShape.new(name: 'AddressSummaryCityString')
     AddressSummaryPostalCodeString = Shapes::StringShape.new(name: 'AddressSummaryPostalCodeString')
     Alias = Shapes::StringShape.new(name: 'Alias')
+    Amount = Shapes::StringShape.new(name: 'Amount')
     ApnPrograms = Shapes::ListShape.new(name: 'ApnPrograms')
     AssignOpportunityRequest = Shapes::StructureShape.new(name: 'AssignOpportunityRequest')
     AssigneeContact = Shapes::StructureShape.new(name: 'AssigneeContact')
@@ -356,56 +357,56 @@ module Aws::PartnerCentralSelling
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
-    Account.add_member(:address, Shapes::ShapeRef.new(shape: Address, location_name: "Address"))
-    Account.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "AwsAccountId"))
-    Account.add_member(:company_name, Shapes::ShapeRef.new(shape: AccountCompanyNameString, required: true, location_name: "CompanyName"))
-    Account.add_member(:duns, Shapes::ShapeRef.new(shape: DunsNumber, location_name: "Duns"))
     Account.add_member(:industry, Shapes::ShapeRef.new(shape: Industry, location_name: "Industry"))
     Account.add_member(:other_industry, Shapes::ShapeRef.new(shape: AccountOtherIndustryString, location_name: "OtherIndustry"))
+    Account.add_member(:company_name, Shapes::ShapeRef.new(shape: AccountCompanyNameString, required: true, location_name: "CompanyName"))
     Account.add_member(:website_url, Shapes::ShapeRef.new(shape: WebsiteUrl, location_name: "WebsiteUrl"))
+    Account.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "AwsAccountId"))
+    Account.add_member(:address, Shapes::ShapeRef.new(shape: Address, location_name: "Address"))
+    Account.add_member(:duns, Shapes::ShapeRef.new(shape: DunsNumber, location_name: "Duns"))
     Account.struct_class = Types::Account
 
     AccountReceiver.add_member(:alias, Shapes::ShapeRef.new(shape: Alias, location_name: "Alias"))
     AccountReceiver.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccount, required: true, location_name: "AwsAccountId"))
     AccountReceiver.struct_class = Types::AccountReceiver
 
-    AccountSummary.add_member(:address, Shapes::ShapeRef.new(shape: AddressSummary, location_name: "Address"))
-    AccountSummary.add_member(:company_name, Shapes::ShapeRef.new(shape: AccountSummaryCompanyNameString, required: true, location_name: "CompanyName"))
     AccountSummary.add_member(:industry, Shapes::ShapeRef.new(shape: Industry, location_name: "Industry"))
     AccountSummary.add_member(:other_industry, Shapes::ShapeRef.new(shape: AccountSummaryOtherIndustryString, location_name: "OtherIndustry"))
+    AccountSummary.add_member(:company_name, Shapes::ShapeRef.new(shape: AccountSummaryCompanyNameString, required: true, location_name: "CompanyName"))
     AccountSummary.add_member(:website_url, Shapes::ShapeRef.new(shape: WebsiteUrl, location_name: "WebsiteUrl"))
+    AccountSummary.add_member(:address, Shapes::ShapeRef.new(shape: AddressSummary, location_name: "Address"))
     AccountSummary.struct_class = Types::AccountSummary
 
     Address.add_member(:city, Shapes::ShapeRef.new(shape: AddressCityString, location_name: "City"))
-    Address.add_member(:country_code, Shapes::ShapeRef.new(shape: CountryCode, location_name: "CountryCode"))
     Address.add_member(:postal_code, Shapes::ShapeRef.new(shape: AddressPostalCodeString, location_name: "PostalCode"))
     Address.add_member(:state_or_region, Shapes::ShapeRef.new(shape: AddressPart, location_name: "StateOrRegion"))
+    Address.add_member(:country_code, Shapes::ShapeRef.new(shape: CountryCode, location_name: "CountryCode"))
     Address.add_member(:street_address, Shapes::ShapeRef.new(shape: AddressStreetAddressString, location_name: "StreetAddress"))
     Address.struct_class = Types::Address
 
     AddressSummary.add_member(:city, Shapes::ShapeRef.new(shape: AddressSummaryCityString, location_name: "City"))
-    AddressSummary.add_member(:country_code, Shapes::ShapeRef.new(shape: CountryCode, location_name: "CountryCode"))
     AddressSummary.add_member(:postal_code, Shapes::ShapeRef.new(shape: AddressSummaryPostalCodeString, location_name: "PostalCode"))
     AddressSummary.add_member(:state_or_region, Shapes::ShapeRef.new(shape: AddressPart, location_name: "StateOrRegion"))
+    AddressSummary.add_member(:country_code, Shapes::ShapeRef.new(shape: CountryCode, location_name: "CountryCode"))
     AddressSummary.struct_class = Types::AddressSummary
 
     ApnPrograms.member = Shapes::ShapeRef.new(shape: String)
 
-    AssignOpportunityRequest.add_member(:assignee, Shapes::ShapeRef.new(shape: AssigneeContact, required: true, location_name: "Assignee"))
     AssignOpportunityRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     AssignOpportunityRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: OpportunityIdentifier, required: true, location_name: "Identifier"))
+    AssignOpportunityRequest.add_member(:assignee, Shapes::ShapeRef.new(shape: AssigneeContact, required: true, location_name: "Assignee"))
     AssignOpportunityRequest.struct_class = Types::AssignOpportunityRequest
 
-    AssigneeContact.add_member(:business_title, Shapes::ShapeRef.new(shape: JobTitle, required: true, location_name: "BusinessTitle"))
     AssigneeContact.add_member(:email, Shapes::ShapeRef.new(shape: Email, required: true, location_name: "Email"))
     AssigneeContact.add_member(:first_name, Shapes::ShapeRef.new(shape: AssigneeContactFirstNameString, required: true, location_name: "FirstName"))
     AssigneeContact.add_member(:last_name, Shapes::ShapeRef.new(shape: AssigneeContactLastNameString, required: true, location_name: "LastName"))
+    AssigneeContact.add_member(:business_title, Shapes::ShapeRef.new(shape: JobTitle, required: true, location_name: "BusinessTitle"))
     AssigneeContact.struct_class = Types::AssigneeContact
 
     AssociateOpportunityRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     AssociateOpportunityRequest.add_member(:opportunity_identifier, Shapes::ShapeRef.new(shape: OpportunityIdentifier, required: true, location_name: "OpportunityIdentifier"))
-    AssociateOpportunityRequest.add_member(:related_entity_identifier, Shapes::ShapeRef.new(shape: AssociateOpportunityRequestRelatedEntityIdentifierString, required: true, location_name: "RelatedEntityIdentifier"))
     AssociateOpportunityRequest.add_member(:related_entity_type, Shapes::ShapeRef.new(shape: RelatedEntityType, required: true, location_name: "RelatedEntityType"))
+    AssociateOpportunityRequest.add_member(:related_entity_identifier, Shapes::ShapeRef.new(shape: AssociateOpportunityRequestRelatedEntityIdentifierString, required: true, location_name: "RelatedEntityIdentifier"))
     AssociateOpportunityRequest.struct_class = Types::AssociateOpportunityRequest
 
     AwsAccountIdOrAliasList.member = Shapes::ShapeRef.new(shape: AwsAccount)
@@ -417,15 +418,15 @@ module Aws::PartnerCentralSelling
     AwsOpportunityCustomer.add_member(:contacts, Shapes::ShapeRef.new(shape: CustomerContactsList, location_name: "Contacts"))
     AwsOpportunityCustomer.struct_class = Types::AwsOpportunityCustomer
 
-    AwsOpportunityInsights.add_member(:engagement_score, Shapes::ShapeRef.new(shape: EngagementScore, location_name: "EngagementScore"))
     AwsOpportunityInsights.add_member(:next_best_actions, Shapes::ShapeRef.new(shape: String, location_name: "NextBestActions"))
+    AwsOpportunityInsights.add_member(:engagement_score, Shapes::ShapeRef.new(shape: EngagementScore, location_name: "EngagementScore"))
     AwsOpportunityInsights.struct_class = Types::AwsOpportunityInsights
 
+    AwsOpportunityLifeCycle.add_member(:target_close_date, Shapes::ShapeRef.new(shape: Date, location_name: "TargetCloseDate"))
     AwsOpportunityLifeCycle.add_member(:closed_lost_reason, Shapes::ShapeRef.new(shape: AwsClosedLostReason, location_name: "ClosedLostReason"))
+    AwsOpportunityLifeCycle.add_member(:stage, Shapes::ShapeRef.new(shape: AwsOpportunityStage, location_name: "Stage"))
     AwsOpportunityLifeCycle.add_member(:next_steps, Shapes::ShapeRef.new(shape: AwsOpportunityLifeCycleNextStepsString, location_name: "NextSteps"))
     AwsOpportunityLifeCycle.add_member(:next_steps_history, Shapes::ShapeRef.new(shape: AwsOpportunityLifeCycleNextStepsHistoryList, location_name: "NextStepsHistory"))
-    AwsOpportunityLifeCycle.add_member(:stage, Shapes::ShapeRef.new(shape: AwsOpportunityStage, location_name: "Stage"))
-    AwsOpportunityLifeCycle.add_member(:target_close_date, Shapes::ShapeRef.new(shape: Date, location_name: "TargetCloseDate"))
     AwsOpportunityLifeCycle.struct_class = Types::AwsOpportunityLifeCycle
 
     AwsOpportunityLifeCycleNextStepsHistoryList.member = Shapes::ShapeRef.new(shape: ProfileNextStepsHistory)
@@ -445,10 +446,10 @@ module Aws::PartnerCentralSelling
     AwsSubmission.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     AwsSubmission.struct_class = Types::AwsSubmission
 
-    AwsTeamMember.add_member(:business_title, Shapes::ShapeRef.new(shape: AwsMemberBusinessTitle, location_name: "BusinessTitle"))
     AwsTeamMember.add_member(:email, Shapes::ShapeRef.new(shape: Email, location_name: "Email"))
     AwsTeamMember.add_member(:first_name, Shapes::ShapeRef.new(shape: AwsTeamMemberFirstNameString, location_name: "FirstName"))
     AwsTeamMember.add_member(:last_name, Shapes::ShapeRef.new(shape: AwsTeamMemberLastNameString, location_name: "LastName"))
+    AwsTeamMember.add_member(:business_title, Shapes::ShapeRef.new(shape: AwsMemberBusinessTitle, location_name: "BusinessTitle"))
     AwsTeamMember.struct_class = Types::AwsTeamMember
 
     Channels.member = Shapes::ShapeRef.new(shape: Channel)
@@ -456,10 +457,10 @@ module Aws::PartnerCentralSelling
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
-    Contact.add_member(:business_title, Shapes::ShapeRef.new(shape: JobTitle, location_name: "BusinessTitle"))
     Contact.add_member(:email, Shapes::ShapeRef.new(shape: Email, location_name: "Email"))
     Contact.add_member(:first_name, Shapes::ShapeRef.new(shape: ContactFirstNameString, location_name: "FirstName"))
     Contact.add_member(:last_name, Shapes::ShapeRef.new(shape: ContactLastNameString, location_name: "LastName"))
+    Contact.add_member(:business_title, Shapes::ShapeRef.new(shape: JobTitle, location_name: "BusinessTitle"))
     Contact.add_member(:phone, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "Phone"))
     Contact.struct_class = Types::Contact
 
@@ -469,60 +470,61 @@ module Aws::PartnerCentralSelling
     CreateEngagementInvitationRequest.add_member(:invitation, Shapes::ShapeRef.new(shape: Invitation, required: true, location_name: "Invitation"))
     CreateEngagementInvitationRequest.struct_class = Types::CreateEngagementInvitationRequest
 
-    CreateEngagementInvitationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: EngagementInvitationArn, required: true, location_name: "Arn"))
     CreateEngagementInvitationResponse.add_member(:id, Shapes::ShapeRef.new(shape: EngagementInvitationIdentifier, required: true, location_name: "Id"))
+    CreateEngagementInvitationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: EngagementInvitationArn, required: true, location_name: "Arn"))
     CreateEngagementInvitationResponse.struct_class = Types::CreateEngagementInvitationResponse
 
     CreateEngagementRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     CreateEngagementRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateEngagementRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
-    CreateEngagementRequest.add_member(:contexts, Shapes::ShapeRef.new(shape: EngagementContexts, location_name: "Contexts"))
-    CreateEngagementRequest.add_member(:description, Shapes::ShapeRef.new(shape: EngagementDescription, required: true, location_name: "Description"))
     CreateEngagementRequest.add_member(:title, Shapes::ShapeRef.new(shape: EngagementTitle, required: true, location_name: "Title"))
+    CreateEngagementRequest.add_member(:description, Shapes::ShapeRef.new(shape: EngagementDescription, required: true, location_name: "Description"))
+    CreateEngagementRequest.add_member(:contexts, Shapes::ShapeRef.new(shape: EngagementContexts, location_name: "Contexts"))
     CreateEngagementRequest.struct_class = Types::CreateEngagementRequest
 
-    CreateEngagementResponse.add_member(:arn, Shapes::ShapeRef.new(shape: EngagementArn, location_name: "Arn"))
     CreateEngagementResponse.add_member(:id, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "Id"))
+    CreateEngagementResponse.add_member(:arn, Shapes::ShapeRef.new(shape: EngagementArn, location_name: "Arn"))
     CreateEngagementResponse.struct_class = Types::CreateEngagementResponse
 
     CreateOpportunityRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    CreateOpportunityRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateOpportunityRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
-    CreateOpportunityRequest.add_member(:customer, Shapes::ShapeRef.new(shape: Customer, location_name: "Customer"))
-    CreateOpportunityRequest.add_member(:life_cycle, Shapes::ShapeRef.new(shape: LifeCycle, location_name: "LifeCycle"))
-    CreateOpportunityRequest.add_member(:marketing, Shapes::ShapeRef.new(shape: Marketing, location_name: "Marketing"))
-    CreateOpportunityRequest.add_member(:national_security, Shapes::ShapeRef.new(shape: NationalSecurity, location_name: "NationalSecurity"))
-    CreateOpportunityRequest.add_member(:opportunity_team, Shapes::ShapeRef.new(shape: PartnerOpportunityTeamMembersList, location_name: "OpportunityTeam"))
-    CreateOpportunityRequest.add_member(:opportunity_type, Shapes::ShapeRef.new(shape: OpportunityType, location_name: "OpportunityType"))
-    CreateOpportunityRequest.add_member(:origin, Shapes::ShapeRef.new(shape: OpportunityOrigin, location_name: "Origin"))
-    CreateOpportunityRequest.add_member(:partner_opportunity_identifier, Shapes::ShapeRef.new(shape: CreateOpportunityRequestPartnerOpportunityIdentifierString, location_name: "PartnerOpportunityIdentifier"))
     CreateOpportunityRequest.add_member(:primary_needs_from_aws, Shapes::ShapeRef.new(shape: PrimaryNeedsFromAws, location_name: "PrimaryNeedsFromAws"))
+    CreateOpportunityRequest.add_member(:national_security, Shapes::ShapeRef.new(shape: NationalSecurity, location_name: "NationalSecurity"))
+    CreateOpportunityRequest.add_member(:partner_opportunity_identifier, Shapes::ShapeRef.new(shape: CreateOpportunityRequestPartnerOpportunityIdentifierString, location_name: "PartnerOpportunityIdentifier"))
+    CreateOpportunityRequest.add_member(:customer, Shapes::ShapeRef.new(shape: Customer, location_name: "Customer"))
     CreateOpportunityRequest.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "Project"))
+    CreateOpportunityRequest.add_member(:opportunity_type, Shapes::ShapeRef.new(shape: OpportunityType, location_name: "OpportunityType"))
+    CreateOpportunityRequest.add_member(:marketing, Shapes::ShapeRef.new(shape: Marketing, location_name: "Marketing"))
     CreateOpportunityRequest.add_member(:software_revenue, Shapes::ShapeRef.new(shape: SoftwareRevenue, location_name: "SoftwareRevenue"))
+    CreateOpportunityRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateOpportunityRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateOpportunityRequest.add_member(:life_cycle, Shapes::ShapeRef.new(shape: LifeCycle, location_name: "LifeCycle"))
+    CreateOpportunityRequest.add_member(:origin, Shapes::ShapeRef.new(shape: OpportunityOrigin, location_name: "Origin"))
+    CreateOpportunityRequest.add_member(:opportunity_team, Shapes::ShapeRef.new(shape: PartnerOpportunityTeamMembersList, location_name: "OpportunityTeam"))
+    CreateOpportunityRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateOpportunityRequest.struct_class = Types::CreateOpportunityRequest
 
     CreateOpportunityResponse.add_member(:id, Shapes::ShapeRef.new(shape: OpportunityIdentifier, required: true, location_name: "Id"))
-    CreateOpportunityResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedDate"))
     CreateOpportunityResponse.add_member(:partner_opportunity_identifier, Shapes::ShapeRef.new(shape: String, location_name: "PartnerOpportunityIdentifier"))
+    CreateOpportunityResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedDate"))
     CreateOpportunityResponse.struct_class = Types::CreateOpportunityResponse
 
     CreateResourceSnapshotJobRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     CreateResourceSnapshotJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateResourceSnapshotJobRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateResourceSnapshotJobRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifier, required: true, location_name: "EngagementIdentifier"))
+    CreateResourceSnapshotJobRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
     CreateResourceSnapshotJobRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "ResourceIdentifier"))
     CreateResourceSnapshotJobRequest.add_member(:resource_snapshot_template_identifier, Shapes::ShapeRef.new(shape: ResourceTemplateName, required: true, location_name: "ResourceSnapshotTemplateIdentifier"))
-    CreateResourceSnapshotJobRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
     CreateResourceSnapshotJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateResourceSnapshotJobRequest.struct_class = Types::CreateResourceSnapshotJobRequest
 
-    CreateResourceSnapshotJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceSnapshotJobArn, location_name: "Arn"))
     CreateResourceSnapshotJobResponse.add_member(:id, Shapes::ShapeRef.new(shape: ResourceSnapshotJobIdentifier, location_name: "Id"))
+    CreateResourceSnapshotJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceSnapshotJobArn, location_name: "Arn"))
     CreateResourceSnapshotJobResponse.struct_class = Types::CreateResourceSnapshotJobResponse
 
     CreateResourceSnapshotRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    CreateResourceSnapshotRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateResourceSnapshotRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateResourceSnapshotRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifier, required: true, location_name: "EngagementIdentifier"))
+    CreateResourceSnapshotRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
     CreateResourceSnapshotRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "ResourceIdentifier"))
     CreateResourceSnapshotRequest.add_member(:resource_snapshot_template_identifier, Shapes::ShapeRef.new(shape: ResourceTemplateName, required: true, location_name: "ResourceSnapshotTemplateIdentifier"))
-    CreateResourceSnapshotRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
+    CreateResourceSnapshotRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateResourceSnapshotRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateResourceSnapshotRequest.struct_class = Types::CreateResourceSnapshotRequest
 
     CreateResourceSnapshotResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "Arn"))
@@ -550,12 +552,12 @@ module Aws::PartnerCentralSelling
 
     DisassociateOpportunityRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     DisassociateOpportunityRequest.add_member(:opportunity_identifier, Shapes::ShapeRef.new(shape: OpportunityIdentifier, required: true, location_name: "OpportunityIdentifier"))
-    DisassociateOpportunityRequest.add_member(:related_entity_identifier, Shapes::ShapeRef.new(shape: DisassociateOpportunityRequestRelatedEntityIdentifierString, required: true, location_name: "RelatedEntityIdentifier"))
     DisassociateOpportunityRequest.add_member(:related_entity_type, Shapes::ShapeRef.new(shape: RelatedEntityType, required: true, location_name: "RelatedEntityType"))
+    DisassociateOpportunityRequest.add_member(:related_entity_identifier, Shapes::ShapeRef.new(shape: DisassociateOpportunityRequestRelatedEntityIdentifierString, required: true, location_name: "RelatedEntityIdentifier"))
     DisassociateOpportunityRequest.struct_class = Types::DisassociateOpportunityRequest
 
-    EngagementContextDetails.add_member(:payload, Shapes::ShapeRef.new(shape: EngagementContextPayload, location_name: "Payload"))
     EngagementContextDetails.add_member(:type, Shapes::ShapeRef.new(shape: EngagementContextType, required: true, location_name: "Type"))
+    EngagementContextDetails.add_member(:payload, Shapes::ShapeRef.new(shape: EngagementContextPayload, location_name: "Payload"))
     EngagementContextDetails.struct_class = Types::EngagementContextDetails
 
     EngagementContextPayload.add_member(:customer_project, Shapes::ShapeRef.new(shape: CustomerProjectsContext, location_name: "CustomerProject"))
@@ -566,15 +568,15 @@ module Aws::PartnerCentralSelling
 
     EngagementContexts.member = Shapes::ShapeRef.new(shape: EngagementContextDetails)
 
-    EngagementCustomer.add_member(:company_name, Shapes::ShapeRef.new(shape: CompanyName, required: true, location_name: "CompanyName"))
-    EngagementCustomer.add_member(:country_code, Shapes::ShapeRef.new(shape: CountryCode, required: true, location_name: "CountryCode"))
     EngagementCustomer.add_member(:industry, Shapes::ShapeRef.new(shape: Industry, required: true, location_name: "Industry"))
+    EngagementCustomer.add_member(:company_name, Shapes::ShapeRef.new(shape: CompanyName, required: true, location_name: "CompanyName"))
     EngagementCustomer.add_member(:website_url, Shapes::ShapeRef.new(shape: CompanyWebsiteUrl, required: true, location_name: "WebsiteUrl"))
+    EngagementCustomer.add_member(:country_code, Shapes::ShapeRef.new(shape: CountryCode, required: true, location_name: "CountryCode"))
     EngagementCustomer.struct_class = Types::EngagementCustomer
 
+    EngagementCustomerProjectDetails.add_member(:title, Shapes::ShapeRef.new(shape: EngagementCustomerProjectTitle, required: true, location_name: "Title"))
     EngagementCustomerProjectDetails.add_member(:business_problem, Shapes::ShapeRef.new(shape: EngagementCustomerBusinessProblem, required: true, location_name: "BusinessProblem"))
     EngagementCustomerProjectDetails.add_member(:target_completion_date, Shapes::ShapeRef.new(shape: EngagementCustomerProjectDetailsTargetCompletionDateString, required: true, location_name: "TargetCompletionDate"))
-    EngagementCustomerProjectDetails.add_member(:title, Shapes::ShapeRef.new(shape: EngagementCustomerProjectTitle, required: true, location_name: "Title"))
     EngagementCustomerProjectDetails.struct_class = Types::EngagementCustomerProjectDetails
 
     EngagementIdentifiers.member = Shapes::ShapeRef.new(shape: EngagementArnOrIdentifier)
@@ -584,25 +586,25 @@ module Aws::PartnerCentralSelling
     EngagementInvitationSummaries.member = Shapes::ShapeRef.new(shape: EngagementInvitationSummary)
 
     EngagementInvitationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
-    EngagementInvitationSummary.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
+    EngagementInvitationSummary.add_member(:payload_type, Shapes::ShapeRef.new(shape: EngagementInvitationPayloadType, location_name: "PayloadType"))
+    EngagementInvitationSummary.add_member(:id, Shapes::ShapeRef.new(shape: EngagementInvitationArnOrIdentifier, required: true, location_name: "Id"))
     EngagementInvitationSummary.add_member(:engagement_id, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "EngagementId"))
     EngagementInvitationSummary.add_member(:engagement_title, Shapes::ShapeRef.new(shape: EngagementTitle, location_name: "EngagementTitle"))
-    EngagementInvitationSummary.add_member(:expiration_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "ExpirationDate"))
-    EngagementInvitationSummary.add_member(:id, Shapes::ShapeRef.new(shape: EngagementInvitationArnOrIdentifier, required: true, location_name: "Id"))
+    EngagementInvitationSummary.add_member(:status, Shapes::ShapeRef.new(shape: InvitationStatus, location_name: "Status"))
     EngagementInvitationSummary.add_member(:invitation_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "InvitationDate"))
-    EngagementInvitationSummary.add_member(:participant_type, Shapes::ShapeRef.new(shape: ParticipantType, location_name: "ParticipantType"))
-    EngagementInvitationSummary.add_member(:payload_type, Shapes::ShapeRef.new(shape: EngagementInvitationPayloadType, location_name: "PayloadType"))
-    EngagementInvitationSummary.add_member(:receiver, Shapes::ShapeRef.new(shape: Receiver, location_name: "Receiver"))
+    EngagementInvitationSummary.add_member(:expiration_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "ExpirationDate"))
     EngagementInvitationSummary.add_member(:sender_aws_account_id, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "SenderAwsAccountId"))
     EngagementInvitationSummary.add_member(:sender_company_name, Shapes::ShapeRef.new(shape: EngagementInvitationSummarySenderCompanyNameString, location_name: "SenderCompanyName"))
-    EngagementInvitationSummary.add_member(:status, Shapes::ShapeRef.new(shape: InvitationStatus, location_name: "Status"))
+    EngagementInvitationSummary.add_member(:receiver, Shapes::ShapeRef.new(shape: Receiver, location_name: "Receiver"))
+    EngagementInvitationSummary.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
+    EngagementInvitationSummary.add_member(:participant_type, Shapes::ShapeRef.new(shape: ParticipantType, location_name: "ParticipantType"))
     EngagementInvitationSummary.struct_class = Types::EngagementInvitationSummary
 
     EngagementInvitationsPayloadType.member = Shapes::ShapeRef.new(shape: EngagementInvitationPayloadType)
 
-    EngagementMember.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "AccountId"))
     EngagementMember.add_member(:company_name, Shapes::ShapeRef.new(shape: MemberCompanyName, location_name: "CompanyName"))
     EngagementMember.add_member(:website_url, Shapes::ShapeRef.new(shape: String, location_name: "WebsiteUrl"))
+    EngagementMember.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "AccountId"))
     EngagementMember.struct_class = Types::EngagementMember
 
     EngagementMemberSummaries.member = Shapes::ShapeRef.new(shape: EngagementMemberSummary)
@@ -614,33 +616,33 @@ module Aws::PartnerCentralSelling
     EngagementMembers.member = Shapes::ShapeRef.new(shape: EngagementMember)
 
     EngagementResourceAssociationSummary.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    EngagementResourceAssociationSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "CreatedBy"))
     EngagementResourceAssociationSummary.add_member(:engagement_id, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "EngagementId"))
-    EngagementResourceAssociationSummary.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "ResourceId"))
     EngagementResourceAssociationSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    EngagementResourceAssociationSummary.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "ResourceId"))
+    EngagementResourceAssociationSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "CreatedBy"))
     EngagementResourceAssociationSummary.struct_class = Types::EngagementResourceAssociationSummary
 
     EngagementResourceAssociationSummaryList.member = Shapes::ShapeRef.new(shape: EngagementResourceAssociationSummary)
 
-    EngagementSort.add_member(:sort_by, Shapes::ShapeRef.new(shape: EngagementSortName, required: true, location_name: "SortBy"))
     EngagementSort.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "SortOrder"))
+    EngagementSort.add_member(:sort_by, Shapes::ShapeRef.new(shape: EngagementSortName, required: true, location_name: "SortBy"))
     EngagementSort.struct_class = Types::EngagementSort
 
     EngagementSummary.add_member(:arn, Shapes::ShapeRef.new(shape: EngagementArn, location_name: "Arn"))
+    EngagementSummary.add_member(:id, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "Id"))
+    EngagementSummary.add_member(:title, Shapes::ShapeRef.new(shape: EngagementTitle, location_name: "Title"))
     EngagementSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedAt"))
     EngagementSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "CreatedBy"))
-    EngagementSummary.add_member(:id, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "Id"))
     EngagementSummary.add_member(:member_count, Shapes::ShapeRef.new(shape: Integer, location_name: "MemberCount"))
-    EngagementSummary.add_member(:title, Shapes::ShapeRef.new(shape: EngagementTitle, location_name: "Title"))
     EngagementSummary.struct_class = Types::EngagementSummary
 
     EngagementSummaryList.member = Shapes::ShapeRef.new(shape: EngagementSummary)
 
-    ExpectedCustomerSpend.add_member(:amount, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Amount"))
+    ExpectedCustomerSpend.add_member(:amount, Shapes::ShapeRef.new(shape: Amount, required: true, location_name: "Amount"))
     ExpectedCustomerSpend.add_member(:currency_code, Shapes::ShapeRef.new(shape: ExpectedCustomerSpendCurrencyCodeEnum, required: true, location_name: "CurrencyCode"))
-    ExpectedCustomerSpend.add_member(:estimation_url, Shapes::ShapeRef.new(shape: WebsiteUrl, location_name: "EstimationUrl"))
     ExpectedCustomerSpend.add_member(:frequency, Shapes::ShapeRef.new(shape: PaymentFrequency, required: true, location_name: "Frequency"))
     ExpectedCustomerSpend.add_member(:target_company, Shapes::ShapeRef.new(shape: ExpectedCustomerSpendTargetCompanyString, required: true, location_name: "TargetCompany"))
+    ExpectedCustomerSpend.add_member(:estimation_url, Shapes::ShapeRef.new(shape: WebsiteUrl, location_name: "EstimationUrl"))
     ExpectedCustomerSpend.struct_class = Types::ExpectedCustomerSpend
 
     ExpectedCustomerSpendList.member = Shapes::ShapeRef.new(shape: ExpectedCustomerSpend)
@@ -650,17 +652,17 @@ module Aws::PartnerCentralSelling
     GetAwsOpportunitySummaryRequest.struct_class = Types::GetAwsOpportunitySummaryRequest
 
     GetAwsOpportunitySummaryResponse.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    GetAwsOpportunitySummaryResponse.add_member(:customer, Shapes::ShapeRef.new(shape: AwsOpportunityCustomer, location_name: "Customer"))
-    GetAwsOpportunitySummaryResponse.add_member(:insights, Shapes::ShapeRef.new(shape: AwsOpportunityInsights, location_name: "Insights"))
+    GetAwsOpportunitySummaryResponse.add_member(:related_opportunity_id, Shapes::ShapeRef.new(shape: OpportunityIdentifier, location_name: "RelatedOpportunityId"))
+    GetAwsOpportunitySummaryResponse.add_member(:origin, Shapes::ShapeRef.new(shape: OpportunityOrigin, location_name: "Origin"))
     GetAwsOpportunitySummaryResponse.add_member(:involvement_type, Shapes::ShapeRef.new(shape: SalesInvolvementType, location_name: "InvolvementType"))
-    GetAwsOpportunitySummaryResponse.add_member(:involvement_type_change_reason, Shapes::ShapeRef.new(shape: InvolvementTypeChangeReason, location_name: "InvolvementTypeChangeReason"))
+    GetAwsOpportunitySummaryResponse.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     GetAwsOpportunitySummaryResponse.add_member(:life_cycle, Shapes::ShapeRef.new(shape: AwsOpportunityLifeCycle, location_name: "LifeCycle"))
     GetAwsOpportunitySummaryResponse.add_member(:opportunity_team, Shapes::ShapeRef.new(shape: AwsOpportunityTeamMembersList, location_name: "OpportunityTeam"))
-    GetAwsOpportunitySummaryResponse.add_member(:origin, Shapes::ShapeRef.new(shape: OpportunityOrigin, location_name: "Origin"))
-    GetAwsOpportunitySummaryResponse.add_member(:project, Shapes::ShapeRef.new(shape: AwsOpportunityProject, location_name: "Project"))
+    GetAwsOpportunitySummaryResponse.add_member(:insights, Shapes::ShapeRef.new(shape: AwsOpportunityInsights, location_name: "Insights"))
+    GetAwsOpportunitySummaryResponse.add_member(:involvement_type_change_reason, Shapes::ShapeRef.new(shape: InvolvementTypeChangeReason, location_name: "InvolvementTypeChangeReason"))
     GetAwsOpportunitySummaryResponse.add_member(:related_entity_ids, Shapes::ShapeRef.new(shape: AwsOpportunityRelatedEntities, location_name: "RelatedEntityIds"))
-    GetAwsOpportunitySummaryResponse.add_member(:related_opportunity_id, Shapes::ShapeRef.new(shape: OpportunityIdentifier, location_name: "RelatedOpportunityId"))
-    GetAwsOpportunitySummaryResponse.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
+    GetAwsOpportunitySummaryResponse.add_member(:customer, Shapes::ShapeRef.new(shape: AwsOpportunityCustomer, location_name: "Customer"))
+    GetAwsOpportunitySummaryResponse.add_member(:project, Shapes::ShapeRef.new(shape: AwsOpportunityProject, location_name: "Project"))
     GetAwsOpportunitySummaryResponse.struct_class = Types::GetAwsOpportunitySummaryResponse
 
     GetEngagementInvitationRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
@@ -668,96 +670,96 @@ module Aws::PartnerCentralSelling
     GetEngagementInvitationRequest.struct_class = Types::GetEngagementInvitationRequest
 
     GetEngagementInvitationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
-    GetEngagementInvitationResponse.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    GetEngagementInvitationResponse.add_member(:engagement_description, Shapes::ShapeRef.new(shape: EngagementDescription, location_name: "EngagementDescription"))
+    GetEngagementInvitationResponse.add_member(:payload_type, Shapes::ShapeRef.new(shape: EngagementInvitationPayloadType, location_name: "PayloadType"))
+    GetEngagementInvitationResponse.add_member(:id, Shapes::ShapeRef.new(shape: EngagementInvitationArnOrIdentifier, required: true, location_name: "Id"))
     GetEngagementInvitationResponse.add_member(:engagement_id, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "EngagementId"))
     GetEngagementInvitationResponse.add_member(:engagement_title, Shapes::ShapeRef.new(shape: EngagementTitle, location_name: "EngagementTitle"))
-    GetEngagementInvitationResponse.add_member(:existing_members, Shapes::ShapeRef.new(shape: EngagementMemberSummaries, location_name: "ExistingMembers"))
-    GetEngagementInvitationResponse.add_member(:expiration_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "ExpirationDate"))
-    GetEngagementInvitationResponse.add_member(:id, Shapes::ShapeRef.new(shape: EngagementInvitationArnOrIdentifier, required: true, location_name: "Id"))
+    GetEngagementInvitationResponse.add_member(:status, Shapes::ShapeRef.new(shape: InvitationStatus, location_name: "Status"))
     GetEngagementInvitationResponse.add_member(:invitation_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "InvitationDate"))
-    GetEngagementInvitationResponse.add_member(:invitation_message, Shapes::ShapeRef.new(shape: InvitationMessage, location_name: "InvitationMessage"))
-    GetEngagementInvitationResponse.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "Payload"))
-    GetEngagementInvitationResponse.add_member(:payload_type, Shapes::ShapeRef.new(shape: EngagementInvitationPayloadType, location_name: "PayloadType"))
-    GetEngagementInvitationResponse.add_member(:receiver, Shapes::ShapeRef.new(shape: Receiver, location_name: "Receiver"))
-    GetEngagementInvitationResponse.add_member(:rejection_reason, Shapes::ShapeRef.new(shape: RejectionReasonString, location_name: "RejectionReason"))
+    GetEngagementInvitationResponse.add_member(:expiration_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "ExpirationDate"))
     GetEngagementInvitationResponse.add_member(:sender_aws_account_id, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "SenderAwsAccountId"))
     GetEngagementInvitationResponse.add_member(:sender_company_name, Shapes::ShapeRef.new(shape: GetEngagementInvitationResponseSenderCompanyNameString, location_name: "SenderCompanyName"))
-    GetEngagementInvitationResponse.add_member(:status, Shapes::ShapeRef.new(shape: InvitationStatus, location_name: "Status"))
+    GetEngagementInvitationResponse.add_member(:receiver, Shapes::ShapeRef.new(shape: Receiver, location_name: "Receiver"))
+    GetEngagementInvitationResponse.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
+    GetEngagementInvitationResponse.add_member(:rejection_reason, Shapes::ShapeRef.new(shape: RejectionReasonString, location_name: "RejectionReason"))
+    GetEngagementInvitationResponse.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "Payload"))
+    GetEngagementInvitationResponse.add_member(:invitation_message, Shapes::ShapeRef.new(shape: InvitationMessage, location_name: "InvitationMessage"))
+    GetEngagementInvitationResponse.add_member(:engagement_description, Shapes::ShapeRef.new(shape: EngagementDescription, location_name: "EngagementDescription"))
+    GetEngagementInvitationResponse.add_member(:existing_members, Shapes::ShapeRef.new(shape: EngagementMemberSummaries, location_name: "ExistingMembers"))
     GetEngagementInvitationResponse.struct_class = Types::GetEngagementInvitationResponse
 
     GetEngagementRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     GetEngagementRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: EngagementArnOrIdentifier, required: true, location_name: "Identifier"))
     GetEngagementRequest.struct_class = Types::GetEngagementRequest
 
+    GetEngagementResponse.add_member(:id, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "Id"))
     GetEngagementResponse.add_member(:arn, Shapes::ShapeRef.new(shape: EngagementArn, location_name: "Arn"))
-    GetEngagementResponse.add_member(:contexts, Shapes::ShapeRef.new(shape: EngagementContexts, location_name: "Contexts"))
+    GetEngagementResponse.add_member(:title, Shapes::ShapeRef.new(shape: EngagementTitle, location_name: "Title"))
+    GetEngagementResponse.add_member(:description, Shapes::ShapeRef.new(shape: EngagementDescription, location_name: "Description"))
     GetEngagementResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedAt"))
     GetEngagementResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "CreatedBy"))
-    GetEngagementResponse.add_member(:description, Shapes::ShapeRef.new(shape: EngagementDescription, location_name: "Description"))
-    GetEngagementResponse.add_member(:id, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "Id"))
     GetEngagementResponse.add_member(:member_count, Shapes::ShapeRef.new(shape: Integer, location_name: "MemberCount"))
-    GetEngagementResponse.add_member(:title, Shapes::ShapeRef.new(shape: EngagementTitle, location_name: "Title"))
+    GetEngagementResponse.add_member(:contexts, Shapes::ShapeRef.new(shape: EngagementContexts, location_name: "Contexts"))
     GetEngagementResponse.struct_class = Types::GetEngagementResponse
 
     GetOpportunityRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     GetOpportunityRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: OpportunityIdentifier, required: true, location_name: "Identifier"))
     GetOpportunityRequest.struct_class = Types::GetOpportunityRequest
 
-    GetOpportunityResponse.add_member(:arn, Shapes::ShapeRef.new(shape: OpportunityArn, location_name: "Arn"))
     GetOpportunityResponse.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    GetOpportunityResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "CreatedDate"))
-    GetOpportunityResponse.add_member(:customer, Shapes::ShapeRef.new(shape: Customer, location_name: "Customer"))
-    GetOpportunityResponse.add_member(:id, Shapes::ShapeRef.new(shape: OpportunityIdentifier, required: true, location_name: "Id"))
-    GetOpportunityResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "LastModifiedDate"))
-    GetOpportunityResponse.add_member(:life_cycle, Shapes::ShapeRef.new(shape: LifeCycle, location_name: "LifeCycle"))
-    GetOpportunityResponse.add_member(:marketing, Shapes::ShapeRef.new(shape: Marketing, location_name: "Marketing"))
-    GetOpportunityResponse.add_member(:national_security, Shapes::ShapeRef.new(shape: NationalSecurity, location_name: "NationalSecurity"))
-    GetOpportunityResponse.add_member(:opportunity_team, Shapes::ShapeRef.new(shape: PartnerOpportunityTeamMembersList, location_name: "OpportunityTeam"))
-    GetOpportunityResponse.add_member(:opportunity_type, Shapes::ShapeRef.new(shape: OpportunityType, location_name: "OpportunityType"))
-    GetOpportunityResponse.add_member(:partner_opportunity_identifier, Shapes::ShapeRef.new(shape: GetOpportunityResponsePartnerOpportunityIdentifierString, location_name: "PartnerOpportunityIdentifier"))
     GetOpportunityResponse.add_member(:primary_needs_from_aws, Shapes::ShapeRef.new(shape: PrimaryNeedsFromAws, location_name: "PrimaryNeedsFromAws"))
+    GetOpportunityResponse.add_member(:national_security, Shapes::ShapeRef.new(shape: NationalSecurity, location_name: "NationalSecurity"))
+    GetOpportunityResponse.add_member(:partner_opportunity_identifier, Shapes::ShapeRef.new(shape: GetOpportunityResponsePartnerOpportunityIdentifierString, location_name: "PartnerOpportunityIdentifier"))
+    GetOpportunityResponse.add_member(:customer, Shapes::ShapeRef.new(shape: Customer, location_name: "Customer"))
     GetOpportunityResponse.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "Project"))
-    GetOpportunityResponse.add_member(:related_entity_identifiers, Shapes::ShapeRef.new(shape: RelatedEntityIdentifiers, required: true, location_name: "RelatedEntityIdentifiers"))
+    GetOpportunityResponse.add_member(:opportunity_type, Shapes::ShapeRef.new(shape: OpportunityType, location_name: "OpportunityType"))
+    GetOpportunityResponse.add_member(:marketing, Shapes::ShapeRef.new(shape: Marketing, location_name: "Marketing"))
     GetOpportunityResponse.add_member(:software_revenue, Shapes::ShapeRef.new(shape: SoftwareRevenue, location_name: "SoftwareRevenue"))
+    GetOpportunityResponse.add_member(:id, Shapes::ShapeRef.new(shape: OpportunityIdentifier, required: true, location_name: "Id"))
+    GetOpportunityResponse.add_member(:arn, Shapes::ShapeRef.new(shape: OpportunityArn, location_name: "Arn"))
+    GetOpportunityResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "LastModifiedDate"))
+    GetOpportunityResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "CreatedDate"))
+    GetOpportunityResponse.add_member(:related_entity_identifiers, Shapes::ShapeRef.new(shape: RelatedEntityIdentifiers, required: true, location_name: "RelatedEntityIdentifiers"))
+    GetOpportunityResponse.add_member(:life_cycle, Shapes::ShapeRef.new(shape: LifeCycle, location_name: "LifeCycle"))
+    GetOpportunityResponse.add_member(:opportunity_team, Shapes::ShapeRef.new(shape: PartnerOpportunityTeamMembersList, location_name: "OpportunityTeam"))
     GetOpportunityResponse.struct_class = Types::GetOpportunityResponse
 
     GetResourceSnapshotJobRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     GetResourceSnapshotJobRequest.add_member(:resource_snapshot_job_identifier, Shapes::ShapeRef.new(shape: ResourceSnapshotJobIdentifier, required: true, location_name: "ResourceSnapshotJobIdentifier"))
     GetResourceSnapshotJobRequest.struct_class = Types::GetResourceSnapshotJobRequest
 
-    GetResourceSnapshotJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceSnapshotJobArn, location_name: "Arn"))
     GetResourceSnapshotJobResponse.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    GetResourceSnapshotJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedAt"))
-    GetResourceSnapshotJobResponse.add_member(:engagement_id, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "EngagementId"))
     GetResourceSnapshotJobResponse.add_member(:id, Shapes::ShapeRef.new(shape: ResourceSnapshotJobIdentifier, location_name: "Id"))
-    GetResourceSnapshotJobResponse.add_member(:last_failure, Shapes::ShapeRef.new(shape: String, location_name: "LastFailure"))
-    GetResourceSnapshotJobResponse.add_member(:last_successful_execution_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastSuccessfulExecutionDate"))
-    GetResourceSnapshotJobResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
-    GetResourceSnapshotJobResponse.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "ResourceId"))
-    GetResourceSnapshotJobResponse.add_member(:resource_snapshot_template_name, Shapes::ShapeRef.new(shape: ResourceTemplateName, location_name: "ResourceSnapshotTemplateName"))
+    GetResourceSnapshotJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceSnapshotJobArn, location_name: "Arn"))
+    GetResourceSnapshotJobResponse.add_member(:engagement_id, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "EngagementId"))
     GetResourceSnapshotJobResponse.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    GetResourceSnapshotJobResponse.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "ResourceId"))
+    GetResourceSnapshotJobResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
+    GetResourceSnapshotJobResponse.add_member(:resource_snapshot_template_name, Shapes::ShapeRef.new(shape: ResourceTemplateName, location_name: "ResourceSnapshotTemplateName"))
+    GetResourceSnapshotJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedAt"))
     GetResourceSnapshotJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: ResourceSnapshotJobStatus, location_name: "Status"))
+    GetResourceSnapshotJobResponse.add_member(:last_successful_execution_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastSuccessfulExecutionDate"))
+    GetResourceSnapshotJobResponse.add_member(:last_failure, Shapes::ShapeRef.new(shape: String, location_name: "LastFailure"))
     GetResourceSnapshotJobResponse.struct_class = Types::GetResourceSnapshotJobResponse
 
     GetResourceSnapshotRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     GetResourceSnapshotRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifier, required: true, location_name: "EngagementIdentifier"))
+    GetResourceSnapshotRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
     GetResourceSnapshotRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "ResourceIdentifier"))
     GetResourceSnapshotRequest.add_member(:resource_snapshot_template_identifier, Shapes::ShapeRef.new(shape: ResourceTemplateName, required: true, location_name: "ResourceSnapshotTemplateIdentifier"))
-    GetResourceSnapshotRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
     GetResourceSnapshotRequest.add_member(:revision, Shapes::ShapeRef.new(shape: ResourceSnapshotRevision, location_name: "Revision"))
     GetResourceSnapshotRequest.struct_class = Types::GetResourceSnapshotRequest
 
-    GetResourceSnapshotResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "Arn"))
     GetResourceSnapshotResponse.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    GetResourceSnapshotResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedAt"))
+    GetResourceSnapshotResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "Arn"))
     GetResourceSnapshotResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "CreatedBy"))
+    GetResourceSnapshotResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedAt"))
     GetResourceSnapshotResponse.add_member(:engagement_id, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "EngagementId"))
-    GetResourceSnapshotResponse.add_member(:payload, Shapes::ShapeRef.new(shape: ResourceSnapshotPayload, location_name: "Payload"))
+    GetResourceSnapshotResponse.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     GetResourceSnapshotResponse.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "ResourceId"))
     GetResourceSnapshotResponse.add_member(:resource_snapshot_template_name, Shapes::ShapeRef.new(shape: ResourceTemplateName, location_name: "ResourceSnapshotTemplateName"))
-    GetResourceSnapshotResponse.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     GetResourceSnapshotResponse.add_member(:revision, Shapes::ShapeRef.new(shape: ResourceSnapshotRevision, location_name: "Revision"))
+    GetResourceSnapshotResponse.add_member(:payload, Shapes::ShapeRef.new(shape: ResourceSnapshotPayload, location_name: "Payload"))
     GetResourceSnapshotResponse.struct_class = Types::GetResourceSnapshotResponse
 
     GetSellingSystemSettingsRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
@@ -771,8 +773,8 @@ module Aws::PartnerCentralSelling
     InternalServerException.struct_class = Types::InternalServerException
 
     Invitation.add_member(:message, Shapes::ShapeRef.new(shape: InvitationMessage, required: true, location_name: "Message"))
-    Invitation.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, required: true, location_name: "Payload"))
     Invitation.add_member(:receiver, Shapes::ShapeRef.new(shape: Receiver, required: true, location_name: "Receiver"))
+    Invitation.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, required: true, location_name: "Payload"))
     Invitation.struct_class = Types::Invitation
 
     InvitationStatusList.member = Shapes::ShapeRef.new(shape: InvitationStatus)
@@ -781,97 +783,97 @@ module Aws::PartnerCentralSelling
     LastModifiedDate.add_member(:before_last_modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "BeforeLastModifiedDate"))
     LastModifiedDate.struct_class = Types::LastModifiedDate
 
+    LifeCycle.add_member(:stage, Shapes::ShapeRef.new(shape: Stage, location_name: "Stage"))
     LifeCycle.add_member(:closed_lost_reason, Shapes::ShapeRef.new(shape: ClosedLostReason, location_name: "ClosedLostReason"))
     LifeCycle.add_member(:next_steps, Shapes::ShapeRef.new(shape: LifeCycleNextStepsString, location_name: "NextSteps"))
-    LifeCycle.add_member(:next_steps_history, Shapes::ShapeRef.new(shape: LifeCycleNextStepsHistoryList, location_name: "NextStepsHistory"))
-    LifeCycle.add_member(:review_comments, Shapes::ShapeRef.new(shape: String, location_name: "ReviewComments"))
-    LifeCycle.add_member(:review_status, Shapes::ShapeRef.new(shape: ReviewStatus, location_name: "ReviewStatus"))
-    LifeCycle.add_member(:review_status_reason, Shapes::ShapeRef.new(shape: String, location_name: "ReviewStatusReason"))
-    LifeCycle.add_member(:stage, Shapes::ShapeRef.new(shape: Stage, location_name: "Stage"))
     LifeCycle.add_member(:target_close_date, Shapes::ShapeRef.new(shape: Date, location_name: "TargetCloseDate"))
+    LifeCycle.add_member(:review_status, Shapes::ShapeRef.new(shape: ReviewStatus, location_name: "ReviewStatus"))
+    LifeCycle.add_member(:review_comments, Shapes::ShapeRef.new(shape: String, location_name: "ReviewComments"))
+    LifeCycle.add_member(:review_status_reason, Shapes::ShapeRef.new(shape: String, location_name: "ReviewStatusReason"))
+    LifeCycle.add_member(:next_steps_history, Shapes::ShapeRef.new(shape: LifeCycleNextStepsHistoryList, location_name: "NextStepsHistory"))
     LifeCycle.struct_class = Types::LifeCycle
 
-    LifeCycleForView.add_member(:next_steps, Shapes::ShapeRef.new(shape: LifeCycleForViewNextStepsString, location_name: "NextSteps"))
+    LifeCycleForView.add_member(:target_close_date, Shapes::ShapeRef.new(shape: Date, location_name: "TargetCloseDate"))
     LifeCycleForView.add_member(:review_status, Shapes::ShapeRef.new(shape: ReviewStatus, location_name: "ReviewStatus"))
     LifeCycleForView.add_member(:stage, Shapes::ShapeRef.new(shape: Stage, location_name: "Stage"))
-    LifeCycleForView.add_member(:target_close_date, Shapes::ShapeRef.new(shape: Date, location_name: "TargetCloseDate"))
+    LifeCycleForView.add_member(:next_steps, Shapes::ShapeRef.new(shape: LifeCycleForViewNextStepsString, location_name: "NextSteps"))
     LifeCycleForView.struct_class = Types::LifeCycleForView
 
     LifeCycleNextStepsHistoryList.member = Shapes::ShapeRef.new(shape: NextStepsHistory)
 
+    LifeCycleSummary.add_member(:stage, Shapes::ShapeRef.new(shape: Stage, location_name: "Stage"))
     LifeCycleSummary.add_member(:closed_lost_reason, Shapes::ShapeRef.new(shape: ClosedLostReason, location_name: "ClosedLostReason"))
     LifeCycleSummary.add_member(:next_steps, Shapes::ShapeRef.new(shape: LifeCycleSummaryNextStepsString, location_name: "NextSteps"))
-    LifeCycleSummary.add_member(:review_comments, Shapes::ShapeRef.new(shape: String, location_name: "ReviewComments"))
-    LifeCycleSummary.add_member(:review_status, Shapes::ShapeRef.new(shape: ReviewStatus, location_name: "ReviewStatus"))
-    LifeCycleSummary.add_member(:review_status_reason, Shapes::ShapeRef.new(shape: String, location_name: "ReviewStatusReason"))
-    LifeCycleSummary.add_member(:stage, Shapes::ShapeRef.new(shape: Stage, location_name: "Stage"))
     LifeCycleSummary.add_member(:target_close_date, Shapes::ShapeRef.new(shape: Date, location_name: "TargetCloseDate"))
+    LifeCycleSummary.add_member(:review_status, Shapes::ShapeRef.new(shape: ReviewStatus, location_name: "ReviewStatus"))
+    LifeCycleSummary.add_member(:review_comments, Shapes::ShapeRef.new(shape: String, location_name: "ReviewComments"))
+    LifeCycleSummary.add_member(:review_status_reason, Shapes::ShapeRef.new(shape: String, location_name: "ReviewStatusReason"))
     LifeCycleSummary.struct_class = Types::LifeCycleSummary
 
     ListEngagementByAcceptingInvitationTaskSummaries.member = Shapes::ShapeRef.new(shape: ListEngagementByAcceptingInvitationTaskSummary)
 
-    ListEngagementByAcceptingInvitationTaskSummary.add_member(:engagement_invitation_id, Shapes::ShapeRef.new(shape: EngagementInvitationIdentifier, location_name: "EngagementInvitationId"))
-    ListEngagementByAcceptingInvitationTaskSummary.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
-    ListEngagementByAcceptingInvitationTaskSummary.add_member(:opportunity_id, Shapes::ShapeRef.new(shape: OpportunityIdentifier, location_name: "OpportunityId"))
-    ListEngagementByAcceptingInvitationTaskSummary.add_member(:reason_code, Shapes::ShapeRef.new(shape: ReasonCode, location_name: "ReasonCode"))
-    ListEngagementByAcceptingInvitationTaskSummary.add_member(:resource_snapshot_job_id, Shapes::ShapeRef.new(shape: ResourceSnapshotJobIdentifier, location_name: "ResourceSnapshotJobId"))
-    ListEngagementByAcceptingInvitationTaskSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
-    ListEngagementByAcceptingInvitationTaskSummary.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn"))
     ListEngagementByAcceptingInvitationTaskSummary.add_member(:task_id, Shapes::ShapeRef.new(shape: TaskIdentifier, location_name: "TaskId"))
+    ListEngagementByAcceptingInvitationTaskSummary.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn"))
+    ListEngagementByAcceptingInvitationTaskSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
     ListEngagementByAcceptingInvitationTaskSummary.add_member(:task_status, Shapes::ShapeRef.new(shape: TaskStatus, location_name: "TaskStatus"))
+    ListEngagementByAcceptingInvitationTaskSummary.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ListEngagementByAcceptingInvitationTaskSummary.add_member(:reason_code, Shapes::ShapeRef.new(shape: ReasonCode, location_name: "ReasonCode"))
+    ListEngagementByAcceptingInvitationTaskSummary.add_member(:opportunity_id, Shapes::ShapeRef.new(shape: OpportunityIdentifier, location_name: "OpportunityId"))
+    ListEngagementByAcceptingInvitationTaskSummary.add_member(:resource_snapshot_job_id, Shapes::ShapeRef.new(shape: ResourceSnapshotJobIdentifier, location_name: "ResourceSnapshotJobId"))
+    ListEngagementByAcceptingInvitationTaskSummary.add_member(:engagement_invitation_id, Shapes::ShapeRef.new(shape: EngagementInvitationIdentifier, location_name: "EngagementInvitationId"))
     ListEngagementByAcceptingInvitationTaskSummary.struct_class = Types::ListEngagementByAcceptingInvitationTaskSummary
 
-    ListEngagementByAcceptingInvitationTasksRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    ListEngagementByAcceptingInvitationTasksRequest.add_member(:engagement_invitation_identifier, Shapes::ShapeRef.new(shape: EngagementInvitationIdentifiers, location_name: "EngagementInvitationIdentifier"))
     ListEngagementByAcceptingInvitationTasksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListEngagementByAcceptingInvitationTasksRequestMaxResultsInteger, location_name: "MaxResults"))
     ListEngagementByAcceptingInvitationTasksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListEngagementByAcceptingInvitationTasksRequestNextTokenString, location_name: "NextToken"))
-    ListEngagementByAcceptingInvitationTasksRequest.add_member(:opportunity_identifier, Shapes::ShapeRef.new(shape: OpportunityIdentifiers, location_name: "OpportunityIdentifier"))
     ListEngagementByAcceptingInvitationTasksRequest.add_member(:sort, Shapes::ShapeRef.new(shape: ListTasksSortBase, location_name: "Sort"))
-    ListEngagementByAcceptingInvitationTasksRequest.add_member(:task_identifier, Shapes::ShapeRef.new(shape: TaskIdentifiers, location_name: "TaskIdentifier"))
+    ListEngagementByAcceptingInvitationTasksRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     ListEngagementByAcceptingInvitationTasksRequest.add_member(:task_status, Shapes::ShapeRef.new(shape: TaskStatuses, location_name: "TaskStatus"))
+    ListEngagementByAcceptingInvitationTasksRequest.add_member(:opportunity_identifier, Shapes::ShapeRef.new(shape: OpportunityIdentifiers, location_name: "OpportunityIdentifier"))
+    ListEngagementByAcceptingInvitationTasksRequest.add_member(:engagement_invitation_identifier, Shapes::ShapeRef.new(shape: EngagementInvitationIdentifiers, location_name: "EngagementInvitationIdentifier"))
+    ListEngagementByAcceptingInvitationTasksRequest.add_member(:task_identifier, Shapes::ShapeRef.new(shape: TaskIdentifiers, location_name: "TaskIdentifier"))
     ListEngagementByAcceptingInvitationTasksRequest.struct_class = Types::ListEngagementByAcceptingInvitationTasksRequest
 
-    ListEngagementByAcceptingInvitationTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListEngagementByAcceptingInvitationTasksResponse.add_member(:task_summaries, Shapes::ShapeRef.new(shape: ListEngagementByAcceptingInvitationTaskSummaries, location_name: "TaskSummaries"))
+    ListEngagementByAcceptingInvitationTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListEngagementByAcceptingInvitationTasksResponse.struct_class = Types::ListEngagementByAcceptingInvitationTasksResponse
 
     ListEngagementFromOpportunityTaskSummaries.member = Shapes::ShapeRef.new(shape: ListEngagementFromOpportunityTaskSummary)
 
+    ListEngagementFromOpportunityTaskSummary.add_member(:task_id, Shapes::ShapeRef.new(shape: TaskIdentifier, location_name: "TaskId"))
+    ListEngagementFromOpportunityTaskSummary.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn"))
+    ListEngagementFromOpportunityTaskSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
+    ListEngagementFromOpportunityTaskSummary.add_member(:task_status, Shapes::ShapeRef.new(shape: TaskStatus, location_name: "TaskStatus"))
+    ListEngagementFromOpportunityTaskSummary.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ListEngagementFromOpportunityTaskSummary.add_member(:reason_code, Shapes::ShapeRef.new(shape: ReasonCode, location_name: "ReasonCode"))
+    ListEngagementFromOpportunityTaskSummary.add_member(:opportunity_id, Shapes::ShapeRef.new(shape: OpportunityIdentifier, location_name: "OpportunityId"))
+    ListEngagementFromOpportunityTaskSummary.add_member(:resource_snapshot_job_id, Shapes::ShapeRef.new(shape: ResourceSnapshotJobIdentifier, location_name: "ResourceSnapshotJobId"))
     ListEngagementFromOpportunityTaskSummary.add_member(:engagement_id, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "EngagementId"))
     ListEngagementFromOpportunityTaskSummary.add_member(:engagement_invitation_id, Shapes::ShapeRef.new(shape: EngagementInvitationIdentifier, location_name: "EngagementInvitationId"))
-    ListEngagementFromOpportunityTaskSummary.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
-    ListEngagementFromOpportunityTaskSummary.add_member(:opportunity_id, Shapes::ShapeRef.new(shape: OpportunityIdentifier, location_name: "OpportunityId"))
-    ListEngagementFromOpportunityTaskSummary.add_member(:reason_code, Shapes::ShapeRef.new(shape: ReasonCode, location_name: "ReasonCode"))
-    ListEngagementFromOpportunityTaskSummary.add_member(:resource_snapshot_job_id, Shapes::ShapeRef.new(shape: ResourceSnapshotJobIdentifier, location_name: "ResourceSnapshotJobId"))
-    ListEngagementFromOpportunityTaskSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
-    ListEngagementFromOpportunityTaskSummary.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn"))
-    ListEngagementFromOpportunityTaskSummary.add_member(:task_id, Shapes::ShapeRef.new(shape: TaskIdentifier, location_name: "TaskId"))
-    ListEngagementFromOpportunityTaskSummary.add_member(:task_status, Shapes::ShapeRef.new(shape: TaskStatus, location_name: "TaskStatus"))
     ListEngagementFromOpportunityTaskSummary.struct_class = Types::ListEngagementFromOpportunityTaskSummary
 
-    ListEngagementFromOpportunityTasksRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    ListEngagementFromOpportunityTasksRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifiers, location_name: "EngagementIdentifier"))
     ListEngagementFromOpportunityTasksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListEngagementFromOpportunityTasksRequestMaxResultsInteger, location_name: "MaxResults"))
     ListEngagementFromOpportunityTasksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListEngagementFromOpportunityTasksRequestNextTokenString, location_name: "NextToken"))
-    ListEngagementFromOpportunityTasksRequest.add_member(:opportunity_identifier, Shapes::ShapeRef.new(shape: OpportunityIdentifiers, location_name: "OpportunityIdentifier"))
     ListEngagementFromOpportunityTasksRequest.add_member(:sort, Shapes::ShapeRef.new(shape: ListTasksSortBase, location_name: "Sort"))
-    ListEngagementFromOpportunityTasksRequest.add_member(:task_identifier, Shapes::ShapeRef.new(shape: TaskIdentifiers, location_name: "TaskIdentifier"))
+    ListEngagementFromOpportunityTasksRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     ListEngagementFromOpportunityTasksRequest.add_member(:task_status, Shapes::ShapeRef.new(shape: TaskStatuses, location_name: "TaskStatus"))
+    ListEngagementFromOpportunityTasksRequest.add_member(:task_identifier, Shapes::ShapeRef.new(shape: TaskIdentifiers, location_name: "TaskIdentifier"))
+    ListEngagementFromOpportunityTasksRequest.add_member(:opportunity_identifier, Shapes::ShapeRef.new(shape: OpportunityIdentifiers, location_name: "OpportunityIdentifier"))
+    ListEngagementFromOpportunityTasksRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifiers, location_name: "EngagementIdentifier"))
     ListEngagementFromOpportunityTasksRequest.struct_class = Types::ListEngagementFromOpportunityTasksRequest
 
-    ListEngagementFromOpportunityTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListEngagementFromOpportunityTasksResponse.add_member(:task_summaries, Shapes::ShapeRef.new(shape: ListEngagementFromOpportunityTaskSummaries, location_name: "TaskSummaries"))
+    ListEngagementFromOpportunityTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListEngagementFromOpportunityTasksResponse.struct_class = Types::ListEngagementFromOpportunityTasksResponse
 
     ListEngagementInvitationsRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    ListEngagementInvitationsRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifiers, location_name: "EngagementIdentifier"))
     ListEngagementInvitationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
     ListEngagementInvitationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListEngagementInvitationsRequest.add_member(:participant_type, Shapes::ShapeRef.new(shape: ParticipantType, required: true, location_name: "ParticipantType"))
-    ListEngagementInvitationsRequest.add_member(:payload_type, Shapes::ShapeRef.new(shape: EngagementInvitationsPayloadType, location_name: "PayloadType"))
-    ListEngagementInvitationsRequest.add_member(:sender_aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountIdOrAliasList, location_name: "SenderAwsAccountId"))
     ListEngagementInvitationsRequest.add_member(:sort, Shapes::ShapeRef.new(shape: OpportunityEngagementInvitationSort, location_name: "Sort"))
+    ListEngagementInvitationsRequest.add_member(:payload_type, Shapes::ShapeRef.new(shape: EngagementInvitationsPayloadType, location_name: "PayloadType"))
+    ListEngagementInvitationsRequest.add_member(:participant_type, Shapes::ShapeRef.new(shape: ParticipantType, required: true, location_name: "ParticipantType"))
     ListEngagementInvitationsRequest.add_member(:status, Shapes::ShapeRef.new(shape: InvitationStatusList, location_name: "Status"))
+    ListEngagementInvitationsRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifiers, location_name: "EngagementIdentifier"))
+    ListEngagementInvitationsRequest.add_member(:sender_aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountIdOrAliasList, location_name: "SenderAwsAccountId"))
     ListEngagementInvitationsRequest.struct_class = Types::ListEngagementInvitationsRequest
 
     ListEngagementInvitationsResponse.add_member(:engagement_invitation_summaries, Shapes::ShapeRef.new(shape: EngagementInvitationSummaries, location_name: "EngagementInvitationSummaries"))
@@ -889,12 +891,12 @@ module Aws::PartnerCentralSelling
     ListEngagementMembersResponse.struct_class = Types::ListEngagementMembersResponse
 
     ListEngagementResourceAssociationsRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    ListEngagementResourceAssociationsRequest.add_member(:created_by, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "CreatedBy"))
-    ListEngagementResourceAssociationsRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "EngagementIdentifier"))
     ListEngagementResourceAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListEngagementResourceAssociationsRequestMaxResultsInteger, location_name: "MaxResults"))
     ListEngagementResourceAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListEngagementResourceAssociationsRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "ResourceIdentifier"))
+    ListEngagementResourceAssociationsRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "EngagementIdentifier"))
     ListEngagementResourceAssociationsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    ListEngagementResourceAssociationsRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "ResourceIdentifier"))
+    ListEngagementResourceAssociationsRequest.add_member(:created_by, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "CreatedBy"))
     ListEngagementResourceAssociationsRequest.struct_class = Types::ListEngagementResourceAssociationsRequest
 
     ListEngagementResourceAssociationsResponse.add_member(:engagement_resource_association_summaries, Shapes::ShapeRef.new(shape: EngagementResourceAssociationSummaryList, required: true, location_name: "EngagementResourceAssociationSummaries"))
@@ -903,11 +905,11 @@ module Aws::PartnerCentralSelling
 
     ListEngagementsRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     ListEngagementsRequest.add_member(:created_by, Shapes::ShapeRef.new(shape: AwsAccountList, location_name: "CreatedBy"))
-    ListEngagementsRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifiers, location_name: "EngagementIdentifier"))
     ListEngagementsRequest.add_member(:exclude_created_by, Shapes::ShapeRef.new(shape: AwsAccountList, location_name: "ExcludeCreatedBy"))
+    ListEngagementsRequest.add_member(:sort, Shapes::ShapeRef.new(shape: EngagementSort, location_name: "Sort"))
     ListEngagementsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: EngagementPageSize, location_name: "MaxResults"))
     ListEngagementsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListEngagementsRequest.add_member(:sort, Shapes::ShapeRef.new(shape: EngagementSort, location_name: "Sort"))
+    ListEngagementsRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifiers, location_name: "EngagementIdentifier"))
     ListEngagementsRequest.struct_class = Types::ListEngagementsRequest
 
     ListEngagementsResponse.add_member(:engagement_summary_list, Shapes::ShapeRef.new(shape: EngagementSummaryList, required: true, location_name: "EngagementSummaryList"))
@@ -915,14 +917,14 @@ module Aws::PartnerCentralSelling
     ListEngagementsResponse.struct_class = Types::ListEngagementsResponse
 
     ListOpportunitiesRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    ListOpportunitiesRequest.add_member(:customer_company_name, Shapes::ShapeRef.new(shape: ListOpportunitiesRequestCustomerCompanyNameList, location_name: "CustomerCompanyName"))
-    ListOpportunitiesRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ListOpportunitiesRequestIdentifierList, location_name: "Identifier"))
-    ListOpportunitiesRequest.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: LastModifiedDate, location_name: "LastModifiedDate"))
-    ListOpportunitiesRequest.add_member(:life_cycle_review_status, Shapes::ShapeRef.new(shape: ListOpportunitiesRequestLifeCycleReviewStatusList, location_name: "LifeCycleReviewStatus"))
-    ListOpportunitiesRequest.add_member(:life_cycle_stage, Shapes::ShapeRef.new(shape: ListOpportunitiesRequestLifeCycleStageList, location_name: "LifeCycleStage"))
     ListOpportunitiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
     ListOpportunitiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListOpportunitiesRequest.add_member(:sort, Shapes::ShapeRef.new(shape: OpportunitySort, location_name: "Sort"))
+    ListOpportunitiesRequest.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: LastModifiedDate, location_name: "LastModifiedDate"))
+    ListOpportunitiesRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ListOpportunitiesRequestIdentifierList, location_name: "Identifier"))
+    ListOpportunitiesRequest.add_member(:life_cycle_stage, Shapes::ShapeRef.new(shape: ListOpportunitiesRequestLifeCycleStageList, location_name: "LifeCycleStage"))
+    ListOpportunitiesRequest.add_member(:life_cycle_review_status, Shapes::ShapeRef.new(shape: ListOpportunitiesRequestLifeCycleReviewStatusList, location_name: "LifeCycleReviewStatus"))
+    ListOpportunitiesRequest.add_member(:customer_company_name, Shapes::ShapeRef.new(shape: ListOpportunitiesRequestCustomerCompanyNameList, location_name: "CustomerCompanyName"))
     ListOpportunitiesRequest.struct_class = Types::ListOpportunitiesRequest
 
     ListOpportunitiesRequestCustomerCompanyNameList.member = Shapes::ShapeRef.new(shape: String)
@@ -933,43 +935,43 @@ module Aws::PartnerCentralSelling
 
     ListOpportunitiesRequestLifeCycleStageList.member = Shapes::ShapeRef.new(shape: Stage)
 
-    ListOpportunitiesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListOpportunitiesResponse.add_member(:opportunity_summaries, Shapes::ShapeRef.new(shape: OpportunitySummaries, required: true, location_name: "OpportunitySummaries"))
+    ListOpportunitiesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListOpportunitiesResponse.struct_class = Types::ListOpportunitiesResponse
 
     ListResourceSnapshotJobsRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    ListResourceSnapshotJobsRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "EngagementIdentifier"))
     ListResourceSnapshotJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListResourceSnapshotJobsRequestMaxResultsInteger, location_name: "MaxResults"))
     ListResourceSnapshotJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListResourceSnapshotJobsRequest.add_member(:sort, Shapes::ShapeRef.new(shape: SortObject, location_name: "Sort"))
+    ListResourceSnapshotJobsRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "EngagementIdentifier"))
     ListResourceSnapshotJobsRequest.add_member(:status, Shapes::ShapeRef.new(shape: ResourceSnapshotJobStatus, location_name: "Status"))
+    ListResourceSnapshotJobsRequest.add_member(:sort, Shapes::ShapeRef.new(shape: SortObject, location_name: "Sort"))
     ListResourceSnapshotJobsRequest.struct_class = Types::ListResourceSnapshotJobsRequest
 
-    ListResourceSnapshotJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListResourceSnapshotJobsResponse.add_member(:resource_snapshot_job_summaries, Shapes::ShapeRef.new(shape: ResourceSnapshotJobSummaryList, required: true, location_name: "ResourceSnapshotJobSummaries"))
+    ListResourceSnapshotJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListResourceSnapshotJobsResponse.struct_class = Types::ListResourceSnapshotJobsResponse
 
     ListResourceSnapshotsRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    ListResourceSnapshotsRequest.add_member(:created_by, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "CreatedBy"))
-    ListResourceSnapshotsRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifier, required: true, location_name: "EngagementIdentifier"))
     ListResourceSnapshotsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListResourceSnapshotsRequestMaxResultsInteger, location_name: "MaxResults"))
     ListResourceSnapshotsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListResourceSnapshotsRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifier, required: true, location_name: "EngagementIdentifier"))
+    ListResourceSnapshotsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ListResourceSnapshotsRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "ResourceIdentifier"))
     ListResourceSnapshotsRequest.add_member(:resource_snapshot_template_identifier, Shapes::ShapeRef.new(shape: ResourceTemplateName, location_name: "ResourceSnapshotTemplateIdentifier"))
-    ListResourceSnapshotsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    ListResourceSnapshotsRequest.add_member(:created_by, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "CreatedBy"))
     ListResourceSnapshotsRequest.struct_class = Types::ListResourceSnapshotsRequest
 
-    ListResourceSnapshotsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListResourceSnapshotsResponse.add_member(:resource_snapshot_summaries, Shapes::ShapeRef.new(shape: ResourceSnapshotSummaryList, required: true, location_name: "ResourceSnapshotSummaries"))
+    ListResourceSnapshotsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListResourceSnapshotsResponse.struct_class = Types::ListResourceSnapshotsResponse
 
     ListSolutionsRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    ListSolutionsRequest.add_member(:category, Shapes::ShapeRef.new(shape: ListSolutionsRequestCategoryList, location_name: "Category"))
-    ListSolutionsRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ListSolutionsRequestIdentifierList, location_name: "Identifier"))
     ListSolutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
     ListSolutionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListSolutionsRequest.add_member(:sort, Shapes::ShapeRef.new(shape: SolutionSort, location_name: "Sort"))
     ListSolutionsRequest.add_member(:status, Shapes::ShapeRef.new(shape: ListSolutionsRequestStatusList, location_name: "Status"))
+    ListSolutionsRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ListSolutionsRequestIdentifierList, location_name: "Identifier"))
+    ListSolutionsRequest.add_member(:category, Shapes::ShapeRef.new(shape: ListSolutionsRequestCategoryList, location_name: "Category"))
     ListSolutionsRequest.struct_class = Types::ListSolutionsRequest
 
     ListSolutionsRequestCategoryList.member = Shapes::ShapeRef.new(shape: String)
@@ -978,8 +980,8 @@ module Aws::PartnerCentralSelling
 
     ListSolutionsRequestStatusList.member = Shapes::ShapeRef.new(shape: SolutionStatus)
 
-    ListSolutionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListSolutionsResponse.add_member(:solution_summaries, Shapes::ShapeRef.new(shape: SolutionList, required: true, location_name: "SolutionSummaries"))
+    ListSolutionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListSolutionsResponse.struct_class = Types::ListSolutionsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourceArn, required: true, location_name: "ResourceArn"))
@@ -988,60 +990,60 @@ module Aws::PartnerCentralSelling
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
-    ListTasksSortBase.add_member(:sort_by, Shapes::ShapeRef.new(shape: ListTasksSortName, required: true, location_name: "SortBy"))
     ListTasksSortBase.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "SortOrder"))
+    ListTasksSortBase.add_member(:sort_by, Shapes::ShapeRef.new(shape: ListTasksSortName, required: true, location_name: "SortBy"))
     ListTasksSortBase.struct_class = Types::ListTasksSortBase
 
-    Marketing.add_member(:aws_funding_used, Shapes::ShapeRef.new(shape: AwsFundingUsed, location_name: "AwsFundingUsed"))
     Marketing.add_member(:campaign_name, Shapes::ShapeRef.new(shape: String, location_name: "CampaignName"))
-    Marketing.add_member(:channels, Shapes::ShapeRef.new(shape: Channels, location_name: "Channels"))
     Marketing.add_member(:source, Shapes::ShapeRef.new(shape: MarketingSource, location_name: "Source"))
     Marketing.add_member(:use_cases, Shapes::ShapeRef.new(shape: UseCases, location_name: "UseCases"))
+    Marketing.add_member(:channels, Shapes::ShapeRef.new(shape: Channels, location_name: "Channels"))
+    Marketing.add_member(:aws_funding_used, Shapes::ShapeRef.new(shape: AwsFundingUsed, location_name: "AwsFundingUsed"))
     Marketing.struct_class = Types::Marketing
 
     MonetaryValue.add_member(:amount, Shapes::ShapeRef.new(shape: MonetaryValueAmountString, required: true, location_name: "Amount"))
     MonetaryValue.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, required: true, location_name: "CurrencyCode"))
     MonetaryValue.struct_class = Types::MonetaryValue
 
-    NextStepsHistory.add_member(:time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "Time"))
     NextStepsHistory.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
+    NextStepsHistory.add_member(:time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "Time"))
     NextStepsHistory.struct_class = Types::NextStepsHistory
 
-    OpportunityEngagementInvitationSort.add_member(:sort_by, Shapes::ShapeRef.new(shape: OpportunityEngagementInvitationSortName, required: true, location_name: "SortBy"))
     OpportunityEngagementInvitationSort.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "SortOrder"))
+    OpportunityEngagementInvitationSort.add_member(:sort_by, Shapes::ShapeRef.new(shape: OpportunityEngagementInvitationSortName, required: true, location_name: "SortBy"))
     OpportunityEngagementInvitationSort.struct_class = Types::OpportunityEngagementInvitationSort
 
     OpportunityIdentifiers.member = Shapes::ShapeRef.new(shape: OpportunityIdentifier)
 
+    OpportunityInvitationPayload.add_member(:sender_contacts, Shapes::ShapeRef.new(shape: SenderContactList, location_name: "SenderContacts"))
+    OpportunityInvitationPayload.add_member(:receiver_responsibilities, Shapes::ShapeRef.new(shape: ReceiverResponsibilityList, required: true, location_name: "ReceiverResponsibilities"))
     OpportunityInvitationPayload.add_member(:customer, Shapes::ShapeRef.new(shape: EngagementCustomer, required: true, location_name: "Customer"))
     OpportunityInvitationPayload.add_member(:project, Shapes::ShapeRef.new(shape: ProjectDetails, required: true, location_name: "Project"))
-    OpportunityInvitationPayload.add_member(:receiver_responsibilities, Shapes::ShapeRef.new(shape: ReceiverResponsibilityList, required: true, location_name: "ReceiverResponsibilities"))
-    OpportunityInvitationPayload.add_member(:sender_contacts, Shapes::ShapeRef.new(shape: SenderContactList, location_name: "SenderContacts"))
     OpportunityInvitationPayload.struct_class = Types::OpportunityInvitationPayload
 
-    OpportunitySort.add_member(:sort_by, Shapes::ShapeRef.new(shape: OpportunitySortName, required: true, location_name: "SortBy"))
     OpportunitySort.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "SortOrder"))
+    OpportunitySort.add_member(:sort_by, Shapes::ShapeRef.new(shape: OpportunitySortName, required: true, location_name: "SortBy"))
     OpportunitySort.struct_class = Types::OpportunitySort
 
     OpportunitySummaries.member = Shapes::ShapeRef.new(shape: OpportunitySummary)
 
-    OpportunitySummary.add_member(:arn, Shapes::ShapeRef.new(shape: OpportunityArn, location_name: "Arn"))
     OpportunitySummary.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    OpportunitySummary.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedDate"))
-    OpportunitySummary.add_member(:customer, Shapes::ShapeRef.new(shape: CustomerSummary, location_name: "Customer"))
     OpportunitySummary.add_member(:id, Shapes::ShapeRef.new(shape: OpportunityIdentifier, location_name: "Id"))
-    OpportunitySummary.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedDate"))
-    OpportunitySummary.add_member(:life_cycle, Shapes::ShapeRef.new(shape: LifeCycleSummary, location_name: "LifeCycle"))
-    OpportunitySummary.add_member(:opportunity_type, Shapes::ShapeRef.new(shape: OpportunityType, location_name: "OpportunityType"))
+    OpportunitySummary.add_member(:arn, Shapes::ShapeRef.new(shape: OpportunityArn, location_name: "Arn"))
     OpportunitySummary.add_member(:partner_opportunity_identifier, Shapes::ShapeRef.new(shape: String, location_name: "PartnerOpportunityIdentifier"))
+    OpportunitySummary.add_member(:opportunity_type, Shapes::ShapeRef.new(shape: OpportunityType, location_name: "OpportunityType"))
+    OpportunitySummary.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedDate"))
+    OpportunitySummary.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedDate"))
+    OpportunitySummary.add_member(:life_cycle, Shapes::ShapeRef.new(shape: LifeCycleSummary, location_name: "LifeCycle"))
+    OpportunitySummary.add_member(:customer, Shapes::ShapeRef.new(shape: CustomerSummary, location_name: "Customer"))
     OpportunitySummary.add_member(:project, Shapes::ShapeRef.new(shape: ProjectSummary, location_name: "Project"))
     OpportunitySummary.struct_class = Types::OpportunitySummary
 
-    OpportunitySummaryView.add_member(:customer, Shapes::ShapeRef.new(shape: Customer, location_name: "Customer"))
+    OpportunitySummaryView.add_member(:opportunity_type, Shapes::ShapeRef.new(shape: OpportunityType, location_name: "OpportunityType"))
     OpportunitySummaryView.add_member(:lifecycle, Shapes::ShapeRef.new(shape: LifeCycleForView, location_name: "Lifecycle"))
     OpportunitySummaryView.add_member(:opportunity_team, Shapes::ShapeRef.new(shape: PartnerOpportunityTeamMembersList, location_name: "OpportunityTeam"))
-    OpportunitySummaryView.add_member(:opportunity_type, Shapes::ShapeRef.new(shape: OpportunityType, location_name: "OpportunityType"))
     OpportunitySummaryView.add_member(:primary_needs_from_aws, Shapes::ShapeRef.new(shape: PrimaryNeedsFromAws, location_name: "PrimaryNeedsFromAws"))
+    OpportunitySummaryView.add_member(:customer, Shapes::ShapeRef.new(shape: Customer, location_name: "Customer"))
     OpportunitySummaryView.add_member(:project, Shapes::ShapeRef.new(shape: ProjectView, location_name: "Project"))
     OpportunitySummaryView.add_member(:related_entity_identifiers, Shapes::ShapeRef.new(shape: RelatedEntityIdentifiers, location_name: "RelatedEntityIdentifiers"))
     OpportunitySummaryView.struct_class = Types::OpportunitySummaryView
@@ -1056,39 +1058,39 @@ module Aws::PartnerCentralSelling
 
     PrimaryNeedsFromAws.member = Shapes::ShapeRef.new(shape: PrimaryNeedFromAws)
 
-    ProfileNextStepsHistory.add_member(:time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "Time"))
     ProfileNextStepsHistory.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
+    ProfileNextStepsHistory.add_member(:time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "Time"))
     ProfileNextStepsHistory.struct_class = Types::ProfileNextStepsHistory
 
-    Project.add_member(:additional_comments, Shapes::ShapeRef.new(shape: ProjectAdditionalCommentsString, location_name: "AdditionalComments"))
-    Project.add_member(:apn_programs, Shapes::ShapeRef.new(shape: ApnPrograms, location_name: "ApnPrograms"))
-    Project.add_member(:competitor_name, Shapes::ShapeRef.new(shape: CompetitorName, location_name: "CompetitorName"))
-    Project.add_member(:customer_business_problem, Shapes::ShapeRef.new(shape: ProjectCustomerBusinessProblemString, location_name: "CustomerBusinessProblem"))
-    Project.add_member(:customer_use_case, Shapes::ShapeRef.new(shape: String, location_name: "CustomerUseCase"))
     Project.add_member(:delivery_models, Shapes::ShapeRef.new(shape: DeliveryModels, location_name: "DeliveryModels"))
     Project.add_member(:expected_customer_spend, Shapes::ShapeRef.new(shape: ExpectedCustomerSpendList, location_name: "ExpectedCustomerSpend"))
-    Project.add_member(:other_competitor_names, Shapes::ShapeRef.new(shape: ProjectOtherCompetitorNamesString, location_name: "OtherCompetitorNames"))
-    Project.add_member(:other_solution_description, Shapes::ShapeRef.new(shape: ProjectOtherSolutionDescriptionString, location_name: "OtherSolutionDescription"))
+    Project.add_member(:title, Shapes::ShapeRef.new(shape: ProjectTitleString, location_name: "Title"))
+    Project.add_member(:apn_programs, Shapes::ShapeRef.new(shape: ApnPrograms, location_name: "ApnPrograms"))
+    Project.add_member(:customer_business_problem, Shapes::ShapeRef.new(shape: ProjectCustomerBusinessProblemString, location_name: "CustomerBusinessProblem"))
+    Project.add_member(:customer_use_case, Shapes::ShapeRef.new(shape: String, location_name: "CustomerUseCase"))
     Project.add_member(:related_opportunity_identifier, Shapes::ShapeRef.new(shape: OpportunityIdentifier, location_name: "RelatedOpportunityIdentifier"))
     Project.add_member(:sales_activities, Shapes::ShapeRef.new(shape: SalesActivities, location_name: "SalesActivities"))
-    Project.add_member(:title, Shapes::ShapeRef.new(shape: ProjectTitleString, location_name: "Title"))
+    Project.add_member(:competitor_name, Shapes::ShapeRef.new(shape: CompetitorName, location_name: "CompetitorName"))
+    Project.add_member(:other_competitor_names, Shapes::ShapeRef.new(shape: ProjectOtherCompetitorNamesString, location_name: "OtherCompetitorNames"))
+    Project.add_member(:other_solution_description, Shapes::ShapeRef.new(shape: ProjectOtherSolutionDescriptionString, location_name: "OtherSolutionDescription"))
+    Project.add_member(:additional_comments, Shapes::ShapeRef.new(shape: ProjectAdditionalCommentsString, location_name: "AdditionalComments"))
     Project.struct_class = Types::Project
 
     ProjectDetails.add_member(:business_problem, Shapes::ShapeRef.new(shape: EngagementCustomerBusinessProblem, required: true, location_name: "BusinessProblem"))
-    ProjectDetails.add_member(:expected_customer_spend, Shapes::ShapeRef.new(shape: ExpectedCustomerSpendList, required: true, location_name: "ExpectedCustomerSpend"))
-    ProjectDetails.add_member(:target_completion_date, Shapes::ShapeRef.new(shape: Date, required: true, location_name: "TargetCompletionDate"))
     ProjectDetails.add_member(:title, Shapes::ShapeRef.new(shape: ProjectDetailsTitleString, required: true, location_name: "Title"))
+    ProjectDetails.add_member(:target_completion_date, Shapes::ShapeRef.new(shape: Date, required: true, location_name: "TargetCompletionDate"))
+    ProjectDetails.add_member(:expected_customer_spend, Shapes::ShapeRef.new(shape: ExpectedCustomerSpendList, required: true, location_name: "ExpectedCustomerSpend"))
     ProjectDetails.struct_class = Types::ProjectDetails
 
     ProjectSummary.add_member(:delivery_models, Shapes::ShapeRef.new(shape: DeliveryModels, location_name: "DeliveryModels"))
     ProjectSummary.add_member(:expected_customer_spend, Shapes::ShapeRef.new(shape: ExpectedCustomerSpendList, location_name: "ExpectedCustomerSpend"))
     ProjectSummary.struct_class = Types::ProjectSummary
 
-    ProjectView.add_member(:customer_use_case, Shapes::ShapeRef.new(shape: String, location_name: "CustomerUseCase"))
     ProjectView.add_member(:delivery_models, Shapes::ShapeRef.new(shape: DeliveryModels, location_name: "DeliveryModels"))
     ProjectView.add_member(:expected_customer_spend, Shapes::ShapeRef.new(shape: ExpectedCustomerSpendList, location_name: "ExpectedCustomerSpend"))
-    ProjectView.add_member(:other_solution_description, Shapes::ShapeRef.new(shape: ProjectViewOtherSolutionDescriptionString, location_name: "OtherSolutionDescription"))
+    ProjectView.add_member(:customer_use_case, Shapes::ShapeRef.new(shape: String, location_name: "CustomerUseCase"))
     ProjectView.add_member(:sales_activities, Shapes::ShapeRef.new(shape: SalesActivities, location_name: "SalesActivities"))
+    ProjectView.add_member(:other_solution_description, Shapes::ShapeRef.new(shape: ProjectViewOtherSolutionDescriptionString, location_name: "OtherSolutionDescription"))
     ProjectView.struct_class = Types::ProjectView
 
     PutSellingSystemSettingsRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
@@ -1113,16 +1115,16 @@ module Aws::PartnerCentralSelling
     RejectEngagementInvitationRequest.struct_class = Types::RejectEngagementInvitationRequest
 
     RelatedEntityIdentifiers.add_member(:aws_marketplace_offers, Shapes::ShapeRef.new(shape: AwsMarketplaceOfferIdentifiers, location_name: "AwsMarketplaceOffers"))
-    RelatedEntityIdentifiers.add_member(:aws_products, Shapes::ShapeRef.new(shape: AwsProductIdentifiers, location_name: "AwsProducts"))
     RelatedEntityIdentifiers.add_member(:solutions, Shapes::ShapeRef.new(shape: SolutionIdentifiers, location_name: "Solutions"))
+    RelatedEntityIdentifiers.add_member(:aws_products, Shapes::ShapeRef.new(shape: AwsProductIdentifiers, location_name: "AwsProducts"))
     RelatedEntityIdentifiers.struct_class = Types::RelatedEntityIdentifiers
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    ResourceSnapshotJobSummary.add_member(:id, Shapes::ShapeRef.new(shape: ResourceSnapshotJobIdentifier, location_name: "Id"))
     ResourceSnapshotJobSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceSnapshotJobArn, location_name: "Arn"))
     ResourceSnapshotJobSummary.add_member(:engagement_id, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "EngagementId"))
-    ResourceSnapshotJobSummary.add_member(:id, Shapes::ShapeRef.new(shape: ResourceSnapshotJobIdentifier, location_name: "Id"))
     ResourceSnapshotJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: ResourceSnapshotJobStatus, location_name: "Status"))
     ResourceSnapshotJobSummary.struct_class = Types::ResourceSnapshotJobSummary
 
@@ -1135,21 +1137,21 @@ module Aws::PartnerCentralSelling
     ResourceSnapshotPayload.struct_class = Types::ResourceSnapshotPayload
 
     ResourceSnapshotSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceSnapshotArn, location_name: "Arn"))
-    ResourceSnapshotSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "CreatedBy"))
+    ResourceSnapshotSummary.add_member(:revision, Shapes::ShapeRef.new(shape: ResourceSnapshotRevision, location_name: "Revision"))
+    ResourceSnapshotSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ResourceSnapshotSummary.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "ResourceId"))
     ResourceSnapshotSummary.add_member(:resource_snapshot_template_name, Shapes::ShapeRef.new(shape: ResourceTemplateName, location_name: "ResourceSnapshotTemplateName"))
-    ResourceSnapshotSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
-    ResourceSnapshotSummary.add_member(:revision, Shapes::ShapeRef.new(shape: ResourceSnapshotRevision, location_name: "Revision"))
+    ResourceSnapshotSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "CreatedBy"))
     ResourceSnapshotSummary.struct_class = Types::ResourceSnapshotSummary
 
     ResourceSnapshotSummaryList.member = Shapes::ShapeRef.new(shape: ResourceSnapshotSummary)
 
     SalesActivities.member = Shapes::ShapeRef.new(shape: SalesActivity)
 
-    SenderContact.add_member(:business_title, Shapes::ShapeRef.new(shape: JobTitle, location_name: "BusinessTitle"))
     SenderContact.add_member(:email, Shapes::ShapeRef.new(shape: SenderContactEmail, required: true, location_name: "Email"))
     SenderContact.add_member(:first_name, Shapes::ShapeRef.new(shape: Name, location_name: "FirstName"))
     SenderContact.add_member(:last_name, Shapes::ShapeRef.new(shape: Name, location_name: "LastName"))
+    SenderContact.add_member(:business_title, Shapes::ShapeRef.new(shape: JobTitle, location_name: "BusinessTitle"))
     SenderContact.add_member(:phone, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "Phone"))
     SenderContact.struct_class = Types::SenderContact
 
@@ -1159,26 +1161,26 @@ module Aws::PartnerCentralSelling
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     SoftwareRevenue.add_member(:delivery_model, Shapes::ShapeRef.new(shape: RevenueModel, location_name: "DeliveryModel"))
+    SoftwareRevenue.add_member(:value, Shapes::ShapeRef.new(shape: MonetaryValue, location_name: "Value"))
     SoftwareRevenue.add_member(:effective_date, Shapes::ShapeRef.new(shape: Date, location_name: "EffectiveDate"))
     SoftwareRevenue.add_member(:expiration_date, Shapes::ShapeRef.new(shape: Date, location_name: "ExpirationDate"))
-    SoftwareRevenue.add_member(:value, Shapes::ShapeRef.new(shape: MonetaryValue, location_name: "Value"))
     SoftwareRevenue.struct_class = Types::SoftwareRevenue
 
-    SolutionBase.add_member(:arn, Shapes::ShapeRef.new(shape: SolutionArn, location_name: "Arn"))
     SolutionBase.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    SolutionBase.add_member(:category, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Category"))
-    SolutionBase.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "CreatedDate"))
     SolutionBase.add_member(:id, Shapes::ShapeRef.new(shape: SolutionIdentifier, required: true, location_name: "Id"))
+    SolutionBase.add_member(:arn, Shapes::ShapeRef.new(shape: SolutionArn, location_name: "Arn"))
     SolutionBase.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     SolutionBase.add_member(:status, Shapes::ShapeRef.new(shape: SolutionStatus, required: true, location_name: "Status"))
+    SolutionBase.add_member(:category, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Category"))
+    SolutionBase.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "CreatedDate"))
     SolutionBase.struct_class = Types::SolutionBase
 
     SolutionIdentifiers.member = Shapes::ShapeRef.new(shape: SolutionIdentifier)
 
     SolutionList.member = Shapes::ShapeRef.new(shape: SolutionBase)
 
-    SolutionSort.add_member(:sort_by, Shapes::ShapeRef.new(shape: SolutionSortName, required: true, location_name: "SortBy"))
     SolutionSort.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "SortOrder"))
+    SolutionSort.add_member(:sort_by, Shapes::ShapeRef.new(shape: SolutionSortName, required: true, location_name: "SortBy"))
     SolutionSort.struct_class = Types::SolutionSort
 
     SortObject.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortBy, location_name: "SortBy"))
@@ -1191,34 +1193,34 @@ module Aws::PartnerCentralSelling
     StartEngagementByAcceptingInvitationTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartEngagementByAcceptingInvitationTaskRequest.struct_class = Types::StartEngagementByAcceptingInvitationTaskRequest
 
-    StartEngagementByAcceptingInvitationTaskResponse.add_member(:engagement_invitation_id, Shapes::ShapeRef.new(shape: EngagementInvitationIdentifier, location_name: "EngagementInvitationId"))
-    StartEngagementByAcceptingInvitationTaskResponse.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
-    StartEngagementByAcceptingInvitationTaskResponse.add_member(:opportunity_id, Shapes::ShapeRef.new(shape: OpportunityIdentifier, location_name: "OpportunityId"))
-    StartEngagementByAcceptingInvitationTaskResponse.add_member(:reason_code, Shapes::ShapeRef.new(shape: ReasonCode, location_name: "ReasonCode"))
-    StartEngagementByAcceptingInvitationTaskResponse.add_member(:resource_snapshot_job_id, Shapes::ShapeRef.new(shape: ResourceSnapshotJobIdentifier, location_name: "ResourceSnapshotJobId"))
-    StartEngagementByAcceptingInvitationTaskResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
-    StartEngagementByAcceptingInvitationTaskResponse.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn"))
     StartEngagementByAcceptingInvitationTaskResponse.add_member(:task_id, Shapes::ShapeRef.new(shape: TaskIdentifier, location_name: "TaskId"))
+    StartEngagementByAcceptingInvitationTaskResponse.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn"))
+    StartEngagementByAcceptingInvitationTaskResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
     StartEngagementByAcceptingInvitationTaskResponse.add_member(:task_status, Shapes::ShapeRef.new(shape: TaskStatus, location_name: "TaskStatus"))
+    StartEngagementByAcceptingInvitationTaskResponse.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    StartEngagementByAcceptingInvitationTaskResponse.add_member(:reason_code, Shapes::ShapeRef.new(shape: ReasonCode, location_name: "ReasonCode"))
+    StartEngagementByAcceptingInvitationTaskResponse.add_member(:opportunity_id, Shapes::ShapeRef.new(shape: OpportunityIdentifier, location_name: "OpportunityId"))
+    StartEngagementByAcceptingInvitationTaskResponse.add_member(:resource_snapshot_job_id, Shapes::ShapeRef.new(shape: ResourceSnapshotJobIdentifier, location_name: "ResourceSnapshotJobId"))
+    StartEngagementByAcceptingInvitationTaskResponse.add_member(:engagement_invitation_id, Shapes::ShapeRef.new(shape: EngagementInvitationIdentifier, location_name: "EngagementInvitationId"))
     StartEngagementByAcceptingInvitationTaskResponse.struct_class = Types::StartEngagementByAcceptingInvitationTaskResponse
 
-    StartEngagementFromOpportunityTaskRequest.add_member(:aws_submission, Shapes::ShapeRef.new(shape: AwsSubmission, required: true, location_name: "AwsSubmission"))
     StartEngagementFromOpportunityTaskRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     StartEngagementFromOpportunityTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: StartEngagementFromOpportunityTaskRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     StartEngagementFromOpportunityTaskRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: OpportunityIdentifier, required: true, location_name: "Identifier"))
+    StartEngagementFromOpportunityTaskRequest.add_member(:aws_submission, Shapes::ShapeRef.new(shape: AwsSubmission, required: true, location_name: "AwsSubmission"))
     StartEngagementFromOpportunityTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartEngagementFromOpportunityTaskRequest.struct_class = Types::StartEngagementFromOpportunityTaskRequest
 
+    StartEngagementFromOpportunityTaskResponse.add_member(:task_id, Shapes::ShapeRef.new(shape: TaskIdentifier, location_name: "TaskId"))
+    StartEngagementFromOpportunityTaskResponse.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn"))
+    StartEngagementFromOpportunityTaskResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
+    StartEngagementFromOpportunityTaskResponse.add_member(:task_status, Shapes::ShapeRef.new(shape: TaskStatus, location_name: "TaskStatus"))
+    StartEngagementFromOpportunityTaskResponse.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    StartEngagementFromOpportunityTaskResponse.add_member(:reason_code, Shapes::ShapeRef.new(shape: ReasonCode, location_name: "ReasonCode"))
+    StartEngagementFromOpportunityTaskResponse.add_member(:opportunity_id, Shapes::ShapeRef.new(shape: OpportunityIdentifier, location_name: "OpportunityId"))
+    StartEngagementFromOpportunityTaskResponse.add_member(:resource_snapshot_job_id, Shapes::ShapeRef.new(shape: ResourceSnapshotJobIdentifier, location_name: "ResourceSnapshotJobId"))
     StartEngagementFromOpportunityTaskResponse.add_member(:engagement_id, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "EngagementId"))
     StartEngagementFromOpportunityTaskResponse.add_member(:engagement_invitation_id, Shapes::ShapeRef.new(shape: EngagementInvitationIdentifier, location_name: "EngagementInvitationId"))
-    StartEngagementFromOpportunityTaskResponse.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
-    StartEngagementFromOpportunityTaskResponse.add_member(:opportunity_id, Shapes::ShapeRef.new(shape: OpportunityIdentifier, location_name: "OpportunityId"))
-    StartEngagementFromOpportunityTaskResponse.add_member(:reason_code, Shapes::ShapeRef.new(shape: ReasonCode, location_name: "ReasonCode"))
-    StartEngagementFromOpportunityTaskResponse.add_member(:resource_snapshot_job_id, Shapes::ShapeRef.new(shape: ResourceSnapshotJobIdentifier, location_name: "ResourceSnapshotJobId"))
-    StartEngagementFromOpportunityTaskResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
-    StartEngagementFromOpportunityTaskResponse.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn"))
-    StartEngagementFromOpportunityTaskResponse.add_member(:task_id, Shapes::ShapeRef.new(shape: TaskIdentifier, location_name: "TaskId"))
-    StartEngagementFromOpportunityTaskResponse.add_member(:task_status, Shapes::ShapeRef.new(shape: TaskStatus, location_name: "TaskStatus"))
     StartEngagementFromOpportunityTaskResponse.struct_class = Types::StartEngagementFromOpportunityTaskResponse
 
     StartResourceSnapshotJobRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
@@ -1263,17 +1265,17 @@ module Aws::PartnerCentralSelling
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateOpportunityRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    UpdateOpportunityRequest.add_member(:customer, Shapes::ShapeRef.new(shape: Customer, location_name: "Customer"))
-    UpdateOpportunityRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: OpportunityIdentifier, required: true, location_name: "Identifier"))
-    UpdateOpportunityRequest.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "LastModifiedDate"))
-    UpdateOpportunityRequest.add_member(:life_cycle, Shapes::ShapeRef.new(shape: LifeCycle, location_name: "LifeCycle"))
-    UpdateOpportunityRequest.add_member(:marketing, Shapes::ShapeRef.new(shape: Marketing, location_name: "Marketing"))
-    UpdateOpportunityRequest.add_member(:national_security, Shapes::ShapeRef.new(shape: NationalSecurity, location_name: "NationalSecurity"))
-    UpdateOpportunityRequest.add_member(:opportunity_type, Shapes::ShapeRef.new(shape: OpportunityType, location_name: "OpportunityType"))
-    UpdateOpportunityRequest.add_member(:partner_opportunity_identifier, Shapes::ShapeRef.new(shape: UpdateOpportunityRequestPartnerOpportunityIdentifierString, location_name: "PartnerOpportunityIdentifier"))
     UpdateOpportunityRequest.add_member(:primary_needs_from_aws, Shapes::ShapeRef.new(shape: PrimaryNeedsFromAws, location_name: "PrimaryNeedsFromAws"))
+    UpdateOpportunityRequest.add_member(:national_security, Shapes::ShapeRef.new(shape: NationalSecurity, location_name: "NationalSecurity"))
+    UpdateOpportunityRequest.add_member(:partner_opportunity_identifier, Shapes::ShapeRef.new(shape: UpdateOpportunityRequestPartnerOpportunityIdentifierString, location_name: "PartnerOpportunityIdentifier"))
+    UpdateOpportunityRequest.add_member(:customer, Shapes::ShapeRef.new(shape: Customer, location_name: "Customer"))
     UpdateOpportunityRequest.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "Project"))
+    UpdateOpportunityRequest.add_member(:opportunity_type, Shapes::ShapeRef.new(shape: OpportunityType, location_name: "OpportunityType"))
+    UpdateOpportunityRequest.add_member(:marketing, Shapes::ShapeRef.new(shape: Marketing, location_name: "Marketing"))
     UpdateOpportunityRequest.add_member(:software_revenue, Shapes::ShapeRef.new(shape: SoftwareRevenue, location_name: "SoftwareRevenue"))
+    UpdateOpportunityRequest.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "LastModifiedDate"))
+    UpdateOpportunityRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: OpportunityIdentifier, required: true, location_name: "Identifier"))
+    UpdateOpportunityRequest.add_member(:life_cycle, Shapes::ShapeRef.new(shape: LifeCycle, location_name: "LifeCycle"))
     UpdateOpportunityRequest.struct_class = Types::UpdateOpportunityRequest
 
     UpdateOpportunityResponse.add_member(:id, Shapes::ShapeRef.new(shape: OpportunityIdentifier, required: true, location_name: "Id"))
@@ -1282,14 +1284,14 @@ module Aws::PartnerCentralSelling
 
     UseCases.member = Shapes::ShapeRef.new(shape: String)
 
-    ValidationException.add_member(:error_list, Shapes::ShapeRef.new(shape: ValidationExceptionErrorList, location_name: "ErrorList"))
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, required: true, location_name: "Reason"))
+    ValidationException.add_member(:error_list, Shapes::ShapeRef.new(shape: ValidationExceptionErrorList, location_name: "ErrorList"))
     ValidationException.struct_class = Types::ValidationException
 
-    ValidationExceptionError.add_member(:code, Shapes::ShapeRef.new(shape: ValidationExceptionErrorCode, required: true, location_name: "Code"))
     ValidationExceptionError.add_member(:field_name, Shapes::ShapeRef.new(shape: String, location_name: "FieldName"))
     ValidationExceptionError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
+    ValidationExceptionError.add_member(:code, Shapes::ShapeRef.new(shape: ValidationExceptionErrorCode, required: true, location_name: "Code"))
     ValidationExceptionError.struct_class = Types::ValidationExceptionError
 
     ValidationExceptionErrorList.member = Shapes::ShapeRef.new(shape: ValidationExceptionError)

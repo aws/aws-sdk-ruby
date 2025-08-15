@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.322.0 (2025-08-13)
+------------------
+
+* Feature - This release introduces compute quota for GPU, Trainium accelerators, vCPU, and vCPU memory utilization across teams in HyperPod clusters
+
+1.321.0 (2025-08-12)
+------------------
+
+* Feature - IAM Identity Center trusted identity propagation is now supported in SageMaker Studio.
+
 1.320.0 (2025-08-08)
 ------------------
 

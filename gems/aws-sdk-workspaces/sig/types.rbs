@@ -379,6 +379,12 @@ module Aws::WorkSpaces
       SENSITIVE: []
     end
 
+    class CustomWorkspaceImageImportErrorDetails
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
     class DataReplicationSettings
       attr_accessor data_replication: ("NO_REPLICATION" | "PRIMARY_AS_SOURCE")
       attr_accessor recovery_snapshot_time: ::Time
@@ -520,6 +526,7 @@ module Aws::WorkSpaces
       attr_accessor dedicated_tenancy_support: ("ENABLED" | "DISABLED")
       attr_accessor dedicated_tenancy_management_cidr_range: ::String
       attr_accessor dedicated_tenancy_account_type: ("SOURCE_ACCOUNT" | "TARGET_ACCOUNT")
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -628,6 +635,23 @@ module Aws::WorkSpaces
     class DescribeConnectionAliasesResult
       attr_accessor connection_aliases: ::Array[Types::ConnectionAlias]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCustomWorkspaceImageImportRequest
+      attr_accessor image_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCustomWorkspaceImageImportResult
+      attr_accessor image_id: ::String
+      attr_accessor infrastructure_configuration_arn: ::String
+      attr_accessor state: ("PENDING" | "IN_PROGRESS" | "COMPLETED" | "ERROR")
+      attr_accessor created: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor image_source: Types::ImageSourceIdentifier
+      attr_accessor image_builder_instance_id: ::String
+      attr_accessor error_details: ::Array[Types::CustomWorkspaceImageImportErrorDetails]
       SENSITIVE: []
     end
 
@@ -913,6 +937,23 @@ module Aws::WorkSpaces
       SENSITIVE: []
     end
 
+    class ImageSourceIdentifier
+      attr_accessor ec2_import_task_id: ::String
+      attr_accessor image_build_version_arn: ::String
+      attr_accessor ec2_image_id: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Ec2ImportTaskId < ImageSourceIdentifier
+      end
+      class ImageBuildVersionArn < ImageSourceIdentifier
+      end
+      class Ec2ImageId < ImageSourceIdentifier
+      end
+      class Unknown < ImageSourceIdentifier
+      end
+    end
+
     class ImportClientBrandingRequest
       attr_accessor resource_id: ::String
       attr_accessor device_type_windows: Types::DefaultImportClientBrandingAttributes
@@ -931,6 +972,25 @@ module Aws::WorkSpaces
       attr_accessor device_type_ios: Types::IosClientBrandingAttributes
       attr_accessor device_type_linux: Types::DefaultClientBrandingAttributes
       attr_accessor device_type_web: Types::DefaultClientBrandingAttributes
+      SENSITIVE: []
+    end
+
+    class ImportCustomWorkspaceImageRequest
+      attr_accessor image_name: ::String
+      attr_accessor image_description: ::String
+      attr_accessor compute_type: ("BASE" | "GRAPHICS_G4DN")
+      attr_accessor protocol: ("PCOIP" | "DCV" | "BYOP")
+      attr_accessor image_source: Types::ImageSourceIdentifier
+      attr_accessor infrastructure_configuration_arn: ::String
+      attr_accessor platform: ("WINDOWS")
+      attr_accessor os_version: ("Windows_10" | "Windows_11")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ImportCustomWorkspaceImageResult
+      attr_accessor image_id: ::String
+      attr_accessor state: ("PENDING" | "IN_PROGRESS" | "COMPLETED" | "ERROR")
       SENSITIVE: []
     end
 
@@ -1056,7 +1116,9 @@ module Aws::WorkSpaces
       SENSITIVE: []
     end
 
-    class ModifyAccountResult < Aws::EmptyStructure
+    class ModifyAccountResult
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class ModifyCertificateBasedAuthPropertiesRequest

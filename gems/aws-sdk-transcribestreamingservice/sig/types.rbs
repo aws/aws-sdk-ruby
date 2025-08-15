@@ -205,7 +205,13 @@ module Aws::TranscribeStreamingService
       attr_accessor channel_definitions: ::Array[Types::MedicalScribeChannelDefinition]
       attr_accessor encryption_settings: Types::MedicalScribeEncryptionSettings
       attr_accessor post_stream_analytics_settings: Types::MedicalScribePostStreamAnalyticsSettings
+      attr_accessor medical_scribe_context: Types::MedicalScribeContext
       attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class MedicalScribeContext
+      attr_accessor patient_context: Types::MedicalScribePatientContext
       SENSITIVE: []
     end
 
@@ -213,6 +219,11 @@ module Aws::TranscribeStreamingService
       attr_accessor kms_encryption_context: ::Hash[::String, ::String]
       attr_accessor kms_key_id: ::String
       SENSITIVE: []
+    end
+
+    class MedicalScribePatientContext
+      attr_accessor pronouns: ("HE_HIM" | "SHE_HER" | "THEY_THEM")
+      SENSITIVE: [:pronouns]
     end
 
     class MedicalScribePostStreamAnalyticsResult
@@ -247,6 +258,7 @@ module Aws::TranscribeStreamingService
       attr_accessor stream_status: ("IN_PROGRESS" | "PAUSED" | "FAILED" | "COMPLETED")
       attr_accessor post_stream_analytics_settings: Types::MedicalScribePostStreamAnalyticsSettings
       attr_accessor post_stream_analytics_result: Types::MedicalScribePostStreamAnalyticsResult
+      attr_accessor medical_scribe_context_provided: bool
       SENSITIVE: []
     end
 

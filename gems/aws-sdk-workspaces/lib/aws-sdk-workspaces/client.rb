@@ -1821,12 +1821,14 @@ module Aws::WorkSpaces
     #   * {Types::DescribeAccountResult#dedicated_tenancy_support #dedicated_tenancy_support} => String
     #   * {Types::DescribeAccountResult#dedicated_tenancy_management_cidr_range #dedicated_tenancy_management_cidr_range} => String
     #   * {Types::DescribeAccountResult#dedicated_tenancy_account_type #dedicated_tenancy_account_type} => String
+    #   * {Types::DescribeAccountResult#message #message} => String
     #
     # @example Response structure
     #
     #   resp.dedicated_tenancy_support #=> String, one of "ENABLED", "DISABLED"
     #   resp.dedicated_tenancy_management_cidr_range #=> String
     #   resp.dedicated_tenancy_account_type #=> String, one of "SOURCE_ACCOUNT", "TARGET_ACCOUNT"
+    #   resp.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeAccount AWS API Documentation
     #
@@ -2300,6 +2302,53 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def describe_connection_aliases(params = {}, options = {})
       req = build_request(:describe_connection_aliases, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a WorkSpace BYOL image being imported via
+    # ImportCustomWorkspaceImage.
+    #
+    # @option params [required, String] :image_id
+    #   The identifier of the WorkSpace image.
+    #
+    # @return [Types::DescribeCustomWorkspaceImageImportResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCustomWorkspaceImageImportResult#image_id #image_id} => String
+    #   * {Types::DescribeCustomWorkspaceImageImportResult#infrastructure_configuration_arn #infrastructure_configuration_arn} => String
+    #   * {Types::DescribeCustomWorkspaceImageImportResult#state #state} => String
+    #   * {Types::DescribeCustomWorkspaceImageImportResult#created #created} => Time
+    #   * {Types::DescribeCustomWorkspaceImageImportResult#last_updated_time #last_updated_time} => Time
+    #   * {Types::DescribeCustomWorkspaceImageImportResult#image_source #image_source} => Types::ImageSourceIdentifier
+    #   * {Types::DescribeCustomWorkspaceImageImportResult#image_builder_instance_id #image_builder_instance_id} => String
+    #   * {Types::DescribeCustomWorkspaceImageImportResult#error_details #error_details} => Array&lt;Types::CustomWorkspaceImageImportErrorDetails&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_custom_workspace_image_import({
+    #     image_id: "WorkspaceImageId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_id #=> String
+    #   resp.infrastructure_configuration_arn #=> String
+    #   resp.state #=> String, one of "PENDING", "IN_PROGRESS", "COMPLETED", "ERROR"
+    #   resp.created #=> Time
+    #   resp.last_updated_time #=> Time
+    #   resp.image_source.ec2_import_task_id #=> String
+    #   resp.image_source.image_build_version_arn #=> String
+    #   resp.image_source.ec2_image_id #=> String
+    #   resp.image_builder_instance_id #=> String
+    #   resp.error_details #=> Array
+    #   resp.error_details[0].error_code #=> String
+    #   resp.error_details[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeCustomWorkspaceImageImport AWS API Documentation
+    #
+    # @overload describe_custom_workspace_image_import(params = {})
+    # @param [Hash] params ({})
+    def describe_custom_workspace_image_import(params = {}, options = {})
+      req = build_request(:describe_custom_workspace_image_import, params)
       req.send_request(options)
     end
 
@@ -3362,6 +3411,89 @@ module Aws::WorkSpaces
     end
 
     # Imports the specified Windows 10 or 11 Bring Your Own License (BYOL)
+    # image into Amazon WorkSpaces using EC2 Image Builder. The image must
+    # be an already licensed image that is in your Amazon Web Services
+    # account, and you must own the image. For more information about
+    # creating BYOL images, see [ Bring Your Own Windows Desktop
+    # Licenses][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html
+    #
+    # @option params [required, String] :image_name
+    #   The name of the WorkSpace image.
+    #
+    # @option params [required, String] :image_description
+    #   The description of the WorkSpace image.
+    #
+    # @option params [required, String] :compute_type
+    #   The supported compute type for the WorkSpace image.
+    #
+    # @option params [required, String] :protocol
+    #   The supported protocol for the WorkSpace image. Windows 11 does not
+    #   support PCOIP protocol.
+    #
+    # @option params [required, Types::ImageSourceIdentifier] :image_source
+    #   The options for image import source.
+    #
+    # @option params [required, String] :infrastructure_configuration_arn
+    #   The infrastructure configuration ARN that specifies how the WorkSpace
+    #   image is built.
+    #
+    # @option params [required, String] :platform
+    #   The platform for the WorkSpace image source.
+    #
+    # @option params [required, String] :os_version
+    #   The OS version for the WorkSpace image source.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The resource tags. Each WorkSpaces resource can have a maximum of 50
+    #   tags.
+    #
+    # @return [Types::ImportCustomWorkspaceImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportCustomWorkspaceImageResult#image_id #image_id} => String
+    #   * {Types::ImportCustomWorkspaceImageResult#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_custom_workspace_image({
+    #     image_name: "WorkspaceImageName", # required
+    #     image_description: "WorkspaceImageDescription", # required
+    #     compute_type: "BASE", # required, accepts BASE, GRAPHICS_G4DN
+    #     protocol: "PCOIP", # required, accepts PCOIP, DCV, BYOP
+    #     image_source: { # required
+    #       ec2_import_task_id: "Ec2ImportTaskId",
+    #       image_build_version_arn: "ImageBuildVersionArn",
+    #       ec2_image_id: "Ec2ImageId",
+    #     },
+    #     infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
+    #     platform: "WINDOWS", # required, accepts WINDOWS
+    #     os_version: "Windows_10", # required, accepts Windows_10, Windows_11
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_id #=> String
+    #   resp.state #=> String, one of "PENDING", "IN_PROGRESS", "COMPLETED", "ERROR"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImportCustomWorkspaceImage AWS API Documentation
+    #
+    # @overload import_custom_workspace_image(params = {})
+    # @param [Hash] params ({})
+    def import_custom_workspace_image(params = {}, options = {})
+      req = build_request(:import_custom_workspace_image, params)
+      req.send_request(options)
+    end
+
+    # Imports the specified Windows 10 or 11 Bring Your Own License (BYOL)
     # image into Amazon WorkSpaces. The image must be an already licensed
     # Amazon EC2 image that is in your Amazon Web Services account, and you
     # must own the image. For more information about creating BYOL images,
@@ -3621,7 +3753,9 @@ module Aws::WorkSpaces
     #   example, 203.0.113.25/16). It must also be specified as available by
     #   the `ListAvailableManagementCidrRanges` operation.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::ModifyAccountResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyAccountResult#message #message} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3629,6 +3763,10 @@ module Aws::WorkSpaces
     #     dedicated_tenancy_support: "ENABLED", # accepts ENABLED
     #     dedicated_tenancy_management_cidr_range: "DedicatedTenancyManagementCidrRange",
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyAccount AWS API Documentation
     #
@@ -4906,7 +5044,7 @@ module Aws::WorkSpaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.142.0'
+      context[:gem_version] = '1.143.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

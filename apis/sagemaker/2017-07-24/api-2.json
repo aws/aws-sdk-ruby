@@ -4192,6 +4192,12 @@
     }
   },
   "shapes":{
+    "AcceleratorsAmount":{
+      "type":"integer",
+      "box":true,
+      "max":10000000,
+      "min":0
+    },
     "Accept":{
       "type":"string",
       "max":256,
@@ -7634,7 +7640,10 @@
       "required":["InstanceType"],
       "members":{
         "InstanceType":{"shape":"ClusterInstanceType"},
-        "Count":{"shape":"InstanceCount"}
+        "Count":{"shape":"InstanceCount"},
+        "Accelerators":{"shape":"AcceleratorsAmount"},
+        "VCpu":{"shape":"VCpuAmount"},
+        "MemoryInGiB":{"shape":"MemoryInGiBAmount"}
       }
     },
     "ComputeQuotaResourceConfigList":{
@@ -10677,6 +10686,7 @@
         "UserProfileName":{"shape":"UserProfileName"},
         "SpaceName":{"shape":"SpaceName"},
         "Status":{"shape":"AppStatus"},
+        "EffectiveTrustedIdentityPropagationStatus":{"shape":"FeatureStatus"},
         "RecoveryMode":{
           "shape":"Boolean",
           "box":true
@@ -13121,6 +13131,7 @@
         "SecurityGroupIds":{"shape":"DomainSecurityGroupIds"},
         "RStudioServerProDomainSettings":{"shape":"RStudioServerProDomainSettings"},
         "ExecutionRoleIdentityConfig":{"shape":"ExecutionRoleIdentityConfig"},
+        "TrustedIdentityPropagationSettings":{"shape":"TrustedIdentityPropagationSettings"},
         "DockerSettings":{"shape":"DockerSettings"},
         "AmazonQSettings":{"shape":"AmazonQSettings"},
         "UnifiedStudioSettings":{"shape":"UnifiedStudioSettings"}
@@ -13132,6 +13143,7 @@
         "RStudioServerProDomainSettingsForUpdate":{"shape":"RStudioServerProDomainSettingsForUpdate"},
         "ExecutionRoleIdentityConfig":{"shape":"ExecutionRoleIdentityConfig"},
         "SecurityGroupIds":{"shape":"DomainSecurityGroupIds"},
+        "TrustedIdentityPropagationSettings":{"shape":"TrustedIdentityPropagationSettings"},
         "DockerSettings":{"shape":"DockerSettings"},
         "AmazonQSettings":{"shape":"AmazonQSettings"},
         "UnifiedStudioSettings":{"shape":"UnifiedStudioSettings"}
@@ -19091,6 +19103,12 @@
       "member":{"shape":"MemberDefinition"},
       "max":10,
       "min":1
+    },
+    "MemoryInGiBAmount":{
+      "type":"float",
+      "box":true,
+      "max":10000000,
+      "min":0
     },
     "MemoryInMb":{
       "type":"integer",
@@ -27244,6 +27262,13 @@
         "LastModifiedTime":{"shape":"Timestamp"}
       }
     },
+    "TrustedIdentityPropagationSettings":{
+      "type":"structure",
+      "required":["Status"],
+      "members":{
+        "Status":{"shape":"FeatureStatus"}
+      }
+    },
     "TtlDuration":{
       "type":"structure",
       "members":{
@@ -28408,6 +28433,12 @@
       "box":true,
       "max":100,
       "min":1
+    },
+    "VCpuAmount":{
+      "type":"float",
+      "box":true,
+      "max":10000000,
+      "min":0
     },
     "ValidationFraction":{
       "type":"float",

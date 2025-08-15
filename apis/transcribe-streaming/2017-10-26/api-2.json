@@ -598,9 +598,16 @@
         "ResourceAccessRoleArn":{"shape":"IamRoleArn"},
         "ChannelDefinitions":{"shape":"MedicalScribeChannelDefinitions"},
         "EncryptionSettings":{"shape":"MedicalScribeEncryptionSettings"},
-        "PostStreamAnalyticsSettings":{"shape":"MedicalScribePostStreamAnalyticsSettings"}
+        "PostStreamAnalyticsSettings":{"shape":"MedicalScribePostStreamAnalyticsSettings"},
+        "MedicalScribeContext":{"shape":"MedicalScribeContext"}
       },
       "event":true
+    },
+    "MedicalScribeContext":{
+      "type":"structure",
+      "members":{
+        "PatientContext":{"shape":"MedicalScribePatientContext"}
+      }
     },
     "MedicalScribeEncryptionSettings":{
       "type":"structure",
@@ -654,6 +661,12 @@
         "PATIENT",
         "CLINICIAN"
       ]
+    },
+    "MedicalScribePatientContext":{
+      "type":"structure",
+      "members":{
+        "Pronouns":{"shape":"Pronouns"}
+      }
     },
     "MedicalScribePostStreamAnalyticsResult":{
       "type":"structure",
@@ -709,7 +722,8 @@
         "EncryptionSettings":{"shape":"MedicalScribeEncryptionSettings"},
         "StreamStatus":{"shape":"MedicalScribeStreamStatus"},
         "PostStreamAnalyticsSettings":{"shape":"MedicalScribePostStreamAnalyticsSettings"},
-        "PostStreamAnalyticsResult":{"shape":"MedicalScribePostStreamAnalyticsResult"}
+        "PostStreamAnalyticsResult":{"shape":"MedicalScribePostStreamAnalyticsResult"},
+        "MedicalScribeContextProvided":{"shape":"NullableBoolean"}
       }
     },
     "MedicalScribeStreamStatus":{
@@ -854,6 +868,15 @@
         "ContentRedactionOutput":{"shape":"ContentRedactionOutput"},
         "OutputEncryptionKMSKeyId":{"shape":"String"}
       }
+    },
+    "Pronouns":{
+      "type":"string",
+      "enum":[
+        "HE_HIM",
+        "SHE_HER",
+        "THEY_THEM"
+      ],
+      "sensitive":true
     },
     "RequestId":{"type":"string"},
     "ResourceNotFoundException":{

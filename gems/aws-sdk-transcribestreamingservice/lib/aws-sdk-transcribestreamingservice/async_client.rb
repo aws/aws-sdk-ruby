@@ -856,12 +856,12 @@ module Aws::TranscribeStreamingService
     #
     # When you start a stream, you first specify the stream configuration in
     # a `MedicalScribeConfigurationEvent`. This event includes channel
-    # definitions, encryption settings, and post-stream analytics settings,
-    # such as the output configuration for aggregated transcript and
-    # clinical note generation. These are additional streaming session
-    # configurations beyond those provided in your initial start request
-    # headers. Whether you are starting a new session or resuming an
-    # existing session, your first event must be a
+    # definitions, encryption settings, medical scribe context, and
+    # post-stream analytics settings, such as the output configuration for
+    # aggregated transcript and clinical note generation. These are
+    # additional streaming session configurations beyond those provided in
+    # your initial start request headers. Whether you are starting a new
+    # session or resuming an existing session, your first event must be a
     # `MedicalScribeConfigurationEvent`.
     #
     # After you send a `MedicalScribeConfigurationEvent`, you start
@@ -2090,7 +2090,7 @@ module Aws::TranscribeStreamingService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

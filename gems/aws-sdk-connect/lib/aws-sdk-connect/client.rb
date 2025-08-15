@@ -14246,10 +14246,6 @@ module Aws::Connect
     #                 tag_value: "String",
     #               },
     #             ],
-    #             hierarchy_group_condition: {
-    #               value: "String",
-    #               hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
-    #             },
     #           },
     #         ],
     #         and_condition: {
@@ -14259,10 +14255,6 @@ module Aws::Connect
     #               tag_value: "String",
     #             },
     #           ],
-    #           hierarchy_group_condition: {
-    #             value: "String",
-    #             hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
-    #           },
     #         },
     #         tag_condition: {
     #           tag_key: "String",
@@ -15848,10 +15840,6 @@ module Aws::Connect
     #                 tag_value: "String",
     #               },
     #             ],
-    #             hierarchy_group_condition: {
-    #               value: "String",
-    #               hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
-    #             },
     #           },
     #         ],
     #         and_condition: {
@@ -15861,10 +15849,6 @@ module Aws::Connect
     #               tag_value: "String",
     #             },
     #           ],
-    #           hierarchy_group_condition: {
-    #             value: "String",
-    #             hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
-    #           },
     #         },
     #         tag_condition: {
     #           tag_key: "String",
@@ -15887,10 +15871,6 @@ module Aws::Connect
     #         field_name: "String",
     #         value: "String",
     #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
-    #       },
-    #       hierarchy_group_condition: {
-    #         value: "String",
-    #         hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
     #       },
     #     },
     #   })
@@ -21555,7 +21535,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.210.0'
+      context[:gem_version] = '1.211.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1649,12 +1649,19 @@ module Aws::DynamoDB
     #   table and index, if applicable.
     #   @return [String]
     #
+    # @!attribute [rw] contributor_insights_mode
+    #   Indicates the current mode of CloudWatch Contributor Insights,
+    #   specifying whether it tracks all access and throttled events or
+    #   throttled events only for the DynamoDB table or index.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ContributorInsightsSummary AWS API Documentation
     #
     class ContributorInsightsSummary < Struct.new(
       :table_name,
       :index_name,
-      :contributor_insights_status)
+      :contributor_insights_status,
+      :contributor_insights_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2799,6 +2806,12 @@ module Aws::DynamoDB
     #     Contributor Insights rules. Please retry request.
     #   @return [Types::FailureException]
     #
+    # @!attribute [rw] contributor_insights_mode
+    #   The mode of CloudWatch Contributor Insights for DynamoDB that
+    #   determines which events are emitted. Can be set to track all access
+    #   and throttled events or throttled events only.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeContributorInsightsOutput AWS API Documentation
     #
     class DescribeContributorInsightsOutput < Struct.new(
@@ -2807,7 +2820,8 @@ module Aws::DynamoDB
       :contributor_insights_rule_list,
       :contributor_insights_status,
       :last_update_date_time,
-      :failure_exception)
+      :failure_exception,
+      :contributor_insights_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6185,25 +6199,39 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # Your request rate is too high. The Amazon Web Services SDKs for
-    # DynamoDB automatically retry requests that receive this exception.
-    # Your request is eventually successful, unless your retry queue is too
-    # large to finish. Reduce the frequency of requests and use exponential
-    # backoff. For more information, go to [Error Retries and Exponential
-    # Backoff][1] in the *Amazon DynamoDB Developer Guide*.
+    # The request was denied due to request throttling. For detailed
+    # information about why the request was throttled and the ARN of the
+    # impacted resource, find the [ThrottlingReason][1] field in the
+    # returned exception. The Amazon Web Services SDKs for DynamoDB
+    # automatically retry requests that receive this exception. Your request
+    # is eventually successful, unless your retry queue is too large to
+    # finish. Reduce the frequency of requests and use exponential backoff.
+    # For more information, go to [Error Retries and Exponential Backoff][2]
+    # in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.Errors.html#Programming.Errors.RetryAndBackoff
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ThrottlingReason.html
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.Errors.html#Programming.Errors.RetryAndBackoff
     #
     # @!attribute [rw] message
     #   You exceeded your maximum allowed provisioned throughput.
     #   @return [String]
     #
+    # @!attribute [rw] throttling_reasons
+    #   A list of [ThrottlingReason][1] that provide detailed diagnostic
+    #   information about why the request was throttled.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ThrottlingReason.html
+    #   @return [Array<Types::ThrottlingReason>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ProvisionedThroughputExceededException AWS API Documentation
     #
     class ProvisionedThroughputExceededException < Struct.new(
-      :message)
+      :message,
+      :throttling_reasons)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7775,21 +7803,34 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # Throughput exceeds the current throughput quota for your account.
-    # Please contact [Amazon Web ServicesSupport][1] to request a quota
-    # increase.
+    # Throughput exceeds the current throughput quota for your account. For
+    # detailed information about why the request was throttled and the ARN
+    # of the impacted resource, find the [ThrottlingReason][1] field in the
+    # returned exception. Contact [Amazon Web ServicesSupport][2] to request
+    # a quota increase.
     #
     #
     #
-    # [1]: https://aws.amazon.com/support
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ThrottlingReason.html
+    # [2]: https://aws.amazon.com/support
     #
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] throttling_reasons
+    #   A list of [ThrottlingReason][1] that provide detailed diagnostic
+    #   information about why the request was throttled.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ThrottlingReason.html
+    #   @return [Array<Types::ThrottlingReason>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RequestLimitExceeded AWS API Documentation
     #
     class RequestLimitExceeded < Struct.new(
-      :message)
+      :message,
+      :throttling_reasons)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9298,6 +9339,101 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # The request was denied due to request throttling. For detailed
+    # information about why the request was throttled and the ARN of the
+    # impacted resource, find the [ThrottlingReason][1] field in the
+    # returned exception.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ThrottlingReason.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] throttling_reasons
+    #   A list of [ThrottlingReason][1] that provide detailed diagnostic
+    #   information about why the request was throttled.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ThrottlingReason.html
+    #   @return [Array<Types::ThrottlingReason>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message,
+      :throttling_reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the specific reason why a DynamoDB request was throttled
+    # and the ARN of the impacted resource. This helps identify exactly what
+    # resource is being throttled, what type of operation caused it, and why
+    # the throttling occurred.
+    #
+    # @!attribute [rw] reason
+    #   The reason for throttling. The throttling reason follows a specific
+    #   format: `ResourceType+OperationType+LimitType`:
+    #
+    #   * Resource Type (What is being throttled): Table or Index
+    #
+    #   * Operation Type (What kind of operation): Read or Write
+    #
+    #   * Limit Type (Why the throttling occurred):
+    #
+    #     * `ProvisionedThroughputExceeded`: The request rate is exceeding
+    #       the [provisioned throughput capacity][1] (read or write capacity
+    #       units) configured for a table or a global secondary index (GSI)
+    #       in provisioned capacity mode.
+    #
+    #     * `AccountLimitExceeded`: The request rate has caused a table or
+    #       global secondary index (GSI) in on-demand mode to exceed the
+    #       [per-table account-level service quotas][2] for read/write
+    #       throughput in the current Amazon Web Services Region.
+    #
+    #     * `KeyRangeThroughputExceeded`: The request rate directed at a
+    #       specific partition key value has exceeded the [internal
+    #       partition-level throughput limits][3], indicating uneven access
+    #       patterns across the table's or GSI's key space.
+    #
+    #     * `MaxOnDemandThroughputExceeded`: The request rate has exceeded
+    #       the [configured maximum throughput limits][4] set for a table or
+    #       index in on-demand capacity mode.
+    #
+    #   Examples of complete throttling reasons:
+    #
+    #   * TableReadProvisionedThroughputExceeded
+    #
+    #   * IndexWriteAccountLimitExceeded
+    #
+    #   This helps identify exactly what resource is being throttled, what
+    #   type of operation caused it, and why the throttling occurred.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ServiceQuotas.html#default-limits-throughput
+    #   [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html
+    #   [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode-max-throughput.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The Amazon Resource Name (ARN) of the DynamoDB table or index that
+    #   experienced the throttling event.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ThrottlingReason AWS API Documentation
+    #
+    class ThrottlingReason < Struct.new(
+      :reason,
+      :resource)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The description of the Time to Live (TTL) status on the specified
     # table.
     #
@@ -9892,12 +10028,18 @@ module Aws::DynamoDB
     #   Represents the contributor insights action.
     #   @return [String]
     #
+    # @!attribute [rw] contributor_insights_mode
+    #   Specifies whether to track all access and throttled events or
+    #   throttled events only for the DynamoDB table or index.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateContributorInsightsInput AWS API Documentation
     #
     class UpdateContributorInsightsInput < Struct.new(
       :table_name,
       :index_name,
-      :contributor_insights_action)
+      :contributor_insights_action,
+      :contributor_insights_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9914,12 +10056,19 @@ module Aws::DynamoDB
     #   The status of contributor insights
     #   @return [String]
     #
+    # @!attribute [rw] contributor_insights_mode
+    #   The updated mode of CloudWatch Contributor Insights that determines
+    #   whether to monitor all access and throttled events or to track
+    #   throttled events exclusively.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateContributorInsightsOutput AWS API Documentation
     #
     class UpdateContributorInsightsOutput < Struct.new(
       :table_name,
       :index_name,
-      :contributor_insights_status)
+      :contributor_insights_status,
+      :contributor_insights_mode)
       SENSITIVE = []
       include Aws::Structure
     end

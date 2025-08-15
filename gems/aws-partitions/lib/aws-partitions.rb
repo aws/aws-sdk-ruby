@@ -283,6 +283,7 @@ module Aws
             'B2bi' => 'b2bi',
             'BCMDataExports' => 'bcm-data-exports',
             'BCMPricingCalculator' => 'bcm-pricing-calculator',
+            'BCMRecommendedActions' => 'bcm-recommended-actions',
             'Backup' => 'backup',
             'BackupGateway' => 'backup-gateway',
             'BackupSearch' => 'backup-search',

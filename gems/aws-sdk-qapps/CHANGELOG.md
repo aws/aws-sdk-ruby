@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2025-08-14)
+------------------
+
+* Feature - Documentation update for Amazon Q Apps API Reference
+
 1.20.0 (2025-08-04)
 ------------------
 

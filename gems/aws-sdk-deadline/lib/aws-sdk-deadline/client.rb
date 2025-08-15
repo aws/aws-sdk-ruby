@@ -1297,7 +1297,7 @@ module Aws::Deadline
     #           ],
     #         },
     #         instance_market_options: { # required
-    #           type: "on-demand", # required, accepts on-demand, spot
+    #           type: "on-demand", # required, accepts on-demand, spot, wait-and-save
     #         },
     #         vpc_configuration: {
     #           resource_configuration_arns: ["VpcResourceConfigurationArn"],
@@ -2603,6 +2603,7 @@ module Aws::Deadline
     #   * {Types::GetFleetResponse#display_name #display_name} => String
     #   * {Types::GetFleetResponse#description #description} => String
     #   * {Types::GetFleetResponse#status #status} => String
+    #   * {Types::GetFleetResponse#status_message #status_message} => String
     #   * {Types::GetFleetResponse#auto_scaling_status #auto_scaling_status} => String
     #   * {Types::GetFleetResponse#target_worker_count #target_worker_count} => Integer
     #   * {Types::GetFleetResponse#worker_count #worker_count} => Integer
@@ -2630,7 +2631,8 @@ module Aws::Deadline
     #   resp.farm_id #=> String
     #   resp.display_name #=> String
     #   resp.description #=> String
-    #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "SUSPENDED"
+    #   resp.status_message #=> String
     #   resp.auto_scaling_status #=> String, one of "GROWING", "STEADY", "SHRINKING"
     #   resp.target_worker_count #=> Integer
     #   resp.worker_count #=> Integer
@@ -2685,7 +2687,7 @@ module Aws::Deadline
     #   resp.configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].name #=> String
     #   resp.configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].values #=> Array
     #   resp.configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].values[0] #=> String
-    #   resp.configuration.service_managed_ec2.instance_market_options.type #=> String, one of "on-demand", "spot"
+    #   resp.configuration.service_managed_ec2.instance_market_options.type #=> String, one of "on-demand", "spot", "wait-and-save"
     #   resp.configuration.service_managed_ec2.vpc_configuration.resource_configuration_arns #=> Array
     #   resp.configuration.service_managed_ec2.vpc_configuration.resource_configuration_arns[0] #=> String
     #   resp.configuration.service_managed_ec2.storage_profile_id #=> String
@@ -4038,7 +4040,7 @@ module Aws::Deadline
     #     farm_id: "FarmId", # required
     #     principal_id: "IdentityCenterPrincipalId",
     #     display_name: "ResourceName",
-    #     status: "ACTIVE", # accepts ACTIVE, CREATE_IN_PROGRESS, UPDATE_IN_PROGRESS, CREATE_FAILED, UPDATE_FAILED
+    #     status: "ACTIVE", # accepts ACTIVE, CREATE_IN_PROGRESS, UPDATE_IN_PROGRESS, CREATE_FAILED, UPDATE_FAILED, SUSPENDED
     #     next_token: "String",
     #     max_results: 1,
     #   })
@@ -4049,7 +4051,8 @@ module Aws::Deadline
     #   resp.fleets[0].fleet_id #=> String
     #   resp.fleets[0].farm_id #=> String
     #   resp.fleets[0].display_name #=> String
-    #   resp.fleets[0].status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.fleets[0].status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "SUSPENDED"
+    #   resp.fleets[0].status_message #=> String
     #   resp.fleets[0].auto_scaling_status #=> String, one of "GROWING", "STEADY", "SHRINKING"
     #   resp.fleets[0].target_worker_count #=> Integer
     #   resp.fleets[0].worker_count #=> Integer
@@ -4104,7 +4107,7 @@ module Aws::Deadline
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].name #=> String
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].values #=> Array
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].values[0] #=> String
-    #   resp.fleets[0].configuration.service_managed_ec2.instance_market_options.type #=> String, one of "on-demand", "spot"
+    #   resp.fleets[0].configuration.service_managed_ec2.instance_market_options.type #=> String, one of "on-demand", "spot", "wait-and-save"
     #   resp.fleets[0].configuration.service_managed_ec2.vpc_configuration.resource_configuration_arns #=> Array
     #   resp.fleets[0].configuration.service_managed_ec2.vpc_configuration.resource_configuration_arns[0] #=> String
     #   resp.fleets[0].configuration.service_managed_ec2.storage_profile_id #=> String
@@ -6320,7 +6323,7 @@ module Aws::Deadline
     #           ],
     #         },
     #         instance_market_options: { # required
-    #           type: "on-demand", # required, accepts on-demand, spot
+    #           type: "on-demand", # required, accepts on-demand, spot, wait-and-save
     #         },
     #         vpc_configuration: {
     #           resource_configuration_arns: ["VpcResourceConfigurationArn"],
@@ -7126,7 +7129,7 @@ module Aws::Deadline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-deadline'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

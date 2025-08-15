@@ -117,6 +117,9 @@
   "BCMPricingCalculator": {
     "models": "bcm-pricing-calculator/2024-06-19"
   },
+  "BCMRecommendedActions": {
+    "models": "bcm-recommended-actions/2024-11-14"
+  },
   "Backup": {
     "models": "backup/2018-11-15"
   },

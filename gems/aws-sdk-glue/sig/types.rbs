@@ -1351,6 +1351,17 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class CreateGlueIdentityCenterConfigurationRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor scopes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateGlueIdentityCenterConfigurationResponse
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateGrokClassifierRequest
       attr_accessor classification: ::String
       attr_accessor name: ::String
@@ -2114,6 +2125,12 @@ module Aws::Glue
     end
 
     class DeleteDevEndpointResponse < Aws::EmptyStructure
+    end
+
+    class DeleteGlueIdentityCenterConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class DeleteGlueIdentityCenterConfigurationResponse < Aws::EmptyStructure
     end
 
     class DeleteIntegrationRequest
@@ -3185,6 +3202,16 @@ module Aws::Glue
       attr_accessor records: ::Array[untyped]
       attr_accessor next_token: ::String
       SENSITIVE: [:records]
+    end
+
+    class GetGlueIdentityCenterConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class GetGlueIdentityCenterConfigurationResponse
+      attr_accessor application_arn: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor scopes: ::Array[::String]
+      SENSITIVE: []
     end
 
     class GetIntegrationResourcePropertyRequest
@@ -6939,6 +6966,14 @@ module Aws::Glue
     end
 
     class UpdateDevEndpointResponse < Aws::EmptyStructure
+    end
+
+    class UpdateGlueIdentityCenterConfigurationRequest
+      attr_accessor scopes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateGlueIdentityCenterConfigurationResponse < Aws::EmptyStructure
     end
 
     class UpdateGrokClassifierRequest

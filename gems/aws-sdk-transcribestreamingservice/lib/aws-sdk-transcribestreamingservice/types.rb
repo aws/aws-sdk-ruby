@@ -947,6 +947,11 @@ module Aws::TranscribeStreamingService
     #   Specify settings for post-stream analytics.
     #   @return [Types::MedicalScribePostStreamAnalyticsSettings]
     #
+    # @!attribute [rw] medical_scribe_context
+    #   The `MedicalScribeContext` object that contains contextual
+    #   information used to generate customized clinical notes.
+    #   @return [Types::MedicalScribeContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/MedicalScribeConfigurationEvent AWS API Documentation
     #
     class MedicalScribeConfigurationEvent < Struct.new(
@@ -957,7 +962,25 @@ module Aws::TranscribeStreamingService
       :channel_definitions,
       :encryption_settings,
       :post_stream_analytics_settings,
+      :medical_scribe_context,
       :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `MedicalScribeContext` object that contains contextual information
+    # which is used during clinical note generation to add relevant context
+    # to the note.
+    #
+    # @!attribute [rw] patient_context
+    #   Contains patient-specific information used to customize the clinical
+    #   note generation.
+    #   @return [Types::MedicalScribePatientContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/MedicalScribeContext AWS API Documentation
+    #
+    class MedicalScribeContext < Struct.new(
+      :patient_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1027,6 +1050,21 @@ module Aws::TranscribeStreamingService
       :kms_encryption_context,
       :kms_key_id)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains patient-specific information.
+    #
+    # @!attribute [rw] pronouns
+    #   The patient's preferred pronouns that the user wants to provide as
+    #   a context for clinical note generation .
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/MedicalScribePatientContext AWS API Documentation
+    #
+    class MedicalScribePatientContext < Struct.new(
+      :pronouns)
+      SENSITIVE = [:pronouns]
       include Aws::Structure
     end
 
@@ -1181,6 +1219,11 @@ module Aws::TranscribeStreamingService
     #   session.
     #   @return [Types::MedicalScribePostStreamAnalyticsResult]
     #
+    # @!attribute [rw] medical_scribe_context_provided
+    #   Indicates whether the `MedicalScribeContext` object was provided
+    #   when the stream was started.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/MedicalScribeStreamDetails AWS API Documentation
     #
     class MedicalScribeStreamDetails < Struct.new(
@@ -1198,7 +1241,8 @@ module Aws::TranscribeStreamingService
       :encryption_settings,
       :stream_status,
       :post_stream_analytics_settings,
-      :post_stream_analytics_result)
+      :post_stream_analytics_result,
+      :medical_scribe_context_provided)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -44,6 +44,7 @@ module Aws::Glue
     AnnotationErrorList = Shapes::ListShape.new(name: 'AnnotationErrorList')
     AnnotationList = Shapes::ListShape.new(name: 'AnnotationList')
     ApiVersion = Shapes::StringShape.new(name: 'ApiVersion')
+    ApplicationArn = Shapes::StringShape.new(name: 'ApplicationArn')
     ApplyMapping = Shapes::StructureShape.new(name: 'ApplyMapping')
     ArnString = Shapes::StringShape.new(name: 'ArnString')
     AthenaConnectorSource = Shapes::StructureShape.new(name: 'AthenaConnectorSource')
@@ -322,6 +323,8 @@ module Aws::Glue
     CreateDatabaseResponse = Shapes::StructureShape.new(name: 'CreateDatabaseResponse')
     CreateDevEndpointRequest = Shapes::StructureShape.new(name: 'CreateDevEndpointRequest')
     CreateDevEndpointResponse = Shapes::StructureShape.new(name: 'CreateDevEndpointResponse')
+    CreateGlueIdentityCenterConfigurationRequest = Shapes::StructureShape.new(name: 'CreateGlueIdentityCenterConfigurationRequest')
+    CreateGlueIdentityCenterConfigurationResponse = Shapes::StructureShape.new(name: 'CreateGlueIdentityCenterConfigurationResponse')
     CreateGrokClassifierRequest = Shapes::StructureShape.new(name: 'CreateGrokClassifierRequest')
     CreateIcebergTableInput = Shapes::StructureShape.new(name: 'CreateIcebergTableInput')
     CreateIntegrationRequest = Shapes::StructureShape.new(name: 'CreateIntegrationRequest')
@@ -476,6 +479,8 @@ module Aws::Glue
     DeleteDatabaseResponse = Shapes::StructureShape.new(name: 'DeleteDatabaseResponse')
     DeleteDevEndpointRequest = Shapes::StructureShape.new(name: 'DeleteDevEndpointRequest')
     DeleteDevEndpointResponse = Shapes::StructureShape.new(name: 'DeleteDevEndpointResponse')
+    DeleteGlueIdentityCenterConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteGlueIdentityCenterConfigurationRequest')
+    DeleteGlueIdentityCenterConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteGlueIdentityCenterConfigurationResponse')
     DeleteIntegrationRequest = Shapes::StructureShape.new(name: 'DeleteIntegrationRequest')
     DeleteIntegrationResponse = Shapes::StructureShape.new(name: 'DeleteIntegrationResponse')
     DeleteIntegrationTablePropertiesRequest = Shapes::StructureShape.new(name: 'DeleteIntegrationTablePropertiesRequest')
@@ -690,6 +695,8 @@ module Aws::Glue
     GetDevEndpointsResponse = Shapes::StructureShape.new(name: 'GetDevEndpointsResponse')
     GetEntityRecordsRequest = Shapes::StructureShape.new(name: 'GetEntityRecordsRequest')
     GetEntityRecordsResponse = Shapes::StructureShape.new(name: 'GetEntityRecordsResponse')
+    GetGlueIdentityCenterConfigurationRequest = Shapes::StructureShape.new(name: 'GetGlueIdentityCenterConfigurationRequest')
+    GetGlueIdentityCenterConfigurationResponse = Shapes::StructureShape.new(name: 'GetGlueIdentityCenterConfigurationResponse')
     GetIntegrationResourcePropertyRequest = Shapes::StructureShape.new(name: 'GetIntegrationResourcePropertyRequest')
     GetIntegrationResourcePropertyResponse = Shapes::StructureShape.new(name: 'GetIntegrationResourcePropertyResponse')
     GetIntegrationTablePropertiesRequest = Shapes::StructureShape.new(name: 'GetIntegrationTablePropertiesRequest')
@@ -838,6 +845,9 @@ module Aws::Glue
     IcebergTransformString = Shapes::StringShape.new(name: 'IcebergTransformString')
     IdString = Shapes::StringShape.new(name: 'IdString')
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
+    IdentityCenterInstanceArn = Shapes::StringShape.new(name: 'IdentityCenterInstanceArn')
+    IdentityCenterScope = Shapes::StringShape.new(name: 'IdentityCenterScope')
+    IdentityCenterScopesList = Shapes::ListShape.new(name: 'IdentityCenterScopesList')
     IdleTimeout = Shapes::IntegerShape.new(name: 'IdleTimeout')
     IllegalBlueprintStateException = Shapes::StructureShape.new(name: 'IllegalBlueprintStateException')
     IllegalSessionStateException = Shapes::StructureShape.new(name: 'IllegalSessionStateException')
@@ -1513,6 +1523,8 @@ module Aws::Glue
     UpdateDatabaseResponse = Shapes::StructureShape.new(name: 'UpdateDatabaseResponse')
     UpdateDevEndpointRequest = Shapes::StructureShape.new(name: 'UpdateDevEndpointRequest')
     UpdateDevEndpointResponse = Shapes::StructureShape.new(name: 'UpdateDevEndpointResponse')
+    UpdateGlueIdentityCenterConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateGlueIdentityCenterConfigurationRequest')
+    UpdateGlueIdentityCenterConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateGlueIdentityCenterConfigurationResponse')
     UpdateGrokClassifierRequest = Shapes::StructureShape.new(name: 'UpdateGrokClassifierRequest')
     UpdateIcebergInput = Shapes::StructureShape.new(name: 'UpdateIcebergInput')
     UpdateIcebergTableInput = Shapes::StructureShape.new(name: 'UpdateIcebergTableInput')
@@ -2776,6 +2788,13 @@ module Aws::Glue
     CreateDevEndpointResponse.add_member(:arguments, Shapes::ShapeRef.new(shape: MapValue, location_name: "Arguments"))
     CreateDevEndpointResponse.struct_class = Types::CreateDevEndpointResponse
 
+    CreateGlueIdentityCenterConfigurationRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: IdentityCenterInstanceArn, required: true, location_name: "InstanceArn"))
+    CreateGlueIdentityCenterConfigurationRequest.add_member(:scopes, Shapes::ShapeRef.new(shape: IdentityCenterScopesList, location_name: "Scopes"))
+    CreateGlueIdentityCenterConfigurationRequest.struct_class = Types::CreateGlueIdentityCenterConfigurationRequest
+
+    CreateGlueIdentityCenterConfigurationResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "ApplicationArn"))
+    CreateGlueIdentityCenterConfigurationResponse.struct_class = Types::CreateGlueIdentityCenterConfigurationResponse
+
     CreateGrokClassifierRequest.add_member(:classification, Shapes::ShapeRef.new(shape: Classification, required: true, location_name: "Classification"))
     CreateGrokClassifierRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     CreateGrokClassifierRequest.add_member(:grok_pattern, Shapes::ShapeRef.new(shape: GrokPattern, required: true, location_name: "GrokPattern"))
@@ -3409,6 +3428,10 @@ module Aws::Glue
     DeleteDevEndpointRequest.struct_class = Types::DeleteDevEndpointRequest
 
     DeleteDevEndpointResponse.struct_class = Types::DeleteDevEndpointResponse
+
+    DeleteGlueIdentityCenterConfigurationRequest.struct_class = Types::DeleteGlueIdentityCenterConfigurationRequest
+
+    DeleteGlueIdentityCenterConfigurationResponse.struct_class = Types::DeleteGlueIdentityCenterConfigurationResponse
 
     DeleteIntegrationRequest.add_member(:integration_identifier, Shapes::ShapeRef.new(shape: String128, required: true, location_name: "IntegrationIdentifier"))
     DeleteIntegrationRequest.struct_class = Types::DeleteIntegrationRequest
@@ -4222,6 +4245,13 @@ module Aws::Glue
     GetEntityRecordsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetEntityRecordsResponse.struct_class = Types::GetEntityRecordsResponse
 
+    GetGlueIdentityCenterConfigurationRequest.struct_class = Types::GetGlueIdentityCenterConfigurationRequest
+
+    GetGlueIdentityCenterConfigurationResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "ApplicationArn"))
+    GetGlueIdentityCenterConfigurationResponse.add_member(:instance_arn, Shapes::ShapeRef.new(shape: IdentityCenterInstanceArn, location_name: "InstanceArn"))
+    GetGlueIdentityCenterConfigurationResponse.add_member(:scopes, Shapes::ShapeRef.new(shape: OrchestrationStringList, location_name: "Scopes"))
+    GetGlueIdentityCenterConfigurationResponse.struct_class = Types::GetGlueIdentityCenterConfigurationResponse
+
     GetIntegrationResourcePropertyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String128, required: true, location_name: "ResourceArn"))
     GetIntegrationResourcePropertyRequest.struct_class = Types::GetIntegrationResourcePropertyRequest
 
@@ -4891,6 +4921,8 @@ module Aws::Glue
 
     IdempotentParameterMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     IdempotentParameterMismatchException.struct_class = Types::IdempotentParameterMismatchException
+
+    IdentityCenterScopesList.member = Shapes::ShapeRef.new(shape: IdentityCenterScope)
 
     IllegalBlueprintStateException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     IllegalBlueprintStateException.struct_class = Types::IllegalBlueprintStateException
@@ -7282,6 +7314,11 @@ module Aws::Glue
 
     UpdateDevEndpointResponse.struct_class = Types::UpdateDevEndpointResponse
 
+    UpdateGlueIdentityCenterConfigurationRequest.add_member(:scopes, Shapes::ShapeRef.new(shape: IdentityCenterScopesList, location_name: "Scopes"))
+    UpdateGlueIdentityCenterConfigurationRequest.struct_class = Types::UpdateGlueIdentityCenterConfigurationRequest
+
+    UpdateGlueIdentityCenterConfigurationResponse.struct_class = Types::UpdateGlueIdentityCenterConfigurationResponse
+
     UpdateGrokClassifierRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     UpdateGrokClassifierRequest.add_member(:classification, Shapes::ShapeRef.new(shape: Classification, location_name: "Classification"))
     UpdateGrokClassifierRequest.add_member(:grok_pattern, Shapes::ShapeRef.new(shape: GrokPattern, location_name: "GrokPattern"))
@@ -8038,6 +8075,20 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
       end)
 
+      api.add_operation(:create_glue_identity_center_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateGlueIdentityCenterConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateGlueIdentityCenterConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateGlueIdentityCenterConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
       api.add_operation(:create_integration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateIntegration"
         o.http_method = "POST"
@@ -8457,6 +8508,20 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:delete_glue_identity_center_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteGlueIdentityCenterConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteGlueIdentityCenterConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteGlueIdentityCenterConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_integration, Seahorse::Model::Operation.new.tap do |o|
@@ -9198,6 +9263,20 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: FederationSourceException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_glue_identity_center_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetGlueIdentityCenterConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetGlueIdentityCenterConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetGlueIdentityCenterConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:get_integration_resource_property, Seahorse::Model::Operation.new.tap do |o|
@@ -10940,6 +11019,20 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_glue_identity_center_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateGlueIdentityCenterConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateGlueIdentityCenterConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateGlueIdentityCenterConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:update_integration_resource_property, Seahorse::Model::Operation.new.tap do |o|

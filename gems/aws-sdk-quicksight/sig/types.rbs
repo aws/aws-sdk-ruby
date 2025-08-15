@@ -4990,7 +4990,9 @@ module Aws::QuickSight
     class HeatMapConfiguration
       attr_accessor field_wells: Types::HeatMapFieldWells
       attr_accessor sort_configuration: Types::HeatMapSortConfiguration
+      attr_accessor row_axis_display_options: Types::AxisDisplayOptions
       attr_accessor row_label_options: Types::ChartAxisLabelOptions
+      attr_accessor column_axis_display_options: Types::AxisDisplayOptions
       attr_accessor column_label_options: Types::ChartAxisLabelOptions
       attr_accessor color_scale: Types::ColorScale
       attr_accessor legend: Types::LegendOptions
@@ -6865,6 +6867,7 @@ module Aws::QuickSight
       attr_accessor title: Types::VisualTitleLabelOptions
       attr_accessor subtitle: Types::VisualSubtitleLabelOptions
       attr_accessor chart_configuration: Types::PluginVisualConfiguration
+      attr_accessor actions: ::Array[Types::VisualCustomAction]
       attr_accessor visual_content_alt_text: ::String
       SENSITIVE: []
     end

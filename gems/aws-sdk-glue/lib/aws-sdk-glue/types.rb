@@ -5792,6 +5792,42 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Request to create a new Glue Identity Center configuration.
+    #
+    # @!attribute [rw] instance_arn
+    #   The Amazon Resource Name (ARN) of the Identity Center instance to be
+    #   associated with the Glue configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] scopes
+    #   A list of Identity Center scopes that define the permissions and
+    #   access levels for the Glue configuration.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateGlueIdentityCenterConfigurationRequest AWS API Documentation
+    #
+    class CreateGlueIdentityCenterConfigurationRequest < Struct.new(
+      :instance_arn,
+      :scopes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response from creating a new Glue Identity Center configuration.
+    #
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of the Identity Center application
+    #   that was created for the Glue configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateGlueIdentityCenterConfigurationResponse AWS API Documentation
+    #
+    class CreateGlueIdentityCenterConfigurationResponse < Struct.new(
+      :application_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies a `grok` classifier for `CreateClassifier` to create.
     #
     # @!attribute [rw] classification
@@ -9037,6 +9073,20 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDevEndpointResponse AWS API Documentation
     #
     class DeleteDevEndpointResponse < Aws::EmptyStructure; end
+
+    # Request to delete the existing Glue Identity Center configuration.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteGlueIdentityCenterConfigurationRequest AWS API Documentation
+    #
+    class DeleteGlueIdentityCenterConfigurationRequest < Aws::EmptyStructure; end
+
+    # Response from deleting the Glue Identity Center configuration.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteGlueIdentityCenterConfigurationResponse AWS API Documentation
+    #
+    class DeleteGlueIdentityCenterConfigurationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] integration_identifier
     #   The Amazon Resource Name (ARN) for the integration.
@@ -12939,6 +12989,41 @@ module Aws::Glue
       :records,
       :next_token)
       SENSITIVE = [:records]
+      include Aws::Structure
+    end
+
+    # Request to retrieve the Glue Identity Center configuration.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetGlueIdentityCenterConfigurationRequest AWS API Documentation
+    #
+    class GetGlueIdentityCenterConfigurationRequest < Aws::EmptyStructure; end
+
+    # Response containing the Glue Identity Center configuration details.
+    #
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of the Identity Center application
+    #   associated with the Glue configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_arn
+    #   The Amazon Resource Name (ARN) of the Identity Center instance
+    #   associated with the Glue configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] scopes
+    #   A list of Identity Center scopes that define the permissions and
+    #   access levels for the Glue configuration.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetGlueIdentityCenterConfigurationResponse AWS API Documentation
+    #
+    class GetGlueIdentityCenterConfigurationResponse < Struct.new(
+      :application_arn,
+      :instance_arn,
+      :scopes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28394,6 +28479,27 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDevEndpointResponse AWS API Documentation
     #
     class UpdateDevEndpointResponse < Aws::EmptyStructure; end
+
+    # Request to update an existing Glue Identity Center configuration.
+    #
+    # @!attribute [rw] scopes
+    #   A list of Identity Center scopes that define the updated permissions
+    #   and access levels for the Glue configuration.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateGlueIdentityCenterConfigurationRequest AWS API Documentation
+    #
+    class UpdateGlueIdentityCenterConfigurationRequest < Struct.new(
+      :scopes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response from updating an existing Glue Identity Center configuration.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateGlueIdentityCenterConfigurationResponse AWS API Documentation
+    #
+    class UpdateGlueIdentityCenterConfigurationResponse < Aws::EmptyStructure; end
 
     # Specifies a grok classifier to update when passed to
     # `UpdateClassifier`.

@@ -797,6 +797,16 @@ module Aws::QApps
     # `scope` parameter determines how the file will be used, either at the
     # app definition level or the app session level.
     #
+    # <note markdown="1"> The IAM permissions are derived from the `qapps:ImportDocument`
+    # action. For more information on the IAM policy for Amazon Q Apps, see
+    # [IAM permissions for using Amazon Q Apps][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/deploy-q-apps-iam-permissions.html
+    #
     # @option params [required, String] :instance_id
     #   The unique identifier of the Amazon Q Business application environment
     #   instance.
@@ -3339,7 +3349,7 @@ module Aws::QApps
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qapps'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -352,6 +352,7 @@ module Aws
         def contributor_insights_status: () -> ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "FAILED")
         def last_update_date_time: () -> ::Time
         def failure_exception: () -> Types::FailureException
+        def contributor_insights_mode: () -> ("ACCESSED_AND_THROTTLED_KEYS" | "THROTTLED_KEYS")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#describe_contributor_insights-instance_method
       def describe_contributor_insights: (
@@ -1112,12 +1113,14 @@ module Aws
         def table_name: () -> ::String
         def index_name: () -> ::String
         def contributor_insights_status: () -> ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "FAILED")
+        def contributor_insights_mode: () -> ("ACCESSED_AND_THROTTLED_KEYS" | "THROTTLED_KEYS")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#update_contributor_insights-instance_method
       def update_contributor_insights: (
                                          table_name: ::String,
                                          ?index_name: ::String,
-                                         contributor_insights_action: ("ENABLE" | "DISABLE")
+                                         contributor_insights_action: ("ENABLE" | "DISABLE"),
+                                         ?contributor_insights_mode: ("ACCESSED_AND_THROTTLED_KEYS" | "THROTTLED_KEYS")
                                        ) -> _UpdateContributorInsightsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContributorInsightsResponseSuccess
 

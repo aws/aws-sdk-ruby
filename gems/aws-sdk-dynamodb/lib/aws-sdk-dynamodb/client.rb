@@ -2648,6 +2648,7 @@ module Aws::DynamoDB
     #   * {Types::DescribeContributorInsightsOutput#contributor_insights_status #contributor_insights_status} => String
     #   * {Types::DescribeContributorInsightsOutput#last_update_date_time #last_update_date_time} => Time
     #   * {Types::DescribeContributorInsightsOutput#failure_exception #failure_exception} => Types::FailureException
+    #   * {Types::DescribeContributorInsightsOutput#contributor_insights_mode #contributor_insights_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2666,6 +2667,7 @@ module Aws::DynamoDB
     #   resp.last_update_date_time #=> Time
     #   resp.failure_exception.exception_name #=> String
     #   resp.failure_exception.exception_description #=> String
+    #   resp.contributor_insights_mode #=> String, one of "ACCESSED_AND_THROTTLED_KEYS", "THROTTLED_KEYS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeContributorInsights AWS API Documentation
     #
@@ -4449,6 +4451,7 @@ module Aws::DynamoDB
     #   resp.contributor_insights_summaries[0].table_name #=> String
     #   resp.contributor_insights_summaries[0].index_name #=> String
     #   resp.contributor_insights_summaries[0].contributor_insights_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "FAILED"
+    #   resp.contributor_insights_summaries[0].contributor_insights_mode #=> String, one of "ACCESSED_AND_THROTTLED_KEYS", "THROTTLED_KEYS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListContributorInsights AWS API Documentation
@@ -7151,11 +7154,16 @@ module Aws::DynamoDB
     # @option params [required, String] :contributor_insights_action
     #   Represents the contributor insights action.
     #
+    # @option params [String] :contributor_insights_mode
+    #   Specifies whether to track all access and throttled events or
+    #   throttled events only for the DynamoDB table or index.
+    #
     # @return [Types::UpdateContributorInsightsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateContributorInsightsOutput#table_name #table_name} => String
     #   * {Types::UpdateContributorInsightsOutput#index_name #index_name} => String
     #   * {Types::UpdateContributorInsightsOutput#contributor_insights_status #contributor_insights_status} => String
+    #   * {Types::UpdateContributorInsightsOutput#contributor_insights_mode #contributor_insights_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -7163,6 +7171,7 @@ module Aws::DynamoDB
     #     table_name: "TableArn", # required
     #     index_name: "IndexName",
     #     contributor_insights_action: "ENABLE", # required, accepts ENABLE, DISABLE
+    #     contributor_insights_mode: "ACCESSED_AND_THROTTLED_KEYS", # accepts ACCESSED_AND_THROTTLED_KEYS, THROTTLED_KEYS
     #   })
     #
     # @example Response structure
@@ -7170,6 +7179,7 @@ module Aws::DynamoDB
     #   resp.table_name #=> String
     #   resp.index_name #=> String
     #   resp.contributor_insights_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "FAILED"
+    #   resp.contributor_insights_mode #=> String, one of "ACCESSED_AND_THROTTLED_KEYS", "THROTTLED_KEYS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateContributorInsights AWS API Documentation
     #
@@ -8671,7 +8681,7 @@ module Aws::DynamoDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.149.0'
+      context[:gem_version] = '1.150.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

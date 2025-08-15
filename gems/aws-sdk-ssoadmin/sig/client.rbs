@@ -552,6 +552,16 @@ module Aws
                                  ) -> _GetApplicationGrantResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApplicationGrantResponseSuccess
 
+      interface _GetApplicationSessionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApplicationSessionConfigurationResponse]
+        def user_background_session_application_status: () -> ("ENABLED" | "DISABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#get_application_session_configuration-instance_method
+      def get_application_session_configuration: (
+                                                   application_arn: ::String
+                                                 ) -> _GetApplicationSessionConfigurationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApplicationSessionConfigurationResponseSuccess
+
       interface _GetInlinePolicyForPermissionSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetInlinePolicyForPermissionSetResponse]
         def inline_policy: () -> ::String
@@ -928,6 +938,16 @@ module Aws
                                    }
                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _PutApplicationSessionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutApplicationSessionConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#put_application_session_configuration-instance_method
+      def put_application_session_configuration: (
+                                                   application_arn: ::String,
+                                                   ?user_background_session_application_status: ("ENABLED" | "DISABLED")
+                                                 ) -> _PutApplicationSessionConfigurationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutApplicationSessionConfigurationResponseSuccess
 
       interface _PutInlinePolicyToPermissionSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutInlinePolicyToPermissionSetResponse]

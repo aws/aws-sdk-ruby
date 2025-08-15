@@ -35,6 +35,12 @@ module Aws::EC2
     end
     alias :volume_id :id
 
+    # The ID of the Availability Zone for the volume.
+    # @return [String]
+    def availability_zone_id
+      data[:availability_zone_id]
+    end
+
     # The Amazon Resource Name (ARN) of the Outpost.
     # @return [String]
     def outpost_arn

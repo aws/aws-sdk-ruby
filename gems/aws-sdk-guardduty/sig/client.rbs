@@ -265,6 +265,23 @@ module Aws
                                   ) -> _CreateSampleFindingsResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSampleFindingsResponseSuccess
 
+      interface _CreateThreatEntitySetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateThreatEntitySetResponse]
+        def threat_entity_set_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#create_threat_entity_set-instance_method
+      def create_threat_entity_set: (
+                                      detector_id: ::String,
+                                      name: ::String,
+                                      format: ("TXT" | "STIX" | "OTX_CSV" | "ALIEN_VAULT" | "PROOF_POINT" | "FIRE_EYE"),
+                                      location: ::String,
+                                      ?expected_bucket_owner: ::String,
+                                      activate: bool,
+                                      ?client_token: ::String,
+                                      ?tags: Hash[::String, ::String]
+                                    ) -> _CreateThreatEntitySetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateThreatEntitySetResponseSuccess
+
       interface _CreateThreatIntelSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateThreatIntelSetResponse]
         def threat_intel_set_id: () -> ::String
@@ -281,6 +298,23 @@ module Aws
                                      ?expected_bucket_owner: ::String
                                    ) -> _CreateThreatIntelSetResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateThreatIntelSetResponseSuccess
+
+      interface _CreateTrustedEntitySetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTrustedEntitySetResponse]
+        def trusted_entity_set_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#create_trusted_entity_set-instance_method
+      def create_trusted_entity_set: (
+                                       detector_id: ::String,
+                                       name: ::String,
+                                       format: ("TXT" | "STIX" | "OTX_CSV" | "ALIEN_VAULT" | "PROOF_POINT" | "FIRE_EYE"),
+                                       location: ::String,
+                                       ?expected_bucket_owner: ::String,
+                                       activate: bool,
+                                       ?client_token: ::String,
+                                       ?tags: Hash[::String, ::String]
+                                     ) -> _CreateTrustedEntitySetResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrustedEntitySetResponseSuccess
 
       interface _DeclineInvitationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeclineInvitationsResponse]
@@ -358,6 +392,16 @@ module Aws
                                          ) -> _DeletePublishingDestinationResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePublishingDestinationResponseSuccess
 
+      interface _DeleteThreatEntitySetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteThreatEntitySetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#delete_threat_entity_set-instance_method
+      def delete_threat_entity_set: (
+                                      detector_id: ::String,
+                                      threat_entity_set_id: ::String
+                                    ) -> _DeleteThreatEntitySetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteThreatEntitySetResponseSuccess
+
       interface _DeleteThreatIntelSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteThreatIntelSetResponse]
       end
@@ -367,6 +411,16 @@ module Aws
                                      threat_intel_set_id: ::String
                                    ) -> _DeleteThreatIntelSetResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteThreatIntelSetResponseSuccess
+
+      interface _DeleteTrustedEntitySetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTrustedEntitySetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#delete_trusted_entity_set-instance_method
+      def delete_trusted_entity_set: (
+                                       detector_id: ::String,
+                                       trusted_entity_set_id: ::String
+                                     ) -> _DeleteTrustedEntitySetResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTrustedEntitySetResponseSuccess
 
       interface _DescribeMalwareScansResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMalwareScansResponse]
@@ -694,6 +748,25 @@ module Aws
                                          ) -> _GetRemainingFreeTrialDaysResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRemainingFreeTrialDaysResponseSuccess
 
+      interface _GetThreatEntitySetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetThreatEntitySetResponse]
+        def name: () -> ::String
+        def format: () -> ("TXT" | "STIX" | "OTX_CSV" | "ALIEN_VAULT" | "PROOF_POINT" | "FIRE_EYE")
+        def location: () -> ::String
+        def expected_bucket_owner: () -> ::String
+        def status: () -> ("INACTIVE" | "ACTIVATING" | "ACTIVE" | "DEACTIVATING" | "ERROR" | "DELETE_PENDING" | "DELETED")
+        def tags: () -> ::Hash[::String, ::String]
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def error_details: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_threat_entity_set-instance_method
+      def get_threat_entity_set: (
+                                   detector_id: ::String,
+                                   threat_entity_set_id: ::String
+                                 ) -> _GetThreatEntitySetResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetThreatEntitySetResponseSuccess
+
       interface _GetThreatIntelSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetThreatIntelSetResponse]
         def name: () -> ::String
@@ -709,6 +782,25 @@ module Aws
                                   threat_intel_set_id: ::String
                                 ) -> _GetThreatIntelSetResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetThreatIntelSetResponseSuccess
+
+      interface _GetTrustedEntitySetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTrustedEntitySetResponse]
+        def name: () -> ::String
+        def format: () -> ("TXT" | "STIX" | "OTX_CSV" | "ALIEN_VAULT" | "PROOF_POINT" | "FIRE_EYE")
+        def location: () -> ::String
+        def expected_bucket_owner: () -> ::String
+        def status: () -> ("INACTIVE" | "ACTIVATING" | "ACTIVE" | "DEACTIVATING" | "ERROR" | "DELETE_PENDING" | "DELETED")
+        def tags: () -> ::Hash[::String, ::String]
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def error_details: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_trusted_entity_set-instance_method
+      def get_trusted_entity_set: (
+                                    detector_id: ::String,
+                                    trusted_entity_set_id: ::String
+                                  ) -> _GetTrustedEntitySetResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTrustedEntitySetResponseSuccess
 
       interface _GetUsageStatisticsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetUsageStatisticsResponse]
@@ -915,6 +1007,19 @@ module Aws
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
+      interface _ListThreatEntitySetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListThreatEntitySetsResponse]
+        def threat_entity_set_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_threat_entity_sets-instance_method
+      def list_threat_entity_sets: (
+                                     detector_id: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListThreatEntitySetsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListThreatEntitySetsResponseSuccess
+
       interface _ListThreatIntelSetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListThreatIntelSetsResponse]
         def threat_intel_set_ids: () -> ::Array[::String]
@@ -927,6 +1032,19 @@ module Aws
                                     ?next_token: ::String
                                   ) -> _ListThreatIntelSetsResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListThreatIntelSetsResponseSuccess
+
+      interface _ListTrustedEntitySetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTrustedEntitySetsResponse]
+        def trusted_entity_set_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_trusted_entity_sets-instance_method
+      def list_trusted_entity_sets: (
+                                      detector_id: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListTrustedEntitySetsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrustedEntitySetsResponseSuccess
 
       interface _StartMalwareScanResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartMalwareScanResponse]
@@ -1221,6 +1339,20 @@ module Aws
                                          ) -> _UpdatePublishingDestinationResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePublishingDestinationResponseSuccess
 
+      interface _UpdateThreatEntitySetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateThreatEntitySetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#update_threat_entity_set-instance_method
+      def update_threat_entity_set: (
+                                      detector_id: ::String,
+                                      threat_entity_set_id: ::String,
+                                      ?name: ::String,
+                                      ?location: ::String,
+                                      ?expected_bucket_owner: ::String,
+                                      ?activate: bool
+                                    ) -> _UpdateThreatEntitySetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateThreatEntitySetResponseSuccess
+
       interface _UpdateThreatIntelSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateThreatIntelSetResponse]
       end
@@ -1234,6 +1366,20 @@ module Aws
                                      ?expected_bucket_owner: ::String
                                    ) -> _UpdateThreatIntelSetResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateThreatIntelSetResponseSuccess
+
+      interface _UpdateTrustedEntitySetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTrustedEntitySetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#update_trusted_entity_set-instance_method
+      def update_trusted_entity_set: (
+                                       detector_id: ::String,
+                                       trusted_entity_set_id: ::String,
+                                       ?name: ::String,
+                                       ?location: ::String,
+                                       ?expected_bucket_owner: ::String,
+                                       ?activate: bool
+                                     ) -> _UpdateTrustedEntitySetResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTrustedEntitySetResponseSuccess
     end
   end
 end

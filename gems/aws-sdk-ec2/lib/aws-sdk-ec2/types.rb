@@ -2510,6 +2510,11 @@ module Aws::EC2
     #   The ID of the internet gateway or virtual private gateway.
     #   @return [String]
     #
+    # @!attribute [rw] public_ipv_4_pool
+    #   The ID of a public IPv4 pool. A public IPv4 pool is a pool of IPv4
+    #   addresses that you've brought to Amazon Web Services with BYOIP.
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -2529,6 +2534,7 @@ module Aws::EC2
     #
     class AssociateRouteTableRequest < Struct.new(
       :gateway_id,
+      :public_ipv_4_pool,
       :dry_run,
       :subnet_id,
       :route_table_id)
@@ -8889,6 +8895,9 @@ module Aws::EC2
 
     # @!attribute [rw] availability_zone
     #   The Availability Zone in which to create the default subnet.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified,
+    #   but not both.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -8904,12 +8913,20 @@ module Aws::EC2
     #   before you can create an IPv6 only subnet.
     #   @return [Boolean]
     #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified,
+    #   but not both.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultSubnetRequest AWS API Documentation
     #
     class CreateDefaultSubnetRequest < Struct.new(
       :availability_zone,
       :dry_run,
-      :ipv_6_native)
+      :ipv_6_native,
+      :availability_zone_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14685,6 +14702,17 @@ module Aws::EC2
     # @!attribute [rw] availability_zone
     #   The ID of the Availability Zone in which to create the volume. For
     #   example, `us-east-1a`.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified,
+    #   but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone in which to create the volume. For
+    #   example, `use1-az1`.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified,
+    #   but not both.
     #   @return [String]
     #
     # @!attribute [rw] encrypted
@@ -14906,6 +14934,7 @@ module Aws::EC2
     #
     class CreateVolumeRequest < Struct.new(
       :availability_zone,
+      :availability_zone_id,
       :encrypted,
       :iops,
       :kms_key_id,
@@ -23226,6 +23255,9 @@ module Aws::EC2
     #
     #   * `availability-zone` - The Availability Zone of the instance.
     #
+    #   * `availability-zone-id` - The ID of the Availability Zone of the
+    #     instance.
+    #
     #   * `event.code` - The code for the scheduled event (`instance-reboot`
     #     \| `system-reboot` \| `system-maintenance` \|
     #     `instance-retirement` \| `instance-stop`).
@@ -23754,6 +23786,9 @@ module Aws::EC2
     #     `arm64`).
     #
     #   * `availability-zone` - The Availability Zone of the instance.
+    #
+    #   * `availability-zone-id` - The ID of the Availability Zone of the
+    #     instance.
     #
     #   * `block-device-mapping.attach-time` - The attach time for an EBS
     #     volume mapped to the instance, for example,
@@ -28957,6 +28992,9 @@ module Aws::EC2
     #   * `launched-availability-zone` - The Availability Zone in which the
     #     request is launched.
     #
+    #   * `launched-availability-zone-id` - The ID of the Availability Zone
+    #     in which the request is launched.
+    #
     #   * `network-interface.addresses.primary` - Indicates whether the IP
     #     address is the primary private IP address.
     #
@@ -29057,6 +29095,13 @@ module Aws::EC2
 
     # Contains the parameters for DescribeSpotPriceHistory.
     #
+    # @!attribute [rw] availability_zone_id
+    #   Filters the results by the specified ID of the Availability Zone.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` can be specified,
+    #   but not both
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -29090,6 +29135,9 @@ module Aws::EC2
     #   * `availability-zone` - The Availability Zone for which prices
     #     should be returned.
     #
+    #   * `availability-zone-id` - The ID of the Availability Zone for which
+    #     prices should be returned.
+    #
     #   * `instance-type` - The type of instance (for example, `m3.medium`).
     #
     #   * `product-description` - The product description for the Spot price
@@ -29110,6 +29158,9 @@ module Aws::EC2
     #
     # @!attribute [rw] availability_zone
     #   Filters the results by the specified Availability Zone.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` can be specified,
+    #   but not both
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -29131,6 +29182,7 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotPriceHistoryRequest AWS API Documentation
     #
     class DescribeSpotPriceHistoryRequest < Struct.new(
+      :availability_zone_id,
       :dry_run,
       :start_time,
       :end_time,
@@ -31123,6 +31175,9 @@ module Aws::EC2
     #   * `availability-zone` - The Availability Zone in which the volume
     #     was created.
     #
+    #   * `availability-zone-id` - The ID of the Availability Zone in which
+    #     the volume was created.
+    #
     #   * `create-time` - The time stamp when the volume was created.
     #
     #   * `encrypted` - Indicates whether the volume is encrypted (`true` \|
@@ -31509,9 +31564,6 @@ module Aws::EC2
     #
     #   * `resource-configuration-group-arn` - The Amazon Resource Name
     #     (ARN) of the resource configuration of type GROUP.
-    #
-    #   * `service-network-resource-association-id` - The ID of the
-    #     association.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -35027,6 +35079,10 @@ module Aws::EC2
     #   The IP address type of the endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] public_dns_names
+    #   The public DNS names of the endpoint.
+    #   @return [Types::InstanceConnectEndpointPublicDnsNames]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ec2InstanceConnectEndpoint AWS API Documentation
     #
     class Ec2InstanceConnectEndpoint < Struct.new(
@@ -35045,7 +35101,8 @@ module Aws::EC2
       :preserve_client_ip,
       :security_group_ids,
       :tags,
-      :ip_address_type)
+      :ip_address_type,
+      :public_dns_names)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44025,6 +44082,11 @@ module Aws::EC2
     #   The Availability Zone where the resulting instance will reside.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone where the resulting instance will
+    #   reside.
+    #   @return [String]
+    #
     # @!attribute [rw] bytes_converted
     #   The number of bytes converted so far.
     #   @return [Integer]
@@ -44053,6 +44115,7 @@ module Aws::EC2
     #
     class ImportInstanceVolumeDetailItem < Struct.new(
       :availability_zone,
+      :availability_zone_id,
       :bytes_converted,
       :description,
       :image,
@@ -44281,6 +44344,13 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone for the resulting EBS volume.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified,
+    #   but not both.
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -44290,6 +44360,9 @@ module Aws::EC2
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone for the resulting EBS volume.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified,
+    #   but not both.
     #   @return [String]
     #
     # @!attribute [rw] image
@@ -44307,6 +44380,7 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportVolumeRequest AWS API Documentation
     #
     class ImportVolumeRequest < Struct.new(
+      :availability_zone_id,
       :dry_run,
       :availability_zone,
       :image,
@@ -44334,6 +44408,11 @@ module Aws::EC2
     #   The Availability Zone where the resulting volume will reside.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone where the resulting volume will
+    #   reside.
+    #   @return [String]
+    #
     # @!attribute [rw] bytes_converted
     #   The number of bytes converted so far.
     #   @return [Integer]
@@ -44354,6 +44433,7 @@ module Aws::EC2
     #
     class ImportVolumeTaskDetails < Struct.new(
       :availability_zone,
+      :availability_zone_id,
       :bytes_converted,
       :description,
       :image,
@@ -45106,6 +45186,48 @@ module Aws::EC2
       :available_capacity,
       :instance_type,
       :total_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The DNS names of the endpoint.
+    #
+    # @!attribute [rw] dns_name
+    #   The DNS name of the EC2 Instance Connect Endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] fips_dns_name
+    #   The Federal Information Processing Standards (FIPS) compliant DNS
+    #   name of the EC2 Instance Connect Endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceConnectEndpointDnsNames AWS API Documentation
+    #
+    class InstanceConnectEndpointDnsNames < Struct.new(
+      :dns_name,
+      :fips_dns_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The public DNS names of the endpoint, including IPv4-only and
+    # dualstack DNS names.
+    #
+    # @!attribute [rw] ipv_4
+    #   The IPv4-only DNS name of the EC2 Instance Connect Endpoint.
+    #   @return [Types::InstanceConnectEndpointDnsNames]
+    #
+    # @!attribute [rw] dualstack
+    #   The dualstack DNS name of the EC2 Instance Connect Endpoint. A
+    #   dualstack DNS name supports connections from both IPv4 and IPv6
+    #   clients.
+    #   @return [Types::InstanceConnectEndpointDnsNames]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceConnectEndpointPublicDnsNames AWS API Documentation
+    #
+    class InstanceConnectEndpointPublicDnsNames < Struct.new(
+      :ipv_4,
+      :dualstack)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47487,6 +47609,10 @@ module Aws::EC2
     #   The Availability Zone of the instance.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone of the instance.
+    #   @return [String]
+    #
     # @!attribute [rw] outpost_arn
     #   The Amazon Resource Name (ARN) of the Outpost.
     #   @return [String]
@@ -47529,6 +47655,7 @@ module Aws::EC2
     #
     class InstanceStatus < Struct.new(
       :availability_zone,
+      :availability_zone_id,
       :outpost_arn,
       :operator,
       :events,
@@ -51642,6 +51769,10 @@ module Aws::EC2
     #   The Availability Zone of the instance.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone of the instance.
+    #   @return [String]
+    #
     # @!attribute [rw] affinity
     #   The affinity setting for the instance on the Dedicated Host.
     #   @return [String]
@@ -51682,6 +51813,7 @@ module Aws::EC2
     #
     class LaunchTemplatePlacement < Struct.new(
       :availability_zone,
+      :availability_zone_id,
       :affinity,
       :group_name,
       :host_id,
@@ -51698,6 +51830,16 @@ module Aws::EC2
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone for the instance.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` can be specified,
+    #   but not both
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone for the instance.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` can be specified,
+    #   but not both
     #   @return [String]
     #
     # @!attribute [rw] affinity
@@ -51742,6 +51884,7 @@ module Aws::EC2
     #
     class LaunchTemplatePlacementRequest < Struct.new(
       :availability_zone,
+      :availability_zone_id,
       :affinity,
       :group_name,
       :host_id,
@@ -54492,6 +54635,80 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceCapacityReservationAttributesResult AWS API Documentation
     #
     class ModifyInstanceCapacityReservationAttributesResult < Struct.new(
+      :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_connect_endpoint_id
+    #   The ID of the EC2 Instance Connect Endpoint to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address_type
+    #   The new IP address type for the EC2 Instance Connect Endpoint.
+    #
+    #   <note markdown="1"> `PreserveClientIp` is only supported on IPv4 EC2 Instance Connect
+    #   Endpoints. To use `PreserveClientIp`, the value for `IpAddressType`
+    #   must be `ipv4`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   Changes the security groups for the EC2 Instance Connect Endpoint.
+    #   The new set of groups you specify replaces the current set. You must
+    #   specify at least one group, even if it's just the default security
+    #   group in the VPC. You must specify the ID of the security group, not
+    #   the name.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] preserve_client_ip
+    #   Indicates whether the client IP address is preserved as the source.
+    #   The following are the possible values.
+    #
+    #   * `true` - Use the client IP address as the source.
+    #
+    #   * `false` - Use the network interface IP address as the source.
+    #
+    #   <note markdown="1"> `PreserveClientIp=true` is only supported on IPv4 EC2 Instance
+    #   Connect Endpoints. If modifying `PreserveClientIp` to `true`, either
+    #   the endpoint's existing `IpAddressType` must be `ipv4`, or if
+    #   modifying `IpAddressType` in the same request, the new value must be
+    #   `ipv4`.
+    #
+    #    </note>
+    #
+    #   Default: `false`
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceConnectEndpointRequest AWS API Documentation
+    #
+    class ModifyInstanceConnectEndpointRequest < Struct.new(
+      :dry_run,
+      :instance_connect_endpoint_id,
+      :ip_address_type,
+      :security_group_ids,
+      :preserve_client_ip)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   The return value of the request. Returns `true` if the specified
+    #   product code is owned by the requester and associated with the
+    #   specified instance.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceConnectEndpointResult AWS API Documentation
+    #
+    class ModifyInstanceConnectEndpointResult < Struct.new(
       :return)
       SENSITIVE = []
       include Aws::Structure
@@ -61318,6 +61535,21 @@ module Aws::EC2
 
     # Describes the placement of an instance.
     #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone of the instance.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` can be specified,
+    #   but not both. If neither is specified, Amazon EC2 automatically
+    #   selects an Availability Zone based on the load balancing criteria
+    #   for the Region.
+    #
+    #   This parameter is not supported for [CreateFleet][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
+    #   @return [String]
+    #
     # @!attribute [rw] affinity
     #   The affinity setting for the instance on the Dedicated Host.
     #
@@ -61397,8 +61629,10 @@ module Aws::EC2
     # @!attribute [rw] availability_zone
     #   The Availability Zone of the instance.
     #
-    #   If not specified, an Availability Zone will be automatically chosen
-    #   for you based on the load balancing criteria for the Region.
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` can be specified,
+    #   but not both. If neither is specified, Amazon EC2 automatically
+    #   selects an Availability Zone based on the load balancing criteria
+    #   for the Region.
     #
     #   This parameter is not supported for [CreateFleet][1].
     #
@@ -61410,6 +61644,7 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Placement AWS API Documentation
     #
     class Placement < Struct.new(
+      :availability_zone_id,
       :affinity,
       :group_name,
       :partition_number,
@@ -67355,6 +67590,11 @@ module Aws::EC2
     #   The ID of the internet gateway or virtual private gateway.
     #   @return [String]
     #
+    # @!attribute [rw] public_ipv_4_pool
+    #   The ID of a public IPv4 pool. A public IPv4 pool is a pool of IPv4
+    #   addresses that you've brought to Amazon Web Services with BYOIP.
+    #   @return [String]
+    #
     # @!attribute [rw] association_state
     #   The state of the association.
     #   @return [Types::RouteTableAssociationState]
@@ -67367,6 +67607,7 @@ module Aws::EC2
       :route_table_id,
       :subnet_id,
       :gateway_id,
+      :public_ipv_4_pool,
       :association_state)
       SENSITIVE = []
       include Aws::Structure
@@ -69355,8 +69596,18 @@ module Aws::EC2
     #   The service state.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_ids
+    #   The IDs of the Availability Zones in which the service is available.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` can be specified,
+    #   but not both
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] availability_zones
     #   The Availability Zones in which the service is available.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` can be specified,
+    #   but not both
     #   @return [Array<String>]
     #
     # @!attribute [rw] acceptance_required
@@ -69421,6 +69672,7 @@ module Aws::EC2
       :service_id,
       :service_name,
       :service_state,
+      :availability_zone_ids,
       :availability_zones,
       :acceptance_required,
       :manages_vpc_endpoints,
@@ -69456,8 +69708,18 @@ module Aws::EC2
     #   The Region where the service is hosted.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_ids
+    #   The IDs of the Availability Zones in which the service is available.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` can be specified,
+    #   but not both
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] availability_zones
     #   The Availability Zones in which the service is available.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` can be specified,
+    #   but not both
     #   @return [Array<String>]
     #
     # @!attribute [rw] owner
@@ -69517,6 +69779,7 @@ module Aws::EC2
       :service_id,
       :service_type,
       :service_region,
+      :availability_zone_ids,
       :availability_zones,
       :owner,
       :base_endpoint_dns_names,
@@ -70936,6 +71199,16 @@ module Aws::EC2
     #
     # @!attribute [rw] launched_availability_zone
     #   The Availability Zone in which the request is launched.
+    #
+    #   Either `launchedAvailabilityZone` or `launchedAvailabilityZoneId`
+    #   can be specified, but not both
+    #   @return [String]
+    #
+    # @!attribute [rw] launched_availability_zone_id
+    #   The ID of the Availability Zone in which the request is launched.
+    #
+    #   Either `launchedAvailabilityZone` or `launchedAvailabilityZoneId`
+    #   can be specified, but not both
     #   @return [String]
     #
     # @!attribute [rw] product_description
@@ -71016,6 +71289,7 @@ module Aws::EC2
       :launch_group,
       :launch_specification,
       :launched_availability_zone,
+      :launched_availability_zone_id,
       :product_description,
       :spot_instance_request_id,
       :spot_price,
@@ -71566,6 +71840,10 @@ module Aws::EC2
     #   The Availability Zone.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone.
+    #   @return [String]
+    #
     # @!attribute [rw] instance_type
     #   The instance type.
     #   @return [String]
@@ -71593,6 +71871,7 @@ module Aws::EC2
     #
     class SpotPrice < Struct.new(
       :availability_zone,
+      :availability_zone_id,
       :instance_type,
       :product_description,
       :spot_price,
@@ -76723,6 +77002,10 @@ module Aws::EC2
 
     # Describes a volume.
     #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone for the volume.
+    #   @return [String]
+    #
     # @!attribute [rw] outpost_arn
     #   The Amazon Resource Name (ARN) of the Outpost.
     #   @return [String]
@@ -76823,6 +77106,7 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Volume AWS API Documentation
     #
     class Volume < Struct.new(
+      :availability_zone_id,
       :outpost_arn,
       :iops,
       :tags,

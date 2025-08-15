@@ -2498,6 +2498,10 @@ module Aws::EC2
     # @option params [String] :gateway_id
     #   The ID of the internet gateway or virtual private gateway.
     #
+    # @option params [String] :public_ipv_4_pool
+    #   The ID of a public IPv4 pool. A public IPv4 pool is a pool of IPv4
+    #   addresses that you've brought to Amazon Web Services with BYOIP.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -2534,6 +2538,7 @@ module Aws::EC2
     #
     #   resp = client.associate_route_table({
     #     gateway_id: "RouteGatewayId",
+    #     public_ipv_4_pool: "Ipv4PoolEc2Id",
     #     dry_run: false,
     #     subnet_id: "SubnetId",
     #     route_table_id: "RouteTableId", # required
@@ -6546,8 +6551,11 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/work-with-default-vpc.html#create-default-subnet
     #
-    # @option params [required, String] :availability_zone
+    # @option params [String] :availability_zone
     #   The Availability Zone in which to create the default subnet.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified,
+    #   but not both.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -6560,6 +6568,12 @@ module Aws::EC2
     #   default subnet for this Availability Zone, you must delete it before
     #   you can create an IPv6 only subnet.
     #
+    # @option params [String] :availability_zone_id
+    #   The ID of the Availability Zone.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified,
+    #   but not both.
+    #
     # @return [Types::CreateDefaultSubnetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDefaultSubnetResult#subnet #subnet} => Types::Subnet
@@ -6567,9 +6581,10 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_default_subnet({
-    #     availability_zone: "AvailabilityZoneName", # required
+    #     availability_zone: "AvailabilityZoneName",
     #     dry_run: false,
     #     ipv_6_native: false,
+    #     availability_zone_id: "AvailabilityZoneId",
     #   })
     #
     # @example Response structure
@@ -7203,6 +7218,7 @@ module Aws::EC2
     #             weighted_capacity: 1.0,
     #             priority: 1.0,
     #             placement: {
+    #               availability_zone_id: "AvailabilityZoneId",
     #               affinity: "String",
     #               group_name: "PlacementGroupName",
     #               partition_number: 1,
@@ -8076,7 +8092,7 @@ module Aws::EC2
     #   resp.instance_connect_endpoint.owner_id #=> String
     #   resp.instance_connect_endpoint.instance_connect_endpoint_id #=> String
     #   resp.instance_connect_endpoint.instance_connect_endpoint_arn #=> String
-    #   resp.instance_connect_endpoint.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.instance_connect_endpoint.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "delete-in-progress", "delete-complete", "delete-failed", "update-in-progress", "update-complete", "update-failed"
     #   resp.instance_connect_endpoint.state_message #=> String
     #   resp.instance_connect_endpoint.dns_name #=> String
     #   resp.instance_connect_endpoint.fips_dns_name #=> String
@@ -8093,6 +8109,10 @@ module Aws::EC2
     #   resp.instance_connect_endpoint.tags[0].key #=> String
     #   resp.instance_connect_endpoint.tags[0].value #=> String
     #   resp.instance_connect_endpoint.ip_address_type #=> String, one of "ipv4", "dualstack", "ipv6"
+    #   resp.instance_connect_endpoint.public_dns_names.ipv_4.dns_name #=> String
+    #   resp.instance_connect_endpoint.public_dns_names.ipv_4.fips_dns_name #=> String
+    #   resp.instance_connect_endpoint.public_dns_names.dualstack.dns_name #=> String
+    #   resp.instance_connect_endpoint.public_dns_names.dualstack.fips_dns_name #=> String
     #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInstanceConnectEndpoint AWS API Documentation
@@ -9346,6 +9366,7 @@ module Aws::EC2
     #       },
     #       placement: {
     #         availability_zone: "String",
+    #         availability_zone_id: "AvailabilityZoneId",
     #         affinity: "String",
     #         group_name: "PlacementGroupName",
     #         host_id: "DedicatedHostId",
@@ -9775,6 +9796,7 @@ module Aws::EC2
     #       },
     #       placement: {
     #         availability_zone: "String",
+    #         availability_zone_id: "AvailabilityZoneId",
     #         affinity: "String",
     #         group_name: "PlacementGroupName",
     #         host_id: "DedicatedHostId",
@@ -10001,6 +10023,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.key_name #=> String
     #   resp.launch_template_version.launch_template_data.monitoring.enabled #=> Boolean
     #   resp.launch_template_version.launch_template_data.placement.availability_zone #=> String
+    #   resp.launch_template_version.launch_template_data.placement.availability_zone_id #=> String
     #   resp.launch_template_version.launch_template_data.placement.affinity #=> String
     #   resp.launch_template_version.launch_template_data.placement.group_name #=> String
     #   resp.launch_template_version.launch_template_data.placement.host_id #=> String
@@ -13116,6 +13139,7 @@ module Aws::EC2
     #   resp.route_table.associations[0].route_table_id #=> String
     #   resp.route_table.associations[0].subnet_id #=> String
     #   resp.route_table.associations[0].gateway_id #=> String
+    #   resp.route_table.associations[0].public_ipv_4_pool #=> String
     #   resp.route_table.associations[0].association_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failed"
     #   resp.route_table.associations[0].association_state.status_message #=> String
     #   resp.route_table.propagating_vgws #=> Array
@@ -16004,9 +16028,19 @@ module Aws::EC2
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
     # [3]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-creating-volume.html
     #
-    # @option params [required, String] :availability_zone
+    # @option params [String] :availability_zone
     #   The ID of the Availability Zone in which to create the volume. For
     #   example, `us-east-1a`.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified,
+    #   but not both.
+    #
+    # @option params [String] :availability_zone_id
+    #   The ID of the Availability Zone in which to create the volume. For
+    #   example, `use1-az1`.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified,
+    #   but not both.
     #
     # @option params [Boolean] :encrypted
     #   Indicates whether the volume should be encrypted. The effect of
@@ -16207,6 +16241,7 @@ module Aws::EC2
     #
     # @return [Types::Volume] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::Volume#availability_zone_id #availability_zone_id} => String
     #   * {Types::Volume#outpost_arn #outpost_arn} => String
     #   * {Types::Volume#iops #iops} => Integer
     #   * {Types::Volume#tags #tags} => Array&lt;Types::Tag&gt;
@@ -16282,7 +16317,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_volume({
-    #     availability_zone: "AvailabilityZoneName", # required
+    #     availability_zone: "AvailabilityZoneName",
+    #     availability_zone_id: "AvailabilityZoneId",
     #     encrypted: false,
     #     iops: 1,
     #     kms_key_id: "KmsKeyId",
@@ -16313,6 +16349,7 @@ module Aws::EC2
     #
     # @example Response structure
     #
+    #   resp.availability_zone_id #=> String
     #   resp.outpost_arn #=> String
     #   resp.iops #=> Integer
     #   resp.tags #=> Array
@@ -17039,6 +17076,8 @@ module Aws::EC2
     #   resp.service_configuration.service_id #=> String
     #   resp.service_configuration.service_name #=> String
     #   resp.service_configuration.service_state #=> String, one of "Pending", "Available", "Deleting", "Deleted", "Failed"
+    #   resp.service_configuration.availability_zone_ids #=> Array
+    #   resp.service_configuration.availability_zone_ids[0] #=> String
     #   resp.service_configuration.availability_zones #=> Array
     #   resp.service_configuration.availability_zones[0] #=> String
     #   resp.service_configuration.acceptance_required #=> Boolean
@@ -18070,7 +18109,7 @@ module Aws::EC2
     #   resp.instance_connect_endpoint.owner_id #=> String
     #   resp.instance_connect_endpoint.instance_connect_endpoint_id #=> String
     #   resp.instance_connect_endpoint.instance_connect_endpoint_arn #=> String
-    #   resp.instance_connect_endpoint.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.instance_connect_endpoint.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "delete-in-progress", "delete-complete", "delete-failed", "update-in-progress", "update-complete", "update-failed"
     #   resp.instance_connect_endpoint.state_message #=> String
     #   resp.instance_connect_endpoint.dns_name #=> String
     #   resp.instance_connect_endpoint.fips_dns_name #=> String
@@ -18087,6 +18126,10 @@ module Aws::EC2
     #   resp.instance_connect_endpoint.tags[0].key #=> String
     #   resp.instance_connect_endpoint.tags[0].value #=> String
     #   resp.instance_connect_endpoint.ip_address_type #=> String, one of "ipv4", "dualstack", "ipv6"
+    #   resp.instance_connect_endpoint.public_dns_names.ipv_4.dns_name #=> String
+    #   resp.instance_connect_endpoint.public_dns_names.ipv_4.fips_dns_name #=> String
+    #   resp.instance_connect_endpoint.public_dns_names.dualstack.dns_name #=> String
+    #   resp.instance_connect_endpoint.public_dns_names.dualstack.fips_dns_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteInstanceConnectEndpoint AWS API Documentation
     #
@@ -24389,6 +24432,7 @@ module Aws::EC2
     #   resp.conversion_tasks[0].import_instance.platform #=> String, one of "Windows"
     #   resp.conversion_tasks[0].import_instance.volumes #=> Array
     #   resp.conversion_tasks[0].import_instance.volumes[0].availability_zone #=> String
+    #   resp.conversion_tasks[0].import_instance.volumes[0].availability_zone_id #=> String
     #   resp.conversion_tasks[0].import_instance.volumes[0].bytes_converted #=> Integer
     #   resp.conversion_tasks[0].import_instance.volumes[0].description #=> String
     #   resp.conversion_tasks[0].import_instance.volumes[0].image.checksum #=> String
@@ -24400,6 +24444,7 @@ module Aws::EC2
     #   resp.conversion_tasks[0].import_instance.volumes[0].volume.id #=> String
     #   resp.conversion_tasks[0].import_instance.volumes[0].volume.size #=> Integer
     #   resp.conversion_tasks[0].import_volume.availability_zone #=> String
+    #   resp.conversion_tasks[0].import_volume.availability_zone_id #=> String
     #   resp.conversion_tasks[0].import_volume.bytes_converted #=> Integer
     #   resp.conversion_tasks[0].import_volume.description #=> String
     #   resp.conversion_tasks[0].import_volume.image.checksum #=> String
@@ -27436,7 +27481,7 @@ module Aws::EC2
     #   resp.instance_connect_endpoints[0].owner_id #=> String
     #   resp.instance_connect_endpoints[0].instance_connect_endpoint_id #=> String
     #   resp.instance_connect_endpoints[0].instance_connect_endpoint_arn #=> String
-    #   resp.instance_connect_endpoints[0].state #=> String, one of "create-in-progress", "create-complete", "create-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.instance_connect_endpoints[0].state #=> String, one of "create-in-progress", "create-complete", "create-failed", "delete-in-progress", "delete-complete", "delete-failed", "update-in-progress", "update-complete", "update-failed"
     #   resp.instance_connect_endpoints[0].state_message #=> String
     #   resp.instance_connect_endpoints[0].dns_name #=> String
     #   resp.instance_connect_endpoints[0].fips_dns_name #=> String
@@ -27453,6 +27498,10 @@ module Aws::EC2
     #   resp.instance_connect_endpoints[0].tags[0].key #=> String
     #   resp.instance_connect_endpoints[0].tags[0].value #=> String
     #   resp.instance_connect_endpoints[0].ip_address_type #=> String, one of "ipv4", "dualstack", "ipv6"
+    #   resp.instance_connect_endpoints[0].public_dns_names.ipv_4.dns_name #=> String
+    #   resp.instance_connect_endpoints[0].public_dns_names.ipv_4.fips_dns_name #=> String
+    #   resp.instance_connect_endpoints[0].public_dns_names.dualstack.dns_name #=> String
+    #   resp.instance_connect_endpoints[0].public_dns_names.dualstack.fips_dns_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceConnectEndpoints AWS API Documentation
@@ -27966,6 +28015,9 @@ module Aws::EC2
     #
     #   * `availability-zone` - The Availability Zone of the instance.
     #
+    #   * `availability-zone-id` - The ID of the Availability Zone of the
+    #     instance.
+    #
     #   * `event.code` - The code for the scheduled event (`instance-reboot`
     #     \| `system-reboot` \| `system-maintenance` \| `instance-retirement`
     #     \| `instance-stop`).
@@ -28096,6 +28148,7 @@ module Aws::EC2
     #
     #   resp.instance_statuses #=> Array
     #   resp.instance_statuses[0].availability_zone #=> String
+    #   resp.instance_statuses[0].availability_zone_id #=> String
     #   resp.instance_statuses[0].outpost_arn #=> String
     #   resp.instance_statuses[0].operator.managed #=> Boolean
     #   resp.instance_statuses[0].operator.principal #=> String
@@ -28772,6 +28825,9 @@ module Aws::EC2
     #     `arm64`).
     #
     #   * `availability-zone` - The Availability Zone of the instance.
+    #
+    #   * `availability-zone-id` - The ID of the Availability Zone of the
+    #     instance.
     #
     #   * `block-device-mapping.attach-time` - The attach time for an EBS
     #     volume mapped to the instance, for example,
@@ -29458,6 +29514,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
     #   resp.reservations[0].instances[0].instance_type #=> String, one of "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "c5ad.large", "c5ad.xlarge", "c5ad.2xlarge", "c5ad.4xlarge", "c5ad.8xlarge", "c5ad.12xlarge", "c5ad.16xlarge", "c5ad.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "c5n.metal", "c6g.medium", "c6g.large", "c6g.xlarge", "c6g.2xlarge", "c6g.4xlarge", "c6g.8xlarge", "c6g.12xlarge", "c6g.16xlarge", "c6g.metal", "c6gd.medium", "c6gd.large", "c6gd.xlarge", "c6gd.2xlarge", "c6gd.4xlarge", "c6gd.8xlarge", "c6gd.12xlarge", "c6gd.16xlarge", "c6gd.metal", "c6gn.medium", "c6gn.large", "c6gn.xlarge", "c6gn.2xlarge", "c6gn.4xlarge", "c6gn.8xlarge", "c6gn.12xlarge", "c6gn.16xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "c6i.32xlarge", "c6i.metal", "cc1.4xlarge", "cc2.8xlarge", "cg1.4xlarge", "cr1.8xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "d3.xlarge", "d3.2xlarge", "d3.4xlarge", "d3.8xlarge", "d3en.xlarge", "d3en.2xlarge", "d3en.4xlarge", "d3en.6xlarge", "d3en.8xlarge", "d3en.12xlarge", "dl1.24xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4ad.xlarge", "g4ad.2xlarge", "g4ad.4xlarge", "g4ad.8xlarge", "g4ad.16xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g4dn.metal", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.12xlarge", "g5.16xlarge", "g5.24xlarge", "g5.48xlarge", "g5g.xlarge", "g5g.2xlarge", "g5g.4xlarge", "g5g.8xlarge", "g5g.16xlarge", "g5g.metal", "hi1.4xlarge", "hpc6a.48xlarge", "hs1.8xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "im4gn.large", "im4gn.xlarge", "im4gn.2xlarge", "im4gn.4xlarge", "im4gn.8xlarge", "im4gn.16xlarge", "inf1.xlarge", "inf1.2xlarge", "inf1.6xlarge", "inf1.24xlarge", "is4gen.medium", "is4gen.large", "is4gen.xlarge", "is4gen.2xlarge", "is4gen.4xlarge", "is4gen.8xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5dn.metal", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "m5n.metal", "m5zn.large", "m5zn.xlarge", "m5zn.2xlarge", "m5zn.3xlarge", "m5zn.6xlarge", "m5zn.12xlarge", "m5zn.metal", "m6a.large", "m6a.xlarge", "m6a.2xlarge", "m6a.4xlarge", "m6a.8xlarge", "m6a.12xlarge", "m6a.16xlarge", "m6a.24xlarge", "m6a.32xlarge", "m6a.48xlarge", "m6g.metal", "m6g.medium", "m6g.large", "m6g.xlarge", "m6g.2xlarge", "m6g.4xlarge", "m6g.8xlarge", "m6g.12xlarge", "m6g.16xlarge", "m6gd.metal", "m6gd.medium", "m6gd.large", "m6gd.xlarge", "m6gd.2xlarge", "m6gd.4xlarge", "m6gd.8xlarge", "m6gd.12xlarge", "m6gd.16xlarge", "m6i.large", "m6i.xlarge", "m6i.2xlarge", "m6i.4xlarge", "m6i.8xlarge", "m6i.12xlarge", "m6i.16xlarge", "m6i.24xlarge", "m6i.32xlarge", "m6i.metal", "mac1.metal", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "p4d.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "r5b.large", "r5b.xlarge", "r5b.2xlarge", "r5b.4xlarge", "r5b.8xlarge", "r5b.12xlarge", "r5b.16xlarge", "r5b.24xlarge", "r5b.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5dn.metal", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge", "r5n.metal", "r6g.medium", "r6g.large", "r6g.xlarge", "r6g.2xlarge", "r6g.4xlarge", "r6g.8xlarge", "r6g.12xlarge", "r6g.16xlarge", "r6g.metal", "r6gd.medium", "r6gd.large", "r6gd.xlarge", "r6gd.2xlarge", "r6gd.4xlarge", "r6gd.8xlarge", "r6gd.12xlarge", "r6gd.16xlarge", "r6gd.metal", "r6i.large", "r6i.xlarge", "r6i.2xlarge", "r6i.4xlarge", "r6i.8xlarge", "r6i.12xlarge", "r6i.16xlarge", "r6i.24xlarge", "r6i.32xlarge", "r6i.metal", "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "t4g.nano", "t4g.micro", "t4g.small", "t4g.medium", "t4g.large", "t4g.xlarge", "t4g.2xlarge", "u-6tb1.56xlarge", "u-6tb1.112xlarge", "u-9tb1.112xlarge", "u-12tb1.112xlarge", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "vt1.3xlarge", "vt1.6xlarge", "vt1.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "x2iezn.2xlarge", "x2iezn.4xlarge", "x2iezn.6xlarge", "x2iezn.8xlarge", "x2iezn.12xlarge", "x2iezn.metal", "x2gd.medium", "x2gd.large", "x2gd.xlarge", "x2gd.2xlarge", "x2gd.4xlarge", "x2gd.8xlarge", "x2gd.12xlarge", "x2gd.16xlarge", "x2gd.metal", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "x2idn.16xlarge", "x2idn.24xlarge", "x2idn.32xlarge", "x2iedn.xlarge", "x2iedn.2xlarge", "x2iedn.4xlarge", "x2iedn.8xlarge", "x2iedn.16xlarge", "x2iedn.24xlarge", "x2iedn.32xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6a.32xlarge", "c6a.48xlarge", "c6a.metal", "m6a.metal", "i4i.large", "i4i.xlarge", "i4i.2xlarge", "i4i.4xlarge", "i4i.8xlarge", "i4i.16xlarge", "i4i.32xlarge", "i4i.metal", "x2idn.metal", "x2iedn.metal", "c7g.medium", "c7g.large", "c7g.xlarge", "c7g.2xlarge", "c7g.4xlarge", "c7g.8xlarge", "c7g.12xlarge", "c7g.16xlarge", "mac2.metal", "c6id.large", "c6id.xlarge", "c6id.2xlarge", "c6id.4xlarge", "c6id.8xlarge", "c6id.12xlarge", "c6id.16xlarge", "c6id.24xlarge", "c6id.32xlarge", "c6id.metal", "m6id.large", "m6id.xlarge", "m6id.2xlarge", "m6id.4xlarge", "m6id.8xlarge", "m6id.12xlarge", "m6id.16xlarge", "m6id.24xlarge", "m6id.32xlarge", "m6id.metal", "r6id.large", "r6id.xlarge", "r6id.2xlarge", "r6id.4xlarge", "r6id.8xlarge", "r6id.12xlarge", "r6id.16xlarge", "r6id.24xlarge", "r6id.32xlarge", "r6id.metal", "r6a.large", "r6a.xlarge", "r6a.2xlarge", "r6a.4xlarge", "r6a.8xlarge", "r6a.12xlarge", "r6a.16xlarge", "r6a.24xlarge", "r6a.32xlarge", "r6a.48xlarge", "r6a.metal", "p4de.24xlarge", "u-3tb1.56xlarge", "u-18tb1.112xlarge", "u-24tb1.112xlarge", "trn1.2xlarge", "trn1.32xlarge", "hpc6id.32xlarge", "c6in.large", "c6in.xlarge", "c6in.2xlarge", "c6in.4xlarge", "c6in.8xlarge", "c6in.12xlarge", "c6in.16xlarge", "c6in.24xlarge", "c6in.32xlarge", "m6in.large", "m6in.xlarge", "m6in.2xlarge", "m6in.4xlarge", "m6in.8xlarge", "m6in.12xlarge", "m6in.16xlarge", "m6in.24xlarge", "m6in.32xlarge", "m6idn.large", "m6idn.xlarge", "m6idn.2xlarge", "m6idn.4xlarge", "m6idn.8xlarge", "m6idn.12xlarge", "m6idn.16xlarge", "m6idn.24xlarge", "m6idn.32xlarge", "r6in.large", "r6in.xlarge", "r6in.2xlarge", "r6in.4xlarge", "r6in.8xlarge", "r6in.12xlarge", "r6in.16xlarge", "r6in.24xlarge", "r6in.32xlarge", "r6idn.large", "r6idn.xlarge", "r6idn.2xlarge", "r6idn.4xlarge", "r6idn.8xlarge", "r6idn.12xlarge", "r6idn.16xlarge", "r6idn.24xlarge", "r6idn.32xlarge", "c7g.metal", "m7g.medium", "m7g.large", "m7g.xlarge", "m7g.2xlarge", "m7g.4xlarge", "m7g.8xlarge", "m7g.12xlarge", "m7g.16xlarge", "m7g.metal", "r7g.medium", "r7g.large", "r7g.xlarge", "r7g.2xlarge", "r7g.4xlarge", "r7g.8xlarge", "r7g.12xlarge", "r7g.16xlarge", "r7g.metal", "c6in.metal", "m6in.metal", "m6idn.metal", "r6in.metal", "r6idn.metal", "inf2.xlarge", "inf2.8xlarge", "inf2.24xlarge", "inf2.48xlarge", "trn1n.32xlarge", "i4g.large", "i4g.xlarge", "i4g.2xlarge", "i4g.4xlarge", "i4g.8xlarge", "i4g.16xlarge", "hpc7g.4xlarge", "hpc7g.8xlarge", "hpc7g.16xlarge", "c7gn.medium", "c7gn.large", "c7gn.xlarge", "c7gn.2xlarge", "c7gn.4xlarge", "c7gn.8xlarge", "c7gn.12xlarge", "c7gn.16xlarge", "p5.48xlarge", "m7i.large", "m7i.xlarge", "m7i.2xlarge", "m7i.4xlarge", "m7i.8xlarge", "m7i.12xlarge", "m7i.16xlarge", "m7i.24xlarge", "m7i.48xlarge", "m7i-flex.large", "m7i-flex.xlarge", "m7i-flex.2xlarge", "m7i-flex.4xlarge", "m7i-flex.8xlarge", "m7a.medium", "m7a.large", "m7a.xlarge", "m7a.2xlarge", "m7a.4xlarge", "m7a.8xlarge", "m7a.12xlarge", "m7a.16xlarge", "m7a.24xlarge", "m7a.32xlarge", "m7a.48xlarge", "m7a.metal-48xl", "hpc7a.12xlarge", "hpc7a.24xlarge", "hpc7a.48xlarge", "hpc7a.96xlarge", "c7gd.medium", "c7gd.large", "c7gd.xlarge", "c7gd.2xlarge", "c7gd.4xlarge", "c7gd.8xlarge", "c7gd.12xlarge", "c7gd.16xlarge", "m7gd.medium", "m7gd.large", "m7gd.xlarge", "m7gd.2xlarge", "m7gd.4xlarge", "m7gd.8xlarge", "m7gd.12xlarge", "m7gd.16xlarge", "r7gd.medium", "r7gd.large", "r7gd.xlarge", "r7gd.2xlarge", "r7gd.4xlarge", "r7gd.8xlarge", "r7gd.12xlarge", "r7gd.16xlarge", "r7a.medium", "r7a.large", "r7a.xlarge", "r7a.2xlarge", "r7a.4xlarge", "r7a.8xlarge", "r7a.12xlarge", "r7a.16xlarge", "r7a.24xlarge", "r7a.32xlarge", "r7a.48xlarge", "c7i.large", "c7i.xlarge", "c7i.2xlarge", "c7i.4xlarge", "c7i.8xlarge", "c7i.12xlarge", "c7i.16xlarge", "c7i.24xlarge", "c7i.48xlarge", "mac2-m2pro.metal", "r7iz.large", "r7iz.xlarge", "r7iz.2xlarge", "r7iz.4xlarge", "r7iz.8xlarge", "r7iz.12xlarge", "r7iz.16xlarge", "r7iz.32xlarge", "c7a.medium", "c7a.large", "c7a.xlarge", "c7a.2xlarge", "c7a.4xlarge", "c7a.8xlarge", "c7a.12xlarge", "c7a.16xlarge", "c7a.24xlarge", "c7a.32xlarge", "c7a.48xlarge", "c7a.metal-48xl", "r7a.metal-48xl", "r7i.large", "r7i.xlarge", "r7i.2xlarge", "r7i.4xlarge", "r7i.8xlarge", "r7i.12xlarge", "r7i.16xlarge", "r7i.24xlarge", "r7i.48xlarge", "dl2q.24xlarge", "mac2-m2.metal", "i4i.12xlarge", "i4i.24xlarge", "c7i.metal-24xl", "c7i.metal-48xl", "m7i.metal-24xl", "m7i.metal-48xl", "r7i.metal-24xl", "r7i.metal-48xl", "r7iz.metal-16xl", "r7iz.metal-32xl", "c7gd.metal", "m7gd.metal", "r7gd.metal", "g6.xlarge", "g6.2xlarge", "g6.4xlarge", "g6.8xlarge", "g6.12xlarge", "g6.16xlarge", "g6.24xlarge", "g6.48xlarge", "gr6.4xlarge", "gr6.8xlarge", "c7i-flex.large", "c7i-flex.xlarge", "c7i-flex.2xlarge", "c7i-flex.4xlarge", "c7i-flex.8xlarge", "u7i-12tb.224xlarge", "u7in-16tb.224xlarge", "u7in-24tb.224xlarge", "u7in-32tb.224xlarge", "u7ib-12tb.224xlarge", "c7gn.metal", "r8g.medium", "r8g.large", "r8g.xlarge", "r8g.2xlarge", "r8g.4xlarge", "r8g.8xlarge", "r8g.12xlarge", "r8g.16xlarge", "r8g.24xlarge", "r8g.48xlarge", "r8g.metal-24xl", "r8g.metal-48xl", "mac2-m1ultra.metal", "g6e.xlarge", "g6e.2xlarge", "g6e.4xlarge", "g6e.8xlarge", "g6e.12xlarge", "g6e.16xlarge", "g6e.24xlarge", "g6e.48xlarge", "c8g.medium", "c8g.large", "c8g.xlarge", "c8g.2xlarge", "c8g.4xlarge", "c8g.8xlarge", "c8g.12xlarge", "c8g.16xlarge", "c8g.24xlarge", "c8g.48xlarge", "c8g.metal-24xl", "c8g.metal-48xl", "m8g.medium", "m8g.large", "m8g.xlarge", "m8g.2xlarge", "m8g.4xlarge", "m8g.8xlarge", "m8g.12xlarge", "m8g.16xlarge", "m8g.24xlarge", "m8g.48xlarge", "m8g.metal-24xl", "m8g.metal-48xl", "x8g.medium", "x8g.large", "x8g.xlarge", "x8g.2xlarge", "x8g.4xlarge", "x8g.8xlarge", "x8g.12xlarge", "x8g.16xlarge", "x8g.24xlarge", "x8g.48xlarge", "x8g.metal-24xl", "x8g.metal-48xl", "i7ie.large", "i7ie.xlarge", "i7ie.2xlarge", "i7ie.3xlarge", "i7ie.6xlarge", "i7ie.12xlarge", "i7ie.18xlarge", "i7ie.24xlarge", "i7ie.48xlarge", "i8g.large", "i8g.xlarge", "i8g.2xlarge", "i8g.4xlarge", "i8g.8xlarge", "i8g.12xlarge", "i8g.16xlarge", "i8g.24xlarge", "i8g.metal-24xl", "u7i-6tb.112xlarge", "u7i-8tb.112xlarge", "u7inh-32tb.480xlarge", "p5e.48xlarge", "p5en.48xlarge", "f2.12xlarge", "f2.48xlarge", "trn2.48xlarge", "c7i-flex.12xlarge", "c7i-flex.16xlarge", "m7i-flex.12xlarge", "m7i-flex.16xlarge", "i7ie.metal-24xl", "i7ie.metal-48xl", "i8g.48xlarge", "c8gd.medium", "c8gd.large", "c8gd.xlarge", "c8gd.2xlarge", "c8gd.4xlarge", "c8gd.8xlarge", "c8gd.12xlarge", "c8gd.16xlarge", "c8gd.24xlarge", "c8gd.48xlarge", "c8gd.metal-24xl", "c8gd.metal-48xl", "i7i.large", "i7i.xlarge", "i7i.2xlarge", "i7i.4xlarge", "i7i.8xlarge", "i7i.12xlarge", "i7i.16xlarge", "i7i.24xlarge", "i7i.48xlarge", "i7i.metal-24xl", "i7i.metal-48xl", "p6-b200.48xlarge", "m8gd.medium", "m8gd.large", "m8gd.xlarge", "m8gd.2xlarge", "m8gd.4xlarge", "m8gd.8xlarge", "m8gd.12xlarge", "m8gd.16xlarge", "m8gd.24xlarge", "m8gd.48xlarge", "m8gd.metal-24xl", "m8gd.metal-48xl", "r8gd.medium", "r8gd.large", "r8gd.xlarge", "r8gd.2xlarge", "r8gd.4xlarge", "r8gd.8xlarge", "r8gd.12xlarge", "r8gd.16xlarge", "r8gd.24xlarge", "r8gd.48xlarge", "r8gd.metal-24xl", "r8gd.metal-48xl", "c8gn.medium", "c8gn.large", "c8gn.xlarge", "c8gn.2xlarge", "c8gn.4xlarge", "c8gn.8xlarge", "c8gn.12xlarge", "c8gn.16xlarge", "c8gn.24xlarge", "c8gn.48xlarge", "c8gn.metal-24xl", "c8gn.metal-48xl", "f2.6xlarge", "p6e-gb200.36xlarge"
     #   resp.reservations[0].instances[0].launch_time #=> Time
+    #   resp.reservations[0].instances[0].placement.availability_zone_id #=> String
     #   resp.reservations[0].instances[0].placement.affinity #=> String
     #   resp.reservations[0].instances[0].placement.group_name #=> String
     #   resp.reservations[0].instances[0].placement.partition_number #=> Integer
@@ -30636,6 +30693,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.key_name #=> String
     #   resp.launch_template_versions[0].launch_template_data.monitoring.enabled #=> Boolean
     #   resp.launch_template_versions[0].launch_template_data.placement.availability_zone #=> String
+    #   resp.launch_template_versions[0].launch_template_data.placement.availability_zone_id #=> String
     #   resp.launch_template_versions[0].launch_template_data.placement.affinity #=> String
     #   resp.launch_template_versions[0].launch_template_data.placement.group_name #=> String
     #   resp.launch_template_versions[0].launch_template_data.placement.host_id #=> String
@@ -35555,6 +35613,7 @@ module Aws::EC2
     #   resp.route_tables[0].associations[0].route_table_id #=> String
     #   resp.route_tables[0].associations[0].subnet_id #=> String
     #   resp.route_tables[0].associations[0].gateway_id #=> String
+    #   resp.route_tables[0].associations[0].public_ipv_4_pool #=> String
     #   resp.route_tables[0].associations[0].association_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failed"
     #   resp.route_tables[0].associations[0].association_state.status_message #=> String
     #   resp.route_tables[0].propagating_vgws #=> Array
@@ -37522,6 +37581,9 @@ module Aws::EC2
     #   * `launched-availability-zone` - The Availability Zone in which the
     #     request is launched.
     #
+    #   * `launched-availability-zone-id` - The ID of the Availability Zone in
+    #     which the request is launched.
+    #
     #   * `network-interface.addresses.primary` - Indicates whether the IP
     #     address is the primary private IP address.
     #
@@ -37743,6 +37805,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.security_groups[0].group_name #=> String
     #   resp.spot_instance_requests[0].launch_specification.monitoring.enabled #=> Boolean
     #   resp.spot_instance_requests[0].launched_availability_zone #=> String
+    #   resp.spot_instance_requests[0].launched_availability_zone_id #=> String
     #   resp.spot_instance_requests[0].product_description #=> String, one of "Linux/UNIX", "Linux/UNIX (Amazon VPC)", "Windows", "Windows (Amazon VPC)"
     #   resp.spot_instance_requests[0].spot_instance_request_id #=> String
     #   resp.spot_instance_requests[0].spot_price #=> String
@@ -37785,6 +37848,12 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances-history.html
     #
+    # @option params [String] :availability_zone_id
+    #   Filters the results by the specified ID of the Availability Zone.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` can be specified,
+    #   but not both
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -37813,6 +37882,9 @@ module Aws::EC2
     #   * `availability-zone` - The Availability Zone for which prices should
     #     be returned.
     #
+    #   * `availability-zone-id` - The ID of the Availability Zone for which
+    #     prices should be returned.
+    #
     #   * `instance-type` - The type of instance (for example, `m3.medium`).
     #
     #   * `product-description` - The product description for the Spot price
@@ -37831,6 +37903,9 @@ module Aws::EC2
     #
     # @option params [String] :availability_zone
     #   Filters the results by the specified Availability Zone.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` can be specified,
+    #   but not both
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
@@ -37892,6 +37967,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_spot_price_history({
+    #     availability_zone_id: "AvailabilityZoneId",
     #     dry_run: false,
     #     start_time: Time.now,
     #     end_time: Time.now,
@@ -37913,6 +37989,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #   resp.spot_price_history #=> Array
     #   resp.spot_price_history[0].availability_zone #=> String
+    #   resp.spot_price_history[0].availability_zone_id #=> String
     #   resp.spot_price_history[0].instance_type #=> String, one of "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "c5ad.large", "c5ad.xlarge", "c5ad.2xlarge", "c5ad.4xlarge", "c5ad.8xlarge", "c5ad.12xlarge", "c5ad.16xlarge", "c5ad.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "c5n.metal", "c6g.medium", "c6g.large", "c6g.xlarge", "c6g.2xlarge", "c6g.4xlarge", "c6g.8xlarge", "c6g.12xlarge", "c6g.16xlarge", "c6g.metal", "c6gd.medium", "c6gd.large", "c6gd.xlarge", "c6gd.2xlarge", "c6gd.4xlarge", "c6gd.8xlarge", "c6gd.12xlarge", "c6gd.16xlarge", "c6gd.metal", "c6gn.medium", "c6gn.large", "c6gn.xlarge", "c6gn.2xlarge", "c6gn.4xlarge", "c6gn.8xlarge", "c6gn.12xlarge", "c6gn.16xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "c6i.32xlarge", "c6i.metal", "cc1.4xlarge", "cc2.8xlarge", "cg1.4xlarge", "cr1.8xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "d3.xlarge", "d3.2xlarge", "d3.4xlarge", "d3.8xlarge", "d3en.xlarge", "d3en.2xlarge", "d3en.4xlarge", "d3en.6xlarge", "d3en.8xlarge", "d3en.12xlarge", "dl1.24xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4ad.xlarge", "g4ad.2xlarge", "g4ad.4xlarge", "g4ad.8xlarge", "g4ad.16xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g4dn.metal", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.12xlarge", "g5.16xlarge", "g5.24xlarge", "g5.48xlarge", "g5g.xlarge", "g5g.2xlarge", "g5g.4xlarge", "g5g.8xlarge", "g5g.16xlarge", "g5g.metal", "hi1.4xlarge", "hpc6a.48xlarge", "hs1.8xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "im4gn.large", "im4gn.xlarge", "im4gn.2xlarge", "im4gn.4xlarge", "im4gn.8xlarge", "im4gn.16xlarge", "inf1.xlarge", "inf1.2xlarge", "inf1.6xlarge", "inf1.24xlarge", "is4gen.medium", "is4gen.large", "is4gen.xlarge", "is4gen.2xlarge", "is4gen.4xlarge", "is4gen.8xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5dn.metal", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "m5n.metal", "m5zn.large", "m5zn.xlarge", "m5zn.2xlarge", "m5zn.3xlarge", "m5zn.6xlarge", "m5zn.12xlarge", "m5zn.metal", "m6a.large", "m6a.xlarge", "m6a.2xlarge", "m6a.4xlarge", "m6a.8xlarge", "m6a.12xlarge", "m6a.16xlarge", "m6a.24xlarge", "m6a.32xlarge", "m6a.48xlarge", "m6g.metal", "m6g.medium", "m6g.large", "m6g.xlarge", "m6g.2xlarge", "m6g.4xlarge", "m6g.8xlarge", "m6g.12xlarge", "m6g.16xlarge", "m6gd.metal", "m6gd.medium", "m6gd.large", "m6gd.xlarge", "m6gd.2xlarge", "m6gd.4xlarge", "m6gd.8xlarge", "m6gd.12xlarge", "m6gd.16xlarge", "m6i.large", "m6i.xlarge", "m6i.2xlarge", "m6i.4xlarge", "m6i.8xlarge", "m6i.12xlarge", "m6i.16xlarge", "m6i.24xlarge", "m6i.32xlarge", "m6i.metal", "mac1.metal", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "p4d.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "r5b.large", "r5b.xlarge", "r5b.2xlarge", "r5b.4xlarge", "r5b.8xlarge", "r5b.12xlarge", "r5b.16xlarge", "r5b.24xlarge", "r5b.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5dn.metal", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge", "r5n.metal", "r6g.medium", "r6g.large", "r6g.xlarge", "r6g.2xlarge", "r6g.4xlarge", "r6g.8xlarge", "r6g.12xlarge", "r6g.16xlarge", "r6g.metal", "r6gd.medium", "r6gd.large", "r6gd.xlarge", "r6gd.2xlarge", "r6gd.4xlarge", "r6gd.8xlarge", "r6gd.12xlarge", "r6gd.16xlarge", "r6gd.metal", "r6i.large", "r6i.xlarge", "r6i.2xlarge", "r6i.4xlarge", "r6i.8xlarge", "r6i.12xlarge", "r6i.16xlarge", "r6i.24xlarge", "r6i.32xlarge", "r6i.metal", "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "t4g.nano", "t4g.micro", "t4g.small", "t4g.medium", "t4g.large", "t4g.xlarge", "t4g.2xlarge", "u-6tb1.56xlarge", "u-6tb1.112xlarge", "u-9tb1.112xlarge", "u-12tb1.112xlarge", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "vt1.3xlarge", "vt1.6xlarge", "vt1.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "x2iezn.2xlarge", "x2iezn.4xlarge", "x2iezn.6xlarge", "x2iezn.8xlarge", "x2iezn.12xlarge", "x2iezn.metal", "x2gd.medium", "x2gd.large", "x2gd.xlarge", "x2gd.2xlarge", "x2gd.4xlarge", "x2gd.8xlarge", "x2gd.12xlarge", "x2gd.16xlarge", "x2gd.metal", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "x2idn.16xlarge", "x2idn.24xlarge", "x2idn.32xlarge", "x2iedn.xlarge", "x2iedn.2xlarge", "x2iedn.4xlarge", "x2iedn.8xlarge", "x2iedn.16xlarge", "x2iedn.24xlarge", "x2iedn.32xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6a.32xlarge", "c6a.48xlarge", "c6a.metal", "m6a.metal", "i4i.large", "i4i.xlarge", "i4i.2xlarge", "i4i.4xlarge", "i4i.8xlarge", "i4i.16xlarge", "i4i.32xlarge", "i4i.metal", "x2idn.metal", "x2iedn.metal", "c7g.medium", "c7g.large", "c7g.xlarge", "c7g.2xlarge", "c7g.4xlarge", "c7g.8xlarge", "c7g.12xlarge", "c7g.16xlarge", "mac2.metal", "c6id.large", "c6id.xlarge", "c6id.2xlarge", "c6id.4xlarge", "c6id.8xlarge", "c6id.12xlarge", "c6id.16xlarge", "c6id.24xlarge", "c6id.32xlarge", "c6id.metal", "m6id.large", "m6id.xlarge", "m6id.2xlarge", "m6id.4xlarge", "m6id.8xlarge", "m6id.12xlarge", "m6id.16xlarge", "m6id.24xlarge", "m6id.32xlarge", "m6id.metal", "r6id.large", "r6id.xlarge", "r6id.2xlarge", "r6id.4xlarge", "r6id.8xlarge", "r6id.12xlarge", "r6id.16xlarge", "r6id.24xlarge", "r6id.32xlarge", "r6id.metal", "r6a.large", "r6a.xlarge", "r6a.2xlarge", "r6a.4xlarge", "r6a.8xlarge", "r6a.12xlarge", "r6a.16xlarge", "r6a.24xlarge", "r6a.32xlarge", "r6a.48xlarge", "r6a.metal", "p4de.24xlarge", "u-3tb1.56xlarge", "u-18tb1.112xlarge", "u-24tb1.112xlarge", "trn1.2xlarge", "trn1.32xlarge", "hpc6id.32xlarge", "c6in.large", "c6in.xlarge", "c6in.2xlarge", "c6in.4xlarge", "c6in.8xlarge", "c6in.12xlarge", "c6in.16xlarge", "c6in.24xlarge", "c6in.32xlarge", "m6in.large", "m6in.xlarge", "m6in.2xlarge", "m6in.4xlarge", "m6in.8xlarge", "m6in.12xlarge", "m6in.16xlarge", "m6in.24xlarge", "m6in.32xlarge", "m6idn.large", "m6idn.xlarge", "m6idn.2xlarge", "m6idn.4xlarge", "m6idn.8xlarge", "m6idn.12xlarge", "m6idn.16xlarge", "m6idn.24xlarge", "m6idn.32xlarge", "r6in.large", "r6in.xlarge", "r6in.2xlarge", "r6in.4xlarge", "r6in.8xlarge", "r6in.12xlarge", "r6in.16xlarge", "r6in.24xlarge", "r6in.32xlarge", "r6idn.large", "r6idn.xlarge", "r6idn.2xlarge", "r6idn.4xlarge", "r6idn.8xlarge", "r6idn.12xlarge", "r6idn.16xlarge", "r6idn.24xlarge", "r6idn.32xlarge", "c7g.metal", "m7g.medium", "m7g.large", "m7g.xlarge", "m7g.2xlarge", "m7g.4xlarge", "m7g.8xlarge", "m7g.12xlarge", "m7g.16xlarge", "m7g.metal", "r7g.medium", "r7g.large", "r7g.xlarge", "r7g.2xlarge", "r7g.4xlarge", "r7g.8xlarge", "r7g.12xlarge", "r7g.16xlarge", "r7g.metal", "c6in.metal", "m6in.metal", "m6idn.metal", "r6in.metal", "r6idn.metal", "inf2.xlarge", "inf2.8xlarge", "inf2.24xlarge", "inf2.48xlarge", "trn1n.32xlarge", "i4g.large", "i4g.xlarge", "i4g.2xlarge", "i4g.4xlarge", "i4g.8xlarge", "i4g.16xlarge", "hpc7g.4xlarge", "hpc7g.8xlarge", "hpc7g.16xlarge", "c7gn.medium", "c7gn.large", "c7gn.xlarge", "c7gn.2xlarge", "c7gn.4xlarge", "c7gn.8xlarge", "c7gn.12xlarge", "c7gn.16xlarge", "p5.48xlarge", "m7i.large", "m7i.xlarge", "m7i.2xlarge", "m7i.4xlarge", "m7i.8xlarge", "m7i.12xlarge", "m7i.16xlarge", "m7i.24xlarge", "m7i.48xlarge", "m7i-flex.large", "m7i-flex.xlarge", "m7i-flex.2xlarge", "m7i-flex.4xlarge", "m7i-flex.8xlarge", "m7a.medium", "m7a.large", "m7a.xlarge", "m7a.2xlarge", "m7a.4xlarge", "m7a.8xlarge", "m7a.12xlarge", "m7a.16xlarge", "m7a.24xlarge", "m7a.32xlarge", "m7a.48xlarge", "m7a.metal-48xl", "hpc7a.12xlarge", "hpc7a.24xlarge", "hpc7a.48xlarge", "hpc7a.96xlarge", "c7gd.medium", "c7gd.large", "c7gd.xlarge", "c7gd.2xlarge", "c7gd.4xlarge", "c7gd.8xlarge", "c7gd.12xlarge", "c7gd.16xlarge", "m7gd.medium", "m7gd.large", "m7gd.xlarge", "m7gd.2xlarge", "m7gd.4xlarge", "m7gd.8xlarge", "m7gd.12xlarge", "m7gd.16xlarge", "r7gd.medium", "r7gd.large", "r7gd.xlarge", "r7gd.2xlarge", "r7gd.4xlarge", "r7gd.8xlarge", "r7gd.12xlarge", "r7gd.16xlarge", "r7a.medium", "r7a.large", "r7a.xlarge", "r7a.2xlarge", "r7a.4xlarge", "r7a.8xlarge", "r7a.12xlarge", "r7a.16xlarge", "r7a.24xlarge", "r7a.32xlarge", "r7a.48xlarge", "c7i.large", "c7i.xlarge", "c7i.2xlarge", "c7i.4xlarge", "c7i.8xlarge", "c7i.12xlarge", "c7i.16xlarge", "c7i.24xlarge", "c7i.48xlarge", "mac2-m2pro.metal", "r7iz.large", "r7iz.xlarge", "r7iz.2xlarge", "r7iz.4xlarge", "r7iz.8xlarge", "r7iz.12xlarge", "r7iz.16xlarge", "r7iz.32xlarge", "c7a.medium", "c7a.large", "c7a.xlarge", "c7a.2xlarge", "c7a.4xlarge", "c7a.8xlarge", "c7a.12xlarge", "c7a.16xlarge", "c7a.24xlarge", "c7a.32xlarge", "c7a.48xlarge", "c7a.metal-48xl", "r7a.metal-48xl", "r7i.large", "r7i.xlarge", "r7i.2xlarge", "r7i.4xlarge", "r7i.8xlarge", "r7i.12xlarge", "r7i.16xlarge", "r7i.24xlarge", "r7i.48xlarge", "dl2q.24xlarge", "mac2-m2.metal", "i4i.12xlarge", "i4i.24xlarge", "c7i.metal-24xl", "c7i.metal-48xl", "m7i.metal-24xl", "m7i.metal-48xl", "r7i.metal-24xl", "r7i.metal-48xl", "r7iz.metal-16xl", "r7iz.metal-32xl", "c7gd.metal", "m7gd.metal", "r7gd.metal", "g6.xlarge", "g6.2xlarge", "g6.4xlarge", "g6.8xlarge", "g6.12xlarge", "g6.16xlarge", "g6.24xlarge", "g6.48xlarge", "gr6.4xlarge", "gr6.8xlarge", "c7i-flex.large", "c7i-flex.xlarge", "c7i-flex.2xlarge", "c7i-flex.4xlarge", "c7i-flex.8xlarge", "u7i-12tb.224xlarge", "u7in-16tb.224xlarge", "u7in-24tb.224xlarge", "u7in-32tb.224xlarge", "u7ib-12tb.224xlarge", "c7gn.metal", "r8g.medium", "r8g.large", "r8g.xlarge", "r8g.2xlarge", "r8g.4xlarge", "r8g.8xlarge", "r8g.12xlarge", "r8g.16xlarge", "r8g.24xlarge", "r8g.48xlarge", "r8g.metal-24xl", "r8g.metal-48xl", "mac2-m1ultra.metal", "g6e.xlarge", "g6e.2xlarge", "g6e.4xlarge", "g6e.8xlarge", "g6e.12xlarge", "g6e.16xlarge", "g6e.24xlarge", "g6e.48xlarge", "c8g.medium", "c8g.large", "c8g.xlarge", "c8g.2xlarge", "c8g.4xlarge", "c8g.8xlarge", "c8g.12xlarge", "c8g.16xlarge", "c8g.24xlarge", "c8g.48xlarge", "c8g.metal-24xl", "c8g.metal-48xl", "m8g.medium", "m8g.large", "m8g.xlarge", "m8g.2xlarge", "m8g.4xlarge", "m8g.8xlarge", "m8g.12xlarge", "m8g.16xlarge", "m8g.24xlarge", "m8g.48xlarge", "m8g.metal-24xl", "m8g.metal-48xl", "x8g.medium", "x8g.large", "x8g.xlarge", "x8g.2xlarge", "x8g.4xlarge", "x8g.8xlarge", "x8g.12xlarge", "x8g.16xlarge", "x8g.24xlarge", "x8g.48xlarge", "x8g.metal-24xl", "x8g.metal-48xl", "i7ie.large", "i7ie.xlarge", "i7ie.2xlarge", "i7ie.3xlarge", "i7ie.6xlarge", "i7ie.12xlarge", "i7ie.18xlarge", "i7ie.24xlarge", "i7ie.48xlarge", "i8g.large", "i8g.xlarge", "i8g.2xlarge", "i8g.4xlarge", "i8g.8xlarge", "i8g.12xlarge", "i8g.16xlarge", "i8g.24xlarge", "i8g.metal-24xl", "u7i-6tb.112xlarge", "u7i-8tb.112xlarge", "u7inh-32tb.480xlarge", "p5e.48xlarge", "p5en.48xlarge", "f2.12xlarge", "f2.48xlarge", "trn2.48xlarge", "c7i-flex.12xlarge", "c7i-flex.16xlarge", "m7i-flex.12xlarge", "m7i-flex.16xlarge", "i7ie.metal-24xl", "i7ie.metal-48xl", "i8g.48xlarge", "c8gd.medium", "c8gd.large", "c8gd.xlarge", "c8gd.2xlarge", "c8gd.4xlarge", "c8gd.8xlarge", "c8gd.12xlarge", "c8gd.16xlarge", "c8gd.24xlarge", "c8gd.48xlarge", "c8gd.metal-24xl", "c8gd.metal-48xl", "i7i.large", "i7i.xlarge", "i7i.2xlarge", "i7i.4xlarge", "i7i.8xlarge", "i7i.12xlarge", "i7i.16xlarge", "i7i.24xlarge", "i7i.48xlarge", "i7i.metal-24xl", "i7i.metal-48xl", "p6-b200.48xlarge", "m8gd.medium", "m8gd.large", "m8gd.xlarge", "m8gd.2xlarge", "m8gd.4xlarge", "m8gd.8xlarge", "m8gd.12xlarge", "m8gd.16xlarge", "m8gd.24xlarge", "m8gd.48xlarge", "m8gd.metal-24xl", "m8gd.metal-48xl", "r8gd.medium", "r8gd.large", "r8gd.xlarge", "r8gd.2xlarge", "r8gd.4xlarge", "r8gd.8xlarge", "r8gd.12xlarge", "r8gd.16xlarge", "r8gd.24xlarge", "r8gd.48xlarge", "r8gd.metal-24xl", "r8gd.metal-48xl", "c8gn.medium", "c8gn.large", "c8gn.xlarge", "c8gn.2xlarge", "c8gn.4xlarge", "c8gn.8xlarge", "c8gn.12xlarge", "c8gn.16xlarge", "c8gn.24xlarge", "c8gn.48xlarge", "c8gn.metal-24xl", "c8gn.metal-48xl", "f2.6xlarge", "p6e-gb200.36xlarge"
     #   resp.spot_price_history[0].product_description #=> String, one of "Linux/UNIX", "Linux/UNIX (Amazon VPC)", "Windows", "Windows (Amazon VPC)"
     #   resp.spot_price_history[0].spot_price #=> String
@@ -40611,6 +40688,9 @@ module Aws::EC2
     #   * `availability-zone` - The Availability Zone in which the volume was
     #     created.
     #
+    #   * `availability-zone-id` - The ID of the Availability Zone in which
+    #     the volume was created.
+    #
     #   * `create-time` - The time stamp when the volume was created.
     #
     #   * `encrypted` - Indicates whether the volume is encrypted (`true` \|
@@ -40771,6 +40851,7 @@ module Aws::EC2
     #
     #   resp.next_token #=> String
     #   resp.volumes #=> Array
+    #   resp.volumes[0].availability_zone_id #=> String
     #   resp.volumes[0].outpost_arn #=> String
     #   resp.volumes[0].iops #=> Integer
     #   resp.volumes[0].tags #=> Array
@@ -41326,9 +41407,6 @@ module Aws::EC2
     #   * `resource-configuration-group-arn` - The Amazon Resource Name (ARN)
     #     of the resource configuration of type GROUP.
     #
-    #   * `service-network-resource-association-id` - The ID of the
-    #     association.
-    #
     # @option params [Integer] :max_results
     #   The maximum page size.
     #
@@ -41633,6 +41711,8 @@ module Aws::EC2
     #   resp.service_configurations[0].service_id #=> String
     #   resp.service_configurations[0].service_name #=> String
     #   resp.service_configurations[0].service_state #=> String, one of "Pending", "Available", "Deleting", "Deleted", "Failed"
+    #   resp.service_configurations[0].availability_zone_ids #=> Array
+    #   resp.service_configurations[0].availability_zone_ids[0] #=> String
     #   resp.service_configurations[0].availability_zones #=> Array
     #   resp.service_configurations[0].availability_zones[0] #=> String
     #   resp.service_configurations[0].acceptance_required #=> Boolean
@@ -41835,6 +41915,8 @@ module Aws::EC2
     #   resp.service_details[0].service_type #=> Array
     #   resp.service_details[0].service_type[0].service_type #=> String, one of "Interface", "Gateway", "GatewayLoadBalancer"
     #   resp.service_details[0].service_region #=> String
+    #   resp.service_details[0].availability_zone_ids #=> Array
+    #   resp.service_details[0].availability_zone_ids[0] #=> String
     #   resp.service_details[0].availability_zones #=> Array
     #   resp.service_details[0].availability_zones[0] #=> String
     #   resp.service_details[0].owner #=> String
@@ -48192,6 +48274,7 @@ module Aws::EC2
     #   resp.launch_template_data.key_name #=> String
     #   resp.launch_template_data.monitoring.enabled #=> Boolean
     #   resp.launch_template_data.placement.availability_zone #=> String
+    #   resp.launch_template_data.placement.availability_zone_id #=> String
     #   resp.launch_template_data.placement.affinity #=> String
     #   resp.launch_template_data.placement.group_name #=> String
     #   resp.launch_template_data.placement.host_id #=> String
@@ -50886,6 +50969,7 @@ module Aws::EC2
     #       },
     #       instance_type: "a1.medium", # accepts a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5a.large, c5a.xlarge, c5a.2xlarge, c5a.4xlarge, c5a.8xlarge, c5a.12xlarge, c5a.16xlarge, c5a.24xlarge, c5ad.large, c5ad.xlarge, c5ad.2xlarge, c5ad.4xlarge, c5ad.8xlarge, c5ad.12xlarge, c5ad.16xlarge, c5ad.24xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, c5n.metal, c6g.medium, c6g.large, c6g.xlarge, c6g.2xlarge, c6g.4xlarge, c6g.8xlarge, c6g.12xlarge, c6g.16xlarge, c6g.metal, c6gd.medium, c6gd.large, c6gd.xlarge, c6gd.2xlarge, c6gd.4xlarge, c6gd.8xlarge, c6gd.12xlarge, c6gd.16xlarge, c6gd.metal, c6gn.medium, c6gn.large, c6gn.xlarge, c6gn.2xlarge, c6gn.4xlarge, c6gn.8xlarge, c6gn.12xlarge, c6gn.16xlarge, c6i.large, c6i.xlarge, c6i.2xlarge, c6i.4xlarge, c6i.8xlarge, c6i.12xlarge, c6i.16xlarge, c6i.24xlarge, c6i.32xlarge, c6i.metal, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge, cr1.8xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, d3.xlarge, d3.2xlarge, d3.4xlarge, d3.8xlarge, d3en.xlarge, d3en.2xlarge, d3en.4xlarge, d3en.6xlarge, d3en.8xlarge, d3en.12xlarge, dl1.24xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4ad.xlarge, g4ad.2xlarge, g4ad.4xlarge, g4ad.8xlarge, g4ad.16xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, g4dn.metal, g5.xlarge, g5.2xlarge, g5.4xlarge, g5.8xlarge, g5.12xlarge, g5.16xlarge, g5.24xlarge, g5.48xlarge, g5g.xlarge, g5g.2xlarge, g5g.4xlarge, g5g.8xlarge, g5g.16xlarge, g5g.metal, hi1.4xlarge, hpc6a.48xlarge, hs1.8xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, im4gn.large, im4gn.xlarge, im4gn.2xlarge, im4gn.4xlarge, im4gn.8xlarge, im4gn.16xlarge, inf1.xlarge, inf1.2xlarge, inf1.6xlarge, inf1.24xlarge, is4gen.medium, is4gen.large, is4gen.xlarge, is4gen.2xlarge, is4gen.4xlarge, is4gen.8xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5dn.metal, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, m5n.metal, m5zn.large, m5zn.xlarge, m5zn.2xlarge, m5zn.3xlarge, m5zn.6xlarge, m5zn.12xlarge, m5zn.metal, m6a.large, m6a.xlarge, m6a.2xlarge, m6a.4xlarge, m6a.8xlarge, m6a.12xlarge, m6a.16xlarge, m6a.24xlarge, m6a.32xlarge, m6a.48xlarge, m6g.metal, m6g.medium, m6g.large, m6g.xlarge, m6g.2xlarge, m6g.4xlarge, m6g.8xlarge, m6g.12xlarge, m6g.16xlarge, m6gd.metal, m6gd.medium, m6gd.large, m6gd.xlarge, m6gd.2xlarge, m6gd.4xlarge, m6gd.8xlarge, m6gd.12xlarge, m6gd.16xlarge, m6i.large, m6i.xlarge, m6i.2xlarge, m6i.4xlarge, m6i.8xlarge, m6i.12xlarge, m6i.16xlarge, m6i.24xlarge, m6i.32xlarge, m6i.metal, mac1.metal, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, p4d.24xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, r5b.large, r5b.xlarge, r5b.2xlarge, r5b.4xlarge, r5b.8xlarge, r5b.12xlarge, r5b.16xlarge, r5b.24xlarge, r5b.metal, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5dn.metal, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge, r5n.metal, r6g.medium, r6g.large, r6g.xlarge, r6g.2xlarge, r6g.4xlarge, r6g.8xlarge, r6g.12xlarge, r6g.16xlarge, r6g.metal, r6gd.medium, r6gd.large, r6gd.xlarge, r6gd.2xlarge, r6gd.4xlarge, r6gd.8xlarge, r6gd.12xlarge, r6gd.16xlarge, r6gd.metal, r6i.large, r6i.xlarge, r6i.2xlarge, r6i.4xlarge, r6i.8xlarge, r6i.12xlarge, r6i.16xlarge, r6i.24xlarge, r6i.32xlarge, r6i.metal, t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, t4g.nano, t4g.micro, t4g.small, t4g.medium, t4g.large, t4g.xlarge, t4g.2xlarge, u-6tb1.56xlarge, u-6tb1.112xlarge, u-9tb1.112xlarge, u-12tb1.112xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, vt1.3xlarge, vt1.6xlarge, vt1.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, x2iezn.2xlarge, x2iezn.4xlarge, x2iezn.6xlarge, x2iezn.8xlarge, x2iezn.12xlarge, x2iezn.metal, x2gd.medium, x2gd.large, x2gd.xlarge, x2gd.2xlarge, x2gd.4xlarge, x2gd.8xlarge, x2gd.12xlarge, x2gd.16xlarge, x2gd.metal, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, x2idn.16xlarge, x2idn.24xlarge, x2idn.32xlarge, x2iedn.xlarge, x2iedn.2xlarge, x2iedn.4xlarge, x2iedn.8xlarge, x2iedn.16xlarge, x2iedn.24xlarge, x2iedn.32xlarge, c6a.large, c6a.xlarge, c6a.2xlarge, c6a.4xlarge, c6a.8xlarge, c6a.12xlarge, c6a.16xlarge, c6a.24xlarge, c6a.32xlarge, c6a.48xlarge, c6a.metal, m6a.metal, i4i.large, i4i.xlarge, i4i.2xlarge, i4i.4xlarge, i4i.8xlarge, i4i.16xlarge, i4i.32xlarge, i4i.metal, x2idn.metal, x2iedn.metal, c7g.medium, c7g.large, c7g.xlarge, c7g.2xlarge, c7g.4xlarge, c7g.8xlarge, c7g.12xlarge, c7g.16xlarge, mac2.metal, c6id.large, c6id.xlarge, c6id.2xlarge, c6id.4xlarge, c6id.8xlarge, c6id.12xlarge, c6id.16xlarge, c6id.24xlarge, c6id.32xlarge, c6id.metal, m6id.large, m6id.xlarge, m6id.2xlarge, m6id.4xlarge, m6id.8xlarge, m6id.12xlarge, m6id.16xlarge, m6id.24xlarge, m6id.32xlarge, m6id.metal, r6id.large, r6id.xlarge, r6id.2xlarge, r6id.4xlarge, r6id.8xlarge, r6id.12xlarge, r6id.16xlarge, r6id.24xlarge, r6id.32xlarge, r6id.metal, r6a.large, r6a.xlarge, r6a.2xlarge, r6a.4xlarge, r6a.8xlarge, r6a.12xlarge, r6a.16xlarge, r6a.24xlarge, r6a.32xlarge, r6a.48xlarge, r6a.metal, p4de.24xlarge, u-3tb1.56xlarge, u-18tb1.112xlarge, u-24tb1.112xlarge, trn1.2xlarge, trn1.32xlarge, hpc6id.32xlarge, c6in.large, c6in.xlarge, c6in.2xlarge, c6in.4xlarge, c6in.8xlarge, c6in.12xlarge, c6in.16xlarge, c6in.24xlarge, c6in.32xlarge, m6in.large, m6in.xlarge, m6in.2xlarge, m6in.4xlarge, m6in.8xlarge, m6in.12xlarge, m6in.16xlarge, m6in.24xlarge, m6in.32xlarge, m6idn.large, m6idn.xlarge, m6idn.2xlarge, m6idn.4xlarge, m6idn.8xlarge, m6idn.12xlarge, m6idn.16xlarge, m6idn.24xlarge, m6idn.32xlarge, r6in.large, r6in.xlarge, r6in.2xlarge, r6in.4xlarge, r6in.8xlarge, r6in.12xlarge, r6in.16xlarge, r6in.24xlarge, r6in.32xlarge, r6idn.large, r6idn.xlarge, r6idn.2xlarge, r6idn.4xlarge, r6idn.8xlarge, r6idn.12xlarge, r6idn.16xlarge, r6idn.24xlarge, r6idn.32xlarge, c7g.metal, m7g.medium, m7g.large, m7g.xlarge, m7g.2xlarge, m7g.4xlarge, m7g.8xlarge, m7g.12xlarge, m7g.16xlarge, m7g.metal, r7g.medium, r7g.large, r7g.xlarge, r7g.2xlarge, r7g.4xlarge, r7g.8xlarge, r7g.12xlarge, r7g.16xlarge, r7g.metal, c6in.metal, m6in.metal, m6idn.metal, r6in.metal, r6idn.metal, inf2.xlarge, inf2.8xlarge, inf2.24xlarge, inf2.48xlarge, trn1n.32xlarge, i4g.large, i4g.xlarge, i4g.2xlarge, i4g.4xlarge, i4g.8xlarge, i4g.16xlarge, hpc7g.4xlarge, hpc7g.8xlarge, hpc7g.16xlarge, c7gn.medium, c7gn.large, c7gn.xlarge, c7gn.2xlarge, c7gn.4xlarge, c7gn.8xlarge, c7gn.12xlarge, c7gn.16xlarge, p5.48xlarge, m7i.large, m7i.xlarge, m7i.2xlarge, m7i.4xlarge, m7i.8xlarge, m7i.12xlarge, m7i.16xlarge, m7i.24xlarge, m7i.48xlarge, m7i-flex.large, m7i-flex.xlarge, m7i-flex.2xlarge, m7i-flex.4xlarge, m7i-flex.8xlarge, m7a.medium, m7a.large, m7a.xlarge, m7a.2xlarge, m7a.4xlarge, m7a.8xlarge, m7a.12xlarge, m7a.16xlarge, m7a.24xlarge, m7a.32xlarge, m7a.48xlarge, m7a.metal-48xl, hpc7a.12xlarge, hpc7a.24xlarge, hpc7a.48xlarge, hpc7a.96xlarge, c7gd.medium, c7gd.large, c7gd.xlarge, c7gd.2xlarge, c7gd.4xlarge, c7gd.8xlarge, c7gd.12xlarge, c7gd.16xlarge, m7gd.medium, m7gd.large, m7gd.xlarge, m7gd.2xlarge, m7gd.4xlarge, m7gd.8xlarge, m7gd.12xlarge, m7gd.16xlarge, r7gd.medium, r7gd.large, r7gd.xlarge, r7gd.2xlarge, r7gd.4xlarge, r7gd.8xlarge, r7gd.12xlarge, r7gd.16xlarge, r7a.medium, r7a.large, r7a.xlarge, r7a.2xlarge, r7a.4xlarge, r7a.8xlarge, r7a.12xlarge, r7a.16xlarge, r7a.24xlarge, r7a.32xlarge, r7a.48xlarge, c7i.large, c7i.xlarge, c7i.2xlarge, c7i.4xlarge, c7i.8xlarge, c7i.12xlarge, c7i.16xlarge, c7i.24xlarge, c7i.48xlarge, mac2-m2pro.metal, r7iz.large, r7iz.xlarge, r7iz.2xlarge, r7iz.4xlarge, r7iz.8xlarge, r7iz.12xlarge, r7iz.16xlarge, r7iz.32xlarge, c7a.medium, c7a.large, c7a.xlarge, c7a.2xlarge, c7a.4xlarge, c7a.8xlarge, c7a.12xlarge, c7a.16xlarge, c7a.24xlarge, c7a.32xlarge, c7a.48xlarge, c7a.metal-48xl, r7a.metal-48xl, r7i.large, r7i.xlarge, r7i.2xlarge, r7i.4xlarge, r7i.8xlarge, r7i.12xlarge, r7i.16xlarge, r7i.24xlarge, r7i.48xlarge, dl2q.24xlarge, mac2-m2.metal, i4i.12xlarge, i4i.24xlarge, c7i.metal-24xl, c7i.metal-48xl, m7i.metal-24xl, m7i.metal-48xl, r7i.metal-24xl, r7i.metal-48xl, r7iz.metal-16xl, r7iz.metal-32xl, c7gd.metal, m7gd.metal, r7gd.metal, g6.xlarge, g6.2xlarge, g6.4xlarge, g6.8xlarge, g6.12xlarge, g6.16xlarge, g6.24xlarge, g6.48xlarge, gr6.4xlarge, gr6.8xlarge, c7i-flex.large, c7i-flex.xlarge, c7i-flex.2xlarge, c7i-flex.4xlarge, c7i-flex.8xlarge, u7i-12tb.224xlarge, u7in-16tb.224xlarge, u7in-24tb.224xlarge, u7in-32tb.224xlarge, u7ib-12tb.224xlarge, c7gn.metal, r8g.medium, r8g.large, r8g.xlarge, r8g.2xlarge, r8g.4xlarge, r8g.8xlarge, r8g.12xlarge, r8g.16xlarge, r8g.24xlarge, r8g.48xlarge, r8g.metal-24xl, r8g.metal-48xl, mac2-m1ultra.metal, g6e.xlarge, g6e.2xlarge, g6e.4xlarge, g6e.8xlarge, g6e.12xlarge, g6e.16xlarge, g6e.24xlarge, g6e.48xlarge, c8g.medium, c8g.large, c8g.xlarge, c8g.2xlarge, c8g.4xlarge, c8g.8xlarge, c8g.12xlarge, c8g.16xlarge, c8g.24xlarge, c8g.48xlarge, c8g.metal-24xl, c8g.metal-48xl, m8g.medium, m8g.large, m8g.xlarge, m8g.2xlarge, m8g.4xlarge, m8g.8xlarge, m8g.12xlarge, m8g.16xlarge, m8g.24xlarge, m8g.48xlarge, m8g.metal-24xl, m8g.metal-48xl, x8g.medium, x8g.large, x8g.xlarge, x8g.2xlarge, x8g.4xlarge, x8g.8xlarge, x8g.12xlarge, x8g.16xlarge, x8g.24xlarge, x8g.48xlarge, x8g.metal-24xl, x8g.metal-48xl, i7ie.large, i7ie.xlarge, i7ie.2xlarge, i7ie.3xlarge, i7ie.6xlarge, i7ie.12xlarge, i7ie.18xlarge, i7ie.24xlarge, i7ie.48xlarge, i8g.large, i8g.xlarge, i8g.2xlarge, i8g.4xlarge, i8g.8xlarge, i8g.12xlarge, i8g.16xlarge, i8g.24xlarge, i8g.metal-24xl, u7i-6tb.112xlarge, u7i-8tb.112xlarge, u7inh-32tb.480xlarge, p5e.48xlarge, p5en.48xlarge, f2.12xlarge, f2.48xlarge, trn2.48xlarge, c7i-flex.12xlarge, c7i-flex.16xlarge, m7i-flex.12xlarge, m7i-flex.16xlarge, i7ie.metal-24xl, i7ie.metal-48xl, i8g.48xlarge, c8gd.medium, c8gd.large, c8gd.xlarge, c8gd.2xlarge, c8gd.4xlarge, c8gd.8xlarge, c8gd.12xlarge, c8gd.16xlarge, c8gd.24xlarge, c8gd.48xlarge, c8gd.metal-24xl, c8gd.metal-48xl, i7i.large, i7i.xlarge, i7i.2xlarge, i7i.4xlarge, i7i.8xlarge, i7i.12xlarge, i7i.16xlarge, i7i.24xlarge, i7i.48xlarge, i7i.metal-24xl, i7i.metal-48xl, p6-b200.48xlarge, m8gd.medium, m8gd.large, m8gd.xlarge, m8gd.2xlarge, m8gd.4xlarge, m8gd.8xlarge, m8gd.12xlarge, m8gd.16xlarge, m8gd.24xlarge, m8gd.48xlarge, m8gd.metal-24xl, m8gd.metal-48xl, r8gd.medium, r8gd.large, r8gd.xlarge, r8gd.2xlarge, r8gd.4xlarge, r8gd.8xlarge, r8gd.12xlarge, r8gd.16xlarge, r8gd.24xlarge, r8gd.48xlarge, r8gd.metal-24xl, r8gd.metal-48xl, c8gn.medium, c8gn.large, c8gn.xlarge, c8gn.2xlarge, c8gn.4xlarge, c8gn.8xlarge, c8gn.12xlarge, c8gn.16xlarge, c8gn.24xlarge, c8gn.48xlarge, c8gn.metal-24xl, c8gn.metal-48xl, f2.6xlarge, p6e-gb200.36xlarge
     #       placement: {
+    #         availability_zone_id: "AvailabilityZoneId",
     #         affinity: "String",
     #         group_name: "PlacementGroupName",
     #         partition_number: 1,
@@ -50926,6 +51010,7 @@ module Aws::EC2
     #   resp.conversion_task.import_instance.platform #=> String, one of "Windows"
     #   resp.conversion_task.import_instance.volumes #=> Array
     #   resp.conversion_task.import_instance.volumes[0].availability_zone #=> String
+    #   resp.conversion_task.import_instance.volumes[0].availability_zone_id #=> String
     #   resp.conversion_task.import_instance.volumes[0].bytes_converted #=> Integer
     #   resp.conversion_task.import_instance.volumes[0].description #=> String
     #   resp.conversion_task.import_instance.volumes[0].image.checksum #=> String
@@ -50937,6 +51022,7 @@ module Aws::EC2
     #   resp.conversion_task.import_instance.volumes[0].volume.id #=> String
     #   resp.conversion_task.import_instance.volumes[0].volume.size #=> Integer
     #   resp.conversion_task.import_volume.availability_zone #=> String
+    #   resp.conversion_task.import_volume.availability_zone_id #=> String
     #   resp.conversion_task.import_volume.bytes_converted #=> Integer
     #   resp.conversion_task.import_volume.description #=> String
     #   resp.conversion_task.import_volume.image.checksum #=> String
@@ -51203,14 +51289,23 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
     #
+    # @option params [String] :availability_zone_id
+    #   The ID of the Availability Zone for the resulting EBS volume.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified,
+    #   but not both.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
-    # @option params [required, String] :availability_zone
+    # @option params [String] :availability_zone
     #   The Availability Zone for the resulting EBS volume.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified,
+    #   but not both.
     #
     # @option params [required, Types::DiskImageDetail] :image
     #   The disk image.
@@ -51228,8 +51323,9 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.import_volume({
+    #     availability_zone_id: "AvailabilityZoneId",
     #     dry_run: false,
-    #     availability_zone: "String", # required
+    #     availability_zone: "String",
     #     image: { # required
     #       format: "VMDK", # required, accepts VMDK, RAW, VHD
     #       bytes: 1, # required
@@ -51250,6 +51346,7 @@ module Aws::EC2
     #   resp.conversion_task.import_instance.platform #=> String, one of "Windows"
     #   resp.conversion_task.import_instance.volumes #=> Array
     #   resp.conversion_task.import_instance.volumes[0].availability_zone #=> String
+    #   resp.conversion_task.import_instance.volumes[0].availability_zone_id #=> String
     #   resp.conversion_task.import_instance.volumes[0].bytes_converted #=> Integer
     #   resp.conversion_task.import_instance.volumes[0].description #=> String
     #   resp.conversion_task.import_instance.volumes[0].image.checksum #=> String
@@ -51261,6 +51358,7 @@ module Aws::EC2
     #   resp.conversion_task.import_instance.volumes[0].volume.id #=> String
     #   resp.conversion_task.import_instance.volumes[0].volume.size #=> Integer
     #   resp.conversion_task.import_volume.availability_zone #=> String
+    #   resp.conversion_task.import_volume.availability_zone_id #=> String
     #   resp.conversion_task.import_volume.bytes_converted #=> Integer
     #   resp.conversion_task.import_volume.description #=> String
     #   resp.conversion_task.import_volume.image.checksum #=> String
@@ -52212,6 +52310,7 @@ module Aws::EC2
     #             weighted_capacity: 1.0,
     #             priority: 1.0,
     #             placement: {
+    #               availability_zone_id: "AvailabilityZoneId",
     #               affinity: "String",
     #               group_name: "PlacementGroupName",
     #               partition_number: 1,
@@ -53118,6 +53217,84 @@ module Aws::EC2
     # @param [Hash] params ({})
     def modify_instance_capacity_reservation_attributes(params = {}, options = {})
       req = build_request(:modify_instance_capacity_reservation_attributes, params)
+      req.send_request(options)
+    end
+
+    # Modifies the specified EC2 Instance Connect Endpoint.
+    #
+    # For more information, see [Modify an EC2 Instance Connect Endpoint][1]
+    # in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/modify-ec2-instance-connect-endpoint.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :instance_connect_endpoint_id
+    #   The ID of the EC2 Instance Connect Endpoint to modify.
+    #
+    # @option params [String] :ip_address_type
+    #   The new IP address type for the EC2 Instance Connect Endpoint.
+    #
+    #   <note markdown="1"> `PreserveClientIp` is only supported on IPv4 EC2 Instance Connect
+    #   Endpoints. To use `PreserveClientIp`, the value for `IpAddressType`
+    #   must be `ipv4`.
+    #
+    #    </note>
+    #
+    # @option params [Array<String>] :security_group_ids
+    #   Changes the security groups for the EC2 Instance Connect Endpoint. The
+    #   new set of groups you specify replaces the current set. You must
+    #   specify at least one group, even if it's just the default security
+    #   group in the VPC. You must specify the ID of the security group, not
+    #   the name.
+    #
+    # @option params [Boolean] :preserve_client_ip
+    #   Indicates whether the client IP address is preserved as the source.
+    #   The following are the possible values.
+    #
+    #   * `true` - Use the client IP address as the source.
+    #
+    #   * `false` - Use the network interface IP address as the source.
+    #
+    #   <note markdown="1"> `PreserveClientIp=true` is only supported on IPv4 EC2 Instance Connect
+    #   Endpoints. If modifying `PreserveClientIp` to `true`, either the
+    #   endpoint's existing `IpAddressType` must be `ipv4`, or if modifying
+    #   `IpAddressType` in the same request, the new value must be `ipv4`.
+    #
+    #    </note>
+    #
+    #   Default: `false`
+    #
+    # @return [Types::ModifyInstanceConnectEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyInstanceConnectEndpointResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_instance_connect_endpoint({
+    #     dry_run: false,
+    #     instance_connect_endpoint_id: "InstanceConnectEndpointId", # required
+    #     ip_address_type: "ipv4", # accepts ipv4, dualstack, ipv6
+    #     security_group_ids: ["SecurityGroupId"],
+    #     preserve_client_ip: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceConnectEndpoint AWS API Documentation
+    #
+    # @overload modify_instance_connect_endpoint(params = {})
+    # @param [Hash] params ({})
+    def modify_instance_connect_endpoint(params = {}, options = {})
+      req = build_request(:modify_instance_connect_endpoint, params)
       req.send_request(options)
     end
 
@@ -61875,6 +62052,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.security_groups[0].group_name #=> String
     #   resp.spot_instance_requests[0].launch_specification.monitoring.enabled #=> Boolean
     #   resp.spot_instance_requests[0].launched_availability_zone #=> String
+    #   resp.spot_instance_requests[0].launched_availability_zone_id #=> String
     #   resp.spot_instance_requests[0].product_description #=> String, one of "Linux/UNIX", "Linux/UNIX (Amazon VPC)", "Windows", "Windows (Amazon VPC)"
     #   resp.spot_instance_requests[0].spot_instance_request_id #=> String
     #   resp.spot_instance_requests[0].spot_price #=> String
@@ -63417,6 +63595,7 @@ module Aws::EC2
     #       enabled: false, # required
     #     },
     #     placement: {
+    #       availability_zone_id: "AvailabilityZoneId",
     #       affinity: "String",
     #       group_name: "PlacementGroupName",
     #       partition_number: 1,
@@ -63734,6 +63913,7 @@ module Aws::EC2
     #   resp.instances[0].product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
     #   resp.instances[0].instance_type #=> String, one of "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "c5ad.large", "c5ad.xlarge", "c5ad.2xlarge", "c5ad.4xlarge", "c5ad.8xlarge", "c5ad.12xlarge", "c5ad.16xlarge", "c5ad.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "c5n.metal", "c6g.medium", "c6g.large", "c6g.xlarge", "c6g.2xlarge", "c6g.4xlarge", "c6g.8xlarge", "c6g.12xlarge", "c6g.16xlarge", "c6g.metal", "c6gd.medium", "c6gd.large", "c6gd.xlarge", "c6gd.2xlarge", "c6gd.4xlarge", "c6gd.8xlarge", "c6gd.12xlarge", "c6gd.16xlarge", "c6gd.metal", "c6gn.medium", "c6gn.large", "c6gn.xlarge", "c6gn.2xlarge", "c6gn.4xlarge", "c6gn.8xlarge", "c6gn.12xlarge", "c6gn.16xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "c6i.32xlarge", "c6i.metal", "cc1.4xlarge", "cc2.8xlarge", "cg1.4xlarge", "cr1.8xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "d3.xlarge", "d3.2xlarge", "d3.4xlarge", "d3.8xlarge", "d3en.xlarge", "d3en.2xlarge", "d3en.4xlarge", "d3en.6xlarge", "d3en.8xlarge", "d3en.12xlarge", "dl1.24xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4ad.xlarge", "g4ad.2xlarge", "g4ad.4xlarge", "g4ad.8xlarge", "g4ad.16xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g4dn.metal", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.12xlarge", "g5.16xlarge", "g5.24xlarge", "g5.48xlarge", "g5g.xlarge", "g5g.2xlarge", "g5g.4xlarge", "g5g.8xlarge", "g5g.16xlarge", "g5g.metal", "hi1.4xlarge", "hpc6a.48xlarge", "hs1.8xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "im4gn.large", "im4gn.xlarge", "im4gn.2xlarge", "im4gn.4xlarge", "im4gn.8xlarge", "im4gn.16xlarge", "inf1.xlarge", "inf1.2xlarge", "inf1.6xlarge", "inf1.24xlarge", "is4gen.medium", "is4gen.large", "is4gen.xlarge", "is4gen.2xlarge", "is4gen.4xlarge", "is4gen.8xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5dn.metal", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "m5n.metal", "m5zn.large", "m5zn.xlarge", "m5zn.2xlarge", "m5zn.3xlarge", "m5zn.6xlarge", "m5zn.12xlarge", "m5zn.metal", "m6a.large", "m6a.xlarge", "m6a.2xlarge", "m6a.4xlarge", "m6a.8xlarge", "m6a.12xlarge", "m6a.16xlarge", "m6a.24xlarge", "m6a.32xlarge", "m6a.48xlarge", "m6g.metal", "m6g.medium", "m6g.large", "m6g.xlarge", "m6g.2xlarge", "m6g.4xlarge", "m6g.8xlarge", "m6g.12xlarge", "m6g.16xlarge", "m6gd.metal", "m6gd.medium", "m6gd.large", "m6gd.xlarge", "m6gd.2xlarge", "m6gd.4xlarge", "m6gd.8xlarge", "m6gd.12xlarge", "m6gd.16xlarge", "m6i.large", "m6i.xlarge", "m6i.2xlarge", "m6i.4xlarge", "m6i.8xlarge", "m6i.12xlarge", "m6i.16xlarge", "m6i.24xlarge", "m6i.32xlarge", "m6i.metal", "mac1.metal", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "p4d.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "r5b.large", "r5b.xlarge", "r5b.2xlarge", "r5b.4xlarge", "r5b.8xlarge", "r5b.12xlarge", "r5b.16xlarge", "r5b.24xlarge", "r5b.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5dn.metal", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge", "r5n.metal", "r6g.medium", "r6g.large", "r6g.xlarge", "r6g.2xlarge", "r6g.4xlarge", "r6g.8xlarge", "r6g.12xlarge", "r6g.16xlarge", "r6g.metal", "r6gd.medium", "r6gd.large", "r6gd.xlarge", "r6gd.2xlarge", "r6gd.4xlarge", "r6gd.8xlarge", "r6gd.12xlarge", "r6gd.16xlarge", "r6gd.metal", "r6i.large", "r6i.xlarge", "r6i.2xlarge", "r6i.4xlarge", "r6i.8xlarge", "r6i.12xlarge", "r6i.16xlarge", "r6i.24xlarge", "r6i.32xlarge", "r6i.metal", "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "t4g.nano", "t4g.micro", "t4g.small", "t4g.medium", "t4g.large", "t4g.xlarge", "t4g.2xlarge", "u-6tb1.56xlarge", "u-6tb1.112xlarge", "u-9tb1.112xlarge", "u-12tb1.112xlarge", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "vt1.3xlarge", "vt1.6xlarge", "vt1.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "x2iezn.2xlarge", "x2iezn.4xlarge", "x2iezn.6xlarge", "x2iezn.8xlarge", "x2iezn.12xlarge", "x2iezn.metal", "x2gd.medium", "x2gd.large", "x2gd.xlarge", "x2gd.2xlarge", "x2gd.4xlarge", "x2gd.8xlarge", "x2gd.12xlarge", "x2gd.16xlarge", "x2gd.metal", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "x2idn.16xlarge", "x2idn.24xlarge", "x2idn.32xlarge", "x2iedn.xlarge", "x2iedn.2xlarge", "x2iedn.4xlarge", "x2iedn.8xlarge", "x2iedn.16xlarge", "x2iedn.24xlarge", "x2iedn.32xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6a.32xlarge", "c6a.48xlarge", "c6a.metal", "m6a.metal", "i4i.large", "i4i.xlarge", "i4i.2xlarge", "i4i.4xlarge", "i4i.8xlarge", "i4i.16xlarge", "i4i.32xlarge", "i4i.metal", "x2idn.metal", "x2iedn.metal", "c7g.medium", "c7g.large", "c7g.xlarge", "c7g.2xlarge", "c7g.4xlarge", "c7g.8xlarge", "c7g.12xlarge", "c7g.16xlarge", "mac2.metal", "c6id.large", "c6id.xlarge", "c6id.2xlarge", "c6id.4xlarge", "c6id.8xlarge", "c6id.12xlarge", "c6id.16xlarge", "c6id.24xlarge", "c6id.32xlarge", "c6id.metal", "m6id.large", "m6id.xlarge", "m6id.2xlarge", "m6id.4xlarge", "m6id.8xlarge", "m6id.12xlarge", "m6id.16xlarge", "m6id.24xlarge", "m6id.32xlarge", "m6id.metal", "r6id.large", "r6id.xlarge", "r6id.2xlarge", "r6id.4xlarge", "r6id.8xlarge", "r6id.12xlarge", "r6id.16xlarge", "r6id.24xlarge", "r6id.32xlarge", "r6id.metal", "r6a.large", "r6a.xlarge", "r6a.2xlarge", "r6a.4xlarge", "r6a.8xlarge", "r6a.12xlarge", "r6a.16xlarge", "r6a.24xlarge", "r6a.32xlarge", "r6a.48xlarge", "r6a.metal", "p4de.24xlarge", "u-3tb1.56xlarge", "u-18tb1.112xlarge", "u-24tb1.112xlarge", "trn1.2xlarge", "trn1.32xlarge", "hpc6id.32xlarge", "c6in.large", "c6in.xlarge", "c6in.2xlarge", "c6in.4xlarge", "c6in.8xlarge", "c6in.12xlarge", "c6in.16xlarge", "c6in.24xlarge", "c6in.32xlarge", "m6in.large", "m6in.xlarge", "m6in.2xlarge", "m6in.4xlarge", "m6in.8xlarge", "m6in.12xlarge", "m6in.16xlarge", "m6in.24xlarge", "m6in.32xlarge", "m6idn.large", "m6idn.xlarge", "m6idn.2xlarge", "m6idn.4xlarge", "m6idn.8xlarge", "m6idn.12xlarge", "m6idn.16xlarge", "m6idn.24xlarge", "m6idn.32xlarge", "r6in.large", "r6in.xlarge", "r6in.2xlarge", "r6in.4xlarge", "r6in.8xlarge", "r6in.12xlarge", "r6in.16xlarge", "r6in.24xlarge", "r6in.32xlarge", "r6idn.large", "r6idn.xlarge", "r6idn.2xlarge", "r6idn.4xlarge", "r6idn.8xlarge", "r6idn.12xlarge", "r6idn.16xlarge", "r6idn.24xlarge", "r6idn.32xlarge", "c7g.metal", "m7g.medium", "m7g.large", "m7g.xlarge", "m7g.2xlarge", "m7g.4xlarge", "m7g.8xlarge", "m7g.12xlarge", "m7g.16xlarge", "m7g.metal", "r7g.medium", "r7g.large", "r7g.xlarge", "r7g.2xlarge", "r7g.4xlarge", "r7g.8xlarge", "r7g.12xlarge", "r7g.16xlarge", "r7g.metal", "c6in.metal", "m6in.metal", "m6idn.metal", "r6in.metal", "r6idn.metal", "inf2.xlarge", "inf2.8xlarge", "inf2.24xlarge", "inf2.48xlarge", "trn1n.32xlarge", "i4g.large", "i4g.xlarge", "i4g.2xlarge", "i4g.4xlarge", "i4g.8xlarge", "i4g.16xlarge", "hpc7g.4xlarge", "hpc7g.8xlarge", "hpc7g.16xlarge", "c7gn.medium", "c7gn.large", "c7gn.xlarge", "c7gn.2xlarge", "c7gn.4xlarge", "c7gn.8xlarge", "c7gn.12xlarge", "c7gn.16xlarge", "p5.48xlarge", "m7i.large", "m7i.xlarge", "m7i.2xlarge", "m7i.4xlarge", "m7i.8xlarge", "m7i.12xlarge", "m7i.16xlarge", "m7i.24xlarge", "m7i.48xlarge", "m7i-flex.large", "m7i-flex.xlarge", "m7i-flex.2xlarge", "m7i-flex.4xlarge", "m7i-flex.8xlarge", "m7a.medium", "m7a.large", "m7a.xlarge", "m7a.2xlarge", "m7a.4xlarge", "m7a.8xlarge", "m7a.12xlarge", "m7a.16xlarge", "m7a.24xlarge", "m7a.32xlarge", "m7a.48xlarge", "m7a.metal-48xl", "hpc7a.12xlarge", "hpc7a.24xlarge", "hpc7a.48xlarge", "hpc7a.96xlarge", "c7gd.medium", "c7gd.large", "c7gd.xlarge", "c7gd.2xlarge", "c7gd.4xlarge", "c7gd.8xlarge", "c7gd.12xlarge", "c7gd.16xlarge", "m7gd.medium", "m7gd.large", "m7gd.xlarge", "m7gd.2xlarge", "m7gd.4xlarge", "m7gd.8xlarge", "m7gd.12xlarge", "m7gd.16xlarge", "r7gd.medium", "r7gd.large", "r7gd.xlarge", "r7gd.2xlarge", "r7gd.4xlarge", "r7gd.8xlarge", "r7gd.12xlarge", "r7gd.16xlarge", "r7a.medium", "r7a.large", "r7a.xlarge", "r7a.2xlarge", "r7a.4xlarge", "r7a.8xlarge", "r7a.12xlarge", "r7a.16xlarge", "r7a.24xlarge", "r7a.32xlarge", "r7a.48xlarge", "c7i.large", "c7i.xlarge", "c7i.2xlarge", "c7i.4xlarge", "c7i.8xlarge", "c7i.12xlarge", "c7i.16xlarge", "c7i.24xlarge", "c7i.48xlarge", "mac2-m2pro.metal", "r7iz.large", "r7iz.xlarge", "r7iz.2xlarge", "r7iz.4xlarge", "r7iz.8xlarge", "r7iz.12xlarge", "r7iz.16xlarge", "r7iz.32xlarge", "c7a.medium", "c7a.large", "c7a.xlarge", "c7a.2xlarge", "c7a.4xlarge", "c7a.8xlarge", "c7a.12xlarge", "c7a.16xlarge", "c7a.24xlarge", "c7a.32xlarge", "c7a.48xlarge", "c7a.metal-48xl", "r7a.metal-48xl", "r7i.large", "r7i.xlarge", "r7i.2xlarge", "r7i.4xlarge", "r7i.8xlarge", "r7i.12xlarge", "r7i.16xlarge", "r7i.24xlarge", "r7i.48xlarge", "dl2q.24xlarge", "mac2-m2.metal", "i4i.12xlarge", "i4i.24xlarge", "c7i.metal-24xl", "c7i.metal-48xl", "m7i.metal-24xl", "m7i.metal-48xl", "r7i.metal-24xl", "r7i.metal-48xl", "r7iz.metal-16xl", "r7iz.metal-32xl", "c7gd.metal", "m7gd.metal", "r7gd.metal", "g6.xlarge", "g6.2xlarge", "g6.4xlarge", "g6.8xlarge", "g6.12xlarge", "g6.16xlarge", "g6.24xlarge", "g6.48xlarge", "gr6.4xlarge", "gr6.8xlarge", "c7i-flex.large", "c7i-flex.xlarge", "c7i-flex.2xlarge", "c7i-flex.4xlarge", "c7i-flex.8xlarge", "u7i-12tb.224xlarge", "u7in-16tb.224xlarge", "u7in-24tb.224xlarge", "u7in-32tb.224xlarge", "u7ib-12tb.224xlarge", "c7gn.metal", "r8g.medium", "r8g.large", "r8g.xlarge", "r8g.2xlarge", "r8g.4xlarge", "r8g.8xlarge", "r8g.12xlarge", "r8g.16xlarge", "r8g.24xlarge", "r8g.48xlarge", "r8g.metal-24xl", "r8g.metal-48xl", "mac2-m1ultra.metal", "g6e.xlarge", "g6e.2xlarge", "g6e.4xlarge", "g6e.8xlarge", "g6e.12xlarge", "g6e.16xlarge", "g6e.24xlarge", "g6e.48xlarge", "c8g.medium", "c8g.large", "c8g.xlarge", "c8g.2xlarge", "c8g.4xlarge", "c8g.8xlarge", "c8g.12xlarge", "c8g.16xlarge", "c8g.24xlarge", "c8g.48xlarge", "c8g.metal-24xl", "c8g.metal-48xl", "m8g.medium", "m8g.large", "m8g.xlarge", "m8g.2xlarge", "m8g.4xlarge", "m8g.8xlarge", "m8g.12xlarge", "m8g.16xlarge", "m8g.24xlarge", "m8g.48xlarge", "m8g.metal-24xl", "m8g.metal-48xl", "x8g.medium", "x8g.large", "x8g.xlarge", "x8g.2xlarge", "x8g.4xlarge", "x8g.8xlarge", "x8g.12xlarge", "x8g.16xlarge", "x8g.24xlarge", "x8g.48xlarge", "x8g.metal-24xl", "x8g.metal-48xl", "i7ie.large", "i7ie.xlarge", "i7ie.2xlarge", "i7ie.3xlarge", "i7ie.6xlarge", "i7ie.12xlarge", "i7ie.18xlarge", "i7ie.24xlarge", "i7ie.48xlarge", "i8g.large", "i8g.xlarge", "i8g.2xlarge", "i8g.4xlarge", "i8g.8xlarge", "i8g.12xlarge", "i8g.16xlarge", "i8g.24xlarge", "i8g.metal-24xl", "u7i-6tb.112xlarge", "u7i-8tb.112xlarge", "u7inh-32tb.480xlarge", "p5e.48xlarge", "p5en.48xlarge", "f2.12xlarge", "f2.48xlarge", "trn2.48xlarge", "c7i-flex.12xlarge", "c7i-flex.16xlarge", "m7i-flex.12xlarge", "m7i-flex.16xlarge", "i7ie.metal-24xl", "i7ie.metal-48xl", "i8g.48xlarge", "c8gd.medium", "c8gd.large", "c8gd.xlarge", "c8gd.2xlarge", "c8gd.4xlarge", "c8gd.8xlarge", "c8gd.12xlarge", "c8gd.16xlarge", "c8gd.24xlarge", "c8gd.48xlarge", "c8gd.metal-24xl", "c8gd.metal-48xl", "i7i.large", "i7i.xlarge", "i7i.2xlarge", "i7i.4xlarge", "i7i.8xlarge", "i7i.12xlarge", "i7i.16xlarge", "i7i.24xlarge", "i7i.48xlarge", "i7i.metal-24xl", "i7i.metal-48xl", "p6-b200.48xlarge", "m8gd.medium", "m8gd.large", "m8gd.xlarge", "m8gd.2xlarge", "m8gd.4xlarge", "m8gd.8xlarge", "m8gd.12xlarge", "m8gd.16xlarge", "m8gd.24xlarge", "m8gd.48xlarge", "m8gd.metal-24xl", "m8gd.metal-48xl", "r8gd.medium", "r8gd.large", "r8gd.xlarge", "r8gd.2xlarge", "r8gd.4xlarge", "r8gd.8xlarge", "r8gd.12xlarge", "r8gd.16xlarge", "r8gd.24xlarge", "r8gd.48xlarge", "r8gd.metal-24xl", "r8gd.metal-48xl", "c8gn.medium", "c8gn.large", "c8gn.xlarge", "c8gn.2xlarge", "c8gn.4xlarge", "c8gn.8xlarge", "c8gn.12xlarge", "c8gn.16xlarge", "c8gn.24xlarge", "c8gn.48xlarge", "c8gn.metal-24xl", "c8gn.metal-48xl", "f2.6xlarge", "p6e-gb200.36xlarge"
     #   resp.instances[0].launch_time #=> Time
+    #   resp.instances[0].placement.availability_zone_id #=> String
     #   resp.instances[0].placement.affinity #=> String
     #   resp.instances[0].placement.group_name #=> String
     #   resp.instances[0].placement.partition_number #=> Integer
@@ -66418,7 +66598,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.546.0'
+      context[:gem_version] = '1.549.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

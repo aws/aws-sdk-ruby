@@ -2917,11 +2917,7 @@ module Aws
                                                tag_key: ::String?,
                                                tag_value: ::String?
                                              },
-                                           ]?,
-                                           hierarchy_group_condition: {
-                                             value: ::String?,
-                                             hierarchy_group_match_type: ("EXACT" | "WITH_CHILD_GROUPS")?
-                                           }?
+                                           ]?
                                          },
                                        ]?,
                                        and_condition: {
@@ -2930,11 +2926,7 @@ module Aws
                                              tag_key: ::String?,
                                              tag_value: ::String?
                                            },
-                                         ]?,
-                                         hierarchy_group_condition: {
-                                           value: ::String?,
-                                           hierarchy_group_match_type: ("EXACT" | "WITH_CHILD_GROUPS")?
-                                         }?
+                                         ]?
                                        }?,
                                        tag_condition: {
                                          tag_key: ::String?,
@@ -3611,11 +3603,7 @@ module Aws
                                                       tag_key: ::String?,
                                                       tag_value: ::String?
                                                     },
-                                                  ]?,
-                                                  hierarchy_group_condition: {
-                                                    value: ::String?,
-                                                    hierarchy_group_match_type: ("EXACT" | "WITH_CHILD_GROUPS")?
-                                                  }?
+                                                  ]?
                                                 },
                                               ]?,
                                               and_condition: {
@@ -3624,11 +3612,7 @@ module Aws
                                                     tag_key: ::String?,
                                                     tag_value: ::String?
                                                   },
-                                                ]?,
-                                                hierarchy_group_condition: {
-                                                  value: ::String?,
-                                                  hierarchy_group_match_type: ("EXACT" | "WITH_CHILD_GROUPS")?
-                                                }?
+                                                ]?
                                               }?,
                                               tag_condition: {
                                                 tag_key: ::String?,
@@ -3647,10 +3631,6 @@ module Aws
                                               field_name: ::String?,
                                               value: ::String?,
                                               comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                                            }?,
-                                            hierarchy_group_condition: {
-                                              value: ::String?,
-                                              hierarchy_group_match_type: ("EXACT" | "WITH_CHILD_GROUPS")?
                                             }?
                                           }
                                         ) -> _SearchUserHierarchyGroupsResponseSuccess

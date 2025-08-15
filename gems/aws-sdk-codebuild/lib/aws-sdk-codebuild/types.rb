@@ -5512,10 +5512,10 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # Configuration policy that defines comment-based approval requirements
-    # for triggering builds on pull requests. This policy helps control when
-    # automated builds are executed based on contributor permissions and
-    # approval workflows.
+    # A PullRequestBuildPolicy object that defines comment-based approval
+    # requirements for triggering builds on pull requests. This policy helps
+    # control when automated builds are executed based on contributor
+    # permissions and approval workflows.
     #
     # @!attribute [rw] requires_comment_approval
     #   Specifies when comment-based approval is required before triggering
@@ -8242,6 +8242,13 @@ module Aws::CodeBuild
     #   A message associated with the status of a webhook.
     #   @return [String]
     #
+    # @!attribute [rw] pull_request_build_policy
+    #   A PullRequestBuildPolicy object that defines comment-based approval
+    #   requirements for triggering builds on pull requests. This policy
+    #   helps control when automated builds are executed based on
+    #   contributor permissions and approval workflows.
+    #   @return [Types::PullRequestBuildPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Webhook AWS API Documentation
     #
     class Webhook < Struct.new(
@@ -8255,7 +8262,8 @@ module Aws::CodeBuild
       :last_modified_secret,
       :scope_configuration,
       :status,
-      :status_message)
+      :status_message,
+      :pull_request_build_policy)
       SENSITIVE = []
       include Aws::Structure
     end

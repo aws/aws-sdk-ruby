@@ -652,7 +652,12 @@ module Aws
                                           key: ::String,
                                           value: ::String
                                         },
-                                      ]
+                                      ],
+                                      ?medical_scribe_context: {
+                                        patient_context: {
+                                          pronouns: ("HE_HIM" | "SHE_HER" | "THEY_THEM")?
+                                        }?
+                                      }
                                     ) -> _StartMedicalScribeJobResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMedicalScribeJobResponseSuccess
 

@@ -141,11 +141,6 @@ module Aws::PartnerCentralSelling
       end
 
       # @return [String]
-      def error_list
-        @data[:error_list]
-      end
-
-      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -153,6 +148,11 @@ module Aws::PartnerCentralSelling
       # @return [String]
       def reason
         @data[:reason]
+      end
+
+      # @return [String]
+      def error_list
+        @data[:error_list]
       end
     end
 

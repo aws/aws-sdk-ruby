@@ -409,8 +409,35 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] asn
-    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
-    #   configuration.
+    #   The autonomous system number (ASN). The valid range is from 1 to
+    #   2147483646 for Border Gateway Protocol (BGP) configuration. If you
+    #   provide a number greater than the maximum, an error is returned. Use
+    #   `asnLong` instead.
+    #
+    #   <note markdown="1"> You can use `asnLong` or `asn`, but not both. We recommend using
+    #   `asnLong` as it supports a greater pool of numbers.
+    #
+    #    * The `asnLong` attribute accepts both ASN and long ASN ranges.
+    #
+    #   * If you provide a value in the same API call for both `asn` and
+    #     `asnLong`, the API will only accept the value for `asnLong`.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] asn_long
+    #   The long ASN for the BGP peer. The valid range is from 1 to
+    #   4294967294 for BGP configuration.
+    #
+    #   <note markdown="1"> You can use `asnLong` or `asn`, but not both. We recommend using
+    #   `asnLong` as it supports a greater pool of numbers.
+    #
+    #    * The `asnLong` attribute accepts both ASN and long ASN ranges.
+    #
+    #   * If you provide a value in the same API call for both `asn` and
+    #     `asnLong`, the API will only accept the value for `asnLong`.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
@@ -475,6 +502,7 @@ module Aws::DirectConnect
     class BGPPeer < Struct.new(
       :bgp_peer_id,
       :asn,
+      :asn_long,
       :auth_key,
       :address_family,
       :amazon_address,
@@ -924,10 +952,16 @@ module Aws::DirectConnect
     #   The connections.
     #   @return [Array<Types::Connection>]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Connections AWS API Documentation
     #
     class Connections < Struct.new(
-      :connections)
+      :connections,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1344,8 +1378,36 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] asn
-    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
+    #   The autonomous system number (ASN). The valid range is from 1 to
+    #   2147483646 for Border Gateway Protocol (BGP) configuration. If you
+    #   provide a number greater than the maximum, an error is returned. Use
+    #   `asnLong` instead.
+    #
+    #   <note markdown="1"> You can use `asnLong` or `asn`, but not both. We recommend using
+    #   `asnLong` as it supports a greater pool of numbers.
+    #
+    #    * The `asnLong` attribute accepts both ASN and long ASN ranges.
+    #
+    #   * If you provide a value in the same API call for both `asn` and
+    #     `asnLong`, the API will only accept the value for `asnLong`.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] asn_long
+    #   The long ASN for the BGP peer to be deleted from a Direct Connect
+    #   virtual interface. The valid range is from 1 to 4294967294 for BGP
     #   configuration.
+    #
+    #   <note markdown="1"> You can use `asnLong` or `asn`, but not both. We recommend using
+    #   `asnLong` as it supports a greater pool of numbers.
+    #
+    #    * The `asnLong` attribute accepts both ASN and long ASN ranges.
+    #
+    #   * If you provide a value in the same API call for both `asn` and
+    #     `asnLong`, the API will only accept the value for `asnLong`.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] customer_address
@@ -1361,6 +1423,7 @@ module Aws::DirectConnect
     class DeleteBGPPeerRequest < Struct.new(
       :virtual_interface_id,
       :asn,
+      :asn_long,
       :customer_address,
       :bgp_peer_id)
       SENSITIVE = []
@@ -1642,10 +1705,25 @@ module Aws::DirectConnect
     #   The ID of the connection.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results
+    #   are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsRequest AWS API Documentation
     #
     class DescribeConnectionsRequest < Struct.new(
-      :connection_id)
+      :connection_id,
+      :max_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1887,10 +1965,25 @@ module Aws::DirectConnect
     #   The ID of the interconnect or LAG.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results
+    #   are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeHostedConnectionsRequest AWS API Documentation
     #
     class DescribeHostedConnectionsRequest < Struct.new(
-      :connection_id)
+      :connection_id,
+      :max_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1938,10 +2031,25 @@ module Aws::DirectConnect
     #   The ID of the interconnect.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results
+    #   are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnectsRequest AWS API Documentation
     #
     class DescribeInterconnectsRequest < Struct.new(
-      :interconnect_id)
+      :interconnect_id,
+      :max_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1950,10 +2058,25 @@ module Aws::DirectConnect
     #   The ID of the LAG.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results
+    #   are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLagsRequest AWS API Documentation
     #
     class DescribeLagsRequest < Struct.new(
-      :lag_id)
+      :lag_id,
+      :max_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2064,11 +2187,26 @@ module Aws::DirectConnect
     #   The ID of the virtual interface.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results
+    #   are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualInterfacesRequest AWS API Documentation
     #
     class DescribeVirtualInterfacesRequest < Struct.new(
       :connection_id,
-      :virtual_interface_id)
+      :virtual_interface_id,
+      :max_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2099,7 +2237,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] amazon_side_asn
-    #   The autonomous system number (ASN) for the Amazon side of the
+    #   The autonomous system number (AS) for the Amazon side of the
     #   connection.
     #   @return [Integer]
     #
@@ -2568,10 +2706,16 @@ module Aws::DirectConnect
     #   The interconnects.
     #   @return [Array<Types::Interconnect>]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Interconnects AWS API Documentation
     #
     class Interconnects < Struct.new(
-      :interconnects)
+      :interconnects,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2722,10 +2866,16 @@ module Aws::DirectConnect
     #   The LAGs.
     #   @return [Array<Types::Lag>]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Lags AWS API Documentation
     #
     class Lags < Struct.new(
-      :lags)
+      :lags,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2912,8 +3062,15 @@ module Aws::DirectConnect
     # Information about a new BGP peer.
     #
     # @!attribute [rw] asn
-    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
-    #   configuration.
+    #   The autonomous system number (ASN). The valid range is from 1 to
+    #   2147483646 for Border Gateway Protocol (BGP) configuration. If you
+    #   provide a number greater than the maximum, an error is returned. Use
+    #   `asnLong` instead.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] asn_long
+    #   The long ASN for a new BGP peer. The valid range is from 1 to
+    #   4294967294.
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
@@ -2938,6 +3095,7 @@ module Aws::DirectConnect
     #
     class NewBGPPeer < Struct.new(
       :asn,
+      :asn_long,
       :auth_key,
       :address_family,
       :amazon_address,
@@ -2959,10 +3117,37 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] asn
-    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
-    #   configuration.
+    #   The autonomous system number (ASN). The valid range is from 1 to
+    #   2147483646 for Border Gateway Protocol (BGP) configuration. If you
+    #   provide a number greater than the maximum, an error is returned. Use
+    #   `asnLong` instead.
     #
-    #   The valid values are 1-2147483647.
+    #   <note markdown="1"> You can use `asnLong` or `asn`, but not both. We recommend using
+    #   `asnLong` as it supports a greater pool of numbers.
+    #
+    #    * The `asnLong` attribute accepts both ASN and long ASN ranges.
+    #
+    #   * If you provide a value in the same API call for both `asn` and
+    #     `asnLong`, the API will only accept the value for `asnLong`.
+    #
+    #    </note>
+    #
+    #   The valid values are 1-2147483646.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] asn_long
+    #   The long ASN for a new private virtual interface. The valid range is
+    #   from 1 to 4294967294 for BGP configuration.
+    #
+    #   <note markdown="1"> You can use `asnLong` or `asn`, but not both. We recommend using
+    #   `asnLong` as it supports a greater pool of numbers.
+    #
+    #    * The `asnLong` attribute accepts both ASN and long ASN ranges.
+    #
+    #   * If you provide a value in the same API call for both `asn` and
+    #     `asnLong`, the API will only accept the value for `asnLong`.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] mtu
@@ -3010,6 +3195,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :asn_long,
       :mtu,
       :auth_key,
       :amazon_address,
@@ -3037,10 +3223,37 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] asn
-    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
-    #   configuration.
+    #   The autonomous system number (ASN). The valid range is from 1 to
+    #   2147483646 for Border Gateway Protocol (BGP) configuration. If you
+    #   provide a number greater than the maximum, an error is returned. Use
+    #   `asnLong` instead.
     #
-    #   The valid values are 1-2147483647.
+    #   <note markdown="1"> You can use `asnLong` or `asn`, but not both. We recommend using
+    #   `asnLong` as it supports a greater pool of numbers.
+    #
+    #    * The `asnLong` attribute accepts both ASN and long ASN ranges.
+    #
+    #   * If you provide a value in the same API call for both `asn` and
+    #     `asnLong`, the API will only accept the value for `asnLong`.
+    #
+    #    </note>
+    #
+    #   The valid values are 1-2147483646.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] asn_long
+    #   The ASN when allocating a new private virtual interface. The valid
+    #   range is from 1 to 4294967294 for BGP configuration.
+    #
+    #   <note markdown="1"> You can use `asnLong` or `asn`, but not both. We recommend using
+    #   `asnLong` as it supports a greater pool of numbers.
+    #
+    #    * The `asnLong` attribute accepts both ASN and long ASN ranges.
+    #
+    #   * If you provide a value in the same API call for both `asn` and
+    #     `asnLong`, the API will only accept the value for `asnLong`.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] mtu
@@ -3076,6 +3289,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :asn_long,
       :mtu,
       :auth_key,
       :amazon_address,
@@ -3099,10 +3313,35 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] asn
-    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
-    #   configuration.
+    #   The autonomous system number (ASN). The valid range is from 1 to
+    #   2147483646 for Border Gateway Protocol (BGP) configuration. If you
+    #   provide a number greater than the maximum, an error is returned. Use
+    #   `asnLong` instead.
     #
-    #   The valid values are 1-2147483647.
+    #   <note markdown="1"> You can use `asnLong` or `asn`, but not both. We recommend using
+    #   `asnLong` as it supports a greater pool of numbers.
+    #
+    #    * The `asnLong` attribute accepts both ASN and long ASN ranges.
+    #
+    #   * If you provide a value in the same API call for both `asn` and
+    #     `asnLong`, the API will only accept the value for `asnLong`.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] asn_long
+    #   The long ASN for a new public virtual interface. The valid range is
+    #   from 1 to 4294967294 for BGP configuration.
+    #
+    #   <note markdown="1"> You can use `asnLong` or `asn`, but not both. We recommend using
+    #   `asnLong` as it supports a greater pool of numbers.
+    #
+    #    * The `asnLong` attribute accepts both ASN and long ASN ranges.
+    #
+    #   * If you provide a value in the same API call for both `asn` and
+    #     `asnLong`, the API will only accept the value for `asnLong`.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
@@ -3138,6 +3377,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :asn_long,
       :auth_key,
       :amazon_address,
       :customer_address,
@@ -3162,10 +3402,37 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] asn
-    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
-    #   configuration.
+    #   The autonomous system number (ASN). The valid range is from 1 to
+    #   2147483646 for Border Gateway Protocol (BGP) configuration. If you
+    #   provide a number greater than the maximum, an error is returned. Use
+    #   `asnLong` instead.
     #
-    #   The valid values are 1-2147483647.
+    #   <note markdown="1"> You can use `asnLong` or `asn`, but not both. We recommend using
+    #   `asnLong` as it supports a greater pool of numbers.
+    #
+    #    * The `asnLong` attribute accepts both ASN and long ASN ranges.
+    #
+    #   * If you provide a value in the same API call for both `asn` and
+    #     `asnLong`, the API will only accept the value for `asnLong`.
+    #
+    #    </note>
+    #
+    #   The valid values are 1-2147483646.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] asn_long
+    #   The ASN when allocating a new public virtual interface. The valid
+    #   range is from 1 to 4294967294 for BGP configuration.
+    #
+    #   <note markdown="1"> You can use `asnLong` or `asn`, but not both. We recommend using
+    #   `asnLong` as it supports a greater pool of numbers.
+    #
+    #    * The `asnLong` attribute accepts both ASN and long ASN ranges.
+    #
+    #   * If you provide a value in the same API call for both `asn` and
+    #     `asnLong`, the API will only accept the value for `asnLong`.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
@@ -3201,6 +3468,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :asn_long,
       :auth_key,
       :amazon_address,
       :customer_address,
@@ -3224,10 +3492,35 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] asn
-    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
-    #   configuration.
+    #   The autonomous system number (ASN). The valid range is from 1 to
+    #   2147483646 for Border Gateway Protocol (BGP) configuration. If you
+    #   provide a number greater than the maximum, an error is returned. Use
+    #   `asnLong` instead.
     #
-    #   The valid values are 1-2147483647.
+    #   <note markdown="1"> You can use `asnLong` or `asn`, but not both. We recommend using
+    #   `asnLong` as it supports a greater pool of numbers.
+    #
+    #    * The `asnLong` attribute accepts both ASN and long ASN ranges.
+    #
+    #   * If you provide a value in the same API call for both `asn` and
+    #     `asnLong`, the API will only accept the value for `asnLong`.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] asn_long
+    #   The long ASN for a new transit virtual interface.The valid range is
+    #   from 1 to 4294967294 for BGP configuration.
+    #
+    #   <note markdown="1"> You can use `asnLong` or `asn`, but not both. We recommend using
+    #   `asnLong` as it supports a greater pool of numbers.
+    #
+    #    * The `asnLong` attribute accepts both ASN and long ASN ranges.
+    #
+    #   * If you provide a value in the same API call for both `asn` and
+    #     `asnLong`, the API will only accept the value for `asnLong`.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] mtu
@@ -3271,6 +3564,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :asn_long,
       :mtu,
       :auth_key,
       :amazon_address,
@@ -3297,10 +3591,37 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] asn
-    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
-    #   configuration.
+    #   The autonomous system number (ASN). The valid range is from 1 to
+    #   2147483646 for Border Gateway Protocol (BGP) configuration. If you
+    #   provide a number greater than the maximum, an error is returned. Use
+    #   `asnLong` instead.
     #
-    #   The valid values are 1-2147483647.
+    #   <note markdown="1"> You can use `asnLong` or `asn`, but not both. We recommend using
+    #   `asnLong` as it supports a greater pool of numbers.
+    #
+    #    * The `asnLong` attribute accepts both ASN and long ASN ranges.
+    #
+    #   * If you provide a value in the same API call for both `asn` and
+    #     `asnLong`, the API will only accept the value for `asnLong`.
+    #
+    #    </note>
+    #
+    #   The valid values are 1-2147483646.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] asn_long
+    #   The ASN when allocating a new transit virtual interface. The valid
+    #   range is from 1 to 4294967294 for BGP configuration.
+    #
+    #   <note markdown="1"> You can use `asnLong` or `asn`, but not both. We recommend using
+    #   `asnLong` as it supports a greater pool of numbers.
+    #
+    #    * The `asnLong` attribute accepts both ASN and long ASN ranges.
+    #
+    #   * If you provide a value in the same API call for both `asn` and
+    #     `asnLong`, the API will only accept the value for `asnLong`.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] mtu
@@ -3336,6 +3657,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :asn_long,
       :mtu,
       :auth_key,
       :amazon_address,
@@ -3785,14 +4107,39 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] asn
-    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
-    #   configuration.
+    #   The autonomous system number (ASN). The valid range is from 1 to
+    #   2147483646 for Border Gateway Protocol (BGP) configuration. If you
+    #   provide a number greater than the maximum, an error is returned. Use
+    #   `asnLong` instead.
     #
-    #   The valid values are 1-2147483647.
+    #   <note markdown="1"> You can use `asnLong` or `asn`, but not both. We recommend using
+    #   `asnLong` as it supports a greater pool of numbers.
+    #
+    #    * The `asnLong` attribute accepts both ASN and long ASN ranges.
+    #
+    #   * If you provide a value in the same API call for both `asn` and
+    #     `asnLong`, the API will only accept the value for `asnLong`.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] asn_long
+    #   The long ASN for the virtual interface. The valid range is from 1 to
+    #   4294967294 for BGP configuration.
+    #
+    #   <note markdown="1"> You can use `asnLong` or `asn`, but not both. We recommend using
+    #   `asnLong` as it supports a greater pool of numbers.
+    #
+    #    * The `asnLong` attribute accepts both ASN and long ASN ranges.
+    #
+    #   * If you provide a value in the same API call for both `asn` and
+    #     `asnLong`, the API will only accept the value for `asnLong`.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] amazon_side_asn
-    #   The autonomous system number (ASN) for the Amazon side of the
+    #   The autonomous system number (AS) for the Amazon side of the
     #   connection.
     #   @return [Integer]
     #
@@ -3919,6 +4266,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :asn_long,
       :amazon_side_asn,
       :auth_key,
       :amazon_address,
@@ -3995,10 +4343,16 @@ module Aws::DirectConnect
     #   The virtual interfaces
     #   @return [Array<Types::VirtualInterface>]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/VirtualInterfaces AWS API Documentation
     #
     class VirtualInterfaces < Struct.new(
-      :virtual_interfaces)
+      :virtual_interfaces,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end

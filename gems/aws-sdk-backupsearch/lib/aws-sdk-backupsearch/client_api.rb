@@ -532,6 +532,7 @@ module Aws::BackupSearch
         o.http_request_uri = "/search-jobs"
         o.input = Shapes::ShapeRef.new(shape: StartSearchJobInput)
         o.output = Shapes::ShapeRef.new(shape: StartSearchJobOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

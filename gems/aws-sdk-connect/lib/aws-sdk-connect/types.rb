@@ -2447,16 +2447,10 @@ module Aws::Connect
     #   A leaf node condition which can be used to specify a tag condition.
     #   @return [Array<Types::TagCondition>]
     #
-    # @!attribute [rw] hierarchy_group_condition
-    #   A leaf node condition which can be used to specify a hierarchy group
-    #   condition.
-    #   @return [Types::HierarchyGroupCondition]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CommonAttributeAndCondition AWS API Documentation
     #
     class CommonAttributeAndCondition < Struct.new(
-      :tag_conditions,
-      :hierarchy_group_condition)
+      :tag_conditions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27577,18 +27571,12 @@ module Aws::Connect
     #    </note>
     #   @return [Types::StringCondition]
     #
-    # @!attribute [rw] hierarchy_group_condition
-    #   A leaf node condition which can be used to specify a hierarchy group
-    #   condition.
-    #   @return [Types::HierarchyGroupCondition]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserHierarchyGroupSearchCriteria AWS API Documentation
     #
     class UserHierarchyGroupSearchCriteria < Struct.new(
       :or_conditions,
       :and_conditions,
-      :string_condition,
-      :hierarchy_group_condition)
+      :string_condition)
       SENSITIVE = []
       include Aws::Structure
     end

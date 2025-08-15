@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.231.0 (2025-08-14)
+------------------
+
+* Feature - AWS Glue now supports Trusted Identity Propagation.
+
 1.230.0 (2025-08-07)
 ------------------
 

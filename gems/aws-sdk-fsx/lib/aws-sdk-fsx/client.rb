@@ -852,7 +852,7 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.backup.file_system.administrative_actions[0].request_time #=> Time
-    #   resp.backup.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.backup.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.backup.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
     #   resp.backup.file_system.administrative_actions[0].failure_details.message #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
@@ -936,6 +936,7 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backup.file_system.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.backup.file_system.administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].message #=> String
     #   resp.backup.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
     #   resp.backup.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
@@ -969,11 +970,14 @@ module Aws::FSx
     #   resp.backup.file_system.open_zfs_configuration.root_volume_id #=> String
     #   resp.backup.file_system.open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.backup.file_system.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.backup.file_system.open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.backup.file_system.open_zfs_configuration.route_table_ids #=> Array
     #   resp.backup.file_system.open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.backup.file_system.open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.backup.file_system.open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.backup.file_system.open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.backup.file_system.open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.backup.file_system.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.backup.directory_information.domain_name #=> String
     #   resp.backup.directory_information.active_directory_id #=> String
     #   resp.backup.directory_information.resource_arn #=> String
@@ -1026,7 +1030,7 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.backup.volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.backup.volume.administrative_actions[0].request_time #=> Time
-    #   resp.backup.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.backup.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.owner_id #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.file_system_id #=> String
@@ -1132,11 +1136,14 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.backup.volume.administrative_actions[0].failure_details.message #=> String
     #   resp.backup.volume.administrative_actions[0].target_volume_values #=> Types::Volume
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.resource_arn #=> String
@@ -1152,6 +1159,7 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backup.volume.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.backup.volume.administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.backup.volume.administrative_actions[0].message #=> String
     #   resp.backup.volume.open_zfs_configuration.parent_volume_id #=> String
     #   resp.backup.volume.open_zfs_configuration.volume_path #=> String
     #   resp.backup.volume.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
@@ -1277,7 +1285,7 @@ module Aws::FSx
     #   resp.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.administrative_actions[0].progress_percent #=> Integer
     #   resp.administrative_actions[0].request_time #=> Time
-    #   resp.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.administrative_actions[0].target_file_system_values.owner_id #=> String
     #   resp.administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.administrative_actions[0].target_file_system_values.file_system_id #=> String
@@ -1383,11 +1391,14 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.administrative_actions[0].target_file_system_values.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.administrative_actions[0].failure_details.message #=> String
     #   resp.administrative_actions[0].target_volume_values.creation_time #=> Time
     #   resp.administrative_actions[0].target_volume_values.file_system_id #=> String
@@ -1470,6 +1481,7 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.administrative_actions[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CopySnapshotAndUpdateVolume AWS API Documentation
     #
@@ -1483,9 +1495,8 @@ module Aws::FSx
     # Creates an S3 access point and attaches it to an Amazon FSx volume.
     # For FSx for OpenZFS file systems, the volume must be hosted on a
     # high-availability file system, either Single-AZ or Multi-AZ. For more
-    # information, see [Accessing your data using access
-    # points](fsx/latest/OpenZFSGuide/s3accesspoints-for-FSx.html) in the
-    # Amazon FSx for OpenZFS User Guide.
+    # information, see [Accessing your data using Amazon S3 access
+    # points][1]. in the Amazon FSx for OpenZFS User Guide.
     #
     # The requester requires the following permissions to perform these
     # actions:
@@ -1505,6 +1516,10 @@ module Aws::FSx
     # * DescribeS3AccessPointAttachments
     #
     # * DetachAndDeleteS3AccessPoint
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/s3accesspoints-for-FSx.html
     #
     # @option params [String] :client_request_token
     #   (Optional) An idempotency token for resource creation, in a string of
@@ -1823,7 +1838,7 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.backup.file_system.administrative_actions[0].request_time #=> Time
-    #   resp.backup.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.backup.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.backup.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
     #   resp.backup.file_system.administrative_actions[0].failure_details.message #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
@@ -1907,6 +1922,7 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backup.file_system.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.backup.file_system.administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].message #=> String
     #   resp.backup.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
     #   resp.backup.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
@@ -1940,11 +1956,14 @@ module Aws::FSx
     #   resp.backup.file_system.open_zfs_configuration.root_volume_id #=> String
     #   resp.backup.file_system.open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.backup.file_system.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.backup.file_system.open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.backup.file_system.open_zfs_configuration.route_table_ids #=> Array
     #   resp.backup.file_system.open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.backup.file_system.open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.backup.file_system.open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.backup.file_system.open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.backup.file_system.open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.backup.file_system.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.backup.directory_information.domain_name #=> String
     #   resp.backup.directory_information.active_directory_id #=> String
     #   resp.backup.directory_information.resource_arn #=> String
@@ -1997,7 +2016,7 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.backup.volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.backup.volume.administrative_actions[0].request_time #=> Time
-    #   resp.backup.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.backup.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.owner_id #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.file_system_id #=> String
@@ -2103,11 +2122,14 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.backup.volume.administrative_actions[0].failure_details.message #=> String
     #   resp.backup.volume.administrative_actions[0].target_volume_values #=> Types::Volume
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.resource_arn #=> String
@@ -2123,6 +2145,7 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backup.volume.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.backup.volume.administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.backup.volume.administrative_actions[0].message #=> String
     #   resp.backup.volume.open_zfs_configuration.parent_volume_id #=> String
     #   resp.backup.volume.open_zfs_configuration.volume_path #=> String
     #   resp.backup.volume.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
@@ -2917,6 +2940,12 @@ module Aws::FSx
     # @option params [Types::CreateFileSystemOpenZFSConfiguration] :open_zfs_configuration
     #   The OpenZFS configuration for the file system that's being created.
     #
+    # @option params [String] :network_type
+    #   The network type of the Amazon FSx file system that you are creating.
+    #   Valid values are `IPV4` (which supports IPv4 only) and `DUAL` (for
+    #   dual-stack mode, which supports both IPv4 and IPv6). The default is
+    #   `IPV4`. Supported only for Amazon FSx for OpenZFS file systems.
+    #
     # @return [Types::CreateFileSystemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFileSystemResponse#file_system #file_system} => Types::FileSystem
@@ -3125,12 +3154,14 @@ module Aws::FSx
     #       },
     #       preferred_subnet_id: "SubnetId",
     #       endpoint_ip_address_range: "IpAddressRange",
+    #       endpoint_ipv_6_address_range: "Ipv6AddressRange",
     #       route_table_ids: ["RouteTableId"],
     #       read_cache_configuration: {
     #         sizing_mode: "NO_CACHE", # accepts NO_CACHE, USER_PROVISIONED, PROPORTIONAL_TO_THROUGHPUT_CAPACITY
     #         size_gi_b: 1,
     #       },
     #     },
+    #     network_type: "IPV4", # accepts IPV4, DUAL
     #   })
     #
     # @example Response structure
@@ -3210,7 +3241,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
-    #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
     #   resp.file_system.administrative_actions[0].failure_details.message #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
@@ -3294,6 +3325,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.file_system.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.file_system.administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.file_system.administrative_actions[0].message #=> String
     #   resp.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
@@ -3327,11 +3359,14 @@ module Aws::FSx
     #   resp.file_system.open_zfs_configuration.root_volume_id #=> String
     #   resp.file_system.open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.file_system.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.file_system.open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.file_system.open_zfs_configuration.route_table_ids #=> Array
     #   resp.file_system.open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.file_system.open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.file_system.open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.file_system.open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.file_system.open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.file_system.network_type #=> String, one of "IPV4", "DUAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystem AWS API Documentation
     #
@@ -3517,6 +3552,10 @@ module Aws::FSx
     #   provide any other value, Amazon FSx responds with an HTTP status code
     #   400 Bad Request.
     #
+    # @option params [String] :network_type
+    #   Sets the network type for the Amazon FSx for OpenZFS file system that
+    #   you're creating from a backup.
+    #
     # @return [Types::CreateFileSystemFromBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFileSystemFromBackupResponse#file_system #file_system} => Types::FileSystem
@@ -3690,6 +3729,7 @@ module Aws::FSx
     #       },
     #       preferred_subnet_id: "SubnetId",
     #       endpoint_ip_address_range: "IpAddressRange",
+    #       endpoint_ipv_6_address_range: "Ipv6AddressRange",
     #       route_table_ids: ["RouteTableId"],
     #       read_cache_configuration: {
     #         sizing_mode: "NO_CACHE", # accepts NO_CACHE, USER_PROVISIONED, PROPORTIONAL_TO_THROUGHPUT_CAPACITY
@@ -3697,6 +3737,7 @@ module Aws::FSx
     #       },
     #     },
     #     storage_capacity: 1,
+    #     network_type: "IPV4", # accepts IPV4, DUAL
     #   })
     #
     # @example Response structure
@@ -3776,7 +3817,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
-    #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
     #   resp.file_system.administrative_actions[0].failure_details.message #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
@@ -3860,6 +3901,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.file_system.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.file_system.administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.file_system.administrative_actions[0].message #=> String
     #   resp.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
@@ -3893,11 +3935,14 @@ module Aws::FSx
     #   resp.file_system.open_zfs_configuration.root_volume_id #=> String
     #   resp.file_system.open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.file_system.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.file_system.open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.file_system.open_zfs_configuration.route_table_ids #=> Array
     #   resp.file_system.open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.file_system.open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.file_system.open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.file_system.open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.file_system.open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.file_system.network_type #=> String, one of "IPV4", "DUAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemFromBackup AWS API Documentation
     #
@@ -3992,7 +4037,7 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.snapshot.administrative_actions[0].progress_percent #=> Integer
     #   resp.snapshot.administrative_actions[0].request_time #=> Time
-    #   resp.snapshot.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.snapshot.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.owner_id #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.snapshot.administrative_actions[0].target_file_system_values.file_system_id #=> String
@@ -4098,11 +4143,14 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.snapshot.administrative_actions[0].failure_details.message #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.creation_time #=> Time
     #   resp.snapshot.administrative_actions[0].target_volume_values.file_system_id #=> String
@@ -4175,6 +4223,7 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_snapshot_values #=> Types::Snapshot
     #   resp.snapshot.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.snapshot.administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.snapshot.administrative_actions[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateSnapshot AWS API Documentation
     #
@@ -4481,7 +4530,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.volume.administrative_actions[0].request_time #=> Time
-    #   resp.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.volume.administrative_actions[0].target_file_system_values.owner_id #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.volume.administrative_actions[0].target_file_system_values.file_system_id #=> String
@@ -4587,11 +4636,14 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.volume.administrative_actions[0].failure_details.message #=> String
     #   resp.volume.administrative_actions[0].target_volume_values #=> Types::Volume
     #   resp.volume.administrative_actions[0].target_snapshot_values.resource_arn #=> String
@@ -4607,6 +4659,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.volume.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.volume.administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.volume.administrative_actions[0].message #=> String
     #   resp.volume.open_zfs_configuration.parent_volume_id #=> String
     #   resp.volume.open_zfs_configuration.volume_path #=> String
     #   resp.volume.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
@@ -4777,7 +4830,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.volume.administrative_actions[0].request_time #=> Time
-    #   resp.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.volume.administrative_actions[0].target_file_system_values.owner_id #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.volume.administrative_actions[0].target_file_system_values.file_system_id #=> String
@@ -4883,11 +4936,14 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.volume.administrative_actions[0].failure_details.message #=> String
     #   resp.volume.administrative_actions[0].target_volume_values #=> Types::Volume
     #   resp.volume.administrative_actions[0].target_snapshot_values.resource_arn #=> String
@@ -4903,6 +4959,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.volume.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.volume.administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.volume.administrative_actions[0].message #=> String
     #   resp.volume.open_zfs_configuration.parent_volume_id #=> String
     #   resp.volume.open_zfs_configuration.volume_path #=> String
     #   resp.volume.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
@@ -5161,8 +5218,8 @@ module Aws::FSx
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/access-points-list
-    # [2]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/delete-points-list
+    # [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/access-points-list.html
+    # [2]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/delete-access-point.html
     # [3]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/unmounting-fs.html
     # [4]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/monitoring-cloudwatch.html#auto-import-export-metrics
     # [5]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/export-data-repo-task-dra.html
@@ -5627,7 +5684,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.backups[0].file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.backups[0].file_system.administrative_actions[0].request_time #=> Time
-    #   resp.backups[0].file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.backups[0].file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.backups[0].file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
     #   resp.backups[0].file_system.administrative_actions[0].failure_details.message #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
@@ -5711,6 +5768,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backups[0].file_system.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.backups[0].file_system.administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.backups[0].file_system.administrative_actions[0].message #=> String
     #   resp.backups[0].file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backups[0].file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
     #   resp.backups[0].file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
@@ -5744,11 +5802,14 @@ module Aws::FSx
     #   resp.backups[0].file_system.open_zfs_configuration.root_volume_id #=> String
     #   resp.backups[0].file_system.open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.backups[0].file_system.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.backups[0].file_system.open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.backups[0].file_system.open_zfs_configuration.route_table_ids #=> Array
     #   resp.backups[0].file_system.open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.backups[0].file_system.open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.backups[0].file_system.open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.backups[0].file_system.open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.backups[0].file_system.open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.backups[0].file_system.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.backups[0].directory_information.domain_name #=> String
     #   resp.backups[0].directory_information.active_directory_id #=> String
     #   resp.backups[0].directory_information.resource_arn #=> String
@@ -5801,7 +5862,7 @@ module Aws::FSx
     #   resp.backups[0].volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.backups[0].volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].request_time #=> Time
-    #   resp.backups[0].volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.backups[0].volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.owner_id #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.file_system_id #=> String
@@ -5907,11 +5968,14 @@ module Aws::FSx
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.backups[0].volume.administrative_actions[0].failure_details.message #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_volume_values #=> Types::Volume
     #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.resource_arn #=> String
@@ -5927,6 +5991,7 @@ module Aws::FSx
     #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backups[0].volume.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.backups[0].volume.administrative_actions[0].message #=> String
     #   resp.backups[0].volume.open_zfs_configuration.parent_volume_id #=> String
     #   resp.backups[0].volume.open_zfs_configuration.volume_path #=> String
     #   resp.backups[0].volume.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
@@ -6505,7 +6570,7 @@ module Aws::FSx
     #   resp.file_systems[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.file_systems[0].administrative_actions[0].progress_percent #=> Integer
     #   resp.file_systems[0].administrative_actions[0].request_time #=> Time
-    #   resp.file_systems[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.file_systems[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.file_systems[0].administrative_actions[0].target_file_system_values #=> Types::FileSystem
     #   resp.file_systems[0].administrative_actions[0].failure_details.message #=> String
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.creation_time #=> Time
@@ -6589,6 +6654,7 @@ module Aws::FSx
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.file_systems[0].administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.file_systems[0].administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.file_systems[0].administrative_actions[0].message #=> String
     #   resp.file_systems[0].ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_systems[0].ontap_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_systems[0].ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
@@ -6622,11 +6688,14 @@ module Aws::FSx
     #   resp.file_systems[0].open_zfs_configuration.root_volume_id #=> String
     #   resp.file_systems[0].open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.file_systems[0].open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.file_systems[0].open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.file_systems[0].open_zfs_configuration.route_table_ids #=> Array
     #   resp.file_systems[0].open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.file_systems[0].open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.file_systems[0].open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.file_systems[0].open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.file_systems[0].open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.file_systems[0].network_type #=> String, one of "IPV4", "DUAL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeFileSystems AWS API Documentation
@@ -6831,7 +6900,7 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.snapshots[0].administrative_actions[0].progress_percent #=> Integer
     #   resp.snapshots[0].administrative_actions[0].request_time #=> Time
-    #   resp.snapshots[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.snapshots[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.owner_id #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.file_system_id #=> String
@@ -6937,11 +7006,14 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.snapshots[0].administrative_actions[0].failure_details.message #=> String
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.creation_time #=> Time
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.file_system_id #=> String
@@ -7014,6 +7086,7 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_snapshot_values #=> Types::Snapshot
     #   resp.snapshots[0].administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.snapshots[0].administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeSnapshots AWS API Documentation
@@ -7200,7 +7273,7 @@ module Aws::FSx
     #   resp.volumes[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.volumes[0].administrative_actions[0].progress_percent #=> Integer
     #   resp.volumes[0].administrative_actions[0].request_time #=> Time
-    #   resp.volumes[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.volumes[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.owner_id #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.file_system_id #=> String
@@ -7306,11 +7379,14 @@ module Aws::FSx
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.volumes[0].administrative_actions[0].failure_details.message #=> String
     #   resp.volumes[0].administrative_actions[0].target_volume_values #=> Types::Volume
     #   resp.volumes[0].administrative_actions[0].target_snapshot_values.resource_arn #=> String
@@ -7326,6 +7402,7 @@ module Aws::FSx
     #   resp.volumes[0].administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.volumes[0].administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.volumes[0].administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.volumes[0].administrative_actions[0].message #=> String
     #   resp.volumes[0].open_zfs_configuration.parent_volume_id #=> String
     #   resp.volumes[0].open_zfs_configuration.volume_path #=> String
     #   resp.volumes[0].open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
@@ -7661,7 +7738,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
-    #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
     #   resp.file_system.administrative_actions[0].failure_details.message #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
@@ -7745,6 +7822,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.file_system.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.file_system.administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.file_system.administrative_actions[0].message #=> String
     #   resp.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
@@ -7778,11 +7856,14 @@ module Aws::FSx
     #   resp.file_system.open_zfs_configuration.root_volume_id #=> String
     #   resp.file_system.open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.file_system.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.file_system.open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.file_system.open_zfs_configuration.route_table_ids #=> Array
     #   resp.file_system.open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.file_system.open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.file_system.open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.file_system.open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.file_system.open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.file_system.network_type #=> String, one of "IPV4", "DUAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ReleaseFileSystemNfsV3Locks AWS API Documentation
     #
@@ -7848,7 +7929,7 @@ module Aws::FSx
     #   resp.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.administrative_actions[0].progress_percent #=> Integer
     #   resp.administrative_actions[0].request_time #=> Time
-    #   resp.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.administrative_actions[0].target_file_system_values.owner_id #=> String
     #   resp.administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.administrative_actions[0].target_file_system_values.file_system_id #=> String
@@ -7954,11 +8035,14 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.administrative_actions[0].target_file_system_values.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.administrative_actions[0].failure_details.message #=> String
     #   resp.administrative_actions[0].target_volume_values.creation_time #=> Time
     #   resp.administrative_actions[0].target_volume_values.file_system_id #=> String
@@ -8041,6 +8125,7 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.administrative_actions[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/RestoreVolumeFromSnapshot AWS API Documentation
     #
@@ -8156,7 +8241,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
-    #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
     #   resp.file_system.administrative_actions[0].failure_details.message #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
@@ -8240,6 +8325,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.file_system.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.file_system.administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.file_system.administrative_actions[0].message #=> String
     #   resp.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
@@ -8273,11 +8359,14 @@ module Aws::FSx
     #   resp.file_system.open_zfs_configuration.root_volume_id #=> String
     #   resp.file_system.open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.file_system.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.file_system.open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.file_system.open_zfs_configuration.route_table_ids #=> Array
     #   resp.file_system.open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.file_system.open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.file_system.open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.file_system.open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.file_system.open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.file_system.network_type #=> String, one of "IPV4", "DUAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/StartMisconfiguredStateRecovery AWS API Documentation
     #
@@ -8631,6 +8720,8 @@ module Aws::FSx
     #
     # * `DiskIopsConfiguration`
     #
+    # * `EndpointIpv6AddressRange`
+    #
     # * `ReadCacheConfiguration`
     #
     # * `RemoveRouteTableIds`
@@ -8656,9 +8747,9 @@ module Aws::FSx
     # @option params [Integer] :storage_capacity
     #   Use this parameter to increase the storage capacity of an FSx for
     #   Windows File Server, FSx for Lustre, FSx for OpenZFS, or FSx for ONTAP
-    #   file system. Specifies the storage capacity target value, in GiB, to
-    #   increase the storage capacity for the file system that you're
-    #   updating.
+    #   file system. For second-generation FSx for ONTAP file systems, you can
+    #   also decrease the storage capacity. Specifies the storage capacity
+    #   target value, in GiB, for the file system that you're updating.
     #
     #   <note markdown="1"> You can't make a storage capacity increase request if there is an
     #   existing storage capacity increase request in progress.
@@ -8694,17 +8785,20 @@ module Aws::FSx
     #   of throughput capacity. For more information, see [Managing storage
     #   capacity][3] in the *Amazon FSxfor Windows File Server User Guide*.
     #
-    #   For ONTAP file systems, the storage capacity target value must be at
-    #   least 10 percent greater than the current storage capacity value. For
-    #   more information, see [Managing storage capacity and provisioned
-    #   IOPS][4] in the *Amazon FSx for NetApp ONTAP User Guide*.
+    #   For ONTAP file systems, when increasing storage capacity, the storage
+    #   capacity target value must be at least 10 percent greater than the
+    #   current storage capacity value. When decreasing storage capacity on
+    #   second-generation file systems, the target value must be at least 9
+    #   percent smaller than the current SSD storage capacity. For more
+    #   information, see [File system storage capacity and IOPS][4] in the
+    #   Amazon FSx for NetApp ONTAP User Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
     #   [2]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-storage-capacity.html
     #   [3]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
-    #   [4]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html
+    #   [4]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/storage-capacity-and-IOPS.html
     #
     # @option params [Types::UpdateFileSystemWindowsConfiguration] :windows_configuration
     #   The configuration updates for an Amazon FSx for Windows File Server
@@ -8728,6 +8822,9 @@ module Aws::FSx
     #   The Lustre version you are updating an FSx for Lustre file system to.
     #   Valid values are `2.12` and `2.15`. The value you choose must be newer
     #   than the file system's current Lustre version.
+    #
+    # @option params [String] :network_type
+    #   Changes the network type of an FSx for OpenZFS file system.
     #
     # @return [Types::UpdateFileSystemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8863,9 +8960,11 @@ module Aws::FSx
     #         sizing_mode: "NO_CACHE", # accepts NO_CACHE, USER_PROVISIONED, PROPORTIONAL_TO_THROUGHPUT_CAPACITY
     #         size_gi_b: 1,
     #       },
+    #       endpoint_ipv_6_address_range: "Ipv6AddressRange",
     #     },
     #     storage_type: "SSD", # accepts SSD, HDD, INTELLIGENT_TIERING
     #     file_system_type_version: "FileSystemTypeVersion",
+    #     network_type: "IPV4", # accepts IPV4, DUAL
     #   })
     #
     # @example Response structure
@@ -8945,7 +9044,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
-    #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
     #   resp.file_system.administrative_actions[0].failure_details.message #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
@@ -9029,6 +9128,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.file_system.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.file_system.administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.file_system.administrative_actions[0].message #=> String
     #   resp.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
@@ -9062,11 +9162,14 @@ module Aws::FSx
     #   resp.file_system.open_zfs_configuration.root_volume_id #=> String
     #   resp.file_system.open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.file_system.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.file_system.open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.file_system.open_zfs_configuration.route_table_ids #=> Array
     #   resp.file_system.open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.file_system.open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.file_system.open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.file_system.open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.file_system.open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.file_system.network_type #=> String, one of "IPV4", "DUAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystem AWS API Documentation
     #
@@ -9180,7 +9283,7 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.snapshot.administrative_actions[0].progress_percent #=> Integer
     #   resp.snapshot.administrative_actions[0].request_time #=> Time
-    #   resp.snapshot.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.snapshot.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.owner_id #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.snapshot.administrative_actions[0].target_file_system_values.file_system_id #=> String
@@ -9286,11 +9389,14 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.snapshot.administrative_actions[0].failure_details.message #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.creation_time #=> Time
     #   resp.snapshot.administrative_actions[0].target_volume_values.file_system_id #=> String
@@ -9363,6 +9469,7 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_snapshot_values #=> Types::Snapshot
     #   resp.snapshot.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.snapshot.administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.snapshot.administrative_actions[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateSnapshot AWS API Documentation
     #
@@ -9609,7 +9716,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION", "MISCONFIGURED_STATE_RECOVERY", "VOLUME_UPDATE_WITH_SNAPSHOT", "VOLUME_INITIALIZE_WITH_SNAPSHOT", "DOWNLOAD_DATA_FROM_BACKUP"
     #   resp.volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.volume.administrative_actions[0].request_time #=> Time
-    #   resp.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING"
+    #   resp.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING", "OPTIMIZING", "PAUSED", "CANCELLED"
     #   resp.volume.administrative_actions[0].target_file_system_values.owner_id #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.volume.administrative_actions[0].target_file_system_values.file_system_id #=> String
@@ -9715,11 +9822,14 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ipv_6_address #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.sizing_mode #=> String, one of "NO_CACHE", "USER_PROVISIONED", "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.read_cache_configuration.size_gi_b #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.volume.administrative_actions[0].failure_details.message #=> String
     #   resp.volume.administrative_actions[0].target_volume_values #=> Types::Volume
     #   resp.volume.administrative_actions[0].target_snapshot_values.resource_arn #=> String
@@ -9735,6 +9845,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.volume.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.volume.administrative_actions[0].remaining_transfer_bytes #=> Integer
+    #   resp.volume.administrative_actions[0].message #=> String
     #   resp.volume.open_zfs_configuration.parent_volume_id #=> String
     #   resp.volume.open_zfs_configuration.volume_path #=> String
     #   resp.volume.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
@@ -9789,7 +9900,7 @@ module Aws::FSx
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.118.0'
+      context[:gem_version] = '1.120.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

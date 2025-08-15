@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2025-08-11)
+------------------
+
+* Feature - Added support for managing user background session for applications
+
 1.58.0 (2025-08-04)
 ------------------
 

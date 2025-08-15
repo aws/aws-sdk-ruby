@@ -258,6 +258,7 @@ module Aws::DynamoDB
       attr_accessor table_name: ::String
       attr_accessor index_name: ::String
       attr_accessor contributor_insights_status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "FAILED")
+      attr_accessor contributor_insights_mode: ("ACCESSED_AND_THROTTLED_KEYS" | "THROTTLED_KEYS")
       SENSITIVE: []
     end
 
@@ -464,6 +465,7 @@ module Aws::DynamoDB
       attr_accessor contributor_insights_status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "FAILED")
       attr_accessor last_update_date_time: ::Time
       attr_accessor failure_exception: Types::FailureException
+      attr_accessor contributor_insights_mode: ("ACCESSED_AND_THROTTLED_KEYS" | "THROTTLED_KEYS")
       SENSITIVE: []
     end
 
@@ -1163,6 +1165,7 @@ module Aws::DynamoDB
 
     class ProvisionedThroughputExceededException
       attr_accessor message: ::String
+      attr_accessor throttling_reasons: ::Array[Types::ThrottlingReason]
       SENSITIVE: []
     end
 
@@ -1385,6 +1388,7 @@ module Aws::DynamoDB
 
     class RequestLimitExceeded
       attr_accessor message: ::String
+      attr_accessor throttling_reasons: ::Array[Types::ThrottlingReason]
       SENSITIVE: []
     end
 
@@ -1613,6 +1617,18 @@ module Aws::DynamoDB
       SENSITIVE: []
     end
 
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor throttling_reasons: ::Array[Types::ThrottlingReason]
+      SENSITIVE: []
+    end
+
+    class ThrottlingReason
+      attr_accessor reason: ::String
+      attr_accessor resource: ::String
+      SENSITIVE: []
+    end
+
     class TimeToLiveDescription
       attr_accessor time_to_live_status: ("ENABLING" | "DISABLING" | "ENABLED" | "DISABLED")
       attr_accessor attribute_name: ::String
@@ -1712,6 +1728,7 @@ module Aws::DynamoDB
       attr_accessor table_name: ::String
       attr_accessor index_name: ::String
       attr_accessor contributor_insights_action: ("ENABLE" | "DISABLE")
+      attr_accessor contributor_insights_mode: ("ACCESSED_AND_THROTTLED_KEYS" | "THROTTLED_KEYS")
       SENSITIVE: []
     end
 
@@ -1719,6 +1736,7 @@ module Aws::DynamoDB
       attr_accessor table_name: ::String
       attr_accessor index_name: ::String
       attr_accessor contributor_insights_status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "FAILED")
+      attr_accessor contributor_insights_mode: ("ACCESSED_AND_THROTTLED_KEYS" | "THROTTLED_KEYS")
       SENSITIVE: []
     end
 

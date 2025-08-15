@@ -555,6 +555,16 @@ module Aws::SSOAdmin
       SENSITIVE: []
     end
 
+    class GetApplicationSessionConfigurationRequest
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationSessionConfigurationResponse
+      attr_accessor user_background_session_application_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class GetInlinePolicyForPermissionSetRequest
       attr_accessor instance_arn: ::String
       attr_accessor permission_set_arn: ::String
@@ -1023,6 +1033,15 @@ module Aws::SSOAdmin
       attr_accessor grant_type: ("authorization_code" | "refresh_token" | "urn:ietf:params:oauth:grant-type:jwt-bearer" | "urn:ietf:params:oauth:grant-type:token-exchange")
       attr_accessor grant: Types::Grant
       SENSITIVE: []
+    end
+
+    class PutApplicationSessionConfigurationRequest
+      attr_accessor application_arn: ::String
+      attr_accessor user_background_session_application_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class PutApplicationSessionConfigurationResponse < Aws::EmptyStructure
     end
 
     class PutInlinePolicyToPermissionSetRequest

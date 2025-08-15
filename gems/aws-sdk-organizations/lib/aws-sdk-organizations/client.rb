@@ -3783,6 +3783,137 @@ module Aws::Organizations
       req.send_request(options)
     end
 
+    # Lists all the accounts in an organization that have invalid effective
+    # policies. An *invalid effective policy* is an [effective policy][1]
+    # that fails validation checks, resulting in the effective policy not
+    # being fully enforced on all the intended accounts within an
+    # organization.
+    #
+    # This operation can be called only from the organization's management
+    # account or by a member account that is a delegated administrator.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_effective.html
+    #
+    # @option params [required, String] :policy_type
+    #   The type of policy that you want information about. You can specify
+    #   one of the following values:
+    #
+    #   * [DECLARATIVE\_POLICY\_EC2][1]
+    #
+    #   * [BACKUP\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #   * [CHATBOT\_POLICY][4]
+    #
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][5]
+    #
+    #   * [SECURITYHUB\_POLICY][6]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
+    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #
+    # @option params [String] :next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
+    #
+    # @option params [Integer] :max_results
+    #   The total number of results that you want included on each page of the
+    #   response. If you do not include this parameter, it defaults to a value
+    #   that is specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (is not null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that Organizations might return fewer
+    #   results than the maximum even when there are more results available.
+    #   You should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
+    #
+    # @return [Types::ListAccountsWithInvalidEffectivePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccountsWithInvalidEffectivePolicyResponse#accounts #accounts} => Array&lt;Types::Account&gt;
+    #   * {Types::ListAccountsWithInvalidEffectivePolicyResponse#policy_type #policy_type} => String
+    #   * {Types::ListAccountsWithInvalidEffectivePolicyResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list all accounts in an organization with invalid effective policy
+    #
+    #   # The following example shows you how to request a list of the accounts in an organization having invalid effective policy
+    #   # for a policy type:
+    #
+    #   resp = client.list_accounts_with_invalid_effective_policy({
+    #     policy_type: "BACKUP_POLICY", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     accounts: [
+    #       {
+    #         email: "bill@example.com", 
+    #         id: "111111111111", 
+    #         name: "Management Account", 
+    #       }, 
+    #       {
+    #         email: "alice@example.com", 
+    #         id: "222222222222", 
+    #         name: "Developer Account", 
+    #       }, 
+    #       {
+    #         email: "juan@example.com", 
+    #         id: "333333333333", 
+    #         name: "Test Account", 
+    #       }, 
+    #       {
+    #         email: "anika@example.com", 
+    #         id: "444444444444", 
+    #         name: "Production Account", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_accounts_with_invalid_effective_policy({
+    #     policy_type: "TAG_POLICY", # required, accepts TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.accounts #=> Array
+    #   resp.accounts[0].id #=> String
+    #   resp.accounts[0].arn #=> String
+    #   resp.accounts[0].email #=> String
+    #   resp.accounts[0].name #=> String
+    #   resp.accounts[0].status #=> String, one of "ACTIVE", "SUSPENDED", "PENDING_CLOSURE"
+    #   resp.accounts[0].joined_method #=> String, one of "INVITED", "CREATED"
+    #   resp.accounts[0].joined_timestamp #=> Time
+    #   resp.policy_type #=> String, one of "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsWithInvalidEffectivePolicy AWS API Documentation
+    #
+    # @overload list_accounts_with_invalid_effective_policy(params = {})
+    # @param [Hash] params ({})
+    def list_accounts_with_invalid_effective_policy(params = {}, options = {})
+      req = build_request(:list_accounts_with_invalid_effective_policy, params)
+      req.send_request(options)
+    end
+
     # Lists all of the organizational units (OUs) or accounts that are
     # contained in the specified parent OU or root. This operation, along
     # with ListParents enables you to traverse the tree structure that makes
@@ -4146,6 +4277,146 @@ module Aws::Organizations
     # @param [Hash] params ({})
     def list_delegated_services_for_account(params = {}, options = {})
       req = build_request(:list_delegated_services_for_account, params)
+      req.send_request(options)
+    end
+
+    # Lists all the validation errors on an [effective policy][1] for a
+    # specified account and policy type.
+    #
+    # This operation can be called only from the organization's management
+    # account or by a member account that is a delegated administrator.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_effective.html
+    #
+    # @option params [required, String] :account_id
+    #   The ID of the account that you want details about. Specifying an
+    #   organization root or organizational unit (OU) as the target is not
+    #   supported.
+    #
+    # @option params [required, String] :policy_type
+    #   The type of policy that you want information about. You can specify
+    #   one of the following values:
+    #
+    #   * [DECLARATIVE\_POLICY\_EC2][1]
+    #
+    #   * [BACKUP\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #   * [CHATBOT\_POLICY][4]
+    #
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][5]
+    #
+    #   * [SECURITYHUB\_POLICY][6]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
+    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #
+    # @option params [String] :next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
+    #
+    # @option params [Integer] :max_results
+    #   The total number of results that you want included on each page of the
+    #   response. If you do not include this parameter, it defaults to a value
+    #   that is specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (is not null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that Organizations might return fewer
+    #   results than the maximum even when there are more results available.
+    #   You should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
+    #
+    # @return [Types::ListEffectivePolicyValidationErrorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEffectivePolicyValidationErrorsResponse#account_id #account_id} => String
+    #   * {Types::ListEffectivePolicyValidationErrorsResponse#policy_type #policy_type} => String
+    #   * {Types::ListEffectivePolicyValidationErrorsResponse#path #path} => String
+    #   * {Types::ListEffectivePolicyValidationErrorsResponse#evaluation_timestamp #evaluation_timestamp} => Time
+    #   * {Types::ListEffectivePolicyValidationErrorsResponse#next_token #next_token} => String
+    #   * {Types::ListEffectivePolicyValidationErrorsResponse#effective_policy_validation_errors #effective_policy_validation_errors} => Array&lt;Types::EffectivePolicyValidationError&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list all effective policy validation errors for an account policy type
+    #
+    #   # The following example shows you how to request a list of effective policy validation errors for an account and policy
+    #   # type:
+    #
+    #   resp = client.list_effective_policy_validation_errors({
+    #     account_id: "111111111111", 
+    #     policy_type: "BACKUP_POLICY", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     account_id: "111111111111", 
+    #     effective_policy_validation_errors: [
+    #       {
+    #         contributing_policies: [
+    #           "p-examplepolicyid111", 
+    #         ], 
+    #         error_code: "ELEMENTS_TOO_FEW", 
+    #         error_message: "tag_value is less than the allowed minimum limit 1", 
+    #         path_to_error: "plans/backup_daily/selections/tags/dailydatatype/tag_value", 
+    #       }, 
+    #       {
+    #         contributing_policies: [
+    #           "p-examplepolicyid111", 
+    #           "p-examplepolicyid222", 
+    #         ], 
+    #         error_code: "ELEMENTS_TOO_MANY", 
+    #         error_message: "rules exceeds the allowed maximum limit 10", 
+    #         path_to_error: "plans/backup_daily/rules", 
+    #       }, 
+    #     ], 
+    #     evaluation_timestamp: Time.parse("2024-03-04T19:39:38.376000+00:00"), 
+    #     path: "o-exampleorgid/r-examplerootid111/111111111111/", 
+    #     policy_type: "BACKUP_POLICY", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_effective_policy_validation_errors({
+    #     account_id: "AccountId", # required
+    #     policy_type: "TAG_POLICY", # required, accepts TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_id #=> String
+    #   resp.policy_type #=> String, one of "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
+    #   resp.path #=> String
+    #   resp.evaluation_timestamp #=> Time
+    #   resp.next_token #=> String
+    #   resp.effective_policy_validation_errors #=> Array
+    #   resp.effective_policy_validation_errors[0].error_code #=> String
+    #   resp.effective_policy_validation_errors[0].error_message #=> String
+    #   resp.effective_policy_validation_errors[0].path_to_error #=> String
+    #   resp.effective_policy_validation_errors[0].contributing_policies #=> Array
+    #   resp.effective_policy_validation_errors[0].contributing_policies[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListEffectivePolicyValidationErrors AWS API Documentation
+    #
+    # @overload list_effective_policy_validation_errors(params = {})
+    # @param [Hash] params ({})
+    def list_effective_policy_validation_errors(params = {}, options = {})
+      req = build_request(:list_effective_policy_validation_errors, params)
       req.send_request(options)
     end
 
@@ -5876,7 +6147,7 @@ module Aws::Organizations
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.120.0'
+      context[:gem_version] = '1.121.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

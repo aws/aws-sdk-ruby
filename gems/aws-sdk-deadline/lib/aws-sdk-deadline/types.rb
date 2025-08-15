@@ -2800,6 +2800,10 @@ module Aws::Deadline
     #   The status of the fleet.
     #   @return [String]
     #
+    # @!attribute [rw] status_message
+    #   A message that communicates a suspended status of the fleet.
+    #   @return [String]
+    #
     # @!attribute [rw] auto_scaling_status
     #   The Auto Scaling status of a fleet.
     #   @return [String]
@@ -2847,6 +2851,7 @@ module Aws::Deadline
       :farm_id,
       :display_name,
       :status,
+      :status_message,
       :auto_scaling_status,
       :target_worker_count,
       :worker_count,
@@ -3080,6 +3085,10 @@ module Aws::Deadline
     #   The status of the fleet.
     #   @return [String]
     #
+    # @!attribute [rw] status_message
+    #   A message that communicates a suspended status of the fleet.
+    #   @return [String]
+    #
     # @!attribute [rw] auto_scaling_status
     #   The Auto Scaling status of the fleet. Either `GROWING`, `STEADY`, or
     #   `SHRINKING`.
@@ -3143,6 +3152,7 @@ module Aws::Deadline
       :display_name,
       :description,
       :status,
+      :status_message,
       :auto_scaling_status,
       :target_worker_count,
       :worker_count,

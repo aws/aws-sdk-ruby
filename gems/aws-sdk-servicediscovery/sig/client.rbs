@@ -238,7 +238,8 @@ module Aws
                                 ?max_results: ::Integer,
                                 ?query_parameters: Hash[::String, ::String],
                                 ?optional_parameters: Hash[::String, ::String],
-                                ?health_status: ("HEALTHY" | "UNHEALTHY" | "ALL" | "HEALTHY_OR_ELSE_ALL")
+                                ?health_status: ("HEALTHY" | "UNHEALTHY" | "ALL" | "HEALTHY_OR_ELSE_ALL"),
+                                ?owner_account: ::String
                               ) -> _DiscoverInstancesResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DiscoverInstancesResponseSuccess
 
@@ -249,12 +250,14 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#discover_instances_revision-instance_method
       def discover_instances_revision: (
                                          namespace_name: ::String,
-                                         service_name: ::String
+                                         service_name: ::String,
+                                         ?owner_account: ::String
                                        ) -> _DiscoverInstancesRevisionResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DiscoverInstancesRevisionResponseSuccess
 
       interface _GetInstanceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceResponse]
+        def resource_owner: () -> ::String
         def instance: () -> Types::Instance
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#get_instance-instance_method
@@ -294,7 +297,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#get_operation-instance_method
       def get_operation: (
-                           operation_id: ::String
+                           operation_id: ::String,
+                           ?owner_account: ::String
                          ) -> _GetOperationResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOperationResponseSuccess
 
@@ -320,6 +324,7 @@ module Aws
 
       interface _ListInstancesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListInstancesResponse]
+        def resource_owner: () -> ::String
         def instances: () -> ::Array[Types::InstanceSummary]
         def next_token: () -> ::String
       end
@@ -342,7 +347,7 @@ module Aws
                              ?max_results: ::Integer,
                              ?filters: Array[
                                {
-                                 name: ("TYPE" | "NAME" | "HTTP_NAME"),
+                                 name: ("TYPE" | "NAME" | "HTTP_NAME" | "RESOURCE_OWNER"),
                                  values: Array[::String],
                                  condition: ("EQ" | "IN" | "BETWEEN" | "BEGINS_WITH")?
                                },
@@ -380,7 +385,7 @@ module Aws
                            ?max_results: ::Integer,
                            ?filters: Array[
                              {
-                               name: ("NAMESPACE_ID"),
+                               name: ("NAMESPACE_ID" | "RESOURCE_OWNER"),
                                values: Array[::String],
                                condition: ("EQ" | "IN" | "BETWEEN" | "BEGINS_WITH")?
                              },

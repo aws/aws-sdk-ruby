@@ -19435,9 +19435,17 @@ module Aws::QuickSight
     #   The sort configuration of a heat map.
     #   @return [Types::HeatMapSortConfiguration]
     #
+    # @!attribute [rw] row_axis_display_options
+    #   The options that determine the presentation of the row axis label.
+    #   @return [Types::AxisDisplayOptions]
+    #
     # @!attribute [rw] row_label_options
     #   The label options of the row that is displayed in a `heat map`.
     #   @return [Types::ChartAxisLabelOptions]
+    #
+    # @!attribute [rw] column_axis_display_options
+    #   The options that determine the presentation of the row axis label.
+    #   @return [Types::AxisDisplayOptions]
     #
     # @!attribute [rw] column_label_options
     #   The label options of the column that is displayed in a heat map.
@@ -19469,7 +19477,9 @@ module Aws::QuickSight
     class HeatMapConfiguration < Struct.new(
       :field_wells,
       :sort_configuration,
+      :row_axis_display_options,
       :row_label_options,
+      :column_axis_display_options,
       :column_label_options,
       :color_scale,
       :legend,
@@ -26452,6 +26462,10 @@ module Aws::QuickSight
     #   properties.
     #   @return [Types::PluginVisualConfiguration]
     #
+    # @!attribute [rw] actions
+    #   The list of custom actions that are configured for a visual.
+    #   @return [Array<Types::VisualCustomAction>]
+    #
     # @!attribute [rw] visual_content_alt_text
     #   The alt text for the visual.
     #   @return [String]
@@ -26464,6 +26478,7 @@ module Aws::QuickSight
       :title,
       :subtitle,
       :chart_configuration,
+      :actions,
       :visual_content_alt_text)
       SENSITIVE = []
       include Aws::Structure

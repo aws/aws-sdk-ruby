@@ -1872,8 +1872,10 @@ module Aws::EC2
     InstanceBlockDeviceMappingSpecificationList = Shapes::ListShape.new(name: 'InstanceBlockDeviceMappingSpecificationList')
     InstanceBootModeValues = Shapes::StringShape.new(name: 'InstanceBootModeValues')
     InstanceCapacity = Shapes::StructureShape.new(name: 'InstanceCapacity')
+    InstanceConnectEndpointDnsNames = Shapes::StructureShape.new(name: 'InstanceConnectEndpointDnsNames')
     InstanceConnectEndpointId = Shapes::StringShape.new(name: 'InstanceConnectEndpointId')
     InstanceConnectEndpointMaxResults = Shapes::IntegerShape.new(name: 'InstanceConnectEndpointMaxResults')
+    InstanceConnectEndpointPublicDnsNames = Shapes::StructureShape.new(name: 'InstanceConnectEndpointPublicDnsNames')
     InstanceConnectEndpointSet = Shapes::ListShape.new(name: 'InstanceConnectEndpointSet')
     InstanceCount = Shapes::StructureShape.new(name: 'InstanceCount')
     InstanceCountList = Shapes::ListShape.new(name: 'InstanceCountList')
@@ -2348,6 +2350,8 @@ module Aws::EC2
     ModifyInstanceAttributeRequest = Shapes::StructureShape.new(name: 'ModifyInstanceAttributeRequest')
     ModifyInstanceCapacityReservationAttributesRequest = Shapes::StructureShape.new(name: 'ModifyInstanceCapacityReservationAttributesRequest')
     ModifyInstanceCapacityReservationAttributesResult = Shapes::StructureShape.new(name: 'ModifyInstanceCapacityReservationAttributesResult')
+    ModifyInstanceConnectEndpointRequest = Shapes::StructureShape.new(name: 'ModifyInstanceConnectEndpointRequest')
+    ModifyInstanceConnectEndpointResult = Shapes::StructureShape.new(name: 'ModifyInstanceConnectEndpointResult')
     ModifyInstanceCpuOptionsRequest = Shapes::StructureShape.new(name: 'ModifyInstanceCpuOptionsRequest')
     ModifyInstanceCpuOptionsResult = Shapes::StructureShape.new(name: 'ModifyInstanceCpuOptionsResult')
     ModifyInstanceCreditSpecificationRequest = Shapes::StructureShape.new(name: 'ModifyInstanceCreditSpecificationRequest')
@@ -4101,6 +4105,7 @@ module Aws::EC2
     AssociateRouteServerResult.struct_class = Types::AssociateRouteServerResult
 
     AssociateRouteTableRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: RouteGatewayId, location_name: "GatewayId"))
+    AssociateRouteTableRequest.add_member(:public_ipv_4_pool, Shapes::ShapeRef.new(shape: Ipv4PoolEc2Id, location_name: "PublicIpv4Pool"))
     AssociateRouteTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     AssociateRouteTableRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "subnetId"))
     AssociateRouteTableRequest.add_member(:route_table_id, Shapes::ShapeRef.new(shape: RouteTableId, required: true, location_name: "routeTableId"))
@@ -5235,9 +5240,10 @@ module Aws::EC2
     CreateCustomerGatewayResult.add_member(:customer_gateway, Shapes::ShapeRef.new(shape: CustomerGateway, location_name: "customerGateway"))
     CreateCustomerGatewayResult.struct_class = Types::CreateCustomerGatewayResult
 
-    CreateDefaultSubnetRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, required: true, location_name: "AvailabilityZone"))
+    CreateDefaultSubnetRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "AvailabilityZone"))
     CreateDefaultSubnetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateDefaultSubnetRequest.add_member(:ipv_6_native, Shapes::ShapeRef.new(shape: Boolean, location_name: "Ipv6Native"))
+    CreateDefaultSubnetRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     CreateDefaultSubnetRequest.struct_class = Types::CreateDefaultSubnetRequest
 
     CreateDefaultSubnetResult.add_member(:subnet, Shapes::ShapeRef.new(shape: Subnet, location_name: "subnet"))
@@ -6197,7 +6203,8 @@ module Aws::EC2
     CreateVolumePermissionModifications.add_member(:remove, Shapes::ShapeRef.new(shape: CreateVolumePermissionList, location_name: "Remove"))
     CreateVolumePermissionModifications.struct_class = Types::CreateVolumePermissionModifications
 
-    CreateVolumeRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, required: true, location_name: "AvailabilityZone"))
+    CreateVolumeRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "AvailabilityZone"))
+    CreateVolumeRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     CreateVolumeRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
     CreateVolumeRequest.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "Iops"))
     CreateVolumeRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
@@ -8425,6 +8432,7 @@ module Aws::EC2
     DescribeSpotInstanceRequestsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeSpotInstanceRequestsResult.struct_class = Types::DescribeSpotInstanceRequestsResult
 
+    DescribeSpotPriceHistoryRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     DescribeSpotPriceHistoryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DescribeSpotPriceHistoryRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "startTime"))
     DescribeSpotPriceHistoryRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "endTime"))
@@ -9419,6 +9427,7 @@ module Aws::EC2
     Ec2InstanceConnectEndpoint.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdSet, location_name: "securityGroupIdSet"))
     Ec2InstanceConnectEndpoint.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     Ec2InstanceConnectEndpoint.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
+    Ec2InstanceConnectEndpoint.add_member(:public_dns_names, Shapes::ShapeRef.new(shape: InstanceConnectEndpointPublicDnsNames, location_name: "publicDnsNames"))
     Ec2InstanceConnectEndpoint.struct_class = Types::Ec2InstanceConnectEndpoint
 
     EfaInfo.add_member(:maximum_efa_interfaces, Shapes::ShapeRef.new(shape: MaximumEfaInterfaces, location_name: "maximumEfaInterfaces"))
@@ -11073,6 +11082,7 @@ module Aws::EC2
     ImportInstanceTaskDetails.struct_class = Types::ImportInstanceTaskDetails
 
     ImportInstanceVolumeDetailItem.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    ImportInstanceVolumeDetailItem.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
     ImportInstanceVolumeDetailItem.add_member(:bytes_converted, Shapes::ShapeRef.new(shape: Long, location_name: "bytesConverted"))
     ImportInstanceVolumeDetailItem.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     ImportInstanceVolumeDetailItem.add_member(:image, Shapes::ShapeRef.new(shape: DiskImageDescription, location_name: "image"))
@@ -11124,8 +11134,9 @@ module Aws::EC2
 
     ImportTaskIdList.member = Shapes::ShapeRef.new(shape: ImportImageTaskId, location_name: "ImportTaskId")
 
+    ImportVolumeRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     ImportVolumeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
-    ImportVolumeRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, required: true, location_name: "availabilityZone"))
+    ImportVolumeRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
     ImportVolumeRequest.add_member(:image, Shapes::ShapeRef.new(shape: DiskImageDetail, required: true, location_name: "image"))
     ImportVolumeRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     ImportVolumeRequest.add_member(:volume, Shapes::ShapeRef.new(shape: VolumeDetail, required: true, location_name: "volume"))
@@ -11135,6 +11146,7 @@ module Aws::EC2
     ImportVolumeResult.struct_class = Types::ImportVolumeResult
 
     ImportVolumeTaskDetails.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    ImportVolumeTaskDetails.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
     ImportVolumeTaskDetails.add_member(:bytes_converted, Shapes::ShapeRef.new(shape: Long, location_name: "bytesConverted"))
     ImportVolumeTaskDetails.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     ImportVolumeTaskDetails.add_member(:image, Shapes::ShapeRef.new(shape: DiskImageDescription, location_name: "image"))
@@ -11269,6 +11281,14 @@ module Aws::EC2
     InstanceCapacity.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     InstanceCapacity.add_member(:total_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "totalCapacity"))
     InstanceCapacity.struct_class = Types::InstanceCapacity
+
+    InstanceConnectEndpointDnsNames.add_member(:dns_name, Shapes::ShapeRef.new(shape: String, location_name: "dnsName"))
+    InstanceConnectEndpointDnsNames.add_member(:fips_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "fipsDnsName"))
+    InstanceConnectEndpointDnsNames.struct_class = Types::InstanceConnectEndpointDnsNames
+
+    InstanceConnectEndpointPublicDnsNames.add_member(:ipv_4, Shapes::ShapeRef.new(shape: InstanceConnectEndpointDnsNames, location_name: "ipv4"))
+    InstanceConnectEndpointPublicDnsNames.add_member(:dualstack, Shapes::ShapeRef.new(shape: InstanceConnectEndpointDnsNames, location_name: "dualstack"))
+    InstanceConnectEndpointPublicDnsNames.struct_class = Types::InstanceConnectEndpointPublicDnsNames
 
     InstanceConnectEndpointSet.member = Shapes::ShapeRef.new(shape: Ec2InstanceConnectEndpoint, location_name: "item")
 
@@ -11593,6 +11613,7 @@ module Aws::EC2
     InstanceStateChangeList.member = Shapes::ShapeRef.new(shape: InstanceStateChange, location_name: "item")
 
     InstanceStatus.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    InstanceStatus.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
     InstanceStatus.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "outpostArn"))
     InstanceStatus.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
     InstanceStatus.add_member(:events, Shapes::ShapeRef.new(shape: InstanceStatusEventList, location_name: "eventsSet"))
@@ -12370,6 +12391,7 @@ module Aws::EC2
     LaunchTemplateOverridesList.member = Shapes::ShapeRef.new(shape: LaunchTemplateOverrides, location_name: "item")
 
     LaunchTemplatePlacement.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    LaunchTemplatePlacement.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
     LaunchTemplatePlacement.add_member(:affinity, Shapes::ShapeRef.new(shape: String, location_name: "affinity"))
     LaunchTemplatePlacement.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
     LaunchTemplatePlacement.add_member(:host_id, Shapes::ShapeRef.new(shape: String, location_name: "hostId"))
@@ -12381,6 +12403,7 @@ module Aws::EC2
     LaunchTemplatePlacement.struct_class = Types::LaunchTemplatePlacement
 
     LaunchTemplatePlacementRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
+    LaunchTemplatePlacementRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     LaunchTemplatePlacementRequest.add_member(:affinity, Shapes::ShapeRef.new(shape: String, location_name: "Affinity"))
     LaunchTemplatePlacementRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: PlacementGroupName, location_name: "GroupName"))
     LaunchTemplatePlacementRequest.add_member(:host_id, Shapes::ShapeRef.new(shape: DedicatedHostId, location_name: "HostId"))
@@ -12904,6 +12927,16 @@ module Aws::EC2
 
     ModifyInstanceCapacityReservationAttributesResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     ModifyInstanceCapacityReservationAttributesResult.struct_class = Types::ModifyInstanceCapacityReservationAttributesResult
+
+    ModifyInstanceConnectEndpointRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyInstanceConnectEndpointRequest.add_member(:instance_connect_endpoint_id, Shapes::ShapeRef.new(shape: InstanceConnectEndpointId, required: true, location_name: "InstanceConnectEndpointId"))
+    ModifyInstanceConnectEndpointRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
+    ModifyInstanceConnectEndpointRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdStringListRequest, location_name: "SecurityGroupId"))
+    ModifyInstanceConnectEndpointRequest.add_member(:preserve_client_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "PreserveClientIp"))
+    ModifyInstanceConnectEndpointRequest.struct_class = Types::ModifyInstanceConnectEndpointRequest
+
+    ModifyInstanceConnectEndpointResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    ModifyInstanceConnectEndpointResult.struct_class = Types::ModifyInstanceConnectEndpointResult
 
     ModifyInstanceCpuOptionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     ModifyInstanceCpuOptionsRequest.add_member(:core_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "CoreCount"))
@@ -14172,6 +14205,7 @@ module Aws::EC2
     Phase2IntegrityAlgorithmsRequestListValue.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
     Phase2IntegrityAlgorithmsRequestListValue.struct_class = Types::Phase2IntegrityAlgorithmsRequestListValue
 
+    Placement.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
     Placement.add_member(:affinity, Shapes::ShapeRef.new(shape: String, location_name: "affinity"))
     Placement.add_member(:group_name, Shapes::ShapeRef.new(shape: PlacementGroupName, location_name: "groupName"))
     Placement.add_member(:partition_number, Shapes::ShapeRef.new(shape: Integer, location_name: "partitionNumber"))
@@ -15348,6 +15382,7 @@ module Aws::EC2
     RouteTableAssociation.add_member(:route_table_id, Shapes::ShapeRef.new(shape: String, location_name: "routeTableId"))
     RouteTableAssociation.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
     RouteTableAssociation.add_member(:gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "gatewayId"))
+    RouteTableAssociation.add_member(:public_ipv_4_pool, Shapes::ShapeRef.new(shape: String, location_name: "publicIpv4Pool"))
     RouteTableAssociation.add_member(:association_state, Shapes::ShapeRef.new(shape: RouteTableAssociationState, location_name: "associationState"))
     RouteTableAssociation.struct_class = Types::RouteTableAssociation
 
@@ -15709,6 +15744,7 @@ module Aws::EC2
     ServiceConfiguration.add_member(:service_id, Shapes::ShapeRef.new(shape: String, location_name: "serviceId"))
     ServiceConfiguration.add_member(:service_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceName"))
     ServiceConfiguration.add_member(:service_state, Shapes::ShapeRef.new(shape: ServiceState, location_name: "serviceState"))
+    ServiceConfiguration.add_member(:availability_zone_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "availabilityZoneIdSet"))
     ServiceConfiguration.add_member(:availability_zones, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "availabilityZoneSet"))
     ServiceConfiguration.add_member(:acceptance_required, Shapes::ShapeRef.new(shape: Boolean, location_name: "acceptanceRequired"))
     ServiceConfiguration.add_member(:manages_vpc_endpoints, Shapes::ShapeRef.new(shape: Boolean, location_name: "managesVpcEndpoints"))
@@ -15730,6 +15766,7 @@ module Aws::EC2
     ServiceDetail.add_member(:service_id, Shapes::ShapeRef.new(shape: String, location_name: "serviceId"))
     ServiceDetail.add_member(:service_type, Shapes::ShapeRef.new(shape: ServiceTypeDetailSet, location_name: "serviceType"))
     ServiceDetail.add_member(:service_region, Shapes::ShapeRef.new(shape: String, location_name: "serviceRegion"))
+    ServiceDetail.add_member(:availability_zone_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "availabilityZoneIdSet"))
     ServiceDetail.add_member(:availability_zones, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "availabilityZoneSet"))
     ServiceDetail.add_member(:owner, Shapes::ShapeRef.new(shape: String, location_name: "owner"))
     ServiceDetail.add_member(:base_endpoint_dns_names, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "baseEndpointDnsNameSet"))
@@ -15969,6 +16006,7 @@ module Aws::EC2
     SpotInstanceRequest.add_member(:launch_group, Shapes::ShapeRef.new(shape: String, location_name: "launchGroup"))
     SpotInstanceRequest.add_member(:launch_specification, Shapes::ShapeRef.new(shape: LaunchSpecification, location_name: "launchSpecification"))
     SpotInstanceRequest.add_member(:launched_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "launchedAvailabilityZone"))
+    SpotInstanceRequest.add_member(:launched_availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "launchedAvailabilityZoneId"))
     SpotInstanceRequest.add_member(:product_description, Shapes::ShapeRef.new(shape: RIProductDescription, location_name: "productDescription"))
     SpotInstanceRequest.add_member(:spot_instance_request_id, Shapes::ShapeRef.new(shape: String, location_name: "spotInstanceRequestId"))
     SpotInstanceRequest.add_member(:spot_price, Shapes::ShapeRef.new(shape: String, location_name: "spotPrice"))
@@ -16037,6 +16075,7 @@ module Aws::EC2
     SpotPlacementScores.member = Shapes::ShapeRef.new(shape: SpotPlacementScore, location_name: "item")
 
     SpotPrice.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    SpotPrice.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
     SpotPrice.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
     SpotPrice.add_member(:product_description, Shapes::ShapeRef.new(shape: RIProductDescription, location_name: "productDescription"))
     SpotPrice.add_member(:spot_price, Shapes::ShapeRef.new(shape: String, location_name: "spotPrice"))
@@ -17213,6 +17252,7 @@ module Aws::EC2
 
     VirtualizationTypeSet.member = Shapes::ShapeRef.new(shape: VirtualizationType, location_name: "item")
 
+    Volume.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
     Volume.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "outpostArn"))
     Volume.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "iops"))
     Volume.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
@@ -23005,6 +23045,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyInstanceCapacityReservationAttributesRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyInstanceCapacityReservationAttributesResult)
+      end)
+
+      api.add_operation(:modify_instance_connect_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyInstanceConnectEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyInstanceConnectEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyInstanceConnectEndpointResult)
       end)
 
       api.add_operation(:modify_instance_cpu_options, Seahorse::Model::Operation.new.tap do |o|

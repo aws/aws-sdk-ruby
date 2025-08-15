@@ -112,8 +112,12 @@ module Aws::GuardDuty
     CreateS3BucketResource = Shapes::StructureShape.new(name: 'CreateS3BucketResource')
     CreateSampleFindingsRequest = Shapes::StructureShape.new(name: 'CreateSampleFindingsRequest')
     CreateSampleFindingsResponse = Shapes::StructureShape.new(name: 'CreateSampleFindingsResponse')
+    CreateThreatEntitySetRequest = Shapes::StructureShape.new(name: 'CreateThreatEntitySetRequest')
+    CreateThreatEntitySetResponse = Shapes::StructureShape.new(name: 'CreateThreatEntitySetResponse')
     CreateThreatIntelSetRequest = Shapes::StructureShape.new(name: 'CreateThreatIntelSetRequest')
     CreateThreatIntelSetResponse = Shapes::StructureShape.new(name: 'CreateThreatIntelSetResponse')
+    CreateTrustedEntitySetRequest = Shapes::StructureShape.new(name: 'CreateTrustedEntitySetRequest')
+    CreateTrustedEntitySetResponse = Shapes::StructureShape.new(name: 'CreateTrustedEntitySetResponse')
     Criterion = Shapes::MapShape.new(name: 'Criterion')
     CriterionKey = Shapes::StringShape.new(name: 'CriterionKey')
     DNSLogsConfigurationResult = Shapes::StructureShape.new(name: 'DNSLogsConfigurationResult')
@@ -141,8 +145,12 @@ module Aws::GuardDuty
     DeleteMembersResponse = Shapes::StructureShape.new(name: 'DeleteMembersResponse')
     DeletePublishingDestinationRequest = Shapes::StructureShape.new(name: 'DeletePublishingDestinationRequest')
     DeletePublishingDestinationResponse = Shapes::StructureShape.new(name: 'DeletePublishingDestinationResponse')
+    DeleteThreatEntitySetRequest = Shapes::StructureShape.new(name: 'DeleteThreatEntitySetRequest')
+    DeleteThreatEntitySetResponse = Shapes::StructureShape.new(name: 'DeleteThreatEntitySetResponse')
     DeleteThreatIntelSetRequest = Shapes::StructureShape.new(name: 'DeleteThreatIntelSetRequest')
     DeleteThreatIntelSetResponse = Shapes::StructureShape.new(name: 'DeleteThreatIntelSetResponse')
+    DeleteTrustedEntitySetRequest = Shapes::StructureShape.new(name: 'DeleteTrustedEntitySetRequest')
+    DeleteTrustedEntitySetResponse = Shapes::StructureShape.new(name: 'DeleteTrustedEntitySetResponse')
     DescribeMalwareScansRequest = Shapes::StructureShape.new(name: 'DescribeMalwareScansRequest')
     DescribeMalwareScansResponse = Shapes::StructureShape.new(name: 'DescribeMalwareScansResponse')
     DescribeOrganizationConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeOrganizationConfigurationRequest')
@@ -198,6 +206,7 @@ module Aws::GuardDuty
     Eq = Shapes::ListShape.new(name: 'Eq')
     Equals = Shapes::ListShape.new(name: 'Equals')
     Evidence = Shapes::StructureShape.new(name: 'Evidence')
+    ExpectedBucketOwner = Shapes::StringShape.new(name: 'ExpectedBucketOwner')
     FargateDetails = Shapes::StructureShape.new(name: 'FargateDetails')
     FeatureAdditionalConfiguration = Shapes::StringShape.new(name: 'FeatureAdditionalConfiguration')
     FeatureStatus = Shapes::StringShape.new(name: 'FeatureStatus')
@@ -260,8 +269,12 @@ module Aws::GuardDuty
     GetOrganizationStatisticsResponse = Shapes::StructureShape.new(name: 'GetOrganizationStatisticsResponse')
     GetRemainingFreeTrialDaysRequest = Shapes::StructureShape.new(name: 'GetRemainingFreeTrialDaysRequest')
     GetRemainingFreeTrialDaysResponse = Shapes::StructureShape.new(name: 'GetRemainingFreeTrialDaysResponse')
+    GetThreatEntitySetRequest = Shapes::StructureShape.new(name: 'GetThreatEntitySetRequest')
+    GetThreatEntitySetResponse = Shapes::StructureShape.new(name: 'GetThreatEntitySetResponse')
     GetThreatIntelSetRequest = Shapes::StructureShape.new(name: 'GetThreatIntelSetRequest')
     GetThreatIntelSetResponse = Shapes::StructureShape.new(name: 'GetThreatIntelSetResponse')
+    GetTrustedEntitySetRequest = Shapes::StructureShape.new(name: 'GetTrustedEntitySetRequest')
+    GetTrustedEntitySetResponse = Shapes::StructureShape.new(name: 'GetTrustedEntitySetResponse')
     GetUsageStatisticsRequest = Shapes::StructureShape.new(name: 'GetUsageStatisticsRequest')
     GetUsageStatisticsResponse = Shapes::StructureShape.new(name: 'GetUsageStatisticsResponse')
     GroupByType = Shapes::StringShape.new(name: 'GroupByType')
@@ -337,8 +350,12 @@ module Aws::GuardDuty
     ListPublishingDestinationsResponse = Shapes::StructureShape.new(name: 'ListPublishingDestinationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListThreatEntitySetsRequest = Shapes::StructureShape.new(name: 'ListThreatEntitySetsRequest')
+    ListThreatEntitySetsResponse = Shapes::StructureShape.new(name: 'ListThreatEntitySetsResponse')
     ListThreatIntelSetsRequest = Shapes::StructureShape.new(name: 'ListThreatIntelSetsRequest')
     ListThreatIntelSetsResponse = Shapes::StructureShape.new(name: 'ListThreatIntelSetsResponse')
+    ListTrustedEntitySetsRequest = Shapes::StructureShape.new(name: 'ListTrustedEntitySetsRequest')
+    ListTrustedEntitySetsResponse = Shapes::StructureShape.new(name: 'ListTrustedEntitySetsResponse')
     LocalIpDetails = Shapes::StructureShape.new(name: 'LocalIpDetails')
     LocalPortDetails = Shapes::StructureShape.new(name: 'LocalPortDetails')
     Location = Shapes::StringShape.new(name: 'Location')
@@ -530,6 +547,9 @@ module Aws::GuardDuty
     Tags = Shapes::ListShape.new(name: 'Tags')
     Threat = Shapes::StructureShape.new(name: 'Threat')
     ThreatDetectedByName = Shapes::StructureShape.new(name: 'ThreatDetectedByName')
+    ThreatEntitySetFormat = Shapes::StringShape.new(name: 'ThreatEntitySetFormat')
+    ThreatEntitySetIds = Shapes::ListShape.new(name: 'ThreatEntitySetIds')
+    ThreatEntitySetStatus = Shapes::StringShape.new(name: 'ThreatEntitySetStatus')
     ThreatIntelSetFormat = Shapes::StringShape.new(name: 'ThreatIntelSetFormat')
     ThreatIntelSetIds = Shapes::ListShape.new(name: 'ThreatIntelSetIds')
     ThreatIntelSetStatus = Shapes::StringShape.new(name: 'ThreatIntelSetStatus')
@@ -541,6 +561,9 @@ module Aws::GuardDuty
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Total = Shapes::StructureShape.new(name: 'Total')
     TriggerDetails = Shapes::StructureShape.new(name: 'TriggerDetails')
+    TrustedEntitySetFormat = Shapes::StringShape.new(name: 'TrustedEntitySetFormat')
+    TrustedEntitySetIds = Shapes::ListShape.new(name: 'TrustedEntitySetIds')
+    TrustedEntitySetStatus = Shapes::StringShape.new(name: 'TrustedEntitySetStatus')
     UnarchiveFindingsRequest = Shapes::StructureShape.new(name: 'UnarchiveFindingsRequest')
     UnarchiveFindingsResponse = Shapes::StructureShape.new(name: 'UnarchiveFindingsResponse')
     UnprocessedAccount = Shapes::StructureShape.new(name: 'UnprocessedAccount')
@@ -567,8 +590,12 @@ module Aws::GuardDuty
     UpdatePublishingDestinationRequest = Shapes::StructureShape.new(name: 'UpdatePublishingDestinationRequest')
     UpdatePublishingDestinationResponse = Shapes::StructureShape.new(name: 'UpdatePublishingDestinationResponse')
     UpdateS3BucketResource = Shapes::StructureShape.new(name: 'UpdateS3BucketResource')
+    UpdateThreatEntitySetRequest = Shapes::StructureShape.new(name: 'UpdateThreatEntitySetRequest')
+    UpdateThreatEntitySetResponse = Shapes::StructureShape.new(name: 'UpdateThreatEntitySetResponse')
     UpdateThreatIntelSetRequest = Shapes::StructureShape.new(name: 'UpdateThreatIntelSetRequest')
     UpdateThreatIntelSetResponse = Shapes::StructureShape.new(name: 'UpdateThreatIntelSetResponse')
+    UpdateTrustedEntitySetRequest = Shapes::StructureShape.new(name: 'UpdateTrustedEntitySetRequest')
+    UpdateTrustedEntitySetResponse = Shapes::StructureShape.new(name: 'UpdateTrustedEntitySetResponse')
     UsageAccountResult = Shapes::StructureShape.new(name: 'UsageAccountResult')
     UsageAccountResultList = Shapes::ListShape.new(name: 'UsageAccountResultList')
     UsageCriteria = Shapes::StructureShape.new(name: 'UsageCriteria')
@@ -966,6 +993,19 @@ module Aws::GuardDuty
 
     CreateSampleFindingsResponse.struct_class = Types::CreateSampleFindingsResponse
 
+    CreateThreatEntitySetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    CreateThreatEntitySetRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    CreateThreatEntitySetRequest.add_member(:format, Shapes::ShapeRef.new(shape: ThreatEntitySetFormat, required: true, location_name: "format"))
+    CreateThreatEntitySetRequest.add_member(:location, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "location"))
+    CreateThreatEntitySetRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: ExpectedBucketOwner, location_name: "expectedBucketOwner"))
+    CreateThreatEntitySetRequest.add_member(:activate, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "activate"))
+    CreateThreatEntitySetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateThreatEntitySetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateThreatEntitySetRequest.struct_class = Types::CreateThreatEntitySetRequest
+
+    CreateThreatEntitySetResponse.add_member(:threat_entity_set_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "threatEntitySetId"))
+    CreateThreatEntitySetResponse.struct_class = Types::CreateThreatEntitySetResponse
+
     CreateThreatIntelSetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     CreateThreatIntelSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateThreatIntelSetRequest.add_member(:format, Shapes::ShapeRef.new(shape: ThreatIntelSetFormat, required: true, location_name: "format"))
@@ -978,6 +1018,19 @@ module Aws::GuardDuty
 
     CreateThreatIntelSetResponse.add_member(:threat_intel_set_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "threatIntelSetId"))
     CreateThreatIntelSetResponse.struct_class = Types::CreateThreatIntelSetResponse
+
+    CreateTrustedEntitySetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    CreateTrustedEntitySetRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    CreateTrustedEntitySetRequest.add_member(:format, Shapes::ShapeRef.new(shape: TrustedEntitySetFormat, required: true, location_name: "format"))
+    CreateTrustedEntitySetRequest.add_member(:location, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "location"))
+    CreateTrustedEntitySetRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: ExpectedBucketOwner, location_name: "expectedBucketOwner"))
+    CreateTrustedEntitySetRequest.add_member(:activate, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "activate"))
+    CreateTrustedEntitySetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateTrustedEntitySetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateTrustedEntitySetRequest.struct_class = Types::CreateTrustedEntitySetRequest
+
+    CreateTrustedEntitySetResponse.add_member(:trusted_entity_set_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "trustedEntitySetId"))
+    CreateTrustedEntitySetResponse.struct_class = Types::CreateTrustedEntitySetResponse
 
     Criterion.key = Shapes::ShapeRef.new(shape: String)
     Criterion.value = Shapes::ShapeRef.new(shape: Condition)
@@ -1066,11 +1119,23 @@ module Aws::GuardDuty
 
     DeletePublishingDestinationResponse.struct_class = Types::DeletePublishingDestinationResponse
 
+    DeleteThreatEntitySetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    DeleteThreatEntitySetRequest.add_member(:threat_entity_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "threatEntitySetId"))
+    DeleteThreatEntitySetRequest.struct_class = Types::DeleteThreatEntitySetRequest
+
+    DeleteThreatEntitySetResponse.struct_class = Types::DeleteThreatEntitySetResponse
+
     DeleteThreatIntelSetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     DeleteThreatIntelSetRequest.add_member(:threat_intel_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "threatIntelSetId"))
     DeleteThreatIntelSetRequest.struct_class = Types::DeleteThreatIntelSetRequest
 
     DeleteThreatIntelSetResponse.struct_class = Types::DeleteThreatIntelSetResponse
+
+    DeleteTrustedEntitySetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    DeleteTrustedEntitySetRequest.add_member(:trusted_entity_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "trustedEntitySetId"))
+    DeleteTrustedEntitySetRequest.struct_class = Types::DeleteTrustedEntitySetRequest
+
+    DeleteTrustedEntitySetResponse.struct_class = Types::DeleteTrustedEntitySetResponse
 
     DescribeMalwareScansRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     DescribeMalwareScansRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
@@ -1484,6 +1549,21 @@ module Aws::GuardDuty
     GetRemainingFreeTrialDaysResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: UnprocessedAccounts, location_name: "unprocessedAccounts"))
     GetRemainingFreeTrialDaysResponse.struct_class = Types::GetRemainingFreeTrialDaysResponse
 
+    GetThreatEntitySetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    GetThreatEntitySetRequest.add_member(:threat_entity_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "threatEntitySetId"))
+    GetThreatEntitySetRequest.struct_class = Types::GetThreatEntitySetRequest
+
+    GetThreatEntitySetResponse.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    GetThreatEntitySetResponse.add_member(:format, Shapes::ShapeRef.new(shape: ThreatEntitySetFormat, required: true, location_name: "format"))
+    GetThreatEntitySetResponse.add_member(:location, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "location"))
+    GetThreatEntitySetResponse.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: ExpectedBucketOwner, location_name: "expectedBucketOwner"))
+    GetThreatEntitySetResponse.add_member(:status, Shapes::ShapeRef.new(shape: ThreatEntitySetStatus, required: true, location_name: "status"))
+    GetThreatEntitySetResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetThreatEntitySetResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    GetThreatEntitySetResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    GetThreatEntitySetResponse.add_member(:error_details, Shapes::ShapeRef.new(shape: String, location_name: "errorDetails"))
+    GetThreatEntitySetResponse.struct_class = Types::GetThreatEntitySetResponse
+
     GetThreatIntelSetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     GetThreatIntelSetRequest.add_member(:threat_intel_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "threatIntelSetId"))
     GetThreatIntelSetRequest.struct_class = Types::GetThreatIntelSetRequest
@@ -1495,6 +1575,21 @@ module Aws::GuardDuty
     GetThreatIntelSetResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetThreatIntelSetResponse.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "expectedBucketOwner"))
     GetThreatIntelSetResponse.struct_class = Types::GetThreatIntelSetResponse
+
+    GetTrustedEntitySetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    GetTrustedEntitySetRequest.add_member(:trusted_entity_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "trustedEntitySetId"))
+    GetTrustedEntitySetRequest.struct_class = Types::GetTrustedEntitySetRequest
+
+    GetTrustedEntitySetResponse.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    GetTrustedEntitySetResponse.add_member(:format, Shapes::ShapeRef.new(shape: TrustedEntitySetFormat, required: true, location_name: "format"))
+    GetTrustedEntitySetResponse.add_member(:location, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "location"))
+    GetTrustedEntitySetResponse.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: ExpectedBucketOwner, location_name: "expectedBucketOwner"))
+    GetTrustedEntitySetResponse.add_member(:status, Shapes::ShapeRef.new(shape: TrustedEntitySetStatus, required: true, location_name: "status"))
+    GetTrustedEntitySetResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetTrustedEntitySetResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    GetTrustedEntitySetResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    GetTrustedEntitySetResponse.add_member(:error_details, Shapes::ShapeRef.new(shape: String, location_name: "errorDetails"))
+    GetTrustedEntitySetResponse.struct_class = Types::GetTrustedEntitySetResponse
 
     GetUsageStatisticsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     GetUsageStatisticsRequest.add_member(:usage_statistic_type, Shapes::ShapeRef.new(shape: UsageStatisticType, required: true, location_name: "usageStatisticsType"))
@@ -1787,6 +1882,15 @@ module Aws::GuardDuty
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    ListThreatEntitySetsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    ListThreatEntitySetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListThreatEntitySetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListThreatEntitySetsRequest.struct_class = Types::ListThreatEntitySetsRequest
+
+    ListThreatEntitySetsResponse.add_member(:threat_entity_set_ids, Shapes::ShapeRef.new(shape: ThreatEntitySetIds, required: true, location_name: "threatEntitySetIds"))
+    ListThreatEntitySetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListThreatEntitySetsResponse.struct_class = Types::ListThreatEntitySetsResponse
+
     ListThreatIntelSetsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     ListThreatIntelSetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListThreatIntelSetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
@@ -1795,6 +1899,15 @@ module Aws::GuardDuty
     ListThreatIntelSetsResponse.add_member(:threat_intel_set_ids, Shapes::ShapeRef.new(shape: ThreatIntelSetIds, required: true, location_name: "threatIntelSetIds"))
     ListThreatIntelSetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListThreatIntelSetsResponse.struct_class = Types::ListThreatIntelSetsResponse
+
+    ListTrustedEntitySetsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    ListTrustedEntitySetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListTrustedEntitySetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListTrustedEntitySetsRequest.struct_class = Types::ListTrustedEntitySetsRequest
+
+    ListTrustedEntitySetsResponse.add_member(:trusted_entity_set_ids, Shapes::ShapeRef.new(shape: TrustedEntitySetIds, required: true, location_name: "trustedEntitySetIds"))
+    ListTrustedEntitySetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListTrustedEntitySetsResponse.struct_class = Types::ListTrustedEntitySetsResponse
 
     LocalIpDetails.add_member(:ip_address_v4, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "ipAddressV4"))
     LocalIpDetails.add_member(:ip_address_v6, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "ipAddressV6"))
@@ -2487,6 +2600,8 @@ module Aws::GuardDuty
     ThreatDetectedByName.add_member(:threat_names, Shapes::ShapeRef.new(shape: ScanThreatNames, location_name: "threatNames"))
     ThreatDetectedByName.struct_class = Types::ThreatDetectedByName
 
+    ThreatEntitySetIds.member = Shapes::ShapeRef.new(shape: String)
+
     ThreatIntelSetIds.member = Shapes::ShapeRef.new(shape: String)
 
     ThreatIntelligenceDetail.add_member(:threat_list_name, Shapes::ShapeRef.new(shape: String, location_name: "threatListName"))
@@ -2510,6 +2625,8 @@ module Aws::GuardDuty
     TriggerDetails.add_member(:guard_duty_finding_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "guardDutyFindingId"))
     TriggerDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     TriggerDetails.struct_class = Types::TriggerDetails
+
+    TrustedEntitySetIds.member = Shapes::ShapeRef.new(shape: String)
 
     UnarchiveFindingsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     UnarchiveFindingsRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIds, required: true, location_name: "findingIds"))
@@ -2614,6 +2731,16 @@ module Aws::GuardDuty
     UpdateS3BucketResource.add_member(:object_prefixes, Shapes::ShapeRef.new(shape: MalwareProtectionPlanObjectPrefixesList, location_name: "objectPrefixes"))
     UpdateS3BucketResource.struct_class = Types::UpdateS3BucketResource
 
+    UpdateThreatEntitySetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    UpdateThreatEntitySetRequest.add_member(:threat_entity_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "threatEntitySetId"))
+    UpdateThreatEntitySetRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    UpdateThreatEntitySetRequest.add_member(:location, Shapes::ShapeRef.new(shape: Location, location_name: "location"))
+    UpdateThreatEntitySetRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: ExpectedBucketOwner, location_name: "expectedBucketOwner"))
+    UpdateThreatEntitySetRequest.add_member(:activate, Shapes::ShapeRef.new(shape: Boolean, location_name: "activate"))
+    UpdateThreatEntitySetRequest.struct_class = Types::UpdateThreatEntitySetRequest
+
+    UpdateThreatEntitySetResponse.struct_class = Types::UpdateThreatEntitySetResponse
+
     UpdateThreatIntelSetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     UpdateThreatIntelSetRequest.add_member(:threat_intel_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "threatIntelSetId"))
     UpdateThreatIntelSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -2623,6 +2750,16 @@ module Aws::GuardDuty
     UpdateThreatIntelSetRequest.struct_class = Types::UpdateThreatIntelSetRequest
 
     UpdateThreatIntelSetResponse.struct_class = Types::UpdateThreatIntelSetResponse
+
+    UpdateTrustedEntitySetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    UpdateTrustedEntitySetRequest.add_member(:trusted_entity_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "trustedEntitySetId"))
+    UpdateTrustedEntitySetRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    UpdateTrustedEntitySetRequest.add_member(:location, Shapes::ShapeRef.new(shape: Location, location_name: "location"))
+    UpdateTrustedEntitySetRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: ExpectedBucketOwner, location_name: "expectedBucketOwner"))
+    UpdateTrustedEntitySetRequest.add_member(:activate, Shapes::ShapeRef.new(shape: Boolean, location_name: "activate"))
+    UpdateTrustedEntitySetRequest.struct_class = Types::UpdateTrustedEntitySetRequest
+
+    UpdateTrustedEntitySetResponse.struct_class = Types::UpdateTrustedEntitySetResponse
 
     UsageAccountResult.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
     UsageAccountResult.add_member(:total, Shapes::ShapeRef.new(shape: Total, location_name: "total"))
@@ -2835,6 +2972,16 @@ module Aws::GuardDuty
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
+      api.add_operation(:create_threat_entity_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateThreatEntitySet"
+        o.http_method = "POST"
+        o.http_request_uri = "/detector/{detectorId}/threatentityset"
+        o.input = Shapes::ShapeRef.new(shape: CreateThreatEntitySetRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateThreatEntitySetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
       api.add_operation(:create_threat_intel_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateThreatIntelSet"
         o.http_method = "POST"
@@ -2844,6 +2991,16 @@ module Aws::GuardDuty
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_trusted_entity_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTrustedEntitySet"
+        o.http_method = "POST"
+        o.http_request_uri = "/detector/{detectorId}/trustedentityset"
+        o.input = Shapes::ShapeRef.new(shape: CreateTrustedEntitySetRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTrustedEntitySetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:decline_invitations, Seahorse::Model::Operation.new.tap do |o|
@@ -2928,12 +3085,32 @@ module Aws::GuardDuty
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
+      api.add_operation(:delete_threat_entity_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteThreatEntitySet"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/detector/{detectorId}/threatentityset/{threatEntitySetId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteThreatEntitySetRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteThreatEntitySetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
       api.add_operation(:delete_threat_intel_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteThreatIntelSet"
         o.http_method = "DELETE"
         o.http_request_uri = "/detector/{detectorId}/threatintelset/{threatIntelSetId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteThreatIntelSetRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteThreatIntelSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:delete_trusted_entity_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTrustedEntitySet"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/detector/{detectorId}/trustedentityset/{trustedEntitySetId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTrustedEntitySetRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTrustedEntitySetResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
@@ -3184,12 +3361,32 @@ module Aws::GuardDuty
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
+      api.add_operation(:get_threat_entity_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetThreatEntitySet"
+        o.http_method = "GET"
+        o.http_request_uri = "/detector/{detectorId}/threatentityset/{threatEntitySetId}"
+        o.input = Shapes::ShapeRef.new(shape: GetThreatEntitySetRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetThreatEntitySetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
       api.add_operation(:get_threat_intel_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetThreatIntelSet"
         o.http_method = "GET"
         o.http_request_uri = "/detector/{detectorId}/threatintelset/{threatIntelSetId}"
         o.input = Shapes::ShapeRef.new(shape: GetThreatIntelSetRequest)
         o.output = Shapes::ShapeRef.new(shape: GetThreatIntelSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:get_trusted_entity_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTrustedEntitySet"
+        o.http_method = "GET"
+        o.http_request_uri = "/detector/{detectorId}/trustedentityset/{trustedEntitySetId}"
+        o.input = Shapes::ShapeRef.new(shape: GetTrustedEntitySetRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTrustedEntitySetResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
@@ -3386,12 +3583,44 @@ module Aws::GuardDuty
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
+      api.add_operation(:list_threat_entity_sets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListThreatEntitySets"
+        o.http_method = "GET"
+        o.http_request_uri = "/detector/{detectorId}/threatentityset"
+        o.input = Shapes::ShapeRef.new(shape: ListThreatEntitySetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListThreatEntitySetsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_threat_intel_sets, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListThreatIntelSets"
         o.http_method = "GET"
         o.http_request_uri = "/detector/{detectorId}/threatintelset"
         o.input = Shapes::ShapeRef.new(shape: ListThreatIntelSetsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListThreatIntelSetsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_trusted_entity_sets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTrustedEntitySets"
+        o.http_method = "GET"
+        o.http_request_uri = "/detector/{detectorId}/trustedentityset"
+        o.input = Shapes::ShapeRef.new(shape: ListTrustedEntitySetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTrustedEntitySetsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o[:pager] = Aws::Pager.new(
@@ -3558,6 +3787,16 @@ module Aws::GuardDuty
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
+      api.add_operation(:update_threat_entity_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateThreatEntitySet"
+        o.http_method = "POST"
+        o.http_request_uri = "/detector/{detectorId}/threatentityset/{threatEntitySetId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateThreatEntitySetRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateThreatEntitySetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
       api.add_operation(:update_threat_intel_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateThreatIntelSet"
         o.http_method = "POST"
@@ -3567,6 +3806,16 @@ module Aws::GuardDuty
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_trusted_entity_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateTrustedEntitySet"
+        o.http_method = "POST"
+        o.http_request_uri = "/detector/{detectorId}/trustedentityset/{trustedEntitySetId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateTrustedEntitySetRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateTrustedEntitySetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
     end
 

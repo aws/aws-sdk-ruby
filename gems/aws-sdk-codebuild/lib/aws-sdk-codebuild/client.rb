@@ -1122,6 +1122,9 @@ module Aws::CodeBuild
     #   resp.projects[0].webhook.scope_configuration.scope #=> String, one of "GITHUB_ORGANIZATION", "GITHUB_GLOBAL", "GITLAB_GROUP"
     #   resp.projects[0].webhook.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "DELETING"
     #   resp.projects[0].webhook.status_message #=> String
+    #   resp.projects[0].webhook.pull_request_build_policy.requires_comment_approval #=> String, one of "DISABLED", "ALL_PULL_REQUESTS", "FORK_PULL_REQUESTS"
+    #   resp.projects[0].webhook.pull_request_build_policy.approver_roles #=> Array
+    #   resp.projects[0].webhook.pull_request_build_policy.approver_roles[0] #=> String, one of "GITHUB_READ", "GITHUB_TRIAGE", "GITHUB_WRITE", "GITHUB_MAINTAIN", "GITHUB_ADMIN", "GITLAB_GUEST", "GITLAB_PLANNER", "GITLAB_REPORTER", "GITLAB_DEVELOPER", "GITLAB_MAINTAINER", "GITLAB_OWNER", "BITBUCKET_READ", "BITBUCKET_WRITE", "BITBUCKET_ADMIN"
     #   resp.projects[0].vpc_config.vpc_id #=> String
     #   resp.projects[0].vpc_config.subnets #=> Array
     #   resp.projects[0].vpc_config.subnets[0] #=> String
@@ -2162,6 +2165,9 @@ module Aws::CodeBuild
     #   resp.project.webhook.scope_configuration.scope #=> String, one of "GITHUB_ORGANIZATION", "GITHUB_GLOBAL", "GITLAB_GROUP"
     #   resp.project.webhook.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "DELETING"
     #   resp.project.webhook.status_message #=> String
+    #   resp.project.webhook.pull_request_build_policy.requires_comment_approval #=> String, one of "DISABLED", "ALL_PULL_REQUESTS", "FORK_PULL_REQUESTS"
+    #   resp.project.webhook.pull_request_build_policy.approver_roles #=> Array
+    #   resp.project.webhook.pull_request_build_policy.approver_roles[0] #=> String, one of "GITHUB_READ", "GITHUB_TRIAGE", "GITHUB_WRITE", "GITHUB_MAINTAIN", "GITHUB_ADMIN", "GITLAB_GUEST", "GITLAB_PLANNER", "GITLAB_REPORTER", "GITLAB_DEVELOPER", "GITLAB_MAINTAINER", "GITLAB_OWNER", "BITBUCKET_READ", "BITBUCKET_WRITE", "BITBUCKET_ADMIN"
     #   resp.project.vpc_config.vpc_id #=> String
     #   resp.project.vpc_config.subnets #=> Array
     #   resp.project.vpc_config.subnets[0] #=> String
@@ -2411,6 +2417,9 @@ module Aws::CodeBuild
     #   resp.webhook.scope_configuration.scope #=> String, one of "GITHUB_ORGANIZATION", "GITHUB_GLOBAL", "GITLAB_GROUP"
     #   resp.webhook.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "DELETING"
     #   resp.webhook.status_message #=> String
+    #   resp.webhook.pull_request_build_policy.requires_comment_approval #=> String, one of "DISABLED", "ALL_PULL_REQUESTS", "FORK_PULL_REQUESTS"
+    #   resp.webhook.pull_request_build_policy.approver_roles #=> Array
+    #   resp.webhook.pull_request_build_policy.approver_roles[0] #=> String, one of "GITHUB_READ", "GITHUB_TRIAGE", "GITHUB_WRITE", "GITHUB_MAINTAIN", "GITHUB_ADMIN", "GITLAB_GUEST", "GITLAB_PLANNER", "GITLAB_REPORTER", "GITLAB_DEVELOPER", "GITLAB_MAINTAINER", "GITLAB_OWNER", "BITBUCKET_READ", "BITBUCKET_WRITE", "BITBUCKET_ADMIN"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhook AWS API Documentation
     #
@@ -6773,6 +6782,9 @@ module Aws::CodeBuild
     #   resp.project.webhook.scope_configuration.scope #=> String, one of "GITHUB_ORGANIZATION", "GITHUB_GLOBAL", "GITLAB_GROUP"
     #   resp.project.webhook.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "DELETING"
     #   resp.project.webhook.status_message #=> String
+    #   resp.project.webhook.pull_request_build_policy.requires_comment_approval #=> String, one of "DISABLED", "ALL_PULL_REQUESTS", "FORK_PULL_REQUESTS"
+    #   resp.project.webhook.pull_request_build_policy.approver_roles #=> Array
+    #   resp.project.webhook.pull_request_build_policy.approver_roles[0] #=> String, one of "GITHUB_READ", "GITHUB_TRIAGE", "GITHUB_WRITE", "GITHUB_MAINTAIN", "GITHUB_ADMIN", "GITLAB_GUEST", "GITLAB_PLANNER", "GITLAB_REPORTER", "GITLAB_DEVELOPER", "GITLAB_MAINTAINER", "GITLAB_OWNER", "BITBUCKET_READ", "BITBUCKET_WRITE", "BITBUCKET_ADMIN"
     #   resp.project.vpc_config.vpc_id #=> String
     #   resp.project.vpc_config.subnets #=> Array
     #   resp.project.vpc_config.subnets[0] #=> String
@@ -7071,6 +7083,9 @@ module Aws::CodeBuild
     #   resp.webhook.scope_configuration.scope #=> String, one of "GITHUB_ORGANIZATION", "GITHUB_GLOBAL", "GITLAB_GROUP"
     #   resp.webhook.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "DELETING"
     #   resp.webhook.status_message #=> String
+    #   resp.webhook.pull_request_build_policy.requires_comment_approval #=> String, one of "DISABLED", "ALL_PULL_REQUESTS", "FORK_PULL_REQUESTS"
+    #   resp.webhook.pull_request_build_policy.approver_roles #=> Array
+    #   resp.webhook.pull_request_build_policy.approver_roles[0] #=> String, one of "GITHUB_READ", "GITHUB_TRIAGE", "GITHUB_WRITE", "GITHUB_MAINTAIN", "GITHUB_ADMIN", "GITLAB_GUEST", "GITLAB_PLANNER", "GITLAB_REPORTER", "GITLAB_DEVELOPER", "GITLAB_MAINTAINER", "GITLAB_OWNER", "BITBUCKET_READ", "BITBUCKET_WRITE", "BITBUCKET_ADMIN"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhook AWS API Documentation
     #
@@ -7099,7 +7114,7 @@ module Aws::CodeBuild
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.161.0'
+      context[:gem_version] = '1.162.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

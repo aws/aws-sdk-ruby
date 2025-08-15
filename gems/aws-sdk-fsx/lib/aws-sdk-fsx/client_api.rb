@@ -264,6 +264,7 @@ module Aws::FSx
     Iops = Shapes::IntegerShape.new(name: 'Iops')
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
     IpAddressRange = Shapes::StringShape.new(name: 'IpAddressRange')
+    Ipv6AddressRange = Shapes::StringShape.new(name: 'Ipv6AddressRange')
     JunctionPath = Shapes::StringShape.new(name: 'JunctionPath')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LastUpdatedTime = Shapes::TimestampShape.new(name: 'LastUpdatedTime')
@@ -297,6 +298,7 @@ module Aws::FSx
     NetBiosAlias = Shapes::StringShape.new(name: 'NetBiosAlias')
     NetworkInterfaceId = Shapes::StringShape.new(name: 'NetworkInterfaceId')
     NetworkInterfaceIds = Shapes::ListShape.new(name: 'NetworkInterfaceIds')
+    NetworkType = Shapes::StringShape.new(name: 'NetworkType')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NfsVersion = Shapes::StringShape.new(name: 'NfsVersion')
     NotServiceResourceError = Shapes::StructureShape.new(name: 'NotServiceResourceError')
@@ -526,6 +528,7 @@ module Aws::FSx
     AdministrativeAction.add_member(:target_snapshot_values, Shapes::ShapeRef.new(shape: Snapshot, location_name: "TargetSnapshotValues"))
     AdministrativeAction.add_member(:total_transfer_bytes, Shapes::ShapeRef.new(shape: TotalTransferBytes, location_name: "TotalTransferBytes"))
     AdministrativeAction.add_member(:remaining_transfer_bytes, Shapes::ShapeRef.new(shape: RemainingTransferBytes, location_name: "RemainingTransferBytes"))
+    AdministrativeAction.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     AdministrativeAction.struct_class = Types::AdministrativeAction
 
     AdministrativeActionFailureDetails.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -737,6 +740,7 @@ module Aws::FSx
     CreateFileSystemFromBackupRequest.add_member(:file_system_type_version, Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileSystemTypeVersion"))
     CreateFileSystemFromBackupRequest.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
     CreateFileSystemFromBackupRequest.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "StorageCapacity"))
+    CreateFileSystemFromBackupRequest.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     CreateFileSystemFromBackupRequest.struct_class = Types::CreateFileSystemFromBackupRequest
 
     CreateFileSystemFromBackupResponse.add_member(:file_system, Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
@@ -791,6 +795,7 @@ module Aws::FSx
     CreateFileSystemOpenZFSConfiguration.add_member(:root_volume_configuration, Shapes::ShapeRef.new(shape: OpenZFSCreateRootVolumeConfiguration, location_name: "RootVolumeConfiguration"))
     CreateFileSystemOpenZFSConfiguration.add_member(:preferred_subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "PreferredSubnetId"))
     CreateFileSystemOpenZFSConfiguration.add_member(:endpoint_ip_address_range, Shapes::ShapeRef.new(shape: IpAddressRange, location_name: "EndpointIpAddressRange"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:endpoint_ipv_6_address_range, Shapes::ShapeRef.new(shape: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
     CreateFileSystemOpenZFSConfiguration.add_member(:route_table_ids, Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "RouteTableIds"))
     CreateFileSystemOpenZFSConfiguration.add_member(:read_cache_configuration, Shapes::ShapeRef.new(shape: OpenZFSReadCacheConfiguration, location_name: "ReadCacheConfiguration"))
     CreateFileSystemOpenZFSConfiguration.struct_class = Types::CreateFileSystemOpenZFSConfiguration
@@ -808,6 +813,7 @@ module Aws::FSx
     CreateFileSystemRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemOntapConfiguration, location_name: "OntapConfiguration"))
     CreateFileSystemRequest.add_member(:file_system_type_version, Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileSystemTypeVersion"))
     CreateFileSystemRequest.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
+    CreateFileSystemRequest.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     CreateFileSystemRequest.struct_class = Types::CreateFileSystemRequest
 
     CreateFileSystemResponse.add_member(:file_system, Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
@@ -1327,6 +1333,7 @@ module Aws::FSx
     FileSystem.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: OntapFileSystemConfiguration, location_name: "OntapConfiguration"))
     FileSystem.add_member(:file_system_type_version, Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileSystemTypeVersion"))
     FileSystem.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: OpenZFSFileSystemConfiguration, location_name: "OpenZFSConfiguration"))
+    FileSystem.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     FileSystem.struct_class = Types::FileSystem
 
     FileSystemEndpoint.add_member(:dns_name, Shapes::ShapeRef.new(shape: DNSName, location_name: "DNSName"))
@@ -1536,8 +1543,10 @@ module Aws::FSx
     OpenZFSFileSystemConfiguration.add_member(:root_volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "RootVolumeId"))
     OpenZFSFileSystemConfiguration.add_member(:preferred_subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "PreferredSubnetId"))
     OpenZFSFileSystemConfiguration.add_member(:endpoint_ip_address_range, Shapes::ShapeRef.new(shape: IpAddressRange, location_name: "EndpointIpAddressRange"))
+    OpenZFSFileSystemConfiguration.add_member(:endpoint_ipv_6_address_range, Shapes::ShapeRef.new(shape: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
     OpenZFSFileSystemConfiguration.add_member(:route_table_ids, Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "RouteTableIds"))
     OpenZFSFileSystemConfiguration.add_member(:endpoint_ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "EndpointIpAddress"))
+    OpenZFSFileSystemConfiguration.add_member(:endpoint_ipv_6_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "EndpointIpv6Address"))
     OpenZFSFileSystemConfiguration.add_member(:read_cache_configuration, Shapes::ShapeRef.new(shape: OpenZFSReadCacheConfiguration, location_name: "ReadCacheConfiguration"))
     OpenZFSFileSystemConfiguration.struct_class = Types::OpenZFSFileSystemConfiguration
 
@@ -1890,6 +1899,7 @@ module Aws::FSx
     UpdateFileSystemOpenZFSConfiguration.add_member(:add_route_table_ids, Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "AddRouteTableIds"))
     UpdateFileSystemOpenZFSConfiguration.add_member(:remove_route_table_ids, Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "RemoveRouteTableIds"))
     UpdateFileSystemOpenZFSConfiguration.add_member(:read_cache_configuration, Shapes::ShapeRef.new(shape: OpenZFSReadCacheConfiguration, location_name: "ReadCacheConfiguration"))
+    UpdateFileSystemOpenZFSConfiguration.add_member(:endpoint_ipv_6_address_range, Shapes::ShapeRef.new(shape: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
     UpdateFileSystemOpenZFSConfiguration.struct_class = Types::UpdateFileSystemOpenZFSConfiguration
 
     UpdateFileSystemRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
@@ -1901,6 +1911,7 @@ module Aws::FSx
     UpdateFileSystemRequest.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: UpdateFileSystemOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
     UpdateFileSystemRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "StorageType"))
     UpdateFileSystemRequest.add_member(:file_system_type_version, Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileSystemTypeVersion"))
+    UpdateFileSystemRequest.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     UpdateFileSystemRequest.struct_class = Types::UpdateFileSystemRequest
 
     UpdateFileSystemResponse.add_member(:file_system, Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))

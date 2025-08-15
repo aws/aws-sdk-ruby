@@ -573,7 +573,6 @@ module Aws::Connect
 
     class CommonAttributeAndCondition
       attr_accessor tag_conditions: ::Array[Types::TagCondition]
-      attr_accessor hierarchy_group_condition: Types::HierarchyGroupCondition
       SENSITIVE: []
     end
 
@@ -6284,7 +6283,6 @@ module Aws::Connect
       attr_accessor or_conditions: ::Array[Types::UserHierarchyGroupSearchCriteria]
       attr_accessor and_conditions: ::Array[Types::UserHierarchyGroupSearchCriteria]
       attr_accessor string_condition: Types::StringCondition
-      attr_accessor hierarchy_group_condition: Types::HierarchyGroupCondition
       SENSITIVE: []
     end
 

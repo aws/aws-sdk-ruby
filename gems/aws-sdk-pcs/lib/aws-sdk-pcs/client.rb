@@ -670,15 +670,14 @@ module Aws::PCS
     #   The Amazon Resource Name (ARN) of the IAM instance profile used to
     #   pass an IAM role when launching EC2 instances. The role contained in
     #   your instance profile must have the
-    #   `pcs:RegisterComputeNodeGroupInstance` permission. The resource
-    #   identifier of the ARN must start with `AWSPCS` or it must have
-    #   `/aws-pcs/` in its path.
+    #   `pcs:RegisterComputeNodeGroupInstance` permission and the role name
+    #   must start with `AWSPCS` or must have the path `/aws-pcs/`. For more
+    #   information, see [IAM instance profiles for PCS][1] in the *PCS User
+    #   Guide*.
     #
-    #   **Examples**
     #
-    #   * `arn:aws:iam::111122223333:instance-profile/AWSPCS-example-role-1`
     #
-    #   * `arn:aws:iam::111122223333:instance-profile/aws-pcs/example-role-2`
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/security-instance-profiles.html
     #
     # @option params [required, Types::ScalingConfigurationRequest] :scaling_configuration
     #   Specifies the boundaries of the compute node group auto scaling.
@@ -1486,15 +1485,14 @@ module Aws::PCS
     #   The Amazon Resource Name (ARN) of the IAM instance profile used to
     #   pass an IAM role when launching EC2 instances. The role contained in
     #   your instance profile must have the
-    #   `pcs:RegisterComputeNodeGroupInstance` permission. The resource
-    #   identifier of the ARN must start with `AWSPCS` or it must have
-    #   `/aws-pcs/` in its path.
+    #   `pcs:RegisterComputeNodeGroupInstance` permission and the role name
+    #   must start with `AWSPCS` or must have the path `/aws-pcs/`. For more
+    #   information, see [IAM instance profiles for PCS][1] in the *PCS User
+    #   Guide*.
     #
-    #   **Examples**
     #
-    #   * `arn:aws:iam::111122223333:instance-profile/AWSPCS-example-role-1`
     #
-    #   * `arn:aws:iam::111122223333:instance-profile/aws-pcs/example-role-2`
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/security-instance-profiles.html
     #
     # @option params [Types::UpdateComputeNodeGroupSlurmConfigurationRequest] :slurm_configuration
     #   Additional options related to the Slurm scheduler.
@@ -1667,7 +1665,7 @@ module Aws::PCS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pcs'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

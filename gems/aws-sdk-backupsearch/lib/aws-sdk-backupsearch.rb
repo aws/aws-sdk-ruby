@@ -55,7 +55,7 @@ module Aws::BackupSearch
   autoload :EndpointProvider, 'aws-sdk-backupsearch/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-backupsearch/endpoints'
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.11.0'
 
 end
 

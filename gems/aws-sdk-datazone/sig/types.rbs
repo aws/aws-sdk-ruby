@@ -75,6 +75,38 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class AccountInfo
+      attr_accessor aws_account_id: ::String
+      attr_accessor aws_account_name: ::String
+      attr_accessor supported_regions: ::Array[::String]
+      SENSITIVE: [:aws_account_name]
+    end
+
+    class AccountPoolSummary
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor domain_unit_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor resolution_strategy: ("MANUAL")
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:name]
+    end
+
+    class AccountSource
+      attr_accessor accounts: ::Array[Types::AccountInfo]
+      attr_accessor custom_account_pool_handler: Types::CustomAccountPoolHandler
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Accounts < AccountSource
+      end
+      class CustomAccountPoolHandler < AccountSource
+      end
+      class Unknown < AccountSource
+      end
+    end
+
     class ActionParameters
       attr_accessor aws_console_link: Types::AwsConsoleLinkParameters
       attr_accessor unknown: untyped
@@ -550,6 +582,30 @@ module Aws::DataZone
       attr_accessor props: Types::ConnectionPropertiesOutput
       attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
       SENSITIVE: []
+    end
+
+    class CreateAccountPoolInput
+      attr_accessor account_source: Types::AccountSource
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor resolution_strategy: ("MANUAL")
+      SENSITIVE: [:description, :name]
+    end
+
+    class CreateAccountPoolOutput
+      attr_accessor account_source: Types::AccountSource
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor domain_unit_id: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor resolution_strategy: ("MANUAL")
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:description, :name]
     end
 
     class CreateAssetFilterInput
@@ -1272,6 +1328,12 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class CustomAccountPoolHandler
+      attr_accessor lambda_execution_role_arn: ::String
+      attr_accessor lambda_function_arn: ::String
+      SENSITIVE: []
+    end
+
     class CustomParameter
       attr_accessor default_value: ::String
       attr_accessor description: ::String
@@ -1447,6 +1509,15 @@ module Aws::DataZone
       attr_accessor type: ::String
       attr_accessor updated_at: ::Time
       SENSITIVE: [:description, :name, :schedule]
+    end
+
+    class DeleteAccountPoolInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccountPoolOutput < Aws::EmptyStructure
     end
 
     class DeleteAssetFilterInput
@@ -1839,6 +1910,7 @@ module Aws::DataZone
     end
 
     class EnvironmentConfiguration
+      attr_accessor account_pools: ::Array[::String]
       attr_accessor aws_account: Types::AwsAccount
       attr_accessor aws_region: Types::Region
       attr_accessor configuration_parameters: Types::EnvironmentConfigurationParametersDetails
@@ -1869,6 +1941,7 @@ module Aws::DataZone
       attr_accessor environment_configuration_name: ::String
       attr_accessor environment_id: ::String
       attr_accessor environment_parameters: ::Array[Types::EnvironmentParameter]
+      attr_accessor environment_resolved_account: Types::EnvironmentResolvedAccount
       SENSITIVE: [:environment_configuration_name]
     end
 
@@ -1903,6 +1976,13 @@ module Aws::DataZone
       attr_accessor project_id: ::String
       attr_accessor updated_at: ::Time
       SENSITIVE: [:description, :name]
+    end
+
+    class EnvironmentResolvedAccount
+      attr_accessor aws_account_id: ::String
+      attr_accessor region_name: ::String
+      attr_accessor source_account_pool_id: ::String
+      SENSITIVE: []
     end
 
     class EnvironmentSummary
@@ -2018,6 +2098,27 @@ module Aws::DataZone
       attr_accessor revision: ::String
       attr_accessor status: ("ENABLED" | "DISABLED")
       SENSITIVE: [:description, :model, :name]
+    end
+
+    class GetAccountPoolInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccountPoolOutput
+      attr_accessor account_source: Types::AccountSource
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor domain_unit_id: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor resolution_strategy: ("MANUAL")
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:description, :name]
     end
 
     class GetAssetFilterInput
@@ -3134,6 +3235,36 @@ module Aws::DataZone
 
     class LineageSyncSchedule
       attr_accessor schedule: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccountPoolsInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ("NAME")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: [:name]
+    end
+
+    class ListAccountPoolsOutput
+      attr_accessor items: ::Array[Types::AccountPoolSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccountsInAccountPoolInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccountsInAccountPoolOutput
+      attr_accessor items: ::Array[Types::AccountInfo]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -5122,6 +5253,31 @@ module Aws::DataZone
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAccountPoolInput
+      attr_accessor account_source: Types::AccountSource
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor resolution_strategy: ("MANUAL")
+      SENSITIVE: [:description, :name]
+    end
+
+    class UpdateAccountPoolOutput
+      attr_accessor account_source: Types::AccountSource
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor domain_unit_id: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor resolution_strategy: ("MANUAL")
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:description, :name]
     end
 
     class UpdateAssetFilterInput

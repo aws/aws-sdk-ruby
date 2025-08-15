@@ -18,6 +18,9 @@ module Aws
       def id: () -> String
       alias volume_id id
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#availability_zone_id-instance_method
+      def availability_zone_id: () -> ::String
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#outpost_arn-instance_method
       def outpost_arn: () -> ::String
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2025-08-11)
+------------------
+
+* Feature - Adds support for Wait and Save feature in service-managed fleets
+
 1.33.0 (2025-08-04)
 ------------------
 

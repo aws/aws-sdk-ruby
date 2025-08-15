@@ -1991,6 +1991,49 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # Contains details about the validation errors that occurred when
+    # generating or enforcing an [effective policy][1], such as which
+    # policies contributed to the error and location of the error.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_effective.html
+    #
+    # @!attribute [rw] error_code
+    #   The error code for the validation error. For example,
+    #   `ELEMENTS_TOO_MANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message for the validation error.
+    #   @return [String]
+    #
+    # @!attribute [rw] path_to_error
+    #   The path within the effective policy where the validation error
+    #   occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] contributing_policies
+    #   The individual policies [inherited][1] and [attached][2] to the
+    #   account which contributed to the validation error.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inheritance_mgmt.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_policies_attach.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EffectivePolicyValidationError AWS API Documentation
+    #
+    class EffectivePolicyValidationError < Struct.new(
+      :error_code,
+      :error_message,
+      :path_to_error,
+      :contributing_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] service_principal
     #   The service principal name of the Amazon Web Services service for
     #   which you want to enable integration with your organization. This is
@@ -2807,6 +2850,111 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # @!attribute [rw] policy_type
+    #   The type of policy that you want information about. You can specify
+    #   one of the following values:
+    #
+    #   * [DECLARATIVE\_POLICY\_EC2][1]
+    #
+    #   * [BACKUP\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #   * [CHATBOT\_POLICY][4]
+    #
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][5]
+    #
+    #   * [SECURITYHUB\_POLICY][6]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
+    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The total number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value that is specific to the operation. If additional items exist
+    #   beyond the maximum you specify, the `NextToken` response element is
+    #   present and has a value (is not null). Include that value as the
+    #   `NextToken` request parameter in the next call to the operation to
+    #   get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsWithInvalidEffectivePolicyRequest AWS API Documentation
+    #
+    class ListAccountsWithInvalidEffectivePolicyRequest < Struct.new(
+      :policy_type,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] accounts
+    #   The accounts in the organization which have an invalid effective
+    #   policy for the specified policy type.
+    #   @return [Array<Types::Account>]
+    #
+    # @!attribute [rw] policy_type
+    #   The specified policy type. One of the following values:
+    #
+    #   * [DECLARATIVE\_POLICY\_EC2][1]
+    #
+    #   * [BACKUP\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #   * [CHATBOT\_POLICY][4]
+    #
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][5]
+    #
+    #   * [SECURITYHUB\_POLICY][6]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
+    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsWithInvalidEffectivePolicyResponse AWS API Documentation
+    #
+    class ListAccountsWithInvalidEffectivePolicyResponse < Struct.new(
+      :accounts,
+      :policy_type,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] parent_id
     #   The unique identifier (ID) for the parent root or OU whose children
     #   you want to list.
@@ -3058,6 +3206,136 @@ module Aws::Organizations
     class ListDelegatedServicesForAccountResponse < Struct.new(
       :delegated_services,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the account that you want details about. Specifying an
+    #   organization root or organizational unit (OU) as the target is not
+    #   supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_type
+    #   The type of policy that you want information about. You can specify
+    #   one of the following values:
+    #
+    #   * [DECLARATIVE\_POLICY\_EC2][1]
+    #
+    #   * [BACKUP\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #   * [CHATBOT\_POLICY][4]
+    #
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][5]
+    #
+    #   * [SECURITYHUB\_POLICY][6]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
+    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The total number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value that is specific to the operation. If additional items exist
+    #   beyond the maximum you specify, the `NextToken` response element is
+    #   present and has a value (is not null). Include that value as the
+    #   `NextToken` request parameter in the next call to the operation to
+    #   get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListEffectivePolicyValidationErrorsRequest AWS API Documentation
+    #
+    class ListEffectivePolicyValidationErrorsRequest < Struct.new(
+      :account_id,
+      :policy_type,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The ID of the specified account.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_type
+    #   The specified policy type. One of the following values:
+    #
+    #   * [DECLARATIVE\_POLICY\_EC2][1]
+    #
+    #   * [BACKUP\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #   * [CHATBOT\_POLICY][4]
+    #
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][5]
+    #
+    #   * [SECURITYHUB\_POLICY][6]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
+    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The path in the organization where the specified account exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_timestamp
+    #   The time when the latest effective policy was generated for the
+    #   specified account.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_token
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_policy_validation_errors
+    #   The `EffectivePolicyValidationError` object contains details about
+    #   the validation errors that occurred when generating or enforcing an
+    #   effective policy, such as which policies contributed to the error
+    #   and location of the error.
+    #   @return [Array<Types::EffectivePolicyValidationError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListEffectivePolicyValidationErrorsResponse AWS API Documentation
+    #
+    class ListEffectivePolicyValidationErrorsResponse < Struct.new(
+      :account_id,
+      :policy_type,
+      :path,
+      :evaluation_timestamp,
+      :next_token,
+      :effective_policy_validation_errors)
       SENSITIVE = []
       include Aws::Structure
     end

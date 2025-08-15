@@ -201,12 +201,16 @@ module Aws::EC2
     #
     #   routetableassociation = route_table.associate_with_subnet({
     #     gateway_id: "RouteGatewayId",
+    #     public_ipv_4_pool: "Ipv4PoolEc2Id",
     #     dry_run: false,
     #     subnet_id: "SubnetId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :gateway_id
     #   The ID of the internet gateway or virtual private gateway.
+    # @option options [String] :public_ipv_4_pool
+    #   The ID of a public IPv4 pool. A public IPv4 pool is a pool of IPv4
+    #   addresses that you've brought to Amazon Web Services with BYOIP.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

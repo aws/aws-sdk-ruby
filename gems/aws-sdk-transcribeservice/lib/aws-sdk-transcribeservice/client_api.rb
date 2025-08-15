@@ -129,6 +129,7 @@ module Aws::TranscribeService
     MedicalScribeChannelDefinition = Shapes::StructureShape.new(name: 'MedicalScribeChannelDefinition')
     MedicalScribeChannelDefinitions = Shapes::ListShape.new(name: 'MedicalScribeChannelDefinitions')
     MedicalScribeChannelId = Shapes::IntegerShape.new(name: 'MedicalScribeChannelId')
+    MedicalScribeContext = Shapes::StructureShape.new(name: 'MedicalScribeContext')
     MedicalScribeJob = Shapes::StructureShape.new(name: 'MedicalScribeJob')
     MedicalScribeJobStatus = Shapes::StringShape.new(name: 'MedicalScribeJobStatus')
     MedicalScribeJobSummaries = Shapes::ListShape.new(name: 'MedicalScribeJobSummaries')
@@ -137,6 +138,7 @@ module Aws::TranscribeService
     MedicalScribeNoteTemplate = Shapes::StringShape.new(name: 'MedicalScribeNoteTemplate')
     MedicalScribeOutput = Shapes::StructureShape.new(name: 'MedicalScribeOutput')
     MedicalScribeParticipantRole = Shapes::StringShape.new(name: 'MedicalScribeParticipantRole')
+    MedicalScribePatientContext = Shapes::StructureShape.new(name: 'MedicalScribePatientContext')
     MedicalScribeSettings = Shapes::StructureShape.new(name: 'MedicalScribeSettings')
     MedicalTranscript = Shapes::StructureShape.new(name: 'MedicalTranscript')
     MedicalTranscriptionJob = Shapes::StructureShape.new(name: 'MedicalTranscriptionJob')
@@ -160,6 +162,7 @@ module Aws::TranscribeService
     Phrases = Shapes::ListShape.new(name: 'Phrases')
     PiiEntityType = Shapes::StringShape.new(name: 'PiiEntityType')
     PiiEntityTypes = Shapes::ListShape.new(name: 'PiiEntityTypes')
+    Pronouns = Shapes::StringShape.new(name: 'Pronouns')
     RedactionOutput = Shapes::StringShape.new(name: 'RedactionOutput')
     RedactionType = Shapes::StringShape.new(name: 'RedactionType')
     RelativeTimeRange = Shapes::StructureShape.new(name: 'RelativeTimeRange')
@@ -642,6 +645,9 @@ module Aws::TranscribeService
 
     MedicalScribeChannelDefinitions.member = Shapes::ShapeRef.new(shape: MedicalScribeChannelDefinition)
 
+    MedicalScribeContext.add_member(:patient_context, Shapes::ShapeRef.new(shape: MedicalScribePatientContext, location_name: "PatientContext"))
+    MedicalScribeContext.struct_class = Types::MedicalScribeContext
+
     MedicalScribeJob.add_member(:medical_scribe_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, location_name: "MedicalScribeJobName"))
     MedicalScribeJob.add_member(:medical_scribe_job_status, Shapes::ShapeRef.new(shape: MedicalScribeJobStatus, location_name: "MedicalScribeJobStatus"))
     MedicalScribeJob.add_member(:language_code, Shapes::ShapeRef.new(shape: MedicalScribeLanguageCode, location_name: "LanguageCode"))
@@ -654,6 +660,7 @@ module Aws::TranscribeService
     MedicalScribeJob.add_member(:settings, Shapes::ShapeRef.new(shape: MedicalScribeSettings, location_name: "Settings"))
     MedicalScribeJob.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: DataAccessRoleArn, location_name: "DataAccessRoleArn"))
     MedicalScribeJob.add_member(:channel_definitions, Shapes::ShapeRef.new(shape: MedicalScribeChannelDefinitions, location_name: "ChannelDefinitions"))
+    MedicalScribeJob.add_member(:medical_scribe_context_provided, Shapes::ShapeRef.new(shape: Boolean, location_name: "MedicalScribeContextProvided"))
     MedicalScribeJob.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     MedicalScribeJob.struct_class = Types::MedicalScribeJob
 
@@ -671,6 +678,9 @@ module Aws::TranscribeService
     MedicalScribeOutput.add_member(:transcript_file_uri, Shapes::ShapeRef.new(shape: Uri, required: true, location_name: "TranscriptFileUri"))
     MedicalScribeOutput.add_member(:clinical_document_uri, Shapes::ShapeRef.new(shape: Uri, required: true, location_name: "ClinicalDocumentUri"))
     MedicalScribeOutput.struct_class = Types::MedicalScribeOutput
+
+    MedicalScribePatientContext.add_member(:pronouns, Shapes::ShapeRef.new(shape: Pronouns, location_name: "Pronouns"))
+    MedicalScribePatientContext.struct_class = Types::MedicalScribePatientContext
 
     MedicalScribeSettings.add_member(:show_speaker_labels, Shapes::ShapeRef.new(shape: Boolean, location_name: "ShowSpeakerLabels"))
     MedicalScribeSettings.add_member(:max_speaker_labels, Shapes::ShapeRef.new(shape: MaxSpeakers, location_name: "MaxSpeakerLabels"))
@@ -804,6 +814,7 @@ module Aws::TranscribeService
     StartMedicalScribeJobRequest.add_member(:settings, Shapes::ShapeRef.new(shape: MedicalScribeSettings, required: true, location_name: "Settings"))
     StartMedicalScribeJobRequest.add_member(:channel_definitions, Shapes::ShapeRef.new(shape: MedicalScribeChannelDefinitions, location_name: "ChannelDefinitions"))
     StartMedicalScribeJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StartMedicalScribeJobRequest.add_member(:medical_scribe_context, Shapes::ShapeRef.new(shape: MedicalScribeContext, location_name: "MedicalScribeContext"))
     StartMedicalScribeJobRequest.struct_class = Types::StartMedicalScribeJobRequest
 
     StartMedicalScribeJobResponse.add_member(:medical_scribe_job, Shapes::ShapeRef.new(shape: MedicalScribeJob, location_name: "MedicalScribeJob"))

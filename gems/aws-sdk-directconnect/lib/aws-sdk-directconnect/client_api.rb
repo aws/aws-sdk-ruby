@@ -351,6 +351,7 @@ module Aws::DirectConnect
 
     BGPPeer.add_member(:bgp_peer_id, Shapes::ShapeRef.new(shape: BGPPeerId, location_name: "bgpPeerId"))
     BGPPeer.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, location_name: "asn"))
+    BGPPeer.add_member(:asn_long, Shapes::ShapeRef.new(shape: LongAsn, location_name: "asnLong"))
     BGPPeer.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
     BGPPeer.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
     BGPPeer.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
@@ -426,6 +427,7 @@ module Aws::DirectConnect
     ConnectionList.member = Shapes::ShapeRef.new(shape: Connection)
 
     Connections.add_member(:connections, Shapes::ShapeRef.new(shape: ConnectionList, location_name: "connections"))
+    Connections.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     Connections.struct_class = Types::Connections
 
     CreateBGPPeerRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, location_name: "virtualInterfaceId"))
@@ -512,6 +514,7 @@ module Aws::DirectConnect
 
     DeleteBGPPeerRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, location_name: "virtualInterfaceId"))
     DeleteBGPPeerRequest.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, location_name: "asn"))
+    DeleteBGPPeerRequest.add_member(:asn_long, Shapes::ShapeRef.new(shape: LongAsn, location_name: "asnLong"))
     DeleteBGPPeerRequest.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
     DeleteBGPPeerRequest.add_member(:bgp_peer_id, Shapes::ShapeRef.new(shape: BGPPeerId, location_name: "bgpPeerId"))
     DeleteBGPPeerRequest.struct_class = Types::DeleteBGPPeerRequest
@@ -569,6 +572,8 @@ module Aws::DirectConnect
     DescribeConnectionsOnInterconnectRequest.struct_class = Types::DescribeConnectionsOnInterconnectRequest
 
     DescribeConnectionsRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, location_name: "connectionId"))
+    DescribeConnectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultSetSize, location_name: "maxResults"))
+    DescribeConnectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     DescribeConnectionsRequest.struct_class = Types::DescribeConnectionsRequest
 
     DescribeCustomerMetadataResponse.add_member(:agreements, Shapes::ShapeRef.new(shape: AgreementList, location_name: "agreements"))
@@ -618,6 +623,8 @@ module Aws::DirectConnect
     DescribeDirectConnectGatewaysResult.struct_class = Types::DescribeDirectConnectGatewaysResult
 
     DescribeHostedConnectionsRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
+    DescribeHostedConnectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultSetSize, location_name: "maxResults"))
+    DescribeHostedConnectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     DescribeHostedConnectionsRequest.struct_class = Types::DescribeHostedConnectionsRequest
 
     DescribeInterconnectLoaRequest.add_member(:interconnect_id, Shapes::ShapeRef.new(shape: InterconnectId, required: true, location_name: "interconnectId"))
@@ -629,9 +636,13 @@ module Aws::DirectConnect
     DescribeInterconnectLoaResponse.struct_class = Types::DescribeInterconnectLoaResponse
 
     DescribeInterconnectsRequest.add_member(:interconnect_id, Shapes::ShapeRef.new(shape: InterconnectId, location_name: "interconnectId"))
+    DescribeInterconnectsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultSetSize, location_name: "maxResults"))
+    DescribeInterconnectsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     DescribeInterconnectsRequest.struct_class = Types::DescribeInterconnectsRequest
 
     DescribeLagsRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, location_name: "lagId"))
+    DescribeLagsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultSetSize, location_name: "maxResults"))
+    DescribeLagsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     DescribeLagsRequest.struct_class = Types::DescribeLagsRequest
 
     DescribeLoaRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
@@ -657,6 +668,8 @@ module Aws::DirectConnect
 
     DescribeVirtualInterfacesRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, location_name: "connectionId"))
     DescribeVirtualInterfacesRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, location_name: "virtualInterfaceId"))
+    DescribeVirtualInterfacesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultSetSize, location_name: "maxResults"))
+    DescribeVirtualInterfacesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     DescribeVirtualInterfacesRequest.struct_class = Types::DescribeVirtualInterfacesRequest
 
     DirectConnectClientException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -751,6 +764,7 @@ module Aws::DirectConnect
     InterconnectList.member = Shapes::ShapeRef.new(shape: Interconnect)
 
     Interconnects.add_member(:interconnects, Shapes::ShapeRef.new(shape: InterconnectList, location_name: "interconnects"))
+    Interconnects.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     Interconnects.struct_class = Types::Interconnects
 
     Lag.add_member(:connections_bandwidth, Shapes::ShapeRef.new(shape: Bandwidth, location_name: "connectionsBandwidth"))
@@ -779,6 +793,7 @@ module Aws::DirectConnect
     LagList.member = Shapes::ShapeRef.new(shape: Lag)
 
     Lags.add_member(:lags, Shapes::ShapeRef.new(shape: LagList, location_name: "lags"))
+    Lags.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     Lags.struct_class = Types::Lags
 
     ListVirtualInterfaceTestHistoryRequest.add_member(:test_id, Shapes::ShapeRef.new(shape: TestId, location_name: "testId"))
@@ -819,6 +834,7 @@ module Aws::DirectConnect
     MacSecKeyList.member = Shapes::ShapeRef.new(shape: MacSecKey)
 
     NewBGPPeer.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, location_name: "asn"))
+    NewBGPPeer.add_member(:asn_long, Shapes::ShapeRef.new(shape: LongAsn, location_name: "asnLong"))
     NewBGPPeer.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
     NewBGPPeer.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
     NewBGPPeer.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
@@ -827,7 +843,8 @@ module Aws::DirectConnect
 
     NewPrivateVirtualInterface.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, required: true, location_name: "virtualInterfaceName"))
     NewPrivateVirtualInterface.add_member(:vlan, Shapes::ShapeRef.new(shape: VLAN, required: true, location_name: "vlan"))
-    NewPrivateVirtualInterface.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, required: true, location_name: "asn"))
+    NewPrivateVirtualInterface.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, location_name: "asn"))
+    NewPrivateVirtualInterface.add_member(:asn_long, Shapes::ShapeRef.new(shape: LongAsn, location_name: "asnLong"))
     NewPrivateVirtualInterface.add_member(:mtu, Shapes::ShapeRef.new(shape: MTU, location_name: "mtu"))
     NewPrivateVirtualInterface.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
     NewPrivateVirtualInterface.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
@@ -841,7 +858,8 @@ module Aws::DirectConnect
 
     NewPrivateVirtualInterfaceAllocation.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, required: true, location_name: "virtualInterfaceName"))
     NewPrivateVirtualInterfaceAllocation.add_member(:vlan, Shapes::ShapeRef.new(shape: VLAN, required: true, location_name: "vlan"))
-    NewPrivateVirtualInterfaceAllocation.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, required: true, location_name: "asn"))
+    NewPrivateVirtualInterfaceAllocation.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, location_name: "asn"))
+    NewPrivateVirtualInterfaceAllocation.add_member(:asn_long, Shapes::ShapeRef.new(shape: LongAsn, location_name: "asnLong"))
     NewPrivateVirtualInterfaceAllocation.add_member(:mtu, Shapes::ShapeRef.new(shape: MTU, location_name: "mtu"))
     NewPrivateVirtualInterfaceAllocation.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
     NewPrivateVirtualInterfaceAllocation.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
@@ -852,7 +870,8 @@ module Aws::DirectConnect
 
     NewPublicVirtualInterface.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, required: true, location_name: "virtualInterfaceName"))
     NewPublicVirtualInterface.add_member(:vlan, Shapes::ShapeRef.new(shape: VLAN, required: true, location_name: "vlan"))
-    NewPublicVirtualInterface.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, required: true, location_name: "asn"))
+    NewPublicVirtualInterface.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, location_name: "asn"))
+    NewPublicVirtualInterface.add_member(:asn_long, Shapes::ShapeRef.new(shape: LongAsn, location_name: "asnLong"))
     NewPublicVirtualInterface.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
     NewPublicVirtualInterface.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
     NewPublicVirtualInterface.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
@@ -863,7 +882,8 @@ module Aws::DirectConnect
 
     NewPublicVirtualInterfaceAllocation.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, required: true, location_name: "virtualInterfaceName"))
     NewPublicVirtualInterfaceAllocation.add_member(:vlan, Shapes::ShapeRef.new(shape: VLAN, required: true, location_name: "vlan"))
-    NewPublicVirtualInterfaceAllocation.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, required: true, location_name: "asn"))
+    NewPublicVirtualInterfaceAllocation.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, location_name: "asn"))
+    NewPublicVirtualInterfaceAllocation.add_member(:asn_long, Shapes::ShapeRef.new(shape: LongAsn, location_name: "asnLong"))
     NewPublicVirtualInterfaceAllocation.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
     NewPublicVirtualInterfaceAllocation.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
     NewPublicVirtualInterfaceAllocation.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
@@ -875,6 +895,7 @@ module Aws::DirectConnect
     NewTransitVirtualInterface.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: "virtualInterfaceName"))
     NewTransitVirtualInterface.add_member(:vlan, Shapes::ShapeRef.new(shape: VLAN, location_name: "vlan"))
     NewTransitVirtualInterface.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, location_name: "asn"))
+    NewTransitVirtualInterface.add_member(:asn_long, Shapes::ShapeRef.new(shape: LongAsn, location_name: "asnLong"))
     NewTransitVirtualInterface.add_member(:mtu, Shapes::ShapeRef.new(shape: MTU, location_name: "mtu"))
     NewTransitVirtualInterface.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
     NewTransitVirtualInterface.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
@@ -888,6 +909,7 @@ module Aws::DirectConnect
     NewTransitVirtualInterfaceAllocation.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: "virtualInterfaceName"))
     NewTransitVirtualInterfaceAllocation.add_member(:vlan, Shapes::ShapeRef.new(shape: VLAN, location_name: "vlan"))
     NewTransitVirtualInterfaceAllocation.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, location_name: "asn"))
+    NewTransitVirtualInterfaceAllocation.add_member(:asn_long, Shapes::ShapeRef.new(shape: LongAsn, location_name: "asnLong"))
     NewTransitVirtualInterfaceAllocation.add_member(:mtu, Shapes::ShapeRef.new(shape: MTU, location_name: "mtu"))
     NewTransitVirtualInterfaceAllocation.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
     NewTransitVirtualInterfaceAllocation.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
@@ -1004,6 +1026,7 @@ module Aws::DirectConnect
     VirtualInterface.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: "virtualInterfaceName"))
     VirtualInterface.add_member(:vlan, Shapes::ShapeRef.new(shape: VLAN, location_name: "vlan"))
     VirtualInterface.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, location_name: "asn"))
+    VirtualInterface.add_member(:asn_long, Shapes::ShapeRef.new(shape: LongAsn, location_name: "asnLong"))
     VirtualInterface.add_member(:amazon_side_asn, Shapes::ShapeRef.new(shape: LongAsn, location_name: "amazonSideAsn"))
     VirtualInterface.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
     VirtualInterface.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
@@ -1039,6 +1062,7 @@ module Aws::DirectConnect
     VirtualInterfaceTestHistoryList.member = Shapes::ShapeRef.new(shape: VirtualInterfaceTestHistory)
 
     VirtualInterfaces.add_member(:virtual_interfaces, Shapes::ShapeRef.new(shape: VirtualInterfaceList, location_name: "virtualInterfaces"))
+    VirtualInterfaces.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     VirtualInterfaces.struct_class = Types::VirtualInterfaces
 
 

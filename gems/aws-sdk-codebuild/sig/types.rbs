@@ -1527,6 +1527,7 @@ module Aws::CodeBuild
       attr_accessor scope_configuration: Types::ScopeConfiguration
       attr_accessor status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING")
       attr_accessor status_message: ::String
+      attr_accessor pull_request_build_policy: Types::PullRequestBuildPolicy
       SENSITIVE: []
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2025-08-13)
+------------------
+
+* Feature - Added support for Organizational Unit-level Membership configuration and the ability to resume a cancelled membership.
+
 1.11.0 (2025-08-08)
 ------------------
 

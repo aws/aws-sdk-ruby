@@ -421,6 +421,20 @@ module Aws
                                     ) -> _ListAccountsForParentResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccountsForParentResponseSuccess
 
+      interface _ListAccountsWithInvalidEffectivePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccountsWithInvalidEffectivePolicyResponse]
+        def accounts: () -> ::Array[Types::Account]
+        def policy_type: () -> ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#list_accounts_with_invalid_effective_policy-instance_method
+      def list_accounts_with_invalid_effective_policy: (
+                                                         policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY"),
+                                                         ?next_token: ::String,
+                                                         ?max_results: ::Integer
+                                                       ) -> _ListAccountsWithInvalidEffectivePolicyResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccountsWithInvalidEffectivePolicyResponseSuccess
+
       interface _ListChildrenResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListChildrenResponse]
         def children: () -> ::Array[Types::Child]
@@ -473,6 +487,24 @@ module Aws
                                                  ?max_results: ::Integer
                                                ) -> _ListDelegatedServicesForAccountResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDelegatedServicesForAccountResponseSuccess
+
+      interface _ListEffectivePolicyValidationErrorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEffectivePolicyValidationErrorsResponse]
+        def account_id: () -> ::String
+        def policy_type: () -> ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+        def path: () -> ::String
+        def evaluation_timestamp: () -> ::Time
+        def next_token: () -> ::String
+        def effective_policy_validation_errors: () -> ::Array[Types::EffectivePolicyValidationError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#list_effective_policy_validation_errors-instance_method
+      def list_effective_policy_validation_errors: (
+                                                     account_id: ::String,
+                                                     policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY"),
+                                                     ?next_token: ::String,
+                                                     ?max_results: ::Integer
+                                                   ) -> _ListEffectivePolicyValidationErrorsResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEffectivePolicyValidationErrorsResponseSuccess
 
       interface _ListHandshakesForAccountResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListHandshakesForAccountResponse]

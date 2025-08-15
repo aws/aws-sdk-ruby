@@ -14,6 +14,7 @@ module Aws::SageMaker
 
     include Seahorse::Model
 
+    AcceleratorsAmount = Shapes::IntegerShape.new(name: 'AcceleratorsAmount')
     Accept = Shapes::StringShape.new(name: 'Accept')
     AcceptEula = Shapes::BooleanShape.new(name: 'AcceptEula')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
@@ -1577,6 +1578,7 @@ module Aws::SageMaker
     MediaType = Shapes::StringShape.new(name: 'MediaType')
     MemberDefinition = Shapes::StructureShape.new(name: 'MemberDefinition')
     MemberDefinitions = Shapes::ListShape.new(name: 'MemberDefinitions')
+    MemoryInGiBAmount = Shapes::FloatShape.new(name: 'MemoryInGiBAmount')
     MemoryInMb = Shapes::IntegerShape.new(name: 'MemoryInMb')
     MetadataProperties = Shapes::StructureShape.new(name: 'MetadataProperties')
     MetadataPropertyValue = Shapes::StringShape.new(name: 'MetadataPropertyValue')
@@ -2500,6 +2502,7 @@ module Aws::SageMaker
     TrialSourceArn = Shapes::StringShape.new(name: 'TrialSourceArn')
     TrialSummaries = Shapes::ListShape.new(name: 'TrialSummaries')
     TrialSummary = Shapes::StructureShape.new(name: 'TrialSummary')
+    TrustedIdentityPropagationSettings = Shapes::StructureShape.new(name: 'TrustedIdentityPropagationSettings')
     TtlDuration = Shapes::StructureShape.new(name: 'TtlDuration')
     TtlDurationUnit = Shapes::StringShape.new(name: 'TtlDurationUnit')
     TtlDurationValue = Shapes::IntegerShape.new(name: 'TtlDurationValue')
@@ -2623,6 +2626,7 @@ module Aws::SageMaker
     UsersPerStep = Shapes::IntegerShape.new(name: 'UsersPerStep')
     UtilizationMetric = Shapes::FloatShape.new(name: 'UtilizationMetric')
     UtilizationPercentagePerCore = Shapes::IntegerShape.new(name: 'UtilizationPercentagePerCore')
+    VCpuAmount = Shapes::FloatShape.new(name: 'VCpuAmount')
     ValidationFraction = Shapes::FloatShape.new(name: 'ValidationFraction')
     VariantName = Shapes::StringShape.new(name: 'VariantName')
     VariantProperty = Shapes::StructureShape.new(name: 'VariantProperty')
@@ -3645,6 +3649,9 @@ module Aws::SageMaker
 
     ComputeQuotaResourceConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: ClusterInstanceType, required: true, location_name: "InstanceType"))
     ComputeQuotaResourceConfig.add_member(:count, Shapes::ShapeRef.new(shape: InstanceCount, location_name: "Count"))
+    ComputeQuotaResourceConfig.add_member(:accelerators, Shapes::ShapeRef.new(shape: AcceleratorsAmount, location_name: "Accelerators"))
+    ComputeQuotaResourceConfig.add_member(:v_cpu, Shapes::ShapeRef.new(shape: VCpuAmount, location_name: "VCpu"))
+    ComputeQuotaResourceConfig.add_member(:memory_in_gi_b, Shapes::ShapeRef.new(shape: MemoryInGiBAmount, location_name: "MemoryInGiB"))
     ComputeQuotaResourceConfig.struct_class = Types::ComputeQuotaResourceConfig
 
     ComputeQuotaResourceConfigList.member = Shapes::ShapeRef.new(shape: ComputeQuotaResourceConfig)
@@ -5059,6 +5066,7 @@ module Aws::SageMaker
     DescribeAppResponse.add_member(:user_profile_name, Shapes::ShapeRef.new(shape: UserProfileName, location_name: "UserProfileName"))
     DescribeAppResponse.add_member(:space_name, Shapes::ShapeRef.new(shape: SpaceName, location_name: "SpaceName"))
     DescribeAppResponse.add_member(:status, Shapes::ShapeRef.new(shape: AppStatus, location_name: "Status"))
+    DescribeAppResponse.add_member(:effective_trusted_identity_propagation_status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "EffectiveTrustedIdentityPropagationStatus"))
     DescribeAppResponse.add_member(:recovery_mode, Shapes::ShapeRef.new(shape: Boolean, location_name: "RecoveryMode", metadata: {"box" => true}))
     DescribeAppResponse.add_member(:last_health_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastHealthCheckTimestamp"))
     DescribeAppResponse.add_member(:last_user_activity_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUserActivityTimestamp"))
@@ -6357,6 +6365,7 @@ module Aws::SageMaker
     DomainSettings.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: DomainSecurityGroupIds, location_name: "SecurityGroupIds"))
     DomainSettings.add_member(:r_studio_server_pro_domain_settings, Shapes::ShapeRef.new(shape: RStudioServerProDomainSettings, location_name: "RStudioServerProDomainSettings"))
     DomainSettings.add_member(:execution_role_identity_config, Shapes::ShapeRef.new(shape: ExecutionRoleIdentityConfig, location_name: "ExecutionRoleIdentityConfig"))
+    DomainSettings.add_member(:trusted_identity_propagation_settings, Shapes::ShapeRef.new(shape: TrustedIdentityPropagationSettings, location_name: "TrustedIdentityPropagationSettings"))
     DomainSettings.add_member(:docker_settings, Shapes::ShapeRef.new(shape: DockerSettings, location_name: "DockerSettings"))
     DomainSettings.add_member(:amazon_q_settings, Shapes::ShapeRef.new(shape: AmazonQSettings, location_name: "AmazonQSettings"))
     DomainSettings.add_member(:unified_studio_settings, Shapes::ShapeRef.new(shape: UnifiedStudioSettings, location_name: "UnifiedStudioSettings"))
@@ -6365,6 +6374,7 @@ module Aws::SageMaker
     DomainSettingsForUpdate.add_member(:r_studio_server_pro_domain_settings_for_update, Shapes::ShapeRef.new(shape: RStudioServerProDomainSettingsForUpdate, location_name: "RStudioServerProDomainSettingsForUpdate"))
     DomainSettingsForUpdate.add_member(:execution_role_identity_config, Shapes::ShapeRef.new(shape: ExecutionRoleIdentityConfig, location_name: "ExecutionRoleIdentityConfig"))
     DomainSettingsForUpdate.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: DomainSecurityGroupIds, location_name: "SecurityGroupIds"))
+    DomainSettingsForUpdate.add_member(:trusted_identity_propagation_settings, Shapes::ShapeRef.new(shape: TrustedIdentityPropagationSettings, location_name: "TrustedIdentityPropagationSettings"))
     DomainSettingsForUpdate.add_member(:docker_settings, Shapes::ShapeRef.new(shape: DockerSettings, location_name: "DockerSettings"))
     DomainSettingsForUpdate.add_member(:amazon_q_settings, Shapes::ShapeRef.new(shape: AmazonQSettings, location_name: "AmazonQSettings"))
     DomainSettingsForUpdate.add_member(:unified_studio_settings, Shapes::ShapeRef.new(shape: UnifiedStudioSettings, location_name: "UnifiedStudioSettings"))
@@ -11174,6 +11184,9 @@ module Aws::SageMaker
     TrialSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     TrialSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     TrialSummary.struct_class = Types::TrialSummary
+
+    TrustedIdentityPropagationSettings.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, required: true, location_name: "Status"))
+    TrustedIdentityPropagationSettings.struct_class = Types::TrustedIdentityPropagationSettings
 
     TtlDuration.add_member(:unit, Shapes::ShapeRef.new(shape: TtlDurationUnit, location_name: "Unit"))
     TtlDuration.add_member(:value, Shapes::ShapeRef.new(shape: TtlDurationValue, location_name: "Value"))

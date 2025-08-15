@@ -559,6 +559,11 @@ module Aws::TranscribeService
       SENSITIVE: []
     end
 
+    class MedicalScribeContext
+      attr_accessor patient_context: Types::MedicalScribePatientContext
+      SENSITIVE: []
+    end
+
     class MedicalScribeJob
       attr_accessor medical_scribe_job_name: ::String
       attr_accessor medical_scribe_job_status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
@@ -572,6 +577,7 @@ module Aws::TranscribeService
       attr_accessor settings: Types::MedicalScribeSettings
       attr_accessor data_access_role_arn: ::String
       attr_accessor channel_definitions: ::Array[Types::MedicalScribeChannelDefinition]
+      attr_accessor medical_scribe_context_provided: bool
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -591,6 +597,11 @@ module Aws::TranscribeService
       attr_accessor transcript_file_uri: ::String
       attr_accessor clinical_document_uri: ::String
       SENSITIVE: []
+    end
+
+    class MedicalScribePatientContext
+      attr_accessor pronouns: ("HE_HIM" | "SHE_HER" | "THEY_THEM")
+      SENSITIVE: [:pronouns]
     end
 
     class MedicalScribeSettings
@@ -748,6 +759,7 @@ module Aws::TranscribeService
       attr_accessor settings: Types::MedicalScribeSettings
       attr_accessor channel_definitions: ::Array[Types::MedicalScribeChannelDefinition]
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor medical_scribe_context: Types::MedicalScribeContext
       SENSITIVE: []
     end
 

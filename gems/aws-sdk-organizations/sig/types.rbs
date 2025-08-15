@@ -384,6 +384,14 @@ module Aws::Organizations
       SENSITIVE: []
     end
 
+    class EffectivePolicyValidationError
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      attr_accessor path_to_error: ::String
+      attr_accessor contributing_policies: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class EnableAWSServiceAccessRequest
       attr_accessor service_principal: ::String
       SENSITIVE: []
@@ -526,6 +534,20 @@ module Aws::Organizations
       SENSITIVE: []
     end
 
+    class ListAccountsWithInvalidEffectivePolicyRequest
+      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAccountsWithInvalidEffectivePolicyResponse
+      attr_accessor accounts: ::Array[Types::Account]
+      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListChildrenRequest
       attr_accessor parent_id: ::String
       attr_accessor child_type: ("ACCOUNT" | "ORGANIZATIONAL_UNIT")
@@ -576,6 +598,24 @@ module Aws::Organizations
     class ListDelegatedServicesForAccountResponse
       attr_accessor delegated_services: ::Array[Types::DelegatedService]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEffectivePolicyValidationErrorsRequest
+      attr_accessor account_id: ::String
+      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEffectivePolicyValidationErrorsResponse
+      attr_accessor account_id: ::String
+      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+      attr_accessor path: ::String
+      attr_accessor evaluation_timestamp: ::Time
+      attr_accessor next_token: ::String
+      attr_accessor effective_policy_validation_errors: ::Array[Types::EffectivePolicyValidationError]
       SENSITIVE: []
     end
 

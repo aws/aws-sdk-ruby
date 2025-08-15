@@ -10,13 +10,7 @@
 module Aws::Evs
   module Types
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  A check on the environment to identify environment health and
-    # validate
+    # A check on the environment to identify environment health and validate
     # VMware VCF licensing compliance.
     #
     # @!attribute [rw] type
@@ -62,12 +56,7 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  The connectivity configuration for the environment. Amazon EVS
+    # The connectivity configuration for the environment. Amazon EVS
     # requires that you specify two route server peer IDs. During
     # environment creation, the route server endpoints peer with the NSX
     # uplink VLAN for connectivity to the NSX overlay network.
@@ -424,12 +413,7 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  An object that represents an Amazon EVS environment.
+    # An object that represents an Amazon EVS environment.
     #
     # @!attribute [rw] environment_id
     #   The unique ID for the environment.
@@ -579,12 +563,7 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  A list of environments with summarized environment details.
+    # A list of environments with summarized environment details.
     #
     # @!attribute [rw] environment_id
     #   A unique ID for the environment.
@@ -659,12 +638,7 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  An ESXi host that runs on an Amazon EC2 bare metal instance. Four
+    # An ESXi host that runs on an Amazon EC2 bare metal instance. Four
     # hosts are created in an Amazon EVS environment during environment
     # creation. You can add hosts to an environment using the
     # `CreateEnvironmentHost` operation. Amazon EVS supports 4-16 hosts per
@@ -743,15 +717,9 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
+    # An object that represents a host.
     #
-    #  </note>
-    #
-    #  An object that represents a host.
-    #
-    #  <note markdown="1"> You cannot use `dedicatedHostId` and
-    # `placementGroupId` together in
+    # <note markdown="1"> You cannot use `dedicatedHostId` and `placementGroupId` together in
     # the same `HostInfoForCreate`object. This results in a
     # `ValidationException` response.
     #
@@ -790,20 +758,14 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  An object that represents an initial VLAN subnet for the Amazon EVS
+    # An object that represents an initial VLAN subnet for the Amazon EVS
     # environment. Amazon EVS creates initial VLAN subnets when you first
     # create the environment. Amazon EVS creates the following 10 VLAN
     # subnets: host management VLAN, vMotion VLAN, vSAN VLAN, VTEP VLAN,
     # Edge VTEP VLAN, Management VM VLAN, HCX uplink VLAN, NSX uplink VLAN,
     # expansion VLAN 1, expansion VLAN 2.
     #
-    #  <note markdown="1"> For each Amazon EVS VLAN subnet, you must specify
-    # a non-overlapping
+    # <note markdown="1"> For each Amazon EVS VLAN subnet, you must specify a non-overlapping
     # CIDR block. Amazon EVS VLAN subnets have a minimum CIDR block size of
     # /28 and a maximum size of /24.
     #
@@ -824,12 +786,7 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  The initial VLAN subnets for the environment. Amazon EVS VLAN subnets
+    # The initial VLAN subnets for the environment. Amazon EVS VLAN subnets
     # have a minimum CIDR block size of /28 and a maximum size of /24.
     # Amazon EVS VLAN subnet CIDR blocks must not overlap with other subnets
     # in the VPC.
@@ -910,12 +867,7 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  The license information that Amazon EVS requires to create an
+    # The license information that Amazon EVS requires to create an
     # environment. Amazon EVS requires two license keys: a VCF solution key
     # and a vSAN license key.
     #
@@ -1106,12 +1058,7 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  An elastic network interface (ENI) that connects hosts to the VLAN
+    # An elastic network interface (ENI) that connects hosts to the VLAN
     # subnets. Amazon EVS provisions two identically configured ENIs in the
     # VMkernel management subnet during host creation. One ENI is active,
     # and the other is in standby mode for automatic switchover during a
@@ -1155,12 +1102,7 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  A managed secret that contains the credentials for installing vCenter
+    # A managed secret that contains the credentials for installing vCenter
     # Server, NSX, and SDDC Manager. During environment creation, the Amazon
     # EVS control plane uses Amazon Web Services Secrets Manager to create,
     # encrypt, validate, and store secrets. If you choose to delete your
@@ -1181,12 +1123,7 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  The security groups that allow traffic between the Amazon EVS control
+    # The security groups that allow traffic between the Amazon EVS control
     # plane and your VPC for Amazon EVS service access. If a security group
     # is not specified, Amazon EVS uses the default security group in your
     # account for service access.
@@ -1370,13 +1307,7 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  Stores information about a field passed inside a request that
-    # resulted
+    # Stores information about a field passed inside a request that resulted
     # in an exception.
     #
     # @!attribute [rw] name
@@ -1396,17 +1327,12 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  The DNS hostnames that Amazon EVS uses to install VMware vCenter
+    # The DNS hostnames that Amazon EVS uses to install VMware vCenter
     # Server, NSX, SDDC Manager, and Cloud Builder. Each hostname must be
     # unique, and resolve to a domain name that you've registered in your
     # DNS service of choice. Hostnames cannot be changed.
     #
-    #  VMware VCF requires the deployment of two NSX Edge nodes, and three
+    # VMware VCF requires the deployment of two NSX Edge nodes, and three
     # NSX Manager virtual machines.
     #
     # @!attribute [rw] v_center
@@ -1461,12 +1387,7 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  The VLANs that Amazon EVS creates during environment creation.
+    # The VLANs that Amazon EVS creates during environment creation.
     #
     # @!attribute [rw] vlan_id
     #   The unique ID of the VLAN.

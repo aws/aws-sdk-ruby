@@ -27,6 +27,14 @@ module Aws::DataZone
     AcceptedAssetScope = Shapes::StructureShape.new(name: 'AcceptedAssetScope')
     AcceptedAssetScopes = Shapes::ListShape.new(name: 'AcceptedAssetScopes')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccountInfo = Shapes::StructureShape.new(name: 'AccountInfo')
+    AccountInfoList = Shapes::ListShape.new(name: 'AccountInfoList')
+    AccountPoolId = Shapes::StringShape.new(name: 'AccountPoolId')
+    AccountPoolList = Shapes::ListShape.new(name: 'AccountPoolList')
+    AccountPoolName = Shapes::StringShape.new(name: 'AccountPoolName')
+    AccountPoolSummaries = Shapes::ListShape.new(name: 'AccountPoolSummaries')
+    AccountPoolSummary = Shapes::StructureShape.new(name: 'AccountPoolSummary')
+    AccountSource = Shapes::UnionShape.new(name: 'AccountSource')
     ActionLink = Shapes::StringShape.new(name: 'ActionLink')
     ActionParameters = Shapes::UnionShape.new(name: 'ActionParameters')
     AddEntityOwnerInput = Shapes::StructureShape.new(name: 'AddEntityOwnerInput')
@@ -94,10 +102,12 @@ module Aws::DataZone
     AuthorizedPrincipalIdentifiers = Shapes::ListShape.new(name: 'AuthorizedPrincipalIdentifiers')
     AwsAccount = Shapes::UnionShape.new(name: 'AwsAccount')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
+    AwsAccountName = Shapes::StringShape.new(name: 'AwsAccountName')
     AwsConsoleLinkParameters = Shapes::StructureShape.new(name: 'AwsConsoleLinkParameters')
     AwsLocation = Shapes::StructureShape.new(name: 'AwsLocation')
     AwsLocationAccessRoleString = Shapes::StringShape.new(name: 'AwsLocationAccessRoleString')
     AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
+    AwsRegionList = Shapes::ListShape.new(name: 'AwsRegionList')
     BasicAuthenticationCredentials = Shapes::StructureShape.new(name: 'BasicAuthenticationCredentials')
     BasicAuthenticationCredentialsPasswordString = Shapes::StringShape.new(name: 'BasicAuthenticationCredentialsPasswordString')
     BasicAuthenticationCredentialsUserNameString = Shapes::StringShape.new(name: 'BasicAuthenticationCredentialsUserNameString')
@@ -131,6 +141,8 @@ module Aws::DataZone
     ConnectionSummaries = Shapes::ListShape.new(name: 'ConnectionSummaries')
     ConnectionSummary = Shapes::StructureShape.new(name: 'ConnectionSummary')
     ConnectionType = Shapes::StringShape.new(name: 'ConnectionType')
+    CreateAccountPoolInput = Shapes::StructureShape.new(name: 'CreateAccountPoolInput')
+    CreateAccountPoolOutput = Shapes::StructureShape.new(name: 'CreateAccountPoolOutput')
     CreateAssetFilterInput = Shapes::StructureShape.new(name: 'CreateAssetFilterInput')
     CreateAssetFilterOutput = Shapes::StructureShape.new(name: 'CreateAssetFilterOutput')
     CreateAssetInput = Shapes::StructureShape.new(name: 'CreateAssetInput')
@@ -202,6 +214,7 @@ module Aws::DataZone
     CredentialMapKeyString = Shapes::StringShape.new(name: 'CredentialMapKeyString')
     CredentialMapValueString = Shapes::StringShape.new(name: 'CredentialMapValueString')
     CronString = Shapes::StringShape.new(name: 'CronString')
+    CustomAccountPoolHandler = Shapes::StructureShape.new(name: 'CustomAccountPoolHandler')
     CustomParameter = Shapes::StructureShape.new(name: 'CustomParameter')
     CustomParameterKeyNameString = Shapes::StringShape.new(name: 'CustomParameterKeyNameString')
     CustomParameterList = Shapes::ListShape.new(name: 'CustomParameterList')
@@ -241,6 +254,8 @@ module Aws::DataZone
     DataZoneEntityType = Shapes::StringShape.new(name: 'DataZoneEntityType')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime', timestampFormat: "iso8601")
     DecisionComment = Shapes::StringShape.new(name: 'DecisionComment')
+    DeleteAccountPoolInput = Shapes::StructureShape.new(name: 'DeleteAccountPoolInput')
+    DeleteAccountPoolOutput = Shapes::StructureShape.new(name: 'DeleteAccountPoolOutput')
     DeleteAssetFilterInput = Shapes::StructureShape.new(name: 'DeleteAssetFilterInput')
     DeleteAssetInput = Shapes::StructureShape.new(name: 'DeleteAssetInput')
     DeleteAssetOutput = Shapes::StructureShape.new(name: 'DeleteAssetOutput')
@@ -359,6 +374,7 @@ module Aws::DataZone
     EnvironmentProfileName = Shapes::StringShape.new(name: 'EnvironmentProfileName')
     EnvironmentProfileSummaries = Shapes::ListShape.new(name: 'EnvironmentProfileSummaries')
     EnvironmentProfileSummary = Shapes::StructureShape.new(name: 'EnvironmentProfileSummary')
+    EnvironmentResolvedAccount = Shapes::StructureShape.new(name: 'EnvironmentResolvedAccount')
     EnvironmentStatus = Shapes::StringShape.new(name: 'EnvironmentStatus')
     EnvironmentSummaries = Shapes::ListShape.new(name: 'EnvironmentSummaries')
     EnvironmentSummary = Shapes::StructureShape.new(name: 'EnvironmentSummary')
@@ -398,6 +414,8 @@ module Aws::DataZone
     Forms = Shapes::StringShape.new(name: 'Forms')
     FormsInputMap = Shapes::MapShape.new(name: 'FormsInputMap')
     FormsOutputMap = Shapes::MapShape.new(name: 'FormsOutputMap')
+    GetAccountPoolInput = Shapes::StructureShape.new(name: 'GetAccountPoolInput')
+    GetAccountPoolOutput = Shapes::StructureShape.new(name: 'GetAccountPoolOutput')
     GetAssetFilterInput = Shapes::StructureShape.new(name: 'GetAssetFilterInput')
     GetAssetFilterOutput = Shapes::StructureShape.new(name: 'GetAssetFilterOutput')
     GetAssetInput = Shapes::StructureShape.new(name: 'GetAssetInput')
@@ -548,6 +566,8 @@ module Aws::DataZone
     JobType = Shapes::StringShape.new(name: 'JobType')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LakeFormationConfiguration = Shapes::StructureShape.new(name: 'LakeFormationConfiguration')
+    LambdaExecutionRoleArn = Shapes::StringShape.new(name: 'LambdaExecutionRoleArn')
+    LambdaFunctionArn = Shapes::StringShape.new(name: 'LambdaFunctionArn')
     LastName = Shapes::StringShape.new(name: 'LastName')
     LessThanExpression = Shapes::StructureShape.new(name: 'LessThanExpression')
     LessThanOrEqualToExpression = Shapes::StructureShape.new(name: 'LessThanOrEqualToExpression')
@@ -571,6 +591,10 @@ module Aws::DataZone
     LineageSqlQueryRunDetails = Shapes::StructureShape.new(name: 'LineageSqlQueryRunDetails')
     LineageSyncSchedule = Shapes::StructureShape.new(name: 'LineageSyncSchedule')
     LineageSyncScheduleScheduleString = Shapes::StringShape.new(name: 'LineageSyncScheduleScheduleString')
+    ListAccountPoolsInput = Shapes::StructureShape.new(name: 'ListAccountPoolsInput')
+    ListAccountPoolsOutput = Shapes::StructureShape.new(name: 'ListAccountPoolsOutput')
+    ListAccountsInAccountPoolInput = Shapes::StructureShape.new(name: 'ListAccountsInAccountPoolInput')
+    ListAccountsInAccountPoolOutput = Shapes::StructureShape.new(name: 'ListAccountsInAccountPoolOutput')
     ListAssetFiltersInput = Shapes::StructureShape.new(name: 'ListAssetFiltersInput')
     ListAssetFiltersOutput = Shapes::StructureShape.new(name: 'ListAssetFiltersOutput')
     ListAssetRevisionsInput = Shapes::StructureShape.new(name: 'ListAssetRevisionsInput')
@@ -801,6 +825,7 @@ module Aws::DataZone
     RemovePolicyGrantOutput = Shapes::StructureShape.new(name: 'RemovePolicyGrantOutput')
     RequestReason = Shapes::StringShape.new(name: 'RequestReason')
     RequiredMetadataFormList = Shapes::ListShape.new(name: 'RequiredMetadataFormList')
+    ResolutionStrategy = Shapes::StringShape.new(name: 'ResolutionStrategy')
     Resource = Shapes::StructureShape.new(name: 'Resource')
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -878,6 +903,7 @@ module Aws::DataZone
     SingleSignOn = Shapes::StructureShape.new(name: 'SingleSignOn')
     SingleSignOnIdcInstanceArnString = Shapes::StringShape.new(name: 'SingleSignOnIdcInstanceArnString')
     Smithy = Shapes::StringShape.new(name: 'Smithy')
+    SortFieldAccountPool = Shapes::StringShape.new(name: 'SortFieldAccountPool')
     SortFieldConnection = Shapes::StringShape.new(name: 'SortFieldConnection')
     SortFieldProject = Shapes::StringShape.new(name: 'SortFieldProject')
     SortKey = Shapes::StringShape.new(name: 'SortKey')
@@ -994,6 +1020,8 @@ module Aws::DataZone
     Unit = Shapes::StructureShape.new(name: 'Unit')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAccountPoolInput = Shapes::StructureShape.new(name: 'UpdateAccountPoolInput')
+    UpdateAccountPoolOutput = Shapes::StructureShape.new(name: 'UpdateAccountPoolOutput')
     UpdateAssetFilterInput = Shapes::StructureShape.new(name: 'UpdateAssetFilterInput')
     UpdateAssetFilterOutput = Shapes::StructureShape.new(name: 'UpdateAssetFilterOutput')
     UpdateConnectionInput = Shapes::StructureShape.new(name: 'UpdateConnectionInput')
@@ -1113,6 +1141,34 @@ module Aws::DataZone
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AccountInfo.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "awsAccountId"))
+    AccountInfo.add_member(:aws_account_name, Shapes::ShapeRef.new(shape: AwsAccountName, location_name: "awsAccountName"))
+    AccountInfo.add_member(:supported_regions, Shapes::ShapeRef.new(shape: AwsRegionList, required: true, location_name: "supportedRegions"))
+    AccountInfo.struct_class = Types::AccountInfo
+
+    AccountInfoList.member = Shapes::ShapeRef.new(shape: AccountInfo)
+
+    AccountPoolList.member = Shapes::ShapeRef.new(shape: AccountPoolId)
+
+    AccountPoolSummaries.member = Shapes::ShapeRef.new(shape: AccountPoolSummary)
+
+    AccountPoolSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
+    AccountPoolSummary.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, location_name: "domainId"))
+    AccountPoolSummary.add_member(:domain_unit_id, Shapes::ShapeRef.new(shape: DomainUnitId, location_name: "domainUnitId"))
+    AccountPoolSummary.add_member(:id, Shapes::ShapeRef.new(shape: AccountPoolId, location_name: "id"))
+    AccountPoolSummary.add_member(:name, Shapes::ShapeRef.new(shape: AccountPoolName, location_name: "name"))
+    AccountPoolSummary.add_member(:resolution_strategy, Shapes::ShapeRef.new(shape: ResolutionStrategy, location_name: "resolutionStrategy"))
+    AccountPoolSummary.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
+    AccountPoolSummary.struct_class = Types::AccountPoolSummary
+
+    AccountSource.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountInfoList, location_name: "accounts"))
+    AccountSource.add_member(:custom_account_pool_handler, Shapes::ShapeRef.new(shape: CustomAccountPoolHandler, location_name: "customAccountPoolHandler"))
+    AccountSource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AccountSource.add_member_subclass(:accounts, Types::AccountSource::Accounts)
+    AccountSource.add_member_subclass(:custom_account_pool_handler, Types::AccountSource::CustomAccountPoolHandler)
+    AccountSource.add_member_subclass(:unknown, Types::AccountSource::Unknown)
+    AccountSource.struct_class = Types::AccountSource
 
     ActionParameters.add_member(:aws_console_link, Shapes::ShapeRef.new(shape: AwsConsoleLinkParameters, location_name: "awsConsoleLink"))
     ActionParameters.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -1351,6 +1407,8 @@ module Aws::DataZone
     AwsLocation.add_member(:iam_connection_id, Shapes::ShapeRef.new(shape: ConnectionId, location_name: "iamConnectionId"))
     AwsLocation.struct_class = Types::AwsLocation
 
+    AwsRegionList.member = Shapes::ShapeRef.new(shape: AwsRegion)
+
     BasicAuthenticationCredentials.add_member(:password, Shapes::ShapeRef.new(shape: BasicAuthenticationCredentialsPasswordString, location_name: "password"))
     BasicAuthenticationCredentials.add_member(:user_name, Shapes::ShapeRef.new(shape: BasicAuthenticationCredentialsUserNameString, location_name: "userName"))
     BasicAuthenticationCredentials.struct_class = Types::BasicAuthenticationCredentials
@@ -1482,6 +1540,26 @@ module Aws::DataZone
     ConnectionSummary.add_member(:props, Shapes::ShapeRef.new(shape: ConnectionPropertiesOutput, location_name: "props"))
     ConnectionSummary.add_member(:type, Shapes::ShapeRef.new(shape: ConnectionType, required: true, location_name: "type"))
     ConnectionSummary.struct_class = Types::ConnectionSummary
+
+    CreateAccountPoolInput.add_member(:account_source, Shapes::ShapeRef.new(shape: AccountSource, required: true, location_name: "accountSource"))
+    CreateAccountPoolInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateAccountPoolInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    CreateAccountPoolInput.add_member(:name, Shapes::ShapeRef.new(shape: AccountPoolName, required: true, location_name: "name"))
+    CreateAccountPoolInput.add_member(:resolution_strategy, Shapes::ShapeRef.new(shape: ResolutionStrategy, required: true, location_name: "resolutionStrategy"))
+    CreateAccountPoolInput.struct_class = Types::CreateAccountPoolInput
+
+    CreateAccountPoolOutput.add_member(:account_source, Shapes::ShapeRef.new(shape: AccountSource, required: true, location_name: "accountSource"))
+    CreateAccountPoolOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    CreateAccountPoolOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, required: true, location_name: "createdBy"))
+    CreateAccountPoolOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateAccountPoolOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, location_name: "domainId"))
+    CreateAccountPoolOutput.add_member(:domain_unit_id, Shapes::ShapeRef.new(shape: DomainUnitId, location_name: "domainUnitId"))
+    CreateAccountPoolOutput.add_member(:id, Shapes::ShapeRef.new(shape: AccountPoolId, location_name: "id"))
+    CreateAccountPoolOutput.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastUpdatedAt"))
+    CreateAccountPoolOutput.add_member(:name, Shapes::ShapeRef.new(shape: AccountPoolName, location_name: "name"))
+    CreateAccountPoolOutput.add_member(:resolution_strategy, Shapes::ShapeRef.new(shape: ResolutionStrategy, location_name: "resolutionStrategy"))
+    CreateAccountPoolOutput.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
+    CreateAccountPoolOutput.struct_class = Types::CreateAccountPoolOutput
 
     CreateAssetFilterInput.add_member(:asset_identifier, Shapes::ShapeRef.new(shape: AssetId, required: true, location: "uri", location_name: "assetIdentifier"))
     CreateAssetFilterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -2093,6 +2171,10 @@ module Aws::DataZone
     CredentialMap.key = Shapes::ShapeRef.new(shape: CredentialMapKeyString)
     CredentialMap.value = Shapes::ShapeRef.new(shape: CredentialMapValueString)
 
+    CustomAccountPoolHandler.add_member(:lambda_execution_role_arn, Shapes::ShapeRef.new(shape: LambdaExecutionRoleArn, location_name: "lambdaExecutionRoleArn"))
+    CustomAccountPoolHandler.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: LambdaFunctionArn, required: true, location_name: "lambdaFunctionArn"))
+    CustomAccountPoolHandler.struct_class = Types::CustomAccountPoolHandler
+
     CustomParameter.add_member(:default_value, Shapes::ShapeRef.new(shape: String, location_name: "defaultValue"))
     CustomParameter.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CustomParameter.add_member(:field_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fieldType"))
@@ -2241,6 +2323,12 @@ module Aws::DataZone
     DataSourceSummary.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "type"))
     DataSourceSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "updatedAt"))
     DataSourceSummary.struct_class = Types::DataSourceSummary
+
+    DeleteAccountPoolInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    DeleteAccountPoolInput.add_member(:identifier, Shapes::ShapeRef.new(shape: AccountPoolId, required: true, location: "uri", location_name: "identifier"))
+    DeleteAccountPoolInput.struct_class = Types::DeleteAccountPoolInput
+
+    DeleteAccountPoolOutput.struct_class = Types::DeleteAccountPoolOutput
 
     DeleteAssetFilterInput.add_member(:asset_identifier, Shapes::ShapeRef.new(shape: AssetId, required: true, location: "uri", location_name: "assetIdentifier"))
     DeleteAssetFilterInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -2543,8 +2631,9 @@ module Aws::DataZone
     EnvironmentBlueprintSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     EnvironmentBlueprintSummary.struct_class = Types::EnvironmentBlueprintSummary
 
-    EnvironmentConfiguration.add_member(:aws_account, Shapes::ShapeRef.new(shape: AwsAccount, required: true, location_name: "awsAccount"))
-    EnvironmentConfiguration.add_member(:aws_region, Shapes::ShapeRef.new(shape: Region, required: true, location_name: "awsRegion"))
+    EnvironmentConfiguration.add_member(:account_pools, Shapes::ShapeRef.new(shape: AccountPoolList, location_name: "accountPools"))
+    EnvironmentConfiguration.add_member(:aws_account, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "awsAccount"))
+    EnvironmentConfiguration.add_member(:aws_region, Shapes::ShapeRef.new(shape: Region, location_name: "awsRegion"))
     EnvironmentConfiguration.add_member(:configuration_parameters, Shapes::ShapeRef.new(shape: EnvironmentConfigurationParametersDetails, location_name: "configurationParameters"))
     EnvironmentConfiguration.add_member(:deployment_mode, Shapes::ShapeRef.new(shape: DeploymentMode, location_name: "deploymentMode"))
     EnvironmentConfiguration.add_member(:deployment_order, Shapes::ShapeRef.new(shape: DeploymentOrder, location_name: "deploymentOrder"))
@@ -2569,6 +2658,7 @@ module Aws::DataZone
     EnvironmentConfigurationUserParameter.add_member(:environment_configuration_name, Shapes::ShapeRef.new(shape: EnvironmentConfigurationName, location_name: "environmentConfigurationName"))
     EnvironmentConfigurationUserParameter.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId"))
     EnvironmentConfigurationUserParameter.add_member(:environment_parameters, Shapes::ShapeRef.new(shape: EnvironmentParametersList, location_name: "environmentParameters"))
+    EnvironmentConfigurationUserParameter.add_member(:environment_resolved_account, Shapes::ShapeRef.new(shape: EnvironmentResolvedAccount, location_name: "environmentResolvedAccount"))
     EnvironmentConfigurationUserParameter.struct_class = Types::EnvironmentConfigurationUserParameter
 
     EnvironmentConfigurationUserParametersList.member = Shapes::ShapeRef.new(shape: EnvironmentConfigurationUserParameter)
@@ -2608,6 +2698,11 @@ module Aws::DataZone
     EnvironmentProfileSummary.add_member(:project_id, Shapes::ShapeRef.new(shape: ProjectId, location_name: "projectId"))
     EnvironmentProfileSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     EnvironmentProfileSummary.struct_class = Types::EnvironmentProfileSummary
+
+    EnvironmentResolvedAccount.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "awsAccountId"))
+    EnvironmentResolvedAccount.add_member(:region_name, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "regionName"))
+    EnvironmentResolvedAccount.add_member(:source_account_pool_id, Shapes::ShapeRef.new(shape: AccountPoolId, location_name: "sourceAccountPoolId"))
+    EnvironmentResolvedAccount.struct_class = Types::EnvironmentResolvedAccount
 
     EnvironmentSummaries.member = Shapes::ShapeRef.new(shape: EnvironmentSummary)
 
@@ -2713,6 +2808,23 @@ module Aws::DataZone
 
     FormsOutputMap.key = Shapes::ShapeRef.new(shape: FormName)
     FormsOutputMap.value = Shapes::ShapeRef.new(shape: FormEntryOutput)
+
+    GetAccountPoolInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    GetAccountPoolInput.add_member(:identifier, Shapes::ShapeRef.new(shape: AccountPoolId, required: true, location: "uri", location_name: "identifier"))
+    GetAccountPoolInput.struct_class = Types::GetAccountPoolInput
+
+    GetAccountPoolOutput.add_member(:account_source, Shapes::ShapeRef.new(shape: AccountSource, required: true, location_name: "accountSource"))
+    GetAccountPoolOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    GetAccountPoolOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, required: true, location_name: "createdBy"))
+    GetAccountPoolOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    GetAccountPoolOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, location_name: "domainId"))
+    GetAccountPoolOutput.add_member(:domain_unit_id, Shapes::ShapeRef.new(shape: DomainUnitId, location_name: "domainUnitId"))
+    GetAccountPoolOutput.add_member(:id, Shapes::ShapeRef.new(shape: AccountPoolId, location_name: "id"))
+    GetAccountPoolOutput.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastUpdatedAt"))
+    GetAccountPoolOutput.add_member(:name, Shapes::ShapeRef.new(shape: AccountPoolName, location_name: "name"))
+    GetAccountPoolOutput.add_member(:resolution_strategy, Shapes::ShapeRef.new(shape: ResolutionStrategy, location_name: "resolutionStrategy"))
+    GetAccountPoolOutput.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
+    GetAccountPoolOutput.struct_class = Types::GetAccountPoolOutput
 
     GetAssetFilterInput.add_member(:asset_identifier, Shapes::ShapeRef.new(shape: AssetId, required: true, location: "uri", location_name: "assetIdentifier"))
     GetAssetFilterInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -3610,6 +3722,28 @@ module Aws::DataZone
 
     LineageSyncSchedule.add_member(:schedule, Shapes::ShapeRef.new(shape: LineageSyncScheduleScheduleString, location_name: "schedule"))
     LineageSyncSchedule.struct_class = Types::LineageSyncSchedule
+
+    ListAccountPoolsInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    ListAccountPoolsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAccountPoolsInput.add_member(:name, Shapes::ShapeRef.new(shape: AccountPoolName, location: "querystring", location_name: "name"))
+    ListAccountPoolsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListAccountPoolsInput.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortFieldAccountPool, location: "querystring", location_name: "sortBy"))
+    ListAccountPoolsInput.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "sortOrder"))
+    ListAccountPoolsInput.struct_class = Types::ListAccountPoolsInput
+
+    ListAccountPoolsOutput.add_member(:items, Shapes::ShapeRef.new(shape: AccountPoolSummaries, location_name: "items"))
+    ListAccountPoolsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListAccountPoolsOutput.struct_class = Types::ListAccountPoolsOutput
+
+    ListAccountsInAccountPoolInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    ListAccountsInAccountPoolInput.add_member(:identifier, Shapes::ShapeRef.new(shape: AccountPoolId, required: true, location: "uri", location_name: "identifier"))
+    ListAccountsInAccountPoolInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAccountsInAccountPoolInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListAccountsInAccountPoolInput.struct_class = Types::ListAccountsInAccountPoolInput
+
+    ListAccountsInAccountPoolOutput.add_member(:items, Shapes::ShapeRef.new(shape: AccountInfoList, location_name: "items"))
+    ListAccountsInAccountPoolOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListAccountsInAccountPoolOutput.struct_class = Types::ListAccountsInAccountPoolOutput
 
     ListAssetFiltersInput.add_member(:asset_identifier, Shapes::ShapeRef.new(shape: AssetId, required: true, location: "uri", location_name: "assetIdentifier"))
     ListAssetFiltersInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -5183,6 +5317,27 @@ module Aws::DataZone
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateAccountPoolInput.add_member(:account_source, Shapes::ShapeRef.new(shape: AccountSource, location_name: "accountSource"))
+    UpdateAccountPoolInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateAccountPoolInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    UpdateAccountPoolInput.add_member(:identifier, Shapes::ShapeRef.new(shape: AccountPoolId, required: true, location: "uri", location_name: "identifier"))
+    UpdateAccountPoolInput.add_member(:name, Shapes::ShapeRef.new(shape: AccountPoolName, location_name: "name"))
+    UpdateAccountPoolInput.add_member(:resolution_strategy, Shapes::ShapeRef.new(shape: ResolutionStrategy, location_name: "resolutionStrategy"))
+    UpdateAccountPoolInput.struct_class = Types::UpdateAccountPoolInput
+
+    UpdateAccountPoolOutput.add_member(:account_source, Shapes::ShapeRef.new(shape: AccountSource, required: true, location_name: "accountSource"))
+    UpdateAccountPoolOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    UpdateAccountPoolOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, required: true, location_name: "createdBy"))
+    UpdateAccountPoolOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateAccountPoolOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, location_name: "domainId"))
+    UpdateAccountPoolOutput.add_member(:domain_unit_id, Shapes::ShapeRef.new(shape: DomainUnitId, location_name: "domainUnitId"))
+    UpdateAccountPoolOutput.add_member(:id, Shapes::ShapeRef.new(shape: AccountPoolId, location_name: "id"))
+    UpdateAccountPoolOutput.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastUpdatedAt"))
+    UpdateAccountPoolOutput.add_member(:name, Shapes::ShapeRef.new(shape: AccountPoolName, location_name: "name"))
+    UpdateAccountPoolOutput.add_member(:resolution_strategy, Shapes::ShapeRef.new(shape: ResolutionStrategy, location_name: "resolutionStrategy"))
+    UpdateAccountPoolOutput.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
+    UpdateAccountPoolOutput.struct_class = Types::UpdateAccountPoolOutput
+
     UpdateAssetFilterInput.add_member(:asset_identifier, Shapes::ShapeRef.new(shape: AssetId, required: true, location: "uri", location_name: "assetIdentifier"))
     UpdateAssetFilterInput.add_member(:configuration, Shapes::ShapeRef.new(shape: AssetFilterConfiguration, location_name: "configuration"))
     UpdateAssetFilterInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -5738,6 +5893,22 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
 
+      api.add_operation(:create_account_pool, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAccountPool"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/account-pools"
+        o.input = Shapes::ShapeRef.new(shape: CreateAccountPoolInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateAccountPoolOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
       api.add_operation(:create_asset, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAsset"
         o.http_method = "POST"
@@ -6137,6 +6308,20 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
 
+      api.add_operation(:delete_account_pool, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccountPool"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/account-pools/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccountPoolInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAccountPoolOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
       api.add_operation(:delete_asset, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteAsset"
         o.http_method = "DELETE"
@@ -6501,6 +6686,20 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:get_account_pool, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccountPool"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/account-pools/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetAccountPoolInput)
+        o.output = Shapes::ShapeRef.new(shape: GetAccountPoolOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
@@ -6985,6 +7184,45 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:list_account_pools, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAccountPools"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/account-pools"
+        o.input = Shapes::ShapeRef.new(shape: ListAccountPoolsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListAccountPoolsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_accounts_in_account_pool, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAccountsInAccountPool"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/account-pools/{identifier}/accounts"
+        o.input = Shapes::ShapeRef.new(shape: ListAccountsInAccountPoolInput)
+        o.output = Shapes::ShapeRef.new(shape: ListAccountsInAccountPoolOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_asset_filters, Seahorse::Model::Operation.new.tap do |o|
@@ -7871,6 +8109,22 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:update_account_pool, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAccountPool"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/account-pools/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAccountPoolInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAccountPoolOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
 
