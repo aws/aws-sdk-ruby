@@ -398,7 +398,7 @@ module Aws
         end
         true
       end
-      deprecated(:upload_stream, use: `Aws::S3::TransferManager.new.upload_stream`, version: 'next major version')
+      deprecated(:upload_stream, use: 'Aws::S3::TransferManager.new.upload_stream', version: 'next major version')
 
       # Uploads a file from disk to the current object in S3.
       #
