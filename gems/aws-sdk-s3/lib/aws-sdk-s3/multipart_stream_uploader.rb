@@ -9,19 +9,11 @@ module Aws
   module S3
     # @api private
     class MultipartStreamUploader
-      # @api private
+
       DEFAULT_PART_SIZE = 5 * 1024 * 1024 # 5MB
-
-      # @api private
       DEFAULT_THREAD_COUNT = 10
-
-      # @api private
       CREATE_OPTIONS = Set.new(Client.api.operation(:create_multipart_upload).input.shape.member_names)
-
-      # @api private
       UPLOAD_PART_OPTIONS = Set.new(Client.api.operation(:upload_part).input.shape.member_names)
-
-      # @api private
       COMPLETE_UPLOAD_OPTIONS = Set.new(Client.api.operation(:complete_multipart_upload).input.shape.member_names)
 
       # @option options [Client] :client

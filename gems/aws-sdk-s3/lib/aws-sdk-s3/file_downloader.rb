@@ -9,10 +9,7 @@ module Aws
     # @api private
     class FileDownloader
 
-      # @api private
       MIN_CHUNK_SIZE = 5 * 1024 * 1024
-
-      # @api private
       MAX_PARTS = 10_000
 
       def initialize(options = {})

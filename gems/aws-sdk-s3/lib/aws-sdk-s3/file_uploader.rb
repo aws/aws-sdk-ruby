@@ -7,7 +7,6 @@ module Aws
     # @api private
     class FileUploader
 
-      # @api private
       DEFAULT_MULTIPART_THRESHOLD = 100 * 1024 * 1024
 
       # @param [Hash] options
