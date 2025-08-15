@@ -95,9 +95,8 @@ module Aws
       # @see Client#head_object
       def download_file(destination, bucket:, key:, **options)
         downloader = FileDownloader.new(client: @client)
-        Aws::Plugins::UserAgent.metric('S3_TRANSFER') do
-          downloader.download(destination, options.merge(bucket: bucket, key: key))
-        end
+        # TODO: wrap with user-agent metric tracking
+        downloader.download(destination, options.merge(bucket: bucket, key: key))
         true
       end
 
@@ -169,11 +168,13 @@ module Aws
       # @see Client#complete_multipart_upload
       # @see Client#upload_part
       def upload_file(source, bucket:, key:, **options)
-        upload_opts = options.dup
-        uploader = FileUploader.new(multipart_threshold: upload_opts.delete(:multipart_threshold), client: @client)
-        response = Aws::Plugins::UserAgent.metric('S3_TRANSFER') do
-          uploader.upload(source, upload_opts.merge(bucket: bucket, key: key))
-        end
+        uploading_options = options.dup
+        uploader = FileUploader.new(
+          multipart_threshold: uploading_options.delete(:multipart_threshold),
+          client: @client
+        )
+        # TODO: wrap with user-agent metric tracking
+        response = uploader.upload(source, uploading_options.merge(bucket: bucket, key: key))
         yield response if block_given?
         true
       end
@@ -230,16 +231,15 @@ module Aws
       # @see Client#complete_multipart_upload
       # @see Client#upload_part
       def upload_stream(bucket:, key:, **options, &block)
-        upload_opts = options.dup
+        uploading_options = options.dup
         uploader = MultipartStreamUploader.new(
           client: @client,
-          thread_count: upload_opts.delete(:thread_count),
-          tempfile: upload_opts.delete(:tempfile),
-          part_size: upload_opts.delete(:part_size)
+          thread_count: uploading_options.delete(:thread_count),
+          tempfile: uploading_options.delete(:tempfile),
+          part_size: uploading_options.delete(:part_size)
         )
-        Aws::Plugins::UserAgent.metric('S3_TRANSFER') do
-          uploader.upload(upload_opts.merge(bucket: bucket, key: key), &block)
-        end
+        # TODO: wrap with user-agent metric tracking
+        uploader.upload(uploading_options.merge(bucket: bucket, key: key), &block)
         true
       end
     end

@@ -29,16 +29,18 @@ module Aws
         @params = options
         validate!
 
-        case @mode
-        when 'auto' then multipart_download
-        when 'single_request' then single_request
-        when 'get_range'
-          raise ArgumentError, 'In get_range mode, :chunk_size must be provided' unless @chunk_size
+        Aws::Plugins::UserAgent.metric('S3_TRANSFER') do
+          case @mode
+          when 'auto' then multipart_download
+          when 'single_request' then single_request
+          when 'get_range'
+            raise ArgumentError, 'In get_range mode, :chunk_size must be provided' unless @chunk_size
 
-          resp = @client.head_object(@params)
-          multithreaded_get_by_ranges(resp.content_length, resp.etag)
-        else
-          raise ArgumentError, "Invalid mode #{@mode} provided, :mode should be single_request, get_range or auto"
+            resp = @client.head_object(@params)
+            multithreaded_get_by_ranges(resp.content_length, resp.etag)
+          else
+            raise ArgumentError, "Invalid mode #{@mode} provided, :mode should be single_request, get_range or auto"
+          end
         end
         File.rename(@temp_path, @path) if @temp_path
       ensure
