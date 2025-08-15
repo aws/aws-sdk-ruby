@@ -8,15 +8,6 @@ module Aws
       # Make the method redefinable
       alias_method :copy_from, :copy_from
 
-      # @api private
-      def self.deprecation_msg(method)
-        "#################### DEPRECATION WARNING ####################\n"\
-          "Called deprecated method `#{method}` of #{self}.\n"\
-          "Use method `#{method}` from Aws::S3::TransferManager instead.\n"\
-          "#{self} support will be removed in next major version.\n"\
-          '#############################################################'
-      end
-
       # Copies another object to this object. Use `multipart_copy: true`
       # for large objects. This is required for objects that exceed 5GB.
       #
@@ -404,7 +395,7 @@ module Aws
         end
         true
       end
-      deprecated(:upload_stream, message: deprecation_msg(:upload_stream))
+      deprecated(:upload_stream, use: `Aws::S3::TransferManager.new.upload_stream`, version: 'next major version')
 
       # Uploads a file from disk to the current object in S3.
       #
@@ -472,7 +463,7 @@ module Aws
         yield response if block_given?
         true
       end
-      deprecated(:upload_file, message: deprecation_msg(:upload_file))
+      deprecated(:upload_file, use: 'Aws::S3::TransferManager.new.upload_file', version: 'next major version')
 
       # Downloads a file in S3 to a path on disk.
       #
@@ -542,7 +533,7 @@ module Aws
         end
         true
       end
-      deprecated(:download_file, message: deprecation_msg(:download_file))
+      deprecated(:download_file, use: 'Aws::S3::TransferManager.new.download_file', version: 'next major version')
 
       class Collection < Aws::Resources::Collection
         alias_method :delete, :batch_delete!
