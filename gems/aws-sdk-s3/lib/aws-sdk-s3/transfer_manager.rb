@@ -95,7 +95,6 @@ module Aws
       # @see Client#head_object
       def download_file(destination, bucket:, key:, **options)
         downloader = FileDownloader.new(client: @client)
-        # TODO: wrap with user-agent metric tracking
         downloader.download(destination, options.merge(bucket: bucket, key: key))
         true
       end
@@ -173,7 +172,6 @@ module Aws
           multipart_threshold: uploading_options.delete(:multipart_threshold),
           client: @client
         )
-        # TODO: wrap with user-agent metric tracking
         response = uploader.upload(source, uploading_options.merge(bucket: bucket, key: key))
         yield response if block_given?
         true
@@ -238,7 +236,6 @@ module Aws
           tempfile: uploading_options.delete(:tempfile),
           part_size: uploading_options.delete(:part_size)
         )
-        # TODO: wrap with user-agent metric tracking
         uploader.upload(uploading_options.merge(bucket: bucket, key: key), &block)
         true
       end
