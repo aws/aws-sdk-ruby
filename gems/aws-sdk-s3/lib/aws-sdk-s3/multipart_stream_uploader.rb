@@ -170,7 +170,13 @@ module Aws
       end
 
       def ordered_parts(parts)
-        parts.size.times.map { parts.pop }.sort_by { |part| part[:part_number] }
+        sorted = []
+        until parts.empty?
+          part = parts.pop
+          index = sorted.bsearch_index { |p| p[:part_number] >= part[:part_number] } || sorted.size
+          sorted.insert(index, part)
+        end
+        sorted
       end
 
       def clear_body(body)
