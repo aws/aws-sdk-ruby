@@ -24,6 +24,7 @@ module Aws
       # @option options [Integer] :thread_count (DEFAULT_THREAD_COUNT)
       def initialize(options = {})
         @client = options[:client] || Client.new
+        @executor = options[:executor]
         @thread_count = options[:thread_count] || DEFAULT_THREAD_COUNT
       end
 
@@ -66,7 +67,13 @@ module Aws
       def upload_parts(upload_id, source, options)
         completed = PartList.new
         pending = PartList.new(compute_parts(upload_id, source, options))
-        errors = upload_in_threads(pending, completed, options)
+        errors =
+          if @executor
+            puts "Executor route - using #{@executor}"
+            upload_in_executor(pending, completed, options)
+          else
+            upload_in_threads(pending, completed, options)
+          end
         if errors.empty?
           completed.to_a.sort_by { |part| part[:part_number] }
         else
@@ -135,6 +142,62 @@ module Aws
         end
       end
 
+      def upload_in_executor(pending, completed, options)
+        if (callback = options[:progress_callback])
+          progress = MultipartProgress.new(pending, callback)
+        end
+        max_parts = pending.count
+        completion_queue = Queue.new
+        stop_work = false
+        errors = []
+        counter = 0
+
+        puts "Submitting #{max_parts} tasks"
+        while (part = pending.shift)
+          counter += 1
+          puts "Submitting #{counter} task to executor"
+          @executor.post(part) do |p|
+            if stop_work
+              puts 'Work stopped so skipping'
+              completion_queue << :done
+              next
+            end
+
+            if progress
+              p[:on_chunk_sent] =
+                proc do |_chunk, bytes, _total|
+                  progress.call(p[:part_number], bytes)
+                end
+            end
+
+            begin
+              puts "Uploading #{p[:part_number]}"
+
+              resp = @client.upload_part(p)
+              p[:body].close
+              completed_part = { etag: resp.etag, part_number: p[:part_number] }
+              algorithm = resp.context.params[:checksum_algorithm]
+              k = "checksum_#{algorithm.downcase}".to_sym
+              completed_part[k] = resp.send(k)
+              completed.push(completed_part)
+            rescue StandardError => e
+              puts "Encountered Error #{e}"
+              stop_work = true
+              errors << e
+            ensure
+              puts 'Adding to completion queue'
+              completion_queue << :done
+            end
+            nil
+          end
+        end
+
+        puts "Waiting for #{counter} completion"
+        max_parts.times { completion_queue.pop }
+        puts "Done Waiting. Result: \n Completed:#{completed} \n Error: #{errors}"
+        errors
+      end
+
       def upload_in_threads(pending, completed, options)
         threads = []
         if (callback = options[:progress_callback])
@@ -187,6 +250,10 @@ module Aws
         def initialize(parts = [])
           @parts = parts
           @mutex = Mutex.new
+        end
+
+        def count
+          @mutex.synchronize { @parts.count }
         end
 
         def push(part)

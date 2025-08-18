@@ -18,10 +18,14 @@ module Aws
       #   will be created automatically.
       def initialize(options = {})
         @client = options.delete(:client) || Client.new
+        @executor = options.delete(:executor)
       end
 
       # @return [S3::Client]
       attr_reader :client
+
+      # @return [Object] executor
+      attr_reader :executor
 
       # Downloads a file in S3 to a path on disk.
       #
@@ -170,7 +174,8 @@ module Aws
         uploading_options = options.dup
         uploader = FileUploader.new(
           multipart_threshold: uploading_options.delete(:multipart_threshold),
-          client: @client
+          client: @client,
+          executor: @executor
         )
         response = uploader.upload(source, uploading_options.merge(bucket: bucket, key: key))
         yield response if block_given?
@@ -244,7 +249,8 @@ module Aws
         upload_directory_opts = options.dup
         directory_uploader = DirectoryUploader.new(
           client: @client,
-          thread_count: upload_directory_opts.delete(:thread_count)
+          thread_count: upload_directory_opts.delete(:thread_count),
+          executor: @executor
         )
         directory_uploader.upload(source, upload_directory_opts)
         true # TODO: need to change depending on failure policy set
