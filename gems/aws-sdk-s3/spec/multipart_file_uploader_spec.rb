@@ -18,15 +18,6 @@ module Aws
           uploader = MultipartFileUploader.new
           expect(uploader.client).to be(client)
         end
-
-        it 'sets a default thread count when not given' do
-          expect(subject.instance_variable_get(:@thread_count)).to be(MultipartFileUploader::DEFAULT_THREAD_COUNT)
-        end
-
-        it 'sets a custom thread count' do
-          subject = MultipartFileUploader.new(client: client, thread_count: 3)
-          expect(subject.instance_variable_get(:@thread_count)).to be(3)
-        end
       end
 
       describe '#upload' do

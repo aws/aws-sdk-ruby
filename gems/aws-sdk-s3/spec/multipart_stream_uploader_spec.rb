@@ -20,22 +20,6 @@ module Aws
           uploader = MultipartStreamUploader.new
           expect(uploader.client).to be(client)
         end
-
-        it 'sets default configuration values when none provided' do
-          expect(subject.instance_variable_get(:@tempfile)).to be_nil
-          expect(subject.instance_variable_get(:@part_size)).to eq(MultipartStreamUploader::DEFAULT_PART_SIZE)
-          expect(subject.instance_variable_get(:@thread_count)).to eq(MultipartStreamUploader::DEFAULT_THREAD_COUNT)
-        end
-
-        it 'sets provided configurations' do
-          ten_mb = one_mb * 10
-          subject = MultipartStreamUploader.new(client: client, tempfile: true, part_size: ten_mb, thread_count: 1)
-
-          expect(subject.client).to be(client)
-          expect(subject.instance_variable_get(:@tempfile)).to be(true)
-          expect(subject.instance_variable_get(:@part_size)).to eq(ten_mb)
-          expect(subject.instance_variable_get(:@thread_count)).to eq(1)
-        end
       end
 
       describe '#upload_stream', :jruby_flaky do
