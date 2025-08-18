@@ -902,7 +902,8 @@ module Aws
                                 ],
                                 ?integration_config: {
                                   refresh_interval: ::String?,
-                                  source_properties: Hash[::String, ::String]?
+                                  source_properties: Hash[::String, ::String]?,
+                                  continuous_sync: bool?
                                 }
                               ) -> _CreateIntegrationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIntegrationResponseSuccess
@@ -5218,12 +5219,18 @@ module Aws
         def create_time: () -> ::Time
         def errors: () -> ::Array[Types::IntegrationError]
         def data_filter: () -> ::String
+        def integration_config: () -> Types::IntegrationConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#modify_integration-instance_method
       def modify_integration: (
                                 integration_identifier: ::String,
                                 ?description: ::String,
                                 ?data_filter: ::String,
+                                ?integration_config: {
+                                  refresh_interval: ::String?,
+                                  source_properties: Hash[::String, ::String]?,
+                                  continuous_sync: bool?
+                                },
                                 ?integration_name: ::String
                               ) -> _ModifyIntegrationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyIntegrationResponseSuccess

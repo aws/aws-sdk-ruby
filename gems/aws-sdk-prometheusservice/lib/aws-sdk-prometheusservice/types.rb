@@ -28,9 +28,10 @@ module Aws::PrometheusService
     # for the alert manager, including information about receivers for
     # routing alerts.
     #
-    # @!attribute [rw] created_at
-    #   The date and time that the alert manager definition was created.
-    #   @return [Time]
+    # @!attribute [rw] status
+    #   A structure that displays the current status of the alert manager
+    #   definition..
+    #   @return [Types::AlertManagerDefinitionStatus]
     #
     # @!attribute [rw] data
     #   The actual alert manager definition.
@@ -43,23 +44,22 @@ module Aws::PrometheusService
     #   [1]: https://docs.aws.amazon.com/prometheus/latest/APIReference/yaml-AlertManagerDefinitionData.html
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   The date and time that the alert manager definition was created.
+    #   @return [Time]
+    #
     # @!attribute [rw] modified_at
     #   The date and time that the alert manager definition was most
     #   recently changed.
     #   @return [Time]
     #
-    # @!attribute [rw] status
-    #   A structure that displays the current status of the alert manager
-    #   definition..
-    #   @return [Types::AlertManagerDefinitionStatus]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/AlertManagerDefinitionDescription AWS API Documentation
     #
     class AlertManagerDefinitionDescription < Struct.new(
-      :created_at,
+      :status,
       :data,
-      :modified_at,
-      :status)
+      :created_at,
+      :modified_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -140,12 +140,8 @@ module Aws::PrometheusService
 
     # Represents the input of a `CreateAlertManagerDefinition` operation.
     #
-    # @!attribute [rw] client_token
-    #   A unique identifier that you can provide to ensure the idempotency
-    #   of the request. Case-sensitive.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to add the alert manager definition to.
     #   @return [String]
     #
     # @!attribute [rw] data
@@ -160,16 +156,20 @@ module Aws::PrometheusService
     #   [1]: https://docs.aws.amazon.com/prometheus/latest/APIReference/yaml-AlertManagerDefinitionData.html
     #   @return [String]
     #
-    # @!attribute [rw] workspace_id
-    #   The ID of the workspace to add the alert manager definition to.
+    # @!attribute [rw] client_token
+    #   A unique identifier that you can provide to ensure the idempotency
+    #   of the request. Case-sensitive.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateAlertManagerDefinitionRequest AWS API Documentation
     #
     class CreateAlertManagerDefinitionRequest < Struct.new(
-      :client_token,
+      :workspace_id,
       :data,
-      :workspace_id)
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -191,12 +191,8 @@ module Aws::PrometheusService
 
     # Represents the input of a `CreateLoggingConfiguration` operation.
     #
-    # @!attribute [rw] client_token
-    #   A unique identifier that you can provide to ensure the idempotency
-    #   of the request. Case-sensitive.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to create the logging configuration for.
     #   @return [String]
     #
     # @!attribute [rw] log_group_arn
@@ -205,16 +201,20 @@ module Aws::PrometheusService
     #   operation.
     #   @return [String]
     #
-    # @!attribute [rw] workspace_id
-    #   The ID of the workspace to create the logging configuration for.
+    # @!attribute [rw] client_token
+    #   A unique identifier that you can provide to ensure the idempotency
+    #   of the request. Case-sensitive.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateLoggingConfigurationRequest AWS API Documentation
     #
     class CreateLoggingConfigurationRequest < Struct.new(
-      :client_token,
+      :workspace_id,
       :log_group_arn,
-      :workspace_id)
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -234,6 +234,16 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace for which to create the query logging
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   The destinations where query logs will be sent. Only CloudWatch Logs
+    #   destination is supported. The list must contain exactly one element.
+    #   @return [Array<Types::LoggingDestination>]
+    #
     # @!attribute [rw] client_token
     #   (Optional) A unique, case-sensitive identifier that you can provide
     #   to ensure the idempotency of the request.
@@ -242,22 +252,12 @@ module Aws::PrometheusService
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] destinations
-    #   The destinations where query logs will be sent. Only CloudWatch Logs
-    #   destination is supported. The list must contain exactly one element.
-    #   @return [Array<Types::LoggingDestination>]
-    #
-    # @!attribute [rw] workspace_id
-    #   The ID of the workspace for which to create the query logging
-    #   configuration.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateQueryLoggingConfigurationRequest AWS API Documentation
     #
     class CreateQueryLoggingConfigurationRequest < Struct.new(
-      :client_token,
+      :workspace_id,
       :destinations,
-      :workspace_id)
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -276,12 +276,12 @@ module Aws::PrometheusService
 
     # Represents the input of a `CreateRuleGroupsNamespace` operation.
     #
-    # @!attribute [rw] client_token
-    #   A unique identifier that you can provide to ensure the idempotency
-    #   of the request. Case-sensitive.
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to add the rule groups namespace.
+    #   @return [String]
     #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
+    # @!attribute [rw] name
+    #   The name for the new rule groups namespace.
     #   @return [String]
     #
     # @!attribute [rw] data
@@ -297,8 +297,12 @@ module Aws::PrometheusService
     #   [1]: https://docs.aws.amazon.com/prometheus/latest/APIReference/yaml-RuleGroupsNamespaceData.html
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The name for the new rule groups namespace.
+    # @!attribute [rw] client_token
+    #   A unique identifier that you can provide to ensure the idempotency
+    #   of the request. Case-sensitive.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -306,30 +310,26 @@ module Aws::PrometheusService
     #   namespace.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] workspace_id
-    #   The ID of the workspace to add the rule groups namespace.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateRuleGroupsNamespaceRequest AWS API Documentation
     #
     class CreateRuleGroupsNamespaceRequest < Struct.new(
-      :client_token,
-      :data,
+      :workspace_id,
       :name,
-      :tags,
-      :workspace_id)
+      :data,
+      :client_token,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Represents the output of a `CreateRuleGroupsNamespace` operation.
     #
-    # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the new rule groups namespace.
-    #   @return [String]
-    #
     # @!attribute [rw] name
     #   The name of the new rule groups namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the new rule groups namespace.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -345,8 +345,8 @@ module Aws::PrometheusService
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateRuleGroupsNamespaceResponse AWS API Documentation
     #
     class CreateRuleGroupsNamespaceResponse < Struct.new(
-      :arn,
       :name,
+      :arn,
       :status,
       :tags)
       SENSITIVE = []
@@ -359,25 +359,6 @@ module Aws::PrometheusService
     #   (optional) An alias to associate with the scraper. This is for your
     #   use, and does not need to be unique.
     #   @return [String]
-    #
-    # @!attribute [rw] client_token
-    #   (Optional) A unique, case-sensitive identifier that you can provide
-    #   to ensure the idempotency of the request.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
-    #   @return [String]
-    #
-    # @!attribute [rw] destination
-    #   The Amazon Managed Service for Prometheus workspace to send metrics
-    #   to.
-    #   @return [Types::Destination]
-    #
-    # @!attribute [rw] role_configuration
-    #   Use this structure to enable cross-account access, so that you can
-    #   use a target account to access Prometheus metrics from source
-    #   accounts.
-    #   @return [Types::RoleConfiguration]
     #
     # @!attribute [rw] scrape_configuration
     #   The configuration file to use in the new scraper. For more
@@ -393,6 +374,25 @@ module Aws::PrometheusService
     #   The Amazon EKS cluster from which the scraper will collect metrics.
     #   @return [Types::Source]
     #
+    # @!attribute [rw] destination
+    #   The Amazon Managed Service for Prometheus workspace to send metrics
+    #   to.
+    #   @return [Types::Destination]
+    #
+    # @!attribute [rw] role_configuration
+    #   Use this structure to enable cross-account access, so that you can
+    #   use a target account to access Prometheus metrics from source
+    #   accounts.
+    #   @return [Types::RoleConfiguration]
+    #
+    # @!attribute [rw] client_token
+    #   (Optional) A unique, case-sensitive identifier that you can provide
+    #   to ensure the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   (Optional) The list of tag keys and values to associate with the
     #   scraper.
@@ -402,11 +402,11 @@ module Aws::PrometheusService
     #
     class CreateScraperRequest < Struct.new(
       :alias,
-      :client_token,
-      :destination,
-      :role_configuration,
       :scrape_configuration,
       :source,
+      :destination,
+      :role_configuration,
+      :client_token,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -414,12 +414,12 @@ module Aws::PrometheusService
 
     # Represents the output of a `CreateScraper` operation.
     #
-    # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the new scraper.
-    #   @return [String]
-    #
     # @!attribute [rw] scraper_id
     #   The ID of the new scraper.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the new scraper.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -434,8 +434,8 @@ module Aws::PrometheusService
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateScraperResponse AWS API Documentation
     #
     class CreateScraperResponse < Struct.new(
-      :arn,
       :scraper_id,
+      :arn,
       :status,
       :tags)
       SENSITIVE = []
@@ -460,6 +460,10 @@ module Aws::PrometheusService
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The list of tag keys and values to associate with the workspace.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] kms_key_arn
     #   (optional) The ARN for a customer managed KMS key to use for
     #   encrypting data within your workspace. For more information about
@@ -471,30 +475,25 @@ module Aws::PrometheusService
     #   [1]: https://docs.aws.amazon.com/prometheus/latest/userguide/encryption-at-rest-Amazon-Service-Prometheus.html
     #   @return [String]
     #
-    # @!attribute [rw] tags
-    #   The list of tag keys and values to associate with the workspace.
-    #   @return [Hash<String,String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateWorkspaceRequest AWS API Documentation
     #
     class CreateWorkspaceRequest < Struct.new(
       :alias,
       :client_token,
-      :kms_key_arn,
-      :tags)
+      :tags,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Represents the output of a `CreateWorkspace` operation.
     #
-    # @!attribute [rw] arn
-    #   The ARN for the new workspace.
+    # @!attribute [rw] workspace_id
+    #   The unique ID for the new workspace.
     #   @return [String]
     #
-    # @!attribute [rw] kms_key_arn
-    #   (optional) If the workspace was created with a customer managed KMS
-    #   key, the ARN for the key used.
+    # @!attribute [rw] arn
+    #   The ARN for the new workspace.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -507,24 +506,29 @@ module Aws::PrometheusService
     #   workspace.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] workspace_id
-    #   The unique ID for the new workspace.
+    # @!attribute [rw] kms_key_arn
+    #   (optional) If the workspace was created with a customer managed KMS
+    #   key, the ARN for the key used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateWorkspaceResponse AWS API Documentation
     #
     class CreateWorkspaceResponse < Struct.new(
+      :workspace_id,
       :arn,
-      :kms_key_arn,
       :status,
       :tags,
-      :workspace_id)
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Represents the input of a `DeleteAlertManagerDefinition` operation.
     #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to delete the alert manager definition from.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   A unique identifier that you can provide to ensure the idempotency
     #   of the request. Case-sensitive.
@@ -533,21 +537,22 @@ module Aws::PrometheusService
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] workspace_id
-    #   The ID of the workspace to delete the alert manager definition from.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteAlertManagerDefinitionRequest AWS API Documentation
     #
     class DeleteAlertManagerDefinitionRequest < Struct.new(
-      :client_token,
-      :workspace_id)
+      :workspace_id,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Represents the input of a `DeleteLoggingConfiguration` operation.
     #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace containing the logging configuration to
+    #   delete.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   A unique identifier that you can provide to ensure the idempotency
     #   of the request. Case-sensitive.
@@ -556,20 +561,20 @@ module Aws::PrometheusService
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] workspace_id
-    #   The ID of the workspace containing the logging configuration to
-    #   delete.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteLoggingConfigurationRequest AWS API Documentation
     #
     class DeleteLoggingConfigurationRequest < Struct.new(
-      :client_token,
-      :workspace_id)
+      :workspace_id,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace from which to delete the query logging
+    #   configuration.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   (Optional) A unique, case-sensitive identifier that you can provide
     #   to ensure the idempotency of the request.
@@ -578,22 +583,54 @@ module Aws::PrometheusService
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] workspace_id
-    #   The ID of the workspace from which to delete the query logging
-    #   configuration.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteQueryLoggingConfigurationRequest AWS API Documentation
     #
     class DeleteQueryLoggingConfigurationRequest < Struct.new(
+      :workspace_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace from which to delete the resource-based
+    #   policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   request is safe to retry (idempotent).
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID of the policy to delete. Use this parameter to
+    #   ensure that you are deleting the correct version of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteResourcePolicyRequest AWS API Documentation
+    #
+    class DeleteResourcePolicyRequest < Struct.new(
+      :workspace_id,
       :client_token,
-      :workspace_id)
+      :revision_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Represents the input of a `DeleteRuleGroupsNamespace` operation.
     #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace containing the rule groups namespace and
+    #   definition to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the rule groups namespace to delete.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   A unique identifier that you can provide to ensure the idempotency
     #   of the request. Case-sensitive.
@@ -602,26 +639,21 @@ module Aws::PrometheusService
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The name of the rule groups namespace to delete.
-    #   @return [String]
-    #
-    # @!attribute [rw] workspace_id
-    #   The ID of the workspace containing the rule groups namespace and
-    #   definition to delete.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteRuleGroupsNamespaceRequest AWS API Documentation
     #
     class DeleteRuleGroupsNamespaceRequest < Struct.new(
-      :client_token,
+      :workspace_id,
       :name,
-      :workspace_id)
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Represents the input of a `DeleteScraper` operation.
+    #
+    # @!attribute [rw] scraper_id
+    #   The ID of the scraper to delete.
+    #   @return [String]
     #
     # @!attribute [rw] client_token
     #   (Optional) A unique, case-sensitive identifier that you can provide
@@ -631,15 +663,11 @@ module Aws::PrometheusService
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] scraper_id
-    #   The ID of the scraper to delete.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteScraperRequest AWS API Documentation
     #
     class DeleteScraperRequest < Struct.new(
-      :client_token,
-      :scraper_id)
+      :scraper_id,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -665,6 +693,10 @@ module Aws::PrometheusService
 
     # Represents the input of a `DeleteWorkspace` operation.
     #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to delete.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   A unique identifier that you can provide to ensure the idempotency
     #   of the request. Case-sensitive.
@@ -673,15 +705,11 @@ module Aws::PrometheusService
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] workspace_id
-    #   The ID of the workspace to delete.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteWorkspaceRequest AWS API Documentation
     #
     class DeleteWorkspaceRequest < Struct.new(
-      :client_token,
-      :workspace_id)
+      :workspace_id,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -770,21 +798,56 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
-    # Represents the input of a `DescribeRuleGroupsNamespace` operation.
-    #
-    # @!attribute [rw] name
-    #   The name of the rule groups namespace that you want information for.
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to describe the resource-based policy for.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeResourcePolicyRequest AWS API Documentation
+    #
+    class DescribeResourcePolicyRequest < Struct.new(
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_document
+    #   The JSON policy document for the resource-based policy attached to
+    #   the workspace.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_status
+    #   The current status of the resource-based policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID of the current resource-based policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeResourcePolicyResponse AWS API Documentation
+    #
+    class DescribeResourcePolicyResponse < Struct.new(
+      :policy_document,
+      :policy_status,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the input of a `DescribeRuleGroupsNamespace` operation.
     #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace containing the rule groups namespace.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The name of the rule groups namespace that you want information for.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeRuleGroupsNamespaceRequest AWS API Documentation
     #
     class DescribeRuleGroupsNamespaceRequest < Struct.new(
-      :name,
-      :workspace_id)
+      :workspace_id,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -995,6 +1058,11 @@ module Aws::PrometheusService
     # control time series limits and to monitor usage by specific label
     # groups. Example label sets might be `team:finance` or `env:prod`
     #
+    # @!attribute [rw] limits
+    #   This structure contains the information about the limits that apply
+    #   to time series that match this label set.
+    #   @return [Types::LimitsPerLabelSetEntry]
+    #
     # @!attribute [rw] label_set
     #   This defines one label set that will have an enforced active time
     #   series limit.
@@ -1006,16 +1074,11 @@ module Aws::PrometheusService
     #   `[a-zA-Z_:][a-zA-Z0-9_:]*`
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] limits
-    #   This structure contains the information about the limits that apply
-    #   to time series that match this label set.
-    #   @return [Types::LimitsPerLabelSetEntry]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/LimitsPerLabelSet AWS API Documentation
     #
     class LimitsPerLabelSet < Struct.new(
-      :label_set,
-      :limits)
+      :limits,
+      :label_set)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1042,9 +1105,9 @@ module Aws::PrometheusService
 
     # Represents the input of a `ListRuleGroupsNamespaces` operation.
     #
-    # @!attribute [rw] max_results
-    #   The maximum number of results to return. The default is 100.
-    #   @return [Integer]
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace containing the rule groups namespaces.
+    #   @return [String]
     #
     # @!attribute [rw] name
     #   Use this parameter to filter the rule groups namespaces that are
@@ -1063,22 +1126,26 @@ module Aws::PrometheusService
     #   subsequent call will return the remaining 2 namespaces.
     #   @return [String]
     #
-    # @!attribute [rw] workspace_id
-    #   The ID of the workspace containing the rule groups namespaces.
-    #   @return [String]
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. The default is 100.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListRuleGroupsNamespacesRequest AWS API Documentation
     #
     class ListRuleGroupsNamespacesRequest < Struct.new(
-      :max_results,
+      :workspace_id,
       :name,
       :next_token,
-      :workspace_id)
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Represents the output of a `ListRuleGroupsNamespaces` operation.
+    #
+    # @!attribute [rw] rule_groups_namespaces
+    #   The returned list of rule groups namespaces.
+    #   @return [Array<Types::RuleGroupsNamespaceSummary>]
     #
     # @!attribute [rw] next_token
     #   A token indicating that there are more results to retrieve. You can
@@ -1086,15 +1153,11 @@ module Aws::PrometheusService
     #   request to retrieve those results.
     #   @return [String]
     #
-    # @!attribute [rw] rule_groups_namespaces
-    #   The returned list of rule groups namespaces.
-    #   @return [Array<Types::RuleGroupsNamespaceSummary>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListRuleGroupsNamespacesResponse AWS API Documentation
     #
     class ListRuleGroupsNamespacesResponse < Struct.new(
-      :next_token,
-      :rule_groups_namespaces)
+      :rule_groups_namespaces,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1122,6 +1185,11 @@ module Aws::PrometheusService
     #   that match the filter.
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] next_token
+    #   (Optional) The token for the next set of items to return. (You
+    #   received this token from a previous call.)
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   Optional) The maximum number of scrapers to return in one
     #   `ListScrapers` operation. The range is 1-1000.
@@ -1129,22 +1197,22 @@ module Aws::PrometheusService
     #   If you omit this parameter, the default of 100 is used.
     #   @return [Integer]
     #
-    # @!attribute [rw] next_token
-    #   (Optional) The token for the next set of items to return. (You
-    #   received this token from a previous call.)
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListScrapersRequest AWS API Documentation
     #
     class ListScrapersRequest < Struct.new(
       :filters,
-      :max_results,
-      :next_token)
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Represents the output of a `ListScrapers` operation.
+    #
+    # @!attribute [rw] scrapers
+    #   A list of `ScraperSummary` structures giving information about
+    #   scrapers in the account that match the filters provided.
+    #   @return [Array<Types::ScraperSummary>]
     #
     # @!attribute [rw] next_token
     #   A token indicating that there are more results to retrieve. You can
@@ -1152,16 +1220,11 @@ module Aws::PrometheusService
     #   retrieve those results.
     #   @return [String]
     #
-    # @!attribute [rw] scrapers
-    #   A list of `ScraperSummary` structures giving information about
-    #   scrapers in the account that match the filters provided.
-    #   @return [Array<Types::ScraperSummary>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListScrapersResponse AWS API Documentation
     #
     class ListScrapersResponse < Struct.new(
-      :next_token,
-      :scrapers)
+      :scrapers,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1193,6 +1256,17 @@ module Aws::PrometheusService
 
     # Represents the input of a `ListWorkspaces` operation.
     #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. You receive this
+    #   token from a previous call, and use it to get the next page of
+    #   results. The other parameters must be the same as the initial call.
+    #
+    #   For example, if your initial request has `maxResults` of 10, and
+    #   there are 12 workspaces to return, then your initial request will
+    #   return 10 and a `nextToken`. Using the next token in a subsequent
+    #   call will return the remaining 2 workspaces.
+    #   @return [String]
+    #
     # @!attribute [rw] alias
     #   If this is included, it filters the results to only the workspaces
     #   with names that start with the value that you specify here.
@@ -1207,28 +1281,22 @@ module Aws::PrometheusService
     #   is 100.
     #   @return [Integer]
     #
-    # @!attribute [rw] next_token
-    #   The token for the next set of items to return. You receive this
-    #   token from a previous call, and use it to get the next page of
-    #   results. The other parameters must be the same as the initial call.
-    #
-    #   For example, if your initial request has `maxResults` of 10, and
-    #   there are 12 workspaces to return, then your initial request will
-    #   return 10 and a `nextToken`. Using the next token in a subsequent
-    #   call will return the remaining 2 workspaces.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListWorkspacesRequest AWS API Documentation
     #
     class ListWorkspacesRequest < Struct.new(
+      :next_token,
       :alias,
-      :max_results,
-      :next_token)
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Represents the output of a `ListWorkspaces` operation.
+    #
+    # @!attribute [rw] workspaces
+    #   An array of `WorkspaceSummary` structures containing information
+    #   about the workspaces requested.
+    #   @return [Array<Types::WorkspaceSummary>]
     #
     # @!attribute [rw] next_token
     #   A token indicating that there are more results to retrieve. You can
@@ -1236,16 +1304,11 @@ module Aws::PrometheusService
     #   retrieve those results.
     #   @return [String]
     #
-    # @!attribute [rw] workspaces
-    #   An array of `WorkspaceSummary` structures containing information
-    #   about the workspaces requested.
-    #   @return [Array<Types::WorkspaceSummary>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListWorkspacesResponse AWS API Documentation
     #
     class ListWorkspacesResponse < Struct.new(
-      :next_token,
-      :workspaces)
+      :workspaces,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1257,20 +1320,6 @@ module Aws::PrometheusService
     #
     #  </note>
     #
-    # @!attribute [rw] created_at
-    #   The date and time that the logging configuration was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] log_group_arn
-    #   The ARN of the CloudWatch log group to which the vended log data
-    #   will be published.
-    #   @return [String]
-    #
-    # @!attribute [rw] modified_at
-    #   The date and time that the logging configuration was most recently
-    #   changed.
-    #   @return [Time]
-    #
     # @!attribute [rw] status
     #   The current status of the logging configuration.
     #   @return [Types::LoggingConfigurationStatus]
@@ -1279,14 +1328,28 @@ module Aws::PrometheusService
     #   The ID of the workspace the logging configuration is for.
     #   @return [String]
     #
+    # @!attribute [rw] log_group_arn
+    #   The ARN of the CloudWatch log group to which the vended log data
+    #   will be published.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the logging configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The date and time that the logging configuration was most recently
+    #   changed.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/LoggingConfigurationMetadata AWS API Documentation
     #
     class LoggingConfigurationMetadata < Struct.new(
-      :created_at,
-      :log_group_arn,
-      :modified_at,
       :status,
-      :workspace)
+      :workspace,
+      :log_group_arn,
+      :created_at,
+      :modified_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1353,12 +1416,8 @@ module Aws::PrometheusService
 
     # Represents the input of a `PutAlertManagerDefinition` operation.
     #
-    # @!attribute [rw] client_token
-    #   A unique identifier that you can provide to ensure the idempotency
-    #   of the request. Case-sensitive.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to update the alert manager definition in.
     #   @return [String]
     #
     # @!attribute [rw] data
@@ -1373,16 +1432,20 @@ module Aws::PrometheusService
     #   [1]: https://docs.aws.amazon.com/prometheus/latest/APIReference/yaml-AlertManagerDefinitionData.html
     #   @return [String]
     #
-    # @!attribute [rw] workspace_id
-    #   The ID of the workspace to update the alert manager definition in.
+    # @!attribute [rw] client_token
+    #   A unique identifier that you can provide to ensure the idempotency
+    #   of the request. Case-sensitive.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/PutAlertManagerDefinitionRequest AWS API Documentation
     #
     class PutAlertManagerDefinitionRequest < Struct.new(
-      :client_token,
+      :workspace_id,
       :data,
-      :workspace_id)
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1402,14 +1465,73 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
-    # Represents the input of a `PutRuleGroupsNamespace` operation.
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to attach the resource-based policy to.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_document
+    #   The JSON policy document to use as the resource-based policy. This
+    #   policy defines the permissions that other AWS accounts or services
+    #   have to access your workspace.
+    #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   A unique identifier that you can provide to ensure the idempotency
-    #   of the request. Case-sensitive.
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   request is safe to retry (idempotent).
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID of the policy to update. Use this parameter to
+    #   ensure that you are updating the correct version of the policy. If
+    #   you don't specify a revision ID, the policy is updated regardless
+    #   of its current revision.
+    #
+    #   For the first **PUT** request on a workspace that doesn't have an
+    #   existing resource policy, you can specify `NO_POLICY` as the
+    #   revision ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/PutResourcePolicyRequest AWS API Documentation
+    #
+    class PutResourcePolicyRequest < Struct.new(
+      :workspace_id,
+      :policy_document,
+      :client_token,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_status
+    #   The current status of the resource-based policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID of the newly created or updated resource-based
+    #   policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/PutResourcePolicyResponse AWS API Documentation
+    #
+    class PutResourcePolicyResponse < Struct.new(
+      :policy_status,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the input of a `PutRuleGroupsNamespace` operation.
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace where you are updating the rule groups
+    #   namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the rule groups namespace that you are updating.
     #   @return [String]
     #
     # @!attribute [rw] data
@@ -1424,34 +1546,33 @@ module Aws::PrometheusService
     #   [1]: https://docs.aws.amazon.com/prometheus/latest/APIReference/yaml-RuleGroupsNamespaceData.html
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The name of the rule groups namespace that you are updating.
-    #   @return [String]
+    # @!attribute [rw] client_token
+    #   A unique identifier that you can provide to ensure the idempotency
+    #   of the request. Case-sensitive.
     #
-    # @!attribute [rw] workspace_id
-    #   The ID of the workspace where you are updating the rule groups
-    #   namespace.
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/PutRuleGroupsNamespaceRequest AWS API Documentation
     #
     class PutRuleGroupsNamespaceRequest < Struct.new(
-      :client_token,
-      :data,
+      :workspace_id,
       :name,
-      :workspace_id)
+      :data,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Represents the output of a `PutRuleGroupsNamespace` operation.
     #
-    # @!attribute [rw] arn
-    #   The ARN of the rule groups namespace.
-    #   @return [String]
-    #
     # @!attribute [rw] name
     #   The name of the rule groups namespace that was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the rule groups namespace.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1467,8 +1588,8 @@ module Aws::PrometheusService
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/PutRuleGroupsNamespaceResponse AWS API Documentation
     #
     class PutRuleGroupsNamespaceResponse < Struct.new(
-      :arn,
       :name,
+      :arn,
       :status,
       :tags)
       SENSITIVE = []
@@ -1476,19 +1597,6 @@ module Aws::PrometheusService
     end
 
     # The metadata for a query logging configuration.
-    #
-    # @!attribute [rw] created_at
-    #   The date and time when the query logging configuration was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] destinations
-    #   The configured destinations for the query logging configuration.
-    #   @return [Array<Types::LoggingDestination>]
-    #
-    # @!attribute [rw] modified_at
-    #   The date and time when the query logging configuration was last
-    #   modified.
-    #   @return [Time]
     #
     # @!attribute [rw] status
     #   The current status of the query logging configuration.
@@ -1499,14 +1607,27 @@ module Aws::PrometheusService
     #   configuration.
     #   @return [String]
     #
+    # @!attribute [rw] destinations
+    #   The configured destinations for the query logging configuration.
+    #   @return [Array<Types::LoggingDestination>]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the query logging configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The date and time when the query logging configuration was last
+    #   modified.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/QueryLoggingConfigurationMetadata AWS API Documentation
     #
     class QueryLoggingConfigurationMetadata < Struct.new(
-      :created_at,
-      :destinations,
-      :modified_at,
       :status,
-      :workspace)
+      :workspace,
+      :destinations,
+      :created_at,
+      :modified_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1593,9 +1714,13 @@ module Aws::PrometheusService
     #   `arn:aws:aps:<region>:123456789012:rulegroupsnamespace/ws-example1-1234-abcd-5678-ef90abcd1234/rulesfile1`.
     #   @return [String]
     #
-    # @!attribute [rw] created_at
-    #   The date and time that the rule groups namespace was created.
-    #   @return [Time]
+    # @!attribute [rw] name
+    #   The name of the rule groups namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the rule groups namespace.
+    #   @return [Types::RuleGroupsNamespaceStatus]
     #
     # @!attribute [rw] data
     #   The rule groups file used in the namespace.
@@ -1608,18 +1733,14 @@ module Aws::PrometheusService
     #   [1]: https://docs.aws.amazon.com/prometheus/latest/APIReference/yaml-RuleGroupsNamespaceData.html
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   The date and time that the rule groups namespace was created.
+    #   @return [Time]
+    #
     # @!attribute [rw] modified_at
     #   The date and time that the rule groups namespace was most recently
     #   changed.
     #   @return [Time]
-    #
-    # @!attribute [rw] name
-    #   The name of the rule groups namespace.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The current status of the rule groups namespace.
-    #   @return [Types::RuleGroupsNamespaceStatus]
     #
     # @!attribute [rw] tags
     #   The list of tag keys and values that are associated with the rule
@@ -1630,11 +1751,11 @@ module Aws::PrometheusService
     #
     class RuleGroupsNamespaceDescription < Struct.new(
       :arn,
-      :created_at,
-      :data,
-      :modified_at,
       :name,
       :status,
+      :data,
+      :created_at,
+      :modified_at,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1666,15 +1787,6 @@ module Aws::PrometheusService
     #   The ARN of the rule groups namespace.
     #   @return [String]
     #
-    # @!attribute [rw] created_at
-    #   The date and time that the rule groups namespace was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] modified_at
-    #   The date and time that the rule groups namespace was most recently
-    #   changed.
-    #   @return [Time]
-    #
     # @!attribute [rw] name
     #   The name of the rule groups namespace.
     #   @return [String]
@@ -1683,6 +1795,15 @@ module Aws::PrometheusService
     #   A structure that displays the current status of the rule groups
     #   namespace.
     #   @return [Types::RuleGroupsNamespaceStatus]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the rule groups namespace was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The date and time that the rule groups namespace was most recently
+    #   changed.
+    #   @return [Time]
     #
     # @!attribute [rw] tags
     #   The list of tag keys and values that are associated with the rule
@@ -1693,10 +1814,10 @@ module Aws::PrometheusService
     #
     class RuleGroupsNamespaceSummary < Struct.new(
       :arn,
-      :created_at,
-      :modified_at,
       :name,
       :status,
+      :created_at,
+      :modified_at,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1738,23 +1859,15 @@ module Aws::PrometheusService
     #   (Optional) A name associated with the scraper.
     #   @return [String]
     #
+    # @!attribute [rw] scraper_id
+    #   The ID of the scraper. For example,
+    #   `s-example1-1234-abcd-5678-ef9012abcd34`.
+    #   @return [String]
+    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the scraper. For example,
     #   `arn:aws:aps:<region>:123456798012:scraper/s-example1-1234-abcd-5678-ef9012abcd34`.
     #   @return [String]
-    #
-    # @!attribute [rw] created_at
-    #   The date and time that the scraper was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] destination
-    #   The Amazon Managed Service for Prometheus workspace the scraper
-    #   sends metrics to.
-    #   @return [Types::Destination]
-    #
-    # @!attribute [rw] last_modified_at
-    #   The date and time that the scraper was last modified.
-    #   @return [Time]
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that provides
@@ -1765,53 +1878,61 @@ module Aws::PrometheusService
     #   `arn:aws:iam::123456789012:role/service-role/AmazonGrafanaServiceRole-12example`.
     #   @return [String]
     #
-    # @!attribute [rw] role_configuration
-    #   This structure displays information about the IAM roles used for
-    #   cross-account scraping configuration.
-    #   @return [Types::RoleConfiguration]
-    #
-    # @!attribute [rw] scrape_configuration
-    #   The configuration in use by the scraper.
-    #   @return [Types::ScrapeConfiguration]
-    #
-    # @!attribute [rw] scraper_id
-    #   The ID of the scraper. For example,
-    #   `s-example1-1234-abcd-5678-ef9012abcd34`.
-    #   @return [String]
-    #
-    # @!attribute [rw] source
-    #   The Amazon EKS cluster from which the scraper collects metrics.
-    #   @return [Types::Source]
-    #
     # @!attribute [rw] status
     #   A structure that contains the current status of the scraper.
     #   @return [Types::ScraperStatus]
     #
-    # @!attribute [rw] status_reason
-    #   If there is a failure, the reason for the failure.
-    #   @return [String]
+    # @!attribute [rw] created_at
+    #   The date and time that the scraper was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The date and time that the scraper was last modified.
+    #   @return [Time]
     #
     # @!attribute [rw] tags
     #   (Optional) The list of tag keys and values associated with the
     #   scraper.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] status_reason
+    #   If there is a failure, the reason for the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] scrape_configuration
+    #   The configuration in use by the scraper.
+    #   @return [Types::ScrapeConfiguration]
+    #
+    # @!attribute [rw] source
+    #   The Amazon EKS cluster from which the scraper collects metrics.
+    #   @return [Types::Source]
+    #
+    # @!attribute [rw] destination
+    #   The Amazon Managed Service for Prometheus workspace the scraper
+    #   sends metrics to.
+    #   @return [Types::Destination]
+    #
+    # @!attribute [rw] role_configuration
+    #   This structure displays information about the IAM roles used for
+    #   cross-account scraping configuration.
+    #   @return [Types::RoleConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ScraperDescription AWS API Documentation
     #
     class ScraperDescription < Struct.new(
       :alias,
-      :arn,
-      :created_at,
-      :destination,
-      :last_modified_at,
-      :role_arn,
-      :role_configuration,
-      :scrape_configuration,
       :scraper_id,
-      :source,
+      :arn,
+      :role_arn,
       :status,
+      :created_at,
+      :last_modified_at,
+      :tags,
       :status_reason,
-      :tags)
+      :scrape_configuration,
+      :source,
+      :destination,
+      :role_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1838,22 +1959,13 @@ module Aws::PrometheusService
     #   (Optional) A name associated with the scraper.
     #   @return [String]
     #
+    # @!attribute [rw] scraper_id
+    #   The ID of the scraper.
+    #   @return [String]
+    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the scraper.
     #   @return [String]
-    #
-    # @!attribute [rw] created_at
-    #   The date and time that the scraper was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] destination
-    #   The Amazon Managed Service for Prometheus workspace the scraper
-    #   sends metrics to.
-    #   @return [Types::Destination]
-    #
-    # @!attribute [rw] last_modified_at
-    #   The date and time that the scraper was last modified.
-    #   @return [Time]
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that provides
@@ -1861,47 +1973,56 @@ module Aws::PrometheusService
     #   behalf.
     #   @return [String]
     #
-    # @!attribute [rw] role_configuration
-    #   This structure displays information about the IAM roles used for
-    #   cross-account scraping configuration.
-    #   @return [Types::RoleConfiguration]
-    #
-    # @!attribute [rw] scraper_id
-    #   The ID of the scraper.
-    #   @return [String]
-    #
-    # @!attribute [rw] source
-    #   The Amazon EKS cluster from which the scraper collects metrics.
-    #   @return [Types::Source]
-    #
     # @!attribute [rw] status
     #   A structure that contains the current status of the scraper.
     #   @return [Types::ScraperStatus]
     #
-    # @!attribute [rw] status_reason
-    #   If there is a failure, the reason for the failure.
-    #   @return [String]
+    # @!attribute [rw] created_at
+    #   The date and time that the scraper was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The date and time that the scraper was last modified.
+    #   @return [Time]
     #
     # @!attribute [rw] tags
     #   (Optional) The list of tag keys and values associated with the
     #   scraper.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] status_reason
+    #   If there is a failure, the reason for the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The Amazon EKS cluster from which the scraper collects metrics.
+    #   @return [Types::Source]
+    #
+    # @!attribute [rw] destination
+    #   The Amazon Managed Service for Prometheus workspace the scraper
+    #   sends metrics to.
+    #   @return [Types::Destination]
+    #
+    # @!attribute [rw] role_configuration
+    #   This structure displays information about the IAM roles used for
+    #   cross-account scraping configuration.
+    #   @return [Types::RoleConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ScraperSummary AWS API Documentation
     #
     class ScraperSummary < Struct.new(
       :alias,
-      :arn,
-      :created_at,
-      :destination,
-      :last_modified_at,
-      :role_arn,
-      :role_configuration,
       :scraper_id,
-      :source,
+      :arn,
+      :role_arn,
       :status,
+      :created_at,
+      :last_modified_at,
+      :tags,
       :status_reason,
-      :tags)
+      :source,
+      :destination,
+      :role_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1910,10 +2031,6 @@ module Aws::PrometheusService
     #
     # @!attribute [rw] message
     #   Description of the error.
-    #   @return [String]
-    #
-    # @!attribute [rw] quota_code
-    #   Service quotas code of the originating quota.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -1928,14 +2045,18 @@ module Aws::PrometheusService
     #   Service quotas code for the originating service.
     #   @return [String]
     #
+    # @!attribute [rw] quota_code
+    #   Service quotas code of the originating quota.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ServiceQuotaExceededException AWS API Documentation
     #
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      :quota_code,
       :resource_id,
       :resource_type,
-      :service_code)
+      :service_code,
+      :quota_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1992,6 +2113,10 @@ module Aws::PrometheusService
     #   Description of the error.
     #   @return [String]
     #
+    # @!attribute [rw] service_code
+    #   Service quotas code for the originating service.
+    #   @return [String]
+    #
     # @!attribute [rw] quota_code
     #   Service quotas code for the originating quota.
     #   @return [String]
@@ -2000,17 +2125,13 @@ module Aws::PrometheusService
     #   Advice to clients on when the call can be safely retried.
     #   @return [Integer]
     #
-    # @!attribute [rw] service_code
-    #   Service quotas code for the originating service.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Struct.new(
       :message,
+      :service_code,
       :quota_code,
-      :retry_after_seconds,
-      :service_code)
+      :retry_after_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2038,6 +2159,15 @@ module Aws::PrometheusService
 
     # Represents the input of an `UpdateLoggingConfiguration` operation.
     #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to update the logging configuration for.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_arn
+    #   The ARN of the CloudWatch log group to which the vended log data
+    #   will be published.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   A unique identifier that you can provide to ensure the idempotency
     #   of the request. Case-sensitive.
@@ -2046,21 +2176,12 @@ module Aws::PrometheusService
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] log_group_arn
-    #   The ARN of the CloudWatch log group to which the vended log data
-    #   will be published.
-    #   @return [String]
-    #
-    # @!attribute [rw] workspace_id
-    #   The ID of the workspace to update the logging configuration for.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateLoggingConfigurationRequest AWS API Documentation
     #
     class UpdateLoggingConfigurationRequest < Struct.new(
-      :client_token,
+      :workspace_id,
       :log_group_arn,
-      :workspace_id)
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2080,6 +2201,16 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace for which to update the query logging
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   The destinations where query logs will be sent. Only CloudWatch Logs
+    #   destination is supported. The list must contain exactly one element.
+    #   @return [Array<Types::LoggingDestination>]
+    #
     # @!attribute [rw] client_token
     #   (Optional) A unique, case-sensitive identifier that you can provide
     #   to ensure the idempotency of the request.
@@ -2088,22 +2219,12 @@ module Aws::PrometheusService
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] destinations
-    #   The destinations where query logs will be sent. Only CloudWatch Logs
-    #   destination is supported. The list must contain exactly one element.
-    #   @return [Array<Types::LoggingDestination>]
-    #
-    # @!attribute [rw] workspace_id
-    #   The ID of the workspace for which to update the query logging
-    #   configuration.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateQueryLoggingConfigurationRequest AWS API Documentation
     #
     class UpdateQueryLoggingConfigurationRequest < Struct.new(
-      :client_token,
+      :workspace_id,
       :destinations,
-      :workspace_id)
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2120,28 +2241,13 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # @!attribute [rw] scraper_id
+    #   The ID of the scraper to update.
+    #   @return [String]
+    #
     # @!attribute [rw] alias
     #   The new alias of the scraper.
     #   @return [String]
-    #
-    # @!attribute [rw] client_token
-    #   A unique identifier that you can provide to ensure the idempotency
-    #   of the request. Case-sensitive.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
-    #   @return [String]
-    #
-    # @!attribute [rw] destination
-    #   The new Amazon Managed Service for Prometheus workspace to send
-    #   metrics to.
-    #   @return [Types::Destination]
-    #
-    # @!attribute [rw] role_configuration
-    #   Use this structure to enable cross-account access, so that you can
-    #   use a target account to access Prometheus metrics from source
-    #   accounts.
-    #   @return [Types::RoleConfiguration]
     #
     # @!attribute [rw] scrape_configuration
     #   Contains the base-64 encoded YAML configuration for the scraper.
@@ -2157,29 +2263,44 @@ module Aws::PrometheusService
     #   [1]: https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html
     #   @return [Types::ScrapeConfiguration]
     #
-    # @!attribute [rw] scraper_id
-    #   The ID of the scraper to update.
+    # @!attribute [rw] destination
+    #   The new Amazon Managed Service for Prometheus workspace to send
+    #   metrics to.
+    #   @return [Types::Destination]
+    #
+    # @!attribute [rw] role_configuration
+    #   Use this structure to enable cross-account access, so that you can
+    #   use a target account to access Prometheus metrics from source
+    #   accounts.
+    #   @return [Types::RoleConfiguration]
+    #
+    # @!attribute [rw] client_token
+    #   A unique identifier that you can provide to ensure the idempotency
+    #   of the request. Case-sensitive.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateScraperRequest AWS API Documentation
     #
     class UpdateScraperRequest < Struct.new(
+      :scraper_id,
       :alias,
-      :client_token,
+      :scrape_configuration,
       :destination,
       :role_configuration,
-      :scrape_configuration,
-      :scraper_id)
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the updated scraper.
-    #   @return [String]
-    #
     # @!attribute [rw] scraper_id
     #   The ID of the updated scraper.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the updated scraper.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2194,8 +2315,8 @@ module Aws::PrometheusService
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateScraperResponse AWS API Documentation
     #
     class UpdateScraperResponse < Struct.new(
-      :arn,
       :scraper_id,
+      :arn,
       :status,
       :tags)
       SENSITIVE = []
@@ -2203,6 +2324,10 @@ module Aws::PrometheusService
     end
 
     # Represents the input of an `UpdateWorkspaceAlias` operation.
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to update.
+    #   @return [String]
     #
     # @!attribute [rw] alias
     #   The new alias for the workspace. It does not need to be unique.
@@ -2220,20 +2345,25 @@ module Aws::PrometheusService
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] workspace_id
-    #   The ID of the workspace to update.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateWorkspaceAliasRequest AWS API Documentation
     #
     class UpdateWorkspaceAliasRequest < Struct.new(
+      :workspace_id,
       :alias,
-      :client_token,
-      :workspace_id)
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace that you want to update. To find the IDs of
+    #   your workspaces, use the [ListWorkspaces][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/prometheus/latest/APIReference/API_ListWorkspaces.htm
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   You can include a token in your operation to make it an idempotent
     #   opeartion.
@@ -2254,22 +2384,13 @@ module Aws::PrometheusService
     #   workspace.
     #   @return [Integer]
     #
-    # @!attribute [rw] workspace_id
-    #   The ID of the workspace that you want to update. To find the IDs of
-    #   your workspaces, use the [ListWorkspaces][1] operation.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/prometheus/latest/APIReference/API_ListWorkspaces.htm
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateWorkspaceConfigurationRequest AWS API Documentation
     #
     class UpdateWorkspaceConfigurationRequest < Struct.new(
+      :workspace_id,
       :client_token,
       :limits_per_label_set,
-      :retention_period_in_days,
-      :workspace_id)
+      :retention_period_in_days)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2289,10 +2410,6 @@ module Aws::PrometheusService
     # The input fails to satisfy the constraints specified by an Amazon Web
     # Services service.
     #
-    # @!attribute [rw] field_list
-    #   The field that caused the error, if applicable.
-    #   @return [Array<Types::ValidationExceptionField>]
-    #
     # @!attribute [rw] message
     #   Description of the error.
     #   @return [String]
@@ -2301,12 +2418,16 @@ module Aws::PrometheusService
     #   Reason the request failed validation.
     #   @return [String]
     #
+    # @!attribute [rw] field_list
+    #   The field that caused the error, if applicable.
+    #   @return [Array<Types::ValidationExceptionField>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
-      :field_list,
       :message,
-      :reason)
+      :reason,
+      :field_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2314,25 +2435,30 @@ module Aws::PrometheusService
     # Information about a field passed into a request that resulted in an
     # exception.
     #
-    # @!attribute [rw] message
-    #   A message describing why the field caused an exception.
-    #   @return [String]
-    #
     # @!attribute [rw] name
     #   The name of the field that caused an exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message describing why the field caused an exception.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ValidationExceptionField AWS API Documentation
     #
     class ValidationExceptionField < Struct.new(
-      :message,
-      :name)
+      :name,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # This structure contains the description of the workspace
     # configuration.
+    #
+    # @!attribute [rw] status
+    #   This structure displays the current status of the workspace
+    #   configuration, and might also contain a reason for that status.
+    #   @return [Types::WorkspaceConfigurationStatus]
     #
     # @!attribute [rw] limits_per_label_set
     #   This is an array of structures, where each structure displays one
@@ -2344,17 +2470,12 @@ module Aws::PrometheusService
     #   workspace.
     #   @return [Integer]
     #
-    # @!attribute [rw] status
-    #   This structure displays the current status of the workspace
-    #   configuration, and might also contain a reason for that status.
-    #   @return [Types::WorkspaceConfigurationStatus]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/WorkspaceConfigurationDescription AWS API Documentation
     #
     class WorkspaceConfigurationDescription < Struct.new(
+      :status,
       :limits_per_label_set,
-      :retention_period_in_days,
-      :status)
+      :retention_period_in_days)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2382,6 +2503,11 @@ module Aws::PrometheusService
     # The full details about one Amazon Managed Service for Prometheus
     # workspace in your account.
     #
+    # @!attribute [rw] workspace_id
+    #   The unique ID for the workspace. For example,
+    #   `ws-example1-1234-abcd-5678-ef90abcd1234`.
+    #   @return [String]
+    #
     # @!attribute [rw] alias
     #   The alias that is assigned to this workspace to help identify it. It
     #   does not need to be unique.
@@ -2392,45 +2518,40 @@ module Aws::PrometheusService
     #   `arn:aws:aps:<region>:123456789012:workspace/ws-example1-1234-abcd-5678-ef90abcd1234`.
     #   @return [String]
     #
-    # @!attribute [rw] created_at
-    #   The date and time that the workspace was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] kms_key_arn
-    #   (optional) If the workspace was created with a customer managed KMS
-    #   key, the ARN for the key used.
-    #   @return [String]
+    # @!attribute [rw] status
+    #   The current status of the workspace.
+    #   @return [Types::WorkspaceStatus]
     #
     # @!attribute [rw] prometheus_endpoint
     #   The Prometheus endpoint available for this workspace. For example,
     #   `https://aps-workspaces.<region>.amazonaws.com/workspaces/ws-example1-1234-abcd-5678-ef90abcd1234/api/v1/`.
     #   @return [String]
     #
-    # @!attribute [rw] status
-    #   The current status of the workspace.
-    #   @return [Types::WorkspaceStatus]
+    # @!attribute [rw] created_at
+    #   The date and time that the workspace was created.
+    #   @return [Time]
     #
     # @!attribute [rw] tags
     #   The list of tag keys and values that are associated with the
     #   workspace.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] workspace_id
-    #   The unique ID for the workspace. For example,
-    #   `ws-example1-1234-abcd-5678-ef90abcd1234`.
+    # @!attribute [rw] kms_key_arn
+    #   (optional) If the workspace was created with a customer managed KMS
+    #   key, the ARN for the key used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/WorkspaceDescription AWS API Documentation
     #
     class WorkspaceDescription < Struct.new(
+      :workspace_id,
       :alias,
       :arn,
-      :created_at,
-      :kms_key_arn,
-      :prometheus_endpoint,
       :status,
+      :prometheus_endpoint,
+      :created_at,
       :tags,
-      :workspace_id)
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2452,6 +2573,10 @@ module Aws::PrometheusService
     # The information about one Amazon Managed Service for Prometheus
     # workspace in your account.
     #
+    # @!attribute [rw] workspace_id
+    #   The unique ID for the workspace.
+    #   @return [String]
+    #
     # @!attribute [rw] alias
     #   The alias that is assigned to this workspace to help identify it. It
     #   does not need to be unique.
@@ -2461,38 +2586,34 @@ module Aws::PrometheusService
     #   The ARN of the workspace.
     #   @return [String]
     #
-    # @!attribute [rw] created_at
-    #   The date and time that the workspace was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] kms_key_arn
-    #   (optional) If the workspace was created with a customer managed KMS
-    #   key, the ARN for the key used.
-    #   @return [String]
-    #
     # @!attribute [rw] status
     #   The current status of the workspace.
     #   @return [Types::WorkspaceStatus]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the workspace was created.
+    #   @return [Time]
     #
     # @!attribute [rw] tags
     #   The list of tag keys and values that are associated with the
     #   workspace.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] workspace_id
-    #   The unique ID for the workspace.
+    # @!attribute [rw] kms_key_arn
+    #   (optional) If the workspace was created with a customer managed KMS
+    #   key, the ARN for the key used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/WorkspaceSummary AWS API Documentation
     #
     class WorkspaceSummary < Struct.new(
+      :workspace_id,
       :alias,
       :arn,
-      :created_at,
-      :kms_key_arn,
       :status,
+      :created_at,
       :tags,
-      :workspace_id)
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end

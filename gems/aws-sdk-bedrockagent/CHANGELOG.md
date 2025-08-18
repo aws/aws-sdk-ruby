@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2025-08-15)
+------------------
+
+* Feature - This release adds support for saving Bedrock Flows while node configuration is still in progress, even if the Flow is not yet able to be invoked
+
 1.62.0 (2025-08-04)
 ------------------
 

@@ -4151,6 +4151,7 @@ module Aws::Glue
     class IntegrationConfig
       attr_accessor refresh_interval: ::String
       attr_accessor source_properties: ::Hash[::String, ::String]
+      attr_accessor continuous_sync: bool
       SENSITIVE: []
     end
 
@@ -4954,6 +4955,7 @@ module Aws::Glue
       attr_accessor integration_identifier: ::String
       attr_accessor description: ::String
       attr_accessor data_filter: ::String
+      attr_accessor integration_config: Types::IntegrationConfig
       attr_accessor integration_name: ::String
       SENSITIVE: []
     end
@@ -4971,6 +4973,7 @@ module Aws::Glue
       attr_accessor create_time: ::Time
       attr_accessor errors: ::Array[Types::IntegrationError]
       attr_accessor data_filter: ::String
+      attr_accessor integration_config: Types::IntegrationConfig
       SENSITIVE: []
     end
 

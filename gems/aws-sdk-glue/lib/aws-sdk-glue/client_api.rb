@@ -279,6 +279,7 @@ module Aws::Glue
     ContextKey = Shapes::StringShape.new(name: 'ContextKey')
     ContextValue = Shapes::StringShape.new(name: 'ContextValue')
     ContextWords = Shapes::ListShape.new(name: 'ContextWords')
+    ContinuousSync = Shapes::BooleanShape.new(name: 'ContinuousSync')
     Crawl = Shapes::StructureShape.new(name: 'Crawl')
     CrawlId = Shapes::StringShape.new(name: 'CrawlId')
     CrawlList = Shapes::ListShape.new(name: 'CrawlList')
@@ -4977,6 +4978,7 @@ module Aws::Glue
 
     IntegrationConfig.add_member(:refresh_interval, Shapes::ShapeRef.new(shape: String128, location_name: "RefreshInterval"))
     IntegrationConfig.add_member(:source_properties, Shapes::ShapeRef.new(shape: IntegrationSourcePropertiesMap, location_name: "SourceProperties"))
+    IntegrationConfig.add_member(:continuous_sync, Shapes::ShapeRef.new(shape: ContinuousSync, location_name: "ContinuousSync"))
     IntegrationConfig.struct_class = Types::IntegrationConfig
 
     IntegrationConflictOperationFault.add_member(:message, Shapes::ShapeRef.new(shape: IntegrationErrorMessage, location_name: "Message"))
@@ -5643,6 +5645,7 @@ module Aws::Glue
     ModifyIntegrationRequest.add_member(:integration_identifier, Shapes::ShapeRef.new(shape: String128, required: true, location_name: "IntegrationIdentifier"))
     ModifyIntegrationRequest.add_member(:description, Shapes::ShapeRef.new(shape: IntegrationDescription, location_name: "Description"))
     ModifyIntegrationRequest.add_member(:data_filter, Shapes::ShapeRef.new(shape: String2048, location_name: "DataFilter"))
+    ModifyIntegrationRequest.add_member(:integration_config, Shapes::ShapeRef.new(shape: IntegrationConfig, location_name: "IntegrationConfig"))
     ModifyIntegrationRequest.add_member(:integration_name, Shapes::ShapeRef.new(shape: String128, location_name: "IntegrationName"))
     ModifyIntegrationRequest.struct_class = Types::ModifyIntegrationRequest
 
@@ -5658,6 +5661,7 @@ module Aws::Glue
     ModifyIntegrationResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: IntegrationTimestamp, required: true, location_name: "CreateTime"))
     ModifyIntegrationResponse.add_member(:errors, Shapes::ShapeRef.new(shape: IntegrationErrorList, location_name: "Errors"))
     ModifyIntegrationResponse.add_member(:data_filter, Shapes::ShapeRef.new(shape: String2048, location_name: "DataFilter"))
+    ModifyIntegrationResponse.add_member(:integration_config, Shapes::ShapeRef.new(shape: IntegrationConfig, location_name: "IntegrationConfig"))
     ModifyIntegrationResponse.struct_class = Types::ModifyIntegrationResponse
 
     MongoDBTarget.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))

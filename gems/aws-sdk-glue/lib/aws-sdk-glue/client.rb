@@ -2984,6 +2984,7 @@ module Aws::Glue
     #       source_properties: {
     #         "IntegrationString" => "IntegrationString",
     #       },
+    #       continuous_sync: false,
     #     },
     #   })
     #
@@ -3009,6 +3010,7 @@ module Aws::Glue
     #   resp.integration_config.refresh_interval #=> String
     #   resp.integration_config.source_properties #=> Hash
     #   resp.integration_config.source_properties["IntegrationString"] #=> String
+    #   resp.integration_config.continuous_sync #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateIntegration AWS API Documentation
     #
@@ -6159,6 +6161,7 @@ module Aws::Glue
     #   resp.inbound_integrations[0].integration_config.refresh_interval #=> String
     #   resp.inbound_integrations[0].integration_config.source_properties #=> Hash
     #   resp.inbound_integrations[0].integration_config.source_properties["IntegrationString"] #=> String
+    #   resp.inbound_integrations[0].integration_config.continuous_sync #=> Boolean
     #   resp.inbound_integrations[0].errors #=> Array
     #   resp.inbound_integrations[0].errors[0].error_code #=> String
     #   resp.inbound_integrations[0].errors[0].error_message #=> String
@@ -6228,6 +6231,7 @@ module Aws::Glue
     #   resp.integrations[0].integration_config.refresh_interval #=> String
     #   resp.integrations[0].integration_config.source_properties #=> Hash
     #   resp.integrations[0].integration_config.source_properties["IntegrationString"] #=> String
+    #   resp.integrations[0].integration_config.continuous_sync #=> Boolean
     #   resp.integrations[0].errors #=> Array
     #   resp.integrations[0].errors[0].error_code #=> String
     #   resp.integrations[0].errors[0].error_message #=> String
@@ -13656,6 +13660,9 @@ module Aws::Glue
     # @option params [String] :data_filter
     #   Selects source tables for the integration using Maxwell filter syntax.
     #
+    # @option params [Types::IntegrationConfig] :integration_config
+    #   Properties associated with the integration.
+    #
     # @option params [String] :integration_name
     #   A unique name for an integration in Glue.
     #
@@ -13673,6 +13680,7 @@ module Aws::Glue
     #   * {Types::ModifyIntegrationResponse#create_time #create_time} => Time
     #   * {Types::ModifyIntegrationResponse#errors #errors} => Array&lt;Types::IntegrationError&gt;
     #   * {Types::ModifyIntegrationResponse#data_filter #data_filter} => String
+    #   * {Types::ModifyIntegrationResponse#integration_config #integration_config} => Types::IntegrationConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -13680,6 +13688,13 @@ module Aws::Glue
     #     integration_identifier: "String128", # required
     #     description: "IntegrationDescription",
     #     data_filter: "String2048",
+    #     integration_config: {
+    #       refresh_interval: "String128",
+    #       source_properties: {
+    #         "IntegrationString" => "IntegrationString",
+    #       },
+    #       continuous_sync: false,
+    #     },
     #     integration_name: "String128",
     #   })
     #
@@ -13702,6 +13717,10 @@ module Aws::Glue
     #   resp.errors[0].error_code #=> String
     #   resp.errors[0].error_message #=> String
     #   resp.data_filter #=> String
+    #   resp.integration_config.refresh_interval #=> String
+    #   resp.integration_config.source_properties #=> Hash
+    #   resp.integration_config.source_properties["IntegrationString"] #=> String
+    #   resp.integration_config.continuous_sync #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ModifyIntegration AWS API Documentation
     #
@@ -17777,7 +17796,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.231.0'
+      context[:gem_version] = '1.232.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

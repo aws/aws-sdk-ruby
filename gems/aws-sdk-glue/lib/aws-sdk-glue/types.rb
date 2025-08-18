@@ -16772,11 +16772,18 @@ module Aws::Glue
     #   during data integration operations.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] continuous_sync
+    #   Enables continuous synchronization for on-demand data extractions
+    #   from SaaS applications to Amazon Web Services data services like
+    #   Amazon Redshift and Amazon S3.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IntegrationConfig AWS API Documentation
     #
     class IntegrationConfig < Struct.new(
       :refresh_interval,
-      :source_properties)
+      :source_properties,
+      :continuous_sync)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16861,11 +16868,18 @@ module Aws::Glue
     #
     # @!attribute [rw] function_spec
     #   Specifies the function used to partition data on the target. The
-    #   only accepted value for this parameter is `'identity'` (string).
-    #   The `'identity'` function ensures that the data partitioning on
-    #   the target follows the same scheme as the source. In other words,
-    #   the partitioning structure of the source data is preserved in the
-    #   target destination.
+    #   accepted values for this parameter are:
+    #
+    #   * `identity` - Uses source values directly without transformation
+    #
+    #   * `year` - Extracts the year from timestamp values (e.g., 2023)
+    #
+    #   * `month` - Extracts the month from timestamp values (e.g., 2023-01)
+    #
+    #   * `day` - Extracts the day from timestamp values (e.g., 2023-01-15)
+    #
+    #   * `hour` - Extracts the hour from timestamp values (e.g.,
+    #     2023-01-15-14)
     #   @return [String]
     #
     # @!attribute [rw] conversion_spec
@@ -20520,6 +20534,10 @@ module Aws::Glue
     #   syntax.
     #   @return [String]
     #
+    # @!attribute [rw] integration_config
+    #   Properties associated with the integration.
+    #   @return [Types::IntegrationConfig]
+    #
     # @!attribute [rw] integration_name
     #   A unique name for an integration in Glue.
     #   @return [String]
@@ -20530,6 +20548,7 @@ module Aws::Glue
       :integration_identifier,
       :description,
       :data_filter,
+      :integration_config,
       :integration_name)
       SENSITIVE = []
       include Aws::Structure
@@ -20603,6 +20622,10 @@ module Aws::Glue
     #   syntax.
     #   @return [String]
     #
+    # @!attribute [rw] integration_config
+    #   Properties associated with the integration.
+    #   @return [Types::IntegrationConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ModifyIntegrationResponse AWS API Documentation
     #
     class ModifyIntegrationResponse < Struct.new(
@@ -20617,7 +20640,8 @@ module Aws::Glue
       :status,
       :create_time,
       :errors,
-      :data_filter)
+      :data_filter,
+      :integration_config)
       SENSITIVE = []
       include Aws::Structure
     end

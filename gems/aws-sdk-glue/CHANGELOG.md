@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.232.0 (2025-08-15)
+------------------
+
+* Feature - AWS Glue Zero ETL now supports On-demand snapshot load
+
 1.231.0 (2025-08-14)
 ------------------
 
