@@ -4,10 +4,11 @@
 
 Gem::Specification.new do |spec|
   spec.name        = 'aws-sdk-lambda'
-  spec.version     = '2.0.0.pre0'
+  spec.version     = File.read(File.expand_path('../VERSION', __FILE__))
   spec.summary     = 'Generated gem using Smithy'
   spec.authors     = ['Smithy Ruby']
-  spec.files       = Dir['lib/**/*.rb', base: __dir__]
+  spec.files       = Dir['VERSION', 'CHANGELOG.md', 'lib/**/*.rb', base: __dir__]
+  spec.license     = 'Apache-2.0'
 
   spec.add_dependency('aws-sdk-core', '4.0.0.pre0')
   spec.add_dependency('smithy-json', '1.0.0.pre1')

@@ -9,7 +9,7 @@ require_relative 'aws-sdk-code-generator/welds'
 module AwsSdkCodeGenerator
   # temporary
   def self.generate_aws_sdk_lambda
-    model = JSON.load_file('apis/lambda/service/2015-03-31/lambda-2015-03-31.json')
+    model = JSON.load_file('models/lambda.json')
     plan_options = {
       module_name: 'Aws::Lambda',
       gem_name: 'aws-sdk-lambda',
